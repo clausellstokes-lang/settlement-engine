@@ -253,6 +253,48 @@ const CORPUS_LINE_STANDING = [
   'above (a which-clause close, a colon, a number error in a fill), do not imitate the breach.',
 ].join('\n');
 
+/**
+ * ⭐⭐ THE DAILY-LIFE REGISTER (design §5c rule 4; the owner, 2026-09-14 ~06:5x: "it is
+ * automatically default that the daily life tab be populated rather than on command").
+ *
+ * ⛔ IT IS A REGISTER AND NOT A LICENCE. The five beats are the ONE place on a settlement's whole
+ * dossier where the archiver writes about ordinary hours rather than about a state, and a writer
+ * given that seat with no register would reach for a story. So the seat is described and every bar
+ * above it is restated as still binding: the roster still closes who may act, the record floor
+ * still bars an event, a date and a number, the no-future bar still holds, and the unit cap is the
+ * same three sentences it is everywhere else.
+ *
+ * ⛔ AND THE ONE DIFFERENCE FROM EVERY OTHER POOL IS STATED HERE RATHER THAN LEFT TO BE INFERRED:
+ * a beat declares no typed field, and a pool with no typed field is otherwise told to write one
+ * sentence and no second (the second sentence must rest on a field). A beat rests on the TOWN
+ * BLOCK instead, which every seat already holds, so it may run to the cap.
+ */
+const DAILY_LIFE_REGISTER = [
+  'THE DAILY-LIFE BEATS, WHICH ARE THE ONE PLACE THIS DOSSIER WRITES ABOUT HOURS.',
+  'Where the card lists pools in block `DS-DAILY`, you are writing ONE ORDINARY DAY in this town as',
+  'the archiver watched it, in five beats and in this order: dawn, the market, midday, the tavern,',
+  'night. Each beat is its own unit and its own paragraph; none of them continues the sentence of',
+  'another, and none of them refers to another.',
+  '',
+  'WHAT A BEAT IS MADE OF. Every person in it is a ROLE the town block seats, named by the office',
+  'and never by a name. Every place in it is a row the town block carries: an institution, a body,',
+  'a force. What they are doing is ordinary and is happening now, in the season the state above',
+  'names. A beat may say what a person meets at a place, what is being carried, what is being said',
+  'about the work, and what the hour feels like.',
+  '',
+  'WHAT A BEAT MAY NOT BE. Not an EVENT: nothing happens once, nothing is decided, nobody arrives',
+  'or leaves for good, and no day is the day something began. Not a FORECAST: nothing is about to',
+  'happen and nothing is going to. Not a DATE, a COUNT, a RATE or a PRICE. Not a body or an office',
+  'the town block does not carry. Every other bar above binds here exactly as it binds elsewhere,',
+  'and the unit cap is the same three sentences.',
+  '',
+  'A BEAT DECLARES NO TYPED FIELD, AND THAT IS NOT THE SILENCE IT IS ELSEWHERE. A pool with no',
+  'field is told to write one sentence and no second, because a second sentence must rest on a',
+  'second typed field. A beat rests on the TOWN BLOCK instead, which you already hold, so it may',
+  'run to the cap. The line given with each beat is its CLAIM and the line that ships if yours is',
+  'refused, exactly as every other pool\'s is.',
+].join('\n');
+
 /** The closing paragraph: the card is the world, and the model is a clerk in it. */
 const THE_FACTS = [
   'THE FACTS ARE NOT YOURS TO CHOOSE. The card in the next turn is the whole world you may',
@@ -307,6 +349,8 @@ export function buildScribeBrief(input) {
     FUNDING_NOTE,
     '',
     CORPUS_LINE_STANDING,
+    '',
+    DAILY_LIFE_REGISTER,
     '',
     THE_FACTS,
     '',
@@ -540,6 +584,13 @@ function poolBrief(pool) {
       rows.push('    A field reading UNKNOWN or DERIVED cannot carry a value of its own, and no');
       rows.push('    absence may be read out of one.');
     }
+  } else if (String(pool?.register) === 'daily-life') {
+    // ⭐ (W4 car 3) THE ONE POOL SHAPE THAT DECLARES NO FIELD AND IS STILL NOT A ONE-SENTENCE POOL.
+    // A beat rests on the TOWN BLOCK rather than on a typed field row, which is why the global
+    // brief carries a DAILY-LIFE REGISTER section and why this row points at it instead of at the
+    // no-second-sentence rule a fieldless corpus pool gets.
+    rows.push('  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;');
+    rows.push('  write it under THE DAILY-LIFE BEATS above, up to the unit cap.');
   } else {
     rows.push('  THE FIELDS this pool reads: none are recorded, so write ONE sentence and no second.');
   }

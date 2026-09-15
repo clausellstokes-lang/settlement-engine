@@ -11,6 +11,11 @@ import Button from '../../primitives/Button.jsx';
 import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { flag } from '../../../lib/flags.js';
+import { proseOf, unitsFor } from '../../../lib/scribeArtefact.js';
+import {
+  DAILY_LIFE_BEATS, DAILY_LIFE_BLOCK, DAILY_LIFE_LABELS, dailyLifeBeats, dailyLifeNarrative,
+} from '../../../domain/prose/dailyLifeBeats.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -94,15 +99,21 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
     setLocalLoading(true);
     setLocalError(null);
     setNarrative(null);
-    // Math.random() picks a loading message. The whole function is a
-    // button-click handler — never runs during render — so the purity
-    // rule is over-broad here.
-    // eslint-disable-next-line react-hooks/purity
+    // Math.random() picks a loading message. The whole function is a button-click handler and
+    // never runs during render. It used to carry a `react-hooks/purity` disable, which the rule
+    // now reports as UNNECESSARY: the rule fired because this closure read the render-phase `ctx`,
+    // and W4 car 3's one generator takes the settlement instead, so the closure is no longer
+    // render-phase at all. The directive is removed rather than left for `--fix` to strip and
+    // re-stage behind a commit.
     setLoadMsg(LOAD_MSGS[Math.floor(Math.random() * LOAD_MSGS.length)]);
 
     try {
       await new Promise(resolve => setTimeout(resolve, 250));
-      setNarrative(buildLocalDailyLifeNarrative(ctx));
+      // ⭐ ONE GENERATOR (W4 car 3). The four-paragraph offline prose used to live at the foot
+      // of this file; it is `domain/prose/dailyLifeBeats.js` now, so the text the tab renders
+      // offline, the CLAIM the Scribe is handed and the FALLBACK a refused beat draws are the same
+      // bytes. `dailyLifeNarrative` rejoins the last two beats exactly as they were joined before.
+      setNarrative(dailyLifeNarrative(r));
     } catch (e) {
       setLocalError(e.message);
     } finally {
@@ -113,6 +124,20 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   // Merge store daily life with local narrative
   const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
   const hasContent = !!displayNarrative;
+
+  // ⭐⭐ DAILY LIFE IS RENDERED BY DEFAULT (design §5c rule 4; the owner, 2026-09-14 ~06:5x: "it is
+  // automatically default that the daily life tab be populated rather than on command"). The five
+  // beats are the seventh tab call of the epoch render, they land on the same artefact as every
+  // other block, and they are FROZEN until the next advance exactly as every other block is — so
+  // the on-command Generate button has nothing left to ask for and the survey-level Redraw covers
+  // the one case it served. The OLD path is not removed (W5 owns the retirements, ruling 20): it is
+  // simply not reachable while the beats are on the page.
+  //
+  // ⛔ DARK, THIS FILE IS BYTE-IDENTICAL TO WHAT IT WAS. `scribeBeats` is null with the flag off,
+  // null on a town that has never been scribed, and null on a render made for another seed or
+  // another engine; every branch below then reads exactly as it read before.
+  const scribeBeats = flag('scribe') ? scribeDailyLifeBeatsOf(r) : null;
+  const scribeOn = Array.isArray(scribeBeats);
 
   const tierLabel     = ctx.tierLabel;
   // Prosperity color from the canonical PROSPERITY_COLORS map (the same source
@@ -200,7 +225,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {/* Unsaved settlements (Create page) get a slim inline hint instead of
           a disabled teaser button — tab-contextual, so it explains what saving
           unlocks for "Daily Life" specifically. */}
-      {!dailyLifeEnabled ? (
+      {scribeOn ? null : !dailyLifeEnabled ? (
         <div
           style={{
             padding: '10px 14px', marginBottom: 16,
@@ -232,6 +257,33 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
 
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
 
+      {/* ── THE SURVEY'S FIVE BEATS (design §5c rule 4) ────────────────────
+          One ordinary day as the archiver watched it, in the order the day happens in. Every
+          paragraph is a unit the same two readers judged as they judge every other unit on every
+          other tab; a beat they refused is the deterministic offline paragraph, seated silently
+          (ruling 6: the reader is never told which line a model wrote). */}
+      {scribeOn && (
+        <div style={{
+          background: PARCH,
+          border: `1px solid ${BORDER}`,
+          padding: mobile ? '16px 14px' : '20px 22px',
+          marginBottom: 16,
+        }}>
+          {scribeBeats.map((text, i) => (
+            <div key={DAILY_LIFE_BEATS[i]} style={{ marginBottom: i < scribeBeats.length - 1 ? 16 : 0 }}>
+              <div style={{
+                fontSize: FS['8.5'], fontWeight: 700, color: MUTED,
+                textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 3,
+              }}>{DAILY_LIFE_LABELS[i]}</div>
+              <p style={{
+                fontSize: FS['13.5'], lineHeight: 1.75, color: INK, margin: 0,
+                fontFamily: `Georgia, 'Times New Roman', serif`,
+              }}>{text}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* ── ERROR ─────────────────────────────────────────────────────────── */}
       {error && (
         <div style={{
@@ -244,7 +296,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       )}
 
       {/* ── NARRATIVE ─────────────────────────────────────────────────────── */}
-      {hasContent && (
+      {!scribeOn && hasContent && (
         <div style={{ position: 'relative' }}>
           {/* Regenerate overlay — floating chip so the user sees "a new version is brewing" */}
           {regenerating && (
@@ -283,7 +335,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       )}
 
       {/* ── EMPTY STATE ───────────────────────────────────────────────────── */}
-      {!hasContent && !loading && !error && (
+      {!scribeOn && !hasContent && !loading && !error && (
         <div style={{
           background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
           padding: '32px 20px', textAlign: 'center',
@@ -310,50 +362,37 @@ function formatDailyLifeResult(result) {
   return parts.join('\n\n');
 }
 
-function humanize(value) {
-  if (!value) return '';
-  return String(value)
-    .replace(/_/g, ' ')
-    .replace(/\b\w/g, ch => ch.toUpperCase());
-}
-
-function listText(items, fallback) {
-  const clean = (items || []).filter(Boolean);
-  if (!clean.length) return fallback;
-  if (clean.length === 1) return clean[0];
-  return `${clean.slice(0, -1).join(', ')} and ${clean.at(-1)}`;
-}
-
-function buildLocalDailyLifeNarrative(ctx) {
-  const terrain = humanize(ctx.terrain) || 'mixed terrain';
-  const trade = humanize(ctx.tradeRoute) || 'road access';
-  const culture = humanize(ctx.culture) || 'local custom';
-  const food = ctx.foodDeficit > 20
-    ? 'bread is dear and the poorest households plan every meal carefully'
-    : ctx.foodDeficit > 0
-      ? 'food is adequate for most families, though prices are watched closely'
-      : ctx.foodSurplus > 10
-        ? 'granaries and kitchen gardens give the town a little breathing room'
-        : 'the food supply is ordinary, practical, and never taken for granted';
-
-  const order = ctx.safetyScore >= 70
-    ? 'people move after dusk with confidence'
-    : ctx.safetyScore >= 45
-      ? 'doors are barred early and strangers are studied before they are welcomed'
-      : 'ordinary errands carry a careful awareness of who controls the street';
-
-  const institutions = Object.values(ctx.keyInsts || {}).flat().slice(0, 5);
-  const anchors = listText(institutions, 'the market, shrine, workshop, and watch post');
-  const stress = ctx.stressTypes.length
-    ? `The talk of the day keeps returning to ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`
-    : 'The place is not peaceful so much as practiced: people know its routines and work around its frictions.';
-
-  return [
-    `Morning starts around ${anchors}. ${terrain} and ${trade} shape the pace: carts, tools, and gossip move where the ground and roads allow, while ${culture} gives even routine bargains a recognizable local rhythm.`,
-    `${food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.`,
-    `Power is felt through ${ctx.govFaction || 'whoever can make orders stick this week'}. ${ctx.stability < 45 ? "Promises are weighed carefully because yesterday's bargain may not survive tomorrow." : 'Most residents know where authority lives and how to petition it without making themselves memorable.'} ${order}.`,
-    `${stress} By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.`,
-  ].join('\n\n');
+/**
+ * ⭐⭐ THE FIVE BEATS THE SCRIBE RENDERED, OR NULL (design §5c rule 4; W4 car 3).
+ *
+ * Null is the answer in every case the composer's own switch answers null in, and for the same
+ * reasons: no artefact, a render made for a different seed, an engine the world has migrated past,
+ * or no `DS-DAILY` block landed. Then the tab is EXACTLY what it was before this file knew about
+ * the Scribe.
+ *
+ * ⛔ A BEAT THAT DID NOT LAND FALLS BACK TO ITS OWN OFFLINE PARAGRAPH, not to a hole and not to
+ * the whole tab reverting: a unit refused by the instruments draws the hand-written line at its
+ * own seat, which is the rule every other pool on every other tab is drawn under.
+ *
+ * ⛔ THE ENGINE GATE IS THE WORLD'S OWN TWO VERSIONS, spelled exactly as `faceSources.js` spells
+ * it (design §7), so the tab and the composer can never disagree about whether an artefact is
+ * still the world's.
+ */
+function scribeDailyLifeBeatsOf(settlement) {
+  const prose = proseOf(settlement);
+  if (!prose) return null;
+  const renderedFor = String(settlement?._seed ?? settlement?.id ?? '');
+  const engineVersion = `gen-${String(settlement?.generatorVersion ?? '')}/sim-${String(settlement?.simulationVersion ?? '')}`;
+  const rendered = DAILY_LIFE_BEATS.map((beat) => {
+    const units = unitsFor(prose, {
+      blockId: DAILY_LIFE_BLOCK, poolKey: beat, renderedFor, engineVersion,
+    });
+    const spine = Array.isArray(units) && typeof units[0]?.spine === 'string' ? units[0].spine.trim() : '';
+    return spine;
+  });
+  if (!rendered.some(Boolean)) return null;
+  const offline = dailyLifeBeats(settlement);
+  return rendered.map((text, i) => text || offline[i]);
 }
 
 export default React.memo(DailyLifeTab);

@@ -42,6 +42,7 @@ import {
   resolveReadingBags,
 } from '../../scripts/lib/scribe-read-resolution.mjs';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
+import { DAILY_LIFE_BEATS, dailyLifeBeats } from '../../src/domain/prose/dailyLifeBeats.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const STATIC_CARD = JSON.parse(readFileSync(join(ROOT, 'docs/content/scribe-static-card.json'), 'utf8'));
@@ -238,14 +239,25 @@ describe('townCard — no new read, and no new producer', () => {
       }
     };
     for (const rel of NEW_MODULES) visit(rel);
-    // ⭐ THE COMPONENT ALLOWLIST IS EXACT, so a fifth reds by name rather than by habit. These
-    // four are plain `.js` reading recipes that render nothing; two of them live under
-    // `src/components/` only because the mount walker admits exactly ONE component file per desk.
+    // ⭐ THE COMPONENT ALLOWLIST IS EXACT, so an eighth reds by name rather than by habit. Every
+    // one is a plain `.js` file that renders nothing; several live under `src/components/` only
+    // because the mount walker admits exactly ONE component file per desk.
+    //
+    // ⭐ THREE JOINED AT W4 car 3 (design §5c rule 4). `dailyLifeBeats.js` is the ONE generator of
+    // the daily-life beats — the tab's offline prose, the Scribe's claim and the fallback a refused
+    // beat draws are the same bytes — and it reads the town through `dailyLifeLogic.js`, the tab's
+    // own pure context reader, rather than through a second opinion about the town. `design.js`
+    // (TIER_LABELS) and `theme.js` (the swatch table `design.js` reads) ride in behind it; both are
+    // plain tables, neither renders anything, and the arms above still prove no `.jsx` and no React
+    // import is anywhere in the closure.
     expect([...components].sort()).toEqual([
+      'src/components/new/dailyLifeLogic.js',
+      'src/components/new/design.js',
       'src/components/new/economyDeskRead.js',
       'src/components/new/generalDeskRead.js',
       'src/components/new/tabHelpers.js',
       'src/components/settlement/faithPanelModel.js',
+      'src/components/theme.js',
     ]);
     expect(seen.size).toBeGreaterThan(20);
   });
@@ -260,6 +272,13 @@ describe('townCard — the join with the static card and the corpus', () => {
       try { s = settlementOf(row); } catch { continue; }
       for (const tab of SCRIBE_TABS) {
         for (const pool of cardOf(s, tab).pools) {
+          // ⛔ THE DAILY-LIFE BEATS ARE SYNTHETIC AND ARE EXCLUDED BY NAME (W4 car 3). They are the
+          // only pools on the card that were NOT harvested from the composer's trace: daily life
+          // has no hand-written corpus and no census row, so there is no static row to join and no
+          // annex variant to index. Their `unit.spine` is the deterministic offline paragraph,
+          // which the daily-life arm below pins. Excluding them here rather than weakening the
+          // assertion keeps the arm's teeth on every pool that IS the corpus's.
+          if (pool.blockId === 'DS-DAILY') continue;
           if (pool.static === null) missingStatic.push(`${keyOf(row)} :: ${pool.blockId} :: ${pool.poolKey}`);
           if (variantAt(pool.blockId, pool.poolKey, pool.authoredIndex) === null) {
             missingCorpus.push(`${keyOf(row)} :: ${pool.blockId} :: ${pool.poolKey} @ ${pool.authoredIndex}`);
@@ -411,8 +430,10 @@ describe('townCard — what has no value, and what cannot be written (W3b car 2)
         if (pool.writeable === true && pool.fields.every((f) => f.state === 'unreadable')) allUnreadableAndWriteable += 1;
       }
     }
+    // ⭐ `daily_life` IS 6 AND NOT 1 SINCE W4 car 3: its one composed pool (DS-ECO-8) plus the five
+    // DS-DAILY beats, which are the seventh tab call's own pools and ride at the end of the list.
     expect(total).toEqual({
-      daily_life: 1, defense: 15, economics: 7, faith: 1, history: 6, overview: 17,
+      daily_life: 6, defense: 15, economics: 7, faith: 1, history: 6, overview: 17,
       plot_hooks: 7, power: 10, relationships: 0, resources: 0, services: 1, viability: 4, war: 0,
     });
     expect(unwriteable).toEqual({
@@ -1089,6 +1110,50 @@ describe('townCard — the epoch', () => {
   }, 60_000);
 });
 
+describe('⭐⭐ THE FIVE DAILY-LIFE BEATS (W4 car 3, design §5c rule 4)', () => {
+  const s = townOf({
+    settType: 'town', culture: 'germanic', terrainOverride: 'plains',
+    tradeRouteAccess: 'road', monsterThreat: 'civilized',
+  }, 'daily-life-beats');
+
+  it('the daily_life card carries five DS-DAILY pools whose spine IS the offline paragraph', () => {
+    const card = cardOf(s, 'daily_life');
+    const beats = card.pools.filter((p) => p.blockId === 'DS-DAILY');
+    expect(beats.map((p) => p.poolKey)).toEqual([...DAILY_LIFE_BEATS]);
+    // THE SPINE IS THE CLAIM AND THE FALLBACK (§9), and it is the SAME bytes the tab renders
+    // offline, because there is one generator (`domain/prose/dailyLifeBeats.js`).
+    expect(beats.map((p) => p.unit.spine)).toEqual(dailyLifeBeats(s));
+    // A beat is the archiver's own observation: no face, no source, no annex row, no census row.
+    expect(beats.every((p) => p.unit.faces.length === 0)).toBe(true);
+    expect(beats.every((p) => p.faceSources.length === 0 && p.compromised === null)).toBe(true);
+    expect(beats.every((p) => p.vid === 0 && p.static === null && p.fields.length === 0)).toBe(true);
+    // And it says which register it is in, which is what stops the brief printing the
+    // one-sentence rule a fieldless corpus pool gets.
+    expect(beats.every((p) => p.register === 'daily-life' && p.writeable === true)).toBe(true);
+  });
+
+  it('the one COMPOSED pool the tab has is still there, and still first', () => {
+    const card = cardOf(s, 'daily_life');
+    expect(card.pools[0].blockId).toBe('DS-ECO-8');
+    expect(card.pools).toHaveLength(6);
+  });
+
+  it('⛔ NO OTHER TAB CARRIES A BEAT: the block is the daily_life tab\'s and no one else\'s', () => {
+    const elsewhere = [];
+    for (const tab of SCRIBE_TABS) {
+      if (tab === 'daily_life') continue;
+      for (const pool of cardOf(s, tab).pools) {
+        if (pool.blockId === 'DS-DAILY') elsewhere.push(`${tab} :: ${pool.poolKey}`);
+      }
+    }
+    expect(elsewhere).toEqual([]);
+  });
+
+  it('the beats are byte-stable across two builds, like every other row of the card', () => {
+    expect(JSON.stringify(cardOf(s, 'daily_life'))).toBe(JSON.stringify(cardOf(s, 'daily_life')));
+  });
+});
+
 describe('townCard — the golden', () => {
   /**
    * ── SHIFT RECORD ────────────────────────────────────────────────────────────
@@ -1187,6 +1252,15 @@ describe('townCard — the golden', () => {
    *   THAT MOVED, and only these: `fields[].value` and `fields[].inputs[].value` wherever the
    *   reading is a small record, and `fields[].note` on the `axis` rows, whose reason was re-worded
    *   because it named one axis by example on a pool about another. NO KEY WAS ADDED OR REMOVED.
+   *
+   * 2026-09-14 — RE-RECORDED (W4 car 3), card schema /7 -> /8. CAUSE: daily life renders BY DEFAULT
+   *   as the seventh tab call (design §5c rule 4; the owner ~06:5x), so the `daily_life` card has
+   *   to hand the writer its five beats the way it hands every other pool. THE KEYS THAT MOVED,
+   *   and only these: `tabs.daily_life.pools` gains FIVE rows (block `DS-DAILY`, keys dawn, market,
+   *   midday, tavern and night, each carrying the deterministic offline paragraph as its
+   *   `unit.spine` and a `register` key of `daily-life`), and the `schema` string on all thirteen
+   *   tabs. MEASURED, tab by tab: `daily_life` moved `pools` and `schema`; the other twelve moved
+   *   `schema` and nothing else, and no pool count anywhere else changed. NO KEY WAS REMOVED.
    */
   it('the first golden town matches the committed card, byte for byte, on every tab', () => {
     const row = goldenCorpus()[0];

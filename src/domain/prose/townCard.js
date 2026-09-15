@@ -81,6 +81,7 @@
  * @enforced-by tests/domain/townCard.test.js
  */
 import { renderTabPage, SCRIBE_TABS, seedOf } from './scribePage.js';
+import { DAILY_LIFE_BEATS, DAILY_LIFE_BLOCK, dailyLifeBeats } from './dailyLifeBeats.js';
 import { classifyMoves, orderIdOf, LEVEL1_ORDERS } from './moveGrammar.js';
 import {
   sourcesOf, rolesOf, compromisedSourcesOf, renderYearOf,
@@ -151,7 +152,7 @@ import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../data/dossierStateProse/warF
  * resolution reaches, the `caveats` of the pools whose readings stopped being valueless, and the
  * schema string.
  */
-export const TOWN_CARD_SCHEMA = 'scribe-town-card/7';
+export const TOWN_CARD_SCHEMA = 'scribe-town-card/8';
 
 /**
  * The engine fingerprint the artefact is keyed to (§7). Spelled from the schema's own two
@@ -994,6 +995,72 @@ function poolRow(s, line, ctx) {
 }
 
 /**
+ * ⭐⭐ THE FIVE DAILY-LIFE BEATS, AS POOLS THE WRITER MEETS LIKE ANY OTHER (design §5c rule 4;
+ * the owner, 2026-09-14 ~06:5x: "it is automatically default that the daily life tab be populated
+ * rather than on command").
+ *
+ * ⛔ THEY ARE SYNTHETIC POOLS AND THEY SAY SO. Every other row of `pools` is HARVESTED from the
+ * composer's own trace, because the card's whole principle is that it never re-derives a draw
+ * (§3.3). These five are not in the corpus at all: daily life has never had hand-written variants,
+ * it had a five-call AI path and a deterministic offline fallback. So they are built here, with
+ * `vid: 0` (there is no annex row to name), `faces: []` (the archiver's own observation, spoken
+ * through nobody) and `static: null` (no census row reads them). What they DO carry is the one
+ * thing that matters: the OFFLINE PARAGRAPH as `unit.spine`, which is this pool's claim, its
+ * exemplar and the line that ships if the writer's is refused — the same standing every
+ * hand-written pool line has (§9).
+ *
+ * ⛔ AND THEY ARE `writeable` WITH NO FIELD ROWS, which is the one place they differ from a corpus
+ * pool and is why `poolBrief` reads `register`. A pool with no `fields` is normally told to write
+ * one sentence and no second, because a second sentence must rest on a typed field the pool reads.
+ * A daily-life beat rests on the TOWN BLOCK — the roster, the institutions, the bodies, the forces
+ * — which every seat already has, and the brief's own DAILY-LIFE REGISTER says so in terms.
+ *
+ * @param {object} s @returns {object[]}
+ */
+function dailyLifeRows(s) {
+  const beats = dailyLifeBeats(s);
+  return DAILY_LIFE_BEATS.map((poolKey, i) => {
+    const spine = String(beats[i] ?? '');
+    return sorted([
+      ['blockId', DAILY_LIFE_BLOCK],
+      ['poolKey', poolKey],
+      ['mount', 'daily_life.beats'],
+      ['section', 'daily_life'],
+      ['vid', 0],
+      ['authoredIndex', i],
+      ['face', 0],
+      ['angle', 'the archiver\'s own observation of one ordinary day'],
+      ['marks', []],
+      ['pieces', []],
+      ['pairKinds', []],
+      ['faceSources', []],
+      ['faceRoles', []],
+      ['slots', sorted([
+        ['declared', []], ['fills', []], ['verbs', []], ['recovered', true],
+      ])],
+      ['compromised', null],
+      ['unit', sorted([
+        ['rendered', spine],
+        ['spine', spine],
+        ['order', orderOf(spine)],
+        ['faces', []],
+        ['faceSourceTags', []],
+        ['pairs', []],
+      ])],
+      ['static', null],
+      ['fields', []],
+      ['caveats', []],
+      // ⭐ THE ONE KEY THAT IS NOT ON A CORPUS POOL ROW. It names the register the beat is written
+      // in, so `poolBrief` prints the daily-life instruction instead of the no-second-sentence
+      // rule a fieldless corpus pool would get. `ctx.hasWorld` is unread here on purpose: a
+      // beat is about this town's own ordinary day and needs no world.
+      ['register', 'daily-life'],
+      ['writeable', true],
+    ]);
+  });
+}
+
+/**
  * ⭐⭐ THE TOWN CARD.
  *
  * @param {object} settlement a generated settlement
@@ -1044,7 +1111,15 @@ export function townCard(settlement, options) {
     // ⛔ PAGE ORDER, NOT SORTED. Every other list on this card is sorted so two builds are
     // byte-equal; this one is byte-equal because the render is deterministic, and its ORDER is
     // a fact the refuter's page-level arms read. Sorting it would destroy the fact.
-    ['pools', page.filter((l) => l.kind === 'composed').map((l) => poolRow(s, l, ctx))],
+    // ⭐ (W4 car 3) AND THE FIVE DAILY-LIFE BEATS, APPENDED ON THE ONE TAB THEY BELONG TO. They
+    // ride at the END of the list rather than in page order because page order is a fact about the
+    // COMPOSED rows and these are not composed: they are the seventh call's own pools, and the tab
+    // renders them under their own heading below the one composed line it carries. See
+    // `dailyLifeRows` for why they are synthetic and what standing their spine has.
+    ['pools', [
+      ...page.filter((l) => l.kind === 'composed').map((l) => poolRow(s, l, ctx)),
+      ...(tab === 'daily_life' ? dailyLifeRows(s) : []),
+    ]],
     // (c) THE MACHINE LINES ACTUALLY ON THE TAB, in page order — the marker card's (3)/(4)
     // collapsed to the literal page. The composed rows are here too, so the model reads the page
     // as a reader meets it rather than as two lists it must interleave itself.

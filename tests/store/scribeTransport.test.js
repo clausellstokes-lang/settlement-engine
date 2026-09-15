@@ -201,3 +201,38 @@ describe('⭐ THE REDRAW RETIRES BEFORE IT LANDS (design §5c rule 1, ruling 16)
     expect(pricing).toContain('dossierProse');
   });
 });
+
+describe('⭐ THE DAILY-LIFE BLOCK LANDS LIKE ANY OTHER (W4 car 3, design §5c rule 4)', () => {
+  it('a DS-DAILY answer reads back per beat, which is what makes daily life the seventh tab call', () => {
+    const keys = {
+      advanceSeq: 0, renderedFor: 'seed-a', renderedAt: '2026-09-14T00:00:00.000Z',
+      version: { engine: 'gen-1/sim-1' },
+    };
+    const out = landTabAnswer({ id: 't' }, {
+      blocks: {
+        'DS-DAILY': {
+          dawn: [{ vid: 0, spine: 'The gate crew unbars the doors.', faces: [], notebook: [] }],
+          night: [{ vid: 0, spine: 'By dark the watch walks the lanes.', faces: [], notebook: [] }],
+        },
+        'DS-ECO-8': { PROSPEROUS: [{ vid: 2, spine: 'People here put things by.', faces: [], notebook: [] }] },
+      },
+    }, keys);
+    const prose = proseOf(out);
+    expect(unitsFor(prose, { blockId: 'DS-DAILY', poolKey: 'dawn', renderedFor: 'seed-a' })[0].spine)
+      .toBe('The gate crew unbars the doors.');
+    expect(unitsFor(prose, { blockId: 'DS-DAILY', poolKey: 'night', renderedFor: 'seed-a' })[0].spine)
+      .toBe('By dark the watch walks the lanes.');
+    // A beat nobody wrote reads back null and the tab draws its own offline paragraph.
+    expect(unitsFor(prose, { blockId: 'DS-DAILY', poolKey: 'midday', renderedFor: 'seed-a' })).toBe(null);
+    // And the tab's one composed pool landed in the same call, because it is ONE tab render.
+    expect(unitsFor(prose, { blockId: 'DS-ECO-8', poolKey: 'PROSPEROUS', renderedFor: 'seed-a' }))
+      .toHaveLength(1);
+  });
+
+  it('⛔ AND THE TAB IS ALREADY IN THE FIRING SET, so no list had to be maintained for it', () => {
+    // `firingTabs` asks the page, not a table: daily_life composes DS-ECO-8's one line, so it has
+    // always been sent. The beats ride the render that tab was already getting.
+    const render = (unused, tab) => (tab === 'daily_life' ? [{ kind: 'composed' }] : []);
+    expect(firingTabs({}, render, ['daily_life', 'war'])).toEqual(['daily_life']);
+  });
+});

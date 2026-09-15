@@ -114,9 +114,215 @@
           },
           "vid": 1,
           "writeable": true
+        },
+        {
+          "angle": "the archiver's own observation of one ordinary day",
+          "authoredIndex": 0,
+          "blockId": "DS-DAILY",
+          "caveats": [],
+          "compromised": null,
+          "face": 0,
+          "faceRoles": [],
+          "faceSources": [],
+          "fields": [],
+          "marks": [],
+          "mount": "daily_life.beats",
+          "pairKinds": [],
+          "pieces": [],
+          "poolKey": "dawn",
+          "register": "daily-life",
+          "section": "daily_life",
+          "slots": {
+            "declared": [],
+            "fills": [],
+            "recovered": true,
+            "verbs": []
+          },
+          "static": null,
+          "unit": {
+            "faceSourceTags": [],
+            "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
+            "pairs": [],
+            "rendered": "Morning starts around Access to external mill, Subsistence farming, Shepherd collective, Burial ground and Informal elder consensus. Plains and Road shape the pace: carts, tools, and gossip move where the ground and roads allow, while Germanic gives even routine bargains a recognizable local rhythm.",
+            "spine": "Morning starts around Access to external mill, Subsistence farming, Shepherd collective, Burial ground and Informal elder consensus. Plains and Road shape the pace: carts, tools, and gossip move where the ground and roads allow, while Germanic gives even routine bargains a recognizable local rhythm."
+          },
+          "vid": 0,
+          "writeable": true
+        },
+        {
+          "angle": "the archiver's own observation of one ordinary day",
+          "authoredIndex": 1,
+          "blockId": "DS-DAILY",
+          "caveats": [],
+          "compromised": null,
+          "face": 0,
+          "faceRoles": [],
+          "faceSources": [],
+          "fields": [],
+          "marks": [],
+          "mount": "daily_life.beats",
+          "pairKinds": [],
+          "pieces": [],
+          "poolKey": "market",
+          "register": "daily-life",
+          "section": "daily_life",
+          "slots": {
+            "declared": [],
+            "fills": [],
+            "recovered": true,
+            "verbs": []
+          },
+          "static": null,
+          "unit": {
+            "faceSourceTags": [],
+            "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
+            "pairs": [],
+            "rendered": "food is adequate for most families, though prices are watched closely. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
+            "spine": "food is adequate for most families, though prices are watched closely. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown."
+          },
+          "vid": 0,
+          "writeable": true
+        },
+        {
+          "angle": "the archiver's own observation of one ordinary day",
+          "authoredIndex": 2,
+          "blockId": "DS-DAILY",
+          "caveats": [],
+          "compromised": null,
+          "face": 0,
+          "faceRoles": [],
+          "faceSources": [],
+          "fields": [],
+          "marks": [],
+          "mount": "daily_life.beats",
+          "pairKinds": [],
+          "pieces": [],
+          "poolKey": "midday",
+          "register": "daily-life",
+          "section": "daily_life",
+          "slots": {
+            "declared": [],
+            "fills": [],
+            "recovered": true,
+            "verbs": []
+          },
+          "static": null,
+          "unit": {
+            "faceSourceTags": [],
+            "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
+            "pairs": [],
+            "rendered": "Power is felt through Elder Council. Most residents know where authority lives and how to petition it without making themselves memorable. ordinary errands carry a careful awareness of who controls the street.",
+            "spine": "Power is felt through Elder Council. Most residents know where authority lives and how to petition it without making themselves memorable. ordinary errands carry a careful awareness of who controls the street."
+          },
+          "vid": 0,
+          "writeable": true
+        },
+        {
+          "angle": "the archiver's own observation of one ordinary day",
+          "authoredIndex": 3,
+          "blockId": "DS-DAILY",
+          "caveats": [],
+          "compromised": null,
+          "face": 0,
+          "faceRoles": [],
+          "faceSources": [],
+          "fields": [],
+          "marks": [],
+          "mount": "daily_life.beats",
+          "pairKinds": [],
+          "pieces": [],
+          "poolKey": "tavern",
+          "register": "daily-life",
+          "section": "daily_life",
+          "slots": {
+            "declared": [],
+            "fills": [],
+            "recovered": true,
+            "verbs": []
+          },
+          "static": null,
+          "unit": {
+            "faceSourceTags": [],
+            "faces": [],
+            "order": {
+              "id": "V1",
+              "licences": "the state key alone",
+              "moves": [
+                "PRESENT"
+              ]
+            },
+            "pairs": [],
+            "rendered": "The talk of the day keeps returning to Infiltrated.",
+            "spine": "The talk of the day keeps returning to Infiltrated."
+          },
+          "vid": 0,
+          "writeable": true
+        },
+        {
+          "angle": "the archiver's own observation of one ordinary day",
+          "authoredIndex": 4,
+          "blockId": "DS-DAILY",
+          "caveats": [],
+          "compromised": null,
+          "face": 0,
+          "faceRoles": [],
+          "faceSources": [],
+          "fields": [],
+          "marks": [],
+          "mount": "daily_life.beats",
+          "pairKinds": [],
+          "pieces": [],
+          "poolKey": "night",
+          "register": "daily-life",
+          "section": "daily_life",
+          "slots": {
+            "declared": [],
+            "fills": [],
+            "recovered": true,
+            "verbs": []
+          },
+          "static": null,
+          "unit": {
+            "faceSourceTags": [],
+            "faces": [],
+            "order": {
+              "id": "V2",
+              "licences": "state key + a STRUCTURAL-consequence field",
+              "moves": [
+                "PRESENT",
+                "CONSEQUENCE"
+              ]
+            },
+            "pairs": [],
+            "rendered": "By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.",
+            "spine": "By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying."
+          },
+          "vid": 0,
+          "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "daily_life",
@@ -2407,7 +2613,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "defense",
@@ -3493,7 +3699,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "economics",
@@ -3905,7 +4111,7 @@
           "writeable": false
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "faith",
@@ -4742,7 +4948,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "history",
@@ -7082,7 +7288,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "overview",
@@ -7832,7 +8038,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "plot_hooks",
@@ -8951,7 +9157,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "power",
@@ -9263,7 +9469,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "relationships",
@@ -9844,7 +10050,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "resources",
@@ -10280,7 +10486,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "services",
@@ -10967,7 +11173,7 @@
           "writeable": true
         }
       ],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "viability",
@@ -11291,7 +11497,7 @@
         }
       ],
       "pools": [],
-      "schema": "scribe-town-card/7",
+      "schema": "scribe-town-card/8",
       "seed": "golden-master-v3",
       "staticCardJoined": true,
       "tab": "war",

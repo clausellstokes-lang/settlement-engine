@@ -1,5 +1,9 @@
 // dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
-import { TIER_LABELS } from './design';
+// ⛔ THE EXTENSION IS LOAD-BEARING (W4 car 3). Vite resolves `./design`, plain Node does not,
+// and this module is now reached from `domain/prose/dailyLifeBeats.js` — which the pilot harness,
+// `scripts/scribe-static-card.mjs` and the wave gate all import under Node. The spelling below is
+// what the rest of the estate already uses for this same file.
+import { TIER_LABELS } from './design.js';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
 import {
   CULTURE_PROFILES,

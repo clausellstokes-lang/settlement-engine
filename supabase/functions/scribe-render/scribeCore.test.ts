@@ -555,3 +555,53 @@ Deno.test('the tier-1 answer schema is CLOSED at every level and admits only yes
   );
   assertEquals(TIER1_ANSWER_SCHEMA.properties.answers.items.properties.record.enum, ['yes', 'no']);
 });
+
+Deno.test('⭐⭐ THE DAILY-LIFE REGISTER IS IN THE CACHED BRIEF (W4 car 3, design §5c rule 4)', () => {
+  // Daily life renders BY DEFAULT as the seventh tab call, so the writer needs the register in the
+  // half that is cached once for every settlement of the hour rather than re-sent per town.
+  const text = brief();
+  assert(text.includes('THE DAILY-LIFE BEATS, WHICH ARE THE ONE PLACE THIS DOSSIER WRITES ABOUT HOURS.'));
+  assert(text.includes('dawn, the market, midday, the tavern,'));
+  // The register does not LIFT a bar: it restates the three that a beat is most likely to breach.
+  assert(text.includes('Not an EVENT'));
+  assert(text.includes('Not a FORECAST'));
+  assert(text.includes('Not a DATE, a COUNT, a RATE or a PRICE.'));
+  assert(text.includes('the unit cap is the same three sentences'));
+  // And it is STILL byte-stable, which is the whole economics of the cached half.
+  assertStrictEquals(brief(), text);
+});
+
+Deno.test('⭐ A DAILY-LIFE BEAT IS NOT TOLD TO WRITE ONE SENTENCE AND NO SECOND', () => {
+  // A pool with no typed field is otherwise told exactly that, because a second sentence must rest
+  // on a second typed field. A beat rests on the TOWN BLOCK instead, and `register` is how the
+  // pool row says so. Without this the five beats would each be one sentence long.
+  const beatCard = {
+    ...card,
+    tab: 'daily_life',
+    pools: [{
+      blockId: 'DS-DAILY',
+      poolKey: 'dawn',
+      vid: 0,
+      angle: 'the archiver\'s own observation of one ordinary day',
+      marks: [],
+      register: 'daily-life',
+      writeable: true,
+      caveats: [],
+      fields: [],
+      slots: { declared: [], fills: [], verbs: [], recovered: true },
+      unit: { spine: 'Morning starts around the market square.', faces: [], order: { id: '', moves: [], licences: '' } },
+    }],
+  };
+  const turn = buildScribeUserTurn({ card: beatCard, record: null, guidance: '' });
+  assert(turn.includes('THIS IS A DAILY-LIFE BEAT.'));
+  assert(turn.includes('write it under THE DAILY-LIFE BEATS above, up to the unit cap.'));
+  assert(!turn.includes('none are recorded, so write ONE sentence and no second'));
+  // NEGATIVE CONTROL — a fieldless pool WITHOUT the register still gets the one-sentence rule.
+  const plain = buildScribeUserTurn({
+    card: { ...beatCard, pools: [{ ...beatCard.pools[0], register: undefined }] },
+    record: null,
+    guidance: '',
+  });
+  assert(plain.includes('none are recorded, so write ONE sentence and no second'));
+  assert(!plain.includes('THIS IS A DAILY-LIFE BEAT.'));
+});
