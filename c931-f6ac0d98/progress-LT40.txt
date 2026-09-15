@@ -1,0 +1,7 @@
+car6 cf0365942 the ruined-court civic snapshot REPORTED at both ends, cured nowhere; probe re-executed; stale cites corrected; gate green except its own census bill
+car6b 9b1c55ecd the census bill PAID: 9 line cites into economicState.js followed +11, wiring-census.json regenerated (one stamp hash moved); tests/lint 155/2600 green
+note tests/copy voiceMechanics E2 is RED AT THE BASE (labelBands.js em0->5, generalStateProse.js em0->3) — neither file touched by any LT40 car; the strings are another desk's rendered prose so a rewrite is output-moving and owner-gated. Reported, not touched.
+car7 d33d95882 history.age PINNED as a generation-time constant (12 advances, year 2->13, age 215); control fired only at the 3rd plant site; one cite left stale on purpose inside a hash-pinned detector source
+car7b 1cd710bd7 the lighting census bill PAID through its ritual on a clean tree (titles 24170->24171, suiteTitles 6452->6453); receipt run 34/34 green
+car8 6b4cc8f43 D-CH-1 CLOSED on the code (2 of 2 removals receipted over the 30-settlement scan; receipt predates the docket by a month); TWO aggregate reader surfaces not one; the unreceipted deletion located in assembleInstitutions exclusive-group displacement, priced not built
+DONE all of cars 6,7,8 landed with their bills; dock tip 6b4cc8f43; porcelain 0

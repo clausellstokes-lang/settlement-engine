@@ -1,0 +1,44 @@
+HEAD=6b4cc8f43d20a01209191d7331e290edbd84117f porcelain=0 13:46  up 2 days, 17:38, 1 user, load averages: 6.72 33.10 76.32
+=== FOCUSED (the lane's suites, the walkers its files feed, the voice suite whole) ===
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+AssertionError: 
+src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0
+src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0
+: expected [ …(2) ] to deeply equal []
+- Expected
++ Received
+- []
++ [
++   "src/domain/display/labelBands.js: baseline em:0 bang:0 → current em:5 bang:0",
++   "src/domain/display/stateProse/generalStateProse.js: baseline em:0 bang:0 → current em:3 bang:0",
++ ]
+ ❯ tests/copy/voiceMechanics.test.js:308:46
+    306|       }
+    307|     }
+    308|     expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+       |                                              ^
+    309|   });
+    310|
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+ Test Files  1 failed | 44 passed (45)
+      Tests  1 failed | 602 passed (603)
+   Start at  13:47:03
+   Duration  40.18s (transform 29.55s, setup 1.36s, import 107.91s, tests 84.46s, environment 26.93s)
+FOCUSED_DONE 13:47  up 2 days, 17:39, 1 user, load averages: 9.86 27.95 70.70
+=== OSR read-only ===
+CR-OSR-FREEZE-7 UNREVIEWED-UI cohort (src/components/): 50 file(s) / 128 identit(ies) / 192 read(s), banked in the frozen inventory and PER-ROW TRIAGED under CR-OSR-FREEZE-7 (the dispositions live in 
+OSR_EXIT=0
+=== writer-reach dry ===
+WRWALKER HOLD — judged 6532 · LIT 560 · LIT-NAME 4646 · DARK 1326 (reviewable 526) · pending-surface debt: isolationSupport on settlement → web-display (§12 WRW-2, the owner row that rules wh
+WR_EXIT=0
+=== check:quick ===
+CHECKQUICK_EXIT=0
+[implementation-gate] validate-packets: node scripts/implementation-packets.mjs validate
+[implementation-packets] valid: 182 packets (0 READY)
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+  validate-packets: exit 0, 577 ms
+  typecheck-full: exit 0, 13431 ms
+  typecheck-domain: exit 0, 11462 ms
+DONE 13:52  up 2 days, 17:43, 1 user, load averages: 4.16 17.42 55.07 porcelain=0

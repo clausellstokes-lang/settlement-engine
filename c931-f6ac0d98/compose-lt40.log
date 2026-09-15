@@ -1,0 +1,41 @@
+consist before=9018705dd dock lane-LT40-engine tip=6b4cc8f43 base=f73bdbf16
+--- lane-LT40-engine (12 cars) ---
+  ok  c1792e11a LT40 car 1: the seed-join cure is COLLECTED onto the build slot, and the
+  ok  71c16dae8 LT40 car 1 (the census bill it owed): the prose-numerics baseline follow
+  ok  2d841ad53 LT40 car 2: `settlement.services` is PINNED permanently absent, so no ne
+  ok* 43335c380 LT40 car 2 (the census bill): the lighting census is REGENERATED through   [conflict on: tests/lint/.lighting-census-baseline.json — incoming copy taken; re-frozen at the register step]
+  ok  5f9cd858a LT40 car 3: the razing spoils are PINNED inert — one reader, no writer
+  ok  f6961265c LT40 car 4: the four banked dark-pool dispositions are written down AT T
+  ok  b771ccfa7 LT40 car 5: VERDICT — `fires(n)`'s 65-ceiling is a RARITY DIAL, not an
+  ok  cf0365942 LT40 car 6: the ruined-court civic snapshot is REPORTED at both ends of 
+  ok  9b1c55ecd LT40 car 6 (the census bill): nine line-keyed citations into economicSta
+  ok  d33d95882 LT40 car 7: the SECOND clock is pinned as the constant it is, and the fr
+  ok  1cd710bd7 LT40 car 7 (the census bill): the lighting census is REGENERATED through
+  ok  6b4cc8f43 LT40 car 8: D-CH-1 is CLOSED on the code — the repair pass receipts ev
+CONSIST_TIP=95e8c4704 cars=59 porcelain=0
+--- trailers:
+trees+dates identical: YES
+seat census over the new cars:   12 1 
+--- three-way byte check (base f73bdbf16 / ours 9018705dd / theirs 6b4cc8f43):
+OK   docs/ENGINE_DEFECT_DISPOSITIONS.md
+OK   docs/README.md
+OK   docs/content/wiring-census.json
+OK   src/components/new/tabs/OverviewTab.jsx
+OK   src/components/new/tabs/PowerTab.jsx
+OK   src/domain/display/stateProse/defenseStateProse.js
+OK   src/domain/institutions/institutionTable.js
+OK   src/domain/prose/holderTable.js
+OK   src/domain/settlement.schema.js
+OK   src/domain/worldPulse/warDeployment.js
+OK   src/domain/worldPulse/worldState.js
+OK   src/generators/economy/economicState.js
+OK   src/generators/historyGenerator.js
+OK   src/generators/priorityHelpers.js
+OK   src/generators/steps/coherenceRepairPass.js
+OK   tests/domain/warDeployment.test.js
+OK   tests/domain/worldPulseTickClock.test.js
+DIFF tests/lint/.lighting-census-baseline.json (merge rc=1; head==theirs: yes)
+OK   tests/lint/.prose-numerics-baseline.json
+OK   tests/lint/institutionTable.walker.test.js
+OK   tests/lint/observedShapeSentinel.test.js
+CONSIST_TIP=b0de595ae cars=59 porcelain=0

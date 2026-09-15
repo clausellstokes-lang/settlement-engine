@@ -1,0 +1,30 @@
+consist before=b0de595ae dock lane-LT41-voice tip=919c37da5 base=c351fdb44
+--- lane-LT41-voice (8 cars) ---
+  skip(applied) c04f2e24c LT41 car 1: the voice guard gains a FIFTH TIER over src/generators, with
+  skip(applied) c5541dd0a LT41 car 2: the eight transcribed dashes join the declared allowlist and
+  skip(applied) 2be1a8f58 Register (capsule car): the base-state capsule regenerates at the LT41 c
+  skip(applied) c351fdb44 LT41 car 3: the record's own figures corrected where the guard describes
+  ok  c404e1321 LT41b car 4 (RULING 1): the eleven cross-settlement conflict sentences a
+  ok  89f4a622a LT41b car 5 (RULING 2): the five origin-prose dashes are REFUSED, and th
+  ok  a76fe8cdf LT41b car 6 (RULING 3): the stability label's three separator convention
+  ok* 919c37da5 Register (census car): the lighting census re-freezes at the LT41b car-6   [conflict on: tests/lint/.lighting-census-baseline.json — incoming copy taken; re-frozen at the register step]
+CONSIST_TIP=201af3d5a cars=63 porcelain=0
+--- trailers:
+trees+dates identical: YES
+seat census over the new cars:    4 1 
+--- three-way byte check (base c351fdb44 / ours b0de595ae / theirs 919c37da5):
+OK   docs/content/wiring-census.json
+OK   src/domain/display/labelBands.js
+OK   src/domain/display/stateProse/powerStateProse.js
+OK   src/domain/simulationSpine.js
+OK   src/generators/aiLayer.js
+OK   src/generators/crossSettlementConflicts.js
+OK   src/generators/power/governanceNarrative.js
+OK   tests/copy/.voice-mechanics-generators-baseline.json
+OK   tests/copy/voiceMechanics.test.js
+OK   tests/domain/powerStateProseDesk.test.js
+OK   tests/generators/aiLayer.test.js
+OK   tests/generators/governanceNarrative.test.js
+DIFF tests/lint/.lighting-census-baseline.json (merge rc=1; head==theirs: yes)
+OK   tests/lint/vocabularyTotality.walker.test.js
+CONSIST_TIP=bf7a7a2f3 cars=63 porcelain=0

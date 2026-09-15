@@ -1,0 +1,27 @@
+HEAD=919c37da52bcb4de1231ada9726b499f963d412a porcelain=0 13:47  up 2 days, 17:39, 1 user, load averages: 10.08 28.61 71.44
+=== FOCUSED + tests/copy whole + tests/generators whole ===
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 31169 after 1 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+ RUN  v4.1.11 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/lane-LT41-voice
+ Test Files  128 passed (128)
+      Tests  1456 passed (1456)
+   Start at  13:48:14
+   Duration  121.68s (transform 21.04s, setup 4.78s, import 202.92s, tests 340.40s, environment 21ms)
+FOCUSED_DONE 13:50  up 2 days, 17:42, 1 user, load averages: 11.95 23.96 62.29
+=== GOLDEN RED-SET: base c351fdb44 vs tip (throwaway worktrees) ===
+failed rows: 1
+failed rows: 1
+base rows:        1  tip rows:        1
+RED-SET IDENTICAL (diff empty)
+=== OSR read-only ===
+CR-OSR-FREEZE-7 UNREVIEWED-UI cohort (src/components/): 50 file(s) / 128 identit(ies) / 192 read(s), banked in the frozen inventory and PER-ROW TRIAGED under CR-OSR-FREEZE-7 (the dispositions live in 
+OSR_EXIT=0
+=== check:quick ===
+CHECKQUICK_EXIT=0
+[implementation-gate] validate-packets: node scripts/implementation-packets.mjs validate
+[implementation-packets] valid: 182 packets (0 READY)
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+  validate-packets: exit 0, 414 ms
+  typecheck-full: exit 0, 13057 ms
+  typecheck-domain: exit 0, 11603 ms
+DONE 13:52  up 2 days, 17:44, 1 user, load averages: 3.77 16.07 53.27 porcelain=0
