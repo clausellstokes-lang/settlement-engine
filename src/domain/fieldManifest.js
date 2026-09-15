@@ -296,6 +296,70 @@ export const FROZEN_VS_LIVE = Object.freeze([
       + 'package gives it a pulse writeback must flip this row to live and name the writer.',
     guards: [],
   },
+  {
+    // ── pdf.7's STRUCTURAL HALF (A+ Track G, landed by LT37 car 6) ──────────
+    // THE THIRD AXIS OF FIELD ROT. The two manifests above govern a field a long
+    // campaign contradicts (frozen-vs-live) and a field nobody reads (dead
+    // writes). This row governs the third: a field two surfaces both render from
+    // DIFFERENT sources, which is how the screen and the PDF drift apart while
+    // every parity test stays green.
+    //
+    // WHY THIS ROW AND NOT A `consumerProbe` KEY. pdf.7's text guesses a key
+    // shape this module does not have (`grep -c consumerProbe` was 0 at
+    // f73bdbf16, and still is). The manifest's real idiom for "the generator
+    // wrote a verdict, and consumers must derive the live answer instead of
+    // reading it" is a SNAPSHOT row whose `guards` carry mustMatch/mustNotMatch
+    // at the named display sites, exactly as the magicTradeChannel row above
+    // does. So the parity contract is registered in that idiom: the VALUE half
+    // of the contract stays where it already lives and is walked value-by-value
+    // (SHARED_FIELDS in src/domain/display/parityContract.js, exercised by
+    // tests/pdf/viewModelParity.test.js and goldenViewModel.test.js); this row
+    // adds the SOURCE half pdf.7 actually asked for, which is the probe that
+    // reds when a converged tab regresses to reading the raw engine struct.
+    //
+    // ⚠ src/components/new/dailyLifeLogic.js IS DELIBERATELY NOT GUARDED HERE,
+    // and that exclusion is the point rather than a hole. It reads
+    // `fb.deficitPercent` at :54 and DailyLifeTab bands food pressure on it, so
+    // guarding it would red the gate today. LT37 car 5 MEASURED that read over
+    // 360 generated settlements: 337 exact agreements, 21 one-point spreads, 2
+    // two-point spreads, and the band word identical in all 360, the spread
+    // being double rounding inside foodBalance.js's canonical reconcile. Routing
+    // it through deriveFoodBalance is therefore an OUTPUT-MOVING change with a
+    // measured-small blast radius, it went up under 764.3, and THE CHAIR REFUSED
+    // IT on that measurement (2026-09-15): a cure that moves zero band words buys
+    // no reader-visible correctness. So the second read is TOLERATED DELIBERATELY
+    // and this exclusion is permanent until a new measurement moves the band. The
+    // record of the refusal, with the patch and the rows it would have moved, is
+    // docs/implementation/LT37-dailylife-food-deficit-cure.md.
+    path: 'economicViability.metrics.foodBalance.deficitPercent (the PARITY axis: screen vs PDF source)',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict for the food deficit percentage, written by '
+      + 'generators/economy/foodBalance.js. The CONVERGED dossier surfaces must read the '
+      + 'percentage through deriveFoodBalance (residual over daily need), the same derivation '
+      + 'src/pdf/lib/viewModel.js uses, so the screen and the exported PDF can never print two '
+      + 'different numbers under one label. A tab that goes back to the raw engine field is the '
+      + 'drift pdf.2 and pdf.3 exist to kill, and the guards below are where it is caught. Known '
+      + 'and deliberate exclusion: src/components/new/dailyLifeLogic.js still reads the engine '
+      + 'field; LT37 car 5 measured the spread at 0 to 2 points with no band movement across 360 '
+      + 'settlements, and the cure was REFUSED on that measurement because it can move on-screen '
+      + 'output and buys no reader-visible correctness. The exclusion is permanent until a new '
+      + 'measurement moves the band.',
+    guards: [{
+      file: 'src/components/new/tabs/EconomicsTab.jsx',
+      mustMatch: 'deriveFoodBalance',
+      mustNotMatch: '\\.deficitPercent',
+      why: 'pdf.3 converged this tab onto the shared derivation; a raw engine read here is the '
+        + 'exact regression that put the screen and the PDF on two numbers',
+    }, {
+      file: 'src/components/new/SummaryTab.jsx',
+      mustMatch: 'deriveFoodBalance',
+      mustNotMatch: '\\.deficitPercent',
+      why: 'the other half of the pdf.3 convergence; the DM summary and the PDF overview print '
+        + 'the same food fact and must read it from one place',
+    }],
+  },
 ]);
 
 // ── Manifest 2: producer/consumer registry (dead-field CI) ────────────────

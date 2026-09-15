@@ -277,4 +277,42 @@ describe('screen↔PDF parity axis (A+ #6 — governed by SHARED_FIELDS)', () =>
       expect(Array.isArray(row.vmPaths) && row.vmPaths.length > 0).toBe(true);
     }
   });
+
+  // ── pdf.7's STRUCTURAL HALF (LT37 car 6) ───────────────────────────────────
+  // The block above registers the VALUE half: the contract exists and is
+  // well-formed, walked value-by-value by tests/pdf/viewModelParity.test.js.
+  // pdf.7's Done-when asks for something the value half structurally cannot
+  // give: "reintroducing a raw `.deficitPercent` read in any listed web tab
+  // makes that test fail naming the offending file". That is a SOURCE probe, and
+  // it now lives in FROZEN_VS_LIVE as a snapshot row with guards, which is this
+  // manifest's own idiom for "derive the live answer, never read the verdict"
+  // (the magicTradeChannel row is the precedent). The guard mechanics are
+  // exercised by the generic "guards for '%s' hold at the declared display
+  // sites" arm above; this arm pins that the ROW ITSELF stays declared, stays a
+  // snapshot, and keeps guarding BOTH converged tabs, so a later edit cannot
+  // quietly drop the probe and leave the value half looking complete.
+  test('the parity SOURCE probe is declared in FROZEN_VS_LIVE and guards both converged tabs', () => {
+    const row = FROZEN_VS_LIVE.find((e) => /deficitPercent/.test(e.path) && /PARITY/.test(e.path));
+    expect(row, 'the parity-axis source row is gone from FROZEN_VS_LIVE; pdf.7 regressed to the value half alone').toBeTruthy();
+    expect(row.mode, 'the parity-axis row is a generation verdict, so it is a snapshot').toBe('snapshot');
+    expect(row.pulseWriter).toBeNull();
+
+    const guarded = (row.guards || []).map((g) => g.file).sort();
+    expect(guarded, 'both tabs pdf.3 converged must stay guarded').toEqual([
+      'src/components/new/SummaryTab.jsx',
+      'src/components/new/tabs/EconomicsTab.jsx',
+    ]);
+    for (const guard of row.guards) {
+      expect(guard.mustMatch, `${guard.file}: the guard must require the shared derivation`).toBe('deriveFoodBalance');
+      expect(guard.mustNotMatch, `${guard.file}: the guard must ban the raw engine read`).toBe('\\.deficitPercent');
+      expect(typeof guard.why, `${guard.file}: the manifest convention is that every probe states its why`).toBe('string');
+    }
+
+    // THE DOCUMENTED EXCLUSION, pinned as a documented exclusion rather than left
+    // as a hole. dailyLifeLogic.js reads the engine field today; LT37 car 5
+    // measured the spread and the cure is owner-gated because it can move
+    // on-screen output, so the row must SAY so rather than silently omit it.
+    expect(row.displayRule, 'the row must name the deliberate dailyLifeLogic exclusion')
+      .toContain('dailyLifeLogic.js');
+  });
 });
