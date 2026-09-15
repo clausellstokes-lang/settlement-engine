@@ -1,0 +1,23 @@
+HEAD=aab26d4aa porcelain=0 17:44  up 2 days, 21:36, 1 user, load averages: 3.48 5.58 9.03
+=== FOCUSED + the blind suites ===
+     × per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win) 11ms
+     × every config produces byte-identical output to the golden master 27692ms
+     × every completeness claim carries an @enforced-by tag with ≥1 target 15ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/copy/voiceMechanics.test.js > E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only) > per-file debt exactly matches the baseline (grew ⇒ rewrite; fell ⇒ bank the win)
+ FAIL  tests/docs/enforcement-claims.test.js > enforcement-claims meta-pin (A+ P1.1) > every completeness claim carries an @enforced-by tag with ≥1 target
+ FAIL  tests/property/generatorGoldenMaster.test.js > generator golden master (cross-build output stability) > every config produces byte-identical output to the golden master
+ Test Files  3 failed | 455 passed | 1 skipped (459)
+      Tests  3 failed | 6294 passed | 1 skipped (6298)
+FOCUSED_DONE 17:51  up 2 days, 21:42, 1 user, load averages: 36.87 37.66 23.70
+=== OSR ===
+CR-OSR-FREEZE-7 UNREVIEWED-UI cohort (src/components/): 50 file(s) / 128 identit(ies) / 192 read(s), banked in the frozen inventory and PER-ROW TRIAGED under CR
+OSR_EXIT=0
+=== check:quick ===
+CHECKQUICK_EXIT=0
+[typecheck-ratchet] OK — no type regressions (173 error(s), ceiling 173).
+[domain-strict] ✓ no strict-type regressions (1120 errors, ceiling 1120).
+  validate-packets: exit 0, 442 ms
+  typecheck-full: exit 0, 15052 ms
+  typecheck-domain: exit 0, 12419 ms
+DONE 17:52  up 2 days, 21:44, 1 user, load averages: 13.01 29.95 22.01 porcelain=0
