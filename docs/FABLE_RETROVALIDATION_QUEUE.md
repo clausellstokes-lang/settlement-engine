@@ -3831,3 +3831,12 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* the four census walkers' output before and after; the refreeze's own non-zero-by-design message quoting all five figures; the plain re-run 34/34; `git diff --numstat` = `5 0` on the manifest; `check-test-ratchet.mjs:124/:1330/:1350` read at the dock tip.
 *Priority:* **P2** on J-LT42-41 (an unpaid ratchet bill is a false green in a landed commit). **P4** on the rest.
 **Status:** enrolled. §921.8's owed re-freeze is CLOSED — the lighting census re-frozen and green, the test-ratchet re-freeze proved not owed. ⛔ The FULL-SUITE gate remains unrun by this item: the repo-wide mutex was held by another session's lane throughout, and `gate-mutex.sh` gives up and exits 0.
+
+## §928 — THE LONG TAIL'S FIRST FOUR ITEMS CORRECTED BY THE CODE, AND THE SCRIBE'S BILLING DEFECT (SEAT: Fable 5.1 — the chair)
+
+### R91 — the chair's own rulings inside §928 (Fable seat; recorded for the retro pass under the 09-12 obligation)
+*What was judged:* J-CH-928-1 the three ledger-cut docks REPLACED from the slot before any byte (over reconciling the branches, which is the owner's); J-CH-928-2 #15 STRUCK as landed with a two-car residue (over re-running the item); J-CH-928-3 the three remaining dial-0 pins in `pricing.test.js` are the FLIP car's (over reshaping them now); J-CH-928-4 #17's output-moving cars HELD and §764.3 ASKED (over landing them under the 22:5x grant — an output-moving change under the same-seed law is the freeze class); J-CH-928-5 202's header MAY be corrected in place because it has never been applied anywhere (over a 204 that corrects a 202 nobody has run).
+*What Fable re-derives:* whether J-CH-928-4 was too cautious under the owner's grant (the grant says 'everything you can do without me'; the chair read the freeze law as an exception the grant did not name).
+*Receipts:* the four lanes' reports (`$SC/kit/RESUME-NOTE.md` 00:3x → 03:2x); the seals `refs/preserve/lt15-secrets-2026-09-14` `ee449f4f6` · `lt16-money` `517f8c950` · `lt17-hygiene` `1771acd50` · `lt42-instruments` `6b3b49a47`; the chair's own gate runs quoted in the diary.
+*Priority:* P3 on J-CH-928-4; P4 on the rest.
+**Status:** enrolled. The seat is Fable; nothing here needs a Fable re-validation of an Opus judgment — recorded so the retro pass can overturn one ruling without re-running the item.
