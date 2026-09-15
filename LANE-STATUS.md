@@ -1,6 +1,6 @@
-# LANE-STATUS — written 2026-09-14 21:03:08 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-14 21:08:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
-product claude/composite-r4 = f73bdbf16 · ledger = 5cfc417ea Plan: RUN 5 closes the Scribe's keyless measurement — 87 % / 84 % / 12 contradicting lin
+product claude/composite-r4 = f73bdbf16 · ledger = f70dfee96 Plan: the collection at 09-14 ~22:1x — the Scribe is built through W4, dark and unverifi
 
 ## BUILD / KIT LANES (dock · base · cars · porcelain · receipt)
 - REWRITE 8b DS-DEF-11 (the validation block; cure round): dock laneRW-DEF11 ABSENT
@@ -95,7 +95,7 @@ stat: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-
 - DS-DEF-2: pools 26 · skeleton 26 · draft 39 · refine 0 · kept 0 · refute 24 · cure 0 · cured 0 · JUDGMENT no · JUDGMENT-cure no
 - DS-DEF-2.licence-test-attempt: pools 26 · skeleton 26 · draft 36 · refine 26 · kept 26 · refute 32 · cure 24 · cured 0 · JUDGMENT yes · JUDGMENT-cure no
 - entailment: surveys 6 · refutes 6 · ENTAILMENT-TABLE.draft.md 09-12 20:49 346945 B · referent surveys 6 · referent refutes 6 · REFERENT-TABLE.draft.md 09-12 20:49 285943 B
-- HOLD-VITEST absent · runner count 9
+- HOLD-VITEST absent · runner count 0
 
 ## RESEARCH SWEEPS (state = claims/verdicts/kept; verdict files; section/critic mtimes) — round tags in sweep/LAST-RUNS.json
 Traceback (most recent call last):
@@ -113,6 +113,9 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f86a239c-ba8e-464d-a904-e4b70a0c4b2e — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
+- **wf_00542089-397** (mtime 09-14 21:05): agent calls 2 (2 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_00542089-397/`
+    - `a0745eb26` ? · IN FLIGHT · transcript 09-14 21:08 695 KB · 39 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a534045ec` ? · IN FLIGHT · transcript 09-14 21:08 693 KB · 24 tool calls · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_00f13b26-496** (mtime 09-14 19:35): agent calls 64 (64 distinct) · DONE 64 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_00f13b26-496/`
     - `a4fbfbedf` ? · DONE · transcript 09-14 18:51 616 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 14, "notes": ["Two seats name sources this town does not seat: 'garrison' (Internal Security face 5, Economic Survival face 1) and 'elders' (In
     - `aff4d541f` ? · DONE · transcript 09-14 18:55 754 KB · 9 tool calls · files: response-sonnet.json · result: {"unitsWritten": 14, "notes": ["DS-DEF-2 assigns speaking faces to 'elders' (Invasion & War) and 'garrison' (Internal Security, Economic Survival), but town.md'
@@ -453,4 +456,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `afbaa2e6b` ADVERSARY · DONE · transcript 09-14 03:02 490 KB · 6 tool calls · result: {"pool": "Disasters & Famine: NO reserves, NO medical provision", "auditorWasWrong": true, "missedFindings": [{"kind": "CLAIM_MOVED", "variant": 2, "faceOrSpine
 
 ## PROCESSES: 
-load: 28.79 17.97 15.18
+load: 3.03 15.21 16.50
