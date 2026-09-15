@@ -1,6 +1,10 @@
+import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
+import { codeOnly } from '../helpers/codeOnlySource.js';
+import { razingSpoils } from '../../src/domain/worldPulse/razing.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
 import { stampWarIntent } from '../../src/domain/worldPulse/warIntent.js';
@@ -849,5 +853,108 @@ describe('WR-8 R2 — the license patch\'s one road into the world', () => {
       expect(war.worldStatePatch).toEqual({});
       expect(Object.isFrozen(war.worldStatePatch)).toBe(true);
     }
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LT40 car 3 — §733.2, THE RAZING SPOILS. A guard, deliberately not a cure.
+//
+// `warDeployment.js` hands `razingSiegeEmission` a `movableWealth` read off
+// `conqueredSettlement.economicState.wealthIndex`. That field has ONE reader —
+// that line — and NO WRITER anywhere in the estate, so the read is 0 on every
+// conquest that has ever resolved and the whole razing-spoils subsystem is
+// inert. The cure §733.2 names is the TREASURY FIELD, which is W-COIN: a new
+// persistence shape, panel-gated at §733.1, and not built. So this file gets the
+// GUARD instead — the dead read is pinned dead, and the day a writer lands the
+// pin reds rather than the subsystem quietly starting to lie.
+//
+// ⛔ THE SECOND HALF OF §733.2 IS ALREADY CURED AND IS RECORDED HERE SO IT IS NOT
+// RE-FOUND: `peaceTermsDrafting.js` no longer promises players "N% of the
+// treasury". TE-HERALD-1 retired the percentage — `TERM_SHARE_WORDS` at :95,
+// `treasuryShareWords` at :97, rendered at :108 as "A tribute stream: a modest
+// share of the treasury for N years" — for the reason its own docblock gives at
+// :85-88, "a fraction of a quantity no reader can see".
+// ─────────────────────────────────────────────────────────────────────────────
+describe('§733.2 — the razing spoils read, pinned inert until a writer exists', () => {
+  /** @param {string} tier @param {string} seed */
+  const producedTown = (tier, seed) => generateSettlementPipeline(
+    {
+      settType: tier, culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road',
+    },
+    null,
+    { seed, customContent: {} },
+  );
+
+  test('THE RAZING SPOILS ARE PROVABLY INERT: one reader, no writer, 0 on every produced town', () => {
+    // ── (1) THE SOURCE FENCE, ON CODE RATHER THAN BYTES ────────────────────────
+    // The read's own docblock names `wealthIndex` a dozen times explaining why it
+    // is dead, so a raw-byte scan would convict the explanation. `codeOnly`
+    // blanks comments and string CONTENTS while preserving offsets, which is the
+    // estate's shared answer to exactly this (tests/helpers/codeOnlySource.js).
+    const candidates = execSync(
+      'grep -rl "wealthIndex" src --include=*.js --include=*.jsx 2>/dev/null || true',
+      { cwd: new URL('../..', import.meta.url).pathname, encoding: 'utf8' },
+    ).trim();
+    const files = candidates === '' ? [] : candidates.split('\n');
+    // The grep must be able to find something, or every refusal below is vacuous.
+    expect(files.length, 'the scan found no src/ file naming the field at all').toBeGreaterThan(0);
+    /** @type {string[]} */
+    const readers = [];
+    /** @type {string[]} */
+    const writers = [];
+    for (const rel of files) {
+      const code = codeOnly(readFileSync(new URL(`../../${rel}`, import.meta.url), 'utf8'));
+      // A READ is a member access; a WRITE is an object key or an assignment.
+      if (/\.\s*wealthIndex\b/.test(code) || /\?\.\s*wealthIndex\b/.test(code)) readers.push(rel);
+      if (/\bwealthIndex\s*:/.test(code) || /\bwealthIndex\s*=[^=]/.test(code)) writers.push(rel);
+    }
+    expect(readers, 'the one reader of economicState.wealthIndex')
+      .toEqual(['src/domain/worldPulse/warDeployment.js']);
+    expect(
+      writers,
+      'a writer of economicState.wealthIndex appeared. The razing-spoils subsystem has been'
+      + ' inert since it shipped and this pin holds it inert on purpose: if W-COIN (the'
+      + ' treasury field, §733.1-gated) has landed, retire this pin DELIBERATELY and price the'
+      + ' razing outcomes it moves — do not delete it to make a red go away.',
+    ).toEqual([]);
+    // LIVENESS FOR BOTH REFUSALS: the reader's exact spelling is still the line
+    // this pin is about, so an emptied or renamed read cannot pass as "no writer".
+    const warDeploymentCode = codeOnly(readFileSync(
+      new URL('../../src/domain/worldPulse/warDeployment.js', import.meta.url), 'utf8',
+    ));
+    expect(warDeploymentCode).toMatch(
+      /movableWealth:\s*Number\(conqueredSettlement\?\.economicState\?\.wealthIndex\)\s*\|\|\s*0/,
+    );
+
+    // ── (2) MEASURED ON PRODUCED TOWNS, not asserted about a fixture ───────────
+    /** @type {string[]} */
+    const carriers = [];
+    let scanned = 0;
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      const settlement = producedTown(tier, `spoils-${tier}`);
+      scanned += 1;
+      // The economic state really is built — the liveness anchor for the absence.
+      expect(settlement.economicState, `${tier} produced no economicState`).toBeTruthy();
+      expect(Object.keys(settlement.economicState).length).toBeGreaterThan(5);
+      if (settlement.economicState.wealthIndex !== undefined) carriers.push(tier);
+      // The read spelled EXACTLY as warDeployment.js:763 spells it.
+      const movableWealth = Number(settlement?.economicState?.wealthIndex) || 0;
+      expect(movableWealth).toBe(0);
+      const spoils = razingSpoils({ movableWealth, population: settlement.population });
+      expect(spoils.plunder).toBe(0);
+      expect(spoils.tributePerYear).toBe(0);
+      expect(spoils.nothingLeft).toBe(true);
+      expect(spoils.receipt).toContain('there is nothing in the ash');
+    }
+    expect(scanned).toBe(6);
+    expect(carriers, 'a generated settlement began carrying economicState.wealthIndex').toEqual([]);
+
+    // ── (3) THE POSITIVE TWIN ─────────────────────────────────────────────────
+    // The zero above must be the FIELD's emptiness, never a dead function. Hand
+    // the same call a real number and the spoils are live, so the day a writer
+    // exists this read starts reporting rather than staying silently at zero.
+    const live = razingSpoils({ movableWealth: 900, population: 5000 });
+    expect(live.plunder).toBeGreaterThan(0);
+    expect(live.nothingLeft).toBe(false);
   });
 });
