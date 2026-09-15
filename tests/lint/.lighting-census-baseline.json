@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
+  "measuredAtSha": "a8cd9deb3ee1a5494a8bc02e1763b2b902295d8c",
+  "measuredBy": "lane LT39 (Opus 5 — the relationship chronicle surface)",
+  "date": "2026-09-15",
+  "note": "LT39 car 1 adds six titles to two existing suites (tests/domain/chronicleReadModel.test.js +4, tests/components/advanceReport.test.jsx +2) and no new test FILE, so files/parked/credited are unchanged and only the title count moves: 24169 -> 24175. No suite title was added, so suiteTitles holds at 6452.",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24169,
+  "titles": 24175,
   "suiteTitles": 6452
 }
