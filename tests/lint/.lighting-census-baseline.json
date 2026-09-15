@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a7955b6c0e50f9f8af8d3144d48f86bbda52612b",
-  "measuredBy": "LT28-gate (Opus 5 — Fable-unvalidated)",
+  "measuredAtSha": "a8cd9deb3ee1a5494a8bc02e1763b2b902295d8c",
+  "measuredBy": "lane LT39 (Opus 5 — the relationship chronicle surface)",
   "date": "2026-09-15",
-  "note": "LT28 car 6: two detector controls added to tests/docs/enforcement-claims.test.js pin the `\\b0 problems` precision fix in both directions (+2 titles). The four controls added to tests/copy/voiceMechanics.test.js for the authored-vocabulary exemption class contribute ZERO titles — that file is parked — which was measured, not assumed: with enforcement-claims alone reverted to HEAD the walker was 34 passed. No file changed park or credit status.",
+  "note": "LT39 car 1 adds six titles to two existing suites (tests/domain/chronicleReadModel.test.js +4, tests/components/advanceReport.test.jsx +2) and no new test FILE, so files/parked/credited are unchanged and only the title count moves: 24169 -> 24175. No suite title was added, so suiteTitles holds at 6452.",
   "files": 2563,
   "parked": 375,
   "credited": 2188,
-  "titles": 24171,
+  "titles": 24175,
   "suiteTitles": 6452
 }
