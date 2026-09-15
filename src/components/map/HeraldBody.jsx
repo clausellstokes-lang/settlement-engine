@@ -40,6 +40,8 @@ import HeraldAdjudication from './HeraldAdjudication.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
 import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
 import PerspectiveStandings from './PerspectiveStandings.jsx';
+import RelationshipChronicleSection from './RelationshipChronicleSection.jsx';
+import NpcTrailSection from './NpcTrailSection.jsx';
 import RealmDocket from './RealmDocket.jsx';
 import AdvanceReport from './AdvanceReport.jsx';
 import TreatyPanel from './TreatyPanel.jsx';
@@ -237,6 +239,14 @@ export default function HeraldBody({
           {/* DESK-4 — one observer, its relations in plain words; the believed
               half is DM-gated inside; the omniscient matrix stays refused. */}
           <PerspectiveStandings campaign={campaign} nameById={nameById} />
+          {/* LT39 — the other half of that desk: what those standings SURVIVED.
+              Self-gates to absent on a realm with no recorded history; the covert
+              rows are withheld inside the read model, fail-closed. */}
+          <RelationshipChronicleSection campaign={campaign} nameById={nameById} />
+          {/* LT39 car 5 — the court's dated record, beside RealmIntrigue's
+              present standing. DM-only inside; absent when the ladder recorded
+              nothing. */}
+          <NpcTrailSection campaign={campaign} />
           {showResolve && (
             <WarResolveSection
               campaign={campaign}
