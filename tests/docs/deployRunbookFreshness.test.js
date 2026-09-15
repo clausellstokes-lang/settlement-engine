@@ -242,7 +242,7 @@ describe('canonical deploy safety — durable work and Stripe cutover', () => {
 // reads '' , and the failure surfaces at the first real user. So the required set
 // is DERIVED from the functions themselves rather than kept by hand.
 //
-// ⚠ THE SCAN NEEDS THREE ARMS BECAUSE THE CODE HAS THREE SPELLINGS, and a
+// ⚠ THE SCAN NEEDS FOUR ARMS BECAUSE THE CODE HAS FOUR SPELLINGS, and a
 // literal-only scan is the vacuity this pin exists to refuse — it reports a
 // complete-looking subset while missing every durable-worker cron secret and the
 // whole mail seam. It also could not express the ONE deliberate exclusion this
@@ -251,11 +251,27 @@ describe('canonical deploy safety — durable work and Stripe cutover', () => {
 //   arm 1  Deno.env.get('NAME')                      — the obvious spelling
 //   arm 2  const IDENT = 'NAME'; Deno.env.get(IDENT) — all three worker secrets
 //   arm 3  env('NAME') through an injected getter    — the mail adapter
+//   arm 4  alias.env.get('NAME') / readEnv('NAME')   — the runtime-guarded seams
+//
+// Arm 4 is not a hypothetical. A module that vitest imports under NODE cannot
+// name `Deno` directly — the global does not exist there — so it reads through
+// `const deno = (globalThis as any).Deno` or a `readEnv(name)` helper, and the
+// three ruled arms return [] on those lines. `_shared/verifyTurnstile.ts` is
+// written that way and its TURNSTILE_SECRET_KEY was consumed by two live money-
+// path doors while being invisible to this census. The cure belongs in the
+// SCANNER: `_shared/cors.ts:74-80` documents the guard on purpose and
+// tests/edgeFunctions/cors.test.js imports the module from Node, so normalizing
+// those sources to a bare `Deno.env.get` would break the Node suite and turn a
+// docs pin into an edge-behavior change.
+//
+// ⚠ Arm 4's alias pattern MATCHES ARM 1'S OWN SPELLING by construction (`Deno`
+// is itself a valid identifier), so its non-redundancy control is written on set
+// DIFFERENCE, never on set size — a size comparison would pass vacuously.
 describe('DEPLOY.md documents every environment name the functions consume', () => {
   const FUNCTIONS_DIR = resolve(repoRoot, 'supabase/functions');
 
   /**
-   * Every environment name the sources under `dir` actually read, by all three
+   * Every environment name the sources under `dir` actually read, by all four
    * spellings. Returned per-arm so the arms can be shown to be non-redundant.
    * @param {string} dir
    */
@@ -263,6 +279,7 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
     /** @type {Set<string>} */ const literal = new Set();
     /** @type {Set<string>} */ const viaConst = new Set();
     /** @type {Set<string>} */ const viaGetter = new Set();
+    /** @type {Set<string>} */ const viaAlias = new Set();
     const walk = (d) => {
       for (const entry of readdirSync(d, { withFileTypes: true })) {
         const p = resolve(d, entry.name);
@@ -284,6 +301,15 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
         for (const m of src.matchAll(/\benv\(\s*['"]([A-Z0-9_]+)['"]\s*\)/g)) {
           viaGetter.add(m[1]);
         }
+        // arm 4a: an ALIASED Deno global — `const deno = (globalThis as any).Deno;`
+        // then `deno.env.get('NAME')`. Deliberately a superset of arm 1.
+        for (const m of src.matchAll(/[A-Za-z_$][\w$]*\.env\.get\(\s*['"]([A-Z0-9_]+)['"]/g)) {
+          viaAlias.add(m[1]);
+        }
+        // arm 4b: a NAMED getter whose identifier ends in Env — `readEnv('NAME')`.
+        for (const m of src.matchAll(/[A-Za-z_$][\w$]*[Ee]nv\(\s*['"]([A-Z0-9_]+)['"]\s*\)/g)) {
+          viaAlias.add(m[1]);
+        }
       }
     };
     walk(dir);
@@ -291,7 +317,8 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       literal,
       viaConst,
       viaGetter,
-      all: new Set([...literal, ...viaConst, ...viaGetter]),
+      viaAlias,
+      all: new Set([...literal, ...viaConst, ...viaGetter, ...viaAlias]),
     };
   }
 
@@ -322,10 +349,10 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       + ' would tell an operator to arm the thing the release is choosing not to arm.',
   });
 
-  it('CONTROL: the scanner finds a planted secret in all three spellings', () => {
+  it('CONTROL: the scanner finds a planted secret in all four spellings', () => {
     // A census that reports zero and a census that is broken look identical from
     // the outside. Plant one name in each spelling in a throwaway tree and prove
-    // every arm reads it — including the two a literal-only scan cannot see.
+    // every arm reads it — including the three a literal-only scan cannot see.
     const tmp = mkdtempSync(join(tmpdir(), 'deploy-env-census-'));
     const nested = resolve(tmp, 'nested');
     mkdirSync(nested);
@@ -335,6 +362,14 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       "const KEY = 'PLANTED_CONST_SECRET';\nconst b = Deno.env.get(KEY);\n",
     );
     writeFileSync(resolve(nested, 'viaGetter.ts'), "const c = env('PLANTED_GETTER_SECRET');\n");
+    // Arm 4's TWO shapes, both live in this tree and both invisible to arms 1-3:
+    // a runtime-guarded alias of the Deno global, and a named `…Env(name)` helper.
+    writeFileSync(
+      resolve(nested, 'viaAlias.ts'),
+      'const deno = (globalThis as any).Deno;\n'
+      + "const d = deno.env.get('PLANTED_ALIAS_SECRET');\n"
+      + "const e = readEnv('PLANTED_NAMED_GETTER_SECRET');\n",
+    );
     // …and a test double, which is NOT deployed code and must not enter the census.
     writeFileSync(resolve(tmp, 'thing.test.ts'), "Deno.env.get('PLANTED_TEST_ONLY_SECRET');\n");
 
@@ -342,20 +377,30 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
     expect(found.literal).toContain('PLANTED_LITERAL_SECRET');
     expect(found.viaConst).toContain('PLANTED_CONST_SECRET');
     expect(found.viaGetter).toContain('PLANTED_GETTER_SECRET');
+    expect(found.viaAlias).toContain('PLANTED_ALIAS_SECRET');
+    expect(found.viaAlias).toContain('PLANTED_NAMED_GETTER_SECRET');
+    // Arm 4a is a SUPERSET of arm 1 by construction — it reads `Deno.env.get` too.
+    // Stated here as an assertion so the overlap is a measured fact, and so the
+    // non-redundancy control below is visibly forced onto set DIFFERENCE.
+    expect(found.viaAlias).toContain('PLANTED_LITERAL_SECRET');
     expect([...found.all].sort()).toEqual([
-      'PLANTED_CONST_SECRET', 'PLANTED_GETTER_SECRET', 'PLANTED_LITERAL_SECRET',
+      'PLANTED_ALIAS_SECRET', 'PLANTED_CONST_SECRET', 'PLANTED_GETTER_SECRET',
+      'PLANTED_LITERAL_SECRET', 'PLANTED_NAMED_GETTER_SECRET',
     ]);
     expect(found.all.has('PLANTED_TEST_ONLY_SECRET')).toBe(false);
     rmSync(tmp, { recursive: true, force: true });
   });
 
-  it('CONTROL: arms 2 and 3 are not redundant — each sees live names arm 1 cannot', () => {
+  it('CONTROL: arms 2, 3 and 4 are not redundant — each sees live names the earlier arms cannot', () => {
     // If this ever passes trivially the extra arms have stopped earning their
     // keep, and a future lane should be told so rather than left guessing.
     const found = scanConsumedEnvNames(FUNCTIONS_DIR);
     const constOnly = [...found.viaConst].filter((n) => !found.literal.has(n)).sort();
     const getterOnly = [...found.viaGetter]
       .filter((n) => !found.literal.has(n) && !found.viaConst.has(n)).sort();
+    const aliasOnly = [...found.viaAlias]
+      .filter((n) => !found.literal.has(n) && !found.viaConst.has(n) && !found.viaGetter.has(n))
+      .sort();
     expect(
       constOnly,
       'the const-resolved arm no longer finds anything the literal arm misses',
@@ -364,8 +409,26 @@ describe('DEPLOY.md documents every environment name the functions consume', () 
       getterOnly,
       'the injected-getter arm no longer finds anything the other two miss',
     ).not.toEqual([]);
+    expect(
+      aliasOnly,
+      '\nThe runtime-guarded-alias arm (arm 4) no longer finds any name the three ruled arms'
+      + ' miss. Arm 4a matches arm 1\'s own spelling by construction, so this control is'
+      + ' written on set DIFFERENCE and an empty difference means the arm has stopped earning'
+      + ' its keep — NOT that it is fine. WHAT TO DO, in order:\n'
+      + '  1. If a source normalized its guarded alias back to a bare `Deno.env.get`, check'
+      + ' first that the module is not imported by vitest under Node (where `Deno` is'
+      + ' undefined) — see supabase/functions/_shared/cors.ts and tests/edgeFunctions/cors.test.js.'
+      + ' If the normalization is legitimate and no guarded reader remains, RETIRE arm 4 and'
+      + ' this clause together, in one commit, with the census re-measured.\n'
+      + '  2. If a different name now carries the arm, RE-POINT the expectation below at it.\n'
+      + 'Do not delete the assertion to make the gate green.\n',
+    ).not.toEqual([]);
     // The durable-worker cron secrets are the reason arm 2 exists.
     expect(constOnly).toContain('OPERATOR_MESSAGE_CRON_SECRET');
+    // The Turnstile seam is the reason arm 4 exists: _shared/verifyTurnstile.ts reads
+    // its secret through `(globalThis as any).Deno` so the module stays importable under
+    // Node, and it gates two live money-path doors (create-checkout, verify-single-dossier).
+    expect(aliasOnly).toContain('TURNSTILE_SECRET_KEY');
   });
 
   it('every consumed environment name is documented or allowlisted with a reason', () => {

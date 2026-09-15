@@ -314,10 +314,15 @@ Functions → Secrets.
 `tests/docs/deployRunbookFreshness.test.js` scans `supabase/functions/**` for
 every environment name the deployed code actually consumes and requires each one
 to appear in this section or in that file's allowlist with a written reason. The
-scan has three arms because the code has three spellings — a literal
+scan has four arms because the code has four spellings — a literal
 `Deno.env.get('NAME')`, a name held in a `const` and read through it (all three
-durable-worker cron secrets are written that way), and a name read through an
-injected env getter (the mail adapter). A one-arm scan reports a comfortable,
+durable-worker cron secrets are written that way), a name read through an
+injected env getter (the mail adapter), and a name read through a RUNTIME-GUARDED
+alias (`const deno = (globalThis as any).Deno` or a `readEnv('NAME')` helper),
+which is how a module that vitest also imports under Node — where the `Deno`
+global does not exist — is obliged to be written. `TURNSTILE_SECRET_KEY` below
+was consumed by two live money-path doors in exactly that spelling while being
+invisible to the first three arms. A one-arm scan reports a comfortable,
 complete-looking subset and misses precisely the secrets a first cutover cannot
 run without. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
 
@@ -407,6 +412,24 @@ ANALYTICS_HASH_PEPPER        # ⛔ pepper for the device/actor hash in ingest-ev
                              #   nothing is logged; the data is simply never joinable.
 EXPORT_SHARED_SECRET         # ⛔ analytics-export's x-export-secret. Unset => '' => the
                              #   private research export cannot authenticate its caller.
+```
+
+**Human verification (Cloudflare Turnstile) — ships INERT, and this release does
+not arm it.** Listed here because the code reads it, not because the cutover
+sets it. Setting it is a security-posture change on a paid surface and is the
+owner's call, not the operator's.
+
+```
+TURNSTILE_SECRET_KEY         # ⚠ INERT UNTIL SET, and leaving it unset is the shipped
+                             #   posture: verifyTurnstile returns { ok:true, enforced:false }
+                             #   and every legitimate flow is byte-identical. It gates two
+                             #   doors — the checkout-session door (create-checkout) and the
+                             #   single-dossier verification door (verify-single-dossier).
+                             #   SETTING IT ENFORCES human verification on both and FAILS
+                             #   CLOSED on a missing or unverified token, so the client widget
+                             #   and its script-src/frame-src CSP allowance must ship FIRST or
+                             #   every checkout is rejected for a missing token.
+                             #   Key-pair setup: docs/PERIMETER_RUNBOOK.md, step 5.
 ```
 
 **Cron and durable-worker shared secrets.** Each is a high-entropy value shared
