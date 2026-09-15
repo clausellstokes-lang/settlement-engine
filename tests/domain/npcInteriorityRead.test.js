@@ -159,8 +159,8 @@ describe('npcInteriority — the NPC trail (LT39 car 5)', () => {
     expect(trailOf().map((r) => [r.week, r.kind, r.text])).toEqual([
       [4, 'contest', 'Contested Mira, and lost.'],
       [12, 'contest', 'Pushed the same end as Mira, and it is not settled yet.'],
-      [20, 'seat', 'Took the governing seat from Mira — faction challenge.'],
-      [31, 'seat', 'Left the governing seat and the seat stood empty — death in office.'],
+      [20, 'seat', 'Took the governing seat from Mira (faction challenge).'],
+      [31, 'seat', 'Left the governing seat and the seat stood empty (death in office).'],
     ]);
   });
 
@@ -188,7 +188,7 @@ describe('npcInteriority — the NPC trail (LT39 car 5)', () => {
     expect(mira.map((r) => r.text)).toEqual([
       'Contested Aldis, and did not lose.',
       'Pushed the same end as Aldis, and it is not settled yet.',
-      'Left the governing seat to Aldis — faction challenge.',
+      'Left the governing seat to Aldis (faction challenge).',
     ]);
   });
 
@@ -198,7 +198,7 @@ describe('npcInteriority — the NPC trail (LT39 car 5)', () => {
     // anchored: the length assertion one line above proves all four rows were built, so each row's absent key is measured against live prose.
     for (const row of anonymous) expect(row.text, row.id).not.toContain('ash:');
     expect(anonymous[0].text).toBe('Contested a rival, and lost.');
-    expect(anonymous[2].text).toBe('Took the governing seat from whoever held it before — faction challenge.');
+    expect(anonymous[2].text).toBe('Took the governing seat from whoever held it before (faction challenge).');
     // …and the raw key stays on the ROW for a surface that can resolve it.
     expect(anonymous[0].otherNid).toBe('ash:mira');
   });

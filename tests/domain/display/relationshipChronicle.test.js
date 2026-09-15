@@ -302,8 +302,8 @@ describe('relationshipChronicle — ⛔ the fail-closed disclosure gate', () => 
 describe('relationshipChronicle — every line can be said in English', () => {
   it('the authored clause, the family template, and the honest fallback are all SENTENCES', () => {
     expect(incidentPhrase('coalition_betrayal')).toBe('A coalition partner turned on the rest');
-    expect(incidentPhrase('stressor_resolved:famine')).toBe('The pressure they shared ended — famine');
-    expect(incidentPhrase('canon_royal_wedding')).toBe('Something you wrote into the world touched them — royal wedding');
+    expect(incidentPhrase('stressor_resolved:famine')).toBe('The pressure they shared ended: famine');
+    expect(incidentPhrase('canon_royal_wedding')).toBe('Something you wrote into the world touched them: royal wedding');
     // The unmapped token: a sentence that owns the thinness, never a bare token.
     const unknown = incidentPhrase('some_future_engine_thing');
     expect(unknown).toBe('Something the record types only as “some future engine thing”');

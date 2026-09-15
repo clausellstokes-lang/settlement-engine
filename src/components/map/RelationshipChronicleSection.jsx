@@ -48,7 +48,7 @@ const LINES_SHOWN = 6;
 
 const TERM_HELP = Object.freeze({
   public: 'A recorded fact of the realm: the kind of thing neighbours would know.',
-  covert: 'Quiet business — spies, sabotage, bought men. DM knowledge; a player-facing view does not receive it.',
+  covert: 'Quiet business: spies, sabotage, bought men. DM knowledge; a player-facing view does not receive it.',
   unclassified: 'The record keeps this one, but nothing yet says who would know of it. Withheld from a player-facing view for that reason. DM knowledge.',
 });
 
@@ -72,7 +72,7 @@ function ChronicleLine({ line }) {
       </span>
       <span>
         <span style={{ color: MUTED, fontWeight: 800 }}>{whenLabel(line.tick)}</span>
-        {' — '}
+        {': '}
         {incidentPhrase(line.type)}
         {line.fromType && line.toType ? (
           <span style={{ color: SECOND }}>
@@ -198,7 +198,7 @@ export default function RelationshipChronicleSection({ campaign, nameById }) {
       <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
         Every entry here was written down when it happened and has not been thinned since
         {includeGroundTruth
-          ? '. The gold entries are quiet business — yours to know, and not shown in a player-facing view.'
+          ? '. The gold entries are quiet business: yours to know, and not shown in a player-facing view.'
           : '. Quiet business is not shown here.'}
       </div>
     </section>

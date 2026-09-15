@@ -195,7 +195,7 @@ function ladderTrailOf(records, nid, resolveNpcName) {
         kind: 'seat',
         id: `seat:${nonEmpty(t.id) ? String(t.id) : `${t.tick}:${t.cause}`}`,
         otherNid: nonEmpty(other) ? String(other) : null,
-        text: `${took ? 'Took the governing seat' : 'Left the governing seat'} ${counterpart} — ${cause}.`,
+        text: `${took ? 'Took the governing seat' : 'Left the governing seat'} ${counterpart} (${cause}).`,
       });
     }
   }
