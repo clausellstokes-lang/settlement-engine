@@ -41,6 +41,7 @@ import { botGuard } from "../_shared/requestMeta.ts";
 // matched origin, never "*") and accepts the Cloudflare Pages preview origin.
 import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
 import { selectMailAdapter } from "../_shared/mailAdapter.ts";
+import { logSafe, maskIp } from "../_shared/log.ts";
 
 /** Per-request CORS headers from the shared allowlist (preserves prior Allow-Headers). */
 function corsHeadersFor(req: Request): Record<string, string> {
@@ -354,10 +355,18 @@ async function consumeAnonRateLimit(
   if (data.allowed !== true) {
     // Over limit on IP and/or recipient. Log enough to spot abuse spikes in
     // the function logs without a separate pipeline.
-    console.warn(
-      `[send-email] cap_warning rate-limited ip=${ip} ` +
-      `ip_count=${data.ip_count} recipient_count=${data.recipient_count}`,
-    );
+    //
+    // A+ backend.6, SECOND SITE. This read `ip=${ip}` through a bare console.warn — the
+    // same raw-client-IP-in-a-log-line defect backend.6 names at requestMeta.ts, at a site
+    // the record does not mention. It was found by the guard scripts/edgeLogGuard.mjs arm 2
+    // added in LT36 car 2, not by the register, which is the whole argument for the guard.
+    // The /24 keeps the abuse-spike signal; the counters were never PII and are unchanged.
+    logSafe("warn", "send-email", {
+      event: "cap_warning_rate_limited",
+      ip: maskIp(ip),
+      ip_count: data.ip_count,
+      recipient_count: data.recipient_count,
+    });
     return { ok: false, reason: "rate_limited" };
   }
   return { ok: true };
