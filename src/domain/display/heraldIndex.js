@@ -44,7 +44,10 @@ function asObject(v) {
   return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {};
 }
 
-/** Every non-empty id in a value, whether it arrived as one id or a list. */
+/**
+ * Every non-empty id in a value, whether it arrived as one id or a list.
+ * @param {unknown} value @returns {string[]}
+ */
 function ids(value) {
   if (Array.isArray(value)) return value.map(String).filter(Boolean);
   if (value == null) return [];
@@ -52,13 +55,19 @@ function ids(value) {
   return one ? [one] : [];
 }
 
-/** The record an entry was normalized from, plus its nested outcome. */
+/**
+ * The record an entry was normalized from, plus its nested outcome.
+ * @param {unknown} entry @returns {Array<Record<string, unknown>>}
+ */
 function recordsOf(entry) {
   const record = asObject(asObject(entry).record);
   return [record, asObject(record.outcome)];
 }
 
-/** Read the first spelling of a typed ref slot that the records actually carry. */
+/**
+ * Read the first spelling of a typed ref slot that the records actually carry.
+ * @param {unknown} entry @param {readonly string[]} keys @returns {string[]}
+ */
 function refFromRecord(entry, keys) {
   const out = [];
   for (const source of recordsOf(entry)) {
@@ -244,7 +253,11 @@ export function readableBy(entry, includeCovert) {
   return true;
 }
 
-/** The free-text haystack: RENDERED PROSE ONLY, plus resolved settlement names. */
+/**
+ * The free-text haystack: RENDERED PROSE ONLY, plus resolved settlement names.
+ * @param {unknown} entry @param {Map<string, unknown>} nameById
+ * @returns {string}
+ */
 function proseHaystack(entry, nameById) {
   const row = asObject(entry);
   const hay = [];
@@ -276,7 +289,7 @@ function proseHaystack(entry, nameById) {
  * @param {Record<string, ReadonlyArray<string>>} [args.facets]
  * @param {Map<string,string>} [args.nameById]
  * @param {boolean} [args.includeCovert]  DM sessions only; default FALSE
- * @param {number} [args.nowTick]
+ * @param {number|null} [args.nowTick]
  * @param {number} [args.intervalWeeks]
  * @returns {{ results: Array<Record<string, unknown>>, groups: Array<{ desk: string, timeBand: string, items: Array<Record<string, unknown>> }>, redactedCount: number }}
  */

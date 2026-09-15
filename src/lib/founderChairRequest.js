@@ -116,6 +116,13 @@ export function standingFromRow(row, now) {
   };
 }
 
+/**
+ * The fail-open standing. ⚠ THE `@returns` IS LOAD-BEARING, not decoration: without it tsc
+ * widens `state` to `string`, which is not assignable to the closed union in
+ * `ChairRequestStanding`, and all three `return unknown()` sites red (TS2322).
+ *
+ * @returns {ChairRequestStanding}
+ */
 function unknown() {
   return { canWrite: true, state: 'unknown', since: null, daysLeft: null };
 }

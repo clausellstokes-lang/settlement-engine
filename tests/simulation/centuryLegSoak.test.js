@@ -56,7 +56,7 @@
 
 import { createHash } from 'node:crypto';
 
-import { beforeAll, describe, expect, test } from 'vitest';
+import { afterAll, describe, expect, test } from 'vitest';
 
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import {
@@ -339,46 +339,136 @@ function livenessOf(leg) {
 /** The realm total at one year index. */
 const realmTotalAt = (leg, index) => leg.yearlyPopulations[index].reduce((sum, value) => sum + value, 0);
 
-/** @type {{shippedA: object, litA: object, replayA: object, shippedB: object}} */
+/** @type {{shippedA?: object, litA?: object, replayA?: object, shippedB?: object}} */
 const legs = {};
 
+/**
+ * ⭐ THE LEGS ARE MEMOISED PER TEST, NOT RUN UP FRONT IN ONE HOOK (LT28 car 2, 2026-09-15).
+ *
+ * WHAT THIS CHANGED AND WHY. Every leg used to run inside ONE `beforeAll(…, 900_000)`.
+ * That hook is a SINGLE POINT OF CENSUS COLLAPSE: when it does not finish, vitest reports
+ * all NINE tests as SKIPS, the suite yields zero measurable tests, and
+ * `scripts/check-test-ratchet.mjs` fires its SCOPE SENTINEL (:1275) plus the skip ceiling
+ * (:1394) on top of it. That verdict CANNOT BE BANKED — `baseline.uncollectedSuites` is
+ * pinned at length 0 by `tests/lint/testRatchet.test.js:540` — so one slow hook takes the
+ * whole gate down with no lawful repair available.
+ *
+ * ⭐ MEASURED IN BOTH DIRECTIONS, 2026-09-15, 8 cores (LT28 car 1) — the collapse is COST,
+ * never correctness: standalone at 1-min load 2.38 the file is `9 passed` in 261.42 s; in a
+ * full `npm run test:ratchet` whose own parallelism sat at load 26.30/31.44/23.82 the file
+ * was GREEN; in a second full ratchet run that ended at load 146.89/160.11/127.79 it
+ * collapsed with the byte-identical sentinel message. Same sha, same bytes, three loads.
+ *
+ * WHAT THE SPLIT BUYS. `legFor` runs each leg AT MOST ONCE and awaits the legs BEFORE it in
+ * `LEG_ORDER` first, so the execution order is byte-identical to the old hook's
+ * (shippedA → litA → replayA → shippedB). That order is load-bearing: the replay arm exists
+ * to catch module-scope cache warmth, so which legs have run before it is part of what it
+ * proves. What changes is only WHO PAYS: each test carries its own declared 300_000 ms
+ * budget, so a leg that overruns fails THE TESTS THAT ASKED FOR IT with a real message
+ * instead of pending all nine. A failed row keeps the suite MEASURABLE — `uncollectedOf`
+ * (`scripts/check-test-ratchet.mjs:503`) only calls a suite uncollected when it failed with
+ * NO row of status `failed` — so the unbankable sentinel is no longer reachable by slowness.
+ *
+ * ⛔ NOTHING WAS TRADED FOR THIS. The horizon is still 100 years, both seeds still run, all
+ * four legs still run in the same order, no assertion moved, and the suite-wide
+ * `testTimeout` is untouched (START_HERE §3k forbids raising it by name).
+ *
+ * ── THE PER-TEST BUDGETS, AND WHERE THEIR NUMBER COMES FROM ──────────────────────────
+ * The 900_000 ms that used to sit on the hook was a budget for ALL FOUR legs together, and
+ * 2026-09-15 proved it is not enough on honest hardware: a full ratchet run that ended at
+ * load 146.89/160.11/127.79 blew it. So the budget FOLLOWS THE WORK rather than being
+ * inherited: each row is sized at the worst CONTENTION MULTIPLE this box has been measured
+ * to produce at the test grain — 8.3x, from `tests/domain/stateProseKernel.test.js`'s law-6
+ * row, which costs 7,483 ms alone and was killed at 61,996 ms inside the same ratchet run.
+ *
+ *   600_000    every row that may wait on ONE leg. 8.3x the dearest single leg (LIT,
+ *              104.90 s) is 871 s; 600 s covers every leg but the pair below, and a row
+ *              that overruns it fails ALONE and says so.
+ *   1_200_000  the replay row ONLY, because `legFor` runs the legs in their declared order
+ *              and the replay is declared after the LIT century — so that one row pays
+ *              104.90 + 4.71 = 109.61 s of legs, and 8.3x of that is 910 s.
+ *
+ * ⚠ A ROW THAT EXPIRES IS A COST FAILURE, NEVER DEBT, and it must never be banked: the
+ * census refuses it by name (`scripts/check-test-ratchet.mjs`, the budget-expiry note).
+ */
+const LEG_ORDER = ['shippedA', 'litA', 'replayA', 'shippedB'];
+
+/** @type {Record<string, () => Promise<object>>} */
+const LEG_RUNNERS = {
+  shippedA: () => runLeg(SEEDS[0], HORIZON_YEARS, { lit: false }),
+  litA: () => runLeg(SEEDS[0], HORIZON_YEARS, { lit: true }),
+  replayA: () => runLeg(SEEDS[0], REPLAY_YEARS, { lit: false }),
+  shippedB: () => runLeg(SEEDS[1], HORIZON_YEARS, { lit: false }),
+};
+
+/** @type {Record<string, Promise<object>>} */
+const started = {};
+
+/**
+ * ⚠ THE NEGATIVE CONTROL SEAM. Naming a leg here forces it to THROW, which is how the
+ * census instrument's behaviour on a broken leg is proved rather than assumed. It can only
+ * ever make the gate REDDER — there is no value of it that skips a test or greens an
+ * assertion — so it is not a door in the certification.
+ */
+const FAULT_LEG = process.env.CENTURY_LEG_FAULT || '';
+
+/** Run (or reuse) one leg, having first run every leg declared before it. */
+async function legFor(name) {
+  for (const key of LEG_ORDER) {
+    if (!started[key]) {
+      started[key] = (async () => {
+        if (FAULT_LEG === key) throw new Error(`CENTURY_LEG_FAULT: leg "${key}" forced to throw`);
+        legs[key] = await LEG_RUNNERS[key]();
+        return legs[key];
+      })();
+    }
+    await started[key];
+    if (key === name) return legs[key];
+  }
+  throw new Error(`unknown century leg "${name}"`);
+}
+
 describe('Tier 1 — the century leg on a light hand-authored realm', () => {
-  beforeAll(async () => {
-    legs.shippedA = await runLeg(SEEDS[0], HORIZON_YEARS, { lit: false });
-    legs.litA = await runLeg(SEEDS[0], HORIZON_YEARS, { lit: true });
-    legs.replayA = await runLeg(SEEDS[0], REPLAY_YEARS, { lit: false });
-    legs.shippedB = await runLeg(SEEDS[1], HORIZON_YEARS, { lit: false });
-    const totalMs = legs.shippedA.totalMs + legs.litA.totalMs + legs.replayA.totalMs + legs.shippedB.totalMs;
-    const peak = Math.max(...Object.values(legs).map((leg) => leg.peakHeapUsedBytes));
+  afterAll(() => {
+    const ran = LEG_ORDER.filter((key) => legs[key]);
+    if (!ran.length) return;
+    const totalMs = ran.reduce((sum, key) => sum + legs[key].totalMs, 0);
+    const peak = Math.max(...ran.map((key) => legs[key].peakHeapUsedBytes));
     // REPORTED, never asserted — see the file header. Memory in particular is a flake
     // instrument in a shared vitest heap; Tier 2's register bands it on a solo run.
+    // A leg that did not run says so rather than being silently omitted from the total.
+    const say = (key, label) => (legs[key] ? `${label} ${(legs[key].totalMs / 1000).toFixed(1)}s` : `${label} (not run)`);
     console.log(
       `\n[century leg] ${SEEDS.length} seed(s), ${HORIZON_YEARS} years at the product grain`
       + ` (${TICKS_PER_YEAR} weekly ticks/year)`
-      + `\n  SHIPPED ${SEEDS[0]} ${(legs.shippedA.totalMs / 1000).toFixed(1)}s`
-      + ` · LIT ${SEEDS[0]} ${(legs.litA.totalMs / 1000).toFixed(1)}s`
-      + ` · replay ${REPLAY_YEARS}y ${(legs.replayA.totalMs / 1000).toFixed(1)}s`
-      + ` · SHIPPED ${SEEDS[1]} ${(legs.shippedB.totalMs / 1000).toFixed(1)}s`
-      + `\n  file total ${(totalMs / 1000).toFixed(1)}s (design budget 360s; Car 0 measured 222.5s for two seeds)`
+      + `\n  ${say('shippedA', `SHIPPED ${SEEDS[0]}`)}`
+      + ` · ${say('litA', `LIT ${SEEDS[0]}`)}`
+      + ` · ${say('replayA', `replay ${REPLAY_YEARS}y`)}`
+      + ` · ${say('shippedB', `SHIPPED ${SEEDS[1]}`)}`
+      + `\n  file total ${(totalMs / 1000).toFixed(1)}s over ${ran.length} of ${LEG_ORDER.length} leg(s)`
+      + ' (design budget 360s; Car 0 measured 222.5s for two seeds)'
       + `\n  peak heap across legs ${(peak / 1e6).toFixed(0)}MB — REPORTED, not asserted`,
     );
-  }, 900_000);
+  });
 
-  test('the SHIPPED century advances the whole horizon at the product grain', () => {
+  test('the SHIPPED century advances the whole horizon at the product grain', async () => {
+    await legFor('shippedA');
     expect(legs.shippedA.finalTick).toBe(HORIZON_YEARS * TICKS_PER_YEAR);
     expect(legs.shippedA.yearlyHashes).toHaveLength(HORIZON_YEARS);
     // §141 refuses shortened centuries by name; the horizon is never what gets dropped.
     expect(legs.shippedA.years).toBe(HORIZON_YEARS);
-  }, 300_000);
+  }, 600_000);
 
-  test('no non-finite figure appears in any year of the SHIPPED century', () => {
+  test('no non-finite figure appears in any year of the SHIPPED century', async () => {
+    await legFor('shippedA');
     const failures = collectSeedFailures(legs.shippedA.yearlyNonFinite, (paths, index) => {
       expect(paths, `year ${index + 1} carried a non-finite figure`).toEqual([]);
     });
     expectNoSeedFailures(failures, 'every year of the SHIPPED century is finite');
-  }, 300_000);
+  }, 600_000);
 
-  test('every settlement is alive every year of the SHIPPED century, remnants excepted', () => {
+  test('every settlement is alive every year of the SHIPPED century, remnants excepted', async () => {
+    await legFor('shippedA');
     // The remnant law (2026-07-31): a properly-died settlement legitimately holds zero.
     const failures = collectSeedFailures(legs.shippedA.yearlyPopulations, (populations, yearIndex) => {
       populations.forEach((population, placeIndex) => {
@@ -390,17 +480,19 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
       });
     });
     expectNoSeedFailures(failures, 'every settlement of the SHIPPED century is alive or lawfully dead');
-  }, 300_000);
+  }, 600_000);
 
-  test('the SHIPPED century holds the serialized-state envelope with room', () => {
+  test('the SHIPPED century holds the serialized-state envelope with room', async () => {
+    await legFor('shippedA');
     const ceiling = YEARLY_BYTES_PER_SETTLEMENT_CEILING * BAND.length;
     const maxBytes = Math.max(...legs.shippedA.yearlyBytes);
     expect(maxBytes).toBeLessThan(ceiling);
     // Car 0 measured 1,075,435 B against the 3,600,000 B ceiling — 30 % of it.
     expect(ceiling).toBe(3_600_000);
-  }, 300_000);
+  }, 600_000);
 
-  test('the SHIPPED century passes the liveness floor, and its realm ratio is REPORTED not asserted', () => {
+  test('the SHIPPED century passes the liveness floor, and its realm ratio is REPORTED not asserted', async () => {
+    await legFor('shippedA');
     const verdict = livenessOf(legs.shippedA);
     expect(verdict.executable).toBe(true);
     expect(verdict.failures).toEqual([]);
@@ -423,9 +515,10 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
       + `, majors min ${verdict.reported.minMajorsPerDecade} with ${verdict.reported.majorSilentDecades} silent decade(s)`,
     );
     expect(envelope.executable).toBe(true);
-  }, 300_000);
+  }, 600_000);
 
-  test('the SHIPPED decade replay is element-wise identical to the century first ten years', () => {
+  test('the SHIPPED decade replay is element-wise identical to the century first ten years', async () => {
+    await legFor('replayA');
     // ⚠ THE WEAK FORM, DELIBERATELY. A same-process replay catches module-scope cache
     // warmth — the twelve `__tickIndexStats` caches, which Car 0 measured as a 5.6 % drift
     // across three in-process runs — and a second century would double the file's cost. The
@@ -435,9 +528,14 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
     });
     expectNoSeedFailures(failures, 'the ten-year replay reproduces the century opening decade');
     expect(legs.replayA.yearlyHashes).toHaveLength(REPLAY_YEARS);
-  }, 300_000);
+    // ⭐ THE PAIR BUDGET. This row is the one that triggers the LIT century (104.90 s) as
+    // well as the replay (4.71 s), because `legFor` preserves the legs' ORDER and the LIT
+    // leg is declared before the replay. 8.3x of that 109.61 s pair is 910 s — see the
+    // budget note on the row above for where 8.3 comes from.
+  }, 1_200_000);
 
-  test('the LIT century holds the population envelope and no settlement runs away', () => {
+  test('the LIT century holds the population envelope and no settlement runs away', async () => {
+    await legFor('litA');
     // ⭐ THE CAPACITY HOOK. The envelope is asserted HERE, where it is true by design, and a
     // red is routed to CAPACITY as a finding and NEVER banked (§4.7 R3, STOP S3-a).
     const envelope = populationEnvelopeVerdict({
@@ -461,9 +559,10 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
     const verdict = livenessOf(legs.litA);
     expect(verdict.executable).toBe(true);
     expect(verdict.failures).toEqual([]);
-  }, 300_000);
+  }, 600_000);
 
-  test('the LIT bound ratio is MEASURED and REPORTED, and no allowance literal is asserted', () => {
+  test('the LIT bound ratio is MEASURED and REPORTED, and no allowance literal is asserted', async () => {
+    await legFor('litA');
     // ⛔ THE ARM §4.1 ASKED FOR CANNOT BE WRITTEN — see the file header. The rule "tighten
     // toward the measured max, never loosen past 1.5" admits no value against a measured max
     // of 3.5741x, and the cause is the DENOMINATOR collapsing 6.7x on a lawful tier
@@ -494,9 +593,10 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
       + ' (recommended: population(y) <= 1.5 x max(bound(y), bound(y-1)), with a second row on'
       + ' foodCapacityOf(...).mouths alone).',
     );
-  }, 300_000);
+  }, 600_000);
 
-  test('the second seed drives the same arms: finite, alive, bytes, liveness', () => {
+  test('the second seed drives the same arms: finite, alive, bytes, liveness', async () => {
+    await legFor('shippedB');
     // §4.1 gives `-b` (and `-c`) ONE drive test each: the second seed proves the arms
     // generalise, and a third would repeat the proof at 1.29x of budget margin.
     expect(legs.shippedB.finalTick).toBe(HORIZON_YEARS * TICKS_PER_YEAR);
@@ -519,5 +619,5 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
     const verdict = livenessOf(legs.shippedB);
     expect(verdict.executable).toBe(true);
     expect(verdict.failures).toEqual([]);
-  }, 300_000);
+  }, 600_000);
 });
