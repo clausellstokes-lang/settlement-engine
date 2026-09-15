@@ -319,6 +319,20 @@ const text = (v) => (typeof v === 'string' ? v.trim() : '');
  * access: **1,678 instantiated service rows · 1,655 naming a LIVE institution or none · 32
  * duty-kind · `settlement.services` 0.** Reproduce with
  * `tests/lint/institutionTable.walker.test.js`'s ruin-filter arm, which walks the same thirty.
+ *
+ * ⛔ AND THE ZERO IS NOW PINNED, NOT MERELY RECORDED (LT40 car 2). A measurement in a
+ * comment is a claim, and this one is exactly the claim a new reader would violate by
+ * growing on the schema's declared-but-unwritten field. The pin is the same walker's
+ * "PINS `settlement.services` PERMANENTLY ABSENT" arm, and it asserts the KEY IS ABSENT
+ * rather than that its length is zero — `services: []` also has length zero, so the
+ * length arm alone would pass a writer that regrew the field empty. The schema typedef
+ * (`src/domain/settlement.schema.js`, `@property {Service[]} [services]`) now carries the
+ * cross-link, so the declaration stops reading as a live field. POPULATING OR RETIRING
+ * the field is owner-gated and output-moving in either direction:
+ * `src/lib/structuralFingerprint.js:261` reads `arr(settlement.services).length` as a
+ * constant 0 INSIDE a fingerprint. The other two readers of the always-empty field are
+ * `src/store/settlementGenerateAction.js:384` and
+ * `src/domain/worldPulse/factionCompetition.js:156`/`:186`.
  * @param {TableSettlement} settlement
  * @returns {Array<{name: string, institution: string, desc: string}>}
  */
