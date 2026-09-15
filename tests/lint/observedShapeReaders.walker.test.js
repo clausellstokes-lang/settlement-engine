@@ -135,7 +135,8 @@ import {
   provenanceDriftOf, isDetectorSourcePath, DETECTOR_INPUT_PATHS,
   scannerToolFiles as scannerToolFilesOf, subjectFiles as subjectFilesOf,
   sourceFiles as sourceFilesOf,
-  BASELINE_SCAN_MODE, BASELINE_SCHEMA, cohortOf, compare, EXACT_SCAN_EXCLUDED_SCOPE,
+  BASELINE_SCAN_MODE, BASELINE_SCHEMA, CLASS_A_PROTECTED_IDENTITIES, cohortOf, compare,
+  EXACT_SCAN_EXCLUDED_SCOPE,
   EXPLAINED_WRITER_EXEMPTIONS,
   identityOf, inventoryOf, isExactScanExcludedReadPath, MIN_ROWS, ORIGIN_MIN_ROWS,
   ratchetMessage, rowOf, sentinelFailures, sentinelOf, sourceFiles, UNREVIEWED_UI_COHORT,
@@ -1460,6 +1461,150 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // being counted into it, so a cohort that swallowed the tree would red.
     expect(cohort.counts).toBeLessThan(live.findings.length);
     expect(live.findings.some((f) => f.file.startsWith('src/domain/'))).toBe(true);
+  });
+
+  /**
+   * ⭐⭐ THE CLASS-(a) WORKLIST IS A DERIVATION, AND THIS IS THE MACHINERY THAT SAYS SO.
+   *
+   * ── THE HAZARD, WHICH HAS BITTEN TWICE AND COST A DAY ────────────────────────
+   * "How many reader-without-writer defects are still open?" has a correct answer
+   * that anyone can compute in one line — join `CLASS_A_PROTECTED_IDENTITIES`
+   * against the frozen register — and a WRONG answer that is much easier to reach:
+   * read the last number somebody wrote down. `docs/SOL_QUEUE.md` §4 carried
+   * "the 21 remaining reader-without-writer defects (2 of 23 repaired)" from
+   * 2026-08-11, and that sentence mis-dispatched two lanes. Lane C took it on
+   * 2026-08-11, measured the register at SEVEN, and recorded the finding as a law:
+   * *"`scripts/.observed-shape-readers-baseline.json` at HEAD is the ONLY authority
+   * on what class-(a) debt is outstanding … believing the brief would have cost a
+   * day chasing already-dead reads"* (memory/osr-class-a-worklist-is-the-baseline-
+   * not-the-brief.md). Thirteen months later the long-tail card read 21 back off
+   * the same unrepaired row and dispatched a second lane on it.
+   *
+   * ── WHY THE CURE IS A TEST AND NOT A BETTER SENTENCE ─────────────────────────
+   * Under the HAZARD CONVERSION LAW a confirmed hazard class becomes MACHINERY or
+   * is explicitly accepted with a stated reason, and a prose correction is neither:
+   * it is one more number in one more document, which is the thing that rotted.
+   * What cannot rot is a derivation that reds. This arm computes the worklist from
+   * the register AND from the live scan, proves the two agree, and then pins the
+   * result — identity, file and multiplicity, with each row's standing disposition
+   * beside it. It reds in BOTH directions and neither red is silenceable by a
+   * transcription: a REPAIR shrinks the join and must be recorded here, a
+   * REGRESSION grows it and names the new row.
+   *
+   * ⛔ WHY IT LIVES IN THE WALKER AND NOT IN THE SCANNER. Any byte in a detector
+   * source moves `detectorTree`, the drift classifier refuses the ordinary gate,
+   * and the change costs a governed schema rung. `scannerToolFiles()` lists
+   * package.json, package-lock.json, the five `scripts/lib` detector modules,
+   * `check-observed-shape-readers.mjs`, `migrate-observed-shape-readers.mjs` and
+   * `tests/fixtures/spatialPackFixtures.js` — this file is on none of them, so the
+   * guard costs NO rung. Do not "tidy" the scanner while adding to this arm.
+   *
+   * ── THE TWO SIDES ARE INDEPENDENT PRODUCTIONS, WHICH IS WHY BOTH ARE READ ────
+   * The frozen side is a persisted artifact; the live side is this run's scan. A
+   * pin over the register alone would still be green on a tree whose estate had
+   * moved underneath it, and a pin over the live scan alone would be green on a
+   * register that had been hand-edited. The equality between them is the claim the
+   * CLI's own headline makes ("exactly matching the frozen inventory") narrowed to
+   * the rows that are debt.
+   *
+   * ⚠ THE ROSTER LENGTH IS PINNED TOO, and it is not decoration. The join is a
+   * FILTER: an identity quietly dropped from `CLASS_A_PROTECTED_IDENTITIES` leaves
+   * a row in the register that this arm would simply stop looking at, and that is
+   * the one mutation the triple pin below cannot see. The roster is a historical
+   * bank of CONFIRMED true positives — a repair does NOT remove an entry (six
+   * repaired identities are still listed) — so it moves only by a deliberate
+   * re-triage, exactly the act that should have to stop here and say so.
+   *
+   * ── THE EXECUTED MUTANTS (both run out of band at 935b3d94b, both red) ───────
+   * (1) THE SHRINK DIRECTION — delete the `coalitionEvidence on outcome` row from
+   *     the expected triples below. 1 failed of 45, and the diff named the dropped
+   *     row by identity and file. So the pin is not a tautology.
+   * (2) THE GROWTH DIRECTION — plant a live read of a REPAIRED class-(a) identity,
+   *     `export function probe(settlement) { return settlement.plotHooks; }` at
+   *     `src/domain/__lt30RegressionProbe.js`, and the live side grew a fourth row
+   *     the register does not carry. 3 failed of 45, and THIS arm's equality
+   *     assertion reds first and names it:
+   *       "the live scan and the frozen register disagree about which class-(a)
+   *        rows are still outstanding … + file: src/domain/__lt30RegressionProbe.js,
+   *        identity: plotHooks on settlement"
+   *     The probe was removed and `git status --porcelain` re-checked afterwards.
+   *
+   * ⚠⚠ TWO MEASURED FACTS ABOUT PLANTING THIS PARTICULAR MUTANT, because both cost
+   * a run and the next lane will otherwise repeat them:
+   *   * `title on currentTensions` — the obvious repaired identity to regress —
+   *     CANNOT be planted through a bare parameter. `currentTensions` is an ARRAY
+   *     shape, so `currentTensions.title` is array surface, and the detector's
+   *     arrayness rule correctly declines to call it a domain key. The plant ran
+   *     GREEN at 45/45, which reads exactly like a vacuous mutant and is not one:
+   *     it is the `arraySurface` negative control firing. Plant on a NON-array
+   *     shape — `settlement` is the root-name-prior case the other probes use.
+   *   * A probe in a `mkdtempSync` dir (the `scanEstateWith` `extraFiles` door the
+   *     MUTANTS block uses) CANNOT reach this arm's assertion: `inventoryOf` runs
+   *     `assertCanonicalPath` and throws "observed-shape finding has a noncanonical
+   *     path" on the absolute temp path first. The MUTANTS block never hits this
+   *     because it filters raw findings by basename instead of inventorying them.
+   *     A growth mutant for any inventory-shaped arm must be an IN-TREE file.
+   *
+   * ⚠ Mutant (2) is deliberately NOT kept as a standing arm: it needs a third
+   * full-tree scan and `scansRun` is pinned at two, which is the flake budget this
+   * file paid for in timeouts. The regression direction is guarded by the equality
+   * assertion; the plant proved the assertion can see it.
+   */
+  test('the LIVE class-(a) worklist is exactly the rows the register still holds', () => {
+    // The roster is a FILTER over both sides, so its own size is load-bearing.
+    expect(CLASS_A_PROTECTED_IDENTITIES.length,
+      'the class-(a) roster changed size — a re-triage is a governed act and the worklist'
+      + ' pin below cannot see an identity that was removed from the roster it filters by')
+      .toBe(20);
+
+    const guarded = new Set(CLASS_A_PROTECTED_IDENTITIES);
+    /** Every class-(a) row an inventory still carries, in a stable order. */
+    const worklistOf = (inventory) => Object.entries(inventory)
+      .flatMap(([file, row]) => Object.entries(row)
+        .filter(([identity]) => guarded.has(identity))
+        .map(([identity, count]) => ({ identity, file, count })))
+      .sort((a, b) => (a.identity.localeCompare(b.identity) || a.file.localeCompare(b.file)));
+
+    const frozenWorklist = worklistOf(baseline.inventory);
+    const liveWorklist = worklistOf(inventoryOf(live.findings));
+    // ⚠ THE LIVE SIDE FIRST: a regression plants itself here, and this is the arm the
+    // planted mutant reds on. The register can only disagree with the estate by being
+    // stale, and staleness is the failure this whole file exists to refuse.
+    expect(liveWorklist, 'the live scan and the frozen register disagree about which'
+      + ' class-(a) rows are still outstanding — the register is stale, or a repaired'
+      + ' identity has come back; re-derive the join before touching the pin below')
+      .toEqual(frozenWorklist);
+
+    // ⛔ THE PIN. Three rows, each a DELIBERATE STOP documented AT THE READ. If this
+    // reds, the cure is NEVER to transcribe the new number: re-run the join, read the
+    // disposition at each surviving read, and edit this list with the reason.
+    expect(frozenWorklist, 'the class-(a) worklist moved — say WHICH row and WHY here,'
+      + ' and correct docs/SOL_QUEUE.md §4 item 2 in the same commit').toEqual([
+      // A TOLERANT FAMILY READ, refuted twice: `metadata.coalitionEvidence ??
+      // outcome.coalitionEvidence` — the fallback arm is the dead one, and deleting it
+      // narrows a contract that is deliberately permissive about where evidence rides.
+      { identity: 'coalitionEvidence on outcome', file: 'src/domain/worldPulse/warCoalitionEvidence.js', count: 1 },
+      // ⛔ OWNER-OWED, ODQ §338.2 — these two are a FENCE, not a display read.
+      // `compareEntityArrays` reports `invented_entity` for a key present in `refined`
+      // and absent from `original`, so the undefined-vs-populated comparison is exactly
+      // the case the arm exists to catch, and REMOVING it is FAIL-OPEN on an
+      // anti-hallucination guard sitting on a PAID AI surface. The in-file note above
+      // the two calls records the non-repair. A lane may not re-point this.
+      { identity: 'hooks on settlement', file: 'src/domain/aiOverlayVerifier.js', count: 1 },
+      { identity: 'supplyChains on settlement', file: 'src/domain/aiOverlayVerifier.js', count: 1 },
+    ]);
+
+    // NEGATIVE CONTROL — the derivation is not structurally blind. A repaired identity
+    // is still ON the roster (the roster banks history, not the worklist), so feeding
+    // one back in through a synthetic inventory must produce a row. Without this, a
+    // `worklistOf` that had quietly stopped matching identities would green on three
+    // rows it never actually found.
+    expect(guarded.has('title on currentTensions')).toBe(true);
+    expect(worklistOf({ 'src/domain/__synthetic__.js': { 'title on currentTensions': 2 } }))
+      .toEqual([{ identity: 'title on currentTensions', file: 'src/domain/__synthetic__.js', count: 2 }]);
+    // …and it does not match a NON-class-(a) identity, so the filter is a filter.
+    expect(worklistOf({ 'src/domain/__synthetic__.js': { 'neighbourNetwork on settlement': 2 } }))
+      .toEqual([]);
   });
 });
 
