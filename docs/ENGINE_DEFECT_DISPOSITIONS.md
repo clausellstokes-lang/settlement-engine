@@ -109,3 +109,48 @@ the three banked cures; curing `history.age`; changing any `fires(n)` constant o
 modulus; curing the `compound.inst` snapshot; re-recording the generator golden master; W-COIN /
 the treasury field; and the settlement-map module (§724/§739 descope — `grep forcePort` over this
 whole checkout returns **zero**, so §708.4's ordering defect is not in this tree at all).
+
+---
+
+## §3 — VERDICT: `fires(n)`'s 65-ceiling is a RARITY DIAL, not an off-by-one (2026-09-15, lane-LT40-engine)
+
+**The question.** `src/generators/priorityHelpers.js:464-472` computes
+`threshold = |(e·7 + m·13 + r·17 + mg·19 + c·23) % 97|` and `fires = (n) => threshold < n`,
+and all thirteen call sites pass `n ≤ 65`. Does that mean 32 of the 97 slider-hashes can never
+fire ANY compound-stress flag **by design**, or is it an **off-by-one in shipped flag logic**?
+
+**VERDICT — a rarity dial, deliberately. CONFIRMED by execution, not read off the source.**
+
+1. `threshold` ranges 0…96 and **all 97 residues are reachable** — measured over the 21⁵
+   slider lattice (each priority 0, 5, …, 100): **97 of 97**.
+2. `fires(n)` is `threshold < n`, so a flag whose conditions hold fires on exactly `n` of the
+   97 reachable hashes. **`n` is a probability numerator**, never a comparison against a score.
+   The thirteen dials run 45/97 … 65/97.
+3. The consequence is arithmetic: because the most permissive dial is 65, **thresholds 65…96
+   (32 of 97) can fire no compound flag at all**, and 62…96 (35) can fire no *fixed* dial.
+4. **The dial was watched doing exactly that.** Over 69 configs that ALL satisfy
+   `secularBrutalism`'s conditions (economy 32…100, military 75, religion 20, garrison, no
+   church): fired on **36 of 36** with threshold < 50, and **0 of 33** with threshold ≥ 50.
+5. **The strict `<` is load-bearing.** `stateCrime` is written
+   `fires(stateCrimeCond && stateCrimeInst ? 62 : 0)` and depends on `fires(0) === false` as
+   its guard. Under `<=` it would fire on settlements whose conditions fail. Executed: at a
+   config failing `stateCrimeCond`, `stateCrime === false`, threshold 24. **An off-by-one
+   "fix" here would be the defect.**
+
+### ⚠ The correction this verdict carries
+
+The finding that prompted the question said *"every compound-stress flag is false at all-50
+whatever the institutions say"*. **The fact is right and the cause named for it is wrong.** At
+all-50 the threshold is 50 × 79 mod 97 = **70**, inside the dead band — but every one of the
+thirteen **condition** gates already fails at all-50 independently (each wants a priority
+≥ 60–70 or ≤ 28–42). Driven with a maximal roster, all-50 returns `anyActive: false` and no
+flag true. **The conditions silence the default sliders, not the hash ceiling.**
+
+### Held, and owed
+
+- ⛔ Changing any `fires(n)` constant or the `% 97` modulus moves thirteen flags on every
+  settlement. **Owner-gated under §764.3.** Car 5 changed no number.
+- ⚠ **Owed, named, not built:** no suite in the estate exercises this dial.
+  `tests/generators/stressPriority.test.js` is about `STRESS_PRIORITY`, a different subject;
+  the two suites that name these flags (`narrativeQualityCorpus`, `governanceNarrative`) read
+  them as downstream inputs. A dial nobody tests is how a tuned constant moves unnoticed.
