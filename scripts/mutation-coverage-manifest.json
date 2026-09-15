@@ -1543,6 +1543,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/galleryChronicleProjection.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/gallerySanitize.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
