@@ -119,7 +119,14 @@ export function buildVersionTimeline(save) {
     entries.push({
       id: 'exported',
       ts: cs.lastExportAt,
-      label: 'Exported (PDF / JSON / AI prompt)',
+      // THE LABEL NAMES THE ARTIFACTS THAT ACTUALLY STAMP THIS TIMESTAMP. It used to
+      // read "(PDF / JSON / AI prompt)", which was wrong twice over: nothing in the
+      // product exports JSON or a prompt, and the two exports that DO set this stamp
+      // were missing from it. `markExported` has exactly three callers, all verified
+      // at this tree — SettlementDetail.jsx:431 (the PDF and Foundry branches of
+      // runExport), SettlementDetail.jsx:464 (the share-card PNG) and
+      // generate/ExportDraftButton.jsx:77 (the wizard's draft PDF).
+      label: 'Exported (PDF, Foundry module, or share card)',
       kind: 'export',
       revertable: false,
     });

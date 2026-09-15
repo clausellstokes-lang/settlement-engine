@@ -218,18 +218,20 @@ function QuickStart() {
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:'0 0 8px' }}>
         <strong style={{ color:GOLD }}>Narrative Refinement Layer</strong> is built in. The settlement
         itself is simulated, not AI-generated. But you can optionally refine the simulator's output
-        into table-ready prose. Hit the purple button in any saved settlement and the layer
-        synthesizes the full settlement state into narrative. Faction tensions, economic pressures,
-        historical character, and daily texture become a coherent voice grounded in what was
+        into table-ready prose. Open any saved settlement and choose <strong>Refine narrative</strong>,
+        and the layer synthesizes the full settlement state into narrative. Faction tensions, economic
+        pressures, historical character, and daily texture become a coherent voice grounded in what was
         actually simulated. The refinement augments the outputs rather than replacing them, giving
         you something ready for the table without transcribing anything.
       </p>
       <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.7, margin:0 }}>
-        <strong style={{ color:GOLD }}>Narrative AI Prompt</strong> is for deeper work. The export
-        button packages the full settlement brief. Economy, power structure, NPC goals and secrets,
-        stress conditions, history. As a structured prompt for any external AI tool. Because the
-        data is coherent, the AI produces consistent fiction across multiple queries. Hand it to
-        any AI assistant and ask it anything about the settlement.
+        <strong style={{ color:GOLD }}>Export</strong> is for deeper work. The export sheet packages
+        the full settlement brief. Economy, power structure, NPC goals and secrets, stress conditions,
+        history. You pick the cut, from a <strong>Draft Brief</strong> for quick prep to
+        a <strong>Canon Dossier</strong> carrying current state and timeline, and the format: a
+        print-ready PDF, or a Foundry VTT module whose journal pages import on first load. Where a
+        settlement has been refined, you also choose whether the file carries the refined prose or
+        the raw simulation.
       </p>
     </div>
   );
@@ -246,7 +248,7 @@ function QuickStart() {
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
-      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
+      <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> a print-ready PDF briefing, or a Foundry VTT module that imports as journal pages.</Step>
       <Tip>You don't need to read every section before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
   );
@@ -305,7 +307,7 @@ function PowerUser() {
         <Step n={1}><strong>Save</strong> after generating to store a settlement in your library.</Step>
         <Step n={2}><strong>Campaigns</strong>. Group settlements into named campaign folders directly inside the Settlements tab. Use the arrow button on any saved settlement to move it between campaigns. Export a campaign to PDF for a complete campaign dossier.</Step>
         <Step n={3}><strong>Export PDF</strong> from the detail view header for a print-ready settlement brief, or export a full campaign PDF from the campaign folder.</Step>
-        <Step n={4}><strong>Narrative AI Prompt</strong> and <strong>Map AI Prompt</strong> exports are also available in the detail view. Use these to feed your settlement into an AI assistant for session fiction or map generation.</Step>
+        <Step n={4}><strong>Export Image</strong> and the <strong>Foundry VTT module</strong> are also available in the detail view. The image is a share card carrying the settlement's name, tier and headline stats, sized for a forum post or a chat channel; the module imports the dossier into Foundry as journal pages. The realm map exports on its own, from the map toolbar's <strong>Download map (PNG)</strong>.</Step>
         <Step n={5}><strong>Edit Names</strong> lets you rename any NPC or faction. Changes propagate to all linked neighbour records automatically.</Step>
         <Step n={6}><strong>World Map</strong>. Drag any saved settlement onto the embedded fantasy map to place it geographically. Click a placed burg to see its linked settlement data. Toggle relationships and supply-chain overlays from the map toolbar.</Step>
       </div>

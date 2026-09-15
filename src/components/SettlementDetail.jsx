@@ -661,8 +661,10 @@ export default function SettlementDetail({
       />
 
       {/* Provenance block. The "Next best action" rail was removed: its
-          Canonize / Polish with AI / Export actions are now in the always-
-          visible dossier header, so the rail was pure duplication. */}
+          Canonize / Refine narrative / Export actions are now in the always-
+          visible dossier header, so the rail was pure duplication. (The middle
+          one read "Polish with AI" until LT38 car 4 brought the CTA into voice;
+          the label lives at copy/en.js `ai.polishCta`, not here.) */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 12, marginBottom: 12 }}>
         <ProvenanceBlock save={detail.saveData || detail} />
       </div>

@@ -539,10 +539,21 @@ export const en = Object.freeze({
     },
     insufficient: 'You need {cost} credits for this. You have {balance}.',
     buyMore:      'Buy more credits',
-    // Inline "Polish with AI" hook + CTA shown on the dossier (migrated here
-    // from the retired copy/strings.js so there is one copy registry).
+    // The inline narrative-refinement hook + CTA shown on the dossier (migrated
+    // here from the retired copy/strings.js so there is one copy registry).
+    //
+    // ⛔ THE KEY NAME IS INTERNAL, THE VALUE IS THE PRODUCT'S VOICE. The key stays
+    // `polishCta` because it is an identifier two call sites resolve; the VALUE was
+    // 'Polish with AI', which docs/VOICE_AND_TONE.md forbids in as many words
+    // ("never 'AI'; the product is narrated / the Narrative Layer"). Renamed to the
+    // house term the product already uses for this exact act — en.js:160
+    // `quillLabel: 'Narrative refinement'`, :923, :1244 — and to the PAIR of
+    // `regenerateCta: 'Regenerate narrative'` three lines down, which is the SAME
+    // layer's second pass and was already in voice. One value change moves BOTH
+    // consumers (NextActionRail.jsx:185 and AIInlineCard.jsx:76 read this key), so
+    // the "coordinated rename" the backlog scoped is one line here.
     inlineHook:   'Want table-ready prose?',
-    polishCta:    'Polish with AI',
+    polishCta:    'Refine narrative',
     // Cost is interpolated at call time. Follows the house convention (see
     // ai.narrative.button / ai.insufficient) of always pluralizing "credits" —
     // the narrative cost is 3 (fast 2), so the singular case never renders.
