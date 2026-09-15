@@ -108,7 +108,7 @@ function text(value) {
 /** Reader words cannot carry scalars, raw ids, JSON, or tuning vocabulary. */
 function readerText(value) {
   const valueText = text(value);
-  if (!valueText || /[\d%\u00d7_{}\[\]]/u.test(valueText)) return '';
+  if (!valueText || /[\d%\u00d7_{}[\]]/u.test(valueText)) return '';
   if (/\b(?:rng|score|ratio|tick|chance|candidate|probability|odds|threshold|coefficient|multiplier|percent(?:age)?|per\s+cent|state\s*read)\b/i.test(valueText)) return '';
   return valueText;
 }

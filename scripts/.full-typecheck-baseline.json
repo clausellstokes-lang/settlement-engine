@@ -1,8 +1,8 @@
 {
   "_doc": "Per-file ceiling for `tsc --noEmit -p tsconfig.full.json`. SHRINK-ONLY. A file absent from `files` has an allowance of ZERO. Regenerate with `npm run typecheck:ratchet:update` — never hand-edit, and never widen. See scripts/check-full-typecheck.mjs.",
-  "measuredAtSha": "0f7424f7303d52020c9ca630588c78e7ce318d02",
-  "total": 173,
-  "resolvedCount": 1400,
+  "measuredAtSha": "f73bdbf16d3f7a57c18d7fd57b0478b953043a73",
+  "total": 167,
+  "resolvedCount": 1561,
   "roots": [
     "src/application/",
     "src/components/",
@@ -17,7 +17,8 @@
     "src/kernel/",
     "src/lib/",
     "src/pdf/",
-    "src/store/"
+    "src/store/",
+    "src/workers/"
   ],
   "files": {
     "src/domain/worldPulse/applyWorldPulse.js": 12,
@@ -55,8 +56,6 @@
     "src/domain/worldPulse/warDeployment.js": 2,
     "src/domain/worldPulse/warPeaceDecision.js": 8,
     "src/domain/worldPulse/warRulingsNews.js": 1,
-    "src/domain/worldPulse/warTermination.js": 15,
-    "src/lib/founderChairRequest.js": 3,
-    "src/lib/foundersHall.js": 3
+    "src/domain/worldPulse/warTermination.js": 15
   }
 }

@@ -1,9 +1,9 @@
 {
-  "total": 1120,
+  "total": 1113,
   "files": {
     "src/domain/display/heraldCausalGrammar.js": 2,
     "src/domain/display/heraldCausalVoice.js": 3,
-    "src/domain/display/heraldIndex.js": 20,
+    "src/domain/display/heraldIndex.js": 13,
     "src/domain/display/heraldIntegrity.js": 6,
     "src/domain/region/wizardNews.js": 3,
     "src/domain/rulingPower.js": 3,

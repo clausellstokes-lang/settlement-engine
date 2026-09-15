@@ -15,10 +15,6 @@
   "em": 5,
   "bang": 0
  },
- "src/domain/causalViews.js": {
-  "em": 1,
-  "bang": 0
- },
  "src/domain/certification/subsystemRowsBelief.js": {
   "em": 27,
   "bang": 1
@@ -75,10 +71,6 @@
   "em": 15,
   "bang": 0
  },
- "src/domain/dailyLife.js": {
-  "em": 2,
-  "bang": 0
- },
  "src/domain/display/dossierViewModel.js": {
   "em": 1,
   "bang": 0
@@ -108,10 +100,6 @@
   "bang": 4
  },
  "src/domain/highWater.js": {
-  "em": 2,
-  "bang": 0
- },
- "src/domain/historyBeats.js": {
   "em": 2,
   "bang": 0
  },
