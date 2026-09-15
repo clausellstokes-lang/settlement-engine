@@ -111,9 +111,215 @@
    },
    "vid": 2,
    "writeable": true
+  },
+  {
+   "angle": "the archiver's own observation of one ordinary day",
+   "authoredIndex": 0,
+   "blockId": "DS-DAILY",
+   "caveats": [],
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "daily_life.beats",
+   "pairKinds": [],
+   "pieces": [],
+   "poolKey": "dawn",
+   "register": "daily-life",
+   "section": "daily_life",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": null,
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Morning starts around Town granary, Market square, Weekly market, Annual fair and Mills (2-5). River and Road shape the pace: carts, tools, and gossip move where the ground and roads allow, while Germanic gives even routine bargains a recognizable local rhythm.",
+    "spine": "Morning starts around Town granary, Market square, Weekly market, Annual fair and Mills (2-5). River and Road shape the pace: carts, tools, and gossip move where the ground and roads allow, while Germanic gives even routine bargains a recognizable local rhythm."
+   },
+   "vid": 0,
+   "writeable": true
+  },
+  {
+   "angle": "the archiver's own observation of one ordinary day",
+   "authoredIndex": 1,
+   "blockId": "DS-DAILY",
+   "caveats": [],
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "daily_life.beats",
+   "pairKinds": [],
+   "pieces": [],
+   "poolKey": "market",
+   "register": "daily-life",
+   "section": "daily_life",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": null,
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "food is adequate for most families, though prices are watched closely. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
+    "spine": "food is adequate for most families, though prices are watched closely. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown."
+   },
+   "vid": 0,
+   "writeable": true
+  },
+  {
+   "angle": "the archiver's own observation of one ordinary day",
+   "authoredIndex": 2,
+   "blockId": "DS-DAILY",
+   "caveats": [],
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "daily_life.beats",
+   "pairKinds": [],
+   "pieces": [],
+   "poolKey": "midday",
+   "register": "daily-life",
+   "section": "daily_life",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": null,
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "Power is felt through Guild Council. Most residents know where authority lives and how to petition it without making themselves memorable. ordinary errands carry a careful awareness of who controls the street.",
+    "spine": "Power is felt through Guild Council. Most residents know where authority lives and how to petition it without making themselves memorable. ordinary errands carry a careful awareness of who controls the street."
+   },
+   "vid": 0,
+   "writeable": true
+  },
+  {
+   "angle": "the archiver's own observation of one ordinary day",
+   "authoredIndex": 3,
+   "blockId": "DS-DAILY",
+   "caveats": [],
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "daily_life.beats",
+   "pairKinds": [],
+   "pieces": [],
+   "poolKey": "tavern",
+   "register": "daily-life",
+   "section": "daily_life",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": null,
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V1",
+     "licences": "the state key alone",
+     "moves": [
+      "PRESENT"
+     ]
+    },
+    "pairs": [],
+    "rendered": "The place is not peaceful so much as practiced: people know its routines and work around its frictions.",
+    "spine": "The place is not peaceful so much as practiced: people know its routines and work around its frictions."
+   },
+   "vid": 0,
+   "writeable": true
+  },
+  {
+   "angle": "the archiver's own observation of one ordinary day",
+   "authoredIndex": 4,
+   "blockId": "DS-DAILY",
+   "caveats": [],
+   "compromised": null,
+   "face": 0,
+   "faceRoles": [],
+   "faceSources": [],
+   "fields": [],
+   "marks": [],
+   "mount": "daily_life.beats",
+   "pairKinds": [],
+   "pieces": [],
+   "poolKey": "night",
+   "register": "daily-life",
+   "section": "daily_life",
+   "slots": {
+    "declared": [],
+    "fills": [],
+    "recovered": true,
+    "verbs": []
+   },
+   "static": null,
+   "unit": {
+    "faceSourceTags": [],
+    "faces": [],
+    "order": {
+     "id": "V2",
+     "licences": "state key + a STRUCTURAL-consequence field",
+     "moves": [
+      "PRESENT",
+      "CONSEQUENCE"
+     ]
+    },
+    "pairs": [],
+    "rendered": "By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.",
+    "spine": "By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying."
+   },
+   "vid": 0,
+   "writeable": true
   }
  ],
- "schema": "scribe-town-card/7",
+ "schema": "scribe-town-card/8",
  "seed": "render-town",
  "staticCardJoined": true,
  "tab": "daily_life",

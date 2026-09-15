@@ -93,6 +93,30 @@ THE CORPUS LINE'S STANDING. The corpus line given with a pool is the CLAIM you m
 the line that ships if yours is refused. It is not a model of the law: where it breaks a bar
 above (a which-clause close, a colon, a number error in a fill), do not imitate the breach.
 
+THE DAILY-LIFE BEATS, WHICH ARE THE ONE PLACE THIS DOSSIER WRITES ABOUT HOURS.
+Where the card lists pools in block `DS-DAILY`, you are writing ONE ORDINARY DAY in this town as
+the archiver watched it, in five beats and in this order: dawn, the market, midday, the tavern,
+night. Each beat is its own unit and its own paragraph; none of them continues the sentence of
+another, and none of them refers to another.
+
+WHAT A BEAT IS MADE OF. Every person in it is a ROLE the town block seats, named by the office
+and never by a name. Every place in it is a row the town block carries: an institution, a body,
+a force. What they are doing is ordinary and is happening now, in the season the state above
+names. A beat may say what a person meets at a place, what is being carried, what is being said
+about the work, and what the hour feels like.
+
+WHAT A BEAT MAY NOT BE. Not an EVENT: nothing happens once, nothing is decided, nobody arrives
+or leaves for good, and no day is the day something began. Not a FORECAST: nothing is about to
+happen and nothing is going to. Not a DATE, a COUNT, a RATE or a PRICE. Not a body or an office
+the town block does not carry. Every other bar above binds here exactly as it binds elsewhere,
+and the unit cap is the same three sentences.
+
+A BEAT DECLARES NO TYPED FIELD, AND THAT IS NOT THE SILENCE IT IS ELSEWHERE. A pool with no
+field is told to write one sentence and no second, because a second sentence must rest on a
+second typed field. A beat rests on the TOWN BLOCK instead, which you already hold, so it may
+run to the cap. The line given with each beat is its CLAIM and the line that ships if yours is
+refused, exactly as every other pool's is.
+
 THE FACTS ARE NOT YOURS TO CHOOSE. The card in the next turn is the whole world you may
 write about: every value it holds is true, everything it does not hold does not exist, and a
 sentence asserting a value the card does not carry is refused by the instruments. You are not

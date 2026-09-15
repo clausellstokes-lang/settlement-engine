@@ -32,3 +32,58 @@ POOL "COMFORTABLE" in block DS-ECO-8
   THE CORPUS LINE, as the claim and the fallback:
     spine: People here put things by, and can. That is the difference between this town and a poorer one.
     notebook: none. Return an empty list.
+POOL "dawn" in block DS-DAILY
+  vid: 0
+  stance: the archiver's own observation of one ordinary day
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
+  slots you may use: (none)
+  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;
+  write it under THE DAILY-LIFE BEATS above, up to the unit cap.
+  faces to write: 0
+  THE CORPUS LINE, as the claim and the fallback:
+    spine: Morning starts around Town granary, Market square, Weekly market, Annual fair and Mills (2-5). River and Road shape the pace: carts, tools, and gossip move where the ground and roads allow, while Germanic gives even routine bargains a recognizable local rhythm.
+    notebook: none. Return an empty list.
+POOL "market" in block DS-DAILY
+  vid: 0
+  stance: the archiver's own observation of one ordinary day
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
+  slots you may use: (none)
+  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;
+  write it under THE DAILY-LIFE BEATS above, up to the unit cap.
+  faces to write: 0
+  THE CORPUS LINE, as the claim and the fallback:
+    spine: food is adequate for most families, though prices are watched closely. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.
+    notebook: none. Return an empty list.
+POOL "midday" in block DS-DAILY
+  vid: 0
+  stance: the archiver's own observation of one ordinary day
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
+  slots you may use: (none)
+  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;
+  write it under THE DAILY-LIFE BEATS above, up to the unit cap.
+  faces to write: 0
+  THE CORPUS LINE, as the claim and the fallback:
+    spine: Power is felt through Guild Council. Most residents know where authority lives and how to petition it without making themselves memorable. ordinary errands carry a careful awareness of who controls the street.
+    notebook: none. Return an empty list.
+POOL "tavern" in block DS-DAILY
+  vid: 0
+  stance: the archiver's own observation of one ordinary day
+  THE ORDER: the corpus spine realises the move order `V1` — `PRESENT` (the state key alone); keep that order in your spine.
+  slots you may use: (none)
+  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;
+  write it under THE DAILY-LIFE BEATS above, up to the unit cap.
+  faces to write: 0
+  THE CORPUS LINE, as the claim and the fallback:
+    spine: The place is not peaceful so much as practiced: people know its routines and work around its frictions.
+    notebook: none. Return an empty list.
+POOL "night" in block DS-DAILY
+  vid: 0
+  stance: the archiver's own observation of one ordinary day
+  THE ORDER: the corpus spine realises the move order `V2` — `PRESENT then CONSEQUENCE` (state key + a STRUCTURAL-consequence field); keep that order in your spine.
+  slots you may use: (none)
+  THIS IS A DAILY-LIFE BEAT. It declares no typed field and rests on the town block;
+  write it under THE DAILY-LIFE BEATS above, up to the unit cap.
+  faces to write: 0
+  THE CORPUS LINE, as the claim and the fallback:
+    spine: By evening, daily life narrows to lamplight, shared meals, debts remembered, and news carried from door to door. The settlement feels less like a map marker than a set of bargains people keep renewing because leaving would cost more than staying.
+    notebook: none. Return an empty list.
