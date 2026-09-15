@@ -18,6 +18,12 @@
  *     struck/lowered (the errorCopyBaseline honesty idiom). The remaining debt
  *     is dominated by the kernel prose pools (eventProse/roadsProse/
  *     traditionProse — canonical-at-zero contracts) and burns down by wave.
+ *     ⭐ ODQ §901's NAMED CURE IS DISCHARGED HERE (LT41 car 2): the eight dashes
+ *     the per-file arm was BANKED on at §900 are TRANSCRIPTIONS of strings the
+ *     then-unscanned `src/generators` producers write, so they now pass by the
+ *     declared authored-vocabulary allowlist below — count-pinned, named by file
+ *     and literal, with the producer line each mirrors. The producers themselves
+ *     are scanned by Tier 5, so neither half is exempt any more.
  *  3. E-E — THE JSX EXTENSION (docs/THE_APLUS_EXECUTION_ARCHITECTURE.md §E-E).
  *     Tier 2's char tokenizer only finds QUOTED string literals, so it never
  *     reached src/**\/*.jsx: the reader-facing copy in a component is usually
@@ -247,60 +253,70 @@ function walkJs(dir, out = []) {
 //
 // Each entry names the PRODUCER LINE it is authored at, so a reader can go and
 // see the string rather than trust this list. Line numbers are as of the landing
-// commit and are given as orientation; the allowlist matches on TEXT, and the
-// exact-set arm below refuses any entry that stops being a live literal.
+// commit and are given as orientation; the allowlist matches on TEXT.
+//
+// ⭐ AND EVERY ENTRY IS COUNT-PINNED (`count`), not merely named. Banking a row
+// freezes its EXISTENCE; the magnitude is what freezes its SIZE — the same law
+// scripts/.test-ratchet-baseline.json applies to a banked red. Without it, the
+// bare `'—'` delimiter entry below would be a STANDING PASS for every future bare
+// em dash in that file, which is the one place a by-name allowlist is genuinely
+// loose. With it, a copy that appears and a copy that disappears both red, and
+// the arm's message says which direction moved.
 const AUTHORED_VOCABULARY_ALLOWLIST = Object.freeze({
   'src/generators/power/governanceNarrative.js': Object.freeze({
-    'Unstable — criminal governance':
-      'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").',
-    'Critical (active siege — survival priority)':
-      'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.',
-    'Fractured — no stable governing authority':
-      'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.',
-    'Shaken — institutional trust collapsed':
-      'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.',
-    'Desperate — hunger is eroding order':
-      'public-order band, applyStressStability :301 — the `famine` stressor override.',
-    'Anxious — disease is overriding normal authority':
-      'public-order band, applyStressStability :304 — the `plague_onset` stressor override.',
-    'Volatile — power is available to whoever moves first':
-      'public-order band, applyStressStability :307 — the `succession_void` stressor override.',
-    'Strained — debt obligations constrain every decision':
-      'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.',
-    'Tense — regional monster threat':
-      'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.',
+    'Unstable — criminal governance': { count: 1, why: 'public-order band, deriveBaselineStability :250 — sibling values in the same return set spell the gloss with parentheses ("Enforced Order (authoritarian)", "Tense (external threat)").' },
+    'Critical (active siege — survival priority)': { count: 1, why: 'public-order band, applyStressStability :289 — the dash is INSIDE the parenthetical gloss.' },
+    'Fractured — no stable governing authority': { count: 1, why: 'public-order band, applyStressStability :295 — the `politically_fractured` stressor override.' },
+    'Shaken — institutional trust collapsed': { count: 1, why: 'public-order band, applyStressStability :298 — the `recently_betrayed` stressor override.' },
+    'Desperate — hunger is eroding order': { count: 1, why: 'public-order band, applyStressStability :301 — the `famine` stressor override.' },
+    'Anxious — disease is overriding normal authority': { count: 1, why: 'public-order band, applyStressStability :304 — the `plague_onset` stressor override.' },
+    'Volatile — power is available to whoever moves first': { count: 1, why: 'public-order band, applyStressStability :307 — the `succession_void` stressor override.' },
+    'Strained — debt obligations constrain every decision': { count: 1, why: 'public-order band, applyStressStability :313 — the `indebted` stressor override, which yields to an Unstable baseline.' },
+    'Tense — regional monster threat': { count: 1, why: 'public-order band, annotateMonsterThreat :337 — the standalone form of the "; monster threat active" annotation.' },
   }),
   'src/generators/economy/prosperity.js': Object.freeze({
-    'Highly diversified — multiple major revenue streams':
-      'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.',
-    'Diversified — broad institutional economic base':
-      'economic-complexity band, deriveEconomicComplexity :298 — labelBands.js COMPLEXITY_LABEL.DIVERSIFIED transcribes it.',
-    'Concentrated — fewer revenue streams than scale suggests':
-      'economic-complexity band, deriveEconomicComplexity :299 — labelBands.js COMPLEXITY_LABEL.CONCENTRATED transcribes it.',
-    'Limited — narrow economic base for this scale':
-      'economic-complexity band, deriveEconomicComplexity :305 — labelBands.js COMPLEXITY_LABEL.LIMITED transcribes it.',
-    'Subsistence — survival economy':
-      'economic-complexity band, deriveEconomicComplexity :314 — labelBands.js COMPLEXITY_LABEL.SUBSISTENCE transcribes it.',
+    'Highly diversified — multiple major revenue streams': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :296 — byte-identical to src/domain/display/labelBands.js COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED, which transcribes this producer.' },
+    'Diversified — broad institutional economic base': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :298 — labelBands.js COMPLEXITY_LABEL.DIVERSIFIED transcribes it.' },
+    'Concentrated — fewer revenue streams than scale suggests': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :299 — labelBands.js COMPLEXITY_LABEL.CONCENTRATED transcribes it.' },
+    'Limited — narrow economic base for this scale': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :305 — labelBands.js COMPLEXITY_LABEL.LIMITED transcribes it.' },
+    'Subsistence — survival economy': { count: 1, why: 'economic-complexity band, deriveEconomicComplexity :314 — labelBands.js COMPLEXITY_LABEL.SUBSISTENCE transcribes it.' },
   }),
   'src/generators/safetyProfile.js': Object.freeze({
-    'Dangerous — Plague Unrest':
-      'safety strain band :135 — the two-em-dash plague strain the safetyStrains docblock names; the composite label is built from the TYPED entry, never parsed back out.',
-    'Controlled — Authoritarian':
-      'safety band :241, repeated as a comparison literal at :489 (isDangerous).',
-    'Dangerous — Criminal Governance':
-      'safety band :248, repeated as a comparison literal at :490 (isDangerous).',
+    'Dangerous — Plague Unrest': { count: 1, why: 'safety strain band :135 — the two-em-dash plague strain the safetyStrains docblock names; the composite label is built from the TYPED entry, never parsed back out.' },
+    'Controlled — Authoritarian': { count: 2, why: 'safety band :241, repeated as a comparison literal at :489 (isDangerous).' },
+    'Dangerous — Criminal Governance': { count: 2, why: 'safety band :248, repeated as a comparison literal at :490 (isDangerous).' },
   }),
   'src/generators/economy/economicState.js': Object.freeze({
-    'Military services — standing army leasing, siege engineering, garrison contracts':
-      'primary-export band :626 — `Export — what it is`, the same shape as every other primaryExports entry.',
-    'Mercenary services — trained companies available for hire':
-      'primary-export band :628 — the mercenary-institution arm of the same militaryExport ladder.',
-    'Military services — garrison contracts and armed escort':
-      'primary-export band :629 — the lower-effectiveness arm of the same militaryExport ladder.',
+    'Military services — standing army leasing, siege engineering, garrison contracts': { count: 1, why: 'primary-export band :626 — `Export — what it is`, the same shape as every other primaryExports entry.' },
+    'Mercenary services — trained companies available for hire': { count: 1, why: 'primary-export band :628 — the mercenary-institution arm of the same militaryExport ladder.' },
+    'Military services — garrison contracts and armed escort': { count: 1, why: 'primary-export band :629 — the lower-effectiveness arm of the same militaryExport ladder.' },
   }),
   'src/generators/foodGenerator.js': Object.freeze({
-    'Deficit — Active Famine':
-      'food-security band :342 — byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this producer and says so in its own docblock (:40, :255).',
+    'Deficit — Active Famine': { count: 1, why: 'food-security band :342 — byte-identical to the pool key at src/domain/display/stateProse/generalStateProse.js:266, which transcribes this producer and says so in its own docblock (:40, :255).' },
+  }),
+
+  // ── THE TIER-2 HALF (LT41 car 2): THE EIGHT TRANSCRIBED DASHES ──────────────
+  // These are the exact strings the Tier-2 per-file arm was BANKED on at ODQ §900,
+  // whose census row named this allowlist as its cure: "the structural cure is a
+  // declared authored-vocabulary exemption class in the voice scanner (§901)".
+  // ⛔ NOT ONE OF THEM IS AUTHORED HERE. Every one is a TRANSCRIPTION of a string
+  // an UNSCANNED producer in src/generators writes — verified byte for byte with
+  // `grep -F` — or a delimiter matched to a separator such a producer composes.
+  // That is the whole argument: the domain leaf may not import the generator (the
+  // ZERO IMPORTS law, stated in labelBands.js's own docblock and in
+  // economyStateProse.js), so the vocabulary has to be spelled twice, and a guard
+  // that reds on the copy while never reading the original is measuring the wrong
+  // file. Both halves are now scanned, and both halves are declared here.
+  'src/domain/display/labelBands.js': Object.freeze({
+    'Highly diversified — multiple major revenue streams': { count: 1, why: 'COMPLEXITY_LABEL.HIGHLY_DIVERSIFIED :131 — transcribes src/generators/economy/prosperity.js:296 byte for byte.' },
+    'Diversified — broad institutional economic base': { count: 1, why: 'COMPLEXITY_LABEL.DIVERSIFIED :132 — transcribes prosperity.js:298 byte for byte.' },
+    'Concentrated — fewer revenue streams than scale suggests': { count: 1, why: 'COMPLEXITY_LABEL.CONCENTRATED :133 — transcribes prosperity.js:299 byte for byte.' },
+    'Limited — narrow economic base for this scale': { count: 1, why: 'COMPLEXITY_LABEL.LIMITED :134 — transcribes prosperity.js:305 byte for byte.' },
+    'Subsistence — survival economy': { count: 1, why: 'COMPLEXITY_LABEL.SUBSISTENCE :135 — transcribes prosperity.js:314 byte for byte.' },
+  }),
+  'src/domain/display/stateProse/generalStateProse.js': Object.freeze({
+    'Deficit — Active Famine': { count: 1, why: 'the FOOD_POOL_OF key :266 — transcribes src/generators/foodGenerator.js:342 byte for byte, and the map\'s own docblock (:40, :255) names that producer line as its source.' },
+    '—': { count: 2, why: 'the two `.split(\'—\')` DELIMITERS at :323 (safetyPoolKey) and :1728 (the Systems Health rung) — the separator they split on is composed by src/generators/safetyProfile.js:235 (`${strain} — ${condition}`). A parser argument, not copy: it burns WITH the producer, the same way Tier 3\'s six banked JSX dashes do.' },
   }),
 });
 
@@ -656,22 +672,26 @@ describe('E2/Tier-5 voiceMechanics — src/generators string-literal ratchet (sh
 });
 
 describe('E2 voiceMechanics — the authored-vocabulary allowlist (ODQ §901)', () => {
-  it('EXACT — every allowlisted string is still a live literal in the file that declares it', () => {
-    // The Tier-4 quarantine idiom, applied to the allowlist: a string that has
-    // been rewritten or deleted must be STRUCK here, so the list cannot rot into
-    // a standing exemption for text nobody can find.
+  it('EXACT — every allowlisted string occurs in its file exactly the declared number of times', () => {
+    // The Tier-4 quarantine idiom plus the census's magnitude law, in one arm. A
+    // measured 0 means the string was rewritten or deleted and the entry must be
+    // STRUCK, so the list cannot rot into an exemption for text nobody can find.
+    // A measured number ABOVE the declared one means new copies landed under an
+    // existing exemption — the only way a by-name allowlist can grow silently,
+    // and the reason `count` exists at all.
     /** @type {string[]} */
-    const stale = [];
+    const wrong = [];
     for (const [rel, entries] of Object.entries(AUTHORED_VOCABULARY_ALLOWLIST)) {
-      const live = new Set(stringLiteralContents(readFileSync(join(ROOT, rel), 'utf8')));
-      for (const text of Object.keys(entries)) {
-        if (!live.has(text)) stale.push(`${rel} :: ${JSON.stringify(text)}`);
+      const live = stringLiteralContents(readFileSync(join(ROOT, rel), 'utf8'));
+      for (const [text, { count }] of Object.entries(entries)) {
+        const measured = live.filter((t) => t === text).length;
+        if (measured !== count) {
+          wrong.push(`${rel} :: ${JSON.stringify(text)}: declared ${count}, measured ${measured}`
+            + `${measured === 0 ? ' (GONE — strike the entry and bank the win)' : ' (a copy landed under an existing exemption)'}`);
+        }
       }
     }
-    expect(
-      stale,
-      `\nThese allowlist entries no longer match any literal. Delete them and bank the win:\n  ${stale.join('\n  ')}\n`,
-    ).toEqual([]);
+    expect(wrong, `\n${wrong.join('\n')}\n`).toEqual([]);
   });
 
   it('EXACT — every allowlisted string actually carries an em dash (no entry earns its keep by accident)', () => {
@@ -686,9 +706,13 @@ describe('E2 voiceMechanics — the authored-vocabulary allowlist (ODQ §901)', 
 
   it('every entry carries a REAL reason naming its producer line (a stub launders the exemption)', () => {
     for (const [rel, entries] of Object.entries(AUTHORED_VOCABULARY_ALLOWLIST)) {
-      for (const [text, reason] of Object.entries(entries)) {
+      for (const [text, { count, why }] of Object.entries(entries)) {
         expect(
-          String(reason).length,
+          Number.isInteger(count) && count > 0,
+          `${rel} :: ${JSON.stringify(text)} — count must be a positive whole number, got ${JSON.stringify(count)}`,
+        ).toBe(true);
+        expect(
+          String(why).length,
           `${rel} :: ${JSON.stringify(text)} — exempted with a stub, not an argument`,
         ).toBeGreaterThan(40);
       }
