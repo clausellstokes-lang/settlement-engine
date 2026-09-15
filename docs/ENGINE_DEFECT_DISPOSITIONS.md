@@ -154,3 +154,66 @@ flag true. **The conditions silence the default sliders, not the hash ceiling.**
   `tests/generators/stressPriority.test.js` is about `STRESS_PRIORITY`, a different subject;
   the two suites that name these flags (`narrativeQualityCorpus`, `governanceNarrative`) read
   them as downstream inputs. A dial nobody tests is how a tuned constant moves unnoticed.
+
+---
+
+## §4 — REPORT: the ruined-court civic snapshot (2026-09-15, lane-LT40-engine)
+
+**Status: reported, deliberately not cured. No cure option is taken here.**
+
+### The chain, measured at this slot
+
+| step | where | what it does |
+|---|---|---|
+| producer | `src/generators/economy/economicState.js:62` | `ecoInstFlags = getInstFlags(config, institutions)` — the **raw** roster |
+| the read under it | `src/generators/priorityHelpers.js:42` | `nativeSemanticNames(institutions)` — never `liveInstitutions()` |
+| the stamp | `src/generators/economy/economicState.js:883` | `compound: ecoInstFlags` — written **once**, at generation |
+| the consumer | `src/domain/display/stateProse/defenseStateProse.js:578` + `:616` | `const compound = settlement?.economicState?.compound?.inst \|\| {}`, then `civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison)` (`civicFlag` itself at `:269`) |
+| the pool that keys on it | same file, `:1369` (the DS-DEF-6 collision block) | DS-DEF-2 row 3 `internalRowPoolKey` = `hasCourtSystem` × `hasPrison` |
+
+Nothing on the advance path recomputes `compound`.
+
+*(Every line cite in this section is read AT THIS COMMIT'S TIP — this car's own two docblocks
+shift `economicState.js` by 11 lines and `defenseStateProse.js` by 22, so the recon brief's
+pre-edit cites `:51`, `:872` and `:240-248` do not resolve here and are corrected above.)*
+
+### CONFIRMED by execution — city seed `civic-probe`
+
+```
+civic rows on the roster: Gambling halls · City hall · Multiple courthouses · Large prison
+compound.inst.hasCourtSystem = true   hasPrison = true
+(mark the four civic rows ruined)
+live roster drops to 42 of 46
+a RECOMPUTE over the RAW roster  : {"court":true,"prison":true}
+a RECOMPUTE over liveInstitutions: {"court":false,"prison":false}
+THE STAMP still on the record    : {"court":true,"prison":true}
+```
+
+**So a town whose court and prison are rubble still asserts a full legal chain** — a floor-1
+self-contradiction reachable with no authoring error.
+
+### The two cures, priced, neither taken
+
+1. **Recompute from `liveInstitutions()` at READ** (in the desk). Narrow blast radius —
+   DS-DEF-2's civic rows only — but it leaves the producer lying to every other consumer.
+2. **Re-derive `compound` at ADVANCE** (in the producer). Correct at the source, and the
+   widest possible blast radius: `compound`'s flags feed prosperity, safety, services, NPC
+   generation and the power layer, so every advanced world's economic record moves.
+
+**Both are output-moving on every ruined town, so both are owner-gated under §764.3.**
+
+### The family this belongs to
+
+This is the §708.7 family's house rule broken at the producer: **a roster read goes through
+`liveInstitutions()`** (`src/domain/institutions/institutionRoster.js:53`; **25 consumers in
+`src/` at this tip**). `getInstFlags` is one of the reads that does not. Fixing the rule
+wholesale is a sweep, not a car.
+
+### ⚠ A budget hazard found while writing this section
+
+`src/generators/economy/economicState.js` sits under a **frozen 900-line cohesion ceiling**
+(`tests/generators/economicStructure.test.js:39`, `MODULE_LINE_CEILING = 900`, strict `<`). At
+the start of this car the file counted **886**, so the 28-line docblock the trace wanted **broke
+the ceiling**: `expected [ [ 'economicState.js', 914 ] ] to deeply equal []`. The note was
+**compressed to 11 lines**, never the ceiling raised. **In that file a comment is a budget
+item** — it now counts 897, i.e. **2 lines of headroom left**.

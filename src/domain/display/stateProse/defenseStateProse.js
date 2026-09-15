@@ -234,6 +234,28 @@ const MONSTER_FAMILY_OF = Object.freeze({
  * question: the defence rows now take a typed `standingDefenseForces` projection, and the
  * civic rows go through `civicFlag`, which is total about the one shape its producer
  * emits. The full measurement is in defenseInstitutionBuckets.js's header.
+ *
+ * ── ⛔⛔ AND THE VALUE `civicFlag` READS IS A GENERATION-TIME SNAPSHOT ────────────────
+ * LT40 car 6 — REPORTED, DELIBERATELY NOT CURED. `compound.inst` is stamped ONCE, by
+ * `economicState.js` (`compound: ecoInstFlags`, :883), from `getInstFlags(config,
+ * institutions)` over the RAW roster — `priorityHelpers.js:42` maps
+ * `nativeSemanticNames(institutions)`, never `liveInstitutions()` — and NOTHING on the
+ * advance path recomputes it. So these flags describe the town as GENERATED, not as it
+ * stands.
+ *
+ * MEASURED (city seed `civic-probe`): ruin the four civic rows and the live roster drops
+ * 46 -> 42; a recompute over `liveInstitutions()` gives `hasCourtSystem: false,
+ * hasPrison: false`; the stamped `compound.inst` still reads TRUE on both. Since
+ * DS-DEF-2 row 3 (`internalRowPoolKey`) keys on exactly that pair — this file's own note
+ * at the DS-DEF-6 collision block (:1369) says so — a town whose court and prison are RUBBLE
+ * still asserts a full legal chain. A floor-1 self-contradiction reachable with no
+ * authoring error.
+ *
+ * ⛔ DO NOT CURE IT HERE. Both cures — recompute from `liveInstitutions()` at read, or
+ * re-derive `compound` at advance — move DS-DEF-2's civic rows on every ruined town, and
+ * the producer's flags also feed prosperity, safety, services, NPCs and the power layer.
+ * The trace and the pricing are docs/ENGINE_DEFECT_DISPOSITIONS.md §4; the cure is
+ * owner-gated under §764.3.
  */
 
 /**
