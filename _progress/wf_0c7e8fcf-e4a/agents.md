@@ -1,4 +1,4 @@
-# wf_0c7e8fcf-e4a — per-agent progress, 2026-09-14 22:14:07
+# wf_0c7e8fcf-e4a — per-agent progress, 2026-09-14 22:20:58
     - `a64dc9d07` ? · DONE · transcript 09-14 13:09 616 KB · 11 tool calls · files: response-opus.json · result: {"unitsWritten": 12, "notes": ["Three pools were omitted as unwritable, not skipped: DS-DEF-2 'Invasion & War: walls with NO force' seats face 0 through `elders
     - `a0141863e` ? · DONE · transcript 09-14 13:11 695 KB · 11 tool calls · files: response-sonnet.json · result: {"unitsWritten": 12, "notes": ["Omitted 3 of 15 pools (DS-DEF-2: 'Invasion & War: walls with NO force' vid 3, 'Internal Security: full legal chain (court AND pr
     - `af7353a3e` ? · DONE · transcript 09-14 13:06 521 KB · 8 tool calls · files: response-opus.json · result: {"unitsWritten": 7, "notes": ["Two of the turn's stance tags, `threshold` (PRESSURED) and `counterforce` (DS-ECO-6), are not defined anywhere in the brief, whic
