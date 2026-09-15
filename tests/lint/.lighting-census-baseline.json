@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "62bf2da7d1ffdddc503a11a221d7fb758c7cf344",
-  "measuredBy": "LT42 cars 2+3 (Opus 5 — Fable-unvalidated)",
+  "measuredAtSha": "f42b3ed9f8481ff8f85cefd2642ce7881061dfda",
+  "measuredBy": "LT16 car 3 (Opus 5 — the money path, long tail #16)",
   "date": "2026-09-15",
-  "note": "LONG TAIL #42 lands two new TEST files and no helper: tests/lint/ledgerCitationIntegrity.test.js (10 titles under 2 describes) and tests/scripts/provenanceMap.test.js (7 titles under 2 describes). Both are CREDITED, not parked — every test registers straight-line at module scope with no conditional wrapper. No existing file gained or lost a title.",
-  "files": 2565,
+  "note": "LT16 car 3, the anti-double-subscribe hydration gate: ONE new test file, tests/ui/pricingPageHydrationGate.test.jsx (6 titles under 1 describe, every title a literal so the file is credited, not parked), plus new literal arms on two already-credited files — tests/ui/accountSubscriptionSectionCta.test.jsx (+4 titles, +1 suite title) and tests/components/purchaseModal.test.jsx (+3 titles, +1 nested suite title). No rule widened or narrowed. The three edited source components and contracts.test.js (parked, its arms generated from for-of loops) contribute no titles.",
+  "files": 2564,
   "parked": 375,
-  "credited": 2190,
-  "titles": 24186,
-  "suiteTitles": 6456
+  "credited": 2189,
+  "titles": 24182,
+  "suiteTitles": 6455
 }
