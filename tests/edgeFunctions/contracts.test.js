@@ -1504,6 +1504,105 @@ describe('Tier 3.3 — product catalog drift between checkout + webhook', () => 
 });
 
 // ─────────────────────────────────────────────────────────────────────────
+// WEB-10(a) — THE ALLOWANCE TABLE'S CROSS-SIDE CREDIT PARITY
+//
+// The webhook's monthly allowance stopped being one hard-coded plan and became a
+// price-id → plan table. Each row's credit integer MIRRORS a client-side figure
+// in src/config/pricing.js, and the two sides live in different languages,
+// different runtimes and different test suites — exactly the shape that drifts.
+//
+// ⭐ THE PIN IS WRITTEN TO HOLD AT BOTH VALUES OF THE SURVEYOR DIAL. It compares
+// the webhook's integer to pricing.js's integer, never to a literal, so the
+// owner's later flip of SURVEYOR_PLAN.monthlyCredits stays ONE line on each side
+// with no test edit behind it. A flip of only one side reds here.
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('WEB-10(a) — the allowance table mirrors the client credit figures', () => {
+  let tableBlock;
+  let pricing;
+  beforeAll(() => {
+    const webhook = readFunction('stripe-webhook');
+    // Slice the marked table block, so an unrelated STRIPE_PRICE_* read elsewhere
+    // in this 3,000-line function (the surveyor_renewal discrimination, for one)
+    // can never be mistaken for a table row.
+    const start = webhook.indexOf('// ── ALLOWANCE TABLE ROWS: BEGIN');
+    const end = webhook.indexOf('// ── ALLOWANCE TABLE ROWS: END', start);
+    expect(start, 'stripe-webhook lost its ALLOWANCE TABLE ROWS begin marker').toBeGreaterThan(-1);
+    expect(end, 'stripe-webhook lost its ALLOWANCE TABLE ROWS end marker').toBeGreaterThan(start);
+    tableBlock = webhook.slice(start, end);
+    pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+  });
+
+  /** The integer the table spells beside one env name. */
+  function tableCreditsFor(envName) {
+    const m = tableBlock.match(new RegExp(`${envName}'\\)[\\s\\S]{0,400}?credits:\\s*(\\d+)`));
+    return m ? Number(m[1]) : null;
+  }
+
+  /** The integer pricing.js spells inside one Object.freeze block. */
+  function clientCreditsIn(blockAnchor) {
+    const at = pricing.indexOf(blockAnchor);
+    if (at < 0) return null;
+    const m = pricing.slice(at).match(/monthlyCredits:\s*(\d+)/);
+    return m ? Number(m[1]) : null;
+  }
+
+  it('the block really is the table (guard the guard)', () => {
+    // If the slice or the markers rot, every comparison below would read null
+    // and could go vacuously green on null === null.
+    expect(tableBlock).toMatch(/STRIPE_PRICE_SURVEYOR/);
+    expect(tableBlock).toMatch(/STRIPE_PRICE_PREMIUM/);
+    expect(tableBlock).toMatch(/plan:\s*'surveyor_monthly'/);
+    expect(tableBlock).toMatch(/CARTOGRAPHER_MONTHLY_PLAN/);
+    // …and the annual row is NOT here: its dial is 0, its cadence is unruled, and
+    // its server half is owner-gated WEB-10(b).
+    // anchored: the two positive STRIPE_PRICE_* matches above read this same slice
+    expect(tableBlock).not.toMatch(/STRIPE_PRICE_PREMIUM_ANNUAL/);
+  });
+
+  it('the Surveyor row grants exactly SURVEYOR_PLAN.monthlyCredits', () => {
+    const server = tableCreditsFor('STRIPE_PRICE_SURVEYOR');
+    const client = clientCreditsIn('export const SURVEYOR_PLAN = Object.freeze({');
+    expect(server, 'no credits integer beside STRIPE_PRICE_SURVEYOR in the table').not.toBeNull();
+    expect(client, 'SURVEYOR_PLAN.monthlyCredits not found in pricing.js').not.toBeNull();
+    expect(server).toBe(client);
+  });
+
+  it('the Cartographer row grants exactly TIERS.cartographer.monthlyCredits', () => {
+    const server = tableCreditsFor('STRIPE_PRICE_PREMIUM');
+    const client = clientCreditsIn('cartographer: Object.freeze({');
+    expect(server, 'no credits integer beside STRIPE_PRICE_PREMIUM in the table').not.toBeNull();
+    expect(client, 'TIERS.cartographer.monthlyCredits not found in pricing.js').not.toBeNull();
+    expect(server).toBe(client);
+  });
+
+  it('the unknown-plan arm fails CLOSED with an ALARM, and never by throwing', () => {
+    const webhook = readFunction('stripe-webhook');
+    // W-2: "never a silent skip that keeps the money and grants nothing" — the
+    // skip is paired with a structured logError carrying its own stage token.
+    expect(webhook).toMatch(/monthly_allowance_unknown_plan/);
+    expect(webhook).toMatch(/logError\([\s\S]{0,400}monthly_allowance_unknown_plan/);
+    // …and a THROW here would be worse than the silent skip it replaces: Stripe
+    // redelivers on any non-2xx, so an unrecognised invoice would retry forever.
+    // The alarm block must contain no throw.
+    const at = webhook.indexOf('monthly_allowance_unknown_plan');
+    const armStart = webhook.lastIndexOf('} else if (premiumPriceId && firstLinePriceId) {', at);
+    expect(armStart, 'the unknown-plan arm is no longer shaped as expected').toBeGreaterThan(-1);
+    const arm = webhook.slice(armStart, webhook.indexOf('} else {', at));
+    expect(arm).toMatch(/return profile;/);
+    // anchored: the same slice is asserted to CONTAIN the return above
+    expect(arm).not.toMatch(/throw\s/);
+  });
+
+  it('the §471.2/F5 back-compat line survives verbatim (the present-by-default arm)', () => {
+    const webhook = readFunction('stripe-webhook');
+    expect(webhook).toContain(
+      'monthly-allowance price-id gate inactive for invoice ${invoice.id} (env=${Boolean(premiumPriceId)}, line=${Boolean(firstLinePriceId)}) — proceeding for back-compat',
+    );
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
 // The Surveyor SKU asymmetry — DELIBERATE-PENDING-RULING (ODQ §839 FLAG 1)
 //
 // `surveyor` is an ACTIVE checkout SKU server-side and a fully wired webhook

@@ -297,6 +297,58 @@ async function findBillingProfileByVerifiedUserId(
   };
 }
 
+/** One row of the monthly-allowance table: a Stripe price id, what it grants, and
+ *  the plan name that grant is recorded under. */
+type AllowanceRow = { priceId: string; credits: number; plan: string };
+
+/** The plan name the Cartographer monthly allowance is recorded under. Named
+ *  because arm (iv) below writes it without matching a table row. */
+const CARTOGRAPHER_MONTHLY_PLAN = 'cartographer_monthly';
+
+/**
+ * THE ALLOWANCE TABLE (WEB-10(a) — the charter's §4 contract 1, built with the
+ * two rows that need no owner ruling and WITHOUT the annual row).
+ *
+ * Read AT CALL TIME from env so resolution tracks the deployment's secrets
+ * rather than the module's load moment. A row exists only when its price id is
+ * CONFIGURED: an unset env resolves to '' and would otherwise match every
+ * invoice whose line carries no price at all.
+ *
+ * ⛔ THE CREDIT INTEGERS ARE A CROSS-SIDE PARITY SURFACE, not local constants.
+ * Each one mirrors a client-side figure, and tests/edgeFunctions/contracts.test.js
+ * scans the marked block below and asserts the pair — the Surveyor row against
+ * SURVEYOR_PLAN.monthlyCredits and the Cartographer row against
+ * TIERS.cartographer.monthlyCredits in src/config/pricing.js. That pin holds at
+ * BOTH values of the Surveyor dial, so the owner's later flip stays one line on
+ * each side.
+ *
+ * ⭐ THE SURVEYOR ROW GRANTS 0 TODAY, AND THAT IS THE POINT. It mirrors
+ * SURVEYOR_PLAN.monthlyCredits, which is the dark dial WEB-10(b) flips. Because
+ * the row EXISTS whenever its price id is configured, a Surveyor invoice is
+ * positively identified and mints nothing — THE ALLOWANCE TRAP IS CLOSED IN
+ * CODE WHATEVER THE ENV, instead of depending on STRIPE_PRICE_PREMIUM having
+ * been set first.
+ *
+ * ⛔ premium_annual is DELIBERATELY ABSENT. Its dial (ANNUAL_FACTOR) is 0, its
+ * credit CADENCE is an unruled owner decision (LD-6 item 7, W-1), and the server
+ * half it belongs to is owner-gated WEB-10(b). Adding a row here without that
+ * ruling would be the silent activation this split exists to avoid.
+ */
+function allowanceRows(): AllowanceRow[] {
+  const rows: AllowanceRow[] = [];
+  // ── ALLOWANCE TABLE ROWS: BEGIN (the parity scan slices on these markers) ──
+  const surveyorPriceId = Deno.env.get('STRIPE_PRICE_SURVEYOR') || '';
+  if (surveyorPriceId) {
+    rows.push({ priceId: surveyorPriceId, credits: 0, plan: 'surveyor_monthly' });
+  }
+  const premiumPriceId = Deno.env.get('STRIPE_PRICE_PREMIUM') || '';
+  if (premiumPriceId) {
+    rows.push({ priceId: premiumPriceId, credits: 30, plan: CARTOGRAPHER_MONTHLY_PLAN });
+  }
+  // ── ALLOWANCE TABLE ROWS: END ─────────────────────────────────────────────
+  return rows;
+}
+
 // Returns the resolved profile so the invoice.paid case can run the referral
 // qualification (107) against the same customer→user binding without a second
 // resolution round trip.
@@ -356,22 +408,69 @@ async function grantMonthlyAllowanceIfNeeded(
     return profile;
   }
 
-  // THE ALLOWANCE PRICE-ID GATE (§5, §14 — load-bearing). The 30-credit monthly
-  // allowance is the CARTOGRAPHER (premium) perk ONLY. Without this, a Surveyor
-  // subscription invoice (also billing_reason subscription_create/cycle) would mint
-  // the Cartographer allowance. Require the invoice's first line's price id to be
-  // STRIPE_PRICE_PREMIUM. Read at call time so the check tracks the env. FAIL-OPEN
-  // for back-compat: an unset env OR an absent line price proceeds (logged) — the
-  // gate only ever SKIPS the allowance for an invoice we can positively identify as
-  // a NON-Cartographer plan.
+  // THE ALLOWANCE PRICE-ID GATE (§5, §14 — load-bearing), now a TABLE rather
+  // than one hard-coded plan. The monthly allowance is a per-PLAN perk, and the
+  // invoice's first line price id is what names the plan. Resolution runs in
+  // exactly this order (the charter's §4 contract 1, §471.2/F5 as ruled):
+  //
+  //  (i)   the line price matches a CONFIGURED table row ⇒ that row's credits,
+  //        recorded under that row's plan. A row whose allowance is 0 — the
+  //        Surveyor row today — SKIPS the grant rather than writing a zero
+  //        ledger row: the plan is positively identified and its allowance is
+  //        dark, which is a different fact from "unrecognised".
+  //  (ii)  (folded into (i): the Cartographer row is a table row whenever
+  //        STRIPE_PRICE_PREMIUM is set.)
+  //  (iii) STRIPE_PRICE_PREMIUM is SET and the line price matches NO row ⇒ SKIP
+  //        **AND ALARM**. This is W-2's fail-closed-with-alert and it replaces a
+  //        silent console.log: an invoice we cannot map to a plan is money taken
+  //        for something the platform does not recognise, and it must never be a
+  //        quiet skip that keeps the money and grants nothing.
+  //        ⛔ SKIP-AND-ALARM, NEVER THROW. Stripe redelivers on any non-2xx, so
+  //        throwing here would retry an unrecognised invoice forever and could
+  //        wedge the webhook behind it. (The throw at the unhandled-CHECKOUT-
+  //        product branch is a different case and stays: there a paid session has
+  //        no fulfilment at all.)
+  //  (iv)  STRIPE_PRICE_PREMIUM is UNSET, or the invoice carries NO line price ⇒
+  //        THE CARTOGRAPHER PRESENT-BY-DEFAULT ARM: 30 under
+  //        'cartographer_monthly', with the back-compat line below preserved
+  //        verbatim. §471.2/F5's victim is why: without it, the configuration
+  //        "Surveyor env set, PREMIUM env unset" would silently stop every live
+  //        Cartographer subscriber's monthly 30. This arm is NARROWER than the
+  //        old fail-open — (i) now catches a Surveyor invoice before it reaches
+  //        here — and exactly as wide as the old one for everything else.
   const premiumPriceId = Deno.env.get('STRIPE_PRICE_PREMIUM') || '';
   const firstLinePriceId = invoice.lines?.data?.[0]?.price?.id ?? null;
-  if (premiumPriceId && firstLinePriceId && firstLinePriceId !== premiumPriceId) {
-    console.log(`[stripe-webhook] invoice ${invoice.id} price ${firstLinePriceId} is not the Cartographer plan (${premiumPriceId}) — skipping the monthly Cartographer allowance`);
+  const rows = allowanceRows();
+  const matchedRow = firstLinePriceId
+    ? rows.find((row) => row.priceId === firstLinePriceId) ?? null
+    : null;
+
+  let allowanceCredits: number;
+  let allowancePlan: string;
+  if (matchedRow) {
+    if (matchedRow.credits <= 0) {
+      console.log(`[stripe-webhook] invoice ${invoice.id} is the ${matchedRow.plan} plan, whose monthly allowance is 0 — no credits minted`);
+      return profile;
+    }
+    allowanceCredits = matchedRow.credits;
+    allowancePlan = matchedRow.plan;
+  } else if (premiumPriceId && firstLinePriceId) {
+    logError(
+      'stripe-webhook',
+      profile.userId,
+      'monthly allowance: the invoice line price maps to NO known plan — skipping the grant (fail-closed)',
+      {
+        stage: 'monthly_allowance_unknown_plan',
+        invoice_id: invoice.id,
+        price_id: firstLinePriceId,
+        known_plans: rows.map((row) => row.plan).join(',') || '(none configured)',
+      },
+    );
     return profile;
-  }
-  if (!premiumPriceId || !firstLinePriceId) {
+  } else {
     console.log(`[stripe-webhook] monthly-allowance price-id gate inactive for invoice ${invoice.id} (env=${Boolean(premiumPriceId)}, line=${Boolean(firstLinePriceId)}) — proceeding for back-compat`);
+    allowanceCredits = 30;
+    allowancePlan = CARTOGRAPHER_MONTHLY_PLAN;
   }
 
   // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
@@ -403,13 +502,19 @@ async function grantMonthlyAllowanceIfNeeded(
   const firstLine = invoice.lines?.data?.[0];
   const periodEnd = firstLine?.period?.end || invoice.period_end || null;
   const expiresAt = periodEnd ? new Date(periodEnd * 1000).toISOString() : null;
-  await grantCredits(supabase, profile.userId, 30, 'monthly_allowance', {
+  // `source` stays 'monthly_allowance' — the ledger's per-invoice idempotency
+  // (the webhook pre-check above, system_grant_credits' delivery key, and the
+  // partial unique index) and the allowance-first spend FIFO all hang on it, and
+  // all three are amount-agnostic. `plan` rides beside the existing four metadata
+  // keys so a grant can be attributed to the plan that earned it.
+  await grantCredits(supabase, profile.userId, allowanceCredits, 'monthly_allowance', {
     stripe_invoice_id: invoice.id,
     stripe_subscription_id: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || '',
     stripe_customer_id: customerId || '',
     period_end: periodEnd || null,
+    plan: allowancePlan,
   }, expiresAt);
-  console.log(`Granted 30 monthly credits to user ${profile.userId} for invoice ${invoice.id}`);
+  console.log(`Granted ${allowanceCredits} monthly credits (${allowancePlan}) to user ${profile.userId} for invoice ${invoice.id}`);
   return profile;
 }
 

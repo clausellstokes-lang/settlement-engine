@@ -3336,6 +3336,174 @@ scopedEnv.test('a Cartographer invoice with the premium price still mints the al
   }
 });
 
+// ── WEB-10(a): THE ALLOWANCE TABLE + THE W-2 FAIL-CLOSED ALARM ───────────────
+//
+// The single hard-coded plan became a price-id → plan TABLE. These cases are the
+// charter's §4 A1/A3 arms, executed. Both dials stay OFF: the Surveyor row's
+// allowance is 0 (mirroring SURVEYOR_PLAN.monthlyCredits) and there is no annual
+// row at all, so no configuration that exists today changes what it grants — the
+// two exceptions are declared in the landing commit and pinned below.
+
+/** Record every console.error line emitted while `run` executes, then restore.
+ *  logError's sink IS console.error (one structured JSON line), so this asserts
+ *  THE SINK rather than a log's prose. */
+async function captureErrorLines(run: () => Promise<void>): Promise<string[]> {
+  const lines: string[] = [];
+  const original = console.error;
+  console.error = (...args: unknown[]) => { lines.push(args.map(String).join(' ')); };
+  try {
+    await run();
+  } finally {
+    console.error = original;
+  }
+  return lines;
+}
+
+/** Same, for console.log — used to prove the back-compat line survives verbatim. */
+async function captureLogLines(run: () => Promise<void>): Promise<string[]> {
+  const lines: string[] = [];
+  const original = console.log;
+  console.log = (...args: unknown[]) => { lines.push(args.map(String).join(' ')); };
+  try {
+    await run();
+  } finally {
+    console.log = original;
+  }
+  return lines;
+}
+
+const allowanceInvoice = (id: string, priceId: string | null, customer = 'cus_p', subscription = 'sub_p') =>
+  JSON.stringify({
+    id: `evt_${id}`, type: 'invoice.paid',
+    data: { object: { id, customer, billing_reason: 'subscription_cycle',
+      subscription, amount_paid: 900, currency: 'usd', period_end: 1893456000,
+      hosted_invoice_url: 'https://stripe.test/renew',
+      lines: { data: [priceId ? { price: { id: priceId }, period: { end: 1893456000 } } : { period: { end: 1893456000 } }] } } },
+  });
+
+scopedEnv.test('W-2 FAIL-CLOSED ALARM: PREMIUM configured + an UNKNOWN line price ⇒ zero grants AND the alarm fires', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  try {
+    const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+    const body = allowanceInvoice('in_unknown_plan', 'price_who_knows');
+    let status = 0;
+    const errors = await captureErrorLines(async () => {
+      const res = await handleStripeWebhook(
+        req(body, { 'stripe-signature': await sign(body, SECRET) }),
+        { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+      );
+      status = res.status;
+    });
+    // SKIP-AND-ALARM, NEVER THROW: Stripe redelivers on any non-2xx, so an
+    // unrecognised invoice must still be acknowledged.
+    assertEquals(status, 200);
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), false);
+    // THE SINK, not the prose: one structured logError line naming this stage.
+    const alarm = errors.filter((line) => line.includes('monthly_allowance_unknown_plan'));
+    assertEquals(alarm.length, 1);
+    const parsed = JSON.parse(alarm[0]) as Record<string, unknown>;
+    assertEquals(parsed.level, 'error');
+    assertEquals(parsed.fn, 'stripe-webhook');
+    assertEquals(parsed.price_id, 'price_who_knows');
+    assertEquals(parsed.invoice_id, 'in_unknown_plan');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+  }
+});
+
+scopedEnv.test('F5 / M6: SURVEYOR set + PREMIUM UNSET ⇒ a premium-priced invoice still mints 30 (cartographer_monthly, back-compat line)', async () => {
+  // THE SKEPTIC'S VICTIM, pinned. This configuration is reachable the moment the
+  // owner creates the Surveyor price before setting STRIPE_PRICE_PREMIUM, and a
+  // Cartographer row that existed only when its env was set would silently stop
+  // every live subscriber's monthly 30 here.
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  Deno.env.delete('STRIPE_PRICE_PREMIUM');
+  try {
+    const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+    const body = allowanceInvoice('in_prem_no_env', 'price_premium');
+    const logs = await captureLogLines(async () => {
+      const res = await handleStripeWebhook(
+        req(body, { 'stripe-signature': await sign(body, SECRET) }),
+        { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+      );
+      assertEquals(res.status, 200);
+    });
+    const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance');
+    assertEquals(Boolean(grant), true);
+    const args = grant!.args as { amount: number; metadata: Record<string, unknown> };
+    assertEquals(args.amount, 30);
+    assertEquals(args.metadata.plan, 'cartographer_monthly');
+    // The §471.2/F5 back-compat line survives verbatim.
+    assertEquals(logs.some((line) => line.includes('monthly-allowance price-id gate inactive')
+      && line.includes('proceeding for back-compat')), true);
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+scopedEnv.test('F5 / M6: SURVEYOR set + PREMIUM UNSET ⇒ a SURVEYOR-priced invoice in the SAME configuration mints nothing', async () => {
+  // THE ALLOWANCE TRAP, CLOSED IN CODE. Before the table this configuration
+  // reached the fail-open arm and minted the Cartographer 30 on a Surveyor
+  // invoice — the trap ODQ §470 named. The Surveyor row exists whenever its
+  // price id is configured, so the plan is positively identified and its dark
+  // allowance (0) mints nothing, whatever STRIPE_PRICE_PREMIUM is.
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  Deno.env.delete('STRIPE_PRICE_PREMIUM');
+  try {
+    const stub = makeStub('track', { profile: { id: 'us', is_founder: false, stripe_subscription_id: 'sub_s', tier: 'free' } });
+    const body = allowanceInvoice('in_surv_no_env', 'price_surveyor', 'cus_s', 'sub_s');
+    const errors = await captureErrorLines(async () => {
+      const res = await handleStripeWebhook(
+        req(body, { 'stripe-signature': await sign(body, SECRET) }),
+        { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+      );
+      assertEquals(res.status, 200);
+    });
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), false);
+    // A KNOWN plan with a dark allowance is not an unrecognised invoice: no alarm.
+    assertEquals(errors.some((line) => line.includes('monthly_allowance_unknown_plan')), false);
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+scopedEnv.test('NO env at all ⇒ the legacy 30 still mints, under cartographer_monthly', async () => {
+  // Arm (iv) with neither price id configured — the local/dev and pre-cutover
+  // shape, and the one the :513 pin has always covered. Unchanged by the table.
+  const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+  const body = allowanceInvoice('in_no_env', 'price_anything');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+  );
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance');
+  assertEquals(Boolean(grant), true);
+  const args = grant!.args as { amount: number; metadata: Record<string, unknown> };
+  assertEquals(args.amount, 30);
+  assertEquals(args.metadata.plan, 'cartographer_monthly');
+});
+
+scopedEnv.test('the Cartographer grant records its plan in metadata (PREMIUM configured)', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  try {
+    const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+    const body = allowanceInvoice('in_prem_plan', 'price_premium');
+    const res = await handleStripeWebhook(
+      req(body, { 'stripe-signature': await sign(body, SECRET) }),
+      { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+    );
+    assertEquals(res.status, 200);
+    const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance');
+    const args = grant!.args as { amount: number; source: string; metadata: Record<string, unknown> };
+    assertEquals(args.amount, 30);
+    assertEquals(args.source, 'monthly_allowance');
+    assertEquals(args.metadata.plan, 'cartographer_monthly');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+  }
+});
+
 scopedEnv.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the Cartographer downgrade', async () => {
   const stub = makeStub('track', { rpcData: { revoke_surveyor_entitlement_by_subscription: true } });
   const body = JSON.stringify({
