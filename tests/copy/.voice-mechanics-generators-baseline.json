@@ -1,0 +1,34 @@
+{
+ "src/generators/aiLayer.js": {
+  "em": 15,
+  "bang": 0
+ },
+ "src/generators/crossSettlementConflicts.js": {
+  "em": 11,
+  "bang": 0
+ },
+ "src/generators/generateSettlementPipeline.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/generators/narrative/settlementOriginProse.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/generators/pipeline.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/generators/power/settlementNarrative.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/generators/safetyProfile.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/generators/steps/resolveStress.js": {
+  "em": 1,
+  "bang": 0
+ }
+}
