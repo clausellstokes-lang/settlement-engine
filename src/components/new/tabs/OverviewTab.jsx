@@ -295,8 +295,23 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 // DS-STR-1, per banner. The desk keys on v.type — the stable machine
                 // identity — never on the label, because two of the fifteen labels differ
                 // from their pool key and a label route would darken them silently.
+                //
+                // ⛔ AN EMPTY DESK SEED MUST STAY EMPTY THROUGH THE JOIN (the promise's own
+                // degenerate case). `deskSeed` is written `String(r?._seed ?? r?.id ?? '')`,
+                // so it ADMITS the empty string; a bare `${deskSeed}::${v.type}` then hands
+                // the kernel `"::famine"`, which is TRUTHY, so `drawVariant`'s seedless line
+                // (`if (!seed) return eligible[0]`, kernel law 4 — canonical-at-zero) never
+                // runs and the banner is drawn by a hash of a literal. Measured on the shipped
+                // corpus: 26 of the 30 type x audience cells draw a vid other than the
+                // canonical 1 that way. The guard is the estate's own spelling of this —
+                // `marketPrices.js` crierLineFor and `settlementRumors.js` both write
+                // `seed ? hash(`${seed}::${tag}`) : pool[0]` for exactly this reason.
+                // ⚠ NO READ MOVES TODAY, and that is measured rather than assumed: every
+                // production path stamps an id (`normalizeSettlement` mints one from `_seed`
+                // or from content), so `deskSeed` is non-empty even on a gallery import, whose
+                // `_seed` IS nulled. This closes the trap, it does not move the page.
                 const drawn = publicDossier ? null : drawnAtMount(CRISIS_MOUNT, crisisBannerRung(
-                  r, v, { seed: `${deskSeed}::${v.type}`, audience: deskAudience },
+                  r, v, { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience },
                 ));
                 return drawn?.sentence ? (
                   <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
