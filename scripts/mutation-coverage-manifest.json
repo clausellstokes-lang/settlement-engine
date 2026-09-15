@@ -134,6 +134,11 @@
       "kind": "rationale",
       "ref": "observed-shape-schema3-controls-2026-08-09"
     },
+    "tests/lint/ledgerCitationIntegrity.test.js": {
+      "kind": "rationale",
+      "rationale": "THE LEDGER-CITATION RATCHET (LONG TAIL #42 car 2; ODQ §920/§921). Its catching power is EXECUTED IN THE TEST BODY rather than claimed, which is what makes a planted sweep regression redundant here: SIX of its ten arms ARE the planted controls, each driving the walker over an in-memory corpus built for the purpose and asserting it CONVICTS -- a citation with no opener and no alias; the same number acquitting once its opener exists; an alias whose proof string has rotted; a combined-header alias whose target is not an opener; an alias for a number that has gained a real opener; and a forward reference above the high-water mark that must NOT be ratcheted. The two LIVE arms were additionally proved non-vacuous by baseline mutation, MEASURED 2026-09-14 by execution: dropping 683 from tests/lint/.ledger-citation-baseline.json reds TWO arms with the sites quoted (the only-shrinks arm and the completeness arm), and adding a phantom 500 reds the cleared-entry arm with 'delete the entry'; both mutations restored and the file returns 10/10. A sweep plant would exercise the same predicate those controls already drive, over a corpus the sweep cannot construct -- the subject is a git ref's docs tree, not the working tree.",
+      "kindNote": "Add the standing sweep plant if and when mutation-sweep.sh gains a way to stage an alternate docs corpus at a git ref; until then the in-body controls are the stronger proof because they drive the real resolution path."
+    },
     "tests/lint/legacyReaderShapeScan.test.js": {
       "kind": "rationale",
       "ref": "observed-shape-schema3-controls-2026-08-09"
