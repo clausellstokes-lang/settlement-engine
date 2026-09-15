@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "cea20ddb30d9359ec72f579ccd87dd171758737e",
-  "measuredBy": "REWRITE car 8a-13 (Opus 5 — Fable-unvalidated)",
-  "date": "2026-09-09",
-  "note": "two new files land and only one is a TEST file: tests/lint/proseDrawnAnchors.walker.test.js (6 titles under 1 describe), while tests/helpers/drawnProse.js is a pure helper and is uncredited by construction. The four converted suites gained no titles and lost none — the car replaced literal anchors with computed ones inside existing arms.",
-  "files": 2563,
-  "parked": 375,
-  "credited": 2188,
-  "titles": 24169,
-  "suiteTitles": 6452
+  "measuredAtSha": "ca1badc268fdf6c5c36e557ca089f3ef1419126d",
+  "measuredBy": "LT36-security (Opus 5 — Fable-unvalidated)",
+  "date": "2026-09-15",
+  "note": "LT36 cars 2-8. THREE new test FILES (files 2563->2566): tests/security/profileRpcs.pglite.test.js and tests/security/galleryChronicleProjection.pglite.test.js are both PARKED, because their arms live under describe.runIf(present) and the walker cannot resolve a runIf title statically — so parked moves 375->377 and they contribute ZERO titles, exactly as the 106 existing *.pglite.test.js suites do; tests/scripts/reviewFindingsTriage.test.js is CREDITED (2188->2189) and carries 13. The titles delta 24169->24208 (+39) is therefore 13 from that file plus 26 added to the existing tests/security/edgeLogRedaction.test.js (the PII-value guard arm, the maskIp //24 arm, the bot-rejection arm and the baseline ratchet). The two demoted contract suites (profile_security, gallery_privacy) gained SECONDARY GUARD pointer comments and no titles. No file left the corpus.",
+  "files": 2566,
+  "parked": 377,
+  "credited": 2189,
+  "titles": 24208,
+  "suiteTitles": 6460
 }
