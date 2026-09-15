@@ -3,10 +3,6 @@
   "em": 15,
   "bang": 0
  },
- "src/generators/crossSettlementConflicts.js": {
-  "em": 11,
-  "bang": 0
- },
  "src/generators/generateSettlementPipeline.js": {
   "em": 3,
   "bang": 0

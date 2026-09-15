@@ -81,6 +81,15 @@
  *      strings pass by the named allowlist, leaving 39 over 8 files as Tier 5's first
  *      freeze. Re-measure by running this file — every number above is one it computes.
  *
+ *   ⭐ AND THE FIRST SHRINK, LT41b car 4 (2026-09-15): 39 over 8 files → 28 over 7. The
+ *      ELEVEN prose dashes in `src/generators/crossSettlementConflicts.js` were RECAST
+ *      without the dash by the chair's own authored sentences, on the owner's delegated
+ *      word ("I leave the rulings to you", 2026-09-15), so that file's row leaves the
+ *      baseline entirely. The classification figures above are NOT rewritten: they record
+ *      what the 2026-09-14 parse measured at the first freeze, and 16 prose dashes is what
+ *      it found. FIVE of that sixteen remain, all in narrative/settlementOriginProse.js,
+ *      and they are RULED LAWFUL rather than owed (see the tier block below).
+ *
  * ⭐ THE SHIFT RECORD (VOICE-1b, 2026-08-31; the full entry lives with this instrument's
  * banked rows in scripts/.test-ratchet-baseline.json). TWO trains landed the generated
  * dossier corpora on 2026-08-03, not one: P-1 `a277f53d3` (six state-prose desk leaves,
@@ -450,15 +459,27 @@ if (UPDATE) {
 // the 16 prose dashes — is FROZEN AS DECLARED DEBT in the baseline below: 39 em
 // dashes across 8 files. The tier does NOT cut them.
 //
-// ⛔ THE 16 PROSE DASHES ARE ENROLLED AS SHRINK-ONLY DEBT, NOT CURED. They are
+// ⛔ THE 16 PROSE DASHES WERE ENROLLED AS SHRINK-ONLY DEBT AT THE FIRST FREEZE:
 // 11 in crossSettlementConflicts.js and 5 in narrative/settlementOriginProse.js
-// (16 dashes over 15 sentences — :136 carries two). Cutting them is
-// OUTPUT-MOVING on a same-seed surface and is the owner's call, which is why
-// this tier enrols them instead: no NEW one can appear, and these can only
-// fall. Five of the sixteen are additionally ruled LAWFUL apposition by the
-// corpus annex's own ratified R-DST-W4-f, and two of those five are transcribed
-// byte-for-byte into the canonical-at-zero pin at
-// tests/generators/settlementOriginProse.test.js:62.
+// (16 dashes over 15 sentences — :136 carries two). Cutting them was
+// OUTPUT-MOVING on a same-seed surface and therefore the owner's call, which is
+// why the tier enrolled them rather than cutting them: no NEW one could appear,
+// and these could only fall.
+//
+// ⭐ THE OWNER GAVE THE CALL TO THE CHAIR on 2026-09-15 ("I leave the rulings to
+// you") and the chair ruled the two halves DIFFERENTLY, which is why the debt
+// falls by eleven and not by sixteen:
+//   • THE ELEVEN in crossSettlementConflicts.js are CURED (LT41b car 4). They
+//     are unowned reader prose — no card, no writer seat, no refuter, and no test
+//     pinned one by text — so the dash is a plain lexical tell with nothing
+//     holding it up. Each sentence was RECAST by the chair under the CLAIM
+//     FREEZE (the words move, the claim does not) and every recast keeps its
+//     first forty characters byte-identical, because RelationshipsTab.jsx:82
+//     dedupes a persisted row against a live one on `description.slice(0, 40)`.
+//     Declared same-seed text shift under §764.3; that file's row is gone from
+//     the baseline.
+//   • THE FIVE in narrative/settlementOriginProse.js STAY, and they are no
+//     longer "debt" — see the RULED-LAWFUL note on that file's baseline row.
 const GENERATORS_BASELINE_PATH = join(ROOT, 'tests/copy/.voice-mechanics-generators-baseline.json');
 
 const GENERATOR_FILES = walkJs(join(ROOT, 'src/generators'))
@@ -683,7 +704,11 @@ describe('E2/Tier-5 voiceMechanics — src/generators string-literal ratchet (sh
     // measures zero today — the "~7 real bangs" a 2026-09-03 parser sweep
     // reported over the unscanned directories are NOT in src/generators.
     // MONOTONE DOWN. Raising either is an owner act, not a lane's.
-    const EM_BUDGET_GENERATORS = 39;
+    // ⭐ BANKED DOWN 39 → 28 by LT41b car 4, which cut the eleven
+    // crossSettlementConflicts.js prose dashes: the budget follows the measured
+    // baseline down so the win cannot be silently re-spent. A ceiling that keeps
+    // the headroom a cure just bought is a ceiling that never cured anything.
+    const EM_BUDGET_GENERATORS = 28;
     const BANG_BUDGET_GENERATORS = 0;
     const totals = Object.values(currentGenerators).reduce(
       (t, c) => ({ em: t.em + c.em, bang: t.bang + c.bang }),
