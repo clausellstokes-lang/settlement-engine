@@ -81,8 +81,77 @@ describe('chronicleReadModel — delta-first (§3)', () => {
     expect(d.population.fell).toContain('B');
     expect(d.population.net).toBe(90);
     expect(d.tiers).toEqual([{ id: 'A', from: 2, to: 3 }]);
-    expect(d.relationships).toEqual([{ key: 'A::C', kind: 'war-declared' }]);
+    // LT39 car 1 — the row carries the PARTIES and the from→to labels. This
+    // outcome recorded its pair ONLY in the payload key, so it names nobody: the
+    // key is not a source of settlement ids (see the negative control below).
+    expect(d.relationships).toEqual([{
+      key: 'A::C', kind: 'war-declared', settlementIds: [], fromType: null, toType: 'hostile',
+    }]);
     expect(d.hasContent).toBe(true);
+  });
+
+  it('LT39 — a row carries fromType/toType when the payload recorded both', () => {
+    const record = {
+      tick: 20,
+      selectedOutcomes: [{
+        id: 'o1', headline: 'the pact broke', targetSaveId: 'Ash', settlementIds: ['Ash', 'Calder'],
+        proposalPayload: { kind: 'relationship_label_change', relationshipKey: 'edge-77', fromType: 'allied', toType: 'hostile' },
+      }],
+      impactDigest: [],
+    };
+    expect(deltaFirst(nodesFromRecord(record)).relationships).toEqual([{
+      key: 'edge-77', kind: 'war-declared', settlementIds: ['Ash', 'Calder'], fromType: 'allied', toType: 'hostile',
+    }]);
+  });
+
+  it('LT39 — a keyed row with NO recorded settlement id names nobody rather than inventing one', () => {
+    // ⛔ THE NEGATIVE CONTROL FOR THE KEY-PARSING TRAP. `relationshipKeyFromEdge`
+    // returns `edge.id` when the edge carries one, so 'rel.opaque.7' is NOT a
+    // parseable pair. A reader that split it would name two settlements that do
+    // not exist; the row must carry [] instead.
+    const record = {
+      tick: 9,
+      selectedOutcomes: [{
+        id: 'o1', headline: 'a shift', relationshipKey: 'rel.opaque.7', relationshipPatch: { trust: 0.1 },
+      }],
+      impactDigest: [],
+    };
+    const [row] = deltaFirst(nodesFromRecord(record)).relationships;
+    expect(row).toEqual({ key: 'rel.opaque.7', kind: 'relationship-change', settlementIds: [], fromType: null, toType: null });
+  });
+
+  it('LT39 — an edge-id key is NOT laundered into parties through the graph key set', () => {
+    // ⛔ THE SHARPEST FORM OF THE TRAP, AND THE REASON THE PARTIES ARE NOT READ OFF
+    // `node.settlementIds`. chronicleGraph.entityKeysOf SPLITS a relationship key on
+    // /[:|>-]+/ to widen inferred linkage, so the key 'edge-77' enters the node's key
+    // set as the tokens 'edge' and '77'. Correct for linkage; catastrophic for prose,
+    // because a naming surface would print "edge and 77" as two settlements.
+    const record = {
+      tick: 5,
+      selectedOutcomes: [{ id: 'o1', headline: 'a shift', relationshipKey: 'edge-77', relationshipPatch: { trust: 0.1 } }],
+      impactDigest: [],
+    };
+    const [node] = nodesFromRecord(record);
+    expect(node.settlementIds).toContain('edge'); // the graph really does launder it
+    expect(node.settlementIds).toContain('77');
+    const [row] = deltaFirst(nodesFromRecord(record)).relationships;
+    expect(row.settlementIds).toEqual([]); // …and the delta row refuses it
+  });
+
+  it('LT39 — the parties are deterministic and deduped across input reordering', () => {
+    const outcome = {
+      id: 'o1', headline: 'x', targetSaveId: 'Calder',
+      settlementIds: ['Ash', 'Calder'], affectedSettlementIds: ['Calder', 'Ash'],
+      proposalPayload: { kind: 'relationship_label_change', relationshipKey: 'k1', toType: 'allied' },
+    };
+    const a = deltaFirst(nodesFromRecord({ tick: 1, selectedOutcomes: [outcome], impactDigest: [] }));
+    const b = deltaFirst(nodesFromRecord({
+      tick: 1,
+      selectedOutcomes: [{ ...outcome, settlementIds: ['Calder', 'Ash'], affectedSettlementIds: ['Ash', 'Calder'] }],
+      impactDigest: [],
+    }));
+    expect(a.relationships[0].settlementIds).toEqual(['Ash', 'Calder']);
+    expect(b.relationships).toEqual(a.relationships);
   });
 });
 

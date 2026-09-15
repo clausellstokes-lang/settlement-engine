@@ -44,7 +44,7 @@ import {
  * @typedef {Object} Delta  the delta-first summary (§3)
  * @property {{ rose: string[], fell: string[], net: number }} population
  * @property {Array<{ id: string, from: unknown, to: unknown }>} tiers
- * @property {Array<{ key: string, kind: string }>} relationships
+ * @property {Array<{ key: string, kind: string, settlementIds: string[], fromType: string|null, toType: string|null }>} relationships
  * @property {boolean} hasContent
  */
 
@@ -193,10 +193,34 @@ export function chapterSeasons(prevWeek, week) {
 }
 
 /**
+ * THE PARTIES a relationship delta row names — the node's `namedSettlementIds`
+ * (chronicleGraph's ONE reader of the id-bearing fields), narrowed by the
+ * ReceiptRow idiom (a compound value bearing `:` is a key, not a settlement id).
+ *
+ * ⛔ NEVER `node.settlementIds`, AND NEVER THE RELATIONSHIP KEY. `node.settlementIds`
+ * is `entityKeysOf`, which SPLITS the key on /[:|>-]+/ on purpose to widen the
+ * graph's inferred linkage; correct for linkage and wrong for prose, because
+ * `relationshipKeyFromEdge` returns `edge.id` whenever the edge carries one, so
+ * `edge-77` launders into the tokens `edge` and `77` and a naming surface would
+ * print two settlements that do not exist. A row whose outcome recorded no
+ * settlement id yields [] — the surface then names NOBODY rather than inventing
+ * a party.
+ * @param {ChronicleNode} n
+ * @returns {string[]}
+ */
+function partiesOf(n) {
+  return (n.namedSettlementIds || []).filter((id) => !String(id).includes(':'));
+}
+
+/**
  * DELTA-FIRST (§3): what is DIFFERENT after the advance, aggregated from the
  * outcomes' own carried deltas. population net per settlement + totals, tier
  * changes, and relationship changes (wars/peaces/alliances started/ended). Pure,
  * deterministic (sorted).
+ *
+ * A relationship row carries the PARTIES and the from→to labels so the surface can
+ * say "Ashford and Calder: allied → hostile" instead of a partyless "war declared"
+ * (LT39 car 1 — the GM could not tell WHO went to war).
  * @param {ChronicleNode[]} nodes  nodesFromRecord output
  * @returns {Delta}
  */
@@ -205,7 +229,7 @@ export function deltaFirst(nodes) {
   const pop = new Map();
   /** @type {Array<{ id: string, from: unknown, to: unknown }>} */
   const tiers = [];
-  /** @type {Array<{ key: string, kind: string }>} */
+  /** @type {Array<{ key: string, kind: string, settlementIds: string[], fromType: string|null, toType: string|null }>} */
   const rels = [];
   for (const n of nodes) {
     const o = n.raw || {};
@@ -226,9 +250,16 @@ export function deltaFirst(nodes) {
         : /ally|alliance|vassal/i.test(to) ? 'alliance-formed'
         : to ? 'peace-or-shift'
         : 'relationship-change';
-      rels.push({ key: String(pay.relationshipKey || o.relationshipKey), kind });
+      const key = String(pay.relationshipKey || o.relationshipKey);
+      rels.push({
+        key, kind,
+        settlementIds: partiesOf(n),
+        fromType: pay.fromType ? String(pay.fromType) : null,
+        toType: to || null,
+      });
     } else if (o.relationshipPatch && o.relationshipKey) {
-      rels.push({ key: String(o.relationshipKey), kind: 'relationship-change' });
+      const key = String(o.relationshipKey);
+      rels.push({ key, kind: 'relationship-change', settlementIds: partiesOf(n), fromType: null, toType: null });
     }
   }
   let net = 0;

@@ -100,8 +100,54 @@ describe('AdvanceReport — populated report', () => {
     );
 
     expect(screen.getByText('Aldermoor: Size Large town → City')).toBeTruthy();
-    expect(screen.getByText('war declared')).toBeTruthy();
+    // LT39 car 1 — A DELIBERATE, RECORDED CHANGE OF OUTPUT. This chip read the
+    // bare 'war declared' until the read model carried the parties; the GM could
+    // see that a war began and not who fought it. This outcome records only ONE
+    // settlement id (targetSaveId 'A'), so exactly one party is named — the key
+    // 'A:B' is never split into parties (see chronicleReadModel's negative control).
+    expect(screen.getByText('Aldermoor: war declared')).toBeTruthy();
     expect(container.textContent).not.toMatch(/\btier\b|large_town|war-declared/i);
+  });
+
+  test('LT39 — the relationship chip names both parties and the from→to shift', () => {
+    const campaign2 = {
+      id: 'c-lt39', settlementIds: ['A', 'B'],
+      worldState: {
+        pulseHistory: [{
+          tick: 1,
+          selectedOutcomes: [{
+            id: 'pact-broken', headline: 'The pact broke', targetSaveId: 'A', settlementIds: ['A', 'B'],
+            proposalPayload: { kind: 'relationship_label_change', relationshipKey: 'edge-77', fromType: 'allied', toType: 'hostile' },
+          }],
+          impactDigest: [],
+        }],
+      },
+    };
+    const { container } = render(
+      <AdvanceReport campaign={campaign2} nameFor={(id) => (id === 'A' ? 'Aldermoor' : 'Briarwatch')} />,
+    );
+    expect(screen.getByText('Aldermoor and Briarwatch: allied → hostile')).toBeTruthy();
+    // anchored: the getByText above proves this exact chip rendered into this container, so the absence below is measured against a live, non-empty render rather than a collection that drifted away.
+    expect(container.textContent).not.toMatch(/edge-77|war-declared/);
+  });
+
+  test('LT39 — an outcome with no recorded settlement id names nobody (no invented party)', () => {
+    const campaign3 = {
+      id: 'c-lt39b', settlementIds: [],
+      worldState: {
+        pulseHistory: [{
+          tick: 1,
+          selectedOutcomes: [{
+            id: 'opaque', headline: 'Relations shifted', relationshipKey: 'rel.opaque.7', relationshipPatch: { trust: 0.2 },
+          }],
+          impactDigest: [],
+        }],
+      },
+    };
+    const { container } = render(<AdvanceReport campaign={campaign3} nameFor={(id) => `Town ${id}`} />);
+    expect(screen.getByText('relationship change')).toBeTruthy();
+    // anchored: the getByText above proves the partyless chip rendered, so the absence below distinguishes "no party invented" from "nothing rendered at all".
+    expect(container.textContent).not.toMatch(/rel\.opaque|Town rel/);
   });
 });
 
