@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 18:08:14 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 18:15:39 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -114,7 +114,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
 - **wf_6a1dc505-cea** (mtime 09-15 18:04): agent calls 1 (1 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
-    - `acf75dfb5` ? · IN FLIGHT · transcript 09-15 18:08 847 KB · 37 tool calls · files: odq-3b506360f.md · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `acf75dfb5` ? · IN FLIGHT · transcript 09-15 18:14 1239 KB · 74 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_a95227c9-cf1** (mtime 09-15 18:02): agent calls 6 (6 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 6 — mirror `_progress/wf_a95227c9-cf1/`
     - `a5d08fa55` ? · IN FLIGHT · transcript 09-15 18:03 423 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
     - `a2e931bc4` ? · IN FLIGHT · transcript 09-15 18:03 490 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
@@ -181,4 +181,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 260.48 212.77 130.54
+load: 153.58 201.92 166.52
