@@ -1,0 +1,15 @@
+LEDGER_TIP_BEFORE=a803dee7a31edd0f57634a28bed09f416d58c8ad
+  seal OK · product OK at a5876c0ea
+--- C0 scan (must be 0 each) ---
+  OWNER_DECISION_QUEUE.md: 0
+  FABLE_RETROVALIDATION_QUEUE.md: 0
+  HANDOFF_CURRENT.md: 0
+  REWRITE_RECUT_PROGRAM_PLAN.md: 0
+  OWNER_SITTING_2026-09-15.md: 0
+  ledger and queue are PURE APPENDS
+  recut plan: +1 -1 (one row amended in place, append-only inside the row)
+  handoff: +3 -1
+  (pre-existing tokens like __LANEROWS__ __ENC4_PROOFS__ __FILL__ in HEAD's docs are not ours and are left as they are)
+LEDGER COMMIT: 3b506360f344b9ec3ea384da21f046bfd5d298c3
+COMMIT_OK
+⛔ the real index changed — read index-before/after
