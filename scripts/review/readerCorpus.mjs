@@ -844,6 +844,125 @@ const extensionFor = (format) => ({ json: 'json', jsonl: 'jsonl', text: 'txt', p
  * paths win.
  * @returns {Promise<any[]>}
  */
+/**
+ * ⛔ THE SECOND PIN THAT MAKES THE DOSSIER A BIT CLAIM. The lockfile's @react-pdf/pdfkit (5.1.1)
+ * salts every embedded font subset with SIX RANDOM UPPERCASE LETTERS drawn from `Math.random()`
+ * (`/FontName /QHKWUQ+Nunito-Regular`), and the salt reaches the font descriptor, the base-font
+ * names, the subset's own name table and the ToUnicode map, so two renders of one world differ
+ * in three compressed font streams per font and nowhere else. Measured 2026-09-16: on the CI
+ * runner all four dossiers, then on a lockfile-faithful scratch worktree — equal byte lengths,
+ * first difference at the tag, then in objects 193/200/204 (the FontFile2 and two small
+ * streams). No local pair had ever drifted because the box's drifted node_modules carries
+ * pdfkit 0.20.1, which derives the tag from the font's id instead.
+ *
+ * `Math.random` is the library's only entropy on this path (pdfkit's CreationDate is pinned by
+ * READER_NOW above, and the /ID pair derives from it), so the corpus renderer swaps it for a
+ * seeded generator for exactly the awaited render and restores it after. The seed is the
+ * save's id, so the same document always draws the same salts; the product's own PDF export is
+ * untouched. Nothing else runs in this process between the swap and the restore: the renderer
+ * awaits the one render, and vitest runs a file's tests in sequence in their own worker.
+ * @template T
+ * @param {string} seed
+ * @param {() => Promise<T>} render
+ * @returns {Promise<T>}
+ */
+async function withPinnedEntropy(seed, render) {
+  const original = Math.random;
+  let state = 0x9e3779b9;
+  for (const ch of String(seed)) state = (Math.imul(state ^ ch.charCodeAt(0), 0x01000193) >>> 0) || 1;
+  // mulberry32: small, well-mixed, and enough for six letters per font.
+  Math.random = () => {
+    state = (state + 0x6d2b79f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+  try {
+    return await render();
+  } finally {
+    Math.random = original;
+  }
+}
+
+/**
+ * ⛔ THE THIRD PIN. With the clock and the entropy pinned, two renders of one world still
+ * differed on the lockfile's @react-pdf/pdfkit (5.1.1): every object's bytes were identical,
+ * but the FONT objects were written in a different ORDER, because that pdfkit finalises each
+ * embedded font through a stream (`subset.encodeStream()` piped into the font file) and emits
+ * the objects as the stream events land, so the order follows I/O timing. Only the cross-
+ * reference table then differs (it records each object's offset). Measured 2026-09-16 on a
+ * lockfile-faithful worktree: 220 objects, one body differing (the xref), the order diverging
+ * from object 193 on. The box's pdfkit 0.20.1 encodes subsets synchronously and never showed it.
+ *
+ * A PDF's objects are position-independent apart from the cross-reference table, so the
+ * corpus renderer re-emits them in ascending object number and rebuilds the table: the header,
+ * every object body and the trailer dictionary are copied byte for byte; only the order, the
+ * xref offsets and `startxref` change. The result has the same length and the same multiset of
+ * objects, asserted below. The product's own export is untouched — this is the corpus
+ * renderer's pin, like READER_NOW and withPinnedEntropy above it.
+ * @param {Buffer} body
+ * @returns {Buffer}
+ */
+export function canonicalObjectOrder(body) {
+  const text = body.toString('latin1');
+  const startxrefAt = text.lastIndexOf('startxref');
+  if (startxrefAt < 0) throw new Error('canonicalObjectOrder: no startxref');
+  const xrefAt = Number(text.slice(startxrefAt + 'startxref'.length).match(/\d+/)[0]);
+  if (text.slice(xrefAt, xrefAt + 4) !== 'xref') throw new Error('canonicalObjectOrder: startxref does not point at xref');
+  const trailerAt = text.indexOf('trailer', xrefAt);
+  const trailerDict = text.slice(trailerAt + 'trailer'.length, startxrefAt).replace(/^\s+|\s+$/g, '');
+  // The table pdfkit writes is one section, `0 N` then N twenty-byte entries.
+  const table = text.slice(xrefAt, trailerAt);
+  const head = table.match(/^xref\r?\n(\d+) (\d+)\r?\n/);
+  if (!head || Number(head[1]) !== 0) throw new Error('canonicalObjectOrder: unexpected xref section');
+  const count = Number(head[2]);
+  const entries = table.slice(head[0].length).match(/\d{10} \d{5} [nf]/g) || [];
+  if (entries.length !== count) throw new Error(`canonicalObjectOrder: ${entries.length} xref entries for ${count} objects`);
+  const offsets = entries.map((e) => ({ at: Number(e.slice(0, 10)), inUse: e.endsWith('n') }));
+  const objects = [];
+  for (let num = 1; num < count; num += 1) {
+    const { at, inUse } = offsets[num];
+    if (!inUse) continue;
+    const header = text.slice(at, at + 40).match(/^(\d+) 0 obj\r?\n/);
+    if (!header || Number(header[1]) !== num) throw new Error(`canonicalObjectOrder: object ${num} is not at its xref offset`);
+    let end;
+    const streamAt = text.indexOf('stream', at);
+    const endobjAt = text.indexOf('endobj', at);
+    if (streamAt >= 0 && streamAt < endobjAt) {
+      const dict = text.slice(at, streamAt);
+      const length = dict.match(/\/Length (\d+)/);
+      if (!length) throw new Error(`canonicalObjectOrder: object ${num} has a stream without a direct /Length`);
+      const dataAt = streamAt + 'stream'.length + (text[streamAt + 6] === '\r' ? 2 : 1);
+      end = text.indexOf('endobj', dataAt + Number(length[1]));
+    } else {
+      end = endobjAt;
+    }
+    if (end < 0) throw new Error(`canonicalObjectOrder: object ${num} has no endobj`);
+    end += 'endobj'.length;
+    while (text[end] === '\r' || text[end] === '\n') end += 1;
+    objects.push({ num, bytes: text.slice(at, end) });
+  }
+  const firstObjectAt = Math.min(...objects.map((o) => offsets[o.num].at));
+  const header = text.slice(0, firstObjectAt);
+  objects.sort((x, y) => x.num - y.num);
+  let out = header;
+  const newOffsets = new Array(count).fill(null);
+  for (const o of objects) { newOffsets[o.num] = out.length; out += o.bytes; }
+  const newXrefAt = out.length;
+  const pad = (n, width) => String(n).padStart(width, '0');
+  out += `xref\n0 ${count}\n0000000000 65535 f \n`;
+  for (let num = 1; num < count; num += 1) {
+    out += newOffsets[num] == null ? `${pad(offsets[num].at, 10)} 00000 f \n` : `${pad(newOffsets[num], 10)} 00000 n \n`;
+  }
+  out += `trailer\n${trailerDict}\nstartxref\n${newXrefAt}\n%%EOF\n`;
+  const result = Buffer.from(out, 'latin1');
+  if (result.length !== body.length) {
+    throw new Error(`canonicalObjectOrder: length moved ${body.length} -> ${result.length}`);
+  }
+  return result;
+}
+
 async function renderDossierPdfs({ saves, campaign, P }) {
   const out = [];
   /** @type {any} */
@@ -868,7 +987,7 @@ async function renderDossierPdfs({ saves, campaign, P }) {
     const normalized = P.normalize.normalizeSettlement(save.settlement);
     const derived = P.systemState.deriveSystemState(normalized);
     const doc = await guardedAsync(`dossier-${save.id}.pdf`, async () => {
-      const buffer = await pdf.renderToBuffer(react.default.createElement(SettlementPDF, {
+      const buffer = await withPinnedEntropy(save.id, () => pdf.renderToBuffer(react.default.createElement(SettlementPDF, {
         settlement: normalized,
         systemState: derived,
         eventLog: save.campaignState?.eventLog ?? [],
@@ -884,14 +1003,15 @@ async function renderDossierPdfs({ saves, campaign, P }) {
         // `.pdf` hash could never pass. The prop already exists and its own docblock names it
         // the document's CreationDate, so the pin costs zero `src/` bytes.
         creationDate: READER_NOW,
-      }));
-      const body = Buffer.from(buffer);
+      })));
+      const body = canonicalObjectOrder(Buffer.from(buffer));
       return { format: 'pdf', body, pages: countPdfPages(body) };
     });
     out.push(doc);
   }
   return out;
 }
+
 
 let fontsRegistered = false;
 /** @param {any} Font */
