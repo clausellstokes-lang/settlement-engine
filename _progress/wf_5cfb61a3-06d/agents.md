@@ -1,8 +1,8 @@
-# wf_5cfb61a3-06d — per-agent progress, 2026-09-15 22:34:20
+# wf_5cfb61a3-06d — per-agent progress, 2026-09-15 22:39:53
     - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
     - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
     - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
     - `a395b300a` ? · DONE · transcript 09-15 22:20 1261 KB · 76 tool calls · files: skeptic.md · result: {"reader": "skeptic \u2014 WF (faith), waves WF-0 \u2026 WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d
     - `a2c7b8cec` ? · DONE · transcript 09-15 22:28 794 KB · 13 tool calls · files: HISTORY-WF-2026-09-15.md · result: {"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-WF-2026-09-15.md"
-    - `a09855848` ? · IN FLIGHT · transcript 09-15 22:34 756 KB · 47 tool calls · files: odq_heads.txt · last: Bash K=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a2c342f3f` ? · IN FLIGHT · transcript 09-15 22:33 731 KB · 40 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `a09855848` ? · IN FLIGHT · transcript 09-15 22:39 1055 KB · 84 tool calls · files: odq_heads.txt · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `a2c342f3f` ? · IN FLIGHT · transcript 09-15 22:39 1060 KB · 80 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
