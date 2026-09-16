@@ -126,6 +126,14 @@ const chunksContaining = literal => readdirSync(ASSETS)
   .filter(file => file.endsWith('.js'))
   .filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(literal));
 
+// THE PER-TEST BUDGET for the three arms that walk the dist chunk graph or the src static closure.
+// Measured 2026-09-16 on the deploy worktree: 4.5 s / 3.2 s / 2.5 s alone (whole tests/build 12 s wall clock);
+// 21.9 s for the first arm when the box was loaded by a concurrent dev server + Playwright run, which
+// crossed the suite-wide testTimeout (20 000, vite.config.js) and reddened `npm run verify:dist` — the
+// same 20-second red CI's two-core runner showed on a5876c0ea (the step failed at 20 s). A slow arm gets
+// its own budget, never a bank (the estate's law, LT29/LT30): the walk is correct, only slow under load.
+const CLOSURE_ARM_BUDGET_MS = 120_000;
+
 describe('campaign runtime capsule source boundary', () => {
   test('first paint contains only entries and the bridge, never campaign bodies', () => {
     const closure = sourceStaticClosure('src/main.jsx');
@@ -195,7 +203,7 @@ describe('campaign runtime capsule source boundary', () => {
         .map(candidate => relative(ROOT, candidate).replace(/\\/g, '/'));
       expect(carriers).toEqual([module]);
     }
-  });
+  }, CLOSURE_ARM_BUDGET_MS);
 
   test('the static parser follows both export-star and named re-export edges', () => {
     expect(staticSpecifiers([
@@ -224,7 +232,7 @@ describe.runIf(REQUIRE_DIST && DIST_EXISTS)('built campaign runtime capsule boun
     expect(closure.filter(chunk => (
       readFileSync(join(ASSETS, chunk), 'utf8').includes(RUNTIME_SENTINEL)
     ))).toEqual([]);
-  });
+  }, CLOSURE_ARM_BUDGET_MS);
 
   test('the runtime fingerprint survives in a non-worker lazy chunk', () => {
     const carriers = chunksContaining(RUNTIME_SENTINEL);
@@ -248,5 +256,5 @@ describe.runIf(REQUIRE_DIST && DIST_EXISTS)('built campaign runtime capsule boun
       expect(runtimeClosure.has(carriers[0])).toBe(true);
       expect(entryClosure.has(carriers[0])).toBe(false);
     }
-  });
+  }, CLOSURE_ARM_BUDGET_MS);
 });
