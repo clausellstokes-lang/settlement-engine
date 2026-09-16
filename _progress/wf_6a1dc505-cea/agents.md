@@ -1,4 +1,4 @@
-# wf_6a1dc505-cea — per-agent progress, 2026-09-15 21:55:51
+# wf_6a1dc505-cea — per-agent progress, 2026-09-15 22:01:19
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
@@ -14,4 +14,4 @@
     - `a82a93cae` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a7f6bde78` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a1d041898` ? · FAILED · transcript 09-15 19:25 161 KB · 0 tool calls
-    - `ae4986df2` ? · IN FLIGHT · transcript 09-15 21:53 1939 KB · 108 tool calls · files: brief-1-TR-TR-4.md, brief-2-TR-TR-5.md, brief-7-TR-TR-1-TR-3.md · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
+    - `ae4986df2` ? · IN FLIGHT · transcript 09-15 22:00 2109 KB · 111 tool calls · files: brief-2-TR-TR-5.md, brief-7-TR-TR-1-TR-3.md, brief-8-TR-TR-6.md, brief-55-TR-TR-2-TR-2b.md · last: Write /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
