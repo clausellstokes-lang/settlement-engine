@@ -1,4 +1,4 @@
-# wf_6a1dc505-cea — per-agent progress, 2026-09-15 22:50:55
+# wf_6a1dc505-cea — per-agent progress, 2026-09-15 22:56:26
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
@@ -18,4 +18,5 @@
     - `a8c0016e2` ? · DONE · transcript 09-15 22:21 1208 KB · 43 tool calls · result: {"summary": "Eight TR briefs read whole against the consist (laneCONSIST-932, tip 315080928), the TRADE history fold, PRICING \u00a7A.3/\u00a7A.4/\u00a7B/\u00a7
     - `ab128d0dc` ? · DONE · transcript 09-15 22:48 3159 KB · 186 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · result: Every correction is in place and the files have been stable for over a minute. The corrected family summary follows.  # FAMILY TR — CORRECTED SUMMARY (the Fable
     - `ab4af106e` ? · IN FLIGHT · transcript 09-15 22:49 346 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
-    - `a57a3432c` ? · IN FLIGHT · transcript 09-15 22:50 745 KB · 19 tool calls · last: Read /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/
+    - `a57a3432c` ? · IN FLIGHT · transcript 09-15 22:51 807 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+    - `abcc6f3e9` ? · IN FLIGHT · transcript 09-15 22:56 715 KB · 18 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
