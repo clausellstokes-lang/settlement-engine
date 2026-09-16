@@ -59,12 +59,22 @@
     "                   before the freeze, so a constant added or deleted convicts immediately.",
     "  ownerRow         the ODQ §-row where the owner signed this row's current bytes.",
     "  governance       present only where a surface's own header carries a seal STRONGER than",
-    "                   door traffic. Read it before ruling on that row."
+    "                   door traffic. Read it before ruling on that row.",
+    "",
+    "FROZEN 2026-09-16 (the genesis act; the owner: \"sign the golden\"). The paragraph above that begins \"THIS REGISTER IS UNFROZEN\" describes the state BEFORE this act and is kept as history; from this act every `sha256`, `rows` and `ownerRow` is a recorded value the walker binds, and a row moves only through the door with a signed record."
   ],
   "registerVersion": 1,
-  "frozenAt": null,
-  "frozenAtSha": null,
-  "genesis": null,
+  "frozenAt": "2026-09-16T13:55:10Z",
+  "frozenAtSha": "d22ceff01fe3d55c4d4ad0e4cd414dcdbdadb6b8",
+  "genesis": {
+    "signedRecord": "docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json",
+    "signedRecordSha256": "91e13857bf9c6b8b4b914b47e4ccf16157a5baeeca49bd1e955106d907a20cbd",
+    "ownerWords": "sign the golden, push them",
+    "ownerDate": "2026-09-16",
+    "odqRow": "§901",
+    "cutBy": "Fable 5.1 — validated (the chair, session f6ac0d98)",
+    "note": "THE FREEZE ACT. One surface moved (generator-golden-master, through the door); 49 surfaces frozen at their committed bytes by measurement. The six fixtureless *DormancyGolden suites stay on the unresolved roster: their ruling (a register row with a proofForm of their own, or a written exclusion) is owed at the first landing that touches them and is recorded here when cut."
+  },
   "inventory": {
     "measuredAtSha": "8b07ce45f179b583c6a152412a23777cb1a15a38",
     "measuredBy": "lane GOLDEN-BUILD (Opus 5) — TE-GOLDEN-1 machinery, pre-freeze",
@@ -169,12 +179,12 @@
       "suite": "tests/property/beliefAxesDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "200b2e79a9b4e5f3a715dfa0cd070e6d63b89314b329b6b75c63de043bcb8b9f",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "belief-map-golden",
@@ -182,12 +192,12 @@
       "suite": "tests/property/beliefMapGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "151171842ac5b4b5e585182f4ce32b0d81a7dc0669e8c89813ddc1e2c773ae9e",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "cartography-calibration-corpus",
@@ -195,12 +205,12 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "f2a5edae77a8202b93edd3a5b76f00e6475aed3f82d910641582596633fe80ae",
+      "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "chroniclers-letter-golden",
@@ -208,12 +218,12 @@
       "suite": "tests/property/chroniclersLetterGolden.test.js",
       "recordEnv": "UPDATE_LETTER_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "2009cf7f2e81f4e653e51544ce7124c8f50c4f43dcb7b887df339243c7e9c932",
+      "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "contested-goals-dormancy-golden",
@@ -221,12 +231,12 @@
       "suite": "tests/property/contestedGoalsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "0728b30f11c788a75f0397ceba8f2acd6127e1308f837465b328cef245587b3b",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "corruption-web-dormancy-golden",
@@ -234,12 +244,12 @@
       "suite": "tests/property/corruptionWebDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "fa351b5d2386375b42cc032865f4b38d24fa20aca5e5e271204ceebd55c696bc",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "demographics-lifecycle-golden",
@@ -247,12 +257,12 @@
       "suite": "tests/property/demographicsLifecycleGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "62329c24a314fc5ec5e1fd5cf9cef57c974f1a82cb2b1971a40121b9a3b69ee3",
+      "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "disposition-channels-dormancy-golden",
@@ -260,12 +270,12 @@
       "suite": "tests/property/dispositionChannelsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "cf3c11924d7827e868ea7edabbe55feb00bf347d323d27d879c5747e6cdd30d1",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "espionage-dormancy-fence",
@@ -278,12 +288,12 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": null,
+      "sha256": "fe8be28d04e44bf9edb385a70941663aec40a41e375dd0df044de720e0a11d37",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null,
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
     {
@@ -298,12 +308,12 @@
         "PRE_ES1_TICK_HASHES"
       ],
       "frozenConstants": null,
-      "sha256": null,
+      "sha256": "67aa679ef69db1ea8554f24b73affdd7b4cda8c0fe49171d05f35f150ec669ab",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null,
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Header seal: 'Re-record it only with a stated, legitimate cause under the estate's golden-shift discipline, never to get green.' Compatible with door traffic. Inventoried by lane GOLDEN's own constant sweep at the build base; independently discovered by lane T13's step-5 fence sweep. It is NOT in the charter's §1.1 table."
     },
     {
@@ -318,12 +328,12 @@
         "PRE_ESDA_DARK_TICK_HASHES"
       ],
       "frozenConstants": null,
-      "sha256": null,
+      "sha256": "26937295e3135fb356a092f717b60933f30d8256d2ca8fc1fc5e8cdc8a6f4f9b",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null,
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "OWNER STOP, NOT DOOR TRAFFIC. This suite's header reads, verbatim: '⛔ THIS NUMBER MOVING IS A STOP, NEVER A RE-RECORD — it is the owner's condition.' A register row is a re-recordable surface by construction, so enrolling this constant as ordinary door traffic would DOWNGRADE an owner STOP into a signed re-record. It is inventoried here so the freeze act cannot miss it; whether it is enrolled as door traffic, enrolled with a STOP flag the door honors, or excluded and left on its header seal is a GOVERNANCE RULING the freeze act must make explicitly."
     },
     {
@@ -332,12 +342,12 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "fb8d1a6e90d87f07146de12e847e018581926607c48d5c49d9fff5abd5ca0895",
+      "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
       "surface": "generosity-dormancy-golden",
@@ -345,12 +355,12 @@
       "suite": "tests/property/generosityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "9b57f25d3d6015d76dcc2ec9e46e70643c4f115b0d3f0b0daed32d8fc4e0321d",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "information-statecraft-dormancy-golden",
@@ -358,12 +368,12 @@
       "suite": "tests/property/informationStatecraftDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "8fe9ad93d1145d4e4b7b9c4df245262fe522feebbab7daf4c39815a1b692d7b0",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "intel-trade-dormancy-golden",
@@ -371,12 +381,12 @@
       "suite": "tests/property/intelTradeDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "978c88f8726b67fe448cb6b7bedae58f6325d40ed86ba9ef5343d32dad94a693",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "interior-golden",
@@ -384,12 +394,12 @@
       "suite": "tests/interior/interiorModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "858f019a61e67c23d7039adad698c2bc75ea55c7551bf35cb924adecfb594efe",
+      "rows": 48,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": "NO CAPTURE ARM EXISTS. interiorModel.test.js only READS this manifest; there is no writeFileSync and no env spelling anywhere in the suite, so this golden is re-recorded BY HAND under the SHIFT RECORD block in the suite's header. It is invisible to the env-pattern census AND to the tests/fixtures/*golden*.json glob (wrong directory), and is enrolled here solely because this row names its path. The door cannot migrate a capture arm that does not exist; the walker's byte arm is this surface's whole enforcement."
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. NO CAPTURE ARM EXISTS. interiorModel.test.js only READS this manifest; there is no writeFileSync and no env spelling anywhere in the suite, so this golden is re-recorded BY HAND under the SHIFT RECORD block in the suite's header. It is invisible to the env-pattern census AND to the tests/fixtures/*golden*.json glob (wrong directory), and is enrolled here solely because this row names its path. The door cannot migrate a capture arm that does not exist; the walker's byte arm is this surface's whole enforcement."
     },
     {
       "surface": "intervention-dormancy-golden",
@@ -397,12 +407,12 @@
       "suite": "tests/property/interventionDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "bf5b0513793904ead721ba702011d6dae52fb9f4edd8e46ac43cda51662d921e",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "migration-rumors-dormancy-golden",
@@ -410,12 +420,12 @@
       "suite": "tests/property/migrationRumorsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "f0148778c80a5f26d53c012a736d622ff058d14246faf0675143cec08c100523",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "momentum-dormancy-golden",
@@ -423,12 +433,12 @@
       "suite": "tests/property/momentumDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "277b599a588a3e1587e9f04c77124c55dc58c81aae9e970e90a6a9971be4322e",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "npc-credibility-dormancy-golden",
@@ -436,12 +446,12 @@
       "suite": "tests/property/npcCredibilityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "b872e66a2f183d5c6554c8334679e71ef7b2ca8f60d24d70a9867fc60134edbc",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "npc-growth-dormancy-golden",
@@ -449,12 +459,12 @@
       "suite": "tests/property/npcGrowthDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "fadc3d0e2fbe3bfbb85491cd58b4afa35eb085b29d79be5e929e1bc96c1ac986",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "npc-ladder-dormancy-golden",
@@ -462,12 +472,12 @@
       "suite": "tests/property/npcLadderDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "ced10cd34e3245f956151bc94afe3ff07c2f48c073f316e8121e5de4860dc1a2",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "npc-ledger-dormancy-golden",
@@ -475,12 +485,12 @@
       "suite": "tests/property/npcLedgerDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "ca58422d8f46a8504aaa0d8a4315a2b4141e20596f48ac1a93f572fb9f6fe1e8",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "pdf-golden-view-model-snapshot",
@@ -488,13 +498,13 @@
       "suite": "tests/pdf/goldenViewModel.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": null,
+      "sha256": "39447f53f8ba615c17ede57350954120e0dfb8c1a86b4a544e1781d7fbc3253e",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
+      "ownerRow": "§901",
       "governance": "THE WRITER IS VITEST ITSELF, NOT REPO SOURCE. This surface is a vitest toMatchSnapshot() file; its lawful re-record path is `vitest -u`. That path carries no env spelling and no writeFileSync, so no source scan can see it and THE DOOR CANNOT REFUSE IT. The walker can only CONVICT the result after the fact via the byte arm. This asymmetry is real and is written here rather than discovered at the freeze: for this one surface the machinery detects but does not prevent. Ruling on whether to convert it to a door-written manifest belongs to the freeze act.",
-      "note": "Charter §1.1 row 6. The only __snapshots__ file in the estate."
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. Charter §1.1 row 6. The only __snapshots__ file in the estate."
     },
     {
       "surface": "peace-causal-dormancy-golden",
@@ -502,12 +512,12 @@
       "suite": "tests/property/peaceCausalDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "0ce1cdc734407259f9324bfd04ffa1d5364dc2053ee637a46a27b8b155fe93a5",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "provenance-dormancy-golden",
@@ -515,12 +525,12 @@
       "suite": "tests/property/provenanceDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "10432b43fe941bb496a0e01c99922e7dbc1569f8932e9864333f0a03a9d20c70",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "resource-dynamics-dormancy-golden",
@@ -528,12 +538,12 @@
       "suite": "tests/property/resourceDynamicsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "7e0f3d48b05c59bc94833022d43504b145b2d649eaf2476cce5500f270c12fb3",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "roads-dormancy-golden",
@@ -541,12 +551,12 @@
       "suite": "tests/property/roadsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "faa3bce9b09b9bf086a4767601161e1c7cddf8c714abf9c0dc9e868a5db4840e",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "route-network-dormancy-golden",
@@ -554,12 +564,12 @@
       "suite": "tests/domain/routeNetworkDormancy.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "ad12bd54e746a23eb54c0d71b052ab24a334c7f0fb1d7c545ea53edd1a34a0ed",
+      "rows": 6,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "rumor-ledger-golden",
@@ -567,12 +577,12 @@
       "suite": "tests/property/rumorLedgerGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "787c1b92f53ee6d5dd977c82513f2f2215d783e31000577c5db1485f009a62b8",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "sea-lanes-golden",
@@ -580,12 +590,12 @@
       "suite": "tests/property/seaLanesGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "23d65a476d185f42447566e49d4b2384b105c97291513997346480881a95f561",
+      "rows": 8,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "seasonal-overlay-golden",
@@ -593,12 +603,12 @@
       "suite": "tests/property/seasonalOverlayGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "e7e903361d8b9dbfcd5dbed8cb7407617f7fa37046923c3c787589358026fa23",
+      "rows": 7,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "settlement-lifecycle-dormancy-golden",
@@ -606,12 +616,12 @@
       "suite": "tests/property/settlementLifecycleDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "a0de1360a79d16d124329492ac9dfa1bc46043a72543ef9cbc50608148ea34b1",
+      "rows": 5,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "settlement-politics-dormancy-golden",
@@ -619,12 +629,12 @@
       "suite": "tests/property/settlementPoliticsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "b5540cf47a38d97e8fb6f5a63c59722834c8469226b1db84543ab8f64e77ae1c",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "spatial-consequence-dormancy-golden",
@@ -632,12 +642,12 @@
       "suite": "tests/property/spatialConsequenceDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "b7e8b526a7c5183e8ee83afba743e0a3cf3d22eeffe8b2cac1d5a9bc247ca615",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "spatial-digest-golden",
@@ -645,12 +655,12 @@
       "suite": "tests/property/spatialDigestGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "f38d9de4ee11d717b696a240331553b331b9ef560693d70bd282fe4a4f613e46",
+      "rows": 9,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "supply-web-warfare-dormancy-golden",
@@ -658,12 +668,12 @@
       "suite": "tests/property/supplyWebWarfareDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "82966f36f634caef331a0bb2893e8dd8b82e5d187478a0c0f394c5409a31dec8",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "teleport-edges-golden",
@@ -671,12 +681,12 @@
       "suite": "tests/property/teleportEdgesGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "efa945b42e6a6798cfd9adf6af3af230a77993a0977bdc5b673bae9e181ddfe5",
+      "rows": 8,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "timeline-track-golden",
@@ -684,12 +694,12 @@
       "suite": "tests/property/timelineTrackGolden.test.js",
       "recordEnv": "UPDATE_TIMELINE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "80a708c583b492b8e26a53d822d353e17c0ba026c40764712c8ee91b273d5436",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "town-cartography-dormancy-golden",
@@ -697,12 +707,12 @@
       "suite": "tests/property/townCartographyDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "6edc064aca15d194e87cf7bf17b4cf4e1340c8b0bc8a6dec3cccbef280433e20",
+      "rows": 54,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "town-map-golden",
@@ -710,12 +720,12 @@
       "suite": "tests/property/townMapGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "89ca6d4efc7fb46f779a5b8ed0cb6919b9f985ce15283591532e20a5837b8f25",
+      "rows": 14,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "town-map-v2-golden",
@@ -723,12 +733,12 @@
       "suite": "tests/property/townMapV2Golden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "fd91116ff179128c4ae6d849d8b7e98b2867f7636e46161795b5f9ddc3e9d61b",
+      "rows": 10,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "traditions-dormancy-golden",
@@ -736,12 +746,12 @@
       "suite": "tests/property/traditionsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "b11c6b572832f7328521673bf4781e5af9baf855e2b1ca401d2ba96acbcb5594",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "upswing-dormancy-golden",
@@ -749,12 +759,12 @@
       "suite": "tests/property/upswingDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "09340560fb3583e07ac9280d72b1c47fb6eb365fe805b86f8d458525b44ef8dc",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "urban-fabric-dormancy-golden",
@@ -762,12 +772,12 @@
       "suite": "tests/property/urbanFabricDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "bb93090a39c7ab7fc0a6dbec65d49f3fb83bfad071afd7fb4e1bdd93c65e7744",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "worldpulse-golden-master",
@@ -775,12 +785,12 @@
       "suite": "tests/property/worldpulseDeityGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "6e5937d20203b2cf673cff755cc27134b365f6755d5231bb861efd0e0f05ad8a",
+      "rows": 4,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "worldpulse-seasons-golden",
@@ -788,12 +798,12 @@
       "suite": "tests/property/worldpulseSeasonsGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "26eed82fd6c9f3e7432271c4398491d120eddd3efdbec0a406ca0a3e1cd5245a",
+      "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "worldpulse-spatial-golden",
@@ -801,12 +811,12 @@
       "suite": "tests/property/worldpulseSpatialGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "4f22c79586303f9ab5117cf9a9d1aa4df07c39f0bb4a79a3de61edeed3c928a7",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": null
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
       "surface": "dossier-prose-manifest",
@@ -814,12 +824,12 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "a64b9a75d6ecd3f38810e219244aeb4231234ced54d51125fce23e392993cdcc",
+      "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": "ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {
       "surface": "preset-lighting-witness",
@@ -827,12 +837,12 @@
       "suite": "tests/simulation/presetLightingWitness.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": null,
-      "rows": null,
+      "sha256": "b89d4f7aef050e4982dfa90ef2c4fcdd0407cb799375718ef8f59b53ca7e6403",
+      "rows": 15,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": null,
-      "note": "NO CAPTURE ARM EXISTS, AND THAT IS THE POINT. This is the estate's only bit-level witness of WHICH simulation preset a NEW CAMPAIGN is born with: every other pulse and dormancy golden drives literal rules, so lighting the shipped default — or silently re-darkening it later — is invisible to all of them. The manifest records, per preset plus a `__birth_default__` row born through the real birth door with no preset id, the resolved birth rules and the hashes of one simulated year (52 interior one-week ticks). It carries no env spelling and no writeFileSync: the door writes recorded values onto these rows, and every such value must stay null until the freeze act, so a capture arm routed through the door today would poison this register. Re-recorded BY HAND under the golden-shift discipline, from the recipe in the manifest's own _doc, which drives tests/simulation/presetLightingWitnessRun.js — the single writer of the measurement, imported by the suite so the recorded world and the asserted world cannot diverge. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a witness named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane LGT-P14-WITNESS (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
+      "ownerRow": "§901",
+      "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. NO CAPTURE ARM EXISTS, AND THAT IS THE POINT. This is the estate's only bit-level witness of WHICH simulation preset a NEW CAMPAIGN is born with: every other pulse and dormancy golden drives literal rules, so lighting the shipped default — or silently re-darkening it later — is invisible to all of them. The manifest records, per preset plus a `__birth_default__` row born through the real birth door with no preset id, the resolved birth rules and the hashes of one simulated year (52 interior one-week ticks). It carries no env spelling and no writeFileSync: the door writes recorded values onto these rows, and every such value must stay null until the freeze act, so a capture arm routed through the door today would poison this register. Re-recorded BY HAND under the golden-shift discipline, from the recipe in the manifest's own _doc, which drives tests/simulation/presetLightingWitnessRun.js — the single writer of the measurement, imported by the suite so the recorded world and the asserted world cannot diverge. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a witness named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane LGT-P14-WITNESS (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     }
   ]
 }
