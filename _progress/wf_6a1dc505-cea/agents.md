@@ -1,4 +1,4 @@
-# wf_6a1dc505-cea — per-agent progress, 2026-09-15 22:39:53
+# wf_6a1dc505-cea — per-agent progress, 2026-09-15 22:45:25
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
@@ -16,4 +16,4 @@
     - `a1d041898` ? · FAILED · transcript 09-15 19:25 161 KB · 0 tool calls
     - `ae4986df2` ? · DONE · transcript 09-15 22:08 2278 KB · 115 tool calls · files: brief-55-TR-TR-2-TR-2b.md, brief-56a-TR-TR-7.md, brief-56b-TR-TR-8.md, brief-56c-TR-TR-9.md · result: Eight briefs written to `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/briefs/` (292
     - `a8c0016e2` ? · DONE · transcript 09-15 22:21 1208 KB · 43 tool calls · result: {"summary": "Eight TR briefs read whole against the consist (laneCONSIST-932, tip 315080928), the TRADE history fold, PRICING \u00a7A.3/\u00a7A.4/\u00a7B/\u00a7
-    - `ab128d0dc` ? · IN FLIGHT · transcript 09-15 22:39 2321 KB · 113 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · last: Edit /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
+    - `ab128d0dc` ? · IN FLIGHT · transcript 09-15 22:45 2928 KB · 159 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
