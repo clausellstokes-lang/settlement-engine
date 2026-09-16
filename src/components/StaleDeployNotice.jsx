@@ -10,16 +10,28 @@
  * EAGER BY NECESSITY, unlike SessionEvictedBanner which it otherwise mirrors (a
  * flat ink strip, a hairline rule, no radii or shadows): a stale tab cannot load
  * a lazy chunk, and this notice exists for exactly that tab. Its imports are all
- * already in the first-paint closure (theme, the two primitives, the copy
- * register). It sits at the BOTTOM so it never covers the eviction strip at the top.
+ * already in the first-paint closure (theme and the two primitives). It sits at
+ * the BOTTOM so it never covers the eviction strip at the top.
+ *
+ * ⛔ ITS WORDS ARE LITERALS HERE, NOT COPY-REGISTER KEYS, AND THAT IS MEASURED. The
+ * register (src/copy) is a lazy chunk; importing `t` from this eager component
+ * dragged the whole register into the entry chunk (+58,594 B raw, over all three
+ * first-paint budgets in tests/build/vendorPdfLazy.test.js). SessionEvictedBanner
+ * keeps its words as literals for the same reason.
  */
 import { useCallback, useState, useSyncExternalStore } from 'react';
 import { X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { INK, CARD, BORDER, sans, FS, SP } from './theme.js';
-import { t } from '../copy/index.js';
 import { STALE_DEPLOY_EVENT, isStaleDeployNoticeShown } from '../lib/staleDeploy.js';
+
+/** The notice's words (literals: see the header). No em dash. */
+export const STALE_DEPLOY_COPY = Object.freeze({
+  message: 'SettlementForge was updated while this page was open. Save anything you want to keep, then reload to continue.',
+  reload: 'Reload',
+  dismiss: 'Dismiss',
+});
 
 /**
  * @param {{ reload?: () => void, isShown?: () => boolean }} [props]
@@ -52,12 +64,12 @@ export default function StaleDeployNotice({ reload, isShown = isStaleDeployNotic
         fontFamily: sans, fontSize: FS.sm, lineHeight: 1.4, textAlign: 'center',
       }}
     >
-      <span>{t('errors.staleDeploy')}</span>
+      <span>{STALE_DEPLOY_COPY.message}</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexShrink: 0 }}>
         <Button variant="primary" size="lg" onClick={doReload} style={{ minHeight: 44 }}>
-          {t('errors.staleDeployReload')}
+          {STALE_DEPLOY_COPY.reload}
         </Button>
-        <IconButton Icon={X} label={t('errors.staleDeployDismiss')} onClick={() => setDismissed(true)} size="md" />
+        <IconButton Icon={X} label={STALE_DEPLOY_COPY.dismiss} onClick={() => setDismissed(true)} size="md" />
       </span>
     </div>
   );
