@@ -24,6 +24,7 @@ import { act, cleanup, render } from '@testing-library/react';
 //    strip) populates on mount. ────────────────────────────────────────────────
 const invoke = vi.fn();
 vi.mock('../../src/lib/supabase.js', () => ({
+  isConfigured: false,
   supabase: { functions: { invoke: (...a) => invoke(...a) } },
 }));
 

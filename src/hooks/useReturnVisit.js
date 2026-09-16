@@ -17,6 +17,14 @@
  *     stamped on every page load. We compare to the previous value
  *     before we overwrite it, so the first-load-after-a-day returns the
  *     gap correctly.
+ *   - Cross-device / cleared-storage fallback (review C6): the stamp is
+ *     device-local, but a signed-in user's saves are cloud-synced
+ *     (settlementSlice: "persisted to Supabase") — so when THIS device
+ *     has no stamp, the most-recent save timestamp stands in as the
+ *     prior-visit evidence. A laptop→phone return is greeted, not mute.
+ *     A present stamp always wins (it refreshes every load; saves only
+ *     on edits). Anon stays excluded BY DESIGN, mirroring the card's
+ *     gate — the welcome-back surface resumes a saved settlement.
  *   - lastSettlement is derived from the savedSettlements slice — the
  *     entry with the most recent `savedAt` or `campaignState.editedAt`.
  *
@@ -48,6 +56,17 @@ function stampVisit() {
   } catch { /* private mode — accept the loss */ }
 }
 
+/**
+ * The activity timestamp of a saved settlement, in epoch millis. editedAt is
+ * an ISO string and savedAt is epoch millis — Number(ISO) is NaN (which once
+ * made the ranking comparator arbitrary), so Date.parse handles the ISO and
+ * Number the epoch; either failing falls through to 0.
+ * @param {any} x @returns {number}
+ */
+function savedAtOf(x) {
+  return Date.parse(x?.campaignState?.editedAt) || Number(x?.savedAt) || 0;
+}
+
 export function useReturnVisit() {
   const savedSettlements = useStore(s => s.savedSettlements || []);
   const tier = useStore(s => s.auth.tier);
@@ -71,18 +90,22 @@ export function useReturnVisit() {
 
   const lastSettlement = useMemo(() => {
     if (!Array.isArray(savedSettlements) || savedSettlements.length === 0) return null;
-    // editedAt is an ISO string and savedAt is epoch millis — Number(ISO) is NaN,
-    // which made the comparator return NaN and the "welcome back" pick arbitrary.
-    const tsOf = (x) => Date.parse(x.campaignState?.editedAt) || Number(x.savedAt) || 0;
-    const ranked = [...savedSettlements].sort((a, b) => tsOf(b) - tsOf(a));
+    const ranked = [...savedSettlements].sort((a, b) => savedAtOf(b) - savedAtOf(a));
     return ranked[0] || null;
   }, [savedSettlements]);
 
   const result = useMemo(() => {
-    if (!prior || tier === 'anon') {
+    if (tier === 'anon') {
       return { isReturn: false, daysSinceLastVisit: 0, lastSettlement };
     }
-    const gapMs = nowAtMount - prior;
+    // The device-local stamp when present; otherwise the cloud-save fallback
+    // (see the header) — a signed-in user's most-recent save timestamp is
+    // durable cross-device evidence of the last visit.
+    const lastActivityAt = prior || (lastSettlement ? savedAtOf(lastSettlement) : 0);
+    if (!lastActivityAt) {
+      return { isReturn: false, daysSinceLastVisit: 0, lastSettlement };
+    }
+    const gapMs = nowAtMount - lastActivityAt;
     const isReturn = gapMs >= RETURN_THRESHOLD_MS;
     const days = Math.floor(gapMs / (24 * 60 * 60 * 1000));
     return { isReturn, daysSinceLastVisit: days, lastSettlement };

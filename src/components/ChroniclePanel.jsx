@@ -20,14 +20,16 @@ import { useState } from 'react';
 import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
+import EmptyState from './primitives/EmptyState.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import { nameOf } from '../domain/rulingPower.js';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
 const INK    = swatch['#1C1409'];
 const MUTED  = swatch['#9C8068'];
-const CARD   = 'rgba(255,251,245,0.96)';
+const CARD   = swatch['#FFFBF5'];
 
 const REASON_META = {
   initial:     { label: 'Initial',     color: '#1a5a28', Icon: Sparkles },
@@ -62,7 +64,37 @@ function relativeTime(iso) {
 
 function absoluteTime(iso) {
   if (!iso) return '';
-  try { return new Date(iso).toLocaleString(); } catch (_) { return iso; }
+  try { return new Date(iso).toLocaleString('en-US'); } catch (_) { return iso; }
+}
+
+// `Label: blurb`, or a bare `Label` when the record carries no blurb at all. A
+// trailing colon with nothing after it reads as a rendering failure, and some real
+// records genuinely have no prose: `npcs` mixes two kinds, and the STRUCTURAL
+// office-holders (npcStructure.js — `generatedAs`, `importance`, linked ids) carry
+// no goal/secret/desc of any sort.
+function labelled(label, blurb) {
+  return blurb ? `${label}: ${blurb}` : label;
+}
+
+// `settlement.stress` is a SINGLE OBJECT, not an array — confirmed by executed probe
+// (0 arrays / 10 plain objects / 30 absent across 40 generations). renderList's
+// `Array.isArray` guard therefore dropped the Stressors row outright on real data, which
+// is why fixing only that row's key spelling would have been cosmetic. The narrative edge
+// function normalizes exactly this way before reading it (prompts.ts stress extract).
+function asList(value) {
+  if (Array.isArray(value)) return value;
+  return value ? [value] : [];
+}
+
+// C2 (bar 18): compose a readable line for a conflict record that carries neither
+// desc nor issue nor description — from its own parties/stakes when present, a
+// neutral in-register sentence otherwise. The reader never meets JSON.
+function conflictLine(c) {
+  const parties = Array.isArray(c?.parties) ? c.parties.filter(Boolean).map(String).join(' and ') : '';
+  const stakes = typeof c?.stakes === 'string' ? c.stakes.trim() : '';
+  if (parties && stakes) return `${parties} contend; at stake: ${stakes}`;
+  if (parties) return `A quarrel stands between ${parties}.`;
+  return 'A quarrel of the town, its terms not set down.';
 }
 
 // Chip with label + icon.
@@ -70,7 +102,7 @@ function Chip({ color, Icon, children, filled = false, title }) {
   return (
     <span title={title} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '2px 8px', borderRadius: 11, fontSize: FS.xxs, fontWeight: 800,
+      padding: '2px 8px', fontSize: FS.xxs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase',
       color: filled ? '#fff' : color,
       background: filled ? color : `${color}18`,
@@ -96,11 +128,24 @@ function FullEntryModal({ entry, onClose }) {
   const dl = entry.aiDailyLife || {};
   const meta = REASON_META[entry.reason] || REASON_META.initial;
 
-  // Plain-text dumper for known narrative sections. Intentionally simple — the
+  // Plain-text renderer for known narrative sections. Intentionally simple — the
   // point is to let the DM read what they had, not to re-render the tab UI.
+  // C2 (bar 18, "raw JSON where prose belongs"): a non-string body (the pipeline's
+  // History/EconomicViability object shapes) is flattened to its PROSE — every
+  // nested string value in reading order — and a body with no prose renders
+  // nothing. A serialized-object dump never reaches the reader.
+  const flattenProse = (v, depth = 0) => {
+    if (typeof v === 'string') return v.trim();
+    if (Array.isArray(v)) return v.map((x) => flattenProse(x, depth + 1)).filter(Boolean).join(' ');
+    if (v && typeof v === 'object' && depth < 3) {
+      return Object.values(v).map((x) => flattenProse(x, depth + 1)).filter(Boolean).join(' ');
+    }
+    return '';
+  };
   const renderSection = (title, body) => {
     if (!body) return null;
-    const text = typeof body === 'string' ? body : JSON.stringify(body, null, 2);
+    const text = typeof body === 'string' ? body : flattenProse(body);
+    if (!text) return null;
     return (
       <div style={{ marginBottom: 14 }}>
         <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
@@ -141,15 +186,14 @@ function FullEntryModal({ entry, onClose }) {
         aria-label="Chronicle entry details"
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
+          background: CARD, border: `1px solid ${BORDER}`,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-          boxShadow: '0 12px 48px rgba(0,0,0,0.45)',
         }}
       >
         {/* Header */}
         <div style={{
           padding: '12px 18px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 100%)',
-          display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(196,154,60,0.2)',
+          display: 'flex', alignItems: 'center', gap: 10, borderBottom: `1px solid ${swatch['#C49A3C']}33`,
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: swatch['#C49A3C'] }}>
@@ -168,7 +212,7 @@ function FullEntryModal({ entry, onClose }) {
         {/* Body */}
         <div style={{ padding: '16px 22px', overflowY: 'auto', flex: 1 }}>
           {entry.triggeredBy && (
-            <div style={{ marginBottom: 12, padding: '6px 10px', background: 'rgba(106,42,154,0.08)', border: '1px solid rgba(106,42,154,0.2)', borderRadius: 5, fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
+            <div style={{ marginBottom: 12, padding: '6px 10px', background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`, borderLeft: '3px solid #5A6E82', fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
               <strong>Triggered by:</strong> {entry.triggeredBy}
             </div>
           )}
@@ -177,11 +221,37 @@ function FullEntryModal({ entry, onClose }) {
           {renderSection('History', s.history)}
           {renderSection('Economic Viability', s.economicViability)}
 
-          {renderList('Institutions', s.institutions, (it) => `${it?.name || 'Unnamed'}: ${it?.description || ''}`)}
-          {renderList('NPCs', s.npcs, (n) => `${n?.name || 'Unnamed'} (${n?.role || ''}): ${n?.description || ''}`)}
-          {renderList('Factions', s.powerStructure?.factions, (f) => `${f?.name || 'Unnamed'}: ${f?.description || ''}`)}
-          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.description || JSON.stringify(c)))}
-          {renderList('Stressors', s.stress, (st) => `${st?.label || ''}: ${st?.description || st?.text || ''}`)}
+          {/* THE SNAPSHOT-SHAPE LAW. `entry.aiSettlement` is NOT an AI-authored object —
+              generate-narrative deep-clones the GENERATOR settlement and refines text in
+              place (prompts.ts extract/apply write `desc`/`summary`/`issue` back onto the
+              existing records), so these five rows carry GENERATOR keys: factions
+              [faction, power, desc, ...], conflicts [parties, issue, stakes, desc, ...],
+              institutions [name, category, desc, ...], npcs [name, role, goal, secret, ...],
+              stress [type, label, summary, crisisHook, ...] — all five confirmed by an
+              executed generateSettlementPipeline probe. An earlier cut read
+              `.name`/`.description` throughout — spellings NO generator record carries — so
+              factions rendered "Unnamed: ", institutions/NPCs/stressors rendered a bare
+              label with an empty blurb, and conflicts fell through to a raw JSON dump.
+              Real key FIRST, legacy `.description` kept as a tail fallback (fixture-shaped
+              data still renders). Faction naming routes through the canonical
+              rulingPower.nameOf (`.faction || .name`) rather than a fourth hand-rolled
+              accessor — same chokepoint the ladder faction-key fix adopted.
+              Contrast: identityMarkers and frictionPoints below are AI-authored WHOLESALE
+              (apply() mints them), so their accessors were already correct.
+              @enforced-by tests/ui/chronicleSnapshotShape.test.jsx */}
+          {renderList('Institutions', s.institutions, (it) => labelled(it?.name || 'Unnamed', it?.desc || it?.description || ''))}
+          {renderList('NPCs', s.npcs, (n) => labelled(
+            `${n?.name || 'Unnamed'}${n?.role ? ` (${n.role})` : ''}`,
+            // goal.short then secret.what — the two fields the narrative pass actually
+            // refines for an NPC (prompts.ts npcs apply()). Structural office-holders
+            // have neither and correctly render as a bare name.
+            n?.goal?.short || n?.secret?.what || n?.desc || n?.description || '',
+          ))}
+          {renderList('Factions', s.powerStructure?.factions, (f) => labelled(nameOf(f) || 'Unnamed', f?.desc || f?.description || ''))}
+          {/* C2 (bar 18): the last-resort tail is composed prose from the record's own
+              parties/stakes, never a JSON dump in the serif register. */}
+          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.desc || c?.issue || c?.description || conflictLine(c)))}
+          {renderList('Stressors', asList(s.stress), (st) => labelled(st?.label || 'Stressor', st?.summary || st?.description || st?.text || ''))}
 
           {renderList('Identity Markers', s.identityMarkers, (m) => m)}
           {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} - ${fp?.what || ''}`)}
@@ -244,7 +314,6 @@ function EntryCard({ entry, onOpen }) {
       background: CARD,
       border: `1px solid ${BORDER}`,
       borderLeft: `3px solid ${meta.color}`,
-      borderRadius: 6,
       marginBottom: 8,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
@@ -297,7 +366,7 @@ export default function ChroniclePanel({ entries }) {
     // cluster), so the parent's gap owns the spacing — a baked-in marginBottom
     // double-counted it and broke the spacing rhythm (P5). The border stays: this
     // is a genuinely-interactive collapsible (a click target earns it).
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
       <button
         type="button"
         aria-expanded={open}
@@ -326,9 +395,10 @@ export default function ChroniclePanel({ entries }) {
       {open && (
         <div style={{ padding: '12px 14px', background: swatch['#FAF8F4'], maxHeight: 420, overflowY: 'auto' }}>
           {list.length === 0 ? (
-            <div style={{ padding: '18px 0', textAlign: 'center', color: MUTED, fontSize: FS.sm, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-              No narrative chronicle entries yet. Generate a narrative to start the log.
-            </div>
+            <EmptyState
+              heading="No chronicle yet."
+              body="Narrate an advance and it opens the log. Each account is kept here in the order the realm lived it."
+            />
           ) : (
             list.map((e) => (
               <EntryCard key={e.id} entry={e} onOpen={setModalEntry} />

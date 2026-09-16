@@ -164,7 +164,7 @@ describe.runIf(band.length > 0)('migration chain — apply in sequence (pglite)'
     } catch (e) {
       applyError = /** @type {Error} */ (e);
     }
-  });
+  }, 60000); // Applies the WHOLE 125-file chain + PGlite cold-start — well beyond 10s under parallel load.
 
   it('every migration in the chain is syntactically valid SQL (no parse error)', () => {
     expect(applyError, applyError ? applyError.message : 'no error').toBeNull();

@@ -11,6 +11,7 @@
 
 // Expected service categories per tier. (Was J0 in tabConstants; moved here so
 // screen + print derive absences from one map.)
+/** @type {Readonly<Record<string, readonly string[]>>} */
 export const EXPECTED_SERVICES_BY_TIER = Object.freeze({
   thorp:      ['food'],
   hamlet:     ['food', 'healing'],
@@ -20,6 +21,7 @@ export const EXPECTED_SERVICES_BY_TIER = Object.freeze({
   metropolis: ['food', 'healing', 'equipment', 'information', 'lodging', 'legal', 'transport', 'entertainment'],
 });
 
+/** @type {Readonly<Record<string, string>>} */
 const SERVICE_LABELS = Object.freeze({
   lodging: 'Lodging', food: 'Food & Drink', equipment: 'Equipment',
   magic: 'Magical Services', information: 'Information', healing: 'Healing',
@@ -27,20 +29,26 @@ const SERVICE_LABELS = Object.freeze({
   entertainment: 'Entertainment', employment: 'Employment', criminal: 'Criminal Services',
 });
 
-export const serviceLabel = (/** @type {any} */ key) => /** @type {Record<string, string>} */ (SERVICE_LABELS)[key] || key;
+/**
+ * Human-readable label for a service-category key.
+ * @param {string} key service-category key
+ * @returns {string}
+ */
+export const serviceLabel = (key) => SERVICE_LABELS[key] || key;
 
 /**
  * Service categories a settlement of `tier` is expected to have but lacks.
  * Mirrors the web ServicesTab's `missing` computation. `availableServices` is
  * the settlement.availableServices map (category key -> array of services).
  * Returns [{ key, label }].
- * @param {any} tier
- * @param {any} availableServices
+ * @param {string} tier settlement tier (thorp..metropolis)
+ * @param {Record<string, unknown>|null|undefined} availableServices settlement.availableServices map
+ * @returns {Array<{ key: string, label: string }>}
  */
 export function deriveNotableAbsences(tier, availableServices) {
-  const expected = /** @type {Record<string, string[]>} */ (EXPECTED_SERVICES_BY_TIER)[tier] || [];
+  const expected = EXPECTED_SERVICES_BY_TIER[tier] || [];
   const avail = availableServices || {};
   return expected
-    .filter((/** @type {any} */ k) => !(Array.isArray(avail[k]) && avail[k].length > 0))
-    .map((/** @type {any} */ k) => ({ key: k, label: serviceLabel(k) }));
+    .filter((k) => !(Array.isArray(avail[k]) && avail[k].length > 0))
+    .map((k) => ({ key: k, label: serviceLabel(k) }));
 }

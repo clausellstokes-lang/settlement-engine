@@ -12,6 +12,8 @@
  * - Trade partners are complementary, not competing
  */
 
+import { prosperityLabelOf, prosperityRank01 } from '../domain/prosperityRank.js';
+
 // ── Government antithesis map ─────────────────────────────────────────────────
 // For each government archetype, what is its ideological opposite?
 const GOV_ANTITHESIS = {
@@ -37,12 +39,12 @@ const GOV_ANTITHESIS = {
 // militaryBias: additive militarization bias 0..0.5 — defense/military
 //   institution chances multiply by (1 + militaryBias)
 //
-// VOCABULARY CONTRACT: these four keys are the ONLY dyn.* keys any consumer may
-// read. The original join snapped exactly here — the institution-probability
-// path read dyn.defense/market/craft/criminal/espionage/government, keys this
-// table never defined, so every relationship multiplied by the same 1.0.
-// tests/generators/neighbourRelDynamics.test.js pins reads ⊆ definitions so the
-// join cannot re-snap.
+// VOCABULARY CONTRACT (H13/H14, R3): these four keys are the ONLY dyn.* keys
+// any consumer may read. The original join snapped exactly here — the
+// institution-probability path read dyn.defense/market/craft/criminal/
+// espionage/government, keys this table never defined, so every relationship
+// multiplied by the same 1.0. tests/generators/neighbourRelDynamics.test.js
+// pins reads ⊆ definitions so the join cannot re-snap.
 export const REL_DYNAMICS = {
   neutral: {
     economyMode:      'independent',
@@ -95,8 +97,8 @@ export const REL_DYNAMICS = {
 };
 
 // ── Economy mode → market-institution multiplier ──────────────────────────────
-// This join repair wires the existing table rather than redesigning it.
-// institutionProbability's market/economy branch used to read dyn.market —
+// The H13 join repair (R3 decision: WIRE the existing table, do not redesign
+// it). institutionProbability's market/economy branch used to read dyn.market —
 // a key REL_DYNAMICS never defined — so every relationship multiplied market
 // odds by 1.0. The table's economy magnitudes already live in
 // getNeighbourEconomicBias below; this map routes each mode's existing figure
@@ -128,19 +130,19 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Active supply chain IDs
   const activeChains    = econ.activeChains    || [];
 
-  // Prosperity → economic strength 0–1. The engine emits the prosperity *label*
-  // on econ.prosperity (economicGenerator emits `prosperity`, not `prosperityLevel`);
-  // keep prosperityLevel as a legacy fallback. The canonical band order is
-  // Struggling(lowest)→Poor→Moderate→Comfortable→Prosperous→Wealthy; Subsistence and
-  // the legacy Modest/Affluent/Thriving/Impoverished labels are kept as aliases.
-  const PROSPERITY_RANK = {
-    'Subsistence':0.05,'Impoverished':0.1,'Struggling':0.1,'Poor':0.25,'Modest':0.4,
-    'Moderate':0.5,'Comfortable':0.65,'Prosperous':0.8,'Thriving':0.9,'Wealthy':0.95,'Affluent':1.0,
-  };
-  const prosperityLabel =
-    typeof econ.prosperity === 'string' ? econ.prosperity
-      : econ.prosperity?.level || econ.prosperityLevel;
-  const economicStrength = PROSPERITY_RANK[prosperityLabel] ?? 0.5;
+  // Prosperity → economic strength 0–1, through the ONE ladder (domain/prosperityRank.js).
+  //
+  // ⭐ THIS LADDER IS THE ONE THAT WON. It used to live here as a private `PROSPERITY_RANK`
+  // literal, one of FOUR private re-quantifications of the same categorical on three
+  // different scales (§759.3). The leaf carries these values UNCHANGED — this consumer is
+  // byte-identical across the unification — because it was the only ladder keyed on the exact
+  // vocabulary `deriveProsperityLabel` emits, the only one monotone across all six emitted
+  // labels, and the only one already carrying the legacy aliases (`Modest` reaches readers
+  // through historyGenerator's default). The leaf's header records the argument in full.
+  //
+  // `prosperityLevel` stays as the legacy fallback SHAPE; `prosperityRank01` reads the
+  // string / `{label|tier|level}` object shapes the estate's four readers between them saw.
+  const economicStrength = prosperityRank01(prosperityLabelOf(econ.prosperity) || econ.prosperityLevel);
 
   // Military strength from config priority
   const militaryStrength = ((config.priorityMilitary ?? 50) / 100);
@@ -151,8 +153,13 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
   // Dominant faction types (top 2 by influence)
   const dominantFactionTypes = extractDominantFactionTypes(factions);
 
-  // Magic level
-  const magicLevel = (config.priorityMagic ?? 0) / 100;
+  // ⚠ NO `magicLevel` HERE, DELIBERATELY, AND IT IS A TOMBSTONE. This profile used to carry
+  // `magicLevel: (config.priorityMagic ?? 0) / 100` — a NUMBER under a name that is
+  // canonically a BAND STRING ('none'|'low'|'medium'|'high', magicLedger.js). Nothing read
+  // it; it was a dead write waiting for a consumer to import the wrong unit, and the
+  // canonical field's own vocabulary had already been bitten once by exactly that class
+  // (capacityModel.js:371, customContent.js:304). Deleted at §759.3/§763.2; the row lives in
+  // fieldManifest.REMOVED_DEAD_FIELDS, whose walker asserts this file no longer mentions it.
 
   // Trade route connectivity
   const tradeRoute = config.tradeRouteAccess || 'road';
@@ -171,7 +178,6 @@ export function extractNeighbourProfile(neighbour, relationshipType = 'neutral')
     militaryStrength,
     governmentType,
     dominantFactionTypes,
-    magicLevel,
     tradeRoute,
     // Raw dynamics for the relationship type
     dynamics: REL_DYNAMICS[relationshipType] || REL_DYNAMICS.neutral,
@@ -285,7 +291,7 @@ export function getNeighbourFactionBias(neighbourProfile) {
     .filter((v, i, a) => a.indexOf(v) === i)
     .filter(t => !dominantFactionTypes.includes(t));
 
-  // Join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
+  // H13 join repair: this used to read dynamics.factionMirrorW/.factionOpposeW —
   // keys REL_DYNAMICS never defined — so every relationship rolled the same
   // 0.1/0.05 faction-mirror odds. The table's existing mirror/antithesis
   // magnitudes (govMirrorW/govAntithesisW: "probability weights for mirroring
@@ -304,14 +310,6 @@ export function getNeighbourFactionBias(neighbourProfile) {
 export function getMirrorFactionLabel(factionType, relType, neighbourName) {
   const n = neighbourName || 'the neighbour';
   const labels = {
-    neutral: {
-      military:   null,
-      economy:    `${n} Trade Correspondents`,
-      religious:  null,
-      government: `${n} Observers' Delegation`,
-      criminal:   null,
-      magic:      null,
-    },
     allied: {
       military:   `Joint Defense Compact (with ${n})`,
       economy:    `Merchants of the ${n} Alliance`,
@@ -370,6 +368,93 @@ export function getMirrorFactionLabel(factionType, relType, neighbourName) {
     },
   };
   return (labels[relType] || labels.allied || {})[factionType] || null;
+}
+
+// ── MG-3c / leak L4 — THE MUNDANE TWIN OF THE ARCANE SLOT ─────────────────────
+// Every `magic:` label above ('Arcane Exchange Circle', '<N> Arcane Envoys',
+// '<N> Arcane Observers', 'Anti-<N> Arcane Resistance', 'Arcane Counter-intelligence',
+// 'Arcane Defenders') was minted with ZERO reads of the world's magic law, so a
+// settlement in a world without functioning magic still grew arcane orders out of its
+// neighbour's influence.
+//
+// The cure is SUBSTITUTION, not deletion (MG-LAW-3 — a mundane world is not a thinner
+// world). The arcane slot exists because a neighbour's influence reaches the settlement
+// through people who KNOW things; strip the sorcery and that role does not vanish, it
+// becomes lettered: scholars, chroniclers, archivists, surveyors, correspondents. The
+// faction still lands, still carries the same category, still weighs the same power —
+// it simply reads as a world where knowledge is won rather than cast.
+//
+// FOUR VARIANTS PER SLOT (the SP-6 content-depth floor): the caller supplies a seeded
+// pick, so two mundane realms with the same neighbour relationship do not grow the same
+// order twice. None of these names trips the world law's own magic-assertion vocabulary
+// — that is the point, and generationCoherence's receipt re-checks it.
+const MUNDANE_LORE_LABELS = {
+  mirror: {
+    allied: [
+      n => `Shared Lore Athenaeum (with ${n})`,
+      n => `Compact of Letters (with ${n})`,
+      n => `Joint Scriveners' Chapter (with ${n})`,
+      n => `Fellowship of Shared Records (with ${n})`,
+    ],
+    patron: [
+      n => `${n} Lettered Envoys`,
+      n => `${n} Chancery Scholars`,
+      n => `${n} Archivists in Residence`,
+      n => `${n} Surveyors and Reckoners`,
+    ],
+    rival: [
+      n => `${n} Chartered Observers`,
+      n => `${n} Naturalists Abroad`,
+      n => `${n} Almanac-Keepers`,
+      n => `${n} Itinerant Lecturers`,
+    ],
+    cold_war: [
+      n => `${n} Quiet Correspondents`,
+      n => `${n} Cartographic Survey`,
+      n => `${n} Antiquarian Society`,
+      n => `${n} Reading Circle`,
+    ],
+  },
+  oppose: {
+    rival: [
+      n => `Anti-${n} Scholars' League`,
+      n => `Counter-${n} Chroniclers`,
+      n => `The ${n} Refutation Society`,
+      n => `Anti-${n} Almanac Guild`,
+    ],
+    cold_war: [
+      () => 'Cipher and Post Office',
+      () => 'The Quiet Reading Room',
+      () => 'Chapter of Careful Records',
+      () => 'The Unsigned Correspondents',
+    ],
+    hostile: [
+      () => 'Keepers of the Muniments',
+      () => 'The Wardens of Record',
+      () => 'Chapter of the Sealed Archive',
+      () => 'The Last Librarians',
+    ],
+  },
+};
+
+/**
+ * The mundane twin of a neighbour-influence faction label the world law refuses.
+ * Returns null when the slot has no authored mundane form — the caller then skips the
+ * faction rather than inventing one, which is honest: not every arcane role has a
+ * lettered counterpart.
+ *
+ * @param {'mirror'|'oppose'} kind
+ * @param {string} relType         the neighbour relationship type.
+ * @param {string} neighbourName
+ * @param {number} pick            seeded 0..3 variant index (wrapped defensively).
+ * @returns {string|null}
+ */
+export function getMundaneLoreFactionLabel(kind, relType, neighbourName, pick = 0) {
+  const n = neighbourName || 'the neighbour';
+  const pool = MUNDANE_LORE_LABELS[kind]?.[relType];
+  if (!Array.isArray(pool) || !pool.length) return null;
+  const index = ((Number(pick) || 0) % pool.length + pool.length) % pool.length;
+  return pool[index](n);
 }
 
 export function getOpposeFactionLabel(factionType, relType, neighbourName) {

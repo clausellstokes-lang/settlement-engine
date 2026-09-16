@@ -45,35 +45,32 @@ describe('mapSlice annotation undo/redo (F6)', () => {
     expect(store.getState().mapState.labels).toHaveLength(1);
   });
 
-  test('image import is a single undoable step: undo reverts the backdrop, redo re-applies it', () => {
+  test('campaign switch (replaceMapState) CLEARS both stacks — no cross-campaign injection (fix wave 2 #3)', () => {
     const store = makeStore();
-    // A label exists before the import; the import-undo must restore it too
-    // (the import "overwrites the current map").
-    store.getState().addLabel({ x: 5, y: 5, text: 'pre-import' });
-    expect(store.getState().mapState.customBackdrop).toBeNull();
+    // Campaign A: build undo history including a SECRET marker.
+    store.getState().addLabel({ x: 1, y: 1, text: 'A-note' });
+    store.getState().addMarker({ x: 2, y: 2, title: 'A-hidden-cache', note: 'GM secret' });
+    expect(store.getState().mapUndoStack.length).toBeGreaterThan(0);
 
-    store.getState().setMapBackdrop({ imageUrl: 'blob:demo', w: 1000, h: 800 });
-    expect(store.getState().mapState.customBackdrop).toMatchObject({ imageUrl: 'blob:demo', w: 1000, h: 800 });
+    // Switch to campaign B (its saved map has no markers).
+    store.getState().replaceMapState({ placements: {}, labels: [], markers: [], forests: [] });
+    expect(store.getState().mapUndoStack).toEqual([]);
+    expect(store.getState().mapRedoStack).toEqual([]);
 
-    // One undo reverts the whole import back to terrain mode.
+    // Undo in B must be a no-op — it can NEVER resurrect campaign A's marker/label.
     store.getState().mapUndo();
-    expect(store.getState().mapState.customBackdrop).toBeNull();
-    expect(store.getState().mapState.labels).toHaveLength(1);
-
-    // Redo re-applies the backdrop as one step.
-    store.getState().mapRedo();
-    expect(store.getState().mapState.customBackdrop).toMatchObject({ imageUrl: 'blob:demo' });
+    expect(store.getState().mapState.markers).toEqual([]);
+    expect(store.getState().mapState.labels).toEqual([]);
   });
 
-  test('annotation undo entries never carry the backdrop key (import undo is isolated)', () => {
+  test('deselect (resetMapState) clears both undo AND redo stacks (fix wave 2 #3)', () => {
     const store = makeStore();
-    store.getState().setMapBackdrop({ imageUrl: 'blob:keep', w: 10, h: 10 });
     store.getState().addLabel({ x: 1, y: 1, text: 'A' });
-    // The label entry is on top; undoing it must NOT touch the backdrop.
-    expect('customBackdrop' in store.getState().mapUndoStack.at(-1).snapshot).toBe(false);
-    store.getState().mapUndo();
-    expect(store.getState().mapState.customBackdrop).toMatchObject({ imageUrl: 'blob:keep' });
-    expect(store.getState().mapState.labels).toHaveLength(0);
+    store.getState().mapUndo(); // populate the redo stack too
+    expect(store.getState().mapRedoStack.length).toBeGreaterThan(0);
+    store.getState().resetMapState();
+    expect(store.getState().mapUndoStack).toEqual([]);
+    expect(store.getState().mapRedoStack).toEqual([]);
   });
 
   test('undo restores a MOVED label (pushMapUndo) without reverting geography/camera', () => {
@@ -95,5 +92,51 @@ describe('mapSlice annotation undo/redo (F6)', () => {
     // …but geography + camera are untouched by the annotation undo.
     expect(store.getState().mapState.fmgSnapshot).toBe('GEO');
     expect(store.getState().mapState.viewport.scale).toBe(3);
+  });
+});
+
+describe('mapSlice — the SEAM-1 geography divergence signal', () => {
+  // W-SEAM SEAM-1 (S1). Lives in this file because it is the only mapSlice store
+  // suite; the signal itself has nothing to do with undo. It is raised by the
+  // fmg:terrainChanged bridge push (wired in useMapBridge) and read by the
+  // SpatialCanonGate CTA.
+  beforeEach(() => { installLocalStorage(); });
+
+  const withCanon = (store, version) => store.setState(s => {
+    s.activeCampaignId = 'camp-1';
+    s.campaigns = [{ id: 'camp-1', accessState: 'active', worldState: version == null ? {} : { spatialCanonVersion: version } }];
+  });
+
+  test('starts down, and is SESSION state — never inside the persisted mapState', () => {
+    const store = makeStore();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+    expect('geographyMayHaveDiverged' in store.getState().mapState).toBe(false);
+  });
+
+  test('a terrain edit on an UNMAPPED realm raises nothing — there is no canon to diverge from', () => {
+    const store = makeStore();
+    withCanon(store, null);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+    withCanon(store, 0);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+  });
+
+  test('a terrain edit on a MAPPED realm raises it, and a campaign reset lowers it', () => {
+    const store = makeStore();
+    withCanon(store, 1);
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(true);
+    store.getState().resetMapState();
+    expect(store.getState().geographyMayHaveDiverged).toBe(false);
+  });
+
+  test('raising it twice is idempotent, so a burst of tool activations cannot latch anything else', () => {
+    const store = makeStore();
+    withCanon(store, 2);
+    store.getState().flagGeographyDiverged();
+    store.getState().flagGeographyDiverged();
+    expect(store.getState().geographyMayHaveDiverged).toBe(true);
   });
 });

@@ -94,6 +94,40 @@ describe('verifyAiOverlay() — envelope shape', () => {
     expect(result.violations).toEqual([]);
   });
 
+  it('allows AI-authored dmCompass hooks without treating them as root entities', () => {
+    const original = baseFixture();
+    const refined = clone(original);
+    refined.dmCompass = {
+      hooks: [{ text: 'Ask who profits if the toll dispute continues.' }],
+    };
+    const result = verifyAiOverlay(original, refined);
+    expect(result.ok).toBe(true);
+    expect(result.violations.some((v) => v.kind === 'invented_entity')).toBe(false);
+  });
+
+  it('still protects user-authored root hooks at their explicit entity address', () => {
+    const original = baseFixture();
+    original.hooks = [{
+      id: 'hook.authored',
+      description: 'The ferryman knows who cut the chain.',
+      _userEdits: {
+        description: {
+          value: 'The ferryman knows who cut the chain.',
+          originalValue: 'Ask about the broken chain.',
+          editedAt: '2026-08-09T00:00:00.000Z',
+        },
+      },
+    }];
+    const refined = clone(original);
+    refined.hooks[0].description = 'A generic rumor circulates at the docks.';
+
+    const result = verifyAiOverlay(original, refined);
+    expect(result.ok).toBe(false);
+    expect(result.summary.userFieldChanged).toBe(1);
+    expect(result.violations.find((v) => v.kind === 'changed_user_field')?.field)
+      .toBe('hook[0].description');
+  });
+
   it('null original returns ok=true (neutral pass-through)', () => {
     expect(verifyAiOverlay(null, baseFixture()).ok).toBe(true);
   });

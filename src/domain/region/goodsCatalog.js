@@ -7,9 +7,11 @@
  * so channels can compare exports/imports without brittle prose matching.
  *
  * Unknown labels are preserved as custom.<slug> ids. That keeps user content
- * and future packs lossless while still letting the engine reason over
+ * and future packs lossless while still letting the P0 engine reason over
  * known staples.
  */
+
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
 
 export const REGIONAL_GOOD_CATEGORIES = Object.freeze([
   'food',
@@ -251,7 +253,27 @@ const TOKEN_STOPWORDS = new Set([
   'naval', 'route', 'routes',
 ]);
 
-/** @param {any} value */
+/**
+ * @typedef {Object} CatalogEntry
+ * @property {string} id
+ * @property {string} label
+ * @property {string} kind
+ * @property {string} category
+ * @property {number} criticality
+ * @property {string[]} [aliases]
+ * @property {boolean} [custom]
+ * @property {string} [sourceLabel]
+ */
+
+/**
+ * A label string or a loosely-shaped trade-good bag from upstream data.
+ * @typedef {string | { id?: string, label?: string, name?: string, product?: string, chain?: string, output?: string, exportLabel?: string, criticality?: number } | null | undefined} GoodInput
+ */
+
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
 function stripAnnotations(value) {
   return String(value || '')
     .replace(/\([^)]*\)/g, ' ')
@@ -268,7 +290,8 @@ function stripAnnotations(value) {
  * field instead of blindly `String()`-ing an object to the useless
  * '[object Object]' — and, critically, never lets a caller call `.toLowerCase()`
  * on an object and crash. Bare strings and nullish pass straight through.
- * @param {any} value
+ * @param {string | { good?: string, name?: string, label?: string } | null | undefined} value
+ * @returns {string}
  */
 export function goodText(value) {
   if (value && typeof value === 'object') {
@@ -277,16 +300,18 @@ export function goodText(value) {
   return String(value ?? '');
 }
 
-/** @param {any} value */
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
 export function slugifyGood(value) {
-  return String(value || 'unknown')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 64) || 'unknown';
+  return kernelSlugify(value, { sep: '_', max: 64, fallback: 'unknown', empty: 'unknown' });
 }
 
-/** @param {any} value */
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
 function comparable(value) {
   return stripAnnotations(value)
     .toLowerCase()
@@ -295,7 +320,10 @@ function comparable(value) {
     .trim();
 }
 
-/** @param {any} value */
+/**
+ * @param {unknown} value
+ * @returns {string[]}
+ */
 function tokensOf(value) {
   return comparable(value)
     .split(' ')
@@ -316,50 +344,51 @@ function buildAliasIndex() {
 
 const ALIAS_INDEX = buildAliasIndex();
 
-// ── fuzzyMatch is on the per-tick hot path (regional graph derivation calls
-// normalizeGood over every settlement's trade lists, every kernel tick) ──────
-// Two pure caches keep it deterministic AND stop the re-tokenization churn:
-//   • FUZZY_CANDIDATES — the static catalog's candidate token lists, computed
-//     ONCE (the catalog is frozen, so tokenizing it per call was pure waste).
-//     The flat array preserves the original scan order (entries in catalog
-//     order, id → label → aliases within each), so best-match tie-breaking
-//     ("first strictly-better score wins") is byte-identical.
-//   • FUZZY_MEMO — result per comparable(label) key (the ONLY input the match
-//     depends on), null misses included. Same input → same output by
-//     construction, so this cannot shift results — it only skips the rescan.
-//     Bounded: user content can mint unbounded custom labels, so the memo
-//     clears past FUZZY_MEMO_MAX rather than growing without limit.
-/** @type {{ entry: any, tokens: string[] }[] | null} */
-let FUZZY_CANDIDATES = null;
-
-function fuzzyCandidates() {
-  if (!FUZZY_CANDIDATES) {
-    FUZZY_CANDIDATES = [];
-    for (const entry of Object.values(GOOD_CATALOG)) {
-      for (const candidate of [entry.id, entry.label, ...(entry.aliases || [])]) {
-        const tokens = tokensOf(candidate);
-        if (tokens.length) FUZZY_CANDIDATES.push({ entry, tokens });
-      }
+// fuzzyMatch is on the per-tick hot path: the regional graph normalizes every
+// settlement's trade lists on every kernel tick. Two caches keep it identical
+// AND stop the re-tokenization churn.
+//   • FUZZY_CANDIDATES — the catalog's candidate token lists, tokenized ONCE at
+//     module init, in the same nested order the scan used (entries in catalog
+//     order; id → label → aliases within each) and skipping empty-token
+//     candidates exactly where the scan's `continue` did, so first-strictly-
+//     better tie-breaking is unchanged. It snapshots the catalog at the same
+//     moment ALIAS_INDEX already does, so it rests on an invariant this module
+//     is already built on rather than a new one.
+//   • FUZZY_MEMO — result per comparable(label) key. comparable() is the ONLY
+//     input the match reads (tokensOf is comparable + split + filter), so equal
+//     keys have equal results by construction; nulls are cached too. Bounded:
+//     custom content can mint unbounded labels, so the memo clears past
+//     FUZZY_MEMO_MAX. Eviction changes cost, never a result.
+/** @type {{ entry: CatalogEntry, tokens: string[] }[]} */
+const FUZZY_CANDIDATES = (() => {
+  const out = [];
+  for (const entry of Object.values(GOOD_CATALOG)) {
+    for (const candidate of [entry.id, entry.label, ...(entry.aliases || [])]) {
+      const tokens = tokensOf(candidate);
+      if (tokens.length) out.push({ entry, tokens });
     }
   }
-  return FUZZY_CANDIDATES;
-}
+  return out;
+})();
 
 const FUZZY_MEMO_MAX = 512;
-/** @type {Map<string, any>} */
+/** @type {Map<string, CatalogEntry | null>} */
 const FUZZY_MEMO = new Map();
 
-/** @param {any} label */
+/**
+ * @param {unknown} label
+ * @returns {CatalogEntry | null}
+ */
 function fuzzyMatch(label) {
   const key = comparable(label);
-  if (FUZZY_MEMO.has(key)) return FUZZY_MEMO.get(key);
+  if (FUZZY_MEMO.has(key)) return /** @type {CatalogEntry | null} */ (FUZZY_MEMO.get(key));
 
   const labelTokens = tokensOf(label);
   let result = null;
   if (labelTokens.length) {
     let best = null;
     let bestScore = 0;
-    for (const { entry, tokens: candidateTokens } of fuzzyCandidates()) {
+    for (const { entry, tokens: candidateTokens } of FUZZY_CANDIDATES) {
       const overlap = labelTokens.filter(t =>
         candidateTokens.some(c => c === t || c.startsWith(t) || t.startsWith(c))
       ).length;
@@ -383,7 +412,10 @@ function fuzzyMatch(label) {
 // prose roughly mean grain?") but wrong as a merge key — token overlap calls
 // "Baked goods" iron (via "metal goods") and "Smoked seafood" salt (via "sea
 // salt"), and merging on a guess erases real exports.
-/** @param {any} label */
+/**
+ * @param {unknown} label
+ * @returns {CatalogEntry | null}
+ */
 function exactCatalogEntry(label) {
   const key = comparable(label);
   return (key && ALIAS_INDEX.get(key)) || null;
@@ -395,7 +427,10 @@ function exactCatalogEntry(label) {
  * for display predicates: subsumption renames within a canonical good
  * ('Boots and shoes' surviving as 'Leather goods') stay matchable by id where
  * first-word/substring text checks snap.
- * @param {any} label
+ */
+/**
+ * @param {unknown} label
+ * @returns {string | null}
  */
 export function exactGoodId(label) {
   const entry = exactCatalogEntry(label);
@@ -404,12 +439,15 @@ export function exactGoodId(label) {
 
 /**
  * Convert any label/object into a canonical regional good/service entry.
- * @param {any} value
+ */
+/**
+ * @param {GoodInput} value
+ * @returns {(CatalogEntry & { sourceLabel: string }) | null}
  */
 export function normalizeGood(value) {
   if (value == null) return null;
-  if (typeof value === 'object' && value.id && /** @type {Record<string, any>} */ (GOOD_CATALOG)[value.id]) {
-    const entry = /** @type {Record<string, any>} */ (GOOD_CATALOG)[value.id];
+  if (typeof value === 'object' && value.id && /** @type {Record<string, CatalogEntry>} */ (GOOD_CATALOG)[value.id]) {
+    const entry = /** @type {Record<string, CatalogEntry>} */ (GOOD_CATALOG)[value.id];
     return { ...entry, sourceLabel: value.label || value.name || entry.label };
   }
 
@@ -438,7 +476,10 @@ export function normalizeGood(value) {
   };
 }
 
-/** @param {any} [values] */
+/**
+ * @param {GoodInput | GoodInput[]} [values]
+ * @returns {Array<CatalogEntry & { sourceLabel: string }>}
+ */
 export function normalizeGoodsList(values = []) {
   const list = Array.isArray(values) ? values : [values];
   const out = [];
@@ -462,7 +503,8 @@ const ANNOTATION_RE = /\([^)]*\)/;
 /**
  * @param {string} a
  * @param {string} b
- * @param {any} entry
+ * @param {CatalogEntry | null} entry
+ * @returns {string}
  */
 function preferTradeLabel(a, b, entry) {
   // '(transit)' outranks every other annotation: reconcileTradeLists spares
@@ -494,7 +536,7 @@ function preferTradeLabel(a, b, entry) {
  * Only catalog GOODS merge across different spellings, and only on an EXACT
  * alias hit — a fuzzy token-overlap match is a guess, not an identity, so a
  * fuzzy-only label stays verbatim like an unrecognized one. Services
- * collapse only on identical text: "Spellcasting (1st-3rd level)" and
+ * collapse only on identical text: "Spellcasting (minor)" and
  * "Magical identification" both canonicalize to arcane_services, but they
  * are genuinely distinct exports — merging them would erase real variety.
  * Unrecognized labels get the same identical-text-only rule, annotations
@@ -504,8 +546,11 @@ function preferTradeLabel(a, b, entry) {
  * opts.opaque — Set of lowercased labels that must never merge or be
  * renamed (user-authored custom trade goods; the dossier's gold tint
  * matches them by exact label).
- * @param {any} [labels]
- * @param {{ opaque?: any }} [opts]
+ */
+/**
+ * @param {unknown[]} [labels]
+ * @param {{ opaque?: Set<string> | null }} [opts]
+ * @returns {string[]}
  */
 export function subsumeTradeGoods(labels = [], opts = {}) {
   const opaque = opts.opaque || null;
@@ -537,8 +582,13 @@ export function subsumeTradeGoods(labels = [], opts = {}) {
  * importing a good and re-selling it onward is what an entrepôt does.
  * Matching is exact-alias only: a fuzzy resemblance is not a contradiction,
  * and dropping an export on a guess erases a real economy line.
- * @param {any[]} [exports]
- * @param {any[]} [imports]
+ */
+/**
+ * Pure filter over `exports` — the element type follows the input.
+ * @template T
+ * @param {T[]} [exports]
+ * @param {unknown[]} [imports]
+ * @returns {T[]}
  */
 export function reconcileTradeLists(exports = [], imports = []) {
   const importIds = new Set();
@@ -554,16 +604,20 @@ export function reconcileTradeLists(exports = [], imports = []) {
   });
 }
 
-/** @param {any} goodOrId */
+/**
+ * @param {string | { id?: string, criticality?: number } | null | undefined} goodOrId
+ * @returns {number}
+ */
 export function goodCriticality(goodOrId) {
   const id = typeof goodOrId === 'string' ? goodOrId : goodOrId?.id;
   if (!id) return 0.35;
-  return /** @type {Record<string, any>} */ (GOOD_CATALOG)[id]?.criticality ?? goodOrId?.criticality ?? 0.35;
+  return /** @type {Record<string, CatalogEntry>} */ (GOOD_CATALOG)[id]?.criticality ?? /** @type {{ criticality?: number }} */ (goodOrId)?.criticality ?? 0.35;
 }
 
 /**
- * @param {any[]} [left]
- * @param {any[]} [right]
+ * @param {GoodInput[]} [left]
+ * @param {GoodInput[]} [right]
+ * @returns {Array<CatalogEntry & { sourceLabel: string, matchedLabel: unknown }>}
  */
 export function goodsIntersect(left = [], right = []) {
   const leftGoods = normalizeGoodsList(left);
@@ -572,13 +626,16 @@ export function goodsIntersect(left = [], right = []) {
   const matches = [];
   for (const good of leftGoods) {
     if (rightById.has(good.id)) {
-      matches.push({ ...good, matchedLabel: rightById.get(good.id).sourceLabel });
+      matches.push({ ...good, matchedLabel: /** @type {CatalogEntry & { sourceLabel: string }} */ (rightById.get(good.id)).sourceLabel });
     }
   }
   return matches;
 }
 
-/** @param {any[]} [goods] */
+/**
+ * @param {GoodInput[]} [goods]
+ * @returns {string[]}
+ */
 export function summarizeGoods(goods = []) {
   return normalizeGoodsList(goods).map(g => g.label);
 }

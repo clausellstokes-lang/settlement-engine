@@ -19,8 +19,8 @@
  * exactly where ModeSwitch + IconButton live.
  */
 
-import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
+import { render, cleanup, fireEvent, screen, waitFor } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -71,7 +71,6 @@ const storeState = {
   addPlacement: vi.fn(),
   removePlacementLocal: vi.fn(),
   clearAllPlacementsLocal: vi.fn(),
-  replaceAllPlacements: vi.fn(),
   replaceMapState: vi.fn(),
   resetMapState: vi.fn(),
   setMapSnapshot: vi.fn(),
@@ -96,6 +95,8 @@ const storeState = {
   // saves / auth
   savedSettlements: [],
   savedSettlementsLoaded: true,
+  savedSettlementsOwnerId: null,
+  savedSettlementsHydrationGeneration: 0,
   setSavedSettlements: vi.fn(),
   auth: { tier: 'anon', user: null },
   isElevated: () => false,
@@ -121,6 +122,13 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 describe('WorldMap — partial-refactor smoke', () => {
+  beforeEach(() => {
+    storeState.auth = { tier: 'anon', user: null };
+    storeState.campaigns = [];
+    storeState.activeCampaignId = null;
+    vi.clearAllMocks();
+  });
+
   test('mounts without throwing and renders the toolbar', () => {
     let WorldMap;
     let didRender = false;
@@ -138,5 +146,19 @@ describe('WorldMap — partial-refactor smoke', () => {
       expect(container.querySelectorAll('button').length).toBeGreaterThan(0);
       expect(didRender).toBe(true);
     });
+  });
+
+  test('the string value emitted by the campaign picker selects the numeric campaign id', async () => {
+    storeState.auth = { tier: 'premium', user: { id: 'owner-1' } };
+    storeState.campaigns = [{ id: 42, name: 'The Reach', settlementIds: [], accessState: 'active' }];
+    const WorldMap = (await import('../../src/components/WorldMap.jsx')).default;
+    render(<WorldMap onNavigate={() => {}} />);
+
+    fireEvent.change(screen.getByRole('combobox', { name: 'Active campaign' }), {
+      target: { value: '42' },
+    });
+
+    await waitFor(() => expect(storeState.setActiveCampaign).toHaveBeenCalledWith(42));
+    expect(storeState.getCampaignMapState).toHaveBeenCalledWith(42);
   });
 });

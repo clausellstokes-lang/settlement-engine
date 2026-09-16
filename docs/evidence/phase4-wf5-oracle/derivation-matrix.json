@@ -1,0 +1,144 @@
+{
+  "change": "W-F5 STAGE 1 — dropped deityTemper stored-value short-circuit (temper now derived from evil01/chaos01)",
+  "TEMPER_DERIVATION": {
+    "W_EVIL": 0.7,
+    "W_CHAOS": 0.3,
+    "THRESHOLD": 0.15
+  },
+  "derivationMatrix": [
+    {
+      "alignmentAxis": "good",
+      "lawAxis": "lawful",
+      "evil01": 0,
+      "chaos01": 0,
+      "derivedTemper": "peacelike",
+      "viaDeityTemper": "peacelike"
+    },
+    {
+      "alignmentAxis": "good",
+      "lawAxis": "neutral",
+      "evil01": 0,
+      "chaos01": 0.5,
+      "derivedTemper": "peacelike",
+      "viaDeityTemper": "peacelike"
+    },
+    {
+      "alignmentAxis": "good",
+      "lawAxis": "chaotic",
+      "evil01": 0,
+      "chaos01": 1,
+      "derivedTemper": "peacelike",
+      "viaDeityTemper": "peacelike"
+    },
+    {
+      "alignmentAxis": "neutral",
+      "lawAxis": "lawful",
+      "evil01": 0.5,
+      "chaos01": 0,
+      "derivedTemper": "neutral",
+      "viaDeityTemper": "neutral"
+    },
+    {
+      "alignmentAxis": "neutral",
+      "lawAxis": "neutral",
+      "evil01": 0.5,
+      "chaos01": 0.5,
+      "derivedTemper": "neutral",
+      "viaDeityTemper": "neutral"
+    },
+    {
+      "alignmentAxis": "neutral",
+      "lawAxis": "chaotic",
+      "evil01": 0.5,
+      "chaos01": 1,
+      "derivedTemper": "neutral",
+      "viaDeityTemper": "neutral"
+    },
+    {
+      "alignmentAxis": "evil",
+      "lawAxis": "lawful",
+      "evil01": 1,
+      "chaos01": 0,
+      "derivedTemper": "warlike",
+      "viaDeityTemper": "warlike"
+    },
+    {
+      "alignmentAxis": "evil",
+      "lawAxis": "neutral",
+      "evil01": 1,
+      "chaos01": 0.5,
+      "derivedTemper": "warlike",
+      "viaDeityTemper": "warlike"
+    },
+    {
+      "alignmentAxis": "evil",
+      "lawAxis": "chaotic",
+      "evil01": 1,
+      "chaos01": 1,
+      "derivedTemper": "warlike",
+      "viaDeityTemper": "warlike"
+    }
+  ],
+  "lawIndependent": true,
+  "perFixtureAttribution": [
+    {
+      "file": "tests/domain/religionCorruption.test.js:27  (OQ22 WARLIKE)",
+      "deity": "Kaor (align=neutral, law=absent, stored temper=warlike)",
+      "temperBefore": "warlike",
+      "temperAfter": "neutral",
+      "shifted": true,
+      "nicheBefore": "warlike:neutral",
+      "nicheAfter": "neutral:neutral",
+      "driveSignBefore": 1,
+      "driveSignAfter": 0,
+      "exactlyTheDerivation": true,
+      "downstream": "disposition.deityTemperDrive → aggressiveness"
+    },
+    {
+      "file": "tests/domain/religionCorruption.test.js:28  (OQ22 PEACELIKE)",
+      "deity": "Serel (align=neutral, law=absent, stored temper=peacelike)",
+      "temperBefore": "peacelike",
+      "temperAfter": "neutral",
+      "shifted": true,
+      "nicheBefore": "peacelike:neutral",
+      "nicheAfter": "neutral:neutral",
+      "driveSignBefore": -1,
+      "driveSignAfter": 0,
+      "exactlyTheDerivation": true,
+      "downstream": "disposition.deityTemperDrive → aggressiveness"
+    },
+    {
+      "file": "tests/domain/crisisConversion.test.js:63  (incumbent \"Faded\")",
+      "deity": "Faded (align=neutral, law=neutral, stored temper=peacelike)",
+      "temperBefore": "peacelike",
+      "temperAfter": "neutral",
+      "shifted": true,
+      "nicheBefore": "peacelike:neutral",
+      "nicheAfter": "neutral:neutral",
+      "driveSignBefore": -1,
+      "driveSignAfter": 0,
+      "exactlyTheDerivation": true,
+      "downstream": "nicheOf → coexistence vs same-niche contest"
+    },
+    {
+      "file": "tests/domain/crisisConversion.test.js:62  (source \"Storm\", control — NO shift)",
+      "deity": "Storm (align=neutral, law=chaotic, stored temper=neutral)",
+      "temperBefore": "neutral",
+      "temperAfter": "neutral",
+      "shifted": false,
+      "nicheBefore": "neutral:neutral",
+      "nicheAfter": "neutral:neutral",
+      "driveSignBefore": 0,
+      "driveSignAfter": 0,
+      "exactlyTheDerivation": true,
+      "downstream": "nicheOf (control — stored == derived)"
+    }
+  ],
+  "exactlyTheDerivationClass": {
+    "allShiftsAreDerivation": true,
+    "everyShiftIsNeutralAlignmentDecoupled": true
+  },
+  "deityFreeIdentityAnchor": {
+    "driveSignForAbsent": 0
+  }
+}

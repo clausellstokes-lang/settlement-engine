@@ -24,4 +24,3 @@ export const ADVANCE_TIME_NAV_TARGET = Object.freeze({
   // The post-advance "what changed" surface (Wizard News → Realm Inspector Chronicle).
   workspace: 'news',
 });
-

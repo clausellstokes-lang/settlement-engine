@@ -41,6 +41,20 @@ describe('PDF viewModel parity', () => {
     expect(vm.raw).toBe(settlement);
     expect(vm.active).toBeTruthy();
     expect(vm.narrativeMode).toBe(false);
+
+    // §353.3 — the cured servicesSlice semantics. Both institution strain-list read
+    // arms were dead (no producer, admission-schema row or edit path in the estate has
+    // ever written those keys on an institution record), so the slice emits the empty
+    // list unconditionally and a legacy-shaped record carrying them must not flow through.
+    // anchored: the name/category/length assertions are this arm's positive controls —
+    // they prove a real slice row was built rather than an empty list being read.
+    const legacy = { ...settlement, institutions: [{ ...(settlement.institutions?.[0] || {}),
+      name: 'Legacy Hall', category: 'civic', pressures: ['legacy-a'], stresses: ['legacy-b'] }] };
+    const legacyRows = buildViewModel({ settlement: legacy }).services.detailed;
+    expect(legacyRows.length).toBeGreaterThanOrEqual(1);
+    expect(legacyRows[0].name).toBe('Legacy Hall');
+    expect(legacyRows[0].category).toBe('civic');
+    expect(legacyRows[0].pressures).toEqual([]);
   });
 });
 

@@ -20,10 +20,10 @@
  */
 
 import { useState } from 'react';
-import { X, SlidersHorizontal, CheckSquare } from 'lucide-react';
 import { sans, FS, SP, R, swatch, BORDER, PARCH, INK, MUTED, BODY } from '../theme.js';
 import { isCanonSave, savePhase } from '../../domain/campaign/canon.js';
 import { settlementSignals, needsAttention, healthPip } from '../settlements/livingWorldSignals.js';
+import { isDestroyedRow } from '../map/heraldRegister.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
@@ -55,6 +55,11 @@ export const SORT_OPTIONS = Object.freeze({
 function attentionSeverity(save) {
   const sett = save?.settlement;
   if (!sett) return 0;
+  // A destroyed town has no live health to rank: the derivation still bands the
+  // blob it had when it stood, so without this it could out-rank a standing
+  // settlement in "Needs attention". Same reason the Library card suppresses its
+  // pip; asked of the SAVE ROW, where "destroyed" is canon (isDestroyedRow).
+  if (isDestroyedRow(save)) return 0;
   return healthPip(sett)?.severity || 0;
 }
 
@@ -123,7 +128,9 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
   // In crisis floats off the SAME health derivation as the "Needs attention" sort
   // (deriveSystemState) — a strained/critical band. Pure function of the save.
   if (filters.inCrisis) {
-    out = out.filter(s => needsAttention(s.settlement));
+    // A town the canon records as destroyed is not in crisis — it is over. Without
+    // this the same stale derivation that fed the sort would surface it here too.
+    out = out.filter(s => !isDestroyedRow(s) && needsAttention(s.settlement));
   }
   // At war reads the LIVE campaign worldState the parent resolves per save. With
   // no context (e.g. an isolated test without campaign wiring) it matches nothing.
@@ -163,9 +170,9 @@ export default function LibraryToolbar({
   filters, setFilters,
   totalCount,
   visibleCount,
-  campaigns = [],
   selectMode = false,
   onToggleSelectMode,
+  minimal = false,
 }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const isMobile = useIsMobile();
@@ -210,33 +217,55 @@ export default function LibraryToolbar({
     <>
       <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
       {/* Structure */}
-      <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
+      <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Has neighbours</Button>
       {/* Living world */}
       <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
       <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a patron deity.">Has deity</Button>
       <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
-      {/* Campaign selector */}
-      {campaigns.length > 0 && (
-        <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
-          <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
-          <select
-            id="library-campaign-filter"
-            value={filters?.campaignId || ''}
-            onChange={(e) => setFilters({ ...filters, campaignId: e.target.value || undefined })}
-            style={{ background: 'transparent', border: 'none', outline: 'none', fontFamily: sans, fontSize: FS.xs, color: INK, fontWeight: 600, cursor: 'pointer' }}
-          >
-            <option value="">All</option>
-            {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
-        </label>
-      )}
-
+      {/* The in-Filters Campaign selector was removed (legibility wave, 2026-07-22):
+          campaign folders already slice the list, so it was a second door to the
+          same slice. The `filters.campaignId` plumbing (applyLibraryFilters) is
+          kept intact for deep links. OWNER-VETOABLE control removal. */}
       {activeFilterCount > 0 && (
-        <Button size="sm" variant="ghost" icon={<X size={12} />} onClick={() => setFilters({})}>Clear filters</Button>
+        <Button size="sm" variant="ghost" onClick={() => setFilters({})}>Clear filters</Button>
       )}
     </>
   );
+
+  // ── Minimal face ──────────────────────────────────────────────────────────
+  // Below 5 saves the full six-control face is overkill for finding one town, so
+  // the parent renders Search alone (minimal). Sort / phase / Filters / Select
+  // return the moment the library grows past four. OWNER-VETOABLE threshold
+  // (legibility wave, 2026-07-22) — the gate lives at the SettlementsPanel render
+  // site (minimal = saves.length < 5).
+  if (minimal) {
+    return (
+      <div style={{
+        padding: SP.sm, background: PARCH,
+        display: 'flex', alignItems: 'center', gap: SP.xs,
+        fontFamily: sans, fontSize: FS.xs, color: INK,
+      }}>
+        <div style={{
+          flex: 1, minWidth: 0, minHeight: 44, boxSizing: 'border-box',
+          display: 'flex', alignItems: 'center', gap: SP.xs, padding: '8px',
+          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+        }}>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search settlements, NPCs, and factions"
+            placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
+            style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
+          />
+          {query && (
+            <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+          )}
+        </div>
+      </div>
+    );
+  }
 
   // ── Mobile branch ─────────────────────────────────────────────────────────
   // The desktop toolbar packs Search · Sort · phase segment · Filters · Select ·
@@ -273,7 +302,7 @@ export default function LibraryToolbar({
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
           {query && (
-            <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+            <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
           )}
         </div>
 
@@ -336,7 +365,6 @@ export default function LibraryToolbar({
               variant={selectMode ? 'gold' : 'secondary'}
               aria-pressed={selectMode}
               onClick={() => onToggleSelectMode()}
-              icon={<CheckSquare size={12} />}
             >
               Select
             </Button>
@@ -386,7 +414,7 @@ export default function LibraryToolbar({
         />
         {query && (
           <IconButton
-            Icon={X}
+            glyph="×"
             label="Clear search"
             tone="ghost"
             size="sm"
@@ -448,7 +476,6 @@ export default function LibraryToolbar({
         aria-expanded={filtersOpen}
         aria-controls="library-filter-panel"
         onClick={() => setFiltersOpen(o => !o)}
-        icon={<SlidersHorizontal size={12} />}
       >
         Filters{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''} {filtersOpen ? '▴' : '▾'}
       </Button>
@@ -460,7 +487,6 @@ export default function LibraryToolbar({
           variant={selectMode ? 'gold' : 'secondary'}
           aria-pressed={selectMode}
           onClick={() => onToggleSelectMode()}
-          icon={<CheckSquare size={12} />}
         >
           Select
         </Button>
@@ -489,34 +515,10 @@ export default function LibraryToolbar({
           }}
         >
           {/* Phase — All | Drafts | Canon now lives on the front-line Segmented
-              control above; the disclosure keeps the secondary filters only. */}
-          <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
-          {/* Structure */}
-          <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
-          {/* Living world */}
-          <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
-          <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a patron deity.">Has deity</Button>
-          <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
-
-          {/* Campaign selector */}
-          {campaigns.length > 0 && (
-            <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
-              <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
-              <select
-                id="library-campaign-filter"
-                value={filters?.campaignId || ''}
-                onChange={(e) => setFilters({ ...filters, campaignId: e.target.value || undefined })}
-                style={{ background: 'transparent', border: 'none', outline: 'none', fontFamily: sans, fontSize: FS.xs, color: INK, fontWeight: 600, cursor: 'pointer' }}
-              >
-                <option value="">All</option>
-                {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-              </select>
-            </label>
-          )}
-
-          {activeFilterCount > 0 && (
-            <Button size="sm" variant="ghost" icon={<X size={12} />} onClick={() => setFilters({})}>Clear filters</Button>
-          )}
+              control above; the disclosure keeps the secondary filters only, from
+              the SAME shared `secondaryFilters` node the mobile BottomSheet renders,
+              so a chip can never drift between the two surfaces. */}
+          {secondaryFilters}
         </div>
       )}
     </div>

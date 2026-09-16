@@ -30,6 +30,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '050': resolve(dir, '050_admin_least_privilege.sql'),
@@ -51,7 +53,7 @@ describe('pglite targets exist (guards against silent vacuous skip)', () => {
 
 /** Extract a `create or replace function public.<name>(…) … $$;` block verbatim. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
@@ -121,7 +123,7 @@ describe.runIf(allExist)('A3 follow-up — account-deletion processor (pglite, e
     await db.exec(extractFn(s050, 'mask_email'));
     await db.exec(extractFn(s051, 'write_audit'));
     await db.exec(extractFn(s054, 'process_account_deletions'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

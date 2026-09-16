@@ -242,3 +242,45 @@ describe('advanceCampaignWorld — settlementTickStates survives across pulses',
     expect(campaign.worldState.settlementTickStates.a.clockStages).toBeDefined();
   });
 });
+
+describe('coherence-12 — political control biases the closure target (institutionPoliticalControlEnabled)', () => {
+  const gate = INSTITUTION_LIFECYCLE_TUNING.close.requiredStreak;
+  // Two equally-impaired, chain-less (contribution-0) Services institutions TIE on vulnerability, so
+  // the codepoint tiebreak makes 'Almshouse' (A < B) the baseline closure target. Controlling it
+  // halves its vulnerability, flipping the target to 'Bathhouse' — a deterministic proof the read bites.
+  const TWO_IMPAIRED = [
+    { name: 'Almshouse', category: 'Services', impairments: [{ type: 'capacity', severity: 0.6, causeEventId: 'seed' }] },
+    { name: 'Bathhouse', category: 'Services', impairments: [{ type: 'capacity', severity: 0.6, causeEventId: 'seed' }] },
+  ];
+  function closeCandidateWith(simulationRules, extraOverrides) {
+    let worldState = { tick: 0, settlementTickStates: {} };
+    let candidate = null;
+    for (let i = 1; i <= gate; i += 1) {
+      const r = evaluateInstitutionLifecycle(worldState, snapshotWith(BAD_SCORES, { institutions: TWO_IMPAIRED, ...extraOverrides }), null, { tick: i, simulationRules });
+      worldState = r.worldState;
+      if (r.candidates.length) candidate = r.candidates[0];
+    }
+    return candidate;
+  }
+
+  test('DARK: the more-vulnerable impaired institution (Bathhouse) is the closure target', () => {
+    const c = closeCandidateWith(undefined, {});
+    expect(c?.candidateType).toBe('institution_closure');
+    expect(c.headline).toContain('Bathhouse');
+  });
+
+  test('LIT: controlling the dark target (Bathhouse ×0.5) + suppressing its rival (Almshouse ×1.5) flips the closure', () => {
+    // factionCompetition writes stablePart(id) slugs; 'Bathhouse'→'bathhouse', 'Almshouse'→'almshouse'.
+    const factions = { powerStructure: { factions: [{ name: 'The Cartel', controlledInstitutions: ['bathhouse'], suppressedInstitutions: ['almshouse'] }] } };
+    const c = closeCandidateWith({ institutionLifecycleEnabled: true, institutionPoliticalControlEnabled: true }, factions);
+    expect(c?.candidateType).toBe('institution_closure');
+    expect(c.headline).toContain('Almshouse'); // the suppressed rival now closes first
+    expect(c.headline).not.toContain('Bathhouse'); // the controlled institution is spared
+  });
+
+  test('LIT but nothing controlled: byte-identical to dark (Bathhouse still closes)', () => {
+    const c = closeCandidateWith({ institutionLifecycleEnabled: true, institutionPoliticalControlEnabled: true }, {});
+    expect(c?.candidateType).toBe('institution_closure');
+    expect(c.headline).toContain('Bathhouse');
+  });
+});

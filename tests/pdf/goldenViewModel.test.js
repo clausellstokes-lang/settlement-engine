@@ -9,6 +9,13 @@
  *   1. GOLDEN SNAPSHOT — the canonical values of every SHARED_FIELDS fact for a
  *      fixed seed are snapshotted, so ANY change to a derived dossier value is
  *      surfaced for review (not auto-updated) instead of slipping through.
+ *      ⚠ REVIEWED AND RE-RECORDED 2026-08-30 (lane TE-RESIDUE-1, ODQ §708.5):
+ *      `headcounts.institutions` 54 → 55, and NOTHING ELSE in the snapshot moved.
+ *      The cause is the burial-ladder content car — the catalog could bury the dead
+ *      at exactly one tier, so a `required: true` burial row was authored for the
+ *      other five and this fixture's settlement gains exactly one institution. The
+ *      +1 IS the review: a required row adds one member and consumes no draw, so a
+ *      second moved field here would have meant something else had changed with it.
  *
  *   2. RENDER-LEAF — parity of the view-model is necessary but not sufficient: a
  *      section can read the right value yet fail to PRINT it. This renders the
@@ -64,6 +71,18 @@ describe('pdf.6 — render-leaf: pinned values reach the rendered PDF section', 
     // case-insensitively since the chapter may upper-case its labels.
     const hit = texts.some(t => t.toLowerCase().includes(String(label).toLowerCase()));
     expect(hit, `Overview text leaves must contain prosperity label "${label}"; got: ${texts.join(' | ').slice(0, 300)}`).toBe(true);
+  });
+
+  it('pdf-export-3: the AI arrival scene + pressure sentence reach the Overview chapter', () => {
+    const aiSettlement = {
+      arrivalScene: 'The gate of ARRIVAL_SENTINEL yawns open before you.',
+      pressureSentence: 'A PRESSURE_SENTINEL hangs over the market.',
+    };
+    const aiVm = buildViewModel({ settlement, aiSettlement, narrativeMode: true });
+    expect(aiVm.overview.arrivalScene, 'AI-mode vm carries the arrival scene').toContain('ARRIVAL_SENTINEL');
+    const joined = collectText(Overview({ settlement, narrativeMode: true, vm: aiVm })).join(' | ');
+    expect(joined, 'Overview must print the arrival scene').toContain('ARRIVAL_SENTINEL');
+    expect(joined, 'Overview must print the pressure sentence').toContain('PRESSURE_SENTINEL');
   });
 
   it('the headcount totals reach the Overview chapter', () => {

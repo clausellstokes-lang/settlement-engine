@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { ensureNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement, npcId } from '../../src/domain/worldPulse/npcAgency.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // §corruption Phase 1b — per-tick onset + organic exposure over worldState.npcStates.
 const snapshotWith = ({ crime, secure }) => ({

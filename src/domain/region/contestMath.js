@@ -13,19 +13,26 @@
  * to ~0 the instant ONE factor is weak, collapsing the field. Summing in LOG-ODDS
  * space and squashing ONCE keeps every factor's marginal influence alive.
  *
- * Cross-platform reproducibility caveat: logistic/logit/softmax use
- * Math.exp and Math.log, which the ECMAScript spec does NOT require to be
- * bit-identical across engines/platforms. In rare boundary cases — a contest
- * score sitting exactly on its pHold cutoff, or a near-tie cumulative-weight
- * boundary in stableSampleByWeight — the same seed could in principle resolve
- * differently on a different platform. This is inherent to transcendentals and
- * accepted as-is; if byte-identical cross-platform snapshots ever become a hard
- * requirement, quantize scores/weights to a fixed precision before the
- * threshold comparison.
+ * Cross-platform reproducibility: SETTLED, and no longer a caveat. logistic,
+ * logit and softmax once called Math.exp and Math.log, which the ECMAScript
+ * spec does NOT require to be bit-identical across engines — so the same seed
+ * could resolve a contest differently in Safari than in Chrome, and no
+ * same-engine golden we own could ever see it. T13 TRANS replaced all four
+ * sites with src/kernel/detMath.js's detExp and detLn, which are built only
+ * from the spec-exact operations (+, -, *, /, compare, floor). These three
+ * functions now answer identically on every conforming engine; the one-time
+ * numeric shift that cure introduced is named in T13's shift record.
  */
 
-/** @param {number} v @returns {number} */
-export const clamp01 = (v) => Math.max(0, Math.min(1, Number.isFinite(v) ? v : 0));
+// clamp01 is the kernel primitive (code-quality-4). The former local one-liner is
+// byte-identical to it over every input (parity-proven,
+// tests/kernel/clampPrimitive.parity.test.js). Imported for this module's own
+// callers + re-exported for the six worldPulse contest modules that import it here.
+// (kernel/math.js is the shared determinism-primitive layer — not src/generators,
+// so the region-must-not-import-prng law is preserved.)
+import { clamp01 } from '../../kernel/math.js';
+import { detExp, detLn } from '../../kernel/detMath.js';
+export { clamp01 };
 
 /**
  * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).
@@ -55,8 +62,8 @@ export function hash01(text) {
  * @param {number} x @returns {number} */
 export function logistic(x) {
   if (!Number.isFinite(x)) return x > 0 ? 1 : 0;
-  if (x >= 0) return 1 / (1 + Math.exp(-x));
-  const z = Math.exp(x);
+  if (x >= 0) return 1 / (1 + detExp(-x));
+  const z = detExp(x);
   return z / (1 + z);
 }
 
@@ -64,7 +71,7 @@ export function logistic(x) {
  * @param {number} p @returns {number} */
 export function logit(p) {
   const c = Math.min(1 - 1e-6, Math.max(1e-6, clamp01(p)));
-  return Math.log(c / (1 - c));
+  return detLn(c / (1 - c));
 }
 
 /**
@@ -79,7 +86,7 @@ export function softmaxWeights(scores, k = 1) {
   if (!scores.length) return [];
   const scaled = scores.map((s) => k * (Number.isFinite(s) ? s : 0));
   const max = Math.max(...scaled);
-  const exps = scaled.map((s) => Math.exp(s - max));
+  const exps = scaled.map((s) => detExp(s - max));
   const total = exps.reduce((a, b) => a + b, 0) || 1;
   return exps.map((e) => e / total);
 }

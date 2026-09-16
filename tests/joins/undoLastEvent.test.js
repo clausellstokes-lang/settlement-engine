@@ -29,6 +29,10 @@
  */
 
 import { beforeEach, describe, test, expect, vi } from 'vitest';
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -64,6 +68,9 @@ import { createSettlementSlice, stripDerivedConfigKeys } from '../../src/store/s
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const gen = (config, seed) =>
@@ -78,7 +85,8 @@ const BASE_CFG = {
 
 // Probed shapes, shared with the sibling harnesses: ec-rt-1 rolls NO
 // stressors and NO activeConditions (eventConditions.test.js); re-rt-1
-// rolls river_fish open and defended_pass depleted (resourceEdits.test.js).
+// rolls [marshlands, ancient_grove, coal_deposits, hunting_grounds] with
+// marshlands open and ancient_grove depleted (resourceEdits.test.js).
 const SEED = 'ec-rt-1';
 const RESOURCE_SEED = 're-rt-1';
 
@@ -115,8 +123,11 @@ function makeStore() {
 /** Seed the slice with a pipeline-generated settlement and enter canon. */
 function bootCanonStore(settlement) {
   const store = makeStore();
-  store.setState(s => { s.settlement = settlement; s.lastSeed = 'undo-test'; });
-  store.getState().refreshSystemState();
+  store.setState(s => {
+    s.settlement = settlement;
+    s.lastSeed = 'undo-test';
+    s.systemState = deriveSystemState(s.settlement);
+  });
   store.getState().canonize();
   return store;
 }
@@ -276,14 +287,21 @@ describe('join: undo of RESOLVE_STRESSOR un-eases — the resolution is taken ba
 describe('join: undo restores the provenance-free records from the log-entry snapshot', () => {
   test('DEPLETE_RESOURCE → undo: the resourceEdits record and the live depletion both revert', () => {
     const before = gen(BASE_CFG, RESOURCE_SEED);
-    expect(before.config.nearbyResources).toContain('river_fish');
-    expect(before.config.nearbyResourcesDepleted).not.toContain('river_fish');
+    expect(before.config.nearbyResources).toContain('marshlands');
+    // The seed's OWN rolled depletion anchors the pre-state: read from the settlement
+    // rather than hardcoded, so it keeps anchoring if the roll ever moves.
+    const rolledDepletion = before.config.nearbyResourcesDepleted?.[0];
+    expect(rolledDepletion, 'this seed must roll a depletion to anchor the pre-state').toBeTruthy();
+    expectAbsentWithAnchor(
+      before.config.nearbyResourcesDepleted, 'marshlands', rolledDepletion,
+      'pre-event depletion set',
+    );
     const store = bootCanonStore(before);
 
-    store.getState().applyEvent(ev('DEPLETE_RESOURCE', { id: 'ev-deplete', targetId: 'river_fish' }));
+    store.getState().applyEvent(ev('DEPLETE_RESOURCE', { id: 'ev-deplete', targetId: 'marshlands' }));
     const depleted = store.getState().settlement;
-    expect(depleted.config.resourceEdits.depleted).toEqual(['river_fish']);
-    expect(depleted.config.nearbyResourcesDepleted).toContain('river_fish');
+    expect(depleted.config.resourceEdits.depleted).toEqual(['marshlands']);
+    expect(depleted.config.nearbyResourcesDepleted).toContain('marshlands');
 
     store.getState().undoLastEvent();
     const undone = store.getState().settlement;
@@ -296,26 +314,42 @@ describe('join: undo restores the provenance-free records from the log-entry sna
     expect(undone.config.nearbyResourcesDepleted).toEqual(before.config.nearbyResourcesDepleted);
 
     const s2 = gen(buildNextConfig(undone), RESOURCE_SEED);
-    expect(s2.config.nearbyResourcesDepleted).not.toContain('river_fish');
+    // The depleted settlement's own list is the anchor: the event demonstrably put
+    // marshlands into it, so the regenerated absence measures the undo.
+    expectPresentThenAbsent(
+      depleted.config.nearbyResourcesDepleted, s2.config.nearbyResourcesDepleted,
+      'marshlands', 'undo reverts the depletion through a full regeneration',
+    );
   });
 
   test('RECOVERED_RESOURCE → undo: the generator’s own rolled depletion comes back', () => {
     const before = gen(BASE_CFG, RESOURCE_SEED);
-    // defended_pass was rolled depleted by the generator itself.
-    expect(before.config.nearbyResourcesDepleted).toContain('defended_pass');
+    // Resource-semantics expansion intentionally changed which canonical
+    // resource owns this draw. The contract is provenance, not a particular
+    // resource key: recover one generator-depleted resource and undo it.
+    const depletedResource = before.config.nearbyResourcesDepleted?.[0];
+    expect(depletedResource).toBeTruthy();
     const store = bootCanonStore(before);
 
-    store.getState().applyEvent(ev('RECOVERED_RESOURCE', { id: 'ev-recover', targetId: 'defended_pass' }));
-    expect(store.getState().settlement.config.nearbyResourcesDepleted).not.toContain('defended_pass');
+    store.getState().applyEvent(ev('RECOVERED_RESOURCE', {
+      id: 'ev-recover',
+      targetId: depletedResource,
+    }));
+    expectPresentThenAbsent(
+      before.config.nearbyResourcesDepleted,
+      store.getState().settlement.config.nearbyResourcesDepleted,
+      depletedResource,
+      'RECOVERED_RESOURCE clears the generator-rolled depletion',
+    );
 
     store.getState().undoLastEvent();
     const undone = store.getState().settlement;
-    expect(undone.config.nearbyResourcesDepleted).toContain('defended_pass');
+    expect(undone.config.nearbyResourcesDepleted).toContain(depletedResource);
     expect(undone.config.resourceEdits).toEqual(before.config.resourceEdits);
     // Without the recovered record, the same-seed regen re-rolls the
     // original depletion — exactly the pre-event world.
     const s2 = gen(buildNextConfig(undone), RESOURCE_SEED);
-    expect(s2.config.nearbyResourcesDepleted).toContain('defended_pass');
+    expect(s2.config.nearbyResourcesDepleted).toContain(depletedResource);
   });
 
   test('REMOVE_TRADE_GOOD → undo: the suppression entry and the live strip both revert', () => {
@@ -350,14 +384,20 @@ describe('join: undo restores the provenance-free records from the log-entry sna
     store.getState().applyEvent(ev('ADD_TRADE_GOOD', {
       id: 'ev-good', targetId: 'Saffron', payload: { direction: 'import' },
     }));
-    expect(store.getState().settlement.economicState.primaryImports).toContain('Saffron');
+    const importsWithSaffron = store.getState().settlement.economicState.primaryImports;
+    expect(importsWithSaffron).toContain('Saffron');
 
     store.getState().undoLastEvent();
     const undone = store.getState().settlement;
     expect('customTradeGoods' in undone.config).toBe('customTradeGoods' in before.config);
     expect(undone.economicState.primaryImports).toEqual(importsBefore);
     const s2 = gen(buildNextConfig(undone), RESOURCE_SEED);
-    expect(s2.economicState.primaryImports).not.toContain('Saffron');
+    // The post-event import list is the anchor: the good demonstrably reached the
+    // economy, so its absence after undo+regen measures the revert, not an empty list.
+    expectPresentThenAbsent(
+      importsWithSaffron, s2.economicState.primaryImports, 'Saffron',
+      'undo removes the authored good from the regenerated economy',
+    );
   });
 
   test('a LEGACY log entry (no snapshot) degrades to the old leave-it behavior, no crash', () => {

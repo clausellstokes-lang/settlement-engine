@@ -2,6 +2,7 @@
  * spatialGenerator.js
  * Settlement spatial layout and district generation.
  */
+import { createGenerationWorldLaw } from './generationContext.js';
 
 // ─── generateSpatialLayout ────────────────────────────────────────────────────
 
@@ -15,6 +16,7 @@
  * @returns {{ layout: string, quarters: Array, tradeAccess: string }}
  */
 export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainType = 'plains') => {
+  const worldLaw = createGenerationWorldLaw({}, { tradeRoute, terrainType });
   const instNames = institutions.map(i => i.name);
   const has = (keyword) => instNames.some(n => n.includes(keyword));
 
@@ -71,11 +73,16 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   // requiring both a dock-specific name and a water trade route.
   const isDockInstitution = (n) => /docks\/port|major port|harbou?r|shipyard|wharf/i.test(n);
   if (instNames.some(isDockInstitution) && ['port', 'river'].includes(tradeRoute)) {
+    const maritime = worldLaw.supportsMaritime();
     quarters.push({
       name:      'Waterfront District',
-      location:  'Along river/coast',
-      desc:      'Warehouses, docks, sailors, longshoremen, fish smell',
-      landmarks: ['Main Wharf', 'Warehouse Row', "Sailors' Quarter"],
+      location:  maritime ? 'Along the coast' : 'Along the river',
+      desc:      maritime
+        ? 'Warehouses, docks, sailors, longshoremen, salt, and fish'
+        : 'Warehouses, wharves, barges, dockworkers, and river traffic',
+      landmarks: maritime
+        ? ['Main Wharf', 'Warehouse Row', "Sailors' Quarter"]
+        : ['Barge Wharf', 'Warehouse Row', 'River Landing'],
     });
   }
 
@@ -214,20 +221,34 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         riverside: 'Walled town straddling the river, a fortified bridge at its commercial heart',
         plains:    'Compact within walls, outlying farms and a weekly market field beyond the gates',
         forest:    'Tightly walled market town, timber yards and sawpits outside the north gate',
-        hills:     'Stone-walled hill town, the castle or keep visible above the market quarter',
+        // "the keep" (was "the castle or keep" — the same unresolved-alternation
+        // class as the desert-village row, §767.3(e); no castle-family
+        // institution exists at town tier, so the sentence commits to the one
+        // word the tier can honestly carry).
+        hills:     'Stone-walled hill town, the keep visible above the market quarter',
         desert:    'Walled trading town around a great well, caravanserai outside the south gate',
         mountain:  'Fortified pass town, walls cutting across the valley floor, garrison above',
       };
       return townLayouts[terrainType] || 'Compact within walls, some outlying farms';
     })(),
     village:     (() => {
+      // The desert row's sacred building is DERIVED from the roster, never
+      // hedged: the template shipped "…well and mosque or chapel" verbatim —
+      // an unresolved authoring alternation printed to the user (§767.3(e)),
+      // naming buildings ('mosque') no institution in the catalog ever mints.
+      // The generator decides from what this settlement actually holds: its
+      // church family, its shrine, or nothing — so the layout line can never
+      // promise a building the dossier lacks.
+      const desertSacred = (has('church') || has('Church') || has('Cathedral') || has('monastery') || has('Temple'))
+        ? ' and its church'
+        : (has('shrine') || has('Shrine')) ? ' and a wayside shrine' : '';
       const villageLayouts = {
         coastal:   'Church and green above the tideline, a harbour lane leading down to the water',
         riverside: 'Village green beside the mill, the river road running through the centre',
         forest:    'A clearing settlement: church, green, and dwellings ringed by managed woodland',
         plains:    'Clustered around church and green, fields radiating out in open strips',
         hills:     'Stone-walled village on a south-facing slope, paths converging at the market cross',
-        desert:    'Compact walled settlement around a central well and mosque or chapel',
+        desert:    `Compact walled settlement around a central well${desertSacred}`,
         mountain:  'Close-built stone houses below the church, a single defended gate',
       };
       return villageLayouts[terrainType] || 'Clustered around church and green';
@@ -248,10 +269,13 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   };
 
   // ── Trade access descriptions ────────────────────────────────────────────
+  const portAccess = worldLaw.supportsMaritime()
+    ? 'Coastal port (harbour and shipyards)'
+    : 'Inland river port (wharves and barge docks)';
   const TRADE_ACCESS_BY_ROUTE = {
     crossroads: 'Major crossroads (multiple gates)',
     river:      'River access (water gate and docks)',
-    port:       'Coastal port (harbor and shipyards)',
+    port:       portAccess,
     road:       'Single main road (two gates)',
     isolated:   'Isolated (one gate, poor road)',
   };

@@ -1,71 +1,22 @@
 // Filter sidebar for the gallery MAPS tab. Mirrors GallerySidebar's structure
-// (SidebarSection + chip rows + ToggleRow + Clear) but over map facets: kind,
-// backdrop, a has-settlements toggle, and the dynamic tag vocabulary.
+// (SidebarSection + chip rows + ToggleRow + Clear) but over map facets:
+// backdrop, the importable toggle, and the dynamic tag vocabulary.
+//
+// The kind facet and the has-settlements toggle were struck when GALLERY-2
+// phase 2 split campaign shares onto their own Campaigns tab: this tab is
+// narrowed server-side to blank maps (kind=['map']), which carry no
+// settlements, so both facets could only ever return the full set or nothing.
 //
 // Icons are OFF here — the gallery is not the Realm map surface, so chips are
 // text/glyph only (gated Button primitives, variant gold/secondary). Theme
 // tokens only; no raw hex or font sizes.
 import { useId } from 'react';
 
-import useIsMobile from '../../hooks/useIsMobile.js';
-import {
-  CARD_ALT,
-  FS,
-  GOLD,
-  GOLD_TXT,
-  INK,
-  R,
-  SP,
-  sans,
-} from '../theme.js';
-import BottomSheet from '../primitives/BottomSheet.jsx';
+import { FS, INK, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import {
-  activeMapFilterCount,
-  BACKDROP_OPTIONS,
-  human,
-  KIND_OPTIONS,
-} from './galleryMapsUtils.js';
-
-function SidebarSection({ title, count = 0, children, style }) {
-  return (
-    <section style={{ display: 'grid', gap: SP.sm, ...style }}>
-      <h3 style={{
-        margin: 0,
-        display: 'flex',
-        alignItems: 'center',
-        gap: SP.xs,
-        color: INK,
-        fontFamily: sans,
-        fontSize: FS.sm,
-        fontWeight: 950,
-        textTransform: 'uppercase',
-        letterSpacing: '0.04em',
-      }}>
-        {title}
-        {count > 0 && (
-          <span style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minWidth: 16,
-            height: 16,
-            padding: '0 5px',
-            borderRadius: 999,
-            background: GOLD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xs,
-            fontWeight: 950,
-          }}>
-            {count}
-          </span>
-        )}
-      </h3>
-      {children}
-    </section>
-  );
-}
+import { activeMapFilterCount, BACKDROP_OPTIONS } from './galleryMapsFilters.js';
+import { human } from './galleryUtils.js';
+import GalleryFilterShell, { SidebarSection } from './GalleryFilterShell.jsx';
 
 // Chips over [value, label] pairs (kind/backdrop). Text only — no icon — so the
 // chip reads as a glyph toggle, not a Realm-map control.
@@ -136,31 +87,34 @@ function ToggleRow({ checked, label, onChange }) {
 
 // The map facet body, shared by the desktop sidebar and the mobile sheet. The
 // Clear control is rendered by the chrome so the body holds only the facets.
-function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool }) {
+//
+// `showHasSettlements` gates the has-settlements toggle: it is OFF for the Maps
+// tab (pinned to blank maps, which carry no members — the facet could only ever
+// return the full set or nothing) and ON for the Campaigns tab (map_with_campaign
+// tiles carry a real member_count, so member_count > 0 is a meaningful filter the
+// list_gallery_maps RPC honors — migration 090's hasSettlements arm).
+function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool, showHasSettlements = false }) {
   return (
     <>
-      <SidebarSection title="Kind" count={filters.kind?.length || 0}>
-        <PairChips options={KIND_OPTIONS} value={filters.kind} onToggle={option => onToggleArray('kind', option)} />
-      </SidebarSection>
-
       <SidebarSection title="Backdrop" count={filters.backdrop?.length || 0}>
         <PairChips options={BACKDROP_OPTIONS} value={filters.backdrop} onToggle={option => onToggleArray('backdrop', option)} />
       </SidebarSection>
 
-      <SidebarSection title="Settlements">
-        <ToggleRow
-          checked={!!filters.hasSettlements}
-          label="Has settlements"
-          onChange={value => onToggleBool('hasSettlements', value)}
-        />
-      </SidebarSection>
-
-      <SidebarSection title="Import">
-        <ToggleRow
-          checked={!!filters.importable}
-          label="Importable only"
-          onChange={value => onToggleBool('importable', value)}
-        />
+      <SidebarSection title="Contents">
+        <div style={{ display: 'grid', gap: SP.sm }}>
+          {showHasSettlements && (
+            <ToggleRow
+              checked={!!filters.hasSettlements}
+              label="Has settlements"
+              onChange={value => onToggleBool('hasSettlements', value)}
+            />
+          )}
+          <ToggleRow
+            checked={!!filters.importable}
+            label="Importable only"
+            onChange={value => onToggleBool('importable', value)}
+          />
+        </div>
       </SidebarSection>
 
       {tagVocabulary.length > 0 && (
@@ -184,61 +138,20 @@ function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBoo
  * @param {(key:string, value:string) => void} props.onToggleArray
  * @param {(key:string, value:boolean) => void} props.onToggleBool
  * @param {() => void} props.onClear
+ * @param {boolean} [props.showHasSettlements]  show the has-settlements toggle
+ *   (Campaigns tab only; struck on the blank-maps tab)
  */
-export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onToggleArray, onToggleBool, onClear }) {
-  const isMobile = useIsMobile();
+export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onToggleArray, onToggleBool, onClear, showHasSettlements = false }) {
   const activeCount = activeMapFilterCount(filters);
-  const bodyProps = { filters, tagVocabulary, onToggleArray, onToggleBool };
-
-  if (isMobile) {
-    return (
-      <div style={{ marginBottom: SP.md }}>
-        <BottomSheet title="Filters" triggerLabel="Filters" count={activeCount} fullWidthTrigger>
-          <div style={{ display: 'grid', gap: SP.lg }}>
-            {activeCount > 0 && (
-              <Button
-                variant="ghost"
-                onClick={onClear}
-                aria-label={`Clear all ${activeCount} active filters`}
-                style={{ justifySelf: 'start', color: GOLD_TXT }}
-              >
-                Clear
-              </Button>
-            )}
-            <MapFilterBody {...bodyProps} />
-          </div>
-        </BottomSheet>
-      </div>
-    );
-  }
-
   return (
-    <aside className="gallery-sidebar-panel" style={{
-      display: 'grid',
-      gap: SP.lg,
-      alignSelf: 'start',
-      padding: SP.md,
-      borderRadius: R.lg,
-      background: CARD_ALT,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
-          Filters
-        </h2>
-        {activeCount > 0 && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClear}
-            aria-label={`Clear all ${activeCount} active filters`}
-            style={{ marginLeft: 'auto', color: GOLD_TXT }}
-          >
-            Clear
-          </Button>
-        )}
-      </div>
-
-      <MapFilterBody {...bodyProps} />
-    </aside>
+    <GalleryFilterShell activeCount={activeCount} onClear={onClear}>
+      <MapFilterBody
+        filters={filters}
+        tagVocabulary={tagVocabulary}
+        onToggleArray={onToggleArray}
+        onToggleBool={onToggleBool}
+        showHasSettlements={showHasSettlements}
+      />
+    </GalleryFilterShell>
   );
 }

@@ -1,0 +1,407 @@
+/**
+ * @vitest-environment jsdom
+ *
+ * economicsTabFlow.test.js — M6d FLOW-DERIVED ECONOMICS, the EconomicsTab thread.
+ *
+ * The tab reads the owning campaign's worldState from the store (the RumorsTab
+ * store-selector pattern) and projects the arrivals tally through the marker-gated
+ * selector. Proves:
+ *   - DORMANT (no campaign / no tally) ⇒ the tab renders WITHOUT the "Live Trade
+ *     Flow" section (byte-identical to today);
+ *   - FLOW PRESENT (a campaign carrying a tradeFlow ledger) ⇒ the additive live-flow
+ *     section renders BESIDE the generation baseline (which still renders).
+ */
+import React from 'react';
+import { describe, test, expect, afterEach } from 'vitest';
+import { render, cleanup } from '@testing-library/react';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { drawnMembers } from '../helpers/drawnProse.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { useStore } from '../../src/store/index.js';
+
+const e = React.createElement;
+
+const ECO = {
+  prosperity: 'modest', economicComplexity: 'a market town', tradeAccess: 'road',
+  primaryImports: ['Wrought iron'], primaryExports: ['Timber'],
+  tradeDependencies: [{ resource: 'iron', severity: 'critical' }],
+  activeChains: [], incomeSources: [],
+};
+const SETTLEMENT = { id: 'forge_town', name: 'Forge Town', economicState: ECO };
+
+const initialCampaigns = useStore.getState().campaigns;
+afterEach(() => {
+  cleanup();
+  useStore.setState({ campaigns: initialCampaigns });
+});
+
+describe('EconomicsTab M6d thread', () => {
+  test('DORMANT: no campaign in the store ⇒ no Live Trade Flow section (baseline only)', () => {
+    useStore.setState({ campaigns: [] });
+    const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    expect(container.textContent).not.toContain('Live Trade Flow');
+    // The generation baseline still renders (prosperity header).
+    expect(container.textContent).toContain('modest');
+  });
+
+  test('FLOW PRESENT: a campaign carrying a tradeFlow tally ⇒ the additive live-flow section renders', () => {
+    useStore.setState({
+      campaigns: [{
+        id: 'c1', settlementIds: ['forge_town'],
+        worldState: { tick: 6, spatialLedgers: { tradeFlow: { forge_town: { in: 2, out: 1, lastTick: 6 } } } },
+      }],
+    });
+    const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    expect(container.textContent).toContain('Live Trade Flow');
+    // The generation baseline is UNTOUCHED beside it.
+    expect(container.textContent).toContain('modest');
+  });
+
+  test('a CHOKED trade-dependent town surfaces the shortage reading', () => {
+    useStore.setState({
+      campaigns: [{
+        id: 'c1', settlementIds: ['forge_town'],
+        worldState: { tick: 6, spatialLedgers: { tradeFlow: { forge_town: { in: 0.1, out: 0.05, lastTick: 6 } } } },
+      }],
+    });
+    const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    expect(container.textContent).toContain('Trade choked');
+  });
+
+  test('does not throw when saveId is absent (falls back to settlement.id, no store campaign)', () => {
+    useStore.setState({ campaigns: [] });
+    expect(() => render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT }))).not.toThrow();
+  });
+});
+
+/**
+ * ── THE PUBLIC GATE (O2GATE, §885.3) ────────────────────────────────────────────────
+ * §885.2/§885.3 rule that the conservative PAID-SURFACE default is `publicDossier ⇒ no
+ * state prose`. The economy desk did not implement it: `OutputContainer` computed
+ * `publicDossier` and never handed it to the tab, so the anonymous gallery dossier
+ * (`PublicDossierView` mounts `OutputContainer` readOnly with NO saveId) drew the corpus
+ * sentences for free.
+ *
+ * TWO mounts carry a `sentence` rung, not one — `economics.prosperityHeader` (DS-ECO-1,
+ * drawn in EconomicsGlance) and `economics.foodSecurity` (DS-ECO-9, drawn here) — so the
+ * gate is placed at the single DRAW that feeds both, and both are asserted below.
+ *
+ * Each arm asserts BOTH DIRECTIONS on the SAME settlement, so it cannot pass vacuously:
+ * a settlement that simply had nothing to say would fail the non-public half.
+ */
+const HERE = dirname(fileURLToPath(import.meta.url));
+const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
+
+/**
+ * A town whose state genuinely DRAWS both sentence mounts. `Comfortable` is on the
+ * prosperity ladder (an OFF-ladder spelling ranks -1 and draws nothing, which is why the
+ * M6d fixture above — `prosperity: 'modest'` — never caught the leak), and the food
+ * balance carries a real DEFICIT so the Food Security section is `defaultOpen` and its
+ * mount is actually in the DOM rather than behind a collapsed header.
+ */
+const SPEAKING = {
+  // Both pins below are LIVENESS ANCHORS on a DRAWN member of a pool, and which member a pool
+  // draws is a function of this `_seed` (`stateProseKernel.js` `drawVariant`) — which is why
+  // car 8a-1's index-stable draw moved DS-ECO-9's member without moving one byte of the
+  // corpus, the desk or the gate this file exists to prove, and why car 8a-12 had to search
+  // this seed. Since car 8a-13 both anchors are COMPUTED from this seed through the shipped
+  // read path (`tests/helpers/drawnProse.js`), so the seed is no longer load-bearing and the
+  // next draw change moves the member and the anchor together. `id` and `saveId` stay
+  // `forge_town` — only `_seed` reaches the draw.
+  id: 'forge_town', name: 'Forge Town', _seed: 'forge_town-b', tier: 'town',
+  economicState: {
+    prosperity: 'Comfortable', economicComplexity: 'a market town', tradeAccess: 'road',
+    situationDesc: 'The market square keeps its hours.',
+    activeChains: [], incomeSources: [], institutionalServices: [],
+    foodSecurity: { label: 'Deficit', stockpile: {} },
+  },
+  economicViability: {
+    metrics: {
+      foodBalance: {
+        dailyProduction: 600, dailyNeed: 1000, deficit: 400, surplus: 0,
+        importCoverage: 0, rawDeficit: 400, agricultureModifier: 1,
+      },
+    },
+  },
+};
+
+/**
+ * The DS-ECO-1 header sentence and the DS-ECO-9 food-security sentence this town draws,
+ * computed through the shipped read path at this fixture's seed (car 8a-13).
+ *
+ * ⚠ THE BAG IS THE ECONOMY DESK'S ONE SHARED BAG, and only two of its seams have a fill on
+ * this town: `{settlement}` and `{access}` (`ACCESS_NOUN.road`). `{complexity}` is UNFILLED
+ * because `COMPLEXITY_NOUN` is keyed on the producer's eleven display strings and this
+ * fixture's `'a market town'` is not one of them — which is the desk's own §0c-3 refusal, and
+ * dropping the variants that name it is what makes this pool's draw what it is.
+ */
+const ECO_SLOTS = Object.freeze({ settlement: 'Forge Town', access: 'road' });
+const { HEADER_SENTENCE, FOOD_SENTENCE } = drawnMembers({
+  HEADER_SENTENCE: { blockId: 'DS-ECO-1', poolKey: 'COMBINATION C3: the middle rungs' },
+  FOOD_SENTENCE: { blockId: 'DS-ECO-9', poolKey: 'DEFICIT' },
+}, { leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS });
+
+describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier', () => {
+  test('a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH', () => {
+    useStore.setState({ campaigns: [] });
+    // Direction 1 — the private dossier SPEAKS. Captured BEFORE cleanup: the container's
+    // textContent empties when the tree unmounts, so reading it later would make the
+    // liveness anchor below assert against an empty string.
+    const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    // Direction 2 — the SAME town on a public dossier says NOTHING from the corpus.
+    const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    // Each sentence is proved PRESENT privately and ABSENT publicly in ONE anchored act. A
+    // public render that silently produced nothing now reds on the liveness anchor instead
+    // of passing a bare exclusion (tests/helpers/anchoredNegatives.js).
+    expectPresentThenAbsent(privText, pubText, HEADER_SENTENCE, 'public dossier gate: the DS-ECO-1 header sentence');
+    expectPresentThenAbsent(privText, pubText, FOOD_SENTENCE, 'public dossier gate: the DS-ECO-9 food-security sentence');
+  });
+
+  test('the gate removes ONLY the corpus sentences — the header prose and every datum tile survive', () => {
+    useStore.setState({ campaigns: [] });
+    const { container } = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
+    // The generator's own header prose is a DATUM, not corpus state prose: it stays.
+    expect(container.textContent).toContain('The market square keeps its hours.');
+    // The glance tiles and their sub-lines are untouched.
+    expect(container.textContent).toContain('Comfortable');
+    expect(container.textContent).toContain('a market town');
+    expect(container.textContent).toContain('Food');
+    expect(container.textContent).toContain('lbs/day');
+    // And the tab's OWN arithmetic readout below the balance bar is untouched.
+    expect(container.textContent).toContain('Production deficit of');
+  });
+
+  test('the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab', () => {
+    const router = readFileSync(ROUTER_SRC, 'utf8');
+    // The condition is still computed where it always was...
+    expect(router).toContain('const publicDossier = readOnly && !saveId;');
+    // ...and the economics route now actually PASSES it. Without this line the render
+    // arms above would pass while the live gallery dossier still leaked.
+    const economicsCase = router.split('\n').find((l) => l.includes("case 'economics':"));
+    expect(economicsCase).toBeTruthy();
+    expect(economicsCase).toContain('publicDossier={publicDossier}');
+  });
+});
+
+/**
+ * ── DESK-ECON2: THE ECONOMY DESK ON ITS THREE OTHER TABS ─────────────────────────────
+ *
+ * ⚠ THIS FILE IS NOW THE ECONOMY DESK'S UI HOME, NOT THE ECONOMICS TAB'S. The desk's leaf
+ * was never an economics-TAB leaf: DS-ECO-11 is the resources page, DS-SUP-3 the services
+ * page, and DS-ECO-8's one speaking position is on daily life. The arms live here rather
+ * than in three new files on purpose — a new test file moves the lighting census and two
+ * ratchet floors, and one desk's rendered proof is one subject.
+ *
+ * WHAT THESE ARMS ARE FOR, restated because the walker cannot do it: the reachability arm
+ * in dossierMountRegistry.walker.test.js only checks that a mount id appears as a string
+ * literal at exactly ONE site under src/components. It cannot tell a real draw from a
+ * decorative literal. A mount is real only if the rendered DOM carries the corpus sentence,
+ * and that is what every arm below asserts — in both directions, on the SAME settlement,
+ * so a fixture that simply had nothing to say fails the liveness half.
+ */
+import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
+import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+
+/**
+ * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
+ * 4): the desk reads index 0 of each pool's eligible list and the expected sentences below
+ * are literal rather than seed-dependent. Its FIELD SHAPES are pinned against a really
+ * generated settlement by the SHAPE PIN arm at the end, which is trap 4 of the desk-car law:
+ * a fixture that is the only writer of the shape it grades is a desk green on nothing.
+ */
+const GROUND = {
+  name: 'Thornwall',
+  tier: 'village',
+  config: { terrainType: 'plains' },
+  economicState: {
+    prosperity: 'Comfortable',
+    tradeAccess: 'road',
+    primaryExports: ['Timber', 'Wool'],
+    activeChains: [],
+    incomeSources: [],
+    institutionalServices: [],
+  },
+  resourceAnalysis: {
+    terrain: 'Plains',
+    strategicValue: 'Medium - agricultural heartland, but exposed to raids',
+    economicStrengths: ['Grain production', 'Livestock'],
+    exploitation: {
+      unexploited: [{
+        rawResource: 'timber',
+        exportValue: 'very high',
+        processingInstitutions: ['Sawmill'],
+        intermediateGoods: ['sawn planks'],
+        finalProducts: ['furniture'],
+      }],
+      partiallyExploited: [],
+      fullyExploited: [],
+    },
+  },
+  availableServices: {
+    food: [{ name: 'Inn', desc: 'A bed and a meal', institution: 'The Broken Wheel' }],
+    equipment: [{ name: 'Smithy', desc: 'Ironwork', institution: 'Blacksmith' }],
+  },
+};
+
+/**
+ * The canonical-at-zero sentence each mounted position draws over GROUND, computed through the
+ * shipped read path with NO SEED — kernel law 4, which is a real and stable answer and not a
+ * fallback (car 8a-13).
+ *
+ * ⚠ WHY THESE ARE COMPUTED TOO, when no draw rule can move a seedless read. A draw rule
+ * cannot, but the REWRITE can: NEVER TRIM lets a pool GROW and Shift 1 rewrites the wordings
+ * themselves, and index 0's own text moving is exactly as fatal to a literal pin as a re-index
+ * was. The `{resource}` and `{institution}` fills ride the exploitation lens's per-lens
+ * override; `{access}` is the shared bag's, and `{good}` and `{complexity}` have no fill on
+ * this town (`bareCommonFill` refuses a title-cased export, and the fixture carries no
+ * `economicComplexity`) — that refusal is part of what each pool's eligible set is.
+ */
+const GROUND_SLOTS = Object.freeze({ settlement: 'Thornwall', access: 'road' });
+const GROUND_LINES = Object.freeze(drawnMembers({
+  terrain: { blockId: 'DS-ECO-11', poolKey: 'TERRAIN: Plains' },
+  strengths: { blockId: 'DS-ECO-11', poolKey: 'ECONOMIC STRENGTHS: the roster is populated' },
+  worth: { blockId: 'DS-ECO-11', poolKey: "STRATEGIC VALUE: the generator's assessment, framed" },
+  workings: {
+    blockId: 'DS-ECO-11',
+    poolKey: 'EXPLOITATION: unexploited, exportValue: high',
+    slots: { ...GROUND_SLOTS, resource: 'timber', institution: 'Sawmill' },
+  },
+  catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
+  posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
+  standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
+}, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
+
+describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
+  test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
+    const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(ResourcesTab, { settlement: GROUND, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
+    // moved rather than the first.
+    expectNoSeedFailures(collectSeedFailures(Object.entries({
+      terrain: GROUND_LINES.terrain,
+      strengths: GROUND_LINES.strengths,
+      worth: GROUND_LINES.worth,
+      workings: GROUND_LINES.workings,
+    }), ([lens, line]) => expectPresentThenAbsent(
+      privText, pubText, line, `resources.groundAndWorkings :: ${lens}`,
+    )), 'all four resources lenses draw privately and none reaches a public dossier');
+    // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
+    // generator's own strategic-value line are the page's and are not corpus prose.
+    expect(pubText).toContain('Plains');
+    expect(pubText).toContain('Grain production');
+    expect(pubText).toContain('agricultural heartland');
+  });
+
+  test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
+    const priv = render(e(ServicesTab, {
+      services: GROUND.availableServices, settlement: GROUND, publicDossier: false,
+    }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(ServicesTab, {
+      services: GROUND.availableServices, settlement: GROUND, publicDossier: true,
+    }));
+    expectPresentThenAbsent(privText, pub.container.textContent, GROUND_LINES.catalog,
+      'services.catalogStanding');
+    // The village tier expects food, healing and equipment; this town keeps two of the
+    // three, so the DATUM the sentence bands is on the page beside it.
+    expect(pub.container.textContent).toContain('1 missing');
+  });
+
+  test('economics.exportPosture: the posture sentence renders, and a public dossier renders none', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    expectPresentThenAbsent(privText, pubText, GROUND_LINES.posture, 'economics.exportPosture');
+    // The Trade Profile section itself is the surface and survives the gate.
+    expect(pubText).toContain('Timber');
+    expect(pubText).toContain('Exports');
+  });
+
+  test('daily_life.standingOfLiving: DS-ECO-8 speaks HERE, and nowhere else on the page-set', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(DailyLifeTab, { settlement: GROUND, publicDossier: false }));
+    const privText = priv.container.textContent;
+    cleanup();
+    const pub = render(e(DailyLifeTab, { settlement: GROUND, publicDossier: true }));
+    const pubText = pub.container.textContent;
+    expectPresentThenAbsent(privText, pubText, GROUND_LINES.standing, 'daily_life.standingOfLiving');
+    // The band word is the page's own anchor fact and is NOT corpus prose.
+    expect(pubText).toContain('Comfortable');
+    cleanup();
+    // ⭐ THE ONE-FACT-ONE-SENTENCE LAW, DRIVEN RATHER THAN ASSERTED FROM THE TABLE: the same
+    // rung is mounted at `economics.economyTile` as a GLANCE, so the economics page must NOT
+    // carry this sentence even though the desk built the rung for it.
+    const econ = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }));
+    // The daily-life render above proved this exact string is drawable from this exact
+    // fixture, so its absence here is the GLANCE rung and not an empty page.
+    // anchored: the same string was asserted PRESENT on daily_life from this same fixture
+    expect(econ.container.textContent).not.toContain(GROUND_LINES.standing);
+    expect(econ.container.textContent, 'the economics page did not render at all')
+      .toContain('Comfortable');
+  });
+
+  test('the ROUTER threads the public condition to all three new tabs', () => {
+    const router = readFileSync(ROUTER_SRC, 'utf8');
+    for (const tab of ['resources', 'services', 'daily_life']) {
+      const line = router.split('\n').find((l) => l.includes(`case '${tab}':`));
+      expect(line, `the router has no ${tab} case`).toBeTruthy();
+      expect(line, `case '${tab}' does not receive publicDossier`).toContain('publicDossier={publicDossier}');
+    }
+  });
+
+  /**
+   * ⛔ TRAP 4 OF THE DESK-CAR LAW: a fixture can be the only writer of the FIELD or the
+   * SHAPE it grades. Every field GROUND carries is checked against a really generated
+   * settlement — same key, same JS shape — so a desk green on this fixture is a desk that
+   * would be green on a real world.
+   */
+  test('SHAPE PIN: every field the fixture carries has the shape the real generator writes', () => {
+    const real = generateSettlementPipeline(
+      { settType: 'village', culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' },
+      null, { seed: 'econ2-shape-pin', customContent: {} },
+    );
+    const shape = (v) => (Array.isArray(v) ? 'array' : v === null ? 'null' : typeof v);
+    expect(shape(real.config?.terrainType)).toBe(shape(GROUND.config.terrainType));
+    expect(shape(real.tier)).toBe(shape(GROUND.tier));
+    expect(shape(real.resourceAnalysis?.terrain)).toBe(shape(GROUND.resourceAnalysis.terrain));
+    expect(shape(real.resourceAnalysis?.strategicValue)).toBe(shape(GROUND.resourceAnalysis.strategicValue));
+    expect(shape(real.resourceAnalysis?.economicStrengths)).toBe('array');
+    expect(shape(real.resourceAnalysis?.exploitation)).toBe('object');
+    for (const bucket of ['unexploited', 'partiallyExploited', 'fullyExploited']) {
+      expect(shape(real.resourceAnalysis?.exploitation?.[bucket]), bucket).toBe('array');
+    }
+    // availableServices is an OBJECT of arrays, not an array — the shape the desk's absence
+    // reader depends on, and the one a hand fixture most easily gets wrong.
+    expect(shape(real.availableServices)).toBe('object');
+    for (const list of Object.values(real.availableServices || {})) expect(shape(list)).toBe('array');
+    expect(shape(real.economicState?.primaryExports)).toBe('array');
+    // And the exploitation ROW shape, taken from a settlement that has one.
+    const anyRow = ['unexploited', 'partiallyExploited', 'fullyExploited']
+      .flatMap((b) => real.resourceAnalysis?.exploitation?.[b] || [])[0];
+    if (anyRow) {
+      expect(shape(anyRow.rawResource)).toBe('string');
+      expect(shape(anyRow.processingInstitutions)).toBe('array');
+      expect(shape(anyRow.finalProducts)).toBe('array');
+    }
+    // The terrain TOKEN and the terrain NAME are different strings on a real settlement —
+    // the label trap, pinned in the UI suite as well as the desk suite.
+    expect(real.config.terrainType).toBe('plains');
+    expect(real.resourceAnalysis.terrain).toBe('Plains');
+  });
+});

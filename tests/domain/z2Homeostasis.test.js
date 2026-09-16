@@ -29,7 +29,7 @@ import { settlementStrength, buildPressureSummary } from '../../src/domain/world
 import { deriveSettlementPressures, pressureIndex } from '../../src/domain/worldPulse/pressureModel.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 

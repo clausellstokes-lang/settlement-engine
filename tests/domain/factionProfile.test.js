@@ -20,6 +20,11 @@ import {
   deriveFactionProfile,
   deriveAllFactionProfiles,
 } from '../../src/domain/factionProfile.js';
+import { explainInstitution } from '../../src/domain/explanation.js';
+import { deriveCausalView } from '../../src/domain/causalViews.js';
+import { recalculateFactionRelationships } from '../../src/domain/factionRelationshipUpdate.js';
+import { deriveDistrictProfile } from '../../src/domain/districtProfile.js';
+import { counterfactualCandidates } from '../../src/domain/counterfactual.js';
 
 // ── deriveFactionArchetype ───────────────────────────────────────────────
 
@@ -226,5 +231,84 @@ describe('deriveAllFactionProfiles()', () => {
     });
     expect(profiles).toHaveLength(1);
     expect(profiles[0].archetype).toBe('merchant');
+  });
+
+  // ── Wave B regression: dense FactionProfile[] (drops nullish roster rows) ──
+  // deriveFactionProfile maps a falsy roster entry to null; deriveAllFactionProfiles
+  // must filter those so every consumer sees a dense array and never dereferences a
+  // null element. Consumers key on profile.id/.name, not positional alignment.
+  it('drops nullish roster rows so the result is a dense FactionProfile[]', () => {
+    const profiles = deriveAllFactionProfiles({
+      powerStructure: {
+        governingName: 'Town Council',
+        factions: [
+          { faction: 'Town Council', power: 35 },
+          null,                          // degenerate/legacy row → deriveFactionProfile returns null
+          undefined,                     // ditto
+          '',                            // falsy string → null
+          { faction: 'Merchant Guilds', power: 22 },
+        ],
+      },
+    });
+    expect(profiles).toHaveLength(2);
+    expect(profiles.every(p => p != null)).toBe(true);
+    expect(profiles.map(p => p.archetype)).toEqual(['government', 'merchant']);
+  });
+});
+
+// ── Wave B regression: consumers tolerate a nullish faction row ────────────
+// Before the source fix these five sites dereferenced array elements behind a
+// non-null cast; a falsy roster row would crash. Now the array is dense, so
+// each consumer produces output without throwing and simply omits that faction.
+describe('deriveAllFactionProfiles() consumers omit a nullish faction row', () => {
+  const settlement = {
+    name: 'Testburgh',
+    powerStructure: {
+      governingName: 'Town Council',
+      publicLegitimacy: { score: 60 },
+      factions: [
+        { faction: 'Town Council', power: 35, controlsInstitutionIds: ['institution.granary'] },
+        null,                            // the degenerate row under test
+        { faction: 'Merchant Guilds', power: 22 },
+      ],
+    },
+    institutions: [{ id: 'institution.granary', name: 'Granary' }],
+    spatialLayout: { quarters: [{ name: 'Market Quarter' }] },
+  };
+
+  it('explanation.explainInstitution does not throw and finds the controlling faction', () => {
+    let env;
+    expect(() => { env = explainInstitution(settlement, 'institution.granary'); }).not.toThrow();
+    expect(env).toBeTruthy();
+    expect(env.causes.some(c => /Town Council/.test(c.reason))).toBe(true);
+  });
+
+  it('causalViews.deriveCausalView("faction") does not throw and lists both real factions', () => {
+    let view;
+    expect(() => { view = deriveCausalView(settlement, 'faction'); }).not.toThrow();
+    expect(view.entries.factions).toHaveLength(2);
+  });
+
+  it('factionRelationshipUpdate.recalculateFactionRelationships does not throw', () => {
+    let updates;
+    expect(() => {
+      updates = recalculateFactionRelationships(settlement, { type: 'PLAGUE' }, { archetype: 'plague' });
+    }).not.toThrow();
+    expect(Array.isArray(updates)).toBe(true);
+  });
+
+  it('districtProfile.deriveDistrictProfile does not throw', () => {
+    let profile;
+    expect(() => {
+      profile = deriveDistrictProfile({ name: 'Market Quarter' }, settlement);
+    }).not.toThrow();
+    expect(profile).toBeTruthy();
+  });
+
+  it('counterfactual.counterfactualCandidates does not throw and lists both real factions', () => {
+    let candidates;
+    expect(() => { candidates = counterfactualCandidates(settlement); }).not.toThrow();
+    const factionCandidates = candidates.filter(c => c.type === 'faction');
+    expect(factionCandidates).toHaveLength(2);
   });
 });

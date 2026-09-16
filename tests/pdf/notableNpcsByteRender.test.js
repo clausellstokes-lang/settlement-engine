@@ -46,8 +46,8 @@ Font.register({
   ],
 });
 
-// "fortified" carries an fi ligature that the bundled Lora subset mis-renders;
-// it MUST be defused (ZWNJ-split) by the section before it reaches the renderer.
+// "fortified" carries an fi cluster. The v2 faces have no ligature lookup, so it
+// MUST reach the renderer BYTE-IDENTICAL — no joiner inserted, none needed.
 // (See the boundary-level assertion below and proseLigatureDefuse.test.js.)
 const SENT = 'The archivist keeps a ledger of debts nobody remembers owing behind the fortified door, and reads it aloud on feast days. ';
 const BLURB = SENT.repeat(5);
@@ -56,7 +56,7 @@ const ZWNJ = '‌';
 
 // Deep collector that EXECUTES the section's (hookless) function components so we
 // reach the leaf <Text> strings — the byte stream itself is font-subset-encoded
-// and ungreppable, so ZWNJ presence is asserted on the element tree instead.
+// and ungreppable, so string fidelity is asserted on the element tree instead.
 function deepText(node, out = []) {
   if (node == null || node === false || node === true) return out;
   if (typeof node === 'string') { out.push(node); return out; }
@@ -110,11 +110,17 @@ describe('NotableNPCs renders real PDF bytes (M4 — worst-case NPC paginates, n
     const vm = buildViewModel({ settlement });
     expect(vm.npcs.sorted.length).toBeGreaterThan(0);
 
-    // Boundary check: the blurb's "fortified" fi-ligature reaches the leaf <Text>
-    // already defused with a ZWNJ. This is what the byte stream can't prove (font
-    // subsetting encodes the glyphs), so we assert it on the executed element tree.
+    // Boundary check: the blurb reaches the leaf <Text> BYTE-IDENTICAL. This is
+    // what the byte stream can't prove (font subsetting encodes the glyphs), so
+    // we assert it on the executed element tree.
+    // ⚠ Was `toContain('fortif<ZWNJ>ied')` until 2026-09-01 — noLig() used to
+    // insert a joiner here, and U+200C is covered by no embedded face, so the
+    // marker was splitting the run onto a non-embedded Helvetica. See
+    // src/pdf/lib/format.js.
     const sectionText = deepText(NotableNPCs({ settlement, vm })).join('');
-    expect(sectionText).toContain(`fortif${ZWNJ}ied`);
+    expect(sectionText).toContain('fortified');
+    // anchored: the toContain above proves the tree rendered — an empty walk reds there.
+    expect(sectionText).not.toContain(ZWNJ);
 
     const element = React.createElement(Document, null,
       React.createElement(NotableNPCs, { settlement, vm }));

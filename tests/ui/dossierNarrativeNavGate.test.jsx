@@ -91,9 +91,6 @@ function freshStore() {
     auth: { tier: 'free', modelPreference: null },
     isElevated: () => false,
     creditLedger: [],
-    trackTabExplored: vi.fn(),
-    onboardingActive: false,
-    onboardingStep: 0,
     userPrefs: { tableViewOpen: false },
     setUserPref: vi.fn(),
   };
@@ -126,6 +123,9 @@ function clickGenerateNarrative(container) {
   fireEvent.click(btn);
 }
 
+// LINEAGE NOTE (master merge W6): the success-lands-on-summary test was removed —
+// master's post-narrative auto-landing was not adopted; this lineage does not
+// navigate on success. The failure-path gate (no navigation on error) stays.
 describe('Dossier narrative — navigation is gated on success', () => {
   test('a FAILED requestNarrative does NOT navigate to the narrative surface', async () => {
     storeState = freshStore();
@@ -146,15 +146,4 @@ describe('Dossier narrative — navigation is gated on success', () => {
     expect(activeTabId(container)).not.toBe('summary');
   });
 
-  test('a SUCCESSFUL requestNarrative still lands on the narrative surface', async () => {
-    storeState = freshStore();
-    // Success: clears aiError (mirrors the slice's success path).
-    storeState.requestNarrative = vi.fn(async () => { storeState.aiError = null; });
-    const { container } = render(<OutputContainer settlement={storeState.settlement} saveId={SAVE_ID} />);
-
-    expect(activeTabId(container)).not.toBe('summary');
-    clickGenerateNarrative(container);
-
-    await waitFor(() => expect(activeTabId(container)).toBe('summary'));
-  });
 });

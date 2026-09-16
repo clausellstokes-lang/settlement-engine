@@ -1,11 +1,17 @@
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
+import { codeOnly } from '../helpers/codeOnlySource.js';
+import { razingSpoils } from '../../src/domain/worldPulse/razing.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
+import { stampWarIntent } from '../../src/domain/worldPulse/warIntent.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature A (war/deployment) — A1 test gates.
@@ -64,7 +70,7 @@ function victim(id, name) {
     legitimacy: 24,
     factions: [
       { faction: 'Village Elders', category: 'civic', power: 30, isGoverning: true },
-      { faction: 'Hedge Wardens', category: 'military', power: 22 },
+      { faction: 'Hedge Guard', category: 'military', power: 22 },
     ],
   });
 }
@@ -161,10 +167,125 @@ describe('war layer — deployment + drain', () => {
     const kinds = war.outcomes.map(o => o.candidateType).sort();
     expect(kinds).toEqual(['army_deployed', 'strategy_deploy', 'war_drain']);
     const drain = war.outcomes.find(o => o.candidateType === 'war_drain');
+    const deployed = war.outcomes.find(o => o.candidateType === 'army_deployed');
     expect(drain.condition.archetype).toBe('war_drain');
     expect(drain.condition.severity).toBeGreaterThan(0);
+    // No persisted WAR_LAYER condition exists yet: both are onset beats.
+    expect(drain.recordMode).toBeUndefined();
+    expect(deployed.recordMode).toBeUndefined();
   });
 
+  test.each([
+    ['a current patron', { tier: 'town', population: 4000 }, true],
+    ['an equal live host under temporary pressure', {
+      tier: 'city', population: 5000,
+      activeConditions: [{ archetype: 'war_pressure', severity: 1 }],
+    }, false],
+  ])('WR-1 opener rejects stale opportunism contradicted by %s', (_counterforce, targetPatch, hasPatron) => {
+    const saves = [
+      save('strong', 'Ironhold', { tier: 'city', population: 5000 }),
+      save('weak', 'Thornmere', targetPatch),
+      ...(hasPatron ? [save('guardian', 'Highwatch', { tier: 'city', population: 8000 })] : []),
+    ];
+    const edges = {
+      settlementIds: saves.map(item => item.id),
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        ...(hasPatron ? [{ id: 'edge.guardian.weak', from: 'guardian', to: 'weak', relationshipType: 'patron' }] : []),
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile' },
+        ...(hasPatron ? { 'edge.guardian.weak': { relationshipType: 'patron', patronSaveId: 'guardian' } } : {}),
+      },
+    };
+    const staleOpportunism = {
+      updatedTick: 1,
+      reasons: {
+        opportunism: {
+          type: 'opportunism', score: 1, sinceTick: 1, tick: 1,
+          receipt: 'The court remembers an undefended prize.',
+        },
+      },
+    };
+    const evaluate = warTerminationEnabled => {
+      const rules = { peaceEngineEnabled: true, warTerminationEnabled };
+      const campaign = warCampaign(rules, {
+        edges,
+        extraState: {
+          warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } },
+          spatialCanonVersion: 1,
+          spatialLedgers: { warReasons: { 'strong>weak': staleOpportunism } },
+        },
+      });
+      campaign.worldState = stampWarIntent(campaign.worldState, 'strong', 'weak', 4);
+      const snap = snapshotFor(campaign, saves);
+      return evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('stale-opportunism'),
+        tick: 5, now: NOW, rules: snap.worldState.simulationRules,
+      });
+    };
+
+    const dark = evaluate(false);
+    const lit = evaluate(true);
+    expect(dark.deployments.strong?.casusReasons).toEqual([{
+      type: 'opportunism', score: 1, receipt: 'The court remembers an undefended prize.',
+    }]);
+    expect(lit.deployments.strong, 'counterforced opportunism cannot open one stale war').toBeUndefined();
+    expect(lit.graphChannels).toEqual([]);
+  });
+
+  test('a fresh age-0 deployment keeps its first conscription visible and conserved', () => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    const rules = { warLayerEnabled: true, warEconomyDrainEnabled: true };
+    const snap = snapshotFor(warCampaign(rules, {
+      edges,
+      extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } } },
+    }), saves);
+    const war = evaluateWarLayer({
+      snapshot: snap,
+      worldState: snap.worldState,
+      rng: createPRNG('r'),
+      tick: 5,
+      now: NOW,
+      rules,
+    });
+    const conscription = war.outcomes.find(o => o.candidateType === 'war_conscription');
+
+    expect(war.deployments.strong.deploymentAge).toBe(0);
+    expect(conscription.recordMode).toBeUndefined();
+    expect(-conscription.populationDeltas[0].delta)
+      .toBe(war.deployments.strong.deployedPopulation);
+  });
+
+  test('light-record migration preserves pinned causes, sacred anchors, and auxiliary deployment state', () => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    const original = {
+      targetId: 'weak', sinceTick: 1, role: 'siege',
+      casusReasons: [{ type: 'sacred_claim', score: 0.8, receipt: 'The rival patron remains an offense.', atTick: 1 }],
+      attackerPatronRef: 'deity:ash', defenderPatronRef: 'deity:river',
+      auxiliary: { campaignKey: 'winter-oath' },
+    };
+    const snap = snapshotFor(warCampaign({}, { edges, extraState: { deployments: { strong: original } } }), saves);
+    const war = evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('migration'), tick: 5, now: NOW, rules: { warLayerEnabled: true } });
+    expect(war.deployments.strong.casusReasons).toEqual(original.casusReasons);
+    expect(war.deployments.strong).toMatchObject({
+      attackerPatronRef: 'deity:ash', defenderPatronRef: 'deity:river',
+      auxiliary: { campaignKey: 'winter-oath' }, sinceTick: 1, deploymentAge: 5,
+    });
+    expect(war.deployments.strong.currentEffectiveStrength).toBeGreaterThan(0);
+  });
+
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
   test('war_drain drains the home economic_capacity (the homeostasis SOURCE is live)', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = {
@@ -317,7 +438,15 @@ describe('Z1 — pulse-conquered occupation parity (matches a generation-occupie
     const deployments = { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } };
     let worldState = { rngSeed: 'war-seed', tick: 4, relationshipStates: edges.relationshipStates, deployments, simulationRules: { warLayerEnabled: true } };
 
-    // The victim's pre-conquest military faction (Hedge Wardens, power 22).
+    // ⚠ THE FIXTURE'S MILITARY ROW WAS RENAMED BY SR-b (the WAR mini-window, cause :261),
+    // and the rename is the point rather than cosmetics: this arm's own title claims parity
+    // with a generation-occupied town, and it was passing on a faction — 'Hedge Wardens' —
+    // that the GENERATOR would never have disarmed at all. The arm was certifying the very
+    // mismatch laneT4-receipt.md:257-261 recorded. 'Hedge Guard' is a name BOTH the sim's
+    // (now generator-identical) predicate and the generator's own call military, so the ×0.3
+    // assertion below is finally an end-to-end proof of the parity the title claims.
+    // The SHIFT RECORD is in tests/domain/occupationLiberationUninstall.test.js.
+    // The victim's pre-conquest military faction (Hedge Guard, power 22).
     const PRE_MILITARY_POWER = 22;
     let parity = false;
     for (let i = 0; i < 60 && !parity; i += 1) {
@@ -332,7 +461,7 @@ describe('Z1 — pulse-conquered occupation parity (matches a generation-occupie
       const conquered = (ps.previousGovernments || []).some(g => g.cause === 'conquest');
       if (conquered) {
         // The local military faction was disarmed (×0.3) and flagged.
-        const military = (ps.factions || []).find(f => /hedge wardens/i.test(f.faction || f.name || ''));
+        const military = (ps.factions || []).find(f => /hedge guard/i.test(f.faction || f.name || ''));
         expect(military).toBeTruthy();
         expect(military.power).toBeLessThanOrEqual(Math.round(PRE_MILITARY_POWER * 0.3) + 1);
         expect((military.modifiers || []).includes('disarmed')).toBe(true);
@@ -412,5 +541,420 @@ describe('war layer — mutual-siege numeric convergence', () => {
       return null;
     };
     expect(firstResolution([...saves].reverse())).toEqual(firstResolution(saves));
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// WR-8 AMENDMENT R — THE THIRD INTENT, AT ITS ONE MOUTH (lane WZ-2).
+//
+// Two slices of WR-8 shipped DARK because `warDeployment.js` had no room for the
+// fork. It has room now, and this is the fork executed: the SAME fixture that
+// conquers above burns instead, and the razing REPLACES the power transfer
+// rather than riding beside it. Every assertion here is driven through the real
+// `evaluateWarLayer`, because the whole claim is about what the war layer emits.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('WR-8 R — the razing fork at the conquest power-transfer site', () => {
+  /** Every prerequisite flag WR-8 lights behind, spelled where the fixture reads it. */
+  const DOCTRINE_LIT = Object.freeze({
+    warLayerEnabled: true,
+    warTerminationEnabled: true,
+    peaceEngineEnabled: true,
+    dispositionChannelsEnabled: true,
+    coalitionLedgerEnabled: true,
+    envoyDiplomacyEnabled: true,
+    demographicsEnabled: true,
+    conquestDoctrineEnabled: true,
+  });
+
+  /**
+   * The conquering fixture, plus everything the razing law requires and nothing
+   * it does not: an openly hostile border with the resentment above hostility's
+   * own floor, ONE maxed live grievance (CR-WR8-B-CLARIFIED), and a besieger
+   * whose derived alignment is malicious (an evil patron and a war-scarred
+   * ledger — the razer's nature is READ, never handed in).
+   */
+  function razingFixture() {
+    const strong = attacker('strong', 'Ironhold');
+    strong.settlement.config.primaryDeitySnapshot = { name: 'The Iron Maw', alignmentAxis: 'evil' };
+    strong.settlement.institutions = [];
+    const weak = victim('weak', 'Thornmere');
+    weak.settlement.institutions = [
+      { id: 'temple', name: 'Temple of the Quiet Road' },
+      { id: 'granary', name: 'The Granary', protectedFromSack: true },
+    ];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile', resentment: 0.95, trust: 0.02, fear: 0.5 },
+      },
+    };
+    return {
+      saves: [strong, weak],
+      edges,
+      channels: [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }],
+      extraState: {
+        deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+        // The scar that makes the court malicious through the real alignment read.
+        warExhaustion: { strong: 1 },
+        spatialLedgers: {
+          warReasons: {
+            'strong>weak': {
+              reasons: {
+                grievance: {
+                  type: 'grievance', score: 1, tick: 4,
+                  receipt: 'Thornmere burned Ironhold’s daughter-village and never answered for it',
+                },
+              },
+            },
+          },
+        },
+      },
+    };
+  }
+
+  /** Drive the real war layer until the siege resolves; return that outcome. */
+  function firstSiegeResolution(rulesPatch) {
+    const { saves, edges, channels, extraState } = razingFixture();
+    for (let tick = 5; tick < 60; tick += 1) {
+      const campaign = warCampaign(rulesPatch, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      const resolution = war.outcomes.find(
+        (o) => o.candidateType === 'conquest' || o.candidateType === 'razing',
+      );
+      if (resolution) return { resolution, war, tick };
+    }
+    return null;
+  }
+
+  test('THE FORK — a wicked victor at the extreme BURNS, and mints no power transfer', () => {
+    const found = firstSiegeResolution(DOCTRINE_LIT);
+    expect(found).not.toBeNull();
+    const { resolution, war } = /** @type {{ resolution: any, war: any }} */ (found);
+    expect(resolution.candidateType).toBe('razing');
+    // LAW 6 — the signature. No occupation, and therefore no power transfer.
+    expect(resolution.type).toBe('condition');
+    expect(resolution.powerTransfer).toBeUndefined();
+    expect(resolution.razing.departure.occupation).toBeNull();
+    expect(resolution.razing.departure.garrison).toBeNull();
+    expect(resolution.razing.departure.terms).toBeNull();
+    expect(resolution.summary).toContain('rode home');
+    // The road is the WICKED one: no license was minted or spent.
+    expect(resolution.razing.road).toBe('initiation');
+    expect(resolution.razing.licenseId).toBeNull();
+    // The conserved sack rides the outcome, and takes people from the victim ONLY —
+    // a razing carries no captives home.
+    expect(resolution.populationDeltas).toHaveLength(1);
+    expect(resolution.populationDeltas[0].saveId).toBe('weak');
+    expect(resolution.populationDeltas[0].delta).toBeLessThan(0);
+    // The institution stamps ride it too, and the protected one is reported unstamped.
+    const byId = Object.fromEntries(resolution.razing.institutions.map((i) => [i.id, i]));
+    expect(byId.temple.impairment.type).toBe('capacity');
+    expect(byId.granary.impairment).toBeNull();
+    expect(byId.granary.protected).toBe(true);
+    // The siege still RESOLVED: the army came home and the front retired.
+    expect(war.deployments.strong).toBeUndefined();
+    expect(war.resolvedDeployments.map((r) => r.outcome)).toEqual(['razing']);
+    expect(war.retiredChannels.length).toBeGreaterThan(0);
+  });
+
+  test('NEGATIVE CONTROL — the SAME fixture with the doctrine DARK conquers exactly as it always did', () => {
+    // The dormancy proof that matters: not "nothing happened", but "the OLD
+    // thing happened, unchanged". Every campaign that has ever run is this one.
+    const found = firstSiegeResolution({});
+    expect(found).not.toBeNull();
+    const { resolution, war } = /** @type {{ resolution: any, war: any }} */ (found);
+    expect(resolution.candidateType).toBe('conquest');
+    expect(resolution.type).toBe('power_transfer');
+    expect(resolution.powerTransfer.toPowerName).toBe('Ironhold occupation authority');
+    expect(resolution.razing).toBeUndefined();
+    expect(war.resolvedDeployments.map((r) => r.outcome)).toEqual(['conquest']);
+  });
+
+  test('NEGATIVE CONTROL — lit, but the quarrel is merely bad: the victor holds the walls', () => {
+    // The gate the amendment says must pin hardest. Same lit world, same wicked
+    // court, one conjunct removed (the border is a rivalry rather than open
+    // hostility) — and the acquisition ladder is back.
+    const { saves, edges, channels, extraState } = razingFixture();
+    edges.edges[0].relationshipType = 'rival';
+    edges.relationshipStates['edge.strong.weak'].relationshipType = 'rival';
+    let resolution = null;
+    for (let tick = 5; tick < 60 && !resolution; tick += 1) {
+      const campaign = warCampaign(DOCTRINE_LIT, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      resolution = war.outcomes.find(
+        (o) => o.candidateType === 'conquest' || o.candidateType === 'razing',
+      ) || null;
+    }
+    expect(resolution).not.toBeNull();
+    expect(/** @type {any} */ (resolution).candidateType).toBe('conquest');
+  });
+});
+
+describe('WR-8 R2 — the license patch\'s one road into the world', () => {
+  const KERNEL = readFileSync(new URL('../../src/domain/worldPulse/pulseKernel.js', import.meta.url), 'utf8');
+
+  test('✅ LANDED — the kernel spreads the patch on the war-ON re-seat, and never on the other one', () => {
+    // ⚠️⚠️ THE LINE OCCURS TWICE AND ONLY ONE OF THEM IS THE RIGHT ONE. The
+    // war-exhaustion re-seat is written once inside `if (simulationRules
+    // .warLayerEnabled)` — where `evaluateWarLayer` resolved a siege and a town
+    // could have burned — and once inside the WAR-OFF WIND-DOWN branch, where
+    // every deployment was resolved as a WITHDRAWAL. A razing needs a WON siege,
+    // which the wind-down branch cannot produce, so patching THAT line would let
+    // a ledger ride out of a branch incapable of minting one.
+    //
+    // ✅ AND THE PATCH IS NOW SPREAD (lane WZ-3, chair ruling CR-PK-1). This pin
+    // was written while the edit was STOPPED, and it deliberately permitted zero
+    // or one spread so it would guard the mistake rather than freeze the stop.
+    // The stop is over: the blocker was the pre-commit hook refusing a file whose
+    // two `no-useless-assignment` errors had been recorded as unfixable, and that
+    // record was false on both legs (the flagged reassignment is not inside any
+    // conditional, and the merge it feeds cannot tell `undefined` from `[]`). So
+    // the count is now EXACTLY ONE: permitting zero would leave a hole exactly
+    // where the ledger's only road runs. The kernel edit was net-zero on the size
+    // ratchet's own metric — 1580 effective before and after.
+    const lines = KERNEL.split('\n');
+    const reseats = lines.filter(
+      (l) => l.includes('deployments: war.deployments, warExhaustion: war.warExhaustion'),
+    );
+    expect(reseats).toHaveLength(2); // the anchor: both re-seats exist
+    const patched = lines.filter((l) => l.includes('...war.worldStatePatch'));
+    expect(patched).toHaveLength(1);
+    // …and it is the war-ON one: the single patched line is also a re-seat line.
+    expect(patched[0]).toContain('deployments: war.deployments');
+    // THE FORBIDDEN LINE, identified by the branch it lives in. The wind-down
+    // re-seat is the one preceded by the WAR-OFF wind-down comment block.
+    const windDownIndex = lines.findIndex((l) => l.includes('WAR-OFF WIND-DOWN'));
+    expect(windDownIndex).toBeGreaterThan(-1); // the anchor: the branch is findable
+    const windDownReseat = lines.findIndex(
+      (l, i) => i > windDownIndex
+        && l.includes('deployments: war.deployments, warExhaustion: war.warExhaustion'),
+    );
+    expect(windDownReseat).toBeGreaterThan(windDownIndex);
+    expect(lines[windDownReseat]).not.toContain('...war.worldStatePatch');
+  });
+
+  test('⚠️ THE MOUTH FOLDS THE LEDGER FORWARD — a second burning may not erase the first', () => {
+    // ⚠️⚠️ THIS PIN IS STRUCTURAL AND SAYS SO, because the behavioural version is
+    // not affordable here and a silent structural pin is how a lane pretends.
+    // The leaf seam is proved BEHAVIOURALLY in razingExecutionWr8.test.js ("A TICK
+    // THAT BURNS TWO TOWNS KEEPS BOTH LEDGERS"), with the counterfactual measured:
+    // hand the second burning the untouched world and the first town's license is
+    // gone. What that pin cannot reach is whether THE MOUTH does the threading,
+    // and a mutant deleting the fold survived every suite — so this exists.
+    // A behavioural mouth-level proof needs a fixture where TWO sieges are won on
+    // ONE tick, which is a seed search rather than a fixture; DELIBERATELY
+    // DEFERRED, documented here, not a bug to re-find.
+    const SRC = readFileSync(new URL('../../src/domain/worldPulse/warDeployment.js', import.meta.url), 'utf8');
+    // Non-vacuity floor: the module is real and the razing branch is findable, so
+    // a relocation or a rename reds here instead of quietly proving nothing.
+    expect(SRC.length).toBeGreaterThan(10000);
+    expect(SRC).toContain('razingSiegeEmission({');
+    const lines = SRC.split('\n');
+    const callIndex = lines.findIndex((l) => l.includes('razingSiegeEmission({'));
+    expect(callIndex).toBeGreaterThan(-1);
+    // 1. The accumulator is DECLARED before the siege loop and seeded from the
+    //    tick's own worldState.
+    const seedIndex = lines.findIndex((l) => l.includes('let razingLicenseState = worldState;'));
+    expect(seedIndex).toBeGreaterThan(-1);
+    expect(seedIndex).toBeLessThan(callIndex);
+    // 2. The emission is HANDED it (and not the raw worldState twice over).
+    const handed = lines.findIndex((l, i) => i > callIndex && i < callIndex + 20 && l.includes('licenseState: razingLicenseState,'));
+    expect(handed).toBeGreaterThan(callIndex);
+    // 3. And the patch is FOLDED BACK IN after each razing, below the call.
+    const folded = lines.findIndex((l, i) => i > callIndex
+      && l.includes('razingLicenseState = { ...razingLicenseState, ...razed.worldStatePatch };'));
+    expect(folded).toBeGreaterThan(handed);
+  });
+
+  test('⚠️ THE PATCH ACTUALLY LEAVES THE LAYER — a razing tick carries the minted license home', () => {
+    // THIS PIN EXISTS BECAUSE ITS ABSENCE WAS MEASURED. A mutant that deleted
+    // the ONE line carrying `razed.worldStatePatch` onto the bag left every
+    // other suite GREEN: the emission's own pins prove the patch is BUILT, and
+    // nothing proved it is RETURNED. The road out of the layer needs its own
+    // proof, and this is it.
+    const strong = attacker('strong', 'Ironhold');
+    strong.settlement.config.primaryDeitySnapshot = { name: 'The Iron Maw', alignmentAxis: 'evil' };
+    const weak = victim('weak', 'Thornmere');
+    // The mourner: bordered by the razer, and close to the town that burns.
+    const ally = save('ally', 'Everdeep');
+    const edges = {
+      settlementIds: ['strong', 'weak', 'ally'],
+      edges: [
+        { id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' },
+        { id: 'edge.strong.ally', from: 'strong', to: 'ally', relationshipType: 'cordial' },
+        { id: 'edge.ally.weak', from: 'ally', to: 'weak', relationshipType: 'allied' },
+      ],
+      relationshipStates: {
+        'edge.strong.weak': { relationshipType: 'hostile', resentment: 0.95, trust: 0.02, fear: 0.5 },
+        'edge.strong.ally': { relationshipType: 'cordial', resentment: 0.1, trust: 0.4 },
+        'edge.ally.weak': { relationshipType: 'allied', resentment: 0.02, trust: 0.95 },
+      },
+    };
+    const extraState = {
+      deployments: { strong: { targetId: 'weak', sinceTick: 1, role: 'siege' } },
+      warExhaustion: { strong: 1 },
+      spatialLedgers: {
+        warReasons: {
+          'strong>weak': {
+            reasons: { grievance: { type: 'grievance', score: 1, tick: 4, receipt: 'blood is owed' } },
+          },
+        },
+      },
+    };
+    const channels = [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }];
+    const saves = [strong, weak, ally];
+    let patch = null;
+    for (let tick = 5; tick < 60 && !patch; tick += 1) {
+      const campaign = warCampaign({
+        warLayerEnabled: true, warTerminationEnabled: true, peaceEngineEnabled: true,
+        dispositionChannelsEnabled: true, coalitionLedgerEnabled: true,
+        envoyDiplomacyEnabled: true, demographicsEnabled: true, conquestDoctrineEnabled: true,
+      }, { edges, channels, extraState });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick, now: NOW, rules: { warLayerEnabled: true },
+      });
+      if (war.outcomes.some((o) => o.candidateType === 'razing')) patch = war.worldStatePatch;
+    }
+    expect(patch).not.toBeNull();
+    const licenses = /** @type {any} */ (patch).spatialLedgers.vengeanceLicenses;
+    const [id] = Object.keys(licenses);
+    expect(id).toMatch(/^vengeance_license\.strong\.weak\./);
+    expect(licenses[id].holders).toEqual(['ally']);
+    expect(licenses[id].consumedBy).toBeNull();
+  });
+
+  test('the evaluator always answers with a patch — every return, including both dark ones', () => {
+    // TOTALITY, because `{...undefined}` is legal JS and a missing key would be
+    // an invisible hole rather than a crash.
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    for (const rules of [{ warLayerEnabled: false }, { warLayerEnabled: true }]) {
+      const campaign = warCampaign(rules, { edges });
+      const snap = snapshotFor(campaign, saves);
+      const war = evaluateWarLayer({
+        snapshot: snap, worldState: snap.worldState, rng: createPRNG('war-seed'),
+        tick: 6, now: NOW, rules,
+      });
+      expect(war.worldStatePatch).toEqual({});
+      expect(Object.isFrozen(war.worldStatePatch)).toBe(true);
+    }
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LT40 car 3 — §733.2, THE RAZING SPOILS. A guard, deliberately not a cure.
+//
+// `warDeployment.js` hands `razingSiegeEmission` a `movableWealth` read off
+// `conqueredSettlement.economicState.wealthIndex`. That field has ONE reader —
+// that line — and NO WRITER anywhere in the estate, so the read is 0 on every
+// conquest that has ever resolved and the whole razing-spoils subsystem is
+// inert. The cure §733.2 names is the TREASURY FIELD, which is W-COIN: a new
+// persistence shape, panel-gated at §733.1, and not built. So this file gets the
+// GUARD instead — the dead read is pinned dead, and the day a writer lands the
+// pin reds rather than the subsystem quietly starting to lie.
+//
+// ⛔ THE SECOND HALF OF §733.2 IS ALREADY CURED AND IS RECORDED HERE SO IT IS NOT
+// RE-FOUND: `peaceTermsDrafting.js` no longer promises players "N% of the
+// treasury". TE-HERALD-1 retired the percentage — `TERM_SHARE_WORDS` at :95,
+// `treasuryShareWords` at :97, rendered at :108 as "A tribute stream: a modest
+// share of the treasury for N years" — for the reason its own docblock gives at
+// :85-88, "a fraction of a quantity no reader can see".
+// ─────────────────────────────────────────────────────────────────────────────
+describe('§733.2 — the razing spoils read, pinned inert until a writer exists', () => {
+  /** @param {string} tier @param {string} seed */
+  const producedTown = (tier, seed) => generateSettlementPipeline(
+    {
+      settType: tier, culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road',
+    },
+    null,
+    { seed, customContent: {} },
+  );
+
+  test('THE RAZING SPOILS ARE PROVABLY INERT: one reader, no writer, 0 on every produced town', () => {
+    // ── (1) THE SOURCE FENCE, ON CODE RATHER THAN BYTES ────────────────────────
+    // The read's own docblock names `wealthIndex` a dozen times explaining why it
+    // is dead, so a raw-byte scan would convict the explanation. `codeOnly`
+    // blanks comments and string CONTENTS while preserving offsets, which is the
+    // estate's shared answer to exactly this (tests/helpers/codeOnlySource.js).
+    const candidates = execSync(
+      'grep -rl "wealthIndex" src --include=*.js --include=*.jsx 2>/dev/null || true',
+      { cwd: new URL('../..', import.meta.url).pathname, encoding: 'utf8' },
+    ).trim();
+    const files = candidates === '' ? [] : candidates.split('\n');
+    // The grep must be able to find something, or every refusal below is vacuous.
+    expect(files.length, 'the scan found no src/ file naming the field at all').toBeGreaterThan(0);
+    /** @type {string[]} */
+    const readers = [];
+    /** @type {string[]} */
+    const writers = [];
+    for (const rel of files) {
+      const code = codeOnly(readFileSync(new URL(`../../${rel}`, import.meta.url), 'utf8'));
+      // A READ is a member access; a WRITE is an object key or an assignment.
+      if (/\.\s*wealthIndex\b/.test(code) || /\?\.\s*wealthIndex\b/.test(code)) readers.push(rel);
+      if (/\bwealthIndex\s*:/.test(code) || /\bwealthIndex\s*=[^=]/.test(code)) writers.push(rel);
+    }
+    expect(readers, 'the one reader of economicState.wealthIndex')
+      .toEqual(['src/domain/worldPulse/warDeployment.js']);
+    expect(
+      writers,
+      'a writer of economicState.wealthIndex appeared. The razing-spoils subsystem has been'
+      + ' inert since it shipped and this pin holds it inert on purpose: if W-COIN (the'
+      + ' treasury field, §733.1-gated) has landed, retire this pin DELIBERATELY and price the'
+      + ' razing outcomes it moves — do not delete it to make a red go away.',
+    ).toEqual([]);
+    // LIVENESS FOR BOTH REFUSALS: the reader's exact spelling is still the line
+    // this pin is about, so an emptied or renamed read cannot pass as "no writer".
+    const warDeploymentCode = codeOnly(readFileSync(
+      new URL('../../src/domain/worldPulse/warDeployment.js', import.meta.url), 'utf8',
+    ));
+    expect(warDeploymentCode).toMatch(
+      /movableWealth:\s*Number\(conqueredSettlement\?\.economicState\?\.wealthIndex\)\s*\|\|\s*0/,
+    );
+
+    // ── (2) MEASURED ON PRODUCED TOWNS, not asserted about a fixture ───────────
+    /** @type {string[]} */
+    const carriers = [];
+    let scanned = 0;
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+      const settlement = producedTown(tier, `spoils-${tier}`);
+      scanned += 1;
+      // The economic state really is built — the liveness anchor for the absence.
+      expect(settlement.economicState, `${tier} produced no economicState`).toBeTruthy();
+      expect(Object.keys(settlement.economicState).length).toBeGreaterThan(5);
+      if (settlement.economicState.wealthIndex !== undefined) carriers.push(tier);
+      // The read spelled EXACTLY as warDeployment.js:763 spells it.
+      const movableWealth = Number(settlement?.economicState?.wealthIndex) || 0;
+      expect(movableWealth).toBe(0);
+      const spoils = razingSpoils({ movableWealth, population: settlement.population });
+      expect(spoils.plunder).toBe(0);
+      expect(spoils.tributePerYear).toBe(0);
+      expect(spoils.nothingLeft).toBe(true);
+      expect(spoils.receipt).toContain('there is nothing in the ash');
+    }
+    expect(scanned).toBe(6);
+    expect(carriers, 'a generated settlement began carrying economicState.wealthIndex').toEqual([]);
+
+    // ── (3) THE POSITIVE TWIN ─────────────────────────────────────────────────
+    // The zero above must be the FIELD's emptiness, never a dead function. Hand
+    // the same call a real number and the spoils are live, so the day a writer
+    // exists this read starts reporting rather than staying silently at zero.
+    const live = razingSpoils({ movableWealth: 900, population: 5000 });
+    expect(live.plunder).toBeGreaterThan(0);
+    expect(live.nothingLeft).toBe(false);
   });
 });

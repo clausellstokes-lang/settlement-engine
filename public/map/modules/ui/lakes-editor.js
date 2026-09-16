@@ -193,6 +193,7 @@ function editLake() {
       byId("lakeGroup").selectedOptions[0].remove();
       byId("lakeGroup").options.add(new Option(group, group, false, true));
       oldGroup.id = group;
+      getLake().group = group; // SettlementForge fork patch: keep feature.group in sync with the renamed group
       toggleNewGroupInput();
       byId("lakeGroupName").value = "";
       return;
@@ -204,6 +205,7 @@ function editLake() {
     newGroup.id = group;
     byId("lakeGroup").options.add(new Option(group, group, false, true));
     byId(group).appendChild(elSelected.node());
+    getLake().group = group; // SettlementForge fork patch: keep feature.group in sync with the DOM move (else the edit reverts on redraw/reload)
 
     toggleNewGroupInput();
     byId("lakeGroupName").value = "";
@@ -228,7 +230,13 @@ function editLake() {
           const freshwater = byId("freshwater");
           const groupEl = byId(group);
           while (groupEl.childNodes.length) {
-            freshwater.appendChild(groupEl.childNodes[0]);
+            const node = groupEl.childNodes[0];
+            // SettlementForge fork patch: keep each lake's feature.group in sync with the DOM move to
+            // freshwater — otherwise the persisted group disagrees with the DOM and reverts on redraw/reload.
+            const lakeId = +node.getAttribute?.("data-f");
+            const lake = pack.features.find(feature => feature.i === lakeId);
+            if (lake) lake.group = "freshwater";
+            freshwater.appendChild(node);
           }
           groupEl.remove();
           byId("lakeGroup").selectedOptions[0].remove();

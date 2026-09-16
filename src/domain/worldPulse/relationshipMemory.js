@@ -1,4 +1,6 @@
 import { TIER_ORDER } from '../../data/constants.js';
+import { halfLifeFactor } from './bandedStock.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { truncateAtWord } from '../../lib/text.js';
 import {
   ensureRelationshipState,
@@ -7,9 +9,20 @@ import {
   relationshipKeyFromEdge,
   relationshipRoles,
 } from './relationshipEvolution.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 
 export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
 export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
+// D5 SEAM (deliberately deferred — documented, not a bug to re-find): the lifespan
+// memory band (relationshipEvolution.memoryHorizonMultiplierOf) scales the load-bearing
+// grievance/warmth mean-reversion in relaxRelationshipStates (both signs, all four D5
+// pins). This incident-memory HALF-LIFE — a secondary read feeding posture classification
+// and revanchism — is NOT yet band-scaled: threading a per-edge horizon through
+// collectMemories → memoryEntry → relationshipMemoryWeight's {halfLifeTicks,
+// maxLookbackTicks} options is the follow-up. Consequence today: an `undying` town's
+// resentment persists (relax suppressed) but its derived memoryScore still decays on the
+// 4-tick human half-life. relationshipMemoryWeight already accepts the scaled options, so
+// the wiring point is ready.
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
 
@@ -77,7 +90,7 @@ function population(/** @type {any} */ item) {
 
 function settlementPower(/** @type {any} */ item) {
   if (!item) return 0.35;
-  const popScore = Math.min(1, Math.log10(Math.max(10, population(item))) / 5);
+  const popScore = Math.min(1, detLog10(Math.max(10, population(item))) / 5);
   const tierScore = tierRank(item) / Math.max(1, TIER_ORDER.length - 1);
   const scores = item.causal?.scores || {};
   const economy = (scores.trade_connectivity ?? 50) / 100;
@@ -114,7 +127,7 @@ export function relationshipMemoryWeight(
   if (!Number.isFinite(eventTick)) return 0;
   const age = Math.max(0, Number(currentTick || 0) - eventTick);
   if (age > maxLookbackTicks) return 0;
-  return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
+  return clamp01(halfLifeFactor(age, Math.max(1, halfLifeTicks)));
 }
 
 function memoryEntry(/** @type {any} */ raw, /** @type {any} */ currentTick, /** @type {any} */ fallbackType) {
@@ -140,7 +153,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   const out = [];
   // One world event lands in up to THREE stores: applyRelationshipPatch writes
   // a recentIncidents row AND (for label changes) a history row, while the
-  // pulse record keeps the outcome itself in pulseHistory.selectedOutcomes —
+  // pulse record keeps the outcome itself in its internal consequence window —
   // and a hierarchy resolution writes incident + history + hierarchyResolutions
   // in one call. Each event must score ONCE (double/triple-counting saturated
   // memoryScore — one modest incident read as an escalating rivalry). The
@@ -178,7 +191,12 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const proposal of worldState?.proposals || []) {
     if (proposal?.status === 'applied' && proposal?.outcome?.id) appliedMarkers.add(proposal.outcome.id);
   }
-  for (const store of [relState.recentIncidents, relState.hierarchyResolutions, relState.history]) {
+  for (const store of [
+    relState.recentIncidents,
+    relState.hierarchyResolutions,
+    relState.turningPoints,
+    relState.history,
+  ]) {
     for (const row of store || []) {
       if (row?.outcomeId) appliedMarkers.add(row.outcomeId);
     }
@@ -186,7 +204,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
 
   for (const pulse of worldState?.pulseHistory || []) {
     const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
-    for (const outcome of pulse?.selectedOutcomes || []) {
+    for (const outcome of outcomesForMechanicalHistory(pulse)) {
       if (outcome?.relationshipKey !== relationshipKey) continue;
       if (outcome?.applyMode === 'proposal' && !appliedMarkers.has(outcome?.id)) continue;
       const tick = Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick;
@@ -216,6 +234,14 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const item of relState.hierarchyResolutions || []) {
     const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
     add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
+  }
+  // Major label/hierarchy changes survive in a separate bounded archive even
+  // after the rolling history window fills. Read it before history so the
+  // durable copy claims the identity and the duplicate short-window row cannot
+  // double-score.
+  for (const item of relState.turningPoints || []) {
+    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_turning_point');
+    add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type)]);
   }
   for (const item of relState.history || []) {
     const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');
@@ -273,9 +299,12 @@ function postureReasons(/** @type {any} */ type, /** @type {any} */ relState, /*
   /** @type {any[]} */
   const out = [];
   if (memories[0]) out.push(`Recent memory: ${memories[0].summary}`);
-  if (relState.resentment > 0.5) out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);
-  if (relState.trust > 0.65) out.push(`High trust (${relState.trust.toFixed(2)}) keeps the relationship functional.`);
-  if (relState.dependency > 0.6) out.push(`Dependency (${relState.dependency.toFixed(2)}) makes the relationship materially unequal.`);
+  // TE-HERALD-1: each of these three lines is GATED above a threshold, so the gate is
+  // the band — the word 'high' was already the honest reading and the float only
+  // repeated it. The scalars stay on the relationship state, where every consumer reads them.
+  if (relState.resentment > 0.5) out.push('High resentment shapes the posture.');
+  if (relState.trust > 0.65) out.push('High trust keeps the relationship functional.');
+  if (relState.dependency > 0.6) out.push('Dependency makes the relationship materially unequal.');
   if (Math.abs(asymmetry) > 0.22) {
     out.push(asymmetry > 0
       ? 'The source settlement has the stronger structural position.'

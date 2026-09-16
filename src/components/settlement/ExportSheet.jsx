@@ -16,37 +16,39 @@
  * settlement would print an empty timeline chapter, which is useless.
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FS, swatch } from '../theme.js';
-import { X } from 'lucide-react';
+import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
-import { COPY } from '../../copy/strings.js';
+import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
-// Variants that print canon-only chapters as their reason for being — disabled
-// in draft (a draft export of them would degrade to a thin shell).
+const VARIANT_ICON = {
+  draft_brief:     Edit3,
+  canon_dossier:   BookMarked,
+  timeline_packet: Clock,
+  campaign_state:  Swords,
+};
+
+// pdf-5: canon-only flagship variants. Their headline chapters (timeline / live
+// Faith & War) are `if-canon`, so a DRAFT-phase export of one silently drops them.
+// Disable them off-canon with a reason, exactly as timeline_packet always did.
 const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
 
 /**
- * Conditionally mounted by the parent ({open && <ExportSheet …/>}), so it
- * remounts on each open and re-derives its phase-aware variant + AI-source
- * defaults from the live store every time — no stale first-mount state.
- *
  * @param {Object} props
+ * @param {boolean} props.open
  * @param {() => void} props.onClose
- * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet'|'campaign_state', useAi?: boolean) => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} [props.onExportFoundry]
+ *   Optional Foundry VTT module export (W-Session). When absent the sheet
+ *   renders exactly as before — no Format section, PDF-only.
  * @param {boolean} [props.exporting]
- * @param {string|null} [props.error]   export failure message — surfaced inside
- *   the sheet with a retry affordance, so status + recovery sit with the action.
  */
-export default function ExportSheet({ onClose, onExport, exporting, error }) {
-  // aria-modal="true" promises the background is inert; back it with real focus
-  // management (focus-in on open, Tab trap, Escape, restore on close). Conditionally
-  // mounted by the parent, so it is always "open" while rendered.
-  const dialogRef = useDialogFocusTrap(true, onClose);
+export default function ExportSheet({ open, onClose, onExport, onExportFoundry, exporting }) {
   const phase    = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
@@ -57,11 +59,43 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
   const aiSettlement = useStore(s => s.aiSettlement);
   const hasAi = !!aiSettlement;
   const [useAi, setUseAi] = useState(hasAi);
+  // W-Session — export format. 'pdf' is the default and the only option when
+  // the caller doesn't provide onExportFoundry (drafts, legacy mounts).
+  // effectiveFormat guards the stranded case: a picked 'foundry' survives in
+  // state across close/reopen, but if the prop is withdrawn meanwhile (flag
+  // killswitch), the CTA must fall back to PDF rather than call undefined.
+  const hasFoundry = typeof onExportFoundry === 'function';
+  const [format, setFormat] = useState('pdf');
+  const effectiveFormat = hasFoundry ? format : 'pdf';
+  // Back the aria-modal="true" promise with real focus management (trap Tab,
+  // move focus in on open, Escape dismisses, restore focus on close). Called
+  // before the `!open` early return so hook order stays stable.
+  const dialogRef = useDialogFocusTrap(open, onClose);
+
+  // pdf-export-2: the sheet is ALWAYS-MOUNTED (SettlementDetail keeps it in the
+  // tree). A canon-only variant picked in canon then uncanonized to draft would
+  // otherwise stay `picked` and export a GUTTED document (the exact hole pdf-5's
+  // disable fix targeted). A fresh open re-syncs useAi to the current AI overlay
+  // too (was frozen at first mount).
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (open) setUseAi(hasAi);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  if (!open) return null;
+
+  const isDisabledVariant = (id) => CANON_ONLY_VARIANTS.has(id) && phase !== 'canon';
+  // effectivePicked mirrors effectiveFormat: a picked-then-stranded canon-only
+  // variant falls back to the suggested variant for THIS phase, so the CTA never
+  // exports a gutted PDF regardless of the mounted-state pick.
+  const effectivePicked = isDisabledVariant(picked) ? suggested : picked;
 
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
-    disabled: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon',
-    disabledReason: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon'
+    Icon: VARIANT_ICON[id] || FileText,
+    disabled: isDisabledVariant(id),
+    disabledReason: isDisabledVariant(id)
       ? 'Available once the settlement is canonized.'
       : null,
   }));
@@ -82,7 +116,7 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="export-sheet-title" style={titleStyle}>
-            {COPY.export.sheetTitle}
+            <FileText size={16} aria-hidden="true" /> {t('export.sheetTitle')}
           </h2>
           <IconButton Icon={X} label="Close" tone="ghost" size="sm" onClick={onClose} />
         </header>
@@ -98,14 +132,39 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
           ))}
         </div>
 
+        {hasFoundry && (
+          <div style={{ padding: '0 12px 8px' }}>
+            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Format</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
+                <Button
+                  key={opt.id}
+                  variant={format === opt.id ? 'secondary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setFormat(opt.id)}
+                  aria-pressed={format === opt.id}
+                  style={{ flex: 1 }}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+            {format === 'foundry' && (
+              <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable. The journals import on first load.
+              </div>
+            )}
+          </div>
+        )}
+
         {hasAi && (
           <div style={{ padding: '0 12px 4px' }}>
             <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
             <div style={{ display: 'flex', gap: 6 }}>
-              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'Narrated' }].map(opt => (
+              {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
                 <Button
                   key={opt.label}
-                  variant={useAi === opt.ai ? 'gold' : 'secondary'}
+                  variant={useAi === opt.ai ? 'secondary' : 'ghost'}
                   size="sm"
                   onClick={() => setUseAi(opt.ai)}
                   aria-pressed={useAi === opt.ai}
@@ -118,17 +177,8 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
             <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
               {useAi
                 ? 'Exports the narrated dossier. Canonical facts are preserved.'
-                : 'Exports the raw simulation. Your narrative stays out of this file.'}
+                : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
             </div>
-          </div>
-        )}
-
-        {/* Export failure — surfaced co-located with the retry control below,
-            rather than a page-body banner stranded behind a closed overlay. The
-            'path forward' prose is owned by the voice workstream. */}
-        {error && (
-          <div role="alert" style={{ margin: '0 12px 8px', padding: '8px 10px', background: swatch.dangerBg, border: `1px solid ${swatch['#C88A8A']}`, borderRadius: 6, fontSize: FS.xs, color: swatch.danger, lineHeight: 1.45 }}>
-            {error}
           </div>
         )}
 
@@ -139,11 +189,13 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
           <Button
             variant="primary"
             size="sm"
-            onClick={() => onExport(picked, useAi)}
+            onClick={() => (effectiveFormat === 'foundry' ? onExportFoundry(effectivePicked, useAi) : onExport(effectivePicked, useAi))}
             disabled={exporting}
             busy={exporting}
           >
-            {exporting ? 'Building PDF…' : (error ? <>Retry export</> : <>Export {PDF_VARIANTS[picked].label}</>)}
+            {exporting
+              ? (effectiveFormat === 'foundry' ? 'Building Module…' : 'Building PDF…')
+              : <>Export {effectiveFormat === 'foundry' ? `${PDF_VARIANTS[effectivePicked].label} Module` : PDF_VARIANTS[effectivePicked].label}</>}
           </Button>
         </footer>
       </div>
@@ -152,6 +204,7 @@ export default function ExportSheet({ onClose, onExport, exporting, error }) {
 }
 
 function VariantCard({ v, picked, onPick }) {
+  const Icon = v.Icon;
   return (
     <button
       type="button"
@@ -162,27 +215,20 @@ function VariantCard({ v, picked, onPick }) {
       style={{
         display: 'flex', alignItems: 'flex-start', gap: 10,
         padding: 10,
-        background: picked ? 'rgba(160,118,42,0.10)' : '#fff',
-        border: `1px solid ${picked ? '#a0762a' : '#d2bd96'}`,
-        borderRadius: 6,
+        // A dispatch parcel: quiet by default, selection carried by an ink border
+        // + a faint ink wash + the trailing tally mark — never gold. Gold is spent
+        // once, on the dispatch seal (the footer Export button).
+        background: picked ? 'rgba(28,20,9,0.05)' : '#fff',
+        border: `1px solid ${picked ? swatch.inkMag2 : '#d2bd96'}`,
         cursor: v.disabled ? 'not-allowed' : 'pointer',
         opacity: v.disabled ? 0.5 : 1,
         textAlign: 'left',
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      {/* Selection in a second channel (P7): a leading check glyph + heavier
-          label weight when picked, not the gold border/tint alone. The slot is
-          width-reserved so the layout does not shift between states. */}
-      <span aria-hidden="true" style={{
-        flexShrink: 0, width: '1em', marginTop: 1, lineHeight: 1.4,
-        fontSize: FS.md, fontWeight: 800,
-        color: picked ? '#a0762a' : 'transparent',
-      }}>
-        {picked ? '✓' : ''}
-      </span>
+      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch.inkMag2 }} />
       <div style={{ flex: 1 }}>
-        <div style={{ fontSize: FS.md, fontWeight: picked ? 800 : 700, color: swatch.inkMag }}>
+        <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
           {v.label}
         </div>
         <div style={{ fontSize: FS.xs, color: swatch.inkMag3, marginTop: 2, lineHeight: 1.4 }}>
@@ -194,6 +240,11 @@ function VariantCard({ v, picked, onPick }) {
           </div>
         )}
       </div>
+      {picked && (
+        <span aria-hidden="true" style={{ flexShrink: 0, alignSelf: 'center', fontSize: FS.md, fontWeight: 800, color: swatch.inkMag2 }}>
+          ✓
+        </span>
+      )}
     </button>
   );
 }
@@ -214,7 +265,7 @@ const sheetStyle = {
   width: 'min(480px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: '#fffbf5',
-  border: '1px solid #d2bd96', borderRadius: 8,
+  border: '1px solid #d2bd96',
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {

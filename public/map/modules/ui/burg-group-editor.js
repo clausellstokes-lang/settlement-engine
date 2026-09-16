@@ -57,10 +57,11 @@ function editBurgGroups() {
 
   function createLine(group) {
     const count = pack.burgs.filter(burg => !burg.removed && burg.group === group.name).length;
+    const safeGroupName = escapeHtml(group.name); // SettlementForge fork patch: untrusted .map group name → innerHTML
     // prettier-ignore
-    return /* html */ `<tr name="${group.name}">
+    return /* html */ `<tr name="${safeGroupName}">
       <td data-tip="Rendering order: higher values are rendered on top"><input type="number" name="order" min="1" max="999" step="1" required value="${group.order || ''}" /></td>
-      <td data-tip="Type group name. It can contain only text, digits and underscore"><input type="text" name="name" value="${group.name}" required pattern="\\w+" /></td>
+      <td data-tip="Type group name. It can contain only text, digits and underscore"><input type="text" name="name" value="${safeGroupName}" required pattern="\\w+" /></td>
       <td data-tip="Settlement preview generator">
         <select name="preview">
           <option value="" ${!group.preview ? "selected" : ""}>no</option>
@@ -108,15 +109,15 @@ function editBurgGroups() {
     const filtered = data.filter(datum => datum.i && !datum.removed);
     const lines = filtered.map(
       ({i, name, fullName, color}) => /* html */ `
-        <tr data-tip="${name}">
+        <tr data-tip="${escapeHtml(name)}">
           <td>
-            <span style="color:${color}">⬤</span>
+            <span style="color:${escapeHtml(color)}">⬤</span>
           </td>
           <td>
             <input data-i="${i}" id="el${i}" type="checkbox" class="checkbox" ${
         !initial.length || initial.includes(i) ? "checked" : ""
       } >
-            <label for="el${i}" class="checkbox-label">${fullName || name}</label>
+            <label for="el${i}" class="checkbox-label">${escapeHtml(fullName || name)}</label>
           </td>
         </tr>`
     );

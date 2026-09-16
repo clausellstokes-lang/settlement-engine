@@ -9,6 +9,7 @@
  * state core, so both rule modules and the orchestrator depend on it with no cycle.
  */
 import { TIER_ORDER } from '../../data/constants.js';
+import { detLog10 } from '../../kernel/detMath.js';
 import { clamp01, normalizeRelationshipType, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles, normalizeRelationshipEdge, ensureRelationshipState } from './relationshipState.js';
 
 const stablePart = (/** @type {any} */ value) =>
@@ -135,6 +136,7 @@ const candidateBase = (/** @type {any} */ {
   metadata = {},
   condition,
   targetSaveId,
+  actorSaveId,
   conflictTags = [],
   dispositionFactor = EMPTY_DISPOSITION,
   tradeSalienceFactor = EMPTY_TRADE_SALIENCE,
@@ -144,10 +146,15 @@ const candidateBase = (/** @type {any} */ {
   const metadataAny = /** @type {any} */ (metadata);
   const toType = typeof metadataAny.toType === "string" ? metadataAny.toType : null;
   const direction = candidateDirection(candidateType, relState, metadataAny);
-  // The actor (the settlement driving this candidate) is the attributed save. Its
-  // disposition multiplier, signed by the candidate's escalation/de-escalation
-  // intent, scales severity + probability. 1.0 for a legacy/empty ledger.
-  const actorId = String(targetSaveId || settlements.from);
+  // The disposition multiplier scales severity + probability by the AGGRESSOR's
+  // aggressiveness — the settlement DRIVING the candidate. For victim-attributed
+  // adversarial candidates (raid/tribute/proxy/sanction/embargo) targetSaveId is
+  // the VICTIM (news attribution), so callers pass an explicit actorSaveId (the
+  // aggressor already in metadata); it defaults to targetSaveId||from for the
+  // majority of pair-driven candidates where actor == attributed save. Keying on
+  // the victim inverted the seam (a pacifist victim damped its raider's raids).
+  // 1.0 for a legacy/empty ledger. [worldpulse-religion-trade-5]
+  const actorId = String(actorSaveId || targetSaveId || settlements.from);
   const factor = signedDispositionFactor(
     /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
     direction,
@@ -279,7 +286,7 @@ function warCostPenalty(/** @type {any} */ item) {
 // and the relationship gate can never diverge. 0..1.
 export function settlementStrength(/** @type {any} */ item, /** @type {any} */ pressure = {}) {
   const pop = populationFor(item);
-  const popScore = Math.min(1, Math.log10(Math.max(10, pop)) / 5);
+  const popScore = Math.min(1, detLog10(Math.max(10, pop)) / 5);
   // economy (0.12) is the war-layer homeostasis lever. conflict
   // stays 0.18 so war's direct effect isn't diluted; the weight came from tier/pop/
   // trade/legitimacy. Weights sum to 1.0. The war-cost penalty is then

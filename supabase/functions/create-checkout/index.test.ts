@@ -20,29 +20,41 @@
  * below must be set BEFORE importing index.ts (PRICE_MAP reads them at module load).
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('CLIENT_URL', 'https://settlementforge.com');
-// Configure the price ids the catalog maps to (PRICE_MAP reads env at load).
-Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_credits_25');
-Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
-Deno.env.set('STRIPE_PRICE_SINGLE_DOSSIER', 'price_single_dossier');
-Deno.env.set('STRIPE_PRICE_FOUNDER_LIFETIME', 'price_founder_lifetime');
+const scopedEnv = installScopedTestEnv({
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  CLIENT_URL: 'https://settlementforge.com',
+  // Configure the price ids the catalog maps to (PRICE_MAP reads env at load).
+  STRIPE_PRICE_CREDITS_25: 'price_credits_25',
+  STRIPE_PRICE_PREMIUM: 'price_premium',
+  STRIPE_PRICE_SINGLE_DOSSIER: 'price_single_dossier',
+  STRIPE_PRICE_FOUNDER_LIFETIME: 'price_founder_lifetime',
+  STRIPE_PRICE_SURVEYOR: 'price_surveyor',
+});
 
 const { handleCreateCheckout } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** Recording Stripe stub: captures the params handed to checkout.sessions.create. */
 function makeStripe() {
   const created: Array<Record<string, unknown>> = [];
   const customers: Array<Record<string, unknown>> = [];
+  const deletedCustomers: string[] = [];
   const stripeClient = {
     customers: {
       create: (params: Record<string, unknown>) => {
         customers.push(params);
         return Promise.resolve({ id: 'cus_stub' });
+      },
+      del: (id: string) => {
+        deletedCustomers.push(id);
+        return Promise.resolve({ id, deleted: true });
       },
     },
     checkout: {
@@ -55,7 +67,7 @@ function makeStripe() {
     },
   };
   // deno-lint-ignore no-explicit-any
-  return { created, customers, stripeClient: stripeClient as any };
+  return { created, customers, deletedCustomers, stripeClient: stripeClient as any };
 }
 
 /** supabase user-client stub: getUser() returns the given user (the verified JWT). */
@@ -73,11 +85,23 @@ function makeUserClient(user: { id: string; email?: string | null } | null, auth
 
 /** Admin stub: profile read returns an existing stripe_customer_id by default;
  *  rpc('founder_seats_taken') resolves the given seat count (default: plenty free). */
-function makeAdminClient(customerId: string | null = 'cus_existing', seatsTaken: number | null = 0) {
+function makeAdminClient(
+  customerId: string | null = 'cus_existing',
+  seatsTaken: number | null = 0,
+  inactive = false,
+) {
   // deno-lint-ignore no-explicit-any
   return (): any => ({
     from: (_t: string) => ({
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: customerId }, error: null }) }) }),
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({
+        data: {
+          stripe_customer_id: customerId,
+          banned_at: null,
+          disabled_at: null,
+          deleted_at: inactive ? '2026-07-24T00:00:00.000Z' : null,
+        },
+        error: null,
+      }) }) }),
       update: () => ({ eq: () => Promise.resolve({ error: null }) }),
     }),
     rpc: (fn: string) => Promise.resolve(
@@ -95,7 +119,7 @@ const req = (body: unknown, headers: Record<string, string> = {}) =>
     body: JSON.stringify(body),
   });
 
-Deno.test('credits are derived from CREDIT_AMOUNTS server-side, NOT from the request body', async () => {
+scopedEnv.test('credits are derived from CREDIT_AMOUNTS server-side, NOT from the request body', async () => {
   const stripe = makeStripe();
   // The body tries to smuggle credits=99999; the metadata must carry 25 (the
   // server CREDIT_AMOUNTS value for credits_25), never the attacker number.
@@ -110,7 +134,7 @@ Deno.test('credits are derived from CREDIT_AMOUNTS server-side, NOT from the req
   assertEquals(metadata.product, 'credits_25');
 });
 
-Deno.test('supabase_user_id in the metadata comes from getUser(), never the body', async () => {
+scopedEnv.test('supabase_user_id in the metadata comes from getUser(), never the body', async () => {
   const stripe = makeStripe();
   // The body claims a different user id; the verified JWT resolves to u_real.
   const res = await handleCreateCheckout(
@@ -122,7 +146,7 @@ Deno.test('supabase_user_id in the metadata comes from getUser(), never the body
   assertEquals(metadata.supabase_user_id, 'u_real');   // from getUser(), not the body
 });
 
-Deno.test('an unknown product is rejected (400) and never reaches Stripe', async () => {
+scopedEnv.test('an unknown product is rejected (400) and never reaches Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'free_credits_lol' }, { Authorization: 'Bearer jwt' }),
@@ -132,7 +156,7 @@ Deno.test('an unknown product is rejected (400) and never reaches Stripe', async
   assertEquals(stripe.created.length, 0);     // no session created for a fake product
 });
 
-Deno.test('a non-anonymous product with NO auth header is rejected (400) before Stripe', async () => {
+scopedEnv.test('a non-anonymous product with NO auth header is rejected (400) before Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'credits_25' }),  // no Authorization header
@@ -142,7 +166,23 @@ Deno.test('a non-anonymous product with NO auth header is rejected (400) before 
   assertEquals(stripe.created.length, 0);
 });
 
-Deno.test('single_dossier is anonymous-allowed with a valid checkout token and carries no user id', async () => {
+scopedEnv.test('an inactive account is rejected before any Stripe billing side effect', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }),
+      adminClient: makeAdminClient('cus_existing', 0, true),
+    },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(await res.json(), { error: 'account_inactive' });
+  assertEquals(stripe.customers.length, 0);
+  assertEquals(stripe.created.length, 0);
+});
+
+scopedEnv.test('single_dossier is anonymous-allowed with a valid checkout token and carries no user id', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);  // 24..128 chars
   const res = await handleCreateCheckout(
@@ -157,7 +197,7 @@ Deno.test('single_dossier is anonymous-allowed with a valid checkout token and c
   assertEquals(metadata.anonymous, 'true');
 });
 
-Deno.test('single_dossier without a valid checkout token is rejected (400)', async () => {
+scopedEnv.test('single_dossier without a valid checkout token is rejected (400)', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'single_dossier', checkoutToken: 'short' }),
@@ -167,29 +207,81 @@ Deno.test('single_dossier without a valid checkout token is rejected (400)', asy
   assertEquals(stripe.created.length, 0);
 });
 
-// ── Founder Lifetime seat cap (advertised 30 seats, enforced server-side) ────
-// founder_seats_taken() feeds both the pricing-page counter AND this gate; a
-// sold-out founder tier must never reach Stripe.
+// ── Anonymous single_dossier rate limiter (backend-1) ────────────────────────
+// The amplifiable path (mint Stripe sessions + write dossier_purchases with the
+// public anon key) must be throttled BEFORE Stripe is reached, like every other
+// anon edge fn. The `rateLimit` dep is the injection seam; production passes the
+// migration-035-backed limiter with an in-memory backstop.
 
-Deno.test('founder_lifetime with seats remaining creates a checkout session', async () => {
+scopedEnv.test('anonymous single_dossier over the rate limit is rejected (429) before Stripe', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient(null),
+      adminClient: makeAdminClient(),
+      rateLimit: () => Promise.resolve(false),   // over the limit
+    },
+  );
+  assertEquals(res.status, 429);
+  assertEquals(stripe.created.length, 0);         // never reached Stripe
+});
+
+scopedEnv.test('the rate limiter gates ONLY the single_dossier path (a credits checkout is not throttled)', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }),
+      adminClient: makeAdminClient(),
+      rateLimit: () => Promise.resolve(false),   // would block if consulted
+    },
+  );
+  // A non-anonymous product never consults the single_dossier limiter.
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+});
+
+// ── The Founder chair is ABOLISHED, not capped (ODQ §118) ───────────────────
+// These two tests used to assert that a founder checkout SUCCEEDS below the cap
+// and is refused at it. A chair is given, never sold, so both are inverted: the
+// request is refused with the generic 400 at EVERY seat count, and it is refused
+// before any Stripe call regardless of how many chairs are held.
+
+scopedEnv.test('founder_lifetime is refused (400) even with chairs unheld, and never reaches Stripe', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
   );
-  assertEquals(res.status, 200);
-  assertEquals(stripe.created.length, 1);
-  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'founder_lifetime');
+  assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
 });
 
-Deno.test('founder_lifetime at the 30-seat cap is rejected (400) and never reaches Stripe', async () => {
+scopedEnv.test('founder_lifetime is refused at a full Hall too (the refusal is not a seat gate)', async () => {
   const stripe = makeStripe();
   const res = await handleCreateCheckout(
     req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 30) },
   );
   assertEquals(res.status, 400);
-  assertEquals(stripe.created.length, 0);   // seat 31 is never offered for sale
+  assertEquals(stripe.created.length, 0);
+});
+
+// CONTROL: the harness can still create a session, so the two refusals above are
+// a real verdict on the product and not a stub that refuses everything.
+scopedEnv.test('CONTROL: premium still creates a checkout session on the same harness', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'premium' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'premium');
 });
 
 // ── Redeem codes (migration 107) ──────────────────────────────────────────────
@@ -224,7 +316,7 @@ function makeRedeemAdminClient(cfg: {
   return { rpcCalls, adminClient: () => client };
 }
 
-Deno.test('a reserved free_month code attaches a SERVER-side discount and binds the session', async () => {
+scopedEnv.test('a reserved free_month code attaches a SERVER-side discount and binds the session', async () => {
   const stripe = makeStripe();
   const admin = makeRedeemAdminClient({
     reservation: { ok: true, stripe_coupon_id: 'coupon_free_month', kind: 'free_month', credit_amount: null, applies_to: 'subscription', redemption_id: 'red_1' },
@@ -258,7 +350,7 @@ Deno.test('a reserved free_month code attaches a SERVER-side discount and binds 
   assertEquals(body.redeemNotice, undefined);      // applied cleanly — no notice
 });
 
-Deno.test('a reserved credits-kind code attaches NO discount (the webhook grants on completion)', async () => {
+scopedEnv.test('a reserved credits-kind code attaches NO discount (the webhook grants on completion)', async () => {
   const stripe = makeStripe();
   const admin = makeRedeemAdminClient({
     reservation: { ok: true, stripe_coupon_id: null, kind: 'credits', credit_amount: 15, applies_to: 'any', redemption_id: 'red_2' },
@@ -275,7 +367,7 @@ Deno.test('a reserved credits-kind code attaches NO discount (the webhook grants
   assertEquals(bind!.args.p_session_id, 'cs_stub');
 });
 
-Deno.test('a code that fails to reserve proceeds WITHOUT a discount and returns a redeemNotice', async () => {
+scopedEnv.test('a code that fails to reserve proceeds WITHOUT a discount and returns a redeemNotice', async () => {
   const stripe = makeStripe();
   const admin = makeRedeemAdminClient({
     reservation: { ok: false, reason: 'invalid_code' },
@@ -293,7 +385,7 @@ Deno.test('a code that fails to reserve proceeds WITHOUT a discount and returns 
   assertEquals(typeof body.url, 'string');
 });
 
-Deno.test('a mode_mismatch reservation returns a notice WITHOUT reverting (no burn)', async () => {
+scopedEnv.test('a mode_mismatch reservation returns a notice WITHOUT reverting (no burn)', async () => {
   // A subscription-only code typed into the credit-pack (payment-mode) modal. The mode
   // gate (112) refuses it inside reserve_redemption BEFORE any once-per-user row exists,
   // so create-checkout must NOT run the revert lifecycle that used to burn the code —
@@ -318,7 +410,7 @@ Deno.test('a mode_mismatch reservation returns a notice WITHOUT reverting (no bu
   assertEquals(typeof body.redeemNotice, 'string');
 });
 
-Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never reserves)', async () => {
+scopedEnv.test('an anonymous single_dossier purchase IGNORES the redeem code (never reserves)', async () => {
   const stripe = makeStripe();
   const admin = makeRedeemAdminClient();
   const token = 'x'.repeat(40);
@@ -339,20 +431,21 @@ Deno.test('an anonymous single_dossier purchase IGNORES the redeem code (never r
 // to revert. The "a mode_mismatch reservation returns a notice WITHOUT reverting" test
 // above covers the replacement behaviour, including that no coupon rides the session.)
 
-Deno.test('a founder seat-count failure FAILS CLOSED (400, no session)', async () => {
+// Re-keyed onto `premium` (ODQ §118): the founder seat-count RPC no longer runs,
+// so the fail-closed behaviour is asserted on a product that still transacts.
+scopedEnv.test('an admin-lookup failure FAILS CLOSED (400, no session)', async () => {
   const stripe = makeStripe();
-  // rpc resolves an error (seatsTaken=null + patched rpc): simulate via a stub
-  // whose rpc always errors.
+  // Every admin call errors: the handler must refuse rather than proceed.
   // deno-lint-ignore no-explicit-any
   const adminClient = (): any => ({
     from: () => ({
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: 'cus_x' }, error: null }) }) }),
-      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: { message: 'profiles unavailable' } }) }) }),
+      update: () => ({ eq: () => Promise.resolve({ error: { message: 'profiles unavailable' } }) }),
     }),
     rpc: () => Promise.resolve({ data: null, error: { message: 'counter unavailable' } }),
   });
   const res = await handleCreateCheckout(
-    req({ product: 'founder_lifetime' }, { Authorization: 'Bearer jwt' }),
+    req({ product: 'premium' }, { Authorization: 'Bearer jwt' }),
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient },
   );
   assertEquals(res.status, 400);
@@ -398,7 +491,7 @@ function makeSaveAdminClient(save: { id: string; user_id: string } | null) {
   return { factory, settlementLookups };
 }
 
-Deno.test('a signed-in single_dossier binds save_id ONLY after ownership verification', async () => {
+scopedEnv.test('a signed-in single_dossier binds save_id ONLY after ownership verification', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);
   const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'u1' });   // owned by the buyer
@@ -414,7 +507,7 @@ Deno.test('a signed-in single_dossier binds save_id ONLY after ownership verific
   assertEquals(metadata.save_id, 'save_1');            // the verified save id rode the metadata
 });
 
-Deno.test('a FORGED saveId (a save the buyer does not own) is rejected (400), no session', async () => {
+scopedEnv.test('a FORGED saveId (a save the buyer does not own) is rejected (400), no session', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);
   const admin = makeSaveAdminClient({ id: 'save_victim', user_id: 'someone_else' });  // foreign save
@@ -426,7 +519,7 @@ Deno.test('a FORGED saveId (a save the buyer does not own) is rejected (400), no
   assertEquals(stripe.created.length, 0);              // a forged binding never reaches Stripe
 });
 
-Deno.test('an UNKNOWN saveId (no such save) is rejected (400), no session', async () => {
+scopedEnv.test('an UNKNOWN saveId (no such save) is rejected (400), no session', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);
   const admin = makeSaveAdminClient(null);             // settlements lookup misses
@@ -438,7 +531,7 @@ Deno.test('an UNKNOWN saveId (no such save) is rejected (400), no session', asyn
   assertEquals(stripe.created.length, 0);
 });
 
-Deno.test('a signed-in single_dossier WITHOUT a saveId stays valid (one-shot) with empty save_id', async () => {
+scopedEnv.test('a signed-in single_dossier WITHOUT a saveId stays valid (one-shot) with empty save_id', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);
   const admin = makeSaveAdminClient(null);
@@ -452,7 +545,7 @@ Deno.test('a signed-in single_dossier WITHOUT a saveId stays valid (one-shot) wi
   assertEquals(admin.settlementLookups.length, 0);     // no ownership read attempted
 });
 
-Deno.test('an ANONYMOUS single_dossier IGNORES saveId (never reads settlements, empty save_id)', async () => {
+scopedEnv.test('an ANONYMOUS single_dossier IGNORES saveId (never reads settlements, empty save_id)', async () => {
   const stripe = makeStripe();
   const token = 'x'.repeat(40);
   const admin = makeSaveAdminClient({ id: 'save_1', user_id: 'whoever' });
@@ -465,4 +558,241 @@ Deno.test('an ANONYMOUS single_dossier IGNORES saveId (never reads settlements, 
   assertEquals(metadata.anonymous, 'true');
   assertEquals(metadata.save_id, '');                  // anonymous never binds durable rights
   assertEquals(admin.settlementLookups.length, 0);     // anonymous never reads settlements
+});
+
+// ── Delivery stash (dossier_purchases, migration 122) ───────────────────────
+// Ported OURS-only lane: an anonymous single_dossier buyer's settlement is
+// persisted server-side (keyed on checkout_token) BEFORE the Stripe session, the
+// size guard is an early return (buyer sees it pre-payment), and the success URL
+// echoes the delivery token (dt) so a wiped localStorage can still recover it.
+
+/** Admin stub that records dossier_purchases upserts (the delivery stash). */
+function makeStashAdmin() {
+  const upserts: Array<{ row: Record<string, unknown>; opts: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const adminClient = (): any => ({
+    from: (_t: string) => ({
+      upsert: (row: Record<string, unknown>, opts: unknown) => {
+        upserts.push({ row, opts });
+        return Promise.resolve({ error: null });
+      },
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: null }, error: null }) }) }),
+      update: () => ({ eq: () => Promise.resolve({ error: null }) }),
+    }),
+    rpc: (_fn: string) => Promise.resolve({ data: 0, error: null }),
+  });
+  return { upserts, adminClient };
+}
+
+scopedEnv.test('an OVERSIZED settlement is rejected (413) BEFORE any Stripe call or persist', async () => {
+  const stripe = makeStripe();
+  const admin = makeStashAdmin();
+  const huge = { blob: 'x'.repeat(520 * 1024) };   // > MAX_DOSSIER_BYTES (512KB)
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: 't'.repeat(40), settlement: huge }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 413);
+  assertEquals(stripe.created.length, 0);   // rejected pre-payment
+  assertEquals(admin.upserts.length, 0);    // and never persisted
+});
+
+scopedEnv.test('an anonymous single_dossier persists the settlement + byte_size, then creates the session with a dt token', async () => {
+  const stripe = makeStripe();
+  const admin = makeStashAdmin();
+  const token = 't'.repeat(40);
+  const settlement = { name: 'Riverbend', tier: 'village', population: 400 };
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token, settlement }),   // no auth → anonymous
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  // The settlement was stashed on the checkout_token with its byte size.
+  assertEquals(admin.upserts.length, 1);
+  assertEquals(admin.upserts[0].row.checkout_token, token);
+  assertEquals(admin.upserts[0].row.settlement, settlement);
+  assertEquals(typeof admin.upserts[0].row.byte_size, 'number');
+  // The session was created and its success URL carries the delivery token (dt).
+  assertEquals(stripe.created.length, 1);
+  const successUrl = String(stripe.created[0].success_url);
+  assertEquals(successUrl.includes(`dt=${token}`), true);
+});
+
+scopedEnv.test('a single_dossier WITHOUT a settlement still creates the session (client stash fallback)', async () => {
+  const stripe = makeStripe();
+  const admin = makeStashAdmin();
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: 't'.repeat(40) }),   // no settlement
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(admin.upserts.length, 0);    // nothing to stash server-side
+  assertEquals(stripe.created.length, 1);   // checkout still proceeds
+});
+
+// ── Auto-reload consent: savePaymentMethod → setup_future_usage (M-3b, §4.2) ────
+// A signed-in credit-pack buyer may opt to save the card off-session. Gated
+// server-side on payment mode + signed-in + credit-pack; never trusts the flag
+// alone to bypass those conditions.
+
+scopedEnv.test('savePaymentMethod on a signed-in credit pack sets payment_intent_data.setup_future_usage=off_session', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);
+  const params = stripe.created[0];
+  assertEquals((params.payment_intent_data as Record<string, unknown>)?.setup_future_usage, 'off_session');
+});
+
+scopedEnv.test('a credit pack WITHOUT savePaymentMethod carries no payment_intent_data', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+scopedEnv.test('savePaymentMethod is ignored on a SUBSCRIPTION product (payment_intent_data invalid in subscription mode)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'premium', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(stripe.created[0].mode, 'subscription');
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+  assertEquals(
+    stripe.created[0].subscription_data,
+    { metadata: { supabase_user_id: 'u1', product: 'premium' } },
+  );
+});
+
+scopedEnv.test('savePaymentMethod is ignored for an ANONYMOUS buyer (no signed-in user)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'single_dossier', savePaymentMethod: true, checkoutToken: 'a'.repeat(40) }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient(null) },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+// Re-keyed onto `single_dossier` (ODQ §118): founder_lifetime is refused before
+// any session exists, so it can no longer witness a session-shape claim.
+scopedEnv.test('savePaymentMethod is ignored on a non-credit-pack payment product (single_dossier)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: 'tok_'.padEnd(32, 'a'), savePaymentMethod: true }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient(null) },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+// ── Surveyor product (#16, M-4b): subscription mode, signed-in only ───────────
+
+scopedEnv.test('surveyor creates a SUBSCRIPTION-mode checkout session for a signed-in user', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'surveyor' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  assertEquals(stripe.created[0].mode, 'subscription');
+  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'surveyor');
+  assertEquals((stripe.created[0].metadata as Record<string, string>).credits, '0');
+  assertEquals(
+    stripe.created[0].subscription_data,
+    { metadata: { supabase_user_id: 'u1', product: 'surveyor' } },
+  );
+  // subscription mode never attaches payment_intent_data (savePaymentMethod ignored).
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+scopedEnv.test('surveyor requires authentication (an anonymous request is rejected)', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'surveyor' }),   // no Authorization header
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status >= 400, true);
+  assertEquals(stripe.created.length, 0);   // never reached Stripe
+});
+
+// ── Wave-D human verification (Turnstile) ─────────────────────────────────────
+// verifyTurnstile gates the session-creation door BEFORE any Stripe call. It is
+// INERT (a no-op, ok:true) until TURNSTILE_SECRET_KEY is set — so the money path
+// is byte-identical while unconfigured — and FAILS CLOSED (403) when active: a
+// missing/failed token shows the house-register error and never reaches Stripe.
+// verifyTurnstile itself is pinned in _shared/verifyTurnstile.test.ts; these pin
+// the create-checkout WIRING (inert byte-path, fail-closed, active happy path).
+
+/** Stub globalThis.fetch so a secret-configured verifyTurnstile resolves a known
+ *  siteverify verdict without touching the network. Returns a restore fn. */
+function stubFetch(success: boolean): () => void {
+  const original = globalThis.fetch;
+  // deno-lint-ignore no-explicit-any
+  globalThis.fetch = (() => Promise.resolve(new Response(JSON.stringify({ success }), { status: 200 }))) as any;
+  return () => { globalThis.fetch = original; };
+}
+
+scopedEnv.test('INERT: a captchaToken in the body does not change the flow while unconfigured (byte-identical)', async () => {
+  Deno.env.delete('TURNSTILE_SECRET_KEY');
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', captchaToken: 'anything' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);            // inert → the token is a no-op
+  assertEquals(stripe.created.length, 1);   // checkout proceeds exactly as before
+});
+
+scopedEnv.test('ACTIVE + a MISSING token FAILS CLOSED (403) before any Stripe call', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),   // no captchaToken
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stripe.created.length, 0);   // the door never opened
+  } finally {
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+scopedEnv.test('ACTIVE + a VALID token proceeds (200) to Stripe', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(true);
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25', captchaToken: 'good-token' }, { Authorization: 'Bearer jwt' }),
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 200);
+    assertEquals(stripe.created.length, 1);
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+scopedEnv.test('ACTIVE + a FAILED token is rejected (403) before Stripe', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(false);
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25', captchaToken: 'bad-token' }, { Authorization: 'Bearer jwt' }),
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stripe.created.length, 0);
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
 });

@@ -25,6 +25,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { applyCustomTradeGoodsConfig } from '../../src/generators/steps/generateEconomy.js';
@@ -312,7 +313,12 @@ describe('join: ADD/REMOVE_TRADE_GOOD survive a full regeneration', () => {
 
 describe('join: customTradeGoods is user input, not derived config', () => {
   test('stripDerivedConfigKeys preserves customTradeGoods', () => {
-    expect(DERIVED_CONFIG_KEYS).not.toContain('customTradeGoods');
+    // 'stressType' is the liveness anchor: it is a real derived key that this same
+    // test strips below, so an emptied or renamed DERIVED_CONFIG_KEYS cannot make
+    // the exclusion pass by accident.
+    expectAbsentWithAnchor(
+      DERIVED_CONFIG_KEYS, 'customTradeGoods', 'stressType', 'derived-key roster',
+    );
     const stripped = stripDerivedConfigKeys({
       stressType: 'plague',
       customTradeGoods: { exports: ['Dragonscale wine'], imports: [], transit: [], removed: [] },

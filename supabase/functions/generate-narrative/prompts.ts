@@ -52,6 +52,20 @@ AUTHORITY LADDER for using this context:
 
 const HOUSE_STYLE = `Voice: confident, unhurried, a little wry. Prose that earns each sentence. No adjective fatigue, no "nestled," no "bustling," no "quiet dignity," no "tapestry of," no "belies," no "whispers of." No game mechanics language, no stat numbers, no parenthetical asides explaining lore. Present tense where apt. Always replace generic detail with something specific to THIS settlement's data.`;
 
+// PRONOUN-LINK CONTRACT (deploy-gated). Inert until this edge function is
+// deployed. Names are linked by the server automatically; this asks the clerk to
+// mark PRONOUNS whose antecedent it alone knows, anchored by the entity's exact
+// name. entityRefWrapper.normalizePronounTokens then validates each anchor against
+// the real entity set and rewrites it to the stable id (or unwraps it to plain
+// text when the anchor is unknown — fail-open), so a wrong or over-eager mark can
+// never mint a link to something that is not a real entity. THE FINITE-SEMANTICS
+// LAW holds: the server owns the id set; the clerk only points at a name.
+const PRONOUN_LINK_CONTRACT = `PRONOUN LINKS (mark, do not overreach):
+- When a pronoun (he, she, they, it, him, her, them, his, hers, its, their) UNAMBIGUOUSLY refers to a specific NPC, faction, or this settlement that is named in the source, wrap JUST that pronoun as ⟦pronoun:<ExactEntityName>|<theWord>⟧ — e.g. "Aldric holds the seat, and ⟦pronoun:Aldric|he⟧ answers to no one."
+- Use the entity's EXACT name from the source as the anchor. Wrap the pronoun ONLY — never wrap the surrounding words, and keep the pronoun's own casing.
+- Do NOT wrap a pronoun whose antecedent is a crowd, a pair, an unnamed group, or anything not named in the source. If in any doubt, leave the pronoun as plain text.
+- Do NOT wrap entity NAMES yourself — the system links those. Only pronouns.`;
+
 const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - Keep every proper noun from the source: names, titles, places, relationships.
 - Keep every numerical fact and categorical fact.
@@ -60,7 +74,9 @@ const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - You MAY restructure sentences, improve rhythm, add sensory texture, and tie details to the thesis.
 - If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.
 - NEVER describe the settlement as self-sufficient, fully self-sustaining, or feeding itself when the context records a food deficit or critical food imports — the gap is a fact; write around it, not over it.
-- Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors) unless the context lists port or river access.`;
+- Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors) unless the context lists port or river access.
+
+${PRONOUN_LINK_CONTRACT}`;
 
 // Tier 6.8 — settlement-specific preservation lines composed from the
 // shared aiGrounding contract. Adds explicit "MUST PRESERVE" lines for
@@ -158,6 +174,43 @@ function stripFencesDeep<T>(value: T): T {
   return value;
 }
 
+/**
+ * Resolve a settlement's terrain from what the engine actually persists.
+ * Mirrors src/domain/resolveTerrain.js (this Deno function cannot import the
+ * browser-side domain module): config.terrainType is the canonical write
+ * (resolveConfig); terrainOverride may carry the UI sentinel 'auto' verbatim
+ * when the route is not random_trade — it is not a terrain, never ground the
+ * model in it; config.terrain was never written by any generator path.
+ * Postcondition (mirrors the domain module): never return 'auto' from ANY
+ * leg — the engine only writes it to terrainOverride, but imported dossiers
+ * can carry it anywhere.
+ */
+function resolveTerrain(config: Record<string, any> | null | undefined): string | null {
+  const cfg = config || {};
+  const type = cfg.terrainType && cfg.terrainType !== 'auto' ? cfg.terrainType : null;
+  const override = cfg.terrainOverride && cfg.terrainOverride !== 'auto' ? cfg.terrainOverride : null;
+  const legacy = cfg.terrain && cfg.terrain !== 'auto' ? cfg.terrain : null;
+  return type || override || legacy || null;
+}
+
+// ── COGS control: per-field prose caps ──────────────────────────────────────
+// summarizeSettlement already caps ARRAY COUNTS (slice(0, N)), but individual
+// user-editable prose STRINGS (faction desc, NPC secret, arrivalScene, …) were
+// uncapped — and the same summary is re-sent on every one of a run's ~20 model
+// calls, so one oversized field inflates INPUT tokens on every call. capStr
+// ellipsis-truncates a string field to a generous ceiling (non-strings pass
+// through untouched); the array count caps stay. Generous by design — these
+// bounds sit well above any normal authored field, so quality is unaffected and
+// only pathological/oversized input is trimmed.
+const CAP_NAME  = 160;
+const CAP_SHORT = 280;   // goal, secret, personality, conflict issue/stakes, tension
+const CAP_DESC  = 480;   // faction / institution descriptions, crisis hooks
+const CAP_PROSE = 900;   // scene / founding / historical narrative fields
+function capStr(v: unknown, maxLen: number): unknown {
+  if (typeof v !== 'string') return v;
+  return v.length > maxLen ? `${v.slice(0, maxLen).trimEnd()}…` : v;
+}
+
 function summarizeSettlement(settlement: Record<string, unknown>): Record<string, unknown> {
   const s = settlement as Record<string, any>;
   const ps = s.powerStructure || {};
@@ -166,10 +219,10 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
   const stressArr = Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [];
 
   return stripFencesDeep({
-    name: s.name,
+    name: capStr(s.name, CAP_NAME),
     tier: s.tier,
     population: s.population,
-    terrain: s.config?.terrainOverride || s.config?.terrainType || s.config?.terrain,
+    terrain: resolveTerrain(s.config),
     culture: s.config?.culture,
     tradeRouteAccess: s.config?.tradeRouteAccess,
     monsterThreat: s.config?.monsterThreat,
@@ -184,52 +237,52 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
       type: typeof ps.government === 'string' ? ps.government : ps.government?.type,
       // Faction entries key the name under .faction (powerGenerator); .name
       // is the legacy/alternate shape.
-      governingFaction: governing?.name || governing?.faction || null,
+      governingFaction: governing?.faction || governing?.name || null,
     },
     factions: factions.slice(0, 6).map((f: any) => ({
-      name: f?.name || f?.faction,
+      name: capStr(f?.faction || f?.name, CAP_NAME),
       isGoverning: !!f?.isGoverning,
-      desc: f?.desc,
+      desc: capStr(f?.desc, CAP_DESC),
       power: f?.power || f?.powerLabel,
     })),
     conflicts: (ps.conflicts || []).slice(0, 4).map((c: any) => ({
-      issue: c?.issue,
-      stakes: c?.stakes,
+      issue: capStr(c?.issue, CAP_SHORT),
+      stakes: capStr(c?.stakes, CAP_SHORT),
       factions: c?.factions,
     })),
     institutions: (s.institutions || []).slice(0, 12).map((i: any) => ({
-      name: i?.name,
+      name: capStr(i?.name, CAP_NAME),
       category: i?.category,
-      desc: i?.desc,
+      desc: capStr(i?.desc, CAP_DESC),
     })),
     signatureNPCs: (s.npcs || []).slice(0, 6).map((n: any) => ({
-      name: n?.name,
+      name: capStr(n?.name, CAP_NAME),
       role: n?.role,
-      goal: n?.goal?.short,
-      secret: n?.secret?.what,
-      personality: n?.personality,
+      goal: capStr(n?.goal?.short, CAP_SHORT),
+      secret: capStr(n?.secret?.what, CAP_SHORT),
+      personality: capStr(n?.personality, CAP_SHORT),
     })),
     stressors: stressArr.slice(0, 3).map((t: any) => ({
       type: t?.type,
       label: t?.label,
-      summary: t?.summary,
-      crisisHook: t?.crisisHook,
+      summary: capStr(t?.summary, CAP_DESC),
+      crisisHook: capStr(t?.crisisHook, CAP_DESC),
     })),
     recentTensions: (s.history?.currentTensions || []).slice(0, 4).map((t: any) => ({
       type: t?.type,
-      description: t?.description,
+      description: capStr(t?.description, CAP_SHORT),
       severity: t?.severity,
     })),
-    historicalCharacter: s.history?.historicalCharacter,
-    founding: s.history?.founding,
-    arrivalScene: s.arrivalScene,
-    pressureSentence: s.pressureSentence,
-    settlementReason: (
+    historicalCharacter: capStr(s.history?.historicalCharacter, CAP_PROSE),
+    founding: capStr(s.history?.founding, CAP_PROSE),
+    arrivalScene: capStr(s.arrivalScene, CAP_PROSE),
+    pressureSentence: capStr(s.pressureSentence, CAP_DESC),
+    settlementReason: capStr((
       typeof s.settlementReason === 'string' ? s.settlementReason :
       Array.isArray(s.settlementReason) ? s.settlementReason.filter((x: unknown) => typeof x === 'string').join(' ') :
       s.settlementReason?.primary || null
-    ),
-    prominentRelationship: s.prominentRelationship?.phrasing,
+    ), CAP_DESC),
+    prominentRelationship: capStr(s.prominentRelationship?.phrasing, CAP_DESC),
   });
 }
 
@@ -499,7 +552,7 @@ Return JSON: { "items": [{ "id": <number>, "summary": "<refined>", "crisisHook":
     max_tokens: 1800,
     extract: (s) => (s.powerStructure?.factions || []).slice(0, 10).map((f: any, idx: number) => ({
       id: idx,
-      name: f?.name || f?.faction,
+      name: f?.faction || f?.name,
       isGoverning: !!f?.isGoverning,
       power: f?.power || f?.powerLabel,
       desc: f?.desc,
@@ -773,7 +826,7 @@ Return JSON: { "viabilitySummary": "<refined>", "guardEffectivenessDesc": "<refi
       const out: Record<string, unknown> = {
         name: s.name,
         tier: s.tier,
-        terrain: s.config?.terrainOverride || s.config?.terrainType || s.config?.terrain,
+        terrain: resolveTerrain(s.config),
         culture: s.config?.culture,
       };
       const insts = (s.institutions || []).slice(0, 6).map((i: any) => ({
@@ -809,7 +862,7 @@ Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. 
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const institutions = (s.institutions || []).slice(0, 3).map((i: any) => ({
         name: i?.name, category: i?.category,
@@ -844,7 +897,7 @@ Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 senten
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 6).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const institutions = (s.institutions || []).slice(0, 5).map((i: any) => ({
         name: i?.name, category: i?.category,
@@ -918,7 +971,7 @@ Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or em
       })).filter((x: any) => x.name);
       if (npcs.length) out.npcs = npcs;
       const factions = (s.powerStructure?.factions || []).slice(0, 3).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       if (factions.length) out.factions = factions;
       return out;
@@ -993,7 +1046,7 @@ No preamble, no markdown.`,
         label: t?.label, summary: t?.summary,
       })).filter((x: any) => x.label);
       const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const npcs = (s.npcs || []).slice(0, 4).map((n: any) => ({
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
@@ -1114,6 +1167,36 @@ No preamble, no markdown.`,
   },
 };
 
+// ── COGS control: prompt-cache activation ───────────────────────────────────
+// Anthropic caches a prefix only when it meets the model's minimum cacheable
+// size: 4096 tokens on Opus 4.8 (the default profile) AND Haiku 4.5 (the fast
+// profile), 2048 on Sonnet. A run re-sends the SAME stable prefix (role + thesis
+// + settlement summary) on every one of its ~19 post-thesis calls, but a typical
+// few-KB prefix falls BELOW 4096 tokens — so the cache_control:ephemeral block is
+// SILENTLY a no-op on the default and fast paths and full input is billed on every
+// call. Padding the stable prefix past 4096 tokens turns caching on: ~19 cached
+// reads at 0.1x input decisively beat the single 1.25x cache write (a run's
+// prefix-input cost drops ~2-3x).
+//
+// The filler is DETERMINISTIC and byte-stable across a run's calls (the thesis +
+// summary are fixed within a run, so the padded prefix is byte-identical on every
+// call → a real cache prefix match), content-neutral, and clearly labeled so the
+// narrator ignores it. It is engine-internal (never surfaced to a reader), so it
+// does not touch the finite-semantics truth surface. The token estimate is chars/4
+// (the same heuristic index.ts uses); it UNDER-counts the JSON-dense summary, so
+// the true prefix token count is >= the estimate — keeping us safely above the floor.
+const CACHE_MIN_PREFIX_TOKENS = 4096;
+const CACHE_PAD_TARGET_TOKENS = 4400; // margin above the 4096 floor
+const CACHE_PAD_SENTENCE =
+  'Ignore this line; it is content-neutral filler present only to keep the cached prompt prefix at a stable, cacheable size. ';
+function cachePadding(prefixText: string): string {
+  const estTokens = Math.ceil(prefixText.length / 4);
+  if (estTokens >= CACHE_MIN_PREFIX_TOKENS) return '';
+  const neededChars = (CACHE_PAD_TARGET_TOKENS - estTokens) * 4;
+  const reps = Math.max(1, Math.ceil(neededChars / CACHE_PAD_SENTENCE.length));
+  return `\n\n[CACHE-STABILIZER — ignore this block; it is not settlement data]\n${CACHE_PAD_SENTENCE.repeat(reps)}\n[END CACHE-STABILIZER]`;
+}
+
 function buildRefinementPrompt(
   instruction: string,
   thesis: string,
@@ -1153,7 +1236,7 @@ ${stripGuidanceFences(dynamicPreservationBlock).split('\n').filter(l => l.starts
 
   // `payload` is extracted from the RAW settlement (not the fence-stripped
   // summary), so user-edited prose reaches this builder live — strip it here.
-  return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
+  const cachePrefix = `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
 
 THESIS (inherit this voice; reference its themes subtly; do not repeat it):
 """
@@ -1161,7 +1244,8 @@ ${stripGuidanceFences(thesis)}
 """
 
 SETTLEMENT CONTEXT (for grounding only — do not repeat):
-${JSON.stringify(stripFencesDeep(summary), null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
+  return `${cachePrefix}${cachePadding(cachePrefix)}
 ${CACHE_BREAKPOINT}
 TASK:
 ${instruction}
@@ -1324,7 +1408,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
 
   // Factions — match by name/faction
   if (Array.isArray(prior.powerStructure?.factions) && Array.isArray(clone.powerStructure?.factions)) {
-    const facKey = (f: any) => String(f?.name || f?.faction || '');
+    const facKey = (f: any) => String(f?.faction || f?.name || '');
     const priorMap = new Map(prior.powerStructure.factions.map((f: any) => [facKey(f), f]));
     for (const cf of clone.powerStructure.factions) {
       const p: any = priorMap.get(facKey(cf));
@@ -1506,12 +1590,13 @@ function buildDailyLifePrompt(
   relationshipMemoryContext: Record<string, unknown> | null = null,
   chronicleContext: Record<string, unknown> | null = null,
 ): string {
-  return `You are a worldbuilding narrator for tabletop RPGs.
+  const cachePrefix = `You are a worldbuilding narrator for tabletop RPGs.
 ${relationshipMemoryBlock(relationshipMemoryContext)}
 ${chronicleBlock(chronicleContext)}
 
 Settlement context:
-${JSON.stringify(stripFencesDeep(summary), null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
+  return `${cachePrefix}${cachePadding(cachePrefix)}
 ${CACHE_BREAKPOINT}
 ${instruction}
 ${guidanceBlock(aiGuidance)}

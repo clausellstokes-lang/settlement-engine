@@ -1,19 +1,25 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/pdf/proseLigatureDefuse.test.js — ligature defusing at the prose +
- * entity-ref render boundaries.
+ * tests/pdf/proseLigatureDefuse.test.js — the prose + entity-ref render
+ * boundaries deliver their string VERBATIM.
  *
- * The bundled Lora subset mis-renders the `fi`/`fl`/`ff`/`ffi`/`ffl` OpenType
- * ligatures (the ligated glyph drops the dotted-i, so "fi" prints as "f"). Every
- * string handed to a react-pdf <Text>/<Link> must pass through `safe()`/`noLig()`,
- * which slips a zero-width non-joiner (U+200C) between the offending pairs.
+ * ⚠ INVERTED 2026-09-01. These boundaries were found bypassing the string
+ * chokepoint entirely (ProseText plain segments rendered the raw token value;
+ * EntityRef rendered the resolved label / fallback raw), and the fix routed them
+ * through `safe()`/`noLig()` — which at the time inserted a zero-width
+ * non-joiner (U+200C) into every f-cluster to defuse a `liga` GSUB lookup. So
+ * this suite asserted a ZWNJ appeared, as proof the routing had happened.
  *
- * Two boundaries previously bypassed it:
- *   - ProseText plain (non-ref) segments rendered the raw token value.
- *   - EntityRef rendered the resolved label / fallback raw.
+ * The v2 font re-cut removed those lookups (pinned in
+ * tests/build/fontsAndMeta.test.js §3d), and U+200C turned out to be covered by
+ * NO embedded face — so the marker this suite looked for was itself splitting
+ * the text onto a non-embedded Helvetica. The insertion is gone.
  *
- * These tests assert a ZWNJ now appears in the rendered text of both.
+ * ⭐ The ROUTING is still what matters, so it is still pinned — via the stronger
+ * assertion: each boundary's string arrives at the leaf byte-identical, with no
+ * joiner. A boundary that stopped calling the chokepoint, or a chokepoint that
+ * started mutating again, reds here either way.
  */
 import { describe, test, expect } from 'vitest';
 import { ProseText } from '../../src/pdf/primitives/ProseText.jsx';
@@ -32,36 +38,39 @@ function collectText(node, out = []) {
   return out;
 }
 
-describe('ProseText — plain segments defuse ligatures', () => {
-  test('a non-token prose stretch with "fi" gets a ZWNJ', () => {
+describe('ProseText — plain segments render verbatim', () => {
+  test('a non-token prose stretch reaches the leaf byte-identical', () => {
     // No entity tokens ⇒ a single plain segment, the path that bypassed noLig.
     const tree = ProseText({ text: 'The first fleet sailed at dawn.' });
     const text = collectText(tree).join('');
-    expect(text).toContain(ZWNJ);
-    // The visible characters survive (ZWNJ is invisible) once stripped.
-    expect(text.replaceAll(ZWNJ, '')).toBe('The first fleet sailed at dawn.');
+    // Byte-identical: the chokepoint is transparent, and inserts no joiner.
+    expect(text).toBe('The first fleet sailed at dawn.');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
+    expect(text).not.toContain(ZWNJ);
   });
 });
 
-describe('EntityRef — labels defuse ligatures', () => {
+describe('EntityRef — labels render verbatim', () => {
   const index = {
     resolve: (id) => (id === 'faction.goldfinch'
       ? { anchor: 'faction-goldfinch', currentName: 'The Goldfinch Guild' }
       : null),
   };
 
-  test('a resolved link label with "fi" gets a ZWNJ', () => {
+  test('a resolved link label reaches the leaf byte-identical', () => {
     const node = EntityRef({ id: 'faction.goldfinch', index });
     const text = collectText(node).join('');
-    expect(text).toContain(ZWNJ);
-    expect(text.replaceAll(ZWNJ, '')).toBe('The Goldfinch Guild');
+    expect(text).toBe('The Goldfinch Guild');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
+    expect(text).not.toContain(ZWNJ);
   });
 
-  test('an unresolved fallback with "fl" gets a ZWNJ', () => {
+  test('an unresolved fallback reaches the leaf byte-identical', () => {
     const node = EntityRef({ id: 'faction.gone', index, fallback: 'the conflict' });
     const text = collectText(node).join('');
-    expect(text).toContain(ZWNJ);
-    expect(text.replaceAll(ZWNJ, '')).toBe('the conflict');
+    expect(text).toBe('the conflict');
+    // anchored: the toBe above pins the whole leaf text — a dead boundary reds there.
+    expect(text).not.toContain(ZWNJ);
   });
 });
 
@@ -86,7 +95,7 @@ function deepText(node, out = []) {
   return out;
 }
 
-describe('NotableNPCs — body prose defuses ligatures (FullCard)', () => {
+describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
   // Build the minimal vm the section reads: a single top-power NPC whose body
   // fields ALL carry f-ligature clusters. These render on the flagship per-NPC
   // FullCard and previously bypassed noLig (blurb via stripZwnj; personality /
@@ -99,7 +108,7 @@ describe('NotableNPCs — body prose defuses ligatures (FullCard)', () => {
     };
   }
 
-  test('a rendered NPC blurb containing "fortified" carries the defusing ZWNJ', () => {
+  test('a rendered NPC blurb and name reach the leaf byte-identical', () => {
     const npc = {
       id: 'npc.x', name: 'Griffin Bellwether', title: 'the Fletcher',
       power: 9,
@@ -107,18 +116,15 @@ describe('NotableNPCs — body prose defuses ligatures (FullCard)', () => {
     };
     const tree = NotableNPCs({ settlement: {}, vm: vmWithNpc(npc) });
     const text = deepText(tree).join("");
-    // The blurb's fi/ff/fl clusters (fortified, fields, stiff, fletcher) are defused.
-    expect(text).toContain(ZWNJ);
-    // Specifically: the "fi" in "fortified" is broken by a ZWNJ.
-    expect(text).toContain(`fortif${ZWNJ}ied`);
-    // And the visible copy survives once the invisible joiner is stripped.
-    expect(text.replaceAll(ZWNJ, '')).toContain('fortified gatehouse');
-    // The name ("Griffin" = ffi ligature) is defused too, not left as tofu.
-    expect(text).toContain(`Grif${ZWNJ}f${ZWNJ}in`);
-    expect(text.replaceAll(ZWNJ, '')).toContain('Griffin Bellwether');
+    // The blurb's f-clusters (fortified, fields, stiff, fletcher) survive intact.
+    // anchored: the two toContain below prove the blurb and name rendered.
+    expect(text).not.toContain(ZWNJ);
+    expect(text).toContain('fortified gatehouse');
+    // The name ("Griffin" = the old ffi case) reaches the leaf verbatim.
+    expect(text).toContain('Griffin Bellwether');
   });
 
-  test('personality / appearance / secret / relationship prose all defuse', () => {
+  test('personality / appearance / secret / relationship prose all render verbatim', () => {
     const npc = {
       id: 'npc.y', name: 'Flora', power: 8,
       personality: 'Fiercely efficient; a fixer who never reflects.',
@@ -129,14 +135,12 @@ describe('NotableNPCs — body prose defuses ligatures (FullCard)', () => {
     };
     const tree = NotableNPCs({ settlement: {}, vm: vmWithNpc(npc) });
     const text = deepText(tree).join("");
-    const stripped = text.replaceAll(ZWNJ, '');
-    // Every body field's visible content survives…
-    expect(stripped).toContain('Fiercely efficient');
-    expect(stripped).toContain('fitted officer coat');
-    expect(stripped).toContain('falsified the fief ledgers');
-    expect(stripped).toContain('fickle, shifting truce');
-    // …and each carried at least one defusing joiner (they all have f-clusters).
-    expect(text).toContain(`falsif${ZWNJ}ied`); // fi in "falsified"
-    expect(text).toContain(`f${ZWNJ}ickle`);    // fi in "fickle"
+    // Every body field's content reaches the leaf verbatim, joiner-free.
+    // anchored: the four toContain below prove every body field rendered.
+    expect(text).not.toContain(ZWNJ);
+    expect(text).toContain('Fiercely efficient');
+    expect(text).toContain('fitted officer coat');
+    expect(text).toContain('falsified the fief ledgers');
+    expect(text).toContain('fickle, shifting truce');
   });
 });

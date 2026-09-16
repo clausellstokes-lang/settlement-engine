@@ -2,12 +2,15 @@ import { describe, it, expect } from 'vitest';
 
 import {
   KIND_OPTIONS,
+  ownedCampaignBySlug,
+  suggestedTagsForCampaign,
+} from '../../../src/components/gallery/galleryMapsUtils.js';
+import {
   BACKDROP_OPTIONS,
   MAP_SORT_OPTIONS,
   deriveTagVocabulary,
   activeMapFilterCount,
-  ownedCampaignBySlug,
-} from '../../../src/components/gallery/galleryMapsUtils.js';
+} from '../../../src/components/gallery/galleryMapsFilters.js';
 
 // Fixture mirrors the list_gallery_maps tile shape (migration 065): the server
 // now returns the narrowed set, plus the real import_count + member_count.
@@ -67,6 +70,21 @@ describe('deriveTagVocabulary', () => {
   it('tolerates empty / malformed input', () => {
     expect(deriveTagVocabulary()).toEqual([]);
     expect(deriveTagVocabulary([{ tags: null }, {}])).toEqual([]);
+  });
+});
+
+describe('suggestedTagsForCampaign terrain tag', () => {
+  const member = (config) => ({ name: 'M', tier: 'town', settlement: { tier: 'town', config } });
+
+  it('reads the persisted terrainType through the shared resolver', () => {
+    const tags = suggestedTagsForCampaign({}, [member({ terrainType: 'mountain', terrainOverride: 'auto' })]);
+    expect(tags).toContain('mountain');
+    expect(tags).not.toContain('auto');
+  });
+
+  it("never surfaces the 'auto' sentinel from a legacy member without terrainType", () => {
+    const tags = suggestedTagsForCampaign({}, [member({ terrainOverride: 'auto' })]);
+    expect(tags).not.toContain('auto');
   });
 });
 

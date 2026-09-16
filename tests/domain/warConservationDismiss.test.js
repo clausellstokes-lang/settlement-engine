@@ -10,7 +10,7 @@ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKer
 import { deriveActiveCondition } from '../../src/domain/activeConditions.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * The war-economy CONSERVATION seam (all flag-gated, default OFF — byte-identical when

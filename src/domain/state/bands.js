@@ -36,11 +36,67 @@ export function bandFor(value) {
 }
 
 /**
- * Display color for a band — foreground text on a light tint of the same hue
- * (LivingWorldSignalRow pips, StateBadge), plus SystemStateBar and PDF chips.
- * The amber/orange mid-tones (Strained/Vulnerable) are darkened to clear WCAG
- * AA (4.5:1) for the small pill text: the "needs attention" states a GM scans
- * for were previously the hardest to read (~3.0–4.0:1).
+ * POLARITY — THE SINGLE SOURCE for which direction is good on each of the four
+ * SystemState dimensions.
+ *
+ * Why it lives here and nowhere else: this fact used to be declared in THREE
+ * separate places (compareSystemState's local POLARITY, SystemStateBar's
+ * DIM_META.higherIsBetter, livingWorldSignals' dims[].higherIsBetter) and read
+ * by NONE of them at band time. The band ladder above is strictly
+ * higher-is-better, so `bandFor(value)` applied to volatility / externalThreat /
+ * resourcePressure printed the OPPOSITE of the truth: a town at volatility 95
+ * (six factions, five conflicts, rulers with no legitimacy) banded "Stable" in
+ * green, and a calm town at volatility 17 banded "Critical" in oxblood. Every
+ * band reader inherited it — the bar tile, the PDF dimension card, the Library
+ * health pip and its "Needs attention" sort, the BAND_HINT one-liner, the
+ * persisted campaign snapshot, and the event log's band-crossing sentence.
+ *
+ * Fixed by banding off the polarity-ORIENTED score (`bandForDimension`), the
+ * same cure the causal substrate already used one layer down (causalState.js
+ * finalizeVariable). The raw 0-100 `value` is untouched — only the qualitative
+ * word flips — so deltas, bar fills and persisted scores keep their meaning.
+ *
+ * @type {Readonly<Record<string, 'higher_is_better'|'lower_is_better'>>}
+ */
+export const DIM_POLARITY = Object.freeze({
+  resilience:       'higher_is_better',
+  volatility:       'lower_is_better',
+  externalThreat:   'lower_is_better',
+  resourcePressure: 'lower_is_better',
+});
+
+/**
+ * Polarity of one dimension. Unknown keys read higher_is_better, so a future
+ * fifth dimension bands exactly as the pre-fix code did until it declares itself.
+ * @param {string} key
+ * @returns {'higher_is_better'|'lower_is_better'}
+ */
+export function dimensionPolarity(key) {
+  return DIM_POLARITY[key] === 'lower_is_better' ? 'lower_is_better' : 'higher_is_better';
+}
+
+/**
+ * Band label for a dimension's raw 0-100 score, ORIENTED by that dimension's
+ * polarity. For a lower-is-better dimension the ladder is walked from the other
+ * end (100 - value), so "Stable" always means healthy and "Critical" always
+ * means failing, whichever way the underlying number runs.
+ *
+ * Non-finite input flows through unchanged (100 - NaN is NaN), so it lands on
+ * the same neutral 'Strained' fallback `bandFor` gives.
+ *
+ * @param {string} key    one of the four SystemState dimension keys
+ * @param {number} value  the dimension's raw 0-100 score
+ * @returns {Band}
+ */
+export function bandForDimension(key, value) {
+  return bandFor(dimensionPolarity(key) === 'lower_is_better' ? 100 - value : value);
+}
+
+/**
+ * Display color for a band — used by SystemStateBar and PDF chips. The amber/
+ * orange mid-tones (Strained/Vulnerable) are darkened to clear WCAG AA (4.5:1)
+ * for small pill text: the "needs attention" states a GM scans for were
+ * previously the hardest to read (~3.0-4.0:1).
  */
 export const BAND_COLOR = {
   Stable:     '#1a5a28',  // ~5:1 on card
@@ -49,7 +105,11 @@ export const BAND_COLOR = {
   Critical:   '#8b1a1a',  // ~7:1 on card
 };
 
-/** A short DM-facing one-liner per band — for tooltips and the PDF. */
+/** A short DM-facing one-liner per band — for tooltips and the PDF. These read
+ *  as HEALTH statements, not as statements about the underlying number, so they
+ *  stay true for both polarities once the band itself is oriented
+ *  (`bandForDimension`): "Already failing" is the right line for a settlement at
+ *  volatility 95 exactly as it is for one at resilience 10. */
 export const BAND_HINT = {
   Stable:     'Healthy. Shocks are absorbed without crisis.',
   Strained:   'Functional but stretched. A bad season would hurt.',
@@ -62,6 +122,7 @@ export const BAND_HINT = {
  * code can produce out-of-range values when summing many small drivers,
  * and we want band-mapping to be total.
  * @param {number} value
+ * @returns {number}
  */
 export function clamp01(value) {
   if (!Number.isFinite(value)) return 50;
@@ -77,6 +138,7 @@ export function clamp01(value) {
  * means the same thing as a 10-point drop from Strained to Vulnerable —
  * it's a real shift in band probability.
  * @param {number} delta
+ * @returns {string}
  */
 export function severityFor(delta) {
   const m = Math.abs(delta);

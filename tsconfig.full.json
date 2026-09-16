@@ -24,13 +24,15 @@
   "compilerOptions": {},
   "include": [
     "src/**/*.d.ts",
+    "src/kernel/**/*.js",
     "src/domain/**/*.js",
     "src/domain/**/*.ts",
     "src/store/**/*.js",
     "src/lib/**/*.js",
     "src/hooks/**/*.js",
     "src/generators/**/*.js",
-    "src/pdf/**/*.js"
+    "src/pdf/**/*.js",
+    "src/foundry/**/*.js"
   ],
   "exclude": [
     "node_modules",

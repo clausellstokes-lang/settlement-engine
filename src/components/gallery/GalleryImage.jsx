@@ -1,37 +1,27 @@
 import { CARD_ALT, FS, GOLD, PARCH, serif_ } from '../theme.js';
 import { fallbackInitial } from './galleryUtils.js';
-import { tierBackdrop } from '../../lib/tierBackdrop.js';
 
-export default function GalleryImage({ item, height = 170, fallbackHeight }) {
-  // A user-uploaded image always wins; otherwise fall back to the tier's default
-  // backdrop so an un-imaged share still reads as the kind of place it is. The
-  // gradient-initial below is the last resort (no image AND an unknown tier).
-  const src = item?.imageUrl || tierBackdrop(item?.tier);
-  if (src) {
+export default function GalleryImage({ item, height = 170 }) {
+  if (item?.imageUrl) {
     return (
       <img
-        src={src}
-        alt={item?.imageAlt || item?.name || 'Settlement image'}
+        src={item.imageUrl}
+        alt={item.imageAlt || item.name || 'Settlement image'}
         loading="lazy"
         style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: CARD_ALT }}
       />
     );
   }
-  // No uploaded image: the gradient-initial fallback carries zero runnable
-  // information, so it must NOT out-weigh the settlement name in the squint test
-  // (P1/P4). Render it as a slim header band (a fraction of the real-image height)
-  // rather than a full focal block, and shrink the decorative initial to match.
-  const h = fallbackHeight ?? Math.round(height * 0.5);
   return (
     <div style={{
-      height: h,
+      height,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       background: `linear-gradient(135deg, ${PARCH}, ${CARD_ALT})`,
       color: GOLD,
       fontFamily: serif_,
-      fontSize: FS.xxl,
+      fontSize: FS['36'],
       fontWeight: 700,
     }}>
       {fallbackInitial(item?.name)}

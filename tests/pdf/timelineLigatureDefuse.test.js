@@ -1,20 +1,23 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/pdf/timelineLigatureDefuse.test.js — ligature defusing at the Timeline
- * chapter's engine-prose render boundaries.
+ * tests/pdf/timelineLigatureDefuse.test.js — the Timeline chapter's
+ * engine-prose render boundaries deliver their string VERBATIM.
  *
- * The bundled Lora subset mis-renders the `fi`/`fl`/`ff`/`ffi`/`ffl` OpenType
- * ligatures (the ligated glyph drops the dotted-i, so "fi" prints as "f").
- * Every engine string the Timeline hands to a react-pdf <Text> — the event
- * summary, the description, the delta explanations, and the faction
- * responses/hooks (all of which carry entity names like factions and
- * settlements) — must pass through `safe()`, which slips a zero-width
- * non-joiner (U+200C) between the offending pairs.
+ * ⚠ INVERTED 2026-09-01. Timeline used to render these boundaries raw, and the
+ * fix routed each through `safe()` — which at the time slipped a zero-width
+ * non-joiner (U+200C) into every f-cluster to defuse a `liga` GSUB lookup in the
+ * pre-v2 faces. This suite asserted the joiner appeared, as proof of routing.
+ * The v2 re-cut removed the lookups (pinned in
+ * tests/build/fontsAndMeta.test.js §3d) and U+200C is covered by NO embedded
+ * face, so the marker was itself splitting text onto a non-embedded Helvetica.
+ * The insertion is gone; the routing still matters and is still pinned.
  *
- * Before the fix, Timeline rendered these raw; an event touching "the Goldfinch
- * Guild" or "the conflict" printed a mangled name. These tests assert a ZWNJ
- * now appears in the rendered text of each boundary.
+ * ⭐ THE INVERSION MADE THESE STRICTLY STRONGER. The old assertions searched for
+ * `f<ZWNJ>i` in the JOINED text of the whole chapter, so a single boundary could
+ * satisfy all six — they could not tell which boundary produced the hit. Each
+ * test now names the actual source string it expects at the leaf, which is a
+ * real per-boundary assertion the marker form could not express.
  */
 import { describe, test, expect } from 'vitest';
 import { Timeline } from '../../src/pdf/sections/Timeline.jsx';
@@ -57,40 +60,43 @@ const vm = {
   }],
 };
 
-describe('Timeline — engine prose defuses ligatures at every Text boundary', () => {
+describe('Timeline — engine prose renders verbatim at every Text boundary', () => {
   const text = collectText(Timeline({ settlement: {}, narrativeMode: false, vm })).join('');
 
-  test('the event summary "fixed" gets a ZWNJ', () => {
-    expect(text).toContain(`f${ZWNJ}i`); // "fixed"
+  // ⭐ The inversion made these assertions STRONGER, not merely opposite. The
+  // old ones looked for `f<ZWNJ>i` anywhere in the JOINED text of the whole
+  // chapter, so any one boundary could satisfy all six — a green that could not
+  // distinguish which boundary it came from. Naming the actual source string per
+  // boundary is what the old marker could not do.
+  test('the event summary reaches the leaf verbatim', () => {
+    expect(text).toContain('The Goldfinch Guild fixed the toll.');
   });
 
-  test('the description "flight"/"fines" gets a ZWNJ', () => {
-    expect(text).toContain(`f${ZWNJ}l`); // "flight"
+  test('the description reaches the leaf verbatim', () => {
+    expect(text).toContain('A flight of fines fell on the river craft.');
   });
 
-  test('the in-world date "Flamerule"/"first" gets a ZWNJ', () => {
-    // "first" -> f<ZWNJ>i, proving the date label also routes through safe().
-    expect(text).toContain(`f${ZWNJ}i`);
+  test('the in-world date label routes through the chokepoint verbatim', () => {
+    expect(text).toContain('first of Flamerule');
   });
 
-  test('a delta explanation "affluence"/"flush" gets a ZWNJ', () => {
-    expect(text).toContain(`f${ZWNJ}f`); // "affluence" / "flush"
+  test('a delta explanation reaches the leaf verbatim', () => {
+    expect(text).toContain('Trade affluence fell sharply');
   });
 
-  test('a faction name "Goldfinch" gets a ZWNJ', () => {
-    expect(text).toContain(`f${ZWNJ}i`); // "Goldfinch"
+  test('a faction name reaches the leaf verbatim', () => {
+    expect(text).toContain('The Goldfinch Guild');
   });
 
-  test('a faction response "affirm" and hook "fleet" get a ZWNJ', () => {
-    expect(text).toContain(`f${ZWNJ}f`); // "affirm"
-    expect(text).toContain(`f${ZWNJ}l`); // "fleet"
+  test('a faction response and hook reach the leaf verbatim', () => {
+    expect(text).toContain('They affirm the fine.');
+    expect(text).toContain('a fleet of informants');
   });
 
-  test('stripping ZWNJ restores the original visible prose', () => {
-    const visible = text.replaceAll(ZWNJ, '');
-    expect(visible).toContain('The Goldfinch Guild fixed the toll.');
-    expect(visible).toContain('A flight of fines fell on the river craft.');
-    expect(visible).toContain('The Goldfinch Guild');
-    expect(visible).toContain('a fleet of informants');
+  test('no boundary emits a zero-width non-joiner', () => {
+    // U+200C is covered by NONE of the eight embedded faces; one anywhere in the
+    // chapter splits that run onto a non-embedded Helvetica.
+    // anchored: six sibling tests pin exact source strings against this SAME `text`.
+    expect(text).not.toContain(ZWNJ);
   });
 });

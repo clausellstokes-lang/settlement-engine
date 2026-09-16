@@ -25,8 +25,8 @@ export const CUSTOM_ITEM_SCHEMA_VERSION = 1;
  * unchanged (same reference) when it is already current, so callers can rely on
  * referential stability for the common case.
  * @param {string} _type - bucket key (institutions/services/resources/…)
- * @param {any} item - the stored custom item
- * @returns {any} the normalized item
+ * @param {Record<string, unknown>} item - the stored custom item
+ * @returns {Record<string, unknown>} the normalized item
  */
 export function migrateCustomItem(_type, item) {
   if (!item || typeof item !== 'object') return item;
@@ -52,12 +52,12 @@ export function migrateCustomItem(_type, item) {
  * Map every bucket of a grouped customContent blob through migrateCustomItem.
  * Returns a new blob (buckets are fresh arrays of normalized items); non-array
  * buckets pass through untouched.
- * @param {object} grouped - { institutions: [...], services: [...], … }
- * @returns {object}
+ * @param {Record<string, unknown>} grouped - { institutions: [...], services: [...], … }
+ * @returns {Record<string, unknown>}
  */
 export function migrateCustomContent(grouped) {
   if (!grouped || typeof grouped !== 'object') return grouped;
-  /** @type {Record<string, any>} */
+  /** @type {Record<string, unknown>} */
   const out = {};
   for (const [type, arr] of Object.entries(grouped)) {
     out[type] = Array.isArray(arr) ? arr.map((it) => migrateCustomItem(type, it)) : arr;

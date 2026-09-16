@@ -8,20 +8,20 @@
  *     but must ALSO wind down the settlement-level food_anchor_lost condition
  *     its loss raised — otherwise the food crisis outlives the granary's repair.
  *
- *  2. The idempotent re-add path (ADD_INSTITUTION / ADD_FACTION on an existing
- *     entity) must clear ONLY the removal (REMOVED status + removal-caused
- *     impairments), mirroring RESTORE_*. A blanket `impairments: []` wipes
- *     UNRELATED impairments from other in-timeline events.
+ *  2. ADD_INSTITUTION on a supported removed entity clears only its removal.
+ *     ADD_FACTION has no removal lifecycle and is a strict idempotent no-op for
+ *     an existing canonical name; it must not become a hidden restore event.
  */
 
 import { describe, it, expect } from 'vitest';
-import { mutateSettlement } from '../../../src/domain/events/mutate.js';
+import { mutateSettlement, mutateSettlementChecked } from '../../../src/domain/events/mutate.js';
 import { findActiveCondition } from '../../../src/domain/activeConditions.js';
 
 const run = (s, type, targetId, payload) => mutateSettlement({
   settlement: s, event: { id: 'e1', type, targetId, payload },
 });
 
+// Landed events wave — needs food_anchor_lost wind-down on the RESTORE_/ADD_INSTITUTION handlers in src/domain/events/mutate.js
 describe('food_anchor_lost winds down when the anchor is restored / re-opened', () => {
   it('REMOVE then ADD a granary clears the food_anchor_lost crisis its loss raised', () => {
     const base = {
@@ -127,7 +127,9 @@ describe('food_anchor_lost winds down when the anchor is restored / re-opened', 
   });
 });
 
-describe('idempotent re-add clears ONLY the removal, not unrelated impairments', () => {
+// Landed events wave — removal-scoped institution reopening and an explicit
+// no-resurrection faction contract.
+describe('idempotent add semantics preserve each entity lifecycle', () => {
   it('ADD_INSTITUTION on a removed institution preserves an impairment from an unrelated event', () => {
     const base = {
       name: 'Town',
@@ -150,25 +152,29 @@ describe('idempotent re-add clears ONLY the removal, not unrelated impairments',
     expect(barracks.removedByEventId).toBeUndefined();
   });
 
-  it('ADD_FACTION on a removed faction preserves an impairment from an unrelated event', () => {
+  it('legacy ADD_FACTION on an existing faction remains an unchanged-content no-op', () => {
     const base = {
       name: 'Town',
       powerStructure: {
         factions: [{
-          id: 'faction.guild', name: 'Guild', faction: 'Guild', status: 'removed',
-          removedByEventId: 'e_disband',
+          id: 'faction.guild', name: 'Guild', faction: 'Guild', status: 'impaired',
           impairments: [
             { type: 'public_support', severity: 0.4, causeEventId: 'old_riot' },
-            { type: 'membership', severity: 1.0, causeEventId: 'e_disband' },
           ],
         }],
       },
     };
-    const readded = run(base, 'ADD_FACTION', 'faction.guild');
-    const guild = readded.powerStructure.factions.find(f => f.id === 'faction.guild');
-    const causes = (guild.impairments || []).map(i => i.causeEventId);
-    expect(causes).toContain('old_riot');
-    expect(causes).not.toContain('e_disband');
-    expect(guild.removedByEventId).toBeUndefined();
+    const event = { id: 'e_add', type: 'ADD_FACTION', targetId: 'faction.guild' };
+    const checked = mutateSettlementChecked({ settlement: base, event });
+    const legacy = mutateSettlement({ settlement: base, event });
+
+    expect(checked.veto).toEqual({
+      __mutationVeto: true,
+      code: 'faction_already_present',
+      detail: 'guild',
+    });
+    expect(legacy).toEqual(base);
+    expect(legacy).toEqual(checked.settlement);
+    expect(legacy.powerStructure.factions[0]).toEqual(base.powerStructure.factions[0]);
   });
 });

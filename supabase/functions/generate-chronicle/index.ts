@@ -20,8 +20,11 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -144,10 +147,16 @@ export async function handleGenerateChronicle(
   deps: {
     userClient?: (authHeader: string) => ReturnType<typeof createClient>;
     adminClient?: () => ReturnType<typeof createClient>;
+    // Provider fetch seam (commit 1afb0310 DI pattern): the money-path test lane
+    // injects a recording/failing fetch to prove spend-before-model and the
+    // refund-on-failure boundary without a live Anthropic call. Production passes
+    // nothing, so the global fetch is used and behavior is byte-identical.
+    anthropicFetch?: typeof fetch;
   } = {},
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
   const makeAdminClient = deps.adminClient ?? defaultAdminClient;
+  const providerFetch = deps.anthropicFetch ?? fetch;
   const cors = getCorsHeaders(req);
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405, cors);
@@ -170,6 +179,17 @@ export async function handleGenerateChronicle(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): instant 401 eviction where AI money
+    // burns — a superseded device is rejected at the request layer, before any spend.
+    if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: 'session_superseded' }, 401, cors);
+    }
+
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Inert in tests / local (no cf-connecting-ip → sentinel IP → no RPC).
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, cors);
+    if (ipGate) return ipGate;
 
     // Trust-boundary gate: reject a banned / disabled / soft-deleted account
     // even though its JWT is still valid (review B16 finding #1). The DB
@@ -341,7 +361,7 @@ export async function handleGenerateChronicle(
       const timer = setTimeout(() => ac.abort(), ANTHROPIC_TIMEOUT_MS);
       let resp: Response;
       try {
-        resp = await fetch('https://api.anthropic.com/v1/messages', {
+        resp = await providerFetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           signal: ac.signal,
           headers: {
@@ -386,6 +406,7 @@ export async function handleGenerateChronicle(
     }
 
     await releaseReservation();   // success: COGS metered, reservation no longer needed
+    scheduleAutoReload(supabaseAdmin, user.id);
     return json({ chronicle: prose, creditsRemaining: balanceAfter }, 200, cors);
   } catch (e) {
     // Release a reservation taken before this throw (086). supabaseAdmin is

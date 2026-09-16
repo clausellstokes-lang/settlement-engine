@@ -1,4 +1,3 @@
-import { Check, ChevronDown, ChevronRight, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -34,7 +33,9 @@ export default function RegionalCausalChainViewer({
   const [expandedImpactId, setExpandedImpactId] = useState(null);
 
   const model = useMemo(() => {
-    const graph = ensureRegionalGraph(campaign?.regionalGraph);
+    // A render must not mint a clock: the campaign's own stamp is the deterministic
+    // in-band answer (migrateCampaign's idiom), so re-rendering cannot restamp the graph.
+    const graph = ensureRegionalGraph(campaign?.regionalGraph, { now: campaign?.updatedAt || campaign?.createdAt });
     const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
     const channelsById = new Map(graph.channels.map(channel => [channel.id, channel]));
     const eventsByImpactId = new Map();
@@ -80,7 +81,7 @@ export default function RegionalCausalChainViewer({
   if (!model.rows.length) return null;
 
   return (
-    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, borderRadius: 6, background: CARD, overflow: 'hidden' }}>
+    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -150,7 +151,7 @@ export default function RegionalCausalChainViewer({
                 {row.impact.status === 'queued' && (
                   <>
                     <IconButton
-                      Icon={Check}
+                      glyph="✓"
                       label={available ? 'Apply regional impact' : 'Impact is delayed'}
                       tone="primary"
                       size="sm"
@@ -158,7 +159,7 @@ export default function RegionalCausalChainViewer({
                       onClick={() => onApplyImpact?.(campaign.id, row.impact.id)}
                     />
                     <IconButton
-                      Icon={CircleSlash}
+                      glyph="⊘"
                       label="Ignore regional impact"
                       size="sm"
                       onClick={() => onIgnoreImpact?.(campaign.id, row.impact.id)}
@@ -167,14 +168,14 @@ export default function RegionalCausalChainViewer({
                 )}
                 {row.impact.status === 'applied' && (
                   <IconButton
-                    Icon={Undo2}
+                    glyph="↶"
                     label="Resolve applied regional impact"
                     size="sm"
                     onClick={() => onResolveImpact?.(campaign.id, row.impact.id)}
                   />
                 )}
                 <IconButton
-                  Icon={expandedImpactId === row.impact.id ? ChevronDown : ChevronRight}
+                  glyph={expandedImpactId === row.impact.id ? '⌄' : '›'}
                   label={expandedImpactId === row.impact.id ? 'Hide causal details' : 'Show causal details'}
                   size="sm"
                   pressed={expandedImpactId === row.impact.id}
@@ -189,7 +190,6 @@ export default function RegionalCausalChainViewer({
                   gap: 7,
                   padding: '7px 8px',
                   borderTop: `1px solid ${BORDER}`,
-                  borderRadius: 5,
                   background: GOLD_BG,
                 }}>
                   <DetailBlock
@@ -245,7 +245,6 @@ export default function RegionalCausalChainViewer({
 
 const selectStyle = {
   border: `1px solid ${BORDER}`,
-  borderRadius: 5,
   background: CARD,
   color: SECOND,
   fontFamily: sans,

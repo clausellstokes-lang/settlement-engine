@@ -1,6 +1,6 @@
 /**
  * domain/events/partyEventLinkage.js — bridge party-caused settlement events
- * into the world-pulse engine.
+ * into the world-pulse engine (§8 M3b Phase 2).
  *
  * A settlement-level "Make Changes" event marked "caused by the party" should
  * not just be attributed — when it has a world-scale analog it should also
@@ -19,31 +19,52 @@
  * resulting action through recordPartyImpact, and only in a canon campaign.
  */
 
-import { PARTY_IMPACT_KINDS } from '../worldPulse/partyImpact.js';
+// Leaf import ON PURPOSE: this module is eager (settlementSlice → applyEvent,
+// first paint). Importing partyImpact.js instead would drag the whole
+// world-pulse apply pipeline (applyWorldPulse, relationshipEvolution,
+// npcAgency, factionCompetition, … — 152 kB minified) back into the entry
+// chunk just for this const.
+import { PARTY_IMPACT_KINDS } from '../worldPulse/partyImpactKinds.js';
 
 // Settlement event type → party-impact kind + which action field carries the
 // event's targetId. Only world-scale analogs belong here.
 const EVENT_TO_PARTY_KIND = Object.freeze({
   KILL_NPC:        { kind: 'remove_npc',        targetField: 'npcId' },
+  // KILL_LEADER is killNpcMutation forced to pillar importance — strictly more
+  // consequential than KILL_NPC, so it must fire the SAME party-impact ripple
+  // (the campaign-scale dominant_npc_removed leadership-void condition, the
+  // npcState.removed patch, party-attributed Wizard News). [domain-events-region-4]
+  KILL_LEADER:     { kind: 'remove_npc',        targetField: 'npcId' },
   IMPAIR_FACTION:  { kind: 'undermine_faction', targetField: 'factionId' },
   RESTORE_FACTION: { kind: 'bolster_faction',   targetField: 'factionId' },
+  // [domain-events-region-1] G1d — the DM's relationship levers reach the live
+  // conflict layer. A PARTY-CAUSED alliance/dispute rides the pulse-proven
+  // broker_relationship / inflame_relationship kinds (a gradual ladder nudge on
+  // the pulse relationshipState — the de-escalation counterpart to the war
+  // system). The event's targetId is the OTHER settlement in the pair, carried
+  // as `relationshipTargetId`; buildPartyImpactOutcomes resolves it to the
+  // pulse's edge key (relationshipKeyFromEdge) so the nudge lands on the SAME
+  // state the war layer reads. OPENED_TRADE_ROUTE + the NON-party canon lane are
+  // handled store-side (rippleEventThroughWorld) with a direct type-upsert.
+  BROKERED_ALLIANCE:  { kind: 'broker_relationship',  targetField: 'relationshipTargetId' },
+  SETTLEMENT_DISPUTE: { kind: 'inflame_relationship', targetField: 'relationshipTargetId' },
 });
 
 /**
  * Map a party-caused settlement event to a party-impact action, or null when the
  * event has no world-scale analog (attribution-only).
  *
- * @param {any} event   the applied settlement event ({ type, targetId, partyCaused, description, ... })
+ * @param {{ type?: string, targetId?: unknown, partyCaused?: unknown, description?: string, [k: string]: unknown }} event   the applied settlement event
  * @param {string} saveId  the settlement's campaign save id (party impacts are settlement-scoped)
- * @returns {Object|null}  a PARTY_IMPACT action, or null
+ * @returns {Record<string, unknown>|null}  a PARTY_IMPACT action, or null
  */
 export function mapEventToPartyImpact(event, saveId) {
   if (!event || !event.partyCaused || !saveId) return null;
-  const mapping = /** @type {Record<string, any>} */ (EVENT_TO_PARTY_KIND)[event.type];
+  const mapping = EVENT_TO_PARTY_KIND[/** @type {keyof typeof EVENT_TO_PARTY_KIND} */ (event.type)];
   if (!mapping) return null;
   const targetId = String(event.targetId || '').trim();
   if (!targetId) return null;
-  const spec = /** @type {Record<string, any>} */ (PARTY_IMPACT_KINDS)[mapping.kind];
+  const spec = /** @type {Record<string, { defaultMagnitude: number, label: string, note: string }>} */ (PARTY_IMPACT_KINDS)[mapping.kind];
   if (!spec) return null;
   return {
     kind: mapping.kind,

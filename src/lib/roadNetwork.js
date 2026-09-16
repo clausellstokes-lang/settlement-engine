@@ -6,6 +6,8 @@
  *   - Highways connect all city+ placements via a true minimum spanning tree
  *     (Prim's algorithm backed by a binary-heap priority queue)
  *   - Trade roads follow explicit relationship or supply-chain links
+ *   - The URQUHART SUPERGRAPH adds the geometric neighbour links the MST cannot
+ *     carry (a tree has no cycles; a road network does) — see the pass below
  *   - Country lanes ensure every placement is connected to at least one other
  *   - Sea mode is chosen iframe-side when both endpoints are coastal and the
  *     water path is cheaper than the land path.
@@ -21,7 +23,11 @@
  * stable node-index order rather than a Math/locale-dependent ordering.
  */
 
-import { buildChainEdges, CHAIN_DEFS } from './supplyChains.js';
+import {
+  buildChainEdges,
+  CHAIN_DEFS,
+  nativeChainResourceList,
+} from './supplyChains.js';
 
 /**
  * Minimal binary min-heap (priority queue) over arbitrary items, ordered by a
@@ -110,10 +116,7 @@ function chainMembership(sett) {
     if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
     return '';
   };
-  const resList = sett?.config?.nearbyResources
-    || sett?.nearbyResources
-    || sett?.resources
-    || [];
+  const resList = nativeChainResourceList(sett);
   const resources = new Set(resList.map(normRes).filter(Boolean));
 
   const normInst = (i) => (i?.id || i?.name || '').toLowerCase();
@@ -137,13 +140,185 @@ function chainMembership(sett) {
   return { producesByChain, consumesByChain };
 }
 
+// ── The Urquhart supergraph (WEAVE NET-1) ───────────────────────────────────
+// A minimum spanning tree is a TREE: no cycles, so every journey between two
+// neighbouring towns that the tree does not directly link detours through the
+// tree's spine. Real road networks are not trees. The Urquhart graph is the
+// classical cheap answer: take the Delaunay triangulation and drop, from each
+// triangle, its LONGEST edge. What survives is a planar graph that contains the
+// Euclidean minimum spanning tree (EMST ⊆ RNG ⊆ Urquhart ⊆ Delaunay), so adding
+// it to the emitted set is a SUPERGRAPH of what we drew before — never a
+// replacement, never a removal.
+//
+// Everything below is index arithmetic over plain numbers: no RNG, no locale
+// compare, no Math.random, no dependency. Determinism is bought three ways:
+//   1. points enter the triangulation in ASCENDING BURG-ID order, so the result
+//      does not depend on the iteration order of the `placements` object;
+//   2. the cavity walk pushes new triangles in the order the bad triangles were
+//      found, and edges within a triangle in fixed (a,b) (b,c) (c,a) order;
+//   3. the emitted edge list is sorted by the same `[a,b].sort().join('|')`
+//      burg-pair key `addEdge` already uses, so the emit order is a pure
+//      function of the burg ids regardless of any triangulation internals.
+
+/**
+ * Is `p` strictly inside the circumcircle of triangle (a, b, c)?
+ * The standard InCircle determinant, sign-corrected for triangle orientation so
+ * the caller never has to pre-wind its triangles. A degenerate (collinear)
+ * triangle has no circumcircle and answers false.
+ *
+ * @param {number[]} a @param {number[]} b @param {number[]} c @param {number[]} p
+ */
+function inCircumcircle(a, b, c, p) {
+  const orient = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+  if (orient === 0) return false;
+  const adx = a[0] - p[0], ady = a[1] - p[1];
+  const bdx = b[0] - p[0], bdy = b[1] - p[1];
+  const cdx = c[0] - p[0], cdy = c[1] - p[1];
+  const ad = adx * adx + ady * ady;
+  const bd = bdx * bdx + bdy * bdy;
+  const cd = cdx * cdx + cdy * cdy;
+  const det =
+      adx * (bdy * cd - bd * cdy)
+    - ady * (bdx * cd - bd * cdx)
+    + ad  * (bdx * cdy - bdy * cdx);
+  return orient > 0 ? det > 0 : det < 0;
+}
+
+/**
+ * Delaunay triangulation by Bowyer–Watson incremental insertion.
+ *
+ * `pts` must already be DISTINCT (duplicates make the cavity ill-defined) and in
+ * the order the caller wants inserted. Returns `[i, j, k]` index triples into
+ * `pts`, with every triangle touching the bounding super-triangle discarded.
+ * O(n²) worst case, which matches the module's other passes.
+ *
+ * @param {Array<number[]>} pts
+ * @returns {Array<number[]>}
+ */
+function delaunayTriangles(pts) {
+  const n = pts.length;
+  if (n < 3) return [];
+
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const [x, y] of pts) {
+    if (x < minX) minX = x;
+    if (y < minY) minY = y;
+    if (x > maxX) maxX = x;
+    if (y > maxY) maxY = y;
+  }
+  // A super-triangle comfortably enclosing the whole point cloud. The 20× span
+  // margin keeps every real point far from its edges, so no real circumcircle
+  // reaches a super vertex for the wrong reason.
+  const span = Math.max(maxX - minX, maxY - minY) || 1;
+  const midX = (minX + maxX) / 2;
+  const midY = (minY + maxY) / 2;
+  const P = pts.concat([
+    [midX - 20 * span, midY - span],
+    [midX,             midY + 20 * span],
+    [midX + 20 * span, midY - span],
+  ]);
+
+  let tris = [[n, n + 1, n + 2]];
+  for (let i = 0; i < n; i++) {
+    const p = P[i];
+    const bad = [];
+    const kept = [];
+    for (const t of tris) {
+      if (inCircumcircle(P[t[0]], P[t[1]], P[t[2]], p)) bad.push(t);
+      else kept.push(t);
+    }
+    if (!bad.length) continue;   // numerically outside every circumcircle
+
+    // The cavity boundary is exactly the edges owned by ONE bad triangle.
+    const seenEdge = new Map();
+    for (const [a, b, c] of bad) {
+      for (const [u, v] of [[a, b], [b, c], [c, a]]) {
+        const k = u < v ? `${u}_${v}` : `${v}_${u}`;
+        seenEdge.set(k, (seenEdge.get(k) || 0) + 1);
+      }
+    }
+    tris = kept;
+    for (const [a, b, c] of bad) {
+      for (const [u, v] of [[a, b], [b, c], [c, a]]) {
+        const k = u < v ? `${u}_${v}` : `${v}_${u}`;
+        if (seenEdge.get(k) === 1) tris.push([u, v, i]);
+      }
+    }
+  }
+
+  return tris.filter(t => t[0] < n && t[1] < n && t[2] < n);
+}
+
+/**
+ * The Urquhart edge set over `pts`: every Delaunay edge except, for each
+ * triangle, its longest side. Ties inside a triangle are broken by the larger
+ * `i_j` index key so the dropped side is a pure function of the input.
+ *
+ * @param {Array<number[]>} pts
+ * @returns {Array<number[]>} `[i, j]` index pairs, i < j
+ */
+function urquhartEdges(pts) {
+  const tris = delaunayTriangles(pts);
+  const d2 = (i, j) => (pts[i][0] - pts[j][0]) ** 2 + (pts[i][1] - pts[j][1]) ** 2;
+  const ekey = (i, j) => (i < j ? `${i}_${j}` : `${j}_${i}`);
+
+  const kept = new Set();
+  const dropped = new Set();
+  for (const [a, b, c] of tris) {
+    const sides = [[a, b], [b, c], [c, a]];
+    let longest = null, longestD = -1, longestK = '';
+    for (const [u, v] of sides) {
+      const k = ekey(u, v);
+      kept.add(k);
+      const d = d2(u, v);
+      if (d > longestD || (d === longestD && k > longestK)) {
+        longest = k; longestD = d; longestK = k;
+      }
+    }
+    if (longest) dropped.add(longest);
+  }
+
+  const out = [];
+  for (const k of kept) {
+    if (dropped.has(k)) continue;
+    const [i, j] = k.split('_');
+    out.push([Number(i), Number(j)]);
+  }
+  return out;
+}
+
 /**
  * @param {Array} saves       savedSettlements from the store
  * @param {Object} placements mapState.placements — keyed by burgId
+ * @param {{canonPortIds?: Set<string>|null}|null} [options]
+ *        WEAVE NET-1: `canonPortIds` unifies the render-tier port definition onto
+ *        the frozen canon's. When a campaign has an active spatial canon the
+ *        caller passes THAT canon's port-id set — the ids `domain/spatial/
+ *        distanceRead.isPort` answers true for, which is the sea graph's own node
+ *        list — and it becomes authoritative for `preferSea`. Absent or null ⇒ the
+ *        pre-canon institutional read below, byte-identically to before this
+ *        parameter existed.
+ *
+ *        WHY INJECTED RATHER THAN READ HERE: `distanceRead.js` is the ~53 kB
+ *        frozen-digest reader whose own docblock states it "never reaches first
+ *        paint", and importing ANY symbol from it pulls the whole module into the
+ *        importer's chunk — the exact incident recorded at
+ *        tests/build/vendorPdfLazy.test.js (a three-line import dragged it onto
+ *        the critical path). This module is the FP-G9 lazy-map-chunk resident and
+ *        stays a zero-domain-import leaf. The port LAW is still single-sourced:
+ *        the caller asks `isPort`, this module never re-derives it.
  * @returns {Array<{id, fromBurgId, toBurgId, fromX, fromY, toX, toY, tier, preferSea, reason}>}
  */
-export function computeRoadEdges(saves, placements) {
+export function computeRoadEdges(saves, placements, options = null) {
   if (!placements) return [];
+
+  // WEAVE NET-1 · ONE PORT DEFINITION. A frozen canon knows whether a settlement
+  // is REALLY a port — its sea-lane graph is built from geography ∧ institution
+  // ∧ (river ⇒ navigable) — while the config read below knows only what the
+  // settlement CLAIMS. Where the canon exists it wins outright, so a town that
+  // calls itself a port but sits inland in the frozen truth no longer asks the
+  // iframe for a sea lane. `null` (no canon) keeps the institutional read.
+  const canonPortIds = options?.canonPortIds instanceof Set ? options.canonPortIds : null;
 
   // Index saves by id so we can attach settlement data to each placement
   const saveById = new Map();
@@ -165,7 +340,32 @@ export function computeRoadEdges(saves, placements) {
       y: p.y,
       tier,
       rank: TIER_RANK[tier] ?? 2,
-      isPort: !!(sett?.tradeRouteAccess === 'port' || sett?.port),
+      // ── ONE-TIME CORRECTION, 2026-08-11 (owner-approved) ──────────────────
+      // This read was one level too SHALLOW. `tradeRouteAccess` has no writer at
+      // the top level of either a save row or a settlement blob — the RESOLVED
+      // route is persisted at `.config.tradeRouteAccess` (assembleSettlement
+      // writes `config: { ...effectiveConfig }`) — and the second arm, `sett.port`,
+      // has no writer anywhere in the repo. `isPort` was therefore ALWAYS FALSE,
+      // which made `preferSea` below always false: no road between two port
+      // settlements has ever been routed as a sea lane. Same defect and same fix
+      // as PlacementsLayer.jsx:129, which landed earlier with the same rationale.
+      //
+      // `sett` is already unwrapped above (`save.settlement || save`), so this one
+      // address serves both save shapes; no extra wrapper hop is added.
+      //
+      // ⚠ DECLARED SHIFT: a map whose placements connect two port settlements now
+      // emits `preferSea: true` on that edge where it emitted false before. The
+      // edge SET and its order are unchanged — only this flag moves. A road network
+      // rendered across this date boundary is expected to differ in exactly that way.
+      //
+      // ── WEAVE NET-1 ── When a canon exists the render tier stops keeping its own
+      // port definition and reads the canon's (see `canonPortIds` above). A
+      // placement with no `settlementId` cannot be looked up in a settlement-id
+      // keyed canon, so it is not a port under the canon — which is the honest
+      // answer: an unlinked pin is not a harbour the frozen sea graph connects.
+      isPort: canonPortIds
+        ? (!!p.settlementId && canonPortIds.has(String(p.settlementId)))
+        : sett?.config?.tradeRouteAccess === 'port',
       save,
       sett,
     });
@@ -379,6 +579,65 @@ export function computeRoadEdges(saves, placements) {
       break;
     }
   }
+
+  // ── 4. Urquhart supergraph — the geometric neighbour links (WEAVE NET-1) ──
+  // Runs LAST, so it can only ever APPEND. Every pair an earlier pass claimed is
+  // already in `seen` and `addEdge` no-ops on it, which makes the pre-NET-1 edge
+  // list an exact PREFIX of this one: no edge is removed, re-tiered, re-reasoned
+  // or moved. `route_count` therefore only ever rises. (That prefix property is
+  // pinned by a test; it is the whole reason this pass is last rather than
+  // slotted beside the MST, where it would have re-labelled the lane pass's
+  // 'nearest' edges as 'urquhart'.)
+  //
+  // TWO node sets, because the network has two scales and the MST only covers
+  // one of them:
+  //   (a) city+ only — the supergraph of the HIGHWAY tree. A spanning tree has
+  //       no cycles, so the trunk network today routes every city-to-city
+  //       journey the tree does not directly carry back through its spine. The
+  //       Urquhart edges over the same node set are the missing trunk cycles.
+  //   (b) every placement — the local road web. This is the bigger visible win:
+  //       the lane pass gives an un-linked placement exactly ONE edge, to its
+  //       nearest peer, which leaves the map a scatter of small disconnected
+  //       clumps (measured on a 34-placement world: 13 of 34 placements in the
+  //       largest component before, 34 of 34 after).
+  //
+  // Tier: 'highway' between two city+ centres, 'lane' otherwise. Deliberately
+  // NOT 'trade' — `addEdge` FORCES trade edges through hostile pairs, and an
+  // Urquhart edge is a claim about GEOMETRY, not about politics; a rival pair
+  // must stay unlinked, exactly as it does for the MST.
+  //
+  // Co-located placements: the triangulation needs distinct points, so the first
+  // node (in ascending burg-id order) at each coordinate represents it. A second
+  // node on the identical coordinate sits this pass out and is still served by
+  // the MST/trade/lane passes above.
+  const urquhartPass = (nodeSet) => {
+    const ordered = [...nodeSet].sort(
+      (n1, n2) => (n1.burgId < n2.burgId ? -1 : n1.burgId > n2.burgId ? 1 : 0),
+    );
+    const pts = [];
+    const reps = [];
+    const seenPoint = new Set();
+    for (const n of ordered) {
+      const pk = `${n.x}_${n.y}`;
+      if (seenPoint.has(pk)) continue;
+      seenPoint.add(pk);
+      pts.push([n.x, n.y]);
+      reps.push(n);
+    }
+    if (reps.length < 3) return;
+    const pairs = urquhartEdges(pts).map(([i, j]) => {
+      const a = reps[i], b = reps[j];
+      return { a, b, key: [a.burgId, b.burgId].sort().join('|') };
+    });
+    // Emit in sorted burg-pair-key order — a pure function of the burg ids, so
+    // no triangulation internal can reach the emitted order.
+    pairs.sort((p1, p2) => (p1.key < p2.key ? -1 : p1.key > p2.key ? 1 : 0));
+    for (const { a, b } of pairs) {
+      addEdge(a, b, a.rank >= 4 && b.rank >= 4 ? 'highway' : 'lane', 'urquhart');
+    }
+  };
+  urquhartPass(topNodes);   // (a) the highway supergraph
+  urquhartPass(nodes);      // (b) the full local web
 
   return edges;
 }

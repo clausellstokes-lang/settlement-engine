@@ -7,6 +7,11 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { isCategoryEnabled } from './categoryToggleReader.js';
+import { institutionToggleFor } from './institutionToggleReader.js';
 
 // Faction category → catalog category keys
 const FACTION_TO_CATALOG = {
@@ -101,13 +106,18 @@ export function applyFactionInstitutionBoosts(
   const cap      = TIER_BOOST_CAPS[tier] || 0;
   if (cap === 0 || boosts.length === 0) return [];
 
+  const nativeInstitutions = existingInstitutions.filter(
+    institution => !isMaterializedCustomContent(institution),
+  );
   const existingNames = new Set(
-    existingInstitutions.map(i => (i.name || '').toLowerCase())
+    nativeInstitutions.map(i => (i.name || '').toLowerCase()),
   );
   // Exact names + exclusive groups already seated — a faction pull must not
   // seat a second member of an exclusive group (same contract as cascade).
-  const existingExact = new Set(existingInstitutions.map(i => i.name));
-  const takenGroups   = new Set(existingInstitutions.map(i => i.exclusiveGroup).filter(Boolean));
+  const existingExact = new Set(nativeInstitutions.map(i => i.name));
+  const takenGroups   = new Set(
+    nativeInstitutions.map(i => i.exclusiveGroup).filter(Boolean),
+  );
   const TIER_ORD      = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const tierIdx       = TIER_ORD.indexOf(tier);
   const tradeRoute    = config?.tradeRouteAccess || null;
@@ -119,10 +129,10 @@ export function applyFactionInstitutionBoosts(
   // the faction pull; a dominant faction must not resurrect it. The bare-name
   // string/boolean forms are kept for legacy callers.
   const toggleExcluded = (name, cat) => {
-    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
-                || institutionToggles[`${tier}_${cat}_${name}`]
-                || institutionToggles[`all::${cat}::${name}`]
-                || institutionToggles[`all_${cat}_${name}`]
+    // The bare-name key is this file's OWN legacy tail, kept at the call site rather than
+    // folded into the shared ladder — the other two consumers do not read it and folding it
+    // in would quietly widen what they honour.
+    const toggle = institutionToggleFor(institutionToggles, [tier], cat, name)
                 || institutionToggles[name];
     if (!toggle) return false;
     if (toggle === 'exclude' || toggle === false) return true;
@@ -142,11 +152,9 @@ export function applyFactionInstitutionBoosts(
       if (additions.length >= cap) break;
 
       const catInsts = tierCatalog[catalogCat] || {};
-      // Check category toggle (both keying vocabularies in circulation)
-      if (categoryToggles[`${tier}_${catalogCat}`]  === false) continue;
-      if (categoryToggles[`${tier}::${catalogCat}`] === false) continue;
-      if (categoryToggles[`all_${catalogCat}`]      === false) continue;
-      if (categoryToggles[`all::${catalogCat}`]     === false) continue;
+      // Check category toggle via the shared reader (pipeline-4: single predicate
+      // co-owned with assembleInstitutions so the two passes never disagree).
+      if (!isCategoryEnabled(categoryToggles, config?.settType, tier, catalogCat)) continue;
 
       // When magic doesn't exist in the world, skip the entire Magic catalog category
       if (config?.magicExists === false && catalogCat === 'Magic') continue;

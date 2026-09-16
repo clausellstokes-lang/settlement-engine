@@ -154,15 +154,15 @@ describe('advanceMultiTick flag gate', () => {
     expect(mineUndo[0].interval).toBe('one_month');
   });
 
-  test('FLAG ON: a 48-tick one_year advance writes EXACTLY ONE ring record (not 48)', async () => {
+  test('FLAG ON: a 52-tick one_year advance writes EXACTLY ONE ring record (not 52)', async () => {
     setMultiTick(true);
     const store = makeStore();
     seedStore(store);
 
     const result = await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
 
-    expect(result.tick).toBe(48);
-    expect(store.getState().campaigns[0].worldState.tick).toBe(48);
+    expect(result.tick).toBe(52);
+    expect(store.getState().campaigns[0].worldState.tick).toBe(52);
     // The ring must NOT consume 48/80 for one advance.
     expect(store.getState().campaigns[0].worldState.pulseHistory.length).toBe(1);
     // PULSE_UNDO_CAP not blown: one undo entry for the whole interval.

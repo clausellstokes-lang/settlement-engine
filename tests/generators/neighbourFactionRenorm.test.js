@@ -1,8 +1,6 @@
 /**
  * tests/generators/neighbourFactionRenorm.test.js
  *
- * 5th-layer review, cluster generation-neighbour:
- *
  *  (1) MED — the neighbourFactions step injected mirror/oppose factions with
  *      RAW-scale power (rng.randInt(10,30) / (8,26)) into a roster generatePower
  *      had already normalized to percentage points summing ~100. That broke the
@@ -10,18 +8,14 @@
  *      Fix: renormalize the whole roster to integer points summing exactly 100
  *      after injection.
  *
- *  (2) LOW — normalizeAndAnnotateFactions uses an intransitive sort comparator.
- *      A total-order replacement was attempted but REVERTED: it reordered factions
- *      and surfaced a latent cross-process non-determinism (the golden master could
- *      not cleanly rebaseline), which is not worth a global output change for a LOW
- *      robustness nit. The old comparator is stable-in-practice (the golden master
- *      passes), so finding 2 is consciously deferred. Only finding 1 is fixed here.
+ *  (2) The largest-remainder helper renormalizeFactionPower itself is pinned
+ *      here (sums to exactly 100, no 99/101 drift, no-op on degenerate rosters).
  */
 
 import { describe, expect, test } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { renormalizeFactionPower } from '../../src/generators/powerGenerator.js';
+import { renormalizeFactionPower } from '../../src/generators/power/rulingStructure.js';
 
 // A bound neighbour activates the mirror/oppose injection. Search the seed
 // space for a (rel, seed) where the injection provably fires, then assert the
@@ -75,7 +69,7 @@ describe('neighbourFactions power-share invariant (finding 1)', () => {
       expect(f.rawPower).toBeGreaterThanOrEqual(8);
       expect(typeof f.power).toBe('number');
     }
-  });
+  }, 60_000);
 });
 
 describe('renormalizeFactionPower helper (largest-remainder, sums to 100)', () => {

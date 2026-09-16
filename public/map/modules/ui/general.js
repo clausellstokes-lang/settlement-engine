@@ -27,8 +27,22 @@ const tipBackgroundMap = {
   error: "linear-gradient(0.1turn, #ffffff00, #e11d1dcc, #ffffff00)"
 };
 
+// SECURITY (SettlementForge fork patch, H9): tip() is the ONE chokepoint every
+// tooltip flows through (~300 call sites) and it wrote its argument straight to
+// innerHTML. Several callers interpolate untrusted loaded-.map strings into that
+// argument — burg name+group, river name, the MFCG burg name pulled from
+// document.referrer — so a crafted map could inject markup into this
+// token-bearing origin on a mere hover. Escape at the chokepoint: every tip
+// renders as TEXT. escapeHtml is the fork's canonical escaper (hoisted function
+// declaration below, so it's callable here even though tip() precedes it).
+// dataset.main stores the RAW string and showMainTip() re-escapes on render, so
+// the main-tip round-trip is never a second unescaped innerHTML sink and the
+// value is never double-escaped. Trade-off: the two developer-authored
+// intentional-HTML tips (tools.js "<i>States Number</i>", military-overview.js
+// "<span…>") now show their tags literally — an accepted cosmetic loss for
+// closing every sink at one point.
 function tip(tip, main = false, type = "info", time = 0) {
-  tooltip.innerHTML = tip;
+  tooltip.innerHTML = escapeHtml(tip);
   tooltip.style.background = tipBackgroundMap[type];
 
   if (main) {
@@ -40,7 +54,7 @@ function tip(tip, main = false, type = "info", time = 0) {
 
 function showMainTip() {
   tooltip.style.background = tooltip.dataset.color;
-  tooltip.innerHTML = tooltip.dataset.main;
+  tooltip.innerHTML = escapeHtml(tooltip.dataset.main);
 }
 
 function clearMainTip() {
@@ -114,6 +128,65 @@ function sanitizeNoteHtml(html) {
         element.removeAttribute(attribute.name);
       else if (NOTE_RESOURCE_ATTRIBUTES.includes(name) && UNSAFE_NOTE_RESOURCE_PROTOCOL.test(attribute.value))
         element.removeAttribute(attribute.name);
+    }
+  }
+  return doc.body.innerHTML;
+}
+
+// SECURITY (SettlementForge fork patch): shared HTML-text escaper for the
+// innerHTML sinks that interpolate untrusted loaded-.map strings (marker icons,
+// panel names). Emoji / icon-font glyphs pass through unchanged; the five HTML
+// metacharacters are entity-encoded so a value can neither introduce a tag nor
+// break out of an attribute. Defined here (loaded before load.js / the editors)
+// so every fork consumer can reach it as a global.
+function escapeHtml(value) {
+  const map = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"};
+  return String(value ?? "").replace(/[&<>"']/g, ch => map[ch]);
+}
+
+// SECURITY (SettlementForge fork patch): a saved .map's SVG segment (data[5] in
+// modules/io/load.js) is untrusted markup injected into our own token-bearing
+// origin via document.body.insertAdjacentHTML. Scrub every script vector —
+// <script> elements, inline on* event handlers, and javascript:/vbscript:
+// navigations — while preserving the map SVG (all drawing attributes, ids,
+// data: image hrefs). Parsed as text/html so parsing is inert: no script runs
+// and no resource is fetched, exactly like sanitizeNoteHtml above.
+// HARDENED (cycle-3 security fix): the previous version stripped only <script>,
+// on* handlers, and javascript:/vbscript: hrefs — leaving <iframe srcdoc>,
+// <object>, <embed>, <base>, <form>, <foreignObject> (the SVG→HTML escape
+// hatch), src=javascript:, and SMIL href animation to execute on this
+// token-bearing origin. This mirrors sanitizeNoteHtml's denylist, adapted for
+// SVG: it PRESERVES the legitimate map (drawing attributes, ids, <style> for
+// map styling, and data:image hrefs for embedded raster) while removing every
+// script-execution vector. Parsed as text/html so parsing is inert.
+const UNSAFE_SVG_TAGS = /^(script|iframe|frame|frameset|object|embed|link|meta|base|form|template|foreignObject)$/i;
+const UNSAFE_URL_PROTOCOL = /^\s*(javascript|vbscript):/i;
+// href/xlink:href is a navigation context: block script protocols AND any data:
+// that is NOT an embeddable raster image (data:image/svg+xml can carry script
+// when navigated, so it too is blocked here; <image> raster stays legitimate).
+const UNSAFE_NAV_DATA = /^\s*data:(?!image\/(?:png|jpe?g|gif|webp|bmp|avif))/i;
+const SVG_URL_ATTRS = ["href", "xlink:href", "src", "poster", "background"];
+const SVG_ANIM_VALUE_ATTRS = ["values", "to", "from", "by", "begin", "end"];
+function sanitizeMapSvg(markup) {
+  const doc = new DOMParser().parseFromString(String(markup ?? ""), "text/html");
+  for (const element of [...doc.body.querySelectorAll("*")]) {
+    if (UNSAFE_SVG_TAGS.test(element.tagName)) {
+      element.remove();
+      continue;
+    }
+    for (const attribute of [...element.attributes]) {
+      const name = attribute.name.toLowerCase();
+      const value = attribute.value;
+      if (name.startsWith("on") || name === "srcdoc" || name === "xlink:actuate") {
+        element.removeAttribute(attribute.name);
+      } else if (name === "href" || name === "xlink:href") {
+        if (UNSAFE_URL_PROTOCOL.test(value) || UNSAFE_NAV_DATA.test(value)) element.removeAttribute(attribute.name);
+      } else if (SVG_URL_ATTRS.includes(name) && UNSAFE_URL_PROTOCOL.test(value)) {
+        element.removeAttribute(attribute.name);
+      } else if (SVG_ANIM_VALUE_ATTRS.includes(name) && UNSAFE_URL_PROTOCOL.test(value)) {
+        // SMIL <animate attributeName="href" values="javascript:...">
+        element.removeAttribute(attribute.name);
+      }
     }
   }
   return doc.body.innerHTML;
@@ -304,23 +377,33 @@ function updateCellInfo(point, i, g) {
   infoTemp.innerHTML = convertTemperature(grid.cells.temp[g]);
   infoPrec.innerHTML = cells.h[i] >= 20 ? getFriendlyPrecipitation(i) : "n/a";
   infoRiver.innerHTML = cells.h[i] >= 20 && cells.r[i] ? getRiverInfo(cells.r[i]) : "no";
+  // SECURITY (SettlementForge fork patch): the state/province/culture/religion/
+  // burg/biome NAMES below are untrusted strings from a loaded .map (pack.* is
+  // JSON.parse'd from uploaded data) rendered raw into innerHTML on this
+  // token-bearing origin. Route every name through escapeHtml() so a crafted
+  // name can neither introduce a tag nor break out of the interpolation. The
+  // numeric cell indices interpolated alongside them are safe as-is.
   infoState.innerHTML =
     cells.h[i] >= 20
       ? cells.state[i]
-        ? `${pack.states[cells.state[i]].fullName} (${cells.state[i]})`
+        ? `${escapeHtml(pack.states[cells.state[i]].fullName)} (${cells.state[i]})`
         : "neutral lands (0)"
       : "no";
   infoProvince.innerHTML = cells.province[i]
-    ? `${pack.provinces[cells.province[i]].fullName} (${cells.province[i]})`
+    ? `${escapeHtml(pack.provinces[cells.province[i]].fullName)} (${cells.province[i]})`
     : "no";
-  infoCulture.innerHTML = cells.culture[i] ? `${pack.cultures[cells.culture[i]].name} (${cells.culture[i]})` : "no";
+  infoCulture.innerHTML = cells.culture[i]
+    ? `${escapeHtml(pack.cultures[cells.culture[i]].name)} (${cells.culture[i]})`
+    : "no";
   infoReligion.innerHTML = cells.religion[i]
-    ? `${pack.religions[cells.religion[i]].name} (${cells.religion[i]})`
+    ? `${escapeHtml(pack.religions[cells.religion[i]].name)} (${cells.religion[i]})`
     : "no";
   infoPopulation.innerHTML = getFriendlyPopulation(i);
-  infoBurg.innerHTML = cells.burg[i] ? pack.burgs[cells.burg[i]].name + " (" + cells.burg[i] + ")" : "no";
+  infoBurg.innerHTML = cells.burg[i]
+    ? escapeHtml(pack.burgs[cells.burg[i]].name) + " (" + cells.burg[i] + ")"
+    : "no";
   infoFeature.innerHTML = f ? pack.features[f].group + " (" + f + ")" : "n/a";
-  infoBiome.innerHTML = biomesData.name[cells.biome[i]];
+  infoBiome.innerHTML = escapeHtml(biomesData.name[cells.biome[i]]);
 }
 
 function getGeozone(latitude) {

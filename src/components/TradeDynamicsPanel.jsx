@@ -1,23 +1,22 @@
 import { useState, useMemo } from 'react';
 import ControlsStrip from './ControlsStrip.jsx';
-import { GOLD, INK, MUTED, SECOND, sans, FS, swatch, CARD_ALT, CARD_HDR } from './theme.js';
-import Button from './primitives/Button.jsx';
+import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from './theme.js';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid } from '../store/selectors.js';
-import {SERVICE_TIER_DATA} from '../generators/servicesGenerator';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData';
 import {TIER_ORDER} from '../generators/helpers';
 
 const CAT_COLORS = {
-  agricultural:  { bg:'#f0faf2', text:swatch['#1A5A28'], label:'Agricultural' },
-  raw_materials: { bg:swatch['#F7F0E4'], text:swatch['#7A5010'], label:'Raw Material'  },
-  manufactured:  { bg:swatch.infoBg, text:'#1a2a8a', label:'Manufactured'  },
+  agricultural:  { bg:'#f0faf2', text:'#1a5a28', label:'Agricultural' },
+  raw_materials: { bg:'#faf4e8', text:'#7a5010', label:'Raw Material'  },
+  manufactured:  { bg:'#f0f4ff', text:'#1a2a8a', label:'Manufactured'  },
   luxury:        { bg:'#faf0ff', text:'#6a1a8a', label:'Luxury'         },
   services:      { bg:'#f0f8ff', text:'#1a5a8a', label:'Service'        },
   food_processed:{ bg:'#fff4e8', text:'#8a4010', label:'Processed'      },
 };
 
 function catColor(cat) {
-  return CAT_COLORS[String(cat||'').toLowerCase()] || { bg:swatch['#F7F0E4'], text:SECOND, label:'' };
+  return CAT_COLORS[String(cat||'').toLowerCase()] || { bg:'#f7f0e4', text:SECOND, label:'' };
 }
 
 function getGoodsForTier(tier) {
@@ -25,14 +24,14 @@ function getGoodsForTier(tier) {
   if (tier === 'all') {
     const seen = new Set(), out = [];
     (TIER_ORDER||[]).forEach(t => {
-      const data = SERVICE_TIER_DATA[t] || {};
+      const data = GOODS_MODIFIERS_BY_TIER[t] || {};
       Object.entries(data).forEach(([name,def]) => {
         if (!seen.has(name)) { seen.add(name); out.push({name,...def,_tier:t}); }
       });
     });
     return out;
   }
-  const data = SERVICE_TIER_DATA[tier] || {};
+  const data = GOODS_MODIFIERS_BY_TIER[tier] || {};
   return Object.entries(data).map(([name,def]) => ({name,...def}));
 }
 
@@ -46,23 +45,23 @@ function GoodCard({ good, state, onCycle }) {
   const isExcluded  = forceExclude;
   const _isAllowed   = !isForced && !isExcluded;
 
-  const bg         = isForced ? swatch['#F0E8D8'] : CARD_ALT;
+  const bg         = isForced ? '#efe8d0' : '#faf6ef';
   const borderLeft = `3px solid ${isForced ? GOLD : 'transparent'}`;
-  const labelText  = isForced ? 'Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
+  const labelText  = isForced ? ' Forced' : isExcluded ? '✕ Excluded' : '○ Allow';
   const labelColor = isForced ? GOLD : MUTED;
 
   return (
-    <div className="trade-good-row" onClick={onCycle} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onCycle(); } }} style={{
+    <div onClick={onCycle} role="button" tabIndex={0} onKeyDown={(e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); onCycle(); } }} style={{
       display:'flex', alignItems:'flex-start', gap:8,
       padding:'6px 12px 6px 10px',
-      background:bg, borderLeft, borderBottom:`1px solid ${swatch['#F0E8D8']}`,
+      background:bg, borderLeft, borderBottom:'1px solid #f0e8d8',
       cursor:'pointer', userSelect:'none', WebkitTapHighlightColor:'transparent',
-      transition:'background 0.1s',
+       transition:'background 0.1s',
     }}>
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
           <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
-          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, padding:'0 4px'}}>{cc.label}</span>}
           {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
         </div>
         {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
@@ -74,29 +73,24 @@ function GoodCard({ good, state, onCycle }) {
 
 function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
   return (
-    <Button
-      variant="ghost"
-      onClick={onToggle}
-      fullWidth
-      aria-expanded={isOpen}
-      style={{
-        justifyContent:'flex-start', gap:8, padding:'7px 12px',
-        background: isOpen ? swatch['#F0EAD8'] : CARD_HDR,
-        border:'none', borderTop:`1px solid ${swatch['#E0D0B0']}`,
-        borderRadius:0, textAlign:'left', fontFamily:sans, fontWeight:400,
-      }}
-    >
+    <button type="button" onClick={onToggle} style={{
+      width:'100%', display:'flex', alignItems:'center', gap:8, padding:'7px 12px',
+      background: isOpen ? '#f0ead8' : '#faf4e8',
+      border:'none', borderTop:'1px solid #e0d0b0',
+      cursor:'pointer', textAlign:'left', fontFamily:sans,
+      WebkitTapHighlightColor:'transparent',
+    }}>
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
-        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
-        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
-    </Button>
+    </button>
   );
 }
 
@@ -104,7 +98,7 @@ function GoodsPanel() {
   const tier = useStore(selectTierForGrid);
   const goodsToggles = useStore(s => s.goodsToggles);
   const onGoodsToggle = useStore(s => s.toggleGood);
-  const setGoodsToggles = useStore(s => s.setGoodsToggles);
+  const bulkSetGoods = useStore(s => s.bulkSetGoods);
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [search, setSearch] = useState('');
@@ -147,9 +141,24 @@ function GoodsPanel() {
     onGoodsToggle(getKey(good.name), next);
   };
 
-  // Bulk operations
-  const bulkForce   = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:true,  force:true,  forceExclude:false }));
-  const bulkExclude = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:false, force:false, forceExclude:true  }));
+  // Bulk operations — one store action owns the write for the whole grid, the way
+  // InstitutionalGrid routes its strip through bulkSetInstitutions. bulkSetGoods
+  // builds `${tier}_good_${name}` per tier it is given, so the goods are grouped by
+  // the tier their key ALREADY resolves to (getKey's own rule: the visible tier, or
+  // under 'All tiers' the first tier that carries the good). That keeps a bulk press
+  // and a card click writing the same entries, and never reaches a tier the grid is
+  // not showing.
+  const bulkTierData = useMemo(() => {
+    const byTier = {};
+    for (const g of goods) {
+      const t = tier === 'all' ? g._tier : tier;
+      if (!byTier[t]) byTier[t] = {};
+      byTier[t][g.name] = g;
+    }
+    return byTier;
+  }, [goods, tier]);
+  const bulkForce   = () => bulkSetGoods('force', bulkTierData);
+  const bulkExclude = () => bulkSetGoods('exclude', bulkTierData);
 
   const filtered = search
     ? goods.filter(g => g.name.toLowerCase().includes(search.toLowerCase()) || (g.desc||'').toLowerCase().includes(search.toLowerCase()) || (g.category||'').toLowerCase().includes(search.toLowerCase()))
@@ -164,16 +173,13 @@ function GoodsPanel() {
   const allowedCount  = goods.filter(g => { const s=getState(g); return !s.force&&!s.forceExclude; }).length;
 
   return (
-    <div>
-      {/* role=button good rows have no default ring; give keyboard focus a
-          perceivable outline without forcing a 44px target (dense-scan rationale). */}
-      <style>{`.trade-good-row:focus-visible{outline:2px solid ${GOLD};outline-offset:-2px;}`}</style>
+    <div style={{border:`1px solid ${BORDER}`, borderRadius:0, borderTop:'none'}}>
       <ControlsStrip
         search={search}
         setSearch={setSearch}
         placeholder="Search goods…"
         onForceAll={bulkForce}
-        onReset={() => setGoodsToggles({})}
+        onReset={() => bulkSetGoods('reset')}
         onExcludeAll={bulkExclude}
         onExpandAll={() => { setShowExport(true); setShowImport(true); }}
         onCollapseAll={() => { setShowExport(false); setShowImport(false); }}
@@ -194,12 +200,7 @@ function GoodsPanel() {
         </div>
       )}
 
-      {/* Both sections render the same goods bound to the same `${tier}_good_*`
-          toggle keys, so a good forced under Export is forced under Import too.
-          The header must therefore report the SAME forcedCount as Export — the
-          previous hardcoded forced={0} made the Import header read "N allowed"
-          with no forced badge even while its own rows showed '● Forced'. */}
-      <SectionHeader label="Import Goods" forced={forcedCount} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
+      <SectionHeader label="Import Goods" forced={0} allowed={allowedCount+forcedCount} total={goods.length} isOpen={showImport} onToggle={()=>setShowImport(v=>!v)}/>
       {showImport && (
         <div style={{maxHeight:360, overflowY:'auto', background:CARD_ALT}}>
           {sorted.length===0 && search
@@ -217,7 +218,8 @@ function GoodsPanel() {
 // affordance, and the wizard_step_viewed funnel fire. The component's own outer
 // collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
 // its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
-// there is exactly one disclosure layer. GoodsPanel renders directly.
+// there is exactly one disclosure layer. GoodsPanel renders directly. (Restores
+// master's flattening — base of record; the double-disclosure was the merge regression.)
 export default function TradeDynamicsPanel() {
   return <GoodsPanel />;
 }

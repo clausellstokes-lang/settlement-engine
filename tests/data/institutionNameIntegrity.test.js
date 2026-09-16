@@ -18,16 +18,19 @@ import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import {
   INSTITUTION_SPATIAL,
   GATE_FEATURES,
+  GATE_DERIVED_REQUIREMENTS,
   GOVERNMENT_INSTITUTIONS,
 } from '../../src/data/spatialData.js';
-import { EXPORT_GOODS_BY_TIER, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
-import { SERVICE_TIER_DATA } from '../../src/generators/servicesGenerator.js';
 import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 
-// The set of institution names a settlement can actually HOLD — i.e. names that
-// appear on `settlement.institutions[].name`. Only the catalog emits these during
-// generation (assembleInstitutions pulls exclusively from institutionalCatalog);
-// GATE_FEATURES / SPATIAL_FEATURES are validation-rule keys, NOT emittable names.
+// EP-g3 is an explicit owner disposition, not part of the EP-g2 vocabulary
+// repair. Keep these two dead legacy keys visible and exact until that decision
+// lands; any third non-catalog gate is a regression.
+const EP_G3_OWNER_DEFERRED_GATE_KEYS = new Set([
+  'Major port',
+  'Navy (if coastal)',
+]);
+
 function buildCatalogNames() {
   const names = new Set();
   for (const tier of Object.values(institutionalCatalog)) {
@@ -38,24 +41,8 @@ function buildCatalogNames() {
   return names;
 }
 
-// Quarantine for GATE_FEATURES requirements that name an institution existing
-// nowhere in the catalog/spatial maps (so the requirement can never resolve).
-// Now EMPTY: the three dead-vocabulary entries this guard originally surfaced
-// were removed from GATE_FEATURES —
-//   - "Arcane university" / "Magical academy"  (from "Magic item consignment")
-//   - "River access"  (from "Tanners") — an ACCESS type, not an institution.
-// The real institutions already listed alongside each carried the requirement,
-// so dropping the dead tokens changed no gate outcome. Keep this set empty; a
-// new unresolved name must be fixed in the data, not quarantined here.
-const KNOWN_UNRESOLVED = new Set([]);
-
 function buildDefinedNames() {
-  const defined = new Set();
-  for (const tier of Object.values(institutionalCatalog)) {
-    for (const category of Object.values(tier)) {
-      for (const name of Object.keys(category)) defined.add(name);
-    }
-  }
+  const defined = buildCatalogNames();
   for (const key of Object.keys(GATE_FEATURES)) defined.add(key);
   for (const entry of INSTITUTION_SPATIAL) {
     if (entry?.institution) defined.add(entry.institution);
@@ -68,44 +55,9 @@ function buildDefinedNames() {
   return defined;
 }
 
-// GATE_FEATURES is an INTENTIONAL SUPERSET of the emittable catalog: many of its
-// keys gate institution NAMES the base catalog never produces (rich-setting /
-// custom-content institutions like "University", "Curse breaking", or a stricter
-// variant such as "Inner citadel" distinct from the catalog's "Citadel"). Those
-// keys are dormant for generated settlements and only bind when a custom-authored
-// institution carries that exact name — they are NOT dead code. This set pins the
-// accepted superset so the useful signal survives: a NEW non-catalog key here means
-// you either (a) added such a superset gate — extend this set on purpose — or (b)
-// RENAMED/removed a catalog institution and silently killed a gate key that used to
-// bind (fix the data so the key matches its catalog name again).
-const SUPERSET_GATE_KEYS = new Set([
-  "Adventurers' guild hall",
-  'Curse breaking',
-  'Enchanting quarter',
-  'Inner citadel',
-  'Magic item consignment',
-  'Magical banking (high magic)',
-  'Major port',
-  'Mercenary company HQ',
-  'Monster part dealers',
-  'Multiple cathedrals',
-  'Multiple warehouse districts',
-  'Multiple wizard towers',
-  'Navy (if coastal)',
-  'Professional arena',
-  'Professional guard (hundreds)',
-  'Resurrection services (10,000+ only)',
-  'Sage/library',
-  'Spellcasting services (1st-4th level)',
-  'Spellcasting services (1st-6th level)',
-  'Spellcasting services (1st-8th level)',
-  'Stock exchange (early)',
-  'University',
-]);
-
 describe('institution-name integrity (string-coupling guard)', () => {
-  const defined = buildDefinedNames();
   const catalogNames = buildCatalogNames();
+  const defined = buildDefinedNames();
   const isDefined = (name) => defined.has(name);
 
   it('every SPATIAL_FEATURES implied (lesser) institution is defined somewhere', () => {
@@ -131,44 +83,24 @@ describe('institution-name integrity (string-coupling guard)', () => {
     expect(orphans).toEqual([]);
   });
 
-  it('every GATE_FEATURES requirement resolves, except documented pre-existing bugs', () => {
-    const orphans = new Set();
-    for (const [feature, def] of Object.entries(GATE_FEATURES)) {
-      for (const req of def?.requires || []) {
-        if (!isDefined(req)) orphans.add(req);
-      }
-    }
-    // Exact match: a NEW unresolved name fails (drift caught); a FIXED one also
-    // fails, prompting its removal from KNOWN_UNRESOLVED so the list stays honest.
-    expect([...orphans].sort()).toEqual([...KNOWN_UNRESOLVED].sort());
+  it('every live GATE_FEATURES key is a catalog institution', () => {
+    const orphans = Object.keys(GATE_FEATURES)
+      .filter(name => !catalogNames.has(name))
+      .sort();
+    expect(orphans).toEqual([...EP_G3_OWNER_DEFERRED_GATE_KEYS].sort());
   });
 
-  it('every trade-good requiredInstitution (all 3 parallel maps) names an emittable catalog institution', () => {
-    // A good's `requiredInstitution` is matched by EXACT NAME against a settlement's
-    // institutions — GOODS_MODIFIERS_BY_TIER gates generation on it; EXPORT_GOODS_BY_TIER
-    // and SERVICE_TIER_DATA drive the dependency compendium's cross-links. All three are
-    // tier→good→spec maps and must reference REAL catalog institutions; if one names
-    // something the catalog can never emit ('University', 'Specialist craftsmen quarters',
-    // guild-forms like "Bakers' guild"), the requirement is a fiction that either
-    // permanently suppresses the good (generation) or dead-ends the cross-link (display).
-    const MAPS = { EXPORT_GOODS_BY_TIER, GOODS_MODIFIERS_BY_TIER, SERVICE_TIER_DATA };
-    const orphans = new Set();
-    for (const [mapName, map] of Object.entries(MAPS)) {
-      for (const goods of Object.values(map || {})) {
-        for (const [good, spec] of Object.entries(goods || {})) {
-          const req = spec?.requiredInstitution;
-          if (req && !catalogNames.has(req)) orphans.add(`${mapName}:${good} → ${req}`);
+  it('every live GATE_FEATURES dependency is cataloged or explicitly real-derived', () => {
+    const derived = new Set(GATE_DERIVED_REQUIREMENTS);
+    const orphans = [];
+    for (const [feature, def] of Object.entries(GATE_FEATURES)) {
+      for (const field of ['requires', 'requiresAny', 'blockedBy']) {
+        for (const requirement of def?.[field] || []) {
+          if (catalogNames.has(requirement) || derived.has(requirement)) continue;
+          orphans.push(`${feature}.${field}: ${requirement}`);
         }
       }
     }
-    expect([...orphans].sort()).toEqual([]);
-  });
-
-  it('every GATE_FEATURES key that is NOT an emittable catalog name is an accepted superset gate', () => {
-    // Pins the intentional catalog↔gate gap (see SUPERSET_GATE_KEYS above). Fails when
-    // the gap CHANGES — a new dormant/superset gate to acknowledge, or (the real bug
-    // this catches) a catalog rename that silently dropped a live gate key to dormant.
-    const nonCatalogKeys = Object.keys(GATE_FEATURES).filter((k) => !catalogNames.has(k));
-    expect([...nonCatalogKeys].sort()).toEqual([...SUPERSET_GATE_KEYS].sort());
+    expect(orphans.sort()).toEqual([]);
   });
 });

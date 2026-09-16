@@ -12,8 +12,8 @@
  * This is a class component because React error boundaries can only be class
  * components (getDerivedStateFromError / componentDidCatch have no hook form).
  * It mirrors the two existing patterns it consolidates:
- *   • DetailErrorBoundary (SettlementDetail.jsx) — small inline fallback + a
- *     console.error scoped log.
+ *   • DetailErrorBoundary (settlementDetail/DetailErrorBoundary.jsx) — small
+ *     fallback + a console.error scoped log.
  *   • the root ErrorBoundary (main.jsx) — reportError() telemetry.
  * Doing BOTH gives defense-in-depth: the panel recovers locally AND the failure
  * is still reported, so a swallowed throw never becomes an invisible bug.
@@ -26,7 +26,8 @@
 import { Component } from 'react';
 import { reportError } from '../lib/errorReporter.js';
 import Button from './primitives/Button.jsx';
-import { FS, SP, R, sans, swatch } from './theme.js';
+import HouseDevice from './brand/HouseDevice.jsx';
+import { FS, SP, sans, swatch } from './theme.js';
 
 /** Shallow per-element comparison of two resetKeys arrays. */
 function keysChanged(a, b) {
@@ -83,7 +84,7 @@ export default class FeatureErrorBoundary extends Component {
       if (typeof fallback === 'function') return fallback(this.state.error, this.handleRetry);
       if (fallback !== undefined && fallback !== null) return fallback;
 
-      const title = this.props.fallbackTitle || 'Something went wrong rendering this view.';
+      const title = this.props.fallbackTitle || 'This page would not open.';
       return (
         <div
           role="alert"
@@ -91,16 +92,18 @@ export default class FeatureErrorBoundary extends Component {
             margin: SP.md,
             padding: SP.lg,
             border: `1px solid ${swatch.danger}`,
-            borderRadius: R.lg,
-            background: swatch.dangerBg,
+            background: swatch['#FAF8F4'],
             color: swatch.danger,
             fontSize: FS.sm,
             fontFamily: sans,
           }}
         >
+          {/* The clerk's-slip stamp — the house device holds the fiction even
+              when a view fails (owner placement addendum #3). */}
+          <HouseDevice size={22} mode="light" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
           <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
           <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
-            The rest of the app is still working. You can try again or navigate away.
+            The rest of the realm stands. Try again, or turn elsewhere.
           </div>
           <Button variant="danger" size="sm" onClick={this.handleRetry} style={{ minHeight: 44 }}>
             Try again

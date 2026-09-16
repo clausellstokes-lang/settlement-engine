@@ -1,0 +1,55 @@
+{
+  "_doc": [
+    "THE SOAK REGISTER (SOAKCHAIN Car 4; DESIGN_HORIZON §1.6, §4.1). The home the 300-year",
+    "curve the tuning sitting signs against is frozen in — 'the re-run must plateau, not",
+    "explode slower'. Written ONLY by scripts/soak/soak-register.mjs --write, on a CLEAN tree,",
+    "from a receipt that passed with zero deterministic tripwire firings.",
+    "",
+    "⛔ BOTH CELLS ARE UNFROZEN GENESIS. They carry no figures because NO LEDGER FIGURE IS",
+    "EVER TYPED IN — 're-measure, do not inherit'. The FIRST clean run is the freeze act, and",
+    "until it happens `--compare` reports NOT-EXECUTABLE and exits 0 with a proposal beside it.",
+    "",
+    "⛔ CI NEVER WRITES THIS FILE. The research workflow runs `--compare … --propose` and",
+    "uploads the proposal; the chair mints it on a clean tree.",
+    "",
+    "⛔⛔ THE GOVERNED GROWTH DOOR ⟦A22 E6⟧⟦CHAIR-R6⟧. Raising a `shrink` figure or lowering a",
+    "`floor` figure is refused even when declared, unless the write carries --charter=§NNN AND",
+    "a SOAK_REGISTER_NOTE of at least 60 characters; every such move appends a debtHistory row",
+    "and joins a shrink-only population every later --compare prints as a HOLD line.",
+    "SOAK-4's 'accept the honest red' is the ONLY sanctioned use before the sitting."
+  ],
+  "registerVersion": 1,
+  "figureDirections": ["shrink", "floor", "band", "exact", "ceiling", "report"],
+  "cells": {
+    "research-lit-4s/research-lit-4s-300y-4s-seed1": {
+      "frozenAtSha": "",
+      "measuredBy": "",
+      "date": "",
+      "note": "UNFROZEN GENESIS. The INTERIM cell: 300 years x 4 settlements under the lit overlay, sized to fit a hosted 6-hour job (~2.3 h at the 3.5 s/settlement-year estimate — §14 E12 is deliberately left PLAUSIBLE, because two measured 30-year figures disagree by 17.8x at the same horizon and extrapolating either to 300 years is unsound). A DIFFERENT register identity from the 12 s cell, never a substitute for it.",
+      "identity": {
+        "seed": "",
+        "years": 300,
+        "settlements": 4,
+        "lighting": { "demographicsEnabled": true },
+        "receiptSchemaVersion": 0,
+        "settlementIds": []
+      },
+      "figures": {}
+    },
+    "research-lit/research-lit-300y-12s-seed1": {
+      "frozenAtSha": "",
+      "measuredBy": "",
+      "date": "",
+      "note": "UNFROZEN GENESIS. THE cell the tuning sitting signs against: 300 years x 12 settlements under the lit overlay. Its frozenAtSha and identity.lighting together are the citation the tuning signature record carries. Does not fit a hosted runner (~7 h before superlinearity) — SOAK-1 resolved to MANUAL, so the figure is produced on this Mac and minted through the same --write ritual; the register cares only that the tree was clean and the identity matches.",
+      "identity": {
+        "seed": "",
+        "years": 300,
+        "settlements": 12,
+        "lighting": { "demographicsEnabled": true },
+        "receiptSchemaVersion": 0,
+        "settlementIds": []
+      },
+      "figures": {}
+    }
+  }
+}

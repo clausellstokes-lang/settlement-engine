@@ -12,6 +12,11 @@
  *     shows its current name and still resolves by id.
  *   - BROKEN-LINK-SAFE — an id that does not resolve in THIS document's entity
  *     set renders as plain <Text> (the fallback), never a dead anchor.
+ *   - VERBATIM (pronoun) — when `verbatim` is set the link shows `fallback`
+ *     exactly (the wrapped word) instead of the resolved current name, so a
+ *     ⟦pronoun:id|he⟧ token prints "he" as a link, never the entity's name. The
+ *     unresolved branch already renders `fallback`, so a broken pronoun link
+ *     degrades to the bare word.
  *
  * The web primitive reads its index from React context; the PDF sections are
  * plain hook-free functions (smoke-tested by direct call), so this primitive
@@ -24,7 +29,10 @@
  * @param {string} [props.type]      Advisory entity type ('faction' | 'npc' | …),
  *                                   kept for API parity with the web EntityLink;
  *                                   the index already knows the resolved type.
- * @param {string} [props.fallback]  Text shown when the id does not resolve.
+ * @param {string} [props.fallback]  Text shown when the id does not resolve, and
+ *                                   the verbatim text shown when `verbatim` is set.
+ * @param {boolean} [props.verbatim] Render `fallback` verbatim (a pronoun link)
+ *                                   rather than the resolved current name.
  * @param {object} [props.style]     Extra style merged onto the rendered node.
  * @returns {object|null}
  */
@@ -58,7 +66,7 @@ export function anchorTarget(index, id) {
   return entry?.anchor || undefined;
 }
 
-export function EntityRef({ id, index, type: _type, fallback = '', style }) {
+export function EntityRef({ id, index, type: _type, fallback = '', verbatim = false, style }) {
   const entry = id && index?.resolve ? index.resolve(id) : null;
 
   // Broken / unresolved id -> plain text, never a dead anchor.
@@ -67,7 +75,8 @@ export function EntityRef({ id, index, type: _type, fallback = '', style }) {
     return text ? <Text style={style}>{text}</Text> : null;
   }
 
-  const label = safe(entry.currentName || fallback || entry.label || '');
+  // A pronoun link keeps the wrapped word; a name link resolves the live name.
+  const label = safe(verbatim ? fallback : (entry.currentName || fallback || entry.label || ''));
   return (
     <Link src={`#${entry.anchor}`} style={{ ...LINK_STYLE, ...style }}>
       {label}

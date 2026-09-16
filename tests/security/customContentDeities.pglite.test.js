@@ -24,18 +24,24 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG004 = resolve(dir, '004_custom_content.sql');
 const MIG017 = resolve(dir, '017_fix_credit_auth_integrity.sql');
 const MIG049 = resolve(dir, '049_custom_content_deities.sql');
 const MIG056 = resolve(dir, '056_deity_law_axis.sql');
-const allExist = [MIG004, MIG017, MIG049, MIG056].every(existsSync);
+// W-FAITH F1c: the authored-character widening (authoredTemper, chart positions,
+// boon/bane). It is NOT deployed — it is written and owner-gated — so this suite is
+// where its SQL is actually EXECUTED rather than merely read.
+const MIG200 = resolve(dir, '200_deity_authored_character.sql');
+const allExist = [MIG004, MIG017, MIG049, MIG056, MIG200].every(existsSync);
 
 // Hard-fail (not a silent vacuous skip) when a target migration moves/renames:
 // the runIf(allExist) suites below would otherwise go GREEN with 0 tests run.
 describe('pglite targets exist (guards against silent vacuous skip)', () => {
   it('every required migration is present (a moved migration must fail loudly)', () => {
-    const targets = { '004': MIG004, '017': MIG017, '049': MIG049, '056': MIG056 };
+    const targets = { '004': MIG004, '017': MIG017, '049': MIG049, '056': MIG056, '200': MIG200 };
     const missing = Object.entries(targets).filter(([, p]) => !existsSync(p)).map(([k]) => k);
     expect(missing, `missing migrations: ${missing.join(', ')}`).toEqual([]);
     expect(allExist).toBe(true);
@@ -91,8 +97,12 @@ describe.runIf(allExist)('migration 049 — deities bucket constraints (pglite)'
     await db.exec(loadSql(MIG004));
     await db.exec(loadSql(MIG049));
     await db.exec(loadSql(MIG056));
+    // 200 (W-FAITH F1c) mints the chart-position predicate function and widens the
+    // same named axes CHECK a third time. Executing it here is the only proof that
+    // the SQL parses and enforces: it is deliberately NOT deployed.
+    await db.exec(loadSql(MIG200));
     await db.exec(`set test.uid = '${UID}';`);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.custom_content cascade;');
@@ -158,6 +168,141 @@ describe.runIf(allExist)('migration 049 — deities bucket constraints (pglite)'
       .rejects.toThrow(/custom_content_deity_axes_check/);
   });
 
+  // ── W-FAITH F1c: the authored character — migration 200 ────────────────────
+  it('admits a deity carrying NONE of the new fields (the legacy shape is untouched)', async () => {
+    await expect(insert('deities', VALID_DEITY)).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, lawAxis: 'chaotic' })).resolves.toBeTruthy();
+  });
+
+  it('accepts each authoredTemper word and rejects one outside the vocabulary', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, authoredTemper: 'warlike' })).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, authoredTemper: 'peacelike' })).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, authoredTemper: 'neutral' })).resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, authoredTemper: 'brooding' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('accepts chart positions on distinct axes, including the full roster', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:vice:defining'] }))
+      .resolves.toBeTruthy();
+    await expect(insert('deities', {
+      ...VALID_DEITY,
+      characterAxes: ['MERCY:vice:defining', 'CANDOR:virtue:a_touch', 'TEMPER:vice:marked'],
+    })).resolves.toBeTruthy();
+    const full = ['CANDOR', 'MERCY', 'COURAGE', 'TEMPER', 'GENEROSITY', 'HUMILITY', 'FIDELITY',
+      'INDUSTRY', 'JUSTICE', 'PRUDENCE', 'TRUST', 'CHEER', 'FORBEARANCE', 'PROTECTION',
+      'TEMPERANCE', 'CONTENT'].map((axis) => `${axis}:virtue:marked`);
+    expect(full.length).toBe(16);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: full })).resolves.toBeTruthy();
+  });
+
+  it('accepts an empty position list (an all-neutral god is a real choice)', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: [] })).resolves.toBeTruthy();
+  });
+
+  it('REJECTS two positions on the same axis (one signed position per axis)', async () => {
+    await expect(insert('deities', {
+      ...VALID_DEITY,
+      characterAxes: ['MERCY:vice:defining', 'MERCY:virtue:a_touch'],
+    })).rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('rejects a token outside the closed vocabulary, an unknown axis, and a bad level', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:vice:consuming'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['AMBITION:vice:marked'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:middle:marked'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('rejects DEVOTION, whose existence is still an open owner ruling', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['DEVOTION:virtue:marked'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('rejects a malformed position shape rather than ERRORING on it', async () => {
+    // The CASE ordering in _deity_chart_axes_valid is load-bearing: jsonb_array_elements
+    // RAISES on a non-array, so a guard that only usually ran first would turn a
+    // malformed value into a hard exception instead of a clean constraint refusal.
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: { MERCY: 'vice' } }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: [42] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: 7 }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('rejects a token with a TRAILING TAIL that split_part alone would ignore', async () => {
+    // The arity guard. Without it `MERCY:vice:defining:extra` passes all three
+    // split_part checks in the database while the JS wall, which compares against
+    // a closed list, rejects it — a divergence in the dangerous direction.
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:vice:defining:extra'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: 'MERCY:vice:defining:extra' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:vice:defining:'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: ['MERCY:vice'] }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('honours the SCALAR arm exactly as every layer above it does', async () => {
+    // The manifest types characterAxes `string-or-string-list`. The JS admission
+    // wall, the edge validator and 185's own record validator all accept a bare
+    // token, so the database must too: a DB that refused what the application
+    // admits would fail a write only after deploy, on content already authored.
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: 'MERCY:vice:defining' }))
+      .resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: 'MERCY:vice:consuming' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, characterAxes: 'DEVOTION:vice:marked' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('accepts pure buff, pure bane, both, and a shared channel', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, boonChannel: 'harvest', boonStrength: 'firm' }))
+      .resolves.toBeTruthy();
+    await expect(insert('deities', { ...VALID_DEITY, baneChannel: 'sea', baneStrength: 'heavy' }))
+      .resolves.toBeTruthy();
+    await expect(insert('deities', {
+      ...VALID_DEITY,
+      boonChannel: 'trade', boonStrength: 'faint', baneChannel: 'order', baneStrength: 'firm',
+    })).resolves.toBeTruthy();
+    await expect(insert('deities', {
+      ...VALID_DEITY,
+      boonChannel: 'sea', boonStrength: 'heavy', baneChannel: 'sea', baneStrength: 'faint',
+    })).resolves.toBeTruthy();
+  });
+
+  it('REJECTS a half-authored boon or bane (channel and strength travel together)', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, boonChannel: 'harvest' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, baneStrength: 'heavy' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('rejects a channel or strength outside its vocabulary, and a float strength', async () => {
+    await expect(insert('deities', { ...VALID_DEITY, boonChannel: 'vengeance', boonStrength: 'firm' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, baneChannel: 'craft', baneStrength: 'devastating' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, boonChannel: 'craft', boonStrength: 0.7 }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('200 does not weaken the three required axes it inherits from 049', async () => {
+    await expect(insert('deities', { name: 'Axeless', authoredTemper: 'warlike' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+    await expect(insert('deities', { ...VALID_DEITY, alignmentAxis: 'lawful', authoredTemper: 'warlike' }))
+      .rejects.toThrow(/custom_content_deity_axes_check/);
+  });
+
+  it('the new fields do not constrain non-deity rows either', async () => {
+    await expect(insert('factions', { name: 'Guild', characterAxes: ['NOPE:sideways:loud'] }))
+      .resolves.toBeTruthy();
+  });
+
   it('the axes check does NOT constrain non-deity rows', async () => {
     // A faction row with a "bad axis"-looking field is fine — the check is
     // short-circuited to TRUE for every non-deity category.
@@ -185,6 +330,10 @@ describe.runIf(allExist)('migration 049 — RLS is owner-scoped + premium-gated 
   it('049 adds NO tier predicate of its own (premium gate stays the inherited one — D.0)', () => {
     const sql049 = loadSql(MIG049);
     expect(sql049).not.toMatch(/profile_has_premium_access/i);
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(sql049).not.toMatch(/create policy/i);
   });
 });

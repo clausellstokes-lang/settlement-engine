@@ -5,8 +5,11 @@
  * Pins:
  *   • Renders the settlement name, the tension line, stressor chips, and the
  *     reused "Tonight at the table" cheat-sheet entries.
- *   • Closes via the X button, via Escape, and via backdrop click — but NOT
- *     when the inner card itself is clicked (stopPropagation).
+ *   • Closes via the X button, via Escape (the shared focus trap), and via a
+ *     backdrop mousedown — but NOT when the inner card is interacted with. The
+ *     backdrop is a role="presentation" scrim that dismisses only on a mousedown
+ *     of the scrim itself (currentTarget); role="dialog" sits on the panel and
+ *     is focus-trapped by useDialogFocusTrap (M12).
  *
  * TableView is presentational (settlement + onClose props, no store/flag
  * reads), so no mocks are needed — the caller owns the flag/pref gating.
@@ -44,7 +47,7 @@ describe('TableView', () => {
     expect(screen.getByText('Maren')).toBeTruthy();
     expect(screen.getByText('NPC')).toBeTruthy();
     expect(screen.getByText('The Salt Debt')).toBeTruthy();
-    expect(screen.getByText('Hook')).toBeTruthy();
+    expect(screen.getByText('HOOK')).toBeTruthy();
   });
 
   it('falls back gracefully when there are no entries', () => {
@@ -65,13 +68,16 @@ describe('TableView', () => {
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
-  it('closes on backdrop click but not on inner-card click', () => {
+  it('closes on a backdrop mousedown but not on inner-card interaction', () => {
     render(<TableView settlement={fixture()} onClose={onClose} />);
-    // Inner card click is swallowed by stopPropagation.
-    fireEvent.click(screen.getByText('Hollowmere'));
+    // A mousedown inside the panel bubbles to the backdrop, but its target is
+    // not the scrim itself (currentTarget), so it does not dismiss.
+    fireEvent.mouseDown(screen.getByText('Hollowmere'));
     expect(onClose).not.toHaveBeenCalled();
-    // Backdrop is the dialog element itself.
-    fireEvent.click(screen.getByRole('dialog'));
+    // The presentational scrim is the dialog panel's parent; a mousedown on the
+    // scrim itself dismisses.
+    const backdrop = screen.getByRole('dialog').parentElement;
+    fireEvent.mouseDown(backdrop);
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

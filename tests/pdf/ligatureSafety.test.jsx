@@ -4,30 +4,51 @@ import { safe, noLig, stripZwnj } from '../../src/pdf/lib/format.js';
 import { SafeText } from '../../src/pdf/primitives/Dense.jsx';
 
 /**
- * Ligature safety (audit finding: defusing was convention-only — a new section
- * rendering a raw engine string reintroduced "tofu" with a green suite). The Dense
- * value primitives now defuse f-ligatures at the shared chokepoint, and SafeText is
- * the reusable wrapper for section-level raw strings. This pins the mechanism and the
- * wrapper so the defusion can't silently regress.
+ * The PDF string chokepoint is TRANSPARENT — it must not mutate what it is given.
+ *
+ * ⚠ THIS SUITE WAS INVERTED ON 2026-09-01, and the inversion is the point.
+ * It used to assert the opposite: that `noLig()` inserted a zero-width
+ * non-joiner (U+200C) into every lowercase f-cluster, to defuse a `liga` GSUB
+ * lookup in the pre-v2 Lora/Nunito faces. The v2 re-cut removed those lookups
+ * (pinned as an executed guarantee in tests/build/fontsAndMeta.test.js §3d), so
+ * the insertion had nothing left to defuse — while U+200C is covered by NONE of
+ * the eight embedded faces, so every insertion split the run onto a
+ * NON-EMBEDDED base-14 Helvetica: 25–86 such runs per dossier, measured, on
+ * 100% of exports, swallowing adjacent covered characters.
+ *
+ * What is worth pinning was never the marker — it was the CHOKEPOINT: that the
+ * Dense value primitives and SafeText are the single seam every section's raw
+ * engine string renders through. That is still pinned here. The assertion the
+ * seam carries is now the stronger one the product actually promises: the
+ * string arrives at the renderer BYTE-IDENTICAL. If anyone re-introduces a
+ * mutating chokepoint, these reds.
  */
 const ZWNJ = '‌';
 
-describe('f-ligature defusion mechanism', () => {
-  // Only LOWERCASE f-clusters ligate in the font's GSUB (capital F doesn't), so the
-  // guard targets internal lowercase f — exactly where names carry the risk.
-  test('noLig inserts a zero-width non-joiner into every lowercase f-ligature cluster', () => {
-    expect(noLig('Griffin')).toContain(ZWNJ); // ffi
-    expect(noLig('Waffle')).toContain(ZWNJ);  // ffl
-    expect(noLig('Refined')).toContain(ZWNJ); // fi
-    expect(noLig('Reflected')).toContain(ZWNJ); // fl
-    expect(noLig('Offer')).toContain(ZWNJ);   // ff
+describe('PDF string chokepoint is transparent', () => {
+  // The f-clusters that used to be rewritten. They must now survive verbatim —
+  // this is the exact set the old suite asserted was mutated.
+  test('noLig passes every former f-ligature cluster through byte-identically', () => {
+    for (const word of ['Griffin', 'Waffle', 'Refined', 'Reflected', 'Offer']) {
+      expect(noLig(word)).toBe(word);
+      // anchored: the toBe above pins the FULL string — it cannot have gone empty.
+      expect(noLig(word)).not.toContain(ZWNJ);
+    }
   });
 
   test('is a no-op for f-free strings (byte-identical) and idempotent', () => {
     expect(noLig('Barracks')).toBe('Barracks');
     expect(safe('Griffin')).toBe(safe(safe('Griffin'))); // idempotent
-    // round-trips: stripping the ZWNJ recovers the original glyphs
+    // safe() emits nothing to strip; stripZwnj is now a defence against
+    // USER-AUTHORED joiners, not against our own.
     expect(stripZwnj(safe('Griffin Hall'))).toBe('Griffin Hall');
+    expect(safe('Griffin Hall')).toBe('Griffin Hall');
+  });
+
+  test('stripZwnj still removes a ZWNJ that arrives in user-authored data', () => {
+    // customContentSchema.js validates type and length only — no charset check —
+    // so a pasted joiner reaches the renderer. This is the live reason to keep it.
+    expect(stripZwnj(`Auror${ZWNJ}a Provisioners`)).toBe('Aurora Provisioners');
   });
 
   test('safe() null-guards and stringifies', () => {
@@ -38,10 +59,11 @@ describe('f-ligature defusion mechanism', () => {
 });
 
 describe('SafeText wrapper', () => {
-  test('defuses a string child', () => {
+  test('passes a string child through byte-identically', () => {
     const el = SafeText({ children: 'Griffin Hall' });
-    expect(el.props.children).toContain(ZWNJ);
-    expect(stripZwnj(el.props.children)).toBe('Griffin Hall');
+    expect(el.props.children).toBe('Griffin Hall');
+    // anchored: the toBe above pins the exact child — an emptied child reds there first.
+    expect(el.props.children).not.toContain(ZWNJ);
   });
 
   test('passes non-string children through untouched (no crash on nested nodes)', () => {

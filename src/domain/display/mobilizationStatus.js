@@ -19,7 +19,7 @@ import {
   classifyFeasibility,
 } from '../worldPulse/feasibilityGate.js';
 
-/** @param {any} a @param {any} b @returns {number} */
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
 // Heuristic phrasing for each posture state — DM-facing, no enum jargon. `peace` /
@@ -101,7 +101,7 @@ export function mobilizationStandings({ worldState, includeCovert = false } = /*
  * the covert convention: a player-view (`includeCovert:false`) call on a covertly-
  * preparing settlement returns null.
  * @param {Object} args
- * @param {any} args.settlementId
+ * @param {unknown} args.settlementId
  * @param {any} args.worldState
  * @param {boolean} [args.includeCovert]
  * @returns {{ phrase: string, ticksToDeploy: number, covert: boolean } | null}

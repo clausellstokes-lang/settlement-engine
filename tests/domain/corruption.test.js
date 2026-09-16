@@ -4,8 +4,10 @@ import {
   spawnCorruptionChance, onsetHazard, exposureChance,
   demoteImportance, demoteDotRank, canBeOuted, CORRUPTION_TUNING,
   readCorruptionClimate,
-  guildStrength, guildEffectiveSecurity, GUILD_TUNING,
+  guildEffectiveSecurity, GUILD_TUNING,
 } from '../../src/domain/corruption.js';
+import { guildStrength } from '../../src/domain/worldPulse/thievesGuild.js';
+import { PROSPERITY_RANK_NEUTRAL } from '../../src/domain/prosperityRank.js';
 
 describe('corruption — eligibility + vectors', () => {
   it('recognizes corruptible flaws and rejects benign ones', () => {
@@ -93,6 +95,24 @@ describe('corruption — settlement climate adapter', () => {
     expect(readCorruptionClimate(clean).hasCriminalInst).toBe(false);
   });
 
+  it('does not derive criminal presence from current custom presentation tags', () => {
+    const custom = {
+      name: 'Quiet Hall',
+      category: 'Civic',
+      tags: ['criminal'],
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:quiet-hall',
+    };
+    const legacy = { name: 'Quiet Hall', category: 'Civic', tags: ['criminal'] };
+
+    expect(readCorruptionClimate({ institutions: [custom] }).hasCriminalInst)
+      .toBe(false);
+    expect(readCorruptionClimate({ institutions: [legacy] }).hasCriminalInst)
+      .toBe(true);
+  });
+
   it('normalizes crime/security/prosperity into 0..1', () => {
     const c = readCorruptionClimate(withCrime);
     expect(c.crime).toBeGreaterThan(0.5);   // criminalEffective 70 → 0.7
@@ -108,7 +128,12 @@ describe('corruption — settlement climate adapter', () => {
     const c = readCorruptionClimate({});
     expect(c.hasCriminalInst).toBe(false);
     expect(c.crime).toBeGreaterThanOrEqual(0);
-    expect(c.prosperity).toBe(0.4); // unknown → middling
+    // Unknown → the ONE ladder's declared neutral. Was 0.4 while corruption.js carried its
+    // own private ladder; T8 flipped it onto `prosperityRank01` (J-T7-C / ODQ §809) and the
+    // neutral moved with it. The generator goldens this shifted are re-recorded under the
+    // SHIFT RECORD in tests/property/generatorGoldenMaster.test.js.
+    expect(c.prosperity).toBe(PROSPERITY_RANK_NEUTRAL);
+    expect(PROSPERITY_RANK_NEUTRAL).toBe(0.5);
   });
 });
 

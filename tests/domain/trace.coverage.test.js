@@ -28,11 +28,17 @@
 
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { getStepMeta } from '../../src/generators/pipeline.js';
 import { getTraces, tracesByStep } from '../../src/domain/trace.js';
 
 const SEED = 'sf-trace-coverage';
 
 function gen(extraConfig = {}) {
+  // Options are the THIRD argument (the second is importedNeighbour). This
+  // file once passed the options bag second, so the seed was silently
+  // discarded and every run generated from Date.now()+Math.random() — the
+  // trace assertions flaked on whatever settlement happened to come out.
+  // generateSettlementPipeline now throws on that misuse.
   return generateSettlementPipeline({
     settType: 'town',
     culture: 'germanic',
@@ -41,7 +47,7 @@ function gen(extraConfig = {}) {
     monsterThreat: 'frontier',
     magicExists: true,
     ...extraConfig,
-  }, { seed: SEED, customContent: {} });
+  }, null, { seed: SEED, customContent: {} });
 }
 
 describe('Tier 2.1 — trace layer is live on the engine', () => {
@@ -164,16 +170,15 @@ describe('Tier 2.1 — query helpers work on real traces', () => {
   });
 
   test('every trace has step matching one of the registered steps', () => {
-    const VALID_STEPS = new Set([
-      'resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour',
-      'assembleInstitutions', 'subsumptionPass', 'cascadePass', 'isolationPass',
-      'stressConfirmPass', 'generateEconomy', 'generatePower', 'neighbourFactions',
-      'factionCorrelationPass', 'economyReconcilePass', 'structuralValidationPass',
-      'generatePopulation', 'generateNarratives',
-      'assembleSettlement', 'stepMetadata',
-    ]);
+    // Derived from the live pipeline registry, not a hand-maintained list —
+    // the old hardcoded copy silently drifted (it never learned about
+    // corruptionPass), so a legitimate step's traces read as "unregistered".
+    // A trace can only fail this test by carrying a step name that truly
+    // isn't registered (e.g. a typo at a recordTrace call site).
+    const VALID_STEPS = new Set(getStepMeta().map((s) => s.name));
+    expect(VALID_STEPS.has('corruptionPass')).toBe(true); // registry sanity: the step that exposed the drift
     for (const t of traces) {
-      expect(VALID_STEPS.has(t.step)).toBe(true);
+      expect(VALID_STEPS.has(t.step), `unregistered step: ${t.step}`).toBe(true);
     }
   });
 });

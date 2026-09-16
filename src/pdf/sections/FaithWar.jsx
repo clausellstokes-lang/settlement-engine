@@ -1,24 +1,28 @@
 /**
  * FaithWar — chapter 03D, the PDF's LIVE "Faith & War" read surface.
  *
- * The screen↔PDF parity fix: the dossier's WarFaithSection has long rendered a
+ * The screen↔PDF parity fix: the dossier's War & Faith tab has long rendered a
  * live war/faith block the PDF could not, because the PDF never received the
- * campaign worldState. With the Phase-7 plumbing in place, this chapter mirrors
- * WarFaithSection from the SAME pure selectors (via vm.liveWorld) — siege /
- * coalition / occupation status, deployments, disposition standing, war
- * exhaustion, trade-war prize, the patron deity and its describeDeityEffects
- * couplings (read from the `*Axis` fields), plus the realm pantheon + named arcs.
+ * campaign worldState. With the plumbing in place, this chapter mirrors that tab
+ * from the SAME pure selectors (via vm.liveWorld) — siege / coalition /
+ * occupation status, mobilization, disposition standing, war exhaustion, trade-
+ * war prize, the patron deity and its describeDeityEffects couplings (read from
+ * the `*Axis` fields), plus the realm pantheon + named arcs.
  *
- * CANON-ONLY + SELF-GATING. The chapter is variant-gated to canon (like the
- * Timeline) AND renders NOTHING when vm.liveWorld is null (dormant: no live war
- * status and no assigned deity). A peaceful, deity-free, non-campaign settlement
- * therefore produces a byte-identical PDF — this chapter never appears.
+ * PREMIUM + CANON-ONLY + SELF-GATING. SettlementPDF only renders this chapter
+ * when the export is premium-unlocked (the faith premium seam, mirroring the
+ * screen's FaithSection), the variant includes it, the phase is canon, AND
+ * vm.liveWorld is non-null (dormant: no live war status and no assigned deity).
+ * A free/anon export, or a peaceful deity-free settlement, therefore produces a
+ * PDF where this chapter never appears — and never a deity name.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule, Tag } from '../primitives/Dense.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
+import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
+import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -29,6 +33,26 @@ const POSTURE_TONE = {
 };
 
 const ALIGN_TONE = { evil: 'bad', good: 'good', neutral: 'muted' };
+
+/**
+ * §69.3's float half, cured: an UNCAUSED multiplier or scalar is a leak, and the
+ * two sub-lines on the strip below were exactly that — `aggression ×0.62` and a
+ * bare `0.42`. The reader cannot act on either; neither says what moved it.
+ *
+ * The war-weariness bands already have authored cause sentences on the SCREEN
+ * (the WarFaithTab war-weariness line), so the PDF adopts the same wording
+ * rather than inventing a second voice for the same scar: the two surfaces now
+ * agree. The posture strip gets NOTHING, which is the other half of the ruling's
+ * "the recorded cause phrase or nothing" — the vm carries no recorded cause for
+ * aggression, and inventing one here would be worse than the number was.
+ *
+ * `rested` and `war-weary` are deliberately absent: the band name is the whole
+ * honest statement, so `sub` is undefined and Stat renders no caption line.
+ */
+const WAR_WEARY_CAUSE = Object.freeze({
+  'near peace': 'The scar is healing; this realm leans toward peace.',
+  exhausted: 'Sustained fighting is pushing it to sue for peace.',
+});
 
 function Stat({ label, value, sub, tone = 'ink', flex = 1 }) {
   const color = palette[tone] || palette.ink;
@@ -71,12 +95,21 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
   const contestOdds = Array.isArray(lw.contestOdds) ? lw.contestOdds : null;
   const mandate = lw.mandate || null;
   const cults = Array.isArray(lw.cults) ? lw.cults : [];
-  // B-track heuristic surfaces (player-safe; mirror the screen WarFaithSection).
+  // B-track heuristic surfaces (player-safe; mirror the screen WarFaithTab).
   const mobilization = lw.mobilization || null;
   const army = lw.army || null;
   const occupationLive = lw.occupationLive || null;
   const holdings = lw.holdings || null;
   const tradePressure = Array.isArray(lw.tradePressure) ? lw.tradePressure : [];
+  // pdf-1: the living-world reads the on-screen dossier shows — rumors (player
+  // projection), belief-divergence (DM projection, gated by this premium chapter),
+  // M6d trade-flow drift, and pestilence.
+  const rumors = Array.isArray(lw.rumors) ? lw.rumors : [];
+  const beliefs = Array.isArray(lw.beliefs) ? lw.beliefs : [];
+  const flowDrift = lw.flowDrift || null;
+  const pestilence = lw.pestilence || null;
+  // ambition-fit-3: the realm's treaties (the war-room table).
+  const treaties = Array.isArray(lw.treaties) ? lw.treaties : [];
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
   const headline = lw.atWar
@@ -100,7 +133,6 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         <Stat
           label="POSTURE"
           value={posture.label}
-          sub={`aggression ×${posture.value.toFixed(2)}`}
           tone={postureTone}
           flex={2}
         />
@@ -108,15 +140,15 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           <Stat
             label="WAR-WEARY"
             value={cap(exhaustion.band)}
-            sub={exhaustion.value.toFixed(2)}
+            sub={WAR_WEARY_CAUSE[exhaustion.band]}
             tone={exhaustion.band === 'exhausted' ? 'bad' : exhaustion.band === 'near peace' ? 'good' : 'warn'}
           />
         )}
         {standing && (
           <Stat
-            label="STANDING"
+            label={REALM_CONTEST_RECORD_LABEL.toUpperCase()}
             value={`${standing.wins}W / ${standing.losses}L`}
-            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score}`}
+            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score} · ${REALM_CONTEST_RECORD_HELP}`}
             tone={standing.score > 0 ? 'good' : standing.score < 0 ? 'bad' : 'muted'}
           />
         )}
@@ -140,7 +172,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           {lw.occupied && (
             <Line label="Occupied." tone="bad">
               Held under {lw.occupied.occupier} by right of conquest
-              {lw.occupied.sinceTick != null ? ` (since tick ${lw.occupied.sinceTick})` : ''}.
+              {lw.occupied.sinceTick != null ? ` (since ${tickCalendarLabel(lw.occupied.sinceTick)})` : ''}.
             </Line>
           )}
         </View>
@@ -153,7 +185,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             <Line label="Mobilization." tone="warn">
               {mobilization.phrase}
               {mobilization.ticksToDeploy > 0
-                ? `. Roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'tick' : 'ticks'} from marching.`
+                ? `. Roughly ${tickDurationLabel(mobilization.ticksToDeploy)} from marching.`
                 : '.'}
             </Line>
           )}
@@ -190,13 +222,59 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         <View style={{ marginBottom: space.sm }}>
           {tradeWars.map(prize => (
             <Line key={prize.prizeId} label="Trade war." tone="warn">
-              {prize.role === 'supplier'
-                ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
-                : prize.role === 'displaced'
-                  ? `Displaced as supplier of ${prize.commodityLabel} to ${prize.buyer}.`
-                  : `Contesting ${prize.commodityLabel} (${prize.buyer}).`}
+              {prize.role === 'market'
+                ? `Its ${prize.commodityLabel} market is a contested prize. ${prize.winner} now supplies it.`
+                : prize.role === 'supplier'
+                  ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
+                  : prize.role === 'displaced'
+                    ? `Displaced as supplier of ${prize.commodityLabel} to ${prize.buyer}.`
+                    : `Contesting ${prize.commodityLabel} for ${prize.buyer}'s market.`}
             </Line>
           ))}
+        </View>
+      )}
+
+      {/* ── Pestilence (pdf-1) ────────────────────────────────────────── */}
+      {pestilence && (
+        <View style={{ marginBottom: space.sm }}>
+          <Line label="Pestilence." tone="bad">
+            {pestilence.presence} {pestilence.originFiction}
+            {pestilence.care?.fiction ? ` ${pestilence.care.fiction}` : ''}
+          </Line>
+        </View>
+      )}
+
+      {/* ── Treaties (ambition-fit-3: the war-room's crown page — the peace
+          engine's treaty table, the exact artifact the vision names) ──────── */}
+      {treaties.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>TREATIES</Text>
+          {treaties.map(doc => (
+            <View key={doc.pairKey} style={{ marginBottom: 4 }} wrap={false}>
+              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>
+                {doc.title}
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}> · under {doc.victorName}&apos;s terms · {doc.complianceState}</Text>
+              </Text>
+              {doc.terms.map((term, i) => (
+                <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
+                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} · {term.strainLine}
+                </Text>
+              ))}
+              {doc.frayingLine && (
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], fontStyle: 'italic' }}>{doc.frayingLine}</Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── Live trade-flow drift (M6d, pdf-1) ────────────────────────── */}
+      {flowDrift && (
+        <View style={{ marginBottom: space.sm }}>
+          <Line label="Trade flow." tone="warn">
+            {flowDrift.label}: {flowDrift.headline} (inbound {flowDrift.inbound}, outbound {flowDrift.outbound}).
+          </Line>
         </View>
       )}
 
@@ -210,7 +288,10 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             </Text>
             {deity.rankAxis && <Tag tone="gold">{cap(deity.rankAxis)}</Tag>}
             {deity.alignmentAxis && <Tag tone={ALIGN_TONE[deity.alignmentAxis] || 'muted'}>{cap(deity.alignmentAxis)}</Tag>}
-            {deity.temperamentAxis && <Tag tone={deity.temperamentAxis === 'warlike' ? 'bad' : 'cool'}>{cap(deity.temperamentAxis)}</Tag>}
+            {/* W-FAITH F7c: `temper` is the engine derivation off the liveWorld
+                slice (authored wins, else the axes; neutral is null and prints
+                nothing) — the retired stored temperamentAxis is gone from it. */}
+            {deity.temper && <Tag tone={deity.temper === 'warlike' ? 'bad' : 'cool'}>{cap(deity.temper)}</Tag>}
             {deity.lawAxis && <Tag tone={deity.lawAxis === 'lawful' ? 'good' : 'warn'}>{cap(deity.lawAxis)}</Tag>}
           </View>
           {deity.domain && (
@@ -298,6 +379,40 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
               <Text style={{ color: palette.gold, marginRight: 5, fontSize: pt['9.5'] }}>•</Text>
               <Text style={{ ...type.italic, flex: 1, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>{arc}</Text>
             </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── Word from the roads (rumors, pdf-1) ───────────────────────── */}
+      {rumors.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>WORD FROM THE ROADS</Text>
+          {rumors.map(r => (
+            <View key={r.id} style={{ marginBottom: 3 }} wrap={false}>
+              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>
+                {r.headline}
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}> · {r.freshness}, {r.distance}</Text>
+              </Text>
+              {r.detail && (
+                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>{r.detail}</Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── What they believe (belief-divergence, pdf-1) ──────────────── */}
+      {beliefs.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>WHAT THEY BELIEVE</Text>
+          {beliefs.map((b, i) => (
+            <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 2 }}>
+              <Text style={{ ...type.body_em, color: palette.ink }}>{b.subject}: </Text>
+              believed {b.strength}, {b.readiness} ({b.confidence}, {b.staleness})
+              {b.divergence.length > 0 ? `: ${b.divergence.join('; ')}` : ''}
+            </Text>
           ))}
         </View>
       )}

@@ -25,6 +25,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
@@ -45,7 +47,7 @@ describe('account-status gate pglite targets exist (guards against silent vacuou
  *  public.<name>` to the first `$$;`. */
 function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration ${migKey}`);
   return m[0];
 }
@@ -114,7 +116,7 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
     await db.exec(extractFn('057', 'account_is_active'));
     await db.exec(extractFn('057', 'spend_credits'));
     await db.exec(extractFn('057', 'mutate_settlement_batch'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions, public.settlements cascade;');
@@ -146,7 +148,10 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
   it('an ACTIVE account can spend (baseline — funds + gate both pass)', async () => {
     const { r } = await scalar("select public.spend_credits('narrative') as r");
     expect(r.ok).toBe(true);
-    expect(r.balance).toBe(7);
+    // This suite deliberately executes historical migration 057, whose applied
+    // fallback schedule was 3/4/5. Migration 174 performs the later forward
+    // reprice; current-price parity is covered against net-current 192.
+    expect(r.balance).toBe(7); // 10-credit grant − historical narrative cost 3
   });
 
   it('a BANNED account cannot spend (despite a valid JWT and sufficient funds)', async () => {

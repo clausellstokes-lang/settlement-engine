@@ -101,8 +101,11 @@ describe('WorldMapToolbar — Stage 4 multi-tick affordances', () => {
         onResumeAdvance={onResumeAdvance}
       />,
     );
-    // The chip names the remaining work and is keyboard/SR operable.
-    const chip = screen.getByRole('button', { name: /Advance paused\. Resume advancing, 43 of 48 steps remaining\./ });
+    // The chip names the remaining work and is keyboard/SR operable. This lineage's RF
+    // fix-wave resumes WITH per-major recommendations (verdicts set in the World Pulse
+    // panel), so the accessible copy reads "Resume with recommendations …" rather than
+    // the older plain "Resume advancing …".
+    const chip = screen.getByRole('button', { name: /Advance paused\. Resume with recommendations, 43 of 48 steps remaining\. Set per-major verdicts in the World Pulse panel\./ });
     expect(chip).toBeTruthy();
     fireEvent.click(chip);
     expect(onResumeAdvance).toHaveBeenCalledWith({});

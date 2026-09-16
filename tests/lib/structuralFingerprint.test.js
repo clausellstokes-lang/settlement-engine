@@ -64,10 +64,14 @@ const settlement = {
     id: 'n1', name: 'Seraphina Voss', importance: 'pillar', role: 'Spymaster of the council',
     personality: 'paranoid and cunning', goal: 'seize the council by midwinter',
     secret: 'poisoned the late mayor', factionAffiliation: 'The Hidden Hand',
+    // ⚠ THE HOOK MOVED OFF THE SETTLEMENT ROOT (2026-08-11). It used to sit at
+    // `settlement.plotHooks`, which no writer produces, so `hook_count` read 0 on
+    // every fingerprint ever captured and this fixture was the only shape in which
+    // it did not. It now sits at a live address the canonical collector walks.
+    plotHooks: [{ text: 'A masked merchant seeks passage through the marsh.' }],
   }],
   neighbourNetwork: [{ name: 'Greycairn', relationshipType: 'rival' }],
   history: 'Founded by exiles fleeing the Salt War, long ago.',
-  plotHooks: [{ text: 'A masked merchant seeks passage through the marsh.' }],
   dossierNotes: 'private DM notes about betrayal',
   thesis: 'A town built on buried secrets',
 };
@@ -117,6 +121,10 @@ describe('structuralFingerprint — redaction canary', () => {
     expect(fp.power.factions).toHaveLength(1);
     expect(fp.power.factions[0]).toEqual({ idx: 'f0', category: 'criminal', power_band: 'b3' });
     expect(fp.npc_count).toBe(1);
+    // hook_count is counted through the canonical collector. It read
+    // `settlement.plotHooks || settlement.hooks` until 2026-08-11 — two keys no
+    // writer produces on a settlement root — so it was 0 on every real capture.
+    expect(fp.hook_count).toBe(1);
     expect(fp.npc_importance_dist).toEqual({ pillar: 1 });
     expect(fp.institutions_by_category).toEqual({ tavern: 1 });
     expect(fp.conditions[0]).toMatchObject({ archetype: 'famine_risk', status: 'active', severityBand: 'high' });

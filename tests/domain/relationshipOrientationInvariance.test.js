@@ -26,7 +26,7 @@ import {
   evaluateRelationshipRules,
   pressureIndex,
 } from '../../src/domain/worldPulse/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const SYMMETRIC_TYPES = ['neutral', 'trade_partner', 'allied', 'rival', 'cold_war', 'hostile', 'criminal_network'];
 const PRESSURE_KINDS = ['food', 'disease', 'conflict', 'hostility', 'trade', 'legitimacy', 'crime', 'economy', 'defense'];

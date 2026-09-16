@@ -5,10 +5,12 @@
  * the options for each tool (font size, color, marker icon, forest style).
  */
 
-import { MousePointer2, Type, Pin, TreePine, Trash2, Undo2, Redo2 } from 'lucide-react';
+// `Trees` (not TreePine) deliberately: TerrainToolbar already bundles it in
+// this same lazy map chunk, so the Forest tool adds zero new icon modules.
+import { MousePointer2, Type, Pin, Trees, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS, FOREST_STYLES } from '../../store/mapSlice.js';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, ELEV, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -45,18 +47,15 @@ export default function AnnotateToolbar() {
   }
 
   return (
-    // Second row of the shared toolbar card (WorldMap.jsx) — no border/fill of
-    // its own; a single top hairline divides it from the mode row without
-    // re-introducing a stacked box (P5).
     <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap',
+      display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       padding: `${SP.sm}px ${SP.md}px`,
-      borderTop: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`,
     }}>
       {/* Tool selector */}
       <div style={{
         display: 'flex', gap: 2, padding: 2,
-        background: BORDER2, borderRadius: R.md,
+        background: BORDER2,
       }}>
         <ToolButton
           active={annotateTool === ANNOTATE_TOOLS.SELECT}
@@ -79,14 +78,12 @@ export default function AnnotateToolbar() {
         <ToolButton
           active={annotateTool === ANNOTATE_TOOLS.FOREST}
           onClick={() => setAnnotateTool(ANNOTATE_TOOLS.FOREST)}
-          Icon={TreePine}
+          Icon={Trees}
           label="Forest"
         />
       </div>
 
-      {/* Grouping via differential spacing, not a hairline: a single wide gap
-          separates the tool picker from its option cluster (P5). */}
-      <div style={{ width: SP.lg }} />
+      <div style={{ width: 1, height: 24, background: BORDER2 }} />
 
       {/* Per-tool options */}
       {annotateTool === ANNOTATE_TOOLS.LABEL && (
@@ -99,12 +96,11 @@ export default function AnnotateToolbar() {
             aria-label="Size"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xs, color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
+          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 18 }}>{opts.labelSize}</span>
           <OptionLabel>Font</OptionLabel>
           <select
             value={opts.labelFont}
             onChange={e => setOpt('labelFont', e.target.value)}
-            aria-label="Font"
             style={selectStyle}
           >
             <option value="serif">Serif</option>
@@ -120,7 +116,7 @@ export default function AnnotateToolbar() {
             value={opts.labelColor}
             onChange={e => setOpt('labelColor', e.target.value)}
             aria-label="Color"
-            style={{ width: 28, height: 28, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
+            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, cursor: 'pointer' }}
           />
         </>
       )}
@@ -131,7 +127,6 @@ export default function AnnotateToolbar() {
           <select
             value={opts.markerIcon}
             onChange={e => setOpt('markerIcon', e.target.value)}
-            aria-label="Marker icon"
             style={selectStyle}
           >
             <option value="pin">Pin</option>
@@ -145,7 +140,7 @@ export default function AnnotateToolbar() {
             value={opts.markerColor}
             onChange={e => setOpt('markerColor', e.target.value)}
             aria-label="Color"
-            style={{ width: 28, height: 28, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
+            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, cursor: 'pointer' }}
           />
         </>
       )}
@@ -173,7 +168,7 @@ export default function AnnotateToolbar() {
             aria-label="Radius"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xs, color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
+          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
           <OptionLabel>Density</OptionLabel>
           <input
             type="range" min={0.1} max={1} step={0.05}
@@ -182,18 +177,16 @@ export default function AnnotateToolbar() {
             aria-label="Density"
             style={{ width: 90, accentColor: GOLD }}
           />
-          <span style={{ fontSize: FS.xs, color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
+          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
         </>
       )}
 
       <div style={{ flex: 1 }} />
 
-      {/* Selection actions — destructive, so low-emphasis (P8): it must never be
-          the loudest control in the row. It already renders only when an
-          annotation is selected, so it needs no color emphasis to be found. */}
+      {/* Selection actions */}
       {selectedId && annotateTool === ANNOTATE_TOOLS.SELECT && (
         <Button
-          variant="ghost"
+          variant="danger"
           size="sm"
           onClick={handleDelete}
           title="Delete selected annotation"
@@ -204,9 +197,9 @@ export default function AnnotateToolbar() {
       )}
 
       {/* Undo / Redo — disabled when their stack is empty so the available-action
-          state is honest (P10), and sized up toward the at-the-table target (P7). */}
-      <IconButton Icon={Undo2} label="Undo" onClick={mapUndo} size="lg" disabled={!canUndo} />
-      <IconButton Icon={Redo2} label="Redo" onClick={mapRedo} size="lg" disabled={!canRedo} />
+          state is honest (P10). */}
+      <IconButton Icon={Undo2} label="Undo" onClick={mapUndo} size="md" disabled={!canUndo} />
+      <IconButton Icon={Redo2} label="Redo" onClick={mapRedo} size="md" disabled={!canRedo} />
     </div>
   );
 }
@@ -220,9 +213,6 @@ function ToolButton({ active, onClick, Icon, label }) {
       title={label}
       icon={<Icon size={13} />}
       aria-pressed={active}
-      // Inset shadow as the second active-state channel, matching ModeSwitch /
-      // TerrainToolbar / the map IconButton so "selected" is one idiom (P11/P7).
-      style={active ? { boxShadow: ELEV[1] } : undefined}
     >
       {label}
     </Button>
@@ -232,7 +222,7 @@ function ToolButton({ active, onClick, Icon, label }) {
 function OptionLabel({ children }) {
   return (
     <span style={{
-      fontSize: FS.xs, fontWeight: 700, color: SECOND,
+      fontSize: FS.xxs, fontWeight: 700, color: SECOND,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
       {children}
@@ -243,8 +233,7 @@ function OptionLabel({ children }) {
 const selectStyle = {
   padding: '4px 8px',
   border: `1px solid ${BORDER}`,
-  borderRadius: R.sm,
   background: CARD,
-  fontSize: FS.xs, fontFamily: sans, color: INK,
+  fontSize: FS.xxs, fontFamily: sans, color: INK,
   cursor: 'pointer',
 };

@@ -93,7 +93,7 @@ function populationFlows(snapshot, tick, requireProposal) {
           headline: `Refugees from ${source?.name || sourceId} reach ${dest?.name || destId}`,
           summary: `~${refugees} people flee ${human} in ${source?.name || sourceId} toward ${dest?.name || destId}.`,
           reasons: [
-            `A severe ${human} (${sourceSeverity.toFixed(2)}) is displacing people.`,
+            sourceSeverity >= 0.66 ? `A devastating ${human} is displacing people.` : `A severe ${human} is displacing people.`,
             `A confirmed ${channel.type.replace(/_/g, ' ')} channel carries them.`,
           ],
           condition: deriveActiveCondition({

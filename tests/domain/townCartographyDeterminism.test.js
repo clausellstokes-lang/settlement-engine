@@ -1,0 +1,408 @@
+/**
+ * townCartographyDeterminism.test.js — TC-2's determinism corpus.
+ *
+ * DETERMINISM IS THE WHOLE GAME in this slice: "same seed => same map, byte for
+ * byte" is the product thesis (DESIGN_TOWN_CARTOGRAPHY §0.1), and this file is
+ * where that claim is measured rather than asserted in prose.
+ *
+ * THREE INSTRUMENTS, because each is blind to what the others catch:
+ *
+ *   1. SEED-FAMILY TOTALITY. Sixteen identities crossed over six tiers and seven
+ *      site kinds, each synthesized twice, every failure COLLECTED. A single-seed
+ *      restriction pin is vacuous by construction, and a bare seed loop reports a
+ *      lower bound rather than a count (both recorded wave-E hazard classes), so
+ *      the family runs through collectSeedFailures.
+ *   2. CROSS-SEED DISTINCTNESS. "Two runs agree" is trivially true of a synthesis
+ *      that emits nothing. The family must also produce DISTINCT digests, which is
+ *      the anti-vacuity half of the same measurement.
+ *   3. A STRUCTURAL PURITY SCAN. A two-pass behavioural check is BLIND to
+ *      parity-period state: a module-scope counter that alternates passes "run it
+ *      twice" and still forks the world on the third call. Only a source scan sees
+ *      that, so the scan is not redundant with instrument 1 -- it covers the exact
+ *      hole instrument 1 has.
+ *
+ * Plus the DRAW LEDGER, which is how stream theft becomes visible: a per-tick
+ * keyed fork hides one stage quietly consuming another's entropy, and a frozen
+ * per-stage draw count turns that into a red test instead of a mystery.
+ *
+ * @enforced-by this file
+ */
+import { readFileSync, readdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { describe, expect, test } from 'vitest';
+
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import {
+  cartographyFixture,
+  cartographySeedFamily,
+  GOVERNANCE_CHAOTIC,
+} from '../helpers/townCartographyFixture.js';
+import { synthesizeTownSkeleton } from '../../src/domain/townCartography/cartographySynthesis.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const PACKAGE = join(ROOT, 'src/domain/townCartography');
+const SOURCES = readdirSync(PACKAGE).filter((name) => name.endsWith('.js')).sort();
+const readSource = (name) => readFileSync(join(PACKAGE, name), 'utf8');
+
+/** Strip comments only. Prose about `Math.random` must not count as a call, but
+ *  string LITERALS survive here because two scans below read literal values
+ *  (fork labels and import specifiers) and blanking them would make both vacuous. */
+function withoutComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/^\s*\/\/.*$/gm, '');
+}
+
+/** Strip comments AND string bodies so a source scan reads CODE, not prose. */
+function codeOnly(source) {
+  // ⭐ TEMPLATES FIRST, AND THE ORDER IS LOAD-BEARING (car STRIPPER-UNIFY). This estate
+  // writes apostrophes inside backticks constantly; a single-quote pass that runs first
+  // reads each one as an opening quote and eats the code after it. The quote classes here
+  // already stop at a newline, so the reorder is the whole cure: measured over src/ at
+  // this base, the landed spelling mis-stripped 7 of 2,174 files (10,230 characters) and
+  // the reorder takes that to 0. Pinned by a fixture in the vacuity test below.
+  return withoutComments(source)
+    .replace(/`(?:[^`\\]|\\.)*`/g, '``')
+    .replace(/'(?:[^'\\\n]|\\.)*'/g, "''")
+    .replace(/"(?:[^"\\\n]|\\.)*"/g, '""');
+}
+
+describe('TC-2 determinism: the seed family is total', () => {
+  test('the package actually has sources to scan (the scan is not vacuous)', () => {
+    expect(SOURCES.length).toBeGreaterThanOrEqual(5);
+    expect(SOURCES).toContain('cartographySynthesis.js');
+    // TC-3a's two leaves, TC-3b's one and TC-4's two travel every package scan below;
+    // naming them here means a rename or a relocation reds HERE rather than silently
+    // emptying the coverage. (TC-5a's two presentation adapters were retired with the
+    // legacy settlement-map draw stack — ODQ §725/§772; the roster shrank, the law did
+    // not change.)
+    expect(SOURCES).toContain('cartographyPlan.js');
+    expect(SOURCES).toContain('cartographyWards.js');
+    expect(SOURCES).toContain('cartographyParcels.js');
+    expect(SOURCES).toContain('cartographyMultiplicity.js');
+    expect(SOURCES).toContain('cartographyBuildings.js');
+  });
+
+  test('every seed in the family synthesizes byte-identically twice', () => {
+    const failures = collectSeedFailures(cartographySeedFamily(), (row) => {
+      const fixture = cartographyFixture(row);
+      const first = synthesizeTownSkeleton(fixture);
+      const second = synthesizeTownSkeleton(fixture);
+      expect(JSON.stringify(second.streets)).toBe(JSON.stringify(first.streets));
+      expect(JSON.stringify(second.infrastructureCandidates))
+        .toBe(JSON.stringify(first.infrastructureCandidates));
+      expect(second.receipts.skeletonDigest).toBe(first.receipts.skeletonDigest);
+      expect(second.receipts.draws).toEqual(first.receipts.draws);
+    });
+    expectNoSeedFailures(failures, 'same settlement and same digest yield the same town');
+  });
+
+  test('a rebuilt fixture (fresh raster objects) yields the same town', () => {
+    // Replay safety: the manifest is rebuilt from scratch on every compile, so
+    // identity must ride the DATA, never object identity or call order.
+    const failures = collectSeedFailures(cartographySeedFamily(), (row) => {
+      const a = synthesizeTownSkeleton(cartographyFixture(row));
+      const b = synthesizeTownSkeleton(cartographyFixture(row));
+      expect(b.receipts.skeletonDigest).toBe(a.receipts.skeletonDigest);
+    });
+    expectNoSeedFailures(failures, 'a rebuilt raster replays the same town');
+  });
+
+  test('the family produces DISTINCT towns (the agreement above is not vacuous)', () => {
+    const digests = cartographySeedFamily()
+      .map((row) => synthesizeTownSkeleton(cartographyFixture(row)).receipts.skeletonDigest);
+    expect(new Set(digests).size).toBe(digests.length);
+  });
+
+  test('a synthesized town is not empty (the digest is of real geometry)', () => {
+    const result = synthesizeTownSkeleton(cartographyFixture({ tier: 'city' }));
+    expect(result.streets.arterials.length).toBeGreaterThan(0);
+    expect(result.streets.lanes.length).toBeGreaterThan(20);
+    expect(result.infrastructureCandidates.walls.length).toBe(1);
+  });
+});
+
+describe('TC-2 determinism: the draw ledger', () => {
+  test('the defenses stage draws EXACTLY zero (hull and intersections are exact)', () => {
+    const failures = collectSeedFailures(cartographySeedFamily(), (row) => {
+      const result = synthesizeTownSkeleton(cartographyFixture(row));
+      expect(result.receipts.draws.defenses).toBe(0);
+    });
+    expectNoSeedFailures(failures, 'walls, gates and bridges consume no entropy');
+  });
+
+  test('the field stage draws exactly two per attractor and nothing else', () => {
+    const failures = collectSeedFailures(cartographySeedFamily(), (row) => {
+      const result = synthesizeTownSkeleton(cartographyFixture(row));
+      expect(result.receipts.draws.field % 2).toBe(0);
+      expect(result.receipts.draws.field).toBeGreaterThan(0);
+    });
+    expectNoSeedFailures(failures, 'the field spends entropy only on attractor jitter');
+  });
+
+  test('the frozen ledger for one corpus row (stream theft moves a number here first)', () => {
+    const result = synthesizeTownSkeleton(cartographyFixture({
+      tier: 'city', seedKey: 'ledger-row', site: 'river',
+    }));
+    expect(result.receipts.draws).toEqual({
+      field: 320, arterials: 93, lanes: 190, defenses: 0,
+    });
+  });
+
+  test('the arterial stream is ISOLATED from the lane stream', () => {
+    // Two settlements that differ ONLY in accumulated urban fabric. That input
+    // reaches planning01 -> gridCore, which is a LANE-stage input and nothing
+    // else. If the two stages shared a stream, changing the lane stage's draw
+    // pattern would move the arterials too.
+    const planned = cartographyFixture({
+      tier: 'town', age: null, stocks: { market: 0.99, craft: 0.99, civic: 0.99 },
+    });
+    const unplanned = cartographyFixture({
+      tier: 'town', age: null, stocks: { market: 0.002, craft: 0.002, civic: 0.002 },
+    });
+    const a = synthesizeTownSkeleton(planned);
+    const b = synthesizeTownSkeleton(unplanned);
+    expect(a.morphology.gridCore).not.toBe(b.morphology.gridCore);
+    expect(JSON.stringify(b.streets.arterials)).toBe(JSON.stringify(a.streets.arterials));
+    expect(b.receipts.draws.arterials).toBe(a.receipts.draws.arterials);
+    expect(JSON.stringify(b.streets.lanes)).not.toBe(JSON.stringify(a.streets.lanes));
+  });
+
+  test('the fork family is one spelling and never embeds the reserved delimiter', () => {
+    const source = withoutComments(readSource('cartographySynthesis.js'));
+    // The labels are literals handed to countedStream, which forks with them. The
+    // scan therefore looks for the LABEL FAMILY rather than the `.fork(` call site.
+    const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+    expect(labels.sort()).toEqual(['carto:arterials', 'carto:defenses', 'carto:field', 'carto:lanes']);
+    // anchored: the four labels above are the live subject; this asserts none of
+    // them spells '::', which would alias a fork CHAIN (kernel/prng.js contract).
+    for (const label of labels) expect(label.includes('::')).toBe(false);
+  });
+
+  test('TC-3a adds exactly two naming fork families, both single-colon', () => {
+    const source = withoutComments(readSource('cartographyWards.js'));
+    const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+    expect(labels.sort()).toEqual(['carto:names:street', 'carto:names:ward']);
+    // anchored: the two labels above are the live subject; this asserts neither of
+    // them spells '::', which would alias a fork CHAIN (kernel/prng.js contract).
+    for (const label of labels) expect(label.includes('::')).toBe(false);
+    // The shared narrowing kernel owns NO stream at all: an entropy label appearing
+    // there would be a second naming home the ward layer could silently disagree with.
+    // The positives above pin the WARD leaf; this negative's subject is the PLAN leaf,
+    // which nothing here had proven was still on disk — pin it by its own export first.
+    const plan = withoutComments(readSource('cartographyPlan.js'));
+    expect(plan).toContain('export function planPoint');
+    // anchored: the plan leaf is proven live by its own planPoint export above
+    expect(plan).not.toMatch(/'carto:/);
+  });
+
+  test('TC-3b adds ONE label — a digest DOMAIN, not a fork — and roots no stream', () => {
+    const source = withoutComments(readSource('cartographyParcels.js'));
+    const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+    expect(labels).toEqual(['carto:institution-parcel']);
+    // anchored: the label above is the live subject; this asserts it never spells
+    // '::', which would alias a fork CHAIN (kernel/prng.js's delimiter contract).
+    for (const label of labels) expect(label.includes('::')).toBe(false);
+    // It is a DIGEST domain, not a PRNG fork label. The naming left with TC-3a and
+    // took the stream with it, so this leaf may not root or fork one at all: every
+    // choice it makes is a digest of named inputs, and a draw appearing here would be
+    // entropy no draw ledger counts.
+    const code = codeOnly(readSource('cartographyParcels.js'));
+    // An emptied read would red the sceneDigest positive below, not this line.
+    // anchored: measured against a live source whose digest call that positive proves
+    expect(code).not.toMatch(/\bcreatePRNG\b/);
+    // anchored: same live source text, same sceneDigest positive below
+    expect(code).not.toMatch(/\.fork\s*\(/);
+    expect(code).toMatch(/\bsceneDigest\s*\(/);
+    // ⭐⭐ AND THE STRIPPER BEHIND EVERY SCAN IN THIS FILE IS PINNED (car STRIPPER-UNIFY).
+    // The fixture is a LITERAL built on these lines and goes FALSE under the spelling that
+    // was landed on this file's base — a single-quote pass running BEFORE the template
+    // pass, where an apostrophe inside backticks opens a spurious span that eats the code
+    // between the two templates. Under it, every `not.toMatch` arm above asserts on text
+    // the scan cannot see: vacuous green in the direction that passes. (The quote classes
+    // here already stop at a newline, so the order is the whole cure; measured over src/
+    // at this base, the landed spelling mis-stripped 7 of 2,174 files.)
+    // ⚠ THE FIXTURE IS ONE LINE ON PURPOSE: this stripper's quote classes already stop
+    // at a newline, so a multi-line fixture would survive the unsound order and pin
+    // nothing — measured, not reasoned (plant-out M1).
+    expect(codeOnly([
+      "const a = `the mayor's seat`;",
+      'const d = sceneDigest(anchor);',
+      "const b = `the guild's hall`;",
+    ].join(' '))).toMatch(/\bsceneDigest\s*\(/);
+  });
+
+  test('TC-4 adds ONE label per leaf — digest DOMAINS, not forks — and roots no stream', () => {
+    // Same instrument as TC-3b's row, applied to this wave's two leaves. A count is
+    // decided by a digest of the anchor and a footprint by a digest of the subject;
+    // a PRNG draw appearing in either would be entropy that no draw ledger counts.
+    for (const [name, expected] of [
+      ['cartographyMultiplicity.js', 'carto:multiplicity'],
+      ['cartographyBuildings.js', 'carto:building-dress'],
+    ]) {
+      const source = withoutComments(readSource(name));
+      const labels = [...source.matchAll(/'(carto:[^']*)'/g)].map((match) => match[1]);
+      expect(labels, name).toEqual([expected]);
+      // anchored: the label above is the live subject; this asserts it never spells
+      // '::', which would alias a fork CHAIN (kernel/prng.js's delimiter contract).
+      for (const label of labels) expect(label.includes('::'), name).toBe(false);
+      const code = codeOnly(readSource(name));
+      // An emptied or renamed read would red the sceneDigest positive below first.
+      // anchored: measured against a live source whose sceneDigest call that positive proves
+      expect(code, name).not.toMatch(/\bcreatePRNG\b/);
+      // anchored: same live source text, same sceneDigest positive below
+      expect(code, name).not.toMatch(/\.fork\s*\(/);
+      expect(code, name).toMatch(/\bsceneDigest\s*\(/);
+    }
+  });
+
+  test('TC-3 lowers and carves with bounded FOR loops only — no retry, no while, no do/while', () => {
+    // The lowering is a total pass over a narrowed district list and the carve is a
+    // fan bounded by vertex count, not the output of a rejection loop. A `while`
+    // appearing here would mean someone reintroduced the "try again with a smaller
+    // box" repair the design explicitly does not own. TC-4's packing joins the list:
+    // its shrink ladder is a FIXED three-rung `for`, never a retry.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js', 'cartographyParcels.js',
+      'cartographyMultiplicity.js', 'cartographyBuildings.js']) {
+      const code = codeOnly(readSource(name));
+      expect(/\bwhile\s*\(/.test(code), name).toBe(false);
+      expect(/\bdo\s*\{/.test(code), name).toBe(false);
+      // anchored: the two negatives are measured against a live source whose own
+      // export the positive below proves is actually present.
+      expect(/\bexport function /.test(code), name).toBe(true);
+    }
+    // The stages that actually ITERATE do so with bounded `for` loops. The
+    // multiplicity resolver is deliberately ABSENT from this second list: it is
+    // closed-form arithmetic carrying no loop at all, and demanding a `for` there
+    // would be a false anchor — it would red the day the file got simpler.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js',
+      'cartographyParcels.js', 'cartographyBuildings.js']) {
+      expect(/\bfor\s*\(/.test(codeOnly(readSource(name))), name).toBe(true);
+    }
+  });
+
+  test('TC-3a takes the naming pools as an ARGUMENT and imports no parcel-side geometry', () => {
+    // CR-TC3A-1 is a bundle contract before it is a code contract: a static import of
+    // the naming table here drags 68,656 bytes into the bounded compiler chunk, and
+    // sceneDigest/scenePolygonArea are TC-3b's tools, not this wave's.
+    for (const name of ['cartographyPlan.js', 'cartographyWards.js']) {
+      const code = withoutComments(readSource(name));
+      // LIVENESS ANCHOR, per iteration. The ward-side positives after this loop prove
+      // only the WARD leaf; the loop also reads the PLAN leaf, and a renamed or emptied
+      // plan file would satisfy all three absences below without anything reding.
+      expect(code, name).toMatch(/^export function /m);
+      // anchored: this iteration's leaf is proven live by its own export pin above
+      expect(code, name).not.toMatch(/namingData\.js/);
+      // anchored: same live source text as this iteration's export pin above
+      expect(code, name).not.toMatch(/\bsceneDigest\b/);
+      // anchored: same live source text as this iteration's export pin above
+      expect(code, name).not.toMatch(/\bscenePolygonArea\b/);
+    }
+    // The ward leaf additionally carries the injected parameter and geometry predicate.
+    const wards = withoutComments(readSource('cartographyWards.js'));
+    expect(wards).toContain('input.namingPools');
+    expect(wards).toContain('scenePointInPolygon');
+  });
+});
+
+// TC-5a's two presentation adapters (the paint leaves) were retired with the legacy
+// settlement-map draw stack per ODQ §725/§772, and their bundle-exclusion suite went
+// with them: the closure they were excluded from can no longer contain what no longer
+// exists. The remaining package scans below still run over the whole live directory.
+
+describe('TC-2 determinism: the structural purity scan', () => {
+  test('no ambient entropy, clock, or host globals anywhere in the package', () => {
+    /** @type {string[]} */
+    const offenders = [];
+    for (const name of SOURCES) {
+      const code = codeOnly(readSource(name));
+      for (const [label, pattern] of [
+        ['Math.random', /Math\s*\.\s*random\s*\(/],
+        ['Date.now', /Date\s*\.\s*now\s*\(/],
+        ['new Date', /new\s+Date\s*\(/],
+        ['globalThis', /\bglobalThis\b/],
+        ['performance', /\bperformance\s*\./],
+        ['import.meta', /\bimport\s*\.\s*meta\b/],
+      ]) {
+        if (pattern.test(code)) offenders.push(`${name}: ${label}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  test('no module-scope mutable state (the parity-period blind spot)', () => {
+    // A two-pass behavioural check cannot see a module-scope counter that flips
+    // on every call: two runs agree, the third forks. Only this scan sees it.
+    /** @type {string[]} */
+    const offenders = [];
+    for (const name of SOURCES) {
+      const code = codeOnly(readSource(name));
+      for (const line of code.split('\n')) {
+        if (/^(?:export\s+)?(?:let|var)\s/.test(line)) offenders.push(`${name}: ${line.trim()}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  test('no transcendental float reaches a seeded decision', () => {
+    // Math.pow / ** / sin / cos / exp / log are implementation-approximated per
+    // the ECMAScript spec, so one feeding a threshold forks the same seed ACROSS
+    // engines while every same-engine golden stays green. Math.sqrt is exempt by
+    // spec (required correctly rounded).
+    /** @type {string[]} */
+    const offenders = [];
+    for (const name of SOURCES) {
+      const code = codeOnly(readSource(name));
+      if (/Math\s*\.\s*(?:pow|sin|cos|tan|asin|acos|atan|atan2|exp|log|log2|log10|sinh|cosh|tanh|cbrt|hypot)\s*\(/.test(code)) {
+        offenders.push(`${name}: Math transcendental`);
+      }
+      if (/\*\*=?/.test(code)) offenders.push(`${name}: ** operator`);
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  test('the package imports no store, React, or flag module (headless domain)', () => {
+    /** @type {string[]} */
+    const everySpecifier = [];
+    for (const name of SOURCES) {
+      const code = withoutComments(readSource(name));
+      const imports = [...code.matchAll(/from\s+'([^']+)'/g)].map((match) => match[1]);
+      for (const specifier of imports) {
+        everySpecifier.push(specifier);
+        expect(/\/store\/|^react$|^react\/|^zustand|lib\/flags/.test(specifier)).toBe(false);
+      }
+    }
+    // The anchor proves the specifier collection is LIVE: the Weyl sampler import
+    // travels the same scan as any forbidden import would, so an empty or drifted
+    // collection reds here instead of passing the exclusion vacuously.
+    expectAbsentWithAnchor(everySpecifier.join(' '), 'zustand', '../lowDiscrepancy.js');
+  });
+});
+
+describe('TC-2 determinism: governance moves the town, and nothing else does', () => {
+  test('an identical settlement under chaotic governance draws a DIFFERENT town', () => {
+    const ordered = synthesizeTownSkeleton(cartographyFixture({ tier: 'city' }));
+    const chaotic = synthesizeTownSkeleton(cartographyFixture({
+      tier: 'city', governance: GOVERNANCE_CHAOTIC,
+    }));
+    expect(chaotic.morphology.order01).toBeLessThan(ordered.morphology.order01);
+    expect(chaotic.receipts.skeletonDigest).not.toBe(ordered.receipts.skeletonDigest);
+  });
+
+  test('the synthesis takes NO style knob (A-10: state decides, not a dial)', () => {
+    const source = codeOnly(readSource('cartographySynthesis.js'));
+    const signature = source.slice(
+      source.indexOf('export function synthesizeTownSkeleton'),
+      source.indexOf('export function synthesizeTownSkeleton') + 400,
+    );
+    // anchored: the slice above is the live entry point's body; the positive half
+    // is that it reads morphology from the settlement, which only holds while the
+    // function exists and is spelled this way.
+    expect(signature).toContain('readTownMorphology(input.settlement)');
+    for (const knob of ['style', 'chaosLevel', 'organic', 'preset', 'knob']) {
+      expect(signature.includes(`input.${knob}`)).toBe(false);
+    }
+  });
+});

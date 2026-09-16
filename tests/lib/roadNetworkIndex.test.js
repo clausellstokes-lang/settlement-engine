@@ -66,3 +66,140 @@ describe('computeRoadEdges — shared settlementId index (#15)', () => {
     expect([highway.fromBurgId, highway.toBurgId].sort()).toEqual(['b1', 'b2']);
   });
 });
+
+/**
+ * REGRESSION PIN for the ONE-TIME CORRECTION of 2026-08-11 (owner-approved).
+ *
+ * `isPort` read `sett.tradeRouteAccess` / `sett.port`. NEITHER address has a
+ * writer: the resolved route is persisted at `.config.tradeRouteAccess`. isPort
+ * was therefore always false and `preferSea` was always false — no road between
+ * two ports had ever been marked as a sea crossing. These pins red if the read
+ * regresses to either dead address, and they drive BOTH save shapes the module
+ * supports, because `sett` is `save.settlement || save`.
+ */
+describe('computeRoadEdges — preferSea reads the route at its persisted address', () => {
+  const portSave = (id, shape) => (shape === 'wrapped'
+    ? { id, settlement: { tier: 'city', config: { tradeRouteAccess: 'port' }, neighbourNetwork: [] } }
+    : { id, tier: 'city', config: { tradeRouteAccess: 'port' }, neighbourNetwork: [] });
+
+  const pair = Object.fromEntries([
+    placement('b1', 0, 0, 'A'),
+    placement('b2', 50, 0, 'B'),
+  ]);
+
+  test.each(['wrapped', 'flattened'])(
+    'two %s port saves produce a sea-preferring edge',
+    (shape) => {
+      const edges = computeRoadEdges([portSave('A', shape), portSave('B', shape)], pair);
+      expect(edges).toHaveLength(1);
+      expect(edges[0].preferSea).toBe(true);
+    },
+  );
+
+  test('a non-port pair produces an edge that does NOT prefer sea', () => {
+    const inland = (id) => ({
+      id, settlement: { tier: 'city', config: { tradeRouteAccess: 'road' }, neighbourNetwork: [] },
+    });
+    const edges = computeRoadEdges([inland('A'), inland('B')], pair);
+    expect(edges).toHaveLength(1);
+    expect(edges[0].preferSea).toBe(false);
+  });
+
+  test('the two DEAD top-level addresses do not make a port', () => {
+    // The live pair is the anchor: the SAME two cities, the same placements, the
+    // same single emitted edge — but with the route at its real address it does
+    // prefer sea. So `false` below is this read discriminating between addresses,
+    // not an edge list that stopped being produced.
+    const live = computeRoadEdges([portSave('A', 'wrapped'), portSave('B', 'wrapped')], pair);
+    const deadAddress = (id) => ({
+      id,
+      settlement: { tier: 'city', tradeRouteAccess: 'port', port: true, neighbourNetwork: [] },
+    });
+    const dead = computeRoadEdges([deadAddress('A'), deadAddress('B')], pair);
+    expect(live.map(e => e.preferSea)).toEqual([true]);
+    expect(dead.map(e => e.preferSea)).toEqual([false]);
+  });
+});
+
+// ── WEAVE NET-1 · the render tier's port definition unified onto the canon ───
+describe('computeRoadEdges — canonPortIds overrides the institutional port read', () => {
+  const save = (id, access) => ({
+    id,
+    settlement: { tier: 'city', config: { tradeRouteAccess: access }, neighbourNetwork: [] },
+  });
+  const pair = Object.fromEntries([
+    placement('b1', 0, 0, 'A'),
+    placement('b2', 50, 0, 'B'),
+  ]);
+
+  test('absent options is byte-identical to the two-argument call (the dormancy bar)', () => {
+    const saves = [save('A', 'port'), save('B', 'port')];
+    const bare = computeRoadEdges(saves, pair);
+    expect(computeRoadEdges(saves, pair, null)).toEqual(bare);
+    expect(computeRoadEdges(saves, pair, {})).toEqual(bare);
+    expect(computeRoadEdges(saves, pair, { canonPortIds: null })).toEqual(bare);
+    // A non-Set is not a canon and must not be half-read.
+    expect(computeRoadEdges(saves, pair, { canonPortIds: ['A', 'B'] })).toEqual(bare);
+    expect(bare[0].preferSea).toBe(true);
+  });
+
+  test('the canon OVERRULES a settlement that only claims to be a port', () => {
+    // Both claim 'port' institutionally; the frozen sea graph connects neither.
+    const saves = [save('A', 'port'), save('B', 'port')];
+    const edges = computeRoadEdges(saves, pair, { canonPortIds: new Set() });
+    expect(edges).toHaveLength(1);
+    expect(edges[0].preferSea).toBe(false);
+    // One-sided: a canon that knows only one of them is still not a sea pair.
+    expect(computeRoadEdges(saves, pair, { canonPortIds: new Set(['A']) })[0].preferSea).toBe(false);
+    expect(computeRoadEdges(saves, pair, { canonPortIds: new Set(['A', 'B']) })[0].preferSea).toBe(true);
+  });
+
+  test('the canon OVERRULES in the other direction too: a road-config pair the sea graph connects', () => {
+    // Discrimination both ways is what makes this a unification and not a filter.
+    const saves = [save('A', 'road'), save('B', 'road')];
+    expect(computeRoadEdges(saves, pair)[0].preferSea).toBe(false);
+    expect(computeRoadEdges(saves, pair, { canonPortIds: new Set(['A', 'B']) })[0].preferSea).toBe(true);
+  });
+
+  test('canon ids are compared as strings, matching the sea graph\'s own node ids', () => {
+    const numericPair = Object.fromEntries([
+      placement('b1', 0, 0, 7),
+      placement('b2', 50, 0, 12),
+    ]);
+    const saves = [
+      { id: 7, settlement: { tier: 'city', config: {}, neighbourNetwork: [] } },
+      { id: 12, settlement: { tier: 'city', config: {}, neighbourNetwork: [] } },
+    ];
+    const edges = computeRoadEdges(saves, numericPair, { canonPortIds: new Set(['7', '12']) });
+    expect(edges[0].preferSea).toBe(true);
+  });
+
+  test('an unlinked placement is not a port under a canon, however its save reads', () => {
+    // No settlementId ⇒ nothing to look up in a settlement-id keyed sea graph.
+    const orphanPair = Object.fromEntries([
+      placement('b1', 0, 0, null),
+      placement('b2', 50, 0, 'B'),
+    ]);
+    const saves = [save('B', 'port')];
+    const edges = computeRoadEdges(saves, orphanPair, { canonPortIds: new Set(['B']) });
+    expect(edges).toHaveLength(1);
+    expect(edges[0].preferSea).toBe(false);
+  });
+
+  test('only the FLAG moves: the edge set, order, tiers and reasons are untouched', () => {
+    const saves = ['A', 'B', 'C', 'D'].map(id => save(id, 'port'));
+    const placements = Object.fromEntries([
+      placement('b1', 0, 0, 'A'), placement('b2', 60, 0, 'B'),
+      placement('b3', 30, 45, 'C'), placement('b4', 30, -45, 'D'),
+    ]);
+    const strip = es => es.map(({ preferSea, ...rest }) => rest);
+    const bare = computeRoadEdges(saves, placements);
+    const canon = computeRoadEdges(saves, placements, { canonPortIds: new Set(['A', 'C']) });
+    expect(strip(canon)).toEqual(strip(bare));
+    // …and the flag really did move, so the equality above is not vacuous.
+    expect(bare.map(e => e.preferSea)).not.toEqual(canon.map(e => e.preferSea));
+    const key = e => [e.fromBurgId, e.toBurgId].sort().join('|');
+    const sea = canon.filter(e => e.preferSea).map(key);
+    expect(sea).toEqual(['b1|b3']);
+  });
+});

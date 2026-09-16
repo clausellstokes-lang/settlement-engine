@@ -5,11 +5,14 @@
  * the cooperative evaluators from relationshipRulesCore.js). Extracted verbatim from
  * relationshipEvolution.js; bodies byte-identical.
  */
-import { clamp01, getRelationshipSettlements } from './relationshipState.js';
+import { clamp01, getRelationshipSettlements, relationLevelWordFor } from './relationshipState.js';
 import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js';
 import { isBattlefieldPrimary } from './relationshipCompatibility.js';
 import { hash01, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, subjugationDirection, supplyExposure } from './relationshipRuleHelpers.js';
 import { neutralRules, tradePartnerRules, alliedRules, patronRules, clientRules, vassalRules } from './relationshipRulesCore.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
+// alignment axes — the stored temperamentAxis (and its legacy spellings) is inert.
+import { deityTemper } from './deityAxes.js';
 
 function rivalRules(/** @type {any} */ ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
@@ -84,7 +87,7 @@ function rivalRules(/** @type {any} */ ctx) {
         probability: clamp01(0.05 + confidenceGap * 0.18 + relState.resentment * 0.12),
         reasons: [
           "A rival with a stronger economy, military, or tier position grows confident enough to press the contest.",
-          `Power confidence gap ${confidenceGap.toFixed(2)}.`,
+          `The gap in believed standing is ${relationLevelWordFor(confidenceGap)}.`,
         ],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.055),
@@ -147,10 +150,15 @@ function coldWarRules(/** @type {any} */ ctx) {
       ? String(settlements.from) <= String(settlements.to)
       : sourcePressure.legitimacy > targetPressure.legitimacy;
     const destabilizedId = String(fromDestabilized ? settlements.from : settlements.to);
+    // The exploiting rival drives the proxy opening — the NON-destabilized side.
+    // It isn't captured in metadata, so derive it for the disposition key.
+    // [worldpulse-religion-trade-5]
+    const exploiterId = String(fromDestabilized ? settlements.to : settlements.from);
     candidates.push(
       internalDrift(ctx, "cold_war_proxy_conflict", {
         ruleId: "cold_war_proxy_conflict",
         targetSaveId: destabilizedId,
+        actorSaveId: exploiterId,
         severity: 0.3 + Math.max(sourcePressure.legitimacy, targetPressure.legitimacy) * 0.38,
         probability: 0.08 + conflictStress * 0.16,
         reasons: ["Weak legitimacy gives cold-war rivals a proxy faction opening."],
@@ -183,12 +191,15 @@ function coldWarRules(/** @type {any} */ ctx) {
         ruleId: "cold_war_supply_sanctions",
         type: "condition",
         targetSaveId: sanctionedId,
+        actorSaveId: imposerId, // disposition scales by the imposer [worldpulse-religion-trade-5]
         severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
         probability: clamp01(0.08 + Math.max(exposure, tradeStress) * 0.2 + relState.resentment * 0.08),
         reasons: [
           "Cold-war pressure follows exposed trade and supply channels through inspections, sanctions, and informal embargoes.",
           `${itemFor(ctx.snapshot, imposerId)?.name || imposerId} squeezes the strained economy of ${itemFor(ctx.snapshot, sanctionedId)?.name || sanctionedId}.`,
-          exposure > 0 ? `Confirmed supply exposure ${exposure.toFixed(2)}.` : `Trade stress ${tradeStress.toFixed(2)}.`,
+          exposure > 0
+            ? `The supply exposure is confirmed, and it is ${relationLevelWordFor(exposure)}.`
+            : `Nothing is confirmed; the trade strain alone is ${relationLevelWordFor(tradeStress)}.`,
         ],
         relationshipPatch: {
           tradeBalance: clamp01(relState.tradeBalance - 0.05),
@@ -283,6 +294,7 @@ function hostileRules(/** @type {any} */ ctx) {
       candidateType: "hostile_raid",
       ruleId: "hostile_raid",
       targetSaveId: victimId,
+      actorSaveId: aggressorId, // disposition scales by the raider, not the victim [worldpulse-religion-trade-5]
       severity: 0.28 + conflictStress * 0.36,
       probability: 0.1 + conflictStress * 0.18,
       reasons: ["Hostile neighbors create raid, blockade, or intimidation pressure."],
@@ -365,6 +377,7 @@ function hostileRules(/** @type {any} */ ctx) {
       internalDrift(ctx, "hostile_forced_tribute", {
         ruleId: "hostile_forced_tribute",
         targetSaveId: tributeVictimId,
+        actorSaveId: extractorId, // disposition scales by the extractor [worldpulse-religion-trade-5]
         severity: 0.32 + relState.leverage * 0.35,
         probability: 0.06 + relState.leverage * 0.16,
         reasons: ["The economically dominant hostile side may demand tribute before outright occupation."],
@@ -387,7 +400,7 @@ function hostileRules(/** @type {any} */ ctx) {
         probability: clamp01(0.05 + attackerAttrition * 0.18 + relState.trust * 0.08),
         reasons: [
           `Open hostility is losing practical support as the economy, defenses, legitimacy, or manpower of ${itemFor(ctx.snapshot, aggressorId)?.name || aggressorId} (the aggressing side) slip.`,
-          `Attacker attrition ${attackerAttrition.toFixed(2)}.`,
+          `The wear on the aggressor is ${relationLevelWordFor(attackerAttrition)}.`,
         ],
         relationshipPatch: {
           trust: clamp01(relState.trust + 0.025),
@@ -537,13 +550,13 @@ function criminalNetworkRules(/** @type {any} */ ctx) {
 // info is threaded or the tie is not critical / no tension spike.
 
 // A settlement's embedded deity temper sign: warlike +1, peacelike −1, else 0.
-// Reads the resolved primaryDeitySnapshot (store-decoupled), tolerant of the two
-// field spellings the snapshot uses across phases.
+// Reads the resolved primaryDeitySnapshot (store-decoupled). Temper comes from
+// the DERIVATION (deityAxes.deityTemper — axis retirement, W-F5 stage 2): the
+// stored temperamentAxis and its legacy spellings are inert to this read.
 function deityTemperSign(/** @type {any} */ settlement) {
-  const deity = settlement?.config?.primaryDeitySnapshot;
-  const axis = String(deity?.temperamentAxis || deity?.temperAxis || deity?.temper || '');
-  if (/warlike|war/i.test(axis)) return 1;
-  if (/peace/i.test(axis)) return -1;
+  const axis = deityTemper(settlement?.config?.primaryDeitySnapshot);
+  if (axis === 'warlike') return 1;
+  if (axis === 'peacelike') return -1;
   return 0;
 }
 
@@ -589,11 +602,12 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       ruleId: "trade_dependency_embargo",
       type: "condition",
       targetSaveId: dependentId,
+      actorSaveId: supplierId, // disposition scales by the supplier weaponizing the tie [worldpulse-religion-trade-5]
       severity: sev,
       probability: clamp01(0.05 + tensionDrive * 0.18 + info.salience * 0.08),
       reasons: [
         "A valuable, hard-to-replace trade dependency has become a weapon: rising military or religious tension collapses it into an embargo.",
-        `Trade salience ${info.salience.toFixed(2)} with tension ${tensionDrive.toFixed(2)}.`,
+        `What the trade is worth to them is ${relationLevelWordFor(info.salience)}; the tension pulling against it, ${relationLevelWordFor(tensionDrive)}.`,
       ],
       relationshipPatch: {
         tradeBalance: clamp01(ctx.relState.tradeBalance - 0.08),
@@ -635,7 +649,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       probability: clamp01(0.06 + info.salience * 0.14),
       reasons: [
         "A critical-supplier dependency is leverage: the supplier extracts concessions or preferential terms rather than risk war over the relationship.",
-        `Trade salience ${info.salience.toFixed(2)} (critical supplier).`,
+        `What the trade is worth to them is ${relationLevelWordFor(info.salience)}, and there is no other supplier of consequence.`,
       ],
       relationshipPatch: {
         leverage: clamp01(ctx.relState.leverage + 0.05),

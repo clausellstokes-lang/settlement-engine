@@ -9,9 +9,23 @@
  * war/deity campaign card renders it. Also pins the select-mode checkbox.
  */
 
-import { describe, it, expect, afterEach, vi } from 'vitest';
+import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent, within } from '@testing-library/react';
 import { SettlementCard } from '../../src/components/settlements/SettlementCard.jsx';
+import { useStore } from '../../src/store/index.js';
+import { preloadCampaignRuntimeForStore } from '../../src/store/campaignRuntimeBridge.js';
+
+// SettlementCard reads campaign actions (getSettlementDeletionBlock,
+// getCampaignMutationBlock, getCampaignMembershipBlock) DURING RENDER. Since the
+// cold-slice split at 6e7acc4d those names are always present as stable delegates
+// that THROW CampaignRuntimeNotReadyError until the runtime chunk preloads — so
+// the defensive `state.getX?.(…)` at the call site no longer short-circuits.
+// Production never renders this card cold: every campaign-capable route is behind
+// AppViews' `campaignLazy` gate, which awaits exactly this preload before it will
+// import the view (both facts pinned by tests/store/campaignRuntimeRouteGate.test.js).
+// Satisfying the same precondition here renders the card the way production does,
+// rather than outside its gate. Every assertion below is unchanged.
+beforeAll(async () => { await preloadCampaignRuntimeForStore(useStore); });
 
 afterEach(cleanup);
 
@@ -104,6 +118,31 @@ describe('SettlementCard — select mode', () => {
   });
 });
 
+describe('SettlementCard — AUDIT-2.2 frozen-card read-only export', () => {
+  // A retention-frozen (plan-lapsed) save: the paid-rights floor says the owner
+  // can always extract what they made.
+  const frozenSave = {
+    id: 's-frozen', name: 'Ashfen', tier: 'town', timestamp: Date.now(),
+    accessState: 'inactive_plan',
+    settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+  };
+
+  it('offers a read-only Export PDF alongside Reactivate on a frozen card', () => {
+    render(<SettlementCard s={frozenSave} {...baseProps} currentCampaignId={null} canReactivate={false} />);
+    expect(screen.getByRole('button', { name: /export pdf/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /reactivate/i })).toBeTruthy();
+    // The frozen export is NOT the simulation-resuming Open action.
+    expect(screen.queryByRole('button', { name: /open ashfen/i })).toBeNull();
+  });
+
+  it('an active card shows Open, never the frozen Export affordance', () => {
+    const activeSave = { ...frozenSave, id: 's-active', accessState: 'active' };
+    render(<SettlementCard s={activeSave} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByRole('button', { name: /open ashfen/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /export pdf/i })).toBeNull();
+  });
+});
+
 describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
   it('standalone card routes Advance Time to the move-to-campaign popover', () => {
     render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} campaigns={[{ id: 'c1', name: 'Camp One' }]} />);
@@ -119,5 +158,68 @@ describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
     fireEvent.click(screen.getByLabelText('More actions'));
     fireEvent.click(screen.getByText('Advance Time'));
     expect(onAdvanceTime).toHaveBeenCalledWith('camp-1');
+  });
+});
+
+describe('SettlementCard — saved-on date (defect 7b: never "Invalid Date")', () => {
+  // Local/anon saves stamp only the numeric `savedAt`, never a top-level
+  // `timestamp` (saves.js localSaveEntry), so a fresh draft used to render the
+  // literal "Invalid Date". The card must fall back to `savedAt` and never render
+  // an unparseable date.
+  it('falls back to savedAt when timestamp is absent — real date, no "Invalid Date"', () => {
+    const draftNoTimestamp = {
+      id: 's-draft', name: 'Draftholm', tier: 'village',
+      savedAt: Date.parse('2026-07-01T10:00:00Z'), // valid epoch, no `timestamp`
+      settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+    };
+    render(<SettlementCard s={draftNoTimestamp} {...baseProps} currentCampaignId={null} />);
+    expect(screen.queryByText(/Invalid Date/i)).toBeNull();
+    // A real formatted date line renders from the savedAt fallback (day mon yy).
+    // §69.2 / J-TC21-4 (DA-A3): this card was one of three `en-GB` outliers against
+    // 24 explicit `en-US` renders, so the FIELD ORDER moved with the locale —
+    // `1 Jan 26` became `Jan 1, 26`. The pin's subject is unchanged: a real date
+    // rendered rather than the literal "Invalid Date" this suite exists to forbid.
+    expect(screen.getByText(/\w{3}\s+\d{1,2},\s+\d{2}/)).toBeTruthy();
+  });
+
+  it('drops the date line entirely when neither timestamp nor savedAt is parseable', () => {
+    const noDates = {
+      id: 's-nodate', name: 'Nowhen', tier: 'hamlet',
+      settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+    };
+    render(<SettlementCard s={noDates} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByText('Nowhen')).toBeTruthy();
+    expect(screen.queryByText(/Invalid Date/i)).toBeNull();
+  });
+});
+
+/**
+ * A DESTROYED ROW DOES NOT PRINT A LIVE HEALTH BAND. DestroySettlementControl.jsx
+ * documented this as deliberately deferred: "the Health column still reads the band
+ * derived from the settlement blob, so a destroyed town can show 'Stable' beside its
+ * Destroyed mark". Cured at the derivation (livingWorldSignals.healthPip), so the
+ * Health column falls back to the dash it ALREADY renders when no system state can
+ * be derived — the column's existing null grammar, not a new one, and no second
+ * lifecycle encoding beside the Phase column's Destroyed rubric.
+ */
+describe('SettlementCard — a destroyed row carries no live health band', () => {
+  const destroyedSave = {
+    ...peacefulSave,
+    id: 's-gone',
+    settlement: { ...peacefulSave.settlement, status: 'destroyed' },
+  };
+
+  it('a standing row DOES paint its health pip (the control)', () => {
+    render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByTestId('health-pip')).toBeTruthy();
+  });
+
+  it('a destroyed row paints its Destroyed rubric and NO health band word', () => {
+    render(<SettlementCard s={destroyedSave} {...baseProps} currentCampaignId={null} />);
+    // anchored: the row demonstrably rendered, and its lifecycle mark is present —
+    // so the pip's absence is a suppression, not an unmounted card.
+    expect(screen.getByText('Greenhollow')).toBeTruthy();
+    expect(screen.getByText('Destroyed')).toBeTruthy();
+    expect(screen.queryByTestId('health-pip')).toBeNull();
   });
 });

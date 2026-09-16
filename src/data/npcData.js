@@ -1,6 +1,8 @@
 // npcData.js — NPC table data extracted from npcGenerator.js
 // All constants exported for use by npcGenerator.js
 
+import { pickVariant } from '../kernel/proseHash.js';
+
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
   'never makes direct eye contact with inferiors',
@@ -12,12 +14,12 @@ export const MANNERISMS = [
   'cleans or fidgets with their hands constantly',
   'addresses everyone by full name, never shortened',
   'pauses for exactly three seconds before answering any question',
-  'carries food or sweets, offers them to smooth a room',
+  'carries food or sweets, offers them as social lubricant',
   "unconsciously mimics the posture of whoever they're speaking to",
   'refuses to sit with their back to a door',
   'hums under their breath when concentrating',
   'keeps a coin or token that they flip when making decisions',
-  'never volunteers anything, answers only what is asked',
+  'never volunteers information, only answers what is asked',
   'speaks of themselves in the third person when angry',
   'checks exits in every new room before speaking',
   'maintains an unnervingly fixed smile during conflict',
@@ -27,7 +29,7 @@ export const MANNERISMS = [
   'uses elaborate, florid greetings regardless of context',
   'deflects personal questions with a counter-question',
   'keeps their hands clasped behind their back when displeased',
-  'always arrives fifteen minutes early and comments when others do not',
+  'always arrives fifteen minutes early, and comments when others do not',
   'repeats the last word of a sentence spoken to them before responding',
   'traces patterns on flat surfaces absentmindedly',
   'flinches slightly at raised voices even when calm',
@@ -35,12 +37,12 @@ export const MANNERISMS = [
 ];
 
 export const SPEECH_PATTERNS = [
-  'Speaks in short, clipped sentences, every word chosen',
+  'Speaks in short, clipped sentences: every word intentional',
   'Verbose and elaborate; takes three sentences where one would do',
   'Peppers speech with trade or craft jargon even in unrelated contexts',
   'Speaks softly, forcing others to lean in',
   'Asks rhetorical questions to make points rather than stating them',
-  "Uses the formal royal 'we' as an old habit from a previous station",
+  "Uses the formal royal 'we' (old habit from a previous station)",
   'Pauses mid-sentence to choose words with visible care',
   'Deflects personal questions with philosophical tangents',
   'Speaks as if dictating a letter, formal even in crisis',
@@ -54,33 +56,25 @@ export const SPEECH_PATTERNS = [
   'Drops to a near-whisper when saying something important',
   "Repeats key words for emphasis: 'The contract. The contract is clear'",
   'Addresses strangers formally and familiars by diminutives',
-  'Uses long pauses as punctuation and sits comfortably in silence',
+  'Uses long pauses as punctuation, sits comfortably in silence',
+  // CONTENT-GT-FINAL (Charge 3): +10 — the survey's thinnest personality slot (was 20).
+  // Single-pick draw site (generateReligionType), draw-count invariant.
+  'Never interrupts, waits out even the longest speaker, then answers the first point only',
+  "Answers questions with inventories: 'Three reasons. First.'",
+  'Trails off mid-sentence when approaching something they regret knowing',
+  'Speaks quickly when lying, slowly when bargaining. The local traders know the tell',
+  'Quotes their own past pronouncements as though citing law',
+  'Talks to everyone in the room except the person the answer is for',
+  'Prefaces bad news with elaborate courtesy, good news with none',
+  'Wields professional titles with surgical precision. Rank omitted is rank denied',
+  "Says 'as you know' before telling people things they do not know",
+  'Ends disagreements by restating the other position, slightly wrong',
 ];
 
-/**
- * TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable weights deciding which of an
- * NPC's two corruption-relevant personality slots survive generation:
- *   • `dominant` (a steady TEMPERAMENT) makes an NPC harder for the world-pulse
- *     sim to turn.
- *   • `flaw` (greed, ambition, a vice) is the weakness organized crime leverages
- *     to turn an NPC. No flaw ⇒ nothing to leverage ⇒ the sim can never turn them.
- *
- * The four buckets are independent presence outcomes (weights sum to 1.0). A
- * solid majority keep a flaw (both + flawOnly = 70%) so the background sim still
- * has people to turn; only 10% have neither slot. The roll is drawn from the
- * seeded PRNG so generation stays reproducible. This governs ONLY trait
- * presence — it does NOT touch the manual "Impose corruption" DM override, which
- * works on any NPC with no flaw check.
- * @type {Readonly<{both:number, flawOnly:number, temperamentOnly:number, neither:number}>}
- */
-export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
-  both: 0.40,
-  flawOnly: 0.30,
-  temperamentOnly: 0.20,
-  neither: 0.10,
-});
-
-export const NPC_RELIGION_DATA = {
+// Personality-trait pools (positive / negative / neutral adjectives). The NPC
+// generator draws one dominant trait, one flaw, and one modifier from these.
+// (Formerly mis-exported as NPC_RELIGION_DATA — nothing here is about religion.)
+export const NPC_PERSONALITY_TRAITS = {
   positive: [
     'honest',
     'brave',
@@ -112,6 +106,26 @@ export const NPC_RELIGION_DATA = {
     'warm-hearted',
     'level-headed',
     'forthright',
+    // CONTENT-GT-FINAL (Charge 3): +15. Single-pick draw site (draw-count invariant);
+    // no code branches on positive-trait VALUES (corruption checks presence only).
+    // LOCKSTEP LAW: domain/npc/npcBank.js NPC_TEMPERAMENTS mirrors this pool EXACTLY
+    // (same entries, same order) — append there too; the npcBank counterpart pin
+    // (tests/domain/npc/npcBank.test.js) enforces it.
+    'prudent',
+    'candid',
+    'gracious',
+    'stalwart',
+    'discerning',
+    'equitable',
+    'temperate',
+    'courteous',
+    'dependable',
+    'astute',
+    'conscientious',
+    'good-humoured',
+    'unflappable',
+    'plain-dealing',
+    'hospitable',
   ],
   negative: [
     'greedy',
@@ -179,143 +193,6 @@ export const NPC_RELIGION_DATA = {
   ],
 };
 
-/**
- * TRAIT_AGGRESSION — signed aggression weights over the AUTHORED personality
- * descriptor vocabulary (NPC_RELIGION_DATA positive/negative/neutral above).
- *
- * An NPC's belligerence is read from the AUTHORED
- * `npc.personality.{dominant,flaw,modifier}` strings (what the dossier shows),
- * NEVER the RNG-rolled `npcStates.alignment` (write-only, dossier-mismatched).
- *
- * Convention: a POSITIVE weight pulls a settlement toward war/coercion; a
- * NEGATIVE weight pulls it toward peace/diplomacy/trade. Magnitudes are bounded
- * (|w| ≤ 1) and intentionally modest — a single descriptor nudges, it does not
- * dominate. A descriptor absent from this map contributes EXACTLY 0 (neutral),
- * so adding vocabulary never silently churns the score. Keys are lowercased
- * descriptor strings; lookups normalize case + trim.
- *
- * Sourced ONLY from descriptors that actually appear in NPC_RELIGION_DATA, so a
- * generated NPC's authored traits resolve against real entries. Pure data —
- * frozen so a typo'd key reads as `undefined` (→ 0), not a silent miss.
- */
-export const TRAIT_AGGRESSION = Object.freeze({
-  // ── belligerent (flaw / negative vocab → +) ───────────────────────────────
-  cruel: 0.9,
-  'cold-blooded': 0.9,
-  ruthless: 0.85,
-  callous: 0.7,
-  domineering: 0.7,
-  overbearing: 0.65,
-  imperious: 0.65,
-  wrathful: 0.8,
-  vengeful: 0.75,
-  vindictive: 0.75,
-  reckless: 0.5,
-  volatile: 0.55,
-  arrogant: 0.4,
-  'self-serving': 0.35,
-  bitter: 0.3,
-  // ── pacific / cooperative (positive vocab → −) ────────────────────────────
-  merciful: -0.85,
-  compassionate: -0.8,
-  diplomatic: -0.8,
-  generous: -0.6,
-  magnanimous: -0.7,
-  'warm-hearted': -0.6,
-  patient: -0.55,
-  humble: -0.5,
-  'fair-minded': -0.55,
-  'level-headed': -0.5,
-  principled: -0.4,
-  protective: -0.3,
-  loyal: -0.2,
-  // ── neutral vocab → mild signed nudges (modifier slot) ────────────────────
-  zealous: 0.4,
-  ambitious: 0.3,
-  opportunistic: 0.25,
-  contrarian: 0.2,
-  cynical: 0.15,
-  proud: 0.15,
-  cautious: -0.25,
-  reserved: -0.15,
-});
-
-/**
- * TRAIT_ALIGNMENT — signed good↔evil weights over the AUTHORED personality
- * descriptor vocabulary (NPC_RELIGION_DATA positive/negative/neutral above).
- *
- * The sibling of TRAIT_AGGRESSION. It reads the SAME
- * AUTHORED `npc.personality.{dominant,flaw,modifier}` strings (what the dossier
- * shows), NEVER the RNG-rolled `npcStates.alignment` (write-only,
- * dossier-mismatched). It encodes HOW an individual NPC responds to an embedded
- * deity's good/evil axis — NOT the deity's own alignment.
- *
- * Convention: a POSITIVE weight is a GOOD-leaning conscience (compassionate,
- * principled, merciful) — such an NPC is MORE incorruptible under a good deity
- * and MORE RESISTANT to an evil deity's corruption. A NEGATIVE weight is an
- * EVIL-leaning disposition (cruel, ruthless, deceitful) — such an NPC corrupts
- * FASTER under an evil deity (the faithful are corrupted from within) and is
- * harder for a good deity to reform.
- *
- * The per-NPC disfavor at the call site is the DOT PRODUCT of this signed score
- * with the deity's signed alignment direction (evil deity = −, good deity = +),
- * so an aligned NPC (same sign as the deity) is amplified and a misaligned NPC
- * is damped — see corruption.deityDisfavor.
- *
- * Magnitudes are bounded (|w| ≤ 1) and intentionally modest — a single
- * descriptor nudges, it does not dominate. A descriptor absent from this map
- * contributes EXACTLY 0 (neutral), so adding vocabulary never silently churns
- * the score. Keys are lowercased descriptor strings; lookups normalize case +
- * trim. Sourced ONLY from descriptors that actually appear in
- * NPC_RELIGION_DATA. Pure data — frozen so a typo'd key reads as `undefined`
- * (→ 0), not a silent miss.
- */
-export const TRAIT_ALIGNMENT = Object.freeze({
-  // ── good-leaning conscience (positive vocab → +) ──────────────────────────
-  compassionate: 0.85,
-  merciful: 0.85,
-  generous: 0.7,
-  magnanimous: 0.75,
-  'warm-hearted': 0.65,
-  principled: 0.8,
-  incorruptible: 1,
-  'fair-minded': 0.7,
-  honest: 0.75,
-  forthright: 0.6,
-  loyal: 0.4,
-  humble: 0.45,
-  protective: 0.45,
-  pious: 0.5,
-  brave: 0.35,
-  patient: 0.3,
-  // ── evil-leaning disposition (negative vocab → −) ─────────────────────────
-  cruel: -0.9,
-  'cold-blooded': -0.9,
-  ruthless: -0.85,
-  callous: -0.7,
-  wrathful: -0.65,
-  vengeful: -0.65,
-  vindictive: -0.7,
-  deceitful: -0.7,
-  manipulative: -0.7,
-  mendacious: -0.65,
-  corrupt: -0.85,
-  greedy: -0.6,
-  'self-serving': -0.55,
-  hypocritical: -0.5,
-  domineering: -0.45,
-  imperious: -0.4,
-  petty: -0.3,
-  // ── neutral vocab → mild signed nudges (modifier slot) ────────────────────
-  zealous: -0.2,
-  opportunistic: -0.3,
-  cynical: -0.2,
-  hedonistic: -0.25,
-  pragmatic: -0.1,
-  idealistic: 0.3,
-  stoic: 0.1,
-});
-
 export const NPC_AGE_DATA = {
   young: ['early twenties', 'mid-twenties', 'late twenties'],
   middle: ['early thirties', 'mid-thirties', 'late thirties', 'early forties', 'mid-forties'],
@@ -327,11 +204,11 @@ export const NPC_PLOT_HOOKS = {
   government: [
     {
       impression:
-        'Efficient, a little distracted. Someone with too many things in their head, and a practised way of not showing it.',
+        'Efficient, slightly distracted: someone with too many things in their head and a practised way of not showing it.',
       disposition: 'transactional',
     },
     {
-      impression: 'Warmer than their office suggests. They make people feel briefly important.',
+      impression: 'Warmer than their office suggests. They have the gift of making people feel briefly important.',
       disposition: 'welcoming',
     },
     {
@@ -339,19 +216,19 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'cautious',
     },
     {
-      impression: 'Tired, not rudely but visibly: someone who has been doing a hard job for a long time.',
+      impression: 'Tired. Not rudely, but visibly. This is a person who has been doing a hard job for a long time.',
       disposition: 'cautious',
     },
   ],
   military: [
     {
       impression:
-        "Direct: they assess you in the first three seconds, and their expression tells you they've reached a provisional conclusion.",
+        "Direct. They assess you in the first three seconds and their expression tells you they've reached a provisional conclusion.",
       disposition: 'cautious',
     },
     {
       impression:
-        'Professionally cordial, the manner of someone who deals with strangers all day and has a system for it.',
+        'Professionally cordial: the manner of someone who deals with strangers all day and has a system for it.',
       disposition: 'transactional',
     },
     {
@@ -359,7 +236,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: "Alert, not hostile but attentive in a way that doesn't quite switch off.",
+      impression: "Alert. Not hostile, but attentive in a way that doesn't quite switch off.",
       disposition: 'cautious',
     },
   ],
@@ -369,7 +246,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Composed, the particular stillness of someone who has practised being still.',
+      impression: 'Composed. The particular stillness of someone who has practised being still.',
       disposition: 'cautious',
     },
     {
@@ -377,21 +254,21 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Watchful, in a religious way, not suspicious but as though taking a reading.',
+      impression: 'Watchful, in a religious way: not suspicious, but as though taking a reading.',
       disposition: 'cautious',
     },
   ],
   economy: [
     {
-      impression: 'Quick to smile, quick to calculate, both things happening at once.',
+      impression: 'Quick to smile, quick to calculate. Both things are happening simultaneously.',
       disposition: 'welcoming',
     },
     {
-      impression: "Busy, or presenting as busy: someone who doesn't waste time.",
+      impression: "Busy, or presenting as busy. The first impression is of someone who doesn't waste time.",
       disposition: 'transactional',
     },
     {
-      impression: 'Affable, the manner of someone for whom friendliness is both genuine and useful.',
+      impression: 'Affable. The manner of someone for whom friendliness is both genuine and useful.',
       disposition: 'welcoming',
     },
     {
@@ -432,7 +309,7 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Polite but removed, not unfriendly, just operating at a different register.',
+      impression: 'Polite but removed. Not unfriendly, just operating at a different register.',
       disposition: 'dismissive',
     },
   ],
@@ -447,11 +324,11 @@ export const NPC_PLOT_HOOKS = {
       disposition: 'welcoming',
     },
     {
-      impression: 'Tired but alert, the combination of someone who works hard and pays attention.',
+      impression: 'Tired, but alert. The combination of someone who works hard and pays attention.',
       disposition: 'transactional',
     },
     {
-      impression: 'Reserved, not hostile, just private.',
+      impression: 'Reserved. Not hostile, just private.',
       disposition: 'cautious',
     },
   ],
@@ -463,7 +340,7 @@ export const NPC_BUILDS = [
   'tall with a slight stoop',
   'average height, unremarkable frame',
   'heavyset and solid',
-  'slight, smaller than expected for the role',
+  'slight: smaller than expected for the role',
   'imposingly tall',
   'compact and powerful',
   'willowy',
@@ -501,48 +378,80 @@ export const NPC_FEATURES = [
   'eyes that never stop moving',
 ];
 
+// CONTENT-GT-FINAL (Charge 3): each category 4→8 — the survey's thinnest cells. The
+// entries are CLOTHING descriptions consumed as the appearance `clothes` field
+// (npcGenerator.js:286); the constant NAME is the recorded mislabel (flagged in the
+// shift map, deliberately not renamed — the wiring is correct). Single-pick draw site.
 export const NPC_WANTS = {
   government: [
     'formal robes of office',
     'expensive but conservative merchant dress',
     'a chain of office worn even off-duty',
     'court attire with discreet personal touches',
+    'robes cut for a taller predecessor, never altered',
+    'official dress one grade above their actual station',
+    'sombre official black with a jewelled clasp nobody asks about',
+    'immaculate formal wear that has clearly never seen weather',
   ],
   military: [
     'functional armour with personal sigils',
     'guard uniform kept immaculate',
     "soldier's practical dress with officer's insignia",
     "battle-worn plate they haven't replaced",
+    'a dress uniform kept for funerals, worn thin at the elbows',
+    'mismatched armour pieces, each from a different campaign',
+    'a field coat carrying the insignia of a disbanded company',
+    'civilian dress worn like a uniform: pressed, squared, joyless',
   ],
   religious: [
     'religious vestments layered over travelling clothes',
     'simple robes of their order',
     'ceremonial attire worn at all times',
     'plain devotional dress with one opulent accessory',
+    'vestments a size too grand for the shrine they serve',
+    'threadbare robes patched with fabric from finer ones',
+    'a formal habit with a travel-stained hem never cleaned',
+    'lay clothes with the collar of the order left visible',
   ],
   economy: [
-    'merchant dress, practical but signalling wealth through material',
+    'merchant dress: practical but signalling wealth through material',
     'guild colours worn with pride',
     'clothes that once cost a fortune and now show the miles',
     'well-cut but understated trading clothes',
+    'sober broadcloth with buttons worth more than the coat',
+    'foreign-cut clothes from a market they want to be asked about',
+    "a ledger-keeper's plain dress with ink at the right cuff",
+    "last season's fashion maintained with visible determination",
   ],
   criminal: [
     'nondescript working clothes chosen specifically to be forgettable',
     'fine clothes worn ironically over rougher garments',
     'guard or clergy disguise worn as a habit',
-    'whatever is clean, they move frequently',
+    'whatever is clean (they move frequently)',
+    "a dockhand's oilskins over hands too clean for the work",
+    'respectable dress exactly average for the street they work',
+    'good boots and cheap everything else',
+    'a heavy coat worn indoors, contents unexamined',
   ],
   magic: [
     'scholarly robes with heavy pockets',
     "travelling mage's coat covered in small pouches",
     'deceptively plain clothes that crackle faintly with residual energy',
     'formal academic dress worn with absent-minded disregard',
+    'robes singed at one cuff and never mended',
+    'practical dress with chalk dust in every seam',
+    "a scholar's gown two institutions out of date",
+    'ordinary clothes with a lining that clinks faintly',
   ],
   other: [
     'clothes practical for their work with one personal flourish',
     'travel-worn but well-maintained gear',
     "second-hand fine clothes that don't quite fit",
-    "whatever was available, they don't care about dress",
+    "whatever was available (they don't care about dress)",
+    'work clothes patched by someone who loved them',
+    'a good coat inherited from a larger relative',
+    'dress entirely without signal (deliberately so)',
+    'weathered gear maintained past the point of economy',
   ],
 };
 
@@ -550,7 +459,7 @@ export const NPC_FACTION_GOALS = {
   Mayor: [
     {
       short: "Navigate a dispute between two powerful guilds without losing either's support",
-      long: 'Die in office having kept the peace, legacy matters more than wealth',
+      long: 'Die in office having kept the peace (legacy matters more than wealth)',
       driven_by: 'protection',
     },
     {
@@ -560,24 +469,24 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Find funding for desperately needed infrastructure repairs',
-      long: 'Build a political dynasty where their children inherit influence, not just money',
+      long: 'Build a political dynasty (their children will inherit influence, not just money)',
       driven_by: 'power',
     },
     {
       short: 'Discredit a council rival before the annual election',
-      long: 'Write laws that outlast them as real reform, not political theatre',
+      long: 'Write laws that outlast them: real reform, not political theatre',
       driven_by: 'reform',
     },
   ],
   Governor: [
     {
       short: 'Secure enough grain reserves before winter to prevent unrest',
-      long: 'Become indispensable to the crown, irreplaceable and never exposed',
+      long: 'Become indispensable to the crown: irreplaceable, never exposed',
       driven_by: 'power',
     },
     {
       short: 'Root out the faction leaking tax figures to rivals',
-      long: 'Retire with a fortune and a clean name, in that order',
+      long: 'Retire with a fortune and a clean name (in that order)',
       driven_by: 'wealth',
     },
   ],
@@ -596,7 +505,7 @@ export const NPC_FACTION_GOALS = {
   'Tax Collector': [
     {
       short: "Meet this quarter's collection target without triggering another riot",
-      long: 'Accumulate enough to buy out of this hated post, any post but this',
+      long: 'Accumulate enough to buy out of this hated post (any post but this)',
       driven_by: 'wealth',
     },
     {
@@ -624,8 +533,8 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: "Identify which of their officers is on the organized crime payroll",
-      long: 'Die in bed rather than in the street, an unusual ambition for the role',
+      short: "Identify which of their officers is on the thieves' guild payroll",
+      long: 'Die in bed rather than in the street (unusual ambition for the role)',
       driven_by: 'personal',
     },
   ],
@@ -637,7 +546,7 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Contain a near-mutiny caused by months of unpaid wages',
-      long: 'Obtain a noble title through military distinction, the only path left open',
+      long: 'Obtain a noble title through military distinction (the only path left open)',
       driven_by: 'power',
     },
   ],
@@ -655,20 +564,20 @@ export const NPC_FACTION_GOALS = {
   ],
   'High Priest': [
     {
-      short: 'Restore a desecrated shrine before the annual festival, quietly and without scandal',
+      short: 'Restore a desecrated shrine before the annual festival (quietly, without scandal)',
       long: 'Unite the fractious local clergy under a single doctrinal standard',
       driven_by: 'spiritual',
     },
     {
       short: 'Identify who among their junior clergy is accepting bribes from merchants',
-      long: 'Found an institution, a hospital or school, that will outlast them by centuries',
+      long: 'Found an institution (a hospital, a school) that will outlast them by centuries',
       driven_by: 'reform',
     },
   ],
   'Parish Priest': [
     {
       short: 'Mediate a land dispute between two families before it turns violent',
-      long: 'Keep the community together: feed them, marry them, bury them with dignity',
+      long: 'Simply keep the community together: feed them, marry them, bury them with dignity',
       driven_by: 'protection',
     },
     {
@@ -685,14 +594,14 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Negotiate a tithe reduction with the local lord without compromising principle',
-      long: 'Leave the monastery in better condition, both spiritually and structurally, than they found it',
+      long: 'Leave the monastery in better condition (spiritually and structurally) than they found it',
       driven_by: 'spiritual',
     },
   ],
   Inquisitor: [
     {
       short: 'Confirm or deny specific heresy accusations against a prominent citizen',
-      long: 'Dismantle an actual organised heretical network rather than chase rumours',
+      long: 'Dismantle an actual organised heretical network, not chase rumours',
       driven_by: 'justice',
     },
     {
@@ -733,14 +642,14 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Identify which of their clients is about to default and act first',
-      long: 'Transform the lending business into a proper banking institution, both legitimate and respectable',
+      long: 'Transform the lending business into a proper banking institution: legitimate, respectable',
       driven_by: 'wealth',
     },
   ],
   'Master Craftsman': [
     {
       short: 'Complete a prestigious commission that will make their reputation in the city',
-      long: 'Train an apprentice who surpasses them, the greatest achievement of any craftsman',
+      long: 'Train an apprentice who surpasses them: the greatest achievement of any craftsman',
       driven_by: 'personal',
     },
     {
@@ -749,7 +658,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'knowledge',
     },
   ],
-  "Crime Boss": [
+  "Thieves' Guild Master": [
     {
       short: 'Identify which of their lieutenants is planning to branch out independently',
       long: 'Achieve enough legitimate business to step back from direct criminal exposure',
@@ -764,11 +673,11 @@ export const NPC_FACTION_GOALS = {
   'Crime Lord': [
     {
       short: 'Suppress a rival operation that has begun cutting into smuggling revenue',
-      long: 'Build an empire that survives their death through succession planning',
+      long: 'Build an empire that survives their death: succession planning for criminals',
       driven_by: 'power',
     },
     {
-      short: 'Identify the guard captain who is no longer cooperative and learn why',
+      short: 'Identify the guard captain who is no longer co-operative, and why',
       long: 'Launder enough wealth to fund a legitimate legacy',
       driven_by: 'wealth',
     },
@@ -781,19 +690,19 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Determine whether the recent cargo losses are coincidence or betrayal',
-      long: 'Expand into a trade that requires less hiding, spice or cloth rather than people',
+      long: 'Expand into a trade that requires less hiding: spice or cloth, not people',
       driven_by: 'wealth',
     },
   ],
   'Tower Wizard': [
     {
       short: 'Identify the source of unexplained magical disturbances in the northern district',
-      long: 'Complete a research project that will earn peer recognition rather than power, just acknowledgement',
+      long: 'Complete a research project that will earn peer recognition: not power, just acknowledgement',
       driven_by: 'knowledge',
     },
     {
       short: 'Find an apprentice worth investing time in before they become too old to train anyone',
-      long: 'Solve one genuinely unsolved theoretical problem before they die',
+      long: 'Solve one genuinely unsolved theoretical question before they die',
       driven_by: 'knowledge',
     },
   ],
@@ -805,18 +714,18 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Track down a former student who has been using restricted magic',
-      long: 'Complete the great work, whatever that means to them specifically',
+      long: 'Complete the great work (whatever that means to them specifically)',
       driven_by: 'knowledge',
     },
   ],
   'Hedge Wizard': [
     {
-      short: 'Find reliable income for the next three months, as magical services barely pay',
+      short: 'Find reliable income for the next three months (magical services barely pay)',
       long: 'Be taken seriously by the formal magical establishment, just once',
       driven_by: 'personal',
     },
     {
-      short: 'Identify what is wrong with the crops in the northern fields, which smell magical',
+      short: 'Identify what is wrong with the crops in the northern fields (it smells magical)',
       long: 'Understand their own unusual ability well enough to pass it on',
       driven_by: 'knowledge',
     },
@@ -841,13 +750,13 @@ export const NPC_FACTION_GOALS = {
     },
     {
       short: 'Figure out who has been watering down their barrels before it reaches customers',
-      long: 'Build a place where everyone, not just the wealthy, can feel welcome',
+      long: 'Build a place where everyone (not just the wealthy) can feel welcome',
       driven_by: 'personal',
     },
   ],
   'Sage/Scholar': [
     {
-      short: 'Verify a specific historical claim before publishing it, as one source contradicts all others',
+      short: 'Verify a specific historical claim before publishing it (one source contradicts all others)',
       long: "Complete the comprehensive work they've spent thirty years building toward",
       driven_by: 'knowledge',
     },
@@ -882,11 +791,11 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'Criminal liability and the end of any political or social standing',
     },
     {
-      secret: 'Ordered what was officially ruled an accident and sleeps fine about it',
+      secret: 'Ordered what was officially ruled an accident, and sleeps fine about it',
       stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
     },
     {
-      secret: "On the payroll of organized crime as a silent informant",
+      secret: "On the payroll of the thieves' guild as a silent informant",
       stakes: 'Exposure would cost them their post and likely their safety',
     },
     {
@@ -894,7 +803,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'A cascade of confessions from any single one of the bribed parties',
     },
     {
-      secret: "Runs a protection scheme on the very merchants they're supposed to serve",
+      secret: "Runs a protection scheme targeting the very merchants they're supposed to serve",
       stakes: 'Civil and criminal liability; the merchants have been keeping records',
     },
     {
@@ -912,7 +821,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'Both relationships collapse, along with any claim to moral authority',
     },
     {
-      secret: 'Their identity is fabricated, they fled a different life entirely',
+      secret: 'Their identity is fabricated. They fled a different life entirely',
       stakes: 'The person they became would be destroyed; the person they were might be wanted',
     },
     {
@@ -921,7 +830,7 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret: 'Deeply in debt to a creditor who owns the debt as leverage, not income',
-      stakes: 'The creditor will call it in at the worst possible moment and has leverage to do so',
+      stakes: 'The creditor will call it in at the worst possible moment, and has leverage to do so',
     },
     {
       secret: 'Was directly responsible for a death that was ruled an accident',
@@ -932,7 +841,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'Both the relationship and the embezzlement would become public simultaneously',
     },
     {
-      secret: "Their celebrated achievement was stolen, they took credit for another's work",
+      secret: "Their celebrated achievement was stolen. They took credit for another's work",
       stakes: "The real author has evidence; they've been sitting on it for years",
     },
     {
@@ -959,7 +868,7 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret: "Is the illegitimate heir to a title currently held by someone who doesn't know they exist",
-      stakes: 'Could claim it or be seen as a threat by those who benefit from the status quo',
+      stakes: 'Could claim it, or could be seen as a threat by those who benefit from the status quo',
     },
     {
       secret: 'Has agreed to hand over authority to an external power in exchange for personal safety',
@@ -973,7 +882,7 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret: 'Made a binding pact with an entity they now cannot name without consequence',
-      stakes: 'The pact comes due soon, and the terms are worse than they appeared at signing',
+      stakes: 'The pact will come due (soon), and the terms are worse than they appeared at signing',
     },
     {
       secret: 'Has been using magic to alter memories of specific events',
@@ -984,7 +893,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'Everyone who wants it would kill for the information; none of them should have it',
     },
     {
-      secret: "Is under a compulsion placed by someone who is now dead and finds it getting harder to resist",
+      secret: "Is under a compulsion placed by someone who is now dead, and it's getting harder to resist",
       stakes: 'The compulsion will eventually force an action that exposes everything',
     },
     {
@@ -994,12 +903,12 @@ export const NPC_CRIMINAL_SECRETS = {
   ],
   religious: [
     {
-      secret: 'Lost their faith completely but maintains the role as just a job now',
+      secret: "Lost their faith completely but maintains the role. It's just a job now",
       stakes: "Discovery destroys their flock's trust and their own standing; some would call it heresy",
     },
     {
       secret: "Has been covering for a colleague's heretical activities out of personal loyalty",
-      stakes: 'When the colleague is exposed, and they will be, this secret comes with them',
+      stakes: 'When the colleague is exposed (and they will be), this secret comes with them',
     },
     {
       secret: 'Secretly receives what they believe are genuine divine visions, which terrifies them',
@@ -1015,7 +924,7 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret:
-        "Possesses a relic that was officially declared destroyed and kept it because they couldn't face destroying something real",
+        "Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real",
       stakes: 'Possession is heresy; surrender means explaining how they had it',
     },
   ],
@@ -1025,11 +934,11 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'The family member knows enough to burn them; the payments are leverage',
     },
     {
-      secret: 'Knows their celebrated family history is fabricated and helped fabricate it',
+      secret: 'Knows their celebrated family history is fabricated, and helped fabricate it',
       stakes: 'The real history is much worse; discovery would shame all who share the name',
     },
     {
-      secret: 'One of their children is not theirs biologically and they know it',
+      secret: 'One of their children is not theirs biologically, and they know it',
       stakes: 'Every inheritance, every decision, made differently if this becomes known',
     },
     {
@@ -1037,13 +946,13 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'The debt will eventually be called in at the worst possible moment',
     },
     {
-      secret: "Has been protecting a sibling's crime for years, a serious one",
+      secret: "Has been protecting a sibling's crime for years (a serious one)",
       stakes: 'Discovery makes them an accessory; the sibling has reason to pre-empt exposure',
     },
   ],
   historical: [
     {
-      secret: 'Was present at an atrocity and did nothing to prevent it, an event now history',
+      secret: 'Was present at (and did nothing to prevent) an atrocity that is now history',
       stakes: 'Complicity charges; the moral weight has been crushing them for years',
     },
     {
@@ -1051,7 +960,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'The truth would delegitimise current power structures; powerful people prefer the myth',
     },
     {
-      secret: 'Survived something everyone believes killed them, now living under a different name',
+      secret: 'Survived something everyone believes killed them, under a different name',
       stakes: 'The original identity, if revealed, carries baggage that would end the current one',
     },
     {
@@ -1073,7 +982,7 @@ export const NPC_CRIMINAL_SECRETS = {
   ],
   military: [
     {
-      secret: 'Gave an order during a battle that caused friendly casualties, covered up as enemy action',
+      secret: 'Gave an order during a battle that caused friendly casualties. It was covered up as enemy action',
       stakes: 'The families of the dead believe a lie that this person actively maintains',
     },
     {
@@ -1090,11 +999,11 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret: 'Has been skimming from military supply budgets for years through a trusted subordinate',
-      stakes: 'The subordinate now knows enough to destroy them and is becoming expensive',
+      stakes: 'The subordinate now knows enough to destroy them, and is becoming expensive',
     },
     {
       secret:
-        'Was ordered to commit an atrocity and complied, since rising in the organisation that ordered it',
+        'Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it',
       stakes: 'The order came from someone senior; exposure implicates both of them',
     },
   ],
@@ -1117,12 +1026,12 @@ export const NPC_CRIMINAL_SECRETS = {
     },
     {
       secret: "Their business partner died of natural causes that weren't entirely natural",
-      stakes: 'An investigation would find ambiguous evidence, enough to ruin or maybe enough to prosecute',
+      stakes: 'An investigation would find ambiguous evidence: enough to ruin, maybe enough to prosecute',
     },
   ],
   identity: [
     {
-      secret: 'Is a member of a group that faces serious persecution and passes for something else entirely',
+      secret: 'Is a member of a group that faces serious persecution, and passes for something else entirely',
       stakes: 'Discovery ends everything they have built; some of the people closest to them would turn on them',
     },
     {
@@ -1138,7 +1047,7 @@ export const NPC_CRIMINAL_SECRETS = {
       stakes: 'The two lives have begun to approach each other geographically',
     },
     {
-      secret: 'Is not who their documents say they are, the real person died years ago and they took the identity',
+      secret: 'Is not who their documents say they are. The real person died years ago and they took the identity',
       stakes: "The real person's family recently moved to the area",
     },
   ],
@@ -1166,7 +1075,7 @@ export const NPC_FACTION_LOYALTY = {
     "They've been meeting privately with someone from outside the settlement whose identity they won't disclose.",
     'A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.',
     'Someone who publicly supports them is being paid by someone who opposes them. They know this.',
-    'A deposition in a civil case reached them. Acting on it would be correct, and would ruin someone they need.',
+    'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
   ],
   military: [
     'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.',
@@ -1175,9 +1084,9 @@ export const NPC_FACTION_LOYALTY = {
     'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.',
     "They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.",
     "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
-    'A spy they turned is now being turned back and feeding information in both directions.',
+    'A spy they turned is now being turned back, and feeding information in both directions.',
     "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
-    'A recruit they turned away has since joined a rival outfit. That outfit now pays them to monitor this one.',
+    'A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one.',
     'They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out.',
     "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
   ],
@@ -1210,7 +1119,7 @@ export const NPC_FACTION_LOYALTY = {
   criminal: [
     "One of their people is talking to the guard. They don't know which one yet. They're watching.",
     'A valuable item came through their network recently. Three different parties have asked about it quietly.',
-    "Someone in the legitimate government is playing both sides. That's useful until it isn't.",
+    "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
     'A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?',
@@ -1239,10 +1148,10 @@ export const NPC_FACTION_LOYALTY = {
     "Someone they trust completely has started behaving in ways that don't add up.",
     "They've been offered money to not ask questions about something they hadn't even started asking about.",
     'A document they were asked to witness contained a clause they noticed at the time and said nothing about.',
-    "Their predecessor left something behind in a place where it shouldn't have been, and they haven't reported finding it.",
+    "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reported finding it.",
   ],
   small_settlement: [
-    'Everyone in the settlement is behaving slightly differently toward a visitor from outside, not unfriendly but careful.',
+    'Everyone in the settlement is behaving slightly differently toward a visitor from outside. Not unfriendly, careful.',
     'There is a building no one talks about, goes into, or mentions. It is clearly maintained. No one will say by whom.',
     'The oldest resident refuses to speak about a specific year. Others confirm the year exists. No one remembers what happened.',
     'Something is left at the crossroads each new moon. No one admits to leaving it. It is always gone by morning.',
@@ -1269,7 +1178,7 @@ export const NPC_SECRETS = {
   military: [
     {
       short: 'Train the next cohort to a standard that might actually keep people alive',
-      long: "Build a force that doesn't need them, sustainable rather than dependent",
+      long: "Build a force that doesn't need them: sustainable, not dependent",
       driven_by: 'protection',
     },
     {
@@ -1281,7 +1190,7 @@ export const NPC_SECRETS = {
   religious: [
     {
       short: 'Settle a theological dispute that has divided the congregation for months',
-      long: 'Strengthen the faith, not the institution, the actual living faith',
+      long: 'Strengthen the faith: not the institution, the actual living faith',
       driven_by: 'spiritual',
     },
     {
@@ -1298,7 +1207,7 @@ export const NPC_SECRETS = {
     },
     {
       short: 'Identify the leak in their supply chain before it empties the accounts',
-      long: "Leverage money into influence, that's where security actually lives",
+      long: "Leverage money into influence: that's where security actually lives",
       driven_by: 'power',
     },
   ],
@@ -1333,8 +1242,8 @@ export const NPC_SECRETS = {
       driven_by: 'personal',
     },
     {
-      short: 'Figure out what is going on before it reaches them directly',
-      long: 'Matter to the people immediately around them, at small scale, real',
+      short: 'Figure out what is actually going on before it affects them directly',
+      long: 'Matter to the people immediately around them: small scale, real',
       driven_by: 'personal',
     },
   ],
@@ -1351,7 +1260,7 @@ export const NPC_PRESENTATION_MODES = {
   dangerous_presents_safe: [
     {
       impression:
-        'Genuinely helpful or indistinguishable from it. Knowledgeable, generous with information, nothing that raises concern.',
+        'Genuinely helpful, or indistinguishable from it. Knowledgeable, generous with information, nothing that raises concern.',
       disposition: 'welcoming',
       behaviour: 'Volunteers information before you ask. Seems invested in your success here.',
     },
@@ -1386,162 +1295,382 @@ export const NPC_PRESENTATION_MODES = {
   ],
   significant_presents_ordinary: [
     {
-      impression: 'Unremarkable, the particular invisible quality of someone who has spent years not being noticed.',
+      impression: 'Unremarkable. The particular invisible quality of someone who has spent years not being noticed.',
       disposition: 'transactional',
       behaviour: 'Answers questions. Asks nothing. Remembers more than they show.',
     },
     {
-      impression: 'Tired and ordinary, the manner of someone who is carrying less than they are.',
+      impression: 'Tired and ordinary. The manner of someone who is carrying less than they are.',
       disposition: 'transactional',
       behaviour: 'Cooperative. Unassuming. Easy to overlook.',
     },
     {
-      impression: 'Quiet, neighbourly, the impression of someone with a small life and modest concerns.',
+      impression: 'Quiet, neighbourly. The impression of someone with a small life and modest concerns.',
       disposition: 'welcoming',
       behaviour: "Helpful in the small practical ways that don't invite scrutiny.",
     },
   ],
 };
 
-// NPC faction-relationship archetypes (patron/client, rivalries, debts, etc.)
-// used to colour relationships between settlement power-holders. The legacy
-// export name STRESS_ECONOMIC_EFFECTS (aliased below) is a misnomer: this is NOT
-// stress economics. Prefer NPC_RELATIONSHIP_DYNAMICS in new code.
-export const NPC_RELATIONSHIP_DYNAMICS = {
+// ── Original npcData.js constants (preserved from pre-extraction) ──────────────
+
+// [data-tables-6] A role→goal map that was a byte-identical dead duplicate of
+// NPC_FACTION_GOALS (above) was removed here — it had zero importers (only stale
+// comment mentions in npcGenerator.js). Deletion is behavior-inert: no consumer,
+// so goldens are byte-identical. Disposition: docs/DEAD_CODE_DISPOSITION.md. The
+// purged symbol is pinned absent by tests/joins/deadCode.test.js (do not re-name
+// it here — the ratchet greps this file for the literal name).
+
+// CONTENT-GT-FINAL (Charge 3): pair-keyed, draw-FREE variety for the relationship
+// archetype prose (the survey's "every 'old_debt' pair in the world is described
+// identically" cell). Each archetype's desc/tension grew 1→3 template closures; the
+// closure used for a given pair is selected by a pure fnv hash of the DIRECTED pair
+// key (`${r.name}>${s.name}`, salted per field) — ZERO rng draws, so the relationship
+// roll stream is byte-identical, and the archetype OBJECTS are unchanged (consumers
+// compare them with === and Object.entries().find — identity is load-bearing). The
+// same pair always renders the same line; different pairs stop sharing one realm-wide
+// template. Index 0 of every pool is the pre-existing canonical closure, verbatim.
+const pairProse = (salt, variants) => (r, s) =>
+  pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`)(r, s);
+
+export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`,
-    tension: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`,
+      (r, s) =>
+        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`,
+      (r, s) =>
+        `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
+      (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.',
+      (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`,
+    ]),
     type: 'patron_client',
   },
   econ_crim_exploitation: {
     label: 'Protection Arrangement',
-    desc: (r, s) =>
-      `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`,
-    tension: (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`,
+      (r, s) =>
+        `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`,
+      (r, s) =>
+        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
+      (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`,
+      (r, s) => `A rival crew has offered ${r.name} a better rate. Accepting would be a declaration of war on ${s.name}.`,
+    ]),
     type: 'debtor_creditor',
   },
   mil_crim_corruption: {
     label: 'Corrupt Arrangement',
-    desc: (r, s) =>
-      `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`,
-    tension: (r, s) =>
-      'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`,
+      (r, s) =>
+        `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`,
+      (r, s) =>
+        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
+      (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`,
+      (r, s) => 'The payments have started arriving late. In this trade, late is a message.',
+    ]),
     type: 'ally',
   },
   mil_crim_suppression: {
     label: 'Active Suppression',
-    desc: (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
-    tension: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
+    desc: pairProse('d', [
+      (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
+      (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
+      (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
+      (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`,
+      (r, s) => `Someone in ${r.name}'s command reports to ${s.name}. The file says so; it does not say who.`,
+    ]),
     type: 'enemy',
   },
   econ_mil_contract: {
     label: 'Security Contract',
-    desc: (r, s) =>
-      `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
-    tension: (r, s) =>
-      `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
+      (r, s) =>
+        `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`,
+      (r, s) =>
+        `The contract between ${r.name} and ${s.name} is renewed annually with a handshake; what it actually covers has never been written down anywhere.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
+      (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`,
+      (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.',
+    ]),
     type: 'patron_client',
   },
   rel_mil_crusader: {
     label: 'Sacred Commission',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} operate as a unified authority, temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
-    tension: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
+      (r, s) =>
+        `Between ${r.name}'s pulpit and ${s.name}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
+      (r, s) =>
+        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
+      (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.',
+      (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
+    ]),
     type: 'ally',
   },
   rel_crim_fraud: {
     label: 'Institutional Cover',
-    desc: (r, s) =>
-      `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`,
-    tension: (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`,
+      (r, s) =>
+        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
+      (r, s) =>
+        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
+      (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`,
+      (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
+    ]),
     type: 'ally',
   },
   mag_crim_market: {
     label: 'Arcane Supplier',
-    desc: (r, s) =>
-      `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`,
-    tension: (r, s) =>
-      `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`,
+      (r, s) =>
+        `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`,
+      (r, s) =>
+        `${r.name} takes commissions from ${s.name} that no guild register records: small workings, expertly done, each one deniable and none of them innocent.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
+      (r, s) => `${s.name} has begun asking for workings of a different order: the kind with witnesses. ${r.name} has not yet said no.`,
+      (r, s) => `Another practitioner has noticed ${r.name}'s signature in the residue. Professional courtesy has limits.`,
+    ]),
     type: 'patron_client',
   },
   gov_econ_dependence: {
     label: 'Financial Dependence',
-    desc: (r, s) =>
-      `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`,
-    tension: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`,
+      (r, s) =>
+        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`,
+      (r, s) =>
+        `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
+      (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
+      (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`,
+    ]),
     type: 'debtor_creditor',
   },
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`,
-    tension: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`,
+      (r, s) =>
+        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`,
+      (r, s) =>
+        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
+      (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
+      (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
+    ]),
     type: 'political',
   },
   peer_rivalry: {
     label: 'Professional Rivalry',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded, neither has crossed the line into genuine enmity. Yet.`,
-    tension: (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.`,
+      (r, s) =>
+        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`,
+      (r, s) =>
+        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
+      (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.',
+      (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.',
+    ]),
     type: 'rival',
   },
   mentor_legacy: {
     label: 'Mentor and Successor',
-    desc: (r, s) =>
-      `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`,
-    tension: (r, s) =>
-      `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`,
+      (r, s) =>
+        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`,
+      (r, s) =>
+        `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
+      (r, s) => `${r.name} has one favour left to call in, and is saving it. ${s.name} knows, and is watching for it.`,
+      (r, s) => `A third party has asked ${r.name}, quietly, whether ${s.name} can be trusted. The answer took too long.`,
+    ]),
     type: 'mentor_student',
   },
   mutual_leverage: {
     label: 'Mutual Leverage',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`,
-    tension: (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`,
+      (r, s) =>
+        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`,
+      (r, s) =>
+        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+      (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.',
+      (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`,
+    ]),
     type: 'political',
   },
   wary_alliance: {
     label: 'Pragmatic Alliance',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} work together because the alternative, working against each other, is worse for both. The alliance holds as long as the calculation holds.`,
-    tension: (r, s) => 'A third party is actively working to change that calculation.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
+      (r, s) =>
+        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'A third party is actively working to change that calculation.',
+      (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.',
+      (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`,
+    ]),
     type: 'ally',
   },
   genuine_respect: {
     label: 'Genuine Respect',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`,
-    tension: (r, s) => 'They are about to be on opposite sides of a significant decision.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`,
+      (r, s) =>
+        `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`,
+      (r, s) =>
+        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'They are about to be on opposite sides of a significant decision.',
+      (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.',
+      (r, s) => 'The respect is real and the interests are diverging. Both can read a map.',
+    ]),
     type: 'respect',
   },
   old_debt: {
     label: 'Outstanding Debt',
-    desc: (r, s) =>
-      `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`,
-    tension: (r, s) => `${s.name} is about to call it in.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`,
+      (r, s) =>
+        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`,
+      (r, s) =>
+        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${s.name} is about to call it in.`,
+      (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`,
+      (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.',
+    ]),
     type: 'debtor_creditor',
   },
   family_complication: {
     label: 'Family Complication',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`,
-    tension: (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`,
+      (r, s) =>
+        `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`,
+      (r, s) =>
+        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
+      (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.',
+      (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.',
+    ]),
     type: 'family',
   },
   bitter_history: {
     label: 'Unresolved History',
-    desc: (r, s) =>
-      `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally but do not forgive.`,
-    tension: (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`,
+      (r, s) =>
+        `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`,
+      (r, s) =>
+        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
+      (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.',
+      (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
+    ]),
     type: 'enemy',
   },
 };
 
+// TRAIT_AGGRESSION (belligerent↔pacific) and TRAIT_ALIGNMENT (good↔evil) — the two light
+// signed-weight maps over the AUTHORED personality vocabulary — now live in the zero-import
+// leaf data/npcTraitWeights.js so the EAGER domain/corruption.js consumer (which reads only
+// TRAIT_ALIGNMENT) no longer drags this 64 kB module into the first-paint static closure
+// (FP-G3 reclaim). Re-exported here VERBATIM so npcData.js stays the single source for its
+// lazy consumers (generators, disposition) + the tests. Data is byte-identical to its former
+// inline home — only the module home moved. @see data/npcTraitWeights.js
+export { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from './npcTraitWeights.js';
+
 /**
- * @deprecated Misnomer — this holds NPC relationship dynamics, not stress
- * economics. Kept as an alias for one release to avoid breaking importers;
- * migrate to NPC_RELATIONSHIP_DYNAMICS.
+ * TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable weights deciding which of an
+ * NPC's two corruption-relevant personality slots survive generation:
+ *   • `dominant` (a steady TEMPERAMENT) makes an NPC harder for the world-pulse
+ *     sim to turn.
+ *   • `flaw` (greed, ambition, a vice) is the weakness organized crime leverages
+ *     to turn an NPC. No flaw ⇒ nothing to leverage ⇒ the sim can never turn them.
+ *
+ * The four buckets are independent presence outcomes (weights sum to 1.0). A
+ * solid majority keep a flaw (both + flawOnly = 70%) so the background sim still
+ * has people to turn; only 10% have neither slot. The roll is drawn from the
+ * seeded PRNG so generation stays reproducible. This governs ONLY trait
+ * presence — it does NOT touch the manual "Impose corruption" DM override, which
+ * works on any NPC with no flaw check.
+ * @type {Readonly<{both:number, flawOnly:number, temperamentOnly:number, neither:number}>}
  */
-export const STRESS_ECONOMIC_EFFECTS = NPC_RELATIONSHIP_DYNAMICS;
+export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
+  both: 0.40,
+  flawOnly: 0.30,
+  temperamentOnly: 0.20,
+  neither: 0.10,
+});

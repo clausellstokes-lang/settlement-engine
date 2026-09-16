@@ -21,12 +21,11 @@
 //   settlementEngine:removePlacement     { burgId }
 //   settlementEngine:restorePlacements   { placements }
 //   settlementEngine:clearAllPlacements
+//   settlementEngine:exportThumb         { size }
 //   settlementEngine:getViewport
 //   settlementEngine:setViewport         { cx, cy, scale, duration }
 //   settlementEngine:fitMap
 //   settlementEngine:saveSnapshot
-//   settlementEngine:exportThumb         { maxW }  → small JPEG data URL of the
-//                                          rendered terrain (gallery thumbnail)
 //   settlementEngine:loadSnapshot        { snapshot }
 //   settlementEngine:resetMap            { seed }
 //   settlementEngine:activateTool        { tool, options }
@@ -51,6 +50,15 @@
 (function initSettlementForgeBridge() {
   const isEmbedded = window.parent !== window;
   if (!isEmbedded) return;
+
+  // sf-origin.js loads immediately before this bridge and owns the one allowed
+  // parent origin. Deployed hosts have no same-origin fallback: if the explicit
+  // parentOrigin handshake is absent or malformed, install no command surface
+  // and emit no map/campaign data.
+  const originContract = window.__sfBridgeOrigin;
+  const parentOrigin = originContract?.parentOrigin || null;
+  const postToParent = originContract?.postToParent;
+  if (!parentOrigin || typeof postToParent !== 'function') return;
 
   // Apply SettlementForge chrome palette class
   document.body.classList.add('sf-embedded');
@@ -244,33 +252,8 @@
   }
 
   // ── postMessage plumbing ────────────────────────────────────────────────
-  // Target our own origin (the parent serves /map/ from the same host). The
-  // target origin is FAIL-CLOSED: if it can't be resolved to a concrete http(s)
-  // origin (opaque/sandboxed iframe → "null", file:// scheme → empty/"null"),
-  // we REFUSE to post rather than broadcast to '*'. A '*' target would leak the
-  // bridge's replies (which can carry map/campaign data) to any origin that
-  // happens to hold a reference to this window — so a failed origin computation
-  // must never fall back to broadcasting.
-  function resolveParentOrigin() {
-    let origin;
-    try { origin = window.location.origin; } catch (_) { return null; }
-    // Opaque/file origins serialize to "null" (the string) or an empty value;
-    // neither is a safe postMessage target — treat both as unresolved.
-    if (!origin || origin === 'null') return null;
-    if (!/^https?:\/\//.test(origin)) return null;
-    return origin;
-  }
-
-  function postToParent(msg) {
-    const targetOrigin = resolveParentOrigin();
-    if (!targetOrigin) {
-      // Fail closed: no trustworthy target origin → do not post at all.
-      return;
-    }
-    try {
-      window.parent.postMessage(msg, targetOrigin);
-    } catch (_) { /* cross-origin / detached parent — drop silently */ }
-  }
+  // postToParent closes over the exact origin resolved by sf-origin.js. It
+  // never recomputes from this child window and never falls back to '*'.
 
   function reply(rid, payload) {
     if (!rid) return;
@@ -340,6 +323,21 @@
   // outside this bridge closure and otherwise can't see local helpers.
   window.__sfScreenToMap = screenToMap;
 
+  // ── Map seed accessor (H10) ─────────────────────────────────────────────
+  // FMG's real map seed is the top-level global `seed` (main.js: `var seed`, set
+  // from the URL seed / generateSeed() / a precreated seed, and serialized by
+  // save.js). The bridge previously reported `pack.seed`, which FMG NEVER assigns
+  // — so every fmg:ready / fmg:mapReset carried seed:null. Read the real global.
+  // It's a `var` (a genuine window property), but we reach it as a GUARDED BARE
+  // IDENTIFIER — the one convention this file uses for FMG's script-scoped globals
+  // (svg/zoom) — so an upstream rename degrades to null, not a ReferenceError.
+  function currentSeed() {
+    try {
+      if (typeof seed !== 'undefined' && seed != null && seed !== '') return String(seed);
+    } catch (_) { /* global not bound yet */ }
+    return null;
+  }
+
   // ── Viewport broadcasting ───────────────────────────────────────────────
   // Parse a transform attribute of the form "translate(tx, ty) scale(k)" or
   // "matrix(a b c d e f)". Returns { tx, ty, scale } or null.
@@ -373,7 +371,11 @@
       if (parsed) {
         tx = parsed.tx; ty = parsed.ty; scale = parsed.scale || 1;
       } else {
-        const svgSel = window.svg;
+        // PHANTOM-GLOBAL FIX: `svg` is a top-level `let` in main.js (main.js:23),
+        // a script-scoped lexical global — NEVER window.svg. window.svg was always
+        // undefined, so this d3.zoomTransform fallback never ran. Reach it as a
+        // guarded bare identifier. (d3 is a real UMD window global — left as-is.)
+        const svgSel = (typeof svg !== 'undefined') ? svg : null;
         const tf = (svgSel && window.d3?.zoomTransform) ? window.d3.zoomTransform(svgSel.node()) : null;
         scale = tf?.k || 1;
         tx = tf?.x || 0;
@@ -428,8 +430,16 @@
   }
   function installViewportBroadcaster() {
     try {
-      if (window.zoom && window.svg) {
-        window.zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
+      // PHANTOM-GLOBAL FIX (behavior activation): `zoom` (const, main.js:225) and
+      // `svg` (let, main.js:23) are script-scoped lexical globals, NEVER window
+      // properties. The old `window.zoom && window.svg` guard was `undefined &&
+      // undefined` — always false — so this d3 zoom hook NEVER attached and the
+      // React overlay's pan/zoom mirroring rode on the RAF poll alone. Reaching
+      // the bindings as guarded bare identifiers LIGHTS the zoom-driven broadcast:
+      // fmg:viewport now fires synchronously on the d3 zoom event, not only on the
+      // next animation frame.
+      if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg) {
+        zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
       }
     } catch (e) { /* best-effort */ }
     // Start the RAF poll once (idempotent).
@@ -477,11 +487,15 @@
 
   async function resetMapCmd(seed) {
     if (typeof regenerateMap !== 'function') throw new Error('regenerateMap unavailable');
-    if (seed != null) {
-      try { window.seed = String(seed); } catch (e) {}
-    }
     window.__sfPlacedBurgIds.clear();
-    await Promise.resolve(regenerateMap('SettlementForge resetMap'));
+    // FMG's generate(options) destructures `options.seed` (a STRING) and routes
+    // it through setSeed → aleaPRNG (public/map/main.js). The old call passed a
+    // bare STRING ('SettlementForge resetMap'), which destructured to
+    // seed:undefined — so the documented {seed} was silently ignored and every
+    // reset produced a fresh random map. Pass a real options object with the
+    // seed so it actually applies; omit it (undefined) to keep randomizing.
+    const options = seed != null ? { seed: String(seed) } : undefined;
+    await Promise.resolve(regenerateMap(options));
   }
 
   // ── Command handlers ────────────────────────────────────────────────────
@@ -612,6 +626,58 @@
     // Edges are routed independently; each path is a polyline of cell centers
     // in FMG map coordinates. Overlay <g> applies the same transform FMG uses,
     // so these render aligned with the geography.
+    //
+    // ── WEAVE NET-1 · what the roads learned ───────────────────────────────
+    // Four changes, all inside the cost function and the sea exit. None of them
+    // touches which PAIRS get a road (that is `computeRoadEdges`, parent-side);
+    // they change the LINE each road takes.
+    //
+    //   1. CORRIDOR RE-USE (×0.5). Every hop a previously routed road already
+    //      took is half price for the roads that follow, so traffic bundles into
+    //      trunk corridors instead of every pair carving its own private track
+    //      across the same hills. This is the one piece of state that spans edges
+    //      in a request: `usedCellPairs`, threaded through the edge order the
+    //      parent sends (which is itself deterministic — see roadNetwork.js), so
+    //      the whole batch is a pure function of (pack, edge list, order).
+    //      ⚠ It is a BATCH property: routing the same edge alone and routing it
+    //      after its neighbours can legitimately differ. RoadsLayer always sends
+    //      the whole set in one call, which is what makes this well-defined.
+    //   2. OFF-BURG MULTIPLIER (×3). A cell with no burg on it costs three times
+    //      a cell that has one, so a road between two distant towns strings
+    //      through the small places on the way rather than ignoring them. This
+    //      raises the land cost SCALE threefold, which is why the heuristic gains
+    //      a scale of its own below — an unscaled straight-line heuristic against
+    //      tripled edge costs degenerates A* toward Dijkstra and starts hitting
+    //      MAX_ITER on long routes.
+    //   3. HAVEN EXIT. FMG already stores, for every coastal land cell, the water
+    //      cell it fronts (`cells.haven`, minted in markupPack). Sea routes now
+    //      leave through it instead of breadth-first searching for "some ocean
+    //      cell near here", which is both exact and O(1). The BFS remains as the
+    //      fallback for a pack with no haven array.
+    //   4. COAST-GRADED SEA COST. `cells.t` is FMG's distance field: LAND_COAST 1,
+    //      WATER_COAST -1, and progressively more negative out to its -10 markup
+    //      limit. Sea cost now grades on that depth, so lanes hug the coast the
+    //      way real shipping does, instead of the old rule which made SHALLOW
+    //      water dearer than deep and pushed lanes out to sea.
+    //
+    // ── E-NET-1..3 · what NET-1 deferred, collected ────────────────────────
+    // Three more, and only the last of them touches which pairs get a road (it
+    // does not — it changes which of them can be a SEA road):
+    //
+    //   5. TRUE-COST MODE SELECTION (E-NET-1). The land-vs-sea verdict compared
+    //      polyline LENGTHS and threw away every terrain term the cost function
+    //      had just computed. It now re-scores both candidates in one declared
+    //      difficulty unit, and the bare `1.15` land preference is the named
+    //      constant SEA_ROUTE_BIAS. DECLARED SHIFT: a pair whose land route is
+    //      short but hard, or long but easy, can change mode across this date.
+    //   6. LAKES ARE NOT THE SEA (E-NET-2). "Water" was `h < 20`, which is every
+    //      lake as well as the ocean, so a lakeside pair could be given a sea
+    //      lane and a boat could put out from a village on a pond. `cells.f` +
+    //      `pack.features` name each water body; only an `ocean` feature is the
+    //      sea now. DECLARED SHIFT on any pack that has lakes.
+    //   7. THE ITERATION GUARD REPORTS (E-NET-3). MAX_ITER exhaustion returned
+    //      null and the road silently vanished off the map with nothing said.
+    //      Exhaustions are now counted, named, and carried back in the reply.
     'settlementEngine:computeRoadNetwork'(data, rid) {
       try {
         const { edges } = data || {};
@@ -625,9 +691,57 @@
         const R = cells.r || [];
         const P = cells.p || [];
         const C = cells.c || [];
+        // NET-1 reads. Each is optional: a pack without it degrades to the
+        // pre-NET-1 rule for that one feature rather than failing the request.
+        const T     = cells.t || [];       // distance field (see 4 above)
+        const HAVEN = cells.haven || [];   // coastal land cell -> the water it fronts
+        const BURG  = cells.burg || [];    // burg id at the cell, 0 = none
+        // E-NET-2 read: `cells.f` is the FEATURE (connected body) each cell belongs
+        // to, and `pack.features[f].type` names it — 'ocean', 'lake' or 'island'.
+        const F        = cells.f || [];
+        const FEATURES = Array.isArray(pack.features) ? pack.features : [];
+
+        // ── E-NET-2 · A LAKE IS NOT THE SEA ────────────────────────────────
+        // "Water" here was `h < 20`, and h < 20 is EVERY body of water FMG holds:
+        // the ocean, an inland sea, and the pond behind the mill. So a pair of
+        // settlements on opposite shores of a lake could be handed a sea lane, a
+        // village on a tarn counted as coastal and got a harbour, and the haven
+        // exit put a boat out onto standing water it could never leave. Nothing
+        // reddened, because every one of those answers is internally consistent.
+        //
+        // FMG already knows the difference and has since reGraph: every cell
+        // carries `f`, the id of the connected body it belongs to, and
+        // `pack.features[f].type` is 'ocean' for water that reaches the map frame
+        // and 'lake' for water that does not. The router reads it and the sea
+        // becomes the sea.
+        //
+        // ⚠ THE CHARTER SAID THIS FIELD WAS "ALREADY CAPTURED". IT IS NOT — and
+        // the distinction matters to the next reader. `getSpatialPack` below copies
+        // {h, biome, r, p, c, fl, g} and a grid climate pair, and no more; `f` has
+        // never crossed the bridge, so the FROZEN CANON still cannot tell a lake
+        // from the ocean and `seaLanes.js` still runs on the height rule. This car
+        // cures the RENDER tier, which reads the live pack and needs no capture.
+        // Curing the canon means widening the capture and bumping SEA_LANE_VERSION
+        // — a discrete re-canonize event, not a router change.
+        //
+        // DEGRADATION, on the NET-1 rule: a pack with no `f` or no `features` (a
+        // synthetic fixture, a hand-edited or pre-markup pack) keeps the height
+        // rule exactly, so nothing that cannot answer the question is made to.
+        // Inside the feature branch the read FAILS CLOSED — a water cell whose
+        // body is unnamed is not the sea, because an unnamed body is not evidence
+        // of an ocean.
+        const waterBodiesKnown = F.length > 0 && FEATURES.length > 1;
+        const seaBodies = new Set();
+        if (waterBodiesKnown) {
+          for (let k = 0; k < FEATURES.length; k++) {
+            const feat = FEATURES[k];
+            if (feat && feat.type === 'ocean') seaBodies.add(k);
+          }
+        }
 
         const isLand   = (i) => (H[i] || 0) >= 20;
-        const isOcean  = (i) => (H[i] || 0) <  20;
+        const isOcean  = (i) => (H[i] || 0) < 20
+          && (!waterBodiesKnown || seaBodies.has(F[i]));
 
         // Biome costs keyed by FMG biome id. Missing biomes fall back to 2.
         // (FMG biome ids: 0 marine, 1 hot desert, 2 cold desert, 3 savanna,
@@ -650,8 +764,87 @@
           1.9,   // wetland
         ];
 
-        const landCost = (cell) => {
-          if (!isLand(cell)) return Infinity;
+        // ── NET-1 tuning constants, named so the coupling below is legible ──
+        const OFF_BURG_MULT   = 3;     // a cell with no burg costs three times one that has
+        const CORRIDOR_REUSE  = 0.5;   // a hop an earlier road already took is half price
+        const SEA_BASE        = 0.9;   // cost of hugging the coastline (|t| === 1)
+        const SEA_DEPTH_STEP  = 0.12;  // added per band away from the shore
+        const SEA_DEPTH_CAP   = 10;    // FMG's own water markup limit
+        // ⚠ THE HEURISTIC SCALE IS LOAD-BEARING, AND GETTING IT WRONG SILENTLY
+        // DELETES THE TWO FEATURES ABOVE. A* only considers a route the heuristic
+        // does not already price out of reach, so an h that over-estimates the
+        // CHEAPEST possible step never explores the cheap steps: a first build of
+        // this handler scaled h by 0.9 × OFF_BURG_MULT and MEASURED corridor
+        // re-use and the burg discount as having ZERO effect on every fixture —
+        // both features present in the cost function, neither ever reached.
+        // So both scales are the true cost FLOOR of their mode, which makes the
+        // heuristic admissible and the returned road a genuine minimum-cost route.
+        // Measured cost of admissibility on a 15,000-cell pack with 20 long
+        // crossings: none — the search demand is the same at every scale from
+        // 0.45 to 2.7 (it is bounded by the graph, not by h, on uniform terrain).
+        // Derived from the constants rather than written out, so a later tuning
+        // edit cannot silently make h inadmissible again. OFF_BURG_MULT is absent
+        // from both products on purpose: it only ever RAISES a cost (a burg cell
+        // pays ×1), so the cheapest land step is the cheapest biome on a burg cell
+        // over a re-used hop, and the cheapest sea step is the shoreline over one.
+        const MIN_BIOME_COST = Math.min(...BIOME_COST);   // grassland, 0.9
+        const LAND_H_SCALE = MIN_BIOME_COST * CORRIDOR_REUSE;
+        const SEA_H_SCALE  = SEA_BASE * CORRIDOR_REUSE;
+
+        // ── E-NET-1 · THE LAND PREFERENCE, NAMED ───────────────────────────
+        // How much cheaper a sea crossing must be before a road becomes a lane.
+        // It was a bare `1.15` sitting in the mode comparison at the bottom of
+        // this handler with no name and no stated meaning. It is a real modelling
+        // claim and it now says so: the water route is charged a 15 % surcharge
+        // because the cost model prices the CROSSING and not the voyage — no
+        // harbour dues, no hull, no crew, no waiting on a wind — so a sea route
+        // that merely ties on terrain is not actually the cheaper way to travel.
+        // Land is the default; the sea has to win by a margin.
+        const SEA_ROUTE_BIAS = 1.15;
+
+        // Every (cell, cell) hop a road has already taken this request. Written
+        // only from the path actually CHOSEN for an edge, never from a candidate
+        // that lost the land-vs-sea comparison.
+        const usedCellPairs = new Set();
+        const hopKey = (a, b) => (a < b ? a + ':' + b : b + ':' + a);
+        const reuse = (from, cell) =>
+          (from != null && usedCellPairs.has(hopKey(from, cell)) ? CORRIDOR_REUSE : 1);
+
+        // ── E-NET-1 · TRAVEL DIFFICULTY, IN ONE DECLARED UNIT ──────────────
+        // ⛔ THE UNIT IS THE WHOLE POINT. `landDifficulty` and `seaDifficulty`
+        // below both answer THE SAME QUESTION IN THE SAME UNIT: **what one map
+        // unit of travel through this cell costs, where the easiest going in
+        // either medium is 0.9** — grassland ashore, the shoreline band afloat.
+        // The two floors coincide at 0.9 by construction (MIN_BIOME_COST is
+        // grassland's 0.9 and SEA_BASE is 0.9), and that coincidence is the ONLY
+        // reason a land number and a sea number may be compared at all. A future
+        // edit that moves one floor without the other silently re-scales the
+        // land-vs-sea choice, so a pin brackets the ratio at which the verdict
+        // turns and would red if either floor moved alone.
+        //
+        // ONE TERM IS DELIBERATELY ABSENT, AND ONE DELIBERATELY PRESENT:
+        //   • OFF_BURG_MULT is OUT. It is a preference ("roads go where people
+        //     are"), not a difficulty — a mule does not walk three times as hard
+        //     through empty country. Left in, it would charge every land route
+        //     ~3× against an unmultiplied sea route and hand almost every coastal
+        //     pair to the sea. (The pin for this is the no-wall control below:
+        //     its land route is off-burg end to end and must still beat the sea.)
+        //   • CORRIDOR_REUSE is IN, and this was MEASURED, not assumed. Scoring
+        //     the two candidates WITHOUT it looked tidier — a verdict about pure
+        //     terrain — but it judges each route under an objective the search did
+        //     not use: a land route that had just detoured onto an existing trunk
+        //     road, and was therefore CHEAPER to travel, scored as the longer line
+        //     it now is and lost the edge to the sea. Observed on a 13×9 fixture:
+        //     the road routed alone stayed ashore and the same road routed after
+        //     two neighbours stole its corridor put out to sea. Scoring with the
+        //     discount keeps the verdict consistent with the path it is judging.
+        //   ⚠ SO THE VERDICT IS A BATCH PROPERTY, exactly as the LINE already is
+        //     (see `usedCellPairs` above): a road's mode may legitimately differ
+        //     between routing it alone and routing it with its neighbours, and
+        //     RoadsLayer always sends the whole set in one call, which is what
+        //     makes it well-defined. It is NOT order-free and nothing here claims
+        //     it is.
+        const landDifficulty = (cell) => {
           const h = H[cell] || 0;
           const b = B[cell] ?? 4;
           const base = BIOME_COST[b] ?? 2.0;
@@ -661,12 +854,33 @@
           return base * elevMult + riverBias;
         };
 
-        const seaCost = (cell) => {
-          if (!isOcean(cell)) return Infinity;
-          // Shallow/coastal ocean (h 10–20) is slightly more expensive than
-          // deep water — hugs the coast for short hops, opens up for long ones.
+        const seaDifficulty = (cell) => {
+          const t = T[cell];
+          if (typeof t === 'number' && t < 0) {
+            // -1 is the shoreline; each band out costs a little more, so a lane
+            // between two harbours follows the coast rather than the open sea.
+            return SEA_BASE + SEA_DEPTH_STEP * (Math.min(-t, SEA_DEPTH_CAP) - 1);
+          }
+          if (T.length) {
+            // Water FMG's markup never reached — beyond its -10 limit. Open ocean.
+            return SEA_BASE + SEA_DEPTH_STEP * (SEA_DEPTH_CAP - 1);
+          }
+          // No distance field at all (a synthetic or pre-markup pack): the
+          // pre-NET-1 elevation rule, unchanged, so such packs do not move.
           const h = H[cell] || 0;
           return h >= 15 ? 1.2 : 0.9;
+        };
+
+        const landCost = (cell, from) => {
+          if (!isLand(cell)) return Infinity;
+          // A burg on the cell is the discount; everywhere else pays the multiplier.
+          const settled = BURG[cell] ? 1 : OFF_BURG_MULT;
+          return landDifficulty(cell) * settled * reuse(from, cell);
+        };
+
+        const seaCost = (cell, from) => {
+          if (!isOcean(cell)) return Infinity;
+          return seaDifficulty(cell) * reuse(from, cell);
         };
 
         // Pack has `findCell(x, y)` as a global. Fall back to a linear scan
@@ -690,49 +904,132 @@
           return best;
         };
 
+        // A binary min-heap over open-list entries, ordered by (f, cell id).
+        // ⚠ THE COMPARATOR IS A STRICT TOTAL ORDER ON PURPOSE. The old open list
+        // was a linear scan that popped the FIRST lowest-f entry, so equal-f ties
+        // resolved by INSERTION ORDER — an accident of how the neighbour arrays
+        // happened to be walked. Breaking ties on the cell id instead makes the
+        // popped sequence, and therefore the path, a pure function of the graph.
+        // (Equal-f ties are common here: a uniform-cost grid produces them at
+        // every step.) This also replaces an O(open) pop with O(log open), which
+        // matters now that NET-1 routes roughly twice as many edges per request.
+        class CellHeap {
+          constructor() { this.a = []; }
+          get size() { return this.a.length; }
+          less(x, y) { return x.f !== y.f ? x.f < y.f : x.c < y.c; }
+          push(item) {
+            const a = this.a;
+            a.push(item);
+            let i = a.length - 1;
+            while (i > 0) {
+              const parent = (i - 1) >> 1;
+              if (!this.less(a[i], a[parent])) break;
+              const t = a[i]; a[i] = a[parent]; a[parent] = t;
+              i = parent;
+            }
+          }
+          pop() {
+            const a = this.a;
+            const n = a.length;
+            if (n === 0) return undefined;
+            const top = a[0];
+            const last = a.pop();
+            if (n > 1) {
+              a[0] = last;
+              let i = 0;
+              for (;;) {
+                const l = 2 * i + 1, r = 2 * i + 2;
+                let best = i;
+                if (l < a.length && this.less(a[l], a[best])) best = l;
+                if (r < a.length && this.less(a[r], a[best])) best = r;
+                if (best === i) break;
+                const t = a[i]; a[i] = a[best]; a[best] = t;
+                i = best;
+              }
+            }
+            return top;
+          }
+        }
+
         // A* over the pack-cell adjacency graph.
         // cells.c[i] is the neighbour index list for cell i.
+        //
+        // Returns an array of CELL IDS (the caller maps them to points), because
+        // NET-1's corridor re-use has to record which HOPS a road took and a list
+        // of coordinates cannot say that.
+        //
+        // `costFn(next, current)` — the current cell is the second parameter, so
+        // a cost can depend on the hop rather than only on the destination. That
+        // is what corridor re-use needs; every other term ignores it.
+        //
+        // `hScale` scales the straight-line heuristic to the cost scale in play;
+        // see LAND_H_SCALE / SEA_H_SCALE above for why it is not simply 1.
+        //
+        // ── E-NET-3 · THE ITERATION GUARD REPORTS ──────────────────────────
+        // `MAX_ITER` is a real ceiling and hitting it is a real event: the search
+        // gives up, returns null, and the road it was drawing SILENTLY VANISHES
+        // from the map. Nothing said so — not a warning, not a count, not a
+        // difference in the reply — so a realm whose roads were quietly thinning
+        // out looked exactly like a realm with fewer roads. The guard now keeps
+        // books: how many searches ran, how deep the deepest one went, how many
+        // gave up, and which roads they were drawing. The reply carries it back
+        // and the layer says so in the parent's console.
+        //
+        // THE HEADROOM, MEASURED: on a 15,000-cell realm pack with 42 edges the
+        // deepest single search is well inside this ceiling, so the counters are
+        // expected to read zero. That is the point of reporting them — a zero you
+        // can see is worth more than a silence you cannot.
         const MAX_ITER = 25000;
-        const aStar = (startCell, goalCell, costFn) => {
+        const searchLedger = { searches: 0, exhausted: 0, peakIterations: 0 };
+        const aStar = (startCell, goalCell, costFn, hScale) => {
           if (startCell == null || goalCell == null) return null;
           if (startCell < 0 || goalCell < 0) return null;
-          if (startCell === goalCell) return [{ x: P[startCell][0], y: P[startCell][1] }];
+          if (startCell === goalCell) return [startCell];
 
           const goalP = P[goalCell];
           const heuristic = (c) => {
             const p = P[c];
             if (!p) return Infinity;
-            return Math.hypot(p[0] - goalP[0], p[1] - goalP[1]);
+            return Math.hypot(p[0] - goalP[0], p[1] - goalP[1]) * hScale;
           };
 
           const gScore = new Map();
           const came   = new Map();
           gScore.set(startCell, 0);
 
-          // Simple open list as sorted array — fine for paths up to a few
-          // thousand cells. Replace with a binary heap if this becomes hot.
-          const open = [{ c: startCell, f: heuristic(startCell) }];
-          const inOpen = new Set([startCell]);
+          const open = new CellHeap();
+          open.push({ c: startCell, f: heuristic(startCell), g: 0 });
 
+          searchLedger.searches++;
           let iter = 0;
-          while (open.length && iter++ < MAX_ITER) {
-            // Pop lowest-f (linear scan is faster than re-sorting on push)
-            let bestIdx = 0;
-            for (let i = 1; i < open.length; i++) {
-              if (open[i].f < open[bestIdx].f) bestIdx = i;
-            }
-            const { c: current } = open.splice(bestIdx, 1)[0];
-            inOpen.delete(current);
+          /** Book the search and hand back its answer, whatever it is. */
+          const done = (path) => {
+            // `iter` is post-incremented by the loop test, so it reads one past the
+            // budget on the run that trips the guard. Report what was SPENT.
+            const used = iter > MAX_ITER ? MAX_ITER : iter;
+            if (used > searchLedger.peakIterations) searchLedger.peakIterations = used;
+            // EXHAUSTED means the budget ran out with work still queued — not the
+            // same thing as an honestly unreachable goal, which drains the open set
+            // and leaves `open.size` at zero. Both return null; only one is a bug
+            // in the making, and conflating them is what made this silent.
+            if (path === null && iter >= MAX_ITER && open.size > 0) searchLedger.exhausted++;
+            return path;
+          };
+          while (open.size && iter++ < MAX_ITER) {
+            const entry = open.pop();
+            const current = entry.c;
+            // Stale entry: a cheaper route to this cell was found after it was
+            // pushed. (No decrease-key; the cheaper copy pops first.)
+            if (entry.g > (gScore.get(current) ?? Infinity)) continue;
 
             if (current === goalCell) {
-              const path = [];
+              const path = [current];
               let cur = current;
-              path.push({ x: P[cur][0], y: P[cur][1] });
               while (came.has(cur)) {
                 cur = came.get(cur);
-                path.unshift({ x: P[cur][0], y: P[cur][1] });
+                path.unshift(cur);
               }
-              return path;
+              return done(path);
             }
 
             const neighbours = C[current] || [];
@@ -741,7 +1038,7 @@
 
             for (let k = 0; k < neighbours.length; k++) {
               const n = neighbours[k];
-              const nc = costFn(n);
+              const nc = costFn(n, current);
               if (!isFinite(nc)) continue;
               const nP = P[n];
               if (!nP) continue;
@@ -750,15 +1047,63 @@
               if (tentativeG < (gScore.get(n) ?? Infinity)) {
                 came.set(n, current);
                 gScore.set(n, tentativeG);
-                const f = tentativeG + heuristic(n);
-                if (!inOpen.has(n)) {
-                  open.push({ c: n, f });
-                  inOpen.add(n);
-                }
+                open.push({ c: n, f: tentativeG + heuristic(n), g: tentativeG });
               }
             }
           }
-          return null;
+          return done(null);
+        };
+
+        /** Cell-id path -> the polyline the parent renders. */
+        const toPoints = (cellPath) =>
+          (cellPath || []).map((c) => ({ x: P[c][0], y: P[c][1] }));
+
+        /** Straight-line map distance between two cell centroids. */
+        const cellSpan = (a, b) => {
+          const pa = P[a], pb = P[b];
+          if (!pa || !pb) return 0;
+          return Math.hypot(pb[0] - pa[0], pb[1] - pa[1]);
+        };
+
+        /**
+         * E-NET-1 · THE TRUE COST OF A ROUTE, in the declared unit above: the sum
+         * over every hop of (the difficulty of the cell entered) × (the distance
+         * of that hop). This is the SAME accumulation A* itself performs, which is
+         * exactly why it is comparable — it re-scores the CHOSEN path with the one
+         * shaping term taken out, rather than inventing a second cost model.
+         * A path of one cell (start === goal) has travelled nothing and costs 0.
+         */
+        const routeDifficulty = (cellPath, difficultyOf) => {
+          if (!Array.isArray(cellPath) || cellPath.length < 2) return 0;
+          let total = 0;
+          for (let i = 1; i < cellPath.length; i++) {
+            const from = cellPath[i - 1], to = cellPath[i];
+            total += difficultyOf(to) * reuse(from, to) * cellSpan(from, to);
+          }
+          return total;
+        };
+
+        /**
+         * A sea route is the water leg PLUS the two quay hops, and the quays are
+         * charged too: the boat's run out of the harbour and into the far one is
+         * sailing, and leaving it unpriced would make every sea route look two
+         * free hops cheaper than it is. Each quay hop is charged at the difficulty
+         * of the WATER cell it touches, which is what a harbour approach costs.
+         */
+        const seaRouteDifficulty = (startCell, midCells, goalCell) => {
+          if (!Array.isArray(midCells) || midCells.length < 1) return Infinity;
+          const first = midCells[0], last = midCells[midCells.length - 1];
+          return routeDifficulty(midCells, seaDifficulty)
+            + seaDifficulty(first) * cellSpan(startCell, first)
+            + seaDifficulty(last) * cellSpan(last, goalCell);
+        };
+
+        /** Bank every hop of a chosen path so the roads that follow ride it cheap. */
+        const recordCorridor = (cellPath) => {
+          if (!Array.isArray(cellPath)) return;
+          for (let i = 1; i < cellPath.length; i++) {
+            usedCellPairs.add(hopKey(cellPath[i - 1], cellPath[i]));
+          }
         };
 
         // Find the nearest ocean cell to a coastal land cell (BFS outward).
@@ -786,65 +1131,261 @@
           return false;
         };
 
+        // ── NET-1 #9 · THE HAVEN EXIT ──────────────────────────────────────
+        // FMG's markupPack already recorded, for every LAND_COAST cell, the water
+        // neighbour nearest its centroid (`cells.haven`) — the cell a boat would
+        // actually put out from. Reading it beats breadth-first searching for
+        // "some ocean around here": it is exact, it is O(1), and it is the same
+        // answer the rest of FMG uses when it asks where a burg's harbour is.
+        // The BFS stays as the fallback for a pack with no haven array (a
+        // synthetic fixture, or a pre-markup pack), so nothing regresses.
+        const havenExit = (cell) => {
+          if (isOcean(cell)) return cell;
+          const h = HAVEN[cell];
+          if (typeof h === 'number' && h >= 0 && h < P.length && P[h] && isOcean(h)) return h;
+          return findNearestOcean(cell);
+        };
+
         const paths = {};
+        // E-NET-3: the roads whose search gave up at the guard, named. Capped so a
+        // pathological map cannot turn the reply into a megabyte of ids; the COUNT
+        // beside it is never capped, so the cap can never hide the scale.
+        const EXHAUSTED_ID_CAP = 20;
+        const exhaustedEdgeIds = [];
         for (const e of edges) {
           const startC = findCellAt(e.fromX, e.fromY);
           const goalC  = findCellAt(e.toX,   e.toY);
           if (startC < 0 || goalC < 0) continue;
+          const exhaustedBefore = searchLedger.exhausted;
 
           let landPath = null;
           if (isLand(startC) && isLand(goalC)) {
-            landPath = aStar(startC, goalC, landCost);
+            landPath = aStar(startC, goalC, landCost, LAND_H_SCALE);
           }
 
-          let seaPath = null;
+          let seaMid = null;
           const canSea = (e.preferSea || !landPath) && isCoastal(startC) && isCoastal(goalC);
           if (canSea) {
-            const seaStart = findNearestOcean(startC);
-            const seaGoal  = findNearestOcean(goalC);
+            const seaStart = havenExit(startC);
+            const seaGoal  = havenExit(goalC);
             if (seaStart != null && seaGoal != null) {
-              const mid = aStar(seaStart, seaGoal, seaCost);
-              if (mid && mid.length >= 2) {
-                seaPath = [
-                  { x: P[startC][0], y: P[startC][1] },
-                  ...mid,
-                  { x: P[goalC][0], y: P[goalC][1] },
-                ];
-              }
+              const mid = aStar(seaStart, seaGoal, seaCost, SEA_H_SCALE);
+              if (mid && mid.length >= 2) seaMid = mid;
             }
           }
 
-          // Pick the cheaper-ish option. We don't have true costs here, so use
-          // polyline length as a proxy. Sea only wins if clearly shorter, since
-          // land paths are usually preferred for adjacent settlements.
-          const plen = (pts) => {
-            if (!pts) return Infinity;
-            let t = 0;
-            for (let i = 1; i < pts.length; i++) {
-              t += Math.hypot(pts[i].x - pts[i-1].x, pts[i].y - pts[i-1].y);
-            }
-            return t;
-          };
+          const landPts = landPath ? toPoints(landPath) : null;
+          // A sea route is the two quays plus the water leg between them.
+          const seaPts = seaMid
+            ? [{ x: P[startC][0], y: P[startC][1] },
+               ...toPoints(seaMid),
+               { x: P[goalC][0], y: P[goalC][1] }]
+            : null;
 
-          let chosen = null, mode = 'land';
-          if (landPath && seaPath) {
-            chosen = plen(seaPath) * 1.15 < plen(landPath) ? seaPath : landPath;
-            mode = chosen === seaPath ? 'sea' : 'land';
-          } else if (landPath) {
-            chosen = landPath; mode = 'land';
-          } else if (seaPath) {
-            chosen = seaPath; mode = 'sea';
+          // ── E-NET-1 · THE MODE IS CHOSEN ON COST, NOT ON LENGTH ───────────
+          // What stood here compared the two POLYLINE LENGTHS and said so in its
+          // own comment ("We don't have true costs here, so use polyline length
+          // as a proxy"). Length is not cost: it cannot tell a road over a glacier
+          // ridge from the same road across grassland, so a land route through
+          // terrain the cost function had just priced at four times grassland won
+          // the comparison outright as long as it was geometrically shorter — and
+          // every one of NET-1's terrain terms was thrown away at the last step.
+          //
+          // Now both candidates are re-scored in the ONE declared difficulty unit
+          // (see landDifficulty / seaDifficulty above) and the bias is a named
+          // constant.
+          const landScore = landPath ? routeDifficulty(landPath, landDifficulty) : Infinity;
+          const seaScore = seaMid ? seaRouteDifficulty(startC, seaMid, goalC) : Infinity;
+
+          let chosen = null, chosenCells = null, mode = 'land';
+          if (landPts && seaPts) {
+            const seaWins = seaScore * SEA_ROUTE_BIAS < landScore;
+            chosen      = seaWins ? seaPts  : landPts;
+            chosenCells = seaWins ? seaMid  : landPath;
+            mode        = seaWins ? 'sea'   : 'land';
+          } else if (landPts) {
+            chosen = landPts; chosenCells = landPath; mode = 'land';
+          } else if (seaPts) {
+            chosen = seaPts;  chosenCells = seaMid;   mode = 'sea';
           }
 
           if (chosen && chosen.length >= 2) {
             paths[e.id] = { points: chosen, mode };
+            // Only the route we actually drew becomes a corridor — a candidate
+            // that lost the comparison above must not make the next road cheap
+            // along a line nobody travels.
+            recordCorridor(chosenCells);
+          }
+          // E-NET-3: attribute the give-up to the road it was drawing. A LAND
+          // candidate can exhaust and the edge still be drawn by sea, and that is
+          // worth saying too: the road on the map is not the road the model wanted.
+          if (searchLedger.exhausted > exhaustedBefore && exhaustedEdgeIds.length < EXHAUSTED_ID_CAP) {
+            exhaustedEdgeIds.push(e.id);
           }
         }
 
-        reply(rid, { type: 'fmg:roadNetworkReply', paths });
+        // ── E-NET-3 · THE REPORT ───────────────────────────────────────────
+        // Additive: `paths` is untouched and every existing consumer reads only
+        // that. `diagnostics` is a fixed-shape summary — six integers, an id list
+        // capped at twenty, and the guard's own value so a reader never has to go
+        // looking for the constant to know what the peak is a fraction OF.
+        const diagnostics = {
+          edges: edges.length,
+          routed: Object.keys(paths).length,
+          searches: searchLedger.searches,
+          maxIterations: MAX_ITER,
+          peakIterations: searchLedger.peakIterations,
+          exhaustedSearches: searchLedger.exhausted,
+          exhaustedEdgeIds,
+        };
+        if (searchLedger.exhausted > 0) {
+          console.warn(
+            `[sfBridge] computeRoadNetwork: ${searchLedger.exhausted} of `
+            + `${searchLedger.searches} route searches hit the ${MAX_ITER}-iteration guard`
+            + ` and were abandoned — those roads are missing from the map.`,
+            exhaustedEdgeIds,
+          );
+        }
+
+        reply(rid, { type: 'fmg:roadNetworkReply', paths, diagnostics });
       } catch (err) {
         console.warn('[sfBridge] computeRoadNetwork failed', err);
         replyError(rid, 'fmg:roadNetworkReply', err);
+      }
+    },
+
+    // ── Spatial pack capture (Phase 5.5 MODULATION — the keystone's live seam) ──
+    // READ-ONLY snapshot of the terrain cell arrays the parent needs to freeze a
+    // spatial digest at an entitled canonize: h (height), biome, r (river flag), p
+    // (cell centroid [x,y]), c (neighbour adjacency). It MUTATES NOTHING — it only
+    // copies the already-generated pack arrays out (the pure digest builder runs
+    // parent-side over this capture, never over the iframe). TypedArrays are
+    // converted to plain arrays so the parent's normalizeSpatialPack (which uses
+    // Array.isArray) reads them; p/c are already plain arrays. Because the pack is
+    // static in memory once generated, two captures of the same map are identical
+    // (the parent asserts this and freezes the first regardless — freeze-first).
+    //
+    // ── W-CAP CAP-1 (design §2 D1: THE ONE CAPTURE-EXTENSION ACT) ───────────────
+    // Four fields join the copy, in ONE act, so the capture surface is widened once
+    // rather than a field per consuming wave:
+    //   • cells.fl — Uint16 FLUX, PACK-indexed (main.js's river model; the volume's
+    //     river-navigability banding reads it).
+    //   • cells.g  — the pack cell's GRID cell index, PACK-indexed. main.js:1245
+    //     mints it as `createTypedArray({maxValue: grid.points.length, …})`.
+    //   • grid.temp — Int8 temperature in DEGREES CELSIUS, GRID-indexed
+    //     (main.js:991 `const cells = grid.cells;` … `minmax(tempSeaLevel - drop, -128, 127)`).
+    //   • grid.prec — Uint8 precipitation in FMG's own 0..255 units, GRID-indexed
+    //     (main.js:1042 `const {cells, cellsX, cellsY} = grid;`).
+    //
+    // ⛔ THE DENOMINATOR IS THE WHOLE POINT. temp/prec are indexed by GRID cell and
+    // h/biome/r/fl by PACK cell — DIFFERENT LENGTHS, different meaning per index. They
+    // are therefore carried under a SEPARATE `grid` key, never mixed into `cells`,
+    // and `cells.g` is the ONLY declared bridge between the two spaces. A reader that
+    // indexes `grid.temp` with a pack cell id is reading a different cell and nothing
+    // will ever red — so the shape refuses to make that mistake spellable.
+    //
+    // The pack may legitimately carry NO flux/g (a hand-edited heightmap before the
+    // river pass) and there may be no `grid` at all; every new field degrades to an
+    // EMPTY array, exactly as `biome`/`r` already do, and the parent's normalize
+    // treats absent as empty. No new failure mode, no throw.
+    'settlementEngine:getSpatialPack'(data, rid) {
+      try {
+        const cells = pack?.cells;
+        if (!cells || !cells.h || !cells.c) {
+          return reply(rid, { type: 'fmg:spatialPackReply', pack: null });
+        }
+        const plain = (arr) => (Array.isArray(arr) ? arr : (arr ? Array.from(arr) : []));
+        // `grid` is a top-level `var` global (main.js:125) exactly as `pack` is, but a
+        // capture can be requested before the grid exists — read it defensively so a
+        // missing global degrades to empty arrays instead of a caught ReferenceError
+        // that would take the WHOLE capture down with it.
+        const gridCells = (typeof grid !== 'undefined' && grid) ? grid.cells : null;
+        reply(rid, {
+          type: 'fmg:spatialPackReply',
+          pack: {
+            cells: {
+              h: plain(cells.h),
+              biome: plain(cells.biome),
+              r: plain(cells.r),
+              // p is an array of [x,y] pairs, c an array of neighbour-index arrays;
+              // both are already plain arrays in the pack — copy the outer array so
+              // the reply can't alias live pack state.
+              p: Array.isArray(cells.p) ? cells.p.map((pt) => (Array.isArray(pt) ? [pt[0], pt[1]] : pt)) : [],
+              c: Array.isArray(cells.c) ? cells.c.map((nb) => (Array.isArray(nb) ? nb.slice() : plain(nb))) : [],
+              // CAP-1, PACK-indexed (same denominator as h/biome/r above).
+              fl: plain(cells.fl),
+              g: plain(cells.g),
+            },
+            // CAP-1, GRID-indexed — a DIFFERENT denominator, hence its own key.
+            grid: {
+              temp: plain(gridCells && gridCells.temp),
+              prec: plain(gridCells && gridCells.prec),
+            },
+          },
+        });
+      } catch (err) {
+        console.warn('[sfBridge] getSpatialPack failed', err);
+        replyError(rid, 'fmg:spatialPackReply', err);
+      }
+    },
+
+    // Rasterize the rendered terrain to a small JPEG data URL for a maps-gallery
+    // cover (parent: src/lib/mapThumb.js). Best-effort by contract: any failure
+    // (no SVG, tainted canvas from an external <image>, unsupported toDataURL)
+    // replies { dataUrl: null } and the caller falls back to the terrain
+    // placeholder. This must NEVER throw across the bridge or block a share.
+    async 'settlementEngine:exportThumb'(data, rid) {
+      try {
+        const svgEl = document.getElementById('map');
+        const srcW = window.graphWidth || (svgEl ? svgEl.clientWidth : 0) || 0;
+        const srcH = window.graphHeight || (svgEl ? svgEl.clientHeight : 0) || 0;
+        if (!svgEl || srcW < 1 || srcH < 1) {
+          return reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
+        }
+        const size = Math.max(64, Math.min(1024, Number(data && data.size) || 480));
+        const fit = Math.min(size / srcW, size / srcH, 1);
+        const outW = Math.max(1, Math.round(srcW * fit));
+        const outH = Math.max(1, Math.round(srcH * fit));
+
+        // Clone the live SVG, pin explicit dimensions + a full-map viewBox so the
+        // export captures the WHOLE map (not the current pan/zoom crop), and
+        // neutralize the camera transform FMG applies to the #viewbox group.
+        const clone = svgEl.cloneNode(true);
+        clone.setAttribute('width', String(srcW));
+        clone.setAttribute('height', String(srcH));
+        clone.setAttribute('viewBox', '0 0 ' + srcW + ' ' + srcH);
+        clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        const vb = clone.querySelector('#viewbox');
+        if (vb) vb.removeAttribute('transform');
+        const xml = new XMLSerializer().serializeToString(clone);
+        const svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+
+        const dataUrl = await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = outW;
+              canvas.height = outH;
+              const ctx = canvas.getContext('2d');
+              if (!ctx) return resolve(null);
+              // White matte: JPEG has no alpha, so transparency would render black.
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, outW, outH);
+              ctx.drawImage(img, 0, 0, outW, outH);
+              resolve(canvas.toDataURL('image/jpeg', 0.82));
+            } catch (_) {
+              resolve(null); // tainted canvas / unsupported — placeholder fallback
+            }
+          };
+          img.onerror = () => resolve(null);
+          img.src = svgUrl;
+        });
+
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: dataUrl, w: outW, h: outH });
+      } catch (err) {
+        console.warn('[sfBridge] exportThumb failed', err);
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
       }
     },
 
@@ -857,14 +1398,16 @@
       try {
         if (typeof window.zoomTo === 'function' && cx != null && cy != null) {
           window.zoomTo(cx, cy, scale || 3, duration);
-        } else if (window.zoom && window.svg && window.d3) {
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          // PHANTOM-GLOBAL FIX: zoom/svg are lexical globals, not window props —
+          // this d3 fallback was dead. Guarded bare access makes it live.
           const w = window.graphWidth || 0;
           const h = window.graphHeight || 0;
           const s = scale || 1;
           const tx = w / 2 - cx * s;
           const ty = h / 2 - cy * s;
-          window.svg.transition().duration(duration)
-            .call(window.zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
+          svg.transition().duration(duration)
+            .call(zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
         }
         // The zoom event will fire and broadcast a new viewport; also reply
         // synchronously with the pre-transition state for the caller.
@@ -876,9 +1419,24 @@
 
     'settlementEngine:fitMap'(data, rid) {
       try {
-        if (window.zoom && window.svg && window.d3) {
-          window.svg.transition().duration(600)
-            .call(window.zoom.transform, window.d3.zoomIdentity);
+        // The embedded build's svg/zoom are top-level let bindings in main.js
+        // (script-scoped, NOT window properties), so the old window.* guard
+        // silently no-oped while replying success. resetZoom() is a top-level
+        // function DECLARATION (thus a real global) that closes over the
+        // scoped svg/zoom and applies the identity transform -- which IS the
+        // fitted full-realm view in embedded mode. Use it; fall back to
+        // fitMapToScreen (canvas re-size only) and the guarded bare-global path
+        // (the phantom-global sweep converted this last resort from the dead
+        // window.* form so it too is live if ever reached).
+        if (typeof resetZoom === 'function') {
+          resetZoom(600);
+        } else if (typeof fitMapToScreen === 'function') {
+          fitMapToScreen();
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          svg.transition().duration(600)
+            .call(zoom.transform, window.d3.zoomIdentity);
+        } else {
+          throw new Error('fitMap: no fit mechanism available in this build');
         }
         reply(rid, { type: 'fmg:viewportReply', ...getCurrentViewport() });
       } catch (err) {
@@ -892,38 +1450,6 @@
         reply(rid, { type: 'fmg:snapshotReply', snapshot });
       } catch (err) {
         replyError(rid, 'fmg:snapshotReply', err);
-      }
-    },
-
-    // Rasterize the rendered FMG terrain to a small JPEG data URL so the maps
-    // gallery tile can show the map image (generated-terrain shares have no
-    // customBackdrop, so no thumb otherwise). Reuses FMG's own getMapURL export
-    // (self-contained SVG blob: inlined fonts/styles, same-origin → no canvas
-    // taint), then downscales via canvas like FMG's PNG path. Best-effort: any
-    // failure replies with an error and the share falls back to the placeholder.
-    async 'settlementEngine:exportThumb'(data, rid) {
-      try {
-        const maxW = Number(data?.maxW) || 480;
-        const url = await getMapURL('png', { fullMap: true, noScaleBar: true });
-        const img = new Image();
-        img.onload = () => {
-          try {
-            const ratio = img.height / img.width;
-            const w = Math.min(maxW, img.width);
-            const h = Math.round(w * ratio);
-            const c = document.createElement('canvas');
-            c.width = w; c.height = h;
-            c.getContext('2d').drawImage(img, 0, 0, w, h);
-            const dataUrl = c.toDataURL('image/jpeg', 0.82);
-            reply(rid, { type: 'fmg:exportThumbReply', dataUrl, w, h });
-          } catch (err) {
-            replyError(rid, 'fmg:exportThumbReply', err);
-          }
-        };
-        img.onerror = () => replyError(rid, 'fmg:exportThumbReply', 'rasterize failed');
-        img.src = url;
-      } catch (err) {
-        replyError(rid, 'fmg:exportThumbReply', err);
       }
     },
 
@@ -951,8 +1477,8 @@
           installMutationObservers();
           installViewportBroadcaster();
           scheduleViewportBroadcast();
-          reply(rid, { type: 'fmg:mapResetReply', seed: pack?.seed || null });
-          postToParent({ type: 'fmg:mapReset', seed: pack?.seed || null });
+          reply(rid, { type: 'fmg:mapResetReply', seed: currentSeed() });
+          postToParent({ type: 'fmg:mapReset', seed: currentSeed() });
           notifyBurgList();
         }, 500);
       } catch (err) {
@@ -1118,21 +1644,16 @@
 
   // ── Message listener ────────────────────────────────────────────────────
   window.addEventListener('message', async (event) => {
-    // Origin check: this bridge is served from our own origin (/map/index.html)
-    // and embedded by the parent app. Any command claiming another origin is a
-    // third-party trying to drive the bridge. Drop it.
-    if (event.origin !== window.location.origin) return;
-
-    // Source check: the bridge only ever takes commands from its embedder.
-    // Reject anything not posted by window.parent (sibling iframes, popups,
-    // a stray window holding a ref). Mirrors the parent-side check in
-    // src/lib/mapBridge.js.
-    if (event.source !== window.parent) return;
-
     const data = event?.data;
     if (!data || typeof data !== 'object') return;
     const { type, _rid } = data;
     if (typeof type !== 'string' || !type.startsWith('settlementEngine:')) return;
+
+    // Trust boundary: only the configured parent origin AND the WindowProxy
+    // that embedded us may drive destructive map commands. The map's own origin
+    // is intentionally different in production.
+    if (event.origin !== parentOrigin) return;
+    if (event.source !== window.parent) return;
 
     const handler = handlers[type];
     if (!handler) return;  // unknown command — silent
@@ -1150,7 +1671,7 @@
   function notifyReady() {
     if (readyNotified) return;
     readyNotified = true;
-    const seed = pack?.seed || null;
+    const seed = currentSeed();
     postToParent({
       type: 'fmg:ready',
       seed,
@@ -1174,12 +1695,21 @@
 
   // Ready poll: check for pack.cells (geography is done) instead of
   // pack.burgs (which may be empty when manors=0).
+  // SettlementForge fork patch: bound the poll. Without a timeout, an upstream `pack` rename would leave the
+  // optional chain undefined forever — the interval never clears, fmg:ready never fires, and the blank iframe
+  // gives zero diagnostic. After ~60s (120 × 500ms) stop and surface a console warning instead of spinning.
+  let readyPollAttempts = 0;
   const readyPoll = setInterval(() => {
     const hasCells = pack?.cells?.i?.length > 0;
     const hasBurgs = pack?.burgs?.length > 0;
     if (hasCells || hasBurgs) {
       clearInterval(readyPoll);
       notifyReady();
+    } else if (++readyPollAttempts >= 120) {
+      clearInterval(readyPoll);
+      try {
+        console.warn('[sf-bridge] fmg:ready timed out — pack.cells never populated (upstream global rename?)');
+      } catch (e) { /* best-effort */ }
     }
   }, 500);
 

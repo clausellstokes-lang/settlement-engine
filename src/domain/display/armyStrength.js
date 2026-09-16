@@ -29,11 +29,19 @@
 
 import { deriveMilitaryCapacity } from '../worldPulse/militaryStrength.js';
 
-/** @param {any} a @param {any} b @returns {number} */
+/**
+ * The loose sim-shape bags this selector reads (worldPulse/pulseShapes.js):
+ * the stateful world ledgers and the per-settlement deployment record.
+ * @typedef {import('../worldPulse/pulseShapes.js').WorldState} WorldState
+ * @typedef {import('../worldPulse/pulseShapes.js').DeploymentRecord} DeploymentRecord
+ * @typedef {import('../worldPulse/pulseShapes.js').SettlementItem} SettlementItem
+ */
+
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
-/** @param {any} v @param {number} [d] @returns {number} */
+/** @param {unknown} v @param {number} [d] @returns {number} */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
+const clamp01 = (/** @type {unknown} */ v) => Math.max(0, Math.min(1, num(v)));
 
 // Heuristic bands for the LATENT (theoretical) strength of a host, 0..100 → words.
 // Bands only — never the number. A thorpe levy ≠ a city host.
@@ -49,7 +57,7 @@ const STRENGTH_BANDS = Object.freeze([
  * The heuristic latent-strength phrase for a settlement (or worldPulse item). Reads
  * the structured military capacity and buckets the 0..100 theoretical capacity into
  * a DM band. Total — always returns a phrase (a settlement always has *some* levy).
- * @param {any} settlementOrItem
+ * @param {SettlementItem | null | undefined} settlementOrItem
  * @returns {{ phrase: string }}
  */
 export function latentStrength(settlementOrItem) {
@@ -61,13 +69,31 @@ export function latentStrength(settlementOrItem) {
 
 // Heuristic bands for the FRACTION of a deployed army's strength that remains after
 // attrition (currentEffectiveStrength / maxStartStrength), 1..0 → words.
+//
+// ⭐ ONE LADDER, TWO PROJECTIONS (W-MEM §2.2's band law). Each row now carries a stable
+// `key` beside its phrase. The phrase is DISPLAY COPY and may be re-worded; the key is
+// a typed token safe to PERSIST, which is what the concluded-war ledger stores so that
+// a re-worded phrase can never rewrite lived history — and so that a record whose whole
+// discipline is "no sentences" does not carry one. Both projections read these same
+// floors, so there is no second vocabulary for the quantity: adding a band, moving a
+// floor, or re-wording a phrase happens HERE, once.
 const REMAINING_BANDS = Object.freeze([
-  { floor: 0.85, phrase: 'still near full strength' },
-  { floor: 0.6, phrase: 'bloodied but holding, most of its strength still standing' },
-  { floor: 0.4, phrase: 'battered, roughly half its strength spent' },
-  { floor: 0.2, phrase: 'gutted, only a fraction of the host left to fight' },
-  { floor: 0, phrase: 'all but broken, a spent remnant in the field' },
+  { floor: 0.85, key: 'near_full', phrase: 'still near full strength' },
+  { floor: 0.6, key: 'bloodied', phrase: 'bloodied but holding, most of its strength still standing' },
+  { floor: 0.4, key: 'battered', phrase: 'battered, roughly half its strength spent' },
+  { floor: 0.2, key: 'gutted', phrase: 'gutted, only a fraction of the host left to fight' },
+  { floor: 0, key: 'broken', phrase: 'all but broken, a spent remnant in the field' },
 ]);
+
+/** The remaining-strength band keys, weakest-last. Closed and persistable.
+ * @type {ReadonlyArray<string>} */
+export const REMAINING_BAND_KEYS = Object.freeze(REMAINING_BANDS.map(b => b.key));
+
+/** @param {number} remainingFraction 0..1 @returns {{floor:number, key:string, phrase:string}} */
+function remainingBandOf(remainingFraction) {
+  const f = clamp01(remainingFraction);
+  return REMAINING_BANDS.find(b => f >= b.floor) || REMAINING_BANDS[REMAINING_BANDS.length - 1];
+}
 
 /**
  * The heuristic "how much of the army is left" phrase for a remaining-strength
@@ -76,9 +102,30 @@ const REMAINING_BANDS = Object.freeze([
  * @returns {string}
  */
 export function attritionPhrase(remainingFraction) {
-  const f = clamp01(remainingFraction);
-  const band = REMAINING_BANDS.find(b => f >= b.floor) || REMAINING_BANDS[REMAINING_BANDS.length - 1];
-  return band.phrase;
+  return remainingBandOf(remainingFraction).phrase;
+}
+
+/**
+ * The same band as a PERSISTABLE key. Total over 0..1, and total over garbage: a
+ * non-finite input clamps to the weakest band rather than throwing, because the caller
+ * is a persistence writer and a thrown band would cost a war its whole record.
+ * @param {number} remainingFraction 0..1
+ * @returns {string} one of REMAINING_BAND_KEYS
+ */
+export function remainingStrengthBandKey(remainingFraction) {
+  return remainingBandOf(remainingFraction).key;
+}
+
+/**
+ * Resolve a persisted remaining-strength band key back to its phrase. Returns '' for a
+ * key this build does not know — a record written by a newer build must render as
+ * silence, never as a wrong band.
+ * @param {unknown} key
+ * @returns {string}
+ */
+export function remainingStrengthPhraseFor(key) {
+  const band = REMAINING_BANDS.find(b => b.key === key);
+  return band ? band.phrase : '';
 }
 
 // The army's supporting condition (supply + morale, both 0..1) in plain words.
@@ -92,7 +139,7 @@ const CONDITION_BANDS = Object.freeze([
 /**
  * The army's supporting-condition phrase from a deployment record (supply + morale).
  * Reads the LIVE supportive facets but surfaces them as words — never the numbers.
- * @param {any} record the worldState.deployments[homeId] stateful record.
+ * @param {DeploymentRecord | null | undefined} record the worldState.deployments[homeId] stateful record.
  * @returns {string}
  */
 function conditionPhrase(record) {
@@ -114,13 +161,14 @@ function conditionPhrase(record) {
  * settlement surfaces nothing.
  *
  * @param {Object} args
- * @param {any} args.settlementId
- * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {string | number | null | undefined} [args.settlementId]
+ * @param {WorldState | null | undefined} [args.worldState]
+ * @param {(id: unknown) => string} [args.nameFor]
  * @returns {{ targetId: string, targetName: string, remainingPhrase: string, conditionPhrase: string, weakened: boolean } | null}
  */
-export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) => String(id) } = {}) {
   if (settlementId == null) return null;
+  /** @type {Record<string, DeploymentRecord>} */
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object'
     ? worldState.deployments
     : {};
@@ -150,11 +198,11 @@ export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) =>
  * when the deployments ledger is absent / empty ⇒ byte-identical off-state.
  *
  * @param {Object} args
- * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {WorldState | null | undefined} [args.worldState]
+ * @param {(id: unknown) => string} [args.nameFor]
  * @returns {Array<{ homeId: string, targetName: string, remainingPhrase: string, conditionPhrase: string, weakened: boolean }>}
  */
-export function deployedArmyStandings({ worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function deployedArmyStandings({ worldState, nameFor = (id) => String(id) } = {}) {
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object'
     ? worldState.deployments
     : {};
@@ -179,10 +227,10 @@ export function deployedArmyStandings({ worldState, nameFor = (id) => String(id)
  * to render its deployed-army block). A dormant campaign yields false ⇒ nothing
  * renders ⇒ byte-identical.
  * @param {Object} args
- * @param {any} args.worldState
+ * @param {WorldState | null | undefined} [args.worldState]
  * @returns {boolean}
  */
-export function hasDeployedArmy({ worldState } = /** @type {any} */ ({})) {
+export function hasDeployedArmy({ worldState } = {}) {
   return deployedArmyStandings({ worldState }).length > 0;
 }
 

@@ -22,12 +22,21 @@ function editNamesbase() {
   document.getElementById("namesbaseDownload").addEventListener("click", namesbaseDownload);
 
   const uploader = document.getElementById("namesbaseToLoad");
+  // SettlementForge fork patch: {once:true} only removes a listener AFTER it fires, so a cancelled file dialog
+  // left a stale change listener on the SHARED input; a later pick then fired BOTH handlers against one file
+  // (duplicating / desyncing nameBases). Use named handlers and clear any pending listener before each attach.
+  const onNamesbaseUpload = e => uploadFile(e.target, d => namesbaseUpload(d, true));
+  const onNamesbaseUploadExtend = e => uploadFile(e.target, d => namesbaseUpload(d, false));
   document.getElementById("namesbaseUpload").addEventListener("click", () => {
-    uploader.addEventListener("change", e => uploadFile(e.target, d => namesbaseUpload(d, true)), {once: true});
+    uploader.removeEventListener("change", onNamesbaseUpload);
+    uploader.removeEventListener("change", onNamesbaseUploadExtend);
+    uploader.addEventListener("change", onNamesbaseUpload, {once: true});
     uploader.click();
   });
   document.getElementById("namesbaseUploadExtend").addEventListener("click", () => {
-    uploader.addEventListener("change", e => uploadFile(e.target, d => namesbaseUpload(d, false)), {once: true});
+    uploader.removeEventListener("change", onNamesbaseUpload);
+    uploader.removeEventListener("change", onNamesbaseUploadExtend);
+    uploader.addEventListener("change", onNamesbaseUploadExtend, {once: true});
     uploader.click();
   });
 

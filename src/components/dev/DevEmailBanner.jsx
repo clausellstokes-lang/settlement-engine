@@ -81,7 +81,6 @@ export default function DevEmailBanner() {
         background: swatch['#3A1A1A'],
         color: swatch['#FFCFCF'],
         border: '1px solid #8b1a1a',
-        borderRadius: 6,
         padding: '10px 14px',
         fontFamily: 'monospace',
         fontSize: FS.sm,

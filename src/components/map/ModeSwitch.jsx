@@ -9,7 +9,7 @@
 import { Eye, Mountain, PenTool, Link as LinkIcon } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
-import { BORDER2, ELEV, R } from '../theme.js';
+import { BORDER2, ELEV } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export function ModeSwitch({ mapMode, setMapMode, imageMode }) {
@@ -36,7 +36,7 @@ export function ModeSwitch({ mapMode, setMapMode, imageMode }) {
   return (
     <div style={{
       display: 'flex', gap: 2, padding: 2,
-      background: BORDER2, borderRadius: R.md,
+      background: BORDER2,
     }}>
       {modes.map(m => {
         const active = mapMode === m.id;

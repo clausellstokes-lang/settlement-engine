@@ -21,9 +21,67 @@
 
 import { en } from './en.js';
 
-// The active locale. Today this is hard-coded; tomorrow it reads from
-// the store or a query param without any component changes.
-const ACTIVE = en;
+// ── The locale registry (V-27a localization scaffold) ───────────────────────
+// `en` is the built-in base locale. Additional locales register at runtime with
+// the SAME nested shape as `en`; components keep calling `t()` unchanged. The
+// active locale is a module-level pointer, swapped by `setLocale`.
+//
+// FIRST-PAINT LAW (see copy/en.js): this whole module is off the eager entry
+// closure — only lazy surfaces import it, and the app shell reads `footer`
+// through copy/footer.js. Locale plumbing stays lazy: a non-`en` locale is
+// loaded through `import()` (e.g. `loadPseudoLocale`), never a static eager
+// import, so the eager first-paint budget is untouched.
+const LOCALES = { en };
+let activeId = 'en';
+
+/** The id of the always-present base locale. */
+export const DEFAULT_LOCALE = 'en';
+
+/** Register a locale table (same nested shape as `en`) under an id. */
+export function registerLocale(id, table) {
+  if (!id || table == null || typeof table !== 'object') return false;
+  LOCALES[id] = table;
+  return true;
+}
+
+/**
+ * Switch the active locale. Unknown ids are rejected (loud in dev) and the
+ * previous locale stays active — a missing locale must never blank the UI.
+ * Returns true if the switch happened.
+ */
+export function setLocale(id) {
+  if (!Object.prototype.hasOwnProperty.call(LOCALES, id)) {
+    if (import.meta?.env?.DEV) {
+
+      console.warn(`[copy] unknown locale: ${id} — staying on ${activeId}`);
+    }
+    return false;
+  }
+  activeId = id;
+  return true;
+}
+
+/** The active locale id. */
+export function getLocale() {
+  return activeId;
+}
+
+/** Every registered locale id (base + any lazily-loaded ones). */
+export function listLocales() {
+  return Object.keys(LOCALES);
+}
+
+/**
+ * Lazily load + register the pseudo-locale and return its id, proving the
+ * localization door swings without shipping translated content. The pseudo
+ * table rides its own dynamic-import chunk — zero eager first-paint cost. This
+ * is a DEV/QA locale (visibly transformed English), never a real language.
+ */
+export async function loadPseudoLocale() {
+  const { pseudo, PSEUDO_LOCALE_ID } = await import('./pseudo.js');
+  registerLocale(PSEUDO_LOCALE_ID, pseudo);
+  return PSEUDO_LOCALE_ID;
+}
 
 // Resolve a dotted key path against a nested object. Returns undefined
 // if any segment is missing. Kept tiny on purpose — no lodash.
@@ -35,6 +93,16 @@ function resolve(obj, dottedKey) {
     cur = cur[p];
   }
   return cur;
+}
+
+// Resolve a key against the active locale, falling back to the base `en`
+// locale for any key the active locale does not carry (partial translations
+// stay functional — the extraction pin, not a blank string, catches the gap).
+function resolveActive(dottedKey) {
+  const primary = resolve(LOCALES[activeId], dottedKey);
+  if (primary !== undefined) return primary;
+  if (activeId !== 'en') return resolve(en, dottedKey);
+  return undefined;
 }
 
 // Substitute {name} placeholders from `vars`. Untouched placeholders are
@@ -54,7 +122,7 @@ function interpolate(str, vars) {
  *   t('ai.narrative.button', { cost: 3 })  // "Generate narrative (3 credits)"
  */
 export function t(key, vars) {
-  const raw = resolve(ACTIVE, key);
+  const raw = resolveActive(key);
   if (typeof raw !== 'string') {
     // Loud in dev, safe in prod.
     if (import.meta?.env?.DEV) {
@@ -73,7 +141,7 @@ export function t(key, vars) {
  *   tx('pricing.tiers.wanderer.features')  // ['3 saved settlements', ...]
  */
 export function tx(key) {
-  const raw = resolve(ACTIVE, key);
+  const raw = resolveActive(key);
   if (raw == null) {
     if (import.meta?.env?.DEV) {
        

@@ -1,0 +1,282 @@
+/**
+ * domain/rulingPowerCoup.js — the coup CONTEST model (the field + the verdict).
+ *
+ * Split out of rulingPower.js: COUP_COERCION, coupContenders() and
+ * resolveCoupVerdict() are reached ONLY by lazy worldPulse tick modules
+ * (coup / stressorDynamics / stressorGates / deploymentReturn / disposition),
+ * never by first-paint code. rulingPower.transferRulingPower (the eager
+ * entrance via events/mutateWorld) uses none of them, so co-locating them in
+ * rulingPower.js dragged the whole contest model into the first-paint static
+ * closure for zero eager consumer. Living in this leaf keeps them lazy.
+ *
+ * Imports the shared helpers (num/round2/nameOf/governingFactionOf) back from
+ * rulingPower.js — the safe lazy → eager import direction (this leaf is lazy;
+ * rulingPower is first-paint). Pure + deterministic: the verdict threads an
+ * injected rng; sorts tiebreak on plain codepoint order (never localeCompare).
+ *
+ * @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
+ */
+
+import { clamp01 } from '../kernel/math.js';
+import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
+import { governingFactionOf, num, round2, nameOf } from './rulingPower.js';
+import { ladderEffectivePowerFactor } from './townMap/ladderRead.js';
+
+/** @typedef {import('./rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+
+const A = FACTION_ARCHETYPES;
+
+/**
+ * Per-archetype coup-coercion factor. Also the single-source aggression baseline
+ * the war-layer disposition model (worldPulse/disposition.js) re-centers into a
+ * signed government tilt — exported (dormant for legacy campaigns; the disposition
+ * consumer is gated behind warLayerEnabled).
+ * @type {Readonly<Record<string, number>>}
+ */
+export const COUP_COERCION = Object.freeze({
+  [A.MILITARY]: 1.25,
+  [A.NOBLE]: 1.1,
+  [A.ARCANE]: 1.05,
+  [A.GOVERNMENT]: 1.0,
+  [A.CIVIC]: 1.0,
+  [A.RELIGIOUS]: 1.0,
+  [A.OCCUPATION]: 1.0,
+  [A.MERCHANT]: 0.95,
+  [A.OUTSIDER]: 0.9,
+  [A.CRAFT]: 0.85,
+  [A.LABOR]: 0.85,
+  [A.OTHER]: 0.9,
+});
+
+const MIN_CONTENDER_POWER = 5;
+
+/**
+ * @param {{name: string, power: number, weight: number}} a
+ * @param {{name: string, power: number, weight: number}} b
+ * @returns {number}
+ */
+function byWeightDescThenName(a, b) {
+  if (b.weight !== a.weight) return b.weight - a.weight;
+  if (b.power !== a.power) return b.power - a.power;
+  return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
+}
+
+/**
+ * The coup field: the top-3 most powerful non-governing, non-criminal
+ * factions, plus the incumbent's amplified defense.
+ *
+ * The incumbent's weight = power × govMultiplier — the legitimacy band the
+ * settlement already maintains (1.30 Endorsed → 0.60 Crisis). `gated` is
+ * the user-facing rule "the ruler only presents a case if it re-enters the
+ * top 3 post-amplification": with a full field of three challengers the
+ * amplified weight must match or beat the weakest challenger; a thinner
+ * field always admits the incumbent (the pool is the top 3 by definition).
+ *
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {{ governing: Object|null,
+ *            challengers: Array<{ name:string, archetype:string, power:number, weight:number }>,
+ *            incumbent: { name:string|null, power:number, govMultiplier:number,
+ *                         amplifiedWeight:number, gated:boolean } }}
+ */
+export function coupContenders(settlement) {
+  const ps = settlement?.powerStructure || {};
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const governing = governingFactionOf(settlement);
+  const govMultiplier = num(ps.publicLegitimacy?.govMultiplier, 1);
+
+  const challengers = factions
+    .filter(f => f && f !== governing)
+    .map(f => {
+      const archetype = factionArchetype(f);
+      // §8 read-side: effective power = base × the ladder's leadership/churn factor. The
+      // factor is EXACTLY 1 when the ladder is dark (no npcLadder mirror) ⇒ byte-identical.
+      const factor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), f);
+      const power = factor === 1 ? num(f.power) : round2(num(f.power) * factor);
+      return {
+        name: nameOf(f),
+        archetype,
+        power,
+        weight: round2(power * (COUP_COERCION[archetype] ?? COUP_COERCION[A.OTHER])),
+      };
+    })
+    // Criminal factions never vie for power openly — the capture ladder is
+    // their path. Powerless factions can't field a coup at all.
+    .filter(c => c.archetype !== A.CRIMINAL && c.power >= MIN_CONTENDER_POWER && c.name)
+    .sort(byWeightDescThenName)
+    .slice(0, 3);
+
+  const incFactor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), governing);
+  const incumbentPower = incFactor === 1 ? num(governing?.power) : round2(num(governing?.power) * incFactor);
+  const amplifiedWeight = round2(incumbentPower * govMultiplier);
+  const gated = challengers.length < 3
+    || amplifiedWeight >= challengers[challengers.length - 1].weight;
+
+  return {
+    governing,
+    challengers,
+    incumbent: {
+      name: governing ? nameOf(governing) : null,
+      power: incumbentPower,
+      govMultiplier,
+      amplifiedWeight,
+      gated,
+    },
+  };
+}
+
+// ── The verdict ────────────────────────────────────────────────────────────
+
+/**
+ * Resolve a coup contest. RNG is preserved — strengths shift the odds,
+ * never guarantee the outcome (except the ungated collapse case, where the
+ * ruler's case is too weak to even be heard: the fall is near-certain).
+ *
+ * @param {Object} args
+ * @param {RulingPowerSettlement} args.settlement
+ * @param {{ random: () => number }} args.rng
+ * @param {number} [args.severity]              coup severity at the verdict (0..1)
+ * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
+ * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
+ * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
+ * @param {number} [args.economicAdj]  coherence-13 flag (economicCoupReadEnabled): signed shift to the incumbent hold-chance from the settlement's economic capacity — a prosperous seat holds, a hollowed treasury falls; the caller supplies 0 when the flag is dark ⇒ byte-identical (the warSentimentAdj precedent)
+ * @param {number} [args.foreignSeatAdj]  W-SEAT D4 (foreignSeatEnabled): signed shift from the occupier or overlord who looms over this court — a foreign seat DEFENDS the government it deals with, so the term is positive by construction; 0 when the flag is dark or no seat resolves ⇒ byte-identical
+ * @param {number} [args.forceRatioFactor]  W-SEAT D10 (irregularForceEnabled): a DIMENSIONLESS factor on the incumbent's political share, carrying how much of the settlement would rise and what that mass is worth against the loyal side — 1 = off ⇒ byte-identical (x × 1 is exact). MULTIPLICATIVE rather than a sixth adj by measurement: the declared adj budget has five thousandths of headroom and its own instrument calls a raise a tuning-signature act, and a force ratio is a claim ABOUT share rather than a term beside it
+ * @returns {{ holds:boolean, pHold:number, roll:number,
+ *            winner:{name:string,archetype:string}|null,
+ *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
+ *            incumbent:Object, reason:string }}
+ */
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0, foreignSeatAdj = 0, forceRatioFactor = 1 }) {
+  const { challengers, incumbent } = coupContenders(settlement);
+  if (!challengers.length) {
+    return {
+      holds: true, pHold: 1, roll: 0, winner: null, challengers, incumbent,
+      reason: 'No faction holds enough power to move against the seat. The plot collapses on its own.',
+    };
+  }
+
+  let pHold;
+  if (!incumbent.gated) {
+    // The amplified case never re-entered the top 3: the ruler has no
+    // standing left to argue from. The seat falls; only the heir is in question.
+    pHold = 0.08;
+  } else {
+    const totalChallenger = challengers.reduce((sum, c) => sum + c.weight, 0);
+    const share = incumbent.amplifiedWeight / Math.max(1e-6, incumbent.amplifiedWeight + totalChallenger);
+    // A hotter coup (higher severity) erodes the incumbent's edge; the
+    // ruling-authority score nudges ±0.125 across its full range.
+    const severityDrag = 1.15 - 0.4 * clamp01(severity);
+    const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {number} */ (rulingAuthorityScore) - 50) / 400 : 0;
+    // warSentimentAdj (P2): 0 when the flag is off ⇒ byte-identical. A war turning sour
+    // (negative sentiment) lowers the seat's hold-chance; a sustainable one raises it.
+    // interventionAdj (W-CONVERGENCE): 0 when the intervention layer is dark ⇒ byte-
+    // identical. A surviving foreign force backing the incumbent raises the seat's
+    // hold-chance; one backing the challengers lowers it. The clamp below bounds it.
+    // economicAdj (coherence-13): 0 when economicCoupReadEnabled is dark ⇒ byte-identical.
+    // A prosperous seat (high economic_capacity) holds; a hollowed treasury falls. Same ±0.125
+    // magnitude as authorityAdj; the caller supplies the signed value, the clamp bounds the sum.
+    // foreignSeatAdj (W-SEAT D4): 0 when foreignSeatEnabled is dark ⇒ byte-identical. The
+    // occupier or overlord defends the government it deals with, so this term is positive by
+    // construction; it is sized at the POLITICAL tier (±0.125) and never at the physical one.
+    //
+    // ⚠⚠ THE ADJ BUDGET, DECLARED — F3 named this and it is now real. FIVE signed terms
+    // compose here (authority ±0.125 · warSentiment ±0.22 · intervention ±0.22 · economic
+    // ±0.125 · foreignSeat +0.125) and SEAT-7's force ratio was chartered as a SIXTH.
+    // ⛔ IT DID NOT LAND AS ONE, AND THE REASON IS MEASURED RATHER THAN STYLISTIC. The five
+    // bounds sum to exactly 0.815 against a DECLARED_BUDGET of 0.82, and the budget
+    // instrument says of itself "Raising it is a tuning-signature act, not a lane's call" —
+    // so a sixth ADDITIVE term of any magnitude a designer would pick needs an owner tuning
+    // signature THE PROMISE reserves to the tuning sitting. SEAT-7a therefore lands the
+    // force ratio as `forceRatioFactor`, a MULTIPLICATIVE factor on `share` below, which
+    // leaves this budget untouched and is the better home besides: the budget exists to
+    // stop adjs from saturating the clamp until `share` stops mattering, and a force ratio
+    // is a claim ABOUT share rather than a term competing with it. The additive slot stays
+    // OPEN and unclaimed; taking it is an owner tuning act, not a later lane's.
+    // Worst-case they sum to ±0.815 against a clamp of [0.1, 0.9] over a base of
+    // `share × severityDrag`, which lives in roughly [0, 1.15]. The risk is NOT overflow —
+    // the clamp bounds it — it is SATURATION: enough adjs pointing one way pin pHold to a
+    // clamp edge and `share`, the thing the contest is actually about, stops mattering.
+    // The budget is asserted rather than hoped for at
+    // tests/domain/foreignSeatCoupAdj.test.js, and the composition is a declared row on the
+    // tuning walking sheet. ⛔ SEAT-2 → SEAT-7 are SERIAL on this file for that reason.
+    // W-SEAT D10 (irregularForceEnabled): EXACTLY 1 when the key is dark, and `x * 1` is
+    // exact for every finite double, so the dark expression below is the pre-SEAT-7a one
+    // BIT for BIT rather than arithmetically equivalent. The `ladderEffectivePowerFactor`
+    // idiom at :93/:108 verbatim — a factor a consumer can gate on `=== 1`.
+    const forceFactor = Number.isFinite(forceRatioFactor) ? Number(forceRatioFactor) : 1;
+    pHold = Math.max(0.1, Math.min(0.9, share * forceFactor * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0) + (Number(foreignSeatAdj) || 0)));
+  }
+
+  const roll = rng.random();
+  if (roll <= pHold) {
+    return {
+      holds: true, pHold: round2(pHold), roll: round2(roll), winner: null, challengers, incumbent,
+      reason: incumbent.gated
+        ? `${incumbent.name || 'The ruling power'} rallied enough of the court to hold the seat.`
+        : 'Against the odds, the conspirators lost their nerve at the door.',
+    };
+  }
+
+  // The seat falls. Winner sampled ∝ weight — highest influence, best chance.
+  const total = challengers.reduce((sum, c) => sum + c.weight, 0);
+  let pick = rng.random() * total;
+  let winner = challengers[challengers.length - 1];
+  for (const c of challengers) {
+    pick -= c.weight;
+    if (pick <= 0) { winner = c; break; }
+  }
+  return {
+    holds: false, pHold: round2(pHold), roll: round2(roll),
+    winner: { name: winner.name, archetype: winner.archetype }, challengers, incumbent,
+    reason: incumbent.gated
+      ? `${winner.name} united the strongest opposition and out-maneuvered both the seat and its rivals.`
+      : `${incumbent.name || 'The ruling power'}'s case never re-entered the field. ${winner.name} took the seat near-unopposed.`,
+  };
+}
+
+/**
+ * THE COUP-RISK LADDER — a closed vocabulary of four, and the ONE derivation of it.
+ *
+ * ⛔ WHY IT MOVED HERE. This four-way lived inline in
+ * `src/components/dossier/EngineSections.jsx`, which is a COMPONENT, and DS-POW-4's corpus
+ * keys four pools on these exact strings — `Critical. The seat could fall` byte for byte.
+ * A desk reading the same state would have had to re-derive the ladder, and a second
+ * spelling of a classification is the fork that drifts: the page and the prose would have
+ * disagreed about whether a seat was Contested or Holding, each correct against its own
+ * copy. The classification belongs beside the record it reads, which is `coupContenders`
+ * directly above.
+ *
+ * ONLY THE CLASSIFICATION MOVED. The component keeps its own label→colour map, because a
+ * palette is a display concern and dragging `GOLD`/`AMBER`/`RED` into the domain layer
+ * would trade one layering error for another.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const COUP_RISK_LABELS = Object.freeze([
+  'Stable',
+  'Holding',
+  'Contested',
+  'Critical. The seat could fall',
+]);
+
+/**
+ * A coarse coup-risk read from the gated/ungated incumbent case. No RNG, no clock.
+ *
+ * The order is load-bearing and is the original's: an UNGATED incumbent is the gravest
+ * case and is tested first, because a seat whose case never entered the field can fall to
+ * anyone; only then does the weight comparison decide Contested from Holding. No
+ * challengers at all is Stable, and it is the only branch that does not read the incumbent.
+ *
+ * @param {{challengers?: ReadonlyArray<{weight?: number}>,
+ *          incumbent?: {gated?: boolean, amplifiedWeight?: number}}|null|undefined} contenders
+ * @returns {string} one of COUP_RISK_LABELS
+ */
+export function coupRiskLabel(contenders) {
+  const challengers = contenders?.challengers;
+  if (!Array.isArray(challengers) || challengers.length === 0) return 'Stable';
+  const incumbent = contenders?.incumbent;
+  if (!incumbent?.gated) return 'Critical. The seat could fall';
+  return Number(incumbent.amplifiedWeight) < Number(challengers[0]?.weight)
+    ? 'Contested'
+    : 'Holding';
+}

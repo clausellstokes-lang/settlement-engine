@@ -47,11 +47,17 @@ Event props are coarse (enums, counts, bands) — never names, prose, secrets, o
 whole domain objects. Enforced statically by the `analytics/analytics-props-hygiene`
 eslint rule and at the ingest boundary by `stripProps` in `ingest-events`.
 
+Operator-message receipts and consent changes do not use this analytics lane.
+Message receipts are the service's own delivery/read records; consent changes are
+durable compliance records carrying prior/new booleans. Neither message bodies nor
+email-open signals are analytics, and outbound email contains no tracking pixels.
+
 ## What is NEVER logged or transmitted
 
 - Customer email / PII in edge logs (e.g. `stripe-webhook` redaction, A+ P0.2).
 - Settlement names / NPC names / prose / secrets / DM notes in any telemetry.
 - Raw IP addresses in any persisted row.
+- Operator-message bodies in analytics, or email-open tracking pixels anywhere.
 
 ## Regression pins (the policy as tests)
 

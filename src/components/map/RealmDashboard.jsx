@@ -23,7 +23,7 @@
  */
 
 import { useEffect } from 'react';
-import { Lock, Sparkles, Globe2, Flame, Users, ArrowUp, ArrowRight } from 'lucide-react';
+import { Lock, Sparkles, Globe, Flame, Users, ArrowUp, ArrowRight } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import {
@@ -33,15 +33,25 @@ import {
   activeDeployments,
   liveTradeWars,
   dispositionStandings,
+  REALM_CONTEST_RECORD_HELP,
+  REALM_CONTEST_RECORD_LABEL,
 } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
+import { hegemonyRead } from '../../domain/display/hegemonyRead.js';
 import { WAR_SHAPED_TYPES } from './WorldPulseData.js';
 import { hasPantheon } from './PantheonPanel.jsx';
+import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
+import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
-import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, R, SP, sans } from '../theme.js';
+import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+// V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
+// lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
+// tip the first-paint ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
+import WorldCertificationPanel from '../settlement/WorldCertificationPanel.jsx';
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
 
@@ -117,7 +127,6 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
       borderLeft: accent ? `3px solid ${accent}` : 'none',
       paddingLeft: accent ? SP.sm : (focal ? SP.md : 0),
       background: focal && accent ? CARD : undefined,
-      borderRadius: focal && accent ? R.md : undefined,
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {Icon && <Icon size={12} />}{label}
@@ -206,7 +215,6 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
       display: 'grid', gap: SP.md,
       padding: SP.lg,
       border: `1px solid ${GOLD}`,
-      borderRadius: R.lg,
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -230,7 +238,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
           aria-label={`Your realm's conflict band: ${previewTension.label} (unlock to read live)`}
           style={{
             display: 'grid', gap: 3,
-            padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md,
+            padding: `${SP.sm}px ${SP.md}px`,
             background: CARD, borderLeft: `3px solid ${previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : GOLD}`,
           }}
         >
@@ -328,6 +336,16 @@ export default function RealmDashboard({
   const standings = dispositionStandings(worldState);
   const topAggressor = standings.slice().sort((a, b) => b.score - a.score)[0] || null;
 
+  // ambition-fit-2 — THE UNNAMED EMPIRE (hegemonyRead / §F.3b). A pure derived read
+  // over the treaty topology: any center with ≥3 subordinate ties forms a sphere.
+  // Dormant-safe: a realm with no such center returns { spheres: [] } ⇒ the Stat
+  // renders "–" and the descriptive detail block below does not mount. Strength is
+  // headcount-share here (no per-settlement strength on the dashboard); the DEPTH
+  // reason half passes real land+naval strength. Descriptive-always; DM baptism (a
+  // persisted canon label) is a separate store lane — omitted here by design.
+  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || 'an unnamed seat' });
+  const topSphere = hegemony.spheres[0] || null;
+
   // One focal Conflict digest: the tension band is the headline, and the four
   // former war stats survive as a one-line component breakdown beneath it. The
   // four facts the GM scans for ("is the realm at war, and how?") now win the
@@ -338,7 +356,9 @@ export default function RealmDashboard({
   if (occupations.length) conflictParts.push(`${occupations.length} occupied`);
   if (mobilizing.length) conflictParts.push(`${mobilizing.length} mobilizing${mobilizing.some(m => m.covert) ? ' (some covert)' : ''}`);
   if (weariest && weariest.warExhaustion >= 0.6) {
-    conflictParts.push(`${nameById?.get(String(weariest.id)) || weariest.id} war-weary`);
+    // Never a raw settlement id in a headline (C3 finding 12) — a missed name
+    // lookup degrades to an in-fiction generic, not a database key.
+    conflictParts.push(`${nameById?.get(String(weariest.id)) || 'a settlement'} war-weary`);
   }
   const conflictSub = conflictParts.length ? conflictParts.join(' · ') : 'No sieges, occupations, or mobilizations';
   const conflictTone = tension.tone === 'crisis' ? 'crisis'
@@ -352,7 +372,7 @@ export default function RealmDashboard({
   return (
     <div data-testid="realm-dashboard" style={{ display: 'grid', gap: SP.lg }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Globe2 size={15} color={GOLD} />
+        <Globe size={15} color={GOLD} />
         {/* The section heading is quiet scent (FS.xs uppercase), not a competing
             focal element — de-emphasizing it lets the focal Conflict value be the
             single dominant entry point in the panel (P4 de-emphasize-to-emphasize). */}
@@ -360,6 +380,17 @@ export default function RealmDashboard({
           State of the Realm
         </h3>
       </div>
+
+      {/* components-dossier-4: the "while you were away" digest — what the
+          living/autonomous world did on campaign activation. Self-gates to nothing
+          when this campaign has no pending catch-up digest. */}
+      <WhileYouWereAway campaignId={campaign.id} />
+
+      {/* Living-world gates: Relationship drift / War layer / Faith spread.
+          Campaign-scoped controls surfaced ON the realm (the DM's world view),
+          mirroring the Library campaign card; both write the same normalized
+          simulationRules seam. The full rule set stays in SimulationRulesDialog. */}
+      <LivingWorldGates campaign={campaign} canWrite={!!canManageCampaigns} />
 
       {/* Eye-path runs change/severity-first: the focal Conflict stat leads, then
           War-weariest (so all conflict signal is contiguous, P6), then the calmer
@@ -383,7 +414,7 @@ export default function RealmDashboard({
         <Stat
           Icon={Flame}
           label="War-weariest"
-          value={weariest ? (nameById?.get(String(weariest.id)) || weariest.id) : '–'}
+          value={weariest ? (nameById?.get(String(weariest.id)) || 'a settlement') : '–'}
           sub={weariest ? warExhaustionBand(weariest.warExhaustion) : 'None war-weary'}
           tone={weariest && weariest.warExhaustion >= 0.6 ? 'hot' : undefined}
         />
@@ -413,24 +444,57 @@ export default function RealmDashboard({
             returns only contested prizes). Dormant ⇒ "–", same idiom as the
             War-weariest / Dominant-faith null cases above. */}
         <Stat
-          Icon={Globe2}
+          Icon={Globe}
           label="Trade routes flipped"
           value={tradeWars.length ? tradeWars.length : '–'}
           sub={tradeWars.length
             ? tradeWars.slice(0, 2).map(t => t.commodityLabel).filter(Boolean).join(' · ')
             : 'No supplier has been displaced'}
         />
-        {/* The cross-settlement aggressor record (dispositionStandings). Names the
-            top scorer by net win/loss. Dormant ⇒ "–". */}
+        {/* The realm contest record (dispositionStandings). Names the top scorer
+            by net resolved-contest W/L. Dormant ⇒ "–". */}
         <Stat
           Icon={Flame}
-          label="Top aggressor"
-          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || topAggressor.id) : '–'}
+          label={REALM_CONTEST_RECORD_LABEL}
+          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || 'a settlement') : '–'}
           sub={topAggressor
             ? `${topAggressor.wins}W / ${topAggressor.losses}L`
-            : 'No win record yet'}
+            : 'No resolved contests yet'}
+          subTitle={REALM_CONTEST_RECORD_HELP}
+        />
+        {/* ambition-fit-2: the unnamed-empire count. Dormant ⇒ "–", same null idiom
+            as the cluster's other reads. */}
+        <Stat
+          Icon={Users}
+          label="Spheres of influence"
+          value={hegemony.spheres.length ? hegemony.spheres.length : '–'}
+          sub={topSphere ? topSphere.brief : 'No hegemony has formed'}
+          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give."
         />
       </div>
+
+      {/* ambition-fit-2: the descriptive sphere read. Self-gates to nothing when no
+          hegemony has formed. Descriptive ALWAYS ("X and its tributaries"); a
+          DM-christened canon label (when the persistence lane lands) replaces it. */}
+      {hegemony.spheres.length > 0 && (
+        <div data-testid="realm-hegemony" style={{ display: 'grid', gap: SP.xs }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Spheres of influence
+          </div>
+          {hegemony.spheres.map((s) => (
+            <div key={String(s.centerId)} style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
+              {/* THE NEWS ADDRESS LAW: the sphere's center settlement, LINKED. */}
+              <RealmEntityLink settlementSaveId={s.centerId} label={s.label} style={{ fontWeight: 700, color: INK }} />
+              {': '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* V-10 THE CERTIFICATE — the world's soak-endurance badge. Inert-honest
+          until the owner's soak writes the first manifest band (reads PENDING);
+          claims-parity holds by construction (buildWorldCertification). */}
+      <WorldCertificationPanel presetId={campaign?.worldState?.simulationRules?.presetId ?? null} />
     </div>
   );
 }

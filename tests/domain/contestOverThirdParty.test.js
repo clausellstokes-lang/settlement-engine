@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { contestOverThirdParty, contestForkKey } from '../../src/domain/region/contestOverThirdParty.js';
 import { logistic, logit, softmaxWeights, hash01, stableSampleByWeight } from '../../src/domain/region/contestMath.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // F3 pin: THE shared two-aggressors-over-a-third contest. War/trade/religion are
 // thin callers. This file pins the determinism + balance contract:

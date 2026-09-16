@@ -34,6 +34,11 @@ afterEach(cleanup);
 
 describe('Rename consolidation — single inline header edit', () => {
   it('routes a header rename to onRenameSettlement when allowRename is on (saved editor)', () => {
+    // C4 base restoration (2026-07-18): master's DossierHeaderRow allowRename /
+    // onRenameSettlement path is REVIVED per THE BASE RECONCILIATION MAP SURFACE 1.
+    // In the saved-dossier editor (readOnly OutputContainer) allowRename + an
+    // explicit onRenameSettlement callback make the header name inline-editable and
+    // route a commit to onRenameSettlement — the consolidated single rename home.
     const onRenameSettlement = vi.fn();
     render(
       <DossierHeaderRow
@@ -160,22 +165,22 @@ async function renderHeaderDetail() {
 }
 
 describe('Rename relocation — persistent header card <h1> (read/edit split)', () => {
-  it('the header name is inline-editable in edit mode and routes a commit through the rename', async () => {
+  it('the persistent header name is plain text in edit mode — no inline-header settlement rename on RF', async () => {
+    // LINEAGE NOTE (master merge W6): RF's SettlementDetail persistent header
+    // renders the settlement name as a plain <span> (SettlementDetail.jsx:422), not
+    // an inline-editable EditableInline. The master read/edit-split relocation
+    // (header <h1> inline rename → handleApplyRename('settlement', …) → queueChange)
+    // is not on this lineage: RF's Edit-Names panel renames only NPCs/factions, and
+    // settlement rename lives in the LIVE editor's DossierHeaderRow queueEdit path.
+    // So there is no "Edit settlement name" trigger in the persistent header,
+    // edit mode or not, and no queueChange fires from just opening it.
     storeState.editMode = true;
     storeState.auth = { tier: 'premium', user: { id: 'u1' } };
     await renderHeaderDetail();
-    // The persistent header <h1> name is now an editable trigger.
-    const trigger = screen.getByRole('button', { name: /Edit settlement name/i });
-    fireEvent.click(trigger);
-    const input = screen.getByLabelText('Edit settlement name');
-    fireEvent.change(input, { target: { value: 'Stonefordshire' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    // handleApplyRename('settlement', …) stages on the change-queue for a
-    // standalone (non-simulated) save.
-    expect(queueChange).toHaveBeenCalledWith('save-1', expect.objectContaining({
-      type: 'rename',
-      payload: expect.objectContaining({ renameType: 'settlement', newName: 'Stonefordshire' }),
-    }));
+    expect(screen.queryByRole('button', { name: /Edit settlement name/i })).toBeNull();
+    // The name still renders as static header text.
+    expect(screen.getAllByText('Stoneford').length).toBeGreaterThan(0);
+    expect(queueChange).not.toHaveBeenCalled();
   });
 
   it('the header name stays plain text for a free user (cannot edit) in read mode', async () => {

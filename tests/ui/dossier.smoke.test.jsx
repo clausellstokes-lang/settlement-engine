@@ -22,6 +22,7 @@
  * needs a populated settlement and resolves a pile of lazy tab chunks.
  */
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { describe, test, expect, vi } from 'vitest';
 
 // Supabase singleton — isConfigured is read at module-eval; stub it false so
@@ -45,7 +46,7 @@ vi.mock('../../src/lib/flags.js', () => ({
 }));
 
 // Store mock. A mutable singleton drives every selector; subscribe and
-// getState are stubbed for the analytics/onboarding/effect paths.
+// getState are stubbed for the analytics/effect paths.
 const storeState = {
   settlement: null,
   aiSettlement: null,
@@ -70,9 +71,6 @@ const storeState = {
   pinNpc: vi.fn(),
   unpinNpc: vi.fn(),
   queueEdit: vi.fn(),
-  trackTabExplored: vi.fn(),
-  onboardingActive: false,
-  onboardingStep: 0,
   userPrefs: { tableViewOpen: false },
   setUserPref: vi.fn(),
 };
@@ -90,5 +88,46 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
   test('module imports and the default export is a component function', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(typeof mod.default).toBe('function');
+  });
+
+  // Phase 5 W4e — the dossier-depth tabs register into the Systems group,
+  // and the OURS-ahead mounted Versions tab is NOT displaced from Notes.
+  // §805 moved War & Faith OUT of Systems into two WORLD-group tabs; the old
+  // combined id must never resurface in any group.
+  test('Systems keeps Substrate / Magic; World registers the split War and Faith tabs', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.systems.tabs).toEqual(
+      expect.arrayContaining(['substrate', 'magic']),
+    );
+    expect(mod.TAB_GROUPS.world.tabs).toEqual(
+      expect.arrayContaining(['war', 'faith']),
+    );
+    // anchored: the arrayContaining assertions above prove both groups resolve
+    // with live tab populations, so this absence cannot pass vacuously.
+    expect(Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs)).not.toContain('war_faith'); // anchored: the arrayContaining assertions above pin both groups' live populations, so this absence cannot pass vacuously.
+  });
+
+  test('the mounted Versions tab (F26) stays registered under Notes', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
+  });
+
+  // W2-c made the Map group a first-class fifth tab; TE-STRIP-1 (owner ruling, ODQ §725)
+  // REMOVED it with the rest of the legacy settlement map. The dossier reads Summary /
+  // Systems / World / Notes, and the pin is INVERTED rather than deleted: the group order
+  // is still asserted (Object insertion order), and the absence of a `map` group is now
+  // asserted BY NAME so a re-introduction reds here instead of arriving silently.
+  test('the tab groups run Summary / Systems / World / Notes, with no Map group', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(Object.keys(mod.TAB_GROUPS)).toEqual(['summary', 'systems', 'world', 'notes']);
+    // The exact-equality assertion on the line above pins the WHOLE key set, so a TAB_GROUPS
+    // that drifted away or emptied reds there before this absence is ever reached.
+    // anchored: the preceding toEqual pins the complete key set, so an empty or drifted TAB_GROUPS reds first.
+    expect(mod.TAB_GROUPS).not.toHaveProperty('map');
+    // …and no surviving group smuggles the map tab back in under another heading. Anchored on
+    // a sibling tab that travels the same registry path, so an empty flatMap cannot pass it.
+    expectAbsentWithAnchor(
+      Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs), 'map', 'versions', 'dossier tab registry',
+    );
   });
 });

@@ -104,14 +104,31 @@ describe('edge contracts are a complement to the executing Deno suite', () => {
   }
 
   it('the executing suites actually invoke a handler (not empty stubs)', () => {
-    // A one-line grep that the trust-boundary suite EXECUTES the handler — so an
-    // emptied-out .test.ts that still exists on disk can't satisfy the presence
-    // check above while covering nothing. Deno test files call `Deno.test(...)`.
+    // A grep that the trust-boundary suite EXECUTES the handler — so an emptied-out
+    // .test.ts that still exists on disk can't satisfy the presence check above while
+    // covering nothing.
+    //
+    // ⚠⚠ THE SPELLING MOVED AND THE PIN WAS STRENGTHENED RATHER THAN RE-AIMED. Every edge
+    // suite now registers through `_shared/scopedTestEnv.ts`'s `scopedEnv.test`, because a
+    // module-top `Deno.env.set` was ambient for every alphabetically later suite in the one
+    // shared `deno test` process and red the deno-tests CI job. A regex that knew only the
+    // old spelling would have gone VACUOUS in the direction that fails OPEN — matching
+    // nothing and therefore proving nothing — so both spellings are admitted, and the bare
+    // presence match is replaced by a COUNT FLOOR that a token stub cannot satisfy.
     const webhookSuite = readFileSync(
       join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
       'utf8',
     );
-    expect(webhookSuite).toMatch(/Deno\.test\s*\(/);
+    const registrations = webhookSuite.match(/(?:Deno|scopedEnv)\.test\s*\(/g) || [];
+    expect(
+      registrations.length,
+      'stripe-webhook/index.test.ts registers too few executing tests — the money-path '
+        + 'trust boundary has been hollowed out',
+    ).toBeGreaterThanOrEqual(50);
+    // …and the registrar really does reach Deno's own runner, so the count above cannot be
+    // satisfied by a local helper that registers nothing.
+    const seam = readFileSync(join(FUNCTIONS_DIR, '_shared', 'scopedTestEnv.ts'), 'utf8');
+    expect(seam).toMatch(/Deno\.test\(/);
   });
 });
 
@@ -264,6 +281,27 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
     expect(src).toMatch(/is_founder:\s*false/);
     expect(src).toMatch(/handle_premium_downgrade/);
     expect(src).toMatch(/founder_clawback:/);
+  });
+
+  it('every charge-reversal class is NAMED and routes to the full clawback (Wave 8 H20/M22 policy)', () => {
+    // classifyChargeReversal makes the amount-blind arm EXPLICIT: full_refund,
+    // partial_refund, and dispute are named, recorded, and ALL route to the same
+    // full clawback lattice BY POLICY (CRIT-1: goodwill = credit grants, never
+    // partial refunds). A future "partial refunds keep credits" regression must
+    // rip this pin out in daylight.
+    expect(src).toMatch(/classifyChargeReversal\s*\(/);
+    expect(src).toMatch(/'partial_refund'/);
+    expect(src).toMatch(/'dispute'/);
+    expect(src).toMatch(/full clawback lattice/i);
+  });
+
+  it('a refunded/disputed credit-pack charge reverses the granted credits (Wave 8 M2)', () => {
+    // The pack grant (source 'purchase', session-keyed) must have a reversal
+    // wired into the same charge.refunded / charge.dispute.created arm; the
+    // atomic RPC (migration 190) owns the claim-once and the may-go-negative
+    // ledger math.
+    expect(src).toMatch(/clawbackCreditPackForSession\s*\(/);
+    expect(src).toMatch(/system_clawback_credits/);
   });
 
   it('downgrades through the retention RPC, not a bare profile tier write', () => {
@@ -526,6 +564,132 @@ describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', (
   });
 });
 
+describe('historical AI-pricing migrations stay immutable; forward reprice owns current parity', () => {
+  // Migration 114 added the config-backed charge path while the applied schedule
+  // was standard 3/4/5 and fast 2/3/4. Migrations 024/057/114 are historical
+  // evidence and must not be rewritten when prices change. Migration 174 is the
+  // forward 5/4/6 reprice; migration 192 is the net-current spend_credits body.
+  let mig114;
+  let mig057;
+  let mig174;
+  let mig192;
+  let pricing;
+  beforeAll(() => {
+    mig114 = readMigration('114_ai_pricing_config.sql');
+    mig057 = readMigration('057_enforce_account_status_writes.sql');
+    mig174 = readMigration('174_pricing_optimal_margins.sql');
+    mig192 = readMigration('192_tier_credit_multiplier.sql');
+    pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+  });
+
+  /**
+   * Pull the `case feature ... end` credit map out of a spend_credits body as a
+   * {feature: cost} object. Anchors on `case feature` (the CASE both 057 and
+   * 114's fallback share) so an unrelated CASE elsewhere in the file can't match.
+   */
+  function extractSpendCase(sql) {
+    const m = sql.match(/case\s+feature([\s\S]*?)end/i);
+    if (!m) return null;
+    const out = {};
+    for (const line of m[1].matchAll(/when\s+'([a-z_]+)'\s+then\s+(\d+)/gi)) {
+      out[line[1]] = Number(line[2]);
+    }
+    return out;
+  }
+
+  it('(a) 114 spend_credits fallback CASE equals the 057 CASE verbatim (config-absent = 057)', () => {
+    const case114 = extractSpendCase(mig114);
+    const case057 = extractSpendCase(mig057);
+    expect(case057, '057 CASE not found').toBeTruthy();
+    expect(case114, '114 fallback CASE not found').toBeTruthy();
+    // Every 057 branch must be present in 114 with the identical cost — including
+    // the chronicle:2 flat that never joins the calibrated system.
+    expect(case114).toEqual(case057);
+    // Spot-pin the money-bearing literals so a whole-map swap can't pass silently.
+    expect(case114.chronicle).toBe(2);
+    expect(case114.narrative).toBe(3);
+    expect(case114.dailyLife).toBe(4);
+    expect(case114.progression).toBe(5);
+    expect(case114.narrative_fast).toBe(2);
+    expect(case114.dailyLife_fast).toBe(3);
+    expect(case114.progression_fast).toBe(4);
+  });
+
+  it('(b) 114 preserves the applied 3/4/5 standard seed and 2/3/4 fast seed', () => {
+    // Extract the seeded per-profile costs from the ai_credit_costs insert. Each
+    // profile row is `'<key>', jsonb_build_object('narrative', N, 'dailyLife', N,
+    // 'progression', N)`. The historical values are intentionally NOT sourced
+    // from today's client config; doing that is what caused the in-place edit.
+    const std = { narrative: 3, dailyLife: 4, progression: 5 };
+    const fast = { narrative: 2, dailyLife: 3, progression: 4 };
+
+    // Isolate the ai_credit_costs seed insert (the 'profiles' jsonb) so we don't
+    // accidentally read get_ai_pricing's in-function `defaults` table below it.
+    const seedM = mig114.match(/'ai_credit_costs'[\s\S]*?on conflict \(key\) do nothing;/i);
+    expect(seedM, 'ai_credit_costs seed insert not found').toBeTruthy();
+    const seed = seedM[0];
+
+    // Parse each `'<profile>', jsonb_build_object('narrative', N, 'dailyLife', N, 'progression', N)` row.
+    const rows = [...seed.matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative',\s*(\d+),\s*'dailyLife',\s*(\d+),\s*'progression',\s*(\d+)\)/gi)];
+    expect(rows.length, '114 ai_credit_costs seed profile rows not parsed').toBe(8);
+
+    // The costTier for each profile comes from AI_MODEL_OPTIONS (client source of truth).
+    const optsBlock = pricing.match(/AI_MODEL_OPTIONS\s*=\s*Object\.freeze\(\[[\s\S]*?\]\);/)[0];
+    const tierOf = (key) => {
+      const entry = optsBlock.match(new RegExp(`key:\\s*'${key}'[\\s\\S]*?costTier:\\s*'(standard|fast)'`));
+      return entry ? entry[1] : null;
+    };
+
+    for (const [, profile, nar, daily, prog] of rows) {
+      const expected = tierOf(profile) === 'fast' ? fast : std;
+      expect(Number(nar), `${profile}.narrative historical seed drifted`).toBe(expected.narrative);
+      expect(Number(daily), `${profile}.dailyLife historical seed drifted`).toBe(expected.dailyLife);
+      expect(Number(prog), `${profile}.progression historical seed drifted`).toBe(expected.progression);
+    }
+  });
+
+  it('(c) the 8 profile keys seeded in 114 equal the AI_MODEL_OPTIONS keys', () => {
+    const optsBlock = pricing.match(/AI_MODEL_OPTIONS\s*=\s*Object\.freeze\(\[[\s\S]*?\]\);/)[0];
+    const clientKeys = [...optsBlock.matchAll(/key:\s*'([a-z0-9_]+)'/gi)].map((m) => m[1]).sort();
+    expect(clientKeys.length, 'expected 8 client model keys').toBe(8);
+
+    const seedM = mig114.match(/'ai_credit_costs'[\s\S]*?on conflict \(key\) do nothing;/i);
+    const seedKeys = [...seedM[0].matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative'/gi)]
+      .map((m) => m[1]).sort();
+    expect(seedKeys, '114 seed profile keys drifted from AI_MODEL_OPTIONS').toEqual(clientKeys);
+  });
+
+  it('(d) 174 and net-current 192 carry the client 5/4/6 + fast 2/3/4 schedule', () => {
+    const case174 = extractSpendCase(mig174);
+    const case192 = extractSpendCase(mig192);
+    expect(case174, '174 forward-reprice CASE not found').toBeTruthy();
+    expect(case192, '192 net-current CASE not found').toBeTruthy();
+    expect(case192).toEqual(case174);
+
+    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
+    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    expect({
+      narrative: case192.narrative,
+      dailyLife: case192.dailyLife,
+      progression: case192.progression,
+    }).toEqual({
+      narrative: num(stdBlock, 'narrative'),
+      dailyLife: num(stdBlock, 'dailyLife'),
+      progression: num(stdBlock, 'progression'),
+    });
+    expect({
+      narrative: case192.narrative_fast,
+      dailyLife: case192.dailyLife_fast,
+      progression: case192.progression_fast,
+    }).toEqual({
+      narrative: num(fastBlock, 'narrative'),
+      dailyLife: num(fastBlock, 'dailyLife'),
+      progression: num(fastBlock, 'progression'),
+    });
+  });
+});
+
 describe('Tier 3.3 — generate-narrative AI invariants', () => {
   let src;
   beforeAll(() => { src = readFunction('generate-narrative'); });
@@ -621,7 +785,14 @@ describe('Tier 3.3 — generate-narrative grounding fidelity', () => {
   });
 
   it('governing faction read tolerates the .faction key shape powerGenerator emits', () => {
-    expect(src).toMatch(/governing\?\.name \|\| governing\?\.faction \|\| null/);
+    // ORDER CORRECTED 2026-07-19 (faction-key precedence sweep). This assertion used to
+    // pin `governing?.name || governing?.faction`, which froze the REVERSED precedence:
+    // `.faction` is the canonical key (rulingPower.nameOf reads `.faction || .name`,
+    // pinned by dc0b6e2b) and `.name` is a legacy alias. The test's stated intent — that
+    // the read tolerates the `.faction` shape powerGenerator emits — is unchanged and
+    // still enforced; only the order the regex freezes is corrected, so this contract can
+    // no longer certify the defect it was meant to prevent.
+    expect(src).toMatch(/governing\?\.faction \|\| governing\?\.name \|\| null/);
   });
 });
 
@@ -779,10 +950,10 @@ describe('Campaign Context surface copy (NotesTab)', () => {
   });
 
   it('the disclosure states flavor weaving, fact priority, prose exposure, and DM privacy', () => {
-    expect(src).toMatch(/Woven into the narration as established campaign lore/);
+    expect(src).toMatch(/Woven into AI narration as established campaign flavor/);
     expect(src).toMatch(/Settlement facts still win/);
-    expect(src).toMatch(/may therefore surface in the refined prose, including shared narration if you publish it/);
-    expect(src).toMatch(/otherwise it stays private to you/);
+    expect(src).toMatch(/may therefore appear in generated prose, including shared narration if you publish it/);
+    expect(src).toMatch(/otherwise it stays DM-private/);
     expect(src).toMatch(/DM Notes are never included/);
   });
 });
@@ -878,6 +1049,28 @@ describe('Tier 3.3 — admin-actions action coverage', () => {
   it('update_user_credits coerces credits to integer (defence vs string injection)', () => {
     expect(src).toMatch(/parseInt\s*\(\s*String\(credits\)/);
   });
+
+  it('list_users strips LIKE wildcards so search cannot become a pattern oracle', () => {
+    // The sanitiser's OWN character class is DERIVED from the source and executed here. A
+    // hand-copied replica would mirror the deriver and could never see the producer drift
+    // away from it — which is the exact vacuity this suite exists to prevent.
+    const decl = src.match(/const search = rawSearch\.replace\(\/\[([^\]]*)\]\/g, " "\)/);
+    expect(decl, 'the list_users sanitiser is present in its expected shape').toBeTruthy();
+    const strip = (value) => value.replace(new RegExp(`[${decl[1]}]`, 'g'), ' ').trim();
+
+    // Both LIKE metacharacters, plus the break-out set that was already handled.
+    for (const meta of ['%', '_', ',', '(', ')', '*', '\\']) {
+      expect(strip(`a${meta}b`), `"${meta}" must not reach the ilike pattern`).toBe('a b');
+    }
+    // THE BUILT PATTERN, not merely the call: nothing the caller supplied survives as a
+    // wildcard on either side of the .or().
+    const built = `email.ilike.%${strip('%a_b%')}%,display_name.ilike.%${strip('%a_b%')}%`;
+    expect(built).toBe('email.ilike.%a b%,display_name.ilike.%a b%');
+    // …and the query is built from the sanitised binding, never the raw one.
+    expect(src).toMatch(/query\.or\(`email\.ilike\.%\$\{search\}%,display_name\.ilike\.%\$\{search\}%`\)/);
+    // anchored: the POSITIVE match on the line above pins the same `src` and the same .or() call, so this negative cannot pass by the source having drifted to empty or been renamed away
+    expect(src).not.toMatch(/ilike\.%\$\{rawSearch\}/);
+  });
 });
 
 describe('Tier 3.3 — admin-actions audit trail (Phase 5 migration 009)', () => {
@@ -967,8 +1160,20 @@ describe('Tier 3.3 — create-checkout product catalog', () => {
     expect(src).toMatch(/premium:\s*Deno\.env\.get\(['"]STRIPE_PRICE_PREMIUM['"]\)/);
   });
 
-  it('exposes founder_lifetime product', () => {
-    expect(src).toMatch(/founder_lifetime:\s*Deno\.env\.get\(['"]STRIPE_PRICE_FOUNDER_LIFETIME['"]\)/);
+  // ⛔ INVERTED (ODQ §118). This assertion used to PIN THE SALE INTO EXISTENCE:
+  // it required create-checkout to carry a founder_lifetime PRICE_MAP row. A
+  // chair is given, never sold, so the row is gone — and the pin now holds the
+  // absence, with a POSITIVE half so a bare deleted line cannot go vacuous.
+  it('refuses founder_lifetime outright and carries NO price row for it', () => {
+    // anchored: ABOLISHED_PRODUCTS and its .has(product) call are asserted PRESENT in this same source below
+    expect(src).not.toMatch(/founder_lifetime:\s*Deno\.env\.get\(/);
+    expect(src).toMatch(/const ABOLISHED_PRODUCTS = new Set\(\['founder_lifetime'\]\)/);
+    // …and the refusal is consulted, not merely declared.
+    expect(src).toMatch(/ABOLISHED_PRODUCTS\.has\(product\)/);
+    // The seat gate went with the sale it guarded (an unreachable enforcement
+    // block is the dead-arm class).
+    // anchored: the same source is proven live by the two ABOLISHED_PRODUCTS assertions above
+    expect(src).not.toMatch(/FOUNDER_SEAT_LIMIT/);
   });
 
   it('exposes single_dossier microtransaction', () => {
@@ -1082,6 +1287,24 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
   });
 });
 
+describe('Tier 3.3 — verify-checkout-session CORS handling (round-1 backend-5)', () => {
+  let src;
+  beforeAll(() => { src = readFunction('verify-checkout-session'); });
+
+  it('handles OPTIONS preflight', () => {
+    expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
+  });
+
+  it('sources the origin allowlist from the shared module and never emits "*"', () => {
+    // W-R2-TRUST: the last per-function inline allowlist (with an `origin || '*'`
+    // fallback) was migrated to _shared/cors.ts, matching every sibling.
+    expect(src).toMatch(/from\s+['"]\.\.\/_shared\/cors\.ts['"]/);
+    // No wildcard ACAO literal, and no `origin || '*'` fallback survives.
+    expect(src).not.toMatch(/Access-Control-Allow-Origin['"]\s*:\s*['"]\*['"]/);
+    expect(src).not.toMatch(/origin\s*\|\|\s*['"]\*['"]/);
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────
 // Cross-function security
 // ─────────────────────────────────────────────────────────────────────────
@@ -1093,6 +1316,11 @@ const ALL_FUNCTIONS = [
   'admin-actions',
   'create-checkout',
   'verify-single-dossier',
+  // migration 115 — the nightly pricing-resync dispatcher target. It satisfies the
+  // no-secrets + serve + ESM-import sweeps below; it is NOT in FUNCTIONS_WITH_GUARD
+  // (it is cron-secret-gated, not user-facing — the same reasoning that exempts
+  // stripe-webhook, though this one DOES still call botGuard at the door).
+  'pricing-resync-cron',
 ];
 
 describe('Tier 3.3 — no plaintext secrets committed', () => {
@@ -1173,11 +1401,11 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   });
 
   it('provisions spend_credits RPC (atomic decrement)', () => {
-    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?spend_credits/i);
+    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?spend_credits/im);
   });
 
   it('provisions refund_credits RPC (ledger-consistent refund)', () => {
-    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?refund_credits/i);
+    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits/im);
   });
 
   it('provisions admin_actions audit table', () => {
@@ -1191,20 +1419,20 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   it('refund_credits writes a "grant" row (never modifies a spend row)', () => {
     // Look at the refund_credits function body. The function is ~50
     // lines so we need a generous window.
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock, 'refund_credits function body not found').toBeTruthy();
     expect(refundBlock[0]).toMatch(/insert\s+into[\s\S]{0,500}credit_ledger/i);
     expect(refundBlock[0]).toMatch(/['"]grant['"]/);
   });
 
   it('refund_credits is idempotent (rejects double-refunds of the same spend row)', () => {
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/already refunded/i);
   });
 
   it('refund_credits checks that the target row is actually a spend (not another grant)', () => {
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/kind\s*<>\s*['"]spend['"]/);
   });
@@ -1215,7 +1443,11 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   beforeAll(() => { sql = readMigration('017_fix_credit_auth_integrity.sql'); });
 
   it('replaces the broken welcome-credit trigger with the current ledger schema', () => {
-    const handleBlock = sql.match(/create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?comment\s+on\s+function\s+public\.handle_new_user/i);
+    // ⚠ Both ends ANCHORED AT LINE START (`^` + m): the unanchored form also
+    // matches prose quoting the statement and extracts comment text, which this
+    // test would assert over without failing. Canonical writeup:
+    // tests/security/moneyRpcNetCurrentGuards.test.js.
+    const handleBlock = sql.match(/^create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?^comment\s+on\s+function\s+public\.handle_new_user/im);
     expect(handleBlock, 'handle_new_user block not found').toBeTruthy();
     expect(handleBlock[0]).toMatch(/insert\s+into\s+public\.credit_ledger\s*\(\s*user_id,\s*kind,\s*amount,\s*source,\s*metadata\s*\)/i);
     expect(handleBlock[0]).toMatch(/'grant'[\s\S]{0,80}'welcome'/i);
@@ -1228,13 +1460,13 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   });
 
   it('exposes welcome_credit_available for the client gift-card gate', () => {
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.welcome_credit_available/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.welcome_credit_available/im);
     expect(sql).toMatch(/grant\s+execute\s+on\s+function\s+public\.welcome_credit_available\(uuid\)\s+to\s+authenticated/i);
   });
 
   it('adds service-role RPCs for audited admin writes', () => {
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/i);
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_set_credits/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/im);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_set_credits/im);
     expect(sql).toMatch(/_assert_service_admin_actor/i);
     expect(sql).toMatch(/insert\s+into\s+public\.admin_actions/i);
   });
@@ -1268,6 +1500,179 @@ describe('Tier 3.3 — product catalog drift between checkout + webhook', () => 
       if (CREDIT_PACK_KEYS.includes(key)) continue;
       expect(webhook, `webhook missing handler for ${key}`).toMatch(new RegExp(`['"]${key}['"]`));
     }
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// WEB-10(a) — THE ALLOWANCE TABLE'S CROSS-SIDE CREDIT PARITY
+//
+// The webhook's monthly allowance stopped being one hard-coded plan and became a
+// price-id → plan table. Each row's credit integer MIRRORS a client-side figure
+// in src/config/pricing.js, and the two sides live in different languages,
+// different runtimes and different test suites — exactly the shape that drifts.
+//
+// ⭐ THE PIN IS WRITTEN TO HOLD AT BOTH VALUES OF THE SURVEYOR DIAL. It compares
+// the webhook's integer to pricing.js's integer, never to a literal, so the
+// owner's later flip of SURVEYOR_PLAN.monthlyCredits stays ONE line on each side
+// with no test edit behind it. A flip of only one side reds here.
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('WEB-10(a) — the allowance table mirrors the client credit figures', () => {
+  let tableBlock;
+  let pricing;
+  beforeAll(() => {
+    const webhook = readFunction('stripe-webhook');
+    // Slice the marked table block, so an unrelated STRIPE_PRICE_* read elsewhere
+    // in this 3,000-line function (the surveyor_renewal discrimination, for one)
+    // can never be mistaken for a table row.
+    const start = webhook.indexOf('// ── ALLOWANCE TABLE ROWS: BEGIN');
+    const end = webhook.indexOf('// ── ALLOWANCE TABLE ROWS: END', start);
+    expect(start, 'stripe-webhook lost its ALLOWANCE TABLE ROWS begin marker').toBeGreaterThan(-1);
+    expect(end, 'stripe-webhook lost its ALLOWANCE TABLE ROWS end marker').toBeGreaterThan(start);
+    tableBlock = webhook.slice(start, end);
+    pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+  });
+
+  /** The integer the table spells beside one env name. */
+  function tableCreditsFor(envName) {
+    const m = tableBlock.match(new RegExp(`${envName}'\\)[\\s\\S]{0,400}?credits:\\s*(\\d+)`));
+    return m ? Number(m[1]) : null;
+  }
+
+  /** The integer pricing.js spells inside one Object.freeze block. */
+  function clientCreditsIn(blockAnchor) {
+    const at = pricing.indexOf(blockAnchor);
+    if (at < 0) return null;
+    const m = pricing.slice(at).match(/monthlyCredits:\s*(\d+)/);
+    return m ? Number(m[1]) : null;
+  }
+
+  it('the block really is the table (guard the guard)', () => {
+    // If the slice or the markers rot, every comparison below would read null
+    // and could go vacuously green on null === null.
+    expect(tableBlock).toMatch(/STRIPE_PRICE_SURVEYOR/);
+    expect(tableBlock).toMatch(/STRIPE_PRICE_PREMIUM/);
+    expect(tableBlock).toMatch(/plan:\s*'surveyor_monthly'/);
+    expect(tableBlock).toMatch(/CARTOGRAPHER_MONTHLY_PLAN/);
+    // …and the annual row is NOT here: its dial is 0, its cadence is unruled, and
+    // its server half is owner-gated WEB-10(b).
+    // anchored: the two positive STRIPE_PRICE_* matches above read this same slice
+    expect(tableBlock).not.toMatch(/STRIPE_PRICE_PREMIUM_ANNUAL/);
+  });
+
+  it('the Surveyor row grants exactly SURVEYOR_PLAN.monthlyCredits', () => {
+    const server = tableCreditsFor('STRIPE_PRICE_SURVEYOR');
+    const client = clientCreditsIn('export const SURVEYOR_PLAN = Object.freeze({');
+    expect(server, 'no credits integer beside STRIPE_PRICE_SURVEYOR in the table').not.toBeNull();
+    expect(client, 'SURVEYOR_PLAN.monthlyCredits not found in pricing.js').not.toBeNull();
+    expect(server).toBe(client);
+  });
+
+  it('the Cartographer row grants exactly TIERS.cartographer.monthlyCredits', () => {
+    const server = tableCreditsFor('STRIPE_PRICE_PREMIUM');
+    const client = clientCreditsIn('cartographer: Object.freeze({');
+    expect(server, 'no credits integer beside STRIPE_PRICE_PREMIUM in the table').not.toBeNull();
+    expect(client, 'TIERS.cartographer.monthlyCredits not found in pricing.js').not.toBeNull();
+    expect(server).toBe(client);
+  });
+
+  it('the unknown-plan arm fails CLOSED with an ALARM, and never by throwing', () => {
+    const webhook = readFunction('stripe-webhook');
+    // W-2: "never a silent skip that keeps the money and grants nothing" — the
+    // skip is paired with a structured logError carrying its own stage token.
+    expect(webhook).toMatch(/monthly_allowance_unknown_plan/);
+    expect(webhook).toMatch(/logError\([\s\S]{0,400}monthly_allowance_unknown_plan/);
+    // …and a THROW here would be worse than the silent skip it replaces: Stripe
+    // redelivers on any non-2xx, so an unrecognised invoice would retry forever.
+    // The alarm block must contain no throw.
+    const at = webhook.indexOf('monthly_allowance_unknown_plan');
+    const armStart = webhook.lastIndexOf('} else if (premiumPriceId && firstLinePriceId) {', at);
+    expect(armStart, 'the unknown-plan arm is no longer shaped as expected').toBeGreaterThan(-1);
+    const arm = webhook.slice(armStart, webhook.indexOf('} else {', at));
+    expect(arm).toMatch(/return profile;/);
+    // anchored: the same slice is asserted to CONTAIN the return above
+    expect(arm).not.toMatch(/throw\s/);
+  });
+
+  it('the §471.2/F5 back-compat line survives verbatim (the present-by-default arm)', () => {
+    const webhook = readFunction('stripe-webhook');
+    expect(webhook).toContain(
+      'monthly-allowance price-id gate inactive for invoice ${invoice.id} (env=${Boolean(premiumPriceId)}, line=${Boolean(firstLinePriceId)}) — proceeding for back-compat',
+    );
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// The Surveyor SKU asymmetry — DELIBERATE-PENDING-RULING (ODQ §839 FLAG 1)
+//
+// `surveyor` is an ACTIVE checkout SKU server-side and a fully wired webhook
+// lifecycle, while src/lib/stripe.js's client product map has no row for it —
+// so startCheckout('surveyor') throws. Whether that is a WALL (owner standing
+// ruling #3: "never a lookalike subscription — task-priced + BYOK") or a GAP
+// (WEB-9a's client arm, re-scoped) is a PAID-SURFACE call sitting on the
+// owner's desk since 2026-09-01, unruled.
+//
+// ⛔ A RED HERE IS NOT CURED BY DELETING THIS TEST. If the client map gained a
+// surveyor row, a paid surface was activated — check that the owner ruled GAP,
+// and retire this suite together with the docblock it guards, in that commit.
+// If the server rows vanished, the WALL was implemented by demolition instead
+// of by ruling, which is also a thing to look at rather than to re-point.
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('the Surveyor SKU asymmetry is deliberate, and documented where it bites', () => {
+  let checkoutSrc;
+  let webhookSrc;
+  let clientSrc;
+  beforeAll(() => {
+    checkoutSrc = readFunction('create-checkout');
+    webhookSrc = readFunction('stripe-webhook');
+    clientSrc = readFileSync(join(ROOT, 'src', 'lib', 'stripe.js'), 'utf8');
+  });
+
+  /**
+   * The BODY of buildProductsMap only. Sliced from the function keyword so the
+   * docblock above it — which necessarily says "surveyor" many times — cannot
+   * satisfy the absence assertion below. The end anchor is the PRODUCTS proxy
+   * that immediately follows.
+   */
+  function clientProductsMapBody() {
+    const start = clientSrc.indexOf('function buildProductsMap');
+    const end = clientSrc.indexOf('const PRODUCTS = new Proxy', start);
+    expect(start, 'src/lib/stripe.js lost buildProductsMap').toBeGreaterThan(-1);
+    expect(end, 'src/lib/stripe.js lost the PRODUCTS proxy end anchor').toBeGreaterThan(start);
+    return clientSrc.slice(start, end);
+  }
+
+  it('the SERVER sells surveyor: an active price row, a subscription product, and a full webhook lifecycle', () => {
+    expect(checkoutSrc).toMatch(/surveyor:\s*Deno\.env\.get\(['"]STRIPE_PRICE_SURVEYOR['"]\)/);
+    expect(checkoutSrc).toMatch(/SUBSCRIPTION_PRODUCTS[\s\S]{0,120}['"]surveyor['"]/);
+    expect(webhookSrc).toMatch(/product\s*===\s*['"]surveyor['"]/);
+    expect(webhookSrc).toMatch(/grant_surveyor_entitlement/);
+    expect(webhookSrc).toMatch(/['"]surveyor_renewal['"]/);
+    expect(webhookSrc).toMatch(/revoke_surveyor_entitlement_by_subscription/);
+  });
+
+  it('the CLIENT product map still carries no surveyor row (so startCheckout throws)', () => {
+    const body = clientProductsMapBody();
+    // Liveness anchors produced by the SAME slice: the map is real, populated,
+    // and keyed the way this assertion assumes, so the absence below measures
+    // exclusion rather than a slicer that drifted onto nothing.
+    expect(body).toMatch(/premium:\s*\{/);
+    expect(body).toMatch(/founder_lifetime:\s*\{/);
+    // anchored: the two positive matches above read the same slice of the same source
+    expect(body).not.toMatch(/\bsurveyor\b/);
+    // …and the throw the absence produces is still the live guard.
+    expect(clientSrc).toMatch(/throw new Error\(`Unknown product: \$\{product\}`\)/);
+  });
+
+  it('the omission is DOCUMENTED at the site, naming the ruling that owns it', () => {
+    const start = clientSrc.indexOf('function buildProductsMap');
+    const docblock = clientSrc.slice(0, start);
+    expect(docblock).toMatch(/DELIBERATE-PENDING-RULING/);
+    expect(docblock).toMatch(/§839/);
+    expect(docblock).toMatch(/standing ruling #3/);
+    expect(docblock).toMatch(/WALL/);
+    expect(docblock).toMatch(/GAP/);
   });
 });
 

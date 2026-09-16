@@ -9,18 +9,24 @@
  * the request we send.)
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+});
 
 const { buildAnthropicUserContent, stripCacheBreakpoint, CACHE_BREAKPOINT } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
-Deno.test('no breakpoint → bare string, unchanged', () => {
+scopedEnv.test('no breakpoint → bare string, unchanged', () => {
   const p = 'a prompt with no cache marker at all';
   assertEquals(buildAnthropicUserContent(p), p);
 });
 
-Deno.test('breakpoint → cached prefix block + plain tail; no content lost', () => {
+scopedEnv.test('breakpoint → cached prefix block + plain tail; no content lost', () => {
   const stable = 'STABLE: thesis + settlement summary, identical across a run\'s 14 passes';
   const varying = 'TASK: write the opening for THIS pass\nITEMS: {...}';
   const prompt = stable + CACHE_BREAKPOINT + varying;
@@ -37,7 +43,7 @@ Deno.test('breakpoint → cached prefix block + plain tail; no content lost', ()
   assertEquals(content[0].text + content[1].text, stable + varying);
 });
 
-Deno.test('both providers see identical text (Anthropic blocks == OpenAI input)', () => {
+scopedEnv.test('both providers see identical text (Anthropic blocks == OpenAI input)', () => {
   const prompt = 'GROUNDING' + CACHE_BREAKPOINT + 'PASS-SPECIFIC TASK';
   const blocks = buildAnthropicUserContent(prompt) as Array<{ text: string }>;
   const anthropicText = blocks.map((b) => b.text).join('');
@@ -46,10 +52,10 @@ Deno.test('both providers see identical text (Anthropic blocks == OpenAI input)'
   assertEquals(openaiText, 'GROUNDINGPASS-SPECIFIC TASK');
 });
 
-Deno.test('a degenerate empty prefix falls back to a bare string (no invalid block)', () => {
+scopedEnv.test('a degenerate empty prefix falls back to a bare string (no invalid block)', () => {
   assertEquals(buildAnthropicUserContent(CACHE_BREAKPOINT + 'tail only'), 'tail only');
 });
 
-Deno.test('stripCacheBreakpoint removes every marker occurrence', () => {
+scopedEnv.test('stripCacheBreakpoint removes every marker occurrence', () => {
   assertEquals(stripCacheBreakpoint('a' + CACHE_BREAKPOINT + 'b' + CACHE_BREAKPOINT + 'c'), 'abc');
 });

@@ -23,6 +23,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '110': resolve(dir, '110_restrict_get_credit_balance_to_owner.sql'),
@@ -41,7 +43,7 @@ describe('110 pglite target exists (guards against silent vacuous skip)', () => 
  *  public.<name>` to the first `$$;`. */
 function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration ${migKey}`);
   return m[0];
 }
@@ -89,7 +91,7 @@ describe.runIf(allExist)('110 get_credit_balance IDOR guard — execution (pglit
     `);
     // The REAL, net-current guarded body.
     await db.exec(extractFn('110', 'get_credit_balance'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.credit_spend_allocations, public.credit_ledger cascade;');

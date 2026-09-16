@@ -25,6 +25,14 @@ playwright/.cache/
 
 .claude/tmp-digests/
 
+# Disaster-recovery drill artifacts contain production user/account data and
+# checksum manifests. They belong in the encrypted backup store, never git.
+/backups/
+
+# Commit-bound simulation evidence is uploaded by CI or retained in the
+# operator's evidence store. Individual receipts are reproducible and noisy.
+/artifacts/
+
 # Point-in-time analysis artifacts (regenerable, large, churny). These are
 # OUTPUTS of scripts, never imported by code — keep them out of git so a stray
 # `node scripts/simulate-generations.mjs` / `deep-profile-generations.mjs` run

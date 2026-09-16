@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { evaluateTradeWar } from '../../src/domain/worldPulse/tradeWar.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Trade war — cooldown-ledger hygiene (resource-leak regression).

@@ -1,44 +1,46 @@
 /**
  * generateCampaignPDF.js — Campaign-level export.
  *
- * One PDF that zooms out across a whole campaign:
+ * One PDF that zooms out across a whole campaign, in EMITTED order (corrected
+ * 2026-09-01 — the old list omitted 6 and mis-numbered 7):
  *   1. Cover page (campaign name + stats)
  *   2. Settlement index (one-line roster, sortable)
  *   3. Relationship map (force-directed diagram across all settlements)
  *   4. Cross-settlement NPC connections (who talks to whom, across places)
  *   5. Per-settlement digest (one card per settlement — not the full sheet)
- *   6. Network effects appendix (cascading modifiers)
- *
- * Uses the same visual language as generateSettlementPDF.js but at a
- * higher altitude — prose is short, lists are wide, the goal is DM at-a-glance.
+ *   6. State of the Realm (living-world chapter; SELF-GATES — legacy campaigns skip)
+ *   7. Network effects appendix (cascading modifiers)
+ * Same visual language as generateSettlementPDF.js at a higher altitude.
  */
 import { jsPDF } from 'jspdf';
+import { formatCount } from '../domain/formatNumber.js';
+import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { autoLayout } from './graphLayout.js';
-// The per-settlement digest derives its overview line, adventure hook, and key
-// NPCs from the SAME shared view-model the single-settlement dossier renders, so
-// the two exports can't drift on field shape (e.g. an `influence` that is an
-// object vs a bare string, or a `role` the engine stores under `title`).
-import { buildViewModel } from '../pdf/lib/viewModel.js';
+import { slugify } from '../kernel/slugify.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
+import { REL_RGB, relRgb } from '../components/settlements/relationshipColors.js';
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
-// The campaign PDF's Realm Chronicle & Geopolitics section reads the
-// SAME pure selectors the settlement PDF + the on-screen Realm surfaces use, so
-// the three artifacts can never drift. All inert ([]/null) when dormant.
-import {
-  activeDeployments, liveSieges, liveTradeWars,
-  dispositionStandings, warExhaustionStandings,
-} from '../domain/display/warStatus.js';
+// lib-infra-7: the living-world read-models the settlement PDF already consumes,
+// reused (never recomputed) so the campaign artifact stops printing a frozen
+// pre-pulse network. All pure display selectors — dormant ⇒ empty ⇒ no chapter.
+import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
+import { liveSieges, warExhaustionStandings, dispositionStandings } from '../domain/display/warStatus.js';
 import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../domain/display/realmArcSummary.js';
-// Shared relationship palette (RGB channels for jsPDF). The card chips, the
-// dossier neighbour list, and these PDF lines all read this one module so a
-// named relationship is the same colour on every surface.
-import { REL_RGB } from '../components/settlements/relationshipColors.js';
+import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
+// THE ONE jsPDF text pass, hoisted (this file's spelling was the byte source).
+import { sanitizeJsPdfText as s } from './jsPdfText.js';
+// THE EMBEDDED FACE. Without it this painter draws with standard-14 Helvetica,
+// which cannot print 41 of the names the product's own pools ship.
+import { BOOK_FAMILY, registerBookFont } from './jsPdfBookFont.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
-function durationBand(ms) {
+// Exported for generateWorldBook, which reports the same campaign-scope completion
+// event. The settlement exporter keeps its own copy (a separate chunk); a THIRD
+// hand-inlined copy here is what this export exists to prevent.
+export function durationBand(ms) {
   const n = Number(ms);
   if (!Number.isFinite(n) || n < 0) return 'unknown';
   if (n < 5000) return 'lt_5s';
@@ -64,10 +66,10 @@ const GOLD  = [160, 118, 42];
 const BROWN = [107, 83,  48];
 const MUTED = [140, 120, 90];
 
-// Relationship line colours — sourced from the SHARED relationship palette so the
-// PDF lines match the library card chips and the dossier neighbour list exactly
-// (one source of truth; was previously a hand-kept duplicate of these RGBs).
-const REL_COLORS = REL_RGB;
+// Relationship line colours. §67.2: REL_RGB's orphan status ends here — this
+// hand-kept RGB copy is exactly what `relRgb()` was written for, and it was
+// missing `vassal` and `criminal_network`, so both fell to the neutral line AND
+// were absent from the legend this file builds by enumerating the table.
 
 const REL_DASH = {
   patron:   [1.5, 1.0],
@@ -88,66 +90,6 @@ function rect(d,x,y,w,h,fill,stroke=null) {
 }
 function hline(d,x1,y,x2,clr=TAN,lw=0.2) { sd(d,clr); d.setLineWidth(lw); d.line(x1,y,x2,y); }
 
-// jsPDF's built-in Helvetica is Latin-1 only, so any code point outside that set
-// is otherwise dropped to a space — which silently mangles ordinary English prose
-// that uses smart punctuation (curly quotes, en/em dashes, ellipses). Fold the
-// common typographic forms to their ASCII equivalents FIRST so the text reads
-// correctly instead of gapping. (True non-Latin scripts still can't render in
-// Helvetica — that needs an embedded Unicode font — but smart-quoted Latin text,
-// by far the common case, now survives.) Escapes used so the table stays legible.
-const PUNCT_FOLD = [
-  [/[\u2018\u2019\u201A\u201B]/g, "'"],             // smart single quotes -> '
-  [/[\u201C\u201D\u201E\u201F]/g, '"'],             // smart double quotes -> "
-  [/[\u2010\u2011\u2012\u2013\u2014\u2015]/g, '-'], // hyphen / en / em / figure dash -> -
-  [/\u2026/g, '...'],                              // ellipsis -> ...
-  [/\u2022/g, '-'],                                // bullet -> -
-  // Alternation (not a char class) so ZWJ/ZWNJ don't trip no-misleading-character-class.
-  [/\u200B|\u200C|\u200D|\u2060|\uFEFF/g, ''],       // zero-width / BOM -> drop
-  [/[\u2007\u2008\u2009\u200A\u202F\u205F]/g, ' '], // figure / thin / narrow-nbsp -> space
-];
-
-// Cyrillic (Russian core) -> ASCII transliteration. Helvetica can't render the
-// glyphs, so without this a Cyrillic name would strip to a single placeholder.
-// A best-effort romanisation keeps the name READABLE instead. Order matters:
-// multi-letter digraphs aren't needed here since we map per code point.
-const CYRILLIC_FOLD = {
-  \u0430:'a',\u0431:'b',\u0432:'v',\u0433:'g',\u0434:'d',\u0435:'e',\u0451:'e',\u0436:'zh',\u0437:'z',\u0438:'i',\u0439:'i',\u043A:'k',
-  \u043B:'l',\u043C:'m',\u043D:'n',\u043E:'o',\u043F:'p',\u0440:'r',\u0441:'s',\u0442:'t',\u0443:'u',\u0444:'f',\u0445:'kh',\u0446:'ts',
-  \u0447:'ch',\u0448:'sh',\u0449:'shch',\u044A:'',\u044B:'y',\u044C:'',\u044D:'e',\u044E:'yu',\u044F:'ya',
-};
-function transliterateCyrillic(str) {
-  let out = '';
-  for (const ch of str) {
-    const lower = ch.toLowerCase();
-    const mapped = CYRILLIC_FOLD[lower];
-    if (mapped === undefined) { out += ch; continue; }
-    // Preserve case: uppercase source -> capitalise the romanisation.
-    out += ch === lower ? mapped
-      : mapped.charAt(0).toUpperCase() + mapped.slice(1);
-  }
-  return out;
-}
-
-function s(v) {
-  // Fold smart punctuation, romanise Cyrillic, THEN handle anything still outside
-  // Latin-1. The negated class allows TAB/LF/CR (0x09/0x0A/0x0D), printable ASCII,
-  // and printable Latin-1; everything else (CJK, Arabic, etc. \u2014 Helvetica can't
-  // render them) is replaced PER RUN by a visible '?' placeholder rather than a
-  // space. A space collapses to nothing under the trim below, which silently
-  // BLANKED a fully-CJK/Cyrillic name to an empty string; the placeholder keeps
-  // an unrenderable name visible as a marker the DM can recognise.
-  let out = String(v || '');
-  for (const [re, rep] of PUNCT_FOLD) out = out.replace(re, rep);
-  out = transliterateCyrillic(out);
-  return out
-    // eslint-disable-next-line no-control-regex
-    .replace(/[^\x09\x0A\x0D\x20-\x7E\xA0-\xFF]+/g, '?')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-// Test-only alias for the PDF string sanitiser (Latin-1 fold + Cyrillic
-// romanisation + unrenderable-run placeholder). Not used by app code.
-export const __sanitizeForPdf = s;
 function wrap(d,text,maxW,fontSize) {
   d.setFontSize(fontSize);
   return d.splitTextToSize(s(text),maxW);
@@ -156,14 +98,6 @@ function wrap(d,text,maxW,fontSize) {
 function truncate(text, maxChars) {
   return truncateAtWord(s(text), maxChars, '...');
 }
-// Culture lives on the RESOLVED config (settlement.config.culture, written by
-// assembleSettlement from effectiveConfig) — the generator never sets a
-// top-level `settlement.culture`. Reading the bare field left the Cultures stat,
-// the CULTURE column, and the digest culture pill silently blank. Prefer the
-// config, fall back to the legacy top-level in case an older/imported save
-// carried it there.
-const cultureOf = (st) => st?.config?.culture || st?.culture;
-
 // A silent `lines.slice(0, n)` hides that prose continues — keep at most
 // `maxLines` lines and mark the final kept line when the clamp actually cut.
 function clampLines(lines, maxLines) {
@@ -177,24 +111,33 @@ function clampLines(lines, maxLines) {
 function secBar(d, y, label, clr = INK, textClr = [255,255,255]) {
   const bh = 6;
   rect(d, ML, y, CW, bh, clr);
-  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, textClr);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(8); st(d, textClr);
   d.text(s(label).toUpperCase(), ML+3, y+4.2);
   return y + bh + 3;
 }
 
 // Footer: "Campaign: <name>   Page N" bottom-right on each page
 function footer(d, campaignName, pageN, totalPagesHint) {
-  d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
+  d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(7); st(d, MUTED);
   d.text(s(campaignName), ML, PH - 5);
   const right = `Page ${pageN}` + (totalPagesHint ? ` of ${totalPagesHint}` : '');
   const w = d.getStringUnitWidth(right) * 7 / d.internal.scaleFactor;
   d.text(right, PW - MR - w, PH - 5);
 }
 
+// Ensure there's room for `h` more millimetres, else paginate.
+function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
+  if (y + h < BOT) return { y, pageN };
+  d.addPage();
+  pageN++;
+  const newY = newTopHandler ? newTopHandler(d, pageN) : MT;
+  return { y: newY, pageN };
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Page 1: Cover
 // ─────────────────────────────────────────────────────────────────────────────
-function buildCover(d, campaign, settlements) {
+function buildCover(d, campaign, settlements, generatedLabel) {
   // Parchment backdrop
   rect(d, 0, 0, PW, PH, PARCH);
 
@@ -208,10 +151,10 @@ function buildCover(d, campaign, settlements) {
   const centerX = PW/2;
   const titleY = 60;
 
-  d.setFont('helvetica','italic'); d.setFontSize(11); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(11); st(d, BROWN);
   d.text('CAMPAIGN DOSSIER', centerX, titleY, { align: 'center' });
 
-  d.setFont('helvetica','bold'); d.setFontSize(28); st(d, INK);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(28); st(d, INK);
   const titleLines = wrap(d, campaign.name || 'Untitled Campaign', CW - 20, 28);
   let ty = titleY + 16;
   for (const line of titleLines.slice(0, 3)) {
@@ -225,7 +168,7 @@ function buildCover(d, campaign, settlements) {
 
   // Description (if any)
   if (campaign.description) {
-    d.setFont('helvetica','normal'); d.setFontSize(10); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(10); st(d, BROWN);
     const descLines = wrap(d, campaign.description, CW - 40, 10);
     let dy = ty + 14;
     for (const line of clampLines(descLines, 6)) {
@@ -239,7 +182,7 @@ function buildCover(d, campaign, settlements) {
   const panelH = 80;
   rect(d, ML + 10, panelY, CW - 20, panelH, CREAM, TAN);
 
-  d.setFont('helvetica','bold'); d.setFontSize(9); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(9); st(d, BROWN);
   d.text('ROSTER', ML + 16, panelY + 9);
   hline(d, ML + 16, panelY + 11, ML + CW - 16, TAN, 0.4);
 
@@ -248,12 +191,12 @@ function buildCover(d, campaign, settlements) {
   let totalPop = 0;
   let totalNPCs = 0;
   const cultures = new Set();
-  for (const save of settlements) {
-    const tier = save.settlement?.tier || 'unknown';
+  for (const s of settlements) {
+    const tier = s.settlement?.tier || 'unknown';
     tierCounts[tier] = (tierCounts[tier] || 0) + 1;
-    totalPop += Number(save.settlement?.population) || 0;
-    totalNPCs += (save.settlement?.npcs || []).length;
-    const c = cultureOf(save.settlement); if (c) cultures.add(c);
+    totalPop += Number(s.settlement?.population) || 0;
+    totalNPCs += (s.settlement?.npcs || []).length;
+    const cul = resolveSettlementCulture(s.settlement); if (cul) cultures.add(cul);
   }
 
   // Two-column stat grid
@@ -262,48 +205,48 @@ function buildCover(d, campaign, settlements) {
   let gy = panelY + 18;
 
   const statRow = (x, y, label, value) => {
-    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, MUTED);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(8); st(d, MUTED);
     d.text(label, x, y);
-    d.setFont('helvetica','bold'); d.setFontSize(10); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(10); st(d, INK);
     d.text(String(value), x + 45, y);
   };
 
   statRow(col1X, gy,      'Settlements',  settlements.length);
-  statRow(col2X, gy,      'Population',   totalPop.toLocaleString());
+  statRow(col2X, gy,      'Population',   formatCount(totalPop));
   statRow(col1X, gy + 8,  'NPCs',         totalNPCs);
   statRow(col2X, gy + 8,  'Cultures',     cultures.size);
 
   // Tier breakdown
-  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(8); st(d, BROWN);
   d.text('BY TIER', col1X, gy + 22);
   hline(d, col1X, gy + 24, col1X + 60, TAN, 0.3);
 
   const tiers = Object.entries(tierCounts).sort((a,b)=>b[1]-a[1]);
   let ty2 = gy + 30;
   for (const [tier, count] of tiers.slice(0, 5)) {
-    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, INK);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(8); st(d, INK);
     d.text(`${tier.charAt(0).toUpperCase() + tier.slice(1)}`, col1X, ty2);
-    d.setFont('helvetica','bold');
+    d.setFont(BOOK_FAMILY,'bold');
     d.text(String(count), col1X + 55, ty2);
     ty2 += 5;
   }
 
   // Right column: top 3 cultures
-  d.setFont('helvetica','bold'); d.setFontSize(8); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(8); st(d, BROWN);
   d.text('CULTURES', col2X, gy + 22);
   hline(d, col2X, gy + 24, col2X + 60, TAN, 0.3);
 
   let cy = gy + 30;
   for (const culture of Array.from(cultures).slice(0, 5)) {
-    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, INK);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(8); st(d, INK);
     const cName = s(culture).replace(/_/g,' ');
     d.text(cName.charAt(0).toUpperCase() + cName.slice(1), col2X, cy);
     cy += 5;
   }
 
   // Footer byline
-  d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
-  d.text(`Generated ${new Date().toLocaleDateString()}`, centerX, PH - 20, { align: 'center' });
+  d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(7); st(d, MUTED);
+  d.text(`Generated ${generatedLabel}`, centerX, PH - 20, { align: 'center' });
   d.text('SettlementForge', centerX, PH - 15, { align: 'center' });
 }
 
@@ -315,7 +258,7 @@ function buildIndex(d, campaignName, settlements, pageN) {
   y = secBar(d, y, 'Settlement Index', INK);
 
   // Column headers
-  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
   d.text('NAME',       ML + 1,  y);
   d.text('TIER',       ML + 65, y);
   d.text('POP',        ML + 95, y);
@@ -329,12 +272,11 @@ function buildIndex(d, campaignName, settlements, pageN) {
 
   settlements.forEach((save, i) => {
     if (y + rowH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
       y = secBar(d, y, 'Settlement Index (continued)', INK);
-      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
       d.text('NAME',    ML + 1,  y);
       d.text('TIER',    ML + 65, y);
       d.text('POP',     ML + 95, y);
@@ -349,15 +291,15 @@ function buildIndex(d, campaignName, settlements, pageN) {
     const st_ = save.settlement || {};
     const links = (st_.neighbourNetwork || []).length;
 
-    d.setFont('helvetica','bold'); d.setFontSize(8); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(8); st(d, INK);
     d.text(truncate(save.name || st_.name || 'Unnamed', 32), ML + 1, y);
 
-    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(7); st(d, BROWN);
     d.text(truncate(st_.tier || '-', 14), ML + 65, y);
-    d.text(String((Number(st_.population) || 0).toLocaleString()), ML + 95, y);
-    d.text(truncate(String(cultureOf(st_) || '-').replace(/_/g,' '), 20), ML + 118, y);
+    d.text(String(formatCount(Number(st_.population) || 0)), ML + 95, y);
+    d.text(truncate(String(resolveSettlementCulture(st_) || '-').replace(/_/g,' '), 20), ML + 118, y);
 
-    d.setFont('helvetica','bold');
+    d.setFont(BOOK_FAMILY,'bold');
     st(d, links > 0 ? GOLD : MUTED);
     d.text(String(links), ML + 162, y);
 
@@ -374,38 +316,33 @@ function buildMap(d, campaignName, settlements, pageN) {
   let y = MT;
   y = secBar(d, y, 'Relationship Map', INK);
 
-  // Build nodes & edges. Node ids and neighbour ids can disagree in JS type
-  // (numeric save id vs stringified neighbour id), so key every id on String —
-  // a raw `===` lookup would silently drop edges on a type mismatch.
-  const nodes = settlements.map(save => ({
-    id: String(save.id),
-    label: save.name || save.settlement?.name || 'Unnamed',
-    tier: save.settlement?.tier || '',
+  // Build nodes & edges
+  const nodes = settlements.map(s => ({
+    id: s.id,
+    label: s.name || s.settlement?.name || 'Unnamed',
+    tier: s.settlement?.tier || '',
   }));
-  const nodeIds = new Set(nodes.map(nn => nn.id));
 
   const seenEdges = new Set();
   const edges = [];
   for (const save of settlements) {
-    const from = String(save.id);
     const net = save.settlement?.neighbourNetwork || [];
     for (const n of net) {
-      if (n.id == null) continue;
-      const to = String(n.id);
-      if (!nodeIds.has(to)) continue;
-      const key = [from, to].sort().join('::');
+      if (!n.id) continue;
+      if (!nodes.find(nn => nn.id === n.id)) continue;
+      const key = [save.id, n.id].sort().join('::');
       if (seenEdges.has(key)) continue;
       seenEdges.add(key);
       edges.push({
-        from,
-        to,
+        from: save.id,
+        to: n.id,
         type: n.relationshipType || 'neutral',
       });
     }
   }
 
   if (nodes.length === 0) {
-    d.setFont('helvetica','italic'); d.setFontSize(10); st(d, MUTED);
+    d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(10); st(d, MUTED);
     d.text('No settlements in this campaign.', ML + 5, y + 10);
     return { y: y + 20, pageN };
   }
@@ -435,7 +372,7 @@ function buildMap(d, campaignName, settlements, pageN) {
     if (!a || !b) continue;
     const pa = proj(a);
     const pb = proj(b);
-    const clr = REL_COLORS[e.type] || REL_COLORS.neutral;
+    const clr = relRgb(e.type);
     sd(d, clr);
     // Line weight by edge type — stronger for hostile/alliance
     const lw = e.type === 'hostile' ? 0.9 :
@@ -464,25 +401,25 @@ function buildMap(d, campaignName, settlements, pageN) {
     d.circle(p.x, p.y, 3.0);
 
     // Label above
-    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, INK);
     const label = truncate(node.label, 20);
     d.text(label, p.x, p.y - 4, { align: 'center' });
 
     // Tier below (small)
     if (node.tier) {
-      d.setFont('helvetica','normal'); d.setFontSize(5.5); st(d, MUTED);
+      d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(5.5); st(d, MUTED);
       d.text(s(node.tier), p.x, p.y + 6, { align: 'center' });
     }
   }
 
   // Legend below diagram
   let ly = DIAG_BOT + 5;
-  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
   d.text('LEGEND', ML, ly);
   hline(d, ML, ly + 1, ML + CW, TAN, 0.3);
   ly += 5;
 
-  const legendItems = Object.entries(REL_COLORS);
+  const legendItems = Object.entries(REL_RGB);
   const legCol = CW / 4;
   legendItems.forEach((entry, idx) => {
     const [type, clr] = entry;
@@ -492,7 +429,7 @@ function buildMap(d, campaignName, settlements, pageN) {
     const lyRow = ly + row * 5;
     sd(d, clr); d.setLineWidth(1.2);
     d.line(lx, lyRow - 0.5, lx + 8, lyRow - 0.5);
-    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(7); st(d, INK);
     d.text(REL_LABELS[type] || type.replace(/_/g,' '), lx + 10, lyRow);
   });
 
@@ -530,9 +467,9 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
   }
 
   if (connections.length === 0) {
-    d.setFont('helvetica','italic'); d.setFontSize(9); st(d, MUTED);
+    d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(9); st(d, MUTED);
     d.text('No cross-settlement NPC contacts recorded.', ML + 3, y + 8);
-    d.setFont('helvetica','normal'); d.setFontSize(8); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(8); st(d, BROWN);
     d.text('Link settlements in the Settlements panel to automatically generate',
            ML + 3, y + 15);
     d.text('paired NPC contacts between them.', ML + 3, y + 20);
@@ -540,7 +477,7 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
   }
 
   // Column headers
-  d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+  d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
   d.text('FROM',          ML + 1,  y);
   d.text('NPC',           ML + 48, y);
   d.text('->',            ML + 92, y);
@@ -552,12 +489,11 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
   const rowH = 5;
   connections.forEach((c, i) => {
     if (y + rowH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
       y = secBar(d, y, 'Cross-Settlement NPC Contacts (cont.)', INK);
-      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
       d.text('FROM',    ML + 1,  y);
       d.text('NPC',     ML + 48, y);
       d.text('->',      ML + 92, y);
@@ -569,24 +505,24 @@ function buildNPCConnections(d, campaignName, settlements, pageN) {
 
     if (i % 2 === 0) rect(d, ML, y - 3.5, CW, rowH, CREAM);
 
-    const clr = REL_COLORS[c.relType] || REL_COLORS.neutral;
+    const clr = relRgb(c.relType);
     // Left colored pip
     sf(d, clr);
     d.circle(ML + 0.5, y - 1.2, 1.1, 'F');
 
-    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(7); st(d, BROWN);
     d.text(truncate(c.home || '-', 22), ML + 3, y);
 
-    d.setFont('helvetica','bold'); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); st(d, INK);
     d.text(truncate(c.npc || '-', 22), ML + 48, y);
 
-    d.setFont('helvetica','bold'); st(d, clr);
+    d.setFont(BOOK_FAMILY,'bold'); st(d, clr);
     d.text('>', ML + 93, y);
 
-    d.setFont('helvetica','bold'); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); st(d, INK);
     d.text(truncate(c.partnerName || '-', 22), ML + 100, y);
 
-    d.setFont('helvetica','normal'); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'normal'); st(d, BROWN);
     d.text(truncate(c.partnerSettlement || '-', 22), ML + 148, y);
 
     y += rowH;
@@ -609,7 +545,6 @@ function buildDigest(d, campaignName, settlements, pageN) {
 
   for (const save of settlements) {
     if (y + CARD_H > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
@@ -617,35 +552,29 @@ function buildDigest(d, campaignName, settlements, pageN) {
     }
 
     const st_ = save.settlement || {};
-    // Derive the digest slices from the shared dossier view-model (same source
-    // as the single-settlement PDF). Guard the build: a malformed member save
-    // must not abort the whole campaign export, so fall back to a null vm and
-    // the section renders the blocks it can from the raw save.
-    let vm = null;
-    try { vm = buildViewModel({ settlement: st_ }); } catch { /* keep vm null; fall back to raw reads */ }
 
     // Card frame
     rect(d, ML, y, CW, CARD_H, CREAM, TAN);
 
     // Title band
     rect(d, ML, y, CW, 7, INK);
-    d.setFont('helvetica','bold'); d.setFontSize(10); st(d, [255,245,220]);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(10); st(d, [255,245,220]);
     d.text(truncate(save.name || st_.name || 'Unnamed', 40), ML + 3, y + 4.8);
 
     // Tier | Culture | Pop (right-aligned pills in title band)
     const pill = (label) => {
-      d.setFont('helvetica','bold'); d.setFontSize(7);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7);
       return d.getStringUnitWidth(label) * 7 / d.internal.scaleFactor + 4;
     };
-    const pops = (Number(st_.population) || 0).toLocaleString();
+    const pops = formatCount(Number(st_.population) || 0);
     const right1 = `${pops} pop`;
     const right2 = s(st_.tier || '');
-    const right3 = s(String(cultureOf(st_) || '').replace(/_/g,' '));
+    const right3 = s(String(resolveSettlementCulture(st_) || '').replace(/_/g,' '));
     const pw1 = pill(right1);
     const pw2 = pill(right2);
     const pw3 = pill(right3);
     let rx = PW - MR - 3 - pw1;
-    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, GOLD);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, GOLD);
     d.text(right1, rx, y + 4.8);
     rx -= (pw2 + 2);
     st(d, [220, 200, 160]);
@@ -662,25 +591,15 @@ function buildDigest(d, campaignName, settlements, pageN) {
     const bodyY = y + 10;
 
     // LEFT — overview line (character & hook)
-    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
     d.text('OVERVIEW', L_X, bodyY);
     hline(d, L_X, bodyY + 1, L_X + colW - 6, TAN, 0.2);
 
-    // Overview line — read the SAME derived fields the dossier overview chapter
-    // uses (view-model coerces settlementReason objects, historicalCharacter, and
-    // the AI arrival/pressure prose). Falls back to raw fields only if the vm
-    // build failed above.
-    const ov = vm?.overview;
-    const reason = ov
-      ? ov.settlementReason
-      : (typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary);
-    const overview = s(
-      (ov ? ov.character : st_.history?.historicalCharacter)
-      || (ov ? ov.arrivalScene : st_.arrivalScene)
-      || (ov ? ov.pressureSentence : st_.pressureSentence)
-      || reason || '',
-    );
-    d.setFont('helvetica','normal'); d.setFontSize(7); st(d, INK);
+    // Real settlement fields — characterSummary/description/overview were never
+    // produced, so the OVERVIEW block was always blank.
+    const reason = typeof st_.settlementReason === 'string' ? st_.settlementReason : st_.settlementReason?.primary;
+    const overview = s(st_.history?.historicalCharacter || st_.arrivalScene || st_.pressureSentence || reason || '');
+    d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(7); st(d, INK);
     const ovLines = wrap(d, overview, colW - 6, 7);
     let ly = bodyY + 5;
     for (const line of clampLines(ovLines, 3)) {
@@ -688,60 +607,54 @@ function buildDigest(d, campaignName, settlements, pageN) {
       ly += 3;
     }
 
-    // Adventure hook (one-liner) — from the shared hooks aggregator the dossier
-    // Plot Hooks chapter uses (priority-sorted, `PLOT HOOK:`-cleaned); falls back
-    // to the raw save fields if the vm build failed.
-    let hook = '';
-    if (vm?.hooks?.all?.length) {
-      hook = vm.hooks.all[0].hook || '';
-    } else {
-      const hooks = st_.plotHooks || st_.hooks || [];
-      if (hooks.length > 0) {
-        hook = typeof hooks[0] === 'string' ? hooks[0] : (hooks[0].hook || hooks[0].text || hooks[0].title || '');
-      }
-    }
-    if (hook) {
-      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
-      d.text('HOOK', L_X, ly + 2);
-      hline(d, L_X, ly + 3, L_X + colW - 6, TAN, 0.2);
-      d.setFont('helvetica','italic'); d.setFontSize(7); st(d, INK);
-      const hLines = wrap(d, hook, colW - 6, 7);
-      let hy = ly + 7;
-      for (const line of clampLines(hLines, 3)) {
-        d.text(line, L_X, hy);
-        hy += 3;
+    // Adventure hook (one-liner).
+    //
+    // ⚠ THIS LINE NEVER PRINTED. The read was `st_.plotHooks || st_.hooks`, and
+    // no writer produces either key on a settlement ROOT, so the HOOK slot on
+    // every settlement card was blank. `collectPlotHooks` is the canonical
+    // collector (src/domain/dossier/plotHooks.js) the on-screen tabs and the
+    // react-pdf lane already share, and it returns hooks sorted by priority —
+    // so hooks[0] here is now the settlement's STRONGEST hook rather than
+    // whichever one happened to sit first in an array nothing filled.
+    const hooks = collectPlotHooks(st_);
+    if (hooks.length > 0) {
+      const hook = hooks[0].text || '';
+      if (hook) {
+        d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
+        d.text('HOOK', L_X, ly + 2);
+        hline(d, L_X, ly + 3, L_X + colW - 6, TAN, 0.2);
+        d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(7); st(d, INK);
+        const hLines = wrap(d, hook, colW - 6, 7);
+        let hy = ly + 7;
+        for (const line of clampLines(hLines, 3)) {
+          d.text(line, L_X, hy);
+          hy += 3;
+        }
       }
     }
 
     // RIGHT — key NPCs
-    d.setFont('helvetica','bold'); d.setFontSize(7); st(d, BROWN);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, BROWN);
     d.text('KEY NPCs', R_X, bodyY);
     hline(d, R_X, bodyY + 1, R_X + colW - 6, TAN, 0.2);
-    // Key NPCs — read the dossier-normalized NPC slice (power-sorted, with
-    // influence coerced to a label and role folded into `title`). The old raw
-    // read `n.influence === 'high'` silently matched nothing when the engine
-    // emits influence as an object ({ label: 'high' }), and `n.role` missed the
-    // NPCs whose role lives under `title`/`presentation`. Prefer high-influence
-    // figures, else the top figures by power (already the slice's sort order).
-    const npcPool = vm?.npcs?.sorted?.length ? vm.npcs.sorted : (st_.npcs || []);
-    const highInfl = vm?.npcs?.sorted
-      ? npcPool.filter(n => String(n.influenceLabel || '').toLowerCase() === 'high').slice(0, 3)
-      : npcPool.filter(n => n.influence === 'high').slice(0, 3);
-    const shownNpcs = highInfl.length > 0 ? highInfl : npcPool.slice(0, 3);
+    const keyNpcs = (st_.npcs || [])
+      .filter(n => n.influence === 'high')
+      .slice(0, 3);
+    const shownNpcs = keyNpcs.length > 0 ? keyNpcs : (st_.npcs || []).slice(0, 3);
 
     let ry = bodyY + 5;
     for (const npc of shownNpcs) {
-      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, INK);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, INK);
       d.text(truncate(s(npc.name), 22), R_X, ry);
-      d.setFont('helvetica','italic'); d.setFontSize(6.5); st(d, BROWN);
-      d.text(truncate(s(npc.title || npc.role), 30), R_X, ry + 3);
+      d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(6.5); st(d, BROWN);
+      d.text(truncate(s(npc.role), 30), R_X, ry + 3);
       ry += 7;
     }
 
     // Links count
     const links = (st_.neighbourNetwork || []).length;
     if (links > 0) {
-      d.setFont('helvetica','bold'); d.setFontSize(6.5); st(d, GOLD);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(6.5); st(d, GOLD);
       d.text(`${links} link${links===1?'':'s'}`, R_X, y + CARD_H - 2.5);
     }
 
@@ -762,8 +675,8 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
     return { y: MT, pageN };
   }
 
-  const withEffects = settlements.filter(save => {
-    const m = allModifiers.get(save.id);
+  const withEffects = settlements.filter(s => {
+    const m = allModifiers.get(s.id);
     return m && m.sources && m.sources.length > 0;
   });
   if (withEffects.length === 0) return { y: MT, pageN };
@@ -777,16 +690,15 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
     const m = allModifiers.get(save.id);
     const blockH = 10 + 5 * EFFECT_CATEGORIES.length + 4;
     if (y + blockH > BOT - 10) {
-      footer(d, campaignName, pageN);
       d.addPage();
       pageN++;
       y = MT;
       y = secBar(d, y, 'Network Effects Appendix (cont.)', INK);
     }
 
-    d.setFont('helvetica','bold'); d.setFontSize(9); st(d, INK);
+    d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(9); st(d, INK);
     d.text(s(save.name), ML, y + 3);
-    d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
+    d.setFont(BOOK_FAMILY,'italic'); d.setFontSize(7); st(d, MUTED);
     d.text(`${m.sources.length} source${m.sources.length===1?'':'s'}`, ML + 100, y + 3);
     hline(d, ML, y + 5, ML + CW, TAN, 0.3);
     y += 8;
@@ -799,7 +711,7 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
       const val = m.totals[cat.key] || 0;
       const pct = Math.min(Math.abs(val) / maxAbs, 1);
       const isPos = val >= 0;
-      d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
+      d.setFont(BOOK_FAMILY,'normal'); d.setFontSize(7); st(d, BROWN);
       d.text(cat.label, ML, y);
       // Bar track
       rect(d, ML + 40, y - 2.5, 80, 2.5, [228,216,196]);
@@ -807,7 +719,7 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
       const fillClr = isPos ? [26, 90, 40] : [139, 26, 26];
       if (val !== 0) rect(d, ML + 40, y - 2.5, 80 * pct, 2.5, fillClr);
       // Value
-      d.setFont('helvetica','bold'); d.setFontSize(7); st(d, isPos ? [26,90,40] : [139,26,26]);
+      d.setFont(BOOK_FAMILY,'bold'); d.setFontSize(7); st(d, isPos ? [26,90,40] : [139,26,26]);
       const valStr = (isPos ? '+' : '') + (val * 100).toFixed(1) + '%';
       d.text(valStr, ML + 124, y);
       y += 4;
@@ -819,181 +731,186 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Realm Chronicle & Geopolitics
+// Main entry point
 // ─────────────────────────────────────────────────────────────────────────────
-// Reads the live worldState through the shared warStatus / pantheon / realmArc
-// selectors (no recompute, no three-way drift). Renders NOTHING when the realm
-// is dormant — no worldState, no war, no deity ⇒ a non-simulated campaign export
-// is unchanged.
-function buildRealmGeopolitics(d, campaignName, settlements, worldState, regionalGraph, pageN) {
-  const sieges = liveSieges({ worldState, regionalGraph });
-  const deployments = activeDeployments(worldState);
-  const tradeWars = liveTradeWars({ worldState, regionalGraph });
-  const standings = dispositionStandings(worldState);
-  const exhaustion = warExhaustionStandings(worldState);
-  const pantheon = pantheonStandings(worldState);
-  const arcs = realmArcLines({ worldState, regionalGraph, settlements });
+// ─────────────────────────────────────────────────────────────────────────────
+// State of the Realm — the living-world chapter (lib-infra-7). The realm's ACTUAL
+// history (chronicle beats, sieges, war-weariness, pantheon standing, named arcs)
+// from the SAME pure read-models the settlement PDF's Faith & War chapter consumes
+// — never recomputed. Gated on a canonized worldState with living content, so a
+// legacy / pre-pulse campaign skips the chapter and renders exactly as before.
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * The living-world SUMMARY DATA — the pure read layer of the State of the Realm
+ * chapter, split from rendering so it is unit-testable (lib-infra-7). Reuses the
+ * SAME display selectors the settlement PDF consumes; never recomputes. Gated on a
+ * canonized worldState; a legacy / draft-world campaign returns `{ present:false }`
+ * so the chapter is skipped and the export is byte-identical to before.
+ *
+ * THE FAITH SEAM — `opts.faithUnlocked` is the realm-scale twin of the settlement
+ * lane's gate (resolveExportSeam feeding faithChapterVisible): the caller passes the
+ * premium result and the DEFAULT (false) is the safe one, so a free / lapsed / anon
+ * realm export never prints a deity name. A locked export reads the realm WITHOUT its
+ * faith ledger, so neither the Pantheon standing nor an "Ascendancy of <deity>" arc
+ * line is ever PRODUCED — whole-section omission, never a blanked name. War, chronicle
+ * and trade content read the live worldState and are untouched by the seam.
+ *
+ * @param {Object} campaign
+ * @param {Array} [settlements]
+ * @param {{ faithUnlocked?: boolean }} [opts]
+ * @returns {{ present:false } | { present:true, nameFor:(id:any)=>string, majors:string[],
+ *   sieges:any[], weary:any[], standings:any[], pantheon:any[], arcs:string[] }}
+ */
+export function collectRealmSummary(campaign, settlements = [], opts = {}) {
+  const worldState = campaign?.worldState || null;
+  if (!worldState?.canonizedAt) return { present: false };
+  const { faithUnlocked = false } = opts;
+  const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+  // The faith-gated read of the realm: the live world minus its pantheon ledger when
+  // the export is locked. ONE seam value feeds BOTH deity-name producers (the
+  // standings and the arc lines), so the two can never drift apart.
+  const faithView = faithUnlocked ? worldState : { ...worldState, pantheon: null };
 
-  // Dormant realm ⇒ render nothing (byte-identical off-state).
-  if (!sieges.length && !deployments.length && !tradeWars.length
-    && !standings.length && !exhaustion.length && !pantheon.length && !arcs.length) {
-    return { pageN, rendered: false };
-  }
-
-  /** @type {Map<string, string>} */
   const nameById = new Map();
-  for (const sv of settlements) {
-    const id = sv?.id != null ? String(sv.id) : null;
-    const nm = sv?.name || sv?.settlement?.name;
-    if (id && nm) nameById.set(id, String(nm));
+  for (const save of settlements) {
+    const id = String(save?.id ?? save?.settlement?.id ?? '');
+    if (id) nameById.set(id, save?.settlement?.name || save?.name || id);
   }
   const nameFor = (id) => nameById.get(String(id)) || String(id);
+
+  const grounding = buildChronicleGrounding({
+    wizardNews: campaign.wizardNews,
+    worldState,
+    snapshot: { settlements: (campaign.settlementIds || []).map(id => ({ id, name: nameFor(id) })) },
+    regionalGraph,
+    lookback: 12,
+  });
+  const majors = Array.isArray(grounding?.majorHeadlines) ? grounding.majorHeadlines.slice(0, 10) : [];
+  // Only public sieges reach this shareable artifact (a GM-concealed front stays hidden).
+  const sieges = liveSieges({ worldState, regionalGraph }).filter(sg => sg.visibility !== 'concealed');
+  const weary = warExhaustionStandings(worldState);
+  const standings = dispositionStandings(worldState);
+  const pantheon = pantheonStandings(faithView);
+  const arcs = realmArcLines({ worldState: faithView, regionalGraph, settlements });
+
+  const present = !!(majors.length || sieges.length || weary.length || standings.length || pantheon.length || arcs.length);
+  return { present, nameFor, majors, sieges, weary, standings, pantheon, arcs };
+}
+
+function buildLivingWorld(d, campaignName, campaign, settlements, pageN, faithUnlocked) {
+  const rs = collectRealmSummary(campaign, settlements, { faithUnlocked });
+  if (!rs.present) return { pageN }; // legacy / draft / quiet world ⇒ chapter skipped
+  const { nameFor, majors, sieges, weary, standings, pantheon, arcs } = rs;
 
   d.addPage();
   pageN++;
   let y = MT;
-  y = secBar(d, y, 'Realm Chronicle & Geopolitics', INK);
+  y = secBar(d, y, 'State of the Realm', INK);
 
-  const ensure = (h) => {
-    if (y + h > BOT - 10) {
-      footer(d, campaignName, pageN);
-      d.addPage();
-      pageN++;
-      y = MT;
-      y = secBar(d, y, 'Realm Chronicle & Geopolitics (cont.)', INK);
-    }
-  };
+  const newTop = (dd) => secBar(dd, MT, 'State of the Realm (continued)', INK);
+  const ensure = (h) => { const r = _ensureSpace(d, y, h, campaignName, pageN, newTop); y = r.y; pageN = r.pageN; };
 
-  const subhead = (text) => {
+  const subHead = (labelText) => {
     ensure(10);
-    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, BROWN);
-    d.text(s(text).toUpperCase(), ML, y);
-    hline(d, ML, y + 1.5, ML + CW, TAN, 0.3);
-    y += 6;
+    d.setFont(BOOK_FAMILY, 'bold'); d.setFontSize(8); st(d, BROWN);
+    d.text(s(labelText).toUpperCase(), ML, y);
+    hline(d, ML, y + 1.2, PW - MR, TAN, 0.2);
+    y += 5;
   };
-
-  const bullet = (text, clr = INK) => {
+  const bullet = (text) => {
     const lines = wrap(d, text, CW - 6, 8);
-    ensure(lines.length * 4 + 2);
-    d.setFont('helvetica', 'normal'); d.setFontSize(8);
-    st(d, GOLD); d.text('•', ML, y);
-    st(d, clr);
-    for (const line of lines) { d.text(line, ML + 4, y); y += 4; }
-    y += 1;
+    for (let i = 0; i < lines.length; i++) {
+      ensure(4);
+      d.setFont(BOOK_FAMILY, 'normal'); d.setFontSize(8); st(d, INK);
+      d.text((i === 0 ? '- ' : '  ') + lines[i], ML, y);
+      y += 3.6;
+    }
+    y += 0.6;
   };
 
-  // ── Named realm arcs (the epic). ──────────────────────────────────────────
-  if (arcs.length) {
-    subhead('Realm Arcs');
-    for (const arc of arcs) bullet(arc);
+  if (majors.length) {
+    subHead('Chronicle');
+    for (const h of majors) bullet(h);
     y += 2;
   }
-
-  // ── Active sieges + deployments. ──────────────────────────────────────────
-  if (sieges.length || deployments.length) {
-    subhead('Wars & Sieges');
-    for (const siege of sieges) {
-      const coalition = siege.coalition.map(nameFor).join(', ');
-      bullet(`${nameFor(siege.targetId)} is besieged${coalition ? ` by ${coalition}` : ''}.`, [139, 26, 26]);
+  if (sieges.length || weary.length || standings.length) {
+    subHead('War & Sieges');
+    for (const sg of sieges.slice(0, 8)) {
+      const besiegers = (sg.coalition || []).map(nameFor).filter(Boolean).join(', ') || 'A besieging force';
+      bullet(`${besiegers} ${sg.coalition && sg.coalition.length > 1 ? 'besiege' : 'besieges'} ${nameFor(sg.targetId)}.`);
     }
-    for (const dep of deployments) {
-      bullet(`${nameFor(dep.homeId)} has an army deployed against ${nameFor(dep.targetId)} (${s(dep.role)}).`);
-    }
+    for (const w of weary.slice(0, 6)) bullet(`${nameFor(w.id)} - ${w.band}.`);
+    const topAgg = standings.slice().sort((a, b) => b.score - a.score)[0];
+    if (topAgg) bullet(`Aggressor of record: ${nameFor(topAgg.id)} (${topAgg.wins}W / ${topAgg.losses}L).`);
     y += 2;
   }
-
-  // ── Trade wars. ───────────────────────────────────────────────────────────
-  if (tradeWars.length) {
-    subhead('Trade Wars');
-    for (const war of tradeWars) {
-      bullet(`${nameFor(war.winnerId)} seizes ${nameFor(war.buyerId)}'s ${s(war.commodityLabel)} market.`);
-    }
-    y += 2;
-  }
-
-  // ── Disposition + war-weariness standings. ───────────────────────────────
-  if (standings.length || exhaustion.length) {
-    subhead('Standings');
-    for (const row of standings) {
-      bullet(`${nameFor(row.id)}: ${row.wins}W / ${row.losses}L (net ${row.score > 0 ? '+' : ''}${row.score}).`);
-    }
-    for (const row of exhaustion) {
-      bullet(`${nameFor(row.id)} is ${s(row.band)} (war-exhaustion ${row.warExhaustion.toFixed(2)}).`, MUTED);
-    }
-    y += 2;
-  }
-
-  // ── Pantheon. ─────────────────────────────────────────────────────────────
   if (pantheon.length) {
-    subhead('Pantheon');
-    for (const p of pantheon) {
-      const tail = p.tier !== 'major' && p.fromMajor > 0 ? `, ${p.fromMajor} from Major` : '';
-      bullet(`${deityDisplayName(p.id)} (${s(p.tier)}), ${p.seats} seat${p.seats === 1 ? '' : 's'}${tail}.`);
+    subHead('Pantheon');
+    for (const p of pantheon.slice(0, 8)) {
+      bullet(`${deityDisplayName(p.id)} - ${p.tier}, ${p.seats} seat${p.seats === 1 ? '' : 's'}.`);
     }
+    y += 2;
+  }
+  if (arcs.length) {
+    subHead('Realm Arcs');
+    for (const arc of arcs.slice(0, 8)) bullet(arc);
   }
 
-  return { pageN, rendered: true };
+  return { pageN };
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Main entry point
-// ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Resolve a campaign's member saves from the full save list.
- *
- * Save ids and campaign.settlementIds can disagree in JS type (a numeric save
- * id vs a stringified settlementId, or vice versa) depending on the storage
- * round-trip, so we key both sides on String — a raw `Set.has(save.id)` would
- * silently drop members on a type mismatch. We also walk settlementIds (not
- * allSaves) so members list in campaign order, and de-dupe in case the same
- * save id appears twice in settlementIds.
- *
- * @param {object} campaign         The campaign ({ settlementIds }).
- * @param {Array<object>} allSaves  Every available save ({ id, … }).
- * @returns {Array<object>}         Member saves, in settlementIds order.
+ * Paint + download the campaign PDF. Fire-and-download: returns nothing, calls
+ * doc.save().
+ * @param {Object} campaign
+ * @param {Array} [allSaves]
+ * @param {{ now?: string, faithUnlocked?: boolean }} [opts] `now` is the already-
+ *   formatted cover date — the SAME injectable seam the World Book cover carries
+ *   (generateWorldBook opts.now), so a fixture renders a reproducible cover.
+ *   Omitted ⇒ wall clock, exactly as before. `faithUnlocked` is the premium faith
+ *   seam (see collectRealmSummary); the default false is the safe one, so a free /
+ *   lapsed / anon campaign export carries no pantheon and no deity-named arc.
+ *   `loadFace` is the font seam: it reads one embedded face's bytes, and defaults
+ *   to fetching the shipped public path. Node has no origin to resolve `/fonts/…`
+ *   against, so a harness passes its own reader (tests/helpers/bookFaceLoader.js)
+ *   — the same shape the react-pdf byte-render tests use for Font.register.
+ * @returns {Promise<void>} ASYNC since the embedded face is fetched. Both product
+ *   call sites (CampaignFolder.jsx) already awaited this; a test call site that
+ *   forgets to await reads the artifact before it exists rather than passing.
  */
-function resolveMembers(campaign, allSaves) {
-  const byId = new Map();
-  for (const save of allSaves || []) {
-    if (save && save.id != null) byId.set(String(save.id), save);
-  }
-  const out = [];
-  const seen = new Set();
-  for (const sid of campaign?.settlementIds || []) {
-    const key = String(sid);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    const save = byId.get(key);
-    if (save) out.push(save);
-  }
-  return out;
-}
-// Test-only alias. Not used by app code.
-export const __resolveMembers = resolveMembers;
-
-export function generateCampaignPDF(campaign, allSaves) {
+export async function generateCampaignPDF(campaign, allSaves, opts = {}) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
   const startedAt = Date.now();
-  const settlements = resolveMembers(campaign, allSaves);
+  // ⚠ BOTH ENDS COERCE. `settlementIds` and a save's `id` are one identity written
+  // by two producers, and nothing in the persisted shape forces them to one JS type
+  // (an imported campaign round-trips whatever its source file carried). A raw
+  // `has(s.id)` resolves ZERO members on a type mismatch and the paid artifact
+  // prints a settlement-less cover instead of failing loudly. Nine sibling sites
+  // (mapEntityIds.js:41, resolveExportSeam.js:28-33, AuspicePanel.jsx:59, …) already
+  // use this idiom; the two exporters were the outliers. Pinned in exportDateSeam.
+  const ids = new Set((campaign.settlementIds || []).map(String));
+  const settlements = (allSaves || []).filter(s => ids.has(String(s.id)));
 
   if (settlements.length === 0) {
     // Still emit a cover page so the user sees something.
   }
 
   const doc = new jsPDF({ unit: 'mm', format: 'a4', compress: true });
+  // Before any setFont: registration must precede the first selection, and a
+  // failure throws rather than falling back to Helvetica — a silent fallback
+  // would quietly print the mangled names again with nothing to say so.
+  await registerBookFont(doc, opts.loadFace);
   let pageN = 1;
 
   // Page 1: cover
-  buildCover(doc, campaign, settlements);
+  buildCover(doc, campaign, settlements, opts.now || new Date().toLocaleDateString('en-US'));
 
   // Page 2+: index
   doc.addPage();
   pageN++;
   const r1 = buildIndex(doc, campaign.name, settlements, pageN);
   pageN = r1.pageN;
-  footer(doc, campaign.name, pageN);
 
   // Page 3+: map
   if (settlements.length > 0) {
@@ -1001,49 +918,78 @@ export function generateCampaignPDF(campaign, allSaves) {
     pageN++;
     const r2 = buildMap(doc, campaign.name, settlements, pageN);
     pageN = r2.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
   // Cross-settlement NPC connections
   if (settlements.length > 0) {
     const r3 = buildNPCConnections(doc, campaign.name, settlements, pageN);
     pageN = r3.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
   // Per-settlement digest
   if (settlements.length > 0) {
     const r4 = buildDigest(doc, campaign.name, settlements, pageN);
     pageN = r4.pageN;
-    footer(doc, campaign.name, pageN);
   }
 
-  // Network effects appendix
+  // State of the Realm — the living-world chapter (lib-infra-7). Self-gates on a
+  // canonized worldState with living content; a legacy campaign skips it entirely.
+  // The faith seam rides with it: a locked export collects no pantheon and no
+  // deity-named arc, so a deity-only realm degrades to no chapter at all.
+  {
+    const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN, opts.faithUnlocked);
+    pageN = rlw.pageN;
+  }
+
+  // Network effects appendix. Its returned pageN is deliberately NOT read back:
+  // nothing downstream needs it now that footers are stamped from the finished
+  // document, and re-assigning it here is exactly the dead write the linter
+  // flags (no-useless-assignment). `pageN` is still threaded IN — every chapter
+  // needs to know which page it starts on.
   if (settlements.length > 1) {
-    const r5 = buildNetworkAppendix(doc, campaign.name, settlements, pageN);
-    pageN = r5.pageN;
-    footer(doc, campaign.name, pageN);
+    buildNetworkAppendix(doc, campaign.name, settlements, pageN);
   }
 
-  // Realm Chronicle & Geopolitics — the living-world section.
-  // Self-gates: a dormant / non-simulated campaign carries no worldState ledgers
-  // ⇒ buildRealmGeopolitics renders nothing and adds no page.
-  if (settlements.length > 0) {
-    const worldState = campaign.worldState || null;
-    const regionalGraph = campaign.regionalGraph || campaign.worldState?.regionalGraph || null;
-    const r6 = buildRealmGeopolitics(doc, campaign.name, settlements, worldState, regionalGraph, pageN);
-    if (r6.rendered) {
-      pageN = r6.pageN;
-      footer(doc, campaign.name, pageN);
-    }
+  // ── FOOTERS: ONE WRITER, ONE PASS, AFTER THE DOCUMENT IS COMPLETE ──────────
+  // Every chapter used to stamp its own footer by hand, which produced two
+  // defects that were really one. First, `footer`'s `totalPagesHint` was dead:
+  // all ELEVEN call sites passed three arguments, so "Page N of M" could never
+  // render — a page count is simply not knowable while the document is still
+  // being built. Second, the stamps were not guarded uniformly:
+  // buildNetworkAppendix early-returns WITHOUT advancing pageN (getAllModifiers
+  // threw, or no settlement has network effects) while its caller stamped
+  // unconditionally, so the page the previous chapter had already footered was
+  // painted a SECOND time, one footer over the other. Measured on a two-member
+  // campaign with no links: stamps per page were {2:1, 3:1, 4:1, 5:2}.
+  //
+  // Stamping here instead fixes both at the cause and removes the habitat: the
+  // total is known because the document is finished, and a page cannot be
+  // stamped twice because exactly one loop stamps it. Page 1 is the cover and
+  // stays unfootered, as it always has.
+  const totalPages = doc.getNumberOfPages();
+  for (let p = 2; p <= totalPages; p++) {
+    doc.setPage(p);
+    footer(doc, campaign.name, p, totalPages);
   }
 
-  // Filename
-  const slug = (campaign.name || 'campaign')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 40) || 'campaign';
+  // Filename. Through the ONE slugify primitive rather than a hand-inlined builder
+  // (the class tests/lint/slugifyIdiomBaseline.test.js exists to shrink).
+  //
+  // PARITY, PROVEN PER SITE as that ratchet's header demands: this copy LOWERED
+  // THEN STRIPPED — the same order the kernel uses — so unlike the dossier
+  // exporter's copy (which stripped then lowered) it is BYTE-IDENTICAL to the
+  // kernel across every probed input, including empty, null, wholly non-Latin,
+  // separator-only, exotic-case and over-length names.
+  //
+  // ⚠ THE CAP CAN LAND MID-SEPARATOR. The kernel edge-trims BEFORE applying `max`
+  // (its documented contract, and NOT changeable here — several call sites mint
+  // PERSISTED ids through the same primitive), so slicing at 40 can leave a
+  // trailing '-' and the file downloads as `campaign-…-cliffs-.pdf`. The re-trim is
+  // therefore this caller's business, exactly as it is in generateSettlementPDF.js
+  // and generateWorldBook.js.
+  const slug = slugify(campaign.name, {
+    max: 40, empty: 'campaign', fallback: 'campaign',
+  }).replace(/-+$/, '') || 'campaign';
 
   doc.save(`campaign-${slug}.pdf`);
 

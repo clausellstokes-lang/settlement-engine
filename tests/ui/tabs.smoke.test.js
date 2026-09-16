@@ -17,6 +17,7 @@
 import React from 'react';
 import { describe, test, expect, beforeAll, afterEach } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { OverviewTab }      from '../../src/components/new/tabs/OverviewTab.jsx';
 import { ResourcesTab }     from '../../src/components/new/tabs/ResourcesTab.jsx';
@@ -64,6 +65,43 @@ describe('OverviewTab smoke', () => {
   test('renders without crashing when settlement is null/undefined', () => {
     expect(() => render(e(OverviewTab, { settlement: null }))).not.toThrow();
     expect(() => render(e(OverviewTab, { settlement: undefined }))).not.toThrow();
+  });
+
+  // ODQ §767.3(b)+(c) — the walk's copy defects, pinned at the render site.
+  test('a structural suggestion reads as two clean sentences, never joined words', () => {
+    const s = {
+      name: 'X', tier: 'village', population: 300,
+      structuralSuggestions: [{
+        type: 'suggestion',
+        reason: 'Frontier region: even small settlements benefit from a palisade or earthwork against monster incursions.',
+        suggested: ['Palisade or earthworks', 'Citizen militia'],
+      }],
+    };
+    const { container } = render(e(OverviewTab, { settlement: s }));
+    const text = container.textContent;
+    // The exact sentence pair — one period, a space, the PDF's "Consider:" form.
+    const pair = 'monster incursions. Consider: Palisade or earthworks, Citizen militia.';
+    expect(text).toContain(pair);
+    // The two shipped defects stay dead: the double stop and the joined words. Both
+    // travel through the anchor, so a suggestion block that drifted away entirely can
+    // never read as "the defect is fixed".
+    expectAbsentWithAnchor(text, 'incursions..', pair, 'structural suggestion sentence pair');
+    expectAbsentWithAnchor(text, 'ConsiderPalisade', pair, 'structural suggestion sentence pair');
+  });
+
+  test('a single quarter is a "quarter", not "1 quarters"', () => {
+    const s = {
+      name: 'X', tier: 'village', population: 300,
+      spatialLayout: { layout: 'Village green beside the mill', quarters: [{ name: 'Market Quarter', desc: 'stalls' }] },
+    };
+    const { container } = render(e(OverviewTab, { settlement: s }));
+    expectAbsentWithAnchor(container.textContent, '1 quarters', 'Spatial Layout (1 quarter)',
+      'single-quarter pluralization');
+    // Plural control: two quarters still read as quarters.
+    cleanup();
+    const two = { ...s, spatialLayout: { ...s.spatialLayout, quarters: [...s.spatialLayout.quarters, { name: 'Shrine', desc: 'quiet' }] } };
+    const second = render(e(OverviewTab, { settlement: two }));
+    expect(second.container.textContent).toContain('Spatial Layout (2 quarters)');
   });
 });
 

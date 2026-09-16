@@ -1,0 +1,181 @@
+[
+  {
+    "id": "s_a1b2c3d4e5f60718",
+    "name": "Harrowmoor",
+    "tier": "village",
+    "seed": "harrowmoor-8823",
+    "toggles": {
+      "institutionToggles": {
+        "village::Economy::Marketplace": {
+          "require": true
+        }
+      },
+      "categoryToggles": {
+        "Magic": {
+          "allow": false
+        }
+      },
+      "goodsToggles": {
+        "iron_tools": {
+          "require": true
+        }
+      },
+      "servicesToggles": {}
+    },
+    "config": {
+      "settType": "village",
+      "terrain": "moor",
+      "culture": "gaelic",
+      "tradeRouteAccess": "road",
+      "monsterThreat": "moderate"
+    },
+    "campaignState": {
+      "phase": "draft",
+      "eventLog": [],
+      "systemState": null,
+      "locks": {},
+      "canonizedAt": null
+    },
+    "settlement": {
+      "name": "Harrowmoor",
+      "tier": "village",
+      "population": 920,
+      "_seed": "harrowmoor-8823",
+      "config": {
+        "terrain": "moor",
+        "terrainType": "moor",
+        "culture": "gaelic",
+        "tradeRouteAccess": "road",
+        "monsterThreat": "moderate"
+      },
+      "stress": {
+        "type": "plague",
+        "label": "Wasting Fever",
+        "summary": "A slow fever thins the herds and the households alike.",
+        "crisisHook": "If the spring caravan is quarantined, the tanners have no hides to sell."
+      },
+      "economicState": {
+        "prosperity": {
+          "tier": "Poor"
+        },
+        "primaryExports": [
+          {
+            "name": "peat",
+            "volume": "steady"
+          },
+          {
+            "name": "wool",
+            "volume": "seasonal"
+          }
+        ],
+        "safetyProfile": {
+          "safetyLabel": "Uneasy",
+          "guardEffectivenessDesc": "A dozen hearth-wardens, no standing watch.",
+          "safetyDesc": "The moor road is walked in daylight only.",
+          "economicDragDesc": "Toll-skimming eats a tenth of the peat trade.",
+          "crimeTypes": [
+            {
+              "type": "smuggling",
+              "desc": "Untaxed peat moves through the bog paths."
+            }
+          ]
+        }
+      },
+      "economicViability": {
+        "summary": "Viable but strained — the peat cut barely covers the grain import.",
+        "metrics": {
+          "foodBalance": {
+            "dailyProduction": 780,
+            "dailyNeed": 1000,
+            "deficit": 220,
+            "importCoverage": 180,
+            "magicFoodOffset": 0
+          }
+        }
+      },
+      "powerStructure": {
+        "government": "Moot of Elders",
+        "factions": [
+          {
+            "name": "The Peat Moot",
+            "isGoverning": true,
+            "power": "dominant",
+            "desc": "The council of turf-cutters that sets the season's quotas."
+          },
+          {
+            "name": "Tanners' Compact",
+            "isGoverning": false,
+            "power": "rising",
+            "desc": "Hide-workers who resent the moot's quarantine of the caravan."
+          }
+        ],
+        "conflicts": [
+          {
+            "factions": [
+              "The Peat Moot",
+              "Tanners' Compact"
+            ],
+            "issue": "whether to quarantine the spring caravan",
+            "stakes": "a season of hide sales against the risk of the fever spreading"
+          }
+        ]
+      },
+      "history": {
+        "historicalCharacter": "A settlement that has always bargained with hard ground.",
+        "founding": {
+          "reason": "The first cutters followed a dry ridge across the bog.",
+          "initialChallenge": "Every foundation had to be corduroyed over peat.",
+          "overcoming": "They learned to float their granaries on timber rafts."
+        },
+        "historicalEvents": [
+          {
+            "type": "plague",
+            "name": "The Grey Winter",
+            "yearsAgo": 40,
+            "description": "A fever like this one halved the herds."
+          }
+        ],
+        "currentTensions": [
+          {
+            "type": "economic",
+            "severity": "rising",
+            "description": "The tanners threaten to run the caravan themselves."
+          }
+        ]
+      },
+      "institutions": [
+        {
+          "name": "The Turf Hall",
+          "category": "Government",
+          "desc": "Where the moot meets and the quotas are chalked."
+        },
+        {
+          "name": "Bog-Chapel of the Drowned",
+          "category": "Faith",
+          "desc": "A shrine to those the moor kept."
+        }
+      ],
+      "npcs": [
+        {
+          "name": "Maede Turfwright",
+          "role": "Moot-speaker",
+          "goal": {
+            "short": "Hold the quarantine one more week."
+          },
+          "secret": {
+            "what": "Her own byre already carries the fever."
+          }
+        }
+      ],
+      "defenseProfile": {
+        "readiness": {
+          "label": "Low"
+        }
+      },
+      "arrivalScene": "The road climbs a dry ridge between black pools; smoke lies flat over turf roofs.",
+      "pressureSentence": "A quarantined caravan is bleeding the tanners dry.",
+      "settlementReason": "Peat and a dry crossing, nothing more.",
+      "neighborRelationship": null
+    }
+  }
+]

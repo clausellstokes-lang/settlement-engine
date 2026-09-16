@@ -34,6 +34,7 @@ import {
   occupiedSettlements,
 } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
+import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { regionalChannelColor } from '../../lib/regionalMapOverlay.js';
 
 // Source the glyph colors from the SAME canonical channel palette the map's other
@@ -157,7 +158,7 @@ export default function WarFaithMapOverlay() {
       {model.occupations.map(o => (
         <g key={o.id} className="sf-occupation" transform={`translate(${o.x} ${o.y})`}>
           <circle r={13} fill={COLOR_OCCUPATION} fillOpacity={0.16} stroke={COLOR_OCCUPATION} strokeOpacity={0.4} strokeWidth={1} strokeDasharray="3 2">
-            <title>{`Occupied by ${o.occupier || 'an occupation authority'}${o.sinceTick != null ? ` since tick ${o.sinceTick}` : ''}`}</title>
+            <title>{`Occupied by ${o.occupier || 'an occupation authority'}${o.sinceTick != null ? ` since ${tickCalendarLabel(o.sinceTick)}` : ''}`}</title>
           </circle>
         </g>
       ))}

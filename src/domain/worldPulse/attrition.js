@@ -26,10 +26,16 @@
  * Strict-clean (typecheck:domain:strict). No React/Zustand imports.
  */
 
+import { resolveSettlementTerrain } from '../resolveTerrain.js';
+// W-F8: readiness quality — drilled/maintained forces bleed slower (decay) and hold the
+// opening tick gentler (first-tick). Both 1× at readiness 0 ⇒ byte-identical.
+import { attritionDecayMult, firstTickAttritionMult } from './martialReadiness.js';
+import { detLn } from '../../kernel/detMath.js';
+
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 
 /**
- * @typedef {'narrow_fail'|'decisive_fail'|'narrow_success'|'costly_success'|'withdrawal'|'hold'} OutcomeBand
+ * @typedef {'narrow_fail'|'decisive_fail'|'decisive_success'|'costly_success'|'withdrawal'|'hold'} OutcomeBand
  */
 
 // ── Tunable attrition constants (calibration is load-bearing). ───────────────────
@@ -55,7 +61,7 @@ const BAND_ATTACKER = Object.freeze({
                          // winning attacker stays in the plausible band long enough)
   narrow_fail:    1.8,   // thrown back, but the army is intact enough to try again
   decisive_fail:  3.0,   // a bloody repulse — the assault broke on the walls
-  narrow_success: 1.6,   // the storm succeeded cleanly — modest cost
+  decisive_success: 1.6,   // the storm succeeded cleanly — modest cost
   costly_success: 2.6,   // a pyrrhic storm — the town fell but the army is gutted
   withdrawal:     0.8,   // an orderly retreat off a stalled siege
 });
@@ -63,7 +69,7 @@ const BAND_DEFENDER = Object.freeze({
   hold:           0.9,   // the defenders held but spent men doing it
   narrow_fail:    0.7,   // they threw the attacker back cheaply
   decisive_fail:  0.5,   // a decisive defense — light defender losses
-  narrow_success: 2.2,   // the walls fell — the garrison was overrun
+  decisive_success: 2.2,   // the walls fell — the garrison was overrun
   costly_success: 2.8,   // the town fell after a brutal fight — heavy defender losses
   withdrawal:     0.4,   // the besieger left — the defenders barely paid
 });
@@ -113,6 +119,30 @@ const FOOD_MITIGATION = 0.15;     // full food reserves → -15% loss
 const MAX_MITIGATION = 0.65;      // never mitigate away more than 65% of a loss
 
 /**
+ * HOW HARD A SIDE BLED THIS TURN, lightest first (TE-HERALD-1). The cuts are this file's
+ * own two loss landmarks — `BASE_ATTACKER_LOSS`, what a plain grinding siege tick costs,
+ * so anything under it is a quiet turn; and `MAX_LOSS_FRACTION`, the hard cap, halved and
+ * whole. COMPUTED ONCE, for the float-boundary reason occupation.js's cuts record.
+ * @type {ReadonlyArray<string>}
+ */
+export const ATTRITION_BLEED_WORDS = Object.freeze(['lightly', 'steadily', 'badly', 'terribly']);
+
+/** The three cuts, computed once so a proof compares the SAME numbers the source uses.
+ * @type {ReadonlyArray<number>} */
+export const ATTRITION_BLEED_CUTS = Object.freeze([
+  BASE_ATTACKER_LOSS, MAX_LOSS_FRACTION / 2, MAX_LOSS_FRACTION,
+]);
+
+/** How hard a side bled, as a word. @param {number} loss 0..1 @returns {string} */
+export function attritionBleedWordFor(loss) {
+  const l = clamp01(loss);
+  if (l < ATTRITION_BLEED_CUTS[0]) return ATTRITION_BLEED_WORDS[0];
+  if (l < ATTRITION_BLEED_CUTS[1]) return ATTRITION_BLEED_WORDS[1];
+  if (l < ATTRITION_BLEED_CUTS[2]) return ATTRITION_BLEED_WORDS[2];
+  return ATTRITION_BLEED_WORDS[3];
+}
+
+/**
  * The fortification strength of a defender (0..1): its walls/garrison institutions
  * facet blended with any explicit fortification/terrain signal. Pure read.
  * @param {{ institutions?: number }} defenderFacets
@@ -123,8 +153,9 @@ export function fortificationStrength(defenderFacets = {}, defenderItem = null) 
   const inst = clamp01((Number(defenderFacets?.institutions) || 0) / 100);
   // A terrain/fortification read from the settlement, when present — defensive
   // terrain (mountain/highland/marsh/island) and walls deepen the advantage.
-  const s = defenderItem?.settlement || defenderItem || {};
-  const terrain = String(s?.config?.terrain || s?.terrain || s?.geography?.terrain || '').toLowerCase();
+  // Resolved via the shared chain (config.terrainType first): the old raw
+  // `config.terrain` read never matched a wizard-generated settlement.
+  const terrain = String(resolveSettlementTerrain(defenderItem) || '').toLowerCase();
   const terrainBonus = /mountain|highland|crag|cliff|marsh|swamp|island|fjord|canyon/.test(terrain) ? 0.18 : 0;
   return clamp01(inst * 0.85 + terrainBonus);
 }
@@ -142,7 +173,7 @@ export function relativeStrengthTilt(attackerCurrent, defenderCurrent, isAttacke
   const a = Math.max(1e-3, Number(attackerCurrent) || 0);
   const d = Math.max(1e-3, Number(defenderCurrent) || 0);
   // log-ratio so a 2× edge and a ½× edge are symmetric. Positive ⇒ attacker stronger.
-  const logRatio = Math.log(a / d);
+  const logRatio = detLn(a / d);
   // The side that is WEAKER bleeds more. For the attacker, a positive logRatio
   // (stronger) REDUCES its loss; for the defender it INCREASES the defender's loss.
   const signed = isAttacker ? -logRatio : logRatio;
@@ -163,6 +194,7 @@ export function relativeStrengthTilt(attackerCurrent, defenderCurrent, isAttacke
  * @param {number} args.fortification       0..1 — the defender's fortification strength.
  * @param {{ supplyIntegrity?: number, morale?: number, magicSupport?: number, foodReserve?: number }} [args.facets]
  *        the THIS-army's mitigating facets (0..1 each). Defaults to neutral 0.5.
+ * @param {number} [args.readiness]  0..1 martial readiness (W-F8) — gentler first-tick + slower decay; 0 ⇒ byte-identical.
  * @returns {{ lossFraction: number, reasons: string[] }}
  */
 export function computeEngagementAttrition({
@@ -173,6 +205,7 @@ export function computeEngagementAttrition({
   deploymentAge = 0,
   fortification = 0,
   facets = {},
+  readiness = 0,
 }) {
   const reasons = [];
   const base = isAttacker ? BASE_ATTACKER_LOSS : BASE_DEFENDER_LOSS;
@@ -199,12 +232,29 @@ export function computeEngagementAttrition({
     SUPPLY_MITIGATION * supply + MORALE_MITIGATION * morale + MAGIC_MITIGATION * magic + FOOD_MITIGATION * food,
   );
 
-  let loss = base * bandMult * tilt * ageRamp * fortMult * (1 - mitigation);
+  // W-F8 MARTIAL READINESS quality: drilled, maintained, well-supplied forces bleed
+  // slower THROUGHOUT (decayMult ≤1) and hold the OPENING tick gentler (the practiced
+  // first shock, deploymentAge ≤1). Both EXACTLY 1 at readiness 0 ⇒ byte-identical.
+  // Efficiency, never invincibility — the loss still clamps at MAX_LOSS_FRACTION.
+  const rdy = clamp01(readiness);
+  const decayMult = attritionDecayMult(rdy);
+  const firstTickMult = (Number(deploymentAge) || 0) <= 1 ? firstTickAttritionMult(rdy) : 1;
+
+  let loss = base * bandMult * tilt * ageRamp * fortMult * (1 - mitigation) * decayMult * firstTickMult;
   loss = Math.max(0, Math.min(MAX_LOSS_FRACTION, loss));
 
-  reasons.push(
-    `${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}% → ${(loss * 100).toFixed(1)}% lost.`,
-  );
+  // TE-HERALD-1. What this line used to be was the derivation, term by term: six
+  // multipliers and two percentages, none of which a reader can act on. What it says now
+  // is the world fact — which side bled, how hard, in what kind of engagement, and whether
+  // anything softened it. The loss itself still leaves here typed, on `lossFraction`; the
+  // six intermediate terms do not, which is EMERGENT row E-HER-6.
+  const sideWord = isAttacker ? 'The attacking host' : 'The defenders';
+  const bledWord = attritionBleedWordFor(loss);
+  const shieldWord = mitigation >= MAX_MITIGATION / 2
+    ? ', though supply, food and heart between them took much of the edge off it'
+    : ', with little to soften it';
+  const drillWord = rdy > 0 ? '; the drilling told, and they bled slower for it' : '';
+  reasons.push(`${sideWord} bled ${bledWord} this turn in a ${band} engagement${shieldWord}${drillWord}.`);
 
   return { lossFraction: clamp01(loss), reasons };
 }
@@ -244,6 +294,7 @@ export function applyAttritionToRecord(record, { isAttacker, band, attackerCurre
     deploymentAge: Number(r.deploymentAge) || 0,
     fortification,
     facets,
+    readiness: Number(r.readiness) || 0,   // W-F8: stamped at seedDeploymentState; 0 ⇒ byte-identical
   });
   const lostPoints = current * lossFraction;
   const nextStrength = Math.max(0, current - lostPoints);

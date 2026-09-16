@@ -8,21 +8,40 @@ const SYMMETRIC_TYPES = new Set([
   'criminal_network',
 ]);
 
-// ── Canonical relationship-label normalizer ─────────────────────────────────
+// ── THE HOME OF RELATIONSHIP SPELLING KNOWLEDGE ─────────────────────────────
 //
-// ONE alias table shared by every regional system (lib/relationshipGraph,
-// domain/regionalGraph, domain/region/graph) so a label authored as 'ally',
-// 'overlord', or the legacy plural 'trade_partners' resolves to the same
-// canonical base label everywhere instead of silently drifting in one
-// subsystem. Each subsystem still maps FROM this canonical
-// label to its own effect profile.
+// This file is the SINGLE HOME for relationship spelling knowledge: every alias
+// table mapping a legacy or synonym spelling onto a canonical relationship label
+// is declared HERE. `tests/lint/implicitNeutralSingleSource.test.js` enforces it
+// as a single-writer law over a declaration-shaped scan of all of `src/`, with
+// the remaining private folds enumerated there as a shrink-only banked inventory.
 //
-// This table is CROSS-VOCAB-SAFE: it only collapses spelling/synonym variants
-// onto a base label that every consumer already recognizes. It deliberately
-// does NOT collapse 'smuggling_partner' → 'criminal_network', because
-// 'smuggling_partner' is the CANONICAL term in the regional structural vocab
-// (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
-// localPropagationType (see PROPAGATION_ALIASES below).
+// ⛔ ONE HOME IS NOT ONE TABLE. There are TWO — one per plane — and they are
+// deliberately NOT merged:
+//
+//   RELATIONSHIP_LABEL_ALIASES  the REGIONAL plane (lib/relationshipGraph,
+//     domain/regionalGraph, domain/region/graph). STRUCTURAL vocabulary: it
+//     keeps 'war', 'subject' and 'tributary' as themselves, because the regional
+//     graph carries them as first-class types.
+//   RELATIONSHIP_PLANE_ALIASES  the RELATIONSHIP-STATE plane (worldPulse).
+//     EFFECT-PROFILE vocabulary: it collapses those same three onto the keys
+//     RELATIONSHIP_DEFAULTS actually carries ('hostile', 'vassal'), because a
+//     plane that cannot find a defaults row has no numbers to apply.
+//
+// The two resolvers disagree on 17 of a 40-input corpus, ON PURPOSE. An
+// exact-equality identity pin in `tests/domain/regionalNeighbourSeam.test.js`
+// holds that divergence at exactly 17, so a later cure cannot quietly converge
+// the planes. Merging their CONTENT is owner-gated (ODQ §64.2) and is not this
+// file's to do; hosting them side by side is what makes this file the one home.
+//
+// Each subsystem still maps FROM its canonical label to its own effect profile.
+//
+// Both tables are CROSS-VOCAB-SAFE: each only collapses spelling/synonym variants
+// onto a base label its own consumers already recognize. The regional table
+// deliberately does NOT collapse 'smuggling_partner' → 'criminal_network',
+// because 'smuggling_partner' is the CANONICAL term in the regional structural
+// vocab (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
+// canonicalPropagationLabel (see PROPAGATION_ALIASES below).
 /** @type {Readonly<Record<string, string>>} */
 const RELATIONSHIP_LABEL_ALIASES = Object.freeze({
   // Legacy plural the old 'Opened Trade Route' event wrote.
@@ -56,12 +75,83 @@ export function canonicalRelationshipLabel(label) {
   return RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
 }
 
+/**
+ * The RELATIONSHIP-STATE plane's alias table — the second table this home hosts.
+ *
+ * Consumed by `src/domain/worldPulse/relationshipState.js`, which re-exports it as
+ * `RELATIONSHIP_TYPE_ALIASES` and builds `normalizeRelationshipType` over it. It lives
+ * here rather than there so that spelling knowledge has ONE home; it is a separate
+ * export rather than a merge because the two planes legitimately disagree.
+ *
+ * ⛔ WHERE IT DIVERGES FROM THE REGIONAL TABLE ABOVE, AND WHY THAT IS CORRECT:
+ *   war, enemy   → 'hostile'   the state plane needs a RELATIONSHIP_DEFAULTS row;
+ *   subject      → 'vassal'    the regional plane keeps these as structural types.
+ *   tributary    → 'vassal'
+ *   criminal_corridor → 'criminal_network'  (both planes agree here)
+ * And where the regional table folds and this one does NOT: 'trade_partners',
+ * 'allies', 'overlord', 'suzerain', 'liege', 'smuggling', 'coldwar', 'cold-war'.
+ * Folding those here is the LEGACY-LIVE content cure and is arm B1's owner-gated
+ * row — NOT this member's. The 17-of-40 divergence pin is what holds that line.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+export const RELATIONSHIP_PLANE_ALIASES = Object.freeze({
+  trade: 'trade_partner',
+  alliance: 'allied',
+  ally: 'allied',
+  war: 'hostile',
+  enemy: 'hostile',
+  subject: 'vassal',
+  tributary: 'vassal',
+  criminal_corridor: 'criminal_network',
+
+  // ⛔ RN-B1 — THE LEGACY-LIVE MERGE. OWNER-GATED AND SIGNED (ODQ §48.4, §64.2).
+  //
+  // Each row below is a spelling this tree DOCUMENTS as real save content. Before this
+  // merge a persisted edge carrying one of them resolved to a label with NO
+  // RELATIONSHIP_DEFAULTS row, so it silently received `neutral`'s numbers under its own
+  // contradicting label. That preserved a MISREADING, not lived history; these rows
+  // restore the reading the persisted label always claimed. THE PROMISE is not touched:
+  // no same-seed generation cell moves, because nothing in src/ can PRODUCE any of these
+  // spellings — they can only arrive from an already-saved world.
+  //
+  //   trade_partners     RELATIONSHIP_OPTIONS.OPENED_TRADE_ROUTE still offers it and the
+  //                      write chokepoint folds it; named a legacy-save spelling at
+  //                      populationDynamics.js:182 and stressorDynamics.js:74.
+  //   overlord           canonicalEdgeForLink handles it as a legacy-save direction hint.
+  //   smuggling          the smuggling family collapses onto the defaults row it has
+  //   smuggling_partner  always meant on THIS plane — `criminal_network`, exactly as
+  //                      `criminal_corridor` above and as canonicalPropagationLabel does.
+  //                      (The REGIONAL table deliberately keeps `smuggling_partner` as a
+  //                      first-class structural type; that asymmetry is the point.)
+  //   hostile rival      the Axis-2 carrier. The key is the LOWERCASED form because this
+  //                      plane lowercases before lookup; the file's own comment above
+  //                      records that 'Hostile rival' reads at the hostile tier.
+  //
+  // ⚠ `tense` IS DELIBERATELY NOT MERGED, AND ITS ABSENCE IS A DECISION, NOT AN OVERSIGHT.
+  // It is the fifth LEGACY-LIVE spelling the cure names, but no ruling determines WHICH
+  // defaults row it should claim: `rival`, `cold_war` and `hostile` are all defensible and
+  // they carry materially different trust/resentment/fear numbers, so choosing one here
+  // would be inventing owner-gated content rather than executing it. It stays unmapped
+  // (neutral numbers, as today) and is raised as an open chair question. Adding it later
+  // is a one-row diff with a signed target.
+  //
+  // ⛔ ARM B2 STAYS REFUSED (§64.3): allies, suzerain, liege, coldwar, cold-war, war,
+  // enemy, subject, tributary are SPECULATIVE — zero producers and zero evidence any world
+  // carried them. The four already present above predate this merge and are not widened.
+  trade_partners: 'trade_partner',
+  overlord: 'vassal',
+  smuggling: 'criminal_network',
+  smuggling_partner: 'criminal_network',
+  'hostile rival': 'hostile',
+});
+
 // Matrix/channel-bundle vocabulary: canonical labels that have NO row in the
 // propagation matrix (lib/relationshipGraph PROPAGATION_MATRIX) map onto the
 // row that carries their semantics. Applied AFTER canonicalRelationshipLabel so
 // 'smuggling'→'smuggling_partner'→'criminal_network' resolves in one pass.
-// Kept separate from the cross-vocab table so the regional
-// structural graph keeps 'smuggling_partner' as a first-class type.
+// Kept separate from the cross-vocab table so the regional structural graph
+// keeps 'smuggling_partner' as a first-class type.
 /** @type {Readonly<Record<string, string>>} */
 const PROPAGATION_ALIASES = Object.freeze({
   smuggling_partner: 'criminal_network',
@@ -88,6 +178,22 @@ const TIER_RANK = {
   metropolis: 5,
 };
 
+// `strongerFirst` used to score each side as TIER_RANK plus a saturating population
+// bonus and compare the two sums. That ordering is LEXICOGRAPHIC in (tier, population)
+// and nothing else: TIER_RANK is an integer 0–5 and the bonus lies in [0, 0.8], so a
+// larger tier always wins, and inside one tier the bonus rises with population until it
+// saturates. Comparing the pair directly is the SAME ordering with no cross-engine-
+// approximated call in it. The saturation point below is the MEASURED double at which
+// the old bonus reached its cap — pinned rather than recomputed, and engine-invariant
+// because the kernel's decimal log is built from correctly-rounded operations only.
+// Bit-identity is proven over every integer population the comparator can see
+// (0 … 2,511,900 against all six tiers, 15,071,406 comparisons) plus three million
+// random pairs; the one residual — two NON-integer populations closer together than one
+// part in 7e13, which the summed score could not tell apart — is recorded as a named
+// comparator gap in T13's shift record, and no population writer in the engine produces
+// a non-integer population.
+const POPULATION_SATURATION = 2511886.43150957906619;
+
 export const RELATIONSHIP_SELECTIONS = [
   { value: 'neutral', label: 'Neutral' },
   { value: 'trade_partner', label: 'Trade partners' },
@@ -102,29 +208,85 @@ export const RELATIONSHIP_SELECTIONS = [
   { value: 'vassal_of', label: 'Current settlement is vassal' },
 ];
 
-/** @param {any} save */
-function strengthScore(save) {
-  const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
-  const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
-  return (TIER_RANK[tier] ?? 2) + Math.min(0.8, Math.log10(Math.max(1, population)) / 8);
+// The relationship families that militarize governance narrative — the
+// hostile-neighbour stability band and the "Ongoing tensions with {neighbour}"
+// recentConflict line. Canonical vocabulary ('rival'/'cold_war'/'hostile') plus
+// the legacy save spellings ('tense', 'hostile_rival'/'Hostile rival', which
+// lower+substring-match 'hostile'). Substring-tolerant so a single predicate
+// serves both generatePower's gate and priorityHelpers' military/economy reader.
+export const ADVERSARIAL_RELATIONSHIP_MATCHES = ['hostile', 'rival', 'cold_war', 'tense'];
+
+/**
+ * @param {string | null | undefined} relType
+ * @returns {boolean} true when the neighbour relationship is adversarial
+ */
+export function isAdversarialRelationship(relType) {
+  const t = String(relType || '').toLowerCase();
+  return t !== '' && ADVERSARIAL_RELATIONSHIP_MATCHES.some((k) => t.includes(k));
 }
 
 /**
- * @param {any} sourceId
- * @param {any} targetId
- * @param {any} sourceSave
- * @param {any} targetSave
+ * A settlement save record (or the settlement itself) — only the fields this
+ * module reads. Legacy saves store population as a bare number, canonical ones
+ * as `{ total }`.
+ * @typedef {Object} SettlementSaveLike
+ * @property {string=} id
+ * @property {string=} tier
+ * @property {{ id?: string, tier?: string, population?: number | { total?: number } }=} settlement
+ */
+
+/**
+ * @param {SettlementSaveLike | null | undefined} save
+ * @returns {number} tier rank, 0 (thorp) … 5 (metropolis), unknown tiers as village
+ */
+function tierRank(save) {
+  const tier = String(save?.tier || save?.settlement?.tier || 'village').toLowerCase();
+  return TIER_RANK[tier] ?? 2;
+}
+
+/**
+ * The population as the size heuristic orders it: floored at 1 and saturated at
+ * POPULATION_SATURATION, so two settlements past the saturation point rank equal
+ * exactly as they did under the summed score. A non-numeric population stays NaN.
+ * @param {SettlementSaveLike | null | undefined} save
+ * @returns {number}
+ */
+function populationKey(save) {
+  // @ts-expect-error -- population is number | { total } across save generations; `.total ||` is the tolerant read
+  const population = Number(save?.settlement?.population?.total || save?.settlement?.population || 0);
+  return Math.min(POPULATION_SATURATION, Math.max(1, population));
+}
+
+/**
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string }} stronger endpoint first
  */
 function strongerFirst(sourceId, targetId, sourceSave, targetSave) {
-  return strengthScore(targetSave) > strengthScore(sourceSave)
+  const targetTier = tierRank(targetSave);
+  const sourceTier = tierRank(sourceSave);
+  const targetPopulation = populationKey(targetSave);
+  const sourcePopulation = populationKey(sourceSave);
+  // `>= 1` is the not-NaN test — the key is floored at 1, so only a non-numeric
+  // population fails it. The summed score went NaN there, and `NaN > x` is false
+  // on either side, which is the source-first branch below.
+  const targetStronger = targetPopulation >= 1 && sourcePopulation >= 1
+    && (targetTier === sourceTier
+      ? targetPopulation > sourcePopulation
+      : targetTier > sourceTier);
+  return targetStronger
     ? { from: String(targetId), to: String(sourceId) }
     : { from: String(sourceId), to: String(targetId) };
 }
 
 /**
- * @param {any} selection
- * @param {any} sourceId
- * @param {any} targetId
+ * @typedef {{ relationshipType: string, from: string, to: string, sourceRole: string, targetRole: string }} RelationshipDefinition
+ * @param {string} selection  a RELATIONSHIP_SELECTIONS value
+ * @param {string} sourceId
+ * @param {string} targetId
+ * @returns {RelationshipDefinition}
  */
 export function relationshipDefinition(selection, sourceId, targetId) {
   const source = String(sourceId);
@@ -154,8 +316,9 @@ export function relationshipDefinition(selection, sourceId, targetId) {
 }
 
 /**
- * @param {any} definition
- * @param {any} localRole
+ * @param {RelationshipDefinition} definition
+ * @param {string} localRole
+ * @returns {{ relationshipType: string, relationshipFrom: string, relationshipTo: string, localRelationshipRole: string, displayRelationshipType: string }}
  */
 export function relationshipLinkMetadata(definition, localRole) {
   return {
@@ -168,9 +331,10 @@ export function relationshipLinkMetadata(definition, localRole) {
 }
 
 /**
- * @param {any} edge
- * @param {any} sourceId
- * @param {any} [_targetId]
+ * @param {{ from?: string, relationshipType?: string } | null | undefined} edge
+ * @param {string} sourceId
+ * @param {string} [_targetId]
+ * @returns {{ sourceRole: string, targetRole: string }}
  */
 export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
   const sourceIsFrom = String(edge?.from) === String(sourceId);
@@ -193,9 +357,20 @@ export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
 /**
  * Resolve new canonical metadata and old display-oriented saves to one edge.
  * Legacy hierarchical links infer the stronger endpoint as patron/overlord.
- * @param {any} link
- * @param {any} sourceSave
- * @param {any} targetSave
+ *
+ * @typedef {Object} RelationshipLinkLike
+ * @property {string=} relationshipType
+ * @property {string=} type                      legacy alias of relationshipType
+ * @property {string=} relationshipFrom
+ * @property {string=} relationshipTo
+ * @property {string=} localRelationshipRole
+ * @property {string=} sourceRole            authored canonical role on the source side
+ * @property {string=} displayRelationshipType
+ *
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @param {SettlementSaveLike | null | undefined} sourceSave
+ * @param {SettlementSaveLike | null | undefined} targetSave
+ * @returns {{ from: string, to: string, relationshipType: string } | null}
  */
 export function canonicalEdgeForLink(link, sourceSave, targetSave) {
   const sourceId = sourceSave?.id || sourceSave?.settlement?.id;
@@ -262,7 +437,7 @@ const DIRECTIONAL_ROLE_PHRASES = Object.freeze({
  * legacy row with neither field present returns null so the caller keeps its
  * existing non-directional label (no regression).
  *
- * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string }} link
+ * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string } | null | undefined} link
  *   the neighbourNetwork entry.
  * @param {string} [neighbourName] the linked settlement's name (fills the slot).
  * @returns {string|null} e.g. "Overlord of Thornmere", or null when not directional.
@@ -276,7 +451,10 @@ export function directionalRelationshipLabel(link, neighbourName) {
   return phrase(name);
 }
 
-/** @param {any} link */
+/**
+ * @param {RelationshipLinkLike | null | undefined} link
+ * @returns {string} relationship type as seen from the local settlement
+ */
 export function localPropagationType(link) {
   const role = link?.localRelationshipRole || link?.displayRelationshipType;
   if (role === 'client') return 'patron';

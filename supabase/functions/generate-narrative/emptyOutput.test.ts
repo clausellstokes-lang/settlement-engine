@@ -20,17 +20,23 @@
  * per-test to return the exact provider envelope we want to exercise.
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
 // Set BOTH keys BEFORE importing the module — callAnthropic/callOpenAI read them
 // into module-scope constants at load, and these tests need the key check to
 // PASS so the (mocked) fetch is reached rather than short-circuiting.
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('ANTHROPIC_API_KEY', 'sk-ant-stub');
-Deno.env.set('OPENAI_API_KEY', 'sk-openai-stub');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  ANTHROPIC_API_KEY: 'sk-ant-stub',
+  OPENAI_API_KEY: 'sk-openai-stub',
+});
 
 const { handleGenerateNarrative } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** user-client stub: verified identity + spend_credits (records every rpc). */
 function makeUserClient(spendResult: Record<string, unknown>) {
@@ -139,7 +145,7 @@ function assertRefunded(lines: Record<string, unknown>[], admin: ReturnType<type
   assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
 }
 
-Deno.test('an EMPTY Anthropic thesis (200 with blank content) refunds and is NOT a success', async () => {
+scopedEnv.test('an EMPTY Anthropic thesis (200 with blank content) refunds and is NOT a success', async () => {
   const user = makeUserClient({ ok: true, spend_id: SPEND_ID, balance: 9, elevated: false });
   const admin = makeAdminClient('anthropic_claude_opus_4_8');
   await withFetch(
@@ -166,7 +172,7 @@ Deno.test('an EMPTY Anthropic thesis (200 with blank content) refunds and is NOT
   );
 });
 
-Deno.test('an OpenAI status:incomplete response (reasoning starved the budget) refunds', async () => {
+scopedEnv.test('an OpenAI status:incomplete response (reasoning starved the budget) refunds', async () => {
   const user = makeUserClient({ ok: true, spend_id: SPEND_ID, balance: 9, elevated: false });
   const admin = makeAdminClient('openai_gpt_5_2');
   let sawReasoning = false;
@@ -207,7 +213,7 @@ Deno.test('an OpenAI status:incomplete response (reasoning starved the budget) r
   );
 });
 
-Deno.test('a NON-EMPTY OpenAI completed response streams a done:true success (control)', async () => {
+scopedEnv.test('a NON-EMPTY OpenAI completed response streams a done:true success (control)', async () => {
   const user = makeUserClient({ ok: true, spend_id: SPEND_ID, balance: 9, elevated: false });
   const admin = makeAdminClient('openai_gpt_5_2');
   await withFetch(

@@ -453,7 +453,9 @@ export function resolveVersionConflicts(mapVersion) {
     const pattern = document.getElementById("oceanic");
     const filter = pattern.firstElementChild.getAttribute("filter");
     const href = filter ? "./images/" + filter.replace("url(#", "").replace(")", "") + ".png" : "";
-    pattern.innerHTML = /* html */ `<image id="oceanicPattern" href=${href} width="100" height="100" opacity="0.2"></image>`;
+    // SettlementForge fork patch: quote the href — it derives from a map-controlled #oceanic filter attribute,
+    // and unquoted it let crafted whitespace/quotes inject extra attributes during pre-1.61 migration.
+    pattern.innerHTML = /* html */ `<image id="oceanicPattern" href="${escapeHtml(href)}" width="100" height="100" opacity="0.2"></image>`;
   }
 
   if (isOlderThan("1.62.0")) {

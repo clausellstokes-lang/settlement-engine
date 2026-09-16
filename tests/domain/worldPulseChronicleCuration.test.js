@@ -8,9 +8,9 @@
  *     population_growth entry, not one per tick — and at least one
  *     auto-applied outcome in the run has no feed entry at all (the
  *     suppression actually fired; anti-vacuity).
- *   • pulseHistory stays the honest ledger: EVERY auto-applied outcome of
- *     every tick lands in that tick's pulseRecord.selectedOutcomes, feed
- *     entry or not.
+ *   • pulseHistory stays the honest split ledger: public auto-applied outcomes
+ *     land in selectedOutcomes, while state-only work lands in the bounded
+ *     mechanical audit and exact consequence window.
  *   • Major arc entries survive curation: a realm-wide famine arc ("The
  *     Great Hunger grips the realm") is still in the feed after the run and
  *     buildChronicleGrounding lists it among majorHeadlines — the chronicle
@@ -21,6 +21,7 @@ import { describe, expect, test } from 'vitest';
 
 import { advanceCampaignWorld, buildChronicleGrounding } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { isPublicOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 
 function save(id, i) {
   const name = `Town-${id.toUpperCase()}`;
@@ -87,15 +88,16 @@ describe('curated feed vs complete ledger (quiet region, 10 ticks)', () => {
     let suppressedCount = 0;
     for (const result of perTick) {
       const feedIds = new Set(result.wizardNews.entries.map(e => e.sourceEventId));
+      const mechanical = result.autoApplied.filter(outcome => !isPublicOutcome(outcome));
+      expect(result.pulseRecord.mechanicalOutcomeCount || 0).toBe(mechanical.length);
+      expect((result.pulseRecord.mechanicalOutcomes || []).map(outcome => outcome.id))
+        .toEqual(mechanical.slice(0, 8).map(outcome => outcome.id));
       for (const outcome of result.autoApplied) {
         appliedCount += 1;
         if (!feedIds.has(outcome.id)) suppressedCount += 1;
-        // The LEDGER is never curated: every auto-applied outcome of this
-        // tick is in its pulseRecord.selectedOutcomes.
-        expect(
-          result.pulseRecord.selectedOutcomes.some(s => s.id === outcome.id),
-          `outcome ${outcome.id} missing from tick ${result.tick} ledger`,
-        ).toBe(true);
+        const publicReceipt = result.pulseRecord.selectedOutcomes
+          .some(receipt => receipt.id === outcome.id);
+        expect(publicReceipt).toBe(isPublicOutcome(outcome));
       }
     }
     expect(appliedCount).toBeGreaterThan(0);
@@ -109,9 +111,14 @@ describe('curated feed vs complete ledger (quiet region, 10 ticks)', () => {
       && e.impactKind === 'population_growth'
       && e.tick >= 1 && e.tick <= 6
       && e.settlementIds.length === 1 && e.settlementIds[0] === 'a');
-    expect(earlyGrowthEntriesForA.length).toBe(1);
-    // And the applied entry states a fact, not a hypothesis.
-    expect(earlyGrowthEntriesForA[0].headline).not.toMatch(/\bmay\b/);
+    expect(earlyGrowthEntriesForA).toEqual([]);
+    const earlyPrivateSeedsForA = perTick
+      .flatMap(result => result.pulseRecord.mechanicalRumorSeeds || [])
+      .filter(entry => entry.impactKind === 'population_growth'
+        && entry.tick >= 1 && entry.tick <= 6
+        && entry.settlementIds.length === 1 && entry.settlementIds[0] === 'a');
+    expect(earlyPrivateSeedsForA).toHaveLength(1);
+    expect(earlyPrivateSeedsForA[0].headline).not.toMatch(/\bmay\b/);
   });
 
   test('a realm-wide famine arc survives curation and grounds the chronicle', () => {

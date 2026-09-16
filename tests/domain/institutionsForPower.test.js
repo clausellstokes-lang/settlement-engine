@@ -42,6 +42,28 @@ describe('institutionsForPower — tag-driven footprint', () => {
   it('honors the generator-category aliases (magic→arcane, noble→government, crafts→craft)', () => {
     expect(institutionsForPower({ faction: 'The Watch', category: 'military' }, settlement)).toContain('The Iron Garrison');
     expect(institutionsForPower({ faction: 'The Faithful', category: 'religious' }, settlement)).toContain('Temple of the Dawn');
+
+    // ⭐ THE ARCANE POWER DOMAIN IS THE UNION OF THE TWO AUTHORED TAG LISTS, and this is the
+    // only place that says so. `POWER_DOMAIN_TAGS.arcane` spreads BOTH `ARCANE_INST_TAGS`
+    // (which answers "does this need magic to exist?") and `TRADE_INST_TAGS` (which answers
+    // "what craft is practised here?"), because belonging to the arcane POWER is a third
+    // question and an alchemist belongs to it whether or not alchemy needs magic
+    // (TE-CH-5, ODQ §541). Before that car the four members were hand-typed here, a fifth
+    // typing of a list whose zero-import leaf exists precisely to stop such drift.
+    // ⚠ BOTH NAMES ARE DELIBERATELY OUTSIDE the arcane NAME hint
+    // (/mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i) and carry no
+    // factionSource, so each row can only be reached down the TAG path — otherwise this
+    // would pass with either spread deleted.
+    const arcaneWorld = { institutions: [
+      { name: 'The Silver Circle',    tags: ['arcane'] },      // via ARCANE_INST_TAGS
+      { name: 'The Sootbottle Works', tags: ['alchemy'] },     // via TRADE_INST_TAGS
+      { name: 'A quiet orchard',      tags: ['agriculture'] }, // via neither
+    ] };
+    const arcane = institutionsForPower({ faction: 'Arcane Orders', category: 'magic' }, arcaneWorld);
+    expect(arcane).toContain('The Silver Circle');
+    expect(arcane).toContain('The Sootbottle Works');
+    // anchored: the two toContain assertions directly above run against THIS SAME `arcane` array, so it cannot have gone empty or drifted out from under this negative.
+    expect(arcane).not.toContain('A quiet orchard');
   });
 
   it('includes an institution explicitly pulled by THIS faction (factionSource), even with no tag/name match', () => {

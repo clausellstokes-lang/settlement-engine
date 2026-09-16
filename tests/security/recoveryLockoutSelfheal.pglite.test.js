@@ -28,6 +28,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase/migrations/068_recovery_lockout_selfheal.sql');
 const exists = existsSync(MIG);
 
@@ -40,7 +42,7 @@ describe('068 pglite target exists (guards against silent vacuous skip)', () => 
 /** Extract a `create or replace function public.<name>` body verbatim through its first `$$;`. */
 function extractFn(name) {
   const src = readFileSync(MIG, 'utf8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from 068`);
   return m[0];
 }
@@ -84,7 +86,7 @@ describe.runIf(exists)('recovery lockout self-heal — execution against 068 (pg
         ('${ALICE}', 'alice@example.com'),
         ('${BOB}',   'bob@example.com');
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`truncate public.recovery_lockouts;`);

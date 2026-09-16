@@ -10,12 +10,18 @@
  * stub is injected via its `deps.adminClient` seam (production passes nothing).
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('EXPORT_SHARED_SECRET', 'sekrit');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  EXPORT_SHARED_SECRET: 'sekrit',
+});
 
 const { handleAnalyticsExport, secretsMatch } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 type TableResult = { data?: unknown; error?: { message: string } | null };
 
@@ -71,7 +77,7 @@ const req = () =>
     headers: { 'x-export-secret': 'sekrit', 'user-agent': 'pg_net/0.7' },
   });
 
-Deno.test('secretsMatch is a correct constant-time equality (matches only the exact secret)', () => {
+scopedEnv.test('secretsMatch is a correct constant-time equality (matches only the exact secret)', () => {
   assertEquals(secretsMatch('sekrit', 'sekrit'), true);
   assertEquals(secretsMatch('sekrit', 'sekrix'), false); // same length, last byte differs
   assertEquals(secretsMatch('sekrit', 'sekri'), false); // prefix / shorter
@@ -84,7 +90,7 @@ Deno.test('secretsMatch is a correct constant-time equality (matches only the ex
   assertEquals(secretsMatch('sé€kret', 'sé€krex'), false);
 });
 
-Deno.test('a wrong x-export-secret is rejected 403 (fail-closed gate still holds)', async () => {
+scopedEnv.test('a wrong x-export-secret is rejected 403 (fail-closed gate still holds)', async () => {
   const admin = makeAdmin({ snapshots: { data: [] }, edits: { data: [] } });
   const res = await handleAnalyticsExport(
     new Request('https://edge/analytics-export', {
@@ -98,7 +104,7 @@ Deno.test('a wrong x-export-secret is rejected 403 (fail-closed gate still holds
   assertEquals(body.error, 'forbidden');
 });
 
-Deno.test('a failing research view is a FAILED run (ok:false, 500), not a quiet month', async () => {
+scopedEnv.test('a failing research view is a FAILED run (ok:false, 500), not a quiet month', async () => {
   const admin = makeAdmin({
     snapshots: { error: { message: 'permission denied for schema research' } },
     edits: { data: [] },
@@ -114,7 +120,7 @@ Deno.test('a failing research view is a FAILED run (ok:false, 500), not a quiet 
   assertEquals(admin.cursorUpserts.length, 0);
 });
 
-Deno.test('a genuinely empty month stays ok:true 200 with zero exports', async () => {
+scopedEnv.test('a genuinely empty month stays ok:true 200 with zero exports', async () => {
   const admin = makeAdmin({ snapshots: { data: [] }, edits: { data: [] } }, { data: [] });
   const res = await handleAnalyticsExport(req(), { adminClient: () => admin.client });
   assertEquals(res.status, 200);
@@ -123,7 +129,7 @@ Deno.test('a genuinely empty month stays ok:true 200 with zero exports', async (
   assertEquals(body.results.every((r: { exported: number }) => r.exported === 0), true);
 });
 
-Deno.test('daily_rollups is CURSORED by day: exports move the YYYYMMDD bookmark after upload', async () => {
+scopedEnv.test('daily_rollups is CURSORED by day: exports move the YYYYMMDD bookmark after upload', async () => {
   const admin = makeAdmin(
     { snapshots: { data: [] }, edits: { data: [] } },
     { data: [

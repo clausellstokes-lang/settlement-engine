@@ -56,7 +56,7 @@ function reg(cat, cond, dom, sub) {
     position:   dom.position.replace('Holds governing authority', 'Occupies a civic position')
                              .replace('Controls the primary', 'Manages a secondary')
                              .replace('Holds institutional', 'Represents an institutional'),
-    goal:       `Maintain and advance the faction's position relative to the dominant authority. ${dom.goal}`,
+    goal:       `Maintain and advance the faction's position relative to the dominant authority: ${dom.goal.toLowerCase()}`,
     constraint: dom.constraint,
   };
 }
@@ -74,7 +74,7 @@ reg('government','corruption',
   { position:  'Governs within or alongside informal arrangements with criminal interests. Official and actual authority are partially different systems.',
     goal:      'Maintain governance viability without forcing a confrontation with the informal arrangements it depends on.',
     constraint:'Cannot act decisively against criminal interests without dismantling arrangements the governance structure currently relies on.' },
-  { position:  'Holds a civic position inside a governance structure with compromised elements. Not the source of the corruption, but operating within it.',
+  { position:  'Holds a civic position inside a governance structure with compromised elements, not the source of the corruption, but operating within it.',
     goal:      'Maintain credibility by demonstrating institutional function in areas the corruption has not reached.',
     constraint:'Any investigation or challenge to the corrupt arrangements requires the cooperation of institutions that are themselves compromised.' }
 );
@@ -129,7 +129,7 @@ reg('military','corruption',
     constraint:'Visibility in either direction (too compliant or too resistant) creates risk the unit cannot currently afford.' }
 );
 reg('military','food_crisis',
-  { position:  'Responsible for public order during supply failure. The conditions that most reliably produce civil disorder are currently present.',
+  { position:  'Responsible for public order during supply failure: the conditions that most reliably produce civil disorder are currently present.',
     goal:      'Maintain order through the crisis without deploying force in ways that create grievances that outlast it.',
     constraint:'Enforcement sufficient to prevent disorder may be enforcement sufficient to generate resentment. The threshold is not visible in advance.' },
   { position:  'Commands a subordinate enforcement unit during a supply crisis. Responsible for a sector where the pressure is acutely felt.',
@@ -236,7 +236,7 @@ reg('religious','food_crisis',
     constraint:'The institution\'s charitable capacity is finite; prioritizing distribution for institutional benefit rather than need creates the scandal that outlasts the crisis.' },
   { position:  'Serves a religious position with limited independent welfare capacity during a supply crisis.',
     goal:      'Connect the community under pastoral care to whatever relief infrastructure exists, maintaining pastoral standing as a reliable intermediary.',
-    constraint:'Intermediary standing depends on the reliability of what is being intermediated. If the relief infrastructure fails, the position loses credibility along with it.' }
+    constraint:'Intermediary standing depends on the reliability of what is being intermediated: if the relief infrastructure fails, the position loses credibility along with it.' }
 );
 reg('religious','economic_stress',
   { position:  'Holds religious authority in a settlement under economic pressure. The church\'s land holdings and endowments are both assets and targets.',
@@ -270,7 +270,7 @@ reg('criminal','governance_fractured',
     constraint:'Expanding too visibly during governance failure risks triggering a consolidation response specifically aimed at criminal interests.' },
   { position:  'Operates within a criminal network as a position secondary to the dominant criminal interest in a settlement with failing governance.',
     goal:      'Advance within the criminal hierarchy using the conditions of governance failure.',
-    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstrating threat to it. Both are visible to the hierarchy.' }
+    constraint:'Advancement within the hierarchy requires either demonstrating value to it or demonstiting threat to it. Both are visible to the hierarchy.' }
 );
 reg('criminal','corruption',
   { position:  'Has arrangements with enforcement that create unusual operational freedom. The position depends on those arrangements remaining stable.',
@@ -328,7 +328,7 @@ reg('magic','corruption',
     constraint:'Arcane services used for concealment create relationships that are difficult to exit.' },
   { position:  'Practices arcane arts in a position secondary to the dominant arcane institution in a compromised institutional environment.',
     goal:      'Sustain the practice by providing arcane services that are not already dominated by the institutional position above.',
-    constraint:'Services not dominated by the primary institution tend to be those the primary institution has declined, often for reasons.' }
+    constraint:'Services not dominated by the primary institution tend to be those the primary institution has declined: often for reasons.' }
 );
 reg('magic','food_crisis',
   { position:  'Holds arcane institutional authority in a supply crisis. Magical production or preservation capacity, if available, becomes a critical resource.',

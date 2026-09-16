@@ -96,6 +96,20 @@ describe('aiSlice — active-save guard on AI generation success', () => {
     armGate();
   });
 
+  // LINEAGE NOTE (master merge W6 — OWNER FORK RECORDED). Master's switched-away
+  // semantics COMMIT the run (creditBalance updates to the server's
+  // creditsRemaining, and A's prose persists to A's ai_data even after the user
+  // switches to B). This lineage's 'release' disposition DISCARDS the
+  // switched-away run instead: the lock frees, the view stays B's, but the
+  // balance is not committed and A's bundle is not persisted — the paid run's
+  // output is dropped. Which model the product keeps is a PAID-SURFACE owner
+  // decision (master-merge owner queue: "switched-away AI run: commit-vs-discard").
+  // Until ruled, these tests pin THIS lineage's discard-on-switch behavior so a
+  // silent drift in either direction is caught. Master's daily-life FOLDING
+  // (narrative runs producing aiDailyLife under one spend) is the same queue's
+  // second fork; this lineage keeps two separate paid actions, so no aiDailyLife
+  // assertions appear on the narrative path here.
+
   test('requestNarrative does not overwrite the now-open settlement view', async () => {
     const store = makeStore();
     const pending = store.getState().requestNarrative('save.a');
@@ -111,13 +125,13 @@ describe('aiSlice — active-save guard on AI generation success', () => {
     expect(st.aiSettlement).toBeNull();
     expect(st.aiDailyLife).toBeNull();
     expect(st.showNarrative).toBe(false);
-    // Settlement-agnostic state still commits.
+    // The lock frees either way.
     expect(st.aiLoading).toBe(false);
-    expect(st.creditBalance).toBe(90);
-    // A's prose is still persisted to A's ai_data (not lost, not on B).
-    const persistedToA = savesUpdate.mock.calls.find((c) => c[0] === 'save.a');
-    expect(persistedToA).toBeTruthy();
-    expect(persistedToA[1].aiData.aiSettlement).toMatchObject({ thesis: 'A-thesis' });
+    // DISCARD-ON-SWITCH (this lineage): the balance is NOT committed from the
+    // switched-away run, and A's bundle is NOT persisted. See the owner-fork
+    // note above — master commits both.
+    expect(st.creditBalance).toBe(100);
+    expect(savesUpdate.mock.calls.some((c) => c[0] === 'save.a')).toBe(false);
     expect(savesUpdate.mock.calls.some((c) => c[0] === 'save.b')).toBe(false);
   });
 
@@ -131,7 +145,9 @@ describe('aiSlice — active-save guard on AI generation success', () => {
     const st = store.getState();
     expect(st.aiSettlement).toMatchObject({ thesis: 'A-thesis' });
     expect(st.showNarrative).toBe(true);
-    expect(st.aiDailyLife).toMatchObject({ dawn: 'A-dawn' });
+    // Two-spend model: a narrative run does not produce daily life (see the
+    // owner-fork note above).
+    expect(st.aiDailyLife).toBeNull();
   });
 
   test('requestProgression does not overwrite the now-open settlement view', async () => {
@@ -152,6 +168,7 @@ describe('aiSlice — active-save guard on AI generation success', () => {
     expect(st.aiSettlement).toBeNull();
     expect(st.showNarrative).toBe(false);
     expect(st.aiLoading).toBe(false);
-    expect(st.creditBalance).toBe(90);
+    // DISCARD-ON-SWITCH (this lineage) — see the owner-fork note above.
+    expect(st.creditBalance).toBe(100);
   });
 });

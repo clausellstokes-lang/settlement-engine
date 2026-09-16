@@ -151,7 +151,7 @@ function religionsEditorAddLines() {
       lines += /* html */ `<div
         class="states"
         data-id="${r.i}"
-        data-name="${r.name}"
+        data-name="${escapeHtml(r.name)}"
         data-color=""
         data-area="${area}"
         data-population="${population}"
@@ -163,7 +163,7 @@ function religionsEditorAddLines() {
       >
         <svg width="9" height="9" class="placeholder"></svg>
         <input data-tip="Religion name. Click and type to change" class="religionName italic" style="width: 11em"
-          value="${r.name}" autocorrect="off" spellcheck="false" />
+          value="${escapeHtml(r.name)}" autocorrect="off" spellcheck="false" />
         <select data-tip="Religion type" class="religionType placeholder" style="width: 5em">
           ${getTypeOptions(r.type)}
         </select>
@@ -180,30 +180,35 @@ function religionsEditorAddLines() {
       continue;
     }
 
+    // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape (name/color/form/deity).
+    const religionName = escapeHtml(r.name);
+    const religionColor = escapeHtml(r.color);
+    const religionForm = escapeHtml(r.form);
+    const religionDeity = escapeHtml(r.deity || "");
     lines += /* html */ `<div
       class="states"
       data-id=${r.i}
-      data-name="${r.name}"
-      data-color="${r.color}"
+      data-name="${religionName}"
+      data-color="${religionColor}"
       data-area=${area}
       data-population=${population}
-      data-type="${r.type}"
-      data-form="${r.form}"
-      data-deity="${r.deity || ""}"
+      data-type="${escapeHtml(r.type)}"
+      data-form="${religionForm}"
+      data-deity="${religionDeity}"
       data-expansion="${r.expansion}"
       data-expansionism="${r.expansionism}"
     >
-      <fill-box fill="${r.color}"></fill-box>
+      <fill-box fill="${religionColor}"></fill-box>
       <input data-tip="Religion name. Click and type to change" class="religionName" style="width: 11em"
-        value="${r.name}" autocorrect="off" spellcheck="false" />
+        value="${religionName}" autocorrect="off" spellcheck="false" />
       <select data-tip="Religion type" class="religionType" style="width: 5em">
         ${getTypeOptions(r.type)}
       </select>
       <input data-tip="Religion form" class="religionForm" style="width: 6em"
-        value="${r.form}" autocorrect="off" spellcheck="false" />
+        value="${religionForm}" autocorrect="off" spellcheck="false" />
       <span data-tip="Click to re-generate supreme deity" class="icon-arrows-cw hide"></span>
       <input data-tip="Religion supreme deity" class="religionDeity hide" style="width: 17em"
-        value="${r.deity || ""}" autocorrect="off" spellcheck="false" />
+        value="${religionDeity}" autocorrect="off" spellcheck="false" />
       <span data-tip="Religion area" style="padding-right: 4px" class="icon-map-o hide"></span>
       <div data-tip="Religion area" class="religionArea hide" style="width: 6em">${si(area) + unit}</div>
       <span data-tip="${populationTip}" class="icon-male hide"></span>

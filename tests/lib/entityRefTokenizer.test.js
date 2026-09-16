@@ -60,3 +60,42 @@ describe('tokenizeProse', () => {
     expect(display).toBe('The Watch answers to Aldric.');
   });
 });
+
+describe('tokenizeProse — pronoun links (the contract extension)', () => {
+  it('parses a pronoun token as a ref carrying verbatim:true and the wrapped word', () => {
+    const out = tokenizeProse('Aldric rules; ⟦pronoun:npc.aldric|he⟧ answers to no one.');
+    expect(out).toEqual([
+      { type: 'text', value: 'Aldric rules; ' },
+      { type: 'ref', value: 'he', id: 'npc.aldric', displayText: 'he', verbatim: true },
+      { type: 'text', value: ' answers to no one.' },
+    ]);
+  });
+
+  it('does NOT put a verbatim key on a name (entity) ref — its shape is unchanged', () => {
+    const [ref] = tokenizeProse('⟦entity:npc.jon|Jon⟧').filter(s => s.type === 'ref');
+    expect(ref).toEqual({ type: 'ref', value: 'Jon', id: 'npc.jon', displayText: 'Jon' });
+    expect('verbatim' in ref).toBe(false);
+  });
+
+  it('parses entity and pronoun tokens together, preserving order', () => {
+    const out = tokenizeProse('⟦entity:faction.guild|the Guild⟧ took the mint; ⟦pronoun:faction.guild|they⟧ hold it.');
+    const refs = out.filter(s => s.type === 'ref');
+    expect(refs.map(r => [r.id, r.value, !!r.verbatim])).toEqual([
+      ['faction.guild', 'the Guild', false],
+      ['faction.guild', 'they', true],
+    ]);
+  });
+
+  it('round-trips a pronoun token to its bare word (de-tokenized display)', () => {
+    const prose = 'The seat is empty and ⟦pronoun:npc.mara|she⟧ knows it.';
+    const display = tokenizeProse(prose).map(s => s.value).join('');
+    expect(display).toBe('The seat is empty and she knows it.');
+  });
+
+  it('treats a malformed pronoun token as plain text, never throws', () => {
+    const malformed = 'stray ⟦pronoun:npc.jon he⟧ here'; // no pipe → not a ref
+    const out = tokenizeProse(malformed);
+    expect(out.every(s => s.type === 'text')).toBe(true);
+    expect(out.map(s => s.value).join('')).toBe(malformed);
+  });
+});

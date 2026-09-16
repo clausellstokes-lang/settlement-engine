@@ -31,9 +31,12 @@ export const PDF_VARIANTS = {
       overview: true,
       systemState: true,
       timeline: false,
-      // The Faith & War chapter is canon-only AND self-gates on dormant
-      // live-world state — a draft brief never carries live war/faith.
+      // The Faith & War chapter is canon-only AND premium/self-gated — a draft
+      // brief never carries live war/faith.
       faithWar: false,
+      // The Traditions register (07B, T-5) is a live-campaign chapter (mirror-only);
+      // a draft brief carries no mirror, so it never appears here regardless.
+      traditions: false,
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -61,10 +64,14 @@ export const PDF_VARIANTS = {
       overview: true,
       systemState: true,
       timeline: 'if-canon',
-      // Live "Faith & War" chapter — canon-only (the campaign artifact), and
-      // self-gates to nothing when the live-world slice is dormant ⇒ a
-      // peaceful / deity-free canon save is byte-identical.
+      // Live "Faith & War" chapter — canon-only (the campaign artifact), premium-
+      // gated at SettlementPDF (the faith seam), and self-gating to nothing when
+      // the live-world slice is dormant ⇒ a peaceful / deity-free canon save is
+      // byte-identical.
       faithWar: 'if-canon',
+      // THE TRADITIONS register (07B, T-5) — canon-only, self-gating on the
+      // settlement.traditions mirror (dark ⇒ no chapter ⇒ byte-identical).
+      traditions: 'if-canon',
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -93,6 +100,7 @@ export const PDF_VARIANTS = {
       systemState: true,
       timeline: 'if-canon',
       faithWar: false,
+      traditions: false,
       tonightAtTheTable: false,
       npcQuickRef: false,
       notableNpcs: false,
@@ -112,12 +120,11 @@ export const PDF_VARIANTS = {
   },
 
   // Campaign State / War Room — the premium living-world artifact. Leads with
-  // the current State chapter (causal-detail enabled), the live Faith & War
-  // chapter, and the Timeline; drops the static reference chapters a DM already
-  // has from the dossier. Self-gates exactly like canon: with a dormant
-  // live-world slice the Faith & War chapter renders nothing, so a no-campaign
-  // export of this variant degrades gracefully to the state-of-the-settlement
-  // chapters.
+  // the current State chapter, the live Faith & War chapter, and the Timeline;
+  // drops the static reference chapters a DM already has from the dossier. Self-
+  // gates exactly like canon: with a dormant live-world slice (or a free/anon
+  // export) the Faith & War chapter renders nothing, so it degrades gracefully
+  // to the state-of-the-settlement chapters.
   campaign_state: {
     label: 'Campaign State / War Room',
     description: 'The living-world snapshot: state, the war front & pantheon, and the timeline.',
@@ -128,6 +135,7 @@ export const PDF_VARIANTS = {
       systemState: true,
       timeline: 'if-canon',
       faithWar: 'if-canon',
+      traditions: 'if-canon',
       tonightAtTheTable: true,
       npcQuickRef: false,
       notableNpcs: false,
@@ -161,4 +169,27 @@ export function shouldInclude(rule, ctx) {
   if (rule === 'if-narrated') return !!ctx.narrated;
   if (rule === 'if-events')   return (ctx.eventCount ?? 0) > 0;
   return !!rule;
+}
+
+/**
+ * The Faith & War chapter's THREE-fold visibility gate, as a pure predicate so
+ * the premium/campaign gate can be test-pinned without rendering react-pdf:
+ *
+ *   1. VARIANT + PHASE — the variant must include `faithWar` and, being
+ *      `if-canon`, the phase must be canon (draft / draft_brief / timeline_packet
+ *      always ⇒ false).
+ *   2. LIVE-WORLD — the live-world slice must be non-null (a dormant peaceful,
+ *      deity-free settlement ⇒ false).
+ *   3. PREMIUM — `faithUnlocked` must be true. This mirrors the screen's
+ *      FaithSection premium seam: a free / lapsed / anon export gets NO faith
+ *      chapter and therefore never a deity name in the PDF. The caller passes the
+ *      premium result; the default (false) is the safe one.
+ *
+ * @param {{ variant?: string, phase?: string, hasLiveWorld?: boolean, faithUnlocked?: boolean, narrated?: boolean, eventCount?: number }} input
+ * @returns {boolean}
+ */
+export function faithChapterVisible({ variant, phase, hasLiveWorld, faithUnlocked, narrated, eventCount } = {}) {
+  const spec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;
+  const included = shouldInclude(spec.chapters.faithWar, { phase, narrated, eventCount });
+  return !!(included && hasLiveWorld && faithUnlocked);
 }

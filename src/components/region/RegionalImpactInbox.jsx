@@ -1,4 +1,20 @@
-import { Check, CircleSlash, Undo2 } from 'lucide-react';
+/*
+ * §69.3 PROSE-LEAK ALLOWANCE — DM-TOOL TIER, recorded in-file as the ruling requires.
+ * "matures in N tick(s)" is an instruction to the DM about how many advances the
+ * queued impact still needs; the count is the action, not decoration.
+ *
+ * §69.3 splits the tiers: a raw engine tick counter is ALLOWED on a DM-facing
+ * instrument, where the number is the control the DM operates, and FORBIDDEN on
+ * player, public and PDF surfaces, which cure to the calendar phrase
+ * (src/domain/display/humanizeEngineTokens.js).
+ *
+ * This record is LOAD-BEARING, not decorative: tests/copy/proseLeak.test.js parses
+ * the line below, exempts exactly that many hits of that class in this file, and
+ * reds both ways — if the file grows one more, and if the allowance outlives the
+ * sites it was granted for.
+ * prose-leak-allowance: tick 2
+ */
+
 import { useMemo } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -41,7 +57,8 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
       (c.settlementIds || []).map(String).includes(String(saveId))
     );
     if (!campaign) return null;
-    const graph = ensureRegionalGraph(campaign.regionalGraph);
+    // Render path: the campaign's own stamp, never a clock (see RegionalGraphSummary).
+    const graph = ensureRegionalGraph(campaign.regionalGraph, { now: campaign.updatedAt || campaign.createdAt });
     const nodeNames = new Map(graph.nodes.map(node => [String(node.id), node.name]));
     const incoming = graph.queuedImpacts
       .filter(impact => String(impact.targetSettlementId) === String(saveId))
@@ -86,7 +103,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     <section style={{
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       padding: '12px 14px',
       marginTop: 12,
       marginBottom: 12,
@@ -116,7 +132,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   gap: 8,
                   padding: '7px 8px',
                   border: `1px solid ${BORDER}`,
-                  borderRadius: 6,
                   background: impact.status === 'applied' ? swatch.successBg : GOLD_BG,
                 }}
               >
@@ -140,7 +155,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 {impact.status === 'queued' && (
                   <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
                     <IconButton
-                      Icon={Check}
+                      glyph="✓"
                       label={available
                         ? 'Apply regional impact'
                         : delayTicks > 0
@@ -151,7 +166,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                       onClick={() => handleApply(impact.id)}
                     />
                     <IconButton
-                      Icon={CircleSlash}
+                      glyph="⊘"
                       label="Ignore regional impact"
                       onClick={() => handleIgnore(impact.id)}
                     />
@@ -160,7 +175,7 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                 {impact.status === 'applied' && (
                   <div style={{ flexShrink: 0 }}>
                     <IconButton
-                      Icon={Undo2}
+                      glyph="↶"
                       label="Resolve regional impact"
                       onClick={() => handleResolve(impact.id)}
                     />

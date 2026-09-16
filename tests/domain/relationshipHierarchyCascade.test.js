@@ -91,6 +91,12 @@ describe('vassal hierarchy cascade explainability', () => {
     // The coordination shape mirrors the executed changes one-to-one.
     expect(result.cascadeChanges.map(change => change.edgeKey))
       .toEqual(result.changes.map(change => change.relationshipKey));
+    expect(result.worldState.relationshipStates['edge.a.b'].turningPoints)
+      .toEqual([expect.objectContaining({
+        type: 'hierarchy_resolution',
+        fromType: 'allied',
+        toType: 'hostile',
+      })]);
   });
 
   test('the cascade executes on APPLY, not while the proposal is pending', () => {

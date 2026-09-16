@@ -1,0 +1,16 @@
+{
+  "_doc": "THE GENESIS RECORD — the freeze act, cut at the owner's signature. It authorizes the one movement of bytes the act carries (the generator golden master re-recorded) and it is the record the register's `genesis` block pins by hash. Every other register row is frozen at its CURRENT committed bytes by measurement in the same act, moving nothing.",
+  "ownerWords": "sign the golden, push them",
+  "ownerDate": "2026-09-16",
+  "odqRow": "§901",
+  "cause": "THE GENESIS FREEZE at the owner's signature. The generator golden master (tests/fixtures/generator-golden-master.json) is re-recorded: all 525 rows had stood red since the em-dash wave e3f6029b2 (the voice law: no em dash in user-facing strings) and were BANKED at ODQ §901 pending exactly this signature; the §931 long-tail landing's declared text shifts (37 of 525 configs, classified with zero UNDECLARED lines) ride the same re-record. The 525-row key set is unchanged. Every other same-seed surface in tests/fixtures/.golden-freeze-register.json is frozen at the bytes committed at the deploy lineage (a5876c0ea + the chair cars of 2026-09-16), none of which moves a generator or pulse byte.",
+  "seat": "Fable 5.1 — validated (the chair, session f6ac0d98; the deploy worktree at 00c97247f+)",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    }
+  ]
+}

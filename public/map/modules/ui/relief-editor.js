@@ -116,7 +116,7 @@ function editReliefIcon() {
 
   function dragToAdd() {
     const pressed = reliefIconsDiv.querySelector("svg.pressed");
-    if (!pressed) return tip("Please select an icon", false, error);
+    if (!pressed) return tip("Please select an icon", false, "error"); // SettlementForge fork patch: was bareword `error` (ReferenceError under strict mode)
 
     const type = pressed.dataset.type;
     const r = +reliefRadiusNumber.value;
@@ -186,7 +186,7 @@ function editReliefIcon() {
 
   function dragToRemove() {
     const pressed = reliefIconsDiv.querySelector("svg.pressed");
-    if (!pressed) return tip("Please select an icon", false, error);
+    if (!pressed) return tip("Please select an icon", false, "error"); // SettlementForge fork patch: was bareword `error` (ReferenceError under strict mode)
 
     const r = +reliefRadiusNumber.value;
     const type = pressed.dataset.type;

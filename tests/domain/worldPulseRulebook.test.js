@@ -314,6 +314,133 @@ describe('World Pulse rulebook expansion', () => {
     expect(candidates.some(candidate => ['institution_capture', 'institution_suppression'].includes(candidate.proposalPayload?.kind))).toBe(true);
   });
 
+  test('one unresolved institution-control intent per faction blocks rotating proposal spam', () => {
+    const factionId = 'ashford:night_cartel';
+    const state = {
+      factionId,
+      settlementId: 'ashford',
+      name: 'Night Cartel',
+      archetype: 'criminal',
+      governmentPreference: 'shadow_council',
+      controlledInstitutions: [],
+      suppressedInstitutions: [],
+      lawPreferences: ['protection_racket'],
+      rivals: [],
+      legitimacyClaim: 0.4,
+      riskTolerance: 0.6,
+      momentum: 0.3,
+      exhaustion: 0,
+    };
+    const settlement = {
+      services: [
+        { id: 'granary', name: 'Public Granary' },
+        { id: 'market', name: 'Grand Market' },
+      ],
+      powerStructure: { factions: [{ faction: 'Night Cartel', power: 76 }] },
+    };
+    const pending = {
+      status: 'pending',
+      outcome: {
+        proposalPayload: {
+          // A capture already on the desk blocks the same faction's rotating
+          // suppression target: both are one institution-control intent family.
+          kind: 'institution_capture',
+          factionId,
+          institutionId: 'granary',
+        },
+      },
+    };
+    const snapshot = {
+      worldState: { tick: 2, factionStates: { [factionId]: state }, proposals: [pending] },
+      settlements: [{ id: 'ashford', settlement }],
+    };
+
+    const candidates = evaluateFactionRules(snapshot, pressuresFor(['ashford'], 0.88), { tick: 3 });
+    expect(candidates.some(candidate => candidate.factionId === factionId
+      && ['faction_institution_capture', 'faction_institution_suppression'].includes(candidate.candidateType))).toBe(false);
+    expect(candidates.some(candidate => candidate.factionId === factionId
+      && candidate.candidateType === 'faction_government_challenge')).toBe(true);
+  });
+
+  test('live suppression refreshes mechanically; only a momentum-band transition is public', () => {
+    const factionId = 'ashford:night_cartel';
+    const institution = {
+      id: 'market',
+      name: 'Grand Market',
+      status: 'impaired',
+      impairments: [{
+        type: 'legitimacy',
+        severity: 0.4,
+        causeEventId: `faction_suppression:${factionId}:market`,
+      }],
+    };
+    const baseState = {
+      factionId,
+      settlementId: 'ashford',
+      name: 'Night Cartel',
+      archetype: 'criminal',
+      governmentPreference: 'shadow_council',
+      controlledInstitutions: [],
+      suppressedInstitutions: ['market'],
+      lawPreferences: ['protection_racket'],
+      rivals: [],
+      legitimacyClaim: 0.4,
+      riskTolerance: 0.6,
+      exhaustion: 0,
+    };
+    const candidateAt = (momentum) => {
+      const snapshot = {
+        worldState: {
+          tick: 2,
+          factionStates: { [factionId]: { ...baseState, momentum } },
+          proposals: [],
+        },
+        settlements: [{
+          id: 'ashford',
+          settlement: {
+            institutions: [institution],
+            powerStructure: { factions: [{ faction: 'Night Cartel', power: 76 }] },
+          },
+        }],
+      };
+      return evaluateFactionRules(snapshot, pressuresFor(['ashford'], 0.88), { tick: 3 })
+        .find(candidate => candidate.candidateType === 'faction_institution_suppression');
+    };
+
+    const sameBand = candidateAt(0.34);
+    expect(sameBand).toMatchObject({ applyMode: 'auto', recordMode: 'state_only' });
+    expect(sameBand.proposalPayload).toBeNull();
+
+    const crossesBand = candidateAt(0.27);
+    expect(crossesBand.applyMode).toBe('auto');
+    expect(crossesBand.recordMode).toBeUndefined();
+    expect(crossesBand.proposalPayload).toBeNull();
+
+    const staleEffect = {
+      ...institution,
+      impairments: [],
+    };
+    const staleSnapshot = {
+      worldState: {
+        tick: 2,
+        factionStates: { [factionId]: { ...baseState, momentum: 0.34 } },
+        proposals: [],
+      },
+      settlements: [{
+        id: 'ashford',
+        settlement: {
+          institutions: [staleEffect],
+          powerStructure: { factions: [{ faction: 'Night Cartel', power: 76 }] },
+        },
+      }],
+    };
+    const reOnset = evaluateFactionRules(staleSnapshot, pressuresFor(['ashford'], 0.88), { tick: 3 })
+      .find(candidate => candidate.candidateType === 'faction_institution_suppression');
+    expect(reOnset.applyMode).toBe('proposal');
+    expect(reOnset.recordMode).toBeUndefined();
+    expect(reOnset.proposalPayload.kind).toBe('institution_suppression');
+  });
+
   test('conflict resolution suppresses contradictory visible relationship transitions', () => {
     const candidates = resolveCandidateConflicts([
       {
@@ -340,5 +467,45 @@ describe('World Pulse rulebook expansion', () => {
 
     expect(candidates).toHaveLength(1);
     expect(candidates[0].id).toBe('a');
+  });
+
+  test('per-actor exclusivity keeps one candidate per composite npc tag', () => {
+    const candidates = resolveCandidateConflicts([
+      {
+        id: 'npc-high',
+        type: 'npc_action',
+        severity: 0.8,
+        conflictTags: ['npc:save1:mayor_bob'],
+      },
+      {
+        id: 'npc-low',
+        type: 'npc_action',
+        severity: 0.4,
+        conflictTags: ['npc:save1:mayor_bob'],
+      },
+    ]);
+
+    expect(candidates).toHaveLength(1);
+    expect(candidates[0].id).toBe('npc-high');
+  });
+
+  test('per-actor exclusivity keeps one candidate per composite faction tag', () => {
+    const candidates = resolveCandidateConflicts([
+      {
+        id: 'faction-high',
+        type: 'faction_action',
+        severity: 0.75,
+        conflictTags: ['faction:save1:merchant_league'],
+      },
+      {
+        id: 'faction-low',
+        type: 'faction_action',
+        severity: 0.35,
+        conflictTags: ['faction:save1:merchant_league'],
+      },
+    ]);
+
+    expect(candidates).toHaveLength(1);
+    expect(candidates[0].id).toBe('faction-high');
   });
 });

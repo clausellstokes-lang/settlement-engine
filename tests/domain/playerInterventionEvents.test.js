@@ -8,7 +8,9 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { runEventPipeline } from '../../src/domain/events/eventPipeline.js';
 
 const NEW_EVENTS = [

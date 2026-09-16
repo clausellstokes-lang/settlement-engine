@@ -1,5 +1,7 @@
 {
-  "appliedHead": 112,
-  "appliedAt": "2026-07-05",
-  "note": "Last migration number applied to the PRODUCTION Supabase project. Bump this in the SAME commit/PR as the `supabase db push` that applies new migrations. The gate cross-checks it (scripts/check-migration-head.mjs + tests/docs/migrationAppliedHead.test.js): appliedHead must reference a real, contiguous migration file and may never exceed the repo migration head. When the repo head is AHEAD of appliedHead, `validate:migration-head` surfaces the pending (undeployed) migrations so the 'code ahead of deployed DB' state is visible in the gate output rather than tribal knowledge. The authoritative live check remains the SUPABASE_MIGRATION_HEAD deploy probe (see docs/DEPLOY.md)."
+  "appliedHead": 200,
+  "appliedAt": "2026-09-16",
+  "verifiedAt": "2026-09-16T07:24:08Z",
+  "verification": "Verified against the linked production project (uhozyhcdccbhigvlacdu) with `supabase migration list` after the owner's attended `supabase db push` of 2026-09-16 (03:0x-03:3x EDT, from the deploy worktree at a5876c0ea + the 191 drop-before-replace fix 76cd50953): migrations 001 through 200 present remotely; the push ran in three stages (122-136 from the ledger checkout, byte-identical SQL to the product branch; 137-190; 191-200 after 191's return-type fix). No local-only migrations remain.",
+  "note": "Last migration number applied to the PRODUCTION Supabase project. Bump this in the SAME commit/PR as the `supabase db push` that applies new migrations. The gate cross-checks it (scripts/check-migration-head.mjs + tests/docs/migrationAppliedHead.test.js): appliedHead must reference a real, contiguous migration file and may never exceed the repo migration head. When the repo head is AHEAD of appliedHead, `validate:migration-head` surfaces the pending (undeployed) migrations so the 'code ahead of deployed DB' state is visible in the gate output rather than tribal knowledge. The authoritative live check remains the SUPABASE_MIGRATION_HEAD deploy probe in scripts/check-migration-head.mjs."
 }

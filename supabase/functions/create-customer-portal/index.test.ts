@@ -23,14 +23,20 @@
  * reads STRIPE_SECRET_KEY at module load).
  */
 import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_ANON_KEY', 'anon_dummy');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('CLIENT_URL', 'https://settlementforge.com');
+const scopedEnv = installScopedTestEnv({
+  STRIPE_SECRET_KEY: 'sk_test_dummy',
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_ANON_KEY: 'anon_dummy',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  CLIENT_URL: 'https://settlementforge.com',
+});
 
 const { handleCreateCustomerPortal } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 type StripeCustomer = { id: string; metadata?: Record<string, string> };
 
@@ -81,9 +87,17 @@ function makeUserClient(user: { id: string; email?: string | null } | null, auth
   });
 }
 
-/** Admin stub: profile read returns the given stripe_customer_id; records updates. */
-function makeAdminClient(customerId: string | null = null) {
+/**
+ * Admin stub: profile read returns the given stripe_customer_id; records updates.
+ * `rate` seeds the ingest_check_rate RPC result the rate gate reads (default:
+ * under rate, so the existing identity tests are unaffected).
+ */
+function makeAdminClient(
+  customerId: string | null = null,
+  rate: { data?: unknown; error?: { message: string } | null } = { data: true, error: null },
+) {
   const updates: Array<Record<string, unknown>> = [];
+  const rpcCalls: string[] = [];
   // deno-lint-ignore no-explicit-any
   const adminClient = (): any => ({
     from: (_t: string) => ({
@@ -95,8 +109,16 @@ function makeAdminClient(customerId: string | null = null) {
         },
       }),
     }),
+    rpc: (fn: string) => {
+      rpcCalls.push(fn);
+      return Promise.resolve(
+        fn === 'ingest_check_rate'
+          ? { data: rate.data ?? null, error: rate.error ?? null }
+          : { data: null, error: null },
+      );
+    },
   });
-  return { updates, adminClient };
+  return { updates, rpcCalls, adminClient };
 }
 
 const req = (headers: Record<string, string> = {}) =>
@@ -105,7 +127,7 @@ const req = (headers: Record<string, string> = {}) =>
     headers: { 'Content-Type': 'application/json', ...headers },
   });
 
-Deno.test('a bare email match without matching supabase_user_id metadata is NEVER adopted', async () => {
+scopedEnv.test('a bare email match without matching supabase_user_id metadata is NEVER adopted', async () => {
   // A stranger's customer shares the caller's email (no identity metadata).
   const stripe = makeStripe([{ id: 'cus_stranger', metadata: {} }]);
   const admin = makeAdminClient(null);
@@ -122,7 +144,7 @@ Deno.test('a bare email match without matching supabase_user_id metadata is NEVE
   assertEquals(admin.updates[0].stripe_customer_id, 'cus_fresh');
 });
 
-Deno.test('an existing customer with metadata.supabase_user_id === user.id IS reused (no duplicate)', async () => {
+scopedEnv.test('an existing customer with metadata.supabase_user_id === user.id IS reused (no duplicate)', async () => {
   const stripe = makeStripe([
     { id: 'cus_other_user', metadata: { supabase_user_id: 'someone_else' } },
     { id: 'cus_mine', metadata: { supabase_user_id: 'u1' } },
@@ -138,7 +160,7 @@ Deno.test('an existing customer with metadata.supabase_user_id === user.id IS re
   assertEquals(admin.updates[0].stripe_customer_id, 'cus_mine');
 });
 
-Deno.test('a profile with stripe_customer_id short-circuits — no list, no create', async () => {
+scopedEnv.test('a profile with stripe_customer_id short-circuits — no list, no create', async () => {
   const stripe = makeStripe([{ id: 'cus_stranger', metadata: {} }]);
   const admin = makeAdminClient('cus_profile');
   const res = await handleCreateCustomerPortal(
@@ -151,7 +173,7 @@ Deno.test('a profile with stripe_customer_id short-circuits — no list, no crea
   assertEquals(stripe.portalSessions[0].customer, 'cus_profile');
 });
 
-Deno.test('no Authorization header is rejected (400) before any Stripe call', async () => {
+scopedEnv.test('no Authorization header is rejected (400) before any Stripe call', async () => {
   const stripe = makeStripe();
   const admin = makeAdminClient(null);
   const res = await handleCreateCustomerPortal(
@@ -164,7 +186,36 @@ Deno.test('no Authorization header is rejected (400) before any Stripe call', as
   assertEquals(stripe.portalSessions.length, 0);
 });
 
-Deno.test('a user without an email cannot mint a customer (400, no Stripe calls)', async () => {
+scopedEnv.test('over the per-user rate limit returns 429 BEFORE any Stripe call', async () => {
+  const stripe = makeStripe([{ id: 'cus_x', metadata: {} }]);
+  // ingest_check_rate reports OVER rate (data:false) → the gate fails closed.
+  const admin = makeAdminClient(null, { data: false, error: null });
+  const res = await handleCreateCustomerPortal(
+    req({ Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'me@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 429);
+  assertEquals((await res.json()).error.includes('Too many'), true);
+  // The Stripe customer/portal APIs were never touched.
+  assertEquals(stripe.getListCalls(), 0);
+  assertEquals(stripe.created.length, 0);
+  assertEquals(stripe.portalSessions.length, 0);
+  // The rate gate actually consulted ingest_check_rate.
+  assertEquals(admin.rpcCalls.includes('ingest_check_rate'), true);
+});
+
+scopedEnv.test('an ingest_check_rate RPC error fails CLOSED (429), not open', async () => {
+  const stripe = makeStripe();
+  const admin = makeAdminClient(null, { error: { message: 'rpc exploded' } });
+  const res = await handleCreateCustomerPortal(
+    req({ Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'me@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 429);
+  assertEquals(stripe.portalSessions.length, 0);
+});
+
+scopedEnv.test('a user without an email cannot mint a customer (400, no Stripe calls)', async () => {
   const stripe = makeStripe();
   const admin = makeAdminClient(null);
   const res = await handleCreateCustomerPortal(

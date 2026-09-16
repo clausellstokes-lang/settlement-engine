@@ -61,14 +61,20 @@ const lightColors = Object.freeze({
   // Muted — chrome-only secondary text (NEVER body copy — fails WCAG)
   'muted-500': '#9C8068',
 
-  // Violet — AI affordances. The single visual marker that means
-  // "this surface is gated / opt-in / spends credits". Never used for
-  // anything else, never collapses with gold.
-  'violet-500': '#7B4FCF',  // AI affordance — fills, borders, icons
-  'violet-700': '#6A3FBF',  // AI TEXT on violet-100 (violet-500 as text is 4.35:1, just under AA)
-  'violet-100': '#EBE2FA',
+  // Slate — the AI register (THE SLATE CONVERSION, C13 owner ruling 2026-07-18:
+  // "slate replaces violet, never removes the distinction"). The single visual
+  // marker that means "this surface is AI-authored / gated / opt-in / spends
+  // credits". Never used for anything else, never collapses with gold. Ratios
+  // mirror the retired violet trio (tests/design/contrast.test.js recomputes):
+  // white on slate-500 = 5.27 (AA) · slate-700 on slate-100 = 6.40 (AA) ·
+  // slate-500 as text on slate-100 = 4.31 (just under AA — the deliberate
+  // negative pin: the fill hue is never text on its own tint).
+  'slate-500': '#5A6E82',  // AI affordance — fills, borders, icons
+  'slate-700': '#435463',  // AI TEXT on slate-100
+  'slate-100': '#E4E9EE',
 
-  // Red — destructive actions and hard errors only
+  // Red — destructive actions and hard errors; the only non-destructive use is
+  // the named operatorAlert semantic alias, fenced to unread-count chrome.
   'red-600': '#A23434',
   'red-100': '#F4DEDE',
 
@@ -80,6 +86,15 @@ const lightColors = Object.freeze({
   'amber-500': '#D08020',  // amber fill / icon / border
   'amber-700': '#8A5212',  // amber TEXT on amber-100 (WCAG AA — amber-500 on amber-100 is 2.85:1)
   'amber-100': '#FDF4EC',
+
+  // THE ROLE RINGS (docs/DESIGN_FOUNDERS_HALL.md §2) — the two staff hues worn
+  // as a ring around a Founders' Hall plate when a chair-holder is ALSO staff.
+  // Deliberately outside the gold family: a role is what you are to the product,
+  // a chair is an honor you hold, and a staff mark must never read as purchasable
+  // prestige. Used ONLY through the founderRing* named tokens below; the ring is
+  // never the sole carrier of the fact (the plate also names the role in text).
+  'ring-blue-400':  '#5B8FD6',  // Developer ring on the Hall's dark ceremonial field
+  'ring-mauve-400': '#C86FB0',  // Admin ring — the purplish-pink of the owner's order
 });
 
 export const color = lightColors;
@@ -93,7 +108,14 @@ export const semantic = Object.freeze({
   pageBg:        color['parchment-50'],
   cardBg:        color['parchment-50'],
   cardHover:     color['parchment-100'],
-  cardBorder:    color['parchment-200'],
+  // THE MATERIALS BRIDGE (Organic Craft, 2026-07-18): the app-wide card border /
+  // divider is now the feint-rule material — the organic ink ramp's hairline tone
+  // (design/organic/ink.js INK.hairline), the receding subdivision rule of the
+  // manuscript grammar. One value swap, zero structural change; every surface
+  // reading BORDER/cardBorder renders the new material. parchment-200 itself is
+  // unchanged (exact-value swatch references keep their promise). Decorative
+  // dividers carry no WCAG floor; interactive boundaries still use BORDER_STRONG.
+  cardBorder:    '#C8B89A',
 
   // Text
   textPrimary:   color['ink-900'],
@@ -105,10 +127,20 @@ export const semantic = Object.freeze({
   ctaPrimary:        color['gold-500'],
   ctaPrimaryHover:   color['gold-400'],
   ctaPrimaryActive:  color['gold-700'],
-  ctaAi:             color['violet-500'],
-  ctaAiBg:           color['violet-100'],
+  ctaAi:             color['slate-500'],
+  ctaAiBg:           color['slate-100'],
+  // THE SLATE PAIR (C13 ruling): the semantic light/dim register for
+  // AI-authored surfaces — `slateLight` washes draft-slip surfaces, `slateDim`
+  // carries the legible slate text/rule. New AI surfaces read THESE names;
+  // the SLATE* flats below carry the same values (renamed from VIOLET* at
+  // fold batch 2, 2026-07-19 — see the flats' comment).
+  slateLight:        color['slate-100'],
+  slateDim:          color['slate-700'],
 
   // Status
+  // Operator-message unread count ONLY. This is an operational chrome alert,
+  // not a general emphasis colour and never a reader/manuscript accent.
+  operatorAlert:  color['red-600'],
   destructive:    color['red-600'],
   destructiveBg:  color['red-100'],
   success:        color['green-600'],
@@ -158,6 +190,7 @@ export const swatch = Object.freeze({
   '#1B1408': '#1b1408',
   '#1C1409': '#1c1409',
   '#2A3A7A': '#2a3a7a',
+  '#E8E2D6': '#e8e2d6',
   '#2C2210': '#2c2210',
   '#3A3A6A': '#3a3a6a',
   '#3A5A2A': '#3a5a2a',
@@ -168,6 +201,7 @@ export const swatch = Object.freeze({
   '#7C3AED12': '#7c3aed12',
   '#7C3AED40': '#7c3aed40',
   '#8A2F4A': '#8a2f4a',
+  '#8A5A1A': '#8a5a1a',
   '#8B1A1A': '#8b1a1a',
   '#8C6F32': '#8c6f32',
   '#9C8068': '#9c8068',
@@ -181,8 +215,12 @@ export const swatch = Object.freeze({
   '#E0D0B0': '#e0d0b0',
   '#E0E8F0': '#e0e8f0',
   '#E8D9B0': '#e8d9b0',
-  '#EBE2FA': '#ebe2fa',
-  '#EBE2FA80': '#ebe2fa80',
+  // THE SLATE CONVERSION (C13): the two violet-wash keys repointed to the slate
+  // wash; at fold batch 2 (2026-07-19) the retired violet KEY spellings were
+  // dropped and the keys renamed to the honest slate hex (value === key, the
+  // swatchbook convention) — call sites updated in the same commit.
+  '#E4E9EE': '#e4e9ee',
+  '#E4E9EE80': '#e4e9ee80',
   '#F4DEDE': '#f4dede',
   '#F5ECD8': '#f5ecd8',
   '#F7EBF0': '#f7ebf0',
@@ -211,7 +249,7 @@ export const swatch = Object.freeze({
   stressAmber: '#ffd080',
   mutedBrown: '#9c8068',
   '#4A3B22': '#4a3b22',
-  '#7B4FCF': '#7b4fcf',
+  '#5A6E82': '#5a6e82', // THE SLATE CONVERSION (C13) — was the retired violet key '#7B4FCF'; renamed to the honest slate hex at fold batch 2 (2026-07-19)
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
@@ -363,6 +401,14 @@ export const swatch = Object.freeze({
   '#C8A84A': '#c8a84a', // random-pool chip border
   '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
   '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
+  // THE HOUSE DEVICE (the eager brand mark, components/brand/HouseDevice.jsx).
+  // The organic-craft rubric oxblood + the dim-field ink/rubric — canonical
+  // definitions live in src/design/organic/{rubrication,ink}.js (lazy); these
+  // swatch keys give the EAGER header/loading/error mark token-routed access
+  // without pulling the organic layer into the first-paint closure.
+  '#8B2E2E': '#8b2e2e', // rubric oxblood — the device seal-point (light)
+  '#ECE0C6': '#ece0c6', // dim-field ink — the device strokes on dark grounds
+  '#E8A860': '#e8a860', // dim-field rubric — the device seal-point on dark grounds
   // Dossier reading-palette (src/components/new/tabs/tabPalette.js) — the darker
   // status/category colors the dense dossier tabs use (a deliberate print-legibility
   // palette on parchment, distinct from the lighter screen chrome tokens). Most
@@ -384,11 +430,19 @@ export const fontFamily = Object.freeze({
   mono:  '"JetBrains Mono", "Fira Code", Consolas, monospace',
 });
 
+// The DISPLAY face is swappable at runtime via the `--oc-display-face` CSS custom
+// property (V-27d IM Fell scaffold): UNSET (the default), var() falls back to the
+// Crimson serif — byte-identical to the historical rendering; SET (e.g. to the IM
+// Fell display face, src/lib/imFellFace.js) it swaps hero + section titles ONLY,
+// leaving prose/body on the serif. Applied as an inline style value, so the browser
+// resolves var() per element. Nothing lights it by default — see imFellFace.js.
+const displaySerif = 'var(--oc-display-face, "Crimson Text"), Georgia, serif';
+
 export const type = Object.freeze({
-  // Display — Crimson serif, used for hero + section titles
-  'display-xl': { family: fontFamily.serif, size: 40, weight: 600, lineHeight: 1.15 },
-  'display-l':  { family: fontFamily.serif, size: 32, weight: 600, lineHeight: 1.2 },
-  'display-m':  { family: fontFamily.serif, size: 22, weight: 600, lineHeight: 1.25 },
+  // Display — Crimson serif (runtime-swappable display face), hero + section titles
+  'display-xl': { family: displaySerif, size: 40, weight: 600, lineHeight: 1.15 },
+  'display-l':  { family: displaySerif, size: 32, weight: 600, lineHeight: 1.2 },
+  'display-m':  { family: displaySerif, size: 22, weight: 600, lineHeight: 1.25 },
 
   // Prose — Crimson serif, used for dossier body
   'prose-l':    { family: fontFamily.serif, size: 18, weight: 400, lineHeight: 1.65, style: 'italic' },
@@ -437,7 +491,60 @@ export const elevation = Object.freeze({
   '3': '0 12px 32px rgba(27,20,8,0.18)', // modals, popovers
 });
 
+// ── Bound Book surface steps ───────────────────────────────────────────────
+// The three authored parchment grounds. AE-1 only establishes the vocabulary;
+// existing semantic/legacy card aliases are deliberately NOT repointed until
+// the elevation sweep can be judged as a visual change.
+export const PARCHMENT_STEPS = Object.freeze({
+  page:   color['parchment-50'],
+  card:   color['parchment-100'],
+  nested: color['parchment-200'],
+});
+
 // ── Motion ─────────────────────────────────────────────────────────────────
+// Primitive values for the already-live twelve-behavior paper-physics grammar.
+// `design/organic/motion.js` re-exports these names; keeping their values here
+// satisfies the token-home law without changing a class, CSS variable, or pixel.
+export const MOTION_PRIMITIVES = Object.freeze({
+  duration: Object.freeze({
+    press: '120ms',
+    ink: '180ms',
+    strike: '300ms',
+    settle: '420ms',
+    lay: '640ms',
+  }),
+  easing: Object.freeze({
+    ink: 'cubic-bezier(0.33, 0, 0.2, 1)',
+    settle: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    press: 'cubic-bezier(0.4, 0, 0.6, 1)',
+  }),
+});
+
+// High-level SURFACE orchestration. This closed vocabulary classifies whether a
+// composed surface resolves once, follows scroll, or stays still. It does not
+// replace the lower-level organic gestures above; AE-4 will map declarations to
+// those gestures. Every moving entry names an equal static composition.
+export const MOTION = Object.freeze({
+  none: Object.freeze({
+    owner: 'static', durationMs: 0, easing: 'linear', iterations: 1,
+    staticComposition: 'present',
+  }),
+  settle: Object.freeze({
+    owner: 'time', durationMs: 320, easing: 'cubic-bezier(.2,.7,.3,1)', iterations: 1,
+    staticComposition: 'settled', translateYPx: 6,
+  }),
+  reveal: Object.freeze({
+    owner: 'time', durationMs: 640, easing: 'cubic-bezier(0.22,1,0.36,1)', iterations: 1,
+    staticComposition: 'resolved',
+  }),
+  scrub: Object.freeze({
+    owner: 'scroll', durationMs: null, easing: 'linear', iterations: 1,
+    staticComposition: 'poster',
+  }),
+});
+
+// Deprecated compatibility table. It has no live in-repo consumers, but AE-1 is
+// data-only and therefore preserves the public export until a dedicated cleanup.
 export const motion = Object.freeze({
   quick:   { duration: 120, easing: 'ease-out' },                       // hover, focus
   base:    { duration: 220, easing: 'cubic-bezier(.2,.7,.3,1)' },       // modal open, tab switch
@@ -484,6 +591,12 @@ export function emitCssTokens(target = document.documentElement) {
   for (const [k, v] of Object.entries(space))     set(`--${k}`, `${v}px`);
   for (const [k, v] of Object.entries(radius))    set(`--radius-${k}`, typeof v === 'number' ? `${v}px` : v);
   for (const [k, v] of Object.entries(elevation)) set(`--elevation-${k}`, v);
+  for (const [k, v] of Object.entries(PARCHMENT_STEPS)) set(`--parchment-step-${k}`, v);
+  for (const [k, v] of Object.entries(MOTION)) {
+    if (v.durationMs !== null) set(`--motion-${k}-duration`, `${v.durationMs}ms`);
+    set(`--motion-${k}-easing`, v.easing);
+    if ('translateYPx' in v) set(`--motion-${k}-translate-y`, `${v.translateYPx}px`);
+  }
 }
 
 // ── Backward-compat shim ───────────────────────────────────────────────────
@@ -504,19 +617,26 @@ export const legacy = Object.freeze({
   // ratio on parchment is what AA mandates and what MUTED fails.
   BODY:     color['ink-600'],
   SECOND:   color['ink-800'],
-  BORDER:   color['parchment-200'],
+  // THE MATERIALS BRIDGE: BORDER is the feint-rule hairline (see semantic.cardBorder).
+  BORDER:   '#C8B89A',
   BORDER2:  '#F0E5C8',            // a lighter parchment-150
   CARD:     '#FFFBF5',            // slightly warmer than parchment-50 for cards
   PARCH:    color['parchment-50'],
   CARD_ALT: '#FAF6EF',
   CARD_HDR: '#FAF4E8',
 
-  // Flat aliases for palette colours that previously had only dashed keys
-  // (color['violet-500'] etc.). Added in the colour burn-down so exact-match
-  // call sites can route through a flat name like the rest.
-  VIOLET:    color['violet-500'],
-  VIOLET_DEEP: color['violet-700'],   // legible AI text on violet-100
-  VIOLET_BG: color['violet-100'],
+  // Flat aliases for palette colours that previously had only dashed keys.
+  // Added in the colour burn-down so exact-match call sites can route through
+  // a flat name like the rest.
+  // THE SLATE CONVERSION (C13, owner ruling 2026-07-18) — COMPLETED at fold
+  // batch 2 (2026-07-19): the AI register's flats are named SLATE* to match
+  // the slate values they have carried since C13. The deferred identifier
+  // rename (VIOLET*→SLATE*) landed as the batch's closing commit — every
+  // consumer renamed at once (the all-or-none law), no VIOLET* alias left
+  // behind. New AI surfaces read semantic.slateLight/slateDim or ctaAi/ctaAiBg.
+  SLATE:    color['slate-500'],
+  SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
+  SLATE_BG: color['slate-100'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],
@@ -564,6 +684,10 @@ export const legacy = Object.freeze({
     pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24,
     '7.5': 7.5, '8.5': 8.5, '9.5': 9.5, '10.5': 10.5, '11.5': 11.5, '12.5': 12.5, '13.5': 13.5,
     '14': 14, '14.5': 14.5, '16': 16, '18': 18, '22': 22, '26': 26, '28': 28, '32': 32, '36': 36,
+    // Display steps for the scrollable landing hero + section headings (spec §6:
+    // hero h1 58px, closer h2 44px, section h2 34px). Additive — no existing key
+    // changes, so every other surface renders byte-identically.
+    '34': 34, '44': 44, '58': 58,
   },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.
@@ -579,3 +703,29 @@ export const legacy = Object.freeze({
   LANDING_MAX: layout.landing,
   FORM_MAX:    layout.form,
 });
+
+// ── Realm/map chrome tokens (tree-shakeable standalone exports) ──────────────
+// GOLD_TXT / GOLD_SOFT / BORDER_STRONG live OUTSIDE the `legacy` (L) object on
+// purpose: they are consumed ONLY by the lazily-loaded Realm/map chrome
+// (WorldMapToolbar, RealmStrip, AdvanceAutoResolveToggle), so keeping them as
+// individual exports lets Rollup tree-shake them into the map chunk instead of
+// welding them into the first-paint `legacy` object (which every eager surface
+// pulls in). Values match the gold-800 / gold-100 scale steps + the WCAG-1.4.11
+// interactive-control border. tokens.js is the token SOURCE, so a raw hex here
+// is the canonical definition, not a fork.
+export const GOLD_TXT  = '#6A511F';  // legible gold TEXT on light / gold-tint surfaces (WCAG AA)
+export const GOLD_SOFT = '#F3E7C6';  // opaque soft-gold fill (tertiary gold button surface)
+export const BORDER_STRONG = '#A6863C'; // interactive-control border ≥3:1 vs card + page (WCAG 1.4.11)
+
+// ── Founders' Hall role rings (tree-shakeable standalone exports) ────────────
+// Same discipline as the Realm/map chrome above, and for the same reason: these
+// are consumed ONLY by the lazily-loaded Hall chunk (components/founders/*), so
+// they stay OUT of the eager `legacy` object. Deliberately NOT re-exported through
+// components/theme.js — that shim is eager, and welding two ceremonial hues into
+// first paint to save an import path would spend the closure budget on a route
+// most visitors never open.
+//
+// The ring is never the sole carrier of the fact: ChairPlate also names the role
+// in text, so the hue is reinforcement, not information (WCAG 1.4.1).
+export const founderRingDeveloper = '#5B8FD6'; // Developer ring — the Hall's blue
+export const founderRingAdmin     = '#C86FB0'; // Admin ring — the purplish-pink of the owner's order

@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup, act, waitFor } from '@testing-library/react';
 
 const flagMock = vi.fn(() => false);
 vi.mock('../../src/lib/flags.js', () => ({ flag: (...a) => flagMock(...a) }));
@@ -55,10 +55,6 @@ vi.mock('../../src/store/index.js', () => {
     clearSettlement: vi.fn(),
     pipelineRevealActive: false,
     dismissPipelineReveal: vi.fn(),
-    onboardingActive: false,
-    onboardingStep: 0,
-    advanceOnboarding: vi.fn(),
-    setOnboardingStep: vi.fn(),
   };
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
@@ -72,9 +68,17 @@ import { useStore } from '../../src/store/index.js';
 describe('GenerateWizard — Phase 6 layered Create flow', () => {
   beforeEach(() => {
     trackMock.mockClear();
-    useStore.__set({ wizardMode: 'advanced', settlement: null });
+    useStore.__set({
+      wizardMode: 'advanced',
+      settlement: null,
+      generateSettlement: vi.fn().mockResolvedValue({ id: 'generated-1' }),
+      clearLoadedFromSave: vi.fn(),
+    });
   });
-  afterEach(() => cleanup());
+  afterEach(() => {
+    cleanup();
+    vi.restoreAllMocks();
+  });
 
   it('renders the single layered ConfigurationPanel (no linear step region)', () => {
     render(<GenerateWizard isMobile={false} />);
@@ -94,5 +98,50 @@ describe('GenerateWizard — Phase 6 layered Create flow', () => {
     fireEvent.click(screen.getByText('Institutions'));
     const afterOpen = trackMock.mock.calls.filter(([ev]) => ev === 'WIZARD_STEP_VIEWED');
     expect(afterOpen.some(([, props]) => props.step_id === 'institutions')).toBe(true);
+  });
+
+  it('keeps generation in flight until the promise settles and ignores repeat clicks', async () => {
+    let resolveGeneration;
+    const pending = new Promise(resolve => {
+      resolveGeneration = resolve;
+    });
+    const generateSettlement = vi.fn(() => pending);
+    const clearLoadedFromSave = vi.fn();
+    useStore.__set({ generateSettlement, clearLoadedFromSave });
+
+    render(<GenerateWizard isMobile={false} />);
+    const button = screen.getByRole('button', { name: 'Generate Draft' });
+    fireEvent.click(button);
+    fireEvent.click(button);
+
+    expect(generateSettlement).toHaveBeenCalledTimes(1);
+    expect(clearLoadedFromSave).not.toHaveBeenCalled();
+    expect(button.disabled).toBe(true);
+
+    await act(async () => {
+      resolveGeneration({ id: 'generated-2' });
+      await pending;
+    });
+
+    expect(clearLoadedFromSave).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(button.disabled).toBe(false));
+  });
+
+  it('surfaces a rejected generation and restores the retry control', async () => {
+    const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const clearLoadedFromSave = vi.fn();
+    useStore.__set({
+      generateSettlement: vi.fn().mockRejectedValue(new Error('engine unavailable')),
+      clearLoadedFromSave,
+    });
+
+    render(<GenerateWizard isMobile={false} />);
+    const button = screen.getByRole('button', { name: 'Generate Draft' });
+    fireEvent.click(button);
+
+    expect((await screen.findByRole('alert')).textContent).toMatch(/simulator hit a snag/i);
+    expect(clearLoadedFromSave).not.toHaveBeenCalled();
+    expect(button.disabled).toBe(false);
+    consoleError.mockRestore();
   });
 });

@@ -40,22 +40,41 @@
  * Pure + deterministic; no rng, no Date.
  */
 
+import { clamp } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
+import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
+import {
+  nativeSemanticName,
+  nativeSemanticNames,
+} from '../content/customContentSemanticAuthority.js';
 
-const clamp = (/** @type {any} */ v, /** @type {number} */ lo, /** @type {number} */ hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
 // one-decimal rounding would silently erase them.
 const round2 = (/** @type {number} */ v) => Math.round(v * 100) / 100;
 
-const INTERVAL_MONTHS = Object.freeze({
-  one_week: 0.25,
-  one_month: 1,
-  one_season: 3,
-  one_year: 12,
+// WEEK-denominated interval durations (the canonical grid — mirrors
+// worldState.js INTERVAL_WEEKS), converted to storage-month units at the ONE
+// boundary below: under the 4-4-5 calendar (52 weeks = 12 months) a week is
+// 12/52 = 3/13 of a month, so months = (weeks × 3) / 13 — the identical float
+// expression on the production weekly path and on a direct coarse call.
+// (Exactness across paths is moot here anyway: the orchestrator only ever
+// ticks one_week; the coarse entries are reached solely by direct unit-test
+// calls.) A one_year coarse call consumes exactly 12 months (156/13 is exact).
+const INTERVAL_WEEKS = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 13,
+  one_year: 52,
 });
+
+/** @param {string} interval */
+function monthsForInterval(interval) {
+  const weeks = /** @type {Record<string, number>} */ (INTERVAL_WEEKS)[interval] ?? INTERVAL_WEEKS.one_month;
+  return (weeks * 3) / 13;
+}
 
 export const STOCKPILE_TUNING = Object.freeze({
   fillRate: 0.6,                // fraction of the surplus that actually reaches storage
@@ -111,7 +130,7 @@ const transportIsDown = (/** @type {any} */ inst) =>
 
 /** @param {import('../settlement.schema.js').SimInstitution} inst */
 function transportChannelOf(inst) {
-  const n = String(inst?.name || '').toLowerCase();
+  const n = nativeSemanticName(inst).toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
   if (n.includes('airship')) return 'airship';
   return null;
@@ -164,7 +183,8 @@ function resilienceStorageComponent(months) {
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function storageCapacityMonths(settlement) {
-  const names = (settlement?.institutions || []).map((/** @type {any} */ i) => String(i?.name || '').toLowerCase());
+  const names = nativeSemanticNames(settlement?.institutions)
+    .map((/** @type {string} */ name) => name.toLowerCase());
   const has = (/** @type {string[]} */ ...fragments) => names.some((/** @type {string} */ n) => fragments.some(f => n.includes(f)));
   const tier = String(settlement?.tier || 'village');
   const base = has('state granary') ? (tier === 'metropolis' ? 12 : 8)
@@ -232,18 +252,35 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * written back through the same gate so the 'Disasters & Famine' row moves
  * with the granary instead of freezing at the generation value.
  *
+ * SEASONS-A (`seasonal` option, kernel-threaded ONLY when seasonsEnabled): the
+ * food year enters HERE, at the consumption point of the production read. The
+ * signed seasonal swing (seasons.js — % of need; harvest positive, winter
+ * negative, biome-amplituded, variance-scaled) lands on the SAME effective
+ * ledger the blockade/famine cuts use:
+ *   • a winter shortfall first eats the structural surplus, then joins the
+ *     effective deficit (so the drawdown answers it — the granary carries the
+ *     town through winter, and the LATE-WINTER HUNGRY GAP is what an empty
+ *     granary looks like to the existing deficit/famine machinery);
+ *   • a harvest boost first covers the structural deficit + cuts, then BANKS
+ *     (the summer/fall refill), capped by the same infrastructure ceiling.
+ * `seasonal` null/absent ⇒ every seasonal term is exactly 0 and the arithmetic
+ * below reduces to the legacy expressions term-for-term — byte-identical (the
+ * constitutional law; pinned by the goldens + seasonsDormancy tests).
+ *
+ * @typedef {{ season: string, weekOfYear: number, weekOfSeason: number,
+ *            year: number, variance: string|null, swingPts: number }} SeasonalFoodContext
  * @param {any} settlement
- * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any }} [options]
+ * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any, seasonal?: SeasonalFoodContext|null }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
  *                       resilienceScore: number, reliefPct: number, tithed: boolean,
  *                       blockaded: boolean, famished: boolean } | null }}
  */
-export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null } = {}) {
+export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null, seasonal = null } = {}) {
   const ledger = foodLedger(settlement);
   if (!ledger.present) return { settlement, changed: false, summary: null };
   const fs = settlement.economicState?.foodSecurity || {};
-  const months = /** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1;
+  const months = monthsForInterval(interval);
   const cap = storageCapacityMonths(settlement);
   const T = STOCKPILE_TUNING;
 
@@ -274,9 +311,14 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // recorded in the stockpile bookkeeping so the dossier can say WHY the
   // blockade did or didn't bite (deriveBlockadeRelief reads it).
   const blockadeBypass = blockaded ? resolveBlockadeBypassChannel(settlement) : null;
-  const _channelShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
+  const _bypassShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
     : blockadeBypass === 'airship' ? FOOD_IMPORT_RATES.airshipBesieged
     : 0;
+  // D6 THE UNDERWAYS (coupling 2 — siege endurance): a tunneled town keeps a bounded
+  // supply trickle under siege/occupation (the underways don't care which side the wall
+  // is on). +0 without the clandestine facet ⇒ _channelShare is byte-identical.
+  const _underwaysShare = blockaded && settlementHasUnderways(settlement) ? UNDERWAYS_TUNING.FOOD_TRICKLE : 0;
+  const _channelShare = _bypassShare + _underwaysShare;
   const blockadePct = blockaded
     ? Math.max(0, clamp(ledger.importDependency, 0, 1) - _channelShare) * 100
     : 0;
@@ -291,11 +333,31 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // same effectiveDeficit so it composes with famine and gets answered by the drawdown.
   const deploying = !!deployment && !blockaded;
   const deployDrainPct = deploying ? T.deploymentDrainPct : 0;
-  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct + deployDrainPct, 0, 95);
+  // SEASONS-A: the signed seasonal production term, split into its shortfall
+  // and boost faces. All three terms are EXACTLY 0 when `seasonal` is absent,
+  // so the deficit/inflow expressions below reduce to the legacy arithmetic
+  // term-for-term (every legacy addend is ≥ 0, so the added Math.max(0,·) is
+  // the identity on the off path — byte-identical by construction).
+  const seasonalCutPct = seasonal ? Math.max(0, -(Number(seasonal.swingPts) || 0)) : 0;
+  const seasonalBoostPct = seasonal ? Math.max(0, Number(seasonal.swingPts) || 0) : 0;
+  // A structural surplus absorbs the winter shortfall before it becomes unmet
+  // need (a surplus town's fields still out-produce its tables in a lean season).
+  const seasonalCutNetPct = Math.max(0, seasonalCutPct - baseSurplusPct);
+  let effectiveDeficit = clamp(
+    Math.max(0, baseDeficitPct + blockadePct + faminePct + deployDrainPct + seasonalCutNetPct - seasonalBoostPct),
+    0, 95,
+  );
 
   if (effectiveDeficit <= 0) {
-    // 1. Surplus fills, capped by the granary infrastructure.
-    storage = Math.min(cap, storage + months * (baseSurplusPct / 100) * T.fillRate);
+    // 1. Surplus fills, capped by the granary infrastructure. The harvest
+    // boost banks whatever is LEFT after covering the structural deficit and
+    // the external cuts; a winter shortfall smaller than the surplus eats the
+    // bankable surplus first. Both adjustments are 0 without `seasonal`.
+    const seasonalInflowPct = seasonal
+      ? Math.max(0, seasonalBoostPct - (baseDeficitPct + blockadePct + faminePct + deployDrainPct))
+        - Math.min(seasonalCutPct, baseSurplusPct)
+      : 0;
+    storage = Math.min(cap, storage + months * (Math.max(0, baseSurplusPct + seasonalInflowPct) / 100) * T.fillRate);
   } else if (storage < T.reserveTitheFloorMonths && effectiveDeficit < T.reserveTitheDeficitCap) {
     // 2. Reserve tithe: mild hardship, empty granary — divert a slice into
     // storage and let the table feel it.
@@ -357,6 +419,17 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       famished,
       deployed: deploying,
       lastTick: tick,
+      // SEASONS-A bookkeeping — present ONLY under the flag (keys appended
+      // after lastTick so the flag-off record's key order is untouched). The
+      // dossier's seasonal read (deriveGranaryOutlook) is self-contained on
+      // these: season + week place the settlement in the year, swing explains
+      // the ledger, the variance names the year's character.
+      ...(seasonal ? {
+        season: seasonal.season,
+        seasonWeek: seasonal.weekOfYear,
+        seasonalSwingPct: round1(seasonal.swingPts),
+        seasonalEvent: seasonal.variance ?? null,
+      } : {}),
     },
   };
 
@@ -370,11 +443,21 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     || fs.stockpile.famished !== famished
     || (fs.stockpile.deployed ?? false) !== deploying
   );
+  // SEASONS-A: the season clock ticks weekly, so a seasonal record that moved
+  // (week/season/variance) counts as change even when the rounded numbers held
+  // still. False whenever `seasonal` is absent (flag-off byte-identity).
+  const _seasonMoved = !!seasonal && (
+    !fs.stockpile
+    || fs.stockpile.seasonWeek !== seasonal.weekOfYear
+    || fs.stockpile.season !== seasonal.season
+    || (fs.stockpile.seasonalEvent ?? null) !== (seasonal.variance ?? null)
+  );
   const changed = nextFoodSecurity.storageMonths !== fs.storageMonths
     || nextFoodSecurity.deficitPct !== fs.deficitPct
     || nextFoodSecurity.resilienceScore !== fs.resilienceScore
     || _disasterMoved
     || _flagsMoved
+    || _seasonMoved
     || !fs.stockpile;
   if (!changed) return { settlement, changed: false, summary: null };
 

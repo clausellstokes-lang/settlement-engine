@@ -1,25 +1,31 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * useFocusOnViewChange — move focus to `ref` whenever `viewKey` changes (a route /
- * view transition), skipping the initial mount so first load isn't disrupted.
+ * useFocusOnViewChange — WCAG 2.4.3 focus management for the SPA.
  *
- * In an SPA the DOM doesn't reload on navigation, so without this a keyboard or
- * screen-reader user stays wherever they were (usually the top of the header) after
- * changing views — WCAG 2.4.3 (Focus Order). Pointing focus at the <main> region (or
- * its heading) on each change gives them a consistent, predictable landing spot. The
- * target must be programmatically focusable (tabIndex={-1}).
+ * On every `view` change, move keyboard/screen-reader focus to the <main>
+ * region (the ref target) so a navigator isn't stranded at the top of the DOM
+ * after the route swaps under them. Pairs with the skip-to-content link and
+ * `main[tabIndex=-1]` in App.jsx.
  *
- * Extracted + unit-tested so the behavior is a guarded contract, not a convention a
- * future App refactor can silently drop (the exact regression the audit found).
+ * Skips the very first render (the initial page load already places focus at
+ * the document top, which is correct for a fresh visit — only a *navigation*
+ * should pull focus into <main>).
  *
- * @param {unknown} viewKey  a value that changes on every view transition
- * @param {import('react').RefObject<HTMLElement>} ref  the focus target
+ * @param {string} view                 the current view id (changes on nav)
+ * @param {{ current: (HTMLElement | null) }} mainRef  ref to the <main> element
  */
-export function useFocusOnViewChange(viewKey, ref) {
-  const isFirst = useRef(true);
+export function useFocusOnViewChange(view, mainRef) {
+  const first = useRef(true);
   useEffect(() => {
-    if (isFirst.current) { isFirst.current = false; return; }
-    ref.current?.focus?.();
-  }, [viewKey, ref]);
+    if (first.current) { first.current = false; return; }
+    const el = mainRef?.current;
+    if (el && typeof el.focus === 'function') {
+      // Preventing scroll keeps the focus move from jumping the viewport; the
+      // view itself owns where it scrolls to.
+      el.focus({ preventScroll: true });
+    }
+  }, [view, mainRef]);
 }
+
+export default useFocusOnViewChange;

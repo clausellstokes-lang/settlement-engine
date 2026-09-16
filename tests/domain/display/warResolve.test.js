@@ -104,6 +104,35 @@ describe('faith relation — opposed patrons under siege', () => {
     const [aurelia] = realmResolveSignals({ saves, worldState: besiegingWorld });
     expect(aurelia.faith.opposed).toHaveLength(0);
   });
+
+  test('W-FAITH F7c THE SHIFT, executed: the temper is the ENGINE derivation, never the stored mirror', () => {
+    // One deity whose stored mirror, axes and authored word all disagree. The
+    // stored word says warlike; the axes derive peacelike (good + lawful); the
+    // authored word says neutral. The signal answers the SEAM: authored wins,
+    // and an authored neutral says nothing (null), so the AI narrative context
+    // is handed the engine truth rather than the retired mirror.
+    const saves = [
+      { id: 'aurelia', settlement: town('Aurelia', { deity: { name: 'Sel', alignmentAxis: 'good', lawAxis: 'lawful', temperamentAxis: 'warlike', authoredTemper: 'neutral' } }) },
+      { id: 'ravager', settlement: town('Ravager', { deity: { name: 'Malok', alignmentAxis: 'evil', temperamentAxis: 'peacelike' } }) },
+    ];
+    const [aurelia] = realmResolveSignals({ saves, worldState: besiegingWorld });
+    expect(aurelia.faith.patron.temper).toBeNull();
+    // The besieger's stored 'peacelike' mirror is ignored too: its axes derive
+    // warlike, and a null-tempered defender cannot be temper-opposed.
+    expect(aurelia.faith.opposed.some((o) => o.opposedOn.includes('temperament'))).toBe(false);
+    // Control on the same fixture shape: drop the authored word and the axes
+    // speak — good + lawful derives peacelike, which IS temper-opposed to the
+    // besieger's derived warlike.
+    const derived = realmResolveSignals({
+      saves: [
+        { id: 'aurelia', settlement: town('Aurelia', { deity: { name: 'Sel', alignmentAxis: 'good', lawAxis: 'lawful', temperamentAxis: 'warlike' } }) },
+        { id: 'ravager', settlement: town('Ravager', { deity: { name: 'Malok', alignmentAxis: 'evil', temperamentAxis: 'peacelike' } }) },
+      ],
+      worldState: besiegingWorld,
+    })[0];
+    expect(derived.faith.patron.temper).toBe('peacelike');
+    expect(derived.faith.opposed[0].opposedOn).toContain('temperament');
+  });
 });
 
 describe('hope + roles read from live war state', () => {

@@ -159,6 +159,8 @@ describe('perf-advance — per-tick progress reporting', () => {
     expect(JSON.stringify(observed)).toBe(JSON.stringify(plain));
   });
 
+  // LANDED (Wave 4f-3 hooks) — src/hooks/useAdvanceSession.js exists and mirrors the
+  // event name locally without importing the lazy worldPulse chunk; un-skipped in 4h.
   test('frozen contract: useAdvanceSession mirrors the event name without importing the lazy domain chunk', () => {
     const hookSource = readFileSync(
       fileURLToPath(new URL('../../src/hooks/useAdvanceSession.js', import.meta.url)),

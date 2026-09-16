@@ -4,6 +4,8 @@
  * Centralised so floats don't show up as "37.80241935483871" anywhere.
  */
 
+import { plotHookText } from '../../lib/proseSeams.js';
+
 export function cap(s) {
   if (!s || typeof s !== 'string') return s || '';
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -54,13 +56,40 @@ export function label(item) {
 }
 
 /**
+ * noteText — extract the PROSE from an object-shaped coherence note, structural
+ * suggestion, or structural violation, instead of collapsing it to its bare
+ * category key (pdf-2). The engine emits these shapes:
+ *   - coherence note:        { type, severity, note }
+ *   - structural suggestion: { type:'suggestion', reason, suggested[] }
+ *   - structural violation:  { type, institution|group, reason }
+ * Falls back to a description/text field, then to label() for label-shaped items,
+ * so a plain string or a `{label}` item still reads exactly as before.
+ */
+export function noteText(item) {
+  if (!item) return '';
+  if (typeof item === 'string') return humanize(item);
+  if (item.note) return String(item.note);
+  if (item.reason) {
+    const who = item.institution || item.group;
+    const suggested = Array.isArray(item.suggested) && item.suggested.length
+      ? ` Consider: ${item.suggested.map(label).filter(Boolean).join(', ')}.`
+      : '';
+    return who ? `${label(who)}: ${item.reason}${suggested}` : `${item.reason}${suggested}`;
+  }
+  if (item.description) return String(item.description);
+  if (item.text) return String(item.text);
+  return label(item);
+}
+
+/**
  * humanize — turn `snake_case`, `kebab-case`, or `camelCase` keys into Title Case.
  * Strings already containing spaces are returned as-is (with light casing).
  *
- * Idempotent: strips any ZWNJ from prior `noLig()` calls before processing,
- * because `\b\w` treats ZWNJ as a non-word character and would otherwise
- * cap the letter after it ("Shellf[ZWNJ]ish" → "Shellf[ZWNJ]Ish" → "ShellfIsh"
- * once the ZWNJ goes invisible in the reader).
+ * Idempotent: strips any ZWNJ before processing, because `\b\w` treats ZWNJ as
+ * a non-word character and would otherwise cap the letter after it
+ * ("Shellf[ZWNJ]ish" → "Shellf[ZWNJ]Ish" → "ShellfIsh" once the ZWNJ goes
+ * invisible in the reader). noLig() no longer inserts any, but user-authored
+ * data can still carry one — see stripZwnj.
  */
 export function humanize(s) {
   if (!s || typeof s !== 'string') return s || '';
@@ -81,27 +110,11 @@ export function humanize(s) {
 }
 
 /**
- * hookText — extract the text of a plot hook regardless of shape. The engine
- * emits hooks under many keys depending on which subsystem produced them
- * (NPC, conflict, viability, history, neighbour). Walk the common ones.
+ * hookText — extract plot-hook prose from the canonical raw/normalized shapes:
+ * a bare string, `{ hook }`, or `{ text }`.
  */
 export function hookText(h) {
-  if (!h) return '';
-  if (typeof h === 'string') return noLig(h);
-  if (typeof h !== 'object') return noLig(String(h));
-  const raw =
-       h.hook
-    || h.text
-    || h.description
-    || h.summary
-    || h.prompt
-    || h.title
-    || h.label
-    || h.body
-    || h.content
-    || (typeof h.value === 'string' ? h.value : null)
-    || '';
-  return noLig(raw);
+  return noLig(plotHookText(h));
 }
 
 /**
@@ -151,25 +164,38 @@ export function safePct(n) {
 }
 
 /**
- * noLig — defuse OpenType ligature substitutions that the bundled Lora fontkit
- * subset renders incorrectly (notably `fi`/`fl`/`ffi`/`ffl`, where the ligated
- * glyph drops the dotted-i and looks like the user typed `f` instead of `fi`).
+ * noLig — IDENTITY for strings. Retained as the declared render chokepoint; it
+ * no longer mutates anything.
  *
- * We insert a zero-width non-joiner (U+200C) between the problematic pairs so
- * fontkit can't fuse them. The character is invisible in PDF readers but
- * blocks the GSUB lookup. Apply on every string we hand to <Text> or
- * <TextInput>; idempotent (won't double-insert if already there).
+ * ⚠ HISTORY, because emptying this body changed paid-surface bytes.
+ * It used to insert a zero-width non-joiner (U+200C) between every
+ * `fi`/`fl`/`ff`/`ffi`/`ffl` to block a `liga` GSUB lookup in the pre-v2 Lora
+ * and Nunito faces, whose ligated glyph dropped the dotted-i. The v2 re-cut
+ * REMOVED those lookups from all eight faces — measured: `availableFeatures`
+ * carries no `liga`/`clig`/`dlig`/`hlig`/`rlig`, and `layout()` of a 33-char
+ * ligature-bait string returns 33 glyphs, 1:1. The guard had nothing left to
+ * defuse. tests/build/fontsAndMeta.test.js §3d now pins that as an executed
+ * guarantee instead of prose: if it ever reds, fix the FONT — do not resurrect
+ * the insertion.
+ *
+ * ⛔ WHAT IT STILL DID, AND WHY IT HAD TO GO. U+200C is covered by NONE of the
+ * eight embedded faces. @react-pdf does not draw an uncovered codepoint as a
+ * `.notdef` box — it substitutes a NON-EMBEDDED base-14 `/Helvetica` and encodes
+ * by low-byte truncation. So every insertion split the text run onto an
+ * unembedded font: 25–86 such runs per dossier, on 100% of exports, measured —
+ * and a fallback run SWALLOWS ADJACENT COVERED CHARACTERS (one measured run
+ * carried the ZWNJ *and* a legible hyphen). The cure had outlived its disease
+ * and become the disease. tests/pdf/renderedFontEmbedding.test.js is the
+ * render-level arm that now holds the line.
+ *
+ * Kept as a seam rather than deleted outright: it is the chokepoint that 39
+ * `safe()` call sites and the Dense primitives render through, so a future font
+ * problem has exactly one place to be fixed. Contract preserved exactly —
+ * non-strings pass through, nullish becomes ''.
  */
-const ZWNJ = '\u200C';
 export function noLig(s) {
   if (!s || typeof s !== 'string') return s || '';
-  if (s.indexOf('f') === -1) return s;
-  return s
-    .replace(/ffi/g, `f${ZWNJ}f${ZWNJ}i`)
-    .replace(/ffl/g, `f${ZWNJ}f${ZWNJ}l`)
-    .replace(/fi/g, `f${ZWNJ}i`)
-    .replace(/fl/g, `f${ZWNJ}l`)
-    .replace(/ff/g, `f${ZWNJ}f`);
+  return s;
 }
 
 /**
@@ -181,14 +207,22 @@ export function safe(s) {
 }
 
 /**
- * stripZwnj — remove the zero-width non-joiners noLig inserts. ZWNJ persists
- * through `.toUpperCase()` / `textTransform: 'uppercase'` and creates a
- * line-break opportunity inside the word in some PDF readers (so "Conflict"
- * → "Conf‌lict" → uppercased to "CONF‌LICT" → renders as "CONF LICT").
+ * stripZwnj — remove any zero-width non-joiner (U+200C) from a string.
  *
- * Apply in any uppercase-styled Text node (Pill, Tag, label, ChapterBand
- * eyebrow). The Lora ligatures we need to defuse are only triggered between
- * lowercase letters anyway, so stripping ZWNJ from uppercase text is safe.
+ * ⚠ ITS SOURCE CHANGED, ITS VALUE DID NOT. This was written to undo noLig()'s
+ * own insertions; noLig is now identity, so nothing in this codebase emits a
+ * ZWNJ any more. What remains is the case that matters MORE: a ZWNJ arriving in
+ * USER-AUTHORED data (custom content names, deity portfolios, tradition
+ * epithets). src/domain/customContentSchema.js validates type and length only —
+ * there is no charset validation anywhere in it — so a pasted ZWNJ reaches the
+ * renderer, where it is covered by NONE of the eight embedded faces and would
+ * split the run onto a non-embedded Helvetica. Keep this call live.
+ *
+ * ZWNJ also persists through `.toUpperCase()` / `textTransform: 'uppercase'` and
+ * creates a line-break opportunity inside the word in some PDF readers (so
+ * "Conflict" → "Conf<ZWNJ>lict" → "CONF<ZWNJ>LICT" → renders as "CONF LICT"),
+ * which is why the uppercase-styled nodes (Pill, Tag, label, ChapterBand
+ * eyebrow) call it rather than trusting their input.
  */
 export function stripZwnj(s) {
   if (s == null) return '';
@@ -204,4 +238,60 @@ export function upper(s) {
   return stripZwnj(s).toUpperCase();
 }
 
-export default { cap, num, pct, smart, plural, label, humanize, hookText, sentence, truncate, noLig, safe, finite, safePct, stripZwnj, upper };
+/**
+ * prominentPair / prominentType / prominentProse — THE reader contract for
+ * `settlement.prominentRelationship`, in one place so the PDF Overview chapter,
+ * the PDF Relationships chapter and the Foundry journal cannot drift apart.
+ *
+ * The record has exactly ONE writer, `genRelNarrative()`
+ * (src/generators/power/settlementNarrative.js), and it carries exactly six
+ * keys: `{ npc1, npc2, type, phrasing, full, tension }`. It describes an
+ * NPC-TO-NPC edge INSIDE the settlement, not a link to another settlement:
+ * `npc1`/`npc2` are canonical NPC names (pinned by
+ * tests/generators/generationCertificationCorpus.test.js), `type` is the
+ * archetype's human LABEL (`topRel.typeName`, e.g. "Quiet Rivalry"), `full` is
+ * the archetype's description of the pair, `phrasing` the rumour sentence and
+ * `tension` the friction line.
+ *
+ * ⚠ WHY THIS EXISTS. Every export reader used to read `otherSettlement`,
+ * `relationshipType`, `description`, `summary`, `flavour` and `flavor` — six
+ * keys no writer in this repo has ever produced (`otherSettlement` has never
+ * once appeared under src/generators/ in the project's history). So all three
+ * exports rendered the record as its bare fallback — "Neighbour · linked" with
+ * an EMPTY body — while the real prose sat unread one key away. Reading the
+ * keys that are actually written is the entire repair: generation is untouched.
+ *
+ * ⚠ `prominentProse` reads `phrasing` FIRST on purpose.
+ * `prominentRelationship.phrasing` is a registered user-editable prose path
+ * (src/domain/userEdits.js, src/store/settlementPendingEdits.js) and the field
+ * the AI narrative refiner rewrites (supabase/functions/generate-narrative).
+ * Preferring `full` would silently drop a user's own edit from their export.
+ *
+ * ⚠ Never humanize() an NPC name — humanize splits at an inner capital, so
+ * "McTavish" would render "Mc Tavish". Names ship verbatim, exactly as every
+ * other NPC surface in the app renders them.
+ */
+export function prominentPair(pr) {
+  const a = typeof pr?.npc1 === 'string' ? pr.npc1.trim() : '';
+  const b = typeof pr?.npc2 === 'string' ? pr.npc2.trim() : '';
+  if (a && b) return `${a} & ${b}`;
+  return a || b || '';
+}
+
+export function prominentType(pr) {
+  const t = typeof pr?.type === 'string' ? pr.type.trim() : '';
+  return t ? cap(t) : '';
+}
+
+export function prominentProse(pr) {
+  for (const key of ['phrasing', 'full', 'tension']) {
+    const v = pr?.[key];
+    if (typeof v === 'string' && v.trim()) return v.trim();
+  }
+  return '';
+}
+
+export default {
+  cap, num, pct, smart, plural, label, humanize, hookText, sentence, truncate, noLig, safe,
+  finite, safePct, stripZwnj, upper, prominentPair, prominentType, prominentProse,
+};

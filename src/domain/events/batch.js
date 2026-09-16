@@ -26,12 +26,13 @@
  * validator.
  */
 
-import { EVENT_REGISTRY, RERUN_KEYS_FOR_EVENT } from './registry.js';
-import { mutateSettlement } from './mutate.js';
-import { resolveStressorEventSeverity } from './resolveStressorEventSeverity.js';
+import { EVENT_REGISTRY } from './registry.js';
+import { mutateSettlementChecked } from './mutate.js';
+import { slugify } from './mutateHelpers.js'; // code-quality-5: the byte-identical copy, now merged
+
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
-import { clamp01, bandFor } from '../state/bands.js';
+import { clamp01, bandForDimension } from '../state/bands.js';
 import { archetypeForStressor } from '../conditionPromotion.js';
 import { canonStressors } from '../canonicalAccessors.js';
 
@@ -54,7 +55,7 @@ const PRODUCES_KIND = Object.freeze({
  * at apply time, so only the name is registered (NPCs are referenced by the
  * institution/faction they join, not the other way around).
  *
- * @param {any} event
+ * @param {Event} event
  * @returns {Array<{kind:string, id?:string, name?:string}>}
  */
 export function eventProduces(event) {
@@ -62,16 +63,16 @@ export function eventProduces(event) {
   // so a later RESOLVE_STRESSOR in the same batch can target it — by type or
   // label (exact), or through the archetype bridge nsHas runs for free text.
   if (event?.type === 'APPLY_STRESSOR') {
-    const type = String(event.payload?.stressorType || event.targetId || '').trim();
+    const type = String(/** @type {any} */ (event.payload)?.stressorType || event.targetId || '').trim();
     if (!type) return [];
-    const refs = [{ kind: 'stressor', id: type, name: event.payload?.label || labelFromTarget(type) }];
-    const archetype = archetypeForStressor({ type, label: event.payload?.label });
+    const refs = [{ kind: 'stressor', id: type, name: /** @type {any} */ (event.payload)?.label || labelFromTarget(type) }];
+    const archetype = archetypeForStressor({ type, label: /** @type {any} */ (event.payload)?.label });
     if (archetype) refs.push({ kind: 'stressorArchetype', id: archetype, name: archetype });
     return refs;
   }
-  const kind = /** @type {Record<string, string>} */ (PRODUCES_KIND)[event?.type];
+  const kind = PRODUCES_KIND[/** @type {keyof typeof PRODUCES_KIND} */ (event?.type)];
   if (!kind) return [];
-  const name = labelFromTarget(event?.targetId) || event?.payload?.name || '';
+  const name = labelFromTarget(event?.targetId) || /** @type {any} */ (event?.payload)?.name || '';
   if (!name) return [];
   const id = kind === 'npc' ? '' : `${kind}.${slugify(name)}`;
   return [{ kind, id, name }];
@@ -89,8 +90,8 @@ export function eventProduces(event) {
 export function eventConsumes(event) {
   const t = event?.type;
   const targetId = event?.targetId;
-  /** @type {any} */
-  const p = event?.payload || {};
+  const p = /** @type {any} */ (event?.payload || {});
+  /** @type {Array<{kind:string, ref:string}>} */
   const refs = [];
   switch (t) {
     case 'REMOVE_INSTITUTION':
@@ -109,6 +110,13 @@ export function eventConsumes(event) {
       // phantom one blocks instead of silently no-opping.
       if (targetId) refs.push({ kind: 'npcOrFactionOrInstitution', ref: targetId });
       break;
+    case 'IMPOSE_CORRUPTION':
+      // imposeCorruption hard-requires the NPC (findNpc → `if (!npc || npc.corrupt)
+      // return s`), so a mistyped/nonexistent (or already-corrupt) NPC silently
+      // no-ops while the authored systemState deltas + narration still land — the
+      // same phantom-event hole EXPOSE_CORRUPTION's ref closes. [domain-events-region-5]
+      if (targetId) refs.push({ kind: 'npc', ref: targetId });
+      break;
     case 'KILL_NPC':
     case 'KILL_LEADER':
       // KILL_LEADER routes through killNpcMutation, which hard-requires the NPC.
@@ -120,6 +128,15 @@ export function eventConsumes(event) {
       // setNeighbourRelationship no-ops unless targetId matches a linked
       // neighbour (by name/neighbourName/id/linkId) — a hard ref, else the
       // relationship narration + deltas land with no graph change.
+      if (targetId) refs.push({ kind: 'neighbour', ref: targetId });
+      break;
+    case 'FORCE_RELIEF':
+    case 'OFFER_CREDIT':
+      // The generosity verbs (FP-G3) hard-require a LINKED neighbour — the handler
+      // vetoes 'neighbour_not_linked' otherwise (findNeighbourLink runs the same
+      // name/neighbourName/id/linkId match the relationship events run). The
+      // qualifying-BOND and reserve-floor gates stay in the handler/predicate
+      // (a kind or granary state is not a namespace ref).
       if (targetId) refs.push({ kind: 'neighbour', ref: targetId });
       break;
     case 'ASSIGN_NPC_TO_ROLE':
@@ -137,6 +154,16 @@ export function eventConsumes(event) {
     case 'REMOVE_RESOURCE':
       if (targetId) refs.push({ kind: 'resource', ref: targetId });
       break;
+    case 'REMOVE_TRADE_GOOD': {
+      // removeTradeGood silently no-ops when the label matches nothing in the live
+      // economicState lists OR the authored customTradeGoods config — the same
+      // hole CHANGE_RULING_POWER's faction ref closes. A hard ref, so a phantom
+      // removal blocks instead of vanishing. The ref carries the raw label
+      // (payload.label || targetId); nsHas mirrors the ' (transit)' normalization.
+      const label = String(p.label || targetId || '').trim();
+      if (label) refs.push({ kind: 'tradeGood', ref: label });
+      break;
+    }
     case 'RAID_OR_MONSTER_ATTACK':
       if (p.damagedInstitutionId) refs.push({ kind: 'institution', ref: p.damagedInstitutionId });
       break;
@@ -189,7 +216,7 @@ export function eventConsumes(event) {
  */
 export function validateBatch(settlement, events = []) {
   const ns = initNamespace(settlement);
-  /** @type {Array<{index:number, eventId:string, severity:string, message:string}>} */
+  /** @type {Array<{index:number, eventId:any, severity:string, message:string}>} */
   const warnings = [];
   events.forEach((event, index) => {
     const label = EVENT_REGISTRY[event?.type]?.label || event?.type || 'Change';
@@ -222,16 +249,25 @@ export function validateBatch(settlement, events = []) {
  * can run a single reactive generator rerun.
  *
  * @param {Object} args
- * @param {import('../settlement.schema.js').SimSettlement} args.settlement
- * @param {any} [args.systemState] before-state (derived if omitted)
- * @param {Event[]} [args.events]
+ * @param {Object} args.settlement
+ * @param {Object|null} [args.systemState] before-state (derived if omitted)
+ * @param {Event[]} args.events
  * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
+ * Vetoed events (the handler-veto channel, Composer V2 §2) contribute NO
+ * mutation, NO summed deltas, and NO narration; their refusal lands in that
+ * event's perEvent warnings — so the batch preview shows exactly what the
+ * per-event applies will commit (preview ≡ apply at the batch seam).
+ *
+ * rerunKeys was REMOVED from this envelope (2026-07-14, W-COMPOSER-1): the
+ * per-type table (RERUN_KEYS_FOR_EVENT, now in registryFull.js — lazy) was
+ * descriptive metadata no UI consumer ever read, and it was the last thing
+ * holding ~1.7 KB of strings in the eager first-paint closure.
+ *
  * @returns {{
  *   beforeSettlement: Object, nextSettlement: Object,
  *   beforeSystemState: Object, afterSystemState: Object,
  *   systemStateDeltas: Array<Object>, summedStateDeltas: Object,
  *   perEvent: Array<{event:Event, narrativeSummary:string, warnings:Array<Object>}>,
- *   rerunKeys: string[],
  * }}
  */
 export function applyEventBatch({ settlement, systemState = null, events = [], now = null }) {
@@ -241,10 +277,7 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
   let working = beforeSettlement;
   /** @type {Record<string, number>} */
   const summedStateDeltas = {};
-  /** @type {Array<{event:any, narrativeSummary:string, warnings:Array<any>}>} */
   const perEvent = [];
-  /** @type {Set<string>} */
-  const rerunKeys = new Set();
 
   for (const event of events) {
     const spec = event ? EVENT_REGISTRY[event.type] : null;
@@ -261,37 +294,44 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     // the already-mutated `working` drifted severity-derived deltas (e.g. a
     // RESOLVE_STRESSOR reading the stressor it just removed).
     const before = working;
-    // Resolve a DERIVED onset severity for an APPLY_STRESSOR whose DM did not pick
-    // one, stamping it ONCE against the BEFORE settlement so the mutation and the
-    // authored stateDeltas read the SAME value — mirrors eventPipeline's single
-    // chokepoint. Without this the batch path falls back to crisisOnset's static
-    // 0.6 default, so batch preview/apply deltas diverged from the store's real
-    // applyEvent path (0.45-0.80 derived severity).
-    const resolvedEvent = resolveStressorEventSeverity(before, event);
-    // Entity mutation, threaded into the next event.
-    working = mutateSettlement({ settlement: working, event: resolvedEvent, now });
+    // Entity mutation, threaded into the next event. A veto refuses THIS
+    // event — its deltas and narration are skipped — while the rest of the
+    // batch continues against the unchanged state.
+    const mutated = mutateSettlementChecked({ settlement: working, event, now });
+    if (mutated.veto) {
+      perEvent.push({
+        event,
+        narrativeSummary: '',
+        warnings: [{
+          severity: 'veto',
+          code: mutated.veto.code,
+          detail: mutated.veto.detail,
+          message: `${spec.label || event.type} refused: ${mutated.veto.code}${mutated.veto.detail ? ` (${mutated.veto.detail})` : ''}`,
+        }],
+      });
+      continue;
+    }
+    working = mutated.settlement;
 
     // Sum the authored state deltas (additive across the batch).
     // Cast: spec.stateDeltas is typed 1-arg in the registry typedef but
     // accepts an optional settlement (every spec honors it), as in eventPipeline.
     const deltas = (typeof spec.stateDeltas === 'function'
-      ? /** @type {Function} */ (spec.stateDeltas)(resolvedEvent, before)
+      ? /** @type {Function} */ (spec.stateDeltas)(event, before)
       : {}) || {};
     for (const [k, v] of Object.entries(deltas)) {
       summedStateDeltas[k] = (summedStateDeltas[k] || 0) + (Number(v) || 0);
     }
 
     const narrativeSummary = typeof spec.narrate === 'function'
-      ? /** @type {Function} */ (spec.narrate)(resolvedEvent, beforeSettlement)
+      ? /** @type {Function} */ (spec.narrate)(event, beforeSettlement)
       : '';
     perEvent.push({ event, narrativeSummary, warnings: [] });
-
-    for (const key of RERUN_KEYS_FOR_EVENT[event.type] || []) rerunKeys.add(key);
   }
 
   const afterStructural = deriveSystemState(working);
   const afterSystemState = applyAuthoredStateDeltas(afterStructural, summedStateDeltas);
-  const systemStateDeltas = compareSystemState(beforeSystemState, afterSystemState);
+  const systemStateDeltas = compareSystemState(/** @type {any} */ (beforeSystemState), afterSystemState);
 
   return {
     beforeSettlement,
@@ -301,7 +341,6 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     systemStateDeltas,
     summedStateDeltas,
     perEvent,
-    rerunKeys: [...rerunKeys],
   };
 }
 
@@ -309,10 +348,7 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
 
 // Mirror of eventPipeline.applyAuthoredStateDeltas (kept local so this module
 // stays decoupled from the single-event pipeline).
-/**
- * @param {any} state
- * @param {any} deltas
- */
+/** @param {any} state @param {Record<string, number>} deltas @returns {any} */
 function applyAuthoredStateDeltas(state, deltas) {
   if (!state) return state;
   /** @type {Record<string, any>} */
@@ -322,8 +358,10 @@ function applyAuthoredStateDeltas(state, deltas) {
     const change = deltas?.[key] ?? 0;
     const value = Math.round(clamp01((dim?.value ?? 50) + change));
     next[key] = {
+      // Polarity-ORIENTED — mirrors eventPipeline.applyAuthoredStateDeltas and
+      // deriveSystemState's finalize(); see bands.js DIM_POLARITY.
       value,
-      band: bandFor(value),
+      band: bandForDimension(key, value),
       drivers: dim?.drivers || [],
       risks:   dim?.risks || [],
     };
@@ -331,10 +369,18 @@ function applyAuthoredStateDeltas(state, deltas) {
   return next;
 }
 
-/** @param {any} x */
+/** @param {unknown} x @returns {string} */
 function lc(x) { return String(x || '').trim().toLowerCase(); }
 
-/** @param {import('../settlement.schema.js').SimSettlement} s */
+// Local (pure) — the canonical trade-good label reader (byte-identical to
+// canonicalAccessors' version; our canonicalAccessors does not re-export it).
+/** @param {any} entry @returns {string} */
+function tradeGoodLabel(entry) {
+  if (typeof entry === 'string') return entry;
+  return String(entry?.name || entry?.good || '');
+}
+
+/** @param {any} s @returns {Record<string, Set<string>>} */
 function initNamespace(s) {
   const ns = {
     institution: new Set(),
@@ -344,6 +390,7 @@ function initNamespace(s) {
     stressor:    new Set(),
     stressorArchetype: new Set(),
     neighbour:   new Set(),
+    tradeGood:   new Set(),
   };
   for (const i of s?.institutions || []) { ns.institution.add(lc(i.id)); ns.institution.add(lc(i.name)); }
   const factions = s?.powerStructure?.factions || s?.factions || [];
@@ -357,6 +404,19 @@ function initNamespace(s) {
     ns.neighbour.add(lc(link?.id));
     ns.neighbour.add(lc(link?.linkId));
   }
+  // REMOVE_TRADE_GOOD targets — mirror removeTradeGood's match: a good is removable
+  // if its label sits in ANY live economicState list OR the authored
+  // customTradeGoods buckets. tradeGoodLabel resolves the string / legacy
+  // {name,good} entry shapes; labels keep their ' (transit)' suffix (nsHas
+  // normalizes on read). Kept in sync with mutateWorld.removeTradeGood.
+  const ec = s?.economicState || {};
+  for (const key of ['primaryExports', 'primaryImports', 'transit', 'exports', 'imports']) {
+    if (Array.isArray(ec[key])) for (const e of ec[key]) ns.tradeGood.add(lc(tradeGoodLabel(e)));
+  }
+  const ctg = s?.config?.customTradeGoods || {};
+  for (const key of ['exports', 'imports', 'transit']) {
+    if (Array.isArray(ctg[key])) for (const l of ctg[key]) ns.tradeGood.add(lc(l));
+  }
   for (const k of s?.config?.nearbyResources || []) ns.resource.add(lc(k));
   for (const r of s?.resources || []) { ns.resource.add(lc(r.id || r.key || r.name)); ns.resource.add(lc(r.name)); }
   // RESOLVE_STRESSOR targets — a mirror of resolveStressor's own matching.
@@ -369,7 +429,7 @@ function initNamespace(s) {
   // re-rolls away while the condition survives via the record. Campaign-owned
   // conditions (origin cause = a regional channel / the world pulse) are
   // excluded — resolveStressor refuses to wind them down.
-  for (const st of /** @type {any[]} */ (canonStressors(s))) {
+  for (const st of canonStressors(s)) {
     ns.stressor.add(lc(st?.type));
     ns.stressor.add(lc(st?.name));
   }
@@ -389,11 +449,7 @@ function initNamespace(s) {
   return ns;
 }
 
-/**
- * @param {any} ns
- * @param {string} kind
- * @param {any} ref
- */
+/** @param {Record<string, Set<string>>} ns @param {string} kind @param {any} ref @returns {boolean} */
 function nsHas(ns, kind, ref) {
   const r = lc(ref);
   if (!r) return true; // nothing to validate
@@ -410,6 +466,14 @@ function nsHas(ns, kind, ref) {
     // fields (no de-slug), so validate the exact lowercased ref only — a
     // de-slugged near-miss would validate a target the mutation then no-ops on.
     return ns.neighbour.has(r);
+  }
+  if (kind === 'tradeGood') {
+    // Mirror removeTradeGood's target set: strip a trailing ' (transit)' and match
+    // the base, the raw, and the '<base> (transit)' form. No labelFromTarget de-slug
+    // — trade goods are freeform labels, not dotted ids, so a de-slugged near-miss
+    // would validate a removal the mutation then no-ops on.
+    const base = r.replace(/\s*\(transit\)\s*$/i, '').trim();
+    return ns.tradeGood.has(r) || ns.tradeGood.has(base) || ns.tradeGood.has(`${base} (transit)`);
   }
   if (kind === 'stressor') {
     // Exact lowercased entry/stamp match first — the picker path. Free text
@@ -428,27 +492,16 @@ function nsHas(ns, kind, ref) {
   return set.has(r) || set.has(label);
 }
 
-/**
- * @param {any} ns
- * @param {string} kind
- * @param {any} value
- */
+/** @param {Record<string, Set<string>>} ns @param {string} kind @param {any} value @returns {void} */
 function nsAdd(ns, kind, value) {
   const v = lc(value);
   if (!v || !ns[kind]) return;
   ns[kind].add(v);
 }
 
-/** @param {any} targetId */
+/** @param {unknown} targetId @returns {string} */
 function labelFromTarget(targetId) {
-  const tail = /** @type {string} */ (String(targetId || '').split('.').pop());
-  return tail.replace(/_/g, ' ');
+  const tail = String(targetId || '').split('.').pop();
+  return /** @type {string} */ (tail).replace(/_/g, ' ');
 }
 
-/** @param {any} s */
-function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-}

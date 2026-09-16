@@ -27,6 +27,7 @@ import {
   normalizeRelationshipEdge,
 } from './relationshipEvolution.js';
 import { stablePart } from './worldState.js';
+import { deriveActiveCondition } from '../activeConditions.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -38,6 +39,46 @@ const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0
 // economy actually shifts. deployed is carried by the war layer's own conditions, so
 // it is NOT re-stamped here (avoids double-counting the economic sink).
 const FOOTING_STATES = new Set(['war_preparation', 'mobilized']);
+
+/**
+ * An unchanged footing still renews its real economic condition, but it is not
+ * a fresh major Chronicle beat. Preserve onset and every posture/severity
+ * transition as public; only an exact persisted recurrence is mechanical.
+ *
+ * @param {{ byId?: Map<string, {
+ *   settlement?: { activeConditions?: unknown[] },
+ *   activeConditions?: unknown[],
+ * }> }} snapshot
+ * @param {{ id: string, prev: string, next: string, transitioned: boolean }} event
+ * @param {number} severity
+ * @returns {'state_only'|undefined}
+ */
+function mobilizationRecordMode(snapshot, event, severity) {
+  if (event.transitioned || event.prev !== event.next) return undefined;
+  const target = String(event.id);
+  const incoming = deriveActiveCondition({
+    archetype: 'war_mobilization',
+    severity,
+    triggeredAt: {
+      sourceEventType: 'WAR_LAYER_MOBILIZATION',
+      sourceEventTargetId: target,
+    },
+  });
+  const item = snapshot?.byId?.get?.(target);
+  const rawActive = item?.settlement?.activeConditions || item?.activeConditions;
+  const active = Array.isArray(rawActive) ? rawActive : [];
+  const current = active
+    .map(condition => deriveActiveCondition(
+      condition && typeof condition === 'object' ? condition : null,
+    ))
+    .find(condition => condition?.id === incoming?.id);
+  return incoming
+    && current
+    && current.status === incoming.status
+    && current.severity === incoming.severity
+    ? 'state_only'
+    : undefined;
+}
 
 /**
  * The settlements visible to (neighbouring) a given settlement, with the
@@ -125,6 +166,7 @@ export function mobilizationEffects({ snapshot, events, tick, now = null, dismis
     }
     const name = settlementNameFor(id);
     const severity = clamp01(ev.severity);
+    const recordMode = mobilizationRecordMode(snapshot, ev, severity);
 
     // ── 1. The war-economy footing condition (economic_capacity sink). ─────────────
     outcomes.push({
@@ -137,6 +179,7 @@ export function mobilizationEffects({ snapshot, events, tick, now = null, dismis
       probability: 1,
       targetSaveId: id,
       severity,
+      ...(recordMode ? { recordMode } : {}),
       headline: `${name} mobilizes for war`,
       summary: `${name} is shifting its economy onto a war footing.`,
       reasons: ev.reasons.slice(0, 4),

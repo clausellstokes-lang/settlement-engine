@@ -34,9 +34,9 @@ await walk(root);
 
 // ── Supply-chain integrity: pin the vendored libs against VENDOR-MANIFEST.json ──
 // The walk above deliberately skips libs/ (the 5.7 MB of minified third-party
-// blobs would just be parse-noise). But those blobs ship to the same origin as
-// the payment+auth app, so a silent swap/tamper is a real risk the gate must
-// see. We hash each pinned file and compare to the manifest; a mismatch (or a
+// blobs would just be parse-noise). Separate-origin deployment reduces their
+// privilege, but a silent swap/tamper is still a real risk the gate must see.
+// We hash each pinned file and compare to the manifest; a mismatch (or a
 // pinned file gone missing) fails CI and forces a conscious re-pin.
 //   - re-pin after a deliberate upgrade: `node scripts/validate-map-fork.mjs --update-manifest`
 let manifest;
@@ -54,8 +54,8 @@ async function hashLib(file) {
 // Recursively enumerate every shippable asset under libs/, as forward-slash
 // paths relative to libsRoot (matching the manifest's `file` convention). The
 // manifest pins the browser-loaded supply-chain surface — not just .js: a .mjs
-// module, a .wasm binary, or a .css stylesheet all reach the payment+auth origin
-// and can each carry a payload (CSS exfiltrates via url()/@import). So the
+// module, a .wasm binary, or a .css stylesheet can each carry a payload (CSS
+// exfiltrates via url()/@import). So the
 // on-disk set we hold the manifest to spans every shippable extension — a new
 // asset of any of these kinds must be consciously pinned, never shipped
 // un-verified. node_modules is skipped (same as walk() above): a stray install

@@ -24,6 +24,7 @@
  */
 
 import { INK, BODY, SECOND, swatch, FS, SP } from '../theme.js';
+import { priorityBandLabel } from '../../domain/priorityBands.js';
 
 // Priority-slider accents routed through the swatch escape hatch (no forked
 // color consts). The accent is DECORATION on the track + value number; the
@@ -54,6 +55,7 @@ export default function PrioritySliders({ config, updateConfig, muted = false, m
           if (key === 'priorityMagic' && magicExists === false) return null;
           const val = config[key] ?? 50;
           const shown = Math.max(5, val);
+          const band = priorityBandLabel(val);
           return (
             <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, width: 62, flexShrink: 0 }}>
@@ -62,15 +64,15 @@ export default function PrioritySliders({ config, updateConfig, muted = false, m
               <input
                 type="range"
                 aria-label={label}
-                aria-valuetext={`${label} priority ${val} of 95`}
+                aria-valuetext={`${label} priority: ${band}, setting ${val}`}
                 min={5}
                 max={95}
                 value={shown}
                 onChange={e => updateConfig({ [key]: Number(e.target.value) })}
                 style={{ flex: 1, accentColor: accent, height: 4 }}
               />
-              <span style={{ fontSize: FS.xs, fontWeight: 700, color: accent, width: 46, textAlign: 'right', whiteSpace: 'nowrap' }}>
-                {val}
+              <span style={{ fontSize: FS.xs, fontWeight: 700, color: accent, minWidth: 88, textAlign: 'right', whiteSpace: 'nowrap' }}>
+                {band} <span style={{ color: SECOND, fontWeight: 600 }}>· {val}</span>
               </span>
             </div>
           );

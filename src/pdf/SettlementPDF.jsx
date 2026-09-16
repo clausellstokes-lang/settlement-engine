@@ -39,9 +39,10 @@ import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
 import { FaithWar } from './sections/FaithWar.jsx';
+import { Traditions } from './sections/Traditions.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
-import { PDF_VARIANTS, shouldInclude } from './variants.js';
+import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from './variants.js';
 
 export function SettlementPDF({
   settlement,
@@ -55,25 +56,42 @@ export function SettlementPDF({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // The LIVE campaign world for this settlement
-  // ({ worldState, regionalGraph, settlements?, nameFor? }). Threaded ONLY for
-  // premium exports (data-layer gate in SettlementDetail). When absent/dormant
-  // the liveWorld slice resolves to null and the Faith & War chapter renders
-  // nothing ⇒ byte-identical to a non-campaign export.
+  // The LIVE campaign world for this settlement ({ worldState, regionalGraph,
+  // settlements?, nameById? }). Threaded ONLY for premium exports. When absent /
+  // dormant the liveWorld slice resolves to null and the Faith & War chapter
+  // renders nothing ⇒ byte-identical to a non-campaign export.
   campaign = null,
-  // Audit recommendation: three export variants, same engine
-  // underneath. Defaults to canon_dossier (the previous behavior) so
-  // legacy callers that don't supply a variant get exactly what they
-  // got before this feature landed.
+  // The faith premium seam, mirroring the screen's FaithSection. Only a premium /
+  // elevated exporter unlocks the Faith & War chapter; a free / lapsed / anon
+  // export keeps the DEFAULT (false) ⇒ no faith chapter, no deity names in the
+  // PDF. The caller (the export surface) passes the tier result.
+  faithUnlocked = false,
+  // Audit recommendation: export variants, same engine underneath. Defaults to
+  // canon_dossier (the previous behavior) so legacy callers that don't supply a
+  // variant get exactly what they got before this feature landed.
   variant = 'canon_dossier',
   // Founder Lifetime exporters see a small parchment-gold "Founder
   // Edition" badge on the cover. Defaults false so historical PDFs
   // are unaffected.
   isFounder = false,
-  // Anonymous PDFs (single-dossier purchase, anonymous preview) carry
-  // a footer watermark. Account holders — Wanderer, Cartographer,
-  // Founder — get clean exports.
+  // The cover's anti-scraping watermark. VERIFIED POSTURE (2026-07-30): NO
+  // production caller passes true. The single-dossier purchase export passes
+  // `false` explicitly (SingleDossierSuccessPage.jsx), and the three account
+  // export surfaces (SettlementCard, ExportDraftButton, SettlementDetail) omit
+  // it and take this default — so the watermark block in Cover.jsx is reachable
+  // only from tests. Whether a purchase / anonymous export should carry it is an
+  // open product call, recorded here, not a defect to re-find.
   isAnonymous = false,
+  // The export date — injectable, mirroring the World Book cover (opts.now).
+  // Null keeps the wall-clock read inside Cover, so legacy callers are unchanged.
+  now = null,
+  // The document's CreationDate. `now` is the printed COVER LABEL (a display
+  // string); this is the metadata timestamp, and they are deliberately separate
+  // props because they are separate facts — a cover can read "Cyfrin 1, 2026" in
+  // a world calendar that no Date can express. react-pdf defaults this to
+  // `new Date()`, so leaving it unset made every export of one unchanged
+  // settlement differ in bytes. Null keeps that default: legacy callers unchanged.
+  creationDate = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -86,14 +104,22 @@ export function SettlementPDF({
   const inc = (key) => shouldInclude(variantSpec.chapters[key], ctx);
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
-  // The live "Faith & War" chapter — variant-gated AND self-gating on the
-  // dormant liveWorld slice (null when peaceful/deity-free/non-campaign). Both
-  // gates must pass; a dormant slice ⇒ no chapter ⇒ byte-identical.
-  const showFaithWar = inc('faithWar') && !!vm.liveWorld;
+  // The live "Faith & War" chapter — variant + canon gated, self-gating on the
+  // dormant liveWorld slice, AND premium-gated (faithUnlocked). All three must
+  // pass; a free/anon export (faithUnlocked=false) or a dormant slice ⇒ no
+  // chapter ⇒ no deity names ⇒ byte-identical.
+  const showFaithWar = faithChapterVisible({
+    variant, phase, hasLiveWorld: !!vm.liveWorld, faithUnlocked,
+    narrated: useAi, eventCount: eventLog?.length || 0,
+  });
   // The "Campaign State / War Room" variant promotes the State chapter to its
   // layered causal-detail form (16-var grid + pressures). Every other variant
   // keeps the default 4-dim snapshot byte-identical.
   const stateCausalDetail = variant === 'campaign_state';
+  // THE TRADITIONS register (07B, T-5) — variant/canon gated AND self-gating on the
+  // settlement.traditions MIRROR (the FaithWar off-state precedent). A draft, or any export
+  // while the traditions layer is DARK (no mirror), ⇒ no chapter ⇒ byte-identical.
+  const showTraditions = inc('traditions') && Array.isArray(safe.traditions) && safe.traditions.length > 0;
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -112,6 +138,7 @@ export function SettlementPDF({
     inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
     inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
     inc('identityDailyLife')   && { no: '07',  title: 'Identity & Daily Life' },
+    showTraditions             && { no: '07B', title: 'Traditions', note: 'festivals & rites' },
     inc('services')            && { no: '08A', title: 'Services', note: 'what players can buy' },
     inc('institutions')        && { no: '08B', title: 'Institutions', note: 'who runs what' },
     inc('economicsTrade')      && { no: '09',  title: 'Economics & Trade' },
@@ -128,9 +155,15 @@ export function SettlementPDF({
       title={`${safe.name || 'Settlement'}: Dossier`}
       author="SettlementForge"
       creator="SettlementForge"
+      // Pinned rather than left to react-pdf's default 'react-pdf', so a paid
+      // artifact's info dict names the product beside its engine instead of the
+      // dependency alone. Truthful about both, and version-free by construction.
+      producer="SettlementForge (react-pdf)"
+      // undefined ⇒ react-pdf's own `new Date()` default, the pre-seam behaviour.
+      creationDate={creationDate ? new Date(creationDate) : undefined}
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
-      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} />}
+      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
@@ -142,6 +175,7 @@ export function SettlementPDF({
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} />}

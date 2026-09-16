@@ -2,9 +2,13 @@
 // Gives chain-adjacent institutions a boosted second chance after main generation.
 // Shared cascade helpers for the settlement generation pipeline.
 
-import { random as _rng } from './rngContext.js';
+import { random as _rng } from '../kernel/rngContext.js';
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
-import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
+import { institutionToggleFor } from './institutionToggleReader.js';
+import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
+import {
+  nativeSemanticName,
+} from '../domain/content/customContentSemanticAuthority.js';
 
 // The grouping ("shelf") keys the cascade walks, in iteration order. Order is
 // behaviourally significant — it is the order cascade candidates are evaluated
@@ -66,19 +70,21 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   // tradeRoute/terrainType gate cascade candidates exactly like the assemble
   // path. When a caller omits them (headless/unit use) the gates are
   // permissive — there is no settlement geography to violate.
-  const { tradeRoute = null, terrainType = null, institutionToggles = null } = opts;
+  const {
+    tradeRoute = null,
+    terrainType = null,
+    institutionToggles = null,
+    worldLaw = null,
+  } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
   // Same exclusion semantics as assembleInstitutions' toggle sweep (cascade
   // candidates are never required/forced, so only the exclude side applies).
   const toggleExcluded = (name, cat, catalogTier) => {
     if (!institutionToggles) return false;
-    const toggle = institutionToggles[`${tier}::${cat}::${name}`]
-                || institutionToggles[`${tier}_${cat}_${name}`]
-                || institutionToggles[`${catalogTier}::${cat}::${name}`]
-                || institutionToggles[`${catalogTier}_${cat}_${name}`]
-                || institutionToggles[`all::${cat}::${name}`]
-                || institutionToggles[`all_${cat}_${name}`];
+    // Two tier candidates here, not one: this pass reads the rolled tier AND the catalog
+    // tier it drew the entry from. The ladder is the reader's; the candidate list is ours.
+    const toggle = institutionToggleFor(institutionToggles, [tier, catalogTier], cat, name);
     if (!toggle) return false;
     return toggle.forceExclude === true || toggle.allow === false;
   };
@@ -86,17 +92,27 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   const cascadeMap = getCascadeMap();
 
   // What's already present (match keys)
-  const existingMKs = new Set(institutions.map(i => mk(i.name)));
+  const nativeNames = institutions
+    .map(nativeSemanticName)
+    .filter(Boolean);
+  const existingMKs = new Set(nativeNames.map(mk));
   // Exact names + exclusive groups already seated on the roster — the
   // cascade may only re-roll institutions the settlement could still
   // legally generate.
-  const existingNames = new Set(institutions.map(i => i.name));
-  const takenGroups   = new Set(institutions.map(i => i.exclusiveGroup).filter(Boolean));
+  const existingNames = new Set(nativeNames);
+  const takenGroups = new Set(
+    institutions
+      .filter(institution => nativeSemanticName(institution))
+      .map(institution => institution.exclusiveGroup)
+      .filter(Boolean),
+  );
 
   // Collect max boost per target match-key
   const boosts = {};
   institutions.forEach(inst => {
-    const entry = cascadeMap[mk(inst.name)];
+    const semanticName = nativeSemanticName(inst);
+    if (!semanticName) return;
+    const entry = cascadeMap[mk(semanticName)];
     if (!entry) return;
     [
       ...entry.up.map(n  => ({ ...n, dir: 'up'   })),
@@ -156,6 +172,14 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
         // User toggles: a DM's explicit exclusion survives the cascade — the
         // second-chance roll must not resurrect what the user turned off.
         if (toggleExcluded(name, cat, t)) return;
+        // The cascade is a second chance, never a second source of world truth.
+        // In pipeline use worldLaw is mandatory; the null fallback preserves
+        // permissive direct calls that have no settlement context to evaluate.
+        if (worldLaw && !worldLaw.allowsInstitution({
+          category: cat,
+          name,
+          ...data,
+        })) return;
 
         // Catalog probability field is `baseChance` — institutionalCatalog
         // defines no `p` field, so any other read silently yields 0.
@@ -170,6 +194,13 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
           // the subsistence strip treats untagged institutions as trade.
           added.push({
             name, category: cat, tier: t, ...data,
+            // The source catalog's `required` is scoped to the tier that declares
+            // it; a cascade addition is a probabilistic second chance, never THIS
+            // tier's contract (owner-ratified 2026-07-26). Non-roster readers
+            // (institution lifecycle, calamity) read the flag straight off the
+            // record, so the record must carry the truth — the override sits
+            // after `...data` so it wins over the borrowed value.
+            required: false,
             source: 'cascade', cascadeAdded: true, cascadeBoost: boost,
           });
           existingMKs.add(nameMK); // prevent re-rolling the same target

@@ -17,7 +17,9 @@
 
 import { describe, test, expect } from 'vitest';
 
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { captureEventUndoSnapshot, scrubUndoneEvent } from '../../src/domain/events/undoEvent.js';
 import { NON_AUTHORABLE_EVENTS } from '../../src/components/settlement/eventComposer/EventComposerConstants.js';
@@ -55,10 +57,15 @@ function applyThenUndo(before, event) {
 }
 
 describe('#2c — composer offers ONE merged action', () => {
+  // Landed events wave — PROMOTE_NPC relabeled in src/domain/events/registry.js.
   test('PROMOTE_NPC is relabeled "Promote/Demote NPC"', () => {
     expect(EVENT_REGISTRY.PROMOTE_NPC.label).toBe('Promote/Demote NPC');
   });
 
+  // LANDED (Wave 4h) — DEMOTE_NPC now sits in NON_AUTHORABLE_EVENTS in
+  // src/components/settlement/eventComposer/EventComposerConstants.js, so the composer
+  // offers only the merged "Promote/Demote NPC" (PROMOTE_NPC) action while DEMOTE_NPC
+  // stays a first-class registry type for old-log + world-sim back-compat.
   test('DEMOTE_NPC is hidden from the authoring menu but stays a registry type', () => {
     expect(NON_AUTHORABLE_EVENTS.has('DEMOTE_NPC')).toBe(true);
     expect(NON_AUTHORABLE_EVENTS.has('PROMOTE_NPC')).toBe(false);

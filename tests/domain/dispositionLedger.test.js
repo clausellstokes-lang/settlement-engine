@@ -6,6 +6,8 @@ import {
   ratchetDisposition,
   applyDispositionDeltas,
   dispositionFactorMap,
+  migrateDispositionStats,
+  readDispositionChannel,
   DISPOSITION_TUNING,
 } from '../../src/domain/worldPulse/dispositionLedger.js';
 import {
@@ -149,5 +151,74 @@ describe('signed candidateBase multiplier', () => {
     // an embargo weaponizes the tie; coercion is the supplier's ALTERNATIVE to war.
     expect(candidateDirection('trade_embargo_collapse', { relationshipType: 'trade_partner' }, {})).toBe('escalation');
     expect(candidateDirection('trade_dependency_coercion', { relationshipType: 'trade_partner' }, {})).toBe('de_escalation');
+  });
+});
+
+/**
+ * ⛔ THE FALSY-SCREEN / FINITENESS-SCREEN PIN.
+ *
+ * `Number(x) || 0` looks like a numeric guard and is not one: it is a FALSY screen. It
+ * catches NaN, because NaN is falsy, and it MISSES ±Infinity, which is truthy. Seven
+ * sites in dispositionLedger.js wore that shape, four of them on the writer side, so an
+ * Infinity read as the top 'dominant' band, drove dispositionProfile's
+ * `thresholdFactorOf` to its 0.8 floor — the lowest possible bar on the coalition-join
+ * threshold — and then LANDED IN PERSISTED STATE, where `JSON.stringify` writes a
+ * non-finite number as `null`.
+ *
+ * Each arm below pairs the poison with a HEALTHY anchor, because a pin that only
+ * asserted "the poison reads neutral" would pass just as happily on a leaf that had
+ * stopped reading wins and losses at all.
+ */
+describe('dispositionLedger — a non-finite win/loss count is corruption, not a record', () => {
+  const HEALTHY = { wins: 3, losses: 1 };
+  const POISON = [
+    ['wins +Infinity', { wins: Number.POSITIVE_INFINITY, losses: 0 }],
+    ['losses +Infinity', { wins: 0, losses: Number.POSITIVE_INFINITY }],
+    ['wins -Infinity', { wins: Number.NEGATIVE_INFINITY, losses: 0 }],
+    ['both +Infinity', { wins: Number.POSITIVE_INFINITY, losses: Number.POSITIVE_INFINITY }],
+  ];
+
+  test('a non-finite count reads NEUTRAL, while a healthy entry keeps its exact stock', () => {
+    // The anchor first: the healthy read is an exact number, not a range.
+    expect(readDispositionChannel(HEALTHY, 'martial').stock01).toBe(0.583333333333);
+    expect(readDispositionChannel(HEALTHY, 'martial').band).toBe('settled');
+    // A string count is still coerced — `finite()` replaced the falsy screen, not `Number()`.
+    expect(readDispositionChannel({ wins: '3', losses: '1' }, 'martial').stock01).toBe(0.583333333333);
+    for (const [label, entry] of POISON) {
+      expect(readDispositionChannel(entry, 'martial').stock01, label).toBe(0.5);
+      expect(readDispositionChannel(entry, 'martial').band, label).toBe('settled');
+      expect(readDispositionMultiplier({ a: entry }, 'a'), label).toBe(1.0);
+    }
+  });
+
+  test('no non-finite number reaches PERSISTED state, so a save round-trip is stable', () => {
+    for (const [label, entry] of [...POISON, ['healthy', HEALTHY]]) {
+      const out = migrateDispositionStats({ a: entry }, 0).a;
+      for (const key of ['score', 'wins', 'losses']) {
+        expect(Number.isFinite(out[key]), `${label}.${key}`).toBe(true);
+        expect(Object.is(out[key], NaN), `${label}.${key}`).toBe(false);
+      }
+      // The defect's real bite: JSON writes a non-finite as `null`, so the ledger used
+      // to change underneath a campaign with no event to explain it. Round-trip stable.
+      expect(JSON.parse(JSON.stringify(out)), label).toEqual(out);
+    }
+    // Anti-vacuity: the healthy entry is not being flattened along with the poison.
+    expect(migrateDispositionStats({ a: HEALTHY }, 0).a.score).toBe(2);
+    expect(migrateDispositionStats({ a: HEALTHY }, 0).a.wins).toBe(3);
+  });
+
+  test('an Infinity count is not PERMANENT — one more outcome still moves it', () => {
+    // `Infinity + 1` is Infinity, so before the repair a poisoned count could never be
+    // corrected by any number of later outcomes. It is ordinary state again.
+    for (const [label, entry] of POISON) {
+      const next = ratchetDisposition({ a: entry }, 'a', { outcome: 'win' }).a;
+      expect(next.wins, label).toBe(1);
+      expect(next.score, label).toBe(1);
+      expect(Number.isFinite(next.losses), label).toBe(true);
+    }
+    // The anchor: a healthy entry ratchets exactly as it always did.
+    const healthyNext = ratchetDisposition({ a: HEALTHY }, 'a', { outcome: 'win' }).a;
+    expect(healthyNext.wins).toBe(4);
+    expect(healthyNext.score).toBe(3);
   });
 });

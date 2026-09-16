@@ -29,12 +29,12 @@ function up(s) {
   return typeof s === 'string' ? stripZwnj(s) : s;
 }
 
-// val — the mirror of up() for normal-case VALUES: defuse f-ligatures (ffi/ffl/
-// fi/fl/ff) so an engine string like "Griffin Hall" or "Fflam" can't render as
-// tofu with the embedded fonts. Idempotent, no-op for non-strings and f-free
-// strings, so it is byte-identical except where it actually prevents a ligature.
-// Applying it here — at the shared Dense primitives most sections render through —
-// makes ligature-safety structural, not a per-call-site convention.
+// val — the mirror of up() for normal-case VALUES. ⛔ CORRECTED 2026-09-01: it no
+// longer defuses anything. safe() is noLig(String(s)) and noLig() is now IDENTITY —
+// the v2 faces expose NO ligature feature, so "Griffin Hall" needs no defusing; and
+// the old failure mode was never tofu (react-pdf substitutes a non-embedded
+// Helvetica and truncates to the low byte). val() is KEPT as the declared chokepoint
+// for the Dense primitives, so any future coercion still has one place to live.
 function val(s) {
   return (typeof s === 'string' || typeof s === 'number') ? safe(s) : s;
 }

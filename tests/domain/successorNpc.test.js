@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { successorNpc, replaceOustedNpcs } from '../../src/domain/worldPulse/successorNpc.js';
 import { isCorruptibleFlaw } from '../../src/domain/corruption.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const ousted = () => ({
   name: 'Captain Vex', role: 'Captain of the Watch', category: 'military',

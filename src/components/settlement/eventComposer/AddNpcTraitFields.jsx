@@ -1,16 +1,16 @@
 /**
  * AddNpcTraitFields — the descriptive trait inputs for the ADD_NPC change.
  *
- * The NPC read card (new/npcComponents.jsx NPCInlineCard) displays flaw,
- * temperament, goal, constraint, and secret; the add flow used to collect only
- * name / importance / role / institution, so an authored NPC always rendered
- * those rows empty. These five free-text inputs let the author set exactly what
- * the card shows. Extracted from EventComposer.jsx to keep that file under the
- * max-lines ratchet; all state lives in the parent and arrives as props, so this
- * component is purely presentational.
+ * The NPC read card displays flaw, temperament, goal, constraint, and secret; the
+ * add flow used to collect only name / importance / role / institution, so an
+ * authored NPC always rendered those rows empty. These five free-text inputs let
+ * the author set exactly what the card shows. Extracted from EventComposer.jsx to
+ * keep that file under the max-lines ratchet; all state lives in the parent and
+ * arrives as props, so this component is purely presentational.
  *
  * The fields are descriptive, not mechanical — none is required. ADD_NPC's
- * tangible effect (a resilience nudge scaled by importance) is unchanged.
+ * tangible effect (a resilience nudge scaled by importance) is unchanged. The
+ * values land verbatim on the NPC via addNpc → createNpc (mutateEntities.js:409-413).
  */
 
 import { Field } from './Field.jsx';

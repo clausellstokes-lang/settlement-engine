@@ -15,9 +15,10 @@ import {
   isOrderedStability,
   formatStability,
   normalizePlotHook,
-  runAiLayer,
+  runTemplateNarrative,
 } from '../../src/generators/aiLayer.js';
-import { extractSettlementContext, buildPrompt } from '../../src/components/new/dailyLifeLogic.js';
+import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('flattenServices (AI context normalizer)', () => {
   test('flattens the category-keyed object shape into one list', () => {
@@ -111,7 +112,12 @@ describe('stability label handling (no more "Tense (external threat)/100")', () 
     }));
     const prompt = buildAiLayerPrompt(ctx);
     expect(prompt).toContain('Political stability: Stable (theocratic governance)');
-    expect(prompt).not.toContain('Stable (theocratic governance)/100');
+    expectAbsentWithAnchor(
+      prompt,
+      'Stable (theocratic governance)/100',
+      'Political stability: Stable (theocratic governance)',
+      'label stability renders verbatim, never suffixed /100',
+    );
   });
 
   test('numeric stability still renders as n/100 in the prompt', () => {
@@ -126,13 +132,13 @@ describe('stability label handling (no more "Tense (external threat)/100")', () 
   });
 
   test('power note: a Stable theocracy reads procedural, a Tense fixture reads contested', async () => {
-    const stable = await runAiLayer(baseSettlement({
+    const stable = await runTemplateNarrative(baseSettlement({
       powerStructure: { stability: 'Stable (theocratic governance)', factions: [] },
     }));
     expect(stable.narrativeNotes.power).toContain("Stability of 'Stable (theocratic governance)'");
     expect(stable.narrativeNotes.power).toContain('recognizable and procedural');
 
-    const tense = await runAiLayer(baseSettlement({
+    const tense = await runTemplateNarrative(baseSettlement({
       powerStructure: { stability: 'Tense (external threat)', factions: [] },
     }));
     expect(tense.narrativeNotes.power).toContain("Stability of 'Tense (external threat)'");
@@ -199,7 +205,12 @@ describe('crimeTypes (objects joined by .type, not [object Object])', () => {
       ] } },
     })));
     expect(prompt).toContain('Crime types: Smuggling, Street gang activity');
-    expect(prompt).not.toContain('[object Object]');
+    expectAbsentWithAnchor(
+      prompt,
+      '[object Object]',
+      'Crime types: Smuggling, Street gang activity',
+      'crime types join by .type',
+    );
   });
 
   test('legacy plain-string entries pass through', () => {
@@ -311,7 +322,12 @@ describe('plotHooks (merged from economicViability + history events)', () => {
     const prompt = buildAiLayerPrompt(ctx);
     expect(prompt).toContain('EMERGING PLOT HOOKS');
     expect(prompt).toContain('- The road trade route is cut off.');
-    expect(prompt).not.toContain('[object Object]');
+    expectAbsentWithAnchor(
+      prompt,
+      '[object Object]',
+      '- The road trade route is cut off.',
+      'plot hooks render as normalized text, never as raw objects',
+    );
   });
 
   test('normalizePlotHook strips the PLOT HOOK marker and tolerates junk', () => {
@@ -326,7 +342,15 @@ describe('plotHooks (merged from economicViability + history events)', () => {
   test('no hooks anywhere → empty, and the prompt omits the section', () => {
     const ctx = extractFullContext(baseSettlement());
     expect(ctx.plotHooks).toEqual([]);
-    expect(buildAiLayerPrompt(ctx)).not.toContain('EMERGING PLOT HOOKS');
+    // 'RESOURCES & VIABILITY' is a SIBLING section header emitted by the same
+    // assembly path, so it proves the prompt was actually built before we assert
+    // that this one optional section was left out of it.
+    expectAbsentWithAnchor(
+      buildAiLayerPrompt(ctx),
+      'EMERGING PLOT HOOKS',
+      'RESOURCES & VIABILITY',
+      'a hook-free settlement omits the section, keeps its siblings',
+    );
   });
 });
 
@@ -337,8 +361,10 @@ describe('dailyLifeLogic food surplus is a percent of dailyNeed', () => {
     const ctx = extractSettlementContext(baseSettlement({
       economicViability: { metrics: { foodBalance: { dailyNeed: 1000, surplus: 400, deficit: 0 } } },
     }));
+    // buildPrompt (which rendered "Food: surplus (40% above need)") was dead code
+    // and was removed (F34); the surplus-percent derivation it consumed lives in
+    // extractSettlementContext and is what actually matters here.
     expect(ctx.foodSurplus).toBe(40);
-    expect(buildPrompt(ctx)).toContain('Food: surplus (40% above need)');
   });
 
   test('a big absolute surplus no longer reads as a four-digit percent', () => {

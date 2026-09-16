@@ -25,12 +25,34 @@
  * @typedef {{ targetId?: any, sinceTick?: number, role?: string }} Deployment
  */
 
+import { isLiveWarFront } from '../worldPulse/warFrontReads.js';
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
+// This ledger is broader than a war score. It ratchets every decisive
+// settlement-vs-settlement contest the engine currently settles: an abandoned
+// siege, a successful defense, a conquest, or a primary-supplier flip. Keep the
+// label and definition shared across the Realm, Library, admin, and export
+// surfaces so W/L is never mistaken for time at war or casualty accounting.
+export const REALM_CONTEST_RECORD_LABEL = 'Realm contest record';
+export const REALM_CONTEST_RECORD_HELP = 'Resolved siege, defense, conquest, and primary-supplier-flip outcomes; not time at war or casualties.';
+
 /**
- * The confirmed war_front channels on a regional graph, as { from, to } pairs.
+ * The LIVE war_front channels on a regional graph, as { from, to } pairs.
  * Tolerates an absent graph / channels array.
+ *
+ * THE READ-SIDE SIEGE GATE (single-source): a `confirmed` war_front id is shared
+ * between a mobilized war-layer siege AND a bare hostile-RELATIONSHIP bundle
+ * (they collide on the same (type,from,to) channel id — see warFrontReads.js).
+ * A merely-hostile pair therefore mints a `confirmed` war_front in BOTH directions
+ * with NO army behind it; reading those as sieges was the phantom-siege bug
+ * (liveSieges / settlementWarStatus reported a siege + atWar for a peace-time
+ * rivalry). This display projection now consults the canonical
+ * `isLiveWarFront` predicate — the SAME gate warDeployment / occupation /
+ * martialReadiness / settlementStrategy use — so the read-side can never diverge
+ * from the engine's siege detection. A war-layer front (or a bare/legacy front)
+ * still reads as live; a pure relationship_label front does not.
  * @param {any} graph
  * @returns {Array<{ from: string, to: string, strength: number, visibility: string }>}
  */
@@ -39,8 +61,7 @@ function confirmedWarFronts(graph) {
   const out = [];
   const channels = Array.isArray(graph?.channels) ? graph.channels : [];
   for (const channel of channels) {
-    if (channel?.type !== 'war_front') continue;
-    if (channel.status !== 'confirmed') continue;
+    if (!isLiveWarFront(channel)) continue;
     if (channel.from == null || channel.to == null) continue;
     out.push({
       from: String(channel.from),
@@ -203,9 +224,11 @@ function commodityLabelsByPair(graph) {
 }
 
 /**
- * The cross-settlement disposition standings: settlements with a net win/loss
- * record, codepoint-sorted by id. A net-zero (or absent) ledger yields []; this
- * surfaces the AGGRESSORS and the BEATEN, not every settlement.
+ * The realm contest record: settlements with a win/loss entry from resolved
+ * sieges, defenses, conquests, or primary-supplier flips, codepoint-sorted by
+ * id. A zero-count (or absent) ledger yields []; this surfaces settlements that
+ * have actually resolved a contest, not every settlement. This is NOT a measure
+ * of time at war or casualties.
  * @param {any} worldState
  * @returns {Array<{ id: string, wins: number, losses: number, score: number }>}
  */
@@ -326,6 +349,50 @@ export function occupiedSettlements(settlementItems) {
 // re-tune the engine); a deeper scar reads "exhausted".
 const WAR_EXHAUSTION_FLOOR = 0.20;
 
+// ⭐ ONE LADDER, TWO PROJECTIONS (W-MEM §2.2's band law). The KEY is a typed token safe
+// to PERSIST; the WORD is display copy and may be re-worded. The concluded-war ledger
+// stores keys, so re-wording a band can never rewrite lived history. Both projections
+// read the SAME thresholds below — there is no second vocabulary for the quantity.
+/** @type {Readonly<Record<string, string>>} */
+const WAR_EXHAUSTION_WORDS = Object.freeze({
+  rested: 'rested',
+  near_peace: 'near peace',
+  war_weary: 'war-weary',
+  exhausted: 'exhausted',
+});
+
+/** The war-weariness band keys, lightest-first. Closed and persistable.
+ * @type {ReadonlyArray<string>} */
+export const WAR_EXHAUSTION_BAND_KEYS = Object.freeze(Object.keys(WAR_EXHAUSTION_WORDS));
+
+/**
+ * The war-weariness band for a 0..1 scar, as a PERSISTABLE key. Total over garbage: a
+ * non-finite scar reads as rested rather than throwing, because one caller is a
+ * persistence writer and a thrown band would cost a war its whole record.
+ * @param {number} value 0..1
+ * @returns {string} one of WAR_EXHAUSTION_BAND_KEYS
+ */
+export function warExhaustionBandKey(value) {
+  const v = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
+  if (v <= 0) return 'rested';
+  if (v < WAR_EXHAUSTION_FLOOR) return 'near_peace';
+  if (v < 0.6) return 'war_weary';
+  return 'exhausted';
+}
+
+/**
+ * Resolve a persisted war-weariness band key back to its word. Returns '' for a key
+ * this build does not know — a record written by a newer build must render as silence,
+ * never as a wrong band.
+ * @param {unknown} key
+ * @returns {string}
+ */
+export function warExhaustionWordFor(key) {
+  return typeof key === 'string' && Object.prototype.hasOwnProperty.call(WAR_EXHAUSTION_WORDS, key)
+    ? WAR_EXHAUSTION_WORDS[key]
+    : '';
+}
+
 /**
  * Human war-weariness band for a 0..1 war-exhaustion scar. Below the engine's
  * condition floor reads as recovery ("near peace"); at/above it the realm is
@@ -335,11 +402,9 @@ const WAR_EXHAUSTION_FLOOR = 0.20;
  * @returns {'rested'|'near peace'|'war-weary'|'exhausted'}
  */
 export function warExhaustionBand(value) {
-  const v = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
-  if (v <= 0) return 'rested';
-  if (v < WAR_EXHAUSTION_FLOOR) return 'near peace';
-  if (v < 0.6) return 'war-weary';
-  return 'exhausted';
+  return /** @type {'rested'|'near peace'|'war-weary'|'exhausted'} */ (
+    WAR_EXHAUSTION_WORDS[warExhaustionBandKey(value)]
+  );
 }
 
 /**

@@ -4,7 +4,12 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './mathHelpers.js';
+import {clamp} from './helpers.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticNames,
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
 
 export const getPriorities = (config = {}) => ({
   economy:  config.priorityEconomy  ?? 50,
@@ -34,7 +39,8 @@ const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
  * @returns {Object} Boolean presence flags
  */
 const getInstitutionNames = (institutions = []) => {
-  const names = institutions.map(i => (i.name || '').toLowerCase());
+  const names = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','professional city watch','multiple garrison']),
@@ -117,8 +123,13 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   };
 
   // Also treat entire Magic/Exotic category institutions with minimum practitioner weight
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
-  const instCategories = institutions.map(i => (i.category || '').toLowerCase());
+  const nativeInstitutions = institutions.filter(
+    institution => !isMaterializedCustomContent(institution),
+  );
+  const instNames = nativeSemanticNames(nativeInstitutions)
+    .map(name => name.toLowerCase());
+  const instCategories = nativeInstitutions
+    .map(institution => (institution.category || '').toLowerCase());
 
   let rawInstScore = 0;
   const instSources = [];
@@ -141,7 +152,7 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   const instContrib = Math.min(40, rawInstScore * 0.4);
 
   // ── 3. Resource bonus (0–22) ──────────────────────────────────────────────
-  const resources = config.nearbyResources || [];
+  const resources = nativeSemanticResourceKeys(config);
   let resourceBonus = 0;
   const resourceSources = [];
 
@@ -187,7 +198,8 @@ export const hasTeleportationInfra = (institutions = [], config = {}) => {
   if (config?._magicTradeOnly === true) return true;
   // Check actual institution presence
   const hasInstitution = institutions.some(inst => {
-    const n = (inst?.name || '').toLowerCase();
+    if (isMaterializedCustomContent(inst)) return false;
+    const n = String(inst?.name || '').toLowerCase();
     return n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional') || n.includes('airship');
   });
   return hasInstitution;
@@ -221,7 +233,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
       ? { buffered: true,  strength: 'moderate',
           note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline. An isolated settlement cannot import raw materials.' };
+          note: 'No trade pipeline: isolated settlement cannot import raw materials.' };
   }
 
   if (effectiveEconomy < 40) {
@@ -443,6 +455,52 @@ export const getInstFlags = (config = {}, institutions = []) => {
  *
  * The "fires(n)" threshold uses a deterministic hash of the five priority values
  * mod 97 so variation occurs across different settlements, not within the same one.
+ *
+ * ── ⭐ `fires(n)` IS A RARITY DIAL WITH DENOMINATOR 97 — THE VERDICT, LT40 car 5 ──────
+ *
+ * It was asked whether the ceiling here is an OFF-BY-ONE in shipped flag logic. IT IS NOT,
+ * and the finding that prompted the question is true about the fact and wrong about the
+ * cause. Stated plainly so nobody re-derives it, and so nobody "fixes" it:
+ *
+ *  1. `threshold` is `|hash % 97|`, so its range is 0…96, and ALL NINETY-SEVEN residues are
+ *     reachable — measured over the 21^5 slider lattice (every priority 0,5,…,100): 97 of 97.
+ *  2. `fires(n)` is `threshold < n`, so a flag whose CONDITIONS hold fires on exactly `n` of
+ *     the 97 reachable hashes. n IS A PROBABILITY NUMERATOR, not a comparison against a
+ *     score. The thirteen dials are 62, 55, 52, `heresyIntensity*65` (≤65), 55, 52, 55, 48,
+ *     45, 50, 55, 50, 45 — i.e. rarities from 45/97 to 65/97.
+ *  3. THE CONSEQUENCE, WHICH IS ARITHMETIC AND NOT A BUG: because the most permissive dial
+ *     is 65, thresholds 65…96 — THIRTY-TWO of 97 — can fire NO compound flag at all, and
+ *     thresholds 62…96 (thirty-five) can fire no FIXED dial. A settlement in that band shows
+ *     no compound stressor however well its structure qualifies. That is what a rarity dial
+ *     with a ceiling below its denominator MEANS.
+ *  4. THE DIAL IS MEASURED DOING EXACTLY THAT. Over 69 configs that ALL satisfy
+ *     `secularBrutalism`'s conditions (economy 32…100, military 75, religion 20, a garrison,
+ *     no church): it fired on 36 of the 36 whose threshold is < 50, and on 0 of the 33 whose
+ *     threshold is ≥ 50. One condition set, one dial, both sides walked.
+ *  5. ⛔ THE STRICT `<` IS LOAD-BEARING AND MUST NOT BECOME `<=`. `stateCrime` is written
+ *     `fires(stateCrimeCond && stateCrimeInst ? 62 : 0)` — it uses `fires(0) === false` AS
+ *     ITS GUARD. Under `<=`, `fires(0)` would be TRUE at threshold 0 and stateCrime would
+ *     fire on settlements whose conditions fail. Executed: at a config failing
+ *     `stateCrimeCond`, `stateCrime === false` with threshold 24.
+ *  6. ⚠ AND THE ALL-50 OBSERVATION IS OVERDETERMINED — the correction this verdict carries.
+ *     At the RATE grid's all-50 sliders the threshold is 50×79 mod 97 = 70, inside the dead
+ *     band, so it is true that no compound flag can fire there. But EVERY ONE of the thirteen
+ *     CONDITION gates already fails at all-50 on its own: each demands a priority ≥ 60–70 or
+ *     ≤ 28–42, and 50 is neither. Driven with a maximal roster (garrison, prison, courthouse,
+ *     market, merchant guild, bank, cathedral, monastery, wizard tower, mages' guild,
+ *     criminal infrastructure, walls…), all-50 yields `anyActive: false` and NO flag true.
+ *     So the hash is NOT what silences the flags at the default sliders; the CONDITIONS are.
+ *     A record that blames the ceiling for the all-50 silence has the wrong cause.
+ *
+ * ⛔ NOTHING HERE LICENSES A CHANGE. Moving any `fires(n)` constant, or the `% 97` modulus,
+ * changes thirteen compound-stress flags on EVERY settlement and is owner-gated under §764.3.
+ * The verdict is recorded in docs/ENGINE_DEFECT_DISPOSITIONS.md §3.
+ *
+ * ⚠ COVERAGE, NAMED NOT CURED: no suite in the estate exercises this function's dial.
+ * `tests/generators/stressPriority.test.js` is about `STRESS_PRIORITY`, a different thing
+ * entirely, and the only tests that name any of these flags
+ * (narrativeQualityCorpus, governanceNarrative) read them as inputs downstream. A dial
+ * nobody tests is how a constant moves unnoticed; that arm is owed and is not car 5's.
  *
  * @param {Object} config       - Settlement config
  * @param {Array}  institutions - Settlement institution objects

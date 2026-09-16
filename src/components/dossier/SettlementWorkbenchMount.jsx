@@ -1,0 +1,59 @@
+/**
+ * Lazy boundary for the game-grade Settlement Workbench.
+ *
+ * OutputContainer is already a large dossier coordinator. Keeping the boundary
+ * here gives the flag one readable mount point without pulling the Workbench
+ * implementation into the initial dossier chunk.
+ */
+
+import { lazy, Suspense } from 'react';
+import { useStore } from '../../store/index.js';
+import { viewerCanAuthor } from '../../lib/viewerAuthority.js';
+
+const SettlementWorkbench = lazy(() => import('./SettlementWorkbench.jsx'));
+
+export default function SettlementWorkbenchMount({ enabled, readOnly }) {
+  // R-2 premium-gate parity — vetoable JUDGMENT per
+  // docs/CAPABILITY_REMEDIATION_PLAN.md Wave R-2 (parity chosen over
+  // open-by-default; veto = drop the `|| !canAuthor` condition below).
+  //
+  // The Create flow reaches this mount with readOnly=false and NO tier check,
+  // while the sibling NPC authoring path holds the SettlementDetail authority
+  // (`canEdit`: premium / founder / elevated role; free tier is routed to the
+  // purchase modal). Since Wave R-4 both surfaces READ THE SAME predicate,
+  // src/lib/viewerAuthority.js `viewerCanAuthor` (was a hand-copied mirror of
+  // SettlementDetail.jsx `canEdit`), so the Workbench's authoring levers —
+  // the prose editor, Edit NPC details, and the Change Dock — never open
+  // below it and the two spellings can no longer drift. FAIL-CLOSED: missing
+  // auth state or a missing isElevated selector reads as not entitled, and
+  // the upstream readOnly prop still wins, so the Library mount's existing
+  // closure is untouched. The single source is enforced by
+  // tests/lint/premiumGateSingleSource.test.js.
+  //
+  // FLAG-ON COUPLING (recorded 2026-07-27, R-3 verify pass; NARROWED by the
+  // R-5b alignment): OutputContainer renders the standalone PendingChangesBar
+  // only when the settlementWorkbench flag is OFF, so at flag-ON the Change
+  // Dock is the sole review/commit surface. This gate used to leave free/anon
+  // Create-flow users holding live queueEdit levers (NpcLifecycleControls via
+  // npcAuthoringAllowed) with nowhere to review them — a widening of the parked
+  // "flag-on review blackout" class. Since the owner-authorized R-5b alignment
+  // (2026-07-27) `npcAuthoringAllowed` reads the SAME viewerCanAuthor predicate,
+  // so those levers close in lockstep with this Dock and the widening is gone.
+  // The RESIDUAL blackout — an entitled owner whose saved dossier arrives
+  // readOnly with mapCanEdit=false or an unhydrated owner scope, stranding the
+  // save-scoped intents hydrateFromSave deliberately preserves — is CLOSED by
+  // owner order (2026-07-27). `canReview` decouples the review surface from the
+  // authoring surface: reviewing work you already staged is an entitlement
+  // question, so it derives from this same fail-closed viewerCanAuthor read and
+  // from nothing upstream, while `readOnly` keeps closing the staging levers
+  // (Edit NPC details, the prose editor, the rename door). Free/anon therefore
+  // change not at all — canAuthor=false makes readOnly true AND canReview false
+  // — which is the R-5b closure preserved, pinned as a negative control.
+  const canAuthor = useStore(viewerCanAuthor);
+  if (!enabled) return null;
+  return (
+    <Suspense fallback={<span role="status">Opening settlement tools…</span>}>
+      <SettlementWorkbench readOnly={readOnly || !canAuthor} canReview={canAuthor} />
+    </Suspense>
+  );
+}

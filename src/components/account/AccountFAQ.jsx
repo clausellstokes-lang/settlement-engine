@@ -8,7 +8,7 @@
  * paragraph away.
  *
  * Six short Q-and-A's, accordion-style. The questions are common-Q's
- * (credit grant, cancel anytime, refund window, founder lifetime,
+ * (credit grant, cancel anytime, refund handling, founder lifetime,
  * gallery privacy, AI vs simulator framing). All copy lives in
  * `t('accountFaq.qs')` so the copy team can edit without a code change.
  *

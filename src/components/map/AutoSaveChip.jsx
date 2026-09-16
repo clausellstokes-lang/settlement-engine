@@ -1,5 +1,5 @@
 /**
- * AutoSaveChip.jsx — visible save-state indicator.
+ * AutoSaveChip.jsx — P136 / M-5 visible save-state indicator.
  *
  * A pill that tells the user "Saved 2 min ago" so they don't keep
  * pressing Ctrl-S out of anxiety. Lives in the WorldMap top toolbar
@@ -13,10 +13,12 @@
  *               state is observable via WorldMap's local saving flag)
  *
  * The "dirty" state derives from comparing the live mapState to the
- * campaign's persisted mapState via the shared content-aware
- * mapFingerprint (placement coords/ids + annotation content), so a
- * drag-move or a label rename is caught — a count-only key would miss
- * both and leave the chip stuck on "Saved".
+ * campaign's persisted mapState via a CONTENT-AWARE fingerprint. An earlier
+ * count-only key (placement ids + layer counts) left the chip reading "Saved"
+ * while the map was actually dirty: a drag-move (placement x/y changes, id set
+ * unchanged) and a rename (label/marker text changes, count unchanged) both
+ * slipped past it. The fingerprint now folds in placement coordinates and
+ * annotation content, so any editable mutation flips the chip to "dirty".
  *
  * Self-gated on activeCampaignId. When there is no active campaign, the
  * chip renders nothing — the save target is undefined, so a save-status
@@ -26,12 +28,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store';
-import { mapFingerprint } from '../../hooks/useMapAutosave.js';
+import { mapDirtyFingerprint } from './mapDirtyFingerprint.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
-const VIOLET = swatch['#7B4FCF'];
-const TEXT = swatch['#3A2F18'];
+const SLATE = swatch['#5A6E82'];
+const MUTED = swatch['#9C8068'];
 const sans = '"Nunito", system-ui, sans-serif';
 
 function formatRelative(savedAt) {
@@ -48,10 +50,17 @@ function formatRelative(savedAt) {
   return `${d}d ago`;
 }
 
+// The content-aware dirty fingerprint now lives in the shared mapDirtyFingerprint
+// module (components-map-1) so this chip and the autosave hook read the SAME
+// source of truth and can never disagree again.
+const fingerprint = mapDirtyFingerprint;
+
 export default function AutoSaveChip({ saving = false }) {
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
-    activeCampaignId ? (s.campaigns || []).find(c => c.id === activeCampaignId) : null,
+    activeCampaignId != null
+      ? (s.campaigns || []).find(c => String(c.id) === String(activeCampaignId))
+      : null,
   );
   const liveMapState = useStore(s => s.mapState);
 
@@ -65,10 +74,10 @@ export default function AutoSaveChip({ saving = false }) {
 
   const dirty = useMemo(() => {
     if (!campaign?.mapState) return false;
-    return mapFingerprint(liveMapState) !== mapFingerprint(campaign.mapState);
+    return fingerprint(liveMapState) !== fingerprint(campaign.mapState);
   }, [liveMapState, campaign?.mapState]);
 
-  if (!activeCampaignId || !campaign) return null;
+  if (activeCampaignId == null || !campaign) return null;
 
   let dotColor = GOLD;
   let label = 'Saved';
@@ -76,7 +85,7 @@ export default function AutoSaveChip({ saving = false }) {
   const relative = formatRelative(saved);
 
   if (saving) {
-    dotColor = VIOLET;
+    dotColor = SLATE;
     label = 'Saving…';
   } else if (dirty) {
     dotColor = AMBER;
@@ -92,24 +101,19 @@ export default function AutoSaveChip({ saving = false }) {
     <span
       role="status"
       aria-live="polite"
-      title={saved ? `Last saved at ${new Date(saved).toLocaleString()}` : 'Not yet saved'}
+      title={saved ? `Last saved at ${new Date(saved).toLocaleString('en-US')}` : 'Not yet saved'}
       style={{
-        // Borderless tinted pill (P5 anti-box-soup): sitting beside the
-        // bordered Save button, a second ring would read as a redundant frame.
-        // The colored dot + label already carry state in two channels (P7).
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '3px 9px',
         background: `${dotColor}10`,
-        borderRadius: 12,
-        // All states use a WCAG-passing ink (the idle "Saved …" state is the
-        // most-shown, and muted failed 4.5:1 on the near-parchment tint).
-        fontSize: FS.xs, color: TEXT,
+        border: `1px solid ${dotColor}45`,
+        fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}
     >
       <span style={{
-        width: 6, height: 6, borderRadius: 3,
+        width: 6, height: 6,
         background: dotColor,
         boxShadow: saving ? `0 0 0 2px ${dotColor}30` : 'none',
         animation: saving ? 'sf-asc-pulse 1.2s ease-in-out infinite' : 'none',

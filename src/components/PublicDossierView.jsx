@@ -21,8 +21,12 @@ import { ArrowRight } from 'lucide-react';
 import OutputContainer from './OutputContainer.jsx';
 import Button from './primitives/Button.jsx';
 import { TIER_LABELS } from './new/design.js';
-import { INK, BORDER, sans, serif_, SP, R, FS, swatch, PARCH, PARCH_100 } from './theme.js';
+import { INK, BORDER, sans, serif_, SP, FS, swatch, PARCH, PARCH_100 } from './theme.js';
 import { t } from '../copy/index.js';
+
+// STRIP-1 (owner ruling, ODQ §725): the SM-4 gallery town-map opt-in is GONE.
+// A public dossier is the dossier — there is no [Dossier | Map] lens toggle and no
+// map body to lazy-load, so this surface holds no map edge at all.
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
@@ -30,7 +34,7 @@ const BODY  = swatch['#4A3B22'];
 function formatDate(iso) {
   if (!iso) return '';
   try {
-    return new Date(iso).toLocaleDateString(undefined, {
+    return new Date(iso).toLocaleDateString('en-US', {
       year: 'numeric', month: 'long', day: 'numeric',
     });
   } catch {
@@ -61,7 +65,6 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
         padding: `${SP.md}px ${SP.lg}px`,
         background: `linear-gradient(135deg, ${PARCH} 0%, ${PARCH_100} 100%)`,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.xl,
         display: 'flex', alignItems: 'center', gap: SP.lg,
         flexWrap: 'wrap',
       }}>

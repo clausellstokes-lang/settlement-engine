@@ -71,11 +71,14 @@ function loadImage(src) {
  * Serialize the live React overlay SVG (placements/markers/labels) to a
  * data URL sized to (w × h). Returns null when the overlay node is absent
  * (e.g. a custom-image map with no placements layer, or the map isn't mounted).
+ * Exported so the overlay-contract test can pin the `[data-map-overlay-svg]`
+ * querySelector to MapOverlay's tagged root <svg> — a lineage merge once
+ * silently dropped that attribute, leaving every campaign thumb bare terrain.
  * @param {number} w target width in px
  * @param {number} h target height in px
  * @returns {string | null}
  */
-function serializeOverlaySvg(w, h) {
+export function serializeOverlaySvg(w, h) {
   if (typeof document === 'undefined') return null;
   const node = document.querySelector('[data-map-overlay-svg]');
   if (!node) return null;

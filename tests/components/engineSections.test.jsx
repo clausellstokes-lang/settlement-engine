@@ -1,5 +1,5 @@
 /** @vitest-environment jsdom */
-import { afterEach, beforeEach, describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
 import {
@@ -8,13 +8,12 @@ import {
   PowerSuccessionSection,
   NpcAgencySection,
 } from '../../src/components/dossier/EngineSections.jsx';
-import { useStore } from '../../src/store/index.js';
 
+// This lineage has no altitude/detail-level store (master's useAltitude was
+// dropped in the master merge), so EngineSections renders at full detail
+// unconditionally — the band detail / contributors these tests assert on are
+// always present, no setDetailLevel setup needed.
 afterEach(cleanup);
-beforeEach(() => {
-  // Detail altitude so the band detail / contributors render for assertions.
-  useStore.getState().setDetailLevel('standard');
-});
 
 describe('EconomicsGranarySection — economic_capacity + granary gauge', () => {
   test('self-gates to nothing without a band or stockpile record', () => {
@@ -88,6 +87,26 @@ describe('PowerSuccessionSection — ruler / coup forecast / lineage', () => {
     expect(getByTestId('coup-risk').textContent).toMatch(/Stable|Holding|Contested|Critical/);
     expect(getByTestId('government-lineage').textContent).toMatch(/Free Commune/);
     expect(getByTestId('government-lineage').textContent).toMatch(/coup/);
+    // LEGIBILITY LAW: the seat's legitimacy multiplier reads as its consequence,
+    // never as the coefficient (this fixture's 1.0 = the neutral band).
+    expect(getByTestId('power-succession-section').textContent).toMatch(/public opinion neither helps nor hurts/);
+    expect(getByTestId('power-succession-section').textContent).not.toMatch(/×/);
+  });
+
+  test('a discredited seat reads its legitimacy as a consequence, not a multiplier', () => {
+    const town = {
+      id: 'p3', name: 'Cinderwatch', population: 3000, config: {},
+      powerStructure: {
+        governingName: 'The Regency',
+        factions: [{ faction: 'The Regency', archetype: 'noble', power: 50, isGoverning: true }],
+        // 0.60 = the Legitimacy Crisis band (rulingPower.js).
+        publicLegitimacy: { govMultiplier: 0.6 },
+      },
+    };
+    const { getByTestId } = render(<PowerSuccessionSection settlement={town} />);
+    const text = getByTestId('power-succession-section').textContent;
+    expect(text).toMatch(/public rejection is breaking their hold/);
+    expect(text).not.toMatch(/0\.6/);
   });
 
   test('self-gates to nothing for a placeholder with no ruler, challengers, or lineage', () => {

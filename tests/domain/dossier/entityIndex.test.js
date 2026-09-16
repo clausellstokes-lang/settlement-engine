@@ -10,6 +10,7 @@ import {
   buildDossierEntityIndex,
   entityAnchor,
   entityIdFor,
+  eventIdFor,
   neighbourIdFor,
   localNpcId,
 } from '../../../src/domain/dossier/entityLinks.js';
@@ -151,6 +152,53 @@ describe('buildDossierEntityIndex', () => {
     expect(derived.currentName).toBe('The Long Winter');
   });
 
+  it('gives an unnamed legacy event content identity that survives reordering and export', () => {
+    const anonymous = {
+      type: 'political',
+      description: 'A council dissolved without a surviving title.',
+      yearsAgo: 22,
+    };
+    const id = eventIdFor(anonymous, 0);
+    const reorderedId = eventIdFor(
+      JSON.parse(JSON.stringify({
+        yearsAgo: 22,
+        description: 'A council dissolved without a surviving title.',
+        type: 'political',
+      })),
+      99,
+    );
+
+    expect(id).toMatch(/^event\.legacy-/);
+    expect(id).not.toContain('index');
+    expect(reorderedId).toBe(id);
+  });
+
+  it('keeps duplicate anonymous legacy events readable but non-interactive', () => {
+    const duplicate = {
+      type: 'political',
+      description: 'An untitled record survived the old export.',
+      yearsAgo: 9,
+    };
+    const settlement = {
+      ...sampleSettlement(),
+      history: {
+        historicalEvents: [
+          { ...duplicate },
+          { ...duplicate },
+        ],
+      },
+    };
+    const index = buildDossierEntityIndex(settlement);
+
+    expect(index.events).toHaveLength(2);
+    expect(new Set(index.events.map(event => event.id)).size).toBe(1);
+    expect(index.events.every(event => (
+      event.identity.state === 'degraded_collision'
+      && event.identity.interactive === false
+    ))).toBe(true);
+    expect(index.resolve(index.events[0].id).identity.interactive).toBe(false);
+  });
+
   it('resolves a trade partner name to its neighbour relationship card (same type)', () => {
     const index = buildDossierEntityIndex(sampleSettlement());
     // economicState stores a partner as a bare neighbour NAME; it links to the
@@ -257,7 +305,7 @@ describe('dossier sink anchors + ids', () => {
     const entry = index.deities[0];
     expect(entry).toBeTruthy();
     expect(entry.type).toBe('deity');
-    expect(entry.tab).toBe('war_faith');
+    expect(entry.tab).toBe('faith');
     // WarFaithSection's outer div declares id={entityAnchor('deity', { name })};
     // it must equal the stored anchor (a true `dossier-deity-<slug>`, not the
     // old borrowed `dossier-settlement-<slug>`).

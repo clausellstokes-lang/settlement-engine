@@ -22,6 +22,7 @@
  */
 
 import { PANTHEON_TUNING } from '../worldPulse/pantheon.js';
+import { deityDisplayNameFromRef } from './deityNames.js';
 
 // Re-export the engine threshold verbatim — this module is presentation-only and
 // must read the SAME promote boundary the engine ratchets on, never a copy.
@@ -47,14 +48,15 @@ export function deityTierStrength(tier) {
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
 /**
- * A human-friendly deity display name from its ledger id. The id is a stable ref
- * (`deity:Vael` / `custom:...`); the tail after the last `:`/`_` is the name.
+ * A human-friendly deity display name from its ledger id — the shared loss-
+ * minimizing floor (content-immersion-r2-4). A minted ref is
+ * `deity:<scope>:<underscore_slug>`, so the old tail-pop returned only the LAST
+ * word ("War Father" → "Father"); the shared helper title-cases every slug token.
  * @param {any} deityId
  * @returns {string}
  */
 export function deityDisplayName(deityId) {
-  const tail = String(deityId == null ? '' : deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
-  return tail.charAt(0).toUpperCase() + tail.slice(1);
+  return deityDisplayNameFromRef(deityId);
 }
 
 /**

@@ -2,9 +2,22 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { consolePiiLiteralOffenders, consolePiiValueOffenders } from './edgeLogGuard.mjs';
+import { moduleTopEnvMutationOffenders } from './edgeEnvScopeGuard.mjs';
 
 const root = fileURLToPath(new URL('../supabase/functions/', import.meta.url));
 const failures = [];
+
+// ── THE PII-VALUE BASELINE (LT36 car 2) ──────────────────────────────────────
+// scripts/edgeLogGuard.mjs arm 2 is an ERROR for any NEW file that logs a PII value; the
+// files already doing so are grandfathered here so the rule could land without redding the
+// gate on arrival (backend.3's own ordering warning). The list is SHRINK-ONLY and its
+// exactness — no new violator hiding inside it, no stale entry lingering after a cure — is
+// pinned in tests/security/edgeLogRedaction.test.js, which reads THIS file.
+const piiBaseline = JSON.parse(
+  await readFile(fileURLToPath(new URL('./.edge-pii-log-baseline.json', import.meta.url)), 'utf8'),
+);
+const piiGrandfathered = new Set(Object.keys(piiBaseline.files || {}));
 
 /**
  * Recursively collect every non-test .ts file under supabase/functions/.
@@ -69,10 +82,74 @@ for (const file of files) {
   if (/const\s+guard\s*=\s*botGuard/.test(source) && /if\s*\(\s*guard\s*\)\s*return\s+guard\b/.test(source)) {
     failures.push(`${rel}: botGuard result must check guard.reject, not the wrapper object`);
   }
+
+  // security-2: no console.* call may embed a literal email (PII must flow through
+  // redact() in _shared/log.ts, never be baked into a raw log line).
+  failures.push(...consolePiiLiteralOffenders(source, rel));
+
+  // backend.3 arm 2: no console.* call may carry a PII VALUE either — the interpolated
+  // shape (`email=${session.customer_email}`, `ip=${meta.ip}`) that the literal rule above
+  // returns [] for, which is the exact shape of the leak backend.1 fixed. Grandfathered
+  // files are skipped; everything else is an error on arrival.
+  if (!piiGrandfathered.has(rel)) failures.push(...consolePiiValueOffenders(source, rel));
+}
+
+// A grandfathered file that no longer offends must LEAVE the baseline — a stale entry is a
+// hole the next leak can land in silently. (The occurrence ceiling is pinned in
+// tests/security/edgeLogRedaction.test.js, which measures the same corpus.)
+for (const rel of [...piiGrandfathered].sort()) {
+  const file = join(root, rel);
+  if (!files.includes(file)) {
+    failures.push(
+      `scripts/.edge-pii-log-baseline.json: grandfathers '${rel}', which is not an edge-function source — remove the entry.`,
+    );
+    continue;
+  }
+  if (consolePiiValueOffenders(await readFile(file, 'utf8'), rel).length === 0) {
+    failures.push(
+      `scripts/.edge-pii-log-baseline.json: '${rel}' no longer logs a PII value — remove the entry and lower 'ceiling' to bank the win.`,
+    );
+  }
+}
+
+// ── THE MODULE-TOP ENV MUTATION GUARD (TE34 member 4) ────────────────────────
+// The walk above deliberately skips *.test.ts. This one scans exactly those, because the
+// leak class lives in the SUITES rather than in the handlers: `deno test` runs them all in
+// ONE process with ONE `Deno.env`, so a module-top `Deno.env.set` is ambient for every
+// other suite and is never restored. See scripts/edgeEnvScopeGuard.mjs for the full
+// mechanism and supabase/functions/_shared/scopedTestEnv.ts for the seam that replaces it.
+async function collectTests(dir, out = []) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) await collectTests(path, out);
+    else if (entry.name.endsWith('.test.ts')) out.push(path);
+  }
+  return out;
+}
+
+const testFiles = await collectTests(root);
+// ⛔ A SCAN THAT SCANNED NOTHING PASSES. The floor is what makes the zero below evidence
+// rather than an artefact of a broken walk or a moved directory.
+const TEST_SUITE_FLOOR = 30;
+if (testFiles.length < TEST_SUITE_FLOOR) {
+  failures.push(
+    `edge env-scope guard walked only ${testFiles.length} *.test.ts file(s) under `
+    + `supabase/functions/ (floor ${TEST_SUITE_FLOOR}) — the scan found nothing to scan, so `
+    + 'its clean result would be vacuous.',
+  );
+}
+for (const file of testFiles) {
+  failures.push(...moduleTopEnvMutationOffenders(
+    await readFile(file, 'utf8'),
+    relative(root, file),
+  ));
 }
 
 if (failures.length) {
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`Edge function syntax and guard contracts are valid (${files.length} files).`);
+console.log(
+  `Edge function syntax and guard contracts are valid (${files.length} files; `
+  + `${testFiles.length} test suites env-scope clean).`,
+);

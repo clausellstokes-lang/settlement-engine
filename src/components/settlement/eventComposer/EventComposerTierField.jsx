@@ -4,12 +4,11 @@
  * organic growth-and-decline drift). Only the legal move(s) appear: promotion is
  * hidden at the metropolis cap, demotion at the thorp floor.
  *
- * This is the picker half of the old standalone "Settlement Size" Workshop card,
- * folded into the event dropdown so a tier shift is authored, previewed, and staged
- * exactly like every other change. The companion clampTierDirection() hands the
- * composer the matching direction to assemble into the staged SHIFT_TIER event, so
- * the dropdown selection and the built event always agree (the SHIFT_TIER handler is
- * itself a no-op at the cap/floor, so a replayed-out-of-bounds shift is harmless).
+ * The companion clampTierDirection() hands the composer's buildEvent the matching
+ * direction to assemble into the staged SHIFT_TIER event, so the dropdown
+ * selection and the built event always agree (the SHIFT_TIER handler is itself a
+ * no-op at the cap/floor — registry.js:829, mutateEntities.js shiftTier — so a
+ * replayed out-of-bounds shift is harmless).
  */
 
 import { TIER_ORDER, popToTier } from '../../../data/constants.js';

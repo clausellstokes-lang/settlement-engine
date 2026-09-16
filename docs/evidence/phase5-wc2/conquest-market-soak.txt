@@ -1,0 +1,76 @@
+
+# W-C2 CONQUEST-MARKET SOAK (deterministic; cohort=4000)
+
+## A. CONQUEST-YIELD ENVELOPE by conqueror PLANE — a metropolis falls (sack, severity 0.8)
+   Captive channel gated by the cruelty-axis conscience read (ABOLITION_FLOOR 0.6).
+   Every victor runs a slave market; the LOOT channel is amoral (plane-independent).
+
+   plane          abolitionRead   permitted   captiveYield   lootYield
+   lawful-good       0.900         NO       0.000         0.700   ← FORECLOSED (revenue LOST)
+   neutral-good      0.900         NO       0.000         0.700   ← FORECLOSED (revenue LOST)
+   chaotic-good      0.900         NO       0.000         0.700   ← FORECLOSED (revenue LOST)
+   true-neutral      0.000         yes      0.920         0.700
+   lawful-evil       0.000         yes      0.920         0.700
+   chaotic-evil      0.000         yes      0.920         0.700
+   (deity-free)      0.000         yes      0.920         0.700
+
+   captive yield by TAKEN tier (evil victor, severity 0.8):
+   taken tier     captiveYield
+   thorp           0.320
+   village         0.560
+   town            0.680
+   city            0.800
+   metropolis      0.920
+
+   READING: good planes FORECLOSE the captive trade (yield lost, no laundering); neutral/evil
+            profit; loot is amoral. Yield rises with the taken town's tier — the gradient.
+
+## B. LOOT-PULSE DECAY PROFILE — one metropolis sack, then peace (week tick)
+   LOOT_DECAY 0.09 ⇒ half-life 7.3 wk. A pulse, not a rebase.
+
+   week    loot pulse    prosperity lift (economy-health +)
+      0     0.600         0.210
+      4     0.411         0.144
+     13     0.176         0.062
+     26     0.052         0.018
+
+   half-life 8 wk (~0.2 yr); pulse clears (≤ EPS) at 51 wk (~1.0 yr) ⇒ returns to byte-neutral.
+   READING: the market boom fades over a season+, then the ledger drops — no permanent step-change.
+
+## C. RENTED-FORCE TRADEOFF — readiness BOUGHT vs prosperity PAID (activity = shortfall × presence)
+   SUPPLEMENT_MAX 0.35 · COST_MAX 0.3 · FIDELITY_MAX 0.3 (all bounded).
+
+   shortfall  presence   activity   supplement(+readiness)   upkeepCost(−prosperity)   fidelityPenalty
+     0.25     0.50       0.13         0.044                   0.037                    0.037
+     0.25     1.00       0.25         0.087                   0.075                    0.075
+     0.50     0.50       0.25         0.087                   0.075                    0.075
+     0.50     1.00       0.50         0.175                   0.150                    0.150
+     0.75     0.50       0.38         0.131                   0.112                    0.112
+     0.75     1.00       0.75         0.262                   0.225                    0.225
+     1.00     0.50       0.50         0.175                   0.150                    0.150
+     1.00     1.00       1.00         0.350                   0.300                    0.300
+
+   shortfall = exposure − native capability (illustrative):
+   scenario                          exposure   capability   shortfall
+   menaced+engaged, unready, floor-kit  1.000      0.000       1.000
+   menaced border, half-ready, half-kit  0.700      0.522       0.178
+   engaged, seasoned, well-supplied    0.950      0.940       0.010
+
+   READING: buying force costs prosperity in proportion — guns-vs-butter. A ready, well-supplied
+            town has ~0 shortfall ⇒ no market ⇒ byte-neutral. Every leg scales with activity.
+
+## D. HIRED-STEEL FIDELITY PENALTY — seeded cohort at the war-decision read
+   Cohort 4000; the merc penalty is FOLDED into rust (rust + merc), summed under TOTAL_MAX 0.75.
+   Sworn steel = rust only; hired steel = rust + merc penalty. chaosPull 0 (lawful actor).
+
+   force          rust(exp)   mercPenalty   mean|err|   max|err|
+   seasoned (sworn)  0.00        0.00         0.000     0.000
+   seasoned (hired)  0.00        0.15         0.075     0.150
+   seasoned (hired)  0.00        0.30         0.148     0.300
+   rusty (sworn)   0.19        0.00         0.094     0.190
+   rusty (hired)   0.19        0.15         0.171     0.340
+   rusty (hired)   0.19        0.30         0.248     0.490
+
+   CAP: rust + merc summed |err| ≤ TOTAL_MAX 0.75. Hired steel degrades the read,
+        never dominates it — and with no active market (merc 0) it is byte-identical to sworn steel.
+

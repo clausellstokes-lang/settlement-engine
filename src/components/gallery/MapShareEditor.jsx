@@ -19,25 +19,19 @@
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Globe, Copy, Check, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { shareMap, unshareMap, updateMapGalleryMetadata, fetchCampaignGalleryFields } from '../../lib/gallery.js';
 import { serializeWorldSnapshotPublic } from '../../domain/display/worldSnapshotPublic.js';
 import { buildRealmArcSummary } from '../../domain/display/realmArcSummary.js';
 import { captureMapThumb, captureCampaignThumb } from '../../lib/mapThumb.js';
 import {
-  KIND_OPTIONS,
-  suggestedTagsForCampaign,
-  campaignFacets,
-} from './galleryMapsUtils.js';
+  KIND_OPTIONS, suggestedTagsForCampaign, campaignFacets, } from './galleryMapsUtils.js';
 import GalleryDescriptionEditor from '../GalleryDescriptionEditor.jsx';
 import CoverImageField from './CoverImageField.jsx';
 import WorldSectionToggles, { WORLD_SECTIONS } from './WorldSectionToggles.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, GREEN_BG,
-  SUCCESS_BORDER, RED, INK, BODY, MUTED,
-} from '../theme.js';
+  BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, GREEN_BG, RED, INK, BODY, MUTED } from '../theme.js';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -262,7 +256,7 @@ export default function MapShareEditor({
     return (
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '6px 10px', borderRadius: R.md,
+        padding: '6px 10px',
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
@@ -329,7 +323,7 @@ export default function MapShareEditor({
       const newSlug = await shareMap(campaignId, buildShareOpts());
       setSlug(newSlug);
       setIsPublic(true);
-      try { updateSavedCampaign?.(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug }, { kindWritten: true })); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, cachePatch({ isPublic: true, publicSlug: newSlug }, { kindWritten: true })); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Map share failed');
     } finally {
@@ -367,7 +361,7 @@ export default function MapShareEditor({
         }),
         ...(facets ? facets : {}),
       });
-      try { updateSavedCampaign?.(campaignId, cachePatch()); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, cachePatch()); } catch { /* non-fatal */ }
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
       onSaved?.();
@@ -383,7 +377,7 @@ export default function MapShareEditor({
     try {
       await unshareMap(campaignId);
       setIsPublic(false);
-      try { updateSavedCampaign?.(campaignId, { isPublic: false }); } catch { /* non-fatal */ }
+      try { updateSavedCampaign(campaignId, { isPublic: false }); } catch { /* non-fatal */ }
     } catch (e) {
       setError(e.message || 'Map unshare failed');
     } finally {
@@ -401,7 +395,7 @@ export default function MapShareEditor({
   const detailsForm = detailsOpen && (
     <div style={{
       width: '100%', display: 'grid', gap: SP.sm, padding: SP.sm,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, marginTop: SP.xs,
+      border: `1px solid ${BORDER2}`, background: CARD_ALT, marginTop: SP.xs,
     }}>
       <Field label="What to share">
         <KindPicker value={kind} onChange={setKind} canShareCampaign={canShareCampaign} />
@@ -409,7 +403,7 @@ export default function MapShareEditor({
       {/* Owner opt-in: allow other DMs to import (clone) the shared map. */}
       <label htmlFor="map-share-importable" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
       }}>
         <input
           id="map-share-importable"
@@ -435,7 +429,7 @@ export default function MapShareEditor({
         {seedingCover && !imageUrl ? (
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            minHeight: 96, border: `1px dashed ${BORDER}`, borderRadius: R.md,
+            minHeight: 96, border: `1px dashed ${BORDER}`,
             background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.xxs,
           }}>
             Capturing the map for the cover…
@@ -458,7 +452,7 @@ export default function MapShareEditor({
           onChange={event => setImageAlt(event.target.value)}
           placeholder={campaign?.name ? `Map of ${campaign.name}` : 'Image description'}
           style={{
-            minHeight: 32, border: `1px solid ${BORDER}`, borderRadius: R.md,
+            minHeight: 32, border: `1px solid ${BORDER}`,
             background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
           }}
         />
@@ -471,7 +465,7 @@ export default function MapShareEditor({
           onChange={event => setTagsInput(event.target.value)}
           placeholder="coastal, small realm, at war"
           style={{
-            minHeight: 32, border: `1px solid ${BORDER}`, borderRadius: R.md,
+            minHeight: 32, border: `1px solid ${BORDER}`,
             background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
           }}
         />
@@ -480,7 +474,6 @@ export default function MapShareEditor({
         <Button
           variant="gold"
           size="sm"
-          icon={<Save size={12} />}
           onClick={handleSaveDetails}
           busy={busy}
           style={{ justifySelf: 'start' }}
@@ -497,16 +490,16 @@ export default function MapShareEditor({
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', fontFamily: sans, width: '100%' }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 9px', borderRadius: R.md,
-          background: GREEN_BG, color: GREEN, border: `1px solid ${SUCCESS_BORDER}`,
+          padding: '4px 9px',
+          background: GREEN_BG, color: GREEN, border: `1px solid ${GREEN}`,
           fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>
           Public
         </span>
-        <Button variant="gold" size="sm" onClick={handleCopy} title="Copy public URL" icon={copied ? <Check size={12} /> : <Copy size={12} />}>
+        <Button variant="gold" size="sm" onClick={handleCopy} title="Copy public URL">
           {copied ? 'Copied' : 'Copy link'}
         </Button>
-        <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)} icon={<ImageIcon size={12} />}>
+        <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)}>
           Gallery details
         </Button>
         <Button variant="ghost" size="sm" onClick={handleUnshare} busy={busy}>
@@ -531,11 +524,10 @@ export default function MapShareEditor({
         onClick={handlePublish}
         busy={busy}
         title="Make this map readable to anyone with the link"
-        icon={<Globe size={12} />}
       >
         {busy ? 'Publishing…' : 'Share to gallery'}
       </Button>
-      <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)} icon={<ImageIcon size={12} />}>
+      <Button variant="ghost" size="sm" onClick={() => setDetailsOpen(open => !open)}>
         Details
       </Button>
       {error && (

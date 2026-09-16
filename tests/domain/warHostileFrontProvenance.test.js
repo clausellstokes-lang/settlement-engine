@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph, relationshipChannelBundle, mintDirectedChannel } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // WAR-FRONT PROVENANCE READ-GATE (security-completeness — phantom-siege class).

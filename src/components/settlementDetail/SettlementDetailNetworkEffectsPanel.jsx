@@ -1,13 +1,42 @@
 import { useMemo } from 'react';
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../../lib/relationshipGraph.js';
+import { campaignMembershipIndex } from '../../domain/relationships/effectiveNeighbours.js';
+import { isCampaignActive } from '../../lib/campaigns.js';
+import { useStore } from '../../store/index.js';
 import { INK, MUTED, BODY, SECOND, sans, FS, swatch } from '../theme';
 
 // ── Network Effects panel — shows cascading modifiers from the relationship graph ──
 
+/**
+ * THE ADVISORY LABEL (owner ruling 2026-07-27, atlas owner-queue #8 /
+ * economy-family gap 1).
+ *
+ * `getSettlementModifiers` totals are consumed by DISPLAY SURFACES ONLY — this
+ * panel, the read-only View echo, the settlements-list badge, and the two PDF
+ * builders. No generator, pulse, event handler, or other engine path reads
+ * them, so the word "modifiers" promises a simulation consequence that does not
+ * exist. The owner picked the honest LABEL over engine wiring: wiring the
+ * cascade in as a declared engine input would shift every same-seed golden, so
+ * it stays a RECORDED FUTURE TUNING CANDIDATE requiring an owner-signed,
+ * versioned tuning change under THE PROMISE. It is not lost and not a bug to
+ * re-find; do not wire it here without that signature.
+ *
+ * Single-home: this constant is the ONLY copy of the string. The sibling
+ * display surfaces deliberately do not carry it (each has its own scope), which
+ * tests/ui/networkEffectsAdvisoryPin.test.jsx pins in both directions.
+ */
+export const NETWORK_EFFECTS_ADVISORY =
+  'These figures inform your reading. The simulation does not apply them.';
+
 export default function NetworkEffectsPanel({ settlementId, saves, relColors }) {
+  // Co-campaign settlements are implicit Neutral neighbours by default (owner
+  // order 2026-07-22). Derived from ALL active campaigns so the cascade stays
+  // ungated exactly as it renders for every tier today.
+  const campaigns = useStore(s => s.campaigns);
+  const campaignOf = useMemo(() => campaignMembershipIndex((campaigns || []).filter(isCampaignActive)), [campaigns]);
   const mods = useMemo(
-    () => getSettlementModifiers(settlementId, saves),
-    [settlementId, saves]
+    () => getSettlementModifiers(settlementId, saves, { campaignOf }),
+    [settlementId, saves, campaignOf]
   );
 
   const hasEffects = mods.sources.length > 0;
@@ -30,7 +59,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
     // three relationship pieces, grouped by the parent's gap, not a standalone
     // bordered card (P5 anti-box-soup; the self-margin double-counted the parent
     // flex gap and broke the spacing rhythm).
-    <div role="group" aria-labelledby="network-effects-heading" style={{ background: swatch['#F8F4EE'], borderRadius: 8, padding: '12px 14px' }}>
+    <div role="group" aria-labelledby="network-effects-heading" aria-describedby="network-effects-advisory" style={{ background: swatch['#F8F4EE'], padding: '12px 14px' }}>
       {/* Level-1 panel keyword + the dominant signal as the headline fact. */}
       <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 10px', marginBottom: 10 }}>
         <h3 id="network-effects-heading" style={{ fontSize: FS.sm, fontWeight: 700, color: swatch['#5A3A1A'], textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
@@ -44,6 +73,12 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
         )}
       </div>
 
+      {/* The honest advisory: the caveat reads BEFORE the numbers it qualifies,
+          and describes the whole group for assistive tech. */}
+      <p id="network-effects-advisory" style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, margin: '0 0 10px' }}>
+        {NETWORK_EFFECTS_ADVISORY}
+      </p>
+
       {/* Category bars — the drill-down behind the headline fact above. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
         {EFFECT_CATEGORIES.map(({ key, label, _color }) => {
@@ -53,14 +88,13 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           return (
             <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
-              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
+              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], overflow: 'hidden', position: 'relative' }}>
                 <div style={{
                   position: 'absolute',
                   [isPos ? 'left' : 'right']: 0,
                   top: 0, height: '100%',
                   width: `${pct}%`,
                   background: isPos ? '#2a7a3a' : '#8b1a1a',
-                  borderRadius: 4,
                   transition: 'width 0.3s',
                 }} />
               </div>
@@ -104,7 +138,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
               <span style={{ fontSize: FS.xs, fontWeight: 600, color: INK, flex: 1 }}>
                 {src.settlementName}
               </span>
-              <span style={{ fontSize: FS.xs, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px', borderRadius: 3 }}>
+              <span style={{ fontSize: FS.xs, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px' }}>
                 {relLabel}
               </span>
               {causalLabel && <span style={{ fontSize: FS.xs, color: BODY }} title={causalLabel}>{causalLabel}</span>}

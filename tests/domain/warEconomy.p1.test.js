@@ -4,7 +4,7 @@ import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
 import { deploymentReturnOutcomes } from '../../src/domain/worldPulse/deploymentReturn.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * War-economy P1 (flag-gated, default OFF): a deployed army conscripts real population
@@ -76,6 +76,10 @@ describe('war-economy P1 — conserved conscription + homecoming', () => {
     expect(banked).toBeGreaterThan(0);
     const conscription = war.outcomes.find(o => o.candidateType === 'war_conscription');
     expect(conscription).toBeTruthy();
+    // This deployment entered the evaluator at age 5 and was aged before step 5:
+    // the weekly debit is mechanical recurrence, not another Chronicle beat.
+    expect(war.deployments.atlas.deploymentAge).toBe(6);
+    expect(conscription.recordMode).toBe('state_only');
     const debit = -conscription.populationDeltas.find(d => d.saveId === 'atlas').delta;
     // First tick: the whole banked headcount is this tick's debit → they match exactly.
     expect(debit).toBe(banked);

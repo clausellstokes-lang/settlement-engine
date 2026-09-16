@@ -20,14 +20,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   addRegionalChannels,
   advanceRegionalImpacts,
+  advanceWizardNewsFeed,
+  appendWizardNewsEntries,
   deriveGraphWithDiscoveredCandidates,
   discoverDependencyCandidates,
   ensureRegionalGraph,
+  ensureWizardNewsFeed,
   normalizeGoodsList,
   propagateRegionalEvent,
   queueRegionalImpacts,
   setRegionalImpactStatus,
 } from '../../src/domain/region/index.js';
+import { migrateCampaign } from '../../src/store/campaignSlice.js';
 import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/index.js';
 
 const T_FIXTURE = new Date('2026-06-01T00:00:00.000Z');
@@ -366,5 +370,173 @@ describe('pulse path stamps no wall-clock time when now is threaded', () => {
     vi.setSystemTime(new Date('2026-10-01T07:00:00.000Z')); // the clock moves; a replay must not see it
     const second = run();
     expect(JSON.stringify(second.regionalGraph)).toBe(JSON.stringify(first.regionalGraph));
+  });
+});
+
+// ── `now: null` MEANS "NO STAMP" ───────────────────────────────────────────────────────
+//
+// THE DEFECT THIS CLOSES. The stamp chain was `row.updatedAt || now || nowIso()` — an `||`,
+// so an EXPLICITLY passed `now: null`, which reads as "pin this to nothing" and is what
+// callers and tests actually write, is falsy and lands on the wall clock at millisecond
+// resolution. §884 measured it at 784 mismatches in 200,000 iterations; the determinism lane
+// reproduced it as a live red two calls 3 ms apart. A fence (the six-writer spelling ban in
+// tests/lint/worldGenerationClockSeam.walker.test.js) was put around the trap; this is the
+// trap's removal.
+//
+// THE CONTRACT, and the whole point is that the three cases are THREE, not two:
+//   • `now` ABSENT / `undefined`  → boundary fallback, mint from the wall clock. UNCHANGED.
+//   • `now: null`                 → NO STAMP. The field is null and stays null.
+//   • `now: '<iso>'`              → stamp it. UNCHANGED.
+// `undefined` keeps meaning "absent" because a spread of an option-less object produces it,
+// and ~120 correct call sites depend on the boundary fallback surviving.
+//
+// WHY NULL IS THE HONEST ANSWER RATHER THAN A THROW: the estate ALREADY writes null stamps
+// through on purpose — warCostsNews.js writes `createdAt: input.now ?? null`,
+// discoverDependencyCandidates.js writes `discoveredAt: options.now` straight through, and
+// `RegionImpact.createdAt` / `RegionChannel.confirmedAt` are already typed `string|null`.
+// These two seams were the outliers, not the rule.
+describe('`now: null` means NO STAMP, never a silent wall clock', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(T_FIXTURE);
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  const rawGraph = () => ({
+    nodes: [{ id: 'v', name: 'Ashford' }, { id: 'o', name: 'Crownhold' }],
+    channels: [{ type: 'political_authority', from: 'v', to: 'o', status: 'confirmed' }],
+    queuedImpacts: [{
+      id: 'regional_impact.nostamp',
+      kind: 'route_disruption',
+      sourceSettlementId: 'v',
+      targetSettlementId: 'o',
+      severity: 0.5,
+      status: 'queued',
+    }],
+  });
+
+  it('THE DEFECT: a stamp-less graph ensured with `now: null` replays byte-identical across a moved clock', () => {
+    // Before the cure this is the 0.489%-of-the-time red that every landing gate this arc
+    // rolled and won: two runs milliseconds apart stamped two different wall clocks. Here the
+    // clock is moved by TWO MONTHS between the runs, so the failure is deterministic, not
+    // probabilistic — a probe that only fails 0.489% of the time is not a guard.
+    const first = ensureRegionalGraph(rawGraph(), { now: null });
+    vi.setSystemTime(T_DRIFTED);
+    const second = ensureRegionalGraph(rawGraph(), { now: null });
+
+    expect(JSON.stringify(second)).toBe(JSON.stringify(first));
+
+    // …and it is byte-identical because there is NO STAMP, not because the two clocks agreed.
+    expect(first.updatedAt).toBe(null);
+    expect(first.nodes[0].updatedAt).toBe(null);
+    expect(first.channels[0].discoveredAt).toBe(null);
+    expect(first.channels[0].updatedAt).toBe(null);
+    expect(first.queuedImpacts[0].createdAt).toBe(null);
+    expect(first.queuedImpacts[0].updatedAt).toBe(null);
+    // The MINTED channel_inferred edge — the record that leaked in the original audit.
+    expect(first.edges.find(e => e.relationshipType === 'channel_inferred').updatedAt).toBe(null);
+    // anchored: the subject is the serialized graph above, already asserted non-empty by the byte-identity check
+    expect(JSON.stringify(first)).not.toContain(T_FIXTURE.toISOString().slice(0, 10));
+  });
+
+  it('THE DEFECT, news half: `now: null` through the six wizardNews writers stamps nothing', () => {
+    const entry = () => ({
+      id: 'wizard_news.1.queued.impact_a',
+      tick: 1,
+      headline: 'A road closes',
+      summary: 'The ford is out.',
+      kind: 'queued',
+      severity: 0.4,
+    });
+
+    const first = appendWizardNewsEntries({}, [entry()], { now: null });
+    vi.setSystemTime(T_DRIFTED);
+    const second = appendWizardNewsEntries({}, [entry()], { now: null });
+
+    expect(JSON.stringify(second)).toBe(JSON.stringify(first));
+    expect(first.entries[0].createdAt).toBe(null);
+    expect(first.updatedAt).toBe(null);
+
+    // ensure / advance / the impact writers agree with append.
+    expect(ensureWizardNewsFeed({}, { now: null }).updatedAt).toBe(null);
+    expect(advanceWizardNewsFeed({}, 1, { now: null }).updatedAt).toBe(null);
+  });
+
+  it('THE BOUNDARY IS PRESERVED: an ABSENT `now` still takes the wall clock', () => {
+    // The over-fix this arm exists to refuse. ~120 call sites legitimately omit the option and
+    // must keep the documented boundary fallback; only an EXPLICIT null means "no stamp".
+    const graph = ensureRegionalGraph(rawGraph());
+    expect(graph.updatedAt).toBe(T_FIXTURE.toISOString());
+    expect(graph.nodes[0].updatedAt).toBe(T_FIXTURE.toISOString());
+    expect(ensureWizardNewsFeed({}).updatedAt).toBe(T_FIXTURE.toISOString());
+  });
+
+  it('`now: undefined` is ABSENT, not null — the three cases really are three', () => {
+    // A spread of an option-less object yields `{ now: undefined }`, and that must keep
+    // behaving as "absent". This is why the spelling ban still convicts `now: undefined`
+    // after the cure even though it now spares `now: null`.
+    expect(ensureRegionalGraph(rawGraph(), { now: undefined }).updatedAt).toBe(T_FIXTURE.toISOString());
+    expect(ensureRegionalGraph(rawGraph(), { now: null }).updatedAt).toBe(null);
+    expect(ensureRegionalGraph(rawGraph(), { now: NOW }).updatedAt).toBe(NOW);
+  });
+
+  it('AN EXISTING STAMP IS NEVER ERASED by `now: null` — stored data is safe by construction', () => {
+    // This is the whole migration argument: the chain is `row.updatedAt || resolveStamp(now)`,
+    // so a row that HAS a stamp keeps it and never reaches the resolver. Only stamp-LESS rows
+    // change, and only when the caller explicitly passes null.
+    const stamped = {
+      nodes: [{ id: 'v', name: 'Ashford', updatedAt: '2026-05-01T00:00:00.000Z' }],
+      channels: [{
+        type: 'political_authority', from: 'v', to: 'o', status: 'confirmed',
+        discoveredAt: '2026-05-01T00:00:00.000Z', updatedAt: '2026-05-01T00:00:00.000Z',
+      }],
+      updatedAt: '2026-05-01T00:00:00.000Z',
+    };
+    const graph = ensureRegionalGraph(stamped, { now: null });
+    expect(graph.updatedAt).toBe('2026-05-01T00:00:00.000Z');
+    expect(graph.nodes[0].updatedAt).toBe('2026-05-01T00:00:00.000Z');
+    expect(graph.channels[0].discoveredAt).toBe('2026-05-01T00:00:00.000Z');
+  });
+
+  it('LIFECYCLE: a null-stamped graph survives persist → reload → regenerate → clone unchanged', () => {
+    // The write that survives one path and ghosts another is this program's most-bitten bug
+    // class, so every path the field can travel is exercised for real rather than read.
+    const created = ensureRegionalGraph(rawGraph(), { now: null });
+
+    // PERSIST + RELOAD (campaign JSON is the storage medium; null survives JSON, undefined
+    // would NOT — which is exactly why the contract is null and not undefined).
+    const reloaded = JSON.parse(JSON.stringify(created));
+    expect(reloaded.updatedAt).toBe(null);
+    expect(Object.prototype.hasOwnProperty.call(reloaded, 'updatedAt')).toBe(true);
+
+    // REGENERATE — re-ensuring a reloaded (brand-stripped) graph must not mint a clock.
+    vi.setSystemTime(T_DRIFTED);
+    const regenerated = ensureRegionalGraph(reloaded, { now: null });
+    expect(JSON.stringify(regenerated)).toBe(JSON.stringify(created));
+
+    // CLONE — structuredClone strips the ensured brand, so the clone takes a FULL re-ensure.
+    const cloned = ensureRegionalGraph(structuredClone(reloaded), { now: null });
+    expect(JSON.stringify(cloned)).toBe(JSON.stringify(created));
+
+    // IDEMPOTENT under repeat application (re-entry), clock still moved.
+    expect(JSON.stringify(ensureRegionalGraph(regenerated, { now: null }))).toBe(JSON.stringify(created));
+  });
+
+  it('LIFECYCLE: the MIGRATE path is deterministic for a graph with no stamps', () => {
+    // campaignSlice.migrateCampaign cured the news feed and left the graph beside it
+    // un-threaded, so migrating the SAME stored campaign twice produced two different graphs.
+    // Threading the campaign's own stamp makes the migration a function of what it migrates.
+    const stored = () => ({
+      id: 'ffffffff-ffff-4fff-8fff-ffffffffffff',
+      updatedAt: '2026-05-01T00:00:00.000Z',
+      regionalGraph: rawGraph(),
+    });
+    const first = migrateCampaign(stored());
+    vi.setSystemTime(T_DRIFTED);
+    const second = migrateCampaign(stored());
+    expect(JSON.stringify(second.regionalGraph)).toBe(JSON.stringify(first.regionalGraph));
+    expect(first.regionalGraph.updatedAt).toBe('2026-05-01T00:00:00.000Z');
   });
 });

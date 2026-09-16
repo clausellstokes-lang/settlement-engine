@@ -98,17 +98,17 @@ function editBiomes() {
         <div
           class="states biomes"
           data-id="${i}"
-          data-name="${b.name[i]}"
+          data-name="${escapeHtml(b.name[i])}"
           data-habitability="${b.habitability[i]}"
           data-cells=${b.cells[i]}
           data-area=${area}
           data-population=${population}
-          data-color=${b.color[i]}
+          data-color="${escapeHtml(b.color[i])}"
         >
-          <fill-box fill="${b.color[i]}"></fill-box>
-          <input data-tip="Biome name. Click and type to change" class="biomeName" value="${
+          <fill-box fill="${escapeHtml(b.color[i])}"></fill-box>
+          <input data-tip="Biome name. Click and type to change" class="biomeName" value="${escapeHtml(
             b.name[i]
-          }" autocorrect="off" spellcheck="false" />
+          )}" autocorrect="off" spellcheck="false" />
           <span data-tip="Biome habitability percent" class="hide">%</span>
           <input
             data-tip="Biome habitability percent. Click and set new value to change"
@@ -296,9 +296,9 @@ function editBiomes() {
     b.area.push(0);
 
     const unit = getAreaUnit();
-    const line = `<div class="states biomes" data-id="${i}" data-name="${b.name[i]}" data-habitability=${b.habitability[i]} data-cells=0 data-area=0 data-population=0 data-color=${b.color[i]}>
-      <fill-box fill="${b.color[i]}"></fill-box>
-      <input data-tip="Biome name. Click and type to change" class="biomeName" value="${b.name[i]}" autocorrect="off" spellcheck="false">
+    const line = `<div class="states biomes" data-id="${i}" data-name="${escapeHtml(b.name[i])}" data-habitability=${b.habitability[i]} data-cells=0 data-area=0 data-population=0 data-color="${escapeHtml(b.color[i])}">
+      <fill-box fill="${escapeHtml(b.color[i])}"></fill-box>
+      <input data-tip="Biome name. Click and type to change" class="biomeName" value="${escapeHtml(b.name[i])}" autocorrect="off" spellcheck="false">
       <span data-tip="Biome habitability percent" class="hide">%</span>
       <input data-tip="Biome habitability percent. Click and set new value to change" type="number" min=0 max=9999 step=1 class="biomeHabitability hide" value=${b.habitability[i]}>
       <span data-tip="Cells count" class="icon-check-empty hide"></span>
@@ -407,7 +407,10 @@ function editBiomes() {
     const temp = biomes.select("#temp");
     const selected = body.querySelector("div.selected");
 
-    const biomeNew = selected.dataset.id;
+    // SettlementForge fork patch: coerce to Number. dataset.id is a string, so `biomeNew === biomeOld`
+    // (compared against the numeric cells.biome) was always false and the skip-unchanged early-return never
+    // fired, appending a redundant temp polygon for every already-correct cell.
+    const biomeNew = +selected.dataset.id;
     const color = biomesData.color[biomeNew];
 
     selection.forEach(function (i) {

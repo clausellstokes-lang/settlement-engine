@@ -6,12 +6,18 @@
  * per-IP rate limit, and insert shape. No live Supabase.
  */
 import { assertEquals, assertStringIncludes } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 
-Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
-Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
-Deno.env.set('ANALYTICS_HASH_PEPPER', 'test_pepper');
+const scopedEnv = installScopedTestEnv({
+  SUPABASE_URL: 'https://stub.supabase.co',
+  SUPABASE_SERVICE_ROLE_KEY: 'service_role_dummy',
+  ANALYTICS_HASH_PEPPER: 'test_pepper',
+});
 
 const { handleLogClientError } = await import('./index.ts');
+// The import above has read the stubs at module scope; hand the ambient environment
+// back so nothing this suite supplied is visible while any OTHER suite runs.
+scopedEnv.release();
 
 /** Admin stub: select(...).eq(...).gte(...) resolves the rate-limit count;
  *  insert(row) records the row. */
@@ -38,7 +44,7 @@ const post = (body: unknown, ua = 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36 Ch
     body: JSON.stringify(body),
   });
 
-Deno.test('OPTIONS preflight returns 200 with no body', async () => {
+scopedEnv.test('OPTIONS preflight returns 200 with no body', async () => {
   const res = await handleLogClientError(
     new Request('https://edge/log-client-error', { method: 'OPTIONS' }),
     { adminClient: makeAdmin().adminClient },
@@ -46,7 +52,7 @@ Deno.test('OPTIONS preflight returns 200 with no body', async () => {
   assertEquals(res.status, 200);
 });
 
-Deno.test('non-POST is rejected 405', async () => {
+scopedEnv.test('non-POST is rejected 405', async () => {
   const res = await handleLogClientError(
     new Request('https://edge/log-client-error', { method: 'GET' }),
     { adminClient: makeAdmin().adminClient },
@@ -54,7 +60,7 @@ Deno.test('non-POST is rejected 405', async () => {
   assertEquals(res.status, 405);
 });
 
-Deno.test('an obvious bot UA is rejected 403 and never inserts', async () => {
+scopedEnv.test('an obvious bot UA is rejected 403 and never inserts', async () => {
   const admin = makeAdmin();
   const res = await handleLogClientError(
     post({ message: 'x' }, 'curl/8.0'),
@@ -64,7 +70,7 @@ Deno.test('an obvious bot UA is rejected 403 and never inserts', async () => {
   assertEquals(admin.inserts.length, 0);
 });
 
-Deno.test('a valid report is bounded, IP-hashed, and inserted', async () => {
+scopedEnv.test('a valid report is bounded, IP-hashed, and inserted', async () => {
   const admin = makeAdmin(0);
   const res = await handleLogClientError(
     post({
@@ -88,7 +94,7 @@ Deno.test('a valid report is bounded, IP-hashed, and inserted', async () => {
   assertEquals((row.ip_hash as string).length, 64);     // sha256 hex
 });
 
-Deno.test('over the per-IP rate limit returns 202 and does NOT insert', async () => {
+scopedEnv.test('over the per-IP rate limit returns 202 and does NOT insert', async () => {
   const admin = makeAdmin(60);   // already at the limit this minute
   const res = await handleLogClientError(post({ message: 'flood' }), { adminClient: admin.adminClient });
   assertEquals(res.status, 202);
@@ -101,7 +107,7 @@ Deno.test('over the per-IP rate limit returns 202 and does NOT insert', async ()
 // insert path: on a count-query error (returned or thrown) the report is dropped
 // with the same 202 accepted-but-not-stored as an over-window flood.
 
-Deno.test('a limiter error (returned) drops the report — 202, no insert (fail closed)', async () => {
+scopedEnv.test('a limiter error (returned) drops the report — 202, no insert (fail closed)', async () => {
   const inserts: Array<Record<string, unknown>> = [];
   const client = {
     from() {
@@ -120,7 +126,7 @@ Deno.test('a limiter error (returned) drops the report — 202, no insert (fail 
   assertStringIncludes(await res.text(), 'throttled');
 });
 
-Deno.test('a limiter error (thrown) drops the report — 202, no insert (fail closed)', async () => {
+scopedEnv.test('a limiter error (thrown) drops the report — 202, no insert (fail closed)', async () => {
   const inserts: Array<Record<string, unknown>> = [];
   const client = {
     from() {
@@ -138,7 +144,7 @@ Deno.test('a limiter error (thrown) drops the report — 202, no insert (fail cl
   assertEquals(inserts.length, 0);
 });
 
-Deno.test('malformed JSON is rejected 400', async () => {
+scopedEnv.test('malformed JSON is rejected 400', async () => {
   const res = await handleLogClientError(
     new Request('https://edge/log-client-error', {
       method: 'POST',

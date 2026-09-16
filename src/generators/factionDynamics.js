@@ -30,9 +30,14 @@ const PROSPERITY_CONTRIB = {
 function safetyContrib(label) {
   if (!label) return 0;
   const l = label.toLowerCase();
-  if (l.includes('desperate') || l.includes('dangerous') || l.includes('famine'))    return -20;
-  if (l.includes('volatile')  || l.includes('tense')     || l.includes('strained'))  return -12;
-  if (l.includes('suspicious')|| l.includes('unsafe'))                                return -8;
+  if (l.includes('critical')   || l.includes('desperate')
+      || l.includes('dangerous') || l.includes('famine'))                             return -20;
+  if (l.includes('restricted') || l.includes('volatile')
+      || l.includes('tense') || l.includes('strained'))                               return -12;
+  if (l.includes('quarantined') || l.includes('suspicious') || l.includes('unsafe'))   return  -8;
+  // An authoritarian peace suppresses ordinary crime but exacts legitimacy:
+  // order without consent is deliberately worse than Moderate, not a crisis.
+  if (l.includes('controlled'))                                                           return  -5;
   if (l.includes('moderate'))                                                          return  0;
   if (l.includes('very safe') || l.includes('orderly'))                               return +20;
   if (l.includes('safe'))                                                              return +15;
@@ -64,6 +69,71 @@ function foodContrib(label) {
   return 0; // Secure
 }
 
+// Tier scale for the defense contribution to public legitimacy. Exported so
+// assembleSettlement's real-readiness patch applies the SAME scale — the
+// unscaled patch stamped spurious small-tier legitimacy crises (a thorp being
+// "Vulnerable" is normal life, not governance failure).
+export const legitimacyDefScale = (tier) =>
+  tier === 'thorp'   ? 0.3
+  : tier === 'hamlet'  ? 0.4
+  : tier === 'village' ? 0.6
+  : tier === 'town'    ? 0.85
+  : 1.0;
+
+/**
+ * The SINGLE public-legitimacy band derivation (cycle-3 Wave 2, chokepoint for
+ * the M5 class). score → { label, color, bg, multipliers, boolean flags }. This
+ * band map used to be hand-rolled in TWO places — computePublicLegitimacy (below)
+ * and assembleSettlement's defense-readiness patch — which is exactly how the
+ * patch drifted: it re-stamped label/color/multipliers on a band crossing but
+ * forgot `bg` (M5). Both now delegate here, so the (label, color, bg, multiplier,
+ * flag) tuple can never disagree across the band boundary again.
+ *
+ * NOTE (deferred): src/domain/timeProgression.js reBand() re-derives the same band
+ * at PLAY time. It is intentionally NOT unified here: it lives in src/domain and
+ * importing this generator export would trip the domain→generators boundary ratchet
+ * (tests/build/domainGeneratorsBoundary.test.js), and its output feeds the parked
+ * worldPulse goldens — a play-time change belongs to a worldPulse lane, not this
+ * generation-side, golden-neutral wave. Documented, not a missed instance.
+ *
+ * @param {number} score  a 0..100 legitimacy score (already clamped by the caller).
+ * @returns {{ label: string, color: string, bg: string, govMultiplier: number,
+ *   crimMultiplier: number, isEndorsed: boolean, isApproved: boolean,
+ *   isTolerated: boolean, isContested: boolean, isLegitimacyCrisis: boolean,
+ *   governanceFractured: boolean }}
+ */
+export function legitimacyBandFor(score) {
+  let label, color, bg;
+  if      (score >= 75) { label = 'Endorsed';        color = '#1a5a28'; bg = '#f0faf4'; }
+  else if (score >= 60) { label = 'Approved';         color = '#4a7a2a'; bg = '#f4faf0'; }
+  else if (score >= 45) { label = 'Tolerated';        color = '#a0762a'; bg = '#faf8ec'; }
+  else if (score >= 30) { label = 'Contested';        color = '#8a4010'; bg = '#fdf6ec'; }
+  else                  { label = 'Legitimacy Crisis';color = '#8b1a1a'; bg = '#fdf4f4'; }
+
+  const govMultiplier =
+    score >= 75 ? 1.30 :
+    score >= 60 ? 1.15 :
+    score >= 45 ? 1.00 :
+    score >= 30 ? 0.80 :
+                  0.60;
+  const crimMultiplier =
+    score >= 75 ? 0.75 :
+    score >= 60 ? 0.90 :
+    score >= 45 ? 1.00 :
+    score >= 30 ? 1.15 :
+                  1.30;
+
+  return {
+    label, color, bg, govMultiplier, crimMultiplier,
+    isEndorsed:         score >= 75,
+    isApproved:         score >= 60,
+    isTolerated:        score >= 45 && score < 60,
+    isContested:        score >= 30 && score < 45,
+    isLegitimacyCrisis: score <  30,
+    governanceFractured: score < 30,
+  };
+}
+
 /**
  * Compute the public legitimacy score (0-100) from settlement outcomes.
  * High score = population consents to governance. Low = legitimacy crisis.
@@ -81,11 +151,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
   // Defense and food contributions are tier-scaled:
   // Small settlements being "Vulnerable" or "food pressured" is NORMAL, not governance failure.
   // Only at city+ scale do these represent actual policy failures.
-  const defScale  = tier === 'thorp'   ? 0.3
-                  : tier === 'hamlet'  ? 0.4
-                  : tier === 'village' ? 0.6
-                  : tier === 'town'    ? 0.85
-                  : 1.0;
+  const defScale  = legitimacyDefScale(tier);
   const foodScale = tier === 'thorp'   ? 0.4
                   : tier === 'hamlet'  ? 0.5
                   : tier === 'village' ? 0.65
@@ -99,45 +165,27 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
 
   const score = Math.max(0, Math.min(100, 50 + pContrib + sContrib + dContrib + fContrib));
 
-  // Label and color
-  let label, color, bg;
-  if      (score >= 75) { label = 'Endorsed';        color = '#1a5a28'; bg = '#f0faf4'; }
-  else if (score >= 60) { label = 'Approved';         color = '#4a7a2a'; bg = '#f4faf0'; }
-  else if (score >= 45) { label = 'Tolerated';        color = '#a0762a'; bg = '#faf8ec'; }
-  else if (score >= 30) { label = 'Contested';        color = '#8a4010'; bg = '#fdf6ec'; }
-  else                  { label = 'Legitimacy Crisis';color = '#8b1a1a'; bg = '#fdf4f4'; }
+  // Label / colour / bg / multipliers / flags — via the single band derivation
+  // (legitimacyBandFor), the chokepoint assembleSettlement's patch also uses.
+  const band = legitimacyBandFor(score);
 
-  // Governing authority performance multiplier
-  const govMultiplier =
-    score >= 75 ? 1.30 :
-    score >= 60 ? 1.15 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 0.80 :
-                  0.60;
-
-  // Criminal faction inverse multiplier (crime fills the vacuum governance leaves)
-  const crimMultiplier =
-    score >= 75 ? 0.75 :
-    score >= 60 ? 0.90 :
-    score >= 45 ? 1.00 :
-    score >= 30 ? 1.15 :
-                  1.30;
-
+  // Key order preserved verbatim (this object is JSON.stringify-hashed in the
+  // generator golden master): score, label, color, bg, breakdown, then the rest.
   return {
     score,
-    label,
-    color,
-    bg,
+    label:              band.label,
+    color:              band.color,
+    bg:                 band.bg,
     breakdown: { prosperity: pContrib, safety: sContrib, defense: dContrib, food: fContrib },
-    govMultiplier,
-    crimMultiplier,
-    isEndorsed:        score >= 75,
-    isApproved:        score >= 60,
-    isTolerated:       score >= 45 && score < 60,
-    isContested:       score >= 30 && score < 45,
-    isLegitimacyCrisis:score <  30,
+    govMultiplier:      band.govMultiplier,
+    crimMultiplier:     band.crimMultiplier,
+    isEndorsed:         band.isEndorsed,
+    isApproved:         band.isApproved,
+    isTolerated:        band.isTolerated,
+    isContested:        band.isContested,
+    isLegitimacyCrisis: band.isLegitimacyCrisis,
     // Governing authority fracture — internal cohesion breaks below 30
-    governanceFractured: score < 30,
+    governanceFractured: band.governanceFractured,
   };
 }
 
@@ -146,7 +194,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
  * Classify the criminal faction's relationship with formal power structures.
  * Three inflection points based on criminal power vs enforcement capacity.
  *
- * Birth-scale reconciliation with the play-time capture ladder
+ * Wave 7 #1 — birth-scale reconciliation with the play-time capture ladder
  * (domain/corruption.js CAPTURE_LADDER, same vocabulary):
  *  • The criminal finder EXCLUDES the governing seat. 'Corrupt Council' /
  *    'Shadow Senate' carry category 'criminal' (the 'Corrupt'/'Shadow'
@@ -262,7 +310,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio <= 0.5) {
       type = 'subordinate';
-      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}. Command authority is unambiguous. Soldiers enforce rather than govern.`;
+      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}. Command authority is unambiguous: soldiers enforce rather than govern.`;
     } else if (ratio <= 0.85) {
       type = 'symbiotic';
       narrative = `${gov.faction} commands, ${mil.faction} executes. A functional partnership: each depends on the other remaining effective.`;
@@ -346,7 +394,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${gov.faction} is a front. ${crim.faction} makes the actual decisions on taxation, law enforcement priority, and appointments. The fiction of legitimate governance is maintained because it is useful.`;
     } else if (crimCapture === 'corrupted') {
       type = 'corrupted';
-      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable: profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
+      narrative = `${crim.faction} has systematic arrangements with key figures in ${gov.faction}. Enforcement decisions are predictable. Profitable crimes go unpunished, competitive threats are selectively prosecuted.`;
     } else if (crimCapture === 'equilibrium') {
       type = 'tense';
       narrative = `${gov.faction} tolerates ${crim.faction} because suppression costs more than it saves. ${crim.faction} avoids open provocation because it needs the governance structure to remain functional enough to extract from.`;
@@ -397,7 +445,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
     } else if (crimCapture === 'equilibrium') {
       type = 'tense';
-      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace, but managed coexistence.`;
+      narrative = `${mil.faction} knows where ${crim.faction} operates. ${crim.faction} knows the watch rotation. Neither pushes the other hard enough to force a confrontation. This is not peace. It is managed coexistence.`;
     } else {
       type = 'competitive';
       narrative = `${mil.faction} actively hunts ${crim.faction}. Arrests are real, enforcement is genuine. ${crim.faction} uses superior local knowledge and social embeddedness to absorb pressure and reconstitute.`;
@@ -457,9 +505,10 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
 
 // Largest-remainder renormalisation to integer points summing to exactly 100.
-// File-local copy of powerGenerator's renormalizeFactionPower: factionDynamics
-// must NOT import from powerGenerator (powerGenerator already imports THIS module,
-// so importing back would close an import cycle the architecture test bans).
+// File-local copy of power/rulingStructure's renormalizeFactionPower:
+// factionDynamics must NOT import from the power modules (rulingStructure
+// already imports THIS module, so importing back would close an import cycle
+// the architecture test bans).
 function renormTo100(factions) {
   if (!factions || !factions.length) return;
   const total = factions.reduce((s, f) => s + (f.power || 0), 0);

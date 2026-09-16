@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 
-import { normalizeAndAnnotateFactions } from '../../src/generators/powerGenerator.js';
+import { normalizeAndAnnotateFactions } from '../../src/generators/power/rulingStructure.js';
 
 /**
  * Regression: normalizeAndAnnotateFactions must not emit NaN on a degenerate roster.
@@ -9,7 +9,7 @@ import { normalizeAndAnnotateFactions } from '../../src/generators/powerGenerato
  * sibling renormalizeFactionPower guards the empty / zero-power cases (`!length`,
  * `total <= 0`); this function did not — so a non-empty roster whose powers sum to 0
  * produced `x / 0 = NaN`, and Math.round(NaN) = NaN corrupted every share, the
- * governing/power sort, and the rivalry annotation. The guard makes it degrade to 0
+ * governing/power sort, and the standing annotation. The guard makes it degrade to 0
  * shares instead, matching the sibling's contract. (Surfaced by the codebase audit.)
  */
 describe('normalizeAndAnnotateFactions — degenerate-roster guard', () => {

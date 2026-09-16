@@ -19,10 +19,9 @@
  * reflects the result, so there is nothing here to spoof or replay. It never
  * navigates into the app (that would race the original window's auto-login).
  */
-import { Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
-import { GOLD, SECOND, MUTED, FS, SP } from '../theme.js';
+import { SECOND, MUTED, FS, SP } from '../theme.js';
 import { AuthPageShell, Button, Alert } from './authUI.jsx';
 import { t } from '../../copy/index.js';
 
@@ -44,7 +43,6 @@ export default function ConfirmEmailPage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         {authLoading ? (
           <>
-            <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <p role="status" aria-live="polite" style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
               {t('auth.confirm.confirming')}
             </p>

@@ -344,6 +344,10 @@ async function checkLoadParameters() {
 async function generateMapOnLoad() {
   await applyStyleOnLoad(); // apply previously selected default or custom style
   await generate(); // generate map
+  // SettlementForge fork patch: generate() catches its own errors and returns normally, leaving pack reset
+  // to an empty/partial object. Running the draw calls on that pack throws again (unhandled) behind the
+  // handled "please retry" dialog. Bail out cleanly when generation did not produce a usable pack.
+  if (!pack?.cells?.i?.length) return;
   applyLayersPreset(); // apply saved layers preset and reder layers
   drawLayers();
   fitMapToScreen();
@@ -358,7 +362,9 @@ function focusOn() {
 
   const fromMGCG = params.get("from") === "MFCG" && document.referrer;
   if (fromMGCG) {
-    if (params.get("seed").length === 13) {
+    // SettlementForge fork patch: guard the null seed. `?from=MFCG` with no seed param made params.get("seed")
+    // null, so `.length` threw a TypeError (an unhandled rejection here, outside generate()'s try/catch).
+    if (params.get("seed")?.length === 13) {
       // show back burg from MFCG
       const burgSeed = params.get("seed").slice(-4);
       params.set("burg", burgSeed);
@@ -400,6 +406,13 @@ function focusOn() {
 
 let isAssistantLoaded = false;
 function toggleAssistant() {
+  // SettlementForge fork patch: FMG's "Assistant" loads a remote SaaS chat widget — libs/openwidget.min.js
+  // appends <script src="https://cdn.openwidget.com/openwidget.js"> to <head> under azgaar's org id — onto
+  // our token-bearing auth+payment origin, and its chats route to azgaar's account. That is a third-party
+  // remote-code surface, not ours, so the load is disabled. Upstream code is left intact below the return for
+  // easy re-enable / upgrade reconciliation. (The /map/ CSP script-src is 'self'-only, so flipping it from
+  // Report-Only to enforced is the complementary origin-level closure.) Re-enabling is an owner decision.
+  return;
   const assistantContainer = byId("chat-widget-container");
   const showAssistant = byId("azgaarAssistant").value === "show";
 
@@ -593,12 +606,13 @@ void (function addDragToUpload() {
           _types = Array.prototype.slice.call(e.dataTransfer.types);
         }
       } catch (_) {}
-      console.log('[sfBridge] drop types:', _types);
+      // SettlementForge fork patch: removed the unconditional debug console.* traces that leaked the
+      // settlement id/name, raw drop coordinates and the posted message to the console on EVERY drag-drop
+      // (no DEV guard). The error-path console.warn calls below are kept (they fire only on failure).
       var sfPayload = e.dataTransfer && e.dataTransfer.getData
         ? e.dataTransfer.getData('application/settlementforge')
         : '';
       if (sfPayload) {
-        console.log('[sfBridge] sf drop payload:', sfPayload);
         var sfData = null;
         try { sfData = JSON.parse(sfPayload); } catch (_) { sfData = null; }
         if (sfData && sfData.id) {
@@ -607,7 +621,6 @@ void (function addDragToUpload() {
             : { left: 0, top: 0 };
           var sx = e.clientX - rect.left;
           var sy = e.clientY - rect.top;
-          console.log('[sfBridge] drop coords raw:', { clientX: e.clientX, clientY: e.clientY, rectLeft: rect.left, rectTop: rect.top, sx: sx, sy: sy });
           var mapPt = null;
           try {
             var _s2m = window.__sfScreenToMap;
@@ -615,7 +628,6 @@ void (function addDragToUpload() {
           } catch (err) {
             console.warn('[sfBridge] screenToMap threw:', err);
           }
-          console.log('[sfBridge] mapPt:', mapPt, 'screenToMapAvailable:', typeof window.__sfScreenToMap);
           if (mapPt) {
             var syntheticBurgId = 'sf_' + sfData.id + '_' + Date.now().toString(36);
             var cellId = null;
@@ -634,19 +646,12 @@ void (function addDragToUpload() {
                 y: mapPt.y,
                 cellId: cellId,
               };
-              console.log('[sfBridge] posting to parent:', msg);
-              // Same-origin parent (the React app serves /map/ from itself).
-              // Targeting our own origin avoids leaking placement events to
-              // any third-party that might frame us in the future.
-              if (window.parent) {
-                try {
-                  window.parent.postMessage(msg, window.location.origin);
-                } catch (e) {
-                  // window.location.origin can be 'null' inside a sandboxed
-                  // iframe (e.g. file://). Fall back to '*' only when we
-                  // can't compute a usable origin — never as the default.
-                  window.parent.postMessage(msg, '*');
-                }
+              // sf-origin.js owns the exact parent-origin handshake. Route this
+              // one FMG-native drop path through the same closure as sf-bridge;
+              // if the contract did not initialize, fail closed.
+              var __sfOriginContract = window.__sfBridgeOrigin;
+              if (__sfOriginContract && typeof __sfOriginContract.postToParent === 'function') {
+                __sfOriginContract.postToParent(msg);
               }
             } catch (err) {
               console.warn('[sfBridge] postMessage failed:', err);
@@ -655,7 +660,7 @@ void (function addDragToUpload() {
             console.warn('[sfBridge] no mapPt — drop ignored');
           }
         } else {
-          console.warn('[sfBridge] sf drop had no sfData.id:', sfData);
+          console.warn('[sfBridge] sf drop ignored: payload missing id'); // SettlementForge fork patch: don't echo the payload
         }
         return;
       }
@@ -792,7 +797,7 @@ function setSeed(precreatedSeed) {
     const first = !mapHistory[0];
     const params = new URL(window.location.href).searchParams;
     const urlSeed = params.get("seed");
-    if (first && params.get("from") === "MFCG" && urlSeed.length === 13) seed = urlSeed.slice(0, -4);
+    if (first && params.get("from") === "MFCG" && urlSeed?.length === 13) seed = urlSeed.slice(0, -4); // SettlementForge fork patch: guard null urlSeed (?from=MFCG with no seed threw before aleaPRNG init)
     else if (first && urlSeed) seed = urlSeed;
     else seed = generateSeed();
   } else {

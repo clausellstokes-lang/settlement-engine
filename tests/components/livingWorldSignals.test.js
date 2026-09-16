@@ -94,6 +94,22 @@ describe('settlementSignals — self-gating', () => {
     expect(model.standing).toEqual({ id: 's-peace', wins: 3, losses: 1, score: 2 });
   });
 
+  it('mixed numeric/string ids preserve fresh war and disposition signals', () => {
+    const worldState = {
+      tick: 4,
+      deployments: { 8: { targetId: 7, sinceTick: 4, role: 'siege' } },
+      dispositionStats: { 7: { wins: 2, losses: 1, score: 1 } },
+    };
+    const model = settlementSignals({
+      settlement: { ...peacefulTown, id: 7 },
+      settlementId: '7',
+      worldState,
+    });
+
+    expect(model.war).toMatchObject({ besiegedBy: ['8'], fresh: true });
+    expect(model.standing).toEqual({ id: '7', wins: 2, losses: 1, score: 1 });
+  });
+
   it('occupation WITHOUT an active siege still marks war.occupied (front torn down by conquest)', () => {
     // Conquest deletes the siege front, so settlementWarStatus goes null — but the
     // occupation ledger persists across ticks. The Occupied pip must survive that.
@@ -166,5 +182,47 @@ describe('healthPip + needsAttention', () => {
   it('null settlement → no pip, not needing attention', () => {
     expect(healthPip(null)).toBeNull();
     expect(needsAttention(null)).toBe(false);
+  });
+});
+
+/**
+ * DESTRUCTION IS DECIDED BY THE CALLER — AND THIS FILE PINS THAT CONTRACT.
+ *
+ * `deriveSystemState` bands a LIVING settlement's four dimensions. A settlement the
+ * canon records as destroyed still carries the blob it had when it stood, so the
+ * derivation bands it happily and every CONSUMER must suppress it — otherwise the
+ * Library row prints "Stable" beside its own Destroyed rubric (the defect
+ * DestroySettlementControl.jsx recorded as deliberately deferred), and the toolbar's
+ * severity sort and attention filter, which read the same value, can float a town
+ * that no longer exists.
+ *
+ * ⚠ THE GUARD DELIBERATELY DOES NOT LIVE HERE, AND THAT IS LOAD-BEARING. "Destroyed"
+ * is canon on the SAVE ROW — settlementSlice's destroySavedSettlement applies
+ * domain/events/mutateEntities.js's `destroySettlement`, which stamps
+ * `status: 'destroyed'` onto the settlement of a saved row — and a bare settlement
+ * blob passed to this pure model has no library canon attached to ask. Every reader
+ * in the app therefore asks the ROW: SettlementCard's `alreadyDestroyed`,
+ * heraldRegister's `isDestroyedRow`, LibraryToolbar's two call sites.
+ *
+ * ⛔ A guard placed inside `healthPip` ALSO REDS A GOVERNED GATE. The
+ * reader-with-no-writer scan (scripts/check-observed-shape-readers.mjs) measured a
+ * NEW `status on settlement` row for this file — "1994 findings" against a frozen
+ * 1993 — because the GENERATION corpus never destroys anything, so the writer is
+ * invisible to it. The row is banked for the two files that legitimately carry it
+ * (heraldRegister.js, lineageClaim.js) and the ratchet may never add a third.
+ * These arms exist so nobody "tidies" the guard back down here.
+ */
+describe('healthPip does NOT itself know about destruction (the caller must)', () => {
+  const destroyedTown = { ...peacefulTown, status: 'destroyed' };
+
+  it('bands a destroyed settlement exactly as it bands a standing one', () => {
+    // Not an endorsement — a PIN on where the guard belongs. Consumers are pinned
+    // in settlementCardSignals.test.jsx and libraryToolbar.test.js.
+    expect(healthPip(destroyedTown)).toEqual(healthPip(peacefulTown));
+    expect(healthPip(peacefulTown)).not.toBeNull();
+  });
+
+  it('a standing settlement is untouched by any status value', () => {
+    expect(healthPip({ ...peacefulTown, status: 'active' })).toEqual(healthPip(peacefulTown));
   });
 });

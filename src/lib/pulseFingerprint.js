@@ -255,7 +255,11 @@ const RULE_TOGGLES = [
 // The complete set of legal rule keys — changed_keys is filtered to this so a
 // stray non-rule string (or smuggled prose) can never pass through, even though
 // the real call site only ever supplies Object.keys() of a rules patch.
-const RULE_KEYS = new Set([...RULE_TOGGLES, 'propagationMode', 'intensity', 'migrationMode']);
+// MG-2: `realmMagicDefault` joins the legal-key set (so a rules patch naming it
+// survives the changed_keys filter) but deliberately NOT RULE_TOGGLES — it is a
+// string enum, and every member of that list is emitted as a boolean `=== true`.
+// Its VALUE rides the enum field below, the twin of spatialUsage's `realm_magic`.
+const RULE_KEYS = new Set([...RULE_TOGGLES, 'propagationMode', 'intensity', 'migrationMode', 'realmMagicDefault']);
 
 export function extractSimulationRules(rules, changedKeys) {
   const r = rules || {};
@@ -265,6 +269,7 @@ export function extractSimulationRules(rules, changedKeys) {
     propagation_mode: enumStr(r.propagationMode),
     intensity: enumStr(r.intensity),
     migration_mode: enumStr(r.migrationMode),
+    realm_magic: enumStr(r.realmMagicDefault),
     toggles,
     changed_keys: arr(changedKeys).filter(k => RULE_KEYS.has(k)).sort(),
   };

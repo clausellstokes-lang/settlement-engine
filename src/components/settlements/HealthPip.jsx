@@ -4,27 +4,29 @@
  * health band (from deriveSystemState via healthPip()), paired with the
  * "Needs attention" sort key that floats strained/critical settlements up.
  *
- * Always derivable (pure function of the settlement, like the dossier's promoted
- * ReadSystemStateBar) — this is NOT gated like the living-world row, because a
- * peaceful town still has a health band. It is deliberately understated: a quiet
- * "Stable" dot reads the same as a card with no living world, so a peaceful card
- * keeps its current clean appearance.
- *
- * Pure presentational over healthPip().
+ * DORMANCY-QUIET: the caller only renders this dot when the worst band reaches
+ * the attention threshold (Vulnerable/Critical) — a peaceful, healthy town shows
+ * NO pip, so its card stays byte-identical to today. The component itself is a
+ * pure projection over healthPip() and renders nothing for a null pip.
  */
 
 import { FS, sans } from '../theme.js';
+import SurveyorGlossary from '../guidance/SurveyorGlossary.jsx';
 
 /**
  * @param {{ pip: ReturnType<typeof import('./livingWorldSignals.js').healthPip> }} props
  */
 export default function HealthPip({ pip }) {
   if (!pip) return null;
+  // W-GUIDE-2 §6: the band word is a "what am I reading?" glossary affordance
+  // (stability-band term). This replaces the native title= teaching tooltip —
+  // one migration off the shrink-only title= census — with the uniform in-place
+  // glossary card. Honesty-gated: if the band has no glossary entry, the word
+  // renders as plain text.
   return (
     <span
       data-testid="health-pip"
       data-band={pip.band}
-      title={`Health: ${pip.band}. Worst of resilience, volatility, threat, and resource pressure, on a four-band scale from Critical up to Stable.`}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         fontSize: FS.xs, fontWeight: 700, fontFamily: sans, color: pip.color,
@@ -34,7 +36,7 @@ export default function HealthPip({ pip }) {
         aria-hidden
         style={{ width: 8, height: 8, borderRadius: '50%', background: pip.color, flexShrink: 0, display: 'inline-block' }}
       />
-      {pip.band}
+      <SurveyorGlossary id={`stability-${String(pip.band).toLowerCase()}`}>{pip.band}</SurveyorGlossary>
     </span>
   );
 }

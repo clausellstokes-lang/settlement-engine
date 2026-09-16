@@ -21,23 +21,13 @@
  * Pure presentational. No store, no rng, no wall clock, no mutation.
  */
 
-import { Activity, BookOpen, CalendarClock, Globe2, MapPin, Sparkles, Swords } from 'lucide-react';
 
+import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import {
-  BODY,
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  GOLD,
-  GOLD_TXT,
-  INK,
-  R,
-  SECOND,
-  SP,
-  sans,
-} from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_TXT, INK, SECOND, SP, sans } from '../theme.js';
+
+/** Weeks in the durable year — the same calendar humanizeEngineTokens keeps. */
+const WEEKS_PER_YEAR = 52;
 
 const SECTION_KEYS = Object.freeze(['worldClock', 'dashboard', 'chronicle', 'pantheon', 'warNetwork']);
 
@@ -50,10 +40,10 @@ function human(value) {
 }
 
 /** A small uppercase section heading with a leading glyph (Inspector scent). */
-function SectionHead({ Icon, children }) {
+function SectionHead({ children }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-      {Icon && <Icon size={13} color={GOLD} aria-hidden />}{children}
+      {children}
     </div>
   );
 }
@@ -63,7 +53,7 @@ function Chip({ children, title }) {
   return (
     <span
       title={title}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, borderRadius: R.sm, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}
     >
       {children}
     </span>
@@ -93,12 +83,15 @@ function WorldClockSection({ worldClock }) {
   const season = titleCase(calendar.season) || 'Spring';
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={CalendarClock}>World Clock</SectionHead>
+      <SectionHead>World Clock</SectionHead>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
         <Chip title="In-world year">Year {year}</Chip>
         <Chip title="In-world month">Month {month}</Chip>
         <Chip title="In-world season">{season}</Chip>
-        <Chip title="Simulation tick">Tick {tick}</Chip>
+        {/* §69.3: the raw simulation counter is FORBIDDEN on a public share. The
+            week within the year is the datum the tick actually carried, said in
+            the reader's own unit and in the sanctioned span idiom. */}
+        <Chip title="In-world week. One tick is one week; a year is 52 weeks.">Week {(tick % WEEKS_PER_YEAR) + 1} of 52</Chip>
       </div>
     </section>
   );
@@ -118,7 +111,7 @@ function DashboardSection({ dashboard }) {
   if (ruleChips.length === 0) return null;
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={Globe2}>State of the Realm</SectionHead>
+      <SectionHead>State of the Realm</SectionHead>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
         {ruleChips.map(chip => <Chip key={chip}>{chip}</Chip>)}
       </div>
@@ -132,9 +125,9 @@ function ChronicleTick({ entry }) {
   const names = Array.isArray(entry?.affectedSettlementNames) ? entry.affectedSettlementNames : [];
   if (headlines.length === 0) return null;
   return (
-    <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.sm, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
+    <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
       <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-        Tick {Math.max(0, Math.floor(Number(entry?.tick) || 0))}
+        {tickCalendarDetailLabel(Math.max(0, Math.floor(Number(entry?.tick) || 0)))}
       </div>
       {headlines.map((h, i) => (
         <div key={i}>
@@ -150,7 +143,7 @@ function ChronicleTick({ entry }) {
       ))}
       {names.length > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
-          <MapPin size={10} color={GOLD} aria-hidden /> {names.slice(0, 4).join(', ')}{names.length > 4 ? ` +${names.length - 4}` : ''}
+          {names.slice(0, 4).join(', ')}{names.length > 4 ? ` +${names.length - 4}` : ''}
         </div>
       )}
     </article>
@@ -167,7 +160,7 @@ function ChronicleSection({ chronicle }) {
   if (ticks.length === 0) return null;
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={BookOpen}>Chronicle</SectionHead>
+      <SectionHead>Chronicle</SectionHead>
       <div style={{ display: 'grid', gap: 6 }}>
         {ticks.map((entry, i) => <ChronicleTick key={entry?.tick ?? i} entry={entry} />)}
       </div>
@@ -181,7 +174,7 @@ function DeityRow({ deity }) {
   const wins = Math.max(0, Math.floor(Number(deity?.wins) || 0));
   const losses = Math.max(0, Math.floor(Number(deity?.losses) || 0));
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 10px', border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 10px', border: `1px solid ${BORDER2}`, background: CARD }}>
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {deity?.name || 'Unnamed faith'}
       </span>
@@ -204,7 +197,7 @@ function PantheonSection({ pantheon }) {
   for (const d of deities) (byTier[d?.tier] || byTier.cult).push(d);
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={Sparkles}>Pantheon</SectionHead>
+      <SectionHead>Pantheon</SectionHead>
       {TIER_ORDER.map(tier => byTier[tier].length > 0 && (
         <div key={tier} style={{ display: 'grid', gap: 5 }}>
           <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -224,7 +217,7 @@ function SiegeRow({ siege }) {
     ? `${coalition.slice(0, 2).join(', ')} +${coalition.length - 2}`
     : coalition.join(' and ');
   return (
-    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.sm, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
       <strong>{siege?.targetName || 'A settlement'}</strong> under siege
       {named ? <span style={{ color: BODY }}> by {named}</span> : null}
     </div>
@@ -243,7 +236,7 @@ function WarNetworkSection({ warNetwork }) {
   if (sieges.length === 0 && tradeWars.length === 0 && channels.length === 0) return null;
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={Swords}>War and Network</SectionHead>
+      <SectionHead>War and Network</SectionHead>
       {sieges.length > 0 && (
         <div style={{ display: 'grid', gap: 5 }}>
           {sieges.map((s, i) => <SiegeRow key={s?.targetId || i} siege={s} />)}
@@ -253,7 +246,7 @@ function WarNetworkSection({ warNetwork }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
           {tradeWars.map((w, i) => (
             <Chip key={w?.prizeId || i} title={`${w?.winnerName || 'A power'} seized ${w?.buyerName || 'a market'}`}>
-              <Globe2 size={11} color={GOLD} aria-hidden /> {w?.commodityLabel || 'Trade war'}
+              {w?.commodityLabel || 'Trade war'}
             </Chip>
           ))}
         </div>
@@ -285,6 +278,21 @@ const SECTION_RENDERERS = {
 };
 
 /**
+ * §807(c) — does a section have anything to render for this snapshot? Answered
+ * through the SAME renderer self-gates the panel itself uses (never a second
+ * spelling of a section's emptiness), so a header tab's presence can never
+ * disagree with what the panel would actually paint.
+ * @param {Record<string, any> | null | undefined} snapshot
+ * @param {string} key one of the SECTION_KEYS
+ * @returns {boolean}
+ */
+export function sectionHasContent(snapshot, key) {
+  if (!snapshot || typeof snapshot !== 'object') return false;
+  const renderer = SECTION_RENDERERS[key];
+  return !!renderer && renderer(snapshot) != null;
+}
+
+/**
  * @param {Object} props
  * @param {Record<string, any> | null} [props.snapshot]  the pre-sanitized public
  *   world snapshot (worldSnapshotPublic shape: worldClock, chronicle, pantheon,
@@ -313,10 +321,9 @@ export default function CampaignStatePanel({ snapshot, sections }) {
   return (
     <section
       data-testid="campaign-state-panel"
-      style={{ display: 'grid', gap: SP.lg, border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg }}
+      style={{ display: 'grid', gap: SP.lg, border: `1px solid ${BORDER}`, background: CARD, padding: SP.lg }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Activity size={15} color={GOLD} aria-hidden />
         <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 900 }}>
           The living world
         </h2>

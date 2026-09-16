@@ -48,9 +48,10 @@ describe('pressure model — condition matching by archetype id', () => {
     const idx = indexFor([item('bare'), item('war', [{ archetype: 'war_pressure' }])]);
 
     expect(idx.get('war', 'conflict').score).toBeCloseTo(idx.get('bare', 'conflict').score + 0.18, 10);
-    expect(idx.get('war', 'conflict').reasons.join(' ')).toContain('war_pressure');
+    expect(idx.get('war', 'conflict').reasons.join(' ')).toContain('war pressure');
+    expect(idx.get('war', 'conflict').reasons.join(' ')).not.toContain('war_pressure');
     expect(idx.get('war', 'defense').score).toBeCloseTo(idx.get('bare', 'defense').score + 0.16, 10);
-    expect(idx.get('war', 'defense').reasons.join(' ')).toContain('war_pressure');
+    expect(idx.get('war', 'defense').reasons.join(' ')).toContain('war pressure');
   });
 
   test('siege_lifted is a recovery condition — it must not read as an active siege', () => {
@@ -74,7 +75,8 @@ describe('pressure model — condition matching by archetype id', () => {
     const idx = indexFor([item('bare'), foodCrisis, trustCrisis]);
 
     expect(idx.get('foodCrisis', 'food').score).toBeCloseTo(idx.get('bare', 'food').score + 0.18, 10);
-    expect(idx.get('foodCrisis', 'food').reasons.join(' ')).toContain('custom_crisis');
+    expect(idx.get('foodCrisis', 'food').reasons.join(' ')).toContain('custom crisis');
+    expect(idx.get('foodCrisis', 'food').reasons.join(' ')).not.toContain('custom_crisis');
     expect(idx.get('foodCrisis', 'conflict').score).toBeCloseTo(idx.get('bare', 'conflict').score, 10);
     expect(idx.get('trustCrisis', 'food').score).toBeCloseTo(idx.get('bare', 'food').score, 10);
   });
@@ -87,8 +89,8 @@ describe('pressure model — condition matching by archetype id', () => {
     expect(idx.get('vassal', 'trade').score).toBeCloseTo(idx.get('bare', 'trade').score + 0.16, 10);
     expect(idx.get('vassal', 'economy').score).toBeCloseTo(idx.get('bare', 'economy').score + 0.14, 10);
     // The reason strings name the real archetype.
-    expect(idx.get('vassal', 'trade').reasons.join(' ')).toContain('vassal_extraction');
-    expect(idx.get('vassal', 'economy').reasons.join(' ')).toContain('vassal_extraction');
+    expect(idx.get('vassal', 'trade').reasons.join(' ')).toContain('vassal extraction');
+    expect(idx.get('vassal', 'economy').reasons.join(' ')).toContain('vassal extraction');
     // Zero conflict (and defense) pressure: tribute is not a war.
     expect(idx.get('vassal', 'conflict').score).toBeCloseTo(idx.get('bare', 'conflict').score, 10);
     expect(idx.get('vassal', 'defense').score).toBeCloseTo(idx.get('bare', 'defense').score, 10);
@@ -114,5 +116,19 @@ describe('pressure model — condition matching by archetype id', () => {
     expect(idx.get('d', 'food').score).toBeCloseTo(idx.get('pd', 'food').score + 0.12, 10);
     expect(idx.get('d', 'food').reasons.join(' ')).toContain('supplier is in a food crisis');
     expect(idx.get('pd', 'food').reasons.join(' ')).not.toContain('supplier is in a food crisis');
+  });
+
+  test('condition-derived reader reasons contain no raw schema spelling', () => {
+    const idx = indexFor([item('mixed', [
+      { archetype: 'war_pressure' },
+      { archetype: 'vassal_extraction' },
+      { archetype: 'custom_crisis', affectedSystems: ['public_legitimacy'] },
+    ])]);
+
+    for (const kind of KINDS) {
+      const reasons = idx.get('mixed', kind).reasons.join(' ');
+      expect(reasons, `${kind} reason`).not.toMatch(/_/);
+      expect(reasons, `${kind} reason`).not.toMatch(/[a-z][A-Z]/);
+    }
   });
 });

@@ -12,9 +12,9 @@
  * function is caught before it leaves the machine.
  *
  * Fail-OPEN on a missing toolchain, by design: a contributor without deno installed
- * is not blocked — it SKIPS with a loud notice, and CI's deno-tests job still gates
- * the actual deploy. So it strengthens the pre-push gate for anyone with deno without
- * breaking anyone without it.
+ * is not blocked — it SKIPS with a loud notice, while CI's deno-tests job still
+ * blocks on both the production type-check and the behavioral suite. So it strengthens
+ * the pre-push gate for anyone with deno without breaking anyone without it.
  */
 import { spawnSync } from 'node:child_process';
 
@@ -24,16 +24,16 @@ function hasDeno() {
 }
 
 if (!hasDeno()) {
-  console.warn('[check:edge-behavior] deno not found on PATH — SKIPPING edge behavioral tests.');
-  console.warn('[check:edge-behavior] Install deno to run them locally; CI\'s deno-tests job still gates deploy.');
+  console.warn('[check:edge-behavior] deno not found on PATH — SKIPPING edge type-check and behavioral tests.');
+  console.warn('[check:edge-behavior] Install deno to run them locally; CI\'s deno-tests job still gates both legs.');
   process.exit(0);
 }
 
 for (const task of ['check:edge', 'test:edge']) {
   const r = spawnSync('deno', ['task', task], { stdio: 'inherit' });
   if (r.status !== 0) {
-    console.error(`\n[check:edge-behavior] \`deno task ${task}\` FAILED — edge behavior is broken.`);
+    console.error(`\n[check:edge-behavior] \`deno task ${task}\` FAILED — the edge gate is red.`);
     process.exit(r.status || 1);
   }
 }
-console.log('[check:edge-behavior] edge behavioral tests passed.');
+console.log('[check:edge-behavior] edge type-check and behavioral tests passed.');

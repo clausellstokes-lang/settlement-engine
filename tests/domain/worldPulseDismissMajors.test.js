@@ -24,7 +24,7 @@ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKer
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 

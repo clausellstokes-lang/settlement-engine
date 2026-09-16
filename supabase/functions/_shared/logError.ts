@@ -20,9 +20,15 @@
  * The line is intentionally a plain console.error so it lands in the existing
  * Supabase function-log pipeline with no new infra; the JSON shape is the contract
  * a future log drain / alert rule keys on.
+ *
+ * PII is scrubbed BY POLICY, not by per-call discipline: the `error` message and every
+ * `extra` string value pass through redact() (supabase/functions/_shared/log.ts) before
+ * emit, so an email/IP/token that reaches this logger is masked (security-2).
  */
+import { redact, redactFields } from "./log.ts";
 
-/** Normalize any thrown value to a plain message string (no stack, no PII). */
+/** Normalize any thrown value to a plain message string (stack-free). Any PII the message
+ *  carries is masked by logError via redact() before the line is emitted. */
 function toMessage(error: unknown): string {
   if (error instanceof Error) return error.message;
   if (typeof error === "string") return error;
@@ -53,9 +59,9 @@ export function logError(
         level: "error",
         fn,
         user: user ?? null,
-        error: toMessage(error),
+        error: redact(toMessage(error)),
         ts: new Date().toISOString(),
-        ...extra,
+        ...redactFields(extra),
       }),
     );
   } catch {

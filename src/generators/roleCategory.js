@@ -15,6 +15,9 @@
  */
 
 import { institutionMatchesKeyword } from './computeActiveChains.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
 
 // ─── Role → category keyword map ──────────────────────────────────────────────
 // Each category lists the role-name keywords that imply it. The map is grouped by
@@ -161,6 +164,10 @@ const CATEGORY_DETECTORS = Object.freeze({
 export function institutionInCategory(inst, category) {
   const det = CATEGORY_DETECTORS[category];
   if (!det || !inst) return false;
+  // Current custom metadata is presentation-only in the manifest. Custom
+  // mechanics must enter through registered fields, never by borrowing native
+  // category/tag/name classification.
+  if (isMaterializedCustomContent(inst)) return false;
   const group = groupOf(inst);
   if (det.groups.includes(group)) return true;
   const tags = tagsOf(inst);
@@ -201,6 +208,7 @@ export function institutionCategoryFlags(institutions = []) {
  */
 export function isCommerceGuild(inst) {
   if (!inst) return false;
+  if (isMaterializedCustomContent(inst)) return false;
   if (institutionInCategory(inst, 'criminal')) return false;
   const tags = tagsOf(inst);
   if (tags.includes('guild')) return true;

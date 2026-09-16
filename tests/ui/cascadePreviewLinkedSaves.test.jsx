@@ -21,7 +21,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 
 // previewCascade is pure; stub it to a minimal, warning-free delta so the
 // only rendered warning-ish block under test is the "Linked saves" row.
-vi.mock('../../src/domain/pendingEdits.js', () => ({
+vi.mock('../../src/domain/pendingEditsPreview.js', () => ({
   previewCascade: () => ({
     summaryLines: [],
     downstreamCounts: { npcs: 0, factions: 0, hooks: 0 },

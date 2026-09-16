@@ -77,6 +77,29 @@ describe('shared edge CORS — Vercel deploy/preview (the second motivating bug)
   it('rejects an unrelated vercel.app project (different team scope)', () => {
     expect(isAllowedOrigin('https://someone-else-other-team.vercel.app')).toBe(false);
   });
+
+  // W-R2-TRUST (backend-functions-3): the bare-suffix `endsWith` was spoofable —
+  // .vercel.app project names are a global first-come namespace, so an attacker's
+  // project named `evil-settlement-forge` yields the production alias
+  // `evil-settlement-forge.vercel.app`, which ended with `-settlement-forge.vercel.app`
+  // and was WRONGLY allowed. The tightened rule requires the full preview shape
+  // (our project prefix + a generated hash/git-branch middle + the team suffix),
+  // which a bare production alias cannot forge.
+  it('rejects the confused-suffix spoof: an attacker project named *-settlement-forge', () => {
+    expect(isAllowedOrigin('https://evil-settlement-forge.vercel.app')).toBe(false);
+  });
+
+  it('rejects a bare project alias that merely ends in the team suffix (no generated middle)', () => {
+    // `<project>.vercel.app` with no deploy-hash/git-branch segment — not a real
+    // preview URL under our team.
+    expect(isAllowedOrigin('https://settlementforge-settlement-forge.vercel.app')).toBe(false);
+    expect(isAllowedOrigin('https://foo-settlement-forge.vercel.app')).toBe(false);
+  });
+
+  it('rejects a short/garbage middle that is neither a 9-char hash nor git-<branch>', () => {
+    expect(isAllowedOrigin('https://settlementforge-x-settlement-forge.vercel.app')).toBe(false);
+    expect(isAllowedOrigin('https://settlementforge-abc-settlement-forge.vercel.app')).toBe(false);
+  });
 });
 
 describe('shared edge CORS — explicit hosts and localhost', () => {

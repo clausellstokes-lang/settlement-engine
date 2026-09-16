@@ -24,17 +24,20 @@ const TIER_ORDER_MAGIC = ['thorp','hamlet','village','town','city','metropolis']
 export function applyMagicSubstitution(activeChains, traditions, magicPriority, tier) {
   // Dead-magic guard: at magic 0 (resolveConfig zeroes the dial when
   // config.magicExists === false) no tradition can substitute — druid groves,
-  // blessed granaries, divine healing, and Fabricate are all magic. Internal so
+  // blessed granaries, divine healing, and arcane fabrication are all magic. Internal so
   // every caller is covered regardless of how it built `traditions`.
   if (!(magicPriority > 0)) return;
   const tierIdxMC = TIER_ORDER_MAGIC.indexOf(tier);
 
   activeChains.forEach(chain => {
     const cid = chain.chainId;
+    const lacksAvailableInput = chain.resourceInputCondition
+      ? chain.resourceInputCondition === 'depleted'
+      : chain.resourceDepleted;
 
     // ── Food chains ─────────────────────────────────────────────────────────
     if (FOOD_CHAIN_IDS.includes(cid) && tierIdxMC >= 1 &&
-        (chain.status === 'impaired' || chain.resourceDepleted)) {
+        (chain.status === 'impaired' || lacksAvailableInput)) {
       const isFishing = cid === 'fishing' || cid === 'river_fishing';
       const isBrewing = cid === 'brewing';
       const isHunting = cid === 'hunting';
@@ -61,8 +64,8 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
       if (traditions.arcane && magicPriority >= 50) {
         const arcRate = isFishing ? 0.20 : isHunting ? 0.25 : 0.30;
         recovery = Math.max(recovery, arcRate);
-        note = note || (isFishing ? 'Conjure Animals produces fish; minor supplement'
-                      : 'Arcane Plant Growth provides minor food supplement');
+        note = note || (isFishing ? 'Conjured game produces fish; minor supplement'
+                      : 'Arcane quickening of growth provides minor food supplement');
       }
       if (recovery > 0) {
         chain.status      = recovery >= 0.55 ? 'magically_sustained' : 'vulnerable';
@@ -74,7 +77,7 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
 
     // ── Timber chains ───────────────────────────────────────────────────────
     if (TIMBER_CHAIN_IDS.includes(cid) && tierIdxMC >= 1 &&
-        (chain.status === 'impaired' || chain.resourceDepleted)) {
+        (chain.status === 'impaired' || lacksAvailableInput)) {
       let recovery = 0, note = '';
       if (traditions.druid) {
         recovery = Math.max(recovery, 0.55);
@@ -82,7 +85,7 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
       }
       if (traditions.arcane && magicPriority >= 55) {
         recovery = Math.max(recovery, 0.25);
-        note = note || 'Fabricate provides processed goods from alternative sources';
+        note = note || 'Arcane fabrication provides processed goods from alternative sources';
       }
       if (recovery > 0) {
         chain.status      = recovery >= 0.5 ? 'magically_sustained' : 'vulnerable';
@@ -104,10 +107,10 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
 
     // ── Extraction chains ───────────────────────────────────────────────────
     if (EXTRACT_CHAIN_IDS.includes(cid) && tierIdxMC >= 3 &&
-        (chain.status === 'impaired' || chain.resourceDepleted) &&
+        (chain.status === 'impaired' || lacksAvailableInput) &&
         traditions.arcane && magicPriority >= 65) {
       chain.status      = 'vulnerable';
-      chain.magicNote   = 'Arcane Fabricate and Transmute Rock partially offset depleted extraction';
+      chain.magicNote   = 'Arcane fabrication and stone-shaping partially offset depleted extraction';
       chain.magicRecovery = 0.25;
       chain.exportable  = false;
     }

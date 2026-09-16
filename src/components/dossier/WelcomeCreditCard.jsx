@@ -23,11 +23,11 @@
 import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { INK, sans, serif_, FS, SP, R, swatch, BODY } from '../theme.js';
+import { INK, sans, serif_, FS, SP, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
-const VIOLET = swatch['#7B4FCF'];
-const VIOLET_BG = swatch['#EBE2FA'];
+const SLATE = swatch['#5A6E82'];
+const SLATE_BG = swatch['#E4E9EE'];
 
 const DISMISS_KEY = 'sf.welcomeCredit.dismissed';
 
@@ -95,7 +95,11 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         if (error) return;
         if (!cancelled && data === true) {
           setWelcomeUnspent(true);
-          Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, { userId });
+          // userId rides the hashed opts lane (the signupCompleted pattern) so
+          // the raw Supabase id never lands in analytics props (never mirrored
+          // raw to a provider, never stored beside the pseudonymous actor_id) —
+          // finding components-dossier-library-1.
+          Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, {}, { userId });
         }
       } catch { /* network failure — just don't show the card */ }
     })();
@@ -110,7 +114,8 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
   const onNarrate = async () => {
     try {
       await requestNarrative?.(saveId);
-      Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, { userId });
+      // Hashed opts lane, not props (see WELCOME_CREDIT_GRANTED above).
+      Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, {}, { userId });
     } catch (e) {
       console.warn('[WelcomeCreditCard] requestNarrative failed:', e);
     }
@@ -132,22 +137,21 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
     <div style={{
       margin: `${SP.md}px ${SP.lg}px`,
       padding: SP.md,
-      background: `linear-gradient(135deg, ${VIOLET_BG}88, ${VIOLET_BG}33)`,
-      borderLeft: `3px solid ${VIOLET}`,
-      borderRadius: R.md,
+      background: `linear-gradient(135deg, ${SLATE_BG}88, ${SLATE_BG}33)`,
+      borderLeft: `3px solid ${SLATE}`,
       fontFamily: sans,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
         <div style={{
           width: 36, height: 36, borderRadius: '50%',
-          background: VIOLET_BG, color: VIOLET,
+          background: SLATE_BG, color: SLATE,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           fontSize: FS.xl,
         }}>✦</div>
         <div style={{ flex: 1 }}>
           <div style={{
             fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
-            textTransform: 'uppercase', color: VIOLET,
+            textTransform: 'uppercase', color: SLATE,
           }}>
             Welcome credit · on us
           </div>
@@ -171,11 +175,11 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         alignItems: 'center', gap: SP.sm,
       }}>
         <div style={{ flex: 1, fontSize: FS.xs, color: BODY }}>
-          <div>Cost: <s>3 credits</s></div>
-          <div style={{ fontWeight: 700, color: VIOLET }}>This one: free</div>
+          <div>Cost: <s>5 credits</s></div>
+          <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
         </div>
         <Button variant="ai" size="md" onClick={onNarrate}>
-          ✦ Narrate this town
+          Narrate this town
         </Button>
         <Button variant="ghost" size="sm" onClick={onLater}>
           Maybe later

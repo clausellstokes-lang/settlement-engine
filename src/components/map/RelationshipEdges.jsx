@@ -14,10 +14,11 @@
 
 import { useMemo } from 'react';
 import { useStore } from '../../store';
-// Single source of truth shared with LayersPanel / MapLegend / RoutesToolbar so
-// the drawn line, the legend, and the filter chips never disagree. WAR_FAITH_STYLE
-// is the SAME export the legend reads, so the siege/faith front the map draws and
-// the key that explains it can never use different colors (P11).
+// Single source of truth shared with MapLegend so the drawn line, the legend, and
+// the war/faith front never disagree. WAR_FAITH_STYLE is the SAME export the legend
+// reads, so the siege/faith front the map draws and the key that explains it can
+// never use different colors (P11). REL_EDGE_STYLE keeps OUR existing static-edge
+// hues (byte-identical authored-neighbour edges).
 import { REL_EDGE_STYLE as STYLE, WAR_FAITH_STYLE } from './relationshipEdgeStyle.js';
 
 export default function RelationshipEdges() {

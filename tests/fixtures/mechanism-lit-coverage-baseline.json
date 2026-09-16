@@ -1,0 +1,56 @@
+{
+  "comment": "E-H per-mechanism lit-walkthrough baseline — the CURRENT lit-coverage gap, SHRINK-ONLY. Each entry is a worldPulse mechanism (module) or simulation-rules flag with NO standing flag-ON lit proof (no direct-import lit test, no LIT_COVERED_BY registry reference in tests/property/mechanismLitCoverage.test.js). Strike entries as lit tests land; never add one except as a deliberate, vetoable burn-down decision. The walker fails on ANY drift in either direction.",
+  "reFrozen": {
+    "at": "af8815e9261977b8dfa3e7ee248cbe6989e522d6",
+    "on": "2026-08-07",
+    "by": "the walker-census lane (S12-W)",
+    "why": "⛔ A DELIBERATE, VETOABLE ADMISSION OF DEBT — NOT A WIN, AND NOT A SILENT ONE. Both RATCHET rows of tests/property/mechanismLitCoverage.test.js were sitting in scripts/.test-ratchet-baseline.json, where a failing row is TOLERATED. Each of those rows is ONE assertion over an OPEN, source-derived population (`expect(uncoveredMechanisms).toEqual(baseline.mechanisms)`), so tolerating the row tolerated the whole population: a 24th uncovered mechanism, or a second uncovered flag, would have produced the byte-identical failing verdict and reddened NOTHING. A failing TEST is debt; a failing WALKER is a DISABLED GUARD (CONTRIBUTING.md, 'The gate'). The census rows are gone and the gap is INVENTORIED here instead, by exact name and in the walker's own order, so a NEW uncovered mechanism or flag reds again while the 23 + 1 known ones stay green.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms / uncoveredFlags computation inside an integrity-counted `git archive` of committed af8815e9 (6,196 tracked paths in, 6,196 out, `git status` clean) — never over the live shared tree, which holds an owner session's uncommitted work (THE ARCHIVE-CENSUS LAW). Names and ORDER are taken from the walker's own output, never transcribed from a review.",
+    "notBurnedDown": "The 23 modules and the one flag are INVENTORIED, not repaired. Writing their lit walkthroughs is a separate wave; this lane restores the guard, it does not clear the habitat. The list is SHRINK-ONLY: the walker reds if a name gains coverage and is not struck (an un-banked win) exactly as it reds if a new name appears.",
+    "introducedAt": "1137f935ee4c1d27ac1f515e2500ee82821e5cef"
+  },
+  "amended": {
+    "at": "22cedb1b0dcc00fbd217f5b3b6312b6394f2f767",
+    "on": "2026-08-15",
+    "by": "lane TE14, the IN-1C-A terminal, under OWNER_DECISION_QUEUE.md \u00a785.2",
+    "what": "ONE entry added: informationReceiptPools. The list grows 23 -> 24, and this block is the reason that growth is a REGISTRATION rather than a silent re-record.",
+    "why": "\u26d4 A DELIBERATE, VETOABLE ADMISSION OF DEBT, RULED BY THE CHAIR RATHER THAN TAKEN BY THE LANE. IN-1c-a mints the estate's FIFTH phrased-kind registry family, and informationReceiptPools.js is its annex-verbatim pool leaf: nine mirror_standing_line variants, ZERO imports, and no standing flag-ON lit proof of its own. The module is genuinely DARK at this landing, reached through informationNews.js's registry rather than driven by a lit walkthrough, so an inventory row is the honest record and a coverage claim would be a false one. \u26d4 It was NOT taken as an implementer's convenience: this file is named in IN-1C-A's INDEX keep-out cell AND in the packet's \u00a714 STOP list, the terminal STOPPED on it, and \u00a785.2 is the ruling that released it.",
+    "measurement": "MEASURED by this walker's own uncoveredMechanisms computation, never transcribed from a review: at base d5a6c009 the RATCHET (modules) arm is GREEN at 23 names; at I1 22cedb1b and at this terminal it reports those identical 23 PLUS informationReceiptPools. The name's spelling and its position between envoyInterceptionStage and lineageNews are taken from that output, which is the walker's own order.",
+    "notBurnedDown": "informationReceiptPools is INVENTORIED, not repaired. Writing its lit walkthrough is a separate wave and IN-1c-b is the natural home. The list stays SHRINK-ONLY: strike this name the moment a lit proof lands, in that same commit.",
+    "law": "\u2b50 THE FIRST PRICED INSTANCE OF THE REGISTRY-MINT TWO-OBLIGATION LAW (\u00a785.4): a registry family that mints a seeded pick AND a pool module costs TWO estate-wide census rows, this one and a habitForkRegistry.js classification row (HBF-33). Neither was priced in IN-1C-A's packet, and both were found only by the full gate. A compiler prices both up front."
+  },
+  "shrunk": {
+    "on": "2026-08-31",
+    "by": "lane T4 · SEAT-B (W-SEAT SEAT-5, the liberation un-install)",
+    "what": "ONE entry STRUCK: applyWorldPulseOccupationAuthority. The list shrinks 24 → 23. This is the direction the walker exists to force — 'a baseline entry that GAINS coverage also fails, forcing the baseline to shrink and locking the win' — so it is a BANKED WIN rather than an admission, and it needs no chair ruling the way the 23 → 24 growth above did.",
+    "why": "SEAT-5 gave the module its first standing flag-ON lit proof. tests/domain/occupationLiberationUninstall.test.js drives liftOccupationAuthority and conquestExtractionCondition with foreignSeatEnabled LIT, against a roster built by running the module's own installOccupationAuthority — so the coverage is a real lit walkthrough of the module's whole install/un-install surface, not an import that happens to touch it. The module had carried NO lit proof since the inventory was frozen: its install half shipped inside THE DECOMPOSITION WAVE's file-4 split and nothing ever exercised it flag-ON."
+  },
+  "mechanisms": [
+    "applyWorldPulseBetrayal",
+    "applyWorldPulseFactionRoster",
+    "applyWorldPulsePrimitives",
+    "applyWorldPulseRelationshipGraph",
+    "applyWorldPulseStressorMerge",
+    "envoyErrandEncounterWriter",
+    "envoyErrandEvidence",
+    "envoyErrandParlay",
+    "envoyInterceptionStage",
+    "informationReceiptPools",
+    "lineageNews",
+    "npcDmVerbAuthority",
+    "npcDmVerbRecords",
+    "peaceTermsAppraisal",
+    "peaceTermsCarriedSheet",
+    "peaceTermsCoalition",
+    "peaceTermsDocument",
+    "peaceTermsGraph",
+    "peaceTermsOverlay",
+    "peaceTermsPrimitives",
+    "secrecyTradeFactor",
+    "sovereigntyReceiptPools",
+    "warReceiptPools"
+  ],
+  "flags": [
+    "warEconomyEnabled"
+  ]
+}

@@ -4,7 +4,7 @@ import { evaluateWarLayer, computeSackTransfer, SIEGE_MAX_AGE } from '../../src/
 import { computeSackFoodTransfer } from '../../src/domain/worldPulse/foodStockpile.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /**
  * Sack & forage P3 (flag-gated, default OFF): a CONQUEST carries off a fraction of the

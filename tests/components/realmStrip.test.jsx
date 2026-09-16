@@ -92,3 +92,36 @@ describe('dominantFaith — tie-break', () => {
     expect(dominantFaith(campaign, []).name).toBe('Hi');
   });
 });
+
+// ── §69.3 / §113: the player-facing strip carries no raw counter ─────────────
+// Both arms mount the real strip first and read its RENDERED text, because a
+// "no raw counter survives" negative asserted against an unmounted component
+// passes for the wrong reason — and this component self-hides on a dormant
+// world, which is exactly the shape that would make it vacuous.
+describe('RealmStrip — the week reads as a span, never as an engine counter', () => {
+  const canonized = (tick, campaignExtra = {}) => ({
+    name: 'The March',
+    worldState: { canonizedAt: '2026-01-01T00:00:00Z', tick, calendar: { season: 'spring', year: 1 } },
+    ...campaignExtra,
+  });
+
+  it('states the week within the year in the sanctioned span idiom', () => {
+    const { container } = render(<RealmStrip campaign={canonized(60)} settlements={[]} />);
+    const text = container.textContent || '';
+    expect(text).toContain('Year 1'); // the strip really mounted
+    expect(text).toContain('week 9 of 52');
+    expect(/·\s*week\s+60\b/.test(text), `raw counter survived: ${text}`).toBe(false);
+  });
+
+  it('reads a news age as prose, singular and plural both byte-identical to the spelling replaced', () => {
+    const single = render(
+      <RealmStrip campaign={canonized(5, { wizardNews: { currentTick: 5, entries: [{ tick: 4 }] } })} settlements={[]} />,
+    );
+    expect(single.container.textContent || '').toContain('News 1 week ago');
+    cleanup();
+    const many = render(
+      <RealmStrip campaign={canonized(5, { wizardNews: { currentTick: 5, entries: [{ tick: 2 }] } })} settlements={[]} />,
+    );
+    expect(many.container.textContent || '').toContain('News 3 weeks ago');
+  });
+});

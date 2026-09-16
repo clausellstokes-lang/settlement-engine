@@ -23,9 +23,12 @@ create index if not exists idx_profiles_email_lower
   on public.profiles((lower(email)))
   where email is not null;
 
-update public.profiles
-  set role = 'admin'
-  where lower(coalesce(email, '')) = 'clausellstokes@aol.com';
+-- Owner bootstrap is NOT auto-granted by a hardcoded email (finding F4). A fresh
+-- deploy is fail-closed: the operator promotes their own account to 'admin'
+-- explicitly (SQL, or the admin-actions edge function's OWNER_EMAIL env seam).
+-- The former `update ... set role='admin' where email='<personal>'` leaked the
+-- maintainer's email into a public repo AND handed admin to whoever registered
+-- that address on any fork. Removed here; privilege now derives from role only.
 
 create or replace function public.current_user_is_privileged()
 returns boolean
@@ -37,10 +40,7 @@ as $$
   select exists (
     select 1 from public.profiles
     where id = auth.uid()
-      and (
-        role in ('developer', 'admin')
-        or lower(coalesce(email, '')) = 'clausellstokes@aol.com'
-      )
+      and role in ('developer', 'admin')
   );
 $$;
 

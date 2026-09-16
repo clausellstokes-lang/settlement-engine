@@ -29,12 +29,11 @@
  * no raw button elements, under the 600-line ratchet.
  */
 import { useEffect, useState } from 'react';
-import { Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
 import { supabase, isConfigured, hasActiveRecoveryFlow, consumeRecoveryFlow } from '../../lib/supabase.js';
-import { GOLD, SECOND, FS, SP } from '../theme.js';
+import { SECOND, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
 import {
   AuthPageShell, FooterLink, Input, Button as AuthCTAButton, Alert, Button,
@@ -136,7 +135,6 @@ export default function SetNewPasswordPage() {
     >
       {phase === 'checking' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
-          <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
           <p role="status" aria-live="polite" style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
             {t('auth.confirm.confirming')}
           </p>

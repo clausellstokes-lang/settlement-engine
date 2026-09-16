@@ -8,16 +8,13 @@
  *   - Idempotent: normalize(normalize(s)) === normalize(s) for all valid s.
  *   - Tolerant: missing fields default to safe values; unknown fields pass
  *     through untouched (forward compatibility).
- *   - Additive, not reversible: there is intentionally NO `denormalizeSettlement`
- *     reverse adapter. Rather than rename fields and rely on a reverse pass,
- *     normalize writes the unified value AND preserves every legacy alias in
- *     place (see step 3), so legacy consumers keep reading the same field with
- *     no round-trip needed. (Earlier drafts envisioned a reverse adapter; the
- *     preserve-in-place approach made it unnecessary, so it was never built.)
+ *   - Lossless on round-trip with `denormalizeSettlement`: any field that
+ *     gets renamed in `normalize` is restored to its legacy alias by the
+ *     reverse adapter, so legacy consumers keep reading the same field.
  *   - Cheap. This runs at save / load / PDF / AI boundaries. O(n) over
  *     settlement size, no deep traversal of nested generator output.
  *
- * Current behavior:
+ * Current behavior (Phase 6 / Tier 1.3):
  *
  *   1. Stamps version fields if absent (schemaVersion, simulationVersion,
  *      generatorVersion). Existing values are preserved — never overwritten.
@@ -28,11 +25,9 @@
  *
  *   3. Resolves duplicate field names (FIELD_ALIASES from the schema
  *      file). For `stressors`, reads from any of `stressors / stress /
- *      stresses` and writes the unified value to `stressors`. Legacy
- *      aliases are PRESERVED, not deleted, so any code still reading the
- *      old name keeps working. `stressTypes` is DELIBERATELY NOT an alias
- *      — it holds type STRINGS, not stressor objects; see the exclusion
- *      rationale on FIELD_ALIASES in settlement.schema.js. Do not add it.
+ *      stresses / stressTypes` and writes the unified value to
+ *      `stressors`. Legacy aliases are PRESERVED, not deleted, so any
+ *      code still reading the old name keeps working.
  *
  *   4. Defaults canonical containers that future consumers expect:
  *      `activeConditions`, `simulationTrace`, `aiOverlays` default to
@@ -62,7 +57,8 @@ import { migrateSettlementToLatest } from './settlementMigrations.js';
  * Hash a seed string into a stable, opaque id. Same seed → same id.
  * Not cryptographically strong — just a deterministic short identifier
  * that survives reruns of the same seed.
- * @param {any} seed
+ * @param {unknown} seed
+ * @returns {string}
  */
 function idFromSeed(seed) {
   const s = String(seed);
@@ -94,18 +90,20 @@ function idFromSeed(seed) {
  * Only lengths (not contents) are read so the fingerprint stays cheap and does
  * not drift when e.g. an NPC inside the list is renamed — it moves only when the
  * settlement's structural composition actually changes.
- * @param {any} s
+ * @param {Record<string, unknown> | null | undefined} s
  * @returns {number[]}
  */
 function structuralFingerprint(s) {
-  const len = (/** @type {any} */ v) => (Array.isArray(v) ? v.length : 0);
+  /** @param {unknown} v @returns {number} */
+  const len = (v) => (Array.isArray(v) ? v.length : 0);
+  const holder = /** @type {{ npcs?: unknown, institutions?: unknown, powerStructure?: { factions?: unknown }, factions?: unknown, neighbourNetwork?: unknown, history?: { historicalEvents?: unknown }, config?: { nearbyResources?: unknown } } | null | undefined} */ (s);
   return [
-    len(s?.npcs),
-    len(s?.institutions),
-    len(s?.powerStructure?.factions ?? s?.factions),
-    len(s?.neighbourNetwork),
-    len(s?.history?.historicalEvents),
-    len(s?.config?.nearbyResources),
+    len(holder?.npcs),
+    len(holder?.institutions),
+    len(holder?.powerStructure?.factions ?? holder?.factions),
+    len(holder?.neighbourNetwork),
+    len(holder?.history?.historicalEvents),
+    len(holder?.config?.nearbyResources),
   ];
 }
 
@@ -123,7 +121,10 @@ function structuralFingerprint(s) {
 // the id stays as stable as a content hash can be against renames. A settlement
 // with a real id or _seed never reaches here, so the blast radius is imported/mock
 // data only.
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {Record<string, unknown> | null | undefined} settlement
+ * @returns {string}
+ */
 function contentId(settlement) {
   return idFromSeed(JSON.stringify({
     name: settlement?.name ?? null,
@@ -136,11 +137,14 @@ function contentId(settlement) {
 /**
  * Resolve a canonical field value by checking the canonical key first,
  * then each declared alias. Returns the first defined value found.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} canonicalKey
+ * @param {Record<string, unknown>} settlement
+ * @param {string} canonicalKey
+ * @returns {unknown}
  */
 function resolveAliased(settlement, canonicalKey) {
   if (settlement[canonicalKey] !== undefined) return settlement[canonicalKey];
+  /** @type {readonly string[]} */
+  // FIELD_ALIASES is a frozen literal without an index signature; typing it Record<string, string[]> belongs in settlement.schema.js
   const aliases = /** @type {Record<string, string[]>} */ (FIELD_ALIASES)[canonicalKey] || [];
   for (const alias of aliases) {
     if (settlement[alias] !== undefined) return settlement[alias];
@@ -152,8 +156,8 @@ function resolveAliased(settlement, canonicalKey) {
  * Convert a settlement (any shape — legacy, partially-canonical, fully
  * canonical) into a canonical settlement.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {Object} New object — input is not mutated.
+ * @param {Record<string, unknown> | null | undefined} settlement
+ * @returns {Record<string, unknown>} New object — input is not mutated.
  */
 export function normalizeSettlement(settlement) {
   if (!settlement || typeof settlement !== 'object') {
@@ -207,19 +211,20 @@ export function normalizeSettlement(settlement) {
   if (!Array.isArray(out.aiOverlays))       out.aiOverlays       = [];
   if (out.userCanon == null || typeof out.userCanon !== 'object') out.userCanon = {};
 
-  // ── 5. Apply schema migrations ─────────────────────────────
+  // ── 5. Apply schema migrations (Tier 1.4) ─────────────────────────────
   // Older saved settlements may carry a lower schemaVersion than the
   // current SCHEMA_VERSION constant. Walk the migration chain so the
   // returned object matches the current shape regardless of when it
   // was generated.
-  return migrateSettlementToLatest(out);
+  return /** @type {Record<string, unknown>} */ (migrateSettlementToLatest(out));
 }
 
 /**
  * Whether a settlement appears to have been normalized at least once
  * (has version stamps and a stable id). Useful for short-circuiting
  * repeated normalize calls in hot paths.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {{ schemaVersion?: unknown, id?: unknown } | null | undefined} settlement
+ * @returns {boolean}
  */
 export function isNormalized(settlement) {
   return Boolean(

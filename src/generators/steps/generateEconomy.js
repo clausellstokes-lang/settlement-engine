@@ -7,7 +7,7 @@
  *
  * Economy step for the settlement generation pipeline.
  *
- * Ordering note: generatePower consumes economicState (prosperity
+ * Ordering note (Wave 4b): generatePower consumes economicState (prosperity
  * drives merchant-faction naming/caps and public legitimacy), and the
  * faction-institution pull consumes powerStructure — so the economy MUST be
  * computed once before factions exist. When factionCorrelationPass later
@@ -17,7 +17,7 @@
  * Services, spatial layout, and supply-chain traces are derived in
  * economyReconcilePass so they always describe the final roster.
  *
- * Emits structured supply-chain traces after the legacy
+ * Tier 4.3: emits structured supply-chain traces after the legacy
  * economic generator finishes (now from economyReconcilePass). Traces are
  * layered on top via deriveSupplyChainState — same Strangler Fig pattern
  * Phase 7 + 9 established. The generator itself is not refactored.
@@ -29,7 +29,10 @@ import { recordTrace } from '../../domain/trace.js';
 import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
-import { foldTradeCategories } from '../../domain/region/foldTradeCategories.js';
+import {
+  projectOwnedCustomTradeDirection,
+  resolveCustomTradeEndpointSemantics,
+} from '../../domain/content/customTradeEndpointProjection.js';
 
 /**
  * applyCustomTradeGoodsConfig — fold the EDITOR-authored trade-good input
@@ -110,8 +113,225 @@ export function applyCustomTradeGoodsConfig(economicState, customTradeGoods) {
 }
 
 /**
+ * Apply custom-good neighbour links and category folding to the CURRENT trade
+ * lists. Exported because reviewed custom-chain endpoints are not eligible for
+ * promotion until economyReconcilePass has the final service roster.
+ *
+ * The merge is deliberately incremental: computeEconomyState may already have
+ * projected editor-authored custom goods before final custom-chain endpoints
+ * arrive. Re-projecting must retain those links/member lists rather than
+ * replacing them with the later subset.
+ */
+export function projectCustomTradeSemantics(economicState, neighbourProfile) {
+  const registry = customDeps.registry();
+
+  // Name lookup remains a compatibility path for editor-authored labels and
+  // older saves. It is consulted only for labels already declared custom.
+  // Current reviewed-chain endpoints use immutable identity below.
+  const satisfiesCandidates = new Map();
+  for (const regCat of ['institutions', 'tradeGoods']) {
+    for (const entry of (registry.listCustom?.(regCat) || [])) {
+      if (entry.raw?.satisfies && entry.name) {
+        const key = String(entry.name).toLowerCase();
+        const candidates = satisfiesCandidates.get(key) || [];
+        candidates.push(entry.raw.satisfies);
+        satisfiesCandidates.set(key, candidates);
+      }
+    }
+  }
+  const satisfiesIndex = new Map(
+    [...satisfiesCandidates.entries()]
+      .filter(([, candidates]) => candidates.length === 1)
+      .map(([name, candidates]) => [name, candidates[0]]),
+  );
+
+  const priorLabels = economicState.customTradeLabels || {};
+  const priorExp = new Set(
+    (priorLabels.exports || [])
+      .map(label => String(label).toLowerCase()),
+  );
+  const priorImp = new Set(
+    (priorLabels.imports || [])
+      .map(label => String(label).toLowerCase()),
+  );
+  const endpointSidecars = economicState.customTradeEndpoints || {};
+  const nativeSidecars = economicState.nativeTradeLabels || {};
+  const exactExports = resolveCustomTradeEndpointSemantics(
+    endpointSidecars.exports,
+    registry,
+  );
+  const exactImports = resolveCustomTradeEndpointSemantics(
+    endpointSidecars.imports,
+    registry,
+  );
+  const foldedExports = projectOwnedCustomTradeDirection(
+    economicState.primaryExports,
+    {
+      endpoints: exactExports,
+      nativeLabels: Array.isArray(nativeSidecars.exports)
+        ? nativeSidecars.exports
+        : null,
+      priorCustom: priorExp,
+      legacySatisfies: satisfiesIndex,
+    },
+  );
+  const foldedImports = projectOwnedCustomTradeDirection(
+    economicState.primaryImports,
+    {
+      endpoints: exactImports,
+      nativeLabels: Array.isArray(nativeSidecars.imports)
+        ? nativeSidecars.imports
+        : null,
+      priorCustom: priorImp,
+      legacySatisfies: satisfiesIndex,
+    },
+  );
+
+  // Native reconciliation gets no authored override. Custom category bridges
+  // are evaluated separately from proven custom endpoint claims, so a native
+  // namesake can never inherit the custom definition's `satisfies` value.
+  /**
+   * @param {string[]} list
+   * @param {'exports'|'imports'} direction
+   * @param {Set<string>} priorCustom
+   */
+  const nativeTradeList = (list, direction, priorCustom) => {
+    const nativeLabels = nativeSidecars[direction];
+    if (Array.isArray(nativeLabels)) {
+      const nativeKeys = new Set(
+        nativeLabels.map(label => String(label).toLowerCase()),
+      );
+      return (list || []).filter(label => (
+        nativeKeys.has(String(label).toLowerCase())
+      ));
+    }
+    const customEndpointKeys = new Set(
+      (endpointSidecars[direction] || [])
+        .map(endpoint => String(endpoint?.label || '').toLowerCase())
+        .filter(Boolean),
+    );
+    return (list || []).filter(label => {
+      const key = String(label).toLowerCase();
+      return !priorCustom.has(key) && !customEndpointKeys.has(key);
+    });
+  };
+  const links = deriveTradeLinks(
+    nativeTradeList(
+      economicState.primaryExports,
+      'exports',
+      priorExp,
+    ),
+    nativeTradeList(
+      economicState.primaryImports,
+      'imports',
+      priorImp,
+    ),
+    neighbourProfile,
+  );
+  const customLinks = [];
+  for (const claim of foldedExports.semanticClaims) {
+    customLinks.push(...deriveTradeLinks(
+      [claim.label],
+      [],
+      neighbourProfile,
+      { satisfiesOf: () => claim.satisfies },
+    ));
+  }
+  for (const claim of foldedImports.semanticClaims) {
+    customLinks.push(...deriveTradeLinks(
+      [],
+      [claim.label],
+      neighbourProfile,
+      { satisfiesOf: () => claim.satisfies },
+    ));
+  }
+  const projectedLinks = [...links, ...customLinks];
+  if (projectedLinks.length) {
+    const seen = new Set();
+    economicState.tradeLinks = [
+      ...(economicState.tradeLinks || []),
+      ...projectedLinks,
+    ].filter(link => {
+      const key = [
+        link?.direction,
+        String(link?.good || '').toLowerCase(),
+        String(link?.partner || '').toLowerCase(),
+        String(link?.goodId || '').toLowerCase(),
+      ].join('|');
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  const mergeMembers = (before, added) => {
+    const merged = { ...(before || {}) };
+    for (const [category, members] of Object.entries(added || {})) {
+      const seen = new Set((merged[category] || []).map(value => String(value).toLowerCase()));
+      merged[category] = [
+        ...(merged[category] || []),
+        ...members.filter(value => {
+          const key = String(value).toLowerCase();
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        }),
+      ];
+    }
+    return merged;
+  };
+  const mergeLabels = (before, added) => {
+    const seen = new Set((before || []).map(value => String(value).toLowerCase()));
+    return [
+      ...(before || []),
+      ...added.filter(value => {
+        const key = String(value).toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }),
+    ];
+  };
+  const withoutFoldedMembers = (before, members) => {
+    const folded = new Set(
+      Object.values(members || {})
+        .flat()
+        .map(value => String(value).toLowerCase()),
+    );
+    return (before || []).filter(value => !folded.has(String(value).toLowerCase()));
+  };
+
+  if (Object.keys(foldedExports.members).length) {
+    economicState.primaryExports = foldedExports.labels;
+    economicState.customCategoryExports = mergeMembers(
+      economicState.customCategoryExports,
+      foldedExports.members,
+    );
+  }
+  if (Object.keys(foldedImports.members).length) {
+    economicState.primaryImports = foldedImports.labels;
+    economicState.customCategoryImports = mergeMembers(
+      economicState.customCategoryImports,
+      foldedImports.members,
+    );
+  }
+  if (foldedExports.custom.length || foldedImports.custom.length) {
+    economicState.customTradeLabels = {
+      exports: mergeLabels(
+        withoutFoldedMembers(priorLabels.exports, foldedExports.members),
+        foldedExports.custom,
+      ),
+      imports: mergeLabels(
+        withoutFoldedMembers(priorLabels.imports, foldedImports.members),
+        foldedImports.custom,
+      ),
+    };
+  }
+}
+
+/**
  * computeEconomyState — the full economicState derivation (legacy generator
- * + §14 custom-chain promotion + neighbour trade links + category folding).
+ * + neighbour trade links + category folding).
  *
  * Pure w.r.t. ctx except: threads neighbour bias into effectiveConfig
  * (idempotent) and consumes the ACTIVE step rng (via rngContext) inside
@@ -132,117 +352,27 @@ export function computeEconomyState(ctx) {
 
   const economicState = generateEconomicState(tier, institutions, tradeRoute, goodsToggles, effectiveConfig);
 
-  // §14 — surface the user's CONFIRMED custom supply chains (reviewed + named in
-  // the Compendium) in the dossier Economics/Trade section. Kept in a SEPARATE
-  // economicState.customChains field — display-only, NOT merged into
-  // activeChains — so they never perturb chain-impairment / depth math. A no-op
-  // (field left unset) when the user has confirmed none.
-  const confirmedChains = customDeps.confirmedSupplyChains?.() || [];
-  if (confirmedChains.length) {
-    // Codepoint-stable order, NOT localeCompare: customChains is part of the
-    // deterministic settlement output, so its array order must not vary by
-    // locale/ICU build for a given seed.
-    economicState.customChains = confirmedChains
-      .slice()
-      .sort((a, b) => {
-        const al = String(a.label || a.chainId || ''), bl = String(b.label || b.chainId || '');
-        return al < bl ? -1 : al > bl ? 1 : 0;
-      })
-      .map((c) => ({
-        chainId: c.chainId || null,
-        label: c.label || c.chainId || 'Custom chain',
-        status: c.status || 'running',
-        resource: c.resource || null,
-        processingInstitutions: Array.isArray(c.processingInstitutions) ? c.processingInstitutions : [],
-        outputs: Array.isArray(c.outputs) ? c.outputs : [],
-        isCustom: true,
-        source: 'custom',
-      }));
-
-    // §14 Phase 2 — promote each confirmed chain's trade endpoints into the
-    // REAL export/import lists: a chain output nobody locally consumes is an
-    // export; a required input nobody locally produces is an import. The labels
-    // are tracked in customTradeLabels so the dossier gold-tints those pills.
-    const labelOf = (e) => (typeof e === 'string' ? e : e?.label) || '';
-    const exp = new Set((economicState.primaryExports || []).map((x) => String(x).toLowerCase()));
-    const imp = new Set((economicState.primaryImports || []).map((x) => String(x).toLowerCase()));
-    const customExports = [];
-    const customImports = [];
-    for (const c of confirmedChains) {
-      const te = c.discovered?.tradeEndpoints || {};
-      const exports = Array.isArray(te.exports) ? te.exports.map(labelOf) : (Array.isArray(c.outputs) ? c.outputs : []);
-      const imports = Array.isArray(te.imports) ? te.imports.map(labelOf) : (Array.isArray(c.upstreamMissing) ? c.upstreamMissing : []);
-      for (const l of exports) {
-        const k = String(l || '').toLowerCase();
-        if (l && !exp.has(k)) { exp.add(k); customExports.push(l); }
-      }
-      for (const l of imports) {
-        const k = String(l || '').toLowerCase();
-        if (l && !imp.has(k)) { imp.add(k); customImports.push(l); }
-      }
-    }
-    if (customExports.length) economicState.primaryExports = [...(economicState.primaryExports || []), ...customExports];
-    if (customImports.length) economicState.primaryImports = [...(economicState.primaryImports || []), ...customImports];
-    if (customExports.length || customImports.length) {
-      economicState.customTradeLabels = { exports: customExports, imports: customImports };
-    }
-  }
+  // Reviewed custom chains are evaluated later in economyReconcilePass, after
+  // the FINAL institution, resource, and service rosters all exist. Confirmation
+  // is authorial review, not evidence that this settlement can run the chain.
 
   // Editor-authored trade goods (config.customTradeGoods — ADD/REMOVE_TRADE_GOOD
   // write it alongside their live economicState edits) join the lists HERE:
-  // after the chain-derived trade endpoints, before neighbour links + category
-  // folding, so authored goods participate in both and removals suppress
-  // derived labels before anything downstream can see them.
+  // before neighbour links + category folding, so authored goods participate
+  // in both. Active reviewed-chain endpoints join at the final-roster boundary;
+  // editor removals are re-applied there and retain the final say.
   applyCustomTradeGoodsConfig(economicState, effectiveConfig.customTradeGoods);
 
-  // §14 Phase 3b — good-level cross-settlement trade with the imported neighbour:
-  // record which of this settlement's exports/imports actually flow to/from the
-  // neighbour (canonical good matching) so the dossier can annotate them
-  // ("Raw dragonbone — from Stonehaven"). No-op when there's no neighbour, the
-  // relationship is hostile, or there's no overlap.
-  // Our custom goods/institutions' declared `satisfies` category, so the matcher
-  // can bridge a specific custom good to a neighbour's category-level demand.
-  const satisfiesIndex = new Map();
-  for (const regCat of ['institutions', 'tradeGoods']) {
-    for (const e of (customDeps.registry().listCustom?.(regCat) || [])) {
-      if (e.raw?.satisfies && e.name) satisfiesIndex.set(String(e.name).toLowerCase(), e.raw.satisfies);
-    }
-  }
-  const tradeLinks = deriveTradeLinks(economicState.primaryExports, economicState.primaryImports, neighbourProfile, {
-    satisfiesOf: (label) => satisfiesIndex.get(String(label).toLowerCase()) || null,
-  });
-  if (tradeLinks.length) economicState.tradeLinks = tradeLinks;
-
-  // §14 — fold custom-good export/import NAMES into their declared trade category
-  // so the Trade Profile shows one bucket ("Weapons & armour", incl. the good)
-  // rather than a pill per custom good. A good with no `satisfies` stays named;
-  // built-in trade labels are never folded (not in satisfiesIndex). Members ride
-  // along in customCategoryExports/Imports for the dossier "incl. …" + PDF. This
-  // runs AFTER deriveTradeLinks so neighbour bridging still sees the raw names.
-  const priorExp = new Set(((economicState.customTradeLabels?.exports) || []).map((s) => String(s).toLowerCase()));
-  const priorImp = new Set(((economicState.customTradeLabels?.imports) || []).map((s) => String(s).toLowerCase()));
-  const fExp = foldTradeCategories(economicState.primaryExports, satisfiesIndex, priorExp);
-  const fImp = foldTradeCategories(economicState.primaryImports, satisfiesIndex, priorImp);
-  // Only rewrite a list when a good actually folded into a category — keeps vanilla
-  // generations (no custom content) byte-identical (no incidental re-dedupe of
-  // built-in labels). customTradeLabels still tracks any custom labels for tinting.
-  if (Object.keys(fExp.members).length) {
-    economicState.primaryExports = fExp.labels;
-    economicState.customCategoryExports = fExp.members;
-  }
-  if (Object.keys(fImp.members).length) {
-    economicState.primaryImports = fImp.labels;
-    economicState.customCategoryImports = fImp.members;
-  }
-  if (fExp.custom.length || fImp.custom.length) {
-    economicState.customTradeLabels = { exports: fExp.custom, imports: fImp.custom };
-  }
+  // Custom labels participate in neighbour reconciliation before category
+  // folding. The same function runs once more for active reviewed-chain
+  // endpoints at the final-roster boundary.
+  projectCustomTradeSemantics(economicState, neighbourProfile);
 
   return economicState;
 }
 
 /**
- * emitChainTraces — one structured trace per active supply chain.
+ * emitChainTraces — one structured trace per active supply chain (Tier 4.3).
  *
  * Causes describe what activated the chain (resource availability,
  * processing institution, upstream chain); downstream describes which
@@ -341,9 +471,9 @@ export function emitChainTraces(ctx, economicState, tier, step = 'economyReconci
 
 registerStep('generateEconomy', {
   deps: ['stressConfirmPass', 'resolveNeighbour'],
-  reads: ['effectiveConfig', 'goodsToggles', 'institutions', 'neighbourEconBias', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces
+  reads: ['effectiveConfig', 'goodsToggles', 'institutions', 'neighbourEconBias', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['economicState'],
-  mutates: ['effectiveConfig'], // threads _neighbourEconBias/_neighbourEconMode onto effectiveConfig in place when a neighbour is bound
+  mutates: ['effectiveConfig'], // threads _neighbourEconBias/_neighbourEconMode onto effectiveConfig in place when a neighbour is bound (A+ P1.7)
   phase: 'economy',
 }, (ctx) => {
   return { economicState: computeEconomyState(ctx) };

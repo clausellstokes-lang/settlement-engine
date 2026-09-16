@@ -37,43 +37,6 @@ const isConfigured = !!(supabaseUrl && supabaseAnon) && !forceLocalData;
 // refresh attempts — one wins, the other sees a fresh token on retry.
 const noopLock = async (_name, _acquireTimeout, fn) => await fn();
 
-// ── Hang guard for unguarded Supabase network legs ───────────────────────────
-//
-// supabase-js data calls (.insert/.update/.select) and auth.signOut() have NO
-// built-in timeout. The noopLock above fixes the token-refresh LOCK hanging, but
-// the network legs themselves can still stall forever — a flaky connection, a
-// laptop sleep/wake mid-request, or an implicit token refresh that never settles
-// leaves the promise PERMANENTLY pending. Any UI awaiting it (the Save button,
-// the Sign-out action) then wedges with its loading flag stuck true, and the only
-// escape is a page refresh — which, for an unsaved dossier, destroys the work.
-//
-// withTimeout races the call against a timer that REJECTS with a coded error, so
-// the caller's existing catch/finally runs: the button re-enables and surfaces an
-// error instead of hanging. We reject (not resolve) so callers never mistake a
-// timed-out write for a successful one.
-export class TimeoutError extends Error {
-  constructor(ms, label) {
-    super(`${label || 'Request'} timed out after ${ms}ms`);
-    this.name = 'TimeoutError';
-    this.isTimeout = true;
-  }
-}
-
-/**
- * Guard a promise (or a supabase-js thenable builder) against hanging forever.
- * @param {Promise|PromiseLike} promise the awaitable to guard
- * @param {number} ms timeout in milliseconds (default 20s — generous so a slow
- *   but valid large-settlement insert or a cold edge function is not false-aborted)
- * @param {string} label human-readable name for the error message
- */
-export function withTimeout(promise, ms = 20000, label = 'Request') {
-  let timer;
-  const timeout = new Promise((_, reject) => {
-    timer = setTimeout(() => reject(new TimeoutError(ms, label)), ms);
-  });
-  return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timer));
-}
-
 // ── "Remember me off" → genuinely non-persistent session ─────────────────────
 //
 // Bug this fixes: signing in with persistSession:true + storage:localStorage and
@@ -126,27 +89,6 @@ export function setSessionPersistence(rememberMe) {
   } catch { /* storage unavailable — falls back to the localStorage default */ }
 }
 
-/**
- * Synchronous check: is there a persisted Supabase auth token in either store
- * (localStorage when "remember me" is on, sessionStorage otherwise)? Lets callers
- * decide "this visitor is definitely logged out" WITHOUT awaiting the async
- * session restore — a returning member always has a token, a fresh visitor never
- * does. Used by the root gate to route logged-out visitors to the landing with no
- * wait, while token-holders wait for validation so they never flash it.
- */
-export function hasStoredAuthToken() {
-  const has = (store) => {
-    try {
-      for (let i = 0; i < store.length; i++) {
-        const k = store.key(i);
-        if (k && k.startsWith('sb-') && k.includes('-auth-token')) return true;
-      }
-    } catch { /* storage unavailable */ }
-    return false;
-  };
-  return has(localStorage) || has(sessionStorage);
-}
-
 const authStorageAdapter = {
   getItem: (key) => {
     try { return (isSessionOnly() ? sessionStorage : localStorage).getItem(key); }
@@ -175,14 +117,12 @@ export const supabase = isConfigured
     })
   : null;
 
-// ── Recovery-flow flag ───────────────────────────────────────────────────────
-//
-// Supabase fires a single `PASSWORD_RECOVERY` event while detectSessionInUrl
-// processes the recovery link's hash. That async parse can complete BEFORE the
-// set-new-password page mounts and subscribes, so the event would be missed.
-// We register the listener HERE, synchronously after createClient — the earliest
-// possible point — and latch the fact in an in-memory module flag the page can
-// read on mount.
+// ── Password-recovery flow latch ────────────────────────────────────────────
+// A genuine PASSWORD_RECOVERY event (fired by detectSessionInUrl when the
+// recovery link's token is parsed on load) is the ONLY authorization the
+// set-new-password page trusts. It is latched here at client creation so a
+// pre-mount firing (the hash parse is async and may complete before the page
+// subscribes) is not lost, and read on mount.
 //
 // In-memory only: nothing sensitive is stored, and it never survives a reload —
 // so a forged URL or a stale tab cannot resurrect it. Fail-closed lifecycle:

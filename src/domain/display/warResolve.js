@@ -24,14 +24,46 @@ import {
   ARMY_DEPLOYED_CAPACITY_PENALTY,
 } from '../worldPulse/warDeployment.js';
 import { computeWarSentiment } from '../worldPulse/disposition.js';
+// W-FAITH F7c (the §866 docket): the temper seam — display reads the derivation,
+// never the retired stored temperamentAxis (W-F5 stage 2's own re-plumb, applied
+// to the last four display surfaces that still read the mirror).
+import { deityTemper } from '../worldPulse/deityAxes.js';
 import { resolveBlockadeBypassChannel } from '../worldPulse/foodStockpile.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from './warStatus.js';
 
-/** @param {any} a @param {any} b @returns {number} */
+/**
+ * @typedef {import('../worldPulse/pulseShapes.js').WorldState} WorldState
+ * @typedef {import('../worldPulse/pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('../settlement.schema.js').SimSettlement} Settlement
+ * @typedef {{ id?: string, name?: string, settlement?: Settlement }} SaveItem
+ * @typedef {{ currentCapacity?: number, facets?: Record<string, number|undefined> }} CapModel
+ * @typedef {{ storageMonths: number|null, deficitPct: number|null, bypassChannel: string|null, besieged: boolean, band: string, note: string|null }} SupplyRead
+ * @typedef {{ patron: { name: string|null, alignment: string|null, temper: string|null }, opposed: Array<{ besieger: string, deity: string|null, opposedOn: string[] }> }} FaithRead
+ * @typedef {{ government: string|null, governingFaction: { name: string|null, power: number }|null, figures: Array<{ name: string|null, role: string|null, temperament: string|null }> }} LeadershipRead
+ * @typedef {{
+ *   id: string,
+ *   name: string,
+ *   atWar: boolean,
+ *   besieged: boolean,
+ *   besieging: string[],
+ *   besiegedBy: string[],
+ *   resolve: { willScore: number, band: string, capitulating: boolean },
+ *   hope: { odds: number, band: string } | null,
+ *   supply: SupplyRead,
+ *   faith: FaithRead | null,
+ *   sentiment: { value: number, band: string },
+ *   warExhaustion: { scar: number, band: string },
+ *   leadership: LeadershipRead,
+ *   capacity: { offensive: number, homeDefense: number, coalitionOffensive: number },
+ * }} WarResolveSignal
+ */
+
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
-/** @param {any} v @param {number} fallback */
+/** @param {unknown} v @param {number} [fallback] @returns {number} */
 const num = (v, fallback = 0) => (Number.isFinite(Number(v)) ? Number(v) : fallback);
-const clamp = (/** @type {number} */ v, /** @type {number} */ lo, /** @type {number} */ hi) => Math.max(lo, Math.min(hi, v));
+/** @param {number} v @param {number} lo @param {number} hi @returns {number} */
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
 
 // ── Human bands (house voice — plain, unhurried). Each is a pure function of one signal. ──
 
@@ -68,17 +100,17 @@ function sentimentBand(v) {
 // the stockpile model uses, so the surface never claims a besieged circle-town is starving.
 
 /**
- * @param {any} settlement
- * @param {boolean} besieged
- * @returns {{ storageMonths: number|null, deficitPct: number|null, bypassChannel: ('teleport'|'airship'|null), besieged: boolean, band: string, note: string|null }}
+ * @param {Settlement} [settlement]
+ * @param {boolean} [besieged]
+ * @returns {SupplyRead}
  */
-function readSupply(settlement, besieged) {
+function readSupply(settlement, besieged = false) {
   const fs = settlement?.economicState?.foodSecurity || {};
   const storageMonthsRaw = Number(fs.storageMonths);
   const storageMonths = Number.isFinite(storageMonthsRaw) ? Math.max(0, storageMonthsRaw) : null;
   const deficitRaw = Number(fs?.stockpile?.effectiveDeficitPct ?? fs.deficitPct);
   const deficitPct = Number.isFinite(deficitRaw) ? clamp(deficitRaw, 0, 100) : null;
-  const bypassChannel = /** @type {'teleport'|'airship'|null} */ (resolveBlockadeBypassChannel(settlement));
+  const bypassChannel = settlement ? (resolveBlockadeBypassChannel(settlement) || null) : null;
   return {
     storageMonths,
     deficitPct,
@@ -105,9 +137,9 @@ function supplyBand({ storageMonths, deficitPct, bypassChannel, besieged }) {
 function supplyNote({ storageMonths, bypassChannel, besieged }) {
   const months = storageMonths == null ? null : Math.round(storageMonths);
   if (besieged) {
-    if (bypassChannel === 'teleport') return 'A teleportation circle runs beneath the siege lines — supplies arrive, and the blockade cannot touch them.';
+    if (bypassChannel === 'teleport') return 'A teleportation circle runs beneath the siege lines. Supplies arrive, and the blockade cannot touch them.';
     if (bypassChannel === 'airship') return 'Airships run the blockade at reduced throughput; the granary drains slowly rather than sharply.';
-    if (months != null) return `The granary stands alone against the blockade — roughly ${months} month${months === 1 ? '' : 's'} before famine.`;
+    if (months != null) return `The granary stands alone against the blockade: roughly ${months} month${months === 1 ? '' : 's'} before famine.`;
     return 'The granary stands alone against the blockade, and the roads are closed.';
   }
   if (bypassChannel === 'teleport') return 'A teleportation circle keeps trade flowing beyond the granary.';
@@ -120,9 +152,10 @@ function supplyNote({ storageMonths, bypassChannel, besieged }) {
 // aggressor is a holy last stand; a shared temperament is a war of like against like.
 
 /**
- * @param {any} settlement
- * @param {string[]} besiegedBy
- * @param {(id:any)=>any} [settlementOf]
+ * @param {Settlement} [settlement]
+ * @param {string[]} [besiegedBy]
+ * @param {(id: string) => (Settlement | null | undefined)} [settlementOf]
+ * @returns {FaithRead | null}
  */
 function readFaith(settlement, besiegedBy, settlementOf) {
   const deity = settlement?.config?.primaryDeitySnapshot;
@@ -130,7 +163,12 @@ function readFaith(settlement, besiegedBy, settlementOf) {
   const patron = {
     name: deity.name || null,
     alignment: deity.alignmentAxis || null,   // good | evil | neutral
-    temper: deity.temperamentAxis || null,     // warlike | peacelike | neutral
+    // W-FAITH F7c (the §866 docket): the temper comes from the SAME derivation
+    // the engine drives on (deityAxes.deityTemper — authored word wins, else the
+    // axes), never the retired stored mirror, so this read-model can no longer
+    // print a word the simulation disagrees with. Neutral says nothing — the
+    // same spelling the alignment/law fields already use here.
+    temper: displayTemper(deity),              // warlike | peacelike | null
   };
   /** @type {Array<{ besieger: string, deity: string|null, opposedOn: string[] }>} */
   const opposed = [];
@@ -139,29 +177,61 @@ function readFaith(settlement, besiegedBy, settlementOf) {
     if (!bd) continue;
     const opposedOn = [];
     if (isOpposite(patron.alignment, bd.alignmentAxis, 'good', 'evil')) opposedOn.push('alignment');
-    if (isOpposite(patron.temper, bd.temperamentAxis, 'warlike', 'peacelike')) opposedOn.push('temperament');
+    if (isOpposite(patron.temper, displayTemper(bd), 'warlike', 'peacelike')) opposedOn.push('temperament');
     if (opposedOn.length) opposed.push({ besieger: String(bid), deity: bd.name || null, opposedOn });
   }
   return { patron, opposed };
 }
 
+/** The engine's temper for a display surface: the derivation's word, with
+ *  neutral spelled as null (neutral says nothing — the lawAxis idiom).
+ * @param {{ authoredTemper?: string, temperamentAxis?: string, alignmentAxis?: string, lawAxis?: string } | null} [deity]
+ * @returns {string|null} */
+function displayTemper(deity) {
+  const temper = deityTemper(deity);
+  return temper && temper !== 'neutral' ? temper : null;
+}
+
 /** Are two axis values diametrically opposed (a↔b, either order)? */
-function isOpposite(/** @type {any} */ x, /** @type {any} */ y, /** @type {string} */ a, /** @type {string} */ b) {
+/** @param {unknown} x @param {unknown} y @param {string} a @param {string} b @returns {boolean} */
+function isOpposite(x, y, a, b) {
   return (x === a && y === b) || (x === b && y === a);
 }
 
 // ── Leadership — who holds the seat, and the figures whose temperament colours the resolve.
 
-/** @param {any} settlement */
+/** Importance rank: the seat-holder (pillar — Lord Mayor/High Priestess/Kingpin/
+ *  Archmagister) ranks above senior staff (key) above notable. (domain-readmodels-3) */
+const IMPORTANCE_RANK = /** @type {Readonly<Record<string, number>>} */ ({ pillar: 3, key: 2, notable: 1 });
+const INFLUENCE_RANK = /** @type {Readonly<Record<string, number>>} */ ({ high: 3, moderate: 2, low: 1 });
+
+/** @param {{ influence?: unknown } | null | undefined} n @returns {number} */
+function npcInfluenceRank(n) {
+  return INFLUENCE_RANK[String(n?.influence || '').toLowerCase()] || 0;
+}
+
+/** @param {Settlement} [settlement] @returns {LeadershipRead} */
 function readLeadership(settlement) {
-  const ps = settlement?.powerStructure || {};
-  const government = settlement?.config?.government || ps.government || null;
-  const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const gov = factions.find((/** @type {any} */ f) => f?.isGoverning) || null;
-  const figures = (Array.isArray(settlement?.npcs) ? settlement.npcs : [])
-    .filter((/** @type {any} */ n) => n?.importance === 'key' || n?.importance === 'notable')
+  const ps = settlement?.powerStructure;
+  const government = settlement?.config?.government || ps?.government || null;
+  const factions = Array.isArray(ps?.factions) ? ps.factions : [];
+  const gov = factions.find((f) => f?.isGoverning) || null;
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  // The figures whose temperament colours the resolve. Prefer importance-stamped
+  // NPCs ordered pillar > key > notable so the RULER (a 'pillar' seat-holder —
+  // previously excluded entirely) leads; when NO npc carries an importance stamp
+  // (a plain npcGenerator settlement), fall back to power/influence ranking so
+  // such settlements still surface figures rather than an empty list. Stable sort
+  // preserves generation order within a rank tier — deterministic, no rng.
+  const stamped = npcs.filter((n) => IMPORTANCE_RANK[n?.importance]);
+  const pool = stamped.length ? stamped : npcs;
+  const figures = pool
+    .slice()
+    .sort((a, b) => (IMPORTANCE_RANK[b?.importance] || 0) - (IMPORTANCE_RANK[a?.importance] || 0)
+      || (num(b?.power, 0) - num(a?.power, 0))
+      || (npcInfluenceRank(b) - npcInfluenceRank(a)))
     .slice(0, 3)
-    .map((/** @type {any} */ n) => ({ name: n?.name || null, role: n?.role || n?.title || null, temperament: n?.temperament || null }));
+    .map((n) => ({ name: n?.name || null, role: n?.role || n?.title || null, temperament: n?.temperament || null }));
   return {
     government: government || null,
     governingFaction: gov ? { name: gov.faction || gov.name || null, power: num(gov.power, 0) } : null,
@@ -173,18 +243,18 @@ function readLeadership(settlement) {
  * The full War & Resolve signal for ONE settlement. Pure + tolerant of missing ledgers.
  *
  * @param {Object} args
- * @param {any} args.settlement                 the settlement object (config/powerStructure/npcs/economicState).
- * @param {any} args.saveId                     its save id (falls back to settlement.id).
- * @param {any} args.worldState                 live worldState (deployments / warExhaustion).
- * @param {any} [args.regionalGraph]            live regional graph (war_front coalitions).
- * @param {(id:any)=>any} [args.capacityOf]     id → military-capacity model (built once by the realm reader).
- * @param {(id:any)=>any} [args.settlementOf]   id → settlement (for besieger faith); optional.
- * @returns {any} the signal bundle (never null; a peaceful settlement carries atWar:false).
+ * @param {Settlement} [args.settlement]        the settlement object (config/powerStructure/npcs/economicState).
+ * @param {string} [args.saveId]                its save id (falls back to settlement.id).
+ * @param {WorldState} [args.worldState]        live worldState (deployments / warExhaustion).
+ * @param {RegionGraph} [args.regionalGraph]    live regional graph (war_front coalitions).
+ * @param {(id: string) => (CapModel | null | undefined)} [args.capacityOf]  id → military-capacity model.
+ * @param {(id: string) => (Settlement | null | undefined)} [args.settlementOf]  id → settlement (for besieger faith).
+ * @returns {WarResolveSignal} the signal bundle (never null; a peaceful settlement carries atWar:false).
  */
-export function warResolveSignal({ settlement, saveId, worldState, regionalGraph, capacityOf, settlementOf } = /** @type {any} */ ({})) {
+export function warResolveSignal({ settlement, saveId, worldState, regionalGraph, capacityOf, settlementOf } = {}) {
   const id = String(saveId ?? settlement?.id ?? '');
   const cap = capacityOf ? capacityOf(id) : deriveMilitaryCapacity(settlement);
-  const facets = cap?.facets || {};
+  const facets = cap?.facets;
 
   const status = settlementWarStatus({ settlementId: id, worldState, regionalGraph });
   const besiegedBy = status?.besiegedBy || [];
@@ -195,7 +265,7 @@ export function warResolveSignal({ settlement, saveId, worldState, regionalGraph
   // penalty when THIS settlement is itself fielding an army abroad.
   const offensive = Math.max(0, num(cap?.currentCapacity, 0));
   const homeDefense = Math.max(0, offensive - (besieging.length ? ARMY_DEPLOYED_CAPACITY_PENALTY : 0));
-  const coalitionOffensive = besiegedBy.reduce((/** @type {number} */ sum, /** @type {any} */ bid) => {
+  const coalitionOffensive = besiegedBy.reduce((sum, bid) => {
     const bc = capacityOf ? capacityOf(bid) : null;
     return sum + Math.max(0, num(bc?.currentCapacity, 0));
   }, 0);
@@ -207,9 +277,9 @@ export function warResolveSignal({ settlement, saveId, worldState, regionalGraph
   // RESOLVE — the SAME will the P4 siege verdict biases by (exact under siege; a latent read
   // otherwise, where the odds term is neutral because there is no coalition pressing).
   const willScore = composeDefenderWillScore({
-    willFacet: facets.will,
+    willFacet: facets?.will,
     legitimacyScore: settlement?.powerStructure?.publicLegitimacy?.score,
-    logisticsFacet: facets.logistics,
+    logisticsFacet: facets?.logistics,
     defenderCurrent: homeDefense,
     coalitionCurrent: coalitionOffensive,
   });
@@ -242,9 +312,9 @@ export function warResolveSignal({ settlement, saveId, worldState, regionalGraph
  * unscarred, undivided) so a quiet town's prompt gains no block. `nameOf` resolves besieger
  * ids to names for the prose; it defaults to the id.
  *
- * @param {any} signal                       a warResolveSignal bundle (or null).
- * @param {(id:any)=>string} [nameOf]        id → display name.
- * @returns {Record<string, any> | null}
+ * @param {WarResolveSignal | null} signal   a warResolveSignal bundle (or null).
+ * @param {(id: string) => string} [nameOf]  id → display name.
+ * @returns {Record<string, unknown> | null}
  */
 export function buildWarMoraleContext(signal, nameOf = (id) => String(id)) {
   if (!signal) return null;
@@ -254,7 +324,7 @@ export function buildWarMoraleContext(signal, nameOf = (id) => String(id)) {
     || (signal.sentiment?.band && signal.sentiment.band !== 'divided');
   if (!notable) return null;
 
-  /** @type {Record<string, any>} */
+  /** @type {Record<string, unknown>} */
   const ctx = { name: signal.name, atWar: !!signal.atWar, besieged: !!signal.besieged };
   if (signal.resolve?.band) ctx.resolve = signal.resolve.band;
   if (signal.hope?.band) ctx.hope = signal.hope.band;
@@ -267,8 +337,8 @@ export function buildWarMoraleContext(signal, nameOf = (id) => String(id)) {
   if (Array.isArray(signal.besieging) && signal.besieging.length) ctx.besieging = signal.besieging.map(nameOf);
   if (signal.faith?.patron?.name) {
     ctx.faith = { patron: signal.faith.patron.name, alignment: signal.faith.patron.alignment || null, temper: signal.faith.patron.temper || null };
-    const opposed = (signal.faith.opposed || []).map((/** @type {any} */ o) => o.deity || nameOf(o.besieger)).filter(Boolean);
-    if (opposed.length) ctx.faith.opposedBy = opposed;
+    const opposed = (signal.faith.opposed || []).map((o) => o.deity || nameOf(o.besieger)).filter(Boolean);
+    if (opposed.length) /** @type {{ opposedBy?: string[] }} */ (ctx.faith).opposedBy = opposed;
   }
   return ctx;
 }
@@ -279,30 +349,33 @@ export function buildWarMoraleContext(signal, nameOf = (id) => String(id)) {
  * and a settlement lookup (for besieger faith). Pure; tolerant of an empty roster.
  *
  * @param {Object} args
- * @param {Array<{ id?: any, settlement?: any }>} [args.saves]  the settlement saves/snapshot items.
- * @param {any} args.worldState
- * @param {any} [args.regionalGraph]
- * @returns {any[]} one signal bundle per settlement, codepoint-sorted.
+ * @param {SaveItem[]} [args.saves]  the settlement saves/snapshot items.
+ * @param {WorldState} [args.worldState]
+ * @param {RegionGraph} [args.regionalGraph]
+ * @returns {WarResolveSignal[]} one signal bundle per settlement, codepoint-sorted.
  */
-export function realmResolveSignals({ saves, worldState, regionalGraph } = /** @type {any} */ ({})) {
+export function realmResolveSignals({ saves, worldState, regionalGraph } = {}) {
   const items = Array.isArray(saves) ? saves : [];
-  /** @type {Map<string, any>} */
+  /** @type {Map<string, Settlement>} */
   const byId = new Map();
   for (const item of items) {
     const id = item?.id != null ? String(item.id) : (item?.settlement?.id != null ? String(item.settlement.id) : null);
     if (id) byId.set(id, item?.settlement || item);
   }
-  /** @type {Map<string, any>} */
+  /** @type {Map<string, CapModel>} */
   const capCache = new Map();
-  const capacityOf = (/** @type {any} */ rawId) => {
+  /** @param {string} rawId @returns {CapModel} */
+  const capacityOf = (rawId) => {
     const key = String(rawId);
-    if (capCache.has(key)) return capCache.get(key);
+    const cached = capCache.get(key);
+    if (cached) return cached;
     const st = byId.get(key);
     const model = st ? deriveMilitaryCapacity(st) : { currentCapacity: 0, facets: {} };
     capCache.set(key, model);
     return model;
   };
-  const settlementOf = (/** @type {any} */ rawId) => byId.get(String(rawId)) || null;
+  /** @param {string} rawId @returns {Settlement | null} */
+  const settlementOf = (rawId) => byId.get(String(rawId)) || null;
 
   return [...byId.keys()].sort(codepoint).map(id =>
     warResolveSignal({ settlement: byId.get(id), saveId: id, worldState, regionalGraph, capacityOf, settlementOf }),

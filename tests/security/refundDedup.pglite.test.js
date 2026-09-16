@@ -44,8 +44,22 @@ it('migration 087 is present (suite is not vacuous)', () => {
   expect(have).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hooks that stand up PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. BOTH hooks carry the ceiling
+ * because the beforeAll only constructs the instance — the first beforeEach
+ * exec pays the cold WASM boot. Never tune this to a measurement (that is how
+ * a previous 30000ms went brittle); generous is the point. Kept in step with
+ * the sibling suites (tierCreditMultiplierSql, surveyorProbeTierSql) and
+ * enforced by tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(have)('087 refund pre-dedup makes the unique index deploy-safe (pglite)', () => {
-  beforeAll(async () => { db = await new PGlite(); });
+  beforeAll(async () => { db = await new PGlite(); }, PGLITE_BOOT_TIMEOUT_MS);
   beforeEach(async () => {
     await db.exec(`
       drop table if exists public.credit_ledger;
@@ -57,7 +71,7 @@ describe.runIf(have)('087 refund pre-dedup makes the unique index deploy-safe (p
         metadata jsonb not null default '{}'::jsonb, created_at timestamptz not null default now()
       );
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('dedups a pre-existing double-refund and reverses the phantom credit, THEN the index creates', async () => {
     // A spend that was refunded TWICE (the race 087 closes): two refund grants of
