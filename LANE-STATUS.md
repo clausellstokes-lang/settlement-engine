@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 23:07:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 23:12:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -122,7 +122,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
     - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
     - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
-    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:07 710 KB · 34 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:12 941 KB · 56 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_6a1dc505-cea** (mtime 09-15 22:53): agent calls 21 (20 distinct) · DONE 4 · FAILED (not retried) 12 · RETRIED (superseded attempts) 1 · IN FLIGHT 4 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
@@ -235,4 +235,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.24 2.36 2.48
+load: 2.24 2.20 2.37
