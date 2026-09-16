@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "da18fccb05881666e32ed90c5e3788f5ba518135",
-  "measuredBy": "§931 long-tail landing at the composed consist, third measurement after LT41b car 6 and LT17 car 2 were held out (Fable 5.1 — validated)",
-  "date": "2026-09-15",
-  "note": "car 6 held for the chartered window; car 2 held for the worker-bundle headroom car; the chair register cars add no title",
-  "files": 2572,
+  "measuredAtSha": "9f75594fcd6450e049681cba74d8a667c500e46e",
+  "measuredBy": "Opus 5 chair, seed-fix car 9f75594fc",
+  "date": "2026-09-16",
+  "note": "one new test file (tests/store/generateStrayConfigSeed.test.js, six literal titles) plus new titles in tests/data/sampleSettlements.test.js (forkConfigFor, three) and tests/domain/contentSamplePreview.test.js (the legacy seed arm, one); no rule widened or narrowed",
+  "files": 2573,
   "parked": 377,
-  "credited": 2195,
-  "titles": 24308,
-  "suiteTitles": 6483
+  "credited": 2196,
+  "titles": 24318,
+  "suiteTitles": 6485
 }
