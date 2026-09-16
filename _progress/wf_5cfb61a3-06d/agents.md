@@ -1,4 +1,4 @@
-# wf_5cfb61a3-06d — per-agent progress, 2026-09-16 11:16:07
+# wf_5cfb61a3-06d — per-agent progress, 2026-09-16 11:21:37
     - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
     - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
     - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
@@ -23,4 +23,4 @@
     - `a1b28cc91` ? · RETRIED (a later attempt on the same key runs) · transcript 09-16 02:28 693 KB · 35 tool calls · files: $W/older.md
     - `ad00f2206` ? · DONE · transcript 09-16 11:06 1111 KB · 65 tool calls · files: progress-ledger.txt, wy-build.md, ledger.md · result: {"reader": "WY \u2014 the LEDGER READER (OWNER_DECISION_QUEUE.md, SOL_QUEUE.md, FABLE_VALIDATION_QUEUE.md, START_HERE.md, RESUME_STATE.md, A_PLUS_ROADMAP.md, GO
     - `abaf2b1e1` ? · DONE · transcript 09-16 11:07 1235 KB · 67 tool calls · files: older.md · result: {"reader": "WY \u2014 the older-programme reader (family WY / wayfare, items 44\u201367 C)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-
-    - `a951542ce` ? · IN FLIGHT · transcript 09-16 11:15 995 KB · 52 tool calls · files: $D/adjudicator.md, $D/progress-adjudicator.txt · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `a951542ce` ? · IN FLIGHT · transcript 09-16 11:18 1033 KB · 52 tool calls · files: $D/adjudicator.md, $D/progress-adjudicator.txt · last: Bash P=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
