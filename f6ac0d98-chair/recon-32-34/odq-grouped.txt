@@ -1,0 +1,314 @@
+   4  L21  ## §0 · 2026-07-28 DELEGATED DISPOSITION — current truth
+   4  L131  ## §1 · THE LAUNCH TAIL — ⛔ owner-physical acts, in execution order
+   1  L172  ## §3 · GOLDEN-SHIFTING / ENGINE rulings (each changes same-seed outputs; batch with T5 where possible)
+   4  L207  ## §5 · PLATFORM / MONEY rulings
+   1  L292  ## §9 · EPISTEMIC PREVENTION PROGRAM 2026-07-27 (test-truthfulness machinery — commit e56cbeaa, minifold)
+   1  L606  ### Recorded, untouched, available as their own lanes
+   1  L616  ### 1. ⚠ YOUR EXIT-ROAD ORDER IS ONLY HALF CARRIED OUT, AND I WANT YOU TO KNOW WHY
+   3  L656  ### §15a · RULED AND DISPATCHED (2026-08-11) — roads are labelled, neighbours are not invented
+   1  L1241  ## §27 · THE BUILD-EVERYTHING ORDERING (owner correction, 2026-08-14 ~04:05, in-chat)
+   1  L1393  ## §32 · GAP-1 IS RULED ON THE G2 RESTAMP (2026-08-14 ~11:15, chair, vetoable)
+   1  L1677  ## ~04:40, chair, vetoable; derivations in laneTC10-report.md)
+   1  L1748  ## AIRSHIPS (2026-08-15 ~08:30, in-chat, verbatim intent; NEW CAPABILITY)
+   4  L1776  ### verbatim intent; amends §46 item 2-4)
+   1  L1832  ### §46c · Owner refinement: CARAVAN COVER FOR SPIES (2026-08-15 ~11:00,
+  16  L1833  ### in-chat, verbatim intent; amends §46b's infiltration channel)
+   1  L1993  ## stopped-tree)
+   1  L2101  ### EXHAUSTIVE — coherence is the HIGHEST priority, NOT the only one
+   2  L2443  ## probes TRUE_EXIT=0 in-shell, code of record `fc8451c4`)
+   1  L2523  ## all static at `d5a6c009`)
+   2  L2564  ## three executed probes, all at `d5a6c009`)
+   3  L2736  ## (owner, two orders 2026-08-15 in-chat; operative reading recorded)
+   1  L3047  ## soak, zero throws, all at `d5a6c009`)
+   1  L3177  ## + laneRPRF-report.md, all figures from executed probes at `d5a6c009`)
+   1  L3297  ## §87 · THE DOCS/OPS/MARKET DIMENSION RULED — §51'S LAST SURVEY
+   2  L3299  ## laneRDOM-report.md, base sealed at `d5a6c009`)
+   1  L3333  ## the integrated verdict over all fourteen dimensions)
+   2  L3497  ## unmoved at `a6fd6395`)
+   1  L3641  ## identical across est-1's mid-round landing)
+   1  L3828  ## docs-only, 40/40 subject blobs identical)
+   1  L3862  ## laneTE17-receipt.md, twelve commits, four members, no truncations)
+   2  L3927  ## laneTE18-receipt.md, fourteen judgments)
+   1  L4023  ## FORCED by executed TTS convictions)
+   1  L4086  ## verbatim, in-chat; the operative charter recorded by the chair)
+   1  L4172  ## laneTE20-receipt.md continuation appendix)
+   1  L4472  ## laneTMC-report.md, all claims measured-static)
+   2  L4534  ## 11 sections)
+   1  L4560  ## (2026-08-15, chair, vetoable; evidence laneTE22-receipt.md §12-14)
+   1  L4617  ## §125 · FIVE LG DIRECTIVES — TRADE CIRCLES, CONFISCATION
+   1  L4618  ## REPLENISHMENT, CARAVAN NEWS CHAINS, SIZE-SCALED SPEED, ROAMING
+  12  L4620  ## recorded; the LG volume gains §46d in this commit)
+   4  L4671  ### vetoable)
+   1  L4735  ## chair; evidence laneTE23-receipt.md + laneTE22-receipt.md §16)
+   1  L4768  ## settlement or just the stressor — RESOLVED FOR THE STRESSOR)
+   1  L4812  ### monster host may besiege a town with no settlement behind it)
+   2  L4866  ## operative readings, vetoable)
+   3  L4969  ## (2026-08-15, chair; everything else confirmed owned or scheduled)
+   1  L5005  ### run POST-SOAK-AND-TUNE
+   3  L5078  ## 2026-08-16, verbatim design recorded; lane PG-C dispatched)
+   2  L5137  ## second pass surfacing nothing new)
+   3  L5174  ## build it and slot it where appropriate.")
+   1  L5593  ## §152 · OWNER ORDER: THE MAP GRAMMARS + BUILD-OUT BEGINS (2026-08-16)
+   1  L5655  ## §154 · OWNER ORDERS: THE MORPHOLOGY LAW + THE HIGGSFIELD GUIDE SESSION (2026-08-16)
+   2  L5736  ## leave everything to your best judgement")
+   1  L5767  ## owner order, vetoable)
+   1  L5792  ## §159 · TWO OWNER CALIBRATIONS + THE WILD ROUND (2026-08-16)
+   3  L5814  ## TC29 DISPATCHED (2026-08-16, chair)
+   1  L5874  ## course base terrain is derived from the dossier")
+   2  L5888  ## extent")
+   1  L5921  ## grow outward, the town is just the umbrella")
+   2  L5927  ## districts can and should overlap")
+   1  L5966  ## buildings")
+   1  L5987  ## owner: promotion, order drift, trade re-orientation, demolition,
+   1  L5988  ## grand roads — "comprehensively and exhaustively")
+   1  L6017  ## I'm allowing it!")
+   4  L6090  ## apparent the more lawful a place is")
+   2  L6114  ## a village is not to the scale of a port of a metropolis")
+   1  L6293  ## the surface should have a front!")
+   2  L6522  ## ORDERED (2026-08-16, chair under §170)
+   1  L6704  ## MF-B3 DISPATCHED (2026-08-16, chair under §170)
+   1  L6846  ## SOLVED; MF-B4 DISPATCHED (2026-08-16, chair under §170)
+   1  L6922  ## it off historical precedence")
+   1  L6941  ## evidence first")
+   2  L7040  ## under §170)
+   1  L7071  ## what doesn't — comprehensively and exhaustively")
+   1  L7242  ## AND ITS STATES; MF-B7 DISPATCHED (2026-08-16, chair §170)
+   2  L7418  ## redirect)
+   1  L7482  ## PER-IMAGE URBANISM STUDY (2026-08-16; MF-S1 dispatched)
+   1  L7505  ## MAXIMUM-IMPACT SEAT (2026-08-16; MF-A1 dispatched ON FABLE)
+   1  L7532  ## §209 · THE URBANISM ATLAS COLLECTED — THE GRAIN CONVICTION,
+   6  L7533  ## AND ALL TEN PROPOSALS ADOPTED (2026-08-16, chair §170)
+   3  L7629  ## (2026-08-16, chair §170; Fable seat, §208.2)
+   1  L7668  ## DISPATCHED (2026-08-16, chair §170)
+   1  L7818  ## §216 · OWNER LAW: THE CONVERGENCE LOOP — THE CORPUS IS THE
+   1  L7848  ## WHERE NECESSARY FOR THE FULL AMBITION (2026-08-16)
+   2  L7926  ## (2026-08-16, self-imposed on the owner's performance question)
+   1  L7943  ## (2026-08-16, chair §170; Fable seat; 120 credits, 1102→982)
+   2  L7971  ## TRADE ROUTES, STRESSORS; ALL JUDGMENT DELEGATED (2026-08-16)
+   1  L7996  ## ALL PURPOSES, ALL JUDGMENT DELEGATED (2026-08-16)
+   1  L8134  ## §229 · MF-B8 COLLECTED — THE GRAIN INVERSION CURED
+   3  L8135  ## STRUCTURALLY; TOWN AND CITY IN BAND (2026-08-16, chair §170)
+   2  L8180  ## (2026-08-16)
+   2  L8211  ## SPEND THE FINAL 646 (2026-08-16, chair §170)
+   3  L8281  ## §process answers)
+   3  L8439  ## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   1  L8556  ## RING (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   2  L8597  ## chair: Opus 5 — Fable-unvalidated)
+   5  L8749  ## Fable-unvalidated)
+   3  L8881  ## Fable-unvalidated)
+   1  L8930  ## Fable-unvalidated)
+   4  L8996  ## chair: Opus 5 — Fable-unvalidated)
+   1  L9062  ## Fable-unvalidated)
+   1  L9260  ## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   1  L9326  ## Opus 5 — Fable-unvalidated)
+   1  L9497  ## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   5  L9529  ## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   2  L9661  ## — Fable-unvalidated)
+   1  L9840  ## Fable-unvalidated)
+   1  L9967  ## Fable-unvalidated)
+   1  L10019  ## Fable-unvalidated)
+   2  L10139  ## (2026-08-17; chair: Opus 5 — Fable-unvalidated)
+   2  L10539  ## — Fable-unvalidated)
+   1  L10618  ## Fable-unvalidated)
+   1  L10690  ## stuff yet")
+   3  L10820  ## architecture + corpus machinery only — no generator wave dispatched)
+   3  L11329  ## receipts)
+   4  L12039  ## failures concentrated in receipt→ledger transit)
+   3  L12320  ## hunks for every edit)
+   4  L12838  ## row)
+   2  L13110  ## queue position under §290)
+   1  L13160  ### GROWTH TEMPERAMENTS AND OPTIONAL CONNECTIVITY
+   1  L13192  ### judgement")
+   4  L13229  ### components")
+   2  L13274  ### refinement at the owner's extended delegation)
+   1  L14408  - **§341.1 The map leg, concretely:** for each candidate tuning, sample the fabric map
+   1  L14419  - **§341.2 Feasibility is already sequenced:** tuning is last, after the parity slice —
+   1  L14959  ## §358 — HUNT-1 FINAL: THE MECHANISM CONFIRMED PER-STRAY; A RETRACTION THAT SHARPENS THE CURE; THE PROTOCOL SIMPLIFIES (2026-08-22 ~12:50)
+   1  L15057  - **§360.1 THE FOUR LAWS THAT SHAPE IT, stated at charter so no lane rediscovers
+   2  L15076  - **§361.1 THE ARCHITECTURE — six stages, staged by what the engine can back:**
+   1  L15668  ## §383 — COLLECTION + CAS: CT-1a LANDED — THE FIRST ATLAS PROSE; THE CONTENT TRAIN'S FIRST CAR (2026-08-22 ~11:55)
+   1  L16175  ## §399 — INV-EVS COLLECTED: THE DISPLACEMENT CONFIRMED ON BOTH SURFACES, A SECOND DEFECT FOUND, THE FORK RIPE FOR THE OWNER (2026-08-22 ~20:45)
+   1  L16291  ## §402 — THE WEBSITE TRAIN CHARTER RULED AS COMPILED: C1-C7 SIGNED, J1-J10 RATIFIED, TWO TRAINS CHARTERED; WEB-1 DISPATCHED (2026-08-22 ~21:40)
+   1  L16528  ## §408 — WEB-1 COLLECTED GREEN; THE GUARD CLEAN; THE BILL WIDENED TO TEN GATES; THE PACKET MINT AUTHORITY GRANTED (2026-08-23 ~01:00)
+   2  L17526  ## §435 — OWNER ORDER: THE DWELLINGS PROGRAM ARCHITECTED — docs/DESIGN_DWELLINGS_PROGRAM.md LANDED ON THE LEDGER (ARCHITECTED, NOT BUILT) (2026-08-23 ~23:40)
+   1  L17593  ## §438 — OWNER ORDER: THE DW RESEARCH EXPANDED TO COMPREHENSIVE PER-INSTITUTION SCOPE, INCLUDING MAGICAL INSTITUTIONS FROM FICTION AND LORE; COST EXPLICITLY ACCEPTED (2026-08-24 ~01:20)
+   4  L17804  - **§441.3 STOP 3 CURED — THE CRIMINAL SHARE HAS A STORED HOME.** The
+   1  L17817  - **§441.4 STOP 4 CURED — UC-4 IS A FLAG-MINTING WAVE AND RIDES ALONE.**
+   1  L17837  - **§441.5 MUST-FIXES RULED:** (a) FACETS — the chokepoint has two facet
+   1  L18327  - **§451.1 MF-UC0 BUILT:** tip a5c6c4fa (e67aacf0 member · a5c6c4fa packet,
+   1  L18396  ## §453 — OWNER DIRECTIVE (in-chat, 2026-08-22 ~21:35 CDT): CLOSETS AND PANTRIES — STORAGE AND SERVICE CELLS ARE FIRST-CLASS ROOMS IN THE DWELLINGS GRAMMAR WHERE APPROPRIATE; CLOCK CORRECTION FOR §449
+   1  L18611  - **§459.1 MF-UC3 BUILT:** tip 64a4b259 (4559b9bd member · 64a4b259 packet,
+   1  L18637  - **§459.2 TC-R-INST-2 DISPATCHED** (Fable; trade/commerce/crafts — the
+  11  L18726  ## §462 — R-INST-2 DELIVERED (TRADE, COMMERCE AND CRAFTS — 124 ENTRIES / 20 FAMILIES AT DEPTH, 582 KB): THE ENGLISH REGISTER HAS NO BUILDING FOR ~30 ENTRIES; TC-R-INST-CIRC DISPATCHED (2026-08-23 00:5
+   1  L19762  - **§485.1 DELIVERED.** `draft-R-INST-4-HOSPITALITY-POVERTY-UTILITY.md` =
+   1  L19858  - **§487.1 HOLDING.** TE-UC4 (Opus): tip `500e65fe` = 7 over `0f3897a5`,
+   1  L19915  - **§488.1 DELIVERED.** `draft-R-INST-5-MAGICAL.md` = 361,337 B, 18 sections,
+   1  L19930  - **§488.2 THE FIVE FINDINGS CARRIED TO THE DW CHARTER (DW-0 inputs):**
+   1  L20175  - **§493.2 THE FIVE FINDINGS (DW-0 inputs):** (1) `NO_BUILDING` must be a
+   2  L20198  - **§493.3 THREE NEW CH ITEMS + TWO CORRECTIONS.** D6-1: `Smuggling network`
+   1  L20211  - **§493.4 RESEARCH COMPLETE — the corpus for DW-0** (preserved
+   1  L20501  - **§497.3 R2' (the compiled replacement, sent to the live DW-0 lane):**
+   1  L20544  - **§498.2 THE CHAIR HAD CONFLATED TWO OBJECTS; THEY ARE NOW SPLIT (R8).**
+   1  L20560  - **§498.3 THE TWO-TIER HALO FALLS OUT FREE (a product win):** hovering any
+   1  L20740  - **§501.4 TWO CLASSES ARE BIGGER THAN §491 SAID.** The `minTier`-versus-block
+   1  L21457  - **§511.4 THE HONEST TRADE-OFF, RECORDED SO IT IS NOT RE-LITIGATED.** Most of
+   1  L21559  - **§513.4 THE THROTTLE WORKS, MEASURED.** Load averages fell from
+   2  L21759  - **§517.2 ⛔ THE BLOCKER — `noble` CANNOT BE CLASSIFIED, AND IT IS THE
+   1  L21836  - **§518.2 WHAT IT SETTLES DOWNSTREAM.** The `Estate` contract's `ownerRef`
+   1  L21888  - **§519.4 THE ONE TENSION, AND IT RESOLVES CLEANLY.** `coupContenders` takes
+   1  L21911  ## §520 — ⛔ THE CHAIR SHIPPED A FLAG THAT DOES NOT EXIST TO FOUR LANES; MF-CH2A IS READY AND MF-CH2B STOPS AT DRAFT ON A FINDING THE CAR CANNOT CURE — **`ARCANE_INST_TAGS` IS A TRADE VOCABULARY DOING 
+   1  L21956  - **§520.5 ⭐ THE STOP, AND IT IS A CONTENT CALL NOT A HYGIENE ONE.**
+   1  L22234  ## §525 — ⭐⭐ MF-CG1b BUILT: **287 OF 504 → 0 OF 504** — EVERY SETTLEMENT CAN DRAW A MAP; THE CONVERGENCE PROBE REFUSED TO CERTIFY, WHICH IS WHY THE HEADROOM EXISTS; **THE RATCHET'S ELEVEN IS RECONCILE
+   1  L22246  - **§525.2 ⭐ THE PROBE REFUSED TO CERTIFY, AND THAT IS THE POINT.** The
+   1  L22406  - **§527.4 NOTHING ELSE CHANGES.** The member's substance is as recorded at
+   1  L22879  - **§534.1 THE AMENDMENT WAS RIGHT AND THE LANE'S OWN CENSUS PROVED IT.** C1
+   1  L22994  - **§535.5 ⭐ THE PICTURE NARROWS TO ONE COHORT.** **Cohort A — 23 files,
+   1  L23038  - **§536.2 ⭐ MY PREMISE WAS WRONG, AND THE LANE'S REPLACEMENT ARGUMENT IS
+   1  L23476  - **§541.3 RULING — SHAPE F, APPROVED.** Move **`alchemy`, and only `alchemy`**,
+   4  L24185  - **§550.4 THE MECHANISM IS VISIBLE IN ELEVEN LINES, AND I VERIFIED IT MYSELF.**
+   1  L24196  - **§550.5 ⭐ THE FINDING THAT DECIDES THE SHAPE.** `Mages' Quarter` is not one
+   1  L24226  - **§550.8 ⛔⛔ CH-7 CHARTERED — CH-1's `den` CURE DID NOT TRAVEL, AND A CRIMINAL
+   1  L24413  - **§553.2 ⭐⭐ THE TWO FIGURES WERE BOTH RIGHT, AND THE MECHANISM IS THE FINDING.**
+   1  L24565  - **§555.2 ⭐⭐ THE FINDING NO LENS MADE, AND THE BEST OF THE NIGHT: NOBODY
+   1  L24606  - **§555.6 ⛔ SIX ITEMS ARE THE OWNER'S, AND TWO OF THEM ARE NEW.** (1) **The
+   1  L24662  - **§556.1 CAS EXECUTED — 60 CARS.** `510c51b76` → **`c3289244d`**, 6 commits,
+   1  L24835  - **§558.5 THE ENVELOPE GETS ITS OWN VOCABULARY — RULED, BECAUSE NO MEASUREMENT
+   1  L25051  - **§561.4 THE UNDERLYING DEFECT IS WORSE THAN BRIEFED — THE TWO QUARTERS WERE
+   1  L25353  - **§569.2 THE VERDICT, COMPRESSED** (full prose in the sitting's report to the
+   1  L25364  - **§569.3 ⛔ THE FINDING THAT OUTRANKS THE VERDICT: MF-A1's CODE IS GONE FROM
+   1  L25404  - **§570.3 DISPATCHED (seats: CH4-CURE + two new = three of four):**
+   1  L25414  - **§570.4 CH4-CURE RE-BASED BY ORDER.** The slot moved under it mid-cure:
+   1  L25476  - **§571.3 THE GENUINELY NEW HALF OF TODAY'S STATEMENT, MINTED AS TWO FABRIC
+   1  L25639  ## §576 · THE MARKET LAW: A MARKET IS ONE GIANT STREET, FURNISHED LIKE A YARD (2026-08-24 ~12:35 CDT)
+   3  L25641  - **§576.1 ⭐ OWNER DIRECTIVE:** markets seamlessly integrate into the street
+   2  L25651  - **§576.2 THE RULES AS MINTED:** (i) a market/plaza shares the street VOID's
+   1  L25894  - **§587.2 ⭐⭐ THE CHAIR'S TASTE VERDICT (delegated, vetoable): PROCEED — the
+   1  L25971  - **§590.1 ⭐ OWNER DIRECTIVE:** "the wall needs to look like a wall like the
+   1  L26309  - **§604.1 ⭐ OWNER GRANT:** "feel free to use more budget to make more
+   1  L26354  - **§606.2 CHARTERED — and the chair's finding is that THE ENGINE ALREADY
+   1  L26379  - **§607.2 THE ENGINEERING SHAPE, RULED:** one final render, every drawn
+   1  L26411  - **§608.3 CHAIR ADDITIONS (vetoable):** the film is **SKIPPABLE** (a
+   1  L26423  - **§609.2 CHARTERED AS A CLOSED BEAT VOCABULARY** (finite semantics — beat
+   1  L26873  - **§627.1** Owner asked how implementation gets faster without losing the
+   1  L26932  ## §629 · THE B13 MINT — THE MARKET'S FURNITURE BAND, CHAIR'S AND VETOABLE (2026-08-25 ~03:25 CDT)
+   6  L26934  - **§629.1 THE BAND** (A2.2's pre-REG-4 obligation, flagged chair's): a **FIXTURE**
+   2  L26949  - **§629.2 REG-4 OPENS** on base `93fa8a2ca` (the REG-3 seal): markets-as-street
+   1  L27019  - **§631.4 CONSEQUENCES:** REG-T2 (trajectory mint) is UNBLOCKED and builds on
+   1  L27029  ## §632 · REG-4 SEALS — THE MARKET IS A PLACE, THE FLOOR IS SIGNED, AND THE DIFFERENTIAL CONVICTS THE GROWTH MODEL (2026-08-25 ~05:50 CDT)
+   3  L27031  - **§632.1 SEALED** at `refs/preserve/map-sandbox-reg4-markets` = `5cce5782d` (base = the
+   1  L27084  - **§633.1 CORRECTION OF RECORD (self-caught):** §632.1 declared REG-4's seal at
+   1  L27133  - **§634.2 THE QUICKLOOK TIER IS BUILT AND FIDELITY-CHECKED** —
+   4  L27300  - **§639.2 TRIAGE — HOMES ASSIGNED (chair, vetoable):** REG-GROW absorbs the growth
+   2  L27337  - **§640.2 CHARTER REVISIONS FROM THE FOUR CONTRADICTIONS — hard rules become WEIGHTS
+   1  L27504  ## §644 · OWNER LAW — CULTIVATED LAND SCALES WITH TIER: SUBSISTENCE BEFORE TRADE (2026-08-25 ~14:00 CDT)
+   1  L27506  - **§644.1 THE DIRECTIVE, verbatim intent:** "the amount of cultivated land surrounding
+   6  L27509  - **§644.2 MINTED AS L-REG-33:** the cultivated area around a settlement is a FUNCTION
+   1  L27522  - **§644.3 HOME = REG-H** (the hinterland mosaic car, gate already open per §642.2):
+   2  L27535  - **§645.1 THE CORRECTION:** the chair's Kitaqiao read credited "the wall genuinely ends
+   1  L27623  - **§648.2 RULINGS:** **J-BR-7 RATIFIED** — the kink budget re-derived at 75° (the 35°
+   1  L27708  - **§651.2 MINTED AS THE TOPOLOGY FORM of §650 (supersedes the clip as the primary
+   1  L27888  - **§658.1 FIRST HAUL (the live bundle, 1.31 MB, 588 Haxe classes with names intact):**
+   1  L27929  - **§659.3 REMAINING DISPOSITIONS:** `marketing/website/` (432 files, 0 at HEAD) stays
+   1  L27943  - **§660.1 THE HONEST EXHIBIT (I1 cured):** 10-arm render proven (8-arm base
+   2  L28017  - **§662.2 THE TANGENTIAL VERDICT — §645 IN NUMBERS, NO ZERO TO EXPLAIN:**
+   2  L28393  - **§679.2 THE MARKETING FIND, routed to the owner's docket (F1):** the market
+   2  L28949  - **§689.4 THE MARKETING CONSEQUENCE, under the standing experience-first doctrine:** never
+   1  L29039  - **§691.3 HOW — DERIVED, NOT BLANKET.** Each `dress-*` id maps to **the role it actually
+   1  L29119  - **§692.6 TWO CORRECTIONS TO MY OWN RECORD, ONE OF THEM A STRIKE I SHOULD NOT HAVE MADE.**
+   1  L29701  - **§701.2 ⛔ THE REAL GAP, MEASURED AT LAST: IT IS THE PAGE BUDGET, NOT THE PAINT.** **The
+   1  L29731  - **§701.5 WHAT SHIPS, AND ITS HONEST SIZE.** The furrow hatch is demoted **at the pixel** by
+   1  L29770  - **§702.1 ⛔⛔ §701.2 IS ANSWERED, AND THE TRADE I PUT ON THE DOCKET WAS NOT A REAL TRADE.**
+   3  L30109  - **§708.3 ⛔⛔ C3 — THE WARD LAYER IS DEGENERATE, AND BOTH OPPOSITE FAILURE MODES ARE IN ONE
+   1  L30121  - **§708.4 C4 — THE PORT ROW IS A GATE, NOT A CONTENT GAP; §660.1 IS REFUTED.** The catalog
+   1  L30153  - **§708.7 ⭐ THE FINDING THAT RE-AIMS THE BUILD: THE TANNERY AT THE CIVIC CORE, FOREVER.**
+   1  L30183  - **§709.2 TWO DEFECTS FOUND INSIDE THE PASS, AND BOTH ARE GENERALISABLE SHAPES.**
+   1  L30204  - **§709.4 THREE JUDGMENTS WORTH NAMING.** **J-SEAT-2 — A RESUMED LANE OVERRULED ITS OWN
+   2  L30274  - **§710.4 ⛔⛔ THE FRAMING LAW IS NOW IMPLICATED THREE TIMES — THIS IS THE WAVE'S REAL
+   1  L30298  - **§710.6 ⭐⭐ THE CLASS, AND IT IS THE SHARPEST THIS PROGRAMME HAS PRODUCED: EVERY CENSUS W1
+   1  L30328  - **§710.9 BLOCKED UPSTREAM, NOT REFUSED: V-B13 FURNITURE AND MONUMENT PLAN-POCHÉ.**
+   1  L30396  - **§711.7 THE FRAMING TRADE HAS A THIRD MEASURED COST — AND THE LANE HONOURED THE BOUNDARY
+   1  L30402  - **§711.8 THE PARTITION OWES A MARKET FACE, AND THE UNFIXABLE IS PARKED PROPERLY.**
+   1  L30412  ## §712 · REGISTERS/ZOOM IS REFUTED AND STRUCK — THE SUBSTRATE HAS TWO GRAINS, NOT FOUR, AND NOTHING WAS BUILT (2026-08-26 ~17:30 CDT; SEAT: Opus 5 — Fable-unvalidated)
+   2  L30433  - **§712.4 ⭐⭐ THE KILL: THE PAGE ALREADY DRAWS AT BLOCK GRAIN.** Every plot-holding block is
+   1  L30525  - **§713.5 FOUR CORRECTIONS TO MY OWN CHARTER, AND ONE IS AN UNSOURCED CITATION.**
+   1  L30571  - **§714.3 ROUND 6 PASSES ON THE JUDGED PAGE — AND THE TIER SIGNAL CORRECTS §696.5.**
+   1  L30614  - **§714.8 FORBIDDEN ITEMS, STOPPED AND REPORTED — INCLUDING THE NEEDLE, CONVICTED FROM THE
+   1  L30644  - **§715.1 ⛔⛔ THE FINDING, AND IT IS THE FRAMING TRADE'S FOURTH AND LARGEST COST.** Every
+   1  L30651  - **§715.2 ⭐ AND THE MECHANISM IS NOT A BUG IN EITHER HALF — TWO CORRECT DECISIONS PRODUCE A
+   1  L30679  - **§715.6 ⛔ AND THE `fjord` READ HAS DEGRADED FROM ABSTENTION TO WRONG CLASS.** A **fourth**
+   1  L30704  - **§716.1 ⛔ A SEQUENCING RULING: REG-F MUST NOT RUN YET, AND THE REASON IS §715.1.** §6's film
+   1  L30793  - **§717.5 ⛔⛔ THE ARMING LAW, AND IT VOIDS ANY DRESS-PAGE CENSUS THAT DOES NOT KNOW IT.**
+   1  L30806  - **§717.6 THE MANIFEST — 39 rows, executable and provably total.** **19 PORTED_ALREADY · 10
+   1  L30837  - **§717.9 ⭐⭐ THE PORT WAS GATED AS A UNIT AND IT DID NOT NEED TO BE — CHAIR RULING, VETOABLE.**
+   1  L30857  - **§717.11 TWO LANES DISPATCHED ON THE VISIBLE DEFECTS, BOTH ON `dea9239d0`, BOTH OPUS-SEATED.**
+   1  L30868  - **§717.12 THE OWNER ASKED WHETHER I WAS FIXING THE DEFECTS I HAD JUST NAMED, AND THE HONEST
+   1  L30876  - **§717.13 THE ARC, RESTATED AFTER THE SPLIT.** Running now: **WORDS-2** (the page learns to
+   1  L31048  - **§719.5 ⛔⛔ THE ENCLOSURE EMPTINESS IS NOT HONEST — BOTH INNOCENT EXPLANATIONS ARE REFUTED BY OUR
+   1  L31161  - **§720.6 THE REJECTION BOUNDARY IS HARD AND EARLY, AND OURS MUST BE HARDER.** All ~26 of DF's
+   2  L31193  - **§720.9 THE CONVERGENCE — FOUR INDEPENDENT LINES, ONE PUBLISHED DISSENT.** Parish & Müller
+   1  L31431  - **§723.7 ⭐ THE PRODUCT IDENTITY FINDING.** **No tool found, procedural or otherwise, generates market stalls or carts as real positioned objects.** MFCG places exactly one object in a market ward. A
+   1  L31432  - **§723.8 WHAT A SUCCESSOR DOES FIRST, IN ORDER.** **(1) Resume CAR-WEAVE** from `$SP/WEAVE-RESUME.md` — its TODO is live and the authoritative gate (expect 549 collected) is the one remaining step; 
+   1  L31440  - **§724.4 THE DOCKET CLASSIFIED (9/9).** MAP-MODULE, defer whole: framing trade · enclosure operator (parked status TRAVELS) · capacity ~3.4× · projection call · art route. DISSOLVES: the cutover fla
+   1  L31452  - **§725.4 DISPATCHED:** lane **TE-STRIP-1** (Opus seat) from build tip `73f5dfc02`, own worktree + node_modules, full detached gate, receipt + checkpoint discipline, explicit pathspecs, removal-mirro
+   1  L31491  - **§731.2 TE-STRIP-1 COLLECTED (tip `08fd4f921`, receipt in the 5a850cca scratchpad):** 15/17 arms green, arm-by-arm walked past the &&-chain blindness; one load stray honestly cleared by the one-qui
+   1  L31507  - **§733.1** The W-COIN architecture is COMPLETE (81.6KB, 45 sections, receipts throughout, two fan-out censuses folded) and lands this act as **`docs/DESIGN_W_COIN.md` — status DRAFT, SKEPTIC PANEL P
+   1  L31508  - **§733.2 ⭐ TWO ENGINE DISCOVERIES from its census, docket-grade:** `economicState.wealthIndex` is read at `warDeployment.js:763` and **written nowhere — the razing-spoils subsystem is provably inert
+   1  L31519  - **§735.1 THE PANEL (wf_162c3f10-2a9, five lenses; reports preserved in the 5a850cca scratchpad wcoin-panel/):** conservation NOT-REFUTED (4 MAJOR: the "clause-for-clause grain mirror" is FALSE — the
+   1  L31520  - **§735.2 ⭐⭐ NEW OWNER DIRECTIVE (verbatim intent, in-chat):** *"When it comes to an occupied or vassal settlement, the ruling power will have an equal or greater counterpart in all decision-makings 
+   1  L31528  - **§737.1** All §735.1 panel findings are ruled and folded as `docs/DESIGN_W_COIN.md` **AMENDMENT A1** (24 rulings, landed this act; A1 outranks the body). Sharpest: the transfer primitive inherits g
+   1  L31536  - **§739.1 (owner, in-chat, verbatim intent):** *"some of these are directly related to settlement layer mapmaking including dwellings. those need to be deferred to the post launch module work."* ⇒ Th
+   1  L31559  ## §743 · OWNER DIRECTIVE: RISINGS AS DERIVED MILITARY FORCES; THE MANY-SIDED INTERVENTION MARKET; COVERT INSTIGATION AT EXPOSURE COST — D10/D11 JOIN THE W-SEAT VOLUME (2026-08-29 ~19:25 CDT; SEAT: Fa
+   1  L31562  - **§743.2** Folded into `docs/DESIGN_W_SEAT.md` as **ADDENDUM D10/D11** (landed this act): the irregular-force law (ONE force model, three births, the same derivation a regular unit would use — no se
+   1  L31569  ## §745 · D10/D11 FULLY ARCHITECTED — RISINGS, THE MARKET, AND INSTIGATION GROUNDED IN SIX CENSUS LANES; THE MINI-PANEL DISPATCHES (2026-08-29 ~21:00 CDT; SEAT: Fable 5 — validated)
+   1  L31571  - **§745.1** The full D10/D11 architecture lands in `docs/DESIGN_W_SEAT.md` (F1–F7, superseding the sketch; census verbatim in the verification doc). The census's design-shaping finds, all folded: **a
+   1  L31618  - **§752.1 THE LANE'S TWO CARS** (own worktree, base `eba286607`, no ref touched, landing deferred behind STRIP-2's gate per §751.5): **car 1 `d89775c3b`** (7 files, +963/−2 — `src/domain/goods.schema
+   1  L31619  - **§752.2 SEVEN JUDGMENT ROWS COLLECTED (J-ST2-A..G, vetoable).** Sharpest: vocabulary homed in `src/domain` not `src/data` (tsconfig.full EXCLUDES src/data; types.js is the idiom) · both doors under
+   1  L31631  - **§754.2 THE GATE-CAUGHT PAIR + THE GENERALIZED LAW.** First gate run RED, both reds real and the lane's own: (a) `tradeDynamicsGoodsSource` — F30's single-source pin regex requires `TradeDynamicsPa
+   1  L31632  - **§754.3 ⛔ OWNER DIRECTIVE (this sitting, in-chat, re the HERALD): realm news must be 100% contextual narrative — "X attacked Y", "A captured B", "D did Z because of W" — NEVER numerical deltas; reg
+   1  L31666  - **§759.5 CONTENT ROWS FOR THE DESK.** Faction NAMEPLATES are the thinnest load-bearing pool (36 generation-side names; power-tab labels are fixed strings — every world shows 'Merchant Guilds'); the 
+   1  L31700  - **§764.1 THE DIRECTIVE (owner, in-chat, verbatim intent):** *"build things out completely and carefully, and do not consider cutting corners because of launch gating. I would rather we do everything
+   1  L31741  - **§770.3 COLLECTED:** J-NET1-A..H (sharpest: A — Urquhart over ALL placements, never `trade` tier, because an Urquhart edge is geometry not politics; C — the port set is INJECTED, keeping the ~53 kB
+   1  L31746  - **§771.1 THE COLLECTION** (lane HEAD `602465158`, clean, holding for the landing queue): **W-COIN-1a** `996a30bdb` (§768.1) · **TE-OSHAPE-1** `c8479ab80` (+742/−10 — the `VIRTUAL_DORMANT_WRITERS` fo
+   1  L31773  - **§776.1 THE DIRECTIVE (owner, in-chat, verbatim intent):** *"WE DO NOT HAVE ABSOLUTE PRICES because of the DM's mandate as having control over those final details… change them into heuristic relati
+   1  L31774  - **§776.2 THE CENSUS SEED (chair, executed at `8ea9c871d`):** primary surfaces located — `src/components/new/tabs/MarketPricesSection.jsx` (the section the owner is looking at) + `EconomicsTab.jsx` +
+   1  L31783  - **§778.1 THE ANALYSIS (measured, not theorized).** Where the remaining arc's time actually goes: (a) ⭐ **mutex contention on TARGETED runs** — the gate lock rightly serializes FULL suites, but 2-min
+   1  L31871  ## §795 · T10 PRODUCT-SURFACE BUILD-COMPLETE ON THE FABLE SEAT — THE WALK'S RULINGS ARE CODE, AND THE MARKET SPEAKS THE OWNER'S LAW (2026-08-30; SEAT: Fable 5 — validated)
+   1  L31873  - **§795.1 THE COLLECTION** (HEAD `f414d74bf`, base `ecc6def3e`, 17 files +669/−537, holds for the train landing queue): **CAR 1** `ae597ec3c` — the §767.2/§777 reorder with the void MEASURED (dossier
+   1  L31883  - **§797.2 THE CHAIR'S REFINEMENTS (delivered in-chat, recorded as the design volume's founding constraints):** (1) **the two-plane doctrine mapping** — Temperament/Flaw are the CULTURAL plane (work i
+   1  L31885  - **§797.4 OWNER AMENDMENT (same sitting, verbatim intent):** *"I'll take pure buffs as well… the bane and boons are in place of domains in my eyes. Between temperament and flaw and bane and boons, th
+   1  L31891  - **§800.2 OWNER ADDENDUM (verbatim intent) — THE PARADIGM-AXIS TRAIT MODEL:** "there should be authored temperments and flaws... each temperment should have a corresponding vice flaw to show that eve
+   1  L31895  - **§801 W-LIVES ARCHITECTURE RULED — docs/DESIGN_W_LIVES.md (chair, Fable seat, owner-commissioned "architect this out to be cohesive, coherent, seamless, careful and comprehensive")**: the unified l
+   1  L31900  - **§803 W-OPS ARCHITECTURE RULED — docs/DESIGN_W_OPS.md (chair, Fable seat, owner-commissioned: "architect this out... Also architect out this broad new update for the goals and missions and even inf
+   1  L31905  - **§806 THE SKEPTIC PANEL REPORTED (§441 J7 discharged for the three volumes) — 15 findings, ALL DISPOSITIONED; the four volumes/pack amended in this act; full report at the session scratchpad `skept
+   1  L31909  - **§810 OWNER DIRECTIVE (verbatim intent, three messages) — TIER-GATED FACTION & NPC DENSITY, ROLLED NEVER HARDCODED:** "we need to disperse and make appropriately variable the amount of factions and
+   1  L31944  - **§835 T10 · TRADE & ECONOMY LANDS — chair-verified and CASed: `claude/composite-r4` `19a8c9197` → `fa7e95f2a2f9b4c5a510c7813280b90592a5b436`** (CAS witnessed the old value; chair's own reads: HEAD 
+   1  L31957  - **§847 D2c COLLECTED (holding `72ab685c5`, four cars) — THE DENSITY LIVE HALF IS FULLY WIRED.** The pulse seam + R18/R20 with the mutateEntities prohibition amended in the same act; the R7/R8/R9/R14
+   1  L31958  - **§848 T6 · REALM-NET LANDS — chair-verified and CASed: `claude/composite-r4` `7ce5ca61f` → `bbf9f8a8c71e61b68323a5b4fb9217404a7337e9`.** Chair reads: HEAD/porcelain/ancestry own-verified; the ratch
+   1  L31969  - **§857 THE D&D-TELL CENSUS COLLECTED (a lane fan-out's sweep, 2,094-file denominator) — TE-AGNOSTIC-1 CHARTERED, AND THE TRADEMARK ROWS GO TO THE OWNER'S LEGAL DESK.** The measured surface: **14 cur
+   1  L31974  - **§861 THE CHAIR DECLARATION SEAT-A2'S LANDING STOPPED FOR — `anticipatedReactions.js` HOMES IN INFO, AND THE COUPLING ROW MINTS AS WR-6c UNDER WAR.** The lane landed 22 commits across an 87-commit 
+   1  L31980  - **§867 L4 COLLECTED (holding `80cd4a2a5` — the L2 stack is now L2+L3+L4) + L5 AND F3c DISPATCHED + THE HEARTBEAT CRON RETIRED BY OWNER ORDER.** L4's eighteen adapters + the R2 known-character read l
+   1  L31993  - **§871 TE-DENSITY-1 LANDS — chair-verified and CASed: `claude/composite-r4` `1d27accdc` → `a107bcde33e1e77c117338afdb894f83d2ac0930`. THE DENSITY CONSIST IS ON THE BRANCH** (24 commits: 15 replayed 
+   1  L31994  - **§871.1 THE NINE-GATE STORY AND THE LAWS IT MINTED (rider).** Gates 1-8 red for SEVEN distinct causes, every one cured at cause and none banked: three real assertion classes (bills 4/6), domain-str
+   1  L31995  - **§871.2 THE SITTING'S DIRECTIVES, THE BOARD, AND WHAT IS OWED (rider).** OWNER DIRECTIVES (verbatim intent, all executed): up-to-FOUR lanes filled wherever appropriate + a 30-minute stall/occupancy
+   1  L31997  - **§872.1 THE POST-§871 BOARD (rider): four more trains complete, two mid-build, and the traps of the day.** COMPLETE AND HOLDING: **W-OPS O2** `a1981ab96` (the acceptance seam + R6-reading leaf; ⭐ T
+   1  L32136  - **§874.3 RIDER — R2 · TE-BUDGET-1 (BUD) — COMPLETE AND HOLDING.** Tip `f63abf60a` (2 cars: `3cba129d7` cut +
+   2  L32174  - **§874.5 RIDER — R4 · TE-GROWTH-MIG (GMIG) — ⛔ STOP RECLASSIFICATION, nothing built (read-only, no dock).**
+   1  L32190  - **§874.6 RIDER — R5 · THE LANDING-PLANNING ARC (compact rider) — seven plans + the walk protocol + the
+   2  L32233  - **§874.7 RIDER — R6 · TE-MATERIAL-1 (MAT) — COMPLETE AND HOLDING; per the compile brief only post-§872
+   1  L32269  - **§875.1 R-T8-OSR (rider): the routing charter's premise was FALSE, the ruling that replaced it, and the schema-15 rung.** The §860 routing act chartered three doors for the OSR growth; the routing 
+   1  L32271  - **§875.2 THE REGISTERS THAT FOUGHT BACK (rider): two predictions missed, both attributed to the digit; two instruments refused correctly; one golden moved under the ruled window.** (1) THE LIGHTING 
+   1  L32307  - **§879.7 GLYPH COMPLETE at `8b934fe67` — three cars chair-verified; one deviation RATIFIED; Car B's census park routed back as a rider; a standing census probe chartered (rider).** Lane GLYPH (Opus)
+   1  L32312  - **§879.11 E2 MEASURED — THE MINT WINDOW NEEDS NO GATE OF ITS OWN (six gates → FIVE); the T13 REC is SIGNED and its build starts EARLY off the critical path; W-ARMS is chartered, not dropped; CH-6b d
+   1  L32316  - **§879.15 INSTRLAND FOUR ACTS IN (the re-freeze running under the exclusive lock); T13 EARLY BUILD: Car 0 adopts (c), Car 1's kernel beats every budget by two orders, and the closure red it predicts
+   1  L32318  - **§880 THE INSTRUMENTS CONSIST LANDS — chair-verified and CASed: `claude/composite-r4` `8b07ce45f` → `60255ca8e`, 27 commits, sealed `refs/preserve/landing-INSTR-2026-09-01`. GATE GREEN FIRST RUN** 
+   1  L32319  - **§880.1 T13's BYTE-DIET LANDS AT ZERO PRECISION COST AND THE RESIDUAL BECOMES THE OWNER'S RE-ASK: 205 B on the first-paint closure RAW ceiling, down from 526; Car 1c accepted against the chair's co
+   1  L32324  - **§880.6 THE COUPLED LANDING AT 53 COMMITS: every bill measured on prediction, the T-only risk absent — and one STOP ruled: the INSTRUMENTS tip froze the each-family park ceiling with ZERO headroom,
+   1  L32343  - **§881.14 THE T13 PRE-BOARD SKEPTIC RETURNS BUILD-READY WITH MANDATORY AMENDMENTS — a PLACEMENT CURE puts the composed closure under the ceiling with no owner re-ask; the chair rules the twelve chai
+   1  L32344  - **§881.15 THE HORIZON VOLUME IS FOLDED AND COMMITTED — BUILD-READY WITH OWNER ROWS 69; `docs/DESIGN_HORIZON.md` lands on the ledger line; the ENCOUNTERS design workflow takes the freed slot (rider).
+   1  L32354  - **§882.5 THE COVERAGE PROBE HOLDS CLEAN AND CONVICTS THE DRAFT — the band census runs in nine seconds, its printed tuple becomes the register's prediction, and eleven rows of the volume's drafted ro
+   1  L32359  - **§882.10 THE ENCOUNTERS DESIGN FOLDS BUILD-READY — and its skeptics find that the volume promised "never a defection" while invoking the machinery that ends in the estate's own defection word; thre
+   1  L32362  - **§882.13 THE OWNER RESTATES FULL DELEGATION — "I leave everything to your judgment" — AND THE CHAIR CLEARS THE DESK: nineteen open rows ruled, five held by their nature, and the boundary that decid
+   1  L32372  - **§883.7 ⛔⛔ THE OWNER DISPUTED A CHAIR CLAIM ABOUT THE PROSE AND WAS RIGHT — and measuring it found that the best writing in the repo is not shipped, and the one desk that is wired prints broken Eng
+   1  L32374  - **§884 ⭐⭐ THE HORIZON-INSTR LANDING — the estate's three new instruments land dark and byte-free, the refreezer is cured before the refreeze, and the landing that tightens a ratchet also records two
+   1  L32379  - **§884.5 ⭐⭐ THE TWO DESIGN LANES RETURN AND BOTH CORRECT THE CHAIR'S OWN BRIEF — a root cause one layer below both skeptics, a headline that turns out to be a suppression key, and a flagship example
+  13  L32390  - **§886 ⭐⭐ THE ELEVENTH LANDING — and the first one a customer would notice.** CASed at **`d1a6c773e7d87dd44ef8fcc1ab2edab53c8081fc`** on `2d5112851` and SEALED `refs/preserve/landing-886-2026-09-03`

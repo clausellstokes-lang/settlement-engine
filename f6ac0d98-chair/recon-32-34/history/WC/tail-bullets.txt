@@ -1,0 +1,485 @@
+31482: - **§730.1 THE ARC:** the owner ordered a qualitative review of Azgaar's published materials (wiki + Patreon) for peer features — battle mechanics foremost — with the TIE-BACK LAW bindi
+31483: - **§730.2 THE BATTLE VERDICT:** their battle layer is a manual, unseeded, consequence-free UI toy (count×power×phase-table on ambient `Math.random`; attacker teleported; writes touch not
+31484: - **§730.3 NEW SCOPE:** wave **W-DESK** (DESK-1 realm census table · DESK-2 map↔word linkage · DESK-3 authored comparison charts · DESK-4 perspective-anchored standings, belief-scoped 
+31485: - **§730.4 NEW OWNER ROWS:** **Q-W7** typed data export (paid-surface; REC DM-tier first) · **Q-W8** state treasury — ⚠ would REVERSE the recorded no-conserved-coin ruling f3cf639e (`t
+31486: - **§730.5 PRODUCT SIGNALS BANKED (§A2.4):** the category leader's own wiki, nine years in: *"The map is static. Over-time simulation is planned, but not yet implemented"* — simulate-his
+31490: - **§731.1 THE GRANTS (owner, in-chat, verbatim intent):** *"do Q-W8 regardless. do the confirmation for Q-S1. do both when they are up."* ⇒ **Q-W8 GRANTED over the chair's recommendation
+31491: - **§731.2 TE-STRIP-1 COLLECTED (tip `08fd4f921`, receipt in the 5a850cca scratchpad):** 15/17 arms green, arm-by-arm walked past the &&-chain blindness; one load stray honestly cleared by 
+31492: - **§731.3 ⭐⭐ THE RETIREMENT-PATH RULING (chair, program-level — the cure for both blockers and for STRIP-2..6 ahead).** The lane's finding is ratified: the estate's instruments assum
+31493: - **§731.4 DISPATCH:** **TE-STRIP-3** (Opus) stacks on `08fd4f921`: the Q-S1 retirement set (fog slices + `mapEdits.js` + prefs fields + registry rows + the compendium regeneration as a DEC
+31497: - **§732.1 THE PAUSE:** owner: *"about to run out of 5 hour usages, save the progress per running lane."* Checkpoint orders were sent to all three lanes (commit verified WIP on detached HEA
+31498: - **§732.2 LANE STATES AT CHECKPOINT (receipts in the 5a850cca scratchpad `receipts/`; trees via `git worktree list`):**
+31503: - **§732.3 A SUCCESSOR'S FIRST ACTS:** (1) re-arm the 30-minute lane-stall wakeup; (2) survey the three receipts + `git worktree list` — the 529-law binds: killed agents leave PARTIAL EDI
+31507: - **§733.1** The W-COIN architecture is COMPLETE (81.6KB, 45 sections, receipts throughout, two fan-out censuses folded) and lands this act as **`docs/DESIGN_W_COIN.md` — status DRAFT, SK
+31508: - **§733.2 ⭐ TWO ENGINE DISCOVERIES from its census, docket-grade:** `economicState.wealthIndex` is read at `warDeployment.js:763` and **written nowhere — the razing-spoils subsystem is
+31509: - **§733.3** Successor: panel `docs/DESIGN_W_COIN.md` (five refute lenses, the granary-regen PLAUSIBLE forced), fold blockers as its A1, then W-COIN-1 dispatches Opus-seat. Everything else 
+31513: - **§734.1 THE DEATHS:** TE-STRIP-3 and TE-WEAVE-SEAM died on the Opus session limit (resets 4:20pm ET / 3:20pm CT). The §732 checkpoint orders were processed by both — each committed WI
+31514: - **§734.2 DEATH STATE (CONFIRMED by worktree survey):** **TE-STRIP-3** tip `873e38d59` (3 cars on `08fd4f921`: the retirement-path validator · the Q-S1 retirement set with the fog blob ke
+31515: - **§734.3 RESUME PROTOCOL:** after 3:20pm CT, message the SAME two agents to resume from their transcripts (their context survives), ordering: verify worktree HEAD against receipt first, r
+31519: - **§735.1 THE PANEL (wf_162c3f10-2a9, five lenses; reports preserved in the 5a850cca scratchpad wcoin-panel/):** conservation NOT-REFUTED (4 MAJOR: the "clause-for-clause grain mirror" is 
+31520: - **§735.2 ⭐⭐ NEW OWNER DIRECTIVE (verbatim intent, in-chat):** *"When it comes to an occupied or vassal settlement, the ruling power will have an equal or greater counterpart in all de
+31524: - **§736.1 (owner, verbatim intent):** *"any attempted coup or rebellion has a scaling factor according to the legitimacy of the ruling powers."* ⇒ Chartered into W-SEAT-0's design scope 
+31528: - **§737.1** All §735.1 panel findings are ruled and folded as `docs/DESIGN_W_COIN.md` **AMENDMENT A1** (24 rulings, landed this act; A1 outranks the body). Sharpest: the transfer primitiv
+31532: - **§738.1 (owner, in-chat):** *"anything involving settlement layer mapmaking is deferred until after launch and is part of the module."* Reaffirms §724/§725. ⛔ **THE DISTINCTION EVERY
+31536: - **§739.1 (owner, in-chat, verbatim intent):** *"some of these are directly related to settlement layer mapmaking including dwellings. those need to be deferred to the post launch module w
+31543: - **§739.2 THE LAUNCH BUILD AFTER THIS RULING:** STRIP 2/4/5/6 · the WEAVE cars · W-COIN (post Q10/Q11) · W-SEAT (post architecture) · MF-CH3 flip + MF-CH2B mint · WEB remainder (re-sc
+31547: - **§740.1 (owner, in-chat):** the undercity/content chapters are *"part of the map layer to be deferred."* ⇒ §739.1's provisional keep of CT-4/CT-5 is REVERSED: **the entire undercity t
+31551: - **§741.1 (owner, verbatim intent):** *"as part of each settlement's or maybe even each competing power's risk assessment, it needs to also consider what each foreign power — allied or n
+31552: - **§741.2 THE DESIGN FRAME (chair, for W-SEAT-0):** ONE derived forecast read — a typed anticipated-reaction vocabulary (closed: e.g. approves/indifferent/protests/sanctions/casus-grade)
+31556: - **§742.1** `docs/DESIGN_W_SEAT.md` lands this act (census receipts verbatim in `docs/DESIGN_W_SEAT_VERIFICATION.md`, seven lanes, `wf_f54ab771-ebc`): the derived foreign seat (`foreignSea
+31557: - **§742.2** The five-lens skeptic panel is dispatched on the volume; blockers fold as its A1 before any implementation car. Nothing here touches settlement-layer mapmaking (§738's boundar
+31561: - **§743.1 (owner, verbatim intent):** coups/rebellions/insurgencies are partially independent military units — born from returning rebellious troops or the population risen against itsel
+31562: - **§743.2** Folded into `docs/DESIGN_W_SEAT.md` as **ADDENDUM D10/D11** (landed this act): the irregular-force law (ONE force model, three births, the same derivation a regular unit would 
+31566: - **§744.1** Panel `wf_5d834f53-17f` (five lenses; the estate lens REFUTED the volume's two central integration-cost claims; all findings amendable): the legitimacy "unification" was a hidd
+31567: - **§744.2** The D10/D11 census (`wf_7192952f-226`) is still in flight; its full architecture authors against THIS amended baseline. No W-SEAT implementation car dispatches until W-COIN-1a 
+31571: - **§745.1** The full D10/D11 architecture lands in `docs/DESIGN_W_SEAT.md` (F1–F7, superseding the sketch; census verbatim in the verification doc). The census's design-shaping finds, al
+31572: - **§745.2** The D10/D11 mini-panel dispatches on F1–F7; SEAT-7/8 charter only after it folds. Sequencing unchanged: nothing before W-COIN-1a; SEAT-7/8 after SEAT-2/SEAT-4.
+31576: - **§746.1** Panel `wf_aa485d16-8ab` (three lenses; the promise/flags lens REFUTED the rally spec): the rally as hedged was INERT on the rebellion/insurgency gates it exists to counterweigh
+31577: - **§746.2 ⚠ OWNER-VISIBILITY NOTE the panel demanded:** your "stats dependent on the makeup" clause is delivered as DISPLAY — composition (foot/horse/engines) is derived FROM strength 
+31578: - **§746.3** With A2 folded, the six-directive political architecture (§735–§745) is SEALED end to end: volume + A1 + F1–F7 + A2, every clause census-grounded and panel-attacked. Impl
+31580: - **§746.4 (rider):** the eight panel lens reports (five W-SEAT, three D10/D11) land verbatim in `docs/DESIGN_W_SEAT_VERIFICATION.md` this act, making A1/A2's citations true.
+31584: - **§747.1 THE LANDING.** Both lanes chair-verified with independent log reads (two-part exits, clean trees, ancestry). **CAS executed: `claude/composite-r4` `73f5dfc02` → `1a2471990`** (
+31585: - **§747.2 WSEAM COLLECTED (tip `c22cf17dc`, green 17/17, raw-byte dormancy 9/9 pinned, nine mutation controls — three initially-vacuous ones caught and re-run).** REBASE ORDERED onto `1a
+31586: - **§747.3 ⚠ CALLED OUT FOR THE OWNER, per the raise law:** WSEAM raised the operation-registry walker's `EXEMPT_CEILING` 68→69 — a shrink-only ratchet RAISE, normally owner-gated —
+31587: - **§747.4 INSTRUMENT FINDINGS CHARTERED:** (1) ⚠⚠ **the gate mutex was DOUBLE-ACQUIRED** — two gates ran concurrently, both logging "acquired atomic lock" (PIDs 38898/44560) — ever
+31591: - **§748.1 THE MUTEX VERDICT (supersedes §747.4(1)'s alarm):** the lock IS atomic and was never double-granted — the lock PATH derives from the caller's TMPDIR (`gate-mutex.sh:21`), so t
+31592: - **§748.2 ⚠ F1 — THE LAST VISIBLE LEGACY-MAP PIXEL:** `StyleOverhaulPanel.jsx` still renders a live legacy-map preview via dynamic barrel imports — un-chartered by any strip wave, co
+31593: - **§748.3 THE STRIP-4 CENSUS (105 files: 25 retained · 28 presentation · 16 orphaned · 36 arch-kernel NOT in scope):** ⚠ the charter's "townCartography (14) go" was WRONG — **11 of 
+31594: - **§748.4 THE TEASER VERDICT — NEVER PUBLISHED (CONFIRMED by two live fingerprints):** production (`settlementforge.com`) runs a build frozen at 2026-06-30 — SEVEN DAYS BEFORE the teas
+31595: - **§748.5** The figure-pin sweep is READY (12 symbol-truncation edits, 11 packets, every replacement verified unique; zero retiredBy) — handed to TE-STRIP-2 verbatim. The **W-COIN-1a/1b 
+31599: - **§749.1 THE WEAVE SEAM IS ON THE BRANCH.** TE-WEAVE-SEAM's rebase landed green at `eba286607` (9 commits on `1a2471990`, 18 files, +1387/−52, zero new files) and the chair verified ind
+31600: - **§749.2 The mutex picture completes (folds into §748.1):** WSEAM's gate recorded the lock acquired TWICE, both at 0 polls (PID 81353 `test:ratchet`, PID 41321 `verify:dist`) — `npm ru
+31601: - **§749.3 ACCOUNT-SWITCH CHECKPOINT (owner order, this hour).** TE-STRIP-2 was ordered to checkpoint-commit all WIP, write a RESUME block, and NOT start a gate (a mid-gate kill leaves a st
+31605: - **§750.1** TE-STRIP-2 checkpointed and stopped BEFORE the account switch: worktree HEAD `4ccbfe7d6`, tree CLEAN, no gate started, all three candidate mutex lock directories ABSENT. Two ca
+31606: - **§750.2 CHAIR RULING (vetoable) — no commit amending over the trailer flag.** The lane observed its base commits carry no seat trailers and no `commit-msg` hook exists on the build bra
+31610: - **§751.1 TE-STRIP-2 MID-FLIGHT COLLECTION** (Opus lane resumed per §750.1). Car 3 pre-severs = `669e50473` (13 files, +206/−127; new `src/lib/downloadBlob.js`, `src/domain/drawOpsSvg.j
+31611: - **§751.2 J-STRIP2-F ACCEPTED + CHARTER AMENDMENT (vetoable).** The fourth pre-sever (coerceStyleId/DEFAULT_STYLE_ID) was rightly NOT executed: `townMapStyles.js` has four RETAINED consume
+31612: - **§751.3 CAR 5 SEVERED FROM STRIP-2 (chair ruling, vetoable) + ⛔ Q-STYLE MINTED — OWNER.** The chartered census confirmed `StyleOverhaulPanel.jsx` is map-only, but its deletion reache
+31613: - **§751.4 THE RECON QUARTET LANDS** (this commit, docs/recon/): **R-STRIP5-CENSUS** — the dependency INVERTS (STRIP-4's changeView/fog deletions need STRIP-5 FIRST: ladder :50, illustrat
+31614: - **§751.5 DISPATCHES + THE ARC (chair, under §729's implementation grant + the owner's parallel directive this sitting).** **TE-ST-2** (goods unification) and **TE-CAP** (CAP-1..4, one la
+31618: - **§752.1 THE LANE'S TWO CARS** (own worktree, base `eba286607`, no ref touched, landing deferred behind STRIP-2's gate per §751.5): **car 1 `d89775c3b`** (7 files, +963/−2 — `src/dom
+31619: - **§752.2 SEVEN JUDGMENT ROWS COLLECTED (J-ST2-A..G, vetoable).** Sharpest: vocabulary homed in `src/domain` not `src/data` (tsconfig.full EXCLUDES src/data; types.js is the idiom) · both
+31620: - **§752.3 CONSEQUENCE.** A1.20's ST-2-first precondition for **W-COIN-1a is satisfied the moment these cars LAND** — the treasury then waits on **Q10/Q11 alone** (dispatch brief ready si
+31624: - **§753.1 THE LANDING, CHAIR-VERIFIED WITH THE CHAIR'S OWN READS** (sealed from the worktree HEAD, not the receipt): HEAD `4bb9f80d9` · tree clean (0 porcelain lines) · `eba286607` ances
+31625: - **§753.2 THREE LANE FINDINGS COLLECTED.** (a) **J-STRIP2-J — the prngSeedEntropy gate flake is PRE-EXISTING, LOAD-SENSITIVE, and never to be banked**: one 9999≠10000 failure under loa
+31626: - **§753.3 CONSEQUENCE + QUEUE.** The legacy settlement map now retains exactly ONE user-reachable door: `StyleOverhaulPanel.jsx` (**Q-STYLE, owner — chair recommends ARM 2 DELETE+DE-LIST
+31630: - **§754.1 THE LANDING, CHAIR-VERIFIED** (own reads, sealed from worktree HEAD): HEAD `da4effc66` · clean · `4bb9f80d9` ancestor · four cars `bd180201c` (vocabulary + the two doors) / `5
+31631: - **§754.2 THE GATE-CAUGHT PAIR + THE GENERALIZED LAW.** First gate run RED, both reds real and the lane's own: (a) `tradeDynamicsGoodsSource` — F30's single-source pin regex requires `Tr
+31632: - **§754.3 ⛔ OWNER DIRECTIVE (this sitting, in-chat, re the HERALD): realm news must be 100% contextual narrative — "X attacked Y", "A captured B", "D did Z because of W" — NEVER nume
+31633: - **§754.4 TE-STRIP-5 BUILDS COMPLETE (same hour).** Three cars in its worktree, base `4bb9f80d9`, nothing landed: `2e031778c` (the ladder strip — 7 files, +228/−297) · `923322c78` (th
+31637: - **§755.1 THE LANDING, CHAIR-VERIFIED** (own reads, sealed from worktree HEAD): HEAD `f49e83ac3` · clean · `da4effc66` ancestor · three cars `1cef7ba8d` (the eight map rows leave the la
+31638: - **§755.2 STRIP STATE.** The paid ladder is settlement-map-FREE. STRIP-4 is now gated on **Q-STYLE alone** (STRIP-5's half of its double-gate is DISCHARGED); STRIP-6 waits on STRIP-4; TE-C
+31639: - **§755.3 DISPATCHES** (the owner's parallel directive + §729's grant, per R-WEAVE-READY's DISPATCHABLE-NOW verdicts; four live lanes incl. CAP = the §447 cap; gates serialize): **TE-NET
+31643: - **§756.1 THE OWNER'S WORD (in-chat, this hour): "we have probably way too many lanes running…" — RATIFIED AND EXECUTED.** The mechanism supports it: all build lanes serialize on the s
+31644: - **§756.2 NEW STANDING POSTURE (until the owner widens it): at most TWO live build lanes — one landing while at most one builds.** Read-only recon fan-outs remain unbounded (they don't t
+31645: - **§756.3 TWO ORPHANED SUB-RECONS OF THE NAME LANE COMPLETED POST-KILL AND ARE PRESERVED** (this commit): **`docs/recon/R-NAME3-ENGAGEMENT-RECON.md`** — ⭐ REFUTES the NAME-3 premise: f
+31646: - **§756.4 A THIRD ORPHANED RECON COMPLETED POST-KILL AND IS PRESERVED** (`docs/recon/R-NAME1-ANCHOR-RECON.md`, this commit): ⭐ **no durable post-war record exists anywhere** — the depl
+31647: - **§756.5 THE OWNER ESCALATED IN-SITTING ("we have WAYY more than four lanes up right now. calm it down and moderate it") — EXECUTED, AND THE RULE WIDENS.** The honest count at peak: TE-
+31651: - **§757.1 The owner (in-chat): "we can still have up to four."** Ruling recorded: the concurrency budget is **UP TO FOUR live lanes/agents at any moment**, superseding §756.5's one-build-
+31655: - **§758.1 THE LANE'S FOUR CARS** (own worktree, base `eba286607`, BUILD-ONLY as ordered, no ref touched): CAP-1 `fcfa812c5` (+360/−10; `pack.cells.fl` flux + `pack.cells.g` pack→GRID b
+31656: - **§758.2 TWO CHAIR RATIFICATIONS (vetoable).** (1) **`climateTruthEnabled`'s gate-exemption row is RATIFIED on the `biomeTruthEnabled` sibling posture**: dark by default, absent-key byte-
+31657: - **§758.3 FINDINGS BANKED, DEFERRALS RECORDED.** F-1 FMG's lake/ocean marker `pack.cells.b` is NOT in D1's capture set — CAP-4 errs toward ocean (silence over fabrication); a follow-on c
+31658: - **§758.4 LANDING ORDER ISSUED.** CAP rebases `--onto f49e83ac3 eba286607` (THREE landed waves under it; expected overlap = the lighting census file only, by the STRIP-2/ST-2/STRIP-5 prece
+31662: - **§759.1 THE COLLECTION.** Six read-only readers at `f49e83ac3`, full report `docs/recon/R-GEN-ASSESSMENT.md` (this commit). Headline grades: the pipeline spine A-minus (22 topo-sorted st
+31663: - **§759.2 ⛔ THE LIVE DEFECT — PACT-STRENGTH-ZERO (CONFIRMED, production).** `pactFormation.js:630-631`'s default strength reader consumes `settlement.militaryStrength`, a field ONLY `t
+31664: - **§759.3 THE §711.6 UNIT-LESS CLASS IS ALIVE AT THE GENERATION EDGES (5th–7th sightings).** PROSPERITY requantified 4 ways on 3 divergent scales (and the interior/townV2 regex `'modest
+31665: - **§759.4 GUARD-DEPTH AND DETERMINISM GAPS, SELF-INVENTORIED.** Mutation depth over generation is near-zero (4 of 108 files carry any plant; the five deepest seam contracts sit uncovered-w
+31666: - **§759.5 CONTENT ROWS FOR THE DESK.** Faction NAMEPLATES are the thinnest load-bearing pool (36 generation-side names; power-tab labels are fixed strings — every world shows 'Merchant G
+31670: - **§760.1 THE LANDING, CHAIR-VERIFIED** (own reads, sealed from worktree HEAD): HEAD `c7bdad5eb` · clean · `f49e83ac3` ancestor · six commits (`dffe90bfa`/`9dcf3ef8e`/`719d34d21`/`650d0
+31671: - **§760.2 THE GATE-CAUGHT TRIO + TWO LAWS REINFORCED.** Run 1 RED with three causes, all the lane's own, none reachable by any targeted suite (the §754.2 law's third sighting): (1) the tr
+31672: - **§760.3 DISPATCH (§757 budget: this is the ONE live build lane; no sub-agents).** **TE-NAME re-dispatches on `c7bdad5eb`** with a recon-sharpened brief (R-NAME1/R-NAME3/R-NAME4, §756):
+31676: - **§761.1 THE LANDING, CHAIR-VERIFIED** (own reads, sealed from worktree HEAD): HEAD `518c40880` · clean · `c7bdad5eb` ancestor · four commits (`07eb856db` NAME-1 namers +891/−32 · `
+31677: - **§761.2 WHAT LANDED.** NAME-1: render-time war names (sorted-original-pair + typed casus, degrading to pair-only post-war; coalitions collapse onto the origin pair via joinLedger so an a
+31678: - **§761.3 THE GATE-CAUGHT TRIO — AND A VACUOUS TEST CONVICTED.** Both new display files carried an `item.settlement || settlement` unwrap for a key NO writer produces (the reader-with-no
+31682: - **§762.1** The owner asked what else can run. The ungated sequential queue, ruled by the chair under §729's grant + the §757 budget (ONE build lane at a time, landings serialized): **TE
+31686: - **§763.1 THE GRANT (owner, in-chat, verbatim intent):** *"Run it all I leave it all to your best judgments. If anything requires my permissions now, or that will pop up emergently I give 
+31687: - **§763.2 THE RULINGS (chair, under the grant — each vetoable):**
+31696: - **§763.3 THE ARC TO THE SOAK** (gates serialize; ≤4 live per §757): NET-1 (landing) → **TE-QSTYLE + W-COIN-1a DISPATCH NOW** (both build; land in completion order) → TE-HERALD-1 �
+31700: - **§764.1 THE DIRECTIVE (owner, in-chat, verbatim intent):** *"build things out completely and carefully, and do not consider cutting corners because of launch gating. I would rather we do
+31701: - **§764.2 CONVERSIONS — docketed debt becomes CHARTERED WORK** (chair, under §763.1's grant; each architecture-first where marked): **TE-TRANS-1** (ARCHITECTURE-FIRST + panel: drive the
+31702: - **§764.3 THE ARC AMENDED (§763.3 + these, ordered by dependency):** …current three landings → TE-HERALD-1 → STRIP-4 → TE-UNITS-1(+versioned-key) → TE-GUARDS-1 → POLIS-2+ST-3 
+31703: - **§764.4 OWNER ADDENDUM (same sitting, verbatim intent):** *"So nothing emergent should ever be delayed or deferred for after launch."* CHAIR READING, recorded vetoably: **every finding t
+31704: - **§764.5 OWNER RATIFICATION (same sitting, verbatim):** *"The only exception is anything related to the settlement layer map module(s) which we've already noted."* §764.4's chair reading
+31708: - **§765.1 THE SCOUT'S TABLE** (landed as `docs/recon/R-RESIDUE-739.md`, this commit; all receipts at `518c40880`): **NO WORK:** WEB-12 (its chokepoint no longer exists in the tree — zero
+31709: - **§765.2 DISPATCH: TE-RESIDUE-1** into the slot the scout freed (board back to 4/4: NET-1 landing · QSTYLE · WCOIN · this) — the smalls set: WF-8 shrink-back · graveyard tier rows (
+31713: - **§766.1 THE DIRECTIVE (owner, in-chat, verbatim intent):** *"if you ever see something that can be built better than what it currently is rather than me to maximally be safe with what it
+31714: - **§766.2 CONVERSIONS — recent "maximally safe" postures FLIP to chartered rebuilds:** **TE-NPCGEN-1** (the 1,690-line frozen relic decomposed and renamed to house standard — generateN
+31718: - **§767.1 THE WALK (executed, real app at `518c40880` via the laneNAME worktree + vite on :5201, anonymous user, receipts = screenshots + page text in-session).** What a stranger actually 
+31719: - **§767.2 ⛔ OWNER RULING (in-chat, watching the walk, verbatim intent):** *"the how this was simulated from a generated settlement, should not be there. It should start with the dossier 
+31720: - **§767.3 THE FINDINGS ROSTER (all user-visible, all launch-path per §764):** (a) the §767.2 reorder [RULED] · (b) copy defects in Suggestions: "incursions.. ConsiderPalisade or earthwo
+31721: - **§767.4** The walk continues at the chair's next free window (sign-in flows · Library · a placed-settlement Realm with the Herald live · Compendium · Gallery · PDF export · real-de
+31725: - **§768.1 THE 1a COLLECTION** (sealed in-worktree at `996a30bdb`, 18 files +1931/−26; lands later in queue order): the treasury vault exists, typed end-to-end (`TREASURY_RECEIPT_KINDS` h
+31726: - **§768.2 CHAIR RULING (under §763.1, vetoable) — 1b's CURE AUTHORIZED AS RECOMMENDED.** The charter placed the legitimacy price at the mint (`settlement_clock`) upstream of every appli
+31727: - **§768.3 CHAIR RULING — THE INSTRUMENT MIGRATION (TE-OSHAPE-1), CHARTERED TO THE SAME LANE, LANDS BEFORE 1a's GATE.** The observed-shape walker reds truthfully on `treasury on economicS
+31728: - **§768.4 DEFERRAL RATIFIED:** the regen coin-wipe stands as A1.7's deliberately conservative law (granary regenerates stocked, treasury re-opens empty) — accepted, documented, launch-pa
+31732: - **§769.1 THE COLLECTION** (lane tip `e7dca7935`, six cars, 64 files +606/−3719, holds SECOND in the landing queue behind NET-1): client retirement `ffb6f80a2` · the de-list `c67614ad6`
+31733: - **§769.2 ⭐ THE CENSUS REFUTED §763.2's REGISTRY PREMISE.** Two of R-STRIP6's four "retained consumers" were styleOverhaul-INTERNAL all along (`surveyorWrite.js:165` lived inside `compi
+31734: - **§769.3 CORRECTION RECORDED — §763.2's "the key goes writer-inert" was WRONG as shorthand:** four live save-minting sites still write `settlement.mapEdits` `{layoutLawVersion: 2}`, wh
+31735: - **§769.4 ⭐ NEW LAW (from E-QSTYLE-4): A TOMBSTONE IS WRITTEN IN THE WALKER-INVISIBLE REGISTER.** A retirement comment that spells the retired thing's registrable name (slug, backticked 
+31739: - **§770.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `1ffd8670c` · clean · `518c40880` ancestor · three cars (`a54b4bbcb` Urquhart supergraph · `f491f3841` one port definition · 
+31740: - **§770.2 ⭐ THE FIND: THE DRAWN ROAD MAP WAS NEVER CONNECTED** — the MST spanned city+ only and the lane pass gave everything else one nearest-peer edge, so mutually-nearest pairs form
+31741: - **§770.3 COLLECTED:** J-NET1-A..H (sharpest: A — Urquhart over ALL placements, never `trade` tier, because an Urquhart edge is geometry not politics; C — the port set is INJECTED, kee
+31742: - **§770.4 ORDERS.** QSTYLE LANDS NEXT: rebase `e7dca7935` onto `1ffd8670c` (the lighting file conflicts by construction — landed-verbatim + re-derive whole; overlap otherwise expected ne
+31746: - **§771.1 THE COLLECTION** (lane HEAD `602465158`, clean, holding for the landing queue): **W-COIN-1a** `996a30bdb` (§768.1) · **TE-OSHAPE-1** `c8479ab80` (+742/−10 — the `VIRTUAL_DO
+31747: - **§771.2 GOVERNANCE RULING (vetoable): the `isCriminal on incomeSources` admission is GRANTED.** It is a FIFTH class (a conditionally-written generator key, not flag-gated — the fourth 
+31748: - **§771.3 GOVERNANCE RULING (vetoable): the SCHEMA-11 RE-MINT IS AUTHORIZED to the lane.** Repairing the detector is itself a detector change; the classifier rightly demands a migration fo
+31752: - **§772.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `8ea9c871d` · clean · `1ffd8670c` ancestor · eight cars (the rebase added car 8: the sizeBaseline WIN LOCKED, settlementSlice 9
+31753: - **§772.2 DISPATCH: TE-STRIP-4** into the freed slot, base `8ea9c871d` — its zero-importer precondition now HOLDS at the branch tip (the panel is gone; `src/design/` empty in all five ed
+31757: - **§773.1 THE RULING (chair, under §763, vetoable).** Each landing costs a rebase + whole-census re-derivation + a full gate; compatible waves therefore couple into TRAINS landing on ONE 
+31758: - **§773.2 THE COUNT:** ~25 wave-landings compress to ~13 train-landings; the census/rebase/gate cost saved is roughly a full working day of machine-serialized landings, and the golden corp
+31762: - **§774.1 THE COLLECTION.** TE-HERALD-1: cars HER-1..3 LANDED in-lane (`7f48b336d`, census 408→338, 113 files/786 tests at tip incl. the whole property estate, re-proved after the hook r
+31763: - **§774.2 CHAIR RULING (vetoable) — J-HER-I RATIFIED, AND THE SHIFT IS TAKEN IN T8's WINDOW.** Humanizing `npcAgency.js:914` makes `isMetronomeRepeat` finally FIRE on that family (a per-
+31764: - **§774.3 CHAIR RULING (vetoable) — THE 8 NOT-PROSE ROWS ARE A DETECTOR QUESTION, CHARTERED TO T9:** the prose-numerics census gains a governed RECEIPT-KEY class (values that are RECORD,
+31768: - **§775.1** The owner asked what could be compiled ahead of the trains. The honest answer: not build artifacts (lanes build their own deps off the shared cache; gates build fresh by design
+31769: - **§775.2 LAW REFINED (HERALD's R5, this hour):** `TRUE_EXIT=3` from a mutex-wrapped run is `gate-mutex` GIVING UP (default 40 polls × 30s), not a verdict — and the wrapper's "exit code
+31773: - **§776.1 THE DIRECTIVE (owner, in-chat, verbatim intent):** *"WE DO NOT HAVE ABSOLUTE PRICES because of the DM's mandate as having control over those final details… change them into heu
+31774: - **§776.2 THE CENSUS SEED (chair, executed at `8ea9c871d`):** primary surfaces located — `src/components/new/tabs/MarketPricesSection.jsx` (the section the owner is looking at) + `Econom
+31775: - **§776.3 CHARTERED:** the **economics-heuristics car joins T10/PRODUCT-SURFACE** (same dossier surface as TE-UX-1; the conversion: absolute renders → relative-to-baseline heuristics, th
+31779: - **§777.1 (owner, in-chat, verbatim intent):** *"the how this was simulated above the dossier is redundant with the how this was simulated button in the dossier itself. so just completely 
+31783: - **§778.1 THE ANALYSIS (measured, not theorized).** Where the remaining arc's time actually goes: (a) ⭐ **mutex contention on TARGETED runs** — the gate lock rightly serializes FULL su
+31784: - **§778.2 EXECUTED NOW:** `git worktree prune` on the shared repo (stale records of already-deleted trees removed; no existing tree touched). **CHARTERED — TE-EFF-1, a small instrument c
+31785: - **§778.3 THE SCHEDULING LAW CODIFIED:** the pipeline stays saturated as ONE train gating + up to three building (§757's four), the next train dispatching from its compiled packet the mom
+31789: - **§779.1 (owner, in-chat): "Implement all of these."** TE-EFF-1 dispatches IMMEDIATELY rather than at the next freed slot — budget note recorded: two of the four live lanes (WCOIN, HERA
+31790: - **§779.2 THE DOCK IS OPERATIONAL NOW (chair law, no code change):** the landed lanes' warm worktrees become the dock — `laneST2-tree`, `laneCAP-tree`, `laneNET1-tree` (installed node_mo
+31794: - **§780.1 (owner, in-chat):** the 30-minute wakeup (unchanged cadence, :11/:41) now carries TWO duties: the standing stall check (§448 resume law; a lawful mutex queue with an armed monit
+31798: - **§781.1 THE COLLECTION.** TE-HERALD-1 complete in-lane: `7f48b336d` (HER-1..3, census 408→338) + `64d9137f8` (HER-4..7, census → **227**, 38 files; ADDED 0 at every car; the wide pro
+31799: - **§781.2 LANDING ORDER ISSUED — HERALD TAKES THE SLOT** (completion order, §772.2: WCOIN's two granted acts are still executing, and the gate must not idle, §778.3): rebase `64d9137f8
+31803: - **§782.1 THE COLLECTION** (tip `c2f1cd8ae`, 8 cars, holding for the queue behind HERALD's landing): WF-8 doc truth caught up (`373bbaa84`) · **the MF flips executed with the token-trap d
+31804: - **§782.2 ⭐ J-RES-G RATIFIED — THE CHARTER'S OWN INSTRUCTION WAS WRONG AND THE LANE PROVED IT.** Adding `divine` to `ARCANE_INST_TAGS` would have DELETED a player's custom divine-tagge
+31805: - **§782.3 THE TWO STOPS RULED.** (a) **MF-CH2B**: ratified as a CAR, not a flip (its packet's own §0.0 law); the 111-commit-stale preserve is REFERENCE ONLY, never rebased; the build join
+31806: - **§782.4 EMERGENT DISPOSITIONS** (13 rows collected; sharpest): **21 dead `checks` argv paths across 9 landed packets** (certifications silently under-run — T9 gains the existence-check
+31810: - **§783.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `82991e1e3` · clean · `8ea9c871d` ancestor · six cars · the draw stack and fabric/ chair-probed GONE · the terminal walker `s
+31811: - **§783.2 COLLECTED.** ⭐ J-STRIP4-A — the lane's own graph instrument was WRONG FIRST and a control caught it (a line-comment containing `/*` opened a phantom block that swallowed six 
+31812: - **§783.3 THE MINT + THE E-ROWS.** The train's one package.json byte ENLARGES a mint that was ALREADY OWED at base (recorded detectorDigest vs computed differ on one fixture file, with pac
+31816: - **§784.1 THE CHECKPOINT COLLECTED.** WCOIN answered in full: the long mutex holds were ITS lawful verifications (pids receipted). The §771.2 admission was WRITTEN, VERIFIED GREEN IN ISOL
+31817: - **§784.2 THE RULING (chair, under §763, vetoable): the genesis precondition RELAXES to "any validly-frozen predecessor, BOUND BY DIGEST."** Custody is preserved by the digest bind (a mig
+31821: - **§785.1 THE BLOCKER (E-HER-13), COLLECTED WITH ITS PROOF.** The prose-family walker's AO-5 denominator is DECLARED IMMUTABLE (throws on ANY movement; baseline AND constants both in PROSE
+31822: - **§785.2 THE RULING (chair, under §763 + the owner's own §754.3 directive, vetoable): OPTION (a) — THE GOVERNED RE-MINT.** An immutable denominator with no governed door forbids the o
+31823: - **§785.3 TWO COLLECTIONS.** ⭐ The edge-bundle SIBLING law sharpened by a measured mistake: a timestamp-only diff on a sibling bundle is not churn — it is the EVIDENCE of the single-bu
+31824: - **§785.4 RIDER — THE THREE-FILE FORM RATIFIED.** The chair's "exactly the two files" was wrong by one: `scripts/lib/prose-family-contract.mjs:62-70` hardcodes the same denominator (prot
+31825: - **§785.5 SCHEDULING LAW (chair, after the owner asked why HERALD was slow):** **THE LANDING-SLOT HOLDER GETS MUTEX PRIORITY.** Building lanes run no full-suite/mutex-holding verifications
+31829: - **§786.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `ecc6def3e` · clean · `82991e1e3` ancestor · seven cars · census at :6942 = **2428/367/2061/20533/5668** (the +5/+3/+2/+19/+6 
+31830: - **§786.2 THE WAVE'S THROUGH-LINE, COLLECTED AS LAW: behaviour held + wording moved → RE-RECORD WITH THE PROOF; behaviour moved → STOP.** It decided the AO-5 re-mint (occurrences 5260�
+31834: - **§787.1 (owner, in-chat, verbatim intent):** *"if there is anything that is typically reserved for opus that Fable is more appropriate (I leave to your discretion) let fable handle it."*
+31835: - **§787.2 THE STAFFING PLAN under the grant** (each recorded at dispatch): **FABLE implements** — T8's content cars (TE-CONTENT-1/2, the register sweep and nameplates: voice/immersion wo
+31839: - **§788.1 THE COLLECTION** (tip `58abd3686`, eight commits, gate green both exits, ratchet 11/28,858 ceiling 11, porcelain empty; holds for the slot after WCOIN): **the mutex tiers** (`f15
+31840: - **§788.2 RULINGS.** (a) The chair-note answer stands collected: the unwrapped runs were RESIDUE's (exported-but-unwrapped) and STRIP-4's (uncapped, 7 workers) — both moot (one landed, t
+31844: - **§789.1 (owner, in-chat): "we have extra lanes so fill them up with whatever is appropriate."** Working lanes had drained to ONE (RESIDUE's gate; WCOIN and EFF-1 idle-holding for landing
+31848: - **§790.1 (owner, in-chat):** three free `/code-review ultra` runs, all committed to this project "considering the complexity and the promise." SCHEDULE (each keystroke the owner's; the ch
+31849: - **§790.2 OWNER OVERRIDE (same sitting, supersedes §790.1's schedule):** *"I'll do it just right before the soak and after my walkthrough check visually on everything."* RULED: the ultra 
+31850: - **§790.3 OWNER CLARIFICATION (same sitting): THE PRE-SOAK ULTRA IS AN ITERATED LOOP.** *"after we fix its findings, I'll do it again."* RULED FINAL: post-walkthrough, the window runs **ul
+31854: - **§791.1 (owner, in-chat):** until the §790.3 ultra loop, the owner will ask THIS chair to review, or ask a FRESH session to review with fresh eyes. Both forms served: the chair's review
+31858: - **§792.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `39e39c835` · clean · `ecc6def3e` ancestor · nine cars · census at :6984 = **2428/367/2061/20547/5670** (⭐ the +14/+2 delta 
+31859: - **§792.2 WCOIN's LANDING ORDER GOES OUT** with the explicit code-branch sha; EFF-1 last (its one-hunk register resolution pre-validated). The three-lane landing queue then closes, run 1 o
+31863: - **§793.1 THE LANDING, CHAIR-VERIFIED** (own reads): HEAD `14707a8a8` · clean · `39e39c835` ancestor · 15 commits (12→10 in the rebase as the two census cars correctly EMPTIED, plus t
+31864: - **§793.2 ⭐ THE LANDING'S OWN INTEGRITY FIND.** The mint's sha-binding named a commit the rebased history no longer contained, and the instrument refused with "detector source moved" (pa
+31868: - **§794.1 THE COLLECTION** (HEAD `c4ee613bf` on the CAP dock tree, base `ecc6def3e`, holds for the train landing queue): POLIS-2 `67b558de0` (reciprocal genesis links before discovery — 
+31869: - **§794.2 RULINGS.** (a) **VAR-1b COUNTERSIGNED**: the charter under-priced the port — 17 ambient `Math.random()` draws (upstream gets determinism by monkey-patching, the idiom §1.1 for
+31873: - **§795.1 THE COLLECTION** (HEAD `f414d74bf`, base `ecc6def3e`, 17 files +669/−537, holds for the train landing queue): **CAR 1** `ae597ec3c` — the §767.2/§777 reorder with the void 
+31874: - **§795.2 QUEUE.** T10 holds; landing order after EFF-1 closes the old queue: T5 → T10 → T6 in completion order (T6 still building). The lane's memory topic file stands; its index row 
+31878: - **§796.1** Working lanes had drained to two (T6 building, EFF-1 landing; T5 and T10 sealed-holding). DISPATCHED: **T2 · COIN** (Opus, base `14707a8a8` — §793's landing satisfied its p
+31882: - **§797.1 THE PROPOSAL (owner, in-chat, verbatim intent).** Three user-authorable deity aspects: **Temperament** and **Flaw** (affect the settlement's NPCs — their own temperaments/flaws
+31883: - **§797.2 THE CHAIR'S REFINEMENTS (delivered in-chat, recorded as the design volume's founding constraints):** (1) **the two-plane doctrine mapping** — Temperament/Flaw are the CULTURAL 
+31884: - **§797.3 CHARTERED: W-FAITH, ARCHITECTURE-FIRST** — the design volume (field equation · vocabularies · drift table shape · clamps · envelope gates · Herald surfaces · admission-sc
+31885: - **§797.4 OWNER AMENDMENT (same sitting, verbatim intent):** *"I'll take pure buffs as well… the bane and boons are in place of domains in my eyes. Between temperament and flaw and bane 
+31886: - **§797.5 THE OWNER WAS RIGHT — THE DRIFT SUBSTRATE EXISTS, AND THE DESIGN IMPROVES FOR IT** (chair search at `14707a8a8`, receipts read whole): **`bandedStock.js`** (SP-5b — the share
+31887: - **§798 W-FAITH ARCHITECTURE RULED — docs/DESIGN_W_FAITH.md (chair, Fable seat, owner-commissioned "architect this out to be cohesive, coherent, seamless, careful and comprehensive")**: 
+31888: - **§799 TE-EFF-1 CHAIR-VERIFIED AND CASed** — `claude/composite-r4` `14707a8a8` → **`b8504409937f968a04a1baa7f10843969ebc8d33`** (CAS witnessed old value; nine commits; chair's own rea
+31889: - **§800 OWNER DIRECTIVE (verbatim intent) — WIDEN NPC TEMPERAMENT/FLAW DEPTH TO THE WHOLE LIVED LIFE:** "with everything else that we have built that involves NPC lets also make the temp
+31890: - **§800.1 OWNER ADDENDUM (verbatim intent) — THE CONSUMER SIDE:** "also temperment and flaw should shape both what their goals and the next evoluation of their goals would be as well as 
+31891: - **§800.2 OWNER ADDENDUM (verbatim intent) — THE PARADIGM-AXIS TRAIT MODEL:** "there should be authored temperments and flaws... each temperment should have a corresponding vice flaw to 
+31892: - **§800.3 OWNER ADDENDA (verbatim intent) + CHAIR RULINGS UNDER FULL DELEGATION** ("i leave all judgemetns to you. but think what would be best for hte users in experience yet also beleiba
+31893: - **§800.4 OWNER RULING (verbatim intent) — FULL PARADIGM FOR ALL, TOP-3 DISPLAY:** "regarding the cap, you suggest, i think every NPC and god deserves the full paradigm but we only show 
+31894: - **§800.5 OWNER RULING (verbatim intent) — EDIT VIEW SHOWS AND SHAPES THE FULL CHART:** "but in edit vidw, the user can freely shape all of them and should be able to see all of theier a
+31895: - **§801 W-LIVES ARCHITECTURE RULED — docs/DESIGN_W_LIVES.md (chair, Fable seat, owner-commissioned "architect this out to be cohesive, coherent, seamless, careful and comprehensive")**: 
+31896: - **§802 OWNER SITTING II (verbatim intent) + CHAIR RULINGS:** (a) "are the npcs agentic enough?"; (b) "if their flaws or vices get too bad to extreme or too crowded, they may willingly see
+31897: - **§802 R4 (owner, same sitting, verbatim intent):** "mechanics where an NPC that was compromsied could have a change of heart before exposure, yet still be bound because of that compromis
+31898: - **§802.1 OWNER RATIFICATION + QUESTION (verbatim intent):** "there of course needs to be weighted rolls on everything if left undisterbed by player or user, but the question is do we have
+31899: - **§802.2 OWNER REFINEMENT (verbatim intent):** "more success with a chosen method reinforces personality drift which may increase liklihood of it being chosen again down the line with a h
+31900: - **§803 W-OPS ARCHITECTURE RULED — docs/DESIGN_W_OPS.md (chair, Fable seat, owner-commissioned: "architect this out... Also architect out this broad new update for the goals and missions
+31901: - **§803.1 OWNER SITTING III (verbatim intent) + CHAIR RULINGS:** "they could seek to be more or could seek to be less which goes into refusal or acceptanace and ambition in any form does n
+31902: - **§803.2 OWNER COHERENCE AUDIT (verbatim intent: "i want this system to be fully coherent, do you think that we are missing anything for it to be fully coherent?") — THE CHAIR'S COMPLET
+31903: - **§804 THE REGISTERS PACK COMPILED — docs/briefs/W-REGISTERS-PACK.md (chair, Fable seat; the owner's-pen artifact the whole program points at):** six registers, markup-ready. **I** the 
+31904: - **§805 OWNER DIRECTIVE (verbatim intent) — SPLIT WAR & FAITH INTO TWO WORLD-LEVEL DOSSIER TABS:** "regarding the war and faith panel in a dossier, move that to world and seperate them o
+31905: - **§806 THE SKEPTIC PANEL REPORTED (§441 J7 discharged for the three volumes) — 15 findings, ALL DISPOSITIONED; the four volumes/pack amended in this act; full report at the session scr
+31906: - **§807 OWNER DIRECTIVE (verbatim intent) — THE SHARED-CAMPAIGN GALLERY VIEW:** "if a user shares a full campaign in the gallery... They show the full interactable map (minus any editing
+31907: - **§808 THE §794.2(d) TRANSCENDENTAL HOMEWORK DISCHARGED — chair's own run at tip `b85044099` (laneST2-tree): `tests/lint/transcendentalMathBaseline.test.js` 1 file / 14 tests GREEN, TR
+31908: - **§809 T7 · HYGIENE BUILD-COMPLETE (collected) + T5 LANDING DISPATCHED + T9 · GUARDS DISPATCHED.** T7 holds ten commits at `8ce2071d1` on `14707a8a8`, porcelain clean, gate correctly le
+31909: - **§810 OWNER DIRECTIVE (verbatim intent, three messages) — TIER-GATED FACTION & NPC DENSITY, ROLLED NEVER HARDCODED:** "we need to disperse and make appropriately variable the amount of
+31910: - **§810.1 OWNER EXTENSION (verbatim intent):** "as tiers grow, more factions may join in and more NPCs per appropriate faction where appropriate as weighted by the influence ranking, legit
+31911: - **§810.2 OWNER CORRECTION + EXTENSION (verbatim intent):** "a thorpe could have multiple, maybe two NPCs maybe three all in the ruling power or dispersed about mulitile factions in the th
+31912: - **§810.2(b) OWNER, same sitting (verbatim intent):** "and that scales to all tiers" + "but again... even with the thorpe example, the range has to be believable." **CHAIR:** R10/R11 apply
+31913: - **§810.3 OWNER HARD GATE (verbatim intent):** "one hard gate to all of this... there still must always be one named NPC for a faction in the ruling seat of the settlement. someone has to 
+31914: - **§811 T6 · REALM-NET BUILD-COMPLETE (collected) — HEAD `245b50505` on `ecc6def3e`, eight commits, in-lane full gate GREEN both exits 0 (ratchet 11/28,582 at its base's ceiling; will r
+31915: - **§812 WINDOW-CLOSE CHECKPOINT (owner: "i may run out of 5 hour window... so prepare for that and update approprately when it comes back on. continue on").** HANDOFF pickup card rewritten
+31916: - **§813 LANES REFILLED TO FOUR (owner: "we have 2 open lanes"):** **T11 · UI dispatched** (FABLE seat, staffing reason recorded — §787.2 design-dense cars: the §805 war/faith world-ta
+31917: - **§810.4 OWNER RULINGS (verbatim intent):** "if there is a power that has more influence than the ruling faction, not bounded in blood, but a stronger weighted roll that that power gains 
+31918: - **§810.5 OWNER RATIFICATION, SIMPLIFIED IN THEIR OWN WORDS (verbatim intent): "if the ruling roster reaches zero factions... that triggers a succession or leadersless type stressors. plai
+31919: - **§810.6 OWNER RULING (verbatim intent): "if a power gains the ruler seat in simulation, then that should create both a factoin, appropriate number of NPCs for the tier, and NPC generatio
+31920: - **§810.6(b) OWNER CLARIFICATION (verbatim): "if that power didn't have a faction"** — confirming R21's exact scoping, already worded so: materialization (faction + tier roster + fresh g
+31921: - **§810.7 OWNER CLARIFICATION (verbatim intent): "succession events are tied to title/position of the NPC and not just faction."** **CHAIR RULING — R22, SUCCESSION IS TITULAR:** a succes
+31922: - **§810.8 OWNER RULING (verbatim intent): "succession events should end with either a rebellion, coup, etc that completely overthrows the ruling seat (factions and all) or with the promoti
+31923: - **§814 THE W-TRAIN DISPATCH PACKETS WRITTEN — docs/briefs/W-TRAIN-PACKETS.md (unblocked by §806's panel verdict):** four packets — W-LIVES L1–L8 with every panel re-ruling baked in
+31924: - **§815 OWNER DIRECTIVE (verbatim intent): "in the power tab, in addition to clearly showing who the ruling power is, we also need to make sure we identify who the ruling faction and NPC w
+31925: - **§816 THE WINDOW-DEATH SURVEY AND THE FOUR-LANE RESUMPTION (chair, back on the Fable account).** Survey verdicts, each from executed reads not receipts: **T5's ONE bare landing gate RAN 
+31926: - **§817 THE DENSITY CENSUS COLLECTED AND DISPOSITIONED — TE-DENSITY-1 D1 DISPATCHES.** `docs/recon/R-DENSITY-CENSUS.md` lands this act (360 settlements, 60/tier, real pipeline, harvest i
+31927: - **§818 TE-GUARDS-1 BUILD-COMPLETE (collected) — tip `ec16cfbbc`, tree clean, HOLDING for the gate grant (the slot stays T5's).** The car-4 survey verdict: the stale resume block MISPRED
+31928: - **§819 T5-CURE COLLECTED — 13 OF 14 REDS CURED AT `90008b5ca`; THE LAST IS RULED, NOT PATCHED.** Five cures, each proven at the committed tip: fourteen any-holes TYPED to zero (no widen
+31929: - **§820 THE OWNER OPENS A LANE — T3 · SEAT-A DISPATCHES; THE Q-S ROWS FOR ITS CARS RULED AT DISPATCH (per §763's per-car law).** Preconditions verified before dispatch: W-COIN-1a/1b LA
+31930: - **§821 T5 · GENESIS LANDED — CAS `b85044099` → `f32f8e7ef`; THE SCHEMA-12 MIGRATION EXECUTED THE §819 RULING AND THE INSTRUMENT CROSS-CHECKED THE CHAIR.** Chair verification, own re
+31931: - **§822 TE-DENSITY-1 D1 BUILD-COMPLETE (collected) — DORMANCY BYTE-IDENTICAL, THE LAW PROVEN, AND A DISCOVERY THE CENSUS MISSED; D2 DISPATCHES STACKED.** D1 holds 4 commits at `1296e7e1b
+31932: - **§823 SEAT-1 BUILT AND COLLECTED — THE LANE'S SCOPE STOP RATIFIED, THE VOLUME CORRECTED BY MEASUREMENT, AND SEAT-A2 RE-DISPATCHES ON THE TRUE DENOMINATOR.** SEAT-1 holds 4 commits at `
+31933: - **§824 ROLLING WINDOW-SAFE CHECKPOINT (owner: "make sure that you are updating regularly in case of 5 hour window usage ending. Note that I will switch to another claude account").** The 
+31934: - **§825 TE-MINT-1 DISCHARGED — CAS `f32f8e7ef` → `19a8c9197`; THE DEAD LIBRARY LEAVES UNDER A RECONCILIATION PROVEN EMPTY; ONE LEGAL ROW SURFACES.** Chair verification, own reads: gate
+31935: - **§826 T11 · UI BUILD-COMPLETE (collected) — FIFTEEN COMMITS, EVERY OWNER DIRECTIVE OF THE SITTING RENDERED, ZERO NEW TEST FILES; THE EIGHT CHAIR ROWS DISPOSITIONED; T12'S ARCHITECTURE
+31936: - **§827 D2 COLLECTED — THREE-INSTRUMENT DORMANCY, TWO PREMISES OVERTURNED ON EVIDENCE, AND THE LIVE HALF DEFERRED AT A NAMED BLOCKER; THE VOCABULARY RULED; D2b DISPATCHES.** D2 holds 7 c
+31937: - **§828 THE W-MEM VOLUME DELIVERED — THE CHARTER'S OWN PREMISE CORRECTED, THE SOCKET FOUND ALREADY BUILT; THE FIVE-LENS PANEL LAUNCHES; D2b DISPATCHES.** `docs/DESIGN_W_MEM.md` lands thi
+31938: - **§829 THE W-MEM PANEL RETURNS: REFUTED, FIVE OF FIVE — 40 MAJORS; THE FOLD ORDERED, THE VOLUME'S CORE SECTIONS REWRITE.** The §744 discipline pays again, harder: every lens refuted th
+31939: - **§830 T10 LANDING MID-FLIGHT RULING — THE GOLDEN DRIFT IS A DECLARED SHIFT WEARING A WRONG COVERAGE CLAIM; RE-RECORD BY RITUAL.** Gate 1 red (9 failures / 5 causes); the lane cured 8 A
+31940: - **§831 ROLLING CHECKPOINT (owner's second window advisory; account switch expected).** The pickup card REWRITTEN WHOLE to the minute (the §824–§830 piecemeal edits consolidated): T10'
+31941: - **§832 ACCOUNT-RETURN RESYNC + FOUR RESUMPTIONS (chair, back on the Fable account; owner: "i made some progress in another claude account see where we have progressed and continue the goo
+31942: - **§833 THE W-MEM FOLD LANDS — docs/DESIGN_W_MEM.md is now the PANEL-HARDENED volume (1,096 lines; the pre-panel version it replaces may no longer be built from anywhere).** The fold lan
+31943: - **§834 T12 · W-MEM BUILD DISPATCHED (owner: "we have a lane open"):** the concluded-wars ledger builds from the §833 panel-hardened volume AND NO OTHER — the dismissal-trap inversion,
+31944: - **§835 T10 · TRADE & ECONOMY LANDS — chair-verified and CASed: `claude/composite-r4` `19a8c9197` → `fa7e95f2a2f9b4c5a510c7813280b90592a5b436`** (CAS witnessed the old value; chair's 
+31945: - **§836 TE-RESIDUE-2 DISPATCHED (owner: "we have an extra lane now" — T2-land idle while its gate runs):** the launch-tail smalls sweep, VERIFY-FIRST row by row against R-RESIDUE-739 at 
+31946: - **§837 D2b'S RESUMPTION REPORT COLLECTED — a red lane tip cured, and §827's PREMISE CORRECTED BY EXECUTED EVIDENCE.** (1) **A LANDED LANE TIP CAN BE RED:** D2's in-lane tip `31b0392d5`
+31947: - **§838 T12 · W-MEM BUILD REPORT COLLECTED (3 cars holding at `d5cded575`) + THE SEAL RULING (chair, §763 omnibus, LOUDLY VETOABLE).** Cars: the two war bands gain persistable keys (beha
+31948: - **§839 TE-RESIDUE-2 COLLECTED (holding at `4b937c662`, 2 cars, census bill ZERO by execution, 17 files/318 tests green at the committed tip).** **Verify-first was the lane's whole value:*
+31949: - **§840 T12 SECOND REPORT — a ruling vacated by measurement, the suite catching what node-proofs cannot, and A HARD CEILING CHARTERED.** (1) Ruling 6 discharged: the queued vitest run la
+31950: - **§841 THE OVERNIGHT ORDER (owner, verbatim): "alright, i'm going to bed, please continue all the way to just right before the soak."** The §763 grant runs the night: the chair drives th
+31951: - **§841.1 (owner, verbatim, on retiring): "i leave all judgements to you."** The overnight grant is total within the four thresholds and the by-nature carve-outs; the standing vetoable rul
+31952: - **§842 T2 · COIN LANDS — chair-verified and CASed: `claude/composite-r4` `fa7e95f2a` → `acaaad63f39437528294f17517cfe2118369acbb`.** Chair's own reads: HEAD match · porcelain empty 
+31953: - **§843 T12 · W-MEM BUILD-COMPLETE (holding at `84ae0f104`, 5 commits) — the writer as ONE act: flag + three doors + residue row + certification row + the grace-window seal.** Receipts 
+31954: - **§844 DOUBLE COLLECTION — SEAT-A2 AND D2b BOTH BUILD-COMPLETE; D2c WIRING + SP-W1 WALKER DISPATCHED.** **SEAT-A2 (holding `c675a0565`, all three cars):** SEAT-2c/3/4 landed with 24 fil
+31955: - **§845 T7 · HYGIENE LANDS — chair-verified and CASed: `claude/composite-r4` `acaaad63f` → `7ce5ca61fdb307439a8ddabcd5261176a2825841` — AND THE CHARACTER PROGRAM OPENS: W-LIVES L1 (
+31956: - **§846 SP-W1 COLLECTED (holding `b61a6585`, 2 files/+928 lines, ZERO src bytes) — THE ALLOWLIST-REBUILDER CLASS IS CLOSED WHERE IT BITES, AND IT WAS LIVE TODAY.** The walker governs the
+31957: - **§847 D2c COLLECTED (holding `72ab685c5`, four cars) — THE DENSITY LIVE HALF IS FULLY WIRED.** The pulse seam + R18/R20 with the mutateEntities prohibition amended in the same act; the
+31958: - **§848 T6 · REALM-NET LANDS — chair-verified and CASed: `claude/composite-r4` `7ce5ca61f` → `bbf9f8a8c71e61b68323a5b4fb9217404a7337e9`.** Chair reads: HEAD/porcelain/ancestry own-ver
+31959: - **§849 W-LIVES L1 COLLECTED (holding, 2 commits on `7ce5ca61f`) — THE CHARACTER PROGRAM'S FIRST CAR IS BUILT.** `paradigmAxisCatalog.js` carries the legacy per-word values VERBATIM acro
+31960: - **§850 THE L2 RECON DISCHARGED — THE DRIFT KEY REFUTED BY EXECUTION, AND THE CURE RULED STRUCTURAL (vetoable, the morning desk's sharpest row).** The mandatory uid walk (R-L2-UID-RECON.
+31961: - **§851 W-FAITH F1c COLLECTED (stack holding at `ee6b8d265` = L1+F1c in one tree, ancestry verified) — AND THE CAR FALSIFIED THE CHAIR'S VOLUME BY MEASUREMENT.** The deity schema lands a
+31962: - **§851.1 F1c postscript — A NEW COSTUME FOR AN OLD LAW, minted from an aborted run:** a conviction plant made in the shared worktree was REVERTED while its runner waited 10+ minutes on 
+31963: - **§852 T9 · GUARDS LANDS — chair-verified and CASed: `claude/composite-r4` `bbf9f8a8c` → `6770f878fd0f855bbb4d69c5d851782dc7c55be8`.** Chair reads: HEAD/porcelain/ancestry own-verifi
+31964: - **§853 W-LIVES L2 COLLECTED (holding `120c70f5a`, four cars, 1,960 insertions) — THE BRIDGE, THE DRIFT STATE, AND A PANEL RULING AMENDED BY MEASUREMENT.** **The bridge:** the recon's re
+31965: - **§854 TE-VOICE-1 COLLECTED (priced report, zero commits — the stop-at-report judgment ACCEPTED) — THE DRIFT IS A DEFECT, AND THE DEFECT IS A DISARMED GUARD.** The verdict, all CONFIR
+31966: - **§854.1 THE VOICE SKEPTIC RETURNS — ALL FIVE CLAIMS SURVIVE, three hardened and two refined; relayed to the live burn lane.** Mechanism confirmed at the source: the permit is `check-te
+31967: - **§855 VOICE-1b COLLECTED (holding, 2 commits on `6770f878f`, 19 files) — THE DARK WINDOW IS BURNED.** Cars 1–4 + 5c DONE: **441 reader-invisible em dashes → 0** (299 pool keys + 14
+31968: - **§856 W-LIVES L3 COLLECTED (stack holding at `f8ac84c1b` = L2+L3, three commits) — THE FUNNEL IS BUILT, AND IT FOUND THE ESTATE'S SECOND FUNNEL.** The source-qualification census is th
+31969: - **§857 THE D&D-TELL CENSUS COLLECTED (a lane fan-out's sweep, 2,094-file denominator) — TE-AGNOSTIC-1 CHARTERED, AND THE TRADEMARK ROWS GO TO THE OWNER'S LEGAL DESK.** The measured surf
+31970: - **§858 T8 · SHIFT WINDOW FIRST REPORT — two ruled movers executed TO THE ROW, and the blocker that proves the instruments: THE OSR MINT AUTHORIZED.** Car 1 (J-T7-C/§809): the corrupti
+31971: - **§859 T11 · UI LANDS (chair-verified, CASed `6770f878f` → `9f13aa4e3d9396cb3982462b6c914eea5ff92ad3`) + SEAT-A2'S LANDING DISPATCHED + W-OPS O1 COLLECTED.** **T11:** 24 commits across
+31972: - **§858.1 CORRECTION, ON THE RECORD:** §858 carried the lane's own probe defect into the ledger — "zero real key-set changes" is FALSE; the corrected measurement is **13 shapes changed 
+31973: - **§860 T8 SECOND REPORT — THE RELABEL LANDS TO THE ROW; THE MINT REFUSED WITH PROOF, AND THE REFUSAL ACCEPTED (J-T8-E).** **The relabel car (`0999f8059`):** 27 rows exactly as approved;
+31974: - **§861 THE CHAIR DECLARATION SEAT-A2'S LANDING STOPPED FOR — `anticipatedReactions.js` HOMES IN INFO, AND THE COUPLING ROW MINTS AS WR-6c UNDER WAR.** The lane landed 22 commits across 
+31975: - **§862 THREE SLOTS FILLED (owner: "don't we have free lanes?"):** W-LIVES L4 (the source adapters off L3's verdict census + the known-character read with the sight ruling structural + the
+31976: - **§863 THE LANDING MANIFEST RE-SORTED INTO CONSISTS (owner audit prompt: "you have sorted them into proper trains correct?") — two couplings ruled, cutting the queued gate count from ~8
+31977: - **§864 SEAT-A2 LANDS — chair-verified and CASed: `claude/composite-r4` `9f13aa4e3` → `6b74ad5bf7bde796dbc65435b25c95c3541b0ccf`. COUNCIL POWER IS ON THE BRANCH** (24 commits: the seat
+31978: - **§865 D3 COLLECTED (holding `c283df0c4` on the density tree — the consist is now COMPLETE: D1+D2+D2b+D2c+D3, one landing) — AND §810.8'S CENTRAL DISTINCTION IS UNREACHABLE IN THE TR
+31979: - **§866 F2c COLLECTED (holding `1a045a704` on the L1/F1c tree) — THE ARM IS LIVE ON EXACTLY ONE SURFACE, AND THAT IS THE CAR'S TRUE RESULT.** The D1 arm landed (authored wins, authored-n
+31980: - **§867 L4 COLLECTED (holding `80cd4a2a5` — the L2 stack is now L2+L3+L4) + L5 AND F3c DISPATCHED + THE HEARTBEAT CRON RETIRED BY OWNER ORDER.** L4's eighteen adapters + the R2 known-cha
+31981: - **§868 T12 · WAR-MEMORY LANDS — chair-verified and CASed: `claude/composite-r4` `6b74ad5bf` → `1d27accdc463d8e9cc1d6b57cdbb0e3781f4e2e7`. THE WARS ARE REMEMBERED.** Chair reads: HEAD
+31982: - **§869 OWNER DIRECTIVE (verbatim): "remember to update everything appropriately i have 97% of weekly usage left and will swithc accounts once i hit the maximum."** The rolling-card discip
+31983: - **§870 ACCOUNT-SWITCH MARK (owner switching NOW) — PER-LANE PROGRESS, fresh-read by the chair seconds before the switch. ⚠ THE FOUR LIVE AGENTS DIE WITH THIS SESSION; their WORKTREES 
+31989: - **§870.1 DENS-land HALTED CLEAN (rider to the switch mark): HEAD `c2bb9c6e0966d8034682f7a97b8901b47a24e2df`, porcelain EMPTY, 18 commits on `1d27accdc` (a 102-commit span; three artifact-
+31990: - **§870.2 F3c HALTED CLEAN (rider): HOLDING at `66c3f53feca075d27c774a3971cb65f6b1d96c11`, act 1 COMPLETE — THE EMBED CARRY IS PROVEN BY TWO HASH COINCIDENCES** (at base the through-the-
+31991: - **§870.3 L5 HALTED CLEAN (the last of the four — THE SWITCH CHECKPOINT IS COMPLETE): HOLDING at `04a6e32a714252562a904cc12a388135c289a588`, five cars, porcelain EMPTY — the dirty regi
+31992: - **§870.4 T4 HALTED WITH ITS FULL REPORT (the checkpoint's final rider): HOLDING at `394d54cbf` on `6b74ad5bf` (deliberately not rebased past T12).** SEAT-5 + SEAT-2b-rest + the terminal b
+31993: - **§871 TE-DENSITY-1 LANDS — chair-verified and CASed: `claude/composite-r4` `1d27accdc` → `a107bcde33e1e77c117338afdb894f83d2ac0930`. THE DENSITY CONSIST IS ON THE BRANCH** (24 commit
+31994: - **§871.1 THE NINE-GATE STORY AND THE LAWS IT MINTED (rider).** Gates 1-8 red for SEVEN distinct causes, every one cured at cause and none banked: three real assertion classes (bills 4/6),
+31995: - **§871.2 THE SITTING'S DIRECTIVES, THE BOARD, AND WHAT IS OWED (rider).** OWNER DIRECTIVES (verbatim intent, all executed): up-to-FOUR lanes filled wherever appropriate + a 30-minute stal
+31996: - **§872 THE SMALLS LAND — chair-verified and CASed: `claude/composite-r4` `a107bcde3` → `853e0e9ba4aa1f6df5703082a8fcbc11208819d5`. FIRST-RUN GREEN GATE** (the sitting's first: ratchet
+31997: - **§872.1 THE POST-§871 BOARD (rider): four more trains complete, two mid-build, and the traps of the day.** COMPLETE AND HOLDING: **W-OPS O2** `a1981ab96` (the acceptance seam + R6-readi
+31998: - **§873 WINDOW-CLOSE MARK (the owner's 5-hour window expires; the successor resumes MID-LANDING) — PER-LANE MARKS, fresh-read seconds before the close. ⚠ THE LIVE AGENTS AND THE DISPAT
+31999: - **§873.1 RIDER: the fifth boarding pack BEAT the window** — FOLLOW-BOARDING-PACK.md is COMPLETE (supersedes §873's item 3; do not re-dispatch). Its three findings bind the follow-ons l
+32113: - **§874.1 WAVES 5–6 AND THE SIX GATES (rider): the owner's cure+ratify executed, the refusal that outran its own ratification, and the two laws the gate minted.** WAVE 5 (Opus) STOPPED o
+32114: - **§874.2 RIDER — R1 · TE-RATCHET-MAG (RMAG) — COMPLETE AND HOLDING.** Tip `b19f20631` (3 cars on
+32136: - **§874.3 RIDER — R2 · TE-BUDGET-1 (BUD) — COMPLETE AND HOLDING.** Tip `f63abf60a` (2 cars: `3cba129d7` cut +
+32156: - **§874.4 RIDER — R3 · R-GODFORTUNES (GF) — MEASUREMENT COMPLETE, read-only, porcelain EMPTY at exit.** THE
+32174: - **§874.5 RIDER — R4 · TE-GROWTH-MIG (GMIG) — ⛔ STOP RECLASSIFICATION, nothing built (read-only, no dock).**
+32190: - **§874.6 RIDER — R5 · THE LANDING-PLANNING ARC (compact rider) — seven plans + the walk protocol + the
+32233: - **§874.7 RIDER — R6 · TE-MATERIAL-1 (MAT) — COMPLETE AND HOLDING; per the compile brief only post-§872
+32265: - **§874.8 THE LANDING-ORDER RULING, THE COLLECTION'S RESOLUTIONS, AND THE BOARD.** ⭐⭐ **RULING (chair, vetoable): the landing order is T8 → WAR → HYGIENE → INSTRUMENTS → FOLLOW
+32267: - **§875 T8 · SHIFT LANDS — chair-verified and CASed: `claude/composite-r4` `598642981` → `6308a27b8` (full `6308a27b8ad0d4679754b76245b1d340ed8c6969`), 12 commits, sealed `refs/preser
+32269: - **§875.1 R-T8-OSR (rider): the routing charter's premise was FALSE, the ruling that replaced it, and the schema-15 rung.** The §860 routing act chartered three doors for the OSR growth; 
+32271: - **§875.2 THE REGISTERS THAT FOUGHT BACK (rider): two predictions missed, both attributed to the digit; two instruments refused correctly; one golden moved under the ruled window.** (1) TH
+32273: - **§876 THE WAR-TRUTH CONSIST LANDS — chair-verified and CASed: `claude/composite-r4` `6308a27b8` → `3f9201e39` (full `3f9201e39966e94c4f4b70bad25c263daca51039`), 14 commits, sealed `r
+32275: - **§876.1 R-FENCE-SCOPE (rider): the chair's own seal convicted, amended, and then RESOLVED NARROWER THAN FEARED.** The §875.2 fence re-arm said "STOP outside T13's window — the last ru
+32277: - **§876.2 THE TERMINAL WINDOW'S EPISTEMICS (rider): two of the chair's attributions died by control, and the instruments kept sharpening their own operator.** (1) THE WALKER ACT `18df1bb3d
+32279: - **§876.3 THE CLOSE IS CHARTERED (rider): both final builds are one signature from dispatch, the endgame's paper is banked, and the owner's handoff is three documents.** The T13 panel (cen
+32281: - **§876.4 THE OWNER'S REFRESHED GRANT (rider, verbatim): "I leave all decisions to your best judgment, and I give my permissions freely for anything current and emergent."** Given mid-land
+32283: - **§876.5 ⭐⭐ THE OWNER SEATS OPUS FOR THE REST OF THE ARC — AND THE MARKING LAW IS RESTATED (owner, verbatim): "Use opus for everything now. But in accordance with our current practi
+32285: - **§877 THE ENGINE-HYGIENE CONSIST LANDS — chair-verified and CASed: `claude/composite-r4` `3f9201e39` → `8b07ce45f` (full `8b07ce45f179b583c6a152412a23777cb1a15a38`), 17 commits, seal
+32287: - **§877.1 THE RETROVALIDATION QUEUE'S FIRST APPEND UNDER THE INVERTED SEAT — SIX ROWS IN ONE ACT (rider).** The queue's previous row was §723 (2026-08-26); §724/§725 had returned the 
+32289: - **§877.2 THE SPAN'S OTHER WORK, AND FOUR CHAIR RULINGS INCLUDING ONE AGAINST THE CHAIR (rider).** **THE TAIL-O CURES**: four cars at `e455c3fa4`, sealed `refs/preserve/tailo-cures-2026-09
+32291: - **§878 ⛔ THE OWNER PAUSES THE PROGRAM AND RESTORES THE SPLIT SEAT (owner, verbatim): "Now go back to using Fabel, doing the retro validation and the previous split tasks! Bring everythi
+32293: - **§878.1 WHAT THE OPUS SPAN PRODUCED, AND THE TWO ROWS THAT NEED THE OWNER'S EYE FIRST (rider).** THE SPAN: one landing collected (§877 HYGIENE), one landing 22 commits deep and clean, a
+32295: - **§879 ⭐⭐ THE RETROVALIDATION SITTING — the Fable seat returns as Fable 5.1 and re-derives the inverted span (owner, verbatim: "please continue the pending work, substituting Fable 
+32297: - **§879.1 ⛔ TWO CHAIR-BRIEF ERRORS SURFACED BY THE PASS, both owned (rider).** **(1) "Fix the sanitiser by preserving the codepoints" was WRONG for jsPDF.** The repair lane measured it b
+32299: - **§879.2 THE PAUSE STATE CONSUMED, and what resumes (rider).** All three paused trees verified unchanged since §878 (`eb150f31b` p0 · `0dac7b074` p2-untracked-only · `f09ce3ff7` p9-sta
+32301: - **§879.3 ✅ EP-g2 RESOLVED-EXECUTED — the row §877's collection promised and never landed (V1 found `EP-g2` at exactly four ODQ mentions, the ✅ row absent).** The EP-g2 gate is rule
+32303: - **§879.4 THE FOUR-CENSUS NOTE FOR THE REPAIR LANE, and the assessment in flight (rider).** PAIDFIX's repair 1 moved all three culture sites through a NEW `src/domain/resolveCulture.js` he
+32305: - **§879.5 CUTOFF PREPARATION (owner: "I'm likely to run out of five hour weekly usage so prepare for that for seamless transition") (rider).** Every running lane's brief and resume state i
+32306: - **§879.6 THE RESUME SITTING — the successor chair (Fable 5.1, session 25b6c8bb) picks up the §879.5 cutoff card; the owner re-issues the standing order and adds three directives; the a
+32307: - **§879.7 GLYPH COMPLETE at `8b934fe67` — three cars chair-verified; one deviation RATIFIED; Car B's census park routed back as a rider; a standing census probe chartered (rider).** Lane
+32309: - **§879.8 EFFICIENCY PROTOCOL III — five quality-neutral-or-positive moves for the remaining landings, adopted vetoably at the owner's question ("anything that can be done to help make t
+32310: - **§879.9 THE OWNER RATIFIES PROTOCOL III WHOLE ("Do all of these") — E5 EXECUTED in this act, E4 becomes standing law, E1–E3 fire at their measured moments (rider).** E5: the handoff 
+32311: - **§879.10 GLYPH COMPLETE at `1e9898d01` and SEALED; COUPLEDPREP delivers the boarding checklist and a rehearsal tip; two chair rulings (R-Q3, R-2a); E3 and E2 dispatched; E4 CONFIRMED by 
+32312: - **§879.11 E2 MEASURED — THE MINT WINDOW NEEDS NO GATE OF ITS OWN (six gates → FIVE); the T13 REC is SIGNED and its build starts EARLY off the critical path; W-ARMS is chartered, not d
+32313: - **§879.12 PAIDFIX COMPLETE at `32ac4980a` and SEALED — nine repairs landed, one STOPPED to the owner's desk (a regressed shipped feature), a self-caught census defect corrected in-lane,
+32314: - **§879.13 THE CRITICAL-PATH LANE NEVER RAN — the 16:01 interrupt killed it silently and the stall check found it 85 minutes later; re-dispatched. COUPLEDREH completes the rehearsal (E3 
+32315: - **§879.14 E1 MEASURED — THE PAID CONSIST RIDES THE COUPLED GATE as slot 7; the consist's one lane-own red goes back to its author as a rider; the coupled landing is now FOLLOW-ONS + TAI
+32316: - **§879.15 INSTRLAND FOUR ACTS IN (the re-freeze running under the exclusive lock); T13 EARLY BUILD: Car 0 adopts (c), Car 1's kernel beats every budget by two orders, and the closure red 
+32317: - **§879.16 SEAMCYCLE cures the MAT/SEAM import cycle at ZERO bundle bytes and measures the variant it rejected; two more landing blockers surface (seven typecheck reds the lint pins cannot
+32318: - **§880 THE INSTRUMENTS CONSIST LANDS — chair-verified and CASed: `claude/composite-r4` `8b07ce45f` → `60255ca8e`, 27 commits, sealed `refs/preserve/landing-INSTR-2026-09-01`. GATE GRE
+32319: - **§880.1 T13's BYTE-DIET LANDS AT ZERO PRECISION COST AND THE RESIDUAL BECOMES THE OWNER'S RE-ASK: 205 B on the first-paint closure RAW ceiling, down from 526; Car 1c accepted against the
+32320: - **§880.2 THE COUPLED CONSIST BOARDS on `60255ca8e`: both landing blockers closed by measurement, the boarding order consolidated, the landing lane dispatched; T13's seam alternative price
+32321: - **§880.3 THE USAGE CUTOFF, SURVIVED CLEAN — three lanes killed by the limit at ~20:05, nothing lost, all three re-dispatched from their receipts at 20:55; DOCKRETIRE reclaims 13.9 GiB w
+32322: - **§880.4 TAIL-F's REHEARSAL COMPLETES ON PREDICTION and produces the finding it existed for: a base-side darkness proof governs an F-line file, and the cheap cure would ship a green claim
+32323: - **§880.5 R-TAILF-1 DISCHARGED at the rehearsal tip `66d6e9235` (sealed); the W-ARMS architecture note is COMPLETE and moves its landing AFTER the freeze; the HORIZON architecture runs as 
+32324: - **§880.6 THE COUPLED LANDING AT 53 COMMITS: every bill measured on prediction, the T-only risk absent — and one STOP ruled: the INSTRUMENTS tip froze the each-family park ceiling with Z
+32325: - **§880.7 THE ACCOUNT SWITCH, SURVIVED — the ratchet act outlived its lane and answered on prediction, the `--update` refused on a walker that reads prose, the cure is ruled at the instr
+32326: - **§880.8 OWNER RULED — THE T13 RE-ASK: OPTION A. The first-paint closure RAW ceiling is raised 1,047,000 → 1,048,000 (+1,000 B, ~0.1 %), cause T13 TRANS; T13-BUILD resumes wiring (rid
+32327: - **§880.9 THE SECOND STOP OF THE COUPLED LANDING — the voice ratchet's three HELD magnitudes: sixty-three em dashes in six picked cars' string literals; RULED — cure the population by 
+32328: - **§880.10 CUTOFF PREPARATION #2 — the owner's window closes again and the account switches; the resume map is refreshed for a successor on any account (rider).** Owner, in chat, ~23:31 
+32329: - **§880.11 THE SECOND ACCOUNT SWITCH SURVIVED — the successor chair resumed in eight minutes from the CUTOFF #2 map; the detached ratchet run outlived its lane again, and four lanes re-b
+32330: - **§880.12 CUTOFF PREPARATION #3 — the owner delegates every decision and warns the window closes again; the resume map is refreshed with each in-flight thing's exact state and next comm
+32331: - **§881 THE COUPLED CONSIST LANDS — FOLLOW-ONS + TAIL-O + TAIL-L + PAID on ONE gate: chair-verified and CASed `claude/composite-r4` `60255ca8e` → `fab576aba`, 58 commits, sealed `refs/
+32332: - **§881.3 THE OWNER CAPS THE BOARD AT FOUR — and T13-BUILD HOLDS with the transcendental census at ONE site, a closure red found by its own sixth build and cured at placement, and zero g
+32333: - **§881.4 OWNER: "LIGHT EVERYTHING UP BEFORE THE EXHAUSTIVE REVIEW" — the arc gains a LIGHTING WAVE between the HORIZON dark cars and the GOLDEN freeze; every dark mechanism lights as a 
+32334: - **§881.5 THE SESSION-LIMIT DEATH — the second account's limit killed the whole board at ~01:1x ET with nothing on disk; the third account's chair resumed from the map in twelve minutes 
+32335: - **§881.6 OWNER (2026-09-02 ~02:25 ET, in chat, two messages while the four lanes ran): "prepare for seamless transition in the case of a 5 hour window usage ending. and I leave all decisi
+32336: - **§881.7 OWNER (2026-09-02 ~02:45 ET, in chat): "remember that fable is architect, manager, validator, recon, and survey etc.... however opus is the primary implementor and verifier." (ri
+32337: - **§881.8 THE LIGHTING INVENTORY IS COMPLETE — 91 rules doors dark in the default preset, 8 doors never minted, 9 prerequisite builds, 13 owner rows — and a skeptic panel runs before a
+32338: - **§881.9 T13's PRE-BOARD (half-1) IS COMPLETE — the stack composes CLEAN onto the coupled tip, but the composed first-paint closure is PREDICTED 95 BYTES OVER the ceiling the owner sign
+32339: - **§881.10 OWNER IDEA (2026-09-02 ~02:55 ET, in chat, verbatim in substance): chance encounters between named NPCs — a named NPC travelling to another settlement (envoy or spy, whatever 
+32340: - **§881.11 OWNER CLARIFIES §881.10 (2026-09-02 ~03:05 ET, in chat, verbatim): "when i say turning i meant compromised to another settlement" (rider).** RULED as applied: the encounter mec
+32341: - **§881.12 OWNER CLARIFIES §881.10's tie clause (2026-09-02 ~03:10 ET, in chat): "I meant to extend NPC relationships to the intersettlement realm. so the vocabulary should already exist"
+32342: - **§881.13 OWNER (2026-09-02 ~03:20 ET, in chat): "so now architect it fully and impliment it" — THE ENCOUNTERS PROGRAM IS OPENED (rider).** The owner orders the chance-encounter mechani
+32343: - **§881.14 THE T13 PRE-BOARD SKEPTIC RETURNS BUILD-READY WITH MANDATORY AMENDMENTS — a PLACEMENT CURE puts the composed closure under the ceiling with no owner re-ask; the chair rules th
+32344: - **§881.15 THE HORIZON VOLUME IS FOLDED AND COMMITTED — BUILD-READY WITH OWNER ROWS 69; `docs/DESIGN_HORIZON.md` lands on the ledger line; the ENCOUNTERS design workflow takes the freed 
+32345: - **§881.16 THE SEAT MOVES TO OPUS AND THE BOARD IS PAUSED FOR AN ACCOUNT SWITCH — every lane accounted, checkpointed and held; the lighting inventory comes back NOT READY from both skept
+32346: - **§881.17 ⛔ CORRECTION TO §881.16 — TAIL-F IS NOT GATE-READY: the picks and both registers are complete, but the WHOLE PROBE BATTERY and the close-out are owed; and the tip build cam
+32347: - **§881.18 T13-PRELAND PAUSES WITH THE PLACEMENT CURE LANDED AND PROVEN — pick 14 committed, fifteen million comparisons with zero mismatches, the build unspent, and a trap recorded for 
+32348: - **§881.19 THE FABLE SEAT RETURNS — the account switch survives, the Opus-chair stratum is walked (thirteen ratified, one amended for precision), the fifty-eight bytes are ruled accepted
+32349: - **§882 ⭐⭐ THE TAIL-F LANDING — the faith chain (F5c · F6c · F7c acts 2/3/5) + the TAIL-F cure act + the two same-act cures + four `REHEARSAL-CURE` commits with R-TAILF-1 implement
+32350: - **§882.1 THE LIGHTING WAVE IS CHARTERED — the inventory's fold completes at 29 of 29, both NOT READY verdicts are discharged by the fold itself, and the chair rules the twenty-three cha
+32351: - **§882.2 T13-PRELAND HOLDS — Car 5 lands as picks 15 and 16, the transcendental class becomes an eslint error in eight blocks, the register retires to zero, and the sixteen-commit consi
+32352: - **§882.3 THE FIRST HORIZON PROBE HOLDS WITH A STOP — the writer-reach walker's `web` closure swallows 87 percent of the pulse, so the instrument as specified measures mention, not reach
+32353: - **§882.4 THE CHARSET PROBE HOLDS CLEAN — no stop, the encoding facts confirmed to the byte, and four assumptions of the volume settled the other way: the sanitiser's set has three sizes
+32354: - **§882.5 THE COVERAGE PROBE HOLDS CLEAN AND CONVICTS THE DRAFT — the band census runs in nine seconds, its printed tuple becomes the register's prediction, and eleven rows of the volume
+32355: - **§882.6 THE WORKER PROBE BUILD HOLDS — the extraction shape SHRINKS first paint by six kilobytes instead of growing it, the engine chunk moves eight bytes with the edge found and accou
+32356: - **§882.7 THE SESSION LIMIT KILLS FOUR AGENTS AT ~05:40 AND THE BOARD RESUMES AT 08:32 FROM ITS PARTIAL FILES — nothing lost but wall-clock; the two skeptics of the T13 order return NOT 
+32357: - **§882.8 THE FABLE WINDOW IS EXHAUSTED MID-FOLD AND THE SEAT MOVES TO OPUS — three folds die on a MODEL limit while the Opus lane beside them finishes; all four slots re-dispatch under 
+32358: - **§882.9 THE T13 ORDER FOLDS BOARD-READY AND THE LANDING LANE BOARDS — seventeen skeptic findings folded and none refused, the five chair rows ruled, and one product-facing golden row a
+32359: - **§882.10 THE ENCOUNTERS DESIGN FOLDS BUILD-READY — and its skeptics find that the volume promised "never a defection" while invoking the machinery that ends in the estate's own defecti
+32360: - **§882.11 THE HORIZON VOLUME IS AMENDED BY MEASUREMENT AND COMMITTED — ninety-three folds, none refused, the instrument cars re-cut from five probe receipts, and the volume on the ledge
+32361: - **§882.12 THE SOAK MEASUREMENT CLOSES G0's LAST ACT — every STOP clears with room, two of its four literals print and the third REFUSES to, the soak is over-priced sevenfold, and the LI
+32362: - **§882.13 THE OWNER RESTATES FULL DELEGATION — "I leave everything to your judgment" — AND THE CHAIR CLEARS THE DESK: nineteen open rows ruled, five held by their nature, and the boun
+32363: - **§882.14 THE OWNER ORDERS AN ENROLMENT AUDIT AND IT FINDS THE MARK PERFECT, THE ENROLMENT NOT — eight Opus lanes the walk could not see, one of them holding seven committed cars alive 
+32364: - **§882.15 T13'S CONSIST IS BUILT AND HOLDING WITH NO STOP FIRED, BOTH INSTRUMENT LANES HOLD, AND A CHAIR RULING IS CORRECTED BY MEASUREMENT — the moved reference row was attributed to t
+32365: - **§883 ⭐⭐ THE T13 LANDING — the deterministic-math kernel lands, the transcendental class is banned at the lint layer, and the composed tip comes in 268 bytes under the ceiling nobo
+32366: - **§883.1 THE BLOCKER IS CURED AT CAUSE — and the reproduction proves the refreeze was NOT REPEATABLE, a sharper broken promise than either lane had reported; a worse sibling of the same
+32367: - **§883.2 THE REACH WALKER'S FOURTH CAR IS BUILT AS RULED — the clause that could never row a dial family now can, proven by a plant differing in ONE BIT — and the car finds a false-gr
+32368: - **§883.3 THE PREVENTION CAR PROVES ITS HAZARD AND FINDS IT FAILS THE OTHER WAY — the landing gate's parser does not REFUSE when it should permit, it PERMITS when it should refuse, stamp
+32369: - **§883.4 THE SOAK CONSIST COMPLETES THE INSTRUMENT TRAIN — five cars, a literal REFUSED because the data admits none, a world-gap made VISIBLE rather than judged, and the known-failure 
+32370: - **§883.5 ⭐⭐ THE INSTRUMENT LANDING ORDER IS FOLDED AND ITS FOUR CHAIR ROWS ARE RULED — a panel of four Opus seats wrote, refuted twice and folded the one document the landing execut
+32371: - **§883.6 ⛔⛔ THE LANDING IS COMPOSED AND HOLDS ON ONE FINDING — A REGISTER FROZEN AGAINST THE WRONG TREE — AND THE CHAIR'S CURE IS CHEAPER AND TIGHTER THAN ALL THREE OPTIONS THE LA
+32372: - **§883.7 ⛔⛔ THE OWNER DISPUTED A CHAIR CLAIM ABOUT THE PROSE AND WAS RIGHT — and measuring it found that the best writing in the repo is not shipped, and the one desk that is wired 
+32373: - **§883.8 ⛔⛔ THE LANE REFUTED THE CHAIR'S RULING WITH AN EXECUTED RUN, AND THE CHAIR RE-RULED — and the finding under the finding is that the register scores the act it exists to enc
+32374: - **§884 ⭐⭐ THE HORIZON-INSTR LANDING — the estate's three new instruments land dark and byte-free, the refreezer is cured before the refreeze, and the landing that tightens a ratchet
+32375: - **§884.1 THE POST-LANDING DISPATCH — the one-way door takes the top of the board, and a standing heartbeat's hard-coded seat trailer is refused.** The board came out of §884 empty (0 o
+32376: - **§884.2 THE GUARD FIRED AND THE ACT DID NOT STOP — the missing half of the §882.11 cure, found by read-back and written down.** The §884.1 collection ran its asserting handoff edit F
+32377: - **§884.3 ⭐⭐ THE ONE-WAY DOOR IS THROUGH — the broken slot fills are cured while the corpus still has ZERO readers, and the proof is a difference over 3,696 real renders rather than 
+32378: - **§884.4 ⛔⛔ THE HARNESS REPORTED A RED FULL-SUITE RUN AS GREEN — and the prevention car re-bases, the consist composes, and a second grammar is found drifting.** Lane CURE-CAPSULE-R
+32379: - **§884.5 ⭐⭐ THE TWO DESIGN LANES RETURN AND BOTH CORRECT THE CHAIR'S OWN BRIEF — a root cause one layer below both skeptics, a headline that turns out to be a suppression key, and a
+32380: - **§884.6 ⛔ THE OWNER REFUTES §884.5's FREEZE-BLOCKING RULING — there are no saves, the product is entirely prelaunch, and the chair ratified a mechanism without checking its premise 
+32381: - **§885 ⭐⭐ THE TENTH LANDING — the landing gate can no longer false-clean, no settlement prints broken English, and the four gate attempts it took are the more useful half of the row
+32382: - **§885.1 ⭐ THE EFFICIENCY LANE RETURNS AND FINDS A DEFECT IN THE LANDING IT WAS BUILT TO MAKE CHEAPER — register acts must be the LAST cars, and nothing enforces that.** Lane PREGATE 
+32383: - **§885.2 THE DARK-READER DESIGN'S ELEVEN CHAIR ROWS ARE RULED — all eleven ratified, two on ground the lane could not have, one with a flag, and ONE OWNER ROW NOW BLOCKS THE DESK WAVE.*
+32384: - **§885.3 ⭐⭐ THE OWNER RE-GRANTS EVERYTHING TO THE SOAK LINE — four blocking rows ruled, the carve-outs restated unprompted, and one grant of authority DECLINED.** The owner, in chat
+32385: - **§885.4 ⭐ TRAIN 1's FIRST CAR IS BUILT — the kernel gains the channel it never implemented, its control is better than the chair briefed, and the census turns out not to move by the 
+32386: - **§885.5 ⭐⭐ TRAIN 2 IS BUILT AND ITS WORDINGS ARE APPROVED — and the lane corrected the spec the chair had ratified.** Three cars on `lane-NEWSTRAIN-2026-09-02`: Cure A `4b00f971b`,
+32387: - **§885.6 THE LANDING IS HELD FOR THE MACHINE, NOT FOR A DEFECT — and a confident word in §885 is walked back.** TRAIN 2 is composed on the landing dock (**`108a02ef4`**, 4 cars, porcel
+32388: - **§885.7 ⭐⭐ THREE LANES RETURN AND EVERY ONE REFUSES A FIGURE IT WAS HANDED — including one of the chair's.** **PARSER (car C9, `c461dc296`):** every predicted leaf byte measured **
+32389: - **§885.8 THE INDEX IS FOLDED AND THE CARD REFRESHED — and the fold itself carried a chair error, caught by read-back.** `MEMORY.md` stood at **16,767 B** against a **~17 KB hard read li
+32390: - **§886 ⭐⭐ THE ELEVENTH LANDING — and the first one a customer would notice.** CASed at **`d1a6c773e7d87dd44ef8fcc1ab2edab53c8081fc`** on `2d5112851` and SEALED `refs/preserve/landin
+32534: - **§920.1 THE CENSUS, RE-RUNNABLE IN ONE COMMAND.** `grep -oE '^(#{1,6}[[:space:]]*)?([-*][[:space:]]*)?(\*\*)?§[0-9]+([ .·]|\*)' docs/OWNER_DECISION_QUEUE.md | grep -oE '§[0-9]+' | tr 
+32535: - **§920.2 THREE GENUINE HOLES — 14 DANGLING CITATION OCCURRENCES AT 3 NUMBERS** (measured at HEAD over `docs/**.md`, occurrences not lines: `git grep -hoE "§N([^0-9]|$)" HEAD -- 'docs/*
+32539: - **§920.3 THE HOMES, RESOLVED BY MEASUREMENT — TWO FOUND, ONE HONESTLY UNKNOWN.** §685.5(vi)'s method was to name the authoritative home rather than retro-insert the section; this car a
+32543: - **§920.4 TWO FALSE ALARMS — NOT HOLES, AND NOW DOCUMENTED AS RESOLVABLE.** Both were resolvable before this car and neither was written down where a citation-chaser would look.
+32546: - **§920.5 NO RETRO-INSERTION — THE APPEND-ONLY LAW HOLDS, AND IT IS THE REASON THIS SECTION EXISTS.** Per §685.5(vi), neither §178 nor §183 is written into the ledger's body at its nu
+32547: - **§920.6 ⛔⛔ A THIRD COPY-TRAP, FOUND WHILE RUNNING THE SECOND MEASUREMENT — AND IT IS WIDER THAN §883.5(c)'s.** The first run of the citation census used `git grep` with no revisio
+32548: - **§920.7 WHAT THIS SECTION DOES NOT DO.** It rules nothing, discharges nothing, and changes no status word or P-ranking anywhere in the register (§685.5(vii)). It records a measurement a
+32552: - **§921.1 WHAT LANDED, AND WHERE.** `scripts/audit/ledger-citations.mjs`, `tests/lint/ledgerCitationIntegrity.test.js` and `tests/lint/.ledger-citation-baseline.json`, committed on the **B
+32553: - **§921.2 ⛔ THE INSTRUMENT'S SUBJECT IS NOT ON THE INSTRUMENT'S BRANCH, AND THAT IS THE CAR'S SHARPEST FINDING.** The ledger estate lives only on `review-fixes-2026-07-08`: `git ls-tree 
+32554: - **§921.3 THE ONLY-SHRINKS SHAPE, AND THE ONE THING IT DELIBERATELY DOES NOT ASSERT.** The baseline holds the **SET** of dangling numbers — `{178, 183, 683}` — and never their counts. 
+32555: - **§921.4 THE ALIAS TABLE IS MACHINE-CHECKED, BECAUSE THE BRIEF'S OWN RISK ROW WAS RIGHT.** An alias table is a place to hide a real hole by adding a line to a JSON file. Every alias there
+32556: - **§921.5 ⭐ TWO CLASSES THE §920 CENSUS COULD NOT SEE — both found by the walker, both after §920 was already written.** The census looked only at §0–§919 and only at numbers; th
+32559: - **§921.6 THE CONTROLS, EXECUTED, WITH THEIR EXITS — because a green from an instrument never shown to fail is the class §685.4's five planted controls exist to refuse.**
+32565: - **§921.7 GATES.** `npm run check:quick` in the dock: **validate-packets exit 0 (182 packets, 0 READY) · typecheck-full exit 0 (173 errors, ceiling 173) · typecheck-domain exit 0 (1,120 
+32566: - **§921.8 ⛔ THE CENSUS STAMP MOVES, DECLARED IN ADVANCE AND STILL OWED.** Predicted **before any run** and recorded in the dock commit message: **+10 test titles for this car (+17 with c
+32567: - **§921.9 WHAT THIS CAR DOES NOT DO.** It rules nothing, discharges nothing, and changes no status word or P-ranking (§685.5(vii)). It moves no `src/` byte, no prose byte and no golden, s
+32571: - **§922.1 THE INSTRUMENT THAT COULD NOT BE REGENERATED.** §687.2 landed `docs/PROVENANCE_MAP.tsv` as the instrument that *"can be regenerated from the walk at any time"*, and its header l
+32572: - **§922.2 WHAT LANDED.** `scripts/audit/provenance-map.mjs` and `tests/scripts/provenanceMap.test.js` on the BUILD SLOT at dock **`625c742af`** (sealed `refs/preserve/lt42-instruments-2026
+32573: - **§922.3 BOTH CHANNELS, AS §685.5(ii) DESCRIBES THEM.** (1) the section's own header names a seat; (2) the `Co-Authored-By` trailer of the commit that **first ADDS the opener line**, rec
+32574: - **§922.4 ⭐ RULE EPOCHS — WHY THERE ARE TWO, AND WHY IT IS NOT A HACK.** The marking convention changed under the map, and §685.5(i) records the succession: §236's `(chair: Opus 5 �
+32575: - **§922.5 ARM 1 IS THE WHOLE STANDING, AND IT WAS PROVED BY MUTATION.** A generator asserting 910 new rows has no standing until it reproduces the 693 known-good ones **byte-for-byte — a
+32576: - **§922.6 DETERMINISM AND ADDITIVITY, MEASURED.** Generated twice and compared: **byte-identical, md5 `e7c3ed7edcfc1b1af1f79967be3bd7c7`**. The 693 committed rows are unchanged and in orde
+32577: - **§922.7 THE MAP'S OWN CITATION REPAIRED.** Header line 5 now reads `# Regenerate: node scripts/audit/provenance-map.mjs --map docs/PROVENANCE_MAP.tsv --write docs/PROVENANCE_MAP.tsv`. Th
+32578: - **§922.8 A CORRECTION TO §920.4, RECORDED RATHER THAN EDITED** (append-only, §685.5(vi)). §920.4 says *"docs/PROVENANCE_MAP.tsv:269 already carries a §246 row."* **It does not.** Line
+32579: - **§922.9 GATES.** `npx vitest run tests/scripts/provenanceMap.test.js` → **7 passed (7)**. `npm run check:quick` in the dock → validate-packets, typecheck-full and typecheck-domain **
+32580: - **§922.10 WHAT THIS CAR DOES NOT DO.** §685.3 makes producing provenance rows **P4-mechanical** ("executed evidence, re-derivable by any seat"). It **does not mark, discharge or validate
+32584: - **§923.1 THE GAP IS CLOSED.** §883.5(c) found three copies of `docs/FABLE_RETROVALIDATION_QUEUE.md` on disk, two of them stale, and recorded that `chair-commit.sh` maps by whichever path
+32585: - **§923.2 WHY EVERY EXISTING GATE WAS BLIND, IN ONE SENTENCE.** Both existing arms — §688.7's "presence is not a row" and §882.14's enrolment check — ask only whether the blob **DIFF
+32586: - **§923.3 ⭐ IT COVERS BOTH APPEND-ONLY FILES, NOT ONLY THE ONE THE RECORD FOUND.** `docs/OWNER_DECISION_QUEUE.md` is read **unconditionally from the main checkout's working tree** at `H=
+32587: - **§923.4 ⚠ ONE PATH DELIBERATELY EXCLUDED, RECORDED SO IT IS NOT MISTAKEN FOR AN OVERSIGHT.** `docs/PROVENANCE_MAP.tsv` is **not** in the gate's list. Its **rows** are additive but its 
+32588: - **§923.5 THE FIVE PLANTED CONTROLS, EXECUTED, EACH EXIT QUOTED — the §685.4 idiom.** Tip verified **unmoved at `c6cfc8210`** before and after all five.
+32594: - **§923.6 ⛔⛔ THE SEAL WAS NOT A SEAL — A FINDING OF THIS CAR, AND IT UNDERCUTS AN ASSUMPTION THE RECORD HAS BEEN MAKING.** `refs/preserve/chair-tools-2026-09-05` is **not frozen**: a
+32595: - **§923.7 ⚠ THE CURE STILL LIVES IN AN UNTRACKED SCRATCHPAD FILE, AND A REBOOT HAS ALREADY DESTROYED THAT DIRECTORY ONCE.** `chair-commit.sh` is not in `git ls-files`; no npm gate covers
+32596: - **§923.8 WHAT THIS CAR DOES NOT DO.** It moves **no repo byte** — the tool is untracked — and rules nothing. It moves two preserve refs, which is a shared-tree write, done with explic
+32600: - **§924.1 THE ENTRY POINT POINTED AT THE WRONG FILE, AND HAD SINCE 2026-07-18.** The memory index and §233 make `docs/HANDOFF_CURRENT.md` the successor's first read. The **committed** `do
+32601: - **§924.2 WHAT LANDED.** One **CURRENT POINTER** block at the top of the committed file (63,186 → 65,507 B): read **HANDOFF_CURRENT.md whole first**, then this file, then the ledger tail
+32602: - **§924.3 THE THREE-COPY STATE, MEASURED AT THIS COMMIT'S PARENT** (`git status --porcelain`, sizes and md5s of disk vs HEAD vs the index blob):
+32613: - **§924.4 ⛔⛔ A PART OF THAT DIVERGENCE IS THIS ITEM'S OWN DOING, AND IT IS RECORDED RATHER THAN QUIETLY LEFT.** Before LONG TAIL #42 the retro queue's and the provenance map's disk cop
+32614: - **§924.5 WHAT THIS CAR DOES NOT DO.** It edits **only HEAD's copy on the ledger branch**. It does not touch the main checkout's index, its staged deletions, or any untracked file. It rule
+32618: - **§925.1 THE HALF THAT WAS NEVER RUN.** §764.4 ordered that *"the deferral ledgers get swept for launch-path members … and each is either scheduled into §764.3's arc or brought to the
+32619: - **§925.2 ⛔ THE ARTIFACT LOSS, RE-CONFIRMED INDEPENDENTLY AND NOT INHERITED.** `$SP/M1A-DEFERRAL-SWEEP.md` and `$SP/laneM1A-receipt.md` (22 rows): `git log --all --diff-filter=A` finds t
+32620: - **§925.3 THE DENOMINATOR AND ITS BOUNDARY, MEASURED AT HEAD.** 884 `docs/**.md`, minus 511 `archive/`, minus 40 verbatim captures, minus the 3 queues = **330 files in scope**; 191 carry a
+32621: - **§925.4 THE VERDICT — EVERY ONE OF THE 93 CARRIES A CITE AND A DISPOSITION.** **13 EMERGENT** (1 constitutional · 1 security · 7 plain · 1 measured-unreachable · 3 schedulable) · 
+32622: - **§925.5 ⛔⛔ THE FIVE THAT ARE MORE THAN A POSTPONEMENT.** **(1)** `SETTLEMENT_CAPABILITY_ATLAS.md:8225` — **a KNOWN, recorded VIOLATION of a ratified constitutional law**: the DEITY
+32623: - **§925.6 §877.2's PARKED WIRING CAR — THE TEST IS RUN AND CANNOT BE COMPLETED; THE ROW IS `EVIDENCE-THIN` AND GOES TO THE OWNER.** §877.2 ruled *"the wiring car is PARKED to a post-la
+32624: - **§925.7 ⚠ A NAMING TRAP, FLAGGED BEFORE IT BITES.** `docs/DESIGN_FP_INTERIOR.md` is the **CHARACTER**-interior volume. §764.5's exception covers the map module's **BUILDING** interior
+32625: - **§925.8 WHAT THIS CAR DOES NOT DO.** It **presents; it does not decide** (§764.4's own second disposition). It rules nothing, discharges nothing, and changes no status word or P-ranking
+32629: - **§926.1 THE SURFACE §693.9 NAMED IS NO LONGER UNREAD.** *"§440–§684 as a body — 245 sections, the single largest unexamined surface, filed P3 'recovered-not-marked' on trailer evi
+32630: - **§926.2 ⛔⛔ CHANNEL 3 IS THE SHARP RESULT — SIXTEEN SECTIONS WHOSE OWN TEXT CONTRADICTS THE REGISTER'S READING OF THEIR SEAT.** The register calls this span **RECOVERED-NOT-MARKED, 
+32631: - **§926.3 A MEASURED CORRECTION TO §685.5(i).** §685.5(i) records that §484's convention *"ran 16 headers and stopped at §513."* Measured: **12 carry it in the HEADER, 16 in the BODY, 
+32632: - **§926.4 ⭐⭐ CHANNEL 1 — THE SILENT-RE-DERIVATION FEAR IS ANSWERED, AND THE ANSWER IS THE FINDING.** **76 of the 244 sections (31 %) carry EXPLICIT self-correction or supersession la
+32633: - **§926.5 CHANNEL 2 — THE RATIFICATIONS CARRY THEMSELVES BY CONSTRUCTION, WITH ONE EXCEPTION.** 40 sections carry RATIFIED/RATIFICATION (62 occurrences). The span's answer is structural:
+32634: - **§926.6 THE TWO UNSWEPT NAMESPACES — MEASURED, AND SMALLER THAN FEARED.** `refs/trains/*` **31** · `refs/preserved/*` **3**. **0 of 34 tips are an ancestor of NEITHER the ledger branc
+32635: - **§926.7 ⭐⭐ THE §683 CLASS WAS CAUGHT ONCE INSIDE THIS SPAN AND REPAIRED — WHICH IS WHY THE THREE THAT ESCAPED MATTER.** **§581** reads *"(BACKFILLED AT §586 — the authoring ro
+32636: - **§926.8 ⛔ THE GRANT-READING CLASS HAS MORE MEMBERS THAN THE DOCKET'S THREE — PRESENTED, NOT RULED.** `docs/OWNER_DOCKET.md` sends **§22, §336 and §362** to the owner as *"a chair 
+32637: - **§926.9 ⭐⭐ THE SPAN INDEPENDENTLY FOUND HALF OF THIS ITEM'S OWN §920.6.** §521.1 records *"`git grep` IS BLIND TO UNTRACKED FILES, SO A GREP ARM RUN BEFORE COMMITTING REPORTS A CLE
+32638: - **§926.10 WHAT THIS CAR DOES NOT DO.** It convenes no sitting, rules nothing, and marks **no section discharged, validated or recovered** (§685.1(iii), §685.5(vii)). It changes no statu
+32642: - **§927.1 ⛔ THE DOCK COMMIT DID NOT PAY THE BILLS ITS OWN LAW NAMES, AND RUNNING THE WALKERS FOUND THEM.** `625c742af` added two test files. §505.6 (*"the new test file reds THREE censu
+32643: - **§927.2 THE THREE, EACH PAID IN ITS OWN PRESCRIBED FORM.** **(i) `mutationCoverageManifest` TOTALITY** — `tests/lint/ledgerCitationIntegrity.test.js` is an enumerated invariant file wi
+32644: - **§927.3 ⭐ THE CENSUS RE-FROZEN, AND THE DELTA IS THE ONE DECLARED BEFORE ANY RUN.** **files 2563 → 2565 · parked 375 → 375 · credited 2188 → 2190 · titles 24169 → 24186 · s
+32645: - **§927.4 ⛔ AND THE CORRECTION THAT MATTERS MOST — §921.8/§922.9's "the test-ratchet re-freeze is OWED" IS WRONG, AND THE BRIEF'S PREDICTION WITH IT.** `scripts/.test-ratchet-baselin
+32646: - **§927.5 ⚠ ONE HONEST NOTE ON THE GREEN, RECORDED RATHER THAN SMOOTHED.** `DOOR 3 PARSER DOOR` measures **~22.5 s against vitest's 20 s default** and timed out on two passes at machine 
+32647: - **§927.6 A MANIFEST NEAR-MISS, DECLARED.** The first attempt at §927.2(i) rewrote `scripts/mutation-coverage-manifest.json` with `json.dump`, which silently **re-indented and un-escaped 
+32651: - **§928.1 THE BUILD SLOT, MEASURED BY FOUR SEATS INDEPENDENTLY.** Product code lives on `claude/composite-r4` (`f73bdbf16` at this hour); this ledger branch's `src/` has had no commit sinc
+32652: - **§928.2 LONG TAIL #15 STRUCK: the ten consumed secrets LANDED at §134 on 2026-08-16 and HOLD at the slot** (ruled-consumed 52, `docs/DEPLOY.md` documents 51, ruled-arm missing 0, one re
+32653: - **§928.3 LONG TAIL #16, THE NON-GATED HALF LANDED** in `lane-LT16-money` (`f73bdbf16` → `517f8c950`, sealed `refs/preserve/lt16-money-2026-09-14`): `d6ab5bd6d` the `ACTIVE_CHECKOUT_SKUS
+32654: - **§928.4 LONG TAIL #17 TO THE BOUNDARY, AND §764.3 IS ASKED BY NAME.** The headline (divine healers keyed as magic) was CURED at MF-CH6 (§594.1/§597.1). Landed in `lane-LT17-hygiene` (
+32655: - **§928.5 THE SCRIBE'S BILLING DEFECT, FOUND BY THE TIER-PROPOSAL RECON.** `renderScribe` POSTs one `scribe-render` invocation per firing tab and EACH runs `spend_credits('dossierProse')`;
+32656: - **§928.6 THE OWNER'S SITTING OPENS** — `docs/OWNER_SITTING_2026-09-15.md`: every decision the long tail's lanes could not make, cheapest first, with the chair's default beside each; §9
+32660: - **§929.1** `lane-scribe` `9a8ff7280` → `600771812`, sealed `refs/preserve/scribe-w5b-2026-09-15`; four cars: the server-minted render session (migration `203_scribe_render_session.sql`,
+32661: - **§929.2** THE SCRIBE'S OWED APPLY IS NOW 201 + 202 + 203 (`docs/OWNER_SITTING_2026-09-15.md` item 7). No live render has ever run; the tier proposal's decision 2 is a confirmation.
+32665: - **§930.1 LONG TAIL #29, THE SLOT CARS LANDED** in `lane-LT29-instruments` (`f73bdbf16` → `49f2dcab8`, sealed `refs/preserve/lt29-instruments-2026-09-15`; 5 files, no `src/` or `package.
+32666: - **§930.2 LONG TAIL #30 LANDED** in `lane-LT30-osr` (`f73bdbf16` → `2cd4f2835`, sealed `refs/preserve/lt30-osr-2026-09-15`; 3 files, no `src/` byte): car 1 `935b3d94b` `docs/SOL_QUEUE.md
+32667: - **§930.3 LONG TAIL #36 LANDED** in `lane-LT36-security` (`f73bdbf16` → `196576930`, sealed `refs/preserve/lt36-security-2026-09-15`; nine commits, 18 files +2,136/−47, no `package.jso
+32668: - **§930.4 LONG TAIL #28, THE GATE MEASURED ON A QUIET BOX** (`lane-LT28-gate`, cut at `f73bdbf16`, dispatched ALONE at load 7 after the other three lanes had landed, so that its one true r
+32669: - **§930.5 THE RECORD CORRECTED BY THE CODE, A SECOND TIME.** Wave 2's recon (`wf_57faeea3-385`, four Opus readers on the ledger worktree for records and the slot worktree `lane-longtail-re
+32670: - **§930.6 WAVE 3 BRIEFED FROM RECON, NOT DISPATCHED** (`wf_d358b43d-411`, five Opus readers, read-only so #28's quiet measurement was undisturbed; briefs in the kit as `brief-LT41-voice-gu
+32671: - **§930.7 THE PROVENANCE MAP CAUGHT UP — 63 ROWS APPENDED (§922–§929).** The walk (`scripts/audit/provenance-map.mjs`, which lives on the SLOT lineage in `lane-LT42-instrument` `6b3b
+32672: - **§930.8 THE COMMIT PATH, AMENDED IN THE SAME NIGHT — AND THE CLOCK.** ⚠ THE STAMPS OF THIS NIGHT DRIFTED: §928's '~03:3x' was committed at `feba86751` = 2026-09-14 23:26 EDT and §9
+32673: - **§930.9 WHAT THIS SECTION DOES NOT DO.** It lands nothing on `claude/composite-r4`: the eight long-tail docks (LT15 `ee449f4f6` · LT42 `6b3b49a47` · LT16 `517f8c950` · LT17 `1771acd50

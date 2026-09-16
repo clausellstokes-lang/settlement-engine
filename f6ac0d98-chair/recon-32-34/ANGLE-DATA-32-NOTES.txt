@@ -1,0 +1,28 @@
+ITEM #32 — DATA ANGLE. Surfaces used: worldState.js (createDefaultWorldState +
+CONDITIONAL_LEDGER_KEYS + normalizeDeployments), settlement.schema.js,
+the setSpatialLedger/dropSpatialLedger key census, src/store, supabase/migrations,
+tests/fixtures, src/lib/spatialUsage.js (the ledger manifest).
+
+THE MASTER INSTRUMENT: DESIGN_FP_ARCHITECTURE.md §4:694-712 is a per-wave table of
+the EXACT persisted sub-key + writer each unbuilt wave must mint. Grepping those
+names against the real setSpatialLedger census is decisive and cheap.
+
+REAL PERSISTED LEDGER KEYS (complete, slot AND consist IDENTICAL): armyTransit
+beliefMaps bluffExposures bufferDiscipline campaignPlans commitments commodityStocks
+commonsVoice credibility disinfo dispatchWillingness embattlement entrepots epidemic
+exposedCorruption generosityWillingness gratitudeBondEvents interventions lendAppetite
+meetingLeanChannels meetingMarkEvents merchantAppetite migration moralDrift navalTransit
+npcCredibility npcLadder obligations peaceReasons provenance reframes refugePostures
+roads roadsBondEvents roadsRansomSettlements roadsReturnedCaptives rumorLedgers
+satellites secrecyPostures sightPostures spatialArrivals supplyShipments tradeFlow
+tradeOverture traditions treaties upswing urbanFabric warReasons + habits +
+demographicPlans + the *_KEY constants.
+ABSENT: houses ventures omenReadings burials departureMemory calamityArcs
+warContributions freeUnits residentCohorts serviceBonds pendingPlants.
+
+⛔ ZSH TRAP THAT FAKED A CLEAN SWEEP: `S="a b c"; grep -r "$w" $S` does NOT
+word-split in zsh — it becomes ONE nonexistent path and grep returns ZERO for
+EVERY term. My first POP+WY sweep read as all-zero for this reason, and the
+negative control (grepping a known-BUILT wave) is what caught it. Use a bash
+array, or `${=S}`. Any lane greping multiple paths from a variable must run a
+known-positive control first.

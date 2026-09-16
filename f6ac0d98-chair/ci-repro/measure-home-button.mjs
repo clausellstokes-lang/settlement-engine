@@ -1,0 +1,14 @@
+import { chromium, devices } from '@playwright/test';
+const base = process.env.BASE || 'http://localhost:5175';
+const iphone = devices['iPhone 13'];
+const browser = await chromium.launch();
+const ctx = await browser.newContext({ ...iphone, defaultBrowserType: undefined });
+const page = await ctx.newPage();
+await page.addInitScript(() => { try { localStorage.clear(); sessionStorage.clear(); } catch {} });
+await page.goto(base + '/create', { waitUntil: 'networkidle', timeout: 90_000 });
+await page.waitForSelector('[aria-label="Anonymous settlement generator"]', { timeout: 60_000 });
+const boxes = await page.$$eval('[aria-label="SettlementForge home"]', (els) => els.map((el) => { const r = el.getBoundingClientRect(); return { tag: el.tagName.toLowerCase(), text: (el.textContent || '').trim().slice(0, 20), width: Math.round(r.width), height: Math.round(r.height), visible: r.width > 0 && r.height > 0 }; }));
+console.log(JSON.stringify({ viewport: iphone.viewport, boxes }, null, 1));
+const under = await page.evaluate((floor) => { const sel = 'button,a[href],[role="button"],[role="link"],[role="tab"],input:not([type="hidden"]),select,textarea'; const out = []; for (const el of document.querySelectorAll(sel)) { const r = el.getBoundingClientRect(); if (r.width === 0 || r.height === 0) continue; const cs = getComputedStyle(el); if (cs.visibility === 'hidden' || cs.display === 'none') continue; if (r.width < floor || r.height < floor) out.push({ tag: el.tagName.toLowerCase(), aria: el.getAttribute('aria-label'), text: (el.textContent || '').trim().slice(0, 24), width: Math.round(r.width), height: Math.round(r.height) }); } return out; }, 44);
+console.log('under 44px (chromium, iPhone 13 viewport):', JSON.stringify(under));
+await browser.close();

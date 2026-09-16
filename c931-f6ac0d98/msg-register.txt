@@ -1,9 +1,0 @@
-Register (§931 doors): the lighting census re-frozen on the composed tree, and the writer-reach register re-stamped at the tip
-
-Taken at the consist tip after every content car, under the gate mutex, by run-registers-930.sh in its recorded order: lighting REFREEZE (four docks had re-frozen it on their own tips — the consist carried LT39's; the composed tree re-measures the union) · OSR read-only (exact) · the mounts door (__MOUNTS__) · the mutation manifest plain (__MANIFEST__) · writer-reach dry then --write (__WR__) · the tuning walker plain · prose-numerics plain · the test ratchet plain. Every changed register read before this commit; the ratchet --update is the totals car that follows.
-
-__FIGURES__
-
-Seat: Fable 5.1 — validated
-
-Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>

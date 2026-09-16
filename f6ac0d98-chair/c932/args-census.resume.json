@@ -1,0 +1,14 @@
+{
+  "skip": ["WF", "POP"],
+  "priorFolds": {
+    "WF": { "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-WF-2026-09-15.md", "summary": "folded in session f6ac0d98 (2026-09-16 02:xx): faith built deeper than the volume admits; one wave landed under its own name; WF-6 INERT (pactFormation.js:217 reads settlement.religionState which nothing writes)", "statusChanges": 1, "recordNeCodeRows": 10, "mandatoryCar0": 5, "carDeltaLow": 4, "carDeltaHigh": 5, "wavesBuilt": 1, "wavesPart": 2, "wavesUnbuilt": 7 },
+    "POP": { "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-POP-2026-09-15.md", "summary": "folded in session f6ac0d98 (2026-09-16): populations built far deeper than the POP volume admits, part of it lit in the birth preset; the belief half of POP-1 built under SPINE SP-B", "statusChanges": 3, "recordNeCodeRows": 9, "mandatoryCar0": 5, "carDeltaLow": 2, "carDeltaHigh": 4, "wavesBuilt": 0, "wavesPart": 3, "wavesUnbuilt": 5 }
+  },
+  "readersDone": {
+    "WY": [
+      { "reader": "ledger", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/history/WY/ledger.md", "summary": "WRITTEN 2026-09-16 11:02 (372 lines, 28 claims, 10 traps): WY = 0 built of 12, DESIGNED-ONLY family-wide; one LANDED-INERT token ('WY' in CHARTERED_VOLUME_PREFIXES couplingRegistry.test.js:108 with zero rows); a src/-restricted pickaxe over --all confirms no WY identifier was ever in src/. READ THE FILE WHOLE for the claim table.", "claims": [] },
+      { "reader": "older", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/history/WY/older.md", "summary": "WRITTEN 2026-09-16 11:05 (A.1 answer, A.2 twelve-wave table, A.3 older-mover to wave table, A.4 pricing deltas 44-67 to 47-70 and 0/0/12 to 0/2/10, B 40-row claim table, C 12 grep traps): SIX mover-borne rumour carriers already relay on the production tick (rumorNetwork.js:742-750: trade, army, criminal, ship, refugee, teleport-hiFi). READ THE FILE WHOLE.", "claims": [] }
+    ]
+  },
+  "note": "WY's adjudicator was mid-verification when the run was paused on 2026-09-16 11:1x: history/WY/adjudicator.md is a 277 B skeleton; its findings so far are in history/WY/progress-adjudicator.txt (read it: the MissionRec finding, roads/state.js:78-79 carries BOTH path frozen-at-dispatch AND departTick). The adjudicator restarts from the two reader files."
+}

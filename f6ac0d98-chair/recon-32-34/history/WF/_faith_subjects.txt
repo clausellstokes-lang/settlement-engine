@@ -1,0 +1,290 @@
+b2648b044|2026-06-17|Track C: decompose 5 god-components under 600 lines (behavior-preserving)
+e00600420|2026-06-17|Track C seal: promote max-lines warn→error (all god-components <600)
+fa9aff06b|2026-06-17|Track C: decompose EventComposer + WorldMap under 600 (the last two god-components)
+77bd27ae1|2026-06-19|feat: living-world simulation (war/trade/religion/pantheon) + comprehensive UI/UX overhaul
+e1c7244e9|2026-06-19|feat(sim): Track B war-deepening — military strength, mobilization, stateful armies, occupation, strategic trade, 4th deity axis
+fd35992c2|2026-06-19|feat(admin): pantheon-standings view in the sim-tuning panel
+6976bcd27|2026-06-22|feat(settlement): layer-toggle upsell fix, remove regenerate button, deity empty-state button
+80db16859|2026-06-24|fix(dossier): complete entity-hyperlink sinks — institution/neighbour/deity landing + NPC id resolution
+0deb04407|2026-06-25|refactor(worldPulse): decompose advanceCampaignWorld god-module into kernel/interval/helpers
+f1cf71317|2026-06-25|refactor: god-module splits, strict-types 4411→1372, money-path hardening
+0d01e1adc|2026-06-27|feat(religion): seeded patron contest — the imposed-cult schism
+337403952|2026-06-27|chore(audit): Phase 2c religion probe — deity competition + faith spread
+3cabae580|2026-06-27|balance(religion): probe + fix evil-compromise double-count
+46e16388f|2026-06-27|fix(religion): make pantheon kernel files typecheck-clean
+4b1f31eff|2026-06-27|feat(religion): surface the living pantheon in the PDF export + a free-tier teaser
+71091a74b|2026-06-27|feat(religion): occupation→conversion coupling + pantheon-rework foundation
+73d758332|2026-06-27|balance(religion): 60k Monte-Carlo certification + corruption-receptivity gradient
+7ea7e87f9|2026-06-27|feat(religion): wire the gradual pantheon into the pulse kernel
+7f7cdf791|2026-06-27|feat(religion): divine-mandate coupling — legitimacy now drives the throne (+ voice fix)
+84c7ca9a9|2026-06-27|feat(religion): gradual pantheon driver (advanceReligionStates) + entry-clone safety
+922d7ef61|2026-06-27|feat(religion): impose-cult event + patron deity rename
+9b8c3010f|2026-06-27|feat(religion): faith-panel UI — the per-settlement pantheon in the dossier
+a3f8681d7|2026-06-27|feat(religion): growth-favor knob + contest odds + legitimacy UI
+a58cb7968|2026-06-27|refactor(religion): DI the contest PRNG (off the generators layer)
+a8f9893e2|2026-06-27|fix(religion): strict-type the pantheon engine + driver (0 added strict debt)
+aa2ccc5ed|2026-06-27|fix(religion): soak-tune the divine mandate to a self-limiting target-pull
+ac8aaced3|2026-06-27|feat(religion): reconcile assign-deity event + wire faith into the analytical layer
+ccd8ab76b|2026-06-27|balance(religion): chronicle→growth knob (#3) + keep organic turnover share-driven
+d48b36b58|2026-06-27|feat(religion): Tier-2 completeness (organic contests + temple backing + occupation stain) + coup-payoff soak
+d52dad4d4|2026-06-27|feat(religion): pantheon projection + divine-mandate legitimacy coupling
+e954f48ca|2026-06-27|balance(religion): live-loop soak + make legitimacy actually govern who rules
+f22f13b61|2026-06-27|feat(religion): compromise chain amplifies evil faiths
+fd8e19787|2026-06-27|feat(religion): legitimacy axis — a faith's rightful claim
+08b114994|2026-06-28|feat(religion): add adherent-share bars to the pantheon standings (keep both bar + legitimacy detail)
+0a34fbdb4|2026-06-28|merge: reconcile origin/master (feat/activate-multitick religion lineage, PR #32) into the patron/legitimacy engine
+3b6641b2e|2026-06-28|feat(religion): size-scale cross-settlement faith influence by relative settlement mass
+5a282a03c|2026-07-04|fix(review): remediate review findings, de-minify generators, split god-slice, magic-supply UI
+415bca5f3|2026-07-09|Phase 4 delta spec — faith is a port, a gate split, and one genuinely new organ
+babfcdb29|2026-07-09|Merge wave 2a-prep — the religion substrate lands dormant
+0d6819992|2026-07-10|Phase 4 spec — chaos builds the wrong mine, and crowns prefer lawful gods
+15da94a00|2026-07-10|Merge wave 4f — deities get identities, and the landing gets its living proof
+3b0062c38|2026-07-10|Phase 4 spec — the seat steers, the pantheon contests, everything is alive
+4056cfff2|2026-07-10|Merge wave 4a — the store learns to hold a deity
+5f0ad7b77|2026-07-10|Phase 4, W-F5 — the axis retires, and every seed carries its silent gods
+6005c0b7d|2026-07-10|Phase 4 spec — gods are kept by conduct, and imposed gods wither
+61f935fb5|2026-07-10|Phase 4 spec — every flaw takes a side: the clergy lens goes per-trait
+64a1855ea|2026-07-10|Phase 4 spec — the gods are latent in every seed; premium turns the key
+6ca27bef6|2026-07-10|Merge wave 2b-r — the religion pipeline becomes reachable
+779fbfff9|2026-07-10|Phase 4, W-F2 — the gods learn whom to trust, by the numbers
+77b2e3001|2026-07-10|Phase 4, W-F6 — the gods find their voice, and the free tier keeps its silence
+9381f3318|2026-07-10|Phase 4 spec — when the town stops living like its god, the pews notice
+9cb43ffb5|2026-07-10|Phase 4, W-F5.5 — faith learns to remember, to empty, and to grieve
+9fed15c43|2026-07-10|Phase 4 spec — sea gods don't found mining towns
+a45629924|2026-07-10|Phase 4 spec — the clergy lens: gods arrive through their priests
+daf970df6|2026-07-10|Phase 4, W-F4a — conduct earns the god, scandal erodes the seat
+e155a40d1|2026-07-10|Phase 4, W-F0 + W-F1 — the baseline is banked, and faith learns two gates
+17c6db642|2026-07-11|Phase 4 spec — the skyline is the soul, commerce launders, and creeds build
+1e065ee14|2026-07-11|feat(w-session): Foundry VTT module export beside the PDF (lazy, faith-gated)
+2674802f0|2026-07-11|Phase 5, W4f last-mile — the premium Faith & War PDF chapter now reaches premium exports
+32e550869|2026-07-11|Phase 5.5 design: round 7 — movement modalities (isolation/teleport/airship) + governance-drift culture axis
+62656e39e|2026-07-11|docs(w-session): scope brief — Foundry module strategy, faith-gate reuse, TableView-pattern session mode, 942B budget plan
+ab38c22c8|2026-07-11|Reunification W4b — the Realm surfaces war and faith again
+bd0093e10|2026-07-11|feat(w-session): Foundry VTT module export beside the PDF (lazy, faith-gated)
+d3045a2b5|2026-07-11|Phase 5, W-C4 — the gods get an authoring desk, walls verified
+d3118f0f8|2026-07-11|docs(w-session): scope brief — Foundry module strategy, faith-gate reuse, TableView-pattern session mode, 942B budget plan
+d45a29c30|2026-07-11|Phase 5.5 design: 4 build decisions SETTLED (culture = derived behavioral/economic similarity)
+ddd7360e1|2026-07-11|Phase 5.5 design: risk assessment is the unifying faculty — information is its epistemic meta-layer
+ee1cc4d6a|2026-07-11|Reunification W4e — dossier depth: Substrate, Magic, War & Faith tabs
+25003430b|2026-07-13|Round-21 W1: the crier's voice — war/faith/trade news gains a herald's line
+82ad676b2|2026-07-13|Phase 5.5, M11a — PESTILENCE: the plague travels the trade roads, and a temple city resists but is never immune
+0690791a9|2026-07-14|Design: the pacing governor (E0 — throttle spontaneity never causality) + the cohesion weave (trade parity, faith×alignment quadrants, structural lenses, acquisition ladder, gap-hunt integrations incl. the UNNAMED EMPIRE read + dynastic-as-prose owner ruling); ARCHITECTURE.md migration count 129→131 (the freshness test caught the docket)
+9bdfa8fa9|2026-07-14|G1c POLITICS, EVENTS, RELIGION — the DM's verbs reach the live world; the religion engine's dead halves wire (16 fixes, 27 pins)
+080c22d86|2026-07-15|DESIGN: W-MOMENTUM — belief & decision momentum (the psychology of being seen)
+1c1da4628|2026-07-15|W-MOMENTUM wiring 1/N — the FENCED pre-wire dormancy golden (captured pre-wire)
+1d12a4280|2026-07-15|W-MOMENTUM Stage 3 — the consumption factors (pure, pre-wire, DORMANT)
+1d55a4602|2026-07-15|W-MOMENTUM wiring 6/N — the Stage-4 LIVE CRACK on the pulse (gated)
+251c7decc|2026-07-15|W-MOMENTUM wiring 8/N — momentum.js to 0 any-holes (design §5, inherited from the pure core)
+311f25e09|2026-07-15|W-MOMENTUM wiring 4/N — the belief-discount closure in reconcileBelief (gated)
+320bbb06b|2026-07-15|W-MOMENTUM Stage 4 (partial) — the priced-crack primitives (DORMANT)
+399b879c7|2026-07-15|W-MOMENTUM Stage 0(a) — a naval blockade feeds economic_strangulation
+52cc0240b|2026-07-15|Merge W-MOMENTUM: belief & decision momentum — THE ENGINE IS COMPLETE
+5f1bcd3e6|2026-07-15|W-MOMENTUM wiring 3/N — the commitment load in the strategy chooser (gated)
+5fb0c10b7|2026-07-15|Capture: W-MOMENTUM commissioned — belief/decision momentum for ALL belief-consuming entities; NPC thresholds from temperament + flaws
+69ef3e668|2026-07-15|Ledger: THE ENGINE IS COMPLETE — W-MOMENTUM merge row (52cc0240); the 9,843/0 perfect gate
+6ce84c999|2026-07-15|W-MOMENTUM Stage 1 — the commitment ledger (DORMANT leaf)
+6e7e21d9e|2026-07-15|Capture: THE FINAL SCOPE CLOSE (owner: W-MOMENTUM is the last addition before soak/tuning)
+70d6c1ed6|2026-07-15|W-MOMENTUM Stage 2 — the entity-appropriate threshold (DORMANT)
+74ca42494|2026-07-15|W-MOMENTUM wiring 2/N — advanceCommitments live in the pulse kernel (gated)
+82a074698|2026-07-15|Capture: THE LIMIT CLAUSE — momentum is weights, never walls (owner refinement)
+9cbb86119|2026-07-15|W-MOMENTUM wiring 5/N — abandonFloorScale in the supply-web ABANDON gate (gated)
+a6df8e180|2026-07-15|Ledger: W-LIFECYCLE merge row (1c18a116) — 5 of 6 engine waves home; the engine awaits only W-MOMENTUM
+b6f2844be|2026-07-15|Capture + design amendments: the residuals rulings (infrastructure parked, pilgrimage deferred, graduation-at-village, the mercenary clause)
+cbaa9fb35|2026-07-15|W-MOMENTUM wiring 7/N — the integration pins the pure core cannot reach
+3041387c9|2026-07-16|W-R2-DEPTH-2 D3: doctrine courses (momentum binds religion)
+33c853c26|2026-07-16|DESIGN_SIM_DEPTH_R2 v3: D6 THE UNDERWAYS — the underground-network institution with full coherence parity (catalog half golden-shifting → G2 regen moment; engine couplings → W-R2-DEPTH)
+7756b1eef|2026-07-16|W-R2-SURFACE-2 grp3: shared deity-name resolver (items 14, 19) + docketLapse strict fix
+08613d1ba|2026-07-17|FOLD: DOOR 2 — THE TABLE LAYER (fog v1) → w7-prep — the last map wave: fogSessions sidecar (interiorEdits idiom, denylist-safe, dormancy byte-identical, reveals keyed on stable ids — a reroll never loses a reveal) · semantic-snap geometry (brush snaps along real edges; version-agnostic street synthesis) · the SVG mask union (overlap-correct, zero townMapDraw coupling) · fogged handout through the whole export matrix (absent ⇒ byte-identical, pinned toBe) · TWO AUDIENCES ONE PROJECTION (the live player view renders exactly the handout export — equality by construction) · fail-closed (fogSessions outside PUBLIC_TOPLEVEL_KEYS, pinned) · the premium gate per the ladder ruling (locked-VISIBLE w/ drawn padlock + purchase moment; sessions never rewritten while locked) · SM-5 analytics inherited (3 features, zero new names); +209 B eager measured vs base; 112/112 lane pins; the clean full suite = the composite gate (fog's runs were owner-parallel-load flakes, all green isolated + base-proven)
+56d33b443|2026-07-17|Ledger: AI SURFACE PANELS FOLDED → w7-prep @ a4343044 — the write stages click-able (labels honest, money moments verbatim, receipts rendered); receipts 26/26 + tsc 0 + domain:strict 0/0 explicit + dist 150/150; +184 B; cure 4-for-4; ONLY FOG REMAINS
+a3df989cc|2026-07-17|S7 client: composeAutonomy transport (appended to lib/surveyorWrite — one-function-per-stage layout; posts the REAL registry projection + stressor vocabulary + standing instructions; client re-validates the composed condition/nudges against the real domain wall = the suspenders) · lib/surveyorAutonomy runAutonomousAdvance orchestrator (store-free by injection; consumes the registered advanceCampaignWorld op one week at a time; pure evaluator at every boundary; guard refusals stop honestly; invalid conditions never advance; 5 pins over the REAL kernel) · AutonomyPanel (lazy 5th workshop stage 'Run', additive STAGES entry): standing-instructions editor via registered updateSavedCampaign (undefined-not-null so clearing DROPS the key at serialization), compose money moment (4 cr), PICKER-ONLY condition builder over the real registry, bounded run w/ live progress + THE STOP RECEIPT (fired/capped/refused honestly; signal values; seed + engine version), nudge approve => registered injectCampaignStressor w/ clamped emission · 8 jsdom pins incl. kill-switch verbatim + picker-only + clamped-emission dispatch. (First commit attempt was hook-rejected: state-order + label-a11y — fixed, lint clean.)
+a4343044b|2026-07-17|FOLD: THE AI SURFACE PANELS → w7-prep — the write stages become click-able: custom content (per-field Mechanical/Flavor/Unsupported badges; the honest no-rule list; per-item mint via addCustomItem) · style overhaul (validateBespokeStyle projection + LIVE map preview via the pure renderer; flip-back Segmented; decline persists nothing) · construction (config wall + real comparator deviations + bounded delta-only revise, visibly cheaper; settlement lands as draft save, realm surfaces canonizes-nothing honestly) · accept→mint (consent barrier explicit, unroutable surfaced never dropped, the reproducibility receipt rendered) — all under one Surveyor's-workshop launcher; S1 money moments verbatim; kill-switch refusals cordial + nothing-charged; early-access badges fail-honest; +184 B eager (under the line); lane pins 20/20 + lazy-membership contract
+b745c20c6|2026-07-17|FOLD: FP-G11 → w7-prep — formatNumber excised from eager engine-core (−341 B, config-only, resolves the FP-G7 deferral; no first-paint importer existed); closure 1,034,683, margin 5,317 held at RATCHET #11 (HOLD ratified — final tightening at the composite, FP-G10 precedent); the customRegistry headline CORRECTED (~41KB real but whale tables don't drop; blocker = sync→async on persisted-event-writing deity actions — owner-gated lane, never a byte-wave rider); spatial slimmer deferral ratified (sub-350B real reclaim vs a dormancy-golden seam); W2 feed-retention precondition MET (+363 B affordable — rebase+revalidate lane authorized by the standing rule)
+fe7fa639e|2026-07-17|Parley §2d amendment: THE TOTAL-GROUNDING LAW — the persona slice ⊇ the entity's engine-consumer census (walker-checkable); explicit manifest: faction/power + fogged hegemony rankings, rulings-through-reframes, deity/doctrine, economy/supply, season, the NPC web
+084862641|2026-07-18|FOLD: THE DOCUMENTATION WAVE 2/2 (About + Compendium) → w7-prep — THE DOCUMENTATION WAVE COMPLETES: About rebuilt as the six-band trust page (the whole-loop schematic in the engraving register · the philosophy ladder w/ the DM-Philosophy prose surviving verbatim · THE COVENANT w/ six verified receipts incl. state-never-fate quoted from source · the tick diagram before its text · the concession-first AI section · the audit-invitation close; the orphaned UnderTheHoodTab reaped) · THE COMPENDIUM under THE REGISTRY-RENDER LAW (one generated artifact + the freshness contract — divergence FAILS CI; the op registry PUBLIC in its real shape klass/scope/receipt/undo, 164 ops walker-pinned; new hubs Deities/Lenses/Facets/Calamity/Operations; the Living World hub renders the REAL 16 systems + preset truth from configs; tier bands CORRECTED from source — a disclosed visible fix; A-Z crawlable index; search re-sourced) · the drift contract's in-tree catches (the '14' stale comment, the wrong Thorp band) · brief premises honestly refined (archetypes = authored-labeled, no engine source exists; calamity = the one bucket; catalogData survives as authored seed only) · the maker's-name publication correctly withheld as owner-gated; ~0 eager, dist 150/150
+308e61e7a|2026-07-18|Deep Craft phase 0d: HERO SPECS — the four moments specified before build
+459f397e4|2026-07-18|CORPUS: DESIGN_THE_LADDER.md — engine lift #3 frozen w/ full coherence matrix: displacement-only conservation law, window-gated challenges w/ structural defender's advantage + challenger's stake, the three determinants (power trajectory · DYNAMIC GOALS as derived reads reusing the S7 registry/evaluator · the growth layer's opposition metric), the owner's coherence mandate (alignment methods, patron-deity faith coherence + pantheon lift, compromised leverage/time-bomb, traits both directions, D5 grudges, reframe-eligible acts, state-never-fate); dormant npcLadderEnabled + sidecar + dormancy golden mandatory
+52ef5e8b0|2026-07-18|Ledger: THE TRADITIONS commissioned (owner) — Engine Lift #4, the culture layer; core-motif invariant, checkpoint mutations, outcome tiers, ownership stakes, imposition/adoption; eighth flag at the regen; recon dispatched
+60dd08310|2026-07-18|Design annex: THE DEEP CRAFT WAVE per-page designs (owner-commissioned) — foundation additions, hero moments, every route's composition, enforcement ratchets
+9d1c9702f|2026-07-18|FOLD: THE MAP-SURFACE GATE WIRING → w7-prep — the ladder ruling's map consumers: DM pins gated (locked-visible drawn padlock on saved maps for free owners; stored annotations never touched; anon/gallery unaffected; viewing stays free) · change-view depth gated (free = the newest change per band, the honest teaser floor; premium = full derived depth; buildChangeView untouched + tier-blind pinned) — both on the fog fold's exact pattern (canEdit predicate, purchase moment, tier-blind source scans); TWO HONEST STOP-AND-REPORTS: interiors have NO consumer to gate (the enter-from-map hook = the recorded unbuilt seam; the free-sample rule RECOMMENDED not committed — most-prominent institution, pure pick) · the v1→v2 redraw affordance is premature until the taste veto; FLAGGED: the map-edit chrome is invisibly gated (hidden, no teaser) = ROUND-3 stock; interior-export monetization intent superseded by the ladder ruling = owner surface; 31/31 pins, 0 eager by construction, pane 597/600
+db6b505e5|2026-07-18|THE LADDER commit 7/N — §4b patron deity (the faith-coherence rupture window)
+e160177fd|2026-07-18|FOLD: THE LADDER (engine lift #3) → w7-prep — THE COURT IS BUILT, DARK, AND GOLDEN-PROVEN: the standing integrator (deeds deposit stakes-weighted, failures withdraw, glory decays; the fabric idiom) · dynamic goals as StopConditions over the S7 registry (REUSED never forked; flaws as risk appetite; the attribution rule — office×domain, the multi-claimant free-riding pin; progress deposits + honest lapsed) · THE CHALLENGE ENGINE (windows · non-short-circuiting receipts · hash01-seeded resolution · the three-body single-pass — the patient bottom sees the straining middle's opening · conservation swap/drop · four brakes · the stigma tax · D5 grudges) · §8 the standing loop single-writer to the mirror (leadership quality lifts factions in coupContenders — a well-led faction resists coups; churn invites them; dark-safe factor===1) · coup truncation (the ladder defers) · the faith-rupture permanent window; the npc_ladder beat registered; all 19 dormancy goldens green + its own; anti-stasis century-band pinned BOTH bounds; ~1,790 engine lines in lazy leaves, pulseKernel net-zero; npcLadderEnabled JOINS THE ONE REGEN
+027e4e4ce|2026-07-19|WC-e: cross-settlement pilgrimage (Wave C seam 5 — DESIGN_TRADITIONS §16)
+185f9b7c4|2026-07-19|Ledger: roads recon REFUTES the travel premise (manager error owned — the 'mover' is culture motion; NPC travel is ABSENT) — greenfield wave; substrate map recorded; Fable architect dispatched
+24f463374|2026-07-19|THE FACTION-KEY BUG, fourth instance: the religion ruler lens reads the canonical seat
+3f08fc6d7|2026-07-19|R3-d — #12 CustomContent: restore the authoring affordances (org only), deity W-C4 kept
+5a0d943bd|2026-07-19|C4c-b — THE VOTIVE REGISTER: DeityAssignmentPanel materials pass
+6f1867fff|2026-07-19|WC-c: culture-vector reads tradition state (Wave C seam 3 — DESIGN_TRADITIONS §1/§16)
+6f5d29ae0|2026-07-19|COMPOSITE: merge claude/traditions @ 80b8ad71 — T-1..T-5 (dark culture engine + the World-group tab now FULLY WIRED)
+76cccbf24|2026-07-19|THE RENAME COMPLETION (fold batch 2 closing): VIOLET*->SLATE* everywhere — theme/tokens exports renamed with no aliases; all consumers (incl. the formerly off-limits App/authUI/Button/PricingBands/PricingMomentCard) renamed in one commit; retired swatch keys '#7B4FCF'/'#EBE2FA'/'#EBE2FA80' renamed to honest slate hex '#5A6E82'/'#E4E9EE'/'#E4E9EE80' with all call sites; kill-list tintedCallouts pattern drops VIOLET_BG (count law intact at 214); rawColor budget re-triaged 1443->1403 (measured, exact-pinned); eager closure 1,039,830 (-6 B, ~0)
+97b68d406|2026-07-19|P-f — THE RECEIPT ARTIFACT: the purchased-dossier moment (C12)
+c628d024b|2026-07-19|Ledger: THE ESCALATION CLAUSE (owner staffing amendment) — Fable implementers allowed case-by-case for difficult tasks, never default; manager criteria + pre-identified candidates recorded; table-reporting standing order noted
+e4ecd0af5|2026-07-19|D1-c (deep-couplings): the cultural feeder — rededications become rumor-visible
+673524738|2026-07-20|Ledger: SHOULD-FIX/POLISH BATCH A FOLDED @ composite-r4 084549e4 (~100 findings: SS4 enforcers + SS2 engine + SS1 fork sink-sweep; fold-fixes = assize slug cure + edge regen; full two-shard 4-parked-only, letter golden green, deity drift unchanged) — batch B next
+becdd38a2|2026-07-20|Vision V-M (e): radar lenses — trend, never prophecy
+86a87878d|2026-07-21|Ledger: THE DEITY DOCTRINE (owner ruling 2026-07-21) — NO premade deities; T4 queue GROWS by the pool removal.
+f7b6ecb62|2026-07-21|Trim: the pricing-moment card no longer announces its own cooldown (owner order 2026-07-21)
+07b34a897|2026-07-22|Wave D (world inputs): terrain and cultures defined, dead lifelines repointed
+19efd1544|2026-07-22|Ledger: LOADING JOURNEY FOLDED @ 0fc79125 — the load wears the film; the socket lit the moment the owner dropped the asset.
+22ee1ad49|2026-07-22|Compendium legibility: operation labels + descriptions, Living-World tab, deity-roster removal
+52a4d8c1d|2026-07-22|Wave C1 (faith): the deity axes and the pantheon rise, the doctrine way
+52c4cb6e0|2026-07-22|Plan: Wave C (faith C1 + magic C2) shipped
+ca27f0993|2026-07-22|Herald Phase 5: the Divination forecast + the Adjudication resolved log.
+d93f86991|2026-07-22|Fold operations legibility: 169 operations named and described; the Living World speaks human; the deity roster is gone
+9ea94dc16|2026-07-27|The deity lane folds: embed-writer parity, restore-from-world, and the ref chain stops minting `converted:`
+b89a2025b|2026-07-28|The owner's tail lands: factions rename everywhere, locks make rerolls safe, the coach vestige retires, and the table records its moments
+527f103f8|2026-07-30|Realm exports honor the faith seam (owner-signed)
+9c57964d1|2026-08-01|Amendment E: war as culture, and the god who wants it
+a1a8a5eb5|2026-08-01|Amendment C2: dissolution is general, and momentum is the force that outlives arithmetic
+27e739f00|2026-08-02|LD-7: the popup scope law — page-scoped by default, leaving is not dismissing, cross-page only by declaration; PricingMomentCard App-level mount diagnosed as the live instance (owner-ordered)
+368626508|2026-08-02|FP correction pass COMPLETE: 143 findings dispositioned under ten chair rulings — the corpus coheres
+ab13157d6|2026-08-02|FP correction pass: partial bank at account switch — markers INFORMATION 14 / GRAMMAR 11 / INTERIOR 7 / TRADE 3 / POPULATIONS 3; FAITH+COUPLINGS+SPINE untouched; successor re-runs the correction script (map: memory fp-corpus-handoff-2026-08-02)
+f4716aa6e|2026-08-02|Directive 12(f,g): the faith climate axis — pious/secular/dynamic convergence over existing levers; the four corner ages mint free from composition (owner dictation; the age family closes at two axes)
+b441bca53|2026-08-04|GR-0 THE LIFECYCLE VOICE: the pact grammar learns the two moments it always executed in silence
+58d3039f4|2026-08-07|CI parity: the hazard-registry gate went dark in CI the moment it was built
+78d136a1b|2026-08-11|Four dead UI reads repaired: the Campaign row, the port badge, Culture/Terrain
+c376ec52e|2026-08-15|CS-B0: the cultural axis seeds itself — and the staleness pin is restored UNTOUCHED
+da73dc7b2|2026-08-15|docs(cs-b P1): promote CS-B0 READY — the cultural axis gets its own seeding path
+66fda66d4|2026-08-16|feat(WF-1a): the typed patron fall — the flag, the leaf, the ring, the classifier
+1a90b5639|2026-08-21|feat(WF-1d): the dissolution names the fall — a war receipt can finally say why the creed left
+3ac279db4|2026-08-21|feat(WF-1E): the town's faith panel says its seat changed hands, and why
+5091ee723|2026-08-21|§342: WF-1E landed, CAS to 3ac279db — the faith panel says why; the WF-1 ladder complete but for WF-1F
+5d18b4a0c|2026-08-21|feat(WF-1F): the last altar names the whole creed, not its last syllable
+adb5faf3f|2026-08-21|feat(WF-1C): the realm last-seat beat — the last altar in the world stops going out in silence
+47ea9c9ba|2026-08-22|feat(WF-8A): the last altar goes dark, and the town's record says so
+e0ad35e39|2026-08-22|refactor(tests): pantheon A5 and the floor walker read the ONE registry roster (H5)
+fe98892c2|2026-08-22|§394: CT-3 collected holding at eb0412e2; warFaith origination banked for the trailing mint; seven judgments ratified; patron-fall diagnosis queued
+03842512b|2026-08-23|§501: the catalog-hygiene charter compiled — four mis-inferences not three (a parish priest drawing the tavern interior in 70 of 420 settlements), the research cure wrong twice, CH-1 zero-shift and dispatchable; the skeptic panel is in the seat
+17c4d75a1|2026-08-24|TE-CH-6: faith leaves the magic-dependence vocabulary — and the keyword list is measured to decide one row of 28
+44114a0ad|2026-08-24|§644: the cultivated-land law — subsistence before trade, minted as L-REG-33
+6f0c89de7|2026-08-24|§541: CH-5 ruled — the defect is one member wide, and the search found a shipped deity-doctrine violation
+029f8f142|2026-08-30|§797: the deity rework is chartered — temperament, flaw, boon and bane on one clamped faith field
+10f94b498|2026-08-30|TE-RESIDUE car 4 (DEITY-LIVE-CHECK): a magic-free world stops promising divine healing — and the tag the charter asked for is refused, with the measurement that refuses it
+190b83e9a|2026-08-30|T11 car 2: §805 — the FAITH tab's layout lands whole; content deepens as the trains land
+22e497324|2026-08-30|§810.6(b): the owner's scoping confirmed — materialization only for the factionless ascendant
+3c5b669f8|2026-08-30|§805: war and faith become two world tabs — belief renders, truth toggles, the field speaks
+aed6a433c|2026-08-30|T11 car 1: §805 — the War & Faith tab splits into WORLD-group WAR and FAITH tabs, and WAR learns the believed picture
+c60c69d72|2026-08-30|§798: the W-FAITH architecture volume — nine vetoable rulings on a substrate read whole
+cc9f1a680|2026-08-30|§800.3: envoys ride free, gods join the one chart immutably — five rulings under delegation
+00a4aa0c9|2026-08-31|W-FAITH F2c: the authored temper reads, and the census says the engine cannot hear it
+09333e936|2026-08-31|W-FAITH F2c: the census stops describing the provenance split and executes it
+142e13bdf|2026-08-31|W-FAITH F3c census bill 1/2: the observed-shape register absorbs the regenerated manifest
+14bbcbc5f|2026-08-31|W-FAITH F3c act 3 census bill: one file, credited whole — and the bill reconciles exactly
+15033b49a|2026-08-31|W-FAITH F7c act 2: the deepening rows - top-3 character, boon and bane, the field in band words
+189954cc8|2026-08-31|W-FAITH F3c act 2b: credit the three new test files to the lighting census
+1a045a704|2026-08-31|W-FAITH F2c census bill 2/2: the lighting register re-measured, and the +28 is not the +25
+2c0ab98b4|2026-08-31|W-LIVES L7 (THE READ MODEL AND THE PROSE): the god and the town disagree about what a man is most known for
+416cd8ec9|2026-08-31|W-FAITH F6c: the tuning signature surface — every faith candidate under one pen
+509ced498|2026-08-31|W-FAITH F2c: the census stops describing the provenance split and executes it
+5c375f82f|2026-08-31|W-FAITH F7c act 2: the deepening rows - top-3 character, boon and bane, the field in band words
+5ecc6616f|2026-08-31|W-FAITH F2c census bill 1/2: the observed-shape register absorbs the regenerated manifest
+62446c51e|2026-08-31|W-FAITH F7c act 1: the T11 faith-tab shell grafted verbatim, at the build-tip bytes
+65d2e9ade|2026-08-31|W-FAITH F6c census bill: the signature surface suite, credited whole
+66c3f53fe|2026-08-31|W-FAITH F3c census bill 2/2: the lighting register re-measured, and the +5 is a +6 and a -1
+6a27991e9|2026-08-31|W-FAITH F1c: the deity's authored character, six optional fields and not one engine byte
+6ec67f7f1|2026-08-31|W-FAITH F3c act 2: the influence field kernel + the witness-plane source
+847d40b82|2026-08-31|W-FAITH F2c: the authored temper reads, and the census says the engine cannot hear it
+8c460ae11|2026-08-31|W-FAITH F3c act 2: the influence field kernel + the witness-plane source
+8cdf0a35b|2026-08-31|W-FAITH F6c: the tuning signature surface — every faith candidate under one pen
+90bf19664|2026-08-31|W-FAITH F3c act 3: the dead spelling cured at both sites, the §851 precedence law — and the witness that could not see its own cure
+94e461bc4|2026-08-31|W-FAITH F6c: the tuning signature surface — every faith candidate under one pen
+a1525c328|2026-08-31|W-FAITH F5c: the vice-pole flaw layer — jealous reads share, wrathful reads fortunes, and no flaw invents a quantity
+a487761bf|2026-08-31|W-FAITH F3c act 2: the census bill — and the arithmetic reconciles exactly
+a8673e3e9|2026-08-31|W-FAITH F1c: the deity's authored character, six optional fields and not one engine byte
+ae6934048|2026-08-31|W-FAITH F5c: the vice-pole flaw layer — jealous reads share, wrathful reads fortunes, and no flaw invents a quantity
+b2b2eedd8|2026-08-31|W-FAITH F5c: the vice-pole flaw layer — jealous reads share, wrathful reads fortunes, and no flaw invents a quantity
+b657208d6|2026-08-31|W-FAITH F3c act 1: the embed carries the authored character, and the writers stop keeping copies
+b9df4101a|2026-08-31|W-FAITH F4c: the observed-shape register absorbs the lawful input drift — debt ledger UNMOVED
+bb920f17a|2026-08-31|W-FAITH F4c census bill: the lighting register — and the +29 hides an honest zero
+bb993470a|2026-08-31|W-FAITH F3c act 2c: the observed-shape ratchet convicted four dead reads — cured at cause
+bcefbf50b|2026-08-31|W-FAITH F4c act 2: the four boon/bane keys become MECHANICAL — with the claim probes that earn it
+be6bb24c5|2026-08-31|W-FAITH F4c act 2: the four boon/bane keys become MECHANICAL — with the claim probes that earn it
+cae3c7838|2026-08-31|W-FAITH F4c: the boon/bane channels reach the causal substrate — six bound, three declared inert
+cc3199d70|2026-08-31|W-FAITH F3c act 2c: the observed-shape ratchet convicted four dead reads — cured at cause
+cd6d5c2e3|2026-08-31|§870: four lanes marked to the commit at the moment of the switch
+de325429f|2026-08-31|W-LIVES L7 (THE READ MODEL AND THE PROSE): the god and the town disagree about what a man is most known for
+e0b4c371b|2026-08-31|W-FAITH F5c census bill: the lighting register — one file, credited whole
+e126c24ed|2026-08-31|W-FAITH F7c act 2: the deepening rows - top-3 character, boon and bane, the field in band words
+e2c4bf845|2026-08-31|W-FAITH F4c: the boon/bane channels reach the causal substrate — six bound, three declared inert
+ed0516380|2026-08-31|T3 SEAT-3: cultivate or exploit stops being a rung the machine climbed and becomes a choice
+ee6b8d265|2026-08-31|W-FAITH F1c census bill 2/2: the lighting register re-measured, and it names a park
+f51781420|2026-08-31|W-FAITH F3c act 2b: credit the three new test files to the lighting census
+f67a88fda|2026-08-31|W-FAITH F3c act 1: the embed carries the authored character, and the writers stop keeping copies
+f98694e9a|2026-08-31|W-FAITH F1c census bill 1/2: the observed-shape register absorbs two generated inputs
+fa53a1da4|2026-08-31|W-FAITH F3c act 3: the dead spelling cured at both sites, the §851 precedence law — and the witness that could not see its own cure
+0dac7b074|2026-09-01|PAID REPAIR 1/5 (register): the reader-with-no-writer ratchet banks the culture strike
+158c36113|2026-09-01|REHEARSAL-CURE: the living-content law version becomes a zero-import leaf — the seam/roster/law cycle is broken by the deityConstants pattern
+1c7981bb9|2026-09-01|REHEARSAL-CURE: the catalog's vocabulary is LIT through the faith tab, the NPC read model stays DARK, and the proof is derived from the rosters instead of written beside them
+38afcdcb3|2026-09-01|PAID REPAIR 1/5 (register): the reader-with-no-writer ratchet banks the culture strike
+3b8f5ef39|2026-09-01|REHEARSAL-CURE: the deepening leaf reads faithChannelLift from the bindings leaf, not the field
+472cd8ef8|2026-09-01|PAID REPAIR 1/5: the campaign PDF and the World Book read culture from an address nothing writes
+4c7d59d1e|2026-09-01|W-FAITH F7c act 5: three registers learn the tree they govern - and a two-car-old stale claim is repaired at cause
+540af8461|2026-09-01|REHEARSAL-CURE: L7's clause register pays the kind the catalog grew under it — `faith_milieu`
+5440b2ff8|2026-09-01|REHEARSAL-CURE: the living-content law version becomes a zero-import leaf — the seam/roster/law cycle is broken by the deityConstants pattern
+5bbaba4fc|2026-09-01|PAID REPAIR 1/5 (register): the reader-with-no-writer ratchet banks the culture strike
+5ee129fbd|2026-09-01|REHEARSAL-CURE: the deepening leaf reads faithChannelLift from the bindings leaf, not the field
+66d6e9235|2026-09-01|REHEARSAL-CURE: the catalog's vocabulary is LIT through the faith tab, the NPC read model stays DARK, and the proof is derived from the rosters instead of written beside them
+689bcbfe3|2026-09-01|W-FAITH F7c act 5: three registers learn the tree they govern - and a two-car-old stale claim is repaired at cause
+68cd13ae2|2026-09-01|PAID REPAIR 1/5: the campaign PDF and the World Book read culture from an address nothing writes
+73df5b32c|2026-09-01|W-FAITH F7c act 3: the four retired-field readers hear the derivation - and the deepening reads move to the model
+a808e56b5|2026-09-01|W-FAITH F7c act 3: the four retired-field readers hear the derivation - and the deepening reads move to the model
+c28c7b43c|2026-09-01|PAID REPAIR 1/5: the campaign PDF and the World Book read culture from an address nothing writes
+c7140cda3|2026-09-01|REHEARSAL-CURE: L7's clause register pays the kind the catalog grew under it — `faith_milieu`
+cdf50747f|2026-09-01|W-FAITH F7c act 3: the four retired-field readers hear the derivation - and the deepening reads move to the model
+debb0aa6e|2026-09-01|W-FAITH F7c act 4: the lighting census bill - two files, credited whole, and the arithmetic reconciles
+e25c73fbf|2026-09-01|W-LIVES L7 (THE READ MODEL AND THE PROSE): the god and the town disagree about what a man is most known for
+eabae6920|2026-09-01|W-FAITH F7c act 5: three registers learn the tree they govern - and a two-car-old stale claim is repaired at cause
+f05331734|2026-09-01|INSTRUMENTS landing cure 1: the blind ledger takes its FIRST measurement on the tree it governs — and the fourth deity field was ruled work, bisected to its commit
+0057317f3|2026-09-02|§882: the faith chain lands — deity character, flaws and one tuning pen, the faith tab's declared lit surface, picked whole from the sealed rehearsal
+2d5112851|2026-09-02|§885 cure 2/2: the culture-class row gets the explicit per-test budget the instrument prescribes — and the instrument's own message misreports which budget governs
+3c6f34dfb|2026-09-02|§881.16: the seat moves to Opus and the board is paused for an account switch — every lane accounted and checkpointed, the faith consist complete on its dock, and the lighting wave refused by both of its skeptics
+6630ef956|2026-09-02|TAIL-F landing register 1/2: the lighting census refrozen for the faith chain — 2495/370/2125/22437/6069, every digit predicted before the probe ran
+66c9abaac|2026-09-02|The declared window's ONE flipped row, attributed and re-recorded: momentumDormancyGolden mo-b|8|one_month
+6892bf929|2026-09-02|WRWALKER Car 2: the surface-class map, the export arm and the cross-join — the culture class is still live in six exact rows, and the CHARSET mirror pin contradicts itself in the charter
+b2d4e961e|2026-09-02|WRWALKER Car 2: the surface-class map, the export arm and the cross-join — the culture class is still live in six exact rows, and the CHARSET mirror pin contradicts itself in the charter
+53fd36d2c|2026-09-03|O-17: the faith tuning surface is candidate-lit, and the §763 ruling that made lighting an unsigned surface unconstructible is superseded by a law that replaces it rather than relaxing it
+8ae07b5fc|2026-09-03|O-17: the faith tuning surface is candidate-lit, and the §763 ruling that made lighting an unsigned surface unconstructible is superseded by a law that replaces it rather than relaxing it
+bd3699daa|2026-09-03|sitting-892 kit, second seal after the §892 partial-sitting commit f6c150528 (2026-09-03 ~23:5x ET): the built queue-892.md, payload, message, tally, every walk/S*.json as of this moment
+0e78576d4|2026-09-04|DESK-ECONFAITH C3: DS-ECO-3 lights four of five — and the fifth pool is unreachable
+1bfb206b7|2026-09-04|DESK-ECONFAITH C2: DS-ECO-6 lights — and the corpus stops repeating the tab back at itself
+20abb68f2|2026-09-04|sitting-892 kit, third seal after §892.1 04f6b255e (2026-09-04 ~00:0x ET): the Opus chair's map (RESUME-NOTE CUTOFF #3, the live-fault list), brief-O2GATE, S01 complete, every walk/S*.json as of this moment
+22d9a0d4d|2026-09-04|DESK-ECONFAITH C1: DS-ECO-12 lights — the commercial profile, three lenses at one position
+2eaac870f|2026-09-04|DESK-ECONFAITH C1: DS-ECO-12 lights — the commercial profile, three lenses at one position
+33124ef8c|2026-09-04|DESK-ECONFAITH C1: DS-ECO-12 lights — the commercial profile, three lenses at one position
+4dc34e9ae|2026-09-04|DESK-ECONFAITH C3: DS-ECO-3 lights four of five — and the fifth pool is unreachable
+5c536ebc1|2026-09-04|DESK-ECONFAITH C2: DS-ECO-6 lights — and the corpus stops repeating the tab back at itself
+8251b9de1|2026-09-04|DESK-ECONFAITH C3: DS-ECO-3 lights four of five — and the fifth pool is unreachable
+d8ed15331|2026-09-04|DESK-ECONFAITH C2: DS-ECO-6 lights — and the corpus stops repeating the tab back at itself
+06f6a790b|2026-09-05|DESK-WARFAITH receipt: 6 of 9 mounted, 3 dark with measurement, four defects found (Opus lane, 09-05)
+0cc9d0b5e|2026-09-05|CHAIR KIT — brief-PANTHEON-ROSTER (the six freezes into one literal roster; ruled), queue
+1506d657d|2026-09-05|LGT-P13-FENCES step 4: the faith-unseating dormancy fence
+160bc100e|2026-09-05|DESK-900 car 4: the war & faith desk cited two enforcers that have never existed, and withdrawing the claim exposes an unproved half of its own gate
+29b13dca4|2026-09-05|PANTHEON-ROSTER step 2: the six registration freezes get ONE roster of record
+306d4426e|2026-09-05|LGT-P13-FENCES step 4: the faith-unseating dormancy fence
+5e946e7af|2026-09-05|DESK-4: the war & faith desk lands on two tabs, and the corpus's own sentences correct three of the desk's
+6e21cc4c8|2026-09-05|CHAIR KIT — queue: PROSE and WARFAITH done; PDFDRIFT and DESK-DEF2 dispatched; OSR-SCHEMA17 after the PROSE gate
+7871d1622|2026-09-05|PANTHEON-ROSTER step 3b: the walker reads the roster, and its four capsule-parsed numerals are BOUND to it
+7dba5508b|2026-09-05|DESK-4: the war & faith desk lands on two tabs, and the corpus's own sentences correct three of the desk's
+84a9dfd02|2026-09-05|DESK-900 car 4: the war & faith desk cited two enforcers that have never existed, and withdrawing the claim exposes an unproved half of its own gate
+a7c701cf1|2026-09-05|PANTHEON-ROSTER step 3b: the walker reads the roster, and its four capsule-parsed numerals are BOUND to it
+aec2b78c4|2026-09-05|CHAIR KIT — PANTHEON-ROSTER done (queue, §900 plan: roster conflict resolution), resume note (RESUME to three)
+bba6b5771|2026-09-05|PANTHEON-ROSTER step 3a: A5 reads the roster — the hand copy that forked twice is gone
+c3359ee7e|2026-09-05|LGT-P13-FENCES step 4: the faith-unseating dormancy fence
+c6026a7a1|2026-09-05|Composed landing (chair car): pantheon A5's four registration pins move by ENC-4's attribution — the fork bit again and landed red, unseen
+d52113a3a|2026-09-05|PANTHEON-ROSTER step 2: the six registration freezes get ONE roster of record
+e4bdb96f6|2026-09-05|PANTHEON-ROSTER step 3a: A5 reads the roster — the hand copy that forked twice is gone
+e85146c58|2026-09-05|CHAIR KIT — car-4 message (pantheon pins), queue (ENC-4b done, SEAT-78 dispatched), resume note
+f3d4b481e|2026-09-05|CHAIR KIT — the desk-car law and the DESK-WARFAITH / DESK-GEN2 briefs (dispatched at 940d161ca alongside LIGHT-PLAN and WARMS-CAR0)
+2f277844b|2026-09-08|SEAM car 3d: the warFaith desk through the composer, and its DeskLines keyed on the mount — zero drift
+0f5570f5e|2026-09-14|REWRITE CLARITY warFaith, BATCH 3 of 7: DS-WAR-3 + DS-WAR-4 + DS-WAR-5a — the dormant note, the aggression postures and the war ladder's first half re-cut, 54 of 68 spines touched, ZERO move-grammar shifts, and four C4 bare futures discharged with rule (a) asked of every one
+169ffe4f0|2026-09-14|REWRITE CLARITY general, BATCH 5 of 11: DS-GEN-7 + DS-GEN-8 — the six coherence notes with the violations and suggestions rows, and the whole steading/ruin lifecycle; ⭐ AND THE A3 ANTITHESIS RULE IS NOW PINNED DOWN BY BISECTION: the arm fires when the antithesis clause is THE LAST THING IN ITS SENTENCE, and a coordinate kept after it inside the sentence suppresses it
+3c1ae2494|2026-09-14|REWRITE CLARITY warFaith, BATCH 4 of 7: DS-WAR-5b — resistance, blockade, the treaty-burden pair and the seven aftermath archetypes; THE WAR HALF OF THE LEAF IS COMPLETE, its mechanical proxy is 262 of 262 and the wave gate's FAIL rows are 17 -> 2
+4c8fc0909|2026-09-14|REWRITE CLARITY warFaith, BATCH 5 of 7: DS-FTH-1 + DS-FTH-2 — the faith panel and the faith teaser re-cut under the DEITY DOCTRINE, only 28 of 71 spines touched, and two new X rows cured by 42's own instruction rather than by a split
+4d2467fe3|2026-09-14|REWRITE CLARITY warFaith, BATCH 2 of 7: DS-WAR-2 — the treaty block re-cut, 61 of 83 spines touched, the proxy cleared on every one, a RULING-40 SELF-CITATION struck, and rule (a) applied where a `will not` was a REFUSAL and not a forecast
+6659d0000|2026-09-14|REWRITE CLARITY warFaith, BATCH 6 of 7: DS-FTH-3 + DS-FTH-4 — the religion state and the temple's ground re-cut, 33 of 85 spines touched, THE LEAF'S UNIT FAIL ROWS ARE NOW 0, and a RATCHET TEST WENT RED AND WAS CURED BY RE-CUTTING THE LINE
+6b2f8d975|2026-09-14|REWRITE CLARITY warFaith, BATCH 1 of 7: DS-WAR-1 — the war block re-cut to rulings 42/42a/42b/42c/42d under the claim freeze, 57 of 66 spines touched, the proxy cleared on every one, and the chair's mid-run HEDGE rule applied to this batch and not the next
+b8a7de5e5|2026-09-14|REWRITE CLARITY warFaith, THE CHAIR'S CUT: 26 moved claims put back after the reader audit — the will-strip rendered as future without a bare will, eight causal links restored, nine hedges and frames, three actors, two metaphors kept; the generic he ruled house convention
+ca49b4168|2026-09-14|REWRITE CLARITY warFaith, BATCH 7 of 7: DS-REL-1 + DS-REL-2 — the neighbour network and the relationship overview re-cut; ⛔ AND THE BRIEF'S LEAF DEFINITION IS WRONG IN TWO WAYS, BOTH MEASURED: DS-REL IS NOT IN THE warFaith LEAF, AND 24 OF ITS VARIANTS ARE INVISIBLE TO EVERY KIT INSTRUMENT
+cd65cc7a4|2026-09-14|REWRITE CLARITY economy, BATCH 8 of 12: DS-STR-1's remaining eight pools — raiders, insurgency, the divided creed, the revolt, wartime, the arrivals and the two arity cells; ⭐ DS-STR-1 IS COMPLETE AT PLAIN 96 OF 96 AND wps 9.82; ⛔ AND ARM (B) CANNOT BE BEATEN BY SWAPPING THE DETERMINER, BECAUSE IT KEYS ON THE SENTENCE'S FIRST WORD AND NOT ON THE COPULA'S SUBJECT
+d9f7b17ef|2026-09-14|REWRITE CLARITY general, BATCH 2 of 11: DS-GEN-3's twenty `scores.*` pools — the five defence axes across four bands, the OVERVIEW tab's own dashboard, re-cut in the BULLET-CELL form no kit instrument can read; and TWO 42a SPLITS WERE REVERTED because they bought a wps figure by trading a plain close for an antithesis close
+ec271c515|2026-09-14|REWRITE CLARITY economy, BATCH 10 of 12: DS-STR-2's seventeen ORIGIN pools — the eighteen-variant origin ladder from a foreign hand to a silent leyline; ⭐⭐ THE STRESSORS SECTION IS CUT END TO END, DS-STR-2 IS PLAIN 92 WITH FOUR HEAD ANTITHESES AT wps 9.00, AND NO `will` OR `shall` SURVIVES ANYWHERE IN THIS LANE'S 539 SPINES
+efad42bdb|2026-09-14|REWRITE CLARITY general, BATCH 1 of 11: DS-GEN-1 + DS-GEN-2 — the ten tension types and the three conflict intensities re-cut; ⛔ AND THE BRIEF'S LEAF DEFINITION IS WRONG AGAIN, THE SAME WAY warFaith's WAS, AND DS-GEN-3'S THIRD AUTHORING FORM IS FOUND, NAMED AND INSTRUMENTED

@@ -1,0 +1,79 @@
+2026-04-24|68463c9b0|Add custom content system — user-authored institutions, resources, stressors, NPCs, trade goods
+2026-06-08|0219be4a1|§14 trade flow Phase 1 — custom goods/institutions satisfy trade-demand categories
+2026-06-08|2ae9f2482|§14 trade flow Phase 3b — good-level cross-settlement trade with the neighbour
+2026-06-08|35d397075|§14 trade flow — category bridge for cross-settlement trade
+2026-06-08|9317b1add|§14 — foodImpact now moves the deficit for custom services + trade goods too
+2026-06-08|d855b58fc|§14 — unified trade-category bucketing: custom goods fold into category lines
+2026-06-08|eac70c49d|§14 P1.2 — Custom content: selectable tags/commodities + drop redundant tabs
+2026-06-08|eee76596e|§14 trade flow Phase 2 — confirmed custom chains feed the real export/import lists
+2026-06-09|9032d2514|Sim P1.1/P1.2: canonical trade-route vocabulary + fix capacityModel dead export read
+2026-06-09|e8428606e|Sim P1.3: one canonical-accessor boundary for stressor + trade-good aliases
+2026-06-09|f8e5579f4|P3.3b Stage 0: de-dup the food trade-import overlap; stand up capacity tests
+2026-06-11|7cf558936|Editor roster wave: resolve stressors, trade goods, resources, NPC standing swaps
+2026-06-16|7dd0c9f5c|A+ generators.7: DEFER the tradeDependencies prefix→id conversion (output-affecting)
+2026-06-16|cc60e1176|A+ generators.7: id-first tradeDependencies join (owner-approved) — fixes a flour-mill→timber false dependency
+2026-06-19|70c14b0b2|refactor(sim): give trade_embargo a real archetype-catalog entry
+2026-06-19|77bd27ae1|feat: living-world simulation (war/trade/religion/pantheon) + comprehensive UI/UX overhaul
+2026-06-19|e1c7244e9|feat(sim): Track B war-deepening — military strength, mobilization, stateful armies, occupation, strategic trade, 4th deity axis
+2026-06-22|255a8fcf4|feat(home): marketing landing as the Home front door + first-visit gating
+2026-06-22|7bebf1c5f|feat(landing): show the marketing landing to logged-out visitors, not just first-timers
+2026-06-22|f3643fcf9|feat(events): make-change extensions — NPC config, instigator->hostile, trade target, corruption tag/scope
+2026-07-02|01a796afc|fix(dossier+pricing): humanize trade goods, clean dropdown placeholders, cap Founder seats at 30
+2026-07-05|3c45b2fcf|fix(data): align trade-good requiredInstitution across all 3 parallel maps
+2026-07-05|3da96586b|fix(causal): siege/occupation lifts RAISE food_security and trade_connectivity
+2026-07-11|01588f099|Phase 5.5 design: entrepot growth + smuggling counterforce
+2026-07-11|56ca62ad1|Phase 5 Reunification, W4h — domain-display read-models (army/trade/visibility)
+2026-07-11|6e07cc82b|Phase 5.5 design: PART VI — grounding verdict rounds 14-16 (additive/byte-safe/tractable; risks are SEQUENCING; lineage-at-3.5 + versioning-in-keystone must not defer; 4 owner decisions); fix V.6 entrepot-brake contradiction
+2026-07-11|8e05441f7|Phase 5.5 design: prosperity migration axis + contraband gate policy/smuggling
+2026-07-11|944431e7f|W4h brief — domain-display read-models (army/trade-pressure/visibility)
+2026-07-11|b9585d7ed|Phase 5.5 design: round 9 — multi-channel carriers (trade dominant, +6 alternate channels)
+2026-07-12|245d95723|Phase 5.5, M6c — GREED vs DANGER: the caravan master weighs profit against pestilence
+2026-07-12|67a946616|Phase 5.5, M2 — CARAVANS / SUPPLY-STARVATION: trade finally travels, and a cut road can starve
+2026-07-12|884b50119|Phase 5.5, STEP 3.5 — Rumors & News: the world now speaks (trade-carrier) + Perfect-but-Delayed
+2026-07-12|cf2bb9cf5|Phase 5.5, M6d — FLOW-DERIVED ECONOMICS: trade dependency you EARN by moving goods (M6 complete)
+2026-07-12|efd3bb5a6|Phase 5.5, M6b — ENTREPÔTS / TOLLS: centrality is earned by the caravans that pass, not by the map
+2026-07-12|f10814141|Round 22 → the TRADE-DECISION LAYER: refusal, flow-derived economics, commodity continuity, greed-vs-danger (owner-architect)
+2026-07-13|25003430b|Round-21 W1: the crier's voice — war/faith/trade news gains a herald's line
+2026-07-13|82ad676b2|Phase 5.5, M11a — PESTILENCE: the plague travels the trade roads, and a temple city resists but is never immune
+2026-07-14|0690791a9|Design: the pacing governor (E0 — throttle spontaneity never causality) + the cohesion weave (trade parity, faith×alignment quadrants, structural lenses, acquisition ladder, gap-hunt integrations incl. the UNNAMED EMPIRE read + dynastic-as-prose owner ruling); ARCHITECTURE.md migration count 129→131 (the freshness test caught the docket)
+2026-07-14|433984231|NUMERIC PRICES: the market speaks in real coin — pure lazy read-model over the live economy
+2026-07-14|f22855aa2|Design: Analytics v2 — one capture pipeline, three consumers (tuning / construction demand / sellable market pack), three consent planes
+2026-07-16|997dedf16|DESIGN_SIM_DEPTH_R2 v2: THE SCALING LAW extends to trade + military decision throughput (owner directive) + THE COHERENCE MATRIX — every design traced against the full ontology, 3 new couplings discovered
+2026-07-17|0c3a9b3fb|Ledger: OWNER DESIGN REFINEMENT — SITE GENESIS stage 0 (folded into #38): the physical canvas generates from realm terrain + resources + trade routes (realm-coherence law; substance-from-dossier/expression-from-seed extends to the site; exploit/endure/fortify response modes; temporal arc = fabric as designed); relay #4 to the v2 lane
+2026-07-17|1c22428c3|FOLD: CONTENT-VT-2 → w7-prep — the view-time selection mechanisms (deferred-with-reason by CONTENT-VT, now built): newsBody 1→4/cell · rumor headline frames 1→4/band (seeded on eventRef — same event frames identically everywhere it's heard) · chronicle quiet-advance framing 1→4/span · the market crier 1→4/tag; every mechanism canonical-at-zero (legacy/id-less callers byte-identical), facts ride every frame unchanged, 0 eager bytes (all lazy chunks, grep-proven), zero golden/snapshot movement (rumor golden hashes ledger records, not headlines); honest view-time variety note recorded
+2026-07-17|39a56a1d9|CONTENT-VT-2 (4/4): market crier line — view-time frame variety (charge-4 sweep)
+2026-07-17|e00d2eaf0|Ledger: OWNER COMMISSION — About page overhaul (task #19): constitution-for-civilians purpose ratified; research sweep dispatched (manifesto/medieval-art/market/digestibility + critic); survives/dies lists; config-sourced facts law; build post-folds pre-ROUND-3 w/ claims audit
+2026-07-17|fb967f807|Ledger: second design-research sweep dispatched (pricing design · hobby-market norms · credit-economy presentation · codex design + critic); both sweeps reconcile into the one documentation-wave brief
+2026-07-19|7b7fb59c6|WC-d: the fair trade-lane pulse (Wave C seam 4 — DESIGN_TRADITIONS §16)
+2026-07-21|92fc6dcb8|Ledger: WALK ADDENDUM 4 (owner in-chat, 2026-07-21) — THE CONDITION-COHESION LAW for M-0b: the cosmetic field consumes the settlement's lived condition — war duration, alignment, trade profile, and the full enumerated dimension set.
+2026-08-01|99974c4ab|I1: four houses that trade in what is true (owner-signed golden re-record)
+2026-08-01|daee130d5|War rulings: amendments R/R2/S (the razing, its moral economy, the sovereignty market) + the compiled architecture volume
+2026-08-02|a7f5c21ca|War amendments: trade-as-proxy-front confirmed integrated — its two absences ruled deliberate
+2026-08-04|71e78fe9d|WR-10w close: the last walker row — and the sovereignty market is wired dark, whole
+2026-08-04|a5647976c|Queue: WR-10's row — the sovereignty market lands as an instrument, four items go to the chair, and a band that would have refused nothing gets caught
+2026-08-04|a57488eff|WW-B-r2: the market composer answers for its own gate, its own band and its own asset
+2026-08-04|c7933e845|TR-9c: the trade convergence contract, and the lighting law stops being prose
+2026-08-04|e3d985129|WR-10r: three ratchets learn that the sovereignty market owes them nothing
+2026-08-04|f94bd2219|Lane WW-B: the market composer — a pressed court looks at what it holds, and the belief legs it does not have
+2026-08-04|f9a7ddea1|WR-10a: the sovereignty market registers its instrument — a term family that cannot yet be drafted, proved unreachable rather than promised so
+2026-08-14|d172e1840|Record §46c: caravan cover for spies
+2026-08-15|a87b904ca|DA-A3: an alliance stops reading as trade — the palette family converges on one source
+2026-08-16|10bdec23f|Owner order: corpus round two (mid-bands, terrain, trade, stressors) (§222)
+2026-08-21|11011b4c3|§353.5: mint-last's debt-freeze trade-off recorded; the three-branch rebuild rule ratified unflipped
+2026-08-23|319b79891|§520: the chair shipped a vitest flag that does not exist to four lanes (exit 1 with zero tests collected); CH-2A is ready and independently landable while CH-2B stops at draft on a trade vocabulary doing a magic-dependence job
+2026-08-23|bbac732c8|§462: R-INST-2 delivered (trade/commerce/crafts — 124 entries / 20 families at depth; ~30 entries have no building in the English register → NO_BUILDING and HOSTED are required grammar concepts); TC-R-INST-CIRC dispatched
+2026-08-24|44114a0ad|§644: the cultivated-land law — subsistence before trade, minted as L-REG-33
+2026-08-24|68ac62247|TE-REG-4 checkpoint 1: the market register, the faubourg origins and L-REG-30
+2026-08-24|b3a647b99|§632: REG-4 seals — the market is a place and the differential convicts the growth model
+2026-08-24|ed96f0eba|TE-CH-5 (SHAPE F, ODQ §541): alchemy is a trade — the magic-dependence list stops carrying a craft, and the data stops disagreeing with itself
+2026-08-24|fdfdbe1dd|§576: a market is one giant street, furnished like a yard
+2026-08-30|f02de39af|T10 car ECO-1: the market speaks in movements, never coin — the §776 price-heuristics conversion
+2026-08-31|64c344615|T8 car 3: twenty-seven trades stop being filed as government, and eight hundred of them find a backer
+2026-08-31|9bc292e75|§835: the market speaks in movements — T10 lands and Coin rolls to the gate
+2026-08-31|f495cdacd|DENS landing bill 8: the moved leaves pay domain-strict's zero-ceiling toll — five honest annotations, no baseline widened
+2026-09-05|4d2e7bde3|DESKCURE-2: three scanner families cured by typing and by routing, never by widening — and a shipped market line stops lying
+2026-09-14|721b6a5d6|REWRITE CLARITY economy, BATCH 2 of 12: DS-ECO-3 + DS-ECO-4 + DS-ECO-5 — the live trade-flow drift, the market prices and the economic-flows chain cards; ⭐⭐ AND THE FIRST BATCH ON ANY LEAF WHOSE CHANGED SIDE RAISES NOT ONE NEW NON-Q ROW, BECAUSE BATCH 1's SOURCE-READ TURNED THE X AND A3 ARMS INTO A PRE-FLIGHT CHECK
+2026-09-14|72d07dc8e|REWRITE CLARITY general, BATCH 8 of 11: DS-GEN-13 + DS-GEN-14 + DS-GEN-15 + DS-GEN-16 — the market, the founding, the fabric and the record; ⛔⛔ THE BARE-COPULA X ROW FIRED FOUR MORE TIMES AND THE RULE IS NOW PINNED DOWN TO ITS SHAPE: A COPULA SENTENCE WHOSE COMPLEMENT IS A DEFINITE SINGULAR NOUN PHRASE, STANDING ALONE
+2026-09-14|ab218a0d6|REWRITE CLARITY economy, BATCH 4 of 12: DS-ECO-9 + DS-ECO-10 — the food-security ladder with its two siege pools, and the export posture with market scarcity; ⛔⛔ AND THE SWEEP'S MOVE ARM FIRED TWICE IN ANGER, ON TWO CLASSES NO LEAF HAS SEEN: A SPLIT AT A **BARE** `and` ADDS A CLAUSE, AND RULING (1)'s PLAIN PRESENT CAN **MINT** A MOVE BECAUSE THE CONSEQUENCE VOCABULARY IS INFLECTED
+2026-09-14|d9f7b17ef|REWRITE CLARITY general, BATCH 2 of 11: DS-GEN-3's twenty `scores.*` pools — the five defence axes across four bands, the OVERVIEW tab's own dashboard, re-cut in the BULLET-CELL form no kit instrument can read; and TWO 42a SPLITS WERE REVERTED because they bought a wps figure by trading a plain close for an antithesis close
+2026-09-14|fa60dae68|REWRITE CLARITY economy, BATCH 6 of 12: DS-ECO-12 alone — the income mix and the trade profile; ⭐⭐ THE ECONOMY SECTION IS CUT END TO END: TWELVE BLOCKS, 152 UNITS TOUCHED, POOL-LEVEL FAIL 19 -> 3, AND NO `will` OR `shall` SURVIVES IN ANY DS-ECO SPINE

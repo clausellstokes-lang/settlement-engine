@@ -1,0 +1,1784 @@
+{
+  "config": {
+    "argv": [
+      "/usr/local/bin/node",
+      "/Users/cstokes/Desktop/settlement-engine-deploy/node_modules/.bin/playwright",
+      "test",
+      "--project=chromium",
+      "--reporter=list,json"
+    ],
+    "configFile": "/Users/cstokes/Desktop/settlement-engine-deploy/playwright.config.js",
+    "rootDir": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e",
+        "testIgnore": [
+          "**/performance/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "mobile-safari",
+        "name": "mobile-safari",
+        "testDir": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e",
+        "testIgnore": [
+          "**/performance/**"
+        ],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "flow-a-generate-save-export.spec.js",
+      "file": "flow-a-generate-save-export.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow A — anonymous generate / preview / save / export",
+          "file": "flow-a-generate-save-export.spec.js",
+          "line": 71,
+          "column": 6,
+          "specs": [
+            {
+              "title": "homepage renders the HomeHero with eyebrow / title / subtitle",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5067,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:12.599Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-d18f504152f3cccf458e",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 88,
+              "column": 3
+            },
+            {
+              "title": "hero exposes the three anonymous size buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7132,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:12.597Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-12ed8237a3c0bfc90343",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 97,
+              "column": 3
+            },
+            {
+              "title": "default size selection is Village (aria-pressed)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 7005,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:12.592Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-674affef2abc4728a953",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 106,
+              "column": 3
+            },
+            {
+              "title": "clicking a different size button updates aria-pressed correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 7284,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:12.606Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-804dbb747902b0aac46f",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 117,
+              "column": 3
+            },
+            {
+              "title": "\"Begin a settlement\" button is enabled before generation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4015,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:19.818Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-43788804d75941e16b42",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 125,
+              "column": 3
+            },
+            {
+              "title": "generation produces a dossier with name + tier + population",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 17377,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:21.776Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-71b269fc96d0a067e703",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 133,
+              "column": 3
+            },
+            {
+              "title": "anon counter is bumped in localStorage after a generation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 16231,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:22.271Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-12c609d6aa4ca657171c",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 144,
+              "column": 3
+            },
+            {
+              "title": "pipeline rail is visible after generation (How this was simulated)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 16275,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:22.333Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-dce696b16d8b5eb8fbfd",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 161,
+              "column": 3
+            },
+            {
+              "title": "\"New\" button after generation returns to a fresh state",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 15538,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:23.858Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-e110b3b2904823b1b688",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 173,
+              "column": 3
+            },
+            {
+              "title": "anonymous user does NOT see the inline Save button (auth-gated)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 14768,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:38.523Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-5a968715899929be2b3f",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 209,
+              "column": 3
+            },
+            {
+              "title": "soft cap: after DEFAULT_DAILY_CAP generations, hero swaps to \"Sign in to continue\"",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5087,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:38.623Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-08b085cc29fa2c299abb",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 222,
+              "column": 3
+            },
+            {
+              "title": "returning to the page preserves generated settlement (state persistence)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 17508,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:39.174Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-69f0e4ba12ceb1826515",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 230,
+              "column": 3
+            },
+            {
+              "title": "no console errors during the happy path",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 13440,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:39.423Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "bc11ef10ad5105e0982d-a06a78820ef27a4c3850",
+              "file": "flow-a-generate-save-export.spec.js",
+              "line": 251,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "flow-b-auth-credits-ai.spec.js",
+      "file": "flow-b-auth-credits-ai.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow B — auth modal + credits gating",
+          "file": "flow-b-auth-credits-ai.spec.js",
+          "line": 82,
+          "column": 6,
+          "specs": [
+            {
+              "title": "\"Sign In\" button is visible in the header for anonymous users",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6878,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:43.792Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-007ed6c1cff116943839",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 94,
+              "column": 3
+            },
+            {
+              "title": "clicking Sign In opens the AuthModal in the signin view",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4840,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:50.690Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-f5b806cdcc9a1209fd13",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 99,
+              "column": 3
+            },
+            {
+              "title": "AuthModal default view is signin (not signup)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4663,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:52.914Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-8e10829fa247dad1a4ee",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "AuthModal tab toggle switches to signup view + updates copy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 4944,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:53.332Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-76d6df06ef679996a8c7",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 112,
+              "column": 3
+            },
+            {
+              "title": "AuthModal primary path is password: fields + CTA render with no clicks",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 4102,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:55.547Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-c9a1d5871486a4d21108",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 130,
+              "column": 3
+            },
+            {
+              "title": "signin shows \"Remember me on this device\" with no clicks",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 4306,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:56.717Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-da3da60b8906d968180f",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 140,
+              "column": 3
+            },
+            {
+              "title": "the email sign-in link is an explicit alternative below the form",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:57.602Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-c8a213a5509c6c30681f",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 145,
+              "column": 3
+            },
+            {
+              "title": "requesting a sign-in link with an empty email does NOT make a network request",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 5817,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:58.293Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-eb4db8608d2131566539",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 152,
+              "column": 3
+            },
+            {
+              "title": "modal closes when the user clicks outside / close button",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5439,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:45:59.672Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-be5e327ceecad8062fc3",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 165,
+              "column": 3
+            },
+            {
+              "title": "soft-cap \"Sign in to continue\" also opens AuthModal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 5201,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:01.039Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-779421ee4ee4e296ec3e",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 183,
+              "column": 3
+            },
+            {
+              "title": "after generation: anonymous Save attempt routes through auth (no silent save)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14984,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:02.889Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-9604c4db9f96da877ab2",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 192,
+              "column": 3
+            },
+            {
+              "title": "no console errors when opening + interacting with the AuthModal",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 4558,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:04.124Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e437560b328badb7722e-96b724cf6ce3b0043b1c",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 217,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Tier 3.7 Flow B (live) — signin → checkout → webhook grant → AI spend",
+          "file": "flow-b-auth-credits-ai.spec.js",
+          "line": 358,
+          "column": 6,
+          "specs": [
+            {
+              "title": "checkout → webhook grant → AI narrative spend decrements the real balance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                        "line": 358,
+                        "column": 6
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "Live money-path suite: set E2E_LIVE=1 (plus E2E_BASE_URL, E2E_TEST_EMAIL, E2E_TEST_PASSWORD, and a Stripe test-mode webhook tunnel) to run. RPC-layer coverage runs in CI: tests/security/moneyPathJourney.pglite.test.js.",
+                      "location": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                        "line": 362,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:05.122Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                            "line": 358,
+                            "column": 6
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "Live money-path suite: set E2E_LIVE=1 (plus E2E_BASE_URL, E2E_TEST_EMAIL, E2E_TEST_PASSWORD, and a Stripe test-mode webhook tunnel) to run. RPC-layer coverage runs in CI: tests/security/moneyPathJourney.pglite.test.js.",
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                            "line": 362,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e437560b328badb7722e-8d262d5583bb3d2c7709",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 378,
+              "column": 3
+            },
+            {
+              "title": "AI failure refunds the reserved credits (server-side fault injection)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "serial",
+                      "location": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                        "line": 358,
+                        "column": 6
+                      }
+                    },
+                    {
+                      "type": "skip",
+                      "description": "Live money-path suite: set E2E_LIVE=1 (plus E2E_BASE_URL, E2E_TEST_EMAIL, E2E_TEST_PASSWORD, and a Stripe test-mode webhook tunnel) to run. RPC-layer coverage runs in CI: tests/security/moneyPathJourney.pglite.test.js.",
+                      "location": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                        "line": 362,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:05.123Z",
+                      "annotations": [
+                        {
+                          "type": "serial",
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                            "line": 358,
+                            "column": 6
+                          }
+                        },
+                        {
+                          "type": "skip",
+                          "description": "Live money-path suite: set E2E_LIVE=1 (plus E2E_BASE_URL, E2E_TEST_EMAIL, E2E_TEST_PASSWORD, and a Stripe test-mode webhook tunnel) to run. RPC-layer coverage runs in CI: tests/security/moneyPathJourney.pglite.test.js.",
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-b-auth-credits-ai.spec.js",
+                            "line": 362,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "e437560b328badb7722e-b7421a74c89e3ae36b6d",
+              "file": "flow-b-auth-credits-ai.spec.js",
+              "line": 456,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "flow-c-save-journey.spec.js",
+      "file": "flow-c-save-journey.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow C — signed-in save journey",
+          "file": "flow-c-save-journey.spec.js",
+          "line": 69,
+          "column": 6,
+          "specs": [
+            {
+              "title": "generate → Save to Library → appears in Settlements, survives reload, reopens",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 33630,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-c-save-journey.spec.js",
+                            "column": 72,
+                            "line": 115
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Qaryatpatan').first()\nExpected: visible\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Qaryatpatan').first() with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Qaryatpatan').first()\u001b[22m\n\u001b[2m  - Test timeout of 30000ms exceeded.\u001b[22m\n\n\n  113 |     // 6. A full reload still shows it (persistence — the save is not wiped).\n  114 |     await page.reload();\n> 115 |     await expect(page.getByText(saved.name, { exact: false }).first()).toBeVisible({ timeout: 15_000 });\n      |                                                                        ^\n  116 |\n  117 |     // 7. The saved settlement can be reopened: deep-link to its detail view,\n  118 |     //    which renders the dossier chrome (name heading + Export action).\n    at /Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-c-save-journey.spec.js:115:72"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:05.137Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-c-save-journey-Tier-3-9df46-nts-survives-reload-reopens-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-c-save-journey-Tier-3-9df46-nts-survives-reload-reopens-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-c-save-journey-Tier-3-9df46-nts-survives-reload-reopens-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-c-save-journey-Tier-3-9df46-nts-survives-reload-reopens-chromium/trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "e5ceb5e162a800e3ed00-4b11150ea2d0cad027e3",
+              "file": "flow-c-save-journey.spec.js",
+              "line": 83,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "flow-d-export.spec.js",
+      "file": "flow-d-export.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow D — PDF export journey",
+          "file": "flow-d-export.spec.js",
+          "line": 70,
+          "column": 6,
+          "specs": [
+            {
+              "title": "generate → save → export triggers a .pdf download of non-trivial size",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 31615,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:06.317Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "acf73e46c01e49ad1335-43d38dbc01218ce9eb23",
+              "file": "flow-d-export.spec.js",
+              "line": 78,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "flow-e-checkout-reconcile.spec.js",
+      "file": "flow-e-checkout-reconcile.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow E — post-checkout entitlement reconciliation",
+          "file": "flow-e-checkout-reconcile.spec.js",
+          "line": 126,
+          "column": 6,
+          "specs": [
+            {
+              "title": "credits: confirming notice first, green success ONLY after the balance flips",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 7992,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:08.719Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "73e15c6b907718c5ad96-9c5548e5305a0fb6a4ac",
+              "file": "flow-e-checkout-reconcile.spec.js",
+              "line": 132,
+              "column": 3
+            },
+            {
+              "title": "verified:false → terminal notice, no success toast",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 45000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 4266,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:16.733Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "73e15c6b907718c5ad96-684fae1a26ea11ff85ee",
+              "file": "flow-e-checkout-reconcile.spec.js",
+              "line": 159,
+              "column": 3
+            },
+            {
+              "title": "premium verified but tier never lands → persistent processing notice with session ref",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 18918,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:17.911Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "73e15c6b907718c5ad96-24246058d4fda9a11b1d",
+              "file": "flow-e-checkout-reconcile.spec.js",
+              "line": 180,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "flow-f-single-dossier.spec.js",
+      "file": "flow-f-single-dossier.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tier 3.7 Flow F — single-dossier recovery",
+          "file": "flow-f-single-dossier.spec.js",
+          "line": 72,
+          "column": 6,
+          "specs": [
+            {
+              "title": "verify returns a server settlement → dossier renders + download affordance",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 2449,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:21.031Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4cada207ae3e2c029655-7c3fdac80e2b90bfa25c",
+              "file": "flow-f-single-dossier.spec.js",
+              "line": 79,
+              "column": 3
+            },
+            {
+              "title": "verify 503 → Retry renders; retry succeeds → dossier renders, stash preserved",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 10376,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: /Download (PDF|again)/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: /Download (PDF|again)/i }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Download (PDF|again)/i })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: /Download (PDF|again)/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: /Download (PDF|again)/i }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Download (PDF|again)/i })\u001b[22m\n\n    at /Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-f-single-dossier.spec.js:146:79",
+                        "location": {
+                          "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-f-single-dossier.spec.js",
+                          "column": 79,
+                          "line": 146
+                        },
+                        "snippet": "  144 |     await expect(page.getByRole('heading', { name: /Your dossier is ready/i })).toBeVisible({ timeout: 30_000 });\n  145 |     await expect(page.getByText('Stashed Hollow', { exact: false })).toBeVisible();\n> 146 |     await expect(page.getByRole('button', { name: /Download (PDF|again)/i })).toBeVisible();\n      |                                                                               ^\n  147 |   });\n  148 | });\n  149 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-f-single-dossier.spec.js",
+                            "column": 79,
+                            "line": 146
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: /Download (PDF|again)/i })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: /Download (PDF|again)/i }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: /Download (PDF|again)/i })\u001b[22m\n\n\n  144 |     await expect(page.getByRole('heading', { name: /Your dossier is ready/i })).toBeVisible({ timeout: 30_000 });\n  145 |     await expect(page.getByText('Stashed Hollow', { exact: false })).toBeVisible();\n> 146 |     await expect(page.getByRole('button', { name: /Download (PDF|again)/i })).toBeVisible();\n      |                                                                               ^\n  147 |   });\n  148 | });\n  149 |\n    at /Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-f-single-dossier.spec.js:146:79"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:23.490Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-f-single-dossier-Tier-60895-ier-renders-stash-preserved-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-f-single-dossier-Tier-60895-ier-renders-stash-preserved-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-f-single-dossier-Tier-60895-ier-renders-stash-preserved-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/flow-f-single-dossier-Tier-60895-ier-renders-stash-preserved-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/flow-f-single-dossier.spec.js",
+                        "column": 79,
+                        "line": 146
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "4cada207ae3e2c029655-9b8147fcd8a4defd6216",
+              "file": "flow-f-single-dossier.spec.js",
+              "line": 111,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "mobile-pointer-targets.spec.js",
+      "file": "mobile-pointer-targets.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "P99 mobile pointer targets — anonymous landing",
+          "file": "mobile-pointer-targets.spec.js",
+          "line": 42,
+          "column": 6,
+          "specs": [
+            {
+              "title": "every interactive element is at least 44×44 px",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "mobile-only suite — skipped on desktop projects",
+                      "location": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/mobile-pointer-targets.spec.js",
+                        "line": 38,
+                        "column": 6
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 3,
+                      "status": "skipped",
+                      "duration": 3,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:37.048Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "mobile-only suite — skipped on desktop projects",
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/mobile-pointer-targets.spec.js",
+                            "line": 38,
+                            "column": 6
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "3a983a638a64539f02b8-c0135326da6f7b1858d4",
+              "file": "mobile-pointer-targets.spec.js",
+              "line": 56,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "regional-causality.spec.js",
+      "file": "regional-causality.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "regional causality campaign UI",
+          "file": "regional-causality.spec.js",
+          "line": 195,
+          "column": 6,
+          "specs": [
+            {
+              "title": "applies and resolves a queued regional impact from the campaign folder",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9672,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Trade Belt', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Trade Belt', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Trade Belt', { exact: true })\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Trade Belt', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Trade Belt', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Trade Belt', { exact: true })\u001b[22m\n\n    at /Users/cstokes/Desktop/settlement-engine-deploy/e2e/regional-causality.spec.js:234:65",
+                        "location": {
+                          "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/regional-causality.spec.js",
+                          "column": 65,
+                          "line": 234
+                        },
+                        "snippet": "  232 |     // subject is the campaign-folder heading itself — the same idiom the\n  233 |     // 'Millcross' assertion below already uses.\n> 234 |     await expect(page.getByText('Trade Belt', { exact: true })).toBeVisible();\n      |                                                                 ^\n  235 |     // Legibility wave (2026-07-22): \"Regional graph\" -> \"Between Your Towns\";\n  236 |     // the settlement badge \"N queued\" -> \"N changes queued\".\n  237 |     await expect(page.getByText('Between Your Towns')).toBeVisible();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/regional-causality.spec.js",
+                            "column": 65,
+                            "line": 234
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Trade Belt', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByText('Trade Belt', { exact: true }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByText('Trade Belt', { exact: true })\u001b[22m\n\n\n  232 |     // subject is the campaign-folder heading itself — the same idiom the\n  233 |     // 'Millcross' assertion below already uses.\n> 234 |     await expect(page.getByText('Trade Belt', { exact: true })).toBeVisible();\n      |                                                                 ^\n  235 |     // Legibility wave (2026-07-22): \"Regional graph\" -> \"Between Your Towns\";\n  236 |     // the settlement badge \"N queued\" -> \"N changes queued\".\n  237 |     await expect(page.getByText('Between Your Towns')).toBeVisible();\n    at /Users/cstokes/Desktop/settlement-engine-deploy/e2e/regional-causality.spec.js:234:65"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:36.854Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/regional-causality-regiona-b80a1-ct-from-the-campaign-folder-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/regional-causality-regiona-b80a1-ct-from-the-campaign-folder-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/regional-causality-regiona-b80a1-ct-from-the-campaign-folder-chromium/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/cstokes/Desktop/settlement-engine-deploy/test-results/regional-causality-regiona-b80a1-ct-from-the-campaign-folder-chromium/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/cstokes/Desktop/settlement-engine-deploy/e2e/regional-causality.spec.js",
+                        "column": 65,
+                        "line": 234
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "c7828ed8b2356333a92a-b2d9adcd1c470a899d4d",
+              "file": "regional-causality.spec.js",
+              "line": 226,
+              "column": 3
+            },
+            {
+              "title": "discovers and confirms suggested regional channels",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 13002,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:37.139Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c7828ed8b2356333a92a-9fb02829f5d2788fbe70",
+              "file": "regional-causality.spec.js",
+              "line": 258,
+              "column": 3
+            },
+            {
+              "title": "world map campaign workspace can switch to Wizard News",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 20813,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:37.954Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c7828ed8b2356333a92a-6cce78c93d3fe1d90612",
+              "file": "regional-causality.spec.js",
+              "line": 269,
+              "column": 3
+            },
+            {
+              "title": "map Layers panel exposes regional overlay toggles and filters",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13608,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-16T07:46:41.840Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "c7828ed8b2356333a92a-0478bd892d6f7f1b8bf6",
+              "file": "regional-causality.spec.js",
+              "line": 325,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-16T07:45:09.223Z",
+    "duration": 109769.348,
+    "expected": 33,
+    "skipped": 3,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

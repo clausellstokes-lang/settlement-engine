@@ -1,7 +1,0 @@
-gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 5469 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
-PROSE MANIFEST CELLS · 525 configurations x 2 audiences
-  towns 525 · rows 1050 · cells 73284 · 9 s
-  cells whose variant the rendered sentence did not identify: 0 · identified ambiguously: 0
-  cells where a recomputation over the AUDIBLE pool would have drawn a different variant (the slot-anchoring filter's own footprint, not a defect): 3914
-  RE-RECORDED tests/fixtures/dossier-prose-manifest-golden.json — 1050 rows, shift INSTRUMENT
-  (no --out given: nothing written)

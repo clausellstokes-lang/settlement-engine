@@ -1,9 +1,0 @@
-# LT38 progress — one line per car: <car> <sha> <status>
-# Dock: kit/lane-LT38-ladder, cut at f73bdbf16 (claude/composite-r4). Detached; the chair cherry-picks.
-car1 3b363bd02 LANDED (previous seat, Opus 5): the LD ladder's build-state table re-measured at the slot
-car2 646da630f LANDED (previous seat, Opus 5): LD-7 the popup scope law, one registry + a render gate
-car2-census 0676efe9f LANDED (previous seat): lighting census re-freeze for car 2's one new test file
-car2-fix be28f2011 LANDED: momentScope.js TS2367 (car 2's own new file, un-baselined, +1 on typecheck:ratchet) cured by DECLARING the row type; caught by check:quick, which car 2's gate never ran
-car3 52cfa319f LANDED: LD-10's real remainder - the consent copy restated to the shipped opt-IN default + a BICONDITIONAL parity arm; the wide gate caught 4 un-anchored negatives (negativeAssertionAnchor walker, ceiling 2, NOT raised) and all four are now anchored
-car3-census 8ff904dbd LANDED: lighting census re-freeze, titles 24185 -> 24189, suiteTitles 6455 -> 6456; plain re-run 34/34 green
-car4 4b3a6c1c0 LANDED: the residual AI language cluster; the export-label half was a DESCRIPTION REPAIR (no such control exists); the observed-shape ratchet caught a ts: cs.lastExportAt I had silently dropped

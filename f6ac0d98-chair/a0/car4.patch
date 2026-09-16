@@ -1,0 +1,311 @@
+diff --git a/src/generators/steps/assembleInstitutions.js b/src/generators/steps/assembleInstitutions.js
+index 5c51e51ff..58919de16 100644
+--- a/src/generators/steps/assembleInstitutions.js
++++ b/src/generators/steps/assembleInstitutions.js
+@@ -11,7 +11,6 @@
+ import { registerStep } from '../pipeline.js';
+ import { TIER_ORDER } from '../../data/constants.js';
+ import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
+-import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
+ import { pickVariant } from '../../kernel/proseHash.js';
+ import { TERRAIN_DATA } from '../../data/geographyData.js';
+ import { RESOURCE_DATA } from '../../data/goods/identity.js';
+@@ -42,6 +41,57 @@ import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+ // step module. The single writer now lives in the side-effect-free data leaf.
+ export { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+ 
++// ── THE DESC-VARIANT SLOT (lane 932-A0, the worker-headroom car) ─────────────
++// `INSTITUTION_DESC_VARIANTS` used to be a static import on the line above the
++// `pickVariant` one. It is 81,263 B of the generation worker's 1,404,493 B
++// bundle — measured, not estimated, by a sourcemap byte census of the §932 base
++// build — and that bundle sat EXACTLY on its monotone-down ceiling, so the
++// table is now reached through this one-slot registry and loaded by a dynamic
++// import at the tail of `steps/index.js`. Read that file's header for the whole
++// boundary law: why the await cannot live in this module (it would reorder the
++// step registry, which is output), and why no caller has to arm anything.
++//
++// ⛔ THE READER THROWS WHEN THE SLOT IS EMPTY, AND THE THROW IS THE POINT. An
++// unloaded table would quietly leave every institution on its canonical catalog
++// desc — a same-seed divergence that depends on whether a chunk happened to be
++// fetched, which is precisely the failure a lazy boundary must never be allowed
++// to introduce. Loud is the only safe shape here, and it is the same ruling
++// `livingContentSeam.js` records for its own lit path.
++//
++// One module-level slot, written once, no RNG, no store, no React.
++/** @type {Readonly<Record<string, ReadonlyArray<string>>>|null} */
++let _descVariants = null;
++
++/**
++ * Register the lazily-loaded description-variant table. Called by
++ * `steps/index.js`'s tail and, in a test that wants to drive this step without
++ * the registry module, directly.
++ *
++ * @param {Readonly<Record<string, ReadonlyArray<string>>>} table
++ * @returns {void}
++ */
++export function registerInstitutionDescVariants(table) {
++  _descVariants = table && typeof table === 'object' ? table : null;
++}
++
++/** Has the desc-variant payload been loaded into this module instance?
++ *  @returns {boolean} */
++export function institutionDescVariantsLoaded() {
++  return _descVariants !== null;
++}
++
++/**
++ * The loaded desc-variant table. Throws rather than degrading — see above.
++ *
++ * @returns {Readonly<Record<string, ReadonlyArray<string>>>}
++ */
++export function institutionDescVariants() {
++  if (!_descVariants) {
++    throw new Error('[assembleInstitutions] institution desc variants not loaded');
++  }
++  return _descVariants;
++}
++
+ // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
+ // Each successful institution selection emits a structured trace so the
+ // PipelineRail / AI overlay / future faction-profile readers can answer
+@@ -738,9 +788,12 @@ registerStep('assembleInstitutions', {
+   // seed or a name with no variants keeps the catalog desc). The chosen string is written
+   // back to the existing scalar `desc` field — no persistence-shape change. Skips custom
+   // institutions (they carry `description`, never a catalog key).
++  // Read the slot ONCE per run, not once per institution: the throw belongs to
++  // the run, and the table is the same object for every row.
++  const descVariantTable = institutionDescVariants();
+   for (const inst of /** @type {any[]} */ (institutions)) {
+     if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
+-    const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
++    const variants = descVariantTable[`${tier}|${inst.category}|${inst.name}`];
+     if (variants && variants.length) {
+       inst.desc = pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`);
+     }
+diff --git a/src/generators/steps/index.js b/src/generators/steps/index.js
+index 0d25bca56..46790ecc8 100644
+--- a/src/generators/steps/index.js
++++ b/src/generators/steps/index.js
+@@ -3,6 +3,51 @@
+  *
+  * Import this file once at app startup to populate the pipeline registry.
+  * Each step module calls registerStep() as a side effect on import.
++ *
++ * ⭐⭐ AND IT IS ALSO THE ONE PLACE THE DESC-VARIANT PAYLOAD IS LOADED (lane
++ * 932-A0, the worker-headroom car). The tail of this file awaits a DYNAMIC
++ * import of `institutionDescVariants.js` and hands the table to
++ * `assembleInstitutions`'s slot. Three things about that are load-bearing and
++ * none of them is style:
++ *
++ *   1. WHY LAZY AT ALL — MEASURED, NOT ARGUED. The table is 81,263 B of the
++ *      1,404,493 B generation-worker bundle (a sourcemap byte census of the
++ *      §932 base build at a5876c0ea: the single largest non-catalog
++ *      contributor after institutionServices). That bundle sat EXACTLY on its
++ *      monotone-down ceiling `WORKER_BUNDLE_CEILING_BYTES`, so every generator
++ *      car in the estate was blocked on a byte. A worker entry is its own
++ *      rollup build with NO manualChunks, so nothing but a dynamic edge can
++ *      move a table out of it, and the table is READ AT GENERATION TIME (it
++ *      writes `inst.desc`), so nothing but a real load can keep the output
++ *      identical.
++ *
++ *   2. WHY HERE AND NOT IN THE STEP — THE REGISTRATION ORDER IS THE OUTPUT.
++ *      `pipeline.js`'s `getStepOrder()` topologically sorts by `deps`, but it
++ *      seeds the walk with `_steps.keys()` — Map INSERTION order — so two steps
++ *      with no dependency edge between them run in the order they registered.
++ *      A top-level await inside ANY step module suspends that module while its
++ *      siblings keep evaluating, which reorders the registry and moves output.
++ *      Placed at the TAIL of this file the await cannot: every `import` above
++ *      is a dependency of this module, so all 22 registrations have already
++ *      completed before this line runs.
++ *
++ *   3. WHY NOBODY HAS TO REMEMBER TO ARM IT. This module is the ONLY path to a
++ *      registered pipeline, so every consumer — the two worker shells, the
++ *      store's lane, the 269 test files, the soak and audit runners — awaits
++ *      the payload transitively by importing what they already import. That is
++ *      the difference between this seam and `livingContentSeam.js`, whose
++ *      loader must be called by name: the living-content law has a DARK PATH
++ *      that loads nothing, so its callers are a set a walker has to hold to the
++ *      tree; this table is read on EVERY generation, so a caller set would have
++ *      been 30-odd arming points and any miss a same-seed divergence.
++ *
++ * ⛔ THE SLOT FAILS LOUD, NEVER QUIET (see `assembleInstitutions.js`): an
++ * unloaded table would silently keep every canonical desc, which is a same-seed
++ * divergence that depends on whether a chunk happened to be fetched — exactly
++ * the class of bug a lazy boundary must never introduce.
++ *
++ * @guarded-by tests/build/generationWorkerLazy.test.js (WORKER_LAZY_EDGES row
++ *   `institutionDescVariants` + the lowered ceiling).
+  */
+ 
+ import './resolveConfig.js';
+@@ -27,3 +72,21 @@ import './generatePopulation.js';
+ import './corruptionPass.js';
+ import './generateNarratives.js';
+ import './assembleSettlement.js';
++
++// ⛔ THE SETTER IS IMPORTED LAST, AND THAT IS NOT COSMETIC. ESM evaluates a
++// module's dependencies in the order its import DECLARATIONS appear, so a named
++// import of `assembleInstitutions.js` placed at the top of this file would
++// evaluate that step module before `resolveConfig.js` and register it first —
++// silently reordering the registry the whole point-2 paragraph above protects.
++// Declared here, after every side-effect import, the evaluation order is byte
++// for byte the one this file has always produced.
++import { registerInstitutionDescVariants } from './assembleInstitutions.js';
++
++// THE LAZY EDGE ITSELF. `import(` with no space and no `from` clause is the
++// form vite.config.js's two graph derivations deliberately do not follow, which
++// is what keeps the table out of the eager first-paint closure as well as out
++// of the worker bundle. Top-level: every importer of this module therefore has
++// the slot filled before it can reach a pipeline run, with no arming call of
++// its own.
++const { INSTITUTION_DESC_VARIANTS } = await import('../../data/institutionDescVariants.js');
++registerInstitutionDescVariants(INSTITUTION_DESC_VARIANTS);
+diff --git a/tests/build/generationWorkerLazy.test.js b/tests/build/generationWorkerLazy.test.js
+index 979837bcb..86c89e2da 100644
+--- a/tests/build/generationWorkerLazy.test.js
++++ b/tests/build/generationWorkerLazy.test.js
+@@ -59,6 +59,35 @@
+  * on"); the rise is declared here, in the ledger row, and is vetoable. The ceiling stays
+  * MONOTONE-DOWN from this value.
+  *
++ * ⭐⭐ LOWERED BY LANE 932-A0 (2026-09-15, the worker-headroom car): 1,404,493 -> 1,323,512
++ * bytes, a purchase of 80,981 B, and it is a LOWERING under the monotone-down rule rather
++ * than a re-mint. THE REASON THE CAR EXISTED: the bundle measured EXACTLY 1,404,493 B at the
++ * §932 base build (a5876c0ea, the build slot after §931's CAS) — zero margin — so every
++ * generator-side car in the estate, LT17 car 2 included, reddened STRICT DIST on a byte.
++ *
++ * WHAT WAS MOVED, AND WHAT WAS NOT. A sourcemap byte census of that base bundle attributed
++ * 1,403,472 of its 1,404,493 B to 220 source modules; the ten largest were
++ * institutionServices 99,068 · institutionDescVariants 81,263 · institutionalCatalog 72,110 ·
++ * npcData 63,977 · namingData 40,109 · historyData 36,411 · narrativeData 35,902 ·
++ * narrativeText 35,780 · npcStructure 34,429 · supplyChainData 32,890. There is no dead code
++ * to remove here (the estate's walkers keep the graph tight) and NO generator family in this
++ * worker's graph is flag-gated — measured: the only `*Enabled` reads in the whole 219-module
++ * closure are a handful of per-row config gates, so the "lazy-load the dark family" move the
++ * ceiling's own history used had no subject. The purchase is therefore a data table behind a
++ * real dynamic edge: `institutionDescVariants` (row 2 of WORKER_LAZY_EDGES below), the
++ * largest table read at exactly ONE site.
++ *
++ * ⛔ AND IT IS A REAL PURCHASE, NOT A CEILING DODGE. The bytes leave the ENTRY BUNDLE for a
++ * sibling chunk that both worker builds fetch in PARALLEL with the roster chunk they already
++ * fetch, so the wire total is unchanged while the entry's parse shrinks by 5.8 %. That is the
++ * same shape this ceiling's §917 note calls the correct one when it refuses inlining the
++ * roster. Measured side effects, declared rather than discovered later: the eager first-paint
++ * static closure is BYTE-UNCHANGED at 1,042,172 B, and the lazy `engine` chunk grows 675,099
++ * -> 675,489 B (+390 B, the await and its preload helper) against its own 676,000 ceiling,
++ * leaving 511 B there. ZERO output bytes moved: 360 same-seed settlements (6 tiers x 4
++ * cultures x 5 terrains x 3 seeds) are byte-identical base-vs-tip, with the chosen
++ * `inst.desc` strings hashed on their own axis as well.
++ *
+  * @enforced-by this test
+  */
+ 
+@@ -74,8 +103,8 @@ const ASSETS = join(DIST, 'assets');
+ const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
+ const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
+ const SENTINEL = 'settlementforge:generation:worker-v1';
+-/** Measured 1,404,242 B at f6545dcd9 (build-900-chair.log); monotone-down — see the docblock. */
+-export const WORKER_BUNDLE_CEILING_BYTES = 1404493;
++/** Measured 1,323,512 B at the lane-932-A0 tip (build-car2-tip.log); monotone-down — see the docblock. */
++export const WORKER_BUNDLE_CEILING_BYTES = 1323512;
+ 
+ const source = (path) => readFileSync(join(ROOT, path), 'utf8');
+ 
+@@ -86,15 +115,23 @@ const source = (path) => readFileSync(join(ROOT, path), 'utf8');
+  * `module` is the SOURCE module's basename as it survives into the emitted
+  * specifier (`./livingContentRoster-CE43XTKG.js`), so the row is stable across
+  * content hashes and names the thing a reader can actually find in `src/`.
+- * `payloadSentinel` is an export name of that module which minification keeps:
+- * it must be present in the split chunk and ABSENT from the worker bundle, which
+- * is how "split out" is told apart from "split out AND inlined as well", the byte
++ * `payloadSentinel` is a string of that module which minification keeps — an
++ * export name, or, when the bundle legitimately NAMES the export (a destructured
++ * `await import()` does), a distinctive literal from the payload itself: it must
++ * be present in the split chunk and ABSENT from the worker bundle, which is how
++ * "split out" is told apart from "split out AND inlined as well", the byte
+  * regression the retired single-chunk arm existed to catch.
+  *
++ * `alsoReferencedBy` names any OTHER emitted bundle permitted to import the same
++ * chunk file, with its reason. It defaults to none, which is the shape the
++ * referrer arm below assumed outright until lane 932-A0 measured otherwise — see
++ * that arm's own note.
++ *
+  * Adding a row is a byte decision, not a formality: every row is one more cold
+  * fetch sitting inside the user's generation wait.
+  *
+- * @type {ReadonlyArray<{module: string, payloadSentinel: string, why: string}>}
++ * @type {ReadonlyArray<{module: string, payloadSentinel: string, why: string,
++ *   alsoReferencedBy?: ReadonlyArray<string>}>}
+  */
+ const WORKER_LAZY_EDGES = Object.freeze([
+   Object.freeze({
+@@ -106,6 +143,23 @@ const WORKER_LAZY_EDGES = Object.freeze([
+       + 'The edge cannot become static: the seam is what keeps the roster and its whole '
+       + 'content-manifest closure out of eager engine-core on the MAIN thread.',
+   }),
++  Object.freeze({
++    module: 'institutionDescVariants',
++    payloadSentinel: 'city|Adventuring|Dungeon delving supply district',
++    alsoReferencedBy: Object.freeze(['customContentPreview.worker']),
++    why: 'the authored institution-description variants are 81,263 B of a bundle that sat '
++      + 'EXACTLY on this file\'s monotone-down ceiling (measured by a sourcemap byte census of '
++      + 'the §932 base build at a5876c0ea: the largest contributor after the two institution '
++      + 'catalogs), and a worker entry is its own rollup build with NO manualChunks, so no '
++      + 'chunking rule could move them — only a dynamic edge could. The table is read at '
++      + 'GENERATION time (assembleInstitutions writes the chosen string into `inst.desc`), so '
++      + 'the edge is awaited at the TAIL of `src/generators/steps/index.js`, after all 22 '
++      + 'registrations: every consumer of a registered pipeline therefore arms it transitively '
++      + 'and no caller set has to be held to the tree. The sentinel is a payload KEY rather '
++      + 'than the export name because the bundle names `INSTITUTION_DESC_VARIANTS` in its own '
++      + 'destructuring await, so the export name is present in the bundle by construction and '
++      + 'would make the not-also-inlined check vacuous.',
++  }),
+ ]);
+ 
+ /** Every dynamic import a bundle carries, opaque ones included (`import(name)`). */
+@@ -345,14 +399,41 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
+       // Measured at dd0b68c0d and pinned because it is the shape, not a wish: a
+       // worker entry is its own rollup build, so this chunk belongs to this
+       // worker alone. The main graph carries its own copy under another hash.
++      //
++      // ⛔ AND "THIS WORKER ALONE" IS TRUE OF A CHUNK WITH A CLOSURE, NOT OF A
++      // PURE DATA LEAF — lane 932-A0 measured the difference rather than
++      // inheriting the sentence above. Each worker entry is its own build, so the
++      // roster's chunk really does differ per build (it carries whatever of its
++      // closure that bundle does not already hold, which is why the same source
++      // module lands under three hashes). A payload that imports NOTHING emits
++      // BYTE-IDENTICAL content from every build, and identical content is one
++      // emitted file — so `institutionDescVariants-*.js` is named by BOTH worker
++      // bundles, and a row that expects a single referrer would be asserting a
++      // property of the roster's closure, not of lazy splitting. The permitted
++      // set is therefore DECLARED per row and still exact: an unexpected referrer
++      // (a first-paint chunk, say) still reds.
++      const allowedReferrers = [
++        bundles[0],
++        ...(edge.alsoReferencedBy || []).flatMap(prefix => readdirSync(ASSETS).filter(
++          file => file.endsWith('.js') && file.startsWith(`${prefix}-`),
++        )),
++      ].sort();
++      // Non-vacuity: every declared sibling must actually have been emitted, or
++      // the allowance silently widens to nothing and the arm stops meaning it.
++      expect(
++        allowedReferrers.length,
++        `${edge.module} declares ${(edge.alsoReferencedBy || []).length} sibling referrer(s) but `
++        + `only ${allowedReferrers.length - 1} matching bundle(s) were emitted`,
++      ).toBe(1 + (edge.alsoReferencedBy || []).length);
+       const referrers = readdirSync(ASSETS)
+         .filter(file => file.endsWith('.js') && file !== target)
+-        .filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(target));
++        .filter(file => readFileSync(join(ASSETS, file), 'utf8').includes(target))
++        .sort();
+       expect(
+         referrers,
+-        `${target} is referenced by ${referrers.join(', ') || 'nothing'} — this chunk is the `
+-        + 'worker build\'s own and only the worker bundle should name it',
+-      ).toEqual([bundles[0]]);
++        `${target} is referenced by ${referrers.join(', ') || 'nothing'} — the row permits `
++        + `exactly ${allowedReferrers.join(', ')}`,
++      ).toEqual(allowedReferrers);
+     }
+   });
+ 

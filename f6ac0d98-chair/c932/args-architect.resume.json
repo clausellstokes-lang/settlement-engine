@@ -1,0 +1,7 @@
+{
+  "families": ["WF", "POP", "WY", "IN", "ES", "WC", "HB", "EP", "INT", "GR-CW", "LG"],
+  "priorSummaries": [
+    "TR: DONE in session f6ac0d98 (2026-09-15/16) — eight briefs written by the Fable architect and CORRECTED after the Opus skeptic under briefs/: brief-1-TR-TR-4, brief-2-TR-TR-5, brief-7-TR-TR-1-TR-3, brief-8-TR-TR-6, brief-55-TR-TR-2-TR-2b, brief-56a-TR-TR-7, brief-56b-TR-TR-8, brief-56c-TR-TR-9. Read them on disk for shared files, flag-mint counts and the serialization table; do not rewrite them.",
+    "WF: FIVE of eight briefs are on disk from the paused WF architect (2026-09-16 11:13, no skeptic pass yet): brief-5-WF-WF-6, brief-16a-WF-WF-0-WF-1, brief-16b-WF-WF-3, brief-17a-WF-WF-2a, brief-17b-WF-WF-2b. Missing: lanes 18 (WF-4), 19 (WF-5a/b), 20 (WF-7), 21 (WF-8), 22 (WF-9). Keep the five (re-read them; a plan exists at plans/plan-WF.md), write the missing ones, then the skeptic runs over all eight."
+  ]
+}

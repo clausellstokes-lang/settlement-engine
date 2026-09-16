@@ -1,0 +1,42 @@
+### -S severityDurableRumorsEnabled (src/ only, --all)
+
+### -S caravanBodiesEnabled (src/ only, --all)
+
+### -S flowMigrationPhysicalEnabled (src/ only, --all)
+
+### -S migrationCargoEnabled (src/ only, --all)
+
+### -S moversCarryNewsEnabled (src/ only, --all)
+
+### -S caravanSeizureEnabled (src/ only, --all)
+
+### -S caravanFloorEnabled (src/ only, --all)
+
+### -S armySupplyEnabled (src/ only, --all)
+
+### -S kmScale (src/ only, --all)
+ee0db96d3 2026-08-21 PRESERVE: the sealed fresh-W3 sandbox tip (laneMFW3F-tip, code+tests+harness, no node_modules) — the map generator of record until the D3a port completes; preserved per ODQ §312 (tmp is not durable)
+
+### -S supplyCargo (src/ only, --all)
+
+### -S prizeCargo (src/ only, --all)
+
+### -S legDepartTick (src/ only, --all)
+
+### -S moverTidings (src/ only, --all)
+
+### -S armySupply.js (src/ only, --all)
+
+### -S armyCaravanSeizure (src/ only, --all)
+
+### -S flowRegimeContract (src/ only, --all)
+
+### -S modeSpeeds (src/ only, --all)
+
+### -S severityDurability (src/ only, --all)
+
+### -S treatyProjection (src/ only, --all)
+
+### -S wayfareMirror (src/ only, --all)
+
+DONE

@@ -1,7 +1,0 @@
-HEAD=f1822a704
-     × ⭐ THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE 7ms
-⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
-AssertionError: a fixture whose recorder has moved since it was written is REFUSED: re-record with `node scripts/prose-manifest-cells.mjs --record`: expected { …(3) } to deeply equal { …(3) }
- Test Files  1 failed | 1 passed (2)
-      Tests  1 failed | 35 passed (36)
-FENCE_DONE

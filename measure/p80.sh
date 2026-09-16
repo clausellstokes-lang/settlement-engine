@@ -1,1 +1,0 @@
-perl -0pi -e 's/    predicate: \[\],\n    branchReads: \[\],\n    fieldsRead: \[\],\n    status: WIRING_STATUS\.UNRESOLVED,/    predicate: [],\n    branchReads: [],\n    fieldsRead: [],\n    status: WIRING_STATUS.RESOLVED,/' src/domain/prose/wiringCensus.js

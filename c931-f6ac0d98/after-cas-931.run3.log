@@ -1,6 +1,0 @@
-gate green · tests=32771
-INFO ratchet register totalTests=32771 totalFiles=2518 entries=1
-PASS ratchet register totalTests == the gate line — (32771, '32771')
-CHAIR-VERIFY GREEN
-CAS OK: product=a5876c0ea · sealed landing-longtail-2026-09-15 · cars over f73bdbf16=67 · cars since ca651d54b=543 · tests=32771
-NEXT: rm /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratchpad/kit/../HOLD-VITEST is NOT yet — first the §931 ledger act via chair-commit.sh --require-ref refs/preserve/landing-longtail-2026-09-15 a5876c0ea67b4606082f8f9068d1096461b0c255, then rm HOLD.
