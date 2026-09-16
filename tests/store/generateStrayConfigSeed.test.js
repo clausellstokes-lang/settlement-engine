@@ -92,12 +92,14 @@ describe('a stray config `seed` never breaks generation', () => {
     const libraryPatch = library.slice(library.indexOf('const forkedConfig = {'));
     const libraryBlock = libraryPatch.slice(0, libraryPatch.indexOf('};') + 2);
     expect(libraryBlock).toContain('forkConfigFor(sample)');
+    // anchored: the line above proves this block is the live fork patch (it loads forkConfigFor), so no seed here is a real absence
     expect(libraryBlock).not.toMatch(/\bseed\s*[,:}]/);
 
     const landing = read('src/components/generate/FoundingWorlds.jsx');
     const call = landing.slice(landing.indexOf('updateConfig({'));
     const landingPatch = call.slice(0, call.indexOf(');') + 2);
     expect(landingPatch).toContain('forkConfigFor(sample)');
+    // anchored: the line above proves this is the live updateConfig patch (it loads forkConfigFor), so no seed here is a real absence
     expect(landingPatch).not.toMatch(/\bseed\s*[,:}]/);
   });
 

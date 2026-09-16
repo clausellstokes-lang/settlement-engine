@@ -91,7 +91,7 @@ function plainRecord(value) {
  * @returns {ContentRecord}
  */
 function previewConfigFrom(config) {
-  const merged = { ...DEFAULT_CONTENT_PREVIEW_CONFIG, ...plainRecord(config) };
+  const merged = /** @type {ContentRecord} */ ({ ...DEFAULT_CONTENT_PREVIEW_CONFIG, ...plainRecord(config) });
   delete merged.seed;
   return merged;
 }
