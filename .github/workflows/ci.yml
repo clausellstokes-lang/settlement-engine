@@ -74,9 +74,11 @@ jobs:
   check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
     name: Gate / test ratchet
     runs-on: ubuntu-latest
-    # The ratchet executes the real ~710s full suite. Keep measured headroom for
+    # The ratchet executes the real full suite. Measured on ubuntu-latest 2026-09-16: 26–28 min
+    # when the run concludes, and five of the nine runs since 08-15 were cut at the old 30-minute
+    # cap (the "~710s" this comment once quoted is two eras stale). Keep measured headroom for
     # runner variance; a timeout is not a test verdict.
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres
