@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 23:01:57 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 23:07:26 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -122,7 +122,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
     - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
     - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
-    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:01 338 KB · 2 tool calls · last: Bash wc -l /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/sc
+    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:07 710 KB · 34 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_6a1dc505-cea** (mtime 09-15 22:53): agent calls 21 (20 distinct) · DONE 4 · FAILED (not retried) 12 · RETRIED (superseded attempts) 1 · IN FLIGHT 4 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
@@ -144,7 +144,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab128d0dc` ? · DONE · transcript 09-15 22:48 3159 KB · 186 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · result: Every correction is in place and the files have been stable for over a minute. The corrected family summary follows.  # FAMILY TR — CORRECTED SUMMARY (the Fable
     - `ab4af106e` ? · IN FLIGHT · transcript 09-15 22:49 346 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
     - `a57a3432c` ? · IN FLIGHT · transcript 09-15 22:51 807 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `abcc6f3e9` ? · IN FLIGHT · transcript 09-15 23:01 1015 KB · 32 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `abcc6f3e9` ? · IN FLIGHT · transcript 09-15 23:06 1142 KB · 35 tool calls · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704
 - **wf_2fd9ec8f-ae7** (mtime 09-15 19:23): agent calls 15 (15 distinct) · DONE 0 · FAILED (not retried) 15 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_2fd9ec8f-ae7/`
     - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
     - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
@@ -235,4 +235,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.65 2.59 2.59
+load: 2.24 2.36 2.48
