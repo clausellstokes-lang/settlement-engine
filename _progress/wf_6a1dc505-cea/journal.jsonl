@@ -28,3 +28,4 @@
 {"type":"failed","key":"v2:8affc8f2f32a5ac866085940e0124156345602708591b6a127deb09606b84133","agentId":"a7f6bde7873d06dd9"}
 {"type":"started","key":"v2:d4dadb1bf71ee423e4eb511b70a4c928dc975eb1fb1eaf49272ffc0a11b63946","agentId":"a1d04189843fa8b3d","label":"fold","phase":"Fold"}
 {"type":"failed","key":"v2:d4dadb1bf71ee423e4eb511b70a4c928dc975eb1fb1eaf49272ffc0a11b63946","agentId":"a1d04189843fa8b3d"}
+{"type":"started","key":"v2:3e3f8ee144b079019715497a0e1a400f2db9d94697a9d250eeb748f03f8b21dc","agentId":"ae4986df2bf7b3aef","label":"arch:TR","phase":"Families"}

@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 21:22:54 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 21:28:22 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -113,10 +113,13 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_6a1dc505-cea** (mtime 09-15 19:25): agent calls 15 (15 distinct) · DONE 1 · FAILED (not retried) 13 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_6a1dc505-cea/`
+- **wf_5cfb61a3-06d** (mtime 09-15 21:23): agent calls 2 (2 distinct) · DONE 0 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 2 — mirror `_progress/wf_5cfb61a3-06d/`
+    - `aace68135` ? · IN FLIGHT · transcript 09-15 21:28 775 KB · 38 tool calls · files: odq-wf-hits.txt · last: Bash K=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `ad6f3e9ef` ? · IN FLIGHT · transcript 09-15 21:28 707 KB · 32 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
+- **wf_6a1dc505-cea** (mtime 09-15 21:23): agent calls 16 (15 distinct) · DONE 1 · FAILED (not retried) 12 · RETRIED (superseded attempts) 1 · IN FLIGHT 2 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a4ae62b63` ? · FAILED · transcript 09-15 19:25 1391 KB · 60 tool calls
+    - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
     - `a9f72d3c1` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a87ab5437` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a4dfed6f7` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
@@ -129,6 +132,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a82a93cae` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a7f6bde78` ? · FAILED · transcript 09-15 19:25 166 KB · 0 tool calls
     - `a1d041898` ? · FAILED · transcript 09-15 19:25 161 KB · 0 tool calls
+    - `ae4986df2` ? · IN FLIGHT · transcript 09-15 21:27 1105 KB · 58 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
 - **wf_2fd9ec8f-ae7** (mtime 09-15 19:23): agent calls 15 (15 distinct) · DONE 0 · FAILED (not retried) 15 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_2fd9ec8f-ae7/`
     - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
     - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
@@ -219,4 +223,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.49 2.33 2.15
+load: 2.42 2.25 2.16
