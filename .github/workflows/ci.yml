@@ -131,7 +131,14 @@ jobs:
             tail -n 160 verify-dist.log
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
-          grep -E '×|FAIL |Error:|AssertionError|boot-smoke:' verify-dist.log | head -40 | sed 's/^/::error::/' || true
+          grep -E '×|FAIL |Error:|AssertionError|boot-smoke:' verify-dist.log | head -20 | sed 's/^/::error::/' || true
+          # The ratchet runner captures vitest as JSON into a temp dir, so the boot-smoke's own report (which
+          # stage failed, which chunk, the error) never reaches stdout. Re-run the one boot suite plainly
+          # against the dist that is still on disk and hand its WHOLE output over as one annotation
+          # (newlines encoded as %0A — the annotation is the only surface a signed-out reader gets).
+          VERIFY_DIST=1 npx vitest run tests/build/bootSmoke.test.js --reporter=verbose > boot-smoke.log 2>&1 || true
+          { echo '## boot-smoke, re-run alone (verbatim)'; echo '```'; tail -n 200 boot-smoke.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          node -e "const t=require('fs').readFileSync('boot-smoke.log','utf8').slice(-60000).replace(/%/g,'%25').replace(/\r/g,'%0D').replace(/\n/g,'%0A'); console.log('::error title=boot-smoke report::'+t)"
 
   check:
     name: Validate, test, build
