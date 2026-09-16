@@ -1,4 +1,4 @@
-# wf_406e67e7-fa9 — per-agent progress, 2026-09-16 05:33:05
+# wf_406e67e7-fa9 — per-agent progress, 2026-09-16 05:38:35
     - `a7e604d4d` ? · DONE · transcript 09-15 12:37 819 KB · 51 tool calls · result: ## The sequencing read — #18, #32, #33, #34, #20, #21  Read at the ledger `a803dee7a` (branch `review-fixes-2026-07-08`) and verified against the build slot `cl
     - `a3ba4fb58` ? · DONE · transcript 09-15 12:41 1079 KB · 56 tool calls · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 declared waves across the FP programs)", "summary": "Item #32 is the FP (Foreign Poli
     - `a5a2edd52` ? · DONE · transcript 09-15 12:49 1174 KB · 48 tool calls · files: flags.txt, waves.md · result: {"item": "Long-tail item #32 \u2014 the declared engine family waves (~113 waves across 13 families)", "summary": "Item #32 is the FP programme: 13 volumes (SP 
