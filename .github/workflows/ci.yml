@@ -358,10 +358,13 @@ jobs:
     # critical path's wall-clock.
     name: Coverage floors (money / security)
     runs-on: ubuntu-latest
-    # The plain suite takes 22.5 min on ubuntu-latest (measured 2026-09-16); under v8 coverage it
-    # cannot fit the old 10-minute cap, which cut this job on every run since 08-15. 45 is the
-    # ratchet job's figure; a timeout is not a coverage verdict.
-    timeout-minutes: 45
+    # Under v8 coverage the suite took 41–43 minutes on ubuntu-latest (measured 2026-09-16, two
+    # runs) and was cut at 45 on the master merge commit b9c494afe the same afternoon; the
+    # 10-minute cap before that had cut it on every run since 08-15. 60 is the measured figure
+    # with headroom for runner variance; a timeout is not a coverage verdict. The Vercel build
+    # gate (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
+    # passing run blocks the production deploy.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
