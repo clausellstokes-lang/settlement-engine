@@ -1,4 +1,4 @@
-# wf_5cfb61a3-06d — per-agent progress, 2026-09-15 22:56:26
+# wf_5cfb61a3-06d — per-agent progress, 2026-09-15 23:01:58
     - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
     - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
     - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
@@ -6,4 +6,5 @@
     - `a2c7b8cec` ? · DONE · transcript 09-15 22:28 794 KB · 13 tool calls · files: HISTORY-WF-2026-09-15.md · result: {"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-WF-2026-09-15.md"
     - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
     - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
-    - `a3124434f` ? · IN FLIGHT · transcript 09-15 22:55 824 KB · 38 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
+    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:01 338 KB · 2 tool calls · last: Bash wc -l /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/sc
