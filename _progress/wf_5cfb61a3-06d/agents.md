@@ -1,4 +1,4 @@
-# wf_5cfb61a3-06d — per-agent progress, 2026-09-16 10:42:55
+# wf_5cfb61a3-06d — per-agent progress, 2026-09-16 10:48:28
     - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
     - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
     - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
@@ -19,5 +19,7 @@
     - `a2a8e8e9f` ? · FAILED · transcript 09-15 23:48 162 KB · 0 tool calls
     - `a7633d695` ? · FAILED · transcript 09-15 23:48 337 KB · 2 tool calls
     - `adab72c34` ? · DONE · transcript 09-16 02:23 443 KB · 4 tool calls · result: {"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-POP-2026-09-15.md
-    - `aaa0bf089` ? · IN FLIGHT · transcript 09-16 02:28 714 KB · 42 tool calls · files: progress-ledger.txt, ledger.md · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-    - `a1b28cc91` ? · IN FLIGHT · transcript 09-16 02:28 693 KB · 35 tool calls · files: $W/older.md · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `aaa0bf089` ? · RETRIED (a later attempt on the same key runs) · transcript 09-16 02:28 714 KB · 42 tool calls · files: progress-ledger.txt, ledger.md
+    - `a1b28cc91` ? · RETRIED (a later attempt on the same key runs) · transcript 09-16 02:28 693 KB · 35 tool calls · files: $W/older.md
+    - `ad00f2206` ? · IN FLIGHT · transcript 09-16 10:48 537 KB · 21 tool calls · files: progress-ledger.txt · last: Bash D=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `abaf2b1e1` ? · IN FLIGHT · transcript 09-16 10:48 530 KB · 17 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc

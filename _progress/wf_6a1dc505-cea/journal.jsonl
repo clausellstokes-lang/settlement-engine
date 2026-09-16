@@ -69,3 +69,4 @@
 {"type":"started","key":"v2:4fad4e12400e5f4079f2f2124ad2cd0df8c07375585026e1a40cea91b8fcc6f3","agentId":"a4c142f72dc41fd4c","label":"fold","phase":"Fold"}
 {"type":"failed","key":"v2:4fad4e12400e5f4079f2f2124ad2cd0df8c07375585026e1a40cea91b8fcc6f3","agentId":"a4c142f72dc41fd4c"}
 {"type":"started","key":"v2:08b37b8eb2194911e700625fc07aa5a7b86e308d8e413b3e98bdf1acb6cd0c55","agentId":"a6762953a94138a81","label":"arch:WF","phase":"Families"}
+{"type":"started","key":"v2:08b37b8eb2194911e700625fc07aa5a7b86e308d8e413b3e98bdf1acb6cd0c55","agentId":"a504d2f8c153185b2","label":"arch:WF","phase":"Families"}
