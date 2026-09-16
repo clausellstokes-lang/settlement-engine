@@ -33,8 +33,9 @@
  * every arm is a plain `it` with its loop inside.
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import {
   GOLDEN_KEY_FIELDS,
   GOLDEN_KEY_SEPARATOR,
@@ -311,23 +312,43 @@ describe('the reader corpus is composed from the golden key', () => {
     // enough to convict a volatile field — a clock, a random, an iteration order — because a
     // volatile producer differs on the FIRST render pair, not on the thirtieth.
     const row = READER_CORPUS_ROSTER.find((r) => r.campaignId === 'rr-fresh-dramatic');
-    const renderOnce = async () => {
+    // Both passes write their bytes to a scratch directory so a drift can be SHOWN, not just
+    // counted: on the CI runner (2026-09-16) all four dossier PDFs differed between two renders
+    // of one world while every local render pair agreed, and a hash alone cannot say where.
+    const scratch = mkdtempSync(join(tmpdir(), 'reader-corpus-twice-'));
+    const renderOnce = async (pass) => {
       const { campaign, saves } = composeReaderRegion(row);
       const advanced = await advanceReaderCampaign({ campaign, saves, years: 1, seed: String(row.seed) });
+      const outDir = join(scratch, pass);
       const documents = await renderReaderDocuments({
-        campaign: advanced.campaign, saves: advanced.saves, yearly: advanced.yearly, outDir: null,
+        campaign: advanced.campaign, saves: advanced.saves, yearly: advanced.yearly, outDir,
       });
-      return { documents, worldHash: advanced.yearly[0].worldHash };
+      return { documents, worldHash: advanced.yearly[0].worldHash, outDir };
     };
-    const first = await renderOnce();
-    const second = await renderOnce();
+    const first = await renderOnce('first');
+    const second = await renderOnce('second');
 
     expect(first.worldHash).toBe(second.worldHash);
     const drift = [];
     for (const [id, receipt] of Object.entries(first.documents)) {
       if (receipt.sha256 !== second.documents[id]?.sha256) drift.push(id);
     }
-    expect(drift).toEqual([]);
+    const printable = (buf, at) => JSON.stringify(buf.subarray(Math.max(0, at - 120), at + 160).toString('latin1'));
+    const fileFor = (dir, id) => {
+      const name = readdirSync(dir).find((f) => f === id || f.startsWith(`${id}.`));
+      return name ? readFileSync(join(dir, name)) : null;
+    };
+    const report = drift.map((id) => {
+      const a = fileFor(first.outDir, id);
+      const b = fileFor(second.outDir, id);
+      if (!a || !b) return `${id}: bytes ${first.documents[id]?.bytes} vs ${second.documents[id]?.bytes} (a pass wrote no file)`;
+      let at = 0;
+      while (at < a.length && at < b.length && a[at] === b[at]) at += 1;
+      return `${id}: ${a.length} vs ${b.length} bytes, first difference at byte ${at}\n`
+        + `      first : ${printable(a, at)}\n      second: ${printable(b, at)}`;
+    });
+    rmSync(scratch, { recursive: true, force: true });
+    expect(drift, `${drift.length} document(s) differ between two renders of one world:\n  ${report.join('\n  ')}`).toEqual([]);
     expect(Object.keys(second.documents).sort()).toEqual(Object.keys(first.documents).sort());
 
     // NO PRODUCER MAY FAIL SILENTLY. A producer that threw is recorded, and a recorded throw
