@@ -152,8 +152,9 @@ jobs:
           for (const file of report.testResults || []) {
             for (const t of file.assertionResults || []) {
               if (t.status !== 'failed') continue;
-              const msg = String((t.failureMessages || [])[0] || '').replace(/\u001b\[[0-9;]*m/g, '').split('\n').find((l) => l.trim()) || '(no message)';
-              rows.push(`${path.relative(process.cwd(), file.name || '')} :: ${t.fullName || t.title}  [${t.duration ?? '?'} ms]\n    ${msg.slice(0, 300)}`);
+              const lines = String((t.failureMessages || [])[0] || '').replace(/\u001b\[[0-9;]*m/g, '').split('\n').filter((l) => l.trim());
+              const msg = lines.length ? lines.slice(0, 15).map((l) => l.slice(0, 400)).join('\n    ') : '(no message)';
+              rows.push(`${path.relative(process.cwd(), file.name || '')} :: ${t.fullName || t.title}  [${t.duration ?? '?'} ms]\n    ${msg}`);
             }
           }
           const totals = { tests: report.numTotalTests, failed: report.numFailedTests, passed: report.numPassedTests, pending: report.numPendingTests, files: report.numTotalTestSuites, failedFiles: report.numFailedTestSuites };
