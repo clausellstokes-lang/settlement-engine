@@ -18,6 +18,26 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-09-16 — THE GENESIS RE-RECORD, OWNER-SIGNED ("sign the golden", 2026-09-16 ~09:4x EDT, in the chat
+ *   of the chair's session f6ac0d98). ALL 525 ROWS OF 525 MOVED, and had stood RED since the em-dash wave
+ *   `e3f6029b2` (the voice law: no em dash in any user-facing string; bisected to that car and BANKED at
+ *   ODQ §901 pending exactly this signature — every landing from §901 to §931 carried the red as the
+ *   ratchet's one known failure, `entries 1`). The 525-row key set is IDENTICAL (totality held at every
+ *   landing; the poisoned-key control convicts exactly 1 — see the T13 row). THE MOVERS, in landing order:
+ *   (1) the em-dash wave itself, every row — punctuation in generator-side text (institution
+ *   descriptions, NPC lines, history beats, the dossier's state prose); (2) the §931 long-tail landing's
+ *   DECLARED text shifts, measured by the chair's base-vs-tip classified diff over this corpus at
+ *   f73bdbf16 → a5876c0ea: 37 of 525 configs changed, 488 unchanged, every changed line classified
+ *   (RULING 3, the stability label harmonised to `Band (gloss)`: 74 lines; RULING 1, the eleven LT41
+ *   conflict sentences: 0 lines in this corpus; UNDECLARED: 0) — the receipt is in the §931 ledger entry
+ *   and `<f6ac0d98 scratchpad>/c931/declared/`. RECORDED AT the deploy lineage `00c97247f` = a5876c0ea +
+ *   four chair cars (migration 191's drop-before-replace, the applied-head ledger, the PDF worker's
+ *   refresh exclusion, a build-test budget) — NONE touches generator output, so this manifest is
+ *   a5876c0ea's generator output exactly. What did NOT move: the key set (525 = 525), the OSR presence,
+ *   the tuning values (no tuning constant changed in any mover; the tuning signature stays the owner's).
+ *   The plain run after the re-record is the proof (3/3); the hostile-locale arm (tr_TR + Pacific/Chatham,
+ *   CI's job) re-run green in the same act.
+ *
  * 2026-09-02 — T13 TRANS: THE CROSS-ENGINE TRANSCENDENTAL RETIREMENT (ODQ §883; the §879.11
  *   REC's declared-shift window). ZERO ROWS OF 525 MOVED IN THIS MANIFEST — it is NOT
  *   re-recorded, and this block is the trace that a re-record which never happened must
