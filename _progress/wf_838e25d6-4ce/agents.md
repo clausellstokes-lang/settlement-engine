@@ -1,4 +1,4 @@
-# wf_838e25d6-4ce — per-agent progress, 2026-09-16 10:37:25
+# wf_838e25d6-4ce — per-agent progress, 2026-09-16 10:42:56
     - `ac77ce7a5` ? · DONE · transcript 09-15 17:10 1011 KB · 52 tool calls · result: {"family": "TR", "summary": "TRADE is 1 landed + 1 part-landed of 9. TR-1 (casus commercii) landed whole in ONE commit \u2014 `d7ea69a4b`, 18 files, +2,933 line
     - `ad4826378` ? · DONE · transcript 09-15 17:11 981 KB · 58 tool calls · result: {"family": "WF \u2014 FAITH (docs/DESIGN_FP_ARCH_WF.md; FP program 5 of 6)", "summary": "Nine wave-units priced: eight UNBUILT (WF-0/2/3/4/5/6/7/9) and one PART
     - `a6f9c673d` ? · DONE · transcript 09-15 17:07 867 KB · 45 tool calls · result: {"family": "POP", "summary": "POP is 8 of 8 UNBUILT, re-confirmed at the build slot `a5876c0ea`: all six flags (`believedMigrationEnabled`, `commonsArcEnabled`,
