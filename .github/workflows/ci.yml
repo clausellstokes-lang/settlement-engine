@@ -357,7 +357,10 @@ jobs:
     # critical path's wall-clock.
     name: Coverage floors (money / security)
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # The plain suite takes 22.5 min on ubuntu-latest (measured 2026-09-16); under v8 coverage it
+    # cannot fit the old 10-minute cap, which cut this job on every run since 08-15. 45 is the
+    # ratchet job's figure; a timeout is not a coverage verdict.
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
