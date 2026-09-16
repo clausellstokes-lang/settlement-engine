@@ -81,6 +81,22 @@ function plainRecord(value) {
 }
 
 /**
+ * The config a preview forges from: the preview defaults under the caller's config,
+ * minus a config-level `seed`. A preview's seed is `request.seed`; the pipeline refuses
+ * a config carrying `seed` (see generateSettlementPipeline), and the campaign
+ * content-binding review passes a SAVED row's config here, which a sample fork saved
+ * before 2026-08-03 still carries (reported 2026-09-16). Dropping it keeps the review
+ * of such a campaign working and changes nothing else: the pipeline never read it.
+ * @param {unknown} config
+ * @returns {ContentRecord}
+ */
+function previewConfigFrom(config) {
+  const merged = { ...DEFAULT_CONTENT_PREVIEW_CONFIG, ...plainRecord(config) };
+  delete merged.seed;
+  return merged;
+}
+
+/**
  * @param {unknown} value
  * @returns {Record<string, Array<Record<string, unknown>>>}
  */
@@ -390,10 +406,7 @@ export function forgeContentSample(request, generateSettlement) {
   const seed = typeof request?.seed === 'string' && request.seed
     ? request.seed
     : 'custom-content-taste-gate-v1';
-  const config = {
-    ...DEFAULT_CONTENT_PREVIEW_CONFIG,
-    ...plainRecord(request?.config),
-  };
+  const config = previewConfigFrom(request?.config);
   const baselineContent = copyContent(request?.baseContent);
   const { snapshot, forced, dormant } = buildContentPreviewSnapshot(
     baselineContent,
@@ -475,10 +488,7 @@ export function forgeContentRuntimeComparison(request, generateSettlement) {
   const seed = typeof request?.seed === 'string' && request.seed
     ? request.seed
     : 'campaign-content-migration-preview-v1';
-  const baseConfig = {
-    ...DEFAULT_CONTENT_PREVIEW_CONFIG,
-    ...plainRecord(request?.config),
-  };
+  const baseConfig = previewConfigFrom(request?.config);
   const beforeRuntime = plainRecord(request?.beforeRuntime);
   const afterRuntime = plainRecord(request?.afterRuntime);
   const beforeContent = copyContent(beforeRuntime.customContent);

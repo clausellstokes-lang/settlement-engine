@@ -85,8 +85,11 @@ describe('R-3 — every censused caller patch shape still applies', () => {
   }
 
   it('applies the sample-fork shape (seed + _forkedFromSample riders)', () => {
-    // SettlementsPanel.forkSample / FoundingWorlds: whole sample config plus
-    // the seed and provenance riders.
+    // A LEGACY shape since 2026-09-16: the fork surfaces no longer send `seed`
+    // (data/sampleSettlements.js forkConfigFor), but a saved config written before
+    // that may still carry it, and `seed` stays admitted so such a load keeps every
+    // other key. It is inert at generation: store/settlementGenerateAction.js drops
+    // a config-level seed before the pipeline (tests/store/generateStrayConfigSeed).
     const patch = {
       settType: 'town',
       tradeRouteAccess: 'port',
