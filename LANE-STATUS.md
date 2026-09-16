@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 23:12:58 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 23:18:29 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -113,17 +113,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
 - LAST-RUNS: 
 
 ## WORKFLOW RUNS of chair session f6ac0d98-bb14-48ae-88d1-c6887f1e2704 — PER AGENT, PER LANE (owner 09-11: save progress per agent per lane; a run dies with the session, its journal + the packets + the dock commits are the checkpoint; journals mirrored under $SC/_progress/<wf>/)
-- **wf_5cfb61a3-06d** (mtime 09-15 23:01): agent calls 9 (9 distinct) · DONE 8 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_5cfb61a3-06d/`
-    - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
-    - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
-    - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
-    - `a395b300a` ? · DONE · transcript 09-15 22:20 1261 KB · 76 tool calls · files: skeptic.md · result: {"reader": "skeptic \u2014 WF (faith), waves WF-0 \u2026 WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d
-    - `a2c7b8cec` ? · DONE · transcript 09-15 22:28 794 KB · 13 tool calls · files: HISTORY-WF-2026-09-15.md · result: {"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-WF-2026-09-15.md"
-    - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
-    - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
-    - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
-    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:12 941 KB · 56 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
-- **wf_6a1dc505-cea** (mtime 09-15 22:53): agent calls 21 (20 distinct) · DONE 4 · FAILED (not retried) 12 · RETRIED (superseded attempts) 1 · IN FLIGHT 4 — mirror `_progress/wf_6a1dc505-cea/`
+- **wf_6a1dc505-cea** (mtime 09-15 23:16): agent calls 27 (26 distinct) · DONE 5 · FAILED (not retried) 12 · RETRIED (superseded attempts) 1 · IN FLIGHT 9 — mirror `_progress/wf_6a1dc505-cea/`
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
@@ -144,7 +134,23 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `ab128d0dc` ? · DONE · transcript 09-15 22:48 3159 KB · 186 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · result: Every correction is in place and the files have been stable for over a minute. The corrected family summary follows.  # FAMILY TR — CORRECTED SUMMARY (the Fable
     - `ab4af106e` ? · IN FLIGHT · transcript 09-15 22:49 346 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
     - `a57a3432c` ? · IN FLIGHT · transcript 09-15 22:51 807 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `abcc6f3e9` ? · IN FLIGHT · transcript 09-15 23:06 1142 KB · 35 tool calls · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704
+    - `abcc6f3e9` ? · DONE · transcript 09-15 23:16 1395 KB · 38 tool calls · files: plan-WF.md · result: {"planFile": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/plans/plan-WF.md", "lane
+    - `ac5328a50` ? · IN FLIGHT · transcript 09-15 23:18 830 KB · 26 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a9e0f5d6b` ? · IN FLIGHT · transcript 09-15 23:18 748 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `aa3c04d7c` ? · IN FLIGHT · transcript 09-15 23:18 681 KB · 14 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `a43a048de` ? · IN FLIGHT · transcript 09-15 23:18 658 KB · 12 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a5aa79058` ? · IN FLIGHT · transcript 09-15 23:18 871 KB · 25 tool calls · last: Bash B=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `ae07a083e` ? · IN FLIGHT · transcript 09-15 23:18 759 KB · 21 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+- **wf_5cfb61a3-06d** (mtime 09-15 23:01): agent calls 9 (9 distinct) · DONE 8 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_5cfb61a3-06d/`
+    - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
+    - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
+    - `a74c64cde` ? · DONE · transcript 09-15 22:00 1161 KB · 52 tool calls · files: adjudicator.md · result: {"reader": "ADJUDICATOR \u2014 WF (faith), waves WF-0..WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-
+    - `a395b300a` ? · DONE · transcript 09-15 22:20 1261 KB · 76 tool calls · files: skeptic.md · result: {"reader": "skeptic \u2014 WF (faith), waves WF-0 \u2026 WF-9", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d
+    - `a2c7b8cec` ? · DONE · transcript 09-15 22:28 794 KB · 13 tool calls · files: HISTORY-WF-2026-09-15.md · result: {"file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/HISTORY-WF-2026-09-15.md"
+    - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
+    - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
+    - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
+    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:17 1091 KB · 70 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_2fd9ec8f-ae7** (mtime 09-15 19:23): agent calls 15 (15 distinct) · DONE 0 · FAILED (not retried) 15 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_2fd9ec8f-ae7/`
     - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
     - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
@@ -235,4 +241,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 2.24 2.20 2.37
+load: 3.66 2.78 2.55

@@ -1,4 +1,4 @@
-# wf_6a1dc505-cea — per-agent progress, 2026-09-15 23:13:00
+# wf_6a1dc505-cea — per-agent progress, 2026-09-15 23:18:31
     - `acf75dfb5` ? · DONE · transcript 09-15 18:25 1475 KB · 76 tool calls · files: odq-3b506360f.md, handoff-3b506360f.md, ARCH-PROTOCOLS.md · result: ARCH-PROTOCOLS.md is written at `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/ARCH-
     - `a5573792d` ? · IN FLIGHT · transcript 09-15 18:39 1366 KB · 54 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a4ae62b63` ? · RETRIED (a later attempt on the same key runs) · transcript 09-15 19:25 1391 KB · 60 tool calls
@@ -19,4 +19,10 @@
     - `ab128d0dc` ? · DONE · transcript 09-15 22:48 3159 KB · 186 tool calls · files: brief-2-TR-TR-5.md, brief-8-TR-TR-6.md, brief-56a-TR-TR-7.md, brief-56c-TR-TR-9.md · result: Every correction is in place and the files have been stable for over a minute. The corrected family summary follows.  # FAMILY TR — CORRECTED SUMMARY (the Fable
     - `ab4af106e` ? · IN FLIGHT · transcript 09-15 22:49 346 KB · 1 tool calls · last: Bash ls -la /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/s
     - `a57a3432c` ? · IN FLIGHT · transcript 09-15 22:51 807 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `abcc6f3e9` ? · IN FLIGHT · transcript 09-15 23:06 1142 KB · 35 tool calls · last: Bash mkdir -p /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704
+    - `abcc6f3e9` ? · DONE · transcript 09-15 23:16 1395 KB · 38 tool calls · files: plan-WF.md · result: {"planFile": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/arch-932/plans/plan-WF.md", "lane
+    - `ac5328a50` ? · IN FLIGHT · transcript 09-15 23:18 830 KB · 26 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a9e0f5d6b` ? · IN FLIGHT · transcript 09-15 23:18 748 KB · 23 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
+    - `aa3c04d7c` ? · IN FLIGHT · transcript 09-15 23:18 681 KB · 14 tool calls · last: Bash L=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `a43a048de` ? · IN FLIGHT · transcript 09-15 23:18 658 KB · 12 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a5aa79058` ? · IN FLIGHT · transcript 09-15 23:18 871 KB · 25 tool calls · last: Bash B=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
+    - `ae07a083e` ? · IN FLIGHT · transcript 09-15 23:18 759 KB · 21 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
