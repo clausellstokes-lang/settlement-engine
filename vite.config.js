@@ -429,7 +429,15 @@ export default defineConfig({
     // Explicit include — keeps the babel transform applied to .jsx/.tsx
     // for HMR + fast refresh; oxc handles the JSX-to-JS lowering for
     // any caller (notably vitest test files that import .jsx components).
-    react({ include: /\.(mjs|jsx|tsx)$/ }),
+    // The PDF worker's module graph (src/utils/pdfRender.worker.js -> src/pdf/**) is EXCLUDED from
+    // the React plugin's Fast Refresh transform: in DEV the plugin wraps every .jsx module with the
+    // refresh preamble ($RefreshReg$ / $RefreshSig$), which exists on the window but not in a Worker
+    // scope, so the worker threw `ReferenceError: $RefreshReg$ is not defined`, fell back to the main
+    // thread, and e2e/flow-f-single-dossier.spec.js saw 'Preparing PDF' where 'Download PDF' was
+    // due (found at the 2026-09-16 CI run on a5876c0ea; production builds carry no refresh code, so
+    // this is a dev-server/e2e defect only). JSX in the excluded files still compiles through
+    // esbuild's automatic runtime; they only lose HMR, which a worker never had.
+    react({ include: /\.(mjs|jsx|tsx)$/, exclude: [/\/src\/pdf\//, /\/src\/utils\/pdfRender\.worker\.js$/, /\/src\/utils\/pdfWorkerShim\.js$/] }),
     analyze && visualizer({
       filename: 'dist/stats.html',
       template: 'treemap',
