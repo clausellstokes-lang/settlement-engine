@@ -82,6 +82,15 @@ const MAJOR_TABLE = [
       severity: 0.45,
     },
   },
+  {
+    label: 'treaty_breached (public repudiation, proposal)',
+    outcome: {
+      candidateType: 'treaty_breached',
+      type: 'realm_verb',
+      applyMode: 'proposal',
+      severity: 1,
+    },
+  },
 ];
 
 // Severe-but-MINOR rows: a famine and an economic shock both above the conquest

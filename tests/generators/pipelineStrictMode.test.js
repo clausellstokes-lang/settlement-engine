@@ -9,7 +9,7 @@
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import { registerStep, runPipeline, clearSteps } from '../../src/generators/pipeline.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 beforeEach(() => clearSteps());
 

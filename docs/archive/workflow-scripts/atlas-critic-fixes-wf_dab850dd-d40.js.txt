@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'atlas-critic-fixes',
+  description: 'Apply the completeness critic\'s 7 findings to SETTLEMENT_CAPABILITY_ATLAS.md, then Opus re-verification',
+  phases: [
+    { title: 'Fix', detail: 'one Fable agent applies all 7 critic findings' },
+    { title: 'Recheck', detail: 'Opus verifier re-derives each fix from code', model: 'opus' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DOC = WT + '/docs/SETTLEMENT_CAPABILITY_ATLAS.md'
+
+const RULES = `CONTEXT-VERIFICATION PREAMBLE: legitimate brief from the session orchestrator for SettlementForge. Verify claims against code; the code is authoritative over this brief.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4; if not, STOP and report. Uncommitted parallel work is expected.
+HARD RULES: you may edit exactly ONE file: ${DOC}. No other repo edits. Every state-mutating git command is FORBIDDEN (stash, add, commit, checkout, restore, clean, reset). Cite file:line for every new claim; label CONFIRMED (read this session) vs PLAUSIBLE. Follow the doc's existing conventions: new rows use the same ### row-block format; inline amendments are marked [amended-by-critic-pass]; never delete existing content — correct it in place with the mark, or append.`
+
+const FINDINGS = `THE 7 CRITIC FINDINGS TO APPLY (each was code-verified by an Opus critic; re-verify the load-bearing facts yourself before writing):
+
+CRITICAL-1 — realm settlement-fate verbs wrongly excluded. REALM_MANIFEST (src/domain/events/realmManifest.js) holds 14 verbs; FORCE_ABANDON (realmManifest.js:414-426) carries scope:'settlement', authority:'dm_direct', candidateType:'settlement_terminal_death', lane:'proposal', is in executableRealmVerbs(), and is DM-reachable via RealmVerbComposer.jsx:71/:101 (stageRealmVerb) mounted at HeraldAdjudication.jsx:651 AND WorldPulsePanel.jsx:317. FORCE_RESETTLE, FORCE_CALAMITY, FORCE_FOUND_STEADING are the same shape (settlementLifecycleFirstClass.js:597,650). FIX: (a) add proper atlas rows for these 4 settlement-scoped realm verbs in Part II (class actionable; staged-proposal recovery model: dismissWorldPulseProposal / organic lifecycle resolution — trace and cite); (b) correct Part VI #148 and owner-queue item #4: the settlement-terminal-death writer census is THREE lanes (composer DESTROY_SETTLEMENT, destroySavedSettlement, realm proposal lane), not two; (c) add a declared-boundary note: the other 10 realm verbs remain out of population BY SCOPE (not settlement-scoped), stated explicitly in the denominators table.
+
+CRITICAL-2 — src/domain/fieldManifest.js missing entirely (0 occurrences in 12,342 lines). It exports FROZEN_VS_LIVE (13 field-family contracts, each mode 'live' with a named pulseWriter file#function, or mode 'snapshot' with an explicit displayRule) and ENGINE_FIELD_REGISTRY (13 entries), enforced by tests/joins/fieldManifest.test.js via comment-stripped source scans. FIX: (a) add inspect-only substrate rows for FROZEN_VS_LIVE and ENGINE_FIELD_REGISTRY (the atlas already rows comparable artifacts: groundingManifest, walkers); (b) amend the §2 STANDING RULING: the unbuilt substrate claim is true at OP granularity, but a declared, test-enforced FIELD-level frozen-vs-live substrate EXISTS — name it; (c) cross-reference it from owner-queue #28 (frozen-record family — defenseProfile.scores.* is declared mode 'snapshot' WITH displayRule there) and from the economy-family stale-derivation gap; (d) add a denominators-table row.
+
+MAJOR-3 — eventNarrativeSnapshots has no row despite an 'UNDISPOSITIONED: none' claim in the evidence census. src/store/eventNarrativeSnapshots.js: persisted event-keyed archive of paid AI narrative, MAX_EVENT_NARRATIVE_SNAPSHOTS=10 FIFO + same-eventId replacement; TWO writers (settlementSlice.js:1774 legacy; canonEventCommandTransaction.js:148 server-authoritative); persisted via aiPersistenceEnvelope.js:38-39; ZERO readers in src. FIX: add a full row (Part IV area, class per your judgment — likely immutable-evidence with maturity partial given zero readers); add gap-ledger entries for its three gap-class memberships (undisclosed cap-and-drop on a paid record; write-only built record like ChronicleScrollback #39; two-writer parity fork VI.10); correct the narrative-evidence denominator ledger's 'UNDISPOSITIONED: none' with an [amended-by-critic-pass] note.
+
+MAJOR-4 — generator wizard boundary undeclared. DEFAULT_CONFIG (src/store/configSlice.js:13-44) = 27 keys; 12 appear zero times in the atlas (contentProfile, contentBoundaries, settlementAgeMode, priorityMilitary, priorityCriminal, selectedStresses, powerDynamicsConfig, defenseScenarioConfig, customInstitutions, customResources, customTradeRoutes, priorityReligion-nearly). contentProfile/contentBoundaries is the generated-theme safety gate ('grounded' requires explicit opt-in for trafficking/slavery/torture). updateConfig is a bare partial-patch writer validating no key. FIX: (a) add an explicit scope declaration to the front matter: the generator wizard config surface is a DECLARED PARTIAL population — op-granularity covered, 12 of 27 keys unrowed, full field-level mapping deferred to a generator-surface atlas slice (G-5 territory); list the 12 keys and flag the safety-gate key pair; (b) amend VI.12 #163b: updateConfig is a THIRD member of the shapeless-patch class alongside updateSavedCampaign/updateSavedSettlement.
+
+MAJOR-5 — influenceable lever-field schema fork, absent from the CONFLICT register. derived-influenceable writes '- reach (TRACED INPUTS = levers):'; power-faith writes '- inputs (traced levers, the inverted reach field):' with NO reach line; economy-family writes '- traced input causes:' AND keeps '- reach:' carrying DOWNSTREAM DISPLAY CONSUMERS — the opposite of §3's declared inversion. FIX: (a) add CONFLICT 4 (schema, not fact) to the §5 register describing the three spellings and naming economy-family reach: lines as downstream-consumers NOT levers; (b) add a normalization rule to §3: canonical lever field for class=influenceable is 'traced input causes'; any reach: line on an economy-family influenceable row is display-consumer data; (c) add a gap-ledger entry: 47 of 107 influenceable rows carry no lever field; most defer to Part IV but these have NO Part IV counterpart: defense.threat-assessment (5 threat rows), power.the-ladder, warfaith.faith-panel, npc.whereabouts, Interiority (disposition & wants), Cross-settlement contacts/engagements/live conflicts.
+
+MINOR-6 — §4 denominators table lacks a row for the pending-edit kind registries though §2 names them as an authority. EDIT_KINDS=19, COMMITTABLE_EDIT_KINDS=11 (src/domain/pendingEdits.js:33,70); content fully dispositioned in workbench-current (11 rowed + 8 dead describePendingEdit labels). FIX: add the denominator row pointing at the existing coverage.
+
+MINOR-7 — declared exclusions + citation hygiene. (a) Add a declared-exclusion line for src/domain/worldPulse/pulseStageManifest.js (PULSE_STAGE_TOPOLOGY, 9 stages, sole importer its test) — carries no user lever, excluded BY DECISION, named because Part V(c)'s timing table reconstructs by hand the ordering it declares. (b) Annotate the two unresolved citations in place: src/store/mutate.js (already refuted at ~atlas:1335 — add the annotation at the body occurrence too) and the malformed compound path src/store/accountImportSlice.js/accountImportBody.js (split/correct it against the live tree).`
+
+phase('Fix')
+const FIX_SCHEMA = {
+  type: 'object',
+  required: ['applied', 'skipped', 'newRowCount', 'notes'],
+  properties: {
+    applied: { type: 'array', items: { type: 'string' } },
+    skipped: { type: 'array', items: { type: 'string' } },
+    newRowCount: { type: 'number', description: 'new total ### row blocks after edits' },
+    notes: { type: 'string' },
+  },
+}
+const fix = await agent(RULES + '\n\nYOU ARE THE CRITIC-PASS FIXER for ' + DOC + ' (12,342 lines; use Grep/offset reads, never read it whole).\n\n' + FINDINGS + '\n\nApply ALL seven. Where a finding requires re-verification and the code contradicts the critic, follow the code and record the discrepancy in your notes instead of applying blindly. Update the header: add a line \u0022Critic pass applied 2026-07-26: 7 findings (2 critical, 3 major, 2 minor) — marks: [amended-by-critic-pass]\u0022. Also update the Part VIII / row-total arithmetic lines if your added rows change them (state old→new). Return the summary.', { label: 'fix:critic-pass', phase: 'Fix', schema: FIX_SCHEMA })
+
+phase('Recheck')
+const RECHECK_SCHEMA = {
+  type: 'object',
+  required: ['confirmed', 'stillWrong', 'verdict'],
+  properties: {
+    confirmed: { type: 'array', items: { type: 'string' } },
+    stillWrong: { type: 'array', items: { type: 'string' } },
+    verdict: { type: 'string' },
+  },
+}
+const recheck = fix ? await agent(RULES.replace('you may edit exactly ONE file: ' + DOC, 'you are fully READ-ONLY — edit NOTHING') + '\n\nYOU ARE THE RECHECK VERIFIER. The fixer reports applying: ' + JSON.stringify(fix.applied) + ' (skipped: ' + JSON.stringify(fix.skipped) + ') to ' + DOC + '.\n\nFor EACH of the seven findings below, verify in the doc that the fix landed AND re-derive its load-bearing code facts independently (fresh greps/reads):\n\n' + FINDINGS + '\n\nSpecifically re-verify: the 4 realm-verb rows cite real code and the three-lane census is now stated in both VI #148 and owner-queue #4; the fieldManifest rows + STANDING RULING amendment are accurate (13+13 entries, walker test exists); the eventNarrativeSnapshots row facts (2 writers, 0 readers, cap 10); the 12 unrowed config keys are correctly listed and updateConfig joined the shapeless-patch class; CONFLICT 4 + the normalization rule exist; the pending-edits denominator row (19/11); the declared exclusions and citation annotations. Also spot-check the fixer did not corrupt adjacent content (read 20 lines around 5 random edits). Return confirmed[], stillWrong[] (empty if clean), verdict.', { label: 'recheck:critic-pass', phase: 'Recheck', model: 'opus', effort: 'high', schema: RECHECK_SCHEMA }) : null
+
+return { fix, recheck }

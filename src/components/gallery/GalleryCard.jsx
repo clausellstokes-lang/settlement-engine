@@ -1,67 +1,70 @@
-
-import { memo, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
 import {
   BODY,
   BORDER,
+  BORDER2,
   CARD,
   CARD_ALT,
   FS,
   GOLD,
-  GOLD_TXT,
   INK,
-  R,
+  MUTED,
   SECOND,
   SP,
   sans,
   serif_,
 } from '../theme.js';
-import { formatDate, formatNumber, human, stabilityBand } from './galleryUtils.js';
+import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
-import BandPill from '../primitives/BandPill.jsx';
+import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
+import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
 import VoteButton from './VoteButton.jsx';
 
-function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
-  // Tier is the runnable identity anchor (front-loaded, INK, bolder); population
-  // and terrain follow as quieter muted facts. (P6 keyword-first / P4 two-lever.)
-  const tierLabel = TIER_LABELS[item.tier] || human(item.tier);
-  const secondaryMeta = [
-    item.population ? `${formatNumber(item.population)} pop` : null,
-    item.terrain ? human(item.terrain) : null,
-  ].filter(Boolean);
-  // Stability is pulled OUT of the tag soup and promoted to a BandPill (the
-  // anomaly P3 says to reserve saturated color for); government/magic/resource
-  // stay as the quiet grey chips below.
-  const stab = stabilityBand(item.stability);
-  const tags = [
-    item.governmentType,
-    item.magicLevel && `${human(item.magicLevel)} magic`,
-    item.primaryResource,
-    ...(item.tags || []),
-  ].filter(Boolean).slice(0, 5);
-  // DOMPurify is not cheap; in a long gallery list this card re-renders on every
-  // vote/scroll. Memoize the sanitized description so it's only re-run when the
-  // source HTML actually changes, not on each render. (defense-in-depth at the sink.)
+export default function GalleryCard({ item, onOpen, onVote, voting }) {
+  const [shared, setShared] = useState(false);
+  // DOMPurify isn't cheap and a gallery is a long list where each card
+  // re-renders on vote/scroll; sanitize only when the description string changes.
   const descriptionHtml = useMemo(
     () => (item.description ? sanitizeGalleryHtml(item.description) : ''),
     [item.description],
   );
+  const onShare = async () => {
+    const r = await shareGalleryDossier({ slug: item.slug, name: item.name });
+    if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
+  };
+  const meta = [
+    TIER_LABELS[item.tier] || human(item.tier),
+    item.population ? `${formatNumber(item.population)} pop` : null,
+    item.terrain ? human(item.terrain) : null,
+  ].filter(Boolean);
+  const tags = [
+    item.governmentType,
+    item.magicLevel && `${human(item.magicLevel)} magic`,
+    item.stability,
+    item.primaryResource,
+    ...(item.tags || []),
+  ].filter(Boolean).slice(0, 5);
 
   return (
-    <article style={{
-      minWidth: 0,
-      overflow: 'hidden',
-      border: `1px solid ${item.curated ? GOLD : BORDER}`,
-      borderRadius: R.lg,
-      background: CARD,
-      boxShadow: item.curated ? '0 8px 22px rgba(201,162,76,0.18)' : '0 4px 14px rgba(27,20,8,0.08)',
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
+    <article
+      className={`oc-m-inkdarken sf-gallery-card${item.curated ? ' sf-gallery-card--curated' : ''}`}
+      style={{
+        minWidth: 0,
+        overflow: 'hidden',
+        // The specimen plate: a hairline frame (law §3, "plates in hairline
+        // frames"), curated in gold — no rounded corner, no drop-shadow lift.
+        // Depth is ink, never elevation; the frame inks darker on hover.
+        border: `1px solid ${item.curated ? GOLD : BORDER}`,
+        background: CARD,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <button
         type="button"
         onClick={() => onOpen(item.slug)}
@@ -70,36 +73,68 @@ function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
       >
         <div style={{ position: 'relative' }}>
           <GalleryImage item={item} />
-          {item.curated && (
-            <div style={{
-              position: 'absolute',
-              left: SP.xs,
-              top: SP.xs,
-              display: 'flex',
-              gap: SP.xs,
+          <div style={{
+            position: 'absolute',
+            left: 8,
+            top: 8,
+            display: 'flex',
+            gap: 6,
+            alignItems: 'center',
+          }}>
+            <span style={{
+              display: 'inline-flex',
               alignItems: 'center',
+              gap: 4,
+              minHeight: 24,
+              padding: '3px 7px',
+              background: GOLD,
+              // Ink-on-gold, the house AA badge pairing (7.6:1) — the
+              // white-on-gold this carried was the retired 2.4:1 failure.
+              color: INK,
+              fontFamily: sans,
+              fontSize: FS.xxs,
+              fontWeight: 950,
             }}>
-              <span title="Chosen by the editors as a worked example" style={{
+              {Math.max(0, item.netVotes || 0)} votes
+            </span>
+            {item.curated && (
+              <span style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: SP.xs,
+                gap: 3,
                 minHeight: 24,
-                padding: `${SP.xs}px ${SP.sm}px`,
-                borderRadius: 999,
+                padding: '3px 7px',
                 background: CARD,
-                color: GOLD_TXT,
+                color: GOLD,
                 border: `1px solid ${GOLD}`,
                 fontFamily: sans,
-                fontSize: FS.xs,
+                fontSize: FS.xxs,
                 fontWeight: 950,
               }}>
                 Curated
               </span>
-            </div>
-          )}
+            )}
+            {item.unlisted && (
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 3,
+                minHeight: 24,
+                padding: '3px 7px',
+                background: CARD,
+                color: SECOND,
+                border: `1px solid ${BORDER2}`,
+                fontFamily: sans,
+                fontSize: FS.xxs,
+                fontWeight: 950,
+              }}>
+                Unlisted
+              </span>
+            )}
+          </div>
         </div>
       </button>
-      <div style={{ padding: SP.md, display: 'grid', gap: SP.xs }}>
+      <div style={{ padding: SP.md, display: 'grid', gap: 8 }}>
         <Button
           variant="ghost"
           onClick={() => onOpen(item.slug)}
@@ -118,33 +153,19 @@ function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
             margin: 0,
             color: INK,
             fontFamily: serif_,
-            fontSize: FS.xl,
+            fontSize: FS.lg,
             lineHeight: 1.2,
-            fontWeight: 800,
+            fontWeight: 700,
             overflowWrap: 'anywhere',
           }}>
             {item.name || t('gallery.untitled')}
           </h3>
         </Button>
-        {/* State-first meta line: the stability band is the loudest, front-loaded
-            token (color + glyph + uppercase label), the keyword-first anchor a
-            grid scan hits before the quiet identity facts. (P3 / P4 / P6) */}
-        <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: SP.xs, fontFamily: sans, fontSize: FS.xs, textTransform: 'capitalize' }}>
-          {stab && (
-            <BandPill band={stab.band} label={stab.label} labelBefore="Stability: " size="sm" style={{ alignSelf: 'center' }} />
-          )}
-          <span style={{ color: INK, fontWeight: 900 }}>{tierLabel}</span>
-          {secondaryMeta.length > 0 && (
-            <span style={{ color: BODY, fontWeight: 700 }}>{secondaryMeta.join(' · ')}</span>
-          )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+          <span>{meta.join(' / ')}</span>
+          {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
+          <AlivenessBadge score={item.aliveness} />
         </div>
-        {/* Author resolved live by owner id (migration 076) — a rename reflects
-            here automatically. Hidden when an owner has no external_name yet. */}
-        {item.author && (
-          <div style={{ fontFamily: sans, fontSize: FS.xs, color: BODY, textTransform: 'none' }}>
-            by {item.author}
-          </div>
-        )}
         {item.description && (
           <div
             className="sf-rich"
@@ -162,16 +183,16 @@ function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
             dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           />
         )}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {tags.map((tag, index) => (
             <span key={`${tag}-${index}`} style={{
               display: 'inline-flex',
-              padding: `2px ${SP.xs}px`,
-              borderRadius: R.sm,
+              padding: '2px 6px',
+              border: `1px solid ${BORDER2}`,
               background: CARD_ALT,
               color: SECOND,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: FS.xxs,
               fontWeight: 800,
               textTransform: 'capitalize',
             }}>
@@ -179,32 +200,30 @@ function GalleryCard({ item, onOpen, onVote, voting, isSignedIn }) {
             </span>
           ))}
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', marginTop: SP.sm }}>
-          <VoteButton
-            count={item.netVotes}
-            voted={item.voted}
-            disabled={voting}
-            isSignedIn={isSignedIn}
-            onClick={() => onVote(item)}
-          />
-          {/* One quiet muted ledger of read-only counts + date — a single tier
-              below the interactive vote control. (P4 <=3 levels / P5 quiet the neighbors.) */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, marginLeft: 'auto', color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
-              {formatNumber(item.viewCount)} views
-            </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs }}>
-              {formatNumber(item.commentCount)} comments
-            </span>
-            <span>{formatDate(item.updatedAt || item.publishedAt)}</span>
-          </div>
+        {/* Reader reactions (GALLERY-2 phase 2) — read-only digest of the top
+            structured reactions; the interactive row lives on the dossier. */}
+        <GalleryReactionSummary counts={item.reactions} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
+          <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+            {formatNumber(item.viewCount)} views
+          </span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+            {formatNumber(item.commentCount)} comments
+          </span>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onShare}
+            title="Share this dossier"
+          >
+            {shared ? 'Copied' : 'Share'}
+          </Button>
+          <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+            {formatDate(item.updatedAt || item.publishedAt)}
+          </span>
         </div>
       </div>
     </article>
   );
 }
-
-// Memoized: this card renders inside items.map() in a long gallery list and the
-// parent (useGalleryPageState) useCallback's onOpen/onVote, so memo skips the
-// re-render when only sibling state (another card's vote, the query) changes.
-export default memo(GalleryCard);

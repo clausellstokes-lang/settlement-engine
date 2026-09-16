@@ -30,6 +30,16 @@ export const GUARDED_RESIDUE_TYPES = Object.freeze([
   'war_mobilization', 'strategy_deploy', 'conquest', 'occupation_vassalized',
 ]);
 
+// DOCUMENTED ALLOWLIST (r2 worldpulse-tick-core-1) — the moral-drift (spatialLedgers.moralDrift)
+// and narrative-tempo (narrativeTempo) CONSEQUENCE stores are deliberately NOT residue-strip
+// sites and stay OUT of GUARDED_RESIDUE_TYPES. This guard polices the PAUSE (defer) path, where a
+// deferred major is pending-apply and LEGITIMATELY counts toward the tempo birth ledger / moral
+// drift — so their presence there is intended, not residue. The distinct discipline that keeps a
+// DM-DISMISSED major out of those stores is pulseKernel's `selectedForConsequences` (= the
+// selected set minus activeDismissals), which the moralDrift loop, the misjudgment-news reader,
+// and foldNarrativeTempo all consume. A dismissed major therefore never reaches them, and a
+// deferred one correctly does — neither is a leak this pause-path guard should flag.
+
 /** True only in a Node test run (vitest sets NODE_ENV=test). Browser / prod / soak = off. */
 function guardEnabled() {
   try {

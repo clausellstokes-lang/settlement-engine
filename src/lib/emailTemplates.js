@@ -1,5 +1,5 @@
 /**
- * emailTemplates.js — lifecycle email templates.
+ * emailTemplates.js — Tier 8.5 lifecycle email templates.
  *
  * Defines the six lifecycle email types as plain JS templates with
  * subject + plain-text body + minimal HTML body. The edge function
@@ -24,6 +24,8 @@
  * is loud, not silent (same convention as copy/index.js).
  */
 
+import { FOUNDER_SEAT_CAP } from './founderSeats.js';
+
 // ── Substitution helper ────────────────────────────────────────────────────
 function interpolate(str, vars) {
   if (!vars || typeof str !== 'string') return str;
@@ -43,11 +45,11 @@ export const TEMPLATES = Object.freeze({
       '',
       '  • Every settlement is simulated from constraints. Not AI-generated.',
       '    Each town is the only coherent settlement that satisfies the',
-      '    constraints you set: sliders, terrain, trade, stress.',
+      '    constraints you set — sliders, terrain, trade, stress.',
       '',
       '  • Your first three saves are free. After that, sign up for a',
       '    Cartographer subscription or claim a Founder Lifetime seat',
-      '    (limited to the first 30 supporters).',
+      `    (limited to the first ${FOUNDER_SEAT_CAP} supporters).`,
       '',
       '  • Narrative refinement (the optional prose layer) costs credits',
       '    per pass. Cartographer subscriptions include a monthly',
@@ -55,7 +57,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'Forge well.',
       '',
-      'SettlementForge',
+      '— SettlementForge',
       'https://settlementforge.com',
     ].join('\n'),
     html: null,  // text-only for v1; HTML can be added per template later
@@ -75,7 +77,7 @@ export const TEMPLATES = Object.freeze({
       'narrative refinement passes you have run. Future regenerations',
       'will not overwrite locked entities.',
       '',
-      'SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -91,7 +93,7 @@ export const TEMPLATES = Object.freeze({
       'narrative refinement you have layered on. If anything looks off,',
       'you can re-export from the settlement detail view at any time.',
       '',
-      'SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -108,11 +110,11 @@ export const TEMPLATES = Object.freeze({
       'Top up here:',
       '  https://settlementforge.com/pricing',
       '',
-      'Reminder: settlements themselves never use credits. Only the',
+      'Reminder: settlements themselves never use credits — only the',
       'optional narrative refinement layer does. Your simulator output',
       'continues to work as normal.',
       '',
-      'SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -122,9 +124,9 @@ export const TEMPLATES = Object.freeze({
     text: [
       'Hello {displayName},',
       '',
-      'You are one of the first 30 supporters. Thank you.',
+      `You are one of the first ${FOUNDER_SEAT_CAP} supporters. Thank you.`,
       '',
-      'Your Founder Lifetime seat is permanent: Cartographer-tier',
+      'Your Founder Lifetime seat is permanent — Cartographer-tier',
       'access, unlimited saves, all current and future expansion packs.',
       'You also get the Founder badge on every dossier you publish.',
       '',
@@ -133,7 +135,7 @@ export const TEMPLATES = Object.freeze({
       '',
       'Forge well.',
       '',
-      'SettlementForge',
+      '— SettlementForge',
     ].join('\n'),
     html: null,
   },
@@ -150,11 +152,58 @@ export const TEMPLATES = Object.freeze({
       'Sign up for a free account to unlock:',
       '  • Up to Town size (Capital with a Cartographer subscription)',
       '  • Saved settlements (3 free)',
-      '  • Keep any saved dossier\'s PDF for $2.99, yours to re-download',
+      '  • PDF export of any saved dossier',
       '',
       'Sign up: https://settlementforge.com/signin',
       '',
-      'SettlementForge',
+      '— SettlementForge',
+    ].join('\n'),
+    html: null,
+  },
+
+  // Retention warning (downgrade-transition audit 2.2): when a lapsed account's
+  // settlements beyond its free slots are held in read-only retention and the
+  // retention window is closing, warn the owner BEFORE the purge so they can
+  // export or resubscribe. Authenticated template (recipient from auth.uid()).
+  retention_warning: {
+    subject: 'Your retained settlements expire soon',
+    text: [
+      'Hello {displayName},',
+      '',
+      'Your account has returned to the free tier, so settlements beyond your',
+      'free slots are held in read-only retention. They will be permanently',
+      'removed after {retentionUntil} unless you act.',
+      '',
+      'To keep them, you can:',
+      '  • Reactivate or export a retained settlement from your library:',
+      '    https://settlementforge.com/settlements',
+      '  • Resubscribe to restore full access to every retained settlement:',
+      '    https://settlementforge.com/pricing',
+      '',
+      'Your simulator output is untouched — retention only limits how many',
+      'settlements stay in your live library.',
+      '',
+      '— SettlementForge',
+    ].join('\n'),
+    html: null,
+  },
+
+  // ops_error_alert — the item-A error-alert consumer (Wave E). Kept in sync with
+  // the edge copy in supabase/functions/send-email/index.ts. Authenticated only
+  // (never added to ANON_OK_TEMPLATES). Numbers from report_client_error_alert().
+  ops_error_alert: {
+    subject: 'SettlementForge: {distinctSignatures} distinct crash signatures in {windowMinutes} min',
+    text: [
+      'Client error alert.',
+      '',
+      'In the last {windowMinutes} minutes SettlementForge saw',
+      '{distinctSignatures} distinct crash signature(s) — over the alert',
+      'threshold of {threshold}.',
+      '',
+      'Open the admin panel → Client Errors for the grouped signatures,',
+      'counts, and sample messages.',
+      '',
+      '— SettlementForge ops',
     ].join('\n'),
     html: null,
   },

@@ -33,6 +33,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 // Extract from 085 — the NET-CURRENT body of refund_credits (085 forked 009's
 // body to make the auth gate service-role-aware; 033 only changed the GRANT).
 // Testing the net-current def keeps this suite honest about what actually ships.
@@ -48,7 +50,7 @@ describe('085 pglite target exists (guards against silent vacuous skip)', () => 
 /** Extract the `create or replace function public.<name>` body verbatim through its first `$$;`. */
 function extractFn(name) {
   const src = readFileSync(MIG, 'utf8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from 085`);
   return m[0];
 }
@@ -149,7 +151,7 @@ describe.runIf(exists)('refund_credits service-role auth gate — execution agai
 
     // The real, verbatim RPC body from 085.
     await db.exec(extractFn('refund_credits'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`truncate public.profiles, public.credit_ledger, public.credit_transactions, public.audit_log;`);

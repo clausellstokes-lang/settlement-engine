@@ -1,0 +1,103 @@
+export const meta = {
+  name: 'build-cycle-42-wz5r-wr8-repair',
+  description: 'WZ-5r: vocabulary-closure cure at the relationship writer, strict truth, queue correction — WR-8 re-closes only if the verifier says the words',
+  phases: [
+    { title: 'Build', detail: 'CR-WZ5-A cure + CR-WZ5-B strict fix + queue-row correction' },
+    { title: 'Verify', detail: 'independent adversarial re-verification; holds the closing sentence' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting on them, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block (per-turn cwd resets). Pathspec commits with THE STAGED-SET LAW: immediately before EVERY commit run git diff --cached --name-only, verify every staged file is yours, and commit with git commit -- <paths>. NEVER git stash, reset, checkout --, or clean. Gates through sh scripts/gate-tail.sh or npm run check:tail, never a bare pipe; before believing any vitest timeout/red, ps aux | grep vitest (parallel-load reds are fake). python3 byte-scan (control bytes <9 or 14-31) EVERY file you Write — the Write tool turns backslash-u-0000 escapes into RAW NULs; spell NUL as an escaped sequence built at runtime, never a literal. tests/fixtures/ UNTOUCHED. Foreign WIP (lane V4C) is the owner's — preserve it, never stage it. Commit messages via a FILE (git commit -F), each ending with the trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. Per-file tsc --noEmit --strict <file> is VACUOUS (TS5112) — the ONLY honest strict receipt is npm run typecheck:domain:strict. DO NOT touch scripts/mutation-coverage-manifest.json or scripts/mutation-sweep.sh — lane V4C is live-editing them; if an edit there becomes unavoidable, STOP and report instead. New pins live INSIDE EXISTING suite files (no new *walker*-named test files) to avoid E-A manifest edits.`
+
+const CONTEXT = `CONTEXT — WHY THIS LANE EXISTS. Lane WZ-5 landed three commits: 19dd07e2 (piece 1, the believed-razing casus — VERIFIER-CONFIRMED WHOLE, 34/34 on an independent adversarial fixture; DO NOT TOUCH ITS BEHAVIOR), db779d5e (piece 2, the ghost-write cure: applyRelationshipPatch(worldState, outcome, now, edge) derives its baseline from a 4th edge argument), e36588c7 (queue row PREMATURELY declaring WR-8 CLOSES). The adversarial verifier REJECTED the close with two executed blocking findings, both in piece 2:
+
+FINDING 1 — THE VOCABULARY LEAK. ensureRegionalGraph mints edges with relationshipType 'channel_inferred' for every inferred channel (src/domain/region/graph.js:310) — a graph-plane token, NOT one of the RELATIONSHIP_DEFAULTS keys. normalizeRelationshipType (src/domain/worldPulse/relationshipState.js:125) passes unknown tokens through. Pre-cure, an absent record resolved to 'neutral'; post-cure the edge speaks and 'channel_inferred' is PERSISTED into worldState.relationshipStates[key].relationshipType while the axes silently fall back to neutral's numbers — label and numbers disagree. Measured consequences: same-seed whole-pipeline harness (3 rule sets x 2 seeds x 24 ticks, clock-stripped, each tree run twice) MOVED in 3 of 6 cells, 53 fields; edge.far.iron / edge.far.mid persist 'channel_inferred' where base persisted 'neutral' (19 occurrences); the raw token renders into DM-facing headlines ("channel inferred may become rival"). Violates THE PROMISE (a seed is a world, forever), the LEGIBILITY/GAME-GRADE law (translate, never show a raw token), and the lane's own STOP condition. channel_inferred is the ONLY out-of-vocabulary edge type minted anywhere in src/. WZ-5's own 3-settlement fixture had only hand-authored edges, so it never minted an inferred channel — its byte-identity claim was VACUOUS for the moved path.
+
+FINDING 2 — STRICT IS RED AT HEAD. npm run typecheck:domain:strict at e36588c7 on a clean tree: razingExecution.js 1 (baseline 0), relationshipEvolution.js 6 (baseline 5), warPeaceRefusal.js 12 (baseline 11) — all the SAME new TS2345: an edge typed 'unknown' handed into the newly-typed 4th parameter, at razingExecution.js(932,13), relationshipEvolution.js(366,11), warPeaceRefusal.js(198,13) (e.g. mintMemoryWeaveIncident's own 'edge?: unknown' spec). The lane ALSO tightened the ceiling 1317 -> 1313 — a number its own code does not meet.
+
+CHAIR RULINGS BINDING THIS LANE (record both in docs/FABLE_VALIDATION_QUEUE.md as vetoable):
+CR-WZ5-A — VOCABULARY CLOSURE AT THE WRITER BOUNDARY. The edge may speak only in the relationship plane's OWN vocabulary. The verifier already EXECUTED this cure and it works: in applyRelationshipPatch, before the baseline derivation: const edgeType = normalizeRelationshipType(edge?.relationshipType); const typedEdge = edge && RELATIONSHIP_DEFAULTS[edgeType] ? edge : {}; then pass typedEdge (not edge) to ensureRelationshipState. Verifier-measured: restores byte-identity in ALL SIX same-seed cells; the repro persists 'neutral' in-vocabulary; 45/46 of WZ-5's pins stay green — the 46th is tests/lint/relationshipPatchEdgeCarry.walker.test.js's source-anchor assertion grepping for the exact spelling 'ensureRelationshipState(edge || {' — update that anchor to the new spelling in the same change. The REJECTED alternative: aliasing channel_inferred -> neutral inside normalizeRelationshipType (imports a graph-plane token into the relationship plane's alias table — cross-plane coupling).
+CR-WZ5-B — THE STRICT FIX LANDS AT THE CALLERS. Type the three callers' edge parameters STRUCTURALLY (match the writer's declared param shape) so 'unknown' no longer flows into the typed 4th param. NEVER widen the writer's contract back toward unknown/any; never use {any} (the any-cast ratchet catches it and is right to); remember a JSDoc @param that merely restates an inline cast is a new any-hole for zero information.`
+
+const BUILD_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WZ-5r REPAIR IMPLEMENTER. Three pieces, in order:
+
+PIECE R1 — THE CURE (CR-WZ5-A). Apply the typedEdge vocabulary closure in applyRelationshipPatch exactly as ruled. Update the walker's source anchor. Add permanent pins INSIDE tests/domain/relationshipPatchGhostWrite.test.js:
+  (a) THE REPRO PIN: absent record + edge {relationshipType:'channel_inferred'} (plus realistic from/to/id) -> the persisted record's relationshipType === 'neutral' and IS a RELATIONSHIP_DEFAULTS key. Run it in BOTH polarities of the outcome sign.
+  (b) THE VOCABULARY-CLOSURE PIN: drive the REAL pipeline (simulateCampaignWorldPulse or the same entry the same-seed harness uses) on a fixture whose regional graph MINTS inferred channels (>=4 settlements; the verifier proved 4 settlements + one extra allied/rival pair suffices); after the drive assert EVERY worldState.relationshipStates[*].relationshipType is a RELATIONSHIP_DEFAULTS key, AND assert NON-VACUITY with an executed count: at least one applyRelationshipPatch call arrived with an absent record and an edge whose raw relationshipType was 'channel_inferred' (count it — instrument via a test-local wrapper/spy or assert the graph contains channel_inferred edges AND the corresponding keys were absent pre-drive then materialized post-drive). A pin that cannot prove it exercised the path is the exact defect that let this leak land — do not re-commit it.
+  (c) THE MUTANT: in a temp worktree, revert typedEdge back to edge — pins (a)+(b) must RED. Also re-run WZ-5's existing mutants: re-open the empty-edge baseline (6 reds expected across the three suites); drop a caller's 4th argument (census reds naming the site).
+
+PIECE R2 — STRICT TRUTH (CR-WZ5-B). Fix the three TS2345s at razingExecution.js(~932), relationshipEvolution.js(~366), warPeaceRefusal.js(~198) by typing the callers' edge params structurally. Then run the REAL gate npm run typecheck:domain:strict (gate-tail) on the clean tree: it must print GREEN. The ceiling stands at 1313 only if honestly met; if the honest count differs, set the ceiling to the measured number and DISCLOSE the arithmetic in your report. Zero per-file regressions vs baselines. No new any-cast holes (run that ratchet too; warDeployment.js 17-vs-16 is pre-existing and NOT yours).
+
+PIECE R3 — THE LEDGER TELLS THE TRUTH. In the queue doc that e36588c7 edited (git show e36588c7 --name-only to find it): append a correction to the WZ-5 row — the WR-8 CLOSES declaration was PREMATURE; verification REJECTED it 2026-08-04 on the channel_inferred vocabulary leak + a strict red; WR-8 re-declares CLOSED at THIS lane's commits with the two CR rulings named. Append CR-WZ5-A and CR-WZ5-B to docs/FABLE_VALIDATION_QUEUE.md (chair rulings, vetoable, with one-line rationale each). New commits only — NEVER amend or rewrite the existing three commits.
+
+THE GATE BAR (all executed, numbers quoted):
+1. SAME-SEED, PROVENANCE-COVERING: whole-pipeline hash, 3 rule sets x 2 seeds x 24 ticks, clock keys stripped, each tree run TWICE with a negative control (THE CLOCK LAW), at the repair HEAD vs base — BYTE-IDENTICAL to base hash 25be40a639383aa026f7352250a478b785ab5927217c06daa22c5190408b468c in ALL SIX cells, on a fixture that MINTS channel_inferred edges (assert non-vacuity in the harness run too).
+2. Suites: relationshipPatchGhostWrite (now with the new pins), relationshipPatchEdgeCarry.walker 3/3 with the updated anchor, razingWitnessWr8 22/22, believedRazingCasusWr8 14/14, plus the 14 probe-named ghost-write suites (the 214-test set).
+3. typecheck:domain:strict GREEN; any-cast ratchet unchanged; eslint clean on every touched source.
+4. npm run build + prerender + npm run smoke:boot PASS (gate-tail).
+5. tests/lint failure set == the base 11-file/32-test set, no new members.
+6. Size ratchets: every touched file measured; no ceiling crossed.
+7. Byte-scan every authored file; tests/fixtures untouched; V4C WIP preserved and never staged; STAGED-SET receipt quoted for every commit.
+
+STOP CONDITIONS (report, do not improvise): any same-seed cell differs post-cure; strict cannot reach green without touching the writer's contract or a V4C-held file; the fixture cannot reach the writer through a channel_inferred edge.
+
+RETURN (raw data, not prose for a human): {lane:'WZ-5r', commits:[...], gates:[...], stopReports:[...], notes:'...'} — notes covers what you changed and why, any deviation from this brief, and the honest strict arithmetic.`
+
+phase('Build')
+const r = await agent(BUILD_BRIEF, {
+  label: 'wz5r:repair',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WZ-5r ADVERSARIAL VERIFIER. The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust NOTHING in that report. Re-execute everything yourself at the committed HEAD on a clean tree (build your own fixtures — your own topology, your own DOTTED prefix-adversarial settlement ids, and a regional graph that MINTS channel_inferred inferred channels; the previous verifier's 4-settlements-plus-one-extra-allied/rival-pair recipe works):
+1. THE REPRO at base (653be592 or the pre-WZ5 base) and at HEAD: absent record + edge {relationshipType:'channel_inferred'} -> base persists 'neutral'; HEAD must ALSO persist 'neutral', in-vocabulary true. If HEAD persists the raw token, REJECT immediately.
+2. YOUR OWN same-seed whole-pipeline harness: 3 rule sets x 2 seeds x 24 ticks, clock keys stripped, each tree run TWICE + negative control, provenance-covering fixture with an EXECUTED non-vacuity count (>=1 absent-record write through a channel_inferred edge during the drive). ALL SIX cells byte-identical to base hash 25be40a639383aa026f7352250a478b785ab5927217c06daa22c5190408b468c.
+3. npm run typecheck:domain:strict via gate-tail on the clean committed tree: GREEN, and the ceiling honest (re-derive the arithmetic; a tightened ceiling the code does not meet = REJECT). Per-file tsc is vacuum — only the project gate counts.
+4. The suites: relationshipPatchGhostWrite (incl. the new pins), edgeCarry walker with its updated anchor, razingWitnessWr8, believedRazingCasusWr8, the 214-test probe-named set. Quote counts.
+5. MUTANTS in a temp worktree: revert typedEdge -> edge (the new pins must RED); re-open the empty-edge baseline (the historic 6 reds must still fire); drop a caller's 4th arg (census reds naming the site).
+6. THE LEDGER: the queue row correction exists, names the rejection honestly, and the re-declaration points at real commits; CR-WZ5-A/CR-WZ5-B recorded in docs/FABLE_VALIDATION_QUEUE.md.
+7. Hygiene: scripts/mutation-coverage-manifest.json and mutation-sweep.sh UNTOUCHED by this lane; tests/fixtures untouched; V4C WIP preserved; byte-scan of authored files clean; build + prerender + smoke:boot PASS; tests/lint failure set == the base 11/32 set.
+8. PIECE 1 SPOT-CHECK: one arc run proving the casus still works end-to-end (emission -> curator -> feed -> read model -> mover) and the just-razing control still raises nothing.
+
+VERDICT: if and only if EVERY item holds with executed evidence, your verdict string must contain the exact words "WR-8 IS CLOSED". Otherwise REJECT with the executed evidence, minimal repro, and (if you can) a verified candidate cure.
+
+RETURN raw data: {lane:'WZ-5r verify', verdict:'...', findings:[...]}.`, {
+  label: 'wz5r:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { r, v }

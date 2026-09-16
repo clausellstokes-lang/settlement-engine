@@ -1,0 +1,38 @@
+export const meta = {
+  name: 'challenge-fitness-audit',
+  description: 'Measure how the architecture meets fraction-legibility and variety-width challenges',
+  phases: [{ title: 'Audit', detail: '3 evidence agents over minifold' }],
+}
+
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: evidence agent for the SettlementForge Fable chair (owner-authorized; see docs/START_HERE.md ledger branch). Tree: ${MF} (claude/composite-r4; dirty W1/carto files are expected and part of the surface). READ-ONLY: no edits, no commits, no golden re-records, no full gate; focused vitest runs allowed. Label findings CONFIRMED (executed/counted) or PLAUSIBLE (reasoned). Return structured data with file:line evidence; your text is data for the chair, not prose for a human.`
+
+const SCHEMA = {
+  type: 'object', required: ['findings'],
+  properties: {
+    findings: { type: 'array', items: { type: 'object',
+      required: ['item', 'verdict', 'evidence', 'confidence'],
+      properties: {
+        item: { type: 'string' },
+        verdict: { type: 'string', description: 'ENFORCED | CONVENTION-ONLY | INSTRUMENTED | GAP | GRADE:<A-F>' },
+        evidence: { type: 'string' },
+        confidence: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE'] },
+        detail: { type: 'string' },
+      } } },
+    summary: { type: 'string' },
+  },
+}
+
+phase('Audit')
+const results = await parallel([
+  () => agent(`${PRE}
+TASK: LEGIBILITY ENFORCEMENT CENSUS. The chair's question: for every law that governs how a receipt/news item reads, is it MACHINE-ENFORCED (a walker/lint/ratchet reds on violation) or CONVENTION-ONLY (docs + review)? Inventory precisely: (1) id presence on news entries — the walker exists? file+scope; (2) address-chain/named-settlement law — enforced where?; (3) WHAT_PHRASES + heraldRouting totality walkers — scope: do they cover ALL emission sites or a registry subset?; (4) significance/severity registration — enforced?; (5) THE KEY QUESTION: does ANY lint/walker forbid RAW NUMERIC LEAKAGE into reader-facing prose (float/percent/scalar interpolation into headline/summary/reason templates — the 'Severity 45%' / 'pressure01 0.73' class)? grep tests/lint and tests/design for anything prose-voice-shaped; check whether the no-raw-color visual lint has a prose sibling; (6) band-word vocabularies (magnitudeBandOf etc.) — is USING them mandatory anywhere or opt-in per author? Report each as ENFORCED (with the test file) or CONVENTION-ONLY (with the drift evidence — the 2026-08-01 register found raw scalars in eventProse.js:191, WizardNewsPanel.jsx:221, momentum.js:1166, supplyWebWarfare.js:431 — confirm these are exactly the surfaces NO instrument covers).`, { label: 'legibility-enforcement', phase: 'Audit', schema: SCHEMA }),
+
+  () => agent(`${PRE}
+TASK: VARIETY INSTRUMENTATION CENSUS. The chair's question: is 'the experienced fraction differs across worlds/replays' a MEASURED property or a hoped one? Inventory what exists: (1) powered distribution envelopes — how many registered, over WHAT (tests/helpers + the envelope roster; which measure story/event-kind DISTRIBUTIONS vs mechanism internals); (2) effect-reachability corpus gates (the EP program) — scope: how many effects proven firing, what classes lack coverage; (3) seed-family totality — enforced where; (4) INTER-WORLD DIVERGENCE: what instrument (if any) compares TWO seeds/worlds and asserts their story-mix/fates DIVERGE (the 30y soak had a divergent-fates check — find it, state exactly what it measures); (5) the eventTypeCounts/moverCounts soak envelope — does any assertion bound story-kind CONCENTRATION (a monotony detector), or did strategy-verb monotony get found by human reading?; (6) WR-9's endings-mix + deciding-term histogram — design-only or partially present in the v5 receipt schema already? Verdict per item: INSTRUMENTED (file+what it proves) or GAP (what a monotony/width instrument would need). Also state: which variety claims currently rest ONLY on the pending soak.`, { label: 'variety-instrumentation', phase: 'Audit', schema: SCHEMA }),
+
+  () => agent(`${PRE}
+TASK: BLIND RECEIPT GRADING — the retellability bar. Sample 20 reader-facing receipt/news templates ACROSS ERAS: at least 5 pre-2026-07 (older lanes: calamity, trade, faction, succession), 5 from waves C..K (routes charter/decay, brokerage stamps, institution status, demographics Herald lines), 5 war/peace (climb-down, treaty signing, war open, peace terms), 5 newest (W1 dirty files, wanderers, verdicts). For EACH: quote the actual emitted sentence shape (trace the template with realistic values), then grade A-F against THE BAR: 'a DM who saw ONLY this sentence, with no other context, could retell it at the table as a story beat — named actors, typed action, a reason, no engine vocabulary.' Grade harshly: raw numbers = C max; ids/jargon leaking = D; bookkeeping voice = D; missing names = F. Return per-template: file:line, the reconstructed sentence, GRADE:<A-F>, the one-line reason. End with the era-over-era pattern: is the newest work better or worse at the bar than the oldest (the chair suspects the newest drifts — confirm or refute with the sample).`, { label: 'receipt-grading', phase: 'Audit', schema: SCHEMA }),
+])
+
+return { results: results.filter(Boolean) }

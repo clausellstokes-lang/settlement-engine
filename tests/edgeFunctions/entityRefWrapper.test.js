@@ -12,6 +12,9 @@ import { describe, it, expect } from 'vitest';
 import {
   wrapEntityRefsInProse,
   collectEntityNameRefs,
+  collectPronounResolver,
+  normalizePronounTokens,
+  stripTokens,
   slugifyEntity as serverSlugify,
   factionIdFromName as serverFactionId,
 } from '../../supabase/functions/generate-narrative/entityRefWrapper.ts';
@@ -190,5 +193,118 @@ describe('collectEntityNameRefs', () => {
     });
     expect(refs.map(r => r.name)).toEqual(['Bo']);
     expect(refs[0].id).toBe('b'); // first id wins
+  });
+});
+
+// ── Pronoun links (the contract extension) ──────────────────────────────────
+// The clerk emits ⟦pronoun:<entityName>|<word>⟧ (name-anchored). The wrapper
+// validates each anchor against the real entity set and rewrites it to the stable
+// id — or unwraps it to plain text (fail-open). Names stay the server's job.
+
+describe('collectPronounResolver — mirrors the client index id set', () => {
+  it('resolves NPC / faction names and the settlement itself to their index ids', () => {
+    const s = sampleSettlement();
+    const { nameToId, linkableIds } = collectPronounResolver(s);
+    expect(nameToId.get('jon aldermere')).toBe(entityIdFor('npc', s.npcs[0]));
+    expect(nameToId.get('iron guild')).toBe(factionIdFromName('Iron Guild'));
+    // The settlement is linkable (owner order: "link to that settlement").
+    expect(nameToId.get('hollowmere')).toBe('hollowmere'); // no s.id → slug(name)
+    expect(linkableIds.has(factionIdFromName('Iron Guild'))).toBe(true);
+  });
+
+  it('is total on garbage', () => {
+    expect(() => collectPronounResolver(null)).not.toThrow();
+    expect(collectPronounResolver(null).linkableIds.size).toBe(0);
+  });
+});
+
+describe('normalizePronounTokens — validate + resolve + fail-open', () => {
+  const resolver = collectPronounResolver({
+    name: 'Hollowmere', id: 'settlement.hollowmere',
+    npcs: [{ id: 'npc.jon_aldermere', name: 'Jon Aldermere' }],
+    powerStructure: { factions: [{ faction: 'Iron Guild' }] },
+  });
+
+  it('rewrites a NAME anchor to the stable id (the clerk works in names)', () => {
+    const out = normalizePronounTokens('Jon holds the docks; ⟦pronoun:Jon Aldermere|he⟧ answers to no one.', resolver);
+    expect(out).toContain('⟦pronoun:npc.jon_aldermere|he⟧');
+  });
+
+  it('links a pronoun to the settlement itself', () => {
+    const out = normalizePronounTokens('The town endures; ⟦pronoun:Hollowmere|it⟧ feeds itself.', resolver);
+    expect(out).toContain('⟦pronoun:settlement.hollowmere|it⟧');
+  });
+
+  it('UNWRAPS an unknown anchor to the bare word (fail-open plain text)', () => {
+    expect(normalizePronounTokens('and ⟦pronoun:Nobody|he⟧ vanished', resolver)).toBe('and he vanished');
+  });
+
+  it('is idempotent: an already-resolved id anchor is kept verbatim', () => {
+    const once = normalizePronounTokens('x ⟦pronoun:Iron Guild|they⟧ y', resolver);
+    expect(once).toBe(normalizePronounTokens(once, resolver));
+    expect(once).toContain(`⟦pronoun:${factionIdFromName('Iron Guild')}|they⟧`);
+  });
+
+  it('leaves prose with no pronoun token untouched (and never throws)', () => {
+    expect(normalizePronounTokens('A quiet town.', resolver)).toBe('A quiet town.');
+    expect(() => normalizePronounTokens(42, resolver)).not.toThrow();
+  });
+});
+
+describe('wrapEntityRefsInProse — pronoun links end to end', () => {
+  function pronounSettlement() {
+    return {
+      name: 'Hollowmere', id: 'settlement.hollowmere',
+      thesis: 'Jon Aldermere holds the docks; ⟦pronoun:Jon Aldermere|he⟧ answers to the Iron Guild, and ⟦pronoun:Iron Guild|they⟧ own the coin.',
+      npcs: [{ id: 'npc.jon_aldermere', name: 'Jon Aldermere' }],
+      powerStructure: { factions: [{ faction: 'Iron Guild' }] },
+    };
+  }
+
+  it('resolves pronoun anchors to ids AND wraps names, both resolvable in the index', () => {
+    const s = pronounSettlement();
+    wrapEntityRefsInProse(s);
+    const refs = tokenizeProse(s.thesis).filter(x => x.type === 'ref');
+    const he = refs.find(r => r.verbatim && r.value === 'he');
+    const they = refs.find(r => r.verbatim && r.value === 'they');
+    expect(he.id).toBe(entityIdFor('npc', { id: 'npc.jon_aldermere', name: 'Jon Aldermere' }));
+    expect(they.id).toBe(factionIdFromName('Iron Guild'));
+    // The names in the same thesis are still wrapped as NAME links (not verbatim).
+    expect(refs.some(r => !r.verbatim && r.displayText === 'Jon Aldermere')).toBe(true);
+    // Every pronoun link resolves to a real card.
+    const index = buildDossierEntityIndex(pronounSettlement());
+    expect(index.resolve(he.id)).toBeTruthy();
+    expect(index.resolve(they.id)).toBeTruthy();
+  });
+
+  it('re-running is idempotent (no accumulation, ids preserved)', () => {
+    const s = pronounSettlement();
+    wrapEntityRefsInProse(s);
+    const once = s.thesis;
+    const s2 = { ...pronounSettlement(), thesis: once };
+    wrapEntityRefsInProse(s2);
+    expect(s2.thesis).toBe(once);
+  });
+
+  it('SANITIZES secret.what — the editable field stays raw (all tokens stripped)', () => {
+    const s = pronounSettlement();
+    s.npcs[0].secret = { what: 'A plot ⟦entity:npc.jon_aldermere|Jon Aldermere⟧ hides ⟦pronoun:Jon Aldermere|his⟧ coin.' };
+    wrapEntityRefsInProse(s);
+    expect(s.npcs[0].secret.what).toBe('A plot Jon Aldermere hides his coin.');
+    expect(s.npcs[0].secret.what).not.toMatch(/⟦/);
+  });
+
+  it('name-wrapping never reaches inside a kept pronoun token', () => {
+    const s = pronounSettlement();
+    wrapEntityRefsInProse(s);
+    // No nested ⟦ inside any token (pronoun tokens are frozen during name-wrapping).
+    expect(s.thesis).not.toMatch(/⟦[^⟧]*⟦/);
+  });
+});
+
+describe('stripTokens', () => {
+  it('collapses every entity/pronoun token to its display text', () => {
+    expect(stripTokens('⟦entity:npc.jon|Jon⟧ and ⟦pronoun:npc.jon|he⟧ left.')).toBe('Jon and he left.');
+    expect(stripTokens('no tokens here')).toBe('no tokens here');
   });
 });

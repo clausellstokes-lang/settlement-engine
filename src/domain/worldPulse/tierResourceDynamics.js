@@ -1,12 +1,44 @@
-import { institutionalCatalog } from '../../data/institutionalCatalog.js';
-import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
+import { clamp01 } from '../../kernel/math.js';
+import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../../data/constants.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
-import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
+import { RESOURCE_TO_CHAINS } from '../../data/supplyChainResourceIndex.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
+import {
+  nativeSemanticDepletedResourceKeys,
+  nativeSemanticResourceKeys,
+} from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './worldState.js';
+import { formatCount } from '../formatNumber.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
+// CL-0: every candidate family consults the per-domain change-authority policy.
+// authorityFor passes each site's legacy gate through VERBATIM under
+// routine/full autonomy (byte-identical), and forces 'proposal' under the new
+// dm_only/recommendations modes. Tier/resource candidates do NOT flow through
+// the evaluateWorldPulseRules choke point, so they consult the policy here.
+import { authorityFor } from './changeAuthorityPolicy.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
+import { reconcileProductionAfterResourceChange } from './resourceDynamicsKernel.js';
+// Phase 4 W-F4b (item 2b) — development fidelity: a chaotic-devout economy mis-RANKS
+// its value chains, acting on a NOISY ESTIMATE of resource pressure (suboptimal
+// expansions, late pivots, lingering on saturated chains). chaosPull 0 (lawful/neutral/
+// no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical; and with no injected rng the
+// term is inert, so every existing evaluateTierResourceDynamics caller is unchanged.
+import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
+// W-F8: the martial-readiness tilt on the value ranking — war-supply chains score higher
+// in a militarized town, civilian chains take an upkeep drag (guns-vs-butter, brake 1).
+// readinessOf 0 (no martial record) ⇒ both factors 1 ⇒ byte-identical.
+import { readinessOf, readinessValueTilt, readinessUpkeepDrag } from './martialReadiness.js';
+import { isWarSupplyResource } from './moralMartialLean.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+// WAVE P1a (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §7b) — THE VIABILITY LADDER'S ONE INPUT.
+// Design §0b is explicit that a density-driven demotion would be a SECOND WRITER on a
+// transition this module already owns, so the ladder arrives as an EXTRA INPUT to the
+// eligibility below and NEVER as a second lane. `tierViabilityOf` is a pure read; the
+// tier transition is still authored here and nowhere else. Dark (`demographicsEnabled`
+// absent, the virtual default) the input is not even computed.
+import { demographicsActive, tierViabilityOf } from './demographicsRates.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -15,10 +47,6 @@ import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 const RESOURCE_CITY_FLOOR_PRESSURE = 0.45;
 
 /** @param {any} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /** @param {any} tier */
 function tierRank(tier) {
@@ -48,122 +76,20 @@ function supportScore(pressureIdx, settlementId) {
   return clamp01(1 - (food * 0.22 + conflict * 0.24 + trade * 0.2 + legitimacy * 0.2 + disease * 0.14));
 }
 
-/** @param {any} tier */
-export function entriesForTier(tier) {
-  const tierCatalog = /** @type {any} */ (institutionalCatalog)[tier] || {};
-  const entries = [];
-  for (const [category, group] of Object.entries(tierCatalog)) {
-    for (const [name, spec] of Object.entries(group || {})) {
-      entries.push({ name, category, spec: spec || {} });
-    }
-  }
-  return entries;
-}
-
-/** @param {any} tier */
-function requiredInstitutionsForTier(tier) {
-  return entriesForTier(tier).filter(entry => entry.spec.required);
-}
-
-/** @param {any} name */
-export function catalogEntryByName(name) {
-  const needle = String(name || '').toLowerCase();
-  for (const tier of TIER_ORDER) {
-    const found = entriesForTier(tier).find(entry => entry.name.toLowerCase() === needle);
-    if (found) return { ...found, nativeTier: tier };
-  }
-  return null;
-}
-
-/** @param {import('../settlement.schema.js').SimSettlement} settlement */
-export function existingInstitutionNames(settlement) {
-  return new Set((settlement?.institutions || [])
-    .filter((/** @type {any} */ inst) => inst?.status !== 'removed' && !inst?._worldPulseInactive)
-    .map((/** @type {any} */ inst) => String(inst.name || '').toLowerCase()));
-}
-
-/** @param {any} name */
-function institutionId(name) {
-  return `institution.${stablePart(name)}`;
-}
-
-/**
- * @param {any} entry
- * @param {any} tier
- * @param {any} outcome
- */
-function newInstitution(entry, tier, outcome) {
-  return {
-    id: institutionId(entry.name),
-    name: entry.name,
-    category: entry.category,
-    status: 'active',
-    description: entry.spec.desc || '',
-    tags: Array.isArray(entry.spec.tags) ? [...entry.spec.tags] : [],
-    required: !!entry.spec.required,
-    _worldPulseTierAdded: true,
-    requiredForTier: tier,
-    createdByWorldPulseOutcomeId: outcome?.id || null,
-  };
-}
-
-/**
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {any} toTier
- */
-function promotionAdditions(settlement, toTier) {
-  const names = existingInstitutionNames(settlement);
-  return requiredInstitutionsForTier(toTier).filter(entry => !names.has(entry.name.toLowerCase()));
-}
-
-/**
- * @param {any} inst
- * @param {any} toTier
- */
-function shouldRemoveForDemotion(inst, toTier) {
-  if (!inst || inst.status === 'removed' || inst._worldPulseInactive) return false;
-  if (inst._worldPulseTierAdded && inst.requiredForTier && !tierAtLeast(toTier, inst.requiredForTier)) return true;
-  const entry = catalogEntryByName(inst.name);
-  if (!entry) return false;
-  if (entry.spec.minTier && !tierAtLeast(toTier, entry.spec.minTier)) return true;
-  if (entry.spec.required && !tierAtLeast(toTier, entry.nativeTier)) return true;
-  return false;
-}
-
-/** @param {any} inst */
-function demotionFateForInstitution(inst) {
-  const entry = catalogEntryByName(inst?.name);
-  const category = String(inst?.category || entry?.category || '').toLowerCase();
-  const text = `${inst?.name || ''} ${(inst?.tags || []).join(' ')} ${category}`.toLowerCase();
-  if (/watch|guard|garrison|barrack|military|defense|fort|wall/.test(text)) return { fate: 'reduced_to_watch_post', status: 'remnant' };
-  if (/academy|library|sage|wizard|mage|arcane|college|school/.test(text)) return { fate: 'abandoned', status: 'removed' };
-  if (/market|guild|bank|merchant|warehouse|trade|craft|smith|mill/.test(text)) return { fate: 'privatized', status: 'remnant' };
-  if (/temple|church|shrine|monastery|religious|divine/.test(text)) return { fate: 'survives_as_remnant', status: 'remnant' };
-  if (/court|council|hall|bureau|civic|legal|government|administration/.test(text)) return { fate: 'downsized', status: 'remnant' };
-  if (/thief|smuggl|criminal|gang/.test(text)) return { fate: 'captured_by_local_powers', status: 'remnant' };
-  return { fate: 'hollowed_out', status: 'remnant' };
-}
-
-/**
- * @param {any} inst
- * @param {any} outcome
- * @param {any} toTier
- */
-function deactivateForDemotion(inst, outcome, toTier) {
-  const fate = demotionFateForInstitution(inst);
-  return {
-    ...inst,
-    status: fate.status,
-    _worldPulseInactive: true,
-    worldPulseFate: fate.fate,
-    demotedByWorldPulseOutcomeId: outcome?.id || null,
-    removedByWorldPulseOutcomeId: fate.status === 'removed' ? (outcome?.id || null) : inst.removedByWorldPulseOutcomeId,
-    removedReason: `Demoted below ${inst.requiredForTier || catalogEntryByName(inst.name)?.nativeTier || 'higher'} tier support; fate: ${fate.fate.replace(/_/g, ' ')}.`,
-    remnantReason: fate.status === 'remnant'
-      ? `No longer fully supported after demotion to ${toTier}; survives as ${fate.fate.replace(/_/g, ' ')}.`
-      : inst.remnantReason,
-  };
-}
+// ── Tier-outcome APPLIER — extracted to ./tierOutcomeApply.js ───────────────
+// The applier + its catalog helpers (entriesForTier, catalogEntryByName,
+// existingInstitutionNames, promotion/demotion surgery) moved VERBATIM to the
+// dependency-light leaf tierOutcomeApply.js (W2b byte-budget extraction): the
+// SHIFT_TIER event handler reuses the single-source applier from the EAGER
+// mutation router, and importing it from THIS module dragged the whole
+// evaluation machinery (canonicalAccessors, supplyChainData, goodsCatalog,
+// worldState, simulationRules, resourceTaxonomy) into the first-paint closure.
+// Imported + re-exported verbatim here so every sim consumer is unchanged.
+import {
+  entriesForTier, catalogEntryByName, existingInstitutionNames,
+  applyTierOutcomeToSettlement,
+} from './tierOutcomeApply.js';
+export { entriesForTier, catalogEntryByName, existingInstitutionNames, applyTierOutcomeToSettlement };
 
 /**
  * @param {any} direction
@@ -177,10 +103,16 @@ function requiredStreak(direction, targetTier) {
 }
 
 /**
+ * THE ONE TIER-TRANSITION ELIGIBILITY (promotion and demotion both). Wave P1a extends
+ * its INPUTS rather than forking a second lane, per design §0b.
+ *
  * @param {any} item
  * @param {any} pressureIdx
+ * @param {import('./demographicsRates.js').TierViability|null} [demography] the wave-P
+ *   viability read, supplied ONLY when `demographicsEnabled` is lit. NULL means dark,
+ *   and every line that consults it below falls back to the legacy expression exactly.
  */
-function tierEligibility(item, pressureIdx) {
+function tierEligibility(item, pressureIdx, demography = null) {
   const settlement = item.settlement || {};
   const currentTier = settlement.tier || popToTier(settlement.population || 0);
   const rank = tierRank(currentTier);
@@ -188,8 +120,19 @@ function tierEligibility(item, pressureIdx) {
   const support = supportScore(pressureIdx, item.id);
   const nextTier = TIER_ORDER[rank + 1] || null;
   const previousTier = TIER_ORDER[rank - 1] || null;
+  // ── EARNED ASCENSION (design §5, wave P1a) ────────────────────────────────────
+  // Lit, the population must ALREADY BE THERE: promotion needs the next tier's whole
+  // authored minimum, not 92 percent of it. This is the paired half of removing the
+  // promotion mint in tierOutcomeApply.js, and the two MUST travel together. The 0.92
+  // window exists precisely because the mint covered the gap it opens: promote a
+  // settlement at 92 percent of the floor without minting the difference and it lands
+  // under its own tier's minimum, where `strainedBelowFloor` below can demote it on the
+  // very next tick, which is the promote/demote churn loop the mint was built to stop.
+  // Requiring the full floor closes the gap at the source instead of papering it with
+  // people who were never born (law 4: damage transmutes, people account).
+  const promotionWindow = demography ? 1 : 0.92;
 
-  if (nextTier && pop >= (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || Infinity) * 0.92 && support >= 0.62) {
+  if (nextTier && pop >= (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || Infinity) * promotionWindow && support >= 0.62) {
     return {
       direction: 'promotion',
       fromTier: currentTier,
@@ -204,14 +147,27 @@ function tierEligibility(item, pressureIdx) {
   const hardPopulationFailure = previousTier && pop < currentMin * 0.82;
   const structuralFailure = previousTier && support <= 0.25;
   const strainedBelowFloor = previousTier && pop < currentMin && support < 0.45;
-  if (hardPopulationFailure || structuralFailure || strainedBelowFloor) {
+  // ── THE VIABILITY LADDER'S INPUT (design §7b, wave P1a) ───────────────────────
+  // Nonzero population and functioning-settlement status are different facts. The three
+  // legacy tests all ask about the HEAD COUNT and the support vector; this one asks
+  // whether the place can still be a settlement of this grade at all, by comparing the
+  // effective bound min(K_food, D_tier) against the tier's own population floor. A town
+  // whose granaries and ground together hold fewer souls than a town needs is failing
+  // whatever its current census says, and it descends the ladder toward the terminal
+  // lane instead of standing frozen at three hundred people forever. Dark, `demography`
+  // is null and this term is exactly false.
+  const demographicFailure = !!previousTier && demography != null && demography.nonviable === true;
+  if (hardPopulationFailure || structuralFailure || strainedBelowFloor || demographicFailure) {
+    const demographicOnly = demographicFailure && !hardPopulationFailure && !structuralFailure && !strainedBelowFloor;
     return {
       direction: 'demotion',
       fromTier: currentTier,
       toTier: previousTier,
       support,
       severity: clamp01((1 - support) * 0.6 + (currentMin ? Math.max(0, 1 - pop / currentMin) : 0) * 0.4),
-      reason: `${currentTier} is no longer supported by population, economy, defense, or legitimacy conditions.`,
+      reason: demographicOnly && demography
+        ? `${currentTier} can no longer be fed or housed at its own scale: the ${demography.binding === 'granary' ? 'granaries' : 'walls'} hold about ${formatCount(demography.bound)} souls, under the ${formatCount(currentMin)} a ${currentTier} needs.`
+        : `${currentTier} is no longer supported by population, economy, defense, or legitimacy conditions.`,
     };
   }
 
@@ -227,11 +183,21 @@ function tierEligibility(item, pressureIdx) {
  * @param {any} item
  * @param {any} drift
  * @param {any} tick
- * @param {{ majorChangesRequireProposal?: boolean }} rules
+ * @param {{ majorChangesRequireProposal?: boolean, demographicsEnabled?: boolean }} rules
+ *   `demographicsEnabled` is the wave-P virtual flag, declared on THIS typedef (the
+ *   owning surface) rather than reached for through a cast.
  */
 function tierCandidate(item, drift, tick, rules) {
   const minimum = requiredStreak(drift.direction, drift.toTier);
   if (drift.streak < minimum) return null;
+  // ── LAW 4, STAMPED ON THE OUTCOME (design §1 law 4, wave P1a) ─────────────────
+  // A tier change may be parked as a proposal and applied MANY ticks later, and the
+  // applier (tierOutcomeApply.js) receives only (settlement, outcome) with no access to
+  // the rules. So the conservation law in force when the candidate was minted travels
+  // WITH it, as a conditional key that is simply absent when dark. Absent means the
+  // legacy unconserved promotion mint, which a golden depends on; present means the
+  // promotion raises the tier and touches nobody's head count.
+  const populationConserved = rules.demographicsEnabled === true;
   const chance = clamp01(0.18 + (drift.streak - minimum + 1) * 0.13 + drift.severity * 0.24);
   return {
     id: `candidate.tier.${drift.direction}.${stablePart(item.id)}.${tick}`,
@@ -245,10 +211,15 @@ function tierCandidate(item, drift, tick, rules) {
     // Honor majorChangesRequireProposal, consistent with resource_depletion in
     // this module: a tier change stays a DM proposal under the conservative
     // default (flag on), and auto-applies only when a campaign opts out of
-    // proposal gating (flag off, e.g. dramatic_campaign).
-    applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto',
+    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate
+    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;
+    // forced to proposal under dm_only/recommendations).
+    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),
     headline: `${item.name || item.id} may ${drift.direction === 'promotion' ? 'rise' : 'fall'} to ${drift.toTier}`,
-    summary: `${item.name || item.id} has met ${drift.direction} eligibility for ${drift.streak} advancement(s).`,
+    // Eligibility is conjunctive in substance: population proximity/failure
+    // and the support vector jointly decide a tier drift. Name both here so
+    // the DM never reads the streak as a population-only threshold.
+    summary: `${item.name || item.id} has met combined population and support ${drift.direction} eligibility for ${drift.streak} consecutive advances.`,
     reasons: [
       drift.reason,
       `Minimum streak ${minimum}; current streak ${drift.streak}.`,
@@ -259,6 +230,7 @@ function tierCandidate(item, drift, tick, rules) {
       fromTier: drift.fromTier,
       toTier: drift.toTier,
       direction: drift.direction,
+      ...(populationConserved ? { populationConserved: true } : {}),
     },
     proposalPayload: {
       kind: 'tier_change',
@@ -276,12 +248,28 @@ function tierCandidate(item, drift, tick, rules) {
   };
 }
 
-/** @param {import('../settlement.schema.js').SimSettlement} settlement */
+/**
+ * Native resources eligible for the built-in depletion/recovery taxonomy.
+ *
+ * The top-level roster is a legacy save shape. Once config owns either roster
+ * sidecar, unioning that legacy field back in would let a custom namesake
+ * masquerade as its built-in counterpart.
+ *
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @returns {string[]}
+ */
 function resourceList(settlement) {
-  return [
-    ...(settlement?.config?.nearbyResources || []),
-    ...(settlement?.nearbyResources || []),
-  ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
+  const config = settlement?.config || {};
+  const source = (
+    Array.isArray(config.nearbyResources)
+    || Array.isArray(config.nearbyResourcesNative)
+  )
+    ? nativeSemanticResourceKeys(config)
+    : /** @type {unknown[]} */ (settlement?.nearbyResources || []);
+  return source
+    .filter(Boolean)
+    .map(value => String(value))
+    .filter((value, index, values) => values.indexOf(value) === index);
 }
 
 /**
@@ -289,10 +277,33 @@ function resourceList(settlement) {
  * @param {any} resource
  */
 function resourceState(settlement, resource) {
-  const explicit = settlement?.config?.nearbyResourcesState?.[resource];
+  const config = settlement?.config || {};
+  const wanted = String(resource).toLowerCase();
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config)
+    .some(key => String(key).toLowerCase() === wanted);
+  // Current settlements carry exact native-depletion authority. The mixed
+  // state map can truthfully remain "depleted" for an exact custom namesake
+  // while the native resource is abundant, so native simulation must not read
+  // it once this sidecar exists.
+  if (Array.isArray(config.nearbyResourcesNativeDepleted)) {
+    return nativeDepleted ? 'depleted' : 'allow';
+  }
+  const explicit = config.nearbyResourcesState?.[resource];
   if (explicit) return explicit;
-  const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
-  return depleted.has(resource) ? 'depleted' : 'allow';
+  if (
+    !Array.isArray(config.nearbyResources)
+    && !Array.isArray(config.nearbyResourcesNative)
+  ) {
+    return /** @type {unknown[]} */ (
+      Array.isArray(settlement?.nearbyResourcesDepleted)
+        ? settlement.nearbyResourcesDepleted
+        : []
+    )
+      .some(key => String(key).toLowerCase() === wanted)
+      ? 'depleted'
+      : 'allow';
+  }
+  return nativeDepleted ? 'depleted' : 'allow';
 }
 
 /**
@@ -413,14 +424,25 @@ export function resourceEconomicRole(settlement, resource) {
  * @param {any} rules
  * @param {any} tick
  * @param {any} previousDrift
+ * @param {{ fork?: (key: string) => { random: () => number } }|null} [rng]  W-F4b: the pulse PRNG (DI'd) — enables the development-fidelity term; absent ⇒ inert.
  */
-function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
+function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rng = null) {
   const settlement = item.settlement || {};
   const resources = resourceList(settlement);
   if (!resources.length) return [];
   const rank = tierRank(settlement.tier);
   const pressureScore = resourcePressure(item, pressureIdx);
   const multiplier = intensityMultiplier(rules);
+  // W-F4b item 2b: the settlement's development-fidelity pull — 0 (⇒ every perceived
+  // pressure equals the true pressure, byte-identical) unless it carries a chaotic-devout
+  // patron with a projected piety record. Computed once per settlement.
+  const chaosPull = rng ? chaosPullOf(settlement) : 0;
+  // W-F8: the militarization state — 0 (both readiness factors 1, byte-identical) unless a
+  // projected martial record is present. rng-gated like chaosPull so rng-less estimate
+  // paths stay byte-identical. Precomputed per settlement (the value tilt / upkeep drag).
+  const readiness01 = rng ? readinessOf(settlement) : 0;
+  const warSupplyTilt = readiness01 > 0 ? readinessValueTilt(settlement) : 1;   // ≥1 on war-supply chains
+  const upkeepDrag = readiness01 > 0 ? readinessUpkeepDrag(settlement) : 1;     // ≤1 on civilian chains
   const out = [];
 
   for (const resource of resources.slice(0, 8)) {
@@ -428,8 +450,29 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
     const economicRole = resourceEconomicRole(settlement, resource);
     const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
-    const effectivePressure = clamp01(pressureScore + tradeLoad);
-    if (state !== 'depleted' && (effectivePressure >= 0.64 || (rank >= tierRank('city') && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE))) {
+    // W-F8 readiness tilt on the VALUE ranking: a militarized town leans into war-supply
+    // chains (ore/smelting/weapons/leather/horses/timber — WAR_SUPPLY_CHAINS) and lets
+    // civilian chains take the garrison-upkeep drag. Factor 1 when no martial record.
+    const readinessTilt = readiness01 > 0 ? (isWarSupplyResource(resource) ? warSupplyTilt : upkeepDrag) : 1;
+    // The chaotic-devout economy acts on a NOISY per-chain estimate of pressure (its
+    // value ranking) — so it over/under-develops the wrong chains. Seeded per (site,
+    // tick,settlement,resource); factor EXACTLY 1 (byte-identical) when chaosPull ≤ 0.
+    const perceivedNoise = fidelityFactor({ rng, site: 'development', tick, cid: String(item.id), decisionKey: `chain:${resource}`, chaosPull });
+    const effectivePressure = clamp01((pressureScore + tradeLoad) * perceivedNoise * readinessTilt);
+    // The same noisy estimate governs the RECOVERY decision (a chaotic economy is late
+    // to reopen a saturated chain). Equals pressureScore exactly when chaosPull ≤ 0.
+    const perceivedPressureScore = clamp01(pressureScore * perceivedNoise * readinessTilt);
+    if (
+      taxonomy.randomDepletionEligible !== false
+      && state !== 'depleted'
+      && (
+        effectivePressure >= 0.64
+        || (
+          rank >= tierRank('city')
+          && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE
+        )
+      )
+    ) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({
         id: `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
@@ -440,7 +483,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         targetSaveId: item.id,
         severity,
         probability: clamp01(0.05 + severity * 0.34),
-        applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
+        applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'),
         headline: `${resource.replace(/_/g, ' ')} may be depleted`,
         summary: `${item.name || item.id} is consuming ${resource.replace(/_/g, ' ')} faster than it recovers.`,
         reasons: [
@@ -452,13 +495,36 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         metadata: { resource, fromState: state, toState: 'depleted', economicRole, resourceTaxonomy: taxonomy },
         conflictTags: [`resource:${item.id}:${resource}`],
       });
-    } else if (state === 'depleted' && ((pressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
+    } else if (state === 'depleted' && (
+      (perceivedPressureScore <= 0.32 && economicRole !== 'primary_export')
+      // A depleted PRIMARY-EXPORT anchor was a permanent one-way ratchet — carved
+      // out of the very quiet-recovery path built to END permanent ratchets, and
+      // because canonExports is generation-frozen the carve-out never lifts. Export
+      // demand justifies SLOWER recovery, not NEVER: allow it under a DEEPER
+      // sustained calm (the quietRecovery threshold ≤0.2) so it rides the slow 0.02
+      // manual path. [worldpulse-religion-trade-8]
+      || (perceivedPressureScore <= 0.2 && economicRole === 'primary_export')
+      || previousDrift?.direction === 'demotion'
+    )) {
+      // CADENCE DAMPING (E4-2b): exhaustibles (iron/stone/gem/salt/clay and
+      // strategic resources) return canRecover:false from the taxonomy — once
+      // depleted they could never come back, so a calm settlement's resources
+      // only ever ratcheted down. A SUSTAINED CALM (very low pressure) now opens
+      // a slow, event-gated recovery for them: prospecting reopens seams,
+      // substitution and trade backfill demand. It is damped (low probability)
+      // and bounded (quiet only) — calm becomes gradual recovery, not permanent
+      // decay — while a resource under any real pressure still cannot regrow.
+      const quietRecovery = perceivedPressureScore <= 0.2;
       const recovery = canRecoverResource(resource, settlement, {
         demotion: previousDrift?.direction === 'demotion',
-        pressureScore,
+        pressureScore: perceivedPressureScore,
+        quietRecovery,
       });
       if (!recovery.canRecover) continue;
-      const severity = clamp01((1 - pressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
+      // Exhaustible/magical recovery is deliberately slow — a fraction of the
+      // renewable rate. It represents years of prospecting, not a season's regrowth.
+      const slow = recovery.taxonomy.recoveryMode === 'manual' || recovery.taxonomy.recoveryMode === 'requires_high_magic';
+      const severity = clamp01((1 - perceivedPressureScore) * 0.5 + (previousDrift?.direction === 'demotion' ? 0.22 : 0));
       out.push({
         id: `candidate.resource.recover.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
         type: 'resource',
@@ -467,12 +533,12 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
         ruleFamily: 'resource',
         targetSaveId: item.id,
         severity,
-        probability: clamp01(0.08 + severity * 0.34),
-        applyMode: 'auto',
+        probability: clamp01((slow ? 0.02 : 0.08) + severity * (slow ? 0.1 : 0.34)),
+        applyMode: authorityFor(rules, 'resource_recovery', 'auto'),
         headline: `${resource.replace(/_/g, ' ')} may recover`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [
-          `Resource pressure ${pressureScore.toFixed(2)} is low enough for recovery.`,
+          `Resource pressure ${perceivedPressureScore.toFixed(2)} is low enough for recovery.`,
           recovery.reason,
           previousDrift?.direction === 'demotion' ? 'Demotion pressure implies reduced consumption.' : null,
           economicRole !== 'local_resource' ? `Economic role: ${economicRole.replace(/_/g, ' ')}.` : null,
@@ -495,6 +561,9 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift) {
 export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
+  // W-F4b item 2b: the pulse PRNG, DI'd via context (kernel passes it). Absent ⇒ the
+  // development-fidelity term is inert ⇒ every non-kernel caller stays byte-identical.
+  const rng = context.rng && typeof context.rng.fork === 'function' ? context.rng : null;
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
   const driftBySettlement = /** @type {any} */ ({});
@@ -505,9 +574,20 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
     .filter((/** @type {any} */ proposal) => proposal?.status === 'pending' && proposal?.outcome?.tierChange?.saveId != null)
     .map((/** @type {any} */ proposal) => String(proposal.outcome.tierChange.saveId)));
 
+  // WAVE P1a: the viability read is computed ONLY when the demographic engine is lit,
+  // so a dark campaign never derives K_food, never touches the food ledger, and cannot
+  // pay a byte for a lane it does not run.
+  const demographicsLit = demographicsActive({ simulationRules: rules });
+
   for (const item of snapshot?.settlements || []) {
     const previous = settlementTickStates[item.id] || {};
-    const eligibility = rules.tierDriftEnabled ? tierEligibility(item, pressureIdx) : null;
+    const eligibility = rules.tierDriftEnabled
+      ? tierEligibility(
+        item,
+        pressureIdx,
+        demographicsLit ? tierViabilityOf(item.settlement, worldState, String(item.id)) : null,
+      )
+      : null;
     let tierDrift = null;
     if (eligibility) {
       const prior = previous.tierDrift || {};
@@ -527,7 +607,7 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
     driftBySettlement[item.id] = tierDrift;
 
     if (rules.resourceDriftEnabled) {
-      candidates.push(...resourceCandidatesFor(item, pressureIdx, rules, tick, tierDrift));
+      candidates.push(...resourceCandidatesFor(item, pressureIdx, rules, tick, tierDrift, rng));
     }
   }
 
@@ -542,153 +622,79 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  */
-export function applyTierOutcomeToSettlement(settlement, outcome) {
-  if (!settlement || !outcome?.tierChange) return settlement;
-  const { fromTier, toTier, direction } = outcome.tierChange;
-  // Self-contained re-verify (same contract as applyInstitutionLifecycleOutcome):
-  // proposals re-apply this from the stored outcome, possibly many ticks after
-  // the candidate fired. A stale fromTier must not rewind the tier — that runs
-  // roster surgery in the wrong direction and writes a bogus tierHistory entry.
-  const currentTier = settlement.tier || popToTier(settlement.population || 0);
-  if (currentTier !== fromTier) return settlement;
-  let institutions = Array.isArray(settlement.institutions) ? [...settlement.institutions] : [];
-  const institutionFates = /** @type {any[]} */ ([]);
-
-  if (direction === 'promotion') {
-    // A required institution may already exist as an inactive remnant (e.g.
-    // closed by the institution lifecycle during a lean stretch, or left
-    // behind by an earlier demotion) — promotionAdditions cannot see those
-    // because existingInstitutionNames excludes them. Reactivate the remnant
-    // instead of appending a same-name duplicate.
-    const additions = promotionAdditions(settlement, toTier);
-    const reactivated = new Set();
-    institutions = institutions.map(inst => {
-      const match = additions.find(entry => entry.name.toLowerCase() === String(inst?.name || '').toLowerCase());
-      if (!match || !(inst.status === 'removed' || inst._worldPulseInactive)) return inst;
-      reactivated.add(match.name.toLowerCase());
-      institutionFates.push({
-        name: inst.name,
-        category: inst.category || match.category,
-        fate: 'reactivated',
-        tier: toTier,
-      });
-      return {
-        ...inst,
-        status: 'active',
-        impairments: [],
-        _worldPulseInactive: false,
-        _worldPulseEconomyClosed: false,
-        worldPulseFate: null,
-        required: true,
-        requiredForTier: toTier,
-        _worldPulseTierAdded: true,
-        createdByWorldPulseOutcomeId: inst.createdByWorldPulseOutcomeId || outcome?.id || null,
-      };
-    });
-    const fresh = additions
-      .filter(entry => !reactivated.has(entry.name.toLowerCase()))
-      .map(entry => {
-        institutionFates.push({
-          name: entry.name,
-          category: entry.category,
-          fate: 'added',
-          tier: toTier,
-        });
-        return newInstitution(entry, toTier, outcome);
-      });
-    institutions = [...institutions, ...fresh];
-  } else {
-    institutions = institutions.map(inst => {
-      if (!shouldRemoveForDemotion(inst, toTier)) return inst;
-      institutionFates.push({
-        name: inst.name,
-        category: inst.category || catalogEntryByName(inst.name)?.category || null,
-        fate: demotionFateForInstitution(inst).fate,
-        tier: toTier,
-      });
-      return deactivateForDemotion(inst, outcome, toTier);
-    });
-  }
-
-  // Promotion nudges population to at least the new tier's floor. Eligibility
-  // promotes at pop >= nextTier.min * 0.92, so without this a just-promoted
-  // settlement sits below its own tier's currentMin and can trip
-  // `strainedBelowFloor` (pop < currentMin && support < 0.45) on the very next
-  // tick — a promote/demote churn loop at the boundary. Demotion leaves
-  // population untouched (the population already fell; the tier is catching up).
-  const promotedFloor = /** @type {any} */ (POPULATION_RANGES)[toTier]?.min || 0;
-  const currentPopulation = Math.round(Number(settlement.population) || 0);
-  const nextPopulation = direction === 'promotion'
-    ? Math.max(currentPopulation, promotedFloor)
-    : currentPopulation; // demotion leaves population untouched (already the rounded current value)
-  // The anti-churn floor bump is a deliberate (unconserved) mint — leave a
-  // populationHistory breadcrumb (same shape as applyPopulationOutcomeToSettlement's)
-  // so the chronicle/audit surfaces can see it instead of an invisible population jump.
-  const floorBump = direction === 'promotion' ? Math.max(0, nextPopulation - currentPopulation) : 0;
-
-  return {
-    ...settlement,
-    tier: toTier,
-    population: nextPopulation,
-    ...(floorBump > 0 ? {
-      populationHistory: [
-        ...(Array.isArray(settlement.populationHistory) ? settlement.populationHistory.slice(-11) : []),
-        {
-          tick: outcome.generatedAtTick ?? outcome.tick ?? null,
-          delta: floorBump,
-          population: nextPopulation,
-          reason: `Promotion to ${toTier} draws settlers up to the tier's population floor.`,
-          outcomeId: outcome.id,
-        },
-      ],
-    } : {}),
-    config: {
-      ...(settlement.config || {}),
-      tier: toTier,
-      settType: toTier,
-    },
-    institutions,
-    tierHistory: [
-      ...(Array.isArray(settlement.tierHistory) ? settlement.tierHistory.slice(-11) : []),
-      {
-        fromTier,
-        toTier,
-        direction,
-        outcomeId: outcome.id,
-        institutionFates,
-      },
-    ],
-    institutionHistory: [
-      ...(Array.isArray(settlement.institutionHistory) ? settlement.institutionHistory.slice(-23) : []),
-      ...institutionFates.map(fate => ({
-        ...fate,
-        outcomeId: outcome.id,
-        reason: `World Pulse ${direction} to ${toTier}.`,
-      })),
-    ].slice(-24),
-  };
-}
-
-/**
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {any} outcome
- */
 export function applyResourceOutcomeToSettlement(settlement, outcome) {
   if (!settlement || !outcome?.resourcePatch) return settlement;
   const { resource, state } = outcome.resourcePatch;
   const config = settlement.config || {};
+  const normalizedResource = String(resource).toLowerCase();
   const resourceStateMap = { ...(config.nearbyResourcesState || {}) };
-  resourceStateMap[resource] = state;
-  const depletedSet = new Set(config.nearbyResourcesDepleted || settlement.nearbyResourcesDepleted || []);
-  if (state === 'depleted') depletedSet.add(resource);
-  else depletedSet.delete(resource);
+  const customDepletedNames = (
+    config.nearbyResourceDefinitionsDepleted || []
+  )
+    .map((
+      /** @type {Record<string, unknown>} */ definition,
+    ) => String(definition?.name || ''))
+    .filter(Boolean);
+  const customNamesakeRemainsDepleted = customDepletedNames.some(
+    (/** @type {string} */ name) => (
+      name.toLowerCase() === normalizedResource
+    ),
+  );
+  resourceStateMap[resource] = (
+    state === 'depleted'
+    || customNamesakeRemainsDepleted
+  )
+    ? 'depleted'
+    : state;
+
+  const nativeDepleted = new Map(
+    nativeSemanticDepletedResourceKeys(config)
+      .map(key => [String(key).toLowerCase(), String(key)]),
+  );
+  if (state === 'depleted') nativeDepleted.set(normalizedResource, resource);
+  else nativeDepleted.delete(normalizedResource);
+
+  // nearbyResourcesDepleted is the compatibility/display union. Rebuild it
+  // from the two exact owners instead of mutating the ambiguous flat label.
+  const flatDepleted = new Map(nativeDepleted);
+  for (const name of customDepletedNames) {
+    const key = name.toLowerCase();
+    if (!flatDepleted.has(key)) flatDepleted.set(key, name);
+  }
+  const nextConfig = {
+    ...config,
+    nearbyResourcesState: resourceStateMap,
+    nearbyResourcesNativeDepleted: [...nativeDepleted.values()],
+    nearbyResourcesDepleted: [...flatDepleted.values()],
+  };
+  const nativeResources = nativeSemanticResourceKeys(config);
+  const nextEconomicState = reconcileProductionAfterResourceChange(
+    settlement.economicState,
+    {
+      // The reconcile reads only the live economic roster and route context.
+      // Pass that narrow projection instead of widening its local kernel type
+      // to every historical SimSettlement field.
+      settlement: {
+        config: nextConfig,
+        institutions: liveInstitutions(settlement),
+        activeConditions: settlement.activeConditions,
+        tier: settlement.tier,
+        tradeRoute: settlement.tradeRoute,
+        name: settlement.name,
+        economicState: settlement.economicState,
+      },
+      oldResources: nativeResources,
+      newResources: nativeResources,
+      oldDepleted: nativeSemanticDepletedResourceKeys(config),
+      newDepleted: [...nativeDepleted.values()],
+    },
+  );
   return {
     ...settlement,
-    config: {
-      ...config,
-      nearbyResourcesState: resourceStateMap,
-      nearbyResourcesDepleted: [...depletedSet],
-    },
+    config: nextConfig,
+    ...(settlement.economicState
+      ? { economicState: nextEconomicState }
+      : {}),
     resourceHistory: [
       ...(Array.isArray(settlement.resourceHistory) ? settlement.resourceHistory.slice(-11) : []),
       {

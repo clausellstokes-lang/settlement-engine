@@ -31,6 +31,7 @@ import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { saves } from '../../src/lib/saves.js';
+import { activateOutboxOwner, resetOutbox } from '../../src/store/outbox.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -43,6 +44,10 @@ function installLocalStorage() {
 }
 
 const stubSlice = () => ({
+  auth: {
+    user: { id: 'test-owner' },
+    session: { session_id: 'test-session' },
+  },
   savedSettlements: [],
   settlement: null,
   activeSaveId: null,
@@ -80,6 +85,8 @@ function settlement(name) {
 describe('campaignSlice world pulse', () => {
   beforeEach(() => {
     installLocalStorage();
+    resetOutbox();
+    activateOutboxOwner('test-owner');
     localStorage.removeItem('sf_campaigns');
   });
 
@@ -103,10 +110,6 @@ describe('campaignSlice world pulse', () => {
       }];
     });
 
-    // previewCampaignWorldPulse is now ASYNC — it lazy-loads the worldPulse
-    // simulation (kept out of the first-paint entry chunk) before computing the
-    // preview, so callers await it (the production caller already wraps it in
-    // `await Promise.resolve(...)`). Result contract is otherwise unchanged.
     const preview = await store.getState().previewCampaignWorldPulse('camp-1', 'one_month', { now: '2026-01-01T00:00:00.000Z' });
     expect(preview.tick).toBe(1);
     expect(store.getState().campaigns[0].worldState.tick).toBe(0);
@@ -133,6 +136,56 @@ describe('campaignSlice world pulse', () => {
     expect(store.getState().savedSettlements[0].campaignState.worldPulse.lastTick).toBe(1);
   });
 
+  // Membership id normalization pin (Owner Ruling #5 blanket, 2026-07-17 — the
+  // signed W6 misc verdict; resolver-level pins live in
+  // campaignMembershipIdNormalization.test.js). Settlement ids are an
+  // acknowledged number/string mix; before the String()-normalization of
+  // campaignSettlements, the number-id member below was silently DROPPED from
+  // every advance while its string-id sibling pulsed.
+  test('a string-id member and a number-id member both advance', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.savedSettlements = [
+        {
+          id: 'stoneford',
+          name: 'Stoneford',
+          phase: 'canon',
+          settlement: settlement('Stoneford'),
+          campaignState: { phase: 'canon', eventLog: [], locks: {} },
+        },
+        {
+          // NUMBER save id on purpose — the campaign row stores the string '7'.
+          id: 7,
+          name: 'Mossbridge',
+          phase: 'canon',
+          settlement: settlement('Mossbridge'),
+          campaignState: { phase: 'canon', eventLog: [], locks: {} },
+        },
+      ];
+      state.campaigns = [{
+        id: 'camp-mixed',
+        name: 'Mixed Ids Realm',
+        settlementIds: ['stoneford', '7'],
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 'mixed-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+    });
+
+    // autoResolve: the multi-tick path (advanceMultiTick default-on; one_month =
+    // 4 weekly ticks) PARKS at the first majors pause when auto-resolve is off,
+    // making the final tick seed-dependent. This pin is about MEMBERSHIP, not
+    // pause semantics — auto-resolving runs the whole interval deterministically.
+    const result = await store.getState().advanceCampaignWorld('camp-mixed', 'one_month', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
+    expect(result.tick).toBe(4);
+
+    const saves = store.getState().savedSettlements;
+    const stoneford = saves.find(s => String(s.id) === 'stoneford');
+    const mossbridge = saves.find(s => String(s.id) === '7');
+    expect(stoneford.campaignState.worldPulse.lastTick).toBe(4);
+    expect(mossbridge.campaignState.worldPulse.lastTick).toBe(4);
+  });
+
   test('retained inactive campaigns reject ordinary store mutations', async () => {
     const store = makeStore();
     store.setState(state => {
@@ -150,15 +203,21 @@ describe('campaignSlice world pulse', () => {
 
     store.getState().toggleCampaignCollapsed('retained-campaign');
     store.getState().renameCampaign('retained-campaign', 'Changed');
-    store.getState().clearCampaignWizardNews('retained-campaign');
+    // Was clearCampaignWizardNews, RETIRED under owner queue #21. Its stand-in is
+    // markCampaignLettersRead — the same findActiveCampaign-guarded shape, on the
+    // same news feed, and LIVE, so this pin keeps testing a reachable door rather
+    // than a decoy one.
+    store.getState().markCampaignLettersRead('retained-campaign');
 
-    // Async now (lazy worldPulse load); the not-found contract still resolves null.
     expect(await store.getState().previewCampaignWorldPulse('retained-campaign')).toBeNull();
     expect(store.getState().campaigns[0]).toMatchObject({
       name: 'Retained Realm',
       collapsed: false,
       accessState: 'inactive_plan',
     });
+    // The refused mutation left no trace either: no read-marker, no updatedAt bump.
+    expect(store.getState().campaigns[0].lastReadTick).toBeUndefined();
+    expect(store.getState().campaigns[0].updatedAt).toBeUndefined();
   });
 
   test('proposal apply and dismiss update world state', async () => {
@@ -219,6 +278,71 @@ describe('campaignSlice world pulse', () => {
 
     const dismissed = await store.getState().dismissWorldPulseProposal('camp-1', 'world_proposal.dismiss');
     expect(dismissed.status).toBe('dismissed');
+  });
+
+  test('concurrent proposal dismissals record exactly one terminal decision', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Realm',
+        settlementIds: [],
+        worldState: {
+          tick: 2,
+          proposals: [{
+            id: 'proposal-exact-once',
+            status: 'pending',
+            headline: 'One ruling awaits',
+          }],
+        },
+      }];
+    });
+
+    const results = await Promise.all([
+      store.getState().dismissWorldPulseProposal('camp-1', 'proposal-exact-once'),
+      store.getState().dismissWorldPulseProposal('camp-1', 'proposal-exact-once'),
+    ]);
+
+    expect(results.filter(Boolean)).toHaveLength(1);
+    expect(results.filter(Boolean)[0]).toMatchObject({
+      id: 'proposal-exact-once',
+      status: 'dismissed',
+    });
+    expect(store.getState().campaigns[0].worldState.proposals).toEqual([
+      expect.objectContaining({
+        id: 'proposal-exact-once',
+        status: 'dismissed',
+      }),
+    ]);
+  });
+
+  test('a stale dismissal cannot overwrite an already-terminal proposal', async () => {
+    const store = makeStore();
+    const terminal = {
+      id: 'proposal-already-applied',
+      status: 'applied',
+      appliedAt: '2026-01-02T00:00:00.000Z',
+      updatedAt: '2026-01-02T00:00:00.000Z',
+    };
+    store.setState(state => {
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Realm',
+        settlementIds: [],
+        updatedAt: '2026-01-02T00:00:00.000Z',
+        worldState: { tick: 2, proposals: [terminal] },
+      }];
+    });
+
+    await expect(
+      store.getState().dismissWorldPulseProposal('camp-1', terminal.id),
+    ).resolves.toBeNull();
+    expect(store.getState().campaigns[0]).toMatchObject({
+      updatedAt: '2026-01-02T00:00:00.000Z',
+      worldState: { proposals: [terminal] },
+    });
+    expect(store.getState().campaigns[0].worldState.proposals[0])
+      .not.toHaveProperty('dismissedAt');
   });
 
   test('a failed cloud save surfaces campaignSyncError instead of swallowing it', async () => {

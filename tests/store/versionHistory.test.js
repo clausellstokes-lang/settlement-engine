@@ -17,7 +17,9 @@ vi.mock('../../src/lib/saves.js', () => ({
   },
 }));
 
+import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
 function makeStore() {
   return create(immer((set, get, store) => createSettlementSlice(set, get, store)));
@@ -27,6 +29,7 @@ describe('version history mutations', () => {
   let useStore;
 
   beforeEach(() => {
+    vi.clearAllMocks();
     useStore = makeStore();
     useStore.setState({
       settlement: {
@@ -43,14 +46,21 @@ describe('version history mutations', () => {
     });
   });
 
-  it('recordSnapshot appends to settlement.versionHistory when no saveId', () => {
+  it('recordSnapshot appends to the draftVersionHistory sibling when no saveId', () => {
     const snap = useStore.getState().recordSnapshot({ kind: 'manual', label: 'After session 3' });
     const state = useStore.getState();
-    expect(state.settlement.versionHistory).toHaveLength(1);
-    expect(state.settlement.versionHistory[0].id).toBe(snap.id);
-    expect(state.settlement.versionHistory[0].kind).toBe('manual');
-    expect(state.settlement.versionHistory[0].label).toBe('After session 3');
-    expect(state.settlement.versionHistory[0].settlement.name).toBe('Hightower\'s Reach');
+    // Draft timeline is a SIBLING to the settlement, never inside it.
+    expect(state.draftVersionHistory).toHaveLength(1);
+    // recordSnapshot returns a Track K §C1 ActionResult envelope; the snapshot
+    // id is surfaced on after.snapshotId (the raw snapshot rides in receipts[0]).
+    expect(state.draftVersionHistory[0].id).toBe(snap.after.snapshotId);
+    expect(state.draftVersionHistory[0].kind).toBe('manual');
+    expect(state.draftVersionHistory[0].label).toBe('After session 3');
+    expect(state.draftVersionHistory[0].settlement.name).toBe('Hightower\'s Reach');
+    // The settlement itself never carries a versionHistory key.
+    expect(state.settlement.versionHistory).toBeUndefined();
+    // And the snapshot payload never nests its own timeline.
+    expect(state.draftVersionHistory[0].settlement.versionHistory).toBeUndefined();
   });
 
   it('recordSnapshot writes onto the matching save when saveId is given', () => {
@@ -91,7 +101,7 @@ describe('version history mutations', () => {
   it('recordSnapshot freezes a deep copy — later mutations do not bleed into history', () => {
     useStore.getState().recordSnapshot({ kind: 'manual', label: 'Before rename' });
     useStore.setState(s => { s.settlement.name = 'Renamed Town'; });
-    const history = useStore.getState().settlement.versionHistory;
+    const history = useStore.getState().draftVersionHistory;
     expect(history[0].settlement.name).toBe('Hightower\'s Reach');
     expect(useStore.getState().settlement.name).toBe('Renamed Town');
   });
@@ -100,8 +110,9 @@ describe('version history mutations', () => {
     const snap = useStore.getState().recordSnapshot({ kind: 'manual', label: 'Checkpoint' });
     useStore.setState(s => { s.settlement.name = 'Mutated'; });
     expect(useStore.getState().settlement.name).toBe('Mutated');
-    const ok = useStore.getState().revertToSnapshot({ snapshotId: snap.id });
-    expect(ok).toBe(true);
+    // revertToSnapshot returns a Track K §C1 ActionResult envelope on success.
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: snap.after.snapshotId });
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
   });
 
@@ -119,25 +130,132 @@ describe('version history mutations', () => {
 
     const ok = useStore.getState().revertToSnapshot({ snapshotId: 'snap-active' });
 
-    expect(ok).toBe(true);
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Restored Saved Reach');
     expect(useStore.getState().savedSettlements[0].settlement.name).toBe('Restored Saved Reach');
   });
 
-  it('revertToSnapshot is non-destructive — current state is auto-snapshotted first', () => {
-    const snap = useStore.getState().recordSnapshot({ kind: 'manual', label: 'Checkpoint A' });
-    useStore.setState(s => { s.settlement.name = 'Pre-Revert State'; });
-    useStore.getState().revertToSnapshot({ snapshotId: snap.id });
-    // After revert: history has 3 entries — Checkpoint A, the auto-pre-revert
-    // snapshot, and Checkpoint A's settlement now overwriting the head, so the
-    // history that survived the revert from the *target snapshot* contains
-    // only [Checkpoint A]. Verify the pre-revert auto-snapshot exists on the
-    // PRE-REVERT history snapshot — we read the auto entry by kind on the
-    // history that was alive at the time of the revert.
-    // Easier check: the target snapshot's settlement, when restored, included
-    // its OWN versionHistory (which had Checkpoint A in it). So we just
-    // verify the revert succeeded.
+  it('revertToSnapshot (draft) is genuinely non-destructive — pre-revert survives and re-revert works', () => {
+    // Snapshot A (the state we will roll back TO).
+    const snapA = useStore.getState().recordSnapshot({ kind: 'manual', label: 'Checkpoint A' });
+    // Mutate the live settlement away from A.
+    useStore.setState(s => { s.settlement.name = 'Mutated State'; });
+
+    // Revert to A. This auto-records a pre-revert snapshot of the CURRENT
+    // ('Mutated State') settlement into the sibling timeline, then restores A.
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: snapA.after.snapshotId });
+    expect(ok.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
+
+    // The pre-revert snapshot SURVIVES in the sibling timeline (the old bug
+    // overwrote the whole object with the target's stale embedded history and
+    // discarded it). It captured the mutated state.
+    const preRevert = useStore.getState().draftVersionHistory.find(s => s.kind === 'pre-revert');
+    expect(preRevert).toBeTruthy();
+    expect(preRevert.settlement.name).toBe('Mutated State');
+    // Timeline holds both A and the pre-revert entry — nothing was destroyed.
+    expect(useStore.getState().draftVersionHistory).toHaveLength(2);
+
+    // Re-revert: rolling forward to the pre-revert snapshot restores the
+    // mutated state — proving the revert is reversible, not a dead end.
+    const ok2 = useStore.getState().revertToSnapshot({ snapshotId: preRevert.id });
+    expect(ok2.ok).toBe(true);
+    expect(useStore.getState().settlement.name).toBe('Mutated State');
+  });
+
+  it('revertToSnapshot re-derives systemState + persists campaignState — coherent in memory AND across reload (state-lifecycle-2)', () => {
+    useStore.setState(s => {
+      s.activeSaveId = 'save-1';
+      // A STALE systemState reflecting the reverted-AWAY settlement, mirrored into the
+      // persisted campaignState (hydrateFromSave prefers cs.systemState on reload).
+      s.systemState = { resilience: { value: 99 }, volatility: { value: 99 } };
+      s.savedSettlements[0].campaignState = {
+        phase: 'draft', eventLog: [], systemState: { resilience: { value: 99 } },
+      };
+      s.savedSettlements[0].versionHistory = [{
+        id: 'snap-x', kind: 'manual', label: 'target',
+        settlement: { name: 'Restored', population: 900, tier: 'thorp' },
+      }];
+    });
+
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: 'snap-x' });
+    expect(ok.ok).toBe(true);
+
+    const st = useStore.getState();
+    // Live systemState was re-derived from the RESTORED settlement — the stale 99 is gone.
+    const expected = deriveSystemState(st.settlement);
+    expect(st.systemState).toEqual(expected);
+    expect(st.systemState).not.toEqual({ resilience: { value: 99 }, volatility: { value: 99 } });
+    // editedAt stamped by the revert.
+    expect(typeof st.editedAt).toBe('string');
+    // The active save's persisted campaignState.systemState now AGREES with the live
+    // view (previously it stayed stale, so the incoherence survived a restart).
+    expect(st.savedSettlements[0].campaignState.systemState).toEqual(expected);
+    // Reload round-trip: hydrating from the save entry reproduces the coherent state.
+    useStore.getState().hydrateFromSave(st.savedSettlements[0]);
+    expect(useStore.getState().systemState).toEqual(expected);
+  });
+
+  it('draft snapshots grow LINEARLY, never exponentially (anti-2^N regression pin)', () => {
+    const N = 12;
+    for (let i = 0; i < N; i += 1) {
+      useStore.setState(s => { s.settlement.name = `Reach v${i}`; });
+      useStore.getState().recordSnapshot({ kind: 'auto-commit', label: `edit ${i}` });
+    }
+    const history = useStore.getState().draftVersionHistory;
+    // Exactly one entry per snapshot — the cap (50) is not hit at N=12.
+    expect(history).toHaveLength(N);
+    // No entry embeds its own timeline: payloads are pure content, so a
+    // snapshot can never contain prior snapshots (the 2^N nesting bug).
+    for (const entry of history) {
+      expect(entry.settlement.versionHistory).toBeUndefined();
+    }
+    // Per-entry byte cost is bounded by the fixture content, so total size is
+    // ~N × per-entry (LINEAR). Under the old nesting bug entry k embedded the
+    // k-1 prior entries, so total ≈ base × 2^N — orders of magnitude larger.
+    const perEntryBound = JSON.stringify(history[0]).length + 64; // + label/id slack
+    const totalLen = JSON.stringify(history).length;
+    expect(totalLen).toBeLessThan(N * perEntryBound);
+  });
+
+  it('recordSnapshot REFUSES a target save the cache does not hold — no phantom snapshot id', () => {
+    // Reachable, not a hydration blip: the save chokepoints stamp activeSaveId on
+    // a row savedSettlements only learns about at its NEXT hydration, and
+    // activeSaveId is outside the persist partialize, so a post-save Create
+    // session sits in this window indefinitely.
+    useStore.setState(s => { s.activeSaveId = 'save-not-hydrated'; });
+
+    const result = useStore.getState().recordSnapshot({ kind: 'manual', label: 'ghost' });
+
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('save_not_loaded');
+    expect(result.before.targetSaveId).toBe('save-not-hydrated');
+    // The load-bearing half of the honesty fix: an id is withheld for a snapshot
+    // that exists nowhere. commitPendingEditScope mints its undo token off this
+    // exact field, so a truthy `after.snapshotId` here is a dead undo lever.
+    expect(result.after).toBeNull();
+    expect(result.persistenceOps).toEqual([]);
+    expect(typeof result.userMessage).toBe('string');
+    // Nothing landed in EITHER timeline — the draft sibling must not silently
+    // absorb a write that named a save.
+    expect(useStore.getState().draftVersionHistory).toEqual([]);
+    expect(saves.update).not.toHaveBeenCalled();
+  });
+
+  it('commitPendingEdits mints NO undo token when the pre-commit checkpoint refused', async () => {
+    useStore.setState(s => { s.activeSaveId = 'save-not-hydrated'; });
+
+    await useStore.getState().queueEdit('rename-settlement', { newName: 'Ghost Name' });
+    await useStore.getState().commitPendingEdits();
+
+    // The edit itself still applied — the checkpoint is a safety net, not a gate.
+    expect(useStore.getState().settlement.name).toBe('Ghost Name');
+    // But nothing was checkpointed, so the receipt makes no undo claim. Before the
+    // honesty fix the refused snapshot still handed back an id and this receipt
+    // advertised an undo that resolved against a timeline that does not exist.
+    const receipt = useStore.getState().pendingEditReceipts.at(-1);
+    expect(receipt.undoToken).toBeNull();
+    expect(useStore.getState().draftVersionHistory).toEqual([]);
   });
 
   it('revertToSnapshot returns false on an unknown snapshotId', () => {
@@ -148,19 +266,37 @@ describe('version history mutations', () => {
     expect(useStore.getState().revertToSnapshot({ snapshotId: 'any' })).toBe(false);
   });
 
-  it('commitPendingEdits auto-snapshots after applying the queue', () => {
+  it('commitPendingEdits checkpoints before apply and exposes a working undo token', async () => {
     // Queue a rename-settlement edit
-    useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
+    await useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
     expect(useStore.getState().pendingEditsQueue).toHaveLength(1);
-    useStore.getState().commitPendingEdits();
+    await useStore.getState().commitPendingEdits();
     // Queue is empty
     expect(useStore.getState().pendingEditsQueue).toHaveLength(0);
     // Settlement renamed
     expect(useStore.getState().settlement.name).toBe('New Name');
-    // Auto-snapshot exists
-    const history = useStore.getState().settlement.versionHistory || [];
+    // Auto-snapshot exists in the sibling draft timeline (no active save) and
+    // contains the PRE-COMMIT value, not the already-renamed value.
+    const history = useStore.getState().draftVersionHistory || [];
     const autoSnap = history.find(s => s.kind === 'auto-commit');
     expect(autoSnap).toBeTruthy();
-    expect(autoSnap.label).toContain('rename-settlement');
+    expect(autoSnap.settlement.name).toBe('Hightower\'s Reach');
+    // Version labels are user-facing; internal operation tokens must not leak
+    // into the dossier timeline.
+    expect(autoSnap.label).toBe('Dossier change');
+    // The commit's auto-snapshot never nests a timeline into its payload.
+    expect(autoSnap.settlement.versionHistory).toBeUndefined();
+
+    const receipt = useStore.getState().pendingEditReceipts.at(-1);
+    expect(receipt.undoToken).toEqual({
+      kind: 'snapshot',
+      snapshotId: autoSnap.id,
+      saveId: null,
+    });
+    const reverted = useStore.getState().revertToSnapshot({
+      snapshotId: receipt.undoToken.snapshotId,
+    });
+    expect(reverted.ok).toBe(true);
+    expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
   });
 });

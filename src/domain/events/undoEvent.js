@@ -31,6 +31,12 @@
 import { deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 import { deepClone } from '../clone.js';
 
+// Schemaless open objects at this layer (see mutateEntities.js). Aliases document
+// intent while centralizing the pure-`any` reality of the mutation surface.
+/** @typedef {any} MutSettlement */
+/** @typedef {any} MutEntity */
+/** @typedef {any} MutateEvent */
+
 // ── Pre-event snapshot (applyEvent stamps it onto logEntry.undo) ─────────
 
 // Live resolved outputs + the authored delta record the resource events
@@ -40,6 +46,10 @@ import { deepClone } from '../clone.js';
 const RESOURCE_CONFIG_KEYS = Object.freeze([
   'resourceEdits',
   'nearbyResources',
+  'nearbyResourcesNative',
+  'nearbyResourcesNativeDepleted',
+  'nearbyResourceDefinitions',
+  'nearbyResourceDefinitionsDepleted',
   'nearbyResourcesState',
   'nearbyResourcesDepleted',
   'nearbyResourcesCustom',
@@ -66,6 +76,13 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   // it cleared.
   APPLY_STRESSOR:     Object.freeze(['stressorEdits']),
   RESOLVE_STRESSOR:   Object.freeze(['stressorEdits']),
+  // REMOVED_THREAT now ALSO writes a stressorEdits.resolved suppression record
+  // (mutateWorld.removedThreat) so a party-removed threat can't resurrect on
+  // regeneration — snapshot stressorEdits so undo restores the pre-event
+  // suppression exactly (it already snapshots the live stressor containers via
+  // SNAPSHOT_SETTLEMENT_KEYS; captureEventUndoSnapshot reads both maps).
+  // [domain-events-region-2]
+  REMOVED_THREAT:     Object.freeze(['stressorEdits']),
   // SET_PRIMARY_DEITY writes config.primaryDeityRef +
   // primaryDeitySnapshot (or deletes them on a clear). Snapshotting both keys
   // makes undo a true inverse — restoreKeys deletes a key that was absent
@@ -170,14 +187,17 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   ADD_FACTION:         ENTITY_GRAPH_KEYS,
   ADD_NPC:             ENTITY_GRAPH_KEYS,
   // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/
-  // stresses containers with a plain array splice — no provenance stamp and no
-  // stressorEdits record, so without the pre-event copy the stressor is lost
-  // permanently on undo. (RESOLVE_STRESSOR deliberately does NOT snapshot these
-  // containers: it routes through the crisis lifecycle, which restores the
-  // stressorEdits record so the live entry returns on the next regeneration —
-  // a documented limitation pinned by tests/joins/crisisTripleSync.test.js.
-  // Resurrecting the live entry directly there would double-count against that
-  // regeneration path, so RESOLVE_STRESSOR's live-entry residue is expected.)
+  // stresses containers with a plain array splice — no provenance stamp — so the
+  // pre-event copy of the containers is the only way back for the live entry.
+  // It ALSO now writes a stressorEdits.resolved suppression record (so the threat
+  // stays gone across regeneration, not just this tick); that record is reverted
+  // on undo via SNAPSHOT_CONFIG_KEYS['stressorEdits'] above — the two snapshots
+  // coexist. (RESOLVE_STRESSOR deliberately does NOT snapshot these containers:
+  // it routes through the crisis lifecycle, which restores the stressorEdits
+  // record so the live entry returns on the next regeneration — a documented
+  // limitation pinned by tests/joins/crisisTripleSync.test.js. Resurrecting the
+  // live entry directly there would double-count against that regeneration path,
+  // so RESOLVE_STRESSOR's live-entry residue is expected.)
   REMOVED_THREAT:      STRESS_CONTAINER_KEYS,
   // SHIFT_TIER rewrites the top-level tier + population and performs institution roster
   // surgery (promotion adds/reactivates; demotion deactivates over-tier institutions into
@@ -185,6 +205,13 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   // exactly reversible from provenance, so the pre-event copy of these subtrees is the
   // only true inverse. (config.tier/settType are restored via SNAPSHOT_CONFIG_KEYS.)
   SHIFT_TIER:          Object.freeze(['tier', 'population', 'institutions', 'tierHistory', 'institutionHistory']),
+  // The generosity verbs (FP-G3) debit foodSecurity.storageMonths in place (no
+  // provenance on a number) and FORCE_RELIEF nudges publicLegitimacy.score — the
+  // pre-event copies are the only exact way back. Their _forcedRelief/_offeredCredit
+  // annotation entries carry atEventId and are scrubbed by provenance instead
+  // (scrubConfigAnnotations below).
+  FORCE_RELIEF:        Object.freeze(['economicState', 'powerStructure']),
+  OFFER_CREDIT:        Object.freeze(['economicState']),
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers
@@ -192,14 +219,14 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
 // pre-event _config copy — one snapshot restores both.
 const MIRRORED_RECORD_KEYS = Object.freeze(['resourceEdits', 'customTradeGoods', 'stressorEdits']);
 
-const clone = (/** @type {any} */ v) => deepClone(v);
+const clone = (/** @type {MutEntity} */ v) => deepClone(v);
 
 /** { keys: every key audited, values: only the keys present (cloned) } —
  *  presence matters: a key the event GREW must be deleted on undo, not
  *  emptied, so an undone settlement stays byte-identical to one that never
  *  saw the event. */
-function snapshotKeys(/** @type {any} */ source, /** @type {any} */ keys) {
-  /** @type {any} */
+function snapshotKeys(/** @type {MutEntity} */ source, /** @type {MutEntity} */ keys) {
+  /** @type {MutEntity} */
   const values = {};
   if (source && typeof source === 'object') {
     for (const k of keys) {
@@ -215,26 +242,26 @@ function snapshotKeys(/** @type {any} */ source, /** @type {any} */ keys) {
  * are provenance-scrubable (the common case) — only the resource/trade-good
  * family needs a snapshot.
  *
- * @param {import('../settlement.schema.js').SimSettlement} settlement  the BEFORE settlement
- * @param {any} event
- * @returns {any}
+ * @param {MutSettlement} settlement  the BEFORE settlement
+ * @param {MutateEvent} event
+ * @returns {MutEntity}
  */
 export function captureEventUndoSnapshot(settlement, event) {
   if (!settlement) return null;
-  const configKeys = /** @type {any} */ (SNAPSHOT_CONFIG_KEYS)[event?.type];
-  const settlementKeys = /** @type {any} */ (SNAPSHOT_SETTLEMENT_KEYS)[event?.type];
+  const configKeys = /** @type {MutEntity} */ (SNAPSHOT_CONFIG_KEYS)[event?.type];
+  const settlementKeys = /** @type {MutEntity} */ (SNAPSHOT_SETTLEMENT_KEYS)[event?.type];
   if (!configKeys && !settlementKeys) return null;
-  /** @type {any} */
+  /** @type {MutEntity} */
   const snapshot = {};
   if (configKeys) snapshot.config = snapshotKeys(settlement.config, configKeys);
-  const economicKeys = /** @type {any} */ (SNAPSHOT_ECONOMIC_KEYS)[event?.type];
+  const economicKeys = /** @type {MutEntity} */ (SNAPSHOT_ECONOMIC_KEYS)[event?.type];
   if (economicKeys) snapshot.economicState = snapshotKeys(settlement.economicState, economicKeys);
   if (settlementKeys) snapshot.settlement = snapshotKeys(settlement, settlementKeys);
   return snapshot;
 }
 
-function restoreKeys(/** @type {any} */ target, /** @type {any} */ snap) {
-  /** @type {any} */
+function restoreKeys(/** @type {MutEntity} */ target, /** @type {MutEntity} */ snap) {
+  /** @type {MutEntity} */
   const next = { ...(target || {}) };
   for (const k of snap?.keys || []) {
     if (snap.values && k in snap.values) next[k] = clone(snap.values[k]);
@@ -243,21 +270,21 @@ function restoreKeys(/** @type {any} */ target, /** @type {any} */ snap) {
   return next;
 }
 
-function restoreSnapshottedRecords(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ snapshot) {
+function restoreSnapshottedRecords(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ snapshot) {
   if (!snapshot || typeof snapshot !== 'object') return s;
   let next = s;
   if (snapshot.config) {
     next = { ...next, config: restoreKeys(next.config, snapshot.config) };
     if (next._config && typeof next._config === 'object') {
-      const mirrored = (snapshot.config.keys || []).filter((/** @type {any} */ k) => MIRRORED_RECORD_KEYS.includes(k));
+      const mirrored = (snapshot.config.keys || []).filter((/** @type {MutEntity} */ k) => MIRRORED_RECORD_KEYS.includes(k));
       if (mirrored.length) {
         next = {
           ...next,
           _config: restoreKeys(next._config, {
             keys: mirrored,
             values: Object.fromEntries(mirrored
-              .filter((/** @type {any} */ k) => snapshot.config.values && k in snapshot.config.values)
-              .map((/** @type {any} */ k) => [k, snapshot.config.values[k]])),
+              .filter((/** @type {MutEntity} */ k) => snapshot.config.values && k in snapshot.config.values)
+              .map((/** @type {MutEntity} */ k) => [k, snapshot.config.values[k]])),
           }),
         };
       }
@@ -289,8 +316,8 @@ function restoreSnapshottedRecords(/** @type {import('../settlement.schema.js').
  * back at the template default, and the next tick's pre-expiry window
  * re-eases it — the drift self-corrects.
  */
-function unEase(/** @type {any} */ condition, /** @type {any} */ strippedCauses) {
-  const restored = /** @type {any} */ (deriveActiveCondition({
+function unEase(/** @type {MutEntity} */ condition, /** @type {MutEntity} */ strippedCauses) {
+  const restored = /** @type {MutEntity} */ (deriveActiveCondition({
     ...condition,
     status: undefined,
     duration: { ...(condition.duration || {}), expiresAtTicks: undefined },
@@ -320,7 +347,7 @@ function unEase(/** @type {any} */ condition, /** @type {any} */ strippedCauses)
  * condition, so undoing the second cannot restore the first's copy — the
  * crisis drops entirely. Same class as re-authoring a stressor then undoing.
  */
-function withoutEventConditions(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
+function withoutEventConditions(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
   const list = Array.isArray(s.activeConditions) ? s.activeConditions : [];
   if (!list.length) return s;
   let changed = false;
@@ -331,7 +358,7 @@ function withoutEventConditions(/** @type {import('../settlement.schema.js').Sim
       changed = true;
       continue;
     }
-    const stripped = causes.filter((/** @type {any} */ cause, /** @type {any} */ i) =>
+    const stripped = causes.filter((/** @type {MutEntity} */ cause, /** @type {MutEntity} */ i) =>
       i === 0 || cause?.source !== 'event' || cause?.eventId !== eventId);
     if (stripped.length === causes.length) {
       kept.push(c);
@@ -353,12 +380,12 @@ function withoutEventConditions(/** @type {import('../settlement.schema.js').Sim
  * stressorEdits.added record brings the authored entry back on the next
  * regeneration.
  */
-function withoutEventStressEntries(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
+function withoutEventStressEntries(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
   let next = s;
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
-    const filtered = arr.filter((/** @type {any} */ st) => st?.addedByEventId !== eventId);
+    const filtered = arr.filter((/** @type {MutEntity} */ st) => st?.addedByEventId !== eventId);
     if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
   }
   return next;
@@ -373,13 +400,16 @@ function withoutEventStressEntries(/** @type {import('../settlement.schema.js').
  * overwritten annotation is unrecoverable — same overwrite class as the
  * condition limitation above).
  */
-function scrubConfigAnnotations(/** @type {any} */ config, /** @type {any} */ eventId) {
+function scrubConfigAnnotations(/** @type {MutEntity} */ config, /** @type {MutEntity} */ eventId) {
   if (!config || typeof config !== 'object') return config;
   let next = config;
-  for (const key of ['_cutRoutes', '_refugeeWaves', '_raidHistory']) {
+  // _forcedRelief/_offeredCredit (the FP-G3 generosity verbs) follow the _cutRoutes
+  // discipline exactly: append-only, atEventId-stamped, dual-written to _config
+  // (withoutEventAnnotations runs this scrub on both copies).
+  for (const key of ['_cutRoutes', '_userRoutes', '_refugeeWaves', '_raidHistory', '_forcedRelief', '_offeredCredit']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
-    const filtered = arr.filter((/** @type {any} */ e) => e?.atEventId !== eventId);
+    const filtered = arr.filter((/** @type {MutEntity} */ e) => e?.atEventId !== eventId);
     if (filtered.length !== arr.length) next = { ...next, [key]: filtered };
   }
   if (next._activePlague?.atEventId === eventId) {
@@ -389,12 +419,32 @@ function scrubConfigAnnotations(/** @type {any} */ config, /** @type {any} */ ev
   return next;
 }
 
-function withoutEventAnnotations(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
+function withoutEventAnnotations(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
   let next = s;
+  // A user route leaves TWO marks on a settlement: the _userRoutes ledger row
+  // (atEventId-stamped, scrubbed by provenance below) and a neighbourNetwork entry
+  // that carries the route identity in its linkId and no event stamp of its own.
+  // Read the ledger for the identities this event chartered BEFORE the scrub
+  // removes the only record that connects them to it.
+  const chartered = new Set();
+  for (const home of [s?.config, s?._config]) {
+    const rows = Array.isArray(home?._userRoutes) ? home._userRoutes : [];
+    for (const row of rows) {
+      if (row?.atEventId === eventId && row?.routeId) chartered.add(String(row.routeId));
+    }
+  }
   const config = scrubConfigAnnotations(s.config, eventId);
   if (config !== s.config) next = { ...next, config };
   const raw = scrubConfigAnnotations(s._config, eventId);
   if (raw !== s._config) next = { ...next, _config: raw };
+  if (chartered.size && Array.isArray(next.neighbourNetwork)) {
+    const kept = next.neighbourNetwork.filter(
+      (/** @type {MutEntity} */ n) => !chartered.has(String(n?.linkId || '')),
+    );
+    if (kept.length !== next.neighbourNetwork.length) {
+      next = { ...next, neighbourNetwork: kept };
+    }
+  }
   return next;
 }
 
@@ -403,7 +453,7 @@ function withoutEventAnnotations(/** @type {import('../settlement.schema.js').Si
  * config flag, so the revival is exact. Status restores to 'active' —
  * destruction is the only settlement-level status writer.
  */
-function withoutEventDestruction(/** @type {any} */ s, /** @type {any} */ eventId) {
+function withoutEventDestruction(/** @type {MutEntity} */ s, /** @type {MutEntity} */ eventId) {
   if (s.destroyedByEventId !== eventId) return s;
   const { destroyedAt: _a, destroyedByEventId: _b, destroyedCause: _c, destroyedReason: _d, ...rest } = s;
   let next = { ...rest, status: 'active' };
@@ -421,20 +471,20 @@ function withoutEventDestruction(/** @type {any} */ s, /** @type {any} */ eventI
  * survived its own undo. Re-add of a pre-existing entity (the idempotent
  * un-remove branch) carries no createdByEventId, so it is left intact.
  */
-function withoutEventCreations(/** @type {import('../settlement.schema.js').SimSettlement} */ s, /** @type {any} */ eventId) {
+function withoutEventCreations(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
   let next = s;
-  const dropCreated = (/** @type {any} */ arr) => arr.filter((/** @type {any} */ e) => e?.createdByEventId !== eventId);
-  if (Array.isArray(next.npcs) && next.npcs.some((/** @type {any} */ n) => n?.createdByEventId === eventId)) {
+  const dropCreated = (/** @type {MutEntity} */ arr) => arr.filter((/** @type {MutEntity} */ e) => e?.createdByEventId !== eventId);
+  if (Array.isArray(next.npcs) && next.npcs.some((/** @type {MutEntity} */ n) => n?.createdByEventId === eventId)) {
     next = { ...next, npcs: dropCreated(next.npcs) };
   }
-  if (Array.isArray(next.institutions) && next.institutions.some((/** @type {any} */ i) => i?.createdByEventId === eventId)) {
+  if (Array.isArray(next.institutions) && next.institutions.some((/** @type {MutEntity} */ i) => i?.createdByEventId === eventId)) {
     next = { ...next, institutions: dropCreated(next.institutions) };
   }
   const psFactions = next.powerStructure?.factions;
-  if (Array.isArray(psFactions) && psFactions.some((/** @type {any} */ f) => f?.createdByEventId === eventId)) {
+  if (Array.isArray(psFactions) && psFactions.some((/** @type {MutEntity} */ f) => f?.createdByEventId === eventId)) {
     next = { ...next, powerStructure: { ...next.powerStructure, factions: dropCreated(psFactions) } };
   }
-  if (Array.isArray(next.factions) && next.factions.some((/** @type {any} */ f) => f?.createdByEventId === eventId)) {
+  if (Array.isArray(next.factions) && next.factions.some((/** @type {MutEntity} */ f) => f?.createdByEventId === eventId)) {
     next = { ...next, factions: dropCreated(next.factions) };
   }
   return next;

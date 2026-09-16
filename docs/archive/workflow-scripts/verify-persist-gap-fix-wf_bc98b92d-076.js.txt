@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'verify-persist-gap-fix',
+  description: 'Adversarial skeptic panel refuting the §10.4 edit-persist fix on review-fixes-2026-07-08',
+  phases: [{ title: 'Refute', detail: 'four independent skeptic lenses try to break the fix' }],
+}
+
+const BASE = 'You are a SKEPTICAL senior reviewer on the SettlementForge repo (branch review-fixes-2026-07-08, worktree loving-kapitsa-e597f0). A persist-gap fix is in the WORKING TREE (unstaged) in src/store/settlementSlice.js plus a new tests/store/editActionPersist.test.js. The fix adds a shared store method `persistActiveSaveEdit` (near persistActiveSaveLifecycle, ~line 1473) and calls `get().persistActiveSaveEdit?.()` after the mutation in FOUR edit actions when a change actually happened: applyUserEditAction, revertUserEditAction, renameNPC, renameFaction. Read the ACTUAL current files. Your job is to REFUTE the claim below — hunt for a concrete failure. Default to HOLE_FOUND if genuinely uncertain; only return CONFIRMED_SOUND if you tried hard and could not break it. Cite file:line for every claim.'
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['verdict', 'summary', 'evidence'],
+  properties: {
+    verdict: { type: 'string', enum: ['CONFIRMED_SOUND', 'HOLE_FOUND'] },
+    summary: { type: 'string', description: 'One-sentence bottom line.' },
+    evidence: { type: 'string', description: 'The trace you ran, with file:line citations.' },
+    holes: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['what', 'where', 'scenario'],
+        properties: {
+          what: { type: 'string' },
+          where: { type: 'string', description: 'file:line' },
+          scenario: { type: 'string', description: 'concrete inputs/state -> wrong outcome' },
+        },
+      },
+    },
+  },
+}
+
+const LENSES = [
+  {
+    key: 'reload-survival',
+    claim: 'CLAIM: after any of the four edit actions runs on a HYDRATED library save (activeSaveId set), the edit durably survives a FRESH reload (a new session that re-reads the Supabase row). Trace persistActiveSaveEdit -> persistSaveUpdate (src/store/campaignSliceShared.js -> src/lib/saves.js) -> the row, and the reload via hydrateFromSave (settlementSlice.js ~1953). Try to find a path where the persisted blob DIVERGES from the live edit or the edit still ghosts: canon-phase prose edit, faction legacy-mirror vs powerStructure.factions, the pickleCampaignState re-persist of eventLog/systemState clobbering something, cloneJson dropping a field, editedAt handling, or updateSavedSettlement Object.assign semantics. Does the exact edited value reach hydrateFromSave intact?',
+  },
+  {
+    key: 'batch-atomicity',
+    claim: 'CLAIM: adding persistActiveSaveEdit to renameNPC does NOT break commitPendingEdits (settlementSlice.js ~486) or any flush. Trace commitPendingEdits end-to-end: it replays state.renameNPC (line ~498) which now persists per-edit, then clears the queue and snapshots. Look for double-write CORRUPTION, ordering hazards, an outbox supersede/coalesce problem (src/store/outbox.js), or the terminal snapshot fighting the per-edit persist. Also verify the flushSuppressPersist guard in persistActiveSaveEdit correctly defers when a future flush sets it, and that it is never set today (so no edit is silently dropped now). Is there any OBSERVABLE state regression vs before the fix?',
+  },
+  {
+    key: 'census-completeness',
+    claim: 'CLAIM: the FOUR patched actions are the COMPLETE set of eager store actions that mutate the live settlement blob in place without persisting. Independently re-census src/store/settlementSlice.js and src/store/*.js (rename/pendingEdits/helpers): grep every mutation of state.settlement / s.settlement (assignment, .push, domainApplyUserEdit/domainRevertUserEdit, any entity field write) and classify each as (a) already persists, (b) flush-owned, (c) genuinely a MISSED gap. Report any store action that mutates the persisted settlement blob and is reachable from the UI but neither persists nor is flush-owned. Was any sibling gap missed?',
+  },
+  {
+    key: 'golden-determinism',
+    claim: 'CLAIM: the fix shifts NO golden and breaks NO same-seed determinism. The edit actions run at user-edit time, not generation time; persistActiveSaveEdit only stamps editedAt (a wall-clock ISO string) + writes the blob + campaignState. Try to refute: does any golden/property test (tests/property, tests/**/*golden*) or same-seed generation path invoke these four actions or read editedAt into generated output? Could the new editedAt stamp or the campaignState re-pickle leak into a hashed/golden surface? Is editedAt already non-deterministic wall-clock elsewhere (so no NEW nondeterminism)?',
+  },
+]
+
+phase('Refute')
+const results = await parallel(LENSES.map(l => () =>
+  agent(`${BASE}\n\n${l.claim}`, { label: `refute:${l.key}`, phase: 'Refute', schema: SCHEMA })
+    .then(v => ({ lens: l.key, ...v }))
+))
+
+return results.filter(Boolean)

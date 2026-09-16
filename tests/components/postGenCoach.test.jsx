@@ -1,11 +1,18 @@
 /** @vitest-environment jsdom */
 /**
- * postGenCoach.test.jsx — the post-generate coach's presentational shell.
+ * postGenCoach.test.jsx — the post-generate coach's presentational shell (C4).
  *
- * The pure next-step builder is exercised in wizardNextSteps.test.js (node).
- * This file pins the coach itself: the no-settlement gate, the dismissed gate,
- * and that each forward "what's next" move (save -> export -> refine -> place)
- * renders as its OWN coach step, with state-aware save framing.
+ * PostGenCoach is the revived HOST of the guidance registry's single
+ * `wizard-postgen` whisper (the component swap that replaced the standalone
+ * WizardNextSteps card). The pure next-step builder is exercised in
+ * wizardNextSteps.test.js (node); this file pins the coach itself:
+ *   - the no-settlement gate + the dismissed gate,
+ *   - each forward "what's next" move (save → export → refine → place) renders
+ *     as its OWN step, with state-aware save framing,
+ *   - "Generate another" (the detached footer) is never a coach step,
+ *   - dismissal rides the UNIFIED sf:guidance store (not master's bespoke
+ *     sf.postGenCoachDismissedAt), and the legacy sf:dismissed_whats_next
+ *     dismissal read-once-migrates (WizardNextSteps' retained behaviour).
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -60,8 +67,8 @@ describe('PostGenCoach — what\'s-next steps', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it('renders nothing when the coach was already dismissed', () => {
-    localStorage.setItem('sf.postGenCoachDismissedAt', String(123));
+  it('renders nothing when the whisper was already dismissed (unified key)', () => {
+    localStorage.setItem('sf:guidance:wizard_next_steps', '1');
     const { container } = render(<PostGenCoach />);
     expect(container.firstChild).toBeNull();
   });
@@ -98,7 +105,7 @@ describe('PostGenCoach — what\'s-next steps', () => {
     expect(screen.getByText(/Save it to your library/i)).toBeTruthy();
   });
 
-  it('"Done" on the final step dismisses the coach and persists the dismissal', () => {
+  it('"Done" on the final step dismisses the coach and persists via the unified key', () => {
     const first = render(<PostGenCoach />);
     let guard = 0;
     while (!screen.queryByRole('button', { name: 'Done' }) && guard < 10) {
@@ -108,10 +115,27 @@ describe('PostGenCoach — what\'s-next steps', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Done' }));
     // Gone immediately…
     expect(first.container.firstChild).toBeNull();
-    expect(localStorage.getItem('sf.postGenCoachDismissedAt')).toBeTruthy();
-    // …and stays gone on a fresh mount (persisted).
+    // …persisted through the unified sf:guidance store (not the legacy key).
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
+    // …and stays gone on a fresh mount.
     cleanup();
     const second = render(<PostGenCoach />);
     expect(second.container.firstChild).toBeNull();
+  });
+
+  it('the ghost "got it" control dismisses from any step and persists', () => {
+    const view = render(<PostGenCoach />);
+    fireEvent.click(screen.getByRole('button', { name: /got it from here/i }));
+    expect(view.container.firstChild).toBeNull();
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
+  });
+
+  it('a legacy sf:dismissed_whats_next dismissal read-once-migrates to the unified key', () => {
+    // The pre-consolidation WizardNextSteps dismissal carries forward — a keeper
+    // who already dismissed the What's-next guide is never re-taught.
+    localStorage.setItem('sf:dismissed_whats_next', '1');
+    const view = render(<PostGenCoach />);
+    expect(view.container.firstChild).toBeNull();
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
   });
 });

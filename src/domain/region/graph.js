@@ -7,6 +7,7 @@
  * - regionalGraph records campaign-canon causal channels between settlements
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
 import {
   canonicalEdgeForLink,
@@ -14,24 +15,46 @@ import {
 } from '../relationships/canonicalRelationship.js';
 import { wallClockNow } from '../clock.js';
 
+/** @typedef {{ id?: string, name?: string|null, tier?: string|null, settlementId?: string|null, updatedAt?: string }} RegionNode */
+/** @typedef {{ id?: string, from?: string, to?: string, relationshipType?: string, relation?: string, status?: string, channelIds?: string[], evidence?: any[], updatedAt?: string }} RegionEdge */
+/** @typedef {{ id?: string, type?: string, from?: string, to?: string, direction?: string, status?: string, visibility?: string, strength?: number, severity?: number, confidence?: number, goods?: any[], evidence?: any[], explanation?: string, relationshipType?: string|null, relationshipKey?: string|null, discoveredAt?: string, confirmedAt?: string|null, updatedAt?: string, [k: string]: any }} RegionChannel */
+/** @typedef {{ id?: string, status?: string, severity?: number, confidence?: number, delayTicks?: number, ageTicks?: number, maxAgeTicks?: number|null, waveDepth?: number, waveDecay?: number, createdAt?: string|null, updatedAt?: string, expiresAtTick?: number, conditionId?: string, appliedAt?: string, ignoredAt?: string, expiredAt?: string, resolvedAt?: string, [k: string]: any }} RegionImpact */
+/** @typedef {{ schemaVersion?: number, nodes?: RegionNode[], edges?: RegionEdge[], channels?: RegionChannel[], queuedImpacts?: RegionImpact[], eventLog?: any[], updatedAt?: string }} RegionGraph */
+/** @typedef {Record<string, any>} RegionOptions */
+
 export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 
-// The eventLog is a bounded audit trail, not cold storage. Wizard News is
+// H18: the eventLog is a bounded audit trail, not cold storage. Wizard News is
 // the durable DM-facing record; the log keeps the newest entries (FIFO drop)
 // so campaign JSON stops growing without bound in localStorage/cloud sync.
 export const REGIONAL_EVENT_LOG_LIMIT = 50;
 
+// performance-scale-1: queuedImpacts only ever STATUS-FLIP (queued → applied/
+// ignored/expired/resolved), never removed — so terminal rows accumulate forever,
+// growing per-tick normalization cost and persisted size with campaign age (the
+// exact harm "year two must feel like day one" targets). The eventLog got a cap
+// (H18) but impacts never did. RETENTION POLICY (the sibling of the eventLog cap):
+// keep EVERY non-terminal (queued) row — they are pending disposition and must
+// survive — plus the most-recent REGIONAL_TERMINAL_IMPACT_LIMIT terminal rows, in
+// array order. Terminal rows already emitted their Wizard News at transition time,
+// so dropping the oldest is DISPLAY-SAFE. The cap is chosen far above any golden or
+// realistic multi-year run (measured: ~13 terminal @ 40 ticks/5 settlements, ~49 @
+// 60 ticks/12 settlements, ~109 @ 200 ticks/8 settlements), so short-horizon
+// fixtures are byte-identical (nothing is dropped) and only a decade-scale living
+// realm hits the bound.
+export const REGIONAL_TERMINAL_IMPACT_LIMIT = 250;
+
 export const REGIONAL_CHANNEL_TYPES = Object.freeze([
-  // Logistics / economic
+  // P0: logistics/economic
   'trade_dependency',
   'export_market',
   'trade_route',
-  // Governance / force
+  // P1: governance/force
   'political_authority',
   'tax_obligation',
   'military_protection',
   'war_front',
-  // Social / cross-cutting
+  // P2: social/cross-cutting
   'service_dependency',
   'religious_authority',
   'criminal_corridor',
@@ -77,18 +100,20 @@ function nowIso() {
   return wallClockNow();
 }
 
-// The regional layer's label normalizer now DELEGATES to the single
-// canonical alias table in relationships/canonicalRelationship.js, so the three
-// regional systems can no longer drift. The old local table only healed the
-// legacy plural 'trade_partners'; the shared table covers that plus 'ally',
+// The regional layer's label normalizer now DELEGATES to the single canonical
+// alias table in relationships/canonicalRelationship.js, so the three regional
+// systems can no longer drift. The old local table only healed the legacy
+// plural 'trade_partners' (H12); the shared table covers that plus 'ally',
 // 'overlord', cold-war spellings, etc. Re-exported under the same name so
 // existing importers (worldPulse/stressorDynamics, worldPulse/populationDynamics)
 // are unaffected.
-export function canonicalRelationshipLabel(/** @type {any} */ label) {
-  return canonicalRelationshipLabelShared(label);
+/** @param {unknown} label */
+export function canonicalRelationshipLabel(label) {
+  return canonicalRelationshipLabelShared(/** @type {string} */ (label));
 }
 
-export function stablePart(/** @type {any} */ value) {
+/** @param {unknown} value */
+export function stablePart(value) {
   return String(value || 'unknown')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '_')
@@ -96,17 +121,22 @@ export function stablePart(/** @type {any} */ value) {
     .slice(0, 80) || 'unknown';
 }
 
-export function edgeIdFor(/** @type {any} */ from, /** @type {any} */ to) {
+/**
+ * @param {unknown} from
+ * @param {unknown} to
+ */
+export function edgeIdFor(from, to) {
   return `edge.${stablePart(from)}.${stablePart(to)}`;
 }
 
-export function channelIdFor(/** @type {any} */ channel) {
+/** @param {RegionChannel} channel */
+export function channelIdFor(channel) {
   // An id-less good object used to stringify to '[object Object]', so two
   // distinct un-normalized goods sets collapsed onto one channel id and merged
   // semantically different channels. Coerce each good to a stable scalar key
   // (id, then label) so malformed/un-normalized goods still mint distinct ids.
   const goods = Array.isArray(channel.goods) && channel.goods.length
-    ? channel.goods.map((/** @type {any} */ g) => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
+    ? channel.goods.map(g => stablePart(g?.id || g?.label || (typeof g === 'string' ? g : 'good'))).sort().join('_')
     : 'general';
   return [
     'channel',
@@ -117,10 +147,14 @@ export function channelIdFor(/** @type {any} */ channel) {
   ].join('.');
 }
 
-// Deterministic timestamps: every normalize* default-stamp path takes a
+// Deterministic timestamps (R4): every normalize* default-stamp path takes a
 // threaded `now` so replay stamps no wall-clock time; nowIso() is the
 // fallback ONLY when no `now` is provided.
-function normalizeNode(/** @type {any} */ node, now = null) {
+/**
+ * @param {RegionNode | null | undefined} node
+ * @param {string | null} [now]
+ */
+function normalizeNode(node, now = null) {
   if (!node?.id) return null;
   return {
     id: String(node.id),
@@ -131,7 +165,11 @@ function normalizeNode(/** @type {any} */ node, now = null) {
   };
 }
 
-function normalizeEdge(/** @type {any} */ edge, now = null) {
+/**
+ * @param {RegionEdge | null | undefined} edge
+ * @param {string | null} [now]
+ */
+function normalizeEdge(edge, now = null) {
   if (!edge?.from || !edge?.to) return null;
   return {
     id: edge.id || edgeIdFor(edge.from, edge.to),
@@ -145,9 +183,13 @@ function normalizeEdge(/** @type {any} */ edge, now = null) {
   };
 }
 
-function normalizeImpact(/** @type {any} */ impact, now = null) {
+/**
+ * @param {RegionImpact | null | undefined} impact
+ * @param {string | null} [now]
+ */
+function normalizeImpact(impact, now = null) {
   if (!impact?.id) return null;
-  const status = REGIONAL_IMPACT_STATUSES.includes(impact.status)
+  const status = REGIONAL_IMPACT_STATUSES.includes(/** @type {string} */ (impact.status))
     ? impact.status
     : 'queued';
   return {
@@ -156,23 +198,27 @@ function normalizeImpact(/** @type {any} */ impact, now = null) {
     status,
     severity: clamp01(impact.severity ?? 0),
     confidence: clamp01(impact.confidence ?? 0.5),
-    delayTicks: Math.max(0, Number.isFinite(impact.delayTicks) ? impact.delayTicks : 0),
-    ageTicks: Math.max(0, Number.isFinite(impact.ageTicks) ? impact.ageTicks : 0),
+    delayTicks: Math.max(0, Number.isFinite(impact.delayTicks) ? /** @type {number} */ (impact.delayTicks) : 0),
+    ageTicks: Math.max(0, Number.isFinite(impact.ageTicks) ? /** @type {number} */ (impact.ageTicks) : 0),
     maxAgeTicks: Number.isFinite(impact.maxAgeTicks) ? impact.maxAgeTicks : null,
-    waveDepth: Math.max(0, Number.isFinite(impact.waveDepth) ? impact.waveDepth : 0),
+    waveDepth: Math.max(0, Number.isFinite(impact.waveDepth) ? /** @type {number} */ (impact.waveDepth) : 0),
     waveDecay: clamp01(impact.waveDecay ?? 1),
     createdAt: impact.createdAt || now || nowIso(),
     updatedAt: impact.updatedAt || impact.createdAt || now || nowIso(),
   };
 }
 
-export function normalizeChannel(/** @type {any} */ channel, now = null) {
+/**
+ * @param {RegionChannel | null | undefined} channel
+ * @param {string | null} [now]
+ */
+export function normalizeChannel(channel, now = null) {
   if (!channel?.from || !channel?.to || !channel?.type) return null;
-  if (!REGIONAL_CHANNEL_TYPES.includes(channel.type)) return null;
-  const status = REGIONAL_CHANNEL_STATUSES.includes(channel.status)
+  if (!REGIONAL_CHANNEL_TYPES.includes(/** @type {string} */ (channel.type))) return null;
+  const status = REGIONAL_CHANNEL_STATUSES.includes(/** @type {string} */ (channel.status))
     ? channel.status
     : 'suggested';
-  const visibility = REGIONAL_CHANNEL_VISIBILITIES.includes(channel.visibility)
+  const visibility = REGIONAL_CHANNEL_VISIBILITIES.includes(/** @type {string} */ (channel.visibility))
     ? channel.visibility
     : (DEFAULT_GM_CHANNEL_TYPES.has(channel.type) ? 'gm' : 'public');
   const normalized = {
@@ -185,7 +231,7 @@ export function normalizeChannel(/** @type {any} */ channel, now = null) {
     visibility,
     strength: clamp01(channel.strength ?? channel.severity ?? 0.5),
     confidence: clamp01(channel.confidence ?? 0.5),
-    goods: Array.isArray(channel.goods) ? channel.goods.map((/** @type {any} */ g) => ({ ...g })) : [],
+    goods: Array.isArray(channel.goods) ? channel.goods.map(g => ({ ...g })) : [],
     evidence: Array.isArray(channel.evidence) ? [...channel.evidence] : [],
     explanation: channel.explanation || '',
     relationshipType: channel.relationshipType || null,
@@ -198,12 +244,10 @@ export function normalizeChannel(/** @type {any} */ channel, now = null) {
   return normalized;
 }
 
-function clamp01(/** @type {any} */ value) {
-  const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
+/** @param {unknown} value */
 
-function dedupeById(/** @type {any} */ items) {
+/** @param {Array<{ id?: string }|null|undefined>} [items] */
+function dedupeById(items) {
   const map = new Map();
   for (const item of items || []) {
     if (!item?.id) continue;
@@ -212,57 +256,51 @@ function dedupeById(/** @type {any} */ items) {
   return [...map.values()];
 }
 
-/**
- * True if an evidence list carries a war-layer provenance tag (a source string
- * prefixed 'war_layer', minted by warDeployment.js via mintDirectedChannel).
- * Used to de-alias war-layer fronts from relationship-bundle fronts that share
- * an id (channelIdFor keys only type/from/to/goods).
- *
- * EXPORTED for the war layer's READ-SIDE provenance gate: warDeployment.js reads
- * confirmed war_front channels as live sieges, but channelIdFor keys only
- * type/from/to — so a hostile-RELATIONSHIP war_front bundle (relationshipChannelBundle
- * §hostile, source 'relationship_label') mints a confirmed war_front that is NOT a
- * mobilized siege (no army, never passed the mobilization/feasibility gates). The read
- * helpers gate on this so only war-layer-minted fronts (source 'war_layer*') are read
- * as sieges — the same provenance check syncRelationshipChannelBundle already uses to
- * de-alias the two (isWarLayerMinted).
- *
- * @param {Array<{source?: string}>|undefined|null} evidence
- * @returns {boolean}
- */
-export function hasWarLayerEvidence(evidence) {
-  return Array.isArray(evidence)
-    && evidence.some(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'));
-}
+// performance-scale-7: a NON-ENUMERABLE brand stamped on every ensureRegionalGraph
+// output so a redundant re-ensure of an already-normalized graph can be short-
+// circuited (ensureRegionalGraphOnce). The wizard-news graph-change diff re-ensured
+// the WHOLE graph twice per changed outcome, plus once more per changed impact —
+// multiplying the per-normalization cost by the tick's outcome count. Non-enumerable
+// ⇒ never serialized (byte-identity holds) and dropped by any spread `{...graph}` or
+// structuredClone, so a structurally-modified or rehydrated graph loses the brand and
+// safely falls back to a FULL re-ensure. Sound because no writer in src mutates an
+// ensured graph in place (verified across the tree): branded ⟺ normalized-and-unmodified.
+const ENSURED_BRAND = Symbol('regionalGraphEnsured');
 
 /**
- * The war-layer provenance rows from an evidence list (sources prefixed
- * 'war_layer'), in original order.
- *
- * @param {Array<{source?: string}>|undefined|null} evidence
- * @returns {Array<{source?: string}>}
+ * @param {RegionGraph} [graph]
+ * @param {RegionOptions} [options]
  */
-function warLayerEvidenceRows(evidence) {
-  return Array.isArray(evidence)
-    ? evidence.filter(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'))
-    : [];
-}
-
-export function ensureRegionalGraph(/** @type {any} */ graph = {}, /** @type {any} */ options = {}) {
+export function ensureRegionalGraph(graph = {}, options = {}) {
   // Deterministic timestamps: ensure mints state (inferred edges below, plus
   // any missing default stamp), so callers that thread options.now get
   // byte-identical replays — without it, the channel_inferred edge minted for
   // an edgeless pair was the one record in a pulse apply still reading the
   // wall clock.
   const now = options.now || null;
-  const nodes = dedupeById((graph.nodes || []).map((/** @type {any} */ node) => normalizeNode(node, now)).filter(Boolean));
-  const edges = dedupeById((graph.edges || []).map((/** @type {any} */ edge) => normalizeEdge(edge, now)).filter(Boolean));
-  const channels = dedupeById((graph.channels || []).map((/** @type {any} */ channel) => normalizeChannel(channel, now)).filter(Boolean));
-  // Cap heals legacy saves that accumulated an unbounded log.
+  const nodes = dedupeById((graph.nodes || []).map(node => normalizeNode(node, now)).filter(Boolean));
+  const edges = dedupeById((graph.edges || []).map(edge => normalizeEdge(edge, now)).filter(Boolean));
+  const channels = dedupeById((graph.channels || []).map(channel => normalizeChannel(channel, now)).filter(Boolean));
+  // Cap heals legacy saves that accumulated an unbounded log (H18).
   const eventLog = Array.isArray(graph.eventLog)
     ? graph.eventLog.slice(-REGIONAL_EVENT_LOG_LIMIT)
     : [];
-  const queuedImpacts = dedupeById((graph.queuedImpacts || []).map((/** @type {any} */ impact) => normalizeImpact(impact, now)).filter(Boolean));
+  // performance-scale-1 retention pass (inlined so queuedImpacts keeps the loose
+  // dedupeById flow — see REGIONAL_TERMINAL_IMPACT_LIMIT). Never drops a QUEUED
+  // (pending) row; caps the TERMINAL (applied/ignored/expired/resolved) backlog at the
+  // limit, dropping OLDEST terminal first (front = earliest minted) while preserving
+  // every survivor's relative order — so a graph within the cap is byte-identical
+  // (no reorder, no drop).
+  let queuedImpacts = dedupeById((graph.queuedImpacts || []).map(impact => normalizeImpact(impact, now)).filter(Boolean));
+  let terminalCount = 0;
+  for (const im of queuedImpacts) if (im.status !== 'queued') terminalCount += 1;
+  if (terminalCount > REGIONAL_TERMINAL_IMPACT_LIMIT) {
+    let toDrop = terminalCount - REGIONAL_TERMINAL_IMPACT_LIMIT;
+    queuedImpacts = queuedImpacts.filter(im => {
+      if (im.status !== 'queued' && toDrop > 0) { toDrop -= 1; return false; }
+      return true;
+    });
+  }
 
   const edgeByPair = new Map(edges.map(e => [`${e.from}->${e.to}`, e]));
   for (const channel of channels) {
@@ -276,7 +314,7 @@ export function ensureRegionalGraph(/** @type {any} */ graph = {}, /** @type {an
     if (!edge.channelIds.includes(channel.id)) edge.channelIds.push(channel.id);
   }
 
-  return {
+  const result = {
     schemaVersion: REGIONAL_GRAPH_SCHEMA_VERSION,
     nodes,
     edges,
@@ -285,9 +323,34 @@ export function ensureRegionalGraph(/** @type {any} */ graph = {}, /** @type {an
     eventLog,
     updatedAt: graph.updatedAt || now || nowIso(),
   };
+  // Brand as normalized (non-enumerable ⇒ invisible to JSON / spread / clone).
+  Object.defineProperty(result, ENSURED_BRAND, { value: true, enumerable: false, writable: false, configurable: false });
+  return result;
 }
 
-function nodeFromSave(/** @type {any} */ save, now = null) {
+/**
+ * Return `graph` unchanged when it is already an ensureRegionalGraph output (carries
+ * the non-enumerable brand), else normalize it. A byte-neutral idempotency short-
+ * circuit for hot re-ensure sites (performance-scale-7): the brand guarantees the
+ * graph is normalized-and-unmodified, and any spread / clone / rehydration strips the
+ * brand so an unbranded graph always gets a full ensure. Safe fallback: worst case is
+ * a redundant normalize, never a stale one.
+ * @param {RegionGraph} [graph]
+ * @param {RegionOptions} [options]
+ * @returns {ReturnType<typeof ensureRegionalGraph>}
+ */
+export function ensureRegionalGraphOnce(graph = {}, options = {}) {
+  if (graph && typeof graph === 'object' && /** @type {Record<symbol, unknown>} */ (graph)[ENSURED_BRAND]) {
+    return /** @type {ReturnType<typeof ensureRegionalGraph>} */ (/** @type {unknown} */ (graph));
+  }
+  return ensureRegionalGraph(graph, options);
+}
+
+/**
+ * @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save
+ * @param {string | null} [now]
+ */
+function nodeFromSave(save, now = null) {
   const state = deriveRegionalState(save);
   if (!state.id) return null;
   return normalizeNode({
@@ -299,30 +362,40 @@ function nodeFromSave(/** @type {any} */ save, now = null) {
   });
 }
 
-function neighbourLinksFor(/** @type {any} */ save) {
-  const settlement = settlementFromSave(save);
+/** @param {import('./deriveRegionalState.js').RegionInput|null|undefined} save */
+function neighbourLinksFor(save) {
+  const settlement = /** @type {any} */ (settlementFromSave(save));
   return settlement?.neighbourNetwork
       || settlement?.neighborNetwork
       || settlement?.neighbourLinks
       || [];
 }
 
-function findTargetSave(/** @type {any} */ link, /** @type {any} */ saves) {
+/**
+ * @param {{ id?: string, targetId?: string, settlementId?: string, neighbourName?: string, name?: string }|null|undefined} link
+ * @param {any[]} saves
+ */
+function findTargetSave(link, saves) {
   const targetId = link?.id || link?.targetId || link?.settlementId;
   if (targetId) {
-    const match = saves.find((/** @type {any} */ s) => String(s.id || s.settlement?.id) === String(targetId));
+    const match = saves.find(s => String(s.id || s.settlement?.id) === String(targetId));
     if (match) return match;
   }
   const name = link?.neighbourName || link?.name;
   if (!name) return null;
-  return saves.find((/** @type {any} */ s) => s.name === name || s.settlement?.name === name) || null;
+  return saves.find(s => s.name === name || s.settlement?.name === name) || null;
 }
 
 /**
  * Build a regional graph scaffold from saved settlements and their current
  * neighbourNetwork links. This does not auto-confirm any causal channel.
  */
-export function deriveRegionalGraphFromSaves(/** @type {any[]} */ saves = [], /** @type {any} */ existingGraph = null, /** @type {any} */ options = {}) {
+/**
+ * @param {any[]} [saves]
+ * @param {RegionGraph | null} [existingGraph]
+ * @param {RegionOptions} [options]
+ */
+export function deriveRegionalGraphFromSaves(saves = [], existingGraph = null, options = {}) {
   // Deterministic timestamps: callers thread options.now so a rebuild replay
   // stamps no wall-clock time (wall clock ONLY when not provided).
   const now = options.now || null;
@@ -331,7 +404,7 @@ export function deriveRegionalGraphFromSaves(/** @type {any[]} */ saves = [], /*
   const edges = [...existing.edges];
   const nodeIds = new Set(nodes.map(n => n.id));
   const edgesById = new Map(edges.map(e => [e.id, e]));
-  const pairKeyFor = (/** @type {any} */ a, /** @type {any} */ b) => [String(a), String(b)].sort().join('::');
+  const pairKeyFor = (/** @type {unknown} */ a, /** @type {unknown} */ b) => [String(a), String(b)].sort().join('::');
   const edgesByPair = new Map();
   for (const e of edges) {
     const key = pairKeyFor(e.from, e.to);
@@ -364,11 +437,11 @@ export function deriveRegionalGraphFromSaves(/** @type {any[]} */ saves = [], /*
       const existingEdge = edgesById.get(edgeIdFor(canonical.from, canonical.to))
         || edgesByPair.get(pairKeyFor(canonical.from, canonical.to));
       if (existingEdge) {
-        // The saves' neighbourNetwork is the canonical relationship
+        // H10: the saves' neighbourNetwork is the canonical relationship
         // source — a rebuild refreshes the edge's relationshipType from the
         // live link instead of freezing the first build forever. Pulse-
         // authored label changes stay authoritative between rebuilds because
-        // the pulse writes them back to the links: both sources
+        // the pulse writes them back to the links (H11): both sources
         // converge. Orientation stays as authored (the pulse's own label
         // updates do the same). Identity no-op when the label is unchanged;
         // edges for pairs no longer linked are preserved as-is.
@@ -423,13 +496,41 @@ export function deriveRegionalGraphFromSaves(/** @type {any[]} */ saves = [], /*
  * never curation: an existing channel keeps its status (suggested, confirmed,
  * dormant, and disabled are all sticky), visibility, confirmedAt, and original
  * discoveredAt, while the candidate refreshes the measurement fields
- * (strength, confidence, goods, evidence, explanation). Evidence is the one
- * partial exception: prior 'war_layer*' provenance rows are carried forward so a
- * relationship bundle that collides ids with a war-layer front cannot erase its
- * ownership tag. Only a brand-new channel takes the candidate's status (discovery
- * candidates are born 'suggested').
+ * (strength, confidence, goods, evidence, explanation). Only a brand-new
+ * channel takes the candidate's status (discovery candidates are born
+ * 'suggested').
  */
-export function addRegionalChannels(/** @type {any} */ graph, /** @type {any[]} */ channels = [], /** @type {any} */ options = {}) {
+/**
+ * True iff an evidence list carries a war-layer provenance row (source prefixed
+ * 'war_layer'). The war-front de-alias reads gate on this so only war-layer-minted
+ * fronts are treated as sieges — the same provenance check syncRelationshipChannelBundle
+ * uses to de-alias a war front from a colliding relationship channel.
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {boolean}
+ */
+export function hasWarLayerEvidence(evidence) {
+  return Array.isArray(evidence)
+    && evidence.some(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'));
+}
+
+/**
+ * The war-layer provenance rows from an evidence list (sources prefixed
+ * 'war_layer'), in original order.
+ * @param {Array<{source?: string}>|undefined|null} evidence
+ * @returns {Array<{source?: string}>}
+ */
+function warLayerEvidenceRows(evidence) {
+  return Array.isArray(evidence)
+    ? evidence.filter(item => typeof item?.source === 'string' && item.source.startsWith('war_layer'))
+    : [];
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionChannel[]} [channels]
+ * @param {RegionOptions} [options]
+ */
+export function addRegionalChannels(graph, channels = [], options = {}) {
   // Deterministic timestamps: callers thread options.now (replay must stamp
   // no wall-clock time); the wall clock is the fallback ONLY when absent.
   const now = options.now || nowIso();
@@ -473,7 +574,11 @@ export function addRegionalChannels(/** @type {any} */ graph, /** @type {any[]} 
   return ensureRegionalGraph({ ...current, channels: [...byId.values()], updatedAt: now }, { now });
 }
 
-function relationshipEvidence(/** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
+/**
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
+ */
+function relationshipEvidence(relationshipType, options = {}) {
   return [{
     source: 'relationship_label',
     reason: options.reason || `Relationship became ${String(relationshipType || 'linked').replace(/_/g, ' ')}.`,
@@ -481,7 +586,12 @@ function relationshipEvidence(/** @type {any} */ relationshipType, /** @type {an
   }];
 }
 
-function relationshipChannel(/** @type {any} */ raw, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
+/**
+ * @param {RegionChannel} raw
+ * @param {string} relationshipType
+ * @param {RegionOptions} [options]
+ */
+function relationshipChannel(raw, relationshipType, options = {}) {
   const now = options.now || nowIso();
   return normalizeChannel({
     status: options.status || 'confirmed',
@@ -496,7 +606,17 @@ function relationshipChannel(/** @type {any} */ raw, /** @type {any} */ relation
   });
 }
 
-function twoWayChannels(/** @type {any} */ type, /** @type {any} */ from, /** @type {any} */ to, /** @type {any} */ relationshipType, /** @type {any} */ options, /** @type {any} */ strength, /** @type {any} */ confidence, /** @type {any} */ extra = {}) {
+/**
+ * @param {string} type
+ * @param {string} from
+ * @param {string} to
+ * @param {string} relationshipType
+ * @param {RegionOptions} options
+ * @param {number} strength
+ * @param {number} confidence
+ * @param {RegionOptions} [extra]
+ */
+function twoWayChannels(type, from, to, relationshipType, options, strength, confidence, extra = {}) {
   return [
     relationshipChannel({ type, from, to, strength, confidence, ...extra }, relationshipType, options),
     relationshipChannel({ type, from: to, to: from, strength, confidence, ...extra }, relationshipType, options),
@@ -508,11 +628,16 @@ function twoWayChannels(/** @type {any} */ type, /** @type {any} */ from, /** @t
  * edge-significant for hierarchical labels: edge.from is the patron/overlord,
  * edge.to is the client/vassal.
  */
-export function relationshipChannelBundle(/** @type {any} */ edge, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
+/**
+ * @param {RegionEdge | null | undefined} edge
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
+ */
+export function relationshipChannelBundle(edge, relationshipType, options = {}) {
   if (!edge?.from || !edge?.to || !relationshipType) return [];
   let from = String(edge.from);
   let to = String(edge.to);
-  // Legacy plural 'trade_partners' still mints the full trade bundle.
+  // Legacy plural 'trade_partners' still mints the full trade bundle (H12).
   let rel = canonicalRelationshipLabel(relationshipType);
   if (rel === 'client') {
     [from, to] = [to, from];
@@ -557,8 +682,8 @@ export function relationshipChannelBundle(/** @type {any} */ edge, /** @type {an
       ...twoWayChannels('information_flow', from, to, rel, base, 0.44, 0.56, { visibility: 'gm' }),
     );
   } else if (rel === 'criminal_network' || rel === 'criminal_corridor' || rel === 'smuggling_partner') {
-    // A 'smuggling_partner' label used to mint ZERO channels here (no
-    // branch matched), so an authored smuggling relationship transmitted nothing
+    // A 'smuggling_partner' label used to mint ZERO channels here (no branch
+    // matched), so an authored smuggling relationship transmitted nothing
     // through the regional layer. It is a criminal-corridor relationship.
     out.push(
       ...twoWayChannels('criminal_corridor', from, to, rel, base, 0.68, 0.72, { visibility: 'gm' }),
@@ -566,8 +691,267 @@ export function relationshipChannelBundle(/** @type {any} */ edge, /** @type {an
     );
   }
 
-  return out.filter(Boolean);
+  return /** @type {RegionChannel[]} */ (out.filter(Boolean));
 }
+
+/** @param {RegionChannel} channel */
+function isWarLayerMinted(channel) {
+  return hasWarLayerEvidence(channel?.evidence);
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionEdge | null | undefined} edge
+ * @param {unknown} relationshipType
+ * @param {RegionOptions} [options]
+ */
+export function syncRelationshipChannelBundle(graph, edge, relationshipType, options = {}) {
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const bundle = relationshipChannelBundle(edge, relationshipType, options);
+  const nextIds = new Set(bundle.map(channel => channel.id));
+  const from = String(edge?.from || '');
+  const to = String(edge?.to || '');
+  const relationshipKey = options.relationshipKey || edge?.id || `${from}->${to}`;
+  const samePair = (/** @type {RegionChannel} */ channel) =>
+    (String(channel.from) === from && String(channel.to) === to)
+    || (String(channel.from) === to && String(channel.to) === from);
+  const channels = current.channels.map(channel => {
+    if (nextIds.has(channel.id)) {
+      // A relationship label CHANGE is curation, not discovery: when the
+      // bundle re-establishes channels for a re-warmed relationship, its OWN
+      // channel ids re-confirm out of dormancy. DM 'disabled' is never
+      // overridden, and plain Discover still resurrects nothing
+      // (addRegionalChannels keeps every prior status sticky).
+      if (channel.status !== 'dormant') return channel;
+      // De-alias war-layer fronts: a dormant front the war layer retired is
+      // owned by the war layer, so the relationship relabel leaves it dormant
+      // (no phantom re-confirm). The war layer alone re-mobilizes it.
+      if (isWarLayerMinted(channel)) return channel;
+      return {
+        ...channel,
+        status: 'confirmed',
+        confirmedAt: channel.confirmedAt || now,
+        updatedAt: now,
+        evidence: [
+          ...(channel.evidence || []),
+          { source: 'relationship_label', reason: `Re-confirmed after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
+        ],
+      };
+    }
+    const relationshipGenerated = channel.relationshipKey === relationshipKey
+      || (samePair(channel) && (channel.evidence || []).some((/** @type {any} */ item) => item.source === 'relationship_label'));
+    // DM 'disabled' survives label changes outright — were it parked as
+    // dormant here, a later re-establishment would re-confirm it.
+    if (!relationshipGenerated || channel.status === 'disabled') return channel;
+    return {
+      ...channel,
+      status: 'dormant',
+      updatedAt: now,
+      evidence: [
+        ...(channel.evidence || []),
+        { source: 'relationship_label', reason: `Dormant after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
+      ],
+    };
+  });
+  return addRegionalChannels({ ...current, channels, updatedAt: now }, bundle, { now });
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {string} channelId
+ * @param {string} status
+ * @param {RegionOptions} [options]
+ */
+export function setRegionalChannelStatus(graph, channelId, status, options = {}) {
+  if (!REGIONAL_CHANNEL_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const channels = current.channels.map(channel => {
+    if (channel.id !== channelId) return channel;
+    return {
+      ...channel,
+      status,
+      confirmedAt: status === 'confirmed' ? (channel.confirmedAt || now) : channel.confirmedAt,
+      updatedAt: now,
+    };
+  });
+  return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
+}
+
+// RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`. The after-the-
+// fact visibility setter had exactly one caller — the identically-named store
+// action, which itself had none — so both halves were retired together. The
+// visibility FIELD is untouched and still governed here: REGIONAL_CHANNEL_VISIBILITIES
+// is the vocabulary, normalizeChannel (above) defaults and migrates it per channel
+// type, relationshipChannelBundle mints it, activeChannelsFrom filters on it, and
+// the confirmed-channel preservation branch carries a curated value across a
+// rediscovery pass. Only the never-called mutator is gone.
+
+/**
+ * @param {RegionGraph} graph
+ * @param {string} settlementId
+ * @param {{ includeSuggested?: boolean, types?: string[]|null, visibility?: string[]|null, excludeHidden?: boolean }} [options]
+ */
+export function activeChannelsFrom(graph, settlementId, options = {}) {
+  const { includeSuggested = false, types = null, visibility = null, excludeHidden = false } = options;
+  const typeSet = Array.isArray(types) ? new Set(types) : null;
+  const visibilitySet = Array.isArray(visibility) ? new Set(visibility) : null;
+  return ensureRegionalGraph(graph || {}).channels.filter(channel => {
+    if (String(channel.from) !== String(settlementId)) return false;
+    if (typeSet && !typeSet.has(channel.type)) return false;
+    if (visibilitySet && !visibilitySet.has(channel.visibility)) return false;
+    if (excludeHidden && channel.visibility === 'hidden') return false;
+    if (channel.status === 'confirmed') return true;
+    return includeSuggested && channel.status === 'suggested';
+  });
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {{ recordedAt?: string, [k: string]: any }} event
+ * @param {RegionOptions} [options]
+ */
+export function appendRegionalEvent(graph, event, options = {}) {
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  return ensureRegionalGraph({
+    ...current,
+    // The append-side cap (newest REGIONAL_EVENT_LOG_LIMIT survive, FIFO drop)
+    // keeps the log bounded even before the next ensure pass (H18).
+    eventLog: [...current.eventLog, { ...event, recordedAt: event.recordedAt || now }]
+      .slice(-REGIONAL_EVENT_LOG_LIMIT),
+    updatedAt: now,
+  }, { now });
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {RegionImpact[]} [impacts]
+ * @param {RegionOptions} [options]
+ */
+export function queueRegionalImpacts(graph, impacts = [], options = {}) {
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const byId = new Map(current.queuedImpacts.map(i => [i.id, i]));
+  for (const impact of impacts) {
+    const normalized = normalizeImpact(impact, now);
+    if (!normalized) continue;
+    const previous = byId.get(normalized.id);
+    const merged = { ...(previous || {}), ...normalized, updatedAt: now };
+    if (
+      previous
+      && ['applied', 'ignored', 'expired', 'resolved'].includes(previous.status)
+      && normalized.status === 'queued'
+    ) {
+      merged.status = previous.status;
+      merged.appliedAt = previous.appliedAt;
+      merged.ignoredAt = previous.ignoredAt;
+      merged.expiredAt = previous.expiredAt;
+      merged.resolvedAt = previous.resolvedAt;
+    }
+    // An applied/resolved row's conditionId is load-bearing: its materialized
+    // condition may live under the legacy truncated id (pre-hash rows carry no
+    // conditionId at all). A re-derivation must not stamp the fresh hashed id
+    // over it, or resolve would miss the real condition.
+    if (previous && ['applied', 'resolved'].includes(previous.status)) {
+      if ('conditionId' in previous) merged.conditionId = previous.conditionId;
+      else delete merged.conditionId;
+    }
+    byId.set(normalized.id, merged);
+  }
+  return ensureRegionalGraph({
+    ...current,
+    queuedImpacts: [...byId.values()],
+    updatedAt: now,
+  }, { now });
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {string} impactId
+ * @param {string} status
+ * @param {RegionOptions} [patch]
+ * @param {RegionOptions} [options]
+ */
+export function setRegionalImpactStatus(graph, impactId, status, patch = {}, options = {}) {
+  if (!REGIONAL_IMPACT_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const queuedImpacts = current.queuedImpacts.map(impact => {
+    if (impact.id !== impactId) return impact;
+    return {
+      ...impact,
+      ...patch,
+      status,
+      appliedAt: status === 'applied' ? (impact.appliedAt || patch.appliedAt || now) : impact.appliedAt,
+      ignoredAt: status === 'ignored' ? (impact.ignoredAt || patch.ignoredAt || now) : impact.ignoredAt,
+      expiredAt: status === 'expired' ? (impact.expiredAt || patch.expiredAt || now) : impact.expiredAt,
+      resolvedAt: status === 'resolved' ? (impact.resolvedAt || patch.resolvedAt || now) : impact.resolvedAt,
+      updatedAt: now,
+    };
+  });
+  return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
+}
+
+/** @param {RegionImpact | null | undefined} impact */
+export function isRegionalImpactAvailable(impact) {
+  return impact?.status === 'queued' && (impact.delayTicks || 0) <= 0;
+}
+
+/**
+ * @param {RegionGraph} graph
+ * @param {number} [ticks]
+ * @param {{ now?: string|null, currentTick?: number|null }} [options]
+ */
+export function advanceRegionalImpacts(graph, ticks = 1, options = {}) {
+  const now = options.now || nowIso();
+  const current = ensureRegionalGraph(graph || {}, { now });
+  const amount = Math.max(1, Math.floor(Number.isFinite(ticks) ? ticks : 1));
+  const currentTick = /** @type {number | null} */ (Number.isFinite(options.currentTick) ? options.currentTick : null);
+  const queuedImpacts = current.queuedImpacts.map(impact => {
+    if (impact.status !== 'queued') return impact;
+    const ageTicks = Math.max(0, (impact.ageTicks || 0) + amount);
+    const delayTicks = Math.max(0, (impact.delayTicks || 0) - amount);
+    const expiredByAge = Number.isFinite(impact.maxAgeTicks) && ageTicks >= impact.maxAgeTicks;
+    const expiredByTick = currentTick !== null
+      && Number.isFinite(impact.expiresAtTick)
+      && currentTick >= impact.expiresAtTick;
+    return {
+      ...impact,
+      ageTicks,
+      delayTicks,
+      status: expiredByAge || expiredByTick ? 'expired' : impact.status,
+      expiredAt: expiredByAge || expiredByTick ? (impact.expiredAt || now) : impact.expiredAt,
+      updatedAt: now,
+    };
+  });
+  return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
+}
+
+/** @param {RegionGraph} graph */
+export function buildRegionalIndexes(graph) {
+  const current = ensureRegionalGraph(graph || {});
+  const outgoingBySettlement = new Map();
+  const incomingBySettlement = new Map();
+  const channelsByType = new Map();
+  for (const channel of current.channels) {
+    if (!outgoingBySettlement.has(channel.from)) outgoingBySettlement.set(channel.from, []);
+    if (!incomingBySettlement.has(channel.to)) incomingBySettlement.set(channel.to, []);
+    if (!channelsByType.has(channel.type)) channelsByType.set(channel.type, []);
+    outgoingBySettlement.get(channel.from).push(channel);
+    incomingBySettlement.get(channel.to).push(channel);
+    channelsByType.get(channel.type).push(channel);
+  }
+  return { outgoingBySettlement, incomingBySettlement, channelsByType };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-prep — DORMANT directed-mint substrate (ADDITIVE; zero callers in this tree
+// until W2a-main's war/religion layer mints fronts + authority edges through it).
+// Copied verbatim from the reference tree. Uses only nowIso() + normalizeChannel,
+// both already defined above.
+// ─────────────────────────────────────────────────────────────────────────────
 
 /**
  * Mint a single DIRECTED regional channel that is NOT implied by a relationship
@@ -613,229 +997,4 @@ export function mintDirectedChannel({
     updatedAt: stamp,
     evidence: [{ source, reason: explanation || `${from} → ${to} ${type}`, outcomeId: null }],
   }, /** @type {any} */ (stamp));
-}
-
-// A war-layer-minted directed channel (today: a war_front from mintDirectedChannel
-// with source 'war_layer_deploy') carries a 'war_layer*' evidence source. Its
-// lifecycle is owned by the war layer's mobilization gate + siege-resolution
-// retirement, NOT by relationship labels — so a relationship relabel must never
-// revive it. This matters because channelIdFor keys only (type, from, to, goods):
-// a hostile-relationship war_front bundle mints the SAME id as a war-layer front,
-// so without this guard the dedormancy branch below would silently re-confirm a
-// war-layer front the war layer had retired to 'dormant', re-seeding a phantom
-// siege that bypasses the mobilization gate.
-/**
- * @param {{evidence?: Array<{source?: string}>}|null|undefined} channel
- * @returns {boolean}
- */
-function isWarLayerMinted(channel) {
-  return hasWarLayerEvidence(channel?.evidence);
-}
-
-export function syncRelationshipChannelBundle(/** @type {any} */ graph, /** @type {any} */ edge, /** @type {any} */ relationshipType, /** @type {any} */ options = {}) {
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const bundle = relationshipChannelBundle(edge, relationshipType, options);
-  const nextIds = new Set(bundle.map((/** @type {any} */ channel) => channel.id));
-  const from = String(edge?.from || '');
-  const to = String(edge?.to || '');
-  const relationshipKey = options.relationshipKey || edge?.id || `${from}->${to}`;
-  const samePair = (/** @type {any} */ channel) =>
-    (String(channel.from) === from && String(channel.to) === to)
-    || (String(channel.from) === to && String(channel.to) === from);
-  const channels = current.channels.map(channel => {
-    if (nextIds.has(channel.id)) {
-      // A relationship label CHANGE is curation, not discovery: when the
-      // bundle re-establishes channels for a re-warmed relationship, its OWN
-      // channel ids re-confirm out of dormancy. DM 'disabled' is never
-      // overridden, and plain Discover still resurrects nothing
-      // (addRegionalChannels keeps every prior status sticky).
-      if (channel.status !== 'dormant') return channel;
-      // De-alias war-layer fronts: a dormant front the war layer retired is
-      // owned by the war layer, so the relationship relabel leaves it dormant
-      // (no phantom re-confirm). The war layer alone re-mobilizes it.
-      if (isWarLayerMinted(channel)) return channel;
-      return {
-        ...channel,
-        status: 'confirmed',
-        confirmedAt: channel.confirmedAt || now,
-        updatedAt: now,
-        evidence: [
-          ...(channel.evidence || []),
-          { source: 'relationship_label', reason: `Re-confirmed after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
-        ],
-      };
-    }
-    const relationshipGenerated = channel.relationshipKey === relationshipKey
-      || (samePair(channel) && (channel.evidence || []).some((/** @type {any} */ item) => item.source === 'relationship_label'));
-    // DM 'disabled' survives label changes outright — were it parked as
-    // dormant here, a later re-establishment would re-confirm it.
-    if (!relationshipGenerated || channel.status === 'disabled') return channel;
-    return {
-      ...channel,
-      status: 'dormant',
-      updatedAt: now,
-      evidence: [
-        ...(channel.evidence || []),
-        { source: 'relationship_label', reason: `Dormant after relationship became ${String(relationshipType).replace(/_/g, ' ')}.` },
-      ],
-    };
-  });
-  return addRegionalChannels({ ...current, channels, updatedAt: now }, bundle, { now });
-}
-
-export function setRegionalChannelStatus(/** @type {any} */ graph, /** @type {any} */ channelId, /** @type {any} */ status, /** @type {any} */ options = {}) {
-  if (!REGIONAL_CHANNEL_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const channels = current.channels.map(channel => {
-    if (channel.id !== channelId) return channel;
-    return {
-      ...channel,
-      status,
-      confirmedAt: status === 'confirmed' ? (channel.confirmedAt || now) : channel.confirmedAt,
-      updatedAt: now,
-    };
-  });
-  return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
-}
-
-export function setRegionalChannelVisibility(/** @type {any} */ graph, /** @type {any} */ channelId, /** @type {any} */ visibility, /** @type {any} */ options = {}) {
-  if (!REGIONAL_CHANNEL_VISIBILITIES.includes(visibility)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const channels = current.channels.map(channel => {
-    if (channel.id !== channelId) return channel;
-    return { ...channel, visibility, updatedAt: now };
-  });
-  return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
-}
-
-export function activeChannelsFrom(/** @type {any} */ graph, /** @type {any} */ settlementId, /** @type {any} */ options = {}) {
-  const { includeSuggested = false, types = null, visibility = null, excludeHidden = false } = options;
-  const typeSet = Array.isArray(types) ? new Set(types) : null;
-  const visibilitySet = Array.isArray(visibility) ? new Set(visibility) : null;
-  return ensureRegionalGraph(graph || {}).channels.filter(channel => {
-    if (String(channel.from) !== String(settlementId)) return false;
-    if (typeSet && !typeSet.has(channel.type)) return false;
-    if (visibilitySet && !visibilitySet.has(channel.visibility)) return false;
-    if (excludeHidden && channel.visibility === 'hidden') return false;
-    if (channel.status === 'confirmed') return true;
-    return includeSuggested && channel.status === 'suggested';
-  });
-}
-
-export function appendRegionalEvent(/** @type {any} */ graph, /** @type {any} */ event, /** @type {any} */ options = {}) {
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  return ensureRegionalGraph({
-    ...current,
-    // The append-side cap (newest REGIONAL_EVENT_LOG_LIMIT survive, FIFO drop)
-    // keeps the log bounded even before the next ensure pass.
-    eventLog: [...current.eventLog, { ...event, recordedAt: event.recordedAt || now }]
-      .slice(-REGIONAL_EVENT_LOG_LIMIT),
-    updatedAt: now,
-  }, { now });
-}
-
-export function queueRegionalImpacts(/** @type {any} */ graph, /** @type {any[]} */ impacts = [], /** @type {any} */ options = {}) {
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const byId = new Map(current.queuedImpacts.map(i => [i.id, i]));
-  for (const impact of impacts) {
-    const normalized = normalizeImpact(impact, now);
-    if (!normalized) continue;
-    const previous = byId.get(normalized.id);
-    const merged = { ...(previous || {}), ...normalized, updatedAt: now };
-    if (
-      previous
-      && ['applied', 'ignored', 'expired', 'resolved'].includes(previous.status)
-      && normalized.status === 'queued'
-    ) {
-      merged.status = previous.status;
-      merged.appliedAt = previous.appliedAt;
-      merged.ignoredAt = previous.ignoredAt;
-      merged.expiredAt = previous.expiredAt;
-      merged.resolvedAt = previous.resolvedAt;
-    }
-    // An applied/resolved row's conditionId is load-bearing: its materialized
-    // condition may live under the legacy truncated id (pre-hash rows carry no
-    // conditionId at all). A re-derivation must not stamp the fresh hashed id
-    // over it, or resolve would miss the real condition.
-    if (previous && ['applied', 'resolved'].includes(previous.status)) {
-      if ('conditionId' in previous) merged.conditionId = previous.conditionId;
-      else delete merged.conditionId;
-    }
-    byId.set(normalized.id, merged);
-  }
-  return ensureRegionalGraph({
-    ...current,
-    queuedImpacts: [...byId.values()],
-    updatedAt: now,
-  }, { now });
-}
-
-export function setRegionalImpactStatus(/** @type {any} */ graph, /** @type {any} */ impactId, /** @type {any} */ status, /** @type {any} */ patch = {}, /** @type {any} */ options = {}) {
-  if (!REGIONAL_IMPACT_STATUSES.includes(status)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const queuedImpacts = current.queuedImpacts.map(impact => {
-    if (impact.id !== impactId) return impact;
-    return {
-      ...impact,
-      ...patch,
-      status,
-      appliedAt: status === 'applied' ? (impact.appliedAt || patch.appliedAt || now) : impact.appliedAt,
-      ignoredAt: status === 'ignored' ? (impact.ignoredAt || patch.ignoredAt || now) : impact.ignoredAt,
-      expiredAt: status === 'expired' ? (impact.expiredAt || patch.expiredAt || now) : impact.expiredAt,
-      resolvedAt: status === 'resolved' ? (impact.resolvedAt || patch.resolvedAt || now) : impact.resolvedAt,
-      updatedAt: now,
-    };
-  });
-  return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
-}
-
-export function isRegionalImpactAvailable(/** @type {any} */ impact) {
-  return impact?.status === 'queued' && (impact.delayTicks || 0) <= 0;
-}
-
-export function advanceRegionalImpacts(/** @type {any} */ graph, /** @type {any} */ ticks = 1, /** @type {any} */ options = {}) {
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const amount = Math.max(1, Math.floor(Number.isFinite(ticks) ? ticks : 1));
-  const currentTick = Number.isFinite(options.currentTick) ? options.currentTick : null;
-  const queuedImpacts = current.queuedImpacts.map(impact => {
-    if (impact.status !== 'queued') return impact;
-    const ageTicks = Math.max(0, (impact.ageTicks || 0) + amount);
-    const delayTicks = Math.max(0, (impact.delayTicks || 0) - amount);
-    const expiredByAge = Number.isFinite(impact.maxAgeTicks) && ageTicks >= impact.maxAgeTicks;
-    const expiredByTick = currentTick !== null
-      && Number.isFinite(impact.expiresAtTick)
-      && currentTick >= impact.expiresAtTick;
-    return {
-      ...impact,
-      ageTicks,
-      delayTicks,
-      status: expiredByAge || expiredByTick ? 'expired' : impact.status,
-      expiredAt: expiredByAge || expiredByTick ? (impact.expiredAt || now) : impact.expiredAt,
-      updatedAt: now,
-    };
-  });
-  return ensureRegionalGraph({ ...current, queuedImpacts, updatedAt: now }, { now });
-}
-
-export function buildRegionalIndexes(/** @type {any} */ graph) {
-  const current = ensureRegionalGraph(graph || {});
-  const outgoingBySettlement = new Map();
-  const incomingBySettlement = new Map();
-  const channelsByType = new Map();
-  for (const channel of current.channels) {
-    if (!outgoingBySettlement.has(channel.from)) outgoingBySettlement.set(channel.from, []);
-    if (!incomingBySettlement.has(channel.to)) incomingBySettlement.set(channel.to, []);
-    if (!channelsByType.has(channel.type)) channelsByType.set(channel.type, []);
-    outgoingBySettlement.get(channel.from).push(channel);
-    incomingBySettlement.get(channel.to).push(channel);
-    channelsByType.get(channel.type).push(channel);
-  }
-  return { outgoingBySettlement, incomingBySettlement, channelsByType };
 }

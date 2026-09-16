@@ -7,9 +7,20 @@ import {
   relationshipKeyFromEdge,
   relationshipRoles,
 } from './relationshipEvolution.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 
 export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
 export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
+// D5 SEAM (deliberately deferred — documented, not a bug to re-find): the lifespan
+// memory band (relationshipEvolution.memoryHorizonMultiplierOf) scales the load-bearing
+// grievance/warmth mean-reversion in relaxRelationshipStates (both signs, all four D5
+// pins). This incident-memory HALF-LIFE — a secondary read feeding posture classification
+// and revanchism — is NOT yet band-scaled: threading a per-edge horizon through
+// collectMemories → memoryEntry → relationshipMemoryWeight's {halfLifeTicks,
+// maxLookbackTicks} options is the follow-up. Consequence today: an `undying` town's
+// resentment persists (relax suppressed) but its derived memoryScore still decays on the
+// 4-tick human half-life. relationshipMemoryWeight already accepts the scaled options, so
+// the wiring point is ready.
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
 
@@ -140,7 +151,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   const out = [];
   // One world event lands in up to THREE stores: applyRelationshipPatch writes
   // a recentIncidents row AND (for label changes) a history row, while the
-  // pulse record keeps the outcome itself in pulseHistory.selectedOutcomes —
+  // pulse record keeps the outcome itself in its internal consequence window —
   // and a hierarchy resolution writes incident + history + hierarchyResolutions
   // in one call. Each event must score ONCE (double/triple-counting saturated
   // memoryScore — one modest incident read as an escalating rivalry). The
@@ -178,7 +189,12 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const proposal of worldState?.proposals || []) {
     if (proposal?.status === 'applied' && proposal?.outcome?.id) appliedMarkers.add(proposal.outcome.id);
   }
-  for (const store of [relState.recentIncidents, relState.hierarchyResolutions, relState.history]) {
+  for (const store of [
+    relState.recentIncidents,
+    relState.hierarchyResolutions,
+    relState.turningPoints,
+    relState.history,
+  ]) {
     for (const row of store || []) {
       if (row?.outcomeId) appliedMarkers.add(row.outcomeId);
     }
@@ -186,7 +202,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
 
   for (const pulse of worldState?.pulseHistory || []) {
     const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
-    for (const outcome of pulse?.selectedOutcomes || []) {
+    for (const outcome of outcomesForMechanicalHistory(pulse)) {
       if (outcome?.relationshipKey !== relationshipKey) continue;
       if (outcome?.applyMode === 'proposal' && !appliedMarkers.has(outcome?.id)) continue;
       const tick = Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick;
@@ -216,6 +232,14 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const item of relState.hierarchyResolutions || []) {
     const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
     add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
+  }
+  // Major label/hierarchy changes survive in a separate bounded archive even
+  // after the rolling history window fills. Read it before history so the
+  // durable copy claims the identity and the duplicate short-window row cannot
+  // double-score.
+  for (const item of relState.turningPoints || []) {
+    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_turning_point');
+    add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type)]);
   }
   for (const item of relState.history || []) {
     const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');

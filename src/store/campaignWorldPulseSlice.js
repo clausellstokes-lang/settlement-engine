@@ -9,103 +9,186 @@
  * actions were scattered through the campaignSlice megafile; grouping them here
  * shrinks that file and gives the pulse surface a single home.
  *
- * Composed into the same store as a spread sub-slice (store/index.js) so it
- * shares one set/get with campaignSlice — every cross-action call already goes
- * through get(), so nothing about call semantics changes. The slice owns the
- * session-scoped `pulseUndoStack` state (NOT persisted; a reload clears it).
+ * campaignRuntime.js constructs this body with the same set/get as the eager
+ * pulse entry, then publishes all actions atomically. Every cross-action call
+ * still goes through get(), so return semantics do not change once the route
+ * preload has armed the runtime. The eager entry owns the session-scoped
+ * `pulseUndoStack` state (NOT persisted; a reload clears it).
  *
- * Imports only leaf helpers (shared persistence, pulse helpers, the region
- * domain + light worldPulse schema leaves, and the fingerprint/analytics libs)
- * and never campaignSlice, so there is no cycle. The HEAVY worldPulse simulation
- * is NOT a static import — it loads lazily (see below).
- *
- * ── Lazy worldPulse simulation ──────────────────────────────────────────────
- * The full worldPulse domain barrel (../domain/worldPulse/index.js) is ~22.7k
- * LOC of simulation. Statically importing it here pulled the entire simulation
- * into store/index.js's static graph, so it landed in the eager entry chunk at
- * first paint even though a user only touches it when they advance a campaign's
- * world clock. Mirroring settlementSlice.loadEngine(), the HEAVY simulation
- * entry points (advance / preview / apply-proposal / party-impact) now load
- * through a module-level memoized `loadWorldPulse()` dynamic import — each action
- * that runs the simulation does `const { ... } = await loadWorldPulse()` before
- * its `set()` producer (Immer producers can't be async), exactly as the engine
- * loader does. Those actions are already async and already awaited by callers
- * (SettlementsPanel/WorldMap await advanceCampaignWorld; SimulationRulesDialog
- * wraps preview in `await Promise.resolve(...)`), so making preview return a
- * Promise is contract-compatible.
- *
- * The LIGHT, schema-shaped helpers (ensureWorldState / canonizeWorldState /
- * updateProposalStatus / normalizeSimulationRules) stay STATIC, imported from
- * their leaf modules (worldState.js / simulationRules.js) rather than the barrel.
- * Those leaves only import simulationRules + ../clock + ../clone (no heavy
- * transitive deps), so they cost ~nothing on first paint, and keeping them sync
- * preserves the contract of `getCampaignWorldState` — which aiSlice consumes
- * SYNCHRONOUSLY (its result is read immediately, not awaited), so it must NOT
- * become async. Importing them from the leaves (not index.js) is also what lets
- * the architecture-boundary ratchet assert this slice has no top-level
- * `worldPulse/index.js` edge.
+ * Imports only leaf helpers (shared persistence, pulse helpers, the
+ * region/worldPulse domains, and the fingerprint/analytics libs) and never
+ * campaignSlice, so there is no cycle.
  */
-// ── Lazy worldPulse simulation loader ───────────────────────────────────────
-// Declared BEFORE the import block (mirroring settlementSlice.loadEngine()) so
-// the module's static `import` statements stay first — keeping `import/first`
-// happy — while the dynamic import() boundary lives in a function body. This is
-// the seam that keeps the ~22.7k-LOC simulation OUT of the first-paint entry
-// chunk: it loads only when an action that runs the simulation is first invoked.
-/** @type {?Promise<typeof import('../domain/worldPulse/index.js')>} */
-let _worldPulsePromise = null;
-/** Memoized dynamic import of the worldPulse simulation barrel. Resolves once
- *  and is shared by every action that runs the simulation. */
-function loadWorldPulse() {
-  return _worldPulsePromise ??= import('../domain/worldPulse/index.js');
+// Narrow world-state helpers only. Import them from leaf modules (never the
+// `export *` barrel) so the cold campaign capsule does not absorb the barrel's
+// whole re-export graph. The heavier tick machinery remains a second-stage lazy
+// load via loadWorldEngine() below.
+import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { worldProgressionOf, advancesOnOpen } from '../domain/worldPulse/simulationRules.js';
+import {
+  findActiveCampaign,
+  captureCampaignSession, isCurrentCampaignSession,
+  parkedIntervalUndoSnapshot,
+} from './campaignSliceShared.js';
+
+export const CAMPAIGN_PULSE_RUNTIME_SENTINEL = 'settlementforge_campaign_pulse_body_v1';
+// The advance/resume BODY (with its advance-only fingerprint/analytics/consent
+// imports) lives in the lazily-loaded ./campaignAdvanceSession.js so it stays out
+// of the first-paint entry closure; this slice keeps only the light mutators +
+// getters + thin guarded wrappers.
+
+// ── Lazy world-simulation engine ──────────────────────────────────────────
+// The advance / preview / apply-proposal / party-impact machinery
+// (advanceCampaignWorld + its whole dependency graph: relationshipEvolution,
+// npcAgency, factionCompetition, institutionLifecycle, tier/population dynamics,
+// applyWorldPulse, …) is the single largest first-paint contributor and is ONLY
+// reachable from these async user actions. Statically importing it welded the
+// full campaign simulation into first paint for anonymous visitors. We instead
+// dynamic-import it here — memoized so it resolves once and every later call
+// hits the cached module promise — so Rollup splits it into its own chunk that
+// is fetched on the first pulse action, not on boot. Mirrors settlementSlice's
+// proven loadEngine() pattern. Each consumer below is already an async action,
+// so it simply awaits the load before mutating state.
+let _worldEnginePromise = null;
+function loadWorldEngine() {
+  if (!_worldEnginePromise) {
+    _worldEnginePromise = Promise.all([
+      import('../domain/worldPulse/advanceCampaignWorld.js'),
+      // Light transport for the off-main-thread multi-tick advance. Loaded HERE
+      // (not statically) so it rides the lazy sim chunk instead of the first-paint
+      // entry closure — it's only ever used once an advance runs, which already
+      // awaits this loader. It takes the sim function as a fallback, so this slice
+      // keeps its no-static-worldPulse-import invariant.
+      import('../lib/advanceWorkerClient.js'),
+      // The multi-tick SESSION logic (pause cursor + resume orchestration). Same
+      // lazy boundary: pause/resume is reachable only once an advance runs, so its
+      // bytes stay OUT of the first-paint entry closure.
+      import('./campaignAdvanceSession.js'),
+    ]).then(([advance, workerClient, session]) => ({
+      previewCampaignWorldPulse: advance.previewCampaignWorldPulse,
+      advanceCampaignWorld: advance.advanceCampaignWorld,
+      // Multi-tick orchestrator (Advance-scaling): N real one-week kernel ticks
+      // composed into ONE result of the same shape as the single-tick advance.
+      // Re-exported by advanceCampaignWorld.js, so it rides the SAME lazy chunk —
+      // no extra first-paint cost.
+      simulateCampaignWorldInterval: advance.simulateCampaignWorldInterval,
+      runAdvanceInterval: workerClient.runAdvanceInterval,
+      runAdvanceCampaignWorld: session.runAdvanceCampaignWorld,
+      runResolveIntervalMajors: session.runResolveIntervalMajors,
+      // M10b catch-up body — lazified out of this eager slice (FP-2 reclaim); rides
+      // the SAME lazy session chunk as the advance/resume bodies.
+      runCatchUpCampaignWorld: session.runCatchUpCampaignWorld,
+    })).catch(error => {
+      _worldEnginePromise = null;
+      throw error;
+    });
+  }
+  return _worldEnginePromise;
 }
 
-import {
-  ensureRegionalGraph,
-  ensureWizardNewsFeed,
-  queueRegionalImpacts,
-} from '../domain/region/index.js';
-// LIGHT, sync schema helpers (leaf modules — no heavy transitive deps). Imported
-// from the leaves (not the barrel) so this slice has NO top-level edge to
-// worldPulse/index.js: the heavy simulation only enters via loadWorldPulse().
-import {
-  canonizeWorldState,
-  ensureWorldState,
-  updateProposalStatus as domainUpdateWorldPulseProposalStatus,
-} from '../domain/worldPulse/worldState.js';
-import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
-import {
-  cloneJson, cacheCampaignState, syncCampaignSnapshot,
-  flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
-} from './campaignSliceShared.js';
-import {
-  capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
-  restorePulseSnapshot, applyWarFrontSeed,
-} from './campaignPulseHelpers.js';
-import { track, EVENTS } from '../lib/analytics.js';
-import { flag } from '../lib/flags.js';
-// Light transport for the off-main-thread advance (NO domain edge — it takes the
-// sim function as a fallback, so this slice keeps its no-static-worldPulse-import
-// invariant; the sim still enters only via loadWorldPulse()).
-import { runAdvanceInterval } from '../lib/advanceWorkerClient.js';
-import { captureFingerprint } from '../lib/researchCapture.js';
-import { getConsent } from '../lib/consent.js';
-import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
-import {
-  extractPulseSummary, extractPulseEffects, extractStressorTransitions,
-  extractProposalDecision, extractPartyImpact, extractSimulationRules,
-} from '../lib/pulseFingerprint.js';
-import {
-  extractRegionalGraphSnapshot, extractRegionalArcs, extractRegionalPropagation,
-} from '../lib/regionalFingerprint.js';
+// ── Lazy low-frequency mutation bodies ────────────────────────────────────
+// Preview, canonization, rules, proposal, party-impact, relationship-ripple,
+// and pulse-undo actions are absent from anonymous first paint. Their public
+// wrappers stay here because they own the synchronous guard prefix: invalid,
+// frozen, unentitled, in-flight, or parked-pause calls must return before any
+// chunk is requested. The deferred module repeats owner and mutation checks
+// after loading, then owns the atomic store mutation + persistence sequence.
+//
+// Keep this loader separate from loadWorldEngine. Most mutations need only a
+// narrow domain leaf, not the full tick engine; joining the promises would turn
+// a proposal dismissal or undo into an unnecessary simulation download.
+let _deferredPulseMutationsPromise = null;
+function loadDeferredPulseMutations() {
+  if (!_deferredPulseMutationsPromise) {
+    _deferredPulseMutationsPromise = import('./campaignWorldPulseDeferred.js').catch(error => {
+      _deferredPulseMutationsPromise = null;
+      throw error;
+    });
+  }
+  return _deferredPulseMutationsPromise;
+}
 
-// Per-campaign cap on retained pre-pulse snapshots (multi-step undo depth).
-const PULSE_UNDO_CAP = 10;
+// FROZEN progression guard (CL-0 item 4): worldProgression 'frozen' parks time
+// itself — advance/resume/preview no-op at the store, the same no-op-with-
+// typed-reason discipline as the isAdvanceInFlight guard. State is FULLY
+// preserved (nothing is deleted or rewritten); unfreezing restores everything,
+// because freezing never touched anything but the rules. worldProgressionOf is
+// a virtual read: an untouched campaign has no worldProgression key and reads
+// 'dm_advanced' — this guard is byte-invisible to legacy saves.
+// The typed no-op result is shared (callers treat advance results as
+// read-only; ADVANCE_ERROR_TEXT maps the reason to plain language).
+const WORLD_FROZEN_RESULT = Object.freeze({ ok: false, reason: 'world_frozen' });
+const AUTH_SESSION_CHANGED_RESULT = Object.freeze({ ok: false, reason: 'auth_session_changed' });
+
+// ── Owner/session fence ────────────────────────────────────────────────────
+// Pulse actions routinely cross lazy-import, worker, and persistence awaits. A
+// sign-out/sign-in can therefore replace the entire campaign list while an old
+// action is suspended. Campaign UUIDs are only unique inside an account, so
+// re-finding by campaignId after the await is not sufficient: account B may own
+// the same UUID as account A. Auth rotates campaignSessionGeneration before it
+// publishes any owner or same-owner SIGNED_IN session boundary; token refreshes
+// deliberately do not rotate it. The shared owner+generation token is therefore
+// the complete fence and avoids teaching this eager slice how to parse JWTs.
+const capturePulseSession = get => captureCampaignSession(get());
+const isPulseSessionCurrent = (get, fence) => isCurrentCampaignSession(get(), fence);
+
+// The public `advanceInFlight` list remains campaign-id-shaped for existing UI
+// subscribers. A private per-store token distinguishes A's stale finalizer from
+// B's new same-UUID advance, so the former can never clear the latter's marker.
+const advanceFlightTokens = new WeakMap();
+
+function flightTokenMap(get) {
+  let map = advanceFlightTokens.get(get);
+  if (!map) {
+    map = new Map();
+    advanceFlightTokens.set(get, map);
+  }
+  return map;
+}
+
+function activeFlightToken(get, campaignId) {
+  return flightTokenMap(get).get(String(campaignId)) || null;
+}
+
+function beginAdvanceFlight(set, get, campaignId, sessionFence) {
+  const key = String(campaignId);
+  flightTokenMap(get).set(key, sessionFence);
+  set(state => {
+    state.advanceInFlight = [
+      ...(state.advanceInFlight || []).filter(id => String(id) !== key),
+      campaignId,
+    ];
+  });
+  return sessionFence;
+}
+
+function finishAdvanceFlight(set, get, campaignId, token) {
+  const key = String(campaignId);
+  const map = flightTokenMap(get);
+  // A later account/session may already have started its own same-UUID advance.
+  // Only the invocation that owns the current token may clear the shared marker.
+  if (map.get(key) !== token) return;
+  // clearCampaigns owns auth-boundary cleanup of the public transient list. A
+  // stale finally must not issue even an otherwise-benign set() into the new
+  // account; leave this private token to be replaced by the next same-id start.
+  if (!isPulseSessionCurrent(get, token)) return;
+  map.delete(key);
+  set(state => {
+    state.advanceInFlight = (state.advanceInFlight || []).filter(id => String(id) !== key);
+  });
+}
+
+// Frozen read against the STORED rules of a campaign (advance/resume guards).
+function frozenFor(get, campaignId) {
+  return worldProgressionOf(findActiveCampaign(get().campaigns, campaignId)?.worldState?.simulationRules) === 'frozen';
+}
 
 // ── Cross-slice contract ──────────────────────────────────────────────────
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. This slice's contract:
 //
-// OWNS state:   pulseUndoStack (session-scoped; not persisted).
+// OWNS state:   pulseUndoStack + proposalUndoStack + advanceSeqByCampaign
+//               (all session-scoped; not persisted).
 // PROVIDES (read via get() by other slices): recordPartyImpact — called by
 //   settlementSlice.rippleEventThroughWorld on a party-caused canon event.
 //   (advanceCampaignWorld → get().recordPartyImpact is a SAME-slice call.)
@@ -119,585 +202,351 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
 
-  // In-flight guard: campaignIds with an advanceCampaignWorld currently running.
-  // advanceCampaignWorld is async (it awaits the lazy simulation import, then the
-  // cloud flush + party-impact replays), so a double-click would otherwise enter
-  // the action TWICE — running two real ticks (cloud increment + world drift) off
-  // one user intent. We mark the campaignId here SYNCHRONOUSLY at the very top of
-  // the action (before the first await) and clear it in a finally, so a second
-  // concurrent call sees its campaign already in flight and no-ops. Session-scoped
-  // like pulseUndoStack (an array, not a Set, so it stays Immer-/persist-friendly);
-  // a reload clears it. Mirrors aiLoading / changeQueueFlushing.
-  //
-  // The SAME mark also gates every OTHER pulse mutator on this campaign
-  // (canonize / rules / apply-proposal / dismiss-proposal / undo). The multi-tick
-  // advance yields to the event loop between tick batches, and its Phase-2 commit
-  // replaces worldState WHOLESALE from clones lifted BEFORE that yield — so a
-  // mutation landing during the await would be silently reverted (and its persist
-  // clobbered by the advance's). Each mutator therefore no-ops with its existing
-  // "nothing changed" value (null / false) while its campaign is advancing.
-  // recordPartyImpact is deliberately NOT gated: advanceCampaignWorld itself
-  // replays drained party impacts through it while still marked in flight.
+  // R-1 (queue #5): session-scoped ring of pre-APPLY snapshots, one per applied
+  // world-pulse proposal, capped PER campaign (PROPOSAL_UNDO_CAP in the deferred
+  // module). A SEPARATE array from pulseUndoStack BY CONSTRUCTION so proposal
+  // traffic can never evict a pre-advance snapshot (the R-0 cap-flood finding).
+  // NOT persisted — a reload clears it, exactly like pulseUndoStack.
+  proposalUndoStack: [],
+
+  // R-1 MUST-FIX (ring-guard saturation): { [campaignId]: int } — the campaign's
+  // LOGICAL advance depth. The advance push site increments it; undoLastPulse
+  // decrements it as it pops; pulseUndoStack cap-EVICTION never touches it. The
+  // proposal ring's coherence guard stamps/compares THIS, never a count of
+  // retained advance snapshots (which saturates at PULSE_UNDO_CAP and fails
+  // open to stale restores). NOT persisted — a reload clears it, exactly like
+  // both undo stacks; clearTransientCampaignWork resets it at the auth boundary.
+  advanceSeqByCampaign: {},
+
+  // In-flight guard: campaignIds with an advanceCampaignWorld (or resume) currently
+  // running. Multi-tick advance is async — it awaits the interval orchestrator,
+  // which yields to the event loop between tick batches — so a double-click would
+  // otherwise re-enter the action TWICE and run two real tick batches off one
+  // intent. We mark the campaignId here SYNCHRONOUSLY at the very top of the action
+  // (before the first await) and clear it in a finally, so a second concurrent call
+  // sees its campaign already in flight and no-ops. The SAME mark gates every other
+  // pulse MUTATOR on this campaign (canonize / rules / apply-proposal / dismiss /
+  // undo): a mutation landing during the advance's yield would be reverted by its
+  // Phase-2 commit (which replaces worldState wholesale from clones lifted BEFORE
+  // the yield). recordPartyImpact is deliberately NOT gated — advanceCampaignWorld
+  // replays its drained party impacts through it while still marked in flight.
+  // Session-scoped (an array, not a Set, so it stays Immer-/persist-friendly); a
+  // reload clears it.
   advanceInFlight: [],
   /** Is an advanceCampaignWorld currently running for this campaign? Drives the
    *  disabled state of the Advance button so a second click can't fire mid-tick. */
-  isAdvanceInFlight: (campaignId) =>
-    (get().advanceInFlight || []).some(id => String(id) === String(campaignId)),
+  isAdvanceInFlight: (campaignId) => {
+    const marked = (get().advanceInFlight || []).some(id => String(id) === String(campaignId));
+    if (!marked) return false;
+    const token = activeFlightToken(get, campaignId);
+    // A manually seeded/legacy marker has no private token and retains the
+    // historical behavior used by guards and isolated stores. Real async marks
+    // are active only for the owner/session that minted them.
+    return !token || isPulseSessionCurrent(get, token);
+  },
 
-  // Advance-scaling Stage 3: the autoresolve toggle. Default OFF — when the
-  // multi-tick flag is ON, an Advance PAUSES at the first tick that surfaces
-  // campaign-altering MAJORS so the DM gets a say (autoresolve ON runs straight to
-  // the end, resolving every major to recommended). With the multi-tick flag OFF
-  // this value is inert (the single-tick path never pauses), so it changes nothing
-  // in prod. UI-scoped; not persisted across reloads (a present pausedAdvance on the
-  // campaign worldState rehydrates an in-flight pause instead).
+  // Advance-scaling Stage 3 + realm directive 7 (J-D7): the auto-resolve toggle —
+  // FULL AUTO-RESOLVE MODE. Default OFF. Two things ride this ONE value, so the DM
+  // sets a play MODE rather than two half-settings:
+  //   • the multi-tick PAUSE. OFF ⇒ an Advance pauses at the first tick that
+  //     surfaces campaign-altering MAJORS so the DM gets a say; ON ⇒ it runs
+  //     straight to the end. (With the multi-tick flag OFF this half is inert —
+  //     the single-tick path never pauses.)
+  //   • the PROPOSAL DOCKET. ON ⇒ every major the advance parks as a pending
+  //     proposal is ruled immediately by the engine, through the SAME accept path
+  //     a hand-Apply uses, each ruling stamped `adjudicatedBy: 'engine_auto'`
+  //     (domain/worldPulse/autoAdjudication.js). OFF ⇒ the docket waits for the DM,
+  //     exactly as before. Engagement is decided at the single advance chokepoint
+  //     (campaignAdvanceSession.runAdvanceCampaignWorld) and requires this toggle —
+  //     an internally-derived autoResolve (the living/autonomous catch-up) never
+  //     triggers it.
+  // PERSISTED (realm directive 7 wave B): a play mode the user OWNS, not session
+  // chrome — re-picking it on every reload was the bug. It rides the store/index.js
+  // `partialize` allowlist as an additive top-level key, absent-tolerant: a blob
+  // written before this shipped rehydrates to the `false` default below, so no
+  // persist-version bump and no migrate branch is owed (the displayPrefs precedent).
+  // Registered in tests/store/lifecycleRoundTrip.test.js ZUSTAND_PERSIST_KEYS. It is
+  // NOT campaign canon — clearTransientCampaignWork leaves it alone at the auth
+  // boundary, and a present pausedAdvance on a campaign worldState still rehydrates
+  // an in-flight pause independently of it.
   advanceAutoResolve: false,
   setAdvanceAutoResolve: (value) => set(state => { state.advanceAutoResolve = !!value; }),
 
+  // components-dossier-4 / experience-product-fit-1 — the "while you were away"
+  // digest. The M10b catch-up now fires from campaign activation (setActiveCampaign),
+  // so the world can move on a path where no one is watching the Pulse tab. This
+  // TRANSIENT field carries the just-ran catch-up's legibility payload for the
+  // banner (RealmDashboard / WorldPulsePanel): `{ campaignId, status:'running' }`
+  // while the capped loop runs, then `{ campaignId, weeksCaughtUp, capped, majors[],
+  // error }` when it settles. NOT persisted (partialize omits it; a top-level field,
+  // never inside worldState) — a reload clears it, exactly like pulseUndoStack.
+  // Written by runCatchUpCampaignWorld (the lazy body); the digest text is built
+  // there so no chronicle-grounding bytes reach the first-paint closure.
+  livingCatchUp: null,
+  /** Dismiss the "while you were away" digest banner. */
+  dismissLivingCatchUp: () => set(state => { state.livingCatchUp = null; }),
+
+  /**
+   * Produce a read-only simulation preview without mutating campaign or save
+   * state. A rules draft may override the stored profile for this what-if only.
+   *
+   * @param {string} campaignId
+   * @param {string} [interval]
+   * @param {{ simulationRules?: any, now?: string|number }} [options]
+   * @returns {Promise<any|null>}
+   */
   previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
+    // Capture ownership before retaining references to the current store snapshot.
+    // The deferred body fences both references after its lazy import resolves.
+    const sessionFence = capturePulseSession(get);
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
-    // Lazy-load the simulation before the (pure, synchronous) preview compute.
-    // The sole caller already awaits this (SimulationRulesDialog wraps it in
-    // `await Promise.resolve(...)`), so returning a Promise is contract-safe.
-    const { previewCampaignWorldPulse: domainPreviewCampaignWorldPulse } = await loadWorldPulse();
-    const previewCampaign = cloneJson(campaign);
-    if (options.simulationRules) {
-      previewCampaign.worldState = {
-        ...(previewCampaign.worldState || {}),
-        simulationRules: normalizeSimulationRules(options.simulationRules),
-      };
-    }
-    const settlements = campaignSettlements(state, campaignId);
-    const preview = domainPreviewCampaignWorldPulse({
-      campaign: previewCampaign,
-      saves: cloneJson(settlements),
+    // FROZEN guard (CL-0): preview is an advance-shaped read, so it honors the
+    // EFFECTIVE rules it would run under — a dialog previewing an unfrozen
+    // draft over a frozen campaign still works (that is the what-if the dialog
+    // exists for); a frozen effective world previews nothing.
+    if (worldProgressionOf(options.simulationRules || campaign.worldState?.simulationRules) === 'frozen') return null;
+    // Not-found/frozen calls remain loader-free. The deferred body revalidates
+    // the captured owner before it consumes `state` or `campaign`.
+    const { runPreviewCampaignWorldPulse } = await loadDeferredPulseMutations();
+    return runPreviewCampaignWorldPulse({
+      state,
+      campaign,
+      campaignId,
       interval,
-      now: options.now,
+      options,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-    track(EVENTS.WORLD_PULSE_PREVIEWED, {
-      interval,
-      settlement_count: settlements.length,
-      proposal_count: Array.isArray(preview?.proposals) ? preview.proposals.length : 0,
-    });
-    return preview;
   },
 
+  /**
+   * Canonize the current world and, when enabled, project settlement layouts into
+   * the compact spatial substrate sidecar. Optional telemetry/projection failures
+   * do not block the authoritative canon write.
+   *
+   * @param {string} campaignId
+   * @returns {Promise<any|null>} The persisted world state, or null on a no-op.
+   */
   canonizeCampaignWorld: async (campaignId) => {
-    // Advance-concurrency guard — see the advanceInFlight contract above. A
-    // mutation during a running advance would be reverted by its Phase-2 commit.
+    const sessionFence = capturePulseSession(get);
+    // A running interval later commits a worldState cloned before its awaits; a
+    // canon written into that window would be silently replaced.
     if (get().isAdvanceInFlight(campaignId)) return null;
-    let campaignPersist = /** @type {any} */ (null);
-    let settlementCount = 0;
-    let regionalSnapshot = /** @type {any} */ (null);
-    const now = new Date().toISOString();
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      settlementCount = campaignSettlements(state, campaignId).length;
-      c.worldState = canonizeWorldState(c.worldState, now, c);
-      // Compute the regional-topology snapshot while the graph draft is live.
-      regionalSnapshot = extractRegionalGraphSnapshot(c.regionalGraph);
-      c.updatedAt = now;
-      campaignPersist = cacheCampaignState(state);
+    // A parked interval is also mid-transaction. Resume re-derives from its
+    // pre-tick cursor and would replace a canon written while it was waiting.
+    if (get().getPausedAdvance(campaignId)) return null;
+    // Cheap exclusivity checks stay before the import. The deferred body repeats
+    // them after loading and owns canon mutation, telemetry, and persistence.
+    const { runCanonizeCampaignWorld } = await loadDeferredPulseMutations();
+    return runCanonizeCampaignWorld({
+      set,
+      get,
+      campaignId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-    if (campaignPersist) {
-      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount });
-      if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
-    return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState || null;
   },
 
-  updateCampaignSimulationRules: async (campaignId, patch = {}) => {
-    // Advance-concurrency guard — see the advanceInFlight contract above. Rules
-    // edited mid-advance would be silently reverted by the Phase-2 commit (the
-    // running interval computed from the OLD rules), so block the write instead.
-    if (get().isAdvanceInFlight(campaignId)) return null;
-    let campaignPersist = /** @type {any} */ (null);
-    let normalizedRules = /** @type {any} */ (null);
-    const now = new Date().toISOString();
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const worldState = ensureWorldState(c.worldState, c);
-      // Build the plain rules object first so the telemetry read below is NOT an
-      // Immer draft proxy (which would be revoked once set() returns).
-      const merged = {
-        ...(worldState.simulationRules || {}),
-        ...(patch || {}),
-      };
-      // War and Settlement Strategy go hand in hand: Strategy scores defend/deploy/
-      // sue-for-peace moves off war_front channels that ONLY exist when the War
-      // layer is on, so a War-on/Strategy-off state leaves Strategy with no inputs.
-      // Enabling War therefore auto-activates Strategy (and the DM can't turn
-      // Strategy off while War is on — it re-asserts here). One-way by design:
-      // turning War off leaves Strategy as the DM last set it. Enforced at this
-      // write seam (both the map dialog and the Workshop toggle route through here)
-      // rather than in normalizeSimulationRules, so engine-direct callers and saved
-      // campaigns are untouched until the DM actually changes a rule.
-      if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
-      normalizedRules = normalizeSimulationRules(merged);
-      c.worldState = { ...worldState, simulationRules: normalizedRules };
-      c.updatedAt = now;
-      campaignPersist = cacheCampaignState(state);
+  /**
+   * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in at the canonize seam. Stamps
+   * the NEW `worldState.spatialCanonVersion` marker and freezes an immutable
+   * spatial digest (territory / gates / neighbour tiers / distance matrix / route
+   * receipts) into `worldState.spatialDigest`. This is a DISTINCT action from the
+   * plain canonizeCampaignWorld so the aspatial path stays byte-identical: an
+   * existing campaign that never opts in carries NO marker and NO digest ⇒ its
+   * bytes never change (the dormancy contract).
+   *
+   * The entitlement + generated-map gates are read HERE, at the store call site
+   * (mirroring settlementSlice's tier split); the domain module stays tier-blind.
+   * The pack.cells capture is an INJECTED seam (`options.captureSpatialPack`) —
+   * the live-iframe capture is a fence-bounded follow-up (see the KEYSTONE
+   * report), so the default returns null and the action cleanly no-ops (writing
+   * NOTHING) rather than persist a partial digest. The pure digest builder is
+   * loaded via a DYNAMIC import so src/domain/spatial never enters the first-paint
+   * static closure.
+   *
+   * Re-canonize (a later placement/forced-road after opt-in) simply calls this
+   * again: it re-captures, re-derives, and BUMPS spatialCanonVersion. The digest
+   * is NEVER re-derived on load or per tick — only by this explicit action.
+   *
+   * @param {string} campaignId
+   * @param {{ captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
+   *   Promise<{pack:any, placements:Array<{id:any,cellId:any}>}|null> }} [options]
+   * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
+   */
+  canonizeCampaignWorldSpatial: async (campaignId, options = {}) => {
+    const sessionFence = capturePulseSession(get);
+    // Advance-concurrency guard — a spatial canonize is a worldState mutation, so
+    // it is blocked mid-advance for the same reason the other pulse mutators are.
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
+    // Parked-pause guard (store-hooks-state-3): a paused-mid-interval campaign
+    // re-commits worldState wholesale on resume, so a spatial canonize (and its
+    // spatialCanonVersion bump) written into the parked window is silently lost.
+    if (get().getPausedAdvance(campaignId)) return { ok: false, reason: 'advance_paused' };
+    const state = get();
+    const campaign = findActiveCampaign(state.campaigns, campaignId);
+    if (!campaign) return { ok: false, reason: 'not_found' };
+    // ENTITLEMENT — read at the store call site (settlementSlice tier-split
+    // pattern). The domain stays tier-blind; the key turns HERE.
+    if (state.auth?.tier !== 'premium') return { ok: false, reason: 'not_entitled' };
+    // GENERATED maps only (II.5-3): an imported / custom-backdrop map has no
+    // persisted terrain to route on, so it stays aspatial (byte-identical).
+    if (state.mapState?.customBackdrop?.imageUrl) return { ok: false, reason: 'not_generated_map' };
+    // All cheap gates ran synchronously. The deferred bridge and spatial session
+    // recheck owner/advance state after their imports and map-capture await.
+    const { runCanonizeCampaignWorldSpatial } = await loadDeferredPulseMutations();
+    return runCanonizeCampaignWorldSpatial({
+      set,
+      get,
+      campaignId,
+      options,
+      sessionFence,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-    if (campaignPersist) {
-      // Emit the rule VALUES, not just the changed keys — this is the join from
-      // simulation config to every subsequent pulse outcome (variance per config).
-      track(EVENTS.SIMULATION_RULES_UPDATED, extractSimulationRules(normalizedRules, Object.keys(patch || {})));
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
-    return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState?.simulationRules || null;
+  },
+
+  /**
+   * Apply a partial simulation-profile edit through the control layer's single
+   * canonicalization and ruleset-receipt seam.
+   *
+   * @param {string} campaignId
+   * @param {Record<string, any>} [patch]
+   * @returns {Promise<any|null>} The persisted canonical rules, or null on a no-op.
+   */
+  updateCampaignSimulationRules: async (campaignId, patch = {}) => {
+    const sessionFence = capturePulseSession(get);
+    // The running interval computed from the old profile and later replaces
+    // worldState wholesale, so an edit here would be both ignored and misleading.
+    if (get().isAdvanceInFlight(campaignId)) return null;
+    // Resume likewise commits the parked cursor's rules and ruleset log. Require
+    // the DM to resolve or abandon that interval before changing the profile.
+    if (get().getPausedAdvance(campaignId)) return null;
+    // Profile normalization, receipt construction, telemetry, and persistence
+    // stay behind the low-frequency boundary; post-load guards live in the body.
+    const { runUpdateCampaignSimulationRules } = await loadDeferredPulseMutations();
+    return runUpdateCampaignSimulationRules({
+      set,
+      get,
+      campaignId,
+      patch,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
   },
 
   advanceCampaignWorld: async (campaignId, interval = 'one_month', options = {}) => {
-    // In-flight guard (set SYNCHRONOUSLY, before the first await below): a
-    // double-click would otherwise re-enter this async action and run a SECOND
-    // real tick off one intent. If this campaign is already advancing, no-op with
-    // a typed result so the caller can tell it apart from a real advance (vs a
-    // not-canonized block) and skip the post-advance nav. Cleared in finally.
+    const sessionFence = capturePulseSession(get);
+    // In-flight guard (checked + set SYNCHRONOUSLY, before the first await below):
+    // multi-tick advance yields to the event loop between tick batches, so a
+    // double-click would otherwise re-enter this async action and run a SECOND real
+    // tick batch off one intent. If already advancing, no-op with a typed result so
+    // the caller can tell it apart from a real advance. Cleared in the finally below.
     if (get().isAdvanceInFlight(campaignId)) {
       return { ok: false, reason: 'advance_in_flight' };
     }
-    // Parked-pause guard (mirrors advance_in_flight; checked SYNCHRONOUSLY before the
-    // first await): a campaign with an OUTSTANDING pausedAdvance cursor — a multi-tick
-    // interval that paused for DM verdicts, including one rehydrated by a reload-into-
-    // paused — is mid-interval, not idle. A fresh Advance over it would drain the queue
-    // and run a NEW interval, then clobber the parked cursor in Phase 2 (overwrite on a
-    // re-pause, or drop it on a complete), discarding the in-flight interval and
-    // silently advancing past the paused state — lost ticks / a corrupted resume. So
-    // no-op with a typed result; the caller must resolveIntervalMajors (resume) or
-    // undoLastPulse (abandon) to clear the pause explicitly before advancing again.
+    if (get().isCampaignMutationLocked?.(campaignId)) {
+      return { ok: false, reason: 'settlement_deletion_in_flight' };
+    }
+    // Parked-pause guard (checked SYNCHRONOUSLY): a campaign with an OUTSTANDING
+    // pausedAdvance cursor — a multi-tick interval that paused for DM verdicts,
+    // including one rehydrated by a reload-into-paused — is mid-interval, not idle. A
+    // fresh Advance over it would run a NEW interval, then clobber the parked cursor
+    // in Phase 2, silently discarding the in-flight interval (lost ticks). So no-op
+    // with a typed result; the caller must resolveIntervalMajors (resume) or
+    // undoLastPulse (abandon) to clear the pause first. The single-tick path never
+    // sets pausedAdvance, so this is inert when the flag is OFF.
     if (get().getPausedAdvance(campaignId)) {
       return { ok: false, reason: 'advance_paused' };
     }
-    set(state => {
-      state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
-    });
+    // FROZEN guard (CL-0, checked synchronously like the guards above): a
+    // frozen world does not advance. Typed no-op so the caller's toast can
+    // explain in plain language; unfreeze in Simulation rules to resume.
+    if (frozenFor(get, campaignId)) {
+      return WORLD_FROZEN_RESULT;
+    }
+    const flightToken = beginAdvanceFlight(set, get, campaignId, sessionFence);
     try {
-    let result = /** @type {any} */ (null);
-    let persistUpdates = [];
-    let campaignPersist = /** @type {any} */ (null);
-    /** Saves to fingerprint after a successful pulse (cap 5). Collected inside
-     *  set() but used after, so the snapshot reflects post-apply settlements. */
-    let fingerprintSaves = [];
-    /** The campaign's live NPC sim-state (cloned plain inside set), so the
-     *  fingerprint can surface per-settlement NPC goal/role evolution. */
-    let campaignNpcStates = /** @type {any} */ (null);
-    /** Queued-impact ids present BEFORE this pulse, so we can diff out the new
-     *  cross-settlement propagation impacts this pulse produced. */
-    let priorQueuedIds = /** @type {Set<string>} */ (null);
-    /** Party-impact actions surfaced by draining party-caused queued events —
-     *  replayed through recordPartyImpact AFTER the pulse (mirroring the
-     *  immediate path's rippleEventThroughWorld party branch). */
-    let drainedPartyImpacts = [];
-    const now = options.now || new Date().toISOString();
-
-    // Lazy-load the simulation BEFORE Phase 1. This is the ONLY await in the
-    // critical region, and it sits before the first set() — so the two-phase
-    // drain→compute→commit sequence below still runs with NO await between its
-    // set() calls and stays atomic w.r.t. other actions (JS is single-threaded;
-    // once the synchronous Phase 1 begins no other action can observe the
-    // drained-but-not-advanced intermediate state). Memoized, so only the first
-    // advance pays the import; subsequent advances resolve from cache.
-    // Advance-scaling Stage 1: a flag selects the advance path. OFF (default) →
-    // the existing single-tick `advanceCampaignWorld` (UNCHANGED — the flag-OFF
-    // store path is byte-identical to today). ON → `simulateCampaignWorldInterval`,
-    // which runs N real one-week ticks for the chosen interval and composes ONE
-    // result of the same shape. Either way the snapshot/drain/commit/persist/
-    // analytics scaffolding below runs ONCE per Advance, so undo grows by exactly
-    // one and persist + analytics fire once regardless of tick count.
-    const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, advanceCampaignWorld: domainAdvanceCampaignWorld } = await loadWorldPulse();
-    const useMultiTick = flag('advanceMultiTick');
-    // Advance-scaling Stage 3: autoresolve rides ONLY the multi-tick path. OFF ⇒ the
-    // interval orchestrator PAUSES at the first tick that surfaces majors. A caller
-    // can override per-advance via options.autoResolve; otherwise the store toggle
-    // governs. The single-tick path ignores it entirely (it never pauses).
-    const autoResolve = options.autoResolve != null ? !!options.autoResolve : !!get().advanceAutoResolve;
-
-    // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
-    // simulation inputs OUT of the Immer producer. The heavy organic pulse is a
-    // pure function over plain clones, so running it on the draft only made
-    // Immer track a draft it never touches. We split it out below WITHOUT an
-    // await between the two set() calls — JS is single-threaded, so no other
-    // action can observe the intermediate (drained-but-not-advanced) state.
-    // The drain IS committed here before the pure pulse runs, but it is no longer
-    // left committed UNCONDITIONALLY: if the pure pulse throws, the compute block
-    // below rolls the full pre-drain snapshot back (atomic rollback), so a failed
-    // advance neither consumes the queue nor advances a tick. This split also
-    // removes the second full clone of every member save: the simulation now
-    // consumes the SAME plain clones we hand it here. */
-    /** @type {any} */ let preSnapshot = null;
-    /** @type {any} */ let simCampaign = null;
-    /** @type {any} */ let simSaves = null;
-    /** @type {any} */ let authoredEventBySave = null;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const worldState = ensureWorldState(c.worldState, c);
-      if (!worldState.canonizedAt) {
-        result = { ok: false, reason: 'world_not_canonized' };
-        return;
-      }
-      // Campaign-clock C2: snapshot the full pre-pulse state (campaign world +
-      // every member save + the live active view) BEFORE anything mutates, so
-      // the advance can be reversed by undoLastPulse. Pushed to the stack only
-      // after the pulse is confirmed below.
-      preSnapshot = capturePulseSnapshot(state, c, now);
-      // Advance-scaling Stage 5: tag the snapshot with the DM-CHOSEN interval so
-      // the session-only Undo affordance can name what it reverts ("Undo the last
-      // advance (1 year)"). Session-scoped like the stack itself; never persisted.
-      preSnapshot.interval = interval;
-      // Campaign-clock C1: drain queued player intentions into the member
-      // settlements (and inject any crisis twins into worldState) BEFORE the
-      // organic pulse, so every settlement's events resolve simultaneously at
-      // this tick and the pulse simulates the post-intervention world. The
-      // augmented worldState is written onto the draft campaign so the pulse's
-      // input clone carries the injected stressors + the cleared queue.
-      const drained = drainCampaignQueueIntoState(state, c, worldState, now);
-      c.worldState = drained.worldState;
-      drainedPartyImpacts = drained.partyImpacts || [];
-      // Phase 4b — fold any DEFERRED regional impacts (parked by campaign-member
-      // change-queue commits since the last Advance) into the live queuedImpacts
-      // EXACTLY ONCE, then clear the bucket. This is the consume-side of the
-      // double-propagation guard: the commit did NOT enqueue these into the graph
-      // (it only stashed them on worldState.deferredImpacts), so this fold is the
-      // single point at which the deferred regional ripple becomes real. Done
-      // BEFORE priorQueuedIds is captured below so the analytics diff treats them
-      // as this pulse's new propagation; they then age via the normal delayTicks
-      // path (advanceCampaignRegionalImpacts), exactly like an immediate enqueue.
-      // After the fold the bucket is emptied, so a SECOND Advance finds nothing
-      // to fold — structurally impossible to double-apply.
-      {
-        const deferred = Array.isArray(c.worldState.deferredImpacts) ? c.worldState.deferredImpacts : [];
-        if (deferred.length > 0) {
-          c.regionalGraph = queueRegionalImpacts(c.regionalGraph, deferred, { now });
-        }
-        if ('deferredImpacts' in c.worldState) {
-          c.worldState = { ...c.worldState, deferredImpacts: [] };
-        }
-      }
-      // #2.2 — DRAIN any deferred WAR-FRONT seeds (parked by campaign-member
-      // change-queue commits of a siege/occupation stressor since the last
-      // Advance) into real seedCampaignWarFront calls EXACTLY ONCE, then clear
-      // the bucket. This is the consume-side of the war-front deferral: the
-      // commit did NOT seed live (it ran with skipRegional), it only stashed the
-      // intent on worldState.deferredWarFronts. Done HERE — in the Phase-1
-      // producer, mutating this draft's worldState.deployments + regionalGraph
-      // BEFORE the post-drain clone (cloneJson below) and BEFORE evaluateWarLayer
-      // reads them — so the seeded siege is processed/retired by THIS SAME
-      // Advance, identical to the immediate path one tick earlier. The bucket is
-      // cleared FIRST (before the loop) so even a throw mid-loop cannot leave
-      // entries for a second drain (and the Phase-1 rollback restores the full
-      // pre-drain snapshot anyway). A SECOND Advance finds [] → seeds nothing.
-      // seedCampaignWarFront's own guards (war-off no-op, one-army invariant,
-      // self-target no-op) make a duplicate-or-stale entry a structural no-op.
-      {
-        const fronts = Array.isArray(c.worldState.deferredWarFronts) ? c.worldState.deferredWarFronts : [];
-        if ('deferredWarFronts' in c.worldState) {
-          c.worldState = { ...c.worldState, deferredWarFronts: [] };
-        }
-        for (const f of fronts) {
-          // Mutate THIS draft `c` directly via the shared seed primitive (NOT the
-          // set()-based seedCampaignWarFront action — a nested set inside this
-          // producer would write a separate update that this producer's draft
-          // would clobber). applyWarFrontSeed is the SAME code the immediate
-          // action runs, so the seeded ledger is byte-identical; it lands on the
-          // draft cloned for the pure pulse below (simCampaign), and is read by
-          // evaluateWarLayer THIS Advance.
-          applyWarFrontSeed(c, {
-            instigatorId: f.instigatorId,
-            targetId: f.targetId,
-            sinceTick: f.sinceTick,
-            now,
-          });
-        }
-      }
-      // Phase 4b — DRAIN any deferred PARTY-IMPACT actions (parked by campaign-member
-      // change-queue commits of a party-caused event since the last Advance) onto
-      // drainedPartyImpacts, then clear the bucket. These replay through the SAME
-      // post-pulse recordPartyImpact path as the queue-surfaced party impacts below
-      // (gated by !cloudPending), so a deferred party impact lands in this Advance's
-      // flow rather than escaping the original flush's atomic commit. Cleared FIRST
-      // (the Phase-1 rollback restores the full pre-drain snapshot on a throw) so a
-      // SECOND Advance finds [] and replays nothing — structurally no double-apply.
-      {
-        const pending = Array.isArray(c.worldState.deferredPartyImpacts) ? c.worldState.deferredPartyImpacts : [];
-        if (pending.length > 0) {
-          drainedPartyImpacts = [...drainedPartyImpacts, ...pending.map(action => ({ action: cloneJson(action) }))];
-        }
-        if ('deferredPartyImpacts' in c.worldState) {
-          c.worldState = { ...c.worldState, deferredPartyImpacts: [] };
-        }
-      }
-      // drainCampaignQueueIntoState read these authored events off THIS (Phase-1)
-      // draft, so their values are draft proxies that Immer revokes the moment
-      // this producer returns. Lift them to plain objects now (mirroring the
-      // cloneJson of simCampaign/simSaves below) so the Phase-2 commit's
-      // layerAuthoredDeltas can safely read event.type after revocation.
-      authoredEventBySave = drained.authoredEventBySave instanceof Map
-        ? new Map([...drained.authoredEventBySave].map(([k, v]) => [k, cloneJson(v)]))
-        : drained.authoredEventBySave;
-      // Snapshot the pre-pulse queued-impact ids (primitive Set — safe to read
-      // outside set) so we can isolate this pulse's NEW propagation impacts.
-      priorQueuedIds = new Set((c.regionalGraph?.queuedImpacts || []).map(i => String(i.id)));
-      // Lift plain (post-drain) simulation inputs out of the draft. These are
-      // the ONLY clones the pure pulse needs — the previous code re-cloned the
-      // member saves a second time inside domainAdvanceCampaignWorld's args.
-      simCampaign = cloneJson(c);
-      simSaves = cloneJson(campaignSettlements(state, campaignId));
-    });
-
-    // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited:
-    // the interval orchestrator yields to the event loop between tick batches so
-    // a long advance (up to 48 one-week kernel passes) does not freeze the UI.
-    // That yield is the ONLY await between the drain set() and the commit set()
-    // below; the per-campaign advanceInFlight guard (set synchronously before the
-    // first await) already serializes advance/resume on THIS campaign across the
-    // yield, so no second advance can observe the drained-but-not-committed state.
-    // The compute is a pure function over the plain clones lifted above (it never
-    // reads the live draft), so the yield only changes WHEN the commit lands, not
-    // WHAT it commits — determinism + the composed result are unchanged.
-    //
-    // ATOMICITY: Phase 1 ALREADY committed the queue drain (player intentions
-    // consumed off worldState.pendingEvents, member settlements + the live view
-    // advanced). If this pure pulse THROWS, that drain must NOT survive — leaving
-    // it committed with no tick advanced and no undo snapshot is silent data
-    // loss: the queued intentions are gone and the world never moved. So on a
-    // throw we roll the FULL pre-drain snapshot back onto the draft, making the
-    // whole action a no-op and preserving the queue for a retry. preSnapshot was
-    // captured BEFORE the drain (above), so it is a complete pre-drain rewind
-    // point for everything the drain touched.
-    if (simCampaign) {
-      try {
-        // Flag-gated path select (commit:true rides the interval orchestrator's
-        // final tick; the single-tick path commits as before). The composed
-        // result has the SAME shape, so Phase 2 + persist + analytics are identical.
-        const multiTickArgs = {
-          campaign: simCampaign,
-          saves: simSaves,
-          interval,
-          commit: true,
-          now,
-          autoResolve,
-        };
-        result = useMultiTick
-          // The worker runs the SAME simulate function off the main thread; the
-          // fallback is the in-thread call, used in Node/tests and when the flag is
-          // off. customContent is snapshotted so the worker's chain-activation seam
-          // matches the page (see advanceWorkerClient / dependencyEngine).
-          ? await (flag('simAdvanceWorker')
-              ? runAdvanceInterval(multiTickArgs, {
-                  fallback: domainSimulateCampaignWorldInterval,
-                  customContent: cloneJson(get().customContent) || {},
-                })
-              : domainSimulateCampaignWorldInterval(multiTickArgs))
-          : domainAdvanceCampaignWorld({
-              campaign: simCampaign,
-              saves: simSaves,
-              interval,
-              now,
-            });
-      } catch (e) {
-        console.error('[campaignWorldPulseSlice] world pulse compute threw; rolling back drain', e);
-        set(state => { restorePulseSnapshot(state, preSnapshot); });
-        // Abort Phase 2 + the persist/analytics tail: the drain is reverted and
-        // nothing was advanced, so there is nothing to commit or persist. Re-throw
-        // so the caller learns the advance failed rather than reading a silent null.
-        throw e;
-      }
-    }
-
-    // ── Phase 2: commit the pure result back onto the draft.
-    if (simCampaign && result) {
-      set(state => {
-        const c = findActiveCampaign(state.campaigns, campaignId);
-        if (!c) return;
-        // The pulse landed — retain the pre-pulse snapshot for multi-step undo.
-        // Cap PER campaign so churn in one campaign can't evict another's
-        // history: drop only this campaign's oldest snapshot past the cap.
-        //
-        // Retained-memory diet: each snapshot is the FULL pre-pulse world
-        // (worldState + regional graph + wizard news + every member
-        // settlement), and up to PULSE_UNDO_CAP of them per campaign made the
-        // stack the store's largest retained-memory consumer as live object
-        // graphs (which Immer also deep-freezes on commit). Park the heavy
-        // body as ONE serialized string instead — same undo fidelity at a
-        // fraction of the retained bytes — keeping only the light fields the
-        // UI reads (campaignId / interval / tick) live. undoLastPulse
-        // re-parses the payload back to the capturePulseSnapshot shape.
-        {
-          const entry = {
-            campaignId: preSnapshot.campaignId,
-            tick: preSnapshot.tick,
-            interval: preSnapshot.interval ?? null,
-            now: preSnapshot.now,
-            payload: JSON.stringify(preSnapshot),
-          };
-          const next = [...(state.pulseUndoStack || []), entry];
-          const mineCount = next.reduce((n, s) => n + (s.campaignId === campaignId ? 1 : 0), 0);
-          if (mineCount > PULSE_UNDO_CAP) {
-            const oldestIdx = next.findIndex(s => s.campaignId === campaignId);
-            if (oldestIdx !== -1) next.splice(oldestIdx, 1);
-          }
-          state.pulseUndoStack = next;
-        }
-        persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
-        // Advance-scaling Stage 3 PAUSE: a paused interval committed its minors
-        // (applyWorldPulseResultToState above wrote the minors-only pause-tick
-        // worldState). Park the resume cursor on c.worldState.pausedAdvance so the
-        // partial interval (ticks committed) + the cursor land in the SAME atomic
-        // persist (069 forward-guard accepts it — tick advanced monotonically). The
-        // cursor carries the PRE-tick inputs (preSnapshot) the resume re-derives from,
-        // so a reload rehydrates it and resolveIntervalMajors continues deterministically.
-        // ensureWorldState materializes pausedAdvance ONLY when present + non-empty, so
-        // a non-paused (complete) advance clears it to byte-neutral (absent) below.
-        if (result.status === 'paused') {
-          c.worldState = {
-            ...c.worldState,
-            pausedAdvance: {
-              interval: result.interval,
-              ticksTotal: result.ticksTotal,
-              ticksDone: result.ticksDone,
-              atTick: result.atTick,
-              resumeTick: result.resumeTick,
-              autoResolve: false,
-              startedAt: now,
-              // Determinism: thread the ORIGINAL advance `now` onto the cursor so a
-              // RESUME (which re-derives the paused tick through the kernel, stamping
-              // now into regional-graph/wizard-news records) replays with the SAME
-              // wall-clock the pause was computed from — not a fresh one. resolveInterval-
-              // Majors reuses this instead of regenerating new Date(). Survives a reload.
-              now,
-              // Stage 5 ring policy: thread the original pre-interval history length
-              // through every re-pause so the whole interval collapses to one record.
-              preIntervalHistoryLen: result.preIntervalHistoryLen,
-              pendingMajors: cloneJson(result.pendingMajors) || [],
-              // The PRE-tick snapshot — the exact inputs the paused tick was computed
-              // from. Resume re-runs the tick from these (seed replay). These fields
-              // are ALREADY plain deep clones: they thread references off simCampaign/
-              // simSaves (cloneJson'd before the pure compute) through the kernel, which
-              // never aliases store state, and `result` is a plain object we own. So we
-              // park the references directly — a second cloneJson per field would deep-
-              // copy the WHOLE pre-tick world (worldState+graph+news+every save) AGAIN
-              // on EVERY pause of a multi-pause interval, doubling the retained + later
-              // serialized cursor for no gain. Bytes fed to the resume kernel are
-              // identical either way, so resume determinism is untouched.
-              preSnapshot: {
-                worldState: result.preWorldState,
-                regionalGraph: result.preRegionalGraph,
-                wizardNews: result.preWizardNews,
-                saves: result.preSaves || [],
-              },
-            },
-          };
-        } else if (c.worldState && 'pausedAdvance' in c.worldState) {
-          // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
-          const { pausedAdvance: _drop, ...rest } = c.worldState;
-          c.worldState = rest;
-        }
-        campaignPersist = cacheCampaignState(state);
-        // Collect the affected saves (post-apply) for the research fingerprint,
-        // capped at 5 per pulse so a large constellation doesn't flood capture.
-        const affectedIds = (Array.isArray(result.settlementUpdates) ? result.settlementUpdates : [])
-          .map(u => String(u.saveId));
-        const affected = new Set(affectedIds);
-        fingerprintSaves = (state.savedSettlements || [])
-          .filter(save => affected.has(String(save.id)))
-          .slice(0, 5)
-          .map(save => ({ id: save.id, settlement: cloneJson(save.settlement), save: { id: save.id, campaignState: cloneJson(save.campaignState) } }));
-        campaignNpcStates = cloneJson(c.worldState?.npcStates) || null;
+      // Delegate the advance body to the lazily-loaded session helper — the two-phase
+      // drain→compute→commit, pause-parking, analytics + persist + party-replay all
+      // ride the SAME lazy chunk as the heavy sim, keeping them (and the advance-only
+      // fingerprint/analytics imports) OUT of the first-paint entry closure. The
+      // synchronous in-flight + parked-pause guards + the in-flight mark/clear finally
+      // stay HERE so a double-click is blocked before the loader await. The flag-OFF
+      // single-tick path is a verbatim code move — its output is byte-identical.
+      const {
+        runAdvanceCampaignWorld, advanceCampaignWorld: domainAdvanceCampaignWorld,
+        simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, runAdvanceInterval,
+      } = await loadWorldEngine();
+      if (!isPulseSessionCurrent(get, sessionFence)) return AUTH_SESSION_CHANGED_RESULT;
+      // M10b: the living/autonomous catch-up cursor re-stamp lives INSIDE
+      // runAdvanceCampaignWorld's Phase-2 commit (campaignAdvanceSession.js), so the
+      // moved cursor rides the same atomic persist as the advance — a reload can no
+      // longer re-simulate already-advanced weeks (state-lifecycle-1 / store-1). It
+      // is gated there on advancesOnOpen + tick-moved, so dm_advanced/frozen stay
+      // byte-identical.
+      const result = await runAdvanceCampaignWorld({
+        set, get, campaignId, interval, options, sessionFence,
+        isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+        // Pass the sim functions resolved through loadWorldEngine's dynamic import
+        // (the seam tests mock) rather than letting the session module import them.
+        deps: {
+          advanceCampaignWorld: domainAdvanceCampaignWorld,
+          simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval,
+          runAdvanceInterval,
+        },
       });
-    }
-
-    // Fire-and-forget analytics — additive, after state has settled.
-    if (result && result.ok === false && result.reason === 'world_not_canonized') {
-      track(EVENTS.WORLD_PULSE_BLOCKED, { reason: 'world_not_canonized' });
-    } else if (result && campaignPersist) {
-      // Enriched per-effect-family summary (fixes the always-0 new_stressor_count
-      // bug; events_applied_count retained for back-compat with existing reads).
-      track(EVENTS.WORLD_PULSE_ADVANCED, {
-        ...extractPulseSummary(result, interval),
-        events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
-      });
-      // Per-type stressor transitions (research-class; gated inside track()).
-      track(EVENTS.WORLD_STRESSOR_TRANSITIONS, extractStressorTransitions(result));
-      // Exhaustive per-effect mutation ledger → world_pulse_effects (research only).
-      if (getConsent().research) {
-        const { rows } = extractPulseEffects(result);
-        for (const row of rows) enqueuePulseEffect(row);
-      }
-      // Regional structure snapshot (research) + realm/compound arc emergence.
-      const regionalSnapshot = extractRegionalGraphSnapshot(result.regionalGraph);
-      if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
-      const arcs = extractRegionalArcs(result);
-      if (arcs.length) track(EVENTS.REGIONAL_ARC_EMERGED, { tick: Number.isFinite(result.tick) ? result.tick : null, arc_count: arcs.length, arcs });
-      // Cross-settlement propagation that occurred during this pulse — the NEW
-      // queued impacts (diffed against the pre-pulse graph).
-      if (result.regionalGraph && priorQueuedIds) {
-        const newImpacts = (result.regionalGraph.queuedImpacts || []).filter(i => !priorQueuedIds.has(String(i.id)));
-        const prop = extractRegionalPropagation({ impacts: newImpacts, genesis: 'world_pulse' });
-        if (prop) track(EVENTS.REGIONAL_PROPAGATION_APPLIED, prop);
-      }
-      for (const entry of fingerprintSaves) {
-        captureFingerprint('pulse_advanced', entry.settlement, {
-          save: entry.save,
-          settlementUuid: String(entry.id),
-          worldState: campaignNpcStates ? { npcStates: campaignNpcStates } : undefined,
-        });
-      }
-    }
-
-    const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
-    // Surface the persistence outcome on the (advanced) result so callers can tell
-    // an advance that fully reached the cloud from one that is applied locally but
-    // cloud-pending. The advance is real locally either way; on a failed persist
-    // the persist tail already raised the retryable campaignSyncError banner, so
-    // the caller must NOT show a plain 'Realm advanced' success — it would
-    // contradict the banner and invite a re-advance (double tick). Only tag a
-    // genuine advance (ok !== false); the not-canonized guard result is untouched.
-    if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
-      result.cloudPending = true;
-    }
-    // Replay party-caused queued events through the party-impact pipeline — the
-    // drain surfaced them; this mirrors the immediate path's rippleEventThroughWorld
-    // party branch (faction/NPC world state, condition resolution, Wizard News).
-    // Best-effort in that each replay is individually try/catch'd so one failure
-    // can't abort the rest or the advance. Unlike the immediate path (which fires
-    // these off unawaited), these ARE awaited sequentially before advance
-    // resolves, so the advance's promise does not settle until every replay has
-    // run — callers that await advanceCampaignWorld see the world fully settled.
-    // The tick itself is already committed above, so a replay failure never
-    // rolls the advance back, and the pre-pulse snapshot already covers these
-    // for undo (they land after the snapshot).
-    //
-    // GUARD: skip the replay when the underlying advance did NOT reach the cloud
-    // (result.cloudPending — the atomic advance write rejected or conflicted with a
-    // concurrent same-tick advance). recordPartyImpact persists as a BACKWARD /
-    // last-write-wins write (expectedTick = null), so it FORCE-writes its settlement
-    // deltas to the cloud out of band — bypassing the very forward guard the advance
-    // just lost to. That would push a party-impact world built atop an unpersisted /
-    // conflicted advance over the (different, winning) cloud timeline, manufacturing
-    // the hybrid state the advance's cloud-pending discipline exists to prevent. The
-    // impacts stay drained on the LOCAL world (the tick is real locally) and replay
-    // on the retry/reload that reconciles the advance, so nothing is lost.
-    if (result && result.ok !== false && !result.cloudPending && drainedPartyImpacts.length
-        && typeof get().recordPartyImpact === 'function') {
-      for (const pi of drainedPartyImpacts) {
-        try { await get().recordPartyImpact(campaignId, pi.action); } catch { /* best-effort */ }
-      }
-    }
-    return result;
+      return result;
     } finally {
       // Clear the in-flight mark for this campaign — runs on every exit path
-      // (success, the not-canonized guard, AND the Phase-1 rollback re-throw), so
-      // a failed advance never wedges the campaign permanently disabled.
-      set(state => {
-        state.advanceInFlight = (state.advanceInFlight || []).filter(id => String(id) !== String(campaignId));
-      });
+      // (success, the not-canonized guard, AND any throw), so a failed advance
+      // never wedges the campaign permanently disabled.
+      finishAdvanceFlight(set, get, campaignId, flightToken);
     }
+  },
+
+  /**
+   * M10b — the capped, deterministic advance-on-open catch-up for a LIVING/
+   * AUTONOMOUS world. THIN eager wrapper: the SYNCHRONOUS not_living guard stays here
+   * (FP-2a §0.7.3 sync-prefix rule) so the DEFAULT dm_advanced campaign — every
+   * non-living open — returns WITHOUT loading the heavy sim chunk. Only a living/
+   * autonomous world falls through to the lazily-loaded body (runCatchUpCampaignWorld
+   * in campaignAdvanceSession.js), whose bytes therefore stay OUT of the first-paint
+   * entry closure. The full mechanism (seed / up-to-date / capped loop, determinism,
+   * cursor lifecycle) is documented on that body.
+   *
+   * @param {string} campaignId
+   * @param {{ now?: string|number }} [options]
+   * @returns {Promise<{ ok:boolean, weeksCaughtUp:number, capped:boolean, reason?:string }>}
+   */
+  catchUpCampaignWorld: async (campaignId, options = {}) => {
+    const sessionFence = capturePulseSession(get);
+    if (get().isCampaignMutationLocked?.(campaignId)) {
+      return { ok: false, weeksCaughtUp: 0, capped: false, reason: 'settlement_deletion_in_flight' };
+    }
+    // Sync prefix (kept eager): a dm_advanced/frozen world is not_living — return the
+    // typed no-op HERE, before any lazy load, so the common open path never fetches
+    // the sim. advancesOnOpen is a virtual read (absent key ⇒ dm_advanced ⇒ false).
+    const campaign = findActiveCampaign(get().campaigns, campaignId);
+    if (!campaign || !advancesOnOpen(campaign.worldState?.simulationRules)) {
+      return { ok: false, weeksCaughtUp: 0, capped: false, reason: 'not_living' };
+    }
+    // Living/autonomous only: delegate the catch-up body to the lazily-loaded session
+    // helper (FP-2a dep-import pattern). It re-reads the campaign through get() after
+    // the load — the same seam loadWorldEngine's tests mock.
+    const { runCatchUpCampaignWorld } = await loadWorldEngine();
+    if (!isPulseSessionCurrent(get, sessionFence)) {
+      return { ok: false, weeksCaughtUp: 0, capped: false, reason: 'auth_session_changed' };
+    }
+    if (get().isCampaignMutationLocked?.(campaignId)) {
+      return { ok: false, weeksCaughtUp: 0, capped: false, reason: 'settlement_deletion_in_flight' };
+    }
+    return runCatchUpCampaignWorld({
+      set,
+      get,
+      campaignId,
+      options,
+      sessionFence,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
   },
 
   /**
@@ -706,166 +555,60 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * c.worldState.pausedAdvance (parked by a paused advanceCampaignWorld, and
    * rehydrated verbatim on reload), re-enters the interval orchestrator's resume
    * path (which re-derives the paused tick from its PRE-tick inputs with the
-   * decisions folded in — recommended ⇒ byte-identical to autoresolve-ON, dismissed
+   * decisions folded in — recommended ⇒ byte-identical to auto-resolve-ON, dismissed
    * ⇒ excluded), commits the resumed segment, and either CLEARS pausedAdvance (the
    * interval finished) or parks a FRESH cursor (the next tick surfaced majors).
    *
    * `decisions` is the DM's per-major verdict keyed by outcome id ({ [id]: { decision:
    * 'recommended'|'dismissed' } }); an empty map resolves every pending major to
-   * recommended. Persists atomically like advanceCampaignWorld (069 forward guard).
+   * recommended.
    *
    * @param {string} campaignId
    * @param {Record<string, {decision?: string}>} [decisions]
    * @param {{ now?: string }} [options]
    */
   resolveIntervalMajors: async (campaignId, decisions = {}, options = {}) => {
+    const sessionFence = capturePulseSession(get);
     // Re-entrancy guard — the SAME advanceInFlight machine advanceCampaignWorld uses
-    // (set SYNCHRONOUSLY before the first await, cleared in finally). resolveInterval-
-    // Majors is async (it awaits the lazy import + the cloud flush), so a double-click
-    // on the Resume button — or a Resume racing an Advance, both keyed on this id —
-    // would otherwise re-enter and run the resumed segment TWICE off the SAME cursor
-    // (two real tick batches, two persists). A re-entrant call sees the campaign already
-    // in flight and no-ops with the typed result; advanceCampaignWorld's parked-pause
-    // guard already blocks the reverse race (Advance over an outstanding pause).
+    // (set SYNCHRONOUSLY before the first await, cleared in finally). A double-click on
+    // Resume — or a Resume racing an Advance — would otherwise re-enter and run the
+    // resumed segment TWICE off the SAME cursor. A re-entrant call no-ops with the
+    // typed result; advanceCampaignWorld's parked-pause guard blocks the reverse race.
     if (get().isAdvanceInFlight(campaignId)) {
       return { ok: false, reason: 'advance_in_flight' };
     }
-    set(state => {
-      state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
-    });
+    if (get().isCampaignMutationLocked?.(campaignId)) {
+      return { ok: false, reason: 'settlement_deletion_in_flight' };
+    }
+    // FROZEN guard (CL-0): resuming a paused interval runs real ticks, so a
+    // frozen world blocks it the same way it blocks a fresh advance. The
+    // parked cursor is untouched — unfreeze and the resume works verbatim.
+    if (frozenFor(get, campaignId)) {
+      return WORLD_FROZEN_RESULT;
+    }
+    const flightToken = beginAdvanceFlight(set, get, campaignId, sessionFence);
     try {
-    let result = /** @type {any} */ (null);
-    let persistUpdates = [];
-    let campaignPersist = /** @type {any} */ (null);
-    const { simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval } = await loadWorldPulse();
-
-    // Compute the resumed interval OUTSIDE any producer, from plain clones lifted in
-    // a read-only set(). The orchestrator's resume is PURE over the cursor's pre-tick
-    // inputs, so the live campaign/saves are only the commit target — the cursor
-    // drives determinism.
-    /** @type {any} */ let simCampaign = null;
-    /** @type {any} */ let simSaves = null;
-    /** @type {any} */ let cursor = null;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const worldState = ensureWorldState(c.worldState, c);
-      cursor = worldState.pausedAdvance ? cloneJson(worldState.pausedAdvance) : null;
-      if (!cursor) { result = { ok: false, reason: 'no_paused_advance' }; return; }
-      simCampaign = cloneJson(c);
-      simSaves = cloneJson(campaignSettlements(state, campaignId));
-    });
-
-    if (!simCampaign || !cursor) return result;
-
-    // Determinism: replay with the advance's ORIGINAL `now` (parked on the cursor),
-    // NOT a fresh wall-clock — the resume re-derives the paused tick through the
-    // kernel, which stamps `now` into regional-graph/wizard-news records, so a fresh
-    // now would make a seed-replay-identical resume diverge. An explicit options.now
-    // still wins (tests/callers that pin a clock); the cursor's now is the default,
-    // and only a legacy cursor lacking it falls back to wall-clock.
-    const now = options.now || cursor.now || new Date().toISOString();
-    const pre = cursor.preSnapshot || {};
-    // Awaited: the orchestrator yields between tick batches so a long resumed
-    // segment does not freeze the UI. The advanceInFlight guard (set above)
-    // serializes resume/advance on this campaign across the yield, and the resume
-    // is pure over the cursor's pre-tick inputs, so the yield changes only WHEN
-    // the commit lands, not WHAT it computes (seed-replay determinism preserved).
-    const resumeArgs = {
-      campaign: simCampaign,
-      saves: simSaves,
-      commit: true,
-      now,
-      autoResolve: false,
-      resume: {
-        interval: cursor.interval,
-        ticksTotal: cursor.ticksTotal,
-        resumeTick: cursor.resumeTick,
-        pendingMajors: cursor.pendingMajors || [],
-        preWorldState: pre.worldState,
-        preRegionalGraph: pre.regionalGraph,
-        preWizardNews: pre.wizardNews,
-        preSaves: pre.saves,
-        decisions: decisions || {},
-        // Stage 5 ring policy: the original pre-interval length, so the whole
-        // multi-segment interval collapses to ONE composed record on finish.
-        preIntervalHistoryLen: cursor.preIntervalHistoryLen,
-      },
-    };
-    // Same worker/fallback split as the advance path (a resumed segment is also a
-    // multi-tick run through the same simulate function).
-    result = await (flag('simAdvanceWorker')
-      ? runAdvanceInterval(resumeArgs, {
-          fallback: domainSimulateCampaignWorldInterval,
-          customContent: cloneJson(get().customContent) || {},
-        })
-      : domainSimulateCampaignWorldInterval(resumeArgs));
-
-    if (result && result.status) {
-      set(state => {
-        const c = findActiveCampaign(state.campaigns, campaignId);
-        if (!c) return;
-        persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-        // Park a FRESH cursor if the resumed segment paused again; else CLEAR the
-        // cursor back to byte-neutral (the interval finished).
-        if (result.status === 'paused') {
-          c.worldState = {
-            ...c.worldState,
-            pausedAdvance: {
-              interval: result.interval,
-              ticksTotal: result.ticksTotal,
-              ticksDone: result.ticksDone,
-              atTick: result.atTick,
-              resumeTick: result.resumeTick,
-              autoResolve: false,
-              startedAt: now,
-              // Determinism: a re-pause within a resume re-threads the SAME original
-              // `now` so every segment of the interval replays from one wall-clock.
-              now,
-              // Stage 5 ring policy: thread the original pre-interval history length
-              // through every re-pause so the whole interval collapses to one record.
-              preIntervalHistoryLen: result.preIntervalHistoryLen,
-              pendingMajors: cloneJson(result.pendingMajors) || [],
-              // Park the PRE-tick references directly (NOT a second cloneJson): they are
-              // already plain deep clones off simCampaign/simSaves threaded through the
-              // kernel, and re-cloning the whole pre-tick world on every re-pause of a
-              // multi-pause interval doubles the retained + serialized cursor for no
-              // gain. Resume feeds identical bytes either way (determinism preserved).
-              preSnapshot: {
-                worldState: result.preWorldState,
-                regionalGraph: result.preRegionalGraph,
-                wizardNews: result.preWizardNews,
-                saves: result.preSaves || [],
-              },
-            },
-          };
-        } else if (c.worldState && 'pausedAdvance' in c.worldState) {
-          const { pausedAdvance: _drop, ...rest } = c.worldState;
-          c.worldState = rest;
-        }
-        campaignPersist = cacheCampaignState(state);
+      // Delegate the resume body to the lazily-loaded session helper — pause/resume
+      // logic rides the SAME lazy chunk as the heavy sim, out of the first-paint
+      // closure. The synchronous in-flight guard + its finally clear stay HERE so a
+      // double-click is blocked before the loader await.
+      const {
+        runResolveIntervalMajors,
+        simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, runAdvanceInterval,
+      } = await loadWorldEngine();
+      if (!isPulseSessionCurrent(get, sessionFence)) return AUTH_SESSION_CHANGED_RESULT;
+      return await runResolveIntervalMajors({
+        set, get, campaignId, decisions, options, sessionFence,
+        isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+        deps: {
+          simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval,
+          runAdvanceInterval,
+        },
       });
-    }
-
-    if (result && result.status && campaignPersist) {
-      track(EVENTS.WORLD_PULSE_ADVANCED, {
-        ...extractPulseSummary(result, result.interval),
-        events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
-      });
-    }
-
-    const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
-    if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
-      result.cloudPending = true;
-    }
-    return result;
     } finally {
       // Clear the in-flight mark on every exit path (success, the no-paused-advance
-      // guard, AND any throw from the kernel) so a failed resume never wedges the
-      // campaign permanently disabled.
-      set(state => {
-        state.advanceInFlight = (state.advanceInFlight || []).filter(id => String(id) !== String(campaignId));
-      });
+      // guard, AND any throw) so a failed resume never wedges the campaign disabled.
+      finishAdvanceFlight(set, get, campaignId, flightToken);
     }
   },
 
@@ -873,142 +616,217 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    *  for this campaign? Drives the resume affordance + rehydrates after a reload. */
   getPausedAdvance: (campaignId) => {
     const c = findActiveCampaign(get().campaigns, campaignId);
+    if (!c) return null;
     return ensureWorldState(c?.worldState, c).pausedAdvance || null;
   },
 
+  /**
+   * Apply one pending proposal and atomically land all campaign/save effects.
+   *
+   * @param {string} campaignId
+   * @param {string} proposalId
+   * @returns {Promise<any|null>} The applied pulse result, or null on a no-op.
+   */
   applyWorldPulseProposal: async (campaignId, proposalId) => {
-    // Advance-concurrency guard — see the advanceInFlight contract above.
-    // (WorldPulsePanel also hides this control while advancing; the store seam
-    // is the layer that must hold regardless of which surface calls in.)
+    const sessionFence = capturePulseSession(get);
+    // Both active and parked intervals later replace worldState from an earlier
+    // snapshot; applying a proposal during either window would be lost.
     if (get().isAdvanceInFlight(campaignId)) return null;
-    let result = /** @type {any} */ (null);
-    let persistUpdates = [];
-    let campaignPersist = /** @type {any} */ (null);
-    let appliedDecision = /** @type {any} */ (null);
-    const now = new Date().toISOString();
-    // Lazy-load the simulation before the (synchronous) Immer producer below —
-    // Immer producers can't be async, so the import is awaited up front.
-    const { applyWorldPulseProposal: domainApplyWorldPulseProposal } = await loadWorldPulse();
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      // Build the decision telemetry INSIDE set() — the proposal is an Immer
-      // draft proxy that is revoked once set() returns; the extractor flattens
-      // it to a plain enum/band object that survives.
-      const proposal = (c.worldState?.proposals || []).find(p => p.id === proposalId) || null;
-      appliedDecision = extractProposalDecision(proposal, 'applied');
-      result = domainApplyWorldPulseProposal({
-        campaign: cloneJson(c),
-        saves: cloneJson(campaignSettlements(state, campaignId)),
-        proposalId,
-        now,
-      });
-      if (!result) return;
-      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      campaignPersist = cacheCampaignState(state);
+    if (get().getPausedAdvance(campaignId)) return null;
+    // Keep the guard prefix eager. The deferred body repeats it after loading,
+    // computes from clones, commits once, then flushes campaign and save writes.
+    const { runApplyWorldPulseProposal } = await loadDeferredPulseMutations();
+    return runApplyWorldPulseProposal({
+      set,
+      get,
+      campaignId,
+      proposalId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-
-    if (result && campaignPersist) {
-      track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
-    }
-    {
-      // backward:true — applying a proposal mutates the world but does NOT advance
-      // the tick, so the snapshot tick EQUALS the cloud's. Under the forward guard
-      // (advance only when strictly behind) that ties → stale_tick (read as success)
-      // and the applied proposal is silently dropped on reload. So this is a
-      // last-write-wins write, exactly like undo (expectedTick = null).
-      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, backward: true });
-      // Same cloud-pending contract as advanceCampaignWorld: a failed persist
-      // already raised the retryable banner, so flag the result rather than let a
-      // caller read an unqualified success over a cloud-pending write.
-      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
-        result.cloudPending = true;
-      }
-    }
-    return result;
   },
 
-  // Party as first-class actor: inject the consequences of a party action
-  // (resolve a stressor, broker/inflame a relationship, clear/impose a
-  // condition, move a faction/NPC) as an authoritative, party-tagged pulse
-  // input. Persists like advanceCampaignWorld.
-  //
-  // Deliberately NOT gated on isAdvanceInFlight (unlike the other pulse
-  // mutators): advanceCampaignWorld replays its drained party impacts through
-  // this action while its campaign is still marked in flight.
-  recordPartyImpact: async (campaignId, action) => {
-    let result = /** @type {any} */ (null);
-    let persistUpdates = [];
-    let campaignPersist = /** @type {any} */ (null);
-    const now = new Date().toISOString();
-    // Lazy-load the simulation before the (synchronous) Immer producer below.
-    const { applyPartyImpact: domainApplyPartyImpact } = await loadWorldPulse();
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      result = domainApplyPartyImpact({
-        campaign: cloneJson(c),
-        saves: cloneJson(campaignSettlements(state, campaignId)),
-        action,
-        now,
-      });
-      if (!result) return;
-      persistUpdates = applyWorldPulseResultToState(state, c, result, now);
-      campaignPersist = cacheCampaignState(state);
+  /**
+   * W-COMPOSER-2 — stage a DM realm-verb order as a PENDING proposal (the
+   * force-as-proposal lane; realmManifest.js is the verb catalog). Cancel =
+   * dismissWorldPulseProposal; approval = applyWorldPulseProposal (the
+   * realm-verb arm applies it force ≡ organic). Same guards as every pulse
+   * mutator: no-op while an advance runs or a paused interval is parked.
+   *
+   * @param {string} campaignId
+   * @param {string} verb
+   * @param {any} args
+   * @returns {Promise<any|{ok:false, code:string}>}
+   */
+  stageRealmVerb: async (campaignId, verb, args) => {
+    const sessionFence = capturePulseSession(get);
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, code: 'advance_in_flight' };
+    if (get().getPausedAdvance(campaignId)) return { ok: false, code: 'advance_paused' };
+    // Mint/apply machinery remains deferred; the body rechecks both guards after
+    // the import before staging the authoritative proposal.
+    const { runStageRealmVerb } = await loadDeferredPulseMutations();
+    return runStageRealmVerb({
+      set,
+      get,
+      campaignId,
+      verb,
+      args,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-
-    if (result && campaignPersist) {
-      track(EVENTS.PARTY_IMPACT_RECORDED, {
-        action_type: action?.kind || 'unknown', // retained for back-compat
-        ...extractPartyImpact(action, result),
-      });
-    }
-    {
-      // rejectIfNewer:true — a party impact is a same-tick INJECTION (it does not
-      // bump worldState.tick). It must land when the cloud is at our snapshot tick,
-      // but must NOT clobber a world-pulse advance a second tab committed in between.
-      // rejectIfNewer sets 069's expectedTick = tick+1, so the existing atomic guard
-      // applies iff cloud <= our tick and REJECTS (→ conflict) iff a concurrent tab
-      // advanced past it — reusing the tested 069 path, no RPC change. A rejected
-      // write surfaces as cloudPending below so the user can reload + re-apply, rather
-      // than silently overwriting the newer timeline. Single-tab is unchanged (applies).
-      const persistOutcome = await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId, rejectIfNewer: true });
-      if (result && result.ok !== false && persistOutcome && persistOutcome.ok === false) {
-        result.cloudPending = true;
-      }
-    }
-    return result;
   },
 
+  /**
+   * Inject a party action (resolve a stressor, broker/inflame a relationship,
+   * clear/impose a condition, or move a faction/NPC) as an authoritative,
+   * party-tagged World Pulse input.
+   *
+   * @param {string} campaignId
+   * @param {any} action
+   * @param {{ sessionFence?: any }} [options] Internal replay may inherit the
+   *   advance session so the entire drain remains under one owner fence.
+   * @returns {Promise<any|{ok:false, reason:string}>}
+   */
+  recordPartyImpact: async (campaignId, action, options = {}) => {
+    const sessionFence = options.sessionFence || capturePulseSession(get);
+    // Parked-pause guard (worldpulse-core-1): a party impact recorded while the
+    // interval is paused for DM verdicts would be clobbered by resume (which replays
+    // the segment from the cursor's pre-tick snapshot). Block a USER-initiated impact
+    // during the parked window — but NOT the advance's own internal party-replay,
+    // which runs while the campaign is still marked in flight (the drained impacts
+    // must land). isAdvanceInFlight distinguishes the two: the parked window is
+    // NOT-in-flight (the advance has returned); the internal replay IS in-flight.
+    if (get().getPausedAdvance(campaignId) && !get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_paused' };
+    }
+    // User-blocking remains synchronous; domain work, telemetry, mutation, and
+    // persistence stay behind the deferred boundary.
+    const { runRecordPartyImpact } = await loadDeferredPulseMutations();
+    return runRecordPartyImpact({
+      set,
+      get,
+      campaignId,
+      action,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
+  },
+
+  /**
+   * Lane 2 (domain-events-region-1): land a NON-party DM canon relationship event
+   * (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE / OPENED_TRADE_ROUTE, and an
+   * APPLY_STRESSOR carrying an instigator) on the live campaign's pulse
+   * relationship edge — the worldState.relationshipStates entry the war layer
+   * reads, plus the regionalGraph edge label + channel bundle. Called
+   * fire-and-forget by settlementSlice.rippleEventThroughWorld on a canon,
+   * non-party relationship event; the undo snapshot is captured synchronously in
+   * applyEvent (logEntry.undo.relationshipRipple) and reversed by
+   * reverseCanonRelationshipRipple, so this async ripple never has to be awaited
+   * for undo to be a clean inverse.
+   *
+   * ORPHAN GUARD: a sync undoLastEvent can pop the event BEFORE this async ripple
+   * (which awaits the lazy engine load) commits. If the triggering event is no
+   * longer in the acting save's eventLog by commit time, skip — the sync undo
+   * already restored the pre-ripple edge, so landing the ripple now would orphan
+   * it.
+   *
+   * @param {string} campaignId
+   * @param {{ event?: any, homeId?: string|number, now?: string|null,
+   *   sessionFence?: any }} [args]
+   *   `now` is the pinNow seam: the drain-path parity replay threads the advance's
+   *   pinned tick clock so a drained relationship verb lands deterministically;
+   *   the immediate path omits it (boundary self-mint).
+   */
+  recordCanonRelationshipRipple: async (campaignId, {
+    event, homeId, now, sessionFence: inheritedSessionFence,
+  } = {}) => {
+    const sessionFence = inheritedSessionFence || capturePulseSession(get);
+    if (!event || homeId == null || homeId === '') return null;
+    // Parked-pause guard (mirrors recordPartyImpact), kept as the SYNC PREFIX
+    // (FP-2a §0.7.3): a relationship ripple recorded while the interval is paused
+    // for DM verdicts would be clobbered by resume. The heavy body (the relationship
+    // applier + persist) rides the lazy campaignCanonRelationshipSession chunk so
+    // NONE of it — nor the relationshipState constructor it pulls — reaches first
+    // paint (dep-import pattern, mirroring canonizeCampaignWorldSpatial).
+    if (get().getPausedAdvance(campaignId) && !get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_paused' };
+    }
+    // The deferred facade preserves the account/session fence around the still
+    // heavier relationship session and its persistence await.
+    const { runRecordCanonRelationshipRipple } = await loadDeferredPulseMutations();
+    return runRecordCanonRelationshipRipple({
+      set,
+      campaignId,
+      event,
+      homeId,
+      now,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
+  },
+
+  /**
+   * Lane 2 (domain-events-region-1) — the INVERSE of recordCanonRelationshipRipple,
+   * for undoLastEvent. Restores the campaign's pre-ripple pulse edge (the
+   * relationshipState entry + the regionalGraph edge label + channel bundle) from
+   * the snapshot applyEvent stamped on logEntry.undo.relationshipRipple. Called
+   * fire-and-forget by settlementSlice.undoLastEvent.
+   *
+   * Async + lazy on purpose: the channel-bundle re-sync it needs (region graph
+   * helpers) rides the SAME lazy chunk the first-paint budget keeps the forward
+   * applier out of the eager closure — the eager undo path touches only the light
+   * snapshot (logEntry.undo). RACE-SAFE with the forward ripple: the snapshot is
+   * the pre-apply value, so restoring it is idempotent when the forward hasn't
+   * landed, and the forward's orphan guard skips once the event is undone —
+   * whichever async op wins, the pulse edge ends at its pre-event value.
+   *
+   * @param {string} campaignId
+   * @param {{ key?: string, from?: unknown, to?: unknown, priorRelState?: unknown, priorEdgeType?: string|null }} [snapshot]
+   * @param {{ now?: string|null, sessionFence?: any }} [options]
+   *   pinNow seam (mirrors the forward);
+   *   the undo caller omits it (boundary self-mint).
+   */
+  reverseCanonRelationshipRipple: async (campaignId, snapshot = {}, {
+    now, sessionFence: inheritedSessionFence,
+  } = {}) => {
+    const sessionFence = inheritedSessionFence || capturePulseSession(get);
+    if (!snapshot?.key) return null;
+    // Advance-in-flight guard (store-2), kept as the SYNC PREFIX: a running
+    // multi-tick advance replaces worldState/regionalGraph wholesale, so an undo
+    // reversal landing mid-advance would be silently reverted. The heavy body rides
+    // the SAME lazy sidecar as the forward ripple (dep-import pattern).
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
+    // As with the forward ripple, the deferred facade fences the nested lazy
+    // session before and after its mutation/persistence sequence.
+    const { runReverseCanonRelationshipRipple } = await loadDeferredPulseMutations();
+    return runReverseCanonRelationshipRipple({
+      set,
+      campaignId,
+      snapshot,
+      now,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
+  },
+
+  /**
+   * Dismiss one pending proposal and persist the DM's block decision.
+   *
+   * @param {string} campaignId
+   * @param {string} proposalId
+   * @returns {Promise<any|null>} The dismissed proposal, or null on a no-op.
+   */
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
-    // Advance-concurrency guard — see the advanceInFlight contract above.
+    const sessionFence = capturePulseSession(get);
+    // Dismissal mutates worldState and is subject to the same replacement races
+    // as apply/canon/rules: neither an active nor parked interval is idle.
     if (get().isAdvanceInFlight(campaignId)) return null;
-    let proposal = /** @type {any} */ (null);
-    let dismissDecision = /** @type {any} */ (null);
-    let campaignPersist = /** @type {any} */ (null);
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const now = new Date().toISOString();
-      c.worldState = domainUpdateWorldPulseProposalStatus(
-        ensureWorldState(c.worldState, c),
-        proposalId,
-        'dismissed',
-        { dismissedAt: now },
-      );
-      proposal = c.worldState.proposals.find(item => item.id === proposalId) || null;
-      // Flatten the draft proxy to plain telemetry before set() revokes it.
-      dismissDecision = proposal ? extractProposalDecision(proposal, 'dismissed') : null;
-      c.updatedAt = now;
-      campaignPersist = cacheCampaignState(state);
+    if (get().getPausedAdvance(campaignId)) return null;
+    // Telemetry extraction and persistence remain deferred; the body repeats the
+    // guards after loading before it touches the proposal draft.
+    const { runDismissWorldPulseProposal } = await loadDeferredPulseMutations();
+    return runDismissWorldPulseProposal({
+      set,
+      get,
+      campaignId,
+      proposalId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-    if (dismissDecision && campaignPersist) {
-      // The BLOCK half of the permission flow — previously emitted nothing, so
-      // accept-vs-block ratio (what DMs let in vs reject) was unmeasurable.
-      track(EVENTS.WORLD_PULSE_PROPOSAL_DISMISSED, dismissDecision);
-      await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
-    }
-    return proposal;
   },
 
   getCampaignWorldState: (campaignId) => {
@@ -1017,9 +835,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   /** Campaign-clock (Phase C2): is there a pre-pulse snapshot to undo for this
-   *  campaign this session? Drives the "Undo last advance" affordance. */
+   *  campaign? Drives the "Undo last advance" affordance.
+   *
+   *  Two sources, in precedence order. (1) The session pulseUndoStack — every
+   *  advance this session pushed one, and popping it keeps the multi-step
+   *  walk-back working. (2) R-5b: the pre-INTERVAL snapshot parked on a PAUSED
+   *  advance's cursor, which survives a reload with the campaign record. Source 2
+   *  is what makes a reload-into-paused interval genuinely undoable instead of
+   *  honestly-but-uselessly refusing; it can only be reached when source 1 is
+   *  empty for this campaign, so an in-session advance behaves exactly as before. */
   canUndoLastPulse: (campaignId) =>
-    (get().pulseUndoStack || []).some(s => s.campaignId === campaignId),
+    (get().pulseUndoStack || []).some(s => s.campaignId === campaignId)
+    || Boolean(parkedIntervalUndoSnapshot(findActiveCampaign(get().campaigns, campaignId))),
 
   /**
    * Campaign-clock (Phase C2): reverse the most recent world-pulse advance for
@@ -1027,104 +854,49 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * the live active view) from the pre-pulse snapshot. Multi-step — each call
    * pops one snapshot, so repeated calls walk back tick by tick. Returns true if
    * an advance was undone. Session-scoped: a reload clears the stack.
+   *
+   * @param {string} campaignId
+   * @returns {Promise<boolean>}
    */
   undoLastPulse: async (campaignId) => {
-    // Advance-concurrency guard — see the advanceInFlight contract above. An
-    // undo popped mid-advance would restore a PRIOR tick under the running
-    // interval, whose Phase-2 commit then re-lands the advanced world on top —
-    // the undo evaporates AND its snapshot is consumed. Undoing a PARKED pause
-    // (the documented abandon path) is unaffected: a paused advance has
-    // returned, so its campaign is no longer marked in flight.
+    const sessionFence = capturePulseSession(get);
+    // A restore landing during an advance would itself be replaced by the
+    // interval's later Phase-2 commit. A parked pause has returned and is not
+    // marked in flight, so undo remains the supported abandon path.
     if (get().isAdvanceInFlight(campaignId)) return false;
-    const persistUpdates = [];
-    let campaignPersist = null;
-    let didUndo = false;
-    set(state => {
-      const stack = state.pulseUndoStack || [];
-      let idx = -1;
-      for (let i = stack.length - 1; i >= 0; i--) {
-        if (stack[i].campaignId === campaignId) { idx = i; break; }
-      }
-      if (idx === -1) return;
-      // Stack entries park the heavy snapshot body as a serialized payload
-      // (see the push site's retained-memory note) — parse it back to the
-      // capturePulseSnapshot shape. Entries are only ever minted by the push
-      // site, so an unparseable payload can't happen in practice; if it ever
-      // does, drop the entry (so the Undo affordance doesn't dangle on it
-      // forever) and report no undo.
-      let snap = null;
-      try { snap = JSON.parse(stack[idx].payload); } catch { /* handled below */ }
-      if (!snap) {
-        state.pulseUndoStack = stack.filter((_, i) => i !== idx);
-        return;
-      }
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const stamp = new Date().toISOString();
-      // Restore the campaign world (world state, regional graph, wizard news).
-      c.worldState = ensureWorldState(snap.worldState, c);
-      c.regionalGraph = ensureRegionalGraph(snap.regionalGraph, { now: stamp });
-      c.wizardNews = ensureWizardNewsFeed(snap.wizardNews, { now: stamp });
-      c.updatedAt = stamp;
-      // Restore each member save to its pre-pulse settlement + campaignState —
-      // but only members that still belong to this campaign (a save detached
-      // since the advance must not be silently reverted).
-      const memberIds = new Set((c.settlementIds || []).map(String));
-      for (const s of snap.saves || []) {
-        if (!memberIds.has(String(s.id))) continue;
-        const sidx = state.savedSettlements.findIndex(x => String(x.id) === String(s.id));
-        if (sidx === -1) continue;
-        const restoredSettlement = cloneJson(s.settlement);
-        const restoredCampaignState = cloneJson(s.campaignState);
-        state.savedSettlements[sidx] = {
-          ...state.savedSettlements[sidx],
-          settlement: restoredSettlement,
-          campaignState: restoredCampaignState,
-          timestamp: stamp,
-        };
-        persistUpdates.push({
-          saveId: s.id,
-          settlement: cloneJson(restoredSettlement),
-          campaignState: cloneJson(restoredCampaignState),
-        });
-      }
-      // Re-hydrate the LIVE active view to whichever member is open now — so the
-      // on-screen settlement reflects the reverted state even if the DM switched
-      // members (or the open member isn't the one captured at advance time)
-      // between advancing and undoing. If no member of THIS campaign is open,
-      // the live view is left untouched (a different campaign's settlement, or
-      // a closed detail view, must not be clobbered).
-      if (state.activeSaveId != null) {
-        if (snap.active && String(state.activeSaveId) === snap.active.saveId) {
-          // Same member that was open at advance time — restore its view verbatim.
-          state.settlement = cloneJson(snap.active.settlement);
-          state.systemState = cloneJson(snap.active.systemState);
-          state.eventLog = cloneJson(snap.active.eventLog);
-          state.phase = snap.active.phase;
-          state.editedAt = stamp;
-        } else {
-          const activeSnap = (snap.saves || []).find(s => String(s.id) === String(state.activeSaveId));
-          if (activeSnap && memberIds.has(String(activeSnap.id))) {
-            const cs = activeSnap.campaignState || {};
-            state.settlement = cloneJson(activeSnap.settlement);
-            state.systemState = cs.systemState != null ? cloneJson(cs.systemState) : null;
-            state.eventLog = Array.isArray(cs.eventLog) ? cloneJson(cs.eventLog) : [];
-            state.phase = cs.phase || state.phase;
-            state.editedAt = stamp;
-          }
-        }
-      }
-      // Pop just this snapshot — multi-step undo walks back one tick per call.
-      state.pulseUndoStack = stack.filter((_, i) => i !== idx);
-      campaignPersist = cacheCampaignState(state);
-      didUndo = true;
+    // Restore and multi-entity persistence are deferred; the body keeps the
+    // session fence around both the atomic store write and its flush.
+    const { runUndoLastPulse } = await loadDeferredPulseMutations();
+    return runUndoLastPulse({
+      set,
+      get,
+      campaignId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
     });
-    // backward:true — an undo restores a PRIOR (lower) tick, so it MUST bypass the
-    // forward stale-tick guard (last-write-wins). Otherwise the cloud, holding the
-    // higher post-advance tick, rejects the revert as stale_tick (which the client
-    // reads as success) and the undone advance resurrects on reload. The forward
-    // advance path leaves backward falsy, keeping the guard intact.
-    await flushWorldPulsePersist({ result: didUndo, campaignPersist, persistUpdates, campaignId, backward: true });
-    return didUndo;
+  },
+
+  /**
+   * R-1 (queue #5): reverse the most recent APPLIED world-pulse proposal,
+   * restoring the campaign world + member saves + the live view from the
+   * pre-apply snapshot on the session proposal-undo ring. Distinct from
+   * undoLastPulse: it pops the PROPOSAL ring only and never touches advance
+   * snapshots. Returns true only when a snapshot was restored and persisted.
+   *
+   * @param {string} campaignId
+   * @returns {Promise<boolean>}
+   */
+  undoLastProposalApply: async (campaignId) => {
+    const sessionFence = capturePulseSession(get);
+    // Same exclusivity story as undoLastPulse; the deferred body repeats the
+    // guards (plus the parked-pause refusal and ring-coherence checks) after
+    // its lazy import resolves.
+    if (get().isAdvanceInFlight(campaignId)) return false;
+    const { runUndoLastProposalApply } = await loadDeferredPulseMutations();
+    return runUndoLastProposalApply({
+      set,
+      get,
+      campaignId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
   },
 });

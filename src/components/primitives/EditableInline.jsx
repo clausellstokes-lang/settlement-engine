@@ -188,7 +188,6 @@ export default function EditableInline({
       margin: '-2px -4px',
       background: '#fff',
       border: `1px solid ${error ? '#A23434' : GOLD}`,
-      borderRadius: 3,
       outline: 'none',
       fontFamily: 'inherit',
       ...textStyle,
@@ -231,7 +230,6 @@ export default function EditableInline({
             background: swatch.white,
             padding: '2px 6px',
             border: `1px solid #A23434`,
-            borderRadius: 3,
             whiteSpace: 'nowrap',
             zIndex: 10,
           }}>

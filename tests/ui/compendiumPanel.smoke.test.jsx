@@ -16,8 +16,8 @@
  *
  * We mock the store (the panel reads getCustomContentCount() on mount, plus the
  * custom-content selectors in the custom-mode branch) and analytics (the global
- * search bar pulls Funnel/EVENTS). Default mode is the built-in catalog with the
- * 'tiers' tab, whose stable copy we assert on.
+ * search bar pulls Funnel/EVENTS). Default mode is the built-in catalog on the
+ * Overview dashboard, whose stable artifact-rendered copy we assert on.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
@@ -70,11 +70,11 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the 'tiers' tab. Pinning the
-    // TiersTab's stable copy means a broken extraction (e.g. CatalogTabs →
-    // primitives import) would surface here.
+    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
+    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
+    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
     expect(
-      screen.getByText(/Tier determines the maximum institution count/),
+      screen.getByText(/rendered by the deterministic engine from its own registries/),
     ).toBeTruthy();
   });
 
@@ -84,7 +84,31 @@ describe('CompendiumPanel — decomposition smoke', () => {
 
     expect(container.firstChild).not.toBeNull();
     expect(
-      screen.getByText(/Tier determines the maximum institution count/),
+      screen.getByText(/rendered by the deterministic engine from its own registries/),
     ).toBeTruthy();
+  });
+
+  // RESTORATION #9 — the standalone-page identity (Page frame + PageHeader) and
+  // the WAI-ARIA tab wiring (role=tablist/tab/tabpanel with matching id linkage)
+  // were dropped at the composite; this pins that they are wired back.
+  test('standalone carries the PageHeader identity and ARIA tab wiring', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    render(<CompendiumPanel standalone />);
+
+    // PageHeader identity: the serif page title, not just a document.title swap.
+    expect(screen.getByRole('heading', { level: 1, name: 'Compendium' })).toBeTruthy();
+
+    // The tab strip is a labelled tablist; every tab declares role=tab; the
+    // content region is a tabpanel whose id matches the selected tab's
+    // aria-controls (the linkage AT relies on).
+    const tablist = screen.getByRole('tablist', { name: 'Compendium sections' });
+    expect(tablist).toBeTruthy();
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs.length).toBeGreaterThan(0);
+    const panel = screen.getByRole('tabpanel');
+    const selected = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+    expect(selected).toBeTruthy();
+    expect(selected.getAttribute('aria-controls')).toBe(panel.getAttribute('id'));
+    expect(panel.getAttribute('aria-labelledby')).toBe(selected.getAttribute('id'));
   });
 });

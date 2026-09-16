@@ -38,13 +38,13 @@ export default function GalleryMemberVisibility({ settlement, shareDm, importabl
   const overriddenCount = npcs.filter(n => overrides[galleryMemberKey(n)]).length;
 
   return (
-    <div style={{ marginTop: 10, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
+    <div style={{ marginTop: 10, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
       <Button
         variant="secondary"
         fullWidth
         aria-expanded={open}
         onClick={() => setOpen(v => !v)}
-        style={{ justifyContent: 'flex-start', gap: 8, padding: '10px 14px', borderRadius: open ? '8px 8px 0 0' : 8, background: open ? swatch['#FAF6EF'] : CARD, border: 'none', boxShadow: 'none', textAlign: 'left' }}
+        style={{ justifyContent: 'flex-start', gap: 8, padding: '10px 14px', background: open ? swatch['#FAF6EF'] : CARD, border: 'none', boxShadow: 'none', textAlign: 'left' }}
       >
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK, flex: 1 }}>Per-member visibility</span>
         <span style={{ fontSize: FS.xxs, color: MUTED }}>

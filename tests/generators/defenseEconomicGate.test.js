@@ -15,17 +15,30 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { generateDefenseProfile, buildThreatAssessment } from '../../src/generators/defenseGenerator.js';
+import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
 import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
+import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
-function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, priorityReligion = 30, stressTypes = [], magicExists = false, institutions } = {}) {
+function town({
+  priorityEconomy = 50,
+  priorityCriminal = 20,
+  priorityMagic = 0,
+  priorityReligion = 30,
+  stressTypes = [],
+  magicExists = false,
+  institutions,
+  tradeRouteAccess = 'crossroads',
+  terrainType = 'plains',
+} = {}) {
   return {
     name: 'Gatewatch',
     tier: 'town',
     population: 2400,
     config: {
-      tradeRouteAccess: 'crossroads',
+      tradeRouteAccess,
+      terrainType,
       monsterThreat: 'frontier',
       magicExists,
       priorityEconomy,
@@ -65,7 +78,13 @@ describe('economic survival respects the actual economy', () => {
     expect(poor.scores.economic).toBeLessThanOrEqual(55);
     const assessment = buildThreatAssessment(poor);
     const economicLine = JSON.stringify(assessment);
-    expect(economicLine).not.toMatch(/Strong economic base/);
+    // 'Economic Survival' is the anchor: it is the label of the very dimension
+    // whose verdict is under test, so an assessment that stopped emitting that
+    // dimension reds here instead of passing the exclusion vacuously.
+    expectAbsentWithAnchor(
+      economicLine, 'Strong economic base', 'Economic Survival',
+      'a struggling economy never earns the strong-base verdict',
+    );
   });
 
   test('a healthy economy with identical buildings scores meaningfully higher', () => {
@@ -81,6 +100,24 @@ describe('economic survival respects the actual economy', () => {
     for (let i = 1; i < scores.length; i++) {
       expect(scores[i]).toBeGreaterThanOrEqual(scores[i - 1]);
     }
+  });
+
+  test('only a maritime port receives the sea-supply resilience bonus', () => {
+    const institutions = [{ name: 'Granary' }];
+    const riverPort = generateDefenseProfile(town({
+      institutions,
+      tradeRouteAccess: 'port',
+      terrainType: 'riverside',
+    }));
+    const coastalPort = generateDefenseProfile(town({
+      institutions,
+      tradeRouteAccess: 'port',
+      terrainType: 'coastal',
+    }));
+
+    expect(coastalPort.scores.economic).toBeGreaterThan(
+      riverPort.scores.economic,
+    );
   });
 });
 
@@ -222,6 +259,42 @@ describe('disaster & famine readiness is gated by economic capacity', () => {
   });
 });
 
+describe('magical defense respects degraded magic influence', () => {
+  const arcaneInstitutions = [
+    { name: 'Granary' },
+    { name: 'Market Square' },
+    { name: "Mages' Guild" },
+    { name: 'Arcane Academy' },
+  ];
+
+  test('a crime-ridden destitute city fields weaker arcane defenses than a healthy one', () => {
+    const healthy = generateDefenseProfile(town({
+      magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10,
+      institutions: arcaneInstitutions,
+    }));
+    const rotten = generateDefenseProfile(town({
+      magicExists: true, priorityMagic: 70, priorityEconomy: 10, priorityCriminal: 85,
+      institutions: arcaneInstitutions,
+    }));
+    expect(healthy.scores.magical).toBeGreaterThan(0);
+    expect(rotten.scores.magical).toBeLessThan(healthy.scores.magical);
+  });
+
+  test('a healthy settlement is not taxed by the health gate (identity, not slider-ratio)', () => {
+    // The gate divides degraded influence by the UNGATED presence score, so a
+    // prosperous low-crime town multiplies by ~1.0. The old slider divisor
+    // (presence score is well below the raw slider) shaved ~30% off healthy
+    // settlements and double-counted weak presence.
+    const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
+    const healthy = generateDefenseProfile(town({ ...cfg, institutions: arcaneInstitutions }));
+    const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
+      magicExists: true, priorityMagic: 70, nearbyResources: [],
+    });
+    // Ungated baseline: presence score + the arcane-guild profile bonus (+8).
+    expect(healthy.scores.magical).toBe(Math.min(100, presence.score + 8));
+  });
+});
+
 describe('stacking famine mitigation never worsens the penalty', () => {
   // Druid wardens alone reduce the famine penalties to -8 econ / -5 mil.
   // Divine (Create Food and Water) CAPS at -12 / -6 — layering it on top of
@@ -257,38 +330,44 @@ describe('stacking famine mitigation never worsens the penalty', () => {
   });
 });
 
-describe('magical defense respects degraded magic influence', () => {
-  const arcaneInstitutions = [
-    { name: 'Granary' },
-    { name: 'Market Square' },
-    { name: "Mages' Guild" },
-    { name: 'Arcane Academy' },
+describe('garrison chain import credit (chainHealthy respects provisioning)', () => {
+  // A connected town's garrison chain that is vulnerable ONLY because its
+  // upstream provisioning chain is missing still earns the +5 military credit —
+  // the garrison is supplied by imports. An isolated settlement, or a chain
+  // with a genuine LOCAL impairment (trade dependency / active substitute),
+  // keeps the -5 penalty.
+  const withChains = (s, activeChains, tradeRouteAccess) => {
+    const out = { ...s, economicState: { ...s.economicState, activeChains } };
+    if (tradeRouteAccess) out.config = { ...s.config, tradeRouteAccess };
+    return out;
+  };
+  const GARRISON_INSTITUTIONS = [
+    { name: 'Granary' }, { name: 'Market Square' }, { name: 'Town Watch' }, { name: 'Garrison' },
   ];
+  const base = () => town({ institutions: GARRISON_INSTITUTIONS });
 
-  test('a crime-ridden destitute city fields weaker arcane defenses than a healthy one', () => {
-    const healthy = generateDefenseProfile(town({
-      magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10,
-      institutions: arcaneInstitutions,
-    }));
-    const rotten = generateDefenseProfile(town({
-      magicExists: true, priorityMagic: 70, priorityEconomy: 10, priorityCriminal: 85,
-      institutions: arcaneInstitutions,
-    }));
-    expect(healthy.scores.magical).toBeGreaterThan(0);
-    expect(rotten.scores.magical).toBeLessThan(healthy.scores.magical);
+  test('upstream-missing-but-importable garrison chain earns the credit instead of the penalty', () => {
+    const importable = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'] },
+    ]));
+    const noChain = generateDefenseProfile(withChains(base(), []));
+    // Credit (+5), not penalty (-5): strictly above the chainless baseline.
+    expect(importable.scores.military).toBe(noChain.scores.military + 5);
   });
 
-  test('a healthy settlement is not taxed by the health gate (identity, not slider-ratio)', () => {
-    // The gate divides degraded influence by the UNGATED presence score, so a
-    // prosperous low-crime town multiplies by ~1.0. The old slider divisor
-    // (presence score is well below the raw slider) shaved ~30% off healthy
-    // settlements and double-counted weak presence.
-    const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
-    const healthy = generateDefenseProfile(town({ ...cfg, institutions: arcaneInstitutions }));
-    const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
-      magicExists: true, priorityMagic: 70, nearbyResources: [],
-    });
-    // Ungated baseline: presence score + the arcane-guild profile bonus (+8).
-    expect(healthy.scores.magical).toBe(Math.min(100, presence.score + 8));
+  test('an ISOLATED settlement with the same missing upstream keeps the penalty', () => {
+    const isolatedVulnerable = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'] },
+    ], 'isolated'));
+    const isolatedNoChain = generateDefenseProfile(withChains(base(), [], 'isolated'));
+    expect(isolatedVulnerable.scores.military).toBe(isolatedNoChain.scores.military - 5);
+  });
+
+  test('a genuine local impairment (trade dependency) is never credited', () => {
+    const locallyImpaired = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'], dependency: { institution: 'Grain factor' } },
+    ]));
+    const noChain = generateDefenseProfile(withChains(base(), []));
+    expect(locallyImpaired.scores.military).toBe(noChain.scores.military - 5);
   });
 });

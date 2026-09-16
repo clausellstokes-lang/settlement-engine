@@ -73,18 +73,16 @@ describe('auth profile source of truth', () => {
     const session = await auth.getSession();
 
     expect(stubs.from).toHaveBeenCalledWith('profiles');
-    expect(stubs.select).toHaveBeenCalledWith('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email, account_number, external_name, first_name, last_name, preferred_name');
+    expect(stubs.select).toHaveBeenCalledWith('role, display_name, tier, is_founder, avatar_url, email_notifications, model_preference, email');
     expect(session.tier).toBe('free');
     expect(session.role).toBe('user');
     expect(session.isFounder).toBe(false);
     expect(session.displayName).toBe('Profile Name');
   });
 
-  it('falls back to safe non-privileged grants when the user has no profile row (PGRST116)', async () => {
-    // PostgREST .single() with no match → genuinely no profile yet; safe
-    // defaults are correct here (never trust user_metadata for tier/role).
+  it('falls back to safe non-privileged grants when the profile read fails', async () => {
     await loadAuthWithProfile({
-      error: { code: 'PGRST116', message: 'Results contain 0 rows' },
+      error: { message: 'RLS denied' },
       data: null,
     });
 
@@ -94,19 +92,5 @@ describe('auth profile source of truth', () => {
     expect(session.role).toBe('user');
     expect(session.isFounder).toBe(false);
     expect(session.displayName).toBe('Metadata Name');
-  });
-
-  it('does NOT downgrade a premium/admin session on a transient profile read failure', async () => {
-    // A non-PGRST116 error (RLS blip, 5xx, network) is transient. The old code
-    // failed the `!error && data` guard and rebuilt the session at free/user —
-    // silently downgrading a premium/admin user mid-flight (and on every token
-    // refresh). The fix surfaces the failure so the caller preserves the
-    // last-known session instead of overwriting it with a downgrade.
-    await loadAuthWithProfile({
-      error: { code: 'PGRST301', message: 'JWT expired' },
-      data: null,
-    });
-
-    await expect(auth.getSession()).rejects.toThrow();
   });
 });

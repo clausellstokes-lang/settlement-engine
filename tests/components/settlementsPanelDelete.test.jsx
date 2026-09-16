@@ -22,8 +22,8 @@
  * persisted batch cleaned A (and only A) and deleted B.
  */
 
-import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup, fireEvent, act } from '@testing-library/react';
+import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
+import { render, screen, cleanup, fireEvent, act, waitFor } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -80,7 +80,17 @@ const storeState = {
   generateSettlement: vi.fn(),
   setPurchaseModalOpen: vi.fn(),
   applyCosmeticRename: vi.fn(),
-  setSavedSettlements: vi.fn(),
+  setSavedSettlements: vi.fn((rows) => {
+    storeState.savedSettlements = rows;
+    storeState.savedSettlementsLoaded = true;
+    return true;
+  }),
+  clearSavedSettlements: vi.fn((ownerId) => {
+    storeState.savedSettlements = [];
+    storeState.savedSettlementsLoaded = false;
+    storeState.savedSettlementsOwnerId = ownerId ?? null;
+    storeState.savedSettlementsHydrationGeneration += 1;
+  }),
   notePersistedSave: vi.fn(),
   canonizeSavedSettlement: vi.fn(),
   queueChange: vi.fn(),
@@ -89,6 +99,9 @@ const storeState = {
   isElevated: () => false,
   auth: { tier: 'free', user: { id: 'u1' } },
   savedSettlements: [],
+  savedSettlementsLoaded: false,
+  savedSettlementsOwnerId: 'u1',
+  savedSettlementsHydrationGeneration: 0,
   selectedSettlementId: null,
   clearSelectedSettlementId: vi.fn(),
   campaigns: [],
@@ -98,6 +111,14 @@ const storeState = {
   toggleCampaignCollapsed: vi.fn(),
   addToCampaign: vi.fn(),
   removeFromCampaign: vi.fn(),
+  removeSavedSettlement: vi.fn(() => ({ ok: true })),
+  withSettlementDeletionLock: vi.fn((_ids, operation) =>
+    operation({ mutationToken: 'test-delete-lock', campaignIds: [] })),
+  getCampaignMembershipBlock: vi.fn(() => null),
+  getSettlementDeletionBlock: vi.fn(() => null),
+  getCampaignMutationBlock: vi.fn(() => null),
+  campaignMutationLocks: [],
+  advanceInFlight: [],
   setActiveCampaign: vi.fn(),
   advanceCampaignWorld: vi.fn(),
   requestMapWorkspace: vi.fn(),
@@ -119,9 +140,22 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 describe('SettlementsPanel — single delete neighbour cleanup', () => {
+  beforeEach(() => {
+    storeState.auth.user = { id: 'u1' };
+    storeState.savedSettlements = [];
+    storeState.savedSettlementsLoaded = false;
+    storeState.savedSettlementsOwnerId = 'u1';
+    storeState.savedSettlementsHydrationGeneration = 0;
+    storeState.removeSavedSettlement.mockClear();
+    storeState.withSettlementDeletionLock.mockClear();
+    storeState.setSavedSettlements.mockClear();
+    storeState.clearSavedSettlements.mockClear();
+  });
+
   test('cleans the one-directionally-linked survivor and leaves unrelated saves untouched', async () => {
     const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
     const { saves: savesService } = await import('../../src/lib/saves.js');
+    savesService.mutateBatch.mockReset().mockResolvedValue(undefined);
 
     render(<SettlementsPanel onNavigate={() => {}} />);
     // Saves resolved onto the list.
@@ -136,8 +170,11 @@ describe('SettlementsPanel — single delete neighbour cleanup', () => {
     await act(async () => { fireEvent.click(confirm); });
 
     // The delete persisted exactly one batch.
-    expect(savesService.mutateBatch).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(savesService.mutateBatch).toHaveBeenCalledTimes(1));
     const { updates, deletes } = savesService.mutateBatch.mock.calls[0][0];
+    const session = savesService.mutateBatch.mock.calls[0][1];
+    expect(session.expectedOwnerId).toBe('u1');
+    expect(session.isSessionCurrent()).toBe(true);
 
     // B was deleted.
     expect(deletes).toEqual(['B']);
@@ -152,5 +189,143 @@ describe('SettlementsPanel — single delete neighbour cleanup', () => {
     // batch. Pre-fix the over-broad `|| n.linkId` gate re-scanned it; correctness
     // held only by luck. This pins it out of the modified set for good.
     expect(updates.some(u => u.id === 'C')).toBe(false);
+    expect(storeState.removeSavedSettlement).toHaveBeenCalledWith(
+      'B',
+      { mutationToken: 'test-delete-lock' },
+    );
+  });
+
+  test('a failed cloud batch rolls the row back and never enters the store delete chokepoint', async () => {
+    const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+    const { saves: savesService } = await import('../../src/lib/saves.js');
+    savesService.mutateBatch.mockReset().mockRejectedValue(new Error('offline'));
+
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    expect(await screen.findByText('Brackwater')).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Delete Brackwater'));
+    fireEvent.click(await screen.findByText('Yes, delete permanently'));
+
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/Library:/));
+    expect(screen.getByText('Brackwater')).toBeTruthy();
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+  });
+
+  test('operation-scoped rollback restores only the failed delete, not a concurrent success or edit', async () => {
+    const { rollbackLibraryMutation } = await import('../../src/components/settlements/libraryDeleteHandlers.js');
+    const previousA = { id: 'A', name: 'A before' };
+    const previousB = { id: 'B', name: 'B before' };
+    const editedB = { id: 'B', name: 'B edited while A was pending' };
+
+    const rolledBack = rollbackLibraryMutation(
+      [editedB],                 // B still exists, but has a newer edit
+      [previousA, previousB],    // snapshot captured before deleting A
+      [previousB],               // optimistic state deleted A
+      ['A'],
+    );
+    expect(rolledBack).toEqual([previousA, editedB]);
+
+    const afterSuccessfulBDelete = rollbackLibraryMutation(
+      [],                        // B was independently deleted successfully
+      [previousA, previousB],
+      [previousB],
+      ['A'],
+    );
+    expect(afterSuccessfulBDelete).toEqual([previousA]);
+  });
+
+  test('single delete normalizes numeric neighbour ids against string save ids', async () => {
+    const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+    const { saves: savesService } = await import('../../src/lib/saves.js');
+    const source = {
+      ...structuredClone(saveA),
+      settlement: {
+        ...structuredClone(saveA.settlement),
+        neighbourNetwork: [{ id: 42, name: 'Former alias', linkId: 'mixed-id-link' }],
+        interSettlementRelationships: [],
+      },
+    };
+    const target = {
+      ...structuredClone(saveB),
+      id: '42',
+      name: 'Renamed target',
+      settlement: { ...structuredClone(saveB.settlement), name: 'Renamed target' },
+    };
+    savesService.list.mockResolvedValueOnce([source, target]);
+    savesService.mutateBatch.mockReset().mockResolvedValue(undefined);
+
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    expect(await screen.findByText('Renamed target')).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Delete Renamed target'));
+    fireEvent.click(await screen.findByText('Yes, delete permanently'));
+
+    await waitFor(() => expect(savesService.mutateBatch).toHaveBeenCalledTimes(1));
+    expect(savesService.mutateBatch.mock.calls[0][0].updates[0].settlement.neighbourNetwork).toEqual([]);
+  });
+
+  test('a late successful A delete cannot remove or prune B after the cache session switches', async () => {
+    let resolveBatch;
+    const batch = new Promise(resolve => {
+      resolveBatch = resolve;
+    });
+    const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+    const { saves: savesService } = await import('../../src/lib/saves.js');
+    savesService.mutateBatch.mockReset().mockReturnValue(batch);
+
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    expect(await screen.findByText('Brackwater')).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Delete Brackwater'));
+    fireEvent.click(await screen.findByText('Yes, delete permanently'));
+    await waitFor(() => expect(savesService.mutateBatch).toHaveBeenCalledTimes(1));
+    const session = savesService.mutateBatch.mock.calls[0][1];
+    expect(session.expectedOwnerId).toBe('u1');
+    expect(session.isSessionCurrent()).toBe(true);
+
+    storeState.auth.user = { id: 'u2' };
+    storeState.savedSettlementsOwnerId = 'u2';
+    storeState.savedSettlementsHydrationGeneration += 1;
+    storeState.savedSettlements = [{ id: 'B', name: 'B account row' }];
+    expect(session.isSessionCurrent()).toBe(false);
+    const writesBeforeResolve = storeState.setSavedSettlements.mock.calls.length;
+    resolveBatch();
+    await act(async () => {
+      await batch;
+      await Promise.resolve();
+    });
+
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+    expect(storeState.setSavedSettlements).toHaveBeenCalledTimes(writesBeforeResolve);
+    expect(storeState.savedSettlements).toEqual([{ id: 'B', name: 'B account row' }]);
+  });
+
+  test('a late failed A delete cannot roll A rows or an A error into B', async () => {
+    let rejectBatch;
+    const batch = new Promise((_, reject) => {
+      rejectBatch = reject;
+    });
+    const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+    const { saves: savesService } = await import('../../src/lib/saves.js');
+    savesService.mutateBatch.mockReset().mockReturnValue(batch);
+
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    expect(await screen.findByText('Brackwater')).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Delete Brackwater'));
+    fireEvent.click(await screen.findByText('Yes, delete permanently'));
+    await waitFor(() => expect(savesService.mutateBatch).toHaveBeenCalledTimes(1));
+
+    storeState.auth.user = { id: 'u2' };
+    storeState.savedSettlementsOwnerId = 'u2';
+    storeState.savedSettlementsHydrationGeneration += 1;
+    storeState.savedSettlements = [{ id: 'B', name: 'B account row' }];
+    const writesBeforeReject = storeState.setSavedSettlements.mock.calls.length;
+    rejectBatch(new Error('A request failed late'));
+    await act(async () => {
+      await batch.catch(() => {});
+      await Promise.resolve();
+    });
+
+    expect(storeState.removeSavedSettlement).not.toHaveBeenCalled();
+    expect(storeState.setSavedSettlements).toHaveBeenCalledTimes(writesBeforeReject);
+    expect(storeState.savedSettlements).toEqual([{ id: 'B', name: 'B account row' }]);
+    expect(screen.queryByRole('alert')).toBeNull();
   });
 });

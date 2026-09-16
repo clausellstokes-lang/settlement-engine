@@ -51,7 +51,12 @@ vi.mock('../../src/store/index.js', () => {
 
 // Treat the app as "not configured" (local mode) so the test never depends on
 // real Supabase env — the buttons still render and still call authOAuth.
-vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false }));
+// LINEAGE NOTE (master merge W6): supabase mock set isConfigured:true. RF added a
+// deliberate guard that DISABLES the OAuth provider buttons when supabase isn't
+// configured (AuthPanel.jsx:297,305 — `disabled={loading || !isConfigured}`). These
+// tests exercise the OAuth interaction/layout, so the environment must be
+// "configured". OAuth itself stays flag-gated OFF in prod per the owner ruling.
+vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
 
 async function renderPanel(initialMode = 'signin') {
   const AuthPanel = (await import('../../src/components/auth/AuthPanel.jsx')).default;

@@ -1,5 +1,7 @@
 /**
- * store/index.js — Unified Zustand store with 16 slices.
+ * store/index.js — Unified Zustand store, one slice per domain (the create*Slice
+ * spreads below are the authoritative census; the old "14 slices" header count
+ * rotted to 18 unnoticed, so no count is transcribed here).
  *
  * Slices:
  *   auth              – user session, tier (anon / free / premium), permissions
@@ -14,10 +16,15 @@
  *   campaignRegional  – campaign regional graph + channels + cross-settlement impacts/stressors
  *   campaignWorldPulse– campaign world-pulse simulation (preview/advance/proposals/undo)
  *   customContent     – user-authored institutions / resources / trade routes
- *   onboarding        – first-run coaching + nudge state
+ *   corpusFactory     – generation-time content corpus factory state
+ *   instantWorld      – the instant-world (one-click realm) flow state
+ *   onboarding        – the session nudge-toast channel (the first-run coach was
+ *                       retired 2026-07-27; teaching lives in the guidance registry)
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
- *   changeQueue       – per-settlement pending-changes queue (stage → commit)
- *   accountImport     – "Import my data" — batches exported records into the library
+ *   displayPrefs      – PERSISTED device-scoped display preferences (uiSlice's
+ *                       persisted counterpart; see that slice's header)
+ *   accountImport     – the "Import my data" write pipeline (batch + rollback)
+ *   fogEdit           – map fog-of-war editing state
  *
  * Usage:
  *   import { useStore } from '../store';
@@ -30,58 +37,37 @@ import { immer } from 'zustand/middleware/immer';
 import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
-import { createConfigSlice, DEFAULT_CONFIG } from './configSlice.js';
-import { createToggleSlice, normalizeServicesToggles } from './toggleSlice.js';
+import { createConfigSlice }     from './configSlice.js';
+import { createToggleSlice }     from './toggleSlice.js';
+// normalizeServicesToggles rides a SEPARATE import (not the createToggleSlice
+// line) so the operationRegistry census walker — which derives the composed-slice
+// file list from the `import { createXSlice }` lines — still recognises this slice.
+import { normalizeServicesToggles } from './toggleSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
 import { createMapSlice }        from './mapSlice.js';
 import { createCreditsSlice }      from './creditsSlice.js';
-import { createCampaignSlice }     from './campaignSlice.js';
-import { createCampaignRegionalSlice } from './campaignRegionalSlice.js';
-import { createCampaignWorldPulseSlice } from './campaignWorldPulseSlice.js';
+import { createCampaignSlice }     from './campaignSliceEntry.js';
+import { createCampaignRegionalSlice } from './campaignRegionalSliceEntry.js';
+import { createCampaignWorldPulseSlice } from './campaignWorldPulseSliceEntry.js';
 import { createCustomContentSlice } from './customContentSlice.js';
+import { createCorpusFactorySlice } from './corpusFactorySlice.js';
+import { createInstantWorldSlice }  from './instantWorldSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
-import { createChangeQueueSlice }   from './changeQueueSlice.js';
-import { createAccountImportSlice }  from './accountImportSlice.js';
-import { setCustomContentSource }   from '../lib/dependencyEngine.js';
+import { createDisplayPrefsSlice }  from './displayPrefsSlice.js';
+import { createAccountImportSlice } from './accountImportSlice.js';
+import { createFogEditSlice }       from './fogEditSlice.js';
+// W-H4 — the DM's three verbs over the world NPC ledger, plus their inverse. Thin and
+// eager by construction: the bodies dynamic-import on first use.
+import { createNpcVerbsSlice }      from './npcVerbsSlice.js';
+import { mergePersistedState }     from './persistMerge.js';
+import { partializeStoreState }    from './persistProjection.js';
+import { setCustomContentSource }   from '../lib/customContentSource.js';
+import { setCrashForensics }        from '../lib/errorReporter.js';
+import { buildCrashForensics }      from '../lib/crashForensics.js';
 import { saves as savesService }    from '../lib/saves.js';
-
-/**
- * Persist-rehydration merge. Exported (not just inlined in the persist config)
- * so it can be unit-tested without importing the full store + its side effects.
- *
- * Deep-merges the durable bags (config / userPrefs / productPrefs) over the
- * slice defaults instead of zustand's shallow replace. Critically, `config` is
- * overlaid on DEFAULT_CONFIG so a key ADDED to DEFAULT_CONFIG after a user last
- * persisted reads back its default rather than `undefined` (a missing boolean
- * would otherwise be treated as falsy and silently mis-resolve generation). The
- * persisted user values still win over the defaults for keys they DID persist.
- */
-export function mergePersistedState(persisted, current) {
-  const c = /** @type {any} */ (current) || {};
-  const p = /** @type {any} */ (persisted) || {};
-  // config / userPrefs / productPrefs are DEEP-overlaid onto their current defaults
-  // (a key added to the default after the user last persisted reads its default,
-  // not undefined). Other persisted bags (goodsToggles / servicesToggles) fall
-  // through the top-level `...p` spread and WHOLESALE-replace their slice default —
-  // fine today because those defaults are `{}` (nothing to lose). If either ever
-  // gains a non-empty default, add it to the deep-overlay list below, or a persisted
-  // bag will shadow the new default keys.
-  return {
-    ...c,
-    ...p,
-    config: { ...DEFAULT_CONFIG, ...(p.config || {}) },
-    userPrefs: { ...c.userPrefs, ...(p.userPrefs || {}) },
-    productPrefs: { ...c.productPrefs, ...(p.productPrefs || {}) },
-    // Migrate any servicesToggles persisted in the pre-Stage-2b display-name key
-    // form (`<instName>_service_<svcName>`) to the current svcKey form on hydrate —
-    // this is the ONLY real load-path seam (the slice's hydrateServicesToggles
-    // action is never invoked at boot), so the normalization must land here.
-    servicesToggles: normalizeServicesToggles(p.servicesToggles),
-  };
-}
 
 export const useStore = create(
   devtools(
@@ -100,68 +86,54 @@ export const useStore = create(
           ...createCampaignRegionalSlice(set, get),
           ...createCampaignWorldPulseSlice(set, get),
           ...createCustomContentSlice(set, get),
-          ...createOnboardingSlice(set, get),
+          ...createCorpusFactorySlice(set, get),
+          ...createInstantWorldSlice(set, get),
+          ...createOnboardingSlice(set),
           ...createUiSlice(set, get),
-          // Per-settlement pending-changes queue (stage → commit). Transient by
-          // construction — `changeQueues` is intentionally absent from
-          // partialize below, like `settlement` itself: a reload discards the
-          // open settlement and its uncommitted draft together.
-          ...createChangeQueueSlice(set, get),
-          // "Import my data" — batches hardened, ownership-remapped export
-          // records into the library via the server-authoritative add-save seam.
+          ...createDisplayPrefsSlice(set, get),
           ...createAccountImportSlice(set, get),
+          ...createFogEditSlice(set, get),
+          ...createNpcVerbsSlice(set, get),
         })),
         {
           name: 'settlementforge',
-          partialize: (state) => ({
-            // Persist only lightweight, user-owned data.
-            // Never persist the massive generated settlement object.
-            // wizardStep / wizardMode are intentionally NOT persisted — users
-            // expect to land on the mode picker on every visit, not get
-            // dumped straight into whatever flow they used last session.
-            config: state.config,
-            // institutionToggles / categoryToggles are intentionally NOT
-            // persisted. They are per-build creation inputs; carrying them across
-            // sessions let a forced (esp. out-of-tier) institution set in a past
-            // build silently re-apply to an unrelated new settlement and surface
-            // as a phantom "deliberate override" the user never made this build.
-            // Each new build starts with a clean institution slate (the in-app
-            // "New Draft" path also resets all toggles). The generator's tier
-            // gate is the complementary guard against any cross-tier leak.
-            goodsToggles:       state.goodsToggles,
-            servicesToggles:    state.servicesToggles,
-            // The progressive-disclosure altitude is a durable, user-owned pref
-            // (a returning power user should stay at Engine). ONLY detailLevel is
-            // persisted from userPrefs — the other keys (tableViewOpen) stay
-            // transient. Persist-merge re-applies this over the slice default.
-            userPrefs: { detailLevel: state.userPrefs?.detailLevel },
-            // Durable Account → Product Preferences. Persist the whole bag so a
-            // returning user keeps their default detail level, PDF style,
-            // player-view/AI-polish defaults, etc.
-            productPrefs: state.productPrefs,
-            // Lifetime narrate-spend count feeds useReaderAudience's
-            // anonymous → intermediate progression. Persist it so the signal
-            // survives reloads instead of resetting to 0 every session.
-            lifetimeNarrateCount: state.lifetimeNarrateCount,
-            // The last campaign the user opened, so the Realm resumes their
-            // last-used campaign + map on a return visit. A single id string;
-            // validated against the loaded campaigns before use, so a stale or
-            // cross-user value safely falls back to the most-recent campaign.
-            lastActiveCampaignId: state.lastActiveCampaignId,
-          }),
-          // Deep-merge the durable bags (config / userPrefs / productPrefs) so a
-          // persisted value overlays the slice defaults WITHOUT clobbering keys
-          // it predates. zustand's default merge is shallow — it would replace
-          // each whole object, dropping the rest (the userPrefs/tableViewOpen
-          // bug, and the config-key-undefined bug for returning users). See
-          // mergePersistedState for the rationale.
+          // store-6: an explicit persist version + a migrate hook, so a future
+          // persisted-shape change has a real upgrade seam instead of silently
+          // forking returning users. v2 adds the JSON-safe, field-level config
+          // intent record used by content-environment defaults. Its legacy
+          // inference and config-key backfill are handled structurally by
+          // `merge` below, which runs on every rehydrate regardless of version.
+          version: 2,
+          migrate: (persistedState /* , fromVersion */) => persistedState,
+          // store-6: zustand's DEFAULT merge is a SHALLOW top-level spread
+          // ({ ...current, ...persisted }), so a returning user's persisted `config`
+          // object REPLACES DEFAULT_CONFIG wholesale — any key added to DEFAULT_CONFIG
+          // after they last saved reads `undefined` for them (a silent config-shape
+          // fork between cohorts that reaches the generator as input). mergePersistedState
+          // deep-merges config (and the four toggle maps) OVER their defaults so a
+          // returning user's missing keys backfill to what a fresh user gets, while the
+          // top-level spread still restores every other slice's methods + state.
           merge: mergePersistedState,
+          // Persist only lightweight, user-owned, device-local data. The named
+          // projection is independently executable so capability symbols and
+          // owner/session state cannot enter storage unnoticed.
+          partialize: partializeStoreState,
           // On rehydrate: always start the Create page at the mode picker.
-          // (Also wipes any stale wizardMode persisted by older builds.)
+          // (Also wipes any stale wizardMode persisted by older builds.) AND heal
+          // legacy service toggles keyed under the pre-Stage-2b display-name form
+          // into the current svcKey form. store-lifecycle: servicesToggles IS
+          // persisted (partialize below), but the normalize migration ran on NO
+          // product path — the hydrateServicesToggles action was never invoked and
+          // save-load wrote the bag raw — so a returning user's saved service prefs
+          // silently stopped applying and never self-healed. This is the single
+          // rehydrate chokepoint the migration's own docstring prescribes; the pass
+          // is pure + idempotent, so a bag already in the new form normalizes to
+          // itself (no churn for the common case).
           onRehydrateStorage: () => (state) => {
             if (!state) return;
             state.wizardStep = 0;
             state.wizardMode = null;
+            state.servicesToggles = normalizeServicesToggles(state.servicesToggles);
           },
         },
       ),
@@ -176,9 +148,21 @@ export const useStore = create(
 // store, rather than inside dependencyEngine itself — that keeps the
 // generator side free of any zustand/react import and makes it
 // runnable headlessly (snapshot tests, scripts, server jobs).
+// DE-EAGER (2026-07-19): the wiring goes through the tiny EAGER seam
+// (lib/customContentSource.js), NOT dependencyEngine directly — a static
+// import of dependencyEngine here dragged the whole registry (~41 KB) into
+// the first-paint closure. The lazy registry reads the getter off the seam
+// when it loads with its real consumers.
 setCustomContentSource(() => useStore.getState().customContent);
 
-// ── Auth intent handlers ─────────────────────────────────────────────────
+// R-14 CRASH FORENSICS: register the reproduction-coordinate provider so any
+// client error report carries the active world's seed + tick + flags_on. Reads
+// only scalars off the live state; errorReporter whitelists again before send —
+// never world state, never PII. (errorReporter stays store-free; the store
+// injects the reader, mirroring the custom-content seam above.)
+setCrashForensics(() => buildCrashForensics(useStore.getState()));
+
+// ── P101 / X-3 — Auth intent handlers ───────────────────────────────────
 // Register handlers for post-auth pending intents. Keep authIntents itself
 // lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
 // chunk that Vite has to warn about.
@@ -192,29 +176,28 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         settlement: payload.settlement,
         config: payload.config || null,
       });
-      // Refresh savedSettlements so the count is accurate, then fire the
-      // real-save instrumentation (first_save/third_save pricing moments +
-      // 'saved' fingerprint) for post-login saves too. Fire-and-forget.
-      try {
-        const refreshed = await savesService.list();
-        useStore.getState().setSavedSettlements?.(refreshed);
-      } catch { /* count may be stale; instrumentation still safe */ }
-      try {
-        useStore.getState().notePersistedSave?.(payload.settlement, result);
-      } catch { /* instrumentation must never throw */ }
+      // F34 — this is the REAL post-signup save chokepoint. Fire the
+      // first_save/third_save pricing moment + 'saved' research capture here
+      // (the dead store saveSettlement action used to host them). Fire-and-forget.
+      import('./saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId: result, settlement: payload.settlement, store: useStore }))
+        .catch(() => { /* never block the save */ });
       // Fire analytics + a toast via the store so the user sees the result.
       const { Funnel, EVENTS } = await import('../lib/analytics.js');
+      // userId rides the hashed opts lane, never props — this essential-class
+      // event mirrors props raw to the third-party provider (W-R2-TRUST: same
+      // class as components-dossier-library-1, surfaced by the props privacy scan).
       Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {
         tier: payload.tier,
-        userId: ctx?.user?.id,
-      });
+      }, { userId: ctx?.user?.id });
       // Surface a toast through the existing onboardingNudge channel so we
       // don't add another notification mechanism. The user sees this on
       // their first signed-in dashboard load.
       try {
         const setOnboardingNudge = useStore.getState().setOnboardingNudge;
         if (typeof setOnboardingNudge === 'function') {
-          setOnboardingNudge(`Saved as ${payload.name}. View it in Settlements.`);
+          setOnboardingNudge(`Saved as ${payload.name} — view it in Settlements.`);
         }
       } catch { /* nudge slice might not be initialized in tests */ }
       return result;
@@ -243,6 +226,7 @@ export const useCredits    = ()  => useStore(s => s.creditBalance);
 // Permission helpers
 export const useCanSave       = () => useStore(s => s.canSave());
 export const useCanUseNeighbour = () => useStore(s => s.canUseNeighbour());
+export const useCanExport     = () => useStore(s => s.canExport());
 export const useMaxTier       = () => useStore(s => s.maxAllowedTier());
 
 // Role helpers

@@ -19,7 +19,7 @@ import { describe, expect, test } from 'vitest';
 import { deploymentReturnOutcomes } from '../../src/domain/worldPulse/deploymentReturn.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 

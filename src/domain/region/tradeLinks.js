@@ -1,5 +1,5 @@
 /**
- * tradeLinks — good-level cross-settlement trade reconciliation.
+ * tradeLinks — good-level cross-settlement trade reconciliation (§14 Phase 3b).
  *
  * At generation a settlement may be created with an imported NEIGHBOUR. This
  * resolves the actual trade between them at the level of individual goods, using
@@ -14,10 +14,18 @@
  * perturbs a settlement generated without a neighbour.
  */
 import { goodsIntersect } from './goodsCatalog.js';
-import { finishedGoodsCategoryOf } from '../../data/economicData.js';
+import { finishedGoodsCategoryOf } from '../../data/finishedGoodsCategory.js';
 
 // Relationships under which the settlements don't openly trade goods.
-const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
+// (Typed to accept `string | undefined` so a profile with no relationshipType
+// can be probed directly — `.has(undefined)` is simply false.)
+// Exported as the single source of the hostile-no-trade rule so the discovery
+// layer honors the same predicate generation-time trade uses, rather than a
+// divergent floor. [domain-events-region-6]
+/** @type {Set<string | undefined>} */
+export const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
+
+/** @typedef {{good: string, goodId: string, direction: string, partner: string, viaNeighbour: boolean, viaCategory?: boolean}} TradeLink */
 
 /**
  * Good-level cross-settlement trade with the imported neighbour. Two matchers:
@@ -37,13 +45,13 @@ const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
 export function deriveTradeLinks(exportsList, importsList, neighbourProfile, opts = {}) {
   const np = neighbourProfile;
   if (!np || !np.name) return [];
-  if (NO_TRADE_RELATIONSHIPS.has(/** @type {string} */ (np.relationshipType)) || np.dynamics?.economyMode === 'suppress') return [];
+  if (NO_TRADE_RELATIONSHIPS.has(np.relationshipType) || np.dynamics?.economyMode === 'suppress') return [];
 
-  /** @type {Array<{good:string, goodId:string, direction:string, partner:string, viaNeighbour:boolean, viaCategory?:boolean}>} */
+  /** @type {TradeLink[]} */
   const links = [];
   const seen = new Set(); // `${direction}:${goodLabelLower}` so the two matchers don't duplicate
 
-  /** @param {any} good @param {any} goodId @param {any} direction @param {any} viaCategory */
+  /** @type {(good: string, goodId: string, direction: string, viaCategory: boolean) => void} */
   const push = (good, goodId, direction, viaCategory) => {
     const key = `${direction}:${String(good).toLowerCase()}`;
     if (seen.has(key)) return;
@@ -56,7 +64,7 @@ export function deriveTradeLinks(exportsList, importsList, neighbourProfile, opt
   for (const m of goodsIntersect(exportsList || [], np.primaryImports || [])) push(m.sourceLabel, m.id, 'export', false);
 
   // 2) category bridge — one link per category per direction.
-  const ourCat = (/** @type {any} */ label) => (opts.satisfiesOf && opts.satisfiesOf(label)) || finishedGoodsCategoryOf(label);
+  const ourCat = (/** @type {string} */ label) => (opts.satisfiesOf && opts.satisfiesOf(label)) || finishedGoodsCategoryOf(label);
   const neighExportCats = new Set((np.primaryExports || []).map(finishedGoodsCategoryOf).filter(Boolean));
   const neighImportCats = new Set((np.primaryImports || []).map(finishedGoodsCategoryOf).filter(Boolean));
   const usedCat = new Set(); // `${direction}:${cat}` — one bridged link per category/direction

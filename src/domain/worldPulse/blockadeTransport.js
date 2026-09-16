@@ -48,7 +48,7 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
       );
       if (existing && existing.severity === severity) return inst; // already stamped at this grip
       changed = true;
-      return withImpairment(inst, {
+      return withImpairment(/** @type {any} */ (inst), {
         type: 'access',
         severity,
         causeEventId,
@@ -65,7 +65,7 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
     if (!stale.length) return inst;
     changed = true;
     let cleared = inst;
-    for (const im of stale) cleared = withoutEventImpairments(cleared, im.causeEventId);
+    for (const im of stale) cleared = withoutEventImpairments(/** @type {any} */ (cleared), im.causeEventId);
     return cleared;
   });
 

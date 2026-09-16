@@ -69,42 +69,13 @@ afterEach(() => {
 });
 
 describe('getAccessTokenSafe — skew tolerance and refresh fallback', () => {
-  test('a just-expired token (within the skew grace) is still served from the LS fallback', async () => {
-    const key = authTokenKey();
-    expect(key).toBeTruthy();
-    // expires_at 5s in the PAST — inside the 30s grace, so still usable.
-    const expAt = Math.floor(Date.now() / 1000) - 5;
-    localStorage.setItem(key, JSON.stringify({ access_token: 'skewed-tok', expires_at: expAt }));
-
-    let sentAuth = null;
-    vi.stubGlobal('fetch', vi.fn((_url, opts) => {
-      sentAuth = opts?.headers?.Authorization;
-      return Promise.resolve(ndjsonResponse([
-        { done: true, result: { thesis: 'ok' }, creditsRemaining: 1, type: 'narrative' },
-      ]));
-    }));
-
-    await generateNarrative('narrative', settlement, 's1', {});
-    // Before the fix this token was rejected outright (expAt*1000 < now) and the
-    // call threw "Not signed in"; now the grace lets it ride through.
-    expect(sentAuth).toBe('Bearer skewed-tok');
-  });
-
-  test('with no usable cached token, a bounded refresh is attempted before failing', async () => {
-    auth.refreshSession.mockResolvedValue({ data: { session: { access_token: 'refreshed-tok' } } });
-
-    let sentAuth = null;
-    vi.stubGlobal('fetch', vi.fn((_url, opts) => {
-      sentAuth = opts?.headers?.Authorization;
-      return Promise.resolve(ndjsonResponse([
-        { done: true, result: { thesis: 'ok' }, creditsRemaining: 1, type: 'narrative' },
-      ]));
-    }));
-
-    await generateNarrative('narrative', settlement, 's1', {});
-    expect(auth.refreshSession).toHaveBeenCalled();
-    expect(sentAuth).toBe('Bearer refreshed-tok');
-  });
+  // BLOCKED ON OWNER (master merge W6): master serves a just-expired token
+  // within a clock-skew grace window and attempts a bounded refreshSession()
+  // fallback before failing. Serving expired tokens is a SECURITY-POSTURE
+  // change (owner-gated) — the two tests pinning it were removed until the
+  // owner rules ("AI token skew-grace + refresh fallback", master-merge owner
+  // queue). The strict-rejection test below pins this lineage's current
+  // fail-closed posture.
 
   test('a token expired well past the grace, with no refresh, is still rejected', async () => {
     const key = authTokenKey();

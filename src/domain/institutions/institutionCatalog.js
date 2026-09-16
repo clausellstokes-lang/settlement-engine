@@ -10,10 +10,12 @@
  */
 
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
+import { byNameCodepoint } from '../deterministicSort.js';
 
 /**
- * @param {Array<any>} institutions  institutions already present
- * @param {Array<any>} customInstitutions     Compendium institutions
+ * @typedef {{ id: string, name: string, category?: string, description?: string, tags?: string[] | string }} CompendiumInstitution
+ * @param {Array<{name?:string}>} institutions  institutions already present
+ * @param {CompendiumInstitution[]} customInstitutions     Compendium institutions
  * @returns {Array<{ id:string, name:string, category:string, tierKey?:string,
  *   desc:string, tags:string[], def?:Object, isCustom?:boolean, alreadyAdded:boolean }>}
  */
@@ -44,10 +46,10 @@ export function buildInstitutionCatalog(institutions = [], customInstitutions = 
     items.push({
       id: ci.id, name: ci.name, category: ci.category || 'Custom',
       desc: ci.description || '',
-      tags: typeof ci.tags === 'string' ? ci.tags.split(',').map((/** @type {any} */ t) => t.trim()) : (ci.tags || []),
+      tags: typeof ci.tags === 'string' ? ci.tags.split(',').map(t => t.trim()) : (ci.tags || []),
       isCustom: true, alreadyAdded: existing.has(ci.name),
     });
   }
 
-  return items.filter(i => !i.alreadyAdded).sort((a, b) => a.name.localeCompare(b.name));
+  return items.filter(i => !i.alreadyAdded).sort(byNameCodepoint);
 }

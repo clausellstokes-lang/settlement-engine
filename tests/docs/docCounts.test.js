@@ -197,7 +197,10 @@ describe('product copy: PDF export is unlimited, not a monthly cap', () => {
     expect(authSlice).toMatch(/export:\s*true/); // a tier whose gate is unlimited-export
   });
 
-  for (const file of ['src/copy/en.js', 'src/copy/strings.js']) {
+  // LINEAGE NOTE (master merge): master kept product copy in src/copy/strings.js;
+  // this lineage's copy home is src/copy/en.js + landing.js (strings.js does not
+  // exist here). Pin the same no-monthly-quota claim on the files that DO exist.
+  for (const file of ['src/copy/en.js', 'src/copy/landing.js']) {
     it(`${file} does not claim a monthly export quota`, () => {
       const copy = read(file);
       expect(copy, `${file} must not contradict unlimited canExport()`).not.toMatch(/\d+\s+exports?\s+a\s+month/i);

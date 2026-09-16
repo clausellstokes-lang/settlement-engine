@@ -7,17 +7,30 @@
  *
  * This is the display-layer sibling of domain/contradictions.js (which
  * surfaces narrative-worthy structural tensions); both share the record shape
- * { id, type, classification, description, references }. The first cut ships the
- * two rules tied to the food/export spine; later work wires it into the
- * publish/export gates and adds the remaining §1b rules.
+ * { id, type, classification, description, references }. M0.1 ships the two
+ * rules tied to the food/export spine; M1–M2 wire it into the publish/export
+ * gates and add the remaining §1b rules.
  *
  * Pure, read-only.
  */
 
 /**
+ * One display-consistency contradiction record (shape shared with
+ * domain/contradictions.js).
+ * @typedef {Object} ConsistencyRecord
+ * @property {string} id
+ * @property {string} type
+ * @property {'invalid'} classification
+ * @property {'block'|'warn'} severity
+ * @property {string} description
+ * @property {string[]} references
+ */
+
+/**
  * @param {string} type
  * @param {string} description
- * @param {{ severity?: string, references?: any[] }} [opts]
+ * @param {{ severity?: 'block'|'warn', references?: string[] }} [options]
+ * @returns {ConsistencyRecord}
  */
 function record(type, description, { severity = 'block', references = [] } = {}) {
   return { id: `consistency.${type}`, type, classification: 'invalid', severity, description, references };
@@ -26,12 +39,14 @@ function record(type, description, { severity = 'block', references = [] } = {})
 /**
  * Validate a settlement for cross-surface display contradictions.
  * Returns { blocking, warnings } — both arrays of contradiction records.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ *
+ * @param {{ economicViability?: { summary?: unknown, metrics?: { foodBalance?: { dailyProduction?: unknown, dailyNeed?: unknown, surplus?: unknown, deficit?: unknown } | null } | null } | null } | null | undefined} settlement
+ * @returns {{ blocking: ConsistencyRecord[], warnings: ConsistencyRecord[] }}
  */
 export function validateDossier(settlement) {
-  /** @type {any[]} */
+  /** @type {ConsistencyRecord[]} */
   const blocking = [];
-  /** @type {any[]} */
+  /** @type {ConsistencyRecord[]} */
   const warnings = [];
   if (!settlement) return { blocking, warnings };
 

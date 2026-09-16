@@ -17,7 +17,7 @@ import {
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { normalizeForDormancy } from './religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Phase B3 — occupation states + benefit/burden + resistance. THE SNOWBALL is the

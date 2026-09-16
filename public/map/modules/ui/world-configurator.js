@@ -97,7 +97,7 @@ function editWorld() {
     if (layerIsOn("toggleBiomes")) drawBiomes();
     if (layerIsOn("toggleCoordinates")) drawCoordinates();
     if (layerIsOn("toggleRivers")) drawRivers();
-    if (byId("canvas3d")) setTimeout(ThreeD.update(), 500);
+    if (byId("canvas3d")) setTimeout(() => ThreeD.update(), 500); // SettlementForge fork patch: was setTimeout(ThreeD.update(), 500) — ran immediately, timer fired undefined
   }
 
   function updateGlobePosition() {

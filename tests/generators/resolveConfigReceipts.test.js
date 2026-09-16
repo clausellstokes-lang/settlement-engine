@@ -1,16 +1,16 @@
 /**
  * resolveConfig receipt honesty (Wave 6 #1b).
  *
- * Two overrides fired on EXPLICIT user choices with no trace at all:
- *   - the isolated→road rewrite (town-plus + no-magic) was only traced on the
- *     random_trade pool path;
- *   - the plagued military floor was only traced on the random_threat path.
+ * Explicit route choices and automatic safety floors require honest receipts:
+ *   - explicit town-plus isolation is preserved for the support model rather
+ *     than silently rewritten to a road;
+ *   - the plagued military floor is traced when it actually changes the dial.
  * And one receipt lied: the random_threat trace claimed priorityMilitary was
  * 'floored to 25' for EVERY plagued roll, even when the user's slider was
  * already ≥ 25 and nothing changed.
  *
- * Pins: explicit overrides leave receipts; receipts only claim the floor when
- * it actually bound; untouched explicit choices leave no override receipt.
+ * Pins: explicit isolation leaves a selection/certification receipt; actual
+ * overrides leave override receipts; untouched choices leave no false claims.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -30,20 +30,36 @@ const floorEffects = (s) => configTraces(s).flatMap(t =>
   (t.downstreamEffects || []).filter(e => e.target === 'priorityMilitary' && /floored/i.test(e.effect || '')),
 );
 
-// ── Explicit isolated → road rewrite ─────────────────────────────────────────
+// ── Explicit isolation is preserved and certified ───────────────────────────
 
-describe('explicit isolated rewrite carries a receipt', () => {
-  test('town + no-magic + explicit isolated → road, with an overridden trace', () => {
+describe('explicit isolation carries a support-model receipt', () => {
+  test('town + no-magic + explicit isolated stays isolated and labels its support gap', () => {
     const s = gen(
       { ...BASE_CFG, settType: 'town', magicExists: false, tradeRouteAccess: 'isolated' },
       'receipts-iso-town',
     );
-    expect(s.config.tradeRouteAccess).toBe('road');
+    expect(s.config.tradeRouteAccess).toBe('isolated');
 
-    const receipt = configTraces(s).find(t => t.result === 'overridden' && t.targetId === 'tradeRoute.road');
-    expect(receipt, 'the explicit rewrite must leave a receipt').toBeTruthy();
-    expect((receipt.causes || []).map(c => c.source)).toContain('config.tradeRouteAccess=isolated');
-    expect((receipt.downstreamEffects || []).map(e => e.target)).toContain('economicViability');
+    const receipt = configTraces(s).find(
+      t => t.result === 'selected' && t.targetId === 'tradeRoute.isolated',
+    );
+    expect(receipt, 'the explicit isolation choice must leave a receipt').toBeTruthy();
+    expect((receipt.causes || []).map(c => c.source)).toContain(
+      'config.tradeRouteAccess=isolated',
+    );
+    expect((receipt.downstreamEffects || []).map(e => e.target)).toContain(
+      'isolationSupport',
+    );
+    expect(s.isolationSupport.applicable).toBe(true);
+    expect(s.structuralViolations).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        type: 'isolation_violation',
+        severity: 'by_design',
+      }),
+    ]));
+    expect(s.generationCoherenceReceipt.status).toBe(
+      'coherent_with_authored_tensions',
+    );
   });
 
   test('village + no-magic keeps explicit isolated — no override receipt', () => {

@@ -10,7 +10,7 @@
  *   40 credits / $19.99 ($0.50/ea, 50% off)
  */
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Zap, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
@@ -18,23 +18,31 @@ import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } fr
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
-import { GOLD, GOLD_DEEP, GOLD_B, GOLD_BG, GREEN_DEEP, INK, INK_DEEP, BODY, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch, TINT_GOLD, TINT_GREEN, TINT_VIOLET_HI, DANGER_BORDER } from './theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
-import Button from './primitives/Button.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
   const authTier      = useStore(s => s.auth.tier);
   const isElevated    = useStore(s => s.isElevated());
+  const isSignedIn    = useStore(s => Boolean(s.auth?.user?.id));
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
+  // Auto-reload consent (§4.2): OFF by default. Drives savePaymentMethod on the
+  // credit-pack checkout so a future off-session reload can charge the saved card.
+  const [saveCard, setSaveCard] = useState(false);
   // Redeem code (107): seeded from the Account-page handoff, editable inline.
   // Advisory input only — create-checkout re-validates and reserves it.
   const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
   const [redeemNotice, setRedeemNotice] = useState(null);
+  // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
+  // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
+  // body. Null while the flag is off — the checkout body is then byte-identical.
+  const [captchaToken, setCaptchaToken] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
 
@@ -58,7 +66,7 @@ export default function PurchaseModal({ onClose }) {
       // before the first payment lands. recordIntent never throws and a
       // rejection surfaces as a note — it must never block the purchase.
       await referral.recordIntent();
-      const { redeemNotice: notice } = await startCheckout(product, { redeemCode });
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode, savePaymentMethod: saveCard, captchaToken: captchaToken || undefined });
       // The code is consumed (reserved or declined server-side) — drop the
       // stash so it cannot resurface on a later, unrelated purchase.
       clearPendingRedeemCode();
@@ -79,6 +87,7 @@ export default function PurchaseModal({ onClose }) {
   // the catalog was repriced to credits_25/60/150 and PRODUCTS[key] went undefined.
   const creditPacks = Object.values(getActivePacks()).map((pack) => ({
     key: pack.key,
+    icon: <Zap size={20} />,
     tier: pack.tier,
   }));
 
@@ -103,10 +112,14 @@ export default function PurchaseModal({ onClose }) {
         aria-modal="true"
         aria-labelledby="purchase-modal-title"
         style={{
-          background: CARD, borderRadius: R.xl,
+          background: CARD,
           border: `1px solid ${BORDER}`,
-          boxShadow: ELEV[3],
-          width: '90%', maxWidth: 520, overflow: 'hidden',
+          width: '90%', maxWidth: 520,
+          // Bound to the viewport and scroll inside, matching the Dialog Shell
+          // primitive (H13). The old `overflow: hidden` with no height cap
+          // clipped the lower form fields and the close button on short
+          // (landscape-phone) viewports, leaving them unreachable.
+          maxHeight: 'min(90vh, 680px)', overflowY: 'auto',
         }}
       >
         {/* Header */}
@@ -131,8 +144,8 @@ export default function PurchaseModal({ onClose }) {
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px`, display: 'flex', flexDirection: 'column', gap: SP.lg }}>
           {/* Current balance */}
           <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: GOLD_BG,
-            borderRadius: R.lg, border: `1px solid ${GOLD_B}`,
+            padding: `${SP.md}px ${SP.lg}px`, background: swatch['#FAF8F4'],
+            border: `1px solid ${GOLD}33`,
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           }}>
             <span style={{ fontSize: FS.sm, color: SECOND, fontFamily: sans }}>Current Balance</span>
@@ -145,8 +158,8 @@ export default function PurchaseModal({ onClose }) {
           {isElevated && (
             <div style={{
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: TINT_VIOLET_HI, border: `1px solid ${swatch['#7C3AED']}`,
-              borderRadius: R.md, fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
+              background: swatch['#FAF8F4'], border: '1px solid #5A6E82',
+              fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
             }}>
               Developer accounts have unlimited credits. Purchases are not required.
             </div>
@@ -157,19 +170,21 @@ export default function PurchaseModal({ onClose }) {
             <div style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md,
+              background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', borderLeft: `3px solid ${swatch.danger}`,
               fontSize: FS.sm, color: swatch.danger,
             }}>
+              <AlertCircle size={16} />
               <span>{error}</span>
             </div>
           )}
 
           {!isConfigured && (
             <div style={{
-              textAlign: 'center', fontSize: FS.sm, color: BODY,
+              textAlign: 'center', fontSize: FS.sm, color: MUTED,
               fontStyle: 'italic', padding: `${SP.md}px 0`,
             }}>
-              Payments are not available in this environment.
+              Payments are not available in local mode.
+              Configure Supabase + Stripe to enable purchases.
             </div>
           )}
 
@@ -179,24 +194,18 @@ export default function PurchaseModal({ onClose }) {
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
-            {t('purchase.packsHeading')}
+            <TrendingDown size={14} /> {t('purchase.packsHeading')}
           </div>
 
           <div style={{ display: 'flex', gap: SP.sm }}>
-            {creditPacks.map(({ key, tier }) => {
+            {creditPacks.map(({ key, icon, tier }) => {
               const p = PRODUCTS[key];
               if (!p) return null;
               const isBest = tier === 'best';
               const isValue = tier === 'value';
-              const borderColor = isBest ? GREEN_DEEP : isValue ? GOLD : BORDER;
-              // Text/badge fills must clear WCAG AA on the light tint card, so the
-              // value tier uses GOLD_DEEP (gold-700, ~4.7:1 on white) rather than
-              // the lighter GOLD that the 2px border can safely use.
-              const accentColor = isBest ? GREEN_DEEP : isValue ? GOLD_DEEP : SECOND;
+              const borderColor = isBest ? '#2a7a2a' : isValue ? GOLD : BORDER;
+              const accentColor = isBest ? '#2a7a2a' : isValue ? GOLD : SECOND;
               return (
-                // Bespoke column-stacked offer card (icon over credits over
-                // price): the Button primitive's inline-row layout cannot
-                // express it. Grandfathered in scripts/.raw-button-baseline.json.
                 <button
                   key={key}
                   type="button"
@@ -205,9 +214,9 @@ export default function PurchaseModal({ onClose }) {
                   disabled={loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,
-                    background: isBest ? TINT_GREEN : isValue ? TINT_GOLD : CARD,
+                    background: isBest ? swatch['#FAF8F4'] : isValue ? swatch['#FAF8F4'] : CARD,
                     border: `2px solid ${borderColor}`,
-                    borderRadius: R.xl, cursor: loading ? 'wait' : 'pointer',
+                    cursor: loading ? 'wait' : 'pointer',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs + 2,
                     fontFamily: sans, transition: 'border-color 0.2s, transform 0.1s',
                     opacity: loading ? 0.6 : 1,
@@ -218,7 +227,7 @@ export default function PurchaseModal({ onClose }) {
                   {p.discount && (
                     <div style={{
                       position: 'absolute', top: -10, right: -4,
-                      padding: '2px 8px', borderRadius: R.md,
+                      padding: '2px 8px',
                       background: accentColor, color: swatch.white,
                       fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
                     }}>
@@ -226,10 +235,11 @@ export default function PurchaseModal({ onClose }) {
                     </div>
                   )}
 
+                  <div style={{ color: accentColor }}>{icon}</div>
                   <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</div>
-                  <div style={{ fontSize: FS.xxs, color: BODY, textTransform: 'uppercase' }}>Credits</div>
+                  <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase' }}>Credits</div>
                   <div style={{ fontSize: FS.xl, fontWeight: 700, color: accentColor }}>{p.price}</div>
-                  <div style={{ fontSize: FS.xxs, color: BODY }}>
+                  <div style={{ fontSize: FS.xxs, color: MUTED }}>
                     {loading === key ? 'Redirecting...' : p.perCredit + '/ea'}
                   </div>
                 </button>
@@ -237,14 +247,34 @@ export default function PurchaseModal({ onClose }) {
             })}
           </div>
 
+          {/* Auto-reload consent (§4.2 / #13). Signed-in only (a saved card needs an
+              account). OFF by default; the whole label is the ~44px tap target. */}
+          {isSignedIn && (
+            <label htmlFor="auto-reload-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, marginTop: SP.sm, cursor: 'pointer' }}>
+              <input
+                id="auto-reload-consent"
+                type="checkbox"
+                checked={saveCard}
+                onChange={(e) => setSaveCard(e.target.checked)}
+                style={{ marginTop: 2, width: 18, height: 18, flexShrink: 0 }}
+                aria-label="Save my card for automatic credit reloads"
+              />
+              <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+                Save my card for automatic credit reloads. When your balance runs low we'll
+                top it back up to your target and charge this card. Off by default. Manage or
+                cancel anytime from your account.
+              </span>
+            </label>
+          )}
+
           {/* Redeem-code disclosure (107). The typed code rides along on
-              whichever pack the reader buys; the server decides whether it
-              fits and answers with a notice when it does not. */}
+              whichever pack the reader buys; the server decides whether it fits
+              and answers with a notice when it does not. */}
           {isConfigured && !isElevated && (
             <RedeemCodeField code={redeemCode} onChange={handleRedeemChange} idPrefix="purchase-modal" />
           )}
           {redeemNotice && (
-            <div role="status" style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+            <div role="status" style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
               {redeemNotice}
             </div>
           )}
@@ -258,26 +288,41 @@ export default function PurchaseModal({ onClose }) {
           {authTier !== 'premium' && !isElevated && (
             <div style={{ fontSize: FS.sm, color: SECOND, textAlign: 'center', lineHeight: 1.55 }}>
               Buying credits often?{' '}
-              <Button
-                variant="ghost"
-                size="sm"
+              <button
+                type="button"
                 onClick={() => handlePurchase('premium')}
                 disabled={loading || !isConfigured}
-                busy={loading === 'premium'}
                 style={{
-                  display: 'inline-flex', minHeight: 0, padding: 0,
-                  color: GOLD, fontWeight: 700, fontSize: 'inherit',
-                  textDecoration: 'underline', verticalAlign: 'baseline',
+                  background: 'none', border: 'none', padding: 0,
+                  color: GOLD, fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
+                  textDecoration: 'underline', fontFamily: sans, fontSize: 'inherit',
                 }}
               >
                 {loading === 'premium' ? 'Redirecting...' : `or upgrade to ${getTierDisplayName('premium')}`}
-              </Button>
+              </button>
               {' '}for a monthly credit allowance.
             </div>
           )}
 
-          <div style={{ fontSize: FS.xxs, color: BODY, textAlign: 'center', lineHeight: 1.5 }}>
+          {/* Wave-D human verification (INERT until activated). Managed/invisible:
+              silent for humans, so it adds no visible step; renders nothing while
+              the perimeterCaptcha flag is off. */}
+          <CaptchaGate action="checkout" onToken={setCaptchaToken} className="captcha-checkout" />
+
+          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
             Payments processed securely by Stripe. Credits never expire.
+          </div>
+
+          {/* Point-of-purchase legal links (additive only — no paid-surface
+              behavior change). New tab so the checkout flow is never disrupted.
+              The refund/cancellation policy lives in Terms §Refunds; /refunds
+              resolves to it. */}
+          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5, marginTop: SP.xs }}>
+            <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.terms')}</a>
+            {' · '}
+            <a href="/refunds" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.refunds')}</a>
+            {' · '}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.privacy')}</a>
           </div>
         </div>
       </div>

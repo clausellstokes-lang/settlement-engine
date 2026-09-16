@@ -40,14 +40,14 @@ const allExist = Object.values(MIG).every(existsSync);
 
 function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract function ${name} from ${migKey}`);
   return m[0];
 }
 function extractPolicy(migKey, title) {
   const src = readFileSync(MIG[migKey], 'utf-8');
   const esc = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const m = src.match(new RegExp(`create policy "${esc}"[\\s\\S]*?;\\s*\\n`, 'i'));
+  const m = src.match(new RegExp(`^create policy "${esc}"[\\s\\S]*?;\\s*\\n`, 'im'));
   if (!m) throw new Error(`could not extract policy "${title}" from ${migKey}`);
   return m[0];
 }
@@ -92,6 +92,20 @@ it('targeted migration(s) present (suite not vacuous)', () => {
   expect(allExist).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeAll boots the
+ * suite's single shared database, so the whole file rides one cold boot.
+ * Never tune this to a measurement (that is how a previous 30000ms went
+ * brittle); generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProvisioning) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(allExist)('profiles moderation-column self-UPDATE lock — executed against 061 (pglite)', () => {
   let db;
   beforeAll(async () => {
@@ -104,7 +118,7 @@ describe.runIf(allExist)('profiles moderation-column self-UPDATE lock — execut
     await db.exec(`drop policy if exists "${POLICY}" on public.profiles;`);
     await db.exec(extractPolicy('061', POLICY));
     await lockdown(db);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

@@ -16,25 +16,24 @@
  *     so reported "No exports" while Economics listed economicState
  *     .primaryExports (§1d).
  *
- * The first milestone proves the spine end-to-end on those two field-families;
- * later work extends the same model (viability, score labels, timeline, AI
+ * M0.1 proves the spine end-to-end on those two field-families; later
+ * milestones extend the same model (viability, score labels, timeline, AI
  * grounding, public-safe projection).
  *
  * Pure; no store / React / time dependencies.
  */
 
 import { cleanNum } from './placeholders.js';
-import { canonExports } from '../canonicalAccessors.js';
 import { deriveMagicProfile } from '../magicProfile.js';
+import { formatCount } from '../formatNumber.js';
+// The export-posture derivation lives in its own dependency-free leaf so the
+// EAGER deriveSystemState.js can reach it without dragging this whole display
+// model (and its magicProfile edge) into the first-paint entry closure
+// (FP-1 read-model split; see exportPosture.js). Re-exported below so every
+// display surface keeps importing it from here.
+import { deriveExportPosture } from './exportPosture.js';
 
-const EXPORT_STATUS_LABEL = Object.freeze({
-  none:             'No exports (economic isolation)',
-  limited:          'Limited export access',
-  vulnerable:       'Exports exist but trade routes are vulnerable',
-  entrepot:         'Entrepôt (re-exports transit goods)',
-  import_dependent: 'Import-dependent',
-  established:      'Active exports',
-});
+export { deriveExportPosture } from './exportPosture.js';
 
 const VIABILITY_LABEL = Object.freeze({
   not_viable:      'Not viable',
@@ -44,16 +43,51 @@ const VIABILITY_LABEL = Object.freeze({
   unknown:         'Unknown',
 });
 
-/** @param {any} n */
+/**
+ * The generator's foodBalance record (economicViability.metrics.foodBalance) —
+ * numeric fields typed `unknown` because they pass through cleanNum coercion.
+ * @typedef {Object} FoodBalanceRecord
+ * @property {unknown} [dailyProduction]
+ * @property {unknown} [dailyNeed]
+ * @property {unknown} [surplus]
+ * @property {unknown} [deficit]
+ * @property {unknown} [deficitPercent]
+ * @property {unknown} [importCoverage]
+ * @property {unknown} [rawDeficit]
+ * @property {string|null} [importChannel]
+ * @property {unknown} [magicFoodOffset]
+ * @property {string|null} [magicFoodNote]
+ */
+
+/**
+ * Structural view of the economicState fields the display model reads.
+ * @typedef {Object} EconStateView
+ * @property {unknown} [primaryExports]
+ * @property {unknown} [exports]
+ * @property {unknown} [isEntrepot]
+ * @property {unknown} [prosperity]
+ * @property {{ stockpile?: { blockaded?: unknown, blockadeBypass?: string|null } | null } | null} [foodSecurity]
+ */
+
+/**
+ * Structural view of the settlement fields the display model reads.
+ * @typedef {Object} DossierSettlementView
+ * @property {{ metrics?: { foodBalance?: FoodBalanceRecord | null, tradeAccess?: string } | null, summary?: string | null, viable?: boolean | null, dependencies?: unknown[] } | null} [economicViability]
+ * @property {EconStateView | null} [economicState]
+ * @property {{ tradeRouteAccess?: string } | null} [config]
+ */
+
+/**
+ * @param {unknown} n
+ * @returns {string|null}
+ */
 function fmtInt(n) {
   const v = cleanNum(n);
-  return v == null ? null : Math.round(v).toLocaleString('en-US');
-}
-
-/** @param {any} v */
-function toArray(v) {
-  if (Array.isArray(v)) return v.filter(Boolean);
-  return v ? [v] : [];
+  // formatCount, not toLocaleString('en-US'): even an explicit-locale Intl call
+  // depends on the host shipping full ICU data (small-icu Node silently falls
+  // back to a different locale). formatCount is table-free and byte-identical
+  // to en-US grouping for integers.
+  return v == null ? null : formatCount(Math.round(v));
 }
 
 /**
@@ -62,7 +96,8 @@ function toArray(v) {
  * dailyProduction / dailyNeed (NOT production / need). Enforces the rule:
  * never show produced=0 & needed=0 next to a non-zero surplus/deficit —
  * fall back to "Not calculated".
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveFoodBalance(settlement) {
   const fb = settlement?.economicViability?.metrics?.foodBalance || null;
@@ -78,8 +113,10 @@ export function deriveFoodBalance(settlement) {
   }
   const produced = cleanNum(fb.dailyProduction);
   const needed   = cleanNum(fb.dailyNeed);
-  const surplus  = Math.max(cleanNum(fb.surplus, 0), 0);
-  const deficit  = Math.max(cleanNum(fb.deficit, 0), 0);
+  // placeholders.cleanNum lacks annotations (inferred fallback: null); it accepts a number fallback and returns number here (crossFileNeeds).
+  const surplus  = Math.max(/** @type {number} */ (cleanNum(fb.surplus, 0)), 0);
+  // same cleanNum annotation gap (crossFileNeeds).
+  const deficit  = Math.max(/** @type {number} */ (cleanNum(fb.deficit, 0)), 0);
   const rawKnown = produced != null && needed != null && (produced > 0 || needed > 0);
 
   // Normalize the residual deficit against need. A raw absolute (e.g. −4096)
@@ -120,34 +157,11 @@ export function deriveFoodBalance(settlement) {
   };
 }
 
-/**
- * Export posture (§1d). Single source for "does this settlement export, and
- * how exposed is that trade?". Reads economicState.primaryExports (what the
- * Economics surface shows), falling back to the legacy economicState.exports.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- */
-export function deriveExportPosture(settlement) {
-  const eco = settlement?.economicState || {};
-  const primary = toArray(eco.primaryExports);
-  const exports = primary.length ? primary : toArray(eco.exports);
-  const count = exports.length;
-  const isEntrepot = !!eco.isEntrepot;
-  const access = settlement?.economicViability?.metrics?.tradeAccess
-              || settlement?.config?.tradeRouteAccess
-              || 'unknown';
-
-  let status;
-  if (count === 0)               status = 'none';
-  else if (isEntrepot)           status = 'entrepot';
-  else if (access === 'isolated') status = 'vulnerable';
-  else if (count === 1)          status = 'limited';
-  else                           status = 'established';
-
-  return { status, label: /** @type {Record<string, string>} */ (EXPORT_STATUS_LABEL)[status], exports, count, isEntrepot, access };
-}
+// deriveExportPosture (§1d) moved to ./exportPosture.js (re-exported above) —
+// see the import note at the top of this file.
 
 /**
- * The canonical display model. Surfaces foodBalance + exportPosture.
+ * The canonical display model. M0.1 surfaces foodBalance + exportPosture.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); food + exports are canonical simulation facts and always read
  * from the base settlement, never an AI clone.
@@ -155,12 +169,14 @@ export function deriveExportPosture(settlement) {
 /**
  * Viability verdict (§1f). Reconciles the generator's verdict with the food
  * balance + trade dependencies so the wording never claims "self-sufficient"
- * while the dossier shows a food deficit. buildViabilitySummary() (economicGenerator)
+ * while the dossier shows a food deficit. buildConflict() (economicGenerator)
  * only checks dependency warnings for its "self-sufficient" branch — it
  * ignores a food deficit — which is the contradiction this corrects.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveViability(settlement) {
+  /** @type {NonNullable<DossierSettlementView['economicViability']>} */
   const v = settlement?.economicViability || {};
   const rawSummary = v.summary || null;
 
@@ -206,8 +222,8 @@ export function deriveViability(settlement) {
           : `feeds itself through ${through} and stored reserves`;
       } else {
         foodClause = magicFed
-          ? 'survives on local production, magical provision, and stored reserves (no meaningful import channel reaches it)'
-          : 'survives on local production and stored reserves (no meaningful import channel reaches it)';
+          ? 'survives on local production, magical provision, and stored reserves — no meaningful import channel reaches it'
+          : 'survives on local production and stored reserves — no meaningful import channel reaches it';
       }
     }
     return {
@@ -231,7 +247,7 @@ export function deriveViability(settlement) {
 }
 
 /**
- * Blockade relief — blockadeBypass gains its reader. The stockpile
+ * Blockade relief (Wave 8 — blockadeBypass gains its reader). The stockpile
  * bookkeeping (economicState.foodSecurity.stockpile, written every pulse by
  * advanceFoodStockpile) records whether a blockade currently grips the
  * settlement and which magical channel, if any, runs it. This is the display
@@ -240,7 +256,8 @@ export function deriveViability(settlement) {
  * unexplained. Settlements the pulse has never touched (no stockpile record)
  * report available:false and say nothing. The prose field is named `display`
  * (the view-model idiom) — NOT `note`, which the publicSafe denylist strips.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveBlockadeRelief(settlement) {
   const sp = settlement?.economicState?.foodSecurity?.stockpile || null;
@@ -250,14 +267,84 @@ export function deriveBlockadeRelief(settlement) {
   let display = null;
   if (blockaded) {
     display = bypass === 'teleport'
-      ? 'Supplies arrive by teleportation circle despite the siege, as much as the circle can carry.'
+      ? "Supplies arrive by teleportation circle despite the siege — up to the circle's throughput."
       : bypass === 'airship'
-        ? 'Airships run the blockade. Imports continue, impaired by siege countermeasures.'
+        ? 'Airships run the blockade — imports continue, impaired by siege countermeasures.'
         : 'The blockade is biting: no magical channel runs it, and the import share of need goes unmet.';
   }
   return { available: true, blockaded, bypass, display };
 }
 
+// ── SEASONS-A: the seasonal granary read ─────────────────────────────────────
+// Self-contained on the stockpile bookkeeping advanceFoodStockpile stamps
+// UNDER seasonsEnabled (season/seasonWeek/seasonalSwingPct/seasonalEvent —
+// fieldManifest rows). A flag-off or never-pulsed settlement carries no season
+// field ⇒ available:false and the surface says nothing (dormancy-clean).
+
+/** @type {Readonly<Record<string, string>>} */
+const SEASON_TITLE = Object.freeze({ spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' });
+/** @type {Readonly<Record<string, string>>} */
+const SEASONAL_EVENT_NOTE = Object.freeze({
+  hard_winter: 'A hard winter grips the year.',
+  drought: 'Drought struck the harvest.',
+  bountiful: 'A bountiful year.',
+});
+const WEEKS_PER_SEASON = 13;
+const SEASON_ORDER = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
+
+/** "early/mid/late <season>" for a 1-based week-of-year, DM-speakable.
+ *  @param {number} weekOfYear */
+function seasonPhaseLabel(weekOfYear) {
+  const w0 = ((Math.floor(weekOfYear) - 1) % 52 + 52) % 52;
+  const season = SEASON_ORDER[Math.floor(w0 / WEEKS_PER_SEASON)] || 'spring';
+  const wos = (w0 % WEEKS_PER_SEASON) + 1;
+  const phase = wos <= 4 ? 'early' : wos <= 9 ? 'mid' : 'late';
+  return `${phase} ${season}`;
+}
+
+/**
+ * The dossier's seasonal food read (design §4i item 6): current season, the
+ * granary level against its derived capacity as a band, and — while in
+ * drawdown — a derived "stores will last until ~X" projection from the
+ * CURRENT release rate (reliefPct is % of need released this tick; a week
+ * costs (reliefPct/100)×(3/13) months under the 4-4-5 calendar). Derived,
+ * fiction-level, never a mechanism name.
+ * @param {DossierSettlementView | null | undefined} settlement
+ */
+export function deriveGranaryOutlook(settlement) {
+  const fs = /** @type {{ storageMonths?: unknown, stockpile?: { capacityMonths?: unknown, reliefPct?: unknown, season?: string|null, seasonWeek?: unknown, seasonalEvent?: string|null } | null } | null} */ (
+    settlement?.economicState?.foodSecurity || null
+  );
+  const sp = fs?.stockpile || null;
+  if (!sp || !sp.season) {
+    return { available: false, season: null, band: null, display: null, lastsUntil: null, yearEvent: null };
+  }
+  const level = cleanNum(fs?.storageMonths, 0) ?? 0;
+  const cap = cleanNum(sp.capacityMonths, 0) ?? 0;
+  const frac = cap > 0 ? level / cap : 0;
+  const band = frac >= 0.75 ? 'well stocked' : frac >= 0.4 ? 'stocked' : frac >= 0.15 ? 'thin' : 'nearly empty';
+  const seasonTitle = SEASON_TITLE[/** @type {string} */ (sp.season)] || String(sp.season);
+  // Drawdown projection: only while stores are actually being released.
+  const reliefPct = cleanNum(sp.reliefPct, 0) ?? 0;
+  const drawPerWeek = (reliefPct / 100) * (3 / 13);
+  let lastsUntil = null;
+  if (drawPerWeek > 0 && level > 0) {
+    const weeksLeft = Math.round(level / drawPerWeek);
+    lastsUntil = weeksLeft > 52 ? 'beyond the year' : `~${seasonPhaseLabel((cleanNum(sp.seasonWeek, 1) ?? 1) + weeksLeft)}`;
+  } else if (drawPerWeek > 0) {
+    lastsUntil = 'already spent';
+  }
+  const yearEvent = SEASONAL_EVENT_NOTE[/** @type {string} */ (sp.seasonalEvent)] || null;
+  const display = [
+    `${seasonTitle} — the granary is ${band} (${level.toFixed(1)} of ${cap.toFixed(1)} months)`,
+    lastsUntil && lastsUntil !== 'already spent' ? `stores will last until ${lastsUntil}` : null,
+    lastsUntil === 'already spent' ? 'the granary is spent' : null,
+    yearEvent,
+  ].filter(Boolean).join('. ');
+  return { available: true, season: sp.season, band, level, capacity: cap, lastsUntil, yearEvent, display };
+}
+
+/** @type {Readonly<Record<string, string>>} */
 const MAGIC_ROLE_LABEL = Object.freeze({
   economic:       'Economic',
   military:       'Military',
@@ -266,14 +353,27 @@ const MAGIC_ROLE_LABEL = Object.freeze({
 });
 
 /**
- * Magic posture — MagicProfile surfaced. One read of the magic
+ * Magic posture (Wave 7 — MagicProfile surfaced). One read of the Tier 4.8
  * profile for every display surface: the availability/legality/cost/risk
  * bands plus the four role lines. Dead-magic worlds (config.magicExists ===
  * false) keep the profile's honest 'absent' shape — the dossier must never
  * price a magic economy that does not exist.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ *
+ * @typedef {Object} MagicProfileLike  structural view of magicProfile.js#deriveMagicProfile output
+ * @property {boolean} [magicExists]
+ * @property {string} [availability]
+ * @property {string} [legality]
+ * @property {string} [institutionalControl]
+ * @property {string} [cost]
+ * @property {string} [risk]
+ * @property {string} [religiousAcceptance]
+ * @property {Record<string, string>} roles
+ *
+ * @param {DossierSettlementView | null | undefined} settlement
  */
 export function deriveMagicPosture(settlement) {
+  /** @type {MagicProfileLike | null} */
+  // @ts-expect-error -- deriveMagicProfile declares @returns {Object}; the profile shape is stable (crossFileNeeds: export a MagicProfile typedef from magicProfile.js).
   const m = deriveMagicProfile(settlement);
   if (!m) {
     return { available: false, magicExists: null, display: 'Not assessed', roles: null, roleLines: [] };
@@ -290,14 +390,14 @@ export function deriveMagicPosture(settlement) {
     roles: { ...m.roles },
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : `Availability ${m.availability}: ${m.legality}, ${m.cost} services, ${m.risk} risk`,
-    roleLines: Object.entries(m.roles).map(([role, band]) => `${/** @type {Record<string, string>} */ (MAGIC_ROLE_LABEL)[role] || role} role: ${band}`),
+      : `Availability ${m.availability} — ${m.legality}, ${m.cost} services, ${m.risk} risk`,
+    roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }
 
 /**
- * The canonical display model. Surfaces foodBalance + exportPosture,
- * viability, the magic posture, and blockade relief.
+ * The canonical display model. M0.1 surfaced foodBalance + exportPosture; M0.2
+ * adds viability; Wave 7 adds the magic posture; Wave 8 adds blockade relief.
  * The `aiOverlay` option is reserved for later milestones (prose-field
  * overlays); these are canonical simulation facts and always read from the
  * base settlement, never an AI clone.
@@ -306,7 +406,7 @@ export function deriveMagicPosture(settlement) {
  * Headcounts (§overview). The institution / NPC / faction totals that BOTH the
  * screen overview and the PDF overview render — sourced identically here so the
  * two surfaces can never disagree on a count.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {{ institutions: number, npcs: number, factions: number }}
  */
 export function deriveHeadcounts(settlement) {
@@ -323,7 +423,7 @@ export function deriveHeadcounts(settlement) {
  * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
  * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
  * scale, the PDF a print palette), so only the label is a shared scalar.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {{ label: string | null }}
  */
 export function deriveProsperityPosture(settlement) {
@@ -333,7 +433,7 @@ export function deriveProsperityPosture(settlement) {
 /**
  * Safety label (§overview) — the safetyProfile.safetyLabel BOTH surfaces render.
  * Tone is per-surface (see deriveProsperityPosture); only the label is shared.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {{ label: string | null }}
  */
 export function deriveSafetyPosture(settlement) {
@@ -345,7 +445,7 @@ export function deriveSafetyPosture(settlement) {
  * score BOTH surfaces render. scoreAvg mirrors the PDF avgScore helper exactly
  * (rounded mean of the numeric score values); the parity pin guards the two copies
  * against future drift.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {{ readinessLabel: string | null, scoreAvg: number | null }}
  */
 export function deriveDefensePosture(settlement) {
@@ -358,22 +458,19 @@ export function deriveDefensePosture(settlement) {
 /**
  * Top export label (§summary) — labelOfThing(primaryExports[0]); mirrors the PDF
  * labelOfThing helper exactly (the good/name/label of the first primary export).
- * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} settlement
  * @returns {{ label: string }}
  */
 export function deriveTopExport(settlement) {
-  // canonExports (not primaryExports directly) so a legacy `exports`-aliased save
-  // still yields a top export. deriveTradeExposure above already does this fallback;
-  // this brings the summary's topExport into line with it (and with the PDF).
-  const item = canonExports(settlement)[0];
+  const item = settlement?.economicState?.primaryExports?.[0];
   if (!item) return { label: '' };
   if (typeof item === 'string') return { label: item };
   return { label: item.good || item.name || item.label || '' };
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {{ aiOverlay?: any }} [opts]
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @param {{ aiOverlay?: unknown }} [options]  aiOverlay reserved for later milestones
  */
 export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = null } = {}) {
   return {

@@ -1,0 +1,111 @@
+export const meta = {
+  name: 'coupling-inclusion-door-audit',
+  description: 'Adversarially verify the four doors for three unlayered worldPulse modules, and hunt for doors the chair missed',
+  phases: [
+    { title: 'Investigate' },
+    { title: 'Refute' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const PREAMBLE = `You are auditing a JavaScript repo at ${ROOT} (git branch claude/composite-r4). READ ONLY — do not edit any file, do not run git state-mutating commands, and DO NOT RUN ANY TEST (vitest/npm test) because a single shared gate mutex is held by another process. Use Read/Grep/Glob and read-only node -e evaluation only.
+
+BACKGROUND. tests/lint/couplingInclusion.walker.test.js is a "cross-layer inclusion ratchet" walker. Read it IN FULL first (863 lines) — it is the authority. Key machinery:
+ - LAYER_PATTERNS: seven "ports" (WAR/TRADE/FAITH/POP/INFO/GRAMMAR/INTERIOR) defined as regex families over src/domain/worldPulse and src/domain/spatial.
+ - CENSUS_SCOPE_RE = /^src\\/domain\\/(?:worldPulse|spatial)\\// — the census is TOTAL over that scope.
+ - Every scoped module must be (a) matched by a LAYER_PATTERNS family, (b) listed in ARGUED_UNLAYERED, or (c) listed in tests/lint/.coupling-unlayered-baseline.json (which is frozen "pre-program debt" and may only SHRINK).
+ - ARGUED_UNLAYERED entries are typed kind:'host' (closed set of exactly 4) or kind:'substrate' (must declare an exact \`reads\` array of its layered imports, plus a readsReason >40 chars if non-empty).
+ - ARGUED_ROSTER_CEILING = 10 (line ~359) caps the argued roster. Raising it is described in-file as "a deliberate, reviewable act" because each admission DELETES that module's edges from scanCrossLayerPairs.
+
+THE PROBLEM. Three modules recently landed inside CENSUS_SCOPE_RE with no layer family, no argument, and no baseline line, so the census reds (LIVE_UNLAYERED 182 vs baseline 179):
+  1. src/domain/worldPulse/ledgerOwnershipManifest.js (104 lines, zero relative imports, certification-only metadata; added by commit d7ec3885 under packet IA-1)
+  2. src/domain/worldPulse/pulseStageResult.js (69 lines, zero relative imports, a common pulse-stage result envelope; added by d7ec3885 under IA-1)
+  3. src/domain/worldPulse/worldStateHydration.js (18 lines, imports ./envoyErrandRecords.js and ./worldState.js; consumed by src/store/campaignHydration.js; added by 6e7acc4d)
+
+THE FOUR CANDIDATE DOORS the chair enumerated:
+  DOOR 1 — add ARGUED_UNLAYERED entries for all three, raising ARGUED_ROSTER_CEILING 10 -> 13.
+  DOOR 2 — give them LAYER_PATTERNS homes.
+  DOOR 3 — add them to tests/lint/.coupling-unlayered-baseline.json.
+  DOOR 4 — relocate ledgerOwnershipManifest.js and pulseStageResult.js to src/domain/certification/ (out of census scope), leaving only worldStateHydration.js to need a door.
+`
+
+phase('Investigate')
+
+const LANES = [
+  {
+    key: 'door1-cost',
+    prompt: `${PREAMBLE}
+YOUR SLICE — DOOR 1's TRUE COVERAGE COST, MEASURED NOT ASSUMED.
+The walker's header claims each ARGUED_UNLAYERED admission "deletes that module's edges from the pair scan". Measure exactly what coverage each of the three admissions would actually cost TODAY and what it could cost later.
+ 1. For each of the three modules, list its complete set of relative imports and say which of those resolve to LAYERED modules (compute LAYER_OF yourself from LAYER_PATTERNS by reading the walker). An admission's OUTBOUND cost is the count of layered imports that leave the scan.
+ 2. Measure the INBOUND cost: grep src/ for modules that IMPORT each of the three. For each importer, say whether the importer is layered (and which layer). An edge from a layered importer INTO an argued module is also outside the pair scan.
+ 3. Compare against the 10 existing ARGUED_UNLAYERED entries: for each existing entry, compute the same outbound number. Is a zero-import declarative leaf materially cheaper than the average existing admission? Give the actual per-module numbers in a table.
+ 4. State whether the ceiling is a good proxy for coverage cost, with the measured numbers as your evidence.
+Return a precise findings report with the numbers.`,
+  },
+  {
+    key: 'door4-blast-radius',
+    prompt: `${PREAMBLE}
+YOUR SLICE — DOOR 4's FULL BLAST RADIUS. Enumerate EVERY file that would have to change if src/domain/worldPulse/ledgerOwnershipManifest.js and src/domain/worldPulse/pulseStageResult.js were moved to src/domain/certification/. Be exhaustive — this repo has many walkers that hand-key absolute repo-relative path strings, and a missed one is a silent red.
+ 1. grep the WHOLE repo (src, tests, scripts, docs, supabase, .github, and any config) for the two basenames AND for their full repo-relative paths, as import specifiers AND as quoted string literals.
+ 2. For docs/implementation/PACKET_MANIFEST.json: read scripts/implementation-packets.mjs IN FULL and determine precisely whether a changeManifest row with action CREATE is joined to file EXISTENCE at the stated path, i.e. whether moving the file makes validatePacketManifest report an error. Quote the exact code that decides it. Also check whether the packet capsule/fileHashes machinery pins content hashes of those paths.
+ 3. Check docs/implementation/packets/infrastructure/IA-1.md and any packet-to-markdown join: does the markdown change table have to agree with the JSON manifest, and is that agreement machine-checked?
+ 4. Check ARCHITECTURE.md around lines 55-70 and whether any test enforces that prose (look for @enforced-by markers and the tests they name).
+ 5. Determine whether src/domain/certification/ is genuinely OUTSIDE every census/walker that would then claim these modules — i.e. does moving them there create a NEW red anywhere (certification-estate walkers, barrel/import-graph walkers, first-paint chunk budgets, size ratchets)?
+Return an exhaustive file-by-file ledger of required edits and any new reds.`,
+  },
+  {
+    key: 'subject-doctrine',
+    prompt: `${PREAMBLE}
+YOUR SLICE — THE SUBJECT DOCTRINE, APPLIED. The walker repeatedly draws one distinction to decide layered-vs-argued: does the module OWN A PORT'S SUBJECT (then it gets a LAYER_PATTERNS family) or does it own NO subject and get spoken by every port (then it may be argued 'substrate')? Read every comment in ARGUED_UNLAYERED and in LAYER_PATTERNS that draws this distinction — especially the strategicPosture.js (INTERIOR), beliefAxisSubjects (INFO), secrecy[A-Z] (INFO), pact[A-Z] (GRAMMAR), errandMint.js (substrate) and spatialLedgerAccess.js (substrate) precedents.
+Then adjudicate EACH of the three modules against that doctrine, in the file's own idiom:
+ 1. ledgerOwnershipManifest.js — read it in full. Whose subject is it? Note it is certification metadata about ledgers owned by MULTIPLE ports. Compare directly to spatialLedgerAccess.js's argument.
+ 2. pulseStageResult.js — read it in full, and read src/domain/worldPulse/pulseStageManifest.js (its twin, which IS in the unlayered baseline). Whose subject is a common stage-result envelope?
+ 3. worldStateHydration.js — read it in full, plus src/domain/worldPulse/worldState.js's relevant section (~line 150-200). worldState.js is an argued HOST. Is the hydration leaf "the worldState.js argument one rung down" (the exact phrasing used to argue spatialLedgerAccess.js)? Could it instead legitimately take GRAMMAR (it imports envoyErrandRecords.js) — argue both sides and say which the file's own doctrine compels.
+Also: is there any DOOR 2 variant that is defensible, e.g. a new pattern that claims one of them without making a port the owner of shared vocabulary?
+Return a written argument per module of the quality the file's existing comments show, with the precedent each one leans on named.`,
+  },
+  {
+    key: 'missed-doors',
+    prompt: `${PREAMBLE}
+YOUR SLICE — HUNT FOR DOORS THE CHAIR MISSED. The chair enumerated four doors. Your job is to find a FIFTH (or prove none exists). Consider and evaluate at least these, plus any you discover:
+ (a) Splitting ARGUED_ROSTER_CEILING into a host ceiling and a substrate ceiling, or making the ceiling count only admissions with NON-EMPTY reach (since a zero-import leaf subtracts no outbound coverage). Is that machinery honest, or does it launder the cost?
+ (b) A new typed kind (e.g. kind:'declarative' for zero-import, zero-execution metadata leaves) with its own closed roster and its own proof obligation (e.g. asserted to have literally zero relative imports, so its admission is provably coverage-neutral).
+ (c) Deleting/merging a module: could pulseStageResult.js or ledgerOwnershipManifest.js legitimately merge into pulseStageManifest.js (already baselined) so the census count doesn't grow? Read all three and say whether that is architecturally coherent or a census-driven distortion.
+ (d) Lowering the ceiling elsewhere: is any of the 10 existing ARGUED_UNLAYERED arguments now DISSOLVED (module gone, gained a layer, or its reach changed) such that the roster could shrink to pay for a new admission? Verify each of the 10 against live code.
+ (e) Narrowing CENSUS_SCOPE_RE — evaluate and almost certainly reject, but say why precisely.
+For each door: state the mechanism, what it costs, what it hides, and whether it is a chair-sized move or an owner-gated one. Be adversarial about proposals that merely make the red go away.
+Return a ranked evaluation.`,
+  },
+  {
+    key: 'obligation-provenance',
+    prompt: `${PREAMBLE}
+YOUR SLICE — THE PROVENANCE AND THE OBLIGATION. Establish exactly what obligation was missed and by whom, from evidence in the repo.
+ 1. Run read-only git commands (git show --stat, git log, git show <sha>:<path>) for commits d7ec3885 and 6e7acc4d. What did each land? Did either touch tests/lint/couplingInclusion.walker.test.js or tests/lint/.coupling-unlayered-baseline.json?
+ 2. Read docs/implementation/packets/infrastructure/IA-1.md IN FULL. Does the packet state a classification obligation for new modules in the FP census scope? Quote any acceptance criteria or "same-commit" obligation text.
+ 3. Find where CR-FP-11's classification obligation is written down (grep docs/ for CR-FP-11, DESIGN_FP_COUPLINGS, "same-commit"). Quote the governing text.
+ 4. Determine whether the couplingInclusion walker was GREEN at d7ec3885 and at 6e7acc4d — i.e. reconstruct whether each commit individually reddened it, or whether the red only appeared when both landed. Do this by reading the baseline file's git history (git log -p -- tests/lint/.coupling-unlayered-baseline.json) and the layer patterns at those shas. DO NOT run tests; reason from the files at those shas via git show.
+ 5. Report whether any OTHER new module has landed in scope recently without classification (i.e. is 182 vs 179 the whole story, or is the delta different from the three named?). Compute the live unlayered set yourself with a read-only node script that replicates the walker's LAYER_OF logic, and diff it against the baseline JSON. Report the EXACT delta both directions.
+Return the provenance report with exact shas, quotes and the measured delta.`,
+  },
+]
+
+const findings = await pipeline(
+  LANES,
+  (lane) => agent(lane.prompt, { label: lane.key, phase: 'Investigate' }),
+  (report, lane) => agent(`${PREAMBLE}
+
+A prior investigator produced the report below on the slice "${lane.key}". Your job is to REFUTE it. Independently re-check its load-bearing factual claims against the repo — every file path, every count, every quoted line, every claim about what a test or script enforces. Read the primary files yourself; do not take the report's word for anything. DO NOT RUN TESTS.
+
+Report every claim that is WRONG, OVERSTATED, or UNVERIFIABLE, and every important thing the report MISSED. If a claim survives your check, say so explicitly and cite the file:line that confirms it. Default to skepticism: a plausible-sounding architectural claim with no file:line behind it is unverified.
+
+=== REPORT UNDER REVIEW ===
+${report}
+=== END REPORT ===
+
+Return: (1) CONFIRMED claims with citations, (2) REFUTED claims with the contrary evidence, (3) MISSED items.`,
+    { label: `refute:${lane.key}`, phase: 'Refute' }),
+)
+
+return LANES.map((lane, i) => ({ slice: lane.key, verified: findings[i] }))

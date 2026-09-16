@@ -44,7 +44,7 @@ export const palette = {
   cool:        L.BLUE,      // = blue; patron/client/infrastructure (print == screen)
   coolBg:      '#f0f4ff',
 
-  // AI narrative — purple lens; darker than violet-500 (L.VIOLET) for print.
+  // AI narrative — purple lens; darker than violet-500 (L.SLATE) for print.
   ai:          '#6a2a9a',
   aiTint:      '#f4ecf8',
   aiRule:      '#8a50b0',

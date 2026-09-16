@@ -66,6 +66,18 @@ describe('pdf.6 — render-leaf: pinned values reach the rendered PDF section', 
     expect(hit, `Overview text leaves must contain prosperity label "${label}"; got: ${texts.join(' | ').slice(0, 300)}`).toBe(true);
   });
 
+  it('pdf-export-3: the AI arrival scene + pressure sentence reach the Overview chapter', () => {
+    const aiSettlement = {
+      arrivalScene: 'The gate of ARRIVAL_SENTINEL yawns open before you.',
+      pressureSentence: 'A PRESSURE_SENTINEL hangs over the market.',
+    };
+    const aiVm = buildViewModel({ settlement, aiSettlement, narrativeMode: true });
+    expect(aiVm.overview.arrivalScene, 'AI-mode vm carries the arrival scene').toContain('ARRIVAL_SENTINEL');
+    const joined = collectText(Overview({ settlement, narrativeMode: true, vm: aiVm })).join(' | ');
+    expect(joined, 'Overview must print the arrival scene').toContain('ARRIVAL_SENTINEL');
+    expect(joined, 'Overview must print the pressure sentence').toContain('PRESSURE_SENTINEL');
+  });
+
   it('the headcount totals reach the Overview chapter', () => {
     const texts = collectText(Overview({ settlement, vm }));
     // Institutions count is non-zero for a town; assert its formatted integer

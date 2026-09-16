@@ -7,7 +7,7 @@ import {
   rollCandidates,
 } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 // R4 pin (audit "saves-array-order dependence", probe-confirmed): the same
 // campaign with its saves array reversed used to select DIFFERENT outcomes —

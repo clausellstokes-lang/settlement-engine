@@ -14,6 +14,8 @@
  * Returns 0–3 annotations; empty is valid.
  */
 
+import { createGenerationWorldLaw } from './generationContext.js';
+
 const MAX_CAUSAL_AGE = {
   disaster:  { current_safety:80, current_economy:80, current_food:30, institutional:200 },
   economic:  { current_economy:60, current_food:40, faction_balance:150, institutional:250 },
@@ -60,7 +62,7 @@ function buildAnnotation(ev, relationship, suffix) {
 
   // relationship: 'unresolved' | 'recovery' | 'drift'
   const effectClause = effect
-    ? ` The lasting consequence (${effect.charAt(0).toLowerCase() + effect.slice(1)}) remains structurally embedded.`
+    ? ` The lasting consequence — ${effect.charAt(0).toLowerCase() + effect.slice(1)} — remains structurally embedded.`
     : '';
 
   if (relationship === 'unresolved') {
@@ -76,7 +78,53 @@ function buildAnnotation(ev, relationship, suffix) {
 }
 
 // ── Match each event against current state ────────────────────────────────────
-function scoreEvent(ev, legState, prosState, foodState, factions) {
+// ── MG-3c / leak L5 — THE MUNDANE VOICE OF AN OLD "MAGICAL" EVENT ─────────────
+// Four variants per relationship slot (the SP-6 content-depth floor). The pick is a
+// STABLE function of the event's own identity rather than an rng draw: this derivation
+// runs from two different callers with no shared seeded stream, and a per-event pick
+// means the same world always tells the same story while different events in the same
+// settlement do not repeat one stock phrase. No rng is touched, so a world where magic
+// functions is byte-identical.
+const MUNDANE_LEGACY_VOICE = {
+  drift: [
+    'the institutions founded in its wake carry embedded civic status that traces to the authority established then.',
+    'the offices raised to answer it never gave the standing back — that authority is still theirs.',
+    'the families who took charge of it kept the charge, and the town still defers to them.',
+    'the emergency powers of that season quietly became the ordinary order of the place.',
+  ],
+  unresolved: [
+    'the settlement\'s relationship between the scholars who studied it and civic governance has been uncertain since.',
+    'no one ever settled who answers for it, and the question surfaces again in every hard year.',
+    'the records of it are contested, and so is the authority that rests on them.',
+    'the town has never agreed whether what happened then was a warning or a windfall.',
+  ],
+};
+
+/**
+ * A stable 0..3 index derived from an event's own identity — deterministic, pure, and
+ * independent of any rng stream (see MUNDANE_LEGACY_VOICE above).
+ * @param {any} ev @returns {number}
+ */
+function stableEventPick(ev) {
+  const text = String(ev?.name ?? ev?.title ?? ev?.type ?? '') + String(ev?.yearsAgo ?? '');
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i++) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619) >>> 0;
+  }
+  return hash % 4;
+}
+
+/**
+ * The mundane re-voicing of a magical event's legacy suffix.
+ * @param {any} ev @param {'drift'|'unresolved'} slot @returns {string}
+ */
+function mundaneLegacyVoice(ev, slot) {
+  const pool = MUNDANE_LEGACY_VOICE[slot];
+  return pool[stableEventPick(ev) % pool.length];
+}
+
+function scoreEvent(ev, legState, prosState, foodState, factions, magicFunctionsHere = true) {
   const type = ev.type || 'political';
   const yrs  = ev.yearsAgo || 0;
   const sev  = ev.severity || 'minor';
@@ -111,7 +159,7 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
   if (type === 'economic') {
     if (prosState === 'stressed' && yrs <= maxAge('economic', 'current_economy')) {
       relationship = 'unresolved';
-      suffix = 'current economic pressure has structural antecedents. The present situation reflects dependencies established then.';
+      suffix = 'current economic pressure has structural antecedents — the present situation reflects dependencies established then.';
       score = 85 + sevBonus;
     } else if (foodState === 'crisis' && yrs <= maxAge('economic', 'current_food')) {
       relationship = 'unresolved';
@@ -119,15 +167,15 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
       score = 80;
     } else if (prosState === 'prosperous' && yrs <= maxAge('economic', 'institutional')) {
       relationship = 'recovery';
-      suffix = 'current commercial strength is accumulated recovery. The present prosperity was built on what was reconstructed.';
+      suffix = 'current commercial strength is accumulated recovery — the present prosperity was built on what was reconstructed.';
       score = 50;
     } else if (['Dominant','Strong'].includes(mercPow) && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have held structural relevance since. The present merchant faction\'s strength is accumulated rather than sudden.';
+      suffix = 'commercial interests have held structural relevance since — the present merchant faction\'s strength is accumulated rather than sudden.';
       score = 40;
     } else if (['Minor','Suppressed'].includes(mercPow) && yrs > 20 && yrs <= maxAge('economic', 'faction_balance')) {
       relationship = 'drift';
-      suffix = 'commercial interests have since lost the structural position they held. The present weakness reflects that displacement.';
+      suffix = 'commercial interests have since lost the structural position they held — the present weakness reflects that displacement.';
       score = 35;
     }
   }
@@ -149,11 +197,11 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
     const isStrong = ['Dominant','Strong'].includes(relPow);
     if (isWeak && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'the religious institution\'s structural prominence has declined significantly since. The settlement\'s current secular character reflects a long displacement.';
+      suffix = 'the religious institution\'s structural prominence has declined significantly since — the settlement\'s current secular character reflects a long displacement.';
       score = 55;
     } else if (isStrong && yrs > 60 && yrs <= maxAge('religious', 'institutional')) {
       relationship = 'drift';
-      suffix = 'religious institutional prominence has been sustained since. The present strength is accumulated rather than recent.';
+      suffix = 'religious institutional prominence has been sustained since — the present strength is accumulated rather than recent.';
       score = 45;
     } else if (yrs <= maxAge('religious', 'faction_balance')) {
       relationship = 'unresolved';
@@ -163,13 +211,25 @@ function scoreEvent(ev, legState, prosState, foodState, factions) {
   }
 
   if (type === 'magical') {
+    // MG-3c (leak L5): this arm branched on the event type alone and NEVER read the
+    // world's magic law, so a settlement where magic does not function still had its
+    // history explained by arcane practitioners and arcane civic status. History
+    // generation already refuses to MINT magical events in such a world; what reaches
+    // here is an authored or legacy event, and MG-LAW-4 says an authored premise
+    // survives — so the event is kept and RE-VOICED in mundane terms rather than
+    // dropped. A magical world reads exactly as it always did.
+    const arcaneVoice = magicFunctionsHere !== false;
     if (['Dominant','Strong'].includes(arcPow) && yrs <= maxAge('magical', 'institutional')) {
       relationship = 'drift';
-      suffix = 'arcane institutions carry embedded civic status that traces to the authority established then.';
+      suffix = arcaneVoice
+        ? 'arcane institutions carry embedded civic status that traces to the authority established then.'
+        : mundaneLegacyVoice(ev, 'drift');
       score = 50;
     } else if (yrs <= maxAge('magical', 'institutional')) {
       relationship = 'unresolved';
-      suffix = 'the settlement\'s relationship between arcane practitioners and civic governance has been uncertain since.';
+      suffix = arcaneVoice
+        ? 'the settlement\'s relationship between arcane practitioners and civic governance has been uncertain since.'
+        : mundaneLegacyVoice(ev, 'unresolved');
       score = 30;
     }
   }
@@ -189,9 +249,14 @@ export function deriveLegacyAnnotations(history, settlement) {
   const prosState= classifyProsperity(es.prosperity);
   const foodState= classifyFood(es.foodSecurity);
 
+  // MG-3c (leak L5): the ONE arbiter every other generator consults. Built from the
+  // settlement's own config (MG-LAW-1 — per-settlement truth, never a realm-level rule),
+  // so a magical or axis-less settlement answers exactly as before.
+  const magicFunctionsHere = createGenerationWorldLaw(settlement.config || {}).magicEnabled;
+
   const candidates = [];
   for (const ev of history.historicalEvents) {
-    const match = scoreEvent(ev, legState, prosState, foodState, factions);
+    const match = scoreEvent(ev, legState, prosState, foodState, factions, magicFunctionsHere);
     if (match) candidates.push(match);
   }
 

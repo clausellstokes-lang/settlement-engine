@@ -59,6 +59,43 @@ describe('storageCapacityMonths()', () => {
     expect(storageCapacityMonths(settlementWith({ institutions: [], tier: 'town' }))).toBe(2);
     expect(storageCapacityMonths(settlementWith({ institutions: [GRANARY, { name: 'Grist Mill' }], tier: 'town' }))).toBeCloseTo(6.3, 5);
   });
+
+  test('a current custom display name cannot acquire granary physics on a tick', () => {
+    const customInstitution = {
+      isCustom: true,
+      source: 'custom',
+      customDefinitionId: 'definition:institutions:pleasant-hall',
+      customDefinitionCategory: 'institutions',
+    };
+    const makeSettlement = name => settlementWith({
+      institutions: [{ ...customInstitution, name }],
+      foodSecurity: {
+        deficitPct: 0,
+        surplusPct: 40,
+        storageMonths: 1.95,
+        importDependency: 0,
+      },
+    });
+    const control = makeSettlement('Pleasant Hall');
+    const adversarial = makeSettlement('State Granary Mill');
+
+    expect(storageCapacityMonths(adversarial)).toBe(
+      storageCapacityMonths(control),
+    );
+
+    const controlTick = advanceFoodStockpile(control, {
+      interval: 'one_month',
+      tick: 1,
+    });
+    const adversarialTick = advanceFoodStockpile(adversarial, {
+      interval: 'one_month',
+      tick: 1,
+    });
+    expect(adversarialTick.summary).toEqual(controlTick.summary);
+    expect(adversarialTick.settlement.economicState.foodSecurity).toEqual(
+      controlTick.settlement.economicState.foodSecurity,
+    );
+  });
 });
 
 describe('advanceFoodStockpile()', () => {
@@ -103,9 +140,11 @@ describe('advanceFoodStockpile()', () => {
     });
     const { settlement, summary } = advanceFoodStockpile(s, { interval: 'one_month', tick: 1 });
     expect(summary.tithed).toBe(false);
-    // Full relief is affordable: 25% of need for one month = 0.25 months < half of 4.
+    // Full relief is affordable: 25% of need for a 4-week one_month interval
+    // (= 12/13 of a label-month under the 4-4-5 calendar) ≈ 0.23 months < half
+    // of 4. Drawdown rounds at 2 decimals: 4 − 0.23 = 3.77.
     expect(settlement.economicState.foodSecurity.deficitPct).toBeCloseTo(STOCKPILE_TUNING.rationFloorPct, 1);
-    expect(settlement.economicState.foodSecurity.storageMonths).toBeCloseTo(3.75, 2);
+    expect(settlement.economicState.foodSecurity.storageMonths).toBeCloseTo(3.77, 2);
   });
 
   test('drawdown never spends more than half the remaining stores in one tick', () => {
@@ -114,8 +153,9 @@ describe('advanceFoodStockpile()', () => {
       foodSecurity: { deficitPct: 80, surplusPct: 0, storageMonths: 1, importDependency: 0 },
     });
     const { settlement } = advanceFoodStockpile(s, { interval: 'one_year', tick: 1 });
-    // Covering 75% of need for 12 months would cost 9 months of food; only
-    // half of the single stored month may be spent.
+    // Covering 75% of need for the 12-month year (one_year = 52 weeks = 12
+    // months exactly under the 4-4-5 calendar) would cost 9 months of food;
+    // only half of the single stored month may be spent.
     expect(settlement.economicState.foodSecurity.storageMonths).toBeCloseTo(0.5, 2);
     expect(settlement.economicState.foodSecurity.deficitPct).toBeGreaterThan(70);
   });
@@ -129,10 +169,11 @@ describe('advanceFoodStockpile()', () => {
     const second = advanceFoodStockpile(first, { interval: 'one_month', tick: 2 }).settlement;
     const fs = second.economicState.foodSecurity;
     // Still relieving from base 30 (not from last tick's 5): deficit holds at
-    // the ration floor while stores keep draining by ~0.25/month.
+    // the ration floor while stores keep draining by ~0.23 per 4-week interval
+    // (12/13 of a label-month under the 4-4-5 calendar): 4 − 2×0.23 = 3.54.
     expect(fs.stockpile.baseDeficitPct).toBe(30);
     expect(fs.deficitPct).toBeCloseTo(STOCKPILE_TUNING.rationFloorPct, 1);
-    expect(fs.storageMonths).toBeCloseTo(3.5, 2);
+    expect(fs.storageMonths).toBeCloseTo(3.54, 2);
   });
 
   test('mild deficit at the tithe floor converges: changed goes false within a dozen ticks', () => {

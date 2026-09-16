@@ -1,0 +1,14 @@
+{
+ "src/components/new/SummaryTab.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/new/tabs/EconomicsTab.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/new/tabs/OverviewTab.jsx": {
+  "em": 1,
+  "bang": 0
+ }
+}

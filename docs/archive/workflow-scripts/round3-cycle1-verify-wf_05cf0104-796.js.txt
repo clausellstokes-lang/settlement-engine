@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'round3-cycle1-verify',
+  description: 'Adversarial verification: 3 refuter lenses per P1/P2 finding, 1 skeptic per P3',
+  phases: [{ title: 'Load' }, { title: 'Verify' }],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const LEDGER = '/Users/cstokes/Desktop/settlement-engine/docs/COMPREHENSIVE_REVIEW_PROGRAM.md'
+
+const VERDICT_SCHEMA = {
+  type: 'object', required: ['findingId', 'lens', 'verdict', 'reason'],
+  properties: {
+    findingId: { type: 'string' },
+    lens: { type: 'string' },
+    verdict: { type: 'string', enum: ['REAL', 'REFUTED', 'REAL_BUT_AMEND'] },
+    reason: { type: 'string' },
+    amendment: { type: 'string' },
+  },
+}
+
+const BASE = `You are an adversarial REFUTER in an authorized owner-delegated review loop on the owner's solo repo (worktree ${WT}, branch claude/composite-r4, tip ca244100 or descendant). A survey lane produced the finding below. Your job is to KILL it if it does not deserve a fix. READ-ONLY + focused probes: Read/Grep/Glob, read-only git, single-file vitest runs, short node probes in the OS temp dir only. Never edit the repo, never git-mutate, no full suite/build. Default skeptical: if you cannot substantiate the finding under your lens, verdict REFUTED. If the finding is real but its claim/severity/fix-shape needs correction, REAL_BUT_AMEND with the amendment.`
+
+const LENSES = {
+  repro: 'LENS: REPRODUCE-OR-REFUTE. Execute the failure scenario or trace the exact code path at the anchor. The claim must hold on THIS tree (not an old base). Quote the code/run output that proves or breaks it.',
+  intent: `LENS: DESIGN-INTENT. Search ${LEDGER} and the design docs (/Users/cstokes/Desktop/settlement-engine/docs/) for a deferral row, judgment blockquote, or owner ruling that makes this behavior DELIBERATE-AND-RECORDED. A recorded deliberate behavior is NOT a defect — verdict REFUTED with the row cited. Also refute if fixing it would cross an owner gate (paid-surface behavior change, schema, goldens, budget, taste, legal) — those belong to the owner queue, not a fix wave.`,
+  material: 'LENS: MATERIALITY + BLAST RADIUS. Does fixing this actually move a dimension grade or user-visible truth, and can it be fixed within the constitution (dark/dormancy, single-writer, ratchets only shrink, no new eager bytes, no golden re-mints)? Refute findings whose fix would be cosmetic churn, whose failure scenario requires unreachable states, or whose fix necessarily violates the constitution.',
+  skeptic: 'LENS: GENERAL SKEPTIC (P3). One pass: is the claim true on this tree, not deliberate-and-recorded, and worth a P3 fix? Check all three cheaply.',
+}
+
+phase('Load')
+const parsedArgs = typeof args === 'string' ? JSON.parse(args) : args
+const candidates = parsedArgs.ids
+const RECORDS = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad/cycle1_fix_candidates.json'
+log(`${candidates.length} candidates loaded`)
+
+phase('Verify')
+const results = await parallel(candidates.map((f) => () => {
+  const desc = `YOUR FINDING: id '${f.id}' [${f.severity}${f.mustFix ? ' mustFix' : ''}]. FIRST ACTION: Read the JSON file ${RECORDS} and locate the record whose id is '${f.id}' — it carries the full title/claim/failureScenario/anchor/fixShape you are verifying. Verify THAT record.`
+  if (f.severity === 'P3') {
+    return agent(`${BASE}\n\n${LENSES.skeptic}\n\n${desc}\n\nReturn findingId='${f.id}', lens='skeptic'.`,
+      { label: `skeptic:${f.id}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'low' })
+      .then((v) => ({ finding: f, votes: v ? [v] : [] }))
+  }
+  return parallel(['repro', 'intent', 'material'].map((lens) => () =>
+    agent(`${BASE}\n\n${LENSES[lens]}\n\n${desc}\n\nReturn findingId='${f.id}', lens='${lens}'.`,
+      { label: `${lens}:${f.id}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: lens === 'repro' ? 'medium' : 'low' })))
+    .then((votes) => ({ finding: f, votes: votes.filter(Boolean) }))
+}))
+
+const judged = results.filter(Boolean).map(({ finding, votes }) => {
+  const refuted = votes.filter((v) => v.verdict === 'REFUTED').length
+  const amend = votes.filter((v) => v.verdict === 'REAL_BUT_AMEND')
+  const survives = finding.severity === 'P3' ? (votes.length > 0 && votes[0].verdict !== 'REFUTED') : refuted < 2
+  return { id: finding.id, severity: finding.severity, mustFix: finding.mustFix, survives, refutedVotes: refuted, totalVotes: votes.length, amendments: amend.map((v) => `${v.lens}: ${v.amendment || v.reason}`), reasons: votes.map((v) => `${v.lens}=${v.verdict}: ${v.reason.slice(0, 220)}`) }
+})
+const killed = judged.filter((j) => !j.survives)
+log(`${judged.length} judged; ${killed.length} killed; ${judged.length - killed.length} survive`)
+return { judged }

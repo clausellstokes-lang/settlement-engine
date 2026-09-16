@@ -32,6 +32,7 @@ function applyThenUndo(before, event) {
   return { after, undone };
 }
 
+// Landed events wave — needs APPLY_STRESSOR instigator souring plus its neighbourNetwork entry in SNAPSHOT_SETTLEMENT_KEYS in src/domain/events/ (mutate.js + undoEvent.js)
 describe('undo of APPLY_STRESSOR restores the instigator-soured neighbour relationship', () => {
   it('a war stressor sours a trade partner to hostile; undo returns it to trade_partner', () => {
     const before = {

@@ -144,7 +144,7 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
     // (ticksDone), and the remaining ticks add up to the total.
     expect(paused.ticksDone).toBeGreaterThanOrEqual(1);
     expect(paused.ticksDone + paused.remainingTicks).toBe(paused.ticksTotal);
-    expect(paused.ticksTotal).toBe(48); // one_year = 48 weeks
+    expect(paused.ticksTotal).toBe(52); // one_year = 52 weeks
     // Majors are batched (no cap) and every one classifies major.
     expect(paused.pendingMajors.length).toBeGreaterThan(0);
     for (const m of paused.pendingMajors) expect(deriveDecisionTier(m)).toBe('major');
@@ -162,8 +162,8 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
     const off = await (async () => { const { campaign, saves } = buildFixture(); return await runOffToCompletionRecommended(campaign, saves, 'one_year'); })();
 
     expect(off.status).toBe('complete');
-    expect(on.worldState.tick).toBe(48);
-    expect(off.worldState.tick).toBe(48);
+    expect(on.worldState.tick).toBe(52);
+    expect(off.worldState.tick).toBe(52);
     // THE locked invariant: byte-identical worldState + settlementUpdates.
     expect(off.worldState).toEqual(on.worldState);
     const sortBySave = arr => [...arr].sort((x, y) => String(x.saveId).localeCompare(String(y.saveId)));
@@ -175,7 +175,7 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
     const off = await runOffToCompletionRecommended(campaign, saves, 'one_season');
     const on = await simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_season', commit: true, now: NOW });
     expect(off.status).toBe('complete');
-    expect(off.worldState.tick).toBe(12);
+    expect(off.worldState.tick).toBe(13);
     expect(off.worldState).toEqual(on.worldState);
   });
 
@@ -197,9 +197,9 @@ describe('Advance-scaling Stage 3 — pause/resume state machine', () => {
       result = await simulateCampaignWorldInterval({ campaign, saves, commit: true, now: NOW, autoResolve: false, resume: JSON.parse(JSON.stringify(cursorFrom(result))) });
     }
 
-    // No double-advance: the rehydrated resume completes at tick 48 (the same end
+    // No double-advance: the rehydrated resume completes at tick 52 (the same end
     // the ON path reaches), proving the cursor picked up at the pause tick, not 0.
-    expect(result.worldState.tick).toBe(48);
+    expect(result.worldState.tick).toBe(52);
     // And it matches a never-reloaded ON run to the same end (full byte-identity).
     const on = await simulateCampaignWorldInterval({ ...buildFixture(), interval: 'one_year', commit: true, now: NOW });
     expect(result.worldState).toEqual(on.worldState);

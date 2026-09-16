@@ -36,7 +36,15 @@ import {
   TRADE_SALIENCE_TUNING,
 } from '../worldPulse/tradeSalience.js';
 
-/** @param {any} a @param {any} b @returns {number} */
+/**
+ * The loose sim-shape bags this selector reads (worldPulse/pulseShapes.js):
+ * the region graph, the world ledgers, and the per-settlement byId item.
+ * @typedef {import('../worldPulse/pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('../worldPulse/pulseShapes.js').WorldState} WorldState
+ * @typedef {import('../worldPulse/pulseShapes.js').SettlementItem} SettlementItem
+ */
+
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
 /**
@@ -45,18 +53,18 @@ const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) 
  * read for settlement economic/food/military state; `regionalGraph` carries the
  * confirmed trade carriers. Tolerates an absent graph / items.
  *
- * @param {any} regionalGraph
- * @param {Array<{ id?: any, settlement?: any }>} items
- * @param {any} worldState
- * @returns {any}
+ * @param {RegionGraph | null | undefined} regionalGraph
+ * @param {Array<SettlementItem> | null | undefined} items
+ * @param {WorldState | null | undefined} worldState
+ * @returns {{ byId: Map<string, SettlementItem>, regionalGraph: RegionGraph | null, worldState: WorldState | null | undefined }}
  */
 function snapshotFrom(regionalGraph, items, worldState) {
+  /** @type {Map<string, SettlementItem>} */
   const byId = new Map();
   for (const it of (Array.isArray(items) ? items : [])) {
     const id = it?.id != null ? String(it.id) : (it?.settlement?.id != null ? String(it.settlement.id) : null);
     if (!id) continue;
-    const anyIt = /** @type {any} */ (it);
-    byId.set(id, { id, settlement: anyIt.settlement || anyIt, name: anyIt.settlement?.name || anyIt.name });
+    byId.set(id, { id, settlement: it.settlement || it, name: it.settlement?.name || it.name });
   }
   return {
     byId,
@@ -86,15 +94,16 @@ export function saliencePhrase(v) {
  * Null when there is no meaningful tie. Pure.
  *
  * @param {Object} args
- * @param {any} args.aId @param {any} args.bId
- * @param {any} args.regionalGraph
- * @param {Array<{ id?: any, settlement?: any }>} args.settlements
- * @param {any} [args.worldState]
+ * @param {string | number | null | undefined} [args.aId]
+ * @param {string | number | null | undefined} [args.bId]
+ * @param {RegionGraph | null | undefined} [args.regionalGraph]
+ * @param {Array<SettlementItem> | null | undefined} [args.settlements]
+ * @param {WorldState | null | undefined} [args.worldState]
  * @param {number} [args.tick]
- * @param {(id:any)=>string} [args.nameFor]
- * @returns {{ phrase: string, restrains: boolean, critical: boolean, dependentId: any, supplierId: any, dependentName: string|null, supplierName: string|null } | null}
+ * @param {(id: unknown) => string} [args.nameFor]
+ * @returns {{ phrase: string, restrains: boolean, critical: boolean, dependentId: string|null, supplierId: string|null, dependentName: string|null, supplierName: string|null } | null}
  */
-export function pairTradePressure({ aId, bId, regionalGraph, settlements, worldState = {}, tick, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function pairTradePressure({ aId, bId, regionalGraph, settlements, worldState = {}, tick, nameFor = (id) => String(id) } = {}) {
   if (aId == null || bId == null) return null;
   const snapshot = snapshotFrom(regionalGraph, settlements, worldState);
   const pair = pairTradeSalience(snapshot, worldState, aId, bId, { tick });
@@ -124,16 +133,16 @@ export function pairTradePressure({ aId, bId, regionalGraph, settlements, worldS
  * for the GM (`includeCovert: true`). The default omits them.
  *
  * @param {Object} args
- * @param {any} args.settlementId
- * @param {any} args.regionalGraph
- * @param {Array<{ id?: any, settlement?: any }>} args.settlements
- * @param {any} [args.worldState]
+ * @param {string | number | null | undefined} [args.settlementId]
+ * @param {RegionGraph | null | undefined} [args.regionalGraph]
+ * @param {Array<SettlementItem> | null | undefined} [args.settlements]
+ * @param {WorldState | null | undefined} [args.worldState]
  * @param {number} [args.tick]
  * @param {boolean} [args.includeCovert]  GM view ⇒ true; player view ⇒ false (default).
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {(id: unknown) => string} [args.nameFor]
  * @returns {Array<{ partnerName: string, phrase: string, role: 'dependent'|'supplier'|'partner', covert: boolean }>}
  */
-export function settlementTradePressure({ settlementId, regionalGraph, settlements, worldState = {}, tick, includeCovert = false, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function settlementTradePressure({ settlementId, regionalGraph, settlements, worldState = {}, tick, includeCovert = false, nameFor = (id) => String(id) } = {}) {
   if (settlementId == null) return [];
   const id = String(settlementId);
   const snapshot = snapshotFrom(regionalGraph, settlements, worldState);
@@ -155,7 +164,7 @@ export function settlementTradePressure({ settlementId, regionalGraph, settlemen
     if (seen.has(partnerId)) continue;
 
     const statuses = overlay[key] || [];
-    const overtStatuses = statuses.filter((/** @type {any} */ s) => s?.covert !== true);
+    const overtStatuses = statuses.filter((s) => s?.covert !== true);
     const covertOnly = statuses.length > 0 && overtStatuses.length === 0;
 
     // PLAYER-SAFE GATE: a covert-only tie (smuggling between battlefield enemies)
@@ -194,7 +203,7 @@ export function settlementTradePressure({ settlementId, regionalGraph, settlemen
 /**
  * Whether ANY strategic-trade pressure surfaces for a settlement (the panel gate).
  * Player-safe by default (covert excluded). [] / false off-state.
- * @param {any} args  same as settlementTradePressure.
+ * @param {Parameters<typeof settlementTradePressure>[0]} [args]  same as settlementTradePressure.
  * @returns {boolean}
  */
 export function hasTradePressure(args = {}) {

@@ -1,0 +1,67 @@
+export const meta = {
+  name: 'cycle2-cold-fmg-fork',
+  description: 'Round 3 cycle 2: cold adversarial review of the MODIFIED Azgaar FMG fork — modification census, security surface, and bridge integration/determinism',
+  phases: [
+    { title: 'Fork review', detail: 'three cold reviewers over the modified vendored FMG' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const TIP = 'c8c5baa8'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+
+const LENSES = [
+  {
+    key: 'fmg-modifications',
+    charge: `THE MODIFICATION CENSUS. public/map/ is a VENDORED FORK of Azgaar's Fantasy Map Generator that WE HAVE MODIFIED. Establish the truth of our modifications, because the upgrade runbook (public/map or docs/fmg-fork.md, inside ${WT}) claims a SMALL patch set (~4 inline patches in main.js + one extracted sf-bridge.js) and that claim may be STALE — an under-counted patch list means a future FMG upgrade silently reverts our modifications. Method: enumerate EVERY modification to the vendored tree yourself — grep the whole public/map for our markers ('settlementforge', 'sf-', 'SF_', branded strings) AND read git history touching public/map to see which vendored files we changed and why. For each modification: what it does, whether it is documented in the runbook, and whether it is REAPPLIED-SAFE on upgrade (would a clean re-vendor of upstream lose it silently?). Findings = every modification that is undocumented, fragile-on-upgrade, or a divergence from upstream that could rot. Also assess: is sf-bridge.js's binding to FMG internals (svg/pack/d3/cells/regenerateMap/seed) resilient to an upstream rename, or does it fail silently?`,
+  },
+  {
+    key: 'fmg-security',
+    charge: `THE FORK SECURITY SURFACE. public/map/ is a vendored FMG fork loaded in an IFRAME and wired to the app by postMessage RPC (public/map/sf-bridge.js) — it sits OUTSIDE the app's eslint/tsc/vitest gates, so its security is unpinned by the normal machinery. Adversarially audit the trust boundary: (1) the postMessage RPC — does sf-bridge.js (and the app side, src/components/WorldMap.jsx) validate message ORIGIN and shape, or will it act on any message from any frame? Can a hostile page or a malicious .map file drive it? (2) .map file loading — FMG loads user/third-party .map files; trace what happens to their contents (eval? innerHTML? DOM injection? stored and re-rendered?) — an XSS or code-exec path here crosses into the app. (3) the map snapshot → gallery path (thumbnail/terrain capture into shared gallery tiles) — can crafted map content become stored XSS for another user who views the gallery? (4) any network calls, external resource loads, or SW registration the fork makes. Prior program commits reference an 'FMG-security' remediation and a 'cross-user map snapshot stored-XSS / account-takeover chain' fix — verify those holes are actually closed in the CURRENT tree at ${TIP}, do not assume. Execute probes where feasible (grep for postMessage handlers, innerHTML, eval, dangerouslySet, addEventListener('message')).`,
+  },
+  {
+    key: 'fmg-bridge-determinism',
+    charge: `THE BRIDGE INTEGRATION & DETERMINISM. The product's constitution is bit-for-bit determinism (a seed is a world, forever) and the map is claimed to provide geography that the engine's depth layer builds on. Adversarially test the seam between the MODIFIED fork and the app: (1) DETERMINISM — does the same seed produce the same map across loads/machines, and does the geography the bridge hands the engine (cells, cultures, borders, biome truth) arrive DETERMINISTICALLY, or can FMG's own RNG/timing/async make the same seed yield different engine input? Trace how seed flows app→fork→back. (2) THE BRIDGE CONTRACT — read sf-bridge.js in full: every RPC method, what it reads from FMG globals, what it returns; find where a shape mismatch, a missing global, or an async race would hand the engine partial/garbage geography with no error. (3) LIFECYCLE — regenerate/reload/undo/import of a world: does the map state and the engine's derived geography stay consistent across all of them, or can they desync? (4) FAILURE MODES — iframe fails to load, FMG throws, postMessage never arrives: does the app degrade honestly or hang/lie? Execute probes against sf-bridge.js and WorldMap.jsx and any bridge tests that exist.`,
+  },
+]
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['title', 'severity', 'claim', 'scenario', 'location', 'evidence'],
+  properties: {
+    title: { type: 'string', maxLength: 90 },
+    severity: { enum: ['must-fix', 'should-fix', 'polish'] },
+    claim: { type: 'string', maxLength: 350 },
+    scenario: { type: 'string', maxLength: 350 },
+    location: { type: 'string', maxLength: 160 },
+    evidence: { enum: ['executed', 'inspected'] },
+  },
+}
+
+const SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['lens', 'health', 'findings', 'modification_inventory', 'evidence_note'],
+  properties: {
+    lens: { type: 'string', maxLength: 40 },
+    health: { enum: ['sound', 'sound-with-findings', 'concerning'] },
+    findings: { type: 'array', maxItems: 14, items: FINDING },
+    modification_inventory: { type: 'array', maxItems: 30, items: { type: 'string', maxLength: 200 } },
+    evidence_note: { type: 'string', maxLength: 400 },
+  },
+}
+
+const COLD = `YOU ARE A COLD ADVERSARIAL REVIEWER — you have NO prior context of this program and must not acquire any. FORBIDDEN: everything under /Users/cstokes/Desktop/settlement-engine/docs/ that is OUTSIDE ${WT} (the ledger-branch docs); /Users/cstokes/.claude/projects/ (program memory); scratchpad files you did not create. Your evidence base is the worktree at ${WT} (verify branch claude/composite-r4 tip ${TIP}; READ-ONLY — never edit, never touch git, never commit) — INCLUDING its own docs/ (docs/fmg-fork.md, docs/azgaar-bridge.md are IN the worktree and ARE in scope as claims to verify) — plus probes you execute under ${SCRATCH}/cold-<your-lens> (create it). The subject — public/map/ — is a MODIFIED vendored third-party fork: you are reviewing OUR modifications and OUR integration of it, and the security/correctness/determinism of the whole as it ships, NOT upstream Azgaar's coding style (do not file house-style findings against third-party idioms). Mark evidence:'executed' only when you ran the proof.`
+
+phase('Fork review')
+const results = await parallel(LENSES.map((l) => () => agent(
+  `${COLD}
+
+YOUR CHARGE — ${l.key}: ${l.charge}
+
+Report at most 14 findings, most material first, each with a concrete scenario and a file:line-style location; modification_inventory = the list of OUR modifications to the fork that you actually found (as many as you can enumerate, even beyond your findings); health = your verdict; evidence_note = executed vs inspected.`,
+  { label: l.key, phase: 'Fork review', schema: SCHEMA, model: 'opus' }
+)))
+
+const ok = results.filter(Boolean)
+log(`FMG fork review returned ${ok.length}/3 lenses`)
+return { fork: ok }

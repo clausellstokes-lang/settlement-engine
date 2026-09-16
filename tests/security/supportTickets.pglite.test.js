@@ -34,6 +34,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '050': resolve(dir, '050_admin_least_privilege.sql'),
@@ -56,13 +58,13 @@ const sql = (k) => readFileSync(MIG[k], 'utf-8');
 
 /** Extract a `create or replace function public.<name>(…) … $$;` block verbatim. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
 /** Extract a `create policy "<name>" … ;` block verbatim. */
 function extractPolicy(src, name) {
-  const m = src.match(new RegExp(`create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract policy ${name}`);
   return m[0];
 }
@@ -212,7 +214,7 @@ describe.runIf(allExist)('A5 support tickets — executed against 050/051/055 (p
       grant execute on function public.list_ticket_pool(text, int) to nosuperuser;
       grant execute on function public.list_ticket_thread(uuid) to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

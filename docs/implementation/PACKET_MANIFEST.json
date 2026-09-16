@@ -1,0 +1,534 @@
+{
+  "schemaVersion": 1,
+  "indexPath": "docs/implementation/INDEX.md",
+  "packets": [
+    {
+      "id": "TC-3A",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3A.md",
+      "verifiedBase": "6da84cfdf9eb533986d34e9a0f18a32b7d592736",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyPlan.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyWards.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/cartographyContract.js" },
+        { "action": "MODIFY", "path": "src/domain/townScene/compileTownSceneManifest.js" },
+        { "action": "MODIFY", "path": "src/workers/townScene.worker.js" },
+        { "action": "MODIFY", "path": "src/lib/townScene/townSceneExport.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyWards.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "TOWN_CARTOGRAPHY_SCHEMA_VERSION" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "townCartographyActive" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townScene/compileTownSceneManifest.js", "symbol": "compileTownSceneManifestFromAuthorizedInput" },
+        { "path": "src/workers/townScene.worker.js", "symbol": "loadManifestCompiler" },
+        { "path": "src/lib/townScene/townSceneExport.js", "symbol": "downloadTownSceneArtifact" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "real lit compile with named streets and wards" },
+        { "id": "A2", "case": "schema v2 and name negatives" },
+        { "id": "A3", "case": "replay and order independence" },
+        { "id": "A4", "case": "one-law audience projection" },
+        { "id": "A5", "case": "naming-pool injection across the lazy boundary" },
+        { "id": "A6", "case": "dormancy regression" },
+        { "id": "A7", "case": "purity and draw ledger" },
+        { "id": "A8", "case": "bounded chunk-pair posture" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "TC-3B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-3B.md",
+      "verifiedBase": "5066c34bf6dd3a1982f92d22b0687ab4f204f17c",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyParcels.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyParcels.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" }
+      ],
+      "acceptanceCases": [
+        { "id": "B1", "case": "real lit compile emits parcels" },
+        { "id": "B2", "case": "replay, order independence, and placement selection" },
+        { "id": "B3", "case": "geometry and bounds over the map corpus" },
+        { "id": "B4", "case": "institution binding" },
+        { "id": "B5", "case": "byte budget and domain separation" },
+        { "id": "B6", "case": "dormancy and purity" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "SC-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/surveyor-chat/SC-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/components/surveyor/SurveyorTextIntentShell.jsx" },
+        { "action": "CREATE", "path": "src/components/surveyor/ProposalCard.jsx" },
+        { "action": "CREATE", "path": "src/styles/surveyorChat.css" },
+        { "action": "MODIFY", "path": "src/components/surveyor/SurveyorDoor.jsx" },
+        { "action": "MODIFY", "path": "src/components/surveyor/InterpretApplyPanel.jsx" },
+        { "action": "TEST", "path": "tests/components/surveyorDoor.test.jsx" },
+        { "action": "CREATE", "path": "tests/components/surveyorProposalCard.test.jsx" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/components/surveyor/SurveyorDoor.jsx", "symbol": "routeDoorPrompt" },
+        { "path": "src/components/surveyor/ProposalCard.jsx", "symbol": "ProposalCard" },
+        { "path": "src/hooks/useIsMobile.js", "symbol": "useIsMobile" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main analyst route" },
+        { "id": "A2", "case": "existing write route" },
+        { "id": "A3", "case": "empty and whitespace absence" },
+        { "id": "A4", "case": "keyboard and composer growth" },
+        { "id": "A5", "case": "mobile focus and entitlement privacy" },
+        { "id": "A6", "case": "controlled proposal decisions" },
+        { "id": "A7", "case": "protected consent integration" },
+        { "id": "A8", "case": "ownership prevention guards" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/components/surveyorDoor.test.jsx",
+          "tests/components/surveyorProposalCard.test.jsx",
+          "tests/components/surveyorInterpretApplyPanel.test.jsx",
+          "tests/domain/doorRouter.test.js",
+          "tests/build/surveyorPanelsLazy.test.js",
+          "tests/design/deepCraftKillList.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "GR-3B-ORIENT",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B-ORIENT.md",
+      "verifiedBase": "820ed989df1747cfbeb8b0a5a9a07b253736151f",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyOrientation.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/treatyTermRoles.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "TEST", "path": "tests/domain/treatyOrientationWr10g.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/treatyOrientation.js", "symbol": "treatyOrientationOf" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "per-term obligor and obligee through the real PASS 2" },
+        { "id": "A2", "case": "beneficiary-less terms delegate to the instrument orientation" },
+        { "id": "A3", "case": "symmetric beneficiaries resolve mutual with no transfer direction" },
+        { "id": "A4", "case": "transfer payer and payee follow the term axis" },
+        { "id": "A5", "case": "defaultedBy names the term obligor" },
+        { "id": "A6", "case": "swapped-proposer invariance of the resolved roles" },
+        { "id": "A7", "case": "closed obligation-kind vocabulary" },
+        { "id": "A8", "case": "round-trip stability of the per-term resolution" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/treatyOrientationWr10g.test.js",
+          "tests/domain/peaceTerms.test.js"]
+      ]
+    },
+    {
+      "id": "GR-3B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/GR-3B.md",
+      "verifiedBase": "0f78d9c8402b177d0786b7da6e9ead533d7af42d",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactFormation.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pactAmendment.js" },
+        { "action": "TEST", "path": "tests/domain/pactFormation.test.js" },
+        { "action": "TEST", "path": "tests/domain/pactAmendment.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTermsGrantTerms.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "PACT_DRAFT_LENS" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "draftPactSheet" },
+        { "path": "src/domain/worldPulse/pactFormation.js", "symbol": "advancePeacetimePacts" },
+        { "path": "src/domain/worldPulse/pactAmendment.js", "symbol": "amendPactInstrument" },
+        { "path": "src/domain/worldPulse/peaceTermsCatalog.js", "symbol": "orderTermsByAsk" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "each trigger drafts its rung-zero terms" },
+        { "id": "A2", "case": "the full boundary table selects exactly" },
+        { "id": "A3", "case": "absent, false, and truthy-non-true stay dormant" },
+        { "id": "A4", "case": "malformed score01 clamps and drafts rung zero" },
+        { "id": "A5", "case": "the eight-row composable-pair closed table" },
+        { "id": "A6", "case": "beneficiary expansion after selection sets the direction" },
+        { "id": "A7", "case": "orderTermsByAsk consumed over the multi-term rungs" },
+        { "id": "A8", "case": "the nine PRODUCER_OWED rows discharge; reparations stays" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/pactFormation.test.js",
+          "tests/domain/pactAmendment.test.js",
+          "tests/domain/peaceTermsGrantTerms.test.js"]
+      ]
+    },
+    {
+      "id": "IN-0C",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/IN-0C.md",
+      "verifiedBase": "e6d963430046f07b2ebac4dd06ce4eddd386343c",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/peaceTermsDisclosure.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryInfo.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistry.js" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_GRAMMAR.md" },
+        { "action": "DOC", "path": "docs/content/RECEIPT_POOLS_INFORMATION.md" },
+        { "action": "TEST", "path": "tests/domain/couplingRegistry.test.js" },
+        { "action": "TEST", "path": "tests/lint/kindPoolFloors.walker.test.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/informationStatecraft.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/peaceTerms.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/treatyLifecycleVoice.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarNews.js" },
+        { "action": "REGISTER", "path": "src/domain/worldPulse/grammarReceiptPools.js" },
+        { "action": "REGISTER", "path": "src/domain/realm/heraldRouting.js" },
+        { "action": "REGISTER", "path": "src/domain/display/chroniclersLetter.js" },
+        { "action": "REGISTER", "path": "src/domain/display/settlementRumors.js" },
+        { "action": "TEST", "path": "tests/domain/informationStatecraftPins.test.js" },
+        { "action": "TEST", "path": "tests/domain/peaceTerms.test.js" },
+        { "action": "TEST", "path": "tests/domain/allyIntelSharing.test.js" },
+        { "action": "TEST", "path": "tests/lint/grammarLifecycleKindPools.walker.test.js" },
+        { "action": "TEST", "path": "tests/property/informationStatecraftDormancyGolden.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/informationStatecraft.js", "symbol": "advanceInformationStatecraft" },
+        { "path": "src/domain/worldPulse/peaceTerms.js", "symbol": "advanceTreaties" },
+        { "path": "src/domain/worldPulse/beliefMap.js", "symbol": "ALLY_INTEL_TUNING" },
+        { "path": "src/domain/worldPulse/treatyLifecycleVoice.js", "symbol": "treatyLapsedBeats" },
+        { "path": "src/domain/worldPulse/grammarNews.js", "symbol": "grammarKindRow" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "next-tick derived credit through the real pulse" },
+        { "id": "A2", "case": "exactly-once under replay" },
+        { "id": "A3", "case": "fidelity ladder honored/strained/defaulted/expired" },
+        { "id": "A4", "case": "fails closed on malformed compliance" },
+        { "id": "A5", "case": "predicate counterforce and per-door totality" },
+        { "id": "A6", "case": "dormancy byte-identical both oracles" },
+        { "id": "A7", "case": "real PASS 1 writer to reader integration" },
+        { "id": "A8", "case": "explicit provenTrue wins over the derived default" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/informationStatecraftPins.test.js",
+          "tests/domain/peaceTerms.test.js",
+          "tests/domain/allyIntelSharing.test.js",
+          "tests/lint/grammarLifecycleKindPools.walker.test.js",
+          "tests/property/informationStatecraftDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "IA-1",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-1.md",
+      "verifiedBase": "2c810d167d016302e641fc9cfe74fff57475b14e",
+      "changeManifest": [
+        { "action": "MODIFY", "path": ".github/workflows/ci.yml" },
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/gate-mutex.sh" },
+        { "action": "MODIFY", "path": "scripts/hazard-registry.json" },
+        { "action": "CREATE", "path": "scripts/implementation-packets.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "MODIFY", "path": "AGENTS.md" },
+        { "action": "MODIFY", "path": "CONTRIBUTING.md" },
+        { "action": "MODIFY", "path": "ARCHITECTURE.md" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/pulseStageResult.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/pulseStageManifest.js" },
+        { "action": "CREATE", "path": "src/domain/worldPulse/ledgerOwnershipManifest.js" },
+        { "action": "CREATE", "path": "tests/scripts/gateMutex.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/domain/pulseStageContracts.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciCheckParity.test.js" },
+        { "action": "MODIFY", "path": "tests/build/ciGateHardening.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/hazardRegistryFailClosed.test.js" },
+        { "action": "MODIFY", "path": "tests/lint/testRatchet.test.js" },
+        { "action": "DOC", "path": "docs/implementation/packets/town-cartography/TC-3.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/surveyor-chat/SC-1.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/GR-3B.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/foreign-policy/IN-0C.md" },
+        { "action": "DOC", "path": "docs/implementation/packets/infrastructure/IA-1.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "package.json", "symbol": "\"check\"" },
+        { "path": "scripts/gate-mutex.sh", "symbol": "holders()" },
+        { "path": ".github/workflows/ci.yml", "symbol": "jobs:" },
+        { "path": "src/domain/worldPulse/pulseStageManifest.js", "symbol": "PULSE_STAGE_TOPOLOGY" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "held lock excludes a second caller and preserves exit status" },
+        { "id": "A2", "case": "stale lock recovery never removes a live foreign lock" },
+        { "id": "A3", "case": "packet validation accepts canon and rejects bounded drift fixtures" },
+        { "id": "A4", "case": "READY-only deterministic hash-bearing coding capsules" },
+        { "id": "A5", "case": "packet quick and diagnostic plans remain non-vacuous" },
+        { "id": "A6", "case": "CI runtime and parallel gate parity" },
+        { "id": "A7", "case": "pulse result identity and explicit substage order metadata" },
+        { "id": "A8", "case": "resolvable and honest ledger ownership metadata" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/gateMutex.test.js",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/domain/pulseStageContracts.test.js",
+          "tests/build/ciCheckParity.test.js",
+          "tests/build/ciGateHardening.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "IA-2",
+      "status": "STALE",
+      "packetPath": "docs/implementation/packets/infrastructure/IA-2.md",
+      "verifiedBase": "f1895e6004eb512a5c7b4c9b4caaf79604bccea6",
+      "changeManifest": [
+        { "action": "MODIFY", "path": "package.json" },
+        { "action": "MODIFY", "path": "scripts/implementation-packets.mjs" },
+        { "action": "MODIFY", "path": "scripts/implementation-gate.mjs" },
+        { "action": "CREATE", "path": "scripts/implementation-session.mjs" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationPackets.test.js" },
+        { "action": "MODIFY", "path": "tests/scripts/implementationGate.test.js" },
+        { "action": "CREATE", "path": "tests/scripts/implementationSession.test.js" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_MANIFEST.json" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_STANDARD.md" },
+        { "action": "MODIFY", "path": "docs/implementation/PACKET_TEMPLATE.md" },
+        { "action": "MODIFY", "path": "docs/implementation/INDEX.md" },
+        { "action": "CREATE", "path": "docs/implementation/packets/infrastructure/IA-2.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "scripts/implementation-packets.mjs", "symbol": "buildCodingCapsule" },
+        { "path": "scripts/implementation-gate.mjs", "symbol": "runPacketPlan" },
+        { "path": "scripts/ops/releaseEvidenceCore.mjs", "symbol": "writeJsonReceiptAtomically" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "deterministic self-contained packet-text dispatch bundle" },
+        { "id": "A2", "case": "READY branch ancestry target-cleanliness and CREATE-absence preflight" },
+        { "id": "A3", "case": "terminal historical reuse without nonterminal path collisions" },
+        { "id": "A4", "case": "worktree-local seal preserves foreign dirt and rejects scope drift" },
+        { "id": "A5", "case": "per-step atomic receipts preserve exact child results and state" },
+        { "id": "A6", "case": "during-step mutation invalidates evidence and blocks later commands" },
+        { "id": "A7", "case": "exact-state resume reuses valid evidence and invalidates stale evidence" },
+        { "id": "A8", "case": "heartbeats locks signals and abandoned runs never manufacture success" }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "tests/scripts/implementationPackets.test.js",
+          "tests/scripts/implementationGate.test.js",
+          "tests/scripts/implementationSession.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "TC-4",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/town-cartography/TC-4.md",
+      "verifiedBase": "7699e367d9fc2fb87bfd5f8b72142969ec52c36e",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyMultiplicity.js" },
+        { "action": "CREATE", "path": "src/domain/townCartography/cartographyBuildings.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographyTuning.js" },
+        { "action": "MODIFY", "path": "src/domain/townCartography/cartographySynthesis.js" },
+        { "action": "CREATE", "path": "tests/domain/townCartographyBuildings.test.js" },
+        { "action": "TEST", "path": "tests/domain/townSceneCartography.test.js" },
+        { "action": "TEST", "path": "tests/property/townCartographyDormancyGolden.test.js" },
+        { "action": "TEST", "path": "tests/domain/townCartographyDeterminism.test.js" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "compileTownParcelLayers" },
+        { "path": "src/domain/townCartography/cartographyParcels.js", "symbol": "bindCanonicalInstitutionsToParcels" },
+        { "path": "src/domain/townCartography/cartographySynthesis.js", "symbol": "compileTownCartography" },
+        { "path": "src/domain/townCartography/cartographyTuning.js", "symbol": "TOWN_CARTOGRAPHY_TUNING" },
+        { "path": "src/domain/townMap/anchors.js", "symbol": "slugify" },
+        { "path": "src/domain/townScene/cartographyContract.js", "symbol": "validateTownCartography" }
+      ],
+      "acceptanceCases": [
+        { "id": "C1", "case": "real lit compile emits a validating buildings layer" },
+        { "id": "C2", "case": "multiplicity resolution, monotonicity, and append-stability" },
+        { "id": "C3", "case": "footprint containment geometry over the map corpus" },
+        { "id": "C4", "case": "population-responsive dwelling fill without parallel identity" },
+        { "id": "C5", "case": "dress derivations and the first-match condition chain" },
+        { "id": "C6", "case": "determinism, purity, and the digest-domain label scans" },
+        { "id": "C7", "case": "dormancy regression with the golden untouched" },
+        { "id": "C8", "case": "bounded chunk-pair posture with zero new closure edges" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/townCartographyBuildings.test.js",
+          "tests/domain/townCartographyParcels.test.js",
+          "tests/domain/townCartographyWards.test.js",
+          "tests/domain/townSceneCartography.test.js",
+          "tests/domain/townCartographyDeterminism.test.js",
+          "tests/property/townCartographyDormancyGolden.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5B",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5B.md",
+      "verifiedBase": "2d420dfafd9e8f92db5deca124cc2353c0073588",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionagePresence.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageMath.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/factionCompetition.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/settlementPolitics.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionagePresence.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageAbsenceDormancy.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCHITECTURE.md" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/settlementPolitics.js", "symbol": "rulingBlocOf" },
+        { "path": "src/domain/worldPulse/factionCompetition.js", "symbol": "topFactionEntries" },
+        { "path": "src/domain/worldPulse/espionage/espionageMath.js", "symbol": "ESPIONAGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/roads/state.js", "symbol": "WHEREABOUTS_STATES" },
+        { "path": "src/domain/worldPulse/npcAgency.js", "symbol": "npcId" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "main reachable behavior at BOTH consumption sites" },
+        { "id": "A2", "case": "four dormancy fences including roads-lit espionage-dark" },
+        { "id": "A3", "case": "hostage counterforce anchored against a live positive control" },
+        { "id": "A4", "case": "sparse and malformed-but-supported inputs resolve to share 1" },
+        { "id": "A5", "case": "the declared one-tick lag, uniform across both consumers" },
+        { "id": "A6", "case": "determinism and member-order independence" },
+        { "id": "A7", "case": "the key mirror joins both derivations, failing to share 1" },
+        { "id": "A8", "case": "the disclosed shift recorded as a dark/lit golden pair" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionagePresence.test.js",
+          "tests/property/espionageAbsenceDormancy.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5C",
+      "status": "LANDED",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5C.md",
+      "verifiedBase": "868aca1a8c602c0d50c3b35180156e17c6941a44",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageCareer.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderChallenge.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageGauntlet.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageCareer.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageCareerDormancy.test.js" },
+        { "action": "TEST", "path": "tests/domain/espionageGauntlet.test.js" },
+        { "action": "TEST", "path": "tests/domain/espionageProducts.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCHITECTURE.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "defenseScore" },
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "openWindows" },
+        { "path": "src/domain/worldPulse/npcLadderChallenge.js", "symbol": "CHALLENGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageMath.js", "symbol": "ESPIONAGE_TUNING" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" },
+        { "path": "src/domain/roads/state.js", "symbol": "WHEREABOUTS_STATES" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "the career register resolves and reaches defenseScore" },
+        { "id": "A2", "case": "four dormancy fences including ladder-dark and roads-dark" },
+        { "id": "A3", "case": "hostage exclusion anchored against a live positive control" },
+        { "id": "A4", "case": "sparse and malformed inputs resolve to no discount" },
+        { "id": "A5", "case": "the declared one-tick whereabouts lag, sinceTick holding a WEEK" },
+        { "id": "A6", "case": "the carrier-conditional promotion term flips, with a control" },
+        { "id": "A7", "case": "the disclosed shift recorded as a dark/lit golden pair" },
+        { "id": "A8", "case": "the repaired ladder-writer guard reds against a planted real write" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageCareer.test.js",
+          "tests/property/espionageCareerDormancy.test.js",
+          "tests/domain/espionageGauntlet.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/domain/couplingRegistry.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    },
+    {
+      "id": "ES-5D",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/foreign-policy/ES-5D.md",
+      "verifiedBase": "857e3a1ac6e5580bb1016fb644dab00f77038a34",
+      "changeManifest": [
+        { "action": "CREATE", "path": "src/domain/worldPulse/espionage/espionageCareerCredit.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/npcLadderKernel.js" },
+        { "action": "MODIFY", "path": "src/domain/worldPulse/espionage/espionageProductStage.js" },
+        { "action": "REGISTER", "path": "src/domain/certification/couplingRegistryEspionage.js" },
+        { "action": "REGISTER", "path": "src/lib/spatialUsage.js" },
+        { "action": "CREATE", "path": "tests/domain/espionageCareerCredit.test.js" },
+        { "action": "CREATE", "path": "tests/property/espionageCareerCreditDormancy.test.js" },
+        { "action": "TEST", "path": "tests/lint/sovereigntyLightingContract.walker.test.js" },
+        { "action": "DOC", "path": "docs/DESIGN_FP_ARCH_ES.md" }
+      ],
+      "requiredSymbols": [
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "advanceLitLadder" },
+        { "path": "src/domain/worldPulse/npcLadderKernel.js", "symbol": "applyGoalLifecycle" },
+        { "path": "src/domain/worldPulse/espionage/espionageProductStage.js", "symbol": "amendCovert" },
+        { "path": "src/domain/worldPulse/espionage/espionageGate.js", "symbol": "espionageActive" }
+      ],
+      "acceptanceCases": [
+        { "id": "A1", "case": "a graded mission deposits and the ladder consumes it once" },
+        { "id": "A2", "case": "four dormancy fences including ladder-dark writing nothing" },
+        { "id": "A3", "case": "the one-tick window closes; a stale deposit is pruned unread" },
+        { "id": "A4", "case": "the grade map: exceeded 2x, met 1x, partial and empty zero, no debit" },
+        { "id": "A5", "case": "an id-less operative resolves to no credit without throwing" },
+        { "id": "A6", "case": "the identity bridge joins ladder nid to errand npcId" },
+        { "id": "A7", "case": "the spatial-ledger classification pin, two mutants" },
+        { "id": "A8", "case": "determinism and the hoisted-Map hot-path shape" }
+      ],
+      "checks": [
+        ["npx", "vitest", "run",
+          "tests/domain/espionageCareerCredit.test.js",
+          "tests/property/espionageCareerCreditDormancy.test.js",
+          "tests/domain/espionageProducts.test.js",
+          "tests/lint/spatialLedgerCoverage.walker.test.js",
+          "tests/lint/couplingInclusion.walker.test.js"]
+      ]
+    }
+  ]
+}

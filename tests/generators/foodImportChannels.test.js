@@ -18,6 +18,7 @@
 
 import { describe, expect, test } from 'vitest';
 import { FOOD_IMPORT_RATES } from '../../src/data/foodImportRates.js';
+import { SEASONAL_ROUTE_FOOD_IMPORT_RATE } from '../../src/domain/tradeRouteSemantics.js';
 import { generateEconomicViability } from '../../src/generators/economicGenerator.js';
 
 const MARKET = { name: 'District market' };
@@ -93,6 +94,21 @@ describe('economicGenerator attribution: importChannel + coverage rate', () => {
     const fb = foodBalance({ institutions: [MARKET, CIRCLE] }); // no wizard on the roster
     expect(fb.importChannel).toBe('teleportation circle');
     expect(fb.importCoverage / fb.rawDeficit).toBeCloseTo(FOOD_IMPORT_RATES.teleport * 0.5, 2);
+  });
+
+  test('a mountain pass carries its own seasonal rung, not the isolated trickle', () => {
+    const pass = foodBalance({ institutions: [MARKET], tradeRouteAccess: 'mountain_pass' });
+    const isolated = foodBalance({ institutions: [MARKET] });
+    const road = foodBalance({ institutions: [MARKET], tradeRouteAccess: 'road' });
+
+    // The token is de-slugged before a player reads it.
+    expect(pass.importChannel).toBe('mountain pass trade');
+    expect(pass.importCoverage / pass.rawDeficit).toBeCloseTo(SEASONAL_ROUTE_FOOD_IMPORT_RATE, 2);
+    // The defect this replaced: no rung at all, so a pass imported LESS than an
+    // isolated city's sanctioned caravans. Same deficit across all three rows.
+    expect(pass.rawDeficit).toBe(isolated.rawDeficit);
+    expect(pass.importCoverage).toBeGreaterThan(isolated.importCoverage);
+    expect(pass.importCoverage).toBeLessThan(road.importCoverage);
   });
 
   test('a siege severs the minor routes entirely', () => {

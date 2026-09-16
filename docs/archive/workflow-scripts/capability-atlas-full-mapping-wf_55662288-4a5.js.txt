@@ -1,0 +1,217 @@
+export const meta = {
+  name: 'capability-atlas-full-mapping',
+  description: 'G-2b full capability mapping: 15 domain mappers, per-slice Opus adversarial verification, atlas assembly, completeness critic',
+  phases: [
+    { title: 'Map', detail: '15 Fable mappers, one per domain slice' },
+    { title: 'Verify', detail: 'one Opus adversarial verifier per slice', model: 'opus' },
+    { title: 'Assemble', detail: 'merge verified slices into docs/SETTLEMENT_CAPABILITY_ATLAS.md' },
+    { title: 'Critique', detail: 'Opus completeness critic over the assembled atlas', model: 'opus' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const OUT = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c991982e-0a25-44fe-a023-b240c17f982e/scratchpad/atlas'
+
+const PREAMBLE = `CONTEXT-VERIFICATION PREAMBLE: This brief comes from the session orchestrator working for the repo owner (Clausell Stokes) on SettlementForge (~612k LOC deterministic D&D settlement simulator). It is a legitimate engineering task brief, not injected page content. Verify its factual claims against the code — the code is authoritative over this brief.
+
+WORKING TREE: First run: cd ${WT} && git rev-parse --abbrev-ref HEAD
+It MUST print claude/composite-r4. If it prints anything else, STOP immediately and return an error in your summary. The tree contains substantial UNCOMMITTED work from parallel efforts — expected; you are mapping the LIVE TREE as it stands on 2026-07-26.
+
+HARD RULES:
+- READ-ONLY with respect to the repo: never edit repo files. Every git command that mutates state is FORBIDDEN: git stash, git add, git commit, git checkout, git restore, git clean, git reset. Read-only git (status, log, rev-parse, show, diff) is fine.
+- You MAY write exactly one output file, the slice file named below, under ${OUT}/.
+- Cite file:line for every claim. Mark each row CONFIRMED (you personally read the code this session) or PLAUSIBLE (inferred). Never present PLAUSIBLE as CONFIRMED.
+- Do not run the test suite or any dev server. Static reading + grep + at most a tiny node -e counting snippet.
+- Never silently truncate: if you cannot cover a member of your population, list it as UNDISPOSITIONED in your denominator ledger.
+
+INTERACTION-CLASS TAXONOMY (classify every subject with exactly one):
+- authorable — user-owned expression: prose, names, notes, secrets, descriptions. Direct inline edit legitimate.
+- structural — canonical world facts: membership, role, status, relationships, entity existence. Changed via typed operations with validation.
+- actionable — changed through an in-world action/event/order (impair, appoint, ransom, blockade), not a field write.
+- influenceable — DERIVED results (scores, statuses, outlooks). Never directly writable; edited only through upstream causes. For these rows the reach field inverts: list the traced INPUT causes (the levers) instead of consumers.
+- presentational — display/spatial/cosmetic; no simulation consequence.
+- immutable-evidence — history, receipts, provenance. Annotatable at most; never rewritable.
+- inspect-only — visible today, none of the above applies (record WHY).
+
+ROW FORMAT — one block per subject. Cluster subjects only when EVERY dimension matches; enumerate all member names inside the cluster row:
+### <subject or cluster name>
+- members: (clusters only — every name)
+- class: <taxonomy value>
+- authority: <file owning the truth>
+- operations: <ops/verbs/commands that legally change it, with source file>
+- inputs: <what the operation needs>
+- preconditions: <predicates, tier gates (premium/free/lapsed), flags, phase>
+- timing: immediate | staged | next-pulse | long-running
+- scope: field | entity | settlement | campaign | cross-save
+- reach: <downstream consumers actually traced, file:line; or UNKNOWN — no declared substrate. Influenceable rows: traced input causes instead.>
+- preview: exact | deterministic-scope | directional | none
+- persistence: <store slice / save payload / supabase / session-only>
+- recovery: revert | snapshot-undo | compensating-action | irreversible | HAZARD:<named>
+- provenance: <receipt/log written, or none>
+- exposure: <where a user can do this TODAY (tab/card/panel/composer), or not-exposed>
+- destination: canvas | inspector | dock | contextual-tool | legacy-retained | retired — RECOMMENDATION ONLY for the G-2b Workbench migration, one line of rationale
+- surveyor: <current AI exposure (explain/recommend/stage/none); note if exposing it would violate a doctrine law>
+- maturity: built | flag-off | partial | planned | missing | prohibited
+- status: CONFIRMED | PLAUSIBLE
+- evidence: <file:line list>
+- notes/gaps:
+
+END OF FILE sections (required):
+## Gaps
+(kinds: displayed-but-no-lever, op-but-no-exposure, no-recovery, no-provenance, unknown-reach, influenceable-without-why, doctrine-conflict, dead-code)
+## Denominator ledger
+Assigned population, how you enumerated it (commands used), count covered, UNDISPOSITIONED members.
+
+DOCTRINE CONSTRAINTS (verify in code where relevant; classify accordingly):
+- Derived facts are influenceable, never writable (determinism law: a seed is a world, forever).
+- AI is a bucketing clerk: free text lands only on presentation-effect or shadow ai_data fields; mechanical fields are enum|boolean|reference (finite-semantics law).
+- No premade deity pool; deities are custom-content only.
+- Never resolve a named character's fate.
+Return as structured output ONLY the compact summary; the file carries the full mapping.`
+
+const SLICES = [
+  { key: 'composer-verbs', brief: `POPULATION: every verb in src/domain/events/affordanceManifest.js (prior audit claims 40 verbs, 31 authorable — verify the real counts yourself). One row per verb. Find the Event Composer UI component(s) that consume the manifest (grep for affordanceManifest imports) to fill the exposure column. Capture the available/reasons/unlocks predicate semantics into preconditions. Note which verbs stage vs apply immediately. Check the SED-04 verbs (ransom, rescue, recall, return, stasis variants) exist and record their gating.` },
+  { key: 'store-ops-a', brief: `POPULATION: src/store/operationRegistry.js entries classed K-A CANON and K-B MECHANICAL. Read the registry header + walker test tests/store/operationRegistry.walker.test.js to establish the full denominator (prior audit: 181 total ops — verify with a count). One row per op, or per exact-dimension cluster with all members named. The registry rows carry roughly 8 flat metadata fields; map them onto the atlas columns and record where registry metadata is MISSING for a column — that is a finding, never a blank to invent. Known defect to record per-op where determinable: undoToken:null overloads irreversible vs not-built.` },
+  { key: 'store-ops-b', brief: `POPULATION: src/store/operationRegistry.js entries classed K-C MACRO and K-D EXEMPT (EXEMPT_OPERATIONS). Same denominator source as the sibling slice (walker test). K-C existing receipts (rollExplanations, rulesetLog, pulse records, eventLog entries, regeneration deltas) feed the provenance column — trace which receipt each macro actually writes. K-D members are mostly inspect-only/presentational/session state — still enumerate EVERY member with a one-line disposition; note the EXEMPT_CEILING shrink-only rule.` },
+  { key: 'commands-surveyor', brief: `POPULATION: every spec in src/application/commands/commandRegistry.js and standardCommandRegistry.js (prior audit: 7 specs — verify), plus the Surveyor command boundary (tests/architecture/surveyorCommandBoundary.test.js — exactly which command kinds AI may create), plus docs/DESIGN_AI_CONTROL_SURFACE.md sections 0-3 and src/domain/ai/groundingManifest.js. One row per command kind capturing the delivery/atomicity/preflight metadata FULLY (these are the richest atlas-grade descriptors in the codebase). Then write a section titled SURVEYOR EXPOSURE RULESET stating what the propose-preview-stage-approve-receipt loop can legally carry today — the assembly agent will use it to normalize every other slice's surveyor column. Known gap to record: commandRegistry has NO registration walker.` },
+  { key: 'tabs-read-a', brief: `POPULATION: the dossier display surface, half A. Read src/components/dossier/dossierLazyTabs.js plus the renderTab switch in src/components/OutputContainer.jsx to establish the FULL tab denominator; your half: Summary, SummaryTabV2, Overview, Economics, Services, Power, DeityAssignmentPanel, WarFaith/Faith section, Defense. For EACH tab enumerate its cards/sections and each displayed fact-group — one row per fact-group with class + exposure. Identify every EditableText mount and every action button. You are the DISPLAY-side mapper: where an operation lives elsewhere, reference it briefly; your unique duty is complete display inventory, per-element classification, and destination recommendation. Record displayed-but-no-lever gaps aggressively.` },
+  { key: 'tabs-read-b', brief: `POPULATION: the dossier display surface, half B: NPCs, History, Resources, Viability, DailyLife, Relationships, DMCompass, Notes, PlotHooks, Chronicle, Versions, Substrate, Magic, Rumors and News — PLUS any tab in dossierLazyTabs.js or the OutputContainer renderTab switch not claimed by half A (Summary, SummaryTabV2, Overview, Economics, Services, Power, DeityAssignmentPanel, WarFaith, Defense): the remainder is yours. Same duties as half A: per-tab card/fact-group inventory, one row each, every EditableText mount, every action button, displayed-but-no-lever gaps.` },
+  { key: 'npc-family', brief: `POPULATION: the NPC entity family end-to-end. Entry points: src/components/new/npcComponents.jsx (editMode paths), src/components/new/tabs/NPCsTab.jsx, src/domain/npc/npcFacets.js (consumer registry — prior audit says 4 facets), the Workbench staged-NPC proof in src/components/dossier/SettlementWorkbench.jsx. Map NPC-specific semantics: targeting, stasis, ransom/rescue/recall, role and goal change, secrets/notes authoring, name/pronoun. You MUST verify the regen edit-loss hazard: does regenSection for npcs still destroy _userEdits/_authored (previously CONFIRMED)? Trace create/read/persist/regen/undo per editable NPC field — that lifecycle truth IS your recovery column. Doctrine: never resolve a named character's fate.` },
+  { key: 'power-faith', brief: `POPULATION: factions, power structures, deities, faith. Entry points: src/components/new/tabs/PowerTab.jsx, the WarFaith tab + Faith section, src/components/dossier or settlement DeityAssignmentPanel.jsx (the write half of the embed-on-assign bridge), faction-touching ops in the registries, the deity custom-content path. Verify tier gating (premium write, lapsed read-only, free upsell). Record as authority constraints: the faction-key cure functions (nameOf/governingFactionOf/factionArchetype/npcInFaction) are the only legal access paths; NO premade deity pool (engine total 0..MAX). Map legitimacy/piety/standing as influenceable with traced levers.` },
+  { key: 'economy-family', brief: `POPULATION: institutions, services, resources, trade/supply, network effects. Entry points: src/components/new/tabs/EconomicsTab.jsx, ServicesTab.jsx, ResourcesTab.jsx, src/components/settlementDetail/SettlementDetailNetworkEffectsPanel.jsx + computeNetworkEcho.js, related composer verbs and store ops. Map add/remove/impair/restore per institution family; supply-chain and trade-route levers; which economy facts are structural vs influenceable (prosperity is likely derived — verify). Network effects: settle the scope column truth (settlement vs campaign).` },
+  { key: 'derived-influenceable', brief: `POPULATION: every derived fact the dossier shows. Entry points: src/domain/state/deriveSystemState.js (enumerate ALL outputs), src/components/settlement/ReadSystemStateBar.jsx, ViabilityTab (Causes/Outlook), the coherence check. For each derived output: one influenceable row whose reach field lists the TRACED INPUTS (read the derivation code; cite lines) — these are the legal levers. This slice is the reverse-reach map, the only honest reach data in the tree. Also record which derived facts have a Why explanation surface today and which do not (gap kind: influenceable-without-why).` },
+  { key: 'narrative-evidence', brief: `POPULATION: history/chronicle/versions/receipts plus every live prose writer. Entry points: ChronicleTab, HistoryTab, VersionsTab, NotesTab, PlotHooksTab, the rumors/news tab, all EditableText mounts (grep EditableText across src/components), rollExplanations/rulesetLog/eventLog display surfaces. Classify evidence surfaces immutable-evidence and state what, if anything, is annotatable. Enumerate EVERY prose writer (the G-2b program requires every live prose writer mapped) as authorable rows with persistence + regen-survival truth — check each writer's membership in COMMITTABLE_EDIT_KINDS / pendingEdits. Known hazard to verify: chronicle stress snapshot is a SINGLE OBJECT, an Array.isArray check drops the row — record current state.` },
+  { key: 'presentation-scene', brief: `POPULATION: presentational surfaces. Entry points: src/domain/townScene/ (sceneSemantics.js, compileTownSceneManifest.js, manifestContract.js), rename surfaces (src/components/settlementDetail/SettlementDetailEditNames.jsx), hero/backdrop (SettlementDossierHero.jsx, SettlementDossierBackdrop.jsx), export seams (resolveExportSeam.js), map placement/massing. Record the deliberate scene-vs-canonical address-space separation as a standing constraint (joining them is an owner decision — record in gaps, do not recommend). Settle the rename classification: presentational or structural? Trace what consumes names (the nameOf cure suggests structural). Note that one-string renames are the owner's vetoable pattern.` },
+  { key: 'custom-content', brief: `POPULATION: the custom-content system. Entry points: src/domain/content/customContentManifest.js and customContentManifest.generated.js, their schemas, the consumers arrays. Map: what users can author (schemas/fields); per field whether it is mechanical (enum|boolean|reference) or presentation free-text — finite-semantics compliance per field; the consumers-declared-but-never-file-verified gap (contrast the npcFacets walker); custom-content lifecycle (create/edit/delete/reference); where custom content surfaces in the dossier.` },
+  { key: 'lifecycle-recovery', brief: `POPULATION: the cross-cutting persistence/recovery/timing truth every other slice depends on. Entry points: pendingEdits + COMMITTABLE_EDIT_KINDS (grep for them), the G-1 local transaction foundation (typed intents/receipts/snapshot undo — locate its modules via docs/GAME_GRADE_PROGRAM.md G-1 references, then grep), regeneration paths (regenSection; check whether buildRegenerationPlan is still dead code), VersionsTab restore, save/load/import/export, save-switch and owner fences, pulse staging (what applies next-pulse), cross-save ops. Deliver three things: (a) canonical rows for each recovery mechanism itself, (b) a corrections table — for each mechanism, which entity families it ACTUALLY covers vs claims to (the regen edit-loss class), (c) a timing truth table (immediate vs staged vs next-pulse, by mechanism).` },
+  { key: 'workbench-current', brief: `POPULATION: the G-2a Workbench proof and editor chrome as it stands. Entry points: src/components/dossier/SettlementWorkbench.jsx, SettlementWorkbenchMount.jsx, DossierEntityContext.jsx, useNavigateToEntity.js, DossierActionBand.jsx, PendingChangesBar.jsx, CascadePreviewPanel.jsx, DossierAiConfirms.jsx, src/components/settlementDetail/SettlementDetailActions.jsx (premium Edit toggle) + editMode in src/store/settlementSlice.js, the settlementWorkbench flag, and the EntityInspector + ChangeDock (locate them inside these files or their imports). Map which capabilities the Workbench exposes TODAY per entity family (staged NPC proof), its read-only/mobile/premium boundaries, the honest-Why state, and the preview/apply/receipt/undo loop. Verify the EngineSections.jsx dead-code claim. This slice defines the exposure + destination ground truth other slices reference. Record the OPEN OWNER RULING — global Edit toggle keep-vs-retire (premium paywall seam argument) — record it, do not decide it.` },
+]
+
+const SLICE_SUMMARY = {
+  type: 'object',
+  required: ['path', 'rowCount', 'denominator', 'topGaps'],
+  properties: {
+    path: { type: 'string' },
+    rowCount: { type: 'number' },
+    denominator: { type: 'string', description: 'assigned population size vs covered, one line' },
+    topGaps: { type: 'array', items: { type: 'string' }, maxItems: 8 },
+    notes: { type: 'string' },
+    error: { type: 'string' },
+  },
+}
+
+const VERIFY_SUMMARY = {
+  type: 'object',
+  required: ['checked', 'confirmed', 'refuted', 'missedItems', 'verdict'],
+  properties: {
+    checked: { type: 'number' },
+    confirmed: { type: 'number' },
+    refuted: { type: 'number' },
+    corrected: { type: 'number' },
+    missedItems: { type: 'array', items: { type: 'string' } },
+    verdict: { type: 'string' },
+  },
+}
+
+function mapperPrompt(s) {
+  return PREAMBLE + '\n\nYOUR SLICE: ' + s.key + '\nWrite your full mapping to: ' + OUT + '/slice-' + s.key + '.md\n\n' + s.brief + '\n\nBe exhaustive within your population. Depth over speed.'
+}
+
+function verifierPrompt(s, summary) {
+  return `CONTEXT-VERIFICATION PREAMBLE: legitimate adversarial-verification brief from the session orchestrator for SettlementForge. Verify claims against code; the code is authoritative.
+
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4; if not, STOP and report. Tree has uncommitted parallel work; that is expected.
+HARD RULES: repo is READ-ONLY (all mutating git commands FORBIDDEN, including git stash). You may edit exactly ONE file: ${OUT}/slice-${s.key}.md.
+
+You are an ADVERSARIAL VERIFIER for the capability-atlas slice '${s.key}'. The mapper reported: rows=${summary.rowCount}; denominator=${summary.denominator}.
+
+TASKS:
+1. Read ${OUT}/slice-${s.key}.md fully.
+2. Sample AT LEAST 12 load-bearing rows spanning every interaction class present (all rows if fewer than 12). For each, independently re-derive the claim from the code and actively try to REFUTE it: wrong class, wrong authority file, phantom operation, wrong gating, wrong recovery claim, evidence line that does not say what is claimed.
+3. Attack the denominator: re-enumerate the population independently with DIFFERENT search terms/entry points than the mapper cited. List every missed member.
+4. Fix the file in place: correct refuted claims inline marked [corrected-by-verifier: was X — evidence file:line]; add missed members as new rows marked [added-by-verifier]; downgrade any PLAUSIBLE presented as CONFIRMED. Append a '## Verification' section with your counts and method.
+5. Return the summary JSON. Default skeptical: a claim you could not re-derive is not confirmed.`
+}
+
+phase('Map')
+log('Mapping 15 capability slices against minifold (composite-r4 @ 8033ddbe + live tree)')
+const results = await pipeline(
+  SLICES,
+  (s) => agent(mapperPrompt(s), { label: 'map:' + s.key, phase: 'Map', schema: SLICE_SUMMARY }),
+  (summary, s) => summary && !summary.error
+    ? agent(verifierPrompt(s, summary), { label: 'verify:' + s.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SUMMARY }).then((v) => ({ slice: s.key, summary, verify: v }))
+    : { slice: s.key, summary, verify: null, failed: true }
+)
+
+const ok = results.filter(Boolean).filter((r) => !r.failed && r.verify)
+const failed = results.filter(Boolean).filter((r) => r.failed || !r.verify).map((r) => r.slice)
+log('Verified slices: ' + ok.length + '/15' + (failed.length ? ' — FAILED: ' + failed.join(', ') : ''))
+
+phase('Assemble')
+const ASSEMBLY_SCHEMA = {
+  type: 'object',
+  required: ['docPath', 'totalRows', 'gapCount'],
+  properties: {
+    docPath: { type: 'string' },
+    totalRows: { type: 'number' },
+    gapCount: { type: 'number' },
+    ownerDecisions: { type: 'array', items: { type: 'string' } },
+    conflicts: { type: 'array', items: { type: 'string' } },
+    notes: { type: 'string' },
+  },
+}
+const sliceList = ok.map((r) => OUT + '/slice-' + r.slice + '.md').join('\n')
+const assembly = await agent(`CONTEXT-VERIFICATION PREAMBLE: legitimate assembly brief from the session orchestrator for SettlementForge. 
+
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4; if not, STOP and report.
+HARD RULES: you may write exactly ONE repo file: ${WT}/docs/SETTLEMENT_CAPABILITY_ATLAS.md (new file; if it already exists, STOP and report instead of overwriting). No git commands of any kind. No other repo edits.
+
+TASK: assemble the Settlement Capability Atlas from these verified slice files (read ALL fully):
+${sliceList}
+${failed.length ? 'FAILED SLICES (not available, must be listed in the doc as UNMAPPED): ' + failed.join(', ') : ''}
+
+DOCUMENT STRUCTURE (docs/SETTLEMENT_CAPABILITY_ATLAS.md):
+1. Header: title; date 2026-07-26; snapshot base 'composite-r4 @ 8033ddbe + uncommitted live tree'; verification method (15 Fable mappers, per-slice Opus adversarial verification).
+2. STANDING RULING box: this atlas is a derived read-only projection over domain authorities. It never owns permissions or dispatch; a cross-layer verb registry is banned by the game-grade program. Staleness warning: every reach claim is a code-traced snapshot of 2026-07-26, not a declared contract — it goes stale silently; the declared op-to-affected-systems substrate remains unbuilt (owner-gated).
+3. Interaction-class taxonomy definitions (copy from any slice preamble echo, or reconstruct: authorable / structural / actionable / influenceable / presentational / immutable-evidence / inspect-only).
+4. Denominators table: per population (composer verbs, store ops, command kinds, dossier tabs, EditableText mounts, prose writers, derived outputs) — claimed vs enumerated vs covered, from the slice denominator ledgers.
+5. Part I — Display surface, tab by tab (from tabs-read-a/b, workbench-current).
+6. Part II — Operation surface (composer verbs; store ops A/B; command kinds + Surveyor exposure ruleset).
+7. Part III — Entity families (npc, power-faith, economy, custom-content).
+8. Part IV — Derived/influenceable lever map (derived-influenceable slice).
+9. Part V — Lifecycle, recovery, and timing truth tables (lifecycle-recovery slice; include the mechanism-coverage corrections table verbatim).
+10. Part VI — Master gap ledger, grouped by kind (displayed-but-no-lever, op-but-no-exposure, no-recovery, no-provenance, unknown-reach, influenceable-without-why, doctrine-conflict, dead-code).
+11. Part VII — Owner-decision queue (every 'record, do not decide' item from all slices, including the global Edit toggle keep-vs-retire).
+12. Part VIII — G-2b destination summary: counts of rows per recommended destination (canvas / inspector / dock / contextual-tool / legacy-retained / retired) and a per-entity-family migration readiness line.
+
+MERGE RULES: preserve EVERY row — do not summarize rows away; you may keep clusters as clusters. Where two slices disagree about the same subject, keep both claims side by side flagged CONFLICT (do not adjudicate). Preserve CONFIRMED/PLAUSIBLE status and [corrected-by-verifier]/[added-by-verifier] marks. Do not invent any row not present in a slice file. Keep every file:line evidence citation.
+Return the summary JSON with docPath, totalRows (count the row blocks), gapCount, ownerDecisions (titles), conflicts (titles).`, { label: 'assemble', phase: 'Assemble', schema: ASSEMBLY_SCHEMA })
+
+phase('Critique')
+const CRITIC_SCHEMA = {
+  type: 'object',
+  required: ['findings', 'denominatorChecks', 'overall'],
+  properties: {
+    findings: { type: 'array', items: { type: 'object', required: ['severity', 'description'], properties: { severity: { type: 'string', enum: ['critical', 'major', 'minor'] }, description: { type: 'string' } } } },
+    denominatorChecks: { type: 'array', items: { type: 'string' } },
+    overall: { type: 'string' },
+  },
+}
+const critic = assembly ? await agent(`CONTEXT-VERIFICATION PREAMBLE: legitimate completeness-critique brief from the session orchestrator for SettlementForge.
+
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4; if not, STOP and report.
+HARD RULES: fully READ-ONLY — edit NOTHING, no git mutations, no test runs.
+
+You are the COMPLETENESS CRITIC for the assembled atlas at ${WT}/docs/SETTLEMENT_CAPABILITY_ATLAS.md (assembler reported ${assembly.totalRows} rows, ${assembly.gapCount} gaps). Read it fully, then attack:
+1. DENOMINATORS — independently count against code and compare to the doc's denominators table: verbs in src/domain/events/affordanceManifest.js; ops registered in src/store/operationRegistry.js (all four K-classes incl. EXEMPT_OPERATIONS); command specs in src/application/commands/; tabs in src/components/dossier/dossierLazyTabs.js plus the OutputContainer renderTab switch; EditableText mounts in src/components. Report each as 'population: doc says N, code says M'.
+2. MISSING POPULATIONS — is anything settlement-dossier-relevant absent entirely? Check at least: realmManifest.js, pulseStageManifest.js, fieldManifest.js, intentions/timeline/regional-impacts/linking/network-effects (the G-2b inventory list in docs/GAME_GRADE_PROGRAM.md), the generator wizard boundary (correctly excluded or wrongly missing?). For each: present, absent-correctly (out of scope, say why), or absent-wrongly.
+3. KNOWN HAZARDS — confirm each appears in the gap ledger or rows: regen edit-loss (_userEdits destroyed by regenSection), undoToken:null overload, chronicle stress single-object shape, unknown-reach/no declared substrate, commandRegistry has no walker, custom-content consumers arrays unverified, EngineSections dead code.
+4. INTERNAL CONSISTENCY — spot-check 10 rows for class misassignment (esp. derived facts not marked influenceable, presentational rows with simulation reach); list unresolved CONFLICT flags; check Part VIII counts roughly reconcile with the row inventory.
+Return findings (severity: critical = wrong/missing load-bearing content; major = coverage hole; minor = polish), denominatorChecks, and an overall one-paragraph verdict. Do NOT fix anything yourself.`, { label: 'critic', phase: 'Critique', model: 'opus', effort: 'high', schema: CRITIC_SCHEMA }) : null
+
+return {
+  slices: ok.map((r) => ({ key: r.slice, rows: r.summary.rowCount, denominator: r.summary.denominator, refuted: r.verify.refuted, corrected: r.verify.corrected || 0, missed: r.verify.missedItems.length })),
+  failedSlices: failed,
+  assembly,
+  critic,
+}

@@ -1,14 +1,17 @@
 /**
- * EventComposerLinkNeighbourField — the neighbour-link CREATION inputs for the Make
- * Changes dropdown, folded in from the retired standalone "Link a neighbour" card.
+ * EventComposerLinkNeighbourField — the neighbour-link CREATION inputs for the
+ * Make Changes dropdown, folded in from the standalone "Link a neighbour" card.
  *
  * Link creation is NOT an applyEvent event (unlike SHIFT_TIER): the rich
- * bidirectional cascade (partner row, ISR + NPC contacts + conflicts, realm-graph
- * rebuild) lives in useChangeQueueCascade. So the composer does not build/stage an
- * event for this — it picks a partner + relationship here and, on Apply, delegates
- * to the SAME `onLink` (handleLink) the card used, which already stages the `link`
- * change-queue order for a standalone save and applies the full cascade immediately
- * for a clock-bound member. No reimplementation, no degraded path.
+ * bidirectional cascade (partner row, inter-settlement NPCs + conflicts, realm
+ * graph) lives in SettlementsPanel's handleLink. So the composer does not
+ * build/stage an event for this — it picks a partner + relationship here and, on
+ * Apply, delegates to the SAME `onLink` (handleLink) the card used. No
+ * reimplementation, no degraded path.
+ *
+ * NB: the feature stays invisible until the host receives an `onLink` handler
+ * (EventComposer's activation point is fenced this wave — SettlementDetail.jsx:574
+ * renders <EventComposer /> propless), so the whole field ships dormant-but-complete.
  */
 
 import { RELATIONSHIP_SELECTIONS, relationshipDefinition, directionalRelationshipLabel } from '../../../domain/relationships/canonicalRelationship.js';

@@ -26,10 +26,10 @@ import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Stat from '../primitives/Stat.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
+import AdminTwoKeyDialog from './AdminTwoKeyDialog.jsx';
+import AdminDirectMessageDialog from './AdminDirectMessageDialog.jsx';
 import {
-  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN,
-  sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
 
 /** Invoke an admin-actions edge action. Returns the data payload or throws. */
 async function callAdmin(body) {
@@ -75,6 +75,11 @@ export default function AdminUsersPanel() {
   const [status, setStatus] = useState(null);        // last action result message
   // The single in-app text-prompt. `prompt.onSubmit(value)` runs the action.
   const [prompt, setPrompt] = useState(null);        // { title, body, label, onSubmit } | null
+  const [directMessageOpen, setDirectMessageOpen] = useState(false);
+  // The TWO-KEY confirm for account-destructive actions (owner-ordered
+  // 2026-07-21): premium/tier/entitlement change, ban / disable. `tk` holds the
+  // modal config; the admin must retype the account id AND their own password.
+  const [tk, setTk] = useState(null);                // { title, body, targetId, valueLabel?, valueHint?, buildBody, successMsg } | null
 
   const search = useCallback(async () => {
     setSearching(true); setError(null);
@@ -199,6 +204,29 @@ export default function AdminUsersPanel() {
     });
   }, []);
 
+  /**
+   * Open the TWO-KEY confirm for an account-destructive action. `cfg.buildBody`
+   * receives (typedTargetId, parsedValue) and returns the admin-actions body; the
+   * server re-enforces the same gate (typed id + fresh password amr) — this modal
+   * is the deliberate-confirmation UX, not the security boundary.
+   */
+  const openTwoKey = useCallback((cfg) => {
+    setTk({ ...cfg, expectedText: cfg.targetId });
+  }, []);
+
+  /**
+   * Submit the two-key confirm: client-side precheck of the id, then
+   * reauthenticate with the admin's OWN password (mints a fresh password amr on
+   * the session — NEVER call the edge fn if reauth fails), then run the action
+   * with confirm:{ typedTargetId }. The fresh session carries the fresh amr the
+   * server requires.
+   */
+  const submitTwoKey = useCallback(async ({ typedText, parsedValue, config }) => {
+    const body = config.buildBody(typedText, parsedValue);
+    setTk(null);
+    await runAction(body, config.successMsg);
+  }, [runAction]);
+
   return (
     // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
     // <Section>, which already supplies the card frame + the "User Search &
@@ -218,11 +246,30 @@ export default function AdminUsersPanel() {
         onConfirm={(value) => { const p = prompt; setPrompt(null); p?.onSubmit?.(value); }}
       />
 
+      <AdminTwoKeyDialog
+        config={tk}
+        onCancel={() => setTk(null)}
+        onConfirmed={submitTwoKey}
+      />
+
+      <AdminDirectMessageDialog
+        open={directMessageOpen}
+        recipientLabel={selected?.display_name || selected?.email_masked || 'selected user'}
+        onCancel={() => setDirectMessageOpen(false)}
+        onSend={async (message) => {
+          setDirectMessageOpen(false);
+          await runAction(
+            { action: 'send_operator_message', userId: id, ...message },
+            'Notice added to Account Messages; email delivery was attempted where eligible.',
+          );
+        }}
+      />
+
       {/* Search */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-        background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        background: swatch.white, border: `1px solid ${BORDER}`,
       }}>
         <input
           type="text" aria-label="Search users by id, email, or name"
@@ -247,7 +294,7 @@ export default function AdminUsersPanel() {
       {/* Results list */}
       {results.length > 0 && (
         <div role="table" aria-label="Search results"
-          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}` }}>
           <div role="row" style={{
             display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
             background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
@@ -279,7 +326,7 @@ export default function AdminUsersPanel() {
 
       {/* Selected user — REDACTED summary */}
       {selected && (
-        <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.lg, background: swatch.white }}>
+        <div style={{ border: `1px solid ${BORDER}`, padding: SP.lg, background: swatch.white }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.md }}>
             <div>
               <h4 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, color: INK }}>
@@ -324,7 +371,7 @@ export default function AdminUsersPanel() {
             <div aria-label="Billing summary" style={{
               display: 'flex', flexWrap: 'wrap', gap: SP.lg, alignItems: 'center',
               padding: SP.md, marginBottom: SP.md,
-              background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
+              background: CARD_HDR, border: `1px solid ${BORDER2}`,
             }}>
               <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Billing
@@ -339,19 +386,13 @@ export default function AdminUsersPanel() {
           {/* Action set */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
             <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => ask(
-                { title: 'Send email to user', label: 'Message', confirmLabel: 'Send' },
-                (body) => runAction(
-                  { action: 'send_user_email', userId: id, emailPayload: { subject: 'A message from SettlementForge', body } },
-                  'Email sent (if configured).',
-                ),
-              )}>Send email</Button>
+              onClick={() => setDirectMessageOpen(true)}>Send notice</Button>
 
             <Button variant="warning" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Issue warning', label: 'Warning reason', confirmLabel: 'Issue' },
                 (reason) => runAction(
-                  { action: 'issue_warning', userId: id, severity: 'minor', reason, metadata: { notify: true } },
+                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
                   'Warning issued.',
                 ),
               )}>Issue warning</Button>
@@ -366,31 +407,37 @@ export default function AdminUsersPanel() {
               )}>Add note</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => ask(
-                { title: 'Grant / refund credits', body: 'Positive grants, negative refunds (e.g. 50 or -10).', label: 'Credits delta', confirmLabel: 'Apply' },
-                (raw) => {
-                  const delta = parseInt(raw, 10);
-                  if (Number.isFinite(delta) && delta !== 0) runAction(
-                    { action: 'grant_credits', userId: id, credits: delta, reason: 'admin adjustment' },
-                    'Credits adjusted.',
-                  );
-                },
-              )}>Grant / refund</Button>
+              onClick={() => openTwoKey({
+                title: 'Grant / refund credits',
+                body: 'Changes a paid entitlement. Retype the account id and your password to confirm.',
+                targetId: id,
+                valueLabel: 'Credits delta (positive grants, negative refunds, e.g. 50 or -10)',
+                valueHint: 'Enter a non-zero whole number.',
+                parseValue: (raw) => { const d = parseInt(raw, 10); return Number.isFinite(d) && d !== 0 ? d : null; },
+                buildBody: (typedTargetId, delta) => ({ action: 'grant_credits', userId: id, credits: delta, reason: 'admin adjustment', confirm: { typedTargetId } }),
+                successMsg: 'Credits adjusted.',
+              })}>Grant / refund</Button>
 
             <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
               Review billing</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => runAction(
-                { action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action' },
-                selected.disabled ? 'Account enabled.' : 'Account disabled.',
-              )}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
+              onClick={() => openTwoKey({
+                title: selected.disabled ? 'Enable account' : 'Disable account',
+                body: `${selected.disabled ? 'Re-enables' : 'Disables'} this account. Retype the account id and your password to confirm.`,
+                targetId: id,
+                buildBody: (typedTargetId) => ({ action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action', confirm: { typedTargetId } }),
+                successMsg: selected.disabled ? 'Account enabled.' : 'Account disabled.',
+              })}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
 
             <Button variant="danger" size="sm" disabled={busy}
-              onClick={() => runAction(
-                { action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', metadata: { notify: !selected.banned } },
-                selected.banned ? 'Account unbanned.' : 'Account banned.',
-              )}>{selected.banned ? 'Unban' : 'Ban'}</Button>
+              onClick={() => openTwoKey({
+                title: selected.banned ? 'Unban account' : 'Ban account',
+                body: `${selected.banned ? 'Lifts the ban on' : 'Bans'} this account. Retype the account id and your password to confirm.`,
+                targetId: id,
+                buildBody: (typedTargetId) => ({ action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', confirm: { typedTargetId } }),
+                successMsg: selected.banned ? 'Account unbanned.' : 'Account banned.',
+              })}>{selected.banned ? 'Unban' : 'Ban'}</Button>
 
             <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
               Export bundle</Button>
@@ -402,9 +449,9 @@ export default function AdminUsersPanel() {
               )}>Full debug copy</Button>
           </div>
 
-          {/* Per-settlement moderation (id-driven; soft-delete-first) */}
+          {/* Settlement moderation (id-driven; soft-delete-first, reversible) */}
           <div style={{ marginTop: SP.md, paddingTop: SP.md, borderTop: `1px solid ${BORDER2}`, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Content moderation (by settlement id):</span>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Settlement moderation (by settlement id):</span>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Soft-delete settlement', body: 'Reversible: hides and unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
@@ -429,6 +476,88 @@ export default function AdminUsersPanel() {
                   'Share link revoked (reversible).',
                 ),
               )}>Revoke share link</Button>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Ban settlement', body: 'Reversible: unpublishes and blocks re-publishing until unbanned.', label: 'Settlement id', confirmLabel: 'Ban' },
+                (sid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'settlement', settlementId: sid, banned: true, reason: 'moderation' },
+                  'Settlement banned (blocks re-publish).',
+                ),
+              )}>Ban settlement</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Unban settlement', body: 'Reversible: lifts the moderation ban so the owner may re-publish.', label: 'Settlement id', confirmLabel: 'Unban' },
+                (sid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'settlement', settlementId: sid, banned: false, reason: 'moderation' },
+                  'Settlement ban lifted.',
+                ),
+              )}>Unban settlement</Button>
+          </div>
+
+          {/* Map / campaign moderation (a shared campaign is a saved_maps row) */}
+          <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Map / campaign moderation (by map id):</span>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Soft-delete map', body: 'Reversible: hides and unpublishes the map or campaign.', label: 'Map id', confirmLabel: 'Soft-delete' },
+                (mid) => runAction(
+                  { action: 'soft_delete_map', mapId: mid, reason: 'moderation' },
+                  'Map soft-deleted (reversible).',
+                ),
+              )}>Soft-delete map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Restore map', body: 'Reversible: clears the moderation soft-delete flag.', label: 'Map id', confirmLabel: 'Restore' },
+                (mid) => runAction(
+                  { action: 'soft_delete_map', mapId: mid, enabled: true, reason: 'moderation' },
+                  'Map restored.',
+                ),
+              )}>Restore map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Set map private', body: 'Reversible: unpublishes the map or campaign without deleting it.', label: 'Map id', confirmLabel: 'Set private' },
+                (mid) => runAction(
+                  { action: 'remove_gallery_map', mapId: mid, reason: 'moderation' },
+                  'Map set private (reversible).',
+                ),
+              )}>Set map private</Button>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Ban map', body: 'Reversible: unpublishes and blocks re-publishing until unbanned.', label: 'Map id', confirmLabel: 'Ban' },
+                (mid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'map', mapId: mid, banned: true, reason: 'moderation' },
+                  'Map banned (blocks re-publish).',
+                ),
+              )}>Ban map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Unban map', body: 'Reversible: lifts the moderation ban so the owner may re-publish.', label: 'Map id', confirmLabel: 'Unban' },
+                (mid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'map', mapId: mid, banned: false, reason: 'moderation' },
+                  'Map ban lifted.',
+                ),
+              )}>Unban map</Button>
+          </div>
+
+          {/* Comment moderation (hidden comments render as an in-place tombstone) */}
+          <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Comment moderation (by comment id):</span>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Remove comment', body: 'Reversible: the comment shows as a moderation tombstone in the thread.', label: 'Comment id', confirmLabel: 'Remove' },
+                (cid) => runAction(
+                  { action: 'moderate_comment', commentId: cid, reason: 'moderation' },
+                  'Comment removed (shows a tombstone).',
+                ),
+              )}>Remove comment</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Restore comment', body: 'Reversible: clears the moderation removal and restores the comment.', label: 'Comment id', confirmLabel: 'Restore' },
+                (cid) => runAction(
+                  { action: 'moderate_comment', commentId: cid, enabled: true, reason: 'moderation' },
+                  'Comment restored.',
+                ),
+              )}>Restore comment</Button>
           </div>
         </div>
       )}

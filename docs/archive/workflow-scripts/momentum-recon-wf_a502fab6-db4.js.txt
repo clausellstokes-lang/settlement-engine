@@ -1,0 +1,48 @@
+export const meta = {
+  name: 'momentum-recon',
+  description: 'Ground W-MOMENTUM: census every belief-consuming decision seam, the NPC temperament/flaw substrate, and the commitment-relevant state',
+  phases: [{ title: 'Recon', detail: '3 parallel surveyor reads' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  properties: {
+    report: { type: 'string', description: 'The full recon report in complete sentences, organized by the numbered questions' },
+    citations: { type: 'array', items: { type: 'string' }, description: 'file:line references for every load-bearing claim' },
+  },
+  required: ['report', 'citations'],
+}
+
+phase('Recon')
+const [seams, npc, commitment] = await parallel([
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine (deterministic D&D settlement/world simulator). Do not edit anything. Mission: census EVERY belief-consuming DECISION seam in the tick engine — the places where an actor reads beliefs (or belief-derived reads) and chooses a course of action. A momentum wave will add a commitment-stock/reconsideration-threshold layer at these seams. Answer with file:line citations:
+1. STRATEGY: the settlement strategy EV (settlementStrategy.js, campaignPlans, warDeployment) — where does it read BELIEVED (not ground-truth) facts, and where does a chosen course get RE-EVALUATED or ABANDONED (withdrawal/recall paths, plan expiry)? Is backing out of a war-preparation/deployment currently free (no cost term)?
+2. WAR/PEACE: where do war initiation, sue-for-peace, and treaty decisions consume beliefs (the Blainey convergence, believed strengths, warReasons/peaceReasons EV)? Where would a commitment stock naturally deposit (casus declaration, muster, blockade/intervention orders) — enumerate the PUBLIC acts the rumor machinery already treats as loud facts.
+3. DOCTRINE: supplyWebWarfare instrument choices, corruptionWeb asset decisions, informationStatecraft SEE/HIDE/LIE choices, generosityEV give/withhold — which of these are per-tick re-evaluations (memoryless) vs course-holding (any dwell/hysteresis/cooldown state that already exists per decision)?
+4. POLITICS: bloc formation/defection/dissolution decisions (settlementPolitics) — what state holds a bloc to its course today (glue types, hysteresis), and where would a bloc-level reconsideration threshold hook?
+5. THE COMMON SHAPE: is there ONE chokepoint where courses-of-action are chosen/held (a shared EV idiom, a candidate lane), or are these N independent seams? If N, enumerate them exhaustively — the wave must thread each or scope explicitly.
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:decision-seams', phase: 'Recon', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Mission: map the NPC TEMPERAMENT/FLAW substrate so per-NPC reconsideration thresholds can derive from it (owner ruling: "at the NPC level, this threshold has to correlate with temperment and flaws appropriately"). Answer with citations:
+1. THE TRAIT MODEL: what does a generated NPC carry — traits, flaws, ideals, bonds, archetypes, alignment? Exact fields + vocabularies (npcProfile, npcGenerator, npcData/npcTraitWeights — note TRAIT_ALIGNMENT/TRAIT_AGGRESSION exist as data). Which fields are GENERATED-AND-PERSISTED vs derived?
+2. MECHANICAL CONSUMPTION TODAY: where do NPC traits/flaws already feed engine math (npcAgency, npcStates, the politics NPC dimension — leader ties, bloc goals, defection points; corruption conscience reads)? Enumerate every existing trait→number mapping — the wave should extend the established mapping idiom, not invent one.
+3. THE §G BOUNDARY in practice: how do NPC modulators stay bounded (the modulator + receipt shape)? Where do NPC-level streams aggregate into settlement/bloc-level decisions?
+4. TEMPERAMENT→THRESHOLD MAPPING RAW MATERIAL: which existing trait/flaw vocabulary terms map naturally to pride/stubbornness/humility/pragmatism/caution? List the actual vocabulary strings so a bounded mapping table can be authored against real data, and note the facet-law hook for custom NPCs (facetOf chokepoint; declared temperament facets).
+5. SUCCESSION: where does leadership change hands (succession machinery) and where is the leader NPC linked to the settlement's decisions — the seam where a new ruler's temperament would shift the crown's momentum.
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:npc-temperament', phase: 'Recon', schema: SCHEMA }),
+
+  () => agent(`You are a READ-ONLY surveyor in the SettlementForge repo at /Users/cstokes/Desktop/settlement-engine. Do not edit anything. Mission: map the COMMITMENT-RELEVANT state a momentum wave composes with. Answer with citations:
+1. LEGITIMACY: the publicLegitimacy machinery — shape, writers, readers; how a legitimacy hit is applied (the generosityKernel legitimacyDeltas idiom); does anything today price a POLICY REVERSAL?
+2. CREDIBILITY: the informationStatecraft credibility stock — shape, spend/earn paths, the fracture.credibilityHit seam (recorded-not-enforced?) — the natural climb-down price.
+3. INCITEMENT/SENTIMENT: warSentimentAdj's derivation (what feeds it), war exhaustion, and any state recording that a power PREPARED or AGITATED for war before declaring (musters? propaganda? campaignPlans stages?) — the deposit sites for a commitment stock.
+4. BELIEF UPDATING: the exact seam where beliefs update on new evidence (corroboration math in the belief/rumor machinery) — where a bounded, course-scoped counter-evidence discount hook would live, and what keeps it from corrupting global beliefs.
+5. FACE-SAVING OFF-RAMPS: the peace-term catalog + sue-for-peace paths — which terms could serve as a cheap declared-victory exit; and the E0 drama-class registry (does a course-reversal/climb-down event need a new class or ride an existing one)?
+6. LEDGER HOME: where should per-actor-per-course commitment state live — an existing ledger (campaignPlans? warReasons?) vs a new conditional ledger; cite the precedent shapes (drop-when-empty, dormancy).
+Your final text is structured output consumed by the coordinator; be complete and factual.`, { label: 'recon:commitment-state', phase: 'Recon', schema: SCHEMA }),
+])
+
+return {
+  seams: seams || null,
+  npc: npc || null,
+  commitment: commitment || null,
+}

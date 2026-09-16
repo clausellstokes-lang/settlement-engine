@@ -236,6 +236,37 @@ describe('computeRoadEdges — supply-chain membership index', () => {
     expect(trade.reason).toBe('chain:iron,grain');
   });
 
+  test('custom-only native-key spelling cannot mint a trade road', () => {
+    const producer = chainSettlement('A', ['iron_ore'], []);
+    producer.settlement.config.nearbyResourcesNative = [];
+    producer.settlement.config.nearbyResourcesCustom = ['iron_ore'];
+    const consumer = chainSettlement('B', [], ['smithy']);
+    const saves = [producer, consumer];
+    const placements = Object.fromEntries([
+      placement('b0', 0, 0, 'A'),
+      placement('b1', 5, 5, 'B'),
+    ]);
+    const chainRoads = currentSaves => computeRoadEdges(
+      currentSaves,
+      placements,
+    ).filter(edge => edge.reason?.startsWith('chain:'));
+
+    expect(chainRoads(saves)).toEqual([]);
+
+    const dualOwner = {
+      ...producer,
+      settlement: {
+        ...producer.settlement,
+        config: {
+          ...producer.settlement.config,
+          nearbyResourcesNative: ['iron_ore'],
+        },
+      },
+    };
+    expect(chainRoads([dualOwner, consumer]))
+      .toContainEqual(expect.objectContaining({ reason: 'chain:iron' }));
+  });
+
   test('supply-chain edges are deterministic across runs', () => {
     const saves = [
       chainSettlement('A', ['iron_ore'], ['bakery']),

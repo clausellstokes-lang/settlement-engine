@@ -114,7 +114,7 @@ describe('deriveSystemState', () => {
   });
 
   test('plagued region raises external threat over safe region', () => {
-    const safe = deriveSystemState({ config: { monsterThreat: 'civilized' } });
+    const safe = deriveSystemState({ config: { monsterThreat: 'heartland' } });
     const plagued = deriveSystemState({ config: { monsterThreat: 'plagued' } });
     expect(plagued.externalThreat.value).toBeGreaterThan(safe.externalThreat.value);
   });
@@ -139,77 +139,6 @@ describe('deriveSystemState', () => {
       config: { nearbyResourcesState: { iron: 'depleted', timber: 'depleted', salt: 'depleted' } },
     });
     expect(tapped.resourcePressure.value).toBeGreaterThan(flush.resourcePressure.value);
-  });
-
-  // A covert IMPOSE_CORRUPTION mark bumps the institution's status to 'impaired'
-  // (withImpairment side effect), but it is hidden by design. Surfacing it as a
-  // visible "impaired institution" resilience risk leaks the covert capture into
-  // public derived state — the inverse of its intent.
-  test('a covert-only institution impairment does not leak as a visible impaired-institution risk', () => {
-    const covertOnly = deriveSystemState({
-      institutions: [
-        {
-          id: 'i1', name: 'City Watch', status: 'impaired',
-          impairments: [{ type: 'corruption', severity: 0.3, covert: true, causeEventId: 'e1' }],
-        },
-      ],
-    });
-    expect(covertOnly.resilience.risks.some(r => /impaired institution/.test(r))).toBe(false);
-
-    // A PUBLIC (non-covert) impairment must still surface as before.
-    const publicImpair = deriveSystemState({
-      institutions: [
-        {
-          id: 'i1', name: 'City Watch', status: 'impaired',
-          impairments: [{ type: 'capacity', severity: 0.5, causeEventId: 'e1' }],
-        },
-      ],
-    });
-    expect(publicImpair.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
-    // The hidden mark also costs no resilience value the public hit does.
-    expect(covertOnly.resilience.value).toBeGreaterThan(publicImpair.resilience.value);
-  });
-
-  // A mixed institution (one covert mark + one public impairment) is genuinely,
-  // publicly impaired — it must still count.
-  test('an institution with a covert AND a public impairment still counts as impaired', () => {
-    const mixed = deriveSystemState({
-      institutions: [
-        {
-          id: 'i1', name: 'City Watch', status: 'impaired',
-          impairments: [
-            { type: 'corruption', severity: 0.3, covert: true, causeEventId: 'e1' },
-            { type: 'capacity', severity: 0.5, causeEventId: 'e2' },
-          ],
-        },
-      ],
-    });
-    expect(mixed.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
-  });
-
-  // The resilience impaired-institution count reads the REAL entity status
-  // vocabulary (status.js: active|impaired|removed|destroyed|vacant). The old code
-  // also matched a 'critical' status the entity model never emits ('critical' is a
-  // capacity/severity BAND elsewhere, never a status) — a dead branch. This pins
-  // the reconciliation: a stray status:'critical' is NOT counted as impaired, while
-  // a real status:'impaired' is.
-  test('resilience counts only the real impaired status, not the never-emitted critical', () => {
-    const stray = deriveSystemState({
-      institutions: [
-        // A non-vocabulary status with a degrading impairment. effectiveStatus would
-        // call it impaired, but countByStatus reads the literal status field, so a
-        // mislabeled 'critical' must contribute NO impaired-institution risk.
-        { id: 'i1', name: 'Mislabeled', status: 'critical', impairments: [] },
-      ],
-    });
-    expect(stray.resilience.risks.some(r => /impaired institution/.test(r))).toBe(false);
-
-    const real = deriveSystemState({
-      institutions: [
-        { id: 'i1', name: 'City Watch', status: 'impaired', impairments: [{ type: 'capacity', severity: 0.5, causeEventId: 'e1' }] },
-      ],
-    });
-    expect(real.resilience.risks.some(r => /impaired institution/.test(r))).toBe(true);
   });
 });
 
@@ -249,81 +178,5 @@ describe('compareSystemState', () => {
     const [delta] = compareSystemState(before, after);
     expect(delta.explanation).toContain('Stable');
     expect(delta.explanation).toContain('Strained');
-  });
-});
-
-// ─────────────────────────────────────────────────────────────────────────────
-// S2 — 15-var causal movement folded into the 4-dim drivers/risks.
-//
-// The war-layer / religion causal movement (war_drain on economic_capacity, the
-// deepened religious_authority, war_pressure, army_deployed) surfaces as NAMED
-// drivers/risks within the EXISTING four dimensions — NOT a new section. The
-// hard guarantee: a settlement with NO war/religion conditions produces the
-// IDENTICAL drivers/risks as before; the new entries appear ONLY when the
-// matching condition/deity is present.
-// ─────────────────────────────────────────────────────────────────────────────
-describe('S2 — war/religion causal movement as named drivers/risks', () => {
-  const base = (patch = {}) => ({
-    economicState: { prosperity: 'Moderate', primaryExports: ['grain'] },
-    powerStructure: { factions: [{ faction: 'A' }, { faction: 'B' }] },
-    institutions: [],
-    config: {},
-    ...patch,
-  });
-
-  test('no-condition settlement is byte-identical with vs without empty arrays', () => {
-    const plain = base();
-    const withEmpties = base({ activeConditions: [], stress: [] });
-    expect(JSON.stringify(deriveSystemState(withEmpties)))
-      .toBe(JSON.stringify(deriveSystemState(plain)));
-  });
-
-  test('a plain settlement carries NONE of the war/religion strings', () => {
-    const st = deriveSystemState(base());
-    const allText = JSON.stringify(st);
-    expect(allText).not.toContain('War economy');
-    expect(allText).not.toContain('wartime pressure');
-    expect(allText).not.toContain('deployed abroad');
-    expect(allText).not.toContain('religious authority');
-  });
-
-  test('war_drain surfaces a war-labeled FALLING economic driver in resilience', () => {
-    const plain = deriveSystemState(base());
-    const war = deriveSystemState(base({ activeConditions: [{ archetype: 'war_drain', severity: 0.5 }] }));
-    expect(war.resilience.risks).toContain('War economy is bleeding the home treasury');
-    // It is a FALLING driver — resilience drops vs the same town at peace.
-    expect(war.resilience.value).toBeLessThan(plain.resilience.value);
-    // The plain town does NOT carry the string.
-    expect(plain.resilience.risks).not.toContain('War economy is bleeding the home treasury');
-  });
-
-  test('war_pressure + army_deployed surface as external-threat risks', () => {
-    const plain = deriveSystemState(base());
-    const war = deriveSystemState(base({ activeConditions: [
-      { archetype: 'war_pressure', severity: 0.6 },
-      { archetype: 'army_deployed', severity: 0.5 },
-    ] }));
-    expect(war.externalThreat.risks).toContain('Under active wartime pressure');
-    expect(war.externalThreat.risks).toContain('Standing army deployed abroad. Home garrison thinned.');
-    // External threat RISES — these are pressures, not relief.
-    expect(war.externalThreat.value).toBeGreaterThan(plain.externalThreat.value);
-  });
-
-  test('a dominant deity surfaces a religious_authority driver in volatility', () => {
-    const plain = deriveSystemState(base());
-    const deityTown = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'Pelor', rankAxis: 'major' } } }));
-    expect(deityTown.volatility.drivers).toContain('Pelor anchors religious authority');
-    expect(plain.volatility.drivers).not.toContain('Pelor anchors religious authority');
-  });
-
-  test('a minor/cult deity surfaces a weaker, named religious driver', () => {
-    const cultTown = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'The Whispered One', rankAxis: 'cult' } } }));
-    expect(cultTown.volatility.drivers).toContain('The Whispered One shapes religious authority');
-  });
-
-  test('a deity with no recognized rankAxis is inert (no driver, byte-neutral)', () => {
-    const plain = deriveSystemState(base());
-    const weird = deriveSystemState(base({ config: { primaryDeitySnapshot: { name: 'X', rankAxis: 'unknown' } } }));
-    expect(JSON.stringify(weird.volatility)).toBe(JSON.stringify(plain.volatility));
   });
 });

@@ -2,10 +2,10 @@
  * tests/lib/institutionTags.test.js — P2.1 foundation.
  *
  * institutionTags / institutionHasTag must reliably resolve an institution's
- * canonical tags from EITHER its declared `tags` OR a name-keyword backfill —
- * including custom/legacy institutions that carry no tags at all. This is the
- * prerequisite that lets the scattered `name.includes(...)` mechanics migrate to
- * tag dispatch without silently breaking when a tag is absent.
+ * canonical native/legacy tags from EITHER declared `tags` OR a name-keyword
+ * backfill. Current custom names and tags are presentation-only and must stop at
+ * provenance. This is the prerequisite that lets scattered `name.includes(...)`
+ * mechanics migrate to tag dispatch without silently breaking legacy rows.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -28,11 +28,27 @@ describe('institutionTags — declared ∪ keyword backfill', () => {
     expect(institutionTags({ name: 'Mage College' })).toContain(TAG.ARCANE);
   });
 
-  it('resolves a CUSTOM institution with a weird name + no tags', () => {
-    // The exact case name-matching handles poorly and tag-only dispatch misses.
-    const custom = { name: 'The Drowned Sentinel Barracks', isCustom: true };
-    expect(institutionHasTag(custom, TAG.MILITARY)).toBe(true);
-    expect(institutionHasTag(custom, TAG.SECURITY)).toBe(true);
+  it('keeps current custom presentation names and tags out of native mechanics', () => {
+    const custom = {
+      name: 'The Drowned Sentinel Barracks',
+      tags: [TAG.MILITARY, TAG.SECURITY],
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:drowned-sentinel',
+    };
+
+    expect(institutionTags(custom)).toEqual([]);
+    expect(institutionHasTag(custom, TAG.MILITARY)).toBe(false);
+    expect(institutionHasTag(custom, TAG.SECURITY)).toBe(false);
+    // Presentation callers can still inspect the author-entered tags directly.
+    expect(tagsOf(custom)).toEqual([TAG.MILITARY, TAG.SECURITY]);
+  });
+
+  it('retains keyword fallback for provenance-free legacy rows', () => {
+    const legacy = { name: 'The Drowned Sentinel Barracks' };
+    expect(institutionHasTag(legacy, TAG.MILITARY)).toBe(true);
+    expect(institutionHasTag(legacy, TAG.SECURITY)).toBe(true);
   });
 
   it('does not invent tags for an unrecognizable name', () => {

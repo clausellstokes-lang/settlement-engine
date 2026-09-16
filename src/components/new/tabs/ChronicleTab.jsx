@@ -11,17 +11,29 @@
  * tested domain/dossier/chronicleFeed helper; this is presentation only.
  */
 import { Section, Empty } from '../Primitives';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS } from '../../theme.js';
+import { INK as OINK } from '../../../design/organic/ink.js';
+import { RUBRIC } from '../../../design/organic/rubrication.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { AddressChain, AffectedSettlements } from '../../map/AddressChain.jsx';
 
-const PARTY = swatch['#8A2F4A'];
-const PARTY_BG = swatch['#F7EBF0'];
-const SRC_EDIT = swatch['#7A5A2A'];
-const SRC_EDIT_BG = swatch['#F5ECD8'];
-const ROW_BORDER = swatch['#C8D0E8'];
+// The Chronicle reads as ANNALS (Deep Craft — the dossier's register voice): a
+// ruled chronological column on parchment, not cool rounded cards. Each entry's
+// SOURCE is a left margin rule + a small-caps stamp in its own tone — the party's
+// hand in the apparatus oxblood, a change you authored in the gold entry mark, the
+// wider world in the neutral sepia ink. All three are the organic ramp's
+// contrast-pinned steps (tests/design/contrast.test.js), so the register is AA on
+// every parchment ground with no new tint to prove.
+const PARTY = RUBRIC.rubric;    // the party's hand — apparatus oxblood
+const SRC_EDIT = RUBRIC.entry;  // a change you authored — the gold entry mark
+const WORLD = OINK.secondary;   // the wider world — neutral sepia ink
+const RULE = OINK.hairline;     // the feint annal ruling (decorative)
 
-function chip(color, bg) {
-  return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800, textTransform: 'uppercase' };
+// A source stamp: small-caps in the source's tone inside a square hairline tag —
+// no rounded card chrome. Colour is never the sole channel; the stamp text
+// (Party / Edit / World) and the row title both carry the source.
+function stamp(color) {
+  return { fontSize: FS.micro, color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' };
 }
 
 /**
@@ -52,23 +64,57 @@ export default function ChronicleTab({ entries = [] }) {
       <Section title={`Chronicle (${entries.length})`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {entries.map((event, i) => {
-            const accent = event.source === 'party' ? PARTY : event.source === 'manual' ? SRC_EDIT : swatch.info;
+            const accent = event.source === 'party' ? PARTY : event.source === 'manual' ? SRC_EDIT : WORLD;
             return (
-              <div key={event.id || i} id={chronicleAnchor(event)} style={{ border: `1px solid ${ROW_BORDER}`, borderLeft: `3px solid ${accent}`, borderRadius: 7, background: swatch['#F4F6FD'], padding: '10px 12px' }}>
+              <div key={event.id || i} id={chronicleAnchor(event)} style={{ borderLeft: `3px solid ${accent}`, borderBottom: `1px solid ${RULE}`, padding: '10px 12px' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: event.summary ? 4 : 0 }}>
                   {event.relativeLabel && (
-                    <span style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
+                    <span style={{ fontSize: FS.micro, fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
                   )}
                   <span style={{ fontSize: FS.xs, fontWeight: 800, color: accent, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     {String(event.title || 'Event').replace(/_/g, ' ')}
                   </span>
                   {event.partyCaused
-                    ? <span title="Caused by the party" style={chip(PARTY, PARTY_BG)}>Party</span>
+                    ? <span title="Caused by the party" style={stamp(PARTY)}>Party</span>
                     : event.source === 'manual'
-                      ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>Edit</span>
-                      : <span title="Driven by the wider world" style={chip(swatch.info, swatch['#F4F6FD'])}>World</span>}
+                      ? <span title="A change you authored" style={stamp(SRC_EDIT)}>Edit</span>
+                      : <span title="Driven by the wider world" style={stamp(WORLD)}>World</span>}
                 </div>
-                {event.summary && <p style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
+                {event.summary && <p style={{ fontSize: FS.sm, color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
+                {/* THE NEWS ADDRESS LAW (2026-07-22): a world entry states, beside its
+                    verbatim headline (subject + action), the subject's LINKED address
+                    chain (settlement › power › faction › npc — INSPECTOR-ADDRESS-WEB
+                    follow-on), the AFFECTED SETTLEMENTS by name (now LINKED) and the
+                    recorded REASON. Only rendered when the address block carries one,
+                    so manual/party/recent rows are unchanged. Levels the record does
+                    not identify are dropped — never fabricated. */}
+                {event.address?.subject && (
+                  <div style={{ marginTop: 5 }}>
+                    <AddressChain descriptor={event.address.subject} />
+                  </div>
+                )}
+                {event.address && (
+                  (Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0) ||
+                  (Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0) ||
+                  event.address.reason
+                ) && (
+                  <div style={{ marginTop: 5, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    {Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0 ? (
+                      <AffectedSettlements ids={event.address.affectedSettlementIds} />
+                    ) : Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 ? (
+                      <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
+                        <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Affects </span>
+                        {event.address.affectedSettlements.join(', ')}
+                      </div>
+                    ) : null}
+                    {event.address.reason && (
+                      <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
+                        <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Because </span>
+                        {String(event.address.reason).replace(/_/g, ' ')}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             );
           })}

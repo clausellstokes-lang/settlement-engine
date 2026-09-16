@@ -1,8 +1,9 @@
 /**
  * domain/qualitativeBands.js — Unified band accessor + display labels.
  *
- * The substrate, capacities, conditions, threats, and chain
- * states all use canonical bands internally. This module
+ * Tier 5.4 of the roadmap. The substrate (Phase 17), capacities
+ * (Phase 21), conditions (Phase 16), threats (Phase 20), and chain
+ * states (Phase 10) all use canonical bands internally. Tier 5.4
  * exposes a single accessor consumers can use to read the band for
  * any reference, plus a display-label mapping so UI surfaces show
  * "Legitimacy: Contested" instead of "public_legitimacy: 37".
@@ -11,8 +12,9 @@
  *   displayBandLabel(domain, band) -> string
  *   displayValueFor(ref, settlement) -> string  ("Contested" not 37)
  *
- * Pure read-only. Composes causalState, capacities, supply chains,
- * conditions, threats, and districts.
+ * Pure read-only. Composes Phase 17 causalState, Phase 21 capacities,
+ * Phase 10 supply chains, Phase 16 conditions, Phase 20 threats,
+ * Phase 29 districts.
  */
 
 import { deriveCausalState, SYSTEM_VARIABLES } from './causalState.js';
@@ -29,8 +31,9 @@ import { deriveAllDistricts } from './districtProfile.js';
 // canonical; consumers can opt into the display labels for user-facing
 // surfaces.
 
+/** @type {Readonly<Record<string, Readonly<Record<string, string>>>>} */
 const DISPLAY_LABELS = Object.freeze({
-  // substrate / capacities share the same 5-band
+  // Phase 17 substrate / Phase 21 capacities share the same 5-band
   // vocabulary. The roadmap example "Legitimacy: Contested" implies
   // a band-name remap for user-facing display; the table below picks
   // labels that read well across substrate variables and capacities.
@@ -48,7 +51,7 @@ const DISPLAY_LABELS = Object.freeze({
     critical:  'Overwhelmed',
     collapsed: 'Collapsed',
   },
-  // supply chain statuses.
+  // Phase 10 supply chain statuses.
   chain: {
     stable:      'Stable',
     strained:    'Strained',
@@ -58,21 +61,21 @@ const DISPLAY_LABELS = Object.freeze({
     substituted: 'Substituted',
     collapsing:  'Collapsing',
   },
-  // condition severity bands.
+  // Phase 16 condition severity bands.
   condition: {
     low:      'Minor',
     medium:   'Notable',
     high:     'Severe',
     critical: 'Critical',
   },
-  // threat severity bands.
+  // Phase 20 threat severity bands.
   threat: {
     low:      'Distant',
     medium:   'Present',
     high:     'Acute',
     critical: 'Imminent',
   },
-  // district wealth.
+  // Phase 29 district wealth.
   district_wealth: {
     destitute:   'Destitute',
     poor:        'Poor',
@@ -81,7 +84,7 @@ const DISPLAY_LABELS = Object.freeze({
     wealthy:     'Wealthy',
     opulent:     'Opulent',
   },
-  // district safety.
+  // Phase 29 district safety.
   district_safety: {
     lawless:    'Lawless',
     unsafe:     'Unsafe',
@@ -103,14 +106,22 @@ const DISPLAY_LABELS = Object.freeze({
  * @returns {string}
  */
 export function displayBandLabel(domain, band) {
-  const map = /** @type {Record<string, Record<string, string>>} */ (DISPLAY_LABELS)[domain];
+  const map = DISPLAY_LABELS[domain];
   if (!map || typeof band !== 'string') return band || '';
   return map[band] || band;
 }
 
 // ── Reference parsing ───────────────────────────────────────────────────
 
-/** @param {any} ref */
+/**
+ * A band reference — bare id string or `{ id, domain }` object.
+ * @typedef {string | { id?: string | null, domain?: string }} BandRef
+ */
+
+/**
+ * @param {BandRef | null | undefined} ref
+ * @returns {{ id?: string | null, domain?: string }}
+ */
 function parseRef(ref) {
   if (typeof ref === 'string') return { id: ref };
   if (ref && typeof ref === 'object') return ref;
@@ -128,8 +139,8 @@ function parseRef(ref) {
  *   - 'threat.<id>' (severity band)
  *   - 'district.<id>' with { domain: 'wealth' | 'safety' } modifier
  *
- * @param {string | {id: string, domain?: string}} ref
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {BandRef} ref
+ * @param {import('./settlement.schema.js').CanonicalSettlement | null | undefined} settlement
  * @returns {string | null}
  */
 export function bandFor(ref, settlement) {
@@ -141,45 +152,45 @@ export function bandFor(ref, settlement) {
   if (id.startsWith('var.')) {
     const name = id.slice('var.'.length);
     if (!SYSTEM_VARIABLES.includes(name)) return null;
-    return deriveCausalState(settlement).bands?.[name] || null;
+    return /** @type {{bands?: Record<string, string>}} */ (deriveCausalState(settlement)).bands?.[name] || null;
   }
   if (SYSTEM_VARIABLES.includes(id)) {
-    return deriveCausalState(settlement).bands?.[id] || null;
+    return /** @type {{bands?: Record<string, string>}} */ (deriveCausalState(settlement)).bands?.[id] || null;
   }
 
   // Capacity
   if (id.startsWith('capacity.')) {
     const name = id.slice('capacity.'.length);
-    if (!CAPACITY_NAMES.includes(name)) return null;
-    const p = /** @type {any} */ (deriveCapacityProfile(name, settlement));
+    if (!/** @type {readonly string[]} */ (CAPACITY_NAMES).includes(name)) return null;
+    const p = /** @type {{band?: string} | null} */ (deriveCapacityProfile(/** @type {import('./capacityModel.js').CapacityName} */ (name), settlement));
     return p?.band || null;
   }
-  if (CAPACITY_NAMES.includes(id)) {
-    const p = /** @type {any} */ (deriveCapacityProfile(id, settlement));
+  if (/** @type {readonly string[]} */ (CAPACITY_NAMES).includes(id)) {
+    const p = /** @type {{band?: string} | null} */ (deriveCapacityProfile(/** @type {import('./capacityModel.js').CapacityName} */ (id), settlement));
     return p?.band || null;
   }
 
   // Chain
   if (id.startsWith('chain.')) {
-    const c = deriveAllSupplyChainStates(settlement).find((/** @type {any} */ x) => x.id === id);
+    const c = deriveAllSupplyChainStates(settlement).find(x => x.id === id);
     return c?.status || null;
   }
 
   // Condition
   if (id.startsWith('condition.')) {
-    const c = findActiveCondition(settlement, id);
+    const c = /** @type {import('./settlement.schema.js').ActiveCondition | null} */ (findActiveCondition(settlement, id));
     return c?.severityBand || null;
   }
 
   // Threat
   if (id.startsWith('threat.')) {
-    const t = deriveAllThreatProfiles(settlement).find((/** @type {any} */ x) => x.id === id);
+    const t = /** @type {Array<{id?: string, severityBand?: string}>} */ (deriveAllThreatProfiles(settlement)).find(x => x.id === id);
     return t?.severityBand || null;
   }
 
   // District — needs a domain modifier (wealth | safety).
   if (id.startsWith('district.')) {
-    const d = deriveAllDistricts(settlement).find((/** @type {any} */ x) => x.id === id);
+    const d = /** @type {Array<{id?: string, wealth: string, safety: string}>} */ (deriveAllDistricts(settlement)).find(x => x.id === id);
     if (!d) return null;
     if (domain === 'safety') return d.safety;
     return d.wealth;  // default
@@ -191,8 +202,10 @@ export function bandFor(ref, settlement) {
 /**
  * Convenience: return the user-facing display value for any reference.
  * Routes the right domain to displayBandLabel automatically.
- * @param {any} ref
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ *
+ * @param {BandRef} ref
+ * @param {import('./settlement.schema.js').CanonicalSettlement | null | undefined} settlement
+ * @returns {string}
  */
 export function displayValueFor(ref, settlement) {
   const { id, domain } = parseRef(ref);
@@ -202,7 +215,7 @@ export function displayValueFor(ref, settlement) {
   if (id.startsWith('var.') || SYSTEM_VARIABLES.includes(id)) {
     return displayBandLabel('substrate', band);
   }
-  if (id.startsWith('capacity.') || CAPACITY_NAMES.includes(id)) {
+  if (id.startsWith('capacity.') || /** @type {readonly string[]} */ (CAPACITY_NAMES).includes(id)) {
     return displayBandLabel('capacity', band);
   }
   if (id.startsWith('chain.'))     return displayBandLabel('chain', band);
@@ -220,8 +233,11 @@ export function supportedBandDomains() {
   return Object.keys(DISPLAY_LABELS);
 }
 
-/** @param {string} domain */
+/**
+ * @param {string} domain
+ * @returns {Record<string, string> | null}
+ */
 export function displayLabelsFor(domain) {
-  const m = /** @type {Record<string, Record<string, string>>} */ (DISPLAY_LABELS)[domain];
+  const m = DISPLAY_LABELS[domain];
   return m ? { ...m } : null;
 }

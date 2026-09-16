@@ -1,10 +1,10 @@
-// Facet vocabularies aligned to what the engine ACTUALLY persists (migration 063).
-// 'capital' is dropped — the generator never emits it (TIER_ORDER stops at
-// metropolis).
+// Facet vocabularies aligned to what the engine ACTUALLY persists AND what the
+// server list RPC filters on (migration 063/071). 'capital' is dropped — the
+// generator never emits it (TIER_ORDER stops at metropolis).
 export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 // config.terrainType vocabulary (resolveConfig + getTerrainType). The old list
 // used display synonyms (coast/river/mountains) that never matched the stored
-// values; these are the real ones.
+// values, so those chips filtered to nothing; these are the real ones.
 export const TERRAIN_OPTIONS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
 // getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
 export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high'];
@@ -21,13 +21,6 @@ export const REPORT_REASON_OPTIONS = [
   ['other', 'Other'],
 ];
 
-// Gallery layout reflow. The 860 breakpoint here is INTENTIONAL and distinct
-// from the app's 640 mobile flag (useIsMobile): 860 is the width at which the
-// two-column sidebar+grid layout no longer fits side by side, so the grids
-// collapse to one column there. The 640 flag governs the mobile CHROME swaps
-// (filters into a BottomSheet, owner authoring behind a desktop gate), which is
-// a separate concern from when the columns stop fitting. Both points coexist by
-// design; 860 is formally the gallery's reflow point.
 export const GALLERY_RESPONSIVE_CSS = `
   .gallery-main-layout {
     grid-template-columns: 260px minmax(0, 1fr);
@@ -62,37 +55,25 @@ export const GALLERY_RESPONSIVE_CSS = `
       position: static;
     }
   }
+
+  /* The specimen plate hovers by INKING its frame darker in place (motion
+     grammar: oc-m-inkdarken, on the card), never by lifting or shadowing.
+     Curated plates ink toward the deep gold entry tone, keeping their gold
+     identity; the rest ink toward strong ink. Reduced-motion collapses the
+     transition to its instant end state (the global rule in organic.css). */
+  .sf-gallery-card:hover { border-color: var(--oc-ink-strong); }
+  .sf-gallery-card--curated:hover { border-color: var(--oc-entry); }
 `;
 
 export function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
 
-/**
- * Map the gallery stability vocabulary (stable/strained/unstable/crisis/
- * collapsing) onto BandPill's five color tiers + an uppercase label. Stability
- * is the one living-world anomaly a GM scans for, so it renders through the
- * canonical multi-channel BandPill (color + glyph + label) instead of as a flat
- * grey tag. Returns null for unknown/empty so callers can omit the pill.
- */
-const STABILITY_BAND = Object.freeze({
-  stable:     { band: 'surplus',   label: 'Stable' },
-  strained:   { band: 'strained',  label: 'Strained' },
-  unstable:   { band: 'critical',  label: 'Unstable' },
-  crisis:     { band: 'critical',  label: 'Crisis' },
-  collapsing: { band: 'collapsed', label: 'Collapsing' },
-});
-
-export function stabilityBand(stability) {
-  const key = String(stability || '').trim().toLowerCase();
-  return STABILITY_BAND[key] || null;
-}
-
 export function formatDate(value) {
   if (!value) return '';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
-  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
 export function formatNumber(value) {
@@ -107,12 +88,10 @@ export function fallbackInitial(name) {
 }
 
 export function activeFilterCount(filters = {}) {
-  let sum = 0;
-  for (const value of Object.values(filters)) {
-    if (Array.isArray(value)) { sum += value.length; continue; }
-    sum += value ? 1 : 0;
-  }
-  return sum;
+  return Object.values(filters).reduce((sum, value) => {
+    if (Array.isArray(value)) return sum + value.length;
+    return sum + (value ? 1 : 0);
+  }, 0);
 }
 
 /** Public URL for a gallery dossier slug (matches ShareToGallery's link form). */
@@ -123,15 +102,28 @@ export function galleryUrlFor(slug) {
 }
 
 /**
- * Share a gallery dossier: Web Share API when available, else copy the
+ * V-13 FEATURED — HIDDEN-UNTIL-OCCUPIED (the no-fake-names honesty): a Featured
+ * section renders ONLY when it holds at least one item. An empty featured set
+ * (nothing admin-featured yet) renders nothing — never an empty band. Pinned by
+ * tests/components/galleryFeaturedVisible.test.js.
+ * @param {unknown} items the featured tiles for a section
+ * @returns {boolean}
+ */
+export function featuredSectionVisible(items) {
+  return Array.isArray(items) && items.length > 0;
+}
+
+/**
+ * Share a gallery dossier (§7): Web Share API when available, else copy the
  * public URL to clipboard. Never throws — returns { ok, method } so callers can
  * show success/failure feedback. A cancelled native share sheet is { ok:false,
  * cancelled:true } (not an error to surface).
+ * @param {{ slug?: string, name?: string }} [item] the tile/dossier being shared
  */
 export async function shareGalleryDossier({ slug, name } = {}) {
   if (!slug) return { ok: false, method: null };
   const url = galleryUrlFor(slug);
-  const title = name ? `${name} (SettlementForge)` : 'SettlementForge dossier';
+  const title = name ? `${name} — SettlementForge` : 'SettlementForge dossier';
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
     try {
       await navigator.share({ title, text: title, url });

@@ -1,11 +1,22 @@
 # SettlementForge — Risk Register
 
-> **Living document. Last reviewed: 2026-07-04** (review-remediation reconciliation; prior full review 2026-06-16 on `analytics-intelligence-layer`).
+> **Historical risk register — last reviewed 2026-06-16** (branch
+> `analytics-intelligence-layer`). It predates the spatial engine, the multi-wave engine
+> stack, and the comprehensive review program, and is kept for its distributed-state /
+> seam analysis (still substantially accurate) — NOT as the current risk surface.
 >
-> **Supersedes [`REVIEW_FINDINGS.md`](./REVIEW_FINDINGS.md)** — that file is a point-in-time
-> snapshot (2026-06-13) of a 133-finding multi-agent review. Most of its high-severity items
-> have since been remediated (see [§4](#4-historical-findings-the-133-finding-snapshot)); it is
-> retained only as a historical record. **This file is the source of truth going forward.**
+> **For the CURRENT live risks** (master-merge lineage collision, prod migration lag,
+> un-soaked deploy) see the execution playbook
+> [`docs/PHASE55_EXECUTION_PLAYBOOK.md`](./PHASE55_EXECUTION_PLAYBOOK.md) §0.0.2 and the
+> newest review doc [`docs/COMPREHENSIVE_REVIEW_2026-07-15.md`](./COMPREHENSIVE_REVIEW_2026-07-15.md).
+>
+> **Supersedes `REVIEW_FINDINGS.md`** — a point-in-time snapshot (2026-06-13) of a
+> 133-finding multi-agent review; most of its high-severity items have since been
+> remediated (see [§4](#4-historical-findings-the-133-finding-snapshot)).
+> ⚠ **That file was EXTRACTED FROM THE REPO on 2026-08-10** (IP exposure: it names
+> files and line numbers for live security seams). It and its `.review_findings.json`
+> sidecar now live outside the repo in the owner's design-handoff folder under
+> `repo-extracted-2026-08-10/`. §4 below is the in-repo summary that survives it.
 
 ## How to use this
 
@@ -13,8 +24,8 @@
 - Each entry cites **`file:line` on the current branch** so it can be re-verified, not taken on faith.
 - Update an entry the same commit you change its code. Add new risks at the top of [§3](#3-open-risk-register-prioritized).
 - This register is deliberately a **register**, not a findings dump. Exhaustive per-finding evidence
-  for the old review lives in `REVIEW_FINDINGS.md` (the git-tracked file;
-  `.review_findings.json` is a gitignored ~1.2MB machine dump, not in the repo).
+  for the old review lived in `REVIEW_FINDINGS.md` / `.review_findings.json`, both **extracted from
+  the repo 2026-08-10** — see the owner's out-of-repo `repo-extracted-2026-08-10/INDEX.md`.
 
 ---
 
@@ -78,15 +89,14 @@ that is a genuine **inconsistency vs its own sibling** is `resolveRegionalImpact
 |---|---|---|---|---|
 | ~~R1~~ | ✅ done | `resolveRegionalImpact` now uses the F2 phase-1/2/3 ordered-await (await the condition-removed settlement save before marking `resolved`, guarded on still-`applied`). Adversarially verified; regression test added. **Fixed 2026-06-16.** | `campaignRegionalSlice.js:525-617`; `tests/store/campaignSlice.regional.test.js` | — |
 | ~~R2~~ | ✅ done | External-mill banalité lockout now keys off `/access to external mill/i` in `processingInstitutions` (only the grain chain contemplates external-mill processing), not `/\bmill/i` — so `floodplain_agriculture`/`river_milling` (local mills) are no longer wrongly export-suppressed or stamped with the grain note. Adversarially verified; 3 regression tests. **Fixed 2026-06-16.** _Pre-existing & out of scope: when grain is locked, `Milled flour` + the `Baked goods` chain-output are correctly withheld, but bulk `Grain surplus`/`Bulk food exports` still export via the independent raw-resource path._ | `computeActiveChains.js:236-248`; `tests/joins/chains.test.js` | — |
-| ~~R3~~ | ✅ done | Edge functions now have real Deno **runtime** tests, not just source-text contracts. `stripe-webhook/index.test.ts` executes the handler and asserts a missing/bad signature returns 400 with **zero** DB writes (`stub.calls.rpc.length === 0`); `refundPolicy`/`promptCache`/`auth-recovery`/`account-actions` carry behavioral tests. They run in CI's `deno-tests` job (`deno task test:edge`), and `deno task check:edge` type-checks all 13 entrypoints. **Fixed — runtime coverage added.** | `supabase/functions/*/index.test.ts`; `deno.json` (`test:edge`/`check:edge`); CI `deno-tests` job | — |
-| **R4** | Low | `settlementSlice.js` (~1919 lines, was ~2425) and the generators are the largest logic files — navigability/onboarding cost on the most-tested core. | `settlementSlice.js`; `src/generators/*` | Deferred by design: extract only the *clean perimeter* when a file starts churning; do NOT split the tangled generation/event core preemptively. The clean perimeters ARE being peeled — snapshot/canon/rename, then deity/cult (`settlementDeityHelpers.js`) + the pending-edits queue (`settlementPendingEditsHelpers.js`) — while the invariant-heavy `applyEvent`/event-engine core stays put. Now **machine-enforced**: `tests/architecture/fileSizeBudget.test.js` is a monotonic-shrink ratchet — the megafiles cannot grow, and a slack guard forces each ceiling DOWN whenever a file shrinks, so the debt can only decrease (never re-grow into banked slack). |
-| **R5** | Low | Dead/divergent save path: `store.saveSettlement` only pushes a `local_`-prefixed row into the array with no cloud write; production saves bypass it via `savesService.save()` directly. | `settlementSlice.js:1043-1093` | Remove the dead action or document it as test-only to prevent a future caller minting non-cloud saves. |
-| ~~R6~~ | ✅ done | Gate now has a hard first-paint bundle budget (`scripts/check-bundle-budget.mjs`, wired into `build`): entry + first-paint-total ceilings, PLUS an explicit lazy-chunk guard that fails the build if a deliberately-lazy chunk (`vendor-pdf` ~614 KB gz, `engine`) leaks into the first-paint modulepreload set via a stray static import — named precisely, not just as an opaque total. Non-vacuity proven. **Fixed.** | `scripts/check-bundle-budget.mjs`; `tests/architecture/bundleBudgetGuard.test.js` | — |
-| ~~R7~~ | ✅ done | A11y now covers dynamic concerns end-to-end. Earlier: `Dialog` focus-trap + live-region tests. Now (completing the 2026-07-01 over-claim): a real skip-to-content link + `<main id="main-content" tabIndex={-1}>`, focus moved to `<main>` on every view change via the unit-tested `useFocusOnViewChange` hook (WCAG 2.4.3), and the four previously-bare `aria-modal` modals (ExportSheet, SimulationDrawer, MapShareEditorOverlay, SuccessorPrompt) now back the promise with the shared `useDialogFocusTrap`. Behavior is tested, not just claimed. **Fixed.** | `src/hooks/useFocusOnViewChange.js`; `src/App.jsx`; `src/styles/a11y.css`; `tests/hooks/useFocusOnViewChange.test.jsx`; `tests/ui/a11yNavigationWiring.test.js` | — |
-| ~~R8~~ | ✅ done | PDF parity is now machine-checked, not a manual audit: full-document + NotableNPCs **byte-render** tests exercise the real react-pdf render path. **Fixed.** | `tests/pdf/fullDocByteRender.test.js`; `tests/pdf/notableNpcsByteRender.test.js` | — |
+| **R3** | Low | Edge-function tests are **source-text contract** assertions (`readFileSync` + `toMatch`), not runtime. A regression in stripe-webhook signature verification or the refund path would pass the gate. | `tests/edgeFunctions/contracts.test.js` | Add a real signed-event smoke test (`generateTestHeaderString` + `createSubtleCryptoProvider`) asserting 200 + state mutation. |
+| **R4** | Low | `settlementSlice.js` (1734 lines) is the largest store file — navigability/onboarding cost on the most-tested core. | `settlementSlice.js` | Deferred by design: extract only the *clean perimeter* (pending-edits, user-edits/rename, snapshots) when it starts churning; do NOT split the tangled generation/event core. See the WS4 sub-slicing analysis. |
+| ~~R5~~ | ✅ done | Dead `store.saveSettlement` action removed (F34). Its live-designed side effects (first_save/third_save pricing moments + `'saved'` research capture) were revived as `src/store/saveMoments.js` (`recordSaveMomentForActiveSave`) and invoked from the REAL save chokepoints — `SaveToLibraryButton` and the `SAVE_SETTLEMENT` auth intent — so the funnel actually fires. **Fixed 2026-07-08.** | `settlementSlice.js`; `src/store/saveMoments.js`; `tests/store/saveMoments.test.js` | — |
+| ~~R6~~ | ✅ done | A first-paint byte budget now gates the build: `tests/build/vendorPdfLazy.test.js` computes the entry's transitive **static** import closure and asserts it stays under a monotone-ratchet ceiling (CI runs it after `npm run build`). The ceiling was ratcheted **down** 2026-07-09 (2,140,000 → 2,075,000) when the campaign world-pulse advance/preview/apply-proposal/party machinery was moved behind a memoized dynamic `loadWorldEngine()` — the entry chunk dropped ~47 kB (711,694 → 664,652) as the advance-exclusive modules split into a lazy chunk fetched on first pulse. **Known remaining anchor** (out of scope, follow-up filed): `settlementSlice → domain/events/partyEventLinkage.js → worldPulse/partyImpact.js` (a `PARTY_IMPACT_KINDS` const import) still drags applyWorldPulse's heavy graph into first paint because the project doesn't mark modules side-effect-free; extracting that const to a leaf module unlocks it. **Fixed 2026-07-09.** | `tests/build/vendorPdfLazy.test.js` (budget + closure BFS); `src/store/campaignWorldPulseSlice.js` (`loadWorldEngine`); `vite.config.js` | — |
+| **R7** | Low | A11y enforcement is static markup lint only — dynamic concerns (focus on view change, custom `Dialog` focus-trap, live-region announcements) are unverified. | `eslint.config.js:166-181` (jsx-a11y errors) | Add focused interaction/axe tests for the dialog + primary view transitions. |
+| **R8** | Low | PDF and on-screen dossier are separate render paths and can drift; parity is a manual audit. | `src/pdf/**` vs `src/components/**`; `PDF_PARITY_AUDIT.md` | Keep the parity audit current; consider shared view-model assertions. |
 | **R9** | Info | Full compiler-enforced store typing is deferred (loose JSDoc by design; `get()` is `any`). | `tsconfig.json` (`strict:false`) | Do it as a prerequisite of the deferred ~650-error JSX-in-tsc project, not standalone. See the WS4 typing analysis. |
 | **R10** | Info | Bus-factor-one: single authorial voice / plan vocabulary throughout. | `ARCHITECTURE.md` | Keep ARCHITECTURE.md + this register as the cold-start path. |
-| **R11** | Info | "Is the deployed DB at migration head?" was tribal knowledge — no in-repo record, and the live `SUPABASE_MIGRATION_HEAD` probe only runs in the deploy pipeline. As of 2026-07-01 prod is at head (097). | `supabase/applied-head.json`; `scripts/check-migration-head.mjs` | Now tracked: the checked-in applied-head ledger is cross-checked on every `npm run check` — it must reference a real migration and never exceed the repo head, and when the repo is ahead the gate lists the pending (undeployed) migrations. Bump it in the same PR as each `db push`. |
 
 ---
 
@@ -119,5 +129,11 @@ On **2026-06-16** the 15 **critical + high** items were re-verified against the 
 ¹ A second critical (`refund_credits`) — the SQL/RLS one — making the header's "1 critical" effectively understated; both money-path criticals are fixed.
 
 The **65 medium + 53 low** findings were **not** individually re-triaged in this pass. Many were
-addressed by the Cohesion Waves; treat the archived `REVIEW_FINDINGS.md` as the lookup for any specific
-medium/low item, and verify against current code before acting (it predates the 2026-06-16 remediation).
+addressed by the Cohesion Waves, but **118 findings carry no remediation status of any kind** — neither
+the markdown nor the JSON sidecar ever had a per-finding open/closed field.
+
+⚠ The per-item lookup is **no longer in the repo.** `REVIEW_FINDINGS.md` and `.review_findings.json`
+were extracted 2026-08-10; the JSON (every row carrying `file`, `line`, `severity`, `evidence`,
+`suggested_fix`) is the worklist for any specific medium/low item and lives in the owner's out-of-repo
+`repo-extracted-2026-08-10/`. Verify against current code before acting on any of them — the register
+predates the spatial engine, the multi-wave engine stack, and the whole Cohesion Wave remediation.

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>SettlementForge Status</title>
+  <!--
+    SettlementForge status page (R-26).
+
+    Self-contained by design: no external scripts, no fonts, no monitoring service,
+    no network calls. It is served straight from /status.html, outside the app bundle,
+    so it stays readable even when the app or the database is down. It is maintained
+    BY HAND: an operator edits this file and redeploys when status changes. See
+    docs/ops/STATUS_PAGE_RUNBOOK.md for the incident template and the exact steps.
+
+    TO UPDATE:
+      1. Set the overall banner class + text (search "OVERALL BANNER").
+      2. Set each component row's status (the class on the <span class="pill ...">).
+         Classes: pill-ok | pill-degraded | pill-down | pill-maintenance.
+      3. Add an incident to "Current incidents" using the template comment there.
+      4. Set the "Last updated" date at the foot.
+      5. Commit + deploy (a normal front-end deploy; this file ships with dist/).
+  -->
+  <style>
+    :root {
+      --ink: #23201a; --body: #4a463d; --muted-text: #7a746a;
+      --paper: #f6f2e9; --card: #fffdf8; --border: #ddd6c6; --rule: #b8945f;
+      --ok: #2f7d4f; --ok-bg: #e7f2ea;
+      --degraded: #9a6b12; --degraded-bg: #f6eeda;
+      --down: #a2352c; --down-bg: #f4e2df;
+      --maint: #3b5a80; --maint-bg: #e4ebf3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ink: #efe9dc; --body: #cec7b8; --muted-text: #9a9385;
+        --paper: #1a1814; --card: #221f19; --border: #3a352c; --rule: #b8945f;
+        --ok: #6fc38c; --ok-bg: #1e3327;
+        --degraded: #d6ab5a; --degraded-bg: #332c18;
+        --down: #e08a80; --down-bg: #35201d;
+        --maint: #8fb0d6; --maint-bg: #1d2836;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--paper); color: var(--body);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6; padding: 0 20px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 0 64px; }
+    header h1 {
+      font-family: Georgia, "Times New Roman", serif; color: var(--ink);
+      font-size: 28px; font-weight: 600; margin: 0 0 4px;
+    }
+    header p { margin: 0 0 28px; color: var(--muted-text); font-size: 15px; }
+    /* OVERALL BANNER: swap the class to banner-degraded / banner-down / banner-maintenance. */
+    .banner {
+      border-top: 2px solid var(--rule); border-bottom: 1px solid var(--border);
+      padding: 20px 0; margin-bottom: 32px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .banner .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; }
+    .banner .msg { font-size: 19px; font-weight: 600; color: var(--ink); }
+    .banner-ok .dot { background: var(--ok); }
+    .banner-degraded .dot { background: var(--degraded); }
+    .banner-down .dot { background: var(--down); }
+    .banner-maintenance .dot { background: var(--maint); }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif; color: var(--ink);
+      font-size: 15px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      margin: 36px 0 12px;
+    }
+    ul.components { list-style: none; margin: 0; padding: 0; }
+    ul.components li {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--border);
+      padding: 14px 16px; margin-bottom: 8px;
+    }
+    ul.components .name { color: var(--ink); font-weight: 600; }
+    ul.components .name small { display: block; color: var(--muted-text); font-weight: 400; font-size: 13px; }
+    .pill {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px; white-space: nowrap;
+    }
+    .pill-ok { color: var(--ok); background: var(--ok-bg); }
+    .pill-degraded { color: var(--degraded); background: var(--degraded-bg); }
+    .pill-down { color: var(--down); background: var(--down-bg); }
+    .pill-maintenance { color: var(--maint); background: var(--maint-bg); }
+    .incidents { background: var(--card); border: 1px solid var(--border); padding: 16px; }
+    .incidents .none { color: var(--muted-text); font-style: italic; margin: 0; }
+    .incident { border-left: 3px solid var(--rule); padding: 0 0 0 14px; margin: 0 0 18px; }
+    .incident:last-child { margin-bottom: 0; }
+    .incident .when { color: var(--muted-text); font-size: 13px; }
+    .incident .head { color: var(--ink); font-weight: 700; margin: 2px 0 6px; }
+    footer {
+      margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule);
+      color: var(--muted-text); font-size: 14px;
+    }
+    footer a { color: var(--rule); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>SettlementForge Status</h1>
+      <p>The current state of the site and its services. This page is kept up to date by hand and lives apart from the app, so it stays readable even when something is not.</p>
+    </header>
+
+    <!-- OVERALL BANNER -->
+    <section class="banner banner-ok" aria-label="Overall status">
+      <span class="dot" aria-hidden="true"></span>
+      <span class="msg">All services are operational.</span>
+    </section>
+
+    <h2>Services</h2>
+    <ul class="components">
+      <li>
+        <span class="name">The site
+          <small>Loading the app, the library, and public pages.</small>
+        </span>
+        <span class="pill pill-ok">Operational</span>
+      </li>
+      <li>
+        <span class="name">Settlement generation
+          <small>Forging a settlement from a seed.</small>
+        </span>
+        <span class="pill pill-ok">Operational</span>
+      </li>
+      <li>
+        <span class="name">Narration and the Surveyor
+          <small>The narrated dossier, the chronicle, and the interpreter.</small>
+        </span>
+        <span class="pill pill-ok">Operational</span>
+      </li>
+      <li>
+        <span class="name">Checkout and billing
+          <small>Buying a dossier, a subscription, or a Founder seat.</small>
+        </span>
+        <span class="pill pill-ok">Operational</span>
+      </li>
+      <li>
+        <span class="name">Saved worlds and accounts
+          <small>Signing in, saving, and loading your library.</small>
+        </span>
+        <span class="pill pill-ok">Operational</span>
+      </li>
+    </ul>
+
+    <h2>Current incidents</h2>
+    <section class="incidents">
+      <p class="none">No incidents reported. Everything is running normally.</p>
+      <!--
+        INCIDENT TEMPLATE. When something breaks, remove the <p class="none"> line above
+        and add one block like this (newest first). Keep the voice plain and factual.
+
+        <div class="incident">
+          <div class="when">1 August 2026, 14:20 UTC</div>
+          <div class="head">Narration is slow to respond</div>
+          <p>Narrated dossiers are taking longer than usual to return. Generation and
+             checkout are unaffected. We are investigating and will update this page.</p>
+        </div>
+
+        As it progresses, add follow-up lines inside the same block (Identified,
+        Monitoring, Resolved) with their own time and one plain sentence each.
+      -->
+    </section>
+
+    <footer>
+      <p>Last updated: 20 July 2026.</p>
+      <p>If something is broken and this page does not yet say so, tell us at
+        <a href="mailto:support@settlementforge.com">support@settlementforge.com</a>.
+        Your same seed still builds the same world once service returns.</p>
+    </footer>
+  </div>
+</body>
+</html>

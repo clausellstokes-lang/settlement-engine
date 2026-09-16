@@ -15,6 +15,9 @@ describe('generateSettlementReason deficit honesty', () => {
   it('an isolated settlement with a meaningful deficit acknowledges it', () => {
     const lines = generateSettlementReason('village', 'isolated', null, {}, { dailyNeed: 1000, rawDeficit: 200 });
     expect(lines[0]).toMatch(/cannot fully feed itself/);
+    // The deficit acknowledgement above proves lines[0] is the live isolated-founding
+    // sentence, so this exclusion measures wording rather than an empty line.
+    // anchored: lines[0] is pinned live by the 'cannot fully feed itself' assertion
     expect(lines[0]).not.toMatch(/Self-sufficiency/);
   });
 

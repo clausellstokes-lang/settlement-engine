@@ -10,24 +10,74 @@
  * it to tear down the dead bridge, mount a fresh iframe (keyed on the same value
  * in WorldMapStage), and re-arm the watchdog.
  *
- * Side-effect hook: returns nothing. All store reads/writes are passed in as
- * stable setters so the hook stays a pure wiring layer.
+ * Side-effect hook: returns only the runtime-resolved iframe URL. All store
+ * reads/writes are passed in as stable setters so the hook stays a wiring
+ * layer; mapRuntimeConfig remains the sole URL/origin authority.
  */
 
 import { useEffect } from 'react';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
+import { readMapRuntimeConfig } from '../lib/mapRuntimeConfig.js';
+import { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } from '../lib/spatialCaptureRegistry.js';
 
 const LOAD_TIMEOUT_MS = 15000;
 
+// Generic reject copy for a placement that arrives via the FMG bridge and is
+// refused by the store's authoritative gate. Mirrors WorldMap.handleDrop's UI
+// copy (minus the settlement name, which the bridge event doesn't carry).
+// Exported: KeyboardPlacementControl speaks the SAME refusal copy through the
+// palette's live region, so the gate never has two spellings (E-I).
+export const PLACEMENT_REJECT_COPY = {
+  'no-campaign': 'Select a campaign before placing settlements on the map.',
+  'not-canon':   'Only canon settlements can be placed. Canonize it first.',
+  'duplicate':   'That settlement is already on this map.',
+};
+
 export function useMapBridge({
+  enabled = true,
   iframeRef, bridgeRef, reloadKey,
   setMapReady, setMapLoading, setMapError, setBridgeReady,
   setMapSnapshot, setMapTemplates, setSelectedBurgId,
   addPlacement, removePlacementLocal, clearAllPlacementsLocal,
+  showToast,
 }) {
+  const {
+    frameUrl,
+    frameOrigin: targetOrigin,
+    configurationError,
+  } = readMapRuntimeConfig();
+
   useEffect(() => {
-    const bridge = createBridgeSingleton(() => iframeRef.current);
+    if (!enabled) return undefined;
+    if (!targetOrigin) {
+      setMapReady(false);
+      setBridgeReady(false);
+      setMapLoading(false);
+      setMapError(configurationError || 'The terrain engine is not securely configured.');
+      return undefined;
+    }
+
+    setMapReady(false);
+    setBridgeReady(false);
+    setMapError(null);
+    setMapLoading(true);
+    let bridge;
+    try {
+      bridge = createBridgeSingleton(
+        () => iframeRef.current,
+        { targetOrigin },
+      );
+    } catch (error) {
+      setMapReady(false);
+      setBridgeReady(false);
+      setMapLoading(false);
+      setMapError(error instanceof Error ? error.message : String(error));
+      return undefined;
+    }
     bridgeRef.current = bridge;
+    // Expose the live bridge to the (lazy) spatial-canonize path, which lives in a
+    // different subtree than the World Map and so can't receive it via props.
+    registerSpatialCaptureBridge(bridge);
 
     // Load watchdog: if `ready` never fires (iframe 404 / hang), flip the map
     // into a recoverable error state with a domain message + "Reload map" CTA.
@@ -54,13 +104,20 @@ export function useMapBridge({
     });
     const offPlaced = bridge.on('settlementPlaced', (data) => {
       if (data?.burgId != null) {
-        addPlacement({
+        // addPlacement is the authoritative gate (campaign / canon / no-duplicate);
+        // a settlementPlaced event that arrives without going through handleDrop's
+        // pre-check (a direct FMG placement, a re-entrant echo) is rejected here
+        // without mutating. Surface the reason so the refusal isn't silent.
+        const res = addPlacement({
           burgId: data.burgId,
           settlementId: data.settlementId,
           x: data.x, y: data.y,
           cellId: data.cellId,
           via: 'drop',
         });
+        if (res && res.ok === false) {
+          showToast?.('info', PLACEMENT_REJECT_COPY[res.reason] || 'That settlement could not be placed.');
+        }
       }
     });
     const offRemoved = bridge.on('placementRemoved', (data) => {
@@ -77,9 +134,12 @@ export function useMapBridge({
       offPlaced?.();
       offRemoved?.();
       offClearedAll?.();
+      unregisterSpatialCaptureBridge(bridge);
       bridge.destroy();
       bridgeRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadKey]);
+  }, [enabled, reloadKey, frameUrl, targetOrigin, configurationError]);
+
+  return frameUrl;
 }

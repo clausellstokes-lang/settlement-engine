@@ -3,35 +3,20 @@
  * portal, inline credit-pack purchase, and the Founder tile for the Account
  * page.
  *
- * Extracted verbatim from AccountPage.jsx during decomposition. Mostly
- * presentational: all shared page state, handlers, and store access stay in
- * AccountPage and arrive via props. The referral/redeem blocks (107) are the
- * one exception — they are self-contained (local copy-feedback + validation
- * state only) and live in ReferralRedeemBlocks.jsx.
- *
- * This is the page's one "feature" section (tone="feature") and its conversion
- * region: for free users it carries the single high-emphasis primary upgrade
- * CTA, and the per-tile upsell footers route to that same next step rather than
- * dead-ending in prose. The tier tile is the dominant stat (P4); credits and
- * saves recede one step.
+ * Extracted verbatim from AccountPage.jsx during decomposition. Purely
+ * presentational: all state, handlers, and store access stay in AccountPage
+ * and arrive via props.
  */
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-import { Crown, CreditCard, ArrowRight } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
-import {
-  GOLD_DEEP, GOLD_BG, INK, MUTED, BODY, SECOND, serif_, SP, R, FS, swatch,
-  AMBER_DEEP, DANGER_BORDER, TINT_VIOLET, TINT_VIOLET_HI, TINT_GREEN, TINT_AMBER_HI,
-} from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
-import Pill from '../primitives/Pill.jsx';
-import { ReferralCard, RedeemBlock } from './ReferralRedeemBlocks.jsx';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
-import useIsMobile from '../../hooks/useIsMobile.js';
-// Founder Lifetime tile, audience-gated to worldbuilder behavior.
-// Self-gates inside; renders null for non-worldbuilder users.
+// P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
+// behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
 
 export default function AccountSubscriptionSection({
@@ -51,71 +36,64 @@ export default function AccountSubscriptionSection({
   const isFree = !isElevated && auth.tier !== 'premium';
   // P8 — one primary per region. When the audience-earned Founder tile is
   // eligible it renders its OWN solid-gold "Claim seat" primary lower in this
-  // section; a free worldbuilder would then satisfy both that and the generic
-  // "See Cartographer" primary below, stacking two co-equal gold CTAs. The $99
-  // conviction offer is the higher-intent action, so it keeps the primary and
-  // the generic CTA drops to secondary — exactly one focal click survives.
+  // section; the generic upgrade CTA below then drops to secondary so exactly
+  // one focal click survives (Founder is the higher-intent action).
   const founderTileShowing = useFounderTileEligible();
-  // Mobile raises the credit-pack tile basis floor so a wrapped tile keeps a
-  // usable width for its multi-line copy (credits / price / per-each) instead of
-  // collapsing toward ~110px. Desktop keeps the 110px basis byte-identical.
-  const isMobile = useIsMobile();
   return (
     <Section title={t('account.subscriptionHeading')} tone="feature">
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-        {/* Tier card — the dominant stat (larger value), grows an "unlock"
-            footer for free users. */}
+        {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
         <div style={{
-          flex: '1.4 1 200px',
-          background: GOLD_BG, borderRadius: R.lg,
+          flex: '1 1 180px',
+          background: GOLD_BG,
+          border: `1px solid rgba(160,118,42,0.2)`,
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div style={{ fontSize: FS.sm, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardCurrentTier')}
             </div>
             <div style={{
-              fontSize: FS['28'], fontWeight: 700, fontFamily: serif_,
-              color: isElevated ? swatch['#7C3AED'] : auth.tier === 'premium' ? swatch['#2A7A2A'] : GOLD_DEEP,
+              fontSize: FS.xxl, fontWeight: 700, fontFamily: serif_,
+              color: isElevated ? '#7c3aed' : auth.tier === 'premium' ? '#2a7a2a' : GOLD,
               textTransform: 'uppercase',
             }}>
               {isElevated ? t('account.fullAccess') : getTierDisplayName(auth.tier)}
             </div>
           </div>
-          {isFree && (
+          {!isElevated && auth.tier !== 'premium' && (
             <div style={{
               padding: `${SP.sm}px ${SP.md}px`,
-              background: TINT_VIOLET,
+              background: 'rgba(124,58,237,0.06)',
+              borderTop: '1px solid rgba(124,58,237,0.20)',
               fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> unlimited saves,
-              cloud sync, neighbours, AI prose pass.
+              neighbours, custom content, and unlimited PDF/JSON export.
             </div>
           )}
         </div>
 
-        {/* Credits card — recedes one step; grows "try Narrate" footer when
-            balance is 0. */}
+        {/* Credits card — grows "try Narrate" footer when balance is 0. */}
         <div style={{
           flex: '1 1 180px',
-          background: TINT_VIOLET, borderRadius: R.lg,
+          background: 'rgba(124,58,237,0.06)',
+          border: '1px solid rgba(124,58,237,0.15)',
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div
-              style={{ fontSize: FS.sm, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}
-              title="A credit funds one narrated prose pass on a settlement."
-            >
+            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardCredits')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#7C3AED'] }}>
-              {isElevated ? '∞' : creditBalance}
+              {isElevated ? '\u221E' : creditBalance}
             </div>
           </div>
           {!isElevated && creditBalance === 0 && (
             <div style={{
               padding: `${SP.sm}px ${SP.md}px`,
-              background: TINT_VIOLET_HI,
+              background: 'rgba(124,58,237,0.10)',
+              borderTop: '1px solid rgba(124,58,237,0.25)',
               fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Try Narrate.</b> Turn this town's data
@@ -125,22 +103,22 @@ export default function AccountSubscriptionSection({
           )}
         </div>
 
-        {/* Saves card — recedes one step; grows "one save left" / "saves
-            full" footer. */}
+        {/* Saves card — grows "one save left" / "saves full" footer. */}
         <div style={{
           flex: '1 1 180px',
-          background: TINT_GREEN, borderRadius: R.lg,
+          background: 'rgba(42,122,42,0.06)',
+          border: '1px solid rgba(42,122,42,0.15)',
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div style={{ fontSize: FS.sm, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardSaves')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#2A7A2A'] }}>
-              {activeSaves} / {maxSaves === Infinity ? '∞' : maxSaves}
+              {activeSaves} / {maxSaves === Infinity ? '\u221E' : maxSaves}
             </div>
             {inactiveSaves > 0 && (
-              <div style={{ fontSize: FS.xs, color: BODY, marginTop: SP.xs }}>
+              <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.xs }}>
                 {inactiveSaves} inactive retained
               </div>
             )}
@@ -148,17 +126,14 @@ export default function AccountSubscriptionSection({
           {!isElevated && maxSaves !== Infinity && activeSaves >= maxSaves - 1 && (
             <div style={{
               padding: `${SP.sm}px ${SP.md}px`,
-              background: TINT_AMBER_HI,
+              background: 'rgba(208,128,32,0.10)',
+              borderTop: '1px solid rgba(208,128,32,0.30)',
               fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
-              {/* Two-channel warning: AMBER_DEEP (amber-700, AA on the amber
-                  tint — brand AMBER failed at 2.72:1) carries the colour, and
-                  the bold warning text carries the meaning, so the state reads
-                  in weight + text + colour, never amber alone (P7). */}
-              <b style={{ color: AMBER_DEEP }}>
+              <b style={{ color: AMBER }}>
                 {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
               </b>{' '}
-              Cartographer lifts the cap and syncs your library across every device.
+              Cartographer = unlimited + cloud sync. Phone, laptop, table.
             </div>
           )}
         </div>
@@ -166,14 +141,12 @@ export default function AccountSubscriptionSection({
 
       {/* Conversion CTA — the one high-emphasis primary action of this region.
           Free users get an obvious first click to Pricing; the per-tile upsell
-          footers above all point here. */}
+          footers above all point here. Navigation-only — never a purchase. */}
       {isFree && (
         <div style={{ marginTop: SP.lg }}>
           <Button
             variant={founderTileShowing ? 'secondary' : 'primary'}
             size="lg"
-            icon={<Crown size={16} />}
-            trailingIcon={<ArrowRight size={16} />}
             onClick={onNavigatePricing}
           >
             See Cartographer
@@ -186,28 +159,11 @@ export default function AccountSubscriptionSection({
           <Button
             variant="secondary"
             size="md"
-            icon={<CreditCard size={15} />}
             onClick={handleManageBilling}
             disabled={portalBusy || !isConfigured}
           >
             {portalBusy ? 'Opening portal...' : 'Manage subscription'}
           </Button>
-          {/* Billing-portal error sits with the control that produced it
-              (handleManageBilling sets purchaseError). */}
-          {purchaseError && (
-            <div role="alert" style={{
-              marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`,
-              background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md,
-              fontSize: FS.sm, color: swatch.danger,
-            }}>
-              {purchaseError}
-            </div>
-          )}
-          {!isConfigured && (
-            <div style={{ marginTop: SP.sm, fontSize: FS.xs, color: BODY }}>
-              Billing is unavailable in this environment.
-            </div>
-          )}
         </div>
       )}
 
@@ -222,26 +178,18 @@ export default function AccountSubscriptionSection({
             {t('account.purchaseCreditsLabel')}
           </div>
 
-          {/* Show the purchase error here only when there's no premium Manage
-              block above (where it already renders adjacent to its button). */}
-          {purchaseError && auth.tier !== 'premium' && (
-            <div role="alert" style={{
+          {purchaseError && (
+            <div style={{
               padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-              background: swatch.dangerBg, border: `1px solid ${DANGER_BORDER}`, borderRadius: R.md,
+              background: swatch.dangerBg, border: '1px solid #e8b0b0',
               fontSize: FS.sm, color: swatch.danger,
             }}>
               {purchaseError}
             </div>
           )}
 
-          {!isConfigured && auth.tier !== 'premium' && (
-            <div style={{ marginBottom: SP.md, fontSize: FS.xs, color: BODY }}>
-              Billing is unavailable in this environment.
-            </div>
-          )}
-
-          <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
-            {/* Read packs from getActivePacks() so the
+          <div style={{ display: 'flex', gap: SP.sm }}>
+            {/* P125 / AC-2 — Read packs from getActivePacks() so the
                 `packsRepriced` flag wins. Hardcoded list was bypassing
                 the flag and showing legacy 5/15/40 even when the new
                 25/60/150 catalog was active. The pack record carries
@@ -250,56 +198,38 @@ export default function AccountSubscriptionSection({
                 need a UI update. */}
             {Object.values(getActivePacks()).map(p => {
               const key = p.key;
-              const isBest = p.tier === 'best';
-              const accent = isBest
-                ? swatch['#2A7A2A']
-                : p.tier === 'value' ? GOLD_DEEP : SECOND;
-              const ariaLabel = `${p.credits} credits for ${p.price}${p.discount ? ', ' + p.discount + ' off' : ''}`;
+              const accent = p.tier === 'best'
+                ? '#2a7a2a'
+                : p.tier === 'value' ? GOLD : SECOND;
               return (
-                <Button
-                  key={key}
-                  variant={isBest ? 'gold' : 'secondary'}
-                  size="md"
-                  onClick={() => handlePurchase(key)}
+                <button key={key} type="button" onClick={() => handlePurchase(key)}
                   disabled={purchasing || !isConfigured}
-                  busy={purchasing === key}
-                  aria-label={ariaLabel}
                   style={{
-                    flex: isMobile ? '1 1 140px' : '1 1 110px', flexDirection: 'column', gap: SP.xs,
-                    padding: `${SP.md}px ${SP.sm}px`, position: 'relative',
-                    whiteSpace: 'normal',
-                  }}
-                >
+                    flex: 1, padding: `${SP.md}px ${SP.sm}px`,
+                    background: CARD, border: `2px solid ${accent}20`,
+                    cursor: 'pointer', fontFamily: sans,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
+                    opacity: purchasing ? 0.6 : 1, position: 'relative',
+                  }}>
                   {p.discount && (
-                    <Pill
-                      absolute
-                      bg={accent}
-                      color={swatch.white}
-                      style={{ top: -8, right: -4, fontWeight: 800, letterSpacing: 0 }}
-                    >{p.discount}</Pill>
+                    <span style={{
+                      position: 'absolute', top: -8, right: -4,
+                      padding: '2px 6px', background: accent,
+                      color: swatch.white, fontSize: FS.micro, fontWeight: 800,
+                    }}>{p.discount}</span>
                   )}
                   <span style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</span>
-                  <span style={{ fontSize: FS.xs, color: BODY, fontWeight: 400 }}>credits</span>
+                  <span style={{ fontSize: FS.xxs, color: MUTED }}>credits</span>
                   <span style={{ fontSize: FS.md, fontWeight: 700, color: accent }}>{p.price}</span>
-                  <span style={{ fontSize: FS.xs, color: BODY, fontWeight: 400 }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
-                </Button>
+                  <span style={{ fontSize: FS.xxs, color: MUTED }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
+                </button>
               );
             })}
           </div>
         </div>
       )}
 
-      {/* Refer a Friend — every signed-in reader can refer (founders get the
-          credits variant of the pitch); the account ID is the immutable handle
-          from migration 075, read straight off auth state. */}
-      <ReferralCard auth={auth} />
-
-      {/* Redeem a Code — pre-validates for instant feedback, then stashes the
-          accepted code so it rides along on the next checkout. Elevated
-          operators never purchase, so the block would be dead weight. */}
-      {!isElevated && <RedeemBlock onNavigatePricing={onNavigatePricing} />}
-
-      {/* Founder Lifetime tile. Self-gates on
+      {/* P116 / X-8 — Founder Lifetime tile. Self-gates on
           audience='worldbuilder' + flag + seats-remaining > 0.
           Renders null for everyone else, so this is safe to mount
           unconditionally here. */}

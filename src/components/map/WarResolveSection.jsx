@@ -14,7 +14,7 @@ import { HeartHandshake, Swords, Home, Flame } from 'lucide-react';
 
 import { realmResolveSignals } from '../../domain/display/warResolve.js';
 import { Section } from './WorldPulsePrimitives.jsx';
-import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, AMBER, GOLD, sans, FS, SP, R } from '../theme.js';
+import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, AMBER, GOLD, sans, FS, SP } from '../theme.js';
 
 /** Map a signal band to a semantic tone. */
 const RESOLVE_TONE = { capitulating: 'danger', breaking: 'danger', wavering: 'warn', steady: 'neutral', resolute: 'good' };
@@ -32,7 +32,7 @@ function Chip({ label, value, tone = 'neutral' }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'baseline', gap: 5, minHeight: 22, padding: '2px 8px',
-      border: `1px solid ${c.border}`, borderRadius: 6, background: c.bg, fontFamily: sans, whiteSpace: 'nowrap',
+      border: `1px solid ${c.border}`, background: c.bg, fontFamily: sans, whiteSpace: 'nowrap',
     }}>
       <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</span>
       <span style={{ color: c.fg, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>{value}</span>
@@ -69,7 +69,7 @@ function SettlementCard({ sig, nameById }) {
   return (
     <div style={{
       display: 'grid', gap: 6, padding: '10px 12px', background: CARD,
-      border: `1px solid ${BORDER}`, borderLeft: `3px solid ${accent}`, borderRadius: R.sm || 6,
+      border: `1px solid ${BORDER}`, borderLeft: `3px solid ${accent}`,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>{sig.name}</span>
@@ -105,7 +105,7 @@ function SettlementCard({ sig, nameById }) {
           {(faith.patron.alignment || faith.patron.temper) ? ` (${[faith.patron.alignment, faith.patron.temper].filter(Boolean).join(', ')})` : ''}.
           {opposed.length > 0 && (
             <span style={{ color: RED, fontWeight: 700 }}>
-              {' '}Set against {opposed.map(o => o.deity || nameFor(o.besieger, nameById)).join(', ')} — a war of opposed faiths, and the faithful dig in.
+              {' '}Set against {opposed.map(o => o.deity || nameFor(o.besieger, nameById)).join(', ')}: a war of opposed faiths, and the faithful dig in.
             </span>
           )}
         </div>
@@ -160,7 +160,7 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
       </div>
 
       {atWar.length > 0 && (
-        <Section title="At war" count={atWar.length}>
+        <Section heading="At war" count={atWar.length}>
           <div style={{ display: 'grid', gap: 8 }}>
             {atWar.map(sig => <SettlementCard key={sig.id} sig={sig} nameById={nameById} />)}
           </div>
@@ -168,12 +168,12 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
       )}
 
       {atPeace.length > 0 && (
-        <Section title="At peace" count={atPeace.length}>
+        <Section heading="At peace" count={atPeace.length}>
           <div style={{ display: 'grid', gap: 6 }}>
             {atPeace.map(sig => (
               <div key={sig.id} style={{
                 display: 'flex', alignItems: 'baseline', gap: 8, padding: '6px 10px',
-                background: CARD_ALT, border: `1px solid ${BORDER2}`, borderRadius: 6, flexWrap: 'wrap',
+                background: CARD_ALT, border: `1px solid ${BORDER2}`, flexWrap: 'wrap',
               }}>
                 <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>{sig.name}</span>
                 <span style={{ marginLeft: 'auto', display: 'flex', gap: 6, flexWrap: 'wrap' }}>

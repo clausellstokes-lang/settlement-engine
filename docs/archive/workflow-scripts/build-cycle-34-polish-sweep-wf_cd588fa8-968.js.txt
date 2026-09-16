@@ -1,0 +1,21 @@
+export const meta = {
+  name: 'build-cycle-34-polish-sweep',
+  description: 'The header focus-ring a11y sibling + rawButton baseline true-up + deepCraft burn-down',
+  phases: [{ title: 'Build', detail: 'one small lane, implement + verify' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; prefer git commit -- <paths>); no stash; focused vitest + gate-tail (ps aux | grep vitest first); python byte-scan every Write; STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Nothing pushed. CONCURRENCY: the WZ razing-wiring lane is live on worldPulse — fenced. Your territory: src/styles/a11y.css, tests/lint/rawButtonBaseline.test.js, the deepCraft offender components, tests/design/deepCraftKillList.test.js only if a row legitimately shrinks.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const r = await agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE PW — THREE SMALL CLOSURES:
+(1) THE HEADER FOCUS-RING SIBLING (FS's out-of-lane find): EVERY header control loses its focus ring's TOP edge — sticky top:0 puts the offset ring above the viewport (lockup ring at y=-3.42..-0.42; plain tabs at y=-3..0). The one-line class fix belongs in src/styles/a11y.css (an inset-aware ring or reduced top offset for controls inside the sticky header — pick the cleanest that keeps 1.4.11 contrast and the existing ring grammar); prove by real Tab traversal + screenshot on EVERY header control (lockup, three fletch cells, three plain tabs, Sign In) — full perimeter visible on each.
+(2) THE rawButtonBaseline TRUE-UP: the census drifted at aaa6f3a4 — src/components/HowToUse.jsx is IN the tree's raw-button set but unlisted; founders/ChairPlate.jsx is listed but no longer offends. Update the baseline's two rows to measured truth (this is a census true-up, not a budget change — say so; the budget total stays lawful), with the causing-commit attribution in the docstring.
+(3) THE deepCraft BURN-DOWN: three rows sit above their shrink-only ceilings (borderRadius 87>85, boxShadow 74>72, rgbaLiterals 171>167). BURN DOWN, do not raise: census the offending occurrences (the ratchet's own regexes tell you where), find the ~8 newest additions across landed lanes (git log -S per pattern), and convert each to the estate's tokens/idiom (theme tokens for radii/shadows, named colors for rgba) — behavior-identical styling through the sanctioned channels; the three rows return to/below their ceilings honestly. If any occurrence is LOAD-BEARING as written (a real design need no token serves), STOP-report that one with its case rather than force it.
+One commit per piece. Return {lane:'PW', commits, gates, stopReports, notes}.`,
+  {label:'pw:polish-sweep', phase:'Build', model:'opus', effort:'high', schema:S})
+const v = await agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify: the ring by REAL Tab on all eight header controls with screenshots (full perimeter each; no control regressed elsewhere — spot-check three non-header controls keep their rings); the true-up rows match a fresh census you run yourself; the deepCraft rows at/below ceiling via the ratchet's own regexes re-run by YOU, and spot-read 5 conversions for styling fidelity (the rendered look must not change — compare computed styles pre/post on one converted component); suites + build green; staged-set law; pathspec vs the WZ lane. Return {lane:'PW verify', verdict, findings}.`,
+  {label:'pw:verify', phase:'Build', model:'opus', effort:'high', schema:V})
+return { r, v }

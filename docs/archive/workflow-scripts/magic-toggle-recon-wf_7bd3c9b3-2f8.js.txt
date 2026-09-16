@@ -1,0 +1,21 @@
+export const meta = {
+  name: 'magic-toggle-recon',
+  description: 'Substrate recon for the realm-generation magic toggle spec',
+  phases: [{ title: 'Recon', detail: '3 read-only surveyors: flow, magic axis, lifecycle' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: read-only SUBSTRATE SURVEY for a design spec (legitimate owner-ordered work; no edits, no git). Tree: ${MF}. Every claim needs a file:line receipt from an executed read/grep — mark anything else UNVERIFIED. Your final output is raw data for the architect, not a human-facing message.`
+const S = { type:'object', required:['findings','gaps','notes'], properties:{
+  findings:{type:'array',items:{type:'object',required:['claim','receipt'],properties:{claim:{type:'string'},receipt:{type:'string'}}}},
+  gaps:{type:'array',items:{type:'string'}}, notes:{type:'string'}}}
+
+phase('Recon')
+const out = await parallel([
+  () => agent(`${PRE}
+SURVEY A — THE BULK-GENERATION FLOW. Find: (1) the UI surface(s) where a user generates/creates MULTIPLE settlements at once (the realm-level "generate settlements" button) — component file:line, the handler; (2) the store action(s) it dispatches and the per-settlement config object it passes (spelling of the config fields); (3) any EXISTING pre-generation modal/pop-up in that flow (is there already a step to hook into, or is the pop-up net-new?); (4) where realm-level generation options currently live in the UI and state; (5) the exact INSERTION SEAM you would recommend for a one-question pre-generation modal (component + state path). Search src/components (realm/world/map-level surfaces), src/store or equivalent, src/AppViews.jsx, and the operationRegistry for bulk-generation actions.`, {label:'recon:flow', phase:'Recon', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SURVEY B — THE MAGIC AXIS. Find: (1) settlement/world config fields controlling magic (grep magicLevel, magic_prevalence, magicalActivity, arcane, magicRating, enchant across src/domain src/generators — plus the config/schema files); is magic a boolean, a band, or absent as a config axis today? (2) the CONTENT SITES that produce or read magical content: mage/wizard NPC classes or roles, magical institutions (towers, academies), magical events (event type 'magical'), the magical_controversy tension, enchanted goods/economy, magic in townMap/architecture; list each producer with file:line; (3) whether any existing generation path already supports suppressing/reducing magic (a low-magic config arm), and (4) what a FULL DISABLE would need to thread — list every producer that would need a mundane substitute or a gate. Be thorough — this census is the spec's §2.`, {label:'recon:magic', phase:'Recon', model:'opus', schema:S}),
+  () => agent(`${PRE}
+SURVEY C — THE LIFECYCLE. Find, with receipts: (1) how per-settlement REGENERATION replays config — where the settlement's generation config persists and how regen re-derives (the regen path's config source); (2) where realm/campaign-level settings persist today (worldState fields? a campaign settings object? localStorage? supabase rows?) — the best HOME for a realm-level magicEnabled setting that survives regen; (3) the world EXPORT/IMPORT JSON surface — would a new realm-level field round-trip automatically or need schema work (check settlement.schema.js and any world-level schema); (4) UNDO — what snapshots exist and whether a realm-level setting would ride them; (5) how the ADVANCE/simulation path reads generation config (would a magicEnabled realm setting be visible to worldPulse content — e.g., magical events during advancement). Trace all lifecycle paths: create, read, persist, regen, undo, export/import, advance.`, {label:'recon:lifecycle', phase:'Recon', model:'opus', schema:S}),
+])
+return { surveys: out.filter(Boolean) }

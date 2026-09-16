@@ -1,0 +1,55 @@
+export const meta = {
+  name: 'walker-identifier-gap-four-more-rows',
+  description: 'The three-arm identifier misses four rows already frozen in the census, and asserts one of them is an ordinary test. Close the gap with an arm derived from the census key itself.',
+  phases: [
+    { title: 'Arm', detail: 'the missing signal, the four rows, the wrong control' },
+    { title: 'Verify', detail: 'hunt for the next miss, not the fixed one' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4), HEAD \`abc5a78b\`, census 35 entries. **Re-read HEAD yourself.** Hard-gate every state-mutating compound with the \`cd\` FIRST.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain. ⛔ NEVER read an exit code through a pipe.
+⚠ EVERY figure in an INTEGRITY-COUNTED \`git archive\`, **\`git init\`ed and committed** (three walkers shell out to git and a bare tar makes them LIE). Disk ~9 GiB; one archive at a time.
+⛔ **AN OWNER-STARTED SESSION HOLDS FOUR DIRTY FILES**: \`src/domain/worldPulse/{commercialReasons,pactProposals}.js\`, \`src/lib/spatialUsage.js\`, \`tests/lib/spatialUsage.test.js\`. DO NOT touch or stage them. ⚠ Note \`commercialReasons.js\` is the file carrying 31 any-holes in \`domainAnyCastBaseline\` — that session may be reducing exactly the debt you are about to reason about, so **re-measure at a committed sha, never the live tree.**
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Arm')
+const arm = await agent(LAWS + `
+
+YOU ARE CLOSING A MEASURED GAP IN A GUARD THAT WAS BUILT TO CLOSE A GAP. Read the shape before the task.
+
+**WHAT LANDED AT \`abc5a78b\`:** a three-arm union identifying enforcement walkers — A1 filename \`.walker.test.js\`, A2 the module header's first docblock line matching /\\bwalkers?\\b/i, A3 structural (enumerates a tree via readdirSync|globSync|fg.sync AND compares against a frozen-inventory token). It catches 10/10 of the rows it was aimed at, and neither A1 (8/10) nor A3 (6/10) suffices alone.
+
+**WHAT ITS VERIFIER FOUND, AND THE CHAIR HAS INDEPENDENTLY CONFIRMED BY READING THE CENSUS:** it MISSES four rows that are already frozen —
+- \`tests/lint/domainAnyCastBaseline.test.js\` ×2: *"baseline exactly matches the tree (airtight against any drift mode)"* and *"no file exceeds its baseline (new files get 0) — fix the types"*
+- \`tests/lint/transcendentalMathBaseline.test.js\` ×2: the same two shapes
+By the lane's own triage line — *does the frozen row range over an OPEN, tree-derived population, or a CLOSED per-member identity?* — these are unambiguously **DISABLED GUARDS**. A new file exceeding its baseline reds nothing today.
+⛔⛔ **AND WORSE: \`domainAnyCastBaseline.test.js\` IS ON THAT LANE'S OWN ORDINARY-TEST CONTROL LIST** — a standing pin asserts it classifies with ZERO arms firing, as proof of no false positives. **That pin currently asserts the guard is CORRECT to ignore a walker.** Fix the pin, not just the classifier; a control that certifies a miss is worse than no control.
+
+⭐ **A HYPOTHESIS FOR THE MISSING ARM — TEST IT, DO NOT ASSUME IT.** The census key IS \`<file> :: <full test title>\`, and both missed files announce themselves in the TITLE while saying nothing in the module header: "ratchet", "frozen baseline governance", "no file exceeds its baseline", "shrink-only". A4 could classify **from the census row itself**, needing no file read at all. **Measure whether that arm catches the four, and what its estate-wide false-positive rate is** (the union already flags 135/2,352 = 5.7%; report the new rate). If a better signal exists, take it and say why — but **any arm you add must be justified by a MEASURED catch/false-positive pair, never by plausibility.**
+
+**THEN TRIAGE THE FOUR** on the same structural line, and free the ones that are disabled guards. ⚠⚠ **\`domainAnyCastBaseline\` carries a RECORDED PROHIBITION: "⛔ DO NOT run \`--update\` — it re-freezes the WHOLE tree and would bank commercialReasons.js's 31 any-holes as permanent debt."** So its debt CANNOT be relocated by a blanket re-freeze; each row is cleared by TYPING the hole. Find the honest home for that debt or **STOP-and-report** — do not invent one, and do not burn the holes down here.
+
+**ACCEPTANCE, all by execution with plants restored \`cmp\`-clean:** (a) the four rows classify as walkers now; (b) the corrected control pin passes and would RED if the classifier regressed; (c) a newly planted violation of each FREED walker REDS; (d) pre-existing debt unchanged — measure at a committed sha, not the live tree.
+
+Append a ledger row at the LIVE tail of \`docs/FABLE_VALIDATION_QUEUE.md\`. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'arm:census-key', phase: 'Arm', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, armAdded: { type: 'string' }, catchesTheFour: { type: 'string' }, newFalsePositiveRate: { type: 'string' }, controlPinCorrected: { type: 'string' }, triage: { type: 'array', items: { type: 'string' } }, rowsFreed: { type: 'number' }, anyCastDebtHome: { type: 'string' }, newViolationReds: { type: 'string' }, debtUnchanged: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const verdict = await agent(LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER. Default posture: WRONG until executed evidence. REFUTE. READ-ONLY in the shared tree; mutants in throwaway archives. You hold the gate slot alone.
+
+Lane reported: ` + JSON.stringify(arm || {}).slice(0, 9000) + `
+
+⭐⭐ **YOUR PRIMARY JOB IS TO FIND THE NEXT MISS, NOT TO CONFIRM THE FIXED ONE.** The previous verifier found four missed rows sitting in the census in plain sight; that is the standard. **Sweep ALL 35 census entries yourself against the triage line — does this row's assertion range over an open, tree-derived population, or a closed per-member identity? — and report EVERY row you judge a disabled guard, whether or not the classifier flags it.** A row the classifier misses that you can identify by reading is a REJECT.
+Then: (1) write your own probe walker that evades every arm and report whether it escapes — state honestly if the classifier is total or merely broad; (2) confirm the corrected control pin genuinely reds on a regressed classifier, by regressing it; (3) plant a fresh violation of each freed walker and confirm it reds; (4) confirm the any-cast debt was NOT blanket re-frozen — the recorded prohibition says \`--update\` would bank 31 holes permanently; (5) confirm no baseline grew without a stated cause and that census changes are removals only; (6) run \`npm run check\` stepwise, status captured immediately, and report the first failing step — ⚠ step 16 \`verify:dist\` is expected red on three inherited first-paint budgets, and **REJECT if this round made any of them worse.**
+
+RETURN structured JSON only.`, { label: 'arm:verify', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, remainingDisabledGuards: { type: 'array', items: { type: 'string' } }, probeEscaped: { type: 'string' }, classifierIsTotal: { type: 'boolean' }, controlPinRedsOnRegression: { type: 'string' }, anyCastNotBlanketRefrozen: { type: 'boolean' }, checkFirstFailingStep: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { arm, verdict }

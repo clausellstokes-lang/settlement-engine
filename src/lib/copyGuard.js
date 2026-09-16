@@ -25,7 +25,8 @@
  * it. Selection-disable plus the clipboard/contextmenu block already cover the
  * casual-copy paths.
  *
- * Gated by the `copyGuard` flag (default on). Idempotent; returns a teardown.
+ * Gated by the `copyGuard` flag (default OFF — see lib/flags.js; flip that one
+ * flag to enable). Idempotent; returns a teardown.
  */
 import { useStore } from '../store/index.js';
 import { flag } from './flags.js';

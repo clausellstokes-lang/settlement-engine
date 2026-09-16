@@ -9,12 +9,18 @@
 
 import { registerStep } from '../pipeline.js';
 import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
+import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
+import {
+  materializeCulturalIdentity,
+  resolveCultureProfileKey,
+} from '../../domain/cultureProfiles.js';
+import {
+  resolveGenerationContentProfile,
+} from '../../domain/generationContentProfile.js';
 
-// Exported so the gallery-facet alignment test can pin TERRAIN_OPTIONS against
-// the vocabulary the generator actually rolls (the values persisted to
-// config.terrainType). See tests/components/gallery/facetAlignment.test.js.
+// Exported for the gallery facet-alignment contract (terrain facet vocabulary).
 export const TERRAIN_WEIGHTS = [
   ['plains', 22], ['hills', 18], ['forest', 13],
   ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
@@ -30,9 +36,8 @@ const TERRAIN_ROUTE_POOLS = {
   desert:    ['crossroads','road','road','isolated','road'],
 };
 
-// The canonical 11-culture catalog. Exported so the gallery-facet alignment
-// test can pin CULTURE_OPTIONS against the values the generator persists to
-// config.culture. See tests/components/gallery/facetAlignment.test.js.
+// Exported for the gallery facet-alignment contract (culture facet vocabulary
+// must match the generator's own list).
 export const CULTURES = [
   'germanic','latin','celtic','arabic','norse','slavic',
   'east_asian','mesoamerican','south_asian','steppe','greek',
@@ -40,10 +45,11 @@ export const CULTURES = [
 
 registerStep('resolveConfig', {
   deps: [],
-  reads: [], // ctx keys this step consumes that another step produces
+  reads: [], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [
     'tier', 'population', 'tradeRoute', 'terrainType', 'resolvedTerrain',
-    'culture', 'magicLevel', 'threat', 'priorityMagicEffective',
+    'culture', 'culturalIdentity', 'generationContentProfile',
+    'magicLevel', 'threat', 'priorityMagicEffective',
     'noMagic', 'townPlus', 'effectiveConfig',
     'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
   ],
@@ -79,43 +85,15 @@ registerStep('resolveConfig', {
   const goodsToggles       = config._goodsToggles       || {};
   const servicesToggles    = config._servicesToggles     || {};
 
-  // Validate the custom-path population up front. config.population arrives
-  // straight from user input and used to be taken verbatim — undefined, NaN,
-  // 0, a negative number, or a non-numeric string would flow into the tier
-  // pick AND the resolved population, poisoning every population-scaled
-  // calculation downstream. Coerce to a finite, positive integer; when it's
-  // missing or junk, fall back to the village default (mid of its range, the
-  // same tier the unknown-settType guard lands on).
-  const VILLAGE_DEFAULT_POP = Math.round(
-    (POPULATION_RANGES.village.min + POPULATION_RANGES.village.max) / 2,
-  );
-  // Upper ceiling: the population is not just floored/sanitized, it is CLAMPED
-  // to the metropolis max. Custom population arrives straight from user input;
-  // an absurd value (a stray extra digit, an intentional 10-million-person
-  // "city") would otherwise flow verbatim into the resolved population — where
-  // popToTier already saturates at 'metropolis', so the tier is right but every
-  // population-scaled calculation (institution counts, food, density, economy)
-  // is driven off a number the sim was never balanced for. Clamp to the top of
-  // the metropolis band so the largest custom settlement is a real metropolis.
-  const MAX_CUSTOM_POP = POPULATION_RANGES.metropolis.max;
-  const rawCustomPop = Number(config.population);
-  const customPopulation = Number.isFinite(rawCustomPop) && rawCustomPop >= 1
-    ? Math.min(Math.floor(rawCustomPop), MAX_CUSTOM_POP)
-    : VILLAGE_DEFAULT_POP;
-
   // Resolve tier
-  const rawTier = config.settType === 'custom'  ? popToTier(customPopulation)
-                : config.settType === 'random'  ? rng.pick(TIER_ORDER)
-                : (config.settType || 'village');
-  // Guard the direct-settType path: an unknown settType (anything outside the
-  // six canonical tiers) would otherwise make POPULATION_RANGES[tier] undefined
-  // and throw on popRange.min/.max below. Fall back to 'village'.
-  const tier = POPULATION_RANGES[rawTier] ? rawTier : 'village';
+  const tier = config.settType === 'custom'  ? popToTier(config.population)
+             : config.settType === 'random'  ? rng.pick(TIER_ORDER)
+             : (config.settType || 'village');
 
   // Population
   const popRange = POPULATION_RANGES[tier];
   const population = config.settType === 'custom'
-    ? customPopulation
+    ? config.population
     : rng.randInt(popRange.min, popRange.max);
 
   // Derive noMagic from the already-resolved effective priority so the two can't
@@ -123,6 +101,7 @@ registerStep('resolveConfig', {
   // priorityMagicEffective defaulted to 50, giving contradictory magic signals.
   const noMagic  = priorityMagicEffective === 0;
   const townPlus = TOWN_PLUS_TIERS.includes(tier);
+  const canUseMagicalIsolation = !noMagic && priorityMagicEffective >= 66;
 
   // Random terrain
   const randomTerrain = !config.terrainOverride || config.terrainOverride === 'auto';
@@ -140,11 +119,16 @@ registerStep('resolveConfig', {
   if (config.tradeRouteAccess === 'random_trade') {
     if (resolvedTerrain) {
       let pool = [...(TERRAIN_ROUTE_POOLS[resolvedTerrain] || ['road','road','road','crossroads'])];
-      if (noMagic && townPlus) pool = pool.filter(r => r !== 'isolated');
+      // Random defaults must not mint a town-scale isolation gap. High magic
+      // may still roll isolation because the later support model can add a
+      // last-resort transit path; low/no magic cannot.
+      if (townPlus && !canUseMagicalIsolation) {
+        pool = pool.filter(r => r !== 'isolated');
+      }
       if (pool.length === 0) pool = ['road'];
       routePool = pool;
     } else {
-      routePool = noMagic && townPlus
+      routePool = townPlus && !canUseMagicalIsolation
         ? ['road','road','road','river','crossroads','port']
         : ['road','road','road','river','crossroads','port','isolated'];
     }
@@ -154,7 +138,10 @@ registerStep('resolveConfig', {
     ? rng.pick(routePool)
     : (config.tradeRouteAccess || 'road');
 
-  const tradeRoute = (rawRoute === 'isolated' && townPlus && noMagic) ? 'road' : rawRoute;
+  // Explicit contradictions are authored premises, not values to rewrite
+  // behind the user's back. Random generation is repaired by the route pool
+  // above; an explicit isolated town survives and receives a support receipt.
+  const tradeRoute = rawRoute;
 
   // Derived values
   const magicLevel = getMagicLevel(priorityMagicEffective);
@@ -162,16 +149,33 @@ registerStep('resolveConfig', {
   const threat = (() => {
     let mt = config.monsterThreat;
     if (mt === 'random_threat') {
-      mt = rng.pick(['heartland','heartland','frontier','frontier','frontier','plagued']);
+      mt = rng.pick([...MONSTER_THREAT_RANDOM_POOL]);
     }
-    mt = mt || 'frontier';
-    return mt === 'low' ? 'heartland' : mt === 'high' ? 'plagued'
-         : mt === 'medium' ? 'frontier' : mt;
+    // Delegate the alias→canonical resolution to the ONE normalizer (the
+    // data-contract chokepoint); byte-identical to the prior inline logic.
+    return normalizeMonsterThreat(mt);
   })();
 
-  const culture = (config.culture === 'random_culture' || !config.culture)
+  const rawCulture = (config.culture === 'random_culture' || !config.culture)
     ? rng.pick(CULTURES)
     : config.culture;
+  // The old `mediterranean` fixture token fell through NPC naming and arrival
+  // prose to the Germanic fallback. Canonicalize legacy/unknown tokens once:
+  // mediterranean → latin; an unknown authored value → mixed rather than
+  // silently claiming a specific culture. The identity draws ride a named
+  // child stream so adding a profile variant cannot shift any other decision.
+  const culture = resolveCultureProfileKey(rawCulture);
+  const culturalIdentity = materializeCulturalIdentity(
+    culture,
+    rng.fork('cultural-identity'),
+  );
+  // Keep the authored boundary object explicit at the deterministic seam. It is
+  // generation input in its own right, not merely metadata attached to a named
+  // profile, and the UI-writer → pipeline-reader contract audits that handoff.
+  const generationContentProfile = resolveGenerationContentProfile({
+    ...config,
+    contentBoundaries: config.contentBoundaries,
+  });
 
   const terrainType = getTerrainType(tradeRoute, resolvedTerrain || config.terrainOverride || null);
 
@@ -189,9 +193,13 @@ registerStep('resolveConfig', {
     tier,
     priorityMagic: priorityMagicEffective,
     tradeRouteAccess: tradeRoute,
+    _routeIntent: config.tradeRouteAccess === 'random_trade' ? 'random' : 'explicit',
     magicLevel,
     monsterThreat: threat,
     culture,
+    cultureProfileKey: culturalIdentity.key,
+    contentProfile: generationContentProfile.id,
+    contentBoundaries: { ...generationContentProfile.boundaries },
     terrainType,
     terrainOverride: resolvedTerrain || config.terrainOverride || null,
     ...(militaryFloor ? { priorityMilitary: militaryFloor } : {}),
@@ -230,11 +238,30 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: 'config.terrainOverride=auto',
-        reason: 'Terrain not pinned. Weighted-rolled from regional pool.',
+        reason: 'Terrain not pinned — weighted-rolled from regional pool.',
       }],
       downstreamEffects: [
         { target: 'tradeRoutePool', effect: 'terrain-constrained' },
         { target: 'resourcePool',   effect: 'terrain-biased' },
+      ],
+    });
+  } else if (randomTerrain) {
+    // pipeline-7: terrain left on 'auto' with an EXPLICIT trade route is derived
+    // deterministically from that route (getTerrainType's route→terrain mapping),
+    // not rolled. This is disclosed, intended design ("Auto (from route)"), but the
+    // decision previously left no receipt — emit one so the lock is legible instead
+    // of invisible. Trace-only; generation output is unchanged.
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `terrain.${terrainType}`,
+      step: 'resolveConfig',
+      result: 'derived',
+      causes: [{
+        source: `config.tradeRouteAccess=${config.tradeRouteAccess || 'road'}`,
+        reason: `Terrain left on 'auto' with an explicit trade route — derived from the route (${config.tradeRouteAccess || 'road'} → ${terrainType}). Pick a terrain override or 'random_trade' for a weighted terrain roll.`,
+      }],
+      downstreamEffects: [
+        { target: 'resourcePool', effect: 'terrain-biased' },
       ],
     });
   }
@@ -247,9 +274,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: resolvedTerrain ? `terrain.${resolvedTerrain}` : 'config.tradeRouteAccess=random_trade',
-        reason: noMagic && townPlus && rawRoute === 'isolated'
-          ? `Rolled 'isolated' but town-plus + no-magic forces road access.`
-          : `Picked from pool: ${routePool.join(', ')}.`,
+        reason: `Picked from coherence-safe pool: ${routePool.join(', ')}.`,
       }],
       downstreamEffects: [
         { target: 'economicViability', effect: 'trade-access input' },
@@ -257,22 +282,21 @@ registerStep('resolveConfig', {
     });
   }
 
-  // The isolated→road rewrite above also fires on an EXPLICIT
-  // tradeRouteAccess:'isolated' (no routePool) — that path used to rewrite
-  // the user's choice with no trace at all. Mirror the rolled-pool trace
-  // shape so the override always leaves a receipt.
-  if (!routePool && tradeRoute !== rawRoute) {
+  // An explicit isolated town+ is preserved. Record that authored tension so
+  // the later isolation-support receipt is read as intentional rather than a
+  // hidden generator accident.
+  if (!routePool && tradeRoute === 'isolated' && townPlus) {
     recordTrace(ctx, {
       targetType: 'condition',
-      targetId: `tradeRoute.${tradeRoute}`,
+      targetId: 'tradeRoute.isolated',
       step: 'resolveConfig',
-      result: 'overridden',
+      result: 'selected',
       causes: [{
-        source: `config.tradeRouteAccess=${rawRoute}`,
-        reason: `Explicit 'isolated' chosen, but town-plus + no-magic forces road access.`,
+        source: 'config.tradeRouteAccess=isolated',
+        reason: `Explicit isolation preserved for a ${tier}; the support model will certify its local foodshed, reserves, seasonal access, patronage, and any functional magic.`,
       }],
       downstreamEffects: [
-        { target: 'economicViability', effect: 'trade-access input' },
+        { target: 'isolationSupport', effect: 'requires certification' },
       ],
     });
   }
@@ -309,7 +333,7 @@ registerStep('resolveConfig', {
       result: 'overridden',
       causes: [{
         source: `config.monsterThreat=${config.monsterThreat}`,
-        reason: 'Explicit plagued-tier threat with priorityMilitary below 25. A settlement under that pressure cannot field less than a skeleton garrison.',
+        reason: 'Explicit plagued-tier threat with priorityMilitary below 25 — a settlement under that pressure cannot field less than a skeleton garrison.',
       }],
       downstreamEffects: [
         { target: 'priorityMilitary', effect: 'floored to 25' },
@@ -325,7 +349,7 @@ registerStep('resolveConfig', {
       result: 'rolled',
       causes: [{
         source: config.culture ? `config.culture=${config.culture}` : 'config.culture=null',
-        reason: 'Culture not pinned. Picked from canonical 11-culture catalog.',
+        reason: 'Culture not pinned — picked from canonical 11-culture catalog.',
       }],
       downstreamEffects: [
         { target: 'namePool',          effect: 'culture-scoped' },
@@ -336,7 +360,8 @@ registerStep('resolveConfig', {
 
   return {
     tier, population, tradeRoute, terrainType, resolvedTerrain,
-    culture, magicLevel, threat, priorityMagicEffective,
+    culture, culturalIdentity, generationContentProfile,
+    magicLevel, threat, priorityMagicEffective,
     noMagic, townPlus, effectiveConfig,
     institutionToggles, categoryToggles, goodsToggles, servicesToggles,
   };

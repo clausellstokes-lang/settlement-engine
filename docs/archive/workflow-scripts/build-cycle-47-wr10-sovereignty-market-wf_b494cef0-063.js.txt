@@ -1,0 +1,107 @@
+export const meta = {
+  name: 'build-cycle-47-wr10-sovereignty-market',
+  description: 'WR-10 the sovereignty market — the war lane closes: scout the spec + twin notes, build dark under the standing laws, adversarially verify',
+  phases: [
+    { title: 'Measure', detail: 'WR-10 spec + twin notes + git state + premise re-measurement' },
+    { title: 'Build', detail: 'WR-10 built dark, graceful degradation until TR-5' },
+    { title: 'Verify', detail: 'independent adversarial verification' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block. Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; git commit -- with explicit paths). NEVER stash/reset/checkout--/clean; cp backups for mutants, restored cmp/md5-exact. Gates via sh scripts/gate-tail.sh or npm run check:tail, never bare pipes (⚠ gate-tail TRUNCATES its tail — for failure-SET captures recover the full log file it names, and assert BOTH sides of any diff non-empty AND untruncated before believing exit 0). ps aux for vitest before believing reds. python3 byte-scan (control bytes <9 or 14-31) EVERY authored file. tests/fixtures/ UNTOUCHED. Commit messages via FILE, trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. Only npm run typecheck:domain:strict counts for strict (ceiling 1313 — leave it met). Ledger edits APPEND-ONLY (⚠ the queue doc may carry FOREIGN UNCOMMITTED WIP from concurrent sessions — git diff it first; if dirty with foreign hunks, your append still only stages after confirming every staged hunk is yours, or STOP-report). tests/lint is RED AT BASE (32 tests / 11 files, pre-existing program debt) — capture the walker VIOLATION ROWS not just failing-file names (a by-name diff cannot see count growth inside an already-red walker); any NEW negative assertion in your tests carries its // anchored: reason on the assertion's own line or the line IMMEDIATELY above (nowhere else counts).
+SIZE LAW: pulseKernel.js 1580 and applyWorldPulse.js 941 are EXACT and MUST NOT grow (net-zero line edits only, measured); behavioralContract.js is near its wall — measure before touching anything; new logic = leaves under 800; measure every hot file's headroom BEFORE editing.
+EVERYTHING BUILDS DARK: no flag lit, no soak grid, no band ratified, no golden re-recorded, no push. Spine requirements 13+14 apply (Alignment line + Edit-verb story or recorded engine-only decision). BYTE-IDENTITY LAW: any same-seed claim over changed paths needs a PROVENANCE-COVERING fixture + an EXECUTED non-vacuity count, acceptance = PER-CELL base-to-HEAD equality; if only certification/harness surfaces are touched, a git-diff receipt with both sides shown suffices. THE SPATIAL CANON lives only in the soak fixture (buildWholeWorldSoakSpatialCanon) — any soak-shaped probe must reproduce it or its findings are about a world that does not ship.`
+
+const CONTEXT = `CONTEXT. The war lane stands at: WR-1..WR-8 CLOSED, WR-9 COMPLETE AS AN INSTRUMENT (@ d91e3ea0 tip). The final war wave per docs/SOL_QUEUE.md section 1 A1 item 10 is: "WR-10 THE SOVEREIGNTY MARKET (after WR-7; the trade-rights components degrade gracefully until TR-5 — twin notes in both volumes)". The spec lives in docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (find the WR-10 section and read it WHOLE, plus its section-10 protocol block); the TWIN NOTES also live in the trade volume (docs/DESIGN_FP_TRADE.md — find the WR-10/TR-5 twin note there and read both sides). THE QUEUE-ROWS-ARE-SPECS LAW: parts may already exist — run git log over both design docs, read any PROGRESS blockquotes, and grep src/+tests/ for every surface the spec names before designing. THE WR-7/CR-WR9-D LESSON (now bitten twice): re-measure EVERY premise the spec or this brief asserts, with MULTIPLE spellings in your greps — a chair grep-set that missed CAPABILITY_FLOOR by searching CAMPAIGN_FLOOR nearly planted a false receipt. Known standing facts you may rely on after re-verification: sovereigntyTradeEnabled exists ONLY at warConvergenceContract.js:54 + one test (no preset row — the same virtual-key class as conquestDoctrineEnabled, whose preset declaration is OWNER-GATED because declaring it moves new-campaign saves; if WR-10's flag needs a preset row, that is a STOP-report, not a build); subsystemRowsWar.js carries no WR-10 row; graceful degradation until TR-5 is a SPEC OBLIGATION — the trade-rights components must behave correctly while TR-5 is unbuilt, and that degradation must be PINNED, not assumed.`
+
+const MEASURE_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-10 SCOUT. Do NOT edit anything. Produce:
+1. The WR-10 spec digested: every obligation in BOTH volumes (war + trade twin notes), verbatim-quoted headings, each classified EXISTS (file:line + proof) / PARTIAL / ABSENT.
+2. Premise audit: every factual claim re-measured at HEAD with multi-spelling greps; stale premises flagged loudly.
+3. Write-surface map: files each obligation touches, effective sizes vs ceilings, any NEW PERSISTED SURFACE or flag-preset need (STOP items, not build items).
+4. Owner-gate scan: everything owner-gated/flag-lit/tuning/golden-shifting listed as PARKED.
+5. The TR-5 degradation contract: what "degrade gracefully" must mean concretely at HEAD, and how it gets PINNED.
+6. A recommended build plan: ordered pieces with files, pins/walkers, gates, STOP conditions.
+RETURN raw data: {spec:[...], premises:[...], surfaces:[...], parked:[...], degradation:[...], plan:[...], notes:'...'}.`
+
+phase('Measure')
+const m = await agent(MEASURE_BRIEF, {
+  label: 'wr10:scout',
+  phase: 'Measure',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['spec', 'premises', 'surfaces', 'parked', 'degradation', 'plan', 'notes'],
+    properties: {
+      spec: { type: 'array', items: { type: 'string' } },
+      premises: { type: 'array', items: { type: 'string' } },
+      surfaces: { type: 'array', items: { type: 'string' } },
+      parked: { type: 'array', items: { type: 'string' } },
+      degradation: { type: 'array', items: { type: 'string' } },
+      plan: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Build')
+const r = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-10 IMPLEMENTER. The scout's measured ground truth:
+${JSON.stringify(m, null, 2)}
+
+Build WR-10 per the scout's plan where spec and tree agree; where they disagree, live code outranks the census — STOP-and-report that item. Any new persisted surface, preset-flag declaration, flag lighting, or golden motion is a STOP-report, not a build. The TR-5 graceful-degradation contract is PINNED with executed evidence (drive the degraded path for real). Every piece lands with pins (real-generation, anchored negatives with correctly-placed reasons, executed mutants for every guard claiming catching power), gates, its own pathspec commit. The closing queue-row commit appends the WR-10 row to docs/FABLE_VALIDATION_QUEUE.md (append-only; check for foreign dirty hunks first) stating what landed, what is parked, and that the WAR LANE's build obligations are now complete pending owner-held items.
+
+GATE BAR per commit: focused suites green (quote per-file counts); tests/lint VIOLATION-ROW diff vs base (not just file names) — no new rows yours; typecheck:domain:strict 1313; any-cast unchanged; size ratchets with pulseKernel 1580 EXACT + applyWorldPulse 941 EXACT; npm run build + prerender + smoke:boot via gate-tail; byte-scan; same-seed per-cell equality on a provenance-covering fixture (with the spatial canon) + executed non-vacuity IF any world-byte path is touched — and if any cell moves on a dark build: STOP.
+
+RETURN raw data: {lane:'WR-10', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`, {
+  label: 'wr10:build',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-10 ADVERSARIAL VERIFIER. The scout reported:
+${JSON.stringify(m, null, 2)}
+
+The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust neither. At the committed HEAD on a clean tree: (1) read BOTH volumes' WR-10 obligations yourself and audit built-as-specced / deviated-and-recorded / silently-missing; (2) re-run every gate with counts, including the VIOLATION-ROW lint diff; (3) drive the TR-5 degradation contract yourself — the degraded path must behave as pinned, and a mutant breaking the degradation must red its pin; (4) if world-byte paths were touched, run YOUR OWN provenance-covering same-seed harness (spatial canon included, per-cell equality, executed non-vacuity) — any moved cell = REJECT; (5) execute at least one mutant per claimed guard; (6) ledger: append-only proven byte-prefix, row accurate, parked items listed; (7) hygiene: pathspec-tight, no fenced/foreign file staged, fixtures untouched, foreign WIP preserved. Attribute every red to this lane or prove it pre-existing at the lane's immediate parent.
+
+VERDICT: 'PASS — WR-10 STANDS AS BUILT; THE WAR LANE'S BUILD OBLIGATIONS ARE COMPLETE' only on executed evidence; otherwise REJECT with minimal repros. RETURN raw data: {lane:'WR-10 verify', verdict:'...', findings:[...]}.`, {
+  label: 'wr10:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { m, r, v }

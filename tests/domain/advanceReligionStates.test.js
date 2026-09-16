@@ -9,7 +9,7 @@ import { advanceReligionStates } from '../../src/domain/worldPulse/religiousCont
 import { patronSnapshot } from '../../src/domain/worldPulse/religionState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const deity = (name, temper, align, rank) => ({ _deityRef: `custom:lu_${name.toLowerCase()}`, name, temperamentAxis: temper, alignmentAxis: align, rankAxis: rank });
@@ -58,13 +58,41 @@ function makeRegion() {
   return { campaign, saves };
 }
 
-describe('advanceReligionStates — dormancy', () => {
-  it('religion off ⇒ null religionStates, no outcomes (byte-identical no-op)', () => {
+describe('advanceReligionStates — two-lane gate (W-F1)', () => {
+  it('spread OFF + deities present ⇒ LOCAL lane runs (per-settlement evolution), NO cross-settlement spread', () => {
+    // The gate split: with a deity present the subsystem is active, so each settlement
+    // evolves its own pantheon in place — but with spread OFF nothing crosses a
+    // settlement boundary (no mints, no carrier reach, no conversion outcomes).
     const { campaign, saves } = makeRegion();
     const snapshot = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
-    const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: 1, now: NOW, rules: { religionDynamicsEnabled: false } });
-    expect(r.religionStates).toBeNull();
+    const rng = createPRNG('rel::tick:1');
+    const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: 1, now: NOW, rules: { faithSpreadEnabled: false }, rng });
+    // LOCAL lane: both deity-bearing settlements evolve their own pantheon.
+    expect(r.religionStates).not.toBeNull();
+    expect(r.religionStates.a.patronRef).toBe(ref('Aurum'));
+    expect(r.religionStates.b.patronRef).toBe(ref('Faded'));
+    // SPREAD OFF: Aurum never crosses the allied edge into B (no reach entry there).
+    expect(r.religionStates.b.deities[ref('Aurum')]).toBeUndefined();
+    // No cross-settlement outputs: no religious_authority mints, no conversion outcomes.
+    expect(r.graphChannels).toEqual([]);
     expect(r.outcomes).toEqual([]);
+  });
+
+  it('DEITY-FREE ⇒ null religionStates regardless of the spread flag (the dormancy anchor)', () => {
+    const saves = [save('a', 'Acity', null, 'city'), save('b', 'Btown', null, 'town')];
+    const campaign = {
+      id: 'rel', name: 'rel', settlementIds: ['a', 'b'],
+      worldState: { rngSeed: 'rel', tick: 1, simulationRules: {} },
+      regionalGraph: ensureRegionalGraph({ edges: [] }),
+      wizardNews: { currentTick: 1, entries: [] },
+    };
+    const snapshot = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
+    for (const rules of [{ faithSpreadEnabled: false }, { faithSpreadEnabled: true }]) {
+      const r = advanceReligionStates({ snapshot, worldState: campaign.worldState, tick: 1, now: NOW, rules });
+      expect(r.religionStates).toBeNull();
+      expect(r.outcomes).toEqual([]);
+      expect(r.graphChannels).toEqual([]);
+    }
   });
 });
 

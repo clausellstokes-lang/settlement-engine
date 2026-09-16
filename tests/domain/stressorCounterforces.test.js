@@ -189,10 +189,13 @@ describe('residual affectedSystems use real causal variables', () => {
     return result.residualOutcomes[0].condition;
   }
 
-  test('succession_void residual maps law_order -> criminal_opportunity', () => {
+  test('[domain-top-state-2] succession_void residual carries BOTH real law_order and criminal_opportunity', () => {
+    // law_order is now the real 16th SYSTEM_VARIABLE, so its alias is dropped and the
+    // stressor reaches it directly; succession_void co-declares criminal_opportunity so
+    // the opportunist effect the old alias carried survives. Both must be present.
     const condition = resolveAndGetResidual('succession_void');
+    expect(condition.affectedSystems).toContain('law_order');
     expect(condition.affectedSystems).toContain('criminal_opportunity');
-    expect(condition.affectedSystems).not.toContain('law_order');
   });
 
   test('occupation residual maps faction_stability -> faction_power', () => {

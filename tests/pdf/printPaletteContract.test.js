@@ -45,7 +45,7 @@ describe('PDF print-palette contract (design/tokens lineage)', () => {
       ['gold', palette.gold, L.GOLD],
       ['good', palette.good, L.GREEN],
       ['bad',  palette.bad,  L.RED],
-      ['ai',   palette.ai,   L.VIOLET],
+      ['ai',   palette.ai,   L.SLATE],
     ];
     for (const [name, print, screen] of pairs) {
       expect(

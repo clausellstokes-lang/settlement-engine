@@ -30,6 +30,7 @@ describe('RESTORE_INSTITUTION scoping', () => {
     ],
   });
 
+  // Landed events wave — needs restore-scope handling (most-recent-impairment undo without causeEventId) in src/domain/events/mutate.js
   it('without a causeEventId, undoes only the MOST RECENT impairment — leaves unrelated ones intact', () => {
     const next = restore(settlement(), 'RESTORE_INSTITUTION', 'Granary');
     const granary = next.institutions.find(i => i.id === 'i1');
@@ -79,6 +80,7 @@ describe('RESTORE_FACTION scoping', () => {
     },
   });
 
+  // Landed events wave — needs restore-scope handling (most-recent-impairment undo without causeEventId) in src/domain/events/mutate.js
   it('without a causeEventId, undoes only the most recent impairment — leaves unrelated ones intact', () => {
     const next = restore(settlement(), 'RESTORE_FACTION', 'Merchants');
     const f = next.powerStructure.factions.find(x => x.id === 'f1');

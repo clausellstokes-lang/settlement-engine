@@ -1,0 +1,31 @@
+export const meta = {
+  name: 'build-cycle-6',
+  description: 'WR-7c repairs + WR-7d · legacy final desks · next surface (check-git-first)',
+  phases: [{ title: 'Build', detail: '3 lanes, implement then verify' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only; pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (full logs for walker diffs); goldens before wiring; STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". NEW STANDING LINE: run npm run typecheck:domain:strict and your NEW files must be strict-clean (the zero-ceiling ratchet is invisible to the hook — check it yourself). CHECK-GIT-FIRST on any queue surface (the queue lists specs, not open work). Best-over-safe. Everything DARK.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE A — WR-7c REPAIR SLICE then WR-7d. REPAIRS (one commit; the cycle-5 verifier's findings in wf_eee8477e-eb4's journal, Lane A verify — read first): (1) the ~7-line strict fixes (@param {string} reason ×4, index casts ×2, envoyTestimony's one) — new leaves strict-clean; (2) CHAIR RULING R-BLD-7: the docstring is the law — chooseAmongCompetingOffers compares acceptWeight against the UNION coalition's totalWeight (a sheet wins only by real majority of the whole coalition's weight); pin the unequal-weight rival case (3-weight sub-tally must NOT beat the 27-weight refusal); (3) desiredOutcome goes closedValue against ONE shared closed vocabulary (finite semantics — two spellings of peace must not break unanimity; pin case-drift); (4) reword the false 'no round compared with any maximum' claims (file docstring, test, queue row) to the honest form (the BAND is capped; maxProbe is a probe horizon with an honest beyond_probe arm — pin that arm); (5) the size-figure corrections (272/280/144) in the queue row. THEN WR-7d — RANSOM + THE COMPROMISED ENVOY (war volume §5 WR-7d, read whole): captivity→ransom on the I2 claim shape with a PERSON subject, dwell-gated on the hold ledger's heldSinceTick, demand and answer BOTH travel (law M), captor + home choices through character + books, the abandoned soul returns carrying the grievance PERSONALLY, SEND-TWO divergence caught by the corroboration ladder (the reader is spec-only upstream — J-INF-15: if you need it, build it as the shared lazy leaf INFO later consumes), the three K.7 shapes pinned. One pathspec commit + queue row. Return {lane:'A 7c-fix+7d', commits, gates, stopReports, notes}.`,
+    {label:'laneA:wr7d', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify the five repairs each with its pin (mutant the sub-tally comparison; case-drift the outcome token; the beyond_probe arm); WR-7d: the ransom rides I2's shape (no new claim vocabulary — grep), both messages TRAVEL (no same-tick teleport — carrier clock), the abandoned grievance is PERSONAL (facet material, never a fate), send-two divergence non-vacuous, strict-clean new files, sizes, pathspec-clean commits. Return {lane:'A verify', verdict, findings}.`,
+      {label:'laneA:verify6', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE B — THE LEGACY RETROFIT CLOSES: the remaining desks in docs/content/RECEIPT_POOLS_LEGACY.md (faith, interior/politics, knowledge/info — whatever §-desks remain unwired after slices 1-3; read the three landed commits 1b9b2b10/6d33aa8d/9dc12049 as your pattern and census what remains). Same discipline: variant-1 byte-equality (STOP on drift), per-entity seeding, goldens before wiring + per-kind plan quoted, repetition-envelope pin per desk, guard rows anchored. Close with a RETROFIT COMPLETE note in the annex header (kinds wired / total) + the queue item update. Return {lane:'B legacy-final', commits, gates, stopReports, notes}.`,
+    {label:'laneB:legacy3', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify byte-anchors, determinism, envelope pins with controls, the completeness census (every LEGACY desk wired or explicitly deferred with reason), pathspec-clean. Return {lane:'B verify', verdict, findings}.`,
+      {label:'laneB:verify6', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE C — THE ABOUT SPLIT (next dictation surface). CHECK-GIT-FIRST per the queue's new discipline: git log -- docs/DESIGN_ABOUT_PAGES.md (or the doc's actual name — grep docs/ for About) + read its PROGRESS blockquote + grep the components — if already built, AUDIT against spec like operator messages was (03d8ebee is your pattern) and close with the queue note; if partially built, complete the gap; if greenfield, implement per spec. Heed the LD-5 hazard note (AccountMenu.jsx carries a landed-surface amendment — read DESIGN_OPERATOR_MESSAGES.md §2 before touching it). Pathspec commits. Return {lane:'C about', commits, gates, stopReports, notes}.`,
+    {label:'laneC:about', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Whatever mode the lane took (audit/complete/build), re-verify its claims by execution; spec conformance §-by-§; pathspec-clean. Return {lane:'C verify', verdict, findings}.`,
+      {label:'laneC:verify6', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

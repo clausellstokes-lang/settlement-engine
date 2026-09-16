@@ -1,0 +1,1004 @@
+{
+  "schemaVersion": 1,
+  "kind": "custom_content_platform_promotion_contract",
+  "evaluatedAt": "2026-07-25",
+  "architecture": "docs/CUSTOM_CONTENT_PLATFORM_ARCHITECTURE.md",
+  "policy": "Custom content may be authored and used through the implemented bounded surfaces before the complete-platform claim is made. Full-platform promotion requires every open integration gate to be closed with source-bound evidence. Public marketplace, arbitrary execution, complete genre neutrality, and unregistered visual grammar are outside that promotion.",
+  "claim": {
+    "implementationStatus": "core_capabilities_implemented",
+    "integrationStatus": "platform_cutover_incomplete",
+    "promotionStatus": "withheld_pending_integration_and_evidence",
+    "currentDecision": "withhold_complete_platform_claim",
+    "publicMarketplaceStatus": "deferred_by_product_decision",
+    "genreNeutralityStatus": "not_claimed",
+    "arbitraryExecutionStatus": "prohibited"
+  },
+  "doctrine": {
+    "model": "controlled_extension_language",
+    "canonicalAuthority": "schema/custom-content.manifest.json",
+    "canonicalAuthorityScope": "authorable_definition_fields_and_effect_truth",
+    "reviewedDerivedAuthority": "src/domain/content/reviewedSupplyChainPersistence.js",
+    "serverAuthority": "bundled_generated_manifest",
+    "clientHandshake": "manifest_version_only",
+    "writeBoundary": "fingerprinted_application_commands_with_distinct_authorable_and_reviewed_derived_lanes",
+    "versioning": "immutable_revisions_with_expected_head_compare_and_swap",
+    "archiveAuthority": "canonical_full_constitution_graph",
+    "archiveRestore": "deterministic_owner_scoped_identity_remap",
+    "archiveActivation": "explicit_preserve_or_adopt_if_empty_policy",
+    "accountRestoreOrder": "archive_before_dependent_settlements_and_campaigns",
+    "localCloudCutover": "confirmed_import_then_all_source_snapshot_cas_clear",
+    "campaignTarget": "pinned_content_environment_revision",
+    "campaignPersistence": "journaled_saved_map_row_lock_compare_and_swap",
+    "removal": "archive_while_referenced",
+    "reviewedSupplyChains": "derived_non_authorable_artifact_with_dedicated_persistence_then_per_settlement_activation",
+    "vanilla": "first_class_empty_environment"
+  },
+  "truthContract": {
+    "scope": "authorable_definition_fields",
+    "effectKinds": [
+      "mechanical",
+      "presentation"
+    ],
+    "activationKinds": [
+      "always",
+      "conditional"
+    ],
+    "userLabels": [
+      "mechanical",
+      "conditional",
+      "presentation",
+      "unsupported"
+    ],
+    "unsupportedPersistsAsExecutableMeaning": false
+  },
+  "executableClaimContract": {
+    "manifestVersion": "2026-08-02.1",
+    "mechanicalFieldCount": 32,
+    "mechanicalCoverage": "exact_category_field_key_with_named_canonical_consumer_and_observation_probe",
+    "materializedIdentityResolution": "exact_definition_or_local_uid_then_unique_identity_free_legacy_name_fallback",
+    "ambiguousNameMechanics": "fail_closed_without_exact_materialized_identity",
+    "nativeKeywordFallback": "unstamped_legacy_only_current_custom_labels_mechanically_inert",
+    "presentationFieldCount": 52,
+    "presentationBoundary": "same_seed_generation_with_canonical_mechanics_projection_unchanged",
+    "presentationAdversarialTierRouteTerrainCases": 18,
+    "assemblyCoherenceRngIsolation": "named_canonical_coherence_substream",
+    "registeredValueConditionalFields": [
+      "deities.domain",
+      "services.category"
+    ],
+    "unknownFieldRejection": "every_authorable_bucket",
+    "referencePackCoverage": "every_authorable_bucket",
+    "tierRouteTerrainCases": 6,
+    "representativeTownSeedCount": 100,
+    "vanillaNonContamination": "byte_identical_before_and_after_custom_runtime",
+    "lifecycleCoverage": [
+      "reviewed_environment_activation",
+      "campaign_binding_pin",
+      "account_head_advancement",
+      "environment_rollback",
+      "archive_restore_with_destination_identity_remap"
+    ]
+  },
+  "authoringFlow": [
+    "describe",
+    "inspect",
+    "effects",
+    "sample",
+    "revise",
+    "approve",
+    "receipt"
+  ],
+  "authorableBuckets": [
+    "institutions",
+    "services",
+    "resources",
+    "stressors",
+    "tradeGoods",
+    "factions",
+    "deities",
+    "traditions"
+  ],
+  "sampleContract": {
+    "saved": false,
+    "comparison": "same_seed_same_config",
+    "transport": "click_lazy_worker",
+    "previewForcedBuckets": [
+      "institutions",
+      "resources",
+      "services"
+    ],
+    "previewDispositionStates": [
+      "materialized",
+      "absent",
+      "ambiguous"
+    ],
+    "previewOverrideMeaning": "marked_mandatory_without_bypassing_tier_provider_dependency_or_final_roster_gates",
+    "factProjectionOnly": true,
+    "campaignMigrationForecast": false,
+    "campaignBindingComparison": {
+      "implemented": true,
+      "saved": false,
+      "comparison": "same_seed_same_config",
+      "scope": "future_settlement_generation_not_world_pulse_causality"
+    }
+  },
+  "supplyChainContract": {
+    "reviewMeaning": "author_accepted_deterministic_projection",
+    "runtimeStates": [
+      "active",
+      "blocked",
+      "ineligible"
+    ],
+    "activationBoundary": "final_tier_institution_resource_and_service_roster",
+    "identityResolution": "byte_exact_stable_ref_or_unique_legacy_name_fail_closed",
+    "inferenceIdentityResolution": "stable_refs_remain_byte_exact_graph_tokens_and_topology_ids_hash_ordered_exact_uids",
+    "materializationIdentityResolution": "exact_definition_revision_and_hash_or_unique_identity_free_legacy_name",
+    "revisionBinding": "exact_computed_content_hash_and_projection_fingerprint",
+    "revisionChange": "confirmation_stale_and_trade_blocked_until_rereview",
+    "endpointAuthority": "explicit_fingerprinted_discovered_imports_and_exports_only",
+    "pathProjectionAuthority": "fingerprinted_nodes_and_endpoints_not_top_level_render_aliases",
+    "conditionalRelationshipFields": [
+      "institutions.requires",
+      "services.requires",
+      "resources.yields",
+      "tradeGoods.requiredResources"
+    ],
+    "conditionalOutputFields": [
+      "resources.commodities"
+    ],
+    "tradePromotion": "active_only",
+    "legacyWithoutEvidence": "needs_reevaluation",
+    "nativeImpairmentIntegration": false
+  },
+  "reviewedDerivedPersistenceContract": {
+    "category": "supplyChains",
+    "classification": "reviewed_derived_non_authorable",
+    "writeBoundary": "dedicated_exact_schema_local_and_cloud_cas_command",
+    "customNodeEvidence": "coherent_current_active_owner_definition_revision_head",
+    "customNodeTuple": [
+      "definitionId",
+      "revisionId",
+      "revisionNumber",
+      "contentHash",
+      "localUid",
+      "kind",
+      "category"
+    ],
+    "chainIdentity": "canonical_hash_of_ordered_exact_node_uids",
+    "artifactIdentityMayChangeChainId": false,
+    "oneCurrentArtifactPerOwnerChainId": true,
+    "history": "append_only_revisions_with_exact_head_archive_and_idempotent_receipts",
+    "environmentAndCampaignBinding": "direct_persisted_revision_only",
+    "genericAuthoringAdmission": false,
+    "packAdmission": false,
+    "archivePortability": "source_graph_validated_then_exact_node_remap_and_rehash",
+    "archiveChainCollision": "fail_closed",
+    "legacyGenericRows": "never_activate_local_flat_rows_ignored_cloud_rows_receipt_quarantined",
+    "legacyReferenceQuarantine": "affected_pack_versions_removed_independently_affected_environment_revision_and_later_same_environment_suffix_quarantined_unrelated_histories_survive",
+    "confirmationImpliesSettlementActivation": false,
+    "repositoryImplemented": true,
+    "productionDeploymentProven": false
+  },
+  "archiveContract": {
+    "format": "settlementforge.custom-content-ledger",
+    "scope": [
+      "active_and_archived_definitions",
+      "reviewed_derived_supply_chain_artifacts",
+      "all_immutable_revisions",
+      "all_retained_pack_versions_and_ordered_closures",
+      "stable_pack_entry_mappings",
+      "all_retained_environment_revisions",
+      "active_environment_pointer",
+      "finalized_command_receipts",
+      "bounded_nested_audit_provenance"
+    ],
+    "fidelity": "complete_graph_and_canonical_json_meaning_not_raw_file_bytes",
+    "exportAuthority": "authenticated_owner_data_right_not_premium_gated",
+    "importAuthority": "authenticated_active_premium_transaction",
+    "lineage": "one_contiguous_1_through_n_chain_with_maximum_head",
+    "identityRemap": {
+      "namespaceInputs": [
+        "destination_owner",
+        "stable_source_key",
+        "identity_kind",
+        "source_identity"
+      ],
+      "mappedKinds": [
+        "definition_ids",
+        "revision_ids",
+        "local_uids",
+        "pack_ids",
+        "environment_ids",
+        "environment_revision_ids"
+      ],
+      "rewritesCustomDependencies": true,
+      "recomputesRevisionContentHashes": true,
+      "rebuildsPackManifestsAndHashes": true,
+      "recomputesEnvironmentHashes": true,
+      "returnsDestinationHashes": true,
+      "serverCrossProvesSourceTransferAndIdentityMap": true,
+      "validatesReviewedSourceGraphBeforeRemap": true,
+      "rewritesReviewedCustomNodeTuples": true,
+      "recomputesReviewedChainIdentityProjectionAndHash": true,
+      "rejectsReviewedDestinationChainCollisions": true,
+      "reviewedArtifactsRemainExcludedFromPacks": true
+    },
+    "replay": "same_command_and_fingerprint_returns_finalized_receipt",
+    "provenanceConvergence": {
+      "ignores": [
+        "exported_at",
+        "outer_archive_fingerprint"
+      ],
+      "distinguishes": [
+        "source_key",
+        "source_ledger_fingerprint",
+        "command_receipts",
+        "nested_audit_provenance"
+      ]
+    },
+    "provenanceGraph": {
+      "logicalShape": "multi_root_dag",
+      "jsonEncoding": "nested_trees_with_shared_ancestors_repeated",
+      "duplicateFingerprint": "allowed_only_when_complete_canonical_node_meaning_is_identical",
+      "divergentDuplicateFingerprint": "rejected",
+      "uniqueNodeLimit": 128
+    },
+    "transportOnlySemanticReplayReusesDestinationResult": true,
+    "transportOnlySemanticReplayConsumesReceiptSlot": false,
+    "merge": "exact_immutable_duplicates_converge_conflicting_meaning_fails",
+    "fastForward": "only_contiguous_suffix_over_exact_installed_prefix",
+    "staleSnapshotMayRewind": false,
+    "divergentLineageMayBranch": false,
+    "sourceFastForwardMayOverwriteLocalLifecycleEdit": false,
+    "limitsApplyToResultingOwnerGraph": true,
+    "prospectiveCanonicalExportReadmittedBeforeSuccess": true,
+    "limitFailureRollsBackGraphAndIsReplayable": true,
+    "finalAvailableExportedReceiptSlotUsable": true,
+    "failureClassification": {
+      "explicitDatabaseOrApiRefusal": "confirmed_failed",
+      "unknownTransactionOutcome": "reconcile_required"
+    },
+    "activationPolicies": {
+      "preserve": "default_account_restore_keeps_destination_activation",
+      "adopt-if-empty": "cutover_may_adopt_source_activation_only_after_locked_pristine_destination_proof",
+      "compatibilityPointers": "rebuilt_only_from_winning_active_pack_facts"
+    }
+  },
+  "accountPortabilityContract": {
+    "v3Authority": "one_constitutional_archive",
+    "exportRequiresArchiveProjectionParity": true,
+    "duplicateDecodedJsonKeysRejected": true,
+    "archiveAndLegacyPackMayCompete": false,
+    "archiveLandsBeforeDependentSaves": true,
+    "reviewedDerivedArtifactsIncludedAndRemapped": true,
+    "campaignCurrentAndHistoryRemapped": true,
+    "campaignPackEnvironmentAndDefinitionIdentityRemapped": true,
+    "v3CampaignDefinitionRevisionLocalUidContentHashAndPackJoinsMustBeComplete": true,
+    "v3MappedEnvironmentJoinMustBeCompleteAndHashConsistent": true,
+    "v3CampaignOnlyEnvironmentMayUseDeterministicEmbeddedIdentity": true,
+    "v3CampaignMayEmbedMissingDefinitionRevisionOrPackIdentity": false,
+    "legacyCampaignCompatibilityMayEmbedHistoricalIdentity": true,
+    "settlementDefinitionRevisionLocalUidAndHashesRemapped": true,
+    "settlementCampaignHashRetainedOnlyWithRebuiltBinding": true,
+    "incompleteExactProvenance": "remove_and_warn",
+    "v3MayDegradeToPerHeadPackImport": false
+  },
+  "cutoverContract": {
+    "sourceAuthorities": [
+      "anonymous_browser_ledger",
+      "signed_in_browser_ledger"
+    ],
+    "mergeBeforeImport": true,
+    "stableSourceKey": true,
+    "authSessionFenced": true,
+    "cloudReceiptMustBeConfirmedApplied": true,
+    "localClear": "one_compare_all_snapshots_then_clear_operation",
+    "ambiguousOrStaleOutcomeRetainsAllLocalState": true,
+    "migrationFlagAfterSuccessfulClearOnly": true,
+    "checkpointMayHideNewLocalState": false,
+    "concurrentInvocationsCoalesced": true,
+    "successShapedUnconfirmedReceiptMayHydrateOrClear": false,
+    "repositoryImplemented": true,
+    "productionDeploymentProven": false
+  },
+  "visualContract": {
+    "authorableInstitutionFields": [
+      "sceneProfileId",
+      "landmarkLevel",
+      "materialFamily",
+      "glyph"
+    ],
+    "compilerOwned": [
+      "geometry",
+      "placement",
+      "footprint_bounds",
+      "height_bounds",
+      "roof_grammar",
+      "condition",
+      "lod",
+      "collision",
+      "materials",
+      "shaders",
+      "player_safe_projection"
+    ],
+    "unregisteredDeferredFields": [
+      "roofFamily",
+      "districtAffinity",
+      "signage",
+      "heraldry"
+    ],
+    "arbitraryMeshAllowed": false,
+    "arbitraryShaderAllowed": false
+  },
+  "sourceRoots": [
+    {
+      "path": "schema/custom-content.manifest.json",
+      "required": true
+    },
+    {
+      "path": "scripts/generate-custom-content-manifest.mjs",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentManifest.generated.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentManifest.js",
+      "required": true
+    },
+    {
+      "path": "supabase/functions/_shared/customContentManifest.generated.ts",
+      "required": true
+    },
+    {
+      "path": "supabase/functions/custom-content/customContentCore.ts",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/contentDraftSession.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/contentEffectProjection.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentSemanticAuthority.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customDefinitionIdentityProjection.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/contentSamplePreview.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/contentSampleCategoryFixtures.js",
+      "required": true
+    },
+    {
+      "path": "src/workers/customContentPreview.worker.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentPreviewClient.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentUsage.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/settlementContentProvenance.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentVersioning.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/contentEnvironment.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/campaignContentLifecycle.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/campaignContentBindingCas.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/campaignContentBindingCache.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/localAuthorityMutex.js",
+      "required": true
+    },
+    {
+      "path": "src/store/campaignContentBindingSession.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/userContentTunables.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customContentCommands.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/customSupplyChainIdentity.js",
+      "required": true
+    },
+    {
+      "path": "src/domain/content/reviewedSupplyChainPersistence.js",
+      "required": true
+    },
+    {
+      "path": "src/application/commands/adapters/customContentApply.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContent.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentLocalLedger.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentLocalLedgerMigration.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentLocalReviewedChains.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentReviewedSupplyChainService.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveContract.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveValidation.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveReviewedChains.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchive.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchivePack.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveImport.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveMerge.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentArchiveService.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentLocalArchiveSession.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentLocalArchive.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/customContentCutover.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/accountContentPortability.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/accountContentReferenceInspection.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/accountData.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/accountImport.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/accountSettlementContentPortability.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/contentPacks.js",
+      "required": true
+    },
+    {
+      "path": "supabase/migrations/185_custom_content_versions.sql",
+      "required": true
+    },
+    {
+      "path": "supabase/migrations/186_campaign_content_binding_cas.sql",
+      "required": true
+    },
+    {
+      "path": "supabase/migrations/187_custom_content_archive_transfer.sql",
+      "required": true
+    },
+    {
+      "path": "supabase/migrations/188_reviewed_supply_chain_persistence.sql",
+      "required": true
+    },
+    {
+      "path": "tests/security/customContentArchive188Upgrade.pglite.test.js",
+      "required": true
+    },
+    {
+      "path": "src/store/customContentSlice.js",
+      "required": true
+    },
+    {
+      "path": "src/store/customContentArchiveActions.js",
+      "required": true
+    },
+    {
+      "path": "src/store/customContentReviewedSupplyChainActions.js",
+      "required": true
+    },
+    {
+      "path": "src/store/accountImportBody.js",
+      "required": true
+    },
+    {
+      "path": "src/store/campaignSlice.js",
+      "required": true
+    },
+    {
+      "path": "src/components/contentStudio",
+      "required": true
+    },
+    {
+      "path": "src/components/contentStudio/CampaignContentBindingLifecycle.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/surveyor/CustomContentPanel.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/compendium/CustomContent.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/compendium/CustomContentUsageEcho.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/compendium/SupplyChainsManager.jsx",
+      "required": true
+    },
+    {
+      "path": "src/domain/townScene/customBuildingPresentation.js",
+      "required": true
+    },
+    {
+      "path": "docs/CUSTOM_CONTENT_PLATFORM_ARCHITECTURE.md",
+      "required": true
+    },
+    {
+      "path": "docs/CUSTOM_CONTENT_PROMOTION_CONTRACT.json",
+      "required": true
+    }
+  ],
+  "implementedGates": [
+    {
+      "id": "CC-MANIFEST",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "One icon-free manifest controls authorable buckets, fields, effect truth, activation truth, and client-edge generation parity.",
+      "evidence": [
+        "schema/custom-content.manifest.json",
+        "scripts/generate-custom-content-manifest.mjs",
+        "tests/domain/customContentManifest.contract.test.js",
+        "tests/edgeFunctions/customContentManifestAuthority.test.js"
+      ]
+    },
+    {
+      "id": "CC-ADMISSION",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Unknown buckets, unknown fields, invalid values, and missing required fields fail closed before persistence.",
+      "evidence": [
+        "src/domain/content/customContentManifest.js",
+        "supabase/functions/custom-content/customContentCore.ts",
+        "tests/domain/customContentCompile.test.js"
+      ]
+    },
+    {
+      "id": "CC-TRUTH",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "The review surfaces derive Mechanical, Conditional, Presentation, and Unsupported labels from the manifest rather than provider prose.",
+      "evidence": [
+        "src/domain/content/contentEffectProjection.js",
+        "src/components/contentStudio/ContentInterpretation.jsx",
+        "tests/domain/contentEffectProjection.test.js"
+      ]
+    },
+    {
+      "id": "CC-SEMANTIC-CLAIMS",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Every current mechanical manifest field is verified by exact category and field key against a named canonical consumer and observable probe; every presentation field is verified not to change the same-seed canonical mechanics projection, current custom labels cannot invoke native keyword physics, presentation draw counts cannot shift later mechanics, and one all-category reference pack proves admission, dormancy, provenance, deterministic tier coverage, vanilla isolation, and portable lifecycle behavior.",
+      "evidence": [
+        "src/domain/content/customContentSemanticAuthority.js",
+        "tests/domain/customContentMechanicalClaims.test.js",
+        "tests/domain/customContentPresentationClaims.test.js",
+        "tests/generators/assemblyCoherenceRngIsolation.test.js",
+        "tests/lib/dependencyEngineAmbiguity.test.js",
+        "tests/lib/foodImpactTally.test.js",
+        "tests/lib/finishedGoodsSupply.test.js",
+        "tests/generators/customFoodImpact.integration.test.js",
+        "tests/generators/customServiceProvenance.test.js",
+        "tests/generators/customServiceProviderGate.test.js",
+        "tests/generators/customTradeSemanticsAmbiguity.test.js",
+        "tests/fixtures/customContentReferencePack.js",
+        "tests/generators/customContentReferencePack.matrix.test.js",
+        "tests/domain/customContentReferencePackLifecycle.test.js",
+        "tests/lib/customContentArchive.test.js",
+        "tests/lib/customContentArchiveMerge.test.js",
+        "tests/domain/contentEnvironment.test.js",
+        "tests/lib/campaignContentBindingCas.test.js"
+      ]
+    },
+    {
+      "id": "CC-AUTHORING-FLOW",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Surveyor authoring follows an explicit seven-stage state machine and waits for a write receipt.",
+      "evidence": [
+        "src/domain/content/contentDraftSession.js",
+        "src/components/surveyor/CustomContentPanel.jsx",
+        "tests/domain/contentDraftSession.test.js",
+        "tests/components/surveyorCustomContentPanel.test.jsx"
+      ]
+    },
+    {
+      "id": "CC-SAMPLE",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "The unsaved sample compares same-seed settlements in a lazy worker, marks only bounded candidate categories as mandatory, and reports their actual exact-identity materialized, absent, or ambiguous outcomes alongside dormant categories.",
+      "evidence": [
+        "src/domain/content/contentSamplePreview.js",
+        "src/workers/customContentPreview.worker.js",
+        "src/lib/customContentPreviewClient.js",
+        "tests/domain/contentSamplePreview.test.js",
+        "tests/ui/contentSampleReceipt.test.jsx",
+        "tests/build/customContentPreviewLazy.test.js"
+      ]
+    },
+    {
+      "id": "CC-USAGE-ECHO",
+      "status": "implemented_with_legacy_inference",
+      "proofClass": "repository",
+      "claim": "The Compendium reports bounded reverse usage, consumes exact settlement materialization receipts, labels name-only historical matches as inferred, and never treats a hash or fingerprint alone as definition-exact identity.",
+      "evidence": [
+        "src/domain/content/customContentUsage.js",
+        "src/domain/content/settlementContentProvenance.js",
+        "src/components/compendium/CustomContentUsageEcho.jsx",
+        "tests/domain/customContentUsage.test.js",
+        "tests/domain/settlementContentProvenance.test.js"
+      ]
+    },
+    {
+      "id": "CC-VERSION-PRIMITIVES",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Definitions have stable identity, revisions are immutable and content-addressed, and edits use expected-head comparison.",
+      "evidence": [
+        "src/domain/content/customContentVersioning.js",
+        "src/lib/customContent.js",
+        "src/store/customContentSlice.js"
+      ]
+    },
+    {
+      "id": "CC-COMMAND",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Every mutation crosses a fingerprinted application-command lane and returns a structured receipt; authorable operations share the generic family while reviewed-derived chains use their separate exact-schema command.",
+      "evidence": [
+        "src/domain/content/customContentCommands.js",
+        "src/application/commands/adapters/customContentApply.js",
+        "src/store/customContentSlice.js"
+      ]
+    },
+    {
+      "id": "CC-PACK-V2",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Pack v2 is bounded, hashed, versioned, compatibility-aware, dependency-diagnostic, prepared as one atomic import, and restricted to the eight authorable buckets rather than reviewed-derived artifacts.",
+      "evidence": [
+        "src/lib/contentPacks.js",
+        "tests/lib/contentPacks.test.js"
+      ]
+    },
+    {
+      "id": "CC-ARCHIVE-PORTABILITY",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "The canonical archive preserves the complete immutable owner graph, including reviewed-derived artifacts and a bounded multi-root provenance DAG, validates every lineage, closure, reviewed-node tuple, and repeated provenance fingerprint, deterministically re-namespaces all identities and hashes, and defines replay, exact merge, compatible fast-forward, aggregate-limit, collision, and explicit activation laws.",
+      "evidence": [
+        "src/lib/customContentArchiveContract.js",
+        "src/lib/customContentArchiveValidation.js",
+        "src/lib/customContentArchiveReviewedChains.js",
+        "src/lib/customContentArchive.js",
+        "src/lib/customContentArchivePack.js",
+        "src/lib/customContentArchiveImport.js",
+        "src/lib/customContentArchiveMerge.js",
+        "src/lib/customContentArchiveService.js",
+        "src/lib/customContentLocalAuthorityRead.js",
+        "src/lib/customContentLocalArchive.js",
+        "supabase/migrations/187_custom_content_archive_transfer.sql",
+        "supabase/migrations/188_reviewed_supply_chain_persistence.sql",
+        "tests/lib/customContentArchive.test.js",
+        "tests/lib/customContentArchiveMerge.test.js",
+        "tests/lib/customContentArchiveService.test.js",
+        "tests/lib/customContentLocalLedger.test.js",
+        "tests/security/customContentArchiveTransfer.pglite.test.js",
+        "tests/security/customContentArchive188Upgrade.pglite.test.js"
+      ]
+    },
+    {
+      "id": "CC-ACCOUNT-PORTABILITY",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Account import restores one v3 constitutional archive, including reviewed-derived artifact history, before dependent saves and rebuilds campaign current/history plus settlement provenance in the receiving identity and hash namespace without retaining unproved foreign joins.",
+      "evidence": [
+        "src/lib/accountContentReferenceInspection.js",
+        "src/lib/accountContentPortability.js",
+        "src/lib/accountSettlementContentPortability.js",
+        "src/lib/accountData.js",
+        "src/lib/accountImport.js",
+        "src/store/accountImportBody.js",
+        "src/store/campaignImportedCreation.js",
+        "tests/lib/accountData.test.js",
+        "tests/lib/accountImport.test.js",
+        "tests/lib/accountContentPortability.test.js",
+        "tests/lib/accountSettlementContentPortability.test.js",
+        "tests/store/accountImportSlice.test.js",
+        "tests/store/campaignSlice.deletionSync.test.js"
+      ]
+    },
+    {
+      "id": "CC-CUTOVER-PROTOCOL",
+      "status": "implemented_in_repository",
+      "proofClass": "repository",
+      "claim": "Premium local-to-cloud cutover merges anonymous and signed-in browser ledgers, fences the owner, requires a confirmed idempotent cloud import, and clears all source ledgers only through one compare-all-snapshots operation.",
+      "evidence": [
+        "src/lib/customContentCutover.js",
+        "src/lib/customContentLocalArchiveSession.js",
+        "src/store/customContentArchiveActions.js",
+        "tests/store/customContentArchiveActions.test.js",
+        "tests/store/customContentCutover.test.js"
+      ]
+    },
+    {
+      "id": "CC-CAMPAIGN-BINDING",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Campaign creation, generation, advancement, forecast, import, persistence, migration, and rollback resolve from the canonical portable binding in the saved-map envelope; cloud binding changes use a journaled row-locking compare-and-swap that cannot be undone by a later blind envelope write.",
+      "evidence": [
+        "src/domain/content/contentEnvironment.js",
+        "src/domain/content/campaignContentLifecycle.js",
+        "src/lib/campaignContentBindingCas.js",
+        "src/store/settlementContentRuntime.js",
+        "src/store/campaignAdvanceSession.js",
+        "src/store/campaignContentBindingSession.js",
+        "src/store/campaignSlice.js",
+        "supabase/migrations/186_campaign_content_binding_cas.sql",
+        "tests/domain/campaignContentLifecycle.test.js",
+        "tests/lib/campaignContentBindingCas.test.js",
+        "tests/lib/campaignsOwnerRace.test.js",
+        "tests/store/campaignContentLifecycle.test.js",
+        "tests/security/campaignContentBindingCas.pglite.test.js",
+        "tests/store/lifecycleRoundTrip.test.js"
+      ]
+    },
+    {
+      "id": "CC-ENVIRONMENT-MIGRATION",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Standalone environments select exact authored-definition and reviewed-derived artifact heads, vanilla is an empty non-destructive runtime, and standalone plus campaign migration provide deterministic review, stale refusal, immutable rollback, and recovery.",
+      "evidence": [
+        "src/domain/content/contentEnvironment.js",
+        "src/domain/content/campaignContentLifecycle.js",
+        "src/components/contentStudio/ContentEnvironmentLifecycle.jsx",
+        "src/components/contentStudio/CampaignContentBindingLifecycle.jsx",
+        "tests/domain/contentEnvironment.test.js",
+        "tests/domain/campaignContentLifecycle.test.js",
+        "tests/store/customContentEnvironment.test.js",
+        "tests/store/campaignContentLifecycle.test.js",
+        "tests/components/contentEnvironmentLifecycle.test.jsx",
+        "tests/components/campaignContentBindingLifecycle.test.jsx"
+      ]
+    },
+    {
+      "id": "CC-TUNABLE-RUNTIME",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Registered integer environment defaults reach canonical generation beneath explicit per-generation choices and fail closed on invalid values.",
+      "evidence": [
+        "src/domain/content/userContentTunables.js",
+        "src/generators/generateSettlementPipeline.js",
+        "src/store/settlementContentRuntime.js",
+        "tests/store/customContentTunablesRuntime.test.js",
+        "tests/security/customContentAdmissionAdversarial.test.js"
+      ]
+    },
+    {
+      "id": "CC-HISTORY-UX",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "The Compendium exposes definition revision history, archive and restore, forward definition rollback, immutable environment rollback, and campaign binding history recovery.",
+      "evidence": [
+        "src/components/contentStudio/CustomContentLifecycle.jsx",
+        "src/components/contentStudio/ContentEnvironmentLifecycle.jsx",
+        "src/components/contentStudio/CampaignContentBindingLifecycle.jsx",
+        "tests/components/customContentLifecycle.test.jsx",
+        "tests/components/contentEnvironmentLifecycle.test.jsx",
+        "tests/components/campaignContentBindingLifecycle.test.jsx"
+      ]
+    },
+    {
+      "id": "CC-VISUAL-BOUNDARY",
+      "status": "implemented_registered_subset",
+      "proofClass": "repository",
+      "claim": "Custom institutions select only registered scene profiles, landmark prominence, materials, and glyphs while the scene compiler owns safe geometry.",
+      "evidence": [
+        "schema/custom-content.manifest.json",
+        "src/domain/townScene/customBuildingPresentation.js",
+        "tests/domain/customTownScenePresentation.test.js"
+      ]
+    },
+    {
+      "id": "CC-SUPPLY-CHAIN-ACTIVATION",
+      "status": "implemented",
+      "proofClass": "repository",
+      "claim": "Confirmed custom chains preserve exact stable references through inference, bind computed definition revisions and explicit canonical graph endpoints, and match exact materialized identity before activation; runtime path fields derive from that fingerprinted projection, only active current reviews promote trade endpoints, and stale, blocked, and ineligible reasons remain visible.",
+      "evidence": [
+        "src/domain/inferSupplyChains.js",
+        "src/domain/content/customSupplyChainReview.js",
+        "src/domain/content/customSupplyChainActivation.js",
+        "src/domain/content/customSupplyChainPresentation.js",
+        "src/generators/steps/economyReconcilePass.js",
+        "src/components/compendium/SupplyChainsManager.jsx",
+        "src/components/new/tabs/EconomicsTab.jsx",
+        "src/pdf/lib/customSupplyChains.js",
+        "src/pdf/lib/viewModel.js",
+        "src/pdf/sections/EconomicsTrade.jsx",
+        "tests/domain/inferSupplyChains.test.js",
+        "tests/generators/customSupplyChainActivation.test.js",
+        "tests/components/customSupplyChainActivationPresentation.test.jsx",
+        "tests/domain/customDefinitionIdentityProjection.test.js"
+      ]
+    },
+    {
+      "id": "CC-REVIEWED-DERIVED-PERSISTENCE",
+      "status": "implemented_in_repository",
+      "proofClass": "repository",
+      "claim": "Reviewed supply chains use a dedicated exact-schema local and cloud CAS command that anchors custom nodes to current owner heads, preserves immutable artifact identity and lifecycle through environments, campaign bindings, archives, and account transfer, excludes the category from generic authoring and packs, and quarantines pre-188 false authority; repository implementation does not prove production deployment.",
+      "evidence": [
+        "src/domain/content/customSupplyChainIdentity.js",
+        "src/domain/content/reviewedSupplyChainPersistence.js",
+        "src/lib/customContentLocalReviewedChains.js",
+        "src/lib/customContentReviewedSupplyChainService.js",
+        "src/lib/customContentArchiveReviewedChains.js",
+        "src/store/customContentReviewedSupplyChainActions.js",
+        "src/components/compendium/SupplyChainsManager.jsx",
+        "supabase/migrations/188_reviewed_supply_chain_persistence.sql",
+        "tests/components/supplyChainsManagerReview.test.jsx",
+        "tests/lib/customContentLocalLedger.test.js",
+        "tests/security/reviewedSupplyChainPersistence.pglite.test.js"
+      ]
+    }
+  ],
+  "openGates": [
+    {
+      "id": "CC-CLOUD-CUTOVER",
+      "status": "open",
+      "proofClass": "deployment_and_rehearsal",
+      "reason": "Migration 187 implements the constitutional archive and cutover base; migration 188 adds reviewed-derived persistence and forward-patches that archive authority, and both are implemented in the repository. Repository implementation is not proof that migrations 185 through 188, their RLS and grants, the archive and reviewed-chain transactions, or the local-to-cloud recovery procedure have been rehearsed and deployed in the target environment.",
+      "requiredEvidence": [
+        "target migration head confirms migrations 185 through 188",
+        "production-clone full-graph export restore replay fast-forward and rollback rehearsal receipt",
+        "post-deploy RLS grant entitlement archive RPC and reviewed-chain RPC verification",
+        "cross-device anonymous plus signed-in cutover recovery drill",
+        "observed ambiguous-response and stale-local-snapshot retry evidence"
+      ]
+    },
+    {
+      "id": "CC-PROVENANCE-COVERAGE",
+      "status": "open",
+      "proofClass": "repository",
+      "reason": "New settlements now retain exact reviewed-environment and materialized-definition receipts, and custom TownScene institutions plus generated custom services retain exact revision identity. Tick-time simulation, Herald, Chronicle, and legacy records do not yet carry that provenance universally.",
+      "requiredEvidence": [
+        "generator provenance coverage walker",
+        "simulation and worker provenance parity tests",
+        "TownScene and 2D map provenance tests",
+        "Herald and Chronicle provenance tests",
+        "legacy inference shrink report"
+      ]
+    },
+    {
+      "id": "CC-PLATFORM-EVIDENCE",
+      "status": "open",
+      "proofClass": "repository_device_lab_and_user_validation",
+      "reason": "A complete-platform claim also needs current determinism, security, accessibility, performance, recovery, and uncoached comprehension evidence bound to the promoted source.",
+      "requiredEvidence": [
+        "full repository gate",
+        "pack and compiler adversarial corpus",
+        "keyboard and assistive-technology matrix",
+        "large-library and large-pack performance receipt",
+        "offline, conflict, and ambiguous-write recovery drills",
+        "uncoached authoring comprehension study"
+      ]
+    }
+  ],
+  "intentionalDeferrals": [
+    {
+      "id": "CC-MARKETPLACE",
+      "status": "deferred",
+      "reason": "Public distribution adds moderation, licensing, attribution, discovery, creator support, payments, compatibility, and long-lived update obligations. Private authoring and portability must mature first."
+    },
+    {
+      "id": "CC-GENRE-NEUTRALITY",
+      "status": "not_claimed",
+      "reason": "The extension wall is reusable, but the current vocabulary, tiers, institutions, politics, religion, and campaign rhythms remain materially medieval-fantasy shaped."
+    },
+    {
+      "id": "CC-VISUAL-EXPANSION",
+      "status": "deferred",
+      "reason": "Roof family, district affinity, signage, heraldry, and setting-pack architecture vocabularies require registered 2D and 3D consumers, safe fallbacks, export behavior, and performance evidence before admission."
+    },
+    {
+      "id": "CC-ARBITRARY-RULES",
+      "status": "prohibited",
+      "reason": "User JavaScript, formulas, state schemas, meshes, shaders, network calls, and simulation physics would violate determinism, security, explainability, and save compatibility."
+    }
+  ],
+  "promotionRules": {
+    "allOpenGatesMustBeClosed": true,
+    "requiredGateEvidenceMustBeSourceBound": true,
+    "publicMarketplaceRequiredForPromotion": false,
+    "completeGenreNeutralityRequiredForPromotion": false,
+    "arbitraryExecutionMayBeEnabled": false,
+    "unregisteredVisualFieldsMayBePersisted": false,
+    "accountRestoreMayOverrideDestinationActivation": false,
+    "cutoverActivationRequiresLockedPristineDestination": true,
+    "localCutoverClearRequiresConfirmedImportAndMatchingSnapshots": true,
+    "unmappedForeignProvenanceMayBePresentedAsExact": false,
+    "reviewedDerivedMayUseGenericAuthoringOrPacks": false,
+    "reviewedDerivedConfirmationMayImplySettlementActivation": false,
+    "currentCustomLabelMayInvokeNativeKeywordMechanics": false,
+    "reviewedDerivedArchiveRemapMayReuseStaleSourceNodeEvidence": false,
+    "promotionRequiresSeparateReviewedChange": true
+  }
+}

@@ -1,0 +1,29 @@
+export const meta = {
+  name: 'tablet-companion-research',
+  description: 'Sixth research sweep: the tablet companion (realm-capable) feeding THE ORGANIC CRAFT LAW',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      principle: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'principle', 'emulate'] } },
+    firstPrinciples: { type: 'array', items: { type: 'string' } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'firstPrinciples', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'premium-tablet-craft', prompt: `Research premium TABLET web experiences — what makes an iPad-class rendering feel bespoke rather than a stretched phone or shrunken desktop (the two documented tablet failure modes): tablet-specific composition (two-page book spreads, split views, floating panels), reading + touch hybrid ergonomics (the tablet as the book-like device), orientation strategy (landscape vs portrait as different compositions, not reflows), and celebrated tablet-first web/app design. FIRST PRINCIPLES: what earns the tablet its OWN art direction? The client: a parchment-toned D&D world-simulator under an organic-craft law (manuscript grammar, surveyor's-desk fiction) whose tablet piece must hit a $10k bespoke bar. Return named examples + principles + emulate/avoid.` },
+  { key: 'tablet-at-the-table', prompt: `Research the TABLET AT THE TTRPG TABLE — the use-case where the tablet is the classic GM-screen/map-display form factor: how GMs actually use iPads at games (GM screen replacement, player-facing battle maps laid flat, VTT tablet clients — Foundry/Roll20 on iPad, D&D Beyond tablet usage), the flat-on-table shared-viewing scenario (players around a tablet showing a town map — orientation, glare, touch by multiple hands), tablet initiative/reference workflows vs phone glanceability, and what published digital GM tools do well/badly on tablets. FIRST PRINCIPLES: which surfaces does the TABLET own at the table that neither phone nor laptop does? The client has town maps, interiors, fog-of-war (a table layer!), dossiers, and a desktop realm — the tablet may be the fog layer's true home. Return principles + emulate/avoid.` },
+  { key: 'touch-complex-tools', prompt: `Research TOUCH-FIRST COMPLEX TOOL design — how serious creative/spatial tools made touch work without a cursor: Figma on iPad/FigJam touch, Procreate's interface discipline (minimal chrome, gesture vocabulary, radial/corner controls), Miro/whiteboard touch patterns, map applications' touch ergonomics (pan/zoom/drag-place/inspect on touch — Google Maps/Felt-class), palm rejection and accidental-touch handling, drag-and-drop on touch (the client's realm has drag-settlement-onto-map placement), and precision techniques for fat fingers (magnifier loupes, tap-then-confirm placement, snap assists). FIRST PRINCIPLES for making a WORLD MAP with drag-placement + overlays work beautifully on touch. The client's realm (map + canonize + advance controls, FMG-based world map in an iframe) is now RULED tablet-capable. Return principles + emulate/avoid.` },
+  { key: 'posture-model-breakpoints', prompt: `Research the TABLET BREAKPOINT PROBLEM in responsive design — the documented trap of tablets falling between mobile and desktop layouts: posture-based design (pointer:coarse/hover:none media queries + width + orientation as a POSTURE MODEL, not width-only breakpoints), container queries for component-level adaptation, hybrid input (touch + keyboard + trackpad iPads — hover exists SOMETIMES), the iPadOS desktop-class-browser complication (tablets requesting desktop sites; UA vs client-hints detection honesty), split-screen/multitasking window sizes breaking device assumptions, and how design systems that handle three postures well actually structure their code. FIRST PRINCIPLES for adding a third posture to an app with an existing mobile/desktop binary (the client has a useIsMobile matchMedia layer). Return principles + emulate/avoid.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for the TABLET COMPANION research sweep — a parchment/gold D&D world-simulator adding a tablet posture (REALM-CAPABLE by owner ruling) to an organic-craft design law with existing desktop + phone-field-companion postures, on a React SPA with a useIsMobile matchMedia binary. The four syntheses + first principles: ${JSON.stringify(results.filter(Boolean).map(r => ({s: r.synthesis, fp: r.firstPrinciples})))}. Name: (1) what is MISSING (esp. the FMG realm iframe's actual touch behavior — vendored map fork; multi-window/split-screen; the fog table-layer's player-facing flat-tablet scenario interacting with the DM/player visibility split), (2) the FIVE strongest principles for the tablet posture, (3) the biggest tablet-specific failure risk and its guard. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

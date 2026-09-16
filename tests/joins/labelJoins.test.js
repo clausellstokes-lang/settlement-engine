@@ -72,13 +72,45 @@ const FROZEN_LABEL_JOINS = Object.freeze({
   'src/generators/cascadeGenerator.js': 2,
   'src/generators/computeActiveChains.js': 10,
   'src/generators/defenseGenerator.js': 2,
-  'src/generators/economicGenerator.js': 58, // 55 → 58: de-minification revealed existing scans (see note above)
+  // economicGenerator.js is now a re-export barrel (F31); its 58 sites moved
+  // verbatim into economy/* — minus dead-code deletions, a legitimate SHRINK
+  // to 51 total (golden byte-identical across the split).
+  //
+  // CORRECTION 2026-07-09 (review residue R2, same class as the 2026-06-14
+  // note above): renaming economicState.js's minified INTERIOR locals revealed
+  // one PRE-EXISTING site to the instName-includes signature — the institution
+  // scan helper formerly written `(V.name || '').toLowerCase().includes(K)`
+  // (V.name evaded the i|inst|institution.name signature) is now the honest
+  // `(inst.name || '').toLowerCase().includes(keyword)`. 1 → 2; no new
+  // label-join logic (golden master byte-identical). Shrink-only holds from
+  // the corrected baseline; the revealed site stays an id-join candidate.
+  'src/generators/economy/economicState.js': 2,
+  'src/generators/economy/finishedGoodsDemand.js': 1,
+  'src/generators/economy/foodBalance.js': 9,
+  'src/generators/economy/prosperity.js': 2,
+  'src/generators/economy/tradeGoods.js': 13,
+  'src/generators/economy/upgradeOpportunities.js': 5,
+  'src/generators/economy/viability.js': 20,
   'src/generators/foodGenerator.js': 3,
   'src/generators/historyGenerator.js': 13,
   'src/generators/isolationGenerator.js': 1,
   'src/generators/narrativeGenerator.js': 1,
   'src/generators/npcGenerator.js': 5,
-  'src/generators/powerGenerator.js': 19, // 17 → 18 → 19: de-minification revealed existing scans (see note above); 2026-07-03 renamed `N` → `inst` in the hasRoyalSeat institution scan, making `inst.name.includes(...)` textually visible. No new label-join LOGIC (generator golden master byte-identical, 155/155 configs).
+  // F31 monolith split (2026-07-09): powerGenerator.js is now a thin re-export
+  // barrel (0 sites). Its 18 label-join sites moved VERBATIM into the power/
+  // split — 12 to governanceNarrative.js, 6 to rulingStructure.js. Total is
+  // unchanged; byte-identical output is proven by generatorGoldenMaster, so no
+  // new label-join LOGIC was added. Shrink-only holds from these new baselines.
+  'src/generators/power/governanceNarrative.js': 12,
+  // CORRECTION 2026-07-09 (review residue R2, same class as the 2026-06-14
+  // note above): renaming rulingStructure.js's minified interior locals
+  // revealed four PRE-EXISTING sites — `D.some(...)` (the lowercase
+  // institution-name list) became `lowerInstNames.some(...)` (×3, now visible
+  // to instNames-scan) and one `(N.name || '')...includes('royal seat')`
+  // became `(inst.name || '')...` (visible to instName-includes). 6 → 10; no
+  // new label-join logic (golden master byte-identical). Shrink-only holds
+  // from the corrected baseline; the revealed sites stay id-join candidates.
+  'src/generators/power/rulingStructure.js': 10,
   'src/generators/priorityHelpers.js': 1,
   'src/generators/spatialGenerator.js': 8,
   'src/generators/steps/cascadePass.js': 1,

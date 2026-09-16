@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'f24-port-verify',
+  description: 'Exhaustively verify the F24 data-layer glyph port onto review-fixes lineage',
+  phases: [
+    { title: 'Verify', detail: 'suite, lint, residue sweep, glyph semantics, PDF risk' },
+    { title: 'Mutate', detail: 'prove the widened pin catches reintroduced corruption' },
+  ],
+}
+
+const CWD = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/awesome-ritchie-063978'
+const CTX = `Repo worktree: ${CWD} (run everything with this as cwd; node_modules installed). Branch claude/f24-data-glyph-port, HEAD b4461bcb, two cherry-picked commits on top of review-fixes-2026-07-08 (dd4f522c): 46aee64c restores ~152 emoji glyphs to icon fields in src/data/supplyChainData.js, src/data/resourceData.js, src/data/stressTypes.js, src/domain/display/threatAssessment.js, src/domain/inferSupplyChains.js, src/generators/computeActiveChains.js, removes a dead {cap.icon} slot in DefenseTab.jsx, and widens tests/lint/copyCorruption.test.js to scan ALL of src with a \\b\\w*[Ii]con SIG1 regex; b4461bcb adds VS16 to the custom-chain gear icon. Golden master regenerated (187 hashes, hash-only, already verified). Do NOT modify any file, do NOT commit, do NOT switch branches.`
+
+const RUN_SCHEMA = { type: 'object', required: ['passed', 'failed', 'skipped', 'failures'], properties: {
+  passed: { type: 'number' }, failed: { type: 'number' }, skipped: { type: 'number' },
+  failures: { type: 'array', items: { type: 'string' }, description: 'verbatim failure name + assertion, one string each; empty if green' },
+  notes: { type: 'string' } } }
+
+const FINDINGS_SCHEMA = { type: 'object', required: ['findings'], properties: {
+  findings: { type: 'array', items: { type: 'object', required: ['file', 'summary', 'severity'], properties: {
+    file: { type: 'string' }, line: { type: 'number' }, summary: { type: 'string' },
+    severity: { enum: ['blocker', 'concern', 'info'] } } } },
+  notes: { type: 'string' } } }
+
+const MUTATION_SCHEMA = { type: 'object', required: ['dataLayerCaught', 'newFileCaught', 'treeCleanAfter'], properties: {
+  dataLayerCaught: { type: 'boolean' }, newFileCaught: { type: 'boolean' }, treeCleanAfter: { type: 'boolean' },
+  detail: { type: 'string' } } }
+
+phase('Verify')
+const [suite, lint, residue, glyphs, pdfRisk] = await parallel([
+  () => agent(`${CTX}
+TASK: Run the full test suite: npx vitest run (timeout 600000ms, capture tail). Report exact pass/fail/skip counts. For every failure, capture the test name and the assertion diff verbatim. If a failure looks like a load flake (worker timeout, EPIPE, snapshot server race), rerun JUST that test file once and report both outcomes, marking it flaky. Do not fix anything.`,
+    { label: 'run:suite', phase: 'Verify', model: 'opus', effort: 'low', schema: RUN_SCHEMA }),
+  () => agent(`${CTX}
+TASK: Run npm run lint (eslint src/ tests/ scripts/). Report error/warning counts as passed=0-errors?1:0 style is NOT wanted — instead put error count in failed, warning count in skipped, passed=1 if zero errors. Capture every error verbatim in failures. Do not fix anything.`,
+    { label: 'run:lint', phase: 'Verify', model: 'opus', effort: 'low', schema: RUN_SCHEMA }),
+  () => agent(`${CTX}
+TASK: Adversarial residue sweep. The widened pin catches four signatures under all of src: (1) /\\b\\w*[Ii]con\\s*[:=]\\s*(?:""|'')/ empty icon fields, (2) a ', ' label-join fallback, (3) orphan U+FE0F variation selector with no preceding emoji base, (4) comma-em-dash residue. review-fixes added ~68k lines since the fix was written (src/domain/worldPulse/*, src/components/map/*, gallery, account, PDF sections) that the original fix NEVER scanned. Hunt for emoji-strip corruption in ALL of src that the four signatures would MISS: icon-ish fields under other names (glyph, emoji, symbol, badge, marker), empty-string values in data tables where sibling entries have emoji, orphan U+FE0F ANYWHERE (grep -rP '(?<![\\x{1F000}-\\x{1FAFF}\\x{2600}-\\x{27BF}\\x{2190}-\\x{2BFF}])\\x{FE0F}' style checks — write a small node script to scan for U+FE0F whose preceding codepoint is not a plausible emoji base), and mojibake (U+FFFD, broken surrogates). Read suspicious hits in context before reporting. Severity blocker = confirmed corruption; concern = suspicious, needs human eye; info = intentional. Empty findings array if clean.`,
+    { label: 'sweep:residue', phase: 'Verify', model: 'opus', effort: 'high', schema: FINDINGS_SCHEMA }),
+  () => agent(`${CTX}
+TASK: Glyph-semantics verification of the restored data. Write node scripts (ESM, run with npx tsx or plain node if importable) or careful greps against the six restored files. Check invariants: (a) no icon-bearing field anywhere in those files is '' or a bare U+FE0F; (b) identical resource names get identical glyphs across supplyChainData.js resourceIcons, resourceData.js, and computeActiveChains.js INSTITUTIONAL_SERVICE_MAP — list any resource label that appears in two files with different glyphs; (c) VS16 consistency: for each glyph used, if the same base codepoint appears elsewhere in src WITH U+FE0F, flag bare occurrences (text-presentation drift like the gear-icon bug); (d) every glyph is a sane emoji for its label (spot-check 15 label→glyph pairs and report any that look semantically wrong). Severity blocker = invariant violation; concern = judgment call.`,
+    { label: 'verify:glyphs', phase: 'Verify', model: 'opus', effort: 'high', schema: FINDINGS_SCHEMA }),
+  () => agent(`${CTX}
+TASK: PDF-crash risk check. The original commit claimed the PDF layer renders NONE of the restored icon fields (label||icon fallbacks only) — but that was verified on the OLD tree, and review-fixes has since added PDF code (src/pdf/sections/FaithWar.jsx, src/pdf/lib/liveWorld.js, src/utils/generateSettlementPDF.js grew ~200 lines, pdfRender.worker.js, etc.). react-pdf with standard fonts can throw on emoji codepoints, so ANY PDF code path that renders resourceIcon/needIcon/icon/stress icon fields from src/data or generator output is a crash risk. Trace: grep the whole src/pdf tree plus src/utils/generateSettlementPDF.js and src/utils/generateCampaignPDF.js for icon-ish property reads (.icon, resourceIcon, needIcon, Icon]), then follow each hit to determine whether the value can reach a <Text> render. Also check whether the PDF viewModel (src/pdf/lib/viewModel.js) strips or passes these fields. Report each render-reachable icon field as blocker with the exact path chain; concern if reachable only behind a flag. Empty findings if the claim still holds.`,
+    { label: 'verify:pdf-risk', phase: 'Verify', model: 'opus', effort: 'high', schema: FINDINGS_SCHEMA }),
+])
+
+// Barrier is deliberate: the mutation test writes to the working tree, which must be
+// quiet — a mid-grep mutation would poison the readers above.
+phase('Mutate')
+const mutation = await agent(`${CTX}
+TASK: Mutation-test the widened copyCorruption pin. You MAY temporarily modify files for this, but MUST restore them (git checkout -- <file>) and end with a clean tree.
+Step 1: verify baseline green: npx vitest run tests/lint/copyCorruption.test.js.
+Step 2 (dataLayerCaught): edit src/data/supplyChainData.js — set one resourceIcon value to '' — run the same test; it MUST FAIL. Revert.
+Step 3 (newFileCaught): pick a file that did NOT exist when the original fix was written, e.g. src/domain/worldPulse/pulseKernel.js or src/domain/worldPulse/occupation.js; insert a line like "const x = { threatIcon: '' };" somewhere syntactically valid — run the test; it MUST FAIL (proves the scan roots really cover new src subtrees). Revert.
+Step 4: git status --porcelain MUST be empty; run the copyCorruption test once more to confirm green. Report booleans exactly as observed — if a mutation was NOT caught, that is the finding, do not massage it.`,
+  { label: 'mutate:pin', phase: 'Mutate', model: 'opus', effort: 'medium', schema: MUTATION_SCHEMA })
+
+return { suite, lint, residue, glyphs, pdfRisk, mutation }

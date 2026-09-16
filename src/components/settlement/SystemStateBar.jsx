@@ -10,14 +10,17 @@
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
-import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { BAND_COLOR, BAND_HINT, dimensionPolarity } from '../../domain/state/bands.js';
+import { INK, MUTED, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 
+// Labels + one-line descriptions only. Polarity is NOT re-declared here — it is
+// read from bands.js (DIM_POLARITY), the single source the band itself is
+// oriented by, so the bar fill and the band word can no longer disagree.
 const DIM_META = {
-  resilience:       { label: 'Resilience',        higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
-  volatility:       { label: 'Volatility',        higherIsBetter: false, desc: 'How close is internal conflict?' },
-  externalThreat:   { label: 'External Threat',   higherIsBetter: false, desc: 'Pressure from outside.' },
-  resourcePressure: { label: 'Resource Pressure', higherIsBetter: false, desc: 'Are key materials strained?' },
+  resilience:       { label: 'Resilience',        desc: 'Can the place absorb shocks?' },
+  volatility:       { label: 'Volatility',        desc: 'How close is internal conflict?' },
+  externalThreat:   { label: 'External Threat',   desc: 'Pressure from outside.' },
+  resourcePressure: { label: 'Resource Pressure', desc: 'Are key materials strained?' },
 };
 
 const DIM_ORDER = ['resilience', 'volatility', 'externalThreat', 'resourcePressure'];
@@ -30,8 +33,9 @@ export default function SystemStateBar() {
 
 /**
  * Presentational 4-dimension grid (UX overhaul Phase 2). The store-bound
- * SystemStateBar above and the read-view ReadSystemStateBar below both render
- * through this, so the promoted read-view strip and the edit-mode bar share ONE
+ * SystemStateBar above and the read-view ReadSystemStateBar (its own file,
+ * ReadSystemStateBar.jsx — NOT below in this one) both render through this, so
+ * the read-view strip in the dossier Summary and the edit-mode bar share ONE
  * visual. Pure — takes the already-derived systemState; no store read.
  * @param {{ systemState: any, title?: string }} props
  */
@@ -46,7 +50,7 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
     <div
       data-testid="system-state-grid"
       style={{
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        background: CARD, border: `1px solid ${BORDER}`,
         padding: SP.sm,
       }}
     >
@@ -82,8 +86,10 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
   const color = BAND_COLOR[dim.band] || MUTED;
   // For "lower is better" dims (volatility, threat, pressure), render
   // the bar from the right so bigger values look heavier and a "good"
-  // value reads as a small bar — matches DM intuition.
-  const fillPct = meta.higherIsBetter ? dim.value : (100 - dim.value);
+  // value reads as a small bar — matches DM intuition. This is the SAME
+  // orientation the band word is computed from, so a full bar and a
+  // "Stable" word now always mean the same thing.
+  const fillPct = dimensionPolarity(dimKey) === 'lower_is_better' ? (100 - dim.value) : dim.value;
 
   return (
     <div
@@ -100,7 +106,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       style={{
         cursor: 'pointer',
         padding: SP.xs,
-        border: `1px solid ${BORDER}`, borderRadius: R.sm,
+        border: `1px solid ${BORDER}`,
         background: CARD,
       }}
     >
@@ -119,7 +125,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
           {dim.value}
         </span>
       </div>
-      <div style={{ height: 4, background: swatch['#E7D7B8'], borderRadius: 2, overflow: 'hidden' }}>
+      <div style={{ height: 4, background: swatch['#E7D7B8'], overflow: 'hidden' }}>
         <div style={{
           height: '100%', width: `${fillPct}%`,
           background: color, transition: 'width 200ms',
@@ -128,7 +134,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       {isOpen && (
         <div style={{
           marginTop: SP.xs, padding: SP.xs,
-          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+          background: swatch.white, border: `1px solid ${BORDER}`,
           fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5,
         }}>
           <div style={{ fontStyle: 'italic', color: MUTED, marginBottom: 4 }}>

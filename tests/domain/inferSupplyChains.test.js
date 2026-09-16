@@ -111,7 +111,11 @@ describe('inferSupplyChains', () => {
     const cc = {
       resources: [{ name: 'Herb Garden', localUid: 'r1', commodities: 'herbs' }],
       institutions: [{ name: 'Apothecary', localUid: 'i1', requires: ['herbs'] }],
-      services: [{ name: 'Healing Draughts', localUid: 's1', providedBy: 'Apothecary' }],
+      services: [{
+        name: 'Healing Draughts',
+        localUid: 's1',
+        providedBy: 'custom:i1',
+      }],
     };
     const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.processingInstitutions.includes('Apothecary'));
     expect(chain).toBeTruthy();
@@ -128,6 +132,89 @@ describe('inferSupplyChains', () => {
     const chain = inferSupplyChains(cc, { resolve: idResolve }).find((c) => c.discovered.nodes.some((n) => n.name === 'Dragonbone Blade'));
     expect(chain).toBeTruthy();
     expect(chain.discovered.nodes.map((n) => n.name)).toEqual(['Dragon Roost', 'Dragonbone Blade']);
+  });
+
+  it('connects a stable reference only to its exact same-name definition', () => {
+    const cc = {
+      institutions: [
+        { name: 'Twin Forge', localUid: 'forge-a' },
+        { name: 'Twin Forge', localUid: 'forge-b' },
+      ],
+      tradeGoods: [{
+        name: 'Aster Blade',
+        localUid: 'aster-blade',
+        requiredInstitution: 'custom:forge-a',
+      }],
+    };
+
+    const chains = inferSupplyChains(cc).filter(chain => (
+      chain.discovered.nodes.some(node => (
+        node.refId === 'custom:aster-blade'
+      ))
+    ));
+    expect(chains.length).toBeGreaterThan(0);
+    expect(chains.every(chain => chain.discovered.nodes.some(node => (
+      node.refId === 'custom:forge-a'
+    )))).toBe(true);
+    expect(chains.every(chain => !chain.discovered.nodes.some(node => (
+      node.refId === 'custom:forge-b'
+    )))).toBe(true);
+  });
+
+  it('fails an ambiguous legacy name closed instead of choosing the first match', () => {
+    const cc = {
+      institutions: [
+        { name: 'Twin Forge', localUid: 'forge-a' },
+        { name: 'Twin Forge', localUid: 'forge-b' },
+      ],
+      tradeGoods: [{
+        name: 'Legacy Blade',
+        localUid: 'legacy-blade',
+        requiredInstitution: 'Twin Forge',
+      }],
+    };
+
+    expect(inferSupplyChains(cc)).toEqual([]);
+  });
+
+  it('treats case-distinct stable local UIDs as different graph identities', () => {
+    const cc = {
+      institutions: [
+        { name: 'Upper Forge', localUid: 'Forge' },
+        { name: 'Lower Forge', localUid: 'forge' },
+      ],
+      tradeGoods: [
+        {
+          name: 'Upper Blade',
+          localUid: 'upper-blade',
+          requiredInstitution: 'custom:Forge',
+        },
+        {
+          name: 'Lower Blade',
+          localUid: 'lower-blade',
+          requiredInstitution: 'custom:forge',
+        },
+      ],
+    };
+
+    const chains = inferSupplyChains(cc);
+    expect(chains).toHaveLength(2);
+    expect(new Set(chains.map(chain => chain.chainId)).size).toBe(2);
+    expect(chains.every(chain => chain.chainId.length <= 240)).toBe(true);
+    const upper = chains.find(chain => chain.discovered.nodes.some(node => (
+      node.refId === 'custom:upper-blade'
+    )));
+    const lower = chains.find(chain => chain.discovered.nodes.some(node => (
+      node.refId === 'custom:lower-blade'
+    )));
+    expect(upper.discovered.nodes.map(node => node.refId)).toEqual([
+      'custom:Forge',
+      'custom:upper-blade',
+    ]);
+    expect(lower.discovered.nodes.map(node => node.refId)).toEqual([
+      'custom:forge',
+      'custom:lower-blade',
+    ]);
   });
 
   it('handles empty / no-edge content without throwing', () => {

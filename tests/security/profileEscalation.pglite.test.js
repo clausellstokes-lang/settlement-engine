@@ -1,16 +1,19 @@
 /**
  * profileEscalation.pglite.test.js — EXECUTION-level test for the profiles
- * RLS column-lock (A+ tests-tooling.3).
+ * RLS column-lock (A+ tests-tooling.3; hardened for finding F7).
  *
- * The privilege-escalation guard is migration 009's UPDATE policy "Users update
- * own profile (display_name only)": its WITH CHECK pins role/tier/credits/
- * is_founder to their current values, so a self-UPDATE can change ONLY
- * display_name. Until now that single line of SQL was verified two non-executing
- * ways — a commented "run manually" block and a Docker-only pgTAP file — so a
- * reorder or a loosened predicate could ship green. This RUNS the real policy.
+ * The privilege-escalation guard is the profiles self-UPDATE policy: its WITH
+ * CHECK pins the escalation-relevant columns to their current values, so a
+ * self-UPDATE can change ONLY safe preference columns (display_name, etc.).
  *
- * It loads the ACTUAL policy DDL verbatim from migration 009 into in-process
- * Postgres (pglite) and attempts every escalation a malicious client could send.
+ * F7 fix: this test previously extracted migration 009's policy "Users update
+ * own profile (display_name only)" BY NAME — but migration 018 DROPS that policy
+ * and replaces it with "Users update own profile (safe preferences only)", which
+ * additionally pins stripe_customer_id and email. So the test verified DEAD SQL
+ * and a regression in the LIVE policy would ship green. It now derives the
+ * NET-CURRENT self-update policy by replaying every migration's create/drop of
+ * profiles UPDATE policies in file order — so it always attacks whatever policy
+ * production actually runs — and asserts every column that policy pins.
  *
  * CRITICAL pglite caveat (baked into setup so it can't false-green): pglite's
  * default connection is a SUPERUSER, and a superuser BYPASSES RLS even with
@@ -20,29 +23,54 @@
  */
 import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG_009 = resolve(process.cwd(), 'supabase', 'migrations', '009_profile_security.sql');
-const present = existsSync(MIG_009);
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 
-// Hard-fail (not a silent vacuous skip) if migration 009 moves/renames: the
-// runIf(present) suite below would otherwise go GREEN with 0 tests run.
-describe('pglite target exists (guards against silent vacuous skip)', () => {
-  it('migration 009 is present (a moved migration must fail loudly)', () => {
-    expect(present, '009_profile_security.sql is missing — column-lock RLS coverage dropped').toBe(true);
-  });
-});
+const MIG_DIR = resolve(process.cwd(), 'supabase', 'migrations');
+const present = existsSync(MIG_DIR);
 
-/** Extract the column-lock UPDATE policy verbatim from migration 009. */
-function extractUpdatePolicy() {
-  const src = readFileSync(MIG_009, 'utf-8');
-  const m = src.match(/create policy "Users update own profile \(display_name only\)"[\s\S]*?;/i);
-  if (!m) throw new Error('could not extract the column-lock UPDATE policy from migration 009');
-  return m[0];
+/**
+ * Derive the NET-CURRENT self-update policy on public.profiles by replaying
+ * every migration's `create policy` / `drop policy` for a FOR UPDATE policy
+ * whose USING references `auth.uid() = id` (the self, not the privileged-dev,
+ * policy). The last one standing is what production enforces. Returns
+ * { name, ddl, pinnedColumns } — pinnedColumns parsed from the `<col> is not
+ * distinct from` clauses in the WITH CHECK so the test asserts exactly what the
+ * live policy locks (catches both a loosened AND a newly-added pin).
+ */
+function netCurrentSelfUpdatePolicy() {
+  const files = readdirSync(MIG_DIR).filter(f => /^\d.*\.sql$/.test(f)).sort();
+  const live = new Map(); // policy name -> ddl
+  const createRe = /^create\s+policy\s+"([^"]+)"\s+on\s+public\.profiles([\s\S]*?);/gim;
+  const dropRe = /drop\s+policy\s+if\s+exists\s+"([^"]+)"\s+on\s+public\.profiles/gi;
+  for (const f of files) {
+    const src = readFileSync(resolve(MIG_DIR, f), 'utf-8');
+    // Process drops and creates in source order within the file.
+    const events = [];
+    let m;
+    while ((m = createRe.exec(src))) events.push({ kind: 'create', name: m[1], body: m[2], ddl: m[0], idx: m.index });
+    while ((m = dropRe.exec(src))) events.push({ kind: 'drop', name: m[1], idx: m.index });
+    events.sort((a, b) => a.idx - b.idx);
+    for (const e of events) {
+      if (e.kind === 'drop') live.delete(e.name);
+      else live.set(e.name, e);
+    }
+  }
+  // The self policy: FOR UPDATE, USING auth.uid() = id, not the dev/privileged one.
+  const self = [...live.values()].find(e =>
+    /for\s+update/i.test(e.body) &&
+    /auth\.uid\(\)\s*=\s*id/i.test(e.body) &&
+    !/current_user_is_privileged/i.test(e.body),
+  );
+  if (!self) throw new Error('could not derive a net-current self-update policy on public.profiles');
+  const pinnedColumns = [...self.body.matchAll(/\b(\w+)\s+is\s+not\s+distinct\s+from/gi)].map(x => x[1]);
+  return { name: self.name, ddl: self.ddl, pinnedColumns };
 }
 
 const UID = '11111111-1111-1111-1111-111111111111';
+const POLICY = present ? netCurrentSelfUpdatePolicy() : null;
 
 let db;
 /** Run a statement AS the unprivileged user (RLS enforced). */
@@ -64,7 +92,18 @@ const readOwn = async (col) => {
   return rows[0]?.[col];
 };
 
-describe.runIf(present)('profiles RLS column-lock — executed against migration 009 (pglite)', () => {
+// Anti-vacuity ([tests-3]/[test-quality-2]): if the migrations directory is absent,
+// the RLS execution suite below would silently describe.runIf-skip and vitest would
+// stay green. This UNCONDITIONAL assert fails loudly — and also proves the
+// net-current self-update policy is still derivable (the thing under test exists).
+describe('profiles RLS migration corpus exists (guards against silent vacuous skip)', () => {
+  it('the migrations dir is present and a net-current self-update policy is derivable', () => {
+    expect(present, `migrations dir missing: ${MIG_DIR}`).toBe(true);
+    expect(POLICY, 'no net-current profiles self-update policy derivable — renamed/dropped?').not.toBeNull();
+  });
+});
+
+describe.runIf(present)('profiles RLS column-lock — executed against the NET-CURRENT policy (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();
     await db.exec(`
@@ -72,12 +111,30 @@ describe.runIf(present)('profiles RLS column-lock — executed against migration
       create or replace function auth.uid() returns uuid language sql stable as $fn$
         select nullif(current_setting('test.uid', true), '')::uuid
       $fn$;
+      -- account_is_active (057) stub — the net-current self-update policy (087,
+      -- forked through 059) gates USING + WITH CHECK on it. Return true so an
+      -- active account's display_name update is admitted; the escalation
+      -- rejections are driven by the column pins, independent of this.
+      create or replace function public.account_is_active(p uuid) returns boolean language sql stable as $fn$
+        select true
+      $fn$;
+      -- Columns the net-current 087 policy pins (beyond the original set): the
+      -- WITH CHECK subqueries read each pinned column via an is-not-distinct-from
+      -- self-subquery, so every pinned column must exist on this scaffold table.
       create table public.profiles (
         id uuid primary key,
         role text not null default 'user',
         tier text not null default 'free',
         credits integer not null default 0,
         is_founder boolean not null default false,
+        stripe_customer_id text,
+        stripe_subscription_id text,
+        email text,
+        banned_at timestamptz,
+        disabled_at timestamptz,
+        deleted_at timestamptz,
+        account_number text,
+        external_name text,
         display_name text,
         updated_at timestamptz default now()
       );
@@ -88,25 +145,39 @@ describe.runIf(present)('profiles RLS column-lock — executed against migration
       alter table public.profiles enable row level security;
       alter table public.profiles force row level security; -- required for pglite to enforce RLS
     `);
-    // The REAL column-lock UPDATE policy, verbatim from migration 009.
-    await db.exec(extractUpdatePolicy());
+    // The REAL, NET-CURRENT self-update policy (018's "safe preferences only"
+    // after 009's "display_name only" is dropped) — derived by migration replay,
+    // never hardcoded by name (finding F7).
+    await db.exec(POLICY.ddl);
     // A non-superuser role — the superuser default bypasses RLS even when forced.
     await db.exec(`
       create role nosuperuser nologin;
       grant select, update on public.profiles to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(reseed);
 
+  // Guard the derivation itself: the live self-update policy MUST pin every
+  // escalation-relevant column. A future migration that loosens the WITH CHECK
+  // (drops a pin) makes this fail — the exact regression the by-name extraction
+  // was blind to.
+  it('the net-current policy pins every escalation-relevant column', () => {
+    for (const col of ['role', 'tier', 'credits', 'is_founder', 'stripe_customer_id', 'email']) {
+      expect(POLICY.pinnedColumns, `live policy "${POLICY.name}" no longer pins ${col}`).toContain(col);
+    }
+  });
+
   // ── Escalations must be REJECTED (WITH CHECK violation → error) ──────────────
   const escalations = {
-    'role → developer':      `update public.profiles set role = 'developer' where id = '${UID}'`,
-    'tier → premium':        `update public.profiles set tier = 'premium' where id = '${UID}'`,
-    'credits → 99999':       `update public.profiles set credits = 99999 where id = '${UID}'`,
-    'is_founder → true':     `update public.profiles set is_founder = true where id = '${UID}'`,
-    // The sneakiest path: all four at once (the migration's own example attack).
-    'combined multi-column': `update public.profiles set role='developer', tier='premium', credits=99999, is_founder=true where id = '${UID}'`,
+    'role → developer':          `update public.profiles set role = 'developer' where id = '${UID}'`,
+    'tier → premium':            `update public.profiles set tier = 'premium' where id = '${UID}'`,
+    'credits → 99999':           `update public.profiles set credits = 99999 where id = '${UID}'`,
+    'is_founder → true':         `update public.profiles set is_founder = true where id = '${UID}'`,
+    'stripe_customer_id hijack': `update public.profiles set stripe_customer_id = 'cus_attacker' where id = '${UID}'`,
+    'email swap':                `update public.profiles set email = 'attacker@evil.test' where id = '${UID}'`,
+    // The sneakiest path: everything at once (the migration's own example attack).
+    'combined multi-column':     `update public.profiles set role='developer', tier='premium', credits=99999, is_founder=true, stripe_customer_id='cus_x', email='x@y.z' where id = '${UID}'`,
   };
 
   for (const [name, sql] of Object.entries(escalations)) {
@@ -117,6 +188,7 @@ describe.runIf(present)('profiles RLS column-lock — executed against migration
       expect(Number(await readOwn('credits'))).toBe(10);
       expect(await readOwn('tier')).toBe('free');
       expect(await readOwn('is_founder')).toBe(false);
+      expect(await readOwn('stripe_customer_id')).toBe(null);
     });
   }
 

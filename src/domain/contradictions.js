@@ -1,7 +1,7 @@
 /**
  * domain/contradictions.js — Structured anomaly detection + classification.
  *
- * Detects places where the settlement has
+ * Tier 4.18 of the roadmap. Detects places where the settlement has
  * structural mismatches — outsized institutions for tier, missing
  * enforcement, factional power without supporting institutions, etc.
  * Each contradiction gets a classification + a structured
@@ -15,8 +15,8 @@
  *   interesting_tension      — narrative-worthy contradiction
  *   user_authored_exception  — user explicitly added this
  *
- * Pure read-only. Composes factions, substrate,
- * threats, capacities.
+ * Pure read-only. Composes Phase 9 factions, Phase 17 substrate,
+ * Phase 20 threats, Phase 21 capacities.
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
@@ -24,7 +24,47 @@ import { deriveCausalState } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveAllCapacities } from './capacityModel.js';
 
-import { snakeCase } from './ids.js';
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+/** @typedef {import('./capacityModel.js').CapacityState} CapacityState */
+/** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+
+/** @typedef {'invalid'|'rare_but_justified'|'interesting_tension'|'user_authored_exception'} ContradictionClassification */
+
+/**
+ * @typedef {Object} ContradictionReference
+ * @property {string} id
+ * @property {string} label
+ * @property {string} type
+ */
+
+/**
+ * @typedef {Object} Contradiction
+ * @property {string} id
+ * @property {string} type
+ * @property {ContradictionClassification} classification
+ * @property {string} description
+ * @property {string} explanation
+ * @property {string[]} consequences
+ * @property {ContradictionReference[]} references
+ */
+
+/**
+ * The slice of a settlement the detectors read.
+ * @typedef {Object} ContradictionSettlement
+ * @property {string} [tier]
+ * @property {Array<{ id?: string, name?: string }|null>} [institutions]
+ */
+
+/**
+ * The full input the composer accepts: the local slice plus the slices the
+ * composed derivations (threats, capacities) declare for themselves.
+ * @typedef {ContradictionSettlement
+ *   & import('./threatProfile.js').ThreatSurfaceSettlement
+ *   & import('./capacityModel.js').SettlementLike
+ *   & import('./causalState.js').CausalSettlementSource} ContradictionSettlementInput
+ */
+
 export const CONTRADICTION_CLASSIFICATIONS = Object.freeze([
   'invalid',
   'rare_but_justified',
@@ -43,18 +83,32 @@ export const CONTRADICTION_TYPES = Object.freeze([
 
 // ── Helpers ──────────────────────────────────────────────────────────────
 
-/** @param {any} s */
+/**
+ * @param {string} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 
 /**
- * @param {any} type
- * @param {any} suffix
+ * @param {string} type
+ * @param {string} suffix
+ * @returns {string}
  */
 function contradictionId(type, suffix) {
   return `contradiction.${type}.${snakeCase(suffix || 'unknown')}`;
 }
 
 /**
- * @param {{ type: any, classification: any, description: any, explanation: any, consequences?: any, references?: any }} args
+ * @param {Object} args
+ * @param {string} args.type
+ * @param {ContradictionClassification} args.classification
+ * @param {string} args.description
+ * @param {string} args.explanation
+ * @param {string[]} [args.consequences]
+ * @param {ContradictionReference[]} [args.references]
+ * @returns {Contradiction}
  */
 function contradiction({ type, classification, description, explanation, consequences, references }) {
   return {
@@ -73,7 +127,10 @@ function contradiction({ type, classification, description, explanation, consequ
 const OVERSIZED_PATTERN = /(cathedral|grand|college|conclave|fortress|citadel|palace|university)/i;
 const ENFORCEMENT_PATTERN = /(watch|garrison|barracks|militia|guard|constabulary|sheriff)/i;
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {ContradictionSettlement} settlement
+ * @returns {Contradiction[]}
+ */
 function detectOversizedInstitutions(settlement) {
   const tier = settlement.tier;
   if (tier !== 'village' && tier !== 'hamlet') return [];
@@ -90,18 +147,23 @@ function detectOversizedInstitutions(settlement) {
         'authority structure tilts toward the institution\'s patrons',
         'visitors and pilgrims outnumber locals in season',
       ],
-      references: [{ id: inst.id || `institution.${snakeCase(String(inst.name))}`, label: inst.name, type: 'institution' }],
+      // @ts-ignore -- inst.name is non-empty here: the OVERSIZED_PATTERN guard
+      // above only passes named institutions, which TS cannot see through test().
+      references: [{ id: inst.id || `institution.${snakeCase(inst.name)}`, label: inst.name, type: 'institution' }],
     }));
   }
   return out;
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {ContradictionSettlement} settlement
+ * @returns {Contradiction[]}
+ */
 function detectMissingEnforcement(settlement) {
   const tier = settlement.tier;
   if (tier !== 'town' && tier !== 'city') return [];
   const inst = settlement.institutions || [];
-  const hasEnforcement = inst.some((/** @type {any} */ i) => ENFORCEMENT_PATTERN.test(String(i?.name || '')));
+  const hasEnforcement = inst.some(i => ENFORCEMENT_PATTERN.test(String(i?.name || '')));
   if (hasEnforcement) return [];
   return [contradiction({
     type: 'missing_enforcement_for_tier',
@@ -109,7 +171,7 @@ function detectMissingEnforcement(settlement) {
     description: `${tier} without an enforcement institution`,
     explanation: `A ${tier} normally maintains some form of watch, militia, or garrison. Its absence implies either a non-coercive governance model (religious peace, council mediation) or hidden enforcement (informal violence, patronage networks).`,
     consequences: [
-      'order is maintained informally: by faction patronage, religious authority, or fear',
+      'order is maintained informally — by faction patronage, religious authority, or fear',
       'outside intervention is the only response to organized violence',
       'criminal opportunity rises silently',
     ],
@@ -118,8 +180,9 @@ function detectMissingEnforcement(settlement) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
+ * @param {ContradictionSettlement} settlement
+ * @param {CausalState} causal
+ * @returns {Contradiction[]}
  */
 function detectLegitimacyVsCrime(settlement, causal) {
   const legBand = causal.bands.public_legitimacy;
@@ -130,7 +193,7 @@ function detectLegitimacyVsCrime(settlement, causal) {
       type: 'legitimacy_vs_crime_mismatch',
       classification: 'interesting_tension',
       description: 'High public legitimacy alongside high criminal opportunity',
-      explanation: 'The governing order enjoys public approval, yet criminal networks operate openly. The two coexist because crime serves the order, not against it: smuggling pays taxes, the watch takes a share, the council looks elsewhere.',
+      explanation: 'The governing order enjoys public approval, yet criminal networks operate openly. The two coexist because crime serves the order, not against it — smuggling pays taxes, the watch takes a share, the council looks elsewhere.',
       consequences: [
         'corruption ties governance to crime',
         'reform attempts threaten both',
@@ -146,10 +209,12 @@ function detectLegitimacyVsCrime(settlement, causal) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any[]} profiles
+ * @param {ContradictionSettlement} settlement
+ * @param {FactionProfile[]} profiles
+ * @returns {Contradiction[]}
  */
 function detectOrphanedFactionPower(settlement, profiles) {
+  /** @type {Contradiction[]} */
   const out = [];
   const inst = settlement.institutions || [];
   const RELIGIOUS_INST = /(temple|chapel|monastery|abbey|cathedral|shrine|sanctum)/i;
@@ -164,7 +229,7 @@ function detectOrphanedFactionPower(settlement, profiles) {
     else if (p.archetype === 'military') { pattern = MILITARY_INST; label = 'military institution'; }
     else if (p.archetype === 'arcane') { pattern = ARCANE_INST; label = 'arcane institution'; }
     if (!pattern) continue;
-    const supporting = inst.some((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
+    const supporting = inst.some(i => pattern.test(String(i?.name || '')));
     if (supporting) continue;
     out.push(contradiction({
       type: 'orphaned_faction_power',
@@ -182,11 +247,13 @@ function detectOrphanedFactionPower(settlement, profiles) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
- * @param {any} capacities
+ * @param {ContradictionSettlement} settlement
+ * @param {CausalState} causal
+ * @param {CapacityState} capacities
+ * @returns {Contradiction[]}
  */
 function detectSurplusButCritical(settlement, causal, capacities) {
+  /** @type {Contradiction[]} */
   const out = [];
   // food_security surplus but food_production capacity critical/collapsed — the
   // two layers tell different stories. Surface as a tension worth telling.
@@ -202,9 +269,9 @@ function detectSurplusButCritical(settlement, causal, capacities) {
         type: 'surplus_but_capacity_critical',
         classification: 'interesting_tension',
         description: `${substrate} reads surplus while ${capacity} capacity is ${capacityBand}`,
-        explanation: `The substrate shows abundance in ${pair}, but the underlying capacity model says supply is overwhelmed by demand. The surplus is being consumed in real time. What's measured is the flow, not the reserve.`,
+        explanation: `The substrate shows abundance in ${pair}, but the underlying capacity model says supply is overwhelmed by demand. The surplus is being consumed in real time — what's measured is the flow, not the reserve.`,
         consequences: [
-          `${pair} surplus is fragile. Any shock removes the buffer immediately`,
+          `${pair} surplus is fragile — any shock removes the buffer immediately`,
           `the ${pair} system has no slack to absorb the next surprise`,
         ],
         references: [
@@ -218,11 +285,13 @@ function detectSurplusButCritical(settlement, causal, capacities) {
 }
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any[]} threats
- * @param {any} capacities
+ * @param {ContradictionSettlement} settlement
+ * @param {ThreatProfile[]} threats
+ * @param {CapacityState} capacities
+ * @returns {Contradiction[]}
  */
 function detectThreatWithoutResponse(settlement, threats, capacities) {
+  /** @type {Contradiction[]} */
   const out = [];
   for (const threat of threats) {
     if (threat.severity < 0.6) continue;  // only acute threats
@@ -263,8 +332,8 @@ function detectThreatWithoutResponse(settlement, threats, capacities) {
 /**
  * Detect every contradiction on a settlement. Pure read-only.
  *
- * @param {Object} settlement
- * @returns {Object[]} Contradiction[]
+ * @param {ContradictionSettlementInput|null|undefined} settlement
+ * @returns {Contradiction[]}
  */
 export function detectContradictions(settlement) {
   if (!settlement) return [];
@@ -284,12 +353,12 @@ export function detectContradictions(settlement) {
 
 /**
  * Group by classification.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {ContradictionSettlementInput|null|undefined} settlement
+ * @returns {Record<ContradictionClassification, number>}
  */
 export function contradictionBreakdown(settlement) {
-  /** @type {Record<string, number>} */
   const out = { invalid: 0, rare_but_justified: 0, interesting_tension: 0, user_authored_exception: 0 };
-  for (const c of /** @type {any[]} */ (detectContradictions(settlement))) {
+  for (const c of detectContradictions(settlement)) {
     if (out[c.classification] !== undefined) out[c.classification] += 1;
   }
   return out;

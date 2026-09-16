@@ -1,0 +1,46 @@
+export const meta = {
+  name: 'cycle2-refute-mustfix',
+  description: 'Adversarial refuter pass over the 38 cycle-2 must-fix findings: reproduce-or-refute each in real code before it reaches a fix wave',
+  phases: [{ title: 'Refute', detail: 'one adversarial verifier per must-fix finding' }],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const TIP = 'c8c5baa8'
+const POOL = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad/CYCLE2_FINDINGS_POOL.json'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+const N = 38
+
+const PRE = `You are an ADVERSARIAL REFUTER verifying ONE cold-review finding before it is allowed to reach a fix wave. Your DEFAULT posture is skepticism: assume the finding is wrong or overstated until real code proves otherwise. You are NOT cold — you may read anything in the worktree ${WT} (verify branch claude/composite-r4, tip ${TIP}; READ-ONLY — never edit/commit/touch git). Probes go under ${SCRATCH}/refute-<idx> (create it). HARNESS: full suite exceeds a 10-min cap — FOCUSED test files only; ONE vitest at a time (shared machine); check-domain-strict.mjs bare never piped; pglite needs --no-file-parallelism; a slow/failing run may be contention — re-run ALONE before believing it.`
+
+const OUT = `OUTPUT — return ONLY a JSON object, no prose/fence, strings within caps:
+{"idx":<n>,"title":"<=90 echo the finding title>","verdict":"CONFIRMED"|"REFUTED"|"PARTIAL","corrected_severity":"must-fix"|"should-fix"|"polish"|"non-issue","reproduced":true|false,"reason":"<=420 what you found in the real code — cite the lines that confirm or refute; if REFUTED say exactly why the claim is wrong or already guarded","fix_hint":"<=240 if CONFIRMED/PARTIAL, the minimal correct fix and every path/site it must cover"}`
+
+phase('Refute')
+const thunks = Array.from({ length: N }, (_, i) => () => agent(
+  `${PRE}
+
+YOUR TARGET: Read the JSON array at ${POOL}. Filter to items where severity === "must-fix", KEEPING FILE ORDER. Take element [${i}] (0-indexed) — that single object is YOUR finding (title/claim/scenario/location). If index ${i} is out of range, return {"idx":${i},"title":"OUT_OF_RANGE","verdict":"REFUTED","corrected_severity":"non-issue","reproduced":false,"reason":"no such index","fix_hint":""}.
+
+Now adversarially verify it: open the cited location(s) in ${WT} and read the FULL enclosing scope; trace whether the claimed defect actually occurs or is guarded/handled elsewhere (a sibling gate, a caller check, a test that already covers it); where feasible EXECUTE a focused probe or the cited test to reproduce (or fail to reproduce) the claim. Then judge:
+- CONFIRMED: the defect is real and reproduces (or is unambiguous in code); keep or correct its severity.
+- PARTIAL: a real issue but narrower/lower-severity than claimed (say how).
+- REFUTED: the claim is wrong, already guarded, intended-and-documented, or not reachable — say precisely why.
+Be specific and cite real line numbers. Prefer executed evidence.
+
+${OUT}`,
+  { label: `refute-${i}`, phase: 'Refute', model: 'opus' }
+))
+
+const raw = await parallel(thunks)
+const parsed = raw.map((s, i) => {
+  if (!s || typeof s !== 'string') return { idx: i, verdict: 'ERROR', reason: 'empty' }
+  let t = s.trim(); const a = t.indexOf('{'); const b = t.lastIndexOf('}')
+  if (a >= 0 && b > a) t = t.slice(a, b + 1)
+  try { return JSON.parse(t) } catch (e) { return { idx: i, verdict: 'PARSEFAIL', reason: String(e).slice(0, 100), head: s.slice(0, 160) } }
+})
+const conf = parsed.filter((p) => p.verdict === 'CONFIRMED').length
+const part = parsed.filter((p) => p.verdict === 'PARTIAL').length
+const ref = parsed.filter((p) => p.verdict === 'REFUTED').length
+const err = parsed.filter((p) => p.verdict === 'ERROR' || p.verdict === 'PARSEFAIL').length
+log(`Refuter verdicts: CONFIRMED=${conf} PARTIAL=${part} REFUTED=${ref} err/parsefail=${err}`)
+return { verdicts: parsed }

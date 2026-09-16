@@ -11,6 +11,11 @@
 
 import {getInstFlags, getPriorities} from './helpers.js';
 import {computeEffectiveMagicPresence} from './priorityHelpers.js';
+import {
+  nativeSemanticName,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
+import { resolveGenerationWorldLaw } from './generationContext.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -21,7 +26,7 @@ import {computeEffectiveMagicPresence} from './priorityHelpers.js';
  */
 const getDefenseInstitutions = (institutions) => {
   const matches = (inst, keywords) =>
-    keywords.some(kw => inst.name.toLowerCase().includes(kw));
+    keywords.some(kw => nativeSemanticName(inst).toLowerCase().includes(kw));
 
   return {
     walls: institutions.filter(i => matches(i, [
@@ -92,7 +97,7 @@ const computeDefenseScores = (
   // ── Tradition detection ─────────────────────────────────────────────────────
   const institutions = config._institutions || [];
   const hasInst = (...kws) => institutions.some(i =>
-    kws.some(kw => (i.name||'').toLowerCase().includes(kw)));
+    kws.some(kw => nativeSemanticName(i).toLowerCase().includes(kw)));
 
   // Arcane: wizard/mage/sorcerer/enchanter
   const hasArcane   = magicOn && magPri >= 35 && (
@@ -266,6 +271,7 @@ const computeDefenseScores = (
   // gates the ability to mobilize it (see econHealthMult below) — a destitute
   // town does not get "Strong economic base" for owning a granary building.
   const foodSec = config._foodSecurity;
+  const worldLaw = resolveGenerationWorldLaw(null, config);
   const storageMonths = foodSec?.storageMonths ?? (inst.hasGranary ? 4 : 1);
   // Storage → score: 0mo=0, 1mo=10, 3mo=25, 6mo=45, 12mo=70 (diminishing returns)
   const storageScore = Math.min(70, Math.round(storageMonths <= 1 ? storageMonths * 10
@@ -274,7 +280,9 @@ const computeDefenseScores = (
   let economic = storageScore;
   if (inst.hasMarket)   economic += 10;  // financial capacity and merchant access
   if (inst.hasHospital) economic += 10;  // medical resilience
-  if (route === 'port')       economic += 10; // sea supply can't be cut by land siege
+  if (route === 'port' && worldLaw.supportsMaritime()) {
+    economic += 10; // sea supply cannot be cut by a land siege
+  }
   if (route === 'crossroads') economic +=  8; // multiple supply routes
   economic = Math.min(100, economic + Math.round(econOutput * 0.2));
   // Alchemy extends granary effective capacity (preservation, food extension)
@@ -366,9 +374,10 @@ const computeDefenseScores = (
       milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
       monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
     }
-    // Divine: Create Food and Water, Bless crops — caps, like arcane below.
-    // (Math.max here would RAISE a druid-reduced penalty back up: stacking
-    // mitigation must never worsen the score.)
+    // Divine: Create Food and Water, Bless crops. A mitigation CAPS the
+    // penalty — Math.min, never Math.max: the old Math.max form WORSENED the
+    // score whenever the druid branch had already reduced the penalty below
+    // the divine cap (stacking two mitigations must not out-penalize one).
     if (hasDivine) {
       econPenalty = Math.min(econPenalty, Math.round(20 * 0.6)); // -20 → -12 (caps)
       milPenalty  = Math.min(milPenalty,  Math.round(10 * 0.6)); // -10 → -6 (caps)
@@ -569,18 +578,36 @@ export function generateDefenseProfile(settlement) {
   let chainMilBonus  = 0;
   let chainEconBonus = 0;
 
-  // Garrison chain: fully operational = +5 military, vulnerable (no provisions) = -5
+  // A military chain counts as healthy when it is operational/running, OR it is
+  // vulnerable ONLY because its upstream provisioning chain (food_processing→grain,
+  // fortification→stone) is absent/strained AND the settlement can provision via
+  // trade. A connected city's garrison is supplied by IMPORTS even when it has no
+  // local bakers/butchers (upstreamMissing) — the old flat -5 wrongly penalized that,
+  // killing the +5/+6/+4 credit at city/metropolis. But an ISOLATED settlement
+  // genuinely cannot import, so a missing/weak upstream there KEEPS the penalty.
+  // A real LOCAL impairment (trade dependency / active substitute) is never healthy.
+  const canProvision = hasTradeRouteConnection(
+    settlement.config?.tradeRouteAccess
+      || settlement.tradeRoute
+      || 'road',
+  );
+  const chainHealthy = (c) =>
+    !!c && (c.status === 'operational' || c.status === 'running' ||
+      (c.status === 'vulnerable' && !c.dependency && !c.substituteActive && canProvision &&
+        ((c.upstreamMissing && c.upstreamMissing.length) || (c.upstreamWeak && c.upstreamWeak.length))));
+
+  // Garrison chain: healthy = +5 military, genuinely vulnerable (no provisions) = -5
   if (garrisonChain) {
-    if (garrisonChain.status === 'operational' || garrisonChain.status === 'running') chainMilBonus  += 5;
+    if (chainHealthy(garrisonChain)) chainMilBonus  += 5;
     else if (garrisonChain.status === 'vulnerable' || garrisonChain.status === 'impaired')  chainMilBonus  -= 5;
   }
-  // Fortification chain: operational = +6 military (walls maintained), impaired = -4
+  // Fortification chain: healthy = +6 military (walls maintained), impaired = -4
   if (fortificationChain) {
-    if (fortificationChain.status === 'operational' || fortificationChain.status === 'running') chainMilBonus  += 6;
+    if (chainHealthy(fortificationChain)) chainMilBonus  += 6;
     else if (fortificationChain.status === 'impaired') chainMilBonus -= 4;
   }
-  // Mercenary chain active and healthy = +4 military (contract force available)
-  if (mercenaryChain && (mercenaryChain.status === 'operational' || mercenaryChain.status === 'running')) {
+  // Mercenary chain healthy = +4 military (contract force available)
+  if (chainHealthy(mercenaryChain)) {
     chainMilBonus += 4;
   }
   // Food processing chain healthy = +5 economic defense (logistics well-supplied)
@@ -632,176 +659,4 @@ export function generateDefenseProfile(settlement) {
       ...(disaster !== undefined ? { disaster: Math.round(disasterGate * 100) / 100 } : {}),
     },
   };
-}
-
-// ── Threat assessment narrative ──────────────────────────────────
-
-export function buildThreatAssessment(r) {
-  const d = r?.defenseProfile || {};
-  const inst = d.institutions || {};
-  const scores = d.scores || {};
-  const sp = r?.economicState?.safetyProfile || {};
-  const f = r?.economicState?.compound?.inst || {};
-  const threat = r?.config?.monsterThreat || 'frontier';
-  const hasWalls = (inst.walls || []).length > 0;
-  const hasGarrison = (inst.garrison || []).length > 0;
-  const hasMilitia = (inst.militia || []).length > 0;
-  const hasCharter = (inst.charter || []).length > 0;
-  const result = [];
-
-  const monColor = threat === 'plagued'
-    ? '#8b1a1a'
-    : threat === 'frontier'
-      ? '#7a5010'
-      : '#1a5a28';
-  let mon;
-  if (threat === 'plagued') {
-    if (hasWalls && hasGarrison) {
-      mon = 'Embattled region: constant creature pressure. Walls and garrison have established a survivable posture. Defense is an ongoing operational necessity. '
-        + (hasCharter
-          ? 'Charter hall coordinates specialist monster response.'
-          : 'No specialist monster hunters on retainer. The garrison handles everything.');
-    } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
-        + (hasCharter
-          ? 'Charter hall provides specialist backup.'
-          : 'No specialist monster hunters.');
-    } else if (hasCharter) {
-      mon = 'No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.';
-    } else if (hasWalls) {
-      mon = 'Walls exist but no organized force to sustain a watch rotation. The palisade creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
-    } else if (hasGarrison) {
-      mon = 'Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
-    } else {
-      mon = 'An embattled region with no organized defense and no perimeter. Survival rests on terrain, luck, and a fast road out. This settlement is in extreme danger.';
-    }
-  } else if (threat === 'frontier') {
-    if (hasWalls && hasGarrison) {
-      mon = 'Active frontier. Walls and garrison provide credible deterrence. Most creature threats will not press a defended perimeter. '
-        + (hasCharter
-          ? 'Charter hall handles anything above the garrison usual remit. '
-          : '')
-        + 'Adequate for the threat level.';
-    } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and militia are standard frontier resilience: effective against most creature threats, strained by simultaneous incursions. '
-        + (hasCharter
-          ? 'Charter hall provides specialist backup. '
-          : '')
-        + 'Honest posture for a frontier settlement.';
-    } else if (hasGarrison || hasMilitia) {
-      mon = 'Active frontier with '
-        + (hasGarrison ? 'a garrison' : 'a militia')
-        + ' but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.';
-    } else {
-      mon = 'Active frontier with no organized defense. Vulnerable to any monster of moderate capability.';
-    }
-  } else {
-    if (hasWalls && hasGarrison) {
-      mon = 'Safe heartland. The existing defenses are substantially more than the threat level requires.';
-    } else if (hasWalls || hasGarrison || hasMilitia || hasCharter) {
-      mon = 'Safe heartland with minimal creature activity. Existing defenses are appropriate. The primary threats here are internal.';
-    } else {
-      mon = 'Safe heartland with no organized defense. Acceptable given the threat environment.';
-    }
-  }
-  result.push({
-    icon: '',
-    label: 'Beasts & Monsters',
-    color: monColor,
-    assess: mon,
-  });
-
-  const milScore = scores.military || 0;
-  const milColor = milScore >= 60
-    ? '#1a4a2a'
-    : milScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
-  let mil;
-  if (hasWalls && hasGarrison) {
-    mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
-  } else if (hasWalls && hasMilitia) {
-    mil = 'Walls with citizen militia: credible deterrence against raiders, inadequate against any professional force with siege capability.';
-  } else if (hasWalls) {
-    mil = 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
-  } else if (hasGarrison) {
-    mil = 'Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.';
-  } else if (hasMilitia) {
-    mil = 'Armed citizens who know their ground. Effective against disorganized raiders. No counter to a disciplined military force.';
-  } else {
-    mil = 'No walls or garrison. Cannot resist organized military aggression. Survival depends entirely on distance, diplomacy, or irrelevance to the attacker.';
-  }
-  result.push({
-    icon: '',
-    label: 'Invasion & War',
-    color: milColor,
-    assess: mil,
-  });
-
-  const intScore = scores.internal || 0;
-  const intColor = intScore >= 60
-    ? '#1a4a2a'
-    : intScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
-  const sl = sp.safetyLabel || 'Moderate';
-  let intA = 'Internal security: ' + sl + '. ';
-  if (sl.includes('Dangerous')) {
-    intA += 'Active violence and organized crime make internal order the primary threat. ';
-  }
-  if (f.hasCourtSystem && f.hasPrison) {
-    intA += 'Full legal infrastructure provides enforcement capacity.';
-  } else if (f.hasCourtSystem) {
-    intA += 'Courts prosecute but limited detention.';
-  } else if (f.hasPrison) {
-    intA += 'Detention without systematic prosecution.';
-  } else {
-    intA += 'No legal infrastructure. Order relies on force alone.';
-  }
-  result.push({
-    icon: '',
-    label: 'Internal Security',
-    color: intColor,
-    assess: intA,
-  });
-
-  const econScore = scores.economic || 0;
-  const econColor = econScore >= 60
-    ? '#1a4a2a'
-    : econScore >= 35
-      ? '#7a5010'
-      : '#8b1a1a';
-  let econA;
-  if (econScore >= 65) {
-    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement.';
-  } else if (econScore >= 40) {
-    econA = 'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.';
-  } else if (econScore >= 25) {
-    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale.';
-  } else {
-    econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
-  }
-  result.push({
-    icon: '',
-    label: 'Economic Survival',
-    color: econColor,
-    assess: econA,
-  });
-
-  const disA = (f.hasGranary
-    ? 'Granary provides food buffer. The community can absorb a bad harvest without immediate hardship.'
-    : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
-    + (f.hasHospital
-      ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
-      : f.hasChurch
-        ? ' Parish clergy provide basic wound care: better than nothing, worse than a hospital.'
-        : ' No medical infrastructure. Plague spreads until it burns out.');
-  result.push({
-    icon: '',
-    label: 'Disasters & Famine',
-    color: '#1a4a5a',
-    assess: disA,
-  });
-
-  return result;
 }

@@ -1,6 +1,6 @@
 /**
  * AdminAnalyticsPanel.jsx — owner-facing read view over the first-party analytics
- * dashboards. Self-contained (mirrors GalleryModerationPanel): calls the
+ * dashboards (doc §9). Self-contained (mirrors GalleryModerationPanel): calls the
  * admin-actions `get_analytics_dashboard` action, which dispatches to the fixed
  * report_* SECURITY DEFINER functions (migration 038). The privilege gate is
  * server-side in admin-actions; this is read-only.
@@ -59,7 +59,7 @@ export default function AdminAnalyticsPanel() {
   return (
     <section aria-label="Analytics dashboards">
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
-        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString()}</span>}
+        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
       <div style={{ margin: `${SP.sm}px 0` }}>
@@ -73,7 +73,7 @@ export default function AdminAnalyticsPanel() {
       </div>
 
       {loading && <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}
-      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Could not load: {error}. Confirm the analytics migrations are deployed.</p>}
+      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Couldn’t load: {error}. (Needs migrations 036–038 deployed.)</p>}
       {!loading && !error && rows.length === 0 && (
         <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>No data yet for this dashboard.</p>
       )}

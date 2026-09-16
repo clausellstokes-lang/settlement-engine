@@ -169,8 +169,10 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
     // were extracted out of relationshipEvolution.js in the god-module split). Any
     // OTHER importer is an unsanctioned coupling (or a new parallel ruleset) and
     // should be flagged.
+    // Scan CODE files only: data baselines (e.g. tests/lint/.domain-any-baseline.json)
+    // list file paths without importing anything.
     const hits = execSync(
-      "grep -rln \"relationshipCompatibility\" src tests || true",
+      "grep -rln --include='*.js' --include='*.jsx' \"relationshipCompatibility\" src tests || true",
       { cwd: process.cwd(), encoding: 'utf8' },
     ).trim().split('\n').filter(Boolean).map(p => p.replace(/\/{2,}/g, '/'));
     const SANCTIONED = [
@@ -180,6 +182,22 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       'src/domain/worldPulse/tradeSalience.js',
       'src/domain/worldPulse/relationshipRulesAdversarial.js',
       'tests/domain/tradeSalience.test.js',
+      // String-coupling registry: READ-ONLY vocabulary pin — it asserts
+      // PRIMARY_RELATIONSHIP_TYPES ⇔ PROPAGATION_MATRIX set equality (the
+      // hand-mirrored list this file's header documents), the same
+      // no-parallel-ruleset intent this allowlist enforces.
+      'tests/data/stringCouplingRegistry.test.js',
+      // S7 signal registry: READ-ONLY vocabulary import (PRIMARY_RELATIONSHIP_TYPES
+      // as a signal-source enum) — no rule evaluation, no parallel ruleset.
+      'src/domain/autonomy/signalRegistry.js',
+      // Herald routing walker: READ-ONLY vocabulary import used to verify that
+      // every relationship signal has a semantic Herald destination. It never
+      // evaluates compatibility or introduces a second relationship ruleset.
+      'tests/lint/heraldRouting.walker.test.js',
+      // EP anchored-negatives walker: its frozen-offender roster names this
+      // test file's PATH as a string key. Imports nothing from the module —
+      // the same string-mention class as the data baselines exempted above.
+      'tests/lint/negativeAssertionAnchor.walker.test.js',
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);

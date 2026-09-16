@@ -1,9 +1,9 @@
 /**
  * domain/mapProfile.js — Map ↔ simulator interface.
  *
- * Map features (terrain, biome, rivers,
+ * Tier 4.14 of the roadmap. Map features (terrain, biome, rivers,
  * roads, regional danger) are already simulation inputs via
- * `config.*`. This module makes the interface explicit in BOTH
+ * `config.*`. Phase 31 makes the interface explicit in BOTH
  * directions:
  *
  *   inputs:  what the simulator reads from map-derived config
@@ -22,8 +22,8 @@
  *     contributors[]
  *   }
  *
- * Pure read-only. Composes substrate (trade_connectivity,
- * defense_readiness), threats (hazard markers), and the
+ * Pure read-only. Composes Phase 17 substrate (trade_connectivity,
+ * defense_readiness), Phase 20 threats (hazard markers), and Phase 30
  * regional graph (authority hubs).
  *
  * No active map mutation here — this is the interface SHAPE map
@@ -34,6 +34,81 @@
 import { deriveCausalState, defenseProfileHasWalls } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
+import { resolveTerrain } from './resolveTerrain.js';
+
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+
+/**
+ * Settlement view this module reads. Config keys are declared broadly so
+ * the object stays structurally assignable to the source shapes that
+ * {@link deriveRegionalGraph} and {@link deriveAllThreatProfiles} accept.
+ * @typedef {Object} MapSettlement
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {{ terrain?: string, biome?: string, riverAccess?: string, river?: string,
+ *   roadAccess?: string, road?: string, tradeRouteAccess?: string, monsterThreat?: string,
+ *   region?: string, magicLevel?: string, priorityMagic?: number, magicExists?: boolean }} [config]
+ * @property {Object} [defenseProfile]
+ * @property {Array<{ name?: string }>} [institutions]
+ */
+
+/**
+ * One provenance entry appended to the contributors list.
+ * @typedef {Object} MapContributor
+ * @property {string} source
+ * @property {string} effect
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} MapProfileInputs
+ * @property {string|null} terrain
+ * @property {string|null} biome
+ * @property {string|null} riverAccess
+ * @property {string|null} roadAccess
+ * @property {string|null} tradeRouteAccess
+ * @property {string|null} monsterThreat
+ * @property {string|null} region
+ */
+
+/**
+ * @typedef {Object} RegionalAuthorityEntry
+ * @property {string} id
+ * @property {string} name
+ * @property {string} relationshipType
+ */
+
+/**
+ * @typedef {Object} HazardMarker
+ * @property {string} id
+ * @property {string} label
+ * @property {string} kind
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} visibility
+ */
+
+/**
+ * @typedef {Object} SuggestedFeature
+ * @property {string} feature
+ * @property {string} reason
+ */
+
+/**
+ * @typedef {Object} MapProfileOutputs
+ * @property {string} roadImportance
+ * @property {string} defensiveTerrain
+ * @property {RegionalAuthorityEntry[]} regionalAuthority
+ * @property {HazardMarker[]} hazardMarkers
+ * @property {SuggestedFeature[]} suggestedFeatures
+ */
+
+/**
+ * @typedef {Object} MapProfile
+ * @property {MapProfileInputs} inputs
+ * @property {MapProfileOutputs} outputs
+ * @property {MapContributor[]} contributors
+ */
 
 // ── Output bands ─────────────────────────────────────────────────────────
 
@@ -44,11 +119,14 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 
 // ── Input envelope ───────────────────────────────────────────────────────
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {MapSettlement} settlement
+ * @returns {MapProfileInputs}
+ */
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
-    terrain:          cfg.terrain          || null,
+    terrain:          resolveTerrain(cfg),
     biome:            cfg.biome            || null,
     riverAccess:      cfg.riverAccess      || cfg.river || null,
     roadAccess:       cfg.roadAccess       || cfg.road  || null,
@@ -61,9 +139,10 @@ function deriveInputs(settlement) {
 // ── Output: roadImportance ──────────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
- * @param {any[]} contributors
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {string}
  */
 function deriveRoadImportance(settlement, causal, contributors) {
   const trade = causal.scores?.trade_connectivity ?? 50;
@@ -71,7 +150,7 @@ function deriveRoadImportance(settlement, causal, contributors) {
   let band = 'low';
   if (access === 'major' || trade >= 70) {
     band = 'critical';
-    contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'critical', reason: 'Major trade route and high trade connectivity. Roads are critical.' });
+    contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'critical', reason: 'Major trade route AND high trade connectivity — roads are critical.' });
   } else if (access === 'minor' || access === 'standard' || access === 'road' || trade >= 55) {
     band = 'major';
     contributors.push({ source: 'config.tradeRouteAccess+trade_connectivity', effect: 'major', reason: 'Settled trade route presence; roads are major.' });
@@ -87,25 +166,28 @@ function deriveRoadImportance(settlement, causal, contributors) {
 // ── Output: defensiveTerrain ────────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
- * @param {any[]} contributors
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {string}
  */
 function deriveDefensiveTerrain(settlement, causal, contributors) {
   const defense = causal.scores?.defense_readiness ?? 50;
-  const terrain = settlement.config?.terrain || '';
+  const terrain = resolveTerrain(settlement.config) || '';
   // Real walls only: read the classified walls DATA (or real institution names),
   // never a stringify regex — the profile always contains the literal key
   // "walls", so the old regex banded every settlement as walled.
   const hasWalls = defenseProfileHasWalls(settlement.defenseProfile)
-                || (settlement.institutions || []).some((/** @type {any} */ i) => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
+                || (settlement.institutions || []).some(i => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
 
   let idx = 1; // 'open' baseline
-  if (/mountain|highland|peak|cliff/i.test(terrain))  { idx = 3; contributors.push({ source: 'config.terrain', effect: 'highland', reason: 'Mountain / cliff terrain is sheltered.' }); }
-  else if (/forest|wood|jungle/i.test(terrain))       { idx = 2; contributors.push({ source: 'config.terrain', effect: 'forest', reason: 'Forest terrain is mixed defensively.' }); }
-  else if (/swamp|marsh|bog/i.test(terrain))          { idx = 2; contributors.push({ source: 'config.terrain', effect: 'wetland', reason: 'Swamp impedes attackers.' }); }
-  else if (/plain|steppe|desert/i.test(terrain))      { idx = 0; contributors.push({ source: 'config.terrain', effect: 'open', reason: 'Plain / steppe / desert is exposed.' }); }
-  else if (/coast|island|harbor|port/i.test(terrain)) { idx = 2; contributors.push({ source: 'config.terrain', effect: 'coast', reason: 'Coast / port is mixed.' }); }
+  if (/mountain|highland|peak|cliff/i.test(terrain))  { idx = 3; contributors.push({ source: 'config.terrainType', effect: 'highland', reason: 'Mountain / cliff terrain is sheltered.' }); }
+  else if (/hill/i.test(terrain))                     { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'highland', reason: 'Hill country favours the defender; mixed.' }); }
+  else if (/forest|wood|jungle/i.test(terrain))       { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'forest', reason: 'Forest terrain is mixed defensively.' }); }
+  else if (/swamp|marsh|bog/i.test(terrain))          { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'wetland', reason: 'Swamp impedes attackers.' }); }
+  else if (/plain|steppe|desert|grass/i.test(terrain)){ idx = 0; contributors.push({ source: 'config.terrainType', effect: 'open', reason: 'Plain / steppe / desert is exposed.' }); }
+  else if (/coast|island|harbor|port/i.test(terrain)) { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'coast', reason: 'Coast / port is mixed.' }); }
+  else if (/river|lake|fjord/i.test(terrain))         { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'riverside', reason: 'A river guards a flank; mixed.' }); }
 
   if (hasWalls && defense >= 55) {
     idx = Math.max(idx, 4);
@@ -121,13 +203,12 @@ function deriveDefensiveTerrain(settlement, causal, contributors) {
 // ── Output: regionalAuthority ───────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any[]} contributors
+ * @param {MapSettlement} settlement
+ * @param {MapContributor[]} contributors
+ * @returns {RegionalAuthorityEntry[]}
  */
 function deriveRegionalAuthority(settlement, contributors) {
-  /** @type {any} */
   const graph = deriveRegionalGraph(settlement);
-  /** @type {any[]} */
   const authorities = [];
   for (const link of graph.links) {
     if (link.relationshipType === 'tax_authority'
@@ -144,7 +225,7 @@ function deriveRegionalAuthority(settlement, contributors) {
     contributors.push({
       source: 'regionalGraph',
       effect: 'authority_detected',
-      reason: `${authorities.length} authority link(s). Map should render hierarchy.`,
+      reason: `${authorities.length} authority link(s) — map should render hierarchy.`,
     });
   }
   return authorities;
@@ -153,12 +234,12 @@ function deriveRegionalAuthority(settlement, contributors) {
 // ── Output: hazardMarkers ───────────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any[]} contributors
+ * @param {MapSettlement} settlement
+ * @param {MapContributor[]} contributors
+ * @returns {HazardMarker[]}
  */
 function deriveHazardMarkers(settlement, contributors) {
   const threats = deriveAllThreatProfiles(settlement);
-  /** @type {any[]} */
   const out = [];
   for (const t of threats) {
     if (t.severity < 0.4) continue;
@@ -175,7 +256,7 @@ function deriveHazardMarkers(settlement, contributors) {
     contributors.push({
       source: 'threatProfile',
       effect: 'hazards_present',
-      reason: `${out.length} threat(s) above moderate severity. Map should pin them.`,
+      reason: `${out.length} threat(s) above moderate severity — map should pin them.`,
     });
   }
   return out;
@@ -184,12 +265,12 @@ function deriveHazardMarkers(settlement, contributors) {
 // ── Output: suggestedFeatures ───────────────────────────────────────────
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} causal
- * @param {any[]} contributors
+ * @param {MapSettlement} settlement
+ * @param {CausalState} causal
+ * @param {MapContributor[]} contributors
+ * @returns {SuggestedFeature[]}
  */
 function deriveSuggestedFeatures(settlement, causal, contributors) {
-  /** @type {any[]} */
   const out = [];
   // Walls suggested for fortified-ish defense bands
   const def = causal.scores?.defense_readiness ?? 50;
@@ -221,8 +302,8 @@ function deriveSuggestedFeatures(settlement, causal, contributors) {
 /**
  * Derive the structured MapProfile.
  *
- * @param {Object} settlement
- * @returns {Object} MapProfile
+ * @param {MapSettlement} settlement
+ * @returns {MapProfile}
  */
 export function deriveMapProfile(settlement) {
   if (!settlement) {
@@ -234,7 +315,7 @@ export function deriveMapProfile(settlement) {
   }
 
   const causal = deriveCausalState(settlement);
-  /** @type {any[]} */
+  /** @type {MapContributor[]} */
   const contributors = [];
 
   return {
@@ -257,17 +338,17 @@ export function defensiveTerrainBands()  { return [...DEFENSIVE_TERRAIN_BANDS]; 
 
 /**
  * Human-readable summary.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {MapSettlement} settlement
+ * @returns {string[]}
  */
 export function summarizeMap(settlement) {
-  /** @type {any} */
   const m = deriveMapProfile(settlement);
   return [
-    `Inputs: terrain: ${m.inputs.terrain || 'unset'}; biome: ${m.inputs.biome || 'unset'}; trade access: ${m.inputs.tradeRouteAccess || 'unset'}; monster threat: ${m.inputs.monsterThreat || 'unset'}.`,
-    `Roads: ${m.outputs.roadImportance} importance.`,
-    `Terrain defense: ${m.outputs.defensiveTerrain}.`,
-    `Regional authorities: ${m.outputs.regionalAuthority.length}.`,
-    `Hazards pinned: ${m.outputs.hazardMarkers.length}.`,
-    `Suggested features: ${m.outputs.suggestedFeatures.map((/** @type {any} */ f) => f.feature).join(', ') || 'none'}.`,
+    `Inputs — terrain: ${m.inputs.terrain || 'unset'}; biome: ${m.inputs.biome || 'unset'}; trade access: ${m.inputs.tradeRouteAccess || 'unset'}; monster threat: ${m.inputs.monsterThreat || 'unset'}.`,
+    `Roads — ${m.outputs.roadImportance} importance.`,
+    `Terrain defense — ${m.outputs.defensiveTerrain}.`,
+    `Regional authorities — ${m.outputs.regionalAuthority.length}.`,
+    `Hazards pinned — ${m.outputs.hazardMarkers.length}.`,
+    `Suggested features — ${m.outputs.suggestedFeatures.map(f => f.feature).join(', ') || 'none'}.`,
   ];
 }

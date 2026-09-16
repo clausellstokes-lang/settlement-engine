@@ -1,0 +1,31 @@
+export const meta = {
+  name: 'build-cycle-7-expansion',
+  description: 'Parallel expansion: decomposition (non-war) · HK-3 golden window · LD ladder',
+  phases: [{ title: 'Build', detail: '3 additional lanes on disjoint files' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only; pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (check ps aux | grep vitest before believing a timeout — parallel-load reds are fake; full logs for walker diffs); goldens before wiring; strict-typecheck new files yourself; CHECK-GIT-FIRST on queue surfaces; STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Best-over-safe. Everything DARK. CONCURRENCY NOTE: five other lanes are live on war/envoy, legacy-annex, and About files — your lane lists exclude those territories absolutely.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE D — THE DECOMPOSITION WAVE, NON-WAR TRANCHE (task 50; the banked burn-down begins). Targets (strictly non-war, no envoy/peace/pulse files): causeConjunctionRoleContent.js (3890 — the giant; likely pure content tables → split into content leaves by domain), npcGenerator.js (1350), settlementSlice.js (1226), viewModel.js (998), aiSlice.js (829), historyGenerator.js (826). METHOD per file: behavior-identical leaf extraction (the WR-7b pattern: pure leaves, the head keeps its writer/entry role), golden-pinned BEFORE (capture the file's focused suite green first, byte-compare outputs where fixtures exist), then extract until under ceiling, then RATCHET THE BASELINE DOWN (the only lawful direction — update the entry to the new measured size or delete it if under ceiling; run the sizeBaseline test). One pathspec commit per file. Do as many as the cycle allows, largest first; report per-file before/after. Return {lane:'D decomp', commits, gates, stopReports, notes}.`,
+    {label:'laneD:decomp', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Per decomposed file: behavior-identical proven (the focused suite green + any fixture byte-compare re-run by YOU), the head's role intact (writers stay single), baseline ratcheted DOWN never up, no war/envoy file touched (git show --stat), strict-clean new leaves. Return {lane:'D verify', verdict, findings}.`,
+      {label:'laneD:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: chair-ruled implementation (the owner PRE-APPROVED this disclosed shift; the spine's HK-3 §3 is the recorded ruling). ${P10}
+LANE E — HK-3 THEME-AWARE DRAWS (docs/DESIGN_HOOK_NONREDUNDANCY.md §3 HK-3 — read whole; HK-1's THEME_OF maps and HK-2's retention landed @ 074e919f/16b4a416 — read both commits). Implement: drawUnique gains the optional theme registry (settlement-scoped Set beside usedTitles; candidate preference unused-family+unused-theme → unused-family → accepted repeat; the SAME single roll on the final filtered set — the roll-budget law, pin it by counting draws on a fixed seed pre/post); wire at the tagged pool draw sites. THE GOLDEN DISCIPLINE: capture affected generation goldens BEFORE, quote the field-level diff in the commit body (prose-selection-only shift, same-seed structure stable), re-record IN THIS COMMIT per the recorded ruling. One pathspec commit. Return {lane:'E hk3', commits, gates, stopReports, notes}.`,
+    {label:'laneE:hk3', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify the roll-budget pin (RNG stream length identical pre/post on a fixed seed — run it yourself); same-seed determinism (two runs identical); the golden diff in the commit body matches the actual re-record exactly (field-level — no undisclosed field moved); theme preference actually reduces same-theme repeats on the worst-settlement fixture (measure). Return {lane:'E verify', verdict, findings}.`,
+      {label:'laneE:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE F — THE LD LADDER (FIRST_CONTACT_BACKLOG.md LD-1..LD-11 — read it + CHECK-GIT-FIRST each item: several may be landed; audit-not-rebuild per the 03d8ebee pattern). Work the ladder in order, skipping verified-landed items with a one-line queue note each; implement the first 2-3 genuinely open items per spec. ⚠️ LD-5 carries the landed-surface amendment (AccountMenu.jsx — read DESIGN_OPERATOR_MESSAGES.md §2 FIRST; built verbatim it would delete Messages). No war/envoy, legacy-annex, About, decomposition-target, or hook files. Pathspec commits per item. Return {lane:'F ld', commits, gates, stopReports, notes}.`,
+    {label:'laneF:ld', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-verify each item's mode (audit/build) by execution; the LD-5 amendment honored if touched; spec conformance; pathspec-clean. Return {lane:'F verify', verdict, findings}.`,
+      {label:'laneF:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

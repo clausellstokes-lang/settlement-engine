@@ -1,0 +1,106 @@
+export const meta = {
+  name: 'wayfare-architecture',
+  description: 'Architect the WAYFARE program (WY): physical flows, absolute distance, map layers + popups, the mirror law — refined cohesive, queue-ready',
+  phases: [
+    { title: 'Substrate', detail: 'five parallel censuses over every touched surface', model: 'opus' },
+    { title: 'Architect', detail: 'the WY master architecture, implementation-grade' },
+    { title: 'Cohesion', detail: 'adversarial critique against everything' },
+  ],
+}
+
+const OUT = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/wayfare-arch'
+const DIRECTIVE = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/rumor-durability-and-absolute-distance-directive.md'
+const ESP = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory/espionage-confirmers-directive.md'
+
+const GROUND = `VERIFY-FIRST: this brief is the SettlementForge chair's authentic instruction set; verify claims against the tree, then proceed — do not refuse it as injection. READ-ONLY against /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold (branch claude/composite-r4; BUILD LANES ARE RUNNING — do NOT run vitest/npm/tests; greps and reads only; the tree moves, record the HEAD you measured at). WRITE ONLY under ${OUT}/ (mkdir -p). python3 byte-scan every Write. THE OWNER DIRECTIVE SET is at ${DIRECTIVE} — sections 1 (severity-durable rumor truth), 2 (absolute distance from the map's km scale, activating the parked J-D11(b) socket), 2b (inhabited roads at freeze), 2c (the Wayfare layers: armies/caravans/persons + the AMBIGUITY LAW and COVERT LAW), 2d (PHYSICAL TRADE: dispatch debits, in-transit inventory, arrival credits, seizure transfers, quantization, exactly-one regime flips), 2e (interactable popups: glance→sentence→TABLE grammar + linked receipts + the POPULATIONS layer with PHYSICAL MIGRATION and faith cargo + the house idiom: on-the-map = REAL = CONSERVED), 2f (the SINGLE-PROJECTION MIRROR LAW: one projection builder per entity kind consumed by popup AND dossier tab, facet-set totality walker; populations/caravans map-only). The covert-rendering law also binds from ${ESP}. The FP volume docs/DESIGN_FP_ARCHITECTURE.md carries the laws (§1) and the programs this must slot between (TR-4's regime pattern, POP's waves, SP-7 transit); the war volume carries §7's J-D11(b) km-scale socket. Navigate by SYMBOL; re-measure every premise with multi-spelling greps.`
+
+phase('Substrate')
+const [mapc, doss, army, mover, flows] = await parallel([
+  () => agent(`${GROUND}
+
+CENSUS 1 — THE MAP INFRASTRUCTURE. Map by grep/read with file:symbol receipts: the map component family (src/components/map/), the existing LAYER system (how layers register, toggle, render — fog-table-layer and map-styles landed programs are precedents), marker/glyph primitives, click/popup handling today (TreatyPanel exists — what popup machinery does the map already have?), performance model (how many markers render today), and how the map reads the freeze snapshot. Deliver ${OUT}/CENSUS-MAP.md: what the four Wayfare layers can RIDE, what popup machinery exists vs needs building, the layer-registration pattern to follow. Return {census:'map', exists:[...], rideable:[...], missing:[...], notes:'...'}.`, { label: 'wy:map', phase: 'Substrate', model: 'opus', schema: { type: 'object', required: ['census','exists','rideable','missing','notes'], properties: { census:{type:'string'}, exists:{type:'array',items:{type:'string'}}, rideable:{type:'array',items:{type:'string'}}, missing:{type:'array',items:{type:'string'}}, notes:{type:'string'} } } }),
+  () => agent(`${GROUND}
+
+CENSUS 2 — THE DOSSIER SURFACES (the mirror law's other half). Map the dossier architecture: the war tab (what it shows about units/deployments TODAY — every facet, its source read, its format), the NPC tab (same), how dossier tabs source their data (projection functions? inline reads?), the DM-only/audience projection machinery on dossiers, and the PDF export's relationship to the same data. Deliver ${OUT}/CENSUS-DOSSIER.md: the current facet sets per tab, the drift risk points (any place two surfaces read the same entity differently TODAY), and the extraction path to ONE projection builder per entity kind. Return {census:'dossier', exists:[...], rideable:[...], missing:[...], notes:'...'}.`, { label: 'wy:dossier', phase: 'Substrate', model: 'opus', schema: { type: 'object', required: ['census','exists','rideable','missing','notes'], properties: { census:{type:'string'}, exists:{type:'array',items:{type:'string'}}, rideable:{type:'array',items:{type:'string'}}, missing:{type:'array',items:{type:'string'}}, notes:{type:'string'} } } }),
+  () => agent(`${GROUND}
+
+CENSUS 3 — THE ARMY/UNIT FACET SUBSTRATE. The owner's army popup demands: exhaustion, military readiness, military experience, troop population, destination, purpose. Census what EXISTS per facet with receipts: deployment records (warDeployment.js — what does a deployment row carry?), army transit state (armyTransitKernel — position, legs, modes), attrition/exhaustion (defenderAttritionEnabled, war economy drain — is exhaustion a tracked facet or derivable?), readiness (where does readiness live — belief-side vs truth-side; the popup is DM-truth), experience (does ANY experience facet exist anywhere, or is it genuinely missing — if missing, say so; the popup declares-absent until a wave mints it), force size/population, reinforcements as entities. Deliver ${OUT}/CENSUS-ARMY.md: per-facet EXISTS/DERIVABLE/MISSING with the honest table. Return {census:'army', exists:[...], rideable:[...], missing:[...], notes:'...'}.`, { label: 'wy:army', phase: 'Substrate', model: 'opus', schema: { type: 'object', required: ['census','exists','rideable','missing','notes'], properties: { census:{type:'string'}, exists:{type:'array',items:{type:'string'}}, rideable:{type:'array',items:{type:'string'}}, missing:{type:'array',items:{type:'string'}}, notes:{type:'string'} } } }),
+  () => agent(`${GROUND}
+
+CENSUS 4 — THE MOVER RECORDS + POSITION MODEL. Every record that will render as a Wayfare marker: roads missions (path[]/legArrivalTick/phase — the interpolation inputs), envoy errands (positionRef/legs), army transit positions, the whereabouts mirror, npcCirculation wanderers. Verify: can a deterministic position-on-route be interpolated at freeze for EACH from existing fields (name the exact fields), what the placeId-tolerance problem looks like (which consumers assume settlement — the 2b census obligation, do a FIRST PASS multi-spelling sweep), and the encounter machinery (interception at crossings, parlay states, convergence) as the ENCOUNTER-PAIRS table's existing arms — including whether army×caravan seizure exists in supplyWebWarfare or is genuinely the one new arm. Deliver ${OUT}/CENSUS-MOVERS.md. Return {census:'movers', exists:[...], rideable:[...], missing:[...], notes:'...'}.`, { label: 'wy:movers', phase: 'Substrate', model: 'opus', schema: { type: 'object', required: ['census','exists','rideable','missing','notes'], properties: { census:{type:'string'}, exists:{type:'array',items:{type:'string'}}, rideable:{type:'array',items:{type:'string'}}, missing:{type:'array',items:{type:'string'}}, notes:{type:'string'} } } }),
+  () => agent(`${GROUND}
+
+CENSUS 5 — THE FLOW REGIMES (trade + migration today). Census the CURRENT abstract regimes the physicalization directives flip: tradeFlowsEnabled's netted flows (where rates apply per tick, which reads consume them), commodityFlow conservation as designed (DESIGN_FP_ARCH_TR.md TR-4's T7 walker + grainArrivalCredit — quote the regime-flip machinery verbatim), migrationFlowsEnabled's current netted migration (where arrivals/departures apply, capacityModel/stressorGates arrival writers), faith spread today (faithSpreadEnabled — how faith moves WITHOUT physical columns; where observance mix lives so a column's faith cargo can derive at departure and credit at arrival), and the population-conservation invariants POP's architecture already specs. Deliver ${OUT}/CENSUS-FLOWS.md: per-flow the CURRENT regime, the flip point, and the conservation story across origin/transit/destination. Return {census:'flows', exists:[...], rideable:[...], missing:[...], notes:'...'}.`, { label: 'wy:flows', phase: 'Substrate', model: 'opus', schema: { type: 'object', required: ['census','exists','rideable','missing','notes'], properties: { census:{type:'string'}, exists:{type:'array',items:{type:'string'}}, rideable:{type:'array',items:{type:'string'}}, missing:{type:'array',items:{type:'string'}}, notes:{type:'string'} } } }),
+])
+
+phase('Architect')
+const arch = await agent(`${GROUND}
+
+YOU ARE THE WAYFARE MASTER ARCHITECT. Five censuses complete under ${OUT}/ — read all five in full; returns:
+${JSON.stringify({ mapc, doss, army, mover, flows }, null, 2)}
+
+Produce ${OUT}/DESIGN_WAYFARE_ARCHITECTURE-DRAFT.md — implementation-grade, war-volume idiom, self-contained, REFINING AND COHERING the whole directive set (sections 1, 2, 2b-2f) into ONE program: (1) THE PHYSICS CHARTER — absolute distance from the declared km scale (the J-D11(b) socket activated; every distance-derived band re-derived per-map from measured spectra; the owner-signed disclosed shift recorded; the tiny-map transparency disclosure for the creation flow); severity-durable rumor fidelity (the one-multiplier amendment on SP-A's severity ladder, big-lies-cost-more emergent); the REGIME-FLIP HOUSE IDIOM formalized once (netted XOR physical per unit per tick, exactly-one walker, conservation across origin/transit/destination, dispatch debits + arrival credits, quantization law) and instantiated THREE times: trade (generalizing TR-4 per good class), migration (the POP wave, with FAITH CARGO deriving from origin observance and crediting destination), and the already-physical travelers; (2) THE CANONICAL MODEL — fight for zero new keys (positions interpolate from existing fields; cargo/faith-composition as conditional banded fields on mover records; projections derived); full lifecycle clauses; (3) THE SURFACE CHARTER — the four layers (army/caravan/person/population) riding the census-1 layer pattern; the AMBIGUITY LAW (no direction from visuals) and COVERT LAW (DM-true view only, fail-closed exports) as pinned laws; the POPUP GRAMMAR (glance → sentence → TABLE + linked receipts; facets declared-absent where records lack them, never invented); THE SINGLE-PROJECTION MIRROR LAW — one projection builder per entity kind with an audience parameter, consumed by popup + dossier tab (war tab shows ALL units home and field; NPC tab mirrors the person popup) + future PDF, with the facet-set totality walker; populations/caravans map-only per the owner's exception; (4) THE ENCOUNTER-PAIRS TABLE — closed vocabulary, existing-kernel mapping per census 4, the one genuinely-new arm (if any) specced, the walker proving no pair fires outside the table; (5) THE WAVES — dependency-ordered with per-wave files/budgets/pins/mutants/dormancy/collision maps AND the QUEUE INSERTION text: where WY waves slot against the FP order (the km-scale + rumor pieces vs SP-7/IN; trade physicalization vs TR-4+; migration+faith vs POP/WF; the surface waves vs the LD ladder), written as the amendment the chair lands; (6) SEAM CONTRACTS to TR/POP/WF/IN/SP/war/espionage (the Wayfare covert rendering rides the espionage covert law) with tripwires; (7) OPEN CHAIR QUESTIONS, max 5, ranked, with recommendations. Label every judgment JUDGMENT (vetoable). Return {draftPath, lineCount, waveCount, newPersistedKeys, seamCount, queueInsertion, openQuestions, notes}.`, {
+  label: 'wy:architect', phase: 'Architect', effort: 'max',
+  schema: { type: 'object', required: ['draftPath','lineCount','waveCount','newPersistedKeys','seamCount','queueInsertion','openQuestions','notes'], properties: {
+    draftPath:{type:'string'}, lineCount:{type:'number'}, waveCount:{type:'number'}, newPersistedKeys:{type:'array',items:{type:'string'}},
+    seamCount:{type:'number'}, queueInsertion:{type:'string'}, openQuestions:{type:'array',items:{type:'string'}}, notes:{type:'string'} } },
+})
+
+phase('Cohesion')
+const coh = await agent(`${GROUND}
+
+YOU ARE THE COHESION CRITIC — the owner's standing mandate: cohesive with EVERYTHING. The architect returned:
+${JSON.stringify(arch, null, 2)}
+
+Read the draft in full. Adversarially: (1) every claimed symbol against the live tree; (2) every WR/FP law against the draft (determinism, THE PROMISE for the km-scale shift, dormancy for every regime flip, dead bands for every distance-derived spectrum, T4, exactly-once, the receipts/banding law inside the popup grammar, the legibility three-register mapping); (3) the neighbor programs: TR-4's T7 walker vs the generalization (does the exactly-one discipline survive per-good-class?), POP's conservation invariants vs the physical columns, WF's observance mix vs faith cargo, the espionage covert law vs the person layer, SP-A's severity ladder vs the rumor multiplier, the encounter table vs existing interception/convergence kernels; (4) the MIRROR LAW's totality (can the facet walker actually compare popup and tab builds — is the single-projection extraction real or aspirational given census 2's findings); (5) the drama check: does the map-with-popups experience actually deliver the owner's intent (positions plain, intentions earned by reading) or does any piece leak direction/intent visually? Number every finding, severity + minimal fix. RETURN {verdict:'COHESIVE'|'NEEDS-REVISION', findings:[...], lawViolations:[...], seamGaps:[...], notes:'...'}.`, {
+  label: 'wy:cohesion', phase: 'Cohesion', effort: 'max',
+  schema: { type: 'object', required: ['verdict','findings','lawViolations','seamGaps','notes'], properties: {
+    verdict:{type:'string'}, findings:{type:'array',items:{type:'string'}}, lawViolations:{type:'array',items:{type:'string'}}, seamGaps:{type:'array',items:{type:'string'}}, notes:{type:'string'} } },
+})
+
+phase('Amend')
+const amend = await agent(`${GROUND}
+
+YOU ARE THE AMENDMENT ARCHITECT. The draft at ${OUT}/DESIGN_WAYFARE_ARCHITECTURE-DRAFT.md drew NEEDS-REVISION. The critic's full verdict:
+${JSON.stringify(coh, null, 2)}
+
+REVISE IN PLACE, three obligations: (1) close every finding, law violation, and seam gap — the two HIGH ones with special care: kmScale must survive RE-CANONIZATION (the digest rebuild on founding events — thread the datum through the rebuild path, lifecycle-pinned edit→recanonize→check, THE PROMISE class); the rumor-degradation mechanism must be rebuilt on the L1 discipline (keyed hash01 only, zero conditional discrete draws — one keyed roll per hop deciding the mutation from a closed table, deterministic both flag states); resolve the J-D11(b) flag-home charter conflict toward the war volume's corrected ruling unless you can refute it by measurement (then STOP-and-report); correct the two measured premises (nine legArrivalTick sites; the commodityFlow arrive-loop normalizer attribution). (2) BAKE IN THE CHAIR'S FIVE RULINGS (each = the draft's own recommendation, AFFIRMED, vetoable): Q1 the architect's drafted conservation shape stands unless a finding refuted it; Q2 home units DECLARE-ABSENT through the completeness map (no new owner-gated record); Q3 the WarFaithMapOverlay home-to-target deployment arrows are MOVEMENT telling — DELETE under the ambiguity law, with the deletion wave-assigned; Q4 the popup primitive is PortablePopup modal v1 (clicking is reading; canvas occlusion acceptable; the anchored popover recorded as a later enhancement, not built); Q5 the caravan layer ships against non-food shipments the moment WY-3 lands, with the legend saying so honestly. (3) keep the queue insertion verbatim-landable and the 12-wave order intact unless a finding forces reordering. Byte-scan every write. Return {draftPath, lineCount, findingsClosed, rulingsBaked, waveCount, notes}.`, {
+  label: 'wy:amend', phase: 'Amend', effort: 'max',
+  schema: { type: 'object', required: ['draftPath','lineCount','findingsClosed','rulingsBaked','waveCount','notes'], properties: {
+    draftPath:{type:'string'}, lineCount:{type:'number'}, findingsClosed:{type:'number'}, rulingsBaked:{type:'number'}, waveCount:{type:'number'}, notes:{type:'string'} } },
+})
+
+phase('Re-cohesion')
+const coh2 = await agent(`${GROUND}
+
+YOU ARE THE RETURNING COHESION CRITIC. The amendment architect reports:
+${JSON.stringify(amend, null, 2)}
+
+Re-read the amended draft in full. Verify every round-1 finding closed with the fix REAL (re-measure the kmScale re-canonize path and the L1 rumor mechanism yourself — the two HIGHs get executed-logic scrutiny, not prose review); the five chair rulings baked verbatim; no new incohesions. Then the arm's-length check: does the amended program still deliver the owner's map — positions plain, intentions earned by reading, everything on it real and conserved? RETURN {verdict:'COHESIVE'|'NEEDS-REVISION', perFinding:[...], newFindings:[...], notes:'...'}.`, {
+  label: 'wy:cohesion2', phase: 'Re-cohesion', effort: 'high',
+  schema: { type: 'object', required: ['verdict','perFinding','newFindings','notes'], properties: {
+    verdict:{type:'string'}, perFinding:{type:'array',items:{type:'string'}}, newFindings:{type:'array',items:{type:'string'}}, notes:{type:'string'} } },
+})
+
+phase('Amend')
+const amend2 = await agent(`${GROUND}
+
+YOU ARE THE SECOND AMENDMENT ARCHITECT — one obligation, surgical. The re-cohesion critic confirmed ALL fifteen round-1 findings closed and the five rulings baked; its ONE new finding: the owner directive file at ${DIRECTIVE} gained sections 2k (MILITARY SUPPLY) and 2l (OCCUPATION IS BOTH-SIDED PROSPERITY) after the draft's read, and the draft neither absorbs nor routes them. Read both sections and integrate: 2k lands in the army-facets wave (supply as a banded facet over the SAME closed goods vocabulary — food=grain class, armor=crafted class; consumption coupling exhaustion/readiness; replenishment via reinforcement cargo per the 2i grounding chain and via rest-debits on host stores; OCCUPIED requisition feeds occupation resistance; FRIENDLY hosting burdens allies; supply joins the army popup facet table + the mirror-law war tab) with its seams to the war program and the trade grounding; 2l routes as a VERIFY-THEN-PIN seam obligation (census the existing occupation benefitYield/war-economy drains; pin the occupier-side holding cost where missing; feeds hold/release/sell strategy + both dossiers' risk registers; the sovereignty-market firesale named as the exit) — assign each to its wave or to the integration-pass fold list explicitly. Close the loop: state in the draft header that directive sections 1 through 2l are ALL absorbed as of this pass. Byte-scan. Return {draftPath, lineCount, sectionsAbsorbed, waveCount, notes}.`, {
+  label: 'wy:amend2', phase: 'Amend', effort: 'high',
+  schema: { type: 'object', required: ['draftPath','lineCount','sectionsAbsorbed','waveCount','notes'], properties: {
+    draftPath:{type:'string'}, lineCount:{type:'number'}, sectionsAbsorbed:{type:'string'}, waveCount:{type:'number'}, notes:{type:'string'} } },
+})
+
+phase('Re-cohesion')
+const coh3 = await agent(`${GROUND}
+
+YOU ARE THE COHESION CRITIC, final pass. The second amendment reports:
+${JSON.stringify(amend2, null, 2)}
+
+Verify: 2k and 2l genuinely absorbed (walk both directive sections clause by clause against the draft — the supply facet's goods-vocabulary grounding, the requisition-resistance coupling, the both-sided occupation pin routing); the header's absorption claim true (re-read the directive file's CURRENT section list yourself and confirm nothing newer appeared); zero new incohesions from the absorption. All prior verdicts bind. RETURN {verdict:'COHESIVE'|'NEEDS-REVISION', perFinding:[...], newFindings:[...], notes:'...'}.`, {
+  label: 'wy:cohesion3', phase: 'Re-cohesion', effort: 'high',
+  schema: { type: 'object', required: ['verdict','perFinding','newFindings','notes'], properties: {
+    verdict:{type:'string'}, perFinding:{type:'array',items:{type:'string'}}, newFindings:{type:'array',items:{type:'string'}}, notes:{type:'string'} } },
+})
+
+return { censuses: { mapc, doss, army, mover, flows }, arch, coh, amend, coh2, amend2, coh3 }

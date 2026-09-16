@@ -1,7 +1,7 @@
 /**
  * domain/threatProfile.js — Structured threat modeling.
  *
- * Today the generator implies threats
+ * Tier 4.6 of the roadmap. Today the generator implies threats
  * across several surfaces without ever materializing them as
  * canonical entities:
  *
@@ -11,11 +11,11 @@
  *   - `stressors[]`: free-form, but commonly include siege/raid/plague/
  *     refugee/war tags
  *   - `neighbours[]` with relationshipType: 'hostile' | 'cold_war'
- *   - `activeConditions[]`: the canonical conditions, several
+ *   - `activeConditions[]`: the canonical Phase 16 conditions, several
  *     of which are themselves threat-shaped (plague, siege_lifted's
  *     aftermath, food_anchor_lost's ongoing pressure)
  *
- * walks every surface and emits canonical ThreatProfile
+ * Phase 20 walks every surface and emits canonical ThreatProfile
  * entries with the roadmap-required fields:
  *
  *   {
@@ -28,16 +28,16 @@
  *   }
  *
  * Pure read-only derivation. No imports from src/lib. Composes
- * active conditions so threats keyed off a canonical
+ * Phase 16 (activeConditions) so threats keyed off a canonical
  * condition share its provenance.
  *
  * Architectural payoff:
- *   - Substrate variables (defense_readiness, social_trust,
+ *   - Phase 17 substrate variables (defense_readiness, social_trust,
  *     food_security, etc.) can quote threat profiles as contributors.
- *   - explainEntity gains a 'threat' explainer.
- *   - Player intervention events get a stable target
+ *   - Phase 19's explainEntity gains a 'threat' explainer.
+ *   - Tier 4.11 (player intervention events) gets a stable target
  *     vocabulary: events like 'removed_threat' reference threat ids.
- *   - For AI grounded-in-trace, the AI can ground "the settlement
+ *   - Tier 6.1 (AI grounded-in-trace) — AI can ground "the settlement
  *     fears X" claims in real threat-profile state.
  */
 
@@ -45,7 +45,6 @@ import { deriveAllActiveConditions } from './activeConditions.js';
 import { magicLedger } from './magicLedger.js';
 import { canonStressors } from './canonicalAccessors.js';
 
-import { snakeCase } from './ids.js';
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 /**
@@ -80,6 +79,19 @@ export const THREAT_STAGES = Object.freeze([
   'latent', 'developing', 'active', 'imminent', 'realized',
 ]);
 
+/**
+ * Per-type template defaults for the canonical threat vocabulary.
+ * @typedef {Object} ThreatTemplate
+ * @property {string} label
+ * @property {string} description
+ * @property {string} vector
+ * @property {string} visibility
+ * @property {string[]} affectedSystems
+ * @property {string[]} beneficiaries
+ * @property {string[]} victims
+ */
+
+/** @type {Readonly<Record<string, ThreatTemplate>> & { other: ThreatTemplate }} */
 const THREAT_TYPE_TEMPLATES = Object.freeze({
   monster_pressure: {
     label: 'Monster pressure',
@@ -195,18 +207,8 @@ const THREAT_TYPE_TEMPLATES = Object.freeze({
 
 const SEVERITY_BANDS = Object.freeze(['low', 'medium', 'high', 'critical']);
 
-// NOTE: severityBand (4-band) and currentStage (5-stage) measure DIFFERENT
-// axes of the same threat — band is "how bad" (matching conditions'
-// 4-band cut points) while stage is "how far along the progression." Their
-// boundaries are intentionally offset (e.g. critical≥0.75 vs imminent≥0.6),
-// so a high-band threat can read as 'active' rather than 'imminent'. This is by
-// design, not an off-by error; do not "align" them — consumers that quote both
-// rely on the two scales being independent.
-
-/**
- * 0..1 score → 4-band severity. Matches conditions.
- * @param {any} severity
- */
+/** 0..1 score → 4-band severity. Matches Phase 16 conditions.
+ * @param {unknown} severity */
 export function threatSeverityBand(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.75) return 'critical';
@@ -215,10 +217,8 @@ export function threatSeverityBand(severity) {
   return 'low';
 }
 
-/**
- * 0..1 score → 5-stage progression.
- * @param {any} severity
- */
+/** 0..1 score → 5-stage progression.
+ * @param {unknown} severity */
 export function severityToStage(severity) {
   const s = typeof severity === 'number' ? Math.max(0, Math.min(1, severity)) : 0;
   if (s >= 0.8) return 'realized';
@@ -253,7 +253,7 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);
 
-/** @param {any} text */
+/** @param {unknown} text */
 function inferThreatType(text) {
   if (!text) return 'other';
   const s = String(text);
@@ -265,7 +265,10 @@ function inferThreatType(text) {
 
 // ── Id helper ────────────────────────────────────────────────────────────
 
-/** @param {any} s */
+/** @param {unknown} s */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 
 /** @param {string} s */
 function shortHash(s) {
@@ -274,11 +277,7 @@ function shortHash(s) {
   return Math.abs(h).toString(36).slice(0, 6);
 }
 
-/**
- * @param {any} type
- * @param {any} source
- * @param {any} label
- */
+/** @param {string|undefined} type @param {string|undefined} source @param {string|undefined} label */
 function threatIdFor(type, source, label) {
   const t = snakeCase(type || 'other');
   const suffix = shortHash(`${source || ''}.${label || ''}`);
@@ -290,11 +289,80 @@ function threatIdFor(type, source, label) {
 // settlement surface. The composer normalizes them into ThreatProfile.
 
 /**
- * Walk every surface and return raw threat-shaped entries.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * A loose threat-shaped value found on any settlement surface.
+ * @typedef {Object} RawThreat
+ * @property {string=} id
+ * @property {string=} name
+ * @property {string=} label
+ * @property {string=} type
+ * @property {string=} description
+ * @property {number=} severity
+ * @property {string=} source
+ * @property {string=} target
+ * @property {string=} vector
+ * @property {string=} visibility
+ * @property {string=} trajectory
+ * @property {string=} currentStage
+ * @property {string[]=} beneficiaries
+ * @property {string[]=} victims
+ * @property {string[]=} affectedSystems
+ * @property {{ name?: string }=} neighbour            hostile-neighbour surface carrier
+ * @property {{ id?: string, label?: string }=} condition  linked Phase 16 active condition
+ */
+
+/**
+ * A collected surface hit before normalization into a ThreatProfile.
+ * @typedef {Object} ThreatSource
+ * @property {(RawThreat | Record<string, unknown> | string)=} raw
+ * @property {(string|null)=} inferredType
+ * @property {string=} originSurface
+ * @property {string=} id      present when an already-canonical threat is passed through
+ * @property {string=} type
+ */
+
+/**
+ * The settlement surfaces this module reads (all optional / legacy-tolerant).
+ * @typedef {Object} ThreatSurfaceSettlement
+ * @property {{ monsterThreat?: string, magicLevel?: string, priorityMagic?: number, magicExists?: boolean }=} config
+ * @property {string=} magicLevel      legacy top-level magic band (pre-config saves)
+ * @property {unknown=} stressors      resolved via canonStressors (alias-tolerant)
+ * @property {unknown=} stress
+ * @property {unknown=} stresses
+ * @property {{ scores?: { military?: number, monster?: number, internal?: number, economic?: number, magical?: number }, threats?: Array<RawThreat | string> }=} defenseProfile
+ * @property {Array<RawThreat | string>=} threats
+ * @property {Array<{ name?: string, relationshipType?: string }>=} neighbours
+ * @property {Array<{ name?: string, relationshipType?: string }>=} neighbourNetwork
+ */
+
+/**
+ * The canonical normalized threat entry (roadmap Phase 20 shape).
+ * @typedef {Object} ThreatProfile
+ * @property {string} id
+ * @property {string} type
+ * @property {string} label
+ * @property {string} description
+ * @property {string} source
+ * @property {string} target
+ * @property {string} vector
+ * @property {string} visibility
+ * @property {number} severity
+ * @property {string} severityBand
+ * @property {string} trajectory
+ * @property {string} currentStage
+ * @property {string[]} beneficiaries
+ * @property {string[]} victims
+ * @property {string[]} affectedSystems
+ * @property {string} originSurface
+ * @property {Partial<RawThreat>} raw
+ */
+
+/** Walk every surface and return raw threat-shaped entries.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {ThreatSource[]}
  */
 export function collectThreatSources(settlement) {
   if (!settlement) return [];
+  /** @type {ThreatSource[]} */
   const out = [];
 
   // 1. config.monsterThreat — environmental wilderness pressure
@@ -353,6 +421,7 @@ export function collectThreatSources(settlement) {
       const label = typeof t === 'string' ? t : (t.label || t.name || 'Unnamed threat');
       out.push({
         raw: t,
+        // @ts-expect-error -- t may be a bare string; `?.type ||` tolerates it (strings have no type field)
         inferredType: t?.type || inferThreatType(label),
         originSurface: 'defenseProfile',
       });
@@ -366,13 +435,16 @@ export function collectThreatSources(settlement) {
       const label = typeof t === 'string' ? t : (t.label || t.name || 'Unnamed threat');
       out.push({
         raw: t,
+        // @ts-expect-error -- t may be a bare string; `?.type ||` tolerates it (strings have no type field)
         inferredType: t?.type || inferThreatType(label),
         originSurface: 'threats',
       });
     }
   }
 
-  // 5. Stressors with threat-shaped tags / names
+  // 5. Stressors with threat-shaped tags / names. Resolve via the canonical
+  // accessor so the bare-object single-stressor shape and the stress/stresses/
+  // stressors alias set all surface (the old inline chain missed both).
   const stressors = canonStressors(settlement);
   for (const stressor of stressors) {
     if (!stressor) continue;
@@ -407,7 +479,7 @@ export function collectThreatSources(settlement) {
     }
   }
 
-  // 7. Active conditions — — that are themselves threats
+  // 7. Active conditions — Phase 16 — that are themselves threats
   for (const cond of deriveAllActiveConditions(settlement)) {
     let inferredType;
     switch (cond.archetype) {
@@ -437,7 +509,10 @@ export function collectThreatSources(settlement) {
 
 // Map a 0..100 score to its inverse 0..1 threat severity (low score
 // = high threat pressure).
-/** @param {number} score */
+/**
+ * @param {number} score
+ * @returns {number}
+ */
 function clampInv(score) {
   const s = Math.max(0, Math.min(100, score));
   return Math.max(0, Math.min(1, (60 - s) / 60));
@@ -449,25 +524,29 @@ function clampInv(score) {
  * Enrich a single collected threat-source entry into a canonical
  * ThreatProfile. Pure; idempotent.
  *
- * @param {any} source  { raw, inferredType, originSurface } from
+ * @param {(ThreatSource & Partial<RawThreat>) | null | undefined} source
+ *                         { raw, inferredType, originSurface } from
  *                         collectThreatSources, or a structured threat
  *                         passed in directly.
- * @param {import('./settlement.schema.js').SimSettlement} [_settlement]
- * @returns {Object | null}
+ * @param {unknown} [_settlement]
+ * @returns {ThreatProfile | null}
  */
 export function deriveThreatProfile(source, _settlement) {
   if (!source) return null;
 
   // Accept already-canonical threats by pass-through (idempotent contract).
   if (typeof source.id === 'string' && source.id.startsWith('threat.') && source.type) {
+    // @ts-expect-error -- the id/type guard identifies an already-canonical ThreatProfile (idempotent pass-through)
     return source;
   }
 
+  /** @type {Partial<RawThreat>} */
+  // @ts-expect-error -- raw may be a bare string or loose record from legacy threat lists; every read below is `raw?.prop ||` tolerant
   const raw = source.raw || source;
   const type = source.inferredType || raw?.type || inferThreatType(
     raw?.name || raw?.label || ''
   );
-  const tmpl = /** @type {Record<string, any>} */ (THREAT_TYPE_TEMPLATES)[type] || THREAT_TYPE_TEMPLATES.other;
+  const tmpl = THREAT_TYPE_TEMPLATES[type] || THREAT_TYPE_TEMPLATES.other;
 
   // Severity: prefer explicit numeric, fall back to template-implied moderate.
   const severity = typeof raw?.severity === 'number'
@@ -509,23 +588,26 @@ export function deriveThreatProfile(source, _settlement) {
   };
 }
 
+/** Derive every threat across all surfaces. Returns [].
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {ThreatProfile[]}
+ */
+export function deriveAllThreatProfiles(settlement) {
+  if (!settlement) return [];
+  const sources = collectThreatSources(settlement);
+  // filter(Boolean) removes the nulls; TS does not narrow the built-in Boolean callback
+  return /** @type {ThreatProfile[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
+}
+
 /**
- * Collapse threats by (type, target), keeping the highest-severity instance.
- * This is the PRESSURE view: it answers "how many DISTINCT KINDS of pressure
- * (per target) press the settlement?", deliberately folding away both
- * cross-surface duplicates (e.g. config.monsterThreat AND a matching stressor)
- * AND legitimately-distinct same-type instances (e.g. two hostile neighbours).
- *
- * It exists ONLY for consumers that SUM threat contributions — most importantly
- * capacityModel's demand math, where charging the same kind of pressure once per
- * surface/neighbour would double-count it and tip capacity bands on phantom load.
- * It is NOT the enumeration view: deriveAllThreatProfiles below stays un-collapsed
- * so explanation / contradictions / map / AI-grounding see every distinct threat.
- *
- * Determinism: iterates input order (collectThreatSources is deterministic) and
- * keeps the first max-severity instance, so the per-(type,target) survivor and
- * the summed demand it drives are byte-stable across runs.
- *
+ * Collapse an un-collapsed threat list to ONE profile per (type, target),
+ * keeping the highest-severity instance. deriveAllThreatProfiles enumerates each
+ * distinct threat surface, so the SAME underlying pressure can appear more than
+ * once (intentional for enumeration); summation consumers (capacity demand math)
+ * must collapse first via this helper so they do not double-count a single
+ * pressure. Determinism: iterates input order (collectThreatSources is
+ * deterministic) and keeps the first max-severity instance, so the per-(type,
+ * target) survivor and the demand it drives are byte-stable across runs.
  * @param {any[]} profiles
  * @returns {any[]} one profile per (type, target), max severity wins.
  */
@@ -540,30 +622,11 @@ export function dedupeThreatsByPressure(profiles) {
   return Array.from(byKey.values());
 }
 
-/**
- * Derive every threat across all surfaces, un-collapsed: each distinct threat
- * survives enumeration so consumers can address them individually (e.g. two
- * hostile neighbours both surface in explanations / contradictions / map /
- * AI-grounding). Note: the same underlying pressure expressed on more than one
- * surface CAN therefore appear more than once here — that is intentional for
- * enumeration. Summation consumers must collapse first via
- * dedupeThreatsByPressure (capacityModel does this in its demand math) so they
- * do not double-count a single pressure.
- *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {any[]} every derived ThreatProfile, un-collapsed.
- */
-export function deriveAllThreatProfiles(settlement) {
-  if (!settlement) return [];
-  const sources = collectThreatSources(settlement);
-  return /** @type {any[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
-}
-
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/**
- * Count threats by type / band / stage.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+/** Count threats by type / band / stage.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {{ count: number, byType: Record<string, number>, byBand: Record<string, number>, byStage: Record<string, number> }}
  */
 export function threatBreakdown(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
@@ -583,10 +646,12 @@ export function threatBreakdown(settlement) {
 
 /**
  * Flat list of system variables pressured by the active threats.
- * Useful for the substrate to cross-reference. Deduplicated.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * Useful for the Phase 17 substrate to cross-reference. Deduplicated.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {string[]}
  */
 export function pressuresOnSubstrate(settlement) {
+  /** @type {Set<string>} */
   const out = new Set();
   for (const t of deriveAllThreatProfiles(settlement)) {
     for (const s of t.affectedSystems || []) out.add(s);
@@ -594,15 +659,15 @@ export function pressuresOnSubstrate(settlement) {
   return Array.from(out);
 }
 
-/**
- * Human-readable lines suitable for AI / PDF / UI.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+/** Human-readable lines suitable for AI / PDF / UI.
+ * @param {ThreatSurfaceSettlement | null | undefined} settlement
+ * @returns {string[]}
  */
 export function summarizeThreats(settlement) {
   const profiles = deriveAllThreatProfiles(settlement);
   if (profiles.length === 0) return ['No threats currently pressing the settlement.'];
   return profiles.map(t =>
-    `${t.label}: ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
+    `${t.label} — ${t.severityBand} (${t.currentStage}) via ${t.vector} on ${(t.affectedSystems || []).join(', ')}`
   );
 }
 
@@ -611,12 +676,12 @@ export function supportedThreatTypes() {
   return [...THREAT_TYPES];
 }
 
-/**
- * Catalog template accessor for UI / help text.
- * @param {any} type
+/** Catalog template accessor for UI / help text.
+ * @param {string} type
+ * @returns {ThreatTemplate | null}
  */
 export function threatTypeTemplate(type) {
-  return /** @type {Record<string, any>} */ (THREAT_TYPE_TEMPLATES)[type] || null;
+  return THREAT_TYPE_TEMPLATES[type] || null;
 }
 
 /** Severity bands list. */

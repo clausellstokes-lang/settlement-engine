@@ -36,7 +36,13 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-import { useMapAutosave, mapFingerprint } from '../../src/hooks/useMapAutosave.js';
+import { useMapAutosave } from '../../src/hooks/useMapAutosave.js';
+// RF consolidated the map dirty-fingerprint into ONE shared module
+// (src/components/map/mapDirtyFingerprint.js) read by both the AutoSaveChip and
+// this hook, so the two can never disagree (components-map-1). The hook does not
+// re-export it; this test exercises that canonical function directly. Aliased to
+// mapFingerprint to keep the assertions below reading naturally.
+import { mapDirtyFingerprint as mapFingerprint } from '../../src/components/map/mapDirtyFingerprint.js';
 
 beforeEach(() => {
   vi.useFakeTimers();

@@ -1,0 +1,90 @@
+export const meta = {
+  name: 'fp-cycle6-lane-a-disposition',
+  description: 'Cycle 6 Lane A: the gate blocker first, then the record-only closes and the small fixes. Deliberately NOT the burn-downs.',
+  phases: [
+    { title: 'Gate', detail: 'the typecheck error that stops check:tail before eslint runs' },
+    { title: 'Verify G', detail: 'adversarial verification' },
+    { title: 'Small', detail: 'the record-only closes + the contained fixes' },
+    { title: 'Verify S', detail: 'adversarial verification' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE; a doc overstatement is a STOP-and-report. Work in ${TREE}. Hard-gate with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\` — the working directory persists between shell calls and this check has already refused a correct commit.
+
+⚠⚠ **A SECOND BUILD LANE IS RUNNING CONCURRENTLY** (Lane B: ES-5 → ES-6, the espionage family). Your file sets are disjoint by design. NEVER touch, stage, revert or clean a file you did not author. Commit with EXPLICIT PATHSPECS and verify \`git diff --cached --name-only\` against your EXPECTED set BY NAME AND COUNT — \`git add\` aborts ATOMICALLY on one bad pathspec, silently if stderr is suppressed.
+
+⭐ USE THE SCRIPTS. \`sh scripts/gate-mutex.sh --wait\` before EVERY vitest run (⛔ never hand-spell \`ps aux | grep -c "[v]itest"\` — it matches your own command line). \`sh scripts/ratchet-inventory.sh <walker> <base> [head]\` for the ratchet half of attribution — ⛔ never hand-read an inventory; vitest truncates the members and five waves have written false receipts reconstructing from the cardinality. ⚠ KNOWN: that script CANNOT read \`tests/lint/seedLoopTotality.walker.test.js\` — it exits 2 saying the extractor is inventing rows, AT THE BASE REF, so the blindness is the tool's. Fall back to archive-vs-archive output comparison there. Read gates ONLY via \`sh scripts/gate-tail.sh\`; ⚠ never read an exit code through a pipe.
+⚠ zsh does NOT word-split unquoted parameters — \`npx vitest run $FILES\` silently runs ONE file and reports a meaningless green.
+⛔ DO NOT edit, stage or commit \`docs/FABLE_VALIDATION_QUEUE.md\`. Compose your row and RETURN IT AS TEXT.
+
+PROTOCOL: NEVER stash/reset/clean/checkout-family — use \`cp\` backups and \`cmp\`-proven restores. python3 byte-scan every authored file for NUL bytes. ⛔ Do NOT tighten the shared domain-strict ratchet even when it reports slack (standing precedent, five times recorded). Navigate by SYMBOL — line addresses rot. ⚠ The anchored-negatives walker's \`// anchored:\` lookback is EXACTLY ONE LINE; a two-line reason silently fails to exempt, which has bitten twice.
+
+⚠⚠ THE FIVE PIN-VACUITY SHAPES. Audit anything you write against all five: (1) compares a function against itself; (2) operators that pass on equality; (3) a claim in a header no pin implements — A COMMENT IS NOT A PIN; (4) two guards over one job, each invisible behind the other — delete each ALONE; (5) CEILING SATURATION — both operands clamped at a bound. ⚠ And a term that can only ever be ZERO is UNREACHABLE, not merely unpinned; a green battery cannot tell them apart.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE. If you are about to write a figure you did not execute, stop and execute it.`
+
+const VERIFIER_LAWS = `
+
+⚠⚠ VERIFIER DISCIPLINE. Do EVERY execution inside a \`git archive\` of the exact commit you are verifying; symlink node_modules; \`rm -f\` THE SYMLINK before removing the tree. Never edit the live tree. ⚠ RE-RUN EVERY GATE THE REPORT QUOTES, AT THE COMMITTED SHA — five false receipts have landed in this program, and the code was fine nearly every time; the defects were in the receipts. ⚠ COMPARE LIKE WITH LIKE: archive against archive, NEVER archive against live — that mismatch is what made one wave's receipt false. ⚠ A MUTANT THAT PLANTS NOTHING GREENS: assert bytes changed before measuring. ⚠ YOUR OWN INSTRUMENT IN THE TREE IS A CONTAMINATION CLASS — if you place a probe file, remove it and RE-RUN rather than subtracting it on paper.`
+
+phase('Gate')
+const gate = await agent(LAWS + `
+
+YOU ARE THE GATE-BLOCKER SLICE, and this is the single highest-leverage fix left in the disposition program.
+
+**\`npm run check:tail\` STOPS AT TYPECHECK BEFORE ESLINT EVER RUNS.** Until that clears, nobody can see whether the rest of the safety net is green — every other disposition is invisible behind it. The banked row is SOL-BANK-3 in \`docs/SOL_QUEUE.md\` §5.
+
+MEASURED at the last recon (RE-MEASURE IT YOURSELF; navigate by SYMBOL, the quoted line numbers rot): \`treatyBreach.js\` declares \`dispositionTransitions?: Array<Record<string, unknown>>\`; \`realmVerbExecution.js\` passes it into \`dispositionNews.js\`, whose parameter demands \`{kind, id, channel, toBand, tick, …}\`. The broad row type does not guarantee those fields.
+
+⛔ **NARROW THE PRODUCER'S \`@returns\`, DO NOT CAST AT THE CALL SITE.** A cast silences the checker; the narrowing fixes the contract, and the broad row type IS the defect. No \`any\`, no widened baseline.
+
+Then MEASURE what the gate does once unblocked: run \`npm run check:tail\` and report how far it now gets and what it finds. **That measurement is half this slice's value** — the program has not seen past this stop in a long time, and whatever is behind it is the real remaining work list. If it now stops somewhere else, say exactly where.
+
+⚠ The full typecheck is red at ~352 errors across ~46 files and that is INHERITED. Do not repair foreign reds. "Pre-existing" is EMPIRICAL: re-run against a \`git archive\` of your OWN parent and cite it.
+
+Wave-end attribution per the LAWS. COMPOSE your ledger row and RETURN IT AS TEXT.
+
+RETURN JSON: {commits, gateBeforeAfter, whatTheGateNowReaches, files, gates, judgments, ledgerRowText, notes}.`, { label: 'build:gate-blocker', phase: 'Gate', model: 'opus' })
+
+phase('Verify G')
+const vgate = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR THE GATE-BLOCKER SLICE. REFUTE. The implementer reported: ` + JSON.stringify(gate).slice(0, 10000) + `
+
+VERIFY: (1) the fix is a NARROWING, not a cast — read the diff and REJECT any \`any\`, \`as\`, or baseline widening. (2) \`npm run check:tail\` genuinely gets further than it did at the parent — run it at BOTH ends yourself and quote where each stops. (3) No behaviour changed: this is a type contract, so same-seed output must be byte-identical — verify, do not assume. (4) Wave-end attribution both granularities, ratchet half via the script. (5) strict 1313 and per-file zero; byte-scans; staged-set completeness by name and count.
+
+RETURN structured JSON only.`, { label: 'verify:gate-blocker', phase: 'Verify G', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Small')
+const small = await agent(LAWS + `
+
+YOU ARE THE CONTAINED-DISPOSITION SLICE. The full work list is \`docs/DISPOSITION_WAVE_AMENDMENT_2026-08-06.md\` on the LEDGER branch (read it via \`git show\` from the other worktree, or read the equivalent SOL-BANK rows in \`docs/SOL_QUEUE.md\` §5 here). Your scope is deliberately NARROW.
+
+**DO THESE — small, contained, individually provable:**
+1. **The dead initializer** — \`lineageClaim.js\`'s \`inversion01\` is assigned before both exhaustive branches overwrite it (\`no-useless-assignment\`). Delete it; prove no read precedes the writes.
+2. **The deep-clone hot path** — \`lineageMemberBirth.js\` uses a bare \`JSON.parse(JSON.stringify(value))\`; route it through \`src/domain/clone.js\`. ⚠⚠ **THIS ONE CAN MOVE PERSISTED SHAPE:** if \`clone.js\` treats \`Date\`/\`Map\`/\`undefined\` differently, the persisted birth record's shape moves. **MEASURE a same-seed hash BEFORE and AFTER and STOP if it moves** — do not land a silent golden shift.
+3. **The stale exclusion coordinate** — the wizard-news authoring census is location-bound BY DESIGN (its own header says so) and its counts have drifted. Refresh the coordinate/signature only; do NOT baseline it as real news debt.
+
+⛔ **DO NOT TOUCH — each is deliberately out of scope and saying so is part of your job:**
+- **The two transcendental sites.** D-W4 was RETURNED TO THE CHAIR UNSIGNED because its documented cure routes \`Math.pow\` through a function that itself calls \`Math.pow\`. Ruling owed; not yours.
+- **The burn-downs** — \`negativeAssertionAnchor\` (~72 offender files), \`clampPrimitiveBaseline\` (11 files, each behaviour-touching at the edges), \`roadsParticipation\` (8 new readers). They need their own slot, and touching that anchor ratchet while a sibling lane adds tests would make both lanes' attribution unreadable.
+- **Anything that re-records a golden.** If a fix would move one, STOP and report with the measurement.
+
+**ALSO: CLOSE THE RECORD-ONLY ROWS.** Several SOL-BANK rows are already cured in the tree and only the record is stale. For EACH, VERIFY the cure exists at HEAD by execution or by reading the bytes, then say so precisely in your returned ledger row. ⚠ One recorded attribution is WRONG in the proposal — the teardown-race cure landed at a different commit than the row names. Check attributions rather than copying them.
+
+Wave-end attribution per the LAWS. COMPOSE your ledger row and RETURN IT AS TEXT.
+
+RETURN JSON: {commits, fixesLanded, recordOnlyCloses, goldenShiftMeasurement, refusedOutOfScope, gates, judgments, ledgerRowText, notes}.`, { label: 'build:contained-disposition', phase: 'Small', model: 'opus' })
+
+phase('Verify S')
+const vsmall = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR THE CONTAINED-DISPOSITION SLICE. REFUTE. The implementer reported: ` + JSON.stringify(small).slice(0, 10000) + `
+
+VERIFY: (1) ⚠ THE DEEP-CLONE REROUTE IS THE DANGEROUS ONE — independently measure a same-seed hash of the persisted birth record at both ends and confirm byte-identity; if it moved and was landed anyway, that is a REJECT. (2) The dead initializer really was dead — plant a read before the writes and confirm the behaviour changes, proving it was unreachable as claimed. (3) Every record-only close is TRUE at HEAD — verify each cure independently rather than accepting the claim, and check the attributions. (4) NOTHING out of scope was touched: no transcendental site, no burn-down ratchet, no golden. (5) Wave-end attribution both granularities, ratchet half via the script. (6) byte-scans; staged-set completeness by name and count.
+
+RETURN structured JSON only.`, { label: 'verify:contained-disposition', phase: 'Verify S', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { gate, vgate, small, vsmall }

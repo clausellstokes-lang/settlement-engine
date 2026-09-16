@@ -1,0 +1,217 @@
+export const meta = {
+  name: 'wizard-news-id-census',
+  description: 'Census every consumer that will newly receive momentum_climb_down and webwar_* wizard-news entries once ids are minted',
+  phases: [
+    { title: 'Census', detail: 'parallel readers over each downstream consumer surface' },
+    { title: 'Verify', detail: 'adversarially verify each claimed impact against real source' },
+    { title: 'Synthesize', detail: 'merge into one disposition ledger' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const PREAMBLE = `You are auditing a REAL codebase to support a bug fix. This is legitimate authorized work on the owner's own repo.
+
+WORKING TREE: ${TREE}
+The shell cwd RESETS between commands — always use absolute paths or prefix every command with \`cd ${TREE} && \`.
+Do NOT edit any file. Read-only investigation only. Do not run git mutations.
+
+THE CHANGE UNDER STUDY (not yet made):
+Two world-pulse subsystems author wizard-news receipts WITHOUT an \`id\` field, so they are silently discarded:
+  - src/domain/worldPulse/momentum.js  -> climbDownNews(), kind 'momentum_climb_down'
+  - src/domain/worldPulse/supplyWebWarfare.js -> mintNews/raidNews/abandonNews/completeNews,
+    kinds 'webwar_campaign_minted', 'webwar_raid', 'webwar_wrong_village',
+    'webwar_campaign_abandoned', 'webwar_campaign_complete'
+They are appended in src/domain/worldPulse/pulseKernel.js via appendObservedWizardNewsEntries.
+src/domain/region/wizardNews.js drops them: normalizeEntry returns null when !entry?.id, and the
+audit receiptSink only pushes entries with entry.id.
+
+THE FIX: mint deterministic ids of the shape \`wizard_news.\${tick}.<slug>.<stableParts>\`
+(the convention in generosityNews.js / upswingKernel.js / pestilenceKernel.js), using
+stablePart() from src/domain/worldPulse/stablePart.js on actor/target ids.
+
+Your job: determine EXACTLY what changes downstream once these ~6 entry kinds start flowing.
+Ground every claim in quoted source with file:line. Distinguish what you VERIFIED by reading
+code from what you INFER. Be specific about breakage risk.`
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['surface', 'impacts', 'breakageRisks', 'notes'],
+  properties: {
+    surface: { type: 'string' },
+    impacts: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['file', 'line', 'what', 'evidence', 'severity'],
+        properties: {
+          file: { type: 'string' },
+          line: { type: 'integer' },
+          what: { type: 'string', description: 'What newly happens once these entries flow' },
+          evidence: { type: 'string', description: 'Quoted source proving it' },
+          severity: { type: 'string', enum: ['breaks', 'behavior-change', 'benign'] },
+        },
+      },
+    },
+    breakageRisks: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['risk', 'file', 'mitigation'],
+        properties: {
+          risk: { type: 'string' },
+          file: { type: 'string' },
+          mitigation: { type: 'string' },
+        },
+      },
+    },
+    notes: { type: 'string' },
+  },
+}
+
+const SURFACES = [
+  {
+    key: 'herald',
+    prompt: `SURFACE: THE HERALD + realm news routing.
+Read src/domain/realm/heraldRouting.js in full, plus any Herald title/registry map, and every
+module that switches on a wizard-news \`kind\` or \`impactKind\` string. Determine: do the six new
+kinds route correctly, get a Herald title, and produce a full NEWS ADDRESS LAW address chain
+(typed action + affected settlements BY NAME + recorded reason)? Is there a default/fallback arm,
+or will an unmapped kind render 'undefined' / a raw id / an empty section? There is a KNOWN
+sibling bug where a World Book beat printed 'undefined' from an id mixup — check whether these
+kinds hit anything similar. Report every kind-keyed map that lacks entries for the six new kinds.`,
+  },
+  {
+    key: 'chronicle-worldbook-ui',
+    prompt: `SURFACE: Chronicle, World Book, and the wizard-news UI panels.
+Find every consumer of the wizard-news feed that renders to a reader: Chronicle composition,
+World Book export/handout, any React component reading wizardNews entries or deriveNewsThreads.
+Determine what the six new kinds render as. Check: arc threading (arcIdForEntry in
+src/domain/region/wizardNews.js groups by impactIds[0] else \`arc:\${impactKind||kind}:\${place}\`)
+— what arcs do these form, and can a repeated webwar raid arc dominate a feed? Check the 240-entry
+cap (capEntries) and its major-arc rescue: 'momentum_climb_down' and 'webwar_raid' are
+significance 'major', so they enter the rescue path — quantify the displacement risk.
+Also check whether any renderer assumes fields these entries lack (impactKind, channelType,
+impactIds, npcIds, factionIds, scope are all absent/null on them).`,
+  },
+  {
+    key: 'soak-certification',
+    prompt: `SURFACE: the soak harness, behavioral observation, and subsystem certification.
+Read scripts/audit/behavioral-observation.mjs (especially moverFamilyOf and however the news
+receipt sink is consumed), the soak harness, and src/domain/certification/* including
+subsystemRowsWaves.js rows momentumEnabled + supplyWebWarfareEnabled.
+Determine: (1) what mover family will each of the six new kinds classify into, and will that
+change postApplyMoverCounts / moverCounts in soak receipts? (2) Do the momentumEnabled and
+supplyWebWarfareEnabled certification rows become eligible for an EVENT channel (they currently
+declare only a stateKeys channel and eventTypes: [] or similar) — quote the row shape exactly.
+(3) Would any existing assertion about receipt counts, family totals, or 'no post-apply receipts
+for these lanes' now fail? Name the exact test files and line numbers.`,
+  },
+  {
+    key: 'tests-goldens',
+    prompt: `SURFACE: tests, goldens, pins, and walker/ratchet tests that will move or red.
+Search the whole tests/ tree plus any golden/snapshot fixture directories for anything that
+would change once momentum_climb_down and the five webwar_* kinds start appearing in the
+wizard-news feed and the audit receipt sink. Look for: (a) exact-count assertions on feed
+entries or receipts; (b) golden/snapshot files containing wizard news; (c) walker tests that
+enumerate news kinds, news authors, or id conventions (there may be a manifest); (d) the known
+pin at tests/domain/subsystemRowsEconomy.test.js line ~262 which asserts the CURRENT omission;
+(e) any sizeBaseline / max-lines ceiling test covering momentum.js, supplyWebWarfare.js,
+subsystemRowsWaves.js or subsystemRowsEconomy.test.js — these have TOLERANCE-0 exact ceilings,
+so report the exact current line counts and ceilings for every file the fix would touch.
+Report each as a concrete file:line that will need updating.`,
+  },
+  {
+    key: 'id-convention',
+    prompt: `SURFACE: the id convention itself, and collision/determinism analysis.
+Read src/domain/worldPulse/stablePart.js, src/domain/region/graph.js stablePart, and at least
+six existing news authors that mint ids (generosityNews.js, upswingKernel.js,
+settlementLifecycleKernel.js, pestilenceKernel.js, navalKernel.js, npcLadderKernel.js).
+Then answer precisely, for each of the six kinds being fixed:
+ - What id shape matches house convention exactly?
+ - COLLISION ANALYSIS: within ONE tick, can two entries of the same kind be authored with the
+   same id components? Read the emitting loops in momentum.js advanceMomentumCracks and
+   supplyWebWarfare.js advanceSupplyWebWarfare to determine the per-tick multiplicity of each
+   receipt. In particular: can raidNews fire more than once per (aggressor,target) per tick, and
+   would satelliteId need to be in the id? appendWizardNewsEntries dedupes by id via a Map, so a
+   collision SILENTLY MERGES two distinct beats — this is the key risk.
+ - Is stablePart() lossy in a way that could alias two distinct settlement ids? Quote its
+   implementation and consider ids differing only in punctuation or beyond 80 chars.
+ - Do the raw ids these authors hold need stablePart at all, given they are already
+   \`<saveId>:<localId>\` shaped? What do sibling authors do with such ids?`,
+  },
+]
+
+phase('Census')
+const findings = await pipeline(
+  SURFACES,
+  (s) => agent(`${PREAMBLE}\n\n${s.prompt}`, { label: `census:${s.key}`, phase: 'Census', schema: SCHEMA }),
+  (result, s) => {
+    if (!result) return null
+    const claims = (result.impacts || []).filter((i) => i.severity !== 'benign')
+    if (!claims.length) return { surface: s.key, result, verdicts: [] }
+    return parallel(claims.slice(0, 6).map((c) => () =>
+      agent(`${PREAMBLE}
+
+ADVERSARIAL VERIFICATION. Another agent claims the following about surface "${s.key}":
+
+  FILE: ${c.file}:${c.line}
+  CLAIM: ${c.what}
+  SEVERITY: ${c.severity}
+  THEIR EVIDENCE: ${c.evidence}
+
+Your job is to REFUTE this claim. Open the cited file and read the actual code. Check whether
+the quoted evidence exists verbatim and whether it actually supports the claim. Common ways such
+claims are wrong: the cited line does not exist or says something else; a default/fallback arm
+already handles the case; the code path is gated off and never runs; the claim confuses the
+audit receipt sink with the canonical feed; the claim assumes a field is required when the
+consumer is absent-tolerant.
+Default to refuted=true when you cannot positively confirm the claim from source you read.`,
+        { label: `verify:${c.file.split('/').pop()}:${c.line}`, phase: 'Verify', schema: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['refuted', 'reasoning', 'correctedClaim'],
+          properties: {
+            refuted: { type: 'boolean' },
+            reasoning: { type: 'string' },
+            correctedClaim: { type: 'string', description: 'If the claim was partly right, the accurate version; else empty' },
+          },
+        } })
+        .then((v) => ({ claim: c, verdict: v }))
+    )).then((verdicts) => ({ surface: s.key, result, verdicts: verdicts.filter(Boolean) }))
+  },
+)
+
+const live = findings.filter(Boolean)
+log(`censused ${live.length}/${SURFACES.length} surfaces`)
+
+phase('Synthesize')
+const confirmed = live.flatMap((f) =>
+  (f.verdicts || []).filter((v) => v.verdict && !v.verdict.refuted)
+    .map((v) => ({ surface: f.surface, ...v.claim, corrected: v.verdict.correctedClaim })))
+
+const summary = await agent(`${PREAMBLE}
+
+You are synthesizing a consumer census. Below are the per-surface findings and the
+adversarially-CONFIRMED impacts (claims that survived a refutation attempt).
+
+RAW FINDINGS:
+${JSON.stringify(live.map((f) => ({ surface: f.surface, impacts: f.result.impacts, breakageRisks: f.result.breakageRisks, notes: f.result.notes })), null, 2)}
+
+CONFIRMED AFTER REFUTATION ATTEMPT:
+${JSON.stringify(confirmed, null, 2)}
+
+Produce the implementer's disposition ledger. For each downstream surface state plainly:
+what breaks, what changes behavior, what is benign. Then give a RANKED list of the concrete
+edits the fix must include beyond the two author files, with file:line. Call out explicitly:
+ - the exact id shape to use for each of the six kinds, and whether satelliteId (or any other
+   component) is REQUIRED to avoid a same-tick id collision that would silently merge beats
+ - every exact-ceiling line-count test that the fix must stay under, with current/ceiling numbers
+ - every test/pin that must be updated in the same commit
+Be concrete and terse. Report uncertainty explicitly rather than guessing.`,
+  { label: 'synthesize', phase: 'Synthesize' })
+
+return { summary, confirmed, surfaces: live.map((f) => ({ surface: f.surface, notes: f.result.notes })) }

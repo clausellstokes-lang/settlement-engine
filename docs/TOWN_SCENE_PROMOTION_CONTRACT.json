@@ -1,0 +1,481 @@
+{
+  "schemaVersion": 1,
+  "kind": "town_scene_3d_promotion_contract",
+  "evaluatedAt": "2026-07-24",
+  "architecture": "docs/TOWN_SCENE_3D_ARCHITECTURE.md",
+  "policy": "The illustrated 3D settlement portrait may be available before it is the default. It may become the default only when every required local and external gate has admissible evidence for the current source fingerprint. The canonical 2D plan remains the precision, accessibility, export, and performance fallback after promotion.",
+  "feature": {
+    "implementationStatus": "capability_implemented_available_opt_in",
+    "promotionStatus": "withheld_pending_current_receipts",
+    "availabilityFlag": "settlementScene3d",
+    "availabilityShippedDefault": true,
+    "defaultFlag": "settlementScene3dDefault",
+    "defaultShippedDefault": false,
+    "currentDecision": "withheld_pending_evidence",
+    "fallbackView": "plan",
+    "persisted3dView": "portrait3d"
+  },
+  "sourceRoots": [
+    {
+      "path": "src/domain/townScene",
+      "required": true
+    },
+    {
+      "path": "src/domain/townMap",
+      "required": true
+    },
+    {
+      "path": "src/domain/display/publicSafe.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/townScene",
+      "required": true
+    },
+    {
+      "path": "src/components/townMap",
+      "required": true
+    },
+    {
+      "path": "src/components/map/heraldCommandSession.js",
+      "required": true
+    },
+    {
+      "path": "src/components/map/RealmInspector.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/map/RealmMobileGate.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/OutputContainer.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/dossier/DossierEntityContext.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/dossier/useNavigateToEntity.js",
+      "required": true
+    },
+    {
+      "path": "src/components/primitives/Button.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/primitives/Segmented.jsx",
+      "required": true
+    },
+    {
+      "path": "src/components/primitives/IconsContext.js",
+      "required": true
+    },
+    {
+      "path": "src/components/theme.js",
+      "required": true
+    },
+    {
+      "path": "src/design/tokens.js",
+      "required": true
+    },
+    {
+      "path": "src/hooks/useIsMobile.js",
+      "required": true
+    },
+    {
+      "path": "src/hooks/useRoute.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/routes.js",
+      "required": true
+    },
+    {
+      "path": "src/workers/townScene.worker.js",
+      "required": true
+    },
+    {
+      "path": "src/workers/townSceneExport.worker.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/flagRegistry.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/flags.js",
+      "required": true
+    },
+    {
+      "path": "src/lib/lastMapView.js",
+      "required": true
+    },
+    {
+      "path": "src/store/campaignSlice.js",
+      "required": true
+    },
+    {
+      "path": "src/store/index.js",
+      "required": true
+    },
+    {
+      "path": "src/store/mapSlice.js",
+      "required": true
+    },
+    {
+      "path": "scripts/lib/adaptiveGovernor.mjs",
+      "required": true
+    },
+    {
+      "path": "scripts/audit/town-scene-certification.mjs",
+      "required": true
+    },
+    {
+      "path": "scripts/audit/town-scene-local-matrix.mjs",
+      "required": true
+    },
+    {
+      "path": "scripts/mutation-coverage-manifest.json",
+      "required": true
+    },
+    {
+      "path": "scripts/mutation-sweep.sh",
+      "required": true
+    },
+    {
+      "path": "docs/TOWN_SCENE_3D_ARCHITECTURE.md",
+      "required": true
+    },
+    {
+      "path": "docs/TOWN_SCENE_PROMOTION_CONTRACT.json",
+      "required": true
+    },
+    {
+      "path": "tests/architecture/adaptiveGovernor.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/architecture/archViewWall.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/build/townScene3dLazy.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/build/townSceneLocalMatrixAudit.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/domain/townMapEdits.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/domain/townSceneGeometry.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/domain/townSceneExport.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/domain/townSceneManifest.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/lib/townSceneWorkerClient.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/lib/townSceneExport.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/lib/townMapFogExport.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/security/townMapEditsPublicDrop.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/security/townMapPlayerProjection.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/security/townScenePlayerSafe.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/security/townSceneFogFailClosed.test.js",
+      "required": true
+    },
+    {
+      "path": "tests/ui/livingBackdrop.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/components/settlementMapExportMenu.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/ui/settlementScene3D.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/ui/townSceneAccessibility.contract.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/ui/townSceneCanvas.contract.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/ui/settlementMapPortraitPresentation.test.jsx",
+      "required": true
+    },
+    {
+      "path": "tests/ui/townSceneSelection.test.js",
+      "required": true
+    },
+    {
+      "path": "src/styles/a11y.css",
+      "required": true
+    },
+    {
+      "path": "vite.config.js",
+      "required": true
+    },
+    {
+      "path": "package.json",
+      "required": true
+    },
+    {
+      "path": "package-lock.json",
+      "required": true
+    }
+  ],
+  "evidenceContract": {
+    "defaultEvidencePath": "artifacts/town-scene/evidence.json",
+    "defaultReceiptPath": "artifacts/town-scene/certification.json",
+    "bundleSchemaVersion": 1,
+    "bundleKind": "town_scene_3d_evidence_bundle",
+    "gateRecord": {
+      "gateId": "must equal the gate id used as the record key",
+      "evidenceKind": "must equal the gate's declared evidenceKind; automated evidence cannot be relabeled as human or field evidence",
+      "producer": "must name the accountable workflow, operator, or study team",
+      "summary": "must briefly state what was exercised and observed",
+      "passed": "must be exactly true",
+      "capturedAt": "must be an ISO-8601 timestamp with a timezone and must satisfy the gate's maxAgeDays when one is declared",
+      "evidenceRefs": "must contain at least one { path, sha256 } record for a real file below artifacts/town-scene; the audit verifies every digest",
+      "sourceFingerprint": "must equal the audit receipt's current source SHA-256"
+    },
+    "booleanOnlyEvidenceAccepted": false,
+    "missingEvidenceMeans": "withhold"
+  },
+  "localDiagnosticContract": {
+    "command": "npm run audit:town-scene:local-matrix",
+    "reportPath": "artifacts/town-scene/local-matrix/local-matrix-report.json",
+    "evidenceClass": "automated_local_deterministic_non_promotion",
+    "promotionEligible": false,
+    "maySatisfyPromotionGateByItself": false,
+    "reason": "The deterministic CPU matrix is a regression diagnostic. It does not exercise the production WebGL renderer, physical devices, assistive technology, or representative human judgment."
+  },
+  "localGates": [
+    {
+      "id": "TS3D-LOCAL-01",
+      "title": "Canonical manifest and projection",
+      "required": true,
+      "evidenceKind": "automated",
+      "acceptance": [
+        "One versioned TownSceneManifest is derived from canonical settlement truth rather than becoming a second mutable settlement model.",
+        "GM and player-safe projections are explicit, and hidden hazards, secrets, and GM-only provenance cannot enter the player projection.",
+        "Unknown manifest versions and malformed records fail closed to the 2D plan."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-02",
+      "title": "Deterministic complete graybox",
+      "required": true,
+      "evidenceKind": "automated",
+      "acceptance": [
+        "The same canonical input, projection, and compiler version produce byte-identical scene manifests.",
+        "Buildings, terrain, roads, walls, water, vegetation, and landmarks have bounded deterministic fallback representations.",
+        "Legacy and sparse settlements still produce a complete, navigable composition."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-03",
+      "title": "Lazy delivery and worker isolation",
+      "required": true,
+      "evidenceKind": "build_and_integration",
+      "acceptance": [
+        "Three.js and the settlement-scene viewer are absent from the entry chunk's transitive static import closure and from first-paint modulepreloads.",
+        "A fresh production build contains the lazy scene sentinel, so the absence proof is not vacuous.",
+        "Geometry lowering uses the worker boundary with request identity, stale-response rejection, transferables where appropriate, cancellation, error fallback, and disposal.",
+        "Deterministic Portrait PNG and Scene GLB encoding remain behind their click-lazy module and export-worker boundaries and are absent from first paint."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-04",
+      "title": "Illustrated-diorama visual system",
+      "required": true,
+      "evidenceKind": "rendered_matrix",
+      "acceptance": [
+        "The material, lighting, atmosphere, edge treatment, and camera grammar read as one illustrated diorama rather than unrelated primitives.",
+        "The supported settlement-size, biome, wall, road, water, season, and condition matrix has reviewed reference captures; fixed-authored-daylight is explicitly verified because canonical state has no time-of-day axis.",
+        "Important structures remain recognizable at default framing and at every supported quality rung."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-05",
+      "title": "Interaction, provenance, and edit round-trip",
+      "required": true,
+      "evidenceKind": "automated_and_rendered",
+      "acceptance": [
+        "Keyboard, pointer, and touch picking resolve stable canonical entity ids and can route to the Workbench and Herald without inventing parallel identity.",
+        "Why-this-looks-this-way provenance names canonical source fields and projection limits.",
+        "Cosmetic edits are schema-validated, undoable, persisted separately from canonical truth, and survive save, reopen, export, import, and legacy migration."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-06",
+      "title": "Living-state and privacy correctness",
+      "required": true,
+      "evidenceKind": "automated_and_adversarial",
+      "acceptance": [
+        "Conditions, repairs, scars, occupation, prosperity, neglect, and seasonal change are projections of existing state with explicit precedence.",
+        "Scene updates do not mutate simulation state and cannot cause a different simulation result.",
+        "GM-only facts remain absent from player views, serialized shares, screenshots, exports, accessibility text, analytics, and error reports.",
+        "Fogged player sessions use the canonical 2D player projection until reveal geometry can clip every visual and semantic record before 3D manifest compilation; renderer-only hiding is never accepted as fog privacy."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-07",
+      "title": "Adaptive quality actuates every rung",
+      "required": true,
+      "evidenceKind": "automated_and_profiled",
+      "acceptance": [
+        "Synthetic traces prove hysteresis, a reachable floor, slow recovery, manual ceilings, deterministic policy, and a real plan2d fallback.",
+        "Render scale, LOD bias, contact shadows, crease ink, cull distance, and massing-only mode each produce measured renderer changes.",
+        "Device loss, WebGL absence, memory pressure, worker failure, and sustained overload all recover to a usable 2D plan without data loss."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-08",
+      "title": "Caching, budgets, and lifecycle",
+      "required": true,
+      "evidenceKind": "production_profile",
+      "acceptance": [
+        "Cache identity includes canonical input, audience projection, compiler version, cosmetic overlay version, and relevant visual vocabulary versions.",
+        "Scene, texture, geometry, listener, animation, and worker resources are released on view switch, settlement switch, and unmount.",
+        "Cold load, warm load, interaction latency, frame pacing, memory, draw calls, triangles, context recovery, and PNG/GLB export latency meet the documented device-tier budgets."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-09",
+      "title": "2D parity and preference continuity",
+      "required": true,
+      "evidenceKind": "automated_and_rendered",
+      "acceptance": [
+        "The 2D plan remains fully functional, directly selectable, and canonical for precision work, accessible inspection, and exports.",
+        "The persisted portrait3d preference is backward-compatible, shape-guarded, and never prevents fallback.",
+        "Reduced capability, explicit user choice, and the adaptive governor can override a promoted 3D default; reduced-motion preference removes nonessential interpolation and damping without treating 3D itself as inaccessible."
+      ]
+    },
+    {
+      "id": "TS3D-LOCAL-10",
+      "title": "Automated accessibility and visual certification",
+      "required": true,
+      "evidenceKind": "automated_and_rendered",
+      "acceptance": [
+        "The canvas has an equivalent structured representation with names, conditions, actions, and provenance.",
+        "Focus order, focus return, zoom controls, quality controls, selection, fallback announcements, contrast, forced colors, and reduced motion pass automation.",
+        "Deterministic screenshot baselines cover the required scene matrix without accepting blank, clipped, leaking, or low-fidelity captures."
+      ]
+    }
+  ],
+  "externalGates": [
+    {
+      "id": "TS3D-EXTERNAL-01",
+      "title": "Representative physical-device matrix",
+      "required": true,
+      "evidenceKind": "human_observed_device_lab",
+      "maxAgeDays": 30,
+      "acceptance": [
+        "Supported desktop, integrated-GPU laptop, tablet, and phone tiers are measured on physical devices in every supported browser family.",
+        "Cold and warm loading, sustained orbit, entity selection, view switching, recovery, thermals, and memory are recorded.",
+        "No supported tier depends on the operator manually rescuing a broken canvas."
+      ]
+    },
+    {
+      "id": "TS3D-EXTERNAL-02",
+      "title": "Assistive-technology journeys",
+      "required": true,
+      "evidenceKind": "human_accessibility",
+      "maxAgeDays": 45,
+      "acceptance": [
+        "Representative screen-reader, keyboard-only, switch/touch, zoom, forced-colors, reduced-motion, and cognitive-load journeys complete on supported platforms.",
+        "The equivalent structured representation can answer the same identity, condition, and navigation questions as the visual scene.",
+        "The 2D fallback is discoverable and preference continuity is understandable."
+      ]
+    },
+    {
+      "id": "TS3D-EXTERNAL-03",
+      "title": "Settlement recognition and task success",
+      "required": true,
+      "evidenceKind": "representative_user_study",
+      "maxAgeDays": 90,
+      "acceptance": [
+        "At least twelve representative non-owner GMs can identify the settlement's important districts, routes, defenses, landmarks, and current conditions from the default portrait.",
+        "At least ten of twelve complete the named orientation and entity-to-detail tasks without coaching.",
+        "Observed misunderstandings are resolved or explicitly accepted before promotion."
+      ]
+    },
+    {
+      "id": "TS3D-EXTERNAL-04",
+      "title": "Visual direction and long-session comfort",
+      "required": true,
+      "evidenceKind": "representative_taste_walk",
+      "maxAgeDays": 90,
+      "acceptance": [
+        "The illustrated-diorama direction is preferred to the graybox and does not obscure game-relevant state.",
+        "Lighting, camera motion, scale, labels, and selection remain comfortable during a representative session rather than only in a hero screenshot.",
+        "The 2D plan remains the preferred precision surface and the transition between views is coherent."
+      ]
+    },
+    {
+      "id": "TS3D-EXTERNAL-05",
+      "title": "Field-shaped resilience soak",
+      "required": true,
+      "evidenceKind": "release_candidate_soak",
+      "maxAgeDays": 30,
+      "acceptance": [
+        "A release-candidate build completes repeated multi-settlement open, orbit, select, edit, advance, fallback, and reopen journeys without growing resource use or losing edits.",
+        "Context loss, backgrounding, worker restart, network interruption, and storage pressure degrade calmly.",
+        "Telemetry and support diagnostics distinguish renderer failure from compiler, projection, data, and preference failures without collecting GM-only content."
+      ]
+    }
+  ],
+  "promotionRule": {
+    "eligibleWhen": [
+      "the availability flag ships true",
+      "every required local gate has admissible passing evidence",
+      "every required external gate has admissible passing evidence",
+      "evidence records identify the gate, proof class, accountable producer, and result summary",
+      "all evidence is bound to the current audited fingerprint of declared entries and their complete repository-local dependency closure",
+      "time-sensitive external evidence is no older than its gate's maxAgeDays",
+      "the certification audit reports zero missing, stale, malformed, or failed gates"
+    ],
+    "doesNotAuthorize": [
+      "removing or weakening the 2D plan",
+      "persisting presentation geometry as a second canonical settlement model",
+      "sending hidden or GM-only fields into player-safe scene payloads",
+      "treating local automated evidence as human, accessibility, device, or field evidence"
+    ],
+    "promotionAction": "After an eligible receipt is reviewed, change settlementScene3dDefault to true in a separate, auditable patch. Never let the audit mutate product flags.",
+    "currentOutcome": "withhold_default"
+  }
+}

@@ -1,8 +1,10 @@
 import { FS, swatch } from '../theme.js';
+import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
-import { threatDisplay } from '../map/settlementThreat.js';
+import { threatDisplay, isCalmThreat } from '../map/settlementThreat.js';
+import { emblem } from '../../design/organic/ornament/compose.js';
 
 // Persistent at-the-table header facts (tier / population / trade route) read
 // mid-session on the dark identity bar. '#D8C8A8' is a light warm parchment ink
@@ -46,6 +48,10 @@ export default function DossierHeaderRow({
   };
   return (
           <div style={{ padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' }}>
+            {/* The settlement's seeded medallion — its own mark on its own dossier
+                (same seed slot as the foot colophon's counterseal, so header and
+                foot carry ONE mark). Decorative; dim-palette for the ink band. */}
+            <span aria-hidden="true" style={{ flexShrink: 0, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: emblem(settlement.name || 'settlement', { mode: 'field', size: 38 }) }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}>
                 {nameEditable ? (
@@ -61,8 +67,8 @@ export default function DossierHeaderRow({
               </div>
               <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
                 <span style={{ fontSize: FS.sm, color: HEADER_FACT, textTransform: 'capitalize', fontWeight: 700 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
-                <span aria-hidden="true" style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{'\u00b7'}</span>
-                {settlement.population != null && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.population.toLocaleString() + ' pop.'}</span>}
+                <span aria-hidden="true" style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{'·'}</span>
+                {settlement.population != null && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{formatCount(settlement.population) + ' pop.'}</span>}
                 {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: HEADER_FACT, fontWeight: 600 }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
                 {/* The threat WORD comes from the shared threatDisplay helper so
                     a given monsterThreat reads identically here and in the
@@ -71,8 +77,8 @@ export default function DossierHeaderRow({
                     parchment-toned for the dark header bar; only the label is
                     unified. The text label carries the threat alongside the
                     tone, so the state is never color-only. */}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
-                {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
+                {settlement.config?.monsterThreat && !isCalmThreat(settlement.config.monsterThreat) && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
+                {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
               </div>
             </div>
             {/* ── AI Narrative Layer button group ──────────────────────────────────

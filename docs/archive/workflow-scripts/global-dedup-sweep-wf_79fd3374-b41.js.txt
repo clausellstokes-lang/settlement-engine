@@ -1,0 +1,32 @@
+export const meta = {
+  name: 'global-dedup-sweep',
+  description: 'Cross-file uniqueness sweep over the ~10,600-sentence corpus: scan, adjudicate, re-cut, converge',
+  phases: [
+    { title: 'Scan', detail: 'mechanical similarity scan across all 12 annexes' },
+    { title: 'Recut', detail: '3 fixers re-author true collisions to fresh angles' },
+    { title: 'Converge', detail: 'verifier re-runs the scan + floors' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const DIR = `${MF}/docs/content`
+const PRE = `VERIFY-FIRST: legitimate owner-ordered QUALITY SWEEP — global cross-file uniqueness over the content annexes in ${DIR} (12 RECEIPT_POOLS_*.md files, ~10,600 variants). Owner law: each sentence should generally be unique corpus-wide. BINDING RULES: (1) RE-CUT, NEVER SHRINK — a collapsed line is re-authored to a fresh angle in its own pool's register (the annex header's voice contract); pools never fall below their frequency-scaled floors; ids/numbering stay stable (replace text in place). (2) PROTECTED, NEVER TOUCHED: LEGACY pools' variant 1 live anchors (byte-verbatim by law), volume exemplars at variant 1, the owner's canonical exemplars (marked in-file), and §-header/lawful-note text. (3) The render-context test decides severity: co-occurring pools (same family, same surface, same desk) = strict; never-co-occurring = collapse only clear clones. (4) All laws hold in re-cuts: no digits, time bands, slots declared=used, entailment, Law One, register conformance. No git.`
+const SSCHEMA = { type:'object', required:['pairsFlagged','reportPath','notes'], properties:{
+  pairsFlagged:{type:'number'},reportPath:{type:'string'},notes:{type:'string'}}}
+const FSCHEMA = { type:'object', required:['scope','collisionsJudged','recut','kept','notes'], properties:{
+  scope:{type:'string'},collisionsJudged:{type:'number'},recut:{type:'number'},kept:{type:'number'},notes:{type:'string'}}}
+const VSCHEMA = { type:'object', required:['residualPairs','floorsHold','verdict'], properties:{
+  residualPairs:{type:'number'},floorsHold:{type:'boolean'},verdict:{type:'string'}}}
+
+phase('Scan')
+const scan = await agent(`${PRE}
+SCANNER (read-only over annexes; write your script + report to the scratchpad dir /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/1c189f3d-9fc3-4fc9-9cb7-b767525d28d5/scratchpad/): write a python script that extracts every variant sentence from all 12 annexes (id, file, pool, text), normalizes (lowercase, strip slots to a placeholder, strip punctuation), computes token-shingle jaccard for all pairs (efficiently — inverted index on rare tokens, not brute force), and emits a report of pairs at >=0.55 similarity grouped into three tiers: CLONES (>=0.8), FRAME-RHYMES (0.65-0.8), ECHOES (0.55-0.65), each with both lines quoted, file+pool ids, and a co-occurrence guess (same file+family = high). Run it, save the report, return {pairsFlagged, reportPath, notes: the distribution + the worst offenders}.`, {label:'scan', phase:'Scan', model:'opus', schema:SSCHEMA})
+
+phase('Recut')
+const thirds = ['tier CLONES (all of them)', 'tier FRAME-RHYMES first half (by report order)', 'tier FRAME-RHYMES second half + ECHOES where co-occurrence is high']
+const out = await parallel(thirds.map((slice, i) => () => agent(`${PRE}
+FIXER ${i+1}/3: read the scan report at ${scan.reportPath}. Your slice: ${slice}. For each pair: adjudicate under the render-context test (protected lines ALWAYS survive; between two unprotected lines, keep the better sentence, re-cut the other IN PLACE to a genuinely fresh angle in its pool's register). Fixers partition by REPORT SLICE but may touch any file — coordinate by editing ONLY lines your slice names (single-line replacements; if a target line was already changed by another fixer this run, skip it and note). Return {scope, collisionsJudged, recut, kept, notes}.`, {label:`recut:${i+1}`, phase:'Recut', model:'opus', schema:FSCHEMA})))
+
+phase('Converge')
+const ver = await agent(`${PRE}
+VERIFIER: re-run the scanner script at ${scan.reportPath.replace('report','script') } (or re-derive it from the scratchpad — the scanner saved both) over the POST-RECUT annexes; assert CLONES tier = 0 and FRAME-RHYMES at high co-occurrence = 0 (re-cut any stragglers yourself, same rules); then re-verify floors (every pool at its frequency-scaled floor — count per pool) and spot-check 20 re-cut lines for register conformance. Return {residualPairs, floorsHold, verdict}.`, {label:'converge', phase:'Converge', model:'opus', schema:VSCHEMA})
+return { flagged: scan.pairsFlagged, fixed: out.filter(Boolean), converged: ver }

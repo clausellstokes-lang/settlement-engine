@@ -80,7 +80,7 @@ describe('client ↔ DB allow-list two-way match (066)', () => {
   it('is_allowed_security_question_id() hard-codes EXACTLY the client id set', () => {
     const sql = readFileSync(migration, 'utf8');
     const fn = sql.match(
-      /create or replace function public\.is_allowed_security_question_id[\s\S]*?\$\$;/i,
+      /^create or replace function public\.is_allowed_security_question_id[\s\S]*?\$\$;/im,
     );
     expect(fn, 'is_allowed_security_question_id must be defined in 066').toBeTruthy();
     // Pull every single-quoted id literal out of the function body.

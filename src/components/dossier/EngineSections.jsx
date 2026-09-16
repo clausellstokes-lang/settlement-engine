@@ -7,21 +7,28 @@
  *
  * All read pure display read-models (deriveBlockadeRelief, deriveCausalState,
  * coupContenders, previousGovernments, NPC agency fields). No store writes, no
- * rng. Altitude-aware where the spec asks for it (band detail at Detail+).
+ * rng.
+ *
+ * Progressive-disclosure note: master's "altitude" detail-level hook
+ * (useAltitude / userPrefs.detailLevel) is not part of this lineage, so these
+ * sections render at full engine detail. DOSSIER_DETAIL_LEVEL is the single seam
+ * to re-introduce a disclosure axis if one ever lands.
  */
 
 import { useMemo } from 'react';
 import { deriveBlockadeRelief } from '../../domain/display/dossierViewModel.js';
 import { deriveCausalState } from '../../domain/causalState.js';
-import { coupContenders } from '../../domain/rulingPower.js';
-import { useAltitude } from '../../hooks/useAltitude.js';
+import { coupContenders } from '../../domain/rulingPowerCoup.js';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import {
-  FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, R, swatch,
-} from '../theme.js';
+  FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, swatch } from '../theme.js';
+
+// Fixed detail rung — this lineage has no altitude/detail-level store, so the
+// former `level !== 'guided'` gates always show detail. See the header note.
+const DOSSIER_DETAIL_LEVEL = 'expert';
 
 const BAND_COLOR = {
   surplus: '#1a5a28', adequate: '#3f7d3f', strained: '#a0762a',
@@ -32,7 +39,7 @@ function BandPill({ band }) {
   if (!band) return null;
   return (
     <span data-band={band} style={{
-      display: 'inline-block', padding: '1px 7px', borderRadius: R.sm, fontSize: FS.xxs,
+      display: 'inline-block', padding: '1px 7px', fontSize: FS.xxs,
       fontWeight: 800, letterSpacing: 0.3, textTransform: 'uppercase', color: swatch.white,
       background: BAND_COLOR[band] || MUTED,
     }}>{band}</span>
@@ -43,7 +50,7 @@ function SectionShell({ title, accent = GOLD, testid, children }) {
   return (
     <div data-testid={testid} style={{
       background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${accent}`,
-      borderRadius: R.md, overflow: 'hidden', margin: '12px 0', fontFamily: sans,
+      overflow: 'hidden', margin: '12px 0', fontFamily: sans,
     }}>
       <div style={{
         fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em',
@@ -60,7 +67,7 @@ function SectionShell({ title, accent = GOLD, testid, children }) {
  * @param {{ settlement: any }} props
  */
 export function EconomicsGranarySection({ settlement }) {
-  const { level } = useAltitude();
+  const level = DOSSIER_DETAIL_LEVEL;
   const model = useMemo(() => {
     if (!settlement) return null;
     const relief = deriveBlockadeRelief(settlement);
@@ -104,7 +111,7 @@ export function EconomicsGranarySection({ settlement }) {
             </span>
           </div>
           {pct != null && (
-            <div style={{ height: 8, background: BORDER, borderRadius: R.sm, overflow: 'hidden' }}>
+            <div style={{ height: 8, background: BORDER, overflow: 'hidden' }}>
               <div style={{ width: `${pct}%`, height: '100%', background: pct >= 50 ? GREEN : pct >= 25 ? AMBER : RED }} />
             </div>
           )}
@@ -115,7 +122,7 @@ export function EconomicsGranarySection({ settlement }) {
           {model.flags.map(f => (
             <span key={f} style={{
               fontSize: FS.xxs, fontWeight: 700, color: f === 'blockade' ? RED : GOLD,
-              background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: 3, padding: '1px 6px',
+              background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 6px',
               textTransform: 'uppercase', letterSpacing: '0.04em',
             }}>{f}</span>
           ))}
@@ -193,10 +200,24 @@ export function DefenseWarFrontSection({ settlement, warStatus = null, nameFor =
 // ── Power: ruler identity, coup forecast, lineage, disposition ────────────────
 
 /**
+ * The seat's legitimacy multiplier (rulingPower.js bands: 0.60 … 1.30) read as
+ * what the public's view DOES to its grip. The coefficient itself never reaches
+ * the page — the legibility law wants the consequence, not the arithmetic.
+ * @param {number} mult @returns {string}
+ */
+function legitimacyHold(mult) {
+  if (mult >= 1.25) return 'public backing hardens their hold';
+  if (mult >= 1.05) return 'public approval lends them weight';
+  if (mult > 0.95) return 'public opinion neither helps nor hurts';
+  if (mult >= 0.7) return 'public doubt loosens their hold';
+  return 'public rejection is breaking their hold';
+}
+
+/**
  * @param {{ settlement: any }} props
  */
 export function PowerSuccessionSection({ settlement }) {
-  const { level } = useAltitude();
+  const level = DOSSIER_DETAIL_LEVEL;
   const model = useMemo(() => {
     if (!settlement) return null;
     const ps = settlement.powerStructure || {};
@@ -229,7 +250,7 @@ export function PowerSuccessionSection({ settlement }) {
               (e.g. a bare government-type label like "Town Council"). */}
           <strong>Ruler:</strong> <EntityLink id={factionIdFromName(incumbentName)} type="faction" fallback={incumbentName} style={{ color: BODY }} />
           {Number.isFinite(contenders.incumbent?.govMultiplier) && level !== 'guided' && (
-            <span style={{ color: MUTED }}> · legitimacy ×{contenders.incumbent.govMultiplier}</span>
+            <span style={{ color: MUTED }}> · {legitimacyHold(contenders.incumbent.govMultiplier)}</span>
           )}
         </div>
       )}
@@ -256,7 +277,7 @@ export function PowerSuccessionSection({ settlement }) {
           {previous.slice(-4).map((g, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY }}>
               {g.label || g.government || 'Prior government'}
-              {g.cause ? <span style={{ color: MUTED }}>, {g.cause}</span> : null}
+              {g.cause ? <span style={{ color: MUTED }}> ({g.cause})</span> : null}
             </div>
           ))}
         </div>

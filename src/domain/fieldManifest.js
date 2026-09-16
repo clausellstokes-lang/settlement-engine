@@ -1,5 +1,5 @@
 /**
- * domain/fieldManifest.js — Structural prevention: the two field
+ * domain/fieldManifest.js — Wave 8 structural prevention: the two field
  * manifests, as data.
  *
  * Two bug classes kept regrowing faster than audits could weed them:
@@ -11,7 +11,7 @@
  *      code written under the program's own discipline).
  *   2. DEAD WRITES — a field written "for the dossier" that no surface
  *      ever reads (`blockadeBypass`, `economicGates` until 1fd128e, the
- *      six dead reads found in an earlier audit).
+ *      six dead reads of Wave 6 #1).
  *
  * This module turns both classes into DATA that a walking test
  * (tests/joins/fieldManifest.test.js) enforces with comment-stripped
@@ -64,7 +64,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: null,
     mode: 'snapshot',
     pulseWriter: null,
-    displayRule: 'Generation verdicts with NO live sibling. Display-as-generated is honest '
+    displayRule: 'Generation verdicts with NO live sibling — display-as-generated is honest '
       + 'today. Whichever package gives any of them a pulse writeback must flip its row to '
       + 'live and name the writer.',
     guards: [],
@@ -111,13 +111,13 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: null,
     mode: 'snapshot',
     pulseWriter: null,
-    displayRule: 'Deliberate snapshot. The food model is population-scale-invariant (audit '
+    displayRule: 'Deliberate snapshot — the food model is population-scale-invariant (audit '
       + 'REFUTED the freshness harm: ratios cancel; live re-derivation would be byte-identical). '
       + 'If refugee influxes should strain per-capita food, that is a model-design decision.',
     guards: [],
   },
   {
-    // Resolution is LIVE-FIRST from the standing
+    // Wave 8 decision (recorded): resolution is LIVE-FIRST from the standing
     // institution roster; the verdict is FALLBACK ONLY for rosters with no
     // name signal either way (legacy/custom-renamed content). A roster whose
     // only sniffable transport lies removed/destroyed is a NEGATIVE signal —
@@ -148,7 +148,7 @@ export const FROZEN_VS_LIVE = Object.freeze([
     field: 'updatedByPulse',
     mode: 'live',
     pulseWriter: 'src/domain/worldPulse/factionCompetition.js#projectFactionStatesOntoSettlement',
-    displayRule: 'Faction live state projects onto powerStructure.factions with '
+    displayRule: 'Wave 7: faction live state projects onto powerStructure.factions with '
       + 'updatedByPulse provenance and identity no-ops; the dossier faction panel reads the '
       + 'projection, never worldState.factionStates directly.',
     guards: [],
@@ -157,7 +157,12 @@ export const FROZEN_VS_LIVE = Object.freeze([
     path: 'neighbourNetwork[].relationshipType',
     field: 'neighbourNetwork',
     mode: 'live',
-    pulseWriter: 'src/domain/worldPulse/applyWorldPulse.js#writeRelationshipLabelToNeighbourNetworks',
+    // RE-POINTED 2026-08-07: the god-module split moved this writer out of
+    // applyWorldPulse.js into the relationship-graph leaf. The write itself never
+    // stopped — applyWorldPulse.js still imports and calls it at two sites — so the
+    // manifest's ADDRESS rotted, not the field. (Measured: the function is defined
+    // once, in the file named below, and still writes neighbourNetwork.)
+    pulseWriter: 'src/domain/worldPulse/applyWorldPulseRelationshipGraph.js#writeRelationshipLabelToNeighbourNetworks',
     displayRule: 'R3/H11: pulse relationship evolution writes back to both settlements’ '
       + 'neighbourNetwork links so dossier/threats/PDF/AI stop asserting stale labels.',
     guards: [],
@@ -184,10 +189,96 @@ export const FROZEN_VS_LIVE = Object.freeze([
     path: 'tier',
     field: 'tier',
     mode: 'live',
-    pulseWriter: 'src/domain/worldPulse/tierResourceDynamics.js#applyTierOutcomeToSettlement',
+    // The applier moved VERBATIM to the tierOutcomeApply.js leaf (W2b byte-budget
+    // extraction); tierResourceDynamics.js re-exports it, but the manifest names
+    // the file that DEFINES the writer (the source-scan pin reads definitions).
+    pulseWriter: 'src/domain/worldPulse/tierOutcomeApply.js#applyTierOutcomeToSettlement',
     writeProbe: '(?<![.\\w\'"`:])tier\\s*:',
     displayRule: 'Live BY PROPOSAL: tier moves only through the proposal gate, with the '
       + 're-verify-current-state apply guard (C2).',
+    guards: [],
+  },
+
+  // ── The G5 generation-frozen record family (atlas owner-queue #28) ─────────
+  // Owner-ratified 2026-07-27 ("do all of these" over the recorded queue), and
+  // landed here in Wave R-5b. These five records are written ONCE, during
+  // generation, and no event, edit, or pulse path recomputes them — the atlas
+  // gap G5 (docs/SETTLEMENT_CAPABILITY_ATLAS.md Part VII #28) is exactly this
+  // family. The DISPLAY side already shipped in Waves R-0/R-2 (first-survey
+  // framing on every render site, pinned in
+  // tests/components/frozenTenseDefenseCopy.test.js,
+  // tests/components/g5FirstSurveyCopy.test.js and
+  // tests/components/g5FirstSurveyPdfTwins.test.js). These rows DECLARE that
+  // contract as manifest data so the next package that gives any of them a
+  // pulse writeback has to flip its row and name its writer.
+  //
+  // `guards: []` follows the defenseProfile.scores precedent above: a snapshot
+  // guard exists to stop a frozen field being PREFERRED over a declared-live
+  // sibling, and none of these five has a live sibling to be preferred over
+  // (the two near-twins are named per row and are re-derivations, not
+  // writebacks). The display copy is one-string vetoable and already pinned in
+  // the three copy suites above; re-pinning it here would turn a deliberate
+  // reword into a four-file edit. The mechanical half of the contract — that
+  // no worldPulse writer has quietly started keeping one of them live — is
+  // walked in tests/joins/fieldManifest.test.js.
+  {
+    path: 'economicViability',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and every render site says so (first-survey framing). deriveViability reconciles the '
+      + 'SUMMARY SENTENCE only; the coherence badge, the critical-issue pill and the issue lists '
+      + 'all read this frozen record. Whichever package gives it a pulse writeback must flip this '
+      + 'row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'structuralViolations',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. The draft-phase checkDraftEdit twin is a '
+      + 'LIVE re-derivation, not a writeback, and the two are allowed to disagree after edits by '
+      + 'design. Whichever package gives this record a pulse writeback must flip this row to live '
+      + 'and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'structuralSuggestions',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Same producer pass as structuralViolations '
+      + 'and it must travel with it; the checkDraftEdit twin re-derives the same suggestions live '
+      + 'in draft phase without writing them back. Whichever package gives this record a pulse '
+      + 'writeback must flip this row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'coherenceNotes',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Narrative-age record, stamped once by the '
+      + 'canonical-coherence substream and read back by the generation receipt; nothing re-runs '
+      + 'the narrative-vs-mechanical agreement check afterwards. Whichever package gives it a '
+      + 'pulse writeback must flip this row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'defenseProfile.magicDependency',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Widest blast radius of the five, because '
+      + 'it is not display-only: worldPulse/stressorGates.js gates a live stressor on this frozen '
+      + 'flag, so a campaign that loses its magical supply chains keeps the gate. Whichever '
+      + 'package gives it a pulse writeback must flip this row to live and name the writer.',
     guards: [],
   },
 ]);
@@ -231,7 +322,7 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     path: 'economicState.activeChains[].magicRecovery',
     producer: 'src/generators/chainMagicSubstitution.js',
     consumers: [
-      'src/domain/supplyChainState.js',        // carried into the canonical envelope
+      'src/domain/supplyChainState.js',        // Wave 8: carried into the canonical envelope
       'src/components/new/tabs/EconomicsTab.jsx',
     ],
   },
@@ -248,13 +339,13 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
   {
     field: 'importChannel',
     path: 'economicViability.metrics.foodBalance.importChannel',
-    producer: 'src/generators/economicGenerator.js',
+    producer: 'src/generators/economy/foodBalance.js',
     consumers: ['src/domain/display/dossierViewModel.js'],
   },
   {
     field: 'magicFoodOffset',
     path: 'economicViability.metrics.foodBalance.magicFoodOffset',
-    producer: 'src/generators/economicGenerator.js',
+    producer: 'src/generators/economy/foodBalance.js',
     consumers: [
       'src/domain/display/dossierViewModel.js',
       'src/generators/aiLayer.js',
@@ -265,7 +356,21 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     path: 'economicState.foodSecurity.stockpile.blockadeBypass',
     producer: 'src/domain/worldPulse/foodStockpile.js',
     producerProbe: '(?<![.\\w])blockadeBypass\\s*,', // shorthand property write
-    consumers: ['src/domain/display/dossierViewModel.js'], // deriveBlockadeRelief
+    consumers: ['src/domain/display/dossierViewModel.js'], // Wave 8: deriveBlockadeRelief
+  },
+  {
+    // SEASONS-A: the seasonal stockpile bookkeeping (written ONLY under
+    // seasonsEnabled; deriveGranaryOutlook is its display reader).
+    field: 'seasonWeek',
+    path: 'economicState.foodSecurity.stockpile.seasonWeek',
+    producer: 'src/domain/worldPulse/foodStockpile.js',
+    consumers: ['src/domain/display/dossierViewModel.js'],
+  },
+  {
+    field: 'seasonalEvent',
+    path: 'economicState.foodSecurity.stockpile.seasonalEvent',
+    producer: 'src/domain/worldPulse/foodStockpile.js',
+    consumers: ['src/domain/display/dossierViewModel.js'],
   },
   {
     // Entity-identity package: generation stamps canonical institution ids
@@ -311,7 +416,7 @@ export const REMOVED_DEAD_FIELDS = Object.freeze([
   {
     field: 'hasRegionalSignal',
     file: 'src/domain/region/deriveRegionalState.js',
-    removed: 'Write-only boolean on deriveLocalDelta; every consumer thresholds '
+    removed: 'Wave 8 — write-only boolean on deriveLocalDelta; every consumer thresholds '
       + 'changes[].magnitude itself.',
   },
 ]);

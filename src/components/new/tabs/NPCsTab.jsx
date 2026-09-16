@@ -1,21 +1,56 @@
 import React, { useState } from 'react';
+import { Search, X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
-import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
+import { serif, Collapsible, Empty } from '../Primitives';
 import {relStyle} from '../tabConstants';
 
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
-import { NpcAgencySection } from '../../dossier/EngineSections.jsx';
+// W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
+// already-lazy tab (HeraldBody's rule for small children of an open door), and it
+// self-hides entirely when the owning realm does not run the consequence economy.
+import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
+import LockControls from '../../dossier/LockControls.jsx';
 
-export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
+export function NPCsTab({
+  npcs,
+  onRerollNPCs,
+  settlement,
+  narrativeNote,
+  pinnedIds,
+  onTogglePin,
+  canAuthorNpc = false,
+  saveId = null,
+  playerView = false,
+  publicDossier = false,
+}) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
-  if (!npcs?.length) return <Empty message="No figures of note recorded here yet."/>;
+  // The unaffiliates are people the WORLD ledger holds against this place, not roster
+  // entries, so they survive an empty roster and are rendered beside the empty state
+  // rather than behind it.
+  const unaffiliates = (
+    <UnaffiliatesSection
+      saveId={saveId}
+      settlement={settlement}
+      playerView={playerView}
+      publicDossier={publicDossier}
+    />
+  );
+
+  if (!npcs?.length) {
+    return (
+      <div>
+        <Empty message="No NPCs generated. Generate a settlement to see key figures."/>
+        {unaffiliates}
+      </div>
+    );
+  }
 
   const highCount = npcs.filter(n=>n.influence==='high').length;
   const modCount  = npcs.filter(n=>n.influence==='moderate').length;
@@ -49,7 +84,6 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
 
   return (
     <div>
-      <TabIntro tabKey="npcs" />
       <NarrativeNote note={narrativeNote} />
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
@@ -61,22 +95,33 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         </div>
         {pinnedCount > 0 && (
           <span
-            title="Pinned figures hold steady when you reforge or advance time. Their goal and secret stay as written."
-            style={{display:'inline-flex',alignItems:'center',gap:4,fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',textTransform:'uppercase',flexShrink:0,cursor:'help'}}>
-            {pinnedCount} pinned
+            title="Pinned NPCs are protected from AI rewrites. Their goal and secret won't be rewritten."
+            style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
+            {pinnedCount} PINNED
           </span>
         )}
-        {onRerollNPCs&&<Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>Reroll</Button>}
+        {/* The Reroll button lives INSIDE LockControls: a locked roster must never
+            render an armed Reroll, and the only way to guarantee that is to let the
+            lock own the button. This control is the WHOLE-SECTION lock (the boolean
+            form of locks.npcs). Per-CHARACTER locks (the id-array form of the same
+            key, read by domain/locksPreservation.js) are now on the roster rows
+            themselves — see NPC_LOCK_COPY in ../npcComponents.jsx. The question that
+            held that back was whether a second row toggle would blur into Pin, which
+            makes a DIFFERENT promise; the answer was to separate them by glyph,
+            colour and sentence (a bronze padlock keeping the PERSON through a
+            reroll, beside a purple pin keeping the PROSE from the AI). */}
+        <LockControls scope="npcs" onReroll={onRerollNPCs} style={{flexShrink:0}} />
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
+          <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Filter by name, role, or faction"
             placeholder="Filter by name, role, or faction…"
-            style={{width:'100%',padding:'7px 28px 7px 10px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
-          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton glyph={'✕'} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
+            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
+          {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
         {[
           {key:'all',   label:'All'},
@@ -101,9 +146,10 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           group={byFaction[factionName]}
           impFilter={impFilter}
           search={q}
-          relationships={settlement?.relationships||[]}
+          relationships={settlement?.relationships || []}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
+          canAuthorNpc={canAuthorNpc}
         />
       ))}
 
@@ -111,39 +157,21 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         {npcs.length} figures · tap any card to expand
       </p>
     
-      {/* NPC Relationships. The list caps the flag-driven set at 6 and the rest
-          at 8; the title reflects the shown count against the total so it never
-          advertises more than it renders, with a "showing N of M" note when the
-          cap bites. */}
-      {(settlement?.relationships?.length > 0) && (() => {
-        const allRels = settlement?.relationships || [];
-        const shownFlagDriven = allRels.filter(r=>r.flagDriven).slice(0,6);
-        const shownOthers = allRels.filter(r=>!r.flagDriven).slice(0,8);
-        const shownCount = shownFlagDriven.length + shownOthers.length;
-        const total = allRels.length;
-        return (
-          <Collapsible title={`NPC Relationships (${total})`} defaultOpen={false}>
-            <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
-              {shownFlagDriven.map((r,i)=>(
-                <NPCRelCard2 key={`f${i}`} rel={r} style={relStyle(r.type)}/>
-              ))}
-              {shownOthers.map((r,i)=>(
-                <NPCRelCard2 key={`o${i}`} rel={r} style={relStyle(r.type)}/>
-              ))}
-              {shownCount < total && (
-                <p style={{fontSize:FS.xs,color:MUTED,margin:'2px 0 0',fontStyle:'italic'}}>
-                  Showing {shownCount} of {total}.
-                </p>
-              )}
-            </div>
-          </Collapsible>
-        );
-      })()}
+      {/* NPC Relationships */}
+      {(settlement?.relationships?.length > 0) && (
+        <Collapsible title={`NPC Relationships (${settlement.relationships.length})`} defaultOpen={false}>
+          <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
+            {(settlement?.relationships||[]).filter(r=>r.flagDriven).slice(0,6).map((r,i)=>(
+              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
+            ))}
+            {(settlement?.relationships||[]).filter(r=>!r.flagDriven).slice(0,8).map((r,i)=>(
+              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
+            ))}
+          </div>
+        </Collapsible>
+      )}
 
-      {/* UX overhaul Phase 2 — NPC agency disclosure: goals / ambition /
-          rivalries / consequenceIfRemoved. Self-gates to nothing when no NPC
-          carries agency fields. */}
-      <NpcAgencySection npcs={npcs} />
+      {unaffiliates}
 </div>
   );
 }

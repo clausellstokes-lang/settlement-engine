@@ -21,7 +21,11 @@
  * stable node-index order rather than a Math/locale-dependent ordering.
  */
 
-import { buildChainEdges, CHAIN_DEFS } from './supplyChains.js';
+import {
+  buildChainEdges,
+  CHAIN_DEFS,
+  nativeChainResourceList,
+} from './supplyChains.js';
 
 /**
  * Minimal binary min-heap (priority queue) over arbitrary items, ordered by a
@@ -110,10 +114,7 @@ function chainMembership(sett) {
     if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
     return '';
   };
-  const resList = sett?.config?.nearbyResources
-    || sett?.nearbyResources
-    || sett?.resources
-    || [];
+  const resList = nativeChainResourceList(sett);
   const resources = new Set(resList.map(normRes).filter(Boolean));
 
   const normInst = (i) => (i?.id || i?.name || '').toLowerCase();

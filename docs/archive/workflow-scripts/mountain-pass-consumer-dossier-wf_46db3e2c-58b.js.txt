@@ -1,0 +1,68 @@
+export const meta = {
+  name: 'mountain-pass-consumer-dossier',
+  description: 'Map exact behavior change in every tradeRouteSemantics consumer if mountain_pass gains a tier',
+  phases: [
+    { title: 'Dossier', detail: '4 parallel readers over the 13 consumer files + branch censuses' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/elated-feynman-4fbc91'
+
+const PREAMBLE = `You are a read-only code-analysis subagent working inside the user's own repository checkout at ${ROOT} (a git worktree the user owns; analyzing it is the assigned, legitimate task). Verify every claim by reading the actual files — never assert from memory. Do NOT edit any file, do NOT run any git command that mutates state (no stash, no checkout, no reset), do NOT run tests or vitest. Bash is for grep/sed/ls reads only.
+
+CONTEXT: src/domain/tradeRouteSemantics.js is the canonical route-vocabulary module. tradeRouteTier(value) maps raw config.tradeRouteAccess values through ROUTE_TIER {crossroads:major, port:major, river:standard, road:standard, coastal:standard, isolated:isolated, major:major, minor:standard, standard:standard, none:isolated} to a tier; unmapped values return 'unknown'. TIER_DELTAS: major={connectivity:+18,transport:+22,foodSupply:+6}, standard={+8,+12,0}, isolated={-12,-15,0}, unknown={0,0,0}. hasTradeRouteConnection = tier is major or standard. isTradeRouteDisconnected/isIsolatedRoute = tier is isolated. tradeRouteSemantics(value) returns {value,tier,isolated,connectivity,transport,foodSupply}.
+
+THE GAP: 'mountain_pass' is a user-selectable route value (ConfigurationPanel) absent from ROUTE_TIER, so today it resolves to tier 'unknown': all-zero deltas, hasTradeRouteConnection=false AND isTradeRouteDisconnected=false. A decision is being prepared to map it (probably to 'standard').
+
+YOUR JOB for each assigned file: read the full enclosing scope of every use of any tradeRouteSemantics import (and any other route-value logic in the file), then report per file:
+- mechanism: what the consumer computes from the route (quote the decisive lines with line numbers)
+- current_unknown_behavior: what a mountain_pass settlement gets TODAY (be concrete: which branch runs, what value results, any split-brain weirdness — e.g. treated as no-import-capacity but also not isolation-supported)
+- standard_behavior: what changes if tradeRouteTier('mountain_pass') === 'standard'
+- major_behavior: what changes if it were 'major' instead
+- bespoke_fallthrough: if a brand-new 4th tier name (e.g. 'constrained') were introduced, would this file's branches silently treat it as neutral/unknown? Quote any branch that string-matches tier names.
+Also note anything downstream-visible to users (prose, receipts, panels).`
+
+const GROUPS = [
+  { key: 'substrate', files: ['src/domain/causalState.js', 'src/domain/capacityModel.js'] },
+  { key: 'economy', files: ['src/generators/economy/viability.js', 'src/generators/economy/foodBalance.js', 'src/generators/economy/prosperity.js', 'src/generators/economy/tradeGoods.js', 'src/generators/economy/economicState.js', 'src/generators/steps/economyReconcilePass.js'] },
+  { key: 'generators', files: ['src/generators/foodGenerator.js', 'src/generators/defenseGenerator.js', 'src/generators/npc/thorpSecondRole.js'] },
+  { key: 'state-pulse', files: ['src/domain/state/deriveSystemState.js', 'src/domain/worldPulse/traditionsKernel.js'] },
+]
+
+const SCHEMA = {
+  type: 'object',
+  required: ['files'],
+  properties: {
+    files: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['file', 'mechanism', 'current_unknown_behavior', 'standard_behavior', 'major_behavior', 'bespoke_fallthrough'],
+        properties: {
+          file: { type: 'string' },
+          mechanism: { type: 'string' },
+          current_unknown_behavior: { type: 'string' },
+          standard_behavior: { type: 'string' },
+          major_behavior: { type: 'string' },
+          bespoke_fallthrough: { type: 'string' },
+          quotes: { type: 'array', items: { type: 'string' } },
+          user_visible: { type: 'string' },
+        },
+      },
+    },
+    extra_findings: { type: 'string' },
+  },
+}
+
+phase('Dossier')
+const results = await parallel(GROUPS.map(g => () =>
+  agent(
+    `${PREAMBLE}\n\nASSIGNED FILES (all relative to ${ROOT}):\n${g.files.map(f => `- ${f}`).join('\n')}` +
+    (g.key === 'state-pulse'
+      ? `\n\nADDITIONAL CENSUS DUTY (report in extra_findings): (1) grep the whole src/ tree for branches that string-compare a tier from tradeRouteTier()/tradeRouteSemantics() against 'major'/'standard'/'isolated' — list every site with file:line and what a new 4th tier name would fall through to. (2) grep src/ for raw route-value branches (tradeRouteAccess === '...' or .includes(...) lists or object lookups keyed by route value, e.g. in narrativeGenerator, historyTemplate, isolationSupport, generationCoherence, npcGenerator, economy/upgradeOpportunities, priorityHelpers, factionCorrelation, dailyLifeLogic, aiLayer, terrainHelpers) and report which of them already handle 'mountain_pass' and which would ignore it — this tells us how first-class the value already is outside the semantics module.`
+      : ''),
+    { label: `dossier:${g.key}`, phase: 'Dossier', schema: SCHEMA, model: 'opus' },
+  )
+))
+
+return { groups: GROUPS.map(g => g.key), results }

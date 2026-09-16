@@ -11,7 +11,10 @@
 
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import { INK, SECOND, BORDER, sans, SP, R, FS, swatch, AMBER_DEEP } from '../theme.js';
+// AMBER is this tree's house warning color (design token `warning` = amber-500);
+// it stands in for the incoming tree's AMBER_DEEP (amber-700), which this
+// tree's palette does not mint. The note is small inline text, never a fill.
+import { INK, SECOND, BORDER, sans, SP, FS, swatch, AMBER } from '../theme.js';
 
 /**
  * @param {object} props
@@ -55,7 +58,7 @@ export default function ReferralIntentField({ referral, idPrefix = 'purchase' })
               style={{
                 minHeight: 44,
                 padding: `${SP.sm}px ${SP.md}px`,
-                border: `1px solid ${BORDER}`, borderRadius: R.md,
+                border: `1px solid ${BORDER}`,
                 fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 400,
               }}
             />
@@ -76,7 +79,7 @@ export default function ReferralIntentField({ referral, idPrefix = 'purchase' })
           role="status"
           style={{
             fontSize: FS.xs, lineHeight: 1.5, fontFamily: sans,
-            color: note.tone === 'ok' ? swatch['#2A7A2A'] : AMBER_DEEP,
+            color: note.tone === 'ok' ? swatch['#2A7A2A'] : AMBER,
           }}
         >
           {note.text}

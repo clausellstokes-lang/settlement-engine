@@ -19,7 +19,7 @@
  *     client. Mirrors the existing contracts.test.js source-inspection style.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import ts from 'typescript';
@@ -235,8 +235,10 @@ describe('generate-narrative — provider fetches are abort-bounded', () => {
       src.indexOf('async function fetchAiWithRetry'),
       src.indexOf('async function runWithConcurrency'),
     );
-    // A per-attempt timeout signal is threaded into the fetch init.
-    expect(fn).toMatch(/signal:\s*t\.signal/);
+    // A per-attempt timeout signal is threaded into the fetch init — now combined
+    // with the inbound request signal (opt2/mig-119) so a client disconnect also
+    // aborts the in-flight fetch, WITHOUT weakening the per-attempt timeout.
+    expect(fn).toMatch(/signal:\s*combineSignals\(\s*t\.signal/);
     // The overall wall-clock deadline bounds the whole call across retries.
     expect(fn).toContain('TOTAL_BUDGET_MS');
     expect(fn).toMatch(/deadline\s*=\s*Date\.now\(\)\s*\+\s*TOTAL_BUDGET_MS/);
@@ -331,5 +333,146 @@ describe('generate-chronicle — secondary seam shares the safety layer', () => 
     expect(chronicleSrc).toContain('new AbortController()');
     expect(chronicleSrc).toMatch(/setTimeout\(\(\)\s*=>\s*\w+\.abort\(\)/);
     expect(chronicleSrc).toContain('signal:');
+  });
+});
+
+// ── the wave L-4 cache attachment (a money regression that fails SILENTLY) ────
+// Each of these shells builds a byte-stable static prefix and must hand the prompt to
+// splitForAnthropic so the prefix ships with cache_control. Dropping that call does not
+// break anything visibly: the request still succeeds, the answer is identical, and full
+// input is simply billed on every call forever. Nothing else in the suite would notice,
+// so the wiring is pinned structurally here alongside the other cost regressions.
+describe('the Surveyor shells attach cache_control to their static prefix (wave L-4)', () => {
+  const SHELLS = [
+    'custom-content', 'style-overhaul', 'construct-settlement',
+    'construct-realm', 'surveyor-autonomy', 'interpret-session',
+  ];
+
+  for (const shell of SHELLS) {
+    it(`${shell} splits its prompt at the cache breakpoint`, () => {
+      const shellSrc = readFileSync(join(ROOT, 'supabase', 'functions', shell, 'index.ts'), 'utf8');
+      // Not vacuous: this shell really does call the provider directly.
+      expect(shellSrc).toContain('https://api.anthropic.com/v1/messages');
+      expect(shellSrc).toContain("from '../_shared/anthropicCache.ts'");
+      expect(shellSrc).toContain("content: splitForAnthropic(prompt)");
+      // the un-split shape must not come back
+      expect(shellSrc).not.toContain("content: prompt }");
+    });
+  }
+});
+
+// ── the wave L-6 formative loop (a capability regression that fails SILENTLY) ──
+// A surface that skips the loop still works: it drafts once, the wall drops what it
+// cannot accept, and the human reads the wreckage. Nothing reds, nothing errors, and the
+// owner's ruling that "the tests become part of the process for the AI rather than a
+// barrier" quietly stops applying to that surface. So the wiring is pinned STRUCTURALLY,
+// against a set DISCOVERED from source rather than a hand-list that can silently go N-1:
+// every shell that seals a static cache prefix is a compile surface, and every compile
+// surface must run its draft through the validator-fed loop.
+describe('every walled Surveyor surface wires the formative repair loop (wave L-6)', () => {
+  const FN_DIR = join(ROOT, 'supabase', 'functions');
+  const shellSrc = (name) => {
+    try { return readFileSync(join(FN_DIR, name, 'index.ts'), 'utf8'); } catch { return ''; }
+  };
+  const shellDirs = readdirSync(FN_DIR, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && d.name !== '_shared')
+    .map((d) => d.name)
+    .sort();
+  // A COMPILE SURFACE seals a byte-stable static prefix. That is exactly the property
+  // that makes a repair round cheap (the prefix is cache-read, only the tail is new), so
+  // it is the honest discovery predicate for "this surface should be repairing".
+  const sealsAPrefix = (src) => src.includes("from '../_shared/anthropicCache.ts'");
+  const COMPILE_SURFACES = shellDirs.filter((name) => sealsAPrefix(shellSrc(name)));
+
+  it('discovery is non-vacuous and finds the five walled surfaces plus interpret', () => {
+    expect(COMPILE_SURFACES.length).toBeGreaterThanOrEqual(6);
+    for (const expected of [
+      'custom-content', 'construct-settlement', 'construct-realm',
+      'style-overhaul', 'surveyor-autonomy', 'interpret-session',
+    ]) {
+      expect(COMPILE_SURFACES, `discovery lost '${expected}'`).toContain(expected);
+    }
+  });
+
+  it.each(COMPILE_SURFACES)('%s runs its draft through runWithRepair', (name) => {
+    const src = shellSrc(name);
+    expect(
+      src.includes("from '../_shared/repairLoop.ts'"),
+      `${name} seals a cache prefix but does not import the formative loop. A surface that `
+      + `skips it degrades silently: the wall still drops bad output, the human still reads `
+      + `it, and nothing anywhere reds. Wire runWithRepair around the parse+validate step.`,
+    ).toBe(true);
+    expect(src).toMatch(/await runWithRepair\(\{/);
+  });
+
+  it.each(COMPILE_SURFACES)('%s reuses the SEALED prefix as the repair base prompt', (name) => {
+    // basePrompt must be the already-built prompt, so the repair tail is appended after
+    // the cache marker and the charter is cache-READ rather than re-billed every round.
+    expect(shellSrc(name)).toMatch(/basePrompt:\s*capturedPrompt/);
+  });
+
+  it.each(COMPILE_SURFACES)('%s takes its round budget from the L-3a tier class', (name) => {
+    const src = shellSrc(name);
+    // The rounds come from the resolver's tierClass, never from a per-surface literal:
+    // one dial, owner-switched, for the whole ladder.
+    expect(src).toMatch(/repairRoundsForTierClass\(\s*resolvedModel\.tierClass\s*\)/);
+    expect(src).toMatch(/maxRounds:\s*repairRounds/);
+    expect(src).not.toMatch(/maxRounds:\s*[1-9]/);
+  });
+
+  it.each(COMPILE_SURFACES)('%s sums repair-round tokens into its ONE COGS row', (name) => {
+    const src = shellSrc(name);
+    expect(src).toContain('newRepairUsage()');
+    expect(src).toMatch(/repairUsage\.inputTokens\s*\?\?/);
+    expect(src).toMatch(/repairUsage\.outputTokens\s*\?\?/);
+    // Exactly one usage row per credited call, as before: the loop adds rounds, not rows.
+    expect((src.match(/from\('ai_usage_events'\)\.insert/g) || []).length).toBe(1);
+    expect((src.match(/rpc\('spend_credits'/g) || []).length).toBe(1);
+  });
+
+  it('the tier dial carries the OWNER-SWITCHED shape, and no other (drift is not activation)', () => {
+    // THE SWITCH WAS THROWN 2026-07-27 by the owner, in writing, naming the activation batch
+    // ("tier values, repair rounds, thinking budgets — one signing") and ordering it finished.
+    // This guard's job does not end at activation, it changes: it stopped an accidental merge
+    // from activating the dial, and now it stops an accidental edit from RE-TUNING it. The
+    // shape below is the one the design recorded as INTENDED long before the switch, so a
+    // value that is neither 0/1/2 nor a fresh owner decision reds here.
+    // VETO = restore 0/0/0 in repairLoop.ts and the three pins in repairLoop.test.ts; nothing
+    // else in the program depends on the dial being non-zero.
+    const dial = readFileSync(join(FN_DIR, '_shared', 'repairLoop.ts'), 'utf8');
+    const block = dial.slice(dial.indexOf('REPAIR_ROUNDS_BY_TIER: Readonly'));
+    expect(block).toMatch(/scout:\s*0/);       // a scout still gets no second chance
+    expect(block).toMatch(/journeyman:\s*1/);
+    expect(block).toMatch(/master:\s*2/);
+    // The thinking dial stays at zero on a CONFIRMED provider blocker (claude-opus-4-8
+    // rejects a fixed thinking budget with a 400), not on caution. Pinned so that clearing
+    // the blocker is a deliberate act with this comment in front of it.
+    const resolver = readFileSync(join(FN_DIR, 'ai-analyst', 'modelResolver.ts'), 'utf8');
+    const think = resolver.slice(resolver.indexOf('THINKING_BUDGET_BY_TIER: Readonly'));
+    expect(think).toMatch(/scout:\s*0/);
+    expect(think).toMatch(/journeyman:\s*0/);
+    expect(think).toMatch(/master:\s*0/);
+  });
+
+  it('every assertion above has an executed negative control (this wall is not vacuous)', () => {
+    // 1. Discovery: a sealing shell is found, a non-sealing one is not.
+    const pretend = "import { splitForAnthropic } from '../_shared/anthropicCache.ts';\nconst x = 1;";
+    expect(sealsAPrefix(pretend)).toBe(true);
+    expect(sealsAPrefix("import { serve } from 'https://deno.land/std/http/server.ts';")).toBe(false);
+    // 2. A sealing shell with no loop import fails the wiring assertion.
+    expect(pretend.includes("from '../_shared/repairLoop.ts'")).toBe(false);
+    expect(/await runWithRepair\(\{/.test(pretend)).toBe(false);
+    // 3. A loop fed a REBUILT prompt (which would re-bill the charter every round instead
+    //    of reading it from cache) fails the base-prompt assertion.
+    expect(/basePrompt:\s*capturedPrompt/.test('basePrompt: buildContentPrompt(intent)')).toBe(false);
+    expect(/basePrompt:\s*capturedPrompt/.test('basePrompt: capturedPrompt,')).toBe(true);
+    // 4. A surface that hard-codes its own round budget, bypassing the owner-switched
+    //    dial, fails the tier assertion in both directions.
+    expect(/maxRounds:\s*[1-9]/.test('maxRounds: 2,')).toBe(true);
+    expect(/maxRounds:\s*[1-9]/.test('maxRounds: repairRounds,')).toBe(false);
+    expect(/repairRoundsForTierClass\(\s*resolvedModel\.tierClass\s*\)/.test('const repairRounds = 2;')).toBe(false);
+    // 5. A second COGS row (one per round) is exactly what the metering assertion forbids.
+    const twoRows = "from('ai_usage_events').insert({}) ... from('ai_usage_events').insert({})";
+    expect((twoRows.match(/from\('ai_usage_events'\)\.insert/g) || []).length).toBe(2);
   });
 });

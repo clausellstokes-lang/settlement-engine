@@ -1,0 +1,218 @@
+[
+  {
+    "id": "s_0f1e2d3c4b5a6879",
+    "name": "Kelder's Reach",
+    "tier": "town",
+    "seed": "kelder-4410",
+    "toggles": {
+      "institutionToggles": {},
+      "categoryToggles": {},
+      "goodsToggles": {},
+      "servicesToggles": {
+        "healing": {
+          "require": true
+        }
+      }
+    },
+    "config": {
+      "settType": "town",
+      "_seed": "kelder-4410",
+      "terrain": "coast",
+      "culture": "norse",
+      "tradeRouteAccess": "port"
+    },
+    "campaignState": {
+      "phase": "canon",
+      "eventLog": [
+        {
+          "tick": 0,
+          "kind": "canonized",
+          "at": "2026-07-01T00:00:00.000Z"
+        }
+      ],
+      "systemState": {
+        "stability": "holding",
+        "notes": []
+      },
+      "locks": {},
+      "canonizedAt": "2026-07-01T00:00:00.000Z",
+      "generatedAt": "2026-06-20T00:00:00.000Z"
+    },
+    "versionHistory": [
+      {
+        "id": "v1",
+        "at": "2026-07-01T00:00:00.000Z",
+        "label": "canonized"
+      }
+    ],
+    "settlement": {
+      "name": "Kelder's Reach",
+      "tier": "town",
+      "population": 3400,
+      "config": {
+        "terrain": "coast",
+        "terrainType": "coast",
+        "culture": "norse",
+        "tradeRouteAccess": "port",
+        "monsterThreat": "low"
+      },
+      "stress": [
+        {
+          "type": "faction",
+          "label": "Harbour Feud",
+          "summary": "Two shipping houses fight for the deep-water berths.",
+          "crisisHook": "One arson at the wrong warehouse and the wharf burns."
+        },
+        {
+          "type": "resource",
+          "label": "Salt Shortage",
+          "summary": "The inland salt road has been cut by spring floods.",
+          "crisisHook": "Without salt the season's catch spoils on the quay."
+        }
+      ],
+      "economicState": {
+        "prosperity": {
+          "tier": "Comfortable"
+        },
+        "primaryExports": [
+          {
+            "name": "salt cod",
+            "volume": "high"
+          },
+          {
+            "name": "amber",
+            "volume": "seasonal"
+          },
+          {
+            "name": "timber",
+            "volume": "steady"
+          }
+        ],
+        "safetyProfile": {
+          "safetyLabel": "Orderly",
+          "safetyDesc": "The harbour watch keeps the quays lit after dark.",
+          "crimeTypes": [
+            {
+              "type": "smuggling",
+              "desc": "Amber leaves untaxed through the fishing fleet."
+            },
+            {
+              "type": "extortion",
+              "desc": "Berth-fees are 'negotiated' by the larger house."
+            }
+          ]
+        }
+      },
+      "economicViability": {
+        "summary": "Viable — the port earns its keep three ways over.",
+        "metrics": {
+          "foodBalance": {
+            "dailyProduction": 4200,
+            "dailyNeed": 3800,
+            "deficit": 0,
+            "importCoverage": 0,
+            "magicFoodOffset": 0
+          }
+        }
+      },
+      "powerStructure": {
+        "government": "Harbour Council",
+        "factions": [
+          {
+            "name": "Kelderhouse",
+            "isGoverning": true,
+            "power": "dominant",
+            "desc": "The founding shipping family; holds the deep-water berths."
+          },
+          {
+            "name": "The Amber Ring",
+            "isGoverning": false,
+            "power": "significant",
+            "desc": "A cartel of amber traders with more coin than title."
+          }
+        ],
+        "conflicts": [
+          {
+            "factions": [
+              "Kelderhouse",
+              "The Amber Ring"
+            ],
+            "issue": "control of the deep-water berths",
+            "stakes": "the tariff on every keel that ties up at the Reach"
+          }
+        ]
+      },
+      "history": {
+        "historicalCharacter": "A harbour that has out-traded three larger rivals up the coast.",
+        "founding": {
+          "reason": "A sheltered deep-water bay on a hostile shore.",
+          "initialChallenge": "Every winter storm tried to silt the channel closed.",
+          "overcoming": "Kelder's first breakwater still holds the mouth open."
+        },
+        "historicalEvents": [
+          {
+            "type": "trade",
+            "name": "The Amber Season",
+            "yearsAgo": 12,
+            "description": "A wreck up the coast made the Reach the only amber market for a year."
+          }
+        ],
+        "currentTensions": [
+          {
+            "type": "economic",
+            "severity": "simmering",
+            "description": "The Amber Ring wants a berth Kelderhouse won't sell."
+          }
+        ]
+      },
+      "institutions": [
+        {
+          "name": "The Long Quay",
+          "category": "Economy",
+          "desc": "The deep-water wharf that made the town."
+        },
+        {
+          "name": "Salt-House",
+          "category": "Economy",
+          "desc": "Where the catch is packed — when there is salt."
+        },
+        {
+          "name": "The Harbour Watch",
+          "category": "Government",
+          "desc": "A paid watch, unusual for a town this size."
+        }
+      ],
+      "npcs": [
+        {
+          "name": "Astrid Kelder",
+          "role": "Harbourmistress",
+          "goal": {
+            "short": "Keep every deep-water berth in the family's hands."
+          },
+          "secret": {
+            "what": "The breakwater is failing and she is hiding the cost."
+          }
+        },
+        {
+          "name": "Rurik the Amberous",
+          "role": "Trade-boss",
+          "goal": {
+            "short": "Buy a berth by any means."
+          },
+          "secret": {
+            "what": "He has already bribed two of the watch."
+          }
+        }
+      ],
+      "defenseProfile": {
+        "readiness": {
+          "label": "Moderate"
+        }
+      },
+      "arrivalScene": "A breakwater arm curls around a forest of masts; gulls and gutting-knives everywhere.",
+      "pressureSentence": "Two houses are one arson away from burning their own wharf.",
+      "settlementReason": "The only deep-water shelter on a hard coast.",
+      "neighborRelationship": null
+    }
+  }
+]

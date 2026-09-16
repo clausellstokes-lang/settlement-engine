@@ -1,7 +1,7 @@
 /**
  * domain/userEdits.js — per-field user authorship.
  *
- * Premium users can hand-write descriptive
+ * Tier 5.4 of the roadmap. Premium users can hand-write descriptive
  * prose for any field in the dossier (NPC secrets, plot hooks,
  * institution descriptions, history beats, etc.). This module is the
  * pure-domain layer underneath the UI:
@@ -28,16 +28,25 @@
  *
  * AND `_authored: true` is set on the entity so the existing
  * domain/canonStatus.js tagger automatically promotes it to
- * `source: 'user'`, `canonStatus: 'canon'`, `locked: true`. Downstream
- * consumers (AI grounding, overlay verifier, engine regenerate)
- * already respect that flag — no new wiring needed for canon
- * preservation.
+ * `source: 'user'`, `canonStatus: 'canon'`, `locked: true`.
+ *
+ * That tag is what carries an edited NPC through a section reroll:
+ * domain/regenerationPreservation.js reads it via regenerationMode's
+ * preservation rules and re-seats the character in the fresh roster.
+ * SCOPE — only the NPC reroll has a preservation tail. An edited
+ * institution, faction, or history beat is still replaced wholesale by
+ * its own regenerate path.
  *
  * Pure, synchronous, no I/O. Callers either pass a draft (Immer) or a
  * mutable clone they own.
  */
 
 import { wallClockNow } from './clock.js';
+
+/**
+ * @typedef {{ value?: unknown, originalValue?: unknown, editedAt?: string }} EditRecord
+ * @typedef {{ _userEdits?: Record<string, EditRecord>, _authored?: boolean, name?: string, faction?: string, [key: string]: unknown }} EditableEntity
+ */
 
 // ── Editable-field registry ────────────────────────────────────────────
 //
@@ -50,6 +59,7 @@ import { wallClockNow } from './clock.js';
 // the UI may expose for editing. Use `isEditablePath(type, path)` to
 // gate user input.
 
+/** @type {Readonly<Record<string, readonly string[]>>} */
 export const EDITABLE_FIELDS = Object.freeze({
   npc: Object.freeze([
     'goal.short',
@@ -102,23 +112,17 @@ export const EDITABLE_ENTITY_TYPES = Object.freeze(Object.keys(EDITABLE_FIELDS))
  * Is the given (type, path) pair user-editable? Type is one of
  * EDITABLE_ENTITY_TYPES. Returns false for unknown types / paths so
  * the UI can use this as a strict gate.
- */
-/**
- * @param {any} type
- * @param {any} path
+ * @param {string} type @param {string} path @returns {boolean}
  */
 export function isEditablePath(type, path) {
-  const allowed = /** @type {any} */ (EDITABLE_FIELDS)[type];
+  const allowed = EDITABLE_FIELDS[type];
   if (!allowed) return false;
   return allowed.includes(path);
 }
 
 // ── Path helpers ───────────────────────────────────────────────────────
 
-/**
- * @param {any} obj
- * @param {any} path
- */
+/** @param {Record<string, any> | null | undefined} obj @param {string} path @returns {any} */
 function getAtPath(obj, path) {
   if (obj == null) return undefined;
   const keys = path.split('.');
@@ -130,11 +134,7 @@ function getAtPath(obj, path) {
   return ref;
 }
 
-/**
- * @param {any} obj
- * @param {any} path
- * @param {any} value
- */
+/** @param {Record<string, any> | null | undefined} obj @param {string} path @param {unknown} value @returns {any} */
 function setAtPath(obj, path, value) {
   if (obj == null) return obj;
   const keys = path.split('.');
@@ -161,12 +161,12 @@ function setAtPath(obj, path, value) {
  * Sets `entity._authored = true` so canonStatus picks it up as
  * `source: 'user'` automatically.
  *
- * @param {any} entity         The entity to mutate (caller-owned).
+ * @param {EditableEntity | null | undefined} entity         The entity to mutate (caller-owned).
  * @param {string} path           Dotted path to the field.
  * @param {string} newValue       The user-authored value.
- * @param {object} [options]
+ * @param {Object} [options]
  * @param {string} [options.editedAt]  ISO timestamp (defaults to now).
- * @returns {any} The same entity (for chaining).
+ * @returns {EditableEntity | null | undefined} The same entity (for chaining).
  */
 export function applyUserEdit(entity, path, newValue, options = {}) {
   if (!entity || typeof entity !== 'object' || typeof path !== 'string' || !path) {
@@ -204,9 +204,9 @@ export function applyUserEdit(entity, path, newValue, options = {}) {
  *
  * No-op if the path isn't edited.
  *
- * @param {any} entity
+ * @param {EditableEntity | null | undefined} entity
  * @param {string} path
- * @returns {any} The same entity (for chaining).
+ * @returns {EditableEntity | null | undefined} The same entity (for chaining).
  */
 export function revertUserEdit(entity, path) {
   if (!entity || typeof entity !== 'object') return entity;
@@ -226,7 +226,7 @@ export function revertUserEdit(entity, path) {
 /**
  * Revert EVERY user edit on `entity`. Convenience for the
  * "Revert all" affordance.
- * @param {any} entity
+ * @param {EditableEntity | null | undefined} entity @returns {EditableEntity | null | undefined}
  */
 export function revertAllEdits(entity) {
   if (!entity || typeof entity !== 'object' || !entity._userEdits) return entity;
@@ -239,7 +239,7 @@ export function revertAllEdits(entity) {
 /**
  * List of dotted paths that have been user-edited on this entity.
  * Returns [] for entities with no edits.
- * @param {any} entity
+ * @param {EditableEntity | null | undefined} entity @returns {string[]}
  */
 export function getEditedPaths(entity) {
   if (!entity || !entity._userEdits) return [];
@@ -248,8 +248,7 @@ export function getEditedPaths(entity) {
 
 /**
  * Is the given path user-edited on this entity?
- * @param {any} entity
- * @param {any} path
+ * @param {EditableEntity | null | undefined} entity @param {string} path @returns {boolean}
  */
 export function isEdited(entity, path) {
   return !!(entity && entity._userEdits && Object.prototype.hasOwnProperty.call(entity._userEdits, path));
@@ -257,7 +256,7 @@ export function isEdited(entity, path) {
 
 /**
  * Does the entity have any user edits at all?
- * @param {any} entity
+ * @param {EditableEntity | null | undefined} entity @returns {boolean}
  */
 export function hasAnyEdit(entity) {
   return getEditedPaths(entity).length > 0;
@@ -266,12 +265,11 @@ export function hasAnyEdit(entity) {
 /**
  * The pre-edit value at `path`. Returns null if the path is not
  * edited. Use this for "Revert to generated" tooltips.
- * @param {any} entity
- * @param {any} path
+ * @param {EditableEntity | null | undefined} entity @param {string} path @returns {unknown}
  */
 export function getOriginalValue(entity, path) {
   if (!isEdited(entity, path)) return null;
-  return entity._userEdits[path].originalValue ?? null;
+  return (/** @type {{ _userEdits: Record<string, EditRecord> }} */ (entity))._userEdits[path].originalValue ?? null;
 }
 
 /**
@@ -279,8 +277,7 @@ export function getOriginalValue(entity, path) {
  * returns the live value — the underlying field stays in sync with
  * the edit record, so this is equivalent to a path read. Provided so
  * callers don't need to know whether a field is edited.
- * @param {any} entity
- * @param {any} path
+ * @param {EditableEntity | null | undefined} entity @param {string} path @returns {any}
  */
 export function getEffectiveValue(entity, path) {
   return getAtPath(entity, path);
@@ -290,12 +287,11 @@ export function getEffectiveValue(entity, path) {
  * The full edit record at `path` ({ value, originalValue, editedAt })
  * or null if not edited. Useful for UI surfaces that want to show the
  * timestamp.
- * @param {any} entity
- * @param {any} path
+ * @param {EditableEntity | null | undefined} entity @param {string} path @returns {EditRecord | null}
  */
 export function getEditRecord(entity, path) {
   if (!isEdited(entity, path)) return null;
-  return entity._userEdits[path];
+  return (/** @type {{ _userEdits: Record<string, EditRecord> }} */ (entity))._userEdits[path];
 }
 
 // ── Public API: settlement-level walking ───────────────────────────────
@@ -318,10 +314,7 @@ const ENTITY_ARRAY_PATHS = Object.freeze([
   ['history', 'currentTensions'],
 ]);
 
-/**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {any} segments
- */
+/** @param {Record<string, any> | null | undefined} settlement @param {readonly string[]} segments @returns {EditableEntity[] | null} */
 function readNestedArray(settlement, segments) {
   let ref = settlement;
   for (const seg of segments) {
@@ -342,10 +335,12 @@ function readNestedArray(settlement, segments) {
  * `kind` is the singular entity type ('npc' / 'faction' / 'institution'
  * / 'historicalEvent' / 'currentTension' / 'hook' / 'plotHook' /
  * 'condition' / 'supplyChain' / 'settlement').
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {EditableEntity | null | undefined} settlement
+ * @returns {Array<{ kind: string, entityIndex: number, entity: EditableEntity, path: string, record: EditRecord | undefined }>}
  */
 export function walkUserEdits(settlement) {
-  const out = /** @type {any[]} */ ([]);
+  /** @type {Array<{ kind: string, entityIndex: number, entity: EditableEntity, path: string, record: EditRecord | undefined }>} */
+  const out = [];
   if (!settlement || typeof settlement !== 'object') return out;
 
   // Settlement root edits first.
@@ -355,10 +350,11 @@ export function walkUserEdits(settlement) {
       entityIndex: -1,
       entity: settlement,
       path,
-      record: settlement._userEdits[path],
+      record: (/** @type {Record<string, EditRecord>} */ (settlement._userEdits))[path],
     });
   }
 
+  /** @type {Record<string, string>} */
   const KIND_BY_FIELD = {
     npcs: 'npc',
     institutions: 'institution',
@@ -376,7 +372,7 @@ export function walkUserEdits(settlement) {
     const arr = readNestedArray(settlement, segments);
     if (!arr) continue;
     const leaf = segments[segments.length - 1];
-    const kind = /** @type {any} */ (KIND_BY_FIELD)[leaf] || leaf;
+    const kind = KIND_BY_FIELD[leaf] || leaf;
     arr.forEach((entity, idx) => {
       for (const path of getEditedPaths(entity)) {
         out.push({
@@ -384,7 +380,7 @@ export function walkUserEdits(settlement) {
           entityIndex: idx,
           entity,
           path,
-          record: entity._userEdits[path],
+          record: (/** @type {Record<string, EditRecord>} */ (entity._userEdits))[path],
         });
       }
     });
@@ -394,7 +390,7 @@ export function walkUserEdits(settlement) {
 
 /**
  * Total count of user edits anywhere in the settlement tree.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {EditableEntity | null | undefined} settlement @returns {number}
  */
 export function countSettlementEdits(settlement) {
   return walkUserEdits(settlement).length;
@@ -403,7 +399,7 @@ export function countSettlementEdits(settlement) {
 /**
  * True if any field anywhere in the settlement is user-edited. Powers
  * the "Edited" badge on the dossier header.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {EditableEntity | null | undefined} settlement @returns {boolean}
  */
 export function isSettlementEdited(settlement) {
   return countSettlementEdits(settlement) > 0;
@@ -413,13 +409,13 @@ export function isSettlementEdited(settlement) {
  * A compact `[ "kind: label > path" ]` summary suitable for tooltips
  * and audit logs. Entity labels default to the entity's `name` /
  * `faction` / index when no name is present.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {EditableEntity | null | undefined} settlement @returns {string[]}
  */
 export function summarizeUserEdits(settlement) {
   const tuples = walkUserEdits(settlement);
   return tuples.map(({ kind, entity, entityIndex, path }) => {
     if (kind === 'settlement') return `settlement > ${path}`;
-    const label = entity?.name || entity?.faction || `#${entityIndex}`;
+    const label = entity?.faction || entity?.name || `#${entityIndex}`;
     return `${kind}: ${label} > ${path}`;
   });
 }

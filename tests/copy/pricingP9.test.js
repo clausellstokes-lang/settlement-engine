@@ -17,7 +17,6 @@
 
 import { describe, it, expect } from 'vitest';
 import { tx, t, en } from '../../src/copy/index.js';
-import { COPY } from '../../src/copy/strings.js';
 
 // Words that would mean "we're selling SIZE as premium". Used to scan the
 // simulation-led premium copy.
@@ -158,9 +157,11 @@ describe('footer links restored', () => {
 });
 
 describe('new simulation-intent pricing moments resolve copy', () => {
-  it('the new moments exist in the canonical registry (strings.js)', () => {
+  // LINEAGE ADAPT (master merge W6): this lineage retired strings.js's
+  // pricing.moments registry into en.moments.<reason>, resolved via tx().
+  it('the new moments exist in the canonical registry (en.moments)', () => {
     for (const reason of ['first_advance_attempt', 'war_layer_curiosity', 'pantheon_preview']) {
-      const m = COPY.pricing.moments[reason];
+      const m = tx(`moments.${reason}`);
       expect(m, reason).toBeDefined();
       expect(m.headline.length).toBeGreaterThan(0);
       expect(m.body.length).toBeGreaterThan(0);
@@ -170,7 +171,7 @@ describe('new simulation-intent pricing moments resolve copy', () => {
   });
 
   it('map_realm_teaser is the canonical realm-unlock moment (single surface)', () => {
-    const m = COPY.pricing.moments.map_realm_teaser;
+    const m = tx('moments.map_realm_teaser');
     expect(m).toBeDefined();
     expect(`${m.headline} ${m.body}`).toMatch(SIMULATION_WORDS);
   });

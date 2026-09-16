@@ -66,12 +66,27 @@ describe('institutionClassify — id-first === name rule for the whole catalog (
     expect(institutionMatchesRegex({ name: 'Blacksmith' }, RE)).toBe(false);
   });
 
-  test('unstamped custom institutions fall to the name predicate (unchanged legacy behavior)', () => {
+  test('provenance-free legacy institutions retain name predicates', () => {
     expect(institutionIsFoodAnchor({ name: 'Communal granary' })).toBe(true);
     expect(institutionIsFoodAnchor({ name: 'Sawmill' })).toBe(false);
     expect(institutionIsFoodAnchor({ name: 'Blacksmith' })).toBe(false);
     expect(institutionIsLawOrder({ name: 'Village court' })).toBe(true);
     expect(institutionIsLawOrder({ name: 'Town watch' })).toBe(true);
     expect(institutionIsLawOrder({ name: 'Tavern' })).toBe(false);
+  });
+
+  test('current custom presentation names cannot acquire native classifier mechanics', () => {
+    const custom = name => ({
+      name,
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: `definition:institutions:${name}`,
+    });
+
+    expect(institutionIsFoodAnchor(custom('Town granary'))).toBe(false);
+    expect(institutionIsLawOrder(custom('Town watch'))).toBe(false);
+    expect(institutionMatchesRegex(custom('Mages guild'), /mage|wizard/i))
+      .toBe(false);
   });
 });

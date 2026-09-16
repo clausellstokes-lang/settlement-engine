@@ -2,6 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { consolePiiLiteralOffenders } from './edgeLogGuard.mjs';
 
 const root = fileURLToPath(new URL('../supabase/functions/', import.meta.url));
 const failures = [];
@@ -69,6 +70,10 @@ for (const file of files) {
   if (/const\s+guard\s*=\s*botGuard/.test(source) && /if\s*\(\s*guard\s*\)\s*return\s+guard\b/.test(source)) {
     failures.push(`${rel}: botGuard result must check guard.reject, not the wrapper object`);
   }
+
+  // security-2: no console.* call may embed a literal email (PII must flow through
+  // redact() in _shared/log.ts, never be baked into a raw log line).
+  failures.push(...consolePiiLiteralOffenders(source, rel));
 }
 
 if (failures.length) {

@@ -1,0 +1,32 @@
+export const meta = {
+  name: 'corruption-web-design-recon',
+  description: 'Read-only recon of the compromise/corruption system for the foreign-leash design',
+  phases: [{ title: 'Recon', detail: '3 read-only surveys: effect layer, covert seams, faction/org model' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  required: ['summary', 'facts', 'hazards', 'reuse', 'openQuestions'],
+  properties: {
+    summary: { type: 'string' },
+    facts: { type: 'array', items: { type: 'object', required: ['point', 'path'], properties: { point: { type: 'string' }, path: { type: 'string' } } } },
+    hazards: { type: 'array', items: { type: 'string' } },
+    reuse: { type: 'array', items: { type: 'string' } },
+    openQuestions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `You are a READ-ONLY recon agent in /Users/cstokes/Desktop/settlement-engine (branch review-fixes-2026-07-08). Do NOT run tests/builds, write nothing, no git state changes (read-only git ok). A parallel implementer may have unstaged work — ignore it. Read whole files. Owner vocabulary: "compromised"/compromise-tag = corruption — ONE system, covert vs revealed. Context: we are DESIGNING (not building) the generalization of corruption so the LEASH-HOLDER (beneficiary) can be a foreign settlement/court, a foreign faction, or a foreign criminal org (incl. a cutout: foreign power hires the LOCAL org) while the local influence-and-effect mechanics stay byte-identical. Return the structured object: summary (<300 words), facts (exact shapes/functions with paths), hazards, reuse, openQuestions.`
+
+const BRIEFS = [
+  { key: 'effect-layer', prompt: `${COMMON}\n\nYOUR SLICE — the compromise-tag DATA MODEL + EFFECT layer. Find where compromise/corruption state lives (search: compromis, corrupt, covert, revealed, criminal): the tag's exact shape (fields, on institutions? NPCs? factions?), WHO can hold the leash today (is the criminal org reference explicit or implicit?), what EFFECTS a compromised entity has on the settlement (economy skim, watch effectiveness, decision influence — exact mechanics + where applied), how compromise is CREATED (generation-time? events? which?), how covert→revealed transitions happen (what triggers, what changes), how it interacts with the world-pulse/tick if at all, and how undo/regen/persistence treat the tags (lifecycle paths).` },
+  { key: 'covert-seams', prompt: `${COMMON}\n\nYOUR SLICE — the COVERT/DM-TRUTH seams. Map the includeCovert/includeGroundTruth selector convention (where defined, which surfaces pass what), how publicSafe/playerView/gallery/PDF/AI-grounding each treat compromise data (free/anon must never see covert truth — law 3), the F4 entity-token-leak fix (what leaked, how the §6 degrade path killed it), and every TEST pinning these seams. Also: how the dossier RENDERS corruption to the DM (which tab/surface, what voice) and to players (what degraded form, if any).` },
+  { key: 'faction-org-model', prompt: `${COMMON}\n\nYOUR SLICE — the FACTION/CRIMINAL-ORG model + cross-settlement references. How factions are represented per settlement (shape, roles, powerStructure seats — factionRoles.js), how criminal organizations specifically are modeled (a faction category? dedicated shape?), whether ANY cross-settlement entity references exist today (inter-settlement relationship links, canon relationships Lane-2, campaign realm graph nodes/edges, war/trade referencing foreign factions), how the spatial/campaign layer identifies settlements+factions stably (ids), and what the smuggle-route/covert machinery in the spatial layer already models (rumorNetwork covert lineages, smuggling in commodityFlow). This tells the design what a FOREIGN leash reference can point at and travel on.` },
+]
+
+phase('Recon')
+const results = await parallel(BRIEFS.map(b => () =>
+  agent(b.prompt, { label: `recon:${b.key}`, phase: 'Recon', schema: SCHEMA })
+    .then(r => ({ key: b.key, ...r }))
+))
+return { recon: results.filter(Boolean), missing: BRIEFS.filter((b,i)=>!results[i]).map(b=>b.key) }

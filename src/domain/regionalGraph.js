@@ -1,8 +1,8 @@
 /**
  * domain/regionalGraph.js — Typed neighbour graph.
  *
- * Neighbours are currently a free-form
- * list (or empty). This module promotes them to a typed graph where
+ * Tier 4.13 of the roadmap. Neighbours are currently a free-form
+ * list (or empty). Phase 30 promotes them to a typed graph where
  * each link has a canonical relationship type, a direction, and
  * propagation hints describing how events on the other settlement
  * affect this one.
@@ -13,18 +13,16 @@
  *     links: [{ from, to, relationshipType, severity, direction, propagationHints[] }]
  *   }
  *
- * Pure read-only. Composes factions (for "tax_authority"
- * inference) and substrate (for "supplier" / "market_hub"
+ * Pure read-only. Composes Phase 9 factions (for "tax_authority"
+ * inference) and Phase 17 substrate (for "supplier" / "market_hub"
  * inference based on trade connectivity).
  *
  * Active propagation (Ironmere mine collapse → Westford tool prices)
- * is reserved for a future tier — exposes the structural
+ * is reserved for a future tier — Phase 30 exposes the structural
  * graph that future propagation logic will read.
  */
 
-import { canonicalRelationshipLabel } from './relationships/canonicalRelationship.js';
 
-import { snakeCase } from './ids.js';
 // ── Catalog ──────────────────────────────────────────────────────────────
 
 export const REGIONAL_RELATIONSHIP_TYPES = Object.freeze([
@@ -43,11 +41,70 @@ export const REGIONAL_RELATIONSHIP_TYPES = Object.freeze([
   'other',
 ]);
 
+// ── Types ────────────────────────────────────────────────────────────────
+
+/**
+ * Object form of a raw neighbour entry (legacy free-form list item).
+ * @typedef {Object} NeighbourObj
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [regionalType]      explicit canonical type (wins)
+ * @property {string} [relationshipType]  legacy vocabulary
+ * @property {number} [severity]
+ * @property {string} [distanceCategory]
+ */
+
+/**
+ * A raw neighbour is either a bare name string or a NeighbourObj. The
+ * string arm is intersected with all-undefined props so property probes
+ * (`raw.regionalType` etc.) typecheck on the union without narrowing.
+ * @typedef {NeighbourObj | (string & {id?: undefined, name?: undefined, regionalType?: undefined, relationshipType?: undefined, severity?: undefined})} RawNeighbour
+ */
+
+/**
+ * One typed link of the regional graph.
+ * @typedef {Object} RegionalLink
+ * @property {string} from
+ * @property {string} to
+ * @property {string} toName
+ * @property {string} relationshipType   one of REGIONAL_RELATIONSHIP_TYPES
+ * @property {number} severity           0..1
+ * @property {string} direction          'incoming' | 'outgoing' | 'bidirectional'
+ * @property {string[]} propagationHints
+ * @property {Array<{source: string, effect: string, reason: string}>} contributors
+ */
+
+/**
+ * The settlement slice this module reads (legacy neighbour spellings).
+ * @typedef {Object} RegionalGraphSettlement
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {RawNeighbour[]} [neighbours]
+ * @property {RawNeighbour[]} [neighbourNetwork]
+ * @property {RawNeighbour[]} [neighborNetwork]
+ */
+
+/**
+ * @typedef {Object} RegionalGraph
+ * @property {string | null} center
+ * @property {Array<{id: string, name: string, role: string}>} nodes
+ * @property {RegionalLink[]} links
+ */
+
 // ── Helpers ──────────────────────────────────────────────────────────────
 
-/** @param {any} s */
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 
-/** @param {any} n */
+/**
+ * @param {RawNeighbour | null | undefined} n
+ * @returns {string | null}
+ */
 function neighbourId(n) {
   if (!n) return null;
   if (typeof n === 'string') return `settlement.${snakeCase(n)}`;
@@ -56,24 +113,28 @@ function neighbourId(n) {
   return null;
 }
 
-/** @param {any} n */
+/**
+ * @param {RawNeighbour | null | undefined} n
+ * @returns {string}
+ */
 function neighbourName(n) {
   if (typeof n === 'string') return n;
   return n?.name || n?.id || 'Unnamed';
 }
 
-// Map CANONICAL relationship labels → regional relationship types. Raw legacy
-// strings are first run through the shared canonicalRelationshipLabel normalizer,
-// so spelling/synonym variants ('ally', 'alliance', 'overlord',
-// 'trade_partners', 'coldwar', ...) are collapsed there rather than re-listed
-// here. This map only needs the canonical bases plus regional-only aliases.
+// Map legacy relationshipType strings → canonical regional relationship types.
+/** @type {Readonly<Record<string, string>>} */
 const LEGACY_RELATIONSHIP_MAP = Object.freeze({
   hostile:             'military_threat',
   cold_war:            'rival',
   rival:               'rival',
+  ally:                'protector',
   allied:              'protector',
+  alliance:            'protector',
   vassal:              'tax_authority',         // we are vassal -> they are tax authority
+  overlord:            'tax_authority',
   trade_partner:       'market_hub',
+  trade:               'market_hub',
   supplier:            'supplier',
   pilgrim:             'pilgrimage_center',
   pilgrimage:          'pilgrimage_center',
@@ -81,6 +142,7 @@ const LEGACY_RELATIONSHIP_MAP = Object.freeze({
   religious_superior:  'religious_superior',
   resource_partner:    'resource_provider',
   refugee_source:      'refugee_source',
+  smuggling:           'smuggling_partner',
   smuggling_partner:   'smuggling_partner',
   neutral:             'other',
 });
@@ -95,7 +157,10 @@ const NEIGHBOUR_NAME_PATTERNS = Object.freeze([
   { pattern: /(border|march|wild|frontier)/i,         type: 'military_threat' },
 ]);
 
-/** @param {any} rawNeighbour */
+/**
+ * @param {RawNeighbour | null | undefined} rawNeighbour
+ * @returns {string}
+ */
 function inferRelationshipType(rawNeighbour) {
   if (!rawNeighbour) return 'other';
   // Explicit canonical type wins
@@ -103,13 +168,9 @@ function inferRelationshipType(rawNeighbour) {
       && REGIONAL_RELATIONSHIP_TYPES.includes(rawNeighbour.regionalType)) {
     return rawNeighbour.regionalType;
   }
-  // Map legacy relationshipType — normalize spelling/synonym variants through
-  // the shared canonical label table first, then map the canonical
-  // base to a regional type.
-  const legacy = canonicalRelationshipLabel(
-    String(rawNeighbour.relationshipType || '').toLowerCase()
-  ).toLowerCase();
-  if (legacy && /** @type {Record<string, string>} */ (LEGACY_RELATIONSHIP_MAP)[legacy]) return /** @type {Record<string, string>} */ (LEGACY_RELATIONSHIP_MAP)[legacy];
+  // Map legacy relationshipType
+  const legacy = String(rawNeighbour.relationshipType || '').toLowerCase();
+  if (legacy && LEGACY_RELATIONSHIP_MAP[legacy]) return LEGACY_RELATIONSHIP_MAP[legacy];
   // Fall back to name pattern
   const name = String(rawNeighbour.name || '');
   for (const { pattern, type } of NEIGHBOUR_NAME_PATTERNS) {
@@ -118,13 +179,18 @@ function inferRelationshipType(rawNeighbour) {
   return 'other';
 }
 
-/** @param {any} rawNeighbour @param {string} relType */
+/**
+ * @param {RawNeighbour | null | undefined} rawNeighbour
+ * @param {string} relType
+ * @returns {number}
+ */
 function inferSeverity(rawNeighbour, relType) {
   // Explicit numeric severity wins
   if (typeof rawNeighbour?.severity === 'number') {
     return Math.max(0, Math.min(1, rawNeighbour.severity));
   }
   // Otherwise pick a category-default
+  /** @type {Record<string, number>} */
   const defaults = {
     military_threat:    0.7,
     rival:              0.5,
@@ -140,10 +206,13 @@ function inferSeverity(rawNeighbour, relType) {
     market_hub:         0.6,
     other:              0.3,
   };
-  return /** @type {Record<string, number>} */ (defaults)[relType] || 0.3;
+  return defaults[relType] || 0.3;
 }
 
-/** @param {string} relType */
+/**
+ * @param {string} relType
+ * @returns {'incoming' | 'outgoing' | 'bidirectional'}
+ */
 function inferDirection(relType) {
   // 'incoming' = the other settlement acts on us
   // 'outgoing' = we act on them
@@ -166,6 +235,7 @@ function inferDirection(relType) {
 }
 
 // What events on the other settlement should propagate here, and how?
+/** @type {Readonly<Record<string, readonly string[]>>} */
 const PROPAGATION_HINTS = Object.freeze({
   supplier:           ['DEPLETE_RESOURCE there → RESOURCE_PRESSURE here', 'cut route there → IMPORTS DROP here'],
   dependent:          ['unrest there → REFUGEE_WAVE here', 'collapse there → TAX_BASE narrows here'],
@@ -182,14 +252,21 @@ const PROPAGATION_HINTS = Object.freeze({
   other:              [],
 });
 
-/** @param {string} relType */
+/**
+ * @param {string} relType
+ * @returns {string[]}
+ */
 function propagationHintsFor(relType) {
-  return [...(/** @type {Record<string, string[]>} */ (PROPAGATION_HINTS)[relType] || [])];
+  return [...(PROPAGATION_HINTS[relType] || [])];
 }
 
 // ── Single-link derivation ───────────────────────────────────────────────
 
-/** @param {any} rawNeighbour @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {RawNeighbour | null | undefined} rawNeighbour
+ * @param {RegionalGraphSettlement | null | undefined} settlement
+ * @returns {RegionalLink | null}
+ */
 export function deriveRegionalLink(rawNeighbour, settlement) {
   if (!rawNeighbour) return null;
   const otherId = neighbourId(rawNeighbour);
@@ -217,25 +294,25 @@ export function deriveRegionalLink(rawNeighbour, settlement) {
 /**
  * Derive the full regional graph centered on this settlement.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {Object} RegionalGraph
+ * @param {RegionalGraphSettlement | null | undefined} settlement
+ * @returns {RegionalGraph}
  */
 export function deriveRegionalGraph(settlement) {
   if (!settlement) return { center: null, nodes: [], links: [] };
   const centerId = settlement.id || 'settlement.center';
   const centerName = settlement.name || 'Center';
 
+  /** @type {RawNeighbour[]} */
   const sources = [];
   if (Array.isArray(settlement.neighbours))        sources.push(...settlement.neighbours);
   if (Array.isArray(settlement.neighbourNetwork))  sources.push(...settlement.neighbourNetwork);
   if (Array.isArray(settlement.neighborNetwork))   sources.push(...settlement.neighborNetwork);
 
-  /** @type {any[]} */
-  const links = sources.map(n => deriveRegionalLink(n, settlement)).filter(Boolean);
+  const links = /** @type {RegionalLink[]} */ (sources.map(n => deriveRegionalLink(n, settlement)).filter(Boolean));
 
   const nodes = [
     { id: centerId, name: centerName, role: 'center' },
-    ...links.map(/** @param {any} l */ l => ({ id: l.to, name: l.toName, role: 'neighbour' })),
+    ...links.map(l => ({ id: l.to, name: l.toName, role: 'neighbour' })),
   ];
 
   return { center: centerId, nodes, links };
@@ -247,23 +324,31 @@ export function supportedRelationshipTypes() {
   return [...REGIONAL_RELATIONSHIP_TYPES];
 }
 
-/** Group links by relationship type. @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * Group links by relationship type.
+ * @param {RegionalGraphSettlement | null | undefined} settlement
+ * @returns {Record<string, number>}
+ */
 export function regionalBreakdown(settlement) {
   /** @type {Record<string, number>} */
   const out = {};
   for (const type of REGIONAL_RELATIONSHIP_TYPES) out[type] = 0;
-  const g = /** @type {any} */ (deriveRegionalGraph(settlement));
+  const g = deriveRegionalGraph(settlement);
   for (const l of g.links) {
     if (out[l.relationshipType] !== undefined) out[l.relationshipType] += 1;
   }
   return out;
 }
 
-/** Human-readable lines. @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * Human-readable lines.
+ * @param {RegionalGraphSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeRegional(settlement) {
-  const g = /** @type {any} */ (deriveRegionalGraph(settlement));
+  const g = deriveRegionalGraph(settlement);
   if (g.links.length === 0) return ['No structured regional neighbours.'];
-  return g.links.map(/** @param {any} l */ l =>
-    `${l.toName}: ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
+  return g.links.map(l =>
+    `${l.toName} — ${l.relationshipType} (${l.direction}, severity ${l.severity}).`
   );
 }

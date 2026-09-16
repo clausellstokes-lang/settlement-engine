@@ -22,7 +22,7 @@ import { advanceReligionStates } from '../../src/domain/worldPulse/religiousCont
 import { patronSnapshot } from '../../src/domain/worldPulse/religionState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const TICKS = 24;

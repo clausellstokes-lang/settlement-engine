@@ -29,6 +29,9 @@ import { defenseLedger } from '../defenseLedger.js';
 import { foodLedger } from '../foodLedger.js';
 import { deriveSystemVariable } from '../causalState.js';
 import { canonImports, canonExports } from '../canonicalAccessors.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
+import { deityTemper } from './deityAxes.js';
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 const clamp0100 = (/** @type {any} */ v) => Math.max(0, Math.min(100, Number(v) || 0));
@@ -178,8 +181,13 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
     `Population ${pop} sets the depth of the levy.`);
 
   // ── institutions: military + defensive ─────────────────────────────────────
-  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
-  const milInstCount = institutions.filter((/** @type {any} */ i) => MILITARY_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  // LIVE roster only — a calamity-flattened garrison/armory is a ruin, not a
+  // fighting force (ruin-filter class): milInstCount + materielInstHits below both
+  // read this filtered list, so a destroyed military institution contributes zero.
+  const institutions = liveInstitutions(s);
+  const milInstCount = institutions.filter((/** @type {any} */ i) => (
+    MILITARY_INSTITUTION_PATTERN.test(nativeSemanticName(i))
+  )).length;
   const led = defenseLedger(s);
   // The defense ledger's military score (walls + garrison) is the conserved
   // defensive-force quantity; blend it with the raw military-institution count.
@@ -198,7 +206,9 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   // law-order institution patterns use), never a fuzzy name-collection join.
   const exportNames = namesFrom(canonExports(s));
   const importNames = namesFrom(canonImports(s));
-  const materielInstHits = institutions.filter((/** @type {any} */ i) => MATERIEL_PATTERN.test(String(i?.name || ''))).length;
+  const materielInstHits = institutions.filter((/** @type {any} */ i) => (
+    MATERIEL_PATTERN.test(nativeSemanticName(i))
+  )).length;
   const materielHits =
     exportNames.filter((/** @type {string} */ n) => MATERIEL_PATTERN.test(n)).length
     + materielInstHits;
@@ -250,10 +260,14 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   // Embedded primary-deity temper (DORMANT until a deity is assigned — a deity-
   // free settlement reads none of this, preserving the dormancy guarantee).
   const deity = s?.config?.primaryDeitySnapshot;
-  const temper = deity && typeof deity === 'object' ? String(deity.temperAxis || deity.temper || '') : '';
-  if (/warlike|war/i.test(temper)) {
+  // Canonical temper DERIVATION (deityAxes.deityTemper — W-F5 retired temperAxis/
+  // temper). Returns undefined for a deity-free settlement ⇒ neither branch fires ⇒
+  // dormancy preserved. The old `deity.temperAxis || deity.temper` read those retired
+  // fields and was DEAD (always ''), so the will-facet deity bonus never applied.
+  const temper = deityTemper(deity);
+  if (temper === 'warlike') {
     will += 8; push('will', deity?._deityRef || 'primaryDeity', 'warlike_deity', +8, `${deity?.name || 'The patron deity'} blesses war.`);
-  } else if (/peace/i.test(temper)) {
+  } else if (temper === 'peacelike') {
     will -= 6; push('will', deity?._deityRef || 'primaryDeity', 'peaceful_deity', -6, `${deity?.name || 'The patron deity'} counsels peace.`);
   }
   will = clamp0100(will);

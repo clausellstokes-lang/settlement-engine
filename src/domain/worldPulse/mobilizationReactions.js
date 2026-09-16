@@ -70,6 +70,70 @@ const REACT_SEVERITY = Object.freeze({
 const PRE_EMPT_AGGR = 1.18;   // a notably belligerent neighbour strikes first
 const FORTIFY_AGGR = 0.95;    // a neutral-to-belligerent neighbour digs in
 
+// war-6 — the DE-ESCALATION half now BITES. negotiate / seek_allies carry a BOUNDED,
+// AUTO relationship nudge (applied through applyRelationshipPatch, like the strategy
+// levers) so a pacific reaction moves real diplomatic state instead of being a
+// narrative no-op — the missing counterweight to the martial reactions. Gentle deltas
+// (mean-reversion pulls them back over time) — a reaction is a pressure, not a shove.
+const REACT_NUDGE = 0.05;
+const REACT_NUDGE_SOFT = 0.04;
+const REACT_EFFECT = Object.freeze({
+  // negotiate: open talks with the MOBILIZER to defuse — warm the edge, cool the fear.
+  negotiate: Object.freeze({ trust: +REACT_NUDGE_SOFT, resentment: -REACT_NUDGE, fear: -REACT_NUDGE_SOFT }),
+  // seek_allies: reach toward a protector — a warmth + dependency overture.
+  seek_allies: Object.freeze({ trust: +REACT_NUDGE, dependency: +REACT_NUDGE_SOFT }),
+});
+
+// Loose sim shapes for the war-6 nudge helpers below (zero any-holes: the looseness
+// lives in the referenced typedefs' own baselines). EdgeStateView is the read-only
+// string-indexed view of an ensureRelationshipState record the nudge math reads.
+/** @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot */
+/** @typedef {import('./pulseShapes.js').RelationshipNudge} RelationshipNudge */
+/** @typedef {Record<string, unknown>} EdgeStateView */
+
+/** A bounded relationship-nudge patch from a reaction's scalar deltas + the CURRENT edge
+ *  state (applyRelationshipPatch SETS absolute values, so we read-then-clamp here).
+ *  @param {Readonly<Record<string, number>>} nudges @param {EdgeStateView|null|undefined} relState @returns {Record<string, number>} */
+function nudgePatch(nudges, relState) {
+  /** @type {Record<string, number>} */
+  const patch = {};
+  for (const [scalar, delta] of Object.entries(nudges)) {
+    patch[scalar] = clamp01((Number(relState?.[scalar]) || 0) + delta);
+  }
+  return patch;
+}
+
+/**
+ * The strongest NON-hostile neighbour of the reactor (for seek_allies) with its edge key,
+ * or null. Codepoint-stable tie-break; reads only the pre-tick snapshot (order-free).
+ * @param {PulseSnapshot} snapshot @param {string|number} reactorId @param {EdgeStateView} states @param {(id:string)=>number} strengthFor
+ * @returns {{ otherId: string, edgeKey: string, relState: EdgeStateView }|null}
+ */
+function strongestProtector(snapshot, reactorId, states, strengthFor) {
+  const id = String(reactorId);
+  /** @type {{ otherId: string, edgeKey: string, relState: EdgeStateView }|null} */
+  let best = null;
+  let bestStrength = -Infinity;
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const edgeKey = relationshipKeyFromEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[edgeKey]);
+    if (RIVAL_TYPES.has(String(relState.relationshipType))) continue; // reach for a NON-hostile tie
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a !== id && b !== id) continue;
+    const other = a === id ? b : a;
+    if (!snapshot?.byId?.has?.(other)) continue;
+    const s = strengthFor(other);
+    if (s > bestStrength || (s === bestStrength && (best == null || other < best.otherId))) {
+      bestStrength = s;
+      best = { otherId: other, edgeKey, relState };
+    }
+  }
+  return best;
+}
+
 /**
  * Resolve who is visibly mobilizing this tick from the persisted posture ledger
  * (the NEXT-tick ledger the war block already wrote onto worldState). Covert
@@ -93,12 +157,12 @@ function visibleMobilizers(worldState) {
  * Build one reaction candidate (probability 1 — the reaction is the DECISION; its
  * downstream roll governs whether it lands). Shares the `strategy:<reactor>`
  * exclusive tag so a reactor cannot both react AND make a separate strategy move.
- * @param {{ move: string, reactorId: string, mobilizerId: string, tick: number, severity: number, headline: string, summary: string, reasons: string[] }} args
+ * @param {{ move: string, reactorId: string, mobilizerId: string, tick: number, severity: number, headline: string, summary: string, reasons: string[], relationshipNudge?: RelationshipNudge|null }} args
  */
-function reactionCandidate({ move, reactorId, mobilizerId, tick, severity, headline, summary, reasons }) {
-  return {
+function reactionCandidate({ move, reactorId, mobilizerId, tick, severity, headline, summary, reasons, relationshipNudge = null }) {
+  const base = {
     id: `candidate.mobilization_reaction.${move}.${stablePart(reactorId)}.${stablePart(mobilizerId)}.${tick}`,
-    type: 'condition',
+    type: relationshipNudge ? 'relationship' : 'condition',
     candidateType: `mobilization_reaction_${move}`,
     ruleId: `mobilization_reaction_${move}`,
     ruleFamily: 'mobilization_reaction',
@@ -111,7 +175,14 @@ function reactionCandidate({ move, reactorId, mobilizerId, tick, severity, headl
     headline,
     summary,
     reasons: reasons.slice(0, 4),
-    metadata: { settlementId: String(reactorId), mobilizerId: String(mobilizerId), reactionMove: move },
+    metadata: {
+      settlementId: String(reactorId),
+      mobilizerId: String(mobilizerId),
+      reactionMove: move,
+      // war-6: applyRelationshipPatch stamps recentIncidents with this type so the drift
+      // reads the de-escalation/overture (a distinct event from the martial reactions).
+      ...(relationshipNudge ? { incidentType: relationshipNudge.incidentType } : {}),
+    },
     // The reactor's exclusive tag (allow-listed `strategy:<S>` in candidateEvents) so
     // a reactor's reaction and its own strategy move resolve as one slot.
     conflictTags: [`strategy:${String(reactorId)}`],
@@ -125,6 +196,17 @@ function reactionCandidate({ move, reactorId, mobilizerId, tick, severity, headl
       : undefined,
     generatedAtTick: tick,
   };
+  // war-6 — the pacific reactions (negotiate / seek_allies) carry a BOUNDED relationship
+  // nudge so choosing peace is never a mechanical no-op. Applied via applyRelationshipPatch
+  // (auto — no DM proposal, no label change, no wind-down).
+  if (relationshipNudge) {
+    return {
+      ...base,
+      relationshipKey: relationshipNudge.relationshipKey,
+      relationshipPatch: relationshipNudge.relationshipPatch,
+    };
+  }
+  return base;
 }
 
 /**
@@ -165,7 +247,7 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
   for (const mob of mobilizers) {
     const mobId = mob.id;
     // Codepoint-sorted edges incident to the mobilizer.
-    /** @type {Array<{ otherId: string, relType: string }>} */
+    /** @type {Array<{ otherId: string, relType: string, edgeKey: string, relState: EdgeStateView }>} */
     const incident = [];
     for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
       const edge = normalizeRelationshipEdge(rawEdge);
@@ -175,12 +257,13 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
       if (a !== mobId && b !== mobId) continue;
       const other = a === mobId ? b : a;
       if (!snapshot?.byId?.has?.(other)) continue;
-      const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
-      incident.push({ otherId: other, relType: String(relState.relationshipType || 'neutral') });
+      const edgeKey = relationshipKeyFromEdge(rawEdge);
+      const relState = ensureRelationshipState(edge, states[edgeKey]);
+      incident.push({ otherId: other, relType: String(relState.relationshipType || 'neutral'), edgeKey, relState });
     }
     incident.sort((x, y) => codepoint(x.otherId, y.otherId));
 
-    for (const { otherId, relType } of incident) {
+    for (const { otherId, relType, edgeKey, relState: mobEdgeState } of incident) {
       if (byReactor.has(otherId)) continue; // one reaction per reactor (first mobilizer wins)
       const isRival = RIVAL_TYPES.has(relType);
       const isDependent = DEPENDENT_TYPES.has(relType);
@@ -223,6 +306,20 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         negotiate: `${reactorName} opens talks to defuse ${mobName}'s mobilization before it threatens trade.`,
       })[move] || `${reactorName} reacts to ${mobName} mobilizing.`;
 
+      // war-6 — the pacific reactions gain a BOUNDED relationship nudge. negotiate warms
+      // the edge to the MOBILIZER (defuse); seek_allies reaches an overture toward the
+      // reactor's strongest non-hostile neighbour (a protector). Absent a valid edge the
+      // nudge is null and the reaction falls back to its (former) inert marker.
+      let relationshipNudge = null;
+      if (move === 'negotiate') {
+        relationshipNudge = { relationshipKey: edgeKey, relationshipPatch: nudgePatch(REACT_EFFECT.negotiate, mobEdgeState), incidentType: 'negotiation' };
+      } else if (move === 'seek_allies') {
+        const protector = strongestProtector(snapshot, otherId, states, strengthFor);
+        if (protector) {
+          relationshipNudge = { relationshipKey: protector.edgeKey, relationshipPatch: nudgePatch(REACT_EFFECT.seek_allies, protector.relState), incidentType: 'alliance_overture' };
+        }
+      }
+
       byReactor.set(otherId, reactionCandidate({
         move,
         reactorId: otherId,
@@ -234,7 +331,9 @@ export function evaluateMobilizationReactions(snapshot, pressureIdx, context = {
         reasons: [
           `${reactorName} is a ${relType} of the mobilizing ${mobName}.`,
           `Disposition ${aggr.toFixed(2)} (centered on 1.0) → ${move}.`,
+          ...(relationshipNudge ? [`A bounded ${Object.keys(relationshipNudge.relationshipPatch).join('/')} nudge (${relationshipNudge.incidentType}).`] : []),
         ],
+        relationshipNudge,
       }));
     }
   }

@@ -17,10 +17,16 @@
  *   5. The hydrateServicesToggles slice action applies the pure normalization.
  */
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { INSTITUTION_SERVICES } from '../../src/data/tradeGoodsData';
+import {
+  INSTITUTION_SERVICE_KEYS,
+} from '../../src/data/institutionServiceKeys.generated.js';
 import { createToggleSlice, normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 
 const FORCE   = { allow: true,  force: true,  forceExclude: false };
@@ -47,6 +53,12 @@ function matchServiceName(instName) {
 }
 
 describe('normalizeServicesToggles', () => {
+  test('compact boot projection preserves every catalog key and its order', () => {
+    expect(INSTITUTION_SERVICE_KEYS).toEqual(
+      Object.keys(INSTITUTION_SERVICES),
+    );
+  });
+
   test('remaps old display-name keys to the svcKey form the panel reads', () => {
     // "Grand Market" and "Village Chapel" are generated display names, not
     // INSTITUTION_SERVICES keys — the old bug keyed toggles under them.
@@ -153,5 +165,31 @@ describe('hydrateServicesToggles action', () => {
     expect(useStore.getState().servicesToggles).toEqual({
       [`${marketKey}_service_Price discovery`]: FORCE,
     });
+  });
+});
+
+// SB1 store-lifecycle — the migration must be WIRED to a product lifecycle path.
+// It was DEAD: servicesToggles IS persisted (index.js partialize), but nothing
+// normalized it — hydrateServicesToggles had no product caller and save-load wrote
+// the bag raw — so a returning user's legacy-keyed prefs silently stopped applying
+// and never self-healed. The fix runs the normalization in the store's
+// onRehydrateStorage. This source-scan reds if that wiring is ever dropped.
+describe('the services-toggle migration is wired into the store rehydrate path (store-lifecycle)', () => {
+  const indexSrc = readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), '../../src/store/index.js'),
+    'utf8',
+  );
+
+  test('index.js imports normalizeServicesToggles from toggleSlice', () => {
+    expect(indexSrc).toMatch(/import\s*\{[^}]*normalizeServicesToggles[^}]*\}\s*from\s*['"]\.\/toggleSlice\.js['"]/);
+  });
+
+  test('onRehydrateStorage applies normalizeServicesToggles to state.servicesToggles', () => {
+    const at = indexSrc.indexOf('onRehydrateStorage:');
+    expect(at, 'onRehydrateStorage handler not found in store/index.js').toBeGreaterThan(-1);
+    // The assignment must sit inside the rehydrate handler window — not merely
+    // somewhere else in the file.
+    const window = indexSrc.slice(at, at + 500);
+    expect(window).toMatch(/state\.servicesToggles\s*=\s*normalizeServicesToggles\(state\.servicesToggles\)/);
   });
 });

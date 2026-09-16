@@ -140,6 +140,35 @@ describe('save schema — entry + campaignState (local)', () => {
     assertShape(loaded, ENTRY_SCHEMA, 'entry');
   });
 
+  // ── F2: seed is a first-class part of the save contract ─────────────
+  test('save derives seed from settlement._seed when the caller omits it', async () => {
+    // Every live save path (SaveToLibraryButton, forkSample, auth-intent) calls
+    // save() WITHOUT a seed field; the seed lives only on the blob at _seed.
+    // The service boundary must lift it so replay/provenance survive a reload.
+    const id = await saves.save({
+      id: 4242,
+      name: 'Seed Bearer', tier: 'city',
+      settlement: { name: 'Seed Bearer', tier: 'city', population: 12000, _seed: 'blob-seed-xyz' },
+      config: { settType: 'city' },
+      institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+      // NO seed field — exactly how the real callers save.
+    });
+    const [loaded] = await saves.list();
+    expect(loaded.id).toBe(id);
+    expect(loaded.seed).toBe('blob-seed-xyz'); // recovered, not null
+  });
+
+  test('an explicit entry.seed still wins over the blob seed', async () => {
+    await saves.save({
+      id: 4243, name: 'Explicit', tier: 'town',
+      settlement: { name: 'Explicit', tier: 'town', _seed: 'blob-seed' },
+      config: {}, institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+      seed: 'explicit-seed',
+    });
+    const [loaded] = await saves.list();
+    expect(loaded.seed).toBe('explicit-seed');
+  });
+
   test('campaignState block has every required field after migration', async () => {
     // Plant a v1-shaped entry (no campaignState) to exercise the
     // migration path. Loaded entry must have a complete campaignState.

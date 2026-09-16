@@ -1,35 +1,32 @@
 # SettlementForge — Deploy guide
 
 Deployment has two halves: the **client app** (Vite SPA on Vercel) and the
-**backend** (Supabase Postgres + Edge Functions). The client redeploys from
-`master` through a CI-gated path — a push does NOT ship directly; CI must go
-green first, and (once the deploy-hook secret is set) a post-CI job triggers the
-actual build. The backend pieces need manual commands run with your Supabase +
-Stripe credentials.
+**backend** (Supabase Postgres + Edge Functions). A production client deployment
+may start only after the required CI jobs are green for the exact source commit;
+the backend pieces need attended commands with Supabase + Stripe credentials.
 
 ## Quick status check (post-push)
 
 After pushing to `origin/master`:
 
-1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate data/edge/map
-   → typecheck → lint → the full Vitest suite → build). The test count grows every
-   PR — the live number is whatever the CI run reports, not a figure pinned here.
-   Watch:
+1. **CI**: `.github/workflows/ci.yml` runs the same `npm run check` gate you run
+   locally (validate data/migration-head/edge/map → typecheck [full + domain-strict]
+   → lint → the full test suite → build → verify:dist). Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
-2. **Vercel deploy**: the push-triggered build is SKIPPED by the fail-closed
-   ignore-gate (`vercel.json` → `scripts/vercel-ignore-build.mjs`) because CI
-   hasn't reported yet. What actually ships is the `redeploy` job at the end of
-   `ci.yml`: after `check` + `e2e` + `deno-tests` all go green on a `master`
-   push, it POSTs the Vercel Deploy Hook, and that hook-triggered build passes
-   the (now-green) gate. This is OPT-IN — it no-ops unless the
-   `VERCEL_DEPLOY_HOOK_URL` secret is set (see *Gating production on CI*); until
-   then a green CI run leaves the deploy waiting on a manual dashboard Redeploy.
-   `vercel.json` points at `npx vite build` → `dist/`. Watch the Vercel
-   dashboard for the project.
+2. **Vercel deployment**: the push-time build is deliberately skipped while CI
+   is pending. The post-CI deploy/retrigger jobs proceed only after every required
+   check is green. `vercel.json` points at `npx vite build` → `dist/`.
 
 3. **Supabase**: nothing happens automatically. Run the manual steps
    below.
+
+4. **Release proof**: after the client, database, and functions are all live,
+   run `npm run ops:post-deploy` with the production health/database
+   configuration. It verifies source identity, both sides of the app/map CSP,
+   public health, contiguous migration history, and combined
+   obligation/application-command health before writing a release receipt. See
+   `docs/ops/POST_DEPLOY_VERIFICATION_RUNBOOK.md`.
 
 If the client app's already up but a new feature is missing, the cause
 is almost always **a) missing migration** or **b) stale edge-function
@@ -37,144 +34,49 @@ bundle**. Check the two manual sections.
 
 ## Gating production on CI
 
-**In-repo gate (wired and ARMED): `vercel.json` → `ignoreCommand`.** `vercel.json`
-sets `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`. Vercel runs that
-BEFORE every build and reads its exit code (exit 0 = skip build, exit 1 =
-proceed — Vercel's inverted convention). The script queries the GitHub Checks
-API for the commit being deployed and only PROCEEDS when the required checks
-(`check`, `e2e`, `deno-tests`) are all green.
+**In-repo half — DONE (finding F35).** `.github/workflows/ci.yml` now:
+- runs on **every branch push** (not just `master`/`main`), so feature branches
+  get the gate before a PR even exists;
+- runs the **domain strict-type ratchet** (`typecheck:domain:strict`) that the
+  local `npm run check` runs — CI and the local gate no longer diverge;
+- has **`deploy` and `redeploy` jobs** gated on the code/build, functional E2E,
+  production-build performance, Deno execution, security-coverage, and
+  hostile-locale determinism jobs. Both are `master`-only and safely no-op when
+  their respective secret is absent.
 
-**The gate is FAIL-CLOSED.** Inside a Vercel git deploy, anything that prevents
-verifying CI — a missing `GITHUB_CI_STATUS_TOKEN`, a network error reaching
-GitHub, a non-2xx response (bad/expired token, rate limit, 404), checks that
-haven't reported yet, or any required check that isn't `success` — BLOCKS the
-deploy (exit 0 = skip) rather than shipping unverified bytes. There is exactly
-one documented escape hatch: setting `VERCEL_ALLOW_UNGATED_DEPLOY=1` makes the
-script proceed UNGATED while emitting a loud warning (intended for a deliberate
-hotfix while the token is being rotated, never as a steady state). Runs that are
-NOT inside a Vercel git deploy (local `vercel build`, `vite preview`, missing git
-metadata) always proceed — the gate only ever governs production/preview deploys.
-
-To make the gate actually verify CI rather than just block, set a read-only
-`GITHUB_CI_STATUS_TOKEN` (a PAT with `repo:status` / checks read) in Vercel →
-Project → Settings → Environment Variables. Without that token every Vercel
-deploy is blocked (unless you set the `VERCEL_ALLOW_UNGATED_DEPLOY=1` opt-out),
-so provisioning the token is a required setup step, not an optional hardening one.
-See the script header in `scripts/vercel-ignore-build.mjs` for the full decision
-table.
-
-**Auto-deploy loop (opt-in): the CI `redeploy` job + `VERCEL_DEPLOY_HOOK_URL`.**
-The gate above only ever SKIPS or PROCEEDS — it never triggers a build. And it
-skips the push-triggered deployment every time: Vercel runs the ignoreCommand
-seconds after a push, long before CI (~10-15m) can conclude, so it always reads
-"required checks not yet reported" and skips. Vercel does NOT re-evaluate on its
-own once CI later goes green — that push's deployment is terminally skipped. The
-`redeploy` job at the end of `.github/workflows/ci.yml` closes the loop: on a
-`master` push, after `check` + `e2e` + `deno-tests` all succeed (`needs:` — a
-red or cancelled gating job skips it), it POSTs the **Vercel Deploy Hook**. That
-fires a FRESH deployment; Vercel re-runs the ignoreCommand on it, and this time
-the required checks ARE green, so the gate PROCEEDS and the build ships.
-
-This auto-deploy is **OFF until you set the secret** and non-breaking: the job
-no-ops (exits 0 with a log line) unless the `VERCEL_DEPLOY_HOOK_URL` GitHub
-Actions secret is present. To turn it on: Vercel → Project → Settings → Git →
-Deploy Hooks → create a hook on branch `master`, then paste its URL into GitHub →
-repo Settings → Secrets and variables → Actions as `VERCEL_DEPLOY_HOOK_URL`.
-Until that secret exists, nothing about the current flow changes — a green CI run
-leaves the deploy waiting on a manual dashboard Redeploy. Note the hook deploys
-the branch HEAD, which may have advanced past the commit whose CI fired it; that
-is safe because the ignoreCommand re-evaluates the required checks on whatever
-commit actually builds, so a red HEAD still cannot ship (and the newer commit's
-own CI run fires its own hook).
-
-**Migration-currency gate (fail-closed).** Even when CI is green, the deploy is
-BLOCKED if `supabase/applied-head.json` says production is behind the repo migration
-head — i.e. the code being shipped may reference a schema the live DB doesn't have
-yet. `npm run check`'s `validate:migration-head` only WARNS on this (the commit→push
-window is normal); the deploy gate is where it turns fatal. To ship: run
-`supabase db push`, bump `appliedHead` in the ledger, and redeploy. For a deliberate
-schema-free deploy while the ledger is legitimately behind, set
-`VERCEL_ALLOW_MIGRATION_DRIFT=1` (proceeds with a loud warning). Verified through the
-real `decideDeploy` in `tests/build/ciGateHardening.test.js`.
-
-**Edge functions are the one UNGATED path to production — deploy them by hand,
-deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
-and the DB has the `applied-head.json` currency gate above, but edge functions ship
-via a bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from
-whatever your **local working tree** contains. Nothing checks that CI is green,
-nothing checks the tree is clean, and — unlike the migration ledger — nothing records
-which commit's functions are live. This matters because the edge layer IS the money +
-auth trust boundary (`stripe-webhook`, `create-checkout`, `auth-recovery`). Two
-consequences to guard against by discipline:
-
-- **Deploy only from a clean tree at a pushed, CI-green commit.** Before deploying any
-  function, confirm `git status` is clean and the commit you're on is the one CI passed
-  on `origin/master`. Deploying with local edits present ships bytes that were never
-  tested and that no reviewer saw. Note the deploying commit SHA in your deploy record
-  (there is no automated ledger to consult later).
-- **`npm run check:edge-behavior` is FAIL-OPEN on a missing toolchain.** It runs the
-  edge type-check + behavioral suite when `deno` is on `PATH`, but **exits 0 (skips)
-  when deno is absent** — so a green local run does NOT prove the edge functions were
-  exercised. Install deno so the pre-push hook actually gates them, and never treat a
-  "skipped" edge check as a pass. CI's separate `deno-tests` job is the real gate, which
-  is exactly why you must only deploy from a commit that job passed.
-
-**Local convenience.** `npm run check` mirrors CI's `check` job (deliberately excludes
-the Deno edge tests, which are CI's separate `deno-tests` job). To run EVERYTHING CI
-runs in one command locally, use `npm run check:full` (= `check` + `check:edge-behavior`).
-The pre-push hook already runs both.
-
-For defense in depth, also do one of the two below (weakest → strongest):
+**Dashboard half — still required to make CI governance complete** (cannot be
+done from the repo). The checked-in ignore command fails closed while CI is
+pending, but repository code cannot configure branch protection, Vercel tokens,
+deploy-hook secrets, or disable a dashboard-side bypass. Complete one of the
+following operating models:
 
 1. **Branch protection + PR flow (minimum).** GitHub → Settings → Branches
    → add a rule for `master`: *Require status checks to pass before
-   merging* → select the **`check`** job, and *Require a pull request
-   before merging*. Stop pushing straight to `master`; land work via PRs.
-   Vercel still builds `master`, but `master` now only advances through a
-   CI-passed merge.
+   merging* → select **Validate, test, build**, **Chromium end-to-end**,
+   **Production-build browser performance**, **Edge function execution tests
+   (Deno)**, **Coverage floors (money / security)**, and **Golden master under
+   tr_TR + Chatham TZ**; then enable *Require a pull request before merging*.
+   Stop pushing straight to `master`; land work through reviewed PRs.
 
 2. **Deploy from CI (strongest).** Turn OFF Vercel's production auto-deploy
-   on push (Vercel → Settings → Git), and add a deploy step to `ci.yml`
-   that runs **after** Build, only on `master`, with a `VERCEL_TOKEN`
-   secret:
+   on push (Vercel → Settings → Git), then add the **`VERCEL_TOKEN`** secret
+   (GitHub → Settings → Secrets → Actions). The `deploy` job already in
+   `ci.yml` then activates automatically after the same complete required-check
+   set passes, on `master` only. No green gate, no deploy.
 
-   ```yaml
-   - name: Deploy to Vercel (production)
-     if: github.ref == 'refs/heads/master'
-     run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
-     env:
-       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-   ```
+Until one of these is in place, **always let the `pre-push` hook run** (never
+`--no-verify` to `master`) and watch the Actions tab after pushing.
 
-   Now CI is the only path to production: no green gate, no deploy.
-
-The in-repo gate above is the first line of defense, but it lives in the deploy
-step, not in `master`'s history — branch protection (option 1) is what stops a
-red commit from reaching `master` at all. Regardless of which defenses are on,
-**always let the `pre-push` hook run** (never `--no-verify` to `master`) and watch
-the Actions tab after pushing.
-
-## Client app (Vercel) — CI-gated auto-deploy
+## Client app (Vercel) — CI-gated
 
 ```bash
-# `git push origin master` does NOT ship on its own.
-# 1. The push-triggered Vercel build is SKIPPED by the fail-closed
-#    ignoreCommand (CI hasn't reported yet).
-# 2. CI runs (~10-15m). When check + e2e + deno-tests are green, the
-#    `redeploy` job POSTs the Vercel Deploy Hook (if VERCEL_DEPLOY_HOOK_URL
-#    is set), which fires a fresh build that now passes the gate.
-# 3. Output: `npx vite build` → dist/ uploaded to the Vercel CDN.
-#
-# If VERCEL_DEPLOY_HOOK_URL is NOT set, step 2 no-ops — trigger the deploy
-# with a manual dashboard Redeploy once CI is green. See "Gating production
-# on CI" for the token + deploy-hook setup.
+# A push starts CI; the gated deploy/retrigger runs only after required checks.
+# Vercel then runs `npx vite build`.
+# Output: dist/ uploaded to the Vercel CDN.
 ```
 
-No manual build command needed (the gate + hook drive it), but two Vercel-side
-env prerequisites govern whether it deploys at all: the `GITHUB_CI_STATUS_TOKEN`
-that arms the CI gate and the `VERCEL_DEPLOY_HOOK_URL` secret that arms the
-auto-redeploy (both under *Gating production on CI*). The other Vercel-side
-gotcha: **client environment variables**. The client needs:
+No manual command needed. The only Vercel-side gotcha: **environment
+variables**. The client needs:
 
 ```
 VITE_SUPABASE_URL=...
@@ -187,10 +89,35 @@ Set these in Vercel's dashboard → Project → Settings → Environment
 Variables. Redeploy after changing them so the new values bake into the
 client bundle.
 
+**Sitemap (GALLERY-2 phase 2, 2026-07-17):** the gallery per-slug fan-out is
+ON BY DEFAULT — `prebuild` (scripts/generate-sitemap.mjs) appends every public
+`/gallery/:slug` whenever `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` exist
+in the build env, which they do on Vercel per the block above (no extra flag
+to set; `SITEMAP_INCLUDE_GALLERY=0` suppresses it). The COMMITTED
+`public/sitemap.xml` is the offline artifact — static routes + the 15 gallery
+facet hubs — and stays byte-pinned by tests/build/sitemap.test.js; the
+deployed `dist/sitemap.xml` is the superset with slugs.
+
 ## Database migrations (Supabase) — manual
 
 Migrations live in `supabase/migrations/*.sql`. Each new migration is
-applied on top of the current schema. Run:
+applied on top of the current schema.
+
+**Rehearse before production.** The current production-ledger gap is divided
+into reviewed, bounded waves and must first pass on an isolated
+production-shaped clone:
+
+```bash
+npm run ops:migrations:rehearse
+# Then follow docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md for the attended clone run.
+```
+
+The runner refuses local/unattested targets, stages no migration above the
+current wave, records pre/post integrity queries, and emits a source-bound
+receipt. A clone pass is required release evidence; it does not perform or
+authorize a production write by itself.
+
+For the attended production push:
 
 ```bash
 # Link the local repo to your Supabase project (one-time):
@@ -202,69 +129,84 @@ npx supabase db push
 
 # Optional: verify the migration ran without errors:
 npx supabase db diff
-
-# Verify the LIVE schema head caught up to the repo head (review M5). Obtain the
-# deployed head, then let check-migration-head.mjs compare it to the repo head —
-# it exits non-zero on drift (e.g. an unpushed hardening migration whose defense
-# is then silently absent in production):
-DEPLOYED_HEAD=$(npx supabase migration list --linked 2>/dev/null | grep -oE '^[[:space:]]*[0-9]+' | tail -1)
-SUPABASE_MIGRATION_HEAD="$DEPLOYED_HEAD" npm run validate:migration-head
 ```
-
-**After `db push`, bump the applied-head ledger.** `supabase/applied-head.json` records the
-last migration number live in production (currently `097`, applied 2026-07-01). It is the
-in-repo record that makes "is the deployed DB at head?" a reviewable fact instead of tribal
-knowledge — and unlike the `SUPABASE_MIGRATION_HEAD` probe (which needs a live DB), it is
-checked on **every** `npm run check`: when the repo head is ahead of `appliedHead`,
-`validate:migration-head` prints the exact list of pending (undeployed) migrations, so the
-"code ahead of deployed DB" state is visible in the gate output rather than silent. Bump
-`appliedHead` (and `appliedAt`) in the SAME commit/PR as the `db push` that applied the new
-migrations. `tests/docs/migrationAppliedHead.test.js` keeps it honest: the value must
-reference a real, committed migration and can never exceed the repo head.
-
-**Apply every file in `supabase/migrations/` in lexical order — do not stop at a
-remembered number.** `db push` does this for you (it applies all pending migrations
-on top of the current schema). Migration numbers grow every release, so this guide
-deliberately does NOT pin a "latest" number that would rot and cause an operator to
-under-apply. Highlights of the later set a production DB that predates this work
-still needs:
-
-- analytics core, settlement snapshots, rollups, cron, trends
-- system-mutation capture; regional NPC reports + regional propagation report
-- map-backdrop storage (bucket + RLS); gallery maps + map-with-campaign share +
-  importable dossiers
-- admin least-privilege, audit log, deletion-request + account-deletion
-  processing, support tickets
 
 **SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
 writes and RLS (a disabled/banned account must not be able to write), **058**
-scopes `system_config` public reads, **061** locks profile moderation
-columns, and **062** closes three authz gaps (enables RLS on the two analytics
-tables, drops the un-audited privileged `profiles`-UPDATE bypass so every
-privileged write goes through the audited RPCs, and column-locks owner
-support-ticket edits). Migration **066** (Auth Phase 2) adds the server-write-only
-`security_answers` bcrypt table — the answer hash is reachable ONLY through the
-SECURITY DEFINER question RPCs and the service-role recovery RPCs, never a client
-SELECT — plus the per-IP/per-email recovery rate limiter. These are not optional
-hardening — skipping them leaves the trust-boundary open. `db push` applies them
-with everything else; if you ever hand-apply, never stop before this set has
-landed.
+scopes `system_config` public reads, **061** locks profile moderation columns,
+and **062** closes three authz gaps (RLS on the analytics tables, drops the
+un-audited privileged `profiles`-UPDATE bypass, column-locks owner
+support-ticket edits). Migration **066** (Auth Phase 2) adds the
+server-write-only `security_answers` bcrypt table. **128–130** strip the latent
+pantheon from every public projection, **135** revokes the PUBLIC grant on the
+role/tier RPC, and **136** lifts the world-snapshot deny census. A by-the-book
+operator must never under-apply this trust-boundary set.
 
-**Auth Phase 2 — also flip email confirmations in the hosted dashboard.** Migration
-066 expects email-confirm-locked signups. `supabase/config.toml` sets
-`enable_confirmations = true`, but that governs `supabase start` (local) ONLY — you
-MUST also enable email confirmations in the hosted **Supabase → Authentication →
-Sign In / Providers → Email** settings for production, or the signup auto-login
-poll never locks/unlocks as designed.
+**Apply every file in `supabase/migrations/` in lexical order — do not stop at a
+remembered number.** Migration numbers grow every release, so this guide
+deliberately does NOT pin a "latest" number that would rot and cause an operator
+to under-apply.
 
-`db push` applies every pending migration on top of the current schema; they must
-ALL land before deploying the corresponding functions and client. Confirm what is
-applied vs pending (don't assume):
+**Current migration head: `195_civility_guard_and_public_identity.sql`** (this
+filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
+derives the head from `supabase/migrations/` and fails the gate if this line drifts).
+<!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
+
+This line records the head **on disk**, not a clearance to apply it: `195` carries its
+own owner-gated, dark header (`AUTHORED, NOT DEPLOYED`), so whether it ships in a given
+cutover is the owner's call — read that file's preamble before pushing.
+
+Do **not** hand-count from a fixed starting migration — `db push` applies EVERY
+pending migration on top of the current schema, in order, and self-corrects
+regardless of how far behind prod is. They must land before the corresponding
+client and ordinary functions. The two durable workers are deliberately deployed
+inert before migrations 175/180, and `stripe-webhook` is held until migration
+181's lease RPC is visible through PostgREST; `scripts/deploy.sh` enforces that
+two-phase exception. Confirm applied vs pending (don't trust any number written
+here — ask the tooling):
 
 ```bash
-npx supabase migration list   # applied (local + remote) vs pending
+npx supabase migration list   # applied (local + remote) vs pending — the authority
 npx supabase db diff          # an empty diff means remote schema matches the tree
 ```
+
+**Is prod actually at head?** Three in-repo checks answer this:
+
+- `npm run validate:migration-head` reads the checked-in applied-head ledger
+  (`supabase/applied-head.json`) and warns when prod is behind the repo head — the
+  documented-normal commit→deploy window. Bump `appliedHead` only *after* a
+  successful `db push`.
+- The live probe: `SUPABASE_MIGRATION_HEAD=<live head number> npm run
+  validate:migration-head` compares the live DB head against the repo head and
+  fails hard on a mismatch (use it in the deploy pipeline, where a live DB exists).
+- `npm run ops:post-deploy` independently reads the live history through a
+  transaction-forced read-only connection, compares it with the filesystem
+  head, and includes that result in the final release receipt.
+
+**Edge functions are the one UNGATED path to production — deploy them by hand,
+deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
+and the DB has the `applied-head.json` currency gate, but edge functions ship via a
+bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from whatever
+your **local working tree** contains. Nothing checks that CI is green, nothing checks
+the tree is clean, and — unlike the migration ledger — nothing records which commit's
+functions are live. This matters because the edge layer IS the money + auth trust
+boundary (`stripe-webhook`, `create-checkout`, `auth-recovery`). Two consequences to
+guard against by discipline:
+
+- **Deploy only from a clean tree at a pushed, CI-green commit.** Before deploying any
+  function, confirm `git status` is clean and the commit you're on is the one CI passed.
+  Deploying with local edits present ships bytes that were never tested and that no
+  reviewer saw. Note the deploying commit SHA in your deploy record (there is no
+  automated ledger to consult later).
+- **`npm run check:edge-behavior` is FAIL-OPEN on a missing toolchain.** It runs the
+  edge behavioral suite when `deno` is on `PATH`, but **exits 0 (skips) when deno is
+  absent** — so a green local run does NOT prove the edge functions were exercised.
+  Install deno so the pre-push hook actually gates them, and never treat a "skipped"
+  edge check as a pass. CI's separate `deno-tests` job is the real gate, which is
+  exactly why you must only deploy from a commit that job passed.
+  (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
+
+There are 33 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -279,49 +221,70 @@ npm run build:edge-shared
 npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 ```
 
-Deploy each function:
-
-> **This is the ungated path to production.** Unlike the client (fail-closed
-> CI gate) and the DB (migration-currency gate), nothing here checks CI is green
-> or the tree is clean, and nothing records the live commit. Deploy only from a
-> clean `git status` at a pushed, CI-green commit, and note the SHA — see "Edge
-> functions are the one UNGATED path to production" under *Gating production on CI*.
+Deploy them. **The canonical path is `bash scripts/deploy.sh`** — it
+auto-discovers every `supabase/functions/*` directory (skipping `_shared`) and
+derives each one's `--no-verify-jwt` flag from `config.toml`, so a newly-added
+function can never be silently left undeployed and the platform JWT gate can never
+drift from config. It bootstraps the deletion/refund workers and their shared
+secrets before `db push`, waits for both routes to answer their non-mutating
+method probe, activates and verifies both migration-seeded dispatcher rows
+immediately afterward, then readiness-probes the migration-181 lease RPC before
+creating or deploying the Stripe webhook. To deploy by hand, preserve that ordering
+and mirror what the script derives — the sixteen self-authenticating functions get
+`--no-verify-jwt`, the seventeen authenticated ones get no flag:
 
 ```bash
-npx supabase functions deploy stripe-webhook          # Stripe posts a signature, not a JWT
+# verify_jwt = false (self-authenticating — signature, shared secret, or anon path):
+npx supabase functions deploy stripe-webhook --no-verify-jwt          # Stripe posts a signature, not a JWT
+npx supabase functions deploy verify-single-dossier --no-verify-jwt   # Stripe session id, not auth
+npx supabase functions deploy ingest-events --no-verify-jwt           # anonymous analytics sink
+npx supabase functions deploy log-client-error --no-verify-jwt        # anonymous crash-report sink
+npx supabase functions deploy analytics-export --no-verify-jwt        # x-export-secret shared secret (cron)
+npx supabase functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-secret shared secret (nightly)
+npx supabase functions deploy send-email --no-verify-jwt              # per-template self-auth + anon cap-warning
+npx supabase functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
+npx supabase functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
+npx supabase functions deploy health --no-verify-jwt                  # uptime liveness + deep DB probe (no JWT)
+npx supabase functions deploy founder-transfer --no-verify-jwt        # run_due cron x-cron-secret; user actions self-auth in-handler
+npx supabase functions deploy retention-warning-cron --no-verify-jwt  # nightly pg_net cron, x-cron-secret shared secret
+npx supabase functions deploy account-deletion-worker --no-verify-jwt # hourly durable deletion cleanup, x-cron-secret
+npx supabase functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
+npx supabase functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
+npx supabase functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
+# verify_jwt = true (require an authenticated user — no flag):
 npx supabase functions deploy create-checkout
-npx supabase functions deploy create-customer-portal  # "Manage subscription" billing portal
-npx supabase functions deploy verify-single-dossier   # anonymous, Stripe session id
+npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
+npx supabase functions deploy create-customer-portal                  # "Manage subscription" billing portal
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
+npx supabase functions deploy ai-analyst                             # Surveyor S1 analyst (requires ANTHROPIC_API_KEY)
+npx supabase functions deploy surveyor-byok                          # Surveyor BYOK key verification + health
+npx supabase functions deploy interview                               # V-1 THE INTERVIEW — cited answers + conjecture register (JWT + entitlement, metered 'analysis')
+npx supabase functions deploy interpret-session                       # Surveyor S3 intent compiler (JWT + entitlement + kill-switch)
+npx supabase functions deploy parley                                  # Surveyor S3 in-character parley (JWT + entitlement + kill-switch)
+npx supabase functions deploy custom-content                          # Surveyor S4 custom-content compiler (JWT + entitlement + kill-switch)
+npx supabase functions deploy style-overhaul                          # Surveyor style-overhaul compiler (JWT + entitlement + kill-switch)
+npx supabase functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
+npx supabase functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
+npx supabase functions deploy surveyor-autonomy                       # Surveyor S7 autonomy composer (JWT + entitlement + kill-switch)
+npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
-npx supabase functions deploy account-actions         # self-serve account export/deletion requests
-npx supabase functions deploy send-email              # per-template self-auth; anon cap_warning path
-npx supabase functions deploy ingest-events           # public analytics event sink (anon traffic)
-npx supabase functions deploy analytics-export        # cron export, x-export-secret shared secret
-npx supabase functions deploy auth-recovery           # logged-out password recovery (Auth Phase 2)
-npx supabase functions deploy log-client-error        # public client-error sink (anon traffic, bot-guarded)
 ```
 
-**No `--no-verify-jwt` flags needed.** `verify_jwt` is pinned EXPLICITLY for every
-function in `config.toml` (the deploy source of truth), so the platform JWT gate
-can't be flipped by a forgotten/stray flag. Seven functions that authenticate
-themselves are pinned `false` (`stripe-webhook`, `verify-single-dossier`,
-`ingest-events`, `analytics-export`, `send-email`, `auth-recovery`,
-`log-client-error`); the rest are pinned `true`.
-The pins are enforced by `tests/edgeFunctions/verifyJwtPins.test.js` (every
-function must have an explicit pin). Deploy **every** function directory under
-`supabase/functions/` — the only non-deployable one is `_shared/` (a helper
-bundle, not a function). There are 13 functions total; on a first cutover deploy
-all of them, and after adding a new function confirm the list with
-`ls -d supabase/functions/*/ | grep -v _shared` rather than trusting this block.
-<!-- @enforced-by tests/docs/docCounts.test.js -->
+There are **33 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The sixteen `verify_jwt = false`
+and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
+single source of truth `deploy.sh` parses. The freshness pin
+(`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
+stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:
 
 ```
-ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle
+ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle + ai-analyst
+# BYOK (ai-analyst): also set the DB secret `app.settings.byok_secret` (pgcrypto passphrase
+# for surveyor_byok_keys); BYOK is fail-closed/unavailable until it is configured.
 RESEND_API_KEY               # for send-email (Resend provider key)
 RESEND_FROM_EMAIL            # for send-email (verified sender address)
 STRIPE_SECRET_KEY            # for webhook, checkout, and dossier verification
@@ -332,11 +295,110 @@ STRIPE_PRICE_CREDITS_150
 STRIPE_PRICE_PREMIUM
 STRIPE_PRICE_FOUNDER_LIFETIME
 STRIPE_PRICE_SINGLE_DOSSIER
+ACCOUNT_DELETION_CRON_SECRET # random high-entropy secret for the pg_net deletion worker
+PAYMENT_REFUND_CRON_SECRET  # random high-entropy secret for the pg_net refund worker
 SUPABASE_URL                 # already set by Supabase
 SUPABASE_ANON_KEY            # already set by Supabase
 SUPABASE_SERVICE_ROLE_KEY    # required for admin operations
 CLIENT_URL                   # e.g. https://settlementforge.com
 ```
+
+`OPERATOR_MESSAGE_CRON_SECRET` is intentionally **not** in the required-secret
+list for this release. Deploying the function is safe, but do not set that secret
+or activate its database dispatcher yet; the broadcast courier is deliberately
+shipping dormant as described below.
+
+### Activate the durable account-deletion worker
+
+Migration 175 deliberately replaces the old SQL-only deletion cron with an
+inert-until-configured Edge dispatch. To minimize the paused window, set the
+function secret and deploy `account-deletion-worker` before applying 175 (it
+remains inert while the config row is absent). Applying 175 unschedules the old
+cron immediately; apply it and update the database config in the same maintenance
+window. Deletions safely remain queued meanwhile. Use one high-entropy value in
+both places:
+
+The canonical script performs and verifies this whole sequence. On a re-deploy it
+reuses the secret already stored in the private dispatcher row; on first install
+it generates one. The commands below are the manual equivalent.
+
+```bash
+npx supabase secrets set ACCOUNT_DELETION_CRON_SECRET='<random-secret>'
+```
+
+```sql
+-- Service-role/operator SQL only. system_config is not public-readable.
+update public.system_config
+   set value = value || jsonb_build_object(
+     'url', 'https://<project-ref>.supabase.co/functions/v1/account-deletion-worker',
+     'secret', '<the same random secret>'
+   )
+ where key = 'account_deletion_cron';
+```
+
+Until both `url` and `secret` are non-empty, the hourly dispatcher returns
+`not_configured` and does no work. Set `enabled=false` in that row to pause
+dispatch without losing queued jobs. `STRIPE_SECRET_KEY` is also required to
+finish any queued account that still has billing linkage; without it the job
+stays retryable and the deletion request remains `processing`. Completion
+irreversibly soft-deletes the GoTrue user (replacing its id with a hash and
+removing its login identities, credentials, and sessions), deletes linked
+Stripe customers, and only then marks the request done.
+
+### Activate the durable payment-refund worker
+
+Migration 180 turns migration 177's durable refund records into an unattended
+recovery queue. Deploy `payment-refund-worker` and set its secret before applying
+180; it remains inert while the config row is absent. Then apply migrations and
+set the same high-entropy secret in the private dispatcher row:
+
+The canonical script performs this in the same two-phase bootstrap as account
+deletion and refuses to finish unless the persisted row has `enabled=true`, the
+deployed worker URL, and the exact function-side secret.
+
+```bash
+npx supabase secrets set PAYMENT_REFUND_CRON_SECRET='<random-secret>'
+```
+
+```sql
+-- Service-role/operator SQL only. system_config is not public-readable.
+update public.system_config
+   set value = value || jsonb_build_object(
+     'url', 'https://<project-ref>.supabase.co/functions/v1/payment-refund-worker',
+     'secret', '<the same random secret>'
+   )
+ where key = 'payment_refund_recovery_cron';
+```
+
+Until both values are non-empty, the five-minute dispatcher returns
+`not_configured` and performs no claims. Set `enabled=false` to pause without
+losing obligations. `STRIPE_SECRET_KEY` is required; when it is absent or Stripe
+is transiently unavailable, the leased row is released into bounded durable
+retry instead of being marked refunded. Recovery reuses the original
+idempotency key and rebuilds Stripe metadata only from immutable obligation
+identity; nullable user, auto-reload-attempt, and Checkout links stay
+database-only so later fill/null transitions cannot change replay parameters.
+
+### Keep the Operator Messages courier disabled
+
+Deploy `operator-message-worker` and `unsubscribe` with the rest of the function
+inventory, but leave the private `operator_message_delivery_cron` row exactly as
+migration 194 seeds it: `enabled=false`, `url=null`, and `secret=null`. Do not set
+`OPERATOR_MESSAGE_CRON_SECRET` in this rollout. Those three independent gates
+make the service-role worker inert even though its route exists; queued broadcast
+jobs remain durable and Account Messages remains the correctness path.
+
+Activation is a separate, attended owner operation after provider throughput and
+an end-to-end consent/unsubscribe drill have been reviewed. The drill must also
+run two concurrent workers against one eligible recipient, expire a lease before
+recipient claim, and crash after provider acceptance but before terminal receipt
+write. Verify that only a lease-token-bound CAS claim can send and that an
+abandoned `sending` attempt becomes terminal `delivery_outcome_unknown` rather
+than eligible for resend. This change neither authorizes activation nor supplies
+activation SQL. Direct notices and
+warning/ban notices still attempt provider-neutral email immediately after the
+authoritative database transaction; a missing mail provider is recorded as
+`skipped` and never rolls back the in-account message.
 
 Legacy SKU keys (`credits_5`, `credits_15`, `credits_40`, etc.) are
 kept in the price map for refund/replay continuity — set them if you
@@ -349,22 +411,81 @@ Webhooks → Add endpoint:
 
 ```
 URL:    https://<your-supabase-project>.supabase.co/functions/v1/stripe-webhook
-Events: checkout.session.completed, invoice.paid,
-        invoice.payment_succeeded, customer.subscription.deleted
+Events: checkout.session.completed,
+        checkout.session.async_payment_succeeded,
+        checkout.session.async_payment_failed,
+        checkout.session.expired,
+        payment_intent.succeeded,
+        payment_intent.payment_failed,
+        refund.created,
+        refund.updated,
+        refund.failed,
+        invoice.paid,
+        invoice.payment_succeeded,
+        invoice.payment_failed,
+        charge.refunded,
+        charge.dispute.created,
+        customer.subscription.updated,
+        customer.subscription.deleted
 ```
 
 Copy the signing secret into `STRIPE_WEBHOOK_SECRET` (above).
+
+Migration 181 retains its direct-table claim only as transitional compatibility
+for an older webhook instance during a rolling deployment. It is not the canonical
+cutover path: `scripts/deploy.sh` calls `claim_stripe_webhook_event` with an empty
+event id and waits for the expected non-mutating `event id is required` response
+before it creates the endpoint or deploys `stripe-webhook`. That response proves
+PostgREST has reloaded the RPC schema; a lingering `PGRST202` aborts the cutover
+instead of exposing the crash-weaker legacy claim. Retire the fallback/default
+after every pre-181 webhook instance has been removed.
+
+After cutover, monitor the two durable external-work queues:
+
+```sql
+select status, count(*) from public.account_deletion_cleanup_jobs group by status;
+select status, count(*) from public.payment_refund_obligations group by status;
+```
+
+Deletion jobs in `retry` and refund obligations in `pending` or
+`requires_action` should advance on later worker runs. A refund in `failed` or
+`canceled` is terminal and requires operator review/manual reimbursement; never
+delete the row to make the dashboard look green.
 
 ## Pre-deploy sanity check
 
 Run locally before pushing:
 
 ```bash
-npm run check        # validate-data + typecheck + lint + tests + build
+npm run check        # the full 14-stage gate (validate → typecheck → lint → test → build → verify:dist)
 npm run build:edge-shared   # regenerate bundle if src/domain/ changed
+npm run ops:migrations:rehearse   # review the exact applied-head → repo-head waves
 ```
 
-Both must pass exit code 0. Any failure means CI will fail too.
+The code/build commands must pass exit code 0. The migration plan must match the
+reviewed clone-rehearsal receipt. Any drift after that receipt invalidates it.
+
+## Post-deploy release proof
+
+After Vercel, migrations, dispatcher activation, and edge functions are live,
+run the fail-closed verifier:
+
+```bash
+POST_DEPLOY_DATABASE_URL='postgresql://release_verifier:REDACTED@db.production-ref.supabase.co:5432/postgres?sslmode=verify-full' \
+SF_PRODUCTION_DATABASE_HOST='db.production-ref.supabase.co' \
+SUPABASE_URL='https://production-ref.supabase.co' \
+SUPABASE_SERVICE_ROLE_KEY='REDACTED' \
+npm run ops:post-deploy -- \
+  --health 'edge=https://production-ref.functions.supabase.co/health?deep=1' \
+  --receipt /secure/release/post-deploy.json
+```
+
+Run from the clean commit that should be deployed. A release receipt is written
+only when both live `/api/release` identities, application/map CSP and pinned
+map artifact, public deep health, contiguous migration history, and combined
+external-obligation/application-command severity all pass. Full configuration,
+evidence fields, and failure actions are in
+`docs/ops/POST_DEPLOY_VERIFICATION_RUNBOOK.md`.
 
 ## Rollback
 
@@ -375,10 +496,7 @@ git revert <bad-sha>
 git push origin master
 ```
 
-The revert ships the same CI-gated way as any push: it deploys once its CI run
-is green and the `redeploy` job fires the hook (or via a manual dashboard
-Redeploy if the deploy-hook secret isn't set) — it is NOT an instant push-to-live
-rollback. For an edge-function regression,
+Vercel will auto-deploy the revert. For an edge-function regression,
 also re-deploy from the prior good commit:
 
 ```bash
@@ -387,11 +505,13 @@ npx supabase functions deploy <name>
 git checkout master
 ```
 
-Database migrations CANNOT be rolled back automatically; restoring a
-schema requires a downward migration written ahead of time. The
-`schemaVersion` + migration chain in `domain/settlementMigrations.js`
-covers settlement-shape rollbacks; SQL schema rollbacks are a separate
-discipline that this project hasn't yet exercised.
+Database migrations CANNOT be rolled back automatically. The default is a
+reviewed forward-fix; the few data-safe partial reversals and every migration
+train rollback classification live under `supabase/rollback/`. The
+`schemaVersion` + migration chain in `domain/settlementMigrations.js` covers
+saved-settlement shapes, not the PostgreSQL schema. Follow
+`docs/ops/DEPLOY_ROLLBACK_RUNBOOK.md` and never improvise a data/RLS reversal
+during an incident.
 
 ## Common breakage modes
 
@@ -399,6 +519,8 @@ discipline that this project hasn't yet exercised.
 |---|---|---|
 | "Insufficient credits" but balance is fine | spend_credits RPC missing | Apply migration 009 |
 | Webhook 400 on every event | Bad STRIPE_WEBHOOK_SECRET | Copy fresh secret from Stripe |
+| Account deletion remains `processing` | Worker URL/secret or Stripe key is missing | Check `account_deletion_cron`, function logs, and `STRIPE_SECRET_KEY` |
+| Refund remains `pending` | Refund worker is inert or Stripe is unavailable | Check `payment_refund_recovery_cron`, worker logs, and the obligation retry fields |
 | AI narrative streams "Invalid JSON" repeatedly | Stale aiGroundingBundle | `npm run build:edge-shared` + redeploy |
 | "Price ID not configured for X" | Missing STRIPE_PRICE_X env var | Set in Supabase Functions secrets |
 | Bot guard rejects real traffic | Aggressive UA pattern | Update `_shared/requestMeta.ts` ALLOWED_BOT_PATTERNS |

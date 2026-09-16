@@ -1,39 +1,41 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/components/eventComposerApplyFlow.test.jsx — the change-queue apply
- * flow, pinned.
+ * tests/components/eventComposerApplyFlow.test.jsx — the owner-requested
+ * apply-flow change, pinned:
  *
- * Apply no longer COMMITS on click — it STAGES the assembled event on the
- * per-settlement change-queue (queueChange). The queue's "Save N changes"
- * commit (covered in tests/store/changeQueueSlice.test.js) replays each staged
- * event through applyEvent and persists atomically. The staleness modal moved
- * to that commit seam (SettlementDetail), so it no longer renders here.
- *
- * What this file now pins:
- *   1. Apply is always offered — preview is an optional look-ahead, not a gate.
- *      Applying STAGES the form as built (queueChange), and does NOT call
- *      applyEvent directly. The DESTROY_SETTLEMENT type-the-name gate still
- *      blocks staging until it matches.
- *   2. The staged event is byte-identical to what a direct apply would build
- *      (ADD_NPC trait payload, the previewed event under a pending preview).
- *   3. No StaleNarrativeModal renders in the composer (it is a commit-time
- *      concern now). Batch "Apply all" stages one order per staged event.
+ *   1. Apply is always offered — preview is an optional look-ahead, not a
+ *      gate. Applying without a preview commits the form as built (and the
+ *      DESTROY_SETTLEMENT type-the-name confirm gate still applies).
+ *   2. THE STALENESS LAW (Composer V2 §5, W-COMPOSER-1): the old
+ *      apply-prefers-pendingPreview bypass is RETIRED. Apply ALWAYS builds
+ *      from the current form — a stale stored preview can never commit, and
+ *      a pending preview no longer bypasses canSubmit.
+ *   3. A successful apply on a NARRATED save raises StaleNarrativeModal
+ *      (the prose was written against the previous state). Raw saves get
+ *      no modal. "Continue with raw simulation" closes without any AI
+ *      call and without un-applying; "Regenerate narrative" calls
+ *      requestNarrative(activeSaveId). A batch apply fires the modal
+ *      ONCE for the whole batch, labelled "N changes".
  */
 
 import React from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 
 import EventComposer from '../../src/components/settlement/EventComposer.jsx';
-import { EVENT_REGISTRY } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY } from '../../src/domain/events/registryFull.js';
 
-// EventComposer reads the store through a selector; a selector-over-plain-object
-// stub keeps the real store (persist, supabase, analytics) out of the render.
+// Both EventComposer and StaleNarrativeModal read the same zustand entry
+// point; a selector-over-plain-object stub keeps the real store (persist,
+// supabase, analytics) out of the render. Reassigned per test via baseState.
 let state;
-vi.mock('../../src/store/index.js', () => ({
-  useStore: (selector) => selector(state),
-}));
+vi.mock('../../src/store/index.js', () => {
+  const useStore = (selector) => selector(state);
+  // The live-preview effect reads the freshest pendingPreview off the store.
+  useStore.getState = () => state;
+  return { useStore };
+});
 
 function baseState(overrides = {}) {
   return {
@@ -46,30 +48,35 @@ function baseState(overrides = {}) {
       config: {},
     },
     previewEvent: vi.fn(),
+    applyEvent: vi.fn((event) => ({ event })),
     dismissPreview: vi.fn(),
     pendingPreview: null,
     previewEventBatch: vi.fn(),
+    applyEventBatch: vi.fn(() => ({ ok: true, warnings: [], logEntries: [] })),
     pendingBatchPreview: null,
     dismissBatchPreview: vi.fn(),
-    // The new apply path: Apply stages via queueChange instead of committing.
-    queueChange: vi.fn(() => 'ord_1'),
     customContent: {},
     activeSaveId: 'save-1',
-    campaigns: [],
+    // W5.7 EventComposer field modules read these selectors.
+    canUseCustomContent: () => false,
+    setPurchaseModalOpen: vi.fn(),
     savedSettlements: [],
+    campaigns: [],
+    requestNarrative: vi.fn(),
+    aiSettlement: null,
+    aiDailyLife: null,
+    // Composer V2 surfaces.
+    composerIntent: null,
+    stageComposerIntent: vi.fn(),
+    isSettlementClockBound: () => false,
     ...overrides,
   };
 }
 
-/** Pick an event type in the composer's Event dropdown (the first select). */
+/** Pick an event type in the composer's Event dropdown (by accessible name —
+ *  the ComposerNavigator renders its own selects before it). */
 function pickEventType(container, type) {
-  fireEvent.change(container.querySelector('select'), { target: { value: type } });
-}
-
-/** The single event staged by the most recent queueChange call. */
-function lastStagedEvent() {
-  const calls = state.queueChange.mock.calls;
-  return calls[calls.length - 1][1].payload.event;
+  fireEvent.change(screen.getByLabelText('Event type'), { target: { value: type } });
 }
 
 afterEach(() => {
@@ -77,8 +84,27 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
-describe('EventComposer — Apply stages onto the change-queue', () => {
-  test('Apply honors canSubmit, then STAGES the built event (no immediate commit)', () => {
+describe('EventComposer — Apply without a preview', () => {
+  test('a clock-bound preview names its isolated scope and intervening-world boundary', () => {
+    state = baseState({
+      isSettlementClockBound: () => true,
+      pendingPreview: {
+        event: { id: 'ev_clock', type: 'ADD_NPC', targetId: 'Mira' },
+        deltas: [],
+        factionResponses: [],
+        warnings: [],
+        narrativeSummary: 'Mira arrives.',
+      },
+    });
+
+    render(<EventComposer />);
+
+    expect(screen.getAllByText(/applying this change stages it for the next World Pulse/i)).toHaveLength(2);
+    expect(screen.getByText(/Isolated-scope review/i)).toBeTruthy();
+    expect(screen.getAllByText(/earlier queued orders.*intervening world changes/i)).toHaveLength(2);
+  });
+
+  test('Apply renders with no pending preview, honors canSubmit, and commits the built event', () => {
     state = baseState();
     const { container } = render(<EventComposer />);
 
@@ -94,69 +120,17 @@ describe('EventComposer — Apply stages onto the change-queue', () => {
     expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(false);
     fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
 
-    // Staged (not committed): one queueChange for this save, carrying the event.
-    expect(state.queueChange).toHaveBeenCalledTimes(1);
-    expect(state.queueChange.mock.calls[0][0]).toBe('save-1');
-    const order = state.queueChange.mock.calls[0][1];
-    expect(order.type).toBe('event');
-    expect(order.payload.event.type).toBe('ADD_NPC');
-    expect(order.payload.event.targetId).toBe('Mira the Bold');
-    expect(order.humanLabel).toBeTruthy();
-    // No Cancel button without a preview to dismiss; no staleness modal here.
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    const applied = state.applyEvent.mock.calls[0][0];
+    expect(applied.type).toBe('ADD_NPC');
+    expect(applied.targetId).toBe('Mira the Bold');
+    // No Cancel button without a preview to dismiss.
     expect(screen.queryByRole('button', { name: /Cancel/ })).toBeNull();
+    // Raw save (no narrative): nothing can go stale, so no modal.
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
-  test('ADD_NPC stages the authored descriptive traits in the event payload', () => {
-    state = baseState();
-    const { container } = render(<EventComposer />);
-
-    pickEventType(container, 'ADD_NPC');
-    fireEvent.change(
-      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
-      { target: { value: 'Mira the Bold' } },
-    );
-    fireEvent.change(screen.getByLabelText('Flaw'),        { target: { value: 'Reckless under pressure' } });
-    fireEvent.change(screen.getByLabelText('Temperament'), { target: { value: 'Hot-tempered' } });
-    fireEvent.change(screen.getByLabelText('Goals'),       { target: { value: 'Reclaim her family name' } });
-    fireEvent.change(screen.getByLabelText('Constraint'),  { target: { value: 'Bound by an old debt' } });
-    fireEvent.change(screen.getByLabelText('Secret'),      { target: { value: 'Funds the smugglers' } });
-
-    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-
-    expect(state.queueChange).toHaveBeenCalledTimes(1);
-    const applied = lastStagedEvent();
-    expect(applied.type).toBe('ADD_NPC');
-    expect(applied.targetId).toBe('Mira the Bold');
-    expect(applied.payload).toMatchObject({
-      flaw: 'Reckless under pressure',
-      temperament: 'Hot-tempered',
-      goal: 'Reclaim her family name',
-      constraint: 'Bound by an old debt',
-      secret: 'Funds the smugglers',
-    });
-  });
-
-  test('ADD_NPC omits trait keys from the staged payload when left blank', () => {
-    state = baseState();
-    const { container } = render(<EventComposer />);
-
-    pickEventType(container, 'ADD_NPC');
-    fireEvent.change(
-      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
-      { target: { value: 'Plain NPC' } },
-    );
-    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-
-    const applied = lastStagedEvent();
-    expect(applied.payload).not.toHaveProperty('flaw');
-    expect(applied.payload).not.toHaveProperty('temperament');
-    expect(applied.payload).not.toHaveProperty('goal');
-    expect(applied.payload).not.toHaveProperty('constraint');
-    expect(applied.payload).not.toHaveProperty('secret');
-  });
-
-  test('DESTROY_SETTLEMENT gates staging behind the type-the-name confirm', () => {
+  test('DESTROY_SETTLEMENT shows the type-the-name gate without a preview and blocks until it matches', () => {
     state = baseState();
     const { container } = render(<EventComposer />);
 
@@ -168,94 +142,85 @@ describe('EventComposer — Apply stages onto the change-queue', () => {
     fireEvent.change(confirmInput, { target: { value: 'Wrongname' } });
     expect(screen.getByRole('button', { name: /Destroy settlement/ }).disabled).toBe(true);
     fireEvent.click(screen.getByRole('button', { name: /Destroy settlement/ }));
-    // Mismatch: nothing staged.
-    expect(state.queueChange).not.toHaveBeenCalled();
+    expect(state.applyEvent).not.toHaveBeenCalled();
 
     fireEvent.change(confirmInput, { target: { value: 'Greenhollow' } });
     expect(screen.getByRole('button', { name: /Destroy settlement/ }).disabled).toBe(false);
     fireEvent.click(screen.getByRole('button', { name: /Destroy settlement/ }));
-    expect(state.queueChange).toHaveBeenCalledTimes(1);
-    expect(lastStagedEvent().type).toBe('DESTROY_SETTLEMENT');
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    expect(state.applyEvent.mock.calls[0][0].type).toBe('DESTROY_SETTLEMENT');
   });
 
-  test('with a preview pending, Apply stages exactly the previewed event (byte-identity) and dismisses', () => {
-    const previewedEvent = { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' };
+  test('STALENESS LAW: a pending preview no longer bypasses canSubmit — a stale preview cannot commit', () => {
+    // A stored preview for a DIFFERENT event than the (incomplete) form: under
+    // the retired bypass this enabled Apply and committed the stale event.
     state = baseState({
       pendingPreview: {
-        event: previewedEvent,
+        event: { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' },
         deltas: [], factionResponses: [], warnings: [],
         narrativeSummary: 'Mira dies.',
+        _previewKey: 'stale-key', _forSettlement: null,
       },
     });
     render(<EventComposer />);
 
-    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-    expect(state.queueChange).toHaveBeenCalledTimes(1);
-    // The staged event IS the previewed event object (preview==apply invariant).
-    expect(lastStagedEvent()).toBe(previewedEvent);
-    // The pending preview is dismissed once staged.
-    expect(state.dismissPreview).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('EventComposer — switching event type clears stale role / institution', () => {
-  test('role typed for ASSIGN_NPC_TO_ROLE does not leak into a later ADD_NPC payload', () => {
-    state = baseState();
-    const { container } = render(<EventComposer />);
-
-    // ASSIGN_NPC_TO_ROLE with no institution shows a free-text Role input.
-    pickEventType(container, 'ASSIGN_NPC_TO_ROLE');
-    fireEvent.change(screen.getByLabelText('Role'), { target: { value: 'Watch Captain' } });
-
-    // Switch to a type that also consumes `role` (ADD_NPC writes payload.role).
-    pickEventType(container, 'ADD_NPC');
-    fireEvent.change(
-      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
-      { target: { value: 'Mira the Bold' } },
-    );
-    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-
-    // Pre-fix the stale 'Watch Captain' role rode along in the ADD_NPC payload.
-    const applied = lastStagedEvent();
-    expect(applied.type).toBe('ADD_NPC');
-    expect(applied.payload).not.toHaveProperty('role');
+    // The form (ADD_INSTITUTION, no target) does not submit — and the stored
+    // preview must NOT re-enable Apply.
+    const apply = screen.getByRole('button', { name: /Apply to Timeline/ });
+    expect(apply.disabled).toBe(true);
+    fireEvent.click(apply);
+    expect(state.applyEvent).not.toHaveBeenCalled();
+    // The pane renders the stored preview as visibly STALE.
+    expect(screen.getByText(/Preview is stale/)).toBeTruthy();
+    // Cancel (dismiss the stale pane) is still offered.
+    expect(screen.getByRole('button', { name: /Cancel/ })).toBeTruthy();
   });
 
-  test('institution chosen for ASSIGN_NPC_TO_ROLE does not leak into a later ADD_NPC link', () => {
+  test('STALENESS LAW: with a stale preview pending, Apply commits the EDITED form event, never the stored one', () => {
     state = baseState({
-      settlement: {
-        name: 'Greenhollow',
-        institutions: [{ id: 'temple-1', name: 'Temple of the Dawn' }],
-        npcs: [],
-        powerStructure: { factions: [] },
-        config: {},
+      pendingPreview: {
+        event: { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' },
+        deltas: [], factionResponses: [], warnings: [],
+        narrativeSummary: 'Mira dies.',
+        _previewKey: 'stale-key', _forSettlement: null,
       },
     });
     const { container } = render(<EventComposer />);
 
-    // Pick the institution under ASSIGN_NPC_TO_ROLE (the Institution select
-    // renders once the settlement has an institution to link). The Field wraps
-    // its control in a <label> whose accessible name is label + hint.
-    pickEventType(container, 'ASSIGN_NPC_TO_ROLE');
-    fireEvent.change(screen.getByRole('combobox', { name: /link this NPC to an institution/ }), { target: { value: 'temple-1' } });
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Fresh Person' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    const applied = state.applyEvent.mock.calls[0][0];
+    expect(applied.type).toBe('ADD_NPC');           // the FORM event…
+    expect(applied.targetId).toBe('Fresh Person');
+    expect(applied.id).not.toBe('ev_1');            // …never the stale preview's
+  });
 
-    // Switch to ADD_NPC (which writes payload.linkedInstitutionIds from institutionId).
+  test('a veto refusal blocks: no reset, the refusal renders, nothing logs stale-modal', () => {
+    state = baseState({
+      aiSettlement: { thesis: 'old prose' }, // narrated — but a veto must NOT raise the modal
+      applyEvent: vi.fn(() => ({ ok: false, veto: { code: 'npc_not_found', message: 'No NPC "X" to remove.' } })),
+    });
+    const { container } = render(<EventComposer />);
     pickEventType(container, 'ADD_NPC');
     fireEvent.change(
       screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
       { target: { value: 'Mira the Bold' } },
     );
     fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-
-    // Pre-fix the stale 'temple-1' link rode along as linkedInstitutionIds.
-    const applied = lastStagedEvent();
-    expect(applied.type).toBe('ADD_NPC');
-    expect(applied.payload).not.toHaveProperty('linkedInstitutionIds');
+    expect(screen.getByText(/The world refuses/)).toBeTruthy();
+    // The form was NOT reset (the DM retargets rather than retyping).
+    expect(screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt).value).toBe('Mira the Bold');
+    expect(screen.queryByRole('dialog')).toBeNull();
   });
 });
 
-describe('EventComposer — no staleness modal in the composer', () => {
-  function stageAddNpc(container, name = 'Mira the Bold') {
+describe('EventComposer — post-apply staleness modal', () => {
+  function applyAddNpc(container, name = 'Mira the Bold') {
     pickEventType(container, 'ADD_NPC');
     fireEvent.change(
       screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
@@ -264,16 +229,57 @@ describe('EventComposer — no staleness modal in the composer', () => {
     fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline|^Apply$/ }));
   }
 
-  test('staging never raises a dialog, even on a narrated save (modal is commit-time now)', () => {
+  test('appears after a successful apply when narrated; Continue closes with no AI call and no un-apply', () => {
     state = baseState({ aiSettlement: { thesis: 'old prose' } });
     const { container } = render(<EventComposer />);
-    stageAddNpc(container);
-    expect(state.queueChange).toHaveBeenCalledTimes(1);
+
+    applyAddNpc(container);
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.getAttribute('aria-modal')).toBe('true');
+    expect(screen.getByText('The narrative is now out of date.')).toBeTruthy();
+    // The applied change is named in the header sub-label. (Scoped to the
+    // dialog — "Add NPC" also exists as an <option> in the Event dropdown.)
+    expect(within(dialog).getByText('Add NPC')).toBeTruthy();
+
+    fireEvent.click(screen.getByText('Continue with raw simulation'));
+    expect(screen.queryByRole('dialog')).toBeNull();
+    // No AI call, and the event stays applied (no further store calls).
+    expect(state.requestNarrative).not.toHaveBeenCalled();
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+  });
+
+  test('Regenerate calls requestNarrative with the active save id and closes', () => {
+    state = baseState({ aiDailyLife: { dawn: 'old prose' } });
+    const { container } = render(<EventComposer />);
+
+    applyAddNpc(container);
+    fireEvent.click(screen.getByText('Regenerate narrative'));
+    expect(state.requestNarrative).toHaveBeenCalledTimes(1);
+    expect(state.requestNarrative).toHaveBeenCalledWith('save-1');
     expect(screen.queryByRole('dialog')).toBeNull();
   });
 
-  test('batch "Apply all" stages one order per staged event', () => {
-    state = baseState({ phase: 'draft' });
+  test('absent when the save is not narrated', () => {
+    state = baseState();
+    const { container } = render(<EventComposer />);
+    applyAddNpc(container);
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
+  test('absent when the apply did not commit', () => {
+    state = baseState({
+      aiSettlement: { thesis: 'old prose' },
+      applyEvent: vi.fn(() => null),
+    });
+    const { container } = render(<EventComposer />);
+    applyAddNpc(container);
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
+  test('batch apply fires the modal once, labelled "N changes", in draft phase too', () => {
+    state = baseState({ phase: 'draft', aiSettlement: { thesis: 'old prose' } });
     const { container } = render(<EventComposer />);
 
     pickEventType(container, 'ADD_NPC');
@@ -286,92 +292,94 @@ describe('EventComposer — no staleness modal in the composer', () => {
     expect(screen.getByText('Staged changes (2)')).toBeTruthy();
     fireEvent.click(screen.getByRole('button', { name: /Apply all \(2\)/ }));
 
-    // One queueChange per staged event, in order.
-    expect(state.queueChange).toHaveBeenCalledTimes(2);
-    expect(state.queueChange.mock.calls[0][1].payload.event.targetId).toBe('First Person');
-    expect(state.queueChange.mock.calls[1][1].payload.event.targetId).toBe('Second Person');
-    // No modal; the cart cleared on stage.
-    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(state.applyEventBatch).toHaveBeenCalledTimes(1);
+    expect(state.applyEventBatch.mock.calls[0][0]).toHaveLength(2);
+    // Exactly ONE modal for the whole batch.
+    expect(screen.getAllByRole('dialog')).toHaveLength(1);
+    expect(screen.getByText('2 changes')).toBeTruthy();
+    // The cart cleared on success.
     expect(screen.queryByText('Staged changes (2)')).toBeNull();
+  });
+
+  test('a failed batch apply raises no modal and keeps the cart', () => {
+    state = baseState({
+      phase: 'draft',
+      aiSettlement: { thesis: 'old prose' },
+      applyEventBatch: vi.fn(() => ({ ok: false, warnings: [], logEntries: [] })),
+    });
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'First Person' } },
+    );
+    fireEvent.click(screen.getByText('+ Add to batch'));
+    fireEvent.click(screen.getByRole('button', { name: /Apply all \(1\)/ }));
+
+    expect(screen.queryByRole('dialog')).toBeNull();
+    expect(screen.getByText('Staged changes (1)')).toBeTruthy();
   });
 });
 
-describe('EventComposer — advance-in-flight guard', () => {
-  test('a clock-bound member cannot apply while its campaign is advancing', () => {
-    // The store no-ops a member world-write during an advance (it would be clobbered
-    // by the wholesale worldState replace), so the composer must DISABLE submit and
-    // say why rather than let a GM action be silently swallowed.
+describe('EventComposer — a staged intent on a settlement-less render', () => {
+  // The intent effect is registered on EVERY render, including the ones that
+  // take the `if (!settlement) return null` early return, so everything it
+  // touches must be declared ABOVE that return. When the setters bag sat below
+  // it, `{ ...composerSetters }` read a const in its temporal dead zone and the
+  // effect threw `Cannot access 'composerSetters' before initialization`.
+  test('consumes and clears the intent instead of throwing on the setters bag', () => {
     state = baseState({
-      isSettlementClockBound: (id) => id === 'save-1',
-      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
-      // The composer subscribes to the advanceInFlight LIST (render-tight), so the
-      // bound campaign's id present here = an advance in flight for it.
-      advanceInFlight: ['camp-1'],
-      applyEvent: vi.fn(),
+      settlement: null,
+      composerIntent: { type: 'ADD_NPC', target: 'Mira the Bold', fields: { importance: 'major' } },
     });
-    render(<EventComposer />);
-    expect(screen.getByText(/realm is advancing/i)).toBeTruthy();
-    expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(true);
-  });
 
-  test('a pending preview does NOT waive the guard — Apply stays disabled and the preview survives', () => {
-    // Pre-fix, applyOk short-circuited to true under a pending preview (the
-    // guard lived only in canSubmit), so Apply stayed enabled mid-advance: the
-    // store no-op'd applyEvent (null + console.warn) while onApply cleared the
-    // form and dismissed the preview — the GM's event silently vanished.
-    const previewedEvent = { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' };
+    const { container } = render(<EventComposer />);
+
+    // The settlement-less render itself is empty…
+    expect(container.firstChild).toBeNull();
+    // …but the intent was consumed into the form and cleared at the source, so
+    // it cannot re-fire (the effect's only dep is the intent object).
+    expect(state.stageComposerIntent).toHaveBeenCalledTimes(1);
+    expect(state.stageComposerIntent).toHaveBeenCalledWith(null);
+  });
+});
+
+describe('EventComposer — ADD_FACTION offers Compendium factions (the FactionEventBanner promise)', () => {
+  // Guards the manifest's factions.name + factions.description "eventComposer"
+  // consumer evidence: a Compendium faction must be PICKABLE here, and its
+  // authored description must prefill the editable Description field (the only
+  // channel to the created faction — event.description → addFaction). If this
+  // flow is ever removed, prune those consumers rather than deleting this test.
+  test('a Compendium faction is pickable under Custom and prefills Description', () => {
     state = baseState({
-      isSettlementClockBound: (id) => id === 'save-1',
-      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
-      advanceInFlight: ['camp-1'],
-      applyEvent: vi.fn(),
-      pendingPreview: {
-        event: previewedEvent,
-        deltas: [], factionResponses: [], warnings: [],
-        narrativeSummary: 'Mira dies.',
+      customContent: {
+        factions: [{ id: 'cf1', name: 'The Gilded Quill', description: 'Scribes with sharp knives.' }],
       },
     });
-    render(<EventComposer />);
+    const { container } = render(<EventComposer />);
 
-    const apply = screen.getByRole('button', { name: /Apply to Timeline/ });
-    expect(apply.disabled).toBe(true);
-    fireEvent.click(apply);
-    expect(state.applyEvent).not.toHaveBeenCalled();
-    expect(state.queueChange).not.toHaveBeenCalled();
-    // The preview is NOT dismissed — nothing was applied, nothing clears.
-    expect(state.dismissPreview).not.toHaveBeenCalled();
+    pickEventType(container, 'ADD_FACTION');
+    const factionSelect = screen.getByLabelText('Faction');
+    // The Custom optgroup carries the authored faction.
+    const customGroup = within(factionSelect).getByRole('group', { name: 'Custom' });
+    expect(within(customGroup).getByRole('option', { name: 'The Gilded Quill' })).toBeTruthy();
+
+    fireEvent.change(factionSelect, { target: { value: 'The Gilded Quill' } });
+    // Description prefilled (still editable), and the event is stageable.
+    expect(screen.getByLabelText('Description').value).toBe('Scribes with sharp knives.');
+    expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(false);
   });
 
-  test('batch "Apply all" mid-advance applies nothing and keeps the cart intact', () => {
-    // Events staged BEFORE the advance started sit in the cart while it runs
-    // ("+ Add to batch" only blocks new staging). Pre-fix the BatchCart onApply
-    // closure was unguarded: each clock-bound applyEvent was no-op'd by the
-    // store, then the cart cleared — the whole batch silently dropped.
+  test('a built-in pick leaves a typed Description alone', () => {
     state = baseState({
-      phase: 'draft',
-      isSettlementClockBound: (id) => id === 'save-1',
-      campaigns: [{ id: 'camp-1', settlementIds: ['save-1'] }],
-      advanceInFlight: [],
-      applyEvent: vi.fn(),
+      customContent: { factions: [{ id: 'cf1', name: 'The Gilded Quill', description: 'Scribes.' }] },
     });
-    const { container, rerender } = render(<EventComposer />);
+    const { container } = render(<EventComposer />);
 
-    pickEventType(container, 'ADD_NPC');
-    const targetInput = () => screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt);
-    fireEvent.change(targetInput(), { target: { value: 'First Person' } });
-    fireEvent.click(screen.getByText('+ Add to batch'));
-    fireEvent.change(targetInput(), { target: { value: 'Second Person' } });
-    fireEvent.click(screen.getByText('+ Add to batch'));
-    expect(screen.getByText('Staged changes (2)')).toBeTruthy();
-
-    // The campaign's advance starts (on the Advance surface, not here).
-    state.advanceInFlight = ['camp-1'];
-    rerender(<EventComposer />);
-
-    fireEvent.click(screen.getByRole('button', { name: /Apply all \(2\)/ }));
-    expect(state.applyEvent).not.toHaveBeenCalled();
-    expect(state.queueChange).not.toHaveBeenCalled();
-    // The staged events survive for a re-apply after the advance settles.
-    expect(screen.getByText('Staged changes (2)')).toBeTruthy();
+    pickEventType(container, 'ADD_FACTION');
+    fireEvent.change(screen.getByLabelText('Description'), { target: { value: 'my own note' } });
+    fireEvent.change(screen.getByLabelText('Faction'), { target: { value: 'The Trade Compact' } });
+    expect(screen.getByLabelText('Description').value).toBe('my own note');
   });
 });

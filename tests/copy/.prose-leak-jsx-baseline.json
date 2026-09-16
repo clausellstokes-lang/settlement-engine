@@ -1,0 +1,23 @@
+{
+ "src/components/map/SimulationRulesAxes.jsx": {
+  "flagKey": 9,
+  "tick": 0,
+  "week": 0,
+  "schema": 0,
+  "rawId": 0
+ },
+ "src/components/map/SimulationRulesDialog.jsx": {
+  "flagKey": 14,
+  "tick": 0,
+  "week": 0,
+  "schema": 0,
+  "rawId": 0
+ },
+ "src/components/settlements/LivingWorldGates.jsx": {
+  "flagKey": 6,
+  "tick": 0,
+  "week": 0,
+  "schema": 0,
+  "rawId": 0
+ }
+}

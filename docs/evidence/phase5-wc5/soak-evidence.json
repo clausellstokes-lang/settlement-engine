@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "cohort": 4000,
+    "RESOLUTION_HOLD_TICKS": 4,
+    "tuning": {
+      "RESOLUTION_HOLD_TICKS": 4,
+      "REFORM_BASE": 0.2,
+      "RECAUSE_BASE": 0.2,
+      "HISTORICIZE_BASE": 0.3,
+      "CONSCIENCE_W": 0.9,
+      "APPETITE_W": 0.9,
+      "TEMPERAMENT_W": 0.4,
+      "DISORDER_HIST_W": 0.2,
+      "REFORM_CLIMATE_LO": 0.4,
+      "REFORM_CLIMATE_SPAN": 1.2
+    }
+  },
+  "A": {
+    "principled-good": {
+      "reform": 2094,
+      "recause": 349,
+      "historicize": 1557,
+      "other": 0
+    },
+    "dutiful-lawful": {
+      "reform": 1494,
+      "recause": 460,
+      "historicize": 2046,
+      "other": 0
+    },
+    "steady-neutral": {
+      "reform": 701,
+      "recause": 671,
+      "historicize": 2628,
+      "other": 0
+    },
+    "greedy-corrupt": {
+      "reform": 412,
+      "recause": 2101,
+      "historicize": 1487,
+      "other": 0
+    },
+    "ruthless-dark": {
+      "reform": 422,
+      "recause": 2144,
+      "historicize": 1434,
+      "other": 0
+    }
+  },
+  "B": {
+    "captured + evil patron": {
+      "reformClimate": 0,
+      "reform": 756,
+      "historicize": 2618,
+      "recause": 626
+    },
+    "low order, neutral": {
+      "reformClimate": 0.38,
+      "reform": 1335,
+      "historicize": 2170,
+      "recause": 495
+    },
+    "moderate": {
+      "reformClimate": 0.53,
+      "reform": 1494,
+      "historicize": 2046,
+      "recause": 460
+    },
+    "high order": {
+      "reformClimate": 0.71,
+      "reform": 1680,
+      "historicize": 1874,
+      "recause": 446
+    },
+    "devout-good purge": {
+      "reformClimate": 0.91,
+      "reform": 1857,
+      "historicize": 1740,
+      "recause": 403
+    }
+  },
+  "C": {
+    "recauses": 5476,
+    "invented": 0,
+    "adopted": {
+      "siege-scarred": 5476
+    }
+  },
+  "D": {
+    "exposedStamped": true,
+    "readjudicate": {
+      "principled-good": {
+        "resolve": 3646,
+        "recatch": 354
+      },
+      "dutiful-lawful": {
+        "resolve": 3529,
+        "recatch": 471
+      },
+      "steady-neutral": {
+        "resolve": 3385,
+        "recatch": 615
+      },
+      "greedy-corrupt": {
+        "resolve": 1928,
+        "recatch": 2072
+      },
+      "ruthless-dark": {
+        "resolve": 1913,
+        "recatch": 2087
+      }
+    }
+  },
+  "E": {
+    "wk1": "this-week",
+    "wk3": "this-month",
+    "wk8": "this-season",
+    "wk13": "this-season",
+    "wk14": "this-year",
+    "wk26": "this-year",
+    "wk49": "this-year",
+    "wk52": "this-year",
+    "wk53": "years-past",
+    "wk200": "years-past"
+  }
+}

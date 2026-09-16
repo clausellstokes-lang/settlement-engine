@@ -22,8 +22,9 @@ import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, relColors, pt, swatch } from '../theme.js';
-import { cap, label, hookText, humanize } from '../lib/format.js';
-import { anchorTarget } from '../primitives/EntityRef.jsx';
+import {
+  cap, label, hookText, humanize, prominentPair, prominentType, prominentProse,
+} from '../lib/format.js';
 
 const REL_LABELS = {
   rival:            'Rival',
@@ -39,7 +40,6 @@ const REL_LABELS = {
 
 export function Relationships({ settlement, narrativeMode, vm }) {
   const r = vm.relationships;
-  const index = vm.entityIndex; // Phase-D id»card resolver (neighbour anchors)
   const hasAny =
     r.neighbours?.length > 0 ||
     r.interSettlement?.length > 0 ||
@@ -59,9 +59,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       />
 
       <ChapterHeadline tone="gold">
-        {/* relationshipsHeadline reads `neighbours` (external) + `internal`; the old
-            `{ all }` shape left neighbours empty and mislabelled them as internal ties. */}
-        {relationshipsHeadline({ neighbours: r.neighbours, internal: r.internal })}
+        {relationshipsHeadline({ all: r.neighbours || [] })}
       </ChapterHeadline>
 
       {!hasAny && (
@@ -76,11 +74,11 @@ export function Relationships({ settlement, narrativeMode, vm }) {
         <Callout
           tone="cool"
           kicker="PROMINENT RELATIONSHIP"
-          title={`${humanize(r.prominentRelationship.otherSettlement || 'Neighbour')} · ${REL_LABELS[r.prominentRelationship.relationshipType] || cap(r.prominentRelationship.relationshipType || 'linked')}`}
+          title={`${prominentPair(r.prominentRelationship) || 'Notable pair'} · ${prominentType(r.prominentRelationship) || 'Linked'}`}
         >
           <EditableProse
             name="relationships.prominent.note"
-            defaultValue={r.prominentRelationship.description || r.prominentRelationship.flavour || r.prominentRelationship.flavor || ''}
+            defaultValue={prominentProse(r.prominentRelationship)}
             lines={2}
             style={{ ...type.body, fontSize: pt['9.5'] }}
           />
@@ -94,7 +92,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
             NEIGHBOUR NETWORK
           </Text>
           {r.neighbours.map((n, i) => (
-            <NeighbourCard key={`n-${i}`} n={n} idx={i} entityIndex={index} />
+            <NeighbourCard key={`n-${i}`} n={n} idx={i} />
           ))}
         </View>
       )}
@@ -139,7 +137,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               }}
               wrap={false}
             >
-              <Text style={{ color: palette.ai, marginRight: 4, fontSize: pt['9'] }}>·</Text>
+              <Text style={{ color: palette.ai, marginRight: 4, fontSize: pt['9'] }}>»</Text>
               <View style={{ flex: 1 }}>
                 <Text style={{ ...type.body, fontSize: pt['9'] }}>
                   <Text style={{ ...type.body_em, color: palette.ai }}>
@@ -240,7 +238,7 @@ export function Relationships({ settlement, narrativeMode, vm }) {
               <Text style={{ color: palette.cool, marginRight: 4, fontSize: pt['9'] }}>•</Text>
               <Text style={{ ...type.body, flex: 1, fontSize: pt['9'] }}>
                 <Text style={{ ...type.body_em, color: palette.ink }}>
-                  {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} · ${rel.to}` : 'Link'))}
+                  {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} <-> ${rel.to}` : 'Link'))}
                 </Text>
                 {rel.description ? `  ${rel.description}` : ''}
               </Text>
@@ -254,15 +252,11 @@ export function Relationships({ settlement, narrativeMode, vm }) {
 
 // ── Sub-components ─────────────────────────────────────────────
 
-function NeighbourCard({ n, idx, entityIndex }) {
+function NeighbourCard({ n, idx }) {
   const _relLabel = REL_LABELS[n.type] || (n.type ? cap(n.type) : 'Linked');
   const color = relColors[n.type] || palette.muted;
-  // Phase-D: this card is the anchor TARGET for any neighbour id reference
-  // (e.g. an Economics trade partner that resolves to this relationship).
-  const anchor = anchorTarget(entityIndex, n.id);
   return (
     <View
-      id={anchor}
       style={{
         marginBottom: 4,
         padding: 5,
@@ -277,7 +271,7 @@ function NeighbourCard({ n, idx, entityIndex }) {
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
           {humanize(n.name || 'Neighbour')}
         </Text>
-        <RelPill type={n.type} directionalLabel={n.directionalLabel} />
+        <RelPill type={n.type} />
       </View>
       {n.description && (
         <EditableText
@@ -333,12 +327,9 @@ function NeighbourCard({ n, idx, entityIndex }) {
   );
 }
 
-function RelPill({ type: relType, directionalLabel }) {
+function RelPill({ type: relType }) {
   if (!relType) return null;
-  // Asymmetric links (overlord/vassal, patron/client) read directionally,
-  // naming the neighbour ("Overlord of X"); the colour still keys off the
-  // canonical base type so the pill tint is unchanged.
-  const labelStr = directionalLabel || REL_LABELS[relType] || cap(relType);
+  const labelStr = REL_LABELS[relType] || cap(relType);
   const color = relColors[relType] || palette.muted;
   return (
     <View

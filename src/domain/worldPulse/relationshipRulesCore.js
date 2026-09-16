@@ -5,6 +5,43 @@
  */
 import { clamp01, relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles } from './relationshipState.js';
 import { stablePart, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, relationshipTypeBetween, patronageEligibility, relationshipThirdParties, activeRebellionAgainstVassal } from './relationshipRuleHelpers.js';
+import { deriveActiveCondition } from '../activeConditions.js';
+
+// CADENCE DAMPING (E4-2a): per-arc cooldown for the overlord-weakness memory
+// beat. The streak it maintains is still measured every tick (it feeds
+// rebellion independence pressure), but its VISIBLE re-noting is bounded to at
+// most once per this many ticks per vassal arc — so one weak-overlord season
+// can't flood the feed with an unbroken run of near-identical entries.
+const WEAKNESS_MEMORY_COOLDOWN = 3;
+
+/**
+ * Recurring tribute keeps moving the vassalage reducers every time it wins its
+ * roll, but the Chronicle only needs the onset or a semantic transition. The
+ * stable condition id carries the overlord role; looking it up on the current
+ * vassal also carries the junior role. A missing match is therefore an onset or
+ * role-context change. Status and severity-band changes remain public.
+ *
+ * @param {{ byId?: Map<string, { activeConditions?: unknown[] }> }} snapshot
+ * @param {string} vassalId
+ * @param {object} incoming
+ * @returns {'state_only'|null}
+ */
+function vassalTributeRecordMode(snapshot, vassalId, incoming) {
+  const next = deriveActiveCondition(incoming);
+  if (!next) return null;
+  const item = snapshot?.byId?.get?.(String(vassalId));
+  const active = Array.isArray(item?.activeConditions) ? item.activeConditions : [];
+  const current = active
+    .map(condition => deriveActiveCondition(
+      condition && typeof condition === 'object' ? condition : null,
+    ))
+    .find(condition => condition?.id === next.id);
+  if (!current) return null;
+  return current.status === next.status
+    && current.severityBand === next.severityBand
+    ? 'state_only'
+    : null;
+}
 
 /** @param {any} ctx */
 function neutralRules(ctx) {
@@ -557,42 +594,51 @@ function vassalRules(ctx) {
   const overlordWeakness = mean(overlordPressure.conflict, overlordPressure.legitimacy, overlordPressure.defense, overlordPressure.economy);
   const weaknessStreak = Math.max(0, Number(relState.overlordWeaknessStreak) || 0);
   const candidates = [];
+  const tributeCondition = {
+    archetype: "vassal_extraction",
+    label: "Vassal extraction",
+    description: "Tribute, levies, or legal concessions are draining local capacity.",
+    severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
+    status: "stable",
+    triggeredAt: { tick, sourceEventType: "WORLD_PULSE_VASSALAGE", sourceEventTargetId: overlordId },
+    affectedSystems: ["trade_connectivity", "public_legitimacy", "faction_power", "defense_readiness"],
+    causes: [{ source: relationshipKeyFromEdge(edge), effect: "vassal_extraction", reason: "A vassal relationship transfers value upward." }],
+  };
+  const tributeRecordMode = vassalTributeRecordMode(
+    ctx.snapshot,
+    vassalId,
+    tributeCondition,
+  );
 
   candidates.push(
-    candidateBase({
-      ...ctx,
-      candidateType: "vassal_tribute_extraction",
-      ruleId: "vassal_tribute_extraction",
-      type: "condition",
-      targetSaveId: vassalId,
-      severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
-      probability: 0.14 + relState.leverage * 0.18,
-      reasons: [
-        "Vassalage creates recurring tribute, legal concessions, and military obligation.",
-        "The overlord benefits structurally, but the vassal's local economy and legitimacy are strained.",
-      ],
-      relationshipPatch: {
-        resentment: clamp01(relState.resentment + 0.035),
-        dependency: clamp01(relState.dependency + 0.025),
-        leverage: clamp01(relState.leverage + 0.025),
-        tradeBalance: clamp01(relState.tradeBalance - 0.025),
-        pactStrength: clamp01(relState.pactStrength + 0.015),
-        overlordSaveId: overlordId,
-        vassalSaveId: vassalId,
-        trajectory: "extractive",
-      },
-      condition: {
-        archetype: "vassal_extraction",
-        label: "Vassal extraction",
-        description: "Tribute, levies, or legal concessions are draining local capacity.",
+    {
+      ...candidateBase({
+        ...ctx,
+        candidateType: "vassal_tribute_extraction",
+        ruleId: "vassal_tribute_extraction",
+        type: "condition",
+        targetSaveId: vassalId,
         severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
-        status: "stable",
-        triggeredAt: { tick, sourceEventType: "WORLD_PULSE_VASSALAGE", sourceEventTargetId: overlordId },
-        affectedSystems: ["trade_connectivity", "public_legitimacy", "faction_power", "defense_readiness"],
-        causes: [{ source: relationshipKeyFromEdge(edge), effect: "vassal_extraction", reason: "A vassal relationship transfers value upward." }],
-      },
-      metadata: { incidentType: "vassal_extraction", overlordSaveId: overlordId, vassalSaveId: vassalId },
-    }),
+        probability: 0.14 + relState.leverage * 0.18,
+        reasons: [
+          "Vassalage creates recurring tribute, legal concessions, and military obligation.",
+          "The overlord benefits structurally, but the vassal's local economy and legitimacy are strained.",
+        ],
+        relationshipPatch: {
+          resentment: clamp01(relState.resentment + 0.035),
+          dependency: clamp01(relState.dependency + 0.025),
+          leverage: clamp01(relState.leverage + 0.025),
+          tradeBalance: clamp01(relState.tradeBalance - 0.025),
+          pactStrength: clamp01(relState.pactStrength + 0.015),
+          overlordSaveId: overlordId,
+          vassalSaveId: vassalId,
+          trajectory: "extractive",
+        },
+        condition: tributeCondition,
+        metadata: { incidentType: "vassal_extraction", overlordSaveId: overlordId, vassalSaveId: vassalId },
+      }),
+      ...(tributeRecordMode ? { recordMode: tributeRecordMode } : {}),
+    },
   );
 
   const overlordColdWar = relationshipThirdParties(ctx, overlordId, ["cold_war"])[0];
@@ -623,22 +669,45 @@ function vassalRules(ctx) {
     );
   }
 
-  if (overlordWeakness > 0.5 || weaknessStreak > 0) {
-    const nextStreak = overlordWeakness > 0.5 ? weaknessStreak + 1 : Math.max(0, weaknessStreak - 1);
+  // CADENCE DAMPING (E4-2a): overlord-weakness memory used to be a GUARANTEED
+  // (probability 1) outcome that fired EVERY tick the overlord read weak — and
+  // every tick of the streak's slow decay afterward. rollCandidates treats
+  // probability ≥ 1 as a certainty that bypasses BOTH the auto budget and the
+  // feed's metronome suppression, so a single weak-overlord beat flooded a
+  // vassal arc's news with an unbroken run of near-identical "weakness noted" /
+  // "recovering" entries for a whole season. The amplifier house pattern now
+  // applies: the streak is still MEASURED at tick start (it feeds the
+  // independencePressure/rebellion gate below), but the VISIBLE beat is
+  //   (a) BOUNDED — at most once per WEAKNESS_MEMORY_COOLDOWN ticks per arc, and
+  //   (b) DAMPED — a normal (< 1) probability that shrinks as the streak grows
+  //       (diminishing returns on repetition), so it respects the auto budget
+  //       and lets the metronome collapse repeats.
+  // The memory lands once, sharply, then holds instead of hammering.
+  const overlordWeaknessActive = overlordWeakness > 0.5;
+  if ((overlordWeaknessActive || weaknessStreak > 0)
+    && !hasRecentIncident(relState, "overlord_weakness_memory", tick, WEAKNESS_MEMORY_COOLDOWN)) {
+    const nextStreak = overlordWeaknessActive ? weaknessStreak + 1 : Math.max(0, weaknessStreak - 1);
     candidates.push(
       internalDrift(ctx, "vassal_overlord_weakness_memory", {
         ruleId: "vassal_overlord_weakness_memory",
         severity: clamp01(0.18 + overlordWeakness * 0.28 + Math.min(0.24, nextStreak * 0.06)),
-        probability: 1,
+        // Damped, not guaranteed: a fresh weakness lands reliably; a long-
+        // remembered one re-notes rarely. Bounds keep it a real (nonzero)
+        // possibility so the streak — and the rebellion pressure it feeds —
+        // still builds, just without the per-tick flood.
+        probability: overlordWeaknessActive
+          ? clamp01(0.5 - Math.min(0.34, weaknessStreak * 0.08))
+          : clamp01(0.32 - Math.min(0.22, weaknessStreak * 0.05)),
         reasons: [
-          overlordWeakness > 0.5
+          overlordWeaknessActive
             ? "The overlord's weak legitimacy, economy, military, or defenses are becoming a remembered vassalage risk."
             : "The overlord is recovering, so vassal independence pressure cools gradually.",
+          `Weakness memory re-notes at most once per ${WEAKNESS_MEMORY_COOLDOWN} ticks; streak now ${nextStreak}.`,
         ],
         relationshipPatch: {
           overlordWeaknessStreak: nextStreak,
-          resentment: overlordWeakness > 0.5 ? clamp01(relState.resentment + 0.02) : relState.resentment,
-          trajectory: overlordWeakness > 0.5 ? "overlord_weakness_noted" : "overlord_recovery_noted",
+          resentment: overlordWeaknessActive ? clamp01(relState.resentment + 0.02) : relState.resentment,
+          trajectory: overlordWeaknessActive ? "overlord_weakness_noted" : "overlord_recovery_noted",
         },
         metadata: { incidentType: "overlord_weakness_memory", overlordWeakness, weaknessStreak: nextStreak },
       }),

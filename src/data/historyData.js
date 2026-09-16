@@ -1,32 +1,49 @@
-// historyData.js — History event templates
+// historyData.js — Settlement history + power-role tables.
 // Extracted from economicGenerator.js where they were misplaced.
-// Used by historyGenerator.js for settlement history generation.
+//
+// This file holds two unrelated datasets:
+//   1. POWER_ROLES_BY_CATEGORY — the catalog of notable power-holder roles
+//      (mayor, high priest, guild master, crime lord, …) keyed by domain,
+//      tier/institution-gated by economy/upgradeOpportunities.js.
+//   2. The genuine history-generation data (AGE_BY_TIER, HISTORICAL_EVENTS_DATA,
+//      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
-export const HISTORY_EVENTS = {
+import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
+import { pickVariant } from '../kernel/proseHash.js';
+
+// Notable power-holder roles by domain (government, religious, crafts,
+// military, economy, criminal, magic, other). Each entry describes a role that
+// can hold influence in a settlement and the conditions under which it appears.
+// Consumed by getUpgradeOpportunities to surface tier-appropriate roles.
+export const POWER_ROLES_BY_CATEGORY = {
   government: [
     {
       role: "Mayor",
       title: "mayor",
       priority: 10,
       minTier: "village",
+      goalCategories: ["power", "protection"],
     },
     {
       role: "Lord",
       title: "lord",
       priority: 10,
       minTier: "town",
+      goalCategories: ["power", "wealth"],
     },
     {
       role: "Governor",
       title: "mayor",
       priority: 10,
       minTier: "city",
+      goalCategories: ["power", "political"],
     },
     {
       role: "Duke/Viceroy",
       title: "mayor",
       priority: 10,
       minTier: "metropolis",
+      goalCategories: ["power", "political"],
       requiresInstKeyword: ['palace', 'royal seat', "noble governor"],
     },
     {
@@ -34,6 +51,7 @@ export const HISTORY_EVENTS = {
       title: "council",
       priority: 9,
       minTier: "metropolis",
+      goalCategories: ["power", "knowledge"],
       requiresInstKeyword: ['palace', 'royal seat', 'multiple court', "government complex"],
     },
     {
@@ -41,12 +59,14 @@ export const HISTORY_EVENTS = {
       title: "guild_master",
       priority: 8,
       minTier: "metropolis",
+      goalCategories: ["wealth", "power"],
     },
     {
       role: "Spymaster",
       title: "captain",
       priority: 8,
       minTier: "metropolis",
+      goalCategories: ["power", "personal"],
       requiresInstKeyword: ['palace', 'royal seat', "noble governor", 'city-state', "government complex"],
     },
     {
@@ -54,6 +74,7 @@ export const HISTORY_EVENTS = {
       title: "council",
       priority: 7,
       minTier: "metropolis",
+      goalCategories: ["political", "personal"],
       requiresInstKeyword: ['palace', 'royal seat', "government complex", 'guild consortium', 'city-state'],
     },
     {
@@ -61,18 +82,21 @@ export const HISTORY_EVENTS = {
       title: "council",
       priority: 7,
       minTier: "town",
+      goalCategories: ["power", "reform"],
     },
     {
       role: "Tax Collector",
       title: "tax_collector",
       priority: 5,
       minTier: "village",
+      goalCategories: ["wealth", "power"],
     },
     {
       role: "Chief Magistrate",
       title: "magistrate",
       priority: 7,
       minTier: "town",
+      goalCategories: ["justice", "power"],
       requiresInstKeyword: ['court', 'town hall', 'city hall', 'prison'],
     },
     {
@@ -80,6 +104,7 @@ export const HISTORY_EVENTS = {
       title: "clerk",
       priority: 3,
       minTier: "town",
+      goalCategories: ["knowledge", "personal"],
       requiresInstKeyword: ['town hall', 'city hall', 'court'],
     },
     {
@@ -87,6 +112,7 @@ export const HISTORY_EVENTS = {
       title: "harbor_master",
       priority: 6,
       minTier: "town",
+      goalCategories: ["wealth", "power"],
       requiresPort: !0,
     },
     {
@@ -94,24 +120,28 @@ export const HISTORY_EVENTS = {
       title: 'overseer',
       priority: 6,
       minTier: 'hamlet',
+      goalCategories: ['justice', 'wealth'],
     },
     {
       role: 'Herald/Town Crier',
       title: 'clerk',
       priority: 4,
       minTier: 'village',
+      goalCategories: ['knowledge', 'personal'],
     },
     {
       role: 'Notary/Scrivener',
       title: 'clerk',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['knowledge', 'wealth'],
     },
     {
       role: 'Customs Inspector',
       title: 'overseer',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['justice', 'wealth'],
       requiresInstKeyword: ['customs', 'harbour', 'harbor', 'dock', 'assay'],
     },
     {
@@ -119,6 +149,7 @@ export const HISTORY_EVENTS = {
       title: 'warden',
       priority: 5,
       minTier: 'city',
+      goalCategories: ['justice', 'power'],
       requiresInstKeyword: ['prison', 'stocks', 'workhouse'],
     },
     {
@@ -126,6 +157,7 @@ export const HISTORY_EVENTS = {
       title: 'advisor',
       priority: 7,
       minTier: 'city',
+      goalCategories: ['power', 'knowledge'],
       requiresInstKeyword: ['palace', 'royal seat', "noble governor", "lord's"],
     },
     {
@@ -133,80 +165,86 @@ export const HISTORY_EVENTS = {
       title: 'council',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'justice'],
     },
     // ── Noble / feudal leadership ────────────────────────────────────────────
-    // Merged from the former HISTORY_EVENTS.noble bucket. That key was a dead
-    // bucket: getUpgradeOpportunities (economicGenerator.js) matches a bucket
-    // only when some institution carries priorityCategory/category equal to the
-    // bucket key, but no catalog entry uses 'noble' on either axis — and the
-    // closed-set governance pin (categoryVocabulary.js + categoryGovernance
-    // .test.js) forbids introducing one. The codebase already treats 'noble' as
-    // an alias of 'government' at the domain layer (deriveNpcProfile maps noble
-    // leverage to government; see wave1CohesionFixes.test.js), so these feudal
-    // leadership roles belong in the reachable 'government' bucket. They now
-    // surface for any settlement with a government institution at the right tier.
+    // Merged from the former POWER_ROLES_BY_CATEGORY.noble bucket. 'noble' was a
+    // dead bucket key: getUpgradeOpportunities (economy/upgradeOpportunities.js)
+    // surfaces a bucket's roles only when some institution carries
+    // priorityCategory/category equal to the bucket key, but no catalog entry
+    // uses 'noble' on either axis and the closed-set category vocabulary
+    // (src/data/categoryVocabulary.js) never admits one — so the bucket never
+    // matched a settlement. The domain layer already aliases 'noble' to
+    // 'government' (deriveNpcProfile maps noble leverage to government; see
+    // src/domain/npcProfile.js, pinned by tests/domain/wave1CohesionFixes.test.js),
+    // so these feudal leadership roles belong in the reachable 'government'
+    // bucket, where they now surface for any settlement with a government
+    // institution at the right tier. goalCategories and the requiresInstKeyword
+    // coherence gates are preserved exactly as they stood in the noble bucket.
     {
       role: 'Lord/Lady of the Manor',
       title: 'noble',
       priority: 8,
       minTier: 'village',
+      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Baron/Baroness',
       title: 'noble',
       priority: 9,
       minTier: 'town',
+      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Court Advisor',
       title: 'advisor',
       priority: 7,
       minTier: 'town',
+      goalCategories: ['power', 'knowledge'],
     },
     {
       role: 'House Steward',
       title: 'steward',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Noble Heir',
       title: 'noble',
       priority: 5,
       minTier: 'hamlet',
+      goalCategories: ['personal', 'power'],
     },
     {
       role: 'Land Agent',
       title: 'agent',
       priority: 5,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Knight/Dame',
       title: 'knight',
       priority: 7,
       minTier: 'village',
+      goalCategories: ['protection', 'personal'],
     },
     {
       role: 'Duke/Duchess',
       title: 'noble',
       priority: 10,
       minTier: 'metropolis',
-      // Coherence gate (consumed by getUpgradeOpportunities' requiresInstKeyword
-      // filter): feudal leadership only appears where a palace / royal seat /
-      // noble-governor / government complex exists. The noble→government merge
-      // dropped this guard; restored so a Duke can't materialise in a settlement
-      // with no seat of feudal power.
-      requiresInstKeyword: ['palace', 'royal seat', 'noble governor', 'government complex'],
+      goalCategories: ['power', 'wealth'],
+      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
     },
     {
       role: 'Royal Chamberlain',
       title: 'noble',
       priority: 8,
       minTier: 'city',
-      // Coherence gate (see Duke/Duchess): a royal chamberlain serves a palace /
-      // royal seat / government complex. Restored after the noble→government merge.
-      requiresInstKeyword: ['palace', 'royal seat', 'government complex'],
+      goalCategories: ['power', 'personal'],
+      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
     },
   ],
   religious: [
@@ -215,12 +253,14 @@ export const HISTORY_EVENTS = {
       title: "priest",
       priority: 9,
       minTier: "village",
+      goalCategories: ["spiritual", "power"],
     },
     {
       role: "Abbot/Abbess",
       title: "priest",
       priority: 8,
       minTier: "town",
+      goalCategories: ["spiritual", "knowledge"],
       requiresInstKeyword: ['monastery', 'friary', 'monastic'],
     },
     {
@@ -228,6 +268,7 @@ export const HISTORY_EVENTS = {
       title: "inquisitor",
       priority: 7,
       minTier: "city",
+      goalCategories: ["spiritual", "justice"],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
     },
     {
@@ -235,6 +276,7 @@ export const HISTORY_EVENTS = {
       title: "priest",
       priority: 10,
       minTier: "metropolis",
+      goalCategories: ["power", "religion"],
       requiresInstKeyword: ['cathedral', 'great cathedral', 'parish churches'],
     },
     {
@@ -242,6 +284,7 @@ export const HISTORY_EVENTS = {
       title: "templar",
       priority: 7,
       minTier: "city",
+      goalCategories: ["spiritual", "protection"],
       requiresInstKeyword: ['barracks', 'garrison', 'monastery', 'cathedral'],
     },
     {
@@ -249,12 +292,14 @@ export const HISTORY_EVENTS = {
       title: "priest",
       priority: 6,
       minTier: "hamlet",
+      goalCategories: ["spiritual", "personal"],
     },
     {
       role: "Monastery Archivist",
       title: "clerk",
       priority: 4,
       minTier: "town",
+      goalCategories: ["knowledge", "spiritual"],
       requiresInstKeyword: ['monastery', 'friary', 'great library'],
     },
     {
@@ -262,6 +307,7 @@ export const HISTORY_EVENTS = {
       title: 'priest',
       priority: 5,
       minTier: 'thorp',
+      goalCategories: ['spiritual', 'personal'],
       requiresInstKeyword: ['shrine', 'wayside', 'temple', 'church'],
     },
     {
@@ -269,12 +315,14 @@ export const HISTORY_EVENTS = {
       title: 'priest',
       priority: 5,
       minTier: 'hamlet',
+      goalCategories: ['spiritual', 'personal'],
     },
     {
       role: 'Temple Healer',
       title: 'healer',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['spiritual', 'protection'],
       requiresInstKeyword: ['hospital', 'church', 'monastery', 'shrine'],
     },
     {
@@ -282,6 +330,7 @@ export const HISTORY_EVENTS = {
       title: 'priest',
       priority: 4,
       minTier: 'hamlet',
+      goalCategories: ['spiritual', 'personal'],
       requiresInstKeyword: ['church', 'parish', 'cathedral', 'monastery'],
     },
     {
@@ -289,6 +338,7 @@ export const HISTORY_EVENTS = {
       title: 'priest',
       priority: 5,
       minTier: 'village',
+      goalCategories: ['spiritual', 'protection'],
       requiresInstKeyword: ['barracks', 'garrison', 'church', 'monastery', "noble governor", 'palace'],
     },
     {
@@ -296,12 +346,14 @@ export const HISTORY_EVENTS = {
       title: 'priest',
       priority: 7,
       minTier: 'town',
+      goalCategories: ['spiritual', 'knowledge'],
     },
     {
       role: 'Head of the Faithful',
       title: 'priest',
       priority: 8,
       minTier: 'city',
+      goalCategories: ['power', 'spiritual'],
       requiresInstKeyword: ['cathedral', 'monastery', 'great cathedral', 'parish churches'],
     },
     {
@@ -309,6 +361,7 @@ export const HISTORY_EVENTS = {
       title: 'inquisitor',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['spiritual', 'justice'],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
     },
   ],
@@ -318,36 +371,42 @@ export const HISTORY_EVENTS = {
       title: 'master',
       priority: 7,
       minTier: 'hamlet',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Carpenter',
       title: 'master',
       priority: 6,
       minTier: 'hamlet',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Weaver',
       title: 'master',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Tanner',
       title: 'master',
       priority: 5,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Head Brewer',
       title: 'guild',
       priority: 5,
       minTier: 'hamlet',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Guild Warden',
       title: 'guild',
       priority: 7,
       minTier: 'town',
+      goalCategories: ['power', 'wealth'],
       requiresGuild: true,
     },
     {
@@ -355,6 +414,7 @@ export const HISTORY_EVENTS = {
       title: 'overseer',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
       requiresGuild: true,
     },
     {
@@ -362,6 +422,7 @@ export const HISTORY_EVENTS = {
       title: 'guild',
       priority: 6,
       minTier: 'city',
+      goalCategories: ['power', 'wealth'],
       requiresGuild: true,
     },
     {
@@ -369,12 +430,14 @@ export const HISTORY_EVENTS = {
       title: 'master',
       priority: 4,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Master Glassblower',
       title: 'master',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
     },
   ],
   military: [
@@ -383,24 +446,28 @@ export const HISTORY_EVENTS = {
       title: "guard",
       priority: 8,
       minTier: "village",
+      goalCategories: ["protection", "justice"],
     },
     {
       role: "Garrison Commander",
       title: "guard",
       priority: 8,
       minTier: "town",
+      goalCategories: ["military", "power"],
     },
     {
       role: "City Watch Chief",
       title: "guard",
       priority: 8,
       minTier: "city",
+      goalCategories: ["protection", "justice"],
     },
     {
       role: "Mercenary Captain",
       title: "captain",
       priority: 6,
       minTier: "town",
+      goalCategories: ["wealth", "power"],
       requiresInstKeyword: ['mercenary', 'free company', 'charter', 'hireling'],
     },
     {
@@ -408,6 +475,7 @@ export const HISTORY_EVENTS = {
       title: "master",
       priority: 6,
       minTier: "city",
+      goalCategories: ["protection", "personal"],
       requiresInstKeyword: ['barracks', 'garrison', 'citadel'],
     },
     {
@@ -415,18 +483,21 @@ export const HISTORY_EVENTS = {
       title: "overseer",
       priority: 5,
       minTier: "town",
+      goalCategories: ["wealth", "military"],
     },
     {
       role: 'Scout/Ranger',
       title: 'guard',
       priority: 6,
       minTier: 'hamlet',
+      goalCategories: ['protection', 'personal'],
     },
     {
       role: 'Siege Engineer',
       title: 'master',
       priority: 6,
       minTier: 'city',
+      goalCategories: ['military', 'knowledge'],
       requiresInstKeyword: ['wall', 'citadel', 'fortif', 'barracks', 'garrison'],
     },
     {
@@ -434,18 +505,21 @@ export const HISTORY_EVENTS = {
       title: 'warden',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['protection', 'justice'],
     },
     {
       role: 'Veteran Soldier',
       title: 'guard',
       priority: 5,
       minTier: 'hamlet',
+      goalCategories: ['personal', 'protection'],
     },
     {
       role: 'Cavalry Commander',
       title: 'captain',
       priority: 7,
       minTier: 'city',
+      goalCategories: ['military', 'power'],
       requiresInstKeyword: ['stable', 'barracks', 'garrison', 'knight'],
     },
     {
@@ -453,6 +527,7 @@ export const HISTORY_EVENTS = {
       title: 'master',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'military'],
       requiresInstKeyword: ['blacksmith', 'smith', 'metalwork', 'specialized metal'],
     },
     {
@@ -460,6 +535,7 @@ export const HISTORY_EVENTS = {
       title: 'captain',
       priority: 8,
       minTier: 'city',
+      goalCategories: ['military', 'power'],
       requiresPort: true,
     },
   ],
@@ -469,12 +545,14 @@ export const HISTORY_EVENTS = {
       title: "merchant",
       priority: 8,
       minTier: "town",
+      goalCategories: ["wealth", "power"],
     },
     {
       role: "Guild Master",
       title: "guild",
       priority: 8,
       minTier: "village",
+      goalCategories: ["power", "wealth"],
       requiresGuild: !0,
     },
     {
@@ -482,12 +560,14 @@ export const HISTORY_EVENTS = {
       title: "master",
       priority: 6,
       minTier: "village",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Moneylender",
       title: "banker",
       priority: 7,
       minTier: "town",
+      goalCategories: ["wealth", "power"],
       requiresInstKeyword: ['money', 'bank', 'pawnbroker', 'exchange', 'credit'],
     },
     {
@@ -495,18 +575,21 @@ export const HISTORY_EVENTS = {
       title: "overseer",
       priority: 5,
       minTier: "village",
+      goalCategories: ["wealth", "justice"],
     },
     {
       role: "Trade Factor",
       title: "merchant",
       priority: 5,
       minTier: "town",
+      goalCategories: ["wealth", "knowledge"],
     },
     {
       role: "Master Shipwright",
       title: "master",
       priority: 5,
       minTier: "town",
+      goalCategories: ["wealth", "personal"],
       requiresPort: !0,
     },
     {
@@ -514,12 +597,14 @@ export const HISTORY_EVENTS = {
       title: 'merchant',
       priority: 5,
       minTier: 'thorp',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Ship Captain',
       title: 'captain',
       priority: 7,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
       requiresPort: true,
     },
     {
@@ -527,6 +612,7 @@ export const HISTORY_EVENTS = {
       title: 'overseer',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
       requiresInstKeyword: ['warehouse', 'granary', 'storage'],
     },
     {
@@ -534,6 +620,7 @@ export const HISTORY_EVENTS = {
       title: 'merchant',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['wealth', 'protection'],
       requiresInstKeyword: ['granary', 'grain', 'mill', 'market'],
     },
     {
@@ -541,12 +628,14 @@ export const HISTORY_EVENTS = {
       title: 'merchant',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'knowledge'],
     },
     {
       role: 'Caravan Master',
       title: 'merchant',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
       requiresInstKeyword: ['caravan', 'coaching', 'stable', 'waystation'],
     },
     {
@@ -554,6 +643,7 @@ export const HISTORY_EVENTS = {
       title: 'banker',
       priority: 6,
       minTier: 'city',
+      goalCategories: ['wealth', 'power'],
       requiresInstKeyword: ['bank', 'banking', 'money changer', 'mint', 'assay'],
     },
   ],
@@ -563,84 +653,98 @@ export const HISTORY_EVENTS = {
       title: "fence",
       priority: 7,
       minTier: "thorp",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Bandit Contact",
       title: "contact",
       priority: 6,
       minTier: "thorp",
+      goalCategories: ["protection", "wealth"],
     },
     {
       role: "Smuggler",
       title: "smuggler",
       priority: 6,
       minTier: "hamlet",
+      goalCategories: ["wealth", "personal"],
     },
     {
-      role: "Crime Boss",
+      role: "Thieves' Guild Master",
       title: "guild_master",
       priority: 8,
       minTier: "town",
+      goalCategories: ["power", "wealth"],
     },
     {
       role: "Black Market Fence",
       title: "fence",
       priority: 6,
       minTier: "town",
+      goalCategories: ["wealth", "knowledge"],
     },
     {
       role: "Smuggler Chief",
       title: "smuggler",
       priority: 6,
       minTier: "town",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Crime Lord",
       title: "lord",
       priority: 9,
       minTier: "city",
+      goalCategories: ["power", "wealth"],
     },
     {
       role: "Shadow Council Leader",
       title: "lord",
       priority: 10,
       minTier: "metropolis",
+      goalCategories: ["wealth", "power"],
     },
     {
       role: "Assassin Guildmaster",
       title: "master",
       priority: 7,
       minTier: "city",
+      goalCategories: ["power", "wealth"],
     },
     {
       role: "Corrupt Official",
       title: "overseer",
       priority: 5,
       minTier: "town",
+      goalCategories: ["wealth", "power"],
     },
     {
       role: 'Cutpurse/Pickpocket',
       title: 'fence',
       priority: 4,
       minTier: 'thorp',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Racketeer',
       title: 'contact',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['wealth', 'power'],
     },
     {
       role: 'Spy/Informant',
       title: 'contact',
       priority: 6,
       minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Counterfeiter',
       title: 'fence',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['wealth', 'knowledge'],
       requiresInstKeyword: ['bank', 'mint', 'money', 'assay', 'banking'],
     },
     {
@@ -648,12 +752,14 @@ export const HISTORY_EVENTS = {
       title: 'lord',
       priority: 7,
       minTier: 'town',
+      goalCategories: ['power', 'wealth'],
     },
     {
       role: 'Underground Broker',
       title: 'merchant',
       priority: 6,
       minTier: 'city',
+      goalCategories: ['wealth', 'knowledge'],
     },
   ],
   magic: [
@@ -662,6 +768,7 @@ export const HISTORY_EVENTS = {
       title: "wizard",
       priority: 8,
       minTier: "city",
+      goalCategories: ["knowledge", "power"],
       requiresInstKeyword: ["wizard's tower", 'wizard'],
     },
     {
@@ -669,12 +776,14 @@ export const HISTORY_EVENTS = {
       title: "archmage",
       priority: 9,
       minTier: "city",
+      goalCategories: ["knowledge", "power"],
     },
     {
       role: "Grand Magister",
       title: "archmage",
       priority: 10,
       minTier: "metropolis",
+      goalCategories: ["power", "knowledge"],
       requiresInstKeyword: ['academy', "mages' district", "mages' guild", 'great library'],
     },
     {
@@ -682,6 +791,7 @@ export const HISTORY_EVENTS = {
       title: "sorcerer",
       priority: 7,
       minTier: "town",
+      goalCategories: ["knowledge", "personal"],
       requiresInstKeyword: ['wizard', 'mage', 'alchemist', 'enchant'],
     },
     {
@@ -689,6 +799,7 @@ export const HISTORY_EVENTS = {
       title: "alchemist",
       priority: 6,
       minTier: "town",
+      goalCategories: ["knowledge", "wealth"],
       requiresInstKeyword: ['alchemist', 'alchemy'],
     },
     {
@@ -696,12 +807,14 @@ export const HISTORY_EVENTS = {
       title: "wizard",
       priority: 5,
       minTier: "village",
+      goalCategories: ["knowledge", "personal"],
     },
     {
       role: "Arcane Archivist",
       title: "clerk",
       priority: 4,
       minTier: "city",
+      goalCategories: ["knowledge", "spiritual"],
       requiresInstKeyword: ['great library', "mages' guild", 'academy', "mages' district"],
     },
     {
@@ -709,18 +822,21 @@ export const HISTORY_EVENTS = {
       title: 'wizard',
       priority: 5,
       minTier: 'village',
+      goalCategories: ['knowledge', 'wealth'],
     },
     {
       role: 'Runesmith',
       title: 'master',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['knowledge', 'wealth'],
     },
     {
       role: 'Enchanter',
       title: 'wizard',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['knowledge', 'wealth'],
       requiresInstKeyword: ['enchant'],
     },
     {
@@ -728,12 +844,14 @@ export const HISTORY_EVENTS = {
       title: 'wizard',
       priority: 5,
       minTier: 'village',
+      goalCategories: ['knowledge', 'personal'],
     },
     {
       role: 'Druid Elder',
       title: 'druid',
       priority: 7,
       minTier: 'village',
+      goalCategories: ['spiritual', 'protection'],
       requiresInstKeyword: ['druid', 'elder grove', "warden's lodge"],
     },
     {
@@ -741,12 +859,14 @@ export const HISTORY_EVENTS = {
       title: 'sorcerer',
       priority: 6,
       minTier: 'town',
+      goalCategories: ['power', 'personal'],
     },
     {
       role: 'Artificer',
       title: 'master',
       priority: 6,
       minTier: 'city',
+      goalCategories: ['knowledge', 'wealth'],
       requiresInstKeyword: ['arcane', 'mage', 'enchant', 'golem', 'academy'],
     },
     {
@@ -754,6 +874,7 @@ export const HISTORY_EVENTS = {
       title: 'wizard',
       priority: 4,
       minTier: 'town',
+      goalCategories: ['knowledge', 'personal'],
     },
   ],
   other: [
@@ -762,36 +883,42 @@ export const HISTORY_EVENTS = {
       title: "owner",
       priority: 5,
       minTier: "hamlet",
+      goalCategories: ["wealth", "knowledge"],
     },
     {
       role: "Sage/Scholar",
       title: "sage",
       priority: 6,
       minTier: "town",
+      goalCategories: ["knowledge", "personal"],
     },
     {
       role: "Healer",
       title: "healer",
       priority: 7,
       minTier: "village",
+      goalCategories: ["protection", "spiritual"],
     },
     {
       role: "Master Builder",
       title: "master",
       priority: 6,
       minTier: "town",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Bard/Chronicler",
       title: "sage",
       priority: 4,
       minTier: "town",
+      goalCategories: ["knowledge", "personal"],
     },
     {
       role: "Retired Adventurer",
       title: "owner",
       priority: 4,
       minTier: "village",
+      goalCategories: ["personal", "protection"],
     },
     {
       role: "Miller",
@@ -799,6 +926,7 @@ export const HISTORY_EVENTS = {
       category: "economy",
       priority: 8,
       minTier: "thorp",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Elder",
@@ -806,12 +934,14 @@ export const HISTORY_EVENTS = {
       category: "government",
       priority: 7,
       minTier: "thorp",
+      goalCategories: ["protection", "personal"],
     },
     {
       role: "Hedge Witch",
       title: "healer",
       priority: 5,
       minTier: "thorp",
+      goalCategories: ["knowledge", "spiritual"],
     },
     {
       role: "Innkeeper",
@@ -819,114 +949,133 @@ export const HISTORY_EVENTS = {
       category: "economy",
       priority: 6,
       minTier: "thorp",
+      goalCategories: ["wealth", "knowledge"],
     },
     {
       role: "Wandering Peddler",
       title: "merchant",
       priority: 4,
       minTier: "thorp",
+      goalCategories: ["wealth", "knowledge"],
     },
     {
       role: "Shepherd",
       title: "owner",
       priority: 3,
       minTier: "thorp",
+      goalCategories: ["personal", "protection"],
     },
     {
       role: "Woodcutter",
       title: "owner",
       priority: 3,
       minTier: "thorp",
+      goalCategories: ["personal", "protection"],
     },
     {
       role: "Blacksmith",
       title: "master",
       priority: 6,
       minTier: "thorp",
+      goalCategories: ["wealth", "personal"],
     },
     {
       role: "Widowed Farmer",
       title: "elder",
       priority: 4,
       minTier: "thorp",
+      goalCategories: ["personal", "protection"],
     },
     {
       role: "Wounded Soldier",
       title: "guard",
       priority: 4,
       minTier: "thorp",
+      goalCategories: ["personal", "protection"],
     },
     {
       role: "Village Priest",
       title: "priest",
       priority: 5,
       minTier: "thorp",
+      goalCategories: ["spiritual", "personal"],
     },
     {
       role: 'Midwife',
       title: 'healer',
       priority: 5,
       minTier: 'thorp',
+      goalCategories: ['protection', 'personal'],
     },
     {
       role: 'Apothecary',
       title: 'healer',
       priority: 6,
       minTier: 'hamlet',
+      goalCategories: ['knowledge', 'wealth'],
     },
     {
       role: 'Cartographer',
       title: 'clerk',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['knowledge', 'wealth'],
     },
     {
       role: 'Rat Catcher',
       title: 'agent',
       priority: 3,
       minTier: 'hamlet',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Gravedigger',
       title: 'agent',
       priority: 3,
       minTier: 'hamlet',
+      goalCategories: ['personal', 'spiritual'],
     },
     {
       role: 'Fisherman',
       title: 'agent',
       priority: 4,
       minTier: 'thorp',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Debt-Ridden Noble',
       title: 'noble',
       priority: 4,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Disgraced Official',
       title: 'overseer',
       priority: 4,
       minTier: 'town',
+      goalCategories: ['personal', 'justice'],
     },
     {
       role: 'Street Preacher',
       title: 'priest',
       priority: 4,
       minTier: 'hamlet',
+      goalCategories: ['spiritual', 'personal'],
     },
     {
       role: 'Mercenary-for-Hire',
       title: 'guard',
       priority: 4,
       minTier: 'hamlet',
+      goalCategories: ['wealth', 'personal'],
     },
     {
       role: 'Dockworker/Stevedore',
       title: 'agent',
       priority: 3,
       minTier: 'town',
+      goalCategories: ['wealth', 'personal'],
       requiresPort: true,
     },
     {
@@ -934,18 +1083,21 @@ export const HISTORY_EVENTS = {
       title: 'bard',
       priority: 4,
       minTier: 'hamlet',
+      goalCategories: ['personal', 'wealth'],
     },
     {
       role: 'Debt Collector',
       title: 'agent',
       priority: 5,
       minTier: 'town',
+      goalCategories: ['wealth', 'justice'],
     },
     {
       role: 'Escaped Slave/Serf',
       title: 'agent',
       priority: 4,
       minTier: 'hamlet',
+      goalCategories: ['personal', 'protection'],
     },
   ],
 };
@@ -977,20 +1129,20 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
       'The ailing ruler wants a final errand completed before naming a successor',
-      'Someone is poisoning the ruler slowly, and the physician knows.',
+      'Someone is poisoning the ruler slowly, and the physician knows',
     ],
     severity: ['minor', 'major'],
   },
   {
     type: 'economic_disparity',
-    description: 'The gap between the merchant class and common laborers widened until it bred open resentment',
+    description: 'Growing wealth gap between merchant class and common laborers creates resentment',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
     lastingEffects: [
       'Wage disputes settled by a standing arbitration council since founded',
       "The merchant quarter and the labourers' quarter remain walled apart",
     ],
     plotHooks: [
-      'A reformer has been found dead. Suicide, or silenced?',
+      'A reformer has been found dead. Suicide or silenced?',
       "A hidden ledger documenting wage theft is circulating in the workers' quarter",
       'A merchant is funding both the reform movement and the suppression of it',
     ],
@@ -998,7 +1150,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'religious_tension',
-    description: 'Rival faiths and rival readings of the same faith fought for influence and converts',
+    description: 'Different faiths or interpretations competed for influence and converts',
     factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
     lastingEffects: [
       "Two rival congregations still divide the settlement's faithful",
@@ -1007,7 +1159,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
-      'Someone is staging miracles for one side; the question is who benefits.',
+      'Someone is staging miracles for one side. The question is who benefits',
     ],
     severity: ['minor', 'major'],
   },
@@ -1043,7 +1195,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'resource_scarcity',
-    description: 'A critical resource ran short, and hoarding and price gouging followed',
+    description: 'A critical resource became scarce, causing hoarding and price gouging',
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
     lastingEffects: [
       'Emergency granary reserves mandated by ordinance since the shortage',
@@ -1051,7 +1203,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'A warehouse full of the resource is being held off the market deliberately',
-      'The scarcity was engineered: someone destroyed the competing supply route.',
+      'The scarcity was engineered. Someone destroyed the competing supply route',
       'An alternative source exists but the information is being suppressed',
     ],
     severity: ['minor', 'major'],
@@ -1065,7 +1217,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'Vigilante bands never fully disbanded and still operate quietly',
     ],
     plotHooks: [
-      'The crime wave is coordinated; someone is directing it to create a pretext for seizing power.',
+      'The crime wave is coordinated. Someone is directing it to create a pretext',
       'A guard captain is on the payroll of the criminal network',
       'The vigilantes have begun targeting innocents based on bad information',
     ],
@@ -1088,7 +1240,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'generational_divide',
-    description: 'Old ways and new ideas set the generations against each other',
+    description: 'Old ways vs new ideas creates conflict between age groups',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
     lastingEffects: [
       'Council seats now formally split between the old and young factions',
@@ -1097,7 +1249,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       "A traditional practice conceals something the elders don't want examined",
       "A young reformer has uncovered records that undermine the old guard's legitimacy",
-      'The new idea being promoted was actually tried once before, and it failed badly.',
+      "The 'new idea' being promoted was actually tried once before, and failed badly",
     ],
     severity: ['minor'],
   },
@@ -1111,7 +1263,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The investigator who uncovered the corruption has received a death threat',
-      "A key witness can be found, but won't speak without protection.",
+      "A key witness can be found, but won't speak without protection",
       'The corruption goes higher than anyone yet suspects; the reformers are being used',
     ],
     severity: ['major'],
@@ -1131,7 +1283,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'The original loan documents contain a clause that was never disclosed publicly',
       "A creditor's agent is in town conducting a quiet assessment before enforcement",
-      'The debt could be voided if someone can prove it was obtained through fraud',
+      'The debt could be voided, if someone can prove it was obtained through fraud',
     ],
     severity: ['major'],
   },
@@ -1158,7 +1310,7 @@ export const HISTORICAL_EVENTS_DATA = [
   {
     type: 'infiltration_fear',
     description:
-      'Rumours of enemy agents within the settlement (some true) caused suspicion and denunciations',
+      'Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations',
     factions: [
       'Security hardliners',
       'Civil libertarians',
@@ -1171,7 +1323,7 @@ export const HISTORICAL_EVENTS_DATA = [
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
       'An innocent person has been identified as a spy and is about to be executed',
-      "The agents' handler is someone in a position of trust, and the party has already met them.",
+      "The agents' handler is someone in a position of trust, and the PCs have already met them",
     ],
     severity: ['major'],
   },
@@ -1190,7 +1342,7 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     plotHooks: [
       'The original charter is held in a private archive whose owner has gone missing',
-      'Something of value was found on the disputed land, and that is why the claim is suddenly being pressed.',
+      'Something of value was found on the disputed land, which is why the claim is suddenly being pressed',
       "A forged document is about to be introduced as evidence; someone knows it's fake",
     ],
     severity: ['minor', 'major'],
@@ -1209,7 +1361,7 @@ export const HISTORICAL_EVENTS_DATA = [
       'A resettlement compact governs where new arrivals may hold property',
     ],
     plotHooks: [
-      'The newcomers fled something, and that something has sent agents after them.',
+      'The newcomers fled something, and that something has sent agents after them',
       "A series of 'accidents' targeting newcomers is being attributed to chance",
       'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
     ],
@@ -1229,11 +1381,166 @@ export const HISTORICAL_EVENTS_DATA = [
       'A regency council formed in the interim never fully dissolved',
     ],
     plotHooks: [
-      'The departed leader left a sealed document designating a successor, and someone wants it destroyed before it can be read.',
+      "The departed leader left a sealed document designating a successor, and someone wants it destroyed before it's read",
       'One claimant has manufactured evidence of a mandate they actually lack',
       'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
     ],
     severity: ['major', 'catastrophic'],
+  },
+  // ── generators-domain-6: additional timeline templates ─────────────────────
+  // Authored to give city/metropolis timelines enough distinct arcs to reach
+  // their event budget (the old category-keyed dedup capped every settlement at
+  // ~8 events) and to deepen the thin disaster/religious/magical categories.
+  // Same voice/shape as the arcs above: one-line setup, three factions, three
+  // present-tense hooks, a severity band. Tokens ({resource}, {location}, etc.)
+  // resolve through the history renderer for both timelines and current tensions.
+  {
+    type: 'market_crash',
+    description: 'A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation',
+    factions: ['Ruined speculators', 'Creditors calling in debts', 'Those who sold in time'],
+    plotHooks: [
+      'A ledger names who was warned to sell before the collapse, and who was not',
+      'A ruined family blames a rival for engineering the panic, and wants proof',
+      'The debts that survived the crash were quietly bought up by a single hidden buyer',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'trade_collapse',
+    description: 'The {route_type} trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years',
+    factions: ['Displaced traders', 'Workers left without wages', 'Rivals who profited from the diversion'],
+    plotHooks: [
+      'The route could be reopened, but someone with power prefers it stay closed',
+      'A caravan master swears the collapse was arranged, and kept the correspondence to prove it',
+      'An old contract still obliges a distant partner to trade here, if anyone can enforce it',
+    ],
+    severity: ['major'],
+  },
+  {
+    type: 'great_fire',
+    description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
+    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
+    plotHooks: [
+      'The fire spared exactly the properties one faction wanted cleared. Coincidence is doubted',
+      'A confession was extracted from a scapegoat; the real arsonist still lives in town',
+      'Rebuilding uncovered something in the ashes that predates the settlement',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'plague_years',
+    description: 'A sickness moved through the settlement for {duration} seasons, thinning families and testing every institution to its limit',
+    factions: ['Quarantine hardliners', 'The bereaved and the blamed', 'Healers and charlatans alike'],
+    plotHooks: [
+      'A healer who profited enormously during the plague is being asked how they stayed untouched',
+      'A mass grave from the years holds a body that does not belong to any recorded victim',
+      'The quarantine was used to settle old scores, and the survivors remember exactly who',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'great_flood',
+    description: 'Waters rose with little warning and reshaped {location}, drowning livelihoods and redrawing who owned what',
+    factions: ['Displaced families', 'Landowners pressing newly-convenient claims', 'Those who profited from the redrawing'],
+    plotHooks: [
+      'The old property boundaries washed away, and the new map favours whoever drew it',
+      'A structure meant to hold back the water had been quietly left to rot, and someone knew',
+      'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'heresy_trial',
+    description: 'An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides',
+    factions: ['The accusers', 'The accused and their sympathizers', 'Authorities exploiting the rift'],
+    plotHooks: [
+      'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
+      "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
+      'A relic seized during the trial never reached the temple vault it was bound for',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'pilgrimage_surge',
+    description: 'A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good',
+    factions: ['Temple beneficiaries', 'Overwhelmed old residents', 'Sceptics who doubt the miracle'],
+    plotHooks: [
+      'The miracle can be explained mundanely, and the person who can explain it is being kept quiet',
+      'The pilgrim trade made one family rich enough to buy the office that authenticates relics',
+      'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'popular_uprising',
+    description: 'The common people rose against the ruling powers over {demands}, and the settlement has never entirely closed the account',
+    factions: ['Former rebels', 'The restored order', 'Those who changed sides at the right moment'],
+    plotHooks: [
+      'A list of everyone who informed on the rebels survived, and it names people still in office',
+      'The uprising was funded by an outside hand that has come back to collect on the favour',
+      'A concession won in the revolt is being quietly rolled back, and the old anger is stirring again',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'tyranny',
+    description: 'A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority',
+    factions: ['Old loyalists', 'Those who suffered under the regime', 'Beneficiaries who kept their gains'],
+    plotHooks: [
+      "The tyrant's private records survived, and they implicate respectable families in the worst of it",
+      'A fortune the regime confiscated was never returned, and the rightful heirs have surfaced',
+      'Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'wild_magic',
+    description: 'An uncontrolled surge of magic left its mark on {quarter} and on the people who were there, and the effects have never fully faded',
+    factions: ['The changed and their descendants', 'Those who fear them', 'Scholars studying the residue'],
+    plotHooks: [
+      'The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed',
+      'A bloodline touched by the surge is now manifesting something the family cannot conceal',
+      'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise',
+    ],
+    severity: ['minor', 'major'],
+  },
+  // ── generators-domain-1: tension templates the STRESS_TO_TENSION map targets ──
+  // insurgency/religious_conversion/slave_revolt → legitimacy_crisis; mass_migration
+  // → demographic_pressure; a trade-partner neighbour → trade_dispute. These three
+  // types were referenced by name but had no template, so the find() silently
+  // dropped the tension — the settlement's active stress never reached its history.
+  {
+    type: 'legitimacy_crisis',
+    description: 'The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim',
+    factions: ['The sitting authority', 'Those who deny its mandate', 'Pragmatists who want any stable answer'],
+    plotHooks: [
+      'A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost',
+      'The authority is quietly manufacturing the consent it can no longer command',
+      'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'demographic_pressure',
+    description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
+    factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
+    plotHooks: [
+      'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers',
+      'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them',
+      'The newcomers fled something, and that something has followed them here',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'trade_dispute',
+    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in the market',
+    factions: ['Merchants tied to the old partner', 'Those who want new partners', 'Authorities caught between them'],
+    plotHooks: [
+      'The dispute is being kept alive by someone who profits from the uncertainty on both sides',
+      'A contract clause that could end the dispute has been deliberately misfiled',
+      'The partner settlement is applying pressure through a debt no one here wants to acknowledge',
+    ],
+    severity: ['minor', 'major'],
   },
 ]
 
@@ -1244,6 +1551,11 @@ export const EVENT_TYPE_NAMES = {
   resource_scarcity:   'The Shortage',
   guild_conflict:      'The Guild War',
   corruption_scandal:  'The Scandal',
+  crime_wave:          'The Crime Wave',
+  // infiltration_fear is a paranoia/denunciation arc (enemy agents, suspicion,
+  // denunciations) — NOT an occupation. It previously collided with
+  // occupation_legacy on 'The Occupation'; 'The Purge' names its actual theme
+  // (the internal hunt for infiltrators) and keeps the title set unique.
   infiltration_fear:   'The Purge',
   leadership_vacuum:   'The Interregnum',
   occupation_legacy:   'The Occupation',
@@ -1253,5 +1565,38 @@ export const EVENT_TYPE_NAMES = {
   external_threat:     'The Siege',
   religious_tension:   'The Religious Conflict',
   magical_controversy: 'The Arcane Incident',
-  crime_wave:          'The Crime Wave',
+  exile_return:        'The Return',
+  // generators-domain-6 additional timeline arcs (titles kept unique + on-theme).
+  market_crash:        'The Crash',
+  trade_collapse:      'The Trade Collapse',
+  great_fire:          'The Great Fire',
+  plague_years:        'The Plague Years',
+  great_flood:         'The Flood',
+  heresy_trial:        'The Heresy Trials',
+  pilgrimage_surge:    'The Pilgrimage',
+  popular_uprising:    'The Uprising',
+  tyranny:             'The Tyranny',
+  wild_magic:          'The Wild Magic',
+  // generators-domain-1 tension arcs (STRESS_TO_TENSION targets).
+  legitimacy_crisis:   'The Mandate',
+  demographic_pressure: 'The Influx',
+  trade_dispute:       'The Trade Dispute',
 }
+
+/**
+ * CONTENT-GT-FINAL (Charge 1): choose a historical-event description among the catalog
+ * canonical (index 0) + its authored variants (historyDescVariants.js), by a pure fnv
+ * hash of a stable per-event seed — ZERO rng draws (kernel/proseHash.pickVariant,
+ * canonical-at-zero). A falsy seed, or a type with no variants, returns the canonical.
+ * Lives here (not in the code-capped historyGenerator.js) and folds into that file's
+ * existing historyData import — the hot-file "lazy leaf" rule.
+ * @param {{type?: string, description: string}} eventTemplate
+ * @param {string|number|null} [seed]
+ * @returns {string}
+ */
+export const historyDescription = (eventTemplate, seed) => {
+  const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
+  return variants
+    ? pickVariant([eventTemplate.description, ...variants], seed)
+    : eventTemplate.description;
+};

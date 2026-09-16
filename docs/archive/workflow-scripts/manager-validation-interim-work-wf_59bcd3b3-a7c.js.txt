@@ -1,0 +1,43 @@
+export const meta = {
+  name: 'manager-validation-interim-work',
+  description: "Fable's manager validation of all work shipped during the Opus-led stretch (W4a-W4h, RP-1) + W2 scoping survey",
+  phases: [
+    { title: 'Validate', detail: 'constitutional seams (adversarial), gates at HEAD, cross-wave interactions, loose-ends reconciliation' },
+    { title: 'Scope', detail: 'W2 conjunction-content-multiplication scoping survey' },
+  ],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const VS = { type:'object', additionalProperties:false, properties:{
+  area:{type:'string'},
+  what_i_checked:{type:'string'},
+  findings:{type:'array', items:{type:'object', additionalProperties:false, properties:{
+    severity:{type:'string', enum:['critical','high','med','low','info']},
+    claim:{type:'string'}, evidence:{type:'string'}, fix:{type:'string'} }, required:['severity','claim','evidence']}},
+  verdict:{type:'string', enum:['clean','clean-with-notes','needs-fixes','blocked']},
+}, required:['area','what_i_checked','findings','verdict'] }
+const pre = `You are an Opus verifier working for the manager (Fable) validating work committed on branch review-fixes-2026-07-08 in ${ROOT} (cwd). The recent stretch shipped: reunification waves W4a-W4h (Library/Realm/Gallery/Account/Dossier-tabs/Generate-PDF-Compendium/Admin/domain-display read-models) + RP-1 (7 regressions) + many design-doc commits. Verify against the TREE and by RUNNING things — never trust a report. Report findings with file:line evidence; empty findings array iff genuinely clean.`
+
+phase('Validate')
+const AREAS = [
+  { key:'constitutional', label:'constitutional seams — ADVERSARIAL audit', focus:`Attack the three constitutional claims of the recent waves: (1) W4g PII fix — prove src/components/AdminPanel.jsx + admin/** contain ZERO raw supabase table reads (grep supabase.from across the admin surface; the only calls must be functions.invoke to the audited edge); (2) the premium faith seam — try to find ANY path where free/anon/lapsed sees live deity names: W4e WarFaithTab, W4f PDF FaithWar chapter (faithChapterVisible three-fold gate — is the production render actually gated?), W4h liveWorld army/trade lines, the landing surfaces. Run tests/pdf/faithWarGate.test.js and the W4e gating test; then hunt for an UNGATED consumer of the gated read-models (armyStrength/tradePressure/visibilityAudit/liveWorld) anywhere in src; (3) premium law — tier never touches generation: grep the generator pipeline for any tier/auth read. Report any leak path as critical.` },
+  { key:'gates-at-head', label:'gates re-run independently at HEAD', focus:`Run the full gate battery at HEAD and report ACTUAL results: npm run build; npm run verify:dist (budget 1,441,000 — confirm the number and headroom); goldens (npx vitest run -t "golden"); the full tests/ui suite; tests/pdf; tests/domain/display; eslint on src (summary); typecheck (tsc -p tsconfig.full.json) + domain-strict if a script exists. Also verify dist byte-determinism if cheap (build twice, compare entry closure size). Report every red with output; report exact headroom to the budget.` },
+  { key:'cross-wave', label:'cross-wave interaction review (the per-wave reports could not see these)', focus:`Several waves touched the SAME files in sequence: OutputContainer.jsx (W4f draft-export mount + RP-1 regenerate-confirm + DossierAiConfirms extraction), AdminPanel.jsx (W4g rewrite + W4h AdminSimTuningPanel mount), auth surfaces (RP-1 confirm-password/reveal + existing OAuth), SaveToLibraryButton (W4f pendingSaveDraft) vs interrupted-save recovery, GenerateWizard (W4f place-in-region + export-draft + recovery banner). Review the COMBINED current state of each for interaction bugs: double-mounted components, dead props, conflicting handlers, state that one wave's edit orphaned, the regenerate-confirm interfering with draft export, AdminSimTuningPanel mounted inside the correct isElevated gate after the W4g rewrite. Read the actual files; run the relevant test files. Report real interaction defects only.` },
+  { key:'loose-ends', label:'loose-ends reconciliation (claimed-done vs actually-tracked)', focus:`Reconcile the flagged follow-ups against the tree: (1) W4f last-mile — SettlementDetail.jsx: does the saved-export path thread campaign+faithUnlocked yet (grep handlePdfExport for campaign/faithUnlocked), or is the FaithWar chapter still dormant for saved exports (expected: dormant — confirm + confirm safe default)? (2) SupportQueuePanel — actually mounted in AdminPanel (W4g claim)? (3) the 8 EventComposer field modules (W4e flagged) — still absent? (4) aiPricing store slice absence — AiPricingResyncPanel degrades safely? (5) LivingWorldGates.jsx legacy religionDynamicsEnabled key (PART VII cleanup, assigned to CL-0 — confirm still present so CL-0 owns it); (6) RP-1 item 5 — existing-account detection wired end-to-end (lib/auth.js identities check + authSlice threading + AuthPanel branch)? For each: PRESENT/ABSENT/TRACKED-WHERE. No fixes — inventory only.` },
+]
+const validate = (await parallel(AREAS.map(a => () =>
+  agent(`${pre}\n\nYOUR AREA: ${a.label}.\n${a.focus}\n\nReturn the structured verdict.`,
+    { label:`validate:${a.key}`, phase:'Validate', schema:VS, effort:'medium', model:'opus' })
+))).filter(Boolean)
+log(`Validated ${validate.length}/${AREAS.length} areas`)
+
+phase('Scope')
+const SS = { type:'object', additionalProperties:false, properties:{
+  area:{type:'string'}, what_exists:{type:'string'},
+  key_files:{type:'array', items:{type:'object', additionalProperties:false, properties:{file:{type:'string'},lines:{type:'string'},what:{type:'string'}}, required:['file','what']}},
+  work_inventory:{type:'string', description:'the concrete W2 work: what content dimensions exist, coverage today, what multiplication requires, where content lives, regen mechanics'},
+  scope_estimate:{type:'string'}, risks:{type:'string'},
+}, required:['area','what_exists','key_files','work_inventory','scope_estimate','risks'] }
+const scope = await agent(`${pre}\n\nYOUR TASK: scope W2 — the "conjunction content multiplication" (THE regen), Phase 5's content wave. Investigate: (1) the W-C5 conjunction key {role, situation, causeClass, lifecycleStage} — where is it computed/consumed (causeLifecycle.js, hook/content selection)? What is the key-space CARDINALITY (how many roles × situations × causeClasses × lifecycleStages)? (2) WHERE does hook/identity/institution content live (content tables, institutionVocabulary, identity cards, hook templates — src/data? src/domain/display?) and what is COVERAGE today (how many conjunctions have distinct content vs falling back to generic)? (3) what did the Phase 5 plan (docs/PHASE5_*.md, task #6 "identity cards + multiplication fan-out") intend W2 to produce? (4) the REGEN mechanics — what regenerates when content multiplies (fixtures? goldens? does adding content change bytes for existing seeds — the golden implications are THE risk)? Return the concrete work inventory + scope estimate + risks so the architect can write the W2 brief.`,
+  { label:'scope:w2', phase:'Scope', schema:SS, effort:'medium', model:'opus' })
+
+return { validate, scope }

@@ -1,7 +1,7 @@
 /**
  * domain/governanceLedger.js — the canonical conserved governance quantity for a settlement.
  *
- * Mirrors foodLedger / defenseLedger. powerGenerator persists the public
+ * P3.3b Stage 2b. Mirrors foodLedger / defenseLedger. powerGenerator persists the public
  * legitimacy on `powerStructure.publicLegitimacy = { score, label, breakdown, ... }`. Four
  * lenses read that score, each with slightly DIFFERENT null-handling: causalState
  * derivePublicLegitimacy + deriveRulingAuthority (`leg && typeof leg.score === 'number'`),
@@ -34,11 +34,19 @@ const NEUTRAL = Object.freeze({
   present: false,
 });
 
-/** @param {any} v @returns {boolean} */
+/** @type {(v: unknown) => v is number} */
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
 
 /**
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * Structural view of the settlement fields this ledger reads.
+ * `publicLegitimacy` is canonically an object `{ score, label }`, but legacy
+ * saves persisted a bare number — both are honoured below.
+ * @typedef {Object} GovernanceLedgerSource
+ * @property {{ publicLegitimacy?: { score?: unknown, label?: unknown } | number | null } | null} [powerStructure]
+ */
+
+/**
+ * @param {GovernanceLedgerSource | null | undefined} settlement
  * @returns {GovernanceLedger}
  */
 export function governanceLedger(settlement) {

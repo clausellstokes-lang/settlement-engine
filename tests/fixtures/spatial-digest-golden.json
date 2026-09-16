@@ -1,0 +1,11 @@
+{
+  "bytes": 7457,
+  "cellCount": 432,
+  "costLawVersion": 1,
+  "gates": 13,
+  "hash": "3ddda43a3ff1421c339a4b1922cb0b48895083c6c824f8f246e89871dad59c2c",
+  "landCellCount": 408,
+  "overlayVersion": 1,
+  "settlements": 8,
+  "spatialGeometryVersion": 1
+}

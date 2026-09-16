@@ -33,18 +33,24 @@ import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
+import {
+  traceEffectLabel,
+  traceResultLabel,
+  traceTargetLabel,
+  traceTokenLabel,
+} from '../domain/display/tracePresentation.js';
 import { t } from '../copy/index.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
 const COG_COLOR = swatch['#8C6F32'];      // gold-700 (procedural, bronze cog)
-const QUILL_COLOR = swatch['#7B4FCF'];    // violet-500 (AI refinement, quill)
+const QUILL_COLOR = swatch['#5A6E82'];    // violet-500 (AI refinement, quill)
 const RAIL_BG = swatch['#FBF5E6'];        // parchment-50
 const RAIL_BORDER = swatch['#E8D9B0'];    // parchment-200
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];           // ink-600 (WCAG-passing)
 const MUTED = swatch['#6B5340'];
 
-function StepRow({ entry, isLast, traces }) {
+export function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
   const meta = metaForStep(entry.id);
   const isAi = entry.kind === 'ai';
@@ -121,18 +127,20 @@ function StepRow({ entry, isLast, traces }) {
                 padding: '6px 8px',
                 background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
-                borderRadius: 4,
                 fontSize: FS.xs, color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
-                  {trace.targetId} <span style={{ color: MUTED, fontWeight: 400 }}>{trace.result}</span>
+                  {traceTargetLabel(trace)}{' '}
+                  <span style={{ color: MUTED, fontWeight: 400 }}>
+                    ({traceResultLabel(trace.result)})
+                  </span>
                 </div>
                 {Array.isArray(trace.causes) && trace.causes.length > 0 && (
                   <ul style={{ margin: '3px 0 0', paddingLeft: 14, listStyle: 'square' }}>
                     {trace.causes.map((c, j) => (
                       <li key={j} style={{ marginTop: 2 }}>
-                        <span style={{ color: INK }}>{c.source}</span>
-                        {c.effect ? <span style={{ color: MUTED }}> · {c.effect}</span> : null}
+                        <span style={{ color: INK }}>Because of {traceTokenLabel(c.source)}</span>
+                        {c.effect ? <span style={{ color: MUTED }}> · {traceEffectLabel(c.effect)}</span> : null}
                         {c.reason ? (
                           <div style={{
                             fontSize: FS['10.5'], fontStyle: 'italic',
@@ -148,11 +156,14 @@ function StepRow({ entry, isLast, traces }) {
                 )}
                 {Array.isArray(trace.downstreamEffects) && trace.downstreamEffects.length > 0 && (
                   <div style={{ marginTop: 4, fontSize: FS.xxs, color: MUTED }}>
-                    Downstream:{' '}
+                    What this shaped:{' '}
                     {trace.downstreamEffects.map((d, k) => (
                       <span key={k}>
                         {k > 0 ? ', ' : ''}
-                        <span style={{ color: INK }}>{d.target}</span> {d.effect}
+                        <span style={{ color: INK }}>
+                          {traceTargetLabel({ targetId: d.target })}
+                        </span>
+                        {d.effect ? ` (${traceEffectLabel(d.effect)})` : ''}
                       </span>
                     ))}
                   </div>
@@ -188,7 +199,6 @@ function SimulationSpine({ settlement }) {
         background: swatch.white,
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
-        borderRadius: 4,
         fontFamily: sans,
       }}
     >
@@ -236,7 +246,6 @@ export default function PipelineRail({ compact = false }) {
       style={{
         background: RAIL_BG,
         border: `1px solid ${RAIL_BORDER}`,
-        borderRadius: 8,
         padding: compact ? '12px 14px' : '16px 18px',
         fontFamily: sans,
       }}

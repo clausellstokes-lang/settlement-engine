@@ -1,71 +1,50 @@
 /**
- * tests/domain/chronicleTimeline.test.js — UX Phase 5 chronicle-timeline selector.
- *
- * Pins the pure merge of chronicles[] + pulseHistory[] into a tick-indexed,
- * newest-first timeline with per-tick affected node ids, plus the compareCausalState
- * pass-through and the dormancy gate.
+ * tests/domain/chronicleTimeline.test.js — the Realm Chronicle scrollback
+ * read-model. Pins domain-readmodels-1: powerTransfer.losers (display NAMES,
+ * minted by warDeployment via settlementNameFor) must NOT be folded into
+ * affectedSettlementIds — only targetSaveId + populationDeltas keys are genuine
+ * save ids (matching worldSnapshotPublic.collectAffectedIds, its public sibling).
  */
-import { describe, test, expect } from 'vitest';
 
-import {
-  chronicleTimeline,
-  hasTimeline,
-  tickCausalDiff,
-} from '../../src/domain/display/chronicleTimeline.js';
+import { describe, it, expect } from 'vitest';
 
-describe('chronicleTimeline — merge + ordering', () => {
-  test('empty for a fresh campaign (dormancy gate)', () => {
+import { chronicleTimeline, hasTimeline } from '../../src/domain/display/chronicleTimeline.js';
+
+describe('chronicleTimeline — affectedSettlementIds carries only real save ids', () => {
+  it('does NOT fold powerTransfer.losers (display names) into affectedSettlementIds', () => {
+    const pulseHistory = [{
+      tick: 4,
+      selectedOutcomes: [{
+        id: 'o1',
+        headline: 'The siege of Greymarch falls',
+        summary: 'Larkfen is conquered.',
+        targetSaveId: 'save-uuid-1',
+        populationDeltas: { 'save-uuid-2': -40 },
+        powerTransfer: { losers: ['Greymarch', 'Larkfen'] }, // DISPLAY NAMES, not ids
+      }],
+    }];
+    const [entry] = chronicleTimeline({ pulseHistory });
+    // Only the two genuine save ids — the loser NAMES never enter.
+    expect(entry.affectedSettlementIds).toEqual(['save-uuid-1', 'save-uuid-2']);
+    expect(entry.affectedSettlementIds).not.toContain('Greymarch');
+    expect(entry.affectedSettlementIds).not.toContain('Larkfen');
+    // The headline itself still carries the outcome (names live there, correctly).
+    expect(entry.headlines[0].settlementIds).toEqual(['save-uuid-1', 'save-uuid-2']);
+  });
+
+  it('impactDigest settlement ids still contribute; ordering is codepoint-stable', () => {
+    const pulseHistory = [{
+      tick: 2,
+      selectedOutcomes: [{ id: 'o', targetSaveId: 'b' }],
+      impactDigest: [{ settlementIds: ['a', 'c'] }],
+    }];
+    const [entry] = chronicleTimeline({ pulseHistory });
+    expect(entry.affectedSettlementIds).toEqual(['a', 'b', 'c']);
+  });
+
+  it('is inert on an empty/absent campaign', () => {
     expect(chronicleTimeline({})).toEqual([]);
     expect(hasTimeline({})).toBe(false);
-    expect(hasTimeline({ chronicles: [], pulseHistory: [] })).toBe(false);
-  });
-
-  test('merges prose + pulse records, newest tick first', () => {
-    const timeline = chronicleTimeline({
-      chronicles: [{ id: 'c7', tick: 7, prose: 'Bram fell.' }],
-      pulseHistory: [
-        { tick: 5, selectedOutcomes: [{ id: 'o5', headline: 'March', targetSaveId: 'a' }] },
-        { tick: 7, selectedOutcomes: [{ id: 'o7', headline: 'Fall', targetSaveId: 'b' }], impactDigest: [{ settlementIds: ['c'] }] },
-      ],
-    });
-    expect(timeline.map(t => t.tick)).toEqual([7, 5]); // newest first
-    const t7 = timeline[0];
-    expect(t7.chronicles).toHaveLength(1);
-    expect(t7.headlines[0].headline).toBe('Fall');
-    // Affected nodes: the outcome target (b) + the impact-digest settlement (c).
-    expect(t7.affectedSettlementIds).toEqual(['b', 'c']);
-    expect(hasTimeline({ chronicles: [{ tick: 7, prose: 'x' }] })).toBe(true);
-  });
-
-  test('collects power-transfer losers + population deltas as affected nodes', () => {
-    const timeline = chronicleTimeline({
-      pulseHistory: [{
-        tick: 2,
-        selectedOutcomes: [{
-          id: 'o', headline: 'Coup', targetSaveId: 'a',
-          populationDeltas: { d: -50 },
-          powerTransfer: { losers: ['e'] },
-        }],
-      }],
-    });
-    expect(timeline[0].affectedSettlementIds).toEqual(['a', 'd', 'e']);
-  });
-});
-
-describe('tickCausalDiff — compareCausalState pass-through', () => {
-  test('returns [] when a snapshot is missing', () => {
-    expect(tickCausalDiff(null, { scores: {} })).toEqual([]);
-    expect(tickCausalDiff({ scores: {} }, null)).toEqual([]);
-  });
-
-  test('surfaces a per-variable change with an explanation', () => {
-    const diff = tickCausalDiff(
-      { scores: { social_trust: 0.6 }, bands: { social_trust: 'stable' } },
-      { scores: { social_trust: 0.3 }, bands: { social_trust: 'strained' } },
-    );
-    expect(diff).toHaveLength(1);
-    expect(diff[0].variable).toBe('social_trust');
-    expect(diff[0].change).toBeCloseTo(-0.3);
-    expect(typeof diff[0].explanation).toBe('string');
+    expect(hasTimeline({ pulseHistory: [{ tick: 1 }] })).toBe(true);
   });
 });

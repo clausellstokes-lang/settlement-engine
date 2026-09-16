@@ -7,6 +7,7 @@
  * parity test (tests/pdf/viewModelParity.test.js) walks this list and asserts
  * canon === vm for every row — so the DEFAULT for any new shared fact is "must
  * match", and a divergence fails the build naming the exact fact.
+ * @enforced-by tests/pdf/viewModelParity.test.js
  *
  * PARITY_EXEMPT enumerates the facts that legitimately differ — AI-only prose and
  * pure layout/formatting — each with a one-line reason. Adding a fact to one

@@ -1,0 +1,79 @@
+export const meta = {
+  name: 'wave-r3-single-writer',
+  description: 'Capability Remediation Wave R-3: writer convergence — destroy/narrative two-writer forks, shapeless-patch validation, economy staleness, toggle scope; plus the two carried R-2 verifications',
+  phases: [
+    { title: 'Fix', detail: '3 file-disjoint Fable lanes' },
+    { title: 'Verify', detail: 'Opus: 3 R-3 lanes + 2 carried R-2 re-verifications', model: 'opus' },
+    { title: 'Gate', detail: 'full widened gate vs 289/289 baseline' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order: "fix it all thoroughly"; Wave R-3 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-3 section + Progress notes first). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind; re-read every file immediately before editing; touch ONLY your lane's files.
+LAWS: NO same-seed drift (golden movers = STOP + defer owner-gated — this wave grazes derivation code, be paranoid: run the determinism/golden suites for anything you touch near the engine); NO persistence-shape changes; new logic = lazy leaf with MEASURED eager deltas; sizeBaseline ceilings EXACT; ratchet baselines never raised; copy = one string, vetoable; registry changes → gen:compendium-data regen; VOICE §6 punctuation (no reader-facing em dashes/bangs); narrated Suspense fallbacks never start with "Loading".
+TESTING: single-threaded ALWAYS; exit codes unmasked, never through pipes; every fix ships pins. Gate baseline: verify:dist 289/289 + typecheck 0 + full lint/copy/store dirs green. Label CONFIRMED/PLAUSIBLE; verbatim output; end on evidence.`
+
+const LANES = [
+  {
+    key: 'writers',
+    files: 'src/store/settlementSlice.js (destroySavedSettlement + updateSavedSettlement + undoLastEvent + the :1774 narrative stamp site) · src/store/canonEventCommandTransaction.js (:148 stamp site) · src/store/eventNarrativeSnapshots.js · src/store/importReconciliationCommandTransaction.js (:230 filter site) · new tests',
+    brief: `LANE A — WRITER CONVERGENCE (atlas VI.10 #148 + R-1 deferrals; Grep "two-writer" and "undoLastEvent" in the atlas + plan).
+1. DESTROY_SETTLEMENT convergence: two writers exist (the composer-pipeline DESTROY_SETTLEMENT event path and destroySavedSettlement). Converge to ONE writer or make the second delegate to the first (read both bodies fully; the R-1 confirm gate + registry truth must survive). Do NOT remove either lane's entry point — converge the WRITE, keep the doors.
+2. undoLastEvent corrupts systemState when a flat destroySavedSettlement log row is the newest entry on a hydrated save (R-1 deferral, atlas VI.10 #148): reproduce with a probe first, then fix at the chokepoint (likely the undo path's assumption about row shape), pin the probe.
+3. eventNarrativeSnapshots two-writer parity: settlementSlice.js:1774 (legacy) and canonEventCommandTransaction.js:148 (server-authoritative) both stamp; converge on one shared stamp helper (they already share appendEventNarrativeSnapshot — verify the CALL CONDITIONS are identical; unify any divergence into the helper) and pin writer parity (same input state → same stamp from either path).
+4. importReconciliationCommandTransaction.js:230 rewrites campaign content but filters NEITHER pulseUndoStack NOR proposalUndoStack (R-1 deferral): add both filters, matching the campaign-delete pattern from R-1; pin (import → stale undo entries gone).
+5. updateSavedSettlement shapeless-patch validation (VI.12 #163b): it is a bare Object.assign patch writer with ~15 internal call sites (nine aiData writes, six campaignState folds). Add key validation at the writer: an explicit allowlist of patchable top-level keys derived from a census of the actual call sites (enumerate all 15 first; the allowlist is the census, not a guess); unknown keys → typed refusal + dev-mode error. Pin: every existing call site still works (exercise the census); an unknown key refuses.`,
+  },
+  {
+    key: 'patch-validation',
+    files: 'src/store/configSlice.js (updateConfig) · src/store/campaignSlice.js (updateSavedCampaign ONLY — the R-1 clear sites are settled, do not touch) · new tests',
+    brief: `LANE B — SHAPELESS-PATCH VALIDATION, the other two of the trio (VI.12 #163b; lane A owns updateSavedSettlement).
+1. updateConfig (configSlice.js:76-85): bare Object.assign over the 27-key DEFAULT_CONFIG including the contentProfile/contentBoundaries safety gate. Add key validation: allowlist = Object.keys(DEFAULT_CONFIG) (the config surface is closed by construction — verify no legitimate caller patches a key outside it; census the callers first); unknown keys → typed refusal + dev error. The configExplicitFields intent recording must be unaffected for valid patches. Pins: every legitimate caller's patch shape passes (from the census); unknown key refuses; safety-gate keys still patch normally (they are legitimate wizard writes).
+2. updateSavedCampaign (campaignSlice.js): same treatment — census the call sites, allowlist from the census, typed refusal, pins.
+Do NOT converge the three validators into one shared helper unless the two files can import it without new eager cost — if a shared helper is right, put it in an existing eager-cheap domain module and MEASURE. Record the choice as a JUDGMENT either way (R-4's scan will want one spelling eventually).`,
+  },
+  {
+    key: 'economy-toggle',
+    files: 'the post-applyEvent derivation seam you locate (READ the atlas economy-family §2 rows first — likely a display/read-model site, NOT the engine) · src/store/toggleSlice.js · new tests',
+    brief: `LANE C — ECONOMY STALENESS + TOGGLE SCOPE.
+1. POST-APPLYEVENT STALE-DERIVATION WINDOW (atlas economy-family §2; fieldManifest 'live' contracts are the spec): after applyEvent, some economy read-models (activeChains/availableServices/prosperity family) render stale until the next derivation pass. Read the atlas rows + fieldManifest.js FROZEN_VS_LIVE first. Choose the cure that avoids ALL golden drift: (a) if a cheap synchronous re-derivation hook exists at the applyEvent seam, close the window there ONLY if it provably cannot change any persisted/generated output (display-time derivation only); otherwise (b) declare the staleness honestly at the display sites (a freshness note per legibility law, one string each) and record (a) as the R-5/owner path. Be explicit about which cure you took and why. Pins either way.
+2. TOGGLE STORE-GLOBAL SCOPE (queue #9): the toggle surface (15 ops) writes store-GLOBAL state where per-save scoping might be intended. Investigate: read the toggleSlice contract comments, consumers, and persistence; decide intended-vs-bug from evidence. If BUG: fix scope (careful — persistence shape! if scoping requires reshaping persisted state, STOP and defer owner-gated). If INTENDED: pin the global semantics + document the contract in the slice header. Report the verdict with evidence either way.`,
+  },
+]
+
+const R2_CARRY = [
+  {
+    key: 'r2-readers-mf',
+    brief: `CARRIED R-2 RE-VERIFICATION (the fixer pass is complete and gate-green; your pass failed twice on server 529): verify the readers-mf must-fix. Finding was: a silent <Suspense fallback={null}> boundary (41st vs exact pin 40) wrapping NarrativeArchivePanel in src/components/SettlementDetail.jsx. The cure in-tree: a narrated fallback "Opening the narrative archive…" (role="status"). Verify: the ratchet passes (run tests/lint/loadingNarrationRatchet.test.js), the string satisfies voiceMechanics + does not start with "Loading" (run tests/copy/voiceMechanics.test.js), and the boundary genuinely renders the fallback (read the mount). Try to refute: any OTHER new silent boundary in the R-2 diff; BARE_LOADING_PIN unchanged at 34.`,
+  },
+  {
+    key: 'r2-prose-mf',
+    brief: `CARRIED R-2 RE-VERIFICATION (fixer complete, gate-green; your pass failed twice on 529): verify the prose-mf must-fix, especially the PREMIUM-GATE PARITY change (paid-surface substrate — this is the one open R-2 obligation). Walk the Create-flow chain from GenerateWizard.jsx down: free/anon must reach ONLY the read-only EntityInspector (no prose editor, no Change Dock, and the setEditMode side door closed); premium/founder/elevated unchanged; NPC card path unchanged; Library mount unchanged. RUN the parity pins (tests/components/workbenchProseEditor.test.jsx + the R-2 pin files). Also verify: the voice-ratchet strings (tests/copy green), the mutation-manifest entry + planted sweep mutation for editProseQueueSpine, and the lazy-leaf claim — re-measure yourself: settlementPendingEdits.js + pendingEditIntents.js fingerprints ABSENT from the entry static closure, present in a lazy chunk (tests/build/pendingEditProseLazy.test.js under VERIFY_DIST, plus your own dist grep). Try to refute the fixer's counter-measurement (+13 B eager, not +2.3 KB).`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+log('Wave R-3: writer convergence, patch validation, economy staleness + carried R-2 verifications')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER for lane ${l.key}. Fixer reports: files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, shift="${r.behaviorShift}", deferrals=${JSON.stringify((r.deferrals || []).slice(0, 6))}. The lane's brief:\n${l.brief}\nRepo READ-ONLY except tests. Per numbered item: verify landed, re-derive with fresh greps, RUN the pins + the determinism/golden suites nearest the touched seams, attempt refutation — writer-convergence bypass routes, undo lifecycle on hydrated saves, allowlist censuses missing a call site (grep beyond the fixer's list), staleness cure causing derivation drift, toggle-scope evidence quality. MUST_FIX only for real unresolved items.`, { label: 'verify:' + l.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+const carried = await parallel(R2_CARRY.map((c) => () =>
+  agent(COMMON + '\n\nREPO IS READ-ONLY FOR YOU except running tests.\n\n' + c.brief, { label: 'verify:' + c.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: c.key, verify: v }))
+))
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END GATE (R-3). Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked: (1) tests/lint/ FULL; (2) tests/copy/ FULL; (3) tests/store/ FULL; (4) all program pin files not covered by those dirs; (5) tests/joins/fieldManifest.test.js + tests/architecture/ FULL; (6) pdf parity suites; (7) the determinism/golden suites nearest the touched derivation seams (find them — this wave touched writer/derivation code); (8) npm run typecheck; (9) npm run build && VERIFY_DIST=1 vitest run tests/build/ --no-file-parallelism. Baseline: 289/289 + typecheck 0 + all dirs green. Report every red verbatim, attributed baseline/foreign/THIS-WAVE.`, { label: 'gate:r3', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), carriedR2: carried.filter(Boolean).map((c) => ({ lane: c.lane, verdict: c.verify && c.verify.verdict, mustFix: c.verify && c.verify.mustFix })), gate }

@@ -30,6 +30,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase/migrations/066_security_questions_and_recovery.sql');
 const exists = existsSync(MIG);
 
@@ -42,7 +44,7 @@ describe('066 pglite target exists (guards against silent vacuous skip)', () => 
 /** Extract a `create or replace function public.<name>` body verbatim through its first `$$;`. */
 function extractFn(name) {
   const src = readFileSync(MIG, 'utf8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from 066`);
   return m[0];
 }
@@ -127,7 +129,7 @@ describe.runIf(exists)('security-answer backend — execution against 066 (pglit
         ('${BOB}',   'bob@example.com'),
         ('${NOANS}', 'noans@example.com');
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`reset role; set test.uid = ''; truncate public.security_answers;`);

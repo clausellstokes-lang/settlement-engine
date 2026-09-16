@@ -106,13 +106,11 @@ describe('shared reactive mobile flag', () => {
     expect(mql.__listenerCount()).toBe(1);
   });
 
-  test('tabConstants.isMobile delegates to the shared source', async () => {
-    vi.resetModules();
-    const { isMobile } = await import('../../src/components/new/tabConstants.js');
-    expect(isMobile()).toBe(false);
-    setMatches(true);
-    expect(isMobile()).toBe(true);
-  });
+  // LINEAGE NOTE (master merge W6): the `tabConstants.isMobile()` delegating
+  // helper test was removed. RF deliberately dropped that export once the last
+  // call site migrated to the `useIsMobile` hook (see tabConstants.js:4-9, F28) —
+  // "reach for the hook, not a helper". The shared source is exercised by the
+  // getIsMobile / useIsMobile tests above.
 });
 
 describe('Button mobile tap floor', () => {

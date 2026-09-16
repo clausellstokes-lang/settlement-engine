@@ -42,7 +42,6 @@ export default function PlotHooksTab({ settlement }) {
                   background: swatch.white,
                   border: `1px solid ${BORDER}`,
                   borderLeft: `3px solid ${cat.color}`,
-                  borderRadius: 4,
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>

@@ -1,0 +1,13 @@
+{
+  "id": "settlementforge-world-importer",
+  "title": "SettlementForge — World Importer",
+  "description": "Import a SettlementForge world export (settlementforge-world JSON) into Foundry as journal entries: a realm index plus a dossier per settlement. Read-only; the DM/player export variant governs what is shown.",
+  "version": "1.0.0",
+  "authors": [{ "name": "SettlementForge" }],
+  "compatibility": { "minimum": "11", "verified": "13" },
+  "esmodules": ["scripts/sf-world-import.js"],
+  "styles": [],
+  "packs": [],
+  "relationships": {},
+  "flags": {}
+}

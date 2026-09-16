@@ -1,0 +1,115 @@
+export const meta = {
+  name: 'wave-r3-verify-recovery',
+  description: 'Wave R-3 recovery: relaunch the 3 Opus lane verifications killed by the account switch + the 2 carried R-2 re-verifications; run the wave gate only if zero MUST_FIX',
+  phases: [
+    { title: 'Verify', detail: 'Opus x5 (3 R-3 lanes + 2 carried R-2), one retry on agent death', model: 'opus' },
+    { title: 'Gate', detail: 'full widened gate vs 289/289 baseline (skipped if any MUST_FIX or dead verifier)' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order: "fix it all thoroughly"; Wave R-3 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-3 section + Progress notes first). Verify claims against code; code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree: NO git mutations of ANY kind (no stash, no checkout, no reset, no add, no commit); re-read every file immediately before citing it.
+TREE NOTE: the three R-3 fixer lanes completed 2026-07-27 ~05:20 and their edits are in the CURRENT tree (all program work is uncommitted by design); a concurrent fold has since committed unrelated foreign work, so line numbers in older citations may have drifted — re-resolve them, and attribute discrepancies (program vs foreign) rather than assuming corruption.
+LAWS: NO same-seed drift (a golden mover = STOP-level finding); NO persistence-shape changes; sizeBaseline ceilings EXACT; ratchet baselines never raised; copy = one string, vetoable; VOICE section-6 punctuation (no reader-facing em dashes/bangs); narrated Suspense fallbacks never start with "Loading".
+TESTING: single-threaded ALWAYS (--no-file-parallelism); exit codes unmasked, never through pipes. Gate baseline: verify:dist 289/289 + typecheck 0 + full lint/copy/store dirs green. Label CONFIRMED/PLAUSIBLE; verbatim output; end on evidence.`
+
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+
+const LANES = [
+  {
+    key: 'writers',
+    brief: `LANE A — WRITER CONVERGENCE (atlas VI.10 #148 + R-1 deferrals; Grep "two-writer" and "undoLastEvent" in the atlas + plan).
+1. DESTROY_SETTLEMENT convergence: two writers exist (the composer-pipeline DESTROY_SETTLEMENT event path and destroySavedSettlement). Converge to ONE writer or make the second delegate to the first (read both bodies fully; the R-1 confirm gate + registry truth must survive). Do NOT remove either lane's entry point — converge the WRITE, keep the doors.
+2. undoLastEvent corrupts systemState when a flat destroySavedSettlement log row is the newest entry on a hydrated save (R-1 deferral, atlas VI.10 #148): reproduce with a probe first, then fix at the chokepoint (likely the undo path's assumption about row shape), pin the probe.
+3. eventNarrativeSnapshots two-writer parity: settlementSlice.js legacy stamp site and canonEventCommandTransaction.js server-authoritative stamp site both stamp; converge on one shared stamp helper (they already share appendEventNarrativeSnapshot — verify the CALL CONDITIONS are identical; unify any divergence into the helper) and pin writer parity (same input state -> same stamp from either path).
+4. importReconciliationCommandTransaction.js rewrites campaign content but filters NEITHER pulseUndoStack NOR proposalUndoStack (R-1 deferral): add both filters, matching the campaign-delete pattern from R-1; pin (import -> stale undo entries gone).
+5. updateSavedSettlement shapeless-patch validation (VI.12 #163b): it is a bare Object.assign patch writer with ~15 internal call sites (nine aiData writes, six campaignState folds). Add key validation at the writer: an explicit allowlist of patchable top-level keys derived from a census of the actual call sites (enumerate all first; the allowlist is the census, not a guess); unknown keys -> typed refusal + dev-mode error. Pin: every existing call site still works (exercise the census); an unknown key refuses.`,
+    fix: {
+      files: ["src/store/settlementSlice.js","src/store/settlementSliceHelpers.js","src/store/eventNarrativeSnapshots.js","src/store/canonEventCommandTransaction.js","src/store/importReconciliationCommandTransaction.js","scripts/.size-baseline.json","scripts/mutation-coverage-manifest.json","tests/store/undoFlatRowGuard.test.js","tests/store/destroyWriterConvergence.test.js","tests/store/narrativeStampParity.test.js","tests/store/importUndoStackHygiene.test.js","tests/store/updateSavedSettlementAllowlist.test.js"],
+      pins: 24,
+      shift: `Declared shifts, all deliberate and pinned: (1) destroySavedSettlement rows now also carry destroyedCause + config._destroyed + config._destroyedByEventId (converged onto the composer lane's domain writer; destroyedReason kept for row-shape stability; flat log-row shape byte-identical). (2) undoLastEvent on a flat library-row entry (destroy/rename shapes) was a corrupting false success (systemState=undefined, record dropped, corruption persisted); it is now a typed ok:false refusal (reason entry_not_undoable) with zero mutation - Timeline's Undo click on such rows becomes a safe silent no-op. (3) updateSavedSettlement refuses patches with keys outside the 17-key census allowlist (typed envelope + dev-mode console.error; all-or-nothing). (4) A structured import now clears pulse/proposal undo snapshots for the campaigns it rewrote. Zero same-seed generator drift: no generator/domain file modified (delegation IMPORTS the existing domain handler); goldens untouched; verify:dist at the exact 289/289 baseline.`,
+      deferrals: ["Full applyEvent-shaped destroy row (one recovery class for DESTROY_SETTLEMENT instead of two) = OWNER-GATED: persistence-shape + undo-capability change; flat row kept, documented in destroySavedSettlement's comment and destroyWriterConvergence.test.js header; the registry's undoState:'irreversible' stays true.","Timeline still renders an Undo button on a flat newest row; the click now refuses safely but silently (Timeline ignores the ActionResult) - surfacing the refusal reason is component-lane polish outside this lane's files.","Standing mutation-sweep plant for narrativeStampParity deferred until the wave folds: check_caught restores targets via git checkout, which would destroy uncommitted wave work; both plants were executed manually red-then-green.","Three-lane convergence question (realm FORCE_ABANDON as the third settlement-terminal-death lane) stays in the owner queue - this lane converged the two direct writers only.","Draft-phase party-caused KILL_NPC escalation flag remains flagged for the owner - not grazed by this lane's changes."],
+    },
+  },
+  {
+    key: 'patch-validation',
+    brief: `LANE B — SHAPELESS-PATCH VALIDATION, the other two of the trio (VI.12 #163b; lane A owns updateSavedSettlement).
+1. updateConfig (configSlice.js): bare Object.assign over the 27-key DEFAULT_CONFIG including the contentProfile/contentBoundaries safety gate. Add key validation: allowlist = Object.keys(DEFAULT_CONFIG) (the config surface is closed by construction — verify no legitimate caller patches a key outside it; census the callers first); unknown keys -> typed refusal + dev error. The configExplicitFields intent recording must be unaffected for valid patches. Pins: every legitimate caller's patch shape passes (from the census); unknown key refuses; safety-gate keys still patch normally (they are legitimate wizard writes).
+2. updateSavedCampaign (campaignSlice.js): same treatment — census the call sites, allowlist from the census, typed refusal, pins.
+Do NOT converge the three validators into one shared helper unless the two files can import it without new eager cost. NOTE: the fixer diverged from item 1's atomic-refusal premise with a recorded JUDGMENT (filter-and-report instead) after the census DISPROVED "closed by construction" — evaluate that judgment on its evidence, not on brief-conformance alone.`,
+    fix: {
+      files: ["src/store/configSlice.js","src/store/campaignSlice.js","scripts/mutation-coverage-manifest.json","tests/store/updateConfigPatchValidation.test.js","tests/store/updateSavedCampaignPatchValidation.test.js","tests/generators/configPatchAllowlistWalker.test.js"],
+      pins: 35,
+      shift: `DECLARED, none silent: (1) updateConfig now key-validates patches — admitted surface = DEFAULT_CONFIG keys + underscore rider family + a census-derived extras literal; unknown keys are DROPPED with a dev console.error and typed report ({ok:true, ignoredKeys}) instead of being assigned, so legacy saved-config blobs stop polluting persisted config (content-only persistence change for pathological saves; NO persistence-shape change); an all-unknown or non-object patch refuses typed with no write; the action's return changed from undefined to typed results (censused callers all ignore returns). (2) updateSavedCampaign now refuses ANY unknown key atomically ({ok:false, reason:'unknown_campaign_patch_keys'}) — structural row fields (id, settlementIds, worldState, mapState, wizardNews, chronicles, contentBinding) can no longer be clobbered through this door; typed returns added incl. campaign_not_found (previously silent undefined). (3) Zero same-seed drift: no derivation code touched, every engine-read key admitted verbatim — CONFIRMED by generatorGoldenMaster 3/3 + verify:dist 289/289. configExplicitFields intent recording byte-identically unaffected for valid patches (pinned). Eager closure delta MEASURED via esbuild-minify: configSlice +1299 B, campaignSlice +559 B.`,
+      deferrals: ["FOREIGN RED 1 at fixer time (since cured by their lanes): mutationCoverageManifest TOTALITY reds on 3 then-unmanifested files from lanes C-1/A-3.","FOREIGN RED 2 at fixer time: sizeBaseline red on EconomicsTab.jsx (+11 foreign insertions) — lane C reported it net-zeroed; re-check.","Walker known edge (documented in the test header): shorthand properties in updateConfig call literals (the two 'seed' fork sites) are not collected by the source scan; the fork shape incl. seed/_forkedFromSample is pinned explicitly in updateConfigPatchValidation instead.","CONFIG_PATCH_EXTRA_KEYS deliberately carries scan over-collection ('has', 'consumers', 'suppliers', ...) so the runtime literal and the walker derivation can never drift; R-4 may tighten with a curated exclusion.","The stale just-captured-thumbnail claim in updateSavedCampaign's old docstring was removed (census found no thumbnail caller); a future thumbnail write path must extend SAVED_CAMPAIGN_PATCH_KEYS — the allowlist-exactness pin will red as designed.","KEY JUDGMENT TO ADVERSARIALLY EVALUATE: updateConfig uses FILTER-AND-REPORT, not atomic refusal — fixer's evidence: legitimate callers patch seed/_forkedFromSample/useCustomContent/terrainOverride/targetCampaignId/primaryDeityRef (none in DEFAULT_CONFIG); engine reads ~50 further keys; SettlementsPanel.onLoad/forkSample replay WHOLE persisted _config blobs with unbounded historical keys — atomic refusal would break Apply Saved Configuration for legacy saves. Verify the walker genuinely re-derives the census from source each run."],
+    },
+  },
+  {
+    key: 'economy-toggle',
+    brief: `LANE C — ECONOMY STALENESS + TOGGLE SCOPE.
+1. POST-APPLYEVENT STALE-DERIVATION WINDOW (atlas economy-family section 2; fieldManifest 'live' contracts are the spec): after applyEvent, some economy read-models (activeChains/availableServices/prosperity family) render stale until the next derivation pass. The fixer chose cure (b): honest declaration at the display sites (freshness notes on EconomicsTab + ServicesTab, conditional on a reconciliationLog economy-touching event newer than the last regenerate boundary, detected via the registry's own RERUN_KEYS_FOR_EVENT intersecting {services, activeChains, economicState}), with cure (a) recorded as provably unavailable (applyEvent seam persists nextSettlement to the save; economy pass consumes rng; partial-rerun engine deliberately retired). Verify the unavailability proof AND that fresh/rebuilt settlements render byte-identically.
+2. TOGGLE STORE-GLOBAL SCOPE (queue #9): fixer verdict INTENDED with a four-layer coherence chain (registry targetScope:'global' rows; partialize persists bags beside config; generation snapshots bags per-settlement into _config via resolveConfig; saves capture copies and Library load restores them) — pinned by 8 tests + slice header contract doc, zero behavior change. Re-derive the verdict from the four layers yourself; if any layer contradicts INTENDED, that is MUST_FIX.`,
+    fix: {
+      files: ["src/domain/display/economyFreshness.js (NEW)","src/domain/events/registryRerunKeys.js (NEW — verbatim RERUN_KEYS_FOR_EVENT extraction, pure data leaf)","src/domain/events/registryFull.js (table replaced by re-export; all consumers keep their import path)","src/components/new/tabs/EconomicsTab.jsx (freshness note + net-zero combine to hold the 600 effective-line ceiling)","src/components/new/tabs/ServicesTab.jsx (freshness note)","src/store/toggleSlice.js (SCOPE CONTRACT header doc only — zero behavior change)","scripts/mutation-coverage-manifest.json (2 appended rationale entries)","tests/domain/economyFreshness.test.js (NEW — 13 pins)","tests/components/economyFreshnessNote.test.jsx (NEW — 4 pins)","tests/store/toggleSlice.scope.test.js (NEW — 8 pins)"],
+      pins: 25,
+      shift: `CONFIRMED, declared: two new conditional one-string freshness notes (each independently vetoable) appear on the Economics tab ("Events recorded after this settlement's last survey may not be fully counted in these tallies yet.") and Services tab ("...in this catalog yet.") ONLY when the settlement's reconciliationLog carries an economy-touching event newer than the last regenerate boundary. Fresh/rebuilt settlements render byte-identically. Zero same-seed generator drift (CONFIRMED by full generators + property/golden suites + verify:dist 289/289). Zero persistence-shape changes. toggleSlice change is documentation-only. Bundle placement: entry chunk has 0 freshness references; notes live in lazy EconomicsTab/ServicesTab chunks (eager delta zero).`,
+      deferrals: ["Real post-event economy re-derivation hook = R-5/owner-gated (rebuilding the retired partial-rerun engine, or an owner-signed persisted-output shift) — recorded in economyFreshness.js header and the manifest rationale.","PDF economy sections (e.g. src/pdf/sections/SupplyChainFlow.jsx) carry the same staleness silently — deferred: lane scoped to interactive read surfaces; a PDF caption twin per the R-2 G5 precedent is the natural follow-up.","ViabilityTab/OverviewTab economy readings: NO second note added — already covered by the R-0/R-2 as-judged-at-first-survey framing (dedupe per legibility law).","pendingEdits (G-1 spine) commit lane appends no reconciliationLog entries, so the detector is deliberately blind there — that seam's staleness story belongs to the G-2b program.","Undo-linger edge: undoLastEvent does not remove trail entries, so the note can persist after an undo until the next rebuild — copy says 'may' for exactly this; the cure would touch Lane A-2's live territory.","Standing sweep plants for the three executed mutations: unsound now (untracked/uncommitted targets; check_caught's git-checkout revert would destroy wave work) — add at wave fold, recorded in both manifest rationale entries."],
+    },
+  },
+]
+
+const R2_CARRY = [
+  {
+    key: 'r2-readers-mf',
+    brief: `CARRIED R-2 RE-VERIFICATION (the fixer pass is complete and gate-green; the prior verify pass failed twice on server 529): verify the readers-mf must-fix. Finding was: a silent <Suspense fallback={null}> boundary (41st vs exact pin 40) wrapping NarrativeArchivePanel in src/components/SettlementDetail.jsx. The cure in-tree: a narrated fallback "Opening the narrative archive…" (role="status"). Verify: the ratchet passes (run tests/lint/loadingNarrationRatchet.test.js), the string satisfies voiceMechanics + does not start with "Loading" (run tests/copy/voiceMechanics.test.js), and the boundary genuinely renders the fallback (read the mount). Try to refute: any OTHER new silent boundary in the R-2 diff; BARE_LOADING_PIN unchanged at 34.`,
+  },
+  {
+    key: 'r2-prose-mf',
+    brief: `CARRIED R-2 RE-VERIFICATION (fixer complete, gate-green; prior pass failed twice on 529): verify the prose-mf must-fix, especially the PREMIUM-GATE PARITY change (paid-surface substrate — this is the one open R-2 obligation). Walk the Create-flow chain from GenerateWizard.jsx down: free/anon must reach ONLY the read-only EntityInspector (no prose editor, no Change Dock, and the setEditMode side door closed); premium/founder/elevated unchanged; NPC card path unchanged; Library mount unchanged. RUN the parity pins (tests/components/workbenchProseEditor.test.jsx + the R-2 pin files). Also verify: the voice-ratchet strings (tests/copy green), the mutation-manifest entry + planted sweep mutation for editProseQueueSpine, and the lazy-leaf claim — re-measure yourself: settlementPendingEdits.js + pendingEditIntents.js fingerprints ABSENT from the entry static closure, present in a lazy chunk (tests/build/pendingEditProseLazy.test.js under VERIFY_DIST, plus your own dist grep). Try to refute the fixer's counter-measurement (+13 B eager, not +2.3 KB).`,
+  },
+]
+
+async function opusVerify(prompt, label) {
+  let v = await agent(prompt, { label, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA })
+  if (!v) {
+    log(label + ' died (likely API overload) — retrying once')
+    v = await agent(prompt, { label: label + ':retry', phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA })
+  }
+  return v
+}
+
+phase('Verify')
+log('Relaunching the 5 Opus verifications that died at the 2026-07-27 account switch (fix lanes already complete in-tree)')
+const results = await parallel([
+  ...LANES.map((l) => () => opusVerify(
+    COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER for lane ${l.key}. The FIXER ALREADY RAN AND COMPLETED (2026-07-27 ~05:20); its edits are in the current tree; the prior verification was killed mid-run by an account switch — start fresh, trust nothing from it. Fixer reports: files=${JSON.stringify(l.fix.files)}, pins=${l.fix.pins}, shift="${l.fix.shift}", deferrals=${JSON.stringify(l.fix.deferrals)}. The lane's brief (what the fixer was asked to do):\n${l.brief}\nRepo READ-ONLY except running tests. Per numbered item: verify landed, re-derive with fresh greps, RUN the pins + the determinism/golden suites nearest the touched seams, attempt refutation — writer-convergence bypass routes, undo lifecycle on hydrated saves, allowlist censuses missing a call site (grep beyond the fixer's list), staleness cure causing derivation drift, toggle-scope evidence quality. MUST_FIX only for real unresolved items.`,
+    'verify:' + l.key
+  ).then((v) => ({ lane: l.key, verify: v }))),
+  ...R2_CARRY.map((c) => () => opusVerify(
+    COMMON + '\n\nREPO IS READ-ONLY FOR YOU except running tests.\n\n' + c.brief,
+    'verify:' + c.key
+  ).then((v) => ({ lane: c.key, verify: v }))),
+])
+
+const clean = results.filter(Boolean)
+const anyMustFix = clean.some((r) => r.verify && r.verify.verdict === 'MUST_FIX')
+const anyDead = results.length !== 5 || clean.length !== 5 || clean.some((r) => !r.verify)
+
+let gate = null
+if (!anyMustFix && !anyDead) {
+  phase('Gate')
+  const TOUCHED = LANES.flatMap((l) => l.fix.files)
+  gate = await agent(COMMON + `\n\nWAVE-END GATE (R-3). Touched by the three fix lanes: ${JSON.stringify(TOUCHED)}. Run single-threaded, exit codes unmasked (capture via log files or pipestatus, never bare pipes): (1) tests/lint/ FULL; (2) tests/copy/ FULL; (3) tests/store/ FULL; (4) all program pin files not covered by those dirs (tests/components + tests/domain + tests/generators program pins — grep the plan doc Progress notes for the pin-file names); (5) tests/joins/fieldManifest.test.js + tests/architecture/ FULL; (6) pdf parity suites; (7) the determinism/golden suites nearest the touched derivation seams (tests/property goldens + generatorGoldenMaster at minimum — this wave touched writer/derivation-adjacent code); (8) npm run typecheck; (9) npm run build then VERIFY_DIST=1 vitest run tests/build/ --no-file-parallelism. Baseline: verify:dist 289/289 + typecheck 0 + all dirs green. The tree has moved since the fixers ran (concurrent fold) — report every red VERBATIM, attributed baseline/foreign/THIS-WAVE.`, { label: 'gate:r3', phase: 'Gate', schema: GATE_SCHEMA })
+} else {
+  log('Gate SKIPPED: ' + (anyMustFix ? 'MUST_FIX findings present' : 'at least one verifier died twice') + ' — the orchestrator handles the next step')
+}
+
+return {
+  lanes: clean.map((r) => ({ lane: r.lane, verdict: r.verify && r.verify.verdict, mustFix: (r.verify && r.verify.mustFix) || [], notes: (r.verify && r.verify.notes) || '', checked: (r.verify && r.verify.checked) || [] })),
+  deadVerifiers: 5 - clean.filter((r) => r.verify).length,
+  gate,
+  gateSkipped: !gate,
+}

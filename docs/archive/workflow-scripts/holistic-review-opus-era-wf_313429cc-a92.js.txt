@@ -1,0 +1,97 @@
+export const meta = {
+  name: 'holistic-review-opus-era',
+  description: 'Holistic review of Opus-era code + whole-system seams; Fable finds, Opus verifies',
+  phases: [
+    { title: 'Review', detail: '10 Fable review dimensions' },
+    { title: 'Verify', detail: 'Opus 5 adversarial verification per dimension' },
+    { title: 'Critic', detail: 'completeness critic' },
+  ],
+}
+
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const PREAMBLE = `VERIFY-FIRST: You are a review agent for the SettlementForge whole-system review, authorized by the repo owner's standing orders (docs/START_HERE.md on the ledger branch). Working tree: ${MF} (branch claude/composite-r4, HEAD b3417677; the tree is DIRTY BY DESIGN with two frozen uncommitted programs — war joins W1 and cartography TC-0/1/2; treat dirty files as part of the review surface). Verify branch with git -C ${MF} branch --show-current; STOP on mismatch.
+HARD RULES: READ-ONLY — never edit, stage, commit, stash, reset, clean, checkout, or re-record anything; never run the full gate; focused vitest runs allowed (npx vitest run <files>); timeout-shaped failures get ONE isolation re-run before you believe them. Code and executed output outrank docs. Label findings CONFIRMED (executed proof) or PLAUSIBLE (reasoning). Findings must be concrete: file:line, the defect, the failure scenario. Do NOT report style nits or intentional domain richness as defects — this codebase's constitution (deterministic seeded engine, dark virtual flags, receipts, finite semantics banded vocabularies, one canonical writer per concept) is deliberate; violations OF that constitution are exactly what you hunt. Your output is structured data for the review chair.`
+
+const FIND_SCHEMA = {
+  type: 'object',
+  required: ['findings', 'strengths'],
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'file', 'severity', 'detail', 'failureScenario', 'confidence'],
+        properties: {
+          title: { type: 'string' },
+          file: { type: 'string', description: 'repo-relative path, with :line where known' },
+          severity: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+          detail: { type: 'string' },
+          failureScenario: { type: 'string', description: 'concrete inputs/state -> wrong outcome' },
+          confidence: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE'] },
+          fixSketch: { type: 'string', description: 'one-paragraph architecture-level cure, for the external implementer spec' },
+        },
+      },
+    },
+    strengths: { type: 'array', items: { type: 'string' }, description: 'load-bearing things done RIGHT that the architecture chair should preserve' },
+  },
+}
+
+const VERIFY_SCHEMA = {
+  type: 'object',
+  required: ['verdicts'],
+  properties: {
+    verdicts: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'verdict', 'reason'],
+        properties: {
+          title: { type: 'string', description: 'the finding title being judged' },
+          verdict: { type: 'string', enum: ['CONFIRMED', 'ADJUSTED', 'REFUTED'] },
+          reason: { type: 'string', description: 'executed evidence or the precise refutation' },
+          adjustedDetail: { type: 'string', description: 'if ADJUSTED: the corrected claim' },
+          severityOverride: { type: 'string', enum: ['critical', 'high', 'medium', 'low'] },
+        },
+      },
+    },
+  },
+}
+
+const DIMENSIONS = [
+  { key: 'war-layer', prompt: `Review the WAR LAYER architecture end to end: src/domain/worldPulse/{warReasons,peaceReasons,peaceTerms,warDeployment,warFrontReads,mobilization,occupation,settlementStrategy,momentum,warIntent,treatyEnforcement,treatyTransfer}.js (last three are uncommitted W1 files — review them as first-class). Hunt: (1) coupling violations — modules importing against the declared DAG direction (headers state one-directional import laws; verify them with grep); (2) the one-opener invariant for wars (exactly one code path may open a war); (3) treaty enforcement completeness — §6 of docs/DESIGN_PEACE_ENGINE.md says an active treaty BLOCKS war, caps readiness, holds occupation — are all three enforcement seams real and reachable, and does anything read a treaty field the writer spells differently (the recorded writer/reader payload-spelling hazard)?; (4) conservation — tribute/reparations/restitution grain movement must debit and credit conservation-exact; (5) receipts — every war/peace/treaty news beat carries id + address chain; (6) dead or vestigial code from the pre-W1 era (accumulators nobody reads now that real grain moves).` },
+  { key: 'demographics', prompt: `Review the DEMOGRAPHIC ENGINE code as built: src/domain/worldPulse/{demographicsKernel,populationDynamics,foodStockpile}.js and every demographics* sibling (risk, war, plans/valves — enumerate with ls), against docs/DESIGN_DEMOGRAPHIC_ENGINE.md sections 1-9. Hunt: (1) the §3 rate equation — every term integer, seeded via ONE fork demographics:<id>, draw-accounted; (2) K_food derives from FLOW never storageMonths (§2b pin) — verify no reserve term leaks into K; (3) the H3 floor composition (pop − residentNamedCount) applied on the death/departure draw; (4) the P1a deadband cure — is the decline-side attractor provably gone in code, and does the terminal lane's tier gate now use the viability ladder; (5) migration conservation — emigrants ARRIVE or ride a ledger, realm total changes only via births/deaths/world edges; (6) the §5c plan slot — one active plan, band-crossing trigger, no per-tick redraws; (7) any hidden governor — a read of realm totals inside a local decision that §12's laws forbid.` },
+  { key: 'routes-j', prompt: `Review the J-PROGRAM (route lifecycle) code: src/domain/worldPulse/routeNetwork*.js (ledger, genesis, flows, charter/decay/danger/bypass, consumers) + src/domain/spatial/{armyTransit,armyTransitKernel}.js. Against docs/DESIGN_ROUTE_LIFECYCLE.md and J-D9 in docs/DESIGN_REALM_DIRECTIVES.md. Hunt: (1) hidden-path persistence as ABSENCE of removal — verify no code path can delete a hidden remnant; (2) hysteresis — formation threshold above removal threshold in the actual band values; (3) the three flow classes (goods/population/military) — one ledger, distinct weights, no fourth class snuck in; (4) ports totality (every port has water routes) — structural or asserted?; (5) the reputation race — persons at road speed, stories at news speed — is the integration pin real and does anything let a named person teleport (amendment M's coming law: MINIMUM one week per leg — find every place a named NPC moves between settlements and check its speed physics); (6) charter/decay events carry full address chains + ids.` },
+  { key: 'npcs-h', prompt: `Review the H-PROGRAM (NPC consequences) code: src/domain/worldPulse/{npcLedger,npcLedgerFacets,npcLedgerProjection,npcCirculation,npcCirculationBelief,npcCirculationTable,npcCirculationTransit,npcVerdictTable,npcVerdictApply}.js. Against J-D8/J-D8b in docs/DESIGN_REALM_DIRECTIVES.md. Hunt: (1) the durable-id mint — zero-PRNG, one-way, idempotent, and NEVER reused for faction founding; (2) both alias homes walked (npcs[] and factions[].members[] — the JSON-alias trap) in every mutation path; (3) the never-kill law — no engine path removes a named NPC (DM KILL verb only); (4) pool equilibrium (J-D8b-i) — outflow pressure exists, pool is bounded; (5) trait stationarity guard (J-D8b-ii) — the envelope test is real and powered; (6) the includeCovert seam on ALL pool projections (a turncoat's compromise source must never reach free/anonymous surfaces — trace the Wanderers tab projection to its audience gate); (7) relinquishment atomicity — jailed/roaming NPCs relinquish influence with the vacancy routed to contested opening, never silently refilled.` },
+  { key: 'brokerages-ik', prompt: `Review the I-PROGRAM (information brokerages) + K-PROGRAM (institution status/magic economy) code: src/domain/worldPulse/{brokerageStamps,brokerageFidelity,brokerageServices,brokerageServicesFeed,brokerageServicesPlant,brokerageServicesRules,brokeragePatronage}.js + the K1 status system module (grep operational.*impaired.*shell) + K2/K3/K4 modules (magic regimes, disaster buffer, substitution/reagents). Against docs/DESIGN_INFORMATION_BROKERAGES.md and DESIGN_MAGIC_ECONOMY.md. Hunt: (1) the credibility ladder (confirmed/corroborated/reported/tavern_talk) — earned from real provenance, never assigned; (2) the plant verb's triple (plant/contradict/expose) with blowback priced; (3) K1 no-orphan totality — every institution has a status, every impairment has a live cause (the cause-bound law: no impairment without live cause — is it pinned?); (4) the two-sided band (tier×magic floor, economy ceiling) — verify floor can never exceed ceiling unhandled; (5) the K3 conservation pin (buffer spends itself — damage transmutes never vanishes); (6) K4 substitution respects its cap band and the removal of the magic source honestly reopens the deficit; (7) magicEconomyEnabled dark discipline.` },
+  { key: 'store-persistence', prompt: `Review STORE + PERSISTENCE seams for the Opus-era additions: src/store/ slices touched since 2026-07-31 (git log --since=2026-07-31 --name-only -- src/store | sort -u), operationRegistry + compendiumData regen consistency, and the save/load shape. Hunt: (1) every new worldState ledger (spatialLedgers.warIntents, npc ledger, route ledgers, demographics, plans) — trace create/read/persist/serialize/reload/regen/undo for each: does a JSON round-trip preserve it, does regen rebuild or orphan it, does undo restore it (the lifecycle-path bug class is this codebase's most-bitten); (2) conditional materialization — drop-when-empty at every level, zero eager bytes when dark; (3) the persistence-shape disclosure from H1 (campaigns under full_simulation gain a ledger key) — does the LOAD path tolerate old saves missing the key, and is there a versioning seam if not; (4) new store actions registered in operationRegistry with regenerated compendium data (run node -e sanity or the registry walker test focused); (5) tests/store/lifecycleRoundTrip.test.js (uncommitted, W1) — run it, read what it pins.` },
+  { key: 'determinism-purity', prompt: `DETERMINISM + PURITY SWEEP over all Opus-era engine code (src/domain/worldPulse/ + src/domain/spatial/ files added or modified since 2026-07-31 — enumerate via git log --since=2026-07-31 --name-only). Hunt with greps + reads: (1) ambient impurity — Date.now, Math.random, new Date, toLocaleString, Intl, Object.keys order dependence on user data, Array sort without comparator; (2) stream theft — rng forks keyed per-tick or shared across settlements where the wave-E law demands per-entity keys; draw accounting present; (3) transcendental math — Math.pow/exp/log in engine paths (the ratchet exists: tests/lint/transcendentalMathBaseline.test.js — run it and also verify new files are covered by its glob); (4) parity-period state — double-pass determinism blind spots (the wave-E hazard class: state that alternates ticks); (5) codepoint-order tie-breaks everywhere a selection iterates an object; (6) the id-less news drop class — grep every new news/receipt emission for id presence; (7) NUL bytes / non-ASCII corruption in new files (python scan, grep -a). Report per-file verdicts.` },
+  { key: 'test-quality', prompt: `TEST-QUALITY review of the Opus-era test suites (tests/ files added since 2026-07-31 — enumerate via git log; plus the uncommitted W1 + cartography tests). Hunt the recorded anti-patterns: (1) VACUOUS ABSENCE PINS — a queryBy === null / toHaveLength(0) pin where the harness defaults the producing state to empty (seed non-empty or it proves nothing); (2) SELF-REFERENTIAL PINS — a denominator from the same declared map it validates (list==list); (3) single-seed restriction pins (the wave-E law demands seed-family totality); (4) negative controls — does every envelope/stationarity/calibration test carry a mutant arm that PROVES the instrument bites; (5) fixture realism — pins against hand-rolled fixtures where the real pipeline shape differs (the generator-probe-corpus hazard: bare generatePowerStructure ≠ generateSettlementPipeline); (6) JSON-round-trip presence on any rename/cascade/alias test; (7) anchored negatives + seedFailures helpers usage (MANDATORY for new generation-tree tests — tests/helpers/{anchoredNegatives,seedFailures}.js — or walkers red). Sample deeply, at least 15 test files. Report per-suite verdicts with the strongest and weakest test named.` },
+  { key: 'legibility-product', prompt: `PRODUCT LEGIBILITY review of the Opus-era user-facing surfaces: the Herald (heraldFeed, heraldRouting, Wanderers tab, Gazetteer/Ruins tabs), receipts and news language from the new systems (war doctrine kinds, route charters, demographic lines, brokerage stamps), and the severity/significance register. THE LEGIBILITY LAW: every surface must pass the regular-human test — glance → sentence → table; formulas TRANSLATED never shown; the NEWS ADDRESS LAW: every item names its full address chain + typed action + affected settlements BY NAME + recorded reason. DO: read the receipt/news templates in the new modules (grep newsEntries push sites since 07-31); judge each as a SENTENCE a DM would read aloud — flag formula leakage ('pressure01 0.73'), band-word absence, missing names, jargon; check the Herald routing doors make player sense (a treaty under 'trade'?); check empty/degraded states of new tabs. Also: the World Book 'Under siege' undefined bug was reported fixed — verify siege lines print names (grep the template). Report per-surface verdicts with example sentences quoted.` },
+  { key: 'bundle-perf', prompt: `BUNDLE + PERFORMANCE DISCIPLINE review of Opus-era additions. Hunt: (1) eager first-paint budget — the ratchet is 1,020,590 B post-FP-G16; enumerate new imports into eager closures (grep import chains from src/main or the eager entry into new worldPulse modules — new engine systems must be lazy leaves or behind existing lazy boundaries; the lazy-import-reparents hazard: importing a lazy chunk from an eager module silently re-parents it); (2) hot files at ceiling — check sizeBaseline for files near their exact ceilings that W1/cartography touched (scripts/.size-baseline.json is modified in the dirty tree — read the diff: which ceilings moved which way; ratchets may only shrink); (3) per-tick allocation patterns in new pulse code — object churn in hot loops (armyTransit, routeNetworkFlows, demographics run per settlement per tick at realm scale ×300y soaks: flag O(S²) scans or per-tick array rebuilds that the tickScanBudget instrument would catch — read how tickScanBudget covers the NEW systems, or does not); (4) the certification/soak harness cost — v5 receipts added per-tick observation: bounded?` },
+  { key: 'design-corpus-coherence', prompt: `DESIGN-CORPUS COHERENCE review — the six frozen Fable design docs vs what the Opus era actually built. Read docs/{DESIGN_REALM_DIRECTIVES,DESIGN_TOWN_CARTOGRAPHY,DESIGN_NPC_CONSEQUENCES,DESIGN_INFORMATION_BROKERAGES,DESIGN_ROUTE_LIFECYCLE,DESIGN_MAGIC_ECONOMY}.md and diff DESIGN INTENT vs BUILT REALITY per program (H, I, J, K, waves C-G, P): (1) enumerate every design promise NOT built (deferred, skipped, or silently absent — check the design's own done-whens); (2) every built thing that DEVIATES from its design doc (the implementer corrections are recorded in FABLE_VALIDATION_QUEUE.md — look for UNRECORDED deviations beyond those); (3) contradictions BETWEEN docs (the village-seeding class: two ratified docs disagreeing — hunt more instances); (4) the war-amendments corpus (DESIGN_REALM_DIRECTIVES Progress amendments A..Q) — list every piece of EXISTING machinery each amendment claims exists and verify the claim (e.g. 'the coup lane exists', 'I2 built confirmed/corroborated/reported/tavern_talk', 'H2 jailed verdict applies to foreign guests', 'war history records outcomes not merely occurrences' — amendment E's substrate warning). Report as a gap-map: claim, verified-or-refuted, evidence.` },
+]
+
+phase('Review')
+
+const results = await pipeline(
+  DIMENSIONS,
+  d => agent(`${PREAMBLE}\nDIMENSION: ${d.key}\n${d.prompt}`, { label: `find:${d.key}`, phase: 'Review', schema: FIND_SCHEMA }),
+  (review, d) => {
+    if (!review || !review.findings || review.findings.length === 0) return { dimension: d.key, review, verify: null }
+    const findingsText = review.findings.map((f, i) => `[${i + 1}] ${f.title} (${f.severity}, ${f.confidence}) — ${f.file}\n${f.detail}\nFailure: ${f.failureScenario}`).join('\n\n')
+    return agent(`${PREAMBLE}\nYou are the ADVERSARIAL VERIFIER for review dimension "${d.key}". A reviewer reported the findings below. Your job is to REFUTE each one: re-derive it from the live tree, execute the cheapest decisive check (read the file, run the focused test, run the grep), and only let it survive if the evidence is real. Findings that are true-but-intentional (documented deferrals, design-doc-sanctioned behavior, recorded hazards already guarded) get REFUTED with the citation. Default to REFUTED when the evidence is ambiguous. Severity-correct anything that survives.\n\nFINDINGS:\n${findingsText}`, { label: `verify:${d.key}`, phase: 'Verify', model: 'opus', schema: VERIFY_SCHEMA })
+      .then(v => ({ dimension: d.key, review, verify: v }))
+  }
+)
+
+phase('Critic')
+const summary = results.filter(Boolean).map(r => {
+  const kept = r.verify ? r.verify.verdicts.filter(v => v.verdict !== 'REFUTED').length : 0
+  const total = r.review && r.review.findings ? r.review.findings.length : 0
+  return `${r.dimension}: ${total} found, ${kept} survived verification`
+}).join('\n')
+
+const critic = await agent(`${PREAMBLE}\nYou are the COMPLETENESS CRITIC for a 10-dimension holistic review of the Opus-era SettlementForge work (dimensions: ${DIMENSIONS.map(d => d.key).join(', ')}; results summary:\n${summary}\n). Your question: WHAT DID THE REVIEW MISS? Consider: surfaces no dimension owned (edge functions/supabase, PDF export of new content, a11y of new tabs, the soak/certification harness itself, migration train 189-193 coherence, security of new DM verbs — can a free-tier user reach them?, analytics of new events); cross-cutting risks no single-file review sees (two new systems each fine alone but composing badly — demographics×war×routes feedback loops); and lifecycle paths (regen/undo/import of every new ledger). Spend your time on the 3-5 highest-consequence blind spots, verify each is REAL with a quick look at the tree, and return them as findings.`, { label: 'completeness-critic', phase: 'Critic', schema: FIND_SCHEMA })
+
+return { dimensions: results.filter(Boolean), critic }

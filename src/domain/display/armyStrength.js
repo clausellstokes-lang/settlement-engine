@@ -29,11 +29,19 @@
 
 import { deriveMilitaryCapacity } from '../worldPulse/militaryStrength.js';
 
-/** @param {any} a @param {any} b @returns {number} */
+/**
+ * The loose sim-shape bags this selector reads (worldPulse/pulseShapes.js):
+ * the stateful world ledgers and the per-settlement deployment record.
+ * @typedef {import('../worldPulse/pulseShapes.js').WorldState} WorldState
+ * @typedef {import('../worldPulse/pulseShapes.js').DeploymentRecord} DeploymentRecord
+ * @typedef {import('../worldPulse/pulseShapes.js').SettlementItem} SettlementItem
+ */
+
+/** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
-/** @param {any} v @param {number} [d] @returns {number} */
+/** @param {unknown} v @param {number} [d] @returns {number} */
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
-const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, num(v)));
+const clamp01 = (/** @type {unknown} */ v) => Math.max(0, Math.min(1, num(v)));
 
 // Heuristic bands for the LATENT (theoretical) strength of a host, 0..100 → words.
 // Bands only — never the number. A thorpe levy ≠ a city host.
@@ -49,7 +57,7 @@ const STRENGTH_BANDS = Object.freeze([
  * The heuristic latent-strength phrase for a settlement (or worldPulse item). Reads
  * the structured military capacity and buckets the 0..100 theoretical capacity into
  * a DM band. Total — always returns a phrase (a settlement always has *some* levy).
- * @param {any} settlementOrItem
+ * @param {SettlementItem | null | undefined} settlementOrItem
  * @returns {{ phrase: string }}
  */
 export function latentStrength(settlementOrItem) {
@@ -92,7 +100,7 @@ const CONDITION_BANDS = Object.freeze([
 /**
  * The army's supporting-condition phrase from a deployment record (supply + morale).
  * Reads the LIVE supportive facets but surfaces them as words — never the numbers.
- * @param {any} record the worldState.deployments[homeId] stateful record.
+ * @param {DeploymentRecord | null | undefined} record the worldState.deployments[homeId] stateful record.
  * @returns {string}
  */
 function conditionPhrase(record) {
@@ -114,13 +122,14 @@ function conditionPhrase(record) {
  * settlement surfaces nothing.
  *
  * @param {Object} args
- * @param {any} args.settlementId
- * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {string | number | null | undefined} [args.settlementId]
+ * @param {WorldState | null | undefined} [args.worldState]
+ * @param {(id: unknown) => string} [args.nameFor]
  * @returns {{ targetId: string, targetName: string, remainingPhrase: string, conditionPhrase: string, weakened: boolean } | null}
  */
-export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) => String(id) } = {}) {
   if (settlementId == null) return null;
+  /** @type {Record<string, DeploymentRecord>} */
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object'
     ? worldState.deployments
     : {};
@@ -150,11 +159,11 @@ export function deployedArmyStatus({ settlementId, worldState, nameFor = (id) =>
  * when the deployments ledger is absent / empty ⇒ byte-identical off-state.
  *
  * @param {Object} args
- * @param {any} args.worldState
- * @param {(id:any)=>string} [args.nameFor]
+ * @param {WorldState | null | undefined} [args.worldState]
+ * @param {(id: unknown) => string} [args.nameFor]
  * @returns {Array<{ homeId: string, targetName: string, remainingPhrase: string, conditionPhrase: string, weakened: boolean }>}
  */
-export function deployedArmyStandings({ worldState, nameFor = (id) => String(id) } = /** @type {any} */ ({})) {
+export function deployedArmyStandings({ worldState, nameFor = (id) => String(id) } = {}) {
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object'
     ? worldState.deployments
     : {};
@@ -179,10 +188,10 @@ export function deployedArmyStandings({ worldState, nameFor = (id) => String(id)
  * to render its deployed-army block). A dormant campaign yields false ⇒ nothing
  * renders ⇒ byte-identical.
  * @param {Object} args
- * @param {any} args.worldState
+ * @param {WorldState | null | undefined} [args.worldState]
  * @returns {boolean}
  */
-export function hasDeployedArmy({ worldState } = /** @type {any} */ ({})) {
+export function hasDeployedArmy({ worldState } = {}) {
   return deployedArmyStandings({ worldState }).length > 0;
 }
 

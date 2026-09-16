@@ -20,6 +20,7 @@
  */
 
 import { liveSieges, liveTradeWars } from './warStatus.js';
+import { deityNameFromSnapshots } from './deityNames.js';
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
@@ -27,22 +28,17 @@ const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) 
 const MAX_ARCS = 6;
 
 /**
- * A human display name for a deity ref, resolved from the embedded primary-deity
- * snapshots on the settlements (the SAME public source realmEvents uses). Falls
- * back to a readable tail of the ref.
+ * A human display name for a deity ref, resolved from the embedded primary/cult
+ * deity snapshots on the settlements (the shared resolver — SAME source realmEvents
+ * uses), floor-fallback to a title-cased slug. domain-display-readmodels-1: this
+ * used a lossy tail-pop copy; both this and worldSnapshotPublic now share one
+ * resolver so the two public arc-line producers can never disagree on a name.
  * @param {Array<any>} settlements
  * @param {string} deityId
  * @returns {string}
  */
 function deityName(settlements, deityId) {
-  for (const item of settlements) {
-    const deity = item?.settlement?.config?.primaryDeitySnapshot || item?.config?.primaryDeitySnapshot;
-    if (!deity) continue;
-    const ref = deity._deityRef || deity.primaryDeityRef || (deity.name ? `deity:${deity.name}` : null);
-    if (String(ref) === String(deityId) && deity.name) return String(deity.name);
-  }
-  const tail = String(deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
-  return tail.charAt(0).toUpperCase() + tail.slice(1);
+  return deityNameFromSnapshots(settlements, deityId);
 }
 
 /**

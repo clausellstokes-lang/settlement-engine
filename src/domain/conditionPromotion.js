@@ -18,7 +18,7 @@
  * replaces by stable id, so re-running promotion never duplicates a condition.
  */
 
-import { deriveActiveCondition, withActiveCondition, withoutActiveCondition } from './activeConditions.js';
+import { deriveActiveCondition, withActiveCondition, withoutActiveCondition, CONDITION_ARCHETYPE_TEMPLATES } from './activeConditions.js';
 import { canonStressors } from './canonicalAccessors.js';
 
 // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
@@ -33,11 +33,11 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   // before the 't'), so wartime settlements silently skipped promotion.
   { re: /\bwar\b|wartime|warfront|invasion|incursion|hostilit/i, archetype: 'war_pressure' },
   // Occupation -> vassal_extraction is VERIFIED honest for both faces of an
-  // occupation: the condition's affectedSystems carry trade_connectivity
+  // occupation (Wave 7): the condition's affectedSystems carry trade_connectivity
   // AND defense_readiness, so the substrate registers economic extraction and
   // military strain from the one condition; the pulse layer's conflict/defense
   // pressures read those substrate scores, so the war side flows end to end.
-  // The TRADE_ARCHETYPES classification (pressureModel.js) only governs the
+  // R3's TRADE_ARCHETYPES classification (pressureModel.js) only governs the
   // flat condition-bonus there — re-pointing the condition at war_pressure
   // would instead LOSE the extraction face. The stressor's pressureKinds
   // ['conflict','legitimacy'] are an input gate (what feeds its birth/growth),
@@ -76,10 +76,7 @@ const STRESSOR_ARCHETYPE_RULES = Object.freeze([
   { re: /coup|putsch/i,                                         archetype: 'faction_challenge' },
 ]);
 
-/**
- * @param {import('./settlement.schema.js').SimStressor} stressor
- * @returns {string|null} the condition archetype this stressor promotes to, or null.
- */
+/** @param {*} stressor @returns {string|null} the condition archetype this stressor promotes to, or null. */
 export function archetypeForStressor(stressor) {
   // `.label` included: world-pulse stressors carry their display text as
   // `label` (stressors.js normalizeStressor), not `name` — a label-only
@@ -90,6 +87,53 @@ export function archetypeForStressor(stressor) {
     if (re.test(text)) return archetype;
   }
   return null;
+}
+
+/**
+ * Settlement-state severity modifier for generation-derived conditions.
+ * Asymmetric and conservative: base archetype defaults already sit at 0.45-0.7
+ * (medium/high), so a typical settlement (modifier ~ 0) stays there. 'critical'
+ * (>=0.75) is reserved for the gravest archetypes when several crisis drivers
+ * genuinely stack; 'low' (<0.25) needs a calm, prosperous, well-defended place.
+ * Makes the low/critical severity bands actually generatable — a fixed catalog
+ * default meant every generated condition landed in the same band.
+ * @param {{ config?: { monsterThreat?: string }, monsterThreat?: string,
+ *           defenseProfile?: { scores?: { military?: number, internal?: number, economic?: number } },
+ *           economicState?: { prosperity?: string,
+ *                             foodSecurity?: { deficitPct?: number, isSurplus?: boolean } } }} settlement
+ * @returns {number}
+ */
+function settlementSeverityModifier(settlement) {
+  let m = 0;
+  const cfg = settlement.config || {};
+  const threat = cfg.monsterThreat || settlement.monsterThreat;
+  if (threat === 'plagued') m += 0.12;
+  else if (threat === 'heartland') m -= 0.12;
+  const sc = settlement.defenseProfile?.scores;
+  if (sc) {
+    const avg = ((sc.military || 0) + (sc.internal || 0) + (sc.economic || 0)) / 3;
+    if (avg < 30) m += 0.10;
+    else if (avg >= 75) m -= 0.10;
+  }
+  const food = settlement.economicState?.foodSecurity;
+  if (typeof food?.deficitPct === 'number' && food.deficitPct > 30) m += 0.10;
+  else if (food?.isSurplus) m -= 0.08;
+  const pros = settlement.economicState?.prosperity;
+  if (pros === 'Subsistence' || pros === 'Struggling' || pros === 'Poor') m += 0.06;
+  else if (pros === 'Prosperous' || pros === 'Wealthy') m -= 0.06;
+  return Math.max(-0.25, Math.min(0.18, m));
+}
+
+/**
+ * Generation-derived severity: archetype default nudged by settlement state.
+ * @param {string} archetype
+ * @param {number} modifier
+ * @returns {number}
+ */
+function deriveGenerationSeverity(archetype, modifier) {
+  const tmpl = /** @type {Record<string, { defaultSeverity?: number }>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype];
+  const base = tmpl?.defaultSeverity ?? 0.45;
+  return Math.max(0, Math.min(1, +(base + modifier).toFixed(3)));
 }
 
 /**
@@ -104,21 +148,21 @@ export function archetypeForStressor(stressor) {
  * Scoped by `archetype` so re-promoting the settlement's OTHER stressors never
  * re-attributes their conditions to the new event.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string} | null} [origin]
- * @returns {any}
+ * @param {Record<string, any>} settlement
+ * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}|null} [origin]
+ * @returns {Record<string, any>}
  */
 export function promoteStressorsToConditions(settlement, origin = null) {
   if (!settlement) return settlement;
+  const sevMod = settlementSeverityModifier(settlement);
   // Collapse to ONE condition per archetype, keeping the highest severity. Two
   // distinct stressors that map to the same archetype (e.g. "plague" + "fever
   // outbreak" -> plague) describe one crisis; emitting two conditions would
   // double-penalize the same affectedSystems in the causal substrate. Keyed off
   // the archetype (not the stressor label) so the condition id is stable and the
   // promotion stays idempotent. Order-independent.
-  /** @type {Map<string, any>} */
   const byArchetype = new Map();
-  for (const stressor of /** @type {any[]} */ (canonStressors(settlement))) {
+  for (const stressor of canonStressors(settlement)) {
     const archetype = archetypeForStressor(stressor);
     if (!archetype) continue;
     const severity = typeof stressor?.severity === 'number' ? stressor.severity : null;
@@ -150,9 +194,11 @@ export function promoteStressorsToConditions(settlement, origin = null) {
     }
     next = withActiveCondition(next, {
       archetype,
-      // Carry the strongest stressor severity when present; else the catalog
-      // default (deriveActiveCondition fills it from the archetype template).
-      severity: severity == null ? undefined : severity,
+      // Carry the strongest stressor severity when present; else derive it from
+      // the archetype default nudged by settlement state, so the low/critical
+      // bands are reachable at generation (a bare catalog default never left
+      // the medium band).
+      severity: severity == null ? deriveGenerationSeverity(archetype, sevMod) : severity,
       triggeredAt: {
         sourceEventType: authored ? origin.sourceEventType : 'GENERATION',
         sourceEventTargetId: archetype,
@@ -186,7 +232,8 @@ export function promoteStressorsToConditions(settlement, origin = null) {
  * event conditions of one archetype (two severed routes) keep their distinct
  * ids and all survive. Pure, deterministic, consumes no rng — a config
  * without the record generates byte-identically.
- * @param {import('./settlement.schema.js').SimSettlement} settlement
+ * @param {Record<string, any>} settlement
+ * @returns {Record<string, any>}
  */
 export function reapplyEventConditions(settlement) {
   const record = settlement?.config?.eventConditions ?? settlement?._config?.eventConditions;

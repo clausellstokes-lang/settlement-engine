@@ -6,7 +6,7 @@
  * its own surface, not a mode listed here.
  */
 
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER2, CARD, serif_, SP, R, FS, ELEV } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER2, CARD, serif_, SP, FS, ELEV } from '../theme.js';
 import { backgroundImageUrl, MODE_BACKGROUNDS } from '../../config/pageBackgrounds.js';
 
 export function ModeSelector({ mode, onModeChange, large = false }) {
@@ -63,7 +63,6 @@ export function ModeSelector({ mode, onModeChange, large = false }) {
                 ? { '--card-bg': backgroundImageUrl(MODE_BACKGROUNDS[id]) }
                 : { background: active ? GOLD_BG : CARD }),
               border: `2px solid ${(large || active) ? GOLD : BORDER2}`,
-              borderRadius: R.lg,
               cursor: 'pointer',
               textAlign: 'center',
               transition: 'all 0.2s',

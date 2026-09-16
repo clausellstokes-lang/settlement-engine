@@ -14,7 +14,10 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
 
-vi.mock('../../src/lib/errorReporter.js', () => ({ reportError: vi.fn() }));
+// Fold seam: vision-d added setCrashForensics (+ installGlobalErrorHandlers) to
+// errorReporter.js and the eager store boot now imports setCrashForensics, so the
+// mock must surface those exports too or the module graph fails to load here.
+vi.mock('../../src/lib/errorReporter.js', () => ({ reportError: vi.fn(), setCrashForensics: vi.fn(), installGlobalErrorHandlers: vi.fn() }));
 
 // Child panels throw so any unwrapped render path would crash the page.
 vi.mock('../../src/components/gallery/GalleryList.jsx', () => ({

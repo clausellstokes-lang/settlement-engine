@@ -32,7 +32,7 @@
  * the stateful deployment record carried on each resolved deployment.
  */
 
-import { resolveCoupVerdict } from '../rulingPower.js';
+import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import {
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,
@@ -40,6 +40,9 @@ import {
   relationshipRoles,
 } from './relationshipEvolution.js';
 import { stablePart } from './worldState.js';
+import { warFrontsInto } from './warFrontReads.js';
+import { formatCount } from '../formatNumber.js';
+import { spatialConsequenceActive, substrateOf, approachOctant, resolveBreachSegment } from '../spatial/spatialSubstrateRead.js';
 
 /** @param {string} a @param {string} b */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -112,12 +115,33 @@ function returnSuccessProbability(ratio, contextTilt = 0) {
  * @param {string} homeId
  */
 function isBesieged(graph, homeId) {
-  for (const channel of graph?.channels || []) {
-    if (channel.type !== 'war_front') continue;
-    if (channel.status !== 'confirmed') continue;
-    if (String(channel.to) === String(homeId)) return true;
-  }
-  return false;
+  // Provenance-gated (warFrontReads): a pure hostile-RELATIONSHIP front mints the
+  // same confirmed war_front id as a real siege but has no army behind it. Counting
+  // it here rolled a phantom "lifts the siege at its gates" recovery (+ a false
+  // chronicle beat) on an army returning to a merely-hostile home.
+  return warFrontsInto(graph, homeId).length > 0;
+}
+
+/**
+ * DOOR 1 — THE SIEGE BREACH (consumer b). The relieved siege breached a specific wall
+ * segment, picked DETERMINISTICALLY from the substrate's per-segment strength + the
+ * attacker's approach (the lowest-codepoint besieger, via a stable per-pair octant).
+ * Returns the additive `{ wallSegmentId, districtId }` to spread INTO the siege_lifted
+ * cause (where the fabric scar reader lifts it into a precise scar). DORMANT — the flag
+ * absent or no substrate ⇒ `{}` ⇒ the cause is byte-identical. PURE.
+ * @param {Record<string, unknown>|null|undefined} worldState @param {string} homeId
+ * @param {{ channels?: unknown[] }|null|undefined} graph
+ * @returns {{ wallSegmentId?: number, districtId?: (string|null) }}
+ */
+function breachCauseFields(worldState, homeId, graph) {
+  if (!spatialConsequenceActive(worldState)) return {};
+  const sub = substrateOf(worldState, homeId);
+  if (!sub) return {};
+  const besiegers = warFrontsInto(graph, homeId).map(String).sort(codepoint);
+  const attacker = besiegers.length ? besiegers[0] : homeId;
+  const breach = resolveBreachSegment(sub, approachOctant(attacker, homeId));
+  if (!breach) return {};
+  return { wallSegmentId: breach.wallSegmentId, districtId: breach.districtId };
 }
 
 /**
@@ -203,9 +227,10 @@ function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess
  * @param {any} args.graph      the regional graph AFTER this tick's mints (so "besieged" is current)
  * @param {{ random: () => number, fork: (label:string) => any }} args.rng
  * @param {number} [args.tick]
+ * @param {Record<string, unknown>|null} [args.worldState]  for DOOR 1's siege-breach precision (flag + substrate); optional
  * @returns {any[]} probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  */
-export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0 }) {
+export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0, worldState = null }) {
   const outcomes = [];
   const baseRng = rng.fork('deployment-return');
   // Codepoint-sort by home id so iteration order never leaks into output.
@@ -311,12 +336,12 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
           generatedAtTick: tick,
           tick,
           headline: `${homeName}'s army comes home`,
-          // Locale pinned to 'en-US' (as populationDynamics does): this summary
-          // persists into wizardNews/chronicle records, so a bare toLocaleString()
-          // would make the same seed produce different bytes across runner locales.
+          // formatCount (as populationDynamics does): this summary persists into
+          // wizardNews/chronicle records, so a bare toLocaleString() would make the
+          // same seed produce different bytes across runner locales.
           summary: dispersedToVassals
-            ? `${survivors.toLocaleString('en-US')} of ${homeName}'s host disperse to their homes${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`
-            : `${survivors.toLocaleString('en-US')} of ${homeName}'s host return to the muster${fell > 0 ? `; ${fell.toLocaleString('en-US')} did not` : ''}.`,
+            ? `${formatCount(survivors)} of ${homeName}'s host disperse to their homes${fell > 0 ? `; ${formatCount(fell)} did not` : ''}.`
+            : `${formatCount(survivors)} of ${homeName}'s host return to the muster${fell > 0 ? `; ${formatCount(fell)} did not` : ''}.`,
           populationDeltas,
           metadata: { warEconomy: 'homecoming', armyId: homeId, survivors, fell, deployedPopulation },
         });
@@ -382,7 +407,11 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
             archetype: 'siege_lifted',
             severity: 0.3,
             triggeredAt: { tick, sourceEventType: 'DEPLOYMENT_RETURN', sourceEventTargetId: sourceId },
-            causes: [{ source: homeId, effect: 'siege_lifted', reason: `${homeName}'s returning army relieved the siege.` }],
+            // DOOR 1 — the relieved siege breached a specific wall SEGMENT; the breach
+            // rides INSIDE the cause (the only field surviving deriveActiveCondition's
+            // whitelist), where the fabric scar reader lifts it into a precise scar.
+            // Dark / no substrate ⇒ {} spread ⇒ the cause is byte-identical.
+            causes: [{ source: homeId, effect: 'siege_lifted', reason: `${homeName}'s returning army relieved the siege.`, ...breachCauseFields(worldState, homeId, graph) }],
           },
         });
       } else {

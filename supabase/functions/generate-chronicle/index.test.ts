@@ -42,6 +42,9 @@ function makeUserClient(
   user: { id: string; email?: string | null } | null,
   spendResult: Record<string, unknown>,
   authError = false,
+  // When true, spend_credits returns an RPC-LEVEL error (not a business ok:false).
+  // Drives the "spend RPC error → 402, no provider call, no refund" money lane.
+  spendError = false,
 ) {
   const rpc: Array<{ fn: string; args: unknown }> = [];
   // deno-lint-ignore no-explicit-any
@@ -54,11 +57,38 @@ function makeUserClient(
     },
     rpc: (fn: string, args: unknown) => {
       rpc.push({ fn, args });
-      if (fn === 'spend_credits') return Promise.resolve({ data: spendResult, error: null });
+      if (fn === 'spend_credits') {
+        return spendError
+          ? Promise.resolve({ data: null, error: { message: 'spend rpc blew up' } })
+          : Promise.resolve({ data: spendResult, error: null });
+      }
       return Promise.resolve({ data: null, error: null });
     },
   };
   return { rpc, userClient: () => client };
+}
+
+/** Recording fetch stub — provider responses for the ported money-path lane. It
+ *  exercises the anthropicFetch DI seam (deps.anthropicFetch), asserting spend-
+ *  before-model and the refund boundary without a live Anthropic call. `mode`:
+ *  'ok' → a well-formed chronicle; 'empty' → a 200 with empty prose (content
+ *  failure → refund + 502); 'never' → records a call that must never happen. */
+function makeProviderFetch(mode: 'ok' | 'empty' | 'never') {
+  const calls: Array<string> = [];
+  const fetchStub = ((url: string | URL | Request) => {
+    calls.push(String(url));
+    if (mode === 'empty') {
+      return Promise.resolve(new Response(
+        JSON.stringify({ content: [{ text: '' }], usage: { input_tokens: 80, output_tokens: 0 } }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
+      ));
+    }
+    return Promise.resolve(new Response(
+      JSON.stringify({ content: [{ text: 'The season passed quietly across the vale.' }], usage: { input_tokens: 80, output_tokens: 40 } }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    ));
+  }) as unknown as typeof fetch;
+  return { calls, fetchStub };
 }
 
 /** Admin (service-role) stub: account_is_active gate, the 086 reservation
@@ -286,4 +316,141 @@ Deno.test('a request with NO authorization header is rejected (401) before any s
   );
   assertEquals(res.status, 401);
   assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+});
+
+// ── Money-path lane (ported from commit 1afb0310's 12-test chronicle suite) ──
+// Re-applied onto the net-current body via the anthropicFetch DI seam. Covers the
+// dimensions the reservation/rate-limit tests above do not: the happy path, the
+// empty-body refund, elevated-not-refunded, the spend/insufficient 402s, and the
+// pre-spend input rejections (auth / grounding / method).
+
+Deno.test('happy path — spends via the user client BEFORE the model call; returns chronicle + creditsRemaining', async () => {
+  const user = makeUserClient({ id: 'payer_ok', email: 'p@x.com' }, { ok: true, spend_id: 'row_ok', balance: 7, elevated: false });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('ok');
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(typeof body.chronicle === 'string' && body.chronicle.length > 0, true);
+  assertEquals(body.creditsRemaining, 7);
+  // Spent exactly once, the model was called once, and a success never refunds.
+  assertEquals(user.rpc.filter((c) => c.fn === 'spend_credits').length, 1);
+  assertEquals(provider.calls.length, 1);
+  assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
+});
+
+Deno.test('an EMPTY chronicle body refunds the spend and returns 502', async () => {
+  const SPEND_ID = 'row_empty';
+  const user = makeUserClient({ id: 'payer_empty', email: 'e@x.com' }, { ok: true, spend_id: SPEND_ID, balance: 6, elevated: false });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('empty');   // 200 but empty prose → content failure
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 502);
+  assertEquals((await res.json()).refunded, true);
+  const refunds = admin.rpc.filter((c) => c.fn === 'refund_credits');
+  assertEquals(refunds.length, 1);
+  assertEquals((refunds[0].args as { spend_ledger_row: string }).spend_ledger_row, SPEND_ID);
+});
+
+Deno.test('an ELEVATED spend that fails is NOT refunded (refunding a non-debit would mint credits)', async () => {
+  const user = makeUserClient({ id: 'dev1', email: 'dev@x.com' }, { ok: true, spend_id: 'row_elev', balance: -2, elevated: true });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('empty');   // generation fails → refund path entered
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 502);
+  // refund() short-circuits for elevated spends → refund_credits never called.
+  assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
+});
+
+Deno.test('a spend_credits RPC error returns 402 with NO provider call and NO refund', async () => {
+  const user = makeUserClient({ id: 'u_spendfail', email: 's@x.com' }, {}, false, /* spendError */ true);
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('never');
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 402);
+  assertEquals(provider.calls.length, 0);                                   // model never reached
+  assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);    // nothing to refund
+  // The reservation taken before the spend is released on the failure.
+  assertEquals(admin.rpc.filter((c) => c.fn === 'release_ai_spend_reservation').length, 1);
+});
+
+Deno.test('an INSUFFICIENT-credits spend returns 402 with the balance and does no work', async () => {
+  const user = makeUserClient({ id: 'u_broke', email: 'b@x.com' }, { ok: false, reason: 'Insufficient credits', balance: 3 });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('never');
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 402);
+  assertEquals((await res.json()).balance, 3);
+  assertEquals(provider.calls.length, 0);
+  assertEquals(admin.rpc.some((c) => c.fn === 'refund_credits'), false);
+});
+
+Deno.test('an INVALID JWT is rejected 401 with no spend and no provider call', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, {}, /* authError */ true);
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('never');
+  const res = await handleGenerateChronicle(
+    req({ grounding: GROUNDING }, { Authorization: 'Bearer bad' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 401);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+  assertEquals(provider.calls.length, 0);
+});
+
+Deno.test('a body with NO grounding payload is rejected 400 before any spend', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('never');
+  const res = await handleGenerateChronicle(
+    req({ notGrounding: true }, { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+  assertEquals(provider.calls.length, 0);
+});
+
+Deno.test('a syntactically invalid JSON body is rejected 400 before any spend', async () => {
+  const user = makeUserClient({ id: 'u1', email: 'u@x.com' }, { ok: true, spend_id: 'x', balance: 10 });
+  const admin = makeAdminClient(true);
+  const provider = makeProviderFetch('never');
+  const res = await handleGenerateChronicle(
+    req('{ not valid json', { Authorization: 'Bearer jwt' }),
+    { userClient: user.userClient, adminClient: admin.adminClient, anthropicFetch: provider.fetchStub },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(user.rpc.some((c) => c.fn === 'spend_credits'), false);
+  assertEquals(provider.calls.length, 0);
+});
+
+Deno.test('a non-POST method is rejected 405 before any client work', async () => {
+  const res = await handleGenerateChronicle(
+    new Request('https://edge/generate-chronicle', { method: 'GET' }),
+    {},
+  );
+  assertEquals(res.status, 405);
+});
+
+Deno.test('an OPTIONS preflight returns 200 and does no work', async () => {
+  const res = await handleGenerateChronicle(
+    new Request('https://edge/generate-chronicle', { method: 'OPTIONS' }),
+    {},
+  );
+  assertEquals(res.status, 200);
 });

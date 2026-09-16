@@ -1,7 +1,48 @@
-// Tag vocabulary is single-sourced from entityTags.TAG (the canonical source).
-// This file previously kept a third private copy of the constants, which invited
-// drift and carried dead KNOWLEDGE/ENTERTAINMENT keys that don't exist in TAG.
-import { TAG as INSTITUTION_TAGS } from "./entityTags.js";
+// INSTITUTION_TAGS — institution tag constants (matching institutionalCatalog.js)
+const INSTITUTION_TAGS = {
+  TRADE: "trade",
+  MARKET: "market",
+  GUILD: "guild",
+  BANKING: "banking",
+  PORT: "port",
+  WAREHOUSE: "warehouse",
+  DEFENSE: "defense",
+  MILITARY: "military",
+  FORTIFICATION: "fortification",
+  LAW_ENFORCEMENT: "law_enforcement",
+  RELIGIOUS: "religious",
+  CHURCH: "church",
+  MONASTERY: "monastery",
+  HEALING: "healing",
+  ARCANE: "arcane",
+  ALCHEMY: "alchemy",
+  ENCHANTING: "enchanting",
+  PLANAR: "planar",
+  DIVINE: "divine",
+  CRIMINAL: "criminal",
+  SMUGGLING: "smuggling",
+  UNDERGROUND: "underground",
+  WATER: "water",
+  SANITATION: "sanitation",
+  CIVIC: "civic",
+  LEGAL: "legal",
+  EDUCATION: "education",
+  METALWORK: "metalwork",
+  TEXTILE: "textile",
+  FOOD: "food",
+  LEATHER: "leather",
+  LUXURY: "luxury",
+  ESSENTIAL: "essential",
+  HOUSING: "housing",
+  AGRICULTURE: "agriculture",
+  TRANSPORT: "transport",
+  SHIPBUILDING: "shipbuilding",
+  KNOWLEDGE: "knowledge",
+  LODGING: "lodging",
+  ENTERTAINMENT: "entertainment",
+  ADVENTURING: "adventuring",
+  EXOTIC: "exotic"
+};
 
 // geographyData.js — extracted from bundle
 // De-minified from original minified identifiers
@@ -82,7 +123,7 @@ export const TERRAIN_DATA = {
       "Salt production",
       "Shipbuilding"
     ],
-    strategicValue: "High: controls sea routes and naval access"
+    strategicValue: "High - controls sea routes and naval access"
   },
   riverside: {
     name: "Riverside",
@@ -164,7 +205,7 @@ export const TERRAIN_DATA = {
       "River trade",
       "Brewing"
     ],
-    strategicValue: "Medium: controls the river crossing and inland trade"
+    strategicValue: "Medium - controls river crossing and inland trade"
   },
   mountain: {
     name: "Mountain",
@@ -214,15 +255,22 @@ export const TERRAIN_DATA = {
         modifier: 2,
         reason: "Ore processing"
       },
+      // data-tables-2: dropped redundant "Stone quarry" row (renamed from dead
+      // "Stonemasons' guild" in ec69513e). It matched only the "Stone quarry" institution,
+      // which the "Quarry" row above already boosts via includes() — a pure double-stack with
+      // no distinct live target (no "Stonemason" institution exists). Merged to one row. (G2)
       {
-        name: "Stonemasons' guild",
-        modifier: 2,
-        reason: "Stone abundance"
-      },
-      {
-        name: "Jewelers' guild",
+        name: "Jeweller",
         modifier: 1.8,
         reason: "Gemstone access"
+      },
+      {
+        // [D6 THE UNDERWAYS] mountain rock is the easiest ground to tunnel and vault —
+        // excavation affinity. Single-match (no other mountain row is a substring of
+        // "Underground network"), per the terrain double-stack lesson. Golden-shifting (G2).
+        name: "Underground network",
+        modifier: 1.6,
+        reason: "Stone easily excavated for tunnels"
       },
       {
         tags: [INSTITUTION_TAGS.AGRICULTURE],
@@ -259,7 +307,7 @@ export const TERRAIN_DATA = {
       "Stoneworking",
       "Gemcutting"
     ],
-    strategicValue: "High: a defensible position that controls the mountain passes and holds mineral wealth"
+    strategicValue: "High - defensible position, controls mountain passes, mineral wealth"
   },
   forest: {
     name: "Forest",
@@ -294,12 +342,16 @@ export const TERRAIN_DATA = {
         reason: "Timber processing"
       },
       {
-        name: "Carpenters' guild",
+        name: "Carpenter",
         modifier: 2,
         reason: "Abundant timber"
       },
       {
-        name: "Foresters' guild",
+        // data-tables-2: was a second "Sawmill" row (renamed from dead "Foresters' guild"
+        // in ec69513e) that double-matched the Sawmill row above via includes(). Re-pointed
+        // to the distinct live "Woodcutter's camp" institution — honors the forestry-management
+        // intent on a real, previously-unboosted institution. Golden-shifting (G2).
+        name: "Woodcutter's camp",
         modifier: 2.5,
         reason: "Forest management"
       },
@@ -314,7 +366,7 @@ export const TERRAIN_DATA = {
         reason: "Fur trade"
       },
       {
-        name: "Bowyer/Fletcher",
+        name: "Bowyer",
         modifier: 1.8,
         reason: "Wood and game access"
       },
@@ -324,7 +376,7 @@ export const TERRAIN_DATA = {
         reason: "Wood charcoal production"
       },
       {
-        name: "Herbalist",
+        name: "Apothecary",
         modifier: 1.5,
         reason: "Medicinal plants"
       },
@@ -363,7 +415,7 @@ export const TERRAIN_DATA = {
       "Woodcraft",
       "Hunting"
     ],
-    strategicValue: "Low to medium: yields timber and game, and the trees make it hard to besiege"
+    strategicValue: "Low-Medium - provides timber and game, difficult to besiege"
   },
   plains: {
     name: "Plains",
@@ -371,11 +423,11 @@ export const TERRAIN_DATA = {
     allowedResources: [
       "grain",
       "wheat",
-      "barley",
+      "flax",
       "oats",
       "livestock",
       "wool",
-      "leather",
+      "hides",
       "dairy",
       "vegetables",
       "hay",
@@ -410,22 +462,22 @@ export const TERRAIN_DATA = {
         reason: "Crop storage"
       },
       {
-        name: "Livestock market",
+        name: "Butcher",
         modifier: 2,
         reason: "Grazing land"
       },
       {
-        name: "Weavers' guild",
+        name: "Weavers",
         modifier: 1.5,
         reason: "Wool from sheep"
       },
       {
-        name: "Tanners' guild",
+        name: "Tanner",
         modifier: 1.5,
         reason: "Livestock hides"
       },
       {
-        name: "Cheesemaker",
+        name: "Dairy farmer",
         modifier: 1.5,
         reason: "Dairy production"
       },
@@ -468,14 +520,14 @@ export const TERRAIN_DATA = {
       "Wool and textiles",
       "Central trade hub"
     ],
-    strategicValue: "Medium: an agricultural heartland, but open to raids"
+    strategicValue: "Medium - agricultural heartland, but exposed to raids"
   },
   hills: {
     name: "Hills",
     description: "Settlement in rolling hills or highland terrain",
     allowedResources: [
       "stone",
-      "clay",
+      "grapes",
       "iron ore",
       "copper",
       "livestock",
@@ -503,18 +555,16 @@ export const TERRAIN_DATA = {
         modifier: 1.8,
         reason: "Stone extraction"
       },
+      // data-tables-2: dropped redundant "Stone quarry" row (double-stacked the "Stone quarry"
+      // institution already caught by the "Quarry" row above via includes()). Merged to one
+      // row — no distinct live stone-craft institution to re-point to. Golden-shifting (G2).
       {
-        name: "Stonemasons' guild",
-        modifier: 1.5,
-        reason: "Local stone"
-      },
-      {
-        name: "Shepherds' guild",
+        name: "Shepherd",
         modifier: 2,
         reason: "Hill grazing"
       },
       {
-        name: "Weavers' guild",
+        name: "Weavers",
         modifier: 1.4,
         reason: "Wool from hillside sheep"
       },
@@ -522,6 +572,13 @@ export const TERRAIN_DATA = {
         name: "Mine",
         modifier: 1.5,
         reason: "Moderate ore deposits"
+      },
+      {
+        // [D6 THE UNDERWAYS] hill slopes and stony ground take a tunnel readily —
+        // excavation affinity (milder than mountain). Single-match. Golden-shifting (G2).
+        name: "Underground network",
+        modifier: 1.3,
+        reason: "Firm ground easily excavated for tunnels"
       },
       {
         tags: [INSTITUTION_TAGS.AGRICULTURE],
@@ -561,7 +618,7 @@ export const TERRAIN_DATA = {
       "Wool production",
       "Mining"
     ],
-    strategicValue: "Medium to high: defensible terrain with a long view"
+    strategicValue: "Medium-High - defensible terrain, good visibility"
   },
   desert: {
     name: "Desert/Arid",
@@ -596,12 +653,12 @@ export const TERRAIN_DATA = {
         reason: "High-quality sand"
       },
       {
-        name: "Salt merchant",
+        name: "Salt works",
         modifier: 2,
         reason: "Salt deposits"
       },
       {
-        name: "Jewelers' guild",
+        name: "Jeweller",
         modifier: 1.5,
         reason: "Gem deposits"
       },
@@ -611,7 +668,7 @@ export const TERRAIN_DATA = {
         reason: "Trade route junction"
       },
       {
-        name: "Water merchant",
+        name: "Aqueduct",
         modifier: 2,
         reason: "Scarce water"
       },
@@ -660,7 +717,7 @@ export const TERRAIN_DATA = {
       "Salt trade",
       "Exotic goods"
     ],
-    strategicValue: "Medium: controls the caravan routes, and the water sources decide who passes"
+    strategicValue: "Medium - controls caravan routes, water sources are strategic"
   }
 };
 

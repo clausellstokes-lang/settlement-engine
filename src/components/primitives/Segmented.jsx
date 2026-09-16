@@ -1,4 +1,4 @@
-import { FS, SP, INK, MUTED, BORDER, CARD, CARD_ALT, ELEV, sans } from '../theme.js';
+import { FS, SP, BORDER, CARD, CARD_ALT, ELEV, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 
 /**
@@ -40,13 +40,16 @@ export default function Segmented({ options = [], value, onChange, size = 'md', 
             type="button"
             onClick={() => onChange(o.id)}
             aria-pressed={active}
+            className="oc-m-press"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: SP.xs,
               padding: `${padY}px ${padX}px`,
               borderRadius: 999, border: 'none', cursor: 'pointer',
               background: active ? CARD : 'transparent',
               boxShadow: active ? ELEV[1] : 'none',
-              color: active ? INK : MUTED,
+              // The oc ink ramp: instrument ink for the lifted active cell, the
+              // receding secondary ink for the rest (organic craft §3 ink density).
+              color: active ? 'var(--oc-btn-ink)' : 'var(--oc-ink-secondary)',
               fontFamily: sans, fontSize: size === 'sm' ? FS.sm : FS.md,
               fontWeight: active ? 800 : 600,
               whiteSpace: 'nowrap',

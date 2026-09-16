@@ -1,0 +1,110 @@
+export const meta = {
+  name: 'build-cycle-44-wr9-convergence',
+  description: 'WR-9 convergence instrumentation per the war architecture spec, measured-premises-first, plus two ledger amendments from the WZ-5r verify',
+  phases: [
+    { title: 'Measure', detail: 'spec + git state + premise measurement before any edit' },
+    { title: 'Build', detail: 'WR-9 built dark under the standing laws' },
+    { title: 'Verify', detail: 'independent adversarial verification' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block (per-turn cwd resets). Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; git commit -- <paths>). NEVER stash/reset/checkout--/clean; cp backups for mutants. Gates via sh scripts/gate-tail.sh or npm run check:tail, never bare pipes; ps aux | grep vitest before believing reds. python3 byte-scan (control bytes <9 or 14-31) EVERY authored file. tests/fixtures/ UNTOUCHED. Commit messages via FILE, trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. Per-file tsc is VACUOUS — only npm run typecheck:domain:strict counts (ceiling 1313, honestly met — leave it met). Foreign WIP (lane V4D may still be live in src/components/nav + brand + theme.js) is preserved, never staged. DO NOT touch scripts/mutation-coverage-manifest.json / mutation-sweep.sh unless a NEW walker-named test file forces a manifest entry — prefer pins inside existing suites; if forced, diff the manifest for foreign hunks before staging (shared-ratchet law).
+SIZE LAW: pulseKernel.js is BANKED at 1580 effective (R-BLD-10) — WR-9 may NOT grow it beyond net-zero on existing lines; applyWorldPulse.js at 941 likewise. All new logic = new lazy leaf modules under 800. Measure ceilings BEFORE editing (hot-files-at-ceiling).
+EVERYTHING BUILDS DARK (SOL_QUEUE section 0): no flag lit, no soak, no band ratified, no golden re-recorded, no push. Dormancy fences stay byte-identical. Spine requirements 13+14 apply: an Alignment line (engagement or declared-empty with reason) and an Edit-verb story (DM verb + edits-delta survival + typed-proposal AI surface, or a recorded engine-only decision).
+BYTE-IDENTITY LAW (standing, from WZ-5r): any same-seed claim over changed paths needs a PROVENANCE-COVERING fixture + an EXECUTED non-vacuity count, and acceptance quotes PER-CELL base-to-HEAD equality, never a combined cross-harness hash.`
+
+const CONTEXT = `CONTEXT. WR-8 (conquest + razing) is CLOSED at 1b7c1eac + 39ba6590, verified. The war lane's next item per docs/SOL_QUEUE.md section 1 A1 is WR-9 CONVERGENCE INSTRUMENTATION, specified in docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md section 5. THE QUEUE-ROWS-ARE-SPECS LAW: queue rows list specs, not open work — parts of WR-9 may already exist. Before any design: (1) read the WR-9 section of the design doc WHOLE, plus its section-10 protocol block; (2) run "git log --oneline -- docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md" + read any PROGRESS blockquote; (3) grep src/ + tests/ for existing convergence instrumentation the spec names (the WR-7 lesson: 4 waves were once deferred on a blocker that MEASUREMENT disproved — re-measure every premise the spec asserts, especially file sizes, mouths, and existing-surface claims); (4) report what EXISTS vs what the spec OWES before building.
+
+TWO LEDGER AMENDMENTS ride this lane's queue-row commit (append-only, never rewrite existing rows):
+(a) F1 OWNER-GATED ROW: DM-facing prose renders raw 'channel inferred' — src/domain/worldPulse/relationshipRuleHelpers.js:181-182 (headline via relationshipType.replace) and relationshipMemory.js:308 (titleForType) — sourced from the MATERIALIZER population (ensureAllRelationshipStates), which legitimately persists channel_inferred for pre-existing inferred edges (base-identical, pinned at tests/domain/tradeWar.test.js:484). Measured at HEAD: hundreds of occurrences per 24-tick drive in 4 of 6 harness cells, including 'channel inferred may become rival'. PRE-EXISTING (predates WZ-5), a LEGIBILITY/GAME-GRADE violation, and closing it MOVES SAME-SEED HASHES — therefore OWNER-GATED under THE PROMISE: record the row so it is a decision, not a re-find.
+(b) J-WZ5R-2 CLARIFICATION: append one line to its entry noting the materializer population it calls 'legitimate' does reach DM-facing prose via the F1 sites — the persistence is legitimate; the rendering is the owner-gated exposure.`
+
+const MEASURE_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9 SCOUT. Do NOT edit anything. Produce the measured ground truth the chair and the builder need:
+1. The WR-9 spec, digested: every numbered obligation in DESIGN_WAR_RULINGS_ARCHITECTURE.md's WR-9 section, verbatim-quoted headings, with each obligation classified EXISTS (cite file:line + proof) / PARTIAL (what exists, what is owed) / ABSENT.
+2. Premise audit: every factual claim the spec makes about the tree (module sizes, mouths, existing readers/writers, persisted surfaces) re-measured against HEAD. Flag every stale premise loudly.
+3. The write-surface map: which files WR-9 obligations would touch; their current effective sizes vs ceilings; whether any obligation implies a NEW PERSISTED SURFACE or golden motion (those are STOP-report items, not build items).
+4. Owner-gate scan: anything in the spec that is owner-gated, flag-lit, tuning, or golden-shifting — list it as PARKED, never as buildable.
+5. A recommended build plan: ordered pieces, each with its files, its pins/walkers, its gates, and its STOP conditions.
+RETURN raw data: {spec:[...], premises:[...], surfaces:[...], parked:[...], plan:[...], notes:'...'}.`
+
+phase('Measure')
+const m = await agent(MEASURE_BRIEF, {
+  label: 'wr9:scout',
+  phase: 'Measure',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['spec', 'premises', 'surfaces', 'parked', 'plan', 'notes'],
+    properties: {
+      spec: { type: 'array', items: { type: 'string' } },
+      premises: { type: 'array', items: { type: 'string' } },
+      surfaces: { type: 'array', items: { type: 'string' } },
+      parked: { type: 'array', items: { type: 'string' } },
+      plan: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Build')
+const r = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9 IMPLEMENTER. The scout's measured ground truth:
+${JSON.stringify(m, null, 2)}
+
+Build WR-9 per the scout's plan WHERE THE SPEC AND THE TREE AGREE; where they disagree, live code outranks the census — STOP-and-report that item rather than building on a stale premise. Honour every law in the preamble. Instrumentation is read-model territory: if any obligation requires a new persisted surface, a flag lit, or golden motion, it is a STOP-report, not a build. Every piece lands with its pins (real-generation, anchored negatives per the epistemic-prevention helpers, executed mutants where a guard claims catching power), its gates run, and its own pathspec commit. The queue-row commit carries the WR-9 row PLUS the two ledger amendments (a) and (b) from the context, append-only.
+
+GATE BAR per commit: focused suites green (quote counts); tests/lint failure set captured at your base and at HEAD and diffed (must be identical); typecheck:domain:strict green at 1313; any-cast ratchet unchanged; size ratchets green with pulseKernel EXACTLY 1580 and applyWorldPulse EXACTLY 941 unless net-zero line edits are proven by measurement; npm run build + prerender + smoke:boot via gate-tail; byte-scan; same-seed per-cell base-to-HEAD equality on a provenance-covering fixture with an executed non-vacuity count IF any touched path can move world bytes (and if any cell moves: STOP — that is the definition of failure for a dark build).
+
+RETURN raw data: {lane:'WR-9', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`, {
+  label: 'wr9:build',
+  phase: 'Build',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      lane: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9 ADVERSARIAL VERIFIER. The scout reported:
+${JSON.stringify(m, null, 2)}
+
+The implementer reports:
+${JSON.stringify(r, null, 2)}
+
+Trust neither. At the committed HEAD on a clean tree: (1) re-read the WR-9 spec section yourself and audit the build against EVERY obligation — built-as-specced / deviated-and-recorded / silently-missing; (2) re-run every gate the bar names, quoting counts (focused suites, tests/lint diff vs the lane's base, strict 1313, any-cast, size with pulseKernel 1580 + applyWorldPulse 941, build + prerender + smoke:boot, byte-scan); (3) if world-byte-capable paths were touched, run YOUR OWN provenance-covering same-seed harness (own fixture, dotted prefix-adversarial ids, executed mint/materialize non-vacuity, clock law, per-cell equality) — any moved cell = REJECT; (4) execute at least one mutant per claimed guard/walker — a guard without proven catching power is unverified; (5) check the ledger: the WR-9 row states only what landed; amendments (a) and (b) present, append-only, accurate; (6) hygiene: pathspec-tight commits, no fenced/foreign files staged, fixtures untouched, V4D WIP preserved. Attribute every red to this lane or prove it pre-existing at the lane's immediate parent (the strongest control).
+
+VERDICT: 'PASS — WR-9 STANDS AS BUILT' only on executed evidence for every item; otherwise REJECT with minimal repros. RETURN raw data: {lane:'WR-9 verify', verdict:'...', findings:[...]}.`, {
+  label: 'wr9:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { m, r, v }

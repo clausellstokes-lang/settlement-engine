@@ -1,0 +1,62 @@
+export const meta = {
+  name: 'spatial-rounds-10-13-ground',
+  description: 'Ground the belief/decision/risk layer (rounds 10-13) against the tree: is the engine omniscient today, and where do belief-maps + risk-assessment attach?',
+  phases: [
+    { title: 'Ground', detail: 'decision seam, belief-map feasibility, risk-assessment seams, round-13 determinism' },
+    { title: 'Stress-test', detail: 'belief/decision determinism+perf; full-13-round completeness + the omniscient→belief transition' },
+  ],
+}
+
+const DESIGN = 'docs/PHASE55_SPATIAL_ENGINE_DESIGN.md'
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const GROUND_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    system: { type: 'string' },
+    persists_or_exposes: { type: 'string' },
+    key_files: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      file: { type: 'string' }, lines: { type: 'string' }, what: { type: 'string' } }, required: ['file','what'] } },
+    attachment_points: { type: 'string' }, gaps: { type: 'string' },
+    feasibility: { type: 'string', enum: ['green','yellow','red'] },
+  },
+  required: ['system','persists_or_exposes','key_files','attachment_points','gaps','feasibility'],
+}
+const CRITIQUE_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    axis: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      severity: { type: 'string', enum: ['high','med','low'] }, claim: { type: 'string' },
+      evidence: { type: 'string' }, mitigation: { type: 'string' } }, required: ['severity','claim','mitigation'] } },
+    verdict: { type: 'string' },
+  },
+  required: ['axis','findings','verdict'],
+}
+const preamble = `Ground a design doc against a REAL codebase. Root: ${ROOT} (cwd). Read ${DESIGN} — focus on §4f (info-quality vector, PRNG organic degradation) + §4g (belief-driven action, risk-assessment faculty, absence-as-information) + PART III (prior verdict; rounds 1-9 substrate already grounded — do NOT re-ground the cost field or wizardNews). Your target is the ROUND 10-13 belief/decision/risk layer. Report only what EXISTS with file:line facts. Reference (read-only, NOT ours): /Users/cstokes/Desktop/settlement-generator/settlement-engine.`
+
+const GROUND = [
+  { key: 'decision-seam', label: 'the per-settlement DECISION/behavior seam (is the engine omniscient?)', focus: `THE central question for rounds 10-13: does a settlement today MAKE DECISIONS (ramp readiness, mobilize, launch, defend) that beliefs could plug into — or is all behavior a PURE FUNCTION of omniscient global state? Investigate the war cluster (W-C1 readiness/threat env, W-C2 conquest feeds/mercenary), stressorDynamics, pulseKernel per-tick evaluation, factionRelationshipUpdate, any "decides to X" logic. Is there a settlement-level actor/agent step, or only global rules over ground truth? Where would a belief-driven decision replace an omniscient one? This determines whether rounds 10-13 are ADDITIVE or a rewrite.` },
+  { key: 'belief-map', label: 'belief-map feasibility (per-settlement partial/perceived world model)', focus: `Round 10's core primitive is a per-settlement BELIEF MAP — a settlement's own possibly-wrong model of OTHERS (their readiness/alignment/faith/alliances/intentions). Does ANY per-settlement PARTIAL/PERCEIVED state exist today, or is all cross-settlement reasoning over GROUND TRUTH (regionalGraph edges, relationship records, worldState)? Where would a bounded (info-neighbourhood-only), deterministic belief map attach + persist (under the spatial-canon key, per PART III)? What's the cardinality risk (per-settlement × per-other-settlement)?` },
+  { key: 'risk-assessment', label: 'risk-assessment + disposition/temperament seams', focus: `Rounds 11-12 say routing (cheap-vs-safe §2/§6) and war (threat assessment §4g) are "risk assessments." Do these exist as ACTUAL code seams, or aspirational? Find any threat/readiness/risk evaluation. And the WEIGHTING inputs: does a per-settlement TEMPERAMENT / disposition / risk-tolerance exist? ALIGNMENT? (PART III said NO settlement-alignment field — reconfirm; it's now needed for culture + moral drift + info-handling + the risk faculty.) What disposition inputs are available to weight a belief-driven decision?` },
+  { key: 'round13-determinism', label: 'round-13 determinism: PRNG organic degradation + absence-as-timeliness', focus: `Round 13: (a) organic content-degradation is a SEEDED PRNG roll per hop (a distribution incl. rare perfect preservation), composing with intentional alignment distortion; (b) absence-of-info is a derived belief-map/timeliness property (weeks-since-last-update → confidence decays). Do these hold under determinism/dormancy given the wizardNews substrate (PART III GREEN) + the seeded-fork discipline? Is there a seeded PRNG a per-hop roll would fork from (fidelityNoise.js? createPRNG?)? Any golden/replay risk from adding per-hop rolls or a weeks-since-update belief field? Is timeliness (deterministic age) cleanly separable from the PRNG content axes?` },
+]
+
+phase('Ground')
+const ground = (await parallel(GROUND.map(a => () =>
+  agent(`${preamble}\n\nYOUR SYSTEM: ${a.label}.\n${a.focus}\n\nStructured facts, file:line, honest feasibility.`,
+    { label: `ground:${a.key}`, phase: 'Ground', schema: GROUND_SCHEMA, effort: 'medium' })
+))).filter(Boolean)
+log(`Grounded ${ground.length}/${GROUND.length}`)
+const digest = ground.map(g => `### ${g.system} [${g.feasibility}]\nEXPOSES: ${g.persists_or_exposes}\nFILES: ${(g.key_files||[]).map(f=>`${f.file}${f.lines?':'+f.lines:''} (${f.what})`).join('; ')}\nATTACH: ${g.attachment_points}\nGAPS: ${g.gaps}`).join('\n\n')
+
+const CRITIQUE = [
+  { key: 'belief-det-perf', label: 'Belief-map + decision layer: determinism + performance', focus: `Attack: a per-settlement belief map about others is potentially O(N²) perceived-state; the decision layer runs per-settlement per-tick over beliefs; two distortion sources (PRNG organic + directed alignment) compose per packet; absence-tracking is per-(settlement, watched-other). Same-seed byte-identity: iteration order over settlements/beliefs/packets, seeded forks for the organic roll + decision PRNG, the belief-map update order. Where does it explode or break replay, and the bounding/fix (info-neighbourhood cap, codepoint sort, conditional materialization)?` },
+  { key: 'full13-completeness', label: 'Full 13-round completeness + the omniscient→belief transition + build order', focus: `Read rounds 1-13 as ONE system + PART II/III. THE big question: rounds 10-13 flip the engine from OMNISCIENT to BELIEF-DRIVEN — is that an ADDITIVE layer (beliefs default to ground truth when dormant ⇒ today's bytes) or a rewrite of the decision code? Contradictions across 13 rounds? Where do belief-maps/decisions sit in the PART-III build order (after step 3.5 rumor mill + after war movers)? Is the settlement-ALIGNMENT field (still absent) now on the critical path for FOUR mechanics? New owner decisions rounds 10-13 surface? Give the concrete build-order placement + the minimal belief-driven-decision slice.` },
+]
+phase('Stress-test')
+const critique = (await parallel(CRITIQUE.map(c => () =>
+  agent(`Adversarial critic, Phase 5.5 spatial engine (read ${DESIGN}, esp. §4g + PART III; root ${ROOT}). Axis: ${c.label}.\n${c.focus}\n\nGROUNDING DIGEST:\n${digest}\n\nReal failure modes ranked by severity, each a concrete mitigation. No padding.`,
+    { label: `critique:${c.key}`, phase: 'Stress-test', schema: CRITIQUE_SCHEMA, effort: 'high' })
+))).filter(Boolean)
+log(`Stress-tested ${critique.length}/${CRITIQUE.length}`)
+return { ground, critique }

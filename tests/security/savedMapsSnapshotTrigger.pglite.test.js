@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -31,7 +33,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  net-current behaviour, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   for (const f of files) {
     const matches = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8').match(re);
@@ -44,7 +46,7 @@ function netCurrentFn(name) {
  *  so the test wires up the REAL trigger DDL, not a hand-rolled copy. */
 function triggerStmt(file, name) {
   const sql = readFileSync(resolve(MIGRATIONS_DIR, file), 'utf-8');
-  const re = new RegExp(`create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'i');
+  const re = new RegExp(`^create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'im');
   const m = sql.match(re);
   return m ? m[0] : null;
 }
@@ -106,7 +108,7 @@ describe('saved_maps world-snapshot guard trigger — net-current execution (pgl
       insert into public.saved_maps (id, user_id, name, map_data, share_kind, is_public, public_slug)
       values ('${MAP_ID}', '${OWNER}', 'Edited Map', '{}'::jsonb, 'map_with_campaign', true, 'edit-slug');
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   /** A DIRECT update of the stored snapshot — the bypassed edit path. */
   const updateSnapshot = (snapshot) =>

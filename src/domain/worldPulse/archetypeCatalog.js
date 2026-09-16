@@ -24,6 +24,12 @@ export const WAR_HOME_CONDITIONS = Object.freeze(['war_drain', 'army_deployed', 
 // Recovery conditions after a siege/occupation ends.
 export const WAR_RECOVERY_CONDITIONS = Object.freeze(['occupation_lifted', 'siege_lifted']);
 
+// W-UPSWING positive-polarity ARC conditions (the upswing arcs — reconstruction,
+// boom, flourishing). LIFTS like the war-recovery set: they RAISE the systems they
+// declare (causalState.LIFT_ARCHETYPES reads this set), never drain them. Each must
+// be a real catalog archetype (validated ⊆ the catalog by the consistency test).
+export const UPSWING_LIFT_CONDITIONS = Object.freeze(['reconstruction', 'boom', 'flourishing']);
+
 // Conditions borne by the settlement on the receiving end of war/subjugation.
 export const WAR_VICTIM_CONDITIONS = Object.freeze(['war_pressure', 'vassal_extraction', 'rebellion']);
 

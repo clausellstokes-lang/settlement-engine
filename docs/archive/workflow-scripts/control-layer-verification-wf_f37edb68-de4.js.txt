@@ -1,0 +1,30 @@
+export const meta = {
+  name: 'control-layer-verification',
+  description: 'Opus verification of the seams the §11 control-layer implementation plan rests on (simulationRules, dialog, autonomy substrate, progression, receipts)',
+  phases: [
+    { title: 'Verify', detail: '5 Opus agents verify the exact seams: rules inventory + initiate-vs-resolve gates, dialog surface, candidate/autoresolve semantics, advance call sites, receipts seam' },
+  ],
+}
+const DESIGN = 'docs/PHASE55_SPATIAL_ENGINE_DESIGN.md'
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const GS = { type:'object', additionalProperties:false, properties:{
+  system:{type:'string'}, persists_or_exposes:{type:'string'},
+  key_files:{type:'array', items:{type:'object', additionalProperties:false, properties:{file:{type:'string'},lines:{type:'string'},what:{type:'string'}}, required:['file','what']}},
+  attachment_points:{type:'string'}, gaps:{type:'string'}, feasibility:{type:'string', enum:['green','yellow','red']} },
+  required:['system','persists_or_exposes','key_files','attachment_points','gaps','feasibility'] }
+const pre = `You are an Opus verifier grounding the §11 SIMULATION CONTROL LAYER (read ${DESIGN} §11, round 17) against the REAL tree. Root: ${ROOT} (cwd). Report ONLY what exists, with file:line facts — the architect's implementation plan depends on your precision. Do not speculate about unopened code.`
+
+const AREAS = [
+  { key:'rules-inventory', label:'simulationRules — full inventory + WHERE each flag gates (initiate vs resolve)', focus:`Enumerate EVERY flag in the current simulationRules object (find normalizeSimulationRules — likely src/domain/worldPulse/simulationRules.js or similar): name, default, and semantics. WHERE does simulationRules persist (campaign.simulationRules? worldState? store slice?) and is there a migration/normalization on load? Then THE key question for the tri-state design: for EACH flag (settlementStrategyEnabled, war/trade/religion/etc.), find WHERE it gates in the kernel (file:line) and classify: does it gate INITIATION (the engine starting/escalating the dynamic), RESOLUTION (processing consequences of an existing dynamic), or BOTH under one boolean? The §11 tri-state (Off / DM-Driven / Autonomous) needs initiation and resolution separable per domain — report per-domain whether that seam exists or the boolean conflates them.` },
+  { key:'dialog-surface', label:'SimulationRulesDialog — structure + save path + growth surface', focus:`src/components/map/SimulationRulesDialog.jsx (RP-1 just verified its focus-trap + mid-advance write guard). Report: its current control structure (groups, toggle list, collapsible sections), the SAVE path (which store action writes rules, where the write guard blocks mid-advance), how the advance pipeline READS the saved rules, and concretely where a preset picker + tri-state rows + axis-mode cards would slot. Also: is the dialog campaign-scoped (realm page) and does anything else write simulationRules?` },
+  { key:'autonomy-substrate', label:'the candidate/autoresolve pipeline — what "DM decisions" means TODAY', focus:`§11 political-autonomy modes (DM-Only / Recommendations / Routine-Autonomy / Full) must map onto the EXISTING candidate flow. Find how worldPulse candidates are produced and resolved: rollCandidates / candidate events / autoresolve — during a DM advance, are candidates AUTO-resolved by the engine (seeded rolls) or surfaced to the DM for approval? Is there ANY existing DM-approval / pending-action flow (a queue, a dialog, event proposals awaiting confirmation)? Where would a PENDING-APPROVALS ledger attach (worldState conditional-ledger precedent) and where would its UI live? Classify today's behavior in §11 terms: which autonomy mode IS the current build?` },
+  { key:'progression-substrate', label:'advance call sites — is ALL progression DM-triggered today? catch-up constraints', focus:`§11 world-progression modes (Frozen / DM-Advanced / Living / Autonomous). Find EVERY call site that advances campaign time (advanceCampaignWorld / simulateCampaignWorldInterval / UI advance buttons / any timer or on-open auto-advance). Is ALL advancement DM-triggered today (i.e., today IS "DM-Advanced")? For a future "Living World" (advance-on-open catch-up): what are the determinism constraints — the pin-now guard (assertNowPinnedInTest), how "now" threads, interval orchestration (one_week..one_year equivalence test) — and where would a deterministic catch-up (calendar-delta → N ticks) attach? Any wall-clock landmines?` },
+  { key:'receipts-seam', label:'ruleset-change receipts — wizardNews entry kinds + worldState ledger add procedure', focus:`§11 requires a RULESET-CHANGE RECEIPT (canonical, versioned: which rules active, when changed, what pending processes affected). Verify: (a) the wizardNews entry-kind extension point — how a NEW entry kind (e.g. ruleset_change) gets minted + normalized (normalizeEntry, significance) without perturbing existing entries; (b) the EXACT procedure to add a new conditionally-materialized worldState ledger (the strip line + deepCloneConditionalLedger + spread in ensureWorldState — cite the line numbers to edit) so a rulesetLog is byte-invisible when absent; (c) the schemaVersion migration chain if needed; (d) where simulationRules changes are DETECTED (the dialog save action) so the receipt emits there.` },
+]
+phase('Verify')
+const results = (await parallel(AREAS.map(a => () =>
+  agent(`${pre}\n\nYOUR SEAM: ${a.label}.\n${a.focus}\n\nStructured facts, file:line, honest feasibility.`,
+    { label:`verify:${a.key}`, phase:'Verify', schema:GS, effort:'medium', model:'opus' })
+))).filter(Boolean)
+log(`Verified ${results.length}/${AREAS.length} seams`)
+return { results }

@@ -1,0 +1,37 @@
+export const meta = {
+  name: 'wave-p1-demographic-rates',
+  description: 'P1 — THE RATES: the demographic kernel that kills the runaway (births, deaths, K_food, D_tier)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const BRIEF = [
+  'You are an Opus IMPLEMENTER for SettlementForge. SLICE P1 of the DEMOGRAPHIC ENGINE - THE RATES. This is the slice that kills the most important defect in the program: the 300-year soak proved population compounds at x1.07/yr to 29 TRILLION because the model has births without deaths, growth without carrying capacity. Read the receipt curve in docs/DESIGN_DEMOGRAPHIC_ENGINE.md (BINDING LAW, whole document - especially laws 1-4, the canonical model in section 2, section 3 natural demography, and judgment blocks J-P1/J-P2/J-P5).',
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 @ bf71d20d - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch. FOREIGN, never touch: wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests, and artifacts/soak/**.',
+  '',
+  'YOUR OWNERSHIP: src/domain/worldPulse/demographicsKernel.js + demographicsRates.js (new leaves, split under the 800 ceiling), the demographicsEnabled rule key + its certification row in the GROWTH lane file (src/domain/certification/subsystemRowsGrowth.js - read subsystemCertification.js for the shape; this is the ONE new rule key this slice mints), the integration seam in settlementLifecycleKernel.js (the demographic step REPLACES the raw growth line ONLY when the flag is lit; the dark path must be byte-identical by OBJECT IDENTITY), tests/domain/demographics*.test.js + the fenced dormancy golden.',
+  'READ-ONLY: foodBalance channels + K4 magicSubstitution (K_food production side - substitution counts at its cap), J2 routeNetworkFlows (K_food import side: net food imports over live edges), H3 npcLedger (the resident named-cast floor - the death/departure draw is taken against pop MINUS residentNamedCount), the existing decline/terminal lanes (UNCHANGED - they work; the soak proved it).',
+  '',
+  'IMPLEMENT (P1 ONLY - no overflow/promotion, no migration, no stressor coupling; P2/P3/P4 own those):',
+  '1. foodCapacityOf(settlement, world) -> K_food: local food production + net imports (J2 goods flows, signed) - treaty obligations, through ONE authored MOUTHS_PER_FOOD_UNIT banded table (finite semantics). Derived every tick, never stored.',
+  '2. densityCeilingOf(settlement) -> D_tier: the authored per-tier table, terrain-adjusted, METROPOLIS INCLUDED.',
+  '3. demographicRates -> {birth01, death01}: birth band suppressed by pressure; death band raised by pressure + food deficit; NATURAL MORTALITY is the death band GUARANTEED NONZERO FLOOR (J-P2: even paradise ages).',
+  '4. The section-3 step: next = pop + births - deaths (integer terms, ONE seeded fork demographics:<id>, draw-accounted per the wave-E instrument), pressure01 = pop / min(K_food, D_tier). Brief overshoot allowed (J-P5: famine lag, no hard clamp). The H3 floor composes: draws taken against pop - residentNamedCount.',
+  '5. Wire into the lifecycle kernel behind demographicsEnabled: lit replaces the raw growth line; dark is byte-identical BY OBJECT IDENTITY (the fenced golden built BEFORE the wiring, the J1 precedent).',
+  '6. Receipts: the pulse demographic line names each term in-world prose (legibility law; the Herald consumes later - just make the receipt shape honest now).',
+  '',
+  'PINS with executed negative controls (revert/red/restore/green quoted):',
+  '- THE CURE PIN (the wave soul): a 300-tick property run on a seeded fixture realm PLATEAUS - no settlement grows monotonically past its bound band; and with the death floor deleted (the negative control) the same fixture RE-CREATES the compounding runaway shape. The defect must be reproducible by reverting the cure.',
+  '- Natural mortality floor: zero-pressure prosperous fixture still has deaths > 0 every window.',
+  '- K_food responds to imports: cut the food edge (the J4 interdiction shape) and K falls and deaths/pressure rise - siege-by-starvation as a TEST.',
+  '- min(K,D) diagnosis: two fixtures, one granary-bound one wall-bound, the receipt names WHICH bound binds.',
+  '- H3 floor: a settlement at cast-count never draws below it.',
+  '- Dormancy by object identity + the fenced golden; seed-family determinism (two-pass + purity scan); draw accounting; JSON round-trip.',
+  '',
+  'HARD RULES: no migrations; no git mutations; no full suites/builds; NO ratchet raises; ZERO any-casts; kernel math primitives; no em dashes in src/domain string literals; conditional worldState keys drop-when-empty; census/walker interactions are registrations with written reasons; the golden law - this slice ships DARK and must not shift a generation golden or any dormancy golden; if you touch anything the edge bundles bake in, reseal via npm run build:edge-shared before declaring done. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls vetoable, discovered.',
+].join('\n')
+
+phase('Build')
+const r = await agent(BRIEF, { label: 'P1:rates', phase: 'Build', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

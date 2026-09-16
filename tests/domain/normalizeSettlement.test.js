@@ -108,6 +108,22 @@ describe('normalizeSettlement()', () => {
     expect(out.futureField).toEqual({ someValue: 42 });
   });
 
+  it('preserves parentRef and additive receipt fields through normalize + JSON', () => {
+    const parentRef = {
+      version: 1,
+      parentId: 'save-parent',
+      sourceSatelliteId: 'satellite-2',
+      foundedTick: 12,
+      graduatedTick: 28,
+      birthId: 'birth-2',
+      futureEvidence: { charterSeal: 'red-wax' },
+    };
+    const normalized = normalizeSettlement({ ...sampleLegacy(), parentRef });
+    const roundTripped = JSON.parse(JSON.stringify(normalized));
+
+    expect(roundTripped.parentRef).toEqual(parentRef);
+  });
+
   it('returns a minimal valid shape for nullish input', () => {
     const out = normalizeSettlement(null);
     expect(out.schemaVersion).toBe(SCHEMA_VERSION);

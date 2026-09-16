@@ -40,6 +40,7 @@ import { botGuard } from "../_shared/requestMeta.ts";
 // This previously emitted "*"; the shared helper fails closed (echoes the
 // matched origin, never "*") and accepts the Cloudflare Pages preview origin.
 import { getCorsHeaders as sharedCorsHeaders } from "../_shared/cors.ts";
+import { selectMailAdapter } from "../_shared/mailAdapter.ts";
 
 /** Per-request CORS headers from the shared allowlist (preserves prior Allow-Headers). */
 function corsHeadersFor(req: Request): Record<string, string> {
@@ -161,6 +162,51 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "— SettlementForge",
     ].join("\n"),
   },
+
+  // Retention warning (downgrade-transition audit 2.2) — kept in sync with
+  // src/lib/emailTemplates.js. Authenticated template (recipient from auth.uid()).
+  retention_warning: {
+    subject: "Your retained settlements expire soon",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your account has returned to the free tier, so settlements beyond your",
+      "free slots are held in read-only retention. They will be permanently",
+      "removed after {retentionUntil} unless you act.",
+      "",
+      "To keep them, you can:",
+      "  • Reactivate or export a retained settlement from your library:",
+      "    https://settlementforge.com/settlements",
+      "  • Resubscribe to restore full access to every retained settlement:",
+      "    https://settlementforge.com/pricing",
+      "",
+      "Your simulator output is untouched — retention only limits how many",
+      "settlements stay in your live library.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
+
+  // ops_error_alert — the item-A error-alert consumer (Wave E). Authenticated
+  // only (NOT in ANON_OK_TEMPLATES — the ops alert must never widen the anon
+  // mailer surface). Sent to the operator's own address; the numbers come from
+  // report_client_error_alert() (migration 167). Kept in sync with
+  // src/lib/emailTemplates.js.
+  ops_error_alert: {
+    subject: "SettlementForge: {distinctSignatures} distinct crash signatures in {windowMinutes} min",
+    text: [
+      "Client error alert.",
+      "",
+      "In the last {windowMinutes} minutes SettlementForge saw",
+      "{distinctSignatures} distinct crash signature(s) — over the alert",
+      "threshold of {threshold}.",
+      "",
+      "Open the admin panel → Client Errors for the grouped signatures,",
+      "counts, and sample messages.",
+      "",
+      "— SettlementForge ops",
+    ].join("\n"),
+  },
 };
 
 // Templates that don't require an authenticated caller. These accept
@@ -256,31 +302,18 @@ function isPlausibleEmail(value: unknown): value is string {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+// Default dispatcher. Name/signature retained for the deps.dispatch test seam;
+// the body now delegates to the env-selected provider adapter (Resend default,
+// Postmark via EMAIL_PROVIDER) so the mail seam is provider-neutral. `from`/
+// `apiKey` are carried by the seam contract but the adapter owns the transport.
 async function sendViaResend(opts: {
   to: string;
   from: string;
   subject: string;
   text: string;
   apiKey: string;
-}) {
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${opts.apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from:    opts.from,
-      to:      [opts.to],
-      subject: opts.subject,
-      text:    opts.text,
-    }),
-  });
-  if (!res.ok) {
-    const detail = await res.text().catch(() => "");
-    throw new Error(`Resend ${res.status}: ${detail}`);
-  }
-  return res.json();
+}): Promise<{ id: string | null }> {
+  return selectMailAdapter().send({ to: opts.to, subject: opts.subject, text: opts.text });
 }
 
 /**
@@ -442,21 +475,23 @@ export async function handleSendEmail(
       }
     }
 
-    // Apply provider config. RESEND_API_KEY + RESEND_FROM_EMAIL come
-    // from Supabase secrets — set with:
+    // Provider config via the provider-neutral adapter (EMAIL_PROVIDER selects;
+    // default 'resend', 'postmark' as a second). Each provider reads its own
+    // secrets (e.g. RESEND_API_KEY + RESEND_FROM_EMAIL) and is INERT when unset:
     //   npx supabase secrets set RESEND_API_KEY=re_xxx
     //   npx supabase secrets set RESEND_FROM_EMAIL="SettlementForge <hello@settlementforge.com>"
-    const apiKey = Deno.env.get("RESEND_API_KEY");
-    const fromEmail = Deno.env.get("RESEND_FROM_EMAIL");
-    if (!apiKey || !fromEmail) {
+    const mailer = selectMailAdapter();
+    if (!mailer.configured) {
       // Soft fail — emails are non-blocking by design. Surface in logs
       // but return 200 so the client doesn't retry.
-      console.warn("[send-email] RESEND_API_KEY or RESEND_FROM_EMAIL not set");
+      console.warn(`[send-email] mail provider '${mailer.id}' is not configured`);
       return new Response(
         JSON.stringify({ ok: false, reason: "unconfigured" }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+    const fromEmail = mailer.from;
+    const apiKey = mailer.token;
 
     // Render. Inject displayName from auth if not supplied.
     // For the anonymous path only the schema-validated payload (digit-only

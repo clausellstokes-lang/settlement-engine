@@ -25,6 +25,7 @@ describe('F5 — war-layer condition archetypes', () => {
     expect(catalog.has('reinforcement_cost')).toBe(true);
   });
 
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
   test('war_drain DRAINS economic_capacity (the homeostasis SOURCE deriveEconomicCapacity was missing)', () => {
     const base = { economicState: { prosperity: 'moderate' }, activeConditions: [] };
     const drained = { economicState: { prosperity: 'moderate' }, activeConditions: [{ archetype: 'war_drain', severity: 0.5 }] };
@@ -41,6 +42,7 @@ describe('F5 — war-layer condition archetypes', () => {
     expect(deriveCausalState(hot).scores.economic_capacity).toBeLessThan(drainedScore);
   });
 
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
   test('war_drain lists ONLY economic_capacity (no double-count with trade/economy pressure)', () => {
     const v = deriveSystemVariable('economic_capacity', {
       economicState: { prosperity: 'moderate' }, activeConditions: [{ archetype: 'war_drain', severity: 0.6 }],

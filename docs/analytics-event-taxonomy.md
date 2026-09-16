@@ -58,6 +58,7 @@ Six of these gain **extended props** (non-breaking — additive only); see §3 E
 | `WIZARD_STEP_VIEWED` | `wizard_step_viewed` | essential | `GenerateWizard.jsx` step transition (`wizardStep` effect; step ids `config\|institutions\|services\|trade`, lines 79–94) | `{ step_id, step_index, mode, direction:'next'\|'back' }` | where the advanced wizard leaks |
 | `WIZARD_ABANDONED` | `wizard_abandoned` | essential | `GenerateWizard.jsx` unmount/pagehide with no generation this wizard session | `{ last_step_id, steps_visited_count, dwell_ms_band }` | wizard drop-off |
 | `REGENERATION_TRIGGERED` | `regeneration_triggered` | essential | re-roll path (settlementSlice regenerate; `src/domain/regenerationMode.js` consumers) | `{ regen_mode, config_changed, changed_config_fields:['culture',…], generation_index_this_session }` | do users tweak config or re-roll blindly |
+| `GENERATION_MILESTONE` | `generation_milestone` | essential | **the generation-id SPINE** (`src/lib/generationTelemetry.js`), fired at five waypoints: `generate` (settlementSlice generate), `save` (saveMoments chokepoint), `canonize` (settlementSlice.canonize), `export` (settlementSlice.markExported), `narrate` (aiSlice.requestNarrative success) | `{ generation_id, milestone, spine_version, tier, terrain_class, prosperity, stress_types, hook_count_band, chain_count_band, has_factions, has_conflicts, has_stressors, has_hooks, has_neighbours, has_supply_chains }` — `generation_id` is a pseudonymous, seed+stamp-derived id (NEVER on the settlement object); fingerprint is bands/enums/booleans ONLY | reconstruct a single generation's whole journey (generate→save→…→narrate); powers reroll-by-cell + abandonment-by-config (server-derived over `generation_id`) |
 
 ## 2. `dossier_reading` namespace
 
@@ -104,6 +105,7 @@ resources → resource category id; `rename-npc` → npc role category; `rename-
 | `NARRATIVE_DRIFT_MODAL_SHOWN` | `narrative_drift_modal_shown` | essential | `src/components/NarrativeDriftModal.jsx` mount | `{ change_class:'cosmetic'\|'structural'\|'seismic' (classifyChange), edits_since_narrative_count }` | how often edits invalidate AI prose |
 | `NARRATIVE_DRIFT_DECISION` | `narrative_drift_decision` | essential | modal buttons | `{ choice:'regenerate'\|'revert'\|'dismiss', change_class }` | regenerate-vs-revert economics |
 | `VERSION_RESTORED` | `version_restored` | essential | versionHistory restore handler (migration 016) | `{ versions_back, snapshot_kind, canon_phase }` | is version history a safety net or unused |
+| `EVENT_EDIT_APPLIED` | `event_edit_applied` | essential | `settlementSlice.applyEvent` commit (reads the C1 ActionResult's `before.eventType`) | `{ event_type }` (in-world event TYPE enum only) | revealed preference: which in-world events DMs actually apply |
 
 **Plus** (research plane, not via `track()`): on commit, for `research`-consented users, each
 committed edit also emits a typed `edit_events` row through `researchCapture.js` —
@@ -144,7 +146,7 @@ Intervals: `one_week | one_month | one_season | one_year`. Stressor statuses:
 | `WORLD_PULSE_PROPOSAL_APPLIED` | `world_pulse_proposal_applied` | essential | `applyWorldPulseProposal` | `{ proposal_type, party_sourced }` | which proposed consequences DMs accept |
 | `PARTY_IMPACT_RECORDED` | `party_impact_recorded` | essential | `recordPartyImpact` | `{ action_type, target_kind }` | party-as-actor adoption |
 | `WORLD_STRESSOR_TRANSITIONS` | `world_stressor_transitions` | **research** | inside pulse-result application, diff stressor statuses before/after | `{ interval, transitions:[{type, from_status, to_status, severity, memory_strength_band}] }` (cap 20) | stressor-lifecycle dataset (echo ladder, counterforces in practice) |
-| `WIZARD_NEWS_PANEL_OPENED` | `wizard_news_panel_opened` | essential | `src/components/map/WizardNewsPanel.jsx` open | `{ unread_count, current_tick }` | is the news feed read |
+| `WIZARD_NEWS_PANEL_OPENED` | `wizard_news_panel_opened` | essential | `src/components/map/WizardNewsPanel.jsx` open | `{ unread_count, current_tick }`, campaign `subject_id` | is the news feed read |
 | `SIMULATION_RULES_UPDATED` | `simulation_rules_updated` | essential | `updateCampaignSimulationRules` | `{ changed_keys:[rule key names only] }` | which sim knobs DMs touch |
 | `CHRONICLE_GENERATED` | `chronicle_generated` | essential | chronicle generation success (`generate-chronicle` path) | `{ entry_count_after, tick }` | chronicle adoption |
 
@@ -195,14 +197,31 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | `SETTLEMENT_REOPENED` | `settlement_reopened` | essential | library open handler (SettlementsPanel / store load) | `{ days_since_edited_band (now − campaignState.editedAt ?? savedAt), canon_phase, has_ai_data, save_count_band, via:'library'\|'welcome_back'\|'deep_link' }` — **the revisit-gap event** |
 | `SETTLEMENT_DELETED` | `settlement_deleted` | essential | `saves` delete call site | `{ canon_phase, age_days_band, had_ai_data, was_published }` |
 | `LIBRARY_VIEWED` | `library_viewed` | essential | SettlementsPanel mount (session-deduped via `useFunnelEvent`) | `{ save_count_band, campaign_count }` |
-| `SESSION_STARTED` | `session_started` | essential | session id mint (`src/lib/session.js`) | `{ is_return, days_since_last_visit_band (useReturnVisit stamp), auth_state:'anon'\|'free'\|'premium', entry_route_kind:'home'\|'dossier'\|'gallery'\|'pricing'\|'other' }` |
+| `SESSION_STARTED` | `session_started` | essential | boot (`src/main.jsx`), **deferred until auth resolves** | `{ is_return, days_since_last_visit_band (useReturnVisit stamp), auth_state:'anon'\|'free'\|'premium'\|'unknown', entry_route_kind:'home'\|'dossier'\|'gallery'\|'pricing'\|'other' }` |
 
-## 10. `research` / `consent`
+> `session_started` fires at boot but is **held until the first auth resolution** so `auth_state` reflects the real tier (auth resolves asynchronously after boot; firing at boot forced a false `'anon'` for returning signed-in users — F34). Events queue locally, so the 1-2s defer is lossless. `'unknown'` is the honest fallback if auth never resolves (Supabase unconfigured / init not reached).
+
+## 10. `research` and consent-service boundary
 
 | Constant | Event | Class | Trigger | Props |
 |---|---|---|---|---|
-| `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable |
-| `CONSENT_UPDATED` | `consent_updated` | essential | `setConsent()` in `src/lib/consent.js` | `{ research:'granted'\|'denied'\|'unset', ai_prose:'granted'\|'denied'\|'unset', surface:'account'\|'opt_in_card'\|'banner' }` |
+| `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | **research** | `captureFingerprint(moment)` in `src/lib/researchCapture.js` at: `generated`, `saved`, `canonized`, `exported`, `ai_polished`, `pulse_advanced`, `published` | `{ moment, consent_version, fingerprint:{…doc 1 §7}, fingerprint_hash, prev_fingerprint_hash, content_hash }` — `prev_fingerprint_hash` makes evolution chains reconstructable; `consent_version` stamps the consent-model basis (see below) |
+
+> Consent changes are deliberately absent from the analytics registry. Signed-in
+> changes write a durable SERVICE-class compliance record containing the changed
+> purpose, prior/new booleans, source, and timestamp. That record persists
+> independently of telemetry choices and is available through the account export.
+
+> **Consent model v2 (research opt-out).** `research` flipped from opt-IN (default
+> false) to opt-OUT (default `!dntEnabled()`). CONSENT_KEY is preserved: prior
+> explicit choices are honored via `updatedAt` provenance (updatedAt>0 ⇒ user
+> touched it ⇒ honor verbatim; absence/0 ⇒ new default). Every research capture
+> carries `CONSENT_MODEL_VERSION` (=2) so the consent basis is auditable. The
+> opt-out is **silent** — no pop-up and no first-run notice anywhere; the
+> disclosure is hosted in the account page's **Privacy & data** section
+> (`PrivacySettings`, surface `account`). DNT is a hard override of all telemetry.
+> Server side: migration 051 sets `profiles.telemetry_consent` research default to
+> true for NEW ROWS ONLY (existing rows are never mass-updated).
 
 ---
 
@@ -226,7 +245,34 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | `src/utils/generateSettlementPDF.js` / `generateCampaignPDF.js` call sites | resolve | `pdf_export_completed`, `captureFingerprint('exported')` |
 | `src/lib/gallery.js` call sites | :41/:52 + vote/comment/report | `gallery_*`, `captureFingerprint('published')` |
 | `src/lib/session.js` | session mint | `session_started` |
-| `src/lib/consent.js` | `setConsent` | `consent_updated` |
+| `src/components/PrivacySettings.jsx` | consent toggle | local consent plus `set_my_telemetry_consent` SERVICE record; no analytics event |
+
+---
+
+## 11. Phase-5.5 spatial-engine usage (rev 7 — ADDITIVE props, NO new events)
+
+The Phase-5.5 spatial engine (preset selection, the mover ladder, the spatial canonize) post-dates
+the taxonomy above and was previously **unmeasured** — worse, preset/flag changes were *filtered
+out* (`extractSimulationRules`'s `changed_keys` clamp excludes every 5.5 key). Rev 7 closes that gap
+by **enriching two existing essential events with coarse, id-free props** — no new event names (so no
+first-paint eager bytes, no edge-bundle event surface change), no DB migration (props are JSONB). All
+derivation is a read-only side-channel off the **already-final post-tick worldState** and lives in
+lazy modules, so same-seed goldens stay byte-identical and the first-paint closure is unchanged.
+
+**Determinism + budget proof (2026-07-13):** goldens byte-identical; `verify:dist` 108/108; entry
+closure `1,255,965` = byte-identical to the pre-change baseline (margin 20 under
+`CLOSURE_BUDGET_BYTES`). The two derivation modules are deliberately SEPARATE files, each imported by
+exactly one lazy body — a single shared module leaks a ~44-byte chunk-manifest string into the entry
+(the FP-R hazard); see the header notes in `spatialUsage.js` / `spatialCanonizeUsage.js`.
+
+| Event (existing) | Fire site (lazy) | New props (all coarse: enums/bands/counts/booleans, no ids) | Question answered |
+|---|---|---|---|
+| `world_pulse_advanced` | `campaignAdvanceSession.js` (`extractSpatialUsage`, `src/lib/spatialUsage.js`) | `sim_config { preset_id, info_mode, world_progression, political_autonomy, spatial_mode, travel_mode, migration_mode, intensity, flags_on:[enabled 5.5 flag names] }` + `spatial_active` + `spatial_canon_version`; and when spatial/movers are live: `movers_active:[embattlement, caravans, smuggle, migration, field_combat, entrepots, trade_flow, rumor, belief, moral_drift, dispatch_refusal, propagation, approval_queue]`, `mover_counts {embattled, caravans(+starving), smuggle, migration_columns, armies_afield(+cut_off), entrepots, trade_flow_nodes, rumor_holders, belief_observers, moral_drift, dispatch_refusing, arrivals_in_transit, approvals_pending}`, `migration_pop_band` | which **presets** real play runs under; which **feature-flags** are adopted; which **mover layers** actually fire, at what intensity; **approval-queue** depth; **tick** cadence |
+| `world_canonized` (SPATIAL path only) | `campaignSpatialCanonize.js` (`extractCanonizeUsage`, `src/lib/spatialCanonizeUsage.js`) | `spatial:true, spatial_canon_version, is_recanonize, geometry_version, cost_law_version, overlay_version, has_sea_lanes, has_teleport, has_seasonal, digest_bytes_band` | spatial-engine **opt-in** rate; re-canonize behavior; which map features (sea/teleport/seasonal) get lit; digest weight |
+
+The plain (non-spatial) `world_canonized` carries no `spatial` prop, so absence distinguishes it from
+the spatial path (zero eager touch to that fire). Gallery interactions and tick/advance cadence are
+already covered by the existing `gallery_*` events and `world_pulse_advanced` fire itself.
 
 ## Totals
 

@@ -22,8 +22,114 @@
  */
 
 import { withImpairment } from './status.js';
+import { factionArchetype } from '../factionArchetypes.js';
+import {
+  factionDisplayNameOf,
+  factionRefOf,
+  resolveFactionRef,
+} from '../factionRefs.js';
+
+// domain-top-3: institution catalog category → canonical faction archetype. Used
+// only as the DOCUMENTED FALLBACK when a faction carries no explicit
+// controls/funds/staffs/protects link to an institution — a faction whose
+// archetype matches the institution's category then takes a low default
+// impairment ('the granary burned → the controlling merchant faction suffers').
+// Categories with no clean faction counterpart (Infrastructure/Adventuring/
+// Entertainment/Exotic) are intentionally omitted so the fallback never fires
+// spuriously. Explicit link lists always win.
+/** @type {Record<string, string>} */
+const INSTITUTION_CATEGORY_ARCHETYPE = Object.freeze({
+  religious: 'religious',
+  defense: 'military',
+  criminal: 'criminal',
+  government: 'government',
+  magic: 'arcane',
+  crafts: 'craft',
+  economy: 'merchant',
+});
+
+/** @param {{ category?: string } | null | undefined} inst @returns {string|null} canonical archetype for an institution's category */
+function institutionCategoryArchetype(inst) {
+  const cat = String((inst && inst.category) || '').trim().toLowerCase();
+  return INSTITUTION_CATEGORY_ARCHETYPE[cat] || null;
+}
 
 /** @typedef {import('./status.js').Impairment} Impairment */
+/** @typedef {import('./status.js').ImpairmentType} ImpairmentType */
+
+// ── Types ──────────────────────────────────────────────────────────────────
+// Minimal structural shapes propagation needs. Real settlements carry far
+// more fields; the generic signatures below thread the caller's full type
+// through untouched, so extra properties survive the spreads.
+
+/** @typedef {'institution'|'faction'|'npc'} PropagationEntityType */
+
+/**
+ * @typedef {Object} PropagationInstitution
+ * @property {string=} id
+ * @property {string=} name
+ * @property {string=} status
+ * @property {string=} category
+ * @property {Impairment[]=} impairments
+ */
+
+/**
+ * @typedef {Object} PropagationFaction
+ * @property {string=} id
+ * @property {string=} faction   legacy name field ({ faction, power, desc } shape)
+ * @property {string=} name
+ * @property {string=} status
+ * @property {Impairment[]=} impairments
+ * @property {string[]=} controlsInstitutionIds
+ * @property {string[]=} fundsInstitutionIds
+ * @property {string[]=} staffsInstitutionIds
+ * @property {string[]=} protectsInstitutionIds
+ */
+
+/**
+ * @typedef {Object} PropagationNpc
+ * @property {string=} id
+ * @property {string=} name
+ * @property {string=} status
+ * @property {string=} importance   canonical values: NpcImportance (entities/npcs.js)
+ * @property {Impairment[]=} impairments
+ * @property {string[]=} linkedInstitutionIds
+ * @property {string[]=} linkedFactionIds
+ */
+
+/**
+ * @typedef {Object} PropagationSettlement
+ * @property {PropagationInstitution[]=} institutions
+ * @property {PropagationFaction[]=} factions
+ * @property {PropagationNpc[]=} npcs
+ * @property {{ factions?: PropagationFaction[] }=} powerStructure
+ */
+
+/**
+ * The originating impairment a cascade expands from.
+ * @typedef {Object} PropagationOrigin
+ * @property {PropagationEntityType} entityType
+ * @property {string} entityId
+ * @property {Impairment} impairment
+ */
+
+/**
+ * BFS frontier entry — an entity whose outgoing edges still need expanding.
+ * @typedef {Object} PropagationNode
+ * @property {PropagationEntityType} entityType
+ * @property {string} entityId
+ * @property {number} severity    attenuated severity outgoing edges should use
+ * @property {number} hops        distance from the origin (0 = origin itself)
+ * @property {ImpairmentType} dimension
+ */
+
+/**
+ * One discovered link: propagate to `targetId` scaled by `strength` (0-1).
+ * @typedef {Object} PropagationEdge
+ * @property {PropagationEntityType} targetType
+ * @property {string} targetId
+ * @property {number} strength
+ */
 
 const DEFAULT_DAMPING = 0.6;
 const MAX_HOPS = 2;
@@ -33,6 +139,8 @@ const MAX_HOPS = 2;
  * Captures the causal logic: a granary losing CAPACITY hurts the
  * controlling faction's WEALTH; a temple losing LEGITIMACY hurts the
  * temple faction's PUBLIC_SUPPORT.
+ *
+ * @type {Partial<Record<ImpairmentType, import('./status.js').FactionImpairmentType>>}
  */
 const INSTITUTION_TO_FACTION_DIM = {
   capacity:       'wealth',
@@ -45,7 +153,9 @@ const INSTITUTION_TO_FACTION_DIM = {
   corruption:     'legitimacy',
 };
 
-/** Reciprocal: faction impairment → institution dimension. */
+/** Reciprocal: faction impairment → institution dimension.
+ * @type {Partial<Record<ImpairmentType, import('./status.js').InstitutionImpairmentType>>}
+ */
 const FACTION_TO_INSTITUTION_DIM = {
   leadership:        'staffing',
   legitimacy:        'legitimacy',
@@ -66,13 +176,14 @@ const FACTION_TO_INSTITUTION_DIM = {
  * Caller responsibility: the originating impairment must already be on
  * the source entity. This function only adds the *propagated* effects.
  *
+ * @template {PropagationSettlement} S
  * @param {Object} args
- * @param {import('../settlement.schema.js').SimSettlement} args.settlement       must have .institutions[], .factions[], .npcs[]
- * @param {{ entityType:'institution'|'faction'|'npc', entityId:string, impairment:Impairment }} args.origin
+ * @param {S} args.settlement            must have .institutions[], .factions[], .npcs[]
+ * @param {PropagationOrigin} args.origin
  * @param {Object} [args.opts]
  * @param {number} [args.opts.damping=0.6]
  * @param {number} [args.opts.maxHops=2]
- * @returns {Object} new settlement with propagation applied
+ * @returns {S} new settlement with propagation applied
  */
 export function propagateImpairment({ settlement, origin, opts = {} }) {
   if (!settlement || !origin) return settlement;
@@ -93,7 +204,7 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
 
   // BFS frontier: entities to expand from. Each entry carries the
   // attenuated severity its outgoing edges should use.
-  /** @type {Array<{ entityType:string, entityId:string, severity:number, hops:number, dimension:string }>} */
+  /** @type {PropagationNode[]} */
   let frontier = [{
     entityType: origin.entityType,
     entityId:   origin.entityId,
@@ -105,6 +216,7 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
   let working = settlement;
 
   while (frontier.length) {
+    /** @type {PropagationNode[]} */
     const next = [];
     for (const node of frontier) {
       if (node.hops >= maxHops) continue;
@@ -115,11 +227,12 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
       const links = findLinkedEntities(working, node);
       for (const link of links) {
         // The npc→faction dimension depends on the NPC's importance tier
-        // (leadership for pillar/key, membership for notable/minor — see the
-        // contract in findLinkedEntities). Resolve the source NPC so
-        // mapDimension can honor that branch.
+        // (leadership for a pillar, membership otherwise — see the contract in
+        // findLinkedEntities / mapDimension). Resolve the source NPC so
+        // mapDimension can honor that branch and agree with killNpc's own
+        // direct-impairment choice.
         const sourceNpc = node.entityType === 'npc'
-          ? (working.npcs || []).find((/** @type {any} */ n) => npcId(n) === node.entityId)
+          ? (working.npcs || []).find(n => npcId(n) === node.entityId)
           : null;
         const propagatedDim = mapDimension(node.entityType, link.targetType, node.dimension, sourceNpc);
         if (!propagatedDim) continue;
@@ -196,11 +309,13 @@ export function propagateImpairment({ settlement, origin, opts = {} }) {
  *
  * Relationship strength is derived from explicit fields when present
  * (e.g. faction.controlStrength) or defaulted by category match.
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {any} node
+ *
+ * @param {PropagationSettlement} settlement
+ * @param {PropagationNode} node
+ * @returns {PropagationEdge[]}
  */
 function findLinkedEntities(settlement, node) {
-  /** @type {any[]} */
+  /** @type {PropagationEdge[]} */
   const out = [];
   // Factions live in either `settlement.factions` or
   // `settlement.powerStructure.factions` depending on which generator
@@ -210,40 +325,50 @@ function findLinkedEntities(settlement, node) {
   // used everywhere a faction lookup happens.
   const factions = factionsList(settlement);
   if (node.entityType === 'institution') {
+    // Look up the institution so the archetype-match fallback (domain-top-3) can
+    // compare the faction's archetype against this institution's category.
+    const inst = (settlement.institutions || []).find(i => instId(i) === node.entityId);
+    const instArchetype = institutionCategoryArchetype(inst);
     for (const f of factions) {
-      const strength = factionInstitutionStrength(f, node.entityId);
-      if (strength > 0) out.push({ targetType: 'faction', targetId: factionId(f), strength });
+      const strength = factionInstitutionStrength(f, node.entityId, instArchetype);
+      const targetId = factionRefOf(f);
+      if (strength > 0 && targetId) out.push({ targetType: 'faction', targetId, strength });
     }
   } else if (node.entityType === 'faction') {
+    const fac = resolveFactionRef(factions, node.entityId);
     for (const i of settlement.institutions || []) {
-      const fac = factions.find((/** @type {any} */ f) => factionId(f) === node.entityId);
-      const strength = fac ? factionInstitutionStrength(fac, instId(i)) : 0;
+      const strength = fac ? factionInstitutionStrength(fac, instId(i), institutionCategoryArchetype(i)) : 0;
       if (strength > 0) out.push({ targetType: 'institution', targetId: instId(i), strength });
     }
   } else if (node.entityType === 'npc') {
-    const npc = (settlement.npcs || []).find((/** @type {any} */ n) => npcId(n) === node.entityId);
+    const npc = (settlement.npcs || []).find(n => npcId(n) === node.entityId);
     if (npc) {
       for (const linkedId of npc.linkedInstitutionIds || []) {
         out.push({ targetType: 'institution', targetId: linkedId, strength: importanceWeight(npc) });
       }
+      const emittedFactionRefs = new Set();
       for (const linkedId of npc.linkedFactionIds || []) {
-        out.push({ targetType: 'faction', targetId: linkedId, strength: importanceWeight(npc) });
+        const faction = resolveFactionRef(factions, linkedId);
+        const targetId = factionRefOf(faction);
+        if (!targetId || emittedFactionRefs.has(targetId)) continue;
+        emittedFactionRefs.add(targetId);
+        out.push({ targetType: 'faction', targetId, strength: importanceWeight(npc) });
       }
     }
   }
   return out;
 }
 
-/**
- * Cross-type dimension mapping.
- * @param {any} fromType
- * @param {any} toType
- * @param {any} dim
- * @param {any} sourceNpc
+/** Cross-type dimension mapping.
+ * @param {PropagationEntityType} fromType
+ * @param {PropagationEntityType} toType
+ * @param {ImpairmentType} dim
+ * @param {PropagationNpc | null | undefined} [sourceNpc]
+ * @returns {ImpairmentType | null}
  */
 function mapDimension(fromType, toType, dim, sourceNpc) {
-  if (fromType === 'institution' && toType === 'faction') return /** @type {Record<string, any>} */ (INSTITUTION_TO_FACTION_DIM)[dim] || null;
-  if (fromType === 'faction'     && toType === 'institution') return /** @type {Record<string, any>} */ (FACTION_TO_INSTITUTION_DIM)[dim] || null;
+  if (fromType === 'institution' && toType === 'faction') return INSTITUTION_TO_FACTION_DIM[dim] || null;
+  if (fromType === 'faction'     && toType === 'institution') return FACTION_TO_INSTITUTION_DIM[dim] || null;
   if (fromType === 'npc' && toType === 'institution') return 'staffing';
   if (fromType === 'npc' && toType === 'faction') {
     // Per the contract: leadership or membership by importance tier — and the
@@ -262,12 +387,15 @@ function mapDimension(fromType, toType, dim, sourceNpc) {
  * Estimate the strength of a faction's link to an institution. Returns
  * 0 if no link, 0.0–1.0 otherwise. Prefers explicit fields; falls back
  * to category match.
- * @param {import('../settlement.schema.js').SimFaction} faction
- * @param {any} instId
+ *
+ * @param {PropagationFaction | null | undefined} faction
+ * @param {string} instId
+ * @param {string | null} [instArchetype] institution's canonical archetype for the fallback
+ * @returns {number}
  */
-function factionInstitutionStrength(faction, instId) {
+function factionInstitutionStrength(faction, instId, instArchetype = null) {
   if (!faction || !instId) return 0;
-  /** @type {Array<{key: string, weight: number}>} */
+  /** @type {Array<{key: 'controlsInstitutionIds'|'fundsInstitutionIds'|'staffsInstitutionIds'|'protectsInstitutionIds', weight: number}>} */
   const lists = [
     { key: 'controlsInstitutionIds', weight: 1.0 },
     { key: 'fundsInstitutionIds',    weight: 0.6 },
@@ -277,10 +405,19 @@ function factionInstitutionStrength(faction, instId) {
   for (const { key, weight } of lists) {
     if (Array.isArray(faction[key]) && faction[key].includes(instId)) return weight;
   }
+  // domain-top-3 fallback: no explicit link list matched. A faction whose canonical
+  // archetype matches the institution's category takes a low default strength (~0.4)
+  // so institution→faction impairment propagation actually fires on generated
+  // settlements (which never write the explicit link lists). Explicit links above
+  // always win — this only runs when none matched.
+  if (instArchetype && factionArchetype(faction) === instArchetype) return 0.4;
   return 0;
 }
 
-/** @param {import('../settlement.schema.js').SimNpc} npc */
+/**
+ * @param {PropagationNpc | null | undefined} npc
+ * @returns {number}
+ */
 function importanceWeight(npc) {
   switch (npc?.importance) {
     case 'pillar': return 1.0;
@@ -292,14 +429,19 @@ function importanceWeight(npc) {
 }
 
 /**
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {any} type
- * @param {any} id
- * @param {any} impairment
+ * Apply one propagated impairment to the entity of the given type/id,
+ * returning a new settlement (input never mutated).
+ *
+ * @template {PropagationSettlement} S
+ * @param {S} settlement
+ * @param {PropagationEntityType} type
+ * @param {string} id
+ * @param {Impairment} impairment
+ * @returns {S}
  */
 function applyImpairmentToEntity(settlement, type, id, impairment) {
   if (type === 'institution') {
-    const next = (settlement.institutions || []).map((/** @type {any} */ i) =>
+    const next = (settlement.institutions || []).map(i =>
       instId(i) === id ? withImpairment(i, impairment) : i,
     );
     return { ...settlement, institutions: next };
@@ -309,18 +451,20 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
     // is the canonical home for generator output; settlement.factions
     // exists in legacy paths. Pick the populated one.
     if (settlement.powerStructure?.factions) {
-      const next = settlement.powerStructure.factions.map((/** @type {any} */ f) =>
-        factionId(f) === id ? withImpairment(f, impairment) : f,
+      const target = resolveFactionRef(settlement.powerStructure.factions, id);
+      const next = settlement.powerStructure.factions.map(f =>
+        f === target ? withImpairment(f, impairment) : f,
       );
       return { ...settlement, powerStructure: { ...settlement.powerStructure, factions: next } };
     }
-    const next = (settlement.factions || []).map((/** @type {any} */ f) =>
-      factionId(f) === id ? withImpairment(f, impairment) : f,
+    const target = resolveFactionRef(settlement.factions || [], id);
+    const next = (settlement.factions || []).map(f =>
+      f === target ? withImpairment(f, impairment) : f,
     );
     return { ...settlement, factions: next };
   }
   if (type === 'npc') {
-    const next = (settlement.npcs || []).map((/** @type {any} */ n) =>
+    const next = (settlement.npcs || []).map(n =>
       npcId(n) === id ? withImpairment(n, impairment) : n,
     );
     return { ...settlement, npcs: next };
@@ -330,25 +474,27 @@ function applyImpairmentToEntity(settlement, type, id, impairment) {
 
 // ── Lookup helpers — entities lack consistent ID fields, so we
 //    normalize via name fallback. Long-term, structured IDs replace this.
-const instId    = (/** @type {any} */ i) => i?.id || i?.name || '';
-const factionId = (/** @type {any} */ f) => f?.id || f?.faction || f?.name || '';
-const npcId     = (/** @type {any} */ n) => n?.id || n?.name || '';
-/**
- * Normalize the two faction-storage shapes the codebase ships with.
- * @param {import('../settlement.schema.js').SimSettlement} s
- */
+/** @type {(i: PropagationInstitution | null | undefined) => string} */
+const instId    = (i) => i?.id || i?.name || '';
+/** @type {(n: PropagationNpc | null | undefined) => string} */
+const npcId     = (n) => n?.id || n?.name || '';
+/** Normalize the two faction-storage shapes the codebase ships with.
+ * @type {(s: PropagationSettlement | null | undefined) => PropagationFaction[]} */
 const factionsList = (s) => s?.powerStructure?.factions || s?.factions || [];
 /**
- * @param {import('../settlement.schema.js').SimSettlement} s
- * @param {any} type
- * @param {any} id
+ * @param {PropagationSettlement} s
+ * @param {PropagationEntityType} type
+ * @param {string} id
+ * @returns {string}
  */
 function entityName(s, type, id) {
   const list = type === 'institution' ? s.institutions : type === 'faction' ? factionsList(s) : s.npcs;
-  const e = (list || []).find((/** @type {any} */ x) => (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
-  return e?.name || id;
+  const e = type === 'faction'
+    ? resolveFactionRef(/** @type {PropagationFaction[]} */ (list || []), id)
+    : (list || []).find(x => (type === 'institution' ? instId(x) : npcId(x)) === id);
+  return (type === 'faction' ? factionDisplayNameOf(e) : e?.name) || id;
 }
-/** @param {number} v */
+/** @param {number} v @returns {number} */
 function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
 /**
@@ -356,19 +502,21 @@ function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
  * second cause path can compound onto it. Matches both type and cause so we
  * only ever fold paths from the SAME originating event together (distinct
  * events stack independently via withImpairment, as before).
- * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @param {string} type
+ *
+ * @param {PropagationSettlement} settlement
+ * @param {PropagationEntityType} type
  * @param {string} id
- * @param {string} dimension
- * @param {string} causeEventId
+ * @param {ImpairmentType} dimension
+ * @param {string=} causeEventId
  * @returns {number}
  */
 function currentSeverity(settlement, type, id, dimension, causeEventId) {
   const list = type === 'institution' ? settlement.institutions
     : type === 'faction' ? factionsList(settlement)
     : settlement.npcs;
-  const entity = (list || []).find((/** @type {any} */ x) =>
-    (type === 'institution' ? instId(x) : type === 'faction' ? factionId(x) : npcId(x)) === id);
-  const match = (entity?.impairments || []).find((/** @type {any} */ i) => i.type === dimension && i.causeEventId === causeEventId);
+  const entity = type === 'faction'
+    ? resolveFactionRef(/** @type {PropagationFaction[]} */ (list || []), id)
+    : (list || []).find(x => (type === 'institution' ? instId(x) : npcId(x)) === id);
+  const match = (entity?.impairments || []).find(i => i.type === dimension && i.causeEventId === causeEventId);
   return match?.severity ?? 0;
 }

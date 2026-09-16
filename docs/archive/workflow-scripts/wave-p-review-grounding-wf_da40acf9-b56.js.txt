@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'wave-p-review-grounding',
+  description: 'Verify the design review\'s load-bearing claims about existing SettlementForge machinery before amending wave P',
+  phases: [{ title: 'Verify', detail: 'two read-only Opus verifiers', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'findings'],
+  properties: {
+    agent: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', required: ['claim', 'verdict', 'evidence'], properties: { claim: { type: 'string' }, verdict: { type: 'string', enum: ['CONFIRMED', 'PARTLY_TRUE', 'REFUTED', 'NOT_FOUND'] }, evidence: { type: 'string' }, implication: { type: 'string' } } } },
+  },
+}
+
+const SHARED = 'Worktree: ' + ROOT + ' branch claude/composite-r4. READ-ONLY TASK: you may NOT edit, create, or delete any file, and you may NOT run git mutations. Report only. Cite file:line for every verdict. Where a claim is PARTLY_TRUE, say exactly which half holds. Where NOT_FOUND, say what you searched so the negative is trustworthy.'
+
+phase('Verify')
+const results = await parallel([
+  () => agent([
+    'You are an Opus VERIFIER for SettlementForge. An external design review of the forthcoming demographic wave makes factual claims about EXISTING machinery. Verify each against the live code. Do not trust the claim; do not trust my framing either.',
+    '',
+    'CLAIMS TO VERIFY (FOOD + CAPACITY half):',
+    '1. "SettlementForge already has a single authoritative food-security writer." Is there ONE canonical writer of food security / food balance? Name it, and name every other module that writes or derives a competing food figure.',
+    '2. Does the existing food model track STOCKS/RESERVES over time (opening balance, storage, spoilage, drawdown), or is it INSTANTANEOUS (production vs consumption this tick, no carry-over)? This decides whether a siege can have a staged failure arc or only a step change.',
+    '3. Is there any existing notion of imports being DEPENDABLE vs nominal (route reliability affecting delivered food), or does trade access read as a static config/tier value?',
+    '4. What food-related consequences exist TODAY for a food deficit (births? mortality? migration? unrest? prices?) — enumerate the actual consequence sites, so the new wave extends rather than duplicates.',
+    '5. Does K4 magicSubstitution (just landed) feed the same food figure, and at what cap?',
+    '',
+    SHARED,
+  ].join('\n'), { label: 'verify:food-capacity', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+
+  () => agent([
+    'You are an Opus VERIFIER for SettlementForge. An external design review of the forthcoming demographic wave makes factual claims about EXISTING machinery. Verify each against the live code. Do not trust the claim; do not trust my framing either.',
+    '',
+    'CLAIMS TO VERIFY (LIFECYCLE + STRESSOR half):',
+    '1. Does the settlement lifecycle support DEMOTION down the tier ladder (city -> town -> village), or only promotion upward plus terminal death? Cite the actual tier-transition code. If demotion exists, what triggers it and is it conservation-exact?',
+    '2. The review asserts named NPCs should not mechanically hold a settlement above a population floor, and that a nonviable settlement should disperse its cast and be allowed to die. Is the DISPERSAL path built (H3 section 9 / the terminal-decline lane), and does it actually scatter named NPCs to other settlements? Or is it specified but unbuilt?',
+    '3. What do the existing stressor incidence weights (disease/plague, beast raids, catastrophe) key on TODAY? Enumerate the actual inputs to incidence. Specifically: does anything already couple incidence to population, density, or food state?',
+    '4. Does the war layer today have any ECONOMIC or demographic motive input (scarcity, food, population pressure), or are war motives purely political/relational?',
+    '5. The 300-year soak showed six settlements floored at 200-500 while others ran away. Find the FLOOR: what code prevents those six from declining further? Name the exact mechanism (a clamp? the named-cast floor? a growth term that never goes negative? the zombie-cure dwell gate?). This is the most important item on your list - the runaway is only half the defect and I want the floor mechanism named with certainty.',
+    '',
+    SHARED,
+  ].join('\n'), { label: 'verify:lifecycle-stressor', phase: 'Verify', schema: SCHEMA, model: 'opus' }),
+])
+
+const all = results.filter(Boolean)
+log(all.length + '/2 verifiers returned')
+return { results: all }

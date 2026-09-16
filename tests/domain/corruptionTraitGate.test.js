@@ -23,8 +23,8 @@ import {
 } from '../../src/domain/corruption.js';
 import { TRAIT_PRESENCE_DISTRIBUTION } from '../../src/data/npcData.js';
 import { generateReligionType } from '../../src/generators/npcGenerator.js';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { ensureNpcStates, advanceNpcCorruption } from '../../src/domain/worldPulse/npcAgency.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 

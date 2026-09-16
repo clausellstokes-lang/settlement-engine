@@ -20,9 +20,12 @@
     "    and CVE-2020-11023 (jQuery.htmlPrefilter / DOM-XSS). Upgrade to >=3.5.0 or",
     "    drop if the fork no longer needs it.",
     "  - audit tinymce / dropbox-sdk versions against advisories; drop unused libs.",
-    "Only the identifiable top-level libraries are pinned (the tinymce skin/plugin",
-    "subtree is represented by its entry tinymce.min.js). Paths are relative to",
-    "public/map/libs/."
+    "  - most `version` fields are still \"unknown\"; the CVE-relevant libs (jquery,",
+    "    d3, jszip, three, tinymce) are recorded, the remainder are a tracked follow-up.",
+    "This is an EXACT-SET contract: every shippable file under libs/ (.js/.mjs/.wasm/.css,",
+    "INCLUDING the entire tinymce skin/plugin/theme subtree — not just tinymce.min.js) is",
+    "individually pinned, and the validator fails if the on-disk set and the pinned set",
+    "differ in EITHER direction (missing OR unlisted). Paths are relative to public/map/libs/."
   ],
   "libs": [
     {
@@ -36,7 +39,7 @@
     {
       "file": "d3.min.js",
       "name": "d3",
-      "version": "unknown",
+      "version": "5.8.0",
       "byteSize": 241983,
       "sha256": "c6c1a88692697c89ba0887683072cc2114e8adedec0d1e69a05b7b09e5318c62",
       "knownAdvisories": []
@@ -117,7 +120,7 @@
     {
       "file": "jszip.min.js",
       "name": "jszip",
-      "version": "unknown",
+      "version": "3.6.0",
       "byteSize": 99112,
       "sha256": "301f962999873267b605154aa43b886dfb3a56549d508018d55ae852613ea7c8",
       "knownAdvisories": []
@@ -189,7 +192,7 @@
     {
       "file": "three.min.js",
       "name": "three",
-      "version": "unknown",
+      "version": "r140",
       "byteSize": 623573,
       "sha256": "941d19bade0319f8d4ce1fa82fb4070aa1f10162d206e854e37e2cd60e4b407c",
       "knownAdvisories": []
@@ -1149,17 +1152,9 @@
     {
       "file": "tinymce/tinymce.min.js",
       "name": "tinymce",
-      "version": "unknown",
+      "version": "7.1.0",
       "byteSize": 763211,
       "sha256": "bf155b725496ab2f919fe5953a85be529602faa91bff8f7fb7cd6e0553e7681a",
-      "knownAdvisories": []
-    },
-    {
-      "file": "umami.js",
-      "name": "umami",
-      "version": "unknown",
-      "byteSize": 1055,
-      "sha256": "7ec0d40374c0950451d20b487b7c088c9412c1af23b285853b4ea684c33c4f8d",
       "knownAdvisories": []
     }
   ]

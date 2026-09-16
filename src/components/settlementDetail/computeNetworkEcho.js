@@ -16,12 +16,15 @@
 
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 
-export function computeNetworkEcho(settlementId, saves) {
+export function computeNetworkEcho(settlementId, saves, campaignOf) {
   if (!settlementId || !Array.isArray(saves) || !saves.length) return null;
 
   let modifiers;
   try {
-    modifiers = getSettlementModifiers(settlementId, saves);
+    // `campaignOf` (a campaign-membership index) makes co-campaign settlements
+    // implicit Neutral neighbours by default; absent ⇒ strict no-op (explicit
+    // links only), so the current call shape is unchanged.
+    modifiers = getSettlementModifiers(settlementId, saves, { campaignOf });
   } catch {
     return null;
   }

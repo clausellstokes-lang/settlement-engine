@@ -1,0 +1,286 @@
+[
+ {
+  "id": "hf258",
+  "stem": "hf258-chrome-dm-annotation-key",
+  "category": "chrome",
+  "stars": 2,
+  "register_index": 3.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "stroke_ratio\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf369",
+  "stem": "hf369-town-refuse-and-drains",
+  "category": "town",
+  "stars": 2,
+  "register_index": 8.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "stroke_ratio\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf339",
+  "stem": "hf339-lens-wet-season",
+  "category": "lens",
+  "stars": 2,
+  "register_index": 12.0,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf332",
+  "stem": "hf332-town-fishing-drying",
+  "category": "town",
+  "stars": 3,
+  "register_index": 14.0,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf278",
+  "stem": "hf278-lens-winter-town",
+  "category": "lens",
+  "stars": 2,
+  "register_index": 31.2,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "chroma\u2193"
+  ]
+ },
+ {
+  "id": "hf323",
+  "stem": "hf323-spec-church-ladder",
+  "category": "specimen",
+  "stars": 3,
+  "register_index": 35.2,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "stroke_ratio\u2191"
+  ]
+ },
+ {
+  "id": "hf290",
+  "stem": "hf290-ordu-mobile-capital",
+  "category": "town",
+  "stars": 1,
+  "register_index": 6.8,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf315",
+  "stem": "hf315-spec-tower-variety",
+  "category": "specimen",
+  "stars": 2,
+  "register_index": 8.1,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193"
+  ]
+ },
+ {
+  "id": "hf370",
+  "stem": "hf370-countryside-fuel-shed",
+  "category": "systems",
+  "stars": 3,
+  "register_index": 8.7,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193"
+  ]
+ },
+ {
+  "id": "hf381",
+  "stem": "hf381-countryside-way-network",
+  "category": "systems",
+  "stars": 3,
+  "register_index": 12.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf326",
+  "stem": "hf326-city-ward-walled-grid",
+  "category": "city",
+  "stars": 2,
+  "register_index": 12.7,
+  "axes_outside": [
+   "fill_tone_iqr\u2193",
+   "stroke_ratio\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf223",
+  "stem": "hf223-terrain-braided-river",
+  "category": "terrain",
+  "stars": 2,
+  "register_index": 16.0,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193"
+  ]
+ },
+ {
+  "id": "hf317",
+  "stem": "hf317-town-flood-marks-AB",
+  "category": "town",
+  "stars": 2,
+  "register_index": 17.2,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf252",
+  "stem": "hf252-terrain-braided-two-season",
+  "category": "terrain",
+  "stars": 1,
+  "register_index": 17.5,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf367",
+  "stem": "hf367-port-foreign-enclaves",
+  "category": "port",
+  "stars": 3,
+  "register_index": 18.7,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "stroke_ratio\u2193"
+  ]
+ },
+ {
+  "id": "hf333",
+  "stem": "hf333-town-drove-stances",
+  "category": "town",
+  "stars": 3,
+  "register_index": 19.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf346",
+  "stem": "hf346-town-head-of-navigation",
+  "category": "town",
+  "stars": 3,
+  "register_index": 20.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "fill_tone_iqr\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf321",
+  "stem": "hf321-spec-field-boundaries",
+  "category": "specimen",
+  "stars": 3,
+  "register_index": 20.5,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193"
+  ]
+ },
+ {
+  "id": "hf241",
+  "stem": "hf241-series-diminished-plan",
+  "category": "series",
+  "stars": 2,
+  "register_index": 28.7,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "ink_L\u2191"
+  ]
+ },
+ {
+  "id": "hf352",
+  "stem": "hf352-terrain-moor-peat",
+  "category": "terrain",
+  "stars": 3,
+  "register_index": 29.3,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "wash_within\u03c3\u2193",
+   "fill_tone_iqr\u2193"
+  ]
+ },
+ {
+  "id": "hf277",
+  "stem": "hf277-town-night-plan-CURE256",
+  "category": "town",
+  "stars": 1,
+  "register_index": 55.5,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "stroke_ratio\u2191",
+   "ink_L\u2193"
+  ]
+ },
+ {
+  "id": "hf206",
+  "stem": "hf206-spec-rural-footprints",
+  "category": "specimen",
+  "stars": 2,
+  "register_index": 57.4,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "stroke_ratio\u2191",
+   "ink_L\u2193"
+  ]
+ },
+ {
+  "id": "hf165",
+  "stem": "hf165-stress-siege",
+  "category": "stressor",
+  "stars": 1,
+  "register_index": 57.6,
+  "axes_outside": [
+   "paper_grain\u03c3\u2193",
+   "fill_tone_iqr\u2191",
+   "stroke_ratio\u2191"
+  ]
+ }
+]

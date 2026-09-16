@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   applyWorldPulseOutcomes,
+  applyPopulationOutcomeToSettlement,
   applyTierOutcomeToSettlement,
   applyNpcPatch,
   deriveFlowCandidates,
@@ -11,6 +12,7 @@ import {
   evaluateTierResourceDynamics,
   normalizeSimulationRules,
   pressureIndex,
+  SIMULATION_RULE_PRESETS,
 } from '../../src/domain/worldPulse/index.js';
 import { addRegionalChannels } from '../../src/domain/region/index.js';
 
@@ -44,7 +46,10 @@ describe('World Pulse expansion systems', () => {
     const defaults = normalizeSimulationRules();
     expect(defaults).toMatchObject({ propagationMode: 'first_order', intensity: 'conservative' });
 
-    const preset = normalizeSimulationRules({ presetId: 'dramatic_campaign', propagationMode: 'full', intensity: 'dramatic', majorChangesRequireProposal: false, migrationMode: 'distributed' });
+    // Source from the CANONICAL dramatic_campaign rules — after the owner's preset
+    // lighting (war/faith/seasons/disasters), the round-trip identity is defined by
+    // the preset's full shape, not a hand-built light blob.
+    const preset = normalizeSimulationRules(SIMULATION_RULE_PRESETS.dramatic_campaign.rules);
     expect(preset.schemaVersion).toBe(1);
     expect(preset.presetId).toBe('dramatic_campaign');
 
@@ -84,6 +89,7 @@ describe('World Pulse expansion systems', () => {
     const migration = candidates.find(candidate => candidate.candidateType === 'population_emigration');
 
     expect(migration).toBeTruthy();
+    expect(migration.recordMode).toBeUndefined();
     expect(migration.populationDeltas.some(delta => delta.saveId === 'a' && delta.delta < 0)).toBe(true);
     expect(migration.populationDeltas.some(delta => delta.saveId === 'b' && delta.delta > 0)).toBe(true);
 
@@ -104,6 +110,45 @@ describe('World Pulse expansion systems', () => {
     const updated = new Map(result.settlementUpdates.map(update => [update.saveId, update.settlement]));
     expect(updated.get('a').population).toBeLessThan(2000);
     expect(updated.get('b').population).toBeGreaterThan(800);
+  });
+
+  test('ordinary growth is state-only, while a major transition stays Chronicle-eligible', () => {
+    const calm = item('calm', settlement('Calmwater', { population: 10000 }));
+    const snapshot = {
+      worldState: { tick: 3, simulationRules: normalizeSimulationRules() },
+      regionalGraph: { channels: [], edges: [] },
+      settlements: [calm],
+      byId: new Map([['calm', calm]]),
+    };
+    const pressures = pressureIndex(['food', 'disease', 'conflict', 'trade', 'legitimacy', 'crime']
+      .map(kind => ({ settlementId: 'calm', kind, score: 0.1 })));
+
+    const ordinary = evaluatePopulationDynamics(snapshot, pressures, {
+      tick: 4,
+      interval: 'one_month',
+      simulationRules: normalizeSimulationRules({ intensity: 'dramatic', majorChangesRequireProposal: true }),
+    })[0];
+    const major = evaluatePopulationDynamics(snapshot, pressures, {
+      tick: 4,
+      interval: 'one_year',
+      simulationRules: normalizeSimulationRules({ intensity: 'dramatic', majorChangesRequireProposal: true }),
+    })[0];
+
+    expect(ordinary).toMatchObject({
+      candidateType: 'population_growth',
+      applyMode: 'auto',
+      recordMode: 'state_only',
+    });
+    expect(major).toMatchObject({
+      candidateType: 'population_growth',
+      applyMode: 'proposal',
+    });
+    expect(major.recordMode).toBeUndefined();
+
+    // The lane tag is receipt metadata only; weekly state arithmetic is unchanged.
+    const { recordMode: _recordMode, ...legacyShape } = ordinary;
+    expect(applyPopulationOutcomeToSettlement(calm.settlement, ordinary, 'calm'))
+      .toEqual(applyPopulationOutcomeToSettlement(calm.settlement, legacyShape, 'calm'));
   });
 
   test('siege_lifted is recovery: growth bonus, never the emigration gate; an active siege still declines', () => {
@@ -401,7 +446,13 @@ describe('World Pulse expansion systems', () => {
     expect(promoted.institutionHistory.some(entry => entry.fate === 'added')).toBe(true);
   });
 
-  test('resource recovery respects renewability and high-magic taxonomy', () => {
+  // E4-2b (cadence damping): exhaustibles used to return canRecover:false, so a
+  // calm settlement's iron/stone/gems ratcheted to PERMANENT depletion. A
+  // sustained calm (pressure ≤ 0.2) now opens a SLOW, quiet-gated recovery for
+  // them (prospecting reopens seams; trade substitutes). Renewables still
+  // recover at the fast natural rate; magic still needs high/pervasive magic —
+  // a moderate-magic town does NOT recover a magical node even when calm.
+  test('resource recovery: renewables fast, exhaustibles slow-under-calm, magic gated', () => {
     const worldState = { tick: 3, simulationRules: normalizeSimulationRules() };
     const lowPressure = pressureIndex(['iron', 'forest', 'magicLow', 'magicHigh'].flatMap(settlementId => [
       { settlementId, kind: 'food', score: 0.05 },
@@ -423,9 +474,19 @@ describe('World Pulse expansion systems', () => {
 
     const result = evaluateTierResourceDynamics(worldState, snapshot, lowPressure, { tick: 4 });
     const recoveries = result.candidates.filter(candidate => candidate.candidateType === 'resource_recovery');
+    const ironRec = recoveries.find(candidate => candidate.targetSaveId === 'iron');
+    const forestRec = recoveries.find(candidate => candidate.targetSaveId === 'forest');
 
-    expect(recoveries.some(candidate => candidate.targetSaveId === 'iron')).toBe(false);
-    expect(recoveries.some(candidate => candidate.targetSaveId === 'forest')).toBe(true);
+    // Exhaustible iron now recovers under sustained calm — but slowly.
+    expect(ironRec).toBeTruthy();
+    expect(forestRec).toBeTruthy();
+    // Bounded/damped: the exhaustible's recovery probability is a fraction of
+    // the renewable's (years of prospecting, not a season's regrowth).
+    expect(ironRec.probability).toBeLessThan(forestRec.probability);
+    expect(ironRec.reasons.some(r => /prospecting|reopened|substitution/i.test(r))).toBe(true);
+
+    // Magic recovery is still gated on high/pervasive magic — calm alone does
+    // not restore a magical node in a moderate-magic town.
     expect(recoveries.some(candidate => candidate.targetSaveId === 'magicLow')).toBe(false);
     expect(recoveries.some(candidate => candidate.targetSaveId === 'magicHigh')).toBe(true);
   });

@@ -41,16 +41,30 @@ export function TabIntro({ tabKey }) {
   );
 }
 
-// Safe string coercer
-export const Ti = v => v == null ? '' : typeof v === 'string' ? v
-  : typeof v === 'object' ? (v.product||v.name||v.chain||v.hook||v.description||v.title||JSON.stringify(v))
-  : String(v);
+// Safe string coercer. Never dumps raw JSON onto a dossier surface (C3
+// finding 13): an unexpected object falls back to its first string field,
+// then a quiet dash; arrays read as a joined list, and known keys recurse
+// (so a nested shape can never reach React as an object child).
+export const Ti = (v) => {
+  if (v == null) return '';
+  if (typeof v === 'string') return v;
+  if (Array.isArray(v)) return v.map(Ti).filter(Boolean).join(', ');
+  if (typeof v === 'object') {
+    const known = v.product || v.name || v.chain || v.hook || v.description || v.title;
+    if (known) return Ti(known);
+    const first = Object.values(v).find((x) => typeof x === 'string' && x);
+    return first || '–';
+  }
+  return String(v);
+};
 
 // Collapsible section with Crimson header + ▲/▼ (Sn in original)
 export function Collapsible({ title, defaultOpen = true, children }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ marginBottom: 14, border: '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
+    // marginBottom 0 (owner order 2026-07-22, flush sweep): dossier cards sit
+    // flush, no inter-card parchment gap.
+    <div style={{ marginBottom: 0, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
       <Button
         variant="secondary"
         aria-expanded={open}
@@ -80,7 +94,8 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     const headerBg   = accent ? `${accent}12` : (open ? '#f5ede0' : '#faf8f4');
     const titleColor = accent || '#1c1409';
     return (
-      <div style={{ marginBottom: 16, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', borderRadius: 7, overflow: 'hidden' }}>
+      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards.
+      <div style={{ marginBottom: 0, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
         <Button
           variant="secondary"
           aria-expanded={open}
@@ -101,7 +116,8 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     );
   }
   return (
-    <div style={{ marginBottom: 16 }}>
+    // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier sections.
+    <div style={{ marginBottom: 0 }}>
       <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.xl, fontWeight: 600, color: swatch.inkMag, borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12 }}>
         {title}
       </div>
@@ -126,7 +142,7 @@ export function SectionHeader({ title, count }) {
 // Basic card
 export function Card({ children, style }) {
   return (
-    <div style={{ background: swatch['#FAF8F4'], border: '1px solid #e0d0b0', borderRadius: 7, padding: '10px 14px', ...style }}>
+    <div style={{ background: swatch['#FAF8F4'], border: '1px solid #e0d0b0', padding: '10px 14px', ...style }}>
       {children}
     </div>
   );
@@ -144,7 +160,7 @@ export function Card({ children, style }) {
 export function Tag({ color, bg, border, children }) {
   const c = color || '#6b5340';
   return (
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), borderRadius: 10, padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
+    <span style={{ fontSize: FS.xs, fontWeight: 600, color: c, background: bg || (c + '18'), border: '1px solid ' + (border || (c + '40')), padding: '2px 9px', display: 'inline-block', margin: '2px 3px 2px 0' }}>
       {children}
     </span>
   );

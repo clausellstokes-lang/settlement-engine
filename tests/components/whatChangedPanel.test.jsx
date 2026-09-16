@@ -42,6 +42,17 @@ describe('WhatChangedPanel — compareCausalState before→after + population ar
     expect(container.querySelector('[data-testid="what-changed-panel"]')).toBeTruthy();
   });
 
+  test('shows the population arc WITHOUT a "held steady" claim when there is no prior snapshot', () => {
+    // Advanced settlement: population history present, but no prior causal
+    // snapshot threaded. The panel must report the arc but must NOT claim the
+    // substrate "held steady" — it never compared.
+    const { getByTestId, queryByText } = render(
+      <WhatChangedPanel settlement={{ ...after, populationHistory: [1000, 950, 900] }} />,
+    );
+    expect(getByTestId('population-arc').textContent).toMatch(/1,000 → 900/);
+    expect(queryByText(/held steady/i)).toBeNull();
+  });
+
   test('renders a population arc from populationHistory', () => {
     const { getByTestId } = render(
       <WhatChangedPanel

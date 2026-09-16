@@ -15,6 +15,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 import {
   ChapterBand, KeyValRow, HairRule, Tag,
 } from '../primitives/Dense.jsx';
@@ -27,13 +28,15 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
   const id = vm.identity;
   const d = vm.daily;
   const a = id.anchor || {};
+  const culture = id.culturalIdentity;
+  const coherence = id.generationCoherence;
   const accent = narrativeMode ? palette.ai : palette.gold;
 
   const founded = foundingLabel(id.founding);
   const idRows = [
     { label: 'Name',          value: id.name },
     { label: 'Tier',          value: id.tier || '–' },
-    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '–' },
+    { label: 'Population',    value: id.population ? formatCount(id.population) : '–' },
     id.dominantRace   ? { label: 'Dominant Race', value: humanize(id.dominantRace) } : null,
     id.terrain        ? { label: 'Terrain',       value: humanize(id.terrain) } : null,
     id.layout         ? { label: 'Layout',        value: humanize(id.layout) } : null,
@@ -53,7 +56,8 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
       />
 
       {/* ── Anchor facts ─────────────────────────────────────── */}
-      {(a.governingName || a.prosperity || a.safety || a.foodDeficit != null ||
+      {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||
+        a.foodDeficit != null ||
         a.foodSurplus != null || a.magicDependency || a.activeStress?.length > 0) && (
         <View
           style={{
@@ -79,7 +83,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
             pairs={[
               a.foodDeficit > 0
                 ? { label: 'FOOD',  value: `−${num(a.foodDeficit)} units` }
-                : a.foodSurplus > 0
+                : a.foodSurplus != null
                   ? { label: 'FOOD',  value: `+${num(a.foodSurplus)} units` }
                   : null,
               a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,
@@ -148,6 +152,46 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
         ))}
       </View>
 
+      {/* ── Structured cultural identity ─────────────────────── */}
+      {culture && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginBottom: 3,
+            }}
+          >
+            <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginRight: 5 }}>
+              CULTURAL IDENTITY
+            </Text>
+            {culture.label && <Tag tone="gold">{culture.label}</Tag>}
+          </View>
+          {culture.scope && (
+            <Text
+              style={{
+                ...type.body,
+                color: palette.second,
+                fontSize: pt['8.5'],
+                fontStyle: 'italic',
+                marginBottom: 3,
+              }}
+            >
+              {culture.scope}
+            </Text>
+          )}
+          <CultureRows culture={culture} />
+        </View>
+      )}
+
+      {/* The receipt is an owner diagnostic, not player-safe certification. The
+          current PDF variants are DM artifacts; a future player variant must
+          omit or explicitly project this block. */}
+      {coherence && (
+        <GenerationCoherence receipt={coherence} />
+      )}
+
       {/* ── Quarters ─────────────────────────────────────────── */}
       {id.quarters?.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
@@ -191,11 +235,6 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
               </View>
             ))
           ) : (
-            // Only render a verdict when food was actually calculated (foodBalance is
-            // null when deriveFoodBalance reports available:false). Distinguish a true
-            // surplus from a merely-balanced ledger so we never claim "Surplus of 0
-            // units / supply is reliable" — the bug other chapters avoid by showing
-            // the clamped canonical number.
             d.foodBalance && (
               <Callout
                 tone={d.foodBalance.deficit > 0 ? 'bad' : 'good'}
@@ -204,9 +243,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
                 <Text style={{ ...type.body, fontSize: pt['9.5'] }}>
                   {d.foodBalance.deficit > 0
                     ? `Deficit of ${smart(d.foodBalance.deficit)} units. The settlement depends on imports for daily survival.`
-                    : d.foodBalance.surplus > 0
-                      ? `Surplus of ${smart(d.foodBalance.surplus)} units. The local food supply is reliable.`
-                      : 'Food production and need are balanced. The local food supply meets demand.'}
+                    : `Surplus of ${smart(d.foodBalance.surplus || 0)} units. The local food supply is reliable.`}
                 </Text>
               </Callout>
             )
@@ -218,6 +255,124 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
 }
 
 // ── Sub-components ─────────────────────────────────────────────
+
+function CultureRows({ culture }) {
+  const rows = [
+    ['Built form', culture.builtForm],
+    ['Civic pattern', culture.civicPattern],
+    ['Exchange', culture.exchangePattern],
+    ['Foodways', culture.foodways],
+    ['Sacred life', culture.sacredLife],
+    ['Defense', culture.defensePattern],
+    ['Social texture', culture.socialTexture],
+    ['Architecture', culture.architecturalDetail],
+  ].filter(([, value]) => value);
+
+  return (
+    <View>
+      {rows.map(([label, value], index) => (
+        <View
+          key={`culture-${label}`}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            paddingVertical: 2,
+            borderBottom: index < rows.length - 1
+              ? `0.3pt solid ${palette.border}`
+              : undefined,
+          }}
+        >
+          <Text
+            style={{
+              ...type.label,
+              color: palette.muted,
+              width: 78,
+              fontSize: pt['7'],
+              marginRight: 5,
+            }}
+          >
+            {label.toUpperCase()}
+          </Text>
+          <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['8.5'] }}>
+            {value}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function GenerationCoherence({ receipt }) {
+  const tone = receipt.status === 'coherent'
+    ? 'good'
+    : receipt.status === 'coherent_with_authored_tensions'
+      ? 'warn'
+      : 'bad';
+  const failed = receipt.checks.filter(check => check.status === 'fail');
+  const reviewJudgments = receipt.judgments.filter(
+    judgment => judgment.status === 'needs_review',
+  );
+  const summary = [
+    `${receipt.passedChecks}/${receipt.totalChecks} checks passed`,
+    receipt.totalJudgments > 0
+      ? `${receipt.supportedJudgments}/${receipt.totalJudgments} formal judgments supported`
+      : null,
+    receipt.repairCount > 0
+      ? `${receipt.repairCount} repair${receipt.repairCount === 1 ? '' : 's'} recorded`
+      : null,
+    receipt.authoredTensions.length > 0
+      ? `${receipt.authoredTensions.length} authored tension${receipt.authoredTensions.length === 1 ? '' : 's'}`
+      : null,
+  ].filter(Boolean).join(' · ');
+
+  return (
+    <View
+      style={{
+        marginBottom: space.sm,
+        padding: 6,
+        backgroundColor: palette.card,
+        border: `0.4pt solid ${palette.border}`,
+        borderRadius: 2,
+      }}
+      wrap={false}
+    >
+      <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
+        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginRight: 5 }}>
+          GENERATION COHERENCE
+        </Text>
+        <Tag tone={tone}>{humanize(receipt.status)}</Tag>
+      </View>
+      <Text style={{ ...type.body, color: palette.second, fontSize: pt['8.5'] }}>
+        {summary}
+      </Text>
+      {failed.map(check => (
+        <View key={check.id || check.label} style={{ marginTop: 2 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
+            {check.label.toUpperCase()}
+          </Text>
+          {check.findings.map((finding, index) => (
+            <Text
+              key={`${check.id || check.label}-${index}`}
+              style={{ ...type.body, color: palette.second, fontSize: pt['8'] }}
+            >
+              {`• ${finding.detail || 'Review required.'}${finding.evidence ? `: ${finding.evidence}` : ''}`}
+            </Text>
+          ))}
+        </View>
+      ))}
+      {reviewJudgments.map(judgment => (
+        <View key={judgment.id || judgment.label} style={{ marginTop: 2 }}>
+          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
+            {`${judgment.label.toUpperCase()}: NEEDS REVIEW`}
+          </Text>
+          <Text style={{ ...type.body, color: palette.second, fontSize: pt['8'] }}>
+            {judgment.summary || 'Formal judgment needs review.'}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+}
 
 function QuarterCard({ q, idx }) {
   return (

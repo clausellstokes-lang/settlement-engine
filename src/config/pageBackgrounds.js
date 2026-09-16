@@ -1,11 +1,13 @@
 /**
  * config/pageBackgrounds.js — which painted background each page shows.
  *
- * Files live at public/backgrounds/<name>.jpg (web-optimized from the
- * source paintings). This module only maps view ids + generation modes
- * to image URLs — the legibility overlays live in src/index.css (so no
- * raw colors leak into JS and trip the visual-budget lint). Components
- * set the URL via the `--page-bg` / `--card-bg` CSS custom properties.
+ * Files live at public/backgrounds/<name>.{jpg,webp}. Each painting ships in
+ * two formats: the original JPEG and a smaller WebP twin built by
+ * scripts/optimize-backgrounds.mjs (~23% off the ~4 MB set). This module maps
+ * view ids + generation modes to image URLs AND picks the best format the
+ * running engine supports — the legibility overlays live in src/index.css (so
+ * no raw colors leak into JS and trip the visual-budget lint). Components set
+ * the URL via the `--page-bg` / `--card-bg` CSS custom properties.
  *
  * Mechanic:
  *   - Each top-level view gets its own page painting.
@@ -14,17 +16,71 @@
  *     custom→city). Choosing a mode blows that scene up into the full
  *     background for the wizard AND the resulting dossier output, until
  *     the user navigates to a different top-level page.
+ *
+ * Disciplined backgrounds (P5 / P12): a painting earns its place on every page,
+ * but a working/reading surface must never be scanned through texture. So the
+ * CLEAN_VIEWS paint BELOW a flat-cream header band (`.page-painted`, art-
+ * directed by SCRIM_PROFILES); `home` is the OPPOSITE polarity — a dark ink
+ * hero (`.hero-dark`) that its own component owns, so it paints nothing at the
+ * page level.
  */
 
 const BASE = '/backgrounds';
+
+// ── WebP capability probe ──────────────────────────────────────────────────
+// We pick ONE format per engine up front so only one file is ever fetched (no
+// double-download) and the CSS background + its <link rel="preload"> always
+// agree. The probe is a synchronous canvas encode test, cached after first
+// use: document.createElement('canvas').toDataURL('image/webp') returns a
+// `data:image/webp` URI only where the engine can ENCODE WebP — which implies
+// it can decode it. No network, no flash. Trade-off: Safari <17 decodes WebP
+// but can't encode it, so it false-negatives to the (still-shipped) JPEG —
+// correct and safe, just not the byte win. In non-DOM contexts (SSR, the
+// vitest node env) there's no canvas, so we also fall back to JPEG.
+let _bgExt = null;
+function bgExt() {
+  if (_bgExt === null) {
+    _bgExt = 'jpg';
+    try {
+      if (typeof document !== 'undefined' && document.createElement) {
+        const canvas = document.createElement('canvas');
+        if (canvas && canvas.toDataURL
+          && canvas.toDataURL('image/webp').startsWith('data:image/webp')) {
+          _bgExt = 'webp';
+        }
+      }
+    } catch {
+      _bgExt = 'jpg';
+    }
+  }
+  return _bgExt;
+}
+
+/** MIME type matching the chosen background format (for <link rel="preload">). */
+function bgMime() {
+  return bgExt() === 'webp' ? 'image/webp' : 'image/jpeg';
+}
+
+/** Bare URL (no `url(...)`) for a background basename, in the best format. */
+export function backgroundHref(name) {
+  return `${BASE}/${name}.${bgExt()}`;
+}
 
 /** view id → background image basename. */
 export const PAGE_BACKGROUNDS = Object.freeze({
   generate:           'create',
   settlements:        'settlements',
+  // The world-map surface is the 'realm' view now (routes.js — `/map` redirects
+  // to `/realm`). Key both: 'realm' for the live view, 'map' for the brief
+  // pre-redirect frame at `/map`.
+  realm:              'world-map',
   map:                'world-map',
   compendium:         'compendium',
-  howto:              'about',      // the About page renders the 'howto' view
+  // THE ABOUT FAMILY (docs/DESIGN_ABOUT_PAGES.md): the split's two pages share
+  // the About painting; `howto` keeps its key for the one pre-redirect frame.
+  'about-what-this-is': 'about',
+  'about-guide':      'about',
+  howto:              'about',      // retired pre-split About page (redirects)
   gallery:            'gallery',
   pricing:            'pricing',
   account:            'account',
@@ -44,16 +100,14 @@ export const MODE_BACKGROUNDS = Object.freeze({
 });
 
 /**
- * Disciplined backgrounds (P5 / P12). A painting earns its place on every
- * page, but a working/reading surface must never be scanned through texture.
- * So the clean views paint BELOW a flat-cream header band: the page header
- * (eyebrow / title / subtitle — the only bare, non-card text) sits on solid
- * cream, which then fades into the per-image painting that fills the content
- * region (page margins + the gaps between the opaque cards). The cards stay
- * fully opaque, so every dense reading surface keeps its calm parchment.
+ * Clean views paint BELOW a flat-cream header band: the page header
+ * (eyebrow / title / subtitle) sits on solid cream, which then fades into the
+ * per-image painting that fills the content region. The cards stay opaque, so
+ * every dense reading surface keeps its calm parchment.
  *
  * `home` is special: its hero band carries the OPPOSITE polarity (a dark ink
- * scrim, .hero-dark) rather than the cream page treatment.
+ * scrim, .hero-dark) rather than the cream page treatment, so it paints nothing
+ * at the page level.
  */
 export const CLEAN_VIEWS = Object.freeze(new Set([
   'home',         // marketing landing — its hero band carries the dark scrim
@@ -63,7 +117,12 @@ export const CLEAN_VIEWS = Object.freeze(new Set([
   'pricing',
   'account',
   'admin',
-  'howto',        // About
+  'about-what-this-is',  // About — What this Is
+  'about-guide',         // About — Practical Guide
+  'howto',        // retired pre-split About page (one pre-redirect frame)
+  'terms',        // legal — flat reading surfaces
+  'privacy',
+  'refunds',
 ]));
 
 /**
@@ -82,7 +141,12 @@ export const SCRIM_PROFILES = Object.freeze({
   pricing:     'calm',   // pricing.jpg     — light calm region
   account:     'calm',   // account.jpg
   admin:       'calm',   // shares account.jpg
+  'about-what-this-is': 'calm',   // about.jpg — light calm region
+  'about-guide':        'calm',
   howto:       'calm',   // about.jpg       — light calm region
+  terms:       'calm',   // legal pages share the About painting family
+  privacy:     'calm',
+  refunds:     'calm',
 });
 
 const DEFAULT_BG = 'create';
@@ -90,9 +154,9 @@ const DEFAULT_BG = 'create';
 /** Safest (most cream) profile if a clean view is ever left unmapped. */
 const DEFAULT_PROFILE = 'calm';
 
-/** A CSS `url(...)` value for a background basename. */
+/** A CSS `url(...)` value for a background basename, in the best format. */
 export function backgroundImageUrl(name) {
-  return `url('${BASE}/${name}.jpg')`;
+  return `url('${backgroundHref(name)}')`;
 }
 
 /**
@@ -100,36 +164,48 @@ export function backgroundImageUrl(name) {
  *
  * Fields:
  *   - url:    the CSS `url(...)` for the painting (always resolved).
+ *   - href/type: the bare URL + MIME of the CHOSEN format, feeding the active-
+ *             view <link rel="preload"> in App.jsx (same format, so paint and
+ *             preload agree and nothing downloads twice).
  *   - isFlow: a generation flow → the `.page-bg.is-flow` lighter scrim.
- *   - clean:  back-compat flag (true for CLEAN_VIEWS). Kept stable for any
- *             existing reader; it no longer means "unpainted".
- *   - paintedBelowHeader: NEW truth — a clean view that paints below a flat
- *             header band via `.page-painted`. False for `home` (dark hero).
+ *   - clean:  a clean view (CLEAN_VIEWS) — App suppresses the full-page
+ *             `.page-bg` painting for it (the painted-below-header treatment or,
+ *             for home, the component's own dark hero, owns the surface instead).
+ *   - paintedBelowHeader: a clean view that paints below a flat header band via
+ *             `.page-painted`. False for `home` (dark hero) and the legal pages'
+ *             plain reading surface may still opt in via SCRIM_PROFILES.
  *   - scrimProfile: the art-direction class suffix (`busy|dark|calm`), or null.
  *
  * @param {{ view?: string, wizardMode?: string|null, settlement?: any }} args
- * @returns {{ url: string, isFlow: boolean, clean: boolean,
- *             paintedBelowHeader: boolean, scrimProfile: string|null }}
+ * @returns {{ url: string, href: string, type: string, isFlow: boolean,
+ *             clean: boolean, paintedBelowHeader: boolean,
+ *             scrimProfile: string|null }}
  */
 export function resolveViewBackground({ view, wizardMode = null, settlement = null } = {}) {
   // Generation flow: once a mode is picked, its settlement scene backs the
   // wizard config and the dossier output (both live in the 'generate' view).
   if (view === 'generate' && (wizardMode || settlement)) {
     const name = MODE_BACKGROUNDS[wizardMode] || MODE_BACKGROUNDS.basic;
-    return { url: backgroundImageUrl(name), isFlow: true, clean: false,
-             paintedBelowHeader: false, scrimProfile: null };
+    return {
+      url: backgroundImageUrl(name), href: backgroundHref(name), type: bgMime(),
+      isFlow: true, clean: false, paintedBelowHeader: false, scrimProfile: null,
+    };
   }
   // Clean views paint BELOW a flat-cream header band (except home, which owns
   // the dark-hero variant inside its own component).
   if (CLEAN_VIEWS.has(view)) {
+    const name = PAGE_BACKGROUNDS[view] || DEFAULT_BG;
     return {
-      url: backgroundImageUrl(PAGE_BACKGROUNDS[view] || DEFAULT_BG),
+      url: backgroundImageUrl(name), href: backgroundHref(name), type: bgMime(),
       isFlow: false,
       clean: true,                          // back-compat; not "unpainted"
       paintedBelowHeader: view !== 'home',  // home uses the dark-hero path
       scrimProfile: SCRIM_PROFILES[view] || DEFAULT_PROFILE,
     };
   }
-  return { url: backgroundImageUrl(PAGE_BACKGROUNDS[view] || DEFAULT_BG), isFlow: false, clean: false,
-           paintedBelowHeader: false, scrimProfile: null };
+  const name = PAGE_BACKGROUNDS[view] || DEFAULT_BG;
+  return {
+    url: backgroundImageUrl(name), href: backgroundHref(name), type: bgMime(),
+    isFlow: false, clean: false, paintedBelowHeader: false, scrimProfile: null,
+  };
 }

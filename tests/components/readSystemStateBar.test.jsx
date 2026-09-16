@@ -27,4 +27,26 @@ describe('ReadSystemStateBar — promoted read-view 4-dim strip', () => {
     const { container } = render(<ReadSystemStateBar settlement={null} />);
     expect(container.firstChild).toBeNull();
   });
+
+  // R-5b #22 — the honest-wiring escape hatch. The strip derives by default, so
+  // on an advanced campaign save it can disagree with the store's LAYERED
+  // systemState (authored per-event deltas move the store copy, not the
+  // derivation). A caller that holds the layered copy passes it in and it wins
+  // outright — pinned so the override cannot silently regress to a derivation.
+  test('a supplied systemState overrides the derivation outright', () => {
+    const layered = {
+      resilience:       { value: 11, band: 'Critical', drivers: [], risks: [] },
+      volatility:       { value: 22, band: 'Stable',   drivers: [], risks: [] },
+      externalThreat:   { value: 33, band: 'Strained', drivers: [], risks: [] },
+      resourcePressure: { value: 44, band: 'Stable',   drivers: [], risks: [] },
+    };
+    const { getByTestId } = render(
+      <ReadSystemStateBar settlement={town} systemState={layered} />,
+    );
+    const text = getByTestId('system-state-grid').textContent;
+    // The override's numbers, not the town's derived ones.
+    expect(text).toMatch(/11/);
+    expect(text).toMatch(/44/);
+    expect(text).toMatch(/Critical/);
+  });
 });

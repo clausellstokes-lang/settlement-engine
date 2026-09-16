@@ -7,90 +7,23 @@
  * (future) campaign sub-slices import from here. Never imports the slice → no cycle.
  */
 import {
-  addRegionalChannels,
   appendWizardNewsEntries,
   deriveWizardNewsEntriesFromGraphChange,
   ensureRegionalGraph,
   ensureWizardNewsFeed,
-  mintDirectedChannel,
-  stablePart,
 } from '../domain/region/index.js';
-import {
-  ensureWorldState,
-  normalizeStressor,
-  proposalIdFor,
-  resolveStressorById,
-  upsertProposal,
-} from '../domain/worldPulse/index.js';
-import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
-import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
-import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
+// Leaf-module imports (not the `export *` barrel). Light world-state helpers
+// come from worldState.js; normalizeStressor/resolveStressorById live in the
+// stressor cluster and are used synchronously inside the drain path, which runs
+// inside advanceCampaignWorld's set() callback — kept static (that cluster is
+// already anchored to first paint by campaignRegionalSlice's sync stressor
+// actions). The heavy advance/AI simulation graph stays out of the barrel path.
+import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { drainQueuedEvents, queueRefusalNews, applyTwinDirectivesToWorld } from '../domain/events/drainQueuedEvents.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { cloneJson, campaignSettlements } from './campaignSliceShared.js';
-
-/**
- * #2 / #2.2 — apply a cross-settlement WAR-FRONT seed directly onto a (draft)
- * campaign `c`, mutating c.worldState.deployments + c.worldState.warPosture and
- * c.regionalGraph in place. This is the SHARED seed primitive behind BOTH the
- * immediate-ripple action (campaignRegionalSlice.seedCampaignWarFront, which
- * wraps this in its own set()) and the deferred drain (advanceCampaignWorld's
- * Phase-1 producer, which must mutate THE SAME draft it then clones for the pure
- * pulse — so it CANNOT call the set()-based action without losing the seed to a
- * nested-producer write). Reuses the war layer's own ledger shape verbatim:
- *
- *   1. a LIGHT deployment record on worldState.deployments[instigatorId]
- *      ({ targetId, sinceTick, role:'siege' }) — enriched by the war layer's
- *      ensureStatefulRecord on first contact;
- *   2. a war_front channel instigator → target with WAR-LAYER provenance
- *      (source:'war_layer_deploy') so isLiveWarFront reads it as a real siege;
- *   3. warPosture[instigatorId] = { state:'deployed', … } so the posture ledger
- *      is consistent.
- *
- * GATED on simulationRules.warLayerEnabled (war-off → no-op, dormancy oracle
- * preserved). Honours the ENGINE'S ONE-ARMY INVARIANT: if the instigator already
- * fields an army the seed is skipped entirely (never overwrites the live ledger).
- * Self-target / empty ids → no-op. Idempotent.
- *
- * @param {object} c        the draft campaign (mutated in place)
- * @param {{ instigatorId?: string|number, targetId?: string|number, sinceTick?: number, now?: string|null }} args
- * @returns {boolean} true when a fresh front was seeded; false on any no-op.
- */
-export function applyWarFrontSeed(c, { instigatorId, targetId, sinceTick = 0, now = null } = {}) {
-  if (!c) return false;
-  const instId = String(instigatorId || '');
-  const tgtId = String(targetId || '');
-  if (!instId || !tgtId || instId === tgtId) return false;
-  const rules = normalizeSimulationRules(c.worldState?.simulationRules);
-  if (!rules.warLayerEnabled) return false;
-  const worldState = ensureWorldState(c.worldState, c);
-  const deployments = { ...(worldState.deployments || {}) };
-  // ONE-ARMY INVARIANT: never overwrite a live deployment.
-  if (deployments[instId]) return false;
-  const stamp = now || new Date().toISOString();
-  const tick = Math.max(0, Math.floor(Number(sinceTick) || 0));
-  // 1. LIGHT deployment record — enriched by the war layer on first contact.
-  deployments[instId] = { targetId: tgtId, sinceTick: tick, role: 'siege' };
-  // 3. posture ledger consistency: the army is in the field.
-  const warPosture = { ...(worldState.warPosture || {}) };
-  warPosture[instId] = { state: 'deployed', progress: 1, sinceTick: tick, covert: false };
-  c.worldState = { ...worldState, deployments, warPosture };
-  // 2. war_front channel WITH war-layer provenance, onto the campaign graph.
-  const channel = mintDirectedChannel({
-    type: 'war_front',
-    from: instId,
-    to: tgtId,
-    strength: 0.6,
-    confidence: 0.8,
-    explanation: `${instId} marches on ${tgtId}.`,
-    relationshipKey: `war_front.${stablePart(instId)}.${stablePart(tgtId)}`,
-    source: 'war_layer_deploy',
-    now: stamp,
-  });
-  c.regionalGraph = addRegionalChannels(ensureRegionalGraph(c.regionalGraph), [channel], { now: stamp });
-  return true;
-}
 
 export function campaignStateForRegionalImpact(state, save, systemState, now) {
   const isActive = state.activeSaveId && String(state.activeSaveId) === String(save.id);
@@ -111,61 +44,14 @@ export function campaignStateForRegionalImpact(state, save, systemState, now) {
   };
 }
 
-// Cap the per-save world-pulse chronicle so an endlessly-advanced campaign can't
-// bloat each member save. Keeps the newest; mirrors the dossier feed's own 40-row
-// default with a little headroom.
-const WORLD_PULSE_EVENTS_CAP = 60;
-
-/**
- * The world-pulse news entries that NAME this settlement, mapped to the dossier
- * Chronicle feed's shape (title from headline; `at` from the threaded advance
- * timestamp). Lets a member's Library Chronicle tab record what the autonomous
- * advance did to IT that tick. result.wizardNews is the cumulative post-advance
- * feed, so this returns the settlement's full surfaced history; the caller dedupes
- * by id and appends only the genuinely-new rows. Pending proposals (kind 'queued')
- * are excluded — the Chronicle is what HAPPENED, not what a DM might still approve;
- * realm-wide arcs that name no specific member stay in the Realm scrollback.
- * @param {any} result the pulse result (carries the post-advance wizardNews feed)
- * @param {string|number} saveId the member settlement id
- * @param {number} now the threaded advance timestamp
- * @returns {Array<{id:string,title:string,summary:string,at:number,kind:string}>}
- */
-function worldPulseChronicleEventsForSave(result, saveId, now) {
-  const entries = Array.isArray(result?.wizardNews?.entries) ? result.wizardNews.entries : [];
-  const id = String(saveId);
-  const out = [];
-  for (const e of entries) {
-    if (!e?.id || String(e.kind) === 'queued') continue;
-    const ids = Array.isArray(e.settlementIds) ? e.settlementIds.map(String) : [];
-    if (!ids.includes(id)) continue;
-    out.push({
-      id: String(e.id),
-      title: e.headline || 'World pulse',
-      summary: e.summary || '',
-      at: now,
-      kind: e.kind || 'applied',
-    });
-  }
-  return out;
-}
-
 export function campaignStateForWorldPulse(state, save, systemState, now, result) {
   const base = campaignStateForRegionalImpact(state, save, systemState, now);
-  // Per-settlement chronicle (the autonomous world now writes to each member's own
-  // dossier feed, not only the realm scrollback). Append the not-yet-recorded rows
-  // that name this save, stamping them with this advance's timestamp; earlier rows
-  // keep their original `at`. Capped to bound the persisted save.
-  const prior = Array.isArray(save.campaignState?.worldPulse?.events) ? save.campaignState.worldPulse.events : [];
-  const priorIds = new Set(prior.map(e => e && e.id));
-  const fresh = worldPulseChronicleEventsForSave(result, save.id, now).filter(e => !priorIds.has(e.id));
-  const events = (fresh.length ? [...prior, ...fresh] : prior).slice(-WORLD_PULSE_EVENTS_CAP);
   return {
     ...base,
     worldPulse: {
       lastTick: result?.tick ?? null,
       lastInterval: result?.interval || null,
       updatedAt: now,
-      events,
     },
   };
 }
@@ -204,8 +90,77 @@ export function campaignClockTick(campaign) {
 export function applyWorldPulseResultToState(state, campaign, result, now, authoredEventBySave = null) {
   const persistUpdates = [];
   const updates = Array.isArray(result?.settlementUpdates) ? result.settlementUpdates : [];
-  // Crisis-triple sync (a deliberate decision to keep the two sides in step):
-  // roaming stressors the pulse resolved ORGANICALLY
+  const births = Array.isArray(result?.memberBirths) ? result.memberBirths : [];
+  /** @type {Map<string, Record<string, unknown>>} */
+  const birthPersistById = new Map();
+  // WR-3: materialize first-class births BEFORE ordinary updates.  A long
+  // interval may update a child on a later tick, and the composed result then
+  // legitimately contains both lanes.  One deterministic id + one upsert
+  // envelope keeps retry and pause/resume idempotent.
+  if (!Array.isArray(campaign.settlementIds)) campaign.settlementIds = [];
+  const memberIds = new Set(campaign.settlementIds.map(String));
+  for (const birth of births) {
+    const saveId = String(birth?.saveId || birth?.save?.id || '');
+    const incoming = birth?.save;
+    if (!saveId || !incoming?.settlement) continue;
+    const incomingBirthId = String(incoming.settlement?.parentRef?.birthId || '');
+    if (!incomingBirthId || incomingBirthId !== String(birth.birthId || '')) {
+      throw new Error(`Invalid lineage member birth envelope for ${saveId}`);
+    }
+    let saveIdx = state.savedSettlements.findIndex(save => String(save.id) === saveId);
+    if (saveIdx !== -1) {
+      const heldBirthId = String(state.savedSettlements[saveIdx]?.settlement?.parentRef?.birthId || '');
+      // Replay may converge only on the SAME child while it is still attached
+      // to THIS campaign.  An unrelated row with the same deterministic id —
+      // or the exact child after a DM deliberately detached/rehomed it — is
+      // user-owned library state, not scratch space for the pulse to reclaim.
+      if (heldBirthId !== incomingBirthId || !memberIds.has(saveId)) {
+        throw new Error(`Lineage member id collision for ${saveId}`);
+      }
+    }
+    let systemState = incoming.campaignState?.systemState || null;
+    try {
+      systemState = deriveSystemState(incoming.settlement);
+    } catch (e) {
+      console.warn('[campaignSlice] deriveSystemState failed for lineage member birth', e);
+    }
+    const campaignState = campaignStateForWorldPulse(
+      state,
+      incoming,
+      systemState,
+      now,
+      result,
+    );
+    const nextSave = {
+      ...incoming,
+      id: saveId,
+      phase: 'canon',
+      settlement: cloneJson(incoming.settlement),
+      campaignState,
+      timestamp: now,
+    };
+    if (saveIdx === -1) {
+      state.savedSettlements.push(nextSave);
+      saveIdx = state.savedSettlements.length - 1;
+    } else {
+      state.savedSettlements[saveIdx] = {
+        ...state.savedSettlements[saveIdx],
+        ...nextSave,
+      };
+    }
+    if (!memberIds.has(saveId)) {
+      memberIds.add(saveId);
+      campaign.settlementIds.push(saveId);
+    }
+    const persist = {
+      saveId,
+      createSave: cloneJson(state.savedSettlements[saveIdx]),
+    };
+    persistUpdates.push(persist);
+    birthPersistById.set(saveId, persist);
+  }
+  // Crisis-triple sync (Wave 8 #4 — the asymmetry the D-wave deferred, owner
+  // decision: SYNC IT): roaming stressors the pulse resolved ORGANICALLY
   // wind down their origin settlement's local representations — the stress
   // entry, the promoted condition (eased per the event-resolution
   // semantics), and the stressorEdits suppression — through the same
@@ -263,11 +218,16 @@ export function applyWorldPulseResultToState(state, campaign, result, now, autho
       state.editedAt = now;
     }
 
-    persistUpdates.push({
-      saveId: save.id,
-      settlement: cloneJson(nextSettlement),
-      campaignState: cloneJson(campaignState),
-    });
+    const birthPersist = birthPersistById.get(String(save.id));
+    if (birthPersist) {
+      birthPersist.createSave = cloneJson(nextSave);
+    } else {
+      persistUpdates.push({
+        saveId: save.id,
+        settlement: cloneJson(nextSettlement),
+        campaignState: cloneJson(campaignState),
+      });
+    }
   }
 
   campaign.worldState = ensureWorldState(result.worldState, campaign);
@@ -311,49 +271,6 @@ export function capturePulseSnapshot(state, campaign, now) {
 }
 
 /**
- * Campaign-clock (Phase C2): restore the campaign + every member save (and the
- * live active view) from a snapshot produced by capturePulseSnapshot. This is
- * the exact inverse of the Phase-1 drain: it rewinds savedSettlements, the live
- * settlement/systemState/eventLog/phase, and the campaign's worldState /
- * regionalGraph / wizardNews to their pre-drain values.
- *
- * advanceCampaignWorld uses it as an atomic-rollback path: if the (uncommitted,
- * pure) organic pulse THROWS after Phase-1 already committed the drain, the
- * drained player intentions would otherwise be silently consumed with no tick
- * advanced and no undo snapshot. Restoring from the pre-drain snapshot makes the
- * whole action a no-op on failure, so the queued intentions are preserved and
- * can be retried. Mutates the draft `state` in place; returns nothing.
- */
-export function restorePulseSnapshot(state, snapshot) {
-  if (!snapshot) return;
-  const c = state.campaigns?.find?.(item => item.id === snapshot.campaignId) || null;
-  if (c) {
-    c.worldState = cloneJson(snapshot.worldState);
-    c.regionalGraph = cloneJson(snapshot.regionalGraph);
-    c.wizardNews = cloneJson(snapshot.wizardNews);
-  }
-  for (const s of snapshot.saves || []) {
-    const idx = (state.savedSettlements || []).findIndex(x => String(x.id) === String(s.id));
-    if (idx === -1) continue;
-    state.savedSettlements[idx] = {
-      ...state.savedSettlements[idx],
-      settlement: cloneJson(s.settlement),
-      campaignState: cloneJson(s.campaignState),
-    };
-  }
-  // Rewind the live active view to whatever was open when the snapshot was taken
-  // (the drain may have rewritten it). Only when the same save is still active —
-  // a different open save (or a closed detail view) must not be clobbered.
-  if (snapshot.active && state.activeSaveId != null
-      && String(state.activeSaveId) === String(snapshot.active.saveId)) {
-    state.settlement = cloneJson(snapshot.active.settlement);
-    state.systemState = cloneJson(snapshot.active.systemState);
-    state.eventLog = cloneJson(snapshot.active.eventLog);
-    state.phase = snapshot.active.phase;
-  }
-}
-
-/**
  * Campaign-clock (Phase C1): drain the campaign's queued player intentions into
  * its member settlements BEFORE the organic pulse, so they resolve
  * simultaneously at this tick. Mutates the draft `state` (savedSettlements +
@@ -367,12 +284,17 @@ export function drainCampaignQueueIntoState(state, campaign, worldState, now) {
   if (!queue.length) return { worldState, touched: [] };
 
   const memberSaves = campaignSettlements(state, campaign.id);
-  const { updates, twinDirectives, partyImpacts } = drainQueuedEvents({
+  const { updates, twinDirectives, partyImpacts, refusals } = drainQueuedEvents({
     queue,
     saves: memberSaves,
     now,
     tick: worldState.tick ?? null,
   });
+  // §10 (W-COMPOSER-2): a refused queue entry surfaces VISIBLY in the advance
+  // digest — the session folds these into the result's news feed.
+  const nameById = new Map(memberSaves.map(s => [String(s.id), s.settlement?.name || s.name || String(s.id)]));
+  const refusalNews = (refusals || []).map(r =>
+    queueRefusalNews(r, nameById.get(String(r.saveId)) || String(r.saveId), worldState.tick ?? null, now));
 
   const touched = [];
   // saveId → the last drained event, so the pulse write can re-layer its
@@ -402,55 +324,10 @@ export function drainCampaignQueueIntoState(state, campaign, worldState, now) {
   // Thread the whole worldState (not just stressors) so a queued RESOLVE can
   // upsert its residual-aftermath proposals exactly as resolveCampaignStressor
   // does for the immediate path.
-  let ws = {
-    ...worldState,
-    stressors: Array.isArray(worldState.stressors) ? [...worldState.stressors] : [],
-  };
+  // The world-side twin fold lives in the DOMAIN (applyTwinDirectivesToWorld)
+  // so the forecast's clone-run replays the EXACT same path — one source.
   const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
-  for (const d of twinDirectives) {
-    if (d.action === 'inject' && d.stressor) {
-      const normalized = normalizeStressor({
-        ...d.stressor,
-        originSettlementId: d.originSettlementId,
-        affectedSettlementIds: [d.originSettlementId],
-        createdAt: now,
-        updatedAt: now,
-      });
-      const byId = new Map((ws.stressors || []).map(s => [s.id, s]));
-      byId.set(normalized.id, normalized);
-      ws = { ...ws, stressors: [...byId.values()] };
-    } else if (d.action === 'resolve' && d.type) {
-      const roamingType = pulseTypeForStressorKey(d.type) || d.type;
-      const match = (ws.stressors || [])
-        .map(raw => normalizeStressor(raw))
-        .find(st => st.status === 'active'
-          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
-          && (String(st.originSettlementId || '') === d.originSettlementId
-            || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));
-      if (match) {
-        const r = resolveStressorById(ws.stressors, match.id, {
-          tick, now, reason: 'Resolved by DM authoring (queued)', emitResidual: true,
-        });
-        if (r.found) {
-          ws = { ...ws, stressors: r.stressors };
-          for (const outcome of (r.residualOutcomes || [])) {
-            ws = upsertProposal(ws, {
-              id: proposalIdFor(outcome, tick),
-              status: 'pending',
-              createdAt: now,
-              updatedAt: now,
-              tick,
-              outcome: cloneJson(outcome),
-              headline: outcome.headline,
-              summary: outcome.summary,
-              severity: outcome.severity,
-              reasons: outcome.reasons || [],
-            });
-          }
-        }
-      }
-    }
-  }
+  const ws = applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, now });
 
-  return { worldState: { ...ws, pendingEvents: [] }, touched, partyImpacts, authoredEventBySave };
+  return { worldState: { ...ws, pendingEvents: [] }, touched, partyImpacts, authoredEventBySave, refusalNews };
 }

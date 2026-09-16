@@ -9,6 +9,11 @@
  * capturing the engine's own self-reports (structuralViolations / coherenceNotes
  * / structuralSuggestions) plus runtime errors and console warnings.
  *
+ * This remains the exploratory distribution report. The assertive
+ * weekly/manual gate lives in audit/generation-certification-soak.mjs; both
+ * tools share its live-vocabulary config builder so diagnostics cannot keep
+ * exercising retired aliases while certification exercises the real product.
+ *
  * Parallel: the main process forks one worker per core; each worker handles a
  * contiguous index slice and writes a partial aggregate JSON. Aggregates are
  * associative, so the main merges them exactly. Memory-bounded (no settlement is
@@ -26,35 +31,17 @@ import os from 'node:os';
 import { tmpdir } from 'node:os';
 import { generateSettlementPipeline } from '../src/generators/generateSettlementPipeline.js';
 import { deriveCausalState, SYSTEM_VARIABLES, CAUSAL_BANDS } from '../src/domain/causalState.js';
+import {
+  GENERATION_DIMENSIONS,
+  configForIndex,
+} from './audit/generation-certification-soak.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SELF = join(__dirname, 'simulate-generations.mjs');
 
 // ── Config space ─────────────────────────────────────────────────────────────
-const TIERS    = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const CULTURES = ['germanic', 'celtic', 'norse', 'mediterranean'];
-const TERRAINS = ['grassland', 'forest', 'river', 'coastal', 'mountains', 'swamp'];
-const TRADE    = ['road', 'river', 'port', 'crossroads', 'isolated', 'none'];
-const THREAT   = ['safe', 'civilized', 'frontier', 'plagued'];
-const MAGIC    = ['none', 'low', 'moderate', 'high'];
+const TIERS = GENERATION_DIMENSIONS.tiers;
 const CAUSAL_BAND_SET = new Set(CAUSAL_BANDS);
-
-// Deterministic per-index config: round-robin tier (balanced coverage) + a tiny
-// hash PRNG over the index for the other dimensions. seed varies per index so
-// outputs vary (distribution), and the whole run is reproducible.
-function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
-function configForIndex(i) {
-  const r = mulberry32(i * 2654435761 >>> 0);
-  const pick = (arr) => arr[Math.floor(r() * arr.length)];
-  return {
-    settType: TIERS[i % TIERS.length],
-    culture: pick(CULTURES),
-    terrain: pick(TERRAINS),
-    tradeRouteAccess: pick(TRADE),
-    monsterThreat: pick(THREAT),
-    magicLevel: pick(MAGIC),
-  };
-}
 
 // ── Aggregator (mergeable) ───────────────────────────────────────────────────
 function newAgg() {
@@ -143,10 +130,15 @@ function processSettlement(agg, s, config, seed) {
   const C = (key, v) => { addCat(agg.categoricals, key, v); addCat(tAgg.categoricals, key, v); };
   C('tier', tier);
   C('culture', s.config?.culture);
-  C('terrain', s.config?.terrain ?? s.config?.terrainType);
+  C('terrain', s.config?.terrainOverride ?? s.config?.terrainType);
   C('trade', s.config?.tradeRouteAccess);
   C('threat', s.config?.monsterThreat);
-  C('magic', s.config?.magicLevel);
+  C(
+    'magic',
+    `${s.config?.magicExists !== false}:${Number(s.config?.priorityMagic) || 0}`,
+  );
+  C('content_profile', s.config?.contentProfile);
+  C('coherence_status', s.generationCoherenceReceipt?.status);
   C('prosperity', s.economicState?.prosperity);
   C('legitimacy_label', s.powerStructure?.publicLegitimacy?.label);
   C('defense_readiness', s.defenseProfile?.readiness?.label ?? s.defenseProfile?.readiness);
@@ -197,6 +189,21 @@ function processSettlement(agg, s, config, seed) {
   if (!s.powerStructure || typeof s.powerStructure !== 'object') recordFail(agg, 'powerStructure_missing', config, seed, '');
   if (tier !== 'thorp' && arr(s.powerStructure?.factions).length < 1) recordFail(agg, 'nonthorp_no_factions', config, seed, tier);
   if (!s.economicState?.prosperity) recordFail(agg, 'prosperity_missing', config, seed, '');
+  if (!s.generationCoherenceReceipt) {
+    recordFail(agg, 'generation_receipt_missing', config, seed, '');
+  } else if (s.generationCoherenceReceipt.status === 'needs_review') {
+    const failedChecks = (s.generationCoherenceReceipt.checks || [])
+      .filter(check => check.status === 'fail')
+      .map(check => check.id)
+      .join(', ');
+    recordFail(
+      agg,
+      'generation_receipt_needs_review',
+      config,
+      seed,
+      failedChecks,
+    );
+  }
   for (const k of ['military', 'monster', 'internal', 'economic', 'magical']) {
     const v = ds[k]; if (v != null && (typeof v !== 'number' || !isFinite(v) || v < 0 || v > 100)) recordFail(agg, `defense_${k}_out_of_range`, config, seed, String(v));
   }

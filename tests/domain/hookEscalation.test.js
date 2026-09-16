@@ -63,6 +63,25 @@ function settlementWithDisruptedFoodChain() {
   };
 }
 
+function settlementWithDisruptedTradeChain() {
+  return {
+    name: 'Greycairn',
+    economicState: {
+      activeChains: [
+        {
+          needKey: 'trade_entrepot',
+          chainId: 'imports',
+          label: 'Regional imports',
+          status: 'impaired',  // → scarce (non-stable)
+          processingInstitutions: ['Customs House'],
+          resource: 'trade_goods',
+          dependency: { institution: 'Merchant Guild', resource: 'imports', severity: 'high' },
+        },
+      ],
+    },
+  };
+}
+
 function settlementWithContestedLegitimacy() {
   return {
     name: 'Greycairn',
@@ -236,6 +255,15 @@ describe('deriveEscalationClocks()', () => {
     expect(bread.stages.some(s => s.includes('Royal Mill'))).toBe(true);
     expect(bread.triggerSource).toBe('supply_chain');
     expect(bread.triggerTargetId).toBe('chain.food_security.grain');
+  });
+
+  it('emits a Smuggling Rise Clock when a trade_entrepot chain is disrupted', () => {
+    const clocks = deriveEscalationClocks(settlementWithDisruptedTradeChain());
+    const smuggling = clocks.find(c => c.label === 'Smuggling Rise Clock');
+    expect(smuggling).toBeTruthy();
+    expect(smuggling.stages.length).toBe(6);
+    expect(smuggling.triggerSource).toBe('supply_chain');
+    expect(smuggling.triggerTargetId).toBe('chain.trade_entrepot.imports');
   });
 
   it('emits a Legitimacy Crisis Clock when the governing faction is Contested', () => {

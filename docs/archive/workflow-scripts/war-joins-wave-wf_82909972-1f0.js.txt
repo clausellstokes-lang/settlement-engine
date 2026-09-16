@@ -1,0 +1,47 @@
+export const meta = {
+  name: 'war-joins-wave',
+  description: 'WAVE W1 — the three broken joins: strategy opens wars, sieges wait for arrival, treaty terms actually transfer',
+  phases: [{ title: 'Joins', detail: '3 Opus implementers, one per join', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const COMMON = [
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 @ 99e2d54f — verify with git rev-parse --abbrev-ref HEAD; stop on mismatch.',
+  'CONCURRENT: two sibling implementers on the OTHER two joins (ownership stated in your brief — never touch theirs) and the owner wizard-news session (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests — FOREIGN, read only). Focused vitest only, one at a time.',
+  '',
+  'A SURVEY OF THE WAR SYSTEM (6 read-only Opus readers) FOUND THESE JOINS BROKEN. You are fixing ONE of them. The findings are grounded with file:line and you should re-verify before trusting them.',
+  '',
+  'HARD RULES: no migrations; no git mutations; no full suites/builds; NO ratchet raises (warDeployment.js is AT its size baseline — net-zero edits there, extract a leaf if you need room); ZERO any-casts (conditional keys declared on the OWNING typedef); kernel math primitives; determinism (named seeded forks or the house hash idiom; NEVER a new per-tick stream without draw accounting; seed-family totality, never single-seed); no em dashes in src/domain|src/data string literals; conditional worldState keys drop-when-empty; THE GOLDEN LAW — warLayerEnabled is TRUE in full_simulation and peaceEngineEnabled is set by the WAVES spread, so the war layer IS LIT in shipped presets: verify no generation or dormancy golden moves, and if one would, STOP and report rather than re-recording. Reseal edge bundles if you touch their inputs. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes (revert/red/restore/green per new pin), behavior shifts plainly, judgment calls vetoable, discovered.',
+].join('\n')
+
+phase('Joins')
+const results = await parallel([
+  () => agent(['You are an Opus IMPLEMENTER. JOIN 1 — THE STRATEGY CHOOSER MUST BE ABLE TO OPEN A WAR.',
+    'THE FINDING: settlementStrategy.js is a real deliberative agent (up to 6 legal moves per settlement per tick, ~10 signals, 5 bounded multipliers, seeded softmax, emits a probability-1 candidate) and it is WIRED. But its `deploy` move DOES NOT START A WAR: it mints no war_front, writes no deployments entry, does not touch warPosture, and warDeployment.evaluateWarLayer never reads strategyMove or anything the chooser produced. The chooser emits an army_deployed posture marker and a feed headline. Wars actually begin elsewhere.',
+    'YOUR JOB: connect them. The chooser CHOOSING to deploy must be able to actually open the war the war layer then prosecutes. VERIFY FIRST how wars currently DO begin (find the real path into deployments/war_front/warPosture) and then make the chooser feed THAT path rather than building a second one — one opener, never two.',
+    'CONSTRAINTS: the chooser is seeded and its stream must not move for existing worlds (a new consumer must not steal draws — draw-account it). warDeployment.js is at its size ceiling: do not grow it, extract if needed. The feasibility gate already runs at the deploy decision (warDeployment.js:1700) — respect it, a hopeless war must still not open.',
+    'YOUR OWNERSHIP: settlementStrategy.js, the opener seam you identify, and your tests. NOT warDeployment internals beyond the seam, NOT armyTransit, NOT peaceTerms.',
+    'PINS with executed negative controls: the chooser deploying now opens a real war (state proves it, not a headline); a hopeless deploy is still refused by the feasibility gate; the seeded stream is UNMOVED for a world where nothing deploys (draw accounting); dormancy/golden untouched.',
+    COMMON].join('\n'), { label: 'join1:strategy-opens-war', phase: 'Joins', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus IMPLEMENTER. JOIN 2 — SIEGES MUST WAIT FOR THE ARMY TO ARRIVE.',
+    'THE FINDING: there are TWO movement models that never meet. The aspatial war layer (warDeployment.js, wired behind warLayerEnabled) is complete. A spatial transit layer (src/domain/spatial/armyTransit.js + armyTransitKernel.js, wired behind spatialCanonVersion) gives each committed army a route, a march time and a position along it, and resolves crossing-path field battles. BUT THE SIEGE LOOP NEVER READS THAT POSITION: warDeployment.js imports exactly ONE symbol from armyTransit — armyTransitActive (line 91) — used only to switch the siege verdict core from a capacity roll to a starvation roll. There is NO arrival gate anywhere in the siege path. An army begins besieging on the tick it is committed while still on the road.',
+    'YOUR JOB: gate the siege on ARRIVAL when the transit layer is active. An army in transit is not besieging. This makes the march time the transit layer already computes actually matter, and it makes distance a real cost of war.',
+    'VERIFY FIRST: read armyTransit for the published position/arrival read, and confirm exactly how the siege loop currently iterates besiegers. The gate must be a READ of the transit layer, never a second position model.',
+    'CONSTRAINTS: warDeployment.js is AT its size baseline — net-zero or extract a leaf. When the transit layer is DARK (no spatial canon) behaviour must be BYTE-IDENTICAL (armies commit and besiege as today). The 60-tick siege ceiling and the exhaustion scar must still bound everything — verify a long march cannot defeat the termination guarantees.',
+    'YOUR OWNERSHIP: the siege-loop arrival gate, a leaf if you need one, your tests. NOT settlementStrategy, NOT peaceTerms.',
+    'PINS with executed negative controls: an army in transit does NOT besiege and DOES once arrived (both arms); dark spatial = byte-identical; the march time measurably delays the first siege tick; termination guarantees still hold with the longest legal march.',
+    COMMON].join('\n'), { label: 'join2:siege-arrival-gate', phase: 'Joins', schema: SCHEMA, model: 'opus' }),
+
+  () => agent(['You are an Opus IMPLEMENTER. JOIN 3 — TREATY TERMS MUST ACTUALLY TRANSFER SOMETHING.',
+    'THE FINDING: the treaty engine mints duration-capped, budget-priced documents with mediation, coalition shares and separate exits — genuinely good. But of six declared term executors, demilitarizationCapFor (readiness_cap) and treatyBlocksWar (war_block) have ZERO src consumers (referenced only by their own tests), occupation_hold has no consumer either, and the tribute / resource_share / restitution streams write ONLY accumulator fields (deliveredToVictor / extractedFromLoser) that NOTHING READS. So no coin, grain, population or prosperity moves on any treaty term. Treaties are documents that do nothing.',
+    'YOUR JOB: make the terms bite, through the ledgers that ALREADY EXIST. Tribute and restitution should move real quantities (the estate has NO treasury and NO coin — verify this yourself; the honest denomination is food stores via foodStockpile storageMonths, which per design section 0b already has FIVE writers, so joining it needs care and a written reason, OR the goods/supply channels J2 counts). readiness_cap should actually cap military readiness where capacity is derived. war_block should actually block the war lane. occupation_hold should actually hold.',
+    'SCOPE DISCIPLINE: wire the executors that exist to consumers that exist. Do NOT invent a treasury, do NOT invent new economic stocks, and if a term genuinely has no honest channel to move through, say so and leave it declared-and-unwired with the reason recorded rather than faking it.',
+    'YOUR OWNERSHIP: peaceTerms.js and the term executors, their consumer seams, your tests. NOT settlementStrategy, NOT warDeployment internals, NOT armyTransit.',
+    'PINS with executed negative controls: each wired term MEASURABLY changes state (quantity in, quantity out, conserved); an unsigned/expired treaty moves nothing; conservation holds (a transfer is a transfer, never a mint — the computeSackTransfer sink-only precedent is the standard); dormancy/golden untouched.',
+    COMMON].join('\n'), { label: 'join3:treaty-terms-bite', phase: 'Joins', schema: SCHEMA, model: 'opus' }),
+])
+const all = results.filter(Boolean)
+log(all.length + '/3 joins returned')
+return { results: all }

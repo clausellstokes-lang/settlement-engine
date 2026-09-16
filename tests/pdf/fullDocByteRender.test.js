@@ -64,5 +64,7 @@ describe('SettlementPDF renders the whole document to real PDF bytes (R8)', () =
     // catastrophic layout collapse. This confirms the pagination pipeline ran.
     expect(countPages(buf)).toBeGreaterThanOrEqual(2);
     expect(buf.length).toBeGreaterThan(5000);
-  }, 30000);
+    // Full-suite contention measured this real byte render at 30,013 ms. Keep the
+    // complete coverage and give the loaded case roughly 2x measured headroom.
+  }, 60_000);
 });

@@ -23,23 +23,31 @@ import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
-import { EntityRef } from '../primitives/EntityRef.jsx';
 import { flag } from '../../lib/flags.js';
+import {
+  tradeLabelOwnership,
+} from '../../domain/content/customTradeLabelOwnership.js';
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
+
+function renderedTradeLabel(economy, direction, item) {
+  const ownership = tradeLabelOwnership(economy, direction, item);
+  if (ownership.customOnly) {
+    const members = ownership.members.length
+      ? ` (incl. ${ownership.members.join(', ')})`
+      : '';
+    return `${label(item)}${members}  *`;
+  }
+  if (ownership.mixed) {
+    const customPart = ownership.members.length
+      ? `incl. ${ownership.members.join(', ')}`
+      : 'also an exact custom endpoint';
+    return `${label(item)} (${customPart} *)`;
+  }
+  return label(item);
+}
 
 export function EconomicsTrade({ settlement, narrativeMode, vm }) {
   const e = vm.economics;
-  const index = vm.entityIndex; // Phase-D id»card resolver (trade partners»neighbours)
-
-  // A trade-partner name links to its neighbour relationship card when it
-  // resolves in-doc (resolveTradePartner matches by id or name→slug), else
-  // plain text. Structured-only and rename-safe (currentName at render).
-  const partnerNode = (partner, style) => {
-    const entry = index?.resolveTradePartner?.(partner);
-    return entry
-      ? <EntityRef id={entry.id} index={index} type="neighbour" fallback={partner} style={style} />
-      : <Text style={style}>{partner}</Text>;
-  };
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -101,7 +109,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryExports}
               tone="good"
               emptyText="None significant"
-              itemRender={(item) => { const isC = (e.customTradeLabels?.exports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryExports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  *` : label(item); }}
+              itemRender={(item) => renderedTradeLabel(e, 'exports', item)}
             />
           </View>
         }
@@ -112,7 +120,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               items={e.primaryImports}
               tone="warn"
               emptyText="None significant"
-              itemRender={(item) => { const isC = (e.customTradeLabels?.imports || []).some((x) => x.toLowerCase() === String(item).toLowerCase()); const inc = e.customCategoryImports?.[item]; return isC ? `${label(item)}${inc && inc.length ? ` (incl. ${inc.join(', ')})` : ''}  *` : label(item); }}
+              itemRender={(item) => renderedTradeLabel(e, 'imports', item)}
             />
           </View>
         }
@@ -139,7 +147,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
-      {/* Cross-settlement trade with the neighbour */}
+      {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
       {e.tradeLinks?.length > 0 && (
         <View style={{ marginBottom: space.sm }} wrap={false}>
           <Text style={{ ...type.label, color: palette.cool, fontSize: pt['8'], marginBottom: 3 }}>
@@ -153,13 +161,13 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
             }, {}),
           ).map(([partner, g], i) => (
             <Text key={`tl-${i}`} style={{ ...type.caption, fontSize: pt['8'], color: palette.second, marginBottom: 1 }}>
-              {partnerNode(partner, { ...type.body_em, color: palette.ink })}
-              {g.imports.length > 0 ? `   « ${g.imports.map(label).join(', ')}` : ''}
-              {g.exports.length > 0 ? `   » ${g.exports.map(label).join(', ')}` : ''}
+              <Text style={{ ...type.body_em, color: palette.ink }}>{partner}</Text>
+              {g.imports.length > 0 ? `   <- ${g.imports.map(label).join(', ')}` : ''}
+              {g.exports.length > 0 ? `   -> ${g.exports.map(label).join(', ')}` : ''}
             </Text>
           ))}
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.faint, fontStyle: 'italic', marginTop: 1 }}>
-            « imported from · » exported to
+            {'<- imported from · -> exported to'}
           </Text>
         </View>
       )}
@@ -250,13 +258,22 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
               .filter(Boolean)
               .map((n) => label(n) || String(n))
               .join(' » ');
+            const activationColor = c.activationState === 'active'
+              ? palette.good
+              : c.activationState === 'blocked'
+                ? palette.warn
+                : palette.muted;
+            const visibleReasons = (c.activationReasons || []).slice(0, 3);
+            const activationNote = visibleReasons.length
+              ? visibleReasons.join(' ')
+              : c.activationSummary;
             return (
               <View
                 key={`cc-${i}`}
                 style={{
                   marginBottom: 3, padding: 5,
                   backgroundColor: palette.goldBg,
-                  border: `0.5pt solid ${palette.gold}`,
+                  border: `0.5pt solid ${activationColor}`,
                   borderRadius: 2,
                 }}
                 wrap={false}
@@ -264,9 +281,36 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: flow ? 2 : 0 }}>
                   <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
                   <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>*</Text>
+                  <Text style={{
+                    ...type.label,
+                    color: activationColor,
+                    fontSize: pt['7.5'],
+                    marginLeft: 5,
+                  }}>
+                    {String(c.activationLabel || 'Needs reevaluation').toUpperCase()}
+                  </Text>
                 </View>
                 {flow ? (
-                  <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.second }}>{flow}</Text>
+                  <Text style={{
+                    ...type.caption,
+                    fontSize: pt['8'],
+                    color: c.activationState === 'active' ? palette.second : palette.muted,
+                  }}>
+                    {flow}
+                  </Text>
+                ) : null}
+                {activationNote ? (
+                  <Text style={{
+                    ...type.caption,
+                    fontSize: pt['7.5'],
+                    color: activationColor,
+                    marginTop: 2,
+                  }}>
+                    {activationNote}
+                    {(c.activationReasons || []).length > visibleReasons.length
+                      ? ` +${c.activationReasons.length - visibleReasons.length} more.`
+                      : ''}
+                  </Text>
                 ) : null}
               </View>
             );

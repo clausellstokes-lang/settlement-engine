@@ -1,0 +1,156 @@
+export const meta = {
+  name: 'refute-zerograin-gift-fix',
+  description: 'Adversarially refute that the E1a zero-grain-GIFT fix in generosityKernel.js is complete and correct',
+  phases: [
+    { title: 'Refute', detail: '4 independent Opus skeptics, distinct lenses' },
+    { title: 'Synthesize', detail: 'weigh surviving findings' },
+  ],
+}
+
+const FIXED = '/Users/cstokes/Desktop/settlement-engine/src/domain/worldPulse/generosityKernel.js'
+const BASE = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine--claude-worktrees-hungry-driscoll-e12282/38042309-f421-4c03-bceb-84196b74a9cd/scratchpad/base-generosityKernel.js'
+const PIN = '/Users/cstokes/Desktop/settlement-engine/tests/domain/generosityKernel.zeroGrainGift.test.js'
+const PURCHASE_PIN = '/Users/cstokes/Desktop/settlement-engine/tests/domain/generosityKernel.purchase.test.js'
+const REACTIONS = '/Users/cstokes/Desktop/settlement-engine/src/domain/spatial/generosityReactions.js'
+const PULSE = '/Users/cstokes/Desktop/settlement-engine/src/domain/worldPulse/pulseKernel.js'
+const VERIFY_WT = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine--claude-worktrees-hungry-driscoll-e12282/38042309-f421-4c03-bceb-84196b74a9cd/scratchpad/zerograin-verify'
+
+const COMMON = `
+CONTEXT — E1a grain-relief GIVE-path fix in a deterministic D&D sim (SettlementForge).
+The bug (same class as an already-fixed E1d PURCHASE bug): in advanceGenerosity()'s isGive branch,
+the give-decision keys on NORMALISED above-floor headroom, but computeSackFoodTransfer FLOORS the
+grain transfer to the tenth-month. A giver a sliver above the reserve floor can DECIDE to give yet
+move ZERO grain (transfer===null ⇒ lostMonths===0). The BASE code minted an obligation + widow's-mite
+gratitude + §9 legitimacy delta + succor news beat + trade-overture warming + rumor/belief broadcast
++ moral-hazard buffer decay for a gift that moved NOTHING — "a debt/gratitude for grain never delivered."
+
+THE FIX (in ${FIXED}, isGive branch ~lines 692-778): wrap every grain-DEPENDENT side-effect inside
+'if (lostMonths > 0)'; leave receipt + moral-hazard buffer OUTSIDE but keyed on lostMonths>0
+(receipt magnitude = lostMonths>0 ? verdict.magnitudeFraction : 0; bufferStep reliefThisTick: lostMonths>0).
+The BASE (pre-fix) version is at ${BASE} for diff. The regression pin is ${PIN}; its template sibling
+is the purchase pin at ${PURCHASE_PIN} ("a seller a SLIVER above the reserve floor moves ZERO grain").
+
+YOUR JOB: try HARD to REFUTE the claim "the fix is complete and correct." Read the ACTUAL files.
+Do NOT rubber-stamp. Bias toward refuted=true if you find a genuine defect. Report ONLY defects you
+can substantiate by citing specific lines — not style nits, not speculation.`
+
+const SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['lens', 'refuted', 'findings', 'evidence'],
+  properties: {
+    lens: { type: 'string' },
+    refuted: { type: 'boolean', description: 'true if you found a genuine defect that breaks completeness/correctness' },
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['severity', 'claim', 'file_line', 'why_real'],
+        properties: {
+          severity: { type: 'string', enum: ['blocker', 'major', 'minor'] },
+          claim: { type: 'string' },
+          file_line: { type: 'string' },
+          why_real: { type: 'string' },
+        },
+      },
+    },
+    evidence: { type: 'string', description: 'what you actually read/ran and the concrete observation' },
+  },
+}
+
+const LENSES = [
+  {
+    key: 'completeness',
+    prompt: `${COMMON}
+
+LENS = COMPLETENESS OF THE GUARD. Enumerate EVERY write/side-effect emitted inside the isGive branch
+of the FIXED file (obligationMints, legitimacyDeltas, incidentWrites for relief_given/relief_received,
+newsEntries succor beat, tradeOvertureGaveInfo, beliefBroadcasters, foodDeltas, receipts, bufferSteps,
+willingnessWrites, and ANYTHING else). For each, decide: is it grain-DEPENDENT (should fire ONLY when
+grain moved) or grain-INDEPENDENT (the ask fired regardless)? Then verify each grain-dependent one is
+INSIDE 'if (lostMonths > 0)' and each grain-independent one is correctly outside. HUNT for a
+grain-dependent side-effect the guard MISSED (still fires on a zero-grain give), OR a grain-independent
+one wrongly pulled inside the guard (now silently dropped for real gives — a regression). Cross-check
+against BASE to see exactly which lines moved. Also check the willingness latch (willingnessWrites) and
+the credit-maturity scan below the loop are unaffected.`,
+  },
+  {
+    key: 'semantics',
+    prompt: `${COMMON}
+
+LENS = SEMANTIC CORRECTNESS of the two OUT-OF-GATE lines (receipt + bufferStep). (1) receipts.push now
+records magnitude 0 for a zero-grain give with the give verdict string. Trace EVERY consumer of the
+generosity receipts array (search the repo — start ${PULSE} and grep '.receipts'). Does any consumer
+break, miscount, or misrender given a give-verdict receipt with magnitude 0? Is emitting a give-verdict
+receipt at all (vs falling through to a refuse receipt) the right call, given the purchase fix's
+analogous choice? (2) bufferStep reliefThisTick: lostMonths>0 — read bufferDisciplineStep in ${REACTIONS}.
+When reliefThisTick is false it RECOVERS/prunes discipline. Confirm a zero-grain give correctly does NOT
+decay the receiver's moral-hazard discipline, and that for a REAL give (lostMonths>0) behavior is
+byte-identical to BASE (which pushed reliefThisTick:true unconditionally). Look for any off-by-one or
+sign error.`,
+  },
+  {
+    key: 'golden-coverage',
+    prompt: `${COMMON}
+
+LENS = LIT-GOLDEN COVERAGE GAP. The task says this fix CHANGES E1a LIT behavior (obligation ledger +
+gratitude shift for near-floor givers) yet the full gate passed with ALL goldens byte-identical and NO
+golden fixture modified. Either (a) no lit golden exercises a sliver-above-floor zero-grain give, or
+(b) one does and it SHOULD have shifted but the suite silently missed it. Investigate: find the lit
+generosity/spatial/deity/seasons goldens (tests/property/worldpulse*Golden.test.js, generosityDormancyGolden,
+beliefMapGolden). Determine whether any drives advanceGenerosity with constructiveFlows LIT and a giver
+whose storageMonths lands a sliver above the reserve floor (reserveTitheFloorMonths, ~1 month) such that
+computeSackFoodTransfer floors to zero. If YES and the golden still passed unchanged, that's a
+SILENT-GOLDEN defect (the behavior change is real but the golden should have moved — either it's masked
+or the goldens don't cover the lit generosity path at all, which is itself a coverage gap worth flagging).
+If NO golden hits this path, confirm that and state it's why goldens are legitimately untouched. You may
+run targeted vitest in the isolated worktree ${VERIFY_WT} (has the fix applied, node_modules linked).`,
+  },
+  {
+    key: 'pin-quality',
+    prompt: `${COMMON}
+
+LENS = PIN QUALITY / VACUITY. Read ${PIN} in full and compare its rigor to the template ${PURCHASE_PIN}
+"a seller a SLIVER above the reserve floor moves ZERO grain" pin. Verify: (1) the LIT pin is NON-VACUOUS —
+it actually reaches the zero-grain-give path (a give fires AND grain provably doesn't move), not passing
+by coincidence or because no give fires; (2) the CONTROL pin proves the reactions DO fire for a real gift
+(guards against a fix that just disables everything); (3) the DORMANCY pin proves byte-identity when the
+gate is absent; (4) the assertions genuinely fail against BASE and pass against FIXED. INDEPENDENTLY
+re-run: copy BASE kernel into the isolated worktree ${VERIFY_WT} and run the pin (expect FAIL), then the
+FIXED kernel (expect PASS) — cite the exact vitest output lines. Also check the firstGive seed-iteration
+harness (loops 80 seeds) can't pass vacuously if NO give ever fires (would r be null and .toBeTruthy fail?
+or could a stale assertion pass?). Flag any way the pin could pass for the wrong reason.`,
+  },
+]
+
+phase('Refute')
+const verdicts = await parallel(LENSES.map((L) => () =>
+  agent(L.prompt, { label: `refute:${L.key}`, phase: 'Refute', model: 'opus', effort: 'high', schema: SCHEMA })
+))
+
+phase('Synthesize')
+const real = verdicts.filter(Boolean)
+const anyRefuted = real.some((v) => v.refuted)
+const allFindings = real.flatMap((v) => (v.findings || []).map((f) => ({ ...f, lens: v.lens })))
+
+const synthesis = await agent(
+  `${COMMON}
+
+You are the SYNTHESIS judge. Four skeptics reported. Their raw verdicts (JSON):
+${JSON.stringify(real, null, 2)}
+
+Decide the FINAL verdict on "the fix is complete and correct." For EACH finding, judge whether it is a
+GENUINE defect requiring a code change, or a false alarm / already-correct / out-of-scope. Be decisive.
+Return a crisp summary: the final verdict (SOUND vs DEFECT-FOUND), the surviving genuine defects (if any)
+with exact file:line and the minimal fix, and anything the skeptics AGREED was correct. If SOUND, say so
+plainly with the strongest single piece of evidence.`,
+  { label: 'synthesize', phase: 'Synthesize', model: 'opus', effort: 'high' }
+)
+
+return {
+  anyRefuted,
+  perLensRefuted: real.map((v) => ({ lens: v.lens, refuted: v.refuted, findingCount: (v.findings || []).length })),
+  findings: allFindings,
+  synthesis,
+}

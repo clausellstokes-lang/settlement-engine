@@ -386,6 +386,16 @@ export function extractStressorGenesis(settlement) {
 }
 
 // ── Stable stringify + hash ──────────────────────────────────────────────────
+// INTENTIONAL TWIN — do NOT unify with settlementFingerprint.js's stableStringify
+// (code-quality-architecture-5, verdict PARTIAL→low). This one is the STALENESS
+// serializer for computeFingerprintHash → analytics content_hash / research _prevHash;
+// it consumes an extractReducedFingerprint PROJECTION (never a raw settlement) and its
+// edge semantics differ ON PURPOSE (circular → null, undefined skipped, functions left
+// to JSON.stringify). The settlementFingerprint twin is a PII-bearing pre-hash serializer
+// over the full prose settlement with different circular/function handling. The two never
+// compare against each other and take different inputs, so for any JSON-serializable input
+// they agree and the divergence (functions/circular/undefined-in-array) cannot manifest as
+// an identity mismatch — merging them buys nothing and risks a silent hash shift.
 /** Deterministic JSON with sorted keys (so the same fingerprint hashes equal). */
 export function stableStringify(value) {
   const seen = new WeakSet();

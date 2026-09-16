@@ -14,7 +14,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js'; // side-effect: registers all steps
 import { runPipeline } from '../../src/generators/pipeline.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import { withCustomContent } from '../../src/lib/dependencyEngine.js';
 
 const CONFIGS = [

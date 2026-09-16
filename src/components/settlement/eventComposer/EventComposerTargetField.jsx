@@ -14,7 +14,8 @@ import { X } from 'lucide-react';
 import CatalogPicker from '../CatalogPicker.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 import { MUTED, FS } from '../../theme.js';
-import { buildTargetOptions, corruptNpcOptions } from './helpers.js';
+import { buildTargetOptions } from './helpers.js';
+import { AFFORDANCE_MANIFEST } from '../../../domain/events/affordanceManifest.js';
 import { Field } from './Field.jsx';
 import {
   TARGET_ENTITY_BY_EVENT, CUSTOM_RESOURCE_OPTION,
@@ -22,7 +23,7 @@ import {
 } from './EventComposerConstants.js';
 
 export function EventComposerTargetField({
-  type, target, setTarget, spec, settlement,
+  type, target, setTarget, setDesc, spec, settlement,
   setAddCategory, setStressorPick, stressorPick,
   setCustomResourceName, customResourceName,
   setSwapWithNpcId, swapWithNpcId,
@@ -79,7 +80,7 @@ export function EventComposerTargetField({
     return (
       <Field label="New ruling power" hint={spec?.targetPrompt}>
         <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
-          <option value="">Pick a faction -</option>
+          <option value="">Pick a faction</option>
           {rulingPowerOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
@@ -93,9 +94,20 @@ export function EventComposerTargetField({
     );
   }
   if (type === 'ADD_FACTION') {
+    // Picking a CUSTOM faction prefills the editable Description with its
+    // authored compendium description — that is the only channel by which the
+    // authored text reaches the created faction (event.description →
+    // addFaction → faction.description). Built-in picks leave Description
+    // alone (descriptors carry no prose, and the DM may have typed their own).
+    const pickFaction = (name) => {
+      setTarget(name);
+      const custom = factionGroups.find(g => g.category === 'custom')
+        ?.options.find(o => o.name === name);
+      if (custom?.description) setDesc(custom.description);
+    };
     return (
       <Field label="Faction" hint="Choose a faction that isn't here yet">
-        <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
+        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle}>
           <option value="">Select a faction</option>
           {factionGroups.map(g => (
             <optgroup key={g.category} label={g.label}>
@@ -105,7 +117,7 @@ export function EventComposerTargetField({
         </select>
         {factionGroups.length === 0 && (
           <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            Every catalogued faction is already present. Name a new one in Description.
+            Every catalogued faction is already present. Author a new one in your Compendium and it appears here.
           </span>
         )}
       </Field>
@@ -140,7 +152,7 @@ export function EventComposerTargetField({
           onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
           style={selectStyle}
         >
-          <option value="">Pick a resource -</option>
+          <option value="">Pick a resource</option>
           {resourceCatalogOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
@@ -158,22 +170,20 @@ export function EventComposerTargetField({
       </Field>
     );
   }
-  // PROMOTE_NPC (the merged "Promote/Demote NPC") — pick the NPC who rises
-  // (grouped by faction), then the same-faction counterpart who steps down. The
-  // swap is symmetric, so one unambiguous pair reads correctly either way.
-  // DEMOTE_NPC no longer reaches the composer (folded into PROMOTE_NPC).
-  if (type === 'PROMOTE_NPC') {
+  // PROMOTE_NPC / DEMOTE_NPC — pick the NPC (grouped by faction), then
+  // the same-faction counterpart they swap standing with.
+  if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
     const pickedGroup = npcSwapGroups.find(g => g.npcs.some(n => n.id === target));
     const counterparts = pickedGroup ? pickedGroup.npcs.filter(n => n.id !== target) : [];
     return (
       <>
-        <Field label="NPC who rises" hint={spec?.targetPrompt}>
+        <Field label="NPC" hint={spec?.targetPrompt}>
           <select
             value={target}
             onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
             style={selectStyle}
           >
-            <option value="">Pick an NPC -</option>
+            <option value="">Pick an NPC</option>
             {npcSwapGroups.map(g => (
               <optgroup key={g.faction} label={g.faction}>
                 {g.npcs.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
@@ -182,8 +192,8 @@ export function EventComposerTargetField({
           </select>
         </Field>
         <Field
-          label="Steps down"
-          hint="Same faction. The two swap standing"
+          label={type === 'PROMOTE_NPC' ? 'Displaces' : 'Displaced by'}
+          hint="Same faction: the two swap standing"
         >
           <select
             value={swapWithNpcId}
@@ -191,7 +201,7 @@ export function EventComposerTargetField({
             style={selectStyle}
             disabled={!target}
           >
-            <option value="">Pick the counterpart -</option>
+            <option value="">Pick the counterpart</option>
             {counterparts.map(n => (
               <option key={n.id} value={n.id}>{n.name}</option>
             ))}
@@ -206,12 +216,12 @@ export function EventComposerTargetField({
   // (new entities) and route-type events that aren't in the
   // dossier as discrete records.
   const collectionKey = TARGET_ENTITY_BY_EVENT[type];
-  // EXPOSE_CORRUPTION reveals a corrupt NPC; the mutation no-ops on any clean
-  // target, so the picker offers only corrupt NPCs (clean picks would move the
-  // dials and write prose with no real state behind them).
-  const targetOpts = type === 'EXPOSE_CORRUPTION'
-    ? corruptNpcOptions(settlement)
-    : buildTargetOptions(settlement, collectionKey);
+  // §3: options are CURRENT-STATE-FILTERED through the manifest — a verb with a
+  // targetOptions override lists only what its handler will actually accept
+  // (compromised entities for Expose corruption, depleted resources for
+  // Recover, impaired entities for Restore, clean NPCs for Impose corruption).
+  const manifestOptions = AFFORDANCE_MANIFEST[type]?.targetOptions;
+  const targetOpts = manifestOptions ? manifestOptions(settlement) : buildTargetOptions(settlement, collectionKey);
   if (collectionKey && targetOpts.length > 0) {
     return (
       <Field label="Target" hint={spec?.targetPrompt}>
@@ -220,7 +230,7 @@ export function EventComposerTargetField({
           onChange={e => setTarget(e.target.value)}
           style={selectStyle}
         >
-          <option value="">Pick a {collectionKey.replace(/s$/, '')} -</option>
+          <option value="">Pick a {collectionKey.replace(/s$/, '')}</option>
           {targetOpts.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}

@@ -1,22 +1,22 @@
 /**
  * domain/dailyLife.js — Daily-life prose grounded in structural state.
  *
- * The most consumed output a dossier
- * produces is the "what is life like here?" prose. This used to be
- * hand-authored or AI-invented; this module derives it
- * directly from the substrate that earlier stages built:
+ * Tier 4.19 of the roadmap. The most consumed output a dossier
+ * produces is the "what is life like here?" prose. Until Phase 22,
+ * this had to be hand-authored or AI-invented. Phase 22 derives it
+ * directly from the substrate that earlier phases built:
  *
- *   - faction profiles (archetype + power)
- *   - supply chain states (food + trade)
- *   - escalation clocks (recent / completed)
- *   - history beats (recentDisruption + unresolvedWound)
- *   - NPC profiles (dominant figures)
- *   - active conditions (current pressures)
- *   - substrate (14 system variables)
- *   - threats (typed pressures, visibility)
- *   - capacity model (supply vs demand for 9 capacities)
+ *   - Phase 9  faction profiles (archetype + power)
+ *   - Phase 10 supply chain states (food + trade)
+ *   - Phase 11 escalation clocks (recent / completed)
+ *   - Phase 12 history beats (recentDisruption + unresolvedWound)
+ *   - Phase 13 NPC profiles (dominant figures)
+ *   - Phase 16 active conditions (current pressures)
+ *   - Phase 17 substrate (14 system variables)
+ *   - Phase 20 threats (typed pressures, visibility)
+ *   - Phase 21 capacity model (supply vs demand for 9 capacities)
  *
- * The 8 canonical daily-life slots — the same shape as the
+ * The 8 canonical daily-life slots — the same shape as Phase 12
  * history beats so consumers render them the same way:
  *
  *   food_culture           What people eat / who controls grain
@@ -30,7 +30,7 @@
  *
  * Pure read-only derivation. Returns structured prose with `references`
  * arrays so the UI can let the user click through to the explainEntity
- * envelope for any cited subsystem.
+ * envelope for any cited subsystem (Phase 19).
  *
  * No imports from src/lib. No mutation. No AI — this is the pre-AI
  * substrate the AI overlay later grounds in.
@@ -40,12 +40,69 @@ import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
-import { deriveAllCapacities, VISIBLE_CAPACITY_LENSES } from './capacityModel.js';
+import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
 
-import { snakeCase } from './ids.js';
+// ── Local typedefs ───────────────────────────────────────────────────────
+
+/** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
+/** @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition */
+/** @typedef {import('./settlement.schema.js').NpcProfile} NpcProfile */
+/** @typedef {import('./supplyChainState.js').DerivedSupplyChainState} DerivedSupplyChainState */
+/** @typedef {import('./threatProfile.js').ThreatProfile} ThreatProfile */
+/** @typedef {import('./capacityModel.js').CapacityState} CapacityState */
+/** @typedef {import('./causalState.js').CausalState} CausalState */
+
+/**
+ * A structured reference pointer consumers can hand to explainEntity.
+ * @typedef {{id: string, label: string, type: string}} SlotReference
+ */
+
+/**
+ * One canonical daily-life slot.
+ * @typedef {Object} DailyLifeSlot
+ * @property {string} key
+ * @property {string} label
+ * @property {string} text
+ * @property {string} source
+ * @property {SlotReference[]} references
+ */
+
+/**
+ * Institution entry as this module reads it.
+ * @typedef {{id?: string, name: string}} InstitutionLike
+ */
+
+/**
+ * Settlement fields this module reads directly (everything else flows
+ * through the substrate derivers, which take the full settlement).
+ * @typedef {Object} DailyLifeSettlement
+ * @property {InstitutionLike[]} [institutions]
+ * @property {import('./supplyChainState.js').ChainsSettlementSource['economicState']} [economicState]
+ * @property {import('./threatProfile.js').ThreatSurfaceSettlement['config']} [config]
+ * @property {import('./settlement.schema.js').StressorEntry[] | import('./settlement.schema.js').StressorEntry} [stressors]
+ */
+
+/**
+ * History-beat fields this module reads (historyBeats.js is still untyped).
+ * @typedef {{key: string, label: string, text: string, source: string}} HistoryBeatLike
+ */
+
+/**
+ * The precomputed substrate context shared by every slot deriver.
+ * @typedef {Object} DailyLifeContext
+ * @property {FactionProfile[]} profiles
+ * @property {DerivedSupplyChainState[]} chains
+ * @property {ActiveCondition[]} conditions
+ * @property {ThreatProfile[]} threats
+ * @property {CapacityState} capacities
+ * @property {CausalState} causal
+ * @property {{recentDisruption?: HistoryBeatLike|null, unresolvedWound?: HistoryBeatLike|null}} history
+ * @property {NpcProfile[]} npcs
+ */
+
 // ── Canonical catalog ────────────────────────────────────────────────────
 
 export const DAILY_LIFE_SLOTS = Object.freeze([
@@ -59,6 +116,7 @@ export const DAILY_LIFE_SLOTS = Object.freeze([
   'recent_changes',
 ]);
 
+/** @type {Readonly<Record<string, string>>} */
 const SLOT_LABELS = Object.freeze({
   food_culture:         'Food culture',
   dawn_work:            'Dawn work',
@@ -78,25 +136,39 @@ const SLOT_LABELS = Object.freeze({
 //   { key, label, text, source, references }
 //
 // references[] is an array of structured pointers (id + type + label)
-// that consumers can hand to 's explainEntity. The deriver
+// that consumers can hand to Phase 19's explainEntity. The deriver
 // always produces a slot — even when data is thin, it falls back to
 // a generic but truthful line.
 
-/** @param {any} s */
-
-/** @param {any} settlement @param {any} pattern */
-function institutionByPattern(settlement, pattern) {
-  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  return inst.filter((/** @type {any} */ i) => pattern.test(String(i?.name || '')));
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @param {RegExp} pattern
+ * @returns {InstitutionLike[]}
+ */
+function institutionByPattern(settlement, pattern) {
+  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  return inst.filter(i => pattern.test(String(i?.name || '')));
+}
+
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveFoodCulture(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
-  const foodChains = ctx.chains.filter((/** @type {any} */ c) => c.needKey === 'food_security');
-  const stableFood = foodChains.find((/** @type {any} */ c) => c.status === 'stable');
-  const disruptedFood = foodChains.find((/** @type {any} */ c) => c.status !== 'stable');
+  const foodChains = ctx.chains.filter(c => c.needKey === 'food_security');
+  const stableFood = foodChains.find(c => c.status === 'stable');
+  const disruptedFood = foodChains.find(c => c.status !== 'stable');
 
   let text;
   switch (food.band) {
@@ -129,22 +201,26 @@ function deriveFoodCulture(s, ctx) {
   return slot('food_culture', text, 'capacity.food_production + supply chains', refs);
 }
 
-// Labor/craft/transport are noise lenses — this
+// Owner decision (W6#4): labor/craft/transport are noise lenses — this
 // slot no longer reads or cites them. Dawn work re-anchors on the
 // canonical food_production + defense lenses (what the first hours of
 // the day are FOR: bread and walls); the guild/merchant flavor the
 // craft band used to gate now keys off faction power alone.
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveDawnWork(s, ctx) {
   const refs = [];
   const food = ctx.capacities.capacities.food_production;
   const defense = ctx.capacities.capacities.defense;
-  const dominantCraftPower = ctx.profiles.find((/** @type {any} */ p) => p.archetype === 'craft')?.power || 0;
-  const dominantMerchantPower = ctx.profiles.find((/** @type {any} */ p) => p.archetype === 'merchant')?.power || 0;
+  const dominantCraftPower = ctx.profiles.find(p => p.archetype === 'craft')?.power || 0;
+  const dominantMerchantPower = ctx.profiles.find(p => p.archetype === 'merchant')?.power || 0;
 
   let text;
   if (food.band === 'critical' || food.band === 'collapsed') {
-    text = 'Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens are warm.';
+    text = 'Dawn work is the search for food — foragers leave before light, and the granary queue forms before the ovens are warm.';
   } else if (defense.band === 'critical' || defense.band === 'collapsed') {
     text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
   } else if (dominantCraftPower >= 25) {
@@ -161,7 +237,11 @@ function deriveDawnWork(s, ctx) {
   return slot('dawn_work', text, 'capacity.food_production + capacity.defense + dominant faction', refs);
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} _ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} _ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveGatheringPlaces(s, _ctx) {
   const refs = [];
   const RELIGIOUS_PATTERN = /(temple|cathedral|chapel|shrine|abbey|monastery)/i;
@@ -186,17 +266,21 @@ function deriveGatheringPlaces(s, _ctx) {
   }
 
   const text = places.length
-    ? `By midday people are gathered at ${places.join(', ')}, talking, trading, and watching.`
-    : 'People gather where they can: the well, the bridge, the open square.';
+    ? `By midday people are gathered at ${places.join(', ')} — talking, trading, and watching.`
+    : 'People gather where they can — the well, the bridge, the open square.';
 
   return slot('gathering_places', text, 'institutions matched by category pattern', refs);
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveChildWarnings(s, ctx) {
   const refs = [];
   // Top threats by severity
-  const top = [...ctx.threats].sort((/** @type {any} */ a, /** @type {any} */ b) => b.severity - a.severity).slice(0, 3);
+  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity).slice(0, 3);
 
   let text;
   if (top.length === 0) {
@@ -210,7 +294,10 @@ function deriveChildWarnings(s, ctx) {
   return slot('child_warnings', text, 'top threats by severity', refs);
 }
 
-/** @param {any} threat */
+/**
+ * @param {ThreatProfile} threat
+ * @returns {string}
+ */
 function threatWarning(threat) {
   switch (threat.type) {
     case 'monster_pressure':    return 'the road past sundown';
@@ -218,7 +305,7 @@ function threatWarning(threat) {
     case 'siege':               return 'staying close when the bells ring three times';
     case 'rival_neighbor':      return `anything bearing the colors of the neighbour`;
     case 'plague':              return 'the sick-house and unfamiliar coughs';
-    case 'famine':              return 'wandering off (bread is short)';
+    case 'famine':              return 'wandering off — bread is short';
     case 'corruption':          return 'talking to officials they don\'t know';
     case 'unrest':              return 'crowds that gather quickly';
     case 'arcane_instability':  return 'shimmering air and unfamiliar lights';
@@ -228,7 +315,11 @@ function threatWarning(threat) {
   }
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveCommonerResentments(s, ctx) {
   const refs = [];
   const causalState = ctx.causal;
@@ -259,7 +350,7 @@ function deriveCommonerResentments(s, ctx) {
   }
 
   // Corruption condition or threat
-  const corruption = ctx.conditions.find((/** @type {any} */ c) => c.archetype === 'corruption_exposed');
+  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
   if (corruption) {
     resentments.push('the officials who keep their posts while honest folk pay the fines');
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
@@ -272,18 +363,18 @@ function deriveCommonerResentments(s, ctx) {
   return slot('commoner_resentments', text, 'criminal_opportunity + food_production + public_legitimacy + corruption', refs);
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveOutsiderImpressions(s, ctx) {
   const refs = [];
-  const top = [...ctx.threats].sort((/** @type {any} */ a, /** @type {any} */ b) => b.severity - a.severity)[0];
+  const top = [...ctx.threats].sort((a, b) => b.severity - a.severity)[0];
   const dominantFaction = ctx.profiles
     .slice()
-    .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.power || 0) - (a.power || 0))[0];
-  // Only the five visible/DM-facing lenses count toward outsider-visible
-  // prose. An internal labor/craft/transport shortage is real for the
-  // simulation but must not surface here, matching the five-lens policy the
-  // AI payload enforces (see aiGrounding.js).
-  const strainedCaps = VISIBLE_CAPACITY_LENSES
+    .sort((a, b) => (b.power || 0) - (a.power || 0))[0];
+  const strainedCaps = CAPACITY_NAMES
     .filter(n => ['strained', 'critical', 'collapsed'].includes(ctx.capacities.bands[n]));
 
   const parts = [];
@@ -296,23 +387,27 @@ function deriveOutsiderImpressions(s, ctx) {
     refs.push({ id: top.id, label: top.label, type: 'threat' });
   }
   if (strainedCaps.length >= 3) {
-    parts.push('several civic services run short: visitors notice missing watch, slow service, or shuttered shops');
+    parts.push('several civic services run short — visitors notice missing watch, slow service, or shuttered shops');
   }
 
   const text = parts.length
     ? `Outsiders notice ${parts.join('; ')}.`
-    : 'The settlement reads to outsiders as ordinary: quiet streets, predictable bells, faces that don\'t yet know yours.';
+    : 'The settlement reads to outsiders as ordinary — quiet streets, predictable bells, faces that don\'t yet know yours.';
 
   return slot('outsider_impressions', text, 'dominant faction + top threat + strained capacities', refs);
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveUnspokenTopics(s, ctx) {
   const refs = [];
   const topics = [];
 
   // Hidden / rumored threats
-  const hidden = ctx.threats.filter((/** @type {any} */ t) => t.visibility === 'hidden' || t.visibility === 'rumored');
+  const hidden = ctx.threats.filter(t => t.visibility === 'hidden' || t.visibility === 'rumored');
   for (const t of hidden.slice(0, 2)) {
     topics.push(t.label.toLowerCase());
     refs.push({ id: t.id, label: t.label, type: 'threat' });
@@ -326,7 +421,7 @@ function deriveUnspokenTopics(s, ctx) {
   }
 
   // Recently exposed corruption
-  const corruption = ctx.conditions.find((/** @type {any} */ c) => c.archetype === 'corruption_exposed');
+  const corruption = ctx.conditions.find(c => c.archetype === 'corruption_exposed');
   if (corruption) {
     topics.push('the names spoken half-whispered in market stalls');
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
@@ -339,7 +434,11 @@ function deriveUnspokenTopics(s, ctx) {
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} s @param {any} ctx */
+/**
+ * @param {DailyLifeSettlement} s
+ * @param {DailyLifeContext} ctx
+ * @returns {DailyLifeSlot}
+ */
 function deriveRecentChanges(s, ctx) {
   const refs = [];
   const changes = [];
@@ -352,7 +451,7 @@ function deriveRecentChanges(s, ctx) {
   }
 
   // Newly-active conditions (elapsedTicks < 2)
-  const newConditions = ctx.conditions.filter((/** @type {any} */ c) => (c.duration?.elapsedTicks ?? 0) < 2);
+  const newConditions = ctx.conditions.filter(c => (c.duration?.elapsedTicks ?? 0) < 2);
   for (const c of newConditions.slice(0, 2)) {
     changes.push(`${c.label.toLowerCase()} is the new shape of things`);
     refs.push({ id: c.id, label: c.label, type: 'condition' });
@@ -360,7 +459,7 @@ function deriveRecentChanges(s, ctx) {
 
   // High-severity, near-realized threats
   const acute = ctx.threats
-    .filter((/** @type {any} */ t) => t.currentStage === 'imminent' || t.currentStage === 'realized')
+    .filter(t => t.currentStage === 'imminent' || t.currentStage === 'realized')
     .slice(0, 2);
   for (const t of acute) {
     changes.push(`${t.label.toLowerCase()} has come to a head`);
@@ -369,18 +468,24 @@ function deriveRecentChanges(s, ctx) {
 
   const text = changes.length
     ? `Recent changes: ${changes.join('; ')}.`
-    : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
+    : 'The last few seasons have run their usual course — no notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);
 }
 
 // ── Slot helper ──────────────────────────────────────────────────────────
 
-/** @param {any} key @param {any} text @param {any} source @param {any} references */
+/**
+ * @param {string} key
+ * @param {string} text
+ * @param {string} source
+ * @param {SlotReference[]} references
+ * @returns {DailyLifeSlot}
+ */
 function slot(key, text, source, references) {
   return {
     key,
-    label: (/** @type {any} */ (SLOT_LABELS))[key] || key,
+    label: SLOT_LABELS[key] || key,
     text,
     source,
     references,
@@ -389,6 +494,7 @@ function slot(key, text, source, references) {
 
 // ── Composer ─────────────────────────────────────────────────────────────
 
+/** @type {Readonly<Record<string, (s: DailyLifeSettlement, ctx: DailyLifeContext) => DailyLifeSlot>>} */
 const DERIVERS = Object.freeze({
   food_culture:         deriveFoodCulture,
   dawn_work:            deriveDawnWork,
@@ -404,10 +510,13 @@ const DERIVERS = Object.freeze({
  * Build the substrate context once per call so each slot deriver
  * doesn't re-derive.
  */
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * @param {DailyLifeSettlement} settlement
+ * @returns {DailyLifeContext}
+ */
 function buildContext(settlement) {
   return {
-    profiles:   deriveAllFactionProfiles(settlement),
+    profiles:   deriveAllFactionProfiles(/** @type {any} */ (settlement)),
     chains:     deriveAllSupplyChainStates(settlement),
     conditions: deriveAllActiveConditions(settlement),
     threats:    deriveAllThreatProfiles(settlement),
@@ -422,38 +531,41 @@ function buildContext(settlement) {
  * Derive one named daily-life slot.
  *
  * @param {string} key   One of DAILY_LIFE_SLOTS.
- * @param {Object} settlement
- * @returns {Object | null}    DailyLifeSlot, or null for unknown key.
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {DailyLifeSlot | null}    DailyLifeSlot, or null for unknown key.
  */
 export function deriveDailyLifeSlot(key, settlement) {
-  if (!key || !(/** @type {any} */ (DERIVERS))[key]) return null;
+  if (!key || !DERIVERS[key]) return null;
   if (!settlement) {
-    return slot(key, '–', 'no settlement', []);
+    return slot(key, '—', 'no settlement', []);
   }
   const ctx = buildContext(settlement);
-  return (/** @type {any} */ (DERIVERS))[key](settlement, ctx);
+  return DERIVERS[key](settlement, ctx);
 }
 
 /**
  * Derive every canonical daily-life slot. Builds context once.
  *
- * @param {import('./settlement.schema.js').SimSettlement} settlement
- * @returns {Object} {
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {{slots: Record<string, DailyLifeSlot>, summary: string[]}} {
  *   slots: { [key]: DailyLifeSlot },
  *   summary: string[],
  * }
  */
 export function deriveDailyLife(settlement) {
   if (!settlement) {
-    const empty = /** @type {any} */ ({});
-    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '–', 'no settlement', []);
+    /** @type {Record<string, DailyLifeSlot>} */
+    const empty = {};
+    for (const key of DAILY_LIFE_SLOTS) empty[key] = slot(key, '—', 'no settlement', []);
     return { slots: empty, summary: [] };
   }
   const ctx = buildContext(settlement);
-  const slots = /** @type {any} */ ({});
+  /** @type {Record<string, DailyLifeSlot>} */
+  const slots = {};
+  /** @type {string[]} */
   const summary = [];
   for (const key of DAILY_LIFE_SLOTS) {
-    const s = (/** @type {any} */ (DERIVERS))[key](settlement, ctx);
+    const s = DERIVERS[key](settlement, ctx);
     slots[key] = s;
     summary.push(`${s.label}: ${s.text}`);
   }
@@ -462,9 +574,13 @@ export function deriveDailyLife(settlement) {
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────
 
-/** Flat array of `${label}: ${text}` lines. @param {import('./settlement.schema.js').SimSettlement} settlement */
+/**
+ * Flat array of `${label}: ${text}` lines.
+ * @param {DailyLifeSettlement | null | undefined} settlement
+ * @returns {string[]}
+ */
 export function summarizeDailyLife(settlement) {
-  return (/** @type {any} */ (deriveDailyLife(settlement))).summary;
+  return deriveDailyLife(settlement).summary;
 }
 
 /** Catalog accessor. */
@@ -472,18 +588,12 @@ export function supportedDailyLifeSlots() {
   return [...DAILY_LIFE_SLOTS];
 }
 
-// Exposed for unit tests that need to drive one deriver against a
-// controlled context (e.g. proving the five-lens visible-capacity boundary
-// holds for outsider-facing prose). Production callers go through
-// deriveDailyLifeSlot / deriveDailyLife.
-export const __test__ = Object.freeze({ deriveOutsiderImpressions });
-
 // ── compareDailyLife ────────────────────────────────────────────────────
 //
 // Diff two daily-life envelopes. Returns one entry per slot whose
-// text changed. Useful for the counterfactual tool — "after
+// text changed. Useful for the Phase 23 counterfactual tool — "after
 // removing the granary, food_culture changed from X to Y" — and for
-// causal delta summaries after regeneration.
+// Tier 5.1 (causal delta summaries after regeneration).
 
 /**
  * @typedef {Object} DailyLifeDelta
@@ -499,21 +609,22 @@ export const __test__ = Object.freeze({ deriveOutsiderImpressions });
  * Diff two daily-life envelopes. Returns slot-level diffs for any
  * slot whose text changed.
  *
- * @param {Object} before  Output of deriveDailyLife.
- * @param {Object} after   Output of deriveDailyLife.
+ * @param {{slots?: Record<string, DailyLifeSlot>} | null | undefined} before  Output of deriveDailyLife.
+ * @param {{slots?: Record<string, DailyLifeSlot>} | null | undefined} after   Output of deriveDailyLife.
  * @returns {DailyLifeDelta[]}
  */
 export function compareDailyLife(before, after) {
   if (!before || !after) return [];
+  /** @type {DailyLifeDelta[]} */
   const out = [];
   for (const key of DAILY_LIFE_SLOTS) {
-    const b = (/** @type {any} */ (before)).slots?.[key];
-    const a = (/** @type {any} */ (after)).slots?.[key];
+    const b = before.slots?.[key];
+    const a = after.slots?.[key];
     if (!b || !a) continue;
     if (b.text === a.text) continue;
     out.push({
       key,
-      label: (/** @type {any} */ (SLOT_LABELS))[key] || key,
+      label: SLOT_LABELS[key] || key,
       before: b.text,
       after: a.text,
       beforeReferences: b.references || [],

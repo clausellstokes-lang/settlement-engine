@@ -90,6 +90,25 @@ describe('EntityLink', () => {
     expect(screen.getByText('a vanished cabal')).toBeTruthy();
   });
 
+  it('renders an ambiguous legacy identity as plain text instead of choosing a sibling', () => {
+    const settlement = {
+      ...makeSettlement(),
+      npcs: [
+        { id: 'npc_shared', name: 'First survivor' },
+        { id: 'npc_shared', name: 'Second survivor' },
+      ],
+    };
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <EntityLink id="npc_shared" type="npc" fallback="a surviving witness" />
+      </Harness>
+    );
+
+    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByText('a surviving witness')
+      .getAttribute('data-entity-identity')).toBe('degraded_collision');
+  });
+
   it('navigateToEntity switches to the target tab and sets focusedEntity', () => {
     const settlement = makeSettlement();
     const setActiveTab = vi.fn();
@@ -123,6 +142,39 @@ describe('EntityLink', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Go to Iron Guild' }));
     });
     expect(setActiveTab).not.toHaveBeenCalled();
+  });
+});
+
+describe('EntityLink — verbatim (pronoun) links', () => {
+  it('renders the wrapped WORD, not the entity name, and still links to the entity', () => {
+    const settlement = makeSettlement();
+    const setActiveTab = vi.fn();
+    const id = factionIdFromName('Iron Guild');
+
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={setActiveTab}>
+        <EntityLink id={id} type="faction" fallback="they" verbatim />
+      </Harness>
+    );
+    // A resolved pronoun link shows "they" (the word), never "Iron Guild"…
+    const btn = screen.getByRole('button', { name: 'Go to Iron Guild' });
+    expect(btn.textContent).toBe('they');
+    expect(screen.queryByText('Iron Guild')).toBeNull();
+    // …and clicking it navigates to the entity's card.
+    act(() => { fireEvent.click(btn); });
+    expect(setActiveTab).toHaveBeenCalledWith('power', 'entity_link');
+    expect(useStore.getState().focusedEntity?.id).toBe(id);
+  });
+
+  it('degrades a broken pronoun link to the bare word (plain text, no link)', () => {
+    const settlement = makeSettlement();
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <EntityLink id="faction.ghost" type="faction" fallback="it" verbatim />
+      </Harness>
+    );
+    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByText('it')).toBeTruthy();
   });
 });
 

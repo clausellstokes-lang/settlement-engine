@@ -16,17 +16,23 @@
  *
  * The rail does NOT do any of the actions. It dispatches into the
  * existing handlers — this is purely an aggregation surface.
+ *
+ * RESTORED @ S2r-a (owner's BASE RULING, 2026-07-18): revived from
+ * origin/master (d024286e). The ONLY adaptation is copy access: the retired
+ * `copy/strings.js` `COPY` map migrated to `copy/en.js` (read via `t()`), so
+ * every `COPY.x.y` became `t('x.y')` and the `*HintFn(cost)` calls became
+ * `t('ai.*Hint', { cost })` templates. Behavior and store reads are unchanged.
  */
 
 import { useState } from 'react';
 import {
-  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3,
+  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Drama, Image as ImageIcon, Share2, Lock,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
-import { COPY } from '../../copy/strings.js';
+import { t } from '../../copy/index.js';
 
 /**
  * @param {Object} props
@@ -42,7 +48,7 @@ import { COPY } from '../../copy/strings.js';
  * @param {() => void} [props.handlers.onEdit]
  * @param {boolean} [props.simulated]    whether the settlement's realm is clock-bound (in the Realm)
  */
-export default function NextActionRail({ settlement, save, handlers, simulated = false }) {
+export default function NextActionRail({ settlement, save, handlers, simulated = false, canEdit = false, galleryPublished = false }) {
   const phase      = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const aiSettlement = useStore(s => s.aiSettlement);
@@ -66,11 +72,13 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
     ? { ...handlers, onRegenerateAi: () => setConfirmRegen(true) }
     : handlers;
 
-  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers });
+  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers, canEdit, galleryPublished });
   if (!items.length) return null;
   return (
     <>
-      <ActionRail title="Next best action" items={items} />
+      {/* Owner order (2026-07-22): the panel is renamed "Actions" and hosts the
+          settlement's verbs (relocated out of the header toolbar). */}
+      <ActionRail title="Actions" items={items} />
       <ConfirmDialog
         open={confirmRegen}
         tone="warning"
@@ -85,7 +93,7 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
 }
 
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers }) {
+function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers, canEdit = false, galleryPublished = false }) {
   // `settlement` is destructured (previously dropped as `_settlement`) so callers
   // that branch on it can. The current ladder reads phase/event/narrated facts;
   // settlement is kept available for future phase-aware rungs.
@@ -110,15 +118,15 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   if (phase === 'draft' && !save && handlers.onSave) {
     items.push({
       id: 'save', primary: true, Icon: Save,
-      label: COPY.save.primary,
+      label: t('save.primary'),
       hint:  'Saving keeps this draft for later editing.',
       onClick: handlers.onSave,
     });
   } else if (phase === 'draft' && handlers.onCanonize) {
     items.push({
       id: 'canonize', primary: true, Icon: BookMarked,
-      label: COPY.detail.canonizeCta,
-      hint:  COPY.detail.canonizeHint,
+      label: t('detail.canonizeCta'),
+      hint:  t('detail.canonizeHint'),
       onClick: handlers.onCanonize,
     });
   } else if (phase === 'canon' && !simulated && handlers.onPlaceOnMap) {
@@ -126,9 +134,9 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
     // the Realm. Naming the destination gives the next step strong scent (P3/P9).
     items.push({
       id: 'send_to_realm', primary: true, Icon: MapPin,
-      label: COPY.detail.sendToRealmCta,
+      label: t('detail.sendToRealmCta'),
       tag:   realmTier,
-      hint:  COPY.detail.sendToRealmHint,
+      hint:  t('detail.sendToRealmHint'),
       onClick: handlers.onPlaceOnMap,
     });
   } else if (phase === 'canon' && handlers.onApplyEvent) {
@@ -143,11 +151,39 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   }
 
   // ── Secondaries — always offered when applicable ────────────────────
+  // Owner order (2026-07-22): the header toolbar's verbs are relocated here.
+  // Order after the primary (Mark Canon / lifecycle rung): Session Mode, Edit,
+  // then the paid narration + the export / share cluster.
+  if (handlers.onSessionMode) {
+    items.push({
+      id: 'session', Icon: Drama,
+      label: 'Session Mode',
+      hint:  'A distraction-free run-of-play view for the table.',
+      onClick: handlers.onSessionMode,
+    });
+  }
+  // Edit — premium-gated. A non-premium owner still sees the rung (labeled
+  // "Edit (Premium)" with a lock) so the upsell survives the move; the handler
+  // routes to toggleEditMode or the purchase modal in useNextActionRailHandlers.
+  if (handlers.onEdit) {
+    items.push({
+      id: 'edit', Icon: canEdit ? Edit3 : Lock,
+      label: canEdit
+        ? (phase === 'canon' ? 'Edit (correction)' : 'Edit Dossier')
+        : 'Edit (Premium)',
+      hint:  canEdit
+        ? (phase === 'canon'
+            ? 'Authorial correction outside the timeline.'
+            : 'Edit dossier prose. Edited NPCs survive a reroll.')
+        : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.',
+      onClick: handlers.onEdit,
+    });
+  }
   if (!narrated && handlers.onPolishAi) {
     items.push({
       id: 'polish', Icon: Sparkles,
-      label: COPY.ai.polishCta,
-      hint:  COPY.ai.inlineHintFn(getAiCost('narrative')),
+      label: t('ai.polishCta'),
+      hint:  t('ai.inlineHint', { cost: getAiCost('narrative') }),
       onClick: handlers.onPolishAi,
     });
   }
@@ -158,16 +194,36 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   if (narrated && handlers.onRegenerateAi) {
     items.push({
       id: 'regenerate', Icon: Sparkles,
-      label: COPY.ai.regenerateCta,
-      hint:  COPY.ai.regenerateHintFn(getAiCost('narrative')),
+      label: t('ai.regenerateCta'),
+      hint:  t('ai.regenerateHint', { cost: getAiCost('narrative') }),
       onClick: handlers.onRegenerateAi,
     });
   }
   if (handlers.onExport) {
     items.push({
       id: 'export', Icon: FileText,
-      label: COPY.export.primaryCta,
+      label: t('export.primaryCta'),
       onClick: handlers.onExport,
+    });
+  }
+  // Export Image — the free PNG share card (relocated from the header). Not
+  // premium-gated; sharing is the growth loop.
+  if (handlers.onExportImage) {
+    items.push({
+      id: 'export_image', Icon: ImageIcon,
+      label: t('export.imageCta'),
+      hint:  'A one-card PNG (name, tier, headline stats) for Discord or a forum.',
+      onClick: handlers.onExportImage,
+    });
+  }
+  // Share to Gallery — publish / manage the public listing (relocated from the
+  // header). Label mirrors the old button (published → manage the listing).
+  if (handlers.onShare) {
+    items.push({
+      id: 'share', Icon: Share2,
+      label: galleryPublished ? 'Edit Gallery Listing' : 'Share to Gallery',
+      hint:  'Publish this dossier to the public gallery, or manage its listing.',
+      onClick: handlers.onShare,
     });
   }
   // Once the settlement is in the Realm, the gold primary above is no longer the
@@ -175,20 +231,10 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   if (phase === 'canon' && simulated && handlers.onPlaceOnMap) {
     items.push({
       id: 'open_realm', Icon: MapPin,
-      label: COPY.detail.openRealmCta,
+      label: t('detail.openRealmCta'),
       tag:   realmTier,
-      hint:  COPY.detail.openRealmHint,
+      hint:  t('detail.openRealmHint'),
       onClick: handlers.onPlaceOnMap,
-    });
-  }
-  if (handlers.onEdit) {
-    items.push({
-      id: 'edit', Icon: Edit3,
-      label: phase === 'canon' ? 'Edit (correction)' : 'Edit',
-      hint:  phase === 'canon'
-        ? 'Authorial correction outside the timeline.'
-        : 'Tweak settings without rerolling identity.',
-      onClick: handlers.onEdit,
     });
   }
   return items;

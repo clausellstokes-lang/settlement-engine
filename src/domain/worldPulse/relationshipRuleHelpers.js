@@ -135,6 +135,7 @@ const candidateBase = (/** @type {any} */ {
   metadata = {},
   condition,
   targetSaveId,
+  actorSaveId,
   conflictTags = [],
   dispositionFactor = EMPTY_DISPOSITION,
   tradeSalienceFactor = EMPTY_TRADE_SALIENCE,
@@ -144,10 +145,15 @@ const candidateBase = (/** @type {any} */ {
   const metadataAny = /** @type {any} */ (metadata);
   const toType = typeof metadataAny.toType === "string" ? metadataAny.toType : null;
   const direction = candidateDirection(candidateType, relState, metadataAny);
-  // The actor (the settlement driving this candidate) is the attributed save. Its
-  // disposition multiplier, signed by the candidate's escalation/de-escalation
-  // intent, scales severity + probability. 1.0 for a legacy/empty ledger.
-  const actorId = String(targetSaveId || settlements.from);
+  // The disposition multiplier scales severity + probability by the AGGRESSOR's
+  // aggressiveness — the settlement DRIVING the candidate. For victim-attributed
+  // adversarial candidates (raid/tribute/proxy/sanction/embargo) targetSaveId is
+  // the VICTIM (news attribution), so callers pass an explicit actorSaveId (the
+  // aggressor already in metadata); it defaults to targetSaveId||from for the
+  // majority of pair-driven candidates where actor == attributed save. Keying on
+  // the victim inverted the seam (a pacifist victim damped its raider's raids).
+  // 1.0 for a legacy/empty ledger. [worldpulse-religion-trade-5]
+  const actorId = String(actorSaveId || targetSaveId || settlements.from);
   const factor = signedDispositionFactor(
     /** @type {Record<string, any>} */ (dispositionFactor)?.[actorId],
     direction,

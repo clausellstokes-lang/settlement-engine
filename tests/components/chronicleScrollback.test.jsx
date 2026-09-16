@@ -60,8 +60,8 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     STORE = { setSelectedSettlementId };
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
     expect(screen.getByTestId('chronicle-scrollback')).toBeTruthy();
-    // Newest tick (7) is selected by default — its prose + headline show.
-    expect(screen.getByText(/Tick 7/)).toBeTruthy();
+    // The newest entry is selected by default — its prose + headline show.
+    expect(screen.getAllByText('week 8 of spring, year 1').length).toBeGreaterThan(0);
     expect(screen.getByText(/The siege of Bram broke/)).toBeTruthy();
     expect(screen.getByText('Bram falls')).toBeTruthy();
     // The older tick (5) is on the rail but not the selected body.
@@ -71,8 +71,8 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
   test('scrubbing to an older tick selects it', () => {
     STORE = { setSelectedSettlementId };
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
-    // Click the tick-5 rail button (role=group + aria-pressed toggle, not a tab).
-    fireEvent.click(screen.getByRole('button', { name: 'Tick 5' }));
+    // Click the older entry's calendar-labelled rail button.
+    fireEvent.click(screen.getByRole('button', { name: 'week 6 of spring, year 1' }));
     expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
     expect(screen.queryByText('Bram falls')).toBeNull();
   });
@@ -82,6 +82,69 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
     fireEvent.click(screen.getByTestId('chronicle-headline'));
     expect(setSelectedSettlementId).toHaveBeenCalledWith('b');
+  });
+
+  test('projects legacy climb-down analytics before rendering a pulse headline', () => {
+    STORE = { setSelectedSettlementId };
+    const momentumCampaign = {
+      id: 'momentum',
+      worldState: {
+        pulseHistory: [{
+          tick: 7,
+          selectedOutcomes: [{
+            id: 'm7', kind: 'momentum_climb_down', headline: 'Aldermoor abandons the war',
+            summary: 'Commitment 3.2× its cliff; price 0.62.', severity: 0.6,
+          }],
+          impactDigest: [],
+        }],
+      },
+    };
+    const { container } = render(<ChronicleScrollback campaign={momentumCampaign} nameFor={nameFor} />);
+    expect(container.textContent).toContain('The court held to the war too long; reversing course carried a real political price.');
+    // anchored: the exact authored projection above proves the selected headline body rendered.
+    expect(container.textContent).not.toMatch(/3\.2|0\.62|×|\b(?:commitment|cliff)\b/i);
+  });
+
+  test('the selection ANCHORS TO ITS TICK when a new advance prepends a frame (SB2)', () => {
+    STORE = { setSelectedSettlementId };
+    const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
+    // The DM scrubs back to tick 5…
+    fireEvent.click(screen.getByRole('button', { name: 'week 6 of spring, year 1' }));
+    expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
+    // …then an advance lands while the panel is open: the newest-first timeline
+    // grows at the FRONT (tick 9 prepends). A positional index would now point
+    // at tick 7; the tick anchor must keep tick 5 selected.
+    const grown = {
+      ...campaign,
+      worldState: {
+        pulseHistory: [
+          ...campaign.worldState.pulseHistory,
+          { tick: 9, selectedOutcomes: [{ id: 'o9', headline: 'A new dawn', summary: '', targetSaveId: 'a', severity: 0.2 }], impactDigest: [] },
+        ],
+      },
+    };
+    rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
+    expect(screen.getAllByText('week 6 of spring, year 1').length).toBeGreaterThan(0);
+    expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
+    expect(screen.queryByText('Bram falls')).toBeNull();
+  });
+
+  test('parked at the newest, the view FOLLOWS a new advance (the default keeps live)', () => {
+    STORE = { setSelectedSettlementId };
+    const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
+    expect(screen.getAllByText('week 8 of spring, year 1').length).toBeGreaterThan(0);
+    const grown = {
+      ...campaign,
+      worldState: {
+        pulseHistory: [
+          ...campaign.worldState.pulseHistory,
+          { tick: 9, selectedOutcomes: [{ id: 'o9', headline: 'A new dawn', summary: '', targetSaveId: 'a', severity: 0.2 }], impactDigest: [] },
+        ],
+      },
+    };
+    rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
+    expect(screen.getAllByText('week 10 of spring, year 1').length).toBeGreaterThan(0);
+    expect(screen.getByText('A new dawn')).toBeTruthy();
   });
 });
 

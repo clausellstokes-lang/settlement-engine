@@ -38,7 +38,7 @@ describe('SimulationRulesDialog', () => {
         }],
       },
     });
-    actions.updateCampaignSimulationRules.mockResolvedValue({ presetId: 'dramatic_campaign' });
+    actions.updateCampaignSimulationRules.mockResolvedValue({ presetId: 'full_simulation' });
     const onClose = vi.fn();
 
     render(<SimulationRulesDialog
@@ -47,15 +47,19 @@ describe('SimulationRulesDialog', () => {
       onClose={onClose}
     />);
 
-    fireEvent.click(screen.getByText('Dramatic Campaign'));
+    // CL-0 dialog v2: the grid carries the four §11 presets (the legacy trio
+    // stays resolvable in the catalog but off the grid).
+    fireEvent.click(screen.getByText('Full Simulation'));
     fireEvent.click(screen.getByRole('button', { name: 'Preview' }));
 
     await waitFor(() => {
       expect(actions.previewCampaignWorldPulse).toHaveBeenCalledWith('camp-1', 'one_month', {
         simulationRules: expect.objectContaining({
-          presetId: 'dramatic_campaign',
-          intensity: 'dramatic',
+          presetId: 'full_simulation',
+          propagationMode: 'full',
           majorChangesRequireProposal: false,
+          politicalAutonomy: 'full',
+          warLayerEnabled: true,
         }),
       });
     });
@@ -64,71 +68,51 @@ describe('SimulationRulesDialog', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
     await waitFor(() => {
       expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-1', expect.objectContaining({
-        presetId: 'dramatic_campaign',
+        presetId: 'full_simulation',
       }));
       expect(onClose).toHaveBeenCalled();
     });
   });
 
-  // ── UX Phase 4 — the THREE living-world gates (the unreachable-engine fix) ──
-  test('renders the 3 living-world gates, OFF by default', () => {
-    render(<SimulationRulesDialog
-      open
-      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
-      onClose={() => {}}
-    />);
-
-    // Discoverability: the Engine group auto-opens while the living-world gates are
-    // still off, so the war/religion toggles are visible the moment the dialog opens
-    // — no click-to-expand needed (the "buyers never found the gates" fix).
-    expect(screen.getByRole('button', { name: /Engine gates \(advanced\)/ }).getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByText('Living-world systems (advanced)')).toBeTruthy();
-    const warGate = screen.getByRole('checkbox', { name: 'War layer' });
-    const strategyGate = screen.getByRole('checkbox', { name: 'Settlement strategy' });
-    const religionGate = screen.getByRole('checkbox', { name: 'Religion dynamics' });
-
-    // The three gates default FALSE (DEFAULT_SIMULATION_RULES), so they render OFF
-    // even though every other toggle is on-unless-explicitly-false.
-    expect(warGate.checked).toBe(false);
-    expect(strategyGate.checked).toBe(false);
-    expect(religionGate.checked).toBe(false);
-  });
-
-  test('toggling the 3 gates ON reaches simulationRules on save', async () => {
-    actions.updateCampaignSimulationRules.mockResolvedValue({});
-    const onClose = vi.fn();
+  test('preview metric fallbacks exclude hidden record-mode outcomes', async () => {
+    actions.previewCampaignWorldPulse.mockReturnValue({
+      candidates: [
+        { id: 'public-candidate' },
+        { id: 'mechanical-candidate', recordMode: 'state_only' },
+        { id: 'suppressor-candidate', recordMode: 'suppression_only' },
+      ],
+      selected: [{ id: 'public-selected', headline: 'A public change' }],
+      autoApplied: [
+        { id: 'public-applied' },
+        { id: 'mechanical-applied', recordMode: 'state_only' },
+      ],
+      proposals: [],
+    });
 
     render(<SimulationRulesDialog
       open
       campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
-      onClose={onClose}
+      onClose={vi.fn()}
     />);
-
-    // The Engine group is open by default while the gates are off, so the toggles
-    // are directly reachable — no expand click needed.
-    fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Settlement strategy' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Religion dynamics' }));
-
-    expect(screen.getByRole('checkbox', { name: 'War layer' }).checked).toBe(true);
-
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Preview' }));
 
     await waitFor(() => {
-      // The toggles reach the rules object passed to updateCampaignSimulationRules —
-      // this is the proof the premium engine is now reachable from the UI.
-      expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-1', expect.objectContaining({
-        warLayerEnabled: true,
-        settlementStrategyEnabled: true,
-        religionDynamicsEnabled: true,
-      }));
-      expect(onClose).toHaveBeenCalled();
+      expect(screen.getByText('A public change')).toBeTruthy();
     });
+    expect(screen.getByText('Candidates').parentElement?.textContent).toBe('Candidates1');
+    expect(screen.getByText('Applied').parentElement?.textContent).toBe('Applied1');
   });
 
-  // ── advance-guard-ui — the store no-ops rules writes mid-advance, so the dialog
-  // must DISABLE its edit controls + show the affordance rather than let Save fire a
-  // write the store will silently drop and still report success over. ───────────────
+  // LINEAGE NOTE (master merge W6): master placed the three living-world gates
+  // (war / strategy / religion) INSIDE this dialog under an auto-opened "Engine
+  // gates (advanced)" group. This lineage deliberately surfaces them as
+  // LivingWorldGates on the Realm dashboard (src/components/settlements/
+  // LivingWorldGates.jsx, mounted in RealmDashboard.jsx:375 — covered by
+  // campaignWorldPulseControlLayer + warFaithSurfacing, 27 green). The two
+  // in-dialog gate tests were removed; the dialog's own coupling logic
+  // (war→strategy, faithSpread↔religionDynamics twin-write) stays exercised
+  // through the save path below.
+
   test('blocks the rules edit while this campaign is advancing', async () => {
     actions.updateCampaignSimulationRules.mockResolvedValue({});
     actions.advanceInFlight = ['camp-1'];
@@ -146,8 +130,9 @@ describe('SimulationRulesDialog', () => {
     expect(screen.getByTestId('rules-advance-blocked')).toBeTruthy();
     const saveBtn = screen.getByRole('button', { name: 'Save' });
     expect(saveBtn.disabled).toBe(true);
-    expect(screen.getByRole('checkbox', { name: 'War layer' }).disabled).toBe(true);
-    expect(screen.getAllByTestId('gate-disabled-reason').length).toBeGreaterThan(0);
+    // (master's in-dialog gate checkboxes are not rendered here — see the
+    // LINEAGE NOTE above; the banner + disabled Save + refused write are the
+    // shared substance.)
 
     // Even if Save is fired (defensively), no store write goes out — the guard
     // refuses so no false-success path exists.
@@ -155,6 +140,48 @@ describe('SimulationRulesDialog', () => {
     await Promise.resolve();
     expect(actions.updateCampaignSimulationRules).not.toHaveBeenCalled();
     expect(onClose).not.toHaveBeenCalled();
+  });
+
+  // W-R2-LIGHT: the Engine Waves section exposes the nine engine-wave gates
+  // individually. Picking a world-alive preset lights them; a custom/default config
+  // reads them all off; and the war-coupled waves lock until War is lit (the
+  // axes-lock idiom — closing sim-cohesion-counterparts-4's "switch that no surface
+  // renders" half, so the realmManifest refusal prose now points at a real control).
+  const WAVE_LABELS = [
+    'Momentum', 'Sea lanes', 'Intervention', 'New & lost steadings',
+    'Causes of war and peace', 'Supply-line war', 'Recovery and boom',
+    'Resource discovery', 'Aid and generosity',
+  ];
+
+  test('the Engine Waves section lights all nine when Full Simulation is picked', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={vi.fn()}
+    />);
+    // A default (realistic_regional) config carries no wave flags ⇒ every toggle off.
+    expect(screen.getByRole('checkbox', { name: 'Momentum' }).checked).toBe(false);
+    // Full Simulation lights all nine (warLayer is lit too, so the war-coupled ones unlock).
+    fireEvent.click(screen.getByText('Full Simulation'));
+    for (const label of WAVE_LABELS) {
+      const box = screen.getByRole('checkbox', { name: label });
+      expect(box.checked, `${label} lit`).toBe(true);
+      expect(box.disabled, `${label} enabled`).toBe(false);
+    }
+  });
+
+  test('war-coupled waves lock until War is lit (honest axes-lock)', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={vi.fn()}
+    />);
+    // warLayer is off in the default config ⇒ the three AND-gated waves are locked…
+    for (const label of ['Intervention', 'Causes of war and peace', 'Supply-line war']) {
+      expect(screen.getByRole('checkbox', { name: label }).disabled, `${label} locked`).toBe(true);
+    }
+    // …while a non-coupled wave stays freely togglable.
+    expect(screen.getByRole('checkbox', { name: 'Momentum' }).disabled).toBe(false);
   });
 
   test('does not block the rules edit for a DIFFERENT campaign advancing', async () => {

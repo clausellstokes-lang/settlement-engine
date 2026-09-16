@@ -40,6 +40,7 @@ const profile = (walls) => ({
 });
 
 describe('phantom walls: the +6 bonus follows the walls DATA, not JSON.stringify', () => {
+  // Landed W2b causalState wave — needs causalState.defenseProfileHasWalls
   it('an unwalled settlement (walls: []) gets NO walled contributor', () => {
     const v = deriveSystemVariable('defense_readiness', town({ defenseProfile: profile([]) }));
     expect(v.contributors.some(c => c.effect === 'walled')).toBe(false);
@@ -59,6 +60,7 @@ describe('phantom walls: the +6 bonus follows the walls DATA, not JSON.stringify
     expect(v.contributors.some(c => c.effect === 'walled')).toBe(true);
   });
 
+  // Landed W2b causalState wave — needs causalState.defenseProfileHasWalls
   it('defenseProfileHasWalls reads data shapes, never key names', () => {
     expect(defenseProfileHasWalls(null)).toBe(false);
     expect(defenseProfileHasWalls({ walls: [] })).toBe(false);
@@ -72,6 +74,7 @@ describe('phantom walls: the +6 bonus follows the walls DATA, not JSON.stringify
 describe('phantom walls: mapProfile defensive terrain banding', () => {
   const bands = defensiveTerrainBands();
 
+  // Landed W2b causalState wave — needs causalState.defenseProfileHasWalls
   it('an unwalled plains settlement with a defenseProfile is NOT banded sheltered/fortified', () => {
     const m = deriveMapProfile(town({ defenseProfile: profile([]) }));
     expect(bands.indexOf(m.outputs.defensiveTerrain)).toBeLessThan(bands.indexOf('sheltered'));
@@ -83,6 +86,7 @@ describe('phantom walls: mapProfile defensive terrain banding', () => {
   });
 });
 
+// Landed W2b causalState wave — needs causalState lift-polarity re-port (occupation_lifted/siege_lifted lifts)
 describe('occupation_lifted polarity: liberation is a LIFT, not a pressure', () => {
   const lifted = () => [{ archetype: 'occupation_lifted', severity: 0.3 }];
 

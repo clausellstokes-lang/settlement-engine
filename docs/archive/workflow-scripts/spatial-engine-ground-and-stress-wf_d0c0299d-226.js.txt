@@ -1,0 +1,82 @@
+export const meta = {
+  name: 'spatial-engine-ground-and-stress',
+  description: 'Ground the Phase 5.5 spatial engine design against the real codebase + adversarially stress-test it',
+  phases: [
+    { title: 'Ground', detail: 'map each existing system the spatial layer must hook into (file:line facts)' },
+    { title: 'Stress-test', detail: 'adversarial critics attack determinism, cascade, dormancy, performance, completeness' },
+  ],
+}
+
+const DESIGN = 'docs/PHASE55_SPATIAL_ENGINE_DESIGN.md'
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+
+const GROUND_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    system: { type: 'string' },
+    persists_or_exposes: { type: 'string', description: 'what state this system persists / what API it exposes that the spatial layer would read or hook' },
+    key_files: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      file: { type: 'string' }, lines: { type: 'string' }, what: { type: 'string' } }, required: ['file','what'] } },
+    attachment_points: { type: 'string', description: 'concretely WHERE the spatial mechanic attaches (function/seam), and via which existing pattern' },
+    gaps: { type: 'string', description: 'what is MISSING or MISMATCHED for the design to work; what would have to be built' },
+    feasibility: { type: 'string', enum: ['green','yellow','red'], description: 'green=exists, hooks cleanly; yellow=exists but needs real new work; red=absent or design conflicts with reality' },
+  },
+  required: ['system','persists_or_exposes','key_files','attachment_points','gaps','feasibility'],
+}
+
+const CRITIQUE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    axis: { type: 'string' },
+    findings: { type: 'array', items: { type: 'object', additionalProperties: false, properties: {
+      severity: { type: 'string', enum: ['high','med','low'] },
+      claim: { type: 'string', description: 'the specific way the design breaks or is underspecified on this axis' },
+      evidence: { type: 'string', description: 'grounded reason — cite a system/pattern from the grounding digest or a file' },
+      mitigation: { type: 'string', description: 'the concrete fix / design change that resolves it' },
+    }, required: ['severity','claim','mitigation'] } },
+    verdict: { type: 'string', description: 'overall: does the design survive this axis? green/yellow/red + one sentence' },
+  },
+  required: ['axis','findings','verdict'],
+}
+
+const preamble = `You are grounding a design doc against a REAL codebase. Repo root: ${ROOT} (this is cwd; use relative paths). First Read ${DESIGN} in full — it is the 6-round owner design for a "spatial engine" (Phase 5.5) that makes the realm map a first-class engine input. Then investigate ONLY your assigned system in OUR codebase (src/**, supabase/**). Report what ACTUALLY exists with file:line facts — do not speculate about code you did not open. Reference (read-only, do NOT confuse with ours): /Users/cstokes/Desktop/settlement-generator/settlement-engine. Your job is truth about the current tree, so the architect can tell the owner what is real vs what must be built.`
+
+const GROUND_AREAS = [
+  { key: 'map-state', label: 'canon map state (THE feasibility check)', focus: `What does OUR canon/realm MAP state actually persist per settlement? Look for the map/campaign store, the fantasy-map generator output, and canonization. Specifically: does a canonized settlement persist x/y position, terrain, elevation/heightmap, a cost field, user-drawn overlay/roads/biomes? Can a deterministic spatial graph (distances, least-cost routes over a terrain cost field, gates, neighbour tiers) be reconstructed purely from persisted state? Is there a "canonize map" event/seam? This is THE gating feasibility question for the whole spatial engine — be exhaustive. Search src/store, src/domain, src/components/map, anything map/realm/campaign.` },
+  { key: 'population-migration', label: 'population + migration', focus: `Find OUR population growth + migration model. Look for populationDynamics.js and any migrationFlows / migrationFlowsEnabled flag. What drives growth today? Is migration aspatial (abstract neighbours) or already route-aware? Where is food-deficit / carrying capacity computed? Where would route-based, distance/prosperity/culture-weighted migration with origin+road MORTALITY attach (§4c/§4d of the design)?` },
+  { key: 'trade-supply', label: 'trade + supply network + food', focus: `Find OUR trade/supply/food systems: supplyCompleteness, WAR_SUPPLY_CHAINS, foodStockpile, supply-gap/starvation impairment, food security/deficit. How is an institution's input supply modelled today (single chain? multi-source?)? Is there a stockpile buffer? Where would per-institution multi-source supply links + an invisible-caravan in-transit ledger + a distinct SUPPLY-STARVED impairment attach (round 3)? Where do tolls/gate-taxes/entrepôt economics (round 4) fit the founding/tier machinery (W-C3)?` },
+  { key: 'war-combat', label: 'war / combat / readiness (W-C1/C2)', focus: `Find OUR war cluster from W-C1/W-C2: readiness, rust, supplyQuality (flag-gated), threat env, decay retune, conquest feeds, mercenary market, conscience/foreclosure. Is there an actual BATTLE/COMBAT-RESOLUTION function, or only readiness/threat inputs? The design says the spatial layer's army-transit + field-collision + attrition finally converge into one bounded weighted-PRNG combat resolution — does that resolver exist, partially exist, or is it absent? Where would embattlement ramp + siege-as-interdiction attach to occupation/siege state?` },
+  { key: 'corruption-crime-culture', label: 'corruption + crime + culture/faith distance', focus: `Find (a) OUR corruption system (compromised / compromise-tag; covert vs revealed) — where corruption level lives per settlement/institution; (b) criminal opportunity / thieves-guild / crime-rate — the "smuggle network" strength source; (c) a CULTURE and/or RELIGION DISTANCE metric between two settlements (the "least drift" migration axis + "culturally different" contraband gate — round 5/6). Does a culture/faith similarity function exist, or must it be built? Where does alignment live (for risk-tolerance weighting)?` },
+  { key: 'determinism-dormancy-premium', label: 'determinism / dormancy / premium seams', focus: `Find the CONSTITUTIONAL patterns the spatial layer must satisfy: (a) the seeded-PRNG utilities and how per-tick/per-decision rolls are forked (same-seed byte-identity); (b) the ACTIVATION SEAM pattern — how the latent-pantheon / faith activation gates dormant behaviour to byte-identical-before; (c) the conditionally-materialized "read-last / write-next" ledger pattern (conquestFeeds / institutionTolerance) the design reuses for in-transit ledgers; (d) the PREMIUM gating (faithPanelModel / tier gates) — realm/map = premium, free/anon = aspatial. Report the exact patterns + files so the architect can say the spatial layer plugs into proven seams.` },
+]
+
+phase('Ground')
+const ground = await parallel(GROUND_AREAS.map(a => () =>
+  agent(`${preamble}\n\nYOUR SYSTEM: ${a.label}.\n${a.focus}\n\nReturn the structured facts. Be concrete with file paths and line ranges; mark feasibility honestly.`,
+    { label: `ground:${a.key}`, phase: 'Ground', schema: GROUND_SCHEMA, effort: 'medium' })
+))
+const groundOk = ground.filter(Boolean)
+log(`Grounded ${groundOk.length}/${GROUND_AREAS.length} systems`)
+const digest = groundOk.map(g =>
+  `### ${g.system} [feasibility: ${g.feasibility}]\nEXPOSES: ${g.persists_or_exposes}\nFILES: ${(g.key_files||[]).map(f => `${f.file}${f.lines?':'+f.lines:''} (${f.what})`).join('; ')}\nATTACH: ${g.attachment_points}\nGAPS: ${g.gaps}`
+).join('\n\n')
+
+const CRITIQUE_AXES = [
+  { key: 'determinism', label: 'Determinism / same-seed byte-identity', focus: `Same-seed byte-identity is CONSTITUTIONAL. Attack every place the spatial design could introduce nondeterminism: A* tie-breaking on equal-cost routes; float accumulation in cost fields; iteration order over settlements/routes/caravans/migration-flows (Map/Set/object key order); the many seeded rolls (banditry loss, smuggle-through, migration scatter, combat resolution, risk-tolerance draws) — are they forked from a stable per-entity/per-tick key so replay is identical? Wall-clock leaks (recall the tick-49 pulseKernel 'now' bug). Where does the spatial layer most likely break replay, and how is each fixed?` },
+  { key: 'cascade', label: 'Cascade / stability / runaway', focus: `The design adds cross-settlement feedback loops. Attack stability: migration (A's famine floods B strains B pushes to C) — does it oscillate or chain-collapse a region? Trade-starvation cascades under siege. Embattlement ramp vs security counterforce — can a region flip-flop embattled/calm each tick? Entrepôt toll-growth vs reroute — does the prosperity->migration->more-prosperity loop run away into one megacity? Prosperity gravity + entrepôt pull compounding. Identify the specific positive-feedback loops and the damping each needs; which one MOST needs a soak before trusting the tuning?` },
+  { key: 'dormancy-premium', label: 'Dormancy / additivity / premium', focus: `The activation seam claims: no canon map => aspatial => byte-identical to today; free/anon => aspatial; pre-canonize drafts => unchanged bytes. Attack it: is there ANY path where the spatial code executes before canonize or for a free/anon user and perturbs output? Does adding spatial fields to canon map state change serialization/goldens even when dormant? Does the premium boundary (realm=Cartographer) actually hold — could a free user's settlement get spatial modulation via a shared campaign? Where could additivity (dormant => prior bytes) silently break the golden corpus?` },
+  { key: 'performance', label: 'Performance / scale explosion', focus: `Attack scale: O(N^2) all-pairs routes on canonize/place/force-road — N settlements how large, recompute cost? The caravan ledger is per-institution × per-input × multi-source × per-route — does it explode? Migration flows + in-transit ledgers per tick. Smuggle/risk rolls per caravan per hostile gate. Is the per-tick cost genuinely just "advance the ledgers" (cheap) or does something force a full re-solve per tick? Identify the worst blow-up and the aggregation/caching/bounding that keeps it linear-ish.` },
+  { key: 'completeness', label: 'Completeness / contradiction / gaps across 6 rounds', focus: `Read all 6 rounds as a whole. What is UNDERSPECIFIED, CONTRADICTORY, or MISSING? e.g. do rounds conflict (round 2 imported-map flat-plain vs round 1 heightmap cost field)? Is contraband/gate-policy (round 6) reconciled with entrepôt tolls (round 4) and interception (round 3)? Are units/scales defined (the 20% deficit tolerance, travel weeks, ramp rates)? What decisions has the owner NOT yet made that the architect must surface? What's the minimal coherent BUILD SLICE (the smallest subset that delivers value and proves the seam) vs the full vision?` },
+]
+
+phase('Stress-test')
+const critique = await parallel(CRITIQUE_AXES.map(c => () =>
+  agent(`You are an adversarial design critic for the Phase 5.5 spatial engine (read ${DESIGN} in full first; repo root ${ROOT}). Your axis: ${c.label}.\n\n${c.focus}\n\nYou have a GROUNDING DIGEST of what actually exists in the codebase — use it to make your critique concrete, not hypothetical:\n\n${digest}\n\nBe genuinely adversarial: find the real failure modes, ranked by severity, each with a concrete mitigation. Do not pad with agreement.`,
+    { label: `critique:${c.key}`, phase: 'Stress-test', schema: CRITIQUE_SCHEMA, effort: 'high' })
+))
+const critiqueOk = critique.filter(Boolean)
+log(`Stress-tested ${critiqueOk.length}/${CRITIQUE_AXES.length} axes`)
+
+return { ground: groundOk, critique: critiqueOk }

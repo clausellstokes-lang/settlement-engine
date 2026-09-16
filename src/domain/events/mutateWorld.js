@@ -12,18 +12,41 @@
 import { withImpairment } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { withActiveCondition, withoutActiveCondition, conditionIdFromArchetype } from '../activeConditions.js';
-import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
+import { crisisOnset, crisisResolve, withStressorResolved } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
+import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';
+import {
+  nativeSemanticDepletedResourceKeys,
+} from '../content/customContentSemanticAuthority.js';
+// The generosity STRUCTURAL GATE (a zero-import leaf — the SAME qualifiesForGenerosity
+// the organic mover runs; generosityEV.js re-exports it). Eager-safe by construction:
+// importing the gate from the lazy generosityEV kernel would drag the whole decision
+// kernel into the first-paint closure (FP-G3).
+import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
 import {
   idOf, eventTime,
   findInstitution, replaceInstitution,
   labelFromTarget, slugify,
+  vetoMutation, sev01,
 } from './mutateHelpers.js';
 
 /** @typedef {import('../types.js').Event} Event */
+// Schemaless open objects at this layer (see mutateEntities.js). Aliases document
+// intent while centralizing the pure-`any` reality of the mutation surface.
+/** @typedef {any} MutEntity */
+/** @typedef {any} MutateEvent */
+
+// Local (pure) — the canonical trade-good label reader. Kept local to the events
+// layer so mutateWorld does not depend on canonicalAccessors (byte-identical to
+// that module's tradeGoodLabel; our canonicalAccessors does not re-export it).
+/** @param {MutEntity} entry @returns {string} */
+function tradeGoodLabel(entry) {
+  if (typeof entry === 'string') return entry;
+  return String(entry?.name || entry?.good || '');
+}
 
 // ── Resource / route mutations ─────────────────────────────────────────────
 
@@ -39,7 +62,7 @@ import {
  * invisible. Verbatim match wins, then a slug-equivalent roster entry, then
  * the slug itself (catalog fallback).
  */
-function resolveRosterKey(/** @type {any} */ config, /** @type {any} */ raw) {
+function resolveRosterKey(/** @type {MutEntity} */ config, /** @type {MutEntity} */ raw) {
   const slug = slugify(raw);
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
   const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
@@ -51,10 +74,31 @@ function resolveRosterKey(/** @type {any} */ config, /** @type {any} */ raw) {
 
 // Slug-equivalent key comparison — the same tolerance the handlers' live
 // filters use ('moonpetal_grove' ≡ 'Moonpetal grove'). Empty slugs never match.
-function slugEq(/** @type {any} */ a, /** @type {any} */ b) {
+function slugEq(/** @type {MutEntity} */ a, /** @type {MutEntity} */ b) {
   if (a === b) return true;
   const sa = slugify(a);
   return !!sa && sa === slugify(b);
+}
+
+function resourceDefinitionKey(/** @type {MutEntity} */ definition) {
+  return String(
+    definition?.customDefinitionId
+    || definition?.localUid
+    || definition?.refId
+    || '',
+  );
+}
+
+function matchingResourceDefinitions(
+  /** @type {MutEntity} */ config,
+  /** @type {MutEntity} */ key,
+) {
+  const definitions = Array.isArray(config.nearbyResourceDefinitions)
+    ? config.nearbyResourceDefinitions
+    : [];
+  return definitions.filter(
+    (/** @type {MutEntity} */ definition) => slugEq(definition?.name, key),
+  );
 }
 
 /**
@@ -64,26 +108,50 @@ function slugEq(/** @type {any} */ a, /** @type {any} */ b) {
  *                 verbatim name, re-tinted gold on regeneration);
  *   { removed }   keys struck by REMOVE_RESOURCE — a suppression list, so
  *                 removing a GENERATOR-rolled node stays gone across regens;
+ *   { removedNative } catalog keys removed by the organic resource lifecycle
+ *                 while a same-name custom definition may remain present;
  *   { depleted }  keys DEPLETE_RESOURCE forces into the depleted set;
+ *   { depletedCustomDefinitionIds } exact custom owners that remain depleted
+ *                 when a same-name native resource is discovered or removed;
  *   { recovered } keys RECOVERED_RESOURCE forces OUT of it — without this a
  *                 same-seed regen re-rolls the original depletion right back.
- * The handlers keep the four lists mutually agreeing (an ADD clears the
- * key's removed/depleted records, a DEPLETE clears its recovered record, …).
+ * The handlers keep these records mutually agreeing: an ADD clears the
+ * relevant removed/depleted records, a DEPLETE clears recovery, and exact
+ * custom depletion survives an independent native transition.
  */
-function resourceEditsOf(/** @type {any} */ config) {
+function resourceEditsOf(/** @type {MutEntity} */ config) {
   const re = config?.resourceEdits || {};
+  const depletedCustomDefinitionIds = Array.isArray(
+    re.depletedCustomDefinitionIds,
+  )
+    ? re.depletedCustomDefinitionIds
+    : [];
   return {
     added: Array.isArray(re.added) ? re.added : [],
     removed: Array.isArray(re.removed) ? re.removed : [],
+    removedNative: Array.isArray(re.removedNative) ? re.removedNative : [],
     depleted: Array.isArray(re.depleted) ? re.depleted : [],
+    ...(depletedCustomDefinitionIds.length > 0
+      ? { depletedCustomDefinitionIds }
+      : {}),
     recovered: Array.isArray(re.recovered) ? re.recovered : [],
   };
 }
 
+function withDepletedCustomDefinitionIds(
+  /** @type {MutEntity} */ edits,
+  /** @type {string[]} */ ids,
+) {
+  const { depletedCustomDefinitionIds: _prior, ...withoutPrior } = edits;
+  return ids.length > 0
+    ? { ...withoutPrior, depletedCustomDefinitionIds: ids }
+    : withoutPrior;
+}
+
 /**
- * Write a resource event's two formats: the LIVE keys (nearbyResources /
- * nearbyResourcesState / nearbyResourcesDepleted / nearbyResourcesCustom —
- * the resolved snapshot every consumer reads NOW) go to config only, and the
+ * Write a resource event's two formats: the LIVE keys (nearbyResources plus
+ * native/custom provenance sidecars, state, and depletion — the resolved
+ * snapshot every consumer reads NOW) go to config only, and the
  * authored resourceEdits delta record goes to BOTH config and _config when
  * present — withCustomTradeGoods' discipline. applyChange regenerates from
  * the raw _config first, and resolveResources re-applies the deltas there;
@@ -92,7 +160,7 @@ function resourceEditsOf(/** @type {any} */ config) {
  * deltas are the part that must survive. (resourceEdits is genuine user
  * input, deliberately NOT in settlementSlice's DERIVED_CONFIG_KEYS strip.)
  */
-function withResourceEdits(/** @type {any} */ s, /** @type {any} */ livePatch, /** @type {any} */ resourceEdits) {
+function withResourceEdits(/** @type {MutEntity} */ s, /** @type {MutEntity} */ livePatch, /** @type {MutEntity} */ resourceEdits) {
   const next = { ...s, config: { ...(s.config || {}), ...livePatch, resourceEdits } };
   if (s._config && typeof s._config === 'object') {
     next._config = { ...s._config, resourceEdits };
@@ -100,33 +168,70 @@ function withResourceEdits(/** @type {any} */ s, /** @type {any} */ livePatch, /
   return next;
 }
 
-function depleteResource(/** @type {any} */ s, /** @type {any} */ event) {
+function depleteResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
   // Write the key form the roster actually holds (resolveRosterKey) into the
   // nearbyResourcesDepleted array the economy/food generators read.
   const key = resolveRosterKey(config, raw);
-  if (!key) return s;
+  if (!key) return vetoMutation('empty_target');
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  const exactDepleted = Array.isArray(
+    config.nearbyResourceDefinitionsDepleted,
+  )
+    ? config.nearbyResourceDefinitionsDepleted
+    : [];
+  const exactKeys = new Set(exactDepleted.map(resourceDefinitionKey));
+  const matchingDefinitions = matchingResourceDefinitions(config, key);
+  const matchingDefinitionIds = matchingDefinitions
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config);
+  const nativeKey = (config.nearbyResourcesNative || [])
+    .find((/** @type {MutEntity} */ candidate) => slugEq(candidate, key));
   const edits = resourceEditsOf(config);
+  const depletedCustomDefinitionIds = [
+    ...(edits.depletedCustomDefinitionIds || []),
+    ...matchingDefinitionIds.filter(
+      (/** @type {string} */ id) => (
+        !(edits.depletedCustomDefinitionIds || []).includes(id)
+      ),
+    ),
+  ];
   return withResourceEdits(s, {
     nearbyResourcesState: { ...state, [key]: 'depleted' },
     nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
-  }, {
+    nearbyResourcesNativeDepleted: (
+      nativeKey
+      && !nativeDepleted.some(
+        (/** @type {MutEntity} */ candidate) => slugEq(candidate, nativeKey),
+      )
+        ? [...nativeDepleted, nativeKey]
+        : nativeDepleted
+    ),
+    nearbyResourceDefinitionsDepleted: [
+      ...exactDepleted,
+      ...matchingDefinitions.filter(
+        (/** @type {MutEntity} */ definition) => (
+          !exactKeys.has(resourceDefinitionKey(definition))
+        ),
+      ),
+    ],
+  }, withDepletedCustomDefinitionIds({
     ...edits,
-    depleted: edits.depleted.some((/** @type {any} */ k) => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
-    recovered: edits.recovered.filter((/** @type {any} */ k) => !slugEq(k, key)),
-  });
+    depleted: edits.depleted.some((/** @type {MutEntity} */ k) => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
+    recovered: edits.recovered.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
+  }, depletedCustomDefinitionIds));
 }
 
 // RECOVERED_RESOURCE — the inverse: clear BOTH depletion formats so chains, exports,
 // food, and resource pressure all see the recovery. (Previously a registry no-op: the
 // depleted set was never cleared, so a recovered resource stayed depleted forever.)
-function recoveredResource(/** @type {any} */ s, /** @type {any} */ event) {
+function recoveredResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   // Recorded under the roster-resolved form — the key a regenerated roster
   // holds. Recorded even when nothing was depleted LIVE: in random mode the
   // depletion may exist only in the re-roll, and the recovered record is
@@ -142,16 +247,30 @@ function recoveredResource(/** @type {any} */ s, /** @type {any} */ event) {
   for (const k of Object.keys(state)) {
     if (state[k] === 'depleted' && (keys.has(k) || slugEq(k, key))) state[k] = 'allow';
   }
-  const depleted = (config.nearbyResourcesDepleted || []).filter((/** @type {any} */ k) => !keys.has(k) && !slugEq(k, key));
+  const depleted = (config.nearbyResourcesDepleted || []).filter((/** @type {MutEntity} */ k) => !keys.has(k) && !slugEq(k, key));
+  const exactDepleted = (
+    config.nearbyResourceDefinitionsDepleted || []
+  ).filter(
+    (/** @type {MutEntity} */ definition) => !slugEq(definition?.name, key),
+  );
+  const matchingDefinitionIds = matchingResourceDefinitions(config, key)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config)
+    .filter((/** @type {MutEntity} */ candidate) => !slugEq(candidate, key));
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
     nearbyResourcesState: state,
     nearbyResourcesDepleted: depleted,
-  }, {
+    nearbyResourcesNativeDepleted: nativeDepleted,
+    nearbyResourceDefinitionsDepleted: exactDepleted,
+  }, withDepletedCustomDefinitionIds({
     ...edits,
-    depleted: edits.depleted.filter((/** @type {any} */ k) => !slugEq(k, key)),
-    recovered: edits.recovered.some((/** @type {any} */ k) => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
-  });
+    depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
+    recovered: edits.recovered.some((/** @type {MutEntity} */ k) => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
+  }, (edits.depletedCustomDefinitionIds || []).filter(
+    (/** @type {string} */ id) => !matchingDefinitionIds.includes(id),
+  )));
 }
 
 // REMOVED_THREAT — the party neutralized an active threat. Removes the matching
@@ -159,7 +278,7 @@ function recoveredResource(/** @type {any} */ s, /** @type {any} */ event) {
 // `stress`/`stresses`), and when the removed threat was a SIEGE promotes the
 // siege_lifted recovery condition — previously a registry no-op, leaving the
 // siege_lifted consumer tree (defense/food/legitimacy/trade recovery) dead.
-function removedThreat(/** @type {any} */ s, /** @type {any} */ event) {
+function removedThreat(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const label = labelFromTarget(event.targetId).toLowerCase();
   let next = { ...s };
   let removed = null;
@@ -169,12 +288,12 @@ function removedThreat(/** @type {any} */ s, /** @type {any} */ event) {
   // substring fallback still helps free-text targets, but only for labels long
   // enough (≥4 chars) to be discriminating — a 1–3 char label matched far too
   // greedily.
-  const exactMatch = (/** @type {any} */ st) => {
+  const exactMatch = (/** @type {MutEntity} */ st) => {
     const name = String(st?.name || '').toLowerCase();
     const type = String(st?.type || '').toLowerCase();
     return name === label || type === label;
   };
-  const looseMatch = (/** @type {any} */ st) =>
+  const looseMatch = (/** @type {MutEntity} */ st) =>
     label.length >= 4 && `${st?.name || ''} ${st?.type || ''}`.toLowerCase().includes(label);
   for (const key of ['stressors', 'stress', 'stresses']) {
     const arr = Array.isArray(next[key]) ? next[key] : null;
@@ -188,6 +307,11 @@ function removedThreat(/** @type {any} */ s, /** @type {any} */ event) {
     }
   }
   const threatText = `${removed?.name || ''} ${removed?.type || ''} ${label}`.toLowerCase();
+  // No stressor matched and the label names no siege to lift: nothing happened —
+  // refuse instead of letting the registry's threat-neutralized deltas land alone.
+  if (!removed && !/siege/.test(threatText)) {
+    return vetoMutation('threat_not_found', labelFromTarget(event.targetId));
+  }
   if (/siege/.test(threatText)) {
     next = withActiveCondition(next, {
       archetype: 'siege_lifted',
@@ -195,14 +319,24 @@ function removedThreat(/** @type {any} */ s, /** @type {any} */ event) {
       causes: [{ source: 'event', eventId: event.id, detail: 'The siege is broken; the settlement begins to recover.' }],
     });
   }
+  // Record the neutralized threat in config.stressorEdits.resolved (dual-written
+  // to _config) so a party-removed threat cannot RESURRECT on regeneration — the
+  // live entry we just spliced is a derivation output the overlay re-rolls from
+  // config, so without the suppression record a config-forced stressor re-mints.
+  // This is the twin of RESOLVE_STRESSOR's suppression (crisisResolve), which
+  // REMOVED_THREAT lacked. Slug/name-tolerant: record the removed entry's type,
+  // its name, and the event label. [domain-events-region-2]
+  if (removed) {
+    next = withStressorResolved(next, [removed.type, removed.name, label]);
+  }
   return next;
 }
 
 // STARTED_RIOT — durable aftermath via the generic residual archetype with an
 // explicit riot framing (no new archetype invented; the provided affectedSystems
 // override the residual template per deriveActiveCondition precedence).
-function startedRiot(/** @type {any} */ s, /** @type {any} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+function startedRiot(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const severity = sev01(event.payload?.severity, 0.6);
   const where = event.targetId ? ` in ${labelFromTarget(event.targetId)}` : '';
   return withActiveCondition(s, {
     archetype: 'stressor_residual',
@@ -229,16 +363,16 @@ const ALLIANCE_REL = 'allied';
 // plural, so normalize at the write chokepoint. (Kept tiny + local: the
 // regional layer's canonicalRelationshipLabel covers the read side.)
 const LEGACY_REL_ALIASES = { trade_partners: 'trade_partner' };
-const canonicalRelType = (/** @type {any} */ rel) => LEGACY_REL_ALIASES[/** @type {keyof typeof LEGACY_REL_ALIASES} */ (String(rel || '').toLowerCase())] || rel;
-function setNeighbourRelationship(/** @type {any} */ s, /** @type {any} */ event) {
+const canonicalRelType = (/** @type {MutEntity} */ rel) => LEGACY_REL_ALIASES[/** @type {keyof typeof LEGACY_REL_ALIASES} */ (String(rel || '').toLowerCase())] || rel;
+function setNeighbourRelationship(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const targetId = event.targetId;
-  if (!targetId) return s;
+  if (!targetId) return vetoMutation('empty_target');
   const relType = event.type === 'BROKERED_ALLIANCE'
     ? ALLIANCE_REL
     : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
   const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
   let touched = false;
-  const next = network.map((/** @type {any} */ link) => {
+  const next = network.map((/** @type {MutEntity} */ link) => {
     const matches = String(link?.name || '') === String(targetId)
       || String(link?.neighbourName || '') === String(targetId)
       || String(link?.id || '') === String(targetId)
@@ -272,10 +406,17 @@ function setNeighbourRelationship(/** @type {any} */ s, /** @type {any} */ event
     };
     return { ...s, neighbourNetwork: [...network, newLink] };
   }
+  // DELIBERATELY NOT A VETO (W-COMPOSER-1 finding): a dispute/alliance naming a
+  // CAMPAIGN PEER that is not a settlement-local neighbour is REAL — the Lane-2
+  // canon-relationship ripple (store layer) mints the pulse edge; only this
+  // settlement-local view has nothing to write. Vetoing here killed the drained
+  // and immediate campaign-peer paths (pinned by campaignClockQueue drain-parity
+  // tests). The composer's predicate + batch eventConsumes still keep garbage
+  // targets out of the UI lanes.
   return s;
 }
 
-function cutTradeRoute(/** @type {any} */ s, /** @type {any} */ event) {
+function cutTradeRoute(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   // Mark the trade route status on settlement.config — coarse but
   // sufficient until the full campaign-graph route model lands.
   const config = s.config || {};
@@ -318,7 +459,7 @@ function cutTradeRoute(/** @type {any} */ s, /** @type {any} */ event) {
  * reapplyEventConditions' targeting: GENERATION-stamped twins only,
  * world/regional conditions untouched.
  */
-function withoutGenerationTwin(/** @type {any} */ s, /** @type {any} */ archetype) {
+function withoutGenerationTwin(/** @type {MutEntity} */ s, /** @type {MutEntity} */ archetype) {
   let next = s;
   for (const cond of next.activeConditions || []) {
     if (cond?.archetype === archetype
@@ -358,7 +499,7 @@ function conditionIdForOnset(archetype, event) {
  * can consume it. Coarse for v1; future versions will derive specific
  * institution strain from the wave size.
  */
-function refugeeWave(/** @type {any} */ s, /** @type {any} */ event) {
+function refugeeWave(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const config = s.config || {};
   const waves = Array.isArray(config._refugeeWaves) ? [...config._refugeeWaves] : [];
   const size = event.payload?.size || 'medium';
@@ -392,8 +533,8 @@ function refugeeWave(/** @type {any} */ s, /** @type {any} */ event) {
  * disease name. Strains healing institutions (capacity impairment),
  * propagates through faction links so the watch and temple respond.
  */
-function plague(/** @type {any} */ s, /** @type {any} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+function plague(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const severity = sev01(event.payload?.severity, 0.6);
   const config = s.config || {};
   const annotation = {
     name: event.targetId || 'unspecified',
@@ -411,8 +552,11 @@ function plague(/** @type {any} */ s, /** @type {any} */ event) {
     next._config = { ...s._config, _activePlague: annotation };
   }
   // Apply a capacity impairment to any healing-tagged institution so
-  // the simulation reflects the strain.
-  const healing = (next.institutions || []).filter((/** @type {any} */ i) => /hospital|temple|infirm|healer/i.test(i.name || ''));
+  // the simulation reflects the strain. Uses the canonical healing vocabulary
+  // (healingLedger's classifier — chapel/hospice/herbalist/apothecary/shrine/
+  // monastery/almshouse too) rather than a private 4-class regex, matching the
+  // roster M11a's care counterforce reads. [domain-events-region-9]
+  const healing = (next.institutions || []).filter((/** @type {MutEntity} */ i) => HEALING_INSTITUTION_PATTERN.test(String(i.name || '')));
   for (const inst of healing) {
     const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
       type: 'capacity',
@@ -444,8 +588,8 @@ function plague(/** @type {any} */ s, /** @type {any} */ event) {
  * is named in the payload, damage it; otherwise just record the raid
  * on the settlement so the next pipeline rerun consumes it.
  */
-function raidOrMonsterAttack(/** @type {any} */ s, /** @type {any} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+function raidOrMonsterAttack(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const severity = sev01(event.payload?.severity, 0.6);
   const config = s.config || {};
   const raids = Array.isArray(config._raidHistory) ? [...config._raidHistory] : [];
   raids.push({
@@ -522,8 +666,8 @@ function instigatorTargetRelationship(stressorType, payload) {
   return null;
 }
 
-function applyStressor(/** @type {any} */ s, /** @type {any} */ event) {
-  const next = /** @type {any} */ (crisisOnset({ settlement: s, event }).settlement);
+function applyStressor(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const next = /** @type {MutEntity} */ (crisisOnset({ settlement: s, event }).settlement);
   // #1 / #3 — INSTIGATOR-SOURED RELATIONSHIP. A WAR-type stressor
   // (siege / wartime / occupation / betrayal) sours the named neighbour to
   // 'hostile'; an INFILTRATION stressor sours it to a lighter, DM-configurable
@@ -539,7 +683,7 @@ function applyStressor(/** @type {any} */ s, /** @type {any} */ event) {
   const targetRank = adversarialRank(targetRel);
   const network = Array.isArray(next.neighbourNetwork) ? next.neighbourNetwork : [];
   let flipped = false;
-  const rewired = network.map((/** @type {any} */ link) => {
+  const rewired = network.map((/** @type {MutEntity} */ link) => {
     const matches = String(link?.name || '') === instigator
       || String(link?.neighbourName || '') === instigator
       || String(link?.id || '') === instigator
@@ -579,19 +723,19 @@ function applyStressor(/** @type {any} */ s, /** @type {any} */ event) {
  * hard-validates the faction ref (batch.js eventConsumes) and the composer
  * only offers real factions.
  */
-function changeRulingPower(/** @type {any} */ s, /** @type {any} */ event) {
+function changeRulingPower(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const cause = event.payload?.cause || 'coup';
   // Try the raw target first (the picker passes the faction name verbatim);
   // fall back to the de-slugged form for "faction.some_name" style ids.
-  let result = /** @type {any} */ (transferRulingPower(s, event.targetId, { cause }));
+  let result = /** @type {MutEntity} */ (transferRulingPower(s, event.targetId, { cause }));
   if (result.error === 'faction_not_found') {
-    result = /** @type {any} */ (transferRulingPower(s, labelFromTarget(event.targetId), { cause }));
+    result = /** @type {MutEntity} */ (transferRulingPower(s, labelFromTarget(event.targetId), { cause }));
   }
-  if (result.error) return s;
+  if (result.error) return vetoMutation(`power_${result.error}`, labelFromTarget(event.targetId));
   const severityByCause = { coup: 0.55, conquest: 0.65, election: 0.25, succession: 0.3, appointment: 0.3 };
   return withActiveCondition(result.settlement, {
     archetype: 'government_overthrown',
-    severity: /** @type {any} */ (severityByCause)[cause] ?? 0.5,
+    severity: /** @type {MutEntity} */ (severityByCause)[cause] ?? 0.5,
     triggeredAt: { sourceEventType: 'CHANGE_RULING_POWER', sourceEventTargetId: event.targetId },
     causes: [{
       source: 'event',
@@ -617,14 +761,14 @@ function changeRulingPower(/** @type {any} */ s, /** @type {any} */ event) {
  * picker offers the live stressors). The roaming world-pulse twin resolves
  * at the store layer through the lifecycle's 'resolve' twinDirective.
  */
-function resolveStressor(/** @type {any} */ s, /** @type {any} */ event) {
-  return crisisResolve({ settlement: s, event }).settlement;
-}
-
-/** Display label for a trade-good list entry (strings + legacy {name, good} objects). */
-function tradeGoodLabel(/** @type {any} */ entry) {
-  if (typeof entry === 'string') return entry;
-  return String(entry?.name || entry?.good || '');
+function resolveStressor(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const r = /** @type {MutEntity} */ (crisisResolve({ settlement: s, event }));
+  // Nothing matched — no live entry removed, no condition wound down: refuse
+  // instead of committing the registry's relief deltas over an unchanged town.
+  if (!r.removed && !r.wound) {
+    return vetoMutation('stressor_not_found', labelFromTarget(event.targetId));
+  }
+  return r.settlement;
 }
 
 /**
@@ -634,7 +778,7 @@ function tradeGoodLabel(/** @type {any} */ entry) {
  * { transit } entrepôt goods, { removed } the suppression list that keeps a
  * removal of a generator-derived good gone across regenerations.
  */
-function customTradeGoodsOf(/** @type {any} */ config) {
+function customTradeGoodsOf(/** @type {MutEntity} */ config) {
   const ctg = config?.customTradeGoods || {};
   return {
     exports: Array.isArray(ctg.exports) ? ctg.exports : [],
@@ -652,7 +796,7 @@ function customTradeGoodsOf(/** @type {any} */ config) {
  * (customTradeGoods is genuine user input, deliberately NOT in
  * settlementSlice's DERIVED_CONFIG_KEYS strip.)
  */
-function withCustomTradeGoods(/** @type {any} */ s, /** @type {any} */ customTradeGoods) {
+function withCustomTradeGoods(/** @type {MutEntity} */ s, /** @type {MutEntity} */ customTradeGoods) {
   const next = { ...s, config: { ...(s.config || {}), customTradeGoods } };
   if (s._config && typeof s._config === 'object') {
     next._config = { ...s._config, customTradeGoods };
@@ -673,16 +817,16 @@ function withCustomTradeGoods(/** @type {any} */ s, /** @type {any} */ customTra
  * regeneration. Re-adding a removed good clears its suppression entry — the
  * two formats must keep agreeing.
  */
-function addTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
+function addTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const label = String(event.payload?.label || event.targetId || '').trim();
-  if (!label) return s;
+  if (!label) return vetoMutation('empty_target');
   const direction = event.payload?.direction === 'import' ? 'import' : 'export';
   const entrepot = direction === 'export' && !!event.payload?.entrepot;
   const ec = s.economicState || {};
   const listKey = direction === 'import' ? 'primaryImports' : 'primaryExports';
   const list = Array.isArray(ec[listKey]) ? ec[listKey] : [];
   const written = entrepot ? `${label} (transit)` : label;
-  const has = (/** @type {any} */ arr, /** @type {any} */ l) => arr.some((/** @type {any} */ e) => tradeGoodLabel(e).toLowerCase() === l.toLowerCase());
+  const has = (/** @type {MutEntity} */ arr, /** @type {MutEntity} */ l) => arr.some((/** @type {MutEntity} */ e) => tradeGoodLabel(e).toLowerCase() === l.toLowerCase());
 
   let nextEc = ec;
   if (!has(list, written)) nextEc = { ...nextEc, [listKey]: [...list, written] };
@@ -693,11 +837,11 @@ function addTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
 
   const ctg = customTradeGoodsOf(s.config);
   const bucket = entrepot ? 'transit' : (direction === 'import' ? 'imports' : 'exports');
-  const inBucket = ctg[bucket].some((/** @type {any} */ l) => String(l).toLowerCase() === label.toLowerCase());
-  const removed = ctg.removed.filter((/** @type {any} */ l) => String(l).toLowerCase() !== label.toLowerCase());
+  const inBucket = ctg[bucket].some((/** @type {MutEntity} */ l) => String(l).toLowerCase() === label.toLowerCase());
+  const removed = ctg.removed.filter((/** @type {MutEntity} */ l) => String(l).toLowerCase() !== label.toLowerCase());
   const configChanged = !inBucket || removed.length !== ctg.removed.length;
 
-  if (nextEc === ec && !configChanged) return s;
+  if (nextEc === ec && !configChanged) return vetoMutation('trade_good_already_present', label);
   let next = nextEc === ec ? s : { ...s, economicState: nextEc };
   if (configChanged) {
     next = withCustomTradeGoods(next, {
@@ -721,9 +865,9 @@ function addTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
  * suppression list, so a removal — even of a generator-derived good — stays
  * gone across a full regeneration.
  */
-function removeTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
+function removeTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.payload?.label || event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const base = raw.replace(/\s*\(transit\)\s*$/i, '').trim();
   const targets = new Set([raw, base, `${base} (transit)`].map(l => l.toLowerCase()));
   const ec = s.economicState || {};
@@ -740,7 +884,7 @@ function removeTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
   }
 
   const ctg = customTradeGoodsOf(s.config);
-  const strike = (/** @type {any} */ arr) => arr.filter((/** @type {any} */ l) => !targets.has(String(l).toLowerCase()));
+  const strike = (/** @type {MutEntity} */ arr) => arr.filter((/** @type {MutEntity} */ l) => !targets.has(String(l).toLowerCase()));
   const struck = {
     exports: strike(ctg.exports),
     imports: strike(ctg.imports),
@@ -751,9 +895,9 @@ function removeTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
     struck.imports.length !== ctg.imports.length ||
     struck.transit.length !== ctg.transit.length;
 
-  if (!changed && !configChanged) return s;
+  if (!changed && !configChanged) return vetoMutation('trade_good_not_found', base);
   let next = changed ? { ...s, economicState: nextEc } : s;
-  const alreadyRemoved = ctg.removed.some((/** @type {any} */ l) => String(l).toLowerCase() === base.toLowerCase());
+  const alreadyRemoved = ctg.removed.some((/** @type {MutEntity} */ l) => String(l).toLowerCase() === base.toLowerCase());
   next = withCustomTradeGoods(next, {
     ...struck,
     removed: alreadyRemoved ? ctg.removed : [...ctg.removed, base],
@@ -763,80 +907,309 @@ function removeTradeGood(/** @type {any} */ s, /** @type {any} */ event) {
 
 /**
  * ADD_RESOURCE — open a new resource node. Mirrors depleteResource's
- * dual-format discipline: write BOTH config.nearbyResources (the roster the
- * generators and the target picker read) and config.nearbyResourcesState
- * (the manual-mode map). Catalog targets store the canonical underscore key;
- * names with no catalog entry are custom resources — stored verbatim (the
- * resolveResources convention) and also recorded in nearbyResourcesCustom so
- * the dossier gold-tints them. Re-adding a depleted node clears the
- * depletion record — the two formats must keep agreeing.
+ * dual-format discipline: write the flat roster, its native/custom provenance
+ * sidecars, and the manual-mode state map together. Catalog targets store the
+ * canonical underscore key. Explicit custom targets—or names with no catalog
+ * entry—remain verbatim and are recorded in nearbyResourcesCustom so the
+ * dossier gold-tints them. Re-adding a depleted node clears the depletion
+ * record; every representation must keep agreeing.
  */
-function addResource(/** @type {any} */ s, /** @type {any} */ event) {
+function addResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const slug = slugify(raw);
-  const catalogKey = /** @type {any} */ (RESOURCE_DATA)[raw] ? raw : (/** @type {any} */ (RESOURCE_DATA)[slug] ? slug : null);
+  const explicitCustom = event.payload?.isCustom === true;
+  const catalogKey = explicitCustom
+    ? null
+    : (/** @type {MutEntity} */ (RESOURCE_DATA)[raw]
+        ? raw
+        : (/** @type {MutEntity} */ (RESOURCE_DATA)[slug] ? slug : null));
   const key = catalogKey || raw;
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
   const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
+  const customSlugs = new Set(custom.map((/** @type {MutEntity} */ value) => slugify(value)));
+  const native = Array.isArray(config.nearbyResourcesNative)
+    ? config.nearbyResourcesNative
+    : nearby.filter((/** @type {MutEntity} */ value) => !customSlugs.has(slugify(value)));
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config);
+  const exactDepleted = Array.isArray(
+    config.nearbyResourceDefinitionsDepleted,
+  )
+    ? config.nearbyResourceDefinitionsDepleted
+    : [];
+  const matchingDefinitionIds = matchingResourceDefinitions(config, key)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const customRemainsDepleted = Boolean(
+    catalogKey
+    && exactDepleted.some(
+      (/** @type {MutEntity} */ definition) => slugEq(definition?.name, key),
+    ),
+  );
+  const nextFlatDepleted = depleted.filter(
+    (/** @type {MutEntity} */ candidate) => !slugEq(candidate, key),
+  );
+  if (customRemainsDepleted) nextFlatDepleted.push(key);
   const edits = resourceEditsOf(config);
+  const nextCustomDepletionIds = catalogKey
+    ? (edits.depletedCustomDefinitionIds || [])
+    : (edits.depletedCustomDefinitionIds || []).filter(
+        (/** @type {string} */ id) => !matchingDefinitionIds.includes(id),
+      );
   return withResourceEdits(s, {
     nearbyResources: nearby.includes(key) ? nearby : [...nearby, key],
-    nearbyResourcesState: { ...state, [key]: 'allow' },
+    nearbyResourcesNative: (
+      catalogKey && !native.includes(key)
+        ? [...native, key]
+        : native
+    ),
+    nearbyResourcesNativeDepleted: nativeDepleted.filter(
+      (/** @type {MutEntity} */ candidate) => !slugEq(candidate, key),
+    ),
+    nearbyResourcesState: {
+      ...state,
+      [key]: customRemainsDepleted ? 'depleted' : 'allow',
+    },
     // Slug-equivalent filter: also clears the legacy slug-form record the
     // old depleteResource wrote for custom resources ('moonpetal_grove').
-    nearbyResourcesDepleted: depleted.filter((/** @type {any} */ k) => k !== key && slugify(k) !== slug),
+    nearbyResourcesDepleted: nextFlatDepleted,
+    nearbyResourceDefinitionsDepleted: catalogKey
+      ? exactDepleted
+      : exactDepleted.filter(
+          (/** @type {MutEntity} */ definition) => !slugEq(definition?.name, key),
+        ),
     ...(catalogKey
       ? {}
       : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
-  }, {
+  }, withDepletedCustomDefinitionIds({
     ...edits,
     // An opened node starts open: clear the key's removed suppression AND
     // its depleted record (mirrors the live nearbyResourcesDepleted filter).
-    added: edits.added.some((/** @type {any} */ e) => slugEq(String(e?.key || ''), key))
+    added: edits.added.some((/** @type {MutEntity} */ e) => (
+      slugEq(String(e?.key || ''), key)
+      && Boolean(e?.custom) === !catalogKey
+    ))
       ? edits.added
       : [...edits.added, { key, custom: !catalogKey }],
-    removed: edits.removed.filter((/** @type {any} */ k) => !slugEq(k, key)),
-    depleted: edits.depleted.filter((/** @type {any} */ k) => !slugEq(k, key)),
-  });
+    removed: edits.removed.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
+    removedNative: catalogKey
+      ? edits.removedNative.filter((/** @type {MutEntity} */ k) => !slugEq(k, key))
+      : edits.removedNative,
+    depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
+  }, nextCustomDepletionIds));
 }
 
 /**
  * REMOVE_RESOURCE — strike a resource node from the roster entirely (the
  * harsher cousin of DEPLETE_RESOURCE: nothing left to recover). Clears every
- * config surface that names it — nearbyResources, nearbyResourcesCustom, the
- * nearbyResourcesState entry, and nearbyResourcesDepleted — matching raw,
- * slugified, and de-slugged forms the way recoveredResource does.
+ * config surface that names it — flat/native/custom rosters, state, and
+ * depletion — matching raw, slugified, and de-slugged forms the way
+ * recoveredResource does.
  */
-function removeResource(/** @type {any} */ s, /** @type {any} */ event) {
+function removeResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
-  if (!nearby.some((/** @type {any} */ k) => keys.has(k))) return s;
+  if (!nearby.some((/** @type {MutEntity} */ k) => keys.has(k))) return vetoMutation('resource_not_found', labelFromTarget(raw));
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) delete state[k];
   // The roster forms actually struck — what the suppression list must name
   // so a regenerated roster (same key forms) drops them again.
-  const struckKeys = nearby.filter((/** @type {any} */ k) => keys.has(k));
-  const hitsStruck = (/** @type {any} */ k) => struckKeys.some((/** @type {any} */ sk) => slugEq(k, sk));
+  const struckKeys = nearby.filter((/** @type {MutEntity} */ k) => keys.has(k));
+  const hitsStruck = (/** @type {MutEntity} */ k) => struckKeys.some((/** @type {MutEntity} */ sk) => slugEq(k, sk));
+  const struckDefinitionIds = matchingResourceDefinitions(config, raw)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
-    nearbyResources: nearby.filter((/** @type {any} */ k) => !keys.has(k)),
-    nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter((/** @type {any} */ k) => !keys.has(k)),
+    nearbyResources: nearby.filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourcesNative: (config.nearbyResourcesNative || [])
+      .filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourcesNativeDepleted: nativeSemanticDepletedResourceKeys(config)
+      .filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
+    nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourceDefinitions: (
+      config.nearbyResourceDefinitions || []
+    ).filter(
+      (/** @type {MutEntity} */ definition) => !keys.has(definition?.name),
+    ),
+    nearbyResourceDefinitionsDepleted: (
+      config.nearbyResourceDefinitionsDepleted || []
+    ).filter(
+      (/** @type {MutEntity} */ definition) => !keys.has(definition?.name),
+    ),
     nearbyResourcesState: state,
-    nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter((/** @type {any} */ k) => !keys.has(k)),
-  }, {
+    nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+  }, withDepletedCustomDefinitionIds({
     ...edits,
-    added: edits.added.filter((/** @type {any} */ e) => !hitsStruck(String(e?.key || ''))),
-    removed: [...edits.removed, ...struckKeys.filter((/** @type {any} */ k) => !edits.removed.some((/** @type {any} */ r) => slugEq(r, k)))],
-    depleted: edits.depleted.filter((/** @type {any} */ k) => !hitsStruck(k)),
-    recovered: edits.recovered.filter((/** @type {any} */ k) => !hitsStruck(k)),
+    added: edits.added.filter((/** @type {MutEntity} */ e) => !hitsStruck(String(e?.key || ''))),
+    removed: [...edits.removed, ...struckKeys.filter((/** @type {MutEntity} */ k) => !edits.removed.some((/** @type {MutEntity} */ r) => slugEq(r, k)))],
+    removedNative: edits.removedNative.filter(
+      (/** @type {MutEntity} */ k) => !hitsStruck(k),
+    ),
+    depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
+    recovered: edits.recovered.filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
+  }, (edits.depletedCustomDefinitionIds || []).filter(
+    (/** @type {string} */ id) => !struckDefinitionIds.includes(id),
+  )));
+}
+
+// ── The generosity counterpart verbs (FP-G3 — the Counterpart Criterion) ────
+// FORCE_RELIEF / OFFER_CREDIT: the DM-forceable twins of the generosity engine's
+// grain instruments (docs/DESIGN_GENEROSITY_ENGINE.md §4). Settlement-scoped (the
+// composer's W1 scope law): the handler acts on the GIVER — the receiving neighbour
+// is a linked name, not a simulated object here, so the receiving-side reactions
+// (obligation mint, gratitude, maturity) belong to the world-pulse mover; the
+// annotation below is the synthetic-cause, DM-provenance record of the act.
+//
+// COUNTERPART FIDELITY (the kernel-header ledger): the handler runs the SAME
+// structural gate the organic mover runs (generosityGate.qualifiesForGenerosity —
+// the DM overrides the WILLINGNESS, never the law: no qualifying bond ⇒ veto), the
+// same hard reserve-floor law, and the same tenth-month grain flooring (a decree
+// that would move ZERO grain is a veto, not a phantom gift — the E1d zero-grain
+// class, closed on the mover's give path this same wave).
+
+// The hard reserve floor a DM-forced relief may never breach (months of stores).
+// MIRROR of STOCKPILE_TUNING.reserveTitheFloorMonths: that constant lives in the
+// LAZY worldPulse/foodStockpile.js (importing it here would drag the heavy food
+// machinery into first paint), so the value is mirrored with a PARITY PIN
+// (tests/domain/events/generosityVerbs.test.js) that fails if the source moves.
+const RELIEF_RESERVE_FLOOR_MONTHS = 1;
+
+// The DM-verb twins of GENEROSITY_MOVER_TUNING.LEGITIMACY_COST / LEGITIMACY_LIFT
+// (generosityKernel.js — lazy; mirrored under the same parity pin): shipping food
+// out of a town left lean costs the ruler legitimacy; a comfortable granary city
+// earns a small lift. Points on the 0..100 publicLegitimacy score.
+const RELIEF_LEGITIMACY_COST = 3;
+const RELIEF_LEGITIMACY_LIFT = 1;
+
+/** The same link match setNeighbourRelationship runs (name/neighbourName/id/linkId). */
+function findNeighbourLink(/** @type {MutEntity} */ s, /** @type {MutEntity} */ targetId) {
+  const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
+  return network.find((/** @type {MutEntity} */ link) =>
+    String(link?.name || '') === String(targetId)
+    || String(link?.neighbourName || '') === String(targetId)
+    || String(link?.id || '') === String(targetId)
+    || String(link?.linkId || '') === String(targetId)) || null;
+}
+
+/**
+ * The shared grain leg of both generosity verbs: gate, floor, and the conserved
+ * tenth-month debit. Returns a typed REFUSAL REASON ({ refuse, detail }) instead of
+ * the veto itself so each handler raises its own LITERAL vetoMutation('code') call —
+ * the predicate-parity walker source-scans for literal codes, and a code passed
+ * through a variable would be invisible to it (the walker's documented cannot-catch
+ * evasion; new gates MUST stay literal). On a clear gate: { mag, sent, nextMonths }.
+ * @param {MutEntity} s @param {MutEntity} event
+ * @returns {{ refuse: 'empty'|'not_linked'|'unqualified'|'nothing', detail?: string }
+ *         | { refuse?: undefined, detail?: undefined, mag: number, sent: number, nextMonths: number }}
+ */
+function grainLegOrRefusal(s, event) {
+  const targetId = event.targetId;
+  if (!targetId) return { refuse: 'empty' };
+  const link = findNeighbourLink(s, targetId);
+  if (!link) return { refuse: 'not_linked', detail: labelFromTarget(targetId) };
+  // THE §0.1 STRUCTURAL GATE, same function as the mover. The dossier layer reads
+  // the link's KIND (strength/trust live in campaign worldState, out of scope here):
+  // a decree can override reluctance, never the absence of a qualifying channel.
+  const kind = normalizeBondKind(link.relationshipType);
+  if (!qualifiesForGenerosity({ bond: { kind, strength01: 1 } })) {
+    return { refuse: 'unqualified', detail: labelFromTarget(targetId) };
+  }
+  const fs = s.economicState?.foodSecurity;
+  const months = Number(fs?.storageMonths);
+  const mag = sev01(event.payload?.magnitude, 0.5);
+  // Only grain ABOVE the reserve floor can move, floored to the tenth-month (the
+  // conserved-sink rounding discipline — computeSackFoodTransfer's Math.floor(x*10)/10).
+  const spareable = Number.isFinite(months) ? Math.max(0, months - RELIEF_RESERVE_FLOOR_MONTHS) : 0;
+  const sent = Math.floor(mag * spareable * 10) / 10;
+  if (sent <= 0) return { refuse: 'nothing', detail: labelFromTarget(targetId) };
+  const nextMonths = Math.round((months - sent) * 10) / 10;
+  return { mag, sent, nextMonths };
+}
+
+/** Write the granary debit + the dual-written annotation entry (the cutTradeRoute
+ *  discipline: config + _config in lockstep; every entry carries atEventId, so the
+ *  undo scrub reverts it by provenance). */
+function withGrainSent(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event, /** @type {string} */ ledgerKey, /** @type {MutEntity} */ leg) {
+  const fs = s.economicState.foodSecurity;
+  const next = {
+    ...s,
+    economicState: { ...s.economicState, foodSecurity: { ...fs, storageMonths: leg.nextMonths } },
+  };
+  const config = next.config || {};
+  const entries = Array.isArray(config[ledgerKey]) ? [...config[ledgerKey]] : [];
+  entries.push({
+    to: event.targetId,
+    monthsSent: leg.sent,
+    magnitude: leg.mag,
+    atEventId: event.id,
+    atTimestamp: eventTime(event),
   });
+  next.config = { ...config, [ledgerKey]: entries };
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, [ledgerKey]: entries };
+  }
+  return next;
+}
+
+/**
+ * FORCE_RELIEF — decree a GIFT of grain to a qualifying neighbour. The grain leaves
+ * the granary (above-floor only, tenth-month floored); the ruler's legitimacy moves
+ * the way the mover's §9 coupling moves it (lean town ⇒ a cost — political courage;
+ * comfortable town ⇒ a small "granary city" lift); the act is recorded on the
+ * dual-written config._forcedRelief annotation ledger (DM provenance, undo-scrubbed
+ * by atEventId).
+ */
+function forceRelief(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const leg = grainLegOrRefusal(s, event);
+  if (leg.refuse !== undefined) {
+    if (leg.refuse === 'empty') return vetoMutation('empty_target');
+    if (leg.refuse === 'not_linked') return vetoMutation('neighbour_not_linked', leg.detail);
+    if (leg.refuse === 'unqualified') return vetoMutation('relief_unqualified', leg.detail);
+    return vetoMutation('relief_nothing_to_send', leg.detail); // 'nothing'
+  }
+  // The success arm (asserted: the non-strict full config does not narrow the
+  // optional discriminant the guard above eliminates; the strict config does).
+  const grain = /** @type {{ mag: number, sent: number, nextMonths: number }} */ (leg);
+  let next = withGrainSent(s, event, '_forcedRelief', grain);
+  // The §9 legitimacy coupling, DM-verb twin (structured {score} only — the
+  // applyDivineMandate idiom; integer, clamped [0,100]; skipped when unreadable).
+  const ps = next.powerStructure || {};
+  const pl = ps.publicLegitimacy;
+  if (pl && typeof pl === 'object' && !Array.isArray(pl) && Number.isFinite(Number(pl.score))) {
+    const lean = grain.nextMonths < RELIEF_RESERVE_FLOOR_MONTHS * 1.5;
+    const delta = lean
+      ? -Math.max(1, Math.round(RELIEF_LEGITIMACY_COST * grain.mag))
+      : Math.round(RELIEF_LEGITIMACY_LIFT * grain.mag);
+    const nextScore = Math.round(Math.max(0, Math.min(100, Number(pl.score) + delta)));
+    if (nextScore !== Number(pl.score)) {
+      next = { ...next, powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } } };
+    }
+  }
+  return next;
+}
+
+/**
+ * OFFER_CREDIT — the same grain as a LOAN (design §3.4). Identical structural gate
+ * and grain leg; no legitimacy move (a loan is not charity — the E1d purchase
+ * precedent); recorded on the dual-written config._offeredCredit annotation ledger
+ * (DM provenance; the mover owns maturity/repayment/default).
+ */
+function offerCredit(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const leg = grainLegOrRefusal(s, event);
+  if (leg.refuse !== undefined) {
+    if (leg.refuse === 'empty') return vetoMutation('empty_target');
+    if (leg.refuse === 'not_linked') return vetoMutation('neighbour_not_linked', leg.detail);
+    if (leg.refuse === 'unqualified') return vetoMutation('credit_unqualified', leg.detail);
+    return vetoMutation('credit_nothing_to_lend', leg.detail); // 'nothing'
+  }
+  return withGrainSent(s, event, '_offeredCredit', leg);
 }
 
 export {
@@ -846,4 +1219,5 @@ export {
   refugeeWave, plague, raidOrMonsterAttack,
   applyStressor, changeRulingPower, resolveStressor,
   addTradeGood, removeTradeGood, addResource, removeResource,
+  forceRelief, offerCredit,
 };

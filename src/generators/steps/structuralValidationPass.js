@@ -8,7 +8,7 @@
  * step 5 — so the coherence receipt (structuralViolations / suggestions on
  * the dossier) described a roster that no longer existed: violations could
  * reference institutions subsumption had removed, and gaps filled by the
- * cascade/isolation passes were still reported as missing. This pass moves
+ * cascade/isolation passes were still reported as missing. Wave 4b moves
  * the validation after the last roster mutation (factionCorrelationPass) so
  * the receipt describes what the dossier actually lists.
  *
@@ -20,25 +20,24 @@ import { registerStep } from '../pipeline.js';
 import { checkStructuralValidity } from '../structuralValidator.js';
 
 registerStep('structuralValidationPass', {
-  deps: ['factionCorrelationPass'],
-  reads: ['effectiveConfig', 'institutions', 'magicLevel', 'threat', 'tier', 'townPlus', 'tradeRoute'], // ctx keys this step consumes that another step produces
+  // The validation itself reads institutions, but this dependency makes the
+  // finalization boundary explicit: no dossier-producing step can pass the
+  // final-roster gate while power still reflects the provisional economy.
+  deps: ['powerEconomyReconcilePass'],
+  reads: ['effectiveConfig', 'institutions', 'isolationSupport', 'magicLevel', 'threat', 'tier', 'townPlus', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['structural'],
   phase: 'institutions',
 }, (ctx) => {
   const { tier, tradeRoute, effectiveConfig, institutions } = ctx;
 
-  // By this point isolationPass has already set _magicTradeOnly on the
-  // effectiveConfig when teleport infrastructure was forced; the derived
-  // fallback is kept for headless/partial contexts.
-  const _preDerivedMagicTrade = ctx.townPlus && tradeRoute === 'isolated'
-    && effectiveConfig.magicExists !== false;
   const structural = checkStructuralValidity(institutions, {
+    ...effectiveConfig,
     tier, tradeRouteAccess: tradeRoute, magicLevel: ctx.magicLevel,
     monsterThreat: ctx.threat,
     priorityMilitary: effectiveConfig.priorityMilitary,
     priorityMagic: effectiveConfig.priorityMagic,
-    nearbyResources: effectiveConfig.nearbyResources,
-    _magicTradeOnly: effectiveConfig._magicTradeOnly || _preDerivedMagicTrade,
+    _magicTradeOnly: effectiveConfig._magicTradeOnly === true,
+    _isolationSupport: ctx.isolationSupport || effectiveConfig._isolationSupport,
   });
 
   return { structural };

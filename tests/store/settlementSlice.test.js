@@ -3,7 +3,7 @@
  * keep saved campaigns truthful across reloads.
  *
  * Why these tests exist (audit reconciliation, CRIT category):
- *   1. __saveSettlementLocal → hydrateFromSave must round-trip campaign state
+ *   1. saveSettlement → hydrateFromSave must round-trip campaign state
  *      (phase / eventLog / systemState / canonizedAt / locks) so opening
  *      a saved canon settlement actually shows that settlement's
  *      timeline, not whatever was last in the global slice.
@@ -25,11 +25,16 @@
  */
 
 import { describe, test, expect, beforeEach } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
-import { createPRNG } from '../../src/generators/prng.js';
+// The harness derives systemState on the REAL path (the same pure function every
+// store writer calls inside its own set()); the old `refreshSystemState` store
+// action existed only for harnesses and was retired with owner queue #21.
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 import {
   deriveGraphWithDiscoveredCandidates,
   setRegionalChannelStatus,
@@ -103,9 +108,8 @@ describe('settlementSlice — canonize lifecycle', () => {
     store.setState(s => {
       s.settlement = fixture();
       s.lastSeed = 'test-seed';
-      s.systemState = null;  // hydrate via refreshSystemState
+      s.systemState = deriveSystemState(s.settlement);
     });
-    store.getState().refreshSystemState();
   });
 
   test('phase defaults to draft on a fresh slice', () => {
@@ -140,8 +144,11 @@ describe('settlementSlice — applyEvent mutates entities', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 
@@ -186,31 +193,78 @@ describe('settlementSlice — applyEvent mutates entities', () => {
   });
 });
 
-describe('settlementSlice — applyPendingPreview integrity', () => {
+describe('settlementSlice — the staleness law + the veto refusal (Composer V2 §2/§5)', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 
-  test('preview then applyPendingPreview commits the SAME event id', () => {
+  // applyPendingPreview was RETIRED (the apply-prefers-pendingPreview bypass —
+  // W-COMPOSER-1): apply always commits the freshly-built form event; the
+  // preview↔commit identity holds via the staleness key + the compose-session
+  // id instead of via a stored-preview preference.
+  test('applyPendingPreview no longer exists on the store', () => {
+    expect(store.getState().applyPendingPreview).toBeUndefined();
+  });
+
+  test('previewEvent stamps the staleness key: payload hash × settlement reference', () => {
     const event = {
       id: 'preview-1', type: 'DAMAGE_INSTITUTION', targetId: 'institution.granary',
       payload: { severity: 0.8 }, cause: 'player_action',
     };
-    store.getState().previewEvent(event);
-    const logEntry = store.getState().applyPendingPreview();
-    expect(logEntry.event.id).toBe('preview-1');
-    expect(store.getState().eventLog[0].event.id).toBe('preview-1');
-    expect(store.getState().pendingPreview).toBeNull();
+    const before = store.getState().settlement;
+    const preview = store.getState().previewEvent(event);
+    expect(typeof preview._previewKey).toBe('string');
+    expect(preview._forSettlement).toBe(before);
+    // Same payload, different id ⇒ SAME key (the compose-session id is free to
+    // re-mint without voiding the pane)…
+    const again = store.getState().previewEvent({ ...event, id: 'preview-2' });
+    expect(again._previewKey).toBe(preview._previewKey);
+    // …but any payload divergence keys differently.
+    const edited = store.getState().previewEvent({ ...event, payload: { severity: 0.3 } });
+    expect(edited._previewKey).not.toBe(preview._previewKey);
+    // And an apply replaces the settlement object — the reference half of the
+    // key voids every open preview.
+    store.getState().applyEvent(event);
+    expect(store.getState().settlement).not.toBe(before);
   });
 
-  test('applyPendingPreview is a no-op when nothing is pending', () => {
-    const result = store.getState().applyPendingPreview();
-    expect(result).toBeNull();
-    expect(store.getState().eventLog).toEqual([]);
+  test('a vetoed apply REFUSES: no eventLog entry, no settlement change, ok:false envelope', () => {
+    const before = store.getState().settlement;
+    const result = store.getState().applyEvent({
+      id: 'veto-1', type: 'CHANGE_RULING_POWER', targetId: 'The Invisible Cabal',
+      payload: { cause: 'coup' }, cause: 'player_action',
+    });
+    expect(result.ok).toBe(false);
+    // The fixture seats no governing faction, so transferRulingPower's FIRST
+    // gate fires; either power_* code is a refusal — the exact one is the
+    // domain's own error, passed through verbatim.
+    expect(result.veto.code).toBe('power_no_governing_faction');
+    expect(typeof result.veto.message).toBe('string');
+    expect(store.getState().eventLog).toEqual([]);          // NO phantom timeline entry
+    expect(store.getState().settlement).toBe(before);       // nothing committed
+    expect(store.getState().pendingPreview).toBeNull();     // the pane cleared
+  });
+
+  test('a DYNAMIC mid-batch veto (validateBatch cannot pre-catch it) surfaces as a refusal; the rest land', () => {
+    // Both events pass reference validation; the SECOND vetoes at apply time
+    // because the first already added the good (trade_good_already_present).
+    const result = store.getState().applyEventBatch([
+      { id: 'b-ok', type: 'ADD_TRADE_GOOD', targetId: 'Silk', payload: { direction: 'export', label: 'Silk' }, cause: 'player_action' },
+      { id: 'b-veto', type: 'ADD_TRADE_GOOD', targetId: 'Silk', payload: { direction: 'export', label: 'Silk' }, cause: 'player_action' },
+    ]);
+    expect(result.ok).toBe(true);
+    expect(result.logEntries).toHaveLength(1);
+    expect(result.warnings).toHaveLength(1);
+    expect(result.warnings[0].code).toBe('trade_good_already_present');
+    expect(store.getState().eventLog).toHaveLength(1);
+    expect(store.getState().eventLog[0].event.id).toBe('b-ok');
   });
 });
 
@@ -218,8 +272,11 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 
@@ -247,30 +304,14 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   });
 });
 
-describe('settlementSlice — __saveSettlementLocal (test-private path) persists campaignState', () => {
-  let store;
-  beforeEach(() => {
-    store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
-  });
-
-  test('a saved canonized settlement carries phase, eventLog, canonizedAt in campaignState', () => {
-    store.getState().canonize();
-    store.getState().applyEvent({
-      id: 'save-test-1', type: 'IMPAIR_INSTITUTION', targetId: 'institution.temple',
-      payload: { dimension: 'legitimacy', severity: 0.5 }, cause: 'player_action',
-    });
-    store.getState().__saveSettlementLocal(store.getState().settlement);
-
-    const [save] = store.getState().savedSettlements;
-    expect(save.campaignState).toBeTruthy();
-    expect(save.campaignState.phase).toBe('canon');
-    expect(save.campaignState.eventLog).toHaveLength(1);
-    expect(save.campaignState.canonizedAt).toBeTruthy();
-    expect(save.campaignState.systemState).toBeTruthy();
-  });
-});
+// NOTE (F34): the 'saveSettlement persists campaignState' describe block was
+// removed with the dead saveSettlement store action (no real save path called
+// it — SaveToLibraryButton + the SAVE_SETTLEMENT auth intent hit
+// savesService.save() directly). campaignState round-trip fidelity is still
+// covered by the hydrateFromSave + active-save-integration blocks below, which
+// exercise the pickleCampaignState → campaignState path used by the live save
+// service. The revived first_save/third_save funnel is pinned in
+// tests/store/saveMoments.test.js.
 
 describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
   let store;
@@ -317,6 +358,188 @@ describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
     expect(s.phase).toBe('draft');
     expect(s.eventLog).toEqual([]);
     expect(s.systemState).toBeTruthy();  // re-derived from settlement
+  });
+
+  test('hydrateFromSave clears session-only state so save A does not leak into save B', () => {
+    // Pre-seed the slice as if the user had been working on save A: a queued
+    // rename, a bumped edit clock, a pending successor prompt, and a draft
+    // timeline. Opening a DIFFERENT save must not inherit any of it, or a
+    // rename queued on A could commit against B (cross-identity mutation).
+    store.setState(s => {
+      s.activeSaveId = 'save-A';
+      s.pendingEditsQueue = [{ id: 'edit-1', kind: 'rename-npc', payload: { npcIndex: 0, newName: 'Renamed' } }];
+      s.pendingEditsClock = 7;
+      s.pendingSuccession = { outgoingNpcId: 'npc-1', outgoingNpcName: 'Old Chief' };
+      s.draftVersionHistory = [{ id: 'snap-A', kind: 'manual', label: 'A checkpoint', settlement: { name: 'Save A' } }];
+    });
+
+    store.getState().hydrateFromSave({ id: 'save-B', settlement: fixture(), seed: 'seed-B' });
+
+    const s = store.getState();
+    expect(s.activeSaveId).toBe('save-B');
+    expect(s.pendingEditsQueue).toEqual([]);
+    expect(s.pendingEditsClock).toBe(0);
+    expect(s.pendingSuccession).toBeNull();
+    expect(s.draftVersionHistory).toEqual([]);
+  });
+});
+
+describe('settlementSlice — resetSettlementIdentity chokepoint (state-lifecycle-3 / store-5 / components-dossier-5)', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); });
+
+  // Seed the slice as if the user had been working on a CANON save A carrying the full
+  // session residue + a live pipeline rail.
+  const seedResidueAsCanonA = () => {
+    store.setState(s => {
+      s.settlement = fixture({ name: 'Town A' });
+      s.activeSaveId = 'save-A';
+      s.phase = 'canon';
+      s.canonizedAt = '2026-02-01T00:00:00.000Z';
+      s.eventLog = [{ event: { id: 'evt-A' } }];
+      s.locks = { name: true };
+      s.systemState = { resilience: { value: 11 } };
+      s.pendingEditsQueue = [{ id: 'e', kind: 'rename-npc', payload: { npcIndex: 0, newName: 'X' } }];
+      s.pendingEditsClock = 5;
+      s.pendingSuccession = { outgoingNpcId: 'npc-1' };
+      s.draftVersionHistory = [{ id: 'snap-A', kind: 'manual', label: 'A', settlement: { name: 'A' } }];
+      s.pipelineHistory = [{ id: 'assembleInstitutions', ts: 1, summary: 'A run' }];
+      s.pipelineRevealActive = true;
+      s.lastRegenerationDelta = { changed: ['npcs'] };
+      s.generationId = 'gen-A';
+    });
+  };
+
+  const expectNoResidue = (s) => {
+    expect(s.pendingEditsQueue).toEqual([]);
+    expect(s.pendingEditsClock).toBe(0);
+    expect(s.pendingSuccession).toBeNull();
+    expect(s.draftVersionHistory).toEqual([]);
+    // components-dossier-5: the rail must not render A's receipts against the new town.
+    expect(s.pipelineHistory).toEqual([]);
+    expect(s.pipelineRevealActive).toBe(false);
+    expect(s.lastRegenerationDelta).toBeNull();
+    expect(s.generationId).toBeNull();
+  };
+
+  test('setSettlement clears residue AND resets the lifecycle to a fresh draft (store-5)', () => {
+    seedResidueAsCanonA();
+    store.getState().setSettlement(fixture({ name: 'Town B' }));
+    const s = store.getState();
+    expect(s.settlement.name).toBe('Town B');
+    expect(s.activeSaveId).toBeNull();
+    // Lifecycle reset — no canon-A residue (else renames silently no-op under canon).
+    expect(s.phase).toBe('draft');
+    expect(s.eventLog).toEqual([]);
+    expect(s.locks).toEqual({});
+    expect(s.canonizedAt).toBeNull();
+    // systemState re-derived from the NEW settlement, not the stale 11.
+    expect(s.systemState).toBeTruthy();
+    expect(s.systemState).not.toEqual({ resilience: { value: 11 } });
+    expectNoResidue(s);
+  });
+
+  test('clearSettlement wipes the view + all residue', () => {
+    seedResidueAsCanonA();
+    store.getState().clearSettlement();
+    const s = store.getState();
+    expect(s.settlement).toBeNull();
+    expect(s.activeSaveId).toBeNull();
+    expect(s.phase).toBe('draft');
+    expect(s.eventLog).toEqual([]);
+    expect(s.canonizedAt).toBeNull();
+    expect(s.systemState).toBeNull();
+    expectNoResidue(s);
+  });
+
+  test('hydrateFromSave also clears the pipeline rail + regen delta (components-dossier-5)', () => {
+    seedResidueAsCanonA();
+    store.getState().hydrateFromSave({ id: 'save-B', settlement: fixture({ name: 'Town B' }), seed: 'b' });
+    expectNoResidue(store.getState());
+  });
+});
+
+describe('settlementSlice — resetSettlementIdentity is the single writer (structural prevention)', () => {
+  // The chokepoint's DEFINITION and its CALL SITES no longer live in one file:
+  // THE DECOMPOSITION WAVE (lane D) moved the definition to
+  // settlementLifecycleHelpers.js while the four callers stayed on the slice.
+  // So this pin reads a MODULE SET for the definition and the slice for the
+  // callers. Anchoring the definition search on a single filename would have
+  // gone VACUOUS on that relocation — the regex would match zero times and the
+  // "exactly one definition" claim would silently become "none, and nobody
+  // noticed". The set is asserted non-empty below for the same reason.
+  const readStore = (f) => readFileSync(new URL(`../../src/store/${f}`, import.meta.url), 'utf8');
+  const DEFINING_MODULES = ['settlementSlice.js', 'settlementLifecycleHelpers.js'];
+  const sources = DEFINING_MODULES.map(readStore);
+  const src = readStore('settlementSlice.js');            // the CALL-SITE surface
+  const defSrc = sources.find((t) => t.includes('function resetSettlementIdentity')) || '';
+
+  test('the chokepoint resets the FULL residue field list', () => {
+    const from = defSrc.indexOf('function resetSettlementIdentity');
+    expect(from, 'no module in the set defines resetSettlementIdentity').toBeGreaterThanOrEqual(0);
+    const rest = defSrc.slice(from);
+    // Bound the body at the next top-level declaration, or EOF when it is last.
+    const nextDecl = rest.slice(1).search(/\nexport (?:const|function) /);
+    const body = nextDecl === -1 ? rest : rest.slice(0, nextDecl + 1);
+    for (const field of [
+      'pendingEditsQueue', 'pendingEditsClock', 'pendingSuccession', 'draftVersionHistory',
+      'generationId', 'pipelineHistory', 'pipelineRevealActive', 'lastRegenerationDelta', 'pendingPreview',
+    ]) {
+      expect(body).toMatch(new RegExp(`state\\.${field}\\s*=`));
+    }
+  });
+
+  test('exactly ONE definition and FOUR call sites — every identity swap routes through it', () => {
+    // A new load path that hand-maintains its own inline reset list (the leak habitat)
+    // would NOT bump this count; a new path that correctly routes through the chokepoint
+    // makes it 5 and trips this pin, forcing a deliberate update. Hydration is
+    // the one call allowed to preserve save-owned pending work across navigation.
+    const defCount = sources.reduce(
+      (n, t) => n + ((t.match(/function resetSettlementIdentity/g) || []).length), 0,
+    );
+    expect(defCount, 'exactly one module in the set may define the chokepoint').toBe(1);
+    const calls = src.match(
+      /resetSettlementIdentity\(state(?:,\s*\{\s*preservePendingEdits:\s*true\s*\})?\);/g,
+    ) || [];
+    expect(calls).toHaveLength(4);
+  });
+});
+
+describe('settlementSlice — regenSection lifecycle (state-lifecycle-4)', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); });
+
+  test('is a NO-OP on a CANON settlement (identity lock — matches renameNPC/renameFaction)', async () => {
+    store.setState(s => {
+      s.settlement = fixture({ name: 'Canon Town' });
+      s.phase = 'canon';
+    });
+    const before = JSON.stringify(store.getState().settlement);
+    await store.getState().regenSection('npcs');
+    // Canon freezes the roster identity — the reroll never ran (a canon reroll would
+    // silently invalidate campaign canon with no event-log entry).
+    expect(JSON.stringify(store.getState().settlement)).toBe(before);
+    expect(store.getState().lastRegenerationDelta).toBeNull();
+  });
+
+  test('a DRAFT reroll with an active save PERSISTS to that save (no ghost on reload)', async () => {
+    // A real generation so regenNPCsPipeline has a valid roster to reroll.
+    const gen = await store.getState().generateSettlement('fixed-seed');
+    expect(gen).toBeTruthy();
+    // Simulate a save hydrated into the live editor: draft phase + activeSaveId + entry.
+    store.setState(s => {
+      s.activeSaveId = 'save-D';
+      s.phase = 'draft';
+      s.savedSettlements = [{ id: 'save-D', settlement: s.settlement, campaignState: { phase: 'draft', eventLog: [] } }];
+    });
+    await store.getState().regenSection('npcs');
+    const s = store.getState();
+    // The reroll was written to the SAVE entry (settlement + campaignState) — previously
+    // it lived only in memory and ghosted on reload.
+    expect(s.savedSettlements[0].settlement).toEqual(s.settlement);
+    expect(s.savedSettlements[0].campaignState).toBeTruthy();
+    expect(s.savedSettlements[0].campaignState.systemState).toBeTruthy();
+    expect(typeof s.editedAt).toBe('string');
   });
 });
 
@@ -425,150 +648,34 @@ describe('settlementSlice — renameFaction (canonical powerStructure path)', ()
     store.setState(s => { s.settlement = fixture(); });
   });
 
-  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', () => {
+  // AWAITED: renameFaction fetches domain/factionRename.js at the call seam to
+  // keep the cascade off first paint, so the action returns a promise.
+  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', async () => {
     // The fixture has factions on powerStructure.factions and no top-level
     // settlement.factions — the exact shape the old code could not rename.
-    store.getState().renameFaction(0, 'High Council');
+    await store.getState().renameFaction(0, 'High Council');
     const factions = store.getState().settlement.powerStructure.factions;
     expect(factions[0].name).toBe('High Council');
     expect(factions[1].name).toBe('Merchants'); // sibling untouched
   });
 
-  test('keeps .faction and .name in sync when the record labels on .faction', () => {
+  test('keeps .faction and .name in sync when the record labels on .faction', async () => {
     store.setState(s => {
       s.settlement.powerStructure.factions = [{ id: 'f1', faction: 'Old Guild', name: 'Old Guild' }];
     });
-    store.getState().renameFaction(0, 'New Guild');
+    await store.getState().renameFaction(0, 'New Guild');
     const f = store.getState().settlement.powerStructure.factions[0];
     expect(f.faction).toBe('New Guild');
     expect(f.name).toBe('New Guild');
   });
 
-  test('out-of-range index is a safe no-op', () => {
-    expect(() => store.getState().renameFaction(99, 'X')).not.toThrow();
+  test('out-of-range index is a safe no-op', async () => {
+    // `.not.toThrow()` around an ASYNC action is vacuous — an async function
+    // returns a rejected promise instead of throwing in the caller's frame, so
+    // the old shape would have passed even if the writer blew up. Assert the
+    // promise RESOLVES, and resolves to the idle envelope.
+    await expect(store.getState().renameFaction(99, 'X'))
+      .resolves.toMatchObject({ changed: false });
     expect(store.getState().settlement.powerStructure.factions[0].name).toBe('Council');
-  });
-});
-
-// canonizeSavedSettlement is the library-row affordance: canonize a draft save
-// BY ID without first loading it as the active settlement. It must match the
-// dossier canonize() semantics (phase→canon, eventLog reset, canonizedAt stamp)
-// and keep the live slice in sync only when the save is the active one.
-describe('settlementSlice — canonizeSavedSettlement (library row)', () => {
-  let store;
-  const draftSave = (id) => ({
-    id,
-    name: `Save ${id}`,
-    settlement: fixture(),
-    campaignState: { phase: 'draft', eventLog: [{ id: 'draft.1', type: 'NOTE', timestamp: 't' }] },
-    timestamp: '2026-01-01T00:00:00.000Z',
-  });
-
-  beforeEach(() => {
-    store = makeStore();
-    store.setState(s => { s.savedSettlements = [draftSave('save-1'), draftSave('save-2')]; });
-  });
-
-  test('promotes a draft save to canon: phase, canonizedAt, cleared timeline', () => {
-    const ok = store.getState().canonizeSavedSettlement('save-1');
-    expect(ok).toBe(true);
-    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
-    expect(save.campaignState.phase).toBe('canon');
-    expect(typeof save.campaignState.canonizedAt).toBe('string');
-    expect(save.campaignState.eventLog).toEqual([]);
-    expect(typeof save.campaignState.editedAt).toBe('string');
-    // the sibling draft is untouched
-    expect(store.getState().savedSettlements.find(s => s.id === 'save-2').campaignState.phase).toBe('draft');
-  });
-
-  test('is a no-op (returns false) on an already-canon save', () => {
-    store.getState().canonizeSavedSettlement('save-1');
-    const at = store.getState().savedSettlements.find(s => s.id === 'save-1').campaignState.canonizedAt;
-    expect(store.getState().canonizeSavedSettlement('save-1')).toBe(false);
-    expect(store.getState().savedSettlements.find(s => s.id === 'save-1').campaignState.canonizedAt).toBe(at);
-  });
-
-  test('returns false for a missing id', () => {
-    expect(store.getState().canonizeSavedSettlement('does-not-exist')).toBe(false);
-  });
-
-  test('mirrors to the live slice when the canonized save is the active one', () => {
-    store.setState(s => { s.activeSaveId = 'save-1'; s.settlement = fixture(); s.phase = 'draft'; s.eventLog = [{ id: 'x' }]; });
-    store.getState().canonizeSavedSettlement('save-1');
-    const s = store.getState();
-    expect(s.phase).toBe('canon');
-    expect(s.eventLog).toEqual([]);
-    expect(typeof s.canonizedAt).toBe('string');
-  });
-
-  test('does NOT touch the live slice when a non-active save is canonized', () => {
-    store.setState(s => { s.activeSaveId = 'save-2'; s.phase = 'draft'; });
-    store.getState().canonizeSavedSettlement('save-1');
-    expect(store.getState().phase).toBe('draft'); // active save-2 unaffected
-  });
-});
-
-describe('settlementSlice — renameSettlement', () => {
-  let store;
-  const makeSave = (id, phase) => ({
-    id,
-    name: `Save ${id}`,
-    settlement: fixture({ name: 'Oldford' }),
-    campaignState: { phase, eventLog: [] },
-    timestamp: '2026-01-01T00:00:00.000Z',
-  });
-
-  beforeEach(() => {
-    store = makeStore();
-  });
-
-  test('pre-canon: edits the name in place and records NO timeline entry', () => {
-    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'draft')]; });
-    const recorded = store.getState().renameSettlement('save-1', 'Newford');
-    expect(recorded).toBe(false);
-    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
-    expect(save.name).toBe('Newford');
-    expect(save.settlement.name).toBe('Newford');
-    // No flavor entry appended in draft.
-    expect(save.campaignState.eventLog).toEqual([]);
-  });
-
-  test('post-canon: edits the name AND records a flavor RENAME_SETTLEMENT entry', () => {
-    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'canon')]; });
-    const recorded = store.getState().renameSettlement('save-1', 'Newford');
-    expect(recorded).toBe(true);
-    const save = store.getState().savedSettlements.find(s => s.id === 'save-1');
-    expect(save.name).toBe('Newford');
-    expect(save.settlement.name).toBe('Newford');
-    // Exactly one recorded flavor entry, naming both old and new identity.
-    expect(save.campaignState.eventLog).toHaveLength(1);
-    const entry = save.campaignState.eventLog[0];
-    expect(entry.type).toBe('RENAME_SETTLEMENT');
-    expect(entry.targetId).toBe('Oldford');
-    expect(entry.narrativeSummary).toBe('Oldford is now known as Newford.');
-    // Flavor only: no afterState / systemState delta on the entry.
-    expect(entry.afterState).toBeUndefined();
-  });
-
-  test('mirrors the rename + canon flavor entry onto the live slice when active', () => {
-    store.setState(s => {
-      s.savedSettlements = [makeSave('save-1', 'canon')];
-      s.activeSaveId = 'save-1';
-      s.settlement = fixture({ name: 'Oldford' });
-      s.phase = 'canon';
-      s.eventLog = [];
-    });
-    store.getState().renameSettlement('save-1', 'Newford');
-    const s = store.getState();
-    expect(s.settlement.name).toBe('Newford');
-    expect(s.eventLog).toHaveLength(1);
-    expect(s.eventLog[0].type).toBe('RENAME_SETTLEMENT');
-  });
-
-  test('is a no-op for an empty name or an unchanged name', () => {
-    store.setState(s => { s.savedSettlements = [makeSave('save-1', 'canon')]; });
-    expect(store.getState().renameSettlement('save-1', '   ')).toBe(false);
-    expect(store.getState().renameSettlement('save-1', 'Oldford')).toBe(false);
-    expect(store.getState().savedSettlements[0].campaignState.eventLog).toEqual([]);
   });
 });

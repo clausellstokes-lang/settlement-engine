@@ -336,3 +336,40 @@ Deno.test('an unexpected throw returns a GENERIC 500 — internal error text is 
   assertEquals(body.error, 'Recovery request failed');
   assertEquals(JSON.stringify(body).includes('recovery_rate_limits'), false);
 });
+
+// ── Transfer lock (160, §6.3, M-6e): question-based recovery is PAUSED during a
+// live founder-transfer case, fail CLOSED. ─────────────────────────────────────
+Deno.test('lookup is REFUSED (403 transfer_lock) during a live transfer; pick_recovery_question never runs', async () => {
+  const stub = makeAdminClient({
+    consume_recovery_rate_limit: ALLOW,
+    recovery_is_locked: { data: false },
+    email_has_active_transfer_lock: { data: true },
+  });
+  const res = await handleAuthRecovery(req({ action: 'lookup', email: 'u@x.com' }), { adminClient: stub.adminClient });
+  assertEquals(res.status, 403);
+  assertEquals((await res.json()).error, 'transfer_lock');
+  assertEquals(ranRpc(stub.rpc, 'pick_recovery_question'), false);
+});
+
+Deno.test('verify is REFUSED (403 transfer_lock) during a live transfer; verify_recovery_answer never runs', async () => {
+  const stub = makeAdminClient({
+    consume_recovery_rate_limit: ALLOW,
+    recovery_is_locked: { data: false },
+    email_has_active_transfer_lock: { data: true },
+  });
+  const res = await handleAuthRecovery(req({ action: 'verify', email: 'u@x.com', slot: 1, answer: 'a' }), { adminClient: stub.adminClient });
+  assertEquals(res.status, 403);
+  assertEquals((await res.json()).error, 'transfer_lock');
+  assertEquals(ranRpc(stub.rpc, 'verify_recovery_answer'), false);
+});
+
+Deno.test('the transfer-lock read FAILS CLOSED: a lock-read error still refuses recovery', async () => {
+  const stub = makeAdminClient({
+    consume_recovery_rate_limit: ALLOW,
+    recovery_is_locked: { data: false },
+    email_has_active_transfer_lock: { error: { message: 'transient' } },
+  });
+  const res = await handleAuthRecovery(req({ action: 'lookup', email: 'u@x.com' }), { adminClient: stub.adminClient });
+  assertEquals(res.status, 403);
+  assertEquals((await res.json()).error, 'transfer_lock');
+});

@@ -3,15 +3,26 @@
 // Pure function: given a base chance, applies priority/resource/config multipliers.
 
 import {TIER_ORDER} from '../data/constants.js';
+import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {ECONOMY_MODE_MARKET_MULT} from './neighbourGenerator.js';
+import {
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { cultureInstitutionMultiplier } from '../domain/cultureProfiles.js';
+import { isArcaneInstitution } from '../domain/arcaneInstitutionIdentity.js';
 
-// NOTE: the former getPriorityModifiers() goods-toggle penalty was dead code.
-// It keyed off `good.institutionKeywords` on GOODS_MODIFIERS_BY_TIER entries, but
-// NO good in the catalog defines that field — so it always produced an empty
-// penalty map and toggling a good never affected institution probability. Removed
-// along with the now-unused GOODS_MODIFIERS_BY_TIER import. The trailing
-// goodsToggles parameter is retained (positional) so existing call sites that
-// still pass it keep working unchanged.
+const getPriorityModifiers = (tier, goodsToggles = {}) => {
+  const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
+  const penalties = {};
+  Object.entries(tierGoods).forEach(([goodName, good]) => {
+    if (goodsToggles[`${tier}_good_${goodName}`] === false && good.institutionKeywords) {
+      good.institutionKeywords.forEach(keyword => {
+        penalties[keyword] = (penalties[keyword] || 1) * 0.35;
+      });
+    }
+  });
+  return penalties;
+};
 
 export const getBaseChance = (
   baseChance,
@@ -19,7 +30,7 @@ export const getBaseChance = (
   name,
   config,
   neighbor,
-  _goodsToggles = {},
+  goodsToggles = {},
 ) => {
   const cat  = category.toLowerCase();
   const inst = name.toLowerCase();
@@ -91,7 +102,8 @@ export const getBaseChance = (
                         inst.includes('elder grove');
     if (isDruidInst) {
       const route = config.tradeRouteAccess || 'road';
-      const hasMagicalNode = (config.nearbyResources || []).includes('magical_node');
+      const hasMagicalNode = nativeSemanticResourceKeys(config)
+        .includes('magical_node');
       const routeBoost = { isolated: 1.8, road: 1.4, river: 1.5, crossroads: 0.9, port: 0.8 }[route] ?? 1.0;
       const nodeBoost = hasMagicalNode ? 1.5 : 1.0;
       chance *= routeBoost * nodeBoost;
@@ -221,7 +233,7 @@ export const getBaseChance = (
         chance *= 0.4;
       }
 
-      // Join repair: this branch used to read dyn.defense/
+      // H13/H14 join repair (R3): this branch used to read dyn.defense/
       // dyn.market/dyn.craft/dyn.criminal/dyn.espionage/dyn.government —
       // keys REL_DYNAMICS never defined — so every relationship type
       // multiplied by the same 1.0 and the picker's promised effect was a
@@ -259,9 +271,37 @@ export const getBaseChance = (
     }
   }
 
-  // (Goods-toggle penalties removed — see note at top of file: the feature's
-  //  backing data, GOODS_MODIFIERS_BY_TIER[*].institutionKeywords, never existed,
-  //  so the penalty path was inert.)
+  // ── Goods-toggle penalties ────────────────────────────────────────────────
+  const modifiers = getPriorityModifiers(
+    resolvedTier || 'town',
+    goodsToggles
+  );
+  Object.entries(modifiers).forEach(([keyword, multiplier]) => {
+    if (inst.includes(keyword)) chance *= multiplier;
+  });
+
+  // Culture is a bounded probability influence, never an eligibility rule.
+  // This is the mechanical half of the cultural-identity contract: a profile
+  // can make locally characteristic institutions somewhat more common, while
+  // tier, world law, route, resources, and explicit toggles still decide what
+  // is possible. The helper clamps even stacked matches to a narrow band.
+  chance *= cultureInstitutionMultiplier(config.culture, category, name);
+
+  // ── MG-3h / L11 — THE DIRECT WORLD-FACT GATE ─────────────────────────────
+  // Every magic suppression above is INDIRECT: it rides `config.priorityMagic`, which
+  // resolveConfig zeroes when magic does not exist (resolveConfig.js:79). That holds only
+  // for a RESOLVED config. A caller handing this function the RAW config keeps the dial's
+  // 50 default, and an arcane institution then survives a dead-magic world at full
+  // probability — the leak the register recorded. `magicExists:false` is a hard world
+  // fact, so it gates directly and last, after every multiplier.
+  //
+  // Arcane-ness is read from the canonical detector (R-BLD-5): the catalog's authored tag
+  // where a catalog identity exists, magicFilter's keyword vocabulary as the fallback.
+  // On the resolved path this line changes NOTHING — the dial is already 0 there and the
+  // chance is already 0 — which is why no same-seed generation golden moves.
+  if (config.magicExists === false && isArcaneInstitution(name, category)) {
+    return 0;
+  }
 
   return Math.min(Math.max(chance, 0), 1);
 };

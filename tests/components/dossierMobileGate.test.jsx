@@ -92,7 +92,7 @@ describe('PendingChangesBar — mobile write-action gate', () => {
     render(<PendingChangesBar />);
 
     expect(screen.getByRole('button', { name: /commit/i })).toBeTruthy();
-    expect(screen.getByRole('button', { name: /revert/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /discard/i })).toBeTruthy();
     expect(screen.getByRole('button', { name: /preview cascade/i })).toBeTruthy();
     expect(screen.queryByText(/larger screen/i)).toBeNull();
   });
@@ -114,6 +114,26 @@ describe('DefenseTab — mobile threat-row reflow', () => {
     return container.querySelector('div[style*="padding: 8px 12px"]');
   }
 
+  /**
+   * The threat label span, found by its ROLE IN THE LAYOUT rather than by index.
+   *
+   * These two tests used `row.children[1]`, which silently encoded an assumption
+   * that an icon span sat at index 0. The owner's icon sweep (2026-08-03) removed
+   * that icon — buildThreatAssessment's rows had carried a dead `icon: ''` slot
+   * since an earlier emoji strip, and DefenseTab rendered it as an empty span
+   * that still consumed the row's flex gap — and the label shifted to index 0,
+   * turning both pins red for a reason unrelated to the reflow they exist to test.
+   *
+   * They test RESPONSIVE REFLOW, so the label is now located by the property that
+   * actually identifies it (the first span carrying the reflow styling), and the
+   * pins survive any future change to what else shares the row.
+   */
+  function threatLabel(row) {
+    return [...row.children].find(
+      (el) => el.tagName === 'SPAN' && (el.style.width === '130px' || el.style.flex.includes('1 1 auto')),
+    );
+  }
+
   test('mobile: the threat row wraps and the label flexes (no fixed width)', async () => {
     installMatchMedia(true);
     const DefenseTab = await loadDefenseTab();
@@ -122,7 +142,8 @@ describe('DefenseTab — mobile threat-row reflow', () => {
     expect(row).toBeTruthy();
     expect(row.style.flexWrap).toBe('wrap');
     // The label span flexes instead of holding a fixed 130px slot.
-    const label = row.children[1];
+    const label = threatLabel(row);
+    expect(label, 'the threat label span must be present').toBeTruthy();
     expect(label.style.width).toBe('');
     expect(label.style.flex).toContain('1 1 auto');
   });
@@ -134,7 +155,8 @@ describe('DefenseTab — mobile threat-row reflow', () => {
     const row = threatRow(container);
     expect(row).toBeTruthy();
     expect(row.style.flexWrap).toBe('');
-    const label = row.children[1];
+    const label = threatLabel(row);
+    expect(label, 'the threat label span must be present').toBeTruthy();
     expect(label.style.width).toBe('130px');
   });
 });

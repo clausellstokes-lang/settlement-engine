@@ -15,10 +15,9 @@
  * result, so there's nothing here to spoof or replay.
  */
 import { useEffect } from 'react';
-import { Loader } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { navigate, navigatePath } from '../../hooks/useRoute.js';
-import { GOLD, SECOND, FS, SP } from '../theme.js';
+import { SECOND, FS, SP } from '../theme.js';
 import { AuthPageShell, Button, Alert } from './authUI.jsx';
 import { t } from '../../copy/index.js';
 
@@ -41,7 +40,6 @@ export default function VerifyEmailPage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
         {authLoading ? (
           <>
-            <Loader size={40} color={GOLD} style={{ margin: '0 auto' }} />
             <p
               role="status"
               aria-live="polite"

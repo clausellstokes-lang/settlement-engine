@@ -1,4 +1,4 @@
-import { Check, CheckCheck, CircleSlash, FastForward, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import Button from '../primitives/Button.jsx';
@@ -32,6 +32,17 @@ export default function RegionalGraphSummary({
   onApplyAllImpacts,
   onIgnoreAllImpacts,
 }) {
+  // Discover is a TRUE TOGGLE (owner order 2026-07-22): the discovered-
+  // suggestions section opens on the first press and closes on the next.
+  // Default-open when the persisted graph already carries suggested channels so
+  // a reload never hides candidates the DM discovered in an earlier session.
+  // The lazy initializer reads the graph once and tolerates a null campaign —
+  // the guard below has not run yet, so this hook stays unconditional (Rules of
+  // Hooks): it must sit ABOVE the early return.
+  const [suggestionsOpen, setSuggestionsOpen] = useState(
+    () => ensureRegionalGraph(campaign?.regionalGraph).channels.some(c => c.status === 'suggested'),
+  );
+
   if (!campaign || settlementCount < 2) return null;
 
   const graph = ensureRegionalGraph(campaign.regionalGraph);
@@ -63,9 +74,19 @@ export default function RegionalGraphSummary({
       padding: '9px 12px',
       background: CARD,
     }}>
+      {/* Glance sentence — one plain truth, composed from the SAME channel /
+          impact counts below (legibility wave, 2026-07-22). "Regional graph" was a
+          builder term with no user definition; the door is now "Between Your
+          Towns" and the raw five-count stat is demoted to the secondary line. */}
+      <div style={{ fontSize: FS.xs, color: INK, fontWeight: 700, fontFamily: sans, marginBottom: 4 }}>
+        {confirmed.length === 0
+          ? 'No trade routes link your towns yet.'
+          : `${confirmed.length} trade route${confirmed.length === 1 ? '' : 's'} link your towns.`}
+        {availableImpacts.length > 0 && ` ${availableImpacts.length} change${availableImpacts.length === 1 ? '' : 's'} ready to apply.`}
+      </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
         <span style={{ fontSize: FS.xs, color: INK, fontWeight: 800, fontFamily: sans }}>
-          Regional graph
+          Between Your Towns
         </span>
         <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>
           {confirmed.length} confirmed · {suggested.length} suggested · {availableImpacts.length}/{queuedImpacts.length} ready · {appliedImpacts.length} applied · {resolvedImpacts.length} resolved
@@ -73,7 +94,7 @@ export default function RegionalGraphSummary({
         {availableImpacts.length > 1 && (
           <>
             <IconButton
-              Icon={CheckCheck}
+              glyph="✓✓"
               label="Apply all queued regional impacts"
               onClick={() => onApplyAllImpacts?.(campaign.id)}
               tone="primary"
@@ -81,7 +102,7 @@ export default function RegionalGraphSummary({
               style={{ marginLeft: 'auto' }}
             />
             <IconButton
-              Icon={CircleSlash}
+              glyph="⊘"
               label="Ignore all queued regional impacts"
               onClick={() => onIgnoreAllImpacts?.(campaign.id)}
               tone="default"
@@ -94,7 +115,6 @@ export default function RegionalGraphSummary({
             <Button
               variant="secondary"
               size="sm"
-              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 1)}
               title="Advance regional impacts 1 tick"
               style={{ marginLeft: availableImpacts.length > 1 ? 0 : 'auto' }}
@@ -104,7 +124,6 @@ export default function RegionalGraphSummary({
             <Button
               variant="secondary"
               size="sm"
-              icon={<FastForward size={11} />}
               onClick={() => onAdvanceImpacts?.(campaign.id, 3)}
               title="Advance regional impacts 3 ticks"
             >
@@ -115,16 +134,25 @@ export default function RegionalGraphSummary({
         <Button
           variant="secondary"
           size="sm"
-          icon={<RefreshCw size={11} />}
-          onClick={() => onDiscover?.(campaign.id)}
-          title="Discover regional channels"
+          onClick={() => {
+            // True toggle: an open suggestions section closes on the next press;
+            // a closed one runs discovery and opens (owner order 2026-07-22).
+            if (suggestionsOpen) {
+              setSuggestionsOpen(false);
+            } else {
+              onDiscover?.(campaign.id);
+              setSuggestionsOpen(true);
+            }
+          }}
+          aria-expanded={suggestionsOpen}
+          title={suggestionsOpen ? 'Hide discovered channels' : 'Discover regional channels'}
           style={{ marginLeft: availableImpacts.length > 1 || delayedImpacts.length > 0 ? 0 : 'auto' }}
         >
           Discover
         </Button>
       </div>
 
-      {topSuggestions.length > 0 && (
+      {suggestionsOpen && topSuggestions.length > 0 && (
         // Flattened to tint-only rows (no per-row border) so the folder keeps two
         // earned elevations — the folder border + the settlement-card borders —
         // not three nested ones (P5 anti-box-soup). The tint + the SP.sm column
@@ -138,7 +166,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                borderRadius: 5,
                 background: swatch['#F8F4EE'],
               }}
             >
@@ -151,7 +178,7 @@ export default function RegionalGraphSummary({
                 </div>
               </div>
               <IconButton
-                Icon={Check}
+                glyph="✓"
                 label="Confirm channel"
                 onClick={() => onConfirmChannel?.(campaign.id, channel.id)}
                 tone="primary"
@@ -178,7 +205,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                borderRadius: 5,
                 background: GOLD_BG,
               }}
             >
@@ -194,7 +220,7 @@ export default function RegionalGraphSummary({
                 </div>
               </div>
               <IconButton
-                Icon={Check}
+                glyph="✓"
                 label={available
                   ? 'Apply regional impact'
                   : delayTicks > 0
@@ -206,7 +232,7 @@ export default function RegionalGraphSummary({
                 size="md"
               />
               <IconButton
-                Icon={CircleSlash}
+                glyph="⊘"
                 label="Ignore regional impact"
                 onClick={() => onIgnoreImpact?.(campaign.id, impact.id)}
                 tone="default"

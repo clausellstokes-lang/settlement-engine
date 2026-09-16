@@ -15,19 +15,26 @@
  * Spend model: the SERVER is the sole authority on credit burn. The AI
  * generation success paths in aiSlice set `creditBalance` directly from the
  * server's returned `creditsRemaining`; the client never decrements locally.
- * `spendCredits`/`addCredits` below are therefore NOT on the live spend path —
- * they remain as a self-contained balance API (and to keep `setCreditBalance`/
- * `canAfford` company) but are currently uncalled. Do not reintroduce a client
- * decrement on the generation path: it would double-count against the
- * server-set balance.
+ * This slice therefore MIRRORS a balance and prices a pre-flight check; it does
+ * not move money. Do not reintroduce a client decrement on the generation path:
+ * it would double-count against the server-set balance.
+ *
+ * RETIRED (R-5b, owner queue #21): `addCredits` and `spendCredits`, plus the
+ * `transactions` array they were the only writers of and the CREDITS_SPENT
+ * analytics call spendCredits was the only producer of. They were a second,
+ * client-side ledger sitting next to a server-authoritative one — uncalled, kept
+ * "as a balance API", and one careless wiring away from double-counting a paid
+ * balance. Their registry rows advertised recovery through
+ * 'external:server-rebalance', which is not a recovery a player can reach. This
+ * changes NO paid behavior: no purchase, spend, refund, or balance read went
+ * through them (the live paths are aiSlice → setCreditBalance from the server's
+ * `creditsRemaining`, and the durable history UI reads lib/creditLedger.js from
+ * the server). The credits SQL, the edge functions, and pricing.js are untouched.
+ * `transactions` was session-only — absent from the persist partialize in
+ * store/index.js — so nothing durable referred to it and no migration is owed.
  */
 
 import { getActiveAiCosts, getAiCost, getAiCostForModel } from '../config/pricing.js';
-import { track, EVENTS } from '../lib/analytics.js';
-
-/** Coarse band for a credit balance (analytics only — never a control-flow input). */
-const creditsRemainingBand = (n) =>
-  n <= 0 ? 'zero' : n <= 5 ? '1_5' : n <= 20 ? '6_20' : 'gt_20';
 
 /**
  * Compatibility export. New code should call `getActiveAiCosts()` from
@@ -46,54 +53,14 @@ export const CREDIT_COSTS = new Proxy({}, {
 
 export const createCreditsSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  creditBalance:     0,         // current credit balance
-  transactions:      [],        // recent transactions for display
+  creditBalance:     0,         // current credit balance (mirrors the server)
   purchaseModalOpen: false,     // whether the purchase modal is showing
 
   // ── Actions ────────────────────────────────────────────────────────────────
+  // THE ONLY WRITER of creditBalance, and it writes what the server said. See the
+  // retirement note in the slice docstring for why there is no local debit/credit.
   setCreditBalance: (balance) =>
     set(state => { state.creditBalance = balance; }),
-
-  // NOTE: not on the live purchase path (a completed purchase refreshes the
-  // balance from the server via setCreditBalance). Kept as a balance API.
-  addCredits: (amount, source) =>
-    set(state => {
-      state.creditBalance += amount;
-      state.transactions.unshift({
-        type: 'purchase',
-        amount,
-        source,
-        timestamp: Date.now(),
-      });
-    }),
-
-  // NOTE: not on the live spend path (the server decrements and returns the
-  // new balance, which aiSlice writes via setCreditBalance). Kept as a
-  // self-contained balance API; see the slice docstring.
-  spendCredits: (amount, feature) => {
-    if (get().isElevated()) return true; // elevated roles have unlimited credits
-    const { creditBalance } = get();
-    if (creditBalance < amount) return false;
-
-    set(state => {
-      state.creditBalance -= amount;
-      state.transactions.unshift({
-        type: 'spend',
-        amount: -amount,
-        feature,
-        timestamp: Date.now(),
-      });
-    });
-
-    // Analytics: credit-burn shape if a local spend is ever performed
-    // (fire-and-forget). The live spend chokepoint is server-side.
-    track(EVENTS.CREDITS_SPENT, {
-      action_type: feature,
-      cost: amount,
-      remaining_band: creditsRemainingBand(creditBalance - amount),
-    });
-    return true;
-  },
 
   /** Pre-flight check: can the user afford this AI feature? */
   canAfford: (feature) => {

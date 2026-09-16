@@ -12,12 +12,14 @@
  *
  *  2. Stage 5's military-services and slave-trade exports (and the paired
  *     enslaved-labour import) survive the Stage 7 chain override, which
- *     rebuilds the re/q trade lists from the chain pipeline and used to
- *     unconditionally discard them (re.length = 0 / q.length = 0).
+ *     rebuilds the primary trade lists from the chain pipeline and used to
+ *     unconditionally discard them (primaryExports.length = 0 / primaryImports.length = 0).
  */
 import { afterEach, describe, expect, it } from 'vitest';
-import { generateEconomicState, getUpgradeChain } from '../../src/generators/economicGenerator.js';
-import { setActiveRng, clearActiveRng } from '../../src/generators/rngContext.js';
+import { generateEconomicState } from '../../src/generators/economy/economicState.js';
+import { getUpgradeChain } from '../../src/generators/economy/tradeGoods.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(() => clearActiveRng());
 
@@ -27,10 +29,18 @@ describe('getUpgradeChain — tier-connectivity pool selection', () => {
     expect(imports).toContain('Luxury textiles');
     expect(imports).toContain('Spices and exotic dyes');
     expect(imports).toContain('Rare materials');
-    // Services are never physical imports
-    expect(imports).not.toContain('Banking services');
+    // Services are never physical imports. 'Luxury textiles' is the anchor: it
+    // rides the same fromCityOrMetropolis pool, so a pool that stopped resolving
+    // reds on the anchor instead of passing both exclusions.
+    expectAbsentWithAnchor(
+      imports, 'Banking services', 'Luxury textiles',
+      'higher-tier pool carries goods, never services',
+    );
     // The hinterland pool no longer shadows the higher-tier one
-    expect(imports).not.toContain('Food surplus');
+    expectAbsentWithAnchor(
+      imports, 'Food surplus', 'Luxury textiles',
+      'fromCityOrMetropolis pool is not shadowed by hinterland',
+    );
   });
 
   it('a town without a higher-tier connection keeps the hinterland pool', () => {
@@ -82,13 +92,16 @@ describe('call-site connectivity — a crossroads town surfaces higher-tier tran
     );
     expect(state.isEntrepot).toBe(true);
     expect(state.transit).toContain('Luxury textiles');
-    expect(state.transit).not.toContain('Food surplus');
+    expectAbsentWithAnchor(
+      state.transit, 'Food surplus', 'Luxury textiles',
+      'entrepot transit carries higher-tier goods, not hinterland bulk',
+    );
   });
 });
 
 describe('Stage 5 exports survive the Stage 7 chain override', () => {
   const SLAVE_EXPORT = /^(slave trade|slave labour|captive trade)/i;
-  const MILITARY_EXPORT = /^(military services|mercenary services):/i;
+  const MILITARY_EXPORT = /^(military|mercenary) services —/i;
   const CITY_INSTS = [
     { name: 'City garrison' },
     { name: 'Mercenary company' },
@@ -103,7 +116,16 @@ describe('Stage 5 exports survive the Stage 7 chain override', () => {
 
   it('the slave-trade export and paired enslaved-labour import are preserved when the draw fires', () => {
     setActiveRng({ random: () => 0 }); // forces the chance-gated slave-trade draw
-    const state = generateEconomicState('city', CITY_INSTS, 'road', {}, CITY_CONFIG);
+    // Coercive trade is outside the grounded default. This characterization
+    // intentionally exercises the opted-in mature economy, so its premise must
+    // select a profile that allows the content.
+    const state = generateEconomicState(
+      'city',
+      CITY_INSTS,
+      'road',
+      {},
+      { ...CITY_CONFIG, contentProfile: 'grim' },
+    );
     expect(state.primaryExports.some((e) => SLAVE_EXPORT.test(e))).toBe(true);
     expect(
       state.primaryImports.some((i) => i.toLowerCase().startsWith('enslaved labour'))

@@ -1,7 +1,7 @@
 /**
  * domain/causalViews.js — Multiple causal views over one settlement.
  *
- * The same dossier, filtered through 7
+ * Tier 5.7 of the roadmap. The same dossier, filtered through 7
  * different causal lenses. Each view is a pure derivation that
  * pulls the relevant subset from the substrate already built.
  *
@@ -26,7 +26,7 @@
 
 import { deriveSimulationSpine } from './simulationSpine.js';
 import { deriveDailyLife } from './dailyLife.js';
-import { deriveCausalState, causalBandWord } from './causalState.js';
+import { deriveCausalState } from './causalState.js';
 import { deriveAllCapacities } from './capacityModel.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
@@ -51,10 +51,12 @@ const VIEW_TITLES = Object.freeze({
 
 // ── Per-view derivers ───────────────────────────────────────────────────
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @typedef {import('./settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
+
+/** @param {CanonicalSettlement} settlement */
 function viewNarrative(settlement) {
   const spine = deriveSimulationSpine(settlement);
-  const daily = /** @type {any} */ (deriveDailyLife(settlement));
+  const daily = deriveDailyLife(settlement);
   return {
     spine,
     dailyLife: daily.slots,
@@ -65,71 +67,70 @@ function viewNarrative(settlement) {
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewSimulation(settlement) {
-  const causal = /** @type {any} */ (deriveCausalState(settlement));
-  const capacities = /** @type {any} */ (deriveAllCapacities(settlement));
+  const causal = deriveCausalState(settlement);
+  const capacities = deriveAllCapacities(settlement);
   return {
     substrate: causal,
     capacities,
     summary: [
       `Substrate variables: ${Object.keys(causal.bands).length}.`,
       `Capacities: ${Object.keys(capacities.bands).length}.`,
-      // Phrase each band through the shared causalBandWord so a lower_is_better
-      // variable never reads inverted: a maximally-criminal settlement prints
-      // "criminal_opportunity is RAMPANT", not the wrong "…is COLLAPSED" (which
-      // a DM/AI reads as crime being gone). Higher-is-better variables keep the
-      // raw band word, so this is output-identical for them.
-      ...(causal.summary.collapsed.map((/** @type {any} */ v) => `${v} is ${causalBandWord(v, 'collapsed').toUpperCase()}.`)),
-      ...(causal.summary.critical.map((/** @type {any} */ v) => `${v} is ${causalBandWord(v, 'critical').toLowerCase()}.`)),
+      ...(causal.summary.collapsed.map(v => `${v} is COLLAPSED.`)),
+      ...(causal.summary.critical.map(v => `${v} is critical.`)),
     ],
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewDelta(settlement) {
   const events = Array.isArray(settlement.eventLog) ? settlement.eventLog : [];
-  const recent = events.slice(-10);
+  const recent =
+    /** @type {Array<{ appliedAt?: string, event?: { type?: string }, narrativeSummary?: string }>} */ (
+      events.slice(-10)
+    );
   return {
     eventLog: recent,
     summary: recent.length
-      ? recent.map((/** @type {any} */ e) => `${e.appliedAt || '–'}: ${e.event?.type || 'unknown'}. ${e.narrativeSummary || 'no narrative'}`)
+      ? recent.map(e => `${e.appliedAt || '—'}: ${e.event?.type || 'unknown'} — ${e.narrativeSummary || 'no narrative'}`)
       : ['No applied events yet.'],
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewFaction(settlement) {
-  const profiles = /** @type {any[]} */ (deriveAllFactionProfiles(settlement));
+  const profiles = deriveAllFactionProfiles(settlement);
   return {
     factions: profiles,
     summary: profiles.length
-      ? profiles.map(p => `${p.name} (${p.archetype}, power ${p.power}).`)
+      ? profiles.map(
+          p => `${p.name} (${p.archetype}, power ${p.power}).`)
       : ['No factions on this settlement.'],
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewSupplyChain(settlement) {
-  const chains = /** @type {any[]} */ (deriveAllSupplyChainStates(settlement));
+  const chains = deriveAllSupplyChainStates(settlement);
   return {
     chains,
     summary: chains.length
-      ? chains.map(c => `${c.name}: ${c.status}. Controller: ${c.controller || 'unattributed'}.`)
+      ? chains.map(c => `${c.name} — ${c.status}. Controller: ${c.controller || 'unattributed'}.`)
       : ['No supply chains on this settlement.'],
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewTimeline(settlement) {
-  const beats = /** @type {any} */ (deriveHistoryBeats(settlement));
-  const clocks = /** @type {any[]} */ (deriveEscalationClocks(settlement));
+  const beats = deriveHistoryBeats(settlement);
+  const clocks = deriveEscalationClocks(settlement);
   const lines = [];
   for (const beat of Object.values(beats)) {
     if (beat) lines.push(`${beat.label}: ${beat.text}`);
   }
   for (const clock of clocks) {
-    lines.push(`${clock.label} (clock): ${clock.triggerDescription}`);
+    lines.push(`Clock — ${clock.label}: ${clock.triggerDescription}`);
   }
   return {
     historyBeats: beats,
@@ -138,13 +139,14 @@ function viewTimeline(settlement) {
   };
 }
 
-/** @param {import('./settlement.schema.js').SimSettlement} settlement */
+/** @param {CanonicalSettlement} settlement */
 function viewDistrict(settlement) {
-  const districts = /** @type {any[]} */ (deriveAllDistricts(settlement));
+  const districts = deriveAllDistricts(settlement);
   return {
     districts,
     summary: districts.length
-      ? districts.map(d => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`)
+      ? /** @type {Array<{ name?: string, category?: string, wealth?: string, safety?: string, currentTension?: string }>} */ (districts).map(
+          d => `${d.name} (${d.category}): ${d.wealth}, ${d.safety}. ${d.currentTension}`)
       : ['No districts on this settlement.'],
   };
 }
@@ -164,11 +166,12 @@ const VIEW_DERIVERS = Object.freeze({
 /**
  * Build a causal view payload.
  *
- * @param {Object} settlement
+ * @param {CanonicalSettlement | null | undefined} settlement
  * @param {string} viewName
  * @returns {Object}
  */
 export function deriveCausalView(settlement, viewName) {
+  const key = /** @type {keyof typeof VIEW_DERIVERS} */ (viewName);
   if (!CAUSAL_VIEWS.includes(viewName)) {
     return {
       view: viewName,
@@ -180,15 +183,15 @@ export function deriveCausalView(settlement, viewName) {
   if (!settlement) {
     return {
       view: viewName,
-      title: /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName],
+      title: VIEW_TITLES[key],
       entries: null,
       summary: ['No settlement to view.'],
     };
   }
-  const entries = /** @type {Record<string, any>} */ (VIEW_DERIVERS)[viewName](settlement);
+  const entries = VIEW_DERIVERS[key](settlement);
   return {
     view: viewName,
-    title: /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName],
+    title: VIEW_TITLES[key],
     entries,
     summary: entries.summary || [],
   };
@@ -201,5 +204,5 @@ export function supportedCausalViews() {
 
 /** @param {string} viewName */
 export function viewTitle(viewName) {
-  return /** @type {Record<string, any>} */ (VIEW_TITLES)[viewName] || viewName;
+  return VIEW_TITLES[/** @type {keyof typeof VIEW_TITLES} */ (viewName)] || viewName;
 }

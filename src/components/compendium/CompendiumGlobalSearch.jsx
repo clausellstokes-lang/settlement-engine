@@ -14,7 +14,6 @@
  */
 
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import IconButton from '../primitives/IconButton.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
@@ -70,8 +69,12 @@ export default function CompendiumGlobalSearch({ onSelect }) {
 
   const choose = (entry) => {
     if (!entry) return;
+    // No raw `query`: free-typed search text is user content, not a coarse
+    // enum/band/count, and COMPENDIUM_SEARCH is essential-class (mirrored to the
+    // third-party provider). term+tab — the chosen catalog entry — already carry
+    // the intent-atlas value as controlled vocabulary (finding
+    // components-dossier-library-6).
     Funnel.track(EVENTS.COMPENDIUM_SEARCH, {
-      query: q.slice(0, 64),
       term: entry.term,
       tab: entry.tab,
     });
@@ -112,7 +115,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
     >
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8,
-        border: `1px solid ${BOR}`, borderRadius: 6,
+        border: `1px solid ${BOR}`,
         background: CARD, padding: '6px 10px',
       }}>
         <input
@@ -134,7 +137,6 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         />
         {query && (
           <IconButton
-            Icon={X}
             glyph="×"
             label="Clear search"
             tone="ghost"
@@ -151,8 +153,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           style={{
             position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
             zIndex: 50, listStyle: 'none', margin: 0, padding: 4,
-            background: CARD, border: `1px solid ${BOR}`, borderRadius: 6,
-            boxShadow: '0 12px 28px rgba(0,0,0,0.18)',
+            background: CARD, border: `1px solid ${BOR}`,
             maxHeight: dropdownMaxHeight, overflowY: 'auto',
           }}
         >
@@ -169,7 +170,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                   style={{
                     width: '100%', textAlign: 'left',
                     display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '7px 9px', border: 'none', borderRadius: 4,
+                    padding: '7px 9px', border: 'none',
                     cursor: 'pointer', fontFamily: sans,
                     background: i === active ? `${GOLD}14` : 'transparent',
                   }}
@@ -179,7 +180,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                   </span>
                   <span style={{
                     fontSize: FS.xs, fontWeight: 700, color,
-                    background: `${color}18`, borderRadius: 8, padding: '1px 7px',
+                    background: `${color}18`, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',
                   }}>
@@ -196,7 +197,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         <div style={{
           position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
           zIndex: 50, padding: '10px 12px', background: CARD,
-          border: `1px solid ${BOR}`, borderRadius: 6,
+          border: `1px solid ${BOR}`,
           fontSize: FS.sm, color: BODY, fontFamily: sans,
           display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         }}>
@@ -204,7 +205,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
             No matches for &ldquo;{q}&rdquo;. Try a tier, archetype, institution, neighbour, route, or stress name.
           </span>
           {/* Recovery CTA at the point of failure, not just the X up in the input. */}
-          <IconButton Icon={X} glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
+          <IconButton glyph="×" label="Clear search" tone="ghost" size="sm" onClick={() => { setQuery(''); setActive(0); setOpen(false); }} />
         </div>
       )}
     </div>

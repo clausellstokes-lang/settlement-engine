@@ -1,0 +1,552 @@
+# DESIGN — THE REALM MAGIC TOGGLE (one question before the world exists)
+
+## Fable 5 architecture, 2026-08-02, under full owner delegation. Owner order
+## (verbatim intent): the multi-settlement generate flow gains ONE extra step —
+## a pop-up asking whether the settlements (ALL of them) enable or disable
+## magic. IMPLEMENTATION IS ASSIGNED TO THE EXTERNAL IMPLEMENTER (Sol); the war
+## volume's §10 implementer protocol binds verbatim. Substrate claims below
+## carry file:line receipts from the three-surveyor recon executed 2026-08-02
+## against claude/composite-r4 @ 59d298d3 (workflow wf_7bd3c9b3-2f8); claims
+## the surveyors could not execute are marked REPRODUCE-FIRST and their slices
+## begin with the reproduction test. Where this document and the tree disagree,
+## live code outranks the census — STOP and report.
+
+---
+
+## §0 THE THESIS
+
+The task is off by one level from how it sounds. A full per-settlement magic
+disable ALREADY EXISTS and is architecturally clean: `magicExists` (a hard
+world fact), `priorityMagic` (the 0–100 dial, zeroed when magic is off), and
+`magicLevel` (a derived band — none/low/medium/high, constants.js:37-41) —
+arbitrated at generation by ONE world-law chokepoint
+(`createGenerationWorldLaw`, generationContext.js:199-356: magicEnabled,
+allowsInstitution/Role/Service/Secret/HistoryEvent/GeneratedContent/
+MagicClaim, 15 consumer modules), read at advance by ONE canonical accessor
+(`magicLedger`, magicLedger.js:73-87), displayed honestly (magicProfile's
+all-absent envelope, magicProfile.js:377-399; the compendium already authors
+"Magic is disabled in this world", bandLadders.js:131-135), and pinned by 68
+test files including a dedicated dead-magic leak suite. What does NOT exist is
+the REALM: the Instant World flow hard-codes every member magical
+(`{ ...DEFAULT_CONFIG, settType: site.tier, _randomizePriorities: true }`,
+composeInstantWorld.js:180 — DEFAULT_CONFIG carries magicExists:true,
+configSlice.js:31), the realm knob surface is exactly three values
+(realmSize/tone/mapKind, worldPlan.js:120-126), and no pre-generation modal
+exists anywhere in the flow (InstantWorldEntry.jsx has no Dialog import; the
+config is an inline panel, :106-170). THE CURE IS PROJECTION, NOT A GATE: the
+realm answer is asked once, then STAMPED INTO EVERY MEMBER'S per-settlement
+config at mint — after which every existing mechanism (world law, ledger,
+display, regen, share, tests) is correct by inheritance, because they all
+already read per-settlement truth. The realm keeps only a default-for-later
+and a provenance echo. One question, zero new authorities.
+
+## §1 THE LAWS THAT BIND EVERY SLICE
+
+- **MG-LAW-1 — PROJECTION, NEVER A SECOND AUTHORITY.** The toggle is
+  GENERATION INPUT projected into each member's `config`/`_config` at mint.
+  No pulse, generator, or display path ever consults a live realm-level magic
+  gate: per-settlement config remains the ONE truth every consumer already
+  reads (the pulse reads `magicLedger(settlement)` per member —
+  magicLedger.js:73-86 — and that stays exactly right because the projection
+  wrote the member). A realm rule that must be consulted at read time is the
+  double-authority defect this law exists to prevent.
+- **MG-LAW-2 — MAGIC IS NOT FAITH (ruled, vetoable).** The toggle gates the
+  ARCANE axis and FUNCTIONING SUPERNATURAL EFFECTS. The deity system —
+  beliefs, temples, patrons, religion state — is untouched (no deity module
+  reads magicExists; verified by grep). The existing code line stands: divine
+  MECHANICAL effects (Turn Undead, blessed granaries, divine healing
+  substitution) follow magicOn (defenseGenerator.js:112-119,
+  chainMagicSubstitution.js:25-29) — a mundane world still prays; its prayers
+  move belief, never physics. This is Law One's own posture: the engine never
+  confirmed the divine anyway. The pop-up copy states it plainly.
+- **MG-LAW-3 — A MUNDANE WORLD IS NOT A THINNER WORLD.** Suppression rides
+  the existing substitution arms (chainMagicSubstitution's food/timber/heal/
+  extract mundane paths; the isolation gap's non-magical support routes;
+  stripArcaneInstitutions' roster repair, isolationGenerator.js:225-245).
+  MG-4's twin-world envelope measures it: a mundane realm's member count,
+  institution count, and service count land within tolerance of its magical
+  twin on the same seed-family. Narrower route rolls (resolveConfig.js:104's
+  isolation guard) are ACCEPTED and documented, not a defect.
+- **MG-LAW-4 — AUTHORED PREMISES SURVIVE.** A MANUALLY selected magical_node
+  survives by design (resolveResources.js:169-177 — "authored premises stay
+  visible for the validator to classify"); user custom content keeps its own
+  path; the DM's per-settlement override (ConfigurationPanel.jsx:443-450)
+  remains sovereign AFTER mint — one strange glowing city in a mundane realm
+  is a deliberate act. The validator warns (MG-3f), never erases.
+- **MG-LAW-5 — DETERMINISM + THE FINGERPRINT.** The knob joins the seed's
+  input surface: same seed + same knob = same world, forever. magicExists is
+  already a structural-fingerprint input (structuralFingerprint.js:315), so
+  the toggle changes fingerprints exactly as any config input does — a NEW
+  world, never a mutated one. No golden moves for existing saves (their
+  configs are untouched); the instant-world composer's own goldens gain the
+  mundane arm as NEW cases.
+- **MG-LAW-6 — THE VIRTUAL-FLAG DISCIPLINE.** The realm-level remainder
+  (`realmMagicDefault`, §4) follows the house idiom exactly: ABSENT from
+  DEFAULT_SIMULATION_RULES (preset-identity hazard, simulationRules.js:552-564
+  — adding a default key re-infers presets for every save), DECLARED in one
+  preset so the certification walker sees it (the invisible-key hazard,
+  simulationRules.js:430-437), read `=== true`/`=== 'mundane'` defensively
+  (virtual keys ride `...input` unnormalized, :697-706), added to BOTH
+  telemetry allowlists (spatialUsage.js:75 TRACKED_FLAGS +
+  pulseFingerprint's twin) and to PUBLIC_SIMULATION_RULE_KEYS for the world
+  export (worldExport.js allowlist — the four-key list must grow or the
+  field silently drops from exports).
+- **MG-LAW-7 — REQUIREMENTS 13 + 14 (spine).** Alignment line: DECLARED
+  EMPTY — a config knob reads no alignment axis and moves none. Edit-verb
+  story: the modal IS the create verb; post-creation the campaign surface
+  shows the realm's magic stance READ-ONLY with "chosen at creation — new
+  settlements follow it; regenerate the realm to change it" (honest regen
+  semantics, never a silent live flip); each member keeps its existing
+  per-settlement edit verb; the AI surface proposes nothing here (a
+  generation-time choice has no typed-proposal lane).
+- Constitutional inheritance (war §1a): same-seed byte identity; seeded
+  purity; monotone ratchets (all new logic in lazy leaves); finite semantics;
+  premium isolation (the Instant World card is already the premium-gated
+  surface, premiumGateSingleSource.test.js:135).
+
+## §2 SUBSTRATE CENSUS (receipts from wf_7bd3c9b3-2f8; live code outranks)
+
+| Surface | Receipt | State |
+|---|---|---|
+| Bulk-gen UI (the ONLY one; desktop-only) | InstantWorldEntry.jsx:58-71 handleGenerate, :151-165 CTA; mounted solely at SettlementPalette.jsx:155-157 (realm empty state) | BUILT |
+| Dispatch chain | instantWorld(basicConfig,{seed}) → instantWorldSlice.js:12-34 → instantWorldBody.js:103-267 runInstantWorld → composeInstantWorld.js:86-191 | BUILT |
+| Realm knobs | worldPlan.js:120-126 normalizeBasicConfig → {realmSize, tone, mapKind} ONLY | THE GAP |
+| Member mint | composeInstantWorld.js:180 `{...DEFAULT_CONFIG, settType, _randomizePriorities:true}` — magic hard-ON | THE GAP |
+| The knob→realm-rule precedent | tone → SIMULATION_RULE_PRESETS → ensureWorldState (composeInstantWorld.js:221-226) | BUILT — the pattern MG-1 copies |
+| Pre-generation modal | NONE anywhere (no Dialog in InstantWorldEntry; GenerateWizard's only dialog is a post-gen exit guard :595-603) | NET-NEW |
+| Per-settlement axis | configSlice.js:28,31; resolveConfig.js:79-80,147; constants.js:37-41; magicLedger.js:73-87; priorityHelpers.js:105-108 | BUILT, deep |
+| Generation arbiter | generationContext.js:199-356 (worldLaw; 15 consumers; patterns :29-55; NEGATED_MAGIC :41-49) | BUILT |
+| Display honesty | magicProfile.js:377-399; MagicTab.jsx:63; pdf viewModel.js:916-926; bandLadders.js:131-135 ("Magic is disabled…") | BUILT |
+| Regen contract | settlement.`_config` raw + `config` resolved (assembleSettlement.js:157,163); full regen = restore `_config` → fresh generate (SettlementsPanel.jsx:102-103); magicExists/priorityMagic NOT in DERIVED_CONFIG_KEYS strip (settlementSlice.js:187-193) — the projection SURVIVES both regen paths; regenSection reads resolved config (:1091) — benign here | BUILT |
+| Config-key allowlist | updateConfig filters unknown keys (configSlice.js:98-102) — no new key needed (magicExists exists) | BUILT |
+| Realm settings home | campaign.worldState.simulationRules; unknown keys survive normalize (:689-696) + ensureWorldState spread; persisted wholesale (localStorage sf_campaigns + saved_maps map_data JSONB, campaigns.js:265-338); account export round-trips verbatim (accountData.js:334-342) | BUILT |
+| Existing realm magic rule | magicEconomyEnabled (dark, simulationRules.js:481) gates the W-K sim lane — ORTHOGONAL: the lane reads magicLedger per settlement and magicFormFloor already nulls when !magicExists (magicForms.js:408-423); a mundane realm leaves it naturally inert; no interaction | BUILT |
+| Undo hazard | pulse-undo restores worldState WHOLESALE (campaignWorldPulseDeferred.js:465-469) — a live realm setting would silently revert on Undo Last Pulse; the projection design dodges this entirely (members ride their own saves; the default key is create-time-written, then never edited live) | HAZARD, dodged by design |
+| Certification hook | world_law_magic row per settlement (generationCoherence.js:365-376,503) — inherited free per member | BUILT |
+| Dead-magic tests | 68 files reference magicExists incl. deadMagicLeaks.test.js + generationWorldLaw.test.js | BUILT |
+
+## §3 THE LEAK REGISTER (pre-existing per-settlement defects a whole-mundane
+## realm makes visible; all CONFIRMED-BY-READ, marked REPRODUCE-FIRST)
+
+| # | Leak | Receipt |
+|---|---|---|
+| L1 | teleportEdges is config-blind: deriveTeleportEligibility(seeds, institutionsById) takes NO config; a legacy roster's 'Teleportation circle' forms teleport edges in a magic-off world | teleportEdges.js:116-132,150-158 vs its own header claim :16-18 |
+| L2 | ⚠️ **STILL OPEN** (reader wired 2026-08-03, writer blocked with L3 — see the corrected MG-3b block below) feasibilityGate can verdict `require_magic` ("arcane force could tip…") off PURELY MUNDANE materiel (weapon/armor/forge/siege terms) | feasibilityGate.js:148,196 |
+| L3 | warDeployment mints a magicSupport combat facet from materiel with no magic gate | warDeployment.js:672-679 |
+| L4 | neighbourGenerator mints 'Arcane Exchange Circle', 'Arcane Envoys', 'Arcane Observers', 'Anti-N Arcane Resistance' with zero magicExists reads | neighbourGenerator.js:313-384 |
+| L5 | legacyGenerator branches on type==='magical' with no worldLaw import | legacyGenerator.js:165-170 |
+| L6 | structuralValidator's high-magic-institution warning fires at 'low' but NOT at 'none' — the dead-magic world with a legacy circle gets no warning | structuralValidator.js:481-495 |
+| L7 | Display asymmetry: magicExists:true + priorityMagic:0 falls past the short-circuit to the ladder — band 'none' renders availability 'rare' + legality 'restricted' (claims rare magic where generation produced none) | magicProfile.js:36,112-114,384 |
+| L8 | TWO duplicate legacy-migration writers with the same magicExists inference rule — a change to one silently forks | settlements/helpers.js:12 + SettlementDetail.jsx:93-95 |
+| L9 | canonBand swallows ANY unknown band token to 'medium' silently (already caused the medium/moderate zero-supply incident of record) | magicLedger.js:49-57 header :8-13 |
+| L10 | Faction classifiers label mundane 'Tower/Academy/College/Sage' factions arcane by name-regex, ungated | factionArchetypes.js:60; factionCategories.js:62 |
+| L11 | institutionProbability's magic suppression is INDIRECT (dial-zero), leaking if a caller passes unresolved config | institutionProbability.js:90-95,174 |
+| L12 | customContent's arcane path keys on config.magicLevel separately from worldLaw | customContent.js:268-273 |
+
+## §4 THE ARCHITECTURE (four slices, dependency order)
+
+### MG-1 — THE QUESTION (the modal + the fourth knob)
+
+`basicConfig` gains `magic: 'yes' | 'no'` (default 'yes'):
+`normalizeBasicConfig` widens to four keys; `deriveWorldPlan` echoes it into
+the plan (beside tonePresetId); the plan's provenance echo lands on
+`campaign.instantWorld` as the realm's recorded stance. THE MODAL is net-new,
+built on the house Dialog primitive (13 existing consumers to pattern-match;
+nearest analogue per recon: the autoplacement confirm), interposed between the
+Generate CTA and `instantWorld(...)` in InstantWorldEntry.handleGenerate:
+
+- Copy (game-grade UX law — the DM's question, never the engine's):
+  **"Does magic exist in these lands?"** — subtext: "This shapes every
+  settlement in the realm: its mages and arcane orders, its magical events,
+  its enchanted trade. Gods and temples remain either way — belief is not a
+  spell." Buttons: **"A world of magic"** (default focus) / **"A mundane
+  world"**. Esc/дismiss = cancel the generation entirely (never a silent
+  default); the choice is remembered per user via displayPrefs (already in
+  the persist allowlist, store/index.js:116-145) and pre-selected next time.
+- The inline knob panel gains a read-only echo chip of the remembered choice
+  so the modal never surprises.
+- Accessibility: role="dialog", aria-modal, focus trap — the existing Dialog
+  primitive's contract.
+
+### MG-2 — THE PROJECTION (the core; one spread, whole-lifecycle correctness)
+
+`composeInstantWorld.mintSettlement` (:87-93) projects the answer into every
+member at the ONE mint site:
+
+`{ ...DEFAULT_CONFIG, settType: site.tier, _randomizePriorities: true,
+   ...(plan.magic === 'no' ? { magicExists: false, priorityMagic: 0 } : {}) }`
+
+Both fields together, matching the per-settlement UI's own coupling
+(ConfigurationPanel.jsx:443-450 writes both). Because the member's `_config`
+persists this raw truth (assembleSettlement.js:163) and neither field is in
+the DERIVED strip list, the projection SURVIVES: full regen (restore-`_config`
+→ generate), section reroll (reads resolved config — carries both), save/load,
+share (publicSafe keeps `config`), account export, and every pulse read
+(magicLedger reads the member). Zero new gates. Additionally:
+
+- `worldState.simulationRules.realmMagicDefault: 'mundane'` is written at the
+  same site the tone preset already writes rules (composeInstantWorld.js:
+  221-226) — ONLY when 'no' (virtual-flag idiom, MG-LAW-6; absent = magical).
+  Its ONE consumer: the single-settlement wizard, when generating INTO an
+  active campaign whose realmMagicDefault is 'mundane', pre-sets
+  magicExists:false in the config panel (visibly, overridably — the DM's
+  glowing-city exception stays one click away). It is never read by
+  generators, pulse, or display (MG-LAW-1).
+- The campaign surface renders the stance line per MG-LAW-7's edit story.
+- Analytics: the GenerateWizard already emits magic_exists
+  (GenerateWizard.jsx:220); the instant-world completion event gains the
+  realm knob; both telemetry allowlists updated (MG-LAW-6).
+
+### MG-3 — THE LEAK CLOSURES (§3's register; each slice REPRODUCE-FIRST)
+
+Order by structural load: (a) L1 teleport — deriveTeleportEligibility gains
+the config/ledger gate at the spatialDigest call site (:52,277-281); (b)
+L2+L3 war — feasibilityGate's magicEdge and warDeployment's magicSupport
+consult the PAIR's magicLedger (both must hold magic for an arcane edge;
+mundane realms get verdict vocabulary without `require_magic`); (c) L4+L5
+neighbour + legacy generators import worldLaw and gate their magic arms
+(mundane neighbour-org name pools authored under the content-depth floor —
+four variants per slot, the SP-6 discipline); (d) L7 display asymmetry —
+magicProfile short-circuits on band 'none' as well as magicExists:false; (e)
+L6 validator gains the 'none' arm (warn on ANY high-magic institution in a
+none-band world); (f) L8 the duplicate migration writers consolidate into one
+shared helper (single-writer law); (g) L9 canonBand's unknown-token arm emits
+a classified warning receipt instead of a silent 'medium'; (h) L10-L12
+classifier/probability/custom-content gates, lowest load. EVERY slice begins
+with the surveyor's named reproduction (e.g., L1: roster with 'Teleportation
+circle' + magicExists:false ⇒ assert edges form TODAY, then close), per
+adversarial-verify's reproduce-then-clear.
+
+#### ⛔ MG-3b L3 — RECORDED BLOCK (2026-08-03, Fable; deliberately deferred, NOT a bug to re-find)
+
+⚠️ **CORRECTED 2026-08-03 BY THE LANE-B VERIFIER — read this before trusting the
+paragraph below.** The original text here read "L2 is CLOSED and landed." That is
+WRONG, and the same size-ratchet wall that blocks L3 is the reason. L2's READER
+(feasibilityGate's `pairMagicFunctions` call) landed; L2's WRITER never did.
+`stampWarMagicLaw` has **ZERO callers in `src/`** — the only invocation in the tree is
+inside `tests/domain/warMagicGate.test.js`, which hand-crafts `{ magicFunctions: false }`
+onto a literal facets object instead of booting the real writer (the estate's
+writer/reader payload-spelling pin class). Every production producer of
+`attackerFacets`/`defenderFacets` is `cap.facets` from `warDeployment.buildCapacityLookup`,
+which returns `facets: model.facets` UNSTAMPED (warDeployment.js:716) — so
+`pairMagicFunctions` answers `true` on every live matchup and the arcane arm is exactly
+as open as it was before MG-3b. **The L2 pin is green and the leak is still live.**
+
+CONFIRMED BY EXECUTION, not by reading. Against a clean detached worktree at 96e27699,
+two settlements configured exactly as MG-2's mundane projection stamps them
+(`{ magicExists:false, priorityMagic:0, magicLevel:'none' }`), facets taken from the real
+`deriveMilitaryCapacity`, attacker exporting weapons/armour/siege engines/warhorses/
+blades/gunpowder (materiel 92) against a grain-and-wool defender (materiel 50, edge 42
+vs the threshold of 22), fed through `feasibilityOutlook` — the live display caller:
+
+    attacker facets keys: manpower,institutions,materiel,logistics,economy,will
+    has magicFunctions stamp? false
+    LIVE PATH  (facets as buildCapacityLookup returns them): require_magic
+    WITH the withheld one-line stamp applied              : harassment
+
+A whole-mundane realm still produces "arcane force could tip an otherwise-hopeless
+siege" off ironmongery. **L2 and L3 are ONE blocked item, not one closed and one
+blocked**, and both unblock on the same line at warDeployment.js:716. The register's
+L2 row must stay OPEN until that line lands.
+
+L2's reader is wired and inert. **L3 is reproduced, written, proven green in the working
+tree, and CANNOT BE COMMITTED.** The closure is one line at warDeployment.js's
+magicSupport mint — `magicSupport: facets.magicFunctions === false ? 0 :
+norm(facets.materiel, 0.5)` — plus the one-line stamp at buildCapacityLookup
+(`facets: stampWarMagicLaw(model.facets, item)`) and its import. At HEAD
+warDeployment.js measures **1412 effective lines against a frozen ceiling of 1106**
+(scripts/.size-baseline.json), so the pre-commit lint-staged gate rejects ANY staged
+change to that file from ANY lane — the identical wall that holds WR-7b. Raising the
+frozen number is forbidden by the ratchet's own shrink-only law and is not a lane
+decision; decomposing a war orchestrator mid-flight belongs to the war lane, not this
+one, so MG-3b STOPPED rather than deviate (war volume §10.6).
+
+The WRITER half shipped and is fully pinned: `src/domain/worldPulse/warMagicGate.js`
+holds the law once (`warMagicFunctions` / `stampWarMagicLaw` / `pairMagicFunctions`),
+`feasibilityGate` already reads it, and `tests/domain/warMagicGate.test.js` covers the
+present-guard and the identity/copy contract. **When warDeployment is decomposed under
+its ceiling, L3 is those two lines plus the withheld integration pins** (a mundane
+realm's deployment record mints magicSupport 0; its magical and axis-less twins are
+byte-identical), which ran green before being withheld.
+
+#### ✅ MG-3h L10–L12 — CLOSED 2026-08-03 under CHAIR RULING R-BLD-5
+
+⚠️ **The STOP below is SUPERSEDED — kept for the reasoning, not for its verdict.** The
+chair ruled R-BLD-5 and the closure landed; read this block first.
+
+**THE RULING.** *The CATALOG'S AUTHORED arcane TAG is the canonical detector (the W-K2
+incident's recorded cure — name-regexes misclassified cobblers' guilds). The four
+classifiers consult the catalog tag wherever a catalog identity exists; name-patterns
+remain ONLY as fallback for non-catalog entities and must apply worldLaw's
+NEGATED_MAGIC_PATTERNS.*
+
+**WHY THE RULING DISSOLVES THE STOP.** The stop was correct about its own design: an
+opt-in options bag threading each settlement's `magicLedger` into `factionArchetype()`
+would need a 10+ site consumer census, and most of those sites hold a faction row with no
+settlement in scope — the N−1 sweep. R-BLD-5 removes the need entirely by changing what
+the question is. Arcane-ness becomes a property of the ENTITY (what the author said it is),
+not of the WORLD, so **no signature changes and no world law is threaded anywhere**. Every
+one of the 10+ consumers is correct by inheritance.
+
+**WHAT LANDED.**
+
+- `src/domain/magicAssertionText.js` (new) — `MAGIC_ASSERTION_PATTERN`,
+  `NEGATED_MAGIC_PATTERNS`, `stripNegatedMagic`, `textAssertsFunctionalMagic`, lifted
+  verbatim out of `generationContext.js`, which now re-exports them. The world law and the
+  detector cannot drift into two readings of the same sentence. 39 world-law + dead-magic
+  tests green across the move.
+- `src/domain/arcaneIdentity.js` (new) — THE LAW plus the FACTION catalog index over
+  `FACTION_DESCRIPTORS` ∪ `FACTION_DESCRIPTORS_EXTRA`. Exact-match then containment, so the
+  dedup pass's adjectival prefixes ("The Greater Tower Alliance") keep their authored tag.
+- `src/domain/arcaneInstitutionIdentity.js` (new) — the INSTITUTION adapter over
+  `institutionalCatalog`'s authored `tags`. Split from the law deliberately: the 2,500-line
+  catalog must not be re-parented into the faction closure that ~30 pulse modules import.
+  Two adapters, one law.
+- The four classifiers adopt it: `factionArchetypes` (arcane slot keeps its ordering,
+  delegates the decision), `power/factionCategories` (magic bucket likewise),
+  `institutionProbability` (a DIRECT `magicExists === false` gate, last, after every
+  multiplier), `customContent` (catalog tag before its own pattern, plus the registered
+  L12 fix — the magic-level hint now reads `magicLedger` and gains an honest magic-off arm).
+- `src/data/powerData.js` gains `FACTION_DESCRIPTORS_EXTRA`, moved from
+  `lib/instantWorld/factionDedup.js` (which re-exports it). The pool is unchanged and still
+  never merged into `FACTION_DESCRIPTORS` — only its address moved, so the detector can
+  read the authored tag of "The Tower Union" instead of guessing.
+
+**THE VOCABULARIES WERE NOT UNIFIED, DELIBERATELY.** Each classifier keeps its own token
+list, split into certain/ambiguous but unchanged in membership; what is shared is the
+PROCEDURE. Merging the four vocabularies would silently reclassify names on surfaces this
+ruling never named — a live same-seed change dressed as a refactor. Residual recorded here,
+not deferred silently.
+
+**DISCLOSED BEHAVIOUR CHANGES (all authorised by R-BLD-5; each is the fix).**
+1. An ambiguous token alone no longer classifies a NON-CATALOG faction arcane. "The Tower
+   Cobblers' Guild" was `arcane`, is now `merchant`. Measured at base 0150bd01.
+2. A catalog faction filed under `magic` now classifies arcane even with no token in its
+   name. "The Enlightened" was `other`, is now `arcane` — the false-negative half of L10,
+   which the register never noticed.
+3. `customContent` emits a new `environment_inert` contributor for an arcane institution in
+   a magic-off world, and a distinct none-band line. The legacy band vocabulary now folds,
+   so a save carrying `magicLevel:'moderate'` reaches the right arm for the first time.
+4. `institutionProbability`'s new gate is a NO-OP on the resolved path (resolveConfig
+   already zeroes the dial at :79) — pinned, so no same-seed generation golden moves.
+
+**⚠️ WHAT THE CENSUS FOUND — 8 MORE SITES, RECORDED NOT CONVERTED.**
+`tests/lint/arcaneClassifierCensus.walker.test.js` is the habitat guard: it fires on any
+alternation MIXING an arcane token with an ambiguous one. Run across `src/` it turned up
+**eight sites in seven files the leak register never saw**. Four are TRUE MEMBERS of the
+L10 class — `districtProfile.js:112`, `npcProfile.js:333` and `:374` (the same table forked
+twice in one file), `stressorDynamics.js:53` (whose arcane row is *entirely* ambiguous
+tokens, so every match it makes is a guess), `tierOutcomeApply.js:143`. Three are
+contextually scoped and not the class (`factionRoles.js:57`, `isolationGenerator.js:97`,
+`contradictions.js:222` — each runs only after an entity is already classified arcane).
+They are FROZEN in the walker's `KNOWN_UNCONVERTED` baseline, shrink-only, each with its
+disposition. **Not converted because each decides live generated output** (district
+categories, NPC domains, stressor subsystems, ruin fates) and R-BLD-5 names four
+classifiers, not twelve. Converting them is a disclosed same-seed wave of its own — chair
+to schedule. Also allowlisted with a stated reason: `lib/entities.js`'s
+`INSTITUTION_KEYWORD_TAGS`, a tag backfill that is already W-K2-correct (unambiguous tokens
+only; it files tower/academy/college under SCHOLARLY).
+
+**ALSO DELIBERATELY NOT FOLDED:** `magicLedger.ARCANE_INSTITUTION_PATTERN`. It answers a
+different question — how much arcane infrastructure stands in a roster — has one home
+already, and converting it moves magicProfile/capacityModel output.
+
+**RECEIPTS.** 39 pins in `tests/domain/arcaneIdentity.test.js`; 5 pins in the census
+walker. Guard-the-guard: five mutants, each reverting ONE closure, run individually —
+faction detector un-gated **6 red**, 'Tower' back in the certain tier **1 red**, L11 gate
+dropped **1 red**, L12 raw `magicLevel` restored **4 red**, L12 catalog consult dropped
+**1 red**. The last of those started VACUOUS and was rebuilt: `Bardic college` (authored
+`tags:['education']`) is the only catalog name in the whole file that matches this surface's
+ambiguous pattern yet is authored mundane, so it is the only pin that can prove the consult.
+
+---
+
+#### ⛔ MG-3h L10–L12 — the SUPERSEDED stop (2026-08-03, Fable; kept for its reasoning)
+
+L1 and L4–L9 are closed (L2 is NOT — see the corrected MG-3b block above; it is blocked
+with L3 on the same warDeployment line). **L10–L12 are NOT attempted**, and the reason is a substrate fact the
+register could not see when it ranked them "lowest load": L10's gate is a change to the
+signature of a CANONICAL DETECTOR, not a local edit.
+
+- **L10 (factionArchetypes.js:60 + power/factionCategories.js:62).** The arcane
+  name-regex mixes UNAMBIGUOUS tokens (`mage|arcane|wizard|sorcer|warlock|magister`)
+  with AMBIGUOUS ones (`tower|academy|college|sage`) — the second set is arcane only
+  where magic functions; a tower is masonry and a college is scholars. But
+  `factionArchetype(faction)` takes ONE argument and has 10+ consumers spanning
+  src/domain (factionProfile, rulingPower, rulingPowerCoup, dossier/powerStrata,
+  dossier/powerSupport, worldPulse/migrationKernel, worldPulse/supplyKernel) and
+  src/generators (factionRoles). Most receive a faction row with no settlement in scope,
+  so the world law is not reachable at those call sites without threading it through
+  every one. An OPT-IN second parameter would leave the leak half-closed at whichever
+  sites were not converted — the N−1 sweep that reads as a fix and is not one.
+- **PROPOSED (chair to rule):** split `NAME_RULES`' arcane entry into `ARCANE_CERTAIN`
+  and `ARCANE_AMBIGUOUS`; give `factionArchetype` an options bag defaulting to
+  magic-functioning; run a FULL consumer census of the 10+ sites in one wave, threading
+  the settlement's `magicLedger` where it exists and recording an explicit
+  exempt-with-reason for any site where it genuinely does not. MG-LAW-4 keeps the
+  certain tokens ungated — a faction literally named "Mages' Guild" in a mundane realm
+  is an authored oddity and the classifier is right to call it arcane.
+- **L11 (institutionProbability.js:90-95,174)** and **L12 (customContent.js:268-273)**
+  are genuinely small and were left with L10 only to keep the classifier wave whole —
+  all three are the same "a second spelling of the magic gate" class, and splitting them
+  across two waves is how the spellings drift apart again.
+
+WHY STOPPED RATHER THAN TAKEN: war volume §10.6 — a deviation an implementer believes
+necessary is proposed, never taken — and a 10-site contract change to a canonical
+detector is not a lane decision. It also could not be verified to this program's own
+standard right now: the working tree does not build (another lane's untracked
+`envoyInterceptionStage.js` imports a `targetCommissionedPlant` that exists nowhere), so
+no chunk- or build-side evidence is available for a change of that reach.
+
+#### ✅ MG-3 VERIFIER PASS (Lane B adversarial verify, 2026-08-03; all receipts executed)
+
+Run in a CLEAN detached worktree at 96e27699 (the live minifold tree carries other lanes'
+dirty files and does not build). Findings beyond the L2 correction above:
+
+- **GUARD-THE-GUARD PASSES for all eight landed closures.** Baseline 6 files / 61 tests
+  green; then each closure reverted INDIVIDUALLY to its own parent and the pin re-run:
+  L1 4 red · L2 (unit) 2 red · L4+L5 7 red · L7 1 red · L6 2 red · L8 2 red (walker +
+  deadCode) · L9 4 red. No pin is vacuous; every one fails without its fix.
+- **CONTENT-DEPTH FLOOR MET AND TOTAL.** All 7 mundane neighbour slots carry exactly 4
+  variants, all 4 distinct, none null, and none re-trips `allowsGeneratedContent`. Swept
+  across every content profile (standard/pg13/family/gritty/mature/default) × every
+  relationship × every faction type: **exactly 7 substitutions, all in the `magic` slot** —
+  no non-magic label is ever mis-substituted into the scholarly pool, and no slot falls to
+  the null/skip arm. A magical world: 0 labels moved, **0 rng draws**. legacyGenerator
+  carries 2 slots × 4 variants on a stable per-event hash. MG-LAW-3 holds.
+- **MG-LAW-2 HELD ABSOLUTELY.** Zero deity/faith/temple/belief/patron modules appear in
+  the lane's whole commit range (50b69622..96e27699).
+- **L7 ENVELOPE SHAPE CLEAN.** The new short-circuit returns the identical 9-key set as
+  the dead-magic envelope AND the normal ladder; the present-guard holds (an axis-less
+  record still reads `limited`/`restricted`, unmoved); MG-LAW-4 conditioning works (an
+  authored tower at dial 0 keeps the ladder running).
+- ⚠️ **UNDISCLOSED BEHAVIOUR SHIFT IN MG-3e (small, benign, but state it).** The commit
+  claims "every other input bands identically to the replaced ladder, pinned at the
+  0/25/26/65/66 boundaries". The DIAL boundaries are indeed identical (the only dial
+  divergence is priority 0: old `low` → new `none`, which IS the fix). The LEGACY BAND
+  vocabulary is not: the replaced ladder passed `rare`/`moderate`/`common`/`pervasive`
+  through RAW, and the canonical accessor folds them. Measured on a `Teleportation circle`
+  roster — `{ magicLevel: 'rare' }` (no dial) produced **0 warnings before, 1 after**
+  ("Magic level is set to Low…"). Only reachable from a legacy or imported save carrying
+  the stale lens vocabulary the generator never emits, and the new warning is arguably the
+  more correct reading — but it is a live output change on existing saves and belongs on
+  the record rather than in a paragraph asserting equivalence.
+- ⚠️ **MG-3g's RECEIPT HAS NO CONSUMER.** `unknownBand` / `KNOWN_MAGIC_BAND_TOKENS` /
+  `UNKNOWN_BAND_FALLBACK` are read by `tests/domain/magicBandReceipt.test.js` and by
+  NOTHING in `src/`. The silent guess is now an unread receipt: a drifted band token is
+  still invisible to the running system, and no walker censuses the vocabulary. The fix is
+  a real improvement in shape and no improvement in observability until a certification row
+  or a walker reads it. Recommend pairing it with a census before L9 is called closed.
+- **LATENT, NOT LIVE — the present-guard's own edge.** `magicLedger.present` is keyed on a
+  numeric `priorityMagic` OR a non-empty band string, NOT on the magic axis: `magicLedger({
+  config: { magicExists: false } })` returns the NEUTRAL envelope (`present:false`), so a
+  config carrying only `magicExists:false` escapes every present-guarded gate this lane
+  wrote. Not reachable today — `DEFAULT_CONFIG` always carries `priorityMagic:50`, MG-2's
+  projection stamps `{ magicExists:false, priorityMagic:0 }`, and ConfigurationPanel zeroes
+  the dial — so every real mundane record is `present:true` and gated correctly. It bites
+  only a hand-crafted or partially-imported config. Recorded so it is not re-found as a bug.
+- **REGRESSION ATTRIBUTED.** `tests/domain` + `tests/generators` at 96e27699 in a clean
+  worktree: 891 files / 11,693 tests, 8 red in 5 files (changeAuthorityPolicy.contract,
+  coalitionTrust, generosityReactions, guidanceRegistry.walker, roadsParticipation). The
+  SAME 5 files / 8 tests are red at the pre-lane base 50b69622 — identical, none Lane B's;
+  the walker censuses name other lanes' files (npcVerdictPulse, warRulingsNews,
+  warSeatBooks). `tsc --noEmit` reports zero errors on every file the lane touched.
+
+### MG-4 — THE MEASURE (realm-scope acceptance)
+
+The dead-magic discipline promoted to realm scope, all soak/gate-side:
+(1) THE MUNDANE-REALM PIN — a fixed-seed instant world with magic:'no'
+asserts, across ALL members: every world_law_magic certification row green,
+zero arcane institutions/factions/services (the §3 classifiers' vocabulary as
+the census), zero magical/wild_magic history events, zero teleport edges,
+magicProfile all-absent everywhere. (2) THE TWIN-WORLD ENVELOPE (MG-LAW-3) —
+same seed-family magical vs mundane: member/institution/service counts within
+an authored tolerance band; a mundane world measurably NOT thinner. (3) THE
+PULSE PIN — N advances of the mundane realm mint zero magic_deadzone /
+magic_practitioner / magic_regime_* events (the four pulse magic kinds,
+grep-censused). (4) A mutant control per pin (un-gate one closure, prove the
+pin reds).
+
+#### ✅ MG-4 BUILT AND LANDED 2026-08-03 — tests/lib/instantWorld/mundaneRealmAcceptance.test.js
+
+21 pins, seed `mg4-acceptance`, small/realistic_regional/highIsland, 5 members.
+
+**MEASURED.** The mundane realm: every `world_law_magic` certification row green (5/5);
+zero arcane institutions, factions and services by the canonical MG-3h census; zero
+magical/wild_magic history events; zero teleport edges *even with a legacy circle planted
+in two members* (the L1 reproduction raised to realm scope); `magicProfile` all-absent on
+every axis for every member. The same-seed MAGICAL twin carries 4 arcane institutions,
+1 arcane faction, 8 arcane services and 2 magical history events — so every absence above
+is a measurement of the world and not of an empty generator.
+
+**THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
+mundane vs magical: members 5 vs 5 (1.000), institutions 134 vs 133 (1.008), factions
+22 vs 24 (0.917), services 193 vs 189 (1.021), history events 24 vs 25 (0.960). A mundane
+realm is not a thinner realm — it is at or above parity on three of the five axes, and
+suppression rides the substitution arms exactly as the law requires.
+
+⚠️ **THESE FIGURES WERE CORRECTED 2026-08-03, AND THE RECORD IS NOW MACHINE-CHECKED.**
+This block, and the test file's own header, previously recorded `institutions 156 vs 158,
+factions 23 vs 23` and omitted services and history events altogether. The harness produces
+neither institution count, and it has always measured five axes rather than three: the
+record was hand-carried and had drifted from the thing it described. A quoted number that
+nobody re-derives is a number that quietly stops being true, so MG-4.2 now carries a pin —
+*the recorded census figures are the ones the harness actually produces* — that parses the
+`RECORDED-CENSUS:` line out of the test file's header and asserts it equals the live
+five-axis census. It reds on any drift and names both places to update. That pin was
+written against the OLD figures first and observed to red, so its catching power is
+measured rather than assumed.
+⚠️ **THE BANDS IN THE FILE ARE PENDING, NOT OWNER-SIGNED** (§6 puts them on the soak).
+They are deliberately generous collapse-catchers so the harness stands and measures before
+the soak runs; one seed cannot answer a seed-FAMILY question. Replace `PENDING_BANDS` and
+delete its note when the owner signs.
+
+**THE PULSE PIN DISCRIMINATES SHARPLY.** Eight ticks over the mundane realm: zero magic_*
+stressor births. The magical twin, same seed and same harness: **40 `magic_deadzone`
+births**, with `magical_instability` also in its candidate space. The census matches on the
+`magic` PREFIX rather than a hand list — the first draft used this document's own four-kind
+list and missed `magical_instability` entirely.
+
+**⚠️ THE HARNESS CAUGHT ITSELF TWICE; both are recorded in the file.** (a) The first pulse
+draft passed bare settlements as `byId` values where the kernel expects
+`{ settlement, causal }` wrappers, so BOTH arms silently returned zero — a vacuous pin that
+only the twin-realm control exposed. (b) The census flagged a mundane metropolis's cathedral
+services as arcane: **'mage' matches inside 'PILGRIMAGE'**. `ARCANE_INST_KW` is unanchored;
+the detector's derived fallback now anchors at word boundaries (with `archmage` restored
+explicitly). ⚠️ **magicFilter's own list is still unanchored** — latent, not live, because
+both of its callers key strictly on catalog institution names and no catalog institution
+NAME carries the substring (verified by scan; two DESCRIPTIONS do). Recorded, not fixed:
+anchoring it moves `filterCatalogForMagic` and `filterServicesForMagic`, a live change
+outside R-BLD-5's four sites. Chair to schedule.
+
+**MUTANT CONTROLS, each reverted individually in source.** Projection stamp deleted →
+**9 of 20 red**; the projection's WORLD-FACT half dropped → **9 red**; MG-3a's teleport
+world-law gate un-gated → **1 red**; magicProfile's dead-magic envelope un-gated →
+**1 red**. Three mutants do NOT red, each for a stated reason rather than a coverage hole,
+and the file's header carries all three: the projection's DIAL half is derivable from the
+world fact (resolveConfig.js:79) so dropping it is inert and its coupling is MG-2's pin;
+magicFilter's strip and institutionProbability's dial-zero are two INDEPENDENT
+suppressions, so removing either alone still yields a mundane realm; and MG-3h's L11 gate
+is a pinned no-op on the resolved path, which is precisely why it moves no golden — its
+catching power lives in the unresolved-config pin in tests/domain/arcaneIdentity.test.js.
+
+## §5 WHAT IS DELIBERATELY NOT BUILT
+
+No third "low magic" realm option in v1 (the binary maps to the existing
+hard axis; a graded realm preset would need the dead genre/magicBias axis
+revived — schema.js:1569's typedef is disposed dead code, and reviving it is
+an owner call). No live realm-level magic gate (MG-LAW-1). No deity/faith
+gating (MG-LAW-2). No retroactive mutation of existing campaigns (the toggle
+is create-time; existing realms keep their members' truth). No stripping of
+authored magical premises (MG-LAW-4). No mobile surface (the bulk-gen card is
+desktop-only by existing design, WorldMap.js:758-770).
+
+## §6 CHAIR CHECKPOINTS FOR SOL
+
+| At | Checkpoint |
+|---|---|
+| Before MG-3 | Read docs/DESIGN_MAGIC_ECONOMY.md (unread by recon; reconcile — it may carry owner rulings on the magic-off case) |
+| MG-2 | If any supabase server-side sanitizer (migrations 089/121/123/129 mirrors) strips realmMagicDefault, STOP and report (recon did not read the DDL) |
+| MG-3b | If gating magicSupport shifts existing war goldens, STOP — that is a live-behavior change needing its own disclosed ruling |
+| MG-4 | Twin-world tolerance bands are owner-signed at the soak (tuning surface) |
+| MG-LAW-2 | The divine-effects ruling is vetoable — if the owner overturns it, defenseGenerator:112-119 + chainMagicSubstitution:25-29 change POLICY, a separate disclosed wave |

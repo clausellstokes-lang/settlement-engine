@@ -93,6 +93,24 @@ describe('corruption — settlement climate adapter', () => {
     expect(readCorruptionClimate(clean).hasCriminalInst).toBe(false);
   });
 
+  it('does not derive criminal presence from current custom presentation tags', () => {
+    const custom = {
+      name: 'Quiet Hall',
+      category: 'Civic',
+      tags: ['criminal'],
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:quiet-hall',
+    };
+    const legacy = { name: 'Quiet Hall', category: 'Civic', tags: ['criminal'] };
+
+    expect(readCorruptionClimate({ institutions: [custom] }).hasCriminalInst)
+      .toBe(false);
+    expect(readCorruptionClimate({ institutions: [legacy] }).hasCriminalInst)
+      .toBe(true);
+  });
+
   it('normalizes crime/security/prosperity into 0..1', () => {
     const c = readCorruptionClimate(withCrime);
     expect(c.crime).toBeGreaterThan(0.5);   // criminalEffective 70 → 0.7

@@ -99,7 +99,7 @@ const WORD_CHAR = '[\\p{L}\\p{N}\\p{M}_]';
  * `newName` is inserted verbatim (function-form replacement), so `$`-sequences
  * in a user-supplied name aren't interpreted as replacement patterns.
  */
-function substituteWholeWord(text, oldName, newName) {
+export function substituteWholeWord(text, oldName, newName) {
   if (!oldName || oldName === newName) return text;
   const re = new RegExp(
     `(?<!${WORD_CHAR})${escapeRegex(oldName)}(?!${WORD_CHAR})`,

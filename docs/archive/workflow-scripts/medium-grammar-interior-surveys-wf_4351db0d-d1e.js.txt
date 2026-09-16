@@ -1,0 +1,47 @@
+export const meta = {
+  name: 'medium-grammar-interior-surveys',
+  description: 'Sequential parity surveys: information/medium, then diplomacy/grammar, then interior books + memory',
+  phases: [
+    { title: 'Information', detail: '3 surveyors — the medium' },
+    { title: 'Diplomacy', detail: '3 surveyors — the grammar' },
+    { title: 'Interior', detail: '3 surveyors — books + memory' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: read-only surveyor for the SettlementForge Fable chair (owner-authorized). Tree: ${MF} (claude/composite-r4; two-writer — Sol is live; edit NOTHING, no git, no gates; focused vitest allowed). CONFIRMED (read/executed) vs PLAUSIBLE. Structured output; file:line evidence.`
+const SCHEMA = { type:'object', required:['findings','summary'], properties:{
+  findings:{type:'array',items:{type:'object',required:['dimension','verdict','evidence'],properties:{
+    dimension:{type:'string'},verdict:{type:'string'},evidence:{type:'string'},detail:{type:'string'}}}},
+  summary:{type:'string'}}}
+
+phase('Information')
+const info = await parallel([
+  () => agent(`${PRE}
+TASK: INFORMATION MECHANICS INVENTORY — the medium's physical layer. Survey: beliefMap/beliefAxes (what is belief-tracked, per whom, decay/update laws), rumorNetwork + migrationRumors (propagation, distance pricing, magnitude), the brokerage stack I1-I4 (houses, stamps/credibility ladder, fidelity, query/feed/plant, patronage), intelActs + compelled intel + M9b ally-intel with deceptive styles, the infowar news kinds, the dramatic-irony brief surfaces, knowledge-lane movers + the knowledge-starvation tuning item. For each: state owned, cost laws (does information COST something to acquire/spread?), conservation/decay, receipts. Verdict: is the medium's physical layer (information as a thing that moves, decays, and is priced) as real as war's?`, {label:'info-mechanics', phase:'Information', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: INFORMATION AGENCY + THE REFLEXIVE QUESTION. (1) Who ACTS on information as strategy: the chooser's info verbs (grep settlementStrategy for query/plant/intel moves), counter-intelligence agency (does anyone DEFEND against plants/spies deliberately?), brokerage houses' own books (patronage exists — do houses act in self-interest anywhere?). (2) Can information BE the policy objective (steal/protect/deny as aims, not just instruments)? (3) THE REFLEXIVE QUESTION — second-order belief: does ANY actor model what OTHERS believe (act on 'they believe X' rather than 'X')? Deception machinery presumes it implicitly (plants target beliefs) — survey whether theory-of-mind is structural anywhere (the victor's belief-read of exhaustion for peeling? K4's design?) or purely implicit. (4) Information LIFECYCLE: secrets (covert seam), revelation events, does a secret ever expire/leak organically? Verdict per dimension: BUILT / PARTIAL / ABSENT.`, {label:'info-agency', phase:'Information', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: INFORMATION MEASUREMENT + DRAMA. (1) Observability: knowledge-lane certification/observations, belief-divergence measures (the dramatic-irony surfaces), any envelope on information health; (2) Herald presence: infowar/knowledge news kinds density; (3) DRAMA INVENTORY — TELLABLE-NOW / PARTIAL / IMPOSSIBLE with the missing piece: the lie that started a war (plant → casus chain); the secret that destroyed a house when it broke; the spy unmasked (infowar_spy_exposed exists — as an ARC or a beat?); the truth that arrived too late (the reputation race — pinned; narrated?); the court that knew and sat still; two courts destroyed by believing each other's bluffs. Verdict: the medium's narrative density vs war's.`, {label:'info-drama', phase:'Information', schema:SCHEMA}),
+])
+
+phase('Diplomacy')
+const diplo = await parallel([
+  () => agent(`${PRE}
+TASK: DIPLOMACY MECHANICS — the grammar's inventory. Survey: the treaty artifact end to end (TERM_CATALOG totality, compliance five-fields, strain, fraying, breach typology, expiry behaviors), NAP standalone instruments, mediation (findCrossPressuredMediator, temple mediation), proposals/approval machinery as the DM-facing grammar, relationship types as quasi-diplomatic states (the REGIONAL_RELATIONSHIP_TYPES vocabulary + transitions), recognition/sphere labels, the vengeance licenses (R2), the sovereignty market (S — designed), the envoy program (WR-7 — designed): distinguish BUILT vs DESIGNED-ONLY throughout. Verdict: the grammar's physical layer.`, {label:'diplo-mechanics', phase:'Diplomacy', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: DIPLOMACY-RELATES-TO-EVERYTHING — the coverage matrix. THE CENTRAL QUESTION: which of the four substances (war, trade, faith, populations) can be NEGOTIATED today, and in which situations? Build the matrix: (a) WAR-END terms — the catalog covers which substances; (b) PEACETIME agreements between non-belligerents — can two neutral realms form a POSITIVE-SUM pact about trade (grain-for-ore), faith (shared rite, missionary exchange), population (migration rights, labor)? — or does every agreement require a war to end first? (c) Formation paths INTO agreement other than war-end (grep for any peacetime pact minting); (d) WHO negotiates (agency per substance); (e) enforcement/monitoring parity across substances. The expected finding: diplomacy is war-exit-shaped and the peacetime three-quarters is thin — CONFIRM or REFUTE with evidence.`, {label:'diplo-coverage', phase:'Diplomacy', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: DIPLOMACY MEASUREMENT + DRAMA. (1) Treaty observability (compliance surfaces, the fraying summary, soak observations of agreement health); (2) news kinds for the grammar (signings, breaches, expiries — the audit found breach/expiry RECEIPTLESS: confirm current state post-corrections); (3) DRAMA INVENTORY: the alliance that held twenty years (longevity narrated?); the broken oath's cascade (breach → reputation → the next war); the mediation that saved two realms; the treaty renegotiated from strength; the pact signed for a lie (compelled-intel deception); succession-repudiation (the heir disavows — designed §12.4: built?). TELLABLE-NOW / PARTIAL / IMPOSSIBLE per story. Verdict: the grammar's narrative density.`, {label:'diplo-drama', phase:'Diplomacy', schema:SCHEMA}),
+])
+
+phase('Interior')
+const interior = await parallel([
+  () => agent(`${PRE}
+TASK: INTERIOR MECHANICS — books + memory's inventory. Survey: legitimacy (sources, decay, hits), the coup/ladder-contest lane, factions + seat capture, succession machinery, ruler NPCs (facets, temper reads W0), unrest, G's two-books read (WR-5 designed — what EXISTS of ruler-vs-settlement interest divergence today?), THE MEMORY LEDGERS: relationshipMemory (betrayal, refused-aid, raid histories), E1 obligations/gratitude, grievance records + revanchism decay clocks, disposition stocks (learned character as memory), kinship/lineage edges, the chronicle as institutional memory. For each: state, decay laws (which memories fade, which are permanent), receipts. Verdict: the interior's physical layer.`, {label:'interior-mechanics', phase:'Interior', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: INTERIOR AGENCY + INHERITANCE. (1) Do FACTIONS hold beliefs/positions about FOREIGN matters (a war party vs peace party — designed in H: built?), or is the interior blind to the exterior? (2) Does DOMESTIC AUDIENCE exist — does a ruler's foreign act play to an internal crowd anywhere (legitimacy hits from foreign outcomes: which exist)? (3) INHERITANCE: what does a successor inherit — treaties (succession-repudiation designed), grievances, obligations, the predecessor's dispositions? What resets, what persists, what is REMEMBERED AGAINST the new seat? (4) FORGIVENESS: does reconciliation machinery exist (debt_forgiven, both-signs reframe) and can a grudge be deliberately buried, or do memories only decay on clocks? (5) Can the interior VETO the exterior (H's coalition-overturn: built or designed?). Verdict per dimension.`, {label:'interior-agency', phase:'Interior', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: INTERIOR MEASUREMENT + DRAMA. (1) Observability: legitimacy/coup/faction certification rows + envelopes; memory-ledger health measures; (2) news density for interior events (coups, successions, faction captures — the audit graded coup receipts C for showing dice: confirm the post-correction state); (3) DRAMA INVENTORY: the king who paid the tribute and lost his throne (strain→coup: TELLABLE?); the grudge that outlived both holders (generational memory narrated?); the heir who broke the father's oath; the reconciliation sealed by aid (obligation→alliance conversion); the court divided against itself while the enemy watched (faction split + foreign exploitation — the intervention lanes); the seat that survived by starting a war (legitimacy_hunger's arc). TELLABLE-NOW / PARTIAL / IMPOSSIBLE. Verdict: interior narrative density vs war's.`, {label:'interior-drama', phase:'Interior', schema:SCHEMA}),
+])
+
+return { information: info.filter(Boolean), diplomacy: diplo.filter(Boolean), interior: interior.filter(Boolean) }

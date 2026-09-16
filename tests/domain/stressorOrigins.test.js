@@ -218,13 +218,45 @@ describe('echoes: resolution leaves recent memory', () => {
     const snapshot = snapshotWith({ stressors: [echo] });
     const pressure = {
       kind: 'food', score: 0.7, settlementId: 'a', settlementName: 'Ashford',
-      label: 'Food pressure', reasons: [],
+      label: 'Food pressure', reasons: ['Pressure score 0.70 passed the birth gate.'],
     };
     const candidates = evaluateStressorRules(snapshot, { get: () => null }, { tick: 11, pressures: [pressure] });
     const birth = candidates.find(c => c.candidateType === 'stressor_birth_famine');
     expect(birth).toBeTruthy();
     expect(birth.severity).toBeGreaterThan(0.7); // pressure + echo warmth
     expect(birth.stressor.id).toBe(echo.id);     // same stable id: rebirth overwrites the echo
+    expect(birth.reasons).toContain("The settlement's present condition gives food pressure room to grow.");
+    // anchored: the exact fail-closed pressure phrase above proves the reader reasons are live.
+    expect(birth.reasons.join(' ')).not.toMatch(/0\.70|\b(?:score|gate|echo)\b|_/i);
+    expect(birth.metadata.pressureEvidence).toEqual({
+      kind: 'food',
+      score: 0.7,
+      sourceNotes: ['Pressure score 0.70 passed the birth gate.'],
+    });
+  });
+
+  test('birth receipts project elapsed origin analysis while retaining exact evidence', () => {
+    const snapshot = snapshotWith({
+      edges: [{ id: 'rel.b.a', from: 'b', to: 'a', relationshipType: 'neutral' }],
+      relationshipStates: {
+        'rel.b.a': {
+          history: [{ tick: 7, type: 'label_proposal_applied', fromType: 'hostile', toType: 'neutral' }],
+        },
+      },
+    });
+    const pressure = {
+      kind: 'legitimacy', score: 0.72, settlementId: 'a', settlementName: 'Ashford',
+      label: 'Legitimacy pressure', reasons: ['legitimacy pressure derived from causal state'],
+    };
+    const birth = evaluateStressorRules(snapshot, { get: () => null }, { tick: 10, pressures: [pressure] })
+      .find(candidate => candidate.candidateType === 'stressor_birth_betrayal');
+    expect(birth).toBeTruthy();
+    expect(birth.reasons).toContain('The old handler is gone, but the planted agent remains.');
+    // anchored: the closed abandoned-agent phrase above proves origin projection fired.
+    expect(birth.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|\b(?:ticks?|causal state|score|weight|multiplier)\b|_/i);
+    expect(birth.metadata.originEvidence.variant).toBe('abandoned_agent');
+    expect(birth.metadata.originEvidence.interpretedAtTick).toBe(10);
+    expect(birth.metadata.originEvidence.sourceNote).toMatch(/3 tick\(s\)/);
   });
 });
 

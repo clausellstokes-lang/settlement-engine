@@ -3,6 +3,11 @@
 // Culture determines which specific goods satisfy those needs.
 // Active supply chains suppress imports that are locally produced.
 
+import {
+  allowsGeneratedContent,
+  resolveGenerationContentProfile,
+} from '../domain/generationContentProfile.js';
+
 // ── Faction demand by category × culture ─────────────────────────────────────
 // Each entry: [goods for this culture, demand weight 1-3]
 // Weight drives how many goods appear: 1 = one good, 2 = up to two, 3 = up to three
@@ -132,11 +137,20 @@ const DEMAND_POWER_THRESHOLD = 8;
  * @param {Array}  activeChains  - economicState.activeChains
  * @param {string} tier          - settlement tier
  * @param {Array}  existingImports - already-derived imports (to avoid duplicates)
+ * @param {Object} [contentConfig] generated-theme profile config
  * @returns {string[]} new import labels to append
  */
-export function computeDemandImports(factions, culture, activeChains, tier, existingImports = []) {
+export function computeDemandImports(
+  factions,
+  culture,
+  activeChains,
+  tier,
+  existingImports = [],
+  contentConfig = {},
+) {
   const budget = TIER_DEMAND_BUDGET[tier] || 0;
   if (budget === 0 || !factions?.length) return [];
+  const contentProfile = resolveGenerationContentProfile(contentConfig);
 
   // Build suppression set from active chains
   const activeChainIds = new Set((activeChains || []).map(c => c.chainId));
@@ -183,7 +197,10 @@ export function computeDemandImports(factions, culture, activeChains, tier, exis
     // Each faction contributes at most 1 good to avoid any one faction dominating
     for (const good of cultureGoods[0]) {
       if (results.length >= budget) break;
-      if (!isSuppressed(good)) {
+      if (
+        allowsGeneratedContent(contentProfile, good) &&
+        !isSuppressed(good)
+      ) {
         results.push(good);
         // Add to existing set so next faction won't duplicate
         existingSet.add(good.toLowerCase());

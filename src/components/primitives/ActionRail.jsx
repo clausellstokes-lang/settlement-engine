@@ -10,10 +10,16 @@
  *
  * Hard cap: 5 visible items. The audit's caveat ("the rail will become
  * a magnet") is real — additional items go behind a "More" disclosure.
+ *
+ * RESTORED @ S2r-a (owner's BASE RULING, 2026-07-18): revived verbatim from
+ * origin/master (d024286e). ⚠ KNOWN COLLISION (ruled, not re-litigated): the
+ * guidance layer once retired this file as a kill-list violator (rounded radii,
+ * rgba tones); the owner's base ruling supersedes. The materials pass (S2r-c)
+ * flattens these to the deep-craft idiom and lowers the ceilings.
  */
 
 import { useState } from 'react';
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, GOLD_DEEP, INK, CARD, BORDER, PARCH } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 import { useIconsOn } from './IconsContext.js';
@@ -96,12 +102,14 @@ function ActionRow({ item }) {
       aria-describedby={item.hint ? `${item.id}-hint` : undefined}
       title={item.disabled && item.disabledReason ? item.disabledReason : item.label}
       style={{
+        // S2r-c materials: rule-framed, not rounded — the deep-craft flat idiom
+        // (the rounded corners the restored master rail carried are struck;
+        // hairline rule only).
         display: 'flex', alignItems: 'flex-start',
         gap: 8, padding: '8px 10px',
         background: tone.bg,
         color: tone.fg,
         border: `1px solid ${tone.border}`,
-        borderRadius: 4,
         fontSize: FS.sm, fontWeight: 700,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         textAlign: 'left',
@@ -121,12 +129,14 @@ function ActionRow({ item }) {
           {item.tag && (
             <span
               style={{
+                // S2r-c materials: flat parchment chip, hairline-ruled — no radius,
+                // palette tokens (the master rail's rounded + rgba tag is struck).
                 flexShrink: 0,
                 fontSize: FS.xxs, fontWeight: 700,
                 letterSpacing: '0.02em',
-                padding: '1px 5px', borderRadius: 3,
-                background: item.primary ? 'rgba(255,251,245,0.18)' : '#f3ecdc',
-                border: `1px solid ${item.primary ? 'rgba(255,251,245,0.45)' : tone.border}`,
+                padding: '1px 5px',
+                background: PARCH,
+                border: `1px solid ${BORDER}`,
               }}
             >
               {item.tag}
@@ -150,5 +160,9 @@ function ActionRow({ item }) {
   );
 }
 
-const primaryTone   = { bg: '#a0762a', fg: '#fffbf5', border: '#a0762a' };
-const secondaryTone = { bg: '#fff',    fg: '#1c1409', border: '#d2bd96' };
+// S2r-c materials: the rail's tones re-vehicled from master's raw hex onto the
+// deep-craft palette tokens (gold-700 primary, parchment card + parchment-ink
+// secondary, palette border) — same families, routed through the ramp so no raw
+// color literal lands in the tree.
+const primaryTone   = { bg: GOLD_DEEP, fg: CARD, border: GOLD_DEEP };
+const secondaryTone = { bg: CARD,      fg: INK,  border: BORDER };

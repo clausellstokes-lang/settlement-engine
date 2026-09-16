@@ -18,13 +18,27 @@
  */
 
 import { clamp01 } from './relationshipState.js';
-import { PANTHEON_TUNING } from './pantheon.js';
 import { popToTier } from '../../data/constants.js';
-
-const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
+// The cult-imposition APPLIER + its two small tables moved VERBATIM to the
+// dependency-free leaf ./cultImpositionApply.js (W2b byte-budget extraction) so
+// the eager IMPOSE_CULT event handler reuses them WITHOUT dragging this module
+// (+ relationshipState + the pantheon kernel) into the first-paint closure.
+// Imported + re-exported verbatim here — every sim consumer is unchanged, and
+// SLOTS_BY_TIER folds back into RELIGION_TUNING below (one source per table).
+import { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition, SLOTS_BY_TIER } from './cultImpositionApply.js';
+export { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition };
+// Phase 4 W-F2 — the inter-deity stance leaf. The LOCAL lane consumes the law-METHOD
+// terms only (methodClash / lawSign), gated on the law axis so every law-neutral
+// legacy fixture stays byte-identical; the good–evil fields are the W-F4 global lane.
+import { deityTemper } from './deityAxes.js';
+import { methodClash, lawSign, STANCE_TUNING } from './deityStance.js';
+// Phase 4 W-F3 — the piety amplifier read helper. pietyMultOf is the identity
+// short-circuit reader (absent record ⇒ literal 1.0), so the mandate coupling is
+// byte-identical on every deity-free / tick-0 / zero-span fixture.
+import { pietyMultOf } from './piety.js';
 
 export const RELIGION_TUNING = Object.freeze({
-  SLOTS_BY_TIER: Object.freeze({ thorp: 1, hamlet: 2, village: 2, town: 3, city: 5, metropolis: 7 }),
+  SLOTS_BY_TIER,
   CULT_SEED_SHARE: 4,         // an arriving cult's seed share
   SHARE_STEP_MAX: 6,          // max adherent-share a deity gains/loses per tick (gradual)
   PUSH_MARGIN: 1.1,           // same-niche push-out: newcomer claim must beat incumbent share ×this
@@ -50,20 +64,25 @@ export const RELIGION_TUNING = Object.freeze({
                               // discredited patron faces a challenge from any established rival (even
                               // cross-niche), no DM imposition required ("when legitimacy is low, the top
                               // three compete"). A more-rightful rival can then topple it via the roll.
+  // ── THE UNAFFILIATED SINK (owner piety-dynamics addendum, 2026-07-10) ──────────
+  // A 'none' bucket in the 100-point ledger: adherents drift to indifference under a
+  // sustained golden age with a WEAK church (prosperity + stability + LOW religious
+  // authority — comfort empties the pews), and flood BACK to the pantheon under crisis
+  // (crisisDisorder01 = revival). Completes the historical cycle piety→order→prosperity
+  // →secularization→crisis→revival and is a second brake on lawful drift (golden ages
+  // quietly empty their own pews). Slow, clamped, BOUNDED (SINK_MAX < 100 ⇒ no atheist
+  // collapse — a secular city, never a godless one); 'none' is a SCALAR field, never a
+  // deity entry, so it never ranks, contests, or holds the seat. Gated on a measured
+  // piety record ⇒ inert (byte-identical) wherever the neutrality theorem holds.
+  SINK_MAX: 45,               // hard ceiling on the unaffiliated share (majority-faithful always)
+  SINK_SECULAR_RATE: 0.02,    // per-tick fraction of the remaining headroom that leaks to 'none' at full secular pull (slow)
+  SINK_REVIVAL_RATE: 0.06,    // per-tick fraction of the current 'none' a full crisis reclaims (revival outpaces drift — the great awakening)
 });
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
-/** A deity's niche key — its temperament × alignment. @param {any} d @returns {string} */
-export function nicheOf(d) {
-  return `${d?.temperamentAxis || 'neutral'}:${d?.alignmentAxis || 'neutral'}`;
-}
-
-/** Slot capacity for a settlement tier (how many faiths the populace sustains). @param {string} tier */
-export function capacityForTier(tier) {
-  return /** @type {Record<string, number>} */ (RELIGION_TUNING.SLOTS_BY_TIER)[tier] ?? 2;
-}
+// (nicheOf / capacityForTier live in ./cultImpositionApply.js — re-exported above.)
 
 // ── Faith MASS: a settlement's weight in PROJECTING and RESISTING cross-settlement
 // faith influence. A bigger settlement sways its smaller neighbours strongly and barely
@@ -94,10 +113,7 @@ export function neighbourFaithInfluence(neighbourMass, targetMass) {
   return Math.max(MASS_INFLUENCE_MIN, Math.min(MASS_INFLUENCE_MAX, r));
 }
 
-/** 0..1 global-rank strength of a deity (major > minor > cult). @param {any} d */
-export function deityRankStrength(d) {
-  return /** @type {Record<string,number>} */ (DEITY_RANK_STRENGTH)[d?.rankAxis] ?? DEITY_RANK_STRENGTH.minor;
-}
+// (deityRankStrength lives in ./cultImpositionApply.js — re-exported above.)
 
 /** Active (non-suppressed) deity refs, codepoint-sorted. @param {Record<string, any>} deities */
 function activeRefs(deities) {
@@ -105,19 +121,22 @@ function activeRefs(deities) {
 }
 
 /**
- * Largest-remainder renorm of ACTIVE deity shares to sum exactly 100 (integer
- * points). File-local mirror of powerGenerator's renormalizeFactionPower so the
- * pantheon and the power system enforce the same conserved-share invariant.
- * @param {Record<string, any>} deities
+ * Largest-remainder renorm of ACTIVE deity shares to sum exactly `target` integer points
+ * (default 100 — the conserved-pantheon invariant). File-local mirror of powerGenerator's
+ * renormalizeFactionPower. `target < 100` is the UNAFFILIATED-SINK case: the faithful
+ * occupy (100 − noneShare) and the 'none' bucket holds the rest — proportions preserved,
+ * so revival reabsorbs share back into the pantheon.
+ * @param {Record<string, any>} deities @param {number} [target]
  */
-export function renormShares(deities) {
+export function renormShares(deities, target = 100) {
   const keys = activeRefs(deities);
   if (!keys.length) return;
+  const T = Math.max(0, Math.round(Number(target) || 0));
   const total = keys.reduce((t, k) => t + Math.max(0, Number(deities[k].share) || 0), 0);
-  if (total <= 0) { const even = Math.floor(100 / keys.length); keys.forEach((k, i) => { deities[k].share = even + (i < 100 - even * keys.length ? 1 : 0); }); return; }
+  if (total <= 0) { const even = Math.floor(T / keys.length); keys.forEach((k, i) => { deities[k].share = even + (i < T - even * keys.length ? 1 : 0); }); return; }
   let assigned = 0;
-  const rows = keys.map((k) => { const exact = Math.max(0, Number(deities[k].share) || 0) / total * 100; const floor = Math.floor(exact); assigned += floor; return { k, floor, rem: exact - floor }; });
-  let leftover = 100 - assigned;
+  const rows = keys.map((k) => { const exact = Math.max(0, Number(deities[k].share) || 0) / total * T; const floor = Math.floor(exact); assigned += floor; return { k, floor, rem: exact - floor }; });
+  let leftover = T - assigned;
   rows.slice().sort((a, b) => (b.rem - a.rem) || codepoint(a.k, b.k)).forEach((r) => { if (leftover > 0) { r.floor++; leftover--; } });
   for (const r of rows) deities[r.k].share = r.floor;
 }
@@ -208,53 +227,8 @@ export function ensureReligionState(state, settlement, tier) {
   return s;
 }
 
-/**
- * Reconcile a DM-imposed CULT into a settlement's persistent cult list, honoring
- * tier capacity (the patron reserves one slot) and the one-deity-per-niche rule
- * (temperament × alignment). A large settlement (more slots) hosts cults across the
- * full niche grid; a small one (few slots) reconciles by refusing or evicting the
- * weakest existing cult. PURE: returns the next cult array + an outcome tag; never
- * touches the patron. The incoming `deity` must already be embed-shaped + frozen
- * (the handler owns the field discipline, mirroring setPrimaryDeity).
- * @param {{ patron?: any, cults?: any[], tier?: string, deity: any }} args
- * @returns {{ cults: any[], action: 'added'|'replaced'|'evicted'|'refused', reason: string, evicted: (string|null) }}
- */
-export function reconcileCultImposition({ patron = null, cults = [], tier = 'village', deity }) {
-  const list = Array.isArray(cults) ? cults.filter(Boolean) : [];
-  const ref = String(deity?._deityRef || deity?.name || '');
-  if (!ref) return { cults: list, action: 'refused', reason: 'invalid', evicted: null };
-  // A deity cannot be both patron and cult.
-  if (patron && String(patron._deityRef || patron.name || '') === ref) {
-    return { cults: list, action: 'refused', reason: 'is_patron', evicted: null };
-  }
-  const niche = nicheOf(deity);
-  // NOTE: a cult imposed in the PATRON's niche is NOT refused — it enters as a
-  // contestant and triggers the seeded patron contest (resolvePatronContest) in the
-  // pulse. It still occupies a cult slot, so capacity/eviction below applies.
-  // Same-niche existing cult → replace it (idempotent refresh, or a niche swap).
-  const sameNicheIdx = list.findIndex((c) => nicheOf(c) === niche);
-  if (sameNicheIdx >= 0) {
-    const replaced = String(list[sameNicheIdx]?._deityRef || list[sameNicheIdx]?.name || '');
-    const next = list.slice();
-    next[sameNicheIdx] = deity;
-    return { cults: next, action: 'replaced', reason: replaced === ref ? 'refresh' : 'niche_swap', evicted: replaced === ref ? null : replaced };
-  }
-  // Capacity: total deities (patron + cults) ≤ tier slots ⇒ cult slots = slots − patron.
-  const cultCapacity = Math.max(0, capacityForTier(tier) - (patron ? 1 : 0));
-  if (list.length < cultCapacity) {
-    return { cults: [...list, deity], action: 'added', reason: 'open_slot', evicted: null };
-  }
-  if (cultCapacity === 0) {
-    return { cults: list, action: 'refused', reason: 'no_cult_slots', evicted: null };
-  }
-  // Capacity full → evict the WEAKEST existing cult (lowest global rank; codepoint
-  // tiebreak) so the imposition seats (a small settlement reconciles by displacement).
-  const weakest = list.slice().sort((a, b) =>
-    (deityRankStrength(a) - deityRankStrength(b)) || codepoint(String(a?._deityRef || a?.name || ''), String(b?._deityRef || b?.name || '')))[0];
-  const weakestRef = String(weakest?._deityRef || weakest?.name || '');
-  const next = list.filter((c) => String(c?._deityRef || c?.name || '') !== weakestRef);
-  return { cults: [...next, deity], action: 'evicted', reason: 'capacity_full', evicted: weakestRef };
-}
+// (reconcileCultImposition lives in ./cultImpositionApply.js — re-exported above:
+// the IMPOSE_CULT handler and the sim read the SAME single-source applier.)
 
 /**
  * Attempt to bring a newcomer deity into the settlement this tick. Implements the
@@ -336,6 +310,43 @@ export function advanceShares(state, strengthByRef) {
   renormShares(deities);
   for (const k of keys) deities[k].standing = standingFor(deities[k].share, deities[k].standing);
   pruneSuppressed(state);
+}
+
+/**
+ * THE UNAFFILIATED SINK — secularization + revival on a per-settlement religion state.
+ * Moves adherent share between the pantheon and a scalar 'none' bucket (part of the same
+ * 100-point ledger) and re-normalizes the faithful into (100 − round(noneShare)).
+ * `secularPull` (0..1 = prosperity + stability + LOW religious authority — comfort empties
+ * the pews) leaks share TO 'none', bounded by SINK_MAX so a secular city never becomes a
+ * godless one; `crisisDisorder` (0..1) drains it BACK to the pantheon (revival, faster than
+ * the drift). 'none' is a FLOAT accumulator that NEVER enters state.deities — it can never
+ * rank, contest, or hold the seat. Standings are recomputed on the secularized shares (the
+ * hollow church: deep secularization can demote even the patron). Returns the visible share
+ * + trend for the legibility receipt; a no-op (no faith) returns { share: 0, rising: false }.
+ * Deterministic, mutates state. Conditional-materialization: the noneShare key is absent
+ * once fully faithful again.
+ * @param {{ deities: Record<string, { share: number, standing: string, suppressed?: boolean }>, noneShare?: number }} state
+ * @param {{ secularPull?: number, crisisDisorder?: number }} [opts]
+ * @returns {{ share: number, rising: boolean }}
+ */
+export function applyUnaffiliatedSink(state, { secularPull = 0, crisisDisorder = 0 } = {}) {
+  const T = RELIGION_TUNING;
+  const keys = activeRefs(state.deities);
+  if (!keys.length) return { share: 0, rising: false };
+  const prev = Math.max(0, Math.min(T.SINK_MAX, Number(state.noneShare) || 0));   // float accumulator
+  const pull = clamp01(Number(secularPull) || 0);
+  const crisis = clamp01(Number(crisisDisorder) || 0);
+  const gain = T.SINK_SECULAR_RATE * pull * (T.SINK_MAX - prev);   // approach SINK_MAX under comfort
+  const drain = T.SINK_REVIVAL_RATE * crisis * prev;               // revival reclaims the unaffiliated
+  const none = Math.max(0, Math.min(T.SINK_MAX, prev + gain - drain));
+  const noneInt = Math.round(none);
+  renormShares(state.deities, 100 - noneInt);
+  for (const k of keys) state.deities[k].standing = standingFor(state.deities[k].share, state.deities[k].standing);
+  // Conditional materialization: keep the float while the bucket is VISIBLE (rounds to ≥1)
+  // or still ACCRUING (rising sub-visible) — otherwise (fully faithful again) drop the key.
+  if (noneInt > 0 || none > prev) state.noneShare = none;
+  else if ('noneShare' in state) delete state.noneShare;
+  return { share: noneInt, rising: none > prev };
 }
 
 /** Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while). @param {any} state */
@@ -442,7 +453,17 @@ export function resolvePatronContest(state, rng) {
   // even across niches, with no DM imposition. This is the "top three compete when
   // legitimacy is low" rule: a rotten regime's patron is toppled by a more-rightful faith.
   const patronLegit = patronRef ? clamp01(Number(state.deities[patronRef].legitimacy) || 0) : 1;
-  const organic = Boolean(patronRef) && patronLegit < T.LEGIT_ORGANIC_CONTEST
+  // W-F2 LOCAL lane: a rival whose METHOD opposes the patron's (lawful↔chaotic)
+  // destabilizes the seat — it raises the legitimacy floor at which the patron
+  // becomes organically contestable. methodClash is 0 for every law-neutral/legacy
+  // pair, so this threshold is unchanged (byte-identical) on existing fixtures.
+  const patronDeity = patronRef ? state.deities[patronRef].snapshot : null;
+  let methodPressure = 0;
+  if (patronRef) for (const k of active) {
+    if (k !== patronRef) methodPressure = Math.max(methodPressure, methodClash(patronDeity, state.deities[k].snapshot));
+  }
+  const organicFloor = T.LEGIT_ORGANIC_CONTEST + STANCE_TUNING.CONTEST_METHOD * methodPressure;
+  const organic = Boolean(patronRef) && patronLegit < organicFloor
     && active.some((k) => k !== patronRef && state.deities[k].standing !== 'cult'
          && contestWeightOf(state, k, patronRef) > contestWeightOf(state, patronRef, patronRef));
   const contested = sameNiche || organic;
@@ -487,8 +508,16 @@ export function patronSnapshot(state) {
  * rightful-claim axis, which folds in the compromise chain), blended with share
  * dominance and damped when contested. Identity no-op when the settlement has no state.
  * @param {import('../settlement.schema.js').SimSettlement} settlement @param {Record<string, any>} religionStates @param {string} saveId
+ * @param {Record<string, import('./piety.js').PietyRecord>|null} [pietyByCid] W-F3: the
+ *   tick's piety read-model per settlement (from advanceReligionStates). Attached to
+ *   faithProfile.piety so next tick's amplified sites read it (tick-START measurement);
+ *   absent ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the oracle.
+ * @param {Record<string, import('./martialReadiness.js').MartialRecord>|null} [martialByCid]
+ *   W-F8: the tick's martial-readiness/experience read-model per settlement. Attached to
+ *   faithProfile.martial (conditional) so next tick's expression sites read it; absent for
+ *   a war-free faith settlement ⇒ no martial key ⇒ byte-identical under the oracle.
  */
-export function projectReligionStateOntoSettlement(settlement, religionStates, saveId) {
+export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null, martialByCid = null) {
   const state = religionStates?.[String(saveId)];
   if (!state || !state.deities) return settlement;
   const active = activeRefs(state.deities);
@@ -505,9 +534,22 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
   // damped when a rival presses. This is what props or fails the throne (applyDivineMandate).
   const patronSecurity = clamp01((0.7 * patronLegit + 0.3 * (patronShare / 100)) * (contested ? 0.65 : 1));
   const snap = patronSnapshot(state);
+  // W-F3: attach the piety read-model (derived-never-stored) when the tick computed one
+  // for this settlement — the tick-START source next tick's amplified sites read. Absent
+  // ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the dormancy oracle.
+  const piety = pietyByCid ? pietyByCid[String(saveId)] : null;
+  // W-F8: the martial read-model (readiness / experience), conditional — absent for a
+  // war-free faith settlement ⇒ no martial key ⇒ byte-identical under the dormancy oracle.
+  const martial = martialByCid ? martialByCid[String(saveId)] : null;
+  // The UNAFFILIATED SINK bucket (W-F5.5): the % of the town that keeps no god, surfaced
+  // for the faith panel. Conditional — absent (byte-identical) wherever the sink never ran.
+  const unaffiliated = Math.round(Number(state.noneShare) || 0);
   const faithProfile = {
     patron: snap ? { name: snap.name, deityRef: state.patronRef, share: patronShare, legitimacy: patronLegit } : null,
     deities, contested, patronSecurity,
+    ...(unaffiliated > 0 ? { unaffiliated } : {}),
+    ...(piety ? { piety } : {}),
+    ...(martial ? { martial } : {}),
   };
   return { ...settlement, config: { ...settlement.config, faithProfile } };
 }
@@ -531,19 +573,27 @@ function mandateGovWeight(government) {
   return 0;  // merchant / council / republic / oligarchy / confederation — no divine mandate
 }
 
-/** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. @param {any} deity @param {any} government */
+/** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. The
+ * temper is read through the W-F2 shim (stored verbatim ⇒ byte-identical), and a
+ * bounded LAW term folds in the axis the mandate was blind to: a lawful patron
+ * props traditional rule harder, a chaotic patron props it less. The law term is 0
+ * for a law-neutral/legacy patron (lawSign 0) ⇒ byte-identical on every existing
+ * fixture; only law-authored patrons shift. @param {any} deity @param {any} government */
 function mandateAlignmentFit(deity, government) {
   const g = String(government || '').toLowerCase();
   if (/theocra/.test(g)) return 1;                                  // a theocracy IS its patron's faith
-  const temper = deity?.temperamentAxis, align = deity?.alignmentAxis;
+  const temper = deityTemper(deity), align = deity?.alignmentAxis;
+  const law = lawSign(deity);                                       // +1 lawful · −1 chaotic · 0 neutral/legacy
   let fit = 0.75;
   if (/despot|autocra|imperial|empire/.test(g)) {                   // martial / authoritarian
     if (temper === 'warlike') fit += 0.25; if (align === 'evil') fit += 0.1;
     if (temper === 'peaceful') fit -= 0.25; if (align === 'good') fit -= 0.1;
+    fit -= STANCE_TUNING.MANDATE_LAW * Math.max(0, -law);           // a chaotic patron props despots-by-fear LESS
   } else if (/monarch|feudal|kingdom|throne|royal|king|queen/.test(g)) {   // traditional order
     if (align === 'good' || align === 'neutral') fit += 0.15;
     if (temper === 'peaceful' || temper === 'neutral') fit += 0.1;
     if (align === 'evil') fit -= 0.15;
+    fit += STANCE_TUNING.MANDATE_LAW * law;                         // a lawful patron props traditional monarchy harder
   }
   return clamp01(fit);
 }
@@ -567,7 +617,12 @@ export function applyDivineMandate(settlement) {
   const security = clamp01(Number(profile.patronSecurity) || 0);
   const base = security - 0.45;                  // >0 props, <0 erodes
   const fitFactor = base >= 0 ? fit : 1;         // a mismatched patron props LESS; erosion is fit-agnostic
-  const target = 50 + weight * base * MANDATE_RANGE * fitFactor;
+  // W-F3 site #3: the piety amplifier scales the mandate TARGET swing (a devout city's
+  // divine mandate swings harder in both directions) — the per-tick MANDATE_STEP clamp
+  // below is UNCHANGED, so per-tick boundedness holds. 1.0 (byte-identical) with no
+  // projected piety record (deity-free / tick-0 / zero-span).
+  const pietyMult = pietyMultOf(settlement);
+  const target = 50 + weight * base * MANDATE_RANGE * fitFactor * pietyMult;
   const delta = Math.max(-MANDATE_STEP, Math.min(MANDATE_STEP, (target - leg.score) * MANDATE_PULL));
   const nextScore = Math.round(Math.max(0, Math.min(100, leg.score + delta)));
   if (nextScore === leg.score) return settlement;

@@ -27,7 +27,7 @@ Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 // set one so the limiter runs against `d:<hash>` rather than the ip fallback.
 Deno.env.set('ANALYTICS_HASH_PEPPER', 'test-pepper');
 
-const { handleIngestEvents, stripProps, __setSupabaseFactory } = await import('./index.ts');
+const { handleIngestEvents, stripProps, __setSupabaseFactory, recordVelocity, bandForCounts } = await import('./index.ts');
 
 const UA = { 'user-agent': 'Mozilla/5.0 (Macintosh) AppleWebKit/537.36', 'content-type': 'application/json' };
 
@@ -222,6 +222,40 @@ Deno.test('rate limiter admits when underRate=true (control): not a 429', async 
   } finally {
     __setSupabaseFactory(null);
   }
+});
+
+// ── Bot-wave velocity telemetry (item 4) ─────────────────────────────────────
+
+Deno.test('recordVelocity counts within the window and prunes samples that age out', () => {
+  const map = new Map<string, number[]>();
+  const t0 = 1_000_000;
+  // Three samples inside a 60s window → count 3.
+  assertEquals(recordVelocity(map, 'ip:1.2.3.4', t0, 60_000), 1);
+  assertEquals(recordVelocity(map, 'ip:1.2.3.4', t0 + 1_000, 60_000), 2);
+  assertEquals(recordVelocity(map, 'ip:1.2.3.4', t0 + 2_000, 60_000), 3);
+  // A sample 61s after the FIRST prunes the ones now outside the window: only
+  // the t0+1s and t0+2s samples survive (still within 60s of t0+61s? no —
+  // cutoff = now-60_000 = t0+1_000, filter keeps t > cutoff → t0+2_000 only),
+  // then this new one is pushed → 2.
+  assertEquals(recordVelocity(map, 'ip:1.2.3.4', t0 + 61_000, 60_000), 2);
+  // A different key is independent.
+  assertEquals(recordVelocity(map, 'ip:9.9.9.9', t0 + 61_000, 60_000), 1);
+});
+
+Deno.test('bandForCounts: normal → "", elevated / burst on IP or actor thresholds', () => {
+  // Below both elevated thresholds → normal (no stamp).
+  assertEquals(bandForCounts(0, 0), '');
+  assertEquals(bandForCounts(20, 15), ''); // exactly at threshold is still normal (strict >)
+  // IP crosses elevated (>20) but not burst.
+  assertEquals(bandForCounts(21, 0), 'elevated');
+  // Actor crosses elevated (>15).
+  assertEquals(bandForCounts(0, 16), 'elevated');
+  // IP burst (>60) dominates.
+  assertEquals(bandForCounts(61, 0), 'burst');
+  // Actor burst (>40) dominates.
+  assertEquals(bandForCounts(0, 41), 'burst');
+  // Burst wins over elevated when both trip.
+  assertEquals(bandForCounts(61, 16), 'burst');
 });
 
 Deno.test('stripProps bounds recursion depth and rejects non-object roots', () => {

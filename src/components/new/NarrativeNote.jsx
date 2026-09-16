@@ -20,10 +20,9 @@ export function NarrativeNote({ note }) {
   return (
     <div style={{
       marginBottom: 14,
-      background: 'linear-gradient(135deg, rgba(74,26,122,0.05), rgba(106,42,154,0.03))',
-      border: '1px solid rgba(123,79,207,0.25)',
-      borderLeft: '3px solid rgba(123,79,207,0.70)',
-      borderRadius: 7,
+      background: swatch['#FAF8F4'],
+      border: `1px solid ${swatch['#C8B89A']}`,
+      borderLeft: `3px solid ${swatch['#5A6E82']}`,
       overflow: 'hidden',
       fontFamily: sans,
     }}>
@@ -38,11 +37,10 @@ export function NarrativeNote({ note }) {
           cursor: 'pointer', textAlign: 'left',
         }}
       >
-        <span style={{ fontSize: FS.xs, color: swatch['#7B4FCF'] }}>✦</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#7B4FCF'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>
-        <span style={{ fontSize: FS.xs, color: swatch['#7B4FCF'] }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: FS.xs, color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {/* Body */}

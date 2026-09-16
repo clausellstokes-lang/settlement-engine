@@ -1,0 +1,195 @@
+export const meta = {
+  name: 'phase55-adversarial-review',
+  description: 'Read-only 8-angle adversarial review of the 19 Phase 5.5 mover-ladder source commits, verified',
+  phases: [
+    { title: 'Review', detail: 'two find-lenses (correctness + cleanup/altitude) per commit' },
+    { title: 'Verify', detail: 'one adversarial refuter per candidate finding' },
+  ],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+
+// The 19 source-bearing Phase 5.5 commits (docs-only Round21/Round22 skipped; M8 skipped per scope).
+const COMMITS = [
+  { code: 'W0',       sha: 'dd4f522c', title: 'W0 foundations — derived alignment, temporal audit, evidence hardening', crit: true },
+  { code: 'FP-1',     sha: '4edc5bf8', title: 'FP-1 first-paint reduction (-186,998 bytes; budget ->1,256,000)', crit: true },
+  { code: 'SEASONS-A',sha: 'b17b89db', title: 'SEASONS-A — aspatial food year / granary rhythm', crit: true },
+  { code: '5.5-K',    sha: 'f4d1aeef', title: '5.5-K KEYSTONE — the frozen spatial digest', crit: true },
+  { code: '5.5-M',    sha: '18fc15f2', title: '5.5-M MODULATION — distance/latency governs; live capture seam', crit: true },
+  { code: 'STEP3.5',  sha: '884b5011', title: 'STEP 3.5 Rumors & News — trade-carrier + Perfect-but-Delayed', crit: false },
+  { code: 'WAVE-A',   sha: 'a4e04ad5', title: 'WAVE A — THE BELIEF MAP: world acts on what it believes', crit: true },
+  { code: 'M1',       sha: '4f76f1ee', title: 'M1 EMBATTLEMENT ROUTING — danger becomes route cost', crit: false },
+  { code: 'M2',       sha: '67a94661', title: 'M2 CARAVANS / SUPPLY-STARVATION — trade travels, cut road starves', crit: false },
+  { code: 'M3',       sha: 'ce949b8f', title: 'M3 SEASONS-B / WINTER ROADS — the road has a season', crit: true },
+  { code: 'FP-R',     sha: '2109a05b', title: 'FP-R SPATIAL LEDGER CONSOLIDATION — one namespace, budget wall cleared', crit: true },
+  { code: 'M4',       sha: '2825b132', title: 'M4 MIGRATION-WITH-MORTALITY — population flows and can die on the road', crit: false },
+  { code: 'M5',       sha: 'b5aebf27', title: 'M5 ARMY-TRANSIT + FIELD COMBAT — armies march, siege = starvation', crit: false },
+  { code: 'M6a',      sha: 'a664d15b', title: 'M6a COMMODITY CONTINUITY — ore must come from an ore-maker', crit: false },
+  { code: 'M6b',      sha: 'efd3bb5a', title: 'M6b ENTREPOTS / TOLLS — centrality earned by caravans that pass', crit: false },
+  { code: 'M6c',      sha: '245d9572', title: 'M6c GREED vs DANGER — caravan master weighs profit vs pestilence', crit: false },
+  { code: 'M6d',      sha: 'cf2bb9cf', title: 'M6d FLOW-DERIVED ECONOMICS — trade dependency earned by moving goods', crit: false },
+  { code: 'M7',       sha: 'c328c305', title: 'M7 CONTRABAND / SMUGGLE — tail of the greed curve turns criminal', crit: false },
+  { code: 'CL-0',     sha: '0359d243', title: 'CL-0 Simulation Control Layer — aspatial core', crit: true },
+]
+
+const INVARIANTS = `
+CONSTITUTIONAL INVARIANTS (this is a DETERMINISTIC sim — a violation of any is the HIGHEST severity):
+- SAME-SEED BYTE-IDENTITY: same seed => byte-identical output. FORBIDDEN in engine code: Date.now(), new Date() (argless), Math.random(). Randomness only via seeded PRNG (createPRNG / rng.fork('label')). No unrounded float persisted to saved state. No dependence on Map/Set/object insertion order without an explicit sort.
+- DORMANCY: when a feature's marker/opt-in is ABSENT, output must be BYTE-IDENTICAL to before the feature existed. Every new overlay/field must be gated so a world that never opted in is unchanged.
+- FROZEN DIGEST: spatialDigest.distanceMatrix is FROZEN at capture time; all overlays (seasonal, embattlement, tolls) are READ-TIME transforms. NEVER re-bake, mutate, or re-sort the frozen distanceMatrix.
+- CODEPOINT-SORTED MUTATION: any ordered iteration that FEEDS a mutation/accumulation must sort deterministically by codepoint. NOTE: JS Array.prototype.sort() with no comparator sorts by UTF-16 code UNIT, which diverges from codepoint order for non-BMP / certain non-ASCII IDs — flag bare .sort() on id lists IF those ids can be non-ASCII.
+- BUDGETS: any-cast budget is EXACTLY 2252. First-paint closure budget is 1,255,985 bytes (enforced by tests/build/vendorPdfLazy.test.js). Flag any static import that would pull heavy code into the first-paint entry closure.
+There is NO CLAUDE.md in this repo; the "conventions" angle = these invariants + clear local file idioms (quote them), not a CLAUDE.md rule.
+`
+
+const FIND_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          file: { type: 'string', description: 'repo-relative path e.g. src/domain/spatial/migration.js' },
+          line: { type: 'integer', description: '1-indexed line the defect anchors to in the current file' },
+          angle: { type: 'string', description: 'one of A B C D E F G H' },
+          category: { type: 'string', description: 'kebab slug e.g. determinism, off-by-one, dormancy-gate, dead-code' },
+          severity: { type: 'string', enum: ['high', 'med', 'low'] },
+          summary: { type: 'string', description: 'one-sentence statement of the defect' },
+          failure_scenario: { type: 'string', description: 'concrete inputs/state -> wrong output/crash/broken invariant' },
+        },
+        required: ['file', 'line', 'angle', 'category', 'severity', 'summary', 'failure_scenario'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  properties: {
+    verdict: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE', 'REFUTED'] },
+    severity: { type: 'string', enum: ['high', 'med', 'low'] },
+    justification: { type: 'string', description: 'one paragraph citing exact file:line evidence for the verdict' },
+    invariant_risk: { type: 'string', enum: ['none', 'byte-identity', 'dormancy', 'frozen-digest', 'codepoint-sort', 'budget', 'master-merge'] },
+  },
+  required: ['verdict', 'severity', 'justification', 'invariant_risk'],
+}
+
+function diffHeader(c) {
+  return `COMMIT ${c.sha} — ${c.title} (mover-ladder step ${c.code}).
+The checkout at ${REPO} is already on the branch under review (review-fixes-2026-07-08 HEAD).
+Get the diff: \`cd ${REPO} && git show ${c.sha} --stat\` then for each SOURCE file \`git diff ${c.sha}^..${c.sha} -- <path>\`.
+Review SOURCE files ONLY (src/** or lib/**). SKIP *.test.* / *.spec.* / *.md / *.json / *.sql. Use Read for surrounding context and Grep for callers when tracing cross-file impact. Line numbers must refer to the CURRENT file content (Read to confirm), not diff offsets.`
+}
+
+function correctnessPrompt(c) {
+  return `You are an adversarial CORRECTNESS reviewer auditing ONE commit of SettlementForge, a deterministic JS D&D world-simulator. READ-ONLY: report defects, do NOT fix.
+
+${diffHeader(c)}
+${INVARIANTS}
+YOUR ANGLES (correctness + determinism only — the other reviewer handles cleanup):
+(A) LINE-BY-LINE diff scan: inverted/negated conditions, off-by-one, null/undefined deref, missing await on a promise, falsy-zero bugs (0 or '' treated as "absent"), copy-paste errors (wrong var/index reused), swallowed errors (empty catch / ignored rejection), NON-DETERMINISM (Date.now/new Date/Math.random, or iteration over an unsorted Map/Set/object that feeds output), unrounded float persisted to saved state.
+(B) REMOVED-BEHAVIOR audit: for every DELETED or replaced line in the diff, is its invariant re-established elsewhere? Pay special attention to any removed guard, gate, sort, rounding, or dormancy/opt-in check — did the removal silently break byte-identity or dormancy?
+(C) CROSS-FILE trace: for each changed/added exported function, Grep its callers across ${REPO}/src. Does a new precondition, a changed return shape, a newly-thrown exception, or a changed argument order break an existing call site?
+
+Be exhaustive but precise: report only defects with a CONCRETE, constructible failure scenario. Prefer fewer, real findings over speculation. ${c.crit ? 'This commit touches constitutional invariants — scrutinize determinism, dormancy gating, and the frozen digest especially hard.' : ''}
+Return findings via the structured schema. If the commit is clean on these angles, return an empty findings array.`
+}
+
+function cleanupPrompt(c) {
+  return `You are an adversarial CLEANUP + ALTITUDE reviewer auditing ONE commit of SettlementForge, a deterministic JS D&D world-simulator. READ-ONLY: report, do NOT fix.
+
+${diffHeader(c)}
+${INVARIANTS}
+YOUR ANGLES (cleanup, altitude, conventions — the other reviewer handles correctness):
+(D) REUSE: does the new code re-implement a helper that already exists? Grep ${REPO}/src for an existing function that does the same thing (distance reads, sorting, rounding, PRNG forking, digest access, clamp/lerp, etc.).
+(E) SIMPLIFICATION: redundant or derivable state (a field recomputed from others), dead code (unreachable branch, unused export/param/var), needless indirection.
+(F) EFFICIENCY: redundant recompute on the per-tick or per-route HOT PATH (e.g. rebuilding a map/sort inside a loop that could hoist out), a closure capturing a large scope it doesn't need, an O(N^2) where O(N log N) is trivial and N is settlements/edges.
+(G) ALTITUDE: a bandaid where the real fix belongs deeper; a special-case branch layered onto shared infra that will need re-patching for the next case; a frozen-digest overlay that should be read-time but instead special-cases the capture.
+(H) CONVENTIONS: violates a constitutional invariant above, or a clear local idiom in the surrounding file (quote the idiom/line it breaks).
+
+Report only findings with concrete justification. A cleanup finding must name what to reuse/remove/hoist and why it's safe. ${c.crit ? 'Watch for altitude problems around the frozen digest and dormancy gating especially.' : ''}
+Return findings via the structured schema. If clean, return an empty findings array.`
+}
+
+function verifyPrompt(c, f) {
+  return `Adversarially VERIFY ONE code-review finding against SettlementForge, a deterministic JS world-sim. The checkout at ${REPO} is already on the branch under review. Your DEFAULT posture is to REFUTE — try to prove the finding wrong.
+
+FINDING (commit ${c.sha}, ladder ${c.code}):
+  location: ${f.file}:${f.line}
+  angle/category: ${f.angle}/${f.category}   claimed severity: ${f.severity}
+  claim: ${f.summary}
+  failure scenario: ${f.failure_scenario}
+
+Inspect the ACTUAL code: \`git show ${c.sha} -- ${f.file}\` for the change, Read ${REPO}/${f.file} for current context, Grep for the guards/callers that would prevent or trigger the scenario.
+${INVARIANTS}
+VERDICT rules (recall-biased — keep real defects, kill fake ones):
+- REFUTED: the defect is constructibly wrong, impossible given the types/domain, or ALREADY GUARDED by a check/round/sort/gate elsewhere. You MUST cite the exact guard at file:line.
+- CONFIRMED: you traced the concrete logic path that yields the wrong output / crash / broken invariant; state the exact trigger.
+- PLAUSIBLE: a realistic world-state reaches the code and you cannot fully confirm or refute without executing — default HERE when genuinely unsure (do not refute on a hunch).
+Set invariant_risk to the constitutional invariant threatened (byte-identity / dormancy / frozen-digest / codepoint-sort / budget / master-merge), or 'none'. Do NOT downgrade a genuine invariant violation. Give final severity (a broken invariant is 'high').
+Return the structured verdict with a one-paragraph justification citing exact file:line evidence.`
+}
+
+phase('Review')
+log(`Reviewing ${COMMITS.length} Phase 5.5 source commits — two find-lenses each, then adversarial verify.`)
+
+const perCommit = await pipeline(
+  COMMITS,
+  // stage 1: two find-lenses in parallel; merge + light-dedup findings
+  (c) => parallel([
+    () => agent(correctnessPrompt(c), { schema: FIND_SCHEMA, phase: 'Review', label: `find:${c.code}:corr` }),
+    () => agent(cleanupPrompt(c),     { schema: FIND_SCHEMA, phase: 'Review', label: `find:${c.code}:clean` }),
+  ]).then((rs) => {
+    const all = rs.filter(Boolean).flatMap((r) => (r && r.findings) ? r.findings : [])
+    const seen = new Set()
+    const findings = []
+    for (const f of all) {
+      const k = `${f.file}::${f.line}::${f.category}`
+      if (seen.has(k)) continue
+      seen.add(k)
+      findings.push(f)
+    }
+    return { c, findings }
+  }),
+  // stage 2: adversarial verify each finding (runs as soon as this commit's find completes)
+  (merged) => parallel(
+    merged.findings.map((f) => () =>
+      agent(verifyPrompt(merged.c, f), { schema: VERDICT_SCHEMA, phase: 'Verify', label: `verify:${merged.c.code}:${(f.file || '').split('/').pop()}:${f.line}` })
+        .then((v) => ({ commit: merged.c.sha, code: merged.c.code, title: merged.c.title, ...f, verdict: v }))
+        .catch(() => null)
+    )
+  ).then((arr) => ({ code: merged.c.code, sha: merged.c.sha, title: merged.c.title, verified: arr.filter(Boolean) }))
+)
+
+const commits = perCommit.filter(Boolean)
+const allVerified = commits.flatMap((r) => r.verified || [])
+const surviving = allVerified.filter((f) => f.verdict && f.verdict.verdict !== 'REFUTED')
+const confirmed = surviving.filter((f) => f.verdict.verdict === 'CONFIRMED')
+const plausible = surviving.filter((f) => f.verdict.verdict === 'PLAUSIBLE')
+const refuted = allVerified.filter((f) => f.verdict && f.verdict.verdict === 'REFUTED')
+const invariantHits = surviving.filter((f) => f.verdict.invariant_risk && f.verdict.invariant_risk !== 'none')
+
+log(`Done. ${allVerified.length} candidates verified: ${confirmed.length} CONFIRMED, ${plausible.length} PLAUSIBLE, ${refuted.length} REFUTED. ${invariantHits.length} touch a constitutional invariant.`)
+
+const perCommitSummary = commits.map((r) => ({
+  code: r.code, sha: r.sha, title: r.title,
+  confirmed: (r.verified || []).filter((f) => f.verdict && f.verdict.verdict === 'CONFIRMED').length,
+  plausible: (r.verified || []).filter((f) => f.verdict && f.verdict.verdict === 'PLAUSIBLE').length,
+  refuted: (r.verified || []).filter((f) => f.verdict && f.verdict.verdict === 'REFUTED').length,
+}))
+
+return {
+  totals: { candidates: allVerified.length, confirmed: confirmed.length, plausible: plausible.length, refuted: refuted.length, invariantHits: invariantHits.length },
+  perCommitSummary,
+  invariantHits: invariantHits.map((f) => ({ code: f.code, file: f.file, line: f.line, summary: f.summary, verdict: f.verdict.verdict, risk: f.verdict.invariant_risk, severity: f.verdict.severity })),
+  surviving: surviving.map((f) => ({
+    code: f.code, sha: f.commit, file: f.file, line: f.line, angle: f.angle, category: f.category,
+    verdict: f.verdict.verdict, severity: f.verdict.severity, invariant_risk: f.verdict.invariant_risk,
+    summary: f.summary, failure_scenario: f.failure_scenario, justification: f.verdict.justification,
+  })),
+}

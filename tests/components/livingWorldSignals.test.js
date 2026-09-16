@@ -94,6 +94,22 @@ describe('settlementSignals — self-gating', () => {
     expect(model.standing).toEqual({ id: 's-peace', wins: 3, losses: 1, score: 2 });
   });
 
+  it('mixed numeric/string ids preserve fresh war and disposition signals', () => {
+    const worldState = {
+      tick: 4,
+      deployments: { 8: { targetId: 7, sinceTick: 4, role: 'siege' } },
+      dispositionStats: { 7: { wins: 2, losses: 1, score: 1 } },
+    };
+    const model = settlementSignals({
+      settlement: { ...peacefulTown, id: 7 },
+      settlementId: '7',
+      worldState,
+    });
+
+    expect(model.war).toMatchObject({ besiegedBy: ['8'], fresh: true });
+    expect(model.standing).toEqual({ id: '7', wins: 2, losses: 1, score: 1 });
+  });
+
   it('occupation WITHOUT an active siege still marks war.occupied (front torn down by conquest)', () => {
     // Conquest deletes the siege front, so settlementWarStatus goes null — but the
     // occupation ledger persists across ticks. The Occupied pip must survive that.

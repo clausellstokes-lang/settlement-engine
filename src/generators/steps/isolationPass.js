@@ -1,8 +1,9 @@
 /**
  * Step 8: isolationPass
  *
- * Applies teleportation infrastructure for isolated town+ settlements,
- * subsistence mode stripping, and arcane institution safety-net.
+ * Derives the isolation-support receipt, adds magical substitution only when
+ * mundane supports leave a real gap, applies small-tier subsistence mode, and
+ * enforces planar prerequisites.
  *
  * Isolation pass for the settlement generation pipeline.
  */
@@ -19,7 +20,6 @@ import {
 } from '../isolationGenerator.js';
 import { TOWN_PLUS_TIERS } from '../../data/constants.js';
 import { recordTrace } from '../../domain/trace.js';
-import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
@@ -27,9 +27,9 @@ function instId(name) {
 
 registerStep('isolationPass', {
   deps: ['cascadePass'],
-  reads: ['catalogForTier', 'effectiveConfig', 'tier', 'tradeRoute', 'stress'], // ctx keys this step consumes that another step produces
-  provides: ['stress', 'stressTypes'], // re-emits the container when the subsistence famine joins it
-  mutates: ['institutions', 'effectiveConfig', 'stressTypes'], // prunes the roster + stamps isolation flags / stress on effectiveConfig+stressTypes in place
+  reads: ['catalogForTier', 'effectiveConfig', 'stress', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  provides: ['stress', 'isolationSupport'], // applySubsistenceMode may append an isolation famine to the stress container
+  mutates: ['institutions', 'effectiveConfig'], // prunes the roster + stamps isolation flags on effectiveConfig in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   const { institutions, tier, tradeRoute, effectiveConfig, catalogForTier } = ctx;
@@ -39,7 +39,7 @@ registerStep('isolationPass', {
 
   // Snapshot before each operation so we can trace what changed.
   const beforeTeleport = new Set(institutions.map(i => i.name));
-  applyTeleportationInfrastructure(
+  const isolationSupport = applyTeleportationInfrastructure(
     institutions, tier, tradeRoute, effectiveConfig, catalogForTier, TOWN_PLUS_TIERS, chanceWrapper
   );
   // Trace any teleport-infrastructure institutions that were added.
@@ -61,9 +61,52 @@ registerStep('isolationPass', {
       });
     }
   }
+  if (isolationSupport?.applicable) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: 'isolationSupport',
+      step: 'isolationPass',
+      result: isolationSupport.status,
+      causes: isolationSupport.paths.map(path => ({
+        source: `isolationSupport.${path.type}`,
+        effect: `capacity +${path.capacity}`,
+        reason: path.evidence.join(', '),
+      })),
+      downstreamEffects: [{
+        target: 'structuralValidationPass',
+        effect: isolationSupport.deficit > 0
+          ? `support deficit ${isolationSupport.deficit}`
+          : 'support requirement met',
+        reason: `Capacity ${isolationSupport.capacity}/${isolationSupport.requiredCapacity}.`,
+      }],
+    });
+  }
 
   const beforeSubsistence = institutions.map(i => i.name);
-  const subsistenceFamine = applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper);
+  // applySubsistenceMode strips trade institutions IN PLACE and returns the
+  // (possibly new) stress container — a real famine entry appended when the
+  // isolation famine roll fires. The container is the single channel:
+  // stressConfirmPass re-weighs the entry against granaries and syncs
+  // effectiveConfig.stressTypes from the confirmed set, so the economy sees
+  // famine only when a famine entry actually survives (no more ghost famine).
+  const nextStress = applySubsistenceMode(institutions, tier, tradeRoute, effectiveConfig, chanceWrapper, ctx.stress);
+  const famineAdded = nextStress !== ctx.stress;
+  if (famineAdded) {
+    recordTrace(ctx, {
+      targetType: 'stressor',
+      targetId:   'stressor.famine',
+      step:       'isolationPass',
+      result:     'emergent',
+      causes: [
+        { source: `tradeRoute.${tradeRoute}`, effect: 'derived',
+          reason: `Isolated subsistence ${tier} has no external supply line — a failed harvest cannot be covered by imports, so famine is a live risk.` },
+      ],
+      downstreamEffects: [
+        { target: 'stressConfirmPass', effect: 'context',
+          reason: 'Re-weighed against granaries/food institutions like every other emergent stressor before the economy reads it.' },
+      ],
+    });
+  }
   // Trace any subsistence-stripped institutions (the pass removes
   // institutions incompatible with full subsistence mode).
   const afterSubsistenceSet = new Set(institutions.map(i => i.name));
@@ -76,7 +119,7 @@ registerStep('isolationPass', {
         result:     'subsistence_stripped',
         causes: [
           { source: 'subsistenceMode', effect: 'removed',
-            reason: `Settlement is in subsistence mode. "${name}" requires external supply chains that don't reach here.` },
+            reason: `Settlement is in subsistence mode — "${name}" requires external supply chains that don't reach here.` },
         ],
       });
     }
@@ -94,7 +137,7 @@ registerStep('isolationPass', {
       result:     'requires_teleportation_circle',
       causes: [
         { source: instId('Teleportation circle'), effect: 'missing prerequisite',
-          reason: `"${name}" trades with other planes through a permanent teleportation circle. No circle exists here, so the institution cannot operate.` },
+          reason: `"${name}" trades with other planes through a permanent teleportation circle — no circle exists here, so the institution cannot operate.` },
       ],
     });
   }
@@ -102,37 +145,7 @@ registerStep('isolationPass', {
   // Note: stripArcaneInstitutions runs later in the original (line 889, after faction correlation).
   // We keep it in a separate logical position but it's still part of institution finalization.
 
-  // Merge the subsistence famine into the stress CONTAINER, not just the
-  // effectiveConfig.stressTypes channel applySubsistenceMode already stamped —
-  // stressConfirmPass iterates container entries ONLY (a stressTypes-only
-  // famine was a ghost: it drove the food math but never appeared on the
-  // roster and was erased whenever the confirm pass re-stamped the confirmed
-  // set), and assembleSettlement renders the stressor roster from the
-  // container. Appended LAST so the confirm pass's re-weighting draws for
-  // earlier entries keep their exact order.
-  if (!subsistenceFamine) return {};
-
-  const entries = Array.isArray(ctx.stress) ? [...ctx.stress] : ctx.stress ? [ctx.stress] : [];
-  entries.push(subsistenceFamine);
-  recordTrace(ctx, {
-    targetType: 'stressor',
-    targetId:   'stressor.famine',
-    step:       'isolationPass',
-    result:     'emergent',
-    causes: [
-      { source: 'subsistenceMode', effect: 'derived',
-        reason: `Isolated ${tier} in subsistence mode rolled a famine: no external supply lines to buffer a failed harvest.` },
-    ],
-    downstreamEffects: [
-      { target: 'foodSecurity', effect: 'context' },
-      { target: 'stressTypes',  effect: 'added' },
-    ],
-  });
-
-  // Preserve generateStress's output shape convention (null / bare object /
-  // array) and the catalog-types-only stressTypes channel filter.
-  return {
-    stress:      entries.length === 1 ? entries[0] : entries,
-    stressTypes: entries.map(e => e?.type).filter(t => t && STRESS_TYPE_MAP[t]),
-  };
+  // Write the stress container back (unchanged unless an isolation famine was
+  // appended above). stressConfirmPass (the next step) reads ctx.stress.
+  return { stress: nextStress, isolationSupport };
 });

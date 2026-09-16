@@ -13,7 +13,7 @@
  * authoritatively; whatever the client sends is advisory input, never trusted.
  */
 
-import { supabase, isConfigured, withTimeout } from './supabase.js';
+import { supabase, isConfigured } from './supabase.js';
 
 // ── Pending redeem-code handoff (Account page → purchase surfaces) ──────────
 // sessionStorage, not localStorage: the code should survive the SPA view
@@ -51,17 +51,14 @@ export function clearPendingRedeemCode() {
  * @param {string} code — matched exactly server-side (case preserved).
  * @returns {Promise<{ valid: boolean, kind: 'free_month'|'credits'|null,
  *   reason: null|'invalid_code'|'already_used'|'account_inactive'|'not_configured' }>}
- * @throws on transport failure/timeout — callers show a "try once more" note.
+ * @throws on transport failure — callers show a "try once more" note.
  */
 export async function validateRedeemCode(code) {
   if (!isConfigured) return { valid: false, kind: null, reason: 'not_configured' };
   const trimmed = typeof code === 'string' ? code.trim() : '';
   if (!trimmed) return { valid: false, kind: null, reason: 'invalid_code' };
 
-  const { data, error } = await withTimeout(
-    supabase.rpc('validate_redeem_code', { p_code: trimmed }),
-    15000, 'Redeem code check',
-  );
+  const { data, error } = await supabase.rpc('validate_redeem_code', { p_code: trimmed });
   if (error) throw error;
   return {
     valid:  Boolean(data?.valid),
@@ -82,17 +79,14 @@ export async function validateRedeemCode(code) {
  * @param {string} accountNumber — the referrer's `SF-XXXXXXX` handle; the RPC
  *   normalizes with upper(btrim()) so case/whitespace are forgiven.
  * @returns {Promise<{ ok: boolean, reason: string|null, referralId: string|null }>}
- * @throws on transport failure/timeout.
+ * @throws on transport failure.
  */
 export async function recordReferralIntent(accountNumber) {
   if (!isConfigured) return { ok: false, reason: 'not_configured', referralId: null };
   const value = typeof accountNumber === 'string' ? accountNumber.trim() : '';
   if (!value) return { ok: false, reason: 'unknown_account_number', referralId: null };
 
-  const { data, error } = await withTimeout(
-    supabase.rpc('record_referral_intent', { p_referrer_account_number: value }),
-    15000, 'Referral intent',
-  );
+  const { data, error } = await supabase.rpc('record_referral_intent', { p_referrer_account_number: value });
   if (error) throw error;
   return {
     ok:         Boolean(data?.ok),
@@ -112,14 +106,11 @@ export async function recordReferralIntent(accountNumber) {
  *
  * @param {string} userId
  * @returns {Promise<boolean>}
- * @throws on transport failure/timeout — callers hide the field (fail-quiet).
+ * @throws on transport failure — callers hide the field (fail-quiet).
  */
 export async function hasPriorReferral(userId) {
   if (!isConfigured || !userId) return false;
-  const { data, error } = await withTimeout(
-    supabase.from('referrals').select('id').eq('referee_user_id', userId).limit(1),
-    15000, 'Referral check',
-  );
+  const { data, error } = await supabase.from('referrals').select('id').eq('referee_user_id', userId).limit(1);
   if (error) throw error;
   return Array.isArray(data) && data.length > 0;
 }

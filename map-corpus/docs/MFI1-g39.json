@@ -1,0 +1,595 @@
+{
+ "instrument": "MFI1-g39",
+ "spec": "GENERATION-SPEC.md 4.1c",
+ "exclusions": {
+  "plates_on_disk": 313,
+  "holdout_arm_proposed": 53,
+  "holdout_arm_minimal_swap": 53,
+  "holdout_arms_intersection": 25,
+  "holdout_union_excluded": 81,
+  "holdout_union_present_on_disk": 81,
+  "plates_admissible": 232,
+  "plates_excluded": 81,
+  "arithmetic": "313 on disk - 81 holdout = 232 admissible",
+  "scrub_34_naming_barred": 34,
+  "scrub_intersect_holdout": []
+ },
+ "thresholds": {
+  "phi_disordered_max": 0.3,
+  "solidity_disordered_max": 0.9,
+  "elongation_disordered_min": 1.5,
+  "arm2_cut": "midpoint of the control's rectangle and L-shape readings"
+ },
+ "arm1": {
+  "n_windows": 31,
+  "dropped": [
+   {
+    "key": "hf90",
+    "why": "grain-invalid tier (ODQ 244.5)"
+   },
+   {
+    "key": "hf88",
+    "why": "grain-invalid tier (ODQ 244.5)"
+   },
+   {
+    "key": "hf93",
+    "why": "grain-invalid tier (ODQ 244.5)"
+   },
+   {
+    "key": "hf91",
+    "why": "grain-invalid tier (ODQ 244.5)"
+   },
+   {
+    "key": "hf26@old",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf26@newquarter",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf26@burnt",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf72@east",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf72@west",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf121@huddle",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf239@camp",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf239@vicus",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf347@core",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf347@outerring",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf40@rich",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf40@poor",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf274@oldbank",
+    "why": "sub-window, not pooled"
+   },
+   {
+    "key": "hf274@newcharter",
+    "why": "sub-window, not pooled"
+   }
+  ],
+  "windows": [
+   "hf100",
+   "hf101",
+   "hf104",
+   "hf121",
+   "hf13",
+   "hf138",
+   "hf166",
+   "hf167",
+   "hf17",
+   "hf20",
+   "hf23",
+   "hf235",
+   "hf239",
+   "hf26",
+   "hf274",
+   "hf277",
+   "hf298",
+   "hf3",
+   "hf30",
+   "hf306",
+   "hf324",
+   "hf33",
+   "hf331",
+   "hf34",
+   "hf347",
+   "hf364",
+   "hf37",
+   "hf40",
+   "hf60",
+   "hf62",
+   "hf72"
+  ],
+  "orientation_order_phi": {
+   "p10": 0.0523,
+   "p50": 0.0983,
+   "p90": 0.2069,
+   "n": 31
+  },
+  "orientation_entropy": {
+   "p10": 3.3431,
+   "p50": 3.4728,
+   "p90": 3.5253,
+   "n": 31
+  },
+  "block_solidity_p50": {
+   "p10": 0.6518,
+   "p50": 0.7455,
+   "p90": 0.794,
+   "n": 31
+  },
+  "block_elongation_p50": {
+   "p10": 1.788,
+   "p50": 2.143,
+   "p90": 2.543,
+   "n": 31
+  },
+  "block_elongation_p90": {
+   "p10": 3.228,
+   "p50": 4.612,
+   "p90": 6.57,
+   "n": 31
+  },
+  "block_circularity_p50": {
+   "p10": 0.2391,
+   "p50": 0.3203,
+   "p90": 0.395,
+   "n": 31
+  },
+  "tests": {
+   "phi_p50_lt_0.30": true,
+   "solidity_p50_lt_0.90": true,
+   "elongation_p50_gt_1.50": true
+  },
+  "verdict": "DISORDERED"
+ },
+ "arm2": {
+  "status": "MEASURED",
+  "control": {
+   "mass": {
+    "rect_ceiling": 0.9211,
+    "lshape_ref": 0.7039,
+    "wedge_ref": 0.5565,
+    "ellipse_ref": 0.7711,
+    "cut_rect_vs_lshape": 0.8125,
+    "recovery_rate_min": 0.973,
+    "recovery_rate_median": 0.9875,
+    "merge_rate_max": 0.0382,
+    "split_rate_max": 0.0,
+    "spurious_rate_max": 0.0539
+   },
+   "region": {
+    "rect_ceiling": 0.9272,
+    "lshape_ref": 0.7027,
+    "wedge_ref": 0.5605,
+    "ellipse_ref": 0.7706,
+    "cut_rect_vs_lshape": 0.815,
+    "recovery_rate_min": 0.9427,
+    "recovery_rate_median": 0.9688,
+    "merge_rate_max": 0.0382,
+    "split_rate_max": 0.1351,
+    "spurious_rate_max": 0.1925
+   }
+  },
+  "by_mode": {
+   "mass": {
+    "n_windows": 37,
+    "n_footprints": 4317,
+    "windows": [
+     "hf100",
+     "hf101",
+     "hf104",
+     "hf121",
+     "hf126",
+     "hf128",
+     "hf13",
+     "hf138",
+     "hf16",
+     "hf166",
+     "hf167",
+     "hf17",
+     "hf20",
+     "hf23",
+     "hf235",
+     "hf239",
+     "hf26",
+     "hf260",
+     "hf274",
+     "hf298",
+     "hf3",
+     "hf30",
+     "hf306",
+     "hf324",
+     "hf33",
+     "hf331",
+     "hf34",
+     "hf341",
+     "hf342",
+     "hf347",
+     "hf364",
+     "hf37",
+     "hf375",
+     "hf40",
+     "hf60",
+     "hf62",
+     "hf72"
+    ],
+    "rect_pooled_p10": 0.5075,
+    "rect_pooled_p25": 0.6197,
+    "rect_pooled_p50": 0.6945,
+    "rect_pooled_p75": 0.7515,
+    "rect_pooled_p90": 0.8242,
+    "rect_window_median_of_medians": 0.6973,
+    "share_at_or_above_rect_ceiling": 0.013,
+    "normalised_to_rect_ceiling": 0.754,
+    "cut": 0.8125,
+    "verdict": "IRREGULAR",
+    "by_tier": {
+     "?": {
+      "n": 843,
+      "rect_p50": 0.6961,
+      "normalised": 0.7557
+     },
+     "city": {
+      "n": 817,
+      "rect_p50": 0.6933,
+      "normalised": 0.7527
+     },
+     "metropolis": {
+      "n": 1156,
+      "rect_p50": 0.6945,
+      "normalised": 0.754
+     },
+     "town": {
+      "n": 1227,
+      "rect_p50": 0.6931,
+      "normalised": 0.7525
+     },
+     "village": {
+      "n": 274,
+      "rect_p50": 0.7107,
+      "normalised": 0.7716
+     }
+    }
+   },
+   "region": {
+    "n_windows": 38,
+    "n_footprints": 9705,
+    "windows": [
+     "hf100",
+     "hf101",
+     "hf104",
+     "hf121",
+     "hf126",
+     "hf128",
+     "hf13",
+     "hf138",
+     "hf16",
+     "hf166",
+     "hf167",
+     "hf17",
+     "hf20",
+     "hf23",
+     "hf235",
+     "hf239",
+     "hf26",
+     "hf260",
+     "hf274",
+     "hf277",
+     "hf298",
+     "hf3",
+     "hf30",
+     "hf306",
+     "hf324",
+     "hf33",
+     "hf331",
+     "hf34",
+     "hf341",
+     "hf342",
+     "hf347",
+     "hf364",
+     "hf37",
+     "hf375",
+     "hf40",
+     "hf60",
+     "hf62",
+     "hf72"
+    ],
+    "rect_pooled_p10": 0.5488,
+    "rect_pooled_p25": 0.6471,
+    "rect_pooled_p50": 0.723,
+    "rect_pooled_p75": 0.8098,
+    "rect_pooled_p90": 0.8789,
+    "rect_window_median_of_medians": 0.7213,
+    "share_at_or_above_rect_ceiling": 0.0194,
+    "normalised_to_rect_ceiling": 0.7798,
+    "cut": 0.815,
+    "verdict": "IRREGULAR",
+    "by_tier": {
+     "?": {
+      "n": 1805,
+      "rect_p50": 0.7447,
+      "normalised": 0.8032
+     },
+     "city": {
+      "n": 1602,
+      "rect_p50": 0.7248,
+      "normalised": 0.7817
+     },
+     "metropolis": {
+      "n": 2202,
+      "rect_p50": 0.7104,
+      "normalised": 0.7662
+     },
+     "town": {
+      "n": 3575,
+      "rect_p50": 0.7249,
+      "normalised": 0.7818
+     },
+     "village": {
+      "n": 521,
+      "rect_p50": 0.719,
+      "normalised": 0.7755
+     }
+    }
+   }
+  },
+  "by_subject_set": {
+   "MFS3a-frame": {
+    "mass": {
+     "n_windows": 27,
+     "n_footprints": 3837,
+     "windows": [
+      "hf100",
+      "hf101",
+      "hf104",
+      "hf121",
+      "hf138",
+      "hf166",
+      "hf167",
+      "hf20",
+      "hf23",
+      "hf235",
+      "hf239",
+      "hf26",
+      "hf274",
+      "hf298",
+      "hf30",
+      "hf306",
+      "hf324",
+      "hf33",
+      "hf331",
+      "hf34",
+      "hf347",
+      "hf364",
+      "hf37",
+      "hf40",
+      "hf60",
+      "hf62",
+      "hf72"
+     ],
+     "rect_pooled_p10": 0.5132,
+     "rect_pooled_p25": 0.6201,
+     "rect_pooled_p50": 0.6936,
+     "rect_pooled_p75": 0.7471,
+     "rect_pooled_p90": 0.8172,
+     "rect_window_median_of_medians": 0.697,
+     "share_at_or_above_rect_ceiling": 0.0078,
+     "normalised_to_rect_ceiling": 0.753,
+     "cut": 0.8125,
+     "verdict": "IRREGULAR",
+     "by_tier": {
+      "?": {
+       "n": 637,
+       "rect_p50": 0.6944,
+       "normalised": 0.7539
+      },
+      "city": {
+       "n": 817,
+       "rect_p50": 0.6933,
+       "normalised": 0.7527
+      },
+      "metropolis": {
+       "n": 1156,
+       "rect_p50": 0.6945,
+       "normalised": 0.754
+      },
+      "town": {
+       "n": 1227,
+       "rect_p50": 0.6931,
+       "normalised": 0.7525
+      }
+     }
+    },
+    "region": {
+     "n_windows": 28,
+     "n_footprints": 8841,
+     "windows": [
+      "hf100",
+      "hf101",
+      "hf104",
+      "hf121",
+      "hf138",
+      "hf166",
+      "hf167",
+      "hf20",
+      "hf23",
+      "hf235",
+      "hf239",
+      "hf26",
+      "hf274",
+      "hf277",
+      "hf298",
+      "hf30",
+      "hf306",
+      "hf324",
+      "hf33",
+      "hf331",
+      "hf34",
+      "hf347",
+      "hf364",
+      "hf37",
+      "hf40",
+      "hf60",
+      "hf62",
+      "hf72"
+     ],
+     "rect_pooled_p10": 0.5506,
+     "rect_pooled_p25": 0.6473,
+     "rect_pooled_p50": 0.7222,
+     "rect_pooled_p75": 0.8115,
+     "rect_pooled_p90": 0.8773,
+     "rect_window_median_of_medians": 0.7128,
+     "share_at_or_above_rect_ceiling": 0.0143,
+     "normalised_to_rect_ceiling": 0.7789,
+     "cut": 0.815,
+     "verdict": "IRREGULAR",
+     "by_tier": {
+      "?": {
+       "n": 1462,
+       "rect_p50": 0.7397,
+       "normalised": 0.7978
+      },
+      "city": {
+       "n": 1602,
+       "rect_p50": 0.7248,
+       "normalised": 0.7817
+      },
+      "metropolis": {
+       "n": 2202,
+       "rect_p50": 0.7104,
+       "normalised": 0.7662
+      },
+      "town": {
+       "n": 3575,
+       "rect_p50": 0.7249,
+       "normalised": 0.7818
+      }
+     }
+    }
+   },
+   "footprint-resolving": {
+    "mass": {
+     "n_windows": 10,
+     "n_footprints": 480,
+     "windows": [
+      "hf126",
+      "hf128",
+      "hf13",
+      "hf16",
+      "hf17",
+      "hf260",
+      "hf3",
+      "hf341",
+      "hf342",
+      "hf375"
+     ],
+     "rect_pooled_p10": 0.4567,
+     "rect_pooled_p25": 0.6167,
+     "rect_pooled_p50": 0.7078,
+     "rect_pooled_p75": 0.7918,
+     "rect_pooled_p90": 0.8831,
+     "rect_window_median_of_medians": 0.7233,
+     "share_at_or_above_rect_ceiling": 0.0542,
+     "normalised_to_rect_ceiling": 0.7684,
+     "cut": 0.8125,
+     "verdict": "IRREGULAR",
+     "by_tier": {
+      "?": {
+       "n": 206,
+       "rect_p50": 0.701,
+       "normalised": 0.761
+      },
+      "village": {
+       "n": 274,
+       "rect_p50": 0.7107,
+       "normalised": 0.7716
+      }
+     }
+    },
+    "region": {
+     "n_windows": 10,
+     "n_footprints": 864,
+     "windows": [
+      "hf126",
+      "hf128",
+      "hf13",
+      "hf16",
+      "hf17",
+      "hf260",
+      "hf3",
+      "hf341",
+      "hf342",
+      "hf375"
+     ],
+     "rect_pooled_p10": 0.5314,
+     "rect_pooled_p25": 0.6459,
+     "rect_pooled_p50": 0.7269,
+     "rect_pooled_p75": 0.7958,
+     "rect_pooled_p90": 0.9046,
+     "rect_window_median_of_medians": 0.7316,
+     "share_at_or_above_rect_ceiling": 0.0718,
+     "normalised_to_rect_ceiling": 0.784,
+     "cut": 0.815,
+     "verdict": "IRREGULAR",
+     "by_tier": {
+      "?": {
+       "n": 343,
+       "rect_p50": 0.7733,
+       "normalised": 0.834
+      },
+      "village": {
+       "n": 521,
+       "rect_p50": 0.719,
+       "normalised": 0.7755
+      }
+     }
+    }
+   }
+  },
+  "dropped": [],
+  "subject_set_note": "footprint-resolving = the zoom plates and the village tier, the only frames in which this corpus draws ONE BUILDING AT A TIME. In the MFS3a-frame windows at town tier and above the corpus draws PERIMETER-BLOCK RANGES with serrated frontages and no party lines, so a rectangularity measured there is a RANGE's, not a footprint's. Both aggregates are published; the second is the one that answers 4.1c's question on its own terms.",
+  "verdict": "IRREGULAR",
+  "mode_verdicts": {
+   "mass": "IRREGULAR",
+   "region": "IRREGULAR",
+   "MFS3a-frame/mass": "IRREGULAR",
+   "MFS3a-frame/region": "IRREGULAR",
+   "footprint-resolving/mass": "IRREGULAR",
+   "footprint-resolving/region": "IRREGULAR"
+  }
+ },
+ "outcome_index": 1,
+ "outcome": "arm 1 disordered AND arm 2 ALSO irregular",
+ "what_follows": "hypothesis REFUTED for our target. The corpus's buildings are not rectangular and imitating a generator's squareness would move us AWAY from it. G-38 keeps its four axes; the chaos scoping is not adopted",
+ "why": "arm 1 disordered, arm 2 also irregular"
+}

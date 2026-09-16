@@ -16,10 +16,20 @@
  *   - Economics tab UI
  */
 
-import { getActiveRng } from './rngContext.js';
+import { getActiveRng } from '../kernel/rngContext.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
+import { customDeps } from '../lib/dependencyEngine.js';
+import {
+  nativeSemanticNames,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { availableNativeResourceKeys } from '../domain/resourceSemantics.js';
+import {
+  hasTradeRouteConnection,
+  isTradeRouteDisconnected,
+  SEASONAL_ROUTE_FOOD_IMPORT_RATE,
+} from '../domain/tradeRouteSemantics.js';
 
-// ── Constants (match assessFoodViability in economicGenerator) ─────────────
+// ── Constants (match buildFactionList in economicGenerator) ────────────────
 const PER_CAPITA_NEED        = 2;    // lbs/day per person
 const FARMER_PRODUCTION      = 6;    // lbs/day per farming worker
 const AGRICULTURAL_WORKFORCE = 0.4;  // fraction of population that farms
@@ -30,19 +40,70 @@ const TERRAIN_AGRI = {
   hills: 0.6, desert: 0.3, mountain: 0.4,
 };
 
+// Registered custom food effects are deliberately small and bounded. These
+// constants live beside the canonical food writer so generation, prosperity,
+// viability, and world-pulse stockpiles can never apply different versions of
+// the author's declaration.
+const CUSTOM_PRODUCER_CAPACITY_PER_ITEM = 0.15;
+const CUSTOM_PRODUCER_CAPACITY_CAP = 0.6;
+const CUSTOM_CONSUMER_NEED_PER_ITEM = 0.1;
+const CUSTOM_CONSUMER_NEED_CAP = 0.5;
+
 export function generateFoodSecurity(tier, institutions, config) {
-  const instNames     = (institutions || []).map(i => (i.name||'').toLowerCase());
+  // Native catalog names remain a compatibility vocabulary for old saves.
+  // Current custom names are presentation-only and must not impersonate a
+  // granary, mill, market, magical transit node, or religious food anchor.
+  // Their registered `foodImpact` declarations enter once through the tally
+  // below instead.
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   // Depleted resources stop feeding the food math (a depleted fishing ground no
   // longer counts as fishing). Reads BOTH depletion formats the DEPLETE_RESOURCE
   // event maintains; inert (identical output) when nothing is depleted.
-  const _depletedRes  = new Set([
+  const flatDepletedResources = new Set([
     ...(config.nearbyResourcesDepleted || []),
     ...Object.entries(config.nearbyResourcesState || {})
       .filter(([, v]) => v === 'depleted')
       .map(([k]) => k),
   ]);
-  const resources     = (config.nearbyResources || []).filter(r => !_depletedRes.has(r));
+  const resources = (config.nearbyResources || []).filter(
+    resource => !flatDepletedResources.has(resource),
+  );
+  const customResourceNames = new Set(
+    (config.nearbyResourcesCustom || []).map(name => String(name).toLowerCase()),
+  );
+  const presentCustomResources = resources.filter(
+    name => customResourceNames.has(String(name).toLowerCase()),
+  );
+  const exactCustomResources = Array.isArray(
+    config.nearbyResourceDefinitions,
+  )
+    ? config.nearbyResourceDefinitions
+    : null;
+  const depletedCustomResourceIds = new Set(
+    (Array.isArray(config.nearbyResourceDefinitionsDepleted)
+      ? config.nearbyResourceDefinitionsDepleted
+      : [])
+      .map(definition => (
+        definition?.customDefinitionId
+        || definition?.localUid
+        || ''
+      ))
+      .filter(Boolean),
+  );
+  const materializedCustomResources = exactCustomResources
+    ? exactCustomResources.filter(definition => (
+        !depletedCustomResourceIds.has(
+          definition?.customDefinitionId || definition?.localUid,
+        )
+      ))
+    : presentCustomResources;
+  // Source sidecars permit a native resource and custom definition to share a
+  // display label. Project native membership explicitly instead of subtracting
+  // custom labels and accidentally erasing the native resource.
+  const nativeResources = availableNativeResourceKeys(config);
   const route         = config.tradeRouteAccess || 'road';
+  const hasPhysicalTradeRoute = hasTradeRouteConnection(route);
   const terrain       = config.terrainType || 'plains';
   const _threat        = config.monsterThreat || 'heartland';
   const stresses      = config.stressTypes || (config.stressType ? [config.stressType] : []);
@@ -51,7 +112,9 @@ export function generateFoodSecurity(tier, institutions, config) {
   const population    = config._population || tierDefaultPop(tier);
 
   const hasInst  = (...keys) => instNames.some(n => keys.some(k => n.includes(k)));
-  const hasRes   = (...keys) => resources.some(r => keys.some(k => r.includes(k)));
+  const hasRes = (...keys) => nativeResources.some(
+    resource => keys.some(key => String(resource).includes(key)),
+  );
 
   // ── Institution flags ─────────────────────────────────────────────────────
   const hasSubsistence    = hasInst('subsistence', 'common field', 'household farm', 'farming community');
@@ -87,37 +150,19 @@ export function generateFoodSecurity(tier, institutions, config) {
     'Pastoral & livestock': hasPastoral || hasRes('grazing_land') || hasInst('butcher', 'livestock', 'slaughter', 'dairy', 'cheese', 'tanner', 'tannery'),
     'Fishing & water':      hasFishing,
     'Hunting & foraging':   hasHunting || hasOrchard || hasRes('hunting_grounds', 'foraging_areas'),
-    'Trade & imports':      (route !== 'isolated' || hasTeleport) && hasMarket,
+    'Trade & imports':      (hasPhysicalTradeRoute || hasTeleport) && hasMarket,
   };
   const activeChains      = Object.entries(chains).filter(([,v])=>v).map(([k])=>k);
   const activeChainsCount = activeChains.length;
   const diversityScore    = Math.min(1, activeChainsCount / 3); // 0–1 normalized
-
-  // ── Stress modifiers (computed before storage so reserves reflect siege/
-  //    occupation drain) ──────────────────────────────────────────────────────
-  const stressFamine  = stresses.includes('famine');
-  const stressSiege   = stresses.includes('under_siege');
-  const stressPlague  = stresses.includes('plague_onset');
-  const stressOccupied= stresses.includes('occupied');
-  let productionMult  = 1;
-  let consumptionMult = 1;
-  let effectiveRoute  = route;
-  if (stressFamine)   { productionMult  *= 0.35; }
-  if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
-  if (stressPlague)   { productionMult  *= 0.75; }
-  if (stressOccupied) { consumptionMult *= 1.20; }
 
   // ── Storage buffer (months of food security) ──────────────────────────────
   const baseStorage = hasStateGranary ? (tier === 'metropolis' ? 12 : 8)
                     : hasCityGranary  ? (tier === 'city' ? 7 : 5)
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
                     : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
-  // Mill extends storage — flour lasts longer than grain.
-  const milledStorage = hasMill ? baseStorage * 1.25 : baseStorage;
-  // A fixed reserve drains faster when daily need is elevated. An occupied
-  // settlement's +20% consumption shortens how many months that reserve lasts;
-  // peacetime (consumptionMult === 1) is unchanged.
-  const storageMonths = Math.round((milledStorage / consumptionMult) * 10) / 10;
+  // Mill extends storage — flour lasts longer than grain
+  const storageMonths = Math.round((hasMill ? baseStorage * 1.25 : baseStorage) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -125,8 +170,22 @@ export function generateFoodSecurity(tier, institutions, config) {
   // sanctioned caravans (0.05); magical transport raises the ceiling to its
   // capped, expensive rate. This nonzero dependency is what lets a siege
   // bite an isolated settlement's granary at tick time (foodStockpile).
-  const _isolatedImportCapacity = hasTeleport && magicExists ? FOOD_IMPORT_RATES.teleport : 0.05;
-  const importCapacity = { isolated:_isolatedImportCapacity, road:0.20, river:0.28, crossroads:0.42, port:0.58 }[route] ?? 0.15;
+  const _isolatedImportCapacity =
+    hasTeleport && magicExists
+      ? FOOD_IMPORT_RATES.teleport
+      : 0.05;
+  const _noRouteImportCapacity =
+    hasTeleport && magicExists
+      ? FOOD_IMPORT_RATES.teleport
+      : 0;
+  const importCapacity = {
+    isolated: _isolatedImportCapacity,
+    none: _noRouteImportCapacity,
+    road: 0.20,
+    river: 0.28,
+    crossroads: 0.42,
+    port: 0.58,
+  }[route] ?? 0;
   const tierImportNeed = { thorp:0, hamlet:0, village:0.05, town:0.20, city:0.38, metropolis:0.52 }[tier] ?? 0;
   const importDependency = Math.min(importCapacity, tierImportNeed + (hasMarket ? 0.04 : 0));
   const importPct        = Math.round(importDependency * 100);
@@ -142,7 +201,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // magicSupplement: 0 → 0.35 fraction of food pressure relieved by magic
 
   // ── Physics-based caloric calculation ────────────────────────────────────
-  // Use the same constants as assessFoodViability for consistency
+  // Use the same constants as buildFactionList for consistency
   const terrainAgri    = TERRAIN_AGRI[terrain] ?? 1.0;
   let agriMod = 0;
   if ((hasSubsistence || hasFarmland) && hasRes('grain_fields','fertile_floodplain')) agriMod += 0.25;
@@ -151,9 +210,55 @@ export function generateFoodSecurity(tier, institutions, config) {
   if (hasFishing   && hasRes('fishing_grounds','river_fish')) agriMod += 0.09;
   if (hasMill      && hasRes('river_mills'))         agriMod += 0.08;
   agriMod = Math.min(agriMod, 0.5);
+
+  // Custom content enters food physics exactly once, here, in the writer of
+  // economicState.foodSecurity. The viability model is only a view of this
+  // record, and the world-pulse stockpile advances its persisted deficit and
+  // surplus. Applying the tally in either downstream consumer would double
+  // count or create a second food truth.
+  const customFoodImpact = customDeps.foodImpactTally(
+    institutions || [],
+    materializedCustomResources,
+    tier,
+  );
+  const customProducerCapacityBonus = Math.min(
+    customFoodImpact.producers * CUSTOM_PRODUCER_CAPACITY_PER_ITEM,
+    CUSTOM_PRODUCER_CAPACITY_CAP,
+  );
+  const customConsumerNeedBonus = Math.min(
+    customFoodImpact.consumers * CUSTOM_CONSUMER_NEED_PER_ITEM,
+    CUSTOM_CONSUMER_NEED_CAP,
+  );
+  agriMod += customProducerCapacityBonus;
   const effectiveAgri = Math.min(terrainAgri + agriMod, 2.0);
 
-  const dailyNeed       = population * PER_CAPITA_NEED * consumptionMult;
+  // Stress modifiers
+  const stressFamine  = stresses.includes('famine');
+  const stressSiege   = stresses.includes('under_siege');
+  const stressPlague  = stresses.includes('plague_onset');
+  const stressOccupied= stresses.includes('occupied');
+  let productionMult  = 1;
+  let consumptionMult = 1;
+  let effectiveRoute  = route;
+  if (stressFamine)   { productionMult  *= 0.35; }
+  if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
+  if (stressPlague)   { productionMult  *= 0.75; }
+  if (stressOccupied) { consumptionMult *= 1.20; }
+  // [generators-domain-1] second-wave stress types whose viabilityNote implies a food
+  // impact: wartime conscription thins the agricultural workforce; a slave_revolt disrupts
+  // labour-dependent production; mass_migration stresses the food balance (immigration →
+  // more mouths). Defense scores stay coupled to these types via the priorityHelpers
+  // effective-score multipliers, so there is deliberately NO inline defense penalty (it
+  // would double-count). Golden-shifting (G2).
+  if (stresses.includes('wartime'))        { productionMult  *= 0.85; }
+  if (stresses.includes('slave_revolt'))   { productionMult  *= 0.80; }
+  if (stresses.includes('mass_migration')) { consumptionMult *= 1.15; }
+
+  const baseDailyNeed = population * PER_CAPITA_NEED;
+  const dailyNeed = (
+    baseDailyNeed * consumptionMult
+    + baseDailyNeed * customConsumerNeedBonus
+  );
   // Seeded crop-fortune variance (±8%): the SAME config yields a slightly
   // different harvest per seed — good years vs lean years — so re-rolling a
   // settlement varies its food resilience instead of producing an identical
@@ -175,7 +280,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   // the minor-route trickle (sanctioned caravans, pilgrimage traffic, protected
   // convoys) that every isolated town+ otherwise receives is severed entirely.
   // Rates come from the shared channel ladder (data/foodImportRates.js).
-  const hasMagicTradeImport = effectiveRoute === 'isolated' && hasTeleport && config.magicExists !== false;
+  const disconnectedRoute = isTradeRouteDisconnected(effectiveRoute);
+  const hasMagicTradeImport =
+    disconnectedRoute
+    && hasTeleport
+    && config.magicExists !== false;
   const _hasArcaneMaintainer = hasArcane || hasInst('alchemist', 'academy');
   const _maintainerMult = _hasArcaneMaintainer ? 1 : 0.5;
   const _magicTradeRate = !hasMagicTradeImport ? 0
@@ -188,13 +297,24 @@ export function generateFoodSecurity(tier, institutions, config) {
   // Terrain-aware import coverage: mountain/desert settlements structurally
   // depend on food imports — they import more efficiently (specialized trade infrastructure)
   const _isLowAgriTerrain = ['mountain','desert','hills'].includes(config.terrainType || '');
-  const _terrainImportBoost = _isLowAgriTerrain && effectiveRoute !== 'isolated' ? 0.15 : 0;
-  const importCoverageRate = effectiveRoute === 'isolated'
+  const _terrainImportBoost =
+    _isLowAgriTerrain && hasTradeRouteConnection(effectiveRoute)
+      ? 0.15
+      : 0;
+  // The mountain_pass rung is the annualized seasonal rate and takes no terrain
+  // boost: for a pass town the binding constraint is the winter closure, not
+  // the efficiency of its trade infrastructure, and the pass IS that
+  // infrastructure. Below road, above the isolated trickle.
+  const importCoverageRate = disconnectedRoute
                            ? Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate)
                            : effectiveRoute === 'port'       ? 0.70
                            : effectiveRoute === 'crossroads' ? 0.60
                            : effectiveRoute === 'river'      ? 0.50
-                           : (0.35 + _terrainImportBoost);  // road: 0.35, or 0.50 for low-agri terrain
+                           : effectiveRoute === 'road'
+                             ? (0.35 + _terrainImportBoost)
+                             : effectiveRoute === 'mountain_pass'
+                               ? SEASONAL_ROUTE_FOOD_IMPORT_RATE
+                               : 0;
   const importCoverage  = rawDeficit > 0 ? Math.min(rawDeficit, rawDeficit * importCoverageRate) : 0;
 
   // Magic food offset
@@ -219,7 +339,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   // ── Food security label ───────────────────────────────────────────────────
   let label, color, bg;
   if (stressFamine) {
-    label = 'Deficit: Active Famine';
+    label = 'Deficit — Active Famine';
     color = '#8b1a1a'; bg = '#fdf4f4';
   } else if (deficitPct > 40) {
     label = 'Deficit';
@@ -242,21 +362,21 @@ export function generateFoodSecurity(tier, institutions, config) {
   // Food security floors or caps prosperity before other modifiers apply
   let prosperityMod = null;
   // Magic-trade isolated settlements can import food at extraordinary cost — soften caps to penalties
-  const _magicFoodMitigated = hasTeleport && config.magicExists !== false && effectiveRoute === 'isolated';
+  const _magicFoodMitigated = hasMagicTradeImport;
   // Terrain-structural deficits: mountain/desert settlements import food by economic design.
   // A mountain mining town or desert caravan hub with road trade access is NOT in crisis
   // just because it can't grow grain locally. Treat as structural dependency, not crisis cap.
   const _terrainStructural = (terrain === 'mountain' || terrain === 'desert' || terrain === 'hills')
-    && effectiveRoute !== 'isolated';
+    && hasTradeRouteConnection(effectiveRoute);
 
   if (stressFamine) {
     prosperityMod = { type: 'cap', value: 0, reason: 'Active famine: food production collapsed, prosperity cannot exceed Struggling' };
   } else if (deficitPct > 40) {
     if (_terrainStructural) {
       // Mountain/desert: severe deficit is normal — penalty not hard cap, imports cover it
-      prosperityMod = { type: 'penalty', value: -1, reason: 'The terrain forces heavy food imports. A standing dependency, not a crisis' };
+      prosperityMod = { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports — structural dependency, not crisis' };
     } else if (_magicFoodMitigated) {
-      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports. Prosperity capped at Moderate' };
+      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports — prosperity capped at Moderate' };
     } else {
       prosperityMod = { type: 'cap', value: 1, reason: 'Severe structural food deficit caps prosperity at Poor' };
     }
@@ -285,15 +405,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   const storageNote = storageMonths >= 8 ? `${storageMonths} months strategic reserve`
                     : storageMonths >= 4 ? `${storageMonths} months buffer`
                     : storageMonths >= 2 ? 'seasonal buffer only'
-                    : 'minimal storage. Vulnerable to disruption';
+                    : 'minimal storage — vulnerable to disruption';
 
   const magicNote = magicSupplement > 0.2 ? 'Significant magical food supplement'
                   : magicSupplement > 0.1 ? 'Modest magical food supplement'
                   : magicSupplement > 0 ? 'Trace magical food contribution'
                   : null;
 
-  const importNote = importPct >= 40 ? `${importPct}% import-dependent. Trade disruption means immediate crisis`
-                   : importPct >= 20 ? `${importPct}% imported. Meaningful external dependency`
+  const importNote = importPct >= 40 ? `${importPct}% import-dependent — trade disruption = immediate crisis`
+                   : importPct >= 20 ? `${importPct}% imported — meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
                    : null;
 
@@ -347,6 +467,18 @@ export function generateFoodSecurity(tier, institutions, config) {
       + (importDependency < 0.2 ? 15 : importDependency < 0.4 ? 8 : 0) // low dependency bonus
       + (deficitPct < 5 ? 20 : deficitPct < 20 ? 10 : 0)               // adequacy bonus
     ),
+
+    // Explain the bounded authored contribution without changing the shape of
+    // vanilla settlements. Counts identify what activated; the two normalized
+    // values expose the exact modifier the canonical writer applied.
+    ...(customFoodImpact.producers > 0 || customFoodImpact.consumers > 0 ? {
+      customFoodImpact: {
+        producers: customFoodImpact.producers,
+        consumers: customFoodImpact.consumers,
+        agricultureCapacityBonus: customProducerCapacityBonus,
+        dailyNeedBonusPct: Math.round(customConsumerNeedBonus * 100),
+      },
+    } : {}),
   };
 }
 

@@ -100,48 +100,12 @@ describe('campaignSlice hybrid-timeline reconciliation', () => {
     h.reset();
   });
 
-  test('a failed atomic advance persist does not backfill the advanced campaign on reload', async () => {
-    // Cloud holds the coherent PRE-advance write-set (069 rolled the whole
-    // advance back): campaign tick 4 alongside its (pre-advance) settlement rows.
-    h.cloud.set(UUID_C, campaignAtTick(4, { updatedAt: '2026-01-02T00:00:00Z' }));
-    // The local cache holds the Phase-2 residue: the ADVANCED campaign (tick 5)
-    // with a newer updatedAt — cached by cacheCampaignState BEFORE the RPC failed.
-    h.caches.set('user_a', [{
-      ...campaignAtTick(5, { updatedAt: '2026-01-02T01:00:00Z' }),
-      pendingSync: false,
-    }]);
-
-    const store = makeStore();
-    await store.getState().loadCampaigns();
-    await flush();
-
-    // No hybrid: the campaign tick matches the cloud (= member-settlement) state…
-    const loaded = store.getState().campaigns.find(c => c.id === UUID_C);
-    expect(loaded?.worldState?.tick).toBe(4);
-    // …the advanced snapshot was NOT bare-upserted to the cloud (which would
-    // advance the campaign row without its member-settlement writes)…
-    expect(h.cloud.get(UUID_C)?.worldState?.tick).toBe(4);
-    // …and the stale local cache was rolled back to the coherent cloud copy.
-    expect(h.caches.get('user_a')?.find(c => c.id === UUID_C)?.worldState?.tick).toBe(4);
-  });
-
-  test('a failed backward (undo) persist also reconciles to the cloud write-set', async () => {
-    // Undo restores a LOWER tick locally; if its atomic persist failed, the
-    // cloud still holds the higher post-advance write-set. Bare-backfilling the
-    // undone campaign row would split it from the (post-advance) settlements.
-    h.cloud.set(UUID_C, campaignAtTick(4, { updatedAt: '2026-01-02T00:00:00Z' }));
-    h.caches.set('user_a', [{
-      ...campaignAtTick(3, { updatedAt: '2026-01-02T01:00:00Z' }),
-      pendingSync: false,
-    }]);
-
-    const store = makeStore();
-    await store.getState().loadCampaigns();
-    await flush();
-
-    expect(store.getState().campaigns.find(c => c.id === UUID_C)?.worldState?.tick).toBe(4);
-    expect(h.cloud.get(UUID_C)?.worldState?.tick).toBe(4);
-  });
+  // LINEAGE NOTE (master merge W6): two tests removed here. They pinned
+  // master's reconcileUnpersistedTickDrift, whose invariant is "worldState.tick
+  // moves ONLY through the atomic persist_world_pulse_advance RPC (mig 069)".
+  // This lineage has NO such RPC (serial persistSaveUpdates instead), so the
+  // invariant does not hold and porting the reconcile would roll back
+  // LEGITIMATE local advances. Master-only architecture — dropped with reason.
 
   test('a same-tick locally-newer campaign (rename) still wins and backfills', async () => {
     // Campaign-row-only writes (rename, map save, queued intentions) do not move

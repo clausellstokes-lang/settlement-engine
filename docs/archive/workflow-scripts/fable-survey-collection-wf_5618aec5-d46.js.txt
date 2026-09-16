@@ -1,0 +1,120 @@
+export const meta = {
+  name: 'fable-survey-collection',
+  description: 'Collect every post-boundary FABLE VALIDATION OWED row with receipts into a rulable digest',
+  phases: [
+    { title: 'Segment', detail: 'find the boundary and enumerate marked rows' },
+    { title: 'Extract', detail: 'per-row act, judgments, receipts, spot-checks' },
+    { title: 'Synthesize', detail: 'one rulable digest sorted by judgment density' },
+  ],
+}
+
+const MINIFOLD = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c42c8924-7331-45ab-a096-c5f1bc35f7d3/scratchpad'
+
+phase('Segment')
+const SEG_SCHEMA = {
+  type: 'object',
+  required: ['rows'],
+  properties: {
+    rows: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['file', 'anchor', 'title', 'lineStart', 'lineEnd'],
+        properties: {
+          file: { type: 'string' },
+          anchor: { type: 'string', description: 'stable locator, e.g. date + heading fragment' },
+          title: { type: 'string' },
+          lineStart: { type: 'number' },
+          lineEnd: { type: 'number' },
+          markerCount: { type: 'number' },
+        },
+      },
+    },
+    boundaryLine: { type: 'number' },
+    notes: { type: 'string' },
+  },
+}
+const seg = await agent(
+  `READ-ONLY task in the SettlementForge build worktree ${MINIFOLD} (branch claude/composite-r4, HEAD ffc85a90). Do not edit anything, do not run vitest or any repo script.
+
+The file docs/FABLE_VALIDATION_QUEUE.md contains a FABLE-EXHAUSTION BOUNDARY block (landed at commit 33aeea35, dated 2026-08-10) and, after it, ledger rows carrying the marker "⏳ OPUS-ERA — FABLE VALIDATION OWED" (72 marker occurrences in the file). Also: docs/implementation/packets/town-cartography/TC-4.md carries 5 marker occurrences and docs/SOL_QUEUE.md carries 1.
+
+Enumerate every DISTINCT marked row/act: for each, return file, a stable anchor (date + heading fragment), a short title, lineStart/lineEnd of the row's full text, and how many markers it carries. A "row" is one dated ledger entry or one packet section — the unit a validator would rule on. Include rows ABOVE the boundary only if they carry the marker (they should not). Return the boundary line number too. Be exhaustive — the marker count across your rows should account for all 78 occurrences (72+5+1); note any discrepancy in notes.`,
+  { label: 'segment-queue', phase: 'Segment', schema: SEG_SCHEMA, model: 'opus' }
+)
+
+const rows = seg.rows
+log(`${rows.length} marked rows found (boundary at line ${seg.boundaryLine || '?'})`)
+
+phase('Extract')
+const EX_SCHEMA = {
+  type: 'object',
+  required: ['items'],
+  properties: {
+    items: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['anchor', 'title', 'act', 'judgments', 'receiptCheck', 'density', 'proposal', 'reason'],
+        properties: {
+          anchor: { type: 'string' },
+          title: { type: 'string' },
+          act: { type: 'string', description: 'what was decided/built, 2-4 sentences' },
+          judgments: { type: 'array', items: { type: 'string' }, description: 'each J-*/CR-* or implicit judgment, one line each' },
+          receiptCheck: { type: 'string', description: 'result of spot-checking the row receipts against the repo at HEAD: what was verified, what could not be' },
+          density: { type: 'string', enum: ['HIGH', 'MEDIUM', 'LOW'] },
+          proposal: { type: 'string', enum: ['RATIFY', 'RE-EXAMINE'] },
+          reason: { type: 'string' },
+          commits: { type: 'array', items: { type: 'string' } },
+        },
+      },
+    },
+  },
+}
+
+const chunks = []
+for (let i = 0; i < rows.length; i += 6) chunks.push(rows.slice(i, i + 6))
+
+const extracted = await parallel(chunks.map((chunk, ci) => () =>
+  agent(
+    `READ-ONLY extraction task in ${MINIFOLD} (branch claude/composite-r4, HEAD ffc85a90). No edits, no vitest, no repo scripts. You are collecting evidence for a Fable validation chair who will re-rule post-boundary judgments.
+
+For EACH of these marked rows, read its full text (file + line range given) and produce:
+- act: what was decided or built (2-4 sentences, plain language)
+- judgments: every distinct judgment call in the row (J-* / CR-* ids where present; implicit calls too), one line each
+- receiptCheck: spot-check the row's cited receipts against the repo at HEAD — do cited files/functions/line anchors exist, do cited figures match where cheaply checkable (grep/read only)? Say exactly what you verified and what you could not.
+- density: HIGH (product behavior, architecture, golden/same-seed, persisted shape, refusals of chartered work), MEDIUM (test/census/instrument semantics), LOW (mechanical, doc-only)
+- proposal: RATIFY (receipts hold, reasoning sound) or RE-EXAMINE (a receipt fails, reasoning has a gap, or the decision contradicts a standing law/owner ruling) — the chair decides; you propose with evidence
+- reason: one or two sentences
+- commits: sha(s) named in the row
+
+Rows (chunk ${ci + 1}):
+${JSON.stringify(chunk, null, 2)}
+
+Context you may need: the owner ruled 4 items on 2026-08-11 (capital does not exist as a concept; two generation-side defects approved as SHIFT-2; exit-road labels approved; locks split). Standing laws: THE PROMISE (seed immutability), finite-semantics, the endgame tail ordering, hazard-conversion law. A row that CONFORMS to a Fable-issued CR ruling inherits validation and is a cheap RATIFY.`,
+    { label: `extract-${ci + 1}`, phase: 'Extract', schema: EX_SCHEMA, model: 'opus' }
+  )
+))
+
+const items = extracted.filter(Boolean).flatMap(r => r.items)
+log(`${items.length} acts extracted`)
+
+phase('Synthesize')
+const digest = await agent(
+  `You are compiling the final rulable digest for the Fable validation chair of the SettlementForge program. Input: ${items.length} extracted post-boundary acts (JSON below). Write a single markdown digest to ${SCRATCH}/laneB-fable-survey-digest.md (you may Write this ONE file; nothing else) with:
+
+1. A header: total acts, counts by density and by proposal.
+2. Section "RE-EXAMINE" — every item proposed RE-EXAMINE, sorted HIGH density first, each with anchor, act, the failing/questionable receipt, and what the chair should check.
+3. Section "RATIFY — HIGH density" — full detail per item (the chair reads every one).
+4. Section "RATIFY — MEDIUM/LOW" — compact table (anchor | title | one-line reason).
+5. Section "Marker homes" — the file list where markers must be cleared once ruled (FABLE_VALIDATION_QUEUE.md rows, TC-4.md, SOL_QUEUE.md), with counts.
+
+Then return a summary: the counts, plus the five items most deserving the chair's scrutiny with one line each.
+
+Items JSON:
+${JSON.stringify(items).slice(0, 180000)}`,
+  { label: 'digest', phase: 'Synthesize', model: 'opus' }
+)
+
+return { rowCount: rows.length, actCount: items.length, digestSummary: digest, digestPath: SCRATCH + '/laneB-fable-survey-digest.md' }

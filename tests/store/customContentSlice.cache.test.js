@@ -22,22 +22,58 @@ function makeStore(userId = null) {
   })));
 }
 
-describe('customContentSlice local cache scoping', () => {
+describe('customContentSlice offline owner mirror scoping', () => {
   beforeEach(() => installLocalStorage());
 
-  test('writes signed-in custom content to a user-scoped cache key', () => {
+  test('mirrors only confirmed revisions into each signed-in owner scope', async () => {
     const storeA = makeStore('user_a');
     const storeB = makeStore('user_b');
 
-    storeA.getState().addCustomItem('institutions', { name: 'A Hall' });
-    storeB.getState().addCustomItem('institutions', { name: 'B Hall' });
+    const itemA = await storeA.getState().addCustomItem(
+      'institutions',
+      { name: 'A Hall' },
+    );
+    const itemB = await storeB.getState().addCustomItem(
+      'institutions',
+      { name: 'B Hall' },
+    );
 
-    expect(JSON.parse(localStorage.getItem('sf_custom_content:user_a')).institutions[0].name).toBe('A Hall');
-    expect(JSON.parse(localStorage.getItem('sf_custom_content:user_b')).institutions[0].name).toBe('B Hall');
+    expect(
+      storeA.getState().customContentLastCommandReceipt.persistence.state,
+    ).toBe('confirmed');
+    expect(
+      storeB.getState().customContentLastCommandReceipt.persistence.state,
+    ).toBe('confirmed');
+    expect(
+      JSON.parse(localStorage.getItem('sf_custom_content:user_a'))
+        .institutions[0],
+    ).toMatchObject({
+      name: 'A Hall',
+      definitionId: itemA.definitionId,
+      revisionId: itemA.revisionId,
+    });
+    expect(
+      JSON.parse(localStorage.getItem('sf_custom_content:user_b'))
+        .institutions[0],
+    ).toMatchObject({
+      name: 'B Hall',
+      definitionId: itemB.definitionId,
+      revisionId: itemB.revisionId,
+    });
+    expect(
+      JSON.parse(
+        localStorage.getItem('sf_custom_content_revision_ledger_v1:user_a'),
+      ).definitions[itemA.definitionId].headRevisionId,
+    ).toBe(itemA.revisionId);
+    expect(
+      JSON.parse(
+        localStorage.getItem('sf_custom_content_revision_ledger_v1:user_b'),
+      ).definitions[itemB.definitionId].headRevisionId,
+    ).toBe(itemB.revisionId);
     expect(localStorage.getItem('sf_custom_content')).toBeNull();
   });
 
-  test('clearCloudCustomContent returns to the anonymous cache only', () => {
+  test('clearCloudCustomContent returns to the anonymous mirror only', () => {
     localStorage.setItem('sf_custom_content', JSON.stringify({ institutions: [{ id: 'anon', name: 'Anon Hall' }] }));
     localStorage.setItem('sf_custom_content:user_a', JSON.stringify({ institutions: [{ id: 'a', name: 'A Hall' }] }));
     const store = makeStore('user_a');

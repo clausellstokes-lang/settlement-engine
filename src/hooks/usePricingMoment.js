@@ -2,7 +2,7 @@
  * usePricingMoment.js — Fire a pricing moment on rising-edge condition.
  *
  * The library `lib/pricingMoments.js` enforces 24h cooldown + premium-skip
- * and looks up copy from COPY.pricing.moments. This hook wraps it for
+ * and looks up copy from the `moments` registry in copy/en.js. This hook wraps it for
  * declarative use:
  *
  *   usePricingMoment(
@@ -29,7 +29,7 @@ import { useStore } from '../store/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 
 /**
- * @param {string} reason — A key in COPY.pricing.moments
+ * @param {string} reason — A key in the `moments` registry (copy/en.js)
  * @param {boolean} condition — Trigger; fires on false → true transition
  * @param {(content: { headline:string, body:string, reason:string }) => void} openModal
  * @param {Object} [opts]

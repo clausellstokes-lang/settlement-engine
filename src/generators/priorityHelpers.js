@@ -4,7 +4,12 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './mathHelpers.js';
+import {clamp} from './helpers.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticNames,
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
 
 export const getPriorities = (config = {}) => ({
   economy:  config.priorityEconomy  ?? 50,
@@ -34,7 +39,8 @@ const PORT_INFRA_RE = /\b(?:port|docks?|harbou?r|shipyard|navy)\b/;
  * @returns {Object} Boolean presence flags
  */
 const getInstitutionNames = (institutions = []) => {
-  const names = institutions.map(i => (i.name || '').toLowerCase());
+  const names = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   return {
     hasMilitaryInst:  hasAny(names, ['garrison','barracks','guard','watch','citadel','walls','militia','mercenary','navy','charter hall']),
     hasGarrison:      hasAny(names, ['garrison','barracks','professional guard','professional city watch','multiple garrison']),
@@ -117,8 +123,13 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   };
 
   // Also treat entire Magic/Exotic category institutions with minimum practitioner weight
-  const instNames = institutions.map(i => (i.name || '').toLowerCase());
-  const instCategories = institutions.map(i => (i.category || '').toLowerCase());
+  const nativeInstitutions = institutions.filter(
+    institution => !isMaterializedCustomContent(institution),
+  );
+  const instNames = nativeSemanticNames(nativeInstitutions)
+    .map(name => name.toLowerCase());
+  const instCategories = nativeInstitutions
+    .map(institution => (institution.category || '').toLowerCase());
 
   let rawInstScore = 0;
   const instSources = [];
@@ -141,7 +152,7 @@ export const computeEffectiveMagicPresence = (institutions = [], config = {}) =>
   const instContrib = Math.min(40, rawInstScore * 0.4);
 
   // ── 3. Resource bonus (0–22) ──────────────────────────────────────────────
-  const resources = config.nearbyResources || [];
+  const resources = nativeSemanticResourceKeys(config);
   let resourceBonus = 0;
   const resourceSources = [];
 
@@ -187,7 +198,8 @@ export const hasTeleportationInfra = (institutions = [], config = {}) => {
   if (config?._magicTradeOnly === true) return true;
   // Check actual institution presence
   const hasInstitution = institutions.some(inst => {
-    const n = (inst?.name || '').toLowerCase();
+    if (isMaterializedCustomContent(inst)) return false;
+    const n = String(inst?.name || '').toLowerCase();
     return n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional') || n.includes('airship');
   });
   return hasInstitution;
@@ -221,7 +233,7 @@ export const evaluateWaterDependency = (config = {}, institutions = []) => {
       ? { buffered: true,  strength: 'moderate',
           note: 'Magical trade infrastructure (teleportation) enables limited craft imports despite isolation.' }
       : { buffered: false, strength: 'none',
-          note: 'No trade pipeline. An isolated settlement cannot import raw materials.' };
+          note: 'No trade pipeline — isolated settlement cannot import raw materials.' };
   }
 
   if (effectiveEconomy < 40) {

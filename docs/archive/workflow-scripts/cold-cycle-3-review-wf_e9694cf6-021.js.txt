@@ -1,0 +1,85 @@
+export const meta = {
+  name: 'cold-cycle-3-review',
+  description: 'Cold comprehensive review: 10 fresh-eyed lenses over the composite, adversarially verified',
+  phases: [
+    { title: 'Cold Find', detail: 'ten independent lenses, code only, no prior findings' },
+    { title: 'Verify', detail: 'adversarial refutation panels per finding' },
+  ],
+}
+
+const WORKTREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COLD = `You are a COLD reviewer: you have never seen this codebase and no prior review of it exists as far as you are concerned. Work ONLY from the code in ${WORKTREE} (READ-ONLY — never edit, never run git mutations, never commit). FORBIDDEN inputs: any docs/*AUDIT*, docs/COMPREHENSIVE_REVIEW_PROGRAM.md, docs/*PLAN*, docs/THE_APLUS*, the directory /Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory, and git history/commit messages as sources of findings — derive everything from source, tests, and your own executed probes. Operational facts (process, not review content): run focused tests via 'npx vitest run <file>' from the worktree root (deps resolve via the main tree — never run npm ci/install); four golden-family test files are known-parked and red by design (generatorGoldenMaster, beliefMapGolden, worldpulseDeityGolden, pdf goldenViewModel) — exclude them from findings; the app is a deterministic settlement simulator where AI must never write canon and same-seed-same-output is constitutional. A finding needs: exact file:line, a concrete failure scenario (inputs/state -> wrong outcome), and severity C (breaks correctness/security/data) / H (real defect, bounded blast) / M (quality/consistency). Prefer probe-confirmed findings (write a tiny scratch script under /tmp if needed). Report at most your 12 STRONGEST findings — depth beats volume.`
+
+const LENSES = [
+  ['correctness', 'Hunt logic bugs in the domain engine: off-by-ones, inverted conditions, wrong aggregations, unreachable branches, contradictory derivations between modules. Read the deepest kernels (src/domain/worldPulse, src/domain/state, generators) with a skeptic eye.'],
+  ['state-lifecycle', 'Hunt writes that die on another path: state that survives create/read but ghosts regenerate, undo, clone, import, or migration. Trace persisted families end-to-end (src/store, persistence, mapEdits, campaign state).'],
+  ['security', 'Hunt authorization and data-exposure defects: RLS gaps in supabase/migrations, edge-function input trust (supabase/functions), secrets in client bundles, private data reachable through public surfaces (gallery, share links).'],
+  ['determinism', 'Hunt determinism leaks: Date.now, Math.random, locale-dependent ops, iteration-order dependence, float instability, non-seeded draws — anywhere that could make the same seed produce different output. Include test-only leaks that mask product leaks.'],
+  ['ui-ux', 'Hunt broken or hostile UI: dead controls, overlapping/colliding elements, focus traps, keyboard dead-ends, missing aria, contrast failures, mobile overflow, states with no escape. Read src/components with the eye of a first-time user and a screen-reader user.'],
+  ['prose-quality', 'Hunt generated-prose defects: composed sentences with dangling pronouns, engine tokens or raw keys leaking into user-facing text, register clashes, double punctuation, template seams visible in output. Probe by running generators/composers and reading their actual output.'],
+  ['performance', 'Hunt real performance defects: accidental O(n^2) in tick/generation hot paths, unnecessary eager imports on first paint, unbounded growth of arrays/maps across ticks, repeated recomputation that memoization contracts promise to avoid.'],
+  ['data-contracts', 'Hunt producer/consumer mismatches: fields written by one module and misread by another (shape, casing, optionality), enums consumed with missing arms, silent fallbacks masking absent data, generated artifacts drifting from their sources.'],
+  ['edge-api', 'Hunt client/server contract defects in supabase/functions and their client callers: error paths that strand the UI, unvalidated payloads, idempotency gaps in credit/purchase flows, race windows in rate limits and session handling.'],
+  ['test-integrity', 'Hunt tests that lie: vacuous assertions, tests passing against broken behavior, mocks that diverge from real implementations, coverage claims not matched by assertions, skipped/conditional tests that silently never run.'],
+  ['fmg-fork', 'Review public/map/ — the vendored Azgaar Fantasy Map Generator fork (large third-party codebase, explicitly IN scope). Hunt: XSS sinks (innerHTML/eval/Function with map-derived strings like burg/label names), postMessage handlers missing origin checks (especially sf-bridge.js), network calls to external hosts, localStorage/session leakage between the fork and the host app, and host-integration contract defects in sf-bridge.js (message shapes the host misreads, state the bridge mutates non-deterministically). Findings in fork files are valid findings.'],
+  ['subsystem-census', 'First enumerate ALL modules under src/domain (list every subdirectory and file). Then identify the 8 modules LEAST likely to be covered by generic lenses (obscure kernels, utility layers, rarely-imported leaves) and depth-review exactly those 8: read each fully, probe its contract against its callers, hunt dead vocabulary, wrong aggregations, and caller/callee shape mismatches. Name in your findings which 8 you chose and why.'],
+]
+
+const FINDINGS = {
+  type: 'object', additionalProperties: false, required: ['findings'],
+  properties: { findings: { type: 'array', maxItems: 12, items: {
+    type: 'object', additionalProperties: false,
+    required: ['file', 'line', 'severity', 'claim', 'failureScenario'],
+    properties: {
+      file: { type: 'string' }, line: { type: 'integer' },
+      severity: { enum: ['C', 'H', 'M'] },
+      claim: { type: 'string' }, failureScenario: { type: 'string' },
+      probe: { type: 'string' },
+    } } } },
+}
+
+const VERDICT = {
+  type: 'object', additionalProperties: false, required: ['refuted', 'reason'],
+  properties: { refuted: { type: 'boolean' }, reason: { type: 'string' } },
+}
+
+phase('Cold Find')
+const rounds = await parallel(LENSES.map(([key, charge]) => () =>
+  agent(`${COLD}\n\nYOUR LENS: ${charge}\n\nReturn your findings as structured output.`,
+    { label: `find:${key}`, phase: 'Cold Find', schema: FINDINGS, model: 'opus' })
+))
+
+const all = rounds.filter(Boolean).flatMap((r, i) =>
+  (r.findings || []).map(f => ({ ...f, lens: LENSES[i][0] })))
+const seen = new Map()
+for (const f of all) {
+  const k = `${f.file}:${f.line}:${(f.claim || '').slice(0, 60).toLowerCase()}`
+  if (!seen.has(k)) seen.set(k, f)
+}
+const deduped = [...seen.values()]
+log(`${all.length} raw findings -> ${deduped.length} after dedup`)
+
+phase('Verify')
+const REFUTE_LENSES = ['reproduce it at the code (does the scenario actually occur?)', 'check spec-consistency (is this intended behavior a cold reader misread?)', 'check blast-radius honesty (is the severity inflated?)']
+const verified = await parallel(deduped.map(f => () => {
+  const panels = f.severity === 'M' ? REFUTE_LENSES.slice(0, 1) : REFUTE_LENSES
+  return parallel(panels.map(lens => () =>
+    agent(`${COLD}\n\nYou are an adversarial VERIFIER. Try hard to REFUTE this claimed finding via this lens: ${lens}\n\nFINDING: [${f.severity}] ${f.file}:${f.line} — ${f.claim}\nSCENARIO: ${f.failureScenario}\n\nDefault to refuted=true if you cannot positively confirm the defect at the code.`,
+      { label: `verify:${f.file.split('/').pop()}`, phase: 'Verify', schema: VERDICT, model: 'opus' })
+  )).then(votes => {
+    const v = votes.filter(Boolean)
+    const refutes = v.filter(x => x.refuted).length
+    const survives = f.severity === 'M' ? refutes === 0 : refutes < 2
+    return { ...f, survives, votes: v.map(x => ({ refuted: x.refuted, reason: x.reason.slice(0, 200) })) }
+  })
+}))
+
+const confirmed = verified.filter(Boolean).filter(f => f.survives)
+const killed = verified.filter(Boolean).filter(f => !f.survives)
+log(`${confirmed.length} confirmed, ${killed.length} refuted`)
+return {
+  confirmed: confirmed.sort((a, b) => 'CHM'.indexOf(a.severity) - 'CHM'.indexOf(b.severity)),
+  refuted: killed.map(f => ({ file: f.file, line: f.line, claim: f.claim, severity: f.severity, votes: f.votes })),
+  stats: { raw: all.length, deduped: deduped.length, confirmed: confirmed.length },
+}

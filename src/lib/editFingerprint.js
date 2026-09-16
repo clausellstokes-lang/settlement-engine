@@ -24,6 +24,14 @@ const TARGET_OF = {
   'add-resource': 'resource', 'remove-resource': 'resource',
   'add-stressor': 'stressor', 'remove-stressor': 'stressor',
   'edit-prose': 'prose',
+  // DESIGN_NPC_LIFECYCLE §2 — all three NPC ops target the npc entity.
+  'edit-npc': 'npc', 'reassign-npc': 'npc', 'stasis-npc': 'npc', 'return-npc': 'npc',
+  // DESIGN_THE_ROADS §11 — the party's hostage-intervention ops target the npc entity.
+  'ransom-npc': 'npc', 'rescue-npc': 'npc',
+  // DESIGN_DEEP_COUPLINGS §8 D-4e — player siding targets the backed contestant (an npc).
+  'champion-npc': 'npc',
+  // DESIGN_VISION_WAVE V-24a — the recall rider targets the traveled npc.
+  'recall-npc': 'npc',
 };
 /** edit kind → change tier (cosmetic|structural|prose) — same grouping the
  *  commit path's EDIT_COMMITTED counts use. */
@@ -33,6 +41,14 @@ const TIER_OF = {
   'add-resource': 'structural', 'remove-resource': 'structural',
   'add-stressor': 'structural', 'remove-stressor': 'structural',
   'edit-prose': 'prose',
+  // NPC lifecycle ops are structural (they move sim-visible facets / seats / state).
+  'edit-npc': 'structural', 'reassign-npc': 'structural', 'stasis-npc': 'structural', 'return-npc': 'structural',
+  // Roads hostage-intervention ops are structural (they move a sim-visible captivity state).
+  'ransom-npc': 'structural', 'rescue-npc': 'structural',
+  // Player siding is structural (it moves a sim-visible contest resolution margin).
+  'champion-npc': 'structural',
+  // The recall rider is structural (it moves a sim-visible travel state — the return leg).
+  'recall-npc': 'structural',
 };
 
 /** Coarse cascade signal from previewCascade() — counts + impact enum only.

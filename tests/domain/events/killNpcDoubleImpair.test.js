@@ -30,6 +30,7 @@ const settlement = () => ({
   }],
 });
 
+// Landed events wave — needs kill-NPC double-impair fix (propagation visited-set seeding) in src/domain/events/mutate.js
 describe('KILL_NPC double-application', () => {
   it('impairs each linked entity EXACTLY once at full direct severity (no propagated clobber)', () => {
     const next = mutateSettlement({

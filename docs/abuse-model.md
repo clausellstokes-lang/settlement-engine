@@ -47,16 +47,24 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **13** edge functions under `supabase/functions/` (excluding
+There are **33** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
-**Bot guard (baseline, all functions except `stripe-webhook`).**
+**Bot guard (baseline on user-facing and mutating functions).**
 `_shared/requestMeta.ts#botGuard` rejects obvious scrapers (curl /
-python-requests / headless browsers / bot UAs) with 403 before any
-other work. Real users are never blocked; the bot pattern list is
-deliberately conservative. `stripe-webhook` skips it because Stripe's
-own signed POST is the trust anchor there, not the UA.
+python-requests / headless browsers / bot UAs) with 403 before expensive
+work. Real users are never blocked; the bot pattern list is deliberately
+conservative. `stripe-webhook` skips it because Stripe's own signed POST
+is the trust anchor, `health` admits monitoring clients, and the internal
+`account-deletion-worker`, `payment-refund-worker`, and the disabled-by-default
+`operator-message-worker` use high-entropy,
+constant-time cron secrets as their complete trust anchors. Those
+infrastructure endpoints do not make authorization depend on a mutable
+client UA. `unsubscribe` also skips the bot guard because automated email
+clients legitimately follow and POST one-click unsubscribe links; its opaque
+bearer token, closed category allowlist, POST-only mutation, and opt-out-only
+RPC are the boundary instead.
 
 - **Allow-list.** Stripe's own UA, monitoring services (UptimeRobot,
   Pingdom, BetterStack), Supabase health checks bypass the bot
@@ -68,6 +76,8 @@ and each handler re-checks auth (and role, where relevant) internally:
 
 - `create-checkout`, `create-customer-portal` — money paths; derive the
   user from `auth.getUser()`, never from the request body.
+- `verify-checkout-session` — post-checkout entitlement verification;
+  JWT-gated and additionally binds the Stripe session to the caller.
 - `generate-narrative`, `generate-chronicle` — AI overlay / chronicle
   passes; JWT-gated so AI credits bill only authenticated callers.
 - `account-actions` — self-service account mutations; per-action role /
@@ -79,7 +89,7 @@ and each handler re-checks auth (and role, where relevant) internally:
 JWT gate is deliberately off — these authenticate themselves (a
 signature, a shared secret, or a rate-limited anon path). Each is pinned
 false in `config.toml` (a forgotten `--no-verify-jwt` can't silently
-flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
+flip intent):
 
 - `stripe-webhook` — verifies the Stripe **signature**
   (`constructEvent`) before any metadata read; a user JWT would be
@@ -95,18 +105,59 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
 - `analytics-export` — cron-invoked (pg_net) export authenticated by the
   `x-export-secret` shared secret; fail-closed on a wrong/missing
   secret.
+- `pricing-resync-cron` — the nightly AI pricing resync, invoked by the
+  pg_cron job (migration 115); authenticated by the `x-cron-secret`
+  shared secret compared constant-time, plus the bot guard.
 - `send-email` — per-template self-auth: authenticated templates read
   the recipient from `auth.getUser()`; the anonymous `cap_warning` path
   takes an explicit recipient behind a per-IP / per-recipient rate limit
-  + bot guard + a strict placeholder schema (`ANON_PLACEHOLDER_RULES`)
-  that admits only the exact shape each anonymous template declares
-  (`cap_warning`: two small digit-only counters), so a caller cannot
-  interpolate any free text — URLs, phishing copy — into mail sent from
-  our Resend identity.
+  + bot guard + a strict placeholder schema so a caller cannot
+  interpolate free text into mail sent from our identity.
 - `auth-recovery` — logged-out password recovery (the caller has no JWT
   because they forgot their password); defended by a hard per-IP +
   per-email rate limit, the bot guard, JSON-only parsing, and
   service-role-only recovery RPCs (066).
+- `og-image` — anonymous unfurl-card renderer for shared gallery links
+  (Reddit/Discord/Slack bots carry no JWT). Reads ONLY the public
+  gallery projection behind the seed-secret firewall (name, tier,
+  terrain, coarse public stats); its only write path (view counts) is
+  deliberately not touched, so scraping it leaks nothing private.
+- `health` — anonymous liveness + optional deep DB probe for uptime
+  monitoring (monitors carry no JWT). Deliberately NOT bot-guarded
+  (uptime services ARE automated clients); reads no user data and takes
+  no write path — the deep probe is a bounded head-count on the ops
+  table only.
+- `founder-transfer` — the `run_due` cron action authenticates by the
+  `x-cron-secret` shared secret (constant-time compared, 503 when
+  unconfigured); every USER action does its own `getUser()` JWT check
+  plus the single-session gate and velocity limits in-handler, so the
+  platform gate is off without widening the anonymous surface.
+- `retention-warning-cron` — nightly pg_net cron (migration 166)
+  authenticated by the `x-cron-secret` shared secret; fail-closed on a
+  wrong/missing secret (403) and refuses to run unconfigured (503).
+- `account-deletion-worker` — hourly pg_net worker (migration 175) for
+  the durable account-erasure queue. It refuses an unset
+  `ACCOUNT_DELETION_CRON_SECRET` (503), compares `x-cron-secret`
+  constant-time, re-checks the private database kill switch, and only
+  then claims service-role-only leased jobs.
+- `payment-refund-worker` — five-minute pg_net worker (migration 180)
+  for durable Stripe refund recovery. It refuses an unset
+  `PAYMENT_REFUND_CRON_SECRET` (503), compares `x-cron-secret`
+  constant-time, re-checks the private database kill switch, and only
+  then claims service-role-only leased refund obligations.
+- `operator-message-worker` — migration 194 seeds this broadcast courier
+  disabled with no URL or secret. Even if deployed, it refuses an unset or
+  mismatched `OPERATOR_MESSAGE_CRON_SECRET`, re-checks the private database
+  kill switch, heartbeats the active job lease, and must CAS-claim each
+  recipient with that lease before any provider call. Reclaim terminalizes an
+  abandoned `sending` attempt as outcome unknown instead of making it resendable.
+  Provider exceptions are redacted in logs and receipts store a closed reason,
+  never provider-supplied text or recipient PII.
+- `unsubscribe` — public email link endpoint. GET renders confirmation without
+  a database call; POST is the only mutation and uses a service-role client to
+  invoke the narrowly granted token RPC. UUID shape + category are allowlisted,
+  the RPC can only turn a preference off, and unknown tokens do not disclose an
+  account identity. The service-role key never leaves the function.
 
 ### Database (Postgres + RLS)
 
@@ -118,6 +169,30 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
 - **Coverage.** `supabase/tests/profile_security.sql` (Tier 0.6)
   proves every escalation path is blocked. Run via `supabase test
   db` before deploy.
+
+### Community (gallery votes + comments)
+
+- **Surface.** Authenticated RPCs `toggle_gallery_vote` and
+  `add_gallery_comment` (migration 019) let any signed-in user vote on
+  or comment under any public dossier.
+- **Threat.** Credit-free abuse: flooding a public dossier with
+  comments (rows persist even though the display list caps at 100) or
+  toggling votes at wire speed.
+- **Mitigation.** Per-user fixed-window velocity guards
+  (migration 052): 20 comments/hour and 60 vote-toggles/hour per
+  `auth.uid()`, enforced inside the SECURITY DEFINER RPCs via a shared
+  private counter (`_consume_action_rate_limit`) over an RLS-locked
+  `user_action_rate_limits` table. The server-fixed limit lives at each
+  call site (never client-overridable); the cap is on ACCEPTED actions
+  (an over-limit call raises, rolling back its own increment, so the
+  counter rests at the ceiling and every further call re-trips it) and
+  the atomic single-statement upsert is race-safe. Moderation
+  (migration 022) remains the reactive backstop.
+- **Coverage.** `tests/security/actionVelocity.pglite.test.js` runs the
+  real 052 SQL in-process and asserts each ceiling bites (the Nth call
+  raises, the throttled write inserts no row), that vote / comment
+  budgets and different users are isolated, plus a static drift pin
+  that the net-current RPC bodies still carry the guard.
 
 ### Stripe payments
 
@@ -159,13 +234,21 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
   - **Dynamic PRESERVATION_RULES** emitted from
     `forbiddenChanges(settlement)` so every refinement-pass prompt
     explicitly names every locked entity + user-edited field.
-- **Coverage.** Three layers guard this surface: grounding tests over
-  the user-edit preservation path (`tests/domain/userEdits.grounding.test.js`),
-  violations-UI tests over how a failed verify is surfaced
-  (`tests/ui/AiOverlayViolations.test.jsx`), and contract tests on the
-  edge function (`tests/edgeFunctions/aiGroundingContract.test.js`,
-  `tests/edgeFunctions/contracts.test.js`). Each prompt-injection canary
-  asserts user-direction text never appears in the dossier JSON.
+  - **Per-user velocity ceiling** (migration 052): beyond the credit
+    spend (the primary economic control), `generate-narrative` calls
+    `consume_narrate_rate_limit` as the user BEFORE spending — a
+    server-fixed 40 generations/hour/user ceiling. Credits bound TOTAL
+    spend; this bounds RATE, so a credit-rich or elevated account
+    can't hammer the model. It FAILS OPEN (a limiter outage never
+    blocks a paying user); a throttled call returns 429 with a
+    `Retry-After` header and no charge.
+- **Coverage.** 24 grounding integration tests + 22 violations-UI
+  tests + 12 contract tests on the edge function. Each prompt-
+  injection canary asserts user-direction text never appears in the
+  dossier JSON. The money-path Deno test
+  (`generate-narrative/index.test.ts`) additionally asserts a
+  throttled user is rejected 429 before any spend and that a limiter
+  error fails open (the paying user still generates).
 
 ## Gaps (open work)
 
@@ -174,11 +257,16 @@ flip intent; enforced by `tests/edgeFunctions/verifyJwtPins.test.js`):
   `edge_function_telemetry` table aggregating volume per IP/UA. A
   future phase could add this once volume data justifies the
   storage.
-- **No per-IP rate-limit at the edge.** The bot guard rejects
-  obvious-bot UAs, but a polite-UA scraper hitting 1000 endpoints/
-  second isn't rejected. Auth gating + Supabase's connection limit
-  is the de-facto throttle today. A future phase could wire
-  Cloudflare Workers KV or Postgres-backed bucketing.
+- **No GENERAL per-IP rate-limit at the edge.** The highest-value
+  actions now have real velocity guards — per-IP for the
+  unauthenticated ones (email 034, dossier-verify 035) and per-user
+  for the authenticated ones (gallery vote/comment + narrate 052) —
+  but there is no blanket per-IP limiter across ALL functions, so a
+  polite-UA scraper hitting a thousand *read* endpoints/second isn't
+  rejected. The bot guard (obvious-bot UAs) + auth gating + Supabase's
+  connection limit is the de-facto throttle for the rest. A future
+  phase could wire Cloudflare Workers KV or Postgres-backed per-IP
+  bucketing in front of every function.
 - **No CAPTCHA on signup.** Bot signups → unused accounts. Low cost
   to the system but pollutes analytics. Future phase.
 - **No bot detection on the gallery.** Public dossier pages are

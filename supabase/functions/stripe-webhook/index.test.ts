@@ -14,9 +14,10 @@
  * machine. The unsigned/bad-signature cases need no crypto and are the core boundary
  * proof; the signed cases use a SubtleCrypto HMAC signer matching Stripe's v1 scheme.
  */
-import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { assertEquals, assertRejects } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 
 const SECRET = 'whsec_test_secret_for_unit_tests';
+const AUTO_RELOAD_ATTEMPT_ID = '11111111-1111-4111-8111-111111111111';
 Deno.env.set('STRIPE_SECRET_KEY', 'sk_test_dummy');
 Deno.env.set('STRIPE_WEBHOOK_SECRET', SECRET);
 Deno.env.set('SUPABASE_URL', 'https://stub.supabase.co');
@@ -26,7 +27,7 @@ Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 Deno.env.set('RESEND_API_KEY', 're_test_dummy');
 Deno.env.set('RESEND_FROM_EMAIL', 'SettlementForge <hello@test.invalid>');
 
-const { handleStripeWebhook } = await import('./index.ts');
+const { handleStripeWebhook, classifyChargeReversal } = await import('./index.ts');
 
 /** processed_webhook_events stub, shared by every admin-client stub below.
  *  The handler claims each event id here (INSERT, PK = event_id) before running
@@ -65,28 +66,225 @@ function makeClaimTable(mode: 'track' | 'absent' = 'track') {
 
 /** A recording stub of the service-role admin client. Captures every RPC/auth/table
  *  write so a test can assert what the handler did (or, for forgeries, did NOT do). */
-function makeStub(claimMode: 'track' | 'absent' = 'track') {
+function makeStub(
+  claimMode: 'track' | 'absent' = 'track',
+  opts: {
+    profile?: Record<string, unknown> | null;
+    rpcData?: Record<string, unknown>;
+    rpcErrors?: Record<string, { message: string }>;
+    autoReloadAttempt?: Record<string, unknown> | null;
+    autoReloadUpdateError?: { message: string } | null;
+    autoReloadReadBarrier?: boolean;
+    accountActive?: boolean | null;
+  } = {},
+) {
   const claims = makeClaimTable(claimMode);
   const calls: { rpc: Array<{ fn: string; args: unknown }>; authUpdates: unknown[]; profileUpdates: unknown[] } = {
     rpc: [], authUpdates: [], profileUpdates: [],
   };
+  // money_events model (156): upsert dedupes on event_key (ignoreDuplicates → a
+  // replayed webhook re-inserts nothing); update().in() is the status flip.
+  const moneyEvents: Array<Record<string, unknown>> = [];
+  // credit_auto_reload_attempts model (158): one mutable attempt, including the
+  // event-before-trigger-stamp case (stripe_payment_intent_id starts null).
+  const autoReloadAttempt: Record<string, unknown> | null = opts.autoReloadAttempt === undefined
+    ? {
+      id: AUTO_RELOAD_ATTEMPT_ID,
+      user_id: 'u1',
+      state: 'pending',
+      credits_delta: 23,
+      amount_cents: 459,
+      stripe_payment_intent_id: null,
+    }
+    : (opts.autoReloadAttempt ? { ...opts.autoReloadAttempt } : null);
+  const autoReloadUpdates: Array<{
+    vals: Record<string, unknown>;
+    filters: Record<string, unknown>;
+    states: string[];
+  }> = [];
+  const autoReloadBindings: string[] = [];
+  let barrierReads = 0;
+  let releaseReadBarrier: (() => void) | null = null;
+  const readBarrier = new Promise<void>((resolve) => {
+    releaseReadBarrier = resolve;
+  });
   const client = {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
     from: (table: string) => {
       if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'money_events') {
+        return {
+          upsert: (row: Record<string, unknown>, _o?: { onConflict?: string; ignoreDuplicates?: boolean }) => {
+            const key = row.event_key as string;
+            // Model the table's `status` default ('paid') the webhook relies on.
+            if (!moneyEvents.some((r) => r.event_key === key)) moneyEvents.push({ status: 'paid', ...row });
+            return Promise.resolve({ data: null, error: null });
+          },
+          update: (vals: Record<string, unknown>) => ({
+            in: (_col: string, keys: string[]) => {
+              for (const r of moneyEvents) if (keys.includes(r.event_key as string)) Object.assign(r, vals);
+              return Promise.resolve({ data: null, error: null });
+            },
+            eq: (_col: string, key: string) => {
+              for (const r of moneyEvents) if (r.event_key === key) Object.assign(r, vals);
+              return Promise.resolve({ data: null, error: null });
+            },
+          }),
+        };
+      }
+      if (table === 'credit_auto_reload_attempts') {
+        const chain = (
+          action: 'select' | 'update',
+          vals: Record<string, unknown> = {},
+        ) => {
+          const filters: Record<string, unknown> = {};
+          let states: string[] = [];
+          const matches = () => {
+            if (!autoReloadAttempt) return false;
+            if (Object.entries(filters).some(([column, value]) => autoReloadAttempt?.[column] !== value)) return false;
+            return states.length === 0 || states.includes(autoReloadAttempt.state as string);
+          };
+          const execute = async (): Promise<{
+            data: Record<string, unknown> | null;
+            error: { message: string } | null;
+          }> => {
+            if (action === 'update' && opts.autoReloadUpdateError) {
+              return Promise.resolve({ data: null, error: opts.autoReloadUpdateError });
+            }
+            if (!matches()) return Promise.resolve({ data: null, error: null });
+            if (action === 'select' && opts.autoReloadReadBarrier && barrierReads < 2
+              && autoReloadAttempt?.stripe_payment_intent_id == null) {
+              // Force two concurrent webhook handlers to observe the same
+              // pre-claim null binding. Their following RPC calls then exercise
+              // the atomic null-or-same winner/loser behavior.
+              const snapshot = { ...autoReloadAttempt };
+              barrierReads += 1;
+              if (barrierReads === 2) releaseReadBarrier?.();
+              await readBarrier;
+              return { data: snapshot, error: null };
+            }
+            if (action === 'update') {
+              Object.assign(autoReloadAttempt!, vals);
+              autoReloadUpdates.push({ vals, filters: { ...filters }, states: [...states] });
+            }
+            return Promise.resolve({ data: { ...autoReloadAttempt! }, error: null });
+          };
+          const builder = {
+            eq: (column: string, value: unknown) => {
+              filters[column] = value;
+              return builder;
+            },
+            in: (_column: string, values: string[]) => {
+              states = [...values];
+              return builder;
+            },
+            select: (_columns?: string) => ({ maybeSingle: execute }),
+            maybeSingle: execute,
+            then: (
+              resolve: (value: { data: Record<string, unknown> | null; error: { message: string } | null }) => unknown,
+              reject?: (reason: unknown) => unknown,
+            ) => execute().then(resolve, reject),
+          };
+          return builder;
+        };
+        return {
+          select: (_columns?: string) => chain('select'),
+          update: (vals: Record<string, unknown>) => chain('update', vals),
+        };
+      }
+      // profiles lookups may be seeded (findUserIdForStripeCustomer / the invoice
+      // renewal path); every other table's select defaults to empty. The update
+      // chain returns a thenable that also carries .eq()/.is() so both
+      // `.update().eq()` (awaited) and `.update().eq().is()` (the sub back-fill)
+      // resolve without a TypeError.
+      const seeded = table === 'profiles' ? (opts.profile ?? null) : null;
+      const upd = (vals: unknown) => {
+        calls.profileUpdates.push(vals);
+        const chain: Record<string, unknown> = {
+          eq: () => chain, is: () => Promise.resolve({ error: null }),
+          then: (res: (v: { error: null }) => unknown) => res({ error: null }),
+        };
+        return chain;
+      };
       return {
-        update: (vals: unknown) => ({ eq: (_col: string, _val: string) => { calls.profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
-        // Chainable select builder: supports any number of .eq() before .maybeSingle()
-        // (the checkout dedup chains .eq('source',…).eq('metadata->>stripe_session_id',…)).
+        update: upd,
+        // No-op upsert for incidental tables (e.g. single_dossier_purchases on the
+        // anonymous dossier path) so those writes don't TypeError under this stub.
+        upsert: () => Promise.resolve({ data: null, error: null }),
+        // Chainable select builder: supports any number of .eq()/.ilike()/.is()
+        // before .maybeSingle() (the checkout dedup chains .eq('source',…)…).
         select: () => {
-          const builder = { eq: () => builder, ilike: () => builder, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+          const builder = { eq: () => builder, ilike: () => builder, is: () => builder, limit: () => builder, maybeSingle: () => Promise.resolve({ data: seeded, error: null }) };
           return builder;
         },
       };
     },
-    rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+    rpc: (fn: string, args: unknown) => {
+      calls.rpc.push({ fn, args });
+      if (opts.rpcErrors?.[fn]) {
+        return Promise.resolve({ data: null, error: opts.rpcErrors[fn] });
+      }
+      if (fn === 'account_is_active') {
+        return Promise.resolve({
+          data: opts.accountActive === undefined ? true : opts.accountActive,
+          error: null,
+        });
+      }
+      if (fn === 'requeue_account_deletion_cleanup_for_late_billing') {
+        return Promise.resolve({
+          data: { ok: true, late_billing_revision: 1 },
+          error: null,
+        });
+      }
+      if (fn === 'record_payment_refund_obligation') {
+        const values = args as Record<string, unknown>;
+        return Promise.resolve({
+          data: {
+            status: values.p_status,
+            payment_intent_id: String(values.p_payment_intent_id ?? '').trim(),
+            purpose: String(values.p_purpose ?? '').trim().toLowerCase(),
+            amount_cents: values.p_amount_cents,
+            reason: String(values.p_reason ?? '').trim(),
+          },
+          error: null,
+        });
+      }
+      if (fn === 'claim_auto_reload_payment_intent') {
+        const values = args as Record<string, unknown>;
+        const piId = values.p_payment_intent as string;
+        const matches = autoReloadAttempt != null
+          && autoReloadAttempt.id === values.p_attempt
+          && autoReloadAttempt.user_id === values.p_user
+          && autoReloadAttempt.amount_cents === values.p_amount_cents
+          && autoReloadAttempt.credits_delta === values.p_credits_delta
+          && ['pending', 'requires_action', 'failed', 'canceled'].includes(autoReloadAttempt.state as string)
+          && (autoReloadAttempt.stripe_payment_intent_id == null
+            || autoReloadAttempt.stripe_payment_intent_id === piId);
+        if (!matches) {
+          return Promise.resolve({ data: { ok: false, reason: 'not_claimed' }, error: null });
+        }
+        autoReloadAttempt!.stripe_payment_intent_id = piId;
+        autoReloadBindings.push(piId);
+        return Promise.resolve({
+          data: { ok: true, state: autoReloadAttempt!.state },
+          error: null,
+        });
+      }
+      return Promise.resolve({
+        data: opts.rpcData ? (opts.rpcData[fn] ?? null) : null,
+        error: null,
+      });
+    },
   };
-  return { calls, claims, adminClient: () => client };
+  return {
+    calls,
+    claims,
+    moneyEvents,
+    autoReloadUpdates,
+    autoReloadBindings,
+    autoReloadAttempt: () => autoReloadAttempt ? { ...autoReloadAttempt } : null,
+    adminClient: () => client,
+  };
 }
 
 /** Stripe v1 signature header: t=<ts>,v1=HMAC_SHA256(secret, `${ts}.${payload}`). */
@@ -158,7 +356,12 @@ Deno.test('an UNPAID checkout.session.completed does NOT fulfil (no grant, no up
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' }, { payment_status: 'unpaid' });
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(res.status, 200);                                           // ack — Stripe should NOT retry
-  assertEquals(stub.calls.rpc.length, 0);                                  // no credit grant
+  assertEquals(
+    stub.calls.rpc.filter((call) =>
+      call.fn !== 'claim_stripe_webhook_event'
+    ).length,
+    0,
+  );                                                                        // no business RPC / credit grant
   assertEquals(stub.calls.authUpdates.length, 0);                          // no tier change
   assertEquals(stub.calls.profileUpdates.length, 0);
 });
@@ -183,6 +386,58 @@ Deno.test('checkout.session.async_payment_succeeded fulfils once the async payme
   const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits');
   assertEquals(grant !== undefined, true);
   assertEquals((grant!.args as { amount: number }).amount, 60);
+});
+
+Deno.test('checkout.session.async_payment_failed releases reserved checkout state without fulfilment', async () => {
+  const stub = makeStub('track', {
+    rpcData: {
+      revert_redemption: { ok: true, redemption_id: 'red_async' },
+      transfer_case_regress_awaiting_payment: { ok: true, case_id: 'case_async' },
+    },
+  });
+  const body = JSON.stringify({
+    id: 'evt_async_failed_1',
+    type: 'checkout.session.async_payment_failed',
+    data: {
+      object: {
+        id: 'cs_async_failed_1',
+        payment_status: 'unpaid',
+        metadata: { supabase_user_id: 'u1', credits: '60' },
+      },
+    },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    stub,
+  );
+  assertEquals(res.status, 200);
+  const revert = stub.calls.rpc.find((c) => c.fn === 'revert_redemption');
+  const regress = stub.calls.rpc.find((c) => c.fn === 'transfer_case_regress_awaiting_payment');
+  assertEquals(revert?.args, { p_session_id: 'cs_async_failed_1' });
+  assertEquals(regress?.args, { p_session: 'cs_async_failed_1' });
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stub.calls.authUpdates.length, 0);
+  assertEquals(stub.calls.profileUpdates.length, 0);
+  assertEquals(stub.moneyEvents.length, 0);
+});
+
+Deno.test('checkout.session.async_payment_failed DB errors release the event claim for retry', async () => {
+  const stub = makeStub('track', {
+    rpcErrors: { transfer_case_regress_awaiting_payment: { message: 'transient regression failure' } },
+  });
+  const body = JSON.stringify({
+    id: 'evt_async_failed_retry',
+    type: 'checkout.session.async_payment_failed',
+    data: { object: { id: 'cs_async_failed_retry', payment_status: 'unpaid', metadata: {} } },
+  });
+  let threw = false;
+  try {
+    await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  } catch {
+    threw = true;
+  }
+  assertEquals(threw, true);
+  assertEquals(stub.claims.releases, ['evt_async_failed_retry']);
 });
 
 Deno.test('a PAID checkout.session.completed still fulfils (guard only blocks unpaid)', async () => {
@@ -271,14 +526,17 @@ Deno.test('a NON-subscription invoice (billing_reason=manual) does NOT grant the
   assertEquals(stub.rpc.some((c) => c.fn === 'system_grant_credits'), false);
 });
 
-Deno.test('a replayed invoice.paid (same invoice id) does NOT double-grant', async () => {
-  // claimMode 'absent' bypasses the event-level claim (fails open) so this test
-  // keeps proving the INNER per-invoice ledger dedup on its own — the outer
-  // event-id guard has its own tests below and must never be the only defense.
-  const stub = makeInvoiceStub('absent');
+Deno.test('a replayed invoice.paid under a new event id does NOT double-grant', async () => {
+  // Dashboard resend can wrap the same invoice in a new event id, bypassing the
+  // outer event lease. The inner invoice ledger key remains authoritative.
+  const stub = makeInvoiceStub();
   const body = invoiceEvent('invoice.paid', 'in_dup');
+  const resend = body.replace(
+    '"id":"evt_in_dup_invoice.paid"',
+    '"id":"evt_in_dup_invoice.paid_resend"',
+  );
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
-  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  await handleStripeWebhook(req(resend, { 'stripe-signature': await sign(resend, SECRET) }), stub);
   const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
   assertEquals(grants.length, 1);   // the second delivery is a no-op
 });
@@ -326,6 +584,9 @@ function makeCheckoutStub(claimMode: 'track' | 'absent' = 'track') {
     }),
     rpc: (fn: string, args: unknown) => {
       rpc.push({ fn, args });
+      if (fn === 'account_is_active') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'system_grant_credits') {
         const meta = (args as { metadata?: { stripe_session_id?: string } }).metadata;
         if (meta?.stripe_session_id) granted.add(meta.stripe_session_id);
@@ -347,24 +608,22 @@ Deno.test('a signed credit-pack checkout grants the metadata credits exactly onc
   assertEquals((grants[0].args as { source: string }).source, 'purchase');
 });
 
-Deno.test('a replayed credit-pack checkout (same session id) does NOT double-grant', async () => {
-  // claimMode 'absent' fails the event-level claim open, so this stays a proof
-  // of the INNER (source, stripe_session_id) ledger dedup standing alone.
-  const stub = makeCheckoutStub('absent');
+Deno.test('a replayed credit-pack session under a new event id does NOT double-grant', async () => {
+  const stub = makeCheckoutStub();
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
+  const resend = body.replace('"id":"evt_1"', '"id":"evt_2"');
   await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
-  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  await handleStripeWebhook(req(resend, { 'stripe-signature': await sign(resend, SECRET) }), stub);
   const grants = stub.rpc.filter((c) => c.fn === 'system_grant_credits');
   assertEquals(grants.length, 1);   // the redelivery is a no-op (idempotent on session id)
 });
 
 // ── Event-level idempotency (processed_webhook_events, migration 107) ────────
 // The claims above are per-GRANT. Stripe also redelivers whole EVENTS
-// (at-least-once), so the handler claims each event id via INSERT on the
-// processed_webhook_events PK right after signature verification: a duplicate
-// delivery reads 200 '[duplicate]' and runs NO handler. The claim fails OPEN
-// (the inner guards stay authoritative for money) and is RELEASED when a
-// handler throws, so Stripe's retry loop still re-runs genuine failures.
+// (at-least-once), so the handler leases each event id right after signature
+// verification: completed duplicates read 200 '[duplicate]', a live concurrent
+// lease reads 409, stale work is reclaimable, and failures release the lease.
+// The legacy insert path exists only for a rolling deploy before migration 181.
 
 Deno.test('a replayed EVENT id runs handlers exactly once and reads [duplicate]', async () => {
   const stub = makeCheckoutStub();
@@ -389,13 +648,20 @@ Deno.test('the event claim is TYPE-AGNOSTIC: even an unhandled event type is cla
   assertEquals(stub.claims.claimed.has('evt_unhandled_1'), true);         // claim persists (success path)
 });
 
-Deno.test('a claim-table failure fails OPEN: the handler still fulfils (availability over strictness)', async () => {
+Deno.test('a missing event-claim table fails closed before fulfillment', async () => {
   const stub = makeCheckoutStub('absent');                                // table not migrated yet
   const body = checkoutEvent({ supabase_user_id: 'u1', credits: '60' });
-  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
-  assertEquals(res.status, 200);
-  assertEquals(await res.text(), JSON.stringify({ received: true }));     // NOT treated as a duplicate
-  assertEquals(stub.rpc.filter((c) => c.fn === 'system_grant_credits').length, 1);  // grant went through
+  let threw = false;
+  try {
+    await handleStripeWebhook(
+      req(body, { 'stripe-signature': await sign(body, SECRET) }),
+      stub,
+    );
+  } catch {
+    threw = true;
+  }
+  assertEquals(threw, true);
+  assertEquals(stub.rpc.filter((c) => c.fn === 'system_grant_credits').length, 0);
 });
 
 Deno.test('a handler failure RELEASES the event claim so a redelivery re-runs (retry-safe)', async () => {
@@ -425,6 +691,9 @@ Deno.test('a handler failure RELEASES the event claim so a redelivery re-runs (r
       update: () => ({ eq: () => Promise.resolve({ error: null }) }),
     }),
     rpc: (fn: string, args: unknown) => {
+      if (fn === 'account_is_active') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'system_grant_credits') {
         grantAttempts += 1;
         if (grantAttempts === 1) return Promise.resolve({ error: { message: 'transient network failure' } });
@@ -573,6 +842,107 @@ Deno.test('a REDELIVERED delete on an already-free user is a no-op (no retention
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(res.status, 200);
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // idempotent — not re-downgraded
+});
+
+// ── customer.subscription.updated: pause / resume (downgrade audit + addendum) ─
+// Stripe's portal "pause" sets pause_collection WITHOUT a .deleted — so a paused
+// Cartographer sub must downgrade (it no longer pays), and resumption must restore.
+// Discriminate surveyor subs (they live only in surveyor_entitlements); honor the
+// founder + stale-sub guards; idempotent both directions.
+// deno-lint-ignore no-explicit-any
+function makePauseStub(cfg: { isSurveyor?: boolean; profile: Record<string, unknown> | null }) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const authUpdates: Array<Record<string, unknown>> = [];
+  const profileUpdates: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    auth: { admin: { updateUserById: (_id: string, attrs: Record<string, unknown>) => { authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'surveyor_entitlements') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: cfg.isSurveyor ? { user_id: 'surv_u' } : null, error: null }) };
+        return b;
+      }
+      // deno-lint-ignore no-explicit-any
+      const sel: any = { select: () => sel, eq: () => sel, ilike: () => sel, maybeSingle: () => Promise.resolve({ data: cfg.profile, error: null }) };
+      return {
+        select: () => sel,
+        update: (vals: Record<string, unknown>) => {
+          profileUpdates.push(vals);
+          // deno-lint-ignore no-explicit-any
+          const u: any = { eq: () => u, then: (res: (v: unknown) => unknown) => Promise.resolve({ error: null }).then(res) };
+          return u;
+        },
+      };
+    },
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+  };
+  return { rpc, authUpdates, profileUpdates, adminClient: () => client };
+}
+
+const subUpdatedEvent = (subId: string, opts: { customer?: string; pause?: unknown; status?: string } = {}) =>
+  JSON.stringify({
+    id: `evt_upd_${subId}_${opts.pause ? 'p' : 'a'}`,
+    type: 'customer.subscription.updated',
+    data: { object: { id: subId, customer: opts.customer ?? 'cus_pause', pause_collection: opts.pause ?? null, status: opts.status ?? 'active' } },
+  });
+
+Deno.test('a PAUSED Cartographer subscription downgrades the user to free (no silent premium retention)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);
+  assertEquals(stub.authUpdates.some((a) => JSON.stringify(a) === JSON.stringify({ user_metadata: { tier: 'free' } })), true);
+});
+
+Deno.test('a RESUMED subscription restores premium for a previously-paused (non-premium) user', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
+  const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'restore_premium_settlements'), true);
+  assertEquals(stub.authUpdates.some((a) => JSON.stringify(a) === JSON.stringify({ user_metadata: { tier: 'premium' } })), true);
+  assertEquals(stub.profileUpdates.some((u) => u.tier === 'premium' && u.premium_downgraded_at === null), true);
+});
+
+Deno.test('a paused SURVEYOR subscription never touches Cartographer premium', async () => {
+  const stub = makePauseStub({ isSurveyor: true, profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_surv', { pause: { behavior: 'void' } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a paused subscription for a FOUNDER never downgrades (premium is lifetime)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: true, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a pause on a STALE (non-current) subscription id does not downgrade', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_NEW', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_OLD', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a routine active .updated on an already-premium user is a no-op (no tier thrash)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+  assertEquals(stub.authUpdates.length, 0);
+});
+
+Deno.test('a pause on an already-non-premium user is a no-op (idempotent)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
 });
 
 // ── Email-fallback profile binding: ILIKE must be EXACT, never a pattern ─────
@@ -745,6 +1115,9 @@ function makeReferralWorld(cfg: {
     },
     rpc: (fn: string, args: Record<string, unknown>) => {
       rpc.push({ fn, args });
+      if (fn === 'account_is_active') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'system_grant_credits') {
         const meta = (args.metadata ?? {}) as Record<string, string>;
         if (meta.stripe_invoice_id) grantedInvoices.add(meta.stripe_invoice_id);
@@ -1118,6 +1491,9 @@ function makeRedeemStub(cfg: {
     }),
     rpc: (fn: string, args: Record<string, unknown>) => {
       rpc.push({ fn, args });
+      if (fn === 'account_is_active') {
+        return Promise.resolve({ data: true, error: null });
+      }
       if (fn === 'system_grant_credits') {
         const src = args.source as string;
         const meta = (args.metadata ?? {}) as { stripe_session_id?: string };
@@ -1319,10 +1695,23 @@ function makeDossierStub(cfg: {
   const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
   const purchases = new Map<string, Record<string, unknown>>();   // session_id → row
   const upserts: Array<{ row: Record<string, unknown>; ignoreDuplicates: boolean }> = [];
+  // Delivery-stash (122) session binds: dossier_purchases.stripe_session_id set by
+  // checkout_token. Records each bind so a test can assert the backfill.
+  const binds: Array<{ vals: Record<string, unknown>; token: string }> = [];
   const client = {
     auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
     from: (table: string) => {
       if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'dossier_purchases') {
+        return {
+          update: (vals: Record<string, unknown>) => ({
+            eq: (_col: string, val: string) => {
+              binds.push({ vals, token: val });
+              return Promise.resolve({ error: null });
+            },
+          }),
+        };
+      }
       if (table === 'single_dossier_purchases') {
         return {
           upsert: (row: Record<string, unknown>, opts?: { onConflict?: string; ignoreDuplicates?: boolean }) => {
@@ -1359,7 +1748,7 @@ function makeDossierStub(cfg: {
       return Promise.resolve({ data: null, error: null });
     },
   };
-  return { rpc, purchases, upserts, claims, adminClient: () => client };
+  return { rpc, purchases, upserts, binds, claims, adminClient: () => client };
 }
 
 const dossierCheckoutEvent = (id: string, metadata: Record<string, string>, extra: Record<string, unknown> = {}) =>
@@ -1512,8 +1901,18 @@ Deno.test('a refund of a single_dossier charge claws back the entitlement AND po
 // is_founder seat (founder_seats_taken counts it), downgrade premium, and claw the
 // 30-credit bonus — none of which happened before. The refunded charge's checkout
 // SESSION id is matched against the buyer via its founder_grant ledger row.
-function makeFounderStub(founderSessionId = 'cs_founder') {
+function makeFounderStub(
+  founderSessionId = 'cs_founder',
+  // W-R2-TRUST backend-functions-1: inject a transient failure into a POST-CLAIM
+  // step. Defaults are null (all steps succeed) so existing callers are unchanged.
+  inject: { downgrade?: { message: string } | null; auth?: { message: string } | null; adjust?: { message: string } | null } = {},
+  // FP-4 (§6.7): a LIVE transfer case for the clawed-back holder's seat. null (default)
+  // = no live case → the abort path no-ops, so every existing caller is unchanged. When
+  // present, the founder_transfer_cases live-state lookup resolves it until it is aborted.
+  liveCase: Record<string, unknown> | null = null,
+) {
   const state = { isFounder: true };
+  const caseState = { aborted: false };
   const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
   const authUpdates: Array<{ id: string; attrs: Record<string, unknown> }> = [];
   const claim = makeClaimTable('track');
@@ -1538,6 +1937,9 @@ function makeFounderStub(founderSessionId = 'cs_founder') {
         }
         // profiles: the elevated-actor lookup for the credit clawback.
         if (table === 'profiles') return Promise.resolve({ data: { id: 'admin_u' }, error: null });
+        // FP-4: the live-case lookup (from_user + state in the live set). Models the DB
+        // partial-unique + the live-state filter — once aborted, no live case remains.
+        if (table === 'founder_transfer_cases') return Promise.resolve({ data: caseState.aborted ? null : liveCase, error: null });
         return Promise.resolve({ data: null, error: null });
       },
       // Awaitable terminal: profiles.update({is_founder:false}).eq().eq().select('id').
@@ -1557,18 +1959,38 @@ function makeFounderStub(founderSessionId = 'cs_founder') {
     return q;
   };
   const client = {
-    auth: { admin: { updateUserById: (id: string, attrs: Record<string, unknown>) => { authUpdates.push({ id, attrs }); return Promise.resolve({ error: null }); } } },
+    auth: { admin: { updateUserById: (id: string, attrs: Record<string, unknown>) => { authUpdates.push({ id, attrs }); return Promise.resolve({ error: inject.auth ?? null }); } } },
     from,
     rpc: (fn: string, args: Record<string, unknown>) => {
       rpc.push({ fn, args });
       if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false, reason: 'no_granted_referral' }, error: null });
       if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
-      if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: { ok: true }, error: null });
-      if (fn === 'service_adjust_credits') return Promise.resolve({ data: { prev: 30, next: 0, delta: -30 }, error: null });
+      if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: inject.downgrade ? null : { ok: true }, error: inject.downgrade ?? null });
+      if (fn === 'service_adjust_credits') return Promise.resolve({ data: inject.adjust ? null : { prev: 30, next: 0, delta: -30 }, error: inject.adjust ?? null });
+      // FP-4: aborting the live case flips it out of the live set (claim-once) and reports
+      // was_paid + the payment session so the webhook can refund the nominee's $99.
+      if (fn === 'transfer_case_abort') {
+        caseState.aborted = true;
+        return Promise.resolve({ data: { ok: true, was_paid: liveCase?.state === 'cooling', payment_session: liveCase?.stripe_session_id ?? null }, error: null });
+      }
       return Promise.resolve({ data: null, error: null });
     },
   };
   return { state, rpc, authUpdates, adminClient: () => client };
+}
+/** Founder-clawback stripe stub that ALSO records the FP-4 nominee refund. */
+// deno-lint-ignore no-explicit-any
+function founderStripeWithRefunds(sessionId = 'cs_founder') {
+  const refunds: Array<{ params: unknown; opts: unknown }> = [];
+  return {
+    refunds,
+    // deno-lint-ignore no-explicit-any
+    client: {
+      charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_f' }) },
+      checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }), retrieve: (_id: string) => Promise.resolve({ payment_intent: 'pi_transfer' }) } },
+      refunds: { create: (params: unknown, opts: unknown) => { refunds.push({ params, opts }); return Promise.resolve({ id: 're_f' }); } },
+    } as any,
+  };
 }
 
 const founderRefund = (eventId: string) => JSON.stringify({
@@ -1598,6 +2020,50 @@ Deno.test('a refunded founder_lifetime charge reverses is_founder, premium, and 
   assertEquals(stub.authUpdates[0].attrs, { user_metadata: { tier: 'free', is_founder: false } });
 });
 
+// W-R2-TRUST (backend-functions-1): POST-CLAIM failure posture. Once is_founder
+// is claimed (flipped true→false), a thrown error would release the Stripe event
+// claim, but the redelivery finds is_founder already false and no-ops — so a
+// throwing downgrade/auth/credit step would permanently strand a refunded founder
+// at tier=premium with the bonus intact. Each post-claim step must therefore LOG,
+// not throw, and must not abort the steps after it.
+Deno.test('founder clawback: a transient DOWNGRADE failure is logged, not thrown — the auth + credit steps still run', async () => {
+  const stub = makeFounderStub('cs_founder', { downgrade: { message: 'transient downgrade boom' } });
+  const body = founderRefund('evt_founder_refund_downgrade_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  // The webhook COMPLETES (200) — the claim is not released into a futile redelivery.
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                                     // seat still freed (the claim)
+  assertEquals(stub.rpc.filter((c) => c.fn === 'handle_premium_downgrade').length, 1); // attempted (failed transiently)
+  assertEquals(stub.authUpdates.length, 1);                                      // auth STILL ran after the downgrade failure
+  assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal STILL ran
+});
+
+Deno.test('founder clawback: a transient AUTH failure is logged, not thrown — the credit reversal still runs', async () => {
+  const stub = makeFounderStub('cs_founder', { auth: { message: 'transient auth boom' } });
+  const body = founderRefund('evt_founder_refund_auth_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.authUpdates.length, 1);
+  assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal ran after the auth failure
+});
+
+Deno.test('founder clawback: a transient CREDIT-reversal failure is logged, not thrown — the webhook completes', async () => {
+  const stub = makeFounderStub('cs_founder', { adjust: { message: 'transient adjust boom' } });
+  const body = founderRefund('evt_founder_refund_adjust_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);                                                 // resolves despite the adjust error
+  assertEquals(stub.rpc.filter((c) => c.fn === 'service_adjust_credits').length, 1);
+});
+
 Deno.test('a redelivered founder refund is idempotent: no second downgrade or credit clawback', async () => {
   const stub = makeFounderStub();
   const first = founderRefund('evt_founder_refund_a');
@@ -1621,4 +2087,1422 @@ Deno.test('a refund of a NON-founder charge leaves founder state untouched', asy
   assertEquals(stub.state.isFounder, true);                                   // untouched
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
   assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), false);
+});
+
+// ── Seat REGISTER clawback release (137/§6.1, M-5c) ──────────────────────────
+// The founder clawback now ALSO releases the durable seat back to the unclaimed
+// pool (release_founder_seat_on_clawback) — the mirror of the founder_lifetime
+// claim. It is a POST-CLAIM step (after the is_founder flip), so a redelivered
+// refund that finds is_founder already false never re-runs it (no double release).
+Deno.test('founder clawback releases the seat AFTER the is_founder flip + downgrade (ordering)', async () => {
+  const stub = makeFounderStub();
+  const body = founderRefund('evt_founder_seat_release_1');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                                   // the flip (the claim) ran
+  const release = stub.rpc.find((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(release !== undefined, true);
+  assertEquals((release!.args as { p_user: string }).p_user, 'founder_u');
+  // Ordering: the release runs AFTER the downgrade (a post-claim step, not before the flip).
+  const downgradeIdx = stub.rpc.findIndex((c) => c.fn === 'handle_premium_downgrade');
+  const releaseIdx = stub.rpc.findIndex((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(downgradeIdx >= 0 && releaseIdx > downgradeIdx, true);
+});
+
+Deno.test('a redelivered founder refund releases the seat exactly once (idempotent)', async () => {
+  const stub = makeFounderStub();
+  const first = founderRefund('evt_seat_release_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  const second = founderRefund('evt_seat_release_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  // The is_founder flip is the claim; the redelivery no-ops before the release step.
+  assertEquals(stub.rpc.filter((c) => c.fn === 'release_founder_seat_on_clawback').length, 1);
+});
+
+Deno.test('a refund of a NON-founder charge never releases a seat', async () => {
+  const stub = makeFounderStub('cs_founder');
+  const body = founderRefund('evt_nonfounder_no_release');
+  await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe('cs_creditpack') },  // not the founder session
+  );
+  assertEquals(stub.rpc.some((c) => c.fn === 'release_founder_seat_on_clawback'), false);
+});
+
+// ── FP-4 (fraud-fix, §6.7 family 2): CLAWBACK ABORTS THE LIVE CASE FIRST ──────
+// A goodwill refund of the ORIGINAL $99 for a seat CURRENTLY in a live transfer case must
+// FIRST abort that case (refunding the nominee's $99 if paid) and THEN release the seat.
+// Before the fix, clawbackFounderForSession only released the seat — the cooling case
+// still finalized, moving the just-unwound seat to the nominee AND scheduling a $49.50
+// payout to the refunded holder (double recovery). Aborting first drives the case out of
+// 'cooling' so the due-runner's transfer_case_finalize refuses (wrong_state).
+Deno.test('FP-4: a goodwill refund during a LIVE cooling case ABORTS+refunds it BEFORE the seat release (§6.7)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_goodwill');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(res.status, 200);
+  // The live case was aborted as 'admin' …
+  const abort = stub.rpc.find((c) => c.fn === 'transfer_case_abort');
+  assertEquals(abort !== undefined, true);
+  assertEquals((abort!.args as { p_actor: string }).p_actor, 'admin');
+  // … the nominee's paid $99 was refunded, keyed abort-refund-<case> (dedups with the edge path) …
+  assertEquals(st.refunds.length, 1);
+  assertEquals((st.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'abort-refund-case-live');
+  assertEquals((st.refunds[0].params as { payment_intent: string }).payment_intent, 'pi_transfer');
+  // … and the abort ran BEFORE the seat release (ordering that makes finalize refuse).
+  const abortIdx = stub.rpc.findIndex((c) => c.fn === 'transfer_case_abort');
+  const releaseIdx = stub.rpc.findIndex((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(abortIdx >= 0 && releaseIdx > abortIdx, true);
+  // The seat is still released (the clawback still frees the seat back to the pool).
+  assertEquals(stub.state.isFounder, false);
+});
+
+Deno.test('FP-4: a live INITIATED (unpaid) case is aborted but no refund fires (nothing was paid)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-unpaid', state: 'initiated', stripe_session_id: null });
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_unpaid');
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_abort'), true);
+  assertEquals(st.refunds.length, 0);   // an unpaid case never entered cooling → nothing to refund
+});
+
+Deno.test('FP-4: a goodwill refund with NO live case never aborts (unchanged clawback)', async () => {
+  const stub = makeFounderStub();   // no live case injected
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_nocase');
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_abort'), false);
+  assertEquals(st.refunds.length, 0);
+});
+
+Deno.test('FP-4: a redelivered goodwill refund aborts the case exactly once (live-state filter)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
+  const st = founderStripeWithRefunds();
+  const first = founderRefund('evt_fp4_redeliver_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  const second = founderRefund('evt_fp4_redeliver_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  // The first abort drove the case out of the live set; the redelivery finds none.
+  assertEquals(stub.rpc.filter((c) => c.fn === 'transfer_case_abort').length, 1);
+  assertEquals(st.refunds.length, 1);   // idempotency key would dedup anyway, but no 2nd attempt is even made
+});
+
+Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now wired)', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_founder_seat_claim', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_founder_claim', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_fc',
+      metadata: { supabase_user_id: 'uf', product: 'founder_lifetime' } } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claim = stub.calls.rpc.find((c) => c.fn === 'claim_next_founder_seat');
+  assertEquals(claim !== undefined, true);
+  assertEquals((claim!.args as { p_user: string }).p_user, 'uf');
+  // The seat claim is never-throw: fulfilment (the credit bonus) still ran.
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), true);
+});
+
+// ── Founder seat TRANSFER money crossing (§6.6/§6.7, M-7) ────────────────────
+Deno.test('a founder_seat_transfer payment marks the case paid (cooling) + mirrors seat_transfer_payment', async () => {
+  const stub = makeStub('track', { rpcData: { transfer_case_mark_paid: { ok: true } } });
+  const body = JSON.stringify({
+    id: 'evt_transfer_paid', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_transfer_1', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_t',
+      metadata: { purpose: 'founder_seat_transfer', transfer_case_id: 'case-1', supabase_user_id: 'u_in' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res.status, 200);
+  const mark = stub.calls.rpc.find((c) => c.fn === 'transfer_case_mark_paid');
+  assertEquals(mark !== undefined, true);
+  assertEquals((mark!.args as { p_case: string; p_price_cents: number }).p_case, 'case-1');
+  assertEquals((mark!.args as { p_price_cents: number }).p_price_cents, 9900);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'seat_transfer_payment');
+});
+
+Deno.test('an expired founder_seat_transfer session regresses the case (never-throw)', async () => {
+  const stub = makeStub('track', { rpcData: { transfer_case_regress_awaiting_payment: { ok: true } } });
+  const body = JSON.stringify({ id: 'evt_transfer_expired', type: 'checkout.session.expired', data: { object: { id: 'cs_transfer_exp' } } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'transfer_case_regress_awaiting_payment'), true);
+});
+
+// ── FP-2 (fraud-fix, §6.8 family 8): THE ORPHAN CHARGE REFUND ────────────────
+// A $99 transfer checkout can COMPLETE for a case that is no longer awaiting_payment
+// (aborted/expired between session creation and payment, or a stale nominee session
+// superseded by a re-minted one). transfer_case_mark_paid no-ops (wrong_state), the seat
+// never moved for THIS session, and the charge is orphaned — it MUST be refunded once,
+// with a refund_note mirrored — EXCEPT a redelivery of the session that LEGITIMATELY paid
+// the case (that money bought the cooling seat; refunding it would strip a paid transfer).
+// deno-lint-ignore no-explicit-any
+function makeOrphanStub(caseRow: Record<string, unknown> | null, markPaid: Record<string, unknown>) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const moneyEvents: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'founder_transfer_cases') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: caseRow, error: null }) };
+        return b;
+      }
+      if (table === 'money_events') {
+        return { upsert: (row: Record<string, unknown>) => { if (!moneyEvents.some((r) => r.event_key === row.event_key)) moneyEvents.push({ status: 'paid', ...row }); return Promise.resolve({ error: null }); } };
+      }
+      // deno-lint-ignore no-explicit-any
+      const b: any = { select: () => b, eq: () => b, in: () => b, maybeSingle: () => Promise.resolve({ data: null, error: null }), update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
+      return b;
+    },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'account_is_active') {
+        return Promise.resolve({ data: true, error: null });
+      }
+      if (fn === 'transfer_case_mark_paid') return Promise.resolve({ data: markPaid, error: null });
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, moneyEvents, adminClient: () => client };
+}
+/** A stripe stub recording refunds.create + resolving the session's payment_intent. */
+// deno-lint-ignore no-explicit-any
+function orphanStripe(): any {
+  const refunds: Array<{ params: unknown; opts: unknown }> = [];
+  return {
+    refunds,
+    stripeClient: {
+      refunds: { create: (params: unknown, opts: unknown) => { refunds.push({ params, opts }); return Promise.resolve({ id: 're_orphan' }); } },
+      checkout: { sessions: { retrieve: (_id: string) => Promise.resolve({ payment_intent: 'pi_orphan' }) } },
+    },
+  };
+}
+const transferCompleted = (sessionId: string, caseId: string) => JSON.stringify({
+  id: `evt_${sessionId}`, type: 'checkout.session.completed',
+  data: { object: { id: sessionId, payment_status: 'paid', amount_total: 9900, currency: 'usd',
+    metadata: { purpose: 'founder_seat_transfer', transfer_case_id: caseId, supabase_user_id: 'u_nominee' } } },
+});
+
+Deno.test('FP-2: a $99 completed for an ABORTED transfer case refunds exactly once + mirrors a refund_note', async () => {
+  // The case was aborted/expired: mark_paid no-ops (wrong_state); paid_at is null.
+  const stub = makeOrphanStub({ paid_at: null, stripe_session_id: null }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_orphan_99', 'case-aborted');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.filter((c) => c.fn === 'transfer_case_mark_paid').length, 1);
+  // The orphaned charge is refunded, idempotency-keyed on the session id.
+  assertEquals(stripe.refunds.length, 1);
+  assertEquals((stripe.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'transfer-orphan-refund-cs_orphan_99');
+  assertEquals((stripe.refunds[0].params as { payment_intent: string }).payment_intent, 'pi_orphan');
+  // A refund_note is mirrored into the money ledger.
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'refund_note');
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+});
+
+Deno.test('FP-2: a REPLAY of the session that LEGITIMATELY paid the case never refunds', async () => {
+  // The paying session moved the seat (paid_at set, stripe_session_id === this session);
+  // its redelivery finds the case cooling → mark_paid wrong_state, but must NOT refund.
+  const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_paid_99' }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_paid_99', 'case-live');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stripe.refunds.length, 0);          // the paying session's money is NOT clawed back
+  assertEquals(stub.moneyEvents.length, 0);
+});
+
+Deno.test('FP-2: a STALE nominee session (a DIFFERENT session paid the case) IS refunded', async () => {
+  // The case was paid by a re-minted session; this older session is orphaned → refund it.
+  const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_new_99' }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_old_99', 'case-live');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stripe.refunds.length, 1);
+  assertEquals((stripe.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'transfer-orphan-refund-cs_old_99');
+});
+
+/** Stub for the transfer chargeback matrix: founder_transfer_cases resolves the
+ *  given case by stripe_session_id; records seat flag updates + rpc calls. */
+// deno-lint-ignore no-explicit-any
+function makeTransferClawbackStub(caseRow: Record<string, unknown> | null) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const seatUpdates: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'founder_transfer_cases') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: caseRow, error: null }) };
+        return b;
+      }
+      if (table === 'founder_seats') {
+        return { update: (vals: Record<string, unknown>) => { seatUpdates.push(vals); return { eq: () => Promise.resolve({ error: null }) }; } };
+      }
+      if (table === 'money_events') {
+        return { update: () => ({ in: () => Promise.resolve({ error: null }) }), upsert: () => Promise.resolve({ error: null }) };
+      }
+      // deno-lint-ignore no-explicit-any
+      const sel: any = { select: () => sel, eq: () => sel, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+      return { select: () => sel, update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
+    },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'claim_stripe_webhook_event') {
+        return Promise.resolve({ data: null, error: null });
+      }
+      if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false }, error: null });
+      if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
+      return Promise.resolve({ data: { ok: true }, error: null });
+    },
+  };
+  return { rpc, seatUpdates, adminClient: () => client };
+}
+// deno-lint-ignore no-explicit-any
+const transferStripe = (): any => ({
+  charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_t' }) },
+  checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: 'cs_transfer_1' }] }) } },
+});
+const transferRefund = (evt: string) => JSON.stringify({ id: evt, type: 'charge.refunded', data: { object: { id: 'ch_t', invoice: null, payment_intent: 'pi_t' } } });
+
+Deno.test('chargeback of a COOLING transfer aborts the case (no seat moved)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-1', state: 'cooling', payout_status: 'none', seat_id: 3 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_cooling'), { 'stripe-signature': await sign(transferRefund('evt_t_cooling'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  const ab = stub.rpc.find((c) => c.fn === 'transfer_case_abort');
+  assertEquals(ab !== undefined, true);
+  assertEquals((ab!.args as { p_actor: string }).p_actor, 'chargeback');
+});
+
+Deno.test('chargeback of a FINALIZED transfer (payout not released) reverses the case (seat moves back)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-2', state: 'finalized', payout_status: 'scheduled', seat_id: 4 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_final'), { 'stripe-signature': await sign(transferRefund('evt_t_final'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_reverse'), true);
+});
+
+Deno.test('chargeback of a FINALIZED transfer AFTER payout released flags the seat (accepted residual)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-3', state: 'finalized', payout_status: 'released', seat_id: 5 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_paid_out'), { 'stripe-signature': await sign(transferRefund('evt_t_paid_out'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_reverse'), false); // NOT reversed
+  assertEquals(stub.seatUpdates.some((u) => u.security_status === 'flagged'), true);
+});
+
+// ── Delivery-stash session bind (dossier_purchases, migration 122) ──────────
+// Ported OURS-only lane: the paid single_dossier branch backfills
+// dossier_purchases.stripe_session_id keyed on the checkout_token, so
+// verify-single-dossier can read the stashed settlement back by session. Additive
+// to the durable-entitlement (108) / anonymous-voucher paths asserted above.
+
+Deno.test('a single_dossier checkout backfills dossier_purchases.stripe_session_id from the checkout_token', async () => {
+  const stub = makeDossierStub();
+  const token = 't'.repeat(40);
+  const body = dossierCheckoutEvent('cs_bind_1', { anonymous: 'true', checkout_token: token });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.binds.length, 1);
+  assertEquals(stub.binds[0].token, token);                       // keyed on checkout_token
+  assertEquals(stub.binds[0].vals.stripe_session_id, 'cs_bind_1'); // bound to the paid session
+});
+
+Deno.test('the single_dossier session bind is idempotent on replay (same session id, no throw)', async () => {
+  const stub = makeDossierStub();
+  const token = 't'.repeat(40);
+  const body = dossierCheckoutEvent('cs_bind_replay', { anonymous: 'true', checkout_token: token });
+  const res1 = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  // A Stripe RESEND: same session, NEW event id (bypasses event-level dedup) → the
+  // bind runs again and must write the same session id without throwing.
+  const body2 = body.replace('evt_cs_bind_replay', 'evt_cs_bind_replay_resend');
+  const res2 = await handleStripeWebhook(req(body2, { 'stripe-signature': await sign(body2, SECRET) }), stub);
+  assertEquals(res1.status, 200);
+  assertEquals(res2.status, 200);
+  assertEquals(stub.binds.length, 2);
+  assertEquals(stub.binds[0].vals.stripe_session_id, 'cs_bind_replay');
+  assertEquals(stub.binds[1].vals.stripe_session_id, 'cs_bind_replay');   // same id, idempotent
+});
+
+Deno.test('a single_dossier WITHOUT a checkout_token is a no-op bind (not an error, still 200)', async () => {
+  const stub = makeDossierStub();
+  // Signed-in dossier with a save_id but no checkout_token → grant runs, bind skips.
+  const body = dossierCheckoutEvent('cs_bind_nocheckout', { supabase_user_id: 'u1', save_id: 'save_1', anonymous: 'false' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.binds.length, 0);
+});
+
+// ── Money spine (156/157 money_events, DESIGN_MONEY_WAVE §2, slice M-1) ───────
+// The webhook mirrors every successful money movement into money_events. These
+// EXECUTE the mirror through the real handler and assert the row (kind, amount,
+// receipt, event_key redelivery shield, and the refund/dispute status flip).
+
+function moneyStripe(opts: {
+  receiptUrl?: string;
+  chargeId?: string;
+  hostedInvoiceUrl?: string;
+  sessionForPI?: string | null;
+  refundFailures?: number;
+  refundStatus?: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+  refundFailureReason?: string | null;
+  invoicePaymentIntent?: string | null;
+} = {}) {
+  const refundCalls: Array<{ params: unknown; request: unknown }> = [];
+  const canceledSubscriptions: string[] = [];
+  const deletedCustomers: string[] = [];
+  let refundFailures = opts.refundFailures ?? 0;
+  let latestRefund: Record<string, unknown> | null = null;
+  return {
+    refundCalls,
+    canceledSubscriptions,
+    deletedCustomers,
+    setRefundStatus: (
+      status: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled',
+      failureReason: string | null = null,
+    ) => {
+      if (latestRefund) {
+        latestRefund.status = status;
+        latestRefund.failure_reason = failureReason;
+      }
+    },
+    refunds: {
+      create: (params: unknown, request: unknown) => {
+        refundCalls.push({ params, request });
+        if (refundFailures > 0) {
+          refundFailures -= 1;
+          return Promise.reject(new Error('transient refund failure'));
+        }
+        const input = params as {
+          payment_intent: string;
+          metadata?: Record<string, string>;
+        };
+        latestRefund = {
+          id: 're_auto_reload',
+          payment_intent: input.payment_intent,
+          amount: 459,
+          currency: 'usd',
+          status: opts.refundStatus ?? 'succeeded',
+          failure_reason: opts.refundFailureReason ?? null,
+          metadata: input.metadata ?? {},
+        };
+        return Promise.resolve(latestRefund);
+      },
+      retrieve: (_id: string) => Promise.resolve(latestRefund),
+      list: (_params: unknown) => Promise.resolve({
+        data: latestRefund ? [latestRefund] : [],
+        has_more: false,
+      }),
+    },
+    paymentIntents: {
+      retrieve: (_id: string, _p?: unknown) => Promise.resolve({
+        latest_charge: { id: opts.chargeId ?? 'ch_x', receipt_url: opts.receiptUrl ?? 'https://stripe.test/receipt' },
+      }),
+    },
+    invoices: {
+      retrieve: (_id: string) => Promise.resolve({
+        hosted_invoice_url: opts.hostedInvoiceUrl ?? 'https://stripe.test/inv',
+        charge: 'ch_inv',
+        amount_paid: 900,
+        currency: 'usd',
+        payment_intent: opts.invoicePaymentIntent ?? 'pi_invoice',
+      }),
+    },
+    // charge→session resolution for refund/dispute clawback keys.
+    charges: { retrieve: (_id: string) => Promise.resolve({ id: 'ch_x', invoice: null, payment_intent: 'pi_ref' }) },
+    checkout: { sessions: { list: (_p: { payment_intent: string }) => Promise.resolve({ data: opts.sessionForPI === null ? [] : [{ id: opts.sessionForPI ?? 'cs_default' }] }) } },
+    customers: {
+      del: (id: string) => {
+        deletedCustomers.push(id);
+        return Promise.resolve({ id, deleted: true });
+      },
+    },
+    subscriptions: {
+      retrieve: (_id: string) => Promise.resolve({ status: 'active' }),
+      cancel: (id: string) => {
+        canceledSubscriptions.push(id);
+        return Promise.resolve({ id, status: 'canceled' });
+      },
+    },
+  };
+}
+
+Deno.test('deleted-account Checkout is canceled, customer-deleted, and refunded without restoring access', async () => {
+  const stub = makeStub('track', { accountActive: false });
+  const stripe = moneyStripe();
+  const body = JSON.stringify({
+    id: 'evt_deleted_checkout',
+    type: 'checkout.session.completed',
+    data: {
+      object: {
+        id: 'cs_deleted_checkout',
+        payment_status: 'paid',
+        amount_total: 900,
+        currency: 'usd',
+        payment_intent: 'pi_deleted_checkout',
+        subscription: 'sub_deleted_checkout',
+        customer: 'cus_deleted_checkout',
+        metadata: { supabase_user_id: 'u1', product: 'premium' },
+      },
+    },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.authUpdates.length, 0);
+  assertEquals(stub.calls.profileUpdates.length, 0);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+  const requeue = stub.calls.rpc.find((c) =>
+    c.fn === 'requeue_account_deletion_cleanup_for_late_billing'
+  );
+  assertEquals(requeue?.args, {
+    p_user: 'u1',
+    p_subscription_id: 'sub_deleted_checkout',
+    p_customer_id: 'cus_deleted_checkout',
+    p_reason: 'checkout_completed_after_account_deletion',
+  });
+  assertEquals(stripe.canceledSubscriptions, ['sub_deleted_checkout']);
+  assertEquals(stripe.deletedCustomers, ['cus_deleted_checkout']);
+  assertEquals(
+    (stripe.refundCalls[0].params as { payment_intent: string }).payment_intent,
+    'pi_deleted_checkout',
+  );
+  const refundRecords = stub.calls.rpc.filter((c) =>
+    c.fn === 'record_payment_refund_obligation'
+  );
+  assertEquals(
+    (refundRecords[0].args as Record<string, unknown>).p_status,
+    'pending',
+  );
+  assertEquals(
+    (refundRecords[1].args as Record<string, unknown>).p_status,
+    'succeeded',
+  );
+  assertEquals(stub.moneyEvents[0].event_key, 'refund:unfulfilled:pi_deleted_checkout');
+  assertEquals(stub.moneyEvents[0].amount_cents, 900);
+});
+
+Deno.test('inactive subscription start uses one refund identity in both Checkout/invoice delivery orders', async () => {
+  const checkout = JSON.stringify({
+    id: 'evt_inactive_sub_checkout',
+    type: 'checkout.session.completed',
+    data: {
+      object: {
+        id: 'cs_inactive_sub',
+        payment_status: 'paid',
+        amount_total: 900,
+        currency: 'usd',
+        payment_intent: 'pi_inactive_sub',
+        subscription: 'sub_inactive_sub',
+        customer: 'cus_inactive_sub',
+        metadata: { supabase_user_id: 'u1', product: 'premium' },
+      },
+    },
+  });
+  const invoice = JSON.stringify({
+    id: 'evt_inactive_sub_invoice',
+    type: 'invoice.paid',
+    data: {
+      object: {
+        id: 'in_inactive_sub',
+        customer: 'cus_inactive_sub',
+        customer_email: 'deleted@example.invalid',
+        subscription: 'sub_inactive_sub',
+        billing_reason: 'subscription_create',
+        amount_paid: 900,
+        currency: 'usd',
+        payment_intent: 'pi_inactive_sub',
+        lines: { data: [] },
+      },
+    },
+  });
+  const deletedProfile = {
+    id: 'u1',
+    is_founder: false,
+    stripe_subscription_id: 'sub_inactive_sub',
+    tier: 'free',
+    banned_at: null,
+    disabled_at: null,
+    deleted_at: '2026-07-24T00:00:00Z',
+  };
+
+  for (const deliveries of [[checkout, invoice], [invoice, checkout]]) {
+    const stub = makeStub('track', {
+      accountActive: false,
+      profile: deletedProfile,
+    });
+    const stripe = moneyStripe();
+    for (const body of deliveries) {
+      const res = await handleStripeWebhook(
+        req(body, { 'stripe-signature': await sign(body, SECRET) }),
+        { adminClient: stub.adminClient, stripeClient: stripe },
+      );
+      assertEquals(res.status, 200);
+    }
+
+    const records = stub.calls.rpc.filter((call) =>
+      call.fn === 'record_payment_refund_obligation'
+    );
+    assertEquals(
+      [...new Set(records.map((call) =>
+        (call.args as Record<string, unknown>).p_purpose
+      ))],
+      ['deleted_account_checkout'],
+    );
+    assertEquals(
+      [...new Set(stripe.refundCalls.map((call) =>
+        (call.request as { idempotencyKey: string }).idempotencyKey
+      ))],
+      ['deleted-account-checkout-refund-pi_inactive_sub'],
+    );
+    const immutableParams = {
+      payment_intent: 'pi_inactive_sub',
+      metadata: {
+        purpose: 'settlementforge_unfulfilled_payment',
+        refund_purpose: 'deleted_account_checkout',
+        payment_intent_id: 'pi_inactive_sub',
+        obligation_amount_cents: '900',
+        reason: 'account_inactive_before_checkout_fulfillment',
+      },
+    };
+    assertEquals(
+      stripe.refundCalls.map((call) => call.params),
+      [immutableParams, immutableParams],
+    );
+  }
+});
+
+Deno.test('pending unfulfilled refund is durable and lifecycle events settle or reverse its ledger note', async () => {
+  const stub = makeStub('track', {
+    autoReloadAttempt: {
+      id: AUTO_RELOAD_ATTEMPT_ID,
+      user_id: 'u1',
+      state: 'succeeded',
+      credits_delta: 23,
+      amount_cents: 459,
+      stripe_payment_intent_id: 'pi_ar_winner',
+    },
+  });
+  const stripe = moneyStripe({ refundStatus: 'pending' });
+  const payment = autoReloadPI('evt_pending_refund_payment', { id: 'pi_ar_loser' });
+  await handleStripeWebhook(
+    req(payment, { 'stripe-signature': await sign(payment, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(stub.moneyEvents.length, 0);
+  const initialRecords = stub.calls.rpc.filter((c) =>
+    c.fn === 'record_payment_refund_obligation'
+  );
+  assertEquals(initialRecords.length, 2);
+  assertEquals(
+    (initialRecords[0].args as Record<string, unknown>).p_stripe_refund_id,
+    null,
+  );
+
+  stripe.setRefundStatus('succeeded');
+  const succeeded = JSON.stringify({
+    id: 'evt_refund_succeeded',
+    created: 1784894400,
+    type: 'refund.updated',
+    data: {
+      object: {
+        id: 're_auto_reload',
+        metadata: { purpose: 'settlementforge_unfulfilled_payment' },
+      },
+    },
+  });
+  await handleStripeWebhook(
+    req(succeeded, { 'stripe-signature': await sign(succeeded, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+
+  stripe.setRefundStatus('failed', 'declined');
+  const failed = JSON.stringify({
+    id: 'evt_refund_failed',
+    created: 1784894460,
+    type: 'refund.failed',
+    data: {
+      object: {
+        id: 're_auto_reload',
+        metadata: { purpose: 'settlementforge_unfulfilled_payment' },
+      },
+    },
+  });
+  await handleStripeWebhook(
+    req(failed, { 'stripe-signature': await sign(failed, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(stub.moneyEvents[0].status, 'reversed');
+  const lifecycleRecords = stub.calls.rpc.filter((c) =>
+    c.fn === 'record_payment_refund_obligation'
+  );
+  assertEquals(
+    (lifecycleRecords.at(-1)!.args as Record<string, unknown>).p_failure_reason,
+    'declined',
+  );
+});
+
+Deno.test('money spine: a paid credit-pack checkout mirrors exactly ONE money_events row, replay-safe', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r1', chargeId: 'ch_1' });
+  const mk = (evtId: string) => JSON.stringify({
+    id: evtId, type: 'checkout.session.completed',
+    data: { object: { id: 'cs_cp', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_cp',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  const b1 = mk('evt_cp_1');
+  const res = await handleStripeWebhook(req(b1, { 'stripe-signature': await sign(b1, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  const row = stub.moneyEvents[0];
+  assertEquals(row.kind, 'credit_pack');
+  assertEquals(row.event_key, 'sess:cs_cp');
+  assertEquals(row.user_id, 'u1');
+  assertEquals(row.amount_cents, 500);
+  assertEquals(row.currency, 'usd');
+  assertEquals(row.receipt_url, 'https://stripe.test/r1');
+  assertEquals(row.stripe_charge_id, 'ch_1');
+  assertEquals(row.status, 'paid');
+  // Redelivery under a NEW event id (same session) — the event_key upsert shield
+  // holds it at exactly one row.
+  const b2 = mk('evt_cp_2');
+  await handleStripeWebhook(req(b2, { 'stripe-signature': await sign(b2, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1);
+});
+
+Deno.test('money spine: a founder_lifetime checkout mirrors a founder_seat row with its receipt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rf', chargeId: 'ch_f' });
+  const body = JSON.stringify({
+    id: 'evt_f', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_f', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_f',
+      metadata: { supabase_user_id: 'uf', product: 'founder_lifetime' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'founder_seat');
+  assertEquals(stub.moneyEvents[0].amount_cents, 9900);
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/rf');
+});
+
+Deno.test('money spine: an anonymous single_dossier mirrors a row with user_id NULL (LAW 9)', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rd', chargeId: 'ch_d' });
+  const body = JSON.stringify({
+    id: 'evt_d', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_d', payment_status: 'paid', amount_total: 299, currency: 'usd', payment_intent: 'pi_d',
+      customer_details: { email: 'buyer@x.com' },
+      metadata: { product: 'single_dossier', anonymous: 'true', checkout_token: 'tok_abc' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'single_dossier');
+  assertEquals(stub.moneyEvents[0].user_id, null);
+  assertEquals(stub.moneyEvents[0].amount_cents, 299);
+});
+
+Deno.test('money spine: a premium checkout mirrors subscription_start with the hosted invoice receipt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/hosted' });
+  const body = JSON.stringify({
+    id: 'evt_p', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_p', payment_status: 'paid', amount_total: 900, currency: 'usd',
+      subscription: 'sub_p', invoice: 'in_p', customer: 'cus_p',
+      metadata: { supabase_user_id: 'up', product: 'premium' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'subscription_start');
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/hosted');
+  assertEquals(stub.moneyEvents[0].stripe_invoice_id, 'in_p');
+});
+
+Deno.test('money spine: a refund flips the mirrored row status to refunded', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r2', chargeId: 'ch_2', sessionForPI: 'cs_ref' });
+  const paid = JSON.stringify({
+    id: 'evt_seed_r', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_ref', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_ref',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].status, 'paid');
+  const refund = JSON.stringify({
+    id: 'evt_ref', type: 'charge.refunded',
+    data: { object: { id: 'ch_2', invoice: null, payment_intent: 'pi_ref' } },
+  });
+  const res = await handleStripeWebhook(req(refund, { 'stripe-signature': await sign(refund, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+});
+
+Deno.test('money spine: a dispute flips the mirrored row status to disputed', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r3', chargeId: 'ch_3', sessionForPI: 'cs_dis' });
+  const paid = JSON.stringify({
+    id: 'evt_seed_d', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_dis', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_ref',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents[0].status, 'paid');
+  const dispute = JSON.stringify({
+    id: 'evt_dis', type: 'charge.dispute.created',
+    data: { object: { id: 'dp_1', charge: 'ch_3' } },
+  });
+  const res = await handleStripeWebhook(req(dispute, { 'stripe-signature': await sign(dispute, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents[0].status, 'disputed');
+});
+
+Deno.test('money spine: a subscription RENEWAL invoice mirrors one row; a subscription_create invoice does NOT (no double-count)', async () => {
+  // subscription_cycle (renewal) → one subscription_renewal row.
+  const cycleStub = makeStub('track', { profile: { id: 'u_sub', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const cycle = JSON.stringify({
+    id: 'evt_cycle', type: 'invoice.paid',
+    data: { object: { id: 'in_cycle', customer: 'cus_x', billing_reason: 'subscription_cycle',
+      subscription: 'sub_x', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+      hosted_invoice_url: 'https://stripe.test/renewal' } },
+  });
+  const res1 = await handleStripeWebhook(req(cycle, { 'stripe-signature': await sign(cycle, SECRET) }), { adminClient: cycleStub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res1.status, 200);
+  assertEquals(cycleStub.moneyEvents.length, 1);
+  assertEquals(cycleStub.moneyEvents[0].kind, 'subscription_renewal');
+  assertEquals(cycleStub.moneyEvents[0].event_key, 'inv:in_cycle');
+  assertEquals(cycleStub.moneyEvents[0].receipt_url, 'https://stripe.test/renewal');
+
+  // subscription_create → the *_start row comes from the checkout session, so the
+  // invoice writes NO money_events row (a Checkout-created sub fires both events).
+  const createStub = makeStub('track', { profile: { id: 'u_sub', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const create = JSON.stringify({
+    id: 'evt_create', type: 'invoice.paid',
+    data: { object: { id: 'in_create', customer: 'cus_x', billing_reason: 'subscription_create',
+      subscription: 'sub_x', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+      hosted_invoice_url: 'https://stripe.test/create' } },
+  });
+  const res2 = await handleStripeWebhook(req(create, { 'stripe-signature': await sign(create, SECRET) }), { adminClient: createStub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res2.status, 200);
+  assertEquals(createStub.moneyEvents.length, 0);
+});
+
+// ── Auto-reload confirmation (158, §4.5, slice M-3d) ─────────────────────────
+// payment_intent.succeeded (purpose credit_auto_reload) is the authoritative
+// grant: credits granted (per-PI idempotency key), attempt succeeded, money_events
+// mirrored. A non-auto-reload PI is ignored.
+
+const autoReloadPI = (evtId: string, over: Record<string, unknown> = {}) => JSON.stringify({
+  id: evtId, type: 'payment_intent.succeeded',
+  data: { object: {
+    id: 'pi_ar', amount: 459, amount_received: 459, currency: 'usd',
+    metadata: {
+      purpose: 'credit_auto_reload',
+      supabase_user_id: 'u1',
+      attempt_id: AUTO_RELOAD_ATTEMPT_ID,
+      credits: '23',
+    },
+    ...over,
+  } },
+});
+
+Deno.test('auto-reload: succeeded event before PI-id stamp binds by attempt_id, grants, and completes', async () => {
+  const stub = makeStub();
+  assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, null);
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
+  const body = autoReloadPI('evt_ar_1');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits');
+  assertEquals((grant!.args as Record<string, unknown>).source, 'auto_reload');
+  assertEquals((grant!.args as Record<string, unknown>).amount, 23);
+  assertEquals(((grant!.args as Record<string, unknown>).metadata as Record<string, string>).stripe_payment_intent_id, 'pi_ar');
+  // The migration-176 RPC claims identity atomically; only then does the handler
+  // complete that exact attempt+PI row.
+  assertEquals(stub.autoReloadBindings, ['pi_ar']);
+  const bind = stub.calls.rpc.find((c) => c.fn === 'claim_auto_reload_payment_intent');
+  assertEquals((bind!.args as Record<string, unknown>).p_attempt, AUTO_RELOAD_ATTEMPT_ID);
+  assertEquals((bind!.args as Record<string, unknown>).p_payment_intent, 'pi_ar');
+  assertEquals(stub.autoReloadUpdates[0].vals.state, 'succeeded');
+  assertEquals(stub.autoReloadUpdates[0].filters.id, AUTO_RELOAD_ATTEMPT_ID);
+  assertEquals(stub.autoReloadUpdates[0].filters.stripe_payment_intent_id, 'pi_ar');
+  assertEquals(stub.autoReloadUpdates[0].states, ['pending', 'requires_action', 'failed', 'canceled']);
+  assertEquals(stub.autoReloadAttempt()?.state, 'succeeded');
+  assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, 'pi_ar');
+  // money_events row (pi: key, kind auto_reload)
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'auto_reload');
+  assertEquals(stub.moneyEvents[0].event_key, 'pi:pi_ar');
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/ar');
+});
+
+Deno.test('auto-reload: a redelivery under a NEW event id keeps exactly ONE money_events row (per-PI dedup key)', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
+  const b1 = autoReloadPI('evt_ar_a');
+  await handleStripeWebhook(req(b1, { 'stripe-signature': await sign(b1, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  const b2 = autoReloadPI('evt_ar_b'); // same PI, new event id (belt 1 does not dedup this)
+  await handleStripeWebhook(req(b2, { 'stripe-signature': await sign(b2, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1); // event_key pi:pi_ar shield holds it
+  // Both grants carry the SAME PI idempotency key, so system_grant_credits dedups.
+  const grants = stub.calls.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 2);
+  for (const g of grants) {
+    assertEquals(((g.args as Record<string, unknown>).metadata as Record<string, string>).stripe_payment_intent_id, 'pi_ar');
+  }
+});
+
+Deno.test('auto-reload: succeeded PI overrides an earlier trigger-side failed resolution', async () => {
+  const stub = makeStub('track', {
+    autoReloadAttempt: {
+      id: AUTO_RELOAD_ATTEMPT_ID,
+      user_id: 'u1',
+      state: 'failed',
+      credits_delta: 23,
+      amount_cents: 459,
+      stripe_payment_intent_id: null,
+    },
+  });
+  const body = autoReloadPI('evt_ar_late_success');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), true);
+  assertEquals(stub.autoReloadAttempt()?.state, 'succeeded');
+  assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, 'pi_ar');
+});
+
+Deno.test('auto-reload: concurrent distinct succeeded PIs race — only the atomically claimed PI grants', async () => {
+  const stub = makeStub('track', { autoReloadReadBarrier: true });
+  const stripe = moneyStripe();
+  const bodyA = autoReloadPI('evt_ar_race_a', { id: 'pi_ar_a' });
+  const bodyB = autoReloadPI('evt_ar_race_b', { id: 'pi_ar_b' });
+  const [sigA, sigB] = await Promise.all([sign(bodyA, SECRET), sign(bodyB, SECRET)]);
+  const [resA, resB] = await Promise.all([
+    handleStripeWebhook(
+      req(bodyA, { 'stripe-signature': sigA }),
+      { adminClient: stub.adminClient, stripeClient: stripe },
+    ),
+    handleStripeWebhook(
+      req(bodyB, { 'stripe-signature': sigB }),
+      { adminClient: stub.adminClient, stripeClient: stripe },
+    ),
+  ]);
+  assertEquals(resA.status, 200);
+  assertEquals(resB.status, 200);
+  assertEquals(stub.autoReloadBindings.length, 1);
+  const winner = stub.autoReloadBindings[0];
+  assertEquals(['pi_ar_a', 'pi_ar_b'].includes(winner), true);
+  assertEquals(stub.autoReloadAttempt()?.stripe_payment_intent_id, winner);
+  const grants = stub.calls.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 1);
+  assertEquals(
+    ((grants[0].args as Record<string, unknown>).metadata as Record<string, string>)
+      .stripe_payment_intent_id,
+    winner,
+  );
+  const loser = winner === 'pi_ar_a' ? 'pi_ar_b' : 'pi_ar_a';
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(
+    (stripe.refundCalls[0].params as { payment_intent: string }).payment_intent,
+    loser,
+  );
+  assertEquals(
+    stripe.refundCalls[0].request,
+    { idempotencyKey: `auto-reload-unfulfilled-refund-${loser}` },
+  );
+  assertEquals(stub.moneyEvents.length, 2);
+  const purchase = stub.moneyEvents.find((row) => row.kind === 'auto_reload');
+  const refund = stub.moneyEvents.find((row) => row.kind === 'refund_note');
+  assertEquals(purchase?.stripe_payment_intent_id, winner);
+  assertEquals(refund?.stripe_payment_intent_id, loser);
+  assertEquals(refund?.event_key, `refund:auto-reload:${loser}`);
+  assertEquals(refund?.status, 'refunded');
+});
+
+Deno.test('auto-reload: a delayed distinct PI after the winner is refunded without granting', async () => {
+  const stub = makeStub('track', {
+    autoReloadAttempt: {
+      id: AUTO_RELOAD_ATTEMPT_ID,
+      user_id: 'u1',
+      state: 'succeeded',
+      credits_delta: 23,
+      amount_cents: 459,
+      stripe_payment_intent_id: 'pi_ar_winner',
+    },
+  });
+  const stripe = moneyStripe();
+  const body = autoReloadPI('evt_ar_delayed_loser', { id: 'pi_ar_loser' });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(
+    (stripe.refundCalls[0].params as { payment_intent: string }).payment_intent,
+    'pi_ar_loser',
+  );
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'refund_note');
+  assertEquals(stub.moneyEvents[0].metadata, {
+    reason: 'payment_intent_identity_conflict',
+    attempt_id: AUTO_RELOAD_ATTEMPT_ID,
+    refund_purpose: 'auto_reload_unfulfilled',
+  });
+});
+
+Deno.test('auto-reload: deletion after charging refunds instead of granting unusable credits', async () => {
+  const stub = makeStub('track', { accountActive: false });
+  const stripe = moneyStripe();
+  const body = autoReloadPI('evt_ar_deleted_after_charge');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stub.autoReloadAttempt()?.state, 'pending');
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(
+    (stripe.refundCalls[0].params as { payment_intent: string }).payment_intent,
+    'pi_ar',
+  );
+  assertEquals(stub.moneyEvents[0].metadata, {
+    reason: 'account_inactive',
+    attempt_id: AUTO_RELOAD_ATTEMPT_ID,
+    refund_purpose: 'auto_reload_unfulfilled',
+  });
+});
+
+Deno.test('auto-reload: a refund failure releases the claim and redelivery retries idempotently', async () => {
+  const stub = makeStub('track', {
+    autoReloadAttempt: {
+      id: AUTO_RELOAD_ATTEMPT_ID,
+      user_id: 'u1',
+      state: 'succeeded',
+      credits_delta: 23,
+      amount_cents: 459,
+      stripe_payment_intent_id: 'pi_ar_winner',
+    },
+  });
+  const stripe = moneyStripe({ refundFailures: 1 });
+  const body = autoReloadPI('evt_ar_refund_retry', { id: 'pi_ar_loser' });
+  const signature = await sign(body, SECRET);
+  let threw = false;
+  try {
+    await handleStripeWebhook(
+      req(body, { 'stripe-signature': signature }),
+      { adminClient: stub.adminClient, stripeClient: stripe },
+    );
+  } catch {
+    threw = true;
+  }
+  assertEquals(threw, true);
+  assertEquals(stub.claims.releases, ['evt_ar_refund_retry']);
+  const retry = await handleStripeWebhook(
+    req(body, { 'stripe-signature': signature }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(retry.status, 200);
+  assertEquals(stripe.refundCalls.length, 2);
+  for (const call of stripe.refundCalls) {
+    assertEquals(call.request, {
+      idempotencyKey: 'auto-reload-unfulfilled-refund-pi_ar_loser',
+    });
+  }
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].event_key, 'refund:auto-reload:pi_ar_loser');
+});
+
+Deno.test('auto-reload: a NON-auto-reload payment_intent.succeeded is ignored', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_other', type: 'payment_intent.succeeded',
+    data: { object: { id: 'pi_other', amount: 500, currency: 'usd', metadata: { purpose: 'something_else' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(
+    stub.calls.rpc.filter((call) =>
+      call.fn !== 'claim_stripe_webhook_event'
+    ).length,
+    0,
+  );
+  assertEquals(stub.moneyEvents.length, 0);
+  assertEquals(stub.autoReloadUpdates.length, 0);
+});
+
+Deno.test('auto-reload: mismatched user/credits metadata cannot grant or mutate the attempt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe();
+  const body = autoReloadPI('evt_ar_mismatch', {
+    metadata: {
+      purpose: 'credit_auto_reload',
+      supabase_user_id: 'u2',
+      attempt_id: AUTO_RELOAD_ATTEMPT_ID,
+      credits: '999',
+    },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stub.autoReloadUpdates.length, 0);
+  assertEquals(stub.autoReloadAttempt()?.state, 'pending');
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'refund_note');
+});
+
+Deno.test('auto-reload: a non-USD succeeded PI cannot grant, bind, or complete the attempt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe();
+  const body = autoReloadPI('evt_ar_currency_mismatch', { currency: 'eur' });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stub.autoReloadUpdates.length, 0);
+  assertEquals(stub.autoReloadAttempt()?.state, 'pending');
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+});
+
+Deno.test('auto-reload: a short collection cannot grant, bind, or complete the attempt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe();
+  const body = autoReloadPI('evt_ar_short_collection', { amount_received: 458 });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+  assertEquals(stub.autoReloadUpdates.length, 0);
+  assertEquals(stub.autoReloadAttempt()?.state, 'pending');
+  assertEquals(stripe.refundCalls.length, 1);
+  assertEquals(stub.moneyEvents[0].amount_cents, 458);
+});
+
+Deno.test('auto-reload: an atomic binding RPC error throws and releases the event claim for retry', async () => {
+  const stub = makeStub('track', {
+    rpcErrors: {
+      claim_auto_reload_payment_intent: { message: 'transient binding failure' },
+    },
+  });
+  const body = autoReloadPI('evt_ar_bind_error');
+  let threw = false;
+  try {
+    await handleStripeWebhook(
+      req(body, { 'stripe-signature': await sign(body, SECRET) }),
+      { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+    );
+  } catch {
+    threw = true;
+  }
+  assertEquals(threw, true);
+  assertEquals(stub.claims.releases, ['evt_ar_bind_error']);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), false);
+});
+
+Deno.test('auto-reload: payment_intent.payment_failed marks the attempt failed with the error code', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_ar_fail', type: 'payment_intent.payment_failed',
+    data: {
+      object: {
+        id: 'pi_ar',
+        amount: 459,
+        currency: 'usd',
+        metadata: {
+          purpose: 'credit_auto_reload',
+          supabase_user_id: 'u1',
+          attempt_id: AUTO_RELOAD_ATTEMPT_ID,
+          credits: '23',
+        },
+        last_payment_error: { code: 'card_declined' },
+      },
+    },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.autoReloadBindings, ['pi_ar']);
+  assertEquals(stub.autoReloadUpdates[0].vals.state, 'failed');
+  assertEquals(stub.autoReloadUpdates[0].vals.failure_reason, 'card_declined');
+  assertEquals(stub.autoReloadUpdates[0].vals.stripe_payment_intent_id, undefined);
+  assertEquals(stub.autoReloadUpdates[0].filters.id, AUTO_RELOAD_ATTEMPT_ID);
+  assertEquals(stub.autoReloadUpdates[0].filters.stripe_payment_intent_id, 'pi_ar');
+});
+
+// ── Surveyor limb (159, §5, slice M-4b) ──────────────────────────────────────
+
+Deno.test('surveyor checkout grants the ENTITLEMENT (no tier/auth write) + surveyor_start money_events', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/surv' });
+  const body = JSON.stringify({
+    id: 'evt_surv_co', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_surv', payment_status: 'paid', amount_total: 900, currency: 'usd',
+      subscription: 'sub_s', invoice: 'in_s', customer: 'cus_s',
+      metadata: { supabase_user_id: 'us', product: 'surveyor' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'grant_surveyor_entitlement');
+  assertEquals((grant!.args as Record<string, unknown>).p_user, 'us');
+  assertEquals((grant!.args as Record<string, unknown>).p_subscription_id, 'sub_s');
+  assertEquals((grant!.args as Record<string, unknown>).p_customer_id, 'cus_s');
+  // The entitlement IS the truth — NO auth metadata write, NO tier/restore RPC.
+  assertEquals(stub.calls.authUpdates.length, 0);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'surveyor_start');
+});
+
+Deno.test('THE ALLOWANCE TRAP: a Surveyor invoice mints NO 30-credit allowance + is a surveyor_renewal', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  try {
+    const stub = makeStub('track', { profile: { id: 'us', is_founder: false, stripe_subscription_id: 'sub_s', tier: 'free' } });
+    const body = JSON.stringify({
+      id: 'evt_surv_inv', type: 'invoice.paid',
+      data: { object: { id: 'in_surv', customer: 'cus_s', billing_reason: 'subscription_cycle',
+        subscription: 'sub_s', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+        hosted_invoice_url: 'https://stripe.test/surv-renew',
+        lines: { data: [{ price: { id: 'price_surveyor' } }] } } },
+    });
+    const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+    assertEquals(res.status, 200);
+    // THE PIN: no Cartographer monthly allowance for a Surveyor invoice.
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), false);
+    assertEquals(stub.moneyEvents.length, 1);
+    assertEquals(stub.moneyEvents[0].kind, 'surveyor_renewal');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+Deno.test('a Cartographer invoice with the premium price still mints the allowance (subscription_renewal)', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  try {
+    const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+    const body = JSON.stringify({
+      id: 'evt_prem_inv', type: 'invoice.paid',
+      data: { object: { id: 'in_prem', customer: 'cus_p', billing_reason: 'subscription_cycle',
+        subscription: 'sub_p', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+        hosted_invoice_url: 'https://stripe.test/prem-renew',
+        lines: { data: [{ price: { id: 'price_premium' }, period: { end: 1893456000 } }] } } },
+    });
+    const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+    assertEquals(res.status, 200);
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), true);
+    assertEquals(stub.moneyEvents[0].kind, 'subscription_renewal');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+Deno.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the Cartographer downgrade', async () => {
+  const stub = makeStub('track', { rpcData: { revoke_surveyor_entitlement_by_subscription: true } });
+  const body = JSON.stringify({
+    id: 'evt_surv_del', type: 'customer.subscription.deleted',
+    data: { object: { id: 'sub_s', customer: 'cus_s' } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'revoke_surveyor_entitlement_by_subscription'), true);
+  // Broke before the Cartographer path — no downgrade, no auth write.
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+  assertEquals(stub.calls.authUpdates.length, 0);
+});
+
+// ── Charge-reversal classification (Wave 8 H20/M22) + credit-pack clawback (M2) ──
+// classifyChargeReversal NAMES the class; BY POLICY (CRIT-1, ruling 2026-07-26)
+// every class — full_refund, partial_refund, dispute — routes to the SAME full
+// clawback lattice (goodwill flows are credit GRANTS, never partial refunds).
+// The pack clawback reverses the FULL 'purchase' grant through the atomic
+// system_clawback_credits RPC (migration 190), keyed on the same session id.
+
+Deno.test('classifyChargeReversal names dispute / full / partial, and NEVER throws on ambiguity', () => {
+  // deno-lint-ignore no-explicit-any
+  const refundEvt = (amount?: number, amount_refunded?: number): any => ({
+    type: 'charge.refunded', data: { object: { id: 'ch_c', amount, amount_refunded } },
+  });
+  // deno-lint-ignore no-explicit-any
+  const disputeEvt: any = { type: 'charge.dispute.created', data: { object: { id: 'dp_1', charge: 'ch_c' } } };
+  assertEquals(classifyChargeReversal(disputeEvt), 'dispute');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 1000)), 'full_refund');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 250)), 'partial_refund');
+  // Ambiguity (missing amounts / zero refunded) defaults to full_refund
+  // semantics — which is what every class receives anyway.
+  assertEquals(classifyChargeReversal(refundEvt(undefined, undefined)), 'full_refund');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 0)), 'full_refund');
+});
+
+Deno.test('a PARTIAL refund (amount_refunded < amount) still runs the FULL clawback lattice', async () => {
+  // The founder stub is the richest lattice observer: if the partial refund
+  // routed anywhere but the full path, the is_founder flip and the FULL −30
+  // bonus reversal below would not happen.
+  const stub = makeFounderStub();
+  const body = JSON.stringify({
+    id: 'evt_partial_refund', type: 'charge.refunded',
+    data: { object: { id: 'ch_f', invoice: null, payment_intent: 'pi_f', amount: 9900, amount_refunded: 1000 } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                       // seat freed — full lattice ran
+  const adj = stub.rpc.find((c) => c.fn === 'service_adjust_credits');
+  assertEquals(adj!.args.delta, -30);                              // FULL bonus reversal, never scaled
+  // The pack clawback ran on the same key and RECORDED the class as its reason.
+  const pack = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals(pack !== undefined, true);
+  assertEquals((pack!.args as { p_session_id: string }).p_session_id, 'cs_founder');
+  assertEquals((pack!.args as { p_reason: string }).p_reason, 'partial_refund');
+});
+
+/** Minimal stub for the credit-pack clawback arm: records RPCs, resolves no
+ *  referral/dossier/founder/transfer state (every sibling clawback no-ops). */
+function makePackStub(cfg: { rpcResult?: Record<string, unknown>; rpcError?: { message: string } | null } = {}) {
+  const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  const claim = makeClaimTable('track');
+  // deno-lint-ignore no-explicit-any
+  const from = (table: string): any => {
+    if (table === 'processed_webhook_events') return claim.builder();
+    // deno-lint-ignore no-explicit-any
+    const q: any = {
+      select() { return q; }, update() { return q; }, eq() { return q; }, in() { return q; },
+      order() { return q; }, limit() { return q; },
+      maybeSingle() { return Promise.resolve({ data: null, error: null }); },
+      // deno-lint-ignore no-explicit-any
+      then(resolve: any, reject: any) { return Promise.resolve({ data: [], error: null }).then(resolve, reject); },
+    };
+    return q;
+  };
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from,
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      rpc.push({ fn, args });
+      if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false, reason: 'no_granted_referral' }, error: null });
+      if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
+      if (fn === 'system_clawback_credits') {
+        return Promise.resolve({
+          data: cfg.rpcError ? null : (cfg.rpcResult ?? { ok: true, user_id: 'pack_u', amount: 50, prev: 50, next: 0 }),
+          error: cfg.rpcError ?? null,
+        });
+      }
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, claim, adminClient: () => client };
+}
+// deno-lint-ignore no-explicit-any
+const packStripe = (sessionId = 'cs_pack'): any => ({
+  charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_p' }) },
+  checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }) } },
+});
+const packRefund = (eventId: string) => JSON.stringify({
+  id: eventId, type: 'charge.refunded',
+  data: { object: { id: 'ch_p', invoice: null, payment_intent: 'pi_p', amount: 999, amount_refunded: 999 } },
+});
+
+Deno.test('a refunded pack charge routes its session key through system_clawback_credits', async () => {
+  const stub = makePackStub();
+  const body = packRefund('evt_pack_refund_1');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claw = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals(claw !== undefined, true);
+  assertEquals((claw!.args as { p_session_id: string }).p_session_id, 'cs_pack');
+  assertEquals((claw!.args as { p_reason: string }).p_reason, 'full_refund');
+});
+
+Deno.test('a DISPUTE also routes to the pack clawback, recorded as class dispute', async () => {
+  const stub = makePackStub();
+  const body = JSON.stringify({
+    id: 'evt_pack_dispute_1', type: 'charge.dispute.created',
+    data: { object: { id: 'dp_p', charge: 'ch_p' } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claw = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals((claw!.args as { p_session_id: string }).p_session_id, 'cs_pack');
+  assertEquals((claw!.args as { p_reason: string }).p_reason, 'dispute');
+});
+
+Deno.test('a refund of a NON-pack session no-ops through the RPC (no throw, 200)', async () => {
+  const stub = makePackStub({ rpcResult: { ok: false, reason: 'no_pack_grant' } });
+  const body = packRefund('evt_pack_refund_nonpack');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe('cs_never_granted') },
+  );
+  assertEquals(res.status, 200);   // business no-op is silent — the arm completes
+  assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 1);
+});
+
+Deno.test('a redelivered pack refund re-asks the RPC; the claim-once lives in the RPC (already_clawed_back)', async () => {
+  // Webhook side: each delivery calls the RPC (the dossier posture); the pglite
+  // suite pins that the SECOND call deducts nothing (already_clawed_back).
+  const stub = makePackStub();
+  const first = packRefund('evt_pack_redeliver_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: packStripe() });
+  const second = packRefund('evt_pack_redeliver_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: packStripe() });
+  assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 2);
+});
+
+Deno.test('a pack-clawback TRANSPORT failure throws (non-2xx → Stripe redelivers) and releases the event claim', async () => {
+  // The RPC is one atomic transaction: an error means nothing committed, so the
+  // throw posture loses no claim — the redelivery re-runs the whole reversal.
+  const stub = makePackStub({ rpcError: { message: 'transient rpc boom' } });
+  const body = packRefund('evt_pack_refund_fail');
+  const signature = await sign(body, SECRET);
+  await assertRejects(
+    () => handleStripeWebhook(
+      req(body, { 'stripe-signature': signature }),
+      { adminClient: stub.adminClient, stripeClient: packStripe() },
+    ),
+    Error,
+    'system_clawback_credits failed',
+  );
+  // The event lease was released so Stripe's redelivery is not read as [duplicate].
+  assertEquals(stub.claim.releases.includes('evt_pack_refund_fail'), true);
 });

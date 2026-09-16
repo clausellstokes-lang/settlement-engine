@@ -5,6 +5,10 @@
  * easiest to let rot. This doesn't try to verify every claim — it pins a couple
  * of facts that have already drifted (or easily could), so the same drift can't
  * silently come back.
+ *
+ * @enforcement-walker Open filesystem populations are compared with documented
+ * claims. If one of those claims drifts, its debt belongs here, not in the
+ * per-test failure census where further drift would become invisible.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -29,5 +33,99 @@ describe('ARCHITECTURE.md freshness', () => {
     const claim = archMd.match(/(\d+)\s+slices/);
     expect(claim, 'ARCHITECTURE.md should state the store-slice count').toBeTruthy();
     expect(Number(claim[1])).toBe(sliceCount);
+  });
+});
+
+describe('ARCHITECTURE.md facts derive from the filesystem (F33)', () => {
+  // The doc understated its own suite by half and described a 14-step pipeline
+  // while 19 steps were registered — number drift is the exact rot class the
+  // meta-pin (claim vocabulary) cannot see. These pins derive the numbers from
+  // the artifacts themselves, so the doc can only be wrong loudly.
+
+  it('lists the exact registered step order from steps/index.js', () => {
+    const stepsIdx = read('../../src/generators/steps/index.js');
+    const steps = [...stepsIdx.matchAll(/import '\.\/(\w+)\.js';/g)].map((m) => m[1]);
+    expect(steps.length).toBeGreaterThan(0);
+    // The doc claims the count…
+    expect(archMd).toMatch(new RegExp(`${steps.length}-step pipeline`));
+    // …and the Order list must name every registered step, in order.
+    const orderBlock = archMd.match(/Order \(\d+ steps\): `([^`]+)`/);
+    expect(orderBlock, 'ARCHITECTURE.md must carry the Order list').toBeTruthy();
+    const docSteps = orderBlock[1].split('→').map((s) => s.trim());
+    expect(docSteps).toEqual(steps);
+  });
+
+  it('states the real migration count', () => {
+    const { readdirSync } = require('node:fs');
+    const n = readdirSync(resolve(here, '../../supabase/migrations')).filter((f) => f.endsWith('.sql')).length;
+    const claim = archMd.match(/\*\*migrations\/\*\* \((\d+)\)/);
+    expect(claim, 'ARCHITECTURE.md should state the migration count').toBeTruthy();
+    expect(Number(claim[1])).toBe(n);
+  });
+
+  it('does not understate the test suite by more than drift tolerance', () => {
+    const { readdirSync, statSync } = require('node:fs');
+    const walk = (d, out = []) => {
+      for (const e of readdirSync(d)) {
+        const p = resolve(d, e);
+        if (statSync(p).isDirectory()) walk(p, out);
+        else if (/\.test\.(js|jsx)$/.test(e)) out.push(p);
+      }
+      return out;
+    };
+    const files = walk(resolve(here, '../..', 'tests')).length;
+    const claim = archMd.match(/~([\d,]+) tests \/ ~(\d+) files/);
+    expect(claim, 'ARCHITECTURE.md should state suite size').toBeTruthy();
+    // Approximate claims are fine; a 25% understatement (the drift that
+    // actually shipped: "~159 files" vs 359 real) is not.
+    expect(Number(claim[2])).toBeGreaterThan(files * 0.75);
+    expect(Number(claim[2])).toBeLessThan(files * 1.25);
+  });
+});
+
+describe('ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2)', () => {
+  // The doc is the second-contributor map for a bus-factor-one repo; for 15 waves
+  // it omitted the entire Phase-5.5 spatial engine and described a 5-step gate
+  // while package.json ran 10. These pins derive both from the filesystem so the
+  // onboarding map can only be wrong loudly.
+
+  const { readdirSync, statSync } = require('node:fs');
+  const walkJs = (d, out = []) => {
+    for (const e of readdirSync(d)) {
+      const p = resolve(d, e);
+      if (statSync(p).isDirectory()) walkJs(p, out);
+      else if (/\.js$/.test(e)) out.push(p);
+    }
+    return out;
+  };
+
+  it('mentions the spatial-canon engine at its real path', () => {
+    // src/domain/spatial/ is a live engine (imported across the tree); the doc
+    // must name it or a new contributor cannot find the realm-map engine.
+    const dir = resolve(here, '../../src/domain/spatial');
+    expect(readdirSync(dir).length, 'src/domain/spatial should exist').toBeGreaterThan(0);
+    expect(archMd, 'ARCHITECTURE.md must mention src/domain/spatial').toMatch(/src\/domain\/spatial/);
+  });
+
+  it('states the worldPulse module count within drift tolerance', () => {
+    const n = walkJs(resolve(here, '../../src/domain/worldPulse')).length;
+    const claim = archMd.match(/`worldPulse\/`[^~]*~(\d+)\s*modules/);
+    expect(claim, 'ARCHITECTURE.md should state the worldPulse module count').toBeTruthy();
+    // The drift that shipped was "~74" vs 126 (0.59×). A 20% band catches that
+    // while tolerating a handful of new modules.
+    expect(Number(claim[1])).toBeGreaterThan(n * 0.8);
+    expect(Number(claim[1])).toBeLessThan(n * 1.2);
+  });
+
+  it("names every sub-step of package.json's check chain in 'The gate'", () => {
+    const pkg = JSON.parse(read('../../package.json'));
+    // The check script is a `&&`-joined list of `npm run <sub-step>` calls.
+    const subSteps = [...pkg.scripts.check.matchAll(/npm run ([\w:-]+)/g)].map((m) => m[1]);
+    expect(subSteps.length, 'check chain should have sub-steps').toBeGreaterThan(4);
+    const missing = subSteps.filter((s) => !archMd.includes(s));
+    expect(
+      missing,
+      `ARCHITECTURE.md 'The gate' omits check sub-step(s): ${missing.join(', ')}`,
+    ).toEqual([]);
   });
 });

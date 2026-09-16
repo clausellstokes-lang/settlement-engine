@@ -5,6 +5,11 @@ import {
   ECONOMIC_WEIGHT_KEYS,
   DEFENSE_ROLE_KEYS,
   POWER_AUTHORITY_KEYS,
+  FOOD_IMPACT_KEYS,
+  DEITY_ALIGNMENT_KEYS,
+  DEITY_TEMPER_KEYS,
+  DEITY_TIER_KEYS,
+  DEITY_LAW_KEYS,
   TIER_ORDER,
   normalizeTags,
   effectiveTags,
@@ -13,6 +18,9 @@ import {
   passesTierGate,
   eligibleCustomContent,
 } from '../../src/domain/customContentSchema.js';
+import {
+  getCustomContentField,
+} from '../../src/domain/content/customContentManifest.js';
 
 describe('customContentSchema taxonomies', () => {
   it('exposes stable key lists', () => {
@@ -24,6 +32,20 @@ describe('customContentSchema taxonomies', () => {
     expect(POWER_AUTHORITY_KEYS).toEqual(expect.arrayContaining(['religious', 'martial', 'economic', 'criminal']));
     expect(TIER_ORDER[0]).toBe('thorp');
     expect(TIER_ORDER[TIER_ORDER.length - 1]).toBe('metropolis');
+  });
+
+  it('keeps legacy labels aligned with manifest-admitted enum values', () => {
+    const values = (bucket, field) => getCustomContentField(bucket, field)?.values;
+    expect(CRITICALITY_KEYS).toEqual(values('services', 'criticality'));
+    expect(ECONOMIC_WEIGHT_KEYS).toEqual(values('institutions', 'economicWeight'));
+    expect(DEFENSE_ROLE_KEYS).toEqual(values('institutions', 'defenseRole'));
+    expect(POWER_AUTHORITY_KEYS).toEqual(values('institutions', 'authority'));
+    expect(FOOD_IMPACT_KEYS).toEqual(values('institutions', 'foodImpact'));
+    expect(TIER_ORDER).toEqual(values('institutions', 'tierMin'));
+    expect(DEITY_ALIGNMENT_KEYS).toEqual(values('deities', 'alignmentAxis'));
+    expect(DEITY_TEMPER_KEYS).toEqual(values('deities', 'temperamentAxis'));
+    expect(DEITY_TIER_KEYS).toEqual(values('deities', 'rankAxis'));
+    expect(DEITY_LAW_KEYS).toEqual(values('deities', 'lawAxis'));
   });
 });
 

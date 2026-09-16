@@ -23,6 +23,7 @@
  *
  * Strict-clean (typecheck:domain:strict). No React/Zustand imports.
  */
+import { pairMagicFunctions } from './warMagicGate.js';
 
 /**
  * The feasibility verdicts. RNG runs ONLY for `plausible`; every other verdict
@@ -141,11 +142,25 @@ export function defenderHasCollapseSignal(defenderItem) {
 
 /**
  * The war-magic materiel edge of the attacker over the defender (facet points).
- * @param {{ materiel?: number }} attackerFacets
- * @param {{ materiel?: number }} defenderFacets
+ *
+ * MG-3b (leak L2): the edge is computed from MATERIEL — weapons, armour, forges, siege
+ * trains — so before the magic law reached this arm, a `require_magic` verdict ("arcane
+ * force could tip an otherwise-hopeless siege") could be earned entirely off mundane
+ * ironmongery, in a world where magic does not function at all. The pair rule closes it:
+ * an arcane advantage means something only where magic works at BOTH ends, since the
+ * contest is fought on the defender's ground. A mundane matchup returns NO edge, and the
+ * classifier falls through to the ordinary verdict vocabulary (coalition / harassment /
+ * auto_fail) exactly as if this arm did not exist.
+ *
+ * The law arrives STAMPED on the facets envelope (warMagicGate's single writer), so an
+ * unstamped envelope — every pre-MG caller, fixture and golden — answers true and derives
+ * byte-identically.
+ * @param {{ materiel?: number, magicFunctions?: unknown }} attackerFacets
+ * @param {{ materiel?: number, magicFunctions?: unknown }} defenderFacets
  * @returns {number}
  */
 function magicEdge(attackerFacets, defenderFacets) {
+  if (!pairMagicFunctions(attackerFacets, defenderFacets)) return 0;
   const a = Number(attackerFacets?.materiel) || 0;
   const d = Number(defenderFacets?.materiel) || 0;
   return a - d;
