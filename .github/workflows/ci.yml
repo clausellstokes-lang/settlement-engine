@@ -96,6 +96,20 @@ jobs:
           --health-retries 10
     steps:
       - uses: actions/checkout@v4
+      # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
+      # provenance-map.mjs: `refs/heads/review-fixes-2026-07-08`; the provenance walk is one
+      # `git log -U0` over the ledger file's whole history). actions/checkout is a depth-1,
+      # single-branch clone, so on the runner the ref never existed and both suites failed at
+      # collection; the ratchet's scope sentinel then refused the run (never green in this era,
+      # measured 2026-09-16). Fetch that branch with its history (about 200 MB of objects),
+      # unless it IS the branch under test.
+      - name: Fetch the ledger branch (two suites read it by ref)
+        shell: bash
+        run: |
+          if [ "$(git rev-parse --abbrev-ref HEAD)" != "review-fixes-2026-07-08" ]; then
+            git fetch --no-tags origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08
+          fi
+          git rev-parse --short refs/heads/review-fixes-2026-07-08
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
@@ -346,6 +360,20 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
+      # provenance-map.mjs: `refs/heads/review-fixes-2026-07-08`; the provenance walk is one
+      # `git log -U0` over the ledger file's whole history). actions/checkout is a depth-1,
+      # single-branch clone, so on the runner the ref never existed and both suites failed at
+      # collection; the ratchet's scope sentinel then refused the run (never green in this era,
+      # measured 2026-09-16). Fetch that branch with its history (about 200 MB of objects),
+      # unless it IS the branch under test.
+      - name: Fetch the ledger branch (two suites read it by ref)
+        shell: bash
+        run: |
+          if [ "$(git rev-parse --abbrev-ref HEAD)" != "review-fixes-2026-07-08" ]; then
+            git fetch --no-tags origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08
+          fi
+          git rev-parse --short refs/heads/review-fixes-2026-07-08
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
