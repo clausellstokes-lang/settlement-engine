@@ -113,7 +113,25 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: npm run verify:dist
+      # The failure text of this gate is otherwise visible only to a signed-in viewer of the raw
+      # log; the estate reads its own CI anonymously and by receipt, so the step tees its output and
+      # the failure step below writes the red lines into the job summary and as annotations.
+      - name: verify:dist
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:dist 2>&1 | tee verify-dist.log
+      - name: Failure receipt (verify:dist)
+        if: failure()
+        shell: bash
+        run: |
+          {
+            echo '## verify:dist — the red, verbatim (last 160 lines)'
+            echo '```'
+            tail -n 160 verify-dist.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          grep -E '×|FAIL |Error:|AssertionError|boot-smoke:' verify-dist.log | head -40 | sed 's/^/::error::/' || true
 
   check:
     name: Validate, test, build
@@ -165,7 +183,10 @@ jobs:
         run: node scripts/check-e2e-not-vacuous.mjs --projects chromium
 
       - name: Run Chromium E2E
-        run: npx playwright test --project=chromium --reporter=github,json
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test --project=chromium --reporter=github,json 2>&1 | tee e2e-chromium.log
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-chromium.json
 
@@ -178,12 +199,34 @@ jobs:
         run: node scripts/check-e2e-not-vacuous.mjs --projects mobile-safari
 
       - name: Audit mobile pointer targets
-        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json 2>&1 | tee e2e-mobile.log
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-mobile.json
 
       - name: Guard mobile e2e executed (runtime)
         run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
+      # Readable without sign-in: every failing spec with its error, and the tails of both logs.
+      - name: Failure receipt (e2e)
+        if: failure()
+        shell: bash
+        run: |
+          node - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('node:fs');
+          for (const f of ['playwright-chromium.json', 'playwright-mobile.json']) {
+            if (!fs.existsSync(f)) continue;
+            const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+            console.log(`## ${f} — stats ${JSON.stringify(d.stats)}`);
+            const walk = (suites) => { for (const su of suites || []) { for (const sp of su.specs || []) for (const t of sp.tests || []) {
+              if (!['expected', 'skipped'].includes(t.status)) { console.log(`- **${sp.file}** :: ${sp.title} — ${t.status}`);
+                for (const r of t.results || []) if (r.error) console.log('  ```\n  ' + String(r.error.message || '').replace(/\u001b\[[0-9;]*m/g, '').split('\n').slice(0, 12).join('\n  ') + '\n  ```'); } }
+              walk(su.suites); } };
+            walk(d.suites);
+          }
+          EOF
+          for f in e2e-chromium.log e2e-mobile.log; do [ -f "$f" ] && { echo "## $f (last 80 lines)"; echo '```'; tail -n 80 "$f"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"; done
 
   performance:
     name: Production-build browser performance
