@@ -1,4 +1,4 @@
-# wf_a95227c9-cf1 — per-agent progress, 2026-09-16 10:09:52
+# wf_a95227c9-cf1 — per-agent progress, 2026-09-16 10:15:23
     - `a5d08fa55` ? · IN FLIGHT · transcript 09-15 18:03 423 KB · 8 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
     - `a2e931bc4` ? · IN FLIGHT · transcript 09-15 18:03 490 KB · 7 tool calls · last: Read /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchp
     - `aefab4768` ? · IN FLIGHT · transcript 09-15 18:03 398 KB · 7 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scrat
