@@ -76,8 +76,9 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 200 is 79 migrations ahead
-   of the live-verified production head 121 (`supabase/applied-head.json`). Both
+1. **Migration train.** Working-tree migration head 200 is 0 migrations ahead
+   of the live-verified production head 200 (`supabase/applied-head.json`; the
+   owner applied 122–200 to production on 2026-09-16). Both
    figures are derived by the freshness pin rather than kept by hand. The eleven
    declared waves need clone rehearsal, wave receipts, rollback practice, and then
    an authorized deployment.

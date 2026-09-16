@@ -512,8 +512,12 @@ describe('clone admission is positive and source-bound', () => {
     });
     expect(result.status).toBe(0);
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
+    // The LIVE plan reads supabase/applied-head.json (200 since the owner applied 122–200 to
+    // production on 2026-09-16); the fixture arms above keep MIGRATION_TRAIN_BASE_HEAD as the
+    // train's historical base. Pinning the constant here failed the day production caught up.
+    const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
-      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
+      appliedHead: liveAppliedHead,
       repoHead: 200,
     });
   });
