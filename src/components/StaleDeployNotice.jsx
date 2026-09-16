@@ -10,7 +10,7 @@
  * EAGER BY NECESSITY, unlike SessionEvictedBanner which it otherwise mirrors (a
  * flat ink strip, a hairline rule, no radii or shadows): a stale tab cannot load
  * a lazy chunk, and this notice exists for exactly that tab. Its imports are all
- * already in the first-paint closure (theme and the two primitives). It sits at
+ * already in the first-paint closure (theme and the Button primitive). It sits at
  * the BOTTOM so it never covers the eviction strip at the top.
  *
  * ⛔ ITS WORDS ARE LITERALS HERE, NOT COPY-REGISTER KEYS, AND THAT IS MEASURED. The
@@ -20,9 +20,7 @@
  * keeps its words as literals for the same reason.
  */
 import { useCallback, useState, useSyncExternalStore } from 'react';
-import { X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
-import IconButton from './primitives/IconButton.jsx';
 import { INK, CARD, BORDER, sans, FS, SP } from './theme.js';
 import { STALE_DEPLOY_EVENT, isStaleDeployNoticeShown } from '../lib/staleDeploy.js';
 
@@ -69,7 +67,11 @@ export default function StaleDeployNotice({ reload, isShown = isStaleDeployNotic
         <Button variant="primary" size="lg" onClick={doReload} style={{ minHeight: 44 }}>
           {STALE_DEPLOY_COPY.reload}
         </Button>
-        <IconButton Icon={X} label={STALE_DEPLOY_COPY.dismiss} onClick={() => setDismissed(true)} size="md" />
+        {/* A text control, not an icon: icons are off outside the Realm map, and a new file
+            may not import lucide (tests/lint/lucideTotality.test.js). */}
+        <Button variant="ghost" size="lg" onClick={() => setDismissed(true)} style={{ minHeight: 44, color: CARD }}>
+          {STALE_DEPLOY_COPY.dismiss}
+        </Button>
       </span>
     </div>
   );
