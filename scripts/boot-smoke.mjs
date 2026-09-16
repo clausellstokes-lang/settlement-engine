@@ -202,6 +202,9 @@ export function findChunkCycles(graph) {
  * @param {string} url
  * @returns {Promise<object>} the jsdom window
  */
+/** @type {string[]} every URL the closed network refused during the boot */
+const networkRequests = [];
+
 async function installBrowserEnvironment(html, url) {
   const require_ = createRequire(pathToFileURL(join(REPO_ROOT, 'noop.cjs')).href);
   const { JSDOM } = await import(pathToFileURL(require_.resolve('jsdom')).href);
@@ -252,6 +255,27 @@ async function installBrowserEnvironment(html, url) {
     nextTick: (fn) => queueMicrotask(fn),
   });
   define('Buffer', undefined);
+  // The network is CLOSED. A browser with modulepreload support never runs Vite's
+  // polyfill (it early-returns on `relList.supports('modulepreload')`); jsdom answers
+  // false, so the polyfill fetched all 71 preload links against the fake host; on a
+  // runner whose resolver fails fast (EAI_AGAIN) that landed as an unhandled rejection
+  // before the smoke exited, while on macOS the mDNS timeout let the smoke exit first (09-16).
+  // Answer like a shipping browser, and refuse any request that still escapes: a
+  // rejected fetch is what an offline browser hands the app, and an unhandled one is
+  // recorded as a boot problem instead of killing the Node process.
+  const nativeSupports = win.DOMTokenList.prototype.supports;
+  Object.defineProperty(win.DOMTokenList.prototype, 'supports', {
+    configurable: true, writable: true,
+    value(token) {
+      if (String(token) === 'modulepreload') return true;
+      return nativeSupports.call(this, token);
+    },
+  });
+  define('fetch', (input) => {
+    const url = typeof input === 'string' ? input : String((input && input.url) || input);
+    networkRequests.push(url);
+    return Promise.reject(new TypeError(`Failed to fetch (boot-smoke: the network is closed) ${url}`));
+  });
   return win;
 }
 
@@ -334,9 +358,19 @@ export async function runBootSmoke(options = {}) {
   // all-chunks walk warms it. Reported in stage order regardless of run order.
   const win = await installBrowserEnvironment(html, 'https://settlementforge.local/');
   const stage3 = [];
+  const unhandled = [];
+  const onUnhandled = (reason) => { unhandled.push(String((reason && reason.message) || reason)); };
+  REAL_PROCESS.on('unhandledRejection', onUnhandled);
   try {
     await import(pathToFileURL(join(assetsDir, entryChunk)).href);
     for (let i = 0; i < 12; i += 1) await new Promise((r) => setTimeout(r, 5));
+    if (networkRequests.length) {
+      notes.push(`stage 3: ${networkRequests.length} network request(s) at boot, refused: `
+        + networkRequests.slice(0, 3).map((u) => u.replace('https://settlementforge.local', '')).join(', '));
+    }
+    if (unhandled.length) {
+      stage3.push(`${unhandled.length} unhandled promise rejection(s) during boot, e.g. ${unhandled[0]}`);
+    }
     const root = win.document.getElementById('root');
     if (!root) {
       stage3.push('dist/index.html has no #root element for the app to mount into');
@@ -351,6 +385,7 @@ export async function runBootSmoke(options = {}) {
     stage3.push(`the entry chunk threw during module initialisation: ${String(error && error.message)}\n`
       + `    origin: ${originSite(error)}`);
   }
+  REAL_PROCESS.off('unhandledRejection', onUnhandled);
   for (const problem of stage3) failures.push(`STAGE 3 — the app shell does not mount: ${problem}`);
 
   // STAGE 2 — every chunk initialises.
