@@ -140,3 +140,19 @@ export function forkSeedFor(sample, userId) {
   const suffix = (userId || 'anon').slice(0, 8);
   return `${sample.config.seed}-${suffix}`;
 }
+
+/**
+ * A sample's config as a fork LOADS it: every key but `seed`. The sample's seed is
+ * the fork's generation ARGUMENT (forkSeedFor, then generateSettlement(seed)), never
+ * a config key. A `seed` in the stored config broke generation outright once the
+ * pipeline began refusing it (see store/settlementGenerateAction.js), and because
+ * the config is persisted, one fork broke every later generation in that browser.
+ * @param {{ config?: Record<string, unknown> } | null | undefined} sample
+ * @returns {Record<string, unknown>}
+ */
+export function forkConfigFor(sample) {
+  if (!sample || !sample.config) return {};
+  const config = { ...sample.config };
+  delete config.seed;
+  return config;
+}

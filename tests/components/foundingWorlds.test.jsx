@@ -5,9 +5,11 @@
  * The cards render the Mossgate / Black Crag / Thornwell sample trio (imported
  * from src/data/sampleSettlements.js — the same source the Library empty-state
  * uses), and 'Fork this sample' drives the SAME fork wiring as the Library
- * (SettlementsPanel.forkSample): the sample's config loaded with a user-suffixed
- * seed, then generateSettlement(seed), then navigate. (Walk W1, owner order
- * 2026-07-21, ledger 13da1e95.)
+ * (SettlementsPanel.forkSample): the sample's config loaded WITHOUT its seed, then
+ * generateSettlement(seed) with a user-suffixed seed, then navigate. (Walk W1, owner
+ * order 2026-07-21, ledger 13da1e95.) The seed left the config patch on 2026-09-16:
+ * a `seed` in the persisted config made the pipeline refuse every later generation
+ * in that browser (tests/store/generateStrayConfigSeed.test.js runs the real path).
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/react';
@@ -51,7 +53,7 @@ describe('FoundingWorlds', () => {
     installMatchMedia();
     const onNavigate = vi.fn();
     const FoundingWorlds = await load();
-    const { SAMPLE_SETTLEMENTS, forkSeedFor } = await import('../../src/data/sampleSettlements.js');
+    const { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } = await import('../../src/data/sampleSettlements.js');
     const { migrateConfig } = await import('../../src/components/settlements/helpers.js');
     const first = SAMPLE_SETTLEMENTS[0];
 
@@ -62,8 +64,11 @@ describe('FoundingWorlds', () => {
     // No auth.user in the mock → the seed suffix is 'anon' (forkSeedFor default).
     const seed = forkSeedFor(first, undefined);
     expect(actions.updateConfig).toHaveBeenCalledWith(
-      expect.objectContaining({ ...migrateConfig(first.config), seed, _forkedFromSample: first.id }),
+      expect.objectContaining({ ...migrateConfig(forkConfigFor(first)), _forkedFromSample: first.id }),
     );
+    // The seed is the generation ARGUMENT and never rides the config patch.
+    const patch = actions.updateConfig.mock.calls.at(-1)[0];
+    expect(Object.hasOwn(patch, 'seed')).toBe(false);
     await waitFor(() => expect(actions.generateSettlement).toHaveBeenCalledWith(seed));
     await waitFor(() => expect(onNavigate).toHaveBeenCalledWith('generate'));
   });

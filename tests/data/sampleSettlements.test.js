@@ -9,7 +9,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../src/data/sampleSettlements.js';
+import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 describe('SAMPLE_SETTLEMENTS shape contract', () => {
@@ -121,5 +121,29 @@ describe('forkSeedFor()', () => {
     expect(forkSeedFor(null, 'x')).toBeNull();
     expect(forkSeedFor({}, 'x')).toBeNull();
     expect(forkSeedFor({ config: {} }, 'x')).toBeNull();
+  });
+});
+
+describe('forkConfigFor()', () => {
+  it('is the sample config minus its seed, for every sample', () => {
+    for (const sample of SAMPLE_SETTLEMENTS) {
+      const config = forkConfigFor(sample);
+      expect(Object.hasOwn(config, 'seed'), sample.id).toBe(false);
+      const { seed: _seed, ...rest } = sample.config;
+      expect(config, sample.id).toEqual(rest);
+    }
+  });
+
+  it('never mutates the frozen sample it reads', () => {
+    const sample = SAMPLE_SETTLEMENTS[0];
+    const before = JSON.stringify(sample.config);
+    forkConfigFor(sample);
+    expect(JSON.stringify(sample.config)).toBe(before);
+    expect(typeof sample.config.seed).toBe('string');
+  });
+
+  it('answers an empty bag for a malformed sample', () => {
+    expect(forkConfigFor(null)).toEqual({});
+    expect(forkConfigFor({})).toEqual({});
   });
 });
