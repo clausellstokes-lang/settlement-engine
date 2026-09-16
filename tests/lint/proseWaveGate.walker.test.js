@@ -23,7 +23,7 @@
  * @enforced-by this file
  */
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import url from 'node:url';
 
@@ -202,7 +202,17 @@ describe('the harness reads the packet directory and writes nothing in it', () =
     expect(absent).toEqual({
       draftRounds: 0, refineA: false, refineB: false, files: [],
     });
-    expect(existsSync(PACKETS), 'the packet root the workflow READS from').toBe(true);
+    // The packet root the workflow READS from sits BESIDE the repository, never inside it
+    // (scripts/prose-wave-gate.mjs: `PACKETS = <scratch>/taste`; an in-tree root would show as
+    // `??` in porcelain on every dock). It exists on a box that has run the wave and not on a
+    // fresh clone or the CI runner, so the arm asserts the LAW and the read-only shape, not
+    // the directory: `roundsOf` answers the empty shape for an absent root (proven above).
+    expect(path.isAbsolute(PACKETS), 'the packet root is an absolute path').toBe(true);
+    expect(path.resolve(PACKETS).startsWith(path.resolve(ROOT) + path.sep), 'the packet root is never inside the repository').toBe(false);
+    expect(path.dirname(path.resolve(PACKETS)), 'the packet root sits beside the repository').toBe(path.resolve(ROOT, '..'));
+    if (existsSync(PACKETS)) {
+      expect(() => readdirSync(PACKETS), 'a present packet root is readable').not.toThrow();
+    }
   });
 
   it('⭐⭐ THE PACKET IT WRITES IS NAMESPACED BY DOCK, and two arms in one tree are two paths', () => {
