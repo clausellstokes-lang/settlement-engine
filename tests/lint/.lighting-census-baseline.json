@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "9f75594fcd6450e049681cba74d8a667c500e46e",
-  "measuredBy": "Opus 5 chair, seed-fix car 9f75594fc",
+  "measuredAtSha": "bfbe78da37c867e25467827ad76123adc39f1941",
+  "measuredBy": "Opus 5 chair, stale-deploy car bfbe78da3",
   "date": "2026-09-16",
-  "note": "one new test file (tests/store/generateStrayConfigSeed.test.js, six literal titles) plus new titles in tests/data/sampleSettlements.test.js (forkConfigFor, three) and tests/domain/contentSamplePreview.test.js (the legacy seed arm, one); no rule widened or narrowed",
-  "files": 2573,
+  "note": "three new test files (tests/lib/staleDeploy.test.js, tests/components/staleDeployNotice.test.jsx, tests/ui/homeHeroStaleDeploy.test.jsx), every title a literal; no rule widened or narrowed",
+  "files": 2576,
   "parked": 377,
-  "credited": 2196,
-  "titles": 24318,
-  "suiteTitles": 6485
+  "credited": 2199,
+  "titles": 24347,
+  "suiteTitles": 6491
 }
