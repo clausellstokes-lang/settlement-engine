@@ -1,4 +1,4 @@
-# LANE-STATUS — written 2026-09-15 23:24:02 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
+# LANE-STATUS — written 2026-09-15 23:29:35 by snapshot-lanes.sh (auto every 5 min; a successor reads THIS first, then RESUME-NOTE.md)
 
 product claude/composite-r4 = a5876c0ea · ledger = 3b506360f Plan §931: the long tail's first landing is down — eleven docks composed onto one consi
 
@@ -141,7 +141,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a43a048de` ? · IN FLIGHT · transcript 09-15 23:18 683 KB · 13 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `a5aa79058` ? · IN FLIGHT · transcript 09-15 23:18 886 KB · 27 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
     - `ae07a083e` ? · IN FLIGHT · transcript 09-15 23:18 803 KB · 24 tool calls · last: Bash cd /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scrat
-    - `a838db842` ? · IN FLIGHT · transcript 09-15 23:23 933 KB · 24 tool calls · last: Bash S=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `a838db842` ? · IN FLIGHT · transcript 09-15 23:29 1212 KB · 37 tool calls · last: Bash B=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratc
 - **wf_5cfb61a3-06d** (mtime 09-15 23:01): agent calls 9 (9 distinct) · DONE 8 · FAILED (not retried) 0 · RETRIED (superseded attempts) 0 · IN FLIGHT 1 — mirror `_progress/wf_5cfb61a3-06d/`
     - `aace68135` ? · DONE · transcript 09-15 21:44 1382 KB · 85 tool calls · files: odq-wf-hits.txt, ledger.md · result: {"claims": [{"what": "WF-1 THE UNSEATING LANDED WHOLE as a six-car ladder (1a the flag/leaf/ring/classifier \u00b7 1b the stamped suppression + flag-forked prun
     - `ad6f3e9ef` ? · DONE · transcript 09-15 21:43 1342 KB · 90 tool calls · files: older.md · result: {"reader": "OLDER-PROGRAMME READER \u2014 WF (faith, WF-0..WF-9)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-
@@ -151,7 +151,7 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a09855848` ? · DONE · transcript 09-15 22:50 1398 KB · 108 tool calls · files: odq_heads.txt, ledger.md · result: {"reader": "POP \u2014 the ledger reader (OWNER_DECISION_QUEUE.md + the queue docs), 2026-09-15", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settle
     - `a2c342f3f` ? · DONE · transcript 09-15 22:48 1321 KB · 91 tool calls · files: older.md · result: {"reader": "older-programme reader \u2014 POP (populations, #32 waves POP-1..POP-7)", "file": "/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/
     - `a3124434f` ? · DONE · transcript 09-15 23:01 1006 KB · 44 tool calls · files: adjudicator.md · result: {"reader": "POP \u2014 the adjudicator (every LANDED / RECORD\u2260CODE claim of both readers re-opened at laneCONSIST-932 HEAD 315080928), 2026-09-15", "file":
-    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:17 1091 KB · 70 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
+    - `adb380f57` ? · IN FLIGHT · transcript 09-15 23:29 1154 KB · 75 tool calls · last: Bash C=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/4e3d2f70-f45f-4e14-b571-514c339cfa17/scratc
 - **wf_2fd9ec8f-ae7** (mtime 09-15 19:23): agent calls 15 (15 distinct) · DONE 0 · FAILED (not retried) 15 · RETRIED (superseded attempts) 0 · IN FLIGHT 0 — mirror `_progress/wf_2fd9ec8f-ae7/`
     - `a189db732` ? · FAILED · transcript 09-15 19:23 835 KB · 38 tool calls
     - `aacd4d7bb` ? · FAILED · transcript 09-15 19:23 798 KB · 48 tool calls · files: odq-sections.txt, tail-bullets.txt
@@ -242,4 +242,4 @@ FileNotFoundError: [Errno 2] No such file or directory: '/private/tmp/claude-502
     - `a223c88f9` ? · DONE · transcript 09-15 13:32 909 KB · 2 tool calls · files: PROGRAMME-32-34.md, OWNER-QUESTIONS-32-34.md · result: Both files are written under `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/f6ac0d98-bb14-48ae-88d1-c6887f1e2704/scratchpad/recon-32-34/` — `
 
 ## PROCESSES: 
-load: 3.92 3.35 2.88
+load: 3.46 3.52 3.11
