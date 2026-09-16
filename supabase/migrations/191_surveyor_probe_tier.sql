@@ -240,6 +240,14 @@ comment on function public.surveyor_byok_set is
 -- LATEST-WINS: every column 143 returned is carried here verbatim; the new ones are
 -- APPENDED so existing positional readers keep their meaning. The L-7a pair is appended
 -- after the L-3b trio for the same reason.
+-- Postgres refuses `create or replace` when the RETURN TYPE changes (SQLSTATE 42P13,
+-- "cannot change return type of existing function"): 143 returned seven columns and this
+-- definition returns twelve, so the 143 function is DROPPED first (the grants below re-issue
+-- it to `authenticated`; the function holds no data, so nothing is lost). Found at the
+-- production push of 2026-09-16 (statement 9 of this file failed at head 190); 194 and 198
+-- redefine functions with UNCHANGED return types and need no drop.
+drop function if exists public.surveyor_byok_status(text);
+
 create or replace function public.surveyor_byok_status(p_provider text default null)
 returns table (
   provider         text,
