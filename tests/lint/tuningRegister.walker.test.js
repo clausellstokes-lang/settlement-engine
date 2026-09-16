@@ -1023,17 +1023,28 @@ describe('tuning register — the signing door, rehearsed', () => {
     expect(CLAIM_RE.test('this is machine-enforced')).toBe(true);
   });
 
-  test('no signature may name a golden shift record while the golden register is unfrozen', () => {
+  test('a signature may name a golden shift record only while the golden register is frozen, and then the record must exist', () => {
+    // THE GENESIS FREEZE (2026-09-16, `Owner-Signed: §901`): tests/fixtures/.golden-freeze-register.json
+    // carries `frozenAt`, so the fail-closed arm this test used to be ("unfrozen, therefore no
+    // signature may name a record") flipped to its live form: a named record must be a real
+    // signed record on disk. The unfrozen branch is kept so a tree without the register still
+    // fails closed.
     const registerPath = join(ROOT, 'tests/fixtures/.golden-freeze-register.json');
     const frozenAt = existsSync(registerPath)
       ? JSON.parse(readFileSync(registerPath, 'utf8')).frozenAt
       : null;
-    expect(frozenAt, 'the golden register is UNFROZEN (or, at this tip, not yet in the tree at'
-      + ' all — the door lands with its own lane). Either way the fail-closed answer is the'
-      + ' same and this arm starts reading real records the day it arrives, with no edit here.')
-      .toBeFalsy();
     const named = register.signatures.filter((entry) => entry.goldenShiftRecord != null);
-    expect(named, 'so no signature may name one').toEqual([]);
+    if (!frozenAt) {
+      expect(named, 'the golden register is UNFROZEN, so no signature may name a golden shift record').toEqual([]);
+      return;
+    }
+    expect(typeof frozenAt, 'a frozen register stamps frozenAt').toBe('string');
+    for (const entry of named) {
+      expect(String(entry.goldenShiftRecord).startsWith('docs/shift-records/'),
+        `signatures[${entry.version}] names a record outside docs/shift-records/`).toBe(true);
+      expect(existsSync(join(ROOT, entry.goldenShiftRecord)),
+        `signatures[${entry.version}] names ${entry.goldenShiftRecord}, which is not on disk`).toBe(true);
+    }
   });
 
   test('a post-freeze re-record that does not cite a tuning version may not coincide with a moved signed digest', () => {
@@ -1186,8 +1197,13 @@ describe('tuning register — the signature is a record, not a word', () => {
       + ' verifies FORM only and knows nothing of signatures[], so a record whose cause reads'
       + ' "tuning-register v2 signed §NNN" can be written and consumed while signatures[] tops'
       + ' at v1 — and the golden would move under a tuning cause the register never signed.').toEqual([]);
-    expect(register.signatures.every((entry) => entry.goldenShiftRecord == null),
-      'and before the freeze every signature\'s goldenShiftRecord is null').toBe(true);
+    // Since the genesis freeze (2026-09-16) a signature MAY name a record; each named one must
+    // point at a file the loop above has already reconciled or that exists on disk.
+    for (const entry of register.signatures) {
+      if (entry.goldenShiftRecord == null) continue;
+      expect(existsSync(join(ROOT, entry.goldenShiftRecord)),
+        `signatures[${entry.version}].goldenShiftRecord names a record that is not on disk`).toBe(true);
+    }
   });
 
   test('the converse arm convicts a fixture record that outruns the signature ledger', () => {
