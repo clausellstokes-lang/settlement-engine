@@ -72,6 +72,18 @@ test.describe('Tier 3.7 Flow C — signed-in save journey', () => {
     // project (which exists for the pointer-target spec) to keep CI lean.
     test.skip(testInfo.project.name === 'mobile-safari', 'desktop-only journey');
 
+    // The suite's 30s default is not an honest budget for THIS journey, and no
+    // assertion below is relaxed to fit it. This is the heaviest test in the
+    // suite by construction: a full client-side world generation plus FOUR
+    // dev-server page loads (/create, /settlements, a reload, /settlements/:id),
+    // each of which re-walks a ~780 module on-demand transform graph. Measured
+    // at a5876c0ea: 18.7s alone on an idle box, 20.1s to 27.8s across three
+    // whole-suite runs at the capped 2 workers. Against a 30s cap that is a
+    // 2.2s margin in the worst observed run, which is how this spec came to
+    // red. Every locator, wait and expectation is unchanged; only the envelope
+    // the journey runs inside is sized to what it was measured to cost.
+    test.setTimeout(60_000);
+
     // Seed ONLY the mock-auth key. Deliberately no localStorage.clear(): the
     // save we write at runtime must survive the reload assertion, and the
     // init script re-runs on every navigation/reload.

@@ -49,7 +49,12 @@ export default defineConfig({
   timeout: 30_000,
   expect: { timeout: 5_000 },
 
-  // Run files in parallel; tests within a file serial (state isolation).
+  // Parallelise at the TEST level, not just the file level. (The comment that
+  // stood here claimed "tests within a file serial"; that describes
+  // fullyParallel:false and is not what this flag does. Two specs are seeded
+  // per-test via addInitScript and a fresh context, so test-level parallelism
+  // is safe for state; what it is NOT safe for is the shared dev server, which
+  // is why `workers` is capped below.)
   fullyParallel: true,
 
   // Fail the build on test.only left in committed code.
@@ -58,8 +63,19 @@ export default defineConfig({
   // CI retries once to ride out flaky network; local devs see issues immediately.
   retries: process.env.CI ? 1 : 0,
 
-  // CI uses 1 worker to keep server logs readable; local maxes out cores.
-  workers: process.env.CI ? 1 : undefined,
+  // CI uses 1 worker to keep server logs readable. LOCAL IS CAPPED AT 2, NOT
+  // LEFT TO PLAYWRIGHT'S DEFAULT (half the logical cores). The bottleneck this
+  // suite contends for is not CPU, it is the ONE Vite dev server per port: a
+  // signed-in route costs ~780 on-demand module transforms per navigation, and
+  // N browsers cold-loading that graph at once serialise behind it. Measured on
+  // an 8-core box at a5876c0ea: the default (4 workers) reds flow-c and
+  // regional-causality deterministically and ALSO, under a different schedule,
+  // flow-a and flow-d, because whichever heavy journey loses the scheduling
+  // draw blows `timeout` / `expect.timeout` above. 2 workers ran the whole
+  // chromium suite green three times for the SAME 2.1 min wall clock, so the
+  // extra parallelism was buying failures, not speed. CI (1 worker) never saw
+  // this, which is why the suite read green there while the local run reds.
+  workers: process.env.CI ? 1 : 2,
 
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
 
