@@ -1400,6 +1400,34 @@ check_caught "prose-composed-walker/an unestablished relation join is reported a
 perl -0pi -e "s/carries: shared\.length > 0/carries: shared.length >= 0/" src/domain/prose/passageShapes.js
 check_caught "prose-passage-shapes/a passage shape is rescued by the composition instead of licensed by it" src/domain/prose/passageShapes.js "npx vitest run tests/lint/prosePassageShapes.walker.test.js --no-file-parallelism"
 
+# ── THE PINNED FOOTER (owner orders 2026-09-16) ───────────────────────────────────────
+# 98. A BOTTOM-ANCHORED LAYER MAY NOT FORGET THE PINNED FOOTER. On desktop the global footer
+#     is sticky and its links row (THE BAND) floats at the viewport bottom, so every fixed
+#     layer anchored to that edge composes the band's measured height through aboveFooter()
+#     or FOOTER_INSET; at a bare `bottom: 72` the scroll-button stack (the owner's own square
+#     arrow) lands on the footer's links. The walker freezes LIFTED and EXEMPT per file,
+#     exact in both directions. The plant strips the lift from that very stack, which moves
+#     one App.jsx site from LIFTED to EXEMPT's unnamed remainder.
+#     Measured before landing (2026-09-16; cp backup, cp restore, never the checkout family;
+#     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 11 passed;
+#     planted => 2 red, the LIFTED and EXEMPT exact arms, the EXEMPT arm naming the stack by
+#     line, 9 passed; restored cmp-identical => 11 passed.
+perl -0pi -e "s/bottom: aboveFooter\(isMobile \? bottomClearance\(CHROME\.fabLift \+ 56\) : SP\.lg \+ 56\), right: SP\.lg, zIndex: 200,/bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,/" src/App.jsx
+check_caught "bottom-anchored-chrome/the scroll-button stack drops its footer lift and lands on the pinned band" src/App.jsx "npx vitest run tests/lint/bottomAnchoredChrome.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-lifted layer not named here is the collision the order forbids"
+
+# 99. THE FOOTER FLOATS ONLY ITS LINKS ROW. The owner's follow-up order keeps only the links
+#     row in view and shows the home button and the copyright line when the page is scrolled
+#     all the way down. The mechanism is one declaration: the sticky footer's bottom offset is
+#     minus THE TUCK (FOOTER_TUCKED_BOTTOM), never a literal 0. The plant writes `bottom: 0`,
+#     which is exactly the first order's whole-footer-pinned shape: nothing fails to render
+#     and every rect-free assertion elsewhere stays green, so only the style contract sees it.
+#     Measured before landing (2026-09-16; cp backup, cp restore, never the checkout family;
+#     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 23 passed;
+#     planted => 2 red, (a)'s sticky-offset arm and (c)'s mobile /terms arm, 21 passed;
+#     restored cmp-identical => 23 passed.
+perl -0pi -e "s/bottom: FOOTER_TUCKED_BOTTOM, zIndex:/bottom: 0, zIndex:/" src/App.jsx
+check_caught "pinned-footer/the footer pins whole again instead of floating only its links row" src/App.jsx "npx vitest run tests/components/pinnedFooter.test.jsx --no-file-parallelism" "sticky with a bottom of minus the tuck, on the header layer, outside any header, nav still labelled"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

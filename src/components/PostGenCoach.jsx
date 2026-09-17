@@ -36,7 +36,7 @@ import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, CHROME, bottomClearance } from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, CHROME, bottomClearance, aboveFooter } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -108,8 +108,9 @@ export default function PostGenCoach() {
         // (scripts/.ui-a11y-contract.json).
         // Mobile bottom offset rides the house clearance helper so the card
         // sits above the bottom nav + home indicator, like every other fixed
-        // bottom overlay (§767.3(g)).
-        bottom: isMobile ? bottomClearance(CHROME.fabLift) : 24, right: 24, zIndex: 900,
+        // bottom overlay (§767.3(g)). aboveFooter lifts it over the desktop pinned
+        // footer (owner order 2026-09-16); the inset is 0px on phones.
+        bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : 24), right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
         background: CARD,
         border: `1px solid ${BORDER}`,

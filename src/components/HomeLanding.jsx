@@ -22,7 +22,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Button from './primitives/Button.jsx';
-import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_ } from './theme.js';
+import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_, CHROME, FOOTER_INSET, HEADER_HEIGHT_VAR } from './theme.js';
 import { trackLandingView } from '../lib/landingFunnelAnalytics.js';
 import { tl } from '../copy/landing.js';
 
@@ -71,6 +71,15 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
         className="sf-landing-hero"
         style={{
           '--sf-scene': HERO_SCENE,
+          // THE LETTERBOX (desktop; owner orders 2026-09-16, LD-3b realised). At 86vh
+          // (index.css) the hero ended short of the viewport, and at 2000x1093 a strip of
+          // the film showed below the dark band, right where the owner said the footer
+          // belongs. On desktop the hero is sized to exactly the gap between the measured
+          // header and the pinned footer's floating band (useChromeInsets), so its bottom
+          // edge IS the band's top edge at every viewport height and header wrap. Phones
+          // keep the 86vh rule. It is inline here, in this lazy chunk, rather than a rule in
+          // the injected sheet, because the first-paint entry closure has no bytes to spare.
+          minHeight: isMobile ? undefined : `calc(100vh - var(${HEADER_HEIGHT_VAR}, ${CHROME.headerDesktop}px) - ${FOOTER_INSET})`,
           // Lift the hero above the fixed film backdrop (zIndex 0, mounted in the
           // lazy below-fold): the hero owns its own eager still-0 paint (LCP), the
           // backdrop only shows through the transparent travel legs below.

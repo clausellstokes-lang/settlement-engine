@@ -35,7 +35,7 @@ import PendingChangesBar from './PendingChangesBar.jsx';
 import Button from '../primitives/Button.jsx';
 import EntityLink from '../primitives/EntityLink.jsx';
 import {
-  BORDER,
+  BORDER, FOOTER_INSET,
   FS,
   SP,
   swatch,
@@ -278,10 +278,11 @@ function EntityInspector({ readOnly = false }) {
         position: 'fixed',
         top: 88,
         right: SP.lg,
-        // Desktop inspection is a floating tool, below drawers and dialogs.
+        // Desktop inspection is a floating tool, below drawers and dialogs. Its
+        // height ends above the pinned footer's links band (owner orders 2026-09-16).
         zIndex: 60,
         width: 340,
-        maxHeight: 'calc(100dvh - 112px)',
+        maxHeight: `calc(100dvh - 112px - ${FOOTER_INSET})`,
         overflowY: 'auto',
         background: PAPER,
         border: `1px solid ${BORDER}`,

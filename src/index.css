@@ -204,14 +204,31 @@ button {
 }
 
 /*
- * Keep the footer below the first viewport while a lazy route chunk resolves.
+ * THE PINNED FOOTER (owner orders 2026-09-16: "the footer should be the same way
+ * on every page", the way the header is, with only its links row floating at the
+ * viewport bottom until the page is scrolled all the way down). On desktop App.jsx
+ * makes the global footer sticky with a negative bottom offset (minus the tuck).
+ * Its four stylesheet rules (the root's scroll padding at the bottom, the matching
+ * scroll margin on the footer's own controls, the print reset and the keyboard reveal
+ * of the tucked rows) are NOT in this file on purpose: this sheet is render-blocking
+ * and its byte budget (tests/build/firstPaintNonJs.test.js, 19,800 B) had 5 B of
+ * headroom, so src/lib/chromeInsets.js holds them and src/hooks/useChromeInsets.js
+ * injects them before the first paint of the app shell. The landing hero's desktop
+ * letterbox is not a stylesheet rule at all: it is an inline min-height in the lazy
+ * HomeLanding chunk.
+ */
+
+/*
+ * The route-height floor while a lazy route chunk resolves.
  *
  * The shell renders its real header, footer, and mobile navigation around the
- * Suspense fallback. Without a route-height floor, the short Loading card lets
- * the footer enter the viewport; the resolved page then pushes that entire
- * footer away and produces a large mobile layout shift. The per-layout reserve
- * is supplied by App so this remains one shell contract rather than a
- * generator-specific skeleton height.
+ * Suspense fallback. The reserve keeps the page floor, and it keeps the IN-FLOW
+ * MOBILE footer below the first viewport: without it the short Loading card lets
+ * that footer enter the viewport, and the resolved page then pushes it away,
+ * producing a large mobile layout shift. The desktop footer is pinned from first
+ * paint, so it never moves while a chunk loads. The per-layout reserve is supplied
+ * by App so this remains one shell contract rather than a generator-specific
+ * skeleton height.
  */
 .app-route-main {
   --app-shell-header-reserve: 72px;
@@ -328,6 +345,10 @@ button {
   background-repeat: no-repeat;
   min-height: 86vh;
 }
+
+/* THE LETTERBOX (desktop; owner orders 2026-09-16) overrides the rule above with an
+   inline min-height in src/components/HomeLanding.jsx (the lazy landing chunk), sized
+   to the gap between the header and the pinned footer's band. Phones keep 86vh. */
 
 /* Walk W1 (owner order 2026-07-21, item 10): every below-fold section card drops its
    painted-scene / opaque-parchment background and adopts ONE translucent cream, so the

@@ -152,8 +152,8 @@ bible mandates the swap.)*
 > |---|---|---|
 > | LD-1 | ⛔ **OPEN, BLOCKED** | no `landingSettlementFixture.js`, no `MiniatureFrame`; see the STOP note in LD-1 below |
 > | LD-2 | ✅ **BUILT** @ `cf7243ab` | `components/nav/NavDivider.jsx` + `NavRibbon.jsx`; `navDividers.test.jsx` 9/9 |
-> | LD-3 | ✅ **BUILT** @ `5a6d7aef` | `components/footer/LegalRibbonRow.jsx`, route-scoped suppression; `landingFooterMigration.test.jsx` 6/6 |
-> | LD-3b | 🔶 **OPEN** — LD-3's successor, not its duplicate | the row LD-3b reuses now exists and is eager; see the STOP note in LD-3b |
+> | LD-3 | ✅ **BUILT** @ `5a6d7aef`; its landing exemption **SUPERSEDED 2026-09-16** (owner order, see THE PINNED FOOTER below LD-3b) | `components/footer/LegalRibbonRow.jsx`; the route-scoped suppression and the band's row mount are gone; `landingFooterMigration.test.jsx` 4/4 (inverted) |
+> | LD-3b | ✅ **REALISED 2026-09-16 in its every-page form** (see THE PINNED FOOTER below LD-3b) | sticky global footer on desktop with only its links row floating (the rest tucked below the viewport edge until the end of the page), letterboxed hero, `pinnedFooter.test.jsx`, `bottomAnchoredChrome.walker.test.js`, `e2e/pinned-footer.spec.js` |
 > | LD-4 | ⛔ OPEN, blocked by LD-1 | shares LD-1's frame contract and its blocker |
 > | LD-5 | 🔶 OPEN (chrome only) | the Account deep-links (`?section=`) and all three About routes are LANDED by other lanes — LD-5's remaining work is the MENU LAYER, nothing else. ⚠️ the Messages amendment binds |
 > | LD-6 | ⛔ OPEN, **OWNER-GATED** | no `annual` anywhere in `config/pricing.js` or `services/stripe.js`; W-1's annual credit CADENCE is routed to the owner (`cca61099`) and item 7 says the toggle does not ship until it is ruled |
@@ -337,6 +337,16 @@ App.jsx:816); the placement map was a hardcoded second truth routes.js forbids;
 ## LD-3 — THE PAGE ENDS ON THE PAINTING (owner-ordered 2026-08-01; implementation =
 ## the external implementer)
 
+> ⛔ **LANDING EXEMPTION SUPERSEDED BY THE OWNER, 2026-09-16.** "The footer is missing
+> on the landing page. When we scroll, the header/ribbon remains sticky. The footer
+> should be the same way on every page." The global footer now renders on every
+> route, the landing included, and the landing band's own footer strip (its
+> LegalRibbonRow mount, its brand-and-links row and the `landing.footer` copy keys)
+> is deleted, so there is still exactly one footer. What LD-3 bought still holds: one
+> row module, one copy truth, every legal and commercial destination reachable from
+> the landing. Its deferred rect-above-the-bar pin is now written
+> (`e2e/pinned-footer.spec.js`, the phone arm). See THE PINNED FOOTER below LD-3b.
+
 > ✅ **BUILT 2026-08-03 (Lane F) @ `5a6d7aef`.** `components/footer/
 > LegalRibbonRow.jsx` is the one row module; App.jsx mounts it inside the global
 > footer on every non-landing route and `LandingBelowFold`'s band mounts it on
@@ -472,6 +482,12 @@ the voice is fixed at the SOURCE, never faked on the landing.
 ## LD-3b — THE TWO RIBBONS (owner amendment 2026-08-01 to LD-3; supersedes LD-3's
 ## document-end model with a stronger one)
 
+> ✅ **REALISED 2026-09-16, IN ITS EVERY-PAGE FORM** (owner order; see THE PINNED
+> FOOTER directly below this section for what was built, what differs from the
+> constraints here, and what was deferred). Constraints 1 (landing-route-only) and 5
+> (a landing-only fixed ribbon with a reserve, ribbon z 60) are superseded by the
+> order; constraint 6 (no fixed ribbon below the mobile breakpoint) is kept.
+
 > 🔶 **OPEN — LD-3 landed first ON PURPOSE, and made this cheaper (Lane F,
 > 2026-08-03).** LD-3b reuses "LD-3's migrated line" as its ribbon content; that
 > row now EXISTS as an eager module (`components/footer/LegalRibbonRow.jsx`), so
@@ -597,6 +613,253 @@ tokens.js chrome tokens) and silently reached into global chrome]:**
    reserve); the scrim-terminus pin is new — at scroll-top the hero's COMPUTED
    GRADIENT TERMINUS equals the ribbon's top edge (asserted at two viewport
    heights, the seam's regression test).
+
+---
+
+## THE PINNED FOOTER (owner orders 2026-09-16; supersedes LD-3's landing exemption, realises LD-3b)
+
+**The first order (owner, against a 2000x1093 screenshot of the landing):** "On the
+footer, keep it the same." Then: "The footer is missing on the landing page. When we
+scroll, the header/ribbon remains sticky. The footer should be the same way on every
+page. Do you see that gap where the shaded region breaks? Underneath that should be the
+footer, as plain as day."
+
+**The follow-up order (owner, later the same day, with two screenshots of the desktop
+landing's lower half):** "I want to make one change to the footer work. The floating
+piece is the one shown in the image above [only the links row: Pricing | Feedback &
+support | Terms | Privacy | About, on the footer's dark band]. Only when a user scrolls
+all the way to the bottom does it show the rest of the footer, including the logo, as
+shown in the second image [the full, unchanged footer]." The footer's look and content
+still do not change.
+
+**Vocabulary.** THE BAND is the part that floats: the footer's top edge down to the top
+of the row after the links row (the top border and padding, the links row and the gap
+under it). THE TUCK is the rest (the home button, the copyright line and the bottom
+padding), which hangs below the viewport edge until the end of the page. Measured in
+Chromium at 2000x1093, 1280x800, 1024x768 and 800x900: band 51 px, tuck 70 px, footer
+121 px. (The brief estimated the band at about 70 to 75 px from the owner's screenshot;
+the measured distance to the home button's top is 51 CSS px, and the band is measured,
+not tokenised.)
+
+**What was built (uncommitted at hand-off; the chair commits):**
+- `src/App.jsx`: one `<footer>` on every route. On desktop it is `position: sticky;
+  z-index: 50`, the header's own mechanism and layer, with `bottom:
+  calc(0px - var(--sf-footer-tuck, 0px))` (`FOOTER_TUCKED_BOTTOM`): a NEGATIVE offset by
+  exactly the tuck, so only the band is held in view and, at maximum scroll, the sticky
+  element reaches its natural spot and the whole footer shows. No script toggles
+  anything and nothing animates. On phones it is in the flow on a low layer
+  (`relative`, z-index 2; the tuck is 0px there, so the offset computes to 0px); its
+  content, background, rule and padding are unchanged. App.jsx stays at 650 effective
+  lines.
+- `src/hooks/useChromeInsets.js` measures THE BAND (the footer's top edge to the top of
+  the row after the links row, floored to whole px, so no pixel of the home button
+  shows), THE TUCK (the footer's full height minus the band) and the header (floored),
+  re-measures on a ResizeObserver over the header and the footer, and writes
+  `--sf-footer-inset` (the band), `--sf-footer-tuck` and `--sf-header-h` on the document
+  element; both footer values are `0px` whenever the footer is not pinned, and unmount
+  removes all three. The links row is found by the stable hook `data-sf-footer-links`
+  (`FOOTER_LINKS_ATTR`) on LegalRibbonRow's `<nav>`; the attribute changes nothing about
+  how the row renders. The names, `FOOTER_INSET`, `FOOTER_TUCKED_BOTTOM` and
+  `aboveFooter()` live in the leaf `src/lib/chromeInsets.js`, re-exported by
+  `components/theme.js`.
+- Four stylesheet rules, injected once by the hook as `<style id="sf-chrome-insets">`
+  (`CHROME_INSET_RULES`): `html { scroll-padding-bottom: <band> }` so keyboard and
+  nearest-aligned scrolls stop above the band (WCAG 2.2 SC 2.4.11); a matching
+  `scroll-margin: <band> 0 -<band>` on the footer's own controls (see the judgment
+  below); a print rule that lays the footer back into the flow; and THE KEYBOARD REVEAL,
+  `.parchment-bg>footer:has(:focus-visible:not([data-sf-footer-links] *))
+  { --sf-footer-tuck: 0px }`, so a tucked control with keyboard focus shows the whole
+  footer, keyed on `:focus-visible` so a mouse press never makes the footer jump. None is
+  in `src/index.css`, whose render-blocking budget (19,800 B,
+  `tests/build/firstPaintNonJs.test.js`) had 5 B left; that sheet is unchanged at
+  19,795 B.
+- The landing hero's desktop LETTERBOX is an inline `minHeight` in the lazy HomeLanding
+  chunk: `calc(100vh - var(--sf-header-h, 38px) - var(--sf-footer-inset, 0px))`, so at
+  scroll 0 the dark band ends exactly at the band's top edge at every viewport height
+  and header wrap; phones keep the 86vh rule.
+- Every fixed bottom-anchored layer composes `aboveFooter()`, which now lifts by the
+  band: the scroll-button stack (the owner's square arrow), the dossier-claim toast, the
+  onboarding nudge, PostGenCoach, FeedbackWidget, PricingMomentCard, AiAnalystPanel,
+  InterviewPanel, SurveyorWorkshop and the Realm map toast. The desktop Realm shell, the
+  desktop Entity Inspector and the two lifted Surveyor panels subtract `FOOTER_INSET`
+  (the band) from their viewport-sized heights.
+- The landing band's `LandingFooter` and its `landing.footer` copy keys are deleted;
+  `LegalRibbonRow`'s `clearMobileNav` prop is retired with its only caller; `#closer`
+  gets a 48px bottom pad back.
+- First paint (measured by replicating `tests/build/vendorPdfLazy.test.js`'s closure
+  walk): raw entry closure 1,046,662 B at base `cb8f0f9e5`, 1,047,911 B after the first
+  order, 1,047,944 B after the follow-up, against 1,048,000 (56 B spare); gzip 333,145
+  of 337,000; Brotli 279,592 of 283,000; render-blocking CSS 19,795 of 19,800. After the
+  review fixes (the same walk over a fresh `npm run build`): raw 1,047,948 B (52 B
+  spare; the phone footer's z-index ternary is the 4 B), gzip 333,130, Brotli 279,514,
+  render-blocking CSS 19,795. ⚠ The next eager byte needs its own extraction.
+- Pins: `tests/components/pinnedFooter.test.jsx` (the tucked sticky offset, the registry
+  layer, the band and tuck measurement from stubbed rects, 0px on phones, removal on
+  unmount, the rule spellings, the letterbox height, the links-row hook),
+  `tests/lint/bottomAnchoredChrome.walker.test.js` (every fixed bottom-anchored layer
+  lifted or exempt by name, exact in both directions),
+  `tests/components/landingFooterMigration.test.jsx` (inverted: the landing has the
+  footer, one row), `e2e/pinned-footer.spec.js` (the geometry: only the band at scroll
+  0, the whole footer at maximum scroll, on the landing at four viewports and on six
+  routes; Tab to the home button reveals it; focusing footer controls mid-page never
+  scrolls; a mouse press does not hold the footer open; a stand-in for the generation
+  reveal's layer covers the phone footer's Terms link and sits under the desktop band),
+  and the kill-list's `rgbaLiterals` ceiling lowered 166 to 163 for the deleted strip.
+- Mutation coverage (review fix): `scripts/mutation-sweep.sh` areas 98 and 99 plant the
+  two regressions the new invariant files exist for (the scroll-button stack losing its
+  `aboveFooter`, and the footer's sticky offset written as `bottom: 0`, which is the first
+  order's whole-footer shape), each claimed in `scripts/mutation-coverage-manifest.json`.
+  Both were executed before landing with a copy backup and restore: the walker 11 passed,
+  planted 2 red (LIFTED and EXEMPT), restored 11 passed; `pinnedFooter.test.jsx` 23
+  passed, planted 2 red ((a) and (c) mobile /terms), restored 23 passed.
+- Production performance (review fix, executed on this tree): `npm run
+  test:e2e:performance` 2 passed, CLS 0.0003 on `performance-chromium` and 0.0035 on
+  `performance-mobile-chromium` against the 0.1 budget; the `mobile-safari`
+  pointer-targets spec 1 passed.
+
+**How it differs from LD-3b's constraints, and why:**
+- Sticky, not fixed: the footer keeps its space in the page, so no reserve has to track
+  a content-sized footer, `scrollHeight` and the jump-to-bottom maths are unchanged, and
+  the whole footer is always reachable at the end of a page.
+- z-index 50 on desktop, not 60: 60 ties `floatingPanel` and wins that tie over the
+  in-main Entity Inspector by DOM order; 50 matches the header and sits below
+  `drawerScrim` (90). Phones take 2 (see the first judgment below).
+- Measured CSS variables, not a `CHROME.ribbonLanding` token: the footer's height depends
+  on the font, zoom and wrapping, and a few pixels short reopens the seam.
+- Every page, not the landing only (the order), and mobile unchanged (constraint 6).
+
+**Judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: the footer pins on desktop only (640px and wider, the `isMobile` breakpoint);
+  phones keep today's in-flow footer above the fixed bottom nav, with no band and no
+  tuck, so every mobile position computes exactly today's value. The one mobile change is
+  its LAYER: the phone footer is `position: relative` (zero offset) on z-index 2,
+  because the landing's fixed film backdrop (z 0) painted over an unpositioned footer at
+  the end of the landing. That was found on a 375x812 screenshot, reproduced red by the
+  e2e paint probe, and cleared. It was first z-index 50, the header's layer; the review
+  lowered it to 2 because at 50 the in-flow phone footer painted over the generation
+  reveal (PipelineReveal, fixed, z 45), which it had sat under before it was positioned,
+  whenever the collapsed page sat scrolled to its end, and over the sticky mobile header
+  on a landscape phone shorter than the header plus the footer. At 2 it clears the film
+  and the landing's z-1 roots and changes no other order. The e2e reveal arm pins it and
+  reds at 50 (executed: 2 failed with the old value, 20 passed with 2). Why the in-flow
+  footer at all: the nav already holds the phone's bottom edge.
+  Flipping it: pass `footerPinned=true` on mobile, place the footer at
+  `bottomClearance(nav height)` and drop its 88px padding; every consumer already
+  composes `aboveFooter`, so they follow.
+- JUDGMENT (follow-up): the band ends at the TOP of the row after the links row, so the
+  8px flex gap under the links stays in view and no pixel of the home button shows; it is
+  floored and the tuck takes the fraction, so the band's top edge sits on a whole pixel.
+- JUDGMENT (follow-up): the footer's own controls carry `scroll-margin: <band> 0 -<band>`.
+  Without it, every focus on a footer link mid-page scrolled the document by about half
+  a viewport and left the link where it was, because the root `scroll-padding-bottom`
+  counts the band as obscured and no scroll can move a sticky element. Measured in
+  Chromium at 1280x800: about 405 px per Tab through the band, and about 370 px per Tab
+  in the whole-footer-pinned shape of the first car (so the defect predates the
+  follow-up). With the rule, focus walks the whole footer with the scroll position
+  unchanged. `scroll-padding-bottom` itself is kept, as the brief asked.
+- JUDGMENT (follow-up): the keyboard reveal keys on `:focus-visible` of any control
+  OUTSIDE the links row (today only the home button; the copyright line has no controls),
+  not on focus in the band, so tabbing along the visible links never moves the footer.
+- JUDGMENT (follow-up): the landing letterbox moved from an injected class rule to an
+  inline style in the lazy HomeLanding chunk, and the injected sheet's marker became an
+  `id`, to pay for the follow-up's bytes: the probe build of the follow-up as first
+  written measured 1,048,213 B against the 1,048,000 B raw first-paint budget (213 B
+  over). The budget was not raised. `HEADER_FALLBACK_PX` left the leaf with the rule
+  (HomeLanding reads `CHROME.headerDesktop` directly).
+- JUDGMENT: fixed layers lift by the band, not the full footer, as the follow-up brief
+  asked, so mid-page they sit just above the band: a 48px centred stand-in at the
+  dossier-claim toast's offset (`aboveFooter(24)`) clears the band by 24px at 1280x800
+  with all five links painted. The price is paid in the last 70 px of scroll on a page,
+  where the tuck rises into the lifted layers' line. MEASURED in Chromium on the landing
+  at maximum scroll (a 420px centred stand-in, the toasts' own maximum width): at
+  1280x800, 1024x768 and 2000x1093 a layer at the dossier-claim toast's and the
+  onboarding nudge's offset, and at the Realm toast's `aboveFooter(20)`, covers ALL FIVE
+  links of the links row (Pricing, Feedback & support, Terms, Privacy, About). This row
+  first said such a toast would sit over the home button or copyright line; that was the
+  shape before the pin, and it was wrong for the pinned footer. The feedback panel
+  opened from the footer covers About at 1024x768 at the end of a page (no link at 1280
+  wide), and PostGenCoach overlaps the footer's top 46px in the right corner at 1280x768,
+  clear of the centred row at that width. The scroll-to-top button clears the whole
+  footer by 2px at all three viewports (72 + 51 = 123 against 121), which is a
+  coincidence of today's heights, not a guard. The toasts live 6 to 8 seconds and every
+  covered link stays reachable once they go. Flipping it: add `var(--sf-footer-tuck,
+  0px)` to the centred transient layers' offsets, which floats them 70px higher on every
+  mid-page scroll.
+- JUDGMENT: the landing band's brand-and-links strip (settlementforge, Compendium,
+  Pricing, Account) is deleted rather than kept above the global footer, because the two
+  together are the "TWO footers" LD-3 removed. Its destinations stay one click away
+  (header Compendium, footer and closer Pricing, the account menu).
+- JUDGMENT: `#closer` gets a 48px bottom pad so "Full pricing" does not sit on the
+  footer's edge (item 11's flush bottom had no strip left to sit flush).
+- JUDGMENT: StaleDeployNotice (the "updated while this page was open" alert, z 1000)
+  stays over the footer, as an interrupting alert should.
+- JUDGMENT: on desktop the generation reveal (PipelineReveal, z 45) sits under the pinned
+  footer as it sits under the header, and its card stays centred on the full viewport.
+  From a page at scroll 0 the band shows over its bottom edge. From a scrolled page the
+  WHOLE footer (home button and copyright line included) shows over its bottom 121px:
+  the reveal hides the output, the page collapses to the route reserve (about 87px of
+  scroll, the reserve's measured figure on short desktop pages) and the browser clamps
+  the scroll to that end, where the sticky footer rests whole (PLAUSIBLE: reasoned from the
+  collapse and the reserve, not run with a live reveal). Resetting the scroll when the
+  reveal mounts would restore band-only; that changes GenerateWizard's flow and is left
+  to the chair. On phones the in-flow footer (z 2) stays under the reveal (the e2e arm,
+  executed).
+- JUDGMENT: z-index 50 popovers inside `<main>` (CompendiumGlobalSearch, the Realm toolbar
+  menu) go under the band when opened within about 51px of the viewport bottom.
+- JUDGMENT: the chrome-inset names live in `src/lib/chromeInsets.js` and theme.js
+  re-exports them, instead of being defined in theme.js: a `src/hooks` file importing
+  theme.js pulls theme.js (6 pre-existing tsc errors in its colour maths) into the
+  full-typecheck gate (measured +6 against ceiling 167).
+- JUDGMENT: the footer stylesheet rules are injected at runtime (the `lib/imFellFace.js`
+  precedent; the CSP allows inline styles) rather than written into `src/index.css`,
+  which had 5 B of render-blocking budget left.
+
+**Deliberately deferred (documented, not bugs to re-find):**
+- Engines without `:has()` (Firefox before 121) ignore the keyboard-reveal rule: there
+  the tucked home button can take focus while below the viewport edge. Every other
+  footer destination stays in the band, and the home button duplicates the header's own
+  home control.
+- LD-3b constraint 2, the film playhead inset: `computeScrollProgress` still measures at
+  `scrollY + innerHeight * 0.5`, about 7px below the centre of the visible area between
+  the 38px header and the 51px band (arithmetic, not measured). Fixing it re-times every
+  film stop, a visible shift the order did not ask for.
+- LD-3b constraint 7's computed-gradient-terminus pin: the e2e arms pin the hero's box
+  against the band's top edge, not the scrim's computed gradient. With
+  `background-attachment: fixed` the 0.7 terminal stop still lands at the viewport
+  bottom behind the band (arithmetic, not measured).
+- The `.app-route-main` reserve (72px against a 38px desktop header) still gives short
+  desktop pages about 87px of scroll at 1280x800 (measured on /realm); at scroll 0 only
+  the band shows, and the last 70px of that scroll reveal the tuck. Its own car.
+- Existing mobile overlaps left as they were: AiAnalystPanel, InterviewPanel, the
+  Surveyor door sheet and the dossier-claim toast over the mobile nav; `CHROME.bottomNav`
+  says 57 where the nav measures 45; the Toast primitive composes `aboveFooter` only
+  when a surface adopts it (the walker's OPAQUE row).
+- Short desktop viewports: below about 714px tall the hero's natural content pushes the
+  FOLLOW THE ROAD cue under the band at scroll 0 (a figure measured against the
+  whole-footer shape, so the band's smaller height lowers it), and below about 741px the
+  Realm shell's 500px floor makes the page scroll.
+- Printing: the header, mobile nav and scroll buttons print as they did before; only
+  the footer gained a print rule.
+- The plan's walks at short desktop heights, partly run (review, 2026-09-16). WALKED in
+  Chromium: the feedback panel opened from the footer at 1280x768 and 1024x768 (top
+  357, bottom 701, band top 717) and at 1280x600 (top 189, bottom 533, band top 549);
+  PostGenCoach after an anonymous generation at 1280x768 (top 468, bottom 693, band top
+  717) and 1280x600 (top 300, bottom 525, band top 549). Mid-page every top stays below
+  the 38px header and every bottom above the band; their end-of-page overlaps are in the
+  lift-by-band judgment above. NOT WALKED, with the reason:
+  - The Entity Inspector open at 768 tall: the anonymous /create dossier renders no
+    entity links (the probe counted 0), so opening it needs a signed-in or saved
+    dossier. Arithmetic only: at its maximum height (top 88, `calc(100dvh - 112px -
+    band)`) its bottom sits 75px above the viewport bottom, 24px clear of the band
+    mid-page, and the risen footer overlaps its bottom 46px at the end of a page.
+  - The plan's collision 17, sticky top asides taller than the viewport minus the header
+    and the band: the one live instance, the NextActionRail aside in
+    `settlementDetail/SettlementDossierHero.jsx` (sticky, z 1, no height cap), renders
+    only for a SAVED settlement. Its bottom 51px stay under the band until its container
+    ends, 51px more than the viewport edge already hid; nothing becomes unreachable.
+  - AiAnalystPanel, InterviewPanel, SurveyorWorkshop and PricingMomentCard at 768 and
+    600 tall: they open only with a Surveyor entitlement or a pricing moment in the
+    store. Their offsets compose the same `aboveFooter` as the walked panels.
 
 ---
 

@@ -28,7 +28,7 @@ import { useStore } from '../store/index.js';
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { deriveGenerationId } from '../lib/generationTelemetry.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomClearance } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomClearance, aboveFooter } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 export default function FeedbackWidget({ visible = true }) {
@@ -95,11 +95,12 @@ export default function FeedbackWidget({ visible = true }) {
 
   // The panel is footer-triggered now (the floating button was retired, W2-a-REVISED),
   // but it still anchors bottom-right and clears the mobile bottom nav + home indicator
-  // via the shared bottomClearance(CHROME.fabLift) token while it is open.
+  // via the shared bottomClearance(CHROME.fabLift) token while it is open. On desktop
+  // aboveFooter opens it above the pinned footer that launched it (2026-09-16).
   const anchor = {
     position: 'fixed',
     right: SP.lg,
-    bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
+    bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : SP.lg),
     // M10: the FEEDBACK layer (910), one step above the post-generate coach
     // (PostGenCoach, 900). Both are fixed bottom-right panels; before this they
     // shared zIndex 900 and stacked ambiguously when shown together. An opened

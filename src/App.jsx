@@ -24,6 +24,7 @@ import { Zap, Shield, X } from 'lucide-react';
 import Lockup from './components/brand/Lockup.jsx';
 import useIsMobile from './hooks/useIsMobile';
 import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
+import useChromeInsets from './hooks/useChromeInsets.js';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
@@ -31,7 +32,7 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, SP, R, FS, swatch, CHROME, bottomClearance,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, ELEV, SHAFT, SHAFT_GRAIN_LAYERS, SLATE, SLATE_BG, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -119,6 +120,9 @@ export default function App() {
   // The skip-to-content link + main[tabIndex=-1] below are the target.
   const mainRef = useRef(null);
   useFocusOnViewChange(view, mainRef);
+  // The pinned footer (owner orders 2026-09-16) publishes its measured band and tuck,
+  // and the header its height, as CSS variables; the footer pins on desktop only.
+  const { headerRef, footerRef } = useChromeInsets(!isMobile);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showScrollBottom, setShowScrollBottom] = useState(false);
   // Auth-modal visibility lives on the store's uiSlice (restoration #16) so the
@@ -533,7 +537,7 @@ export default function App() {
 
         {/* ── Mobile header ───────────────────────────────────── */}
         {isMobile && (
-          <header style={{
+          <header ref={headerRef} style={{
             ...headerStyle,
             padding: `${SP.sm}px ${SP.md}px`,
             position: 'sticky', top: 0, zIndex: 50,
@@ -563,7 +567,7 @@ export default function App() {
 
         {/* ── Desktop header ──────────────────────────────────── */}
         {!isMobile && (
-          <header style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
+          <header ref={headerRef} style={{ ...headerStyle, minHeight: CHROME.headerDesktop, boxSizing: 'border-box', padding: `0 ${SP.xxl}px`, position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.md }}>
             {/* Brand block. The lockup itself — the maker's plate, the wordmark and
                 its wax-seal `o` — lives in components/brand/Lockup.jsx, which both
                 bars share; what stays here is only the home CONTROL it rides in. The
@@ -714,22 +718,31 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            THE LANDING ROUTE IS EXEMPT (LD-3, owner-ordered): the welcome page
-            ends on its own artwork band, so the global strip would be a second
-            footer stacked under the painting. This is a ROUTE-SCOPED suppression,
-            never a deletion — every other view keeps the strip — and the row's
-            content is not lost: LandingBelowFold mounts the very same
-            LegalRibbonRow inside its band, so Pricing, Terms, Privacy and
-            Feedback stay reachable from the landing document. */}
-        {view !== 'home' && (
-          <footer style={{
-            background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.25)',
-            padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
-          }}>
-            <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
-          </footer>
-        )}
+            ONE FOOTER ON EVERY ROUTE, THE LANDING INCLUDED (owner order
+            2026-09-16, superseding LD-3's landing exemption): "the footer should
+            be the same way on every page", the way the header is. Its look and
+            content do not change. On desktop it is sticky at the header's layer
+            (50, below the drawer scrim), and the owner's follow-up order floats
+            ONLY ITS LINKS ROW: the bottom offset is minus the tuck (the measured
+            height below the links row), so the rest hangs below the viewport edge
+            and shows when the page is scrolled all the way down, where the footer
+            reaches its natural spot. A tucked control with keyboard focus reveals
+            the whole footer (lib/chromeInsets.js). On phones it stays in normal
+            flow above the fixed bottom nav, which already holds the bottom edge
+            there (a vetoable call, recorded in docs/FIRST_CONTACT_BACKLOG.md); it
+            is `relative` on z 2 there only to clear the landing's fixed film (z 0)
+            and its z-1 roots, which would otherwise paint over an unpositioned
+            footer. Z 2, not the header's 50, keeps the in-flow phone footer where
+            it was against every other layer: under the generation reveal (z 45)
+            and under the sticky header (z 50). Its tuck is 0px. The band reaches
+            the bottom-anchored layers through aboveFooter (useChromeInsets). */}
+        <footer ref={footerRef} style={{
+          background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
+          borderTop: '1px solid rgba(160,118,42,0.25)',
+          padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`, position: isMobile ? 'relative' : 'sticky', bottom: FOOTER_TUCKED_BOTTOM, zIndex: isMobile ? 2 : 50,
+        }}>
+          <LegalRibbonRow isMobile={isMobile} onNavigate={setView} showHome />
+        </footer>
 
         {/* ── Mobile bottom nav ───────────────────────────────── */}
         {isMobile && (
@@ -792,7 +805,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,
+            position: 'fixed', bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56), right: SP.lg, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
@@ -880,7 +893,7 @@ export default function App() {
         <div
           role="status"
           style={{
-            position: 'fixed', bottom: SP.xxl, left: '50%', transform: 'translateX(-50%)',
+            position: 'fixed', bottom: aboveFooter(SP.xxl), left: '50%', transform: 'translateX(-50%)',
             zIndex: 2000, maxWidth: 'min(92vw, 420px)',
             padding: `${SP.md}px ${SP.lg}px`,
             background: PARCH_100, color: BODY,
@@ -904,7 +917,7 @@ export default function App() {
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearOnboardingNudge(); } }}
           style={{
             position: 'fixed',
-            bottom: isMobile ? 92 : SP.xxl,
+            bottom: aboveFooter(isMobile ? 92 : SP.xxl),
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 2000,

@@ -21,7 +21,7 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS, aboveFooter } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -106,7 +106,8 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
 
   if (!open) return null;
 
-  const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
+  // Docked above the pinned desktop footer (owner order 2026-09-16).
+  const dockPos = { position: 'fixed', left: SP.lg, bottom: aboveFooter(SP.lg), zIndex: 60, fontFamily: sans };
 
   return (
     <div

@@ -24,7 +24,7 @@ import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, CHROME } from './theme.js';
+import { SP, CARD, BORDER, CHROME, FOOTER_INSET } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useEnsureSavedSettlementsLoaded } from '../hooks/useOwnerScopedSaves.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
@@ -779,12 +779,14 @@ export default function WorldMap({ onNavigate } = {}) {
   }
 
   // ── Render ─────────────────────────────────────────────────────────────
-  // Use viewport height minus header/padding so the map fills the screen.
-  // The parent <main> has padding and the header is ~52px on desktop.
+  // Use viewport height minus the chrome so the map fills the screen between the
+  // desktop header (CHROME.headerDesktop), main's padding and the PINNED FOOTER's
+  // floating links band (owner orders 2026-09-16), whose measured height is
+  // FOOTER_INSET; the rest of the footer shows only at the end of the page.
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
-      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      height: `calc(100vh - ${CHROME.mapShellOffset}px - ${FOOTER_INSET})`,   // header + main padding + breathing room, then the footer's band
       minHeight: CHROME.mapShellMin,
       // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
       // document — the geographic canvas is the hero (P1) and must fill its width.

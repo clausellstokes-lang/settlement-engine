@@ -20,7 +20,7 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, sans, serif_, SP, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, sans, serif_, SP, FS, FOOTER_INSET, aboveFooter } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -190,7 +190,9 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
 
   if (!open) return null;
 
-  const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
+  // Docked above the pinned desktop footer (owner order 2026-09-16); the maxHeight
+  // below subtracts the same inset so the lifted panel's top stays where it was.
+  const dockPos = { position: 'fixed', left: SP.lg, bottom: aboveFooter(SP.lg), zIndex: 60, fontFamily: sans };
   const hasThread = thread.length > 0;
   const lastIdx = thread.length - 1;
   const scopeLabel = (scope === 'campaign' && canCampaign)
@@ -201,7 +203,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
     <div
       style={{
         ...dockPos,
-        width: 360, maxWidth: 'calc(100vw - 32px)', maxHeight: 'calc(100vh - 32px)', overflowY: 'auto',
+        width: 360, maxWidth: 'calc(100vw - 32px)', maxHeight: `calc(100vh - 32px - ${FOOTER_INSET})`, overflowY: 'auto',
         background: CARD, color: BODY,
         border: `1px solid ${SLATE}`, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,

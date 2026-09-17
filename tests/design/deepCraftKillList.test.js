@@ -275,6 +275,13 @@ const CEILINGS = Object.freeze({
   // with it. The shrink-only rule reads a shrink as a win to LOCK, so these are lowered
   // rather than left slack — leaving them would let a future surface re-spend the budget
   // the map vacated.
+  // LOWERED BY THE PINNED FOOTER (owner order 2026-09-16): a REMOVAL win, banked in the
+  // same act: rgbaLiterals 166->163. The owner's order put the app's one global footer on
+  // the landing, so the landing band's own footer strip (LandingBelowFold's LandingFooter:
+  // its rgba top rule, its rgba ghost-link tone and the rgba row-colour override on its
+  // LegalRibbonRow mount) left the product. Nothing was restyled and nothing was added:
+  // the footer's own rgba border stays in App.jsx, outside this scan. borderRadius 84,
+  // boxShadow 59 and tintedCallouts 160 measured unchanged.
   borderRadius: 84,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the
@@ -283,7 +290,7 @@ const CEILINGS = Object.freeze({
   boxShadow: 59,        // print has no z-axis — depth is ink, never elevation
                         // (72->69 at LANE PW's burn-down: five z-axis lifts struck,
                         // four of them carrying an rgba that fell with them)
-  rgbaLiterals: 166,    // off-palette translucent washes — ink tones come from the ramp
+  rgbaLiterals: 163,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 160,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 

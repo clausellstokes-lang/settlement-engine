@@ -1673,3 +1673,29 @@ export const FLETCH_HANG = FLETCH.band - CHROME.headerDesktop;
  */
 export const bottomClearance = (basePx) =>
   `calc(${basePx}px + env(safe-area-inset-bottom))`;
+
+/**
+ * THE PINNED FOOTER'S BAND AND TUCK (owner orders 2026-09-16: the footer stays put
+ * "the same way on every page", the way the header does, but only its links row floats
+ * at the viewport bottom; the rest shows when the user scrolls all the way down). The
+ * names are DEFINED in the pure leaf src/lib/chromeInsets.js, which
+ * src/hooks/useChromeInsets.js also reads, and re-exported here beside CHROME and
+ * bottomClearance so every surface keeps importing its chrome vocabulary from theme.js:
+ *
+ *   FOOTER_INSET_VAR      the pinned band's measured height ('0px' when not pinned)
+ *   FOOTER_TUCK_VAR       the footer's height below the band ('0px' when not pinned)
+ *   HEADER_HEIGHT_VAR     the header's measured height (it wraps at narrow widths)
+ *   FOOTER_LINKS_ATTR     the stable hook on the footer's links row
+ *   FOOTER_INSET          var(--sf-footer-inset, 0px), for calc() compositions
+ *   FOOTER_TUCKED_BOTTOM  the footer's own sticky bottom offset (minus the tuck)
+ *   aboveFooter(base)     lifts a bottom offset above the pinned band
+ *
+ * The leaf exists because theme.js sits outside the full-tree typecheck include,
+ * and a hook under src/hooks importing theme.js directly would pull this file (and
+ * its colour maths) into that gate.
+ *
+ * @enforced-by tests/lint/bottomAnchoredChrome.walker.test.js
+ */
+export {
+  FOOTER_INSET_VAR, FOOTER_TUCK_VAR, HEADER_HEIGHT_VAR, FOOTER_LINKS_ATTR, FOOTER_INSET, FOOTER_TUCKED_BOTTOM, aboveFooter,
+} from '../lib/chromeInsets.js';

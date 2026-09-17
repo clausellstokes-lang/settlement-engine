@@ -256,7 +256,7 @@ describe('(3) onboarding nudge dismiss prevents default on Space', () => {
   });
 });
 
-describe('(4) lazy route loading keeps the footer outside the first viewport', () => {
+describe('(4) the route reserve keeps the page floor and the in-flow mobile footer below the first viewport', () => {
   test('the route main wires the shell reserve and its CSS has vh + svh floors', () => {
     const { container } = render(<App />);
     const main = container.querySelector('main#main-content');
