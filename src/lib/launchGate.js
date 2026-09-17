@@ -25,11 +25,12 @@ export const PURCHASES_CLOSED_CODE = 'purchases_not_open';
 
 /**
  * Whether purchases are open in this build.
- * @param {{ VITE_PURCHASES_OPEN?: string } | undefined} [env] the build env (a seam for tests)
+ * @param {unknown} [env] the build env, import.meta.env by default (a seam for tests)
  * @returns {boolean}
  */
 export function purchasesOpen(env = import.meta.env) {
-  return Boolean(env) && env.VITE_PURCHASES_OPEN === 'true';
+  const flags = /** @type {{ VITE_PURCHASES_OPEN?: unknown } | null | undefined} */ (env);
+  return Boolean(flags) && flags?.VITE_PURCHASES_OPEN === 'true';
 }
 
 /**
