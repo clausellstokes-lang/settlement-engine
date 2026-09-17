@@ -16,6 +16,7 @@ import { supabase, isConfigured } from './supabase.js';
 import { getActivePacks, findPackByKey, SINGLE_DOSSIER, TIERS } from '../config/pricing.js';
 import { fetchCreditBalanceFromLedger } from './creditLedger.js';
 import { track, EVENTS, Funnel } from './analytics.js';
+import { purchasesClosedError, purchasesOpen } from './launchGate.js';
 
 // PRODUCTS preserves the historical shape (object keyed by product id)
 // so existing imports (PurchaseModal, AccountPage) keep working. The
@@ -122,6 +123,11 @@ const PRODUCTS = new Proxy({}, {
  * @returns {Promise<{ redeemNotice: string|null }>}
  */
 export async function startCheckout(product, options = {}) {
+  // Purchases stay closed until launch (lib/launchGate.js). Checked FIRST, so a purchase
+  // control the census missed still cannot open a Stripe session before the owner opens sales.
+  if (!purchasesOpen()) {
+    throw purchasesClosedError();
+  }
   if (!isConfigured) {
     throw new Error('Supabase not configured — cannot process payments in local mode');
   }

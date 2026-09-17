@@ -9,12 +9,14 @@
 import { getTierDisplayName } from '../../config/pricing.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { isConfigured } from '../../lib/supabase.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { t, tx } from '../../copy/index.js';
 import {
-  GOLD, GOLD_DEEP, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
+  GOLD, GOLD_DEEP, GOLD_SOFT, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
 } from '../theme.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from '../primitives/AvailableAtLaunchPill.jsx';
 
 function FeatureRow({ children }) {
   return (
@@ -40,6 +42,7 @@ function FeatureRow({ children }) {
  * Defaults false, so every existing caller is byte-identical in behaviour.
  */
 export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, ctaDisabled = false, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
+  const purchasesAreOpen = purchasesOpen();
   // P9 / decision 4 — when the simulation-led A/B variant is on, source the
   // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
   // the current copy. The variant DELIBERATELY names no size as premium (size
@@ -187,11 +190,16 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
 
       {(() => {
         const notConfigured = !isConfigured && tier.priceCents > 0;
+        // THE LAUNCH GATE (lib/launchGate.js), narrowed to the CHECKOUT action the
+        // same way the hydration gate is: only a 'purchase' CTA (Cartographer's
+        // Subscribe) is closed until launch. 'manage' opens the billing portal, and
+        // 'current'/'navigate' take no money, so they stay live and wear no pill.
+        const launchLocked = !purchasesAreOpen && ctaKind === 'purchase';
         return (
           <Button
             type="button"
             onClick={onCta}
-            disabled={loading || notConfigured || ctaDisabled}
+            disabled={launchLocked || loading || notConfigured || ctaDisabled}
             // P8 — button emphasis follows the ACTION's importance, not the card's
             // position. Only a real purchase action gets the solid-gold primary
             // (decided by the parent so the region has exactly one). A billing/
@@ -202,12 +210,17 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
             size="lg"
             fullWidth
             // ~44px target for the page's highest-value tap (Fitts) — lg is 40px.
-            style={{ minHeight: 44 }}
+            // While launch-locked the pill may wrap below the label on a narrow card.
+            style={{ minHeight: 44, ...(launchLocked ? { flexWrap: 'wrap' } : null) }}
             // The disabled reason: the native title= gloss died with the move
             // (the source ratchet); the page's local-mode note names it visibly.
             aria-disabled={notConfigured || undefined}
           >
             {loading ? 'Redirecting…' : ctaLabel}
+            {/* The opaque soft-gold ground keeps the pill's gold ink legible when it
+                sits on the solid gold primary fill (GOLD_TXT on GOLD_SOFT, the gold
+                Button variant's pair); the translucent tint alone reads ~3:1 there. */}
+            {launchLocked && <AvailableAtLaunchPill style={{ marginLeft: 6, background: GOLD_SOFT }} />}
           </Button>
         );
       })()}
@@ -216,6 +229,8 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
 }
 
 export function PackTile({ pack, onBuy, loading, emphasised }) {
+  const purchasesAreOpen = purchasesOpen();
+  const packName = `${t('pricing.creditPacks.pack', { credits: pack.credits })}, ${pack.price}`;
   return (
     // The Button primitive (jsx-hygiene rule — the extraction converted the
     // page's one tracked raw <button>): focus-ring/disabled/target-size come
@@ -225,10 +240,12 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
     <Button
       type="button"
       onClick={onBuy}
-      disabled={loading || !isConfigured}
+      disabled={!purchasesAreOpen || loading || !isConfigured}
       // The tile is several stacked divs with no single accessible name; name
-      // the affordance for screen readers as "<N credits>, <price>".
-      aria-label={`${t('pricing.creditPacks.pack', { credits: pack.credits })}, ${pack.price}`}
+      // the affordance for screen readers as "<N credits>, <price>". While
+      // purchases are closed the name also carries the launch pill's words, which
+      // the aria-label would otherwise hide from a screen reader.
+      aria-label={purchasesAreOpen ? packName : `${packName}, ${AVAILABLE_AT_LAUNCH}`}
       style={{
         flex: '1 1 160px', minWidth: 160,
         padding: `${SP.lg}px ${SP.md}px`,
@@ -239,7 +256,7 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
         background: CARD,
         border: emphasised ? `2px solid ${GOLD}` : `1px solid ${BORDER_STRONG}`,
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        cursor: loading ? 'wait' : 'pointer',
+        cursor: loading ? 'wait' : (purchasesAreOpen ? 'pointer' : 'not-allowed'),
         fontFamily: sans, opacity: loading ? 0.6 : 1,
       }}
     >
@@ -269,6 +286,8 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
       <div style={{ fontSize: FS.xs, color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {t('pricing.creditPacks.pack', { credits: pack.credits })}
       </div>
+      {/* The launch pill wraps inside a narrow tile instead of overflowing it. */}
+      {!purchasesAreOpen && <AvailableAtLaunchPill style={{ whiteSpace: 'normal', textAlign: 'center' }} />}
     </Button>
   );
 }

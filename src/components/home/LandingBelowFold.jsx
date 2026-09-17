@@ -1,8 +1,9 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
  * Welcome page: the salt-road journey 01·Forge → 02·Visual → 03·Voice →
- * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE
- * chunk by HomeLanding.jsx so the hero paints first (LCP).
+ * 04·Realm → 05·Commons → 06·Set out. Lazy-loaded as ONE chunk by
+ * HomeLanding.jsx so the hero paints first (LCP). The page's footer is the
+ * app's one global footer, pinned by App.jsx (owner order 2026-09-16).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
@@ -16,6 +17,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
@@ -24,11 +27,6 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
-// THE MIGRATED LEGAL/COMMERCIAL ROW (LD-3). App.jsx suppresses the global
-// footer on this route, so the band carries the one shared row instead — an
-// EAGER module imported DOWNWARD from the lazy landing chunk (importing it the
-// other way would re-parent this closure into the entry chunk).
-import LegalRibbonRow from '../footer/LegalRibbonRow.jsx';
 // Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
 // interpolates these instead of hand-typing the numbers, so a catalog change
 // (anon size ceiling, free save cap) can never drift from what the strip shows.
@@ -199,7 +197,7 @@ function GalleryCards({ onNavigate }) {
   );
 }
 
-// ── 06 · Set out — tier strip + footer ───────────────────────────────────────
+// ── 06 · Set out — tier strip ────────────────────────────────────────────────
 // Live founder-chair counter. Lazy-imports the seat module so supabase never
 // rides the eager chunk; the RPC read is anon-safe and 5-minute cached. Falls
 // back to the static cap line when the count is unavailable (null), so a backend
@@ -297,48 +295,16 @@ function TierStrip() {
   );
 }
 
-function LandingFooter({ onNavigate, isMobile }) {
-  const links = tl('footer.links') || [];
-  const route = { Compendium: 'compendium', Pricing: 'pricing', Account: 'account' };
-  return (
-    <div style={{
-      maxWidth: CONTENT_MAX, margin: `${SP.xxl * 2}px auto 0`, borderTop: '1px solid rgba(244,234,208,0.2)',
-      paddingTop: SP.xl, display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
-    }}>
-      <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: GOLD }}>{tl('footer.brand')}</span>
-      <span style={{ marginLeft: 'auto', display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
-        {links.map((label) => (
-          <Button
-            key={label}
-            variant="ghost"
-            size="sm"
-            onClick={() => onNavigate(route[label])}
-            style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: 'rgba(244,234,208,0.72)', padding: 0, minHeight: 24 }}
-          >
-            {label}
-          </Button>
-        ))}
-      </span>
-      {/* The page ends on the painting (LD-3): Pricing · Feedback & support ·
-          Terms · Privacy · © · "Simulated, not AI-generated." MIGRATE, never
-          delete — the global strip is suppressed on this route, and /pricing has
-          no `nav:` block, so this row is the landing's only path to it. */}
-      <LegalRibbonRow
-        isMobile={isMobile}
-        onNavigate={onNavigate}
-        clearMobileNav
-        style={{ width: '100%', marginTop: SP.xl, color: 'rgba(244,234,208,0.72)' }}
-      />
-    </div>
-  );
-}
-
 // ── The below-fold page ──────────────────────────────────────────────────────
 // The below-fold CTAs all route to real product surfaces (Forge → generate,
 // See Cartographer / pricing links → pricing, Browse the gallery → gallery), so
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
+  // Pre-launch lockout (lib/launchGate.js): See Cartographer is the landing's one
+  // purchase CTA, so it renders disabled with the pill until purchases open. The
+  // pricing links are information and stay live.
+  const purchasesAreOpen = purchasesOpen();
   // The scroll-journey root: the film backdrop measures the `.leg` travel spacers
   // inside this container to drive its playhead (home/useScrollJourney).
   const rootRef = useRef(null);
@@ -455,7 +421,10 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <p style={proseStyle}>{tl('realm.body1')}</p>
             <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('realm.body2')}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('pricing')}>{tl('realm.cta')}</Button>
+              <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')}>
+                {tl('realm.cta')}
+                {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+              </Button>
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('realm.micro')}</span>
             </div>
           </div>
@@ -486,15 +455,17 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
 
         {/* leg 6 · city → metropolis */}
         <div className="sf-welcome-leg" data-welcome-leg="5" aria-hidden="true" />
-        {/* ══ 06 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
+        {/* ══ 06 · Set out — dark painted create scene (stop 6 · metropolis) ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"
         className="sf-landing-scene-dark"
-        // Item 11 (owner 2026-07-21): FLUSH BOTTOM. Zero bottom padding so the set-out
-        // card's footer sits flush against the page end / the global app footer, with no
-        // dead trailing scroll region. Set-out keeps its dark scene (item-10 exempt).
-        style={{ padding: isMobile ? `0 ${SP.md}px 0` : `0 ${SP.xxl}px 0`, '--sf-scene': SCENE('create') }}
+        // The band's own footer strip is gone (owner order 2026-09-16: the app's one
+        // global footer now follows this band on every route, pinned on desktop), so
+        // item 11's FLUSH BOTTOM (owner 2026-07-21) no longer has a strip to sit flush.
+        // A bottom pad keeps "Full pricing" off the footer's edge. Set-out keeps its
+        // dark scene (item-10 exempt).
+        style={{ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px ${SP.xxl * 2}px`, '--sf-scene': SCENE('create') }}
       >
         <Waypoint pill={tl('closer.waypoint')} dark />
         <div style={{ maxWidth: 880, margin: `${SP.xxl * 2}px auto 0`, textAlign: 'center' }}>
@@ -520,7 +491,6 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             {tl('closer.fullPricing')}
           </Button>
         </div>
-        <LandingFooter onNavigate={onNavigate} isMobile={isMobile} />
       </section>
       </div>
     </>

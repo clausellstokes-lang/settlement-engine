@@ -13,6 +13,10 @@ import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import SaveQuotaMeter, { PREMIUM_PITCH } from '../../src/components/settlements/SaveQuotaMeter.jsx';
 
+// These pins describe the funnel as it behaves once purchases open (lib/launchGate.js).
+// The pre-launch closed state is pinned in launchLock.libraryHeaderLanding.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 afterEach(cleanup);
 
 describe('SaveQuotaMeter — no size gate', () => {

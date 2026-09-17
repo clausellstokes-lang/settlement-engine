@@ -26,6 +26,8 @@ import { reconcileCultImposition, capacityForTier } from '../../../domain/worldP
 import { deitySnapshotFrom } from '../../../domain/deitySnapshot.js';
 import { MUTED, sans, FS } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../../lib/launchGate.js';
 import { navigate } from '../../../hooks/useRoute.js';
 import { Field } from './Field.jsx';
 import { selectStyle } from './EventComposerConstants.js';
@@ -83,11 +85,17 @@ export function canStageDeityEvent({ type, settlement, deityRef, deityMode, cult
 
 function UpsellOrEmpty({ label, prompt, canUseCustom, hasDeities, setPurchaseModalOpen }) {
   if (!canUseCustom) {
+    // Purchases stay closed until launch (lib/launchGate.js): the upgrade CTA is
+    // disabled and wears the Available at launch pill.
+    const purchasesAreOpen = purchasesOpen();
     return (
       <Field label={label}>
         <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
           {prompt}{' '}
-          <Button variant="ghost" size="sm" onClick={() => setPurchaseModalOpen?.(true)}>Upgrade to premium</Button>{' '}
+          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)}>
+            Upgrade to premium
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+          </Button>{' '}
           to author and assign deities.
         </div>
       </Field>

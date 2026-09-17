@@ -1,8 +1,10 @@
 {
   "_doc": "UI a11y contract manifest (Cycle-3 Wave 5). THREE born-empty registries the uiA11yContract walker enforces over src/components: (1) zLayers — the frozen stacking manifest (every zIndex literal must resolve to a named layer or the local band); (2) mousedownActivationAllow — files exempt from the keyboard-reachable ban on mouse-only ACTIVATION; (3) handRolledTrapAllow — files exempt from the single-writer focus-trap rule. Edit this file only to REGISTER a new layer (with review) or, deliberately, to grandfather an exception. Do not raise the local ceiling to smuggle a global layer.",
+  "_arrowHeaderLayers": "The painted arrow header (owner orders 2026-09-16) sits at 50, the value the 'popover' layer names; that shared value is deliberate (the header and the late-DOM popovers were already one band), not a second layer at 50. Its feather hangs on its own sticky layer, arrowOverhang 35, below the dossier toolbar (40) and the generation reveal (45).",
   "zLayersLocalCeil": 20,
   "zLayers": {
     "mapPanelBase": 30,
+    "arrowOverhang": 35,
     "mapPanelRaised": 40,
     "mapControl": 45,
     "popover": 50,

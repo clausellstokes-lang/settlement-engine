@@ -83,6 +83,11 @@ const BINARY = /\.(png|jpg|jpeg|gif|webp|avif|mp4|webm|woff2?|ttf|otf|ico|pdf|gl
  * already-excused component into a read-model directory no ruling had reviewed, which is
  * precisely the review this instrument exists to force. The row itself carries the reasoning
  * and the rejected wider draft.
+ * ⭐ ONE PATH STRUCK 2026-09-16 (the COMPENDIUM TRIM, owner order: the map lenses and interior
+ * pages removed from the Compendium): `src/domain/compendium/` left the derived-readers row
+ * because ROWS ARE EARNED convicted it. Its only hit was the generated compendium artifact's
+ * source-of-truth header naming `townMapStyles`, and that registry is no longer a Compendium
+ * input now the Map Lenses block is gone. No surface was added and none was widened.
  */
 const ALLOWLIST = Object.freeze([
   {
@@ -138,7 +143,7 @@ const ALLOWLIST = Object.freeze([
   {
     surface: 'the design token and lens registry',
     at: ['src/design/'],
-    why: 'The lens definitions, the export palette and the one fixed light. ⚠ Its consumer set CHANGED under ODQ §725/§772 — the live readers are the interior and realm renderers, the persisted-shape wall and the compendium generator, NOT a settlement-map renderer.',
+    why: 'The lens definitions, the export palette and the one fixed light. ⚠ Its consumer set CHANGED under ODQ §725/§772 — the live readers are the interior and realm renderers, the draw-op SVG adapter and the persisted-shape wall, NOT a settlement-map renderer (the compendium generator stopped reading it when the Map Lenses page left the Compendium, 2026-09-16).',
   },
   {
     surface: 'retained persistence and its retirement tombstones',
@@ -152,7 +157,7 @@ const ALLOWLIST = Object.freeze([
   },
   {
     surface: 'derived, generated and observational readers',
-    at: ['src/domain/certification/', 'src/domain/compendium/', 'src/domain/content/', 'src/domain/display/', 'src/domain/highWater.js', 'src/generators/steps/assembleInstitutions.js', 'src/lib/analyticsEvents.js', 'src/lib/mapLayerAnalytics.js', 'src/lib/surveyorWrite.js', 'src/config/entitlementLadder.js', 'src/copy/en.js'],
+    at: ['src/domain/certification/', 'src/domain/content/', 'src/domain/display/', 'src/domain/highWater.js', 'src/generators/steps/assembleInstitutions.js', 'src/lib/analyticsEvents.js', 'src/lib/mapLayerAnalytics.js', 'src/lib/surveyorWrite.js', 'src/config/entitlementLadder.js', 'src/copy/en.js'],
     why: 'Read-models, generated artifacts, the paid ladder and product copy. Most of the vocabulary here is TOMBSTONE — a record of what the strip removed, which §769.4 requires be phrased as an act rather than a token. Two rows in this group carry open questions and are named in the lane receipt rather than hidden here: the map-layer analytics module is now import-orphaned (its capture surface died), and one save-blob path predicate is a reader whose writer cannot be shown to exist.',
   },
   {

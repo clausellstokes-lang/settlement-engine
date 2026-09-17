@@ -1,6 +1,8 @@
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import BuyThisDossier from '../BuyThisDossier.jsx';
 import { t } from '../../copy/index.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 /**
  * SettlementDetailActions — the saved-view header's ACTION cluster (Edit, Session
@@ -25,6 +27,12 @@ export default function SettlementDetailActions({
   imageExporting, onExportImage,
   shareOpen, onToggleShare, galleryPublished,
 }) {
+  // Pre-launch lockout (lib/launchGate.js): only the non-premium "Edit (Premium)"
+  // variant is a purchase (it opens the pricing modal), so only it renders disabled
+  // with the Available at launch pill until purchases open. A premium editor's
+  // Edit Dossier / Stop Editing toggle is untouched.
+  const purchasesAreOpen = purchasesOpen();
+  const editUpsellLocked = !canEdit && !purchasesAreOpen;
   return (
     <>
       {/* Edit-mode toggle. Premium-gated; a non-premium owner sees a greyed
@@ -32,6 +40,7 @@ export default function SettlementDetailActions({
       <Button
         variant={!canEdit ? 'secondary' : 'ai'}
         size="sm"
+        disabled={editUpsellLocked}
         onClick={() => { if (canEdit) { toggleEditMode(); } else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); } }}
         title={canEdit
           ? (editMode
@@ -40,6 +49,7 @@ export default function SettlementDetailActions({
           : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
       >
         {!canEdit ? 'Edit (Premium)' : (editMode ? 'Stop Editing' : 'Edit Dossier')}
+        {editUpsellLocked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
       </Button>
       {sessionModeEnabled && (
         <Button

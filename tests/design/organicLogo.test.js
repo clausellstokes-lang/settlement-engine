@@ -144,11 +144,14 @@ describe('every eager module that INLINES the device pins to the canonical paths
   // SealImpression.jsx. The census below CAUGHT its arrival on the first run rather
   // than being told about it, which is precisely the guard a one-file pin could not be.
   //
-  // ⚠️ IT IS ALSO WHY THE IMPRESSION IS ITS OWN MODULE RATHER THAN LIVING IN WaxSeal.
-  // WaxSeal is this block's NEGATIVE CONTROL — the sibling proving the containment
-  // check can fail — so inlining the device there would have destroyed the only
-  // assertion that keeps the rest of the block honest, silently.
-  const INLINERS = ['HouseDevice.jsx', 'SealImpression.jsx'];
+  // ⚠️ AND IT IS BACK TO ONE MEMBER AGAIN (owner orders 2026-09-16): the header became the
+  // owner's arrow painting, so the gilded wordmark, the wax seal and its impression left
+  // the product with the ribbon, and SealImpression.jsx took the second inlined copy with
+  // it. The SET SHAPE and the directory census stay, for the reason above. The negative
+  // control moved with it: WaxSeal is gone, so the sibling proving the containment check
+  // can fail is now the footer's LegalRibbonRow, which IMPORTS the device and must not
+  // INLINE its geometry.
+  const INLINERS = ['HouseDevice.jsx'];
 
   it('the inliner set is non-empty and every member really exists', () => {
     expect(INLINERS.length).toBeGreaterThanOrEqual(1);
@@ -167,11 +170,12 @@ describe('every eager module that INLINES the device pins to the canonical paths
 
   it('NEGATIVE CONTROL — a module that does NOT inline the device is not in the set', () => {
     // Non-vacuity for the whole block: the containment check must be capable of
-    // failing. WaxSeal is a sibling brand module with its own geometry and none of
-    // the device's, so it is the proof that `toContain` is doing real work.
-    const seal = readFileSync(resolve(process.cwd(), 'src', 'components', 'brand', 'WaxSeal.jsx'), 'utf-8');
-    expect(seal).not.toContain(DEVICE_PATHS.ring);
-    expect(INLINERS).not.toContain('WaxSeal.jsx');
+    // failing. LegalRibbonRow imports the device and draws it, and carries none of its
+    // geometry, so it is the proof that `toContain` is doing real work.
+    const row = readFileSync(resolve(process.cwd(), 'src', 'components', 'footer', 'LegalRibbonRow.jsx'), 'utf-8');
+    expect(row, 'presence control: the row still mounts the device it must not inline').toContain('HouseDevice');
+    expect(row.includes(DEVICE_PATHS.ring), 'LegalRibbonRow inlines the device geometry').toBe(false);
+    expect(INLINERS.includes('LegalRibbonRow.jsx')).toBe(false);
   });
 
   it('⚠️ THE SET IS TOTAL — no brand module inlines the device without being listed', () => {

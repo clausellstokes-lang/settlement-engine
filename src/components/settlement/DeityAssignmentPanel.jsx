@@ -48,6 +48,8 @@ import { td } from '../../copy/deityAuthoring.js';
 import { BORDER, CARD, FS, INK, MUTED, SECOND, sans } from '../theme.js';
 import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // THE VOTIVE REGISTER (Deep Craft — the dossier's faith register voice): the
 // patron/cult assignment reads as a rule-framed dedication plate, not a rounded
@@ -107,6 +109,10 @@ export default function DeityAssignmentPanel() {
   const imposeCult = useStore((s) => s.imposeCult);
   const canUseCustom = useStore((s) => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
   const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
+  // Purchases stay closed until launch (lib/launchGate.js): both upgrade CTAs (the
+  // lapsed renew prompt and the free-tier upsell) are disabled and wear the
+  // Available at launch pill. The lapsed SHED controls are not purchases.
+  const purchasesAreOpen = purchasesOpen();
   const campaigns = useStore((s) => s.campaigns);
   const activeSaveId = useStore((s) => s.activeSaveId);
 
@@ -178,8 +184,9 @@ export default function DeityAssignmentPanel() {
         )}
         <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 8, lineHeight: 1.45 }}>
           {td('assign.lapsedNote')}{' '}
-          <Button variant="ghost" size="sm" onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800 }}>
+          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800 }}>
             {td('assign.upsellCta')}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       </div>
@@ -193,8 +200,9 @@ export default function DeityAssignmentPanel() {
         <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
         <div data-testid="deity-assignment-upsell" style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
           {td('assign.upsellPatron')}{' '}
-          <Button variant="ghost" size="sm" onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800 }}>
+          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800 }}>
             {td('assign.upsellCta')}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>{' '}
           {td('assign.upsellTail')}
         </div>

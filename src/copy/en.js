@@ -924,6 +924,10 @@ export const en = Object.freeze({
     // Vision V-H (R-23): user-facing failure copy routed off component literals
     // into the register, so failures speak in one voice and the i18n door stays open.
     forgeStart:        'The forge stalled before your settlement took shape. Try once more.',
+    // lib/staleDeploy.js: a tab left open across a deploy. forgeUpdated replaces
+    // forgeStart when the failure was a chunk of the previous build (HomeHero is lazy,
+    // so the register is loaded there; the EAGER notice keeps its own literals).
+    forgeUpdated:      'SettlementForge was updated while this page was open. Reload the page to forge with the new version.',
     realmSlots:        'There aren’t enough free save slots for a realm this size. Clear a few, then try again.',
     realmBuild:        'The realm didn’t come together this time. Try once more.',
     mapExport:         'The map didn’t finish exporting. Try once more.',

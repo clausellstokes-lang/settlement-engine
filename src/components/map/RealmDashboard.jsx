@@ -46,6 +46,8 @@ import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 // V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
@@ -198,6 +200,12 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
       })
     : null;
 
+  // Purchases stay closed until launch (lib/launchGate.js): the free tier's
+  // "Upgrade to run the Realm" CTA is disabled and wears the Available at launch
+  // pill. The anonymous "Sign in to unlock the Realm" is account creation, not a
+  // purchase, and stays live.
+  const upgradeClosed = tier !== 'anon' && !purchasesOpen();
+
   useEffect(() => {
     let cancelled = false;
     import('../../lib/pricingMoments.js')
@@ -262,7 +270,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
         <li>The living pantheon: deities contest converts and rise</li>
       </ul>
       <div>
-        <Button variant="primary" size="md" onClick={() => {
+        <Button variant="primary" size="md" disabled={upgradeClosed} style={upgradeClosed ? { flexWrap: 'wrap' } : undefined} onClick={() => {
           // P9 — clicking "run the Realm" IS the advance attempt: fire the
           // simulation-intent moment (cooldown-guarded), then route to the
           // canonical premium-value surface.
@@ -273,6 +281,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
           onUpgrade?.();
         }}>
           {tier === 'anon' ? 'Sign in to unlock the Realm' : 'Upgrade to run the Realm'}
+          {upgradeClosed && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
         </Button>
       </div>
     </div>

@@ -33,10 +33,13 @@ import { createDossierCheckoutToken, stashPendingDossier } from '../lib/pendingD
 import { stashDossierClaim } from '../lib/dossierClaimStash.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
+import { purchasesOpen } from '../lib/launchGate.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import { sans, FS, RED, BODY, INK, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
+import AvailableAtLaunchPill from './primitives/AvailableAtLaunchPill.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
 import ExportUnlockDialog from './dossier/ExportUnlockDialog.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
@@ -97,6 +100,14 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   // the button's aria-describedby to the (always-in-DOM) pill text.
   const [captionHover, setCaptionHover] = useState(false);
   const noteId = useId();
+  // Pre-launch lockout (lib/launchGate.js): both buy buttons render disabled and
+  // wear the Available at launch pill until purchases open. The save-first rung is
+  // a save, not a purchase, and stays live. On a phone the pill wraps below the
+  // label: this control sits in a min-content grid, so an inline pill would push
+  // the button past the screen edge.
+  const purchasesAreOpen = purchasesOpen();
+  const isMobile = useIsMobile();
+  const lockedButtonStyle = !purchasesAreOpen && isMobile ? { flexWrap: 'wrap' } : null;
 
   const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
@@ -204,19 +215,20 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
             variant="primary"
             size={size}
             icon={<Download size={12} />}
-            disabled={!isConfigured}
+            disabled={!purchasesAreOpen || !isConfigured}
             aria-describedby={noteId}
             onClick={() => { setError(null); setLadderOpen(true); }}
             onMouseEnter={() => setCaptionHover(true)}
             onMouseLeave={() => setCaptionHover(false)}
             onFocus={() => setCaptionHover(true)}
             onBlur={() => setCaptionHover(false)}
-            style={{ minHeight: 44 }}
+            style={{ minHeight: 44, ...lockedButtonStyle }}
             title={isConfigured
               ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
               : 'Payments are not configured in this environment.'}
           >
             {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
           <span id={noteId} role="tooltip" style={{ ...pillStyle, opacity: captionHover ? 1 : 0 }}>
             One-time, no account needed.
@@ -281,12 +293,13 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         variant="secondary"
         size={size}
         icon={<Download size={12} />}
-        disabled={!isConfigured}
+        disabled={!purchasesAreOpen || !isConfigured}
         onClick={() => { setError(null); setUnlockOpen(true); }}
-        style={{ minHeight: 44 }}
+        style={{ minHeight: 44, ...lockedButtonStyle }}
         title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       >
         {t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
       </Button>
       {error && <span style={errStyle}>{error}</span>}
       <ExportUnlockDialog open={unlockOpen} saveId={effectiveSaveId} onClose={() => setUnlockOpen(false)} />

@@ -22,7 +22,7 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Button from './primitives/Button.jsx';
-import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_ } from './theme.js';
+import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_, FOOTER_INSET, HEADER_H, BOTTOM_NAV_H } from './theme.js';
 import { trackLandingView } from '../lib/landingFunnelAnalytics.js';
 import { tl } from '../copy/landing.js';
 
@@ -58,25 +58,42 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
     trackLandingView();
   }, []);
 
-  // Full-bleed: cancel <main>'s padding so every section spans edge to edge.
+  // Full-bleed: cancel <main>'s padding so every section spans edge to edge. THE PAINTED
+  // ARROW (owner orders 2026-09-16) is transparent around its nock and arrowhead, so the
+  // landing also pulls the hero up UNDER the header (HEADER_H): the dark scene, not cream,
+  // shows through the painting's gaps. The hero's own top padding adds the same length,
+  // so its content still starts below the shaft.
   const padX = isMobile ? SP.md : SP.xxl;   // matches App.jsx main padding-inline
-  const padT = isMobile ? SP.md : SP.lg;    // main padding-top
+  const padT = isMobile ? SP.md : SP.lg;    // main padding-top (the landing takes no hang reserve)
   const padB = isMobile ? 100 : SP.lg;      // main padding-bottom (mobile reserves 100)
 
   return (
-    <div style={{ margin: `-${padT}px -${padX}px -${padB}px` }}>
+    <div style={{ marginTop: `calc(-${padT}px - ${HEADER_H})`, marginRight: `-${padX}px`, marginBottom: `-${padB}px`, marginLeft: `-${padX}px` }}>
       {/* ══ Hero — dark painted village scene, the page's single <h1> ══ */}
       <section
         aria-labelledby="sf-hero-title"
         className="sf-landing-hero"
         style={{
           '--sf-scene': HERO_SCENE,
+          // THE LETTERBOX (desktop; owner orders 2026-09-16, LD-3b realised). At 86vh
+          // (index.css) the hero ended short of the viewport, and at 2000x1093 a strip of
+          // the film showed below the dark band, right where the owner said the footer
+          // belongs. The hero starts at the top of the viewport, under the transparent
+          // painted header, so on desktop it is sized to the viewport less the pinned
+          // footer's floating band (useChromeInsets, 1024 px and up) and the bottom bar
+          // (640 to 1023 px): its bottom edge IS the band's (or the bar's) top edge at every
+          // viewport height. Phones keep the 86vh rule. It is inline here, in this lazy
+          // chunk, rather than a rule in the injected sheet, because the first-paint entry
+          // closure has no bytes to spare.
+          minHeight: isMobile ? undefined : `calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`,
           // Lift the hero above the fixed film backdrop (zIndex 0, mounted in the
           // lazy below-fold): the hero owns its own eager still-0 paint (LCP), the
           // backdrop only shows through the transparent travel legs below.
           position: 'relative', zIndex: 1,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          textAlign: 'center', padding: isMobile ? `${SP.xxl * 2}px ${SP.lg}px ${SP.xxl}px` : '72px 24px 48px',
+          textAlign: 'center',
+          paddingTop: `calc(${isMobile ? SP.xxl * 2 : 72}px + ${HEADER_H})`, paddingRight: `${isMobile ? SP.lg : 24}px`,
+          paddingBottom: `${isMobile ? SP.xxl : 48}px`, paddingLeft: `${isMobile ? SP.lg : 24}px`,
         }}
       >
         <div style={{ maxWidth: 880, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

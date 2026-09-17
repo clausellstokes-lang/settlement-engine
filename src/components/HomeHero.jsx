@@ -31,6 +31,7 @@ import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
+import { recoverFromChunkError } from '../lib/staleDeploy.js';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
 import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
@@ -194,7 +195,11 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
-      setBeginError(t('errors.forgeStart'));
+      // A chunk of the previous build (this tab outlived a deploy): the recovery
+      // confirms a new build is live and reloads or raises the notice; the message
+      // says why a retry alone would not help. Anything else keeps forgeStart.
+      const recovery = await recoverFromChunkError(e);
+      setBeginError(t(recovery === 'none' ? 'errors.forgeStart' : 'errors.forgeUpdated'));
     } finally {
       generatingRef.current = false;
       setGenerating(false);

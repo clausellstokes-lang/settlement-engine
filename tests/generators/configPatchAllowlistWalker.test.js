@@ -19,8 +19,11 @@
  * computed keys (deliberate, mirrored from configSeamContract):
  *   - Shorthand properties (`updateConfig({ ...cfg, seed, ... })`) are not
  *     collected — shorthand detection false-positives on value identifiers.
- *     The known shorthand writes (`seed`) are pinned explicitly in
- *     tests/store/updateConfigPatchValidation.test.js instead.
+ *     The one historical shorthand write (`seed`, from the two sample-fork
+ *     surfaces) was REMOVED on 2026-09-16: a config `seed` made the pipeline
+ *     refuse generation (tests/store/generateStrayConfigSeed.test.js). The key
+ *     stays admitted only so a legacy saved config still loads, pinned in
+ *     tests/store/updateConfigPatchValidation.test.js.
  *   - Computed keys (`{ [key]: v }`) are skipped; the dynamic writers are the
  *     priority sliders, whose literal names are DEFAULT_CONFIG keys.
  *   - The dot-scan over-collects alias property reads on non-config objects

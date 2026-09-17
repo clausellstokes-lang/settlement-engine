@@ -152,8 +152,8 @@ bible mandates the swap.)*
 > |---|---|---|
 > | LD-1 | ⛔ **OPEN, BLOCKED** | no `landingSettlementFixture.js`, no `MiniatureFrame`; see the STOP note in LD-1 below |
 > | LD-2 | ✅ **BUILT** @ `cf7243ab` | `components/nav/NavDivider.jsx` + `NavRibbon.jsx`; `navDividers.test.jsx` 9/9 |
-> | LD-3 | ✅ **BUILT** @ `5a6d7aef` | `components/footer/LegalRibbonRow.jsx`, route-scoped suppression; `landingFooterMigration.test.jsx` 6/6 |
-> | LD-3b | 🔶 **OPEN** — LD-3's successor, not its duplicate | the row LD-3b reuses now exists and is eager; see the STOP note in LD-3b |
+> | LD-3 | ✅ **BUILT** @ `5a6d7aef`; its landing exemption **SUPERSEDED 2026-09-16** (owner order, see THE PINNED FOOTER below LD-3b) | `components/footer/LegalRibbonRow.jsx`; the route-scoped suppression and the band's row mount are gone; `landingFooterMigration.test.jsx` 4/4 (inverted) |
+> | LD-3b | ✅ **REALISED 2026-09-16 in its every-page form** (see THE PINNED FOOTER below LD-3b) | sticky global footer on desktop with only its links row floating (the rest tucked below the viewport edge until the end of the page), letterboxed hero, `pinnedFooter.test.jsx`, `bottomAnchoredChrome.walker.test.js`, `e2e/pinned-footer.spec.js` |
 > | LD-4 | ⛔ OPEN, blocked by LD-1 | shares LD-1's frame contract and its blocker |
 > | LD-5 | 🔶 OPEN (chrome only) | the Account deep-links (`?section=`) and all three About routes are LANDED by other lanes — LD-5's remaining work is the MENU LAYER, nothing else. ⚠️ the Messages amendment binds |
 > | LD-6 | ⛔ OPEN, **OWNER-GATED** | no `annual` anywhere in `config/pricing.js` or `services/stripe.js`; W-1's annual credit CADENCE is routed to the owner (`cca61099`) and item 7 says the toggle does not ship until it is ruled |
@@ -337,6 +337,16 @@ App.jsx:816); the placement map was a hardcoded second truth routes.js forbids;
 ## LD-3 — THE PAGE ENDS ON THE PAINTING (owner-ordered 2026-08-01; implementation =
 ## the external implementer)
 
+> ⛔ **LANDING EXEMPTION SUPERSEDED BY THE OWNER, 2026-09-16.** "The footer is missing
+> on the landing page. When we scroll, the header/ribbon remains sticky. The footer
+> should be the same way on every page." The global footer now renders on every
+> route, the landing included, and the landing band's own footer strip (its
+> LegalRibbonRow mount, its brand-and-links row and the `landing.footer` copy keys)
+> is deleted, so there is still exactly one footer. What LD-3 bought still holds: one
+> row module, one copy truth, every legal and commercial destination reachable from
+> the landing. Its deferred rect-above-the-bar pin is now written
+> (`e2e/pinned-footer.spec.js`, the phone arm). See THE PINNED FOOTER below LD-3b.
+
 > ✅ **BUILT 2026-08-03 (Lane F) @ `5a6d7aef`.** `components/footer/
 > LegalRibbonRow.jsx` is the one row module; App.jsx mounts it inside the global
 > footer on every non-landing route and `LandingBelowFold`'s band mounts it on
@@ -472,6 +482,12 @@ the voice is fixed at the SOURCE, never faked on the landing.
 ## LD-3b — THE TWO RIBBONS (owner amendment 2026-08-01 to LD-3; supersedes LD-3's
 ## document-end model with a stronger one)
 
+> ✅ **REALISED 2026-09-16, IN ITS EVERY-PAGE FORM** (owner order; see THE PINNED
+> FOOTER directly below this section for what was built, what differs from the
+> constraints here, and what was deferred). Constraints 1 (landing-route-only) and 5
+> (a landing-only fixed ribbon with a reserve, ribbon z 60) are superseded by the
+> order; constraint 6 (no fixed ribbon below the mobile breakpoint) is kept.
+
 > 🔶 **OPEN — LD-3 landed first ON PURPOSE, and made this cheaper (Lane F,
 > 2026-08-03).** LD-3b reuses "LD-3's migrated line" as its ribbon content; that
 > row now EXISTS as an eager module (`components/footer/LegalRibbonRow.jsx`), so
@@ -597,6 +613,840 @@ tokens.js chrome tokens) and silently reached into global chrome]:**
    reserve); the scrim-terminus pin is new — at scroll-top the hero's COMPUTED
    GRADIENT TERMINUS equals the ribbon's top edge (asserted at two viewport
    heights, the seam's regression test).
+
+---
+
+## THE PINNED FOOTER (owner orders 2026-09-16; supersedes LD-3's landing exemption, realises LD-3b)
+
+**The first order (owner, against a 2000x1093 screenshot of the landing):** "On the
+footer, keep it the same." Then: "The footer is missing on the landing page. When we
+scroll, the header/ribbon remains sticky. The footer should be the same way on every
+page. Do you see that gap where the shaded region breaks? Underneath that should be the
+footer, as plain as day."
+
+**The follow-up order (owner, later the same day, with two screenshots of the desktop
+landing's lower half):** "I want to make one change to the footer work. The floating
+piece is the one shown in the image above [only the links row: Pricing | Feedback &
+support | Terms | Privacy | About, on the footer's dark band]. Only when a user scrolls
+all the way to the bottom does it show the rest of the footer, including the logo, as
+shown in the second image [the full, unchanged footer]." The footer's look and content
+still do not change.
+
+**Vocabulary.** THE BAND is the part that floats: the footer's top edge down to the top
+of the row after the links row (the top border and padding, the links row and the gap
+under it). THE TUCK is the rest (the home button, the copyright line and the bottom
+padding), which hangs below the viewport edge until the end of the page. Measured in
+Chromium at 2000x1093, 1280x800, 1024x768 and 800x900: band 51 px, tuck 70 px, footer
+121 px. (The brief estimated the band at about 70 to 75 px from the owner's screenshot;
+the measured distance to the home button's top is 51 CSS px, and the band is measured,
+not tokenised.)
+
+**What was built (uncommitted at hand-off; the chair commits):**
+- `src/App.jsx`: one `<footer>` on every route. On desktop it is `position: sticky;
+  z-index: 50`, the header's own mechanism and layer, with `bottom:
+  calc(0px - var(--sf-footer-tuck, 0px))` (`FOOTER_TUCKED_BOTTOM`): a NEGATIVE offset by
+  exactly the tuck, so only the band is held in view and, at maximum scroll, the sticky
+  element reaches its natural spot and the whole footer shows. No script toggles
+  anything and nothing animates. On phones it is in the flow on a low layer
+  (`relative`, z-index 2; the tuck is 0px there, so the offset computes to 0px); its
+  content, background, rule and padding are unchanged. App.jsx stays at 650 effective
+  lines.
+- `src/hooks/useChromeInsets.js` measures THE BAND (the footer's top edge to the top of
+  the row after the links row, floored to whole px, so no pixel of the home button
+  shows), THE TUCK (the footer's full height minus the band) and the header (floored),
+  re-measures on a ResizeObserver over the header and the footer, and writes
+  `--sf-footer-inset` (the band), `--sf-footer-tuck` and `--sf-header-h` on the document
+  element; both footer values are `0px` whenever the footer is not pinned, and unmount
+  removes all three. The links row is found by the stable hook `data-sf-footer-links`
+  (`FOOTER_LINKS_ATTR`) on LegalRibbonRow's `<nav>`; the attribute changes nothing about
+  how the row renders. The names, `FOOTER_INSET`, `FOOTER_TUCKED_BOTTOM` and
+  `aboveFooter()` live in the leaf `src/lib/chromeInsets.js`, re-exported by
+  `components/theme.js`.
+- Four stylesheet rules, injected once by the hook as `<style id="sf-chrome-insets">`
+  (`CHROME_INSET_RULES`): `html { scroll-padding-bottom: <band> }` so keyboard and
+  nearest-aligned scrolls stop above the band (WCAG 2.2 SC 2.4.11); a matching
+  `scroll-margin: <band> 0 -<band>` on the footer's own controls (see the judgment
+  below); a print rule that lays the footer back into the flow; and THE KEYBOARD REVEAL,
+  `.parchment-bg>footer:has(:focus-visible:not([data-sf-footer-links] *))
+  { --sf-footer-tuck: 0px }`, so a tucked control with keyboard focus shows the whole
+  footer, keyed on `:focus-visible` so a mouse press never makes the footer jump. None is
+  in `src/index.css`, whose render-blocking budget (19,800 B,
+  `tests/build/firstPaintNonJs.test.js`) had 5 B left; that sheet is unchanged at
+  19,795 B.
+- The landing hero's desktop LETTERBOX is an inline `minHeight` in the lazy HomeLanding
+  chunk: `calc(100vh - var(--sf-header-h, 38px) - var(--sf-footer-inset, 0px))`, so at
+  scroll 0 the dark band ends exactly at the band's top edge at every viewport height
+  and header wrap; phones keep the 86vh rule.
+- Every fixed bottom-anchored layer composes `aboveFooter()`, which now lifts by the
+  band: the scroll-button stack (the owner's square arrow), the dossier-claim toast, the
+  onboarding nudge, PostGenCoach, FeedbackWidget, PricingMomentCard, AiAnalystPanel,
+  InterviewPanel, SurveyorWorkshop and the Realm map toast. The desktop Realm shell, the
+  desktop Entity Inspector and the two lifted Surveyor panels subtract `FOOTER_INSET`
+  (the band) from their viewport-sized heights.
+- The landing band's `LandingFooter` and its `landing.footer` copy keys are deleted;
+  `LegalRibbonRow`'s `clearMobileNav` prop is retired with its only caller; `#closer`
+  gets a 48px bottom pad back.
+- First paint (measured by replicating `tests/build/vendorPdfLazy.test.js`'s closure
+  walk): raw entry closure 1,046,662 B at base `cb8f0f9e5`, 1,047,911 B after the first
+  order, 1,047,944 B after the follow-up, against 1,048,000 (56 B spare); gzip 333,145
+  of 337,000; Brotli 279,592 of 283,000; render-blocking CSS 19,795 of 19,800. After the
+  review fixes (the same walk over a fresh `npm run build`): raw 1,047,948 B (52 B
+  spare; the phone footer's z-index ternary is the 4 B), gzip 333,130, Brotli 279,514,
+  render-blocking CSS 19,795. ⚠ The next eager byte needs its own extraction.
+- Pins: `tests/components/pinnedFooter.test.jsx` (the tucked sticky offset, the registry
+  layer, the band and tuck measurement from stubbed rects, 0px on phones, removal on
+  unmount, the rule spellings, the letterbox height, the links-row hook),
+  `tests/lint/bottomAnchoredChrome.walker.test.js` (every fixed bottom-anchored layer
+  lifted or exempt by name, exact in both directions),
+  `tests/components/landingFooterMigration.test.jsx` (inverted: the landing has the
+  footer, one row), `e2e/pinned-footer.spec.js` (the geometry: only the band at scroll
+  0, the whole footer at maximum scroll, on the landing at four viewports and on six
+  routes; Tab to the home button reveals it; focusing footer controls mid-page never
+  scrolls; a mouse press does not hold the footer open; a stand-in for the generation
+  reveal's layer covers the phone footer's Terms link and sits under the desktop band),
+  and the kill-list's `rgbaLiterals` ceiling lowered 166 to 163 for the deleted strip.
+- Mutation coverage (review fix): `scripts/mutation-sweep.sh` areas 98 and 99 plant the
+  two regressions the new invariant files exist for (the scroll-button stack losing its
+  `aboveFooter`, and the footer's sticky offset written as `bottom: 0`, which is the first
+  order's whole-footer shape), each claimed in `scripts/mutation-coverage-manifest.json`.
+  Both were executed before landing with a copy backup and restore: the walker 11 passed,
+  planted 2 red (LIFTED and EXEMPT), restored 11 passed; `pinnedFooter.test.jsx` 23
+  passed, planted 2 red ((a) and (c) mobile /terms), restored 23 passed.
+- Production performance (review fix, executed on this tree): `npm run
+  test:e2e:performance` 2 passed, CLS 0.0003 on `performance-chromium` and 0.0035 on
+  `performance-mobile-chromium` against the 0.1 budget; the `mobile-safari`
+  pointer-targets spec 1 passed.
+
+**How it differs from LD-3b's constraints, and why:**
+- Sticky, not fixed: the footer keeps its space in the page, so no reserve has to track
+  a content-sized footer, `scrollHeight` and the jump-to-bottom maths are unchanged, and
+  the whole footer is always reachable at the end of a page.
+- z-index 50 on desktop, not 60: 60 ties `floatingPanel` and wins that tie over the
+  in-main Entity Inspector by DOM order; 50 matches the header and sits below
+  `drawerScrim` (90). Phones take 2 (see the first judgment below).
+- Measured CSS variables, not a `CHROME.ribbonLanding` token: the footer's height depends
+  on the font, zoom and wrapping, and a few pixels short reopens the seam.
+- Every page, not the landing only (the order), and mobile unchanged (constraint 6).
+
+**Judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: the footer pins on desktop only (640px and wider, the `isMobile` breakpoint);
+  phones keep today's in-flow footer above the fixed bottom nav, with no band and no
+  tuck, so every mobile position computes exactly today's value. The one mobile change is
+  its LAYER: the phone footer is `position: relative` (zero offset) on z-index 2,
+  because the landing's fixed film backdrop (z 0) painted over an unpositioned footer at
+  the end of the landing. That was found on a 375x812 screenshot, reproduced red by the
+  e2e paint probe, and cleared. It was first z-index 50, the header's layer; the review
+  lowered it to 2 because at 50 the in-flow phone footer painted over the generation
+  reveal (PipelineReveal, fixed, z 45), which it had sat under before it was positioned,
+  whenever the collapsed page sat scrolled to its end, and over the sticky mobile header
+  on a landscape phone shorter than the header plus the footer. At 2 it clears the film
+  and the landing's z-1 roots and changes no other order. The e2e reveal arm pins it and
+  reds at 50 (executed: 2 failed with the old value, 20 passed with 2). Why the in-flow
+  footer at all: the nav already holds the phone's bottom edge.
+  Flipping it: pass `footerPinned=true` on mobile, place the footer at
+  `bottomClearance(nav height)` and drop its 88px padding; every consumer already
+  composes `aboveFooter`, so they follow.
+- JUDGMENT (follow-up): the band ends at the TOP of the row after the links row, so the
+  8px flex gap under the links stays in view and no pixel of the home button shows; it is
+  floored and the tuck takes the fraction, so the band's top edge sits on a whole pixel.
+- JUDGMENT (follow-up): the footer's own controls carry `scroll-margin: <band> 0 -<band>`.
+  Without it, every focus on a footer link mid-page scrolled the document by about half
+  a viewport and left the link where it was, because the root `scroll-padding-bottom`
+  counts the band as obscured and no scroll can move a sticky element. Measured in
+  Chromium at 1280x800: about 405 px per Tab through the band, and about 370 px per Tab
+  in the whole-footer-pinned shape of the first car (so the defect predates the
+  follow-up). With the rule, focus walks the whole footer with the scroll position
+  unchanged. `scroll-padding-bottom` itself is kept, as the brief asked.
+- JUDGMENT (follow-up): the keyboard reveal keys on `:focus-visible` of any control
+  OUTSIDE the links row (today only the home button; the copyright line has no controls),
+  not on focus in the band, so tabbing along the visible links never moves the footer.
+- JUDGMENT (follow-up): the landing letterbox moved from an injected class rule to an
+  inline style in the lazy HomeLanding chunk, and the injected sheet's marker became an
+  `id`, to pay for the follow-up's bytes: the probe build of the follow-up as first
+  written measured 1,048,213 B against the 1,048,000 B raw first-paint budget (213 B
+  over). The budget was not raised. `HEADER_FALLBACK_PX` left the leaf with the rule
+  (HomeLanding reads `CHROME.headerDesktop` directly).
+- JUDGMENT: fixed layers lift by the band, not the full footer, as the follow-up brief
+  asked, so mid-page they sit just above the band: a 48px centred stand-in at the
+  dossier-claim toast's offset (`aboveFooter(24)`) clears the band by 24px at 1280x800
+  with all five links painted. The price is paid in the last 70 px of scroll on a page,
+  where the tuck rises into the lifted layers' line. MEASURED in Chromium on the landing
+  at maximum scroll (a 420px centred stand-in, the toasts' own maximum width): at
+  1280x800, 1024x768 and 2000x1093 a layer at the dossier-claim toast's and the
+  onboarding nudge's offset, and at the Realm toast's `aboveFooter(20)`, covers ALL FIVE
+  links of the links row (Pricing, Feedback & support, Terms, Privacy, About). This row
+  first said such a toast would sit over the home button or copyright line; that was the
+  shape before the pin, and it was wrong for the pinned footer. The feedback panel
+  opened from the footer covers About at 1024x768 at the end of a page (no link at 1280
+  wide), and PostGenCoach overlaps the footer's top 46px in the right corner at 1280x768,
+  clear of the centred row at that width. The scroll-to-top button clears the whole
+  footer by 2px at all three viewports (72 + 51 = 123 against 121), which is a
+  coincidence of today's heights, not a guard. The toasts live 6 to 8 seconds and every
+  covered link stays reachable once they go. Flipping it: add `var(--sf-footer-tuck,
+  0px)` to the centred transient layers' offsets, which floats them 70px higher on every
+  mid-page scroll.
+- JUDGMENT: the landing band's brand-and-links strip (settlementforge, Compendium,
+  Pricing, Account) is deleted rather than kept above the global footer, because the two
+  together are the "TWO footers" LD-3 removed. Its destinations stay one click away
+  (header Compendium, footer and closer Pricing, the account menu).
+- JUDGMENT: `#closer` gets a 48px bottom pad so "Full pricing" does not sit on the
+  footer's edge (item 11's flush bottom had no strip left to sit flush).
+- JUDGMENT: StaleDeployNotice (the "updated while this page was open" alert, z 1000)
+  stays over the footer, as an interrupting alert should.
+- JUDGMENT: on desktop the generation reveal (PipelineReveal, z 45) sits under the pinned
+  footer as it sits under the header, and its card stays centred on the full viewport.
+  From a page at scroll 0 the band shows over its bottom edge. From a scrolled page the
+  WHOLE footer (home button and copyright line included) shows over its bottom 121px:
+  the reveal hides the output, the page collapses to the route reserve (about 87px of
+  scroll, the reserve's measured figure on short desktop pages) and the browser clamps
+  the scroll to that end, where the sticky footer rests whole (PLAUSIBLE: reasoned from the
+  collapse and the reserve, not run with a live reveal). Resetting the scroll when the
+  reveal mounts would restore band-only; that changes GenerateWizard's flow and is left
+  to the chair. On phones the in-flow footer (z 2) stays under the reveal (the e2e arm,
+  executed).
+- JUDGMENT: z-index 50 popovers inside `<main>` (CompendiumGlobalSearch, the Realm toolbar
+  menu) go under the band when opened within about 51px of the viewport bottom.
+- JUDGMENT: the chrome-inset names live in `src/lib/chromeInsets.js` and theme.js
+  re-exports them, instead of being defined in theme.js: a `src/hooks` file importing
+  theme.js pulls theme.js (6 pre-existing tsc errors in its colour maths) into the
+  full-typecheck gate (measured +6 against ceiling 167).
+- JUDGMENT: the footer stylesheet rules are injected at runtime (the `lib/imFellFace.js`
+  precedent; the CSP allows inline styles) rather than written into `src/index.css`,
+  which had 5 B of render-blocking budget left.
+
+**Deliberately deferred (documented, not bugs to re-find):**
+- Engines without `:has()` (Firefox before 121) ignore the keyboard-reveal rule: there
+  the tucked home button can take focus while below the viewport edge. Every other
+  footer destination stays in the band, and the home button duplicates the header's own
+  home control.
+- LD-3b constraint 2, the film playhead inset: `computeScrollProgress` still measures at
+  `scrollY + innerHeight * 0.5`, about 7px below the centre of the visible area between
+  the 38px header and the 51px band (arithmetic, not measured). Fixing it re-times every
+  film stop, a visible shift the order did not ask for.
+- LD-3b constraint 7's computed-gradient-terminus pin: the e2e arms pin the hero's box
+  against the band's top edge, not the scrim's computed gradient. With
+  `background-attachment: fixed` the 0.7 terminal stop still lands at the viewport
+  bottom behind the band (arithmetic, not measured).
+- The `.app-route-main` reserve (72px against a 38px desktop header) still gives short
+  desktop pages about 87px of scroll at 1280x800 (measured on /realm); at scroll 0 only
+  the band shows, and the last 70px of that scroll reveal the tuck. Its own car.
+- Existing mobile overlaps left as they were: AiAnalystPanel, InterviewPanel, the
+  Surveyor door sheet and the dossier-claim toast over the mobile nav; `CHROME.bottomNav`
+  says 57 where the nav measures 45; the Toast primitive composes `aboveFooter` only
+  when a surface adopts it (the walker's OPAQUE row).
+- Short desktop viewports: below about 714px tall the hero's natural content pushes the
+  FOLLOW THE ROAD cue under the band at scroll 0 (a figure measured against the
+  whole-footer shape, so the band's smaller height lowers it), and below about 741px the
+  Realm shell's 500px floor makes the page scroll.
+- Printing: the header, mobile nav and scroll buttons print as they did before; only
+  the footer gained a print rule.
+- The plan's walks at short desktop heights, partly run (review, 2026-09-16). WALKED in
+  Chromium: the feedback panel opened from the footer at 1280x768 and 1024x768 (top
+  357, bottom 701, band top 717) and at 1280x600 (top 189, bottom 533, band top 549);
+  PostGenCoach after an anonymous generation at 1280x768 (top 468, bottom 693, band top
+  717) and 1280x600 (top 300, bottom 525, band top 549). Mid-page every top stays below
+  the 38px header and every bottom above the band; their end-of-page overlaps are in the
+  lift-by-band judgment above. NOT WALKED, with the reason:
+  - The Entity Inspector open at 768 tall: the anonymous /create dossier renders no
+    entity links (the probe counted 0), so opening it needs a signed-in or saved
+    dossier. Arithmetic only: at its maximum height (top 88, `calc(100dvh - 112px -
+    band)`) its bottom sits 75px above the viewport bottom, 24px clear of the band
+    mid-page, and the risen footer overlaps its bottom 46px at the end of a page.
+  - The plan's collision 17, sticky top asides taller than the viewport minus the header
+    and the band: the one live instance, the NextActionRail aside in
+    `settlementDetail/SettlementDossierHero.jsx` (sticky, z 1, no height cap), renders
+    only for a SAVED settlement. Its bottom 51px stay under the band until its container
+    ends, 51px more than the viewport edge already hid; nothing becomes unreachable.
+  - AiAnalystPanel, InterviewPanel, SurveyorWorkshop and PricingMomentCard at 768 and
+    600 tall: they open only with a Surveyor entitlement or a pricing moment in the
+    store. Their offsets compose the same `aboveFooter` as the walked panels.
+
+---
+
+## THE PAINTED ARROW HEADER (owner orders 2026-09-16; replaces the procedural ribbon)
+
+**The orders (owner, 2026-09-16):** "Replace the arrow ribbon entirely with the following
+image however appropriate. This is the arrow we were trying and failing to create, so I
+created it. I do not want you to emulate it. I want some copy/cut/cropped/pasted version of
+this arrow as the header/ribbon of the entire website." Then: "The top of the wooden shaft
+(not the top feather) is where the page starts, so cut off that top feather." Then: "I leave
+judgments to you." And of the footer: "keep it the same".
+
+**The chair's rulings on the plan (vetoable; say "veto" on the row to flip it):**
+- The design object in the header recon is the plan: one painted strip drawn as DOM segments
+  with CSS masks (not a canvas), two stacked clips (the header's shaft band at z 50 and a
+  sticky zero-height hang layer at z 35 carrying the feather and barb, with a content
+  reserve), S_MAX 0.6, the word floor 0.48 and the 1024 switch.
+- Below 1024 the COMPACT arrow (brand crop, a filler slot, the tail crop with the blank
+  plate); the bottom bar shows six seats from 640 to 1023 (five below 640).
+- The account's home is a parchment slip on the blank plate (Sign In or the account name);
+  credits, Upgrade (still launch-locked with its pill) and Admin move into the plate's menu.
+- Ship exactly the kit's `arrow-strip.q90.webp` (2133x182) and `arrow-filler.q90.webp`
+  (183x70). The filler is cut from the painting's own plain-wood gaps. Every slot cut keeps
+  at least FE px of plain wood on both sides; Compendium's two gaps are too narrow, so
+  Compendium gets no slots.
+- THE CROSSFADE LESSON: each slot's filler is painted OPAQUE first, spanning the slot plus FE
+  on both sides, and only the painted segments fade over it (two layers that both fade dip in
+  opacity and show the page through as grey bands).
+- ONE CHANGE TO THE PLAN: the footer pins only in full-arrow mode (1024 and up). From 640 to
+  1023 it is in normal flow at the page end with clearance above the bottom bar, and every
+  footer inset variable is 0px there.
+- Nav regions stay Button elements (links deferred), aria-current parity with today, the
+  home control named "SettlementForge home" outside the nav, the anonymous "Sign In" name
+  unchanged.
+
+**Part 1, the paint engine (built and tested, not wired into App.jsx; uncommitted, the chair
+commits):**
+- `public/brand/arrow/arrow-strip.webp` and `arrow-filler.webp`: the kit's files byte for byte
+  (sha256 matched at the copy), then the provenance credit written by
+  `scripts/inject-ai-provenance.mjs` as container-only byte surgery. The ALPH and VP8 chunks
+  are byte-identical to the kit's and the decoded pixels are identical (sharp decode compared
+  before and after). Strip 68,530 B to 70,230 B; filler 3,310 B to 5,024 B.
+- `scripts/ai-media-provenance.json`: two rows (origin `openai:gpt-image@2026-09-16`, agent
+  OpenAI, model gpt-image 2.0 as the master's C2PA manifest names it, credit null because the
+  master carries no human-readable credit, forbid `urn:c2pa` and `Made with Google AI`),
+  `_counts` 52 to 54 present of 77, and an `_originals` note: the C2PA-bearing original is
+  the owner's `~/Desktop/ChatGPT Image Sep 16, 2026, 08_15_41 PM.png` (sha1 e3bc3461...), the
+  kit's copy lives in a temporary scratchpad, no manifest is fabricated, and whether OpenAI's
+  terms require more disclosure is an owner or legal question.
+- `tests/build/aiMediaProvenance.test.js`: `public/brand/arrow` joins MEDIA_ROOTS and
+  PRESENT_COUNT moves 52 to 54 in the same change.
+- `src/components/nav/arrowGeometry.js` (pure, JSDoc-typed): every table measured from the
+  shipped strip's decoded pixels, and `layoutArrow({ clientWidth, full, short })` with
+  `mapX`, plus `padTarget` for 44 px targets.
+- `src/components/nav/useChromeWidth.js`: one external store (a guarded ResizeObserver on the
+  document element, a resize fallback, the short-viewport query), no window access at
+  module load.
+- `src/components/nav/ArrowPaint.jsx`: fillers first and opaque, then masked segments; the
+  band and hang parts; aria-hidden, alt="", no pointer events, one high-priority fetch.
+- Pins: `tests/components/arrowGeometry.test.js` (23), `tests/build/arrowHeaderAssets.test.js`
+  (22), `tests/components/arrowPaint.test.jsx` (12). Seven negative controls were executed
+  by breaking the source and restoring it (a cut moved onto Gallery's G, Create's region
+  moved onto binding 2, the hang cut short, segments painted before fillers, the observer
+  never disconnected, a mask on the fillers, the uncredited kit filler shipped): each went
+  red in its arms and green again once restored.
+
+**Measured corrections to the plan (JUDGMENT rows, vetoable):**
+- JUDGMENT: FE stays 10. Under the shipped strip's own measurement every one of the kit's
+  eleven prototype cuts (558, 657, 713, 825, 881, 982, 1234, 1350, 1413, 1516, 1596) has ten
+  plain columns on both sides. The addendum's first run (550..567) was two columns short at
+  its left; the pixels are plain from 548.
+- JUDGMENT: the compact join is 558 / 1596, not 511 / 1612. Column 511 has five columns of
+  wood to its left and the first binding at 512, so no crossfade fits there. The brand crop
+  now carries the first binding; the compact arrow's natural width is 1095 strip px and its
+  scale min(0.6, cw / 1135), so phones render about 5 percent smaller than the plan's figures
+  (390 px: band 23.4 px, home 176 px wide, plate 87 px, slip 49 x 12.4 px).
+- JUDGMENT: with no Compendium slots the full arrow has 12 shares, not 14: uncut below 1303.8
+  px (s peaks at 0.611 at 1303, above S_MAX as the plan's rule intends), S_MAX up to 2597.4 px,
+  then one filler tile per share. 1280 renders as one uncut image; 1440 inserts 13.4 px of
+  wood per share; 1920, 53.4 px.
+- JUDGMENT: the barb reserve is 41 rows, not 39 (the barb's alpha ends at row 108), and the
+  hit regions run between the MEASURED binding edges (Create 547..668, Library 702..836, Realm
+  870..994, Compendium 1027..1187, Gallery 1219..1364, About 1397..1530).
+- JUDGMENT: row 0 is opaque across 82..1946 and 1989..2055, not the whole of 82..2055: the
+  painting has a see-through notch where the arrowhead's upper barb leaves the socket.
+- JUDGMENT: the slip sits BETWEEN the plate's rivets (1683..1825 x 13..49; the flat field is
+  1672..1833 x 11..51, the rivets at 1664..1679 and 1829..1843). The plan's 1672..1833 x 18..50
+  would cover both rivets.
+- JUDGMENT: `scripts/inject-ai-provenance.mjs` wrote a hard-coded 2026-08-24 into
+  `sfp:restoredOn` and its C2PA note, which would have stamped a false date into the arrow
+  files. A row's own `restored` date now wins. All 46 earlier rows record 2026-08-24, so their
+  packets are unchanged: stripping and re-injecting all 46 reproduced the shipped bytes
+  exactly, before and after the edit.
+- ⚠ FINDING FOR PART 2 (contrast on the real pixels, pinned in arrowHeaderAssets (g)): the
+  plan's "INK focus ring, 4.30:1 at the 5th percentile" does not hold across the band. INK
+  clears 3:1 against the darkest 1 percent of plain wood only on rows 4 to 23. PARCH_100
+  clears 3:1 against the lightest 1 percent only on rows 37 to 66. On rows 0 to 3, 24 to 36
+  and 67 neither does, so a one-colour ring or rule cannot meet 3:1 around a painted region;
+  a two-tone INK and PARCH_100 ring (15.2:1 between its own colours) can. The active-page rule
+  rows (52 and 53, under every descender) take PARCH_100 at 8.3:1 or more and INK at 1.26:1 at
+  best. The house bronze `#a0762a` is 1.26:1 against the median wood.
+
+**Deliberately deferred (documented, not bugs to re-find):**
+- `src/hooks/useChromeInsets.js` already writes `--sf-header-h` (the measured header height,
+  floored). The plan makes ArrowHeader's layout effect the only writer of that name; part 2
+  must retire or reconcile the hook's write so there are not two writers.
+- `THIRD-PARTY-NOTICES.md` section 7 and `public/third-party-notices.html` do not yet name the
+  OpenAI-generated header art. A disclosure edit is an owner or legal surface and was not
+  made.
+- The lighting census walker reds on the three new test files (files 2,584 to 2,587); its
+  governed refreeze belongs in its own commit after the code commit.
+- The two new pin files and the render contract are not enumerated invariants under
+  `tests/lint/mutationCoverage.shared.mjs` (their names carry no invariant token and they sit
+  outside the enforcer trees), so no manifest rows are owed; the plan's mutation-sweep areas
+  for the new guards wait for part 2's header test.
+- Not built, no e2e and no browser seam measurement yet (part 2): the crossfades, the
+  filler's repeat and the band-to-hang boundary still need the seam metric at DPR 1, 1.25, 1.5
+  and 2 in Chromium and WebKit, and owner review.
+
+**Part 2, the header in the app (built and tested; uncommitted, the chair commits):**
+- `src/components/nav/ArrowHeader.jsx` is mounted once by App.jsx for every width: the sticky
+  shaft band (z 50, height `--sf-header-h`, transparent, no shadow, filter, transform or clip)
+  holding the band paint, the home control ("SettlementForge home", outside the nav), the
+  `<nav aria-label="Primary">` of six painted words (full arrow only, NAV order, keyed by id,
+  `aria-current` when `view === id`, a PARCH_100 rule under the current word) and the account
+  plate; then, as its next sibling, the zero-height sticky hang layer (z 35, no pointer events,
+  aria-hidden, `sf-arrow-hang`). Its layout effect is the one writer of `--sf-header-h`,
+  `--sf-arrow-hang`, `--sf-arrow-clear`, `--sf-arrow-barb-clear` and `--sf-bottom-nav-h`
+  (names in `src/lib/chromeInsets.js`, re-exported by theme.js with their var() strings and
+  `aboveBottomNav`). App.jsx keeps `handleNavClick`, every tier comparison, the skip link and
+  `<main>`.
+- `src/components/nav/ArrowControl.jsx`: every control is a transparent Button primitive over a
+  painted rectangle (no raw buttons), with `--sf-focus: INK`, a PARCH_100 inner band while it has
+  keyboard focus (the two-tone ring part 1's pixel finding requires), a PARCH_100 hover wash, no
+  radius and no shadow. Phones and coarse pointers get 44 x 44 targets through `padTarget`.
+- `src/components/AccountMenu.jsx` is the plate: a parchment slip between the rivets reads
+  "Sign In" (the accessible name, unchanged) or the account name; the menu adds the credits row
+  ("..., N credits remaining", to pricing), Upgrade (free tier only, native-disabled with
+  AvailableAtLaunchPill while `purchasesOpen()` is false) and Admin panel (elevated only), and
+  completes the menu-button pattern (Enter / Space / ArrowDown / ArrowUp open and focus a row,
+  arrows / Home / End move over enabled rows, Escape and a choice return focus to the plate, Tab
+  closes, `aria-controls`, rows out of the Tab order).
+- The bottom bar shows below 1024 px: five seats on phones, six from 640 (MOBILE_NAV_PRIORITY
+  order). THE CHAIR'S ONE CHANGE, landed: `useChromeInsets(!narrow)` pins the footer only with the
+  full arrow; from 640 to 1023 the footer is `relative` on z 2 in the flow, its look unchanged,
+  both footer variables 0px, and `.parchment-bg` pads its bottom by `BOTTOM_NAV_H`. The hook no
+  longer measures or writes the header height (the part 1 two-writers deferral is closed).
+- Every consumer of the old header numbers moved onto the painted lengths: main's top padding
+  reserves `ARROW_HANG` on every view but the landing (whose hero now starts under the
+  transparent header), WizardOutputToolbar pins at `HEADER_H` (and turns `visibility: hidden`
+  after its mobile slide), GenerateWizard's scroll padding, the Realm shell and RealmMobileGate,
+  the dossier rail, the Entity Inspector, the Gallery sidebar, `ANCHOR_OFFSET`
+  (`calc(ARROW_CLEAR + 24px)`), the checkout toast and CampaignSyncBanner (below the band), and
+  every bottom-anchored layer's desktop branch (`aboveBottomNav`, so none lands on the 640 to
+  1023 bar; phones unchanged). `src/index.css`'s route floor reads `--sf-header-h`.
+- RETIRED in this change: NavRibbon, FletchBand, ShaftWrap, ShaftNock, NavDivider, Lockup,
+  GildedWordmark, WaxSeal, SealImpression, the war-arrow token block and FLETCH derivations in
+  theme.js, CHROME.headerMobile / headerDesktop / scrollPadDesktop / mapShellOffset, the
+  `.sf-shaft-wrap` CSS fallback, and the tests navFletching, navDividers, brandLockup,
+  compositedBarAA and textureBudget (their surviving pins moved into
+  `tests/components/arrowHeader.test.jsx`: no filter or transform on the header chain, no
+  overflow clip on the controls' or the menu's chain, the a11y.css ring width equals the
+  header's inset).
+- Registers moved in the same change: raw-button budget 42 to 39 and the NavRibbon row out;
+  App.jsx's size-baseline row deleted (650 to 562 effective lines) with the proseCorpusBytes
+  anchor, sweep area 14 and its manifest label retargeted onto `src/domain/explanation.js`;
+  sweep area 28b and its guard row out, area 98 re-anchored, areas 100 to 104 added (a nav edge
+  on a binding, a cut on a word, a hang layer with pointer events, a ring falling back to the
+  bronze, a retired height re-consumed), manifest rows for compositedBarAA, brandLockup and
+  textureBudget out, a mutation row for `tests/lint/arrowHeaderRetirement.test.js` and four
+  `meta:` rows in; negativeAssertionAnchor rows for the four deleted files and navFlowArrows out,
+  organicLogo 4 to 2; `arrowOverhang: 35` in the z-layer contract; HZ-GROUNDMOVE records the
+  fourth ground move (instances 3 to 4, the asset test joins its enforcers) and HZ-SIZECEILING
+  the App.jsx row; rawColorLiteral 1329 to 1326 (FletchBand's three); contrast.test.js loses
+  its five CSS-arrow describes and gains the slip and ring riders; organicLogo's inliner set is
+  HouseDevice alone with LegalRibbonRow as its negative control; the bottom-anchored walker
+  gains the bar-lift law; the deep-craft kill-list counts measured unchanged (84, 59, 163, 160).
+- Bytes (fresh build of the final tree, measured with the budget tests' own walker): first-paint
+  raw 1,033,094 of 1,048,000 (headroom 14,906, was 52 at d710f0a98), gzip 328,052 of 337,000
+  (8,948, was 3,870), Brotli 275,409 of 283,000 (7,591, was 3,486), render-blocking CSS 19,576 of
+  19,800 (224, was 5). No budget raised.
+
+**Part 2 judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: THE SEAM IS AN OVERLAP, NOT A BUTT JOIN. The plan joined the band and hang clips on
+  one CSS length. Measured (the seam metric compares the app against one unclipped image of the
+  strip): a light one-device-pixel hairline across the whole arrow in Chromium at DPR 1.5 (row
+  difference 85 against 3 elsewhere) and fainter at 1.25. Snapping the band to device pixels
+  was built and measured and did not cure it (layout rounds to 1/64 px first), so it was removed.
+  The layers now overlap on strip rows 55 to 62, which are opaque from the nock to the socket
+  (pinned on the pixels); the hairline is gone (85 to 4.8, no visible line at 4x in either
+  engine). Price: during the generation reveal (z 45) the shaft's rows 63 to 67, its
+  anti-aliased lower edge (about 3 CSS px at s 0.6), hide with the feather.
+- JUDGMENT: AccountMenu IS the plate control. The chip's only consumer was App, and its
+  SHAFT_SAGE / SHAFT_STEEL tones had no honest ground on brass, so the chip path retired rather
+  than living beside a `placement` prop. Its name is "Account menu, <name>" ("Account menu" when
+  the visible name is "Account"), with the unread suffix.
+- JUDGMENT: the two-tone ring is drawn by the control itself (INK `--sf-focus` plus a PARCH_100
+  inner band while `:focus-visible`), costing JS bytes, not stylesheet bytes; the active-page
+  rule is PARCH_100 on row 52 (part 1's measured finding over the plan's INK).
+- JUDGMENT: the hang layer's print rule is one of the injected chrome rules
+  (`@media print{.sf-arrow-hang{display:none}}` in lib/chromeInsets.js), not index.css: the
+  footer's pins forbid a print rule in the render-blocking sheet. The route floor's
+  `--sf-header-h` is the one chrome variable index.css reads (the pin now allows exactly its two
+  floor declarations).
+- JUDGMENT: the retirement scan lives at `tests/lint/arrowHeaderRetirement.test.js` (a source
+  scan belongs with the enforcers and so enumerates, with its own sweep plant), and the plan's
+  plants for the header and asset tests are claimed by `meta:` rows (those files do not
+  enumerate by name).
+- JUDGMENT: unkeyed docked Surveyor panels (AiAnalystPanel, InterviewPanel) read useIsMobile so
+  their desktop branch clears the bar and their phone offsets stay exactly as they were.
+- JUDGMENT: GenerateWizard's desktop scroll padding is `HEADER_H + 64 + 22 px` (the old 124 less
+  its 38 px bar and 64 px toolbar); the landing letterbox is `100vh - FOOTER_INSET - BOTTOM_NAV_H`
+  because the hero now starts at the top of the viewport; the checkout toast and the campaign
+  sync banner sit `SP.sm` below the band.
+- JUDGMENT: the z-layer note (the header shares the value 50 with `popover` deliberately) is its
+  own `_arrowHeaderLayers` key, so the contract's `_doc` is untouched.
+- JUDGMENT: `--sf-bottom-nav-h` publishes the bar as rendered, 45 px (a 44 px seat and its 1 px
+  rule) plus the bottom safe-area inset, not the plan's 57: the Chromium e2e run measured the bar
+  at 45 px at 390 and 800 px and the landing hero ended 12 px short of it. CHROME.bottomNav (57)
+  is the older phone token, 12 px generous, and the phone surfaces that read it (RealmMobileGate
+  and the fab lifts) are left as they were (recorded, not re-tuned here).
+
+**Part 2 findings for the owner (measured, not fixed):**
+- ⚠ THE FILLER TILE HAS A BRIGHT BAND. Its column-mean luma peaks at 134 around column 140
+  against 111 to 121 elsewhere, so every repeat of the tile shows a lighter vertical stripe.
+  It is plain at the eleven single-share slots up to 2597 px but visible in the double-share slot
+  before the blank plate on wide screens (two repeats at 2560). The kit's filler ships
+  byte-exact per the chair's ruling; a re-cut or a longer seamless filler from the painting is a
+  kit decision. Seam metric, joins: the worst step inside a slot is 1 to 2.4 times the plain
+  wood's 95th-percentile step, the plate slot the worst in every engine and ratio (receipts in
+  the scratchpad `arrow-part2/seam-metric3.txt`, screenshots in `arrow-part2/shots/`).
+- The strict "no join above the plain-wood p95" bar the plan set fails by that margin at most
+  joins, and the band/hang row difference at fractional ratios stays a little above the other
+  rows' p95 (Chromium 1.25 and 1.5: 4.3 and 4.8 against 2.9 and 3.0; WebKit 1.25: 8.8 against
+  8.1). Neither shows as a line in 4x crops. Owner sign-off on the screenshots is owed.
+
+**Part 2 deliberately deferred (documented, not bugs to re-find):**
+- WebKit scroll smoothness with the masked segments under sticky layers at 1920 and 2560 was
+  not measured (the plan's WebKit compositing risk); the fallback remains baking feathered crops.
+- Pre-existing and unchanged: on phones the docked Surveyor panels (z 60) sit partly under the
+  bottom bar (z 100); the account menu's z 1200 is effectively 50 inside the header's stacking
+  context; SessionEvictedBanner covers the band with the feather hanging below it.
+- Owner questions carried from the plan: whether /about/guide should light About (it lights
+  nothing, parity), whether the nav regions should become links, whether S_MAX should grow,
+  and WCAG 1.4.5 (the painted words are images of text by the owner's design; the names are
+  real text).
+- `THIRD-PARTY-NOTICES.md` still does not name the OpenAI-generated art (part 1's deferral).
+- The lighting census walker reds on this change's test-file count; its governed refreeze is
+  its own commit after the code commit.
+
+**Part 3, the review's fixes and the feather order (2026-09-17; uncommitted, the chair commits):**
+
+**The owner's new order (2026-09-17):** "once we start scrolling, the feather in the arrow
+turns completely transparent, only to reappear fully if they scroll to the very top."
+
+**The chair's rulings for this fix (vetoable; say "veto" on the row to flip it):**
+- A. THE FILLER, RE-CUT BY THE CHAIR from the painting's own pixels: `arrow-filler.webp` is the
+  kit's `arrow-filler-v3.q90.webp` (372x70, 6,366 B, kit sha256 `fb8659db...`; master
+  `arrow-filler-v3.png`) plus the committed injector's credit, 8,246 B (sha256 `43ddc3bf...`),
+  pixels identical to the kit's (decoded and compared). It joins the eleven plain-wood runs in
+  painting order and then in a different order, mirrored, leaves out the bright knot beside
+  binding 7, matches each row's lighting and flattens the column brightness (column luma 110.9
+  to 116.6, measured). FILLER_W 183 to 372 everywhere it is read (the tile size, the per-slot
+  phases, the tiled zone); the provenance row's `mapped_by` describes the re-cut and its
+  `restored` date is 2026-09-17, the day the credit was written.
+- B. TONE PER SLOT: `SLOT_TONE` in `arrowGeometry.js` holds the chair's table (558 1.047, 657
+  1.027, 713 1.044, 825 1.014, 881 1.035, 982 1.019, 1234 0.994, 1350 0.955, 1413 0.981, 1516
+  0.923, 1596 0.802). Each slot's filler takes `filter: brightness(k)`; the compact slot takes
+  its left cut's tone (1.047) at its left end and its right cut's (0.802) at its right end: an
+  opaque copy of the tile at the right tone fades in across the slot over the tile at the left
+  tone, so nothing fades over the page. `tests/build/arrowHeaderAssets.test.js` re-measures the
+  table on the shipped strip and filler to within 0.02.
+- C. THE PLATE SLIP: a signed-in name is shown as written (no capitals, no letter-spacing), its
+  type stepped down half a pixel at a time to SLIP_FLOOR before any ellipsis, with the full name
+  in a title and in the plate's accessible name. "SIGN IN" is unchanged.
+- D. HOVER: a soft radial glow, `radial-gradient(closest-side, color-mix(in srgb, PARCH_100 34%,
+  transparent), transparent)`, on the hovered word, the logo plate or the blank plate, drawn only
+  where `matchMedia('(hover: hover)')` matches when the pointer enters (a tap on a phone lights
+  nothing). The Button primitive's flat hover fill is switched off on the arrow's controls
+  (`--sf-btn-hover-bg: transparent`, because that variable only takes a colour). Zero stylesheet
+  bytes.
+- E. Recorded, not changed: the band jumps from 40.8 to 32.6 px when a window is resized across
+  1024, and a classic scrollbar's width dips the full arrow's scale under the word floor (a 1024
+  px window less a 15 to 17 px scrollbar lays s at about 0.472).
+- F. THE FEATHER HIDES ON SCROLL, superseding the plan's constant feather: fully opaque only while
+  the page is at its very top (scrollY under 1 px), fully transparent (opacity 0, still no pointer
+  events and aria-hidden) anywhere else, a 120 ms fade that a11y.css's reduced-motion rule
+  collapses to 1 ms, the right state on the first render of a page that loads already scrolled,
+  one passive scroll listener, and main's content reserve unchanged. The arrowhead's lower barb is
+  NOT the feather and stays (the chair's reading).
+
+**How F is built:** the hang layer now holds two parts. `ArrowPaint part="hang"` draws rows 55
+down as before but through an L-shaped mask: rows above 68 at every column, and every row from
+strip column 480 rightward (the barb, the cord ends, the shaft's own lower edge). `ArrowPaint
+part="feather"` draws exactly the rest, columns [0, 480) from row 60 down, and ArrowHeader sets
+its opacity from `featherShown(window.scrollY)` read through `useSyncExternalStore`, so the header
+re-renders only when that answer flips. The asset test pins the geometry on the pixels: below row
+73 nothing left of the barb hangs outside columns [0, 480) (the feather itself is more than 20,000
+pixels there), nothing above alpha 12 crosses column 480 below the band, and the overlap rows are
+opaque except the nock's end [0, 80) and the feather's tip [455, 480).
+
+**The review's findings, dispositioned:**
+1. The pale wood before the blank plate: FIXED by A and B. The review's seam metric on the
+   compendium page, zone mean luma step across a crossfade (before, the review's run of this tree,
+   then after; the after run's plain-wood p95 in brackets): 2560 slot 10 fade-out 26.18 to 0.95
+   and fade-in 26.28 to 2.43 [2.67]; 1920 slot 9 fade-in 20.93 to 1.89, slot 10 fade-out 26.75 to
+   0.38 and fade-in 24.74 to 2.85 [2.85]; 1440 at DPR 1 slot 10 26.75 and 20.09 to 0.64 and 0.51
+   [3.34]; 1440 at DPR 2 29.76 and 19.45 to 1.73 and 0.09 [5.32]; the compact slot at 1023
+   fade-in 26.2 to 3.7 [2.68] and at 800 25.69 to 4.26 [3.94]. Filler minus the painted
+   neighbours at slot 10: +21.29 to -0.22 at 1920 and +21.62 to -0.37 at 2560; the compact slot
+   +9.49 to +0.87 at 1023. Every filler box edge still matches the unclipped reference (0). The
+   after run's plain-wood p95s are lower because the re-cut tile has no knot, so "over" counts do
+   not compare across the two runs; the step values do.
+2. The knot repeating every 109.8 px: FIXED by A. The re-cut has no knot, and one tile is 223.2
+   CSS px at s 0.6, so no single-share slot repeats it up to 3958.2 px; at 2560 the double share
+   is 213.4 px, under one tile.
+3. The slip cutting names: FIXED by C. Measured in the preview build: "Wanderer" at 390 px 8.5 px
+   and whole, at 1024 px 11 px and whole, at 1440 px 12 px and whole; "Aldric Thornby" at 390 px 8
+   px with an ellipsis ("Aldric T...", 41 of 56 px shown, the full name in the title and the
+   plate's name), at 1024 px 8.5 px and whole, at 1440 px 11 px and whole (Chromium; WebKit shows
+   the same at 390 and 1440, and at 1024 see the WebKit finding below).
+4. No primary navigation landmark from 640 to 1023 px, and the destinations at the end of the Tab
+   order: FIXED. Below 1024 px the bottom bar is `<nav aria-label="Primary">` (the header's nav
+   shows only with the full arrow, so there is exactly one Primary nav at every width, pinned at
+   390, 800 and 1440) and it sits in the DOM right after the header and its hang layer, so its
+   seats come before main in the Tab order. It is fixed, so nothing moves on screen.
+5. and 9. Keyboard focus under the bar from 640 to 1023 px (two reviewers): FIXED.
+   `html{scroll-padding-bottom:calc(var(--sf-footer-inset, 0px) + var(--sf-bottom-nav-h, 0px))}`:
+   the band is 0px wherever the bar shows and the bar 0px wherever the band does, so 1024 px and
+   up is unchanged and phones gain the fix too. A new e2e arm at 800 px: a nearest-aligned scroll
+   lands above the bar, with the root padding at 45px.
+6. The plate menu off the page at 320 px: FIXED. `menuShift` moves the menu right only as far as
+   keeps MENU_W (292 px, the review's measured 284 plus slack) 8 px inside the page's left edge,
+   never past its right edge less 8, and the menu's max-width is the page width less 16. Pinned in
+   jsdom (320 shifts; 390 and 1440 stay right-aligned) and in a WebKit arm at 320 px (the menu and
+   every row start on the page).
+7. The current-page rule lost under forced colours: FIXED with `forcedColorAdjust: 'none'` on the
+   rule, which keeps PARCH_100 (8.3:1 on those rows of the painting, which forced colours leave
+   alone); pinned on React's own serialisation of the header.
+8. The locked Upgrade row out of reach: FIXED. It is aria-disabled, not native disabled: the arrow
+   keys land on it and it reads its pill, it keeps the locked look (opacity 0.62, not-allowed), and
+   a click or Enter on it does nothing and leaves the menu open. The launch-lock test's
+   `expectLocked` accepts aria-disabled for a menu row only; every other locked control is still
+   native disabled.
+10. The first frame laid across the width before the scrollbar: FIXED. ArrowHeader re-reads the
+   width in a layout effect and, if it moved, re-renders in the same task, before any paint.
+   Pinned twice: in jsdom (a root rendered outside act; a microtask queued from the commit sees the
+   band at 1903px, not 1920px) and in Chromium launched without `--hide-scrollbars` (presence
+   controls: no scrollbar before the app, a classic scrollbar after; the first committed frame's
+   paint width equals the page's clientWidth and nothing scrolls sideways).
+
+**Part 3 judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: the feather's layer ends at strip column 480 and starts below row 68 for what hides.
+  Scrolled, the shaft over the feather's columns ends at row 68: simulated cuts at rows 70, 72 and
+  74 left a grey sliver of feather under the shaft, and row 68 did not.
+- JUDGMENT: the feather layer overlaps the always-drawn hang by eight rows (from row 60), fading in
+  across the first four and whole for the last four. A fade across all eight left a light line of
+  page ground at the hang's mask edge in Chromium at 390 px and a device pixel ratio of 3 (that
+  device row's mean luma 98 against 61 without the split), because the mask edge lands up to a
+  device pixel early. With the fade ending four rows early, the split draws the same rows as the
+  unsplit hang to within a row mean of 2.05 over the feather's columns (rows 52 to 92) in Chromium
+  and WebKit at DPR 1, 1.25, 1.5, 2 and 3. Price, at the top of the page only: the overlap's
+  translucent pixels (the nock's end and the feather's tip) draw twice. Against the pre-fix build
+  at 1440 px, 39 of 1,440 pixels in rows 60 to 68 move by more than 8 levels (at most 26); at 390
+  px, 140 of 660 (at most 23). Side by side at 6x the two builds look the same.
+- JUDGMENT: `featherShown(scrollY)` is `!(scrollY >= 1)`: 0.5 px and the overscroll bounce count as
+  the top, 1 px does not, and a value that is not a position counts as the top.
+- JUDGMENT: SLIP_FLOOR is the house 8 px step (FS.nano). Measured in Nunito Bold, an 8-letter name
+  needs 8.5 px on the 390 px slip (40.8 px of text room) and 7.97 px at 360 px, so a 9 px floor cut
+  it at 390 (the WebKit arm went red at 9 px before the floor moved). At a device pixel ratio of 3
+  the 8 px name reads cleanly.
+- JUDGMENT: the full arrow's tiled zone follows the filler width, as the plan's rule reads ("no
+  slot ever grows longer than one filler tile"): S_MAX now holds up to 3958.2 px (it was 2597.4),
+  so a 3440 px ultrawide keeps s 0.6 (band 40.8 px) where it drew s 0.795.
+- JUDGMENT: the asset test re-measures SLOT_TONE in BT.601 luma, where the chair's table
+  reproduces to within 0.014 on the shipped pixels (in Rec. 709 luma, within 0.024, over the 0.02
+  tolerance). The table itself is the chair's.
+- JUDGMENT: the filler's wrap-seam pin compares the wrap step with the roughest step of the tile's
+  own grain instead of its 95th percentile. The shipped re-cut wraps at 4.34 (grain p95 3.61, p99
+  4.23, max 4.77); the kit's PNG master wraps at 3.30 (its p95 3.24), so the q90 encode roughened
+  that one column. A new CONTROL shows every mis-wrap sampled (columns 20 to 340) measures 4.94 or
+  rougher, so the pin still convicts a wrong wrap.
+- JUDGMENT: the filler's byte ceiling in the asset test moved with the file, by ruling A (5,200 for
+  the 5,024 B first cut; now exactly the re-cut's 8,246 B, no slack). No other ceiling, budget,
+  cap or baseline moved.
+- JUDGMENT: the bottom bar's new DOM place (right after the header) holds for phones too, where it
+  sat after the footer: the destinations come before the page for keyboard and screen-reader users
+  at every width under 1024 px, as the Primary nav does in the header from 1024 up.
+- JUDGMENT: the glow appears and goes with the pointer (no fade), inside a box that is the word's
+  lettering widened by 10 strip columns (inside its region and clear of every cut), the logo plate
+  (columns 128 to 505, between the nock's binding and binding 1, re-measured on the pixels) or the
+  blank plate, over band rows 4 to 64.
+
+**Part 3 findings for the owner or the kit (measured, not fixed):**
+- The plate slot's wood now matches in brightness but reads a little grey: at 2560 px the filler's
+  mean chroma is 73 against 93 and 89 in the painted wood on either side (a brightness filter dims
+  colour with light, while the painting's darker wood beside the plate stays warm). A per-slot
+  `saturate()` measured the way the tone is, or a warmer cut, would close it; that is an art call
+  past ruling B.
+- WebKit's `max-width` media query leaves a classic scrollbar out: Playwright's WebKit at a 1024 px
+  window (clientWidth 1018) lays the COMPACT arrow and the bar where Chromium lays the full arrow
+  (CONFIRMED in Playwright's WebKit; PLAUSIBLE for Safari with always-shown scrollbars, at windows
+  from 1024 to about 1038 px). It belongs with ruling E's switch questions.
+- The compact slot's right-hand fade-in still steps slightly above plain wood (3.7 against 2.68 at
+  1023 px, 4.26 against 3.94 at 800 px): the painting darkens from about 96 to 87 across the wood
+  run the tail crop starts in, and one tone meets it there.
+
+**Bytes (a fresh build of the final tree, measured with the budget tests' own walker):**
+first-paint raw 1,036,070 of 1,048,000 (headroom 11,930; part 2 measured 1,033,094), gzip
+329,151 of 337,000 (7,849), Brotli 276,417 of 283,000 (6,583), render-blocking CSS 19,576 of
+19,800 (224, unchanged). No budget raised.
+
+**Negative controls executed (the source broken, the named arm red, the source restored byte for
+byte):** in jsdom, the first-frame re-read removed, the feather forced opaque, SLOT_TONE at 1596
+set to 0.9, the brightness filter dropped, Upgrade back to native disabled, the glow lit on every
+mouseenter, the menu never shifted, the slip never stepped down, the bar back to a plain div and
+the hang's mask removed; in the browser, the feather forced opaque (Chromium), the first-frame
+re-read removed (the classic-scrollbar arm, red on "the first frame is laid across the page
+width"), the old scroll-padding rule (the 800 px arm, red on "the control lands above the bar")
+and the menu never shifted (the WebKit 320 px arm, red on "the menu starts on the page").
+
+**Part 3 deliberately deferred (documented, not bugs to re-find):**
+- The lighting census walker is red (test files 2,584 to 2,585 from parts 1 and 2, and this part's
+  new titles); its governed refreeze is its own commit after the code commit.
+- The plate slot's residual grey and WebKit's scrollbar-blind switch (above) wait on the owner or
+  the kit.
+- `THIRD-PARTY-NOTICES.md` still does not name the OpenAI-generated art (part 1's deferral).
+
+## COMPENDIUM: MAP LENSES AND INTERIORS REMOVED (owner order 2026-09-16)
+
+**The order (owner):** "completely remove the map lenses and interior pages from the
+compendium".
+
+**The chair's reading (vetoable).** "Map lenses" is the Compendium's Map Lenses tab (tab id
+`lenses`, `LensesHub`), including the District bands section that lived inside it (wealth,
+safety and categories), its Overview card, its A to Z and global-search rows, and the five
+per-entry pages `/compendium/lens-parchment`, `lens-watercolor`, `lens-darkfantasy`,
+`lens-vtt` and `lens-accessible` with their prerendered documents and sitemap URLs.
+"Interior pages" is the Facets tab (tab id `facets`, `FacetsHub`: institution natures,
+interior kinds, room kinds, furnishing kinds) and its Overview card; it had no A to Z,
+search or per-entry rows. Both described features the site does not ship: the
+settlement-map lens plates were removed earlier, and `InteriorView` has no product
+importer. The order is about the COMPENDIUM, so the map rendering, the interior engine
+(`src/components/interior`, `src/domain/interior`), the entitlement ladder's deferred
+`interiors` row and the pricing copy for building interiors are untouched.
+
+**What was removed (uncommitted at hand-off; the chair commits):**
+- `src/components/compendium/CatalogHubs.jsx`: `LensesHub` and `FacetsHub` deleted (and the
+  now-dead `Card` import); the file carries `CalamityHub` alone and keeps its name, so every
+  register that names the path stays valid.
+- `src/components/CompendiumPanel.jsx`: the two tabs, their `ANCHOR_TO_TAB` rows, their
+  `TAB_META` titles and descriptions, their render cases and `WIDE_TABS` entries; the
+  Overview description no longer lists "map lenses, facets".
+- `src/components/compendium/CompendiumDashboard.jsx`: the two Overview cards and the A to Z
+  Lens rows.
+- `src/domain/compendium/searchIndex.js`: `lenses` and `facets` left `COMPENDIUM_TABS`, and
+  the five `Map Lens` index entries (`LENS_ENTRIES`) are gone, which is what removes the
+  per-entry routes from the sitemap and the prerender.
+- `scripts/generate-compendium-data.mjs`: the `lenses`, `districts` and `facets` blocks, their
+  authored copy (`LENS_READINGS`, `ILLUSTRATED_LENS_NOTE`, `DISTRICT_*`), the lens build guard
+  and the now-dead `townMapStyles` and `interiorTemplates` imports. The artifact
+  `compendiumData.generated.js` was regenerated with `npm run gen:compendium-data`, never
+  edited by hand.
+- `scripts/generate-sitemap.mjs`: `lenses` and `facets` left its section list;
+  `public/sitemap.xml` was regenerated with `node scripts/generate-sitemap.mjs`.
+
+**Measured counts (base `d710f0a98` against the change, both from `npm run build`):**
+sitemap 326 to 319 URLs (two section URLs and five entry URLs); prerender 311 to 306
+documents (13 views + 15 gallery hubs + 283 compendium entries, then 278 entries); the
+Compendium index 283 to 278 entries. First paint: raw entry closure 1,047,948 B both times
+(budget 1,048,000); gzip 333,130 to 333,139 B (budget 337,000); Brotli 279,514 to 279,629 B
+(budget 283,000); render-blocking CSS 19,795 B both times (budget 19,800). At the build
+log's 0.01 kB precision only two built chunks changed size: `CompendiumPanel` 156.09 to
+151.92 kB and `compendiumData.generated` 89.58 to 87.16 kB. The small gzip and Brotli movement with identical raw bytes is attributed
+to the renamed lazy-chunk hashes in the entry's preload map (not proven byte by byte).
+
+**Old links.** `/compendium/lens-*` still matches the router's per-entry pattern
+(`view: 'compendium'`, `params.entry`); with no prerendered document the request reaches
+the SPA shell, the id no longer resolves to an index entry, and `CompendiumPanel` opens on
+the Overview. The first cut stopped there, which left the address bar, the canonical and
+`og:url` on the dead path (`applyDocumentHead` builds them from `params.entry` and skips the
+title, og and twitter tags for an entry route), so five URLs that were in the production
+sitemap would have served the Overview under a self-canonical dead address. Review caught
+it; the cure, per the chair's ruling 2 below, is that `CompendiumPanel` REPLACES a removed
+id's address with `/compendium` (`navigate('compendium', { replace: true, scroll: false })`,
+for the five ids in its `REMOVED_ENTRY_IDS`, standalone only). The route then resolves with
+no entry, and App's head effect applies the `/compendium` title, description, canonical,
+`og:url`, og and twitter tags. A live entry id keeps its address. Pinned by
+`tests/ui/compendiumHubs.test.jsx` ("an old /compendium/lens-* link lands on the Overview at
+/compendium, and the head follows the replaced address"; two mutants executed: with the
+replace disabled it reds on `expected '/compendium/lens-parchment' to be '/compendium'`, and
+with the id check removed the live-entry control reds on `expected '/compendium' to be
+'/compendium/tier-thorp'`) and by the dist walk in `tests/build/prerenderRoutes.test.js`. A
+stale `?tab=lenses`, `?tab=facets`, `#lenses` or `#facets` link also opens on the Overview,
+since neither key is in `TAB_META` or `ANCHOR_TO_TAB` any more (pinned in the same test).
+- JUDGMENT (vetoable), where the alias lives. The chair ruled for the router's in-app alias
+  (`resolveLocation` returning `legacy: true`, which App's canonical-URL upgrade rewrites).
+  That was built and MEASURED first: the most compact `legacy: true` form tried (the
+  per-entry builder returning no params for a `lens-` id, the loop returning
+  `{ view, params: {}, legacy: true }`) built to a first-paint static closure of 1,048,020 B
+  against the 1,048,000 B budget (`tests/build/vendorPdfLazy.test.js`, 1 failed | 53
+  passed). `lib/routes.js` is eager and the closure without it measures 1,047,948 B (52 B of
+  headroom); in a standalone esbuild minify of `routes.js` that form adds 70 B and the
+  explicit five-id set the review proposed adds 181 B, so no router alias fits without
+  raising the budget, which is refused. The replace therefore runs in the lazy Compendium chunk, through the
+  same `navigate(..., { replace: true })` primitive App's demoted-destination redirect uses,
+  at zero first-paint bytes. The visible difference from a router alias: the dead address
+  is replaced once the Compendium chunk has loaded rather than on the first route
+  resolution. No `vercel.json` change.
+- Observed, not changed (outside the order): any OTHER unknown id (`/compendium/<typo>`)
+  still opens the Overview under its own dead address and canonical. Generalizing the
+  replace to every id missing from the index would cure that class; it was kept to the five
+  removed ids as the least invasive reading.
+
+**Pins added or updated:** `tests/ui/compendiumHubs.test.jsx` (the tab strip, Overview cards
+and A to Z destinations carry neither page; the old-link replace and head),
+`tests/ui/compendiumMapCalamity.test.jsx` (the lens and district arms left; the calamity arm
+stays), `tests/docs/compendiumDataFreshness.test.js` (the three blocks are absent),
+`tests/domain/compendiumSearch.test.js` (no tab, entry, category or id routes to them),
+`tests/build/sitemap.test.js` (12 sections, no removed URL) and
+`tests/build/prerenderRoutes.test.js` (no removed document in dist). Every new negative goes
+through `tests/helpers/anchoredNegatives.js`. Registers moved by the removal, each lowered to
+its own measured figure: `tests/lint/rawColorLiteral.test.js` budget 1,329 to 1,320 (nine
+Card accents left with the two hubs); the settlement-map allowlist struck
+`src/domain/compendium/` (its only hit was the artifact header naming `townMapStyles`); the
+prose-numerics row for the calamity `{b.scale}` re-addressed from line 95 to 43. Two stale
+reader comments that still named "the compendium generator" as a `townMapStyles` reader were
+corrected (the header of `src/design/townMapStyles.js` and the design-registry row's `why` in
+`tests/lint/settlementMapSurfaceAllowlist.walker.test.js`); no map code moved.
+
+**The chair's rulings on the review (2026-09-17, vetoable):**
+1. The writer-reach DARK identities are banked through the walker's own governed door, not
+   re-homed: the owner ordered the page removed.
+2. Old `/compendium/lens-*` links land on `/compendium` with the address bar, canonical and
+   og tags following, pinned by a test, with no `vercel.json` change (see Old links above for
+   where the replace lives and why).
+3. The observed-shape drift from the regenerated artifact is re-frozen through its own door if
+   that door runs on an uncommitted tree; otherwise it stays red with the exact command.
+4. Four whitespace-only lines restored and the stale `townMapStyles` reader comment fixed.
+
+**Writer-reach (ruling 1, DONE).** Removing the District bands turned `wealth on
+_timePressure` and `wealth on factions` DARK (LIT-NAME 4,647 to 4,645; DARK 1,325 to 1,327;
+reviewable 525 to 527). Their only counting-surface read was `CD.districts.wealth` in the
+removed bands (`CatalogHubs.jsx`), a key-name collision graded N, never a display of either
+fact: `git grep -nw wealth` over `src/components`, `src/pdf`, `src/domain/display`,
+`src/utils` and `src/foundry` finds only a comment and prose. The register has no row reason
+that fits a deliberate removal (`dark-by-construction` needs a dormancy door,
+`engine-internal` claims the key is not a customer fact, and `pending-surface` claims an owed
+surface and its ceiling is shrink-only), so the lawful path is the one the walker's own
+failure names ("bank it through the governed door"): `node scripts/check-writer-reach.mjs
+--rebank --charter=...`, used by ruling for two identities exactly as the §900 desk landing
+did for `forcedByConfig`. It printed `writer-reach REBANK — cohort 1321 → 1323; 0 stale folded
+out; 0 registered rows now lit.` and appended a `rebankHistory` row whose charter names the
+owner's 2026-09-16 order and this ruling. No ceiling was loosened, no arm deleted, no
+register row added. `tests/lint/writerReach.walker.test.js`: 56 passed (56).
+- ⚠ For the landing: the rebank stamped `frozenAtSha` with this worktree's HEAD
+  (`d710f0a98`). If the landing places that sha inside a consist, re-stamp after the commit
+  with the shrink-only `node scripts/check-writer-reach.mjs --write` (the cohort holds at
+  1,323), as the 2026-09-15 consist-tip re-stamp did.
+- Owner question, not a register act: faction wealth (and its time-pressure mirror) is
+  generated on every world and shown on no surface.
+
+**Known reds, left for the chair (each needs a committed tree):**
+- `tests/lint/sovereigntyLightingContract.walker.test.js`: the live test-title count moved
+  24,445 to 24,446. Refreeze owed after commit.
+- `tests/lint/observedShapeReaders.walker.test.js` "THE LIVE ESTATE INSTANCE" and the
+  standalone gate `node scripts/check-observed-shape-readers.mjs` (exit 1: "observed-shape
+  execution INPUT changed since the last re-freeze (1 path(s):
+  src/domain/compendium/generated/compendiumData.generated.js)"). Its shrink-only door
+  `node scripts/check-observed-shape-readers.mjs --write` REFUSES this uncommitted tree
+  (exit 1, "observed-shape current scanTree is not the exact committed HEAD input tree"; the
+  baseline's md5 was unchanged after the refusal), so per ruling 3 it must run after the
+  commit, then `tests/lint` re-runs whole.
+
+**Deliberately deferred, documented, not bugs to re-find:**
+- `scripts/generate-sitemap.mjs` still lists a `deities` section (`/compendium?tab=deities`)
+  although the panel has had no Deities tab since the 2026-07-21 ruling; that URL lands on
+  the Overview. Outside this order.
+- The "289 named entries" figure in comments in `src/lib/routes.js`,
+  `src/lib/seoCompendium.js` and `scripts/prerender-routes.mjs` was already stale (283 at
+  base) and now reads against 278. Left for a prose pass, since the files are otherwise
+  untouched.
+- Remaining references outside the Compendium, kept by the order's scope: the entitlement
+  ladder's deferred `interiors` row (`src/config/entitlementLadder.js`), the pricing label
+  "Building interiors" (`src/copy/pricingPage.js`), the interior engine and viewer, the map
+  style registry `src/design/townMapStyles.js`, and the Command Palette's "Map lens" hint
+  (realm-map overlay toggles, not the Compendium).
 
 ---
 

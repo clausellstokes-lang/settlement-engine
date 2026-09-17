@@ -17,7 +17,7 @@
  */
 
 import { useState, useSyncExternalStore } from 'react';
-import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance } from '../theme.js';
+import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance, aboveBottomNav } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -78,7 +78,7 @@ export default function DevFlagPanel() {
     // the coordinated bottom-right prod stack (Feedback + scroll controls); mobile
     // lifts it clear of the bottom nav + home indicator via the shared token. Stays
     // DEV-gated (this whole component tree-shakes out of prod above).
-    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : 12, left: 12, zIndex: 10000,
+    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(12), left: 12, zIndex: 10000,
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: FS.sm, color: '#1c1409',
   };

@@ -12,9 +12,9 @@
  * owns its anon/free locked state, so the reachable-on-mobile pricing moment
  * behaves exactly as it does on desktop.
  *
- * Height is tokenized off the mobile chrome (slim top header + fixed bottom nav +
- * safe-area) rather than the desktop mapShellOffset, so the gate and dashboard
- * never render under the bottom nav.
+ * Height is tokenized off the phone chrome (the painted arrow's header and hang,
+ * ARROW_CLEAR, plus the fixed bottom nav and the safe area), so the gate and
+ * dashboard never render under the bottom nav.
  *
  * Pure presentational shell — every value is passed in by WorldMap, which holds
  * the campaign/auth/handler state. No store reads, no effects of its own.
@@ -32,7 +32,7 @@
  */
 import { Suspense, lazy, useState } from 'react';
 import {
-  BODY, CHROME, FS, SP, bottomClearance, sans,
+  ARROW_CLEAR, BODY, CHROME, FS, SP, bottomClearance, sans,
 } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
@@ -110,7 +110,7 @@ export default function RealmMobileGate({
       style={{
         display: 'flex', flexDirection: 'column', gap: SP.md,
         padding: SP.sm,
-        minHeight: `calc(100vh - ${CHROME.headerMobile + CHROME.bottomNav}px)`,
+        minHeight: `calc(100vh - ${ARROW_CLEAR} - ${CHROME.bottomNav}px)`,
         paddingBottom: bottomClearance(CHROME.bottomNav + SP.lg),
       }}
     >

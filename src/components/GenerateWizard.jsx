@@ -21,7 +21,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME, HEADER_H } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -285,8 +285,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     if (!dossierVisible || typeof document === 'undefined') return undefined;
     const root = document.documentElement;
     const prev = root.style.scrollPaddingTop;
-    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
-    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    // The header's painted band (HEADER_H) plus the pinned toolbar, and on desktop 22 px of
+    // air below it (the old 124 px pad less its 38 px bar and 64 px toolbar).
+    const pad = isMobile ? CHROME.toolbarHeight : CHROME.toolbarHeight + 22;
+    root.style.scrollPaddingTop = `calc(${HEADER_H} + ${pad}px)`;
     return () => { root.style.scrollPaddingTop = prev; };
   }, [dossierVisible, isMobile]);
 

@@ -24,7 +24,7 @@ import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, CHROME } from './theme.js';
+import { SP, CARD, BORDER, CHROME, FOOTER_INSET, ARROW_CLEAR, BOTTOM_NAV_H } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useEnsureSavedSettlementsLoaded } from '../hooks/useOwnerScopedSaves.js';
 import { useCampaignAutoResume } from '../hooks/useCampaignAutoResume.js';
@@ -779,12 +779,16 @@ export default function WorldMap({ onNavigate } = {}) {
   }
 
   // ── Render ─────────────────────────────────────────────────────────────
-  // Use viewport height minus header/padding so the map fills the screen.
-  // The parent <main> has padding and the header is ~52px on desktop.
+  // Use viewport height minus the chrome so the map fills the screen between the
+  // painted arrow (ARROW_CLEAR: the header band plus the feather's hang, which main
+  // reserves above every view), main's padding plus breathing room (66 px), the bottom
+  // bar where it shows (BOTTOM_NAV_H, 640 to 1023 px) and the PINNED FOOTER's floating
+  // links band (owner orders 2026-09-16), whose measured height is FOOTER_INSET; the
+  // rest of the footer shows only at the end of the page.
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
-      height: `calc(100vh - ${CHROME.mapShellOffset}px)`,   // header (~52px) + main padding (~48px) + breathing room
+      height: `calc(100vh - ${ARROW_CLEAR} - 66px - ${BOTTOM_NAV_H} - ${FOOTER_INSET})`,
       minHeight: CHROME.mapShellMin,
       // P12 EXCEPTION: the realm is a full-screen MAP tool, not a framed reading
       // document — the geographic canvas is the hero (P1) and must fill its width.

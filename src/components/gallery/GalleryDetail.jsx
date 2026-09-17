@@ -12,6 +12,8 @@ import { setSharedDossierMeta } from '../../lib/seoDossier.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
@@ -140,6 +142,10 @@ export default function GalleryDetail({
   // doesn't already own. A non-premium viewer still sees an "Import (premium)"
   // upgrade next-step (not a dead-end) that routes to pricing.
   const importEligible = dossier.importable && auth?.user && !ownedSave;
+  // Purchases stay closed until launch (lib/launchGate.js): the non-premium
+  // "Import (premium)" step toward pricing is disabled and wears the Available at
+  // launch pill. A premium viewer's Import is not a purchase and is unchanged.
+  const purchasesAreOpen = purchasesOpen();
 
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
@@ -239,10 +245,13 @@ export default function GalleryDetail({
                 <Button
                   variant="primary"
                   size="md"
+                  disabled={!purchasesAreOpen}
+                  style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
                   onClick={() => onNavigate?.('pricing')}
                   title="Importing a settlement into your library is a Cartographer feature"
                 >
                   Import (premium)
+                  {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                 </Button>
               ) : (
                 // No import path (signed out, or the dossier isn't importable):

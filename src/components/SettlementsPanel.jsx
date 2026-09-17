@@ -24,7 +24,7 @@ import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
 import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
-import { forkSeedFor } from '../data/sampleSettlements.js';
+import { forkConfigFor, forkSeedFor } from '../data/sampleSettlements.js';
 import {
   migrateConfig, findSaveById, saveCountBand, dayGapBand,
   canonPhaseOf, lastEditedMs, hasAiData,
@@ -118,10 +118,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
    * Fork a Tier 8.2 sample. "Generate" on a sample card now actually
    * produces the settlement (it used to only pre-fill the wizard and
    * navigate, which read as a no-op). The flow:
-   *   1. Load the sample's config into generator state with a
-   *      user-suffixed seed so two users forking the same sample get
-   *      mechanically-different towns.
-   *   2. Run the engine (generateSettlement(seed)) — this populates the
+   *   1. Load the sample's config, minus its seed, into generator state
+   *      (forkConfigFor: a seed is the generation argument, never a
+   *      config key).
+   *   2. Run the engine with a user-suffixed seed (generateSettlement(seed))
+   *      so two users forking the same sample get mechanically-different
+   *      towns; this populates the
    *      store's `settlement` so the Create view shows the result.
    *   3. If the user can save (signed-in, under cap), persist the fork
    *      to their library immediately — "generate AND save" in one tap.
@@ -134,9 +136,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if (!sample?.config || forkingId) return;
     setForkingId(sample.id);
     const seed = forkSeedFor(sample, authUser?.id);
+    // The seed is the generation argument, never a config key (forkConfigFor).
     const forkedConfig = {
-      ...migrateConfig(sample.config),
-      seed,
+      ...migrateConfig(forkConfigFor(sample)),
       _forkedFromSample: sample.id,
     };
     updateConfig(forkedConfig);

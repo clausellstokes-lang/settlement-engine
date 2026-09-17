@@ -1,28 +1,29 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/components/landingFooterMigration.test.jsx — THE PAGE ENDS ON THE
- * PAINTING (LD-3), and nothing legal falls off the edge doing it.
+ * tests/components/landingFooterMigration.test.jsx: ONE FOOTER ON EVERY ROUTE, THE
+ * LANDING INCLUDED, and nothing legal falls off the edge doing it.
  *
- * The owner's order: the landing stacked TWO footers — its own artwork band and
- * then the global app strip — so the global strip is suppressed and the artwork
- * is the end of the page. The danger the order creates is the whole reason this
- * file exists: the suppressed strip carried Terms, Privacy, Feedback & support
- * and Pricing. Dropping Terms or Privacy from the marketing front door is a
- * LEGAL defect, and dropping Pricing is its commercial twin — routes.js gives
- * /pricing no `nav:` block, so the footer is the landing's ONLY path to it.
- * LD-3 is therefore a MIGRATION, and these are its pins:
+ * HISTORY. LD-3 (owner, 2026-08-01) suppressed the global footer on the landing so
+ * the page ended on its artwork band, and MIGRATED the footer's row into that band
+ * (the band carried Terms, Privacy, Feedback & support and Pricing instead). The
+ * owner's order of 2026-09-16 reverses the exemption: "The footer is missing on the
+ * landing page ... The footer should be the same way on every page", pinned the way
+ * the header is. So the landing now renders the app's one global footer, and the
+ * band's own copy of the row is gone, because keeping it would stack exactly the
+ * "two footers" LD-3 removed.
  *
- *   1. the suppression is ROUTE-SCOPED, never a global deletion;
- *   2. every migrated destination is reachable FROM THE LANDING DOCUMENT;
- *   3. one row module serves both surfaces, so the copy cannot fork;
- *   4. the landing row reserves clearance above the FIXED mobile bottom nav —
- *      the clearance the suppressed footer's own padding used to provide.
+ * THE PINS:
+ *   1. every route renders the global <footer> with the row inside, the landing too;
+ *   2. every legal/commercial destination is reachable FROM THE LANDING DOCUMENT
+ *      (a Terms/Privacy absence is a legal defect; Pricing's is its commercial twin,
+ *      since routes.js gives /pricing no `nav:` block);
+ *   3. exactly ONE row on the landing, inside the footer and not inside the band;
+ *   4. one row module, one copy truth.
  *
- * Pin 4 is asserted as the STYLE CONTRACT, not as geometry: jsdom has no layout
- * engine, so a bounding-rect assertion here would be vacuous. LD-3's
- * rect-above-the-bar check belongs to the browser harness and is recorded as
- * deferred rather than faked.
+ * The pinned (sticky) geometry is not asserted here: jsdom has no layout engine.
+ * tests/components/pinnedFooter.test.jsx pins the style contract and
+ * e2e/pinned-footer.spec.js pins the geometry in a real browser.
  */
 
 import React from 'react';
@@ -31,7 +32,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import { t } from '../../src/copy/footer.js';
 import LegalRibbonRow from '../../src/components/footer/LegalRibbonRow.jsx';
-import { CHROME } from '../../src/components/theme.js';
+import { landing } from '../../src/copy/landing.js';
 
 const H = vi.hoisted(() => ({
   route: { view: 'compendium', params: {}, legacy: false, notFound: false },
@@ -154,46 +155,53 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('the suppression is route-scoped — a landing exemption, not a deletion', () => {
-  test('a non-landing route still renders the global footer strip, with the row inside', () => {
+describe('one footer on every route (owner order 2026-09-16 supersedes the LD-3 landing exemption)', () => {
+  test('a non-landing route renders the global footer strip, with the row inside', () => {
     const { container } = render(<App />);
     const footer = container.querySelector('footer');
-    expect(footer, 'every non-landing view keeps the global footer').not.toBeNull();
+    expect(footer, 'every view keeps the global footer').not.toBeNull();
     expect(footer.querySelector('[data-testid="legal-ribbon-row"]')).not.toBeNull();
     for (const label of MIGRATED) {
       expect(screen.getByText(label)).toBeTruthy();
     }
   });
 
-  test('the landing route renders NO global footer, and loses nothing to it', async () => {
+  test('the landing route renders the global footer too, with exactly one row and nothing lost', async () => {
     H.route = { view: 'home', params: {}, legacy: false, notFound: false };
     window.history.replaceState(null, '', '/');
     const { container } = render(<App />);
 
-    // Presence control FIRST: the REAL landing (and its lazy below-fold chunk)
-    // rendered. Without this the absence assertions below would pass just as
-    // happily on a blank shell.
-    await screen.findByText(t('footer.terms'), {}, { timeout: 8000 });
+    // Presence control FIRST: the REAL landing's lazy below-fold chunk rendered. The
+    // anchor is the closer's headline, which ONLY that chunk renders: the eager
+    // footer now supplies "Terms" on first render, so waiting on "Terms" (the LD-3
+    // anchor) would no longer prove the band exists, and the one-row count below
+    // would pass on a shell whose band never loaded.
+    await screen.findByText(landing.closer.h2, {}, { timeout: 8000 });
 
-    // The order: the artwork band is the end of the page.
-    expect(container.querySelector('footer')).toBeNull();
+    // The order: the landing carries the app's one global footer, row inside.
+    const footer = container.querySelector('footer');
+    expect(footer, 'the landing renders the global footer (2026-09-16)').not.toBeNull();
+    expect(footer.querySelector('[data-testid="legal-ribbon-row"]')).not.toBeNull();
 
-    // The migration: every destination the suppressed strip carried is still
-    // reachable from THIS document. A Terms/Privacy absence is a legal defect
-    // and Pricing's is its commercial twin (routes.js gives it no nav block).
+    // Every legal/commercial destination is reachable from THIS document.
     for (const label of MIGRATED) {
-      expect(screen.getAllByText(label).length, `${label} must survive on the landing`).toBeGreaterThan(0);
+      expect(screen.getAllByText(label).length, `${label} must be on the landing`).toBeGreaterThan(0);
     }
     expect(screen.getByText(t('footer.antiAi'))).toBeTruthy();
     expect(screen.getByText(t('footer.copyright', { year: 2026 }))).toBeTruthy();
 
-    // MIGRATED, never duplicated: one row, and no hand-rolled facsimile beside it.
+    // ONE footer, never two: exactly one row and one Terms document-wide, and the
+    // band (#closer) no longer carries a row of its own.
+    expect(container.querySelectorAll('footer').length).toBe(1);
     expect(container.querySelectorAll('[data-testid="legal-ribbon-row"]').length).toBe(1);
     expect(screen.getAllByText(t('footer.terms')).length).toBe(1);
+    const closer = container.querySelector('#closer');
+    expect(closer, 'the band rendered (the lazy chunk resolved)').not.toBeNull();
+    expect(closer.querySelector('[data-testid="legal-ribbon-row"]')).toBeNull();
   });
 });
 
-describe('the row itself — one copy truth, and the clearance the footer used to give', () => {
+describe('the row itself: one copy truth', () => {
   test('every label comes from copy/footer.js, never a literal', () => {
     render(<LegalRibbonRow isMobile={false} onNavigate={() => {}} />);
     for (const label of MIGRATED) expect(screen.getByText(label)).toBeTruthy();
@@ -210,24 +218,5 @@ describe('the row itself — one copy truth, and the clearance the footer used t
     screen.getByText(t('footer.contact')).closest('button').click();
     expect(seen).toHaveBeenCalledTimes(1);
     window.removeEventListener('sf:open-feedback', seen);
-  });
-
-  test('the landing row reserves clearance above the fixed mobile bottom nav', () => {
-    const { container } = render(<LegalRibbonRow isMobile onNavigate={() => {}} clearMobileNav />);
-    const pad = container.querySelector('[data-testid="legal-ribbon-row"]').style.paddingBottom;
-    // Composed from the FROZEN chrome token plus the safe-area inset — a bare
-    // inset does not clear the ~57px bar, which is the bug this guards.
-    expect(pad).toContain(`${CHROME.footerPadMobile}px`);
-    expect(pad).toContain('safe-area-inset-bottom');
-  });
-
-  test('desktop and the global-footer mount take no such padding', () => {
-    const { container: desktop } = render(<LegalRibbonRow isMobile={false} onNavigate={() => {}} clearMobileNav />);
-    expect(desktop.querySelector('[data-testid="legal-ribbon-row"]').style.paddingBottom).toBe('');
-    cleanup();
-    // The global footer supplies its own padding, so the row must not add a
-    // second clearance there (the double-pad the migration could have created).
-    const { container: inFooter } = render(<LegalRibbonRow isMobile onNavigate={() => {}} showHome />);
-    expect(inFooter.querySelector('[data-testid="legal-ribbon-row"]').style.paddingBottom).toBe('');
   });
 });

@@ -31,8 +31,11 @@ import {
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
 import ActionRail from '../primitives/ActionRail.jsx';
+import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from '../primitives/AvailableAtLaunchPill.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
+import { resolveExportAccess } from '../BuyThisDossier.jsx';
 import { t } from '../../copy/index.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 /**
  * @param {Object} props
@@ -63,6 +66,22 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
     || save?.aiData?.aiSettlement || save?.aiData?.aiDailyLife
   );
 
+  // Pre-launch lockout (lib/launchGate.js). The Export rung is a PURCHASE only for
+  // an owner without export access: the handlers route that owner to the $2.99
+  // ExportUnlockDialog, while an export-capable tier or a held durable right opens
+  // the variant sheet. This is the same resolveExportAccess decision, over the same
+  // store reads, that SettlementDetail feeds the handlers (the rail mounts only
+  // for a saved record, whose id is `save.id`).
+  const purchasesAreOpen = purchasesOpen();
+  const saveId = save?.id ?? null;
+  const authTier = useStore(s => s.auth?.tier);
+  const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
+    || (typeof s.canExport === 'function' && s.canExport()));
+  const cachedEntitlement = useStore(s => (saveId ? s.dossierEntitlements?.[saveId] : undefined));
+  const exportIsPurchase = !resolveExportAccess({
+    tier: authTier, canExportFreely, saveId, entitled: cachedEntitlement === true,
+  }).allowed;
+
   // Regenerate discards the existing prose and re-spends credits, so the rung
   // routes through a discard-confirm before firing the real action. Owning the
   // dialog here keeps the regenerate lifecycle on the rail (and SettlementDetail
@@ -72,7 +91,10 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
     ? { ...handlers, onRegenerateAi: () => setConfirmRegen(true) }
     : handlers;
 
-  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers, canEdit, galleryPublished });
+  const items = computeItems({
+    phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers, canEdit, galleryPublished,
+    purchasesAreOpen, exportIsPurchase,
+  });
   if (!items.length) return null;
   return (
     <>
@@ -92,8 +114,33 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
   );
 }
 
+/**
+ * A locked purchase rung: disabled, titled "Available at launch", and wearing the
+ * pill on its hint line. The hint line (not the tag slot) carries the pill because
+ * it sits inside the row under the label and is announced through the row's
+ * aria-describedby; the tag slot would frame the pill in a second parchment chip.
+ */
+function lockForLaunch(item) {
+  return {
+    ...item,
+    disabled: true,
+    disabledReason: AVAILABLE_AT_LAUNCH,
+    hint: (
+      <>
+        {item.hint}
+        <span style={{ display: 'block', marginTop: item.hint ? 4 : 0 }}>
+          <AvailableAtLaunchPill />
+        </span>
+      </>
+    ),
+  };
+}
+
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers, canEdit = false, galleryPublished = false }) {
+function computeItems({
+  phase, eventCount, narrated, simulated, settlement, save, handlers, canEdit = false, galleryPublished = false,
+  purchasesAreOpen = true, exportIsPurchase = false,
+}) {
   // `settlement` is destructured (previously dropped as `_settlement`) so callers
   // that branch on it can. The current ladder reads phase/event/narrated facts;
   // settlement is kept available for future phase-aware rungs.
@@ -166,7 +213,7 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   // "Edit (Premium)" with a lock) so the upsell survives the move; the handler
   // routes to toggleEditMode or the purchase modal in useNextActionRailHandlers.
   if (handlers.onEdit) {
-    items.push({
+    const editItem = {
       id: 'edit', Icon: canEdit ? Edit3 : Lock,
       label: canEdit
         ? (phase === 'canon' ? 'Edit (correction)' : 'Edit Dossier')
@@ -177,7 +224,9 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
             : 'Edit dossier prose. Edited NPCs survive a reroll.')
         : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.',
       onClick: handlers.onEdit,
-    });
+    };
+    // Only the non-premium "Edit (Premium)" upsell is a purchase.
+    items.push(!canEdit && !purchasesAreOpen ? lockForLaunch(editItem) : editItem);
   }
   if (!narrated && handlers.onPolishAi) {
     items.push({
@@ -200,11 +249,12 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
     });
   }
   if (handlers.onExport) {
-    items.push({
+    const exportItem = {
       id: 'export', Icon: FileText,
       label: t('export.primaryCta'),
       onClick: handlers.onExport,
-    });
+    };
+    items.push(exportIsPurchase && !purchasesAreOpen ? lockForLaunch(exportItem) : exportItem);
   }
   // Export Image — the free PNG share card (relocated from the header). Not
   // premium-gated; sharing is the growth loop.

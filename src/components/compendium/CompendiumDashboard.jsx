@@ -26,8 +26,6 @@ const CATALOGS = [
   { tab:'power',        anchor:'archetypes',   label:'Archetypes',   count:CD.archetypes.count,    blurb:'Emergent settlement archetypes keyed to slider + threat conditions.' },
   { tab:'operations',   anchor:'operations',   label:'Operations',   count:CD.operations.count,    blurb:'Every operation the engine can perform, with its class and receipt.' },
   { tab:'living',       anchor:'systems',      label:'Living World',  count:CD.systems.length,     blurb:'The endgame systems, the causal substrate, and the presets that light them.' },
-  { tab:'lenses',       anchor:'lenses',       label:'Map Lenses',   count:CD.lenses.count,        blurb:'The map rendering lenses and the bespoke-style schema.' },
-  { tab:'facets',       anchor:'facets',       label:'Facets',       count:CD.facets.natures.length, blurb:'The institution natures and the interior grammar built on them.' },
   { tab:'tiers',        anchor:'tiers',        label:'Tiers',        count:CD.tiers.length,        blurb:'Settlement size tiers and their population bands.' },
   { tab:'neighbour',    anchor:'neighbours',   label:'Relationships', count:CD.relationships.count, blurb:'Neighbour relationship types and their mechanical effects.' },
   { tab:'calamity',     anchor:'calamity',     label:'Calamity',     count:CD.calamity.flavors.length, blurb:'The one unified calamity mechanic and its terrain flavours.' },
@@ -78,7 +76,6 @@ function buildIndexEntries() {
   // opType); the anchor stays op-<slug(opType)> so existing deep-links survive.
   for (const o of CD.operations.entries) out.push({ term:o.label, tab:'operations', anchor:`op-${slug(o.opType)}`, kind:'Operation' });
   for (const s of CD.systems) out.push({ term:s.label, tab:'living', anchor:`system-${slug(s.id)}`, kind:'System' });
-  for (const l of CD.lenses.entries) out.push({ term:l.label, tab:'lenses', anchor:`lens-${slug(l.id)}`, kind:'Lens' });
   for (const r of CD.relationships.entries) out.push({ term:r.label, tab:'neighbour', anchor:'neighbours', kind:'Relationship' });
   for (const t of CD.tiers) out.push({ term:t.label, tab:'tiers', anchor:'tiers', kind:'Tier' });
   for (const f of CD.calamity.flavors) out.push({ term:f.title, tab:'calamity', anchor:`calamity-${slug(f.key)}`, kind:'Calamity' });

@@ -21,7 +21,8 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS, aboveFooter, aboveBottomNav } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -32,6 +33,7 @@ const AUDIENCE_OPTIONS = [
 ];
 
 export default function AiAnalystPanel({ open = false, onClose, initialQuestion = '' }) {
+  const isMobile = useIsMobile();
   const [question, setQuestion] = useState(initialQuestion);
   const [audience, setAudience] = useState('dm'); // 'dm' | 'player'
   const [loading, setLoading] = useState(false);
@@ -106,7 +108,9 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
 
   if (!open) return null;
 
-  const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
+  // Docked above the pinned desktop footer (owner order 2026-09-16), and from 640 to
+  // 1023 px above the bottom bar (the painted arrow's compact band; phones unchanged).
+  const dockPos = { position: 'fixed', left: SP.lg, bottom: aboveFooter(isMobile ? SP.lg : aboveBottomNav(SP.lg)), zIndex: 60, fontFamily: sans };
 
   return (
     <div

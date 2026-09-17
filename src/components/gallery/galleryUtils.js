@@ -28,7 +28,7 @@ export const GALLERY_RESPONSIVE_CSS = `
 
   .gallery-sidebar-panel {
     position: sticky;
-    top: 16px;
+    top: calc(var(--sf-arrow-clear, 0px) + 16px);
   }
 
   .gallery-topbar {

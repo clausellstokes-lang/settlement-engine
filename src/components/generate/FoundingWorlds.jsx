@@ -22,7 +22,7 @@ import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, sans, serif_, FS, SP } from '
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
-import { SAMPLE_SETTLEMENTS, forkSeedFor } from '../../data/sampleSettlements.js';
+import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampleSettlements.js';
 
 // MG-3f (leak L8): this file used to INLINE the Library's migrateConfig verbatim, for a
 // real reason it recorded — importing settlements/helpers.js dragged the whole saves-panel
@@ -40,8 +40,9 @@ export default function FoundingWorlds({ onNavigate }) {
   const [busyId, setBusyId] = useState(null);
 
   // 'Fork this sample' — identical wiring to the Library's SettlementsPanel.forkSample:
-  // load the sample's config with a user-suffixed seed (so two users forking the same
-  // sample get mechanically-different towns), run the engine, and reveal the dossier.
+  // load the sample's config minus its seed (forkConfigFor), run the engine with a
+  // user-suffixed seed (so two users forking the same sample get mechanically-different
+  // towns), and reveal the dossier.
   // The auto-save-to-Library and purchase-modal branches are Library-dashboard concerns
   // and do not apply on the create-landing strip; a tier-gated null result still routes
   // to the wizard where the existing upgrade path lives.
@@ -51,7 +52,8 @@ export default function FoundingWorlds({ onNavigate }) {
     setBusyId(sample.id);
     try {
       const seed = forkSeedFor(sample, authUserId);
-      updateConfig({ ...normalizeConfig(sample.config), seed, _forkedFromSample: sample.id });
+      // The seed is the generation argument, never a config key (forkConfigFor).
+      updateConfig({ ...normalizeConfig(forkConfigFor(sample)), _forkedFromSample: sample.id });
       await generate(seed);
       onNavigate?.('generate');
     } finally {

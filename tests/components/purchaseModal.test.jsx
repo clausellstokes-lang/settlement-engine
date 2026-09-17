@@ -31,6 +31,10 @@ vi.mock('../../src/lib/supabase.js', () => ({
     functions: { invoke: () => Promise.resolve({ data: null, error: null }) },
   },
 }));
+// THE LAUNCH GATE is OPEN for this file: it pins the purchase controls' live
+// behaviour, which is what launch restores. The closed state is pinned in
+// tests/components/launchLock.pricing.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 describe('PurchaseModal', () => {
   afterEach(cleanup);

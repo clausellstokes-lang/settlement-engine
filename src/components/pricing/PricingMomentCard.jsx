@@ -23,9 +23,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import { GOLD, GOLD_SOFT, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance, aboveFooter, aboveBottomNav } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 
 const SLATE = swatch['#5A6E82'];
 
@@ -105,6 +107,11 @@ export default function PricingMomentCard() {
 
   const { headline, body } = activeMoment;
   const accent = isUpgrade ? SLATE : GOLD;
+  // THE LAUNCH GATE (lib/launchGate.js): only the UPGRADE moment leads to a
+  // purchase, so only its CTA closes until launch. The gold signup/unlock CTA
+  // opens sign-in, and accounts stay open, so it is untouched.
+  const purchasesAreOpen = purchasesOpen();
+  const launchLocked = isUpgrade && !purchasesAreOpen;
 
   return (
     <div
@@ -117,8 +124,10 @@ export default function PricingMomentCard() {
         position: 'fixed',
         // Mobile lifts the card above the fixed bottom nav (+ safe-area inset)
         // so the fixed nudge never tucks under the nav row; desktop keeps the
-        // plain SP.lg gap (no bottom nav there).
-        bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
+        // plain SP.lg gap (no bottom nav there), lifted above the pinned footer by
+        // aboveFooter (owner order 2026-09-16; the inset is 0px on phones), and over the
+        // bottom bar from 640 to 1023 px by aboveBottomNav.
+        bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(SP.lg)),
         right: SP.lg,
         maxWidth: 360,
         width: 'calc(100% - 32px)',
@@ -157,9 +166,17 @@ export default function PricingMomentCard() {
         <Button
           variant="primary"
           onClick={handleClick}
-          style={{ background: accent, color: swatch.white, border: `1px solid ${accent}` }}
+          disabled={launchLocked}
+          // While launch-locked the pill may wrap below the label on a narrow card.
+          style={{
+            background: accent, color: swatch.white, border: `1px solid ${accent}`,
+            ...(launchLocked ? { flexWrap: 'wrap' } : null),
+          }}
         >
           {isUpgrade ? 'See Cartographer' : 'Sign in to unlock'}
+          {/* The opaque soft-gold ground keeps the pill's gold ink legible on the
+              solid slate fill, where the translucent tint alone falls near 1.6:1. */}
+          {launchLocked && <AvailableAtLaunchPill style={{ marginLeft: 6, background: GOLD_SOFT }} />}
         </Button>
         <Button
           variant="ghost"

@@ -23,8 +23,10 @@
  * occurrence budget) exactly like townMapExportPalette.js, never inline in a domain
  * or component file. ⚠ Its consumer set CHANGED under ODQ §725/§772: the settlement-map
  * draw, viewer, thumbnail and PDF-plate surfaces it was written for are all retired, and
- * the live readers are now the INTERIOR renderer, the REALM plate renderer, the persisted
- * map-edits container and the compendium generator. It stays lazy-side either way.
+ * the live readers are now the INTERIOR renderer, the REALM plate renderer, the draw-op
+ * SVG adapter (domain/drawOpsSvg.js) and the persisted map-edits container. The compendium
+ * generator stopped reading it when the Map Lenses page left the Compendium (2026-09-16).
+ * It stays lazy-side either way.
  *
  * EXTENSIBILITY: a style is DATA. Bespoke AI-authored styles (a LATER wave) land as
  * additional definitions of this exact shape, validated against THE WALL — no code

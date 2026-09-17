@@ -25,6 +25,8 @@ import { auth as authService } from '../../lib/auth.js';
 import { validateRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../../lib/referralRedeem.js';
 import { track, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import {
   GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, FS, swatch, AMBER_DEEP } from '../theme.js';
 import { TINT_GOLD, TINT_VIOLET } from './accountTheme.js';
@@ -123,6 +125,9 @@ export function RedeemBlock({ onNavigatePricing }) {
   const [checking, setChecking] = useState(false);
   const [note, setNote] = useState(null); // { tone: 'ok'|'warn', text }
   const [accepted, setAccepted] = useState(false);
+  // THE LAUNCH GATE (lib/launchGate.js): the jump to a purchase stays disabled with
+  // the pill until launch. Checking a code is not a purchase and stays live.
+  const purchasesAreOpen = purchasesOpen();
 
   function onCodeChange(v) {
     setCode(v);
@@ -229,9 +234,11 @@ export function RedeemBlock({ onNavigatePricing }) {
             variant="secondary"
             size="md"
             onClick={onNavigatePricing}
-            style={{ alignSelf: 'flex-start', minHeight: 44 }}
+            disabled={!purchasesAreOpen}
+            style={{ alignSelf: 'flex-start', minHeight: 44, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}
           >
             {t('account.redeemChoosePurchase')}
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         )}
       </div>

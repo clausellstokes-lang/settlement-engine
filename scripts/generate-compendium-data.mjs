@@ -25,9 +25,11 @@
  *
  * WHAT IS DERIVED vs AUTHORED
  *   Derived-from-engine (the drift contract's teeth): causal variables, pressures,
- *   tier bands, prosperity tiers, the operation registry, the deity pool, the map
- *   lenses + style schema, the calamity vocabulary, the interior/facet vocabulary,
- *   the simulation presets + their lit flags, the institution counts.
+ *   tier bands, prosperity tiers, the operation registry, the deity pool, the
+ *   calamity vocabulary, the simulation presets + their lit flags, the institution
+ *   counts. (The map lenses + style schema, the district bands and the interior/facet
+ *   vocabulary were removed from the Compendium by owner order 2026-09-16; neither
+ *   feature ships. See docs/FIRST_CONTACT_BACKLOG.md.)
  *   Authored taxonomy (no engine source exists — verified): the 30 settlement
  *   ARCHETYPES and the 8 neighbour RELATIONSHIP types live in catalogData.js. They
  *   are routed THROUGH this generator so there is ONE render source with a freshness
@@ -52,11 +54,6 @@ import { FACTION_ARCHETYPES } from '../src/domain/factionArchetypes.js';
 import { RULING_POWER_CAUSES } from '../src/domain/rulingPower.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
-import {
-  TOWN_MAP_STYLE_IDS, resolveTownMapStyle,
-  FURNITURE_KINDS, HAZARD_GLYPHS, ANCHOR_GLYPHS, CONTRAST_LEVELS,
-} from '../src/design/townMapStyles.js';
-import { INTERIOR_KINDS, ROOM_KINDS, FURNISHING_KINDS } from '../src/domain/interior/interiorTemplates.js';
 import {
   DISASTER_FLAVOR_TITLE, DISASTER_TYPE_BY_TERRAIN, CALAMITY_SEVERITY_BANDS,
 } from '../src/domain/spatial/calamity.js';
@@ -255,39 +252,6 @@ const GOVERNANCE_LABELS = [
 ];
 const GOVERNANCE_NOTE = 'An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others).';
 
-// Map + district vocabularies (Wave K). Lens readings keyed by TOWN_MAP_STYLE_IDS
-// (build-guarded); the Illustrated 6th lens is noted separately (it re-shapes geometry,
-// not a re-skin). District wealth/safety labels + the category list authored inline,
-// drift-pinned to qualitativeBands / districtProfile.
-const LENS_READINGS = {
-  parchment:   'The default hand-drawn plate.',
-  watercolor:  'Soft washes and muted colour.',
-  darkFantasy: 'Grim, high-contrast linework.',
-  vtt:         'A bare grid and scale bar for virtual tabletops.',
-  accessible:  'Colourblind-safe, high-contrast linework (Okabe-Ito).',
-};
-const ILLUSTRATED_LENS_NOTE = 'A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.';
-const DISTRICT_WEALTH = [
-  { label: 'Destitute',   reading: 'The poorest quarter; want is the rule.' },
-  { label: 'Poor',        reading: 'Getting by, with little to spare.' },
-  { label: 'Modest',      reading: 'Ordinary means.' },
-  { label: 'Comfortable', reading: 'Reliable means and some surplus.' },
-  { label: 'Wealthy',     reading: 'Visibly well off.' },
-  { label: 'Opulent',     reading: 'The richest quarter; conspicuous wealth.' },
-];
-const DISTRICT_SAFETY = [
-  { label: 'Lawless',   reading: 'No effective law; the quarter is left to itself.' },
-  { label: 'Unsafe',    reading: 'Crime outpaces what watch there is.' },
-  { label: 'Watched',   reading: 'A watch is present but stretched.' },
-  { label: 'Orderly',   reading: 'Law holds day to day.' },
-  { label: 'Fortified',  reading: 'Heavily secured and closely held.' },
-];
-const DISTRICT_CATEGORIES = [
-  'religious', 'merchant', 'military', 'craft', 'noble', 'civic',
-  'arcane', 'criminal', 'foreign', 'industrial', 'residential',
-];
-const DISTRICT_NOTE = 'District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy.';
-
 // Living-World completions (Wave L). Settlement remnant grades + satellite fates
 // (settlementLifecycleKernel), and the 10 NPC goal kinds the world pulse pursues
 // (npcAgency GOALS, authored labels; drift-pinned by tests/ui/compendiumLivingCompletions).
@@ -383,9 +347,6 @@ export function buildCompendiumDataObject() {
   }
   for (const id of Object.values(FACTION_ARCHETYPES)) {
     if (!FACTION_ARCHETYPE_READINGS[id]) throw new Error(`compendium: faction archetype "${id}" has no reading`);
-  }
-  for (const id of TOWN_MAP_STYLE_IDS) {
-    if (!LENS_READINGS[id]) throw new Error(`compendium: map lens "${id}" has no LENS_READINGS entry`);
   }
   for (const id of RULING_POWER_CAUSES) {
     if (!TRANSFER_CAUSE_READINGS[id]) throw new Error(`compendium: transfer cause "${id}" has no reading`);
@@ -560,28 +521,6 @@ export function buildCompendiumDataObject() {
     factionArchetypes: Object.values(FACTION_ARCHETYPES).map((id) => ({ id, label: titleCase(id), reading: FACTION_ARCHETYPE_READINGS[id] })),
     governance: { labels: GOVERNANCE_LABELS.map((g) => ({ ...g })), note: GOVERNANCE_NOTE },
 
-    lenses: {
-      count: TOWN_MAP_STYLE_IDS.length,
-      entries: TOWN_MAP_STYLE_IDS.map((id) => ({ id, label: resolveTownMapStyle(id).label, reading: LENS_READINGS[id] })),
-      illustratedNote: ILLUSTRATED_LENS_NOTE,
-      schema: {
-        furniture: [...FURNITURE_KINDS],
-        hazardGlyphs: [...HAZARD_GLYPHS],
-        anchorGlyphs: [...ANCHOR_GLYPHS],
-        contrastLevels: [...CONTRAST_LEVELS],
-      },
-    },
-
-    // District vocabularies (Wave K): the per-quarter wealth (6) + safety (5) ladders
-    // and the category list the settlement-map cards show; distinct from settlement-wide
-    // Prosperity (the note disarms the shared Poor/Comfortable/Wealthy words).
-    districts: {
-      wealth: DISTRICT_WEALTH.map((x) => ({ ...x })),
-      safety: DISTRICT_SAFETY.map((x) => ({ ...x })),
-      categories: [...DISTRICT_CATEGORIES],
-      note: DISTRICT_NOTE,
-    },
-
     // Living-World completions (Wave L): settlement birth/death + NPC goal vocabulary.
     lifecycle: { remnants: LIFECYCLE_REMNANTS.map((x) => ({ ...x })), satellites: LIFECYCLE_SATELLITES },
     npcGoals: { entries: NPC_GOALS.map((x) => ({ ...x })), note: NPC_GOAL_NOTE },
@@ -592,17 +531,6 @@ export function buildCompendiumDataObject() {
       note: POWER_STRUCTURE_NOTE,
     },
     corruption: { vectors: CORRUPTION_VECTORS.map((x) => ({ ...x })), note: CORRUPTION_NOTE },
-
-    // Facets: the exported interior/facet vocabulary. The 7 institution natures are
-    // the interior kinds minus the 'generic' fallback. The institutionFunction axis
-    // is intentionally omitted — its table is un-exported in the engine (a documented
-    // deferral, mirroring the glossary's facet scope note), so it is not invented here.
-    facets: {
-      natures: INTERIOR_KINDS.filter((k) => k !== 'generic'),
-      interiorKinds: [...INTERIOR_KINDS],
-      roomKinds: [...ROOM_KINDS],
-      furnishingKinds: [...FURNISHING_KINDS],
-    },
 
     // Calamity: by owner ruling the mechanics are ONE unified bucket ("The Great
     // Calamity"); the "types" are cosmetic DM flavour. Rendered honestly as such.
@@ -677,8 +605,8 @@ export function buildCompendiumData() {
   const lines = [];
   lines.push('// GENERATED FILE — DO NOT EDIT BY HAND.');
   lines.push('// Source of truth: the engine registries (causalState, signalRegistry,');
-  lines.push('// constants, operationRegistry, townMapStyles, interiorTemplates,');
-  lines.push('// calamity, simulationRules) + the authored catalogData taxonomy.');
+  lines.push('// constants, operationRegistry, calamity, simulationRules) + the authored');
+  lines.push('// catalogData taxonomy.');
   lines.push('// Regenerate: npm run gen:compendium-data');
   lines.push('// Pinned by tests/docs/compendiumDataFreshness.test.js (byte-identity + parity).');
   lines.push('//');
@@ -697,7 +625,7 @@ function main() {
   process.stdout.write(
     `[generate-compendium-data] wrote ${DATA_PATH} ` +
     `(${d.causal.variableCount} vars · ${d.pressures.count} pressures · ` +
-    `${d.operations.count} ops · ${d.lenses.count} lenses)\n`,
+    `${d.operations.count} ops)\n`,
   );
 }
 

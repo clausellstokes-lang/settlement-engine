@@ -8,10 +8,15 @@
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, serif_, FS } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // ── Premium upsell card (shown to free / anon users in the Custom tab) ─────
 export function CustomContentUpsell({ existingCount, isAnon }) {
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  // Purchases stay closed until launch (lib/launchGate.js): the upgrade CTA is
+  // disabled and wears the Available at launch pill.
+  const purchasesAreOpen = purchasesOpen();
   return (
     <div style={{
       padding: '24px 20px', textAlign: 'center',
@@ -52,8 +57,9 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       {isAnon ? (
         <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
       ) : (
-        <Button variant="ai" size="lg" onClick={() => setPurchaseModalOpen(true)}>
+        <Button variant="ai" size="lg" disabled={!purchasesAreOpen} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }} onClick={() => setPurchaseModalOpen(true)}>
           Upgrade to Premium
+          {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
         </Button>
       )}
     </div>

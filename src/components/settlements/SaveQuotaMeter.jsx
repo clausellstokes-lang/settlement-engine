@@ -18,8 +18,10 @@
  */
 
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
 import { getTierDisplayName } from '../../config/pricing.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
@@ -37,6 +39,9 @@ export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns
 export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn }) {
   const isPremium = tier === 'premium' || max === Infinity;
   const isAnon = tier === 'anon';
+  // Pre-launch lockout (lib/launchGate.js): Upgrade is a purchase control, so it
+  // renders disabled and wears the pill until purchases open. Sign in stays live.
+  const purchasesAreOpen = purchasesOpen();
 
   return (
     <div
@@ -115,8 +120,9 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
           }}>
             {PREMIUM_PITCH}
           </span>
-          <Button variant="gold" size="sm" onClick={() => onUpgrade?.()}>
+          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => onUpgrade?.()}>
             Upgrade
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       ) : null}

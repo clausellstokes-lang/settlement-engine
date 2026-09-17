@@ -44,11 +44,11 @@ import { anchorFor } from '../../lib/aboutMapping.js';
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
 
-// THE ANCHOR LANDING OFFSET (theme.js ANCHOR_OFFSET = CHROME.headerDesktop +
-// SP.xxl — the sticky bar plus one gutter; the derivation, never the sum it
-// currently reaches, because the bar has been re-measured once already). Every band carries a
+// THE ANCHOR LANDING OFFSET (theme.js ANCHOR_OFFSET: the painted arrow's header and
+// hang plus one gutter; the derivation, never a sum, because the arrow scales with
+// the page). Every band carries a
 // PUBLISHED `#anchor`: the six manifesto fragments are live URLs, and /how-to?tab=
-// and /compare* deep links are translated onto them. The desktop ribbon is sticky at
+// and /compare* deep links are translated onto them. The painted header is sticky at
 // top:0, so without a scroll margin each of those landings parks its <h2> UNDERNEATH
 // the chrome — the reader arrives at a URL that names the section and a viewport that
 // hides its heading. The guide page answered this at the split; this page did not,

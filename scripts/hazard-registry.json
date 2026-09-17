@@ -401,9 +401,9 @@
       "status": "DOCUMENT",
       "acceptedReason": null,
       "memory": ["ribbon-ground-move-foreground-break-class.md", "fletched-ribbon-fl2-landed.md", "anchor-offset-single-writer-and-side-table-class.md"],
-      "enforcer": { "paths": ["tests/design/contrast.test.js"], "inChain": true, "note": "⚠ STATUS IS DOCUMENT DESPITE A NAMED PATH, AND THAT IS DELIBERATE: contrast.test.js catches the contrast half, but the recorded law is 're-census ALL riders' and nothing forces the rider census when the ground moves. The enforcer is real; it does not enforce THIS class." },
-      "instances": 3,
-      "instanceEvidence": "CONFIRMED from the memory's own title: 'THE HEADER'S GROUND HAS MOVED THREE TIMES (ink bar → cream plank → honey-tan shaft) and EACH move silently broke foregrounds' — 'nothing but tests/design/contrast.test.js ever notices, because the cells still render, still navigate and still carry aria-current.'",
+      "enforcer": { "paths": ["tests/design/contrast.test.js", "tests/build/arrowHeaderAssets.test.js"], "inChain": true, "note": "⚠ STATUS IS DOCUMENT DESPITE NAMED PATHS, AND THAT IS DELIBERATE: contrast.test.js catches the token half, but the recorded law is 're-census ALL riders' and nothing forces the rider census when the ground moves. The enforcers are real; they do not enforce THIS class. Since the fourth move (the painted arrow, 2026-09-16) the ground is the owner's painting, so the riders on the wood (the ring's two tones, the active-page rule, the house bronze as negative control) are measured on the shipped pixels by tests/build/arrowHeaderAssets.test.js, and a re-cut of the art reds there instead of shipping unmeasured contrast; the account's text brings its own PARCH_100 slip, pinned in contrast.test.js." },
+      "instances": 4,
+      "instanceEvidence": "CONFIRMED from the memory's own title: 'THE HEADER'S GROUND HAS MOVED THREE TIMES (ink bar → cream plank → honey-tan shaft) and EACH move silently broke foregrounds'; 'nothing but tests/design/contrast.test.js ever notices, because the cells still render, still navigate and still carry aria-current.' The FOURTH move (owner orders 2026-09-16) replaced the CSS shaft with the owner's arrow painting: every surviving foreground was re-measured on the new ground in the same change (the account chip's SHAFT_SAGE / SHAFT_STEEL tones had no honest place on brass and retired; live text now sits on a parchment slip; the house bronze ring measured 1.26:1 on the median wood and was replaced by a two-tone INK and PARCH_100 ring).",
       "triggers": [
         "any change to a background/ground token in src/styles/theme.js",
         "any edit to the header/ribbon component tree"
@@ -473,7 +473,7 @@
       "memory": ["sizebaseline-exact-ceiling-hazard.md", "hot-files-at-max-lines-ceiling.md", "ld-ladder-size-ratchet-gate.md", "wr7b-size-ratchet-decomposition.md", "rbld10-pulsekernel-banked-permanently.md"],
       "enforcer": { "paths": ["tests/lint/sizeBaseline.test.js", "scripts/.size-baseline.json"], "inChain": true, "note": "It reds correctly and hard. The UN-mechanised half is the RULE — 'new engine logic goes in NEW LAZY LEAVES', 'budget a leaf extraction into every UI item' — nothing warns a wave that its target file is at ceiling BEFORE the work is done." },
       "instances": 4,
-      "instanceEvidence": "CONFIRMED: five hot engine files sit AT unraisable ceilings (pulseKernel banked permanently, npcAgency, warDeployment); OutputContainer.jsx sits at EXACTLY 600 (UNBASELINED) and BLOCKS LD-1; App.jsx is tolerance-0 at its frozen number; roadsKernel at EXACTLY 800. JSX comments count against it.",
+      "instanceEvidence": "CONFIRMED: five hot engine files sit AT unraisable ceilings (pulseKernel banked permanently, npcAgency, warDeployment); OutputContainer.jsx sits at EXACTLY 600 (UNBASELINED) and BLOCKS LD-1; App.jsx WAS tolerance-0 at its frozen 650 until the painted arrow header moved out of the shell (2026-09-16, 650 -> 562, row deleted, the layer ceiling of 600 now guards it); roadsKernel at EXACTLY 800. JSX comments count against it.",
       "triggers": [
         "any added line in a file listed in scripts/.size-baseline.json",
         "any new logic in src/domain/pulseKernel.js, npcAgency.js, warDeployment.js, corruption.js",

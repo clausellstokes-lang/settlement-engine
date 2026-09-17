@@ -14,12 +14,14 @@ import { X, Zap, AlertCircle, TrendingDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout, PRODUCTS } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
+import { purchasesOpen } from '../lib/launchGate.js';
 import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
+import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from './primitives/AvailableAtLaunchPill.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
@@ -36,6 +38,9 @@ export default function PurchaseModal({ onClose }) {
   // mid-hydration. The credit-pack tiles are deliberately NOT gated: a pack is
   // not a subscription and buying one at any tier is correct.
   const authLoading   = useStore(s => Boolean(s.auth?.loading));
+  // THE LAUNCH GATE (lib/launchGate.js): every purchase control below renders
+  // disabled and wears the "Available at launch" pill until the build opens it.
+  const purchasesAreOpen = purchasesOpen();
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
   // Auto-reload consent (§4.2): OFF by default. Drives savePaymentMethod on the
@@ -67,6 +72,10 @@ export default function PurchaseModal({ onClose }) {
   };
 
   const handlePurchase = async (product) => {
+    // Closed until launch. The controls are disabled; this also keeps any other
+    // caller from recording a referral intent ahead of a checkout that
+    // startCheckout would refuse anyway.
+    if (!purchasesOpen()) return;
     setError(null);
     setLoading(product);
     try {
@@ -213,18 +222,21 @@ export default function PurchaseModal({ onClose }) {
               const isValue = tier === 'value';
               const borderColor = isBest ? '#2a7a2a' : isValue ? GOLD : BORDER;
               const accentColor = isBest ? '#2a7a2a' : isValue ? GOLD : SECOND;
+              const packLabel = `Buy ${p.credits} credits for ${p.price}`;
               return (
                 <button
                   key={key}
                   type="button"
                   onClick={() => handlePurchase(key)}
-                  aria-label={`Buy ${p.credits} credits for ${p.price}`}
-                  disabled={loading || !isConfigured}
+                  // While closed the name also carries the pill's words, which the
+                  // aria-label would otherwise hide from a screen reader.
+                  aria-label={purchasesAreOpen ? packLabel : `${packLabel}, ${AVAILABLE_AT_LAUNCH}`}
+                  disabled={!purchasesAreOpen || loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,
                     background: isBest ? swatch['#FAF8F4'] : isValue ? swatch['#FAF8F4'] : CARD,
                     border: `2px solid ${borderColor}`,
-                    cursor: loading ? 'wait' : 'pointer',
+                    cursor: loading ? 'wait' : (purchasesAreOpen ? 'pointer' : 'not-allowed'),
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs + 2,
                     fontFamily: sans, transition: 'border-color 0.2s, transform 0.1s',
                     opacity: loading ? 0.6 : 1,
@@ -250,6 +262,15 @@ export default function PurchaseModal({ onClose }) {
                   <div style={{ fontSize: FS.xxs, color: MUTED }}>
                     {loading === key ? 'Redirecting...' : p.perCredit + '/ea'}
                   </div>
+                  {/* The launch pill wraps inside the tile, set compact: three tiles share
+                      one row, and the canonical pill's longest word alone widened each
+                      tile past the row at a 375px viewport (measured 20px overflow). */}
+                  {!purchasesAreOpen && (
+                    <AvailableAtLaunchPill style={{
+                      whiteSpace: 'normal', textAlign: 'center', overflowWrap: 'anywhere',
+                      padding: '2px 4px', letterSpacing: 0, fontSize: FS.xxs,
+                    }} />
+                  )}
                 </button>
               );
             })}
@@ -258,16 +279,21 @@ export default function PurchaseModal({ onClose }) {
           {/* Auto-reload consent (§4.2 / #13). Signed-in only (a saved card needs an
               account). OFF by default; the whole label is the ~44px tap target. */}
           {isSignedIn && (
-            <label htmlFor="auto-reload-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, marginTop: SP.sm, cursor: 'pointer' }}>
+            <label htmlFor="auto-reload-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, marginTop: SP.sm, cursor: purchasesAreOpen ? 'pointer' : 'not-allowed' }}>
               <input
                 id="auto-reload-consent"
                 type="checkbox"
                 checked={saveCard}
                 onChange={(e) => setSaveCard(e.target.checked)}
+                // The consent only rides a credit-pack checkout, so it closes with them.
+                disabled={!purchasesAreOpen}
                 style={{ marginTop: 2, width: 18, height: 18, flexShrink: 0 }}
-                aria-label="Save my card for automatic credit reloads"
+                aria-label={purchasesAreOpen
+                  ? 'Save my card for automatic credit reloads'
+                  : `Save my card for automatic credit reloads, ${AVAILABLE_AT_LAUNCH}`}
               />
               <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+                {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginRight: 6 }} />}
                 Save my card for automatic credit reloads. When your balance runs low we'll
                 top it back up to your target and charge this card. Off by default. Manage or
                 cancel anytime from your account.
@@ -302,14 +328,15 @@ export default function PurchaseModal({ onClose }) {
                 // THE HYDRATION GATE: blocked while the tier is still unknown,
                 // under its OWN label — the 'Redirecting…' swap belongs to a real
                 // in-flight checkout and would be a lie here.
-                disabled={loading || !isConfigured || authLoading}
+                disabled={!purchasesAreOpen || loading || !isConfigured || authLoading}
                 style={{
                   background: 'none', border: 'none', padding: 0,
-                  color: GOLD, fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
+                  color: GOLD, fontWeight: 700, cursor: loading ? 'wait' : (purchasesAreOpen ? 'pointer' : 'not-allowed'),
                   textDecoration: 'underline', fontFamily: sans, fontSize: 'inherit',
                 }}
               >
                 {loading === 'premium' ? 'Redirecting...' : `or upgrade to ${getTierDisplayName('premium')}`}
+                {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
               </button>
               {' '}for a monthly credit allowance.
             </div>

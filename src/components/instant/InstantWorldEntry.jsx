@@ -24,6 +24,8 @@ import { t } from '../../copy/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { REALM_SIZES, TONES, MAP_KINDS, MAGIC_CHOICES, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND, DEFAULT_MAGIC, isMagicChoice } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import Segmented from '../primitives/Segmented.jsx';
 import { ChoiceDialog } from '../primitives/Dialog.jsx';
 import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, GOLD_TXT, sans, serif_, FS, SP, swatch } from '../theme.js';
@@ -59,6 +61,11 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   const setInstantKnobPin = useStore(s => s.setInstantKnobPin);
 
   const canGenerate = tier === 'premium' || isElevated;
+  // Purchases stay closed until launch (lib/launchGate.js). Only the non-premium
+  // "See Premium" reach is a purchase control: it is disabled and wears the
+  // Available at launch pill. The premium open/hide toggle is untouched.
+  const purchasesAreOpen = purchasesOpen();
+  const premiumReachClosed = !canGenerate && !purchasesAreOpen;
 
   const [open, setOpen] = useState(false);
   const [realmSize, setRealmSize] = useState(DEFAULT_REALM_SIZE);
@@ -146,9 +153,11 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           size="md"
           onClick={handleEntry}
           aria-expanded={open}
+          disabled={premiumReachClosed}
           data-testid="instant-world-open"
         >
           {canGenerate ? (open ? 'Hide options' : 'Build a realm') : 'See Premium'}
+          {premiumReachClosed && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
         </Button>
       </div>
 

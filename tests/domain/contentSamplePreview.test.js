@@ -2,11 +2,33 @@ import { describe, expect, it } from 'vitest';
 import {
   buildContentPreviewSnapshot,
   compareContentSampleProjections,
+  forgeContentRuntimeComparison,
   forgeContentSample,
 } from '../../src/domain/content/contentSamplePreview.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 describe('custom-content sample preview', () => {
+  it('a saved config carrying a legacy `seed` still previews, and the key is inert', () => {
+    // The campaign content-binding review forges from a SAVED row's config, and a sample
+    // fork saved before 2026-08-03 carries `seed`, which the pipeline refuses (reported
+    // 2026-09-16). CONTROL: without previewConfigFrom's drop both forges below throw
+    // "the first argument is the generation config, and it carries a `seed` key".
+    const legacy = { settType: 'village', seed: 'mossgate-004-anon', _forkedFromSample: 'sample-mossgate' };
+    const clean = { settType: 'village', _forkedFromSample: 'sample-mossgate' };
+    const runtime = { customContent: {}, tunables: {} };
+    const comparison = (config) => forgeContentRuntimeComparison({
+      seed: 'legacy-seed-preview', config, beforeRuntime: runtime, afterRuntime: runtime,
+    }, generateSettlementPipeline);
+    const legacyComparison = comparison(legacy);
+    expect(Object.hasOwn(legacyComparison.config, 'seed')).toBe(false);
+    expect(legacyComparison).toEqual(comparison(clean));
+
+    const sample = (config) => forgeContentSample({
+      seed: 'legacy-seed-preview', config, baseContent: {}, accepted: [],
+    }, generateSettlementPipeline);
+    expect(sample(legacy)).toEqual(sample(clean));
+  });
+
   it('forces previewable candidates only in the ephemeral snapshot', () => {
     const original = {
       institutions: [{ localUid: 'existing', name: 'Old Hall', essential: false }],

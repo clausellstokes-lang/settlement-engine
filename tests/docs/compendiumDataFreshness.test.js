@@ -24,7 +24,6 @@ import { SYSTEM_VARIABLES, CAUSAL_BANDS } from '../../src/domain/causalState.js'
 import { PRESSURE_KINDS } from '../../src/domain/autonomy/signalRegistry.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../../src/store/operationRegistry.js';
-import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { ARCHETYPES, REL_TYPES } from '../../src/domain/compendium/catalogData.js';
 import { APPROVED_CORPUS, CORPUS_KINDS } from '../../src/domain/compendium/corpusStaging.js';
@@ -74,13 +73,17 @@ describe('Compendium data — the drift contract', () => {
     expect(sum).toBe(registered.length);
   });
 
-  it('renders the real lens, archetype and relationship counts', () => {
+  it('renders the real archetype and relationship counts, and no removed block', () => {
     // The premade-deity roster was removed by owner ruling (2026-07-21): no premade
     // deities; they enter a world only via custom-content authoring. The compendium
     // publishes no deity block, so there is nothing to count here.
     expect(COMPENDIUM_DATA.deities).toBeUndefined();
-    expect(COMPENDIUM_DATA.lenses.count).toBe(TOWN_MAP_STYLE_IDS.length);
-    expect(COMPENDIUM_DATA.lenses.entries.map((e) => e.id)).toEqual([...TOWN_MAP_STYLE_IDS]);
+    // The map lenses (with their style schema and the district bands) and the facets
+    // (the interior grammar) were removed from the Compendium by owner order 2026-09-16:
+    // neither feature ships, so the artifact publishes none of those blocks.
+    expect(COMPENDIUM_DATA.lenses).toBeUndefined();
+    expect(COMPENDIUM_DATA.districts).toBeUndefined();
+    expect(COMPENDIUM_DATA.facets).toBeUndefined();
     expect(COMPENDIUM_DATA.archetypes.count).toBe(ARCHETYPES.length);
     expect(COMPENDIUM_DATA.relationships.count).toBe(REL_TYPES.length);
   });

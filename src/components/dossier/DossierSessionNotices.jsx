@@ -1,7 +1,9 @@
 import { FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { AiOverlayViolations } from '../primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from '../primitives/RegenerationDeltaCard.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // Session-level notices cluster (AI error, partial-refinement, verifier
 // findings, regenerate delta) — all session-scoped, not tab-scoped, so they
@@ -27,6 +29,10 @@ export default function DossierSessionNotices({
   const hasViolations = !!(showNarrative && violations && (violations.length || violations.summary));
   const hasRegenDelta = !!regenDelta;
   if (!(hasAiError || hasPartialFailure || hasViolations || hasRegenDelta)) return null;
+  // Pre-launch lockout (lib/launchGate.js): "View plans" opens the credits pricing
+  // moment, so it renders disabled and wears the Available at launch pill until
+  // purchases open. The error notice itself still shows.
+  const purchasesAreOpen = purchasesOpen();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, margin: `${SP.sm}px ${SP.lg}px 0` }}>
@@ -49,8 +55,9 @@ export default function DossierSessionNotices({
         >
           <span style={{ flex: 1, minWidth: 0 }}>{aiError}</span>
           {aiErrorIsCredits && (
-            <Button variant="secondary" size="sm" onClick={openCreditsMoment} style={{ flexShrink: 0 }}>
+            <Button variant="secondary" size="sm" disabled={!purchasesAreOpen} onClick={openCreditsMoment} style={{ flexShrink: 0 }}>
               View plans
+              {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
             </Button>
           )}
         </div>

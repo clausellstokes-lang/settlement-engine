@@ -14,6 +14,10 @@ const mocks = vi.hoisted(() => ({
   saveSettings: vi.fn(),
 }));
 
+// These tests drive the panel with purchases OPEN (post-launch behaviour); the
+// closed pre-launch state is pinned in tests/components/launchLock.account.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 vi.mock('../../src/lib/autoReloadClient.js', () => ({
   AUTO_RELOAD_DEFAULTS: { enabled: false, thresholdCredits: 5, targetCredits: 25, monthlyCapCents: 4000 },
   AUTO_RELOAD_LIMITS: { threshold: { min: 1, max: 500 }, target: { min: 2, max: 1000 }, capCents: { min: 500, max: 20000 } },

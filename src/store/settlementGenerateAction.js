@@ -132,8 +132,27 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // from such a config safe is not an absence: it is the CLAMP inside
   // `birthConfig`, which destructures the living-content marker off before
   // spreading the mint, so a birth's law is the DIAL's law on every path.
+  //
+  // ⛔ A CONFIG-LEVEL `seed` IS DROPPED HERE (reported 2026-09-16 as "Generation
+  // failed / The forge stalled before your settlement took shape"). A birth's seed
+  // is this action's ARGUMENT (seedOverride, else generateSeed), never a config key:
+  // the pipeline reads options.seed or a replayed config._seed, and since Lane PT2-1
+  // (4dbef1d16, 2026-08-03) it THROWS on a config carrying `seed`, because a seed
+  // there would be silently ignored. The two sample-fork surfaces (FoundingWorlds,
+  // SettlementsPanel.forkSample) had stamped `seed` into the stored config since
+  // 2026-07-21, and `config` is persisted (store/persistProjection.js), so a single
+  // fork failed and then broke every later generation in that browser until its
+  // storage was cleared. Dropping the key here, where the STORE config reaches the
+  // pipeline, cures every stored state.config and any writer at once; the other
+  // reader of saved configs, the campaign content-binding preview, drops it in
+  // domain/content/contentSamplePreview.js; the fork writers no longer stamp it
+  // (data/sampleSettlements.js forkConfigFor). `seed`
+  // stays an ADMITTED key: pruning it would change saved-config loads, which
+  // tests/generators/configPatchAllowlistWalker.test.js records as a product call.
+  const birthInputs = { ...config };
+  delete birthInputs.seed;
   const fullConfig = geographyLockedConfig(state.locks, state.settlement, birthConfig({
-    ...config,
+    ...birthInputs,
     _institutionToggles: institutionToggles,
     _categoryToggles:    categoryToggles,
     _goodsToggles:       goodsToggles,

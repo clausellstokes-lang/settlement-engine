@@ -14,6 +14,8 @@ import { t } from '../../copy/index.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
@@ -49,6 +51,10 @@ export default function AccountSubscriptionSection({
   // section; the generic upgrade CTA below then drops to secondary so exactly
   // one focal click survives (Founder is the higher-intent action).
   const founderTileShowing = useFounderTileEligible();
+  // THE LAUNCH GATE (lib/launchGate.js). Until launch the upgrade CTA and the
+  // credit-pack tiles render disabled and wear the "Available at launch" pill.
+  // 'Manage subscription' is not gated: billing stays reachable.
+  const purchasesAreOpen = purchasesOpen();
   return (
     <Section title={t('account.subscriptionHeading')} tone="feature">
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
@@ -158,9 +164,11 @@ export default function AccountSubscriptionSection({
             variant={founderTileShowing ? 'secondary' : 'primary'}
             size="lg"
             onClick={onNavigatePricing}
-            disabled={authLoading}
+            disabled={!purchasesAreOpen || authLoading}
+            style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}
           >
             See Cartographer
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       )}
@@ -199,7 +207,7 @@ export default function AccountSubscriptionSection({
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: SP.sm }}>
+          <div style={{ display: 'flex', gap: SP.sm, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
             {/* P125 / AC-2 — Read packs from getActivePacks() so the
                 `packsRepriced` flag wins. Hardcoded list was bypassing
                 the flag and showing legacy 5/15/40 even when the new
@@ -214,11 +222,11 @@ export default function AccountSubscriptionSection({
                 : p.tier === 'value' ? GOLD : SECOND;
               return (
                 <button key={key} type="button" onClick={() => handlePurchase(key)}
-                  disabled={purchasing || !isConfigured}
+                  disabled={!purchasesAreOpen || purchasing || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.md}px ${SP.sm}px`,
                     background: CARD, border: `2px solid ${accent}20`,
-                    cursor: 'pointer', fontFamily: sans,
+                    cursor: purchasesAreOpen ? 'pointer' : 'not-allowed', fontFamily: sans,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
                     opacity: purchasing ? 0.6 : 1, position: 'relative',
                   }}>
@@ -233,6 +241,11 @@ export default function AccountSubscriptionSection({
                   <span style={{ fontSize: FS.xxs, color: MUTED }}>credits</span>
                   <span style={{ fontSize: FS.md, fontWeight: 700, color: accent }}>{p.price}</span>
                   <span style={{ fontSize: FS.xxs, color: MUTED }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
+                  {/* The pill wraps inside the tile with narrower side padding, so three
+                      tiles still share a 375px phone row; narrower screens wrap the row. */}
+                  {!purchasesAreOpen && (
+                    <AvailableAtLaunchPill style={{ whiteSpace: 'normal', textAlign: 'center', justifyContent: 'center', padding: '2px 4px' }} />
+                  )}
                 </button>
               );
             })}

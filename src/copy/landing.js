@@ -196,12 +196,9 @@ export const landing = {
     ],
     fullPricing: 'Full pricing',
   },
-
-  // ── Footer ──────────────────────────────────────────────────────────────────
-  footer: {
-    brand:   'settlementforge',
-    links:   ['Compendium', 'Pricing', 'Account'],
-  },
+  // (The band's own `footer` strip keys left with LandingFooter: owner order
+  // 2026-09-16 put the app's one global footer on the landing, so the landing no
+  // longer carries a brand-and-links strip of its own.)
 };
 
 /**

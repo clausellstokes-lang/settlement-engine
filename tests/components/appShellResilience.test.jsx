@@ -23,6 +23,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // vi.mock factories are hoisted above all top-level `const`s, so every value a
 // factory closes over must itself be hoisted. `H` is the shared mutable ref bag
@@ -256,21 +257,25 @@ describe('(3) onboarding nudge dismiss prevents default on Space', () => {
   });
 });
 
-describe('(4) lazy route loading keeps the footer outside the first viewport', () => {
-  test('the route main wires the shell reserve and its CSS has vh + svh floors', () => {
+describe('(4) the route reserve keeps the page floor and the in-flow footer below the first viewport', () => {
+  test('the route main wires the shell floor and its CSS has vh + svh floors off the painted header length', () => {
+    // The header is the owner's arrow painting (2026-09-16), whose band height scales with
+    // the page; ArrowHeader writes it as --sf-header-h, so one floor serves every width and
+    // the 72px / 56px literals (and the mobile class that switched them) are retired.
     const { container } = render(<App />);
     const main = container.querySelector('main#main-content');
     expect(main?.classList.contains('app-route-main')).toBe(true);
+    expect([...main.classList]).toEqual(['app-route-main']);
 
     const css = readFileSync(join(process.cwd(), 'src/index.css'), 'utf8');
     expect(css).toMatch(
-      /\.app-route-main\s*\{[^}]*--app-shell-header-reserve:\s*72px;[^}]*min-height:\s*calc\(100vh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
+      /\.app-route-main\s*\{[^}]*min-height:\s*calc\(100vh\s*-\s*var\(--sf-header-h,\s*0px\)\)/s,
     );
     expect(css).toMatch(
-      /\.app-route-main--mobile\s*\{[^}]*--app-shell-header-reserve:\s*56px/s,
+      /@supports\s*\(height:\s*100svh\)[\s\S]*?\.app-route-main\s*\{[^}]*min-height:\s*calc\(100svh\s*-\s*var\(--sf-header-h,\s*0px\)\)/s,
     );
-    expect(css).toMatch(
-      /@supports\s*\(height:\s*100svh\)[\s\S]*?\.app-route-main\s*\{[^}]*min-height:\s*calc\(100svh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
-    );
+    // The retired per-layout reserve is gone from the sheet, anchored on the live floor.
+    const selectors = css.replace(/\/\*[\s\S]*?\*\//g, '').match(/[.#]?[\w-]+(?=\s*\{)/g) ?? [];
+    expectAbsentWithAnchor(selectors, '.app-route-main--mobile', '.app-route-main', 'the mobile reserve class retired');
   });
 });

@@ -21,6 +21,7 @@ import {
   COMPENDIUM_INDEX,
   COMPENDIUM_TABS,
 } from '../../src/domain/compendium/searchIndex.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -123,6 +124,21 @@ describe('COMPENDIUM_INDEX integrity', () => {
   it('is frozen (immutable)', () => {
     expect(Object.isFrozen(COMPENDIUM_INDEX)).toBe(true);
     expect(Object.isFrozen(COMPENDIUM_INDEX[0])).toBe(true);
+  });
+
+  // Owner order 2026-09-16: the Map Lenses and Facets pages left the Compendium (neither
+  // the settlement-map lenses nor building interiors ship). No destination tab, index
+  // entry, or per-entry id may route a reader, a sitemap row, or a prerender to them.
+  it('routes nothing to the removed Map Lenses and Facets pages', () => {
+    expectAbsentWithAnchor(COMPENDIUM_TABS, 'lenses', 'calamity', 'COMPENDIUM_TABS');
+    expectAbsentWithAnchor(COMPENDIUM_TABS, 'facets', 'calamity', 'COMPENDIUM_TABS');
+    const tabs = COMPENDIUM_INDEX.map((e) => e.tab);
+    expectAbsentWithAnchor(tabs, 'lenses', 'calamity', 'index entry tabs');
+    expectAbsentWithAnchor(tabs, 'facets', 'calamity', 'index entry tabs');
+    const categories = COMPENDIUM_INDEX.map((e) => e.category);
+    expectAbsentWithAnchor(categories, 'Map Lens', 'Calamity', 'index entry categories');
+    const idPrefixes = COMPENDIUM_INDEX.map((e) => e.id.split('-')[0]);
+    expectAbsentWithAnchor(idPrefixes, 'lens', 'calamity', 'index entry id prefixes');
   });
 });
 

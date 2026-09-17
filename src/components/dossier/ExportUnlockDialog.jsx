@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { startCheckout } from '../../lib/stripe.js';
 import { createDossierCheckoutToken } from '../../lib/pendingDossier.js';
 import { SINGLE_DOSSIER } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { t } from '../../copy/index.js';
 import { FS, RED, sans } from '../theme.js';
 
@@ -35,6 +37,11 @@ import { FS, RED, sans } from '../theme.js';
 export default function ExportUnlockDialog({ open, saveId, onClose }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  // Pre-launch lockout (lib/launchGate.js): "Continue to checkout" renders disabled
+  // and wears the Available at launch pill until purchases open. The pitch and
+  // Not now stay as they are.
+  const purchasesAreOpen = purchasesOpen();
+  const checkoutLabel = busy ? t('dossierExport.buySaved.busy') : t('dossierExport.buySaved.checkout');
 
   const runCheckout = async () => {
     if (busy) return;
@@ -55,9 +62,16 @@ export default function ExportUnlockDialog({ open, saveId, onClose }) {
       tone="default"
       title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       body={t('dossierExport.buySaved.subline')}
-      confirmLabel={busy ? t('dossierExport.buySaved.busy') : t('dossierExport.buySaved.checkout')}
+      confirmLabel={purchasesAreOpen ? checkoutLabel : (
+        // The label and pill wrap as one unit, so on a phone the pill drops below
+        // the label instead of pushing the button past the dialog edge.
+        <span style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', rowGap: 4 }}>
+          {checkoutLabel}
+          <AvailableAtLaunchPill style={{ marginLeft: 6 }} />
+        </span>
+      )}
       cancelLabel={t('dossierExport.buySaved.dismiss')}
-      confirmDisabled={busy || !isConfigured}
+      confirmDisabled={!purchasesAreOpen || busy || !isConfigured}
       onConfirm={runCheckout}
       onCancel={() => { if (!busy) onClose?.(); }}
       extra={error ? <div style={{ marginBottom: 12, fontSize: FS.sm, color: RED, fontFamily: sans }}>{error}</div> : null}

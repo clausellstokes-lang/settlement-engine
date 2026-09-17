@@ -5,6 +5,11 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 const readModelSpy = vi.hoisted(() => vi.fn());
 
+// Purchases OPEN for this file: these pins hold the post-launch behavior of the
+// upgrade CTA (enabled, clickable, exact name). The closed pre-launch state is
+// pinned in tests/components/launchLock.upsells.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 vi.mock('../../src/lib/flags.js', () => ({
   flag: name => name === 'heraldCommandBrief',
 }));

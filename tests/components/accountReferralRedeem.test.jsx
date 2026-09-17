@@ -22,6 +22,10 @@ const mocks = vi.hoisted(() => ({
   getAccountNumber: vi.fn(),
 }));
 
+// These tests drive the blocks with purchases OPEN (post-launch behaviour); the
+// closed pre-launch state is pinned in tests/components/launchLock.account.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 vi.mock('../../src/lib/supabase.js', () => ({
   isConfigured: true,
   withTimeout: (p) => p,

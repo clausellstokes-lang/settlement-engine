@@ -10,6 +10,11 @@ vi.mock('../../src/components/account/OperatorMessagesProvider.jsx', () => ({
 }));
 
 import AccountMenu from '../../src/components/AccountMenu.jsx';
+import { layoutArrow } from '../../src/components/nav/arrowGeometry.js';
+
+// The account lives on the painted arrow's blank plate (owner orders 2026-09-16), laid out
+// for a page width; its accessible name is "Account menu" plus the visible name.
+const layout = layoutArrow({ clientWidth: 1440, full: true });
 
 afterEach(() => {
   cleanup();
@@ -19,10 +24,10 @@ afterEach(() => {
 describe('AccountMenu operator-message badge', () => {
   it('caps at 9+, carries the actual count in names, and swaps into the open menu', () => {
     const onMessages = vi.fn();
-    render(<AccountMenu isAnon={false} displayName="Alice" unreadCount={12} onMessages={onMessages} />);
+    render(<AccountMenu layout={layout} isAnon={false} displayName="Alice" unreadCount={12} onMessages={onMessages} />);
 
-    const trigger = screen.getByRole('button', { name: 'Account, 12 unread messages' });
-    expect(trigger.parentElement.querySelectorAll('[data-operator-unread-badge="true"]')).toHaveLength(1);
+    const trigger = screen.getByRole('button', { name: 'Account menu, Alice, 12 unread messages' });
+    expect(trigger.querySelectorAll('[data-operator-unread-badge="true"]')).toHaveLength(1);
     expect(screen.getByText('9+').getAttribute('aria-hidden')).toBe('true');
 
     fireEvent.click(trigger);
@@ -37,8 +42,8 @@ describe('AccountMenu operator-message badge', () => {
   });
 
   it('renders no empty badge at either render point', () => {
-    render(<AccountMenu isAnon={false} displayName="Alice" unreadCount={0} />);
-    const trigger = screen.getByRole('button', { name: 'Account' });
+    render(<AccountMenu layout={layout} isAnon={false} displayName="Alice" unreadCount={0} />);
+    const trigger = screen.getByRole('button', { name: 'Account menu, Alice' });
     expect(document.querySelector('[data-operator-unread-badge="true"]')).toBeNull();
     fireEvent.click(trigger);
     expect(document.querySelector('[data-operator-unread-badge="true"]')).toBeNull();
