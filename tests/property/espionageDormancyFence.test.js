@@ -189,6 +189,19 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-17, THE DOSSIER CONTRADICTIONS (owner-signed, through the door) ────────────
+ * THE FIRST MOVEMENT OF THIS CONSTANT SINCE THE GENESIS FREEZE, AND IT DID NOT WAIT FOR THE
+ * LIGHTING WAVE: it is a signed re-record under tests/helpers/goldenRecordDoor.js, which from the
+ * genesis (2026-09-16) is the lawful path for every frozen surface. The owner ordered the dossier's
+ * contradictions fixed ("Fix the contradiction."; "fix the remaining contradictions as well") and
+ * signed the re-records ("I approve"), record docs/shift-records/2026-09-17-dossier-contradictions.json.
+ * THE MOVER, FOUND AND ATTRIBUTED TO ZERO RESIDUE: src/generators/power/governanceNarrative.js alone
+ * (a single-variable revert returns the old value). A town under an insurgency, a mass migration, a
+ * war or a religious conversion read `Stable` beside its ACTIVE CRISIS banner; it now reads a crisis
+ * band. On this corpus exactly 26 of 360 rows move, every one in the single field
+ * powerStructure.stability (11 wartime, 6 insurgency, 6 mass migration, 3 religious conversion);
+ * 360/360 hashes stay distinct. `cda5ec87…` -> `b9dc82bc…`.
+ *
  * ── 2026-09-02, T13 TRANS — THE WINDOW OPENED AND CLOSED WITH ZERO MOVEMENT ──────────
  * ⛔ THE STOP IS RE-ARMED TO EXACTLY ONE NAMED WINDOW. T13 TRANS (ODQ §879.11 REC, §883
  * landing) retired every transcendental site in the six census trees — thirty declared-shift
@@ -260,7 +273,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'cda5ec87790ba9fb06e68e9dfe064bb9059d07ede47edbf74855f02f76a3684f';
+const PRE_COUPLING_CORPUS_SHA = 'f13df68e5e511cd385473e95307240d5b73659e11f718eaeafc5f69bf060a69e';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
