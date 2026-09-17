@@ -17,6 +17,7 @@ import { ROUTES } from '../../src/lib/routes.js';
 import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
 import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
 import { buildSitemap, staticUrls, galleryHubUrls, compendiumEntryUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // The per-slug gallery fan-out is ON by default (GALLERY-2 phase 2) but needs
 // Supabase credentials to contribute anything. Pin it OFF here so the
@@ -73,12 +74,25 @@ describe('public/sitemap.xml', () => {
     expect(paths.has('/admin')).toBe(false);
   });
 
-  it('canonicalizes home to / and fans the compendium out to its 14 sections', () => {
+  it('canonicalizes home to / and fans the compendium out to its 12 sections', () => {
     const locs = staticUrls().map((u) => u.loc);
     expect(locs).toContain('https://settlementforge.com/');
     expect(locs).not.toContain('https://settlementforge.com/home');
     const tabs = locs.filter((l) => l.includes('/compendium?tab='));
-    expect(tabs).toHaveLength(14);
+    expect(tabs).toHaveLength(12);
+  });
+
+  // Owner order 2026-09-16: the Map Lenses and Facets pages left the Compendium, so the
+  // committed sitemap lists neither section URL nor any of the five lens entry pages.
+  it('lists no URL for the removed Map Lenses and Facets pages', () => {
+    const locs = [...committed.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    const O = 'https://settlementforge.com';
+    for (const tab of ['lenses', 'facets']) {
+      expectAbsentWithAnchor(locs, `${O}/compendium?tab=${tab}`, `${O}/compendium?tab=calamity`, 'committed sitemap sections');
+    }
+    for (const id of ['lens-parchment', 'lens-watercolor', 'lens-darkfantasy', 'lens-vtt', 'lens-accessible']) {
+      expectAbsentWithAnchor(locs, `${O}/compendium/${id}`, `${O}/compendium/calamity-flood`, 'committed sitemap entries');
+    }
   });
 
   // GALLERY-2 phase 2 — the facet hubs (src/lib/galleryHubs.js).

@@ -79,7 +79,7 @@
   },
   {
     "path": "src/components/compendium/CatalogHubs.jsx",
-    "line": 95,
+    "line": 43,
     "category": "multiplier",
     "snippet": "{b.scale}"
   },
