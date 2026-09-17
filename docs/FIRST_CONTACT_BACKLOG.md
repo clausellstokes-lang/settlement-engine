@@ -1288,6 +1288,166 @@ and the menu never shifted (the WebKit 320 px arm, red on "the menu starts on th
   the kit.
 - `THIRD-PARTY-NOTICES.md` still does not name the OpenAI-generated art (part 1's deferral).
 
+## COMPENDIUM: MAP LENSES AND INTERIORS REMOVED (owner order 2026-09-16)
+
+**The order (owner):** "completely remove the map lenses and interior pages from the
+compendium".
+
+**The chair's reading (vetoable).** "Map lenses" is the Compendium's Map Lenses tab (tab id
+`lenses`, `LensesHub`), including the District bands section that lived inside it (wealth,
+safety and categories), its Overview card, its A to Z and global-search rows, and the five
+per-entry pages `/compendium/lens-parchment`, `lens-watercolor`, `lens-darkfantasy`,
+`lens-vtt` and `lens-accessible` with their prerendered documents and sitemap URLs.
+"Interior pages" is the Facets tab (tab id `facets`, `FacetsHub`: institution natures,
+interior kinds, room kinds, furnishing kinds) and its Overview card; it had no A to Z,
+search or per-entry rows. Both described features the site does not ship: the
+settlement-map lens plates were removed earlier, and `InteriorView` has no product
+importer. The order is about the COMPENDIUM, so the map rendering, the interior engine
+(`src/components/interior`, `src/domain/interior`), the entitlement ladder's deferred
+`interiors` row and the pricing copy for building interiors are untouched.
+
+**What was removed (uncommitted at hand-off; the chair commits):**
+- `src/components/compendium/CatalogHubs.jsx`: `LensesHub` and `FacetsHub` deleted (and the
+  now-dead `Card` import); the file carries `CalamityHub` alone and keeps its name, so every
+  register that names the path stays valid.
+- `src/components/CompendiumPanel.jsx`: the two tabs, their `ANCHOR_TO_TAB` rows, their
+  `TAB_META` titles and descriptions, their render cases and `WIDE_TABS` entries; the
+  Overview description no longer lists "map lenses, facets".
+- `src/components/compendium/CompendiumDashboard.jsx`: the two Overview cards and the A to Z
+  Lens rows.
+- `src/domain/compendium/searchIndex.js`: `lenses` and `facets` left `COMPENDIUM_TABS`, and
+  the five `Map Lens` index entries (`LENS_ENTRIES`) are gone, which is what removes the
+  per-entry routes from the sitemap and the prerender.
+- `scripts/generate-compendium-data.mjs`: the `lenses`, `districts` and `facets` blocks, their
+  authored copy (`LENS_READINGS`, `ILLUSTRATED_LENS_NOTE`, `DISTRICT_*`), the lens build guard
+  and the now-dead `townMapStyles` and `interiorTemplates` imports. The artifact
+  `compendiumData.generated.js` was regenerated with `npm run gen:compendium-data`, never
+  edited by hand.
+- `scripts/generate-sitemap.mjs`: `lenses` and `facets` left its section list;
+  `public/sitemap.xml` was regenerated with `node scripts/generate-sitemap.mjs`.
+
+**Measured counts (base `d710f0a98` against the change, both from `npm run build`):**
+sitemap 326 to 319 URLs (two section URLs and five entry URLs); prerender 311 to 306
+documents (13 views + 15 gallery hubs + 283 compendium entries, then 278 entries); the
+Compendium index 283 to 278 entries. First paint: raw entry closure 1,047,948 B both times
+(budget 1,048,000); gzip 333,130 to 333,139 B (budget 337,000); Brotli 279,514 to 279,629 B
+(budget 283,000); render-blocking CSS 19,795 B both times (budget 19,800). At the build
+log's 0.01 kB precision only two built chunks changed size: `CompendiumPanel` 156.09 to
+151.92 kB and `compendiumData.generated` 89.58 to 87.16 kB. The small gzip and Brotli movement with identical raw bytes is attributed
+to the renamed lazy-chunk hashes in the entry's preload map (not proven byte by byte).
+
+**Old links.** `/compendium/lens-*` still matches the router's per-entry pattern
+(`view: 'compendium'`, `params.entry`); with no prerendered document the request reaches
+the SPA shell, the id no longer resolves to an index entry, and `CompendiumPanel` opens on
+the Overview. The first cut stopped there, which left the address bar, the canonical and
+`og:url` on the dead path (`applyDocumentHead` builds them from `params.entry` and skips the
+title, og and twitter tags for an entry route), so five URLs that were in the production
+sitemap would have served the Overview under a self-canonical dead address. Review caught
+it; the cure, per the chair's ruling 2 below, is that `CompendiumPanel` REPLACES a removed
+id's address with `/compendium` (`navigate('compendium', { replace: true, scroll: false })`,
+for the five ids in its `REMOVED_ENTRY_IDS`, standalone only). The route then resolves with
+no entry, and App's head effect applies the `/compendium` title, description, canonical,
+`og:url`, og and twitter tags. A live entry id keeps its address. Pinned by
+`tests/ui/compendiumHubs.test.jsx` ("an old /compendium/lens-* link lands on the Overview at
+/compendium, and the head follows the replaced address"; two mutants executed: with the
+replace disabled it reds on `expected '/compendium/lens-parchment' to be '/compendium'`, and
+with the id check removed the live-entry control reds on `expected '/compendium' to be
+'/compendium/tier-thorp'`) and by the dist walk in `tests/build/prerenderRoutes.test.js`. A
+stale `?tab=lenses`, `?tab=facets`, `#lenses` or `#facets` link also opens on the Overview,
+since neither key is in `TAB_META` or `ANCHOR_TO_TAB` any more (pinned in the same test).
+- JUDGMENT (vetoable), where the alias lives. The chair ruled for the router's in-app alias
+  (`resolveLocation` returning `legacy: true`, which App's canonical-URL upgrade rewrites).
+  That was built and MEASURED first: the most compact `legacy: true` form tried (the
+  per-entry builder returning no params for a `lens-` id, the loop returning
+  `{ view, params: {}, legacy: true }`) built to a first-paint static closure of 1,048,020 B
+  against the 1,048,000 B budget (`tests/build/vendorPdfLazy.test.js`, 1 failed | 53
+  passed). `lib/routes.js` is eager and the closure without it measures 1,047,948 B (52 B of
+  headroom); in a standalone esbuild minify of `routes.js` that form adds 70 B and the
+  explicit five-id set the review proposed adds 181 B, so no router alias fits without
+  raising the budget, which is refused. The replace therefore runs in the lazy Compendium chunk, through the
+  same `navigate(..., { replace: true })` primitive App's demoted-destination redirect uses,
+  at zero first-paint bytes. The visible difference from a router alias: the dead address
+  is replaced once the Compendium chunk has loaded rather than on the first route
+  resolution. No `vercel.json` change.
+- Observed, not changed (outside the order): any OTHER unknown id (`/compendium/<typo>`)
+  still opens the Overview under its own dead address and canonical. Generalizing the
+  replace to every id missing from the index would cure that class; it was kept to the five
+  removed ids as the least invasive reading.
+
+**Pins added or updated:** `tests/ui/compendiumHubs.test.jsx` (the tab strip, Overview cards
+and A to Z destinations carry neither page; the old-link replace and head),
+`tests/ui/compendiumMapCalamity.test.jsx` (the lens and district arms left; the calamity arm
+stays), `tests/docs/compendiumDataFreshness.test.js` (the three blocks are absent),
+`tests/domain/compendiumSearch.test.js` (no tab, entry, category or id routes to them),
+`tests/build/sitemap.test.js` (12 sections, no removed URL) and
+`tests/build/prerenderRoutes.test.js` (no removed document in dist). Every new negative goes
+through `tests/helpers/anchoredNegatives.js`. Registers moved by the removal, each lowered to
+its own measured figure: `tests/lint/rawColorLiteral.test.js` budget 1,329 to 1,320 (nine
+Card accents left with the two hubs); the settlement-map allowlist struck
+`src/domain/compendium/` (its only hit was the artifact header naming `townMapStyles`); the
+prose-numerics row for the calamity `{b.scale}` re-addressed from line 95 to 43. Two stale
+reader comments that still named "the compendium generator" as a `townMapStyles` reader were
+corrected (the header of `src/design/townMapStyles.js` and the design-registry row's `why` in
+`tests/lint/settlementMapSurfaceAllowlist.walker.test.js`); no map code moved.
+
+**The chair's rulings on the review (2026-09-17, vetoable):**
+1. The writer-reach DARK identities are banked through the walker's own governed door, not
+   re-homed: the owner ordered the page removed.
+2. Old `/compendium/lens-*` links land on `/compendium` with the address bar, canonical and
+   og tags following, pinned by a test, with no `vercel.json` change (see Old links above for
+   where the replace lives and why).
+3. The observed-shape drift from the regenerated artifact is re-frozen through its own door if
+   that door runs on an uncommitted tree; otherwise it stays red with the exact command.
+4. Four whitespace-only lines restored and the stale `townMapStyles` reader comment fixed.
+
+**Writer-reach (ruling 1, DONE).** Removing the District bands turned `wealth on
+_timePressure` and `wealth on factions` DARK (LIT-NAME 4,647 to 4,645; DARK 1,325 to 1,327;
+reviewable 525 to 527). Their only counting-surface read was `CD.districts.wealth` in the
+removed bands (`CatalogHubs.jsx`), a key-name collision graded N, never a display of either
+fact: `git grep -nw wealth` over `src/components`, `src/pdf`, `src/domain/display`,
+`src/utils` and `src/foundry` finds only a comment and prose. The register has no row reason
+that fits a deliberate removal (`dark-by-construction` needs a dormancy door,
+`engine-internal` claims the key is not a customer fact, and `pending-surface` claims an owed
+surface and its ceiling is shrink-only), so the lawful path is the one the walker's own
+failure names ("bank it through the governed door"): `node scripts/check-writer-reach.mjs
+--rebank --charter=...`, used by ruling for two identities exactly as the §900 desk landing
+did for `forcedByConfig`. It printed `writer-reach REBANK — cohort 1321 → 1323; 0 stale folded
+out; 0 registered rows now lit.` and appended a `rebankHistory` row whose charter names the
+owner's 2026-09-16 order and this ruling. No ceiling was loosened, no arm deleted, no
+register row added. `tests/lint/writerReach.walker.test.js`: 56 passed (56).
+- ⚠ For the landing: the rebank stamped `frozenAtSha` with this worktree's HEAD
+  (`d710f0a98`). If the landing places that sha inside a consist, re-stamp after the commit
+  with the shrink-only `node scripts/check-writer-reach.mjs --write` (the cohort holds at
+  1,323), as the 2026-09-15 consist-tip re-stamp did.
+- Owner question, not a register act: faction wealth (and its time-pressure mirror) is
+  generated on every world and shown on no surface.
+
+**Known reds, left for the chair (each needs a committed tree):**
+- `tests/lint/sovereigntyLightingContract.walker.test.js`: the live test-title count moved
+  24,445 to 24,446. Refreeze owed after commit.
+- `tests/lint/observedShapeReaders.walker.test.js` "THE LIVE ESTATE INSTANCE" and the
+  standalone gate `node scripts/check-observed-shape-readers.mjs` (exit 1: "observed-shape
+  execution INPUT changed since the last re-freeze (1 path(s):
+  src/domain/compendium/generated/compendiumData.generated.js)"). Its shrink-only door
+  `node scripts/check-observed-shape-readers.mjs --write` REFUSES this uncommitted tree
+  (exit 1, "observed-shape current scanTree is not the exact committed HEAD input tree"; the
+  baseline's md5 was unchanged after the refusal), so per ruling 3 it must run after the
+  commit, then `tests/lint` re-runs whole.
+
+**Deliberately deferred, documented, not bugs to re-find:**
+- `scripts/generate-sitemap.mjs` still lists a `deities` section (`/compendium?tab=deities`)
+  although the panel has had no Deities tab since the 2026-07-21 ruling; that URL lands on
+  the Overview. Outside this order.
+- The "289 named entries" figure in comments in `src/lib/routes.js`,
+  `src/lib/seoCompendium.js` and `scripts/prerender-routes.mjs` was already stale (283 at
+  base) and now reads against 278. Left for a prose pass, since the files are otherwise
+  untouched.
+- Remaining references outside the Compendium, kept by the order's scope: the entitlement
+  ladder's deferred `interiors` row (`src/config/entitlementLadder.js`), the pricing label
+  "Building interiors" (`src/copy/pricingPage.js`), the interior engine and viewer, the map
+  style registry `src/design/townMapStyles.js`, and the Command Palette's "Map lens" hint
+  (realm-map overlay toggles, not the Compendium).
+
 ---
 
 ## LD-5 — RIBBON DROPDOWNS + THE ACCOUNT IA (owner-ordered 2026-08-01;

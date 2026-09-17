@@ -252,6 +252,18 @@ describe('prerender — dist walk (the emitted files carry their own truth)', ()
     ).toBe(false);
   });
 
+  // Owner order 2026-09-16: the five Map Lenses entry pages left the Compendium, so no
+  // static document is baked for them. An old /compendium/lens-* link now reaches the
+  // SPA shell, whose compendium route opens the Overview dashboard and replaces the dead
+  // address with /compendium, so the head canonicalizes there (pinned in
+  // tests/ui/compendiumHubs.test.jsx). A live entry is the anchor: the walk is not vacuous.
+  it.skipIf(!requireDistRead)('the removed /compendium/lens-* entry documents are not baked into dist', () => {
+    expect(existsSync(distFileForPath('/compendium/tier-thorp')), 'a live entry document').toBe(true);
+    for (const id of ['lens-parchment', 'lens-watercolor', 'lens-darkfantasy', 'lens-vtt', 'lens-accessible']) {
+      expect(existsSync(distFileForPath(`/compendium/${id}`)), `dist still carries /compendium/${id}`).toBe(false);
+    }
+  });
+
   // SB4 — the noindex world family must NOT be prerendered or sitemap-listed:
   // bare /world renders an invalid-code state, and /world/<code> is served by
   // the dynamic meta-shell (unfurl-but-noindex).

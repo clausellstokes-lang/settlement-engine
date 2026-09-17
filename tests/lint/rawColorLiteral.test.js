@@ -71,7 +71,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Measured out of its own red run ("raw color literals: 1326 (committed 1329)") and attributed by
 // re-executing this file's counter on the deleted module (3) and on every other retired or new
 // header module (0 each).
-const BUDGET = 1326; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise.
+// LOWERED 1329 → 1320 on 2026-09-16 by the COMPENDIUM TRIM (owner order: the map lenses and
+// interior pages removed from the Compendium): nine `accent="#…"` Card literals left with the
+// Lenses hub (five: furniture, hazard glyphs, anchor glyphs, contrast levels, district
+// categories) and the Facets hub (four: natures, interior, room and furnishing kinds) in
+// src/components/compendium/CatalogHubs.jsx. Nothing was re-tokenised; the hubs are gone.
+// Measured out of its own red run ("expected 1320 to be 1329").
+// COMBINED on the arrow-header branch (both landings stacked): 1329 - 3 - 9 = 1317, measured below.
+const BUDGET = 1317; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

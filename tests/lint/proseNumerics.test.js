@@ -199,6 +199,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // PLAINLY, because the lane's brief predicted the opposite: this lane authored NO new prose
 // numeric. Its own new leaves carry none, and the row that moved is pre-existing banked debt
 // — a cap computation, not reader prose — so there was nothing here to humanize.
+// COMPENDIUM TRIM (owner order 2026-09-16: the map lenses and interior pages removed from the
+// Compendium) — ONE PURE LINE MOVE, NO CEILING CHANGE, NO DEBT MOTION. Deleting the Lenses
+// and Facets hubs from CatalogHubs.jsx removes fifty-two lines ABOVE the Calamity hub's
+// severity row, so the one row that file owns (`multiplier`, `{b.scale}`) re-addresses
+// 95 -> 43. Path, category and snippet are byte-identical, the census stays at 225 against a
+// 225 ceiling, and the removed hubs carried no banked row. The whole baseline diff is two
+// lines, one -/+ pair, a `"line"` value and nothing else.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the
