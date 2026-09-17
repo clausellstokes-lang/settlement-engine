@@ -35,7 +35,7 @@ import PendingChangesBar from './PendingChangesBar.jsx';
 import Button from '../primitives/Button.jsx';
 import EntityLink from '../primitives/EntityLink.jsx';
 import {
-  BORDER, FOOTER_INSET,
+  BORDER, FOOTER_INSET, ARROW_BARB_CLEAR, BOTTOM_NAV_H,
   FS,
   SP,
   swatch,
@@ -276,13 +276,16 @@ function EntityInspector({ readOnly = false }) {
         fontFamily: sans,
       } : {
         position: 'fixed',
-        top: 88,
+        // Below the painted arrow's right-hand reach (the header band plus the
+        // arrowhead's barb) with 24 px of air.
+        top: `calc(${ARROW_BARB_CLEAR} + 24px)`,
         right: SP.lg,
         // Desktop inspection is a floating tool, below drawers and dialogs. Its
-        // height ends above the pinned footer's links band (owner orders 2026-09-16).
+        // height ends 24 px above the pinned footer's links band (owner orders
+        // 2026-09-16) and the bottom bar where it shows (640 to 1023 px).
         zIndex: 60,
         width: 340,
-        maxHeight: `calc(100dvh - 112px - ${FOOTER_INSET})`,
+        maxHeight: `calc(100dvh - ${ARROW_BARB_CLEAR} - 48px - ${BOTTOM_NAV_H} - ${FOOTER_INSET})`,
         overflowY: 'auto',
         background: PAPER,
         border: `1px solid ${BORDER}`,

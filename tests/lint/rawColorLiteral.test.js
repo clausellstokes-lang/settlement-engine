@@ -64,7 +64,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // they carried exactly ONE raw colour between them. That is the renderers having been disciplined
 // about the styles registry, not the ratchet under-counting; measured out of its own red run
 // ("expected 1329 to be 1330"), never inferred from the file count.
-const BUDGET = 1329; // committed raw-color-literal occurrences — EXACT. Lower on a shrink; never raise.
+// LOWERED 1329 → 1326 on 2026-09-16 by THE PAINTED ARROW HEADER (owner orders: "Replace the arrow
+// ribbon entirely with the following image"): three occurrences left with
+// src/components/nav/FletchBand.jsx, the procedural fletching's SVG band, deleted with the rest of
+// the ribbon. Nothing was re-tokenised; the new header adds none (its art is the owner's painting).
+// Measured out of its own red run ("raw color literals: 1326 (committed 1329)") and attributed by
+// re-executing this file's counter on the deleted module (3) and on every other retired or new
+// header module (0 each).
+const BUDGET = 1326; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

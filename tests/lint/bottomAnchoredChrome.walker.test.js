@@ -39,10 +39,18 @@
  *     freezes, and the one entry is the unused Toast primitive.
  *   - A non-literal position that can evaluate to 'fixed' is asserted absent.
  *
+ * ── THE BOTTOM BAR FROM 640 TO 1023 PX (owner orders 2026-09-16, the painted arrow) ─
+ * The header became the owner's arrow painting, whose painted words only show from
+ * 1024 px, so the fixed bottom bar now also holds the viewport's bottom edge from 640 to
+ * 1023 px, where the footer lies in the flow (its inset is 0px). Every LIFTED site's
+ * desktop branch therefore also clears the bar through aboveBottomNav() or BOTTOM_NAV_H
+ * (0px from 1024 up), and phones keep their own bottomClearance() offsets. A lifted site
+ * that composes neither reds as the same collision, one breakpoint down.
+ *
  * ── ALSO PINNED ────────────────────────────────────────────────────────────────
  * The viewport-sized boxes that would otherwise run under the footer subtract
- * FOOTER_INSET: the desktop Realm shell, the desktop Entity Inspector, and the two
- * lifted Surveyor panels whose maxHeight keeps their top where it was.
+ * FOOTER_INSET (and the bar): the desktop Realm shell, the desktop Entity Inspector, and
+ * the two lifted Surveyor panels whose maxHeight keeps their top where it was.
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -53,6 +61,8 @@ const ROOT = process.cwd();
 const SRC = join(ROOT, 'src');
 
 const LIFT_RE = /\baboveFooter\(|\bFOOTER_INSET\b/;
+/** The bottom bar's lift (640 to 1023 px) in a lifted site's desktop branch. */
+const BAR_RE = /\baboveBottomNav\(|\bBOTTOM_NAV_H\b/;
 
 /** Lifted sites per file (they compose aboveFooter or FOOTER_INSET). */
 const LIFTED = Object.freeze({
@@ -71,7 +81,7 @@ const LIFTED = Object.freeze({
 const EXEMPT = Object.freeze({
   'src/App.jsx': {
     count: 1,
-    reason: 'the MOBILE bottom nav (rendered below 640px only), which is the phone\'s pinned bottom bar; the footer is not pinned there',
+    reason: 'the bottom nav (rendered below 1024px, where the painted arrow is compact), which is the pinned bottom bar there; the footer is not pinned below 1024px',
   },
   'src/components/StaleDeployNotice.jsx': {
     count: 1,
@@ -158,7 +168,7 @@ function censusSource(source) {
     const bottom = props.find((p) => keyName(p) === 'bottom');
     if (bottom) {
       const text = source.slice(bottom.value.range[0], bottom.value.range[1]);
-      sites.push({ line: node.loc.start.line, bottom: text, lifted: LIFT_RE.test(text) });
+      sites.push({ line: node.loc.start.line, bottom: text, lifted: LIFT_RE.test(text), clearsBar: BAR_RE.test(text) });
       return;
     }
     const namesAnEdge = props.some((p) => ['top', 'inset'].includes(keyName(p)));
@@ -174,6 +184,7 @@ function censusTree() {
   const dynamicFixed = [];
   const parseFailures = [];
   const unliftedDetail = [];
+  const barless = [];
   let files = 0;
   for (const file of walkSources(SRC)) {
     files += 1;
@@ -189,11 +200,12 @@ function censusTree() {
       const bucket = site.lifted ? lifted : unlifted;
       bucket[rel] = (bucket[rel] || 0) + 1;
       if (!site.lifted) unliftedDetail.push(`${rel}:${site.line} bottom=${site.bottom}`);
+      if (site.lifted && !site.clearsBar) barless.push(`${rel}:${site.line} bottom=${site.bottom}`);
     }
     if (result.opaque.length) opaque[rel] = result.opaque.length;
     for (const line of result.dynamicFixed) dynamicFixed.push(`${rel}:${line}`);
   }
-  return { files, lifted, unlifted, opaque, dynamicFixed, parseFailures, unliftedDetail };
+  return { files, lifted, unlifted, opaque, dynamicFixed, parseFailures, unliftedDetail, barless };
 }
 
 const counts = (table) => Object.fromEntries(Object.entries(table).map(([k, v]) => [k, typeof v === 'number' ? v : v.count]));
@@ -202,7 +214,7 @@ const sorted = (obj) => Object.fromEntries(Object.entries(obj).sort(([a], [b]) =
 describe('the detector sees what it claims to (mutant arms)', () => {
   test('an un-lifted fixed bottom layer is a site, and not lifted', () => {
     const { sites } = censusSource("const s = { position: 'fixed', bottom: 16, zIndex: 900 };");
-    expect(sites).toEqual([{ line: 1, bottom: '16', lifted: false }]);
+    expect(sites).toEqual([{ line: 1, bottom: '16', lifted: false, clearsBar: false }]);
   });
 
   test('aboveFooter and FOOTER_INSET both lift, including inside JSX style props', () => {
@@ -212,6 +224,15 @@ describe('the detector sees what it claims to (mutant arms)', () => {
     ].join('\n');
     const { sites } = censusSource(src);
     expect(sites.map((s) => s.lifted)).toEqual([true, true]);
+  });
+
+  test('the bar lift is seen through aboveBottomNav or BOTTOM_NAV_H, and a footer-only lift is not a bar lift', () => {
+    const src = [
+      "const a = { position: 'fixed', bottom: aboveFooter(isMobile ? bottomClearance(70) : aboveBottomNav(24)) };",
+      'const b = { position: \'fixed\', bottom: `calc(20px + ${BOTTOM_NAV_H} + ${FOOTER_INSET})` };',
+      "const c = { position: 'fixed', bottom: aboveFooter(24) };",
+    ].join('\n');
+    expect(censusSource(src).sites.map((s) => [s.lifted, s.clearsBar])).toEqual([[true, true], [true, true], [true, false]]);
   });
 
   test('non-fixed positions and top-anchored fixed layers are not sites', () => {
@@ -249,6 +270,11 @@ describe('every bottom-anchored fixed layer clears the pinned footer, or is exem
     }
   });
 
+  test('every lifted site also clears the bottom bar that shows from 640 to 1023 px', () => {
+    expect(Object.keys(tree.lifted).length, 'presence control: lifted sites exist').toBeGreaterThan(0);
+    expect(tree.barless, 'lifted sites whose desktop branch lands on the 640-1023 bottom bar').toEqual([]);
+  });
+
   test('OPAQUE is exact, and no fixed position is computed', () => {
     expect(sorted(tree.opaque)).toEqual(sorted(counts(OPAQUE)));
     expect(tree.dynamicFixed).toEqual([]);
@@ -258,18 +284,20 @@ describe('every bottom-anchored fixed layer clears the pinned footer, or is exem
 describe('viewport-sized boxes leave room for the pinned footer', () => {
   const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
-  test('the desktop Realm shell subtracts FOOTER_INSET', () => {
+  test('the desktop Realm shell subtracts FOOTER_INSET and the bottom bar under the painted arrow', () => {
     expect(read('src/components/WorldMap.jsx'))
-      .toMatch(/height:\s*`calc\(100vh - \$\{CHROME\.mapShellOffset\}px - \$\{FOOTER_INSET\}\)`/);
+      .toMatch(/height:\s*`calc\(100vh - \$\{ARROW_CLEAR\} - 66px - \$\{BOTTOM_NAV_H\} - \$\{FOOTER_INSET\}\)`/);
   });
 
-  test('the desktop Entity Inspector subtracts FOOTER_INSET', () => {
+  test('the desktop Entity Inspector subtracts FOOTER_INSET and the bottom bar below the arrow\'s barb', () => {
     expect(read('src/components/dossier/SettlementWorkbench.jsx'))
-      .toMatch(/maxHeight:\s*`calc\(100dvh - 112px - \$\{FOOTER_INSET\}\)`/);
+      .toMatch(/maxHeight:\s*`calc\(100dvh - \$\{ARROW_BARB_CLEAR\} - 48px - \$\{BOTTOM_NAV_H\} - \$\{FOOTER_INSET\}\)`/);
   });
 
-  test('the lifted Surveyor panels keep their top edge by subtracting the same inset', () => {
-    expect(read('src/components/InterviewPanel.jsx')).toMatch(/maxHeight:\s*`calc\(100vh - 32px - \$\{FOOTER_INSET\}\)`/);
-    expect(read('src/components/surveyor/SurveyorWorkshop.jsx')).toMatch(/maxHeight:\s*`calc\(100vh - 160px - \$\{FOOTER_INSET\}\)`/);
+  test('the lifted Surveyor panels keep their top edge by subtracting the same lifts', () => {
+    expect(read('src/components/InterviewPanel.jsx'))
+      .toMatch(/maxHeight:\s*`calc\(100vh - 32px - \$\{FOOTER_INSET\}\$\{isMobile \? '' : ` - \$\{BOTTOM_NAV_H\}`\}\)`/);
+    expect(read('src/components/surveyor/SurveyorWorkshop.jsx'))
+      .toMatch(/maxHeight:\s*`calc\(100vh - 160px - \$\{FOOTER_INSET\}\$\{isMobile \? '' : ` - \$\{BOTTOM_NAV_H\}`\}\)`/);
   });
 });

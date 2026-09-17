@@ -12,26 +12,34 @@
  *
  * What this file pins (jsdom has no layout engine, so these are CONTRACTS; the
  * geometry lives in e2e/pinned-footer.spec.js):
+ * THE PAINTED ARROW (owner orders 2026-09-16, the chair's ruling on its plan): the footer pins
+ * only where the full painted arrow shows, 1024 px and up. From 640 to 1023 px the bottom bar
+ * holds the viewport's bottom edge, so the footer lies in the page flow (its look unchanged)
+ * with the page's bottom padding clearing the bar, and both footer variables are 0px there.
+ * The header's height is no longer measured by the footer hook: ArrowHeader writes it.
+ *
  *   (a) desktop: the one global <footer> is sticky on the header's own layer, its
  *       bottom offset is minus THE TUCK (the tuck variable, never a literal 0), it sits
  *       outside any <header>, and its nav is still labelled "Footer";
  *   (b) that layer sits above the landing's positioned content (z 1) and below the
  *       drawer scrim, read from the registry, so drawers stay modal;
- *   (c) phones: the footer stays in the page flow (never sticky) with its nav
+ *   (c) below 1024 px: the footer stays in the page flow (never sticky); on phones with its nav
  *       clearance, on a plain route and on the landing, on a LOW layer (z 2): above
  *       the landing's fixed film (z 0) and its z-1 roots, so they cannot paint over
  *       it, and below the generation reveal (z 45) and the sticky header (z 50), as
- *       the unpositioned footer was; the landing hero takes the letterbox height
- *       (header and BAND subtracted) on desktop only;
+ *       the unpositioned footer was; from 640 to 1023 px its look is the desktop one and the
+ *       page's bottom padding clears the bar; the landing hero takes the letterbox height
+ *       (the BAND and the bar subtracted: the hero starts under the transparent header) on
+ *       desktop only;
  *   (d) useChromeInsets measures THE BAND (the footer's top edge to the top of the row
  *       after the links row, floored) and THE TUCK (the full height minus the band),
  *       re-measures on resize, writes 0px for both when the footer is not pinned, and
- *       removes all three variables on unmount; App wires it with the breakpoint;
+ *       removes both variables on unmount; App wires it with the 1024 breakpoint;
  *   (e) aboveFooter's output, and theme.js re-exporting the leaf's names;
  *   (f) the injected rules (scroll-padding-bottom, the footer controls' matching
- *       scroll-margin, print, the keyboard reveal on :focus-visible) spell the exported
- *       names, reach the document once, and stay OUT of the render-blocking
- *       src/index.css (its byte budget had 5 B of headroom);
+ *       scroll-margin, print for the footer and for the arrow's hang layer, the keyboard
+ *       reveal on :focus-visible) spell the exported names, reach the document once, and
+ *       stay OUT of the render-blocking src/index.css (its byte budget had 5 B of headroom);
  *   (g) the links row carries the stable hook, and the home button is the row after it.
  */
 
@@ -46,8 +54,9 @@ import * as leaf from '../../src/lib/chromeInsets.js';
 import { CHROME_INSET_RULES, CHROME_INSET_STYLE_ID } from '../../src/lib/chromeInsets.js';
 import LegalRibbonRow from '../../src/components/footer/LegalRibbonRow.jsx';
 import {
-  CHROME, FOOTER_INSET, FOOTER_INSET_VAR, FOOTER_LINKS_ATTR, FOOTER_TUCKED_BOTTOM, FOOTER_TUCK_VAR, HEADER_HEIGHT_VAR,
-  aboveFooter, bottomClearance,
+  ARROW_BARB_CLEAR, ARROW_CLEAR, ARROW_HANG, ARROW_VARS, BOTTOM_NAV_H, BOTTOM_NAV_H_VAR, CHROME, FOOTER_INSET, FOOTER_INSET_VAR,
+  FOOTER_LINKS_ATTR, FOOTER_TUCKED_BOTTOM, FOOTER_TUCK_VAR, HEADER_H, HEADER_HEIGHT_VAR, aboveBottomNav, aboveFooter,
+  bottomClearance,
 } from '../../src/components/theme.js';
 import { landing } from '../../src/copy/landing.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -55,6 +64,8 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const H = vi.hoisted(() => ({
   route: { view: 'compendium', params: {}, legacy: false, notFound: false },
   isMobile: false,
+  // The painted arrow's switch (useIsMobile(1024)); null follows isMobile.
+  narrow: null,
   storeState: null,
 }));
 
@@ -76,7 +87,9 @@ vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { auth: { getUser: () => Promise.resolve({ data: { user: null } }) } },
 }));
 
-vi.mock('../../src/hooks/useIsMobile', () => ({ default: () => H.isMobile }));
+vi.mock('../../src/hooks/useIsMobile', () => ({
+  default: (bp) => (bp === 1024 ? (H.narrow ?? H.isMobile) : H.isMobile),
+}));
 
 vi.mock('../../src/lib/stripe.js', () => ({
   checkCheckoutResult: () => null,
@@ -153,14 +166,13 @@ const esc = (s) => String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
  * footer's height alone, would write the wrong number). Values are binary-exact so the
  * tuck prints without float noise.
  */
-const BOX = { FOOTER_TOP: 500, FOOTER_H: 121.5, NEXT_TOP: 551.75, HEADER_H: 38.25 };
+const BOX = { FOOTER_TOP: 500, FOOTER_H: 121.5, NEXT_TOP: 551.75 };
 
 function stubMeasurements() {
   return vi.spyOn(window.HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function rect() {
     let top = 0;
     let height = 0;
-    if (this.tagName === 'HEADER') height = BOX.HEADER_H;
-    else if (this.tagName === 'FOOTER') { top = BOX.FOOTER_TOP; height = BOX.FOOTER_H; }
+    if (this.tagName === 'FOOTER') { top = BOX.FOOTER_TOP; height = BOX.FOOTER_H; }
     else if (this.matches(`[${FOOTER_LINKS_ATTR}] + *`)) { top = BOX.NEXT_TOP; height = 30; }
     return { x: 0, y: top, top, left: 0, right: 0, bottom: top + height, width: 0, height, toJSON() {} };
   });
@@ -184,8 +196,9 @@ const rootVar = (name) => document.documentElement.style.getPropertyValue(name);
 beforeEach(() => {
   H.route = { view: 'compendium', params: {}, legacy: false, notFound: false };
   H.isMobile = false;
+  H.narrow = null;
   H.storeState = makeState();
-  Object.assign(BOX, { FOOTER_TOP: 500, FOOTER_H: 121.5, NEXT_TOP: 551.75, HEADER_H: 38.25 });
+  Object.assign(BOX, { FOOTER_TOP: 500, FOOTER_H: 121.5, NEXT_TOP: 551.75 });
   window.history.replaceState(null, '', '/compendium');
 });
 
@@ -193,7 +206,7 @@ afterEach(() => {
   cleanup();
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
-  for (const name of [FOOTER_INSET_VAR, FOOTER_TUCK_VAR, HEADER_HEIGHT_VAR]) document.documentElement.style.removeProperty(name);
+  for (const name of [FOOTER_INSET_VAR, FOOTER_TUCK_VAR, ...ARROW_VARS]) document.documentElement.style.removeProperty(name);
 });
 
 describe('(a) desktop: the one footer is pinned the way the header is, tucked below its links row', () => {
@@ -291,6 +304,29 @@ describe('(c) phones keep the in-flow footer; the landing hero letterboxes on de
     expect(hero.style.minHeight, 'phones keep the 86vh rule from index.css').toBe('');
   });
 
+  test('640 to 1023 px /terms: the footer lies in the flow with its desktop look, and the page clears the bottom bar', () => {
+    H.narrow = true;
+    H.route = { view: 'terms', params: {}, legacy: false, notFound: false };
+    window.history.replaceState(null, '', '/terms');
+    const { container } = render(<App />);
+    const footer = container.querySelector('footer');
+    expect(footer, 'presence control: the footer rendered').not.toBeNull();
+    // The chair's ruling: the footer pins only with the full arrow (1024 px and up).
+    expect(footer.style.position).toBe('relative');
+    expect(footer.style.zIndex).toBe('2');
+    expect(footer.style.bottom).toBe(FOOTER_TUCKED_BOTTOM);
+    expect(rootVar(FOOTER_INSET_VAR), 'the band is 0px below 1024').toBe('0px');
+    expect(rootVar(FOOTER_TUCK_VAR), 'nothing is tucked below 1024').toBe('0px');
+    // "keep it the same": the footer's own look is the desktop one at these widths.
+    expect(footer.style.padding).toBe('16px 24px');
+    expect(footer.style.borderTop).toBe('1px solid rgba(160, 118, 42, 0.25)');
+    // The bottom bar shows here, so the page itself ends BOTTOM_NAV_H lower.
+    const shell = container.querySelector('.parchment-bg');
+    expect(shell.style.paddingBottom).toBe(BOTTOM_NAV_H);
+    expect(rootVar('--sf-bottom-nav-h'), 'the bar height is published').toBe('calc(45px + env(safe-area-inset-bottom))');
+    expect(container.querySelectorAll('[data-testid="legal-ribbon-row"]').length).toBe(1);
+  });
+
   test('desktop /home: the hero letterboxes to the gap between the header and the band, and the footer is pinned', async () => {
     H.route = { view: 'home', params: {}, legacy: false, notFound: false };
     window.history.replaceState(null, '', '/');
@@ -302,8 +338,11 @@ describe('(c) phones keep the in-flow footer; the landing hero letterboxes on de
     }, { timeout: 8000 });
     expect(hero.classList.contains('sf-landing-hero')).toBe(true);
     // The band (FOOTER_INSET), never the full footer: at scroll 0 the hero's bottom edge
-    // is the band's top edge, and the tucked rows hang below the viewport.
-    expect(hero.style.minHeight).toBe(`calc(100vh - var(${HEADER_HEIGHT_VAR}, ${CHROME.headerDesktop}px) - ${FOOTER_INSET})`);
+    // is the band's top edge, and the tucked rows hang below the viewport. The hero starts
+    // under the transparent painted header (its wrapper pulls up by HEADER_H), so only the
+    // band and the bottom bar (0px at 1024 and up) are subtracted.
+    expect(hero.style.minHeight).toBe(`calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`);
+    expect(hero.parentElement.style.marginTop).toBe(`calc(-16px - ${HEADER_H})`);
     expect(FOOTER_INSET).toBe(`var(${FOOTER_INSET_VAR}, 0px)`);
     expect(container.querySelector('footer').style.position).toBe('sticky');
   });
@@ -327,14 +366,15 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     );
   }
 
-  test('a pinned render writes the floored band, the tuck (full height minus band) and the header', () => {
+  test('a pinned render writes the floored band and the tuck (full height minus band), and never the header', () => {
     stubMeasurements();
     stubResizeObserver();
     render(<Probe pinned />);
     // band = floor(551.75 - 500) = 51; tuck = 121.5 - 51 = 70.5.
     expect(rootVar(FOOTER_INSET_VAR), 'the inset is the BAND, not the full footer').toBe('51px');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('70.5px');
-    expect(rootVar(HEADER_HEIGHT_VAR)).toBe('38px');
+    // The painted header's length has one writer, ArrowHeader, and it is not this hook.
+    expect(rootVar(HEADER_HEIGHT_VAR)).toBe('');
     expect(parseFloat(rootVar(FOOTER_INSET_VAR)) + parseFloat(rootVar(FOOTER_TUCK_VAR)), 'band + tuck = the whole footer').toBe(BOX.FOOTER_H);
   });
 
@@ -343,12 +383,11 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     const observers = stubResizeObserver();
     render(<Probe pinned />);
     expect(observers.length).toBe(1);
-    expect(observers[0].targets.map((el) => el.tagName).sort()).toEqual(['FOOTER', 'HEADER']);
-    Object.assign(BOX, { FOOTER_H: 180.25, NEXT_TOP: 566.5, HEADER_H: 80.75 });
+    expect(observers[0].targets.map((el) => el.tagName)).toEqual(['FOOTER']);
+    Object.assign(BOX, { FOOTER_H: 180.25, NEXT_TOP: 566.5 });
     act(() => { observers[0].cb([]); });
     expect(rootVar(FOOTER_INSET_VAR)).toBe('66px');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('114.25px');
-    expect(rootVar(HEADER_HEIGHT_VAR)).toBe('80px');
   });
 
   test('NEGATIVE CONTROL: an unpinned render writes 0px for the band and the tuck', () => {
@@ -358,7 +397,6 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     expect(rootVar(FOOTER_INSET_VAR)).not.toBe('51px');
     expect(rootVar(FOOTER_INSET_VAR)).toBe('0px');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('0px');
-    expect(rootVar(HEADER_HEIGHT_VAR), 'the header is still measured').toBe('38px');
   });
 
   test('without the links-row hook the band falls back to the whole footer (nothing tucks away)', () => {
@@ -369,7 +407,7 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     expect(rootVar(FOOTER_TUCK_VAR), 'under one pixel').toBe('0.5px');
   });
 
-  test('flipping the pin re-runs the effect, and unmount removes all three variables', () => {
+  test('flipping the pin re-runs the effect, and unmount removes both variables', () => {
     stubMeasurements();
     const observers = stubResizeObserver();
     const view = render(<Probe pinned />);
@@ -381,7 +419,6 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     view.unmount();
     expect(rootVar(FOOTER_INSET_VAR)).toBe('');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('');
-    expect(rootVar(HEADER_HEIGHT_VAR)).toBe('');
     expect(observers.every((o) => o.disconnected)).toBe(true);
   });
 
@@ -393,17 +430,23 @@ describe('(d) useChromeInsets: the band, the tuck, re-measure, unpin, clean up',
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('70.5px');
   });
 
-  test('App wires the hook to the breakpoint and the real footer row: band and tuck on desktop, 0px on phones', () => {
+  test('App wires the hook to the 1024 breakpoint and the real footer row: band and tuck with the full arrow, 0px below', () => {
     stubMeasurements();
     stubResizeObserver();
     const desktop = render(<App />);
     expect(rootVar(FOOTER_INSET_VAR), 'the real LegalRibbonRow carries the hook').toBe('51px');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('70.5px');
-    expect(rootVar(HEADER_HEIGHT_VAR)).toBe('38px');
     desktop.unmount();
     expect(rootVar(FOOTER_INSET_VAR)).toBe('');
     expect(rootVar(FOOTER_TUCK_VAR)).toBe('');
 
+    H.narrow = true;
+    const tablet = render(<App />);
+    expect(rootVar(FOOTER_INSET_VAR), '640 to 1023 px: not pinned').toBe('0px');
+    expect(rootVar(FOOTER_TUCK_VAR)).toBe('0px');
+    tablet.unmount();
+
+    H.narrow = null;
     H.isMobile = true;
     render(<App />);
     expect(rootVar(FOOTER_INSET_VAR)).toBe('0px');
@@ -427,6 +470,10 @@ describe('(e) aboveFooter and the theme re-export', () => {
     expect(FOOTER_LINKS_ATTR).toBe(leaf.FOOTER_LINKS_ATTR);
     expect(FOOTER_INSET).toBe(leaf.FOOTER_INSET);
     expect(FOOTER_TUCKED_BOTTOM).toBe(leaf.FOOTER_TUCKED_BOTTOM);
+    // The painted arrow's lengths share the leaf.
+    expect([HEADER_H, ARROW_HANG, ARROW_CLEAR, ARROW_BARB_CLEAR, BOTTOM_NAV_H, ARROW_VARS, aboveBottomNav])
+      .toEqual([leaf.HEADER_H, leaf.ARROW_HANG, leaf.ARROW_CLEAR, leaf.ARROW_BARB_CLEAR, leaf.BOTTOM_NAV_H, leaf.ARROW_VARS, leaf.aboveBottomNav]);
+    expect(aboveBottomNav(24)).toBe('calc(24px + var(--sf-bottom-nav-h, 0px))');
   });
 });
 
@@ -434,8 +481,10 @@ describe('(f) the injected rules: exported spellings, injected once, out of the 
   const rules = CHROME_INSET_RULES;
   const css = readFileSync(join(ROOT, 'src/index.css'), 'utf8');
 
-  test('keyboard focus scrolls clear of the band (WCAG 2.2 SC 2.4.11)', () => {
-    expect(rules).toMatch(new RegExp(`html\\{scroll-padding-bottom:var\\(${esc(FOOTER_INSET_VAR)}, 0px\\)\\}`));
+  test('keyboard focus scrolls clear of the band and of the bottom bar (WCAG 2.2 SC 2.4.11)', () => {
+    // The band is 0px wherever the bar shows (below 1024 px) and the bar 0px wherever the band
+    // does, so the sum is whichever edge chrome the width has.
+    expect(rules).toMatch(new RegExp(`html\\{scroll-padding-bottom:calc\\(var\\(${esc(FOOTER_INSET_VAR)}, 0px\\) \\+ var\\(${esc(BOTTOM_NAV_H_VAR)}, 0px\\)\\)\\}`));
   });
 
   test('the footer\'s own controls translate their focus rect up by the band, so focusing one never scrolls', () => {
@@ -445,6 +494,10 @@ describe('(f) the injected rules: exported spellings, injected once, out of the 
 
   test('print lays the footer back into the flow', () => {
     expect(rules).toMatch(/@media print\{\.parchment-bg>footer\{position:static!important\}\}/);
+  });
+
+  test('print leaves out the painted arrow\'s hang layer, so the feather never overprints a page', () => {
+    expect(rules).toContain('@media print{.sf-arrow-hang{display:none}}');
   });
 
   test('the keyboard reveal zeroes the tuck on the footer while a tucked control is :focus-visible', () => {
@@ -470,14 +523,18 @@ describe('(f) the injected rules: exported spellings, injected once, out of the 
 
   test('none of the footer rules is declared in the render-blocking index.css', () => {
     // The letterbox is an inline height in the lazy HomeLanding chunk (pinned in (c)), so
-    // no declaration in this sheet may compose the chrome variables at all. Comments are
+    // no declaration in this sheet may compose the footer variables at all. Comments are
     // stripped first (they may name a variable, and the build strips them too); the
     // injected rules spelling two of the names is the anchor that the names are live.
     const declarations = css.replace(/\/\*[\s\S]*?\*\//g, '');
     expect(rules.includes(FOOTER_INSET_VAR) && rules.includes(FOOTER_TUCK_VAR), 'presence control: the names are live').toBe(true);
-    for (const name of [FOOTER_INSET_VAR, FOOTER_TUCK_VAR, HEADER_HEIGHT_VAR]) {
+    for (const name of [FOOTER_INSET_VAR, FOOTER_TUCK_VAR]) {
       expect(declarations.includes(name), `${name} is not composed in index.css`).toBe(false);
     }
+    // The painted header's band height is read by exactly one rule here, the lazy-route
+    // floor (1 declaration per @supports arm), and never declared.
+    expect(declarations.match(/min-height:\s*calc\(100s?vh - var\(--sf-header-h, 0px\)\)/g)).toHaveLength(2);
+    expect(declarations.split(HEADER_HEIGHT_VAR).length - 1, 'no other use of the header length').toBe(2);
     expect(/scroll-padding-bottom\s*:/.test(css)).toBe(false);
     expect(/scroll-margin\s*:/.test(css)).toBe(false);
     expect(/@media\s+print/.test(css)).toBe(false);

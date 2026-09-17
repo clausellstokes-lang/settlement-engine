@@ -8,7 +8,7 @@
  */
 
 import { Suspense, lazy } from 'react';
-import { sans, FS, ELEV, swatch, aboveFooter } from '../theme.js';
+import { sans, FS, ELEV, swatch, aboveFooter, aboveBottomNav } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { t } from '../../copy/index.js';
@@ -73,8 +73,10 @@ export function WorldMapOverlays({
           role={toast.kind === 'error' ? 'alert' : undefined}
           aria-live={toast.kind === 'error' ? 'assertive' : undefined}
           style={{
-          // Lifted above the pinned desktop footer's links band (owner orders 2026-09-16).
-          position: 'fixed', bottom: aboveFooter(20), left: '50%', transform: 'translateX(-50%)',
+          // Lifted above the pinned desktop footer's links band (owner orders 2026-09-16)
+          // and the bottom bar from 640 to 1023 px (the Realm workspace renders from 640;
+          // phones get RealmMobileGate instead).
+          position: 'fixed', bottom: aboveFooter(aboveBottomNav(20)), left: '50%', transform: 'translateX(-50%)',
           display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
           background: toast.kind === 'error' ? swatch['#8A2A2A'] : toast.kind === 'info' ? swatch.info : swatch.success,

@@ -863,6 +863,433 @@ not tokenised.)
 
 ---
 
+## THE PAINTED ARROW HEADER (owner orders 2026-09-16; replaces the procedural ribbon)
+
+**The orders (owner, 2026-09-16):** "Replace the arrow ribbon entirely with the following
+image however appropriate. This is the arrow we were trying and failing to create, so I
+created it. I do not want you to emulate it. I want some copy/cut/cropped/pasted version of
+this arrow as the header/ribbon of the entire website." Then: "The top of the wooden shaft
+(not the top feather) is where the page starts, so cut off that top feather." Then: "I leave
+judgments to you." And of the footer: "keep it the same".
+
+**The chair's rulings on the plan (vetoable; say "veto" on the row to flip it):**
+- The design object in the header recon is the plan: one painted strip drawn as DOM segments
+  with CSS masks (not a canvas), two stacked clips (the header's shaft band at z 50 and a
+  sticky zero-height hang layer at z 35 carrying the feather and barb, with a content
+  reserve), S_MAX 0.6, the word floor 0.48 and the 1024 switch.
+- Below 1024 the COMPACT arrow (brand crop, a filler slot, the tail crop with the blank
+  plate); the bottom bar shows six seats from 640 to 1023 (five below 640).
+- The account's home is a parchment slip on the blank plate (Sign In or the account name);
+  credits, Upgrade (still launch-locked with its pill) and Admin move into the plate's menu.
+- Ship exactly the kit's `arrow-strip.q90.webp` (2133x182) and `arrow-filler.q90.webp`
+  (183x70). The filler is cut from the painting's own plain-wood gaps. Every slot cut keeps
+  at least FE px of plain wood on both sides; Compendium's two gaps are too narrow, so
+  Compendium gets no slots.
+- THE CROSSFADE LESSON: each slot's filler is painted OPAQUE first, spanning the slot plus FE
+  on both sides, and only the painted segments fade over it (two layers that both fade dip in
+  opacity and show the page through as grey bands).
+- ONE CHANGE TO THE PLAN: the footer pins only in full-arrow mode (1024 and up). From 640 to
+  1023 it is in normal flow at the page end with clearance above the bottom bar, and every
+  footer inset variable is 0px there.
+- Nav regions stay Button elements (links deferred), aria-current parity with today, the
+  home control named "SettlementForge home" outside the nav, the anonymous "Sign In" name
+  unchanged.
+
+**Part 1, the paint engine (built and tested, not wired into App.jsx; uncommitted, the chair
+commits):**
+- `public/brand/arrow/arrow-strip.webp` and `arrow-filler.webp`: the kit's files byte for byte
+  (sha256 matched at the copy), then the provenance credit written by
+  `scripts/inject-ai-provenance.mjs` as container-only byte surgery. The ALPH and VP8 chunks
+  are byte-identical to the kit's and the decoded pixels are identical (sharp decode compared
+  before and after). Strip 68,530 B to 70,230 B; filler 3,310 B to 5,024 B.
+- `scripts/ai-media-provenance.json`: two rows (origin `openai:gpt-image@2026-09-16`, agent
+  OpenAI, model gpt-image 2.0 as the master's C2PA manifest names it, credit null because the
+  master carries no human-readable credit, forbid `urn:c2pa` and `Made with Google AI`),
+  `_counts` 52 to 54 present of 77, and an `_originals` note: the C2PA-bearing original is
+  the owner's `~/Desktop/ChatGPT Image Sep 16, 2026, 08_15_41 PM.png` (sha1 e3bc3461...), the
+  kit's copy lives in a temporary scratchpad, no manifest is fabricated, and whether OpenAI's
+  terms require more disclosure is an owner or legal question.
+- `tests/build/aiMediaProvenance.test.js`: `public/brand/arrow` joins MEDIA_ROOTS and
+  PRESENT_COUNT moves 52 to 54 in the same change.
+- `src/components/nav/arrowGeometry.js` (pure, JSDoc-typed): every table measured from the
+  shipped strip's decoded pixels, and `layoutArrow({ clientWidth, full, short })` with
+  `mapX`, plus `padTarget` for 44 px targets.
+- `src/components/nav/useChromeWidth.js`: one external store (a guarded ResizeObserver on the
+  document element, a resize fallback, the short-viewport query), no window access at
+  module load.
+- `src/components/nav/ArrowPaint.jsx`: fillers first and opaque, then masked segments; the
+  band and hang parts; aria-hidden, alt="", no pointer events, one high-priority fetch.
+- Pins: `tests/components/arrowGeometry.test.js` (23), `tests/build/arrowHeaderAssets.test.js`
+  (22), `tests/components/arrowPaint.test.jsx` (12). Seven negative controls were executed
+  by breaking the source and restoring it (a cut moved onto Gallery's G, Create's region
+  moved onto binding 2, the hang cut short, segments painted before fillers, the observer
+  never disconnected, a mask on the fillers, the uncredited kit filler shipped): each went
+  red in its arms and green again once restored.
+
+**Measured corrections to the plan (JUDGMENT rows, vetoable):**
+- JUDGMENT: FE stays 10. Under the shipped strip's own measurement every one of the kit's
+  eleven prototype cuts (558, 657, 713, 825, 881, 982, 1234, 1350, 1413, 1516, 1596) has ten
+  plain columns on both sides. The addendum's first run (550..567) was two columns short at
+  its left; the pixels are plain from 548.
+- JUDGMENT: the compact join is 558 / 1596, not 511 / 1612. Column 511 has five columns of
+  wood to its left and the first binding at 512, so no crossfade fits there. The brand crop
+  now carries the first binding; the compact arrow's natural width is 1095 strip px and its
+  scale min(0.6, cw / 1135), so phones render about 5 percent smaller than the plan's figures
+  (390 px: band 23.4 px, home 176 px wide, plate 87 px, slip 49 x 12.4 px).
+- JUDGMENT: with no Compendium slots the full arrow has 12 shares, not 14: uncut below 1303.8
+  px (s peaks at 0.611 at 1303, above S_MAX as the plan's rule intends), S_MAX up to 2597.4 px,
+  then one filler tile per share. 1280 renders as one uncut image; 1440 inserts 13.4 px of
+  wood per share; 1920, 53.4 px.
+- JUDGMENT: the barb reserve is 41 rows, not 39 (the barb's alpha ends at row 108), and the
+  hit regions run between the MEASURED binding edges (Create 547..668, Library 702..836, Realm
+  870..994, Compendium 1027..1187, Gallery 1219..1364, About 1397..1530).
+- JUDGMENT: row 0 is opaque across 82..1946 and 1989..2055, not the whole of 82..2055: the
+  painting has a see-through notch where the arrowhead's upper barb leaves the socket.
+- JUDGMENT: the slip sits BETWEEN the plate's rivets (1683..1825 x 13..49; the flat field is
+  1672..1833 x 11..51, the rivets at 1664..1679 and 1829..1843). The plan's 1672..1833 x 18..50
+  would cover both rivets.
+- JUDGMENT: `scripts/inject-ai-provenance.mjs` wrote a hard-coded 2026-08-24 into
+  `sfp:restoredOn` and its C2PA note, which would have stamped a false date into the arrow
+  files. A row's own `restored` date now wins. All 46 earlier rows record 2026-08-24, so their
+  packets are unchanged: stripping and re-injecting all 46 reproduced the shipped bytes
+  exactly, before and after the edit.
+- ⚠ FINDING FOR PART 2 (contrast on the real pixels, pinned in arrowHeaderAssets (g)): the
+  plan's "INK focus ring, 4.30:1 at the 5th percentile" does not hold across the band. INK
+  clears 3:1 against the darkest 1 percent of plain wood only on rows 4 to 23. PARCH_100
+  clears 3:1 against the lightest 1 percent only on rows 37 to 66. On rows 0 to 3, 24 to 36
+  and 67 neither does, so a one-colour ring or rule cannot meet 3:1 around a painted region;
+  a two-tone INK and PARCH_100 ring (15.2:1 between its own colours) can. The active-page rule
+  rows (52 and 53, under every descender) take PARCH_100 at 8.3:1 or more and INK at 1.26:1 at
+  best. The house bronze `#a0762a` is 1.26:1 against the median wood.
+
+**Deliberately deferred (documented, not bugs to re-find):**
+- `src/hooks/useChromeInsets.js` already writes `--sf-header-h` (the measured header height,
+  floored). The plan makes ArrowHeader's layout effect the only writer of that name; part 2
+  must retire or reconcile the hook's write so there are not two writers.
+- `THIRD-PARTY-NOTICES.md` section 7 and `public/third-party-notices.html` do not yet name the
+  OpenAI-generated header art. A disclosure edit is an owner or legal surface and was not
+  made.
+- The lighting census walker reds on the three new test files (files 2,584 to 2,587); its
+  governed refreeze belongs in its own commit after the code commit.
+- The two new pin files and the render contract are not enumerated invariants under
+  `tests/lint/mutationCoverage.shared.mjs` (their names carry no invariant token and they sit
+  outside the enforcer trees), so no manifest rows are owed; the plan's mutation-sweep areas
+  for the new guards wait for part 2's header test.
+- Not built, no e2e and no browser seam measurement yet (part 2): the crossfades, the
+  filler's repeat and the band-to-hang boundary still need the seam metric at DPR 1, 1.25, 1.5
+  and 2 in Chromium and WebKit, and owner review.
+
+**Part 2, the header in the app (built and tested; uncommitted, the chair commits):**
+- `src/components/nav/ArrowHeader.jsx` is mounted once by App.jsx for every width: the sticky
+  shaft band (z 50, height `--sf-header-h`, transparent, no shadow, filter, transform or clip)
+  holding the band paint, the home control ("SettlementForge home", outside the nav), the
+  `<nav aria-label="Primary">` of six painted words (full arrow only, NAV order, keyed by id,
+  `aria-current` when `view === id`, a PARCH_100 rule under the current word) and the account
+  plate; then, as its next sibling, the zero-height sticky hang layer (z 35, no pointer events,
+  aria-hidden, `sf-arrow-hang`). Its layout effect is the one writer of `--sf-header-h`,
+  `--sf-arrow-hang`, `--sf-arrow-clear`, `--sf-arrow-barb-clear` and `--sf-bottom-nav-h`
+  (names in `src/lib/chromeInsets.js`, re-exported by theme.js with their var() strings and
+  `aboveBottomNav`). App.jsx keeps `handleNavClick`, every tier comparison, the skip link and
+  `<main>`.
+- `src/components/nav/ArrowControl.jsx`: every control is a transparent Button primitive over a
+  painted rectangle (no raw buttons), with `--sf-focus: INK`, a PARCH_100 inner band while it has
+  keyboard focus (the two-tone ring part 1's pixel finding requires), a PARCH_100 hover wash, no
+  radius and no shadow. Phones and coarse pointers get 44 x 44 targets through `padTarget`.
+- `src/components/AccountMenu.jsx` is the plate: a parchment slip between the rivets reads
+  "Sign In" (the accessible name, unchanged) or the account name; the menu adds the credits row
+  ("..., N credits remaining", to pricing), Upgrade (free tier only, native-disabled with
+  AvailableAtLaunchPill while `purchasesOpen()` is false) and Admin panel (elevated only), and
+  completes the menu-button pattern (Enter / Space / ArrowDown / ArrowUp open and focus a row,
+  arrows / Home / End move over enabled rows, Escape and a choice return focus to the plate, Tab
+  closes, `aria-controls`, rows out of the Tab order).
+- The bottom bar shows below 1024 px: five seats on phones, six from 640 (MOBILE_NAV_PRIORITY
+  order). THE CHAIR'S ONE CHANGE, landed: `useChromeInsets(!narrow)` pins the footer only with the
+  full arrow; from 640 to 1023 the footer is `relative` on z 2 in the flow, its look unchanged,
+  both footer variables 0px, and `.parchment-bg` pads its bottom by `BOTTOM_NAV_H`. The hook no
+  longer measures or writes the header height (the part 1 two-writers deferral is closed).
+- Every consumer of the old header numbers moved onto the painted lengths: main's top padding
+  reserves `ARROW_HANG` on every view but the landing (whose hero now starts under the
+  transparent header), WizardOutputToolbar pins at `HEADER_H` (and turns `visibility: hidden`
+  after its mobile slide), GenerateWizard's scroll padding, the Realm shell and RealmMobileGate,
+  the dossier rail, the Entity Inspector, the Gallery sidebar, `ANCHOR_OFFSET`
+  (`calc(ARROW_CLEAR + 24px)`), the checkout toast and CampaignSyncBanner (below the band), and
+  every bottom-anchored layer's desktop branch (`aboveBottomNav`, so none lands on the 640 to
+  1023 bar; phones unchanged). `src/index.css`'s route floor reads `--sf-header-h`.
+- RETIRED in this change: NavRibbon, FletchBand, ShaftWrap, ShaftNock, NavDivider, Lockup,
+  GildedWordmark, WaxSeal, SealImpression, the war-arrow token block and FLETCH derivations in
+  theme.js, CHROME.headerMobile / headerDesktop / scrollPadDesktop / mapShellOffset, the
+  `.sf-shaft-wrap` CSS fallback, and the tests navFletching, navDividers, brandLockup,
+  compositedBarAA and textureBudget (their surviving pins moved into
+  `tests/components/arrowHeader.test.jsx`: no filter or transform on the header chain, no
+  overflow clip on the controls' or the menu's chain, the a11y.css ring width equals the
+  header's inset).
+- Registers moved in the same change: raw-button budget 42 to 39 and the NavRibbon row out;
+  App.jsx's size-baseline row deleted (650 to 562 effective lines) with the proseCorpusBytes
+  anchor, sweep area 14 and its manifest label retargeted onto `src/domain/explanation.js`;
+  sweep area 28b and its guard row out, area 98 re-anchored, areas 100 to 104 added (a nav edge
+  on a binding, a cut on a word, a hang layer with pointer events, a ring falling back to the
+  bronze, a retired height re-consumed), manifest rows for compositedBarAA, brandLockup and
+  textureBudget out, a mutation row for `tests/lint/arrowHeaderRetirement.test.js` and four
+  `meta:` rows in; negativeAssertionAnchor rows for the four deleted files and navFlowArrows out,
+  organicLogo 4 to 2; `arrowOverhang: 35` in the z-layer contract; HZ-GROUNDMOVE records the
+  fourth ground move (instances 3 to 4, the asset test joins its enforcers) and HZ-SIZECEILING
+  the App.jsx row; rawColorLiteral 1329 to 1326 (FletchBand's three); contrast.test.js loses
+  its five CSS-arrow describes and gains the slip and ring riders; organicLogo's inliner set is
+  HouseDevice alone with LegalRibbonRow as its negative control; the bottom-anchored walker
+  gains the bar-lift law; the deep-craft kill-list counts measured unchanged (84, 59, 163, 160).
+- Bytes (fresh build of the final tree, measured with the budget tests' own walker): first-paint
+  raw 1,033,094 of 1,048,000 (headroom 14,906, was 52 at d710f0a98), gzip 328,052 of 337,000
+  (8,948, was 3,870), Brotli 275,409 of 283,000 (7,591, was 3,486), render-blocking CSS 19,576 of
+  19,800 (224, was 5). No budget raised.
+
+**Part 2 judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: THE SEAM IS AN OVERLAP, NOT A BUTT JOIN. The plan joined the band and hang clips on
+  one CSS length. Measured (the seam metric compares the app against one unclipped image of the
+  strip): a light one-device-pixel hairline across the whole arrow in Chromium at DPR 1.5 (row
+  difference 85 against 3 elsewhere) and fainter at 1.25. Snapping the band to device pixels
+  was built and measured and did not cure it (layout rounds to 1/64 px first), so it was removed.
+  The layers now overlap on strip rows 55 to 62, which are opaque from the nock to the socket
+  (pinned on the pixels); the hairline is gone (85 to 4.8, no visible line at 4x in either
+  engine). Price: during the generation reveal (z 45) the shaft's rows 63 to 67, its
+  anti-aliased lower edge (about 3 CSS px at s 0.6), hide with the feather.
+- JUDGMENT: AccountMenu IS the plate control. The chip's only consumer was App, and its
+  SHAFT_SAGE / SHAFT_STEEL tones had no honest ground on brass, so the chip path retired rather
+  than living beside a `placement` prop. Its name is "Account menu, <name>" ("Account menu" when
+  the visible name is "Account"), with the unread suffix.
+- JUDGMENT: the two-tone ring is drawn by the control itself (INK `--sf-focus` plus a PARCH_100
+  inner band while `:focus-visible`), costing JS bytes, not stylesheet bytes; the active-page
+  rule is PARCH_100 on row 52 (part 1's measured finding over the plan's INK).
+- JUDGMENT: the hang layer's print rule is one of the injected chrome rules
+  (`@media print{.sf-arrow-hang{display:none}}` in lib/chromeInsets.js), not index.css: the
+  footer's pins forbid a print rule in the render-blocking sheet. The route floor's
+  `--sf-header-h` is the one chrome variable index.css reads (the pin now allows exactly its two
+  floor declarations).
+- JUDGMENT: the retirement scan lives at `tests/lint/arrowHeaderRetirement.test.js` (a source
+  scan belongs with the enforcers and so enumerates, with its own sweep plant), and the plan's
+  plants for the header and asset tests are claimed by `meta:` rows (those files do not
+  enumerate by name).
+- JUDGMENT: unkeyed docked Surveyor panels (AiAnalystPanel, InterviewPanel) read useIsMobile so
+  their desktop branch clears the bar and their phone offsets stay exactly as they were.
+- JUDGMENT: GenerateWizard's desktop scroll padding is `HEADER_H + 64 + 22 px` (the old 124 less
+  its 38 px bar and 64 px toolbar); the landing letterbox is `100vh - FOOTER_INSET - BOTTOM_NAV_H`
+  because the hero now starts at the top of the viewport; the checkout toast and the campaign
+  sync banner sit `SP.sm` below the band.
+- JUDGMENT: the z-layer note (the header shares the value 50 with `popover` deliberately) is its
+  own `_arrowHeaderLayers` key, so the contract's `_doc` is untouched.
+- JUDGMENT: `--sf-bottom-nav-h` publishes the bar as rendered, 45 px (a 44 px seat and its 1 px
+  rule) plus the bottom safe-area inset, not the plan's 57: the Chromium e2e run measured the bar
+  at 45 px at 390 and 800 px and the landing hero ended 12 px short of it. CHROME.bottomNav (57)
+  is the older phone token, 12 px generous, and the phone surfaces that read it (RealmMobileGate
+  and the fab lifts) are left as they were (recorded, not re-tuned here).
+
+**Part 2 findings for the owner (measured, not fixed):**
+- ⚠ THE FILLER TILE HAS A BRIGHT BAND. Its column-mean luma peaks at 134 around column 140
+  against 111 to 121 elsewhere, so every repeat of the tile shows a lighter vertical stripe.
+  It is plain at the eleven single-share slots up to 2597 px but visible in the double-share slot
+  before the blank plate on wide screens (two repeats at 2560). The kit's filler ships
+  byte-exact per the chair's ruling; a re-cut or a longer seamless filler from the painting is a
+  kit decision. Seam metric, joins: the worst step inside a slot is 1 to 2.4 times the plain
+  wood's 95th-percentile step, the plate slot the worst in every engine and ratio (receipts in
+  the scratchpad `arrow-part2/seam-metric3.txt`, screenshots in `arrow-part2/shots/`).
+- The strict "no join above the plain-wood p95" bar the plan set fails by that margin at most
+  joins, and the band/hang row difference at fractional ratios stays a little above the other
+  rows' p95 (Chromium 1.25 and 1.5: 4.3 and 4.8 against 2.9 and 3.0; WebKit 1.25: 8.8 against
+  8.1). Neither shows as a line in 4x crops. Owner sign-off on the screenshots is owed.
+
+**Part 2 deliberately deferred (documented, not bugs to re-find):**
+- WebKit scroll smoothness with the masked segments under sticky layers at 1920 and 2560 was
+  not measured (the plan's WebKit compositing risk); the fallback remains baking feathered crops.
+- Pre-existing and unchanged: on phones the docked Surveyor panels (z 60) sit partly under the
+  bottom bar (z 100); the account menu's z 1200 is effectively 50 inside the header's stacking
+  context; SessionEvictedBanner covers the band with the feather hanging below it.
+- Owner questions carried from the plan: whether /about/guide should light About (it lights
+  nothing, parity), whether the nav regions should become links, whether S_MAX should grow,
+  and WCAG 1.4.5 (the painted words are images of text by the owner's design; the names are
+  real text).
+- `THIRD-PARTY-NOTICES.md` still does not name the OpenAI-generated art (part 1's deferral).
+- The lighting census walker reds on this change's test-file count; its governed refreeze is
+  its own commit after the code commit.
+
+**Part 3, the review's fixes and the feather order (2026-09-17; uncommitted, the chair commits):**
+
+**The owner's new order (2026-09-17):** "once we start scrolling, the feather in the arrow
+turns completely transparent, only to reappear fully if they scroll to the very top."
+
+**The chair's rulings for this fix (vetoable; say "veto" on the row to flip it):**
+- A. THE FILLER, RE-CUT BY THE CHAIR from the painting's own pixels: `arrow-filler.webp` is the
+  kit's `arrow-filler-v3.q90.webp` (372x70, 6,366 B, kit sha256 `fb8659db...`; master
+  `arrow-filler-v3.png`) plus the committed injector's credit, 8,246 B (sha256 `43ddc3bf...`),
+  pixels identical to the kit's (decoded and compared). It joins the eleven plain-wood runs in
+  painting order and then in a different order, mirrored, leaves out the bright knot beside
+  binding 7, matches each row's lighting and flattens the column brightness (column luma 110.9
+  to 116.6, measured). FILLER_W 183 to 372 everywhere it is read (the tile size, the per-slot
+  phases, the tiled zone); the provenance row's `mapped_by` describes the re-cut and its
+  `restored` date is 2026-09-17, the day the credit was written.
+- B. TONE PER SLOT: `SLOT_TONE` in `arrowGeometry.js` holds the chair's table (558 1.047, 657
+  1.027, 713 1.044, 825 1.014, 881 1.035, 982 1.019, 1234 0.994, 1350 0.955, 1413 0.981, 1516
+  0.923, 1596 0.802). Each slot's filler takes `filter: brightness(k)`; the compact slot takes
+  its left cut's tone (1.047) at its left end and its right cut's (0.802) at its right end: an
+  opaque copy of the tile at the right tone fades in across the slot over the tile at the left
+  tone, so nothing fades over the page. `tests/build/arrowHeaderAssets.test.js` re-measures the
+  table on the shipped strip and filler to within 0.02.
+- C. THE PLATE SLIP: a signed-in name is shown as written (no capitals, no letter-spacing), its
+  type stepped down half a pixel at a time to SLIP_FLOOR before any ellipsis, with the full name
+  in a title and in the plate's accessible name. "SIGN IN" is unchanged.
+- D. HOVER: a soft radial glow, `radial-gradient(closest-side, color-mix(in srgb, PARCH_100 34%,
+  transparent), transparent)`, on the hovered word, the logo plate or the blank plate, drawn only
+  where `matchMedia('(hover: hover)')` matches when the pointer enters (a tap on a phone lights
+  nothing). The Button primitive's flat hover fill is switched off on the arrow's controls
+  (`--sf-btn-hover-bg: transparent`, because that variable only takes a colour). Zero stylesheet
+  bytes.
+- E. Recorded, not changed: the band jumps from 40.8 to 32.6 px when a window is resized across
+  1024, and a classic scrollbar's width dips the full arrow's scale under the word floor (a 1024
+  px window less a 15 to 17 px scrollbar lays s at about 0.472).
+- F. THE FEATHER HIDES ON SCROLL, superseding the plan's constant feather: fully opaque only while
+  the page is at its very top (scrollY under 1 px), fully transparent (opacity 0, still no pointer
+  events and aria-hidden) anywhere else, a 120 ms fade that a11y.css's reduced-motion rule
+  collapses to 1 ms, the right state on the first render of a page that loads already scrolled,
+  one passive scroll listener, and main's content reserve unchanged. The arrowhead's lower barb is
+  NOT the feather and stays (the chair's reading).
+
+**How F is built:** the hang layer now holds two parts. `ArrowPaint part="hang"` draws rows 55
+down as before but through an L-shaped mask: rows above 68 at every column, and every row from
+strip column 480 rightward (the barb, the cord ends, the shaft's own lower edge). `ArrowPaint
+part="feather"` draws exactly the rest, columns [0, 480) from row 60 down, and ArrowHeader sets
+its opacity from `featherShown(window.scrollY)` read through `useSyncExternalStore`, so the header
+re-renders only when that answer flips. The asset test pins the geometry on the pixels: below row
+73 nothing left of the barb hangs outside columns [0, 480) (the feather itself is more than 20,000
+pixels there), nothing above alpha 12 crosses column 480 below the band, and the overlap rows are
+opaque except the nock's end [0, 80) and the feather's tip [455, 480).
+
+**The review's findings, dispositioned:**
+1. The pale wood before the blank plate: FIXED by A and B. The review's seam metric on the
+   compendium page, zone mean luma step across a crossfade (before, the review's run of this tree,
+   then after; the after run's plain-wood p95 in brackets): 2560 slot 10 fade-out 26.18 to 0.95
+   and fade-in 26.28 to 2.43 [2.67]; 1920 slot 9 fade-in 20.93 to 1.89, slot 10 fade-out 26.75 to
+   0.38 and fade-in 24.74 to 2.85 [2.85]; 1440 at DPR 1 slot 10 26.75 and 20.09 to 0.64 and 0.51
+   [3.34]; 1440 at DPR 2 29.76 and 19.45 to 1.73 and 0.09 [5.32]; the compact slot at 1023
+   fade-in 26.2 to 3.7 [2.68] and at 800 25.69 to 4.26 [3.94]. Filler minus the painted
+   neighbours at slot 10: +21.29 to -0.22 at 1920 and +21.62 to -0.37 at 2560; the compact slot
+   +9.49 to +0.87 at 1023. Every filler box edge still matches the unclipped reference (0). The
+   after run's plain-wood p95s are lower because the re-cut tile has no knot, so "over" counts do
+   not compare across the two runs; the step values do.
+2. The knot repeating every 109.8 px: FIXED by A. The re-cut has no knot, and one tile is 223.2
+   CSS px at s 0.6, so no single-share slot repeats it up to 3958.2 px; at 2560 the double share
+   is 213.4 px, under one tile.
+3. The slip cutting names: FIXED by C. Measured in the preview build: "Wanderer" at 390 px 8.5 px
+   and whole, at 1024 px 11 px and whole, at 1440 px 12 px and whole; "Aldric Thornby" at 390 px 8
+   px with an ellipsis ("Aldric T...", 41 of 56 px shown, the full name in the title and the
+   plate's name), at 1024 px 8.5 px and whole, at 1440 px 11 px and whole (Chromium; WebKit shows
+   the same at 390 and 1440, and at 1024 see the WebKit finding below).
+4. No primary navigation landmark from 640 to 1023 px, and the destinations at the end of the Tab
+   order: FIXED. Below 1024 px the bottom bar is `<nav aria-label="Primary">` (the header's nav
+   shows only with the full arrow, so there is exactly one Primary nav at every width, pinned at
+   390, 800 and 1440) and it sits in the DOM right after the header and its hang layer, so its
+   seats come before main in the Tab order. It is fixed, so nothing moves on screen.
+5. and 9. Keyboard focus under the bar from 640 to 1023 px (two reviewers): FIXED.
+   `html{scroll-padding-bottom:calc(var(--sf-footer-inset, 0px) + var(--sf-bottom-nav-h, 0px))}`:
+   the band is 0px wherever the bar shows and the bar 0px wherever the band does, so 1024 px and
+   up is unchanged and phones gain the fix too. A new e2e arm at 800 px: a nearest-aligned scroll
+   lands above the bar, with the root padding at 45px.
+6. The plate menu off the page at 320 px: FIXED. `menuShift` moves the menu right only as far as
+   keeps MENU_W (292 px, the review's measured 284 plus slack) 8 px inside the page's left edge,
+   never past its right edge less 8, and the menu's max-width is the page width less 16. Pinned in
+   jsdom (320 shifts; 390 and 1440 stay right-aligned) and in a WebKit arm at 320 px (the menu and
+   every row start on the page).
+7. The current-page rule lost under forced colours: FIXED with `forcedColorAdjust: 'none'` on the
+   rule, which keeps PARCH_100 (8.3:1 on those rows of the painting, which forced colours leave
+   alone); pinned on React's own serialisation of the header.
+8. The locked Upgrade row out of reach: FIXED. It is aria-disabled, not native disabled: the arrow
+   keys land on it and it reads its pill, it keeps the locked look (opacity 0.62, not-allowed), and
+   a click or Enter on it does nothing and leaves the menu open. The launch-lock test's
+   `expectLocked` accepts aria-disabled for a menu row only; every other locked control is still
+   native disabled.
+10. The first frame laid across the width before the scrollbar: FIXED. ArrowHeader re-reads the
+   width in a layout effect and, if it moved, re-renders in the same task, before any paint.
+   Pinned twice: in jsdom (a root rendered outside act; a microtask queued from the commit sees the
+   band at 1903px, not 1920px) and in Chromium launched without `--hide-scrollbars` (presence
+   controls: no scrollbar before the app, a classic scrollbar after; the first committed frame's
+   paint width equals the page's clientWidth and nothing scrolls sideways).
+
+**Part 3 judgment calls (vetoable; say "veto" on the row to flip it):**
+- JUDGMENT: the feather's layer ends at strip column 480 and starts below row 68 for what hides.
+  Scrolled, the shaft over the feather's columns ends at row 68: simulated cuts at rows 70, 72 and
+  74 left a grey sliver of feather under the shaft, and row 68 did not.
+- JUDGMENT: the feather layer overlaps the always-drawn hang by eight rows (from row 60), fading in
+  across the first four and whole for the last four. A fade across all eight left a light line of
+  page ground at the hang's mask edge in Chromium at 390 px and a device pixel ratio of 3 (that
+  device row's mean luma 98 against 61 without the split), because the mask edge lands up to a
+  device pixel early. With the fade ending four rows early, the split draws the same rows as the
+  unsplit hang to within a row mean of 2.05 over the feather's columns (rows 52 to 92) in Chromium
+  and WebKit at DPR 1, 1.25, 1.5, 2 and 3. Price, at the top of the page only: the overlap's
+  translucent pixels (the nock's end and the feather's tip) draw twice. Against the pre-fix build
+  at 1440 px, 39 of 1,440 pixels in rows 60 to 68 move by more than 8 levels (at most 26); at 390
+  px, 140 of 660 (at most 23). Side by side at 6x the two builds look the same.
+- JUDGMENT: `featherShown(scrollY)` is `!(scrollY >= 1)`: 0.5 px and the overscroll bounce count as
+  the top, 1 px does not, and a value that is not a position counts as the top.
+- JUDGMENT: SLIP_FLOOR is the house 8 px step (FS.nano). Measured in Nunito Bold, an 8-letter name
+  needs 8.5 px on the 390 px slip (40.8 px of text room) and 7.97 px at 360 px, so a 9 px floor cut
+  it at 390 (the WebKit arm went red at 9 px before the floor moved). At a device pixel ratio of 3
+  the 8 px name reads cleanly.
+- JUDGMENT: the full arrow's tiled zone follows the filler width, as the plan's rule reads ("no
+  slot ever grows longer than one filler tile"): S_MAX now holds up to 3958.2 px (it was 2597.4),
+  so a 3440 px ultrawide keeps s 0.6 (band 40.8 px) where it drew s 0.795.
+- JUDGMENT: the asset test re-measures SLOT_TONE in BT.601 luma, where the chair's table
+  reproduces to within 0.014 on the shipped pixels (in Rec. 709 luma, within 0.024, over the 0.02
+  tolerance). The table itself is the chair's.
+- JUDGMENT: the filler's wrap-seam pin compares the wrap step with the roughest step of the tile's
+  own grain instead of its 95th percentile. The shipped re-cut wraps at 4.34 (grain p95 3.61, p99
+  4.23, max 4.77); the kit's PNG master wraps at 3.30 (its p95 3.24), so the q90 encode roughened
+  that one column. A new CONTROL shows every mis-wrap sampled (columns 20 to 340) measures 4.94 or
+  rougher, so the pin still convicts a wrong wrap.
+- JUDGMENT: the filler's byte ceiling in the asset test moved with the file, by ruling A (5,200 for
+  the 5,024 B first cut; now exactly the re-cut's 8,246 B, no slack). No other ceiling, budget,
+  cap or baseline moved.
+- JUDGMENT: the bottom bar's new DOM place (right after the header) holds for phones too, where it
+  sat after the footer: the destinations come before the page for keyboard and screen-reader users
+  at every width under 1024 px, as the Primary nav does in the header from 1024 up.
+- JUDGMENT: the glow appears and goes with the pointer (no fade), inside a box that is the word's
+  lettering widened by 10 strip columns (inside its region and clear of every cut), the logo plate
+  (columns 128 to 505, between the nock's binding and binding 1, re-measured on the pixels) or the
+  blank plate, over band rows 4 to 64.
+
+**Part 3 findings for the owner or the kit (measured, not fixed):**
+- The plate slot's wood now matches in brightness but reads a little grey: at 2560 px the filler's
+  mean chroma is 73 against 93 and 89 in the painted wood on either side (a brightness filter dims
+  colour with light, while the painting's darker wood beside the plate stays warm). A per-slot
+  `saturate()` measured the way the tone is, or a warmer cut, would close it; that is an art call
+  past ruling B.
+- WebKit's `max-width` media query leaves a classic scrollbar out: Playwright's WebKit at a 1024 px
+  window (clientWidth 1018) lays the COMPACT arrow and the bar where Chromium lays the full arrow
+  (CONFIRMED in Playwright's WebKit; PLAUSIBLE for Safari with always-shown scrollbars, at windows
+  from 1024 to about 1038 px). It belongs with ruling E's switch questions.
+- The compact slot's right-hand fade-in still steps slightly above plain wood (3.7 against 2.68 at
+  1023 px, 4.26 against 3.94 at 800 px): the painting darkens from about 96 to 87 across the wood
+  run the tail crop starts in, and one tone meets it there.
+
+**Bytes (a fresh build of the final tree, measured with the budget tests' own walker):**
+first-paint raw 1,036,070 of 1,048,000 (headroom 11,930; part 2 measured 1,033,094), gzip
+329,151 of 337,000 (7,849), Brotli 276,417 of 283,000 (6,583), render-blocking CSS 19,576 of
+19,800 (224, unchanged). No budget raised.
+
+**Negative controls executed (the source broken, the named arm red, the source restored byte for
+byte):** in jsdom, the first-frame re-read removed, the feather forced opaque, SLOT_TONE at 1596
+set to 0.9, the brightness filter dropped, Upgrade back to native disabled, the glow lit on every
+mouseenter, the menu never shifted, the slip never stepped down, the bar back to a plain div and
+the hang's mask removed; in the browser, the feather forced opaque (Chromium), the first-frame
+re-read removed (the classic-scrollbar arm, red on "the first frame is laid across the page
+width"), the old scroll-padding rule (the 800 px arm, red on "the control lands above the bar")
+and the menu never shifted (the WebKit 320 px arm, red on "the menu starts on the page").
+
+**Part 3 deliberately deferred (documented, not bugs to re-find):**
+- The lighting census walker is red (test files 2,584 to 2,585 from parts 1 and 2, and this part's
+  new titles); its governed refreeze is its own commit after the code commit.
+- The plate slot's residual grey and WebKit's scrollbar-blind switch (above) wait on the owner or
+  the kit.
+- `THIRD-PARTY-NOTICES.md` still does not name the OpenAI-generated art (part 1's deferral).
+
+---
+
 ## LD-5 — RIBBON DROPDOWNS + THE ACCOUNT IA (owner-ordered 2026-08-01;
 ## implementation = the external implementer; composes with LD-2's dividers)
 

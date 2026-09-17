@@ -23,7 +23,7 @@ import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { CHROME } from '../../src/components/theme.js';
+import { CHROME, HEADER_H } from '../../src/components/theme.js';
 
 afterEach(cleanup);
 
@@ -65,7 +65,7 @@ describe('WizardOutputToolbar layering + controls', () => {
     expect(screen.getByRole('button', { name: /new draft/i })).toBeTruthy();
   });
 
-  test('sticks fully clear of the global header (offset >= header height) under a lower z-index', () => {
+  test('sticks flush below the painted header (its own length) under a lower z-index', () => {
     const { container } = renderToolbar();
     const bar = container.firstChild;
     expect(bar.style.position).toBe('sticky');
@@ -73,15 +73,15 @@ describe('WizardOutputToolbar layering + controls', () => {
     // positive offset. An offset short of the header (the old top:52) left the
     // bar's top edge tucked under the chrome.
     //
-    // ⚠️ THIS ASSERTED `>= 59` UNTIL RIBBON V2, AND 59 WAS NEVER THIS BAR'S NUMBER.
-    // It is CHROME.headerMobile, and it passed only because headerDesktop happened
-    // to be 60 — one greater. Slimming the shaft to 48 made a correct toolbar fail
-    // a pin that was measuring the wrong surface all along. The real contract is an
-    // EQUALITY with the desktop header token: the toolbar pins flush beneath the
-    // bar, so it tracks any future resize instead of needing this line edited.
-    expect(parseInt(bar.style.top, 10)).toBe(CHROME.headerDesktop);
-    // Lower than the header's z-index (50) so the header wins the overlap.
+    // The header is the owner's arrow painting (2026-09-16), whose band height scales
+    // with the page, so the contract is an EQUALITY with the header's own length
+    // (HEADER_H, the --sf-header-h var ArrowHeader writes): the toolbar pins flush
+    // beneath the shaft at every width instead of needing this line edited.
+    expect(bar.style.top).toBe(HEADER_H);
+    // Lower than the header's z-index (50) so the header wins the overlap, and above
+    // the feather's hang layer (35) so the pinned bar covers the feather.
     expect(Number(bar.style.zIndex)).toBeLessThan(50);
+    expect(Number(bar.style.zIndex)).toBeGreaterThan(35);
   });
 
   test('mobile pins BELOW the slim app header so the two stack (not under it)', () => {
@@ -93,8 +93,24 @@ describe('WizardOutputToolbar layering + controls', () => {
     const { container } = renderToolbar({ isMobile: true });
     const bar = container.firstChild;
     expect(bar.style.position).toBe('sticky');
-    expect(parseInt(bar.style.top, 10)).toBe(CHROME.headerMobile);
+    expect(bar.style.top).toBe(HEADER_H);
     expect(Number(bar.style.zIndex)).toBeLessThan(50);
+  });
+
+  test('mobile hide-on-scroll also hides the bar once its slide ends (the painted header is see-through)', () => {
+    const { container } = renderToolbar({ isMobile: true });
+    const bar = container.firstChild;
+    expect(bar.style.visibility).toBe('visible');
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 400 });
+    fireEvent.scroll(window);
+    expect(bar.style.transform).toBe('translateY(-140%)');
+    expect(bar.style.visibility).toBe('hidden');
+    // The visibility change waits out the 0.25 s slide.
+    expect(bar.style.transition).toContain('visibility 0s linear 0.25s');
+    Object.defineProperty(window, 'scrollY', { configurable: true, value: 0 });
+    fireEvent.scroll(window);
+    expect(bar.style.visibility).toBe('visible');
+    delete window.scrollY;
   });
 
   test('caps its OWN width to the dossier column and centres it, without a wrapper', () => {
@@ -149,26 +165,21 @@ describe('Create-view sticky chrome: occlusion root-cause guards', () => {
     // a scroller) and clears the full chrome stack (header + pinned toolbar).
     const wizardSrc = readFileSync(fromTest('../../src/components/GenerateWizard.jsx'), 'utf8');
     expect(wizardSrc).toMatch(/document\.documentElement[\s\S]{0,200}scrollPaddingTop/);
-    // Desktop clearance must reach past the pinned toolbar's bottom (~124px) —
-    // not a header-only offset that re-hides the tab strip behind the toolbar.
-    // Mobile now STACKS the slim header and the toolbar (the toolbar pins at the
-    // header's height, no longer at top:0), so the mobile clearance is the sum
-    // of both chrome heights rather than a single header's worth. Both offsets
-    // are driven by CHROME tokens, not inline literals.
-    const padMatch = wizardSrc.match(
-      /scrollPaddingTop\s*=\s*isMobile\s*\?\s*`\$\{mobilePad\}px`\s*:\s*`\$\{CHROME\.scrollPadDesktop\}px`/,
-    );
-    expect(padMatch, 'expected a mobile/desktop scrollPaddingTop assignment').toBeTruthy();
+    // Clearance must reach past the pinned toolbar's bottom, not a header-only offset
+    // that re-hides the tab strip behind the toolbar. The header is the owner's arrow
+    // painting, whose band height scales with the page, so the pad is DERIVED: the
+    // header's own length (HEADER_H) plus the toolbar (CHROME.toolbarHeight), with 22 px
+    // of air on desktop.
     expect(
       wizardSrc,
-      'expected the mobile clearance to sum the header + toolbar chrome',
-    ).toMatch(/const mobilePad\s*=\s*CHROME\.headerMobile\s*\+\s*CHROME\.toolbarHeight/);
-    const themeSrc = readFileSync(fromTest('../../src/components/theme.js'), 'utf8');
-    const desktopPad = themeSrc.match(/scrollPadDesktop\s*:\s*(\d+)/);
-    expect(desktopPad, 'expected CHROME.scrollPadDesktop in theme.js').toBeTruthy();
-    expect(Number(desktopPad[1])).toBeGreaterThanOrEqual(120);
-    // Mobile stacked clearance must clear both bars.
-    expect(CHROME.headerMobile + CHROME.toolbarHeight).toBeGreaterThanOrEqual(120);
+      'expected the pad to derive from the toolbar token, plus the desktop air',
+    ).toMatch(/const pad\s*=\s*isMobile\s*\?\s*CHROME\.toolbarHeight\s*:\s*CHROME\.toolbarHeight\s*\+\s*22;/);
+    expect(
+      wizardSrc,
+      'expected one scrollPaddingTop assignment composing the header length',
+    ).toMatch(/root\.style\.scrollPaddingTop\s*=\s*`calc\(\$\{HEADER_H\}\s*\+\s*\$\{pad\}px\)`/);
+    expect((wizardSrc.match(/scrollPaddingTop\s*=/g) || []).length, 'one assignment plus the restore').toBe(2);
+    expect(CHROME.toolbarHeight).toBeGreaterThanOrEqual(64);
   });
 });
 

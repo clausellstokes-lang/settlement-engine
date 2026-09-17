@@ -70,7 +70,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // what the AST rule it claims to mirror already does — is chair-gated and
 // reported, not taken here: it would move the measurement basis for 3 further
 // files that carry prose mentions ALONGSIDE real raw buttons.
-const BUTTON_BUDGET = 42;
+// THE PAINTED ARROW HEADER (owner orders 2026-09-16): tightened 42 → 39, the count
+// MEASURED on this tree. The header became the owner's arrow painting with its controls
+// on the Button primitive, so three raw buttons left with the retired chrome: NavRibbon's
+// cell (its file and its baseline row are gone), App.jsx's desktop brand button and
+// App.jsx's credits badge (the balance is a row of the plate's menu now). App.jsx stays in
+// the set for the bottom bar's seats. The three units are locked here, not left as headroom.
+const BUTTON_BUDGET = 39;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;

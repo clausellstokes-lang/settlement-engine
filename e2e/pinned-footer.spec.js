@@ -18,18 +18,22 @@
  * style contract), so these arms measure boxes:
  *   1. at scroll 0 the landing shows the links row whole, the home button starts at or
  *      below the viewport bottom, the visible band equals the inset, and the hero's
- *      dark band ends at the band's top edge, at the owner's viewport and three more
- *      (one with the header wrapped); at maximum scroll the home button and the
+ *      dark band ends at the band's top edge, at the owner's viewport and two more
+ *      (1280 and the 1024 switch); at maximum scroll the home button and the
  *      copyright line are fully inside the viewport;
  *   2. every route carries one footer row, shows only the band at scroll 0 and the
  *      whole footer at maximum scroll;
  *   3. the scroll-button stack (the owner's square arrow) and the Realm map shell end
  *      above the band;
- *   4. keyboard: focus in main never lands under the band (WCAG 2.2 SC 2.4.11); Tab to
+ *   4. keyboard: focus in main never lands under the band (WCAG 2.2 SC 2.4.11), and below
+ *      1024 px a nearest-aligned scroll stops above the bottom bar; Tab to
  *      the tucked home button reveals the whole footer without scrolling; focusing a
  *      footer link mid-page never scrolls the document; a MOUSE press on the home
  *      button does not hold the footer open;
  *   5. print lays the footer back into the flow;
+ *   5b. (the painted arrow, 2026-09-16) the footer pins only where the full arrow shows,
+ *      1024 px and up: from 640 to 1023 px the bottom bar holds the bottom edge, the footer
+ *      lies in the flow, and the landing hero ends at the bar;
  *   6. phones keep the in-flow footer, with no inset and no tuck, and the landing's
  *      Terms link clears the fixed bottom nav at the end of the page and is actually
  *      painted there, not under the landing's fixed film (LD-3's deferred pin);
@@ -138,7 +142,7 @@ async function raf(page) {
 }
 
 test.describe('the landing: the dark band ends where the floating links band begins', () => {
-  for (const [width, height] of [[2000, 1093], [1280, 800], [1024, 768], [800, 900]]) {
+  for (const [width, height] of [[2000, 1093], [1280, 800], [1024, 768]]) {
     test(`at ${width}x${height}: only the links band at scroll 0, the whole footer at the end`, async ({ page }) => {
       await freshPage(page);
       await page.setViewportSize({ width, height });
@@ -186,6 +190,40 @@ test.describe('the landing: the dark band ends where the floating links band beg
     });
   }
 
+  test('at 800x900 (below the 1024 switch) the footer lies in the flow and the hero ends at the bottom bar', async ({ page }) => {
+    await freshPage(page);
+    await page.setViewportSize({ width: 800, height: 900 });
+    await page.goto('/home', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('section[aria-labelledby="sf-hero-title"]');
+    await page.waitForSelector('#closer', { state: 'attached' });
+    await settleChrome(page, { pinned: false });
+    const m = await page.evaluate(() => {
+      const hero = document.querySelector('section[aria-labelledby="sf-hero-title"]').getBoundingClientRect();
+      const bar = [...document.querySelectorAll('.parchment-bg > nav')].find((d) => getComputedStyle(d).position === 'fixed');
+      const root = document.documentElement.style;
+      return {
+        footerPosition: getComputedStyle(document.querySelector('footer')).position,
+        inset: root.getPropertyValue('--sf-footer-inset'),
+        tuck: root.getPropertyValue('--sf-footer-tuck'),
+        heroTop: hero.top,
+        heroBottom: hero.bottom,
+        barTop: bar ? bar.getBoundingClientRect().top : null,
+      };
+    });
+    expect(m.footerPosition).toBe('relative');
+    expect([m.inset, m.tuck]).toEqual(['0px', '0px']);
+    expect(m.barTop, 'presence control: the bottom bar shows at 800').not.toBeNull();
+    expect(m.heroTop, 'the hero starts under the transparent painted header').toBeLessThanOrEqual(EPS);
+    expect(Math.abs(m.heroBottom - m.barTop), 'the hero ends at the bottom bar').toBeLessThanOrEqual(2);
+
+    await scrollToY(page, 'max');
+    const end = await page.evaluate(() => {
+      const bar = [...document.querySelectorAll('.parchment-bg > nav')].find((d) => getComputedStyle(d).position === 'fixed');
+      return { footerBottom: document.querySelector('footer').getBoundingClientRect().bottom, barTop: bar.getBoundingClientRect().top };
+    });
+    expect(end.footerBottom, 'at the end of the page the footer clears the bar').toBeLessThanOrEqual(end.barTop + EPS);
+  });
+
   test('the scroll-button stack sits above the footer', async ({ page }) => {
     await freshPage(page);
     await page.setViewportSize({ width: 2000, height: 1093 });
@@ -232,8 +270,9 @@ test.describe('every route: one row, the band alone at scroll 0, the whole foote
     await freshPage(page);
     await page.setViewportSize({ width: 2000, height: 1093 });
     await page.goto('/realm', { waitUntil: 'domcontentloaded' });
-    // The shell's inline height is the calc WorldMap.jsx writes (CHROME.mapShellOffset 120).
-    const shell = page.locator('main [style*="100vh - 120px"]').first();
+    // The shell's inline height is the calc WorldMap.jsx writes (the painted arrow's clear
+    // length, 66 px of padding and air, the bottom bar and the footer's band).
+    const shell = page.locator('main [style*="100vh - var(--sf-arrow-clear"]').first();
     await shell.waitFor({ state: 'attached' });
     await settleChrome(page);
     await scrollToY(page, 0);
@@ -297,6 +336,38 @@ test('a nearest-aligned scroll stops above the footer (the root scroll-padding-b
   expect(m.startedBelowFold, 'presence control: the target began below the first viewport').toBe(true);
   expect(m.scrollY).toBeGreaterThan(0);
   expect(m.bottom, 'the control lands above the footer, not under it').toBeLessThanOrEqual(m.footerTop + EPS);
+});
+
+// Below 1024 px the fixed bottom bar holds the bottom edge and the band is 0px, so the same
+// root rule counts the bar instead (--sf-bottom-nav-h); without it a nearest-aligned scroll
+// stopped at the viewport's bottom edge, under the bar (the review's finding, 2026-09-17).
+test('below 1024 px a nearest-aligned scroll stops above the bottom bar (the same root rule)', async ({ page }) => {
+  await freshPage(page);
+  await page.setViewportSize({ width: 800, height: 900 });
+  await page.goto('/home', { waitUntil: 'domcontentloaded' });
+  await page.waitForSelector('#closer', { state: 'attached' });
+  await settleChrome(page, { pinned: false });
+  await scrollToY(page, 0);
+  const m = await page.evaluate(async () => {
+    const bar = [...document.querySelectorAll('.parchment-bg > nav')].find((d) => getComputedStyle(d).position === 'fixed');
+    const target = document.querySelector('#forge button');
+    const before = target.getBoundingClientRect();
+    target.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const after = target.getBoundingClientRect();
+    return {
+      startedBelowFold: before.top > window.innerHeight,
+      scrollY: window.scrollY,
+      bottom: after.bottom,
+      barTop: bar ? bar.getBoundingClientRect().top : null,
+      padding: getComputedStyle(document.documentElement).scrollPaddingBottom,
+    };
+  });
+  expect(m.barTop, 'presence control: the bottom bar shows at 800').not.toBeNull();
+  expect(m.startedBelowFold, 'presence control: the target began below the first viewport').toBe(true);
+  expect(m.scrollY).toBeGreaterThan(0);
+  expect(m.bottom, 'the control lands above the bar, not under it').toBeLessThanOrEqual(m.barTop + EPS);
+  expect(m.padding, 'the root padding is the bar as rendered').toBe('45px');
 });
 
 test('Tab to the tucked home button reveals the whole footer without scrolling, and Shift+Tab tucks it again', async ({ page }) => {
@@ -425,7 +496,7 @@ test('phones keep the in-flow footer, and the landing Terms link clears the bott
   await scrollToY(page, 'max');
   const geo = await page.evaluate((paintedAtSrc) => {
     const paintedAt = new Function(`return (${paintedAtSrc})`)();
-    const nav = [...document.querySelectorAll('.parchment-bg > div')].find((d) => getComputedStyle(d).position === 'fixed');
+    const nav = [...document.querySelectorAll('.parchment-bg > nav')].find((d) => getComputedStyle(d).position === 'fixed');
     const terms = [...document.querySelectorAll('footer nav[aria-label="Footer"] button')].find((b) => b.textContent.trim() === 'Terms');
     const r = terms ? terms.getBoundingClientRect() : null;
     // What is actually PAINTED at the link's centre: the landing's film backdrop is a

@@ -56,12 +56,11 @@ const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
 // THE ANCHOR LANDING OFFSET is theme.js's ANCHOR_OFFSET (imported above). The
-// desktop ribbon is `position:'sticky', top:0` (its module is moving under the LD
-// nav program, so this names the ribbon rather than a file), so a fragment jump — a
-// SectionNav click, a translated `?tab=` deep link, or useAboutHashScroll's
-// scrollIntoView — parks the section heading UNDERNEATH the chrome unless the target
-// carries a scroll margin. The derivation moved to theme.js (beside CHROME, the
-// measurement it comes from) when the SAME defect was found on /about/what-this-is:
+// painted arrow header is `position:'sticky', top:0` with the feather hanging below
+// it, so a fragment jump (a SectionNav click, a translated `?tab=` deep link, or
+// useAboutHashScroll's scrollIntoView) parks the section heading UNDERNEATH the
+// painting unless the target carries a scroll margin. The derivation moved to
+// theme.js (beside CHROME) when the SAME defect was found on /about/what-this-is:
 // three pages re-deriving one sum is three chances to drift, and the second page's
 // sections carried no margin at all.
 

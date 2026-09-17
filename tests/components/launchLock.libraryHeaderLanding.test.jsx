@@ -11,7 +11,10 @@
  *   1. SaveQuotaMeter's free-tier Upgrade (its anon Sign in sibling stays live);
  *   2. SettlementCard's "Free a slot or Upgrade" recovery button on a frozen row;
  *   3. SettlementCard's kebab-menu row "Advance time and run campaigns. Upgrade";
- *   4. App.jsx's desktop header Upgrade (free tier);
+ *   4. the header's free-tier Upgrade, a row of the account menu on the painted arrow's
+ *      blank plate (owner orders 2026-09-16: the header is the owner's painting, so
+ *      credits, Upgrade and Admin moved into the plate's menu; App.jsx still decides the
+ *      tier and passes the lock);
  *   5. LandingBelowFold's realm CTA, See Cartographer.
  *
  * CLOSED is the default and is exercised with launchGate.js REAL and unmocked: nothing
@@ -76,6 +79,10 @@ vi.mock('../../src/lib/creditLedger.js', () => ({
 
 vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
   default: () => null,
+}));
+
+vi.mock('../../src/components/account/OperatorMessagesProvider.jsx', () => ({
+  useOperatorMessages: () => ({ unreadCount: 0, refresh: vi.fn(async () => []) }),
 }));
 
 vi.mock('../../src/components/CompendiumPanel.jsx', () => ({
@@ -151,7 +158,14 @@ const pillIn = (control) => control.querySelector('[data-launch-pill]');
 /** Asserts a control is locked: disabled, with the pill and its words inside it. */
 function expectLocked(control) {
   expect(control.tagName).toBe('BUTTON');
-  expect(control.disabled).toBe(true);
+  if (control.getAttribute('role') === 'menuitem') {
+    // A locked MENU row is aria-disabled, not native-disabled, so the menu's arrow keys still
+    // reach it and it reads its pill (WAI-ARIA APG); its click does nothing (asserted by
+    // each arm).
+    expect(control.getAttribute('aria-disabled')).toBe('true');
+  } else {
+    expect(control.disabled).toBe(true);
+  }
   expect(pillIn(control)).toBeTruthy();
   expect(within(control).getByText(AVAILABLE_AT_LAUNCH)).toBeTruthy();
 }
@@ -161,6 +175,7 @@ function expectLive(control, label) {
   expect(control.tagName).toBe('BUTTON');
   expect(control.textContent).toBe(label);
   expect(control.disabled).toBe(false);
+  expect(control.hasAttribute('aria-disabled')).toBe(false);
   expect(pillIn(control)).toBeNull();
 }
 
@@ -191,6 +206,14 @@ function renderCard(props) {
 }
 
 const FREE_A_SLOT = 'Free a slot or Upgrade';
+
+/** Open the header's account plate and return its Upgrade row (still a `header button`). */
+async function headerUpgrade() {
+  fireEvent.click(await screen.findByRole('button', { name: 'Account menu, Wanderer Test' }));
+  const row = within(screen.getByRole('menu')).getByRole('menuitem', { name: /^Upgrade/ });
+  expect(row.closest('header'), 'the menu stays inside the header').toBeTruthy();
+  return row;
+}
 const MENU_UPGRADE = 'Advance time and run campaigns. Upgrade';
 
 describe('closed (the default build): every purchase control here is locked and wears the pill', () => {
@@ -237,7 +260,7 @@ describe('closed (the default build): every purchase control here is locked and 
 
   test('App header: the free-tier Upgrade is disabled with the pill, and a click does not route', async () => {
     render(<App />);
-    const upgrade = await screen.findByText('Upgrade', { selector: 'header button' });
+    const upgrade = await headerUpgrade();
     expectLocked(upgrade);
     navigate.mockClear();
     fireEvent.click(upgrade);
@@ -300,7 +323,7 @@ describe('open (VITE_PURCHASES_OPEN=true): every control behaves exactly as befo
   test('App header: Upgrade is enabled, pill-free, and routes to pricing', async () => {
     openPurchases();
     render(<App />);
-    const upgrade = await screen.findByText('Upgrade', { selector: 'header button' });
+    const upgrade = await headerUpgrade();
     expectLive(upgrade, 'Upgrade');
     navigate.mockClear();
     fireEvent.click(upgrade);

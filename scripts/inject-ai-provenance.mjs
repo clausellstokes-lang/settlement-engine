@@ -68,7 +68,13 @@ import { dirname, join } from 'node:path';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const REGISTER_PATH = join(ROOT, 'scripts', 'ai-media-provenance.json');
 
-/** The date this restore was performed. A constant: the output must be deterministic. */
+/**
+ * The date the first restore was performed. A constant: the output must be deterministic.
+ * A row that carries its own `restored` date writes that date instead (the 2026-09-16
+ * arrow-header art was credited that day, and stamping 2026-08-24 into it would be a
+ * claim the file cannot support). Every row the 2026-08-24 restore wrote records
+ * exactly this date, so its packet is byte-identical either way.
+ */
 export const RESTORED_ON = '2026-08-24';
 
 /** The byte-order mark an XMP packet header is required to open with. */
@@ -86,8 +92,8 @@ const TRAINED_ALGORITHMIC_MEDIA =
  * written into every file, so the disclaimer travels with the asset instead of
  * living only in a repository nobody downloads.
  */
-const C2PA_NOTE =
-  'Provenance credit re-added 2026-08-24 from the estate-held generation master. '
+const c2paNote = (restoredOn) =>
+  `Provenance credit re-added ${restoredOn} from the estate-held generation master. `
   + 'This is a plain XMP credit, NOT a C2PA manifest: the original C2PA manifest was '
   + 'removed by a re-encode, it was signed by a third party, and it cannot be '
   + 're-created or fabricated.';
@@ -114,8 +120,9 @@ export function buildXmpPacket(rel, row) {
   attrs.push(['sfp:generationMaster', row.master ?? 'not established']);
   if (row.mapped_by) attrs.push(['sfp:masterEstablishedBy', row.mapped_by]);
   attrs.push(['sfp:asset', rel]);
-  attrs.push(['sfp:restoredOn', RESTORED_ON]);
-  attrs.push(['sfp:c2paStatus', C2PA_NOTE]);
+  const restoredOn = row.restored ?? RESTORED_ON;
+  attrs.push(['sfp:restoredOn', restoredOn]);
+  attrs.push(['sfp:c2paStatus', c2paNote(restoredOn)]);
 
   const body = attrs.map(([k, v]) => `    ${k}="${xmlEscape(v)}"`).join('\n');
   return [

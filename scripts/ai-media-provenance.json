@@ -1,5 +1,5 @@
 {
-  "_comment": "THE AI-MEDIA PROVENANCE REGISTER. Every file under the four AI-media roots is listed here with the generator that produced it and whether it still carries that generator's provenance markings. tests/build/aiMediaProvenance.test.js walks it: a file on disk that is not registered here FAILS, a registered file missing from disk FAILS, a 'present' file that loses a required marker FAILS, and the number of 'absent' rows is a SHRINK-ONLY ratchet. Adding AI media without recording its origin is therefore impossible, and metadata that survives today cannot be stripped tomorrow.",
+  "_comment": "THE AI-MEDIA PROVENANCE REGISTER. Every file under the AI-media roots (the MEDIA_ROOTS list in the walker) is listed here with the generator that produced it and whether it still carries that generator's provenance markings. tests/build/aiMediaProvenance.test.js walks it: a file on disk that is not registered here FAILS, a registered file missing from disk FAILS, a 'present' file that loses a required marker FAILS, and the number of 'absent' rows is a SHRINK-ONLY ratchet. Adding AI media without recording its origin is therefore impossible, and metadata that survives today cannot be stripped tomorrow.",
   "_why": "Higgsfield Terms of Use section 5.5 ('you will not remove, alter, or obscure any provenance signals or markings') binds this pre-existing account from 2026-08-27; BytePlus's section 2(e) already prohibits the same act upstream. Two tracked sharp pipelines (scripts/optimize-backgrounds.mjs and scripts/optimize-landing-backgrounds.mjs) stripped metadata by default until 2026-08-24; both now call .keepMetadata() and the source-scan arm of the walker keeps it that way.",
   "_markers": {
     "present": "Carries provenance today. The 'require' list is pinned byte-for-byte by the walker.",
@@ -22,10 +22,10 @@
   },
   "_indemnity_standing_risk": "NOBODY INDEMNIFIES THE ESTATE. Higgsfield offers IP indemnification on the Enterprise plan only and the account was a paid consumer subscription; BytePlus's indemnity runs one way, toward BytePlus, and its section 7.5(c) voids protection where output was 'modified, transformed, or combined with products or services not provided by BytePlus' - which describes every file listed here. Not curable by any change in this repository; recorded so it is not re-found as a bug.",
   "_counts": {
-    "present": 52,
+    "present": 54,
     "absent": 0,
     "n/a": 23,
-    "total": 75
+    "total": 77
   },
   "assets": {
     "public/backgrounds/about.jpg": {
@@ -824,6 +824,52 @@
       ],
       "restored": "2026-08-24"
     },
+    "public/brand/arrow/arrow-filler.webp": {
+      "origin": "openai:gpt-image@2026-09-16",
+      "markers": "present",
+      "master": "ChatGPT Image Sep 16, 2026, 08_15_41 PM.png (the owner's file, sha1 e3bc346157045101faf8a46659107de5e7679e71)",
+      "model": "gpt-image 2.0 (the softwareAgent the master's C2PA manifest names)",
+      "agent": "OpenAI",
+      "generated": "2026-09-16",
+      "credit": null,
+      "mapped_by": "the owner supplied the master on 2026-09-16; this tile (372x70, re-cut 2026-09-17) joins the eleven plain-wood gaps of the levelled strip cut from it, in painting order and then again in a different order, mirrored, leaves out the bright knot beside binding 7, matches each row's lighting and flattens the column brightness so it wraps seamlessly, no pixel synthesised, then one q90 WebP encode",
+      "manifest_when": "2026-09-17T00:00:00Z in the master's C2PA manifest (UTC; 2026-09-16 about 20:15 EDT by the master's filename), signed by OpenAI OpCo, LLC for the OpenAI Media Service API",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "openai:gpt-image@2026-09-16",
+        "sfp:restoredOn=\"2026-09-17\""
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-09-17"
+    },
+    "public/brand/arrow/arrow-strip.webp": {
+      "origin": "openai:gpt-image@2026-09-16",
+      "markers": "present",
+      "master": "ChatGPT Image Sep 16, 2026, 08_15_41 PM.png (the owner's file, sha1 e3bc346157045101faf8a46659107de5e7679e71)",
+      "model": "gpt-image 2.0 (the softwareAgent the master's C2PA manifest names)",
+      "agent": "OpenAI",
+      "generated": "2026-09-16",
+      "credit": null,
+      "mapped_by": "the owner supplied the master on 2026-09-16; this strip is cut from it (a subject mask, integer column shifts at the cord bindings to level the shaft, a crop at the top of the wooden shaft), then one q90 WebP encode",
+      "manifest_when": "2026-09-17T00:00:00Z in the master's C2PA manifest (UTC; 2026-09-16 about 20:15 EDT by the master's filename), signed by OpenAI OpCo, LLC for the OpenAI Media Service API",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "openai:gpt-image@2026-09-16",
+        "sfp:restoredOn=\"2026-09-16\""
+      ],
+      "forbid": [
+        "urn:c2pa",
+        "Made with Google AI"
+      ],
+      "restored": "2026-09-16"
+    },
     "public/evolution/city.jpg": {
       "origin": "higgsfield:google-image@2026-07-18",
       "markers": "present",
@@ -1177,7 +1223,8 @@
     "where": "~/Desktop/settlementforge-marketing-masters/ - out of repo, on the owner's own disk, no download and no vendor round-trip needed. Measured 2026-08-24 by raw byte scan over 82 media files: 32 carry a C2PA manifest, 25 carry the 'Made with Google AI' credit and a SynthID marker.",
     "what it buys": "The human-readable credit, in full and first-hand: the masters are the authoritative source for the XMP photoshop:Credit, the IPTC DigitalSourceType tag, the hf-job-id and the generation date that a restore would write into the shipped derivatives. No approval-gated download is required for that work.",
     "what it does NOT buy": "A valid C2PA on anything the site serves. See _restorable. The one shipped file that carries a valid manifest, public/videos/realm-journey.mp4, carries it precisely because it was never re-encoded, and that is the whole reason re-generating the media would be a net LOSS rather than a cure.",
-    "ten masters with no Google attribution": "evolution-3-village, export-dispatch, gallery-board, hamlet-standalone-alt, metropolis-standalone-alt, 05-ledger-spread, 06-lexicon-page, 12-wax-press, 13-manuscript-page, 14-arrival carry an hf-job-id and no Google marker at all. Which model produced them is NOT established, so a restore must not stamp 'Made with Google AI' onto their derivatives. Two of the ten reach production."
+    "ten masters with no Google attribution": "evolution-3-village, export-dispatch, gallery-board, hamlet-standalone-alt, metropolis-standalone-alt, 05-ledger-spread, 06-lexicon-page, 12-wax-press, 13-manuscript-page, 14-arrival carry an hf-job-id and no Google marker at all. Which model produced them is NOT established, so a restore must not stamp 'Made with Google AI' onto their derivatives. Two of the ten reach production.",
+    "the arrow header master (2026-09-16)": "public/brand/arrow/ holds two cuts of one painting the owner generated with OpenAI's image service on 2026-09-16 (gpt-image 2.0 by its manifest) and supplied as the header art. The C2PA-bearing original is the owner's own file, ~/Desktop/ChatGPT Image Sep 16, 2026, 08_15_41 PM.png (sha1 e3bc346157045101faf8a46659107de5e7679e71), with a byte-identical copy in the cut kit (source.png in the session scratchpad, which is temporary, so the Desktop file is the one to keep). The manifest is signed by OpenAI OpCo, LLC and binds to that file's bytes; the cut (mask, levelling, crop, WebP encode) removed it from both derivatives, and no C2PA manifest is fabricated for them. scripts/inject-ai-provenance.mjs wrote the plain XMP credit into both on 2026-09-16 (their `restored` date), as container-only byte surgery that leaves the ALPH and VP8 chunks byte-identical. Whether OpenAI's terms require any disclosure beyond that credit is an owner or legal question, not settled here."
   },
   "_restore": {
     "what": "On 2026-08-24 scripts/inject-ai-provenance.mjs wrote an XMP provenance packet into the 46 shipped AI files that carried none, adding 71,229 bytes in total. Each packet carries the IPTC DigitalSourceType trainedAlgorithmicMedia tag, the generator, the generation date, the Higgsfield job id where the master recorded one, and photoshop:Credit ONLY where the master itself carried that credit.",

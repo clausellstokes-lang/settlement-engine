@@ -24,7 +24,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
-import { GOLD, GOLD_SOFT, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance, aboveFooter } from '../theme.js';
+import { GOLD, GOLD_SOFT, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance, aboveFooter, aboveBottomNav } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
@@ -125,8 +125,9 @@ export default function PricingMomentCard() {
         // Mobile lifts the card above the fixed bottom nav (+ safe-area inset)
         // so the fixed nudge never tucks under the nav row; desktop keeps the
         // plain SP.lg gap (no bottom nav there), lifted above the pinned footer by
-        // aboveFooter (owner order 2026-09-16; the inset is 0px on phones).
-        bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : SP.lg),
+        // aboveFooter (owner order 2026-09-16; the inset is 0px on phones), and over the
+        // bottom bar from 640 to 1023 px by aboveBottomNav.
+        bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(SP.lg)),
         right: SP.lg,
         maxWidth: 360,
         width: 'calc(100% - 32px)',

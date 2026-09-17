@@ -39,11 +39,11 @@ function Tip({ children }) {
 
 export default function CompareSection() {
   return (
-    // scrollMarginTop (theme.js ANCHOR_OFFSET = CHROME.headerDesktop + SP.xxl —
-    // the sticky bar plus one gutter, never a spelled number): #how-we-compare is the busiest
+    // scrollMarginTop (theme.js ANCHOR_OFFSET: the painted arrow's header and hang plus
+    // one gutter, never a spelled number): #how-we-compare is the busiest
     // inbound anchor on this page — every /compare, /compare-chatgpt,
     // /compare-worldographer and /compare-kanka URL in the world redirects onto it —
-    // so a landing that parks the heading under the sticky ribbon is exactly the
+    // so a landing that parks the heading under the sticky arrow is exactly the
     // link equity the redirect was built to keep.
     <section id={anchorFor('compare')} style={{ maxWidth: 760, margin: '40px auto 0', scrollMarginTop: ANCHOR_OFFSET }}>
       <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK,

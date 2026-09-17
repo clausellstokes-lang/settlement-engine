@@ -377,7 +377,9 @@ describe('the prose byte ratchet — no overlap with the size-baseline instrumen
     expectAbsentWithAnchor(
       sizeBaselineKeys,
       'src/data/dossierStateProse/general.generated.js',
-      'src/App.jsx',
+      // The anchor is a row that is still baselined (src/App.jsx left the baseline when the
+      // painted arrow header moved out of the shell, 2026-09-16).
+      'src/domain/explanation.js',
       'the size baseline must hold no prose leaf row',
     );
     expectAbsentWithAnchor(

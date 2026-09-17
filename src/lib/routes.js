@@ -46,11 +46,12 @@ export const ROUTES = Object.freeze([
   // marketing CTAs); signed-in members are sent to /create — via App's front-door
   // effect (it rewrites only '/', not deep links).
   //
-  // NO `nav` BLOCK — OWNER DIRECTIVE, 2026-08-03 (THE FLETCHED RIBBON, lane FL).
-  // Welcome was the ribbon's leftmost tab until the ribbon became the back half of
-  // an arrow: the WORDMARK is the home button on both surfaces now (App.jsx's brand
-  // block, accessible name "SettlementForge home"), so a Welcome tab would be a
-  // second door to the same room standing where the fletching goes. The ROUTE is
+  // NO `nav` BLOCK: OWNER DIRECTIVE, 2026-08-03 (lane FL), and still true of the
+  // painted arrow header that replaced the ribbon (owner orders 2026-09-16). The
+  // arrow's nock and logo plate are the home control at every width
+  // (components/nav/ArrowHeader.jsx, accessible name "SettlementForge home"), and the
+  // painting has six words, none of them Welcome, so a Welcome tab would be a second
+  // door to the same room with no painted word to stand on. The ROUTE is
   // untouched — /home still resolves, still titles, still canonicalizes from '/' —
   // only its top-nav metadata is retired, which is what removes it from NAV and so
   // from every surface that derives from NAV. The mobile bottom nav never carried it
@@ -214,15 +215,12 @@ export const NAV = Object.freeze(
  *
  * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
  * draws its flow mark ONLY when the successor named here is the tab actually
- * rendered next ON THAT SURFACE. The desktop ribbon runs Create · Library ·
- * Realm, so both marks draw; the mobile bottom nav omits Realm (Gallery follows
- * Library there), so Library draws none. An arrow pointing at the wrong
- * neighbour teaches a false lesson about where the work goes.
- *
- * THE FLETCHING READS THIS TOO (owner directive 2026-08-03). The desktop ribbon's
- * leather-brown band is the maximal NAV run whose consecutive pairs are declared
- * here — so the band's membership is DERIVED from the flow, never listed in the
- * chrome. See components/nav/NavRibbon.jsx and components/nav/NavFlowArrow.jsx.
+ * rendered next ON THAT SURFACE. The bottom bar (below 1024 px) runs Create ·
+ * Library · Realm, so both marks draw there. An arrow pointing at the wrong
+ * neighbour teaches a false lesson about where the work goes. The painted arrow
+ * header (1024 px and up) draws no flow mark: its words are the owner's painting,
+ * and NAV's order is pinned to the painted order instead
+ * (tests/components/arrowGeometry.test.js). See components/nav/NavFlowArrow.jsx.
  * @type {Readonly<Record<string, string>>}
  */
 export const NAV_FLOW = Object.freeze({

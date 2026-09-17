@@ -21,7 +21,7 @@
  */
 
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
-import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, FS, CHROME } from '../theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, FS, HEADER_H } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 
@@ -130,17 +130,21 @@ export function WizardOutputToolbar({
         // a height-collapsed parent, or it would lose its sticky containing block
         // and scroll away with the dossier.
         maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
-        // Pin below the sticky app header so bar and dossier sit flush on BOTH
-        // breakpoints. Both offsets are now CHROME tokens (headerMobile / headerDesktop)
-        // — the desktop side was a hardcoded `60` literal that could silently drift from
-        // the real header height; the tokens keep the toolbar pinned to the header's
-        // exact height. zIndex 40 keeps it above the dossier but below the header
+        // Pin flush below the painted arrow's shaft band on BOTH breakpoints: HEADER_H is
+        // the header's own length (--sf-header-h, written by components/nav/ArrowHeader.jsx
+        // from the page width), so the bar tracks the arrow's scale. zIndex 40 keeps it
+        // above the dossier and ABOVE the feather's hang layer (35), so a pinned toolbar
+        // covers the feather and its Back button stays visible, but below the header
         // (z:50), so the header always wins the overlap.
-        position: 'sticky', top: isMobile ? CHROME.headerMobile : CHROME.headerDesktop, zIndex: 40,
+        position: 'sticky', top: HEADER_H, zIndex: 40,
         // Mobile hide-on-scroll: slide up behind the header when scrolling down;
-        // never while the overflow menu is open. Desktop is always present.
+        // never while the overflow menu is open. Desktop is always present. The painted
+        // header is transparent around the nock and the arrowhead, so the slid-away bar
+        // also turns invisible once the slide ends (the visibility change waits out the
+        // transform, and shows at once on the way back).
         transform: (isMobile && hidden && !menuOpen) ? 'translateY(-140%)' : 'none',
-        transition: 'transform 0.25s ease',
+        visibility: (isMobile && hidden && !menuOpen) ? 'hidden' : 'visible',
+        transition: (isMobile && hidden && !menuOpen) ? 'transform 0.25s ease, visibility 0s linear 0.25s' : 'transform 0.25s ease, visibility 0s',
       }}
     >
       {/* Back is a subordinate nav/reset that discards the just-earned draft —

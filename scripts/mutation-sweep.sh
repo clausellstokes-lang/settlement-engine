@@ -96,7 +96,11 @@ MUTATED_FILES=(
   tests/fixtures/distribution-envelopes.manifest.json
   src/domain/display/discourseKernel.js
   src/domain/townMap/arch/params.js
-  src/components/nav/FletchBand.jsx
+  src/components/nav/arrowGeometry.js
+  src/components/nav/ArrowHeader.jsx
+  src/components/nav/ArrowControl.jsx
+  src/components/generate/WizardOutputToolbar.jsx
+  src/domain/explanation.js
   src/domain/townMap/arch/kit.js
   src/domain/townMap/arch/conditionParams.js
   src/domain/dossier/realmEntityWeb.js
@@ -363,10 +367,12 @@ check_caught "security/verify_jwt platform gate loosened" supabase/config.toml "
 # ── first 13 left unproven; see scripts/mutation-coverage-manifest.json ───────
 
 # 14. Size ratchet — a baselined file grows ONE effective line past its frozen
-#     tolerance-0 ceiling (App.jsx is frozen at its exact current count; the
-#     baseline-honesty test must red on any drift, either direction).
-printf '\nconst _mutSizeSweep = 1;\n' >> src/App.jsx
-check_caught "size-ratchet/App.jsx grows past frozen ceiling" src/App.jsx "npx vitest run tests/lint/sizeBaseline.test.js"
+#     tolerance-0 ceiling (explanation.js is frozen at its exact current count; the
+#     baseline-honesty test must red on any drift, either direction). Retargeted from
+#     src/App.jsx, which fell under its 600 layer ceiling when the painted arrow header
+#     moved out of the shell (2026-09-16) and left the baseline.
+printf '\nconst _mutSizeSweep = 1;\n' >> src/domain/explanation.js
+check_caught "size-ratchet/explanation.js grows past frozen ceiling" src/domain/explanation.js "npx vitest run tests/lint/sizeBaseline.test.js"
 
 # 15. Domain strict ratchet — a new implicit-any strict error lands in the
 #     strict-clean domain kernel (ceiling 0). Gate = the enforcing script
@@ -476,15 +482,6 @@ perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsw
 check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
 
 
-# 28b. RIBBON RETINA-TEXTURE BUDGET (V4.1, counsel R6 — the texture-complete law).
-#      The comb's opacities are lifted from a whisper back toward the weights that
-#      produced the "corrugated metal" verdict on the V3 band. Every retina cue on
-#      this bar owes UNDER 2% EFFECTIVE INK (tone x area, which is what the eye
-#      integrates); the coverage ratchet must red on the comb specifically, because
-#      a budget expressed in opacity alone is exactly the budget that could not see
-#      its own failure the first time.
-perl -0pi -e "s/  opacities: Object\.freeze\(\[0\.13, 0\.2, 0\.27\]\),/  opacities: Object.freeze([0.5, 0.6, 0.7]),/" src/components/nav/FletchBand.jsx
-check_caught "ribbon/retina texture budget blown" src/components/nav/FletchBand.jsx "npx vitest run tests/design/textureBudget.test.js"
 
 # 29. K-1 kernel LOD-ladder totality — a NEW arch grammar ruleset lands under
 #     arch/rulesets/ with no LOD-ladder + mesh-budget walker coverage. Every
@@ -1412,7 +1409,12 @@ check_caught "prose-passage-shapes/a passage shape is rescued by the composition
 #     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 11 passed;
 #     planted => 2 red, the LIFTED and EXEMPT exact arms, the EXEMPT arm naming the stack by
 #     line, 9 passed; restored cmp-identical => 11 passed.
-perl -0pi -e "s/bottom: aboveFooter\(isMobile \? bottomClearance\(CHROME\.fabLift \+ 56\) : SP\.lg \+ 56\), right: SP\.lg, zIndex: 200,/bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,/" src/App.jsx
+#     RE-ANCHORED by the painted arrow header (2026-09-16): the stack's desktop branch also
+#     clears the 640-1023 bottom bar now (aboveBottomNav), so the plant strips both lifts.
+#     Re-measured (cp backup, cp restore; md5 c3a9b3978d70e9e2f423123d127205b3 before and
+#     after): clean tree => 13 passed; planted => 2 red, the LIFTED and EXEMPT exact arms,
+#     11 passed; restored cmp-identical => 13 passed.
+perl -0pi -e "s/bottom: aboveFooter\(isMobile \? bottomClearance\(CHROME\.fabLift \+ 56\) : aboveBottomNav\(SP\.lg \+ 56\)\), right: SP\.lg, zIndex: 200,/bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,/" src/App.jsx
 check_caught "bottom-anchored-chrome/the scroll-button stack drops its footer lift and lands on the pinned band" src/App.jsx "npx vitest run tests/lint/bottomAnchoredChrome.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-lifted layer not named here is the collision the order forbids"
 
 # 99. THE FOOTER FLOATS ONLY ITS LINKS ROW. The owner's follow-up order keeps only the links
@@ -1425,8 +1427,64 @@ check_caught "bottom-anchored-chrome/the scroll-button stack drops its footer li
 #     md5 7e9f63ff538589deb2c31dd876b472fd before and after): clean tree => 23 passed;
 #     planted => 2 red, (a)'s sticky-offset arm and (c)'s mobile /terms arm, 21 passed;
 #     restored cmp-identical => 23 passed.
+#     Re-measured with the painted arrow header (2026-09-16; the footer now pins only from
+#     1024 px and the file gained a 640-1023 arm; md5 c3a9b3978d70e9e2f423123d127205b3 before
+#     and after): clean => 25 passed; planted => 3 red, (a), (c)'s mobile arm and (c)'s 640-1023
+#     arm, 22 passed; restored cmp-identical => 25 passed.
 perl -0pi -e "s/bottom: FOOTER_TUCKED_BOTTOM, zIndex:/bottom: 0, zIndex:/" src/App.jsx
 check_caught "pinned-footer/the footer pins whole again instead of floating only its links row" src/App.jsx "npx vitest run tests/components/pinnedFooter.test.jsx --no-file-parallelism" "sticky with a bottom of minus the tuck, on the header layer, outside any header, nav still labelled"
+
+# ── THE PAINTED ARROW HEADER (owner orders 2026-09-16) ────────────────────────────────
+# "Replace the arrow ribbon entirely with the following image ... I do not want you to
+# emulate it." The header is the owner's painting, laid out by components/nav/arrowGeometry.js
+# from tables measured on the shipped pixels, with controls laid over the painted regions.
+# Every plant below was measured before landing with a cp backup and a cp restore (never the
+# checkout family); each restored file was cmp-identical to its backup, with the md5 named.
+
+# 100. A PAINTED WORD'S HIT REGION MAY NOT SLIDE ONTO A CORD BINDING. NAV_HIT is measured
+#      binding edge to binding edge; nudging Create's right edge 22 columns onto binding 2
+#      would make a click on the cord route to Create. The asset test re-reads the strip's
+#      pixels and finds cord columns inside the region.
+#      Measured (md5 2486f6430b2dfbe47bbd5d8584b1fdab): clean => 23 passed; planted => 2 red
+#      ((c) the binding/region cord arm, (d) the word-extent arm), 21 passed; restored => 23.
+perl -0pi -e "s/generate: Object\.freeze\(\{ x0: 547, x1: 668 \}\)/generate: Object.freeze({ x0: 547, x1: 690 })/" src/components/nav/arrowGeometry.js
+check_caught "arrow-header/a painted word's hit region slides onto a cord binding" src/components/nav/arrowGeometry.js "npx vitest run tests/build/arrowHeaderAssets.test.js --no-file-parallelism" "every binding is mostly cord columns with dark edges, and no painted-word region or the plate carries cord"
+
+# 101. A SLOT CUT MAY NOT LAND ON A PAINTED WORD. Wood is inserted only at columns with FE
+#      columns of plain wood on both sides; moving the 1234 cut to 1260 puts a crossfade on
+#      Gallery's G. The asset test re-reads the columns around every cut.
+#      Measured (md5 2486f6430b2dfbe47bbd5d8584b1fdab): clean => 23 passed; planted => 1 red,
+#      22 passed; restored => 23 passed.
+perl -0pi -e "s/Object\.freeze\(\{ x: 1234, shares: 1 \}\)/Object.freeze({ x: 1260, shares: 1 })/" src/components/nav/arrowGeometry.js
+check_caught "arrow-header/a slot cut lands on a painted word" src/components/nav/arrowGeometry.js "npx vitest run tests/build/arrowHeaderAssets.test.js --no-file-parallelism" "every cut, and the compact join, has FE columns of plain wood on both sides"
+
+# 102. THE FEATHER'S HANG LAYER TAKES NO POINTER EVENTS. It is a sticky layer over the top
+#      of every page (the Realm mode switch, Library's Back to list, the wizard's Back sit
+#      under it when scrolled); with pointer events it would swallow those clicks while
+#      every control still rendered. The declaration is one of two (ArrowPaint's clip wrapper
+#      carries the other): e2e/arrow-header.spec.js's hit test reds only when both go
+#      (executed), so this plant proves the contract arm that keeps the layer's own.
+#      Measured (md5 21e4f81435a37213cc536ea246382e94): clean => 20 passed; planted => 1 red,
+#      19 passed; restored => 20 passed.
+perl -0pi -e "s/zIndex: 35, height: 0, flexShrink: 0, pointerEvents: 'none' \}\}/zIndex: 35, height: 0, flexShrink: 0 }}/" src/components/nav/ArrowHeader.jsx
+check_caught "arrow-header/the feather's hang layer takes pointer events" src/components/nav/ArrowHeader.jsx "npx vitest run tests/components/arrowHeader.test.jsx --no-file-parallelism" "the header's next sibling: sticky at the header length, aria-hidden, no pointer events, height 0, z 35"
+
+# 103. A PAINTED REGION'S FOCUS RING MAY NOT FALL BACK TO THE HOUSE BRONZE. The bronze is
+#      1.26:1 on the median wood; the regions set --sf-focus to INK (with the PARCH_100 inner
+#      band on keyboard focus). Deleting the override leaves a ring nobody can see and every
+#      control still focusable.
+#      Measured (md5 64bf959779db8be1da2e5163b9cb44c0): clean => 20 passed; planted => 1 red,
+#      19 passed; restored => 20 passed.
+perl -0pi -e "s/        '--sf-focus': INK,\n//" src/components/nav/ArrowControl.jsx
+check_caught "arrow-header/a painted region's focus ring falls back to the house bronze" src/components/nav/ArrowControl.jsx "npx vitest run tests/components/arrowHeader.test.jsx --no-file-parallelism" "every control sets --sf-focus to INK and the hover wash, and never switches the ring off"
+
+# 104. A RETIRED HEADER HEIGHT MAY NOT REGAIN A CONSUMER. CHROME.headerDesktop left with the
+#      ribbon; a consumer does not throw, it computes `undefinedpx` and the sticky bar lands
+#      under the painting. The plant puts the dossier toolbar back on the retired token.
+#      Measured (md5 4783499804b9ce068040da2d250c4b92): clean => 9 passed; planted => 1 red,
+#      8 passed; restored => 9 passed.
+perl -0pi -e "s/position: 'sticky', top: HEADER_H, zIndex: 40,/position: 'sticky', top: CHROME.headerDesktop, zIndex: 40,/" src/components/generate/WizardOutputToolbar.jsx
+check_caught "arrow-header/a retired header height regains a consumer" src/components/generate/WizardOutputToolbar.jsx "npx vitest run tests/lint/arrowHeaderRetirement.test.js --no-file-parallelism" "(a) no src file consumes a retired module, token or CHROME height"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

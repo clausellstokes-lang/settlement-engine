@@ -25,7 +25,7 @@
 
 import { Suspense, useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { INK, MUTED, BORDER, CARD, BODY, sans, SP, FS, FOOTER_INSET, aboveFooter } from '../theme.js';
+import { INK, MUTED, BORDER, CARD, BODY, sans, SP, FS, FOOTER_INSET, BOTTOM_NAV_H, aboveFooter, aboveBottomNav } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { AnchorChip, EarlyAccessBadge } from './surveyorPanelKit.jsx';
@@ -72,10 +72,11 @@ export default function SurveyorWorkshop({ open = false, onClose, initialStage =
 
   if (!open) return null;
 
-  // Docked above the pinned desktop footer (owner order 2026-09-16); the maxHeight
-  // below subtracts the same inset so the lifted panel's top stays where it was.
+  // Docked above the pinned desktop footer (owner order 2026-09-16), and from 640 to
+  // 1023 px above the bottom bar (phones unchanged); the maxHeight below subtracts the
+  // same lifts so the panel's top stays where it was.
   const dockPos = {
-    position: 'fixed', left: SP.lg, bottom: aboveFooter(isMobile ? 136 : 76), zIndex: 60, fontFamily: sans,
+    position: 'fixed', left: SP.lg, bottom: aboveFooter(isMobile ? 136 : aboveBottomNav(76)), zIndex: 60, fontFamily: sans,
   };
 
   const active = STAGES.find((s) => s.id === stage) || STAGES[0];
@@ -89,7 +90,7 @@ export default function SurveyorWorkshop({ open = false, onClose, initialStage =
       aria-label="The Surveyor's workshop"
       style={{
         ...dockPos,
-        width: 360, maxWidth: 'calc(100vw - 32px)', maxHeight: `calc(100vh - 160px - ${FOOTER_INSET})`,
+        width: 360, maxWidth: 'calc(100vw - 32px)', maxHeight: `calc(100vh - 160px - ${FOOTER_INSET}${isMobile ? '' : ` - ${BOTTOM_NAV_H}`})`,
         background: CARD, color: BODY, border: `1px solid ${BORDER}`,
         padding: SP.lg, boxShadow: '0 8px 28px rgba(0,0,0,0.28)',
         display: 'flex', flexDirection: 'column', gap: SP.sm, overflowY: 'auto',

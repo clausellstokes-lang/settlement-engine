@@ -1,5 +1,5 @@
 /**
- * NavFlowArrow.jsx — the ribbon's flow chevron.
+ * NavFlowArrow.jsx: the bottom bar's flow chevron.
  *
  * Create · Library · Realm read as a sequence, not a set, so the right edge of
  * a tab that FEEDS its neighbour carries an open chevron pointing into it. It
@@ -9,16 +9,14 @@
  *
  * THE ADJACENCY GUARD: the chevron renders only when `to` — the tab actually
  * rendered next ON THIS SURFACE — is the flow successor lib/routes.js declares
- * in NAV_FLOW. The mobile bottom nav is the ONLY mount (LD-2 retired the
- * desktop ribbon's chevrons); it omits Realm (Gallery follows Library there),
- * so Library draws none. An arrow pointing at the wrong neighbour would teach
- * a false lesson about where the work goes, which is worse than no arrow at
- * all.
+ * in NAV_FLOW. The bottom bar (App.jsx, below 1024 px) is the ONLY mount: the
+ * header above it is the owner's arrow painting (2026-09-16), which carries no
+ * drawn marks of ours. The bar runs Create · Library · Realm, so both chevrons
+ * draw. An arrow pointing at the wrong neighbour would teach a false lesson about
+ * where the work goes, which is worse than no arrow at all.
  *
- * `flowsInto` OUTLIVED ITS OWN CHEVRON on desktop and is now the flow's shared
- * predicate: NavDivider derives its seam kind from it, and NavRibbon derives the
- * FLETCHED BAND's very membership from it (owner directive 2026-08-03). Keep it
- * pure and keep it here — it is the one place that reads NAV_FLOW.
+ * `flowsInto` is the flow's predicate. Keep it pure and keep it here: it is the
+ * one place that reads NAV_FLOW.
  *
  * Harmony: the chevron takes GOLD on the active tab and the quieter BORDER
  * elsewhere, matching the tab's own resting/active register, and carries the
@@ -46,7 +44,7 @@ export default function NavFlowArrow({ from, to, active = false }) {
       data-testid={`nav-flow-${from}-${to}`}
       style={{
         // Sits on the seam between the two tabs (the mobile bar's column
-        // boundary — the only live mount since LD-2) so it reads as the right edge of
+        // boundary, the only live mount) so it reads as the right edge of
         // this tab opening into the next, not as a mark belonging to either.
         position: 'absolute', right: -3, top: '50%',
         width: 6, height: 6, marginTop: -3,
