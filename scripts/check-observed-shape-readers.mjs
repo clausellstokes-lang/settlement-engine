@@ -388,19 +388,45 @@ export const SHAPE_FAMILY_FILTER = Object.freeze({
  * on `outcome`, whose union grows 48 → 141 keys under this very filter.
  *
  * ⚠⚠ ONE ROW HAS BEEN RE-TRIAGED OUT, AND THIS IS THE ONLY DIRECTION THAT
- * REDUCES ENFORCEMENT, SO IT CARRIES ITS REASON. `factions on locks` was banked
- * class-(a) on the evidence that no `setLock` call names `factions`. That
- * evidence was a GREP ARTIFACT: the writer is the DYNAMIC key row at
+ * REDUCES ENFORCEMENT, SO IT CARRIES ITS REASON — AND ITS SEQUEL. The row is
+ * `factions on locks`, and it has now moved twice. Both moves stay recorded,
+ * because the second is only legible against the first.
+ *
+ * MOVE 1 (CR-OSR-SCHEMA-6) — OUT OF CLASS (a), ON CORRECTED EVIDENCE. It was
+ * banked class-(a) on the evidence that no `setLock` call names `factions`. That
+ * evidence was a GREP ARTIFACT: the writer was the DYNAMIC key row at
  * `src/components/dossier/LockControls.jsx` — a `WORLD_LOCKS` entry spelling
- * `key: 'factions'` and a `setLock(key, …)` call that resolves it at run time —
- * and it has existed since `73f00920`. The refusal to touch the row was right;
- * its stated reason was wrong. The chair therefore re-triaged it under
- * CR-OSR-SCHEMA-6 and it moves to `EXPLAINED_WRITER_EXEMPTIONS` as an M8
- * admission-list entry, which is the remedy the error message below already
- * named: *"a row banked as a real defect cannot be exempted as explained;
- * re-triage it instead."* The two acts are one commit BY NECESSITY —
- * `assertExplainedWriterExemptions` throws at module load if a class-(a)
- * identity is exempted, so the removal and the entry cannot be separated.
+ * `key: 'factions'` and a `setLock(key, …)` call that resolved it at run time —
+ * and it had existed since `73f00920`. The refusal to touch the row was right;
+ * its stated reason was wrong. The chair therefore re-triaged it and it moved to
+ * `EXPLAINED_WRITER_EXEMPTIONS` as an M8 admission-list entry, which is the
+ * remedy the error message below already named: *"a row banked as a real defect
+ * cannot be exempted as explained; re-triage it instead."* The two acts were one
+ * commit BY NECESSITY — `assertExplainedWriterExemptions` throws at module load
+ * if a class-(a) identity is exempted, so the removal and the entry could not be
+ * separated.
+ *
+ * MOVE 2 (2026-09-17) — THE EXEMPTION IS RETIRED, NOT RE-TRIAGED AGAIN, BECAUSE
+ * ITS WRITER NO LONGER EXISTS. The owner ordered every lock control removed from
+ * the dossier ("I approve and remove the other padlocks and fix the remaining
+ * contradictions as well"), and `src/components/dossier/LockControls.jsx` was
+ * DELETED with them. That file was the entire basis of move 1: it held the only
+ * `WORLD_LOCKS` declaration and the only `setLock` writer of the key. With it
+ * gone the exemption's own gate 0 refuses — `assertExplainedWriterEvidence`
+ * cannot even read the named writer — and gate 0's message states the remedy
+ * exactly: *"the key genuinely lost its writer, in which case the reads are real
+ * findings again and the exemption must be DELETED, not repaired."* So the entry
+ * is deleted from `EXPLAINED_WRITER_EXEMPTIONS` rather than re-pointed at some
+ * other file: there is no other writer to point it at.
+ *
+ * ⚠ AND THE IDENTITY DOES **NOT** RETURN TO THIS LIST. Retiring an exemption is
+ * not a re-triage back into class (a). This roster is the frozen record of the
+ * CR-OSR-FREEZE-3-R2 triage — the set the M6 family filter may never clear — and
+ * its membership is that historical decision, not a live worklist of whatever is
+ * currently unexplained. The reads simply become ordinary ratchet rows again,
+ * enforced by their own inventory ceilings like every other row. Re-admitting an
+ * identity here is a separate chair act with its own evidence, and the removal
+ * above is deliberately NOT that act.
  */
 export const CLASS_A_PROTECTED_IDENTITIES = Object.freeze([
   '__adjudicationPending on stressors',
@@ -1088,16 +1114,6 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' would tax a custom row that marks itself criminal — and the entry is the standing'
       + ' permission if the corpus ever loses that reach again. Retiring it changes the declared'
       + ' roster and is a chair act, not a lane one.',
-  }),
-  Object.freeze({
-    identity: 'factions on locks',
-    mechanism: 'admission-list',
-    writer: 'src/components/dossier/LockControls.jsx',
-    ruling: 'CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)',
-    why: 'A USER-ACTION writer the generation corpus never runs. WORLD_LOCKS is a closed,'
-      + ' shape-qualified admission list naming the key (`key: \'factions\'`), and the toggle'
-      + ' resolves it through a DYNAMIC `setLock(key, …)` call — which is why a grep for'
-      + ' "setLock naming factions" returned nothing and the row was mis-banked class (a).',
   }),
   Object.freeze({
     identity: 'neighbourNetwork on settlement',

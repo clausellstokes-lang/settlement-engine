@@ -356,7 +356,13 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
         addresses: matches.length,
       }];
     }))).toEqual({
-      'factions on locks': { reads: 2, addresses: 2 },
+      // ⛔ `factions on locks` LEFT THE ROSTER ON 2026-09-17 — its writer,
+      // src/components/dossier/LockControls.jsx, was deleted with the dossier's lock
+      // controls, so gate 0 could no longer read it and the exemption was RETIRED.
+      // It stood here at 2 reads / 2 addresses (locksPreservation.js, coup.js). This
+      // map is keyed BY THE ROSTER, so the entry leaves as soon as the declaration
+      // does; the register's two tagged rows leave when the governed re-freeze
+      // absorbs them, which is what moves the 62/41 literal above to 60/39.
       'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
@@ -370,8 +376,13 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
       // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
       // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
       // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
-      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is still nine, and a declaration that
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is now EIGHT, and a declaration that
       // banks nothing is precisely what this arm should be able to say out loud.
+      // ⚠ "THE NINTH" IS ITS HISTORICAL POSITION, NOT ITS INDEX TODAY — it was declared
+      // ninth and is now first, because `factions on locks` was retired ahead of it on
+      // 2026-09-17. The two cases are worth telling apart: this one keeps its
+      // declaration because its WRITER IS STILL THERE and merely became observable;
+      // that one lost its writer outright, which gate 0 refuses rather than tolerates.
       'isCriminal on incomeSources': { reads: 0, addresses: 0 },
     });
     // ⭐ THE SCHEMA-9 GENESIS STAMPED ONE REASON ONTO ALL FOUR NEW ROWS AND LEFT
@@ -1058,10 +1069,16 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       + 'pin. The 22 surviving reads across 21 files are all on non-observed receivers.',
     ).toBe(0);
     // ⭐ 62 → 64 at the schema-12 mint (ODQ §819): genesisDiplomacy.js's two reads of the
-    // already-declared M9 identity. The bank's DECLARED roster is untouched at nine —
+    // already-declared M9 identity. The bank's DECLARED roster was untouched at nine —
     // bank-by-rule tags a row from an existing declaration, so this figure moves while
     // EXPLAINED_WRITER_EXEMPTIONS does not, and the two arms below still pin the roster.
-    expect(live.explainedWriters.banked).toBe(62);
+    // ⭐ 62 → 60 ON 2026-09-17, AND THIS TIME THE ROSTER IS WHAT MOVED — the opposite
+    // shape to the note above, which is why both are kept. `factions on locks` was
+    // retired when the owner's order deleted its writer, so its two reads
+    // (locksPreservation.js, coup.js) are no longer banked. ⚠ They are not merely
+    // unbanked: they left the estate with the lock controls, so they are also two of
+    // the six STALE rows the governed re-freeze must absorb. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(60);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1104,10 +1121,14 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       'appliedAt on eventLog',
       'deltas on eventLog',
       'event on eventLog',
-      'factions on locks',
+      // ⛔ `factions on locks` SORTED HERE UNTIL 2026-09-17 AND LEFT BY THE OTHER DOOR:
+      // not "declared but unexercised" like the entry below, but UNDECLARED — its
+      // writer was deleted, gate 0 refused it, and the declaration was retired. An
+      // identity can leave this list for either reason and the two must not be
+      // conflated, which is why both notes sit here.
       // ⚠ `isCriminal on incomeSources` LEFT THIS LIST AT THE SCHEMA-17 RUNG — it is still
-      // DECLARED (the roster is nine) but banks nothing, because its reads stopped being
-      // findings once the corpus could observe their writer. Banked ⊆ declared, always.
+      // DECLARED (the roster is now eight) but banks nothing, because its reads stopped
+      // being findings once the corpus could observe their writer. Banked ⊆ declared, always.
       'narrativeSummary on eventLog',
       'neighbourNetwork on settlement',
       'stresses on settlement',
@@ -1250,7 +1271,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
         addresses: rows.length,
       }];
     }))).toEqual({
-      'factions on locks': { reads: 2, addresses: 2 },
+      // ⛔ RETIRED 2026-09-17 with its writer — see the register arm above. On the LIVE
+      // side it had already stopped existing as well: both of its reads
+      // (locksPreservation.js, coup.js) left the estate with the lock controls, which
+      // is why they show up as STALE rows the re-freeze must absorb rather than as
+      // rows that merely stopped being banked.
       'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
@@ -1264,8 +1289,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
       // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
       // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
-      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is still nine, and a declaration that
+      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is now EIGHT, and a declaration that
       // banks nothing is precisely what this arm should be able to say out loud.
+      // ⚠ "THE NINTH" IS ITS HISTORICAL POSITION, NOT ITS INDEX TODAY — it was declared
+      // ninth and is now first, because `factions on locks` was retired ahead of it on
+      // 2026-09-17. The two cases are worth telling apart: this one keeps its
+      // declaration because its WRITER IS STILL THERE and merely became observable;
+      // that one lost its writer outright, which gate 0 refuses rather than tolerates.
       'isCriminal on incomeSources': { reads: 0, addresses: 0 },
     });
 
@@ -1273,7 +1303,7 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 62);
+    expect(clearOutright).toHaveLength(live.findings.length - 60);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 

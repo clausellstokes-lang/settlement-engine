@@ -1041,7 +1041,15 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // here, but it now banks nothing. The roster is the subject of this arm; whether a
       // declaration that banks nothing should be retired is a chair call.
       'isCriminal on incomeSources',
-      'factions on locks',
+      // ⛔ `factions on locks` WAS THE SECOND ENTRY AND WAS RETIRED 2026-09-17. Its
+      // writer — `src/components/dossier/LockControls.jsx`, the `WORLD_LOCKS`
+      // declaration and the dynamic `setLock(key, …)` call that resolved the key at
+      // run time — was DELETED when the owner ordered every lock control out of the
+      // dossier. Gate 0 then could not read the named writer at all, and its own
+      // message rules that case: the key genuinely lost its writer, so the exemption
+      // is DELETED rather than re-pointed. Its two reads become ordinary ratchet rows
+      // again. ⚠ THE ROSTER IS NOW EIGHT, and every index-aligned array below moved
+      // with it — mechanisms, writers, and the gate-0 evidence identities and keys.
       'neighbourNetwork on settlement',
       'stresses on settlement',
       'worldPulse on campaignState',
@@ -1054,14 +1062,23 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       'event on eventLog',
       'narrativeSummary on eventLog',
     ]);
+    // ⚠ INDEX-ALIGNED WITH THE ROSTER ABOVE, one entry per line so a removal cannot
+    // silently re-pair the survivors. The retired `factions on locks` was the OTHER
+    // `admission-list`; the one that remains belongs to `stresses on settlement`.
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ mechanism }) => mechanism)).toEqual([
-      'conditional-generator-branch',
-      'admission-list', 'save-time-writer', 'admission-list', 'save-time-writer',
-      'save-time-writer', 'save-time-writer', 'save-time-writer', 'save-time-writer',
+      'conditional-generator-branch', // isCriminal on incomeSources
+      'save-time-writer', //             neighbourNetwork on settlement
+      'admission-list', //               stresses on settlement
+      'save-time-writer', //             worldPulse on campaignState
+      'save-time-writer', //             appliedAt on eventLog
+      'save-time-writer', //             deltas on eventLog
+      'save-time-writer', //             event on eventLog
+      'save-time-writer', //             narrativeSummary on eventLog
     ]);
     expect(EXPLAINED_WRITER_EXEMPTIONS.map(({ writer }) => writer)).toEqual([
       'src/generators/economy/economicState.js',
-      'src/components/dossier/LockControls.jsx',
+      // ⛔ `src/components/dossier/LockControls.jsx` STOOD HERE until 2026-09-17 and is
+      // now a path that does not exist — which is precisely why its entry is gone.
       'src/lib/saves.js',
       'src/domain/settlement.schema.js',
       'src/store/campaignPulseHelpers.js',
@@ -1078,19 +1095,27 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       .filter(({ identity }) => identity.endsWith(' on eventLog'))
       .map(({ ruling }) => ruling))])
       .toEqual(['CR-OSR-SCHEMA-9 / M9 — ODQ §346.1 Ruling-B eventLog precedent']);
-    // ⚠⚠ THE ONE ROW RE-TRIAGED OUT OF CLASS (a), PINNED IN BOTH DIRECTIONS.
-    // `factions on locks` was banked as a true positive on evidence that turned
-    // out to be a grep artifact, and the two acts — removing it from the guard
-    // set and declaring it here — cannot be separated: the declaration below
-    // throws at module load while the identity is still guarded. Pinning both
-    // halves is what stops a later lane from restoring one without the other.
+    // ⚠⚠ THE ONE ROW RE-TRIAGED OUT OF CLASS (a) — KEPT, ON A NARROWER CLAIM.
+    // It used to pin BOTH HALVES of an inseparable pair: `factions on locks` was
+    // banked as a true positive on evidence that turned out to be a grep artifact,
+    // and removing it from the guard set and declaring it an exemption could not be
+    // separated, because `assertExplainedWriterExemptions` throws at module load
+    // while an exempted identity is still guarded. ⛔ THAT COUPLING IS GONE: the
+    // exemption was RETIRED on 2026-09-17 when its writer was deleted, so there is
+    // no second half left to pair with and this is no longer a both-directions pin.
+    // ⭐ IT IS KEPT BECAUSE THE REMAINING HALF IS STILL A LIVE RULING, and it is the
+    // one the scanner's own docblock now states: retiring an exemption does NOT
+    // re-admit its identity to the frozen CR-OSR-FREEZE-3-R2 roster. Nothing else
+    // catches a re-admission. The walker pins only the roster's LENGTH (20), which
+    // an identity SWAP leaves untouched — the exact blindness this whole instrument
+    // was rebuilt around — and no test pins the roster's membership exactly.
     // ⚠ ANCHORED, and the anchor is chosen to travel the SAME path: a bare
     // `not.toContain` would pass just as happily if the whole guard set drifted
     // away, so `institutions on locks` — the sibling row on the SAME `locks`
     // shape, which must still be guarded — is what proves the set is live.
     expectAbsentWithAnchor(
       CLASS_A_PROTECTED_IDENTITIES, 'factions on locks', 'institutions on locks',
-      'CR-OSR-SCHEMA-6 re-triage',
+      'a retired exemption does not return to the class-(a) roster (2026-09-17)',
     );
     expect(assertExplainedWriterExemptions()).toBe(EXPLAINED_WRITER_EXEMPTIONS);
 
@@ -1138,7 +1163,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       // here, but it now banks nothing. The roster is the subject of this arm; whether a
       // declaration that banks nothing should be retired is a chair call.
       'isCriminal on incomeSources',
-      'factions on locks',
+      // ⛔ `factions on locks` LEFT THIS LIST ON 2026-09-17, and gate 0 is the reason
+      // rather than a bystander: `assertExplainedWriterEvidence` reads each entry's
+      // named writer from the scanned tree, and `LockControls.jsx` no longer exists,
+      // so the entry could not have stayed here even as a stale row — it raised
+      // "names a writer that cannot be read" and refused the whole scan.
       'neighbourNetwork on settlement',
       'stresses on settlement',
       'worldPulse on campaignState',
@@ -1149,7 +1178,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     ]);
     expect(evidence.map(({ key }) => key)).toEqual([
       'isCriminal',
-      'factions', 'neighbourNetwork', 'stresses', 'worldPulse',
+      'neighbourNetwork', 'stresses', 'worldPulse',
       'appliedAt', 'deltas', 'event', 'narrativeSummary',
     ]);
     // ⚠ THE M9 SPLIT IS MACHINE-DRAWN, NOT ARGUED. The same probe that admits
