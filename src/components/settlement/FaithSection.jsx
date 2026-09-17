@@ -31,6 +31,8 @@ import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { faithPanelModel } from './faithPanelModel.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../theme.js';
 
 const TONE_COLOR = { good: GREEN, gold: GOLD, bad: RED };
@@ -223,6 +225,9 @@ function FaithTeaser({ publicDossier }) {
   const tier = useStore((s) => s.auth?.tier);
   const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
   const setActivePricingMoment = useStore((s) => s.setActivePricingMoment);
+  // Purchases stay closed until launch (lib/launchGate.js): the upsell CTA is
+  // disabled and wears the Available at launch pill.
+  const purchasesAreOpen = purchasesOpen();
 
   const onUpsell = () => {
     triggerPricingMoment('pantheon_preview', setActivePricingMoment, { tier });
@@ -252,10 +257,12 @@ function FaithTeaser({ publicDossier }) {
           <Button
             variant="ghost"
             size="sm"
+            disabled={!purchasesAreOpen}
             onClick={onUpsell}
             style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, justifyContent: 'flex-start' }}
           >
             Awaken the pantheon →
+            {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>
         </div>
       )}

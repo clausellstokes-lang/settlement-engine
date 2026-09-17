@@ -12,6 +12,11 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 
+// Purchases OPEN for this file: these pins hold the post-launch behavior of the
+// upgrade CTA (enabled, clickable, exact name). The closed pre-launch state is
+// pinned in tests/components/launchLock.upsells.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
+
 const trackSpy = vi.fn();
 vi.mock('../../src/lib/analytics.js', () => ({
   Funnel: { track: (...a) => trackSpy(...a) },
