@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ee94446824efd32ff5da062d5dc8bc1474fe3ca5",
-  "measuredBy": "Opus 5 chair, stale-deploy budget car ee9444682",
-  "date": "2026-09-16",
-  "note": "one new literal title in tests/components/staleDeployNotice.test.jsx (the copy-register import guard); no rule widened or narrowed",
-  "files": 2576,
+  "measuredAtSha": "7403030611845342dad216137bd859a660b7214d",
+  "measuredBy": "chair Opus 5 (session f6ac0d98, launch lock)",
+  "date": "2026-09-17",
+  "note": "launch lock: six new test files (tests/lib/launchGate.test.js and tests/components/launchLock.{pricing,account,dossier,upsells,libraryHeaderLanding}.test.jsx) plus open-gate pins added to existing suites; every title a literal, parked unchanged",
+  "files": 2582,
   "parked": 377,
-  "credited": 2199,
-  "titles": 24348,
-  "suiteTitles": 6491
+  "credited": 2205,
+  "titles": 24413,
+  "suiteTitles": 6514
 }
