@@ -9,15 +9,19 @@
   "That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
   "Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 18 = schema 17's topology, tag law and NINE-identity declared M8/M9 bank, ALL",
-  "UNCHANGED, re-governed so the migration receipt's SUBJECT COMMIT lies inside the lineage",
-  "that carries this register: a genesis taken in one dock and replayed into another leaves",
-  "`migrationReview.subjectSha` unreachable, and `validateBaselineHistory` — which",
-  "reconstructs this receipt FROM THAT COMMIT'S TREE — then refuses the gate AND every",
-  "--write until a rung re-anchors it. This rung declares no identity, retunes nothing and",
-  "moves no row: its reconciliation is EMPTY. Of the nine declared bank entries EIGHT bank",
-  "reads today; `isCriminal on incomeSources` has banked nothing since schema 17 made its",
-  "writer observable, and banked is always a subset of declared.",
+  "SCHEMA 19 = schema 18's topology and tag law, UNCHANGED, re-governed to a declared",
+  "M8/M9 bank of EIGHT rather than nine. `factions on locks` is RETIRED: the owner's",
+  "2026-09-17 order removed every lock control from the dossier and deleted",
+  "`src/components/dossier/LockControls.jsx`, which was the entry's named writer, so",
+  "gate 0 could no longer read it and the exemption had to be DELETED rather than",
+  "re-pointed — there was no other writer to point it at. This rung retunes nothing, adds",
+  "no mechanism and declares no identity; it RETIRES one and absorbs the estate shrink the",
+  "same deletion caused. Its reconciliation moves SIX rows, five GONE and one DECREASED,",
+  "all on the `locks` shape and all in two files, with NEW and INCREASED both ZERO — a row",
+  "added here would mean the retirement changed a verdict rather than recording one.",
+  "Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`",
+  "has banked nothing since schema 17 made its writer observable, and banked is always a",
+  "subset of declared.",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -25,7 +29,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–17 are the RETIRED numeric predecessors."
+  "Schemas 4–18 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -40,16 +44,16 @@
  },
  "digests": {
   "corpusMeta": "2ef657c8f5a9218ab81c47dc0bc66756055cffcaef2ab01edad1a8e630b37ca1",
-  "inventory": "40856b9ba70142af926f44985a1f8cc9cb979fb833b6e3a7d6bdcde914f1d763",
-  "manifests": "af14eff1447d2e2a3d509544636ad46580533d31e5031b1cb49887663abd88d1",
-  "migrationReview": "18f64e22297327451588ed1d17bb96327c5ddb47174b60b4c92fbdfdbf10e178",
-  "rowTags": "820c468615ac0421b401e29aee3ef223517294215a8b9f3b82130f5e814480f5",
-  "scanStats": "f44ab280220d575ba068aa7174da029db1d519baa05e88474686ffce720d376b",
-  "sentinel": "653d22f6b83fa127e90780f196f89b1ca24596d2766224175647c20921ba4dbf"
+  "inventory": "95b268a892b0dcda7eb1151db88182608adfcf8b360d32df54bbc65e6091d762",
+  "manifests": "8b9f03a7472e7686b69bc75c7be007bfdef30a1289804da901f6643a7d32d3ba",
+  "migrationReview": "6ada554036288c05e52d4418d5c4c2d06d3d93c7817637179ce2907ae44cb4e9",
+  "rowTags": "8427f5f8abc388216f691aca8da33643a74e36d78113075d0d9008774b660705",
+  "scanStats": "e8709129fbd47f2a5e15c097fb6e9900352d97118587e1c544c413cf4e0513bb",
+  "sentinel": "4ffb41fb15b370eb99c53d2fbcfb049fe12d9f297f0e435d2b71051f04470559"
  },
  "frozen": "2026-09-17",
- "frozenAtSha": "b74148a7abaf90d3e2e26f4b1fa3c01dcdf94314",
- "identities": 1397,
+ "frozenAtSha": "ae8bc5e2927d7d87d48d4c3e9fcbfc628c26c5b8",
+ "identities": 1392,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -786,11 +790,7 @@
    "faithProfile on config": 1
   },
   "src/domain/locksPreservation.js": {
-   "factions on locks": 1,
-   "geography on locks": 1,
-   "history on locks": 1,
-   "identity on locks": 1,
-   "npcs on locks": 3
+   "npcs on locks": 2
   },
   "src/domain/magicFilter.js": {
    "magicExists on config": 1
@@ -1147,7 +1147,6 @@
   },
   "src/domain/worldPulse/coup.js": {
    "economic_capacity on scores": 1,
-   "factions on locks": 1,
    "ruling_authority on scores": 1
   },
   "src/domain/worldPulse/decisionTier.js": {
@@ -2224,7 +2223,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
+   "digest": "f4b20996c236d5098710f99bd7f886557817497ba4243dc193c305091596edf7",
    "entries": [
     {
      "mode": "100644",
@@ -2243,8 +2242,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "ae143ab39fdb1d4bd61cf85dba2df4946a1a03e2a4cfd7f0ada3946d9ee563d1",
-     "size": 166097,
+     "sha256": "295c9dc228eb1c999889cee5fd886acf672e680e50247c21323df728bc8c6360",
+     "size": 168917,
      "type": "file"
     },
     {
@@ -2264,8 +2263,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7be2426d2725f09880293db0fd4a1707a0c7bee7bc501f48ef6fc3e67edf8f92",
-     "size": 57831,
+     "sha256": "a77174370c45092d441b6ae5a79ddc55a7f87616f75f28f6cdb5431a88ac6acf",
+     "size": 59093,
      "type": "file"
     },
     {
@@ -2292,8 +2291,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "a11e79f48e7bef3867c0d2eb190b19334eade3d77744270d8ef45e75a662b741",
-     "size": 130025,
+     "sha256": "12750d8058aa9c55cd6457b2ad3ca26fc44ddf6f3fc5bb5a06d46f26e57ab522",
+     "size": 138089,
      "type": "file"
     },
     {
@@ -2307,7 +2306,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6bf795f1d4241e1255dc1b6cf7bcc7f7f28d3a8c68a568c4f4958f9bdf0d7286",
+   "digest": "ccf78efd2c2127c92186bc4a37b1647dedf57cdbe2f7caaa141500db3c03b8c7",
    "entries": [
     {
      "mode": "100644",
@@ -2326,8 +2325,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "ae143ab39fdb1d4bd61cf85dba2df4946a1a03e2a4cfd7f0ada3946d9ee563d1",
-     "size": 166097,
+     "sha256": "295c9dc228eb1c999889cee5fd886acf672e680e50247c21323df728bc8c6360",
+     "size": 168917,
      "type": "file"
     },
     {
@@ -2347,8 +2346,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "7be2426d2725f09880293db0fd4a1707a0c7bee7bc501f48ef6fc3e67edf8f92",
-     "size": 57831,
+     "sha256": "a77174370c45092d441b6ae5a79ddc55a7f87616f75f28f6cdb5431a88ac6acf",
+     "size": 59093,
      "type": "file"
     },
     {
@@ -2375,8 +2374,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "a11e79f48e7bef3867c0d2eb190b19334eade3d77744270d8ef45e75a662b741",
-     "size": 130025,
+     "sha256": "12750d8058aa9c55cd6457b2ad3ca26fc44ddf6f3fc5bb5a06d46f26e57ab522",
+     "size": 138089,
      "type": "file"
     },
     {
@@ -2389,8 +2388,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "1b05cddf2d1f9fa295a990d5de5718fd58ed6c1697ab8f83837aaaa3103efeee",
-     "size": 11069,
+     "sha256": "2e94bdc02b194427a45311ac5993728fe53edff08ed32374cfa2bf0558b91cd4",
+     "size": 11388,
      "type": "file"
     },
     {
@@ -2655,8 +2654,8 @@
     {
      "mode": "100644",
      "path": "src/components/GenerateWizard.jsx",
-     "sha256": "c176f41d4a2fef72e41f3fad78edb1e395cc319ad3032a1059e0567251b5dafd",
-     "size": 33174,
+     "sha256": "9218c6f73d732425d345cf5dbef011e266c3981746a6c3ecab11ac9ac45ecc87",
+     "size": 32138,
      "type": "file"
     },
     {
@@ -2774,8 +2773,8 @@
     {
      "mode": "100644",
      "path": "src/components/SettlementDetail.jsx",
-     "sha256": "7c80a7f967bcb9badf5f2e012c2bcf2f2542003e6b1c6472308b5cc0aa2e4fea",
-     "size": 44020,
+     "sha256": "7a15348a7c83e1c1c5575ed37836c67f40e4ffbfc75f8d2c14270f7ed6163569",
+     "size": 43227,
      "type": "file"
     },
     {
@@ -2837,8 +2836,8 @@
     {
      "mode": "100644",
      "path": "src/components/WorldMap.jsx",
-     "sha256": "9b8633ece874650b02443124b91287de9d6828d48515435871259bcd36e9decd",
-     "size": 48620,
+     "sha256": "5fa010d4c8a73588a7ab32fd6ee2710b8d578178ecc65c849eaf9fd23e630b63",
+     "size": 48929,
      "type": "file"
     },
     {
@@ -3551,8 +3550,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSessionNotices.jsx",
-     "sha256": "e79a01fa1538dc530a5affe700a93064b2f152be2bd08636465867eb383b14bc",
-     "size": 4417,
+     "sha256": "f5588686e47d15e7e67e32876c120d1093d4808a7dbc3b268afe296ef64b2bda",
+     "size": 4470,
      "type": "file"
     },
     {
@@ -3581,13 +3580,6 @@
      "path": "src/components/dossier/FirstDossierCallouts.jsx",
      "sha256": "d7b5b0eb6f7ce7ecd691af5a90998ac67980696149ad89ba923ba996751f98d2",
      "size": 5207,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "4243f7fb1cb69a483606ee244f62b0ee47c20d10fba6d6fd98f33925b37bafc0",
-     "size": 10703,
      "type": "file"
     },
     {
@@ -3999,8 +3991,8 @@
     {
      "mode": "100644",
      "path": "src/components/generate/PlaceInRegionCard.jsx",
-     "sha256": "4cbe5e5ae6caacb5e3df431a43e99bab2c756d703cf9034d24768c644aa4db5c",
-     "size": 7102,
+     "sha256": "8fa2f1a5e6db27f77dc157063a0260a8c171c8a596166890d9fc1a62f76c0b03",
+     "size": 7162,
      "type": "file"
     },
     {
@@ -4104,8 +4096,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/LandingBelowFold.jsx",
-     "sha256": "d89a55b13d30239738c9bb74962f5d160a1aa9000e01310cc0e893bc90009af8",
-     "size": 27254,
+     "sha256": "816c04c1b6063fac5688830e040f93e0495aeb721d6a5182a3109b1b19d6f32d",
+     "size": 28767,
      "type": "file"
     },
     {
@@ -4188,8 +4180,8 @@
     {
      "mode": "100644",
      "path": "src/components/instant/InstantWorldEntry.jsx",
-     "sha256": "7da057a4f08c6fd35f281c2db6946b7555a2525faf4d3cbfb8be5c12fc7a5d3e",
-     "size": 14567,
+     "sha256": "d904525994a3d44ad4a5ecdd32bac22387972391232d32b0bb1035efacad5e62",
+     "size": 14988,
      "type": "file"
     },
     {
@@ -4692,8 +4684,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmMobileGate.jsx",
-     "sha256": "62fd926c4163d80493d78a8dbfa4d58cea61ed1c87dc3d70fce8240c6f992165",
-     "size": 7370,
+     "sha256": "bb42c0a5224056ef8007a3dcf0f3e4c252cb667012a802b73f82dad20a88101f",
+     "size": 7733,
      "type": "file"
     },
     {
@@ -4888,8 +4880,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapOverlays.jsx",
-     "sha256": "8f99833ecd3a17040a0fdc0e29e26a4909f379e2ae7a075f2eb216dd937936f3",
-     "size": 8608,
+     "sha256": "29a5ae5c2f490ce7a6b111dacb0551fcd9a1157a0dfd9b3524db273e503ec863",
+     "size": 10236,
      "type": "file"
     },
     {
@@ -4916,8 +4908,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapTourSteps.js",
-     "sha256": "04f81f8f8d88ae0bbfaa29735b11b90264969824a89b99a1ca3a6b1c6ebb18f7",
-     "size": 2782,
+     "sha256": "6f64de74d2678f0c563ab5f6ae91f0b578c0e39ac27247c458dffb5c1c170a97",
+     "size": 2830,
      "type": "file"
     },
     {
@@ -5196,8 +5188,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "cc190e29f75c6d6ad27149c4025f03550de6b00c645c8d313a659d165788e532",
-     "size": 17944,
+     "sha256": "c110ec90b3a3df294e6565e53fa05f28f2d3f05c2ff7a80d4ae74c083910d358",
+     "size": 18318,
      "type": "file"
     },
     {
@@ -5210,8 +5202,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "cec9e3eee5289def5157bd4677c00da56bbbc3fd54f3bef003cda4e6faeba61e",
-     "size": 26100,
+     "sha256": "67ae499be32912ff7f66b3bf963fb41d706e5586f62d19d0b2c31c9588fc472a",
+     "size": 22207,
      "type": "file"
     },
     {
@@ -5287,8 +5279,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "621fd54520df7038e7915dc2e8fdf59591166c1de310beb0b3a3a3a2528d4a71",
-     "size": 23454,
+     "sha256": "5424c92e6fa24510b39389a03112f201dc527028a4d72e880c7f02d2acb38c43",
+     "size": 23568,
      "type": "file"
     },
     {
@@ -5308,8 +5300,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "743a2bf580330a88c8f7fbbfc4bc2950343240c4a3181fd778e3e7474720ee00",
-     "size": 8144,
+     "sha256": "c3a06e71ae2ddd6209494608f66ae7e4bb9d4ed518ea19cfb32f581f14d7730f",
+     "size": 7777,
      "type": "file"
     },
     {
@@ -5322,8 +5314,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "83a9b2ae1fdba62732da927d5c82079896f35e65c563f67e1dac4f5bc4bfe85b",
-     "size": 49483,
+     "sha256": "a29feb7a3f05b48d95eb7dfd049f3b5a588860db041b17b4f2ef1d00e40d543d",
+     "size": 49710,
      "type": "file"
     },
     {
@@ -5413,8 +5405,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "d1d285dd9bdff9f2076128a9de3694056e9ed14f2ac7734c2ecb1d640598558e",
-     "size": 31041,
+     "sha256": "bce25891d1b9aa2d9dc7bada24856ba2a1ea1bd7e1787b2f8dac6f752b7a5ac4",
+     "size": 33322,
      "type": "file"
     },
     {
@@ -5539,8 +5531,8 @@
     {
      "mode": "100644",
      "path": "src/components/pricing/PricingBands.jsx",
-     "sha256": "99eca27d78e523f27a8292a99e8852f13688fc1abf77131bde4f45f1aa2dc9d7",
-     "size": 15488,
+     "sha256": "76af2f07f5ed6982ce892520090cb78a5e312b46d3215d410ae9604f3a01bad2",
+     "size": 15827,
      "type": "file"
     },
     {
@@ -5798,8 +5790,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/StateBadge.jsx",
-     "sha256": "5502efa7f4f9ebe438eca8fee329ea1fddfddbf77ea8d6fd0d93f1957bcb5576",
-     "size": 3857,
+     "sha256": "26eac433ae17b3857ff438eb270c68c2f5fe28849a60e470ef3c8f198125f4e0",
+     "size": 3878,
      "type": "file"
     },
     {
@@ -5889,8 +5881,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/DeityAssignmentPanel.jsx",
-     "sha256": "cc40be94fc062ca483c643657d890754ed2774447fded34d93aed2c806cf172a",
-     "size": 20631,
+     "sha256": "564c71d5832bd5eeaec0ececad03448a090819d117016b80aae498e7dad271a9",
+     "size": 20737,
      "type": "file"
     },
     {
@@ -5910,8 +5902,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "0db73dba1aed7ab2444501c0e8c55f9a87861d4c5ec94912ae11791944990161",
-     "size": 13711,
+     "sha256": "3625d0a687d970d02a1e7356f59f8003c85867dd1ea4661dd3bf4d8e27e644d6",
+     "size": 13764,
      "type": "file"
     },
     {
@@ -6057,8 +6049,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/eventComposer/EventComposerDeityField.jsx",
-     "sha256": "acfcd72caa7a3feac885fea89e2ac53dffaeba78d71889c426d97faa3dc63cc4",
-     "size": 9665,
+     "sha256": "fdddd1066e102447073393bfda75d3f194916efdf4bef117292d3cdf7c9d3521",
+     "size": 9725,
      "type": "file"
     },
     {
@@ -6169,8 +6161,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlementDetail/SettlementDetailActions.jsx",
-     "sha256": "599827e44d6d3e940f87ebb69f0c22c18dce6144957081c0485aa69a7600dc78",
-     "size": 4228,
+     "sha256": "f9c9d0ee4563d0d2e0b04e627b66d07aa068963eb70d399b5b9ad7fd94d0fd85",
+     "size": 4296,
      "type": "file"
     },
     {
@@ -6295,8 +6287,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlements/SaveQuotaMeter.jsx",
-     "sha256": "8d6aa29e593ce8b43cb454659c375cc02ea11eeb933bf572982fa90da8149c16",
-     "size": 6241,
+     "sha256": "f1dd8389976027984f21a8c2c5c22b4358766c7529a6d4719911076196fa40af",
+     "size": 6301,
      "type": "file"
     },
     {
@@ -6554,8 +6546,8 @@
     {
      "mode": "100644",
      "path": "src/copy/en.js",
-     "sha256": "b7769cbe4bae598962118392655d89b1ecb96e210595b9b99dbb04ff42a52957",
-     "size": 94882,
+     "sha256": "e72069a45afc20d393e4967f9b076fc6d20950844d87ff6b8aead777ea627658",
+     "size": 94890,
      "type": "file"
     },
     {
@@ -6687,7 +6679,7 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "342595dc08fac3f29b9429354193cbf67128838bbd1b280aacfa7f7533234c53",
+     "sha256": "922abdfa84a5017fd258f9285ba10fabe506f099e316928781eb680d34e0e78a",
      "size": 83961,
      "type": "file"
     },
@@ -7667,8 +7659,8 @@
     {
      "mode": "100644",
      "path": "src/domain/compendium/generated/compendiumData.generated.js",
-     "sha256": "ea1ec92f7f302134e5eaba4d51f443a0942a9d00b021e2b8aff1b87e610d1f0f",
-     "size": 95295,
+     "sha256": "23a2b86fab871c8967add9c010c2ec9c451098301a93bb0d20edc93e615aaddf",
+     "size": 94584,
      "type": "file"
     },
     {
@@ -8780,8 +8772,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603",
-     "size": 35783,
+     "sha256": "f1a6d55018640598c321f0dd5bfcb6354645748d0dc6e8d610b3dc088e2baef1",
+     "size": 36753,
      "type": "file"
     },
     {
@@ -8801,8 +8793,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-     "size": 114122,
+     "sha256": "e114adbcff0e25a6f11089904438fb459822aa82297abd91a0ab96dcd30e939d",
+     "size": 115024,
      "type": "file"
     },
     {
@@ -8843,8 +8835,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/stressorsStateProse.js",
-     "sha256": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
-     "size": 29518,
+     "sha256": "0cb857d36b213ee0c4daa3453eb68ab1627a8f6985f3bf71224ce0a1cadd745e",
+     "size": 30862,
      "type": "file"
     },
     {
@@ -9550,8 +9542,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
-     "size": 16477,
+     "sha256": "fc13371fab6925c57503564217da93a59576659db7a3713b85b66c232c6ffd80",
+     "size": 16323,
      "type": "file"
     },
     {
@@ -11293,8 +11285,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
-     "size": 10894,
+     "sha256": "6b56a49889a31f97d156345afa2bf514c429711b228a9a5484f2eb37f15a809f",
+     "size": 10814,
      "type": "file"
     },
     {
@@ -11629,8 +11621,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/changeAuthorityPolicy.js",
-     "sha256": "f683738f560fc36bf01bb5b899dcfda0cc9d7dbe46eeef9270deff86aec9ec6a",
-     "size": 23378,
+     "sha256": "8fd174d74ca4d92ce9abc96caf838ace943c0cbf0c130fab3d2d79ada7ce99b1",
+     "size": 23574,
      "type": "file"
     },
     {
@@ -11797,8 +11789,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/coup.js",
-     "sha256": "a8e37ed145c8128a0d670a4fcd1e50518b52f1d4e77d495135b36c63c1371f70",
-     "size": 12333,
+     "sha256": "c2069cd80ae396002171aad07f973b463706c3456addacfe7de39e3b644e01c8",
+     "size": 11960,
      "type": "file"
     },
     {
@@ -14695,8 +14687,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "a1f22635aa832b75b52ebc56b4db4a38e25594919002aa6f922641892e89ce97",
-     "size": 36862,
+     "sha256": "4dd0cf18fe99ba0dd17a79527f010dcef18e596522d4982f5a9a71c239a98dd1",
+     "size": 38232,
      "type": "file"
     },
     {
@@ -14954,8 +14946,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "52f798d03657c04c02c224d68940ef5a2436ac76b6f898b5ce408fc45f52e0bf",
-     "size": 32865,
+     "sha256": "85319f319abf66ed482294637429010e460d627c72df317a2fe44c00cc6092e4",
+     "size": 34338,
      "type": "file"
     },
     {
@@ -15451,8 +15443,8 @@
     {
      "mode": "100644",
      "path": "src/hooks/useRealmInspector.js",
-     "sha256": "40b29afe61958a65721f1f9cb631341512c71880d30fd31f45a9b478d3a05778",
-     "size": 13184,
+     "sha256": "fd0ba25436314ed6dbcd887b143724d922c9f40bd461239c6e41f0a1ebb2c12c",
+     "size": 14544,
      "type": "file"
     },
     {
@@ -16538,6 +16530,13 @@
      "path": "src/lib/purchaseHistory.js",
      "sha256": "c088c3b0ff980415809b4000d4a140bd550497cafe600ba628cd77b2ddf2bbf0",
      "size": 6001,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/realmHeraldGate.js",
+     "sha256": "d930ca32aacf6c9322d95ce8301cb3fb8fe2352f474b1f782377208fff2ec787",
+     "size": 1981,
      "type": "file"
     },
     {
@@ -17656,8 +17655,8 @@
     {
      "mode": "100644",
      "path": "src/store/operationRegistry.js",
-     "sha256": "21e921c0a4791014dface67c8ef4e3a051e4bb1f964b212f614a35af22cef92e",
-     "size": 91462,
+     "sha256": "73cd7002171e120e31aa48741ef28d0857d394cb5443d1aad57e91e878951268",
+     "size": 90649,
      "type": "file"
     },
     {
@@ -17733,8 +17732,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementGenerateAction.js",
-     "sha256": "1485a484d12844125a8989899004d825511575fd4ec800dd1a964c0c4c8fbb49",
-     "size": 24550,
+     "sha256": "1847fdf5bf3ac9d3c7d51237220a58e13acbd85acb079d6be5b408315daace0b",
+     "size": 24961,
      "type": "file"
     },
     {
@@ -17775,15 +17774,15 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "f052475cd3b3a55cccce2b454cb5ba8f1fb6a825d3c508f45dd4581c88508781",
-     "size": 90286,
+     "sha256": "7d43978e3e831eb717958a6c72f1955ceefa2a5a77589eae9db27300fbbbce5c",
+     "size": 89282,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/store/settlementSliceHelpers.js",
-     "sha256": "66400a71f3bae8d673f4a4faca8f8c1c8828611dda253721db94733ec8281b33",
-     "size": 31386,
+     "sha256": "cbe004961a69c35d7724879d78c0346964d8ec5f098a341316e089890e09f6cb",
+     "size": 30341,
      "type": "file"
     },
     {
@@ -17930,7 +17929,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6428dcc410d54e8a214f8e4cb49675a2ab8f4dd2a2ad5612d8b21ecd9d68552d",
+   "digest": "061064b509da887234e2bf2ab370ca4bc42c11aff882cf65da5c8796421b5442",
    "entries": [
     {
      "mode": "100644",
@@ -17942,8 +17941,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "1b05cddf2d1f9fa295a990d5de5718fd58ed6c1697ab8f83837aaaa3103efeee",
-     "size": 11069,
+     "sha256": "2e94bdc02b194427a45311ac5993728fe53edff08ed32374cfa2bf0558b91cd4",
+     "size": 11388,
      "type": "file"
     },
     {
@@ -18208,8 +18207,8 @@
     {
      "mode": "100644",
      "path": "src/components/GenerateWizard.jsx",
-     "sha256": "c176f41d4a2fef72e41f3fad78edb1e395cc319ad3032a1059e0567251b5dafd",
-     "size": 33174,
+     "sha256": "9218c6f73d732425d345cf5dbef011e266c3981746a6c3ecab11ac9ac45ecc87",
+     "size": 32138,
      "type": "file"
     },
     {
@@ -18327,8 +18326,8 @@
     {
      "mode": "100644",
      "path": "src/components/SettlementDetail.jsx",
-     "sha256": "7c80a7f967bcb9badf5f2e012c2bcf2f2542003e6b1c6472308b5cc0aa2e4fea",
-     "size": 44020,
+     "sha256": "7a15348a7c83e1c1c5575ed37836c67f40e4ffbfc75f8d2c14270f7ed6163569",
+     "size": 43227,
      "type": "file"
     },
     {
@@ -18390,8 +18389,8 @@
     {
      "mode": "100644",
      "path": "src/components/WorldMap.jsx",
-     "sha256": "9b8633ece874650b02443124b91287de9d6828d48515435871259bcd36e9decd",
-     "size": 48620,
+     "sha256": "5fa010d4c8a73588a7ab32fd6ee2710b8d578178ecc65c849eaf9fd23e630b63",
+     "size": 48929,
      "type": "file"
     },
     {
@@ -19104,8 +19103,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSessionNotices.jsx",
-     "sha256": "e79a01fa1538dc530a5affe700a93064b2f152be2bd08636465867eb383b14bc",
-     "size": 4417,
+     "sha256": "f5588686e47d15e7e67e32876c120d1093d4808a7dbc3b268afe296ef64b2bda",
+     "size": 4470,
      "type": "file"
     },
     {
@@ -19134,13 +19133,6 @@
      "path": "src/components/dossier/FirstDossierCallouts.jsx",
      "sha256": "d7b5b0eb6f7ce7ecd691af5a90998ac67980696149ad89ba923ba996751f98d2",
      "size": 5207,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "4243f7fb1cb69a483606ee244f62b0ee47c20d10fba6d6fd98f33925b37bafc0",
-     "size": 10703,
      "type": "file"
     },
     {
@@ -19552,8 +19544,8 @@
     {
      "mode": "100644",
      "path": "src/components/generate/PlaceInRegionCard.jsx",
-     "sha256": "4cbe5e5ae6caacb5e3df431a43e99bab2c756d703cf9034d24768c644aa4db5c",
-     "size": 7102,
+     "sha256": "8fa2f1a5e6db27f77dc157063a0260a8c171c8a596166890d9fc1a62f76c0b03",
+     "size": 7162,
      "type": "file"
     },
     {
@@ -19657,8 +19649,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/LandingBelowFold.jsx",
-     "sha256": "d89a55b13d30239738c9bb74962f5d160a1aa9000e01310cc0e893bc90009af8",
-     "size": 27254,
+     "sha256": "816c04c1b6063fac5688830e040f93e0495aeb721d6a5182a3109b1b19d6f32d",
+     "size": 28767,
      "type": "file"
     },
     {
@@ -19741,8 +19733,8 @@
     {
      "mode": "100644",
      "path": "src/components/instant/InstantWorldEntry.jsx",
-     "sha256": "7da057a4f08c6fd35f281c2db6946b7555a2525faf4d3cbfb8be5c12fc7a5d3e",
-     "size": 14567,
+     "sha256": "d904525994a3d44ad4a5ecdd32bac22387972391232d32b0bb1035efacad5e62",
+     "size": 14988,
      "type": "file"
     },
     {
@@ -20245,8 +20237,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmMobileGate.jsx",
-     "sha256": "62fd926c4163d80493d78a8dbfa4d58cea61ed1c87dc3d70fce8240c6f992165",
-     "size": 7370,
+     "sha256": "bb42c0a5224056ef8007a3dcf0f3e4c252cb667012a802b73f82dad20a88101f",
+     "size": 7733,
      "type": "file"
     },
     {
@@ -20441,8 +20433,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapOverlays.jsx",
-     "sha256": "8f99833ecd3a17040a0fdc0e29e26a4909f379e2ae7a075f2eb216dd937936f3",
-     "size": 8608,
+     "sha256": "29a5ae5c2f490ce7a6b111dacb0551fcd9a1157a0dfd9b3524db273e503ec863",
+     "size": 10236,
      "type": "file"
     },
     {
@@ -20469,8 +20461,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapTourSteps.js",
-     "sha256": "04f81f8f8d88ae0bbfaa29735b11b90264969824a89b99a1ca3a6b1c6ebb18f7",
-     "size": 2782,
+     "sha256": "6f64de74d2678f0c563ab5f6ae91f0b578c0e39ac27247c458dffb5c1c170a97",
+     "size": 2830,
      "type": "file"
     },
     {
@@ -20749,8 +20741,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "cc190e29f75c6d6ad27149c4025f03550de6b00c645c8d313a659d165788e532",
-     "size": 17944,
+     "sha256": "c110ec90b3a3df294e6565e53fa05f28f2d3f05c2ff7a80d4ae74c083910d358",
+     "size": 18318,
      "type": "file"
     },
     {
@@ -20763,8 +20755,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "cec9e3eee5289def5157bd4677c00da56bbbc3fd54f3bef003cda4e6faeba61e",
-     "size": 26100,
+     "sha256": "67ae499be32912ff7f66b3bf963fb41d706e5586f62d19d0b2c31c9588fc472a",
+     "size": 22207,
      "type": "file"
     },
     {
@@ -20840,8 +20832,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "621fd54520df7038e7915dc2e8fdf59591166c1de310beb0b3a3a3a2528d4a71",
-     "size": 23454,
+     "sha256": "5424c92e6fa24510b39389a03112f201dc527028a4d72e880c7f02d2acb38c43",
+     "size": 23568,
      "type": "file"
     },
     {
@@ -20861,8 +20853,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "743a2bf580330a88c8f7fbbfc4bc2950343240c4a3181fd778e3e7474720ee00",
-     "size": 8144,
+     "sha256": "c3a06e71ae2ddd6209494608f66ae7e4bb9d4ed518ea19cfb32f581f14d7730f",
+     "size": 7777,
      "type": "file"
     },
     {
@@ -20875,8 +20867,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "83a9b2ae1fdba62732da927d5c82079896f35e65c563f67e1dac4f5bc4bfe85b",
-     "size": 49483,
+     "sha256": "a29feb7a3f05b48d95eb7dfd049f3b5a588860db041b17b4f2ef1d00e40d543d",
+     "size": 49710,
      "type": "file"
     },
     {
@@ -20966,8 +20958,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "d1d285dd9bdff9f2076128a9de3694056e9ed14f2ac7734c2ecb1d640598558e",
-     "size": 31041,
+     "sha256": "bce25891d1b9aa2d9dc7bada24856ba2a1ea1bd7e1787b2f8dac6f752b7a5ac4",
+     "size": 33322,
      "type": "file"
     },
     {
@@ -21092,8 +21084,8 @@
     {
      "mode": "100644",
      "path": "src/components/pricing/PricingBands.jsx",
-     "sha256": "99eca27d78e523f27a8292a99e8852f13688fc1abf77131bde4f45f1aa2dc9d7",
-     "size": 15488,
+     "sha256": "76af2f07f5ed6982ce892520090cb78a5e312b46d3215d410ae9604f3a01bad2",
+     "size": 15827,
      "type": "file"
     },
     {
@@ -21351,8 +21343,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/StateBadge.jsx",
-     "sha256": "5502efa7f4f9ebe438eca8fee329ea1fddfddbf77ea8d6fd0d93f1957bcb5576",
-     "size": 3857,
+     "sha256": "26eac433ae17b3857ff438eb270c68c2f5fe28849a60e470ef3c8f198125f4e0",
+     "size": 3878,
      "type": "file"
     },
     {
@@ -21442,8 +21434,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/DeityAssignmentPanel.jsx",
-     "sha256": "cc40be94fc062ca483c643657d890754ed2774447fded34d93aed2c806cf172a",
-     "size": 20631,
+     "sha256": "564c71d5832bd5eeaec0ececad03448a090819d117016b80aae498e7dad271a9",
+     "size": 20737,
      "type": "file"
     },
     {
@@ -21463,8 +21455,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "0db73dba1aed7ab2444501c0e8c55f9a87861d4c5ec94912ae11791944990161",
-     "size": 13711,
+     "sha256": "3625d0a687d970d02a1e7356f59f8003c85867dd1ea4661dd3bf4d8e27e644d6",
+     "size": 13764,
      "type": "file"
     },
     {
@@ -21610,8 +21602,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/eventComposer/EventComposerDeityField.jsx",
-     "sha256": "acfcd72caa7a3feac885fea89e2ac53dffaeba78d71889c426d97faa3dc63cc4",
-     "size": 9665,
+     "sha256": "fdddd1066e102447073393bfda75d3f194916efdf4bef117292d3cdf7c9d3521",
+     "size": 9725,
      "type": "file"
     },
     {
@@ -21722,8 +21714,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlementDetail/SettlementDetailActions.jsx",
-     "sha256": "599827e44d6d3e940f87ebb69f0c22c18dce6144957081c0485aa69a7600dc78",
-     "size": 4228,
+     "sha256": "f9c9d0ee4563d0d2e0b04e627b66d07aa068963eb70d399b5b9ad7fd94d0fd85",
+     "size": 4296,
      "type": "file"
     },
     {
@@ -21848,8 +21840,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlements/SaveQuotaMeter.jsx",
-     "sha256": "8d6aa29e593ce8b43cb454659c375cc02ea11eeb933bf572982fa90da8149c16",
-     "size": 6241,
+     "sha256": "f1dd8389976027984f21a8c2c5c22b4358766c7529a6d4719911076196fa40af",
+     "size": 6301,
      "type": "file"
     },
     {
@@ -22107,8 +22099,8 @@
     {
      "mode": "100644",
      "path": "src/copy/en.js",
-     "sha256": "b7769cbe4bae598962118392655d89b1ecb96e210595b9b99dbb04ff42a52957",
-     "size": 94882,
+     "sha256": "e72069a45afc20d393e4967f9b076fc6d20950844d87ff6b8aead777ea627658",
+     "size": 94890,
      "type": "file"
     },
     {
@@ -24214,8 +24206,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603",
-     "size": 35783,
+     "sha256": "f1a6d55018640598c321f0dd5bfcb6354645748d0dc6e8d610b3dc088e2baef1",
+     "size": 36753,
      "type": "file"
     },
     {
@@ -24235,8 +24227,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-     "size": 114122,
+     "sha256": "e114adbcff0e25a6f11089904438fb459822aa82297abd91a0ab96dcd30e939d",
+     "size": 115024,
      "type": "file"
     },
     {
@@ -24277,8 +24269,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/stressorsStateProse.js",
-     "sha256": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
-     "size": 29518,
+     "sha256": "0cb857d36b213ee0c4daa3453eb68ab1627a8f6985f3bf71224ce0a1cadd745e",
+     "size": 30862,
      "type": "file"
     },
     {
@@ -24984,8 +24976,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
-     "size": 16477,
+     "sha256": "fc13371fab6925c57503564217da93a59576659db7a3713b85b66c232c6ffd80",
+     "size": 16323,
      "type": "file"
     },
     {
@@ -26727,8 +26719,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
-     "size": 10894,
+     "sha256": "6b56a49889a31f97d156345afa2bf514c429711b228a9a5484f2eb37f15a809f",
+     "size": 10814,
      "type": "file"
     },
     {
@@ -27063,8 +27055,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/changeAuthorityPolicy.js",
-     "sha256": "f683738f560fc36bf01bb5b899dcfda0cc9d7dbe46eeef9270deff86aec9ec6a",
-     "size": 23378,
+     "sha256": "8fd174d74ca4d92ce9abc96caf838ace943c0cbf0c130fab3d2d79ada7ce99b1",
+     "size": 23574,
      "type": "file"
     },
     {
@@ -27231,8 +27223,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/coup.js",
-     "sha256": "a8e37ed145c8128a0d670a4fcd1e50518b52f1d4e77d495135b36c63c1371f70",
-     "size": 12333,
+     "sha256": "c2069cd80ae396002171aad07f973b463706c3456addacfe7de39e3b644e01c8",
+     "size": 11960,
      "type": "file"
     },
     {
@@ -30129,8 +30121,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "a1f22635aa832b75b52ebc56b4db4a38e25594919002aa6f922641892e89ce97",
-     "size": 36862,
+     "sha256": "4dd0cf18fe99ba0dd17a79527f010dcef18e596522d4982f5a9a71c239a98dd1",
+     "size": 38232,
      "type": "file"
     },
     {
@@ -30388,8 +30380,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "52f798d03657c04c02c224d68940ef5a2436ac76b6f898b5ce408fc45f52e0bf",
-     "size": 32865,
+     "sha256": "85319f319abf66ed482294637429010e460d627c72df317a2fe44c00cc6092e4",
+     "size": 34338,
      "type": "file"
     },
     {
@@ -30885,8 +30877,8 @@
     {
      "mode": "100644",
      "path": "src/hooks/useRealmInspector.js",
-     "sha256": "40b29afe61958a65721f1f9cb631341512c71880d30fd31f45a9b478d3a05778",
-     "size": 13184,
+     "sha256": "fd0ba25436314ed6dbcd887b143724d922c9f40bd461239c6e41f0a1ebb2c12c",
+     "size": 14544,
      "type": "file"
     },
     {
@@ -31972,6 +31964,13 @@
      "path": "src/lib/purchaseHistory.js",
      "sha256": "c088c3b0ff980415809b4000d4a140bd550497cafe600ba628cd77b2ddf2bbf0",
      "size": 6001,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/realmHeraldGate.js",
+     "sha256": "d930ca32aacf6c9322d95ce8301cb3fb8fe2352f474b1f782377208fff2ec787",
+     "size": 1981,
      "type": "file"
     },
     {
@@ -33090,8 +33089,8 @@
     {
      "mode": "100644",
      "path": "src/store/operationRegistry.js",
-     "sha256": "21e921c0a4791014dface67c8ef4e3a051e4bb1f964b212f614a35af22cef92e",
-     "size": 91462,
+     "sha256": "73cd7002171e120e31aa48741ef28d0857d394cb5443d1aad57e91e878951268",
+     "size": 90649,
      "type": "file"
     },
     {
@@ -33167,8 +33166,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementGenerateAction.js",
-     "sha256": "1485a484d12844125a8989899004d825511575fd4ec800dd1a964c0c4c8fbb49",
-     "size": 24550,
+     "sha256": "1847fdf5bf3ac9d3c7d51237220a58e13acbd85acb079d6be5b408315daace0b",
+     "size": 24961,
      "type": "file"
     },
     {
@@ -33209,15 +33208,15 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "f052475cd3b3a55cccce2b454cb5ba8f1fb6a825d3c508f45dd4581c88508781",
-     "size": 90286,
+     "sha256": "7d43978e3e831eb717958a6c72f1955ceefa2a5a77589eae9db27300fbbbce5c",
+     "size": 89282,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/store/settlementSliceHelpers.js",
-     "sha256": "66400a71f3bae8d673f4a4faca8f8c1c8828611dda253721db94733ec8281b33",
-     "size": 31386,
+     "sha256": "cbe004961a69c35d7724879d78c0346964d8ec5f098a341316e089890e09f6cb",
+     "size": 30341,
      "type": "file"
     },
     {
@@ -33357,7 +33356,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f07db2fc2a65a4a1bd8fe20807fea142754dd1d5a51b07c77f80b26161a4131b",
+   "digest": "cc22002d76fd48565dcc0b59c16852870c0469853204d745a98a858ebabaddb0",
    "entries": [
     {
      "mode": "100644",
@@ -33369,8 +33368,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "1b05cddf2d1f9fa295a990d5de5718fd58ed6c1697ab8f83837aaaa3103efeee",
-     "size": 11069,
+     "sha256": "2e94bdc02b194427a45311ac5993728fe53edff08ed32374cfa2bf0558b91cd4",
+     "size": 11388,
      "type": "file"
     },
     {
@@ -33635,8 +33634,8 @@
     {
      "mode": "100644",
      "path": "src/components/GenerateWizard.jsx",
-     "sha256": "c176f41d4a2fef72e41f3fad78edb1e395cc319ad3032a1059e0567251b5dafd",
-     "size": 33174,
+     "sha256": "9218c6f73d732425d345cf5dbef011e266c3981746a6c3ecab11ac9ac45ecc87",
+     "size": 32138,
      "type": "file"
     },
     {
@@ -33754,8 +33753,8 @@
     {
      "mode": "100644",
      "path": "src/components/SettlementDetail.jsx",
-     "sha256": "7c80a7f967bcb9badf5f2e012c2bcf2f2542003e6b1c6472308b5cc0aa2e4fea",
-     "size": 44020,
+     "sha256": "7a15348a7c83e1c1c5575ed37836c67f40e4ffbfc75f8d2c14270f7ed6163569",
+     "size": 43227,
      "type": "file"
     },
     {
@@ -33817,8 +33816,8 @@
     {
      "mode": "100644",
      "path": "src/components/WorldMap.jsx",
-     "sha256": "9b8633ece874650b02443124b91287de9d6828d48515435871259bcd36e9decd",
-     "size": 48620,
+     "sha256": "5fa010d4c8a73588a7ab32fd6ee2710b8d578178ecc65c849eaf9fd23e630b63",
+     "size": 48929,
      "type": "file"
     },
     {
@@ -34531,8 +34530,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSessionNotices.jsx",
-     "sha256": "e79a01fa1538dc530a5affe700a93064b2f152be2bd08636465867eb383b14bc",
-     "size": 4417,
+     "sha256": "f5588686e47d15e7e67e32876c120d1093d4808a7dbc3b268afe296ef64b2bda",
+     "size": 4470,
      "type": "file"
     },
     {
@@ -34561,13 +34560,6 @@
      "path": "src/components/dossier/FirstDossierCallouts.jsx",
      "sha256": "d7b5b0eb6f7ce7ecd691af5a90998ac67980696149ad89ba923ba996751f98d2",
      "size": 5207,
-     "type": "file"
-    },
-    {
-     "mode": "100644",
-     "path": "src/components/dossier/LockControls.jsx",
-     "sha256": "4243f7fb1cb69a483606ee244f62b0ee47c20d10fba6d6fd98f33925b37bafc0",
-     "size": 10703,
      "type": "file"
     },
     {
@@ -34979,8 +34971,8 @@
     {
      "mode": "100644",
      "path": "src/components/generate/PlaceInRegionCard.jsx",
-     "sha256": "4cbe5e5ae6caacb5e3df431a43e99bab2c756d703cf9034d24768c644aa4db5c",
-     "size": 7102,
+     "sha256": "8fa2f1a5e6db27f77dc157063a0260a8c171c8a596166890d9fc1a62f76c0b03",
+     "size": 7162,
      "type": "file"
     },
     {
@@ -35084,8 +35076,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/LandingBelowFold.jsx",
-     "sha256": "d89a55b13d30239738c9bb74962f5d160a1aa9000e01310cc0e893bc90009af8",
-     "size": 27254,
+     "sha256": "816c04c1b6063fac5688830e040f93e0495aeb721d6a5182a3109b1b19d6f32d",
+     "size": 28767,
      "type": "file"
     },
     {
@@ -35168,8 +35160,8 @@
     {
      "mode": "100644",
      "path": "src/components/instant/InstantWorldEntry.jsx",
-     "sha256": "7da057a4f08c6fd35f281c2db6946b7555a2525faf4d3cbfb8be5c12fc7a5d3e",
-     "size": 14567,
+     "sha256": "d904525994a3d44ad4a5ecdd32bac22387972391232d32b0bb1035efacad5e62",
+     "size": 14988,
      "type": "file"
     },
     {
@@ -35672,8 +35664,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/RealmMobileGate.jsx",
-     "sha256": "62fd926c4163d80493d78a8dbfa4d58cea61ed1c87dc3d70fce8240c6f992165",
-     "size": 7370,
+     "sha256": "bb42c0a5224056ef8007a3dcf0f3e4c252cb667012a802b73f82dad20a88101f",
+     "size": 7733,
      "type": "file"
     },
     {
@@ -35868,8 +35860,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapOverlays.jsx",
-     "sha256": "8f99833ecd3a17040a0fdc0e29e26a4909f379e2ae7a075f2eb216dd937936f3",
-     "size": 8608,
+     "sha256": "29a5ae5c2f490ce7a6b111dacb0551fcd9a1157a0dfd9b3524db273e503ec863",
+     "size": 10236,
      "type": "file"
     },
     {
@@ -35896,8 +35888,8 @@
     {
      "mode": "100644",
      "path": "src/components/map/WorldMapTourSteps.js",
-     "sha256": "04f81f8f8d88ae0bbfaa29735b11b90264969824a89b99a1ca3a6b1c6ebb18f7",
-     "size": 2782,
+     "sha256": "6f64de74d2678f0c563ab5f6ae91f0b578c0e39ac27247c458dffb5c1c170a97",
+     "size": 2830,
      "type": "file"
     },
     {
@@ -36176,8 +36168,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/generalDeskRead.js",
-     "sha256": "cc190e29f75c6d6ad27149c4025f03550de6b00c645c8d313a659d165788e532",
-     "size": 17944,
+     "sha256": "c110ec90b3a3df294e6565e53fa05f28f2d3f05c2ff7a80d4ae74c083910d358",
+     "size": 18318,
      "type": "file"
     },
     {
@@ -36190,8 +36182,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "cec9e3eee5289def5157bd4677c00da56bbbc3fd54f3bef003cda4e6faeba61e",
-     "size": 26100,
+     "sha256": "67ae499be32912ff7f66b3bf963fb41d706e5586f62d19d0b2c31c9588fc472a",
+     "size": 22207,
      "type": "file"
     },
     {
@@ -36267,8 +36259,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "621fd54520df7038e7915dc2e8fdf59591166c1de310beb0b3a3a3a2528d4a71",
-     "size": 23454,
+     "sha256": "5424c92e6fa24510b39389a03112f201dc527028a4d72e880c7f02d2acb38c43",
+     "size": 23568,
      "type": "file"
     },
     {
@@ -36288,8 +36280,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "743a2bf580330a88c8f7fbbfc4bc2950343240c4a3181fd778e3e7474720ee00",
-     "size": 8144,
+     "sha256": "c3a06e71ae2ddd6209494608f66ae7e4bb9d4ed518ea19cfb32f581f14d7730f",
+     "size": 7777,
      "type": "file"
     },
     {
@@ -36302,8 +36294,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "83a9b2ae1fdba62732da927d5c82079896f35e65c563f67e1dac4f5bc4bfe85b",
-     "size": 49483,
+     "sha256": "a29feb7a3f05b48d95eb7dfd049f3b5a588860db041b17b4f2ef1d00e40d543d",
+     "size": 49710,
      "type": "file"
     },
     {
@@ -36393,8 +36385,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "d1d285dd9bdff9f2076128a9de3694056e9ed14f2ac7734c2ecb1d640598558e",
-     "size": 31041,
+     "sha256": "bce25891d1b9aa2d9dc7bada24856ba2a1ea1bd7e1787b2f8dac6f752b7a5ac4",
+     "size": 33322,
      "type": "file"
     },
     {
@@ -36519,8 +36511,8 @@
     {
      "mode": "100644",
      "path": "src/components/pricing/PricingBands.jsx",
-     "sha256": "99eca27d78e523f27a8292a99e8852f13688fc1abf77131bde4f45f1aa2dc9d7",
-     "size": 15488,
+     "sha256": "76af2f07f5ed6982ce892520090cb78a5e312b46d3215d410ae9604f3a01bad2",
+     "size": 15827,
      "type": "file"
     },
     {
@@ -36778,8 +36770,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/StateBadge.jsx",
-     "sha256": "5502efa7f4f9ebe438eca8fee329ea1fddfddbf77ea8d6fd0d93f1957bcb5576",
-     "size": 3857,
+     "sha256": "26eac433ae17b3857ff438eb270c68c2f5fe28849a60e470ef3c8f198125f4e0",
+     "size": 3878,
      "type": "file"
     },
     {
@@ -36869,8 +36861,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/DeityAssignmentPanel.jsx",
-     "sha256": "cc40be94fc062ca483c643657d890754ed2774447fded34d93aed2c806cf172a",
-     "size": 20631,
+     "sha256": "564c71d5832bd5eeaec0ececad03448a090819d117016b80aae498e7dad271a9",
+     "size": 20737,
      "type": "file"
     },
     {
@@ -36890,8 +36882,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "0db73dba1aed7ab2444501c0e8c55f9a87861d4c5ec94912ae11791944990161",
-     "size": 13711,
+     "sha256": "3625d0a687d970d02a1e7356f59f8003c85867dd1ea4661dd3bf4d8e27e644d6",
+     "size": 13764,
      "type": "file"
     },
     {
@@ -37037,8 +37029,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/eventComposer/EventComposerDeityField.jsx",
-     "sha256": "acfcd72caa7a3feac885fea89e2ac53dffaeba78d71889c426d97faa3dc63cc4",
-     "size": 9665,
+     "sha256": "fdddd1066e102447073393bfda75d3f194916efdf4bef117292d3cdf7c9d3521",
+     "size": 9725,
      "type": "file"
     },
     {
@@ -37149,8 +37141,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlementDetail/SettlementDetailActions.jsx",
-     "sha256": "599827e44d6d3e940f87ebb69f0c22c18dce6144957081c0485aa69a7600dc78",
-     "size": 4228,
+     "sha256": "f9c9d0ee4563d0d2e0b04e627b66d07aa068963eb70d399b5b9ad7fd94d0fd85",
+     "size": 4296,
      "type": "file"
     },
     {
@@ -37275,8 +37267,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlements/SaveQuotaMeter.jsx",
-     "sha256": "8d6aa29e593ce8b43cb454659c375cc02ea11eeb933bf572982fa90da8149c16",
-     "size": 6241,
+     "sha256": "f1dd8389976027984f21a8c2c5c22b4358766c7529a6d4719911076196fa40af",
+     "size": 6301,
      "type": "file"
     },
     {
@@ -37534,8 +37526,8 @@
     {
      "mode": "100644",
      "path": "src/copy/en.js",
-     "sha256": "b7769cbe4bae598962118392655d89b1ecb96e210595b9b99dbb04ff42a52957",
-     "size": 94882,
+     "sha256": "e72069a45afc20d393e4967f9b076fc6d20950844d87ff6b8aead777ea627658",
+     "size": 94890,
      "type": "file"
     },
     {
@@ -37667,7 +37659,7 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/stressors.generated.js",
-     "sha256": "342595dc08fac3f29b9429354193cbf67128838bbd1b280aacfa7f7533234c53",
+     "sha256": "922abdfa84a5017fd258f9285ba10fabe506f099e316928781eb680d34e0e78a",
      "size": 83961,
      "type": "file"
     },
@@ -38647,8 +38639,8 @@
     {
      "mode": "100644",
      "path": "src/domain/compendium/generated/compendiumData.generated.js",
-     "sha256": "ea1ec92f7f302134e5eaba4d51f443a0942a9d00b021e2b8aff1b87e610d1f0f",
-     "size": 95295,
+     "sha256": "23a2b86fab871c8967add9c010c2ec9c451098301a93bb0d20edc93e615aaddf",
+     "size": 94584,
      "type": "file"
     },
     {
@@ -39760,8 +39752,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/dossierMounts.js",
-     "sha256": "b9314c6d9cb005166297370d350ad2d7294b7c7a87ae5ceecdfdf17526140603",
-     "size": 35783,
+     "sha256": "f1a6d55018640598c321f0dd5bfcb6354645748d0dc6e8d610b3dc088e2baef1",
+     "size": 36753,
      "type": "file"
     },
     {
@@ -39781,8 +39773,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "ab4ed0fce45d2d0b3a81cbfca929b1dda17c2b26038e68643616c5590f54c9ce",
-     "size": 114122,
+     "sha256": "e114adbcff0e25a6f11089904438fb459822aa82297abd91a0ab96dcd30e939d",
+     "size": 115024,
      "type": "file"
     },
     {
@@ -39823,8 +39815,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/stressorsStateProse.js",
-     "sha256": "e51c4df98e6941f6ea8d2f94665aabf143813189c0b787bd289dc9a55765d8ad",
-     "size": 29518,
+     "sha256": "0cb857d36b213ee0c4daa3453eb68ab1627a8f6985f3bf71224ce0a1cadd745e",
+     "size": 30862,
      "type": "file"
     },
     {
@@ -40530,8 +40522,8 @@
     {
      "mode": "100644",
      "path": "src/domain/locksPreservation.js",
-     "sha256": "5304f1237ccf4177a0214c7aceb6cabf97af07f7e1834a3e9954fa2ceef94faa",
-     "size": 16477,
+     "sha256": "fc13371fab6925c57503564217da93a59576659db7a3713b85b66c232c6ffd80",
+     "size": 16323,
      "type": "file"
     },
     {
@@ -42273,8 +42265,8 @@
     {
      "mode": "100644",
      "path": "src/domain/types.js",
-     "sha256": "a95e0bb3619f76396150a009daba24a0f636ce814612b6e81ada472d16b98c25",
-     "size": 10894,
+     "sha256": "6b56a49889a31f97d156345afa2bf514c429711b228a9a5484f2eb37f15a809f",
+     "size": 10814,
      "type": "file"
     },
     {
@@ -42609,8 +42601,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/changeAuthorityPolicy.js",
-     "sha256": "f683738f560fc36bf01bb5b899dcfda0cc9d7dbe46eeef9270deff86aec9ec6a",
-     "size": 23378,
+     "sha256": "8fd174d74ca4d92ce9abc96caf838ace943c0cbf0c130fab3d2d79ada7ce99b1",
+     "size": 23574,
      "type": "file"
     },
     {
@@ -42777,8 +42769,8 @@
     {
      "mode": "100644",
      "path": "src/domain/worldPulse/coup.js",
-     "sha256": "a8e37ed145c8128a0d670a4fcd1e50518b52f1d4e77d495135b36c63c1371f70",
-     "size": 12333,
+     "sha256": "c2069cd80ae396002171aad07f973b463706c3456addacfe7de39e3b644e01c8",
+     "size": 11960,
      "type": "file"
     },
     {
@@ -45675,8 +45667,8 @@
     {
      "mode": "100644",
      "path": "src/generators/generateSettlementPipeline.js",
-     "sha256": "a1f22635aa832b75b52ebc56b4db4a38e25594919002aa6f922641892e89ce97",
-     "size": 36862,
+     "sha256": "4dd0cf18fe99ba0dd17a79527f010dcef18e596522d4982f5a9a71c239a98dd1",
+     "size": 38232,
      "type": "file"
     },
     {
@@ -45934,8 +45926,8 @@
     {
      "mode": "100644",
      "path": "src/generators/power/governanceNarrative.js",
-     "sha256": "52f798d03657c04c02c224d68940ef5a2436ac76b6f898b5ce408fc45f52e0bf",
-     "size": 32865,
+     "sha256": "85319f319abf66ed482294637429010e460d627c72df317a2fe44c00cc6092e4",
+     "size": 34338,
      "type": "file"
     },
     {
@@ -46431,8 +46423,8 @@
     {
      "mode": "100644",
      "path": "src/hooks/useRealmInspector.js",
-     "sha256": "40b29afe61958a65721f1f9cb631341512c71880d30fd31f45a9b478d3a05778",
-     "size": 13184,
+     "sha256": "fd0ba25436314ed6dbcd887b143724d922c9f40bd461239c6e41f0a1ebb2c12c",
+     "size": 14544,
      "type": "file"
     },
     {
@@ -47518,6 +47510,13 @@
      "path": "src/lib/purchaseHistory.js",
      "sha256": "c088c3b0ff980415809b4000d4a140bd550497cafe600ba628cd77b2ddf2bbf0",
      "size": 6001,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/lib/realmHeraldGate.js",
+     "sha256": "d930ca32aacf6c9322d95ce8301cb3fb8fe2352f474b1f782377208fff2ec787",
+     "size": 1981,
      "type": "file"
     },
     {
@@ -48636,8 +48635,8 @@
     {
      "mode": "100644",
      "path": "src/store/operationRegistry.js",
-     "sha256": "21e921c0a4791014dface67c8ef4e3a051e4bb1f964b212f614a35af22cef92e",
-     "size": 91462,
+     "sha256": "73cd7002171e120e31aa48741ef28d0857d394cb5443d1aad57e91e878951268",
+     "size": 90649,
      "type": "file"
     },
     {
@@ -48713,8 +48712,8 @@
     {
      "mode": "100644",
      "path": "src/store/settlementGenerateAction.js",
-     "sha256": "1485a484d12844125a8989899004d825511575fd4ec800dd1a964c0c4c8fbb49",
-     "size": 24550,
+     "sha256": "1847fdf5bf3ac9d3c7d51237220a58e13acbd85acb079d6be5b408315daace0b",
+     "size": 24961,
      "type": "file"
     },
     {
@@ -48755,15 +48754,15 @@
     {
      "mode": "100644",
      "path": "src/store/settlementSlice.js",
-     "sha256": "f052475cd3b3a55cccce2b454cb5ba8f1fb6a825d3c508f45dd4581c88508781",
-     "size": 90286,
+     "sha256": "7d43978e3e831eb717958a6c72f1955ceefa2a5a77589eae9db27300fbbbce5c",
+     "size": 89282,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/store/settlementSliceHelpers.js",
-     "sha256": "66400a71f3bae8d673f4a4faca8f8c1c8828611dda253721db94733ec8281b33",
-     "size": 31386,
+     "sha256": "cbe004961a69c35d7724879d78c0346964d8ec5f098a341316e089890e09f6cb",
+     "size": 30341,
      "type": "file"
     },
     {
@@ -48903,30 +48902,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "4f0b554fb0fdbaf6d260f3e396502c277955b2bbda190c0be825929318c21df0",
+  "bundleDigest": "a05dbf61691b27bb5705276433e43b129c1954ead2dbeabfe484dd3f7819aa7c",
   "corpusDigest": "2027915cb4408bf1053d1f6cd3c3a8616dd5318d848bd62dbb0b301df0efe21a",
-  "currentArtifactDigest": "b1a8ec196e575f71c165fc354651e6bd41346cc0a94eeca0537debd3ad1ca0f6",
-  "currentDetectorDigest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
-  "currentFindingsDigest": "8169c79a5f716b5b7515d29d8d0ca88ede419293610b97c33fc04e244c248c9d",
-  "currentScannerSha": "f20d5dd480a8ad4647b570b23b89f933268352a7",
-  "currentScannerToolDigest": "b17a86279b0fc3380a02292e73a5fc904cdb457fc443d137d31302161a847335",
-  "detectorTreeDigest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
-  "executionTreeDigest": "ca2f98f5c59e63384295eeb1d36884cca97fd6f1c914cb06131337cb99a23b73",
+  "currentArtifactDigest": "dc43a7408d962b423f18dec929324e5ef6149e3aa5ba1ed8f2347cd10943aa41",
+  "currentDetectorDigest": "f4b20996c236d5098710f99bd7f886557817497ba4243dc193c305091596edf7",
+  "currentFindingsDigest": "062e38cb8821e76cc1e54688a914f033ca3ba67e145a203efa031fcd687565c3",
+  "currentScannerSha": "ae8bc5e2927d7d87d48d4c3e9fcbfc628c26c5b8",
+  "currentScannerToolDigest": "bad855488a1fab13d436b5deb14db9034885aa52330e03b3dfdb68aa44d29eaa",
+  "detectorTreeDigest": "f4b20996c236d5098710f99bd7f886557817497ba4243dc193c305091596edf7",
+  "executionTreeDigest": "ccf78efd2c2127c92186bc4a37b1647dedf57cdbe2f7caaa141500db3c03b8c7",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "b1a8ec196e575f71c165fc354651e6bd41346cc0a94eeca0537debd3ad1ca0f6",
-  "legacyDetectorDigest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
-  "legacyScannerSha": "f20d5dd480a8ad4647b570b23b89f933268352a7",
-  "legacyScannerToolDigest": "b17a86279b0fc3380a02292e73a5fc904cdb457fc443d137d31302161a847335",
-  "predecessorBaselineDigest": "bf6782a389d95c02b206cd965b307ff8935b7644d01a8ef2c4c255446bb52ca5",
-  "predecessorBaselineTextSha256": "119516bd65f53eb3e0f3d680edf945998f86299b31a8995a074975cf39e5c910",
+  "legacyArtifactDigest": "dc43a7408d962b423f18dec929324e5ef6149e3aa5ba1ed8f2347cd10943aa41",
+  "legacyDetectorDigest": "f4b20996c236d5098710f99bd7f886557817497ba4243dc193c305091596edf7",
+  "legacyScannerSha": "ae8bc5e2927d7d87d48d4c3e9fcbfc628c26c5b8",
+  "legacyScannerToolDigest": "bad855488a1fab13d436b5deb14db9034885aa52330e03b3dfdb68aa44d29eaa",
+  "predecessorBaselineDigest": "c2629ab21f8e75e88f0d88d4a49e28b843854aa630d5ffbe822883d5a23e3d63",
+  "predecessorBaselineTextSha256": "c2f871808f055a60d57d69494798d4de0c736bddaa60434c15723731a8345ba7",
   "predecessorInventoryDigest": "40856b9ba70142af926f44985a1f8cc9cb979fb833b6e3a7d6bdcde914f1d763",
-  "reportDigest": "426729a5437f878b0ba1e6ef586ab9a13c16dc83e28c80f73571e9a0b160edb3",
-  "reviewDigest": "86bcb8958fc55d284b97295ab13b5db8fbd3ccf67f3324bf04227108fd2e1585",
+  "reportDigest": "7307fc3d3ff657e72db2dd162f392f14ad6f23c8d8f2623d06f5d8a628b1f982",
+  "reviewDigest": "aa2f80fc9e550edbdd65962ec25452795b8da946a900c9b26cf782378d0b1e4d",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "2ef7e90d07af0524cb7fbc93bbeca01f84cb077c469adbcd6904f9ba5f033f05",
-  "sourceTreeDigest": "99d0e5cdf7946269836568c6aa572ebc79451a2ef7f4ec4b38ff4be256fba5dd",
-  "subjectSha": "f20d5dd480a8ad4647b570b23b89f933268352a7",
-  "targetInventoryDigest": "40856b9ba70142af926f44985a1f8cc9cb979fb833b6e3a7d6bdcde914f1d763"
+  "scanTreeDigest": "061064b509da887234e2bf2ab370ca4bc42c11aff882cf65da5c8796421b5442",
+  "sourceTreeDigest": "cc22002d76fd48565dcc0b59c16852870c0469853204d745a98a858ebabaddb0",
+  "subjectSha": "ae8bc5e2927d7d87d48d4c3e9fcbfc628c26c5b8",
+  "targetInventoryDigest": "95b268a892b0dcda7eb1151db88182608adfcf8b360d32df54bbc65e6091d762"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -49065,12 +49064,6 @@
     "rule": "explained-writer"
    }
   },
-  "src/domain/locksPreservation.js": {
-   "factions on locks": {
-    "reason": "CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)",
-    "rule": "explained-writer"
-   }
-  },
   "src/domain/normalizeSettlement.js": {
    "neighbourNetwork on settlement": {
     "reason": "CR-OSR-FREEZE-6-R2 / M9",
@@ -49119,12 +49112,6 @@
     "rule": "explained-writer"
    }
   },
-  "src/domain/worldPulse/coup.js": {
-   "factions on locks": {
-    "reason": "CR-OSR-SCHEMA-6 / M8 — re-triaged out of class (a)",
-    "rule": "explained-writer"
-   }
-  },
   "src/lib/generationTelemetry.js": {
    "neighbourNetwork on settlement": {
     "reason": "CR-OSR-FREEZE-6-R2 / M9",
@@ -49170,22 +49157,22 @@
  },
  "scanStats": {
   "files": 2203,
-  "reads": 127711,
-  "resolved": 9706,
-  "unresolved": 118005
+  "reads": 127678,
+  "resolved": 9702,
+  "unresolved": 117976
  },
  "scannerProvenance": {
-  "detectorDigest": "fbe88af3fce2f5fa467fb87ce2eb32816843edca0f71a4ffc797eef4369f1621",
-  "executionTreeDigest": "6bf795f1d4241e1255dc1b6cf7bcc7f7f28d3a8c68a568c4f4958f9bdf0d7286",
-  "scanTreeDigest": "6428dcc410d54e8a214f8e4cb49675a2ab8f4dd2a2ad5612d8b21ecd9d68552d",
-  "sourceTreeDigest": "f07db2fc2a65a4a1bd8fe20807fea142754dd1d5a51b07c77f80b26161a4131b",
-  "unscannedInputDigest": "13095bd125e9d7963215371ab8ff211e240a41fd052fe1d47a74a8a7f3e60f90"
+  "detectorDigest": "f4b20996c236d5098710f99bd7f886557817497ba4243dc193c305091596edf7",
+  "executionTreeDigest": "ccf78efd2c2127c92186bc4a37b1647dedf57cdbe2f7caaa141500db3c03b8c7",
+  "scanTreeDigest": "061064b509da887234e2bf2ab370ca4bc42c11aff882cf65da5c8796421b5442",
+  "sourceTreeDigest": "cc22002d76fd48565dcc0b59c16852870c0469853204d745a98a858ebabaddb0",
+  "unscannedInputDigest": "0ab30b6829125d995edbeb367f82d949450a27952990adede460720b9df862cc"
  },
- "schema": 18,
+ "schema": 19,
  "sentinel": {
-  "resolvedReads": 9706,
+  "resolvedReads": 9702,
   "totalKeys": 6532,
   "usableShapes": 337
  },
- "total": 1972
+ "total": 1966
 }
