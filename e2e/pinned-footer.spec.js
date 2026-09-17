@@ -74,10 +74,54 @@ async function freshPage(page) {
   });
 }
 
-/** Wait until the shell has measured its chrome (the band and the tuck) and layout has settled. */
+/**
+ * Wait until the view's own content has replaced the lazy-route fallback and the document has
+ * stopped growing. The shell and its footer render BEFORE the view's chunk arrives (the
+ * .app-route-main floor keeps the footer below the fold meanwhile), so a scroll to the end taken
+ * while the fallback shows lands on a page that grows underneath it once the chunk lands. On a
+ * cold CI dev server the Terms chunk arrived between the scroll and the measurement: the document
+ * went from 1,093 to 4,158 px, the scroll stayed at 281, and the footer was about 3,000 px below
+ * the viewport (CI job 105119662237; reproduced locally by delaying the chunk).
+ */
+async function settleRoute(page) {
+  await page.waitForFunction(() => !document.querySelector('[data-sf-route-loading]'));
+  await page.evaluate(() => new Promise((resolve) => {
+    let last = -1;
+    let stable = 0;
+    let frames = 0;
+    const tick = () => {
+      const height = document.documentElement.scrollHeight;
+      stable = height === last ? stable + 1 : 0;
+      last = height;
+      frames += 1;
+      if (stable >= 5 || frames > 600) resolve();
+      else requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }));
+}
+
+/** Scroll to the true end of the settled page, re-scrolling if the end moved. */
+async function scrollToEnd(page) {
+  await settleRoute(page);
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    const atEnd = await page.evaluate(() => new Promise((resolve) => {
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const root = document.documentElement;
+        resolve(window.scrollY + window.innerHeight >= root.scrollHeight - 1);
+      }));
+    }));
+    if (atEnd) return;
+  }
+  throw new Error('scrollToEnd: the page did not stay scrolled to its end');
+}
+
+/** Wait until the view has loaded, the shell has measured its chrome (the band and the tuck) and layout has settled. */
 async function settleChrome(page, { pinned = true } = {}) {
   await page.waitForSelector('footer [data-testid="legal-ribbon-row"]');
   await page.evaluate(() => document.fonts.ready);
+  await settleRoute(page);
   if (pinned) {
     await page.waitForFunction(() => {
       const root = document.documentElement.style;
@@ -133,7 +177,11 @@ function expectWholeFooter(f) {
 }
 
 async function scrollToY(page, y) {
-  await page.evaluate((target) => window.scrollTo({ top: target === 'max' ? document.documentElement.scrollHeight : target, behavior: 'instant' }), y);
+  if (y === 'max') {
+    await scrollToEnd(page);
+    return;
+  }
+  await page.evaluate((target) => window.scrollTo({ top: target, behavior: 'instant' }), y);
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
 }
 
