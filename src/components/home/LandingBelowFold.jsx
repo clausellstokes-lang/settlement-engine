@@ -16,6 +16,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
@@ -339,6 +341,10 @@ function LandingFooter({ onNavigate, isMobile }) {
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
+  // Pre-launch lockout (lib/launchGate.js): See Cartographer is the landing's one
+  // purchase CTA, so it renders disabled with the pill until purchases open. The
+  // pricing links are information and stay live.
+  const purchasesAreOpen = purchasesOpen();
   // The scroll-journey root: the film backdrop measures the `.leg` travel spacers
   // inside this container to drive its playhead (home/useScrollJourney).
   const rootRef = useRef(null);
@@ -455,7 +461,10 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <p style={proseStyle}>{tl('realm.body1')}</p>
             <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('realm.body2')}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('pricing')}>{tl('realm.cta')}</Button>
+              <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')}>
+                {tl('realm.cta')}
+                {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+              </Button>
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('realm.micro')}</span>
             </div>
           </div>

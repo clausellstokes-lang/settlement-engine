@@ -18,12 +18,14 @@ import { settlementSignals, healthPip } from './livingWorldSignals.js';
 import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
 import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
 import { relColor } from './relationshipColors.js';
 import { track, EVENTS } from '../../lib/analytics.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 
 // Relationship-type swatch for the neighbour chips. §67.2: the inline copy that
 // stood here was NOT a cosmetic duplicate — it rendered `allied` in the canonical
@@ -51,6 +53,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const [menuOpen, setMenuOpen] = useState(false);
   const [destroyOpen, setDestroyOpen] = useState(false);
   const menuRef = useRef(null);
+  // Pre-launch lockout (lib/launchGate.js): the two upgrade routes on this row
+  // render disabled and wear the pill until purchases open.
+  const purchasesAreOpen = purchasesOpen();
   const ts = (t) => {
     // An absent or unparseable timestamp must NEVER render the literal "Invalid
     // Date": new Date(undefined).toLocaleDateString() returns that string WITHOUT
@@ -275,9 +280,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             {!active && planInactive && !canReactivate && (
               <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', fontSize:FS.xs, color:BODY }}>
                 <span>Active-save slots are full.</span>
-                <Button variant="ghost" size="sm" onClick={() => onNavigate?.('pricing')}
-                  style={{ padding:'6px 10px', fontSize:FS.xs, color:GOLD_TXT, fontWeight:700 }}>
+                {/* The pill wraps below the label (closed only) so the Settlement
+                    column keeps its width. */}
+                <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => onNavigate?.('pricing')}
+                  style={{ padding:'6px 10px', fontSize:FS.xs, color:GOLD_TXT, fontWeight:700, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
                   Free a slot or Upgrade
+                  {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                 </Button>
               </div>
             )}
@@ -465,10 +473,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                           moment of intent (limits → previews, no dead-end). */}
                       {!currentCampaignId && !canManageCampaigns && campaigns.length === 0 ? (
                         <Button variant="ghost" fullWidth
+                          disabled={!purchasesAreOpen}
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
                           icon={<Clock size={13} color={GOLD}/>}
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, flexWrap: purchasesAreOpen ? undefined : 'wrap' }}>
                           Advance time and run campaigns. Upgrade
+                          {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                         </Button>
                       ) : (
                         <>

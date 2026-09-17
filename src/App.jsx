@@ -40,6 +40,8 @@ import NavRibbon from './components/nav/NavRibbon.jsx';
 import LegalRibbonRow from './components/footer/LegalRibbonRow.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
+import AvailableAtLaunchPill from './components/primitives/AvailableAtLaunchPill.jsx';
+import { purchasesOpen } from './lib/launchGate.js';
 import IconButton from './components/primitives/IconButton.jsx';
 // The route→component registry + shared Loading live in AppViews (extracted so
 // the shell stays legible; the view table has one home).
@@ -627,13 +629,13 @@ export default function App() {
               {/* Persistent upgrade path, demoted to ghost: the richer upsell already
                   lives on Pricing, the footer, the Realm locked-state, and the
                   PricingMomentCard, so this stays discoverable without out-shouting
-                  the AccountMenu chip. Free tier only. */}
+                  the AccountMenu chip. Free tier only. Pre-launch it is disabled and
+                  wears the pill (lib/launchGate.js). The props share lines because
+                  this file sits at its frozen max-lines ceiling. */}
               {authTier === 'free' && (
                 <Button
-                  variant="ghost"
-                  size="md"
-                  icon={<Zap size={13} />}
-                  onClick={() => setView('pricing')}
+                  variant="ghost" size="md" icon={<Zap size={13} />}
+                  disabled={!purchasesOpen()} onClick={() => setView('pricing')}
                   // ⚠️ THE OVERRIDE IS BACK, AND THE ROUND TRIP IS THE POINT. On the
                   // V2 ink bar this was PARCH_100; on the V3 honey barrel the pale
                   // register was unreadable and ghost's own fg (SECOND) measured
@@ -643,7 +645,7 @@ export default function App() {
                   // again (theme.js's dead-band note). PARCH_100 is 5.28:1 here.
                   style={{ color: PARCH_100, letterSpacing: '0.04em', textTransform: 'uppercase' }}
                 >
-                  Upgrade
+                  Upgrade{!purchasesOpen() && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                 </Button>
               )}
 
