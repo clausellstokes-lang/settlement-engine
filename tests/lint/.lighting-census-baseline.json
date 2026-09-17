@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a8a874d58fa44ab2a604ab4f4823683a95faef0b",
-  "measuredBy": "chair Opus 5 (session f6ac0d98, pinned footer)",
+  "measuredAtSha": "dd54911d642db5ba9e95fba77cea0a03b21ce3f5",
+  "measuredBy": "chair Opus 5 (session f6ac0d98, compendium removal)",
   "date": "2026-09-17",
-  "note": "pinned footer: two new test files (tests/components/pinnedFooter.test.jsx, tests/lint/bottomAnchoredChrome.walker.test.js) and retitled or removed landing-footer pins; every title a literal",
+  "note": "compendium removal: lens and district arms removed from compendiumMapCalamity, and new old-link, sitemap, prerender and search pins added; no test file added or deleted; every title a literal",
   "files": 2584,
   "parked": 377,
   "credited": 2207,
-  "titles": 24445,
+  "titles": 24446,
   "suiteTitles": 6524
 }
