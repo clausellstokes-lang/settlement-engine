@@ -16,6 +16,9 @@ import { cleanup, fireEvent, render, screen, within } from '@testing-library/rea
 import DossierLadderModal from '../../src/components/dossier/DossierLadderModal.jsx';
 import { t } from '../../src/copy/index.js';
 import { SINGLE_DOSSIER } from '../../src/config/pricing.js';
+// Purchases OPEN for this file: it pins the ladder's rung routing as it behaves after launch.
+// The pre-launch closed state is pinned in tests/components/launchLock.dossier.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({ ...(await importOriginal()), purchasesOpen: () => true }));
 
 function setup(overrides = {}) {
   const handlers = {
