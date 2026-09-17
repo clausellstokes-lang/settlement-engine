@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e22f9e3290286bd29cf27bff243d15b951aed304",
-  "measuredBy": "chair Opus 5 (session f6ac0d98, painted arrow header)",
+  "measuredAtSha": "a6bba846a9da2468d7eaf965171c3ffb96424cf2",
+  "measuredBy": "chair Opus 5 (session f6ac0d98, compendium removal on the header branch)",
   "date": "2026-09-17",
-  "note": "painted arrow header: new geometry, paint, header, account-menu, assets and retirement tests; five ribbon, lockup and texture tests deleted with the retired modules; every title a literal",
+  "note": "compendium removal cherry-picked onto the arrow header: lens and district arms removed, old-link, sitemap, prerender and search pins added; no test file added or deleted",
   "files": 2585,
   "parked": 377,
   "credited": 2208,
-  "titles": 24461,
+  "titles": 24462,
   "suiteTitles": 6548
 }
