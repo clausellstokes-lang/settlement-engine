@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a8a874d58fa44ab2a604ab4f4823683a95faef0b",
-  "measuredBy": "chair Opus 5 (session f6ac0d98, pinned footer)",
+  "measuredAtSha": "e22f9e3290286bd29cf27bff243d15b951aed304",
+  "measuredBy": "chair Opus 5 (session f6ac0d98, painted arrow header)",
   "date": "2026-09-17",
-  "note": "pinned footer: two new test files (tests/components/pinnedFooter.test.jsx, tests/lint/bottomAnchoredChrome.walker.test.js) and retitled or removed landing-footer pins; every title a literal",
-  "files": 2584,
+  "note": "painted arrow header: new geometry, paint, header, account-menu, assets and retirement tests; five ribbon, lockup and texture tests deleted with the retired modules; every title a literal",
+  "files": 2585,
   "parked": 377,
-  "credited": 2207,
-  "titles": 24445,
-  "suiteTitles": 6524
+  "credited": 2208,
+  "titles": 24461,
+  "suiteTitles": 6548
 }
