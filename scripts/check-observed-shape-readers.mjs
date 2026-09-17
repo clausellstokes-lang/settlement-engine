@@ -91,11 +91,12 @@ import {
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
+  RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema18Baseline,
+  validateSchema19Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -136,7 +137,24 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     with the M8/M9 bank grown by the four declared eventLog identities (RETIRED).
  * 10 = schema 9's topology, tag law and eight-identity bank UNCHANGED, re-governed
  *     to two regenerated subject-but-unscanned prose leaves and one added
- *     package.json lint-staged binding. THE LIVE AUTHORITY.
+ *     package.json lint-staged binding (RETIRED).
+ * 11 = schema 10's topology re-governed to a detector that genuinely changed, with the
+ *     bank grown by the ninth identity (RETIRED).
+ * 12-16 = verdict-only rungs: genesis ties, a dead dependency, the widened clause 4,
+ *     the churn rule's stable-core guard, the door's companion gate. Each moves the
+ *     instrument and NO row (RETIRED).
+ * 17 = the stress-loaded corpus topology pass; the first rung since 8 to clear rows,
+ *     twelve of them, by making a gated writer observable (RETIRED).
+ * 18 = schema 17 re-governed so the receipt's SUBJECT COMMIT lies inside the lineage
+ *     that carries the register. Moves no row (RETIRED).
+ * 19 = schema 18's topology and tag law re-governed to a declared M8/M9 bank of EIGHT:
+ *     `factions on locks` is RETIRED because the owner's 2026-09-17 order deleted its
+ *     writer. Absorbs the six-row estate shrink the same deletion caused.
+ *     THE LIVE AUTHORITY.
+ * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
+ *   the number stood at 18 — so it is filled in here rather than extended by one. Each
+ *   rung's full rationale lives beside its own target constant in
+ *   `migrate-observed-shape-readers.mjs`; this is an index, not a second home.
  */
 export {
   BASELINE_SCHEMA, MIN_ROWS, ORIGIN_MIN_ROWS,
@@ -146,6 +164,7 @@ export {
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
+  RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1325,7 +1344,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema18Baseline(baseline);
+  validateSchema19Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2566,15 +2585,19 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 18 = schema 17\'s topology, tag law and NINE-identity declared M8/M9 bank, ALL',
-      'UNCHANGED, re-governed so the migration receipt\'s SUBJECT COMMIT lies inside the lineage',
-      'that carries this register: a genesis taken in one dock and replayed into another leaves',
-      '`migrationReview.subjectSha` unreachable, and `validateBaselineHistory` — which',
-      'reconstructs this receipt FROM THAT COMMIT\'S TREE — then refuses the gate AND every',
-      '--write until a rung re-anchors it. This rung declares no identity, retunes nothing and',
-      'moves no row: its reconciliation is EMPTY. Of the nine declared bank entries EIGHT bank',
-      'reads today; `isCriminal on incomeSources` has banked nothing since schema 17 made its',
-      'writer observable, and banked is always a subset of declared.',
+      'SCHEMA 19 = schema 18\'s topology and tag law, UNCHANGED, re-governed to a declared',
+      'M8/M9 bank of EIGHT rather than nine. `factions on locks` is RETIRED: the owner\'s',
+      '2026-09-17 order removed every lock control from the dossier and deleted',
+      '`src/components/dossier/LockControls.jsx`, which was the entry\'s named writer, so',
+      'gate 0 could no longer read it and the exemption had to be DELETED rather than',
+      're-pointed — there was no other writer to point it at. This rung retunes nothing, adds',
+      'no mechanism and declares no identity; it RETIRES one and absorbs the estate shrink the',
+      'same deletion caused. Its reconciliation moves SIX rows, five GONE and one DECREASED,',
+      'all on the `locks` shape and all in two files, with NEW and INCREASED both ZERO — a row',
+      'added here would mean the retirement changed a verdict rather than recording one.',
+      'Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`',
+      'has banked nothing since schema 17 made its writer observable, and banked is always a',
+      'subset of declared.',
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -2582,7 +2605,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–17 are the RETIRED numeric predecessors.',
+      'Schemas 4–18 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2756,7 +2779,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema18Baseline,
+    validateBaseline: validateSchema19Baseline,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,

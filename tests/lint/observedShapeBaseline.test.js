@@ -21,6 +21,7 @@ import {
   RETIRED_STABLE_CORE_BASELINE_SCHEMA,
   RETIRED_COMPANION_GATE_BASELINE_SCHEMA,
   RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA,
+  RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -41,6 +42,7 @@ import {
   validateSchema16Baseline,
   validateSchema17Baseline,
   validateSchema18Baseline,
+  validateSchema19Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -299,7 +301,15 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // genesis was cherry-picked out of its own dock, so `validateBaselineHistory` could
     // reconstruct it from nothing here and refused the gate AND every `--write`.
     // Verdict-only like 13, 14, 15 and 16 — its reconciliation is EMPTY.
-    expect(BASELINE_SCHEMA).toBe(18);
+    // ⭐ SCHEMA 19 (owner order, 2026-09-17). Schema 18's envelope re-governed to a
+    // declared M8/M9 bank of EIGHT: `factions on locks` is RETIRED because the owner's
+    // order removing every dossier lock control deleted its named writer,
+    // `src/components/dossier/LockControls.jsx`, and gate 0 refuses an entry whose writer
+    // it cannot read. Like 17 and unlike 18 its reconciliation is NOT empty — six rows
+    // move, five GONE and one DECREASED — but the CAUSE is inverted: 17 moved rows
+    // because the instrument's reach GREW, this one because the ESTATE shrank.
+    expect(BASELINE_SCHEMA).toBe(19);
+    expect(RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA).toBe(18);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -506,6 +516,14 @@ function validSchema16Baseline_fixture() {
 function validSchema17Baseline_fixture() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-18 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-17 fixtures above record. */
+function validSchema18Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -750,7 +768,11 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 18 now.
     const stressTopology = validSchema17Baseline_fixture();
     expect(validateSchema17Baseline(stressTopology)).toBe(stressTopology);
-    expect(validateSchema18Baseline(live)).toBe(live);
+    // ⭐ 18 IS RETIRED at the schema-19 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 19 now.
+    const lineageReanchor = validSchema18Baseline_fixture();
+    expect(validateSchema18Baseline(lineageReanchor)).toBe(lineageReanchor);
+    expect(validateSchema19Baseline(live)).toBe(live);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR

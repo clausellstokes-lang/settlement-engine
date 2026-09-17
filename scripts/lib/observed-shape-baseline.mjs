@@ -282,7 +282,16 @@ export const RETIRED_COMPANION_GATE_BASELINE_SCHEMA = 16;
  *  BASELINE_SCHEMA, and this constant exists so a schema-17 PREDECESSOR is still validated
  *  as schema 17 after the live number moves past it. */
 export const RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA = 17;
-export const BASELINE_SCHEMA = 18;
+/** The RETIRED lineage-reanchor definition — schema 19's predecessor. Same tagged
+ *  topology envelope; schema 19 re-governs it to a declared M8/M9 bank that has lost an
+ *  entry, because the owner's 2026-09-17 order deleted that entry's WRITER. Unlike 18 it
+ *  DOES move rows — six of them, five GONE and one DECREASED, every one an estate shrink
+ *  the lock-control deletion caused rather than anything the instrument decided. Never
+ *  redefined, never deleted — a live baseline is validated against BASELINE_SCHEMA, and
+ *  this constant exists so a schema-18 PREDECESSOR is still validated as schema 18 after
+ *  the live number moves past it. */
+export const RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA = 18;
+export const BASELINE_SCHEMA = 19;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -831,10 +840,23 @@ export function validateSchema17Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 18's tagged envelope re-governed to a declared M8/M9
+ *  bank of EIGHT rather than nine. Re-bound to its own LITERAL now that the authority has
+ *  moved to 19, exactly as its predecessors were: a retired validator that reads
+ *  `BASELINE_SCHEMA` stops validating the rung it is named after the moment the number
+ *  moves. */
+export function validateSchema18Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema18Baseline(baseline) {
+export function validateSchema19Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

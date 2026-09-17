@@ -203,6 +203,7 @@ import {
   validateSchema15Baseline,
   validateSchema16Baseline,
   validateSchema17Baseline,
+  validateSchema18Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -462,6 +463,68 @@ export const STRESS_TOPOLOGY_TARGET_SCHEMA = 17;
  *  figure is also the whole of the writer-reach walker's declared debt against this
  *  register: two banked ratchet rows read `expected 81 to be 80` until this write. */
 export const LINEAGE_REANCHOR_TARGET_SCHEMA = 18;
+
+/* ⭐⭐ THE SCHEMA 18 → 19 RUNG — THE EXEMPTION RETIREMENT (owner order, 2026-09-17).
+ *
+ *  WHAT MOVED, AND IT IS THE DECLARED BANK'S MEMBERSHIP — the first rung since 11 to
+ *  change the roster of `EXPLAINED_WRITER_EXEMPTIONS`, and the FIRST EVER to SHRINK it.
+ *  11 grew the bank by one; this one retires one, and the direction matters because a
+ *  retirement RESTORES enforcement rather than reducing it.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT, AND WHY NOTHING SMALLER WOULD DO. The owner ordered
+ *  every lock control out of the dossier ("I approve and remove the other padlocks and
+ *  fix the remaining contradictions as well") and `src/components/dossier/LockControls.jsx`
+ *  was deleted with them. That file was the entire basis of the `factions on locks`
+ *  exemption: it held the only `WORLD_LOCKS` declaration and the only `setLock` writer of
+ *  the key. Gate 0 reads each entry's named writer from the scanned tree on EVERY scan, so
+ *  the deletion did not leave a stale row — it raised "names a writer that cannot be read"
+ *  and refused the whole instrument. Gate 0's own message names the remedy: *"the key
+ *  genuinely lost its writer, in which case the reads are real findings again and the
+ *  exemption must be DELETED, not repaired."*
+ *  ⛔ AND DELETING IT IS EXACTLY WHAT THE SHRINK-ONLY `--write` CANNOT ABSORB. The entry's
+ *  two committed row tags outlive the declaration by one act, and `assertExplainedWriterRowTags`
+ *  — run against the PREDECESSOR baseline before any scan — classes a tagged inventory
+ *  address with no declaration as a FORGED tag and throws. The register cannot drop the
+ *  tags without a write, and no ordinary write can start while they are there. Only a rung
+ *  breaks that circle, and `check-observed-shape-readers.mjs` says so in its own words:
+ *  "A declaration membership or ruling change alters tag authenticity and requires a
+ *  governed instrument migration; it is not ordinary maintenance."
+ *
+ *  ⛔ THIS RUNG MOVES ROWS AND MUST — like 17, and unlike 13 through 16 and 18. But the
+ *  cause is the opposite of 17's and that distinction is the fence. 17 moved rows because
+ *  the INSTRUMENT's reach grew; this one moves them because the ESTATE shrank, and the
+ *  instrument's reach is byte-for-byte what schema 18 governed. Measured before the rung
+ *  was cut, via `--scan-only --scan-mode=legacy-leaf` at the committed retirement:
+ *
+ *      identities 1397 → 1392 · findings 1972 → 1966 · files 386 → 386
+ *      GONE 5 · DECREASED 1 · NEW 0 · RAISED 0
+ *
+ *  The six are all on the `locks` shape and all in two files: `factions`, `geography`,
+ *  `history` and `identity on locks` GONE from `src/domain/locksPreservation.js`,
+ *  `npcs on locks` LOWERED there 3 → 2, and `factions on locks` GONE from
+ *  `src/domain/worldPulse/coup.js`. Every one is a read that left the estate with the lock
+ *  controls.
+ *  ⛔ THE FENCE IS THE ZERO ON NEW AND INCREASED. A deletion cannot mint a reader, so a
+ *  single added row would mean this rung's own bookkeeping changed a verdict — and a
+ *  retirement that convicts something new is not a retirement. `files` holding at 386 is
+ *  the other half: neither file lost all of its rows, so no file may leave the register.
+ *
+ *  ⚠ THE BANK'S FIGURES MOVE WITH THE ROSTER, AND BOTH HALVES ARE RECORDED: the declared
+ *  roster goes 9 → 8, and the banked reads go 62 → 60 across 41 → 39 tagged addresses.
+ *  The two banked rows are the same two `factions on locks` addresses that this rung's
+ *  reconciliation reports GONE — they stopped being banked and stopped existing in the
+ *  same act, which is why no tagged row survives undeclared.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every rung moves. MEASURED,
+ *  NEVER LISTED: each of the ELEVEN governed detector inputs was hashed against the
+ *  PREDECESSOR'S OWN RECORDED MANIFEST before a byte of this rung was written, and exactly
+ *  ONE came back moved — `check-observed-shape-readers.mjs`, carrying the committed
+ *  retirement itself — with `package.json` and `package-lock.json` measured byte-SAME
+ *  rather than assumed, because any `package.json` byte is itself a mint trigger. The set
+ *  was re-measured after it was written, because writing it changes
+ *  `migrate-observed-shape-readers.mjs`, which is itself a member. See
+ *  `EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS`. */
+export const EXEMPTION_RETIREMENT_TARGET_SCHEMA = 19;
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -756,6 +819,38 @@ export const LINEAGE_REANCHOR_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-18 → 19 delta: THREE paths — the bookkeeping set and nothing else.
+ *
+ * ⛔ MEASURED, NEVER LISTED. Each of the ELEVEN governed detector inputs was hashed
+ * against the PREDECESSOR'S OWN RECORDED MANIFEST at the committed retirement BEFORE a
+ * byte of this rung was written. Exactly one came back MOVED —
+ * `check-observed-shape-readers.mjs`, which carries the retirement itself — and the other
+ * ten byte-identical, `package.json` and `package-lock.json` among them, measured rather
+ * than asserted because any `package.json` byte is itself a mint trigger. The other two
+ * paths below are this rung's own bookkeeping, and the set was re-measured after it was
+ * written, because writing it changes `migrate-observed-shape-readers.mjs`, which is
+ * itself a member. The declared set is a FIXED POINT of its own measurement. A
+ * mis-declared delta set is how rung 10 → 11 became permanently unmigratable.
+ *
+ *   - `check-observed-shape-readers.mjs` — THE SUBJECT: the retired entry itself, the
+ *     re-triage docblock that now records both of the row's moves, the register's `_doc`
+ *     header, and the live-validator binding moving from `validateSchema18Baseline` to
+ *     `validateSchema19Baseline`;
+ *   - `observed-shape-baseline.mjs` — the 18 → 19 bump, the retired-18 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung.
+ *
+ * ⛔ THREE RATHER THAN FOUR, for the same reason 15 → 16 and 17 → 18 were three: the
+ * subject is one of the bookkeeping files. An extra path here, or one of these three
+ * remaining byte-identical, is a different migration and fails closed.
+ */
+export const EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -788,6 +883,8 @@ const STRESS_TOPOLOGY_SCANNER_TRANSITION_POLICY =
   'schema-16-to-17-exact-scanner-transition-v1';
 const LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY =
   'schema-17-to-18-exact-scanner-transition-v1';
+const EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY =
+  'schema-18-to-19-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -824,6 +921,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [COMPANION_GATE_TARGET_SCHEMA]: STABLE_CORE_TARGET_SCHEMA,
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
   [LINEAGE_REANCHOR_TARGET_SCHEMA]: STRESS_TOPOLOGY_TARGET_SCHEMA,
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: LINEAGE_REANCHOR_TARGET_SCHEMA,
 });
 
 /**
@@ -866,6 +964,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 17
   // as schema 17 after the live number moves past it.
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: validateSchema17Baseline,
+  // The schema-19 rung's own predecessor. `validateSchema18Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 18
+  // as schema 18 after the live number moves past it.
+  [LINEAGE_REANCHOR_TARGET_SCHEMA]: validateSchema18Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1332,6 +1434,21 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // which are not subject paths at all, so the digest cannot move and the report's
     // `unscannedMovement` is null. The permission is carried because the class is
     // lawful, not because this rung exercises it.
+    reviewableUnscannedMovement: true,
+  })],
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/`, which
+    // are not subject paths at all, so the digest cannot move BY THIS RUNG. It is carried
+    // because the ESTATE moved under this rung in the very act that caused it — the lock
+    // controls were deleted from `src/components/` — and a generated or data leaf
+    // re-recorded anywhere in that same landing is exactly the movement targets 9 and 10
+    // declared reviewable. Refusing it would refuse the retirement for a movement that
+    // belongs to the owner's change rather than to the instrument.
     reviewableUnscannedMovement: true,
   })],
   [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
@@ -2386,7 +2503,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : LINEAGE_REANCHOR_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EXEMPTION_RETIREMENT_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -2394,8 +2511,9 @@ export function run(argv = process.argv.slice(2)) {
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
     PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
     COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
-    LINEAGE_REANCHOR_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${LINEAGE_REANCHOR_TARGET_SCHEMA} (live lineage-reanchor leaf),`
+    LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (live exemption-retirement leaf),`
+      + ` ${LINEAGE_REANCHOR_TARGET_SCHEMA} (retired lineage-reanchor leaf),`
       + ` ${STRESS_TOPOLOGY_TARGET_SCHEMA} (retired stress-topology leaf),`
       + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`
       + ` ${STABLE_CORE_TARGET_SCHEMA} (retired stable-core leaf),`

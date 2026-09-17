@@ -63,6 +63,7 @@ import {
   validateSchema14Baseline,
   validateSchema15Baseline,
   validateSchema18Baseline,
+  validateSchema19Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -1371,7 +1372,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // of it and collapsed records into id-keyed maps; it now carries the whole-node
     // guarantee its two sibling branches already had. Classification-only, so the cured
     // register reproduces schema 14's row for row and the reconciliation is EMPTY.
-    expect(BASELINE_SCHEMA).toBe(18);
+    // ⭐ SCHEMA 19 (owner order, 2026-09-17): schema 18's envelope re-governed to a
+    // declared M8/M9 bank of EIGHT. `factions on locks` is RETIRED — the order that
+    // removed every dossier lock control deleted its named writer, and gate 0 refuses an
+    // entry whose writer it cannot read. Its reconciliation is NOT empty: six rows move,
+    // because the ESTATE shrank, not because the instrument's reach changed.
+    expect(BASELINE_SCHEMA).toBe(19);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -1387,8 +1393,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
-    // rung; the LIVE envelope is validated by 18 now.
-    expect(validateSchema18Baseline(live)).toBe(live);
+    // rung, 18 at the exemption-retirement rung; the LIVE envelope is validated by 19 now.
+    expect(validateSchema19Baseline(live)).toBe(live);
+    // … and 18 keeps its own literal, so it refuses the live envelope it used to accept.
+    expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1522,7 +1530,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(18);
+    expect(BASELINE_SCHEMA).toBe(19);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
