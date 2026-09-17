@@ -23,9 +23,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
+import { GOLD, GOLD_SOFT, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 
 const SLATE = swatch['#5A6E82'];
 
@@ -105,6 +107,11 @@ export default function PricingMomentCard() {
 
   const { headline, body } = activeMoment;
   const accent = isUpgrade ? SLATE : GOLD;
+  // THE LAUNCH GATE (lib/launchGate.js): only the UPGRADE moment leads to a
+  // purchase, so only its CTA closes until launch. The gold signup/unlock CTA
+  // opens sign-in, and accounts stay open, so it is untouched.
+  const purchasesAreOpen = purchasesOpen();
+  const launchLocked = isUpgrade && !purchasesAreOpen;
 
   return (
     <div
@@ -157,9 +164,17 @@ export default function PricingMomentCard() {
         <Button
           variant="primary"
           onClick={handleClick}
-          style={{ background: accent, color: swatch.white, border: `1px solid ${accent}` }}
+          disabled={launchLocked}
+          // While launch-locked the pill may wrap below the label on a narrow card.
+          style={{
+            background: accent, color: swatch.white, border: `1px solid ${accent}`,
+            ...(launchLocked ? { flexWrap: 'wrap' } : null),
+          }}
         >
           {isUpgrade ? 'See Cartographer' : 'Sign in to unlock'}
+          {/* The opaque soft-gold ground keeps the pill's gold ink legible on the
+              solid slate fill, where the translucent tint alone falls near 1.6:1. */}
+          {launchLocked && <AvailableAtLaunchPill style={{ marginLeft: 6, background: GOLD_SOFT }} />}
         </Button>
         <Button
           variant="ghost"
