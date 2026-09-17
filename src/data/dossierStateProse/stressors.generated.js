@@ -301,7 +301,7 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
-          "text": "There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.",
+          "text": "The crisis is out of sight. The pattern is legible only to whoever is counting the coincidences.",
           "slots": [],
           "vid": 3
         },

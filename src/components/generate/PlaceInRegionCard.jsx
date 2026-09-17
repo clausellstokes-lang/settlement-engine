@@ -67,7 +67,7 @@ export default function PlaceInRegionCard() {
           <span style={{ flex: 1 }}>
             Assign this settlement to a campaign and a patron deity at birth, then advance the region for years.
           </span>
-          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)}>
+          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
             Upgrade
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>

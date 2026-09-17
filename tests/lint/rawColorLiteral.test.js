@@ -78,7 +78,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // src/components/compendium/CatalogHubs.jsx. Nothing was re-tokenised; the hubs are gone.
 // Measured out of its own red run ("expected 1320 to be 1329").
 // COMBINED on the arrow-header branch (both landings stacked): 1329 - 3 - 9 = 1317, measured below.
-const BUDGET = 1317; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise.
+// LOWERED 1317 → 1313 on 2026-09-17 by THE PADLOCK REMOVAL (owner order: "remove the other
+// padlocks"): the never-rendered LOCKED kind left src/components/primitives/StateBadge.jsx with
+// its three literals (bg, fg, border), and the roster-row padlock left
+// src/components/new/npcComponents.jsx with its one unlocked-glyph colour (`'#b8a898'`; the
+// pin beside it keeps its own). Nothing was re-tokenised; the controls are gone. Measured out of
+// its own red run ("raw color literals: 1313 (committed 1317)").
+const BUDGET = 1313; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

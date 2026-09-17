@@ -43,6 +43,7 @@ import {
   recorderShas, sha256, templateMatches,
 } from '../helpers/dossierManifest.js';
 import { classifyCell, classifyCells, VERDICTS } from '../../scripts/prose-manifest-diff.mjs';
+import { MANIFEST_PROVENANCE } from '../../scripts/prose-manifest-cells.mjs';
 import { drawVariant } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_MOUNTS } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { ROOT } from '../helpers/dossierCorpus.js';
@@ -124,10 +125,20 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     }
     const tally = Object.fromEntries([...bySeed]
       .map(([seed, seat]) => [seed, { cells: seat.cells, towns: seat.towns.size }]));
+    // ⚠ RESTATED 2026-09-17 WITH A STATED CAUSE (owner order "Fix the contradiction"). The
+    // DS-STR-1 no-banner pool (keyed "Overview's own section framing") used to compose on every
+    // town WITH a crisis banner and now composes only on a town with NONE. Every
+    // golden-master-v3 town carries a crisis, so 516 towns x 2 audiences lose that one cell
+    // (72,108 -> 71,076); the three calm gm-seed towns gain it (394/390/392 -> 400/396/398).
+    // ⚠ RESTATED AGAIN THE SAME DAY WITH ITS CAUSE (owner order "fix the remaining
+    // contradictions"). DS-GEN-16's UNMARKED ("No great blow stands on the record") no longer
+    // composes over a record carrying a major or catastrophic row: twelve golden-master-v3
+    // hamlets and the three gm-seed-c towns lose that one cell (71,076 -> 71,052; 398 -> 392).
+    // The fixture moves only through the signed door (scripts/prose-manifest-cells.mjs --record).
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 72_108, towns: 516 },
-      'gm-seed-a': { cells: 394, towns: 3 },
-      'gm-seed-b': { cells: 390, towns: 3 },
+      'golden-master-v3': { cells: 71_052, towns: 516 },
+      'gm-seed-a': { cells: 400, towns: 3 },
+      'gm-seed-b': { cells: 396, towns: 3 },
       'gm-seed-c': { cells: 392, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
@@ -189,8 +200,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // the code that produced the rows can be, and they are re-read from the tree here.
     const file = JSON.parse(readFileSync(MANIFEST, 'utf8'));
     const provenance = file._provenance || {};
-    expect(provenance.shift, 'the re-record is a DECLARED instrument shift').toBe('INSTRUMENT');
-    expect(String(provenance.ruling), 'and it names the ruling that ordered it').toMatch(/P\.2-29/);
+    // The declaration is the recorder's own constant, written into the bytes. It was an
+    // INSTRUMENT shift under SITTING §P.2-29 until the owner-signed PROSE shift of 2026-09-17.
+    expect(provenance.shift, 'the re-record is a DECLARED prose shift').toBe(MANIFEST_PROVENANCE.shift);
+    expect(provenance.shift).toBe('PROSE');
+    expect(String(provenance.ruling), 'and it names the orders that ordered it').toMatch(/OWNER ORDERS 2026-09-17/);
     expect(Object.keys(provenance.recorder || {}).sort(), 'the recorder is named file by file')
       .toEqual([...MANIFEST_RECORDER_FILES].sort());
     expect(provenance.recorder, 'a fixture whose recorder has moved since it was written is REFUSED:'

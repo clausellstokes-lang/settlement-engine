@@ -14,6 +14,13 @@
  * roster in, and the write has to reach the save row AND the network, neither of
  * which a pure-function test can observe.
  *
+ * ⛔ THE SURVIVAL LEVER IS AN AUTHORED CHARACTER, NOT A LOCK (owner orders 2026-09-17,
+ * "remove the other padlocks"). These arms used to keep the keeper with a stored
+ * `locks.npcs` id; no stored lock is read any more, so the keeper is a user-authored
+ * character, which the reroll's entity policy (rebalance) carries into the same slot
+ * the lock used to (npc_6 -> npc_8 under the pinned seeds). A stored lock id rides
+ * beside it in the first arm to prove the stored map is still kept true as data.
+ *
  * The fixture is JSON round-tripped before use. `factions[].members[]` ARE the
  * `npcs[]` objects in memory; only serialization splits the alias, so an
  * in-memory fixture can hide a reload-only defect in exactly this lane.
@@ -83,7 +90,7 @@ beforeEach(() => {
 });
 
 describe('REGEN — a pin follows its subject through the roster reroll', () => {
-  test('a pinned, locked NPC keeps its pin when the reroll moves its id', async () => {
+  test('a pinned, authored NPC keeps its pin when the reroll moves its id', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     // FIXTURE SEED re-pinned `pins-store-regen` to `pins-store-regen-1` on 2026-08-01.
     // Wave I1 added four information-brokerage entries to the town/city catalogs and
@@ -93,10 +100,12 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
     // keeper standing still every later assertion would also hold with the remap
     // deleted. Re-pinned to a seed that still MOVES the keeper (6 of the first 21 do).
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    town.npcs[2]._authored = true;
     const target = town.npcs[2];
     store.setState({
       settlement: town,
       config: town.config,
+      // Stored data, not the survival ground: see the header.
       locks: { npcs: [String(target.id)] },
       activeSaveId: SAVE_ID,
       savedSettlements: [{
@@ -109,7 +118,7 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
 
     const after = store.getState();
     const survivor = after.settlement.npcs.find(n => String(n.name) === String(target.name));
-    expect(survivor, 'the locked character survived the reroll').toBeTruthy();
+    expect(survivor, 'the authored character survived the reroll').toBeTruthy();
     // NON-VACUITY GUARD: the defect only exists when the keeper inherits a
     // DIFFERENT slot id. If a future seed stops moving it, every assertion below
     // would hold with the remap deleted — so pin the move itself first.
@@ -118,7 +127,8 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
 
     const row = after.savedSettlements.find(s => s.id === SAVE_ID);
     expect(row.aiData.pinnedNpcs).toEqual([String(survivor.id)]);
-    // The two id-keyed maps are folded in one step and must never disagree.
+    // The two id-keyed maps are folded in one step and must never disagree (the stored
+    // lock map is data now, and it still follows its subject).
     expect(after.locks.npcs).toEqual([String(survivor.id)]);
     // A pin is save-row state: an in-memory-only rewrite ghosts on reload.
     const writes = aiDataWrites();
@@ -132,7 +142,7 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
   }, 90_000);
 
   test('an unmoved pin is left alone and writes no ai_data at all', async () => {
-    // The dormancy half. With nothing locked the reroll preserves nobody, so the
+    // The dormancy half. With nobody authored the reroll preserves nobody, so the
     // report moves no id — and a remap that wrote anyway would burn a cloud write
     // (and a fresh outbox op) on every single reroll.
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
@@ -160,11 +170,11 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
   test('a DRAFT reroll (no active save) touches no pin and does not throw', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
     const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-draft', customContent: {} }));
+    town.npcs[2]._authored = true;
     const target = town.npcs[2];
     store.setState({
       settlement: town,
       config: town.config,
-      locks: { npcs: [String(target.id)] },
       activeSaveId: null,
       // A pinned row for a save that is NOT the one on screen. Pins are per-save;
       // rerolling a draft must never reach into another save's blob.

@@ -13,11 +13,15 @@
  *     premise ("locks run over a FINISHED roll and can only ADD survivors") is
  *     void — do not re-record a golden, find the draw that moved.
  *
- *  2. SURVIVAL + REMAP. A locked character comes through a roster reroll, and the
- *     lock map follows the id its subject INHERITED. The second half is the one
- *     that rots silently: a keeper takes over a fresh slot and adopts that slot's
- *     id, so a lock left naming the old id protects a stranger on the next reroll.
- *     Pinned across TWO rerolls, because one reroll cannot see that failure.
+ *  2. ⛔ NO SURVIVAL (owner orders 2026-09-17). This arm used to pin that a locked
+ *     character comes through a roster reroll with the lock following the id they
+ *     inherited. The owner ordered "remove the other padlocks": the roster-row padlock
+ *     and "Keep these people" are gone and the read side reads no lock
+ *     (domain/locksPreservation.js normalizeLocks). So the arm now pins the opposite:
+ *     a lock map naming the very character a plain reroll loses rolls EXACTLY the
+ *     plain reroll, across two rerolls, and no preservation report is minted. The id
+ *     algebra that still follows an authored keeper is pinned in
+ *     tests/store/locksEngine.test.js.
  *
  * Against the real pipeline, never a hand-rolled roster: the substitution, the
  * relevance re-sort and the prose relink that make ids move only exist there
@@ -82,7 +86,7 @@ describe('THE PROMISE — an unlocked settlement is untouched by the locks engin
   });
 });
 
-describe('a locked character survives the reroll that would have replaced them', () => {
+describe('a STORED lock carries nobody through the reroll that replaces them (owner orders 2026-09-17)', () => {
   /** The mid-roster NPC the plain reroll DOES lose — deliberately not index 0,
    *  which is the roster leader and can survive for unrelated reasons. */
   function victim() {
@@ -98,28 +102,26 @@ describe('a locked character survives the reroll that would have replaced them',
     expect(victim()).toBeTruthy();
   });
 
-  test('locking that character by id carries them through, with their id remapped', () => {
+  test('a stored id naming that character rolls exactly the plain reroll, with no report', () => {
     const target = victim();
-    const locks = { npcs: [String(target.id)] };
-    const parts = regenNPCsPipeline(settlement, settlement.config || CFG, { seed: REROLL_SEED, locks });
-
-    const survivor = parts.npcs.find((/** @type {any} */ n) => String(n.name) === String(target.name));
-    expect(survivor, 'the locked character must be in the rerolled roster').toBeTruthy();
-
-    // The report exists, names the character, and records BOTH ids — the pair the
-    // store needs to rewrite the map.
-    expect(parts._preservation).toBeTruthy();
-    const entry = parts._preservation.preserved.find((/** @type {any} */ p) => p.name === target.name);
-    expect(entry).toBeTruthy();
-    expect(entry.fromId).toBe(String(target.id));
-    expect(String(survivor.id)).toBe(String(entry.id));
+    const cfg = settlement.config || CFG;
+    const plain = regenNPCsPipeline(settlement, cfg, { seed: REROLL_SEED });
+    const stored = regenNPCsPipeline(settlement, cfg, { seed: REROLL_SEED, locks: { npcs: [String(target.id)] } });
+    expect(stored).toEqual(plain);
+    expect(Object.prototype.hasOwnProperty.call(stored, '_preservation'), 'a stored lock still minted a preservation report').toBe(false);
+    expect(stored.npcs.some((/** @type {any} */ n) => String(n.name) === String(target.name)), 'the stored lock still carried its character').toBe(false);
   });
 
-  test('the lock follows its subject across TWO rerolls (the ghosting cure)', () => {
-    // The failure this catches: after reroll #1 the keeper holds a DIFFERENT id.
-    // A lock map left un-remapped still names the old id, which now belongs to
-    // whoever the roll put there — so reroll #2 protects a stranger and drops the
-    // character the user locked. One reroll cannot see this.
+  test('a stored whole-roster lock and a full armed map roll the plain reroll too', () => {
+    const cfg = settlement.config || CFG;
+    const plain = regenNPCsPipeline(settlement, cfg, { seed: REROLL_SEED });
+    const everyId = settlement.npcs.map((/** @type {any} */ n) => String(n.id));
+    for (const locks of [{ npcs: true }, { npcs: everyId, history: true, identity: true, factions: ['x'] }]) {
+      expect(regenNPCsPipeline(settlement, cfg, { seed: REROLL_SEED, locks }), JSON.stringify(locks)).toEqual(plain);
+    }
+  });
+
+  test('a SECOND reroll with the remapped map carries nobody either', () => {
     const target = victim();
     let locks = { npcs: [String(target.id)] };
     let town = deepClone(settlement);
@@ -130,8 +132,8 @@ describe('a locked character survives the reroll that would have replaced them',
     delete town._preservation;
 
     const second = regenNPCsPipeline(town, town.config || CFG, { seed: 'locks-engine-reroll-2', locks });
-    const stillThere = second.npcs.find((/** @type {any} */ n) => String(n.name) === String(target.name));
-    expect(stillThere, 'the locked character must survive the SECOND reroll too').toBeTruthy();
+    const bare = regenNPCsPipeline(town, town.config || CFG, { seed: 'locks-engine-reroll-2' });
+    expect(second).toEqual(bare);
   });
 
   test('an id no one in the roster carries is a silent no-op, not a throw', () => {

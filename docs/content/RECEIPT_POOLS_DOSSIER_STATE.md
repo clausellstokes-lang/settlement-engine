@@ -4118,7 +4118,7 @@ draws at most one of each.
 **INFILTRATED** · `infiltrated`
 1. `[visitor]` Nothing here looks wrong. Decisions land slightly askew, and information reaches the wrong hands slightly too often.
 2. `[ledger]` The economy is untouched and the intelligence is not. Someone else's interest is being served inside the town's own rooms.
-3. `[threshold]` There is no visible crisis. The pattern is legible only to whoever is counting the coincidences.
+3. `[threshold]` The crisis is out of sight. The pattern is legible only to whoever is counting the coincidences.
 4. `[street]` Somebody in {settlement} answers elsewhere, and the town knows it without knowing who.
 5. `[ledger · dm-only]` What {settlement}'s hall discusses and what {settlement}'s hall records have come apart.
 6. `[visitor]` Conversation in {settlement} stops when it should not and resumes carefully.

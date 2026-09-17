@@ -128,6 +128,10 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     const reach = screen.getByTestId('instant-world-open');
     expect(reach.textContent).toMatch(/^See Premium/);
     expectLockedWithPill(reach);
+    // The Realm sidebar is narrower than label plus pill: the locked reach must be
+    // able to wrap the pill under its label, or the card clips both ends ("ee
+    // Premium", owner orders 2026-09-17). The premium toggle below stays unwrapped.
+    expect(reach.style.flexWrap).toBe('wrap');
 
     // The premium user's open button is not a purchase: live, no pill, same label.
     cleanup();
@@ -136,6 +140,7 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     const toggle = screen.getByTestId('instant-world-open');
     expect(toggle.textContent).toBe('Build a realm');
     expectLiveWithoutPill(toggle);
+    expect(toggle.style.flexWrap).toBe('');
   });
 
   it('LockedDestination: the upsell CTA ("See Cartographer" on the Versions tab)', () => {

@@ -120,7 +120,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
           }}>
             {PREMIUM_PITCH}
           </span>
-          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => onUpgrade?.()}>
+          <Button variant="gold" size="sm" disabled={!purchasesAreOpen} onClick={() => onUpgrade?.()} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
             Upgrade
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>

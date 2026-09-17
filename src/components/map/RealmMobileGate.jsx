@@ -8,7 +8,8 @@
  * "open on desktop" wall plus a phone-safe companion. The default path remains
  * the read-only Realm Dashboard (its stat grids already stack at phone width).
  * While the internal Herald proof flag is on, that same slot becomes the
- * decision-capable Herald companion; map authoring stays unavailable. Each child
+ * decision-capable Herald companion once the realm has advanced at least once
+ * (owner order 2026-09-17); map authoring stays unavailable. Each child
  * owns its anon/free locked state, so the reachable-on-mobile pricing moment
  * behaves exactly as it does on desktop.
  *
@@ -35,6 +36,7 @@ import {
   ARROW_CLEAR, BODY, CHROME, FS, SP, bottomClearance, sans,
 } from '../theme.js';
 import { flag } from '../../lib/flags.js';
+import { realmHasAdvanced } from '../../lib/realmHeraldGate.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -96,12 +98,14 @@ export default function RealmMobileGate({
   const commandBriefOn = flag('heraldCommandBrief');
   // A locked viewer keeps the exact established Dashboard path. Besides
   // preserving its teaser and pricing moment, this prevents the desktop gate
-  // from promising touch Decisions that the account cannot execute.
-  const commandCompanionAvailable = commandBriefOn && canManageCampaigns;
+  // from promising touch Decisions that the account cannot execute. And, like the
+  // desktop Herald, the companion waits for the realm's first advance (owner order
+  // 2026-09-17): a never-advanced realm keeps the read-only Dashboard slot.
+  const commandCompanionAvailable = commandBriefOn && canManageCampaigns && realmHasAdvanced(campaign);
   const desktopLead = 'The Realm table is built for a bigger canvas. Placing settlements, advancing years, and charting routes want a desk and a pointer. Your world is saved and will be waiting, exactly here, when you next sit down at one.';
   const companionMessage = commandCompanionAvailable
     ? `${desktopLead} Below, the field companion lets you read the briefing and answer decisions without exposing map authoring.`
-    : commandBriefOn
+    : commandBriefOn && !canManageCampaigns
       ? `${desktopLead} Below, the field companion keeps the Realm's locked preview and its existing unlock path. Live decisions are not available on this account, and map authoring still waits for desktop.`
       : `${desktopLead} Below, the field companion: a read-only look at the living state of your realm.`;
   return (

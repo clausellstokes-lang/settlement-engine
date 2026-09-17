@@ -80,6 +80,46 @@ function Eyebrow({ color = SECOND, children }) {
   );
 }
 
+/**
+ * THE TOWN'S OWN MARTIAL CRISES (owner order 2026-09-17, "fix the remaining contradictions").
+ *
+ * The Overview prints an ACTIVE CRISIS card for every entry in `settlement.stress`, and five of
+ * those stressors are martial facts: a siege at the walls, an occupier in the hall, a war the
+ * town is supplying, an insurgency against its authority, a slave revolt in its districts. The
+ * campaign's war ledger is a DIFFERENT record and can be silent about all five (a generated
+ * siege is not a ledger siege), so a tab that read only the ledger said "This settlement is at
+ * peace: no host abroad, no siege at the walls" beside that card. This reader is the one place
+ * the tab asks the town's own record; the rows are the banners themselves, never a re-derivation.
+ */
+export const MARTIAL_CRISIS_TYPES = Object.freeze(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
+
+/**
+ * @param {{stress?: unknown}|null|undefined} settlement
+ * @returns {Array<{type: string, label?: string, summary?: string, colour?: string}>}
+ */
+export function martialCrisisBanners(settlement) {
+  const raw = settlement?.stress;
+  const banners = (Array.isArray(raw) ? raw : raw ? [raw] : []).filter(Boolean);
+  return banners.filter((banner) => MARTIAL_CRISIS_TYPES.includes(banner?.type));
+}
+
+/** The martial crises the town's own record carries, in the banners' own words. */
+function MartialCrisisBlock({ crises }) {
+  return (
+    <div data-testid="war-martial-crisis" style={{
+      background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
+      padding: '12px 14px', marginBottom: 14,
+    }}>
+      <Eyebrow color={RED}>Active crisis</Eyebrow>
+      {crises.map((crisis, index) => (
+        <Line key={`${crisis.type}:${index}`} strong={`${crisis.label || crisis.type}.`} tone={RED}>
+          {crisis.summary || ''}
+        </Line>
+      ))}
+    </div>
+  );
+}
+
 /** The war half — pure OUR light war read-models (moved verbatim from WarFaithTab). */
 function WarBlock({ war, nameFor }) {
   const { status, exhaustionRaw, exhaustionBand, mobilization, occupied, holdings } = war;
@@ -493,7 +533,11 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
   );
   const hasTreaties = !!war && war.treaties?.length > 0;
   const hasMuster = !!war && (war.musterLine || war.armyStatus || war.martial);
-  const anything = !!war && (hasWar || hasTreaties || hasMuster || war.unit || war.wars.length > 0 || war.beliefs.length > 0);
+  // The town's own martial banners count as "anything" in or out of a campaign, so neither the
+  // dormant note nor either fallback ("at peace", "no war picture to tell") can print beside one.
+  const martialCrises = martialCrisisBanners(settlement);
+  const anything = martialCrises.length > 0
+    || (!!war && (hasWar || hasTreaties || hasMuster || war.unit || war.wars.length > 0 || war.beliefs.length > 0));
 
   // THE DESK, read ONCE per render through its single gated call site and routed by the
   // mount registry below. `warBeat` is this tab's own reading of "anything martial is
@@ -528,6 +572,7 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
 
   return (
     <div data-testid="war-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
+      {!hasWar && martialCrises.length > 0 && <MartialCrisisBlock crises={martialCrises} />}
       {hasWar && <WarBlock war={war} nameFor={nameFor} />}
       {/* ── war.standing (DS-WAR-1) — the martial record in the town's own voice ── */}
       <WarStandingLines desk={deskProse} />

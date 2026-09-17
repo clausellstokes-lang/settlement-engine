@@ -203,7 +203,7 @@ export default function WorldMap({ onNavigate } = {}) {
   // this component stays under the size ratchet. The Inspector OVERLAYS the map.
   const {
     inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
-    inspectorSize, setInspectorSize,
+    inspectorSize, setInspectorSize, heraldAvailable,
     openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
   } = useRealmInspector({
     canManageCampaigns,
@@ -822,7 +822,9 @@ export default function WorldMap({ onNavigate } = {}) {
         handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
         handleExportMap={authTier !== 'anon' ? handleExportMapImage : undefined} exportingMap={exportingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
-        inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} unreviewedCount={unreviewedPulseCount}
+        // The Herald waits for the realm's first advance (owner order 2026-09-17): no
+        // toggle (and so no badge) until then; the toolbar drops a non-function toggle.
+        inspectorOpen={inspectorOpen} onToggleInspector={heraldAvailable ? handleToggleInspector : undefined} unreviewedCount={unreviewedPulseCount}
         activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}
       />
 
@@ -865,7 +867,7 @@ export default function WorldMap({ onNavigate } = {}) {
           />
         </FeatureErrorBoundary>
 
-        {inspectorOpen && (
+        {inspectorOpen && heraldAvailable && ( // the Herald waits for the first advance (owner order 2026-09-17)
           <Suspense fallback={null}>
             <RealmInspector
               open={inspectorOpen} section={inspectorSection}

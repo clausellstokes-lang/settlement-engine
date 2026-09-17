@@ -269,6 +269,10 @@ export function generalDeskLines(settlement, options = {}) {
   const { identity, founded, record } = prose.history;
   return Object.freeze({
     overview: Object.freeze({
+      // ⛔ ALWAYS EMPTY SINCE OWNER ORDER 2026-09-17: `overview.systemsHealth` is a GLANCE row,
+      // so `line()` draws no sentence here and no tab renders this field. It stays routed
+      // through the registry (the position still exists and still shows its rows); re-homing
+      // the sentences is a later registry act, and this reader stays their one call site.
       healthLines: Object.freeze(prose.overview.systemsHealth
         .map((rung) => line(HEALTH_MOUNT, rung)).filter(Boolean)),
       // ONE LINE PER CONFLICT, index-paired with the caller's own rows: the desk keeps a null

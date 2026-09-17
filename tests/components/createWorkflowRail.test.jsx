@@ -18,8 +18,9 @@
  *     against a render where the dossier body IS present (positive control —
  *     an empty render would pass a bare absence check vacuously).
  *   • THE DOSSIER LANDS HEAD-FIRST — the sticky toolbar is the first block
- *     and the dossier body follows it immediately; the world lock controls
- *     sit BELOW the dossier in document order (controls, not head furniture).
+ *     and the dossier body follows it immediately, then the save row. The
+ *     "What a new roll keeps" world-lock section that used to sit below the
+ *     dossier is GONE (owner order 2026-09-17) and must not come back.
  *   • THE FORGE TICKER STILL GATES HONESTLY — while the reveal overlay is
  *     active the dossier cluster is withheld; dismissal is what lands the
  *     reader on the dossier head (the ticker itself is owner-signed to play
@@ -41,6 +42,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 // registry rather than a hand-written string, so a registry relabel can never
 // make the absence pass for the wrong reason.
 import { metaForStep } from '../../src/generators/steps/stepMetadata.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -61,9 +63,9 @@ vi.mock('../../src/components/generate/PipelineReveal.jsx', () => ({
 vi.mock('../../src/components/OutputContainer', () => ({
   default: () => <div data-testid="dossier-body">dossier</div>,
 }));
-vi.mock('../../src/components/dossier/LockControls.jsx', () => ({
-  default: () => <div data-testid="lock-controls">lock-controls</div>,
-}));
+// (The LockControls marker mock left with the component itself: owner order 2026-09-17,
+// "remove the other padlocks", deleted LockControls.jsx, so no import of it can build;
+// tests/components/factionLockCoupShield.test.jsx pins that no component carries one.)
 // Save-row leaves — presence is enough; their own behavior is pinned elsewhere.
 vi.mock('../../src/components/generate/SaveToLibraryButton.jsx', () => ({
   SaveToLibraryButton: () => <div data-testid="save-row">save</div>,
@@ -131,15 +133,19 @@ describe('the post-forge surface carries no above-dossier receipts (§767.2/§77
 });
 
 describe('the dossier lands head-first', () => {
-  test('toolbar → dossier → locks, in document order', async () => {
-    render(<GenerateWizard isMobile={false} />);
+  test('toolbar → dossier → save row, and NO "What a new roll keeps" section (owner order 2026-09-17)', async () => {
+    const { container } = render(<GenerateWizard isMobile={false} />);
     const dossier = await screen.findByTestId('dossier-body');
     const back = screen.getByRole('button', { name: 'Back' });
-    const locks = await screen.findByTestId('lock-controls');
+    const saveRow = await screen.findByTestId('save-row');
     // DOCUMENT_POSITION_FOLLOWING (4): the dossier follows the toolbar…
     expect(back.compareDocumentPosition(dossier) & 4).toBe(4);
-    // …and the world locks follow the dossier (controls live below, never head furniture).
-    expect(dossier.compareDocumentPosition(locks) & 4).toBe(4);
+    // …and the save row follows the dossier.
+    expect(dossier.compareDocumentPosition(saveRow) & 4).toBe(4);
+    // The owner: "Remove the entire section that says what a new roll keeps and any button
+    // associated with that." The render above is live (dossier and save row present).
+    expectAbsentWithAnchor(container.textContent, 'What a new roll keeps', 'dossier',
+      'the "What a new roll keeps" section is back below the dossier');
   });
 });
 

@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 162,
+    "count": 160,
     "exemptCount": 69,
     "byKlass": {
       "canon": 6,
       "macro": 48,
-      "mechanical": 108
+      "mechanical": 106
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -168,8 +168,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"revertUserEditAction","label":"Revert a manual edit","description":"Reverses a previously applied manual user edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"applyUserEditAction"},
       {"opType":"persistActiveSaveEdit","label":"Persist an edit to the active save","description":"Writes an edit to the active save so the change survives a reload.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"markExported","label":"Mark as exported","description":"Flags the settlement as having been exported, for example to a PDF dossier.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"setLock","label":"Set a section lock","description":"Locks a part of the settlement. A locked section refuses to reroll. Locked characters survive any reroll, including a full regenerate, where they take a place in the new town. A full regenerate also keeps the locked name, terrain and history.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"clearLocks","label":"Clear section locks","description":"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"hydrateFromSave","label":"Load state from a save","description":"Rebuilds the working settlement state from a saved settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameSettlement","label":"Rename the settlement","description":"Changes the settlement's name.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"retryOutbox","label":"Retry the sync outbox","description":"Retries any campaign changes that failed to sync to the cloud.","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},

@@ -18,9 +18,11 @@
  * undermining factions) genuinely moves the verdict.
  *
  * User agency:
- *   - a locked governing faction (campaignState.locks.factions) downgrades
- *     a fall verdict to a PROPOSAL — the seat cannot change hands without
- *     explicit approval;
+ *   - the table's approval rules (changeAuthorityPolicy) decide whether a fall
+ *     verdict applies or queues as a PROPOSAL. ⛔ A stored seat lock on the save
+ *     is NO LONGER READ here (owner order 2026-09-17 removed the "What a new roll
+ *     keeps" section and its "Keep them in power" button, the only writer; a lock
+ *     nobody can see or clear must not keep acting). The raw key stays in the save;
  *   - a party-directed resolution (resolveStressorById stamps
  *     resolutionReason) is the table ENDING the coup, not the coup reaching
  *     its verdict — no contest runs, the ruler simply survives.
@@ -56,20 +58,6 @@ export const COUP_STRESSOR_TYPE = 'coup_detat';
  */
 export function isCoupResidualOutcome(outcome) {
   return outcome?.ruleId === `stressor_${COUP_STRESSOR_TYPE}_residual`;
-}
-
-/**
- * @param {any} entry
- * @param {any} governingName
- */
-function lockedGoverningFaction(entry, governingName) {
-  const locked = entry?.save?.campaignState?.locks?.factions;
-  if (!Array.isArray(locked) || !locked.length || !governingName) return false;
-  const target = stablePart(governingName);
-  return locked.some(id => {
-    const key = stablePart(String(id).replace(/^faction\./, ''));
-    return key === target;
-  });
 }
 
 /**
@@ -203,7 +191,6 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       continue;
     }
 
-    const locked = lockedGoverningFaction(entry, verdict.incumbent?.name);
     const losers = verdict.challengers
       .filter((/** @type {any} */ c) => c.name !== verdict.winner.name)
       .map((/** @type {any} */ c) => c.name);
@@ -212,21 +199,19 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       type: 'power_transfer',
       candidateType: 'coup_succeeded',
       ruleId: 'coup_verdict_fall',
-      // M10a — the coup's LEGACY applyMode (locked ⇒ proposal, else auto — the
-      // player-lock escalation) is the legacyMode fed through authorityFor:
-      // VERBATIM under routine/full (byte-identical), forced to 'proposal' under
+      // M10a — the coup's LEGACY applyMode is 'auto', fed through authorityFor:
+      // VERBATIM under routine/full, forced to 'proposal' under
       // dm_only/recommendations and under routine-with-major-approval (a coup is an
       // actor-initiated major). No fresh rng — the verdict already rolled.
-      applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto'),
+      // (The player-lock escalation, a stored seat lock forcing 'proposal', was retired
+      // by owner order 2026-09-17 with the button that wrote it.)
+      applyMode: authorityFor(rules, 'coup_succeeded', 'auto'),
       severity: clamp(0.45, 1, severity),
       headline: `${verdict.winner.name} seizes power in ${settlementName}`,
       summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,
       reasons: [
         verdict.reason,
         'The contest broke against the ruling seat.',
-        ...(locked
-          ? ['The governing faction is locked. The seat cannot change hands without your approval.']
-          : []),
       ],
       powerTransfer: {
         toPowerName: verdict.winner.name,

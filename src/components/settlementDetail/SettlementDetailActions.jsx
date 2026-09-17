@@ -41,6 +41,7 @@ export default function SettlementDetailActions({
         variant={!canEdit ? 'secondary' : 'ai'}
         size="sm"
         disabled={editUpsellLocked}
+        style={editUpsellLocked ? { flexWrap: 'wrap' } : undefined}
         onClick={() => { if (canEdit) { toggleEditMode(); } else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); } }}
         title={canEdit
           ? (editMode

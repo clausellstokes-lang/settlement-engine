@@ -1,6 +1,6 @@
 {
-  "total": 2211,
-  "totalAny": 2173,
+  "total": 2209,
+  "totalAny": 2171,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -348,7 +348,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/coup.js": {
-      "any": 9,
+      "any": 7,
       "suppress": 0
     },
     "src/domain/worldPulse/cultImpositionApply.js": {

@@ -54,7 +54,9 @@ const capsLink = {
   textTransform: 'uppercase', color: GOLD_TXT,
 };
 
-const twoColGrid = (gap = 28) => ({ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap, alignItems: 'center' });
+// The track minimum is capped at the column's own width: on a 390px phone the stop's
+// content box is 366px, and a bare 380px minimum pushed the page 2px sideways.
+const twoColGrid = (gap = 28) => ({ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(380px, 100%), 1fr))', gap, alignItems: 'center' });
 
 // ── The salt-road waypoint spine (spec §4) ───────────────────────────────────
 function Waypoint({ pill, goldPill, dark = false }) {
@@ -97,7 +99,22 @@ function Waypoint({ pill, goldPill, dark = false }) {
 }
 
 // Section wrappers ------------------------------------------------------------
-const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px 84px` });
+/** The empty band below a stop's content, before the next travel leg. */
+const sectionTail = (isMobile) => (isMobile ? SP.xxl * 2 : 84);
+const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${sectionTail(true)}px` : `0 ${SP.xxl}px ${sectionTail(false)}px` });
+// THE FADED TAIL (owner orders 2026-09-17, "Fix the small visual defects"). The header
+// is transparent over the page, so every translucent-cream stop scrolls under it, and
+// while a stop's empty bottom band passes beneath the arrow it read as a plain cream
+// strip between the shaft and the painted film. The strip was that band, not a space
+// kept for the feather (measured: at 1440x900 and scroll 2400 the layer under the
+// shaft is #forge's bottom padding, and the film begins where #forge ends). So the
+// band fades out: the cream dissolves into the film over the tail's own height, which
+// holds no content, and the painting meets the shaft at every scroll position. Masks
+// read only alpha, so the gradient's colour is a token (the ArrowPaint idiom).
+const creamTailFade = (isMobile) => {
+  const fade = `linear-gradient(${INK} calc(100% - ${sectionTail(isMobile)}px), transparent)`;
+  return { WebkitMaskImage: fade, maskImage: fade };
+};
 
 // ── 01 · Forge — the Instant Draft artifact (InstantDraftCard) was removed per
 // owner order (2026-07-22): the Cnocby sample-draft card (MiniDossierCard) now
@@ -301,6 +318,7 @@ function TierStrip() {
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
+  const tail = creamTailFade(isMobile);
   // Pre-launch lockout (lib/launchGate.js): See Cartographer is the landing's one
   // purchase CTA, so it renders disabled with the pill until purchases open. The
   // pricing links are information and stay live.
@@ -324,7 +342,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="forge"
         aria-labelledby="sf-forge-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, ...tail }}
       >
         <Waypoint pill={tl('forge.waypoint')} />
         <div style={twoColGrid(28)}>
@@ -378,7 +396,8 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="voice"
         aria-labelledby="sf-voice-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
+        // The bottom hairline fades out with the tail (THE FADED TAIL, above).
+        style={{ ...pad, ...tail, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
       >
         <Waypoint pill={tl('voice.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -412,7 +431,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="realm"
         aria-labelledby="sf-realm-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad }}
+        style={{ ...pad, ...tail }}
       >
         <Waypoint pill={tl('realm.waypoint')} goldPill={tl('realm.waypointPill')} />
         <div style={twoColGrid(28)}>
@@ -421,7 +440,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <p style={proseStyle}>{tl('realm.body1')}</p>
             <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('realm.body2')}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')}>
+              <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
                 {tl('realm.cta')}
                 {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
               </Button>
@@ -439,7 +458,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
 
       {/* ══ 05 · The commons — translucent cream (item 10) ══ */}
-      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad }}>
+      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad, ...tail }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>

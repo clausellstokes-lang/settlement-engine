@@ -5,7 +5,7 @@ import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
 import {NarrativeNote} from '../NarrativeNote';
-import LockControls from '../../dossier/LockControls.jsx';
+import Button from '../../primitives/Button.jsx';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER (the mount registry's ARM 2), which
 // also owns the §885.3 public gate: corpus prose is a PAID surface and this tab is not
 // filtered off a free gallery dossier.
@@ -94,9 +94,13 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
           {sortedEvents.length>0&&<span style={{fontSize:FS.sm,color:MUTED}}>{sortedEvents.length} historical events · {currentTensions.length} current tensions</span>}
-          {/* Reroll lives inside LockControls — a locked history must never render
-              an armed Reroll. See the control's header. */}
-          <LockControls scope="history" onReroll={onReroll} style={{marginLeft:'auto',flexShrink:0}} />
+          {/* The "Keep this history" padlock is gone (owner order 2026-09-17, "remove the
+              other padlocks"); the Reroll it wrapped stays, for a viewer who may roll. */}
+          {onReroll && (
+            <Button variant="gold" size="sm" onClick={onReroll} style={{marginLeft:'auto',flexShrink:0}}>
+              ↺ Reroll
+            </Button>
+          )}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
         {/* ── DS-GEN-14 (history.founded) and DS-GEN-16 (history.record) ─────

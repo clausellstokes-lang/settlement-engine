@@ -36,8 +36,8 @@
  *                 from the dial, so flipping the dial cannot re-birth old worlds.
  *   REGENERATE  — `regenSection` reads `settlement.config` FIRST. THE STOP.
  *   UNDO/CLONE  — the config bag survives the clone seam intact, marker and all.
- *   PERSIST     — `geographyLockedConfig` overlays geography keys ONLY, so a lit
- *                 previous world cannot smuggle its law into a dark generation.
+ *   PERSIST     — no previous world's config reaches a birth: the one reader that did,
+ *                 `geographyLockedConfig`, was retired with the world locks (2026-09-17).
  *   IMPORT      — out of scope here; the account-import path is proved in
  *                 `tests/store/accountImportSlice.test.js`, the gallery path in
  *                 `tests/lib/importScrub.test.js` and
@@ -80,7 +80,7 @@ import {
   materializesLivingContent,
   resolveLivingContentLawVersion,
 } from '../../src/domain/content/livingContentLawVersion.js';
-import { geographyLockedConfig } from '../../src/domain/locksPreservation.js';
+import * as locksPreservation from '../../src/domain/locksPreservation.js';
 import { deepClone } from '../../src/domain/clone.js';
 import { isAllowedConfigKey } from '../../src/store/configSlice.js';
 // The Library's Load runs a saved `settlement._config` through this before handing
@@ -519,19 +519,16 @@ describe('the living-content law is WIRED, and THE PROMISE survives it', () => {
   });
 
   // ── PERSIST / THE GEOGRAPHY OVERLAY ────────────────────────────────────────
-  it('PERSIST: geographyLockedConfig overlays geography keys ONLY', () => {
-    // The one place a PREVIOUS settlement's config is read on the birth path.
-    // If the overlay were a spread of the whole previous config, a lit world on
-    // screen would decide the law of the next world generated beside it.
-    const previous = { config: { ...LIT_CONFIG, terrainOverride: 'hills' } };
-    const overlaid = geographyLockedConfig({ geography: true }, previous, { ...CONFIG });
-    expect(
-      overlaid[LIVING_CONTENT_LAW_CONFIG_KEY],
-      'the geography overlay carried a generation LAW across from the previous world',
-    ).toBeUndefined();
-    // Non-vacuity: the overlay really did overlay something.
-    expect(overlaid.terrainOverride).toBe('hills');
-    expect(materializesLivingContent(overlaid)).toBe(false);
+  it('PERSIST: no previous settlement config reaches the birth path (the geography overlay is retired)', () => {
+    // `geographyLockedConfig` was the one place a PREVIOUS settlement's config was read on
+    // the birth path, and this arm pinned that it carried geography keys only, never a
+    // generation LAW. Owner order 2026-09-17 retired the world locks, and that overlay with
+    // them, so the path this arm guarded no longer exists; it now pins that it stays gone.
+    expect(typeof locksPreservation.carryLockedSections, 'the locks leaf itself is live').toBe('function');
+    expect(Object.prototype.hasOwnProperty.call(locksPreservation, 'geographyLockedConfig'),
+      'the geography overlay is back on the birth path').toBe(false);
+    // And the birth keeps its own law: a dark config mints no living content.
+    expect(materializesLivingContent({ ...CONFIG })).toBe(false);
   });
 
   // ── THE ADMISSION SURFACE, RECORDED RATHER THAN ASSUMED ────────────────────

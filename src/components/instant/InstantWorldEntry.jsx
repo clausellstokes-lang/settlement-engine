@@ -155,6 +155,11 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
           aria-expanded={open}
           disabled={premiumReachClosed}
           data-testid="instant-world-open"
+          // The pill may wrap below "See Premium" while purchases are closed: this card
+          // sits in the Realm's 240px sidebar, where label and pill are wider than the
+          // button, and without the wrap both spilled out and the card clipped them
+          // ("ee Premium", owner orders 2026-09-17). The premium toggle is untouched.
+          style={premiumReachClosed ? { flexWrap: 'wrap' } : undefined}
         >
           {canGenerate ? (open ? 'Hide options' : 'Build a realm') : 'See Premium'}
           {premiumReachClosed && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}

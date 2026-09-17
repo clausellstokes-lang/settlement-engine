@@ -248,5 +248,9 @@ describe('useRealmInspector — size persistence', () => {
     render(<Probe onState={(h) => { restored = h; }} />);
     expect(restored.inspectorOpen).toBe(true);
     expect(restored.inspectorSection).toBe('trade');
+    // The Herald waits for the first advance (owner order 2026-09-17), but as its
+    // OWN flag: the remembered open record above is kept as-is for this never-advanced
+    // realm, so the Herald returns where the GM left it once the clock moves.
+    expect(restored.heraldAvailable).toBe(false);
   });
 });

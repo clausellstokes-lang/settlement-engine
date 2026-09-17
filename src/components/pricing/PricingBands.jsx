@@ -65,13 +65,17 @@ export function SurveyorBand({ onSeeMenu }) {
       <p style={{ margin: 0, fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans, lineHeight: 1.4 }}>
         {tp('band2.surveyor.lead')}
       </p>
-      <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55, flex: 1 }}>
+      {/* The card stretches to the tallest card in the tier row. Its prose reads
+          straight down, and the spare height sits above the CTA, as it does on the
+          sibling cards, so the CTA stays level with theirs (owner orders 2026-09-17:
+          the body paragraph used to grow and left a dead gap mid-card). */}
+      <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
         {tp('band2.surveyor.body')}
       </p>
       <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
         {tp('band2.surveyor.byok')}
       </p>
-      <Button type="button" variant="secondary" size="lg" fullWidth style={{ minHeight: 44 }} onClick={onSeeMenu}>
+      <Button type="button" variant="secondary" size="lg" fullWidth style={{ minHeight: 44, marginTop: 'auto' }} onClick={onSeeMenu}>
         {tp('band2.surveyor.menuLink')}
       </Button>
     </article>

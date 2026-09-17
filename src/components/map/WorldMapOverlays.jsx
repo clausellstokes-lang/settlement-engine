@@ -14,6 +14,7 @@ import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { t } from '../../copy/index.js';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
+import { realmHasAdvanced } from '../../lib/realmHeraldGate.js';
 
 const SimulationRulesDialog = lazy(() => import('./SimulationRulesDialog.jsx'));
 // THE GATHERED ADJUDICATION SCREEN (realm directive 7 / J-D7). A lazy leaf: a
@@ -21,6 +22,13 @@ const SimulationRulesDialog = lazy(() => import('./SimulationRulesDialog.jsx'));
 // outcome cards, or the address-chain machinery behind them.
 // @enforced-by tests/build/gatheredAdjudicationLazy.test.js
 const GatheredAdjudication = lazy(() => import('./GatheredAdjudication.jsx'));
+// THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17). Its Dashboard
+// door was the only live mount of the living-world controls, and the only mount at
+// all of Map geography (the spatial canonize, which changes what the first advance
+// computes). Until the realm has advanced they ride the Advance dialog, beside the
+// Start the World Clock CTA: the one place every first advance passes through.
+// Lazy, like the dialog's other leaves: only an opened pre-advance dialog loads it.
+const LivingWorldGates = lazy(() => import('../settlements/LivingWorldGates.jsx'));
 
 export function WorldMapOverlays({
   toast,
@@ -55,6 +63,10 @@ export function WorldMapOverlays({
   // Inert default so every existing call site renders byte-identically.
   gatheredDocket = null,
 }) {
+  // Only a campaign manager can hold an active campaign on this surface
+  // (useWorldMapCampaignModel), so a campaign here is a writable one; the store
+  // actions re-check the entitlement at the call site regardless.
+  const preAdvanceGates = !!activeCampaign?.id && !realmHasAdvanced(activeCampaign);
   return (
     <>
       {/* Toast — an optional `action` renders a recovery CTA (P10) so an error
@@ -122,13 +134,13 @@ export function WorldMapOverlays({
         title="Advance the realm?"
         body={advanceBody || ''}
         extra={
-          (!worldCanonized || advanceExtra) ? (
+          (!worldCanonized || advanceExtra || preAdvanceGates) ? (
             <>
               {!worldCanonized && (
                 <div style={{
                   background: swatch['#FAF8F4'], border: `1px solid ${swatch.stressAmber}55`,
                   borderLeft: `3px solid ${swatch.stressAmber}`,
-                  padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
+                  padding: '10px 12px', marginBottom: (advanceExtra || preAdvanceGates) ? 10 : 0,
                 }}>
                   <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
                     This realm's world clock hasn't started yet. Its history can't advance until it does.
@@ -142,6 +154,18 @@ export function WorldMapOverlays({
                   >
                     {canonizeBusy ? 'Starting…' : t('canon.startWorldClock')}
                   </Button>
+                </div>
+              )}
+              {preAdvanceGates && (
+                <div data-testid="advance-living-world" style={{ marginBottom: advanceExtra ? 10 : 0 }}>
+                  {/* A perceptible wait inside an open dialog, so it is narrated. */}
+                  <Suspense fallback={(
+                    <div role="status" style={{ fontSize: FS.xs, color: swatch.inkMag2, fontFamily: sans }}>
+                      Laying out the living-world controls…
+                    </div>
+                  )}>
+                    <LivingWorldGates campaign={activeCampaign} canWrite />
+                  </Suspense>
                 </div>
               )}
               {advanceExtra}

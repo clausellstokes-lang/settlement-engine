@@ -21,6 +21,10 @@
  *      interval — the FAQ's data-longevity number can never drift from the SQL.
  *   8. COPY-SOURCE GUARD: no hand-typed money and no hand-typed fact-counts in
  *      the pricingPage copy module's strings (money/facts must interpolate).
+ *   9. NO DEAD GAP MID-CARD (owner orders 2026-09-17): in every tier-row card the
+ *      CTA is the last child and the card's spare height sits directly above it,
+ *      either in the one growing child just before it or in the CTA's own auto
+ *      top margin, so the card reads straight down and CTAs stay level.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -161,6 +165,31 @@ describe('PricingPage — the five-band drift contract', () => {
       sql,
       `the ACTIVE handle_premium_downgrade (${activeFile}) must derive its retention window from RETENTION_MONTHS`,
     ).toContain(`interval '${RETENTION_MONTHS} months'`);
+  });
+
+  it('tier-row cards: the CTA is last and the spare height sits directly above it, never mid-card', () => {
+    const { container } = renderPage();
+    const row = container.querySelector('section[aria-labelledby="pricing-tiers-heading"]');
+    const cards = [...row.querySelectorAll(':scope > article')];
+    expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toContain('tier-surveyor-name');
+    expect(cards.length).toBe(3);
+    const grows = (el) => {
+      const grow = el.style.flexGrow || String(el.style.flex || '').trim().split(/\s+/)[0];
+      return Number.parseFloat(grow) > 0;
+    };
+    for (const card of cards) {
+      const name = card.getAttribute('aria-labelledby');
+      const children = [...card.children];
+      const cta = children[children.length - 1];
+      expect(cta.tagName, `${name}: the CTA is the card's last child`).toBe('BUTTON');
+      const growers = children.filter(grows);
+      if (growers.length === 0) {
+        expect(cta.style.marginTop, `${name}: with no growing child, the CTA carries the spare height`).toBe('auto');
+      } else {
+        expect(growers.length, `${name}: one growing child at most`).toBe(1);
+        expect(growers[0], `${name}: the growing child sits directly above the CTA`).toBe(children[children.length - 2]);
+      }
+    }
   });
 
   it('copy-source guard: no hand-typed money or fact-counts in pricingPage strings', () => {

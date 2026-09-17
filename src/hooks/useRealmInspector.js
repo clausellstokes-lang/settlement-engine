@@ -5,18 +5,22 @@
  * The Realm Inspector is a right-dock OVERLAY over the world map (it never body-
  * swaps the map away). This hook owns:
  *   - inspectorOpen / inspectorSection state
- *   - the locked-preview auto-open for anon/free (the Realm is reachable, not
- *     hidden; the locked Dashboard teaser is the funnel surface)
+ *   - heraldAvailable: the Herald is withheld until the realm's first advance
+ *     (owner order 2026-09-17), derived from the persisted world clock
+ *   - the anon/free Realm-entry pricing moment (the locked teaser no longer opens
+ *     on entry, because the Herald waits for an advance these viewers cannot run)
  *   - the pendingMapWorkspace → Inspector-section translation (the Library
  *     Advance-Time CTA requests a workspace; we open the matching section)
  *   - handleApplyPreset (toolbar preset chips) + handleUpgrade (locked-state CTA)
  *
- * Behaviour-preserving extraction — no logic change, purely a god-component trim.
+ * Extracted behaviour-preserving from WorldMap; the Herald gate and the entry
+ * moment (owner order 2026-09-17) are the only logic added since.
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useStore } from '../store/index.js';
+import { realmHasAdvanced } from '../lib/realmHeraldGate.js';
 import {
   readHeraldCommandSession,
   writeHeraldCommandSession,
@@ -185,16 +189,31 @@ export function useRealmInspector({
     });
   }, [activeCampaignId, inspectorOpen, inspectorSection]);
 
-  // Open the locked Dashboard teaser for anon/free on entry (reachable, not hidden).
-  const lockedPreviewShownRef = useRef(false);
+  // THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17). Derived from
+  // the persisted world clock (src/lib/realmHeraldGate.js). It is a SEPARATE flag,
+  // never folded into inspectorOpen: the open/section record stays as the GM left
+  // it, so the Herald comes back where it was after the first advance and after a
+  // reload of a realm that has advanced before.
+  const heraldAvailable = realmHasAdvanced(activeCampaign);
+
+  // Anon / free viewers have no campaign here (useWorldMapCampaignModel), so their
+  // realm never advances and the Herald never opens for them. Its locked Dashboard
+  // teaser used to open on entry and fire the `map_realm_teaser` pricing moment as
+  // it mounted; that moment now fires from here instead, once per Realm visit after
+  // auth has settled (so a premium session still hydrating is not pitched), and
+  // cooldown-guarded exactly as before.
+  const authTier = useStore(s => s.auth?.tier);
+  const authSettled = useStore(s => s.auth?.loading !== true);
+  const lockedMomentFiredRef = useRef(false);
   useEffect(() => {
-    if (canManageCampaigns || lockedPreviewShownRef.current) return;
-    lockedPreviewShownRef.current = true;
-    // One-shot sync of an external signal (the auth tier) into local UI state —
-    // the ref guard makes it fire exactly once.
-    setInspectorSection('dashboard');
-    setInspectorOpen(true);
-  }, [canManageCampaigns]);
+    if (canManageCampaigns || !authSettled || lockedMomentFiredRef.current) return;
+    lockedMomentFiredRef.current = true;
+    import('../lib/pricingMoments.js')
+      .then(({ triggerPricingMoment }) => {
+        triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
+      })
+      .catch(() => { /* never block the Realm on a pricing prompt */ });
+  }, [canManageCampaigns, authSettled, authTier]);
 
   // Honor a one-shot workspace request from another view (e.g. the Library
   // Advance-Time CTA → 'news'). Consume only once a campaign is active so the
@@ -260,6 +279,7 @@ export function useRealmInspector({
 
   return {
     inspectorOpen,
+    heraldAvailable,
     setInspectorOpen,
     inspectorSection,
     setInspectorSection,

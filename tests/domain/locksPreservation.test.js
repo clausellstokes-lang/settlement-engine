@@ -1,20 +1,24 @@
 /**
- * locksPreservation.test.js — the LOCKS ENGINE leaf (Phase A).
+ * locksPreservation.test.js — the LOCKS ENGINE leaf.
  *
- * THE LOAD-BEARING PROPERTY is dormancy. Every function in this module returns
- * its INPUT UNCHANGED — the same reference, not an equal copy — when the lock map
- * has nothing to say. That is what makes "a lock-free settlement regenerates
- * exactly as it did before locks were read at all" true by construction rather
- * than by hope, and it is the reason THE PROMISE survives this engine: locks run
- * over a FINISHED roll and can only ever ADD survivors.
+ * ⛔ EVERY LOCK KIND IS RETIRED (owner orders 2026-09-17). The "What a new roll keeps"
+ * section went first (the world keys), then "remove the other padlocks" took the NPCs
+ * and History section locks and the roster-row padlock (`npcs`, `history`). No control
+ * sets, shows or clears a lock any more, so a lock a save still carries must not act:
+ * `normalizeLocks`, the one read every predicate here flows through, reads NOTHING. This
+ * file pins that at the chokepoint (a fully populated map reads as nothing locked, and
+ * every predicate that consumes the view is dormant), and it keeps pinning the id
+ * ALGEBRA (`remapNpcLocks`, `locksAfterFullGenerate`), which reads the RAW map on
+ * purpose: it is data maintenance and the pin remap's algebra, not a lock acting.
  *
- * Same-reference is asserted with `toBe`, deliberately. `toEqual` would pass on a
- * fresh clone with identical contents, and a clone is exactly the regression this
- * pin exists to catch — a copy has a different identity downstream, defeats
- * memoized selectors, and quietly turns a dormant path into a writing one.
+ * THE LOAD-BEARING PROPERTY is still dormancy. Every function in this module returns
+ * its INPUT UNCHANGED — the same reference, not an equal copy — when it has nothing to
+ * do. Same-reference is asserted with `toBe`, deliberately: `toEqual` would pass on a
+ * fresh clone with identical contents, and a clone is exactly the regression this pin
+ * exists to catch.
  *
- * The end-to-end byte-identity proof against the REAL pipeline lives in
- * tests/generators/locksSurviveReroll.test.js; this file pins the algebra.
+ * The end-to-end proofs against the REAL pipeline live in
+ * tests/generators/locksSurviveReroll.test.js and locksSurviveFullGenerate.test.js.
  *
  * @enforced-by this test
  */
@@ -24,105 +28,96 @@ import {
   lockedNpcIdSet,
   sectionLocked,
   carryLockedSections,
-  geographyLockedConfig,
   remapNpcLocks,
   locksAfterFullGenerate,
   LOCKABLE_SECTIONS,
 } from '../../src/domain/locksPreservation.js';
+import * as locksModule from '../../src/domain/locksPreservation.js';
 
-describe('normalizeLocks — tolerant read of a map every app version has written', () => {
+/** Every key any version of the app ever wrote, each in the form that used to act. */
+const EVERY_KIND_ARMED = Object.freeze({
+  identity: true,
+  geography: true,
+  factions: ['Town Council'],
+  institutions: ['the-mint'],
+  history: true,
+  npcs: ['npc_1', 'npc_2'],
+});
+
+describe('normalizeLocks — THE CHOKEPOINT reads no lock (owner orders 2026-09-17)', () => {
   test('an absent, null or non-object map reads as nothing locked', () => {
     for (const input of [undefined, null, 'locks', 42, []]) {
       const n = normalizeLocks(/** @type {any} */ (input));
-      expect(n.identity).toBe(false);
-      expect(n.geography).toBe(false);
       expect(n.history).toBe(false);
       expect(n.npcsSection).toBe(false);
       expect(n.npcs).toEqual([]);
-      expect(n.factions).toEqual([]);
     }
   });
 
-  test('the dead institutions lock is GONE from the normalized shape, beside a live sibling', () => {
-    // ⚠⚠ THE ANCHOR IS THE POINT. `expect(n.institutions).toBeUndefined()` alone is
-    // true both when the field was correctly deleted AND when normalizeLocks broke
-    // outright, returned {}, or was renamed — so it is asserted BESIDE `factions`,
-    // the sibling that travels the identical `idArray(l.<key>)` path and must still
-    // come back populated. If the normalizer drifts, the anchor reds first and names
-    // the real cause; only while the anchor holds does the absence mean anything.
-    //
-    // WHY THE FIELD WENT: it was dead on BOTH ends at once. No UI could write it —
-    // setLock is only ever reached with identity/geography/npcs/history — and nothing
-    // anywhere consumed the normalized value, unlike `factions`, whose raw form the
-    // coup shield really does read. The realistic regression is a well-meaning
-    // "restore the symmetry" edit that adds the key back beside factions.
-    const n = normalizeLocks({ factions: ['the-guild'], institutions: ['the-mint'] });
-    expect(n.factions).toEqual(['the-guild']);
-    expect(Object.prototype.hasOwnProperty.call(n, 'institutions')).toBe(false);
+  test('EVERY lock kind a save can carry reads as nothing locked, in each form it ever took', () => {
+    // The whole-roster boolean and the per-character id list were the two padlocks the
+    // second order removed; `history: true` was "Keep this history". A stored one of each,
+    // beside every retired world key, must leave the honoured view empty.
+    const shapes = [
+      EVERY_KIND_ARMED,
+      { npcs: true },
+      { npcs: ['npc_1'] },
+      { history: true },
+      { history: true, npcs: true },
+    ];
+    for (const locks of shapes) {
+      expect(normalizeLocks(locks), JSON.stringify(locks)).toEqual({ history: false, npcsSection: false, npcs: [] });
+    }
+  });
+
+  test('the honoured view has exactly its three fields, so no retired key can ride back in', () => {
+    // THE SHAPE IS THE ANCHOR: an exact key set cannot pass over a normalizer that
+    // quietly grew `identity`, `geography`, `factions` or `institutions` again.
+    expect(Object.keys(normalizeLocks(EVERY_KIND_ARMED)).sort()).toEqual(['history', 'npcs', 'npcsSection']);
+  });
+
+  test('THE STORED MAP IS KEPT as data: a full generate hands a booleans-and-names map back untouched', () => {
+    // Not reading is not deleting. Pruning a persisted key is an owner-gated migration,
+    // and a veto of the orders restores the controls with a user's old locks intact.
+    const locks = { identity: true, geography: true, factions: ['Town Council'], history: true, npcs: true };
+    expect(locksAfterFullGenerate(locks, [])).toBe(locks);
+    expect(locksAfterFullGenerate({ ...locks, npcs: ['npc_4'] }, [{ id: 'npc_2', fromId: 'npc_4' }]))
+      .toEqual({ ...locks, npcs: ['npc_2'] });
   });
 
   test('an unknown institutions key still round-trips VERBATIM through a full generate', () => {
-    // The normalized VIEW dropped the concept; the persisted MAP is key-agnostic and
-    // deliberately still is. Pruning a key an old save carries would be a migration,
-    // which is owner-gated — so this pins that deleting the reader did NOT quietly
-    // become a data deletion.
     const locks = { institutions: ['the-mint'], history: true };
     expect(locksAfterFullGenerate(locks, [])).toBe(locks);
     expect(locksAfterFullGenerate({ npcs: ['npc_4'], institutions: ['the-mint'] }, [{ id: 'npc_2', fromId: 'npc_4' }]))
       .toEqual({ npcs: ['npc_2'], institutions: ['the-mint'] });
   });
 
-  test('booleans only count when they are literally true', () => {
-    // A truthy non-true value ('yes', 1) is a legacy write, not a lock. Degrading
-    // to "not locked" is the safe direction: it can only ever roll MORE, never
-    // silently freeze a section the user did not freeze.
-    expect(normalizeLocks({ identity: 'yes' }).identity).toBe(false);
-    expect(normalizeLocks({ identity: 1 }).identity).toBe(false);
-    expect(normalizeLocks({ identity: true }).identity).toBe(true);
-  });
-
-  test('npcs accepts BOTH forms without confusing them', () => {
-    // `true` freezes the section; an array names individuals. The two must never
-    // bleed: a section lock yields NO ids (its reroll refuses instead), and an
-    // array is not a section lock.
-    expect(normalizeLocks({ npcs: true }).npcsSection).toBe(true);
-    expect(normalizeLocks({ npcs: true }).npcs).toEqual([]);
-    expect(normalizeLocks({ npcs: ['npc_1'] }).npcsSection).toBe(false);
-    expect(normalizeLocks({ npcs: ['npc_1'] }).npcs).toEqual(['npc_1']);
-  });
-
-  test('id arrays are cleaned of blanks and coerced to strings', () => {
-    expect(normalizeLocks({ npcs: ['npc_1', '', null, undefined, '  ', 7] }).npcs)
-      .toEqual(['npc_1', '7']);
-  });
-
   test('unknown keys are ignored rather than throwing inside a reroll', () => {
     expect(() => normalizeLocks({ weather: true, npcs: ['a'] })).not.toThrow();
-    expect(normalizeLocks({ weather: true, npcs: ['a'] }).npcs).toEqual(['a']);
+    expect(normalizeLocks({ weather: true, npcs: ['a'] }).npcs).toEqual([]);
   });
 });
 
-describe('lockedNpcIdSet / sectionLocked', () => {
-  test('an empty map yields an empty set — the union adds nobody', () => {
+describe('lockedNpcIdSet / sectionLocked — dormant over any stored map', () => {
+  test('a stored id list names nobody, and an empty map names nobody', () => {
+    expect(lockedNpcIdSet({ npcs: ['npc_1', 'npc_2'] }).size).toBe(0);
+    expect(lockedNpcIdSet(EVERY_KIND_ARMED).size).toBe(0);
     expect(lockedNpcIdSet({}).size).toBe(0);
     expect(lockedNpcIdSet(undefined).size).toBe(0);
   });
 
-  test('a WHOLE-SECTION npcs lock contributes no ids (that reroll refuses)', () => {
-    expect(lockedNpcIdSet({ npcs: true }).size).toBe(0);
-    expect(sectionLocked({ npcs: true }, 'npcs')).toBe(true);
-  });
-
-  test('sectionLocked answers only for the sections that can be locked whole', () => {
+  test('no stored section lock refuses a reroll: "Keep these people" and "Keep this history" are gone', () => {
+    // The two names stay in LOCKABLE_SECTIONS so the refusal's one seat is where a veto
+    // re-arms it; what they no longer do is refuse.
     expect(LOCKABLE_SECTIONS).toEqual(['npcs', 'history']);
-    expect(sectionLocked({ history: true }, 'history')).toBe(true);
-    expect(sectionLocked({ npcs: ['npc_1'] }, 'npcs')).toBe(false);
-    // A key that is not a lockable section never refuses a reroll.
+    expect(sectionLocked({ npcs: true }, 'npcs')).toBe(false);
+    expect(sectionLocked({ history: true }, 'history')).toBe(false);
+    expect(sectionLocked(EVERY_KIND_ARMED, 'history')).toBe(false);
     expect(sectionLocked({ identity: true }, 'identity')).toBe(false);
   });
 });
 
-describe('carryLockedSections — the post-hoc half of a full regenerate', () => {
+describe('carryLockedSections — the post-hoc half of a full regenerate, dormant', () => {
   const prev = { name: 'Oldford', history: { founded: 812, note: 'kept' } };
 
   test('DORMANT: no locks ⇒ the same object reference back', () => {
@@ -131,60 +126,19 @@ describe('carryLockedSections — the post-hoc half of a full regenerate', () =>
     expect(carryLockedSections(undefined, prev, fresh)).toBe(fresh);
   });
 
-  test('DORMANT: a lock with nothing to carry is still dormant', () => {
-    const fresh = { name: 'Newbury' };
-    expect(carryLockedSections({ identity: true }, null, fresh)).toBe(fresh);
-    expect(carryLockedSections({ history: true }, { name: 'x' }, fresh)).toBe(fresh);
-  });
-
-  test('identity carries the name and nothing else', () => {
+  test('a STORED history lock carries NOTHING any more (owner order 2026-09-17, "remove the other padlocks")', () => {
     const fresh = { name: 'Newbury', history: { founded: 991 } };
-    const out = carryLockedSections({ identity: true }, prev, fresh);
-    expect(out).not.toBe(fresh);
-    expect(out.name).toBe('Oldford');
-    expect(out.history).toBe(fresh.history);
-  });
-
-  test('history carries the section WHOLE, and by clone', () => {
-    // Whole, because historicalEvents / currentTensions / the coherence prose are
-    // only consistent with each other. By clone, so a later mutation of the live
-    // settlement cannot reach back into the previous one.
-    const fresh = { name: 'Newbury', history: { founded: 991 } };
-    const out = carryLockedSections({ history: true }, prev, fresh);
-    expect(out.history).toEqual(prev.history);
-    expect(out.history).not.toBe(prev.history);
-    expect(out.name).toBe('Newbury');
+    // Same reference back: the fresh history and the fresh name are what the roll made.
+    expect(carryLockedSections({ history: true }, prev, fresh)).toBe(fresh);
+    expect(carryLockedSections({ identity: true, history: true }, prev, fresh)).toBe(fresh);
+    expect(carryLockedSections(EVERY_KIND_ARMED, prev, fresh).history).toEqual({ founded: 991 });
   });
 });
 
-describe('geographyLockedConfig — the one lock that is a generation INPUT', () => {
-  const prev = { config: { terrainType: 'mountain', tradeRouteAccess: 'road', culture: 'germanic' } };
-
-  test('DORMANT: unlocked ⇒ the same config reference back', () => {
-    const cfg = { terrainType: 'grassland' };
-    expect(geographyLockedConfig({}, prev, cfg)).toBe(cfg);
-  });
-
-  test('DORMANT: locked but the previous settlement carries no config', () => {
-    const cfg = { terrainType: 'grassland' };
-    expect(geographyLockedConfig({ geography: true }, null, cfg)).toBe(cfg);
-    expect(geographyLockedConfig({ geography: true }, { config: null }, cfg)).toBe(cfg);
-  });
-
-  test('DORMANT: locked but the ground already matches ⇒ nothing to overlay', () => {
-    const cfg = { terrainType: 'mountain', tradeRouteAccess: 'road' };
-    expect(geographyLockedConfig({ geography: true }, prev, cfg)).toBe(cfg);
-  });
-
-  test('overlays ONLY the geography-determining keys', () => {
-    const cfg = { terrainType: 'grassland', culture: 'iberian', settType: 'city' };
-    const out = geographyLockedConfig({ geography: true }, prev, cfg);
-    expect(out.terrainType).toBe('mountain');
-    expect(out.tradeRouteAccess).toBe('road');
-    // Culture is not geography. A geography lock must not quietly freeze the rest
-    // of the config — that would make "keep the ground" mean "keep everything".
-    expect(out.culture).toBe('iberian');
-    expect(out.settType).toBe('city');
+describe('geographyLockedConfig — RETIRED with the world locks (owner order 2026-09-17)', () => {
+  test('the geography overlay is gone from the module, beside its (dormant) carry sibling', () => {
+    expect(typeof locksModule.carryLockedSections).toBe('function');
+    expect(Object.prototype.hasOwnProperty.call(locksModule, 'geographyLockedConfig'), 'the geography overlay is back').toBe(false);
   });
 });
 
@@ -211,6 +165,15 @@ describe('remapNpcLocks — the lock survives its own subject reroll', () => {
     ]);
     expect(out.npcs).toEqual(['npc_7']);
     expect(out.identity).toBe(true);
+  });
+
+  test('the RAW algebra still reads the stored ids, cleaned of blanks, while the honoured view reads none', () => {
+    // THE SPLIT THE RETIREMENT DEPENDS ON: the pin remap wraps aiData.pinnedNpcs as
+    // `{ npcs }` and a stored lock id must follow an AUTHORED keeper to its new slot, so
+    // this function reads the raw list. The honoured view over the SAME map is empty.
+    const stored = { npcs: ['npc_3', '', null, '  ', 7] };
+    expect(normalizeLocks(stored).npcs).toEqual([]);
+    expect(remapNpcLocks(stored, [{ id: 'npc_9', fromId: 'npc_3' }]).npcs).toEqual(['npc_9', '7']);
   });
 
   test('an id the report does not mention is left alone (the undo tolerance)', () => {
@@ -276,11 +239,10 @@ describe('locksAfterFullGenerate — Phase B remaps what it carried, prunes the 
   });
 
   test('factions and institutions are NAME-keyed and KEPT VERBATIM', () => {
-    // Power factions and institutions carry no id: coup.js matches locks.factions
-    // on the stable part of the NAME. A name cannot misbind across a roll — it
-    // either matches a same-named entity in the new town or matches nothing — so
-    // the array survives as standing intent. Dropping it (what Phase A did)
-    // silently disarmed the coup shield on every full regenerate.
+    // Power factions and institutions carry no id, so these arrays were NAME-keyed
+    // and a full roll keeps them verbatim. Neither is READ any more (institutions
+    // since 2026-08-11, the seat lock since owner order 2026-09-17); they ride
+    // through as stored data, because pruning a persisted key is a migration.
     const locks = { factions: ['faction.the-guild'], institutions: ['the-mint'], history: true };
     expect(locksAfterFullGenerate(locks, [])).toBe(locks);
     const mixed = locksAfterFullGenerate(

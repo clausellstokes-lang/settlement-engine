@@ -295,12 +295,24 @@ function swapNames(text, swaps) {
  * rewrite runs through swapNames, so this lane and the settlement-level one
  * cannot drift apart on what counts as a match.
  *
+ * ⛔ EXPORTED FOR ITS PIN, AND THE REASON IS THE PADLOCK REMOVAL (2026-09-17). The
+ * whole-word cure this lane carries used to be pinned end-to-end through
+ * `carryLockedRosterThroughGenerate`, because a per-character LOCK was the only lever
+ * that could seat an authored prefix pair in a roster a test controls. That carry is now
+ * dormant for every stored map (the read chokepoint reads no lock), and the surviving
+ * live caller is `regenNPCsPipeline`, which mints its own fresh roster internally — so no
+ * caller lets a test choose the colliding pair. The estate was left with the cure live on
+ * a shipping path and NOTHING failing if `swapNames` reverted to `out.split(from).join(to)`.
+ * This export is that seam and only that: no `src/` module imports it, so the bundlers drop
+ * it from every chunk, and the pin drives the real chain (refreshRosterProse → swapNames →
+ * substituteWholeWord) rather than the leaf helper on its own.
+ *
  * @param {Array<Record<string, any>>} npcs
  * @param {Array<{from: string, to: string}>} displacements
  * @param {Set<string>} keeperIds
  * @returns {Array<Record<string, any>>}
  */
-function refreshRosterProse(npcs, displacements, keeperIds) {
+export function refreshRosterProse(npcs, displacements, keeperIds) {
   const live = new Set(npcs.map(npc => String(npc?.name || '')).filter(Boolean));
   const swaps = displacements.filter(swap => swap.from && swap.to && !live.has(swap.from));
   if (swaps.length === 0) return npcs;
@@ -344,6 +356,12 @@ const NAME_CARRYING_PROSE = Object.freeze({
 
 /**
  * THE FULL-GENERATE ROSTER CARRY — locks engine Phase B.
+ *
+ * ⛔ DORMANT SINCE OWNER ORDERS 2026-09-17 ("remove the other padlocks"). Its gate
+ * asks `lockedNpcIdSet`, which reads the honoured view of the lock map
+ * (domain/locksPreservation.js normalizeLocks), and that view reads no lock. Every
+ * call returns the fresh settlement by the same reference with no report. The tail
+ * below is kept, unreached, so a veto of the orders is a revert of one read.
  *
  * A full generate mints an entirely new town, and until this existed the id
  * arrays in `state.locks` were simply dropped: the user could say "keep this

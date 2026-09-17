@@ -38,7 +38,7 @@ import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab
 import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { calamityFill } from '../../src/domain/display/stateProse/generalStateProse.js';
@@ -189,13 +189,84 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       [GROUND, 'DS-GEN-12 the ground (overview.ground)'],
       [MARKET, 'DS-GEN-13 the market (overview.market)'],
       [INSTITUTIONS, 'DS-GEN-17 the roster (overview.institutions)'],
-      [HEALTH, 'DS-GEN-3 systems health (overview.systemsHealth)'],
+      // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17:
+      // that position glances, and the arm below pins its silence in the DOM.
       [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
       [WARNING, 'DS-GEN-7 the coherence warning (overview.warnings)'],
       [CONNECTION, 'DS-REL-2 the notable connection (overview.notableConnection)'],
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every Overview position draws privately and is silent on a public dossier');
+  });
+
+  test('SYSTEMS HEALTH keeps its bars and prints NO sentence list under them (owner order 2026-09-17)', () => {
+    // The owner: "Regarding the 10 different sentences, either simply pick just one or remove
+    // that entire section." The chair ruled REMOVE. The section is found by its own header, so
+    // the absence below is judged inside the section that used to print the stack.
+    const BAR_LABELS = ['Military Might', 'Monster Defense', 'Internal Security', 'Economic Resilience', 'Magical Capability', 'Food Security'];
+    const towns = [
+      SPEAKING,
+      ...[['town', 'germanic'], ['city', 'norse'], ['village', 'celtic']].map(([settType, culture], i) => (
+        generateSettlementPipeline({ settType, culture }, null, { seed: `health-stack-${i}`, customContent: {} }))),
+    ];
+    for (const town of towns) {
+      const { container } = render(e(OverviewTab, {
+        settlement: town, narrativeNote: null, onNavigateTab: () => {},
+        publicDossier: false, playerView: false, worldState: null,
+      }));
+      const header = [...container.querySelectorAll('button')].find((b) => (b.textContent || '').includes('Systems Health'));
+      expect(header, `${town.name}: the Systems Health section is gone`).toBeTruthy();
+      const host = header.closest('div');
+      const text = host.textContent || '';
+      // THE BARS AND THEIR LABELS STILL RENDER — the datum was never the stack.
+      for (const label of BAR_LABELS.slice(0, 5)) expect(text, `${town.name}: the ${label} bar is gone`).toContain(label);
+      if (town.economicState?.foodSecurity?.label) expect(text).toContain('Food Security');
+      // …AND NO SENTENCE LIST. Every DS-GEN-3 line was a <p> in this section; nothing else in
+      // it is (the caption is a div, the badge is spans), so a returning stack reds here.
+      expect(host.querySelectorAll('p').length, `${town.name}: a sentence list is back under the Systems Health bars`).toBe(0);
+      cleanup();
+    }
+    // The drawn DS-GEN-3 member SPEAKING used to print here is absent from the whole page,
+    // anchored on the bar label that sits in the same section.
+    const priv = renderTab(false);
+    expectAbsentWithAnchor(priv, HEALTH, 'Internal Security', 'DS-GEN-3 still prints under the Systems Health bars');
+  });
+
+  test('⛔ THE OVERVIEW NEVER PRINTS "NO CRISIS" BESIDE ITS OWN CRISIS BANNER (owner order 2026-09-17)', () => {
+    // The Kamalavalli contradiction: a Politically Fractured card with its ACTIVE CRISIS badge,
+    // then "There is no crisis on the books…". Driven over generated crisis towns in the DOM,
+    // with the no-crisis pool's every member filled for the town, so no wording escapes.
+    const crisisConfigs = [
+      { settType: 'village', culture: 'celtic', stressTypes: ['politically_fractured'] },
+      { settType: 'town', culture: 'germanic', stressTypes: ['famine'] },
+      { settType: 'city', culture: 'norse', stressTypes: ['famine', 'wartime'] },
+    ];
+    let judged = 0;
+    for (const [i, config] of crisisConfigs.entries()) {
+      const town = generateSettlementPipeline(config, null, { seed: `one-crisis-truth-${i}`, customContent: {} });
+      const noCrisis = poolMemberTexts({
+        leaf: 'stressors', blockId: 'DS-STR-1', poolKey: "Overview's own section framing", slots: { settlement: town.name },
+      });
+      for (const playerView of [false, true]) {
+        const text = render(e(OverviewTab, {
+          settlement: town, narrativeNote: null, onNavigateTab: () => {},
+          publicDossier: false, playerView, worldState: null,
+        })).container.textContent;
+        cleanup();
+        if (!text.includes('ACTIVE CRISIS')) continue;
+        judged += 1;
+        for (const sentence of noCrisis) {
+          expectAbsentWithAnchor(text, sentence, 'ACTIVE CRISIS', `${town.name} prints a no-crisis line beside its own crisis banner`);
+        }
+      }
+    }
+    expect(judged, 'no generated town rendered a crisis banner, so this arm judged nothing').toBeGreaterThan(0);
+    // STRUCTURAL: the Overview's crisis block does not draw the no-banner rung at all, because
+    // that block exists only when there IS a banner (R-DST-K keeps the calm town silent too).
+    const source = readFileSync(join(HERE, '../../src/components/new/tabs/OverviewTab.jsx'), 'utf8');
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '');
+    expectAbsentWithAnchor(code, 'stressorProse.crisisFraming', 'stressorProse.crisisArity',
+      'OverviewTab draws the no-crisis rung inside its crisis block again');
   });
 
   test('the gate takes the CORPUS SENTENCES ONLY — every datum on the page survives it', () => {
@@ -212,12 +283,14 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
 });
 
 describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the gate', () => {
-  test('all eight Overview positions draw through the reader, and go silent as one', () => {
+  test('the Overview positions draw through the reader, and go silent as one', () => {
     const drawn = generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
-    // Every position the desk owns speaks on this town, so the silence below is a gate
-    // rather than a town with nothing to say.
+    // Every SPEAKING position the desk owns speaks on this town, so the silence below is a
+    // gate rather than a town with nothing to say.
     expect(drawn.siteLines.length, 'ground + market + institutions').toBe(3);
-    expect(drawn.healthLines.length, 'DS-GEN-3 lenses').toBeGreaterThan(0);
+    // DS-GEN-3 GLANCES since owner order 2026-09-17: the reader draws no sentence there even
+    // privately, and the six positions around it prove the reader is live.
+    expect(drawn.healthLines, 'overview.systemsHealth glances, so no DS-GEN-3 line is drawn').toEqual([]);
     expect(drawn.originLines.length, 'DS-GEN-6 route + tier overlay').toBe(2);
     expect(drawn.warningLines.length, 'DS-GEN-7').toBeGreaterThan(0);
     expect(drawn.conflictLines.filter(Boolean).length, 'DS-GEN-2').toBe(1);

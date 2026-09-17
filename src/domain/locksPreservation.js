@@ -25,34 +25,47 @@
  * ADD survivors; they can never perturb a seeded draw, because every one of these
  * functions runs over a FINISHED roll.
  *
- * ── WHAT THIS HONESTLY DOES (Phase A + Phase B, both built) ─────────────────
+ * ── WHAT THIS DOES TODAY: NOTHING IS HONOURED (owner orders 2026-09-17) ─────
  *
- * Section rerolls honour every lock: a locked section refuses to roll, locked NPC
- * ids survive an npcs reroll, and the lock follows the id its subject inherits.
+ * EVERY LOCK KIND IS RETIRED. The owner first ordered the "What a new roll keeps"
+ * section removed with every button that served it ("Keep the name", "Keep this
+ * ground", "Keep them in power", "Clear all locks"), and then, the same day, "remove
+ * the other padlocks": the NPCs tab's "Keep these people", the History tab's "Keep
+ * this history" and the per-character padlock on the roster rows ("Lock this person
+ * so they stay through any new roll"). With no control left to see, set or clear a
+ * lock, a stored lock must not keep acting, so `normalizeLocks` below, the one read
+ * every predicate here flows through, reads NOTHING: `sectionLocked` never refuses,
+ * `lockedNpcIdSet` is always empty, `carryLockedSections` never carries history, and
+ * the full-generate roster carry (`carryLockedRosterThroughGenerate` in
+ * generators/generateSettlementPipeline.js) sits at its dormancy gate. The world
+ * keys (`identity`, `geography`, the name-keyed seat array) went first; `npcs` and
+ * `history` followed.
  *
- * A FULL regenerate honours the identity, geography and history booleans, AND —
- * Phase B — carries the locked characters bodily into the new town. The tail that
- * does it lives in generators/generateSettlementPipeline.js
- * (`carryLockedRosterThroughGenerate`) because it needs the displacement /
- * prose-repair / projection-refresh / faction-relink machinery the section reroll
- * already runs; this leaf owns only what happens to the MAP afterwards.
+ * ⚠ STORED DATA IS NOT PRUNED. A save's `campaignState.locks` still round-trips
+ * through hydrate, pickle and persist byte for byte, because pruning a persisted key
+ * is a migration (owner-gated) and because a veto of the orders restores the
+ * controls with a user's old locks intact. The id ALGEBRA below (`remapNpcLocks`,
+ * `locksAfterFullGenerate`) is kept too and reads the RAW map, not the honoured
+ * view: `remapNpcLocks` is also the pin remap's algebra (store
+ * `remapPinnedNpcsAfterRegen` wraps `aiData.pinnedNpcs` as `{ npcs }`), and a stored
+ * id that follows an authored keeper to its new slot is what keeps that data true
+ * for the veto. After a FULL generate the new draft's inherited `npcs` ids are
+ * dropped by the existing stale-id rule (nothing was carried, so every id names a
+ * stranger); the saved row the draft came from is never written by a generate.
  *
- * The three id arrays split by how they identify their subject, and the split is
- * the whole design:
+ * WHAT THE ENGINE KEPT, dormant (Phase A + Phase B were built and are unreached):
+ * the section refusal, the id survival through a roster reroll, the history carry
+ * and the full-generate roster carry. They stay in code so a veto is a revert of the
+ * read, not a rebuild.
  *
- *   • `npcs` is POSITIONAL-ID-keyed. A full roll re-issues npc_1..npc_N to
- *     strangers, so a locked id is meaningless unless the carry tells us which
- *     fresh slot its subject landed on. Remapped by the preservation report;
- *     an id the report does not mention is DROPPED.
- *   • `factions` is NAME-keyed — power factions carry no id at all, and the one
- *     consumer that exists (worldPulse/coup.js `lockedGoverningFaction`) matches
- *     on the stable part of the NAME, tolerating a `faction.` prefix. A name
- *     cannot misbind across a roll: it either names a same-named entity in the
- *     new town or it names nothing. So it is KEPT VERBATIM as standing intent.
- *     Dropping it, which is what this function used to do, silently disarmed the
- *     coup shield on every full regenerate.
+ * `npcs` is POSITIONAL-ID-keyed. A full roll re-issues npc_1..npc_N to strangers,
+ * so a stored id is meaningless unless a carry tells us which fresh slot its
+ * subject landed on. Remapped by the preservation report; an id the report does
+ * not mention is DROPPED.
  *
- * ⛔ THERE IS NO INSTITUTIONS LOCK, AND ITS ABSENCE IS THE FINDING. This module
+ * ⛔ THERE IS NO INSTITUTIONS LOCK, AND ITS ABSENCE IS THE FINDING. (Written
+ * 2026-08-11, when the seat lock was still read; since 2026-09-17 no key is read and
+ * the store's `setLock` writer is retired with its last control.) This module
  * used to normalize a third name-keyed array beside `factions`. It was dead on
  * EVERY end simultaneously: no UI ever offered it (setLock is called with exactly
  * FIVE keys — identity, geography, factions, npcs, history — and NEVER with
@@ -98,16 +111,6 @@ import { deepClone } from './clone.js';
 /** The sections a whole-section lock can name. */
 export const LOCKABLE_SECTIONS = Object.freeze(['npcs', 'history']);
 
-/** The config keys that DETERMINE geography, carried verbatim by a geography lock.
- *
- *  Verbatim, not through resolveTerrain: the resolver collapses the chain to one
- *  answer and drops the 'auto' sentinel, but a geography lock must reproduce the
- *  GENERATION INPUT, and 'auto' is a real input the wizard writes. Carrying the
- *  raw keys is what makes "same seed + same locks ⇒ same world" hold. */
-const GEOGRAPHY_CONFIG_KEYS = Object.freeze([
-  'terrainType', 'terrainOverride', 'terrain', 'tradeRouteAccess',
-]);
-
 /** @param {unknown} value @returns {string[]} */
 function idArray(value) {
   if (!Array.isArray(value)) return [];
@@ -121,41 +124,40 @@ function idArray(value) {
 
 /**
  * @typedef {Object} NormalizedLocks
- * @property {boolean} identity
- * @property {boolean} geography
  * @property {boolean} history      whole-section lock on the history reroll
  * @property {boolean} npcsSection  `npcs: true` — the whole roster is frozen
  * @property {string[]} npcs        specific NPC ids to carry through a roster reroll
- * @property {string[]} factions    NAME-keyed; the coup shield's standing intent
  */
 
 /**
- * Read a sparse, user-written lock map into a total, tolerant shape.
+ * The HONOURED view of a stored lock map: what generation, rerolls and the
+ * simulation may act on.
  *
- * Tolerant on purpose: this map round-trips through saves written by every
- * version of the app, so an unknown key, a string where an array belongs, or a
- * boolean where ids belong must degrade to "not locked" rather than throw inside
- * a reroll. `npcs` accepts BOTH forms — `true` freezes the section, an array
- * names individuals.
+ * ⛔ THE CHOKEPOINT, AND IT READS NOTHING (owner orders 2026-09-17). Every lock kind
+ * is retired: the world keys with the "What a new roll keeps" section, and `npcs`
+ * (the whole-roster boolean and the per-character id list) and `history` with the
+ * last padlocks. A save may still carry any of them; none is read here, so no
+ * predicate, carry or refusal can act on one. The map is accepted and ignored rather
+ * than dropped from the signature so every caller keeps its one read seat, and a
+ * veto restores the reads in this one function. See the header.
  *
- * @param {Record<string, unknown>|null|undefined} locks
+ * (Before the orders this was the tolerant reader: `history === true`, `npcs === true`
+ * for the whole roster, and `npcs` as an array naming individuals.)
+ *
+ * @param {Record<string, unknown>|null|undefined} _locks  the stored map, deliberately unread
  * @returns {NormalizedLocks}
  */
-export function normalizeLocks(locks) {
-  const l = locks && typeof locks === 'object' ? locks : {};
+export function normalizeLocks(_locks) {
   return {
-    identity:     l.identity === true,
-    geography:    l.geography === true,
-    history:      l.history === true,
-    npcsSection:  l.npcs === true,
-    npcs:         idArray(l.npcs),
-    factions:     idArray(l.factions),
+    history:      false,
+    npcsSection:  false,
+    npcs:         [],
   };
 }
 
 /**
- * The NPC ids a roster reroll must carry. Empty when nothing is locked, when the
- * whole section is locked (that reroll refuses instead), or when the map is absent.
+ * The NPC ids a roster reroll must carry. ALWAYS EMPTY since owner orders
+ * 2026-09-17 retired the per-character padlock (it reads the honoured view).
  * @param {Record<string, unknown>|null|undefined} locks
  * @returns {Set<string>}
  */
@@ -164,7 +166,8 @@ export function lockedNpcIdSet(locks) {
 }
 
 /**
- * Does a whole-section lock forbid rerolling this section?
+ * Does a whole-section lock forbid rerolling this section? ALWAYS NO since owner
+ * orders 2026-09-17 retired "Keep these people" and "Keep this history".
  * @param {Record<string, unknown>|null|undefined} locks
  * @param {string} section  'npcs' | 'history'
  * @returns {boolean}
@@ -177,11 +180,14 @@ export function sectionLocked(locks, section) {
 }
 
 /**
- * Carry the locked-identity and locked-history parts of the PREVIOUS settlement
- * over a freshly generated one.
+ * Carry the locked-history part of the PREVIOUS settlement over a freshly
+ * generated one. (It carried a locked NAME too until owner order 2026-09-17
+ * retired the world locks; a stored `identity: true` no longer renames anything.
+ * Since the same day's "remove the other padlocks" a stored `history: true` carries
+ * nothing either: the honoured view reads no lock, so this is always dormant.)
  *
  * Post-hoc by construction: the roll is already finished, so this cannot perturb
- * it. Returns `fresh` UNCHANGED (same reference) when neither lock is set, which
+ * it. Returns `fresh` UNCHANGED (same reference) when the lock is not set, which
  * is the dormant path every unlocked generation takes.
  *
  * `history` is carried whole. It is the section the user froze, and its parts
@@ -195,50 +201,22 @@ export function sectionLocked(locks, section) {
  * @returns {S}
  */
 export function carryLockedSections(locks, prev, fresh) {
-  const n = normalizeLocks(locks);
-  const wantsIdentity = n.identity && !!prev?.name;
-  const wantsHistory = n.history && prev?.history != null;
-  if (!fresh || (!wantsIdentity && !wantsHistory)) return fresh;
+  const wantsHistory = normalizeLocks(locks).history && prev?.history != null;
+  if (!fresh || !wantsHistory) return fresh;
   const next = /** @type {S} */ ({ ...fresh });
   // Write through an unknown-record view: assigning onto a bare generic's
   // properties is a strict error, and the value types are the caller's own.
   const writable = /** @type {Record<string, unknown>} */ (next);
-  if (wantsIdentity) writable.name = prev.name;
-  if (wantsHistory) writable.history = deepClone(prev.history);
+  writable.history = deepClone(prev.history);
   return next;
 }
 
 /**
- * Overlay the geography-determining config keys of the PREVIOUS settlement onto
- * the config a full generation is about to run with.
- *
- * A geography lock is the one lock that is a generation INPUT rather than a
- * post-hoc carry: terrain and trade access are drawn early and everything
- * downstream (food balance, defense, the town map) is conditioned on them, so
- * "keep the geography" can only mean "roll the same ground again". Under THE
- * PROMISE this stays deterministic — same seed + same config + same locks is the
- * same world; a DIFFERENT config legitimately gives a different one.
- *
- * Returns `config` UNCHANGED (same reference) when geography is unlocked or the
- * previous settlement carries none of these keys.
- *
- * @template {Record<string, any>} C
- * @param {Record<string, unknown>|null|undefined} locks
- * @param {{ config?: Record<string, unknown>|null }|null|undefined} prev
- * @param {C} config
- * @returns {C}
+ * ⛔ `geographyLockedConfig` IS RETIRED (owner order 2026-09-17). It overlaid the
+ * previous settlement's terrain and trade-access config keys onto a full generation
+ * when `geography: true` was stored. That key was written only by the removed "Keep
+ * this ground" button, so a full generate now rolls from its own config alone.
  */
-export function geographyLockedConfig(locks, prev, config) {
-  if (!normalizeLocks(locks).geography || !config) return config;
-  const prevConfig = prev?.config;
-  if (!prevConfig || typeof prevConfig !== 'object') return config;
-  /** @type {Record<string, unknown>} */
-  const overlay = {};
-  for (const key of GEOGRAPHY_CONFIG_KEYS) {
-    if (prevConfig[key] !== undefined && prevConfig[key] !== config[key]) overlay[key] = prevConfig[key];
-  }
-  return Object.keys(overlay).length === 0 ? config : /** @type {C} */ ({ ...config, ...overlay });
-}
 
 /**
  * THE ID REMAP — the lifecycle step that keeps a lock alive through its own
@@ -265,7 +243,10 @@ export function geographyLockedConfig(locks, prev, config) {
  * @returns {L}
  */
 export function remapNpcLocks(locks, preservedEntries) {
-  const locked = normalizeLocks(locks).npcs;
+  // The RAW id list, not the honoured view: this is data maintenance (and the pin
+  // remap's algebra), not a lock acting. See the header.
+  const raw = locks && typeof locks === 'object' ? /** @type {Record<string, unknown>} */ (locks).npcs : undefined;
+  const locked = idArray(raw);
   if (locked.length === 0 || !Array.isArray(preservedEntries) || preservedEntries.length === 0) return locks;
   /** @type {Map<string, string>} */
   const moved = new Map();
@@ -286,10 +267,9 @@ export function remapNpcLocks(locks, preservedEntries) {
 /**
  * The lock map that survives a FULL regenerate (locks engine Phase B).
  *
- * The booleans are statements about the settlement — its identity, its ground,
- * its past — and remain meaningful across a fresh roll, so they are untouched.
- * The name-keyed `factions` array is a statement about names and is kept
- * verbatim. Only `npcs` needs work, because only `npcs` is keyed on ids a
+ * The booleans are statements about the settlement (its past, and any retired
+ * world-lock key a save still carries) and are untouched: every key but `npcs` is
+ * spread through verbatim. Only `npcs` needs work, because only `npcs` is keyed on ids a
  * full roll has just reissued: each locked id becomes the id its subject INHERITED
  * in the new town, and a locked id the carry did not preserve is dropped. The
  * header explains why that drop diverges from remapNpcLocks' leave-it-alone rule.

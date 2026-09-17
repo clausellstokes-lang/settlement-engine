@@ -21,8 +21,9 @@ const CANON = ['applyEvent', 'undoLastEvent', 'recordSnapshot', 'revertToSnapsho
 
 describe('Operation envelope (operations.js)', () => {
   test('makeOperation fills the silent default envelope', () => {
-    expect(makeOperation('setLock')).toEqual({
-      opType: 'setLock',
+    // (This arm named `setLock` until owner order 2026-09-17 retired the lock writers.)
+    expect(makeOperation('markExported')).toEqual({
+      opType: 'markExported',
       targets: {},
       params: {},
       provenance: 'manual',

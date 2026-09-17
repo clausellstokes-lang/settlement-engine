@@ -259,7 +259,7 @@ function FaithTeaser({ publicDossier }) {
             size="sm"
             disabled={!purchasesAreOpen}
             onClick={onUpsell}
-            style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, justifyContent: 'flex-start' }}
+            style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, justifyContent: 'flex-start', ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}
           >
             Awaken the pantheon →
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}

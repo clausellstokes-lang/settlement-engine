@@ -44,7 +44,7 @@ import {
 } from '../lib/generationProtocol.js';
 import { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
 import {
-  carryLockedSections, geographyLockedConfig, remapLocksAfterGenerate,
+  carryLockedSections, remapLocksAfterGenerate,
 } from './settlementSliceHelpers.js';
 // ⛔ THE CREATE BOUNDARY IS IMPORTED DIRECTLY, NOT THROUGH THE HELPERS LEAF, AND
 // THAT EDGE IS A FIRST-PAINT MEASUREMENT. `settlementSliceHelpers.js` is EAGER;
@@ -151,7 +151,9 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // tests/generators/configPatchAllowlistWalker.test.js records as a product call.
   const birthInputs = { ...config };
   delete birthInputs.seed;
-  const fullConfig = geographyLockedConfig(state.locks, state.settlement, birthConfig({
+  // (No geography-lock overlay since owner order 2026-09-17 retired the world locks: a
+  // stored `geography: true` no longer re-rolls the previous town's ground.)
+  const fullConfig = birthConfig({
     ...birthInputs,
     _institutionToggles: institutionToggles,
     _categoryToggles:    categoryToggles,
@@ -162,7 +164,7 @@ export async function generateSettlementAction(set, get, seedOverride) {
     // flat 50s — and never writes the rolls back into the stored config.
     ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
-  }));
+  });
 
   const contentRuntimeOptions = await loadSettlementContentRuntimeOptions(state);
   // THE CREATE BOUNDARY'S OTHER HALF (see `loadGenerationLawPayloads`). The
@@ -263,10 +265,15 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // module and leaving it on main would make every first generate fetch the
   // engine chunk here. `_preservation` is the out-of-band report that lets the
   // lock map follow them; it crosses the boundary as plain data and never
-  // enters the settlement blob. Phase A — identity (the name) and history (the
-  // whole section the user froze) are carried across, below.
+  // enters the settlement blob. Phase A — history (the whole section the user froze)
+  // is carried across, below. (The name carry was retired with the world locks by
+  // owner order 2026-09-17.)
+  // ⛔ Both halves are DORMANT since owner orders 2026-09-17 retired every lock
+  // control: the honoured lock view reads nothing (domain/locksPreservation.js
+  // normalizeLocks), so no character and no history is carried, and the map tail
+  // only drops the stale `npcs` ids the new town cannot hold.
   // The carry ignores activeSaveId on purpose: a lock is the user's standing
-  // instruction about what to keep, and Phase A's name/history carry has
+  // instruction about what to keep, and Phase A's history carry has
   // always crossed that boundary. Only the campaign-layer condition carry
   // below is guarded, because those belong to a save, not to an intent.
   const locked = carryLockedSections(state.locks, state.settlement, withRoster);
@@ -301,8 +308,8 @@ export async function generateSettlementAction(set, get, seedOverride) {
       resetSettlementIdentity(state);
       // LOCKS ENGINE Phase B — rewrite the map to the world that now exists:
       // each locked NPC id becomes the id its subject inherited in the carry
-      // above, an id nothing preserved is pruned, and the name-keyed faction /
-      // institution arrays and the booleans are kept. Run inside the same set()
+      // above, an id nothing preserved is pruned, and every other key is kept
+      // verbatim. Run inside the same set()
       // that folds the settlement in, so the map and the roster can never
       // disagree. See domain/locksPreservation.js for the identity split.
       remapLocksAfterGenerate(state, _preservation);

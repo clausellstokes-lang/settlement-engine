@@ -44,23 +44,14 @@ const PRIMARY_STRESS_PRECEDENCE = [
   'slave_revolt',
 ];
 
-const MONSTER_THREAT_ANNOTATION_MARKERS = [
-  'tense',
-  'unstable',
-  'fragile',
-  'rigid',
-  'vulnerable',
-  'enforced',
-  'desperate',
-  'anxious',
-  'volatile',
-  'shaken',
-  'suppressed',
-  'fractured',
-  'critical',
-  'strained',
-  'ordered',
-];
+// Every STABILITY_BANDS word but `Stable` — the labels that already express
+// pressure, so the plagued annotation rides them instead of replacing them. ⛔ ONE ALTERNATION,
+// NOT AN ARRAY OF FIFTEEN `.includes` PROBES: the two forms match identically (an unanchored
+// substring test either way, the sole reader is annotateMonsterThreat, and the constant is
+// module-private), and the array cost the GENERATION WORKER bytes it does not have — its
+// ceiling is 1,404,493 B and never rises. Measured, not assumed; see the receipts in
+// docs/FIRST_CONTACT_BACKLOG.md under DOSSIER AND REALM POLISH, part 4.
+const MONSTER_THREAT_ANNOTATION_MARKERS = /tense|unstable|fragile|rigid|vulnerable|enforced|desperate|anxious|volatile|shaken|suppressed|fractured|critical|strained|ordered/i;
 
 const FORMAL_AUTHORITY_LABELS = new Set([
   'Elected Reeve',
@@ -280,9 +271,9 @@ const deriveBaselineStability = ({
 };
 
 /**
- * Active settlement stressors override the baseline in a fixed public-severity
- * order. `infiltrated` is intentionally an identity case: infiltration changes
- * the vignette but is not necessarily publicly visible enough to relabel order.
+ * Active settlement stressors override the baseline in a fixed public-severity order, the six
+ * arms at the tail included. NO STRESSOR FALLS THROUGH TO THE BARE BASELINE: all fifteen draw
+ * an ACTIVE CRISIS card, so a fall-through read `Stable` beside a crisis.
  */
 const applyStressStability = (baselineStability, hasStress) => {
   if (hasStress('under_siege')) {
@@ -306,7 +297,6 @@ const applyStressStability = (baselineStability, hasStress) => {
   if (hasStress('succession_void')) {
     return 'Volatile — power is available to whoever moves first';
   }
-  if (hasStress('infiltrated')) return baselineStability;
   if (hasStress('indebted')) {
     return baselineStability.includes('Unstable')
       ? baselineStability
@@ -318,6 +308,13 @@ const applyStressStability = (baselineStability, hasStress) => {
   ) {
     return 'Tense (monster pressure from surrounding region)';
   }
+  // ⛔ THE SIX NO-FALL-THROUGH ARMS (owner order 2026-09-17, "fix the remaining contradictions"; the argument, the measurement and the JUDGMENT on these words are in docs/FIRST_CONTACT_BACKLOG.md under DOSSIER AND REALM POLISH, part 3 (C) and part 4). Before them a town under one of these six read the baseline `Stable` beside its own ACTIVE CRISIS banner. Band words are the producer's own vocabulary; the order is PRIMARY_STRESS_PRECEDENCE's, so `infiltrated` is LAST and every public crisis beside it still names itself.
+  if (hasStress('insurgency')) return 'Unstable (insurgency contests authority)';
+  if (hasStress('mass_migration')) return 'Strained (people arriving or leaving)';
+  if (hasStress('wartime')) return 'Tense (requisition and conscription)';
+  if (hasStress('religious_conversion')) return 'Tense (the creed is contested)';
+  if (hasStress('slave_revolt')) return 'Unstable (revolt not contained)';
+  if (hasStress('infiltrated')) return baselineStability.startsWith('Stable') ? 'Vulnerable (decisions shaped from outside)' : baselineStability;
   return baselineStability;
 };
 
@@ -328,10 +325,7 @@ const applyStressStability = (baselineStability, hasStress) => {
  */
 const annotateMonsterThreat = (stability, monsterThreat) => {
   if (monsterThreat !== 'plagued') return stability;
-  const normalizedStability = stability.toLowerCase();
-  const alreadyExpressesPressure = MONSTER_THREAT_ANNOTATION_MARKERS.some(
-    marker => normalizedStability.includes(marker),
-  );
+  const alreadyExpressesPressure = MONSTER_THREAT_ANNOTATION_MARKERS.test(stability);
   return alreadyExpressesPressure
     ? `${stability}; monster threat active`
     : 'Tense — regional monster threat';

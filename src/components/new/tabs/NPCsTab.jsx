@@ -13,7 +13,6 @@ import {NarrativeNote} from '../NarrativeNote';
 import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
-import LockControls from '../../dossier/LockControls.jsx';
 
 export function NPCsTab({
   npcs,
@@ -100,17 +99,16 @@ export function NPCsTab({
             {pinnedCount} PINNED
           </span>
         )}
-        {/* The Reroll button lives INSIDE LockControls: a locked roster must never
-            render an armed Reroll, and the only way to guarantee that is to let the
-            lock own the button. This control is the WHOLE-SECTION lock (the boolean
-            form of locks.npcs). Per-CHARACTER locks (the id-array form of the same
-            key, read by domain/locksPreservation.js) are now on the roster rows
-            themselves — see NPC_LOCK_COPY in ../npcComponents.jsx. The question that
-            held that back was whether a second row toggle would blur into Pin, which
-            makes a DIFFERENT promise; the answer was to separate them by glyph,
-            colour and sentence (a bronze padlock keeping the PERSON through a
-            reroll, beside a purple pin keeping the PROSE from the AI). */}
-        <LockControls scope="npcs" onReroll={onRerollNPCs} style={{flexShrink:0}} />
+        {/* THE PADLOCKS ARE GONE (owner order 2026-09-17, "remove the other padlocks").
+            This Reroll used to live inside LockControls beside "Keep these people", and
+            each roster row carried a padlock; both are removed, and a lock a save still
+            stores is not read (domain/locksPreservation.js normalizeLocks). The Reroll
+            itself stays, offered only to a viewer who may roll the roster. */}
+        {onRerollNPCs && (
+          <Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>
+            ↺ Reroll
+          </Button>
+        )}
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}

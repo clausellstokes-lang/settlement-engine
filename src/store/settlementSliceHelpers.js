@@ -35,7 +35,7 @@ export { persistSaveUpdate } from './campaignSliceShared.js';
 // The LOCKS ENGINE read side (domain/locksPreservation.js), re-exported through this
 // leaf so settlementSlice keeps its single helper import home and gains no new static
 // import of its own — the eager-closure rule the lock leaf's header explains.
-export { sectionLocked, carryLockedSections, geographyLockedConfig } from '../domain/locksPreservation.js';
+export { sectionLocked, carryLockedSections } from '../domain/locksPreservation.js';
 // ⛔ THE CREATE BOUNDARY (ODQ §822) IS NOT RE-EXPORTED HERE ANY MORE, AND THE
 // REASON IS THE ONE THE `loadSettlementContentRuntimeOptions` NOTE ABOVE GIVES.
 // This leaf is EAGER, and the re-export was this file's SOLE static edge into
@@ -554,8 +554,8 @@ export function foldRegeneratedRoster(get, set, parts, preservation) {
  * The engine's `carryLockedRosterThroughGenerate` has already carried the locked
  * characters bodily into the new town and reported which fresh slot each one
  * landed on. This rewrites the map to match: locked NPC ids become the ids their
- * subjects inherited, a locked id nothing preserved is pruned, and the name-keyed
- * faction / institution arrays plus every boolean are kept. Dormant by
+ * subjects inherited, a locked id nothing preserved is pruned, and every other key
+ * (the booleans, and any retired key an old save still carries) is kept verbatim. Dormant by
  * construction — an untouched map is never written back to the draft.
  *
  * This helper takes the REPORT, never the engine: settlementSliceHelpers must stay
@@ -571,35 +571,11 @@ export function remapLocksAfterGenerate(state, preservation) {
 }
 
 /**
- * THE LOCK PERSIST (locks engine Phase A, lifecycle: PERSIST).
- *
- * Before this, `state.locks` was durable ONLY BY PIGGYBACK: it rides inside
- * `campaignState`, so it reached the cloud whenever some OTHER canon-path write
- * happened to pickle the slice, and a session that set a lock and then reloaded
- * lost it. setLock/clearLocks now adopt regenSection's own persist pattern
- * (settlementSlice regenSection tail): stamp editedAt, update the in-memory save
- * entry, and durably write the re-derived campaignState.
- *
- * `campaignState` and `timestamp` are already in SAVED_SETTLEMENT_PATCH_KEYS above,
- * so this widens no allowlist. No settlement blob is written — a lock is intent
- * ABOUT the settlement, not a change to it.
- *
- * @param {() => any} get
- * @param {(fn: (draft: any) => void) => void} set
- * @returns {Promise<boolean>|undefined} the persist promise when there was a save to write
+ * ⛔ THE LOCK PERSIST (`persistLocksToActiveSave`) IS RETIRED with its only caller, the
+ * store's `setLock`, whose last controls (the NPCs and History section locks and the
+ * roster-row padlock) the owner ordered removed on 2026-09-17. A save's stored lock
+ * map still rides every other campaignState write through `pickleCampaignState`.
  */
-export function persistLocksToActiveSave(get, set) {
-  const saveId = get().activeSaveId;
-  if (!saveId) return undefined;
-  const now = new Date().toISOString();
-  set(s => { s.editedAt = now; });
-  const after = get();
-  const campaignState = pickleCampaignState(after, { now });
-  if (typeof after.updateSavedSettlement === 'function') {
-    after.updateSavedSettlement(saveId, { campaignState, timestamp: now });
-  }
-  return persistSaveUpdate(saveId, { campaignState });
-}
 
 export function computePendingSuccession(settlement, event) {
   if (event?.type !== 'KILL_NPC') return null;

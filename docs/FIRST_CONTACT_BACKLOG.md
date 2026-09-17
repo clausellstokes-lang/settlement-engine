@@ -158,7 +158,7 @@ bible mandates the swap.)*
 > | LD-5 | 🔶 OPEN (chrome only) | the Account deep-links (`?section=`) and all three About routes are LANDED by other lanes — LD-5's remaining work is the MENU LAYER, nothing else. ⚠️ the Messages amendment binds |
 > | LD-6 | ⛔ OPEN, **OWNER-GATED** | no `annual` anywhere in `config/pricing.js` or `services/stripe.js`; W-1's annual credit CADENCE is routed to the owner (`cca61099`) and item 7 says the toggle does not ship until it is ruled |
 > | LD-7 | 🔶 OPEN | no moment-scope registry exists; `PricingMomentCard` still mounts at App level (`App.jsx:74`) off a flag no route change clears — the reported bug is live |
-> | LD-8 | 🔶 OPEN | orders 1+2 are deletions (`GenerateWizard.jsx:518` top `PipelineRail`, `:484` `LockControls`); order 3 is the `scroll-padding-top`/`scroll-margin-top` cure from `CHROME` |
+> | LD-8 | 🔶 OPEN (order 3 only) | orders 1+2 are deletions (`GenerateWizard.jsx:518` top `PipelineRail`, `:484` `LockControls`); order 3 is the `scroll-padding-top`/`scroll-margin-top` cure from `CHROME`. **Order 2 CLOSED 2026-09-17** by the owner's second order (see DOSSIER AND REALM POLISH, Order 3): the whole "What a new roll keeps" section is removed and its stored keys no longer act. Order 1's top receipts panel was deleted by §767.2/§777 (`GenerateWizard.jsx` records it; `tests/components/createWorkflowRail.test.jsx` pins it) |
 > | LD-9 | ✅ BUILT (Lane C) | the About split landed; §4 (the dropdown) belongs to LD-5 |
 > | LD-10 | 🔶 OPEN | `PrivacySettings.jsx:187` still reads "Off by default." and the market toggle is still opt-IN |
 > | LD-11 | 🔶 OPEN | no reset map on the route registry; no `resetSection` anywhere in `src/` |
@@ -1447,6 +1447,1125 @@ register row added. `tests/lint/writerReach.walker.test.js`: 56 passed (56).
   "Building interiors" (`src/copy/pricingPage.js`), the interior engine and viewer, the map
   style registry `src/design/townMapStyles.js`, and the Command Palette's "Map lens" hint
   (realm-map overlay toggles, not the Compendium).
+
+---
+
+## DOSSIER AND REALM POLISH (owner orders 2026-09-17)
+
+**The orders (owner, 2026-09-17, after reviewing screenshots of a freshly forged dossier for
+Kamalavalli, the Realm page and Pricing):**
+1. "Fix the contradiction."
+2. "The herald should only appear after the first advanced time on the map."
+3. "Remove the entire section that says what a new roll keeps and any button associated with
+   that."
+4. "Fix the small visual defects."
+5. (later the same day, over a screenshot of Systems Health) "Regarding the 10 different
+   sentences, either simply pick just one or remove that entire section. Any of those pieces
+   should live somewhere else instead and we'll figure that out later, but not altogether like
+   it does right now."
+
+The chair split the work in two parts on one worktree (`arrow-header-2026-09-16`, base
+`a62dcbb90`). Part 1 carries orders 1, 3 and 5 and records them below; part 2 carries orders 2
+and 4 and records them in its own subsections. Everything is uncommitted at hand-off; the chair
+commits.
+
+### Order 1: the contradiction (part 1)
+
+**The chair's ruling (vetoable).** Fix it at the chokepoint so every surface that states crisis
+status agrees with the active-crisis set the banner shows. Prefer correcting the prose rule's
+predicate over hiding a line. Search for sibling contradictions of the same shape and fix every
+instance found. Declare the output shift and move prose, golden or corpus pins only with that
+stated cause, regenerating generated corpora with their own generators.
+
+**The cause.** On the Overview one array (`settlement.stress[]`, normalized in
+`OverviewTab.jsx`) feeds both the ACTIVE CRISIS cards and the stressor desk. The desk's
+`crisisFramingPoolKey` returned the DS-STR-1 pool keyed "Overview's own section framing" when
+that array was NOT empty. That pool is the annex's **ARITY, no banner** pool (R-DST-K gated):
+all three of its wordings say the town has no crisis ("There is no crisis on the books…"). The
+projection had keyed it by a bold span on a hard-wrapped line of the pool's own note, and DESK
+CAR 10 (`fa5696675`, 2026-09-04) read the key literally as "the crisis section's framing" and
+fired it whenever a banner showed. So every crisis town printed "no crisis" directly under its
+crisis card, which is the Kamalavalli screenshot.
+
+**What changed.**
+- `src/domain/display/stateProse/stressorsStateProse.js`: `crisisFramingPoolKey` now returns
+  the pool only when the banner reading is a real, EMPTY array; a missing reading is silence.
+  The pool key string is unchanged, so the draw hash and the census rows do not move.
+- `src/components/new/tabs/OverviewTab.jsx`: the crisis block no longer draws that rung at all.
+  The block exists only when there is a banner, so the no-banner line can never be true there;
+  on a calm town the rung is composed and not rendered, which is what R-DST-K asks.
+- THE SIBLING, FIXED: DS-STR-1 **INFILTRATED** wording 3 printed "There is no visible crisis."
+  inside the INFILTRATED card under its ACTIVE CRISIS badge. The annex line
+  (`docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`) now reads "The crisis is out of sight. The
+  pattern is legible only to whoever is counting the coincidences." The claim is kept (the
+  crisis exists and is hidden); only the denial is gone. JUDGMENT: the replacement wording was
+  chosen byte-for-byte the same length so the prose byte ratchet has nothing to bank; say "veto"
+  to reword it. Regenerated with `node scripts/generate-dossier-state-prose.mjs` (one line of
+  `stressors.generated.js` moved). The move-grammar sweep over `### DS-STR-` against the base
+  reports 1 changed unit, 1 shift (ABSENCE+PRESENT to PRESENT, order none to V1) and 0 LEVEL1
+  orders lost on spines. The shift is the cure: the ABSENCE move was the denial, and the old
+  unit held no LEVEL1 order because ABSENCE opened it. The chair's corpus-gate ritual should
+  still read this one unit.
+- Tests: `tests/domain/stressorsStateProseDesk.test.js` (the predicate arm inverted; a
+  generated-town arm proving the no-crisis rung is present if and only if the banner list is
+  empty; a banner-pool arm refusing any crisis wording that denies its crisis);
+  `tests/ui/generalDeskTabFlow.test.js` (a DOM arm over generated crisis towns, DM and player,
+  that no no-crisis wording renders beside ACTIVE CRISIS, plus a source pin that the crisis
+  block does not draw the rung). Each was run against the base sources and went red.
+
+**Declared output shift.** Rendered: every settlement with at least one `stress[]` entry loses
+exactly one italic sentence under its crisis cards on the Overview, in both the DM and the
+player view; INFILTRATED towns that drew wording 3 read the new sentence. Calm towns, the DM
+Summary, the PDF and public gallery dossiers (which never drew the line) are unchanged.
+Generation, the simulation and the generator golden are unchanged. Composed (not rendered): the
+no-banner rung now composes on calm towns instead of crisis towns, so the DRIFT manifest moved
+on all 1,050 of 1,050 rows: golden-master-v3 72,108 to 71,076 cells (516 crisis towns times 2
+audiences lose the cell) and gm-seed-a/b/c 394/390/392 to 400/396/398 (three calm towns times 2
+gain it), 73,284 to 72,270 cells in all. No DRIFT town draws INFILTRATED wording 3, so the
+corpus edit moved no row.
+
+**Pins moved, each with the cause above.** `tests/fixtures/dossier-prose-manifest-golden.json`
+re-recorded by its own recorder (`node scripts/prose-manifest-cells.mjs --record`); the FOUR
+SEEDS tally in `tests/property/dossierProseManifest.test.js` restated with the cause in a
+comment; `docs/content/wiring-census.json` re-stamped (`node scripts/wiring-census.mjs`; 0 rows
+moved, the stamps of `stressorsStateProse.js` and `dossierMounts.js` only).
+
+**⛔ OWED TO THE PEN, NOT TO A LANE.** The DRIFT manifest is FROZEN in
+`tests/fixtures/.golden-freeze-register.json` (row `dossier-prose-manifest`, ownerRow §901, the
+2026-09-16 genesis). `tests/lint/goldenFreeze.walker.test.js` arm 1 is therefore red on its
+sha256 (`a64b9a75…` to `70607daf…`). A re-record of a frozen surface is OWNER-signed
+(`goldenRecordDoor.js` ACTIONS), and this surface has NO capture arm through the door
+(`recordEnv: null`; the recorder's `--record` comment still describes the unfrozen register),
+so the lawful path is a signed shift record under `docs/shift-records/` plus a door write for
+this surface, from a committed tree. The register row was NOT touched. If the signature is not
+wanted, the fallback that keeps the owner's page fix without moving the golden is: restore the
+base predicate in `stressorsStateProse.js`, restore the base fixture, tally and stressor
+desk test, re-stamp the census, and keep the `OverviewTab.jsx` change and the DOM pin (the page
+then never renders the rung, but the desk's own contract stays inverted). Executed on a scratch
+clone of this change: the stressor desk test, the prose manifest, the golden-freeze walker and
+the general desk DOM flow all pass (4 files, 152 tests). The banner-denial arm for INFILTRATED
+does not depend on the predicate and should be carried over if this fallback is taken.
+
+**Siblings reported, not fixed.**
+- Insurgency, slave revolt, religious conversion, wartime and mass migration towns can keep
+  `powerStructure.stability: Stable` (`generators/power/governanceNarrative.js`
+  `applyStressStability` has no arm for them; code read, and the survey measured 19 of 42
+  insurgency towns Stable), so the Power tab says the hall is settled beside a crisis banner.
+  That is the generator, and the simulation programme is paused.
+- The War tab's dormant note or "at peace" fallback on a campaign whose world has no war beat
+  while the town carries a WARTIME or UNDER SIEGE stress. Campaign-only; not probed.
+- DS-GEN-3's first-survey lines that say "not a crisis" or "not dangerous" beside a crisis
+  banner. Moot on the page since order 5 removed that list.
+- INFILTRATED wording 1 ("Nothing here looks wrong.") was read and judged not a denial: the next
+  clause says what is wrong.
+
+**Deliberately deferred, documented, not bugs to re-find.**
+- The census RATE half for the no-banner pool (`rateBp` 3060) was measured under the inverted
+  predicate and is now a stale report. Measured to a scratch file on this tree with
+  `node scripts/prose-rate-corpus.mjs --out <file>`: 533 of 768 towns, 6,940 bp (the exact
+  complement of 3,060). The norm bit stays 0 either way. Not folded into the census here
+  (`node scripts/wiring-census.mjs --rates <file>`) because that re-takes every pool's rate row
+  at once.
+- The projection mis-parse that named this pool ("a bold span on a wrapped note line becomes
+  the pool label") is left in place. Renaming the key to its authored name moves the draw hash,
+  the census rows and the norms key; it wants its own car with a contract plant.
+
+### Order 3: the new-roll locks (part 1)
+
+**The chair's ruling (vetoable).** Remove the "What a new roll keeps" section everywhere it
+renders and every Keep or Unlock button and component that exists only to serve it. Stored locks
+must not keep acting invisibly: treat them as off at the narrowest read chokepoint that feeds
+regeneration and the simulation, without deleting stored data. Census every writer and reader
+first; if another still-visible surface sets or shows a lock, stop and report it rather than
+removing it.
+
+**The census.** The section was `LockControls` scope `world`, mounted twice: below the draft
+dossier (`GenerateWizard.jsx`) and in edit mode (`SettlementDetail.jsx`). It was the only writer
+of three keys in the persisted `state.locks` map: `identity` (read by `carryLockedSections`,
+kept the old name on a full generate), `geography` (read by `geographyLockedConfig`, overlaid
+the old terrain and trade access on a full generate) and the name-keyed seat array (read only by
+`worldPulse/coup.js`, which turned a fallen seat into a proposal). Its "Clear all locks" button
+was the only caller of the store action `clearLocks`. Locks persist inside
+`save.campaignState`.
+
+**STOP-AND-REPORT: still-visible surfaces that set and show locks, KEPT.** The NPCs tab ("Keep
+these people" beside Reroll), the History tab ("Keep this history" beside Reroll) and the
+per-character padlock on NPC rows, whose copy reads "Lock this person so they stay through any
+new roll." They are not part of the section, so they stay. ⚠ The padlock's words "any new roll"
+may read to the owner as associated with the order; that is the owner's call.
+
+**What changed.**
+- The section, its lazy imports and fallbacks left `GenerateWizard.jsx` and
+  `SettlementDetail.jsx`. `LockControls.jsx` lost its world branch, the row copy, the
+  ruling-power import and the `clearLocks` binding; the section scopes are untouched.
+- Chokepoints, reads only: `domain/locksPreservation.js` `normalizeLocks` no longer reads
+  `identity`, `geography` or the seat array; the name carry left `carryLockedSections` (its
+  history carry stays); `geographyLockedConfig` is retired and `settlementGenerateAction.js`
+  calls `birthConfig` directly; `worldPulse/coup.js` no longer reads the seat lock off the save
+  (the fall's legacy mode is `auto`, still routed through `authorityFor`, and the "governing
+  faction is locked" reason line is gone).
+- The coup's row in `worldPulse/changeAuthorityPolicy.js` moved from the retired class
+  `auto-with-lock-escalation` (it was that class's only member) to `auto-with-approval-routing`,
+  and the locks typedef in `domain/types.js` marks the three keys retired.
+- `clearLocks` retired (store action, registry row, its store test). The `setLock` registry
+  description now says "A full regenerate also keeps a locked history." (it promised the name
+  and terrain). `compendiumData.generated.js` regenerated with `npm run gen:compendium-data`
+  (162 to 161 operations), and `public/sitemap.xml` regenerated with
+  `node scripts/generate-sitemap.mjs` (319 to 318 URLs: `/compendium/op-clearlocks` is gone, so
+  the build's prerender should also lose that one entry document; part 2's build measures it).
+- STORED DATA IS KEPT. Hydrate, pickle, persist and `locksAfterFullGenerate` stay key-agnostic,
+  so a save's old keys ride through untouched and a veto can restore the controls with them
+  intact. Pruning them would be a migration (owner-gated) and was not done.
+- Registers lowered to measured counts: `scripts/.size-baseline.json` `settlementSlice.js`
+  824 to 823; `tests/lint/.domain-any-baseline.json` `coup.js` 9 to 7 any (via
+  `node scripts/count-domain-any.mjs --update`, which moved nothing else).
+- Tests: `tests/components/factionLockCoupShield.test.jsx` now pins the removal (the world scope
+  renders nothing beside a live section scope; no component mounts the world scope or prints the
+  rubric; a stored seat lock changes no coup outcome); `createWorkflowRail.test.jsx` (no section
+  below the dossier); `rulingPower.test.js`, `proposalAdmission.test.js` (its coup fixture now
+  routes through `politicalAutonomy: 'dm_only'`), `changeAuthorityPolicy.contract.test.js`,
+  `locksEngine.test.js`, `locksPreservation.test.js`, `livingContentLawWiring.test.js`. Against
+  the base sources 12 of these arms went red.
+
+**Declared output shift.** Generation: only a full generate from a lock map carrying
+`identity: true` or `geography: true` changes; the name and the ground now roll from the seed and
+config like any other generate. Simulation: only saves whose `campaignState.locks` names the
+incumbent when a coup falls; under the default, routine or full autonomy the fall now applies
+automatically instead of queuing a proposal, and dm_only and recommendations are unchanged. No
+rng draw moves. No golden, corpus, fixture, helper or script carries these keys (grep). How many
+real saves carry them is unknown; querying production is owner-gated.
+
+**LD-8 closed.** LD-8 (owner order 2026-08-01) ordered "Keep the name" and "Keep this ground"
+removed; §767.2/§777 re-homed them instead. This order removes the whole section and stops the
+stored keys acting; the structural pin in `factionLockCoupShield.test.jsx` refuses a re-mount.
+
+**⛔ OWED TO THE CHAIR (instrument acts from a committed tree).**
+- `tests/lint/observedShapeSentinel.test.js` (11 arms) and
+  `tests/lint/observedShapeReaders.walker.test.js` (3 arms). Gate 0 now throws: the explained-
+  writer exemption `factions on locks` names `LockControls.jsx`, which no longer writes the key,
+  and every read of that key is gone too, so the exemption must be DELETED. It lives in a
+  detector source (`scripts/check-observed-shape-readers.mjs`), so that is a governed schema
+  migration with the sentinel's roster pins, not a plain re-freeze. The walker also reports 4
+  stale rows (`identity`, `geography` and `factions on locks` in `locksPreservation.js`;
+  `factions on locks` in `coup.js`), banked 62 to 60, and two drifted execution inputs (the
+  regenerated compendium data and stressors leaf), all absorbed by the shrink-only `--write`
+  after the migration. No comment in `LockControls.jsx` spells the key, so gate 0 cannot pass
+  falsely. Rehearsed on a committed scratch clone of this change: `node
+  scripts/check-observed-shape-readers.mjs --write` exits 1 at gate 0 with the STALE message, so
+  a plain re-freeze cannot absorb it; the exemption's deletion has to come first.
+
+### Order 5: the Systems Health sentence list (part 1)
+
+**The chair's ruling (vetoable).** Remove the whole sentence list under the Systems Health bars
+and keep the bars and their labels. Picking one sentence was rejected because one arbitrary
+reading would stand in for the other nine. Do not delete the prose rules, the corpus or the
+generator; the sentences are to be re-homed later. Bank anything the removal darkens through
+the writer-reach register's own door. Pin the removal and the bars.
+
+**What changed.**
+- `src/domain/display/stateProse/dossierMounts.js`: the `overview.systemsHealth` row (DS-GEN-3)
+  is now a GLANCE row, so the one reader draws no sentence there. DS-GEN-3 stays mounted (not
+  parked dark, which would have grown the shrink-only dark list) and has no speaking position
+  until its lenses are re-homed, which is a registry act.
+- `src/components/new/tabs/OverviewTab.jsx`: the stacked `healthLines` render is gone; the
+  status tags, the six bars, their band words and the first-survey caption stay.
+- `src/components/new/generalDeskRead.js` keeps `healthLines` routed through the registry (now
+  always empty), so the mount id keeps its one site and the future re-home has its call site.
+- The desk (`generalStateProse.js`), the corpus and the generators are untouched.
+- Tests: `tests/ui/generalDeskTabFlow.test.js` renders the Overview for the fixture town and
+  three generated towns and asserts the bar labels render and the Systems Health section holds
+  no sentence paragraph, plus the drawn DS-GEN-3 member is absent; the reader arm asserts
+  `healthLines` is empty; `generalStateProseDesk.test.js` pins that DS-GEN-3 has no speaking
+  position and is not parked dark; `composeStateProse.test.js` moved its sentence-mount example
+  to `overview.ground`. Against the base sources the three DOM and reader arms and the
+  registry arm went red.
+
+**Where else it renders.** Nowhere as one block: the stack was OverviewTab's alone. The DM
+Summary does not call the general desk and `src/pdf` imports no state prose (grep).
+
+**Writer reach.** `tests/lint/writerReach.walker.test.js` stayed green: the removal takes no
+read out of the web-display closure (the desk still reads the same fields, and every fact the
+lines banded is still printed by its tag or bar), so nothing went dark and nothing was banked.
+
+**Output shift.** Rendered: the Overview's Systems Health section prints no sentence list, on
+every settlement, DM and player. Composed prose, the DRIFT manifest, the census rows and every
+generator output are unchanged by this order (the census moved its `dossierMounts.js` stamp
+only).
+
+### Known reds at part 1's hand-off
+`npx vitest run tests/lint tests/design tests/build/sitemap.test.js` on the part-1 tree: 4 files
+and 16 tests red, 172 files and 2,865 tests green (`tests/lint` and `tests/design` were 175 of
+175 files and 2,872 of 2,872 tests green at the base before any change). The whole suite, run on
+a committed scratch clone of part 1 before the sitemap regeneration: 2,585 files, 6 failed, 2,571
+passed, 8 skipped; 18 tests failed, 33,239 passed, 118 skipped. Of those 18, 16 are the reds
+below, the sitemap one is cured by the regeneration above (9 of 9 after), and
+`tests/soak-harness/coveringArrayCoverage.test.js` passed when re-run alone on the same clone
+(the box's load average was about 200 on 8 cores during the whole-suite run). The 16:
+- `tests/lint/sovereigntyLightingContract.walker.test.js` (1): the live test-title count moved
+  24,462 to 24,461. Expected; refreeze after commit, never by a lane.
+- `tests/lint/observedShapeSentinel.test.js` (11) and `tests/lint/observedShapeReaders.walker.test.js`
+  (3): see Order 3's owed instrument act.
+- `tests/lint/goldenFreeze.walker.test.js` arm 1 (1): see Order 1's owed signature.
+
+### Order 2: the Herald waits for the first advance (part 2)
+
+**The chair's ruling (vetoable).** The Herald (the desktop panel, its toggle or reopen control,
+and the phone companion) is not shown on a campaign whose realm clock has never been advanced;
+it appears once the first advance has happened and stays available from then on, including
+after a reload. Derive "has advanced" from existing persisted campaign state and add no new
+persisted field unless none exists. Whatever the Herald carries that a user still needs before
+the first advance must stay reachable elsewhere, listed.
+
+**The cause.** Nothing asked whether the realm had ever advanced. On desktop the panel mounted
+whenever `inspectorOpen` was true (`WorldMap.jsx`), the toolbar toggle was always passed, and
+for anon and free viewers `useRealmInspector.js` opened the Herald on every Realm entry to show
+its locked Cartographer teaser, which is the owner's screenshot. The flagged phone companion
+mounted for any premium campaign (`RealmMobileGate.jsx`).
+
+**The persisted state used: `worldState.tick`, no new field.** It is 0 on a fresh world
+(`createDefaultWorldState`) and every clock-moving path adds one per week (`pulseKernel.js`: a
+single tick, an interval, the tick a paused interval commits, the autonomous catch-up); it
+rides campaign hydration across a reload. `calendar.elapsedWeeks` (and the raw legacy
+`elapsedMonths`) are read as a fallback because a legacy months-only save hydrates to tick 0
+with weeks already elapsed. The predicate is one leaf, `src/lib/realmHeraldGate.js`
+(`realmHasAdvanced`), with no theme or store import.
+
+**What changed.**
+- `src/hooks/useRealmInspector.js` returns `heraldAvailable` as its OWN flag. `inspectorOpen` and
+  the per-campaign session record are left as the GM set them, so the Herald returns where it
+  was once the clock moves, and after a reload of a realm that has advanced. The anon/free
+  auto-open effect is gone; in its place the same `map_realm_teaser` pricing moment the teaser
+  fired on mount now fires once per Realm visit, and only after `auth.loading` has cleared, so a
+  premium session still hydrating is never pitched (cooldown-guarded as before).
+- `src/components/WorldMap.jsx`: the toggle is passed only while `heraldAvailable` (the toolbar
+  already drops a non-function toggle together with its unreviewed-count badge) and the panel
+  mounts only while `heraldAvailable`. Zero net effective lines: the file stays at 599 of 600.
+  The first advance's own `openInspectorAt('dashboard')` means the Herald opens on the Dashboard
+  the moment the first tick commits; a paused first interval commits its tick and opens on
+  Adjudication, where its verdict surface lives.
+- `src/components/map/RealmMobileGate.jsx`: the companion needs `realmHasAdvanced(campaign)` too,
+  and its copy is re-keyed so a premium never-advanced phone reads the read-only sentence, not
+  the locked-account one. Production phones are unchanged (the `heraldCommandBrief` flag is dark
+  there and their Dashboard slot is not the Herald).
+- `src/components/map/WorldMapOverlays.jsx`: while the realm has never advanced, the Advance
+  dialog carries `LivingWorldGates` (lazy, with a narrated fallback: the witnessed-wait ratchet
+  holds at 38 silent boundaries).
+- `src/components/map/WorldMapTourSteps.js`: the Inspector step now says it opens once the realm
+  has advanced for the first time.
+
+**Kept reachable before the first advance (the ruling's list).**
+- Advance Realm and its interval: the toolbar (they never lived in the Herald).
+- Start the World Clock: the Advance dialog (already there).
+- Relationship drift, War layer, Faith spread: the Advance dialog (new) and More, then Rules.
+- Map geography (the spatial canonize, which changes what the first advance computes): the
+  Advance dialog (new). Its only live mount had been the Herald's Dashboard.
+- The anon/free Cartographer upsell: the `map_realm_teaser` popover on Realm entry (the same
+  moment, now fired by the hook), the same moment behind the locked Supply chains reaches in the
+  Layers panel and the Routes toolbar, the Instant World card's See Premium (disabled with its
+  pill until launch), and the footer's Pricing link. Phones keep the locked Dashboard teaser.
+- Deity assignment: the dossier's `DeityAssignmentPanel`. Cancelling a queued event: the
+  dossier's `PendingIntentions`. Map lenses: the Layers panel.
+- Creating or selecting a campaign (the Herald's no-campaign Dashboard offered both): the
+  palette's empty state and the toolbar's campaign select.
+
+**Deliberately deferred until the first advance (documented, not bugs to re-find).** The realm
+forcing surface `RealmVerbComposer` (its other mount, in `WorldPulsePanel`, is dead), the Stage
+the Road and Timelapse desk tools, the Gazetteer, Remembrance and Wanderers registers, the Faith
+door's pantheon panel, the read-only War and Trade panels, and the Herald's own search, filters
+and time lens. The desktop anon/free teaser's longer body (its three benefit bullets) no longer
+shows; the popover carries the pitch.
+
+**JUDGMENTS (each vetoable).**
+- JUDGMENT: the gate is derived with no sticky memory, so undoing a realm's ONLY advance returns
+  it to never-advanced and the Herald waits again. The alternative, a session-only sticky flag,
+  would not survive a reload and would disagree with the restored world. Say "veto" to add it.
+- JUDGMENT: the anon/free upsell stays as the entry pricing moment rather than relocating the
+  whole locked teaser into the 240px palette. Measured: that column already overflows at
+  1024x768 (see the reported sibling below), so a second tall card there would bury the settlement
+  list. Say "veto" to relocate the teaser instead.
+- JUDGMENT: the pre-advance living-world controls ride the Advance dialog, the one place every
+  first advance passes through, beside the existing Start the World Clock CTA, rather than a new
+  toolbar or palette control. Say "veto" to move them.
+
+**Tests (each run against the base sources and red there).**
+- `tests/lib/realmHeraldGate.test.js` (new): the predicate over the real world-state
+  constructors, the legacy months-only save and junk readings.
+- `tests/ui/realmHeraldGate.test.jsx` (new, desktop WorldMap): a never-advanced realm with a
+  remembered open Herald shows neither panel nor toggle while Advance Realm stays; an advanced
+  realm's toggle opens it; the Herald appears the moment the first advance commits; a reload of
+  an advanced realm restores it; the Advance dialog carries the living-world controls only before
+  the first advance; anon gets no Herald and the moment fires once, only after auth settles;
+  premium is never pitched. Base: 4 of 7 red. A mutant without the auth-settled guard reds 1.
+- `tests/ui/heraldMobileCompanion.test.jsx`: the two premium fixtures moved from `worldState: {}`
+  to `{ tick: 7 }` (declared cause: the companion now waits for the first advance), plus a
+  never-advanced premium arm. Base: 1 red; a mutant without the copy re-key: 1 red.
+- `tests/ui/realmInspectorSize.test.jsx`: the restored-session arm also asserts
+  `heraldAvailable` is false while `inspectorOpen` stays true (the separate flag).
+- `e2e/realm-herald-gate.spec.js` (new, Chromium): a fresh realm; an advanced realm opened from
+  its toggle and restored by a reload; THE REAL FIRST ADVANCE (Start the World Clock in the
+  dialog, advance, the Herald appears, no advance failure logged); anon. On the untouched base
+  a62dcbb90: 3 of 4 red (the persistence arm is green there by design).
+- `e2e/regional-causality.spec.js`: the Wizard News arm opens the Herald, so its campaign gains
+  `worldState: { tick: 2, calendar: { elapsedWeeks: 2 } }` (declared cause: the toggle waits for
+  the first advance).
+
+**Output shift.** UI only. No simulation, engine, generation or persisted-shape change; no rng
+draw moves.
+
+### Order 4: the small visual defects (part 2)
+
+**The chair's ruling (vetoable).** Fix all three. (a) Census every other host of
+`AvailableAtLaunchPill`, fix any that clips at 1024 or 390, and pin the rule structurally if
+cheap. (b) The Surveyor card reads top to bottom with no dead gap, its CTA aligned with its
+siblings'. (c) The painted background meets the shaft once the feather is hidden, with no cream
+strip at any scroll position, while content at scroll 0 still clears the feather.
+
+**(a) "ee Premium" on the Realm's Instant World card.** Cause: the Button primitive is
+`white-space: nowrap; justify-content: center`, and the a11y floor `button { min-width: 24px }`
+(`src/styles/a11y.css`) replaces a flex item's min-content minimum; in the Realm's 240px sidebar
+the locked button (186px) was narrower than "See Premium" plus the pill (about 238px), so both
+spilled out and the card's `overflow: hidden` cut both ends. The launch-lock pass had given its
+siblings a closed-only wrap keyed on the viewport, and this card is desktop-only. Fix: a
+closed-only `flexWrap: 'wrap'` on that button. Measured on the production build in Chromium, at
+1024 and 1440 wide: button 51 to 237, content 71 to 223, card 33 to 255; the button grows from 40
+to 59px tall. THE CENSUS: 35 pills in 24 files, 22 inside the Button primitive. Only this one
+clipped at 1024 or 390 in the survey's live walk. JUDGMENT: every other Button host now carries
+the same closed-only wrap (LandingBelowFold, PlaceInRegionCard, SaveQuotaMeter, FaithSection,
+DeityAssignmentPanel twice, EventComposerDeityField, DossierSessionNotices,
+SettlementDetailActions), which changes nothing while the room is there and wraps instead of
+clipping when it is not, so the rule can be pinned exactly; BuyThisDossier's two hosts stay
+exempt by name (a min-content grid, where a wrap would always break the line; they wrap on
+phones through their spread, pinned in `launchLock.dossier.test.jsx`). Say "veto" to keep the
+eight unclipped hosts as they were and exempt them instead. THE PIN:
+`tests/lint/launchPillHostWrap.walker.test.js` (espree over every file that mentions the pill;
+WRAPS, EXEMPT and OTHER_HOSTS frozen exact in both directions; four in-file mutant arms), with
+its manifest row and sweep plant #105 (deleting the card's wrap: clean 8 passed, planted 2 red,
+restored 8 passed, md5 `986b6146145563020491b68f77bd77ac` before and after, cp backup and cp
+restore). `tests/components/launchLock.upsells.test.jsx` asserts the locked reach wraps and the
+premium toggle does not.
+
+**(b) the Surveyor card's dead gap.** Cause: its body paragraph carried `flex: 1`, and the tier
+row stretches every card to the tallest (590px), so the paragraph absorbed 242px (1024) or 261px
+(1440) mid-card. Fix: the paragraph no longer grows and the CTA takes `marginTop: 'auto'`, so the
+lead, body and key note read straight down and the spare height sits above the CTA, exactly where
+the sibling cards keep theirs. Measured on the build: paragraph slack 1 to 3px; the CTA's top
+880 against the Wanderer's 881 at 1440 and 859 against 860 at 1024 (the 1px is the Surveyor's
+border). Pinned in `tests/ui/pricingPageBands.test.jsx` (every tier-row card: CTA last, the only
+growing child directly above it or the CTA's own auto margin; base red).
+
+**(c) the cream strip under the shaft: the premise corrected, then fixed.** Measured: the
+landing reserves no space for the feather (App.jsx gives home only SP.lg of top padding and the
+hero sits under the header). At 1440x900 and scroll 2400 the layer under the shaft is `#forge`'s
+84px bottom padding (the section spans 1749 to 2505, so its tail sits 41 to 105px from the top),
+and the film begins where `#forge` ends. The strip was a translucent-cream stop's empty tail
+passing under the transparent header, so it recurred at every stop's tail. Fix: each
+translucent-cream stop (`#forge`, `#voice`, `#realm`, `#commons`) fades its tail out over the
+tail's own height with an inline mask (`linear-gradient(INK calc(100% - tail), transparent)`,
+the ArrowPaint idiom; 84px on desktop, 48px on phones), so the cream dissolves into the film and
+the painting meets the shaft at every scroll; the dark closer keeps its scene, the header and the
+scroll-0 reserve are untouched. It lives in the lazy below-fold chunk, so first-paint JS and
+render-blocking CSS do not move. JUDGMENT: this softens every cream stop's bottom edge into the
+film at rest as well (a look change the order implies but does not name); `#voice`'s bottom
+hairline fades with it. Say "veto" to keep hard edges; the strip then returns whenever a tail
+passes under the arrow. Pinned in `tests/ui/homeLanding.test.jsx` (the rendered mask on exactly
+the four cream stops, sized to each tail; base red) and measured in `e2e/visual-polish.spec.js`.
+
+**Found beside them and fixed (same page, same family).** The phone landing scrolled 2px
+sideways: `twoColGrid`'s `minmax(380px, 1fr)` in a 366px column. The track minimum is now
+`min(380px, 100%)`. Measured at 390 wide: scrollWidth 390, clientWidth 390 (392 before).
+
+**`e2e/visual-polish.spec.js` (new, Chromium):** (a) at 1024 and 1440 the label and pill sit
+inside the button and the button inside the card; (b) at 1024 and 1440 no Surveyor paragraph
+outgrows its text, the content sits one gap apart and the CTAs stay level; (c) Chromium's
+computed mask on the four cream stops; the phone landing does not scroll sideways. On the
+untouched base: 6 of 6 red.
+
+### Found beside the orders (part 2), reported, not fixed
+
+- ⛔ **THE FIRST REALM ADVANCE FAILS FOR A CAMPAIGN WITH NO CONTENT BINDING** (pre-existing,
+  reproduced on the untouched base a62dcbb90 in Chromium against the e2e dev server). A campaign
+  without `contentBinding` (a legacy, imported or seeded one) is pinned by
+  `pinLegacyCampaignContentBindings` (`src/store/campaignSlice.js`, also called at the top of the
+  advance session) inside a producer, passing `state.activeContentEnvironment`, an Immer draft,
+  into `makeCampaignContentBinding`, whose vanilla branch keeps it by reference inside an
+  `Object.freeze`d binding; Immer does not finalize drafts inside frozen objects, so the stored
+  environment is a revoked proxy. The advance's `cloneJson(c)` then throws "Cannot perform
+  'getPrototypeOf' on a proxy that has been revoked" and the GM sees "The realm could not advance.
+  Try again in a moment." A probe located the revoked value at `campaign.contentBinding.environment`
+  (CONFIRMED); the freeze mechanism is read from code (PLAUSIBLE until fixed and re-run). Such a
+  realm can never make its first advance, so under Order 2 its Herald never appears.
+  `e2e/realm-herald-gate.spec.js` seeds a pre-pinned vanilla binding to step around it. Not fixed
+  here: it is a store and persistence repair outside these orders, and the simulation programme
+  is paused. A follow-up task was raised with the repro, stack and a likely cure.
+- **The Realm sidebar clips its own content at viewport heights below about 900px.** The palette
+  column is `overflow: hidden`; at 1024x768 the Instant World card (554 to 799) is cut at 667 and
+  the settlement list has no height, and at 1280x800 it is cut at 699. Pre-existing: the card was
+  19px shorter before the wrap and was still cut. At the owner's 1440x900 it fits with 2px to
+  spare after the wrap (797 against 799). A cure would let the no-campaign block scroll with the
+  list; that is a palette layout change beyond the named defects.
+- `useAdvanceSession.js`'s "Canonize the world" toast action opens the Herald's Adjudication door,
+  which is withheld before the first advance; it cannot fire in practice because the Advance
+  dialog's confirm stays disabled until the world is canonized. The `pendingMapWorkspace` consumer
+  in `useRealmInspector.js` has no writer in any store slice. Both pre-existing, left as they were.
+
+### Receipts and known reds at part 2's hand-off
+- The whole vitest suite on the worktree (parts 1 and 2 together, after part 2's last source
+  edit): 2,588 files, 4 failed, 2,583 passed, 1 skipped; 16 tests failed, 33,320 passed, 62
+  skipped. The 16 are part 1's reds and nothing else: `observedShapeSentinel` (11) and
+  `observedShapeReaders.walker` (3), with the same stale 4, banked 62 against 60 and the same two
+  drifted inputs, so part 2 added no reader row; `goldenFreeze.walker` arm 1 (1); and
+  `sovereigntyLightingContract.walker` (1), whose file count now reads 2,588 against the census's
+  2,585 because part 2 adds three test files (and titles). Refreeze after commit, never by a lane.
+- `node scripts/check-full-typecheck.mjs`: 167 errors, ceiling 167, no regression.
+- ESLint, in chunks of eight, on every source, test and e2e file part 2 touched: exit 0.
+- `npm run build`, then `VERIFY_DIST=1 npx vitest run tests/build/`: 55 files, 504 tests passed.
+  The first-paint static closure (eight files) measured against the untouched base a62dcbb90 built
+  the same way: raw 1,036,097 to 1,035,611 B (budget 1,048,000; 12,389 B spare), gzip 329,155 to
+  328,993 (budget 337,000), Brotli 276,406 to 276,278 (budget 283,000), render-blocking CSS
+  19,576 to 19,576 (budget 19,800). The small drop is part 1's store and domain removals; no string
+  of any part-2 module appears in a first-paint chunk. Lazy chunks: WorldMap 82,191 to 82,802 B;
+  the living-world controls now load as their own 7,405 B chunk (RealmDashboard 23,672 to 16,807);
+  LandingBelowFold 24,617 to 24,833; PricingPage 25,140 to 25,150. The prerender wrote 305 route
+  documents against the base's 306 (part 1's retired `/compendium/op-clearlocks`).
+- `CI=1 npx playwright test --project=chromium`: 88 tests, 81 passed, 7 skipped, 0 failed, no
+  retry. `CI=1 npx playwright test e2e/mobile-pointer-targets.spec.js e2e/arrow-header.spec.js
+  --project=mobile-safari`: 5 passed, 14 skipped (the desktop Chromium arms skip there by design).
+
+### The owner's third set of orders (2026-09-17, later), and what part 3 carries
+
+The chair reported part 1 and asked whether the frozen dossier-prose golden could be
+re-recorded. **The owner: "I approve and remove the other padlocks and fix the remaining
+contradictions as well."** So part 3 carries three things: (A) the frozen goldens through their
+own signed door, (B) every remaining lock control removed and every lock kind off at the read
+chokepoint, and (C) the remaining contradictions fixed at source plus a census for others. The
+owner lifted the simulation pause for the contradiction fixes only.
+
+### Part 3 (A): the frozen goldens move ONLY through the signed door
+
+**The chair's ruling (vetoable).** Re-record through `tests/helpers/goldenRecordDoor.js` and
+nowhere else; record the owner's approval verbatim with the date and the cause; if the door
+needs a committed tree or a commit trailer, prepare everything and state the exact command;
+never hand-edit a golden; list every other frozen surface these changes move.
+
+**What the door requires (read, not assumed).** `ACTIONS` makes `re-record` OWNER-signed.
+`recordGolden` refuses in order: no signature (`GOLDEN_SHIFT_SIGNED` must NAME a record file
+under `docs/shift-records/`, and the door parses its CONTENT), blank provenance ("" or "1" in
+`ownerWords` / `ownerDate` / `odqRow` / `cause` / `seat`), a surface the record does not name, an
+unknown verb, a proofForm that disagrees with the register row, **a tree dirty beyond the
+register, the manifest being written and the record itself**, and a prediction miss. A
+successful write THROWS by design; the receipt is a plain re-run of the suite plus
+`tests/lint/goldenFreeze.walker.test.js`. `commitTrailerRefusal` wants `Owner-Signed: §NNN` on
+the commit. The genesis act is the precedent to copy: `8c9fd0672`, trailer `Owner-Signed: §901`,
+record `docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json`, fixture +
+register + record in ONE commit.
+
+**The record, prepared and deliberately refused until the chair signs it:**
+`docs/shift-records/2026-09-17-dossier-contradictions.json`. It carries the owner's words
+verbatim, `ownerDate` 2026-09-17, ONE cause (the day's contradiction orders, with the mechanism
+and the measured movement of each surface), the seat, and TWO surfaces
+(`dossier-prose-manifest` · `re-record` · predictedRows 2 · `derived-artefact`;
+`espionage-dormancy-fence` · `re-record` · predictedRows 1 · `in-file corpus constant`).
+⛔ **`odqRow` IS BLANK ON PURPOSE**: the owner spoke in the chair's chat and the ledger row that
+records it is the chair's to write. While it is blank the door REFUSES the record
+(`BLANK_PROVENANCE`), so nothing can move by accident. JUDGMENT (vetoable): ONE record for both
+surfaces, because both movements are the same cause (the day's contradiction orders) and the
+door names its surface at each write; say "veto" to split it in two.
+
+**⛔ PART 1's OUT-OF-DOOR WRITE IS REVERTED IN THE TREE.** Part 1 re-recorded
+`tests/fixtures/dossier-prose-manifest-golden.json` with the plain recorder (before this
+ruling). Part 3 restored it to its committed bytes (`git show HEAD:<path> > <path>`), so the
+frozen golden is untouched in the working tree and moves for the first time inside the door act.
+`tests/lint/goldenFreeze.walker.test.js` is therefore GREEN again (it was arm-1 red at part 1's
+hand-off), and two arms of `tests/property/dossierProseManifest.test.js` are red until the door
+commit (see the known reds).
+
+**Surface 1 — `dossier-prose-manifest`. The capture arm now goes THROUGH the door.**
+`scripts/prose-manifest-cells.mjs --record` wrote the fixture directly, which was lawful while
+the register was UNFROZEN (the register's own arms forbade a recorded value then) and is an
+unsigned move of a frozen golden since the genesis. It now calls `recordGolden`, so it refuses
+without a signature, refuses a dirty tree, writes the fixture and its register row in one act
+and throws on success. The register row's own note anticipated exactly this ("when the freeze
+act arms this register, its re-record path becomes the door like every other"). The declared
+shift the fixture carries (`MANIFEST_PROVENANCE`) is restated from the old INSTRUMENT shift
+(SITTING §P.2-29) to a **PROSE** shift naming the owner's orders and this record; the suite's
+provenance arm moves with it, with the cause in a comment. THE COMMANDS, in order, from a
+CLEAN tree at the landing commit (the fixture, the register and the record are the only paths
+that may be dirty):
+
+```sh
+# 1. fill odqRow in docs/shift-records/2026-09-17-dossier-contradictions.json
+# 2. the door write (it FAILS on success, printing old -> new; that is correct)
+GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-17-dossier-contradictions.json \
+  node scripts/prose-manifest-cells.mjs --record
+# 3. the receipt
+npx vitest run tests/property/dossierProseManifest.test.js tests/lint/goldenFreeze.walker.test.js
+# 4. commit the fixture, the register and the record together, trailer `Owner-Signed: §NNN`
+```
+
+**Surface 2 — `espionage-dormancy-fence`, an IN-FILE corpus constant.** Its surface is the test
+file itself (`tests/property/espionageDormancyFence.test.js`, `PRE_COUPLING_CORPUS_SHA`), and
+its header's window law says movement outside a named chartered window is a STOP. The mover is
+FOUND and attributed to zero residue: `src/generators/power/governanceNarrative.js` ALONE moves
+it (the base clone with only that file swapped in produces the same new value), 29 of 360 rows
+move and **every one of them in the single field `powerStructure.stability`** (11 wartime · 6
+insurgency · 6 mass migration · 3 religious conversion · 3 infiltration), 360/360 hashes
+stay distinct, `cda5ec87…` becomes `f13df68e5e511cd385473e95307240d5b73659e11f718eaeafc5f69bf060a69e`.
+⛔ **AMENDED BY PART 4** (below): part 3 measured 26 rows and `b9dc82bc…` with five arms; the
+sixth arm adds the three infiltration rows and carries the corpus to the value above, which is the
+one the fence's own red now prints as "Received". The door
+write is prepared as a one-off runner rather than new repo tooling:
+`<f6ac0d98 scratchpad>/p3/door-espionage-fence.mjs`. It re-MEASURES the 360-settlement corpus
+with the fence's own recipe, refuses unless the measurement equals `--expect`, rewrites the
+constant AND adds the shift paragraph to the constant's docblock, and writes through
+`recordGolden`:
+
+```sh
+GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-17-dossier-contradictions.json \
+  node <f6ac0d98 scratchpad>/p3/door-espionage-fence.mjs \
+  --expect f13df68e5e511cd385473e95307240d5b73659e11f718eaeafc5f69bf060a69e
+npx vitest run tests/property/espionageDormancyFence.test.js tests/lint/goldenFreeze.walker.test.js
+# commit the fence file, the register and (if not already committed) the record, same trailer
+```
+
+⛔ **THE RUNNER IS CARRIED HERE VERBATIM, because the lane's scratchpad dies with the lane.**
+Write these bytes to any path outside the repo (a scratch file: it is a one-off act, not repo
+tooling) and run it from the repo root of the committed tree. It writes NOTHING unless the corpus
+it measures equals `--expect`, and then only through the door.
+
+```js
+// THE CHAIR'S DOOR WRITE for the espionage dormancy fence's in-file corpus constant
+// (owner orders 2026-09-17, the dossier contradictions). Run FROM THE REPO ROOT of a COMMITTED
+// tree whose only dirty paths may be the fence file, the golden register and the signed record:
+//
+//   GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-17-dossier-contradictions.json \
+//     node <this file> --expect f13df68e5e511cd385473e95307240d5b73659e11f718eaeafc5f69bf060a69e
+//
+// It MEASURES the fence's 360-settlement corpus with the fence's own recipe, refuses unless the
+// measurement equals --expect (the value the fence's own red run printed as "Received"), rewrites
+// the constant and adds the SHIFT RECORD paragraph to the constant's docblock, and writes the file
+// and its register row through tests/helpers/goldenRecordDoor.js, which THROWS on success by design.
+// The receipt is a plain run of tests/property/espionageDormancyFence.test.js and
+// tests/lint/goldenFreeze.walker.test.js afterwards.
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const ROOT = process.cwd();
+const REL = 'tests/property/espionageDormancyFence.test.js';
+const at = process.argv.indexOf('--expect');
+const EXPECT = at >= 0 ? String(process.argv[at + 1] || '') : '';
+if (!/^[0-9a-f]{64}$/.test(EXPECT)) throw new Error('--expect <64-hex sha> is required: the value the fence printed as Received');
+
+const { generateSettlementPipeline } = await import(join(ROOT, 'src/generators/generateSettlementPipeline.js'));
+const { recordGolden } = await import(join(ROOT, 'tests/helpers/goldenRecordDoor.js'));
+
+// THE FENCE'S OWN RECIPE, transcribed from the test (tiers x routes x fifteen seeds, the
+// key-sorted serializer, one row per settlement). The plain fence run afterwards recomputes it
+// in the test's own code, so a transcription slip here reds there rather than landing.
+function stable(v) {
+  if (v === null || typeof v !== 'object') return JSON.stringify(v) ?? 'null';
+  if (Array.isArray(v)) return `[${v.map(stable).join(',')}]`;
+  return `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stable(v[k])}`).join(',')}}`;
+}
+const sha = (s) => createHash('sha256').update(s).digest('hex');
+const rows = [];
+for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
+  for (const route of ['road', 'isolated', 'port', 'crossroads']) {
+    for (let i = 0; i < 15; i += 1) {
+      const seed = `SUBw4-fence1-${tier}-${route}-${String(i).padStart(3, '0')}`;
+      const settlement = generateSettlementPipeline({ settType: tier, tier, tradeRouteAccess: route, culture: 'germanic' }, null, { seed });
+      rows.push(`${tier}\t${route}\t${seed}\t${sha(stable(settlement))}`);
+    }
+  }
+}
+if (new Set(rows.map((row) => row.split('\t')[3])).size !== 360) throw new Error('the corpus stopped discriminating seeds');
+const measured = sha(rows.join('\n'));
+if (measured !== EXPECT) throw new Error(`the measured corpus is ${measured}, not the expected ${EXPECT}; NOTHING was written`);
+
+const CONSTANT_RE = /const PRE_COUPLING_CORPUS_SHA = '([0-9a-f]{64})';/;
+const ANCHOR = ' * ── 2026-09-02, T13 TRANS — THE WINDOW OPENED AND CLOSED WITH ZERO MOVEMENT ──────────';
+const PARAGRAPH = [
+  ' * ── 2026-09-17, THE DOSSIER CONTRADICTIONS (owner-signed, through the door) ────────────',
+  ' * THE FIRST MOVEMENT OF THIS CONSTANT SINCE THE GENESIS FREEZE, AND IT DID NOT WAIT FOR THE',
+  ' * LIGHTING WAVE: it is a signed re-record under tests/helpers/goldenRecordDoor.js, which from the',
+  ' * genesis (2026-09-16) is the lawful path for every frozen surface. The owner ordered the dossier\'s',
+  ' * contradictions fixed ("Fix the contradiction."; "fix the remaining contradictions as well") and',
+  ' * signed the re-records ("I approve"), record docs/shift-records/2026-09-17-dossier-contradictions.json.',
+  ' * THE MOVER, FOUND AND ATTRIBUTED TO ZERO RESIDUE: src/generators/power/governanceNarrative.js alone',
+  ' * (a single-variable revert returns the old value). A town under an insurgency, a mass migration, a',
+  ' * war, a religious conversion or an infiltration read `Stable` beside its ACTIVE CRISIS banner; it',
+  ' * now reads a crisis band. On this corpus exactly 29 of 360 rows move, every one in the single field',
+  ' * powerStructure.stability (11 wartime, 6 insurgency, 6 mass migration, 3 religious conversion,',
+  ' * 3 infiltration); 360/360 hashes stay distinct. `cda5ec87…` -> `f13df68e…`.',
+  ' *',
+];
+
+const produce = () => {
+  const current = readFileSync(join(ROOT, REL), 'utf8');
+  const match = CONSTANT_RE.exec(current);
+  if (!match) throw new Error('the fence constant was not found');
+  if (!current.includes(ANCHOR)) throw new Error('the docblock anchor was not found');
+  if (current.includes(PARAGRAPH[0])) throw new Error('the shift paragraph is already present');
+  return current
+    .replace(CONSTANT_RE, `const PRE_COUPLING_CORPUS_SHA = '${measured}';`)
+    .replace(ANCHOR, `${PARAGRAPH.join('\n')}\n${ANCHOR}`);
+};
+
+recordGolden({ surface: 'espionage-dormancy-fence', path: join(ROOT, REL), produce, root: ROOT });
+```
+
+**Every other frozen surface is UNMOVED, measured rather than assumed.** The generator golden
+master is 525 of 525 byte-identical (the five new stability labels never occur in its corpus,
+which is infiltrated or famine or calm), and `npx vitest run tests/property tests/simulation`
+was 102 of 103 files green with the fence as the only red. The register's other rows are
+untouched; no `sha256`, `rows` or `ownerRow` was hand-edited by this lane.
+
+### Part 3 (B): the other padlocks
+
+**The chair's ruling (vetoable).** Remove every remaining lock control and its display; treat
+every lock kind as off at the read chokepoint without deleting stored data; census writers and
+readers first; update the registers; declare every output shift.
+
+**The census (writers and readers, before the change).** WRITERS: `LockControls.jsx` scopes
+`npcs` and `history` (the NPCs tab's "Keep these people" and the History tab's "Keep this
+history", each wrapping that section's Reroll) and the roster-row padlock in
+`components/new/npcComponents.jsx` (`NPC_LOCK_COPY`, writing the id array). Both called the
+store's `setLock`, whose only other caller (`clearLocks`) part 1 had already retired. READERS:
+`domain/locksPreservation.js` (`normalizeLocks` and every predicate through it — `sectionLocked`
+for `regenSection`'s refusal, `lockedNpcIdSet` for the roster carry and the full-generate carry,
+`carryLockedSections` for the history carry), `generators/generateSettlementPipeline.js`
+(`carryLockedRosterThroughGenerate`, `regenNPCsPipeline`), `domain/regenerationPreservation.js`
+(the keepers union), the store's `remapLocksAfterRegen` / `remapLocksAfterGenerate` /
+`persistLocksToActiveSave`, and `hooks/useReaderAudience.js` (a behaviour SIGNAL, see the
+judgment). PERSISTENCE: `save.campaignState.locks`, carried by `pickleCampaignState`, hydrate and
+the campaign pickle; `state.locks` is NOT in the local persisted projection.
+
+**What changed.**
+- `src/domain/locksPreservation.js` — THE CHOKEPOINT. `normalizeLocks` reads NOTHING: it takes
+  the stored map and returns `{history: false, npcsSection: false, npcs: []}`. So the section
+  refusal never fires, no id is carried through a reroll, the history carry is dormant and the
+  Phase B roster carry sits at its dormancy gate. The signature keeps the map so every caller
+  keeps its one read seat and a veto restores the reads in ONE function.
+- `remapNpcLocks` now reads the RAW id list instead of the honoured view, because it is ALSO the
+  pin remap's algebra (`remapPinnedNpcsAfterRegen` wraps `aiData.pinnedNpcs` as `{ npcs }`) and
+  because keeping a stored id pointing at its own subject is data maintenance, not a lock acting.
+- `src/components/dossier/LockControls.jsx` is DELETED (no scope survived it). The NPCs and
+  History tabs now render the Reroll button they used to wrap, offered only to a viewer who may
+  roll (before, the lock row and its button rendered even for a viewer with no reroll handler).
+- `src/components/new/npcComponents.jsx` — the row padlock, its copy block, its two bronze tones
+  and the `useStore` lock reads are gone; the purple PIN (a different promise: the AI leaves the
+  prose alone) stays.
+- The store: `setLock` retired with its registry row and with `persistLocksToActiveSave` (its
+  only caller), the way part 1 retired `clearLocks`. `regenSection` keeps its `sectionLocked`
+  call as the one seat a veto re-arms, with the dormancy written at the call.
+  `compendiumData.generated.js` regenerated (161 to 160 operations) and `public/sitemap.xml`
+  regenerated (318 to 317 URLs: `/compendium/op-setlock` is gone, so the prerender loses that
+  document too).
+- The display: `primitives/StateBadge.jsx` loses the never-rendered `locked` kind and
+  `copy/en.js` its `state.badges.locked` / `state.tooltips.locked` ("Locked. Survives an NPC
+  reroll.") — a promise nothing can make any more. `moments.regen_burst`'s body advertised
+  "Locks, drift, chronicle" and now advertises "Drift and the chronicle".
+- `domain/types.js`'s `Locks` typedef marks every key retired and records that the map is kept.
+
+**Declared output shift.** RENDERED: no roster row offers a padlock; the NPCs and History tabs
+show their Reroll with no lock sentence beside it, and a viewer with no reroll right sees
+neither (they used to see the lock row). GENERATION: a section reroll of a settlement whose
+stored map says `npcs: true` or `history: true` now REROLLS instead of refusing; a stored id no
+longer carries its character through a roster reroll or a full generate; a stored `history: true`
+no longer carries the history across a full generate. The new draft after a full generate drops
+the stored `npcs` id array (nothing was carried, so every id names a stranger — the existing
+stale-id rule), and keeps every other key verbatim; no save row is written by a generate. No rng
+draw moves (the whole engine is post-hoc over a finished roll). SIMULATION: unchanged by this
+part (part 1 retired the seat lock the coup read; nothing else in the pulse reads the map).
+STORED DATA: hydrate, pickle and persist stay key-agnostic, so a save's map rides through
+untouched and a veto restores the controls with a user's old locks intact. How many real saves
+carry a lock is unknown; querying production is owner-gated.
+
+**JUDGMENTS (each vetoable).**
+- JUDGMENT: the chokepoint is `normalizeLocks`, exactly where part 1 put the world keys, rather
+  than the store's two action entries. Every consumer (the store, the generation worker, any
+  future caller) flows through it, so no path can honour a stored lock. The cost is that the
+  Phase B carry is now unreachable code; it is KEPT, dormant and documented, so a veto is a
+  revert of one read rather than a rebuild. Say "veto" to gate at the store instead.
+- JUDGMENT: `hooks/useReaderAudience.js` still counts "any save with a lock" as one of the
+  campaign-tier behaviour signals. It is evidence that the reader ONCE used the feature, which
+  stays true, and it feeds no regeneration and no simulation; turning it off would silently
+  lower some existing readers' archetype (and with it the Founder tile's eligibility). Say
+  "veto" to route it through the chokepoint too.
+- JUDGMENT: the tests that used a LOCK as the lever for a survival through a reroll now use an
+  AUTHORED character (`_authored: true`), which the reroll's entity policy carries into the same
+  moved slot (probed: npc_6 -> npc_8 under the same pinned seeds), so
+  `pinnedNpcRegenRemap.test.js` and `npcStateRegenRebind.test.js` keep measuring what they were
+  written for. `departedNameProseBoundary.test.js`'s prefix-collision cure moved to its shared
+  helper (`substituteWholeWord`), because the carry that used to host it is dormant.
+
+**STOP-AND-REPORT: lock-shaped surfaces that are NOT this order's and were left alone.**
+- The PREMIUM padlocks (LayersPanel's gold `Lock` glyph, the Realm dashboard's locked teaser,
+  NextActionRail's "Edit (Premium)", ShareToGallery's "Save first to share publicly",
+  `LockedDestination`): a tier gate, not a keep-through-a-reroll promise.
+- The ENTITY-level `locked` / `pinned` flags (`domain/canonStatus.js`, honoured by
+  `domain/regenerationPolicy.js`): this is how a user's OWN edits survive a reroll. It has no
+  control and no padlock of its own (`CanonBadge`, which would draw one, is mounted nowhere in
+  `src/`), and turning it off would make a reroll destroy authored work. Untouched.
+- `copy/en.js`'s `canon.provenance.locked` label: the entity-level word above, unrendered.
+- ⚠ THE SAVE-CONFIRMATION EMAIL still says "Future regenerations will not overwrite locked
+  entities." The live copy is in the EDGE FUNCTION (`supabase/functions/send-email/index.ts`,
+  mirrored in `src/lib/emailTemplates.js`), so changing it is a deploy, which is owner-gated.
+  Reported, not fixed.
+
+### Part 3 (C): the remaining contradictions, and the census
+
+**The chair's ruling (vetoable).** Fix the five stress types' stability labels at the
+generator's single source of truth so a settlement with an active crisis never reads as Stable;
+probe the War tab's "at peace" note; then census the dossier for any other pair of surfaces that
+state opposite truths about the same fact, fix every one found at its source, and list what was
+checked.
+
+**C1 — THE STABILITY LABEL (the generator's single source of truth).**
+`generators/power/governanceNarrative.js`'s `applyStressStability` had an arm for seven
+stressors and none for five: `insurgency`, `mass_migration`, `wartime`, `religious_conversion`,
+`slave_revolt`. Measured before the fix on a forced corpus (15 stress types x 6 tiers x 3 seeds
+beside the 525 golden configurations): 12 of 18 forced towns per type read the plain baseline
+`Stable` under an ACTIVE CRISIS banner. Worse, `infiltrated` returned the baseline ON THE SPOT,
+so an infiltration beside a PUBLIC crisis (debt, monster pressure, or any of the five) masked
+that crisis's label too. Both are fixed at that one function: five arms at its tail, in the
+module's own `PRIMARY_STRESS_PRECEDENCE` order (so the label names the same crisis the vignette
+is written for), and the infiltration arm no longer short-circuits the arms below it. (The five
+are written as five plain `if` returns rather than a table: the table cost 27 lines the module
+does not have under its 800-line ceiling, and the leaf it was extracted to cost the generation
+worker more bytes than its ceiling had left. See the receipts below.) The five labels, each leading with a band word already in `STABILITY_BANDS` and glossed in
+the `Band (gloss)` form with no em dash (JUDGMENT, vetoable — the words are a lane's, drawn from
+each stressor's own vignette and hook):
+`Unstable (insurgency contests authority)` · `Strained (people arriving or leaving)` ·
+`Tense (requisition and conscription)` · `Tense (the creed is contested)` ·
+`Unstable (revolt not contained)`.
+After the fix the census reads NO Stable band on any of the fifteen stress types except
+`infiltrated` alone (below).
+**Declared generation output shift.** Only `powerStructure.stability` moves, and only on a town
+carrying one of the five (or an infiltration beside a public crisis): on the espionage fence's
+360-settlement corpus exactly 26 rows move, all in that one field, and a whole-object deep diff
+finds nothing else — no name, no roster, no history, no rng draw. The generator golden master is
+unmoved (its corpus has none of the five). Downstream, those towns' Power tab reads a crisis band
+instead of `Stable`, the DS-POW-2 pool key follows it (`unstable matched` for the two Unstable
+labels, the plain-description floor for the other three — pinned in
+`tests/domain/powerStateProseDesk.test.js`), and the AI brief, the PDF power slice and the quick
+guide print the new label. The owner lifted the simulation pause for this fix.
+
+**C2 — THE WAR TAB'S "AT PEACE" NOTE (probed, CONFIRMED, fixed).** Probe: a canonized campaign
+whose world ledger has no war beat, over generated towns forced into each martial stressor,
+rendered through `WarTab`. It printed "This settlement is at peace and keeps no named faith." on
+a town whose Overview reads "Under Siege · ACTIVE CRISIS", "A stranger finds neither soldiers nor
+temples worth remarking on at Hartsee" on an occupied town, and "There are quarrels Rundkoppel
+could be part of … and it is part of none" on a town at war; outside any campaign the plain
+fallback said "there is no war picture to tell". The cause: every one of those readings comes
+from the campaign's war LEDGER, and a generated siege is not a ledger siege. The fix is at the
+tab's own reading of "is anything martial happening": `martialCrisisBanners(settlement)` reads
+the town's own banners for the five martial stressors (`under_siege`, `occupied`, `wartime`,
+`insurgency`, `slave_revolt` — the same `settlement.stress` array the Overview's cards read), so
+neither the DS-WAR-3 dormant note nor either plain fallback can print beside one, and the tab
+renders the banners in the banner's OWN words (label + summary) under an "Active crisis" eyebrow.
+A calm town in the same quiet campaign still draws its dormant note: the pool is gated, not
+deleted. JUDGMENT (vetoable): the gate is the TAB's, not the desk's, because the desk would need
+a new reading (`martialCrisis`) that the wiring census cannot resolve to a producer — it grew the
+census's unresolved-source and not-produced counts by one each, and the tab is where "the whole
+page-set at rest" is computed anyway. Say "veto" to move it into the desk and re-take the census.
+
+**C3 — THE CENSUS.** Executed over 795 generated settlements (the 525 golden configurations plus
+15 stress types x 6 tiers x 3 seeds forced), reading each town's labels and every sentence its
+six desks compose at both audiences, plus targeted probes. WHAT WAS CHECKED, and the verdict:
+
+| # | The pair | Verdict |
+|---|---|---|
+| 1 | stability label vs the ACTIVE CRISIS banner | FIXED (C1) |
+| 2 | War tab "at peace" / "nothing is being fought" / "no siege at the walls" vs a martial banner | FIXED (C2) |
+| 3 | DS-GEN-16 `UNMARKED` ("No great blow stands on {settlement}'s record") vs a `major` or `catastrophic` row listed on the History tab | FIXED: the block's own STATE-KEY says UNMARKED means "no severe event on the record", and the desk had it as the fall-through for every record neither anchored arm claimed. 15 of 525 golden towns spoke it over a severe row. A record carrying one that neither arm claims now draws NOTHING (RECORDED-UNANCHORED asserts a `false` the record never wrote) |
+| 4 | safety band vs the banner (all 15 stress types) | no contradiction: every stressor lands on a non-safe band |
+| 5 | food-security band vs the banner | no contradiction at the label (famine reads `Deficit — Active Famine`) |
+| 6 | defense readiness vs the banner | no contradiction at the label (no besieged town reads Well-Defended or Fortress) |
+| 7 | viability / prosperity / economic complexity vs the banner | no contradiction |
+| 8 | every ABSENCE-keyed prose pool vs the list it denies (walls, organized force, legal chain, market, charter hall, arcane defense, exports, reserves) | consistent except the reserves row, item 12 |
+| 9 | the dormant-layer, no-conflict and no-relationship-flag rows vs their lists | consistent |
+| 10 | `infiltrated` ALONE keeping a `Stable` baseline | **FIXED IN PART 4** (this row read LEFT at part 3's hand-off, on the producer's own covert-crisis reasoning, with the size of the exemption declared). The review measured it: 479 of the 525 golden-master towns read `Stable` under an `Infiltrated · ACTIVE CRISIS` card, which is the same contradiction the other five were, so the sixth arm was written. See part 4 below for the label, the JUDGMENT and the declared shift |
+| 11 | DS-POW-1's `Approved` band line ("nobody a stranger falls in with suggests the {seat} ought to be somebody else") vs a `Succession Void` banner and its `Volatile — power is available to whoever moves first` label | FOUND, NOT FIXED (4 of 18 forced succession-void towns). The true source is the legitimacy MODEL: `publicLegitimacy` does not read the succession-void stressor at all, so the band itself is what disagrees. Curing it moves a generation figure the coup machinery reads, which is a simulation change beyond the lifted pause; gating the prose alone would leave the label contradiction standing |
+| 12 | DS-DEF-2 / DS-DEF-6 "holds no food against a bad year" / "nothing put by" vs a `Communal root cellar` in the institution list (whose own tooltip is "the buffer that carries a place through a bad harvest") | FOUND, NOT FIXED (36 of 795). The source is the generator's `instFlags.hasGranary` (`priorityHelpers.js`, keyed on the substring `granar`), while the estate's own canonical reserve reader (`isolationSupport.js RESERVE_INSTITUTION`) counts root cellars. Curing it at the flag moves the persisted `compound` flags, the defense economic score and therefore the generator golden master, and it needs a new word for the Defense tab's "Granary present" status: a generation change with authored copy, for the chair to rule |
+| 13 | DS-ECO-9 `IMPORT-DEPENDENT` variant 3 ("Nothing about the arrangement is failing") vs an `Under Siege` banner | FOUND, NOT FIXED (about 3 towns of 795): a VARIANT-level overclaim against its own block's ENTAILMENT rule ("Import-Dependent entails dependence, not a named cause"). The cure is a corpus rewording, which is authoring and the chair's; the corpus gate and the byte ratchet ride with it |
+| 14 | DS-DEF-2 "Defense at {settlement} is not an emergency arrangement" (the plagued perimeter-and-force row) vs an `Under Siege` banner | FOUND, NOT FIXED (2 of 795), same variant-level class; DS-DEF-8's own override row already says the crisis has rewritten the posture, so the desk knows |
+| 15 | DS-DEF-1 `readiness WEAK` ("how normal the town seems to find that") vs a siege banner | FOUND, JUDGED NOT OPPOSITE (a claim about the town's habit, not about the crisis) |
+| 16 | DS-GEN-11 `criticalIssueCount zero` ("finds no seam in it") vs a Structural Issues row on the Overview | JUDGED NOT OPPOSITE: two different records (the economic arithmetic vs institution prerequisites) |
+| 17 | "walls with NO force" vs a `Free company hall`; "arcane defense ABSENT" vs a Druid Circle or a Warden's Lodge | JUDGED NOT OPPOSITE: a hiring hall is not a standing garrison and neither lodge is an arcane defense; the desk's own taxonomy distinguishes them (`watch PRESENT` says so in as many words) |
+| 18 | Food Security's BAND WORD vs its BAR (the bar tracks `resilienceScore`) | FOUND, NOT FIXED: the ranges overlap, so a `Deficit — Active Famine` town can show a fuller bar (up to 63) than a `Secure` one (from 58). The bar's meaning is the owner's own 2026-07-22 order ("the band label, never a bare number", with the bar on the derived resilience), so reconciling them is a presentation decision for the owner rather than a lane's |
+| 19 | the PDF's `powerTone` (an accent colour) matching only the bare words `unstable`/`fragile`/`volatile` | JUDGED OUT OF SCOPE: a tone, not a stated truth, and pre-existing for every glossed label |
+
+### Receipts and known reds at part 3's hand-off
+
+**Every figure below was EXECUTED on the settled tree**, after part 3's last source edit (the
+`governanceNarrative.js` squeeze that put the module back under its 800-line ceiling and the
+generation worker back under its byte ceiling). Nothing here is a prediction; the only edits
+after the last run quoted here are to this document.
+
+- **The whole vitest suite.** `npx vitest run`: 2,588 files, **5 failed**, 2,582 passed, 1
+  skipped; **18 tests failed**, 33,309 passed, 62 skipped (1,047.8 s). The five red files are
+  the five known reds listed at the end of this section and nothing else. Two files that were red
+  earlier in part 3 are GREEN here: `tests/generators/powerStructure.test.js` (the `power/`
+  module line ceiling: `governanceNarrative.js` is 799 lines against 800, and the ceiling was NOT
+  raised) and `tests/domain/npcLedgerState.test.js` (its preservation lever moved from a lock to
+  an authored character). `tests/scripts/gateMutex.test.js`, which failed once in an earlier
+  whole-suite run on a loaded box and passed alone on this tree and on the parts-1-and-2 clone,
+  passed here too: that red was load, not code.
+- **tests/lint and tests/design as directories.** `npx vitest run tests/lint tests/design`: 176
+  files, 3 failed, 173 passed; 15 tests failed, 2,865 passed. The three are the two
+  observed-shape files and the lighting walker. `tests/lint/goldenFreeze.walker.test.js` is
+  GREEN, which is part 1's out-of-door write reverted and the golden moving only inside the door.
+- **The focused set.** 26 files in one run (the locks family, the removal family, C1/C2/C3's
+  pins, and the four registers part 3 touched): **539 tests passed, exit 0**. The two door-owed
+  goldens were run on their own and are red BY DESIGN until the chair's door act:
+  `espionageDormancyFence` 21 tests / 1 failed, `dossierProseManifest` 15 tests / 2 failed.
+- **Every test importing a changed or deleted module.** Enumerated on the settled tree over the
+  43 changed `src/` and `scripts/` modules: **324 test files import one DIRECTLY, and 1,315 reach
+  one through their static import closure** (of 2,585 test files). All of them ran inside the
+  whole-suite run above, and the only reds in either set are the two door-owed goldens. Nothing
+  imports the deleted
+  `src/components/dossier/LockControls.jsx`: every surviving mention in `src/` and `tests/` is a
+  comment or a negative assertion, and the one live reader of its PATH is
+  `scripts/check-observed-shape-readers.mjs`'s stale explained-writer exemption, which is the
+  observed-shape red below.
+- **The generators' `--check` modes this lane touched.**
+  `node scripts/generate-dossier-state-prose.mjs --check`, exit 0: "verified 68 state blocks /
+  2266 variants across 6 desks, 78 causal families / 468 variants".
+  `node scripts/wiring-census.mjs --check`, exit 0: "verified 708 pools / 2266 variants / 165
+  relation rows against 7 stamped files". (`generate-compendium-data.mjs` and
+  `generate-sitemap.mjs` carry no `--check` mode; their freshness arms ran inside the suite.)
+- **The typecheck ratchet.** `node scripts/check-full-typecheck.mjs`:
+  "[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167)".
+- **ESLint, in chunks of eight.** All 81 changed `.js` / `.jsx` / `.mjs` files (parts 1, 2 and 3
+  together), 11 chunks, every chunk exit 0.
+- **The build, and the first-paint numbers.** `npm run build` exit 0, "✓ built in 18.73s",
+  "[prerender] wrote 304 static route documents (13 views + 15 gallery hubs + 276 compendium
+  entries)" — one document fewer than part 2's 305, the retired `setLock` operation page.
+  `VERIFY_DIST=1 npx vitest run tests/build/`: 55 files, **504 tests passed**. THE FIRST-PAINT
+  STATIC CLOSURE (eight files), measured against a clone holding parts 1 and 2 only, built the
+  same way: raw 1,035,611 to **1,035,094 B** (budget 1,048,000), gzip 328,993 to **328,807**
+  (337,000), Brotli 276,278 to **276,135** (283,000), render-blocking CSS **19,576 unchanged**
+  (19,800). Part 3 only shrinks first paint (the deleted lock controls, copy and badge kind).
+  Lazy chunks: the `LockControls` chunk (1,295 B) is GONE; WarTab 19,718 to 20,380 B (C2's crisis
+  block); StateBadge 1,215 to 1,163; NPCsTab 10,017 to 10,004; HistoryTab 14,732 to 14,725;
+  `compendiumData.generated` 86,866 to 86,490. THE GENERATION WORKER: 1,404,417 to **1,404,489 B**
+  against its never-raised ceiling of 1,404,493 — four bytes spare. That ceiling, not the line
+  ceiling, is why C1's five labels are five inline `if` arms and three glosses are short: the
+  table-plus-leaf shape cost 332 B more than the ceiling had left (measured, 1,404,821 B).
+- **Playwright.** `CI=1 npx playwright test --project=chromium`: 88 tests, **81 passed, 7
+  skipped, 0 failed**, no retry, exit 0 (4.2 m).
+- **The two door writes, RE-MEASURED on the settled tree.** The rehearsal clone was cut before
+  the squeeze, so both values were taken again here rather than carried over. The manifest
+  composes to 1,050 rows / 72,240 cells and sha256
+  `ef95a9064f161be6edb9be44e2c2d5687b3b18e49521908c5ea0ff17ae8298e2` — identical to the
+  rehearsal, so the label rewording does not reach the manifest. The fence corpus measures
+  `b9dc82bc…`, exactly the `--expect` the runner above carries (it is the fence's own red,
+  printed as "Received").
+  ⛔ **BOTH VALUES ARE SUPERSEDED BY PART 4**, whose sixth arm moves the same two surfaces once
+  more: the manifest to `921c51cf…` (its provenance note grew with it) and the fence to
+  `f13df68e…`, and a THIRD door write joins them (`generator-golden-master`). The live figures,
+  the commands and the re-measurements are in part 4; these two are kept as the trail.
+  In the rehearsal clone both door acts were executed end to end: the
+  manifest row moved `a64b9a75…` to `ef95a906…` with `rows` 2 and the suite then 105 tests green,
+  and the fence row moved `fe8be28d…` to `b068435b…` (the sha of the rewritten TEST FILE, `rows`
+  null because the surface is not JSON) with 111 tests green. Both refusals were also proved
+  there: `NO_SIGNATURE` with the env var unset, `DIRTY_TREE` with one unrelated dirty path.
+  ⚠ `predictedRows` for the manifest is **2** because the door counts the artefact's TOP-LEVEL
+  KEYS (`provenance` and `rows`), not its rows; the 1,050-row movement is declared in the
+  record's `cause` and inside the fixture's own provenance block.
+- **Negative controls, executed, never reasoned.** On a clone holding parts 1 and 2 only, with
+  part 3's tests dropped in: the locks family reds 19 tests across 4 files, the control-removal
+  family reds 8 across 4 files, and C1/C2/C3's family reds 8 across 3 files. The one test that
+  passes on that base by design is `npcLedgerState.test.js`, whose change is a lever migration
+  (lock to authored) rather than a new claim.
+
+**THE FIVE KNOWN REDS, verbatim, and exactly what each needs.**
+
+1. `tests/property/dossierProseManifest.test.js` (2 tests). "AssertionError: rows whose composed
+   prose moved: expected [ …(1050) ] to deeply equal []" and "AssertionError: the re-record is a
+   DECLARED prose shift: expected 'INSTRUMENT' to be 'PROSE'". ⛔ NEEDS THE CHAIR: a committed
+   tree, `odqRow` filled in the signed record, the door command in part 3 (A), and the
+   `Owner-Signed: §NNN` trailer on the commit. A lane cannot clear it without hand-editing a
+   frozen golden, which the ruling forbids.
+2. `tests/property/espionageDormancyFence.test.js` (1 test). "AssertionError: THE DRIVEN CORPUS
+   MOVED. This is a STOP, not a re-record. … FIND THE MOVER — and attribute it to zero residue —
+   before touching this constant … expected 'b9dc82bc58347d575ee111c5c88bee34570b9…' to be
+   'cda5ec87790ba9fb06e68e9dfe064bb9059d0…'". The mover IS found and attributed to zero residue
+   (part 3 (A)). ⛔ NEEDS THE CHAIR: same committed tree, same record, the fence runner, same
+   trailer.
+3. `tests/lint/observedShapeSentinel.test.js` (11 tests). Every arm fails on one cause, which the
+   run prints verbatim: "Error: observed-shape explained-writer exemption \"factions on locks\"
+   names a writer that cannot be read: src/components/dossier/LockControls.jsx" (then "ENOENT: no
+   such file or directory"). The exemption's named writer is the component the owner ordered
+   removed, and the scan reads that file on EVERY dispatch, so the whole sentinel family reds.
+   ⛔ NEEDS THE CHAIR: the cure is a governed schema migration that DELETES the stale exemption
+   row (`scripts/check-observed-shape-readers.mjs`) and then a shrink-only
+   `node scripts/check-observed-shape-readers.mjs --write` from a CLEAN, COMMITTED tree; the
+   baseline refuses a hand-edited row by design and refuses any write over a dirty tree.
+4. `tests/lint/observedShapeReaders.walker.test.js` (3 tests). "AssertionError: the live heuristic
+   inventory must exactly match the frozen one. A lawful shrink is `node
+   scripts/check-observed-shape-readers.mjs --write` on a clean tree … NEVER hand-edit a row …
+   expected { violations: +0, stale: 6 } to deeply equal { violations: +0, stale: +0 }". Same
+   cause, same cure, same commit: six rows whose files or keys the removals took away.
+5. `tests/lint/sovereigntyLightingContract.walker.test.js` (1 test). "AssertionError: the
+   estate's file count moved — re-measure, do not re-word: expected 2588 to be 2585". Parts 2 and
+   3 add test files. ⛔ NEEDS THE CHAIR, AFTER THE COMMIT: the lighting census refreeze is always
+   its own commit and is never taken by a lane (this is the standing law in MEMORY and in the
+   walker's own header), so it is reported here and left red.
+
+⭐ **No ceiling, budget, baseline or cap was raised by these orders.** Every register that moved
+moved DOWN to a newly measured count or sideways: the raw-color budget 1,317 to 1,313 (the
+padlock's own glyph colour, with the dated note and the red run that measured it), the slice's
+size baseline 824 to 816, the two prose-numerics rows in `npcComponents.jsx` only re-addressed to
+their new lines, and the negative-anchor register's `npcRowLockToggle` row DELETED at zero rather
+than parked. The writer-reach `--rebank` is a growth-door entry with a written charter (banking
+`locks on campaignState` as DARK, because the owner ordered its only readers removed), not a
+raise. The two ceilings that bind hardest — the `power/` line ceiling 800 and the
+generation-worker ceiling 1,404,493 B — were met by making the code smaller.
+
+### Part 4: the review's findings, confirmed or refuted, and what they moved
+
+An independent review of the uncommitted parts 1 to 3 raised one must-fix and five should-fix
+findings (two pairs of them the same defect seen through two lenses). Every one was re-measured
+on this tree before it was acted on; nothing below is carried from the review's own numbers.
+
+**P4-1 (MUST-FIX, CONFIRMED, FIXED) — `infiltrated` was the last stressor that could read
+`Stable` under its own ACTIVE CRISIS card.** Part 3 left it deliberately and said so (C3 row 10),
+on the producer's documented reasoning that infiltration is covert. The review's counter is the
+owner's own later sentence, "fix the remaining contradictions as well", and the size of what the
+exemption covered. MEASURED on this tree with the estate's own 525-row golden corpus: `golden rows
+525 crisis towns: 516 Stable-band beside a crisis banner: 479 {"infiltrated":479}`; 480 of the 525
+towns carry an infiltration banner and 479 of those read a `Stable` band beside it. THE FIX is a
+sixth arm at the tail of `applyStressStability`, after the five so every public crisis still names
+itself:
+`if (hasStress('infiltrated')) return baselineStability.startsWith('Stable') ? 'Vulnerable (decisions shaped from outside)' : baselineStability;`
+
+**JUDGMENT (vetoable) — why `Vulnerable`, and why the guard.** `Vulnerable` is the least alarmed
+word already in `STABILITY_BANDS` that still refuses to call the town calm, which is what covert
+means here: exposed, not visibly disordered. Inventing a band word (`Compromised`) would have been
+authoring AND a vocabulary change rippling into every `bandOf` consumer, so it was refused. The
+`startsWith('Stable')` guard is load-bearing rather than defensive: without it an infiltrated town
+whose baseline already reads `Unstable (pervasive organized crime)` would be DOWNGRADED by this arm,
+and the module's own precedence test says it must not be. (`includes('Stable')` would have been the
+bug the estate documents twice over: `Unstable` contains `Stable`.) Say "veto" to take either back.
+
+**The declared generation output shift (the owner lifted the pause for these fixes).** One field,
+`powerStructure.stability`, and nothing else, proved by single-variable revert and a whole-object
+deep diff at both corpora:
+- **generator-golden-master: 480 of 525 rows move**, `FIELD PATHS THAT MOVED: [[".powerStructure.stability", 480]]`;
+  479 `Stable` -> `Vulnerable (decisions shaped from outside)` and one
+  `Tense — regional monster threat` -> `Vulnerable (decisions shaped from outside); monster threat active`
+  (that town is `plagued`, and the new label carries a pressure marker the old one did not, so the
+  annotation now rides it instead of replacing it). The 525-key set is IDENTICAL. ⛔ THE FIVE ARMS OF
+  PART 3 MOVED ZERO ROWS OF THIS CORPUS, measured at the same tree: every one of the 480 is this arm,
+  which is why this surface enters the signed record only now.
+
+**AND THE RATE A PLAYER ACTUALLY MEETS, because 480 of 525 would read as alarming and is not
+that number.** The golden corpus shares ONE seed (`golden-master-v3`) across 517 of its 525 rows,
+so its infiltration roll is correlated almost everywhere; that is what makes it a good drift
+instrument and a poor prevalence estimate. Measured on a natural sweep instead — 900
+settlements over four tiers at 900 distinct seeds — **17 carry an infiltration banner and
+all 17 are relabelled**: about 1.9 % of generated towns, not 91 %.
+- **espionage-dormancy-fence: 26 rows become 29 of 360**, the 3 new ones all infiltration; corpus sha
+  `cda5ec87...` (frozen) -> `b9dc82bc...` (part 3) -> `f13df68e...` (now).
+- **dossier-prose-manifest: the CELL COUNT does not move** (72,240 before and after this arm), but 958
+  cells do: 479 towns x 2 audiences, one block, `DS-POW-2 :: power.stabilityHeader`, leaving the
+  `stable matched` pool for the plain-description floor, exactly as three of part 3's five labels
+  already did. Fixture sha `ef95a906...` -> `921c51cf...`.
+
+**P4-2 (CONFIRMED, FIXED) — the signed shift record understated the frozen manifest's movement by
+about 35x.** Its `cause` said "72,270 cells become 72,240". 72,270 is a part-1 intermediate that was
+never committed and never frozen; the FROZEN bytes at `a62dcbb90` hold 73,284 cells
+(`git show HEAD:tests/property/dossierProseManifest.test.js` asserts 72,108 + 394 + 390 + 392), and
+part 1's own prose in this document had it right. Nothing in the estate would have caught it:
+`verifyShiftRecord` checks the record's FORM, never its prose, and `goldenFreeze.walker.test.js`
+short-circuits its record-enumeration arm while `frozenAt` is set. The record now states
+73,284 -> 72,240 with both rungs named, carries the DS-POW-2 movement, and carries a THIRD surface,
+`generator-golden-master` (`re-record`, `predictedRows` 525, `proofForm` `settlement-hash`).
+⛔ THE AMENDMENT IS LAWFUL BECAUSE NO DOOR ACT HAS HAPPENED: `odqRow` is still blank, so the door
+refuses the record with BLANK_PROVENANCE and all three surfaces still stand at their frozen bytes.
+A record is never edited after its act, only superseded. The same declaration is mirrored in
+`MANIFEST_PROVENANCE` (`scripts/prose-manifest-cells.mjs`), which rides INSIDE the fixture's own
+bytes; amending it moved the predicted sha, so the sha in the record was re-measured afterwards
+and is the one above.
+
+**THE THIRD DOOR WRITE THE CHAIR NOW OWES**, beside the two part 3 (A) already describes, from a
+clean committed tree with `odqRow` filled:
+```
+GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-09-17-dossier-contradictions.json \
+  UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js
+```
+It throws BY DESIGN on success; the plain re-run afterwards is the receipt, and the commit carries
+the same `Owner-Signed: §NNN` trailer as the other two.
+
+**P4-3 (CONFIRMED, FIXED) — the new Herald-gate test was load-flaky.** Five of its waits cross a
+`React.lazy` boundary (`RealmInspector` at `WorldMap.jsx`, `LivingWorldGates` at
+`WorldMapOverlays.jsx`) on Testing Library's default 1,000 ms find timeout. Two independent reviewers
+reproduced it at two different arms, and it was the sixth red in a whole-suite run that part 3
+reported as five. Each of the five waits now carries an explicit `{ timeout: 5000 }`, the sibling
+Herald suite's own idiom. A PER-WAIT BUDGET, NEVER A BANK: the number bounds one lazy chunk
+arriving, not the file.
+
+**P4-4 (CONFIRMED, FIXED) — the padlock removal took away the only pipeline-level pin on the
+departed-name cure, and the cure is still live.** `departedNameProseBoundary.test.js` had been
+rewritten to call `substituteWholeWord` directly, because the lock that used to seat its fixture is
+retired. But `swapNames` still ships on the SECTION-REROLL path
+(`regenNPCsPipeline -> refreshRosterProse -> swapNames -> substituteWholeWord`, keepers by `_authored`
+canon, no lock anywhere), and `grep` found no test in the estate driving it: a revert to
+`out.split(from).join(to)` would have passed everything. `refreshRosterProse` is now EXPORTED purely
+as that seam (no `src/` module imports it, so the bundlers drop it), and the file's new first arm
+merges the prefix-pair fixture with the real `mergePreservedNpcs` on an `_authored` keeper and
+repairs it with the pipeline's own lane. NEGATIVE CONTROL EXECUTED: with `swapNames` reverted to the
+substring swap, the new arm reds with `expected 'Kara Vossn owes Kara Voss a silent debt.'` and the
+three leaf arms stay green, which is the gap itself, measured.
+
+**P4-5 (REFUTED IN PART) — "the three sibling `realm-inspector` waits are not lazy-gated".** They
+are: `WorldMap.jsx` mounts `RealmInspector` through `lazy(() => import('./map/RealmInspector.jsx'))`,
+and the other reviewer observed a real failure at one of them. All five waits were budgeted, not
+just the `living-world-gates` one.
+
+**⭐ NO CEILING, BUDGET OR BASELINE WAS RAISED, AND THE WORKER PAID FOR ITSELF.** The sixth arm cost
+the generation worker 86 B against 4 B of headroom (measured: 1,404,489 -> 1,404,575 B, ceiling
+1,404,493, never raised). It was paid back inside the same module, output-neutrally:
+`MONSTER_THREAT_ANNOTATION_MARKERS` was fifteen lower-cased strings probed by
+`.some(m => stability.toLowerCase().includes(m))` and is now one case-insensitive alternation probed
+by `.test(stability)` — an identical unanchored substring test, one module-private reader, no export,
+no consumer. Rebuilt: **1,404,488 B, five bytes under the ceiling.** PROVED OUTPUT-NEUTRAL, not
+argued: with the regex in place the 360-row fence corpus hashes to the same `f13df68e...` and the
+525-row golden corpus deep-diffs to `rows whose serialized object moved: 0 of 525`. The `power/`
+module line ceiling (800) is met the same way: the file is 799 lines, unchanged in count.
+
+**Receipts, all EXECUTED on this tree after the last source edit.**
+- The stability-label consumers, every test file in the estate that reads `powerStructure.stability`,
+  `governanceNarrative`, `deriveGovernance` or `stabilityHeader` (8 files): **235 passed**.
+- The Herald and locks families (8 files): **72 passed**. The flake batch the reviewers used (12
+  files) run FIVE times: **12 passed / 170 tests, five times out of five.**
+- The golden-bearing directories `tests/property tests/generators tests/simulation`: 214 files,
+  **3 failed / 211 passed**; 1,802 tests, **4 failed / 1,798 passed**. The three are the door-owed
+  goldens and nothing else, which answers "does this move any OTHER frozen surface": it does not.
+- `tests/lint tests/design` as directories: 176 files, **3 failed / 173 passed**; 2,880 tests,
+  **15 failed / 2,865 passed** — the same three files, the same 15 tests, as part 3's hand-off.
+- `node scripts/check-full-typecheck.mjs`: "OK — no type regressions (167 error(s), ceiling 167)".
+- ESLint over the six files this part changed, one chunk: exit 0.
+- `npm run build`: "✓ built in 18.35s", 304 prerendered route documents (unchanged).
+  `VERIFY_DIST=1 npx vitest run tests/build/`: 55 files, **504 passed**. FIRST PAINT, measured on
+  that dist: the eight-file static closure is raw **1,035,094 B** (budget 1,048,000; 12,906 spare),
+  gzip 329,347 and Brotli 276,213 (budgets 337,000 / 283,000), render-blocking CSS **19,576 B**
+  (budget 19,800; 224 spare) — raw and CSS identical to part 3's figures, because nothing here
+  reaches the first-paint graph. THE GENERATION WORKER: **1,404,488 B** against its never-raised
+  ceiling of 1,404,493, five bytes spare (part 3 left four).
+- `CI=1 npx playwright test --project=chromium`: 88 tests, **81 passed, 7 skipped, 0 failed** (4.1 m).
+
+**THE KNOWN REDS AT PART 4'S HAND-OFF ARE SIX, one more than part 3's five.** The new one is
+`tests/property/generatorGoldenMaster.test.js` (1 test, "expected [ …(480) ] to deeply equal []"),
+and it is the infiltration arm's declared shift standing at the door exactly like the other two:
+the corpus-totality arm beside it is GREEN (525 keys = 525), so what moved is output, not shape.
+⛔ NEEDS THE CHAIR, with the command above. The other five are unchanged from part 3's list:
+`dossierProseManifest` (2) and `espionageDormancyFence` (1), both door-owed; `observedShapeSentinel`
+(11) and `observedShapeReaders.walker` (3), both owed the governed schema migration and a
+shrink-only `--write` from a clean tree; and `sovereigntyLightingContract.walker` (1), the
+test-file-count refreeze that is always its own commit and never a lane's.
 
 ---
 

@@ -48,11 +48,9 @@ const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
 // ruling — ODQ §767.2 as amended by §777: post-forge lands on the dossier, head
 // at the top, and the simulation record stays one tap away behind the toolbar's
 // drawer trigger, which already carries the duty.)
-// LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
-// only meaningful once a settlement exists. The dossier tabs import the same leaf
-// statically from inside their own lazy chunks, so this costs a shared chunk, not
-// first-paint bytes.
-const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
+// (The "What a new roll keeps" world-lock section that sat below the draft dossier was
+// removed by owner order 2026-09-17: "Remove the entire section that says what a new roll
+// keeps and any button associated with that." Its lazy LockControls import went with it.)
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 // The linear step wizard collapsed into LayeredConfigurationPanel (UX overhaul
@@ -481,9 +479,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {/* THE POST-FORGE ORDER (owner ruling, ODQ §767.2 as amended by §777): the
           dossier lands HEAD-FIRST. The above-dossier receipts panel is deleted
           outright (the toolbar's drawer trigger already carries that duty), and
-          the world locks moved out of the head — to the settlement editor for a
-          saved settlement, and to the quiet controls region below the dossier on
-          this draft surface. Nothing stands between the forge and the dossier. */}
+          the world locks that later sat below the dossier were removed outright
+          (owner order 2026-09-17). Nothing stands between the forge and the dossier. */}
 
       {/* Regenerate lives in the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the
@@ -564,20 +561,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 Save/Export primaries when they apply. */}
             <BuyThisDossier settlement={settlement} saveId={activeSaveId} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
-          </div>
-
-          {/* LOCKS ENGINE, world scope — what a new roll keeps (name / ground /
-              seat). Relocated out of the page head by the §767.2/§777 reorder:
-              on this draft surface the locks live in the controls region below
-              the dossier, beside the other what-do-I-do-with-this-draft verbs
-              (a saved settlement gets them in the settlement editor). The
-              per-section locks stay beside their own Reroll buttons. */}
-          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-            <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}>
-              <ClerkNote rubric="What a new roll keeps">
-                <LockControls scope="world" />
-              </ClerkNote>
-            </Suspense>
           </div>
 
           {/* Post-generate "what's next" guidance now lives in the app-level

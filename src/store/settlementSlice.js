@@ -102,7 +102,7 @@ import {
   _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, foldRegeneratedRoster, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
+  sectionLocked, foldRegeneratedRoster, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -406,11 +406,13 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     const { settlement, config, locks } = state;
     if (!settlement) return;
-    // LOCKS ENGINE Phase A — a whole-section lock is the user's standing "do not
-    // reroll this". The UI disables the button and says why; this is the typed
-    // refusal behind it, so a caller that bypassed the button gets a reason
-    // instead of a silent reroll. Refusal-only envelope, the updateSavedSettlement
-    // shape (this action's success path is unconverted and stays so).
+    // LOCKS ENGINE Phase A — a whole-section lock was the user's standing "do not
+    // reroll this", and this was the typed refusal behind the disabled button.
+    // ⛔ DORMANT since owner order 2026-09-17 ("remove the other padlocks"): the
+    // controls and the store's `setLock` writer are retired, and `sectionLocked`
+    // reads the honoured view (domain/locksPreservation.js normalizeLocks), which
+    // reads no lock, so a `section_locked` refusal cannot fire. The call stays as the
+    // one seat a veto re-arms. Refusal-only envelope, the updateSavedSettlement shape.
     if (sectionLocked(locks, section)) return makeActionResult('regenSection', { ok: false, before: { reason: 'section_locked', section } });
     // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
     // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
@@ -973,29 +975,6 @@ export const createSettlementSlice = (set, get) => ({
       }).catch(() => { /* never block an export */ });
     }
   },
-
-  /**
-   * Set (or, with a falsy/empty value, remove) one lock — the user's standing
-   * "do not reroll this". `key` is a section name ('npcs', 'history') or an
-   * identity/geography flag; the value is `true`, or an array of entity ids.
-   *
-   * THE PERSIST (atlas store-ops-a gap 10): the lock map rides inside
-   * campaignState, so before this it reached the cloud only by PIGGYBACK — when
-   * some OTHER canon-path write happened to pickle the slice. Set a lock, reload
-   * without touching anything else, and it was gone. Both verbs now write through
-   * the same path regenSection uses; see persistLocksToActiveSave.
-   */
-  setLock: (key, value) => {
-    // Flat rather than braced: this file sits exactly at its frozen max-lines
-    // ceiling, so the persist below is funded from the branch's own bytes.
-    set(state => {
-      if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) delete state.locks[key];
-      else state.locks[key] = value;
-    });
-    return persistLocksToActiveSave(get, set);
-  },
-
-  clearLocks: () => { set(state => { state.locks = {}; }); return persistLocksToActiveSave(get, set); },
 
   /**
    * Run the event preview without committing. UI shows the result as a

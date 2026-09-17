@@ -55,7 +55,7 @@ export default function DossierSessionNotices({
         >
           <span style={{ flex: 1, minWidth: 0 }}>{aiError}</span>
           {aiErrorIsCredits && (
-            <Button variant="secondary" size="sm" disabled={!purchasesAreOpen} onClick={openCreditsMoment} style={{ flexShrink: 0 }}>
+            <Button variant="secondary" size="sm" disabled={!purchasesAreOpen} onClick={openCreditsMoment} style={{ flexShrink: 0, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
               View plans
               {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
             </Button>

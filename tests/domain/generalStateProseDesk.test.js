@@ -649,8 +649,10 @@ describe('the general desk over the real generator', () => {
 
 describe('the general desk — the mount registry', () => {
   it('the four blocks speak at the positions the registry names, and none is still dark', () => {
+    // ⛔ DS-GEN-3 IS NOT HERE SINCE OWNER ORDER 2026-09-17: its one row, overview.systemsHealth,
+    // GLANCES (the stacked sentence list under the bars was removed), so it has no speaking
+    // position until its lenses are re-homed. Pinned just below this loop.
     const expected = {
-      'DS-GEN-3': 'overview.systemsHealth',
       'DS-GEN-12': 'overview.ground',
       'DS-GEN-13': 'overview.market',
       'DS-GEN-17': 'overview.institutions',
@@ -678,6 +680,13 @@ describe('the general desk — the mount registry', () => {
       const rung = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId, poolKey: 'p', angle: 'a' } };
       expect(drawnAtMount(mount, rung)).toBe(rung);
     }
+    // DS-GEN-3: still MOUNTED (not declared dark), at a GLANCE row that strips the sentence.
+    expect(sentenceMountForBlock('DS-GEN-3'), 'DS-GEN-3 speaks again: the Systems Health stack is back').toBeNull();
+    expectAbsentWithAnchor(UNMOUNTED_BLOCKS, 'DS-GEN-3', UNMOUNTED_BLOCKS[0], 'DS-GEN-3 was parked dark instead of glanced');
+    const health = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId: 'DS-GEN-3', poolKey: 'p', angle: 'a' } };
+    const drawn = drawnAtMount('overview.systemsHealth', health);
+    expect(drawn.glance, 'the position is still mounted and keeps its glance').toBe('x');
+    expect(drawn.sentence, 'overview.systemsHealth draws no sentence').toBeNull();
   });
 });
 
@@ -1106,8 +1115,22 @@ describe('the history chapter', () => {
       eventRecordPoolKey([blow(true, 5), blow(true, 9)]), eventRecordPoolKey([blow(false, 5)]),
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
     // ⚠ AN ABSENT `anchored` IS NOT A `false`. A record that has not been asked the question
-    // reads UNMARKED, and counting it as unanchored would state something the record does not.
+    // reads UNMARKED when it carries no severe row, and counting it as unanchored would state
+    // something the record does not.
     expect(eventRecordPoolKey([{ yearsAgo: 5, lastingEffects: ['x'] }])).toBe('UNMARKED');
+    expect(eventRecordPoolKey([{ severity: 'minor', yearsAgo: 5, lastingEffects: [] }])).toBe('UNMARKED');
+    // ⛔ AND UNMARKED IS "no severe event on the record" (the block's STATE-KEY; owner order
+    // 2026-09-17, "fix the remaining contradictions"). A `major` or `catastrophic` row that
+    // neither arm claims used to fall through to UNMARKED, which printed "No great blow stands on
+    // the record" beside that very row on the History tab. It now draws NOTHING.
+    for (const severity of ['major', 'catastrophic']) {
+      expect(eventRecordPoolKey([{ severity, yearsAgo: 40, lastingEffects: [] }]), severity).toBeNull();
+      expect(eventRecordPoolKey([{ severity, anchored: false, yearsAgo: 40, lastingEffects: [] }]), severity).toBeNull();
+      expect(eventRecordPoolKey([{ severity, yearsAgo: 40, lastingEffects: ['x'] }]), severity).toBeNull();
+      // The arms that DO claim a severe row are untouched by the severity read.
+      expect(eventRecordPoolKey([{ ...blow(true, 5), severity }])).toBe('ANCHORED-RECENT');
+      expect(eventRecordPoolKey([{ ...blow(false, 5), severity }])).toBe('RECORDED-UNANCHORED');
+    }
     expect(eventAnchorDimension(undefined)).toBeNull();
     expect(eventAnchorDimension(true)).toBe('anchored');
     expect(eventAnchorDimension(false)).toBe('not anchored');
@@ -1116,6 +1139,25 @@ describe('the history chapter', () => {
     expect(significantEvent([blow(false, 8), blow(false, 3)]).yearsAgo).toBe(3);
     expect(significantEvent([])).toBeNull();
   });
+
+  it('⛔ GENERATED TOWNS: "No great blow stands on the record" never composes over a severe row (owner order 2026-09-17)', () => {
+    // The 12 hamlets below are twelve of the fifteen DRIFT-corpus towns the old fall-through
+    // spoke UNMARKED over (each lists a `major` or `catastrophic` event on its History tab).
+    const cultures = ['arabic', 'celtic', 'east_asian', 'germanic', 'greek', 'latin', 'mediterranean',
+      'mesoamerican', 'norse', 'slavic', 'south_asian', 'steppe'];
+    let severeTowns = 0;
+    for (const culture of cultures) {
+      const s = generateSettlementPipeline({
+        settType: 'hamlet', culture, terrainOverride: 'forest', tradeRouteAccess: 'isolated', monsterThreat: 'civilized',
+      }, null, { seed: 'golden-master-v3', customContent: {} });
+      const events = s.history?.historicalEvents || [];
+      const severe = events.some((e) => e.severity === 'major' || e.severity === 'catastrophic');
+      if (severe) severeTowns += 1;
+      if (severe) expect(eventRecordPoolKey(events), `${culture}: a severe row still read UNMARKED`).not.toBe('UNMARKED');
+    }
+    // Non-vacuity: the sweep really reached towns whose record carries a severe row.
+    expect(severeTowns).toBeGreaterThan(0);
+  }, 60_000);
 
   it('MEASURED RESIDUE: the duration ladder tops out below this chapter\'s subject', () => {
     // ⛔ THE FINDING, PINNED SO IT CANNOT DECAY. `{timeband_since}` is the ADVERBIAL column

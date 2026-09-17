@@ -22,6 +22,6 @@ export const WORLD_MAP_TOUR_STEPS = [
   { sel: 'history',   title: 'Advance history', body: 'Every advance is remembered. Open History to walk back to any earlier point in the campaign: a byte-exact return, not a guess.' },
   { sel: 'layers',    title: 'Layers', body: 'Toggle overlays: relationships, supply chains, labels, biomes, borders. Focus on what matters right now.' },
   { sel: 'controls',  title: 'What am I looking at?', body: 'The “?” opens an in-place reference for every control on this toolbar: the same teaching, reachable on touch, without hunting for a hover tooltip.' },
-  { sel: 'inspector', title: 'Realm Inspector', body: 'Open the inspector for the realm’s read surfaces (the news bulletin, the chronicler’s letter, the timelapse, and the road scene), the DM’s window into what the simulation is doing and why.' },
+  { sel: 'inspector', title: 'Realm Inspector', body: 'Once the realm has advanced for the first time, open the inspector for the realm’s read surfaces (the news bulletin, the chronicler’s letter, the timelapse, and the road scene), the DM’s window into what the simulation is doing and why.' },
   { sel: 'help',      title: 'Replay this tour', body: 'Reopen this walkthrough any time from the Help button. That’s the tour. Happy worldbuilding.' },
 ];

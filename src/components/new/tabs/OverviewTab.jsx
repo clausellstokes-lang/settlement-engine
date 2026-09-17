@@ -190,8 +190,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       },
       { seed: deskSeed, audience: deskAudience },
     );
+  // ⛔ THE DESK'S `crisisFraming` RUNG IS NOT DRAWN HERE, and it must never be. It is the
+  // annex's "ARITY — no banner" line ("There is no crisis on the books…"), which speaks only
+  // when `stresses` is EMPTY, and this list renders only inside the ACTIVE CRISIS block below,
+  // which exists only when `stresses` is NOT empty. Drawing it here printed "no crisis" under
+  // a crisis card on every crisis town (owner order 2026-09-17, "Fix the contradiction").
   const crisisSectionLines = [
-    drawnAtMount(CRISIS_MOUNT, stressorProse.crisisFraming),
     drawnAtMount(CRISIS_MOUNT, stressorProse.crisisArity),
   ].map((d) => d?.sentence).filter(Boolean);
   const stressorLines = [
@@ -209,8 +213,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the
   // §885.3 public gate and every reading the desk needs, because that leaf's blocks land on
   // seven tabs and the registry admits one call site per desk.
+  // `healthLines` is deliberately NOT taken: its position glances (owner order 2026-09-17),
+  // so it is always empty, and the Systems Health section renders no sentence list.
   const {
-    healthLines, conflictLines, warningLines, originLines, siteLines, situationLine,
+    conflictLines, warningLines, originLines, siteLines, situationLine,
     connectionLines, populationLine,
     // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
     // annex's own named reader and it imports out of a worldPulse module, so the cost
@@ -411,20 +417,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             removed — Food Security (above) now carries that signal, so the deficit
             line was a duplicate. */}
 
-        {/* ── DS-GEN-3, the dashboard in the town's own voice ────────────────
-            Ten lenses over one block at ONE position: prosperity, safety,
-            viability and defence readiness (the four status tags), the five
-            score bars, and the live food band — in the order the rows above
-            already print them, so each sentence follows the row it is about.
-            The DATUM is untouched: every tag, bar and band still carries its own
-            word, and the prose bands the same fact rather than restating it. */}
-        {healthLines.length>0&&(
-          <div style={{borderTop:'1px solid #e0d0b0',marginTop:12,paddingTop:10}}>
-            {healthLines.map((line,i)=>(
-              <p key={i} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
-          </div>
-        )}
+        {/* ⛔ NO SENTENCE LIST UNDER THE BARS (owner order 2026-09-17). DS-GEN-3's ten
+            lenses used to stack here, one sentence per tag and bar. The owner ruled the
+            stack out; the chair ruled removal over picking one. The registry row
+            `overview.systemsHealth` now GLANCES, so the reader draws no sentence, and this
+            section renders its tags, bars and band words only. The sentences are to be
+            re-homed later, one by one, through the mount registry. Pinned in the DOM by
+            tests/ui/generalDeskTabFlow.test.js. */}
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}

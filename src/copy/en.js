@@ -1157,14 +1157,12 @@ export const en = Object.freeze({
       event_pending: 'Pending',
       narrated:      'Narrated',
       raw:           'Raw',
-      locked:        'Locked',
     },
     tooltips: {
       draft:    'Editable, not yet part of your campaign world.',
       canon:    'Live campaign truth. Changes are logged as events.',
       narrated: 'Narrative refinement layer is present.',
       raw:      'Raw simulation output. No narrative layer.',
-      locked:   'Locked. Survives an NPC reroll.',
     },
   },
 
@@ -1274,7 +1272,8 @@ export const en = Object.freeze({
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
-      body:     'Locks, drift, chronicle: Cartographer hands you the worldbuilder controls.',
+      // "Locks" left this line when the owner ordered the padlocks removed (2026-09-17).
+      body:     'Drift and the chronicle: Cartographer hands you the worldbuilder controls.',
     },
     map_clicked: {
       headline: 'World Map unlocks with Cartographer.',

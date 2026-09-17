@@ -149,11 +149,11 @@ const SOURCE_ANCHORS = Object.freeze({
   occupation_posture: "ruleId: 'occupation_posture',\n          ruleFamily: 'occupation',\n          applyMode: 'auto'",
   npc_goal_culmination: "probability: 0.9,\n    applyMode: 'auto'",
   trade_war: "ruleId: `trade_war_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
-  // auto with a separate lock axis (NOT the proposal flag). M10a routes the coup
-  // through authorityFor: the lock-escalation gate (locked ? 'proposal' : 'auto')
-  // is the LEGACY mode fed through — verbatim under routine/full, forced to
-  // proposal under dm_only/recommendations and routine-with-major-approval.
-  coup_succeeded: "applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto')",
+  // auto, routed through authorityFor (M10a): verbatim under routine/full, forced to
+  // proposal under dm_only/recommendations and routine-with-major-approval. The separate
+  // player-lock axis (a stored seat lock forcing 'proposal') was retired by owner order
+  // 2026-09-17 with the "Keep them in power" button that wrote it.
+  coup_succeeded: "applyMode: authorityFor(rules, 'coup_succeeded', 'auto')",
   // auto with approval routing (W-CONVERGENCE): the autonomous mover routes its legacy
   // 'auto' through authorityFor, forcing proposal under dm_only/recommendations and
   // routine-with-major-approval (byte-identical under legacy routine/full — dark by default).
@@ -332,7 +332,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
 
   test('no campaignAltering marker is keyed off severity or applyMode', () => {
     // Authority class is NOT the signal: campaign-altering entries span auto,
-    // auto-with-lock-escalation, and always-proposal. The flag is structural.
+    // auto-with-approval-routing, and always-proposal. The flag is structural.
     const authorities = new Set(
       CAMPAIGN_ALTERING.map(t => CHANGE_AUTHORITY_POLICY[t].authority),
     );

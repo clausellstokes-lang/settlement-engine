@@ -1273,7 +1273,9 @@ describe('the composer — what it must NOT do', () => {
       .toBe(true);
     // The paired positive: a SENTENCE mount keeps it, so the strip above is a rung class
     // rather than a function that blanks everything.
-    const kept = drawnAtMount('overview.systemsHealth', rung);
+    // (`overview.ground`, not `overview.systemsHealth`: that row GLANCES since owner order
+    // 2026-09-17, so it can no longer serve as the sentence-mount control.)
+    const kept = drawnAtMount('overview.ground', rung);
     expect(kept.provenance.pieces.length, 'a sentence mount keeps the pieces').toBe(1);
   });
 });

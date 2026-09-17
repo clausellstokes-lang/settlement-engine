@@ -26,6 +26,7 @@ import {
   crisisFramingPoolKey, stressorLifecyclePoolKey, stressorOriginPoolKey, stressorsStateProse,
 } from '../../src/domain/display/stateProse/stressorsStateProse.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   isEventSourcedCondition, severityBand, severityBands, supportedConditionArchetypes,
 } from '../../src/domain/activeConditions.js';
@@ -38,6 +39,8 @@ import { VARIANT_HOOKS } from '../../src/domain/worldPulse/stressorDynamics.js';
 import { DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, sentenceMountForBlock } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { parseSlotShapes, mergeSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { poolMemberTexts } from '../helpers/drawnProse.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /**
  * THE LIVENESS ANCHOR for every "this block is not in the dark half" assertion below,
@@ -136,21 +139,80 @@ describe('the stressor desk — ALIVENESS at BIRTH', () => {
     expect(reached.size).toBe(15);
   });
 
-  it('the arity line needs SEVERAL crises, and the framing line needs one', () => {
+  it('the arity line needs SEVERAL crises, and the no-banner line speaks ONLY when there are none', () => {
+    // ⛔ OWNER ORDER 2026-09-17, "Fix the contradiction". The pool keyed "Overview's own
+    // section framing" is the annex's ARITY — no banner pool: all three variants say the
+    // town has NO crisis. It used to fire on ONE banner and print "There is no crisis on the
+    // books" under an ACTIVE CRISIS card. It now reads the same banner list the cards render.
     const one = stressorsStateProse(town, { banners: [banner('famine')], conditions: [] }, { seed: 'a1' });
     expect(one.crisisArity, 'one crisis is not an arity story').toBeNull();
-    expect(one.crisisFraming.sentence).toBeTruthy();
+    expect(one.crisisFraming, 'a town WITH a crisis banner must never draw the no-crisis pool').toBeNull();
     const two = stressorsStateProse(
       town, { banners: [banner('famine'), banner('wartime')], conditions: [] }, { seed: 'a2' },
     );
     expect(two.crisisArity.sentence).toBeTruthy();
     expect(two.crisisArity.provenance.poolKey).toBe('ARITY: several banners standing at once');
-    // No crisis at all ⇒ the section does not render ⇒ neither line speaks.
+    expect(two.crisisFraming, 'two crisis banners, and the no-crisis pool still spoke').toBeNull();
+    // No crisis at all ⇒ the no-banner pool is the one that speaks, and arity does not.
     const none = stressorsStateProse(town, { banners: [], conditions: [] }, { seed: 'a0' });
-    expect(none.crisisFraming).toBeNull();
+    expect(none.crisisFraming.sentence).toBeTruthy();
+    expect(none.crisisFraming.provenance.poolKey).toBe("Overview's own section framing");
+    // The drawn sentence is one of the pool's own members (computed, never a literal pin).
+    expect(poolMemberTexts({
+      leaf: 'stressors', blockId: STR1, poolKey: "Overview's own section framing", slots: { settlement: town.name },
+    })).toContain(none.crisisFraming.sentence);
     expect(none.crisisArity).toBeNull();
+    // A reading the caller did not give is SILENCE, never "no crisis".
     expect(crisisArityPoolKey(null)).toBeNull();
     expect(crisisFramingPoolKey(null)).toBeNull();
+    expect(crisisFramingPoolKey(undefined)).toBeNull();
+    expect(crisisFramingPoolKey('famine')).toBeNull();
+    expect(stressorsStateProse(town, { conditions: [] }, { seed: 'a3' }).crisisFraming).toBeNull();
+  });
+
+  it('⛔ NO CRISIS CARD DENIES ITS OWN CRISIS: no banner-pool wording says there is no crisis', () => {
+    // A banner sentence prints INSIDE its ACTIVE CRISIS card. INFILTRATED's third wording used
+    // to open "There is no visible crisis" there; owner order 2026-09-17 took the same shape as
+    // the no-banner line, so the corpus line was re-worded (claim kept: the crisis is hidden).
+    const DENIAL = /\bno (visible |real |actual )?(crisis|emergency)\b|\bnothing (here )?is urgent\b|\bnot a crisis\b/i;
+    const bannerKeys = Object.keys(STRESS_TYPE_MAP).map((t) => crisisBannerPoolKey(t));
+    expect(bannerKeys, 'the banner roster').toHaveLength(15);
+    const denials = bannerKeys.flatMap((key) => STR1_POOLS[key]
+      .filter((v) => DENIAL.test(v.text)).map((v) => `${key} v${v.vid}: ${v.text}`));
+    expect(denials, 'a crisis banner wording denies the crisis its card announces').toEqual([]);
+    // NON-VACUITY: the same pattern convicts every wording of the pool that IS about no crisis.
+    const noBanner = STR1_POOLS["Overview's own section framing"];
+    expect(noBanner.filter((v) => DENIAL.test(v.text)).length).toBe(noBanner.length);
+  });
+
+  it('THE ONE CRISIS TRUTH: over generated towns the no-crisis line and the crisis banners never coexist', () => {
+    // The Overview's banner list is `settlement.stress[]`, normalized exactly as below
+    // (OverviewTab.jsx). Over real generations, with and without a forced stress, the
+    // no-crisis rung is present IFF that list is empty.
+    let crisis = 0;
+    let calm = 0;
+    const configs = [
+      { settType: 'town', culture: 'germanic' },
+      { settType: 'village', culture: 'celtic' },
+      { settType: 'city', culture: 'norse', stressTypes: ['politically_fractured'] },
+      { settType: 'town', culture: 'mediterranean', stressTypes: ['famine', 'wartime'] },
+    ];
+    const CASES = configs.flatMap((config, i) => ['one-truth-a', 'one-truth-b'].map((seed) => ({ config, seed: `${seed}-${i}` })));
+    expectNoSeedFailures(collectSeedFailures(CASES, ({ config, seed }) => {
+      const r = generateSettlementPipeline(config, null, { seed, customContent: {} });
+      const stresses = (Array.isArray(r?.stress) ? r.stress : r?.stress ? [r.stress] : []).filter(Boolean);
+      const prose = stressorsStateProse(r, { banners: stresses, conditions: [] }, { seed: String(r._seed ?? r.id) });
+      if (stresses.length > 0) {
+        crisis += 1;
+        expect(prose.crisisFraming, `${r.name} shows ${stresses.length} crisis banner(s) and drew the no-crisis line`).toBeNull();
+      } else {
+        calm += 1;
+        expect(prose.crisisFraming?.sentence, `${r.name} has no crisis and the no-banner pool fell silent`).toBeTruthy();
+      }
+    }), 'the no-crisis line and the crisis banners read one crisis truth on every generated town');
+    // Non-vacuity: both sides of the IFF were exercised.
+    expect(crisis, 'no generated crisis town, so the contradiction arm judged nothing').toBeGreaterThan(0);
+    expect(calm, 'no generated calm town, so the silence arm judged nothing').toBeGreaterThan(0);
   });
 
   it('the four SEVERITY pools read through the CANONICAL band derivation', () => {
@@ -434,7 +496,8 @@ describe('DS-STR-2 — the ten dark pools, and the coupling measurement behind t
       { banners: [banner('famine')], conditions: [condition({ severityBand: 'high' })], worldStressor: null },
       { seed: 'birth2' },
     );
-    expect(lit.crisisFraming.sentence).toBeTruthy();
+    // The famine banner is showing, so the no-crisis pool is silent (owner order 2026-09-17).
+    expect(lit.crisisFraming).toBeNull();
     expect(lit.conditionSeverity.sentence).toBeTruthy();
   });
 

@@ -124,6 +124,7 @@ MUTATED_FILES=(
   src/domain/content/customContentCharset.generated.js
   tests/fixtures/.golden-freeze-register.json
   src/domain/display/publicSafe.js
+  src/components/instant/InstantWorldEntry.jsx
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1485,6 +1486,19 @@ check_caught "arrow-header/a painted region's focus ring falls back to the house
 #      8 passed; restored => 9 passed.
 perl -0pi -e "s/position: 'sticky', top: HEADER_H, zIndex: 40,/position: 'sticky', top: CHROME.headerDesktop, zIndex: 40,/" src/components/generate/WizardOutputToolbar.jsx
 check_caught "arrow-header/a retired header height regains a consumer" src/components/generate/WizardOutputToolbar.jsx "npx vitest run tests/lint/arrowHeaderRetirement.test.js --no-file-parallelism" "(a) no src file consumes a retired module, token or CHROME height"
+
+# ── THE LAUNCH-LOCKED PILL HOSTS (owner orders 2026-09-17, "Fix the small visual defects") ──
+# 105. A LAUNCH-LOCKED BUTTON MUST BE ABLE TO WRAP ITS PILL. The Button primitive is nowrap
+#      and the a11y floor `button { min-width: 24px }` replaces a flex item's min-content
+#      minimum, so a locked Button in a box narrower than label plus pill spills out of both
+#      sides and a clipping ancestor cuts both ends: the Realm sidebar's Instant World card
+#      read "ee Premium". The plant deletes that card's closed-only wrap, which is exactly the
+#      shipped defect; everything still renders and the button is still disabled with its pill.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 986b6146145563020491b68f77bd77ac before and after): clean => 8 passed; planted =>
+#      2 red, the WRAPS and EXEMPT exact arms, 6 passed; restored cmp-identical => 8 passed.
+perl -0pi -e "s/          style=\{premiumReachClosed \? \{ flexWrap: 'wrap' \} : undefined\}\n//" src/components/instant/InstantWorldEntry.jsx
+check_caught "launch-pill-host/the Instant World reach loses its wrap and clips in the Realm sidebar" src/components/instant/InstantWorldEntry.jsx "npx vitest run tests/lint/launchPillHostWrap.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-wrapped Button host not named here clips when its box is narrow"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

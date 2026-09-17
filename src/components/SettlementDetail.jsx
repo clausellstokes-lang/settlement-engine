@@ -37,10 +37,8 @@ import WhatChangedPanel from './settlement/WhatChangedPanel.jsx';
 // Wave R-2 (atlas A20): the event-keyed pre-event narrative archive, read side.
 // Lazy leaf — its chunk loads only when a narrated/stamped save opens edit mode.
 const NarrativeArchivePanel = lazy(() => import('./settlement/NarrativeArchivePanel.jsx'));
-// THE WORLD LOCKS (ODQ §767.2/§777): the "what a new roll keeps" controls live
-// in the settlement editor, beside the regenerate verb they govern. Same lazy
-// leaf the dossier tabs mount for their per-section locks.
-const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
+// (THE WORLD LOCKS — the "What a new roll keeps" box that sat under the regenerate verb
+// in edit mode — were removed by owner order 2026-09-17, with their lazy import.)
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
@@ -608,17 +606,6 @@ export default function SettlementDetail({
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',border:`1px solid ${BORDER}`}}>
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
-      </div>
-
-      {/* What a new roll keeps — the world locks (name / ground / seat), seated
-          beside the regenerate verb above per the §767.2/§777 relocation. */}
-      <div style={{marginBottom:12,padding:'8px 12px',background:CARD,border:`1px solid ${BORDER}`}}>
-        <div style={{fontFamily:sans,fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>
-          What a new roll keeps
-        </div>
-        <Suspense fallback={<div style={{fontFamily:sans,fontSize:FS.xxs,color:MUTED}}>Setting out the name, ground and seat locks…</div>}>
-          <LockControls scope="world" />
-        </Suspense>
       </div>
 
       {/* ── Campaign-state engine ─────────────────────────────────────────

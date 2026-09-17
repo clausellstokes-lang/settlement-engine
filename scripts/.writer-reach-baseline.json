@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "d710f0a98fea1c0e389ebbc3a09458e39b08ee79",
+ "frozenAtSha": "a62dcbb907a14daa4e2555f638ad7a7e82883d22",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "44fc73f1b012b60c5aaf7b290fe4917edd89a2493f35016b849d7136752077a8",
  "detectorDigest": "705d2de1fbe73ce23d669a2e4733babcad8fe189075a59b168a157c4dca5c34b",
- "verdictDigest": "6df54e48c8d68169d08bd218364888a83585d08c53cabf54d688c02e26677cf5",
+ "verdictDigest": "09534d437cb5b71f49b0827132567647a7c535a395dfdb2acc22c030a1cf8edd",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,8 +72,8 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 708,
-  "web-transitive": 901,
+  "web-display": 703,
+  "web-transitive": 902,
   "dossier-pdf": 374,
   "campaign-pdf": 75,
   "world-book": 92,
@@ -84,26 +84,26 @@
  "population": {
   "judged": 6532,
   "lit": 560,
-  "litName": 4645,
-  "dark": 1327,
+  "litName": 4644,
+  "dark": 1328,
   "thinKeys": 9144,
   "thinShapes": 962,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1610,
-  "sites": 38792,
-  "propRead": 36737,
+  "files": 1606,
+  "sites": 38779,
+  "propRead": 36727,
   "elemRead": 0,
-  "destructure": 2041,
+  "destructure": 2038,
   "inOp": 14,
-  "rGrades": 5923,
-  "nGrades": 884610,
-  "resolvedReceivers": 6691
+  "rGrades": 5925,
+  "nGrades": 883768,
+  "resolvedReceivers": 6692
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 527,
+ "reviewableDarkCount": 528,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -3164,6 +3164,12 @@
    "key": "livestock",
    "shape": "reasons",
    "rows": 4356
+  },
+  {
+   "identity": "locks on campaignState",
+   "key": "locks",
+   "shape": "campaignState",
+   "rows": 208
   },
   {
    "identity": "logisticsBurden on osr000",
@@ -8256,7 +8262,7 @@
   "season on calendar": "dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N",
   "year on calendar": "dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N",
   "eventLog on campaignState": "campaign-pdf=R dossier-pdf=R foundry=N news=R web-display=R web-transitive=R world-book=R",
-  "locks on campaignState": "web-display=N web-transitive=R",
+  "locks on campaignState": "web-transitive=R",
   "phase on campaignState": "campaign-pdf=R dossier-pdf=R foundry=N news=N web-display=R web-transitive=R world-book=R",
   "action on candidates": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "affectedSettlementIds on candidates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -14598,6 +14604,15 @@
    ],
    "previousCohort": 1321,
    "cohort": 1323
+  },
+  {
+   "charter": "§900 growth-door precedent, opened by ruling for a deliberate removal (owner orders 2026-09-17: the \"What a new roll keeps\" section removed with every button that served it, and then \"remove the other padlocks\"; the chair's rulings are recorded in docs/FIRST_CONTACT_BACKLOG.md under DOSSIER AND REALM POLISH, parts 1 and 3): locks on campaignState banked. Its only counting-surface readers WERE the lock controls themselves (LockControls.jsx's world, NPCs and History scopes, and the roster-row padlock in npcComponents.jsx), and the owner ordered every one of them removed. The key is still WRITTEN (hydrate, pickle and persist carry a save's map verbatim, so a veto of the orders restores the controls with a user's old locks intact) and it is no longer READ by any surface, by generation, by a reroll or by the simulation (domain/locksPreservation.js normalizeLocks reads no key), so DARK is the true verdict rather than a reader this scan missed. Nothing is re-homed: what the padlocks did is not shown anywhere else, by the owner's own order.",
+   "sha": "a62dcbb907a14daa4e2555f638ad7a7e82883d22",
+   "admitted": [
+    "locks on campaignState"
+   ],
+   "previousCohort": 1323,
+   "cohort": 1324
   }
  ]
 }

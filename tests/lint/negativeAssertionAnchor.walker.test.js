@@ -308,7 +308,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/heraldTranslationFloor.test.js': 1,
   'tests/components/mapChainsTierGate.test.jsx': 3,
   'tests/components/mobilePrimitives.test.jsx': 2,
-  'tests/components/npcRowLockToggle.test.jsx': 2,
+  // ⭐ 2026-09-17: `tests/components/npcRowLockToggle.test.jsx` LEFT THIS ROSTER AT ZERO. The
+  //   owner ordered the padlocks removed, the file was rewritten to pin the removal, and every
+  //   absence in it routes through expectAbsentWithAnchor. Banked by DELETION.
   'tests/components/pantheonActivationStrip.test.jsx': 2,
   'tests/components/pantheonPanel.test.jsx': 1,
   'tests/components/primitivesTi.test.js': 1,

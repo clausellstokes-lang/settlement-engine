@@ -199,6 +199,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // PLAINLY, because the lane's brief predicted the opposite: this lane authored NO new prose
 // numeric. Its own new leaves carry none, and the row that moved is pre-existing banked debt
 // — a cap computation, not reader prose — so there was nothing here to humanize.
+// THE PADLOCK REMOVAL (owner order 2026-09-17: "remove the other padlocks") — TWO PURE LINE
+// MOVES, NO CEILING CHANGE, NO DEBT MOTION. Deleting the roster row's padlock (the copy block,
+// the tone constants, the row state and the control) removes twenty-two lines ABOVE the two
+// relationship rows npcComponents.jsx owns, so `{rel.strength}` re-addresses 154 -> 132 and
+// `{rel.tension}` 161 -> 139. Path, category and snippet are byte-identical, the census stays at
+// 225 against a 225 ceiling, and no category count moves. The whole baseline diff is four lines,
+// two -/+ pairs, `"line"` values and nothing else.
 // COMPENDIUM TRIM (owner order 2026-09-16: the map lenses and interior pages removed from the
 // Compendium) — ONE PURE LINE MOVE, NO CEILING CHANGE, NO DEBT MOTION. Deleting the Lenses
 // and Facets hubs from CatalogHubs.jsx removes fifty-two lines ABOVE the Calamity hub's

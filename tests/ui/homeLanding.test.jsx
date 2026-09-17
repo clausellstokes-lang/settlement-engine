@@ -31,6 +31,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
+import { SP } from '../../src/components/theme.js';
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
 // helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
@@ -116,6 +117,41 @@ describe('HomeLanding — scrollable landing', () => {
   // So the assertion flips from 0 to EXACTLY ONE — which is also what this
   // file's own docblock has claimed all along. Exactly one, not ≥1: two copies
   // of a disclosure is a design defect, and the §01 panel is its one home.
+  // THE FADED TAIL + THE CAPPED TRACK (owner orders 2026-09-17, "Fix the small visual
+  // defects"). The header is transparent, so a cream stop's empty bottom band read as a
+  // plain strip under the arrow; each translucent-cream stop now fades that band into
+  // the film over exactly its own height (the dark closer keeps its scene). The two-column
+  // grid's track minimum is capped at the column, so a 390px phone no longer scrolls
+  // sideways. jsdom has no layout and its CSSOM drops mask declarations, so these read
+  // the style props React rendered; e2e/visual-polish.spec.js measures both in Chromium.
+  test('cream stops fade their empty tails into the film, and the two-column track never exceeds its column', async () => {
+    const renderedStyle = (el) => {
+      const key = Object.keys(el).find((k) => k.startsWith('__reactProps$'));
+      return (key && el[key].style) || {};
+    };
+    for (const isMobile of [false, true]) {
+      const { container, unmount } = renderLanding({ isMobile });
+      await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+      const tailPx = isMobile ? SP.xxl * 2 : 84;
+      const cream = [...container.querySelectorAll('section.sf-landing-scene-cream')];
+      expect(cream.map((section) => section.id)).toEqual(['forge', 'voice', 'realm', 'commons']);
+      for (const section of cream) {
+        expect(section.style.paddingBottom, `${section.id} tail height`).toBe(`${tailPx}px`);
+        const style = renderedStyle(section);
+        expect(style.WebkitMaskImage, `${section.id} carries the prefixed mask too`).toBe(style.maskImage);
+        expect(style.maskImage, `${section.id} fades its tail`).toMatch(new RegExp(`^linear-gradient\\(.+ calc\\(100% - ${tailPx}px\\), transparent\\)$`));
+      }
+      const closer = container.querySelector('#closer');
+      expect(renderedStyle(closer).maskImage).toBeUndefined();
+      const grids = [...container.querySelectorAll('#forge > div, #realm > div')].filter((el) => /380px/.test(el.style.gridTemplateColumns));
+      expect(grids.length).toBe(2);
+      for (const grid of grids) {
+        expect(grid.style.gridTemplateColumns).toBe('repeat(auto-fit, minmax(min(380px, 100%), 1fr))');
+      }
+      unmount();
+    }
+  });
+
   test('the anon ceiling string appears exactly once on the landing (§363.1)', async () => {
     renderLanding();
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 }); // page settled

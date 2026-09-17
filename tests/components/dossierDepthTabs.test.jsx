@@ -15,7 +15,7 @@
  */
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // Mock the store: WarFaithTab reads campaigns/savedSettlements/auth, and its
 // composed FaithSection reads auth.tier/isElevated/the upsell seam.
@@ -38,7 +38,7 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import { useStore } from '../../src/store/index.js';
-import WarTab from '../../src/components/new/tabs/WarTab.jsx';
+import WarTab, { MARTIAL_CRISIS_TYPES } from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
@@ -359,6 +359,59 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
     // at peace, and printing them an inch apart is the page saying one thing twice.
     // anchored: the corpus line is asserted PRESENT in this same textContent on the line above, so an emptied render cannot pass this absence
     expect(container.textContent).not.toContain('no host abroad, no siege at the walls');
+  });
+});
+
+describe('WarTab — a martial crisis banner is never contradicted by "at peace" (owner order 2026-09-17)', () => {
+  // The Overview prints an ACTIVE CRISIS card for each `settlement.stress` entry. Measured before
+  // the cure on generated towns: a canonized campaign whose ledger had no war beat printed "This
+  // settlement is at peace and keeps no named faith." under an "Under Siege" card, and a town
+  // outside any campaign printed "there is no war picture to tell".
+  const PEACE_WORDS = Object.freeze([
+    'no host abroad, no siege at the walls',
+    'there is no war picture to tell',
+  ]);
+  const bannered = (type) => ({
+    id: 'held', name: 'Heldmark', config: {},
+    stress: [{ type, label: `Crisis ${type}`, summary: `The ${type} summary as generated.` }],
+  });
+
+  it('in a quiet campaign and outside any campaign, each martial banner shows as an active crisis and nothing says peace', () => {
+    expect(MARTIAL_CRISIS_TYPES).toEqual(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
+    const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
+    for (const type of MARTIAL_CRISIS_TYPES) {
+      for (const inCampaign of [true, false]) {
+        useStore.__reset();
+        useStore.__set({
+          auth: { tier: 'premium' },
+          campaigns: inCampaign
+            ? [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]
+            : [],
+          savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
+        });
+        const { container } = render(<WarTab settlement={bannered(type)} saveId="held" />);
+        const block = screen.getByTestId('war-martial-crisis');
+        const anchor = `Crisis ${type}.`;
+        expect(block.textContent).toContain(anchor);
+        expect(block.textContent).toContain(`The ${type} summary as generated.`);
+        for (const words of [...PEACE_WORDS, ...dormantLines]) {
+          expectAbsentWithAnchor(container.textContent, words, anchor, `${type}, in a campaign: ${inCampaign}`);
+        }
+        cleanup();
+      }
+    }
+  });
+
+  it('a calm town in the same quiet campaign still draws its dormant note (the pool is gated, not deleted)', () => {
+    useStore.__set({
+      auth: { tier: 'premium' },
+      campaigns: [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }],
+      savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
+    });
+    const { container } = render(<WarTab settlement={{ id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'famine', label: 'Famine' }] }} saveId="held" />);
+    const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
+    expect(dormantLines.some((line) => container.textContent.includes(line))).toBe(true);
+    expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
   });
 });
 

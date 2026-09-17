@@ -92,7 +92,7 @@ function UpsellOrEmpty({ label, prompt, canUseCustom, hasDeities, setPurchaseMod
       <Field label={label}>
         <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, maxWidth: 320 }}>
           {prompt}{' '}
-          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)}>
+          <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
             Upgrade to premium
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
           </Button>{' '}
