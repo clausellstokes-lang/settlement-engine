@@ -342,9 +342,15 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
             textDecoration: 'none',
           }}
         >
+          {/* ⛔ NO `textTransform: 'lowercase'`. The span says SettlementForge and
+              the anchor's accessible name says SettlementForge, and the rule
+              rendered "settlementforge" over the sign-in and register cards — the
+              two surfaces where a visitor first reads the product's name, and the
+              one place the brand was spelled a second way. The transform was the
+              only thing doing it; the markup was always right. */}
           <span style={{
             fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-            letterSpacing: '0.02em', textTransform: 'lowercase',
+            letterSpacing: '0.02em',
           }}>
             SettlementForge
           </span>
