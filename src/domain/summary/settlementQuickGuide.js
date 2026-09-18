@@ -80,7 +80,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {unknown} [name]
  * @property {unknown} [tier]
  * @property {unknown} [population]
- * @property {{ label?: unknown, scope?: unknown }} [culturalIdentity]
+ * @property {{ key?: unknown, label?: unknown }} [culturalIdentity]
  * @property {{ label?: unknown }} [culture]
  * @property {unknown} [settlementReason]
  * @property {{
@@ -156,7 +156,7 @@ function composeIdentity(settlement) {
     settlement.culturalIdentity?.label
       || settlement.culture?.label,
   );
-  const scope = cleanText(settlement.culturalIdentity?.scope);
+  const cultureKey = cleanText(settlement.culturalIdentity?.key);
 
   const descriptors = [
     cultureLabel,
@@ -168,7 +168,7 @@ function composeIdentity(settlement) {
 
   const article = articleFor(descriptors);
 
-  const phrase = scopePhrase(scope);
+  const phrase = scopePhrase(cultureKey);
   if (phrase) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
@@ -289,7 +289,9 @@ function articleFor(descriptors) {
 }
 
 /**
- * THE ELEVEN AUTHORED SCOPES, each with the phrase the identity sentence carries.
+ * THE ELEVEN AUTHORED CULTURE PROFILES, each with the phrase the identity sentence
+ * carries — KEYED ON THE PROFILE'S IDENTITY (`culturalIdentity.key`), never on its
+ * authored prose.
  *
  * A culture profile's `scope` (src/data/cultureProfiles.js) is authored as
  * `<article> <terms> design grammar.`, and the guide used to read the whole string
@@ -297,58 +299,70 @@ function articleFor(descriptors) {
  * grammar" - which puts the engine's own filing word in front of a reader.
  *
  * ⚠ LIFTING THE TERMS MECHANICALLY IS WHAT THIS REPLACES, AND WHY. Four of the
- * eleven scopes are ADJECTIVE STACKS, not noun lists: germanic's "timber-and-stone,
- * guild-and-estate", norse's "maritime", east-asian's "bureaucratic-and-lineage" and
- * steppe's "pastoral, mobile-sedentary" all modify the head noun the parse was
- * throwing away, so "built around a timber-and-stone and guild-and-estate" came out
- * a dangling modifier. A derived rule cannot tell the two shapes apart, and the
- * shapes are a property of authored copy rather than of the grammar. So the phrase
- * is AUTHORED per scope, once, here - display only, keyed on the EXACT authored
- * string so a scope that is reworded stops matching and is caught rather than
- * silently paraphrased.
+ * eleven profiles carry ADJECTIVE STACKS in their scope, not noun lists: germanic,
+ * norse, east_asian and steppe all modify the head noun the parse was throwing away,
+ * so "built around a timber-and-stone and guild-and-estate" came out a dangling
+ * modifier. A derived rule cannot tell the two shapes apart, and the shapes are a
+ * property of authored copy rather than of the grammar. So the phrase is AUTHORED
+ * per profile, once, here - display only.
  *
- * ⛔ THE MIXED PROFILE IS DELIBERATELY ABSENT. Its scope is a sentence about
- * blending rather than a term list, and its `label` already says "Germanic-inspired +
- * Latin-inspired", so the blend is on the page either way; an unmapped scope yields
- * '' and the identity sentence falls through to the historical-character form it
- * already uses for a settlement carrying no scope at all.
+ * ⛔ AND IT IS KEYED ON THE PROFILE KEY BECAUSE A CORPUS SENTENCE MAY BE MINTED IN
+ * EXACTLY ONE SOURCE MODULE (FP-G16, tests/build/cultureProfilesLazy.test.js). This
+ * map used to be keyed on the authored scope STRING, which made this file a SECOND
+ * mint of the corpus's fingerprint and read the law red. The key is the same identity
+ * `domain/resolveCulture.js` reads, `generators/steps/assembleSettlement.js` stamps on
+ * the settlement root and `pdf/lib/generationContracts.js` projects; `materializeOne`
+ * writes it on EVERY materialized identity beside the scope it replaces, so the read
+ * is output-identical to the scope read and no persisted shape changed.
+ *
+ * ⚠ THE PROPERTY THE STRING KEY BOUGHT IS NOT LOST, IT MOVED. A reworded scope no
+ * longer falls out of this map by itself, so tests/domain/settlementQuickGuide.test.js
+ * holds the key set BOTH WAYS against the corpus and a digest of each authored scope:
+ * reword one and the pin reds, naming the profile whose paraphrase below must be
+ * re-read before the digest is re-recorded.
+ *
+ * ⛔ THE MIXED PROFILE IS DELIBERATELY ABSENT. `materializeCulturalIdentity`
+ * synthesises it at generation time under `key: 'mixed'` - it is not in the corpus -
+ * and its scope is a sentence about blending rather than a term list, while its
+ * `label` already says "Germanic-inspired + Latin-inspired", so the blend is on the
+ * page either way. An unmapped key yields '' and the identity sentence falls through
+ * to the historical-character form it already uses for a settlement carrying no
+ * culture at all.
  *
  * The map is NOT derived from CULTURE_PROFILES here on purpose: this module is a
  * headless leaf and src/data/cultureProfiles.js is lazily chunked away from the
  * first paint (tests/build/cultureProfilesLazy.test.js). The coverage pin lives in
  * tests/domain/settlementQuickGuide.test.js, which imports the corpus and asserts
- * every authored scope but the blend has a phrase here.
+ * every authored profile but the blend has a phrase here.
  *
  * @type {Readonly<Record<string, string>>}
  */
 const SCOPE_PHRASE = Object.freeze({
-  'A timber-and-stone, guild-and-estate design grammar.':
-    'built in timber and stone, and run by guild and estate',
-  'A masonry, civic-square, patronage-and-law design grammar.':
-    'built in masonry around a civic square, and run by patronage and law',
-  'A kin-district, assembly, pastoral-and-earthwork design grammar.':
-    'built around kin districts and an assembly ground, on pasture and earthwork',
-  'A courtyard, waterworks, endowed-institution-and-caravan design grammar.':
-    'built around courtyards and waterworks, on endowed institutions and the caravan road',
-  'A hall, maritime, assembly-and-seasonal-survival design grammar.':
-    'built around the hall and the water, on assembly and what the season allows',
-  'A timber-compound, communal-land, river-and-forest design grammar.':
-    'built in timber compounds on common land, between river and forest',
-  'A ward, courtyard, bureaucratic-and-lineage design grammar.':
-    'built in wards and courtyards, ordered by bureau and lineage',
-  'A civic-ritual plaza, tribute, market-and-waterworks design grammar.':
-    'built around a civic-ritual plaza, tribute, and market-and-waterworks',
-  'A tank-and-bazaar, occupational-quarter, temple-and-guild design grammar.':
-    'built around the tank and the bazaar, in quarters by trade, under temple and guild',
-  'A pastoral, mobile-sedentary, clan-and-caravan design grammar.':
-    'built for a pastoral life half-settled and half-moving, held by clan and caravan',
-  'An agora, harbor, civic-association-and-hillside design grammar.':
-    'built around the agora and the harbour, on hillside ground and civic association',
+  germanic: 'built in timber and stone, and run by guild and estate',
+  latin: 'built in masonry around a civic square, and run by patronage and law',
+  celtic: 'built around kin districts and an assembly ground, on pasture and earthwork',
+  arabic: 'built around courtyards and waterworks, on endowed institutions and the caravan road',
+  norse: 'built around the hall and the water, on assembly and what the season allows',
+  slavic: 'built in timber compounds on common land, between river and forest',
+  east_asian: 'built in wards and courtyards, ordered by bureau and lineage',
+  mesoamerican: 'built around a civic-ritual plaza, tribute, and market-and-waterworks',
+  south_asian: 'built around the tank and the bazaar, in quarters by trade, under temple and guild',
+  steppe: 'built for a pastoral life half-settled and half-moving, held by clan and caravan',
+  greek: 'built around the agora and the harbour, on hillside ground and civic association',
 });
 
-/** @param {string} scope @returns {string} */
-function scopePhrase(scope) {
-  return SCOPE_PHRASE[scope] || '';
+/**
+ * ⛔ `Object.hasOwn`, NEVER A BARE LOOKUP - the hazard `articleFor` above carries,
+ * on the same kind of string. The key comes off a PERSISTED record, so a save
+ * carrying `key: 'constructor'` (or `toString`, `valueOf`, `hasOwnProperty`) reads
+ * Object.prototype's member through a bare index, and every one of them is TRUTHY:
+ * the function itself would be printed into the reader's first sentence.
+ *
+ * @param {string} cultureKey
+ * @returns {string}
+ */
+function scopePhrase(cultureKey) {
+  return Object.hasOwn(SCOPE_PHRASE, cultureKey) ? SCOPE_PHRASE[cultureKey] : '';
 }
 
 /**

@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "a43cc94479cb28983995ee6dc562e02b143ec084",
+ "frozenAtSha": "e7590db8e990c697ec6904d155c3a48e2bc036c4",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "44fc73f1b012b60c5aaf7b290fe4917edd89a2493f35016b849d7136752077a8",
  "detectorDigest": "7142135443926d4be8879f34e0926a79dd9b6712674cf4015e0ec4abd6a3218e",
- "verdictDigest": "5db84e4997dd76a9e1bec32ffec1647ef1ef536f2abf7e3484aeffff8c4b6931",
+ "verdictDigest": "24521d81f266619e9375afa9e684bf5babfd9b85f16e8530f4eb45e59671a537",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -74,7 +74,7 @@
  "closureSizes": {
   "web-display": 709,
   "web-transitive": 903,
-  "dossier-pdf": 407,
+  "dossier-pdf": 406,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 322,
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1613,
-  "sites": 38861,
-  "propRead": 36802,
+  "sites": 38905,
+  "propRead": 36839,
   "elemRead": 0,
-  "destructure": 2045,
+  "destructure": 2052,
   "inOp": 14,
-  "rGrades": 5947,
-  "nGrades": 887235,
-  "resolvedReceivers": 6714
+  "rGrades": 5957,
+  "nGrades": 888887,
+  "resolvedReceivers": 6724
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
@@ -8403,10 +8403,10 @@
   "defensePattern on culturalIdentity": "dossier-pdf=N web-display=N web-transitive=N",
   "exchangePattern on culturalIdentity": "dossier-pdf=N web-display=N web-transitive=N",
   "foodways on culturalIdentity": "dossier-pdf=N web-display=N web-transitive=N",
-  "key on culturalIdentity": "campaign-pdf=R dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=R",
+  "key on culturalIdentity": "campaign-pdf=R dossier-pdf=R foundry=N web-display=N web-transitive=R world-book=R",
   "label on culturalIdentity": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=R world-book=N",
   "sacredLife on culturalIdentity": "dossier-pdf=N web-display=N web-transitive=N",
-  "scope on culturalIdentity": "campaign-pdf=N dossier-pdf=R foundry=N news=N web-display=R web-transitive=R world-book=N",
+  "scope on culturalIdentity": "campaign-pdf=N dossier-pdf=R foundry=N news=N web-display=R web-transitive=N world-book=N",
   "socialTexture on culturalIdentity": "dossier-pdf=N web-display=R web-transitive=N",
   "sourceKeys on culturalIdentity": "dossier-pdf=R foundry=R web-display=R",
   "description on currentTensions": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
