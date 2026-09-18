@@ -28,6 +28,7 @@ import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuic
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
 import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile, { proseFontSize } from '../../hooks/useIsMobile.js';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];
@@ -49,6 +50,11 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
   // called in the same order every render — gating the useMemos behind
   // an early `if (!settlement)` would create a hooks-order violation
   // flagged by react-hooks/rules-of-hooks.
+  // THE PHONE PROSE FLOOR — the quick guide's reading text (the defining truths,
+  // the pressure) and the cheat sheet's bodies (the entry point, each person's
+  // detail). The eyebrows, the kind tags, the names and the role lines are
+  // glanced at and keep their own steps. Desktop is unchanged.
+  const mobile = useIsMobile();
   const guide = useMemo(
     () => composeSettlementQuickGuide(settlement),
     [settlement],
@@ -159,7 +165,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                 </div>
                 <div style={{
                   marginTop: 1,
-                  fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+                  fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
                 }}>
                   {truth.text}
                 </div>
@@ -192,7 +198,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             </div>
             <div style={{
               marginTop: 2,
-              fontFamily: serif, fontSize: FS.sm, fontStyle: 'italic',
+              fontFamily: serif, fontSize: proseFontSize(FS.sm, mobile), fontStyle: 'italic',
               color: INK_DEEP, lineHeight: 1.5,
             }}>
               {guide.immediatePressure.text}
@@ -250,7 +256,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             </div>
             <div style={{
               marginTop: 2,
-              fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
+              fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4,
             }}>
               {guide.entryPoint.text}
             </div>
@@ -259,7 +265,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           {guide.importantPeople.length === 0 ? (
             <div style={{
               padding: '8px 6px',
-              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+              fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
             }}>
               No important people have been generated yet.
             </div>
@@ -300,7 +306,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               </div>
               <div style={{
                 marginTop: 2,
-                fontSize: FS.xxs, color: BODY, lineHeight: 1.4,
+                fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4,
               }}>
                 {person.detail}
               </div>

@@ -213,6 +213,17 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // 95 -> 43. Path, category and snippet are byte-identical, the census stays at 225 against a
 // 225 ceiling, and the removed hubs carried no banked row. The whole baseline diff is two
 // lines, one -/+ pair, a `"line"` value and nothing else.
+// THE DOSSIER-UI FIXES (owner order 2026-09-18, "impliment every fix") — PURE LINE MOVES IN
+// FOUR FILES, NO CEILING CHANGE, NO DEBT MOTION. The NPC card's goal repair and its phone
+// prose floor add four lines ABOVE the two relationship rows npcComponents.jsx owns, so
+// `{rel.strength}` re-addresses 132 -> 136 and `{rel.tension}` 139 -> 143; the Power tab's
+// basis-caption grouping adds thirty-three lines ABOVE every row PowerStrata.jsx owns, so its
+// distribution-bar pair re-addresses 189 -> 222, `{pct}` 191 -> 224 and `{r.power}`
+// 232 -> 265; the phone prose floor adds eight lines above TableView's `{pressure}`
+// (236 -> 244) and eight above SessionMode's `{n?.power || 0}` (436 -> 444). Path, category
+// and snippet are byte-identical in all eight, the census stays at 225 against a 225 ceiling,
+// and no category count moves. The whole baseline diff is sixteen lines, eight -/+ pairs,
+// `"line"` values and nothing else.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

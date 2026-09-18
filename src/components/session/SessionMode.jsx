@@ -33,6 +33,7 @@ import { FS, ELEV, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import useIsMobile, { proseFontSize } from '../../hooks/useIsMobile.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
@@ -124,6 +125,8 @@ function warModel({ saveId, settlement, campaigns, savedSettlements }) {
 }
 
 function WarPanel({ war }) {
+  // THE PHONE PROSE FLOOR — the war row's sentence; its bold label stays a label.
+  const mobile = useIsMobile();
   const { status, exhaustionBand, mobilization, occupied, holdings, nameFor } = war;
   const rows = [];
   if (status?.besiegedBy?.length) {
@@ -152,7 +155,7 @@ function WarPanel({ war }) {
       {rows.map(([labelText, tone, body], i) => (
         <Card key={i} accent={tone}>
           <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: tone, marginRight: 6 }}>{labelText}.</span>
-          <span style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>{body}</span>
+          <span style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{body}</span>
         </Card>
       ))}
     </div>
@@ -169,6 +172,11 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // Escape dismisses (stacked-aware), and focus restores to the trigger on
   // close — the shared primitive every modal here uses.
   const dialogRef = useDialogFocusTrap(true, onClose);
+  // THE PHONE PROSE FLOOR — this takeover covers the whole viewport, phone
+  // included, so its READING text takes the floor: the defining truths, the
+  // table-night bodies, the event tail, each NPC's tell / want / secret, and the
+  // hook bodies. Eyebrows, kind tags, band figures and PWR counts are glanced at.
+  const mobile = useIsMobile();
 
   const phase = useStore(s => s.phase);
   const systemState = useStore(s => s.systemState);
@@ -321,7 +329,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     </div>
                     <div style={{
                       marginTop: 2,
-                      fontSize: FS.sm, color: BODY, lineHeight: 1.45,
+                      fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45,
                     }}>
                       {truth.text}
                     </div>
@@ -365,7 +373,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0 }}>{row.title}</span>
                       <span style={{ fontSize: FS.nano, fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', flexShrink: 0 }}>{row.kind}</span>
                     </div>
-                    <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>{row.body}</div>
+                    <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{row.body}</div>
                   </Card>
                 ))}
               </div>
@@ -393,7 +401,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
               {recent.length > 0 && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                   {recent.map((en, i) => (
-                    <div key={i} style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+                    <div key={i} style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>
                       <strong style={{ color: INK }}>{en?.event?.description || en?.event?.type || 'Event'}</strong>
                       {en?.narrativeSummary ? <>: {en.narrativeSummary}</> : null}
                     </div>
@@ -436,13 +444,13 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                         <span style={{ fontSize: FS.nano, fontWeight: 800, color: MUTED, flexShrink: 0 }}>PWR {n?.power || 0}</span>
                       </div>
                       {(n?.role || n?.title) && <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
-                      {tell && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{tell}</div>}
+                      {tell && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}>{tell}</div>}
                       {/* "Wants" reads the same way here as on the dossier NPC card and
                           as the SECRET label directly below: a bold inline label, no
                           colon, the want as ordinary body copy after it. */}
-                      {goal && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}><span style={{ fontWeight: 800 }}>Wants</span> {goal}</div>}
+                      {goal && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}><span style={{ fontWeight: 800 }}>Wants</span> {goal}</div>}
                       {secret && (
-                        <div style={{ marginTop: 4, fontSize: FS.xs, color: SLATE, lineHeight: 1.45 }}>
+                        <div style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: SLATE, lineHeight: 1.45 }}>
                           <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: FS.nano }}>SECRET</span> {secret}
                         </div>
                       )}
@@ -465,7 +473,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                         <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{hook.source}</span>
                         <span style={{ fontSize: FS.nano, fontWeight: 800, color: cat.color, letterSpacing: '0.08em', flexShrink: 0 }}>{String(cat.label).toUpperCase()}</span>
                       </div>
-                      <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>{hook.text}</div>
+                      <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{hook.text}</div>
                     </Card>
                   );
                 })}

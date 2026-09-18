@@ -32,6 +32,7 @@ import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import useIsMobile, { proseFontSize } from '../hooks/useIsMobile.js';
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
@@ -63,6 +64,13 @@ export default function TableView({ settlement, onClose }) {
   // Replaces the hand-rolled Escape-only listener — a full-screen aria-modal
   // dialog with no trap leaked keyboard focus to the obscured app behind it.
   const dialogRef = useDialogFocusTrap(true, onClose);
+  // THE PHONE PROSE FLOOR — this is the glance-at-your-phone surface, so its
+  // READING text takes the floor below the breakpoint: the identity sentence,
+  // the defining truths, the empty state and the card bodies. The name, the
+  // identity strip, the truth labels, the stressor chips and the kind tags keep
+  // their own steps — they are glanced at, and they are what makes the prose
+  // findable. On a desktop the 380px column is unchanged.
+  const mobile = useIsMobile();
 
   // FIELD MODE wake lock (Organic Craft law §7 — the cook-mode pattern): while
   // the at-table view is open the screen stays awake, where supported. The lock
@@ -178,7 +186,7 @@ export default function TableView({ settlement, onClose }) {
           {/* Canonical first glance — the same facts lead every compact surface. */}
           <div>
             <div style={{
-              fontFamily: serif, fontSize: FS.md,
+              fontFamily: serif, fontSize: proseFontSize(FS.md, mobile),
               color: CREAM, lineHeight: 1.5,
             }}>
               {guide.identitySentence}
@@ -200,7 +208,7 @@ export default function TableView({ settlement, onClose }) {
                     {truth.label}
                   </span>
                   <span style={{
-                    fontSize: FS.xs, color: CREAM_BODY, lineHeight: 1.45,
+                    fontSize: proseFontSize(FS.xs, mobile), color: CREAM_BODY, lineHeight: 1.45,
                   }}>
                     {truth.text}
                   </span>
@@ -266,7 +274,7 @@ export default function TableView({ settlement, onClose }) {
 
             {entries.length === 0 ? (
               <div style={{
-                fontSize: FS.sm, color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
+                fontSize: proseFontSize(FS.sm, mobile), color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
               }}>
                 No table-night entries derived yet. Generate a richer settlement
                 or run the narrative layer.
@@ -299,7 +307,7 @@ export default function TableView({ settlement, onClose }) {
                           {KIND_LABEL[row.kind] || row.kind}
                         </span>
                       </div>
-                      <div style={{ fontSize: FS.sm, color: CREAM_BODY, lineHeight: 1.5 }}>
+                      <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: CREAM_BODY, lineHeight: 1.5 }}>
                         {row.body}
                       </div>
                     </div>

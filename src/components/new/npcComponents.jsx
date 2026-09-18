@@ -6,6 +6,7 @@ import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
+import useIsMobile, { proseFontSize } from '../../hooks/useIsMobile.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
@@ -118,6 +119,9 @@ export function NPCCategoryGroup({
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
+  // THE PHONE PROSE FLOOR — the card's two paragraphs, and only those; the
+  // names, the kind badge and the role line keep their own steps.
+  const mobile = useIsMobile();
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
       <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
@@ -135,8 +139,8 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
         </div>
       </button>
       {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
-        <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
+        <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
       </div>}
     </div>
   );
@@ -144,6 +148,8 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
 
 export function ConflictCard({conflict:c}) {
   const [_open,_setOpen]=useState(false);
+  // THE PHONE PROSE FLOOR — the description and the stakes sentence.
+  const mobile = useIsMobile();
   const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
@@ -152,8 +158,8 @@ export function ConflictCard({conflict:c}) {
         <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
-      <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
-      {c.stakes&&<div style={{fontSize:FS.xs,color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
+      <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
+      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
       {c.plotHooks?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8,marginTop:4}}>
         {c.plotHooks.map((h,i)=><PlotHook key={i} text={typeof h==='string'?h:h.hook||Ti(h)}/>)}
       </div>}
@@ -206,6 +212,12 @@ function NPCInlineCard({
     if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
   };
   const [open, setOpen] = useState(false);
+  // THE PHONE PROSE FLOOR — every SENTENCE in the expanded card (the
+  // compromise phrase, the replacement note, the whereabouts line, the
+  // structural position, the constraint, the wants, the disposition and the
+  // secret). The trait chips, the influence dots, the name and the labels are
+  // glanced at rather than read, and keep their own scale.
+  const mobile = useIsMobile();
   const color = catColor(npc.category);
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
@@ -352,10 +364,10 @@ function NPCInlineCard({
             </div>
           )}
           {npc.corrupt && compromiseLc?.phrase && (
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
           )}
           {npc.replacedNpc && (
-            <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
+            <div style={{margin:'6px 0',fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>
               Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
@@ -368,14 +380,14 @@ function NPCInlineCard({
                 fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
                 color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
               }}>{wBadge}</span>
-              <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
+              <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
           )}
           {npc.structuralPosition && (
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
           )}
           {npc.activeConstraint && (
-            <p style={{fontSize:FS.xs,color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
@@ -385,7 +397,7 @@ function NPCInlineCard({
                 // Each want goes through ProseParagraph: the first one is the goal the
                 // narrative server may have rewritten, and its prose can carry
                 // ⟦entity:…⟧ tokens that would otherwise reach the reader as literals.
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
                   <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>
                   {wants.map((want, i) => (
                     <Fragment key={`${want}-${i}`}>
@@ -395,7 +407,7 @@ function NPCInlineCard({
                 </div>
               )}
               {disposition.length > 0 && (
-                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
                   <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{disposition.join(', ')}
                 </div>
               )}
@@ -414,10 +426,10 @@ function NPCInlineCard({
                   onRevert={canEditSecret ? onRevertSecret : undefined}
                   placeholder="Add a secret…"
                   ariaLabel={`Secret for ${npc.name}`}
-                  textStyle={{fontSize:FS.xs,color:swatch.inkMag2}}
+                  textStyle={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2}}
                 />
               ) : (
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{secretText}</span>
+                <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2}}>{secretText}</span>
               )}
             </div>
           )}

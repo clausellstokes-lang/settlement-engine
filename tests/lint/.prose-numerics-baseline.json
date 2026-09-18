@@ -19,7 +19,7 @@
   },
   {
     "path": "src/components/TableView.jsx",
-    "line": 236,
+    "line": 244,
     "category": "floatInterpolation",
     "snippet": "{pressure}"
   },
@@ -385,13 +385,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 132,
+    "line": 136,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 139,
+    "line": 143,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -589,25 +589,25 @@
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 189,
+    "line": 222,
     "category": "floatInterpolation",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 189,
+    "line": 222,
     "category": "percentToken",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 191,
+    "line": 224,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 232,
+    "line": 265,
     "category": "floatInterpolation",
     "snippet": "{r.power}"
   },
@@ -703,7 +703,7 @@
   },
   {
     "path": "src/components/session/SessionMode.jsx",
-    "line": 436,
+    "line": 444,
     "category": "floatInterpolation",
     "snippet": "{n?.power || 0}"
   },

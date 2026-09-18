@@ -4,7 +4,7 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
-import useIsMobile from '../../../hooks/useIsMobile.js';
+import useIsMobile, { proseFontSize } from '../../../hooks/useIsMobile.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem} from '../serviceComponents';
@@ -26,6 +26,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   const [search, setSearch] = useState('');
   const [openCats, setOpenCats] = useState({});
   const tier = settlement?.tier || 'town';
+  // `mobile` drives the phone layout AND the phone prose floor: the tab's three
+  // reading sentences (the search miss, the absence note, the criminal-category
+  // caution) take the floor below the breakpoint. Counts, chips and category
+  // headers are glanced at and keep their own steps.
   const mobile = useIsMobile();
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
@@ -158,7 +162,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
         {searchResults !== null && (
           <div style={{marginTop:8}}>
             {searchResults.length === 0
-              ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:FS.md,color:swatch['#5A1A1A']}}>
+              ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:proseFontSize(FS.md,mobile),color:swatch['#5A1A1A']}}>
                   <strong>Not available</strong>. Nothing matching "{search}" in this settlement.
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
@@ -230,7 +234,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
 
         {/* ── NOTABLE ABSENCES ─────────────────────────────────────────────── */}
         {missing.length > 0 && (
-          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:FS.sm,color:swatch['#5A3A10']}}>
+          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10']}}>
             <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}. The party will need to look elsewhere.
           </div>
         )}
@@ -274,7 +278,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 </button>
 
                 {open && <div style={{padding:'10px 14px'}}>
-                  {isCriminal&&meta.note&&<p style={{fontSize:FS.xs,color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
+                  {isCriminal&&meta.note&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
                   <div style={{display:'flex',flexDirection:'column',gap:6}}>
                     {[...list].sort((a,b) => {
                       // Impaired items float to top within category
