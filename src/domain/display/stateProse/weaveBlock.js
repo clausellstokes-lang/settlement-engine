@@ -115,18 +115,32 @@ function escapeForRegExp(text) {
  * town called Ford inside a sentence opening "Fordé…" would read as a word boundary that is
  * not one, and the estate's name generators emit diacritics freely.
  *
- * ⚠ THE LOOKAHEAD IS SPELLED POSITIVELY — `(?=[^…]|$)` rather than `(?!…)` — and the reason
- * is a register rather than taste. `tests/copy/voiceMechanics.test.js` is an exact, per-file,
- * shrink-only ratchet on exclamation points in `src/domain` string literals, and a negative
- * lookahead puts a bare `!` inside this template. The ratchet's own instruction for a file
- * that grew is REWRITE, never bank, so the construct is rewritten. The two forms are exactly
- * equivalent, end of string included: `(?!X)` succeeds where no character matches X, and the
- * `|$` alternative is what carries that same case here.
+ * ⚠ EVERY LOOKAHEAD HERE IS POSITIVE — `(?=…)`, never `(?!…)` — and the reason is a register
+ * rather than taste. `tests/copy/voiceMechanics.test.js` is an exact, per-file, shrink-only
+ * ratchet on exclamation points in `src/domain` string literals, and a negative lookahead puts
+ * a bare `!` inside this template. The ratchet's own instruction for a file that grew is
+ * REWRITE, never bank, so the construct is spelled the other way round. The boundary forms are
+ * exactly equivalent, end of string included: `(?!X)` succeeds where no character matches X,
+ * and the `|$` alternative is what carries that same case here.
+ *
+ * ⛔ THE POSSESSIVE HAS TWO SHAPES, AND MISSING THE SECOND STRANDED AN APOSTROPHE (review
+ * finding, 2026-09-18). The group used to be `('s|’s)?` alone, so a BARE possessive on a name
+ * already ending in s — "Kilcross' market lives off through-traffic" — matched the bare name,
+ * left the apostrophe behind, and the weave printed "The village' market". Both shapes are
+ * matched now: apostrophe-plus-s, or a lone apostrophe that a space or the end of the line
+ * follows. The second is restricted to that position on purpose — an apostrophe with a letter
+ * after it is inside a word, not a possessive ending, and this leaf must not rename a town on
+ * the strength of a contraction.
+ *
+ * ⚠ LATENT RATHER THAN LIVE, MEASURED: the shipped corpus carries 165 `{settlement}`-plus-
+ * apostrophe-s across its 2,266 variants and ZERO bare ones, so today no page renders the
+ * defect. One authored variant ships it, which is why it is closed before it can be written
+ * rather than after. The apostrophe-s path is untouched byte for byte.
  * @param {string} name
  * @returns {RegExp}
  */
 function openingNameMatcher(name) {
-  return new RegExp(`^${escapeForRegExp(name)}(’s|'s)?(?=[^\\p{L}\\p{N}_]|$)`, 'u');
+  return new RegExp(`^${escapeForRegExp(name)}(['’]s|['’](?=\\s|$))?(?=[^\\p{L}\\p{N}_]|$)`, 'u');
 }
 
 /**
@@ -196,10 +210,14 @@ export function weaveBlock(lines, options = {}) {
   // NO NAME OR NO NOUN ⇒ THE JOIN ALONE, which is the honest half of the fix rather than a
   // fallback: the sentences still read as one paragraph, and nothing is renamed on a guess.
   const opening = name && noun ? openingNameMatcher(name) : null;
-  // THE POSSESSIVE RIDES ACROSS VERBATIM rather than being re-spelled. The shipped corpus
-  // writes the straight apostrophe (`Kilcross's market lives off through-traffic`, U+0027
-  // measured), the typographic one appears elsewhere in the estate's copy, and a weave that
-  // normalised either into the other would be changing a character it was told not to.
+  // THE POSSESSIVE KEEPS ITS OWN APOSTROPHE CHARACTER rather than being normalised. The
+  // shipped corpus writes the straight one (`Kilcross's market lives off through-traffic`,
+  // U+0027 measured), the typographic one appears elsewhere in the estate's copy, and a weave
+  // that turned either into the other would be changing a character it was told not to. What
+  // it does NOT keep is the possessive's SHAPE: a tier noun never ends in s, so a bare
+  // possessive on a name that does ("Kilcross' market") becomes "The village's market" — the
+  // right ending for the word that is actually standing there, in the apostrophe the line
+  // itself wrote. `'s` in gives `'s` out, byte for byte, which is every line shipping today.
   const woven = kept.map((line, index) => {
     if (index === 0 || !opening) return line;
     return line.replace(
@@ -210,7 +228,8 @@ export function weaveBlock(lines, options = {}) {
         // tier takes "It"/"Its" instead, so the weave can produce neither "The town is a town"
         // nor "The village is a town".
         if (namesAnyTierNoun(line.slice(match.length))) return possessive ? 'Its' : 'It';
-        return `The ${noun}${possessive || ''}`;
+        if (!possessive) return `The ${noun}`;
+        return `The ${noun}${possessive.charAt(0)}s`;
       },
     );
   });

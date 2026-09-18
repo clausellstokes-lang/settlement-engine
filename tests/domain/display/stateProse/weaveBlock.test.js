@@ -140,6 +140,59 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     expect(typographic.sentences[1]).toBe('The village’s market lives off through-traffic.');
   });
 
+  it('a BARE possessive on a name ending in s is a possessive, not a stranded apostrophe', () => {
+    // ⛔ THE REVIEW FINDING (2026-09-18). The possessive group was apostrophe-plus-s ONLY, so
+    // "Kilcross' market lives off through-traffic" matched the bare NAME, left the apostrophe
+    // where it was, and the weave printed "The village' market". Latent rather than live — the
+    // shipped corpus carries 165 `{settlement}`-plus-apostrophe-s and ZERO bare ones — but one
+    // authored variant ships it, so it is closed before it can be written.
+    //
+    // A TIER NOUN NEVER ENDS IN S, so the stand-in takes the ending the word standing there
+    // actually needs: "The village's", in whichever apostrophe the line itself wrote.
+    const bare = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\' market lives off through-traffic.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(bare.sentences[1]).toBe('The village\'s market lives off through-traffic.');
+    const bareTypographic = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\u2019 market lives off through-traffic.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(bareTypographic.sentences[1]).toBe('The village\u2019s market lives off through-traffic.');
+    // …and it reaches the PRONOUN branch like any other possessive.
+    const pronoun = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\' record still marks each hard season as bearing on the town.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(pronoun.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+    // A bare possessive at the very END of a line is still one.
+    const atEnd = weaveBlock(['Nothing hems Kilcross in.', 'Kilcross\''], { settlementName: 'Kilcross', tierNoun: VILLAGE });
+    expect(atEnd.sentences[1]).toBe('The village\'s');
+  });
+
+  it('…and the bare form is WHOLE-WORD and POSITION-BOUND, so it cannot eat a contraction', () => {
+    // An apostrophe with a LETTER after it is inside a word, not a possessive ending: the bare
+    // alternative is restricted to one a space or the line's end follows. Without that, this
+    // leaf would read a contraction as a possessive and re-spell it.
+    const contraction = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\'n the road are one argument.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(contraction.sentences[1]).toBe('The village\'n the road are one argument.');
+    // …and a LONGER word that merely starts with the name is still not the name.
+    const longer = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcrossshire\' market is elsewhere.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(longer.sentences[1]).toBe('Kilcrossshire\' market is elsewhere.');
+    // …and the apostrophe-s path is UNTOUCHED, byte for byte, which is every line shipping today.
+    const sForm = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\'s market lives off through-traffic.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(sForm.sentences[1]).toBe('The village\'s market lives off through-traffic.');
+  });
+
   it('handles the estate\'s real name shapes — diacritics, apostrophes, spaces', () => {
     const diacritic = weaveBlock(
       ['Edznaxóchitl keeps the terraces.', 'Edznaxóchitl\'s market lives off the road.'],
