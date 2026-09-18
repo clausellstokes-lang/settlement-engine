@@ -26,6 +26,9 @@
  *     (--sf-btn-hover-bg transparent), and the glow is drawn only where the device really
  *     hovers (matchMedia '(hover: hover)', read when the pointer enters), so a tap on a phone
  *     never leaves a lit patch behind. No stylesheet bytes: it is state and an inline style.
+ *   - THE RING HUGS THE PAINTING, NOT THE BOX. Since the fine-pointer target floor the
+ *     control's box can be taller than the painted band it sits on, so the caller passes
+ *     `paintedH` and the ring takes that height instead of the box's.
  *   - NOTHING ROUNDS OR CASTS A SHADOW (the deep-craft kill list), and the box is exactly
  *     the rectangle it is given: no padding, no border, no minimum height of its own.
  *
@@ -69,7 +72,12 @@ function keyboardFocused(el) {
  *   [key: string]: unknown,
  * }} props
  */
-export default function ArrowControl({ rect, glow, children, style, onFocus, onBlur, ...rest }) {
+export default function ArrowControl({ rect, glow, paintedH, children, style, onFocus, onBlur, ...rest }) {
+  // The ring is drawn inside the control's box, and since the pointer floor that box may be
+  // TALLER than the painting it sits on (40 rows over a 32.65 px band at 1024). Ringing the
+  // box would draw its lower edge on the page below the shaft, so the ring takes the
+  // painted height where the caller knows it.
+  const ringH = Math.max(0, (typeof paintedH === 'number' ? Math.min(paintedH, rect.h) : rect.h) - 6);
   const [ring, setRing] = useState(false);
   const [lit, setLit] = useState(false);
   return (
@@ -111,7 +119,7 @@ export default function ArrowControl({ rect, glow, children, style, onFocus, onB
           aria-hidden="true"
           data-sf-arrow-ring=""
           style={{
-            position: 'absolute', inset: 3, pointerEvents: 'none',
+            position: 'absolute', left: 3, right: 3, top: 3, height: px(ringH), pointerEvents: 'none',
             outline: `2px solid ${PARCH_100}`, outlineOffset: -2,
           }}
         />

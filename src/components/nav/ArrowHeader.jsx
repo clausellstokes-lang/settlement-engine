@@ -189,7 +189,7 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
       >
         <div style={{ position: 'relative', height: px(layout.bandPx) }}>
           <ArrowPaint layout={layout} part="band" />
-          <ArrowControl rect={home} glow={within(hits.glow.home, home)} aria-label="SettlementForge home" onClick={onHome} />
+          <ArrowControl rect={home} glow={within(hits.glow.home, home)} paintedH={layout.bandPx} aria-label="SettlementForge home" onClick={onHome} />
           {mode === 'full' && (
             <nav aria-label="Primary">
               {NAV.map(({ id, label }) => {
@@ -201,6 +201,7 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
                     key={id}
                     rect={rect}
                     glow={within(hits.glow.nav[id], rect)}
+                    paintedH={layout.bandPx}
                     data-sf-arrow-region={id}
                     aria-current={active ? 'page' : undefined}
                     onClick={() => onNavClick(id)}

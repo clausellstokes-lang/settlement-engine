@@ -190,7 +190,14 @@ export default function AccountMenu({
     row?.focus();
   }, [open]);
 
-  const plate = roomy ? padTarget(layout.hits.plate, 44, layout.width) : layout.hits.plate;
+  // THE SAME FLOOR THE PAINTED WORDS TAKE (components/nav/ArrowHeader.jsx). Below about
+  // 1255 px of page the painted band is under 40 px tall — 32.65 at 1024 — so the plate was
+  // a smaller target on a laptop than the guideline floor while phones were already padded
+  // to 44. Height only on a fine pointer: padTarget also re-centres x and grows width, and
+  // the plate's box is the brass, which must not move.
+  const plate = roomy
+    ? padTarget(layout.hits.plate, 44, layout.width)
+    : { ...layout.hits.plate, h: Math.max(layout.hits.plate.h, 40) };
   const slip = layout.hits.slip;
   const name = displayName || (isElevated ? 'Developer' : 'Account');
   const nameMax = slipFont(layout.s);
@@ -238,7 +245,7 @@ export default function AccountMenu({
   if (isAnon) {
     return (
       <div ref={ref} data-sf-arrow-plate="" style={plateBox}>
-        <ArrowControl rect={control} glow={glow} onClick={onSignIn}>
+        <ArrowControl rect={control} glow={glow} paintedH={layout.bandPx} onClick={onSignIn}>
           <span style={slipStyle}>Sign In</span>
         </ArrowControl>
       </div>

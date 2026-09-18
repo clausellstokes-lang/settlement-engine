@@ -342,9 +342,11 @@ export const UNDERLINE_ROW = 52;
  * Rows [52, 62) are the tallest run that still takes PARCH_100 at 8:1 against the wood's
  * 99th percentile (8.49:1; twelve rows falls to 7.80 and fails the bar the hairline set),
  * they carry no lettering ink at all, and they stay inside the rows 37-66 band where
- * PARCH_100 clears 3:1 at all. Six columns of parchment past each word's ink is the widest
- * pad that keeps every plaque inside its own hit region — Compendium's gaps are the tight
- * ones, at ten and eleven columns. tests/build/arrowHeaderAssets.test.js re-measures all of
+ * PARCH_100 clears 3:1 at all. Six columns of parchment past each word's ink is a CHOSEN
+ * margin, not a maximum: the binding constraint is Compendium's own gaps, ten columns to
+ * its left binding and eleven to its right, so ten would still fit and eleven would not.
+ * The ceiling is enforced rather than asserted here — tests/components/arrowGeometry.test.js
+ * holds every plaque inside its own hit region at every width from 1009 to 3840. tests/build/arrowHeaderAssets.test.js re-measures all of
  * it on the shipped pixels, so a re-cut of the art reds instead of shipping an invisible or
  * a lettering-covering mark.
  */
