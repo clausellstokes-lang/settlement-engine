@@ -185,29 +185,39 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
       // Critical — so both elements are named and the rule is checked between them.
       const bands = row.querySelectorAll('[data-sf-cap-band]');
       const statusEl = row.querySelector('[data-sf-cap-status]');
-      expect(statusEl, `${label} must render its status`).toBeTruthy();
       expect(bands.length, `${label} must never render a second band`).toBeLessThanOrEqual(1);
+
+      // THE GRADE HAS THREE PLACES IT CAN LAND — the status pill, the band beside the bar,
+      // and the opening word of the note — and the rule is that it lands in exactly one of
+      // them. The pill stands down when the PROSE opens on the grade, because a sentence
+      // that says the word and then says what it means is the better carrier.
+      const opensOnStatus = new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i')
+        .test(String(cap.note || '').trim());
+      expect(Boolean(statusEl), `${label}: the pill must stand down exactly when the prose opens on the grade`)
+        .toBe(!opensOnStatus);
+
+      const said = [statusEl?.textContent, bands[0]?.textContent, opensOnStatus ? cap.status : null].filter(Boolean);
+      expect(said.length, `${label} says its grade more than once: ${said.join(' / ')}`).toBe(new Set(said).size);
 
       // A PRESENCE READ HAS NO MAGNITUDE, so it has no bar and no band: `score: null` is
       // how this list spells "there is nothing here to grade" (Legal Infrastructure,
       // Medical Readiness, Logistics & Supply — and, since the magic row stopped borrowing
       // the engine's magical score, Magical Capability when the town has no arcane
-      // institution). Such a row must show its status and nothing else.
+      // institution). Such a row must still say what IS there.
       if (cap.score === null) {
         expect(bands.length, `${label} is a presence read and must carry no band`).toBe(0);
-        expect(statusEl.textContent, `${label} must still say what is there`).toBeTruthy();
+        expect(said.length, `${label} must still say what is there`).toBeGreaterThan(0);
         continue;
       }
 
       const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
       if (bands.length === 1) {
         expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
-        expect(bands[0].textContent, `${label} prints one word twice`).not.toBe(statusEl.textContent);
         expect(bands[0].textContent, `${label}'s band must be THIS row's score`).toBe(implied);
       } else {
-        // The band may be dropped for ONE reason: the status already says that word. A row
-        // that lost its grade for any other reason is the defect this arm exists to catch.
-        expect(statusEl.textContent, `${label} dropped its band without the status saying it`).toBe(implied);
+        // The band may be dropped for ONE reason: the grade is already said elsewhere in
+        // the row. A row that lost its grade for any other reason is the defect this catches.
+        expect(said, `${label} dropped its band without the row saying that word`).toContain(implied);
       }
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.

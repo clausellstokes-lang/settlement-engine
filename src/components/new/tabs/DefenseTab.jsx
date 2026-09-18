@@ -592,12 +592,22 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                a Weak bar) both still show, because then they are two readings. */
             const band = cap.score !== null ? statusCase(scoreBand(cap.score)) : null;
             const bandRepeatsStatus = band !== null && band === cap.status;
+            /* ⛔ AND THE NOTE IS THE THIRD PLACE THE GRADE CAN LAND. Economic Backing's
+               middle band reads status "Adequate" over the note "Adequate upkeep, some
+               shortfalls." — the same word twice, one line apart, which the band fold above
+               cannot see because it only compares the band with the status. When the PROSE
+               opens on the grade, the prose is the better place for it: it says the word
+               once and then says what the word means. So the pill stands down and the note
+               carries the grade. */
+            const noteOpensOnStatus = typeof cap.note === 'string' && typeof cap.status === 'string'
+              && cap.status.length > 0
+              && new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(cap.note.trim());
             return (
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
-                  <span data-sf-cap-status="" style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>
+                  {!noteOpensOnStatus&&<span data-sf-cap-status="" style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>}
                   {cap.score!==null&&<div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6}}>
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
