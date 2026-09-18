@@ -7,7 +7,9 @@
  * count and pitches the SIMULATION (advance time / campaigns / custom content) as
  * the premium product — never settlement size, never "more saves" alone.
  *
- *   - anon    → "Sign in to save" (anon has 0 slots).
+ *   - anon    → "Sign in free to save up to N settlements" (anon has 0 slots; N is
+ *               the FREE tier's derived cap, since the line is a promise about the
+ *               account this visitor does not have yet, not about their own quota).
  *   - free    → "N of 3 saves" meter + the upgrade card naming the real product.
  *   - premium → "Unlimited saves" + a quiet "living world unlocked" line; no meter.
  *
@@ -21,6 +23,7 @@ import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.js';
 import { getTierDisplayName } from '../../config/pricing.js';
+import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
@@ -57,8 +60,16 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
         {isAnon ? (
+          // The anon line used to say only "Sign in to save … keep your
+          // settlements across sessions": true, but silent about the two facts
+          // that decide whether a visitor bothers — that the account is FREE and
+          // that it holds a bounded number of settlements. Both are named here,
+          // and the number is the DERIVED free-tier cap (config/tierFacts.js,
+          // pinned to TIER_GATE.free.maxSaves by the contract test), never a
+          // hand-typed 3. `max` is this viewer's own cap and is 0 for anon, so it
+          // cannot be the source of the promise being made about an account.
           <span data-testid="quota-label" style={{ color: BODY }}>
-            <strong style={{ color: INK }}>Sign in to save</strong>. Keep your settlements across sessions.
+            <strong style={{ color: INK }}>Sign in free</strong> to save up to {FREE_SAVE_LIMIT} settlements and keep them across sessions.
           </span>
         ) : isPremium ? (
           <span data-testid="quota-label" style={{ color: BODY }}>

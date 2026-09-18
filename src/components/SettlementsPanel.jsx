@@ -704,7 +704,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // Gated on campaigns too: a campaign-first user (campaigns made before
         // any settlement is saved) falls through to the campaign folders below
         // instead of seeing a "you have nothing" sample.
-        <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} /></div>
+        <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} tier={authTier} /></div>
       ) : (filteredSaves.length === 0 && saves.length > 0) ? (
         // The library has saves, but none survive the active search/filters.
         // Offer a recovery CTA rather than a silent dead-end (no inert list).

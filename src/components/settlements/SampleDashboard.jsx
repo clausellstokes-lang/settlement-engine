@@ -12,8 +12,16 @@ import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.j
 // SurveyorNote's contract), so a keeper who hides it stays un-nagged.
 const WHISPER_ID = 'library_empty_invitation';
 
-export function SampleDashboard({ onFork, forkingId }) {
+/**
+ * @param {{ onFork?: Function, forkingId?: string|null, tier?: string }} props
+ *   `tier` is the viewer's auth tier, threaded from SettlementsPanel. An
+ *   ANONYMOUS visitor has `maxSaves: 0` (store/authSlice TIER_GATE), so the card
+ *   must not promise them "your own saves" — a fork lands in the draft they are
+ *   already reading, and keeping it is what an account is for.
+ */
+export function SampleDashboard({ onFork, forkingId, tier }) {
   const [invited, setInvited] = useState(() => !isGuidanceDismissed(WHISPER_ID));
+  const isAnon = tier === 'anon';
   return (
     <div style={{
       padding: '20px 16px',
@@ -48,7 +56,7 @@ export function SampleDashboard({ onFork, forkingId }) {
         fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
         textAlign: 'center', fontFamily: sans,
       }}>
-        Three hand-picked seeds you can fork into your own saves. Each forks
+        Three hand-picked seeds you can fork into {isAnon ? 'a draft' : 'your own saves'}. Each forks
         with a unique character. Same setting, different settlement.
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
