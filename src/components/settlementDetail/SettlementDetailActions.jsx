@@ -27,7 +27,7 @@ export default function SettlementDetailActions({
   imageExporting, onExportImage,
   shareOpen, onToggleShare, galleryPublished,
 }) {
-  // Pre-launch lockout (lib/launchGate.js): only the non-premium "Edit (Premium)"
+  // Pre-launch lockout (lib/launchGate.js): only the non-subscriber "Edit (Cartographer)"
   // variant is a purchase (it opens the pricing modal), so only it renders disabled
   // with the Available at launch pill until purchases open. A premium editor's
   // Edit Dossier / Stop Editing toggle is untouched.
@@ -47,9 +47,9 @@ export default function SettlementDetailActions({
           ? (editMode
               ? 'Stop editing. Fields return to read-only display.'
               : 'Edit dossier prose in place. Edited NPCs survive a reroll; the AI overlay passes them through.')
-          : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
+          : 'Manual editing is a Cartographer feature. Click to upgrade.'}
       >
-        {!canEdit ? 'Edit (Premium)' : (editMode ? 'Stop Editing' : 'Edit Dossier')}
+        {!canEdit ? 'Edit (Cartographer)' : (editMode ? 'Stop Editing' : 'Edit Dossier')}
         {editUpsellLocked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
       </Button>
       {sessionModeEnabled && (

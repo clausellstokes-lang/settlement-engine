@@ -82,7 +82,7 @@ describe('NextActionRail — the "Actions" panel census', () => {
     expect(screen.getByText('Actions')).toBeTruthy();
     // Session Mode + the premium-gated Edit rung are present (Edit shows the lock label).
     expect(screen.getByRole('button', { name: 'Session Mode' })).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'Edit (Premium)' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Edit (Cartographer)' })).toBeTruthy();
     // Export Image + Share may sit under "Show more" (5-item cap) — reveal them.
     const more = screen.queryByRole('button', { name: /show \d+ more/i });
     if (more) fireEvent.click(more);
@@ -90,11 +90,11 @@ describe('NextActionRail — the "Actions" panel census', () => {
     expect(screen.getByRole('button', { name: 'Share to Gallery' })).toBeTruthy();
   });
 
-  test('with purchases open, a free owner\'s Edit (Premium) and Export rungs are live, unpilled, and fire their handlers', () => {
+  test('with purchases open, a free owner\'s Edit (Cartographer) and Export rungs are live, unpilled, and fire their handlers', () => {
     storeRef.current = { phase: 'draft', eventLog: [], aiSettlement: null, aiDailyLife: null, auth: { tier: 'wanderer' } };
     const rail = { onEdit: vi.fn(), onExport: vi.fn() };
     render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={rail} canEdit={false} />);
-    const edit = screen.getByRole('button', { name: 'Edit (Premium)' });
+    const edit = screen.getByRole('button', { name: 'Edit (Cartographer)' });
     const exportRung = screen.getByRole('button', { name: 'Export Dossier' });
     for (const rung of [edit, exportRung]) {
       expect(rung.disabled).toBe(false);

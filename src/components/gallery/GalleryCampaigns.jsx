@@ -239,7 +239,7 @@ export default function GalleryCampaigns({ onNavigate }) {
               <EmptyState
                 align="center"
                 heading="No shared campaigns yet."
-                body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
+                body="Cartographer DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
               />
             )
           )}

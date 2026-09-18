@@ -228,7 +228,7 @@ export function CampaignFolder({
         <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
           {retainedInactive
             ? `Frozen${retainedUntil ? ` until ${retainedUntil}` : ''}`
-            : 'Available again with Premium'}
+            : 'Available again with Cartographer'}
         </span>
       </div>
     );

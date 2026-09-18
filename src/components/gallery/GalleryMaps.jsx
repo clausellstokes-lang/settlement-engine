@@ -223,7 +223,7 @@ export default function GalleryMaps({ onNavigate }) {
           <EmptyState
             align="center"
             heading="No shared maps yet."
-            body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
+            body="Cartographer DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
           />
         )
       )}

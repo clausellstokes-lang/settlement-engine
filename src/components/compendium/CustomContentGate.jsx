@@ -32,7 +32,7 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       <div style={{
         fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
       }}>
-        Custom Compendium (Premium)
+        Custom Compendium (Cartographer)
       </div>
       <div style={{
         fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,

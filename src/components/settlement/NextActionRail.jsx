@@ -209,23 +209,23 @@ function computeItems({
       onClick: handlers.onSessionMode,
     });
   }
-  // Edit — premium-gated. A non-premium owner still sees the rung (labeled
-  // "Edit (Premium)" with a lock) so the upsell survives the move; the handler
+  // Edit — Cartographer-gated. A non-subscriber still sees the rung (labeled
+  // "Edit (Cartographer)" with a lock) so the upsell survives the move; the handler
   // routes to toggleEditMode or the purchase modal in useNextActionRailHandlers.
   if (handlers.onEdit) {
     const editItem = {
       id: 'edit', Icon: canEdit ? Edit3 : Lock,
       label: canEdit
         ? (phase === 'canon' ? 'Edit (correction)' : 'Edit Dossier')
-        : 'Edit (Premium)',
+        : 'Edit (Cartographer)',
       hint:  canEdit
         ? (phase === 'canon'
             ? 'Authorial correction outside the timeline.'
             : 'Edit dossier prose. Edited NPCs survive a reroll.')
-        : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.',
+        : 'Manual editing is a Cartographer feature. Click to upgrade.',
       onClick: handlers.onEdit,
     };
-    // Only the non-premium "Edit (Premium)" upsell is a purchase.
+    // Only the non-subscriber "Edit (Cartographer)" upsell is a purchase.
     items.push(!canEdit && !purchasesAreOpen ? lockForLaunch(editItem) : editItem);
   }
   if (!narrated && handlers.onPolishAi) {

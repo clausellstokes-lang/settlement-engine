@@ -113,7 +113,7 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     expectLockedWithPill(screen.getByText('Upgrade', { selector: 'button' }));
   });
 
-  it('InstantWorldEntry: the non-premium "See Premium" reach is locked, the premium toggle is not', () => {
+  it('InstantWorldEntry: the non-premium "See Cartographer" reach is locked, the premium toggle is not', () => {
     const base = {
       isElevated: () => false,
       instantWorld: vi.fn(),
@@ -126,7 +126,7 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     setStore({ ...base, auth: { tier: 'free' } });
     render(<InstantWorldEntry />);
     const reach = screen.getByTestId('instant-world-open');
-    expect(reach.textContent).toMatch(/^See Premium/);
+    expect(reach.textContent).toMatch(/^See Cartographer/);
     expectLockedWithPill(reach);
     // The Realm sidebar is narrower than label plus pill: the locked reach must be
     // able to wrap the pill under its label, or the card clips both ends ("ee

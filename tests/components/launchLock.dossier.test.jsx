@@ -187,19 +187,19 @@ describe('launch lock (dossier): DossierSessionNotices', () => {
 });
 
 describe('launch lock (dossier): NextActionRail', () => {
-  it('a free owner: "Edit (Premium)" and "Export Dossier" are locked with the pill; Polish with AI stays live', () => {
+  it('a free owner: "Edit (Cartographer)" and "Export Dossier" are locked with the pill; Polish with AI stays live', () => {
     storeRef.current = freeOwnerStore();
     const handlers = { onEdit: vi.fn(), onExport: vi.fn(), onPolishAi: vi.fn() };
     render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={handlers} canEdit={false} />);
 
-    const edit = screen.getByRole('button', { name: 'Edit (Premium)' });
+    const edit = screen.getByRole('button', { name: 'Edit (Cartographer)' });
     const exportRung = screen.getByRole('button', { name: 'Export Dossier' });
     expectLockedWithPill(edit);
     expectLockedWithPill(exportRung);
     // The pill is announced with the row: it sits in the hint the row is described by.
     expect(document.getElementById(exportRung.getAttribute('aria-describedby')).textContent).toBe(PILL);
     expect(document.getElementById(edit.getAttribute('aria-describedby')).textContent)
-      .toBe(`Manual editing is a Cartographer (premium) feature. Click to upgrade.${PILL}`);
+      .toBe(`Manual editing is a Cartographer feature. Click to upgrade.${PILL}`);
     expect(exportRung.getAttribute('title')).toBe(PILL);
     fireEvent.click(edit);
     fireEvent.click(exportRung);
@@ -225,7 +225,7 @@ describe('launch lock (dossier): NextActionRail', () => {
     expect(handlers.onExport).toHaveBeenCalledTimes(1);
   });
 
-  it('a free owner holding the durable right for this save: Export stays live, Edit (Premium) stays locked', () => {
+  it('a free owner holding the durable right for this save: Export stays live, Edit (Cartographer) stays locked', () => {
     storeRef.current = freeOwnerStore({ dossierEntitlements: { 'save-1': true } });
     const handlers = { onEdit: vi.fn(), onExport: vi.fn() };
     render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={handlers} canEdit={false} />);
@@ -234,7 +234,7 @@ describe('launch lock (dossier): NextActionRail', () => {
     expectLiveWithoutPill(exportRung);
     fireEvent.click(exportRung);
     expect(handlers.onExport).toHaveBeenCalledTimes(1);
-    expectLockedWithPill(screen.getByRole('button', { name: 'Edit (Premium)' }));
+    expectLockedWithPill(screen.getByRole('button', { name: 'Edit (Cartographer)' }));
   });
 });
 
@@ -248,12 +248,12 @@ describe('launch lock (dossier): SettlementDetailActions', () => {
     shareOpen: false, onToggleShare: vi.fn(), galleryPublished: false,
   };
 
-  it('a non-premium owner: "Edit (Premium)" is locked with the pill and opens no pricing modal; the buy rung is locked too', () => {
+  it('a non-premium owner: "Edit (Cartographer)" is locked with the pill and opens no pricing modal; the buy rung is locked too', () => {
     storeRef.current = freeOwnerStore();
     const setPurchaseModalOpen = vi.fn();
     render(<SettlementDetailActions {...baseProps} canEdit={false} setPurchaseModalOpen={setPurchaseModalOpen} exportAllowed={false} />);
 
-    const edit = screen.getByRole('button', { name: /^Edit \(Premium\)/ });
+    const edit = screen.getByRole('button', { name: /^Edit \(Cartographer\)/ });
     expectLockedWithPill(edit);
     fireEvent.click(edit);
     expect(setPurchaseModalOpen).toHaveBeenCalledTimes(0);
