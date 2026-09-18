@@ -81,13 +81,26 @@ const classifiersFor = (role) => ({
 });
 
 describe('setting-agnostic role renames are mechanically inert', () => {
-  it('the mirrored power bands still match npcGenerator\'s own', () => {
-    // The mirror above is the only copy in this file; this is what keeps it honest.
-    for (const keyword of [...HIGH_POWER, ...MID_POWER]) {
-      expect(NPC_GENERATOR_SRC, `${keyword} left generateNPCPowerLevel`).toContain(`'${keyword}'`);
-    }
-    expect(NPC_GENERATOR_SRC).toContain('const HIGH_POWER = [');
-    expect(NPC_GENERATOR_SRC).toContain('const MID_POWER = [');
+  it('the mirrored power bands are EXACTLY npcGenerator\'s own, both directions', () => {
+    // ⛔ THE FIRST SPELLING OF THIS PIN WAS SATISFIED BY COINCIDENCE. It asserted
+    // `NPC_GENERATOR_SRC.toContain("'captain'")` for each keyword, which the file answers
+    // from ANY occurrence - 'captain' also appears in ROLE_FACTION_MAP, so deleting it
+    // from HIGH_POWER would have left this green. A containment check over a whole file
+    // cannot see a specific array at all. The arrays are extracted and compared.
+    const arrayLiteral = (name) => {
+      const match = NPC_GENERATOR_SRC.match(new RegExp(`const ${name} = \\[([\\s\\S]*?)\\];`));
+      expect(match, `${name} is no longer a literal array in npcGenerator.js`).toBeTruthy();
+      return [...match[1].matchAll(/'([^']*)'/g)].map((m) => m[1]);
+    };
+    // EQUALITY, so the mirror cannot drift in EITHER direction: a keyword added to the
+    // source without being mirrored fails, and one deleted from the source fails too.
+    expect(arrayLiteral('HIGH_POWER')).toEqual(HIGH_POWER);
+    expect(arrayLiteral('MID_POWER')).toEqual(MID_POWER);
+
+    // And the extractor is not vacuous: it really does read those arrays.
+    expect(arrayLiteral('HIGH_POWER')).toContain('captain');
+    expect(arrayLiteral('HIGH_POWER')).not.toContain('priest');
+    expect(arrayLiteral('MID_POWER')).toContain('priest');
   });
 
   it.each([

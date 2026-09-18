@@ -180,7 +180,7 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45
       ? [
           `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`,
-          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "trade"} never came dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
+          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "export"} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
           `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`,
         ]
       : [

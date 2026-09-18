@@ -228,19 +228,45 @@ const ARTICLE_BY_LEAD = Object.freeze({
  * the vowel that follows, not the letters that open. Both lists are therefore keyed on
  * the lead's first WORD and are kept as short as the defect allows.
  */
-/** Written vowels that open with a consonant sound, so they take 'a'. */
+/**
+ * Whole words that open with a consonant SOUND behind a written vowel, so they take 'a'.
+ * The list is not exhaustive and is not meant to be: it holds the words a settlement
+ * label plausibly opens with, and the PREFIX rule below catches the long tail.
+ */
 const CONSONANT_SOUND_WORDS = new Set([
-  'european', 'euphoric', 'eulogy', 'eucalyptus', 'ewe', 'one', 'once',
-  'unified', 'union', 'united', 'unique', 'uniform', 'unit', 'universal',
-  'university', 'unicorn', 'usual', 'useful', 'utopian', 'ubiquitous',
+  'european', 'euphoric', 'eulogy', 'eucalyptus', 'eucharist', 'eunuch', 'euphemism',
+  'ewe', 'one', 'once', 'unanimous', 'unified', 'union', 'united', 'unique', 'uniform',
+  'unit', 'unicameral', 'universal', 'universe', 'university', 'unicorn', 'usual',
+  'useful', 'usurper', 'usury', 'utopia', 'utopian', 'ubiquitous', 'ufo',
 ]);
 /** Written consonants that open with a vowel sound, so they take 'an'. The silent h. */
 const VOWEL_SOUND_WORDS = new Set([
   'heir', 'heiress', 'heirloom', 'honest', 'honesty', 'honour', 'honor',
   'honourable', 'honorable', 'honorary', 'hour', 'hourglass', 'hourly',
 ]);
+/**
+ * The long tail, as a last resort: most words opening `eu-`, `uni-`, `use-`, `usu-`,
+ * `uto-`, `ubi-`, `ufo-`, `one-` carry the consonant sound and take 'a'.
+ */
+const CONSONANT_SOUND_PREFIX = /^(?:eu|ewe|one|once|uni|use|usu|uto|ubi|ufo)/;
+/**
+ * ⛔ AND THE WORDS THAT MATCH THAT PREFIX AND STILL TAKE 'an'. This set is the whole
+ * reason the prefix may be kept: `uni-` cannot tell `unified` (/juː/) from `uninhabited`
+ * (/ʌn/ + `inhabited`), and `one-` swallows `oneiric`, because the sound is decided by
+ * the vowel that FOLLOWS the prefix, which a prefix never sees. Anything listed here
+ * skips the prefix rule and falls to the plain written-vowel default.
+ */
+const PREFIX_EXCEPTIONS = new Set([
+  'oneiric', 'unaccounted', 'unarmed', 'unbroken', 'uneasy', 'unequal', 'unended',
+  'unending', 'unimportant', 'uninhabited', 'uninterested', 'unopposed', 'unowned',
+  'unusual', 'unusable', 'uninvited', 'unearthly', 'unerring', 'uneven',
+]);
 
 /**
+ * The article the identity sentence takes, decided in five steps: the words the product
+ * mints, then the two sound lists, then the prefix rule behind its exception set, then
+ * the written vowel.
+ *
  * @param {string} descriptors
  * @returns {'a' | 'an'}
  */
@@ -252,9 +278,13 @@ function articleFor(descriptors) {
   // `hasOwnProperty` - each of them TRUTHY, so the function itself was returned and
   // printed: "X is function Object() { [native code] } constructor village of 9 people."
   if (Object.hasOwn(ARTICLE_BY_LEAD, lead)) return ARTICLE_BY_LEAD[lead];
-  const word = (lead.match(/[a-z]+/i) || [''])[0].toLowerCase();
-  if (CONSONANT_SOUND_WORDS.has(word)) return 'a';
+  // ⚠ ANCHORED. An unanchored `/[a-z]+/` takes the first letter-run ANYWHERE in the
+  // lead, so "8-Isle" was decided on `Isle` and came out "an 8-Isle" - the article has
+  // to answer to the character the reader actually says first.
+  const word = (lead.match(/^[^a-z]*([a-z]+)/i)?.[1] || '').toLowerCase();
   if (VOWEL_SOUND_WORDS.has(word)) return 'an';
+  if (CONSONANT_SOUND_WORDS.has(word)) return 'a';
+  if (!PREFIX_EXCEPTIONS.has(word) && CONSONANT_SOUND_PREFIX.test(word)) return 'a';
   return /^[aeiou]/.test(word) ? 'an' : 'a';
 }
 

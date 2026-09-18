@@ -232,6 +232,22 @@ describe('composeSettlementQuickGuide', () => {
     // The ordinary h is untouched.
     expect(lead('Highland')).toBe('a');
     expect(lead('Hill-Clans')).toBe('a');
+
+    // ⛔ THE WHOLE-WORD LISTS ALONE DROPPED WORDS THE PREFIX RULE HAD RIGHT, so the prefix
+    // stays as a LAST RESORT behind its exception set. Each of these opens with a written
+    // vowel and a consonant sound, and none of them is in the word list.
+    for (const word of ['Usurper', 'Usury', 'Utopia', 'Ufo', 'Unicameral', 'Unanimous',
+      'Universe', 'Eucharist', 'Eunuch', 'Euphemism']) {
+      expect(lead(word), word).toBe('a');
+    }
+    // …and the exception set is what stops that prefix over-firing again.
+    for (const word of ['Uninhabited', 'Unimportant', 'Oneiric', 'Unusual', 'Uneven']) {
+      expect(lead(word), word).toBe('an');
+    }
+
+    // The letter-run is read from the START of the lead, never from the middle of it.
+    expect(lead('8-Isle')).toBe('an');   // "an eight-Isle"
+    expect(lead('7-Hills')).toBe('a');   // "a seven-Hills"
   });
 
   it('falls through to historical character when the scope is not a term list', () => {
