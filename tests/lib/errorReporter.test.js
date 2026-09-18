@@ -156,47 +156,80 @@ describe('R-14 crash forensics — seed + tick + flags_on, no world state', () =
 // both buried real console errors and spent two of the 25 per-session beacons on
 // a non-event. It must leave by BOTH doors — the local console.error and the
 // network send — while every other error keeps both.
+//
+// It is DROPPED, NOT ERASED. A silent suppression is how a genuine runaway
+// observer loop becomes invisible, so the first match per page load leaves one
+// console.debug naming the class; later matches are silent (a real loop fires
+// every frame, and a per-match breadcrumb would be the flood the filter exists to
+// stop). Nothing about the beacon path changes: a notice is never reported.
 describe('benign browser notices are not application errors', () => {
   const NOTICES = [
     'ResizeObserver loop completed with undelivered notifications.', // current spelling
     'ResizeObserver loop limit exceeded',                            // older spelling
   ];
 
-  it.each(NOTICES)('drops %s from the console AND the network', async (notice) => {
+  /** Silence + spy BOTH console levels the filter touches. */
+  function spyConsole() {
+    return {
+      logged: vi.spyOn(console, 'error').mockImplementation(() => {}),
+      debugged: vi.spyOn(console, 'debug').mockImplementation(() => {}),
+    };
+  }
+
+  it.each(NOTICES)('drops %s from the error log AND the network', async (notice) => {
     const { beacon, reportError } = await loadWithEndpoint();
-    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { logged, debugged } = spyConsole();
     // The window 'error' listener forwards `e.error || e.message`; this notice
     // carries no Error object, so a bare string is what actually arrives.
     reportError(notice, { kind: 'window.error' });
     expect(beacon).not.toHaveBeenCalled();
     expect(logged).not.toHaveBeenCalled();
+    // …but the suppression itself is discoverable, once, at debug level.
+    expect(debugged).toHaveBeenCalledTimes(1);
+    expect(String(debugged.mock.calls[0][0])).toContain('ResizeObserver loop');
+    expect(debugged.mock.calls[0][1]).toBe(notice);
+  });
+
+  it('announces the dropped class ONCE per page load, however many notices arrive', async () => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const { logged, debugged } = spyConsole();
+    // A real runaway loop fires this on every frame: the breadcrumb must not flood.
+    for (let i = 0; i < 50; i++) {
+      reportError('ResizeObserver loop completed with undelivered notifications.', { kind: 'window.error' });
+    }
+    expect(debugged).toHaveBeenCalledTimes(1);
+    expect(logged).not.toHaveBeenCalled();
+    expect(beacon).not.toHaveBeenCalled();
   });
 
   it('tolerates the browser envelope (an Uncaught prefix, a missing/extra full stop)', async () => {
     const { beacon, reportError } = await loadWithEndpoint();
-    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { logged, debugged } = spyConsole();
     reportError('Uncaught ResizeObserver loop completed with undelivered notifications', { kind: 'window.error' });
     reportError('ResizeObserver loop limit exceeded.', { kind: 'window.error' });
     reportError(new Error('ResizeObserver loop completed with undelivered notifications.'));
     expect(beacon).not.toHaveBeenCalled();
     expect(logged).not.toHaveBeenCalled();
+    expect(debugged).toHaveBeenCalledTimes(1); // all three matched; one breadcrumb
   });
 
   it('still reports a REAL error that merely mentions ResizeObserver', async () => {
     const { beacon, reportError } = await loadWithEndpoint();
-    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { logged, debugged } = spyConsole();
     reportError(errAt('ResizeObserver callback threw: cannot read properties of null'));
     expect(beacon).toHaveBeenCalledTimes(1);
     expect(logged).toHaveBeenCalledTimes(1);
+    expect(debugged).not.toHaveBeenCalled(); // not a suppression — nothing to announce
     expect(JSON.parse(beacon.mock.calls[0][1]).message)
       .toBe('ResizeObserver callback threw: cannot read properties of null');
   });
 
-  it('leaves every unrelated error on both paths', async () => {
+  it('leaves every unrelated error on both paths, and adds no debug noise', async () => {
     const { beacon, reportError } = await loadWithEndpoint();
-    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const { logged, debugged } = spyConsole();
     reportError(errAt('the forge stalled'));
     expect(beacon).toHaveBeenCalledTimes(1);
     expect(logged).toHaveBeenCalledTimes(1);
+    expect(debugged).not.toHaveBeenCalled();
   });
 });

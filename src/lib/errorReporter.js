@@ -8,8 +8,10 @@
  * is configured - fire-and-forgets a compact JSON payload (sendBeacon, falling
  * back to fetch+keepalive). Network is a no-op when the env var is unset, so dev
  * and self-host stay quiet. The ONE class it drops on both paths is a benign
- * browser NOTICE that is not an application error at all - see
- * BENIGN_BROWSER_NOTICES below for the whole list and the reasoning.
+ * browser NOTICE that is not an application error at all - dropped from the error
+ * log and the beacon, but announced once per page load at DEBUG level so the
+ * suppression is never invisible - see BENIGN_BROWSER_NOTICES below for the whole
+ * list and the reasoning.
  *
  * Point `VITE_ERROR_REPORT_URL` at any sink (a Supabase edge function, a
  * Sentry tunnel, Logflare, etc.). The payload is intentionally tiny and
@@ -100,11 +102,26 @@ function forensicsSnapshot() {
 // useChromeInsets and useChromeWidth, and a desktop Realm mount reported it twice.
 // Reporting it as an error buried real crashes in the console AND spent the
 // per-session beacon budget below on a non-event. Dropped at this ONE chokepoint,
-// before the local log and before the network send. Every other error is untouched.
+// before the ERROR log and before the network send. Every other error is untouched.
+//
+// It is dropped, not erased. A suppression with no trace of its own is how a
+// genuine runaway observer loop — one that really does thrash layout — becomes
+// invisible to the developer who has to find it. So the FIRST match per page load
+// leaves one console.debug naming the class that was dropped; every later match is
+// silent, because a real loop fires this notice on every frame and a per-match
+// breadcrumb would be the flood the filter exists to stop. Debug is deliberately
+// below the console's default level: present when someone goes looking, absent
+// from the honest-console bar this filter was written to clear. It never reaches
+// the beacon path — a notice is not worth a report at any volume.
 const BENIGN_BROWSER_NOTICES = new Set([
   'resizeobserver loop completed with undelivered notifications',
   'resizeobserver loop limit exceeded',
 ]);
+
+// The breadcrumb above, rate-limited to once per page load for the whole class
+// (module scope — a reload starts a fresh session, which is exactly the scope a
+// "was anything suppressed here?" question is asked in).
+let benignNoticeAnnounced = false;
 
 /**
  * True only for a known benign browser notice. Browsers vary the ENVELOPE (an
@@ -139,8 +156,19 @@ export function reportError(error, context = {}) {
   const e = /** @type {any} */ (error);
   const message = safe(() => String(e?.message ?? e)) || 'unknown error';
   // A benign browser notice is not an application error (see
-  // BENIGN_BROWSER_NOTICES): drop it before the local log AND before the send.
-  if (isBenignBrowserNotice(message)) return;
+  // BENIGN_BROWSER_NOTICES): drop it before the error log AND before the send,
+  // leaving ONE debug breadcrumb per page load so the suppression itself is
+  // discoverable when a runaway observer loop has to be hunted down.
+  if (isBenignBrowserNotice(message)) {
+    if (!benignNoticeAnnounced) {
+      benignNoticeAnnounced = true;
+      console.debug(
+        '[errorReporter] suppressed benign browser notice (ResizeObserver loop); not an application error, reported once per page load:',
+        message,
+      );
+    }
+    return;
+  }
   const payload = {
     kind: context.kind || 'error',
     message,
