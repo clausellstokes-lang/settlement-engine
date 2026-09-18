@@ -1504,29 +1504,28 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     });
 
     // The one claim with nothing to drive: that the retired machinery is GONE
-    // rather than merely unreachable. Read over CODE ONLY, so the headers that
-    // explain what was removed are not measured as uses, and each file is
-    // anchored on a line proving it is still the file that used to carry it.
+    // rather than merely unreachable. Every file is read as CODE ONLY, so the
+    // headers explaining what was removed are not measured as uses, and every
+    // absence goes through expectAbsentWithAnchor with a LIVE sibling from the
+    // same file — a bare absence would read the same against a module that had
+    // been renamed, gutted or moved out from under the scan.
     test('the claim, the redirect stash and the boot drop are absent from the code', () => {
-      const auth = readSrc('src/store/authSlice.js');
-      expect(auth).toContain('initAuth: async () => {');
-      expect(codeOnly(auth)).not.toMatch(/anonDraft|restoredAnonDraft|signedInWorld/);
+      const RETIRED = ['restoredAnonDraft', 'signedInWorld'];
+      for (const [label, path, anchor, retired] of [
+        ['authSlice', 'src/store/authSlice.js', 'initAuth: async () => {', ['anonDraft', ...RETIRED]],
+        ['persistMerge', 'src/store/persistMerge.js', 'export function readAnonDraft', RETIRED],
+        ['the swap chokepoint', 'src/store/settlementLifecycleHelpers.js', 'export function resetSettlementIdentity', RETIRED],
+        ['settlementSlice', 'src/store/settlementSlice.js', 'claimSettlementForAccount', RETIRED],
+      ]) {
+        const code = codeOnly(readSrc(path));
+        for (const member of retired) expectAbsentWithAnchor(code, member, anchor, `${label} — ${member}`);
+      }
 
-      const merge = readSrc('src/store/persistMerge.js');
-      expect(merge).toContain('export function readAnonDraft');
-      expect(codeOnly(merge)).not.toMatch(/restoredAnonDraft|signedInWorld/);
-
-      const identity = readSrc('src/store/settlementLifecycleHelpers.js');
-      expect(identity).toContain('export function resetSettlementIdentity');
-      expect(codeOnly(identity)).not.toMatch(/restoredAnonDraft|signedInWorld/);
-
-      const slice = readSrc('src/store/settlementSlice.js');
-      expect(slice).toContain('claimSettlementForAccount');
-      expect(codeOnly(slice)).not.toMatch(/restoredAnonDraft|signedInWorld/);
-
-      // The subscription this gate started life as, and the module the claim
-      // machinery lived in, are both gone.
-      expect(readSrc('src/store/index.js')).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
+      const index = readSrc('src/store/index.js');
+      expect(index).toContain('partialize: partializeStoreState');
+      // anchored: the line above proves this is still the composed store's entry module, so the missing subscription is wiring DELETED rather than a file that drifted; the pattern stays a regex because the retired wiring's whitespace was never pinned
+      expect(index).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
+      // …and the module the whole claim machinery lived in is gone from disk.
       expect(() => readSrc('src/store/anonDraftGate.js')).toThrow();
     });
   });
