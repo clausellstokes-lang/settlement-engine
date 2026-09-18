@@ -121,14 +121,22 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         <ReadSystemStateBar settlement={settlement} />
       </div>
 
-      {/* Two-column body */}
+      {/* Two-column body — ONE column on a phone.
+          The 1.2 / 0.95 split is a reading layout for a wide screen. At 375px it
+          divided the 339px of content into a 181px guide and a 144px cheat sheet,
+          which is four or five words to a line: the magazine spread had become two
+          gutters. Below the breakpoint the columns stack, so the quick guide and
+          the cheat sheet each get the full measure the 14px prose floor needs. The
+          order is unchanged — the guide leads, the cheat sheet follows — and the
+          desktop spread is byte-identical. */}
       <div style={{
         display: 'flex', gap: 14,
+        flexDirection: mobile ? 'column' : 'row',
         padding: '16px 18px',
-        alignItems: 'flex-start',
+        alignItems: mobile ? 'stretch' : 'flex-start',
       }}>
         {/* LEFT — one identity, three truths, one pressure. */}
-        <div style={{ flex: 1.2, minWidth: 0 }}>
+        <div style={{ flex: mobile ? '0 0 auto' : 1.2, minWidth: 0 }}>
           <div style={{
             fontSize: FS.micro, fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -209,7 +217,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
 
         {/* RIGHT — three people and one entry point. */}
         <aside style={{
-          flex: 0.95,
+          flex: mobile ? '0 0 auto' : 0.95,
           padding: 12,
           background: PARCH,
           border: `1px solid ${BORDER}`,
