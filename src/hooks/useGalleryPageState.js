@@ -99,12 +99,25 @@ export function useGalleryPageState(routeSlug = null) {
   // (which isn't bound to this effect's lifecycle) can detect a stale query and
   // bail instead of appending stale-query pages onto a fresh result set.
   const queryGenRef = useRef(0);
+  // WHICH load last failed: a query change (loadList) or a NEXT page (loadMore).
+  // `page` cannot answer this — loadMore leaves it where it was when it fails,
+  // so a first failed page still reads as page 0 — and the answer decides how
+  // "Try again" recovers (see retryList, below loadMore).
+  const pageFetchFailedRef = useRef(false);
 
   // THE ONE LIST LOADER, shared by the query effect and the reader's "Try again"
   // so the two can never drift apart. Every call takes the next generation
   // token: a superseded call may still settle, but it may not write.
   const loadList = useCallback((query) => {
     const gen = ++queryGenRef.current;
+    // ⛔ CLEAR THE ERROR ON ENTRY, or a repeat failure is SILENT. `role="alert"`
+    // announces when the node is inserted or its text changes; a second identical
+    // failure re-renders the same node with the same sentence, so a reader using
+    // a screen reader hears nothing at all and the page looks frozen. Dropping
+    // the line for the duration of the attempt makes the next failure a fresh
+    // insertion, and it is also the truth: nothing has failed yet.
+    setListError(null);
+    pageFetchFailedRef.current = false;
     setListLoading(true); // show the spinner immediately on a query change
     const mine = !!query.filters?.mine;
     const unlistedMine = !!query.filters?.unlistedMine;
@@ -157,10 +170,6 @@ export function useGalleryPageState(routeSlug = null) {
     // flag and covers loadMore's snapshot by the same rule.
     return () => { queryGenRef.current += 1; };
   }, [galleryQuery, loadList]);
-
-  // The reader's recovery: re-run the CURRENT query through the same loader.
-  // House copy only — the control never shows the backend's words.
-  const retryList = useCallback(() => { void loadList(galleryQuery); }, [loadList, galleryQuery]);
 
   // The slug whose dossier is currently open or in-flight. The route-sync
   // effect reads this to avoid re-fetching a dossier openDossier just opened:
@@ -248,6 +257,10 @@ export function useGalleryPageState(routeSlug = null) {
     if (galleryQuery.filters?.mine || galleryQuery.filters?.unlistedMine || galleryQuery.filters?.featuredOnly) return; // owner/featured lists return all at once
     const nextPage = page + 1;
     const gen = queryGenRef.current; // snapshot the query generation
+    // Same reason as loadList: a repeat failure must be a fresh insertion or the
+    // alert is announced once and never again.
+    setListError(null);
+    pageFetchFailedRef.current = false;
     setListLoading(true);
     try {
       const res = await fetchPublicGallery({ page: nextPage, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
@@ -269,11 +282,26 @@ export function useGalleryPageState(routeSlug = null) {
       // a failed NEXT page keeps them and adds the error line above them. Only
       // a failed query change (loadList) clears the result, because only there
       // do the rows answer a question the reader has stopped asking.
-      if (queryGenRef.current === gen) setListError(err?.message || String(err));
+      if (queryGenRef.current !== gen) return;
+      setListError(err?.message || String(err));
+      // `page` was NOT advanced, so the next loadMore asks for this same page —
+      // which is exactly what "Try again" needs to resume rather than restart.
+      pageFetchFailedRef.current = true;
     } finally {
       if (queryGenRef.current === gen) setListLoading(false);
     }
   }, [galleryQuery, page, total]);
+
+  // THE READER'S RECOVERY, in two shapes because the two failures are different.
+  // A failed NEXT page is retried AS that page through loadMore, so the pages
+  // already read stay on screen: re-running the query from the top would throw
+  // away four pages of reading to recover the fifth. Anything else re-runs the
+  // current query through the same loader the effect uses. House copy only — the
+  // control never shows the backend's words.
+  const retryList = useCallback(() => {
+    if (pageFetchFailedRef.current && items.length) { void loadMore(); return; }
+    void loadList(galleryQuery);
+  }, [items, loadMore, loadList, galleryQuery]);
 
   const backToList = useCallback(() => {
     dossierRequestGenRef.current += 1;

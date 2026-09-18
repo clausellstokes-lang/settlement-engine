@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
@@ -71,6 +71,8 @@ export default function GalleryList({
   // the empty-gallery community-voice sentence is dismissible through the unified
   // sf:guidance store (the forge CTA below always stays).
   const [invited, setInvited] = useState(() => !isGuidanceDismissed('gallery_empty_invitation'));
+  // Where focus goes when "Try again" unmounts itself (see the control below).
+  const countRef = useRef(null);
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
@@ -98,6 +100,8 @@ export default function GalleryList({
             total={total}
             loading={listLoading}
             disabled={!!filters.mine}
+            error={!!listError}
+            countRef={countRef}
           />
           {/* The house line, not the backend's. `listError` carries the raw
               PostgREST/network message; the hook consoles it for diagnosis and
@@ -113,13 +117,23 @@ export default function GalleryList({
               <div role="alert" style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
                 {t('gallery.loadError')}
               </div>
+              {/* ⛔ aria-disabled, NEVER the native `disabled` (which Button also
+                  sets from `busy`): the browser blurs a control the instant it
+                  becomes disabled, dropping focus to <body>. And this control
+                  unmounts as soon as the retry clears `listError`, so there is
+                  nothing left to restore focus to afterwards — the handler hands
+                  it to the count strip on the way out instead of letting a
+                  keyboard reader fall back to the top of the document. */}
               {onRetryList && (
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={onRetryList}
-                  busy={listLoading}
-                  disabled={listLoading}
+                  aria-disabled={listLoading}
+                  onClick={() => {
+                    if (listLoading) return;
+                    onRetryList();
+                    countRef.current?.focus();
+                  }}
                 >
                   {t('gallery.retry')}
                 </Button>

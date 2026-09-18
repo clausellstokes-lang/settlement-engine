@@ -27,7 +27,7 @@
  *   a successful EMPTY listing       → the empty state
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import { en } from '../../src/copy/en.js';
 
@@ -219,7 +219,16 @@ describe('the gallery list surface — the error state is recoverable and never 
     // The previous query's tile and count must not stand under the error line
     // as though the facet had been applied and returned them.
     expect(screen.queryByText('Alpha')).toBeNull();
-    expect(screen.getByText('0 public settlements')).toBeTruthy();
+    // ⛔ AND THE COUNT MUST NOT BECOME "0 public settlements". An earlier draft
+    // of this test asserted that zero, which blessed the very claim the error
+    // work exists to remove: the topbar's always-mounted role=status strip is
+    // the one region a screen reader is listening to, and a failed read
+    // announcing "0 public settlements" into it says the gallery is EMPTY.
+    // The strip is present and says NOTHING; the alert says what happened.
+    const countStrip = screen.getByRole('status');
+    expect(countStrip.textContent).toBe('');
+    expect(screen.queryByText('0 public settlements')).toBeNull();
+    expect(screen.queryByText('1 public settlement')).toBeNull();
   });
 
   test('Try again re-runs the failed query and clears the error line', async () => {
@@ -238,5 +247,72 @@ describe('the gallery list surface — the error state is recoverable and never 
     expect(await screen.findByText('Alpha')).toBeTruthy();
     expect(screen.queryByRole('alert')).toBeNull();
     expect(mocks.supa.rpc).toHaveBeenCalledTimes(2);
+  });
+
+  test('a repeat failure is a fresh alert, not an unchanged one nobody hears', async () => {
+    // `role="alert"` announces on insertion or on a text change. A second
+    // identical failure re-rendering the SAME node with the SAME sentence is
+    // announced to nobody, and the page reads as frozen. Clearing the error for
+    // the duration of the attempt makes the next failure a fresh insertion.
+    let releaseSecond;
+    mocks.supa.rpc
+      .mockResolvedValueOnce({ data: null, error: { message: 'first failure' } })
+      .mockImplementationOnce(() => new Promise(resolve => { releaseSecond = resolve; }));
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    expect(await findHouseErrorLine()).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: en.gallery.retry }));
+    await waitFor(() => { expect(screen.queryByRole('alert')).toBeNull(); });
+
+    releaseSecond({ data: null, error: { message: 'second failure' } });
+    expect(await findHouseErrorLine()).toBeTruthy();
+  });
+
+  test('Try again never carries the native disabled attribute, and hands focus on', async () => {
+    mocks.supa.rpc
+      .mockResolvedValueOnce({ data: null, error: { message: 'first attempt failed' } })
+      .mockResolvedValueOnce(listingRow('Alpha'));
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    await findHouseErrorLine();
+
+    // Button derives the NATIVE disabled attribute from `busy` as well as from
+    // `disabled`, and a browser blurs a control the moment it becomes disabled.
+    const retry = screen.getByRole('button', { name: en.gallery.retry });
+    expect(retry.hasAttribute('disabled')).toBe(false);
+    expect(retry.getAttribute('aria-disabled')).toBe('false');
+
+    // The control unmounts with the error line, so focus must be handed on
+    // deliberately rather than falling to <body>.
+    fireEvent.click(retry);
+    await waitFor(() => { expect(document.activeElement).toBe(screen.getByRole('status')); });
+    expect(await screen.findByText('Alpha')).toBeTruthy();
+    expect(document.body.contains(retry)).toBe(false);
+  });
+
+  test('after a failed page, Try again resumes THAT page and keeps what was read', async () => {
+    // Re-running the query from the top would throw away four pages of reading
+    // to recover the fifth. `page` cannot tell the two failures apart — loadMore
+    // leaves it where it was — so the hook records which load failed.
+    mocks.supa.rpc
+      .mockResolvedValueOnce(listingRow('Alpha', 48))
+      .mockResolvedValueOnce({ data: null, error: { message: 'page 2 failed' } })
+      .mockResolvedValueOnce(listingRow('Beta', 48));
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    expect(await screen.findByText('Alpha')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Load more' }));
+    expect(await findHouseErrorLine()).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: en.gallery.retry }));
+    expect(await screen.findByText('Beta')).toBeTruthy();
+    // The page already read is still on screen, and the retry asked for the
+    // FAILED page — not page 0.
+    expect(screen.getByText('Alpha')).toBeTruthy();
+    expect(mocks.supa.rpc).toHaveBeenLastCalledWith(
+      'list_gallery_dossiers',
+      expect.objectContaining({ page_number: 1 }),
+    );
   });
 });

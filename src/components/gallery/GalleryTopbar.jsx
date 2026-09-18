@@ -16,6 +16,12 @@ export default function GalleryTopbar({
   sortOptions = GALLERY_SORT_OPTIONS,
   noun = 'settlement',
   countQualifier = 'public',
+  // A failed list read has NO count to report (see the strip below), and
+  // countRef lets the list hand focus to this strip when the control the reader
+  // pressed unmounts under them. Both default off, so the Maps and Campaigns
+  // tabs keep the behaviour they had.
+  error = false,
+  countRef = null,
 }) {
   const nounPlural = `${noun}s`;
   return (
@@ -72,7 +78,7 @@ export default function GalleryTopbar({
           text transitions 'Loading <nouns>...' → 'N <qualifier> <noun(s)>'
           across first load, query change, and load-more. The list/detail
           skeletons stay aria-hidden so the load is announced exactly once. */}
-      <div className="sf-readable-strip" role="status" aria-live="polite" style={{
+      <div ref={countRef} tabIndex={-1} className="sf-readable-strip" role="status" aria-live="polite" style={{
         gridColumn: '1 / -1',
         color: BODY,
         fontFamily: sans,
@@ -80,7 +86,13 @@ export default function GalleryTopbar({
         fontWeight: 850,
         justifySelf: 'start',
       }}>
-        {loading ? `Loading ${nounPlural}...` : `${total ?? 0} ${countQualifier} ${noun}${total === 1 ? '' : 's'}`}
+        {/* ⛔ A FAILED READ HAS NO COUNT. `total` is zeroed when a query change
+            fails (the rows it described are gone), and announcing "0 public
+            settlements" into this polite region would tell the reader the
+            gallery is EMPTY — the precise false claim this file's error work
+            exists to remove, said in the one region a screen reader is
+            listening to. Say nothing; the alert beside it says what happened. */}
+        {error ? '' : loading ? `Loading ${nounPlural}...` : `${total ?? 0} ${countQualifier} ${noun}${total === 1 ? '' : 's'}`}
       </div>
       {/* "My Settlements" mode swaps to the owner-scoped feed, which the search
           field cannot filter — disable it and surface the cause next to the
