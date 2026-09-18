@@ -340,7 +340,30 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // stress-loaded topology pass made their writer OBSERVABLE, so the reads stopped being
     // findings at all. A shrink of a bank is as much a governed event as a growth, and the
     // red on this line is that event announcing itself.
-    }).toEqual({ reads: 62, addresses: 41 }); // +2/+1: genesisDiplomacy.js joins the
+    // ⭐ 62/41 → 60/39 ON 2026-09-17 AT THE SCHEMA-19 RUNG, AND THIS LINE IS WHERE THAT
+    // GOVERNED EVENT WENT UNANNOUNCED FOR THREE COMMITS. The retirement (c4661fe48) moved
+    // every LIVE-side pin the same day — `live.explainedWriters.banked` 62 → 60, the
+    // clear-outright figure, the exact banked list, both per-identity maps — and
+    // deliberately left THIS one, saying so in the map below: "the register's two tagged
+    // rows leave when the governed re-freeze absorbs them, which is what moves the 62/41
+    // literal above to 60/39". The rung (ae8bc5e29) then DECLARED the move in the
+    // migration script's own docblock — "the banked reads go 62 → 60 across 41 → 39
+    // tagged addresses" — and the re-freeze (fe021a487) executed it, absorbing both rows.
+    // ⛔ BUT fe021a487 TOUCHED EXACTLY ONE FILE, the register. So the register went to
+    // 60/39 while this twin stayed at 62/41, and the walker landed RED AT THE TIP ITSELF,
+    // before any later lane's first car — the same failure mode the block at the head of
+    // this section was written about, recurring in the one figure that block exempted.
+    // The two addresses are `factions on locks` in src/domain/locksPreservation.js (×1)
+    // and src/domain/worldPulse/coup.js (×1), both tagged `CR-OSR-SCHEMA-6 / M8 —
+    // re-triaged out of class (a)`, both reads deleted outright by the owner's 2026-09-17
+    // order; neither file reads the `locks` shape's `factions` key at this tree at all.
+    // ⚠ THIS IS A SHRINK AND ONLY A SHRINK, which is exactly why moving it by hand is
+    // lawful: the bank may never be RAISED except by the governed reasoned path, and the
+    // path that LOWERED it ran to completion three commits ago. The figure is READ OFF
+    // the re-frozen register, never predicted from the delta — and the literal STAYS a
+    // literal, because deriving it from the register is the one change that would make
+    // the NEXT bank move silent.
+    }).toEqual({ reads: 60, addresses: 39 }); // +2/+1: genesisDiplomacy.js joins the
     // neighbourNetwork row at the schema-12 mint (ODQ §819). ⚠ +2 READS but only +1
     // ADDRESS, which is the shape a BANK-BY-RULE admission has and a new DECLARATION
     // does not: the ninth identity added two of each because it was a new identity in
