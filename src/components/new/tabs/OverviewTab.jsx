@@ -290,8 +290,16 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {siteLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
+          {/* THE LEAD PARAGRAPH reads one step above the dossier's body prose (FS.lg over
+              FS.md), on the phone as well as the desktop. It is the first thing a DM reads —
+              it sits second, directly under the identity strip — and at FS.md it was the same
+              size as the eleven paragraphs below it, so nothing said "start here". The step
+              is passed as the CALL SITE'S style, which is the seam ProseBlock documents:
+              the site owns the skin, the renderer owns the weave and the phone floor. That
+              floor is a max, so FS.lg survives it and the phone reads 15 where its siblings
+              read 14. */}
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+            style={{fontSize:FS.lg,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
