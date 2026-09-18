@@ -45,7 +45,19 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',padding:'0 5px',flexShrink:0}}>{depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
-        {inst&&<p style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></p>}
+        {/* ⛔ THE ATTRIBUTION LINE IS A `<div>`, AND IT IS NOT A STYLE CHOICE. Its child
+            `InstitutionLink` renders a FRAGMENT — the inline trigger, and beside it the
+            `InstitutionCard` dialog, in place rather than portalled — so opening a service
+            entry's institution put a `<section role="dialog">` with a `<header>`, an `<h2>`,
+            its own `<p>`s and a `<ul>` inside this paragraph, and React's DOM-nesting
+            validator printed one error per block element. `</p>` is implied by any block
+            start tag in the HTML parser, so that markup is not the tree React thinks it
+            built. A `<div>` carrying the SAME explicit style renders the identical box (both
+            are display:block and the `<p>` margin was already overridden), and it is the
+            honest element for a line whose child may open a dialog. The two paragraphs above
+            keep their `<p>`: their children are inline-only.
+            @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
+        {inst&&<div style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
