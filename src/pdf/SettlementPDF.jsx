@@ -183,7 +183,11 @@ export function SettlementPDF({
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {/* ⛔ THE FAITH PROSE HAS ONE HOME PER VARIANT, and this is where that is decided,
+          because `inc` lives here and no chapter can see the variant. Chapter 07 carries it
+          wherever the variant includes chapter 07; `campaign_state` drops chapter 07 and keeps
+          this one, so there it is fed here instead. Never both. */}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={inc('identityDailyLife') ? null : stateProse} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}

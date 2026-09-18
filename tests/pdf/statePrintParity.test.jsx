@@ -29,6 +29,8 @@ import React from 'react';
 
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
+import { PDF_VARIANTS } from '../../src/pdf/variants.js';
+import { buildPdfLiveWorld } from '../../src/pdf/lib/liveWorld.js';
 import { StateProse } from '../../src/pdf/primitives/StateProse.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
@@ -268,6 +270,7 @@ function flat(prose) {
 let full;
 let sparse;
 let captured;
+let patron;
 
 beforeAll(() => {
   // The same fixture the full-document render lane uses, so a divergence here and a crash
@@ -278,6 +281,22 @@ beforeAll(() => {
   ));
   // The threadbare pre-canonical save: most desks fall silent, a few still speak.
   sparse = normalizeSettlement({ name: 'Sparse Thorp', tier: 'thorp', population: 40 });
+  // ⭐ A PATRON TOWN — the only shape the two deity-naming faith positions can draw on, and
+  // therefore the only fixture that can tell the premium seam from a silence. The deity-free
+  // `full` fixture draws `faith.teaser` and nothing else, so an arm using it would have
+  // proved nothing about `faithUnlocked` at all (review 5).
+  patron = normalizeSettlement({
+    ...full,
+    name: 'Patronhold',
+    config: {
+      ...(full.config || {}),
+      primaryDeitySnapshot: {
+        name: 'The Iron Lord', rankAxis: 'major', alignmentAxis: 'neutral',
+        temperamentAxis: 'warlike', domain: 'war',
+      },
+    },
+  });
+
   // A town built to LIGHT the deferred cells — a captured seat (DS-DEF-4 `capture capture`,
   // DS-POW-6 "capture reached a LEADER") over a recognised criminal structure, so the
   // exclusion arm is proved against prose that would otherwise print.
@@ -368,6 +387,100 @@ describe('the print desk reads the screen\'s own desks', () => {
       .toContain(prose.faith['faith.teaser']);
     expect(joined, 'the daily-life paragraph regressed out of the chapter')
       .toContain(prose.daily_life['daily_life.standingOfLiving']);
+
+  });
+
+  test('REACHABILITY: the variant that drops chapter 07 still has a page for the faith prose', () => {
+    // ⭐ REVIEW 5's FINDING. `campaign_state` sets `identityDailyLife: false` while keeping
+    // `faithWar: 'if-canon'`, so on premium + canon + a live world the faith prose has exactly
+    // ONE possible page — the live chapter — and the first cure had just taken it away. The
+    // variant is asserted rather than assumed, so a future re-cut that gives campaign_state
+    // chapter 07 back reds here instead of leaving a dead arm behind.
+    expect(PDF_VARIANTS.campaign_state.chapters.identityDailyLife,
+      'campaign_state gained chapter 07; this arm no longer describes the variant').toBe(false);
+    expect(PDF_VARIANTS.campaign_state.chapters.faithWar).toBe('if-canon');
+
+    // A premium canon export of the PATRON town, whose live slice comes from the product's own
+    // producer rather than a hand-built stub — so the chapter renders against the shape it
+    // really receives, unguarded fields and all.
+    const prose = buildPrintProse(patron, { faithUnlocked: true });
+    const liveWorld = buildPdfLiveWorld({ settlement: patron, campaign: null });
+    expect(liveWorld, 'the patron town produced no live slice, so this arm proves nothing')
+      .not.toBeNull();
+
+    const texts = [];
+    const walk = (node) => {
+      if (node == null || typeof node === 'boolean') return;
+      if (typeof node === 'string' || typeof node === 'number') { texts.push(String(node)); return; }
+      if (Array.isArray(node)) { node.forEach(walk); return; }
+      if (typeof node === 'object') {
+        if (typeof node.type === 'function') { try { walk(node.type(node.props)); } catch { /* sub-tree */ } return; }
+        walk(node.props?.children);
+      }
+    };
+    walk(FaithWar({
+      settlement: patron, narrativeMode: false, stateProse: prose,
+      vm: { ...VM_FOR(patron), liveWorld },
+    }));
+    expect(texts.join('\u0000'), 'campaign_state has no page for the faith prose')
+      .toContain(prose.faith['faith.patronSeat']);
+
+    // AND THE OTHER HALF OF THE GATE: where chapter 07 IS in the variant, the caller feeds this
+    // chapter nothing, so the paragraph cannot print twice in one document.
+    const twice = [];
+    const walk2 = (node) => {
+      if (node == null || typeof node === 'boolean') return;
+      if (typeof node === 'string' || typeof node === 'number') { twice.push(String(node)); return; }
+      if (Array.isArray(node)) { node.forEach(walk2); return; }
+      if (typeof node === 'object') {
+        if (typeof node.type === 'function') { try { walk2(node.type(node.props)); } catch { /* sub-tree */ } return; }
+        walk2(node.props?.children);
+      }
+    };
+    walk2(FaithWar({
+      settlement: patron, narrativeMode: false, stateProse: null,
+      vm: { ...VM_FOR(patron), liveWorld },
+    }));
+    expect(twice.join('\u0000'), 'the live chapter printed the faith prose it was not fed')
+      .not.toContain(prose.faith['faith.patronSeat']);
+  });
+
+  test('THE PREMIUM FAITH SEAM: unlocked, the deity positions print and match the screen', () => {
+    // NON-VACUITY FIRST: this fixture really does carry a patron, and the reading the desk is
+    // handed really does contain the deity's NAME — so the negative arm below is a refusal
+    // rather than a fixture that had nothing to leak.
+    const model = faithPanelModel(patron);
+    expect(model.hasEmbed, 'the patron fixture carries no embedded faith').toBe(true);
+    expect(JSON.stringify(model), "the reading does not carry the deity's name")
+      .toContain('Iron Lord');
+
+    const unlocked = flat(buildPrintProse(patron, { faithUnlocked: true }));
+    expect(unlocked['faith.patronSeat'], 'the unlocked seam printed no patron seat').toBeTruthy();
+
+    const screen = screenProse(patron, true);
+    const drift = Object.entries(unlocked)
+      .filter(([mount]) => mount.startsWith('faith.'))
+      .filter(([mount, p]) => screen[mount] !== p)
+      .map(([mount, p]) => `${mount}\n  PRINT : ${p}\n  SCREEN: ${screen[mount] ?? '(nothing)'}`);
+    expect(drift, 'the unlocked faith prose disagrees between page and screen').toEqual([]);
+  });
+
+  test('THE PREMIUM FAITH SEAM: locked, no deity or creed reaches any page', () => {
+    const locked = buildPrintProse(patron, {});
+    expect(locked.faith?.['faith.patronSeat'], 'a locked export printed the patron seat')
+      .toBeUndefined();
+    expect(locked.faith?.['faith.creedStanding'], "a locked export printed the creed's standing")
+      .toBeUndefined();
+    // THE BELT over the structural arms above: no paragraph ANYWHERE in the document names the
+    // deity. The reading carries the name (asserted in the arm above), so this is a seam that
+    // held rather than a fixture with nothing in it.
+    const everything = Object.values(locked).flatMap((rows) => Object.values(rows)).join(' ');
+    expect(everything, 'a locked export leaked the deity name').not.toContain('Iron Lord');
+    // AND THE CONTROL: unlocking really does change this document, so the arm is not passing
+    // because the builder is inert.
+    const unlocked = buildPrintProse(patron, { faithUnlocked: true });
+    expect(Object.keys(unlocked.faith || {}).length)
+      .toBeGreaterThan(Object.keys(locked.faith || {}).length);
   });
 
   test('PURITY: the builder is a function of its inputs', () => {

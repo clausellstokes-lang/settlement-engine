@@ -23,6 +23,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -85,7 +86,7 @@ function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
-export function FaithWar({ settlement, narrativeMode, vm }) {
+export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
@@ -128,12 +129,16 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
       />
       <ChapterHeadline tone={lw.atWar ? 'bad' : 'gold'}>{headline}</ChapterHeadline>
 
-      {/* ⛔ NO MOUNTED STATE PROSE IS DRAWN HERE, and both halves of that are deliberate.
-          The three `war.*` positions are print-deferred (see printProse.js's ruling block),
-          so the builder emits no `war` tab at all. The FAITH positions used to draw here and
-          COULD NOT BE REACHED: this chapter returns null on a dormant `vm.liveWorld`, which
-          is every export without a live campaign, so they render from chapter 07 instead —
-          see IdentityDailyLife.jsx. ── */}
+      {/* ── The faith prose, THE SECOND HALF OF ITS HOME (review 5).
+          It normally renders from chapter 07 (IdentityDailyLife), because this chapter is
+          null on a dormant `vm.liveWorld` — every export without a live campaign. But the
+          `campaign_state` variant EXCLUDES chapter 07 while keeping this one `if-canon`, so
+          on premium + canon + a live world the faith positions had no page at all. The
+          caller feeds `stateProse` here ONLY when chapter 07 is out of the variant, so the
+          two homes can never both print it.
+          ⛔ NO `war` TAB: the three war positions are print-deferred (printProse.js's ruling
+          block), so the builder emits none. ── */}
+      <StateProse stateProse={stateProse} tab="faith" />
 
       {/* ── Posture / exhaustion / standing strip ─────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>
