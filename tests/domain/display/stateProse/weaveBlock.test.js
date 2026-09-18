@@ -140,57 +140,83 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     expect(typographic.sentences[1]).toBe('The village’s market lives off through-traffic.');
   });
 
-  it('a BARE possessive on a name ending in s is a possessive, not a stranded apostrophe', () => {
-    // ⛔ THE REVIEW FINDING (2026-09-18). The possessive group was apostrophe-plus-s ONLY, so
-    // "Kilcross' market lives off through-traffic" matched the bare NAME, left the apostrophe
-    // where it was, and the weave printed "The village' market". Latent rather than live — the
-    // shipped corpus carries 165 `{settlement}`-plus-apostrophe-s and ZERO bare ones — but one
-    // authored variant ships it, so it is closed before it can be written.
+  it('a BARE apostrophe takes NEITHER the possessive nor the pronoun — it degrades visibly', () => {
+    // ⛔ THE SECOND REVIEW'S RULING (2026-09-18). A bare possessive on a name ending in s
+    // cannot be told from a TYPO without parsing the sentence:
     //
-    // A TIER NOUN NEVER ENDS IN S, so the stand-in takes the ending the word standing there
-    // actually needs: "The village's", in whichever apostrophe the line itself wrote.
+    //   "Kilcross' market lives off through-traffic."   is a possessive
+    //   "Kilcross' is a town in name only."             is an apostrophe that should not be there
+    //
+    // and reading the second as a possessive would print "Its is a town in name only" — a
+    // wreck, and a SILENT one, since nothing downstream can tell a pronoun replaced a subject.
+    // So a bare apostrophe takes the plain form and STAYS WHERE THE LINE PUT IT. The line
+    // degrades to a fault a reader can see; the corpus is forbidden to carry one at all
+    // (tests/data/dossierStateProseProjection.contract.test.js), which is where it is closed.
+    const typo = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\' is a town in name only.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(typo.sentences[1]).toBe('The village\' is a town in name only.');
+    // …and not the pronoun, which is the substitution this arm exists to refuse.
+    expect(typo.sentences[1]).not.toBe('Its is a town in name only.'); // anchored: the toBe above pins what it IS, so this cannot pass on an empty or absent line
     const bare = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\' market lives off through-traffic.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(bare.sentences[1]).toBe('The village\'s market lives off through-traffic.');
+    expect(bare.sentences[1]).toBe('The village\' market lives off through-traffic.');
     const bareTypographic = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\u2019 market lives off through-traffic.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(bareTypographic.sentences[1]).toBe('The village\u2019s market lives off through-traffic.');
-    // …and it reaches the PRONOUN branch like any other possessive.
-    const pronoun = weaveBlock(
+    expect(bareTypographic.sentences[1]).toBe('The village\u2019 market lives off through-traffic.');
+    // A line that NAMES A TIER still takes the plain form when the apostrophe is bare — the
+    // bare test runs FIRST, so the pronoun branch cannot reach it.
+    const namesTier = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\' record still marks each hard season as bearing on the town.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(pronoun.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
-    // A bare possessive at the very END of a line is still one.
+    expect(namesTier.sentences[1]).toBe('The village\' record still marks each hard season as bearing on the town.');
     const atEnd = weaveBlock(['Nothing hems Kilcross in.', 'Kilcross\''], { settlementName: 'Kilcross', tierNoun: VILLAGE });
-    expect(atEnd.sentences[1]).toBe('The village\'s');
+    expect(atEnd.sentences[1]).toBe('The village\'');
   });
 
-  it('…and the bare form is WHOLE-WORD and POSITION-BOUND, so it cannot eat a contraction', () => {
-    // An apostrophe with a LETTER after it is inside a word, not a possessive ending: the bare
-    // alternative is restricted to one a space or the line's end follows. Without that, this
-    // leaf would read a contraction as a possessive and re-spell it.
-    const contraction = weaveBlock(
-      ['Nothing hems Kilcross in.', 'Kilcross\'n the road are one argument.'],
-      { settlementName: 'Kilcross', tierNoun: VILLAGE },
-    );
-    expect(contraction.sentences[1]).toBe('The village\'n the road are one argument.');
-    // …and a LONGER word that merely starts with the name is still not the name.
-    const longer = weaveBlock(
-      ['Nothing hems Kilcross in.', 'Kilcrossshire\' market is elsewhere.'],
-      { settlementName: 'Kilcross', tierNoun: VILLAGE },
-    );
-    expect(longer.sentences[1]).toBe('Kilcrossshire\' market is elsewhere.');
-    // …and the apostrophe-s path is UNTOUCHED, byte for byte, which is every line shipping today.
+  it('…and the APOSTROPHE-S path is untouched by any of that, pronoun branch included', () => {
+    // Every line shipping today is this shape: the corpus carries 165 `{settlement}`-plus-
+    // apostrophe-s across its 2,734 state and causal variants and ZERO bare ones.
     const sForm = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\'s market lives off through-traffic.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
     expect(sForm.sentences[1]).toBe('The village\'s market lives off through-traffic.');
+    const sFormTypographic = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\u2019s market lives off through-traffic.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(sFormTypographic.sentences[1]).toBe('The village\u2019s market lives off through-traffic.');
+    // …and it still reaches the pronoun branch, which the bare form does not.
+    const pronoun = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\'s record still marks each hard season as bearing on the town.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(pronoun.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+  });
+
+  it('an apostrophe MID-WORD is not a possessive, and the name is still stood down', () => {
+    // ⚠ THIS IS THE ARM THE OLD COMMENT CONTRADICTED. It claimed this leaf "must not rename a
+    // town on the strength of a contraction"; it does rename one, and always has. `'n` is not
+    // a bare possessive (no space follows) and not `'s`, so the line takes the ORDINARY path:
+    // the opening name is replaced and the mark is left exactly where it was.
+    const contraction = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcross\'n the road are one argument.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(contraction.sentences[1]).toBe('The village\'n the road are one argument.');
+    // A LONGER WORD starting with the name is a different matter and is still not the name.
+    const longer = weaveBlock(
+      ['Nothing hems Kilcross in.', 'Kilcrossshire\' market is elsewhere.'],
+      { settlementName: 'Kilcross', tierNoun: VILLAGE },
+    );
+    expect(longer.sentences[1]).toBe('Kilcrossshire\' market is elsewhere.');
   });
 
   it('handles the estate\'s real name shapes — diacritics, apostrophes, spaces', () => {

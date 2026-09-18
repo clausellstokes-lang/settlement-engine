@@ -459,6 +459,16 @@ describe('the dossier state-prose projection', () => {
   });
 });
 
+/**
+ * A slot immediately followed by a BARE possessive apostrophe — one that a space or the end of
+ * the line follows. The lawful spelling is `{slot}'s`; this is everything that is not it.
+ *
+ * ⚠ THE TRAILING SPACE IS CONSUMED, not asserted beside the match, so the detector needs no
+ * lookaround; `$` under the `m` flag carries the end-of-line case. Both apostrophes are
+ * matched because the estate's copy carries both.
+ */
+const BARE_SLOT_POSSESSIVE = /\{[a-zA-Z_][a-zA-Z0-9_]*\}['\u2019](\s|$)/gmu;
+
 describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes', () => {
   it('declares a shape for every slot any variant uses, and carries no dead wildcard', () => {
     const { undeclared, deadPrefixes } = assertSlotShapesTotal(SHAPES, USED_SLOTS);
@@ -495,6 +505,67 @@ describe('the slot SHAPE contract — a fill obeys the grammar its seam assumes'
       }
     }
     expect(defects).toEqual([]);
+  });
+
+  it('⛔ no variant writes a BARE possessive apostrophe after a slot', () => {
+    // ⭐ THE RULE (weave review 2, 2026-09-18), and why it lives at AUTHORING rather than at
+    // the reader. `domain/display/stateProse/weaveBlock.js` stands a repeated opening
+    // `{settlement}` down to the tier noun, and it must decide what a trailing apostrophe is.
+    // `{settlement}'s` is unambiguous. A BARE `{settlement}'` is not: on a name ending in s it
+    // is a possessive ("Kilcross' market lives off through-traffic"), and on any name it is
+    // equally a typo ("Kilcross' is a town in name only"). No renderer can tell them apart
+    // without parsing the sentence, and guessing "possessive" prints "Its is a town in name
+    // only" — a wreck, and a SILENT one. The weave therefore guesses NOTHING and degrades such
+    // a line to a visible fault; this arm is what keeps the line out of the corpus, so the
+    // degradation is a belt under a brace rather than a behaviour anyone meets.
+    //
+    // THE SCOPE IS EVERY SLOT, not `{settlement}` alone. The ambiguity is a property of the
+    // punctuation, not of which slot precedes it, and a rule written narrowly would let the
+    // same defect in one seam over the day another leaf grows a proper-shaped slot.
+    const offenders = [];
+    for (const [id, block] of allBlocks) {
+      for (const [key, pool] of Object.entries(block.pools)) {
+        for (const variant of pool) {
+          for (const m of variant.text.matchAll(BARE_SLOT_POSSESSIVE)) {
+            offenders.push(`${id} :: ${key} :: ${m[0]} :: ${variant.text}`);
+          }
+        }
+      }
+    }
+    expect(
+      offenders,
+      'Write the possessive in full — `{slot}\'s` — or recast the clause. A bare apostrophe'
+      + ' after a slot is indistinguishable from a typo, and the dossier weave will not guess'
+      + ' at it: see the BARE_POSSESSIVE note in domain/display/stateProse/weaveBlock.js.',
+    ).toEqual([]);
+    // MEASURED at this tip: 0 across 2,734 state and causal variants, which is why the rule
+    // lands green. The count that matters for non-vacuity is the one below.
+    expect(allBlocks.length, 'no blocks were scanned, so the arm above judged nothing')
+      .toBeGreaterThan(0);
+  });
+
+  it('…and that detector is NOT VACUOUS — it convicts each shape and acquits the lawful one', () => {
+    // THE POSITIVE CONTROL, in the same shape the determiner arm above uses: the empty list
+    // it asserts is also what a detector that had stopped matching produces.
+    const convicts = [
+      "{settlement}' market lives off through-traffic.",
+      '{settlement}\u2019 market lives off through-traffic.',
+      'The road ends where {settlement}\' begins.',
+      "{faction}' hold on the hall is not comfortable.",
+    ];
+    for (const text of convicts) {
+      expect([...text.matchAll(BARE_SLOT_POSSESSIVE)].length, `not convicted: ${text}`).toBe(1);
+    }
+    const acquits = [
+      "{settlement}'s market lives off through-traffic.", // the lawful possessive
+      '{settlement}\u2019s market lives off through-traffic.',
+      '{settlement} keeps no market worth the name.', // no apostrophe at all
+      "{settlement}'n is not a possessive, and no space follows the mark.",
+      "the town' market", // not a slot: the rule is about what follows a FILL
+    ];
+    for (const text of acquits) {
+      expect([...text.matchAll(BARE_SLOT_POSSESSIVE)].length, `wrongly convicted: ${text}`).toBe(0);
+    }
   });
 
   it('convicts a determiner-bearing fixture — the detectors are not vacuous', () => {

@@ -123,25 +123,43 @@ function escapeForRegExp(text) {
  * exactly equivalent, end of string included: `(?!X)` succeeds where no character matches X,
  * and the `|$` alternative is what carries that same case here.
  *
- * ⛔ THE POSSESSIVE HAS TWO SHAPES, AND MISSING THE SECOND STRANDED AN APOSTROPHE (review
- * finding, 2026-09-18). The group used to be `('s|’s)?` alone, so a BARE possessive on a name
- * already ending in s — "Kilcross' market lives off through-traffic" — matched the bare name,
- * left the apostrophe behind, and the weave printed "The village' market". Both shapes are
- * matched now: apostrophe-plus-s, or a lone apostrophe that a space or the end of the line
- * follows. The second is restricted to that position on purpose — an apostrophe with a letter
- * after it is inside a word, not a possessive ending, and this leaf must not rename a town on
- * the strength of a contraction.
- *
- * ⚠ LATENT RATHER THAN LIVE, MEASURED: the shipped corpus carries 165 `{settlement}`-plus-
- * apostrophe-s across its 2,266 variants and ZERO bare ones, so today no page renders the
- * defect. One authored variant ships it, which is why it is closed before it can be written
- * rather than after. The apostrophe-s path is untouched byte for byte.
+ * ⛔ ONLY APOSTROPHE-PLUS-S IS A POSSESSIVE HERE, AND A BARE APOSTROPHE IS DELIBERATELY NOT
+ * ONE (second review, 2026-09-18). A bare possessive on a name already ending in s —
+ * "Kilcross' market lives off through-traffic" — is indistinguishable, without parsing the
+ * sentence, from a line where the apostrophe is simply a typo: "Kilcross' is a town in name
+ * only". Read as a possessive, the second becomes "Its is a town in name only" — a wreck, and
+ * a SILENT one, because nothing downstream can tell that a pronoun was substituted for a
+ * subject. So the matcher leaves a bare apostrophe alone, `weaveBlock` degrades that line to
+ * the plain "The <noun>" form with the apostrophe still visible where the line put it, and
+ * the case is refused AT AUTHORING instead — see the arm in
+ * tests/data/dossierStateProseProjection.contract.test.js, which forbids `{settlement}` (or
+ * any slot) followed by a bare apostrophe and a space. A fault a reader can see, on a line a
+ * walker will not let into the corpus, beats a repair this leaf has to guess at.
  * @param {string} name
  * @returns {RegExp}
  */
 function openingNameMatcher(name) {
-  return new RegExp(`^${escapeForRegExp(name)}(['’]s|['’](?=\\s|$))?(?=[^\\p{L}\\p{N}_]|$)`, 'u');
+  return new RegExp(`^${escapeForRegExp(name)}(['’]s)?(?=[^\\p{L}\\p{N}_]|$)`, 'u');
 }
+
+/**
+ * Does this remainder OPEN on a bare possessive apostrophe — one a space or the line's end
+ * follows? The weave uses it to refuse BOTH the possessive reading and the pronoun on such a
+ * line, so the apostrophe stays where the corpus put it and the fault stays visible.
+ *
+ * ⚠ A PLAIN ANCHORED MATCH, no lookaround at all: the whitespace is CONSUMED by the pattern
+ * rather than asserted beside it, because this predicate only answers a question and never
+ * decides a replacement span.
+ *
+ * ⛔ WHAT IT DOES NOT DO, said plainly because the comment it replaces claimed otherwise and
+ * the suite pinned the opposite: an apostrophe with a LETTER after it — a contraction, or any
+ * mid-word mark — is not matched here, so such a line takes the ORDINARY path and its opening
+ * name IS still stood down. "Kilcross'n the road are one argument" becomes "The village'n the
+ * road are one argument", which the test pins. This predicate decides which of the weave's
+ * three endings a line gets; it has never decided WHETHER a name at index 0 is replaced, and
+ * nothing in this leaf declines to rename a town on the strength of an apostrophe alone.
+ */
+const BARE_POSSESSIVE = /^['’](\s|$)/u;
 
 /**
  * Does this text already name A SETTLEMENT TIER as a WHOLE WORD? — the pronoun branch's test.
@@ -210,26 +228,30 @@ export function weaveBlock(lines, options = {}) {
   // NO NAME OR NO NOUN ⇒ THE JOIN ALONE, which is the honest half of the fix rather than a
   // fallback: the sentences still read as one paragraph, and nothing is renamed on a guess.
   const opening = name && noun ? openingNameMatcher(name) : null;
-  // THE POSSESSIVE KEEPS ITS OWN APOSTROPHE CHARACTER rather than being normalised. The
-  // shipped corpus writes the straight one (`Kilcross's market lives off through-traffic`,
-  // U+0027 measured), the typographic one appears elsewhere in the estate's copy, and a weave
-  // that turned either into the other would be changing a character it was told not to. What
-  // it does NOT keep is the possessive's SHAPE: a tier noun never ends in s, so a bare
-  // possessive on a name that does ("Kilcross' market") becomes "The village's market" — the
-  // right ending for the word that is actually standing there, in the apostrophe the line
-  // itself wrote. `'s` in gives `'s` out, byte for byte, which is every line shipping today.
+  // THE POSSESSIVE RIDES ACROSS VERBATIM rather than being re-spelled. The shipped corpus
+  // writes the straight apostrophe (`Kilcross's market lives off through-traffic`, U+0027
+  // measured), the typographic one appears elsewhere in the estate's copy, and a weave that
+  // normalised either into the other would be changing a character it was told not to.
   const woven = kept.map((line, index) => {
     if (index === 0 || !opening) return line;
     return line.replace(
       opening,
       /** @param {string} match @param {string|undefined} possessive */
       (match, possessive) => {
+        const rest = line.slice(match.length);
+        // ⛔ A BARE APOSTROPHE TAKES NEITHER BRANCH. It cannot be told from a typo without
+        // parsing the sentence, and the pronoun is the dangerous guess: "Kilcross' is a town
+        // in name only" would become "Its is a town in name only", which reads as a wreck and
+        // hides that a subject was replaced. The plain form leaves the apostrophe visible, so
+        // a malformed line degrades to a fault a reader can SEE. The corpus is forbidden to
+        // carry one at all (the projection contract's own arm), which is where it is really
+        // closed; this is the belt under that brace.
+        if (!possessive && BARE_POSSESSIVE.test(rest)) return `The ${noun}`;
         // THE PRONOUN BRANCH (the chair's rulings): a line that already names ANY settlement
         // tier takes "It"/"Its" instead, so the weave can produce neither "The town is a town"
         // nor "The village is a town".
-        if (namesAnyTierNoun(line.slice(match.length))) return possessive ? 'Its' : 'It';
-        if (!possessive) return `The ${noun}`;
-        return `The ${noun}${possessive.charAt(0)}s`;
+        if (namesAnyTierNoun(rest)) return possessive ? 'Its' : 'It';
+        return `The ${noun}${possessive || ''}`;
       },
     );
   });
