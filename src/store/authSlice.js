@@ -24,6 +24,9 @@ import { auth as authService } from '../lib/auth.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activateOutboxOwner } from './outbox.js';
 import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
+// The READ half of the anonymous-draft gate. A leaf, so importing it here cannot
+// close a cycle back through store/index.js.
+import { settleBootAnonDraft } from './anonDraftGate.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
@@ -328,6 +331,16 @@ export const createAuthSlice = (set, get) => ({
       console.error('Auth init error:', e);
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
     }
+
+    // THE BOOT ANSWER, AND THE ONLY PLACE THE ANONYMOUS-DRAFT MARKER IS SPENT.
+    // A rehydrate adopts a persisted anonymous draft before anyone knows who is
+    // booting; this is where that is confirmed or undone, on EVERY branch above
+    // (session found, no session, error). It is called here rather than from a
+    // subscription on `auth.loading` because authSignIn and authSignUp drive that
+    // same edge: on a slow getSession(), a visitor who signed in first would have
+    // had the draft they just signed in to keep dropped underneath them.
+    // Idempotent — initAuth is HMR/remount-safe and the marker is spent once.
+    settleBootAnonDraft(set);
 
     // Listen for auth state changes (token refresh, sign out from another tab).
     // initAuth can run more than once under HMR/remounts, so keep exactly one

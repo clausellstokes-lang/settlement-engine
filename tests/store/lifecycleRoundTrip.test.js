@@ -1122,10 +1122,11 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   // scoped to that cohort and that a blob written before it existed is
   // indistinguishable from a fresh install.
   describe('the anonymous draft', async () => {
-    // The second half of the gate + the non-fatal persist door. Imported here
-    // rather than at the top of the file so the real store (and its boot-time
-    // wiring) is constructed only for the arms that actually need it.
-    const { resolveBootAnonDraft, resilientLocalStorage } = await import('../../src/store/index.js');
+    // The READ half of the gate is a LEAF (no store construction, no cycle).
+    const { resolveBootAnonDraft, settleBootAnonDraft } = await import('../../src/store/anonDraftGate.js');
+    // The non-fatal persist door lives with the store it guards, so this one arm
+    // does construct it.
+    const { resilientLocalStorage } = await import('../../src/store/index.js');
 
     // A stand-in world: what matters to the projection is that the WHOLE object
     // makes the round trip, not what is inside it.
@@ -1248,6 +1249,53 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(resolveBootAnonDraft({
         settlement: draft, restoredAnonDraft: null, auth: { tier: 'premium' },
       }).drop).toBe(false);
+    });
+
+    // ⛔ THE RACE THE FIRST CUT LOST. The marker used to be spent on the first
+    // `auth.loading` true→false edge, read as "the boot check finished". It is
+    // not: authSignIn and authSignUp drive the same edge. On a slow getSession()
+    // an anonymous visitor who submits the sign-in form FIRST drives it first —
+    // and the guard fired with tier 'free' and dropped the draft they had just
+    // signed in to keep. Three arms: the spend is idempotent, it is wired ONLY to
+    // initAuth, and nothing else can reach it.
+    test('spending the marker is a one-shot that drops only a signed-in boot adoption', () => {
+      const run = (seed) => {
+        let state = seed;
+        settleBootAnonDraft((recipe) => { const next = { ...state }; recipe(next); state = next; });
+        return state;
+      };
+      // Signed-in boot: the adopted draft goes, and the marker is spent.
+      const dropped = run({ settlement: draft, lastSeed: 's', restoredAnonDraft: draft, auth: { tier: 'free' } });
+      expect(dropped.settlement).toBeNull();
+      expect(dropped.lastSeed).toBeNull();
+      expect(dropped.restoredAnonDraft).toBeNull();
+
+      // Anonymous boot: the draft stays, and the marker is still spent, so a
+      // LATER sign-in cannot come back for it.
+      const kept = run({ settlement: draft, lastSeed: 's', restoredAnonDraft: draft, auth: { tier: 'anon' } });
+      expect(kept.settlement).toBe(draft);
+      expect(kept.restoredAnonDraft).toBeNull();
+      // Spending twice is a no-op — initAuth is HMR/remount-safe and may rerun.
+      let again = kept;
+      settleBootAnonDraft((recipe) => { const next = { ...again }; recipe(next); again = next; });
+      expect(again.settlement).toBe(draft);
+    });
+
+    test('the spend is wired to initAuth alone, never to a generic loading edge', () => {
+      const authSrc = readSrc('src/store/authSlice.js');
+      const indexSrc = readSrc('src/store/index.js');
+      // Exactly one call, and it is inside initAuth — not in authSignIn/authSignUp,
+      // which drive the same `auth.loading` edge from a user's form submit.
+      const calls = authSrc.match(/settleBootAnonDraft\s*\(/g) || [];
+      expect(calls.length).toBe(1);
+      const initAuthBody = authSrc.slice(
+        authSrc.indexOf('initAuth: async () => {'),
+        authSrc.indexOf('authUnsubscribe = authService.onAuthChange('),
+      );
+      expect(initAuthBody).toContain('settleBootAnonDraft(set)');
+      // anchored: the call above is real, so the absent subscription is a moved
+      // wiring rather than a deleted feature.
+      expect(indexSrc).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
     });
 
     test('a quota error on the persist write is swallowed, never thrown at the caller', () => {

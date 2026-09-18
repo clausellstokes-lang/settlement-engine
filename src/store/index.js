@@ -171,48 +171,13 @@ export const useStore = create(
   ),
 );
 
-/**
- * THE SECOND HALF OF THE ANONYMOUS-DRAFT GATE (2026-09-18).
- *
- * The blob can say, truthfully, "an anonymous session wrote this draft"; it
- * cannot say who is booting. Rehydrate is synchronous and Supabase's session
- * resolves a moment later, so a returning SIGNED-IN user would otherwise boot
- * with a previous anonymous session's world in the editor and be able to save
- * one they never generated. This spends the marker at the FIRST auth resolution
- * — the one `initAuth` always reaches, on every branch — and drops the adopted
- * draft when that resolution is a signed-in tier.
- *
- * TWO THINGS IT DELIBERATELY DOES NOT DO. It does not fire on a LATER sign-in:
- * the marker is spent once, so an anonymous visitor who signs in mid-session to
- * keep their work keeps it. And it never drops a world generated since boot —
- * the identity check is by REFERENCE, and a generation replaces the object.
- *
- * @param {{ auth?: { tier?: string }, settlement?: any, restoredAnonDraft?: any }} state
- * @returns {{ drop: boolean }} whether the adopted draft must be dropped
- */
-export function resolveBootAnonDraft(state) {
-  const adopted = state?.restoredAnonDraft;
-  if (!adopted) return { drop: false };
-  // Reference identity, not deep equality: only the very object this reload
-  // adopted may be dropped.
-  if (state.settlement !== adopted) return { drop: false };
-  return { drop: state?.auth?.tier !== 'anon' };
-}
-
-const stopBootAnonDraftGuard = useStore.subscribe(
-  (s) => s.auth?.loading,
-  (loading) => {
-    if (loading !== false) return;
-    stopBootAnonDraftGuard();
-    useStore.setState((state) => {
-      if (resolveBootAnonDraft(state).drop) {
-        state.settlement = null;
-        state.lastSeed = null;
-      }
-      state.restoredAnonDraft = null;
-    });
-  },
-);
+// THE READ HALF OF THE ANONYMOUS-DRAFT GATE is NOT wired here. It used to be — a
+// subscription on the first `auth.loading` true→false edge — and that edge is not
+// the boot question: authSignIn and authSignUp drive it too, so a sign-in that
+// beat a slow getSession() spent the marker and dropped the draft the visitor had
+// just signed in to keep. The spend now lives inside initAuth's own resolution
+// (store/anonDraftGate.js, called from authSlice.js), which is the one place the
+// boot question is actually answered.
 
 // Wire the dependencyEngine to read customContent from this store.
 // This is the only edge that connects the (store-agnostic) generator's
