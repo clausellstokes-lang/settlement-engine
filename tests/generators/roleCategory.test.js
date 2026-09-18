@@ -56,6 +56,7 @@ import { inferImportance } from '../../src/domain/entities/npcs.js';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const NPC_GENERATOR_SRC = readFileSync(
   join(dirname(fileURLToPath(import.meta.url)), '../../src/generators/npcGenerator.js'),
@@ -97,9 +98,10 @@ describe('setting-agnostic role renames are mechanically inert', () => {
     expect(arrayLiteral('HIGH_POWER')).toEqual(HIGH_POWER);
     expect(arrayLiteral('MID_POWER')).toEqual(MID_POWER);
 
-    // And the extractor is not vacuous: it really does read those arrays.
-    expect(arrayLiteral('HIGH_POWER')).toContain('captain');
-    expect(arrayLiteral('HIGH_POWER')).not.toContain('priest');
+    // And the extractor is not vacuous: it really does read those arrays. The exclusion is
+    // ANCHORED on a sibling that must be present, so a drifted or empty extraction cannot
+    // pass it (tests/helpers/anchoredNegatives.js).
+    expectAbsentWithAnchor(arrayLiteral('HIGH_POWER'), 'priest', 'captain', 'HIGH_POWER keeps the priest out');
     expect(arrayLiteral('MID_POWER')).toContain('priest');
   });
 

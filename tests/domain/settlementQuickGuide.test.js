@@ -205,6 +205,7 @@ describe('composeSettlementQuickGuide', () => {
         name: 'X', tier: 'village', population: 9, culturalIdentity: { label },
       }).identitySentence;
       expect(sentence, label).toMatch(/^X is an? /);
+      // anchored: the line above proves the sentence is live and opens on the article
       expect(sentence, label).not.toMatch(/native code|\[object Object\]/);
     }
   });
