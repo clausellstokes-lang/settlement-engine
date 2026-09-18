@@ -437,7 +437,10 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       </div>
                       {(n?.role || n?.title) && <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
                       {tell && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{tell}</div>}
-                      {goal && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}><em>Wants:</em> {goal}</div>}
+                      {/* "Wants" reads the same way here as on the dossier NPC card and
+                          as the SECRET label directly below: a bold inline label, no
+                          colon, the want as ordinary body copy after it. */}
+                      {goal && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}><span style={{ fontWeight: 800 }}>Wants</span> {goal}</div>}
                       {secret && (
                         <div style={{ marginTop: 4, fontSize: FS.xs, color: SLATE, lineHeight: 1.45 }}>
                           <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: FS.nano }}>SECRET</span> {secret}

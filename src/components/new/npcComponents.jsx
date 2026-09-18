@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
@@ -210,7 +210,12 @@ function NPCInlineCard({
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
-  const publicTraits = traits.filter(t => t.visibility !== 'gm');
+  // THE GOAL CHIP IS GONE (2026-09-18) — see the wants block below: the expanded
+  // card said the same goal three times. The chip row keeps every other trait
+  // (ideal, flaw, bond, ambition, loyalty, fear); only the one the Wants line
+  // already carries is dropped, and it is dropped HERE rather than in
+  // normalizeNpcTraits because the dossier entity index reads that same list.
+  const publicTraits = traits.filter(t => t.visibility !== 'gm' && t.key !== 'goal');
   // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
   // authored office/title while making the declared archetype visible, and only
   // humanize values that are known engine vocabulary so free-authored prose is
@@ -233,9 +238,20 @@ function NPCInlineCard({
   // the DM-truth block (bonds/grudges/credibility) is gated in the leaf and left for a
   // worldState-bearing surface; this card reads the mirror-safe view (secrets seam honoured).
   const interiority = npcInteriority({ npc });
-  const interiorityWants = (interiority?.wants || []).map(value => (
+  // THE GOAL IS PRINTED ONCE (2026-09-18). The expanded card used to state it three
+  // times over: a `Goal:` trait chip, an arrow line of its own, and this Wants line —
+  // all three reading the same `npc.goal.short`, so a reader met the same sentence
+  // three times before reaching the secret. Wants is the one that survives, because
+  // it is the line that also carries the ambition.
+  //
+  // The declared goal FACET still reads here, and it has to: the read-model's
+  // `firstText(goal, goals)` can only see authored goal prose, so a bank-edited
+  // person who carries a facet and no prose would otherwise state no want at all.
+  const readWants = (interiority?.wants || []).map(value => (
     NPC_GOALS.includes(value) ? humanizeNpcFacet(value) : value
   ));
+  const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
+  const disposition = interiority?.disposition || [];
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
   // floor). Null unless the world pulse touched this compromise. The npc pin key
@@ -355,11 +371,6 @@ function NPCInlineCard({
               <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
           )}
-          {goalText && (
-            <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={goalText} />
-            </p>
-          )}
           {npc.structuralPosition && (
             <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
           )}
@@ -368,16 +379,24 @@ function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
-          {interiority && (interiorityWants.length > 0 || interiority.disposition.length > 0) && (
+          {(wants.length > 0 || disposition.length > 0) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
-              {interiorityWants.length > 0 && (
+              {wants.length > 0 && (
+                // Each want goes through ProseParagraph: the first one is the goal the
+                // narrative server may have rewritten, and its prose can carry
+                // ⟦entity:…⟧ tokens that would otherwise reach the reader as literals.
                 <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiorityWants.join(' · ')}
+                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>
+                  {wants.map((want, i) => (
+                    <Fragment key={`${want}-${i}`}>
+                      {i > 0 ? ' · ' : ''}<ProseParagraph text={want} />
+                    </Fragment>
+                  ))}
                 </div>
               )}
-              {interiority.disposition.length > 0 && (
+              {disposition.length > 0 && (
                 <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{interiority.disposition.join(', ')}
+                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{disposition.join(', ')}
                 </div>
               )}
             </div>
