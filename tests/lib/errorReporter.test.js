@@ -147,3 +147,56 @@ describe('R-14 crash forensics — seed + tick + flags_on, no world state', () =
     expect(JSON.parse(beacon.mock.calls[1][1]).forensics).toEqual({});
   });
 });
+
+// ── BENIGN BROWSER NOTICES ───────────────────────────────────────────────────
+// "ResizeObserver loop completed with undelivered notifications." is posted to
+// window.onerror by the engine itself when an observer callback changes layout;
+// the deferred notifications are delivered on the next frame, so nothing is lost
+// and there is nothing to act on. A desktop Realm mount reported it TWICE, which
+// both buried real console errors and spent two of the 25 per-session beacons on
+// a non-event. It must leave by BOTH doors — the local console.error and the
+// network send — while every other error keeps both.
+describe('benign browser notices are not application errors', () => {
+  const NOTICES = [
+    'ResizeObserver loop completed with undelivered notifications.', // current spelling
+    'ResizeObserver loop limit exceeded',                            // older spelling
+  ];
+
+  it.each(NOTICES)('drops %s from the console AND the network', async (notice) => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    // The window 'error' listener forwards `e.error || e.message`; this notice
+    // carries no Error object, so a bare string is what actually arrives.
+    reportError(notice, { kind: 'window.error' });
+    expect(beacon).not.toHaveBeenCalled();
+    expect(logged).not.toHaveBeenCalled();
+  });
+
+  it('tolerates the browser envelope (an Uncaught prefix, a missing/extra full stop)', async () => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    reportError('Uncaught ResizeObserver loop completed with undelivered notifications', { kind: 'window.error' });
+    reportError('ResizeObserver loop limit exceeded.', { kind: 'window.error' });
+    reportError(new Error('ResizeObserver loop completed with undelivered notifications.'));
+    expect(beacon).not.toHaveBeenCalled();
+    expect(logged).not.toHaveBeenCalled();
+  });
+
+  it('still reports a REAL error that merely mentions ResizeObserver', async () => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    reportError(errAt('ResizeObserver callback threw: cannot read properties of null'));
+    expect(beacon).toHaveBeenCalledTimes(1);
+    expect(logged).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(beacon.mock.calls[0][1]).message)
+      .toBe('ResizeObserver callback threw: cannot read properties of null');
+  });
+
+  it('leaves every unrelated error on both paths', async () => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const logged = vi.spyOn(console, 'error').mockImplementation(() => {});
+    reportError(errAt('the forge stalled'));
+    expect(beacon).toHaveBeenCalledTimes(1);
+    expect(logged).toHaveBeenCalledTimes(1);
+  });
+});
