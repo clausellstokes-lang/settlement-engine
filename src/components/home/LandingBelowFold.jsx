@@ -7,9 +7,9 @@
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
- * to four REAL published gallery settlements (W-L2/3, fetched on mount, ranked
- * by top_voted — the strongest signal gallery.js tracks), with the decorative
- * cards as slot-fill and full fallback. Spec constraints held: tokens only
+ * to six REAL published gallery settlements (W-L2/3, fetched on mount, ranked
+ * by top_voted — the strongest signal gallery.js tracks), falling back to the
+ * Create page's three curated Founding Worlds. Spec constraints held: tokens only
  * (§3.1); gold the only brand accent, violet ONLY in §03 + the faith chip in
  * the §04 chronicle (§3.2); Lucide icons, no emoji (§3.5); every control routes
  * and decorative chips are plain spans (§3.8); <section aria-labelledby> + h2.
@@ -23,7 +23,7 @@ import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_TXT, GOLD_BG,
-  PARCH, PARCH_100, BORDER, CARD,
+  PARCH, PARCH_100, BORDER,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
@@ -34,6 +34,10 @@ import { tl } from '../../copy/landing.js';
 // so it adds nothing to the first-paint closure.
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
+// The commons fallback IS the Create page's Founding Worlds strip — the same
+// component, so the heading, the lead-in, the three curated samples and the
+// 'Fork this sample' wiring are single-sourced rather than restated here.
+import FoundingWorlds from '../generate/FoundingWorlds.jsx';
 import {
   MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
@@ -133,19 +137,35 @@ const creamTailFade = (isMobile) => {
 // now carries a RENDERED arm, so un-referencing this key again reds the gate
 // instead of passing quietly.
 
-// ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
+// ── 05 · Commons — REAL published towns, or the curated Founding Worlds (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
 // top_voted — the strongest ranking signal src/lib/gallery.js actually tracks
-// (it has net_votes + view counts; there is NO fork counter). Real published
-// towns fill the slots first; any slot without a real town falls back to a
-// decorative card LABELED ' (placeholder)'. When six real towns exist, all six
-// slots are real and no placeholder shows. A failed or empty fetch renders six
-// placeholders (the empty-gallery dev state). Slot dimensions are identical in
-// every state (150px thumb + one footer row), so the swap-in causes zero layout shift.
-const COMMONS_SLOTS = 6; // owner order 2026-07-21, ledger 4f71743a
+// (it has net_votes + view counts; there is NO fork counter).
+//
+// ⛔ THE PLACEHOLDER BACKFILL IS GONE (2026-09-18). Every slot without a real
+// town used to render a DECORATIVE card — an invented name, an invented author,
+// an invented population, labelled ' (placeholder)' beside the name — so an
+// empty gallery showed six fabricated towns to every visitor of a page that
+// sells "Simulated, not AI-generated". There was no flag: the state was purely
+// data-driven, and the gallery is empty before launch. The rule now:
+//   • THREE OR MORE real published rows → render the real rows, up to six;
+//   • fewer than three → render the Create page's three curated Founding Worlds
+//     (Mossgate / Black Crag / Thornwell), with its heading, its copy and its
+//     real 'Fork this sample' action. They are real generations from real seeds,
+//     so the fallback offers the visitor something true to do instead of
+//     something false to look at.
+// The threshold is three because a one- or two-card grid reads as a broken strip;
+// below it the Founding Worlds trio fills the row honestly.
+const COMMONS_SLOTS = 6;      // owner order 2026-07-21, ledger 4f71743a
+const COMMONS_MIN_REAL = 3;   // below this the curated trio shows instead
+
+// A real row without its own gallery image keeps the strip's painted-scene box
+// (same height, zero layout shift). The scene is DERIVED from the row's own
+// tier, never invented: it is the card's backdrop, not a claim about the town.
+const SCENE_FOR_TIER = { thorp: 'thorpe', hamlet: 'thorpe', village: 'village', town: 'village', city: 'city', metropolis: 'city', capital: 'city' };
+
 function GalleryCards({ onNavigate }) {
-  const decoratives = tl('commons.cards') || [];
-  const [tiles, setTiles] = useState(null); // null = not landed yet → decorative
+  const [tiles, setTiles] = useState(null); // null = not landed yet
   useEffect(() => {
     let live = true;
     fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
@@ -154,59 +174,45 @@ function GalleryCards({ onNavigate }) {
     return () => { live = false; };
   }, []);
 
-  const real = tiles || [];
-  const slots = decoratives.slice(0, COMMONS_SLOTS).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
+  const real = (tiles || []).slice(0, COMMONS_SLOTS);
+  // Not landed yet, unreachable, or a gallery too thin to fill a row: the
+  // curated trio. It carries its own heading and lead-in (the Create page's).
+  if (real.length < COMMONS_MIN_REAL) return <FoundingWorlds onNavigate={onNavigate} />;
 
   return (
     <div style={{
       maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18,
     }}>
-      {slots.map(({ real: tile, deco }) => (
-        <div key={tile?.slug || deco.name} style={{ ...cardStyle, boxShadow: ELEV[1], overflow: 'hidden' }}>
+      {real.map((tile) => (
+        <div key={tile.slug} style={{ ...cardStyle, boxShadow: ELEV[1], overflow: 'hidden' }}>
           <div style={{
             position: 'relative', height: 150,
-            // A real tile's own gallery image wins; otherwise the slot keeps its
-            // painted scene (same box, zero shift).
-            backgroundImage: tile?.imageUrl ? `url('${tile.imageUrl}')` : SCENE(deco.scene),
-            backgroundSize: 'cover', backgroundPosition: tile?.imageUrl ? 'center' : deco.pos,
+            backgroundImage: tile.imageUrl ? `url('${tile.imageUrl}')` : SCENE(SCENE_FOR_TIER[tile.tier] || 'village'),
+            backgroundSize: 'cover', backgroundPosition: 'center',
           }}>
             <span style={{
               position: 'absolute', top: 10, right: 10, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
               letterSpacing: '0.05em', textTransform: 'uppercase', color: PARCH_100,
               background: 'rgba(27,20,8,0.6)', borderRadius: R.sm, padding: '2px 8px',
-            }}>{tile ? tile.tier : deco.size}</span>
+            }}>{tile.tier}</span>
             <span style={{
               position: 'absolute', left: 0, right: 0, bottom: 0, padding: '26px 14px 10px',
               backgroundImage: 'linear-gradient(rgba(20,14,5,0), rgba(20,14,5,0.72))',
               fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: PARCH,
-            }}>{tile ? tile.name : `${deco.name} (placeholder)`}</span>
+            }}>{tile.name}</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: tile ? '7px 14px' : '11px 14px', minHeight: 52 }}>
-            {tile ? (
-              <>
-                <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>
-                  {tl('commons.votes', { n: tile.netVotes ?? 0 })}
-                </span>
-                <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
-                  {tile.population ?? ''}
-                </span>
-                {/* Real tile → a real route (§3.8): the gallery detail view. */}
-                <Button variant="secondary" size="sm" onClick={() => onNavigate('gallery', { params: { slug: tile.slug } })}>
-                  {tl('commons.open')}
-                </Button>
-              </>
-            ) : (
-              <>
-                <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>{deco.author}</span>
-                <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>{deco.pop}</span>
-                {/* Decorative — non-interactive span (§3.8). */}
-                <span style={{
-                  fontFamily: sans, fontSize: FS.xs, fontWeight: 800, color: SECOND,
-                  background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, padding: '5px 12px',
-                }}>{tl('commons.fork')}</span>
-              </>
-            )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: '7px 14px', minHeight: 52 }}>
+            <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>
+              {tl('commons.votes', { n: tile.netVotes ?? 0 })}
+            </span>
+            <span style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
+              {tile.population ?? ''}
+            </span>
+            {/* Real tile → a real route (§3.8): the gallery detail view. */}
+            <Button variant="secondary" size="sm" onClick={() => onNavigate('gallery', { params: { slug: tile.slug } })}>
+              {tl('commons.open')}
+            </Button>
           </div>
         </div>
       ))}

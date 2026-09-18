@@ -143,10 +143,10 @@ export const landing = {
   // below so the waypoint pills stay contiguous.
 
   // ── 05 · The commons ────────────────────────────────────────────────────────
-  // Owner amendment W-L2/3: up to FOUR real published gallery settlements render
-  // here (fetched on below-fold mount, ranked by the strongest signal gallery.js
-  // actually tracks); the decorative cards below fill any remaining slots, and a
-  // failed/empty fetch renders all four decorative — zero layout shift.
+  // Owner amendment W-L2/3: real published gallery settlements render here
+  // (fetched on below-fold mount, ranked by the strongest signal gallery.js
+  // actually tracks). Below three real rows the strip shows the three curated
+  // Founding Worlds instead — the Create page's own samples, forkable, real.
   commons: {
     waypoint: '04 · The commons',
     // Owner amendment: was 'Towns other DMs have forged.' — softened to not
@@ -154,22 +154,18 @@ export const landing = {
     h2:   'Towns others have forged.',
     body: 'Don’t want to configure anything? Walk the Gallery and take a town that’s already lived a little. Admire and share freely; fork one into your own Library with Cartographer.',
     cta:  'Browse the gallery',
-    fork: 'Fork',
     open: 'Open',
     votes: '{n} votes',
-    // Walk W1 (owner order 2026-07-21, ledger 4f71743a): the commons strip shows
-    // SIX slots, fed dynamically from the community gallery (real published towns
-    // fill first, ranked top_voted). These decorative entries are the PLACEHOLDER
-    // backfill for any slot without a real town — the renderer labels each backfilled
-    // card ' (placeholder)' beside its name. When six real towns exist, none show.
-    cards: [
-      { name: 'The Drowned Spire', author: 'mistwarden', pop: '412', size: 'City',    scene: 'city',    pos: 'center 30%' },
-      { name: 'Ashfall Crossing',  author: 'dm_corvid',  pop: '388', size: 'Town',    scene: 'thorpe',  pos: 'center 55%' },
-      { name: 'Greyharbor',        author: 'quiethand',  pop: '291', size: 'Village', scene: 'village', pos: 'center 40%' },
-      { name: 'Saltmere Ford',     author: 'lanternkeep', pop: '203', size: 'Village', scene: 'thorpe',  pos: 'center 20%' },
-      { name: 'Hollowmere',        author: 'oldferry',   pop: '156', size: 'Hamlet',  scene: 'village', pos: 'center 50%' },
-      { name: 'Thornbrook',        author: 'saltpath',   pop: '97',  size: 'Hamlet',  scene: 'thorpe',  pos: 'center 35%' },
-    ],
+    // ⛔ THE DECORATIVE CARDS ARE DELETED (2026-09-18, owner order "impliment every
+    // fix"). Six invented towns with invented authors — a 'City' of 412 people among
+    // them — backfilled every unfilled slot, each labelled ' (placeholder)' beside its
+    // name, on the one page whose whole claim is that nothing here is made up. They had
+    // no flag and no cap: an empty gallery showed six of them to every visitor. The
+    // strip now shows REAL published rows once the gallery has three, and otherwise the
+    // three curated Founding Worlds the Create page already offers (real generations,
+    // forkable, single-sourced from src/data/sampleSettlements.js). No slot is ever
+    // filled with fiction, so no 'fork' chip copy is needed either — the fallback
+    // carries the Create page's real 'Fork this sample' button.
   },
 
   // ── 06 · Set out (closer) ────────────────────────────────────────────────────

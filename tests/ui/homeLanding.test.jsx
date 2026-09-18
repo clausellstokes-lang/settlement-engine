@@ -18,8 +18,10 @@
  *     (the regen-policy drift signal);
  *   - the mono seed provenance tag renders (determinism is the promise);
  *   - COMMONS FALLBACK: with the gallery unreachable (jsdom → supabase
- *     unconfigured), all six slots render as labeled placeholders — six full
- *     slots, no empty grid, zero layout shift.
+ *     unconfigured) the strip renders the Create page's three curated Founding
+ *     Worlds with their real 'Fork this sample' buttons, and NOTHING on the page
+ *     is labelled '(placeholder)' — the six decorative cards (invented names,
+ *     invented authors, a 'City' of 412) were deleted on 2026-09-18.
  *
  * Copy is asserted against the `landing` registry object and the frozen
  * fixture, so a copy/fixture change is a data change here, never a literal edit.
@@ -31,6 +33,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
+import { SAMPLE_SETTLEMENTS } from '../../src/data/sampleSettlements.js';
 import { SP } from '../../src/components/theme.js';
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
@@ -168,13 +171,12 @@ describe('HomeLanding — scrollable landing', () => {
     expect(advance.closest('button')).toBeNull();
     expect(advance.tagName).toBe('SPAN');
 
-    // Decorative Fork chips (the commons fallback set) — never buttons.
-    const forks = screen.getAllByText(landing.commons.fork);
-    expect(forks.length).toBeGreaterThan(0);
-    for (const fork of forks) {
-      expect(fork.closest('button')).toBeNull();
-      expect(fork.tagName).toBe('SPAN');
-    }
+    // The commons fallback's fork controls are the OPPOSITE case and belong in
+    // the same pin: they are REAL buttons, because they really forge (the Create
+    // page's own action). §3.8 forbids decorative chips that look like controls,
+    // not controls that work.
+    const forks = await screen.findAllByRole('button', { name: /Fork this sample/ });
+    expect(forks).toHaveLength(SAMPLE_SETTLEMENTS.length);
 
     // The ONE interactive artifact control (owner addition W-L2/5).
     const forgeExact = screen.getByRole('button', { name: new RegExp(landing.brief.forgeExact) });
@@ -255,17 +257,25 @@ describe('HomeLanding — scrollable landing', () => {
   // showed them are removed, so neither arm has a subject. The realm-map preview plates
   // in the same directory are a DIFFERENT surface and still ship.
 
-  test('commons fallback renders six labeled placeholder slots when the gallery is unreachable', async () => {
-    renderLanding();
+  test('commons fallback renders the curated Founding Worlds, never invented towns', async () => {
+    const { container } = renderLanding();
     await screen.findByText(landing.commons.h2);
-    // W1 (owner order 2026-07-21): the commons strip is fed dynamically from the
-    // gallery into SIX slots; real towns fill first, decorative placeholders back-
-    // fill the rest and are LABELED ' (placeholder)'. jsdom has no Supabase config
-    // → fetchPublicGallery resolves empty → all six slots render as placeholders
-    // (zero layout shift, no empty grid).
-    expect(landing.commons.cards).toHaveLength(6);
-    for (const card of landing.commons.cards) {
-      expect(await screen.findByText(`${card.name} (placeholder)`)).toBeTruthy();
+    // jsdom has no Supabase config → fetchPublicGallery resolves empty → fewer
+    // than three real rows → the Create page's curated trio renders instead of
+    // the deleted decorative cards. Names come from the DATA module, so this is a
+    // data assertion, never a literal edit.
+    for (const sample of SAMPLE_SETTLEMENTS) {
+      expect(await screen.findByText(sample.name), `missing curated sample: ${sample.name}`).toBeTruthy();
     }
+    // The Create page's own heading + lead-in travel with the strip (one source).
+    expect(screen.getByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
+
+    // ⛔ THE REGRESSION THIS PIN EXISTS FOR: the label the decorative cards wore.
+    // Anchored on the live sibling above — a landing that rendered nothing would
+    // have reddened there first, so this absence cannot pass vacuously.
+    expect(container.textContent).not.toMatch(/\(placeholder\)/);
+    // And the fixtures themselves are gone from the registry, not merely unused.
+    expectAbsentWithAnchor(Object.keys(landing.commons), 'cards', 'votes', 'landing.commons copy block');
+    expectAbsentWithAnchor(Object.keys(landing.commons), 'fork', 'open', 'landing.commons copy block');
   });
 });
