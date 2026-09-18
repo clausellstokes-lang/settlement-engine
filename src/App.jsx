@@ -34,7 +34,7 @@ import {
   GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
   ARROW_HANG, BOTTOM_NAV_H, HEADER_H, aboveBottomNav,
 } from './components/theme.js';
-import { resolveViewBackground } from './config/pageBackgrounds.js';
+import { resolveViewBackground, paintsPageBackground } from './config/pageBackgrounds.js';
 import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
 import ArrowHeader from './components/nav/ArrowHeader.jsx';
 import { FULL_MIN_VIEWPORT } from './components/nav/arrowGeometry.js';
@@ -410,6 +410,18 @@ export default function App() {
     applyDocumentHead(view, params);
   }, [view, params]);
 
+  // HAS THE ROUTE SETTLED? The bare root resolves to DEFAULT_VIEW ('generate')
+  // and the front-door effect above rewrites it to /home or /create, so for one
+  // commit `view` is a placeholder the visitor is already leaving. Both the paint
+  // (`--page-bg` below) and the preload (next effect) read THIS ONE value, so the
+  // landing page can never fetch /create's painting through either door — it was
+  // fetching it through BOTH: the wrapper briefly carried `.page-bg`, whose
+  // `var(--page-bg)` pulled the image down before the class was dropped again.
+  // `viewToPath` is the router's own mapping, so no second notion of routing is
+  // invented here; a directly-loaded route agrees from its very first render and
+  // is never delayed.
+  const routeSettled = typeof location === 'undefined' || location.pathname.startsWith(viewToPath(view));
+
   // ── Active-view background preload ─────────────────────────────────────────
   // The .page-bg painting is a fixed CSS background, so the browser only
   // discovers its URL after CSS applies — late enough to delay the first painted
@@ -433,19 +445,25 @@ export default function App() {
   // holds the new link out of the head until it is fully attributed, and the two
   // attribute writes stay in the ONE place that serves both paths.
   //
-  // The `!href` bail is dormant today: every branch of resolveViewBackground
-  // returns a real painting (it falls back to DEFAULT_BG). It is two words of
-  // insurance so a future view that legitimately paints nothing cannot put a bare
-  // preload back in the head — deliberately deferred and recorded, NOT a bug to
-  // re-find: it does not also REMOVE a stale link on such a view, because that
-  // arm would cost lines against this file's 600-line ceiling to serve a case
-  // that cannot yet occur.
+  // AND ONLY FOR A VIEW THAT ACTUALLY PAINTS IT. resolveViewBackground answers
+  // every view with a real painting (it falls back to DEFAULT_BG), but the two
+  // painting classes below are what decide whether anything shows it —
+  // paintsPageBackground is that same decision, so the preload cannot drift from
+  // the paint. `home` fails it: its dark-hero rule is applied by no component, so
+  // the landing page was fetching a full-size image it never displays. A view that
+  // does not paint also DROPS a stale link rather than leaving the previous view's
+  // image in flight behind it.
+  //
+  // AND NOT UNTIL THE ROUTE HAS SETTLED (routeSettled, just above): the bare root
+  // resolves to DEFAULT_VIEW ('generate') for one commit before the front-door
+  // effect rewrites it, and preloading there fetched /create's painting for a
+  // visitor on their way to the landing page.
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    const { href, type } = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
-    if (!href) return;
+    const bg = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
     const ID = 'page-bg-preload';
     let link = document.getElementById(ID);
+    if (!routeSettled || !paintsPageBackground(bg) || !bg.href) { link?.remove(); return; }
     const pending = !link;
     if (pending) {
       link = document.createElement('link');
@@ -453,10 +471,10 @@ export default function App() {
       link.rel = 'preload';
       link.as = 'image';
     }
-    link.type = type;
-    link.href = href;
+    link.type = bg.type;
+    link.href = bg.href;
     if (pending) document.head.appendChild(link);
-  }, [view, wizardMode, hasSettlement]);
+  }, [view, wizardMode, hasSettlement, routeSettled]);
 
   useCustomContentCloudSync({
     authTier,
@@ -539,7 +557,9 @@ export default function App() {
         // From 640 to 1023 px the fixed bottom bar holds the viewport's bottom edge above an
         // in-flow footer, so the page ends BOTTOM_NAV_H lower (0px from 1024 up; phones keep
         // their own main and footer clearances).
-        style={{ '--page-bg': pageBg.url, position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: isMobile ? undefined : BOTTOM_NAV_H }}
+        // `none` until the route settles (routeSettled above): `.page-bg` already
+        // falls back to none, so the gradient still paints and only the IMAGE waits.
+        style={{ '--page-bg': routeSettled ? pageBg.url : 'none', position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: isMobile ? undefined : BOTTOM_NAV_H }}
       >
 
         {/* ── The header: the owner's arrow painting (components/nav/ArrowHeader.jsx),

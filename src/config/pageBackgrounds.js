@@ -160,6 +160,33 @@ export function backgroundImageUrl(name) {
 }
 
 /**
+ * Does this view paint the painting AT PAGE LEVEL?
+ *
+ * App.jsx's wrapper carries exactly two painting classes, and they are the whole
+ * answer: `.page-bg` when the view is not clean, and `.page-painted` when it is
+ * clean but paints below the header band. A view that lands neither sets
+ * `--page-bg` on a wrapper nothing reads, so its painting is resolved, preloaded
+ * and never shown.
+ *
+ * `home` is that view, and today it is the only one: it was meant to ride an
+ * OPPOSITE-polarity dark hero, but `.hero-dark` — the one rule in index.css that
+ * would have consumed `--page-bg` there — is applied by NO component. HomeLanding
+ * paints its own `--sf-scene` from /media/journey-legs instead. So the landing
+ * page, the most important page in the app, was preloading a full-size painting
+ * it cannot display.
+ *
+ * This is THE predicate, not a second list of view ids: it reads the same two
+ * fields the classes read, so a view can never paint and not preload, or preload
+ * and not paint. tests/config/pageBackgrounds.test.js pins both directions.
+ *
+ * @param {{ clean?: boolean, paintedBelowHeader?: boolean }} bg
+ *        a resolveViewBackground() result
+ */
+export function paintsPageBackground(bg) {
+  return !bg?.clean || Boolean(bg?.paintedBelowHeader);
+}
+
+/**
  * Resolve the full-page background for the current view + generation state.
  *
  * Fields:
