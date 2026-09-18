@@ -72,7 +72,8 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
           </div>}
           {link.opportunities?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',padding:'8px 10px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,marginBottom:5}}>Opportunities</div>
-            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}          </div>}
+            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}
+          </div>}
         </div>}
         {link.npcConnections?.length>0&&<div>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,marginBottom:6}}>NPC connections</div>
