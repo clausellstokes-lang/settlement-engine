@@ -358,7 +358,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: `The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food remaining. Famine threatens within weeks.`,
+          hook: `The ${effectiveRoute} trade route is cut off by bandits, war, or weather. The settlement has ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food left. Famine follows within weeks.`,
           severity: 'high',
         });
       }
@@ -387,7 +387,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       }
       plotHooks.push({
         category: 'Trade Politics',
-        hook: 'Price of grain spikes due to poor harvest elsewhere. Can settlement afford imports? Do merchants exploit the situation?',
+        hook: 'A poor harvest somewhere else has spiked the price of grain. The settlement must decide what it can still afford to import, and the merchants are watching it decide.',
         severity: 'medium',
       });
     }
@@ -595,13 +595,13 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     if (route === 'isolated' || route === 'none' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'Settlement is starving. Desperate villagers might turn to banditry, or a merchant offers to supply food... at a terrible price (debt servitude? dark pact?).',
+        hook: 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports. They raise prices 300%. Do locals rebel? Seek alternative suppliers? What price are they willing to pay?',
+        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
@@ -613,13 +613,13 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
       if (route === 'port' && resolveTerrain(config) === 'coastal')
         hooks.push({
           category: 'Naval Blockade',
-          hook: `Enemy fleet or pirates blockade the port. Settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves. Hire ships to break blockade? Negotiate? Starve?`,
+          hook: `An enemy fleet or a pirate squadron blockades the port. The settlement has ${Math.round((foodBalance.dailyProduction / foodBalance.dailyNeed) * 30)} days of reserves, and nothing enters or leaves until that changes.`,
           severity: 'high',
         });
       if (route === 'road' && hasDeficit)
         hooks.push({
           category: 'Bandit Raids',
-          hook: 'Bandits target food caravans. Settlement offers bounty for clearing the trade road. But are the "bandits" actually desperate refugees from elsewhere?',
+          hook: 'Bandits are taking the food caravans, and the settlement has posted a bounty for clearing the trade road. But are the "bandits" refugees driven here from somewhere worse?',
           severity: 'medium',
         });
     }
@@ -652,7 +652,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
         if (resource.toLowerCase().includes('timber'))
           hooks.push({
             category: 'Resource Conflict',
-            hook: "Timber supplier forest is threatened by blight/fire/monsters. Settlement's construction and shipbuilding industries face collapse. Secure new supplier or solve crisis?",
+            hook: "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?",
             severity: 'medium',
           });
         if (resource.toLowerCase().includes('metal') || resource.toLowerCase().includes('iron'))
