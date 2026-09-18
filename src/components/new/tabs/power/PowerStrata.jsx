@@ -74,6 +74,34 @@ function rulerRisk(p) {
 
 const powerCardAnchorId = (name) => `power-card-${factionIdFromName(name) || 'x'}`;
 
+/**
+ * THE BASIS IS THE GROUP'S CAPTION, NOT THE ROW'S (2026-09-18).
+ *
+ * powerSupport's `why` is a typed phrase keyed by the BACKING FACTION'S archetype,
+ * so every aligned institution under one power carries the SAME sentence — a
+ * merchant power with nine houses behind it printed "A commercial house of this
+ * power" nine times down the card, once per row. Grouping by the phrase says it
+ * once and lets the names be the list.
+ *
+ * Insertion order is preserved, so the groups arrive in the derivation's order —
+ * founded (the exact factionSource signal) before aligned (the category signal),
+ * each in the settlement's own institution order. Presentation only: the
+ * derivation is untouched and still returns one flat, ordered list.
+ *
+ * @param {import('../../../../domain/dossier/powerSupport.js').SupportEdge[]} support
+ * @returns {{ why: string, edges: import('../../../../domain/dossier/powerSupport.js').SupportEdge[] }[]}
+ */
+function groupSupportByBasis(support) {
+  /** @type {Map<string, import('../../../../domain/dossier/powerSupport.js').SupportEdge[]>} */
+  const byBasis = new Map();
+  for (const edge of support) {
+    const bucket = byBasis.get(edge.why);
+    if (bucket) bucket.push(edge);
+    else byBasis.set(edge.why, [edge]);
+  }
+  return [...byBasis].map(([why, edges]) => ({ why, edges }));
+}
+
 // ── THE POWERS ───────────────────────────────────────────────────────────────
 
 /**
@@ -138,13 +166,18 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                   <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 5 }}>
                     Institutions behind this power ({support.length})
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    {support.map((edge, si) => (
-                      <div key={si} style={{ display: 'flex', alignItems: 'baseline', gap: 8, fontSize: FS.xs, lineHeight: 1.45 }}>
-                        <span style={{ fontWeight: 700, color: swatch.inkMag, flexShrink: 0 }}>
-                          <InstitutionLink name={edge.name} settlement={settlement} />
-                        </span>
-                        <span style={{ color: MUTED, flex: 1, minWidth: 0 }}>{edge.why}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                    {groupSupportByBasis(support).map((group) => (
+                      <div key={group.why}>
+                        {/* The basis, said once for the whole group. */}
+                        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.45, marginBottom: 2 }}>{group.why}</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 8, borderLeft: `1px solid ${SEAM}` }}>
+                          {group.edges.map((edge, si) => (
+                            <span key={si} style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
+                              <InstitutionLink name={edge.name} settlement={settlement} />
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     ))}
                   </div>
