@@ -74,41 +74,49 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     expect(priest.linkedInstitutionIds).toContain('inst_temple');
   });
 
-  it('a realized office-holder under a DIFFERENT role name suppresses the placeholder (an under-chaplain covers temple)', () => {
-    const out = ensureFactionStructuralNpcs({
+  it('a role NAME covers the temple office, and only on the path that reads it', () => {
+    // ⛔ THIS ARM ABSORBED A VACUOUS ONE, AND THE CONTROL BELOW IS WHY. The test it
+    // replaces asserted that "a realized office-holder under a DIFFERENT role name
+    // suppresses the placeholder" while handing the NPC an affiliation that RESOLVES TO
+    // THE SEAT - so coverage came from the seat and the role name was never read. It
+    // passed for `Under-Chaplain`, and it passed just as green for `Zzz Nonsense` and
+    // for the empty string. A test that cannot fail is not protection.
+    const synthesised = (role, factionAffiliation) => ensureFactionStructuralNpcs({
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Under-Chaplain', factionAffiliation: 'Religious Authorities' }],
-    });
-    const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
-    expect(synth).toHaveLength(0);
-  });
+      npcs: [{ id: 'npc_1', role, factionAffiliation }],
+    }).npcs.filter((n) => n.generatedAs === 'faction_structural');
 
-  it('a SAVED world keeps its coverage after the role was renamed under it', () => {
-    // ROLE_KEY_SYNONYMS is matched against `npc.role` AS IT STANDS ON THE RECORD, and a
-    // settlement written before the setting-agnostic rename still says 'Deacon/Curate'
-    // forever. The old spelling stays in the table beside the one that replaced it, and
-    // this is the pin that stops a tidy-up deleting it and silently un-covering every
-    // persisted world. The affiliation here deliberately resolves to NO seat, which is
-    // the only path on which the synonym table is consulted at all.
+    // THE VACUITY CONTROL: on the seat path the role name is inert, by design.
+    for (const role of ['Under-Chaplain', 'Zzz Nonsense', '']) {
+      expect(synthesised(role, 'Religious Authorities'), `${JSON.stringify(role)} @ seat`).toHaveLength(0);
+    }
+
+    // THE DISCRIMINATION: off the seat, ROLE_KEY_SYNONYMS is the only thing that can
+    // cover the office, so an unknown role MUST still get its placeholder.
+    expect(synthesised('Zzz Nonsense', 'The Old Congregation'), 'an unknown role must not cover').toHaveLength(1);
+
+    // AND THE CLAIM ITSELF. ROLE_KEY_SYNONYMS is matched against `npc.role` AS IT STANDS
+    // ON THE RECORD, and a settlement written before the setting-agnostic rename still
+    // says 'Deacon/Curate' forever; the old spellings stay beside the ones that replaced
+    // them so a persisted world cannot lose an office-holder to a rewording.
     //
-    // ⛔ 'Priest' IS IN THIS LIST BECAUSE IT ONCE FAILED IT. The setting-agnostic rename
-    // left the table holding `parishpriest` alone, and a realized Priest stopped covering
-    // the office here while every golden stayed green - the corpus reaches this office
-    // through the power seat and never takes the fallback at all.
+    // ⛔ 'Priest' IS IN THIS LIST BECAUSE IT ONCE FAILED IT. The rename left the table
+    // holding `parishpriest` alone, and a realized Priest stopped covering the office
+    // here while every golden stayed green - the corpus reaches this office through the
+    // power seat and never takes the fallback at all.
     for (const role of ['Deacon/Curate', 'Under-Chaplain', 'Parish Priest', 'Priest']) {
-      const out = ensureFactionStructuralNpcs({
-        tier: 'town',
-        institutions: [],
-        powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-        npcs: [{ id: 'npc_1', role, factionAffiliation: 'The Old Congregation' }],
-      });
       expect(
-        (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural'),
+        synthesised(role, 'The Old Congregation'),
         `${role} must cover the temple office on the fallback path`,
       ).toHaveLength(0);
     }
+
+    // ⛔ THE SAME CLASS ONE LEVEL DOWN: the lookup is guarded with Object.hasOwn, so a
+    // role named for an Object.prototype member cannot return a FUNCTION into the
+    // covered-office set. Unguarded, `constructor` read back the Object constructor.
+    expect(synthesised('constructor', 'The Old Congregation'), 'a prototype-named role must not cover').toHaveLength(1);
   });
 
   it('per-archetype dedup — two economy seats + one merchant leader synthesizes no second merchant office', () => {

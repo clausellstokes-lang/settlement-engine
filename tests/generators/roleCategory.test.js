@@ -32,25 +32,37 @@ import {
   isCommerceGuild,
 } from '../../src/generators/roleCategory.js';
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
-import { NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
+import { inferRoleArchetype, NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
+import { inferImportance } from '../../src/domain/entities/npcs.js';
 
 // ── 0. the setting-agnostic renames are mechanically inert ───────────────────
 //
 // ⛔ EVERY CLASSIFIER THAT READS A ROLE STRING IS LISTED HERE, and the list is the
-// point: three of them live in npcGenerator.js (a file at its size ceiling, which
-// no rename may edit to compensate), one in domain/entities and one in
-// domain/worldPulse. A rename that is "display only" has to prove it on all five.
+// point: a role label is display copy, but five separate readers take it as a
+// SUBSTRING, so a rename can silently move an NPC's faction, category, power band,
+// importance or simulation archetype.
+//
+// ⚠ THREE OF THE FIVE ARE IMPORTED AND ONE IS NOT, AND THE DIFFERENCE IS DECLARED
+// rather than left to be discovered. `roleToCategory`, `inferRoleArchetype` and
+// `inferImportance` are the SHIPPED functions, called here exactly as the product
+// calls them — `inferRoleArchetype` over the whole field set it reads in production
+// (`name`/`label`/`role`/`title`/`description`), and `inferImportance` over the npc
+// shape. `generateNPCPowerLevel` is module-local to npcGenerator.js, which sits AT
+// its frozen size baseline of 1345 effective lines and which this lane may not edit;
+// exporting it is a zero-line change and is the better end state, but it is not this
+// lane's to make. So its two bands are mirrored below AND PINNED TO THE SOURCE: the
+// arrays are read out of npcGenerator.js and compared, so a drift there reds here
+// instead of quietly making this pin measure a function that no longer exists.
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+const NPC_GENERATOR_SRC = readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../../src/generators/npcGenerator.js'),
+  'utf8',
+);
 const HIGH_POWER = ['mayor', 'lord', 'governor', 'bishop', 'archmage', 'guild_master', 'captain', 'commander', 'crime lord'];
 const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
-
-/** npcAgency.inferRoleArchetype: first match over the archetype order, `civic` by default. */
-function simulationArchetype(role) {
-  const text = String(role).toLowerCase();
-  for (const [name, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
-    if ((def.labels || []).some((label) => text.includes(label))) return name;
-  }
-  return 'civic';
-}
 
 /** npcGenerator.generateNPCPowerLevel's band, which decides influence and power. */
 function powerBand(role) {
@@ -60,23 +72,24 @@ function powerBand(role) {
   return 'low';
 }
 
-/** entities/npcs.inferImportance, which decides ripple weight. */
-function importanceOf(role) {
-  const r = String(role).toLowerCase();
-  if (/high priest|patriarch|matriarch|archmage|dragon|lord mayor|noble lord|baron|baroness|duke|duchess/.test(r)) return 'pillar';
-  if (/captain|priest|guildmaster|master|magister|sheriff|warden|abbot|seneschal/.test(r)) return 'key';
-  if (/lieutenant|clerk|sergeant|deputy|apprentice|councilor|merchant|smith/.test(r)) return 'notable';
-  return 'minor';
-}
-
+/** The four classifiers a rename has to leave alone, over the shape each one ships against. */
 const classifiersFor = (role) => ({
   category: roleToCategory(String(role).toLowerCase()),
-  archetype: simulationArchetype(role),
+  archetype: inferRoleArchetype({ role }),
   power: powerBand(role),
-  importance: importanceOf(role),
+  importance: inferImportance({ role }),
 });
 
 describe('setting-agnostic role renames are mechanically inert', () => {
+  it('the mirrored power bands still match npcGenerator\'s own', () => {
+    // The mirror above is the only copy in this file; this is what keeps it honest.
+    for (const keyword of [...HIGH_POWER, ...MID_POWER]) {
+      expect(NPC_GENERATOR_SRC, `${keyword} left generateNPCPowerLevel`).toContain(`'${keyword}'`);
+    }
+    expect(NPC_GENERATOR_SRC).toContain('const HIGH_POWER = [');
+    expect(NPC_GENERATOR_SRC).toContain('const MID_POWER = [');
+  });
+
   it.each([
     ['Parish Priest', 'Priest'],
     ['Templar Commander', 'Temple Guard Commander'],
@@ -86,13 +99,39 @@ describe('setting-agnostic role renames are mechanically inert', () => {
     expect(classifiersFor(after)).toEqual(classifiersFor(before));
   });
 
+  it('⚠ Temple Guard Commander holds only because MILITARY precedes RELIGIOUS', () => {
+    // The one rename whose stability is ORDER-DEPENDENT rather than absent-label. It
+    // carries BOTH 'commander' (military) and 'temple' (religious), and
+    // inferRoleArchetype returns the FIRST archetype that matches over
+    // NPC_ROLE_ARCHETYPES' insertion order. 'Templar Commander' matched only
+    // 'commander' — 'templar' is not 'temple' — so the two agree today because
+    // military is declared before religious, and reordering that object would move
+    // this NPC without touching a single label. Stated here so the coupling is a
+    // written fact rather than a coincidence the next reader has to rediscover.
+    expect(inferRoleArchetype({ role: 'Temple Guard Commander' })).toBe('military');
+    // Drop the military words and the SAME 'temple' lands religious — which is the
+    // proof that the label is live in the string and the order is what suppresses it.
+    expect(inferRoleArchetype({ role: 'Temple Keeper' })).toBe('religious');
+    expect(Object.keys(NPC_ROLE_ARCHETYPES).indexOf('military'))
+      .toBeLessThan(Object.keys(NPC_ROLE_ARCHETYPES).indexOf('religious'));
+  });
+
   it('the pin can fail: the rejected label DOES move the simulation archetype', () => {
     // The negative control. Without it this block proves only that two strings agree,
     // never that disagreement would be seen — and 'Junior Cleric' is the label this
     // lane actually wrote before the review caught it.
-    expect(simulationArchetype('Deacon/Curate')).toBe('civic');
-    expect(simulationArchetype('Junior Cleric')).toBe('religious');
+    expect(inferRoleArchetype({ role: 'Deacon/Curate' })).toBe('civic');
+    expect(inferRoleArchetype({ role: 'Junior Cleric' })).toBe('religious');
     expect(classifiersFor('Junior Cleric')).not.toEqual(classifiersFor('Deacon/Curate'));
+  });
+
+  it('the archetype reads the whole shipped field set, not the role alone', () => {
+    // inferRoleArchetype joins name/label/role/title/description. A pin that passed only
+    // `{ role }` would miss a cultural TITLE carrying the tell — which is exactly how a
+    // Mesoamerican hamlet's "Tlamacazqui" sits beside its role on the card.
+    expect(inferRoleArchetype({ role: 'Under-Chaplain', title: 'Priest' })).toBe('religious');
+    expect(inferRoleArchetype({ role: 'Under-Chaplain', title: 'Tlamacazqui' })).toBe('civic');
+    expect(inferRoleArchetype({ description: 'keeps the temple roll' })).toBe('religious');
   });
 });
 
