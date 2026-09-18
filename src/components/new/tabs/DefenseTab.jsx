@@ -575,28 +575,41 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       </div>}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {caps.map((cap,i)=>(
+          {caps.map((cap,i)=>{
+            /* R-5b item #20: the bare 0-100 digit beside this bar is the score's band word
+               from the shared ladder. Magical Capability's status ("Arcane support" /
+               "None") is a presence read, not a grade, so there the band is the only word
+               that says how good the bar actually is.
+               ⛔ BUT THE BAND AND THE STATUS ARE NOT ALWAYS TWO FACTS. Economic Backing's
+               status ladder (Well-funded / Adequate / Underfunded / Critical, at 65/40/25)
+               is a second grading of THE SAME econScore the band grades at 65/40/20, and the
+               two vocabularies share Adequate and Critical — so a town in either of those
+               bands printed one word twice on one row. That was invisible while the band
+               shouted in capitals and the status did not; sentence case (the label ladder,
+               2026-09-18) made it plain. The row now says each reading ONCE: where the band
+               would only repeat the status, the bar speaks for itself and the status is the
+               grade. Where they genuinely differ (econScore 25-39 reads Underfunded against
+               a Weak bar) both still show, because then they are two readings. */
+            const band = cap.score !== null ? statusCase(scoreBand(cap.score)) : null;
+            const bandRepeatsStatus = band !== null && band === cap.status;
+            return (
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>
-                  {/* R-5b item #20: the bare 0-100 digit beside this bar is now
-                      the score's band word from the shared ladder. Magical
-                      Capability's status ("Arcane support" / "None") is a
-                      presence read, not a grade, so the band is the only word
-                      that told the reader how good the bar actually is. */}
+                  <span data-sf-cap-status="" style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>
                   {cap.score!==null&&<div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6}}>
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    <span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{statusCase(scoreBand(cap.score))}</span>
+                    {!bandRepeatsStatus&&<span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{band}</span>}
                   </div>}
                 </div>
                 <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </Section>
 

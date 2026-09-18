@@ -30,6 +30,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { scoreBand, scoreColor } from '../../src/domain/display/defenseScoreBands.js';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
@@ -162,29 +163,60 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
 });
 
 describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
-  test.each(CASES.map(([n]) => n))('%s: every scored capability row reads as a band word', (name) => {
+  test.each(CASES.map(([n]) => n))('%s: every scored capability row says its grade exactly once', (name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
 
-    // Both scored rows (Economic Backing, Magical Capability) are present and
-    // banded; the unscored ones (no bar) carry no band and are untouched.
+    // Both scored rows (Economic Backing, Magical Capability) are present; the unscored
+    // ones (no bar) carry no band and are untouched.
+    const caps = deriveSupportingCapabilities(settlement);
     for (const label of ['Economic Backing', 'Magical Capability']) {
       const labelEl = screen.getByText(label);
       const row = labelEl.closest('div').parentElement;
+      const cap = caps.find((c) => c.label === label);
+      expect(cap, `${label} must be derived`).toBeTruthy();
+
       // ADDRESSED, NOT DISAMBIGUATED BY CASE. The band used to be the row's only word in
-      // capitals, so matching the vocabulary found it and nothing else. Now that rung 3
-      // reads in sentence case (components/new/labelLadder.js) the band and the row's own
-      // STATUS word can be the same string — Economic Backing's status ladder is
+      // capitals, so matching the vocabulary found it and nothing else. Since rung 3 reads
+      // in sentence case (components/new/labelLadder.js) the band and the row's own STATUS
+      // word can be the SAME string — Economic Backing's status ladder is
       // Well-funded/Adequate/Underfunded/Critical and it overlaps the band's Adequate and
-      // Critical — so the pin names the band's own element and then checks its word.
+      // Critical — so both elements are named and the rule is checked between them.
       const bands = row.querySelectorAll('[data-sf-cap-band]');
-      expect(bands.length, `${label} must show exactly one band element`).toBe(1);
-      expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
+      const statusEl = row.querySelector('[data-sf-cap-status]');
+      expect(statusEl, `${label} must render its status`).toBeTruthy();
+      expect(bands.length, `${label} must never render a second band`).toBeLessThanOrEqual(1);
+
+      const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
+      if (bands.length === 1) {
+        expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
+        expect(bands[0].textContent, `${label} prints one word twice`).not.toBe(statusEl.textContent);
+        expect(bands[0].textContent, `${label}'s band must be THIS row's score`).toBe(implied);
+      } else {
+        // The band may be dropped for ONE reason: the status already says that word. A row
+        // that lost its grade for any other reason is the defect this arm exists to catch.
+        expect(statusEl.textContent, `${label} dropped its band without the status saying it`).toBe(implied);
+      }
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
     const bars = screen.getByText('Economic Backing').closest('div').parentElement;
     expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/);
+  });
+
+  // REACHABILITY, deterministically rather than through whatever the fixtures happen to
+  // roll: the fold above is dead code unless the two ladders really can produce the same
+  // word. Economic Backing grades econScore at 65/40/25 into the first list;
+  // `scoreBand` grades the SAME number at 65/40/20 into the second.
+  test('Economic Backing\'s status ladder and the band ladder overlap, so the fold is reachable', () => {
+    const statuses = ['Well-funded', 'Adequate', 'Underfunded', 'Critical'];
+    const bandWords = [100, 65, 40, 20, 0].map((n) => statusCase(scoreBand(n)));
+    expect(
+      statuses.filter((w) => bandWords.includes(w)),
+      'the ladders stopped overlapping — the fold in DefenseTab is now dead code, remove it',
+    ).toEqual(['Adequate', 'Critical']);
+    // ...and they are not the SAME ladder, so the band still says something of its own.
+    expect(statuses).not.toEqual(bandWords);
   });
 });
 
