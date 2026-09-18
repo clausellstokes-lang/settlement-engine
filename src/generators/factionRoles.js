@@ -131,7 +131,14 @@ const ROLE_KEY_SYNONYMS = Object.freeze({
   knightdame: 'watch', warden: 'watch', sergeantatarms: 'watch',
   // temple (religious leadership)
   highpriest: 'temple', highpriestess: 'temple', archpriest: 'temple',
-  deaconcurate: 'temple', parishpriest: 'temple', chaplain: 'temple',
+  // ⛔ A RENAMED ROLE ADDS ITS NEW SPELLING AND KEEPS THE OLD ONE. These keys are
+  // matched against `npc.role` as it stands on the record, and a settlement SAVED
+  // before a rename still carries the old string forever. `deaconcurate` and
+  // `parishpriest` therefore stay beside the spellings that replaced them: a
+  // persisted world must not quietly lose an office-holder because the catalog
+  // was reworded after it was written.
+  deaconcurate: 'temple', juniorcleric: 'temple',
+  parishpriest: 'temple', chaplain: 'temple',
   bishop: 'temple', abbot: 'temple', abbess: 'temple', prelate: 'temple',
   patriarch: 'temple', matriarch: 'temple',
   // merchant (trade / craft leadership)

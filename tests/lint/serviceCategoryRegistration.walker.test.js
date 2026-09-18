@@ -294,8 +294,6 @@ const HEURISTIC_UNREGISTERED = Object.freeze([
   "Duties and tariffs",
   "Dye materials",
   "Dyeing",
-  "Ecclesiastical courts",
-  "Ecclesiastical hierarchy",
   "Education",
   "Educational network",
   "Emergency defense",

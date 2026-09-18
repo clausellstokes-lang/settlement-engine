@@ -627,7 +627,7 @@ export const generatePowerStructure = (
                 ? ['city', 'metropolis'].includes(tier)
                   ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
                   : ['hamlet', 'village'].includes(tier)
-                    ? 'The parish priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
+                    ? 'The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'
                 : religiousPower > 10
                   ? ['hamlet', 'village', 'thorp'].includes(tier)

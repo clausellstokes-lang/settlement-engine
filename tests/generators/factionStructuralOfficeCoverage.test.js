@@ -74,15 +74,36 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     expect(priest.linkedInstitutionIds).toContain('inst_temple');
   });
 
-  it('a realized office-holder under a DIFFERENT role name suppresses the placeholder (Deacon covers temple)', () => {
+  it('a realized office-holder under a DIFFERENT role name suppresses the placeholder (a junior cleric covers temple)', () => {
     const out = ensureFactionStructuralNpcs({
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Deacon/Curate', factionAffiliation: 'Religious Authorities' }],
+      npcs: [{ id: 'npc_1', role: 'Junior Cleric', factionAffiliation: 'Religious Authorities' }],
     });
     const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
     expect(synth).toHaveLength(0);
+  });
+
+  it('a SAVED world keeps its coverage after the role was renamed under it', () => {
+    // ROLE_KEY_SYNONYMS is matched against `npc.role` AS IT STANDS ON THE RECORD, and a
+    // settlement written before the setting-agnostic rename still says 'Deacon/Curate'
+    // forever. The old spelling stays in the table beside the one that replaced it, and
+    // this is the pin that stops a tidy-up deleting it and silently un-covering every
+    // persisted world. The affiliation here deliberately resolves to NO seat, which is
+    // the only path on which the synonym table is consulted at all.
+    for (const role of ['Deacon/Curate', 'Junior Cleric']) {
+      const out = ensureFactionStructuralNpcs({
+        tier: 'town',
+        institutions: [],
+        powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
+        npcs: [{ id: 'npc_1', role, factionAffiliation: 'The Old Congregation' }],
+      });
+      expect(
+        (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural'),
+        `${role} must cover the temple office on the fallback path`,
+      ).toHaveLength(0);
+    }
   });
 
   it('per-archetype dedup — two economy seats + one merchant leader synthesizes no second merchant office', () => {

@@ -20,7 +20,7 @@ export const INSTITUTION_SERVICES = {
   "Village headman": {
     "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
     "Communal labour": { on: true, p: 0.9, desc: "Organises shared work: harvest, repairs, the common fields" },
-    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the parish tithe" },
+    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the temple tithe" },
     "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
   },
   "Village elder": {
@@ -72,7 +72,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Church/Temple": {
-    "Religious services": { on: true, p: 1.0, desc: "Mass, prayer, rituals" },
+    "Religious services": { on: true, p: 1.0, desc: "Rites, prayer, observances" },
     "Education (basic)": { on: true, p: 0.8, desc: "Reading, writing for some" },
     "Poor relief": { on: true, p: 0.9, desc: "Charity for destitute" },
     "Record keeping": { on: true, p: 1.0, desc: "Births, deaths, marriages" },
@@ -823,10 +823,10 @@ export const INSTITUTION_SERVICES = {
     "Route consultation": { on: false, p: 0.5, desc: "Advice on the best routes based on available map data." }
   },
   "Cathedral (10,000+ only)": {
-    "Major religious services": { on: true,  p: 1.0, desc: "High mass, feast day observances, and sacraments for the entire diocese." },
+    "Major religious services": { on: true,  p: 1.0, desc: "The great rites, feast day observances, and the rites of the faith for a whole region." },
     "Pilgrimage destination": { on: true, p: 0.9, desc: "Attracts pilgrims from across the region. Economic and spiritual significance." },
-    "Dispensations and annulments": { on: false, p: 0.5, desc: "Church rulings on marriages, vows, and religious obligations. Often requires payment." },
-    "Sanctuary": { on: false, p: 0.4, desc: "Refuge within the cathedral walls. Limited but ancient right." }
+    "Dispensations and annulments": { on: false, p: 0.5, desc: "Rulings of the faith on marriages, vows, and religious obligations. Often requires payment." },
+    "Sanctuary": { on: false, p: 0.4, desc: "Refuge inside the walls of the great temple. Limited but ancient right." }
   },
   "Charcoal burner": {
     "Charcoal supply": { on: true,  p: 1.0, desc: "Produce and sell charcoal for smithing, heating, and industrial use." },
@@ -966,9 +966,9 @@ export const INSTITUTION_SERVICES = {
   },
   "Great cathedral": {
     "High religious ceremony": { on: true,  p: 1.0, desc: "The most significant religious observances. Major feast days and state occasions." },
-    "Pilgrimage services": { on: true, p: 0.9, desc: "Accommodate and process pilgrims. Relics, blessings, and indulgences." },
-    "Ecclesiastical courts": { on: false, p: 0.6, desc: "Church legal proceedings for matters within clerical jurisdiction." },
-    "Dispensations": { on: false, p: 0.5, desc: "Church permission for forbidden actions: marriages, business practices, oaths." },
+    "Pilgrimage services": { on: true, p: 0.9, desc: "Accommodate and process pilgrims. Relics, blessings, and remissions bought outright." },
+    "Religious courts": { on: false, p: 0.6, desc: "Proceedings of the faith for matters within clerical jurisdiction." },
+    "Dispensations": { on: false, p: 0.5, desc: "Permission from the faith for forbidden actions: marriages, business practices, oaths." },
     "Sanctuary": { on: false, p: 0.4, desc: "The ancient right of refuge, claimed at the altar and honoured by custom." }
   },
   "Great library": {
@@ -1097,7 +1097,7 @@ export const INSTITUTION_SERVICES = {
     "Coin inspection": { on: false, p: 0.5, desc: "Verify coin quality and detect forgeries. Official certification available." }
   },
   "Monastery or friary": {
-    "Religious services": { on: true,  p: 1.0, desc: "Masses, prayers, and sacraments. Open to locals and pilgrims." },
+    "Religious services": { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims." },
     "Hospitality": { on: true, p: 0.8, desc: "Food and shelter for travelers and pilgrims. Often free or by donation." },
     "Copyist services": { on: true, p: 0.7, desc: "Copy manuscripts and documents. Primary source of book production." },
     "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population." },
@@ -1159,23 +1159,23 @@ export const INSTITUTION_SERVICES = {
     "Royal audiences": { on: false, p: 0.3, desc: "Formal petitions to the ruler or their appointed representatives." }
   },
   "Parish church": {
-    "Religious services": { on: true,  p: 1.0, desc: "Mass, sacraments, and seasonal observances." },
+    "Religious services": { on: true,  p: 1.0, desc: "Rites, observances, and the seasonal calendar." },
     "Life ceremonies": { on: true, p: 1.0, desc: "Births, marriages, and funerals. Essential community functions." },
-    "Community gathering": { on: false, p: 0.7, desc: "The church space serves as a community meeting hall for non-religious purposes." },
-    "Records": { on: false, p: 0.5, desc: "Parish birth, marriage, and death records. The only civic record-keeping in many areas." }
+    "Community gathering": { on: false, p: 0.7, desc: "The temple space serves as a community meeting hall for non-religious purposes." },
+    "Records": { on: false, p: 0.5, desc: "Birth, marriage, and death records kept by the faith. The only civic record-keeping in many areas." }
   },
   "Parish churches (2-5)": {
-    "Religious services": { on: true,  p: 1.0, desc: "Multiple parishes covering different districts or communities." },
-    "Life ceremonies": { on: true, p: 1.0, desc: "Births, marriages, and funerals across multiple parishes." },
-    "Record keeping": { on: false, p: 0.6, desc: "Centralised or distributed parish records for the whole settlement." }
+    "Religious services": { on: true,  p: 1.0, desc: "Several congregations covering different districts or communities." },
+    "Life ceremonies": { on: true, p: 1.0, desc: "Births, marriages, and funerals across several congregations." },
+    "Record keeping": { on: false, p: 0.6, desc: "Centralised or distributed congregation records for the whole settlement." }
   },
   "Parish churches (10-30)": {
-    "Full religious coverage": { on: true,  p: 1.0, desc: "Every district has a church. Religious observance accessible to all." },
-    "Network coordination": { on: false, p: 0.5, desc: "Multiple parishes coordinate on feast days and city-wide observances." }
+    "Full religious coverage": { on: true,  p: 1.0, desc: "Every district has a temple. Religious observance accessible to all." },
+    "Network coordination": { on: false, p: 0.5, desc: "The congregations coordinate on feast days and city-wide observances." }
   },
   "Parish churches (50-100+)": {
     "Citywide religious infrastructure": { on: true,  p: 1.0, desc: "Comprehensive religious network across the entire city." },
-    "Ecclesiastical hierarchy": { on: false, p: 0.5, desc: "Complex church hierarchy managing resources and appointments." }
+    "Religious hierarchy": { on: false, p: 0.5, desc: "A complex hierarchy of the faith managing resources and appointments." }
   },
   "Peat cutter": {
     "Peat fuel supply": { on: true,  p: 1.0, desc: "Cut and dried peat blocks for fuel. Important where wood is scarce." }
@@ -1409,9 +1409,9 @@ export const INSTITUTION_SERVICES = {
     "Grave maintenance": { on: false, p: 0.25, desc: "Keeping a family's row clear of bramble and stock. Settled in labour more often than in coin." }
   },
   "Parish burial grounds": {
-    "Burial": { on: true,  p: 1.0, desc: "Interment in the parish ground, with the rite that parish keeps." },
+    "Burial": { on: true,  p: 1.0, desc: "Interment in the congregation's ground, with the rite that congregation keeps." },
     "Register of the dead": { on: true, p: 0.8, desc: "The sexton records who lies where. Consulted in inheritance disputes as often as in mourning." },
-    "Memorial inscription": { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the churchyard." },
+    "Memorial inscription": { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the burial ground." },
     "Guild plot": { on: false, p: 0.4, desc: "A block of ground held by a trade for its members and their households." }
   },
   "Burial grounds and charnel house": {
@@ -1422,7 +1422,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Cemetery network": {
     "Burial": { on: true,  p: 1.0, desc: "Interment in the ground the ward is assigned to, reached by the burial roads." },
-    "Central register": { on: true, p: 0.9, desc: "Parish rolls copied into one office, because no parish can any longer say where its own dead are." },
+    "Central register": { on: true, p: 0.9, desc: "Congregation rolls copied into one office, because no congregation can any longer say where its own dead are." },
     "Plot brokerage": { on: false, p: 0.5, desc: "Ground bought, sold and resold. The revenue office watches the trade, and the trade knows it." },
     "Funeral procession": { on: false, p: 0.4, desc: "Bearers, mutes and a hired route out through the gate, priced by how much of the city is meant to notice." }
   },
@@ -1483,7 +1483,7 @@ export const INSTITUTION_SERVICES = {
     "Wayside shrine": {
     "Wayside blessing": { on: true, p: 1.0, desc: "A brief blessing for travelers on the road. Costs nothing; donations welcomed." },
     "Traveller's prayer": { on: false, p: 0.8, desc: "Spoken prayer for safe passage and fair weather." },
-    "Donation accepted": { on: false, p: 0.5, desc: "Small offerings left at the shrine. Accumulated and forwarded to the parish." }
+    "Donation accepted": { on: false, p: 0.5, desc: "Small offerings left at the shrine. Accumulated and forwarded to the temple." }
   },
   // ⚠ SETTING-AGNOSTIC NAMING. The product is setting-agnostic and its faith layer is
   // CULTURE, never theology, so a service menu may name a RITE but never a particular
