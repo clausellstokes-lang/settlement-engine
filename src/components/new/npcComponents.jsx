@@ -223,12 +223,6 @@ function NPCInlineCard({
   const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
-  // THE GOAL CHIP IS GONE (2026-09-18) — see the wants block below: the expanded
-  // card said the same goal three times. The chip row keeps every other trait
-  // (ideal, flaw, bond, ambition, loyalty, fear); only the one the Wants line
-  // already carries is dropped, and it is dropped HERE rather than in
-  // normalizeNpcTraits because the dossier entity index reads that same list.
-  const publicTraits = traits.filter(t => t.visibility !== 'gm' && t.key !== 'goal');
   // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
   // authored office/title while making the declared archetype visible, and only
   // humanize values that are known engine vocabulary so free-authored prose is
@@ -265,6 +259,22 @@ function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
+  // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
+  // card printed that one sentence three times over. The rule behind it is wider
+  // than the goal, and keying it on a LABEL would have left the same defect a row
+  // away: npcInteriority's wants are goal, ambition and ideal, and
+  // normalizeNpcTraits mints a chip for each of those three from the same fields.
+  // So the filter is on the VALUE — a chip is dropped exactly when the Wants line
+  // above already prints its text, whatever the chip happens to be called.
+  //
+  // Everything the Wants line does NOT carry stays: flaw, bond, loyalty, fear,
+  // temperament, and a second ambition or ideal that differs from the one the
+  // read-model chose. The filter runs here rather than in normalizeNpcTraits
+  // because the dossier entity index reads that same trait list.
+  const printedWants = new Set(wants.map(w => String(w).trim().toLowerCase()));
+  const publicTraits = traits.filter(t => (
+    t.visibility !== 'gm' && !printedWants.has(String(t.value).trim().toLowerCase())
+  ));
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
   // floor). Null unless the world pulse touched this compromise. The npc pin key

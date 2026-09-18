@@ -1,14 +1,20 @@
 /** @vitest-environment jsdom */
 /**
- * npcCardGoalOnce.test.jsx — the expanded NPC card states a person's goal ONCE.
+ * npcCardGoalOnce.test.jsx — NO ROW OF THE EXPANDED NPC CARD REPEATS ANOTHER.
  *
- * It used to state it three times over, because three independent rows read the
+ * The goal was stated three times over, because three independent rows read the
  * same `npc.goal.short`: the `Goal:` trait chip (normalizeNpcTraits), an arrow
  * line of its own, and the "Wants" line (npcInteriority's first want). A reader
  * met the same sentence three times before reaching the secret.
  *
- * Wants is the row that survives — it is the one that also carries the ambition —
- * and it renders through ProseParagraph so an ⟦entity:…⟧ token in a
+ * Wants is the row that survives, and the rule generalised rather than stopping
+ * at the goal: npcInteriority's wants are goal, AMBITION and IDEAL, and
+ * normalizeNpcTraits mints a chip for each of those three from the same fields,
+ * so a label-keyed cure would have left the identical defect one row away. The
+ * chip filter is keyed on the VALUE — a chip is dropped exactly when the Wants
+ * line already prints its text.
+ *
+ * Wants renders through ProseParagraph, so an ⟦entity:…⟧ token in a
  * narrative-rewritten goal never reaches the reader as a literal.
  */
 
@@ -54,11 +60,44 @@ describe('NPCInlineCard — the goal is printed once', () => {
     });
 
     expect(occurrences(text, GOAL)).toBe(1);
-    // The second want (the ambition) still rides the same line, after the goal.
-    // NOTE: the ambition ALSO keeps its own `Ambition:` trait chip. That chip is
-    // the same duplication one row deeper and is deliberately left standing —
-    // the 2026-09-18 order named the goal rows, not the ambition's.
+    // The second want (the ambition) rides the same line, after the goal — and it
+    // is stated ONCE too: the `Ambition:` chip that used to repeat it is gone.
+    expect(occurrences(text, AMBITION)).toBe(1);
     expect(wantsLine()).toBe(`Wants ${GOAL} · ${AMBITION}`);
+  });
+
+  it('prints an ideal once as well — the third want the chip row used to echo', () => {
+    const IDEAL = 'the wall holds or nobody does';
+    const text = renderExpanded({
+      id: 'n1b',
+      name: 'Bern Ladd',
+      role: 'Warden',
+      goal: { short: GOAL },
+      personality: { ambition: AMBITION, ideal: IDEAL },
+    });
+
+    expect(occurrences(text, IDEAL)).toBe(1);
+    expect(wantsLine()).toBe(`Wants ${GOAL} · ${AMBITION} · ${IDEAL}`);
+  });
+
+  it('keeps a SECOND ambition the read-model did not choose — only the echo goes', () => {
+    // npcInteriority takes the first non-empty of personality.ambition then
+    // npc.ambition, so a person carrying two distinct ambitions still has one the
+    // Wants line never prints. A value-keyed filter keeps it; a label-keyed one
+    // would have deleted it.
+    const OTHER = 'buy back the family mill';
+    const text = renderExpanded({
+      id: 'n1c',
+      name: 'Alder Finch',
+      role: 'Factor',
+      goal: { short: GOAL },
+      personality: { ambition: AMBITION },
+      ambition: OTHER,
+    });
+
+    expect(wantsLine()).toBe(`Wants ${GOAL} · ${AMBITION}`);
+    expect(screen.getByText(`Ambition: ${OTHER}`)).toBeTruthy();
+    expect(occurrences(text, OTHER)).toBe(1);
   });
 
   it('carries no "Goal:" chip — the retired third copy', () => {
@@ -76,17 +115,22 @@ describe('NPCInlineCard — the goal is printed once', () => {
     expect(occurrences(text, GOAL)).toBe(1);
   });
 
-  it('other trait chips survive the goal chip\'s removal', () => {
+  it('keeps every chip the Wants line does NOT carry', () => {
     renderExpanded({
       id: 'n3',
       name: 'Bern Ladd',
       role: 'Warden',
       goal: { short: GOAL },
-      personality: { flaw: 'drinks before the watch', ideal: 'the wall holds or nobody does' },
+      personality: { flaw: 'drinks before the watch', bond: 'his sister runs the ferry' },
+      fear: 'the river rising',
+      loyalty: 'the old charter',
     });
 
+    // None of these four is a want, so none of them is an echo.
     expect(screen.getByText(/Flaw: drinks before the watch/)).toBeTruthy();
-    expect(screen.getByText(/Ideal: the wall holds or nobody does/)).toBeTruthy();
+    expect(screen.getByText(/Bond: his sister runs the ferry/)).toBeTruthy();
+    expect(screen.getByText(/Fear: the river rising/)).toBeTruthy();
+    expect(screen.getByText(/Loyalty: the old charter/)).toBeTruthy();
   });
 
   it('a person carrying only a declared goal FACET still states a want', () => {
