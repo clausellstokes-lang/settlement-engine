@@ -168,7 +168,7 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   // `lastSeed` rides inside it because a draft without the seed it was drawn from
   // is a world whose provenance the reload silently dropped. The other half of
   // the gate — an anonymous BLOB under a signed-in SESSION — is spent at the boot
-  // auth resolution (store/index.js resolveBootAnonDraft).
+  // auth resolution (store/anonDraftGate.js resolveBootAnonDraft).
   'anonDraft',
 ]);
 
@@ -1125,7 +1125,11 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   // indistinguishable from a fresh install.
   describe('the anonymous draft', async () => {
     // The READ half of the gate is a LEAF (no store construction, no cycle).
-    const { resolveBootAnonDraft, settleBootAnonDraft } = await import('../../src/store/anonDraftGate.js');
+    const {
+      resolveBootAnonDraft, settleBootAnonDraft, stashAnonDraftClaim, readAnonDraftClaim,
+    } = await import('../../src/store/anonDraftGate.js');
+    // The one chokepoint every settlement swap routes through.
+    const { resetSettlementIdentity } = await import('../../src/store/settlementLifecycleHelpers.js');
     // The non-fatal persist door lives with the store it guards, so this one arm
     // does construct it.
     const { resilientLocalStorage } = await import('../../src/store/index.js');
@@ -1256,25 +1260,58 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       }).drop).toBe(false);
     });
 
-    // ⛔ THE RACE, AND THE TWO WAYS THE GATE GOT IT WRONG BEFORE.
-    //   1. It was spent on the first `auth.loading` true→false edge — which
-    //      authSignIn and authSignUp also drive — so a sign-in that beat a slow
-    //      getSession() spent it early.
+    // ⛔ THE RACE, AND THE THREE WAYS THE GATE GOT IT WRONG BEFORE.
+    //   1. Spent on the first `auth.loading` true→false edge — which authSignIn
+    //      and authSignUp also drive — so a sign-in that beat a slow getSession()
+    //      spent it early.
     //   2. Moving the spend into initAuth only DEFERRED that: nothing on the
     //      sign-in path retracted the claim, so initAuth resolved afterwards and
-    //      dropped the very draft the visitor had just signed in to keep.
-    // The claim is now retracted by the events that make the world theirs.
-    const spend = (seed) => {
-      let state = seed;
-      settleBootAnonDraft((recipe) => { const next = { ...state }; recipe(next); state = next; });
-      return state;
+    //      dropped the draft the visitor had just signed in to keep.
+    //   3. Retracting it only in the in-page password doors left every REDIRECT
+    //      door — OAuth, magic link, the sign-up verification round trip — coming
+    //      back to a fresh boot that re-adopted the envelope and dropped it.
+    //
+    // A STORE DOUBLE, not a source scan: a fake `set`/`get` pair over a plain
+    // state object, carrying the real clearSettlement contract (the drop must go
+    // through the ACTION, not null two fields).
+    const bootStore = (seed) => {
+      let state = {
+        ...seed,
+        clearSettlement: () => {
+          state.settlement = null;
+          state.lastSeed = null;
+          // The real action routes through resetSettlementIdentity, which clears
+          // the residue that made the stranger's world reachable around the gate.
+          state.systemState = null;
+          state.eventLog = [];
+          state.draftVersionHistory = [];
+        },
+      };
+      return {
+        settle: () => {
+          settleBootAnonDraft((recipe) => { recipe(state); }, () => state);
+          return state;
+        },
+      };
     };
+    const spend = (seed) => bootStore(seed).settle();
+
+    beforeEach(() => { try { globalThis.sessionStorage?.clear(); } catch { /* jsdom only */ } });
 
     test('a RETURNING signed-in boot drops the stranger draft; an anonymous boot keeps it', () => {
-      const dropped = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' } });
+      const dropped = spend({
+        settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' },
+        systemState: { resilience: 1 }, eventLog: [{ id: 'e1' }], draftVersionHistory: [{ id: 'v1' }],
+      });
       expect(dropped.settlement).toBeNull();
       expect(dropped.lastSeed).toBeNull();
       expect(dropped.restoredAnonDraft).toBe(false);
+      // THE DROP IS A CLEAR, NOT TWO NULLS. Leaving these standing left the
+      // stranger's world reachable around the gate — revertToVersion would have
+      // restored it from draftVersionHistory.
+      expect(dropped.systemState).toBeNull();
+      expect(dropped.eventLog).toEqual([]);
+      expect(dropped.draftVersionHistory).toEqual([]);
 
       const kept = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'anon' } });
       expect(kept.settlement).toBe(draft);
@@ -1286,17 +1323,37 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     test('signing in BEFORE the session resolves keeps the draft that was signed in for', () => {
       // The live sequence: anon boot adopts the draft, getSession() is still in
       // flight, the visitor submits the sign-in form, THEN initAuth resolves.
-      const adopted = { settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'anon' } };
       // authSignIn/authSignUp retract the claim as they publish the session.
-      const afterSignIn = { ...adopted, restoredAnonDraft: false, auth: { tier: 'free' } };
+      const afterSignIn = { settlement: draft, lastSeed: 's', restoredAnonDraft: false, auth: { tier: 'free' } };
       const afterInitAuth = spend(afterSignIn);
       expect(afterInitAuth.settlement).toBe(draft);
       expect(afterInitAuth.lastSeed).toBe('s');
-      // And the retraction is real code on both paths, not a fixture's invention.
-      const authSrc = readSrc('src/store/authSlice.js');
-      for (const fn of ['authSignUp: async', 'authSignIn: async']) {
-        const body = authSrc.slice(authSrc.indexOf(fn), authSrc.indexOf(fn) + 1800);
-        expect(body, fn).toContain('state.restoredAnonDraft = false;');
+    });
+
+    test('a REDIRECT sign-in door carries the claim across the fresh boot', () => {
+      // OAuth / magic link / the sign-up verification round trip all navigate
+      // away, so no store write can survive them: the door stashes the claim
+      // device-locally and the boot resolution honours it. Google and Discord
+      // ship flag-on, so this is the common path.
+      stashAnonDraftClaim();
+      expect(readAnonDraftClaim()).toBe(true);
+      // The return: a brand-new store that re-adopted the envelope, resolving to
+      // the account they just created.
+      const afterReturn = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' } });
+      expect(afterReturn.settlement).toBe(draft);
+      expect(afterReturn.lastSeed).toBe('s');
+      // The stash is CONSUMED at the resolution, used or not, so it can never
+      // rescue a later adoption inside its TTL.
+      expect(readAnonDraftClaim()).toBe(false);
+      const nextBoot = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' } });
+      expect(nextBoot.settlement).toBeNull();
+    });
+
+    test('a stale or malformed stash rescues nothing', () => {
+      // anchored: the fresh stash in the sibling arm above proves the reader works, so these falses are refusals
+      for (const bad of ['not json', '{}', '{"claimedAt":"soon"}', JSON.stringify({ claimedAt: Date.now() - 31 * 60 * 1000 })]) {
+        globalThis.sessionStorage.setItem('sf:anon_draft_claimed', bad);
+        expect(readAnonDraftClaim(), bad).toBe(false);
       }
     });
 
@@ -1305,39 +1362,38 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // every mutation, so an identity test read one edit as "generated since" and
       // kept a stranger's world for a signed-in account to save. The claim does not
       // care what was done to the world — only whether anyone claimed it.
-      const editedSinceAdoption = { ...draft, name: 'Renamed by whoever sat down' };
       const dropped = spend({
-        settlement: editedSinceAdoption, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' },
+        settlement: { ...draft, name: 'Renamed by whoever sat down' },
+        lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' },
       });
       expect(dropped.settlement).toBeNull();
       expect(dropped.lastSeed).toBeNull();
     });
 
-    test('generating a new world retracts both claims, in the action itself', () => {
-      // A minted world is the visitor's own, so it ends the adopted-draft claim
-      // AND the sign-out bar. One store-level line in the generate action; the
-      // pipeline, its inputs and its output are untouched.
-      const genSrc = readSrc('src/store/settlementGenerateAction.js');
-      const commit = genSrc.slice(genSrc.indexOf('state.settlement = withFaith;'));
-      expect(commit).toContain('state.restoredAnonDraft = false;');
-      expect(commit).toContain('state.signedInWorld = false;');
+    test('ANY settlement swap retracts both claims, at the one chokepoint', () => {
+      // Behavioural, through the real helper: generate, setSettlement,
+      // hydrateFromSave and clearSettlement all route through this, so a
+      // purchased dossier or a restored draft can no longer be nulled by a later
+      // signed-in resolution, and a legitimate anonymous world reached by a
+      // non-generate door is no longer barred from its own storage.
+      const swapped = { restoredAnonDraft: true, signedInWorld: true };
+      resetSettlementIdentity(swapped);
+      expect(swapped.restoredAnonDraft).toBe(false);
+      expect(swapped.signedInWorld).toBe(false);
     });
 
+    // The one claim with no behavioural probe: that the spend is NOT wired to a
+    // generic `auth.loading` edge. An absence in the wiring has nothing to drive.
     test('the spend is wired to initAuth alone, never to a generic loading edge', () => {
       const authSrc = readSrc('src/store/authSlice.js');
-      const indexSrc = readSrc('src/store/index.js');
-      // Exactly one call, and it is inside initAuth — not in authSignIn/authSignUp,
-      // which drive the same `auth.loading` edge from a user's form submit.
-      const calls = authSrc.match(/settleBootAnonDraft\s*\(/g) || [];
-      expect(calls.length).toBe(1);
       const initAuthBody = authSrc.slice(
         authSrc.indexOf('initAuth: async () => {'),
         authSrc.indexOf('authUnsubscribe = authService.onAuthChange('),
       );
-      expect(initAuthBody).toContain('settleBootAnonDraft(set)');
+      expect(initAuthBody).toContain('settleBootAnonDraft(set, get)');
       // The live call inside initAuth is asserted above, so the absent
       // anchored: subscription is wiring that MOVED, not a feature deleted.
-      expect(indexSrc).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
+      expect(readSrc('src/store/index.js')).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
     });
 
     // ⛔ SIGN-OUT. clearAuth sets tier 'anon' and LEAVES the editor's world
@@ -1347,7 +1403,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // for the next anonymous visitor on the device to boot into.
     test("a signed-in account's world never lands in storage after sign-out", () => {
       // The world is still on screen (nothing destroyed) and the tier is now anon
-      // — the exact state clearAuth leaves behind — but it is barred by reference.
+      // — the exact state clearAuth leaves behind — but the CLAIM bars it.
       const afterSignOut = {
         ...currentStub(), auth: { tier: 'anon', user: null }, settlement: draft,
         lastSeed: 'sf-seed-1', signedInWorld: true,

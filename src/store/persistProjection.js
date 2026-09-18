@@ -52,6 +52,14 @@
  * stays on screen and never reaches the envelope, while a world the anonymous
  * visitor generates afterwards retracts the claim and persists normally.
  *
+ * ⚠ THE INVARIANT IS PER-TAB, AND THAT IS THE CONTAINMENT. localStorage is
+ * shared across a device's tabs, so two tabs can hold different ideas of what is
+ * in "the" editor and the last write wins the envelope. What bounds it is that
+ * the READ side is per-tab too: every tab adopts the envelope at its own boot and
+ * settles it at its own initAuth, so a signed-in tab still drops what it adopted.
+ * The worst a second tab can do is stash a draft the first tab would not have —
+ * never hand one to a signed-in session that refuses it.
+ *
  * ⚠ `signedInWorld` is a CLAIM, not a reference to the barred object, for the
  * same reason `restoredAnonDraft` is: under immer any mutation replaces
  * `state.settlement`, so a reference test would miss after a single edit and the

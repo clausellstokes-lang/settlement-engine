@@ -85,5 +85,10 @@ export function mergePersistedState(persistedState, currentState) {
     settlement:        anonDraft ? anonDraft.settlement : (current.settlement ?? null),
     lastSeed:          anonDraft ? anonDraft.lastSeed : (current.lastSeed ?? null),
     restoredAnonDraft: !!anonDraft,
+    // Written beside its sibling for the same reason: both are SESSION claims, so
+    // a blob that carries either — a hand-edited one, or a stale one from a build
+    // that persisted them — must not smuggle it past the spread. A fresh boot has
+    // signed out of nothing.
+    signedInWorld:     false,
   };
 }

@@ -26,7 +26,7 @@ import { activateOutboxOwner } from './outbox.js';
 import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
 // The READ half of the anonymous-draft gate. A leaf, so importing it here cannot
 // close a cycle back through store/index.js.
-import { settleBootAnonDraft } from './anonDraftGate.js';
+import { settleBootAnonDraft, stashAnonDraftClaim } from './anonDraftGate.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
@@ -216,11 +216,15 @@ export const createAuthSlice = (set, get) => ({
       // this device's localStorage, and the next anonymous visitor would boot into
       // it. So the world stays on screen and is BARRED from the envelope by a
       // CLAIM — not by a reference to the object, which immer replaces on every
-      // mutation, so one edit would make the bar fail OPEN. Only the generate
-      // action retracts it, because only a new world is genuinely not theirs.
-      // Guarded on a real user so initAuth's no-session branch, which also lands
-      // here at boot, cannot bar a legitimately restored anonymous draft.
-      if (state.auth?.user) state.signedInWorld = !!state.settlement;
+      // mutation, so one edit would make the bar fail OPEN. It is raised
+      // UNCONDITIONALLY rather than off `!!state.settlement`: that was a SNAPSHOT
+      // of one instant, and a world arriving after sign-out through a restore or
+      // a purchased-dossier hand-off would have walked straight past it. The bar
+      // is retracted at the settlement-swap chokepoint (resetSettlementIdentity),
+      // which every real new-world door routes through. Guarded on a real user so
+      // initAuth's no-session branch, which also lands here at boot, cannot bar a
+      // legitimately restored anonymous draft.
+      if (state.auth?.user) state.signedInWorld = true;
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
@@ -353,8 +357,12 @@ export const createAuthSlice = (set, get) => ({
     // subscription on `auth.loading` because authSignIn and authSignUp drive that
     // same edge: on a slow getSession(), a visitor who signed in first would have
     // had the draft they just signed in to keep dropped underneath them.
-    // Idempotent — initAuth is HMR/remount-safe and the marker is spent once.
-    settleBootAnonDraft(set);
+    // Idempotent — initAuth is HMR/remount-safe and the claim is spent once. It
+    // takes `get` as well as `set` because the drop goes through the
+    // clearSettlement ACTION: a settlement is not only `settlement` + `lastSeed`,
+    // and nulling that pair left the stranger's systemState, event log and draft
+    // version history reachable around the gate.
+    settleBootAnonDraft(set, get);
 
     // Listen for auth state changes (token refresh, sign out from another tab).
     // initAuth can run more than once under HMR/remounts, so keep exactly one
@@ -496,6 +504,10 @@ export const createAuthSlice = (set, get) => ({
         });
         activateOutboxOwner(result.user?.id);
       } else {
+        // No session yet: the account needs email verification, and that round
+        // trip leaves the page exactly as a redirect door does. Stash the claim
+        // so the draft they signed up to keep survives the return.
+        if (get().restoredAnonDraft) stashAnonDraftClaim();
         set(state => { state.auth.loading = false; });
       }
       return { needsVerification: result.needsVerification, existingAccount: result.existingAccount };
@@ -639,6 +651,12 @@ export const createAuthSlice = (set, get) => ({
    * follow-up call needed here.
    */
   authMagicLink: async (email) => {
+    // A DOOR THAT NAVIGATES AWAY CANNOT RETRACT THE CLAIM IN STATE. The return is
+    // a fresh boot that re-adopts the envelope, so the claim is stashed
+    // device-locally first (anonDraftGate.js) and honoured at the next boot
+    // resolution. Guarded on a STANDING claim: an unconditional stash would
+    // protect a later boot's stranger draft for the whole TTL.
+    if (get().restoredAnonDraft) stashAnonDraftClaim();
     try {
       const result = await authService.signInWithMagicLink(email);
       return result;  // { sentTo: email }
@@ -657,6 +675,12 @@ export const createAuthSlice = (set, get) => ({
    * @param {'google' | 'discord' | 'github'} provider
    */
   authOAuth: async (provider) => {
+    // A DOOR THAT NAVIGATES AWAY CANNOT RETRACT THE CLAIM IN STATE. The return is
+    // a fresh boot that re-adopts the envelope, so the claim is stashed
+    // device-locally first (anonDraftGate.js) and honoured at the next boot
+    // resolution. Guarded on a STANDING claim: an unconditional stash would
+    // protect a later boot's stranger draft for the whole TTL.
+    if (get().restoredAnonDraft) stashAnonDraftClaim();
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
       const result = /** @type {any} */ (await authService.signInWithOAuth(provider));

@@ -251,6 +251,18 @@ export function resetSettlementIdentity(state, { preservePendingEdits = false } 
   state.pendingSuccession     = null;
   state.canonEventCommandFence = null;
   state.draftVersionHistory   = [];
+  // THE TWO PERSISTENCE CLAIMS ABOUT WHAT IS IN THE EDITOR (2026-09-18). Both
+  // describe the world standing here, so an active-settlement SWAP retracts
+  // them — and this is the one chokepoint every swap routes through (generate,
+  // setSettlement, hydrateFromSave, clearSettlement), which is why they are
+  // retracted here rather than at any single door. Retracting only in the
+  // generate action left four writers that replace the editor without it: the
+  // Stripe-restore and purchased-dossier hand-offs, the wizard's draft restore
+  // and the Library's load. A purchased artifact would have been nulled by a
+  // later signed-in boot resolution, and a legitimate anonymous world reached by
+  // any non-generate door would have stayed barred from its own storage.
+  state.restoredAnonDraft     = false;
+  state.signedInWorld         = false;
   // The generation-id spine is per-generation identity: a loaded/new settlement
   // must never inherit the prior generation's id (a save re-derives its own from
   // seed + generatedAt; a fresh generate mints one after the pipeline).
