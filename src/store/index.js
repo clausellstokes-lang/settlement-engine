@@ -83,7 +83,7 @@ import { saves as savesService }    from '../lib/saves.js';
  * identical to the default `createJSONStorage(() => localStorage)` in every case
  * where localStorage works.
  */
-const resilientLocalStorage = {
+export const resilientLocalStorage = {
   getItem: (name) => {
     try { return globalThis.localStorage?.getItem(name) ?? null; } catch { return null; }
   },
@@ -169,6 +169,49 @@ export const useStore = create(
     ),
     { name: 'SettlementForge' },
   ),
+);
+
+/**
+ * THE SECOND HALF OF THE ANONYMOUS-DRAFT GATE (2026-09-18).
+ *
+ * The blob can say, truthfully, "an anonymous session wrote this draft"; it
+ * cannot say who is booting. Rehydrate is synchronous and Supabase's session
+ * resolves a moment later, so a returning SIGNED-IN user would otherwise boot
+ * with a previous anonymous session's world in the editor and be able to save
+ * one they never generated. This spends the marker at the FIRST auth resolution
+ * — the one `initAuth` always reaches, on every branch — and drops the adopted
+ * draft when that resolution is a signed-in tier.
+ *
+ * TWO THINGS IT DELIBERATELY DOES NOT DO. It does not fire on a LATER sign-in:
+ * the marker is spent once, so an anonymous visitor who signs in mid-session to
+ * keep their work keeps it. And it never drops a world generated since boot —
+ * the identity check is by REFERENCE, and a generation replaces the object.
+ *
+ * @param {{ auth?: { tier?: string }, settlement?: any, restoredAnonDraft?: any }} state
+ * @returns {{ drop: boolean }} whether the adopted draft must be dropped
+ */
+export function resolveBootAnonDraft(state) {
+  const adopted = state?.restoredAnonDraft;
+  if (!adopted) return { drop: false };
+  // Reference identity, not deep equality: only the very object this reload
+  // adopted may be dropped.
+  if (state.settlement !== adopted) return { drop: false };
+  return { drop: state?.auth?.tier !== 'anon' };
+}
+
+const stopBootAnonDraftGuard = useStore.subscribe(
+  (s) => s.auth?.loading,
+  (loading) => {
+    if (loading !== false) return;
+    stopBootAnonDraftGuard();
+    useStore.setState((state) => {
+      if (resolveBootAnonDraft(state).drop) {
+        state.settlement = null;
+        state.lastSeed = null;
+      }
+      state.restoredAnonDraft = null;
+    });
+  },
 );
 
 // Wire the dependencyEngine to read customContent from this store.

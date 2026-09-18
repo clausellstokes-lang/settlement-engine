@@ -157,7 +157,17 @@ export {
 
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  settlement:    null,   // current generated settlement object
+  // `settlement` is the current generated settlement object.
+  //
+  // `restoredAnonDraft` is SESSION-ONLY: the settlement this reload adopted from
+  // a persisted ANONYMOUS draft, held BY REFERENCE (persistMerge.js sets it;
+  // store/index.js spends it at the boot auth resolution and it is never set
+  // again). It exists because a rehydrate finishes before Supabase resolves the
+  // session: the draft has to be adoptable immediately and droppable a moment
+  // later if the session turns out to be signed in. Never persisted — the
+  // partialize is an allowlist. (It shares this line because the file sits at its
+  // frozen max-lines ceiling; the comment, not the packing, is the explanation.)
+  settlement:    null, restoredAnonDraft: null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,

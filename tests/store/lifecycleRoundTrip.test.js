@@ -139,9 +139,9 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Persisted as an
   // additive top-level key (persistProjection.js), absent-tolerant on rehydrate.
   'advanceAutoResolve',
-  // THE ANONYMOUS DRAFT (2026-09-18), with its written reason per the header's
-  // rule 3 — and it is the one entry here that IS a generated world, so the
-  // reason is longer than its neighbours'.
+  // THE ANONYMOUS DRAFT (2026-09-18), as ONE ENVELOPE, with its written reason
+  // per the header's rule 3 — and it is the one entry here that IS a generated
+  // world, so the reason is longer than its neighbours'.
   //
   // It is NOT a family moved out of SESSION_ONLY_FAMILIES: `settlement` was
   // never registered there. It was an unpersisted slice default, and the defect
@@ -155,13 +155,21 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   // cannot reach the generator as input; it is written WHOLE rather than
   // projected, so a restored draft is byte-identical to the generated one and a
   // save after a reload writes exactly what a save before it would; and its
-  // ABSENCE in an older blob rehydrates to the slice's `null` through the
-  // top-level spread, the same cohort-fork safety advanceAutoResolve gets.
-  // Measured before it was written: a TOWN at 4,000 population is 141,607–192,830 B.
+  // ABSENCE in an older blob rehydrates to the slice's `null`, the same
+  // cohort-fork safety advanceAutoResolve gets. Measured before it was written:
+  // a TOWN at 4,000 population is 141,607–192,830 B.
   //
-  // `lastSeed` rides with it because a draft without the seed it was drawn from
-  // is a world whose provenance the reload silently dropped.
-  'settlement', 'lastSeed',
+  // ⛔ IT IS ONE KEY BECAUSE TWO WERE A BUG. The first cut wrote `settlement` and
+  // `lastSeed` as top-level keys gated on the tier at WRITE time, while the READ
+  // restored them by top-level spread — and rehydrate finishes before Supabase
+  // resolves the session, so a returning SIGNED-IN user booted with a previous
+  // anonymous session's draft and could save a world they never generated. The
+  // envelope's PRESENCE is now the claim, so marker and payload cannot separate;
+  // `lastSeed` rides inside it because a draft without the seed it was drawn from
+  // is a world whose provenance the reload silently dropped. The other half of
+  // the gate — an anonymous BLOB under a signed-in SESSION — is spent at the boot
+  // auth resolution (store/index.js resolveBootAnonDraft).
+  'anonDraft',
 ]);
 
 /**
@@ -277,6 +285,7 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   pendingEditReceipts: 'session-only idempotency/correlation receipts; authoritative receipts live in snapshots and event logs',
   pulseUndoStack: 'session-scoped pulse undo stack — a reload clears it (src/store/campaignWorldPulseSlice.js)',
   proposalUndoStack: 'session-scoped proposal-apply undo ring, separate from pulseUndoStack by construction — a reload clears it (src/store/campaignWorldPulseSlice.js)',
+  restoredAnonDraft: 'the settlement THIS reload adopted from a persisted anonymous draft, held by reference so the boot auth resolution can drop it if the session turns out to be signed in; it is a one-reload marker and persisting it would re-arm a gate that has already been spent (src/store/settlementSlice.js)',
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1074,6 +1083,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // The anonymous draft's slice defaults (settlementSlice).
     settlement: null,
     lastSeed: null,
+    restoredAnonDraft: null,
     someSliceMethod: () => {},
   });
 
@@ -1094,12 +1104,11 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // `instantKnobPins` — a current-shape blob carries it whole.
       displayPrefs: { realmMagicChoice: 'yes', instantKnobPins: { realmSize: false, tone: false, mapKind: false } },
       advanceAutoResolve: true,
-      // The anonymous-draft keys are UNCONDITIONAL in the projection — always
-      // present, null when they do not apply — so a current-shape blob carries
-      // them even for a signed-in cohort. That is the point: the persisted SHAPE
-      // never forks by tier, only its values do.
-      settlement: null,
-      lastSeed: null,
+      // The anonymous-draft envelope is UNCONDITIONAL in the projection — always
+      // present, null when there is no draft to keep — so a current-shape blob
+      // carries it even for a signed-in cohort. That is the point: the persisted
+      // SHAPE never forks by tier, only its value does.
+      anonDraft: null,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
     const rePartialized = Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, merged[k]]));
@@ -1112,7 +1121,12 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   // one cohort that has no library; the point of it being safe is that it is
   // scoped to that cohort and that a blob written before it existed is
   // indistinguishable from a fresh install.
-  describe('the anonymous draft', () => {
+  describe('the anonymous draft', async () => {
+    // The second half of the gate + the non-fatal persist door. Imported here
+    // rather than at the top of the file so the real store (and its boot-time
+    // wiring) is constructed only for the arms that actually need it.
+    const { resolveBootAnonDraft, resilientLocalStorage } = await import('../../src/store/index.js');
+
     // A stand-in world: what matters to the projection is that the WHOLE object
     // makes the round trip, not what is inside it.
     const draft = Object.freeze({
@@ -1125,30 +1139,36 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       const projected = partializeOf({
         ...currentStub(), auth: { tier: 'anon' }, settlement: draft, lastSeed: 'sf-seed-1',
       });
-      expectByteEqual(projected.settlement, draft);
-      expect(projected.lastSeed).toBe('sf-seed-1');
+      expectByteEqual(projected.anonDraft, { settlement: draft, lastSeed: 'sf-seed-1' });
 
       const merged = mergePersistedState(JSON.parse(JSON.stringify(projected)), currentStub());
       // Byte-identical, not merely deep-equal: a save taken after a reload must
       // write exactly what a save taken before it would have written.
       expectByteEqual(merged.settlement, draft);
       expect(merged.lastSeed).toBe('sf-seed-1');
+      // The envelope is a transport: the merge spends it into the one-reload
+      // marker the boot auth resolution reads, BY REFERENCE.
+      expect(merged.restoredAnonDraft).toBe(merged.settlement);
     });
 
     // A plain loop, not test.each: the each-family park debt is a frozen,
     // shrink-only ceiling in the lighting contract and a new `each` call raises
     // it (tests/lint/sovereigntyLightingContract.walker).
-    test('no signed-in tier persists its draft, and the KEYS are still there', () => {
+    test('no signed-in tier persists its draft, and the KEY is still there', () => {
       for (const tier of ['free', 'premium', undefined]) {
         const label = tier || 'a viewer with no auth record';
         const projected = partializeOf({
           ...currentStub(), auth: tier ? { tier } : undefined, settlement: draft, lastSeed: 'sf-seed-1',
         });
-        // The KEYS are still there (the shape never forks); the values are not.
-        expect(Object.hasOwn(projected, 'settlement'), label).toBe(true);
-        expect(projected.settlement, label).toBeNull();
-        expect(projected.lastSeed, label).toBeNull();
+        // The KEY is still there (the shape never forks); the value is not.
+        expect(Object.hasOwn(projected, 'anonDraft'), label).toBe(true);
+        expect(projected.anonDraft, label).toBeNull();
       }
+    });
+
+    test('an anonymous session with no draft writes a null envelope, not an empty one', () => {
+      const projected = partializeOf({ ...currentStub(), auth: { tier: 'anon' }, settlement: null });
+      expect(projected.anonDraft).toBeNull();
     });
 
     test('a blob written BEFORE the draft was persisted rehydrates to the slice default', () => {
@@ -1160,10 +1180,94 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         advanceAutoResolve: false,
       };
       // anchored: the sibling key proves the blob really is the pre-draft shape
-      expect(Object.hasOwn(legacy, 'settlement')).toBe(false);
+      expect(Object.hasOwn(legacy, 'anonDraft')).toBe(false);
       const merged = mergePersistedState(legacy, currentStub());
       expect(merged.settlement).toBeNull();
       expect(merged.lastSeed).toBeNull();
+      expect(merged.restoredAnonDraft).toBeNull();
+    });
+
+    // ⛔ THE GATE HAS TWO HALVES AND THIS IS THE ONE THAT WAS MISSING. A WRITE
+    // gate with no READ gate is not a gate: the blob can say truthfully that an
+    // anonymous session wrote the draft, but it cannot say who is booting, and
+    // rehydrate finishes before Supabase resolves the session.
+    test('a stale, half-migrated or hand-edited marker is treated as NOT anonymous', () => {
+      // Every shape that is not a genuine envelope. `{}` is the stale case the
+      // first cut would have adopted; `true` and the string are what a
+      // half-migrated or hand-edited blob looks like; a top-level `settlement`
+      // is the pre-envelope shape trying to smuggle itself past the check.
+      const notEnvelopes = [
+        ['absent', {}],
+        ['null', { anonDraft: null }],
+        ['a bare true', { anonDraft: true }],
+        ['a string', { anonDraft: 'yes' }],
+        ['an empty object', { anonDraft: {} }],
+        ['an array', { anonDraft: [{ settlement: draft }] }],
+        ['an envelope with no settlement', { anonDraft: { lastSeed: 'sf-seed-1' } }],
+        ['a pre-envelope top-level settlement', { settlement: draft, lastSeed: 'sf-seed-1' }],
+      ];
+      for (const [label, blob] of notEnvelopes) {
+        const merged = mergePersistedState({ ...blob }, currentStub());
+        expect(merged.settlement, label).toBeNull();
+        expect(merged.lastSeed, label).toBeNull();
+        expect(merged.restoredAnonDraft, label).toBeNull();
+      }
+    });
+
+    test('an anonymous blob under a SIGNED-IN boot is not adopted; under an anonymous boot it is', () => {
+      const adopted = mergePersistedState(
+        JSON.parse(JSON.stringify(partializeOf({
+          ...currentStub(), auth: { tier: 'anon' }, settlement: draft, lastSeed: 'sf-seed-1',
+        }))),
+        currentStub(),
+      );
+      // The reload adopts it either way — it has to, the session is not known yet.
+      expect(adopted.settlement).toBeTruthy();
+
+      // …and the boot auth resolution is where the second half of the gate lands.
+      for (const tier of ['free', 'premium']) {
+        expect(resolveBootAnonDraft({ ...adopted, auth: { tier } }).drop, tier).toBe(true);
+      }
+      expect(resolveBootAnonDraft({ ...adopted, auth: { tier: 'anon' } }).drop).toBe(false);
+    });
+
+    test('the boot resolution never drops a world generated since the reload', () => {
+      const adopted = mergePersistedState(
+        JSON.parse(JSON.stringify(partializeOf({
+          ...currentStub(), auth: { tier: 'anon' }, settlement: draft, lastSeed: 'sf-seed-1',
+        }))),
+        currentStub(),
+      );
+      // A fresh generation replaces the object, so the identity check misses and
+      // the world stays — even for a signed-in tier. Reference, not deep equality.
+      const generatedSince = { ...draft };
+      expect(resolveBootAnonDraft({
+        ...adopted, settlement: generatedSince, auth: { tier: 'premium' },
+      }).drop).toBe(false);
+      // And with no marker at all there is nothing to drop.
+      expect(resolveBootAnonDraft({
+        settlement: draft, restoredAnonDraft: null, auth: { tier: 'premium' },
+      }).drop).toBe(false);
+    });
+
+    test('a quota error on the persist write is swallowed, never thrown at the caller', () => {
+      const realSetItem = globalThis.localStorage.setItem;
+      const quota = Object.assign(new Error('QuotaExceededError'), { name: 'QuotaExceededError' });
+      globalThis.localStorage.setItem = () => { throw quota; };
+      try {
+        // The whole point: a full or blocked device degrades to "this device does
+        // not remember", never to a throw out of the store's own `set` — which is
+        // where zustand's persist calls setItem, i.e. inside generation.
+        expect(() => resilientLocalStorage.setItem('settlementforge', '{}')).not.toThrow();
+      } finally {
+        globalThis.localStorage.setItem = realSetItem;
+      }
+      // anchored: the same wrapper writes and reads back normally once the device works again
+      globalThis.localStorage.removeItem('sf-probe');
+      resilientLocalStorage.setItem('sf-probe', 'kept');
+      expect(resilientLocalStorage.getItem('sf-probe')).toBe('kept');
+      resilientLocalStorage.removeItem('sf-probe');
+      expect(resilientLocalStorage.getItem('sf-probe')).toBeNull();
     });
   });
 

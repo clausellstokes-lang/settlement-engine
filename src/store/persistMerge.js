@@ -25,9 +25,35 @@ import {
   normalizeUserContentTunableIntent,
 } from '../domain/content/userContentTunableIntent.js';
 
+/**
+ * The persisted anonymous draft, or null when the blob does not carry a genuine
+ * one. FAIL CLOSED: only a plain object with a truthy `settlement` counts. An
+ * absent key (a blob written before the draft existed), a bare `true` or a
+ * string (a hand-edited or half-migrated blob), an empty `{}` (a stale envelope
+ * whose payload was dropped) and an array all read as NOT ANONYMOUS, so the
+ * draft is not adopted rather than adopted on a guess.
+ *
+ * @param {unknown} envelope the blob's `anonDraft` value
+ * @returns {{ settlement: any, lastSeed: any }|null}
+ */
+export function readAnonDraft(envelope) {
+  if (!envelope || typeof envelope !== 'object' || Array.isArray(envelope)) return null;
+  const draft = /** @type {Record<string, any>} */ (envelope);
+  if (!draft.settlement) return null;
+  return { settlement: draft.settlement, lastSeed: draft.lastSeed ?? null };
+}
+
 export function mergePersistedState(persistedState, currentState) {
   const persisted = /** @type {Record<string, any>} */ (persistedState || {});
   const current = /** @type {Record<string, any>} */ (currentState || {});
+  // THE ANONYMOUS DRAFT, LIFTED OUT OF ITS ENVELOPE (2026-09-18). The envelope is
+  // a TRANSPORT and is consumed here: the draft becomes live state, and the
+  // marker is spent so nothing downstream can mistake a stale copy for a fresh
+  // claim. `restoredAnonDraft` holds the restored settlement BY REFERENCE, which
+  // is what lets the boot auth resolution (store/index.js) tell "the draft this
+  // reload adopted" from "a world the visitor generated since" — a fresh
+  // generation replaces the object, so the identity check can never drop it.
+  const anonDraft = readAnonDraft(persisted.anonDraft);
   const configExplicitFields = Object.hasOwn(persisted, 'configExplicitFields')
     ? normalizeUserContentTunableIntent(persisted.configExplicitFields)
     : inferLegacyUserContentTunableIntent(persisted.config);
@@ -53,5 +79,11 @@ export function mergePersistedState(persistedState, currentState) {
     // before the bag itself existed — backfills to the shipped default instead of
     // reading undefined at the consumer.
     displayPrefs:       { ...DEFAULT_DISPLAY_PREFS, ...(persisted.displayPrefs || {}) },
+    // Lifted out of the envelope, or the slice defaults when the blob carries no
+    // genuine anonymous draft. Written AFTER the spread so a hand-edited blob
+    // cannot smuggle a top-level `settlement` past the envelope check.
+    settlement:        anonDraft ? anonDraft.settlement : (current.settlement ?? null),
+    lastSeed:          anonDraft ? anonDraft.lastSeed : (current.lastSeed ?? null),
+    restoredAnonDraft: anonDraft ? anonDraft.settlement : null,
   };
 }

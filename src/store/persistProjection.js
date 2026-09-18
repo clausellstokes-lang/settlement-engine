@@ -28,10 +28,20 @@
  * anonymous path — hero, generate, read the dossier — store writes are discrete
  * user actions, and it is the only cohort that gets nothing without it.
  *
- * THE KEYS ARE UNCONDITIONAL, THE VALUES ARE NOT. `settlement` and `lastSeed`
- * are always present in the blob (null when they do not apply) so the persisted
- * SHAPE never forks by tier — a shape that differs between cohorts is the exact
- * class mergePersistedState exists to close.
+ * ⛔ ONE KEY, NOT TWO PLUS A FLAG — AND THE REASON IS A BUG THIS SHAPE CLOSES.
+ * The first cut wrote `settlement` and `lastSeed` as top-level keys, gated on the
+ * tier at WRITE time. The READ had no such gate: mergePersistedState restores by
+ * top-level spread, and rehydrate runs BEFORE Supabase resolves the session, so a
+ * returning SIGNED-IN user booted with a previous anonymous session's draft in
+ * the editor and could save a world they never generated. A gate on one side of a
+ * round trip is not a gate.
+ *
+ * The draft now travels as ONE envelope whose PRESENCE is the claim "an anonymous
+ * session wrote this". Nothing can separate the marker from the payload, because
+ * they are the same value, and the merge refuses anything that is not a genuine
+ * envelope (absent, `true`, a string, a stale `{}`) — see persistMerge.js. The
+ * second half of the gate, for a blob that IS anonymous but a session that turns
+ * out not to be, lives at the boot auth resolution in store/index.js.
  *
  * ⚠ The whole settlement is persisted, not a projection of it. A restored draft
  * must be byte-identical to the one generated, or saving after a reload would
@@ -39,6 +49,12 @@
  * that this codebase has been bitten by before.
  */
 export function partializeStoreState(state) {
+  // Destructured, and the envelope below is built from SHORTHAND, on purpose:
+  // the persist-shape walker (tests/store/lifecycleRoundTrip) discovers this
+  // projection's keys by scanning the return block for `name: state.field`, so an
+  // inline `{ settlement: state.settlement }` inside the envelope would register
+  // as two more TOP-LEVEL persisted keys that do not exist.
+  const { settlement = null, lastSeed = null } = state || {};
   return {
     config: state.config,
     configExplicitFields: state.configExplicitFields,
@@ -50,8 +66,9 @@ export function partializeStoreState(state) {
     displayPrefs: state.displayPrefs,
     // World play-mode preference; additive and absent-tolerant on older blobs.
     advanceAutoResolve: state.advanceAutoResolve,
-    // The anonymous draft (see the header). Null for every signed-in tier.
-    settlement: state.auth?.tier === 'anon' ? (state.settlement ?? null) : null,
-    lastSeed: state.auth?.tier === 'anon' ? (state.lastSeed ?? null) : null,
+    // The anonymous draft, as ONE envelope (see the header). Null — never a bare
+    // settlement, never a lone flag — for every signed-in tier and whenever there
+    // is no draft to keep.
+    anonDraft: state.auth?.tier === 'anon' && settlement ? { settlement, lastSeed } : null,
   };
 }
