@@ -50,14 +50,16 @@ vi.mock('../../src/lib/analytics.js', () => ({
 // other test in this file reads. This mock KEEPS that default (items: []) and lets
 // the real-rows arm below hand the strip three published towns, which is the other
 // half of the rule: three or more real rows and the real rows render.
-const galleryRows = vi.hoisted(() => ({ items: [] }));
+// `gate`, when set, HOLDS the fetch unsettled so the in-flight state can be read.
+const galleryRows = vi.hoisted(() => ({ items: [], gate: null }));
 vi.mock('../../src/lib/gallery.js', () => ({
-  fetchPublicGallery: async () => ({
-    items: galleryRows.items, hasMore: false, total: galleryRows.items.length,
-  }),
+  fetchPublicGallery: async () => {
+    if (galleryRows.gate) await galleryRows.gate;
+    return { items: galleryRows.items, hasMore: false, total: galleryRows.items.length };
+  },
 }));
 
-afterEach(() => { cleanup(); galleryRows.items = []; });
+afterEach(() => { cleanup(); galleryRows.items = []; galleryRows.gate = null; });
 
 function renderLanding(props = {}) {
   return render(
@@ -268,6 +270,31 @@ describe('HomeLanding — scrollable landing', () => {
   // pinned each plate's seed + style + town stamp. Both the plates and the section that
   // showed them are removed, so neither arm has a subject. The realm-map preview plates
   // in the same directory are a DIFFERENT surface and still ship.
+
+  // ⛔ THE LAZY SEAM ONLY PAYS IF NOTHING MOUNTS BEFORE THE FETCH SETTLES. `tiles`
+  // starts null, and treating null as "no rows yet" made the fallback branch true on
+  // the FIRST render: React.lazy mounts, requests its chunk, and every landing visit
+  // paid a second serial round-trip for a strip that real rows were about to replace.
+  // React.lazy imports on MOUNT, so "the strip has not mounted" is "the chunk has not
+  // been requested" — which is what these three absences read, against a positive
+  // control (the reserve) that proves the section rendered at all.
+  test('the fallback chunk is not requested until the gallery fetch settles', async () => {
+    let release;
+    galleryRows.gate = new Promise((resolve) => { release = resolve; });
+    renderLanding();
+    await screen.findByText(landing.commons.h2);
+
+    // In flight: the section holds its own height and mounts nothing.
+    expect(screen.getByTestId('commons-awaiting-gallery')).toBeTruthy();
+    expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
+    expect(screen.queryByText(SAMPLE_SETTLEMENTS[0].name)).toBeNull();
+
+    // Settled (empty) — now, and only now, the curated strip is reached for.
+    release();
+    galleryRows.gate = null;
+    expect(await screen.findByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
+    expect(screen.queryByTestId('commons-awaiting-gallery')).toBeNull();
+  });
 
   test('three or more real published rows: the strip renders the real towns', async () => {
     galleryRows.items = [

@@ -171,12 +171,57 @@ const creamTailFade = (isMobile) => {
 // below it the Founding Worlds trio fills the row honestly.
 const COMMONS_SLOTS = 6;      // owner order 2026-07-21, ledger 4f71743a
 const COMMONS_MIN_REAL = 3;   // below this the curated trio shows instead
-// The strip's own height, reserved while the lazy fallback chunk arrives: one row
-// of real-row cards is the 150px scene box plus the 52px footer row plus the card's
-// two hairline rules. Reserving it means the swap-in moves nothing below it, which
-// is the same zero-layout-shift property the deleted decorative cards used to hold
-// — kept here without holding it by fabricating content.
+// One real-row card: the 150px scene box, the 52px footer row, two hairline rules.
+// This is the REAL-ROW grid's geometry and is used ONLY for the pre-fetch reserve,
+// because the real rows are what the section is designed around and what it shows
+// once the gallery fills.
 const COMMONS_ROW_H = 150 + 52 + 2;
+
+// ⛔ THE FALLBACK'S RESERVE IS THE FALLBACK'S OWN SHAPE, NOT THE ROW GRID'S, AND IT
+// IS NOT A PINNED NUMBER. FoundingWorlds is a <section> at maxWidth 960 with
+// SP.lg/SP.md padding, an h2, a lead-in paragraph and a 3-up grid whose track is
+// `minmax(min(100%, 280px), 1fr)` — so under about 768px it collapses to ONE column
+// and the strip's height roughly triples. Reserving the row grid's 204px was wrong at
+// both widths (a jump on desktop, a far bigger one on a phone), and TWO pinned
+// per-breakpoint numbers would rot the first time the lead-in wraps differently.
+// So the reserve MIRRORS THE STRIP: the same wrapper metrics and, critically, the
+// same grid track, three plate-shaped boxes inside it. The breakpoint behaviour then
+// falls out of the same CSS the real strip uses, at every width, and the only
+// estimate left is one plate's height.
+//
+// MEASURED IN CHROMIUM on the strip's own page (/create), both widths pinned by the
+// review: at 1440 the section is 296 tall, head block 19, lead-in 18 (one line),
+// grid 211 in THREE columns with every plate at 211; at 375 the section is 796,
+// head 19, lead-in 54 (three lines), grid 675 in ONE column with plates 223/206/223.
+// The column count is the dominant term and the mirrored track reproduces it exactly
+// at every width. The plate figure below is the measured pair's midpoint, which
+// costs about 5px at 1440 and about 3px at 375.
+// ⚠ ONE RESIDUAL, STATED RATHER THAN HIDDEN: the lead-in is the one element that
+// REFLOWS with width (one line at 1440, three at 375) and the reserve cannot follow
+// it without carrying a second copy of that sentence into this chunk — the very
+// duplication the lazy seam exists to avoid. So the reserve is exact at desktop and
+// about 39px short on a 375 phone, against a 796px section. The defect this replaces
+// reserved 204px at both: about 92px out at 1440 and about 592px out at 375.
+const SAMPLE_PLATE_H = 216;  // measured 211 at 1440, 206-223 at 375
+const SAMPLE_LEAD_H = 18;    // the lead-in at FS.sm / 1.5, one line at desktop
+const SAMPLE_HEAD_H = 19;    // the h2 block at FS.lg
+
+/** The curated strip's own footprint, held while its chunk is in flight. */
+function FoundingWorldsReserve() {
+  return (
+    <div aria-hidden="true" style={{
+      maxWidth: 960, margin: '0 auto', width: '100%', padding: `${SP.lg}px ${SP.md}px`,
+    }}>
+      <div style={{ height: SAMPLE_HEAD_H, marginBottom: SP.xs }} />
+      <div style={{ height: SAMPLE_LEAD_H, marginBottom: SP.md }} />
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: SP.md,
+      }}>
+        {[0, 1, 2].map((i) => <div key={i} style={{ minHeight: SAMPLE_PLATE_H }} />)}
+      </div>
+    </div>
+  );
+}
 
 // A real row without its own gallery image keeps the strip's painted-scene box
 // (same height, zero layout shift). The scene is DERIVED from the row's own
@@ -184,7 +229,7 @@ const COMMONS_ROW_H = 150 + 52 + 2;
 const SCENE_FOR_TIER = { thorp: 'thorpe', hamlet: 'thorpe', village: 'village', town: 'village', city: 'city', metropolis: 'city', capital: 'city' };
 
 function GalleryCards({ onNavigate }) {
-  const [tiles, setTiles] = useState(null); // null = not landed yet
+  const [tiles, setTiles] = useState(null); // null = the fetch has not settled yet
   useEffect(() => {
     let live = true;
     fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
@@ -193,13 +238,25 @@ function GalleryCards({ onNavigate }) {
     return () => { live = false; };
   }, []);
 
-  const real = (tiles || []).slice(0, COMMONS_SLOTS);
-  // Not landed yet, unreachable, or a gallery too thin to fill a row: the
-  // curated trio. It carries its own heading and lead-in (the Create page's), and
-  // it arrives on its own chunk behind a height-reserving boundary.
+  // ⛔ NOTHING IS DECIDED UNTIL THE FETCH SETTLES, AND THAT IS THE WHOLE POINT OF
+  // THE LAZY SEAM. `tiles` starts null, so treating null as "no rows yet" made
+  // `real.length < COMMONS_MIN_REAL` true on the FIRST render: the lazy element
+  // mounted immediately, React requested the chunk, and every landing visit paid a
+  // second serial round-trip for a strip that was about to be replaced by real rows.
+  // The lazy import then bought nothing at all. While the fetch is in flight the
+  // section holds its own row height and mounts NOTHING, so the chunk is requested
+  // only in the state that actually renders it.
+  if (tiles === null) {
+    return <div data-testid="commons-awaiting-gallery" aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />;
+  }
+
+  const real = tiles.slice(0, COMMONS_SLOTS);
+  // Unreachable, empty, or a gallery too thin to fill a row: the curated trio. It
+  // carries its own heading and lead-in (the Create page's), and it arrives on its
+  // own chunk behind a boundary that reserves the strip's own footprint.
   if (real.length < COMMONS_MIN_REAL) {
     return (
-      <Suspense fallback={<div aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />}>
+      <Suspense fallback={<FoundingWorldsReserve />}>
         <FoundingWorlds onNavigate={onNavigate} />
       </Suspense>
     );
