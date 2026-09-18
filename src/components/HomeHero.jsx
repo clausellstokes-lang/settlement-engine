@@ -404,7 +404,15 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
                 color: INK, lineHeight: 1.4,
               }}>
-                <b>Sign in (free)</b> to unlock thorp through metropolis and
+                {/* ⛔ THE SIZES SIGNING IN ADDS, NOT THE ONES ALREADY SPENT.
+                    TIER_GATE.anon.maxTier is 'town' (store/authSlice.js), so this
+                    reader has already had thorp through town — the spent line
+                    directly above says so in the same breath ("You've explored
+                    hamlet, village, town."). "unlock thorp through metropolis" sold
+                    three of them back. The registry twin (hero.anonCap.unlockTpl)
+                    was corrected on 2026-09-18; this is the sentence that actually
+                    renders, and it now agrees with it. */}
+                <b>Sign in (free)</b> to unlock city and metropolis and
                 save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
                 PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
               </div>

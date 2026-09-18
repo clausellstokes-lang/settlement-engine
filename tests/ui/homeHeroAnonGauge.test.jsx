@@ -36,7 +36,10 @@ vi.mock('../../src/components/AnonTierTeaser.jsx', () => ({ default: () => null 
 // (vi.hoisted, because the factory runs before the module body's consts).
 const anonLeft = vi.hoisted(() => ({ full: 1, reroll: 2 }));
 vi.mock('../../src/lib/anonGenCounter.js', () => ({
-  anonAtCap: () => false,
+  // At cap is DERIVED from the same two buckets, exactly as the real module
+  // derives it (both spent), so the at-cap arm below cannot disagree with the
+  // counting arms above about what state the reader is in.
+  anonAtCap: () => anonLeft.full === 0 && anonLeft.reroll === 0,
   anonFullRemaining: () => anonLeft.full,
   anonRerollRemaining: () => anonLeft.reroll,
 }));
@@ -123,5 +126,21 @@ describe('HomeHero — the free-today line tells the truth about the two buckets
     renderAnon();
     expect(screen.getByText(`(${t('hero.v2.sublineRerolls', { rerolls: 2 })})`)).toBeTruthy();
     expect(screen.queryByText(/free settlement today/)).toBeNull();
+  });
+
+  // ⛔ BOTH BUCKETS SPENT: the at-cap unlock block renders, and it named the sizes
+  // the reader had ALREADY SPENT. TIER_GATE.anon.maxTier is 'town', and the spent
+  // line directly above it says "You've explored hamlet, village, town" — so
+  // "unlock thorp through metropolis" sold three of them back. This is the sentence
+  // that actually renders; the registry twin (hero.anonCap.unlockTpl) is unrendered.
+  it('at cap, the unlock names the sizes signing in ADDS', () => {
+    anonLeft.full = 0;
+    anonLeft.reroll = 0;
+    const { container } = renderAnon();
+    const text = container.textContent;
+    expect(text, 'the at-cap block did not render').toContain(t('hero.anonCap.spent'));
+    expect(text).toMatch(/to unlock city and metropolis and\s*save up to/);
+    // anchored: the spent line and the unlock sentence are both asserted PRESENT on this same render above, so a block that failed to render reds there first
+    expect(text).not.toMatch(/thorp through metropolis/);
   });
 });
