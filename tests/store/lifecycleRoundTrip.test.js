@@ -55,7 +55,7 @@
  *
  * @enforced-by this test
  */
-import { describe, test, expect, beforeEach, vi } from 'vitest';
+import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { create } from 'zustand';
@@ -1300,23 +1300,32 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // node has neither web storage, so the storage-backed arms install their own
     // shim rather than depend on an ambient one. That also makes them honest about
     // what they prove: the module's contract, not the host's storage.
-    const installStorage = (name) => {
-      const backing = new Map();
+    const installStorage = (name, store) => {
       const previous = Object.getOwnPropertyDescriptor(globalThis, name);
-      Object.defineProperty(globalThis, name, {
-        configurable: true,
-        value: {
-          getItem: (k) => (backing.has(k) ? backing.get(k) : null),
-          setItem: (k, v) => { backing.set(k, String(v)); },
-          removeItem: (k) => { backing.delete(k); },
-          clear: () => backing.clear(),
-        },
-      });
+      if (store === null) delete globalThis[name];
+      else {
+        const backing = new Map();
+        Object.defineProperty(globalThis, name, {
+          configurable: true,
+          value: {
+            getItem: (k) => (backing.has(k) ? backing.get(k) : null),
+            setItem: (k, v) => { backing.set(k, String(v)); },
+            removeItem: (k) => { backing.delete(k); },
+            clear: () => backing.clear(),
+          },
+        });
+      }
       return () => {
         if (previous) Object.defineProperty(globalThis, name, previous);
         else delete globalThis[name];
       };
     };
+    // EVERY arm starts from a known-EMPTY sessionStorage, whichever way the host
+    // jumps: this suite runs in the node environment today, and an arm that reads
+    // "no claim" off an absent store proves nothing about a refusal.
+    let restoreSessionStorage = () => {};
+    beforeEach(() => { restoreSessionStorage = installStorage('sessionStorage'); });
+    afterEach(() => { restoreSessionStorage(); });
 
     test('a RETURNING signed-in boot drops the stranger draft; an anonymous boot keeps it', () => {
       const dropped = spend({
@@ -1355,8 +1364,6 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // away, so no store write can survive them: the door stashes the claim
       // device-locally and the boot resolution honours it. Google and Discord
       // ship flag-on, so this is the common path.
-      const restore = installStorage('sessionStorage');
-      try {
       stashAnonDraftClaim();
       expect(readAnonDraftClaim()).toBe(true);
       // The return: a brand-new store that re-adopted the envelope, resolving to
@@ -1369,29 +1376,30 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(readAnonDraftClaim()).toBe(false);
       const nextBoot = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' } });
       expect(nextBoot.settlement).toBeNull();
-      } finally { restore(); }
     });
 
     test('with no sessionStorage at all the gate still closes, it does not throw', () => {
       // A locked-down browser loses the rescue, never the boot: every access is
       // wrapped, so the claim simply reads false and the stranger draft drops.
-      expect(() => stashAnonDraftClaim()).not.toThrow();
-      expect(readAnonDraftClaim()).toBe(false);
-      expect(spend({ settlement: draft, restoredAnonDraft: true, auth: { tier: 'free' } }).settlement).toBeNull();
+      // The absence is INSTALLED, not assumed off the host.
+      const restore = installStorage('sessionStorage', null);
+      try {
+        expect(globalThis.sessionStorage).toBeUndefined();
+        expect(() => stashAnonDraftClaim()).not.toThrow();
+        expect(readAnonDraftClaim()).toBe(false);
+        expect(spend({ settlement: draft, restoredAnonDraft: true, auth: { tier: 'free' } }).settlement).toBeNull();
+      } finally { restore(); }
     });
 
     test('a stale or malformed stash rescues nothing', () => {
-      const restore = installStorage('sessionStorage');
-      try {
-        // A fresh stash reads true (the reader works), so every false below is a
-        // refusal rather than an absent store.
-        stashAnonDraftClaim();
-        expect(readAnonDraftClaim()).toBe(true);
-        for (const bad of ['not json', '{}', '{"claimedAt":"soon"}', JSON.stringify({ claimedAt: Date.now() - 31 * 60 * 1000 })]) {
-          globalThis.sessionStorage.setItem('sf:anon_draft_claimed', bad);
-          expect(readAnonDraftClaim(), bad).toBe(false);
-        }
-      } finally { restore(); }
+      // A fresh stash reads true (the reader works), so every false below is a
+      // refusal rather than an absent store.
+      stashAnonDraftClaim();
+      expect(readAnonDraftClaim()).toBe(true);
+      for (const bad of ['not json', '{}', '{"claimedAt":"soon"}', JSON.stringify({ claimedAt: Date.now() - 31 * 60 * 1000 })]) {
+        globalThis.sessionStorage.setItem('sf:anon_draft_claimed', bad);
+        expect(readAnonDraftClaim(), bad).toBe(false);
+      }
     });
 
     test('an in-place edit before the session resolves does NOT rescue a stranger draft', () => {
@@ -1469,7 +1477,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     });
 
     test('a quota error on the persist write is swallowed, never thrown at the caller', () => {
-      const restore = installStorage('localStorage');
+      const restoreLocal = installStorage('localStorage');
       const realSetItem = globalThis.localStorage.setItem;
       const quota = Object.assign(new Error('QuotaExceededError'), { name: 'QuotaExceededError' });
       globalThis.localStorage.setItem = () => { throw quota; };
@@ -1487,7 +1495,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(resilientLocalStorage.getItem('sf-probe')).toBe('kept');
       resilientLocalStorage.removeItem('sf-probe');
       expect(resilientLocalStorage.getItem('sf-probe')).toBeNull();
-      restore();
+      restoreLocal();
     });
   });
 
