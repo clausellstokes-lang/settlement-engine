@@ -138,6 +138,17 @@ const ROLE_KEY_SYNONYMS = Object.freeze({
   // persisted world must not quietly lose an office-holder because the catalog
   // was reworded after it was written.
   deaconcurate: 'temple', juniorcleric: 'temple',
+  // ⛔ `priest` WAS MISSING AND THAT WAS A LIVE REGRESSION, not a tidy-up. The hamlet's
+  // role was renamed 'Parish Priest' -> 'Priest' for the setting-agnostic law, and this
+  // table kept only the old spelling - so on the fallback path a realized Priest stopped
+  // covering the temple office and ensureFactionStructuralNpcs appended a second seat
+  // beside him. Probed at the rename: 'Parish Priest' -> npcs 1, 'Priest' -> npcs 2.
+  // It moved NO golden row, and that is the instructive part rather than a reprieve:
+  // the generated pipeline reaches this office through ROLE_FACTION_MAP and the power
+  // seat, so the corpus never takes the fallback, and the defect was reachable only by
+  // the custom, imported and partial records the fallback exists for. A dead synonym is
+  // invisible to every instrument that only ever walks the happy path.
+  priest: 'temple',
   parishpriest: 'temple', chaplain: 'temple',
   bishop: 'temple', abbot: 'temple', abbess: 'temple', prelate: 'temple',
   patriarch: 'temple', matriarch: 'temple',

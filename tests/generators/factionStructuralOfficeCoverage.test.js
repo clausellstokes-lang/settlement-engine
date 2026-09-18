@@ -92,7 +92,12 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     // this is the pin that stops a tidy-up deleting it and silently un-covering every
     // persisted world. The affiliation here deliberately resolves to NO seat, which is
     // the only path on which the synonym table is consulted at all.
-    for (const role of ['Deacon/Curate', 'Junior Cleric']) {
+    //
+    // ⛔ 'Priest' IS IN THIS LIST BECAUSE IT ONCE FAILED IT. The setting-agnostic rename
+    // left the table holding `parishpriest` alone, and a realized Priest stopped covering
+    // the office here while every golden stayed green - the corpus reaches this office
+    // through the power seat and never takes the fallback at all.
+    for (const role of ['Deacon/Curate', 'Junior Cleric', 'Parish Priest', 'Priest']) {
       const out = ensureFactionStructuralNpcs({
         tier: 'town',
         institutions: [],
