@@ -44,6 +44,18 @@ const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() 
 // topFaction/topNPCName+role/commodity/milForce) and, for the compound-branched
 // wartime pool, the branch anchors "on the right side of it" (winning) / "losing
 // people and resources" (losing) that narrativePressureCompound.test.js pins.
+// ⛔ `r.commodity` IS SOMETIMES PLURAL, SO NO TEMPLATE MAY MAKE IT THE SUBJECT OF A
+// NUMBER-SENSITIVE VERB. deriveTradeCommodity returns a bare label and four of its
+// fifteen are plural (`gems`, `crafts`, `spices`, `medicinal herbs`), with the
+// first-word fallback able to return others - and nothing on the object says which.
+// A famine hook shipped reading "knows where the hoarded medicinal herbs IS, and
+// isn't saying" on the Overview, the DM Summary and Table View at once. The cure is
+// invariant phrasing, never agreement logic: there is no plural flag to read, and
+// adding one would put a grammar field on the generated object to serve prose.
+// Keep verbs after `${r.commodity}` number-free (`can be found`, `cannot`, `never
+// came`), or make the commodity a modifier of a noun that carries the number itself
+// (`the ${r.commodity} reserves`, `every ${r.commodity} cache`), as the pools around
+// these three already do.
 export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`,
@@ -56,7 +68,7 @@ export const PRESSURE_SENTENCES = {
   famine: (r) => [
     `${r.name} is two bad weeks from genuine starvation; ${r.topFaction || "the merchant class"} controls the remaining ${r.commodity || "grain"} reserves and is not discussing it openly.`,
     `The harvest failure has restructured every relationship in ${r.name}. Whoever controls food now controls the settlement, and at least three factions have worked this out.`,
-    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} is, and isn't saying, and the reasons for that silence are complicated.`,
+    `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found, and isn't saying, and the reasons for that silence are complicated.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
     `${capFirst(r.govFaction) || "The council"} of ${r.name} announced a fair distribution of the ${r.commodity || "grain"} reserves last week; the announcement and the distribution are turning out to be two different things.`,
     `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`,
@@ -153,7 +165,7 @@ export const PRESSURE_SENTENCES = {
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
           `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,
-          `The ${r.commodity || "trade"} that made ${r.name} worth coming to is now straining under the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
+          `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `${r.name} has grown a second town at its edges. Newer, poorer, and not quite governed by the same rules as the first. ${capFirst(r.govFaction) || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
         ]
       : [
@@ -168,7 +180,7 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45
       ? [
           `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`,
-          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "trade"} has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
+          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "trade"} never came dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
           `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`,
         ]
       : [
