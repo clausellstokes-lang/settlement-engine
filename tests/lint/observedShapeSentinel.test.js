@@ -1412,8 +1412,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
       .rejects.toThrow(/bank fence[\s\S]*per-identity disagreement[\s\S]*stresses on settlement/);
     expect(swapped.baselineWrites).toHaveLength(0);
 
-    // A MODULE THAT YIELDS NOTHING is refused too — a missing or renamed literal must not
-    // read as "no twin to keep", which would be the fence failing open.
+    // A MODULE THAT EXPORTS NOTHING is refused too — an export that yields no object must
+    // not read as "no twin to keep", which would be the fence failing open. ⚠ A MISSING or
+    // renamed FILE fails closed one step earlier: the dynamic `import()` rejects with
+    // ERR_MODULE_NOT_FOUND before `assertBankTwins` runs, so that case never reaches this
+    // named refusal (owed at the next rung: rethrow it with the fence's own message).
     const missing = maintenanceRuntime({ current: [held, banked], frozen: [held, banked] });
     missing.overrides.readBankLiteral = async () => undefined;
     await expect(run(['--write'], missing.overrides)).rejects.toThrow(/did not yield the hand-owned bank literal/);

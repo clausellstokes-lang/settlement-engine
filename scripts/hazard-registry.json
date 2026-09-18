@@ -298,6 +298,7 @@
           "tests/lint/observedShapeMigration.test.js",
           "tests/lint/observedShapeSentinel.test.js",
           "tests/lint/observedShapeBaseline.test.js",
+          "tests/lint/observedShapeBank.literal.js",
           "tests/lint/governedArtifactIo.test.js",
           "tests/lint/legacyReaderShapeScan.test.js",
           "tests/lint/readerShapeResolver.test.js",

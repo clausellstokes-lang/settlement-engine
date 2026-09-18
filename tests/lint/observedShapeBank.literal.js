@@ -28,6 +28,9 @@
  * declaration — edit the figures here to what the re-frozen register WILL derive, in the
  * SAME commit as the register. The write names the exact figures when it refuses. This
  * file is not a governed detector input, so editing it does not dirty the chain.
+ * ⚠ THE WRITE CHECKS THIS FILE ON DISK, NOT IN THE INDEX: stage it WITH the register. A
+ * register committed alone is the fe021a487 shape again, and the walker reds at the next
+ * gate — the fence narrows the miss from "forgot the figure" to "forgot to stage the file".
  *
  * THE HISTORY OF EVERY MOVE stays in the walker beside its assertion; only the live
  * figures live here.

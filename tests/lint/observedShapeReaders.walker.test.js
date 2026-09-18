@@ -195,6 +195,40 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 // literal module. Two independent productions on each side of both assertions —
 // and the module is pinned below to be a BARE literal, so it cannot quietly
 // become a third reading of the register.
+//
+// ⚠ WHAT THE FENCE PROVES, EXACTLY. The write proves agreement AT THE MOMENT OF THE
+// ACT, against the module ON DISK. Committing the module together with the register
+// is still the lane's step: a register committed alone is the fe021a487 shape again,
+// and THIS ARM is what catches it, at the next gate. The fence narrows the failure
+// from "forgot the figure" to "forgot to stage the file"; it does not close the
+// commit boundary, and nothing short of a hook could — see the rung's docblock for
+// why a hook is disqualified here.
+//
+// ⚠ OWED AT THE NEXT RUNG (deliberately deferred — documented, not a bug to re-find).
+// The 2026-09-18 Opus review of the schema-20 rung confirmed seven checker- and
+// migration-side improvements. Every one is a detector-source edit, so each costs a
+// rung; none is worth a rung of its own, and ALL should ride the next one:
+//   1. `readBankLiteralModule` should re-apply THIS file's bare-literal grammar checks
+//      at WRITE time — today the write trusts whatever the module exports, so a module
+//      rewritten as a derivation would pass the write and red only here, at the next
+//      gate. (The walker pin is the gate-time half of that guard.)
+//   2. `assertBankTwins`' per-identity drift lists only the REGISTER's keys, so a literal
+//      still carrying a RETIRED identity is refused with identical totals and no named
+//      difference; iterate the union of both key sets and name top-level key drift.
+//   3. A MISSING module rejects at `import()` (ERR_MODULE_NOT_FOUND) before the fence's
+//      own "did not yield" refusal; wrap the import and rethrow with the fence's message.
+//   4. `declaredBankFor(BASELINE_SCHEMA)` should take the migration's OWN target rather
+//      than the live number (cosmetic while `--migrate-schema=${BASELINE_SCHEMA}` is the
+//      only spelling `commandOf` admits).
+//   5. `bankOf` should refuse an orphan rowTags address BY NAME instead of a TypeError
+//      or a NaN (unreachable on the write path; reachable here on a hand-edited register).
+//   6. Stale twins in the instrument's own prose: observed-shape-baseline.mjs's header
+//      still says "`BASELINE_SCHEMA` is **15**"; the checker's RETIRED_* re-export list
+//      omits 13–17 (the sentinel now imports a RETIRED_* name from the checker, so the
+//      next such import for 13–17 is a hard link error); the migration script's
+//      `usage:` line still advertises `--target-schema=10`.
+//   7. The write's success line should print `git status --short` of the literal module
+//      when it is dirty, naming the step above.
 /** The register's tagged rows, one derivation shared by every consumer. */
 const registerRowTagRows = () => Object.entries(baseline.rowTags).flatMap(([file, row]) => (
   Object.keys(row).map((identity) => ({
@@ -445,7 +479,11 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // no call other than `Object.freeze(`, integers at every leaf, a total that is the sum
     // of its own map.
     const source = readFileSync(join(ROOT, BANK_LITERAL_MODULE), 'utf8');
-    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').trim();
+    // Trailing `//` annotations are stripped as well as whole-line ones (the module's own
+    // "HOW TO MOVE IT" note invites `addresses: 39, // 62/41 → 60/39 at rung 19`): no string
+    // in the module may contain `//`, and a derivation's call paren sits BEFORE any comment
+    // it could try to hide behind, so the paren count below still sees it.
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '').trim();
     expect(code.startsWith('export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({')).toBe(true);
     expect(code.endsWith('});')).toBe(true);
     expect(code.split('export const ')).toHaveLength(2);
