@@ -253,6 +253,7 @@ async function walkEveryView(container) {
         const p = container.querySelector(`#sf-panel-${tabId}`);
         expect(p, `${groupName}/${tabName} never mounted its own panel`).toBeTruthy();
         const text = p.textContent || '';
+        // anchored: the length floor on the next line proves the panel filled; this line proves the fill is not the lazy fallback's own text
         expect(text).not.toMatch(LAZY_FALLBACK);
         expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
       }, { timeout: 10_000 });
