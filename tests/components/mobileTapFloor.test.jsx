@@ -60,8 +60,9 @@ async function load() {
   const useIsMobileMod = await import('../../src/hooks/useIsMobile.js');
   const Button = (await import('../../src/components/primitives/Button.jsx')).default;
   const IconButton = (await import('../../src/components/primitives/IconButton.jsx')).default;
+  const Segmented = (await import('../../src/components/primitives/Segmented.jsx')).default;
   const { ChevronRight } = await import('lucide-react');
-  return { useIsMobileMod, Button, IconButton, Icon: ChevronRight };
+  return { useIsMobileMod, Button, IconButton, Segmented, Icon: ChevronRight };
 }
 
 afterEach(() => {
@@ -204,5 +205,46 @@ describe('IconButton mobile tap floor', () => {
     const el = screen.getByRole('button', { name: 'Toggle' });
     expect(el.getAttribute('aria-pressed')).toBe('true');
     expect(parseInt(el.style.minHeight, 10)).toBeGreaterThanOrEqual(44);
+  });
+});
+
+// The THIRD instance of the same shape (Button, IconButton, and now the
+// segment switch): the Gallery's Settlements / Maps / Campaigns control
+// measured 32px tall on a phone, under every target-size floor. Written in the
+// primitive rather than at one call site, so no Segmented can be built short.
+describe('Segmented mobile tap floor', () => {
+  const OPTIONS = [{ id: 'a', label: 'Settlements' }, { id: 'b', label: 'Maps' }];
+
+  test('desktop emits NO minHeight at all (every call site unchanged at desk width)', async () => {
+    installMatchMedia(false);
+    const { Segmented } = await load();
+    render(<Segmented options={OPTIONS} value="a" onChange={() => {}} ariaLabel="Gallery view" />);
+    for (const name of ['Settlements', 'Maps']) {
+      expect(screen.getByRole('button', { name }).style.minHeight).toBe('');
+    }
+  });
+
+  test('mobile floors every segment to >=44px, at both sizes', async () => {
+    installMatchMedia(true);
+    const { Segmented } = await load();
+    render(
+      <>
+        <Segmented options={OPTIONS} value="a" onChange={() => {}} ariaLabel="md switch" />
+        <Segmented options={[{ id: 'c', label: 'Campaigns' }]} value="c" onChange={() => {}} size="sm" ariaLabel="sm switch" />
+      </>,
+    );
+    for (const name of ['Settlements', 'Maps', 'Campaigns']) {
+      const px = parseInt(screen.getByRole('button', { name }).style.minHeight, 10);
+      expect(px).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  test('re-floors live when the viewport rotates into mobile', async () => {
+    installMatchMedia(false);
+    const { Segmented } = await load();
+    render(<Segmented options={OPTIONS} value="a" onChange={() => {}} ariaLabel="Gallery view" />);
+    expect(screen.getByRole('button', { name: 'Settlements' }).style.minHeight).toBe('');
+    setMatches(true);
+    expect(parseInt(screen.getByRole('button', { name: 'Settlements' }).style.minHeight, 10)).toBeGreaterThanOrEqual(44);
   });
 });

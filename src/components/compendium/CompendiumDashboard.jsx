@@ -59,8 +59,15 @@ export function CompendiumOverview({ onNavigate }) {
       </div>
       <p style={{ fontSize:FS.sm, color:SEC, margin:'16px 0 0', fontFamily:sans }}>
         Looking for a specific name?{' '}
+        {/* The A–Z is the compendium's one orphan-proof door, and its hit area
+            was the bare 16px text line — under every target-size floor on a
+            phone. Vertical padding lifts it to 40px and an equal NEGATIVE margin
+            gives the padding back to the paragraph, so the hit area grows while
+            the rendered line box does not move. (The link is inline in running
+            prose, so the Button/IconButton minHeight idiom does not apply here.) */}
         <a href={hubHref('az', 'az')} onClick={(e) => onLink(e, onNavigate, 'az', 'az')}
-          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm }}>
+          style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600, fontFamily:sans, fontSize:FS.sm,
+            display:'inline-block', padding:'12px 4px', margin:'-12px -4px' }}>
           Browse the A–Z index.
         </a>
       </p>

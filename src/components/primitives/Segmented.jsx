@@ -1,5 +1,6 @@
 import { FS, SP, BORDER, CARD, CARD_ALT, ELEV, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 /**
  * primitives/Segmented — a pill toggle for 2-4 mutually exclusive views.
@@ -21,6 +22,15 @@ export default function Segmented({ options = [], value, onChange, size = 'md', 
   const iconsOn = useIconsOn();
   const padY = size === 'sm' ? 5 : 7;
   const padX = size === 'sm' ? SP.md : SP.lg;
+  // Mobile-only 44px tap floor — the SAME idiom Button and IconButton already
+  // carry (useIsMobile + Math.max against the at-the-table usability floor), and
+  // the third instance of the shape, so it is written here in the primitive
+  // rather than at one call site. The Gallery's Settlements/Maps/Campaigns
+  // switch measured 32px tall on a phone, under every target-size floor.
+  // DESKTOP IS UNTOUCHED: minHeight is undefined off-mobile, so all thirteen
+  // Segmented call sites render byte-identically at desk width.
+  const isMobile = useIsMobile();
+  const minHeight = isMobile ? 44 : undefined;
   return (
     <div
       role="group"
@@ -43,6 +53,9 @@ export default function Segmented({ options = [], value, onChange, size = 'md', 
             className="oc-m-press"
             style={{
               display: 'inline-flex', alignItems: 'center', gap: SP.xs,
+              // undefined off-mobile: React emits no minHeight at all, so the
+              // desktop style attribute is byte-identical to before.
+              minHeight,
               padding: `${padY}px ${padX}px`,
               borderRadius: 999, border: 'none', cursor: 'pointer',
               background: active ? CARD : 'transparent',
