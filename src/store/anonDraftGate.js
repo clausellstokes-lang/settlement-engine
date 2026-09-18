@@ -71,6 +71,9 @@ export function settleBootAnonDraft(set) {
       state.settlement = null;
       state.lastSeed = null;
     }
-    state.restoredAnonDraft = null;
+    // `false`, matching every other writer of this claim (the slice default,
+    // persistMerge, the sign-in paths, the generate action). A flag that is
+    // sometimes null and sometimes false is a shape two readers can disagree on.
+    state.restoredAnonDraft = false;
   });
 }
