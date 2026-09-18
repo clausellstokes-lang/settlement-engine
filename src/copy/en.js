@@ -66,7 +66,14 @@ export const en = Object.freeze({
     subtitle:   'Every street, every faction, every reason the place hasn’t collapsed yet. Simulated in seconds, exported in a click.',
     antiAi:     'Simulated, not AI-generated. The town is derived from constraints, coherent because it has to be.',
     cta:        'Begin a settlement',
-    ctaSubline: 'No account needed. Your first dossier is yours to keep.',
+    // ⚠ THE PROMISE IS SCOPED TO WHAT THE CODE ACTUALLY DOES (2026-09-18). It read
+    // "Your first dossier is yours to keep", which claims durable ownership, and
+    // an anonymous account has no library to keep anything in (authSlice
+    // TIER_GATE maxSaves 0). What is true is narrower and still worth saying: the
+    // draft is persisted device-locally while nobody is signed in, so a refresh or
+    // a later visit in the same browser finds it (store/persistProjection.js). The
+    // sibling `note` below carries the sign-in step, so this line does not have to.
+    ctaSubline: 'No account needed. Your first dossier stays in this browser.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
     // ── Two-voice rewrite ───────────────────────────────────────────────
     v2: {

@@ -7,12 +7,13 @@
  * fields are restored by persistMerge.
  *
  * ⭐ THE ONE GENERATED WORLD THAT IS PERSISTED, AND WHY (2026-09-18). This
- * projection used to exclude generated worlds outright. But /create promises an
- * anonymous visitor "Your first dossier is yours to keep" (copy/en.js
- * hero.ctaSubline) and a refresh took it: an anonymous account has maxSaves 0
+ * projection used to exclude generated worlds outright, and a refresh therefore
+ * took an anonymous visitor's dossier: an anonymous account has maxSaves 0
  * (store/authSlice TIER_GATE), so there is no library for the draft to live in
- * and nothing else held it. The promise was false for exactly the cohort it was
- * written for.
+ * and nothing else held it. /create is where the promise is made — the hero's
+ * `ctaSubline`, "your first dossier stays in this browser" (copy/en.js) — and
+ * this key is the whole of what makes it true, which is why that line was
+ * narrowed to exactly what this code does when the rule below was cut.
  *
  * MEASURED before it was written, not assumed: a TOWN at 4,000 population
  * serializes to 141,607–192,830 B across five seeds (the fattest world the
