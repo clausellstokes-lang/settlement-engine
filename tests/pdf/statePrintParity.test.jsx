@@ -35,6 +35,7 @@ import { StateProse } from '../../src/pdf/primitives/StateProse.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -152,6 +153,9 @@ function copiesInDocument(props, paragraph) {
     .toBeGreaterThan(50);
   return leaves.filter((t) => t.includes(paragraph)).length;
 }
+
+/** The patron fixture's deity. Named once: both faith arms ask about this exact string. */
+const DEITY_NAME = 'The Iron Lord';
 
 const VM_FOR = (s) => buildViewModel({ settlement: s, phase: 'canon', eventLog: [] });
 const OPTS = (s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm' });
@@ -325,7 +329,7 @@ beforeAll(() => {
     config: {
       ...(full.config || {}),
       primaryDeitySnapshot: {
-        name: 'The Iron Lord', rankAxis: 'major', alignmentAxis: 'neutral',
+        name: DEITY_NAME, rankAxis: 'major', alignmentAxis: 'neutral',
         temperamentAxis: 'warlike', domain: 'war',
       },
     },
@@ -510,7 +514,7 @@ describe('the print desk reads the screen\'s own desks', () => {
     const model = faithPanelModel(patron);
     expect(model.hasEmbed, 'the patron fixture carries no embedded faith').toBe(true);
     expect(JSON.stringify(model), "the reading does not carry the deity's name")
-      .toContain('Iron Lord');
+      .toContain(DEITY_NAME);
 
     const unlocked = flat(buildPrintProse(patron, { faithUnlocked: true }));
     expect(unlocked['faith.patronSeat'], 'the unlocked seam printed no patron seat').toBeTruthy();
@@ -523,22 +527,35 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(drift, 'the unlocked faith prose disagrees between page and screen').toEqual([]);
   });
 
-  test('THE PREMIUM FAITH SEAM: locked, no deity or creed reaches any page', () => {
-    const locked = buildPrintProse(patron, {});
-    expect(locked.faith?.['faith.patronSeat'], 'a locked export printed the patron seat')
-      .toBeUndefined();
-    expect(locked.faith?.['faith.creedStanding'], "a locked export printed the creed's standing")
-      .toBeUndefined();
-    // THE BELT over the structural arms above: no paragraph ANYWHERE in the document names the
-    // deity. The reading carries the name (asserted in the arm above), so this is a seam that
-    // held rather than a fixture with nothing in it.
-    const everything = Object.values(locked).flatMap((rows) => Object.values(rows)).join(' ');
-    expect(everything, 'a locked export leaked the deity name').not.toContain('Iron Lord');
-    // AND THE CONTROL: unlocking really does change this document, so the arm is not passing
-    // because the builder is inert.
-    const unlocked = buildPrintProse(patron, { faithUnlocked: true });
-    expect(Object.keys(unlocked.faith || {}).length)
-      .toBeGreaterThan(Object.keys(locked.faith || {}).length);
+  test('THE PREMIUM FAITH SEAM: locked, the document carries no faith position at all', () => {
+    // ⭐ REVIEW 8 #7 — THIS ARM'S WORDING IS NARROWED TO THE SEAM IT ACTUALLY PROVES, and the
+    // reason is a measurement that makes the wider claim untestable.
+    //
+    // ⛔ MEASURED, AND RECORDED SO NOBODY RE-ADDS THE WIDER ARM BELIEVING IT PROVES THIS: no
+    // faith paragraph this corpus can draw for the patron fixture NAMES the deity — not on a
+    // locked export and not on an unlocked one. DS-FTH-1 draws "The faith here has only just
+    // taken root…" and its siblings band the seat without ever filling a `{deity}` slot. So an
+    // arm asserting "no paragraph contains 'The Iron Lord'" passes on a tree where the seam is
+    // WIDE OPEN — it is green for the wrong reason, which is exactly the class
+    // tests/lint/negativeAssertionAnchor.walker.test.js exists to remove, one level below the
+    // matcher it scans for. It is gone rather than annotated.
+    //
+    // WHAT THE SEAM REALLY CONTROLS is the POSITION SET, and that is asked as an equality with
+    // both sides named — so a leak reds with the position that leaked, and a builder that went
+    // inert reds on the unlocked side rather than passing quietly on the locked one.
+    const positionsOf = (flag) => Object.keys(buildPrintProse(patron, { faithUnlocked: flag }).faith || {}).sort();
+
+    expect(positionsOf(false), 'a LOCKED export carries a faith position').toEqual([]);
+    // The live half of the same question: the seam opens, and it opens onto exactly the
+    // deity-bearing position. This is what stops the assertion above passing because the
+    // builder stopped building.
+    expect(positionsOf(true), 'the UNLOCKED seam no longer opens onto the patron seat')
+      .toEqual(['faith.patronSeat']);
+
+    // AND THE POSITIONS ARE REAL PROSE, not empty strings that would satisfy a key count.
+    const seat = buildPrintProse(patron, { faithUnlocked: true }).faith['faith.patronSeat'];
+    expect(typeof seat).toBe('string');
+    expect(seat.length, 'the patron seat printed an empty paragraph').toBeGreaterThan(40);
   });
 
   test('PURITY: the builder is a function of its inputs', () => {
@@ -575,14 +592,17 @@ describe('THE PRINT RULING — the deferred positions and cells never reach the 
     const printed = flat(buildPrintProse(captured, {}));
     const structureLine = drawnAtMount('defense.criminalStructure', criminal.structure)?.sentence;
     const captureLine = criminal.capture.sentence;
-    if (structureLine) {
-      expect(printed['defense.criminalStructure'], 'the structure half is PARITY and must print')
-        .toContain(structureLine);
-    }
-    expect(
-      printed['defense.criminalStructure'] || '',
-      'the capture-at-capture cell is PRINT-DEFERRED and reached the page',
-    ).not.toContain(captureLine);
+    // THE ANCHOR IS THE SIBLING THAT TRAVELS THE SAME PATH (review 8 #7's class). DS-DEF-4's
+    // structure half is ruled PARITY and its capture half PRINT-DEFERRED, and both are drawn
+    // by one desk call into one position — so a structure line that is PRESENT is exactly the
+    // proof that the position is live and the missing capture line is a refusal rather than a
+    // position that fell silent. Asserted unconditionally rather than behind an `if`: the
+    // fixture carries two criminal institutions precisely so this half draws.
+    expect(structureLine, 'the captured fixture drew no structure line to anchor on').toBeTruthy();
+    expectAbsentWithAnchor(
+      printed['defense.criminalStructure'], captureLine, structureLine,
+      'DS-DEF-4 at capture: structure prints, the capture rung does not',
+    );
   });
 
   test('the DS-REL-2 emergent banner never prints, and the prominent tie may', () => {
