@@ -34,6 +34,7 @@ import { buildPdfLiveWorld } from '../../src/pdf/lib/liveWorld.js';
 import { StateProse } from '../../src/pdf/primitives/StateProse.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
+import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -117,6 +118,39 @@ function screenWeave(settlement, lines) {
   return weaveBlock(lines, {
     settlementName: settlement.name, tierNoun: tierNounFor(settlement.tier),
   }).paragraph;
+}
+
+/**
+ * Every text leaf of a react-pdf element tree, with each chapter EXECUTED.
+ *
+ * ⭐ THE TREE, NEVER THE BYTES — the estate's own recorded law for this question
+ * (`tests/pdf/pdfFieldManifest.walker.test.js`: "renders the REAL SettlementPDF viewmodel
+ * tree, walks it (NO PDF bytes — react-pdf renderToBuffer is non-deterministic at the byte
+ * level; we execute the plain hook-free section functions and read the element tree)").
+ * Every chapter is a plain function of its props, so executing one is rendering it.
+ *
+ * ⛔ IT DOES NOT SWALLOW. An earlier copy of this walker caught and ignored a throwing
+ * chapter, which is how a chapter that crashed would have looked exactly like a chapter that
+ * printed nothing. A chapter that throws fails the arm that walked it.
+ * @param {unknown} node @param {string[]} [out]
+ */
+function textLeaves(node, out = []) {
+  if (node == null || typeof node === 'boolean') return out;
+  if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+  if (Array.isArray(node)) { node.forEach((n) => textLeaves(n, out)); return out; }
+  if (typeof node === 'object') {
+    if (typeof node.type === 'function') return textLeaves(node.type(node.props), out);
+    return textLeaves(node.props?.children, out);
+  }
+  return out;
+}
+
+/** How many text leaves of a WHOLE rendered document carry this paragraph. */
+function copiesInDocument(props, paragraph) {
+  const leaves = textLeaves(SettlementPDF(props));
+  expect(leaves.length, 'the document rendered no text at all, so counting proves nothing')
+    .toBeGreaterThan(50);
+  return leaves.filter((t) => t.includes(paragraph)).length;
 }
 
 const VM_FOR = (s) => buildViewModel({ settlement: s, phase: 'canon', eventLog: [] });
@@ -431,59 +465,42 @@ describe('the print desk reads the screen\'s own desks', () => {
     })).not.toThrow();
   });
 
-  test('REACHABILITY: the variant that drops chapter 07 still has a page for the faith prose', () => {
-    // ⭐ REVIEW 5's FINDING. `campaign_state` sets `identityDailyLife: false` while keeping
-    // `faithWar: 'if-canon'`, so on premium + canon + a live world the faith prose has exactly
-    // ONE possible page — the live chapter — and the first cure had just taken it away. The
-    // variant is asserted rather than assumed, so a future re-cut that gives campaign_state
-    // chapter 07 back reds here instead of leaving a dead arm behind.
-    expect(PDF_VARIANTS.campaign_state.chapters.identityDailyLife,
-      'campaign_state gained chapter 07; this arm no longer describes the variant').toBe(false);
+  test('THE FAITH GATE, pinned through a RENDERED DOCUMENT rather than a stub of it', () => {
+    // ⭐ REVIEW 8 #4. The gate is one expression — `SettlementPDF.jsx:190`'s
+    // `stateProse={inc('identityDailyLife') ? null : stateProse}` — and the arms that used to
+    // cover it called `FaithWar(...)` directly with a hand-chosen prop, which is a stub of the
+    // gate rather than the gate. These render the WHOLE document for the two variants the
+    // gate discriminates and count the paragraph in the result.
+    //
+    // THE TWO VARIANTS ARE THE WHOLE TRUTH TABLE, asserted rather than assumed so a re-cut
+    // reds here instead of leaving a dead arm: `canon_dossier` carries BOTH chapters (the
+    // live one `if-canon`, chapter 07 true) and is the only place the prose could print
+    // twice; `campaign_state` drops chapter 07 and keeps the live one, and is the only place
+    // it could print nowhere.
+    expect(PDF_VARIANTS.canon_dossier.chapters.faithWar).toBe('if-canon');
+    expect(PDF_VARIANTS.canon_dossier.chapters.identityDailyLife).toBe(true);
     expect(PDF_VARIANTS.campaign_state.chapters.faithWar).toBe('if-canon');
+    expect(PDF_VARIANTS.campaign_state.chapters.identityDailyLife).toBe(false);
 
-    // A premium canon export of the PATRON town, whose live slice comes from the product's own
-    // producer rather than a hand-built stub — so the chapter renders against the shape it
-    // really receives, unguarded fields and all.
     const prose = buildPrintProse(patron, { faithUnlocked: true });
-    const liveWorld = buildPdfLiveWorld({ settlement: patron, campaign: null });
-    expect(liveWorld, 'the patron town produced no live slice, so this arm proves nothing')
+    const paragraph = prose.faith['faith.patronSeat'];
+    expect(paragraph, 'the patron town composed no seat paragraph to look for').toBeTruthy();
+    // The live slice the premium chapter self-gates on, from the product's own producer.
+    expect(buildPdfLiveWorld({ settlement: patron, campaign: null }),
+      'the patron town produces no live slice, so the faith chapter could never render')
       .not.toBeNull();
 
-    const texts = [];
-    const walk = (node) => {
-      if (node == null || typeof node === 'boolean') return;
-      if (typeof node === 'string' || typeof node === 'number') { texts.push(String(node)); return; }
-      if (Array.isArray(node)) { node.forEach(walk); return; }
-      if (typeof node === 'object') {
-        if (typeof node.type === 'function') { try { walk(node.type(node.props)); } catch { /* sub-tree */ } return; }
-        walk(node.props?.children);
-      }
+    const base = {
+      settlement: patron, phase: 'canon', faithUnlocked: true, stateProse: prose, eventLog: [],
     };
-    walk(FaithWar({
-      settlement: patron, narrativeMode: false, stateProse: prose,
-      vm: { ...VM_FOR(patron), liveWorld },
-    }));
-    expect(texts.join('\u0000'), 'campaign_state has no page for the faith prose')
-      .toContain(prose.faith['faith.patronSeat']);
-
-    // AND THE OTHER HALF OF THE GATE: where chapter 07 IS in the variant, the caller feeds this
-    // chapter nothing, so the paragraph cannot print twice in one document.
-    const twice = [];
-    const walk2 = (node) => {
-      if (node == null || typeof node === 'boolean') return;
-      if (typeof node === 'string' || typeof node === 'number') { twice.push(String(node)); return; }
-      if (Array.isArray(node)) { node.forEach(walk2); return; }
-      if (typeof node === 'object') {
-        if (typeof node.type === 'function') { try { walk2(node.type(node.props)); } catch { /* sub-tree */ } return; }
-        walk2(node.props?.children);
-      }
-    };
-    walk2(FaithWar({
-      settlement: patron, narrativeMode: false, stateProse: null,
-      vm: { ...VM_FOR(patron), liveWorld },
-    }));
-    expect(twice.join('\u0000'), 'the live chapter printed the faith prose it was not fed')
-      .not.toContain(prose.faith['faith.patronSeat']);
+    // EXACTLY ONE COPY, BOTH WAYS. One number pins both halves of the gate: zero would mean
+    // the variant has no page for the prose, two would mean both homes printed it.
+    expect(copiesInDocument({ ...base, variant: 'campaign_state' }, paragraph),
+      'campaign_state: chapter 07 is out, so the live chapter must carry the faith prose')
+      .toBe(1);
+    expect(copiesInDocument({ ...base, variant: 'canon_dossier' }, paragraph),
+      'canon_dossier: chapter 07 carries it, so the live chapter must be fed null')
+      .toBe(1);
   });
 
   test('THE PREMIUM FAITH SEAM: unlocked, the deity positions print and match the screen', () => {
