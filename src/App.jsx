@@ -418,20 +418,44 @@ export default function App() {
   // repointed on every view/flow change, typed to the format the CSS will fetch
   // (WebP where the engine decodes it, else JPEG — see config/pageBackgrounds.js),
   // so preload and paint always agree and no image is fetched twice.
+  //
+  // THE LINK IS FULLY ATTRIBUTED BEFORE IT ENTERS THE HEAD. It used to be
+  // appended bare and then given its `type` and `href`, which cost every page in
+  // the app TWO console warnings at boot — "<link rel=preload> has an invalid
+  // `href` value" — even though all three preloads resolve 200. The engine
+  // validates a preload the moment it joins the document and again on each
+  // attribute write, so an href-less insertion warned once, and the `type = type`
+  // write that followed re-validated the still-href-less link and warned again.
+  // The `href` write that finally made it valid was never the complaint.
+  // Measured in a headless run: append→type→href warns twice, type→href→append
+  // warns zero times, and repointing an ALREADY-VALID link (the view-change path)
+  // has always been silent. So the fix is the ORDER, not the values — `pending`
+  // holds the new link out of the head until it is fully attributed, and the two
+  // attribute writes stay in the ONE place that serves both paths.
+  //
+  // The `!href` bail is dormant today: every branch of resolveViewBackground
+  // returns a real painting (it falls back to DEFAULT_BG). It is two words of
+  // insurance so a future view that legitimately paints nothing cannot put a bare
+  // preload back in the head — deliberately deferred and recorded, NOT a bug to
+  // re-find: it does not also REMOVE a stale link on such a view, because that
+  // arm would cost lines against this file's 600-line ceiling to serve a case
+  // that cannot yet occur.
   useEffect(() => {
     if (typeof document === 'undefined') return;
     const { href, type } = resolveViewBackground({ view, wizardMode, settlement: hasSettlement });
+    if (!href) return;
     const ID = 'page-bg-preload';
     let link = document.getElementById(ID);
-    if (!link) {
+    const pending = !link;
+    if (pending) {
       link = document.createElement('link');
       link.id = ID;
       link.rel = 'preload';
       link.as = 'image';
-      document.head.appendChild(link);
     }
     link.type = type;
     link.href = href;
+    if (pending) document.head.appendChild(link);
   }, [view, wizardMode, hasSettlement]);
 
   useCustomContentCloudSync({
