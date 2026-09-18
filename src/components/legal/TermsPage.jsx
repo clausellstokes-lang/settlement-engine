@@ -5,12 +5,18 @@
  * used to be the standalone /refunds page. That URL now renders THIS page,
  * scrolled to that section (see the `scrollToId` prop + AppViews), so old links
  * still land on the refund policy. Numbers live on the Pricing page, never here
- * (F22). Not yet reviewed legal text (see the under-review banner).
+ * (F22) — and the Founder section carries no figure at all beyond the chair count,
+ * because a chair is given, never sold. Not yet reviewed legal text (see the
+ * under-review banner).
  */
 import { useEffect } from 'react';
 import LegalPage, { LegalSection, LegalP, LegalList } from './LegalPage.jsx';
 import { INK } from '../theme.js';
 import { supportMailto } from '../../copy/support.js';
+// The chair count comes from the catalog (TIERS.founder.seatLimit via tierFacts,
+// a config-only leaf), never typed into legal prose: the Hall's cap and this
+// page's cap are one number or they are a contradiction.
+import { FOUNDER_SEATS } from '../../config/tierFacts.js';
 
 export default function TermsPage({ scrollToId = null } = {}) {
   // When the retired /refunds URL lands here (AppViews renders
@@ -102,40 +108,41 @@ export default function TermsPage({ scrollToId = null } = {}) {
         </LegalP>
       </LegalSection>
 
-      {/* Founder Lifetime license + transfers — the offer's contractual terms.
-          Plain and honest, never investment framing (no "appreciating", "resale
-          value", "ownership", or "governance"). The transfer figures are the
-          license's own contract terms (what an incoming/outgoing holder pays and
-          receives), stated here deliberately per the Founder brief — distinct from
-          the Pricing page's product price list (F22). The transfer MECHANISM is not
-          live yet (a concierge process is planned); this section states the terms
-          that will govern it. */}
-      <LegalSection heading="Founder Lifetime license and transfers" id="terms-founder">
+      {/* ⛔ FOUNDER CHAIRS — THE CODE IS THE SOURCE, AND IT CONTRADICTED THIS PAGE.
+          Until 2026-09-18 this section described Founder Lifetime as a TRANSFERABLE
+          license with a $99 transfer price and a $49.50 payout to the outgoing
+          holder. None of that exists: config/pricing.js gives the founder tier
+          `stripeProduct: null` (there is no SKU, and create-checkout refuses
+          `founder_lifetime` outright through ABOLISHED_PRODUCTS), and the Hall's own
+          covenant — components/founders/HallCovenant.jsx, the surface a founder
+          actually reads — says in terms that chairs are given, never sold, and cannot
+          be bought, traded, inherited, or transferred. The terms now say what the
+          product does. Every price figure is gone with the offer it described; the
+          Subscriptions section above already names the Pricing page as the source of
+          truth for what things cost (F22), and a chair costs nothing because it is
+          not for sale. The count interpolates from the catalog. */}
+      <LegalSection heading="Founder chairs" id="terms-founder">
         <LegalP>
-          Founder Lifetime is a transferable lifetime individual license, not a
-          subscription. It grants one person lifetime access to the paid tier and a
-          place in the credits. No more than 30 Founder seats will ever exist, and the
-          cap never grows. The name “Founder” is reserved for those 30 seats, and any
-          later tier will be named differently. A seat is an entitlement held by one
-          person; it is not the same thing as your account.
+          There are {FOUNDER_SEATS} chairs in the Founders’ Hall, and there will never
+          be more. A chair is given, never sold: it has no price and no checkout path,
+          and it cannot be purchased at any price. Chairs are offered by invitation, to
+          people who carried SettlementForge before it could carry itself; you can ask
+          for one by letter in the Hall.
         </LegalP>
         <LegalP>
-          <strong style={{ color: INK }}>Transferring a seat.</strong> Because the cap
-          never grows, a seat can only change hands by succession: one holder passing
-          it to another, never by minting a new one. Transfers work only through
-          SettlementForge, and only after you have held the seat for at least 12 months.
-          When a seat transfers, the incoming holder pays the Founder transfer price
-          (currently $99) and the outgoing holder receives half of it (currently
-          $49.50), after we verify the transfer, it clears, and a payout delay passes.
-          What transfers is the seat and its lifetime access, nothing else. Your
-          account, your saved worlds, your narrative credits, and your personal data
-          stay with you and never move to the new holder.
+          <strong style={{ color: INK }}>A chair does not change hands.</strong> It
+          cannot be bought, traded, inherited, or transferred. It is held by one person,
+          permanently, and it does not move with a sale, an account, or an estate. A
+          chair is a place in the credits, not property and not an investment, and we
+          neither describe nor price it as one.
         </LegalP>
         <LegalP>
-          A seat is a license to use SettlementForge for life, not an investment. We do
-          not describe or price it as an appreciating asset, and we may pause or decline
-          transfers for security, legal, or operational reasons. If we ever need to
-          change how transfers work, substantive changes bump the version stamped at the
+          A founder holds everything the Cartographer tier runs, for as long as
+          SettlementForge runs. There is no renewal, no tier to climb back up, and
+          nothing to keep paying for. The chair is an entitlement held by a person; it
+          is not the same thing as your account, and your saved worlds, your narrative
+          credits, and your personal data remain yours as set out above. If we ever need
+          to change how chairs work, substantive changes bump the version stamped at the
           top of this page.
         </LegalP>
       </LegalSection>
@@ -169,10 +176,10 @@ export default function TermsPage({ scrollToId = null } = {}) {
           consumer law in your jurisdiction requires it.
         </LegalP>
         <LegalP>
-          <strong style={{ color: INK }}>Founder Lifetime.</strong> The Founder
-          tier is a one-time purchase of lifetime access rather than a recurring
-          subscription. If you believe you were charged in error, contact support
-          with your Stripe receipt and we will review it.
+          <strong style={{ color: INK }}>Founder Lifetime.</strong> There is nothing
+          to refund: a Founder chair is given, never sold, and it has never been for
+          sale (see Founder chairs above). If you believe you were charged for one,
+          contact support with your Stripe receipt and we will review it.
         </LegalP>
         <LegalP>
           <strong style={{ color: INK }}>How to request a refund.</strong> Reaching us:
