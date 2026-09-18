@@ -26,7 +26,10 @@ import { titleForView, viewToPath } from './routes.js';
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
-export const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates them as a persistent world for game masters.';
+// 152 characters. It was 162, and Google truncates a SERP snippet past ~155, so
+// the tail ("for game masters") was cut on the one string that stands in for
+// every route without its own. The sentence is the same claim, shorter.
+export const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs and history, then simulates them as a world that keeps running.';
 
 // The site-default unfurl card (1200×630 PNG). Raster, because Facebook, X,
 // LinkedIn, Slack, Discord et al. do not rasterize SVG.
@@ -62,7 +65,12 @@ export function galleryCardImage(slug) {
 // Hand-written descriptions for the public content routes. Everything else falls
 // back to the site default (and the private routes below get noindex regardless).
 export const VIEW_DESCRIPTIONS = {
-  home:       DEFAULT_DESCRIPTION,
+  // /home is the Welcome page and the site's front door ('/' canonicalizes here
+  // for logged-out visitors), and it was the ONE route deliberately shipping the
+  // generic site fallback — so the page a searcher is most likely to meet first
+  // described the product in the abstract instead of saying what it offers. It
+  // gets the landing's own promise: free, no account, tonight.
+  home:       'Forge a living tabletop-RPG settlement free, with no account: economies, factions, NPCs and history, simulated from constraints and ready for tonight.',
   generate:   'Generate a living tabletop-RPG settlement in seconds: economy, factions, NPCs, institutions, and history, ready for the table.',
   // SB4: description copy is kept at SERP length (~120-160 chars — Google
   // truncates past ~160) AND byte-lean: seo.js is first-paint EAGER and the
@@ -125,6 +133,14 @@ export const NOINDEX_VIEWS = new Set([
   // Deliberately NOT in robots.txt — the noindex meta must stay crawlable and
   // unfurl bots must reach the card.
   'world',
+  // THE COMPARE FAMILY (2026-09-18). The dedicated competitor pages were deleted
+  // and every /compare* URL now REDIRECTS to /about/what-this-is#how-we-compare
+  // (routes.js redirectForView). The sitemap already excluded them as RETIRED, but
+  // the runtime head did not: a JS-executing crawler landing on /compare/kanka got
+  // one indexable frame carrying the generic site description, for a path whose
+  // content is a section of another page. Four near-duplicate soft-200s of one
+  // anchor is the exact class 'world' is here for.
+  'compare', 'compare-chatgpt', 'compare-worldographer', 'compare-kanka',
 ]);
 
 // Exported so the lazy per-dossier enricher (seoDossier.js) reuses one

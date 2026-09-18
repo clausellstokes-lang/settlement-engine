@@ -11,7 +11,7 @@
  *     reaches a meta tag or the JSON-LD.
  */
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { applyDocumentHead } from '../../src/lib/seo.js';
+import { applyDocumentHead, DEFAULT_DESCRIPTION } from '../../src/lib/seo.js';
 import { setSharedDossierMeta } from '../../src/lib/seoDossier.js';
 
 const meta = (attr, key) =>
@@ -51,6 +51,33 @@ describe('applyDocumentHead — per-route OG + Twitter', () => {
   it('a private route is marked noindex', () => {
     applyDocumentHead('account');
     expect(meta('name', 'robots')).toBe('noindex, nofollow');
+  });
+
+  // ⛔ EVERY /compare* PATH REDIRECTS to /about/what-this-is#how-we-compare
+  // (routes.js redirectForView): the dedicated competitor pages were deleted and
+  // the path entries survive only so old links resolve. The sitemap already
+  // excluded them as RETIRED, but the runtime head did not, so a JS-executing
+  // crawler got one INDEXABLE frame per path, all four carrying the generic site
+  // description, for content that is a section of another page.
+  it('a retired compare path is marked noindex, not left as a soft duplicate', () => {
+    for (const view of ['compare', 'compare-chatgpt', 'compare-worldographer', 'compare-kanka']) {
+      applyDocumentHead(view);
+      expect(meta('name', 'robots'), `${view} is indexable`).toBe('noindex, nofollow');
+    }
+    // Control: the arm above is not passing because everything is noindex now.
+    applyDocumentHead('about-what-this-is');
+    expect(meta('name', 'robots')).toBe('noai, noimageai');
+  });
+
+  // The site's front door carried the generic fallback until 2026-09-18 — the one
+  // deliberate DEFAULT_DESCRIPTION user, on the page a searcher meets first.
+  it('/home ships its own description, not the site fallback', () => {
+    applyDocumentHead('home');
+    const d = meta('name', 'description');
+    expect(d).toBeTruthy();
+    expect(d).not.toBe(DEFAULT_DESCRIPTION);
+    expect(d.length, 'a SERP snippet is truncated past ~155 characters').toBeLessThanOrEqual(155);
+    expect(DEFAULT_DESCRIPTION.length, 'the site fallback is itself over the SERP limit').toBeLessThanOrEqual(155);
   });
 
   it('a gallery item points og:image at the DYNAMIC per-slug endpoint', () => {

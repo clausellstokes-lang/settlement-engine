@@ -182,10 +182,13 @@ describe('prerender — pure render (build head == runtime head, the single sour
 
   // SB4 — no indexable route may ship the generic site description: a
   // description-less route previously passed every gate (baked == runtime ==
-  // both generic). Home is the one deliberate DEFAULT_DESCRIPTION user.
+  // both generic). HOME'S EXEMPTION IS GONE (2026-09-18): it was the one
+  // deliberate DEFAULT_DESCRIPTION user, which left the site's front door
+  // describing the product in the abstract, so it now carries its own line and
+  // the loop no longer skips it. Every indexable route, no exceptions.
   it('every indexable route ships a hand-written description, never the site fallback', () => {
     for (const r of ROUTES) {
-      if (!isIndexable(r) || r.view === 'home') continue;
+      if (!isIndexable(r)) continue;
       const d = VIEW_DESCRIPTIONS[r.view];
       expect(d, `route ${r.view} (${r.path}) has no VIEW_DESCRIPTIONS entry`).toBeTruthy();
       expect(d, `route ${r.view} (${r.path}) reuses the generic site description`).not.toBe(DEFAULT_DESCRIPTION);
