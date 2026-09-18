@@ -41,7 +41,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 // The §807(b) viewer-mode negative reads its expected label off the REAL step
 // registry rather than a hand-written string, so a registry relabel can never
 // make the absence pass for the wrong reason.
-import { metaForStep } from '../../src/generators/steps/stepMetadata.js';
+import { presentationForStep } from '../../src/generators/steps/stepMetadata.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -202,7 +202,7 @@ describe('PipelineRail viewer mode — §807(b)', () => {
     expect(block).toBeTruthy();
     // No fabricated step receipts: the registry labels of a generating session
     // are absent (anchored: the block itself rendered above).
-    expect(block.textContent).not.toContain(metaForStep('generatePower').label); // anchored: the rail's complementary role was found above, so the surface lives; the absent label is the viewer-mode claim itself.
+    expect(block.textContent).not.toContain(presentationForStep('generatePower').label); // anchored: the rail's complementary role was found above, so the surface lives; the absent label is the viewer-mode claim itself.
   });
 
   test('no settlement prop and no history ⇒ the rail stays null (the pre-§807 gate, unchanged)', async () => {

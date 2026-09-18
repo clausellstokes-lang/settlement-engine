@@ -59,6 +59,33 @@
  * on"); the rise is declared here, in the ledger row, and is vetoable. The ceiling stays
  * MONOTONE-DOWN from this value.
  *
+ * ⭐ RE-MINTED DOWNWARD BY THE WORKER-HEADROOM CAR (Opus lane, 2026-09-18, branch
+ * `fix-worker-headroom-2026-09-18`): 1,404,493 -> 1,398,705 bytes, measured on
+ * `dist/assets/generation.worker-CXHCiqmL.js` from a worktree verified lockfile-clean
+ * (588 of 588 installed packages at their locked versions — the box-drift hazard makes
+ * a locally built figure worthless otherwise). This is a SHRINK and needs no ruling:
+ * the ceiling may always follow a lower measurement down.
+ *
+ * What bought the 6,439 B, both PROVEN INVISIBLE to generated output (the golden master
+ * and the espionage fence ran plain and green across the change):
+ *   • `src/domain/customContentSchema.js` — sixteen derived `_KEYS` constants took a
+ *     rollup PURE annotation. Five engine modules import that file for `passesTierGate`
+ *     and `tradeCategoryLabelOf` and nothing else; its authoring vocabulary (content
+ *     groups, criticality, economic weight, defense roles, power authorities, food
+ *     impact, satisfies, and the whole deity chart) has ZERO readers under
+ *     src/generators, src/workers, src/lib, src/kernel or src/data. It rode in anyway
+ *     because `Object.freeze(Y.map(f))` lets rollup drop the binding and KEEP the call.
+ *   • `src/generators/steps/stepMetadata.js` — the rail's 22 labels and 22 descriptions
+ *     moved to a sibling table on the same file, `STEP_PRESENTATION`, read only by
+ *     src/components/PipelineRail.jsx. The worker's `metaForStep` reads `summary` alone
+ *     and the packet on the wire is `{ id, index, summary }`, so the words were paying
+ *     rent in this bundle to be read by nobody.
+ *
+ * ⚠ THE HEADROOM IS IN THE BUNDLE, NOT IN THE CEILING. Re-minting at the exact
+ * measurement is what monotone-down means, so this arm is again at 0 B slack by
+ * construction; the 6,439 B of room bought here is room in the WORKER, spent by the next
+ * car that adds authored content, and it is measured before it is spent.
+ *
  * @enforced-by this test
  */
 
@@ -74,8 +101,9 @@ const ASSETS = join(DIST, 'assets');
 const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
 const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
 const SENTINEL = 'settlementforge:generation:worker-v1';
-/** Measured 1,404,242 B at f6545dcd9 (build-900-chair.log); monotone-down — see the docblock. */
-export const WORKER_BUNDLE_CEILING_BYTES = 1404493;
+/** Measured 1,398,705 B by the worker-headroom car, 2026-09-18 (generation.worker-CXHCiqmL.js,
+ *  lockfile-clean worktree); monotone-down — see the docblock for what was removed. */
+export const WORKER_BUNDLE_CEILING_BYTES = 1398705;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -390,7 +418,12 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(workers, 'exactly one generation worker bundle in dist/assets').toHaveLength(1);
     const bytes = readFileSync(join(ROOT, 'dist', 'assets', workers[0])).length;
     // Read the measured figure from the failure, never compute the ceiling from the tree.
-    expect(bytes, `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is ${WORKER_BUNDLE_CEILING_BYTES} B (build-900-chair.log)`).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
+    expect(
+      bytes,
+      `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-minted by the worker-headroom car, 2026-09-18). `
+      + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
+    ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });
 
 });

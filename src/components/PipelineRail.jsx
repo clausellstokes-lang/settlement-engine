@@ -16,7 +16,7 @@
  * Implementation:
  *   The rail reads pipelineHistory from the store (populated by
  *   settlementSlice's generate() handler). Each entry has { id, ts,
- *   summary }; metaForStep maps the id to a human label + description.
+ *   summary }; presentationForStep maps the id to a human label + description.
  *
  *   Procedural steps render with a cog icon (bronze). AI refinement
  *   passes — when the user runs the AI features — render with a quill
@@ -30,7 +30,7 @@
 import { useState } from 'react';
 import { FS, swatch, sans, serif_ } from './theme.js';
 import { useStore } from '../store/index.js';
-import { metaForStep } from '../generators/steps/stepMetadata.js';
+import { presentationForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
 import {
@@ -52,7 +52,10 @@ const MUTED = swatch['#6B5340'];
 
 export function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
-  const meta = metaForStep(entry.id);
+  // The rail's words only. `metaForStep` is the WORKER's half of stepMetadata.js and
+  // carries no label or description: holding the two apart is what keeps 2.9 kB of
+  // rail copy out of the generation worker's bundle (that file's header says why).
+  const meta = presentationForStep(entry.id);
   const isAi = entry.kind === 'ai';
   const color = isAi ? QUILL_COLOR : COG_COLOR;
   const stepTraces = Array.isArray(traces) ? traces : [];

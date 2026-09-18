@@ -6,6 +6,29 @@
  * values and support older readers that have not moved to the manifest adapter.
  * The pure helpers remain useful to generation, but this module must not be
  * treated as a second semantic schema.
+ *
+ * ⛔ WHY EVERY DERIVED `_KEYS` CONSTANT BELOW CARRIES A ROLLUP PURE ANNOTATION, AND
+ * WHY THAT IS NOT DECORATION. Five ENGINE modules import this file, and all five want exactly
+ * two symbols from it: `passesTierGate` (`lib/dependencyEngine.js`,
+ * `generators/steps/assembleInstitutions.js`, `generators/steps/economyReconcilePass.js`,
+ * `generators/services/institutionServices.js`) and `tradeCategoryLabelOf`
+ * (`domain/content/customTradeEndpointProjection.js`). Not one engine, worker, kernel
+ * or data module reads a single authoring vocabulary below - they are the compendium
+ * editor's and the deity panel's, and they are the main thread's alone.
+ *
+ * Rollup could not drop them all the same, and the reason is worth writing down
+ * because it recurs: a `const X = Object.freeze(Y.map(f))` lets rollup drop the
+ * BINDING while KEEPING THE CALL, since it cannot prove `Y.map(f)` is free of
+ * effects - and the retained call keeps `Y` itself alive. The generation worker's
+ * bundle carried the whole authoring vocabulary this way, as orphan statements
+ * (a bare `Object.freeze(x.map(...));` with nothing assigned), for 3.6 kB the worker
+ * can never read. The annotation says the call is free of effects; the UI chunks
+ * that genuinely import these keys are unaffected, because there the binding is used.
+ *
+ * ⚠ `DEITY_MAX_CHART_POSITIONS` IS THE ONE THAT CANNOT TAKE THE ANNOTATION, recorded
+ * so the gap does not read as an oversight: it is a property READ
+ * (`DEITY_CHART_AXIS_IDS.length`), not a call, and `#__PURE__` annotates call and new
+ * expressions only. It holds `DEITY_CHART_AXIS_IDS` (16 tokens) alive and nothing else.
  */
 
 import { compareCodepoint } from './deterministicSort.js';
@@ -22,7 +45,7 @@ export const CONTENT_GROUPS = Object.freeze([
   { key: 'criminal',       label: 'Crime & Underworld' },
   { key: 'social',         label: 'Social & Cultural' },
 ]);
-export const CONTENT_GROUP_KEYS = Object.freeze(CONTENT_GROUPS.map((g) => g.key));
+export const CONTENT_GROUP_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ CONTENT_GROUPS.map((g) => g.key));
 
 // Criticality labels. Manifest-registered resource and service consumers treat
 // `critical` as an inclusion signal; the same field is presentation-only where
@@ -32,7 +55,7 @@ export const CRITICALITY = Object.freeze([
   { key: 'important',     label: 'Important' },
   { key: 'discretionary', label: 'Discretionary — luxury / comfort' },
 ]);
-export const CRITICALITY_KEYS = Object.freeze(CRITICALITY.map((c) => c.key));
+export const CRITICALITY_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ CRITICALITY.map((c) => c.key));
 
 // Economic-weight labels. Institutions and trade goods use this value in the
 // finished-goods supply path; services currently display it without mechanics.
@@ -42,7 +65,7 @@ export const ECONOMIC_WEIGHT = Object.freeze([
   { key: 'major',    label: 'Major' },
   { key: 'backbone', label: 'Backbone of the economy' },
 ]);
-export const ECONOMIC_WEIGHT_KEYS = Object.freeze(ECONOMIC_WEIGHT.map((w) => w.key));
+export const ECONOMIC_WEIGHT_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ ECONOMIC_WEIGHT.map((w) => w.key));
 
 // Reserved defense-role vocabulary. Custom-content records currently display
 // this authorial classification; no defense-readiness mechanic consumes it.
@@ -56,7 +79,7 @@ export const DEFENSE_ROLES = Object.freeze([
   { key: 'logistics',     label: 'Logistics — supply & siege endurance' },
   { key: 'intelligence',  label: 'Intelligence — scouting & spies' },
 ]);
-export const DEFENSE_ROLE_KEYS = Object.freeze(DEFENSE_ROLES.map((d) => d.key));
+export const DEFENSE_ROLE_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEFENSE_ROLES.map((d) => d.key));
 
 // Reserved power-authority vocabulary. It describes an author's intent in the
 // Compendium but does not currently alter legitimacy or faction power.
@@ -70,7 +93,7 @@ export const POWER_AUTHORITIES = Object.freeze([
   { key: 'noble',     label: 'Noble / dynastic' },
   { key: 'criminal',  label: 'Criminal influence' },
 ]);
-export const POWER_AUTHORITY_KEYS = Object.freeze(POWER_AUTHORITIES.map((a) => a.key));
+export const POWER_AUTHORITY_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ POWER_AUTHORITIES.map((a) => a.key));
 
 // Whether an institution / good / service / resource moves the settlement's
 // food balance. Feeds the food-security model (dailyProduction / dailyNeed) so a
@@ -81,7 +104,7 @@ export const FOOD_IMPACT = Object.freeze([
   { key: 'produces', label: 'Produces food — raises supply' },
   { key: 'consumes', label: 'Consumes food — raises demand' },
 ]);
-export const FOOD_IMPACT_KEYS = Object.freeze(FOOD_IMPACT.map((f) => f.key));
+export const FOOD_IMPACT_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ FOOD_IMPACT.map((f) => f.key));
 
 // §14 — the unified TRADE-CATEGORY taxonomy a custom good/institution declares via
 // `satisfies`. One list, two kinds:
@@ -140,8 +163,8 @@ export function satisfiesOptions(customContent) {
 // INSTITUTION_FINISHED_GOODS_DEMAND). finishedGoodsSupply + the demand engine
 // match against these keys; the classification categories above are display/export
 // buckets only.
-export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) => c.demandLive));
-export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
+export const SATISFIES_CATEGORIES = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ TRADE_CATEGORIES.filter((c) => c.demandLive));
+export const SATISFIES_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ SATISFIES_CATEGORIES.map((c) => c.key));
 
 // ── Deities ─────────────────────────────────────────────────────────────────
 // A homebrew deity is inert until assignment embeds a resolved snapshot on a
@@ -156,7 +179,7 @@ export const DEITY_ALIGNMENT = Object.freeze([
   { key: 'evil',    label: 'Evil' },
   { key: 'neutral', label: 'Neutral' },
 ]);
-export const DEITY_ALIGNMENT_KEYS = Object.freeze(DEITY_ALIGNMENT.map((a) => a.key));
+export const DEITY_ALIGNMENT_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_ALIGNMENT.map((a) => a.key));
 
 // Compatibility labels for the persisted temperament mirror. The engine does
 // not read this stored value; deityAxes derives temperament from alignment/law.
@@ -165,7 +188,7 @@ export const DEITY_TEMPER = Object.freeze([
   { key: 'peacelike', label: 'Peacelike' },
   { key: 'neutral',   label: 'Neutral' },
 ]);
-export const DEITY_TEMPER_KEYS = Object.freeze(DEITY_TEMPER.map((t) => t.key));
+export const DEITY_TEMPER_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_TEMPER.map((t) => t.key));
 
 // Rank/scale — major / minor / cult. Scales how strongly the deity lifts
 // religious_authority (a major pantheon-head outweighs a fringe cult).
@@ -174,7 +197,7 @@ export const DEITY_TIER = Object.freeze([
   { key: 'minor', label: 'Minor — a lesser god' },
   { key: 'cult',  label: 'Cult — a fringe or secret following' },
 ]);
-export const DEITY_TIER_KEYS = Object.freeze(DEITY_TIER.map((r) => r.key));
+export const DEITY_TIER_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_TIER.map((r) => r.key));
 
 // Law/chaos — lawful / chaotic / neutral. The 4th axis. Couples into the
 // law_order causal variable: a lawful god RAISES order/legitimacy pressure; a
@@ -187,7 +210,7 @@ export const DEITY_LAW = Object.freeze([
   { key: 'chaotic', label: 'Chaotic — erodes order, tolerates corruption' },
   { key: 'neutral', label: 'Neutral' },
 ]);
-export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
+export const DEITY_LAW_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_LAW.map((l) => l.key));
 
 // Portfolio (Phase 4 W-F5, owner-ratified): an OPTIONAL FREE-TEXT FLAVOR FIELD —
 // what the god is "of", in the author's own words. PURE CONTENT with ZERO
@@ -239,8 +262,8 @@ export const DEITY_MAX_CHART_POSITIONS = DEITY_CHART_AXIS_IDS.length;
 /** The admitted position tokens, `AXIS:pole:level`. DERIVED from the three
  *  vocabularies above rather than transcribed, so a token can never be mistyped;
  *  the drift guard pins the derived set against the manifest's own `values`. */
-export const DEITY_CHART_POSITION_KEYS = Object.freeze(
-  DEITY_CHART_AXIS_IDS.flatMap((axisId) => DEITY_AXIS_POLES.flatMap(
+export const DEITY_CHART_POSITION_KEYS = /*#__PURE__*/ Object.freeze(
+  /*#__PURE__*/ DEITY_CHART_AXIS_IDS.flatMap((axisId) => DEITY_AXIS_POLES.flatMap(
     (pole) => DEITY_AXIS_LEVELS.map((level) => `${axisId}:${pole}:${level}`),
   )),
 );
@@ -266,7 +289,7 @@ export const DEITY_EFFECT_CHANNELS = Object.freeze([
   { key: 'learning',      label: 'Learning and record' },
   { key: 'hearth',        label: 'Hearth and household' },
 ]);
-export const DEITY_EFFECT_CHANNEL_KEYS = Object.freeze(DEITY_EFFECT_CHANNELS.map((c) => c.key));
+export const DEITY_EFFECT_CHANNEL_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_EFFECT_CHANNELS.map((c) => c.key));
 
 // Banded magnitude, never a float (D3). These are the PULL bands of pack Register
 // III (faint / firm / heavy), deliberately NOT the axis band words: a boon is a
@@ -277,7 +300,7 @@ export const DEITY_EFFECT_STRENGTHS = Object.freeze([
   { key: 'firm',  label: 'Firm' },
   { key: 'heavy', label: 'Heavy' },
 ]);
-export const DEITY_EFFECT_STRENGTH_KEYS = Object.freeze(DEITY_EFFECT_STRENGTHS.map((s) => s.key));
+export const DEITY_EFFECT_STRENGTH_KEYS = /*#__PURE__*/ Object.freeze(/*#__PURE__*/ DEITY_EFFECT_STRENGTHS.map((s) => s.key));
 
 // DIVINE IMMUTABILITY, STRUCTURALLY (ODQ 800.3 J4 / DESIGN_W_LIVES 6): a deity has
 // no drift state, and the drift writer accepts NPCs only. The canonical admission
