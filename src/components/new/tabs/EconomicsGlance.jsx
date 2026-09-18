@@ -79,6 +79,7 @@
 import { FS, swatch, MUTED } from '../../theme.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 
 /**
  * The prosperity header and the at-a-glance tile row.
@@ -162,16 +163,23 @@ export default function EconomicsGlance({
 export function DeskLines({ mount, rungs }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
-  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3c). Two lenses
-  // of one position may legitimately draw the SAME line — a pool with one variant left after
-  // anchoring says the same thing twice — and `key={line}` then collides, so React drops one
-  // paragraph and the reader silently loses a lens. The position is what a line IS here, so
-  // the position is its identity.
+  // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18). Every lens of a
+  // position used to be its own `<p>`, keyed on mount + position because two lenses may
+  // legitimately draw the SAME line and `key={line}` then collided (ARCH §4.1, SEAM car 3c).
+  // That whole class is gone with the list: one paragraph needs no keys, and two identical
+  // sentences now simply both appear in it. The `<p>`'s look is unchanged.
+  //
+  // ⚠ THIS POSITION WEAVES BUT DOES NOT YET STAND THE NAME DOWN, and that is a SCOPE line
+  // rather than an oversight. The stand-down needs `settlement.name` and `settlement.tier`,
+  // and every call site of this component (EconomicsTab, ServicesTab, ResourcesTab,
+  // DailyLifeTab) is owned by another lane in this program — this component's own API had to
+  // stay unchanged. Each call site needs exactly one edit when its owner is free:
+  // `settlementName={s?.name} tier={s?.tier}` threaded to the props below. Deliberately
+  // deferred — documented, not a bug to re-find.
   return (
     <div style={{margin:'0 0 12px'}}>
-      {lines.map((line, position) => (
-        <p key={`${mount}::${position}`} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}>{line}</p>
-      ))}
+      <ProseBlock lines={lines}
+        style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}/>
     </div>
   );
 }

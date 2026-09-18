@@ -26,6 +26,11 @@ import { institutionProvenanceOf } from '../../../domain/provenance/rosterProven
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
 import Button from '../../primitives/Button.jsx';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position below used to map
+// its drawn sentences to one `<p>` EACH; ProseBlock weaves them into one paragraph and
+// stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
+// handed over are the same strings `drawnAtMount` ruled on above.
+import ProseBlock from '../ProseBlock.jsx';
 
 // ── The institution provenance badge (R-5b item #10) ───────────────────
 // The pill used to badge only the GENERATION source tag, so a forge the living
@@ -276,13 +281,16 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             court, a garrison or nothing at all says about the place). Three
             blocks, three positions, one paragraph: they answer the same
             question — what kind of place is this — at three scales, and the
-            page reads them as one thought. */}
+            page reads them as one thought.
+            ⭐ AND IT IS NOW LITERALLY ONE PARAGRAPH (owner finding 2026-09-18). The comment
+            above has said "one paragraph" since the position landed while the code rendered
+            three, each opening on the town's name. It keeps its place directly under the
+            identity strip; only the arrangement changed. */}
       {siteLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The ground and the company it keeps</div>
-          {siteLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -328,9 +336,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         ))}
         {crisisSectionLines.length>0&&(
           <div style={{borderTop:'1px solid #e0c890',paddingTop:8}}>
-            {crisisSectionLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={crisisSectionLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
           </div>
         )}
       </div>}
@@ -342,9 +349,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {stressorLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The pressure from outside</div>
-          {stressorLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={stressorLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -355,9 +361,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {conditionLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the town is living through</div>
-          {conditionLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -473,7 +478,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {situationLine ? (
           <>
             <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
-            <p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{situationLine}</p>
+            {/* ONE LENS, so the weave is a no-op here BY CONSTRUCTION (`lines.length <= 1`
+                returns the line unchanged) and the position renders character for character
+                what it rendered before. It routes anyway so the phone floor reaches it with
+                its siblings — one renderer, one rule about a paragraph's smallest size. */}
+            <ProseBlock lines={[situationLine]} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </>
         ) : null}
       </div>}
@@ -492,9 +502,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           visibility arm in dossierMountRegistry.walker.test.js is what keeps it out here. */}
       {originLines.length>0&&(
         <div data-testid="overview-origin-lines" style={{borderLeft:'3px solid #c8b89a',paddingLeft:12,marginBottom:14}}>
-          {originLines.map((line,i)=>(
-            <p key={`o${i}`} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'8px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={originLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -516,9 +525,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             much of its roll this town's own conditions made. The phrasing below
             is the DATUM and keeps its own words; these band what having it
             means. See notableConnectionPoolKey / flagDrivenPoolKey. */}
-        {connectionLines.map((line,i)=>(
-          <p key={`c${i}`} style={{fontSize:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}>{line}</p>
-        ))}
+        <ProseBlock lines={connectionLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}/>
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
             reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
@@ -592,9 +600,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             own words; this bands what having them MEANS. */}
         {warningLines.length>0&&(
           <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'10px 14px',marginBottom:8}}>
-            {warningLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={warningLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
           </div>
         )}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>

@@ -19,6 +19,39 @@ import { deriveEscalationClocks } from '../../../domain/hookEscalation.js';
 // supply-chain and faction-profile leaves, and the reader is imported by every tab that
 // draws this desk — this page is the one that already pays for them.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18) — see the framing block below for
+// why this position is also CAPPED, which no other position is.
+import ProseBlock from '../ProseBlock.jsx';
+
+/**
+ * ⭐ THE FRAMING CAP, AND THE RULING BEHIND IT (owner finding 4, 2026-09-18).
+ *
+ * DS-HK-1 draws ONE line per hook category the page carries plus one per live escalation
+ * clock, so a busy town reaches TEN framing sentences above its hook list — a page of
+ * preamble before the hooks it is meant to frame, each sentence opening on the town's name.
+ *
+ * ⛔ THE FIRST CURE WAS CONSIDERED AND REFUSED ON EVIDENCE: rendering each framing sentence
+ * under the hook group it belongs to. The composer DOES key these lines — `hookCategoryPoolKey`
+ * makes a 7-for-7 identity with `PLOT_HOOK_CATEGORIES`, and the key rides on
+ * `rung.provenance.poolKey`. It cannot be done at this render site today, for three reasons
+ * that are facts about the tree rather than preferences:
+ *
+ *   1. THE KEY DOES NOT REACH HERE. `generalDeskRead.js` — the desk's ONE caller, which ARM 2
+ *      of the mount registry requires to stay one — returns `framingLines` as `string[]`; the
+ *      rung and its provenance are consumed inside it. Carrying the key out is a change to
+ *      that reader's return contract (`GENERAL_DESK_SILENT`), which is a different car.
+ *   2. THERE ARE NO GROUPS TO RENDER UNDER. The hooks below are ONE FLAT LIST of cards in
+ *      `collectPlotHooks` order, each with a category badge. There is no per-category header
+ *      to hang a sentence on; grouping the list is a layout change nobody has asked for.
+ *   3. HALF THE LINES HAVE NO CATEGORY AT ALL. The clock lines (`escalationClockPoolKey`,
+ *      `clock bread_riot`) are keyed to an ESCALATION CLOCK, not a hook category, so even a
+ *      keyed reader would leave them homeless.
+ *
+ * So the second rule applies: ONE woven paragraph, the first three sentences in COMPOSER
+ * ORDER, the rest dropped. Composer order puts the category lines first and the clock lines
+ * after, so the cap keeps the framing of the hooks the page actually carries.
+ */
+const FRAMING_CAP = 3;
 
 const INK = swatch['#1B1408'];
 const BODY = swatch['#3A2F18'];
@@ -54,12 +87,9 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
             background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
             borderLeft: '3px solid #6b5340', padding: '9px 12px', marginBottom: 10,
           }}>
-            {framingLines.map((line, i) => (
-              <p key={i} style={{
-                fontSize: FS.xxs, color: BODY, lineHeight: 1.55,
-                margin: i === 0 ? 0 : '5px 0 0', fontStyle: 'italic',
-              }}>{line}</p>
-            ))}
+            <ProseBlock lines={framingLines.slice(0, FRAMING_CAP)}
+              settlementName={settlement?.name} tier={settlement?.tier}
+              style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}/>
           </div>
         )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>

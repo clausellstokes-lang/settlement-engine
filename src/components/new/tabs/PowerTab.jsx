@@ -13,6 +13,10 @@ import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
+// their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
+// paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
+import ProseBlock from '../ProseBlock.jsx';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -303,12 +307,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               of leaving half a reading on the page. Neither displaces a datum above. */}
           {(drawnBanner?.sentence || drawnLens?.sentence) && (
             <div style={{marginTop:10,borderTop:`1px solid ${leg.color}30`,paddingTop:8}}>
-              {drawnBanner?.sentence && (
-                <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnBanner.sentence}</p>
-              )}
-              {drawnLens?.sentence && (
-                <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnLens.sentence}</p>
-              )}
+              {/* ⭐ ONE PARAGRAPH, not a ladder line and a lens line stacked (owner finding
+                  2026-09-18). This pair was written out by hand rather than mapped, so it
+                  reads differently in the source and identically on the page: two `<p>`, two
+                  openings on the town's name. It is the same position and the same two rungs;
+                  only the arrangement changed. */}
+              <ProseBlock lines={[drawnBanner?.sentence, drawnLens?.sentence]}
+                settlementName={s?.name} tier={s?.tier}
+                style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
             </div>
           )}
         </div>
@@ -355,12 +361,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             ONE position, routed through one mount, exactly as the legitimacy banner above. */}
         {(drawnStab?.sentence || drawnStabLens?.sentence) && (
           <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
-            {drawnStab?.sentence && (
-              <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}>{drawnStab.sentence}</p>
-            )}
-            {drawnStabLens?.sentence && (
-              <p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:'6px 0 0',fontStyle:'italic'}}>{drawnStabLens.sentence}</p>
-            )}
+            {/* The ladder line and its lens, as one paragraph — the banner above's twin. */}
+            <ProseBlock lines={[drawnStab?.sentence, drawnStabLens?.sentence]}
+              settlementName={s?.name} tier={s?.tier}
+              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
           </div>
         )}
       </div>
@@ -373,9 +377,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {undersideLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
-          {undersideLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -387,9 +390,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {blocLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Sides and combinations</div>
-          {blocLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -399,9 +401,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {structureLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The shape of authority</div>
-          {structureLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={structureLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
@@ -412,9 +413,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {successionLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
           <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Rule and succession</div>
-          {successionLines.map((line, i) => (
-            <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={successionLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 

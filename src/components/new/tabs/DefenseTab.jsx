@@ -12,6 +12,11 @@ import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, d
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
+// map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
+// that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
+// same strings `drawnAtMount` ruled on.
+import ProseBlock from '../ProseBlock.jsx';
 
 /**
  * The public-order position. ⚠ Its rungs arrive already PROJECTED BESIDE the DM's field —
@@ -71,6 +76,30 @@ const CRIMINAL_MOUNT = 'defense.criminalStructure';
  */
 const SUPPORTING_MOUNT = 'defense.supportingCapabilities';
 
+/**
+ * ⭐ THE THREAT ROW → DS-DEF-2 POOL JOIN (owner finding 3, 2026-09-18).
+ *
+ * The five readiness sentences used to be flattened into one list and printed as a STACK
+ * ABOVE the bars, so a reader had to pair a sentence with a bar by counting. Each sentence
+ * now renders under the bar it is about, and this is the pairing.
+ *
+ * ⚠ IT IS A LABEL JOIN, AND IT IS TOTAL ON PURPOSE. `buildThreatAssessment` returns rows
+ * carrying `{label, color, assess}` and no machine key, so the alternative was pairing by
+ * INDEX — which would put a famine sentence under a monster bar the day that leaf grows a
+ * conditional row, silently, because both lists would still be five long. The key set is
+ * asserted EQUAL to the builder's own labels in tests/ui/defenseTabFlow.test.js, so neither
+ * side can grow a member the other does not have; a label this map does not know draws
+ * NOTHING rather than the wrong row's sentence. The sibling `threatScores` object in the
+ * body below already keys on the same labels, so this is the file's own idiom.
+ */
+export const THREAT_ROW_KEY = Object.freeze({
+  'Beasts & Monsters': 'beasts',
+  'Invasion & War': 'invasion',
+  'Internal Security': 'internal',
+  'Economic Survival': 'economic',
+  'Disasters & Famine': 'disaster',
+});
+
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
@@ -110,8 +139,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       seed: String(r?._seed ?? r?.id ?? ''),
       audience: playerView ? 'player' : 'dm',
     });
-  const threatLines = ['beasts', 'invasion', 'internal', 'economic', 'disaster']
-    .map((k) => drawnAtMount(THREAT_MOUNT, threatProse[k])?.sentence).filter(Boolean);
+  // The sentence that belongs to ONE readiness row, or null. The registry still rules on
+  // every rung exactly as it did when these were a flat list — flipping `defense.threatAssessment`
+  // to `glance` silences all five together, under every bar at once.
+  const threatSentenceFor = (label) => {
+    const key = THREAT_ROW_KEY[label];
+    return (key ? drawnAtMount(THREAT_MOUNT, threatProse[key])?.sentence : null) || null;
+  };
   // DS-DEF-5, the armed-forces lenses. Same public gate as above, stated rather than
   // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
   const forcesProse = publicDossier
@@ -285,9 +319,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         {/* DS-DEF-1: the posture, the ground and the prize, in the town's own voice. Three
             lenses of one block at one position, BESIDE the badge and the DM's assessment. */}
         {postureLines.length>0&&<div style={{marginTop:10,paddingTop:10,borderTop:`1px solid ${readiness.border}`}}>
-          {postureLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={postureLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
         </div>}
       </div>
 
@@ -301,9 +334,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {stressObj?.summary&&<p style={{fontSize: FS['12.5'],color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
           {stressObj?.viabilityNote&&<p style={{fontSize: FS['11.5'],color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
-          {statusLines.map((line,i)=>(
-            <p key={i} style={{fontSize:FS.xs,color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
+          <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.xs,color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
         </div>
       </div>}
 
@@ -311,24 +343,28 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
         <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
-        {/* DS-DEF-2: what each row MEANS, in the town's own voice. Five pools of one block
-            at one position; the bars and their scores above are untouched. */}
-        {threatLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px',marginBottom:10}}>
-          {threatLines.map((line,i)=>(
-            <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-          ))}
-        </div>}
+        {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
+            readiness sentences used to print here as five paragraphs, one per row, ABOVE the
+            rows they describe — so a reader had to pair sentence to bar by counting, and all
+            five opened on the town's name. Each one now renders UNDER ITS OWN BAR. The caption
+            above stays: it frames the bars, not the sentences. */}
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({label,color,assess},i)=>{
             const sc = threatScores[label]||0;
             const badge = scoreBand(sc);
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
+            const rowLine = threatSentenceFor(label);
             return (
-              <div key={i} role="button" tabIndex={0} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
-                onClick={()=>setExpandedThreat(isExp?null:i)}
-                onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
-                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined}}>
+              // ⚠ THE CARD IS NO LONGER THE BUTTON — the HEADER ROW inside it is. The corpus
+              // sentence sits in the card, under the bar, and folding it inside the control
+              // would have made the button's accessible name a whole paragraph. The row keeps
+              // every handler, its `tabIndex`, its padding and its mobile reflow, so
+              // tests/components/dossierMobileGate.test.jsx still finds exactly what it pins.
+              <div key={i} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4'}}>
+                <div role="button" tabIndex={0} style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined,cursor:'pointer'}}
+                  onClick={()=>setExpandedThreat(isExp?null:i)}
+                  onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
                   <span style={isMobile
                     ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
                     : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
@@ -338,6 +374,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                   <span style={{fontSize:FS.micro,fontWeight:800,color:badgeColor,background:`${badgeColor}15`,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
                   <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
                 </div>
+                {/* DS-DEF-2 for THIS row, in the town's own voice, under the bar it is about.
+                    A row whose pool the corpus is silent about shows nothing here (R-DST-K);
+                    the bar, its band word and its assessment are untouched either way. */}
+                {rowLine&&<div style={{padding:'0 12px 8px'}}>
+                  <ProseBlock lines={[rowLine]} settlementName={r.name} tier={r.tier}
+                    style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
+                </div>}
                 {isExp&&<div style={{padding:'0 12px 10px 12px',borderTop:`1px solid ${color}25`}}>
                   <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0'}}>{assess}</p>
                   {fundingNotes[label]&&<p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'5px 0 0',lineHeight:1.4}}>{fundingNotes[label]}</p>}
@@ -397,9 +440,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* DS-DEF-4: the shape of the crime and how far it has reached, in the town's own
               voice. Two lenses of one block at one position. */}
           {criminalLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px'}}>
-            {criminalLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={criminalLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
 
           {/* Criminal institutions as power structures */}
@@ -479,9 +521,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* DS-DEF-5: what the town can actually field, in its own voice. Five lenses of
               one block at one position; the force cards below are untouched. */}
           {forceLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a3a1a',padding:'9px 13px',marginBottom:10}}>
-            {forceLines.map((line,i)=>(
-              <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-            ))}
+            <ProseBlock lines={forceLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Fortifications</div>
@@ -528,9 +569,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
           keeps it there. */}
       {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
-        {supportingLines.map((line,i)=>(
-          <p key={i} style={{fontSize:i===0?FS.sm:FS.xs,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.55,margin:i===0?0:'5px 0 0',fontStyle:'italic'}}>{line}</p>
-        ))}
+        <ProseBlock lines={supportingLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
       </div>}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>

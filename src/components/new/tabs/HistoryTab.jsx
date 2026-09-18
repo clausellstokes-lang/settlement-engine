@@ -10,6 +10,10 @@ import Button from '../../primitives/Button.jsx';
 // also owns the §885.3 public gate: corpus prose is a PAID surface and this tab is not
 // filtered off a free gallery dossier.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The founding/record pair and the
+// four identity lenses each rendered one `<p>` per sentence; they are now one paragraph
+// each. The DRAW is unchanged — the same strings `drawnAtMount` ruled on in the reader.
+import ProseBlock from '../ProseBlock.jsx';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -109,8 +113,11 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             the age, the counts, the generator's own character line — is
             untouched; these band what having them MEANS. */}
         {(foundedLine||recordLine)&&<div style={{borderTop:'1px solid #c8b89a',marginTop:10,paddingTop:8}}>
-          {foundedLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{foundedLine}</p>}
-          {recordLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.6,margin:foundedLine?'6px 0 0':0,fontStyle:'italic'}}>{recordLine}</p>}
+          {/* TWO BLOCKS, ONE PARAGRAPH. DS-GEN-14 and DS-GEN-16 answer one question between
+              them — how the town began and what the record still carries — and the weave
+              drops the second opening on the name. */}
+          <ProseBlock lines={[foundedLine, recordLine]} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>}
       </div>
 
@@ -123,9 +130,8 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           repeating itself about one fact. */}
       {identityLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
         <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the years have made of it</div>
-        {identityLines.map((line,i)=>(
-          <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-        ))}
+        <ProseBlock lines={identityLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
       </div>}
 
       {/* ── RECENT EVENTS (glance) ───────────────────────────────────────────

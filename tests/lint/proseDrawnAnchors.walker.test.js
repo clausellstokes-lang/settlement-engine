@@ -88,6 +88,21 @@ const FIXTURE_INPUT_FILES = Object.freeze([
   // anti-vacuity arm below drives. A walker that reported itself would be reporting the proof
   // that it works.
   'tests/lint/proseDrawnAnchors.walker.test.js',
+  // ⭐ ADDED 2026-09-18 (the block weave). `weaveBlock` ARRANGES sentences a desk already
+  // drew — it joins them and stands a repeated opening settlement name down to the tier noun
+  // — so its unit test FEEDS corpus sentences to the instrument and asserts the ARRANGEMENT
+  // that comes back. Nothing here is drawn: no pool is read, no seed reaches the file, and
+  // `drawVariant` never runs, so no re-index, rewrite or appended wording can move a single
+  // assertion. Three of its inputs are real shipped wordings on purpose — the owner's own
+  // Vallepagus triple, quoted in the finding this module answers, is the reading the cure has
+  // to be judged against, and substituting invented prose for it would be testing a different
+  // sentence than the one that was complained about.
+  //
+  // ⛔ THE LINE IT MUST NOT CROSS, so the next seat does not widen this row: this file may
+  // never assert that a DESK or a PAGE produced one of these sentences. The moment it does,
+  // it is an anchor and it belongs in `drawnProse.js` like every other. The DOM proof for the
+  // weave lives in tests/ui/generalDeskTabFlow.test.js, which computes its anchors.
+  'tests/domain/display/stateProse/weaveBlock.test.js',
 ]);
 
 /**

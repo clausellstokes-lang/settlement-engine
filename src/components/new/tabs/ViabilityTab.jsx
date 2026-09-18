@@ -13,6 +13,9 @@ import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
+// paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
+import ProseBlock from '../ProseBlock.jsx';
 
 /**
  * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
@@ -150,9 +153,8 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                 and when the reading was taken. The DATUM is untouched — the
                 headline, the summary and the pills all keep their own words. */}
             {verdictLines.length>0&&<div style={{borderTop:'1px solid #d8c090',marginTop:10,paddingTop:8}}>
-              {verdictLines.map((line,i)=>(
-                <p key={i} style={{fontSize:i===0?FS.md:FS.sm,color:i===0?swatch.inkMag2:swatch.inkMag3,lineHeight:1.6,margin:i===0?0:'6px 0 0',fontStyle:'italic'}}>{line}</p>
-              ))}
+              <ProseBlock lines={verdictLines} settlementName={s?.name} tier={s?.tier}
+                style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
             </div>}
           </div>
           {/* Quick metric pills */}

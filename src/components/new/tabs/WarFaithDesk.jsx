@@ -56,6 +56,7 @@
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
+import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 
 /** The war tab's three positions. Bound once so the reachability arm counts one literal. */
 const STANDING_MOUNT = 'war.standing';
@@ -122,18 +123,25 @@ export function warFaithDeskRungs({
 export function DeskLines({ mount, rungs, testId }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
-  // ⭐ KEYED ON MOUNT + POSITION, never on the sentence (ARCH §4.1, SEAM car 3d) — the same
-  // cure as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
-  // deliberately one idiom. Two lenses of one position may legitimately draw the SAME line,
-  // and `key={line}` then collides: React drops a paragraph and a lens goes missing.
+  // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
+  // as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
+  // deliberately one idiom. It matters most HERE: `faith.patronSeat` reads EIGHT lenses of
+  // DS-FTH-1 at one position, so this file's worst case was an eight-paragraph column about
+  // one patron. The mount+position keying is gone with the list — one paragraph needs no
+  // keys, and two lenses drawing the same line now simply both appear in it rather than
+  // colliding.
+  //
+  // ⚠ IT WEAVES BUT DOES NOT YET STAND THE NAME DOWN, on the same SCOPE line as its twin:
+  // the stand-down needs `settlement.name` and `settlement.tier`, and the five wrappers below
+  // are called from WarTab.jsx and FaithTab.jsx, which this lane does not own. Each wrapper
+  // takes one `settlement` prop and threads `settlementName`/`tier` through when their owner
+  // is free. Deliberately deferred — documented, not a bug to re-find.
   return (
     <div data-testid={testId} style={{ margin: '0 0 12px' }}>
-      {lines.map((line, position) => (
-        <p key={`${mount}::${position}`} style={{
-          color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
-          margin: '0 0 6px', fontStyle: 'italic',
-        }}>{line}</p>
-      ))}
+      <ProseBlock lines={lines} style={{
+        color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
+        margin: '0 0 6px', fontStyle: 'italic',
+      }}/>
     </div>
   );
 }
