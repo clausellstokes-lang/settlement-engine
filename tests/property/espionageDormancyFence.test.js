@@ -189,6 +189,20 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-18, THE CONTENT-COHERENCE FIXES (owner-signed, through the door) ────────────
+ * THE SECOND MOVEMENT SINCE THE GENESIS FREEZE, and like the first it is a signed re-record
+ * under tests/helpers/goldenRecordDoor.js rather than a spend of the one window this file's STOP
+ * still names. The owner ordered every reported fix implemented ("impliment every fix",
+ * 2026-09-18); the record is docs/shift-records/2026-09-18-content-coherence.json (odqRow §934).
+ * THE MOVERS, FOUND AND ATTRIBUTED TO ZERO RESIDUE by single-variable trees measured against the
+ * base, whose union is exactly the tip and leaves no row unexplained: D1 and D1b took one world's
+ * liturgy out of the service catalogue and the role labels (a Mesoamerican-inspired hamlet was
+ * listing Baptism and Sunday mass under HEALING beside its own cultural titles), D2 stopped the
+ * role catalog's generalist bucket filing any role into any faction, and D3 rewrote eight plot
+ * hooks out of the rolled-table register. D4 and D4b moved nothing here: they are a display
+ * read-model. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * `f13df68e…` -> `a0c145b2…`.
+ *
  * ── 2026-09-17, THE DOSSIER CONTRADICTIONS (owner-signed, through the door) ────────────
  * THE FIRST MOVEMENT OF THIS CONSTANT SINCE THE GENESIS FREEZE, AND IT DID NOT WAIT FOR THE
  * LIGHTING WAVE: it is a signed re-record under tests/helpers/goldenRecordDoor.js, which from the
@@ -273,7 +287,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'f13df68e5e511cd385473e95307240d5b73659e11f718eaeafc5f69bf060a69e';
+const PRE_COUPLING_CORPUS_SHA = 'a0c145b25758fff12b86e1573ea1a9f9695b17780c9d61bbe6f321bdfd05064e';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
