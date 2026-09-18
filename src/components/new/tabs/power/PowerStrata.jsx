@@ -29,6 +29,8 @@ import EntityLink from '../../../primitives/EntityLink.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
 import { derivePowerStrata, groupRelationships } from '../../../../domain/dossier/powerStrata.js';
+import useIsMobile from '../../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../../design/proseScale.js';
 
 // The parchment seam between flush cards. Imported (never a re-declared hex) so
 // it tracks the design token — the forked-color rule.
@@ -201,6 +203,11 @@ export function ThePowers({ settlement, powers, factionSupport }) {
  * @param {{ settlement:any, roster:any[], expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any }} props
  */
 export function TheFactions({ settlement, roster, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef }) {
+  // THE PHONE PROSE FLOOR — a faction's description and its crisis note, the two
+  // reading passages in this stratum. Read BEFORE the early return so the hook
+  // order is stable on an empty roster. The names, the archetype, the power
+  // figure and the 'holds power' marker keep their own steps.
+  const mobile = useIsMobile();
   if (!roster.length) return null;
   const factionGroups = settlement?.factions || [];
   const total = roster.reduce((n, r) => n + (r.power || 0), 0) || 100;
@@ -276,8 +283,8 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
 
               {isExp && expandable && (
                 <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
-                  {f.desc && <p style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
-                  {f.crisisNote && <p style={{ fontSize: FS['11.5'], color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
+                  {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
+                  {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
                 </div>
               )}
             </div>
@@ -294,6 +301,10 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
  * @param {{ groups: import('../../../../domain/dossier/powerStrata.js').WebGroup[] }} props
  */
 export function TheWeb({ groups }) {
+  // THE PHONE PROSE FLOOR — the per-edge narrative. Read BEFORE the early return
+  // so the hook order is stable when no tie exists. The kind label, the glyph,
+  // the counts and the direction pill keep their own steps.
+  const mobile = useIsMobile();
   if (!groups.length) return null;
   const edgeCount = groups.reduce((n, g) => n + g.edges.length, 0);
 
@@ -329,7 +340,7 @@ export function TheWeb({ groups }) {
                           <span style={{ fontSize: FS.micro, fontWeight: 600, color: MUTED, background: swatch['#FAF8F4'], border: `1px solid ${SEAM}`, padding: '0 5px', flexShrink: 0 }}>{e.direction}</span>
                         )}
                       </div>
-                      {e.narrative && <p style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.45, margin: '3px 0 0' }}>{e.narrative}</p>}
+                      {e.narrative && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, margin: '3px 0 0' }}>{e.narrative}</p>}
                     </div>
                   );
                 })}

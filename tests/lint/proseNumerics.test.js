@@ -226,6 +226,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // import line became two. Path, category and snippet are byte-identical in all eight, the
 // census stays at 225 against a 225 ceiling, and no category count moves. The whole baseline
 // diff is sixteen lines, eight -/+ pairs, `"line"` values and nothing else.
+// THE SAME ORDER'S REMAINDER (2026-09-18, second sitting) — ONE MORE PURE LINE MOVE IN
+// PowerStrata.jsx, NO CEILING CHANGE, NO DEBT MOTION. Carrying the prose floor into the
+// faction and web strata adds two import lines and a five-line hook block ABOVE every row
+// that file owns, so all four re-address by seven: the distribution-bar pair 222 -> 229,
+// `{pct}` 224 -> 231 and `{r.power}` 265 -> 272. The five other files this car touches
+// (serviceComponents, NarrativeNote, Primitives' PlotHook, neighbourComponents,
+// DossierNarrativeBanner) carry NO banked row, and npcComponents' pair is untouched because
+// its edits all sit below line 144. Path, category and snippet are byte-identical, the
+// census stays at 225 against a 225 ceiling, and no category count moves.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

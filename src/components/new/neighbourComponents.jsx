@@ -6,9 +6,16 @@ import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
 import { useStore } from '../../store/index.js';
 import { entityAnchor, neighbourIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 export function NeighbourLinkCard({link,settlement,styleFor}) {
   const [open,setOpen]=useState(false);
+  // THE PHONE PROSE FLOOR — the shared history, the cause, the diplomatic
+  // status, each tension and opportunity, each connection's description and the
+  // reciprocity rows. The neighbour's name, the relationship tag, the section
+  // eyebrows and the NPC name/role lines keep their own steps.
+  const mobile = useIsMobile();
   // This card IS the neighbour's relationship card (its own anchor), so its
   // header stays the expand/collapse toggle rather than a self-link. The
   // index is read to cross-link the LOCAL NPC in each npcConnection to its
@@ -45,27 +52,27 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
             <span style={{fontSize:FS.xxs,fontWeight:700,color:st.color,background:`${st.color}15`,border:`1px solid ${st.color}40`,padding:'1px 8px'}}>{label}</span>
             {link.neighbourTier&&<span style={{fontSize:FS.xs,color:MUTED}}>{link.neighbourTier}</span>}
           </div>
-          {link.sharedHistory&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'4px 0 0',lineHeight:1.4}}>{link.sharedHistory}</p>}
+          {link.sharedHistory&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag3,margin:'4px 0 0',lineHeight:1.4}}>{link.sharedHistory}</p>}
         </div>
         <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
       {open&&<div style={{padding:'12px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${st.border}`}}>
         {link.cause&&<div style={{marginBottom:10}}>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Cause</div>
-          <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.cause}</p>
+          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.cause}</p>
         </div>}
         {link.diplomaticStatus&&<div style={{marginBottom:10}}>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Diplomatic Status</div>
-          <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.diplomaticStatus}</p>
+          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.diplomaticStatus}</p>
         </div>}
         {(link.tensions?.length>0||link.opportunities?.length>0)&&<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:10,marginBottom:10}}>
           {link.tensions?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',padding:'8px 10px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>Tensions</div>
-            {link.tensions.map((t,i)=><div key={i} style={{fontSize:FS.sm,color:swatch.inkMag2,marginBottom:3,lineHeight:1.4}}>▸ {t}</div>)}
+            {link.tensions.map((t,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.4}}>▸ {t}</div>)}
           </div>}
           {link.opportunities?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',padding:'8px 10px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>Opportunities</div>
-            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:FS.sm,color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}
+            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}
           </div>}
         </div>}
         {link.npcConnections?.length>0&&<div>
@@ -92,7 +99,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
                   <div style={{fontSize:FS.xxs,color:swatch['#5A6A9A']}}>{conn.neighbourNPCRole?`${conn.neighbourNPCRole} · `:''}  {link.neighbourName}</div>
                 </div>
               </div>
-              {conn.description&&<p style={{fontSize:FS.sm,color:swatch.inkMag,lineHeight:1.5,margin:0}}>{conn.description}</p>}
+              {conn.description&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,lineHeight:1.5,margin:0}}>{conn.description}</p>}
             </div>
           ))}
         </div>}
@@ -117,9 +124,9 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
               // rx.npcName is a LOCAL NPC (this settlement) -> link to its card.
               // rx.partnerName lives in the foreign settlement -> plain text.
               const _lid = localNpcId(index, rx.npcName);
-              return <div key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,marginBottom:4,lineHeight:1.4,paddingLeft:8,borderLeft:`2px solid ${_c}40`}}>
+              return <div key={i} style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,marginBottom:4,lineHeight:1.4,paddingLeft:8,borderLeft:`2px solid ${_c}40`}}>
                 <strong>{_lid ? <EntityLink id={_lid} type="npc" fallback={rx.npcName} style={{fontSize:'inherit',fontWeight:700}} /> : rx.npcName}</strong> ({rx.npcRole}) ↔ <strong style={{color:_c}}>{rx.partnerName}</strong> ({rx.partnerRole})
-                {rx.description&&<div style={{fontSize:FS.xxs,color:swatch.inkMag3,marginTop:1,fontStyle:'italic'}}>{rx.description}</div>}
+                {rx.description&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag3,marginTop:1,fontStyle:'italic'}}>{rx.description}</div>}
               </div>;
             })}
           </div> : null;

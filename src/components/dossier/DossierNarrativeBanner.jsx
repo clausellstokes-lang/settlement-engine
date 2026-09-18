@@ -1,5 +1,7 @@
 import { FS, swatch } from '../theme.js';
 import ProseParagraph from '../ProseParagraph.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 // ── Banner above tab content ──────────────────────────────────────────────
 // Thesis (identity-level prose) / per-tab note (lens) banner. Extracted
@@ -14,6 +16,9 @@ export default function DossierNarrativeBanner({
   selectedTab,
   aiRegenerating,
 }) {
+          // THE PHONE PROSE FLOOR — the thesis and the per-tab note ARE the prose
+          // this banner exists to carry. Its eyebrow keeps its own step.
+          const mobile = useIsMobile();
           // Owner views read the narrative overlay (aiSettlement); a public gallery
           // dossier embeds the narrative INTO the published settlement, so read the
           // thesis / per-tab note from the rendered settlement there. Either way
@@ -54,11 +59,11 @@ export default function DossierNarrativeBanner({
                   </div>
                   {showThesis
                     ? nsrc.thesis.split(/\n\n+/).map((para, i, arr) => (
-                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+                        <p key={i} style={{ margin: 0, marginBottom: i < arr.length - 1 ? 10 : 0, fontSize: proseFontSize(FS.md, mobile), color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
                           <ProseParagraph text={para.trim()} />
                         </p>
                       ))
-                    : <p style={{ margin: 0, fontSize: FS.md, color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
+                    : <p style={{ margin: 0, fontSize: proseFontSize(FS.md, mobile), color: swatch['#2D1F0E'], lineHeight: 1.65, fontFamily: 'Georgia, serif' }}>
                         <ProseParagraph text={note} />
                       </p>}
                 </div>

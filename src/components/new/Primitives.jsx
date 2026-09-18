@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FS, BODY, swatch, MUTED } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
 export const sans  = { fontFamily: 'Nunito, sans-serif' };
@@ -172,6 +174,10 @@ export function Tag({ color, bg, border, children }) {
 
 // Plot hook row
 export function PlotHook({ text, source, color }) {
+  // THE PHONE PROSE FLOOR — the hook sentence. The ✦ glyph and the source label
+  // are the row's furniture and keep their own steps. (ProseBlock is NOT touched
+  // here: the chair unifies it onto proseScale on the consist.)
+  const mobile = useIsMobile();
   const c = color || '#5a2a8a';
   const txt = Ti(text);
   return (
@@ -179,7 +185,7 @@ export function PlotHook({ text, source, color }) {
       <span style={{ color: c, flexShrink: 0, fontSize: FS.sm }}>\u2746</span>
       <div style={{ flex: 1 }}>
         {source && <div style={{ fontSize: FS.xxs, fontWeight: 700, color: c, marginBottom: 2 }}>{source}</div>}
-        <p style={{ margin: 0, fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
+        <p style={{ margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag, lineHeight: 1.45, fontStyle: 'italic' }}>{txt}</p>
       </div>
     </div>
   );
