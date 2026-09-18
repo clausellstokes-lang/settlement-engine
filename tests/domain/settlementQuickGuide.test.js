@@ -163,6 +163,37 @@ describe('composeSettlementQuickGuide', () => {
     expect(say('arabic')).toMatch(/^Testholm is an Arabic-inspired village/);
   });
 
+  it('takes the article from the SOUND, not from the letter', () => {
+    const lead = (label) => composeSettlementQuickGuide({
+      name: 'Testholm',
+      tier: 'village',
+      population: 400,
+      culturalIdentity: { label },
+      history: { historicalCharacter: 'Founded at a ford.' },
+    }).identitySentence.match(/^Testholm is (an?) /)[1];
+
+    // Every label the product mints is listed in ARTICLE_BY_LEAD, so none of these
+    // depends on the fallback rule at all.
+    expect(Object.entries(CULTURE_PROFILES).map(([, p]) => `${lead(p.label)} ${p.label}`)).toEqual([
+      'a Germanic-inspired', 'a Latin-inspired', 'a Celtic-inspired', 'an Arabic-inspired',
+      'a Norse-inspired', 'a Slavic-inspired', 'an East-Asian-inspired',
+      'a Mesoamerican-inspired', 'a South-Asian-inspired', 'a Steppe-inspired', 'a Greek-inspired',
+    ]);
+
+    // ⛔ THE FALLBACK IS WHERE THE NAIVE RULE WAS WRONG. A written vowel that opens
+    // with a consonant SOUND takes 'a', which `/^[aeiou]/` cannot know: these labels
+    // are not ones the product mints, so only the rule decides them.
+    expect(lead('European-inspired')).toBe('a');
+    expect(lead('Unified-Clans')).toBe('a');
+    expect(lead('One-Road')).toBe('a');
+    expect(lead('Umbrian-inspired')).toBe('an');
+    expect(lead('Oceanic-inspired')).toBe('an');
+
+    // And with no label at all the tier carries the article.
+    expect(composeSettlementQuickGuide({ name: 'Barebones' }).identitySentence)
+      .toBe('Barebones is a settlement.');
+  });
+
   it('falls through to historical character when the scope is not a term list', () => {
     // The mixed-culture profile's scope is a sentence about blending, not the
     // `<article> <terms> design grammar.` shape. Its label already carries the

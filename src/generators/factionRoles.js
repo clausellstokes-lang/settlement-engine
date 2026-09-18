@@ -137,7 +137,7 @@ const ROLE_KEY_SYNONYMS = Object.freeze({
   // `parishpriest` therefore stay beside the spellings that replaced them: a
   // persisted world must not quietly lose an office-holder because the catalog
   // was reworded after it was written.
-  deaconcurate: 'temple', juniorcleric: 'temple',
+  deaconcurate: 'temple', underchaplain: 'temple',
   // ⛔ `priest` WAS MISSING AND THAT WAS A LIVE REGRESSION, not a tidy-up. The hamlet's
   // role was renamed 'Parish Priest' -> 'Priest' for the setting-agnostic law, and this
   // table kept only the old spelling - so on the fallback path a realized Priest stopped

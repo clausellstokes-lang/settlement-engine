@@ -166,12 +166,7 @@ function composeIdentity(settlement) {
     ? ''
     : ` of ${formatCount(population)} ${population === 1 ? 'person' : 'people'}`;
 
-  // ⚠ THE ARTICLE WAS HARDCODED 'a', AND TWO OF THE ELEVEN LABELS START WITH A
-  // VOWEL: every Arabic-inspired and East-Asian-inspired settlement read "is a
-  // Arabic-inspired village" on the DM's first screen. Not a new defect and not
-  // this tranche's, but it is in the one sentence this tranche exists to make
-  // read correctly, and it is display-only.
-  const article = /^[aeiou]/i.test(descriptors) ? 'an' : 'a';
+  const article = articleFor(descriptors);
 
   const phrase = scopePhrase(scope);
   if (phrase) {
@@ -186,6 +181,60 @@ function composeIdentity(settlement) {
   }
 
   return sentence(`${name} is ${article} ${descriptors}${populationPhrase}`);
+}
+
+/**
+ * THE ARTICLE THE IDENTITY SENTENCE TAKES, per LEAD WORD.
+ *
+ * ⚠ IT WAS HARDCODED 'a', so every Arabic-inspired and East-Asian-inspired settlement
+ * read "is a Arabic-inspired village" on the DM's first screen. ⚠ AND THE OBVIOUS
+ * REPAIR IS ALSO WRONG: `/^[aeiou]/` gives "an European" and "an one-street hamlet",
+ * because English takes the article from the SOUND and not from the letter.
+ *
+ * So the words the product actually mints are listed, and nothing is inferred for
+ * them: the eleven authored culture labels and the six tiers. The rule below is a
+ * fallback for a label this file did not write - a legacy save, a custom identity -
+ * where being right most of the time is the best available and being wrong is no
+ * worse than the hardcoded article it replaces.
+ *
+ * @type {Readonly<Record<string, 'a' | 'an'>>}
+ */
+const ARTICLE_BY_LEAD = Object.freeze({
+  'Germanic-inspired': 'a',
+  'Latin-inspired': 'a',
+  'Celtic-inspired': 'a',
+  'Arabic-inspired': 'an',
+  'Norse-inspired': 'a',
+  'Slavic-inspired': 'a',
+  'East-Asian-inspired': 'an',
+  'Mesoamerican-inspired': 'a',
+  'South-Asian-inspired': 'a',
+  'Steppe-inspired': 'a',
+  'Greek-inspired': 'a',
+  thorp: 'a',
+  hamlet: 'a',
+  village: 'a',
+  town: 'a',
+  city: 'a',
+  metropolis: 'a',
+  settlement: 'a',
+});
+
+/**
+ * Written vowels that open with a consonant SOUND, so they take 'a': European,
+ * eulogy, ewe, one-street, once-great, unified, useful, usual, utopian, ubiquitous.
+ * Deliberately short and literal - a general pronunciation model is not something
+ * this file should be carrying, and every word the product mints is in the map above.
+ */
+const CONSONANT_SOUND_LEAD = /^(?:eu|ewe|one|once|uni|use|usu|uto|ubi|ufo)/i;
+
+/** @param {string} descriptors @returns {'a' | 'an'} */
+function articleFor(descriptors) {
+  const lead = descriptors.split(' ')[0] || '';
+  const known = ARTICLE_BY_LEAD[lead];
+  if (known) return known;
+  if (CONSONANT_SOUND_LEAD.test(lead)) return 'a';
+  return /^[aeiou]/i.test(lead) ? 'an' : 'a';
 }
 
 /**

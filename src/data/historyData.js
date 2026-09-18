@@ -326,7 +326,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['hospital', 'church', 'monastery', 'shrine'],
     },
     {
-      role: 'Junior Cleric',
+      role: 'Under-Chaplain',
       title: 'priest',
       priority: 4,
       minTier: 'hamlet',

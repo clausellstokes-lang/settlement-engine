@@ -13,6 +13,13 @@
  *     families the old `name.includes(...)` triple missed ('Street gang', 'Wayside
  *     shrine', 'Teleportation circle') while excluding non-matches.
  *  3. NPC generation stays deterministic — same seed ⇒ byte-identical NPCs.
+ *  4. THE SETTING-AGNOSTIC RENAMES CARRY NO MECHANICS. A role label is display
+ *     copy, but four separate classifiers read it as a SUBSTRING, so renaming one
+ *     can silently move an NPC's faction, category, power band, importance or
+ *     simulation archetype. This block asserts each rename lands on exactly what
+ *     its predecessor did — the pin that caught 'Deacon/Curate' -> 'Junior Cleric'
+ *     flipping npcAgency from `civic` to `religious` because 'cleric' is one of
+ *     the religious archetype's labels and 'deacon' is none of them.
  */
 import { describe, it, expect } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
@@ -25,6 +32,69 @@ import {
   isCommerceGuild,
 } from '../../src/generators/roleCategory.js';
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
+import { NPC_ROLE_ARCHETYPES } from '../../src/domain/worldPulse/npcAgency.js';
+
+// ── 0. the setting-agnostic renames are mechanically inert ───────────────────
+//
+// ⛔ EVERY CLASSIFIER THAT READS A ROLE STRING IS LISTED HERE, and the list is the
+// point: three of them live in npcGenerator.js (a file at its size ceiling, which
+// no rename may edit to compensate), one in domain/entities and one in
+// domain/worldPulse. A rename that is "display only" has to prove it on all five.
+const HIGH_POWER = ['mayor', 'lord', 'governor', 'bishop', 'archmage', 'guild_master', 'captain', 'commander', 'crime lord'];
+const MID_POWER = ['council_member', 'priest', 'wealthy_merchant', 'wizard', 'knight', 'magister', 'sergeant'];
+
+/** npcAgency.inferRoleArchetype: first match over the archetype order, `civic` by default. */
+function simulationArchetype(role) {
+  const text = String(role).toLowerCase();
+  for (const [name, def] of Object.entries(NPC_ROLE_ARCHETYPES)) {
+    if ((def.labels || []).some((label) => text.includes(label))) return name;
+  }
+  return 'civic';
+}
+
+/** npcGenerator.generateNPCPowerLevel's band, which decides influence and power. */
+function powerBand(role) {
+  const r = String(role).toLowerCase();
+  if (HIGH_POWER.some((k) => r.includes(k))) return 'high';
+  if (MID_POWER.some((k) => r.includes(k))) return 'moderate';
+  return 'low';
+}
+
+/** entities/npcs.inferImportance, which decides ripple weight. */
+function importanceOf(role) {
+  const r = String(role).toLowerCase();
+  if (/high priest|patriarch|matriarch|archmage|dragon|lord mayor|noble lord|baron|baroness|duke|duchess/.test(r)) return 'pillar';
+  if (/captain|priest|guildmaster|master|magister|sheriff|warden|abbot|seneschal/.test(r)) return 'key';
+  if (/lieutenant|clerk|sergeant|deputy|apprentice|councilor|merchant|smith/.test(r)) return 'notable';
+  return 'minor';
+}
+
+const classifiersFor = (role) => ({
+  category: roleToCategory(String(role).toLowerCase()),
+  archetype: simulationArchetype(role),
+  power: powerBand(role),
+  importance: importanceOf(role),
+});
+
+describe('setting-agnostic role renames are mechanically inert', () => {
+  it.each([
+    ['Parish Priest', 'Priest'],
+    ['Templar Commander', 'Temple Guard Commander'],
+    ['Wandering Friar', 'Wandering Monk'],
+    ['Deacon/Curate', 'Under-Chaplain'],
+  ])('%s -> %s classifies identically everywhere', (before, after) => {
+    expect(classifiersFor(after)).toEqual(classifiersFor(before));
+  });
+
+  it('the pin can fail: the rejected label DOES move the simulation archetype', () => {
+    // The negative control. Without it this block proves only that two strings agree,
+    // never that disagreement would be seen — and 'Junior Cleric' is the label this
+    // lane actually wrote before the review caught it.
+    expect(simulationArchetype('Deacon/Curate')).toBe('civic');
+    expect(simulationArchetype('Junior Cleric')).toBe('religious');
+    expect(classifiersFor('Junior Cleric')).not.toEqual(classifiersFor('Deacon/Curate'));
+  });
+});
 
 // ── 1. roleToCategory ─────────────────────────────────────────────────────────
 

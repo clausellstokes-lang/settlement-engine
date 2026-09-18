@@ -74,12 +74,12 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     expect(priest.linkedInstitutionIds).toContain('inst_temple');
   });
 
-  it('a realized office-holder under a DIFFERENT role name suppresses the placeholder (a junior cleric covers temple)', () => {
+  it('a realized office-holder under a DIFFERENT role name suppresses the placeholder (an under-chaplain covers temple)', () => {
     const out = ensureFactionStructuralNpcs({
       tier: 'town',
       institutions: [],
       powerStructure: { factions: [{ faction: 'Religious Authorities', category: 'religious' }] },
-      npcs: [{ id: 'npc_1', role: 'Junior Cleric', factionAffiliation: 'Religious Authorities' }],
+      npcs: [{ id: 'npc_1', role: 'Under-Chaplain', factionAffiliation: 'Religious Authorities' }],
     });
     const synth = (out.npcs || []).filter((n) => n.generatedAs === 'faction_structural');
     expect(synth).toHaveLength(0);
@@ -97,7 +97,7 @@ describe('generators-domain-2 — structural-NPC office coverage', () => {
     // left the table holding `parishpriest` alone, and a realized Priest stopped covering
     // the office here while every golden stayed green - the corpus reaches this office
     // through the power seat and never takes the fallback at all.
-    for (const role of ['Deacon/Curate', 'Junior Cleric', 'Parish Priest', 'Priest']) {
+    for (const role of ['Deacon/Curate', 'Under-Chaplain', 'Parish Priest', 'Priest']) {
       const out = ensureFactionStructuralNpcs({
         tier: 'town',
         institutions: [],
