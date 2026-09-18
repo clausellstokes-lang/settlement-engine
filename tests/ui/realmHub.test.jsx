@@ -5,14 +5,14 @@
  * Pins the four Realm-hub deliverables this phase asserts:
  *   1. Realm Dashboard renders the LIVE summary for a simulated campaign.
  *   2. Realm Dashboard shows the LOCKED teaser for anon/free (Realm reachable,
- *      not hidden) and fires the `map_realm_teaser` pricing moment.
+ *      not hidden) and opens NO second upsell over it — the gate is the ask.
  *   3. The Realm Inspector OVERLAYS — it renders its rail without unmounting
  *      anything; the map body is a sibling, not a body-swap.
  *   4. The Inspector self-hides the Pantheon section while religion is dormant.
  */
 
 import { describe, test, expect, afterEach, vi, beforeEach } from 'vitest';
-import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { act, render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -101,7 +101,7 @@ describe('RealmDashboard — live summary (premium)', () => {
 });
 
 describe('RealmDashboard — locked teaser (anon/free)', () => {
-  test('shows the locked teaser and fires map_realm_teaser', async () => {
+  test('shows the locked teaser and opens no second upsell over it', async () => {
     const onUpgrade = vi.fn();
     const onSignIn = vi.fn();
     render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="anon" onUpgrade={onUpgrade} onSignIn={onSignIn} />);
@@ -109,11 +109,13 @@ describe('RealmDashboard — locked teaser (anon/free)', () => {
     expect(screen.getByTestId('realm-dashboard-locked')).toBeTruthy();
     expect(screen.queryByTestId('realm-dashboard')).toBeNull();
 
-    // The teaser fires the simulation-intent pricing moment on mount (the
-    // pricingMoments module is dynamically imported, so wait for the microtask).
-    await waitFor(() => {
-      expect(triggerSpy).toHaveBeenCalledWith('map_realm_teaser', setActivePricingMoment, { tier: 'anon' });
-    });
+    // ⛔ AND NO SECOND UPSELL OVER IT. The gate used to fire map_realm_teaser on
+    // mount, which opened a modal on top of the very card making the ask — and
+    // the modal's own CTA still read "Sign in to unlock", the claim this gate
+    // exists to stop making. One surface, one ask.
+    await act(async () => { await Promise.resolve(); });
+    // anchored: the gate above is on screen, so the silent moment is a suppressed second upsell
+    expect(triggerSpy).not.toHaveBeenCalled();
 
     // P9 — pressing a gate control IS the advance attempt: it fires the
     // first_advance_attempt simulation-intent moment AND routes. For an

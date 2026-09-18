@@ -11,8 +11,9 @@
  * reachable elsewhere; this file pins the two relocations it owns:
  *   - the living-world controls (with Map geography) ride the Advance dialog while
  *     the realm has never advanced;
- *   - anon and free viewers, whose locked Herald teaser used to open on entry, still
- *     get the `map_realm_teaser` pricing moment on entry, once auth has settled.
+ *   - anon and free viewers get the honest locked GATE in the palette and NO second
+ *     upsell over it: the entry pricing moment that stood in for the unreachable
+ *     teaser is gone with the unreachability (2026-09-18).
  *
  * WorldMap is mounted on the desktop branch against a mutable store mock (the
  * worldMap.smoke idiom). RealmInspector is stubbed to a test id so the assertion is
@@ -244,7 +245,13 @@ describe('THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17)', () =
     expect(screen.queryByTestId('living-world-gates')).toBeNull();
   });
 
-  test('anon: no Herald on entry, and the Cartographer teaser moment still fires once auth has settled', async () => {
+  // ⛔ ONE SURFACE, ONE ASK. This hook used to fire the map_realm_teaser moment on
+  // entry, from a time when the locked gate was unreachable on a desktop Realm.
+  // The palette renders that gate now, so the moment stacked a modal ON TOP of it
+  // — two upsells on an anonymous visitor's first screen, the modal still saying
+  // signing in unlocks the Realm, which is the very claim the gate exists to stop
+  // making. The gate IS the upsell; no moment fires from the Realm's entry.
+  test('anon: no Herald on entry, and NO second upsell over the gate', async () => {
     resetStore({ tier: 'anon', loading: true });
     const WorldMap = await loadWorldMap();
     const view = render(<WorldMap onNavigate={() => {}} />);
@@ -253,15 +260,18 @@ describe('THE HERALD WAITS FOR THE FIRST ADVANCE (owner order 2026-09-17)', () =
 
     storeState.auth = { tier: 'anon', user: null, loading: false };
     view.rerender(<WorldMap onNavigate={() => {}} />);
+    await act(async () => { await new Promise((resolve) => { setTimeout(resolve, 30); }); });
 
-    await waitFor(() => expect(moments.triggerPricingMoment).toHaveBeenCalledTimes(1));
-    expect(moments.triggerPricingMoment).toHaveBeenCalledWith('map_realm_teaser', storeState.setActivePricingMoment, { tier: 'anon' });
+    // The gate is on screen and carries the ask itself.
+    expect(await screen.findByTestId('realm-palette-locked', {}, LAZY_CHUNK)).toBeTruthy();
+    // anchored: the gate above is live, so the silent moment is a suppressed second upsell, not an unmounted Realm
+    expect(moments.triggerPricingMoment).not.toHaveBeenCalled();
     expect(screen.queryByTestId('realm-inspector')).toBeNull();
     expect(screen.queryByRole('button', { name: TOGGLE })).toBeNull();
 
     view.rerender(<WorldMap onNavigate={() => {}} />);
     await act(async () => { await new Promise((resolve) => { setTimeout(resolve, 30); }); });
-    expect(moments.triggerPricingMoment).toHaveBeenCalledTimes(1);
+    expect(moments.triggerPricingMoment).not.toHaveBeenCalled();
   });
 
   test('premium: the entry moment never fires', async () => {

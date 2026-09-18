@@ -146,11 +146,6 @@ export default function SettlementPalette({
             tier={tier}
             icon={<Lock size={16} color={GOLD} />}
             testId="realm-palette-locked"
-            // useRealmInspector already fires map_realm_teaser once per Realm
-            // visit for exactly this viewer (it took the job over when the
-            // Herald was withheld until a realm's first advance). Firing again
-            // here would be a second moment for one arrival.
-            fireEntryMoment={false}
             onUpgrade={() => onNavigate?.('pricing')}
             onSignIn={() => onNavigate?.('signin')}
           />

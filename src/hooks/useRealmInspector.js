@@ -196,24 +196,12 @@ export function useRealmInspector({
   // reload of a realm that has advanced before.
   const heraldAvailable = realmHasAdvanced(activeCampaign);
 
-  // Anon / free viewers have no campaign here (useWorldMapCampaignModel), so their
-  // realm never advances and the Herald never opens for them. Its locked Dashboard
-  // teaser used to open on entry and fire the `map_realm_teaser` pricing moment as
-  // it mounted; that moment now fires from here instead, once per Realm visit after
-  // auth has settled (so a premium session still hydrating is not pitched), and
-  // cooldown-guarded exactly as before.
-  const authTier = useStore(s => s.auth?.tier);
-  const authSettled = useStore(s => s.auth?.loading !== true);
-  const lockedMomentFiredRef = useRef(false);
-  useEffect(() => {
-    if (canManageCampaigns || !authSettled || lockedMomentFiredRef.current) return;
-    lockedMomentFiredRef.current = true;
-    import('../lib/pricingMoments.js')
-      .then(({ triggerPricingMoment }) => {
-        triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
-      })
-      .catch(() => { /* never block the Realm on a pricing prompt */ });
-  }, [canManageCampaigns, authSettled, authTier]);
+  // ⛔ NO ENTRY PRICING MOMENT HERE ANY MORE. This hook fired map_realm_teaser
+  // for anon/free viewers because the locked teaser had become unreachable on a
+  // desktop Realm — the Herald that hosts it waits for a first advance these
+  // viewers can never run. The palette now renders that gate itself, so firing
+  // here stacked a modal on top of it: two upsells on one screen, the modal
+  // still saying signing in unlocks the Realm. The gate is the ask.
 
   // Honor a one-shot workspace request from another view (e.g. the Library
   // Advance-Time CTA → 'news'). Consume only once a campaign is active so the

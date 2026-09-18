@@ -28,11 +28,8 @@
  * @param {() => void} [props.onSignIn]           route to the sign-in surface (anon)
  * @param {{label: string, tone: string}|null} [props.previewTension]
  *        the viewer's OWN realm conflict band, when they have a campaign to preview
- * @param {boolean} [props.fireEntryMoment=true]  fire map_realm_teaser on mount
  * @param {string} [props.testId='realm-dashboard-locked']
  */
-
-import { useEffect } from 'react';
 
 import { useStore } from '../../store/index.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SP, sans } from '../theme.js';
@@ -45,7 +42,7 @@ export const REALM_GATE_HEADING = 'The Realm comes alive with Cartographer';
 
 export default function RealmLockedGate({
   tier, icon = null, onUpgrade, onSignIn, previewTension = null,
-  fireEntryMoment = true, testId = 'realm-dashboard-locked',
+  testId = 'realm-dashboard-locked',
 }) {
   // Purchases stay closed until launch (lib/launchGate.js). The TIER DOOR is a
   // conversion CTA and closes with the pill exactly like its siblings; "Sign in"
@@ -54,18 +51,13 @@ export default function RealmLockedGate({
   const purchasesAreOpen = purchasesOpen();
   const isAnon = tier === 'anon';
 
-  useEffect(() => {
-    if (!fireEntryMoment) return undefined;
-    let cancelled = false;
-    import('../../lib/pricingMoments.js')
-      .then(({ triggerPricingMoment }) => {
-        if (cancelled) return;
-        const setActive = useStore.getState().setActivePricingMoment;
-        triggerPricingMoment('map_realm_teaser', setActive, { tier });
-      })
-      .catch(() => { /* never block the teaser render */ });
-    return () => { cancelled = true; };
-  }, [tier, fireEntryMoment]);
+  // ⛔ THE GATE IS THE UPSELL, SO IT OPENS NO SECOND ONE. It used to fire the
+  // map_realm_teaser pricing moment on mount, from a time when this card was
+  // unreachable on a desktop Realm. Now that it renders in the palette, the first
+  // anonymous visit stacked TWO upsells: this honest gate, and a modal over it
+  // reading "UPGRADE — The Realm is where your world comes alive… Sign in to
+  // unlock / Not now" — the same sign-in-unlocks-the-Realm claim this gate exists
+  // to stop making. One surface, one ask.
 
   // P9 — pressing a gate control IS the advance attempt: fire the
   // simulation-intent moment (cooldown-guarded), then route. Both controls carry
