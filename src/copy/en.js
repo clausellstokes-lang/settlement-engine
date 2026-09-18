@@ -74,7 +74,19 @@ export const en = Object.freeze({
       headlineAccent: 'This one simulates.',
       deck:         'First settlement or hundredth: the pieces explain each other.',
       ctaTemplate:  'Forge a {tier} →',
-      subline:      '{remaining} of {cap} free today · no account',
+      // ⛔ THE ANON ALLOWANCE IS TWO BUCKETS, NOT THREE INTERCHANGEABLE RUNS.
+      // lib/anonGenCounter.js splits it into DEFAULT_DAILY_FULL_CAP (1 full
+      // generation) + DEFAULT_DAILY_REROLL_CAP (2 rerolls of it), and
+      // DEFAULT_DAILY_CAP is only their SUM, kept for legacy call sites. The one
+      // line that rendered it said '{remaining} of {cap} free today', so a
+      // first-time visitor was told '3 of 3 free today' and then hit the wall
+      // after one settlement. Three states, three sentences, each counting down
+      // from the live counter; the at-cap copy (hero.anonCap.*) takes over when
+      // both buckets are spent.
+      subline:          '{full} free settlement today, plus {rerolls} rerolls',
+      sublineOneReroll: '{full} free settlement today, plus 1 reroll',
+      sublineNoRerolls: '{full} free settlement today',
+      sublineRerolls:   'Rerolls left today: {rerolls}',
     },
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {

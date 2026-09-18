@@ -26,8 +26,8 @@ vi.mock('../../src/components/AnonTierTeaser.jsx', () => ({ default: () => null 
 // Anon cap helper — signed-in never hits it, but the module is imported.
 vi.mock('../../src/lib/anonGenCounter.js', () => ({
   anonAtCap: () => false,
-  anonGensRemaining: () => 3,
-  DEFAULT_DAILY_CAP: 3,
+  anonFullRemaining: () => 1,
+  anonRerollRemaining: () => 2,
 }));
 
 // Analytics is fire-and-forget.

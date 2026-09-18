@@ -24,7 +24,7 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  anonAtCap, anonGensRemaining, DEFAULT_DAILY_CAP,
+  anonAtCap, anonFullRemaining, anonRerollRemaining,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
@@ -155,7 +155,19 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
     setStageLive(true);
   };
   const atCap = anonAtCap();
-  const remaining = anonGensRemaining();
+  // THE FREE-TODAY LINE READS THE TWO BUCKETS SEPARATELY (lib/anonGenCounter.js:
+  // 1 full generation + 2 rerolls, never 3 interchangeable runs). The line used
+  // to render the SUM against the sum cap — '3 of 3 free today' to a visitor who
+  // had one settlement coming — which the first generation then contradicted.
+  // Both readers already existed on the counter; nothing about its semantics or
+  // its increments moves here, and the analytics events are untouched.
+  const fullLeft = anonFullRemaining();
+  const rerollsLeft = anonRerollRemaining();
+  const freeTodayLine = fullLeft > 0
+    ? t(rerollsLeft === 0 ? 'hero.v2.sublineNoRerolls'
+      : rerollsLeft === 1 ? 'hero.v2.sublineOneReroll'
+      : 'hero.v2.subline', { full: fullLeft, rerolls: rerollsLeft })
+    : t('hero.v2.sublineRerolls', { rerolls: rerollsLeft });
 
   // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero
   // mounts. Funnel.homepageView() handles the once-per-session guard
@@ -444,7 +456,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
                 {t('hero.ctaSubline')}
                 {' '}
                 <span style={{ opacity: 0.7 }}>
-                  ({remaining} of {DEFAULT_DAILY_CAP} free today)
+                  ({freeTodayLine})
                 </span>
               </p>
             )}
