@@ -4,6 +4,7 @@ import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 import { sans } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -291,7 +292,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
           </div>
-          <div style={{ fontSize: FS['11.5'], color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
+          <div style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
             Generate a prose description of ordinary life in this settlement. Dawn, the market, the tavern,
             the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>

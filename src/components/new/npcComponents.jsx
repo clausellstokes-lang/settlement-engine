@@ -120,8 +120,12 @@ export function NPCCategoryGroup({
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
-  // THE PHONE PROSE FLOOR — the card's two paragraphs, and only those; the
-  // names, the kind badge and the role line keep their own steps.
+  // THE PHONE PROSE FLOOR — the card's two paragraphs AND the role line beneath
+  // the names. The role line was left at its own step when this floor first
+  // landed, on the reading that it was furniture; the whole-dossier acceptance
+  // test measured it at 11px and 45+ characters, which is a passage a reader
+  // reads rather than glances at. The names, the kind badge and the emergent tag
+  // keep their own steps.
   const mobile = useIsMobile();
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
@@ -134,7 +138,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
               {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
             </div>
-            <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+            <div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
           <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>

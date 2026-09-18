@@ -108,7 +108,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             </Button>
           )}
         </div>
-        {historicalCharacter&&<p style={{...serif,fontSize: FS['13.5'],color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
+        {historicalCharacter&&<p style={{...serif,fontSize: proseFontSize(FS['13.5'], mobile),color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
         {/* ── DS-GEN-14 (history.founded) and DS-GEN-16 (history.record) ─────
             One sentence each, beside the age they band: how the town began, and
             whether the record still carries its blows forward. The DATUM above —
@@ -157,7 +157,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                     : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}
                 {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
-              {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
+              {event.summary&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
             </div>
             );
           })}
@@ -253,7 +253,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                   ))}
                 </div>
                 {/* Description */}
-                <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
+                <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
                 {/* Factions */}
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
                   {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
@@ -265,7 +265,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                     {t.plotHooks.map((hook,j)=>(
                       <div key={j} style={{display:'flex',gap:7,alignItems:'flex-start'}}>
                         <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm,marginTop:1}}>✦</span>
-                        <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.45,margin:0}}>{hook}</p>
+                        <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{hook}</p>
                       </div>
                     ))}
                   </div>
@@ -288,12 +288,12 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             ].filter(f=>f.value).map(({label,value})=>(
               <div key={label}>
                 <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,marginRight:5}}>{label}:</span>
-                <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{value}</span>
+                <span style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{value}</span>
               </div>
             ))}
           </div>
           {founding.stressNote&&<div style={{background:swatch['#FDF4EC'],border:'1px solid #e0c090',borderLeft:'3px solid #b8860b',padding:'8px 10px'}}>
-            <p style={{fontSize:FS.sm,color:swatch['#5A3010'],lineHeight:1.5,margin:0,fontStyle:'italic'}}>{founding.stressNote}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3010'],lineHeight:1.5,margin:0,fontStyle:'italic'}}>{founding.stressNote}</p>
           </div>}
         </div>
       </Collapsible>}
@@ -330,7 +330,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                         {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color}}>{typeLabel}</span>}
                         {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
                       </div>
-                      <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
+                      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
                     </div>
                     <div style={{flexShrink:0,textAlign:'right'}}>
                       <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>

@@ -13,6 +13,8 @@
 import { deriveMagicPosture } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -40,11 +42,15 @@ function Facet({ label, value }) {
  * @param {{ settlement: any }} props
  */
 export default function MagicTab({ settlement }) {
+  // THE PHONE PROSE FLOOR — the posture line, the role lines and the deity
+  // coupling. Bound above BOTH early returns so the hook order is stable; the
+  // facet labels and their values keep their own steps.
+  const mobile = useIsMobile();
   if (!settlement) return <div style={{ padding: 32, textAlign: 'center', color: MUTED }}>No settlement.</div>;
   const posture = deriveMagicPosture(settlement);
 
   if (!posture.available) {
-    return <div data-testid="magic-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Magic not assessed for this settlement.</div>;
+    return <div data-testid="magic-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile) }}>Magic not assessed for this settlement.</div>;
   }
 
   const deity = settlement?.config?.primaryDeitySnapshot || null;
@@ -58,7 +64,7 @@ export default function MagicTab({ settlement }) {
       <div style={{
         fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4,
       }}>Magic</div>
-      <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>{posture.display}</p>
+      <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>{posture.display}</p>
 
       {posture.magicExists ? (
         <>
@@ -87,7 +93,7 @@ export default function MagicTab({ settlement }) {
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
               {posture.roleLines.map((line, i) => (
-                <div key={i} data-role-line style={{ fontSize: FS.sm, color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
+                <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}
             </div>
           </div>
@@ -102,7 +108,7 @@ export default function MagicTab({ settlement }) {
                 Deity &amp; magic
               </div>
               {magicCoupling.map((line, i) => (
-                <div key={i} style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+                <div key={i} style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>
                   {deity.name}: {line}.
                 </div>
               ))}

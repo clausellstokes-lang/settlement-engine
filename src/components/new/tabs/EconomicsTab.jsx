@@ -6,6 +6,7 @@ import { formatCount } from '../../../domain/formatNumber.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -38,6 +39,8 @@ const FLOW_BAND_COLOR = { shortage: '#8b1a1a', adequate: '#a0762a', surplus: '#1
  * (marker + commodity-flow on + measured flow); absent ⇒ nothing ⇒ byte-identical tab.
  */
 function LiveTradeFlowSection({ drift, rung = null }) {
+  // THE PHONE PROSE FLOOR — the band's own sentence and the note under it.
+  const mobile = useIsMobile();
   const color = FLOW_BAND_COLOR[drift.band] || FLOW_BAND_COLOR.adequate;
   return (
     <Section title="Live Trade Flow" collapsible defaultOpen accent={color}>
@@ -50,12 +53,12 @@ function LiveTradeFlowSection({ drift, rung = null }) {
             BAND_COPY's own headlines and have already drifted from them (period vs em dash),
             so the corpus line REPLACES the headline rather than standing beside its twin.
             Undrawn (public dossier, or the corpus silent) ⇒ the headline stands. */}
-        <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drawnAtMount('economics.tradeFlow',rung)?.sentence||drift.headline}</p>
+        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drawnAtMount('economics.tradeFlow',rung)?.sentence||drift.headline}</p>
         <div style={{display:'flex',gap:14,flexWrap:'wrap',fontSize:FS.xs,color:swatch.inkMag3}}>
           <span><span style={{color:MUTED,marginRight:4}}>Inbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.inbound}</strong></span>
           <span><span style={{color:MUTED,marginRight:4}}>Outbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.outbound}</strong></span>
         </div>
-        <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
+        <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
           Live movement on the trade roads: a drift on top of the settlement's founding trade profile, not a replacement for it.
         </p>
       </div>
@@ -92,6 +95,10 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
+  // THE PHONE PROSE FLOOR — a chain's impairment line, its entrepot note and its
+  // magic substitution note. The chain name, the need tag and the status pill are
+  // the card's furniture and keep their own steps.
+  const mobile = useIsMobile();
   // Guard: a single malformed income entry (no string `source`) must not throw
   // and white-screen the whole tab — in the live generate flow this section is
   // rendered without an error boundary around it. Filter to entries we can
@@ -176,7 +183,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Impairment detail */}
               {chain.dependency && (
-                <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
+                <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
                   {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
@@ -184,12 +191,12 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Entrepôt note */}
               {chain.entrepot && chain.entrepotNote && !chain.dependency && (
-                <p style={{fontSize:FS.xxs,color:swatch['#A0762A'],fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
+                <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch['#A0762A'],fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{chain.entrepotNote}</p>
               )}
 
               {/* Magic substitution note */}
               {chain.magicNote && (
-                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],
+                <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.magic,background:swatch['#F8F0FF'],
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
                   <em>{chain.magicNote}</em>
                   {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:swatch['#7A4AAA'],fontWeight:700}}>
@@ -363,7 +370,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                   {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
               </div>
             </div>
             );
@@ -393,12 +400,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     : ownership.mixed
                       ? 'Also an exact custom endpoint'
                       : undefined;
-                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                  return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                  return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                 })}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
+              :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
             }
           </div>
           {/* Imports */}
@@ -418,16 +425,16 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                       : ownership.mixed
                         ? 'Also an exact custom endpoint'
                         : undefined;
-                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                    return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                    return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
-                {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
+                {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
                   {terrainCriticals.length>0&&eco.necessityImports?.length>0&&<span> · </span>}
                   {eco.necessityImports?.length>0&&<span style={{color:swatch.danger}}>Settlement necessity</span>}
                 </div>}
               </div>
-              :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
+              :<p style={{fontSize:proseFontSize(FS.sm, mobile),color:MUTED,fontStyle:'italic',margin:0}}>No recorded imports.</p>
             }
           </div>
         </div>
@@ -483,7 +490,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
         {/* Balance bar */}
         <div style={{marginBottom:10}}>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xs,color:swatch.inkMag3,marginBottom:4}}>
+          <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
             {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
             <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
@@ -501,7 +508,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           </div>
         </div>
         {/* Narrative */}
-        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
+        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
               ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
@@ -532,7 +539,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>
               <div style={{flex:1}}>
                 {cat&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginRight:6}}>{tokenCase(cat)}</span>}
-                <span style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.5}}>{text}</span>
+                <span style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.5}}>{text}</span>
               </div>
             </div>;
           })}
@@ -548,7 +555,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           now, as the FRAMING of what follows — the DS-HK-1 arrangement, where the block is
           the state the rows are read FROM and the rows keep their own words below. Silent on
           a free dossier and silent where no antecedent holds (R-DST-K). */}
-      {craftReasonLine && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
+      {craftReasonLine && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
 
       {(eco?.activeChains?.length > 0) && (
         <Section title={`Supply Chains (${eco.activeChains.length})`} collapsible defaultOpen={false}>
@@ -586,7 +593,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                       ))}
                     </div>
                   )}
-                  <div style={{fontSize:FS.xxs,color:presentation.color,lineHeight:1.45,marginTop:5}}>
+                  <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:presentation.color,lineHeight:1.45,marginTop:5}}>
                     {visibleReasons.length
                       ? visibleReasons.join(' ')
                       : presentation.summary}
@@ -684,7 +691,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             ONE speaking position reached a first-paint reader on under two percent of the
             worlds this generator builds. The scale note travels WITH it, so nothing is
             doubled and the fold's own reader loses nothing. */}
-        <p data-testid="economics-shadow-economy-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
         <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
@@ -695,7 +702,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,marginTop:2}}>Off-book</div>
               </div>
               <div style={{flex:1}}>
-                {dragDesc&&<p style={{fontSize: FS['11.5'],color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
+                {dragDesc&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
               </div>
             </div>
 
@@ -728,7 +735,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             </div>}
 
             {/* Note directing to Defense for power structure */}
-            <div style={{fontSize:FS.xs,color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
+            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
               Criminal power structures, enforcement dynamics, and public order detail → Defense tab
             </div>
 

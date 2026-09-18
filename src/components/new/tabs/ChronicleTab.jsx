@@ -12,6 +12,8 @@
  */
 import { Section, Empty } from '../Primitives';
 import { FS } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 import { INK as OINK } from '../../../design/organic/ink.js';
 import { RUBRIC } from '../../../design/organic/rubrication.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
@@ -55,6 +57,10 @@ function chronicleAnchor(event) {
 }
 
 export default function ChronicleTab({ entries = [] }) {
+  // THE PHONE PROSE FLOOR — an entry's summary, the only passage in the annal.
+  // Bound above the empty-state early return so the hook order is stable; the
+  // day stamp, the title and the source tag keep their own steps.
+  const mobile = useIsMobile();
   if (!entries.length) {
     return (
       <Empty message="No chronicle yet. Your changes, the party's actions, and the world's own turns will gather here as the settlement's living history, timed from canonization." />
@@ -81,7 +87,7 @@ export default function ChronicleTab({ entries = [] }) {
                       ? <span title="A change you authored" style={stamp(SRC_EDIT)}>Edit</span>
                       : <span title="Driven by the wider world" style={stamp(WORLD)}>World</span>}
                 </div>
-                {event.summary && <p style={{ fontSize: FS.sm, color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
+                {event.summary && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
                 {/* THE NEWS ADDRESS LAW (2026-07-22): a world entry states, beside its
                     verbatim headline (subject + action), the subject's LINKED address
                     chain (settlement › power › faction › npc — INSPECTOR-ADDRESS-WEB

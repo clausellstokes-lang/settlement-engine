@@ -184,7 +184,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
             <NeighbourLinkCard link={link} settlement={r} styleFor={styleFor}/>
             {/* INDEX-PAIRED with the desk's own per-link group, nulls kept in place. */}
             {(relDesk.networkLines[i]||[]).filter(Boolean).map((t,j)=>(
-              <p key={j} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'-6px 0 0',fontStyle:'italic'}}>{t}</p>
+              <p key={j} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'-6px 0 0',fontStyle:'italic'}}>{t}</p>
             ))}
           </React.Fragment>)}
         </div>
@@ -207,7 +207,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
                 {isr.partnerRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.partnerRole})</span>}
                 <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic',flexShrink:0}}>{isr.partnerSettlement}</span>
               </div>
-              {isr.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
+              {isr.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
               <div style={{marginTop:4}}>
                 <span style={{fontSize:FS.xxs,fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'1px 8px'}}>
                   {(isr.relType||'linked').replace(/_/g,' ')}
@@ -257,7 +257,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
       {!neighboursOnly&&<>
       {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'10px 14px',marginBottom:16}}>
         <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
-        <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
+        <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
         </p>
       </div>}
@@ -332,7 +332,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
       </Section>}
 
       </>
-      }{!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:FS.md}}>
+      }{!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
         Generate a settlement to see relationship data.
       </div>}
     </div>

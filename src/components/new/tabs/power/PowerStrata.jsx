@@ -111,11 +111,16 @@ function groupSupportByBasis(support) {
  */
 export function ThePowers({ settlement, powers, factionSupport }) {
   const [openIdx, setOpenIdx] = useState(null);
+  // THE PHONE PROSE FLOOR — the stratum's caption and the support BASIS line,
+  // the two reading passages here. Read BEFORE the early return so the hook
+  // order is stable on a town with no powers; the role pill, the faction name,
+  // the archetype and the power/risk badges keep their own steps.
+  const mobile = useIsMobile();
   if (!powers.length) return null;
 
   return (
     <Section title={`The Powers (${powers.length})`} collapsible defaultOpen accent="#8b6a1a">
-      <div style={{ fontSize: FS.xxs, color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
+      <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
         Who holds and who contests the seat. Open a power to see the institutions behind it.
       </div>
       <div style={{ border: `1px solid ${SEAM}` }}>
@@ -172,7 +177,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                     {groupSupportByBasis(support).map((group) => (
                       <div key={group.why}>
                         {/* The basis, said once for the whole group. */}
-                        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.45, marginBottom: 2 }}>{group.why}</div>
+                        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, marginBottom: 2 }}>{group.why}</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 8, borderLeft: `1px solid ${SEAM}` }}>
                           {group.edges.map((edge, si) => (
                             <span key={si} style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
@@ -310,7 +315,7 @@ export function TheWeb({ groups }) {
 
   return (
     <Section title={`The Web (${edgeCount})`} collapsible defaultOpen accent="#4a6a1a">
-      <div style={{ fontSize: FS.xxs, color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
+      <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
         How the powers and factions stand to one another, grouped by the kind of tie.
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>

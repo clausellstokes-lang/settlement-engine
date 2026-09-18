@@ -20,6 +20,9 @@ export const sans  = { fontFamily: 'Nunito, sans-serif' };
  * dailyLife, services, resources, viability, npcs, dmCompass).
  */
 export function TabIntro({ tabKey }) {
+  // THE PHONE PROSE FLOOR — the tone line IS the caption this primitive carries.
+  // Bound above the missing-key early return so the hook order is stable.
+  const mobile = useIsMobile();
   const line = t(`tabs.${tabKey}`);
   // If the key is missing the t() helper returns the key string itself
   // ("tabs.overview"). Render nothing in that case rather than a broken
@@ -33,7 +36,7 @@ export function TabIntro({ tabKey }) {
     <p style={{
       margin: '0 0 12px 0',
       fontFamily: 'Crimson Text, Georgia, serif',
-      fontSize: FS.sm,
+      fontSize: proseFontSize(FS.sm, mobile),
       fontStyle: 'italic',
       color: BODY,       // ink-600 — keeps AA on the readable caption
       lineHeight: 1.5,
@@ -197,7 +200,10 @@ export function PlotHook({ text, source, color }) {
 
 // Empty state
 export function Empty({ message }) {
-  return <div style={{ padding: '24px 0', textAlign: 'center', color: MUTED, fontSize: FS.md, fontStyle: 'italic' }}>{message}</div>;
+  // THE PHONE PROSE FLOOR — every tab's empty state is a sentence the reader
+  // reads, and this is the one place all of them render.
+  const mobile = useIsMobile();
+  return <div style={{ padding: '24px 0', textAlign: 'center', color: MUTED, fontSize: proseFontSize(FS.md, mobile), fontStyle: 'italic' }}>{message}</div>;
 }
 
 // Summary accordion card — js in original (mobile=accordion, desktop=always open)

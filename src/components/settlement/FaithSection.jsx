@@ -34,6 +34,8 @@ import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const TONE_COLOR = { good: GREEN, gold: GOLD, bad: RED };
 const TREND = {
@@ -63,8 +65,10 @@ function Meter({ label, value, color = GOLD }) {
 
 /** A single plain-prose cause sentence (the legibility law). */
 function Cause({ children }) {
+  // THE PHONE PROSE FLOOR — a cause chain IS a sentence (the legibility law).
+  const mobile = useIsMobile();
   return (
-    <div style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
+    <div style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
       <span style={{ color: GOLD, fontWeight: 900, flexShrink: 0 }}>•</span>
       <span>{children}</span>
     </div>
@@ -74,6 +78,9 @@ function Cause({ children }) {
 /** The full, read-only faith panel (ACTIVE mode). */
 function ActiveFaith({ model }) {
   const [faithOpen, setFaithOpen] = useState(false);
+  // THE PHONE PROSE FLOOR — the coupling bullets and the newly-founded note. The
+  // patron line, the standings rows and the band words keep their own steps.
+  const mobile = useIsMobile();
   const { patron, cults, effects, live, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence } = model;
 
   return (
@@ -117,7 +124,7 @@ function ActiveFaith({ model }) {
             {faithOpen && (
               <ul style={{ margin: '4px 0 0', padding: '0 0 0 12px', listStyle: 'none' }}>
                 {effects.map((eff, i) => (
-                  <li key={i} style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, marginBottom: 3, lineHeight: 1.4 }}>
+                  <li key={i} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), marginBottom: 3, lineHeight: 1.4 }}>
                     <span style={{ color: GOLD, fontWeight: 900 }}>•</span> {eff}
                   </li>
                 ))}
@@ -211,7 +218,7 @@ function ActiveFaith({ model }) {
         )}
 
         {!live && (
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             The faith has only just taken root. Adherent shares, legitimacy, and the tides of devotion emerge as the world turns.
           </div>
         )}
@@ -222,6 +229,9 @@ function ActiveFaith({ model }) {
 
 /** The generic true-neutral line + a quiet upgrade prompt (TEASER mode). Names NO deity. */
 function FaithTeaser({ publicDossier }) {
+  // THE PHONE PROSE FLOOR — the true-neutral line and the upgrade prompt, the
+  // two passages this teaser exists to carry.
+  const mobile = useIsMobile();
   const tier = useStore((s) => s.auth?.tier);
   const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
   const setActivePricingMoment = useStore((s) => s.setActivePricingMoment);
@@ -246,12 +256,12 @@ function FaithTeaser({ publicDossier }) {
         <Sparkles size={15} color={MUTED} />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Faith</span>
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
       </div>
       {!publicDossier && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
           </span>
           <Button

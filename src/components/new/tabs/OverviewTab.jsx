@@ -283,7 +283,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
           <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
             {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
-            {r.spatialLayout?.layout&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
+            {r.spatialLayout?.layout&&<span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
       </div>
@@ -591,7 +591,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
           in with Geography). Inner quarter cards keep the composite's craft. */}
       {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
-        {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
+        {r.spatialLayout.layout&&<p style={{fontSize:proseFontSize(FS.sm,mobile),fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
           {r.spatialLayout.quarters.map((q,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
@@ -607,7 +607,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
-          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
+          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {/* Coherence notes (G5): sole web render site of the generation-frozen
             coherenceNotes record — the header carries the survey vintage. */}

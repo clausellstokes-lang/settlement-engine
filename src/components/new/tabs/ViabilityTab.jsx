@@ -17,6 +17,8 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
@@ -28,6 +30,12 @@ import ProseBlock from '../ProseBlock.jsx';
 const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 
 export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
+  // THE PHONE PROSE FLOOR — the verdict summary, the what-this-checks caption,
+  // the receipt's reading lines and every issue description, reason, impact and
+  // suggested fix below. Bound above the early return so the hook order is
+  // stable; the verdict headline, the category eyebrows and the metric pills
+  // keep their own steps.
+  const mobile = useIsMobile();
   // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
   // the town's own voice beside the three data the panel already prints.
   // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN (rules-of-hooks; ARCH §4.1, X-F9, SEAM car 3g):
@@ -141,8 +149,8 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                 {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'}
               </span>
             </div>
-            {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
-            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
+            {summaryClean&&<p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
+            <p style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
               This tab checks whether your settlement makes logical sense, as judged at the first survey; later
               events and edits do not re-run this check. Not whether it&apos;s economically optimised.
               A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
@@ -193,13 +201,13 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               culture {generationReceipt.cultureProfile} · themes {generationReceipt.contentProfile}
             </span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
+          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
             {(generationReceipt.checks||[]).filter(item=>item.status==='pass').length}/{(generationReceipt.checks||[]).length} checks passed
             {(generationReceipt.repairs||[]).length>0&&` · ${(generationReceipt.repairs||[]).length} deterministic repair${generationReceipt.repairs.length===1?'':'s'} recorded`}
             {(generationReceipt.authoredTensions||[]).length>0&&` · ${(generationReceipt.authoredTensions||[]).length} explicit tension${generationReceipt.authoredTensions.length===1?'':'s'} preserved`}
           </div>
           {generationJudgments.length>0&&(
-            <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
+            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
               Formal judgments: {supportedGenerationJudgments.length}/{generationJudgments.length} supported
               {reviewGenerationJudgments.length>0&&` · ${reviewGenerationJudgments.length} need${reviewGenerationJudgments.length===1?'s':''} review`}
             </div>
@@ -210,7 +218,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
             </div>
           ))}
           {reviewGenerationJudgments.map(judgment=>(
-            <div key={judgment.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+            <div key={judgment.id} style={{fontSize:proseFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
               {judgment.label}: {judgment.summary||'Formal judgment needs review.'}
             </div>
           ))}
@@ -224,14 +232,14 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
             Magic Dependency · First Survey
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
+          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
             chains are magically sustained, or stress conditions are being offset by arcane, divine,
             or druidic intervention. Losing those practitioners through conflict, plague, or
             political disruption would immediately expose critical vulnerabilities.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
-            <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
+            <div key={i} style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
               borderLeft:'2px solid #c0a0e0',fontStyle:'italic'}}>
               {c.label}: {c.magicNote}
             </div>
@@ -248,21 +256,21 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {magicLine&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a3a9a',
           padding:'9px 13px',marginBottom:12}}>
-          <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
+          <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
         </div>
       )}
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
       {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
-        <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
+        <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
           These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
         </div>
         {byDesignIssues.map((v2,i)=>(
           <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
-            <div style={{fontSize: FS['11.5'],color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
+            <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
             {v2.suggestedFixes?.[0] && (
-              <div style={{fontSize: FS['10.5'],color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
+              <div style={{fontSize: proseFontSize(FS['10.5'], mobile),color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
             )}
           </div>
         ))}
@@ -275,7 +283,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
             <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
               {v2.institution||v2.group}
             </div>
-            <p style={{fontSize:FS.md,color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
+            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
           </div>
         ))}
       </Section>}
@@ -288,14 +296,14 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
-            {issue.priorityNote&&<p style={{fontSize: FS['11.5'],color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
+            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            {issue.priorityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:3}}>
                   <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize: FS['11.5'],color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}
@@ -313,12 +321,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
                   <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}
@@ -328,13 +336,13 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
       {stressConsequences.length>0&&<Section title={`Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
-        <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
           These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
-            <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
           </div>
         ))}
       </Section>}
@@ -348,13 +356,13 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
-            {wobj.description&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
-            {wobj.impact&&<p style={{fontSize: FS['11.5'],color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
+            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
+            {wobj.impact&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
                   <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
-                  <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{fix}</span>
+                  <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
             </div>}
