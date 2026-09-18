@@ -22,6 +22,8 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18) — see the framing block below for
 // why this position is also CAPPED, which no other position is.
 import ProseBlock from '../ProseBlock.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * ⭐ THE FRAMING CAP, AND THE RULING BEHIND IT (owner finding 4, 2026-09-18).
@@ -59,6 +61,11 @@ const BORDER = swatch['#E8D9B0'];
 const SERIF = 'Crimson Text, Georgia, serif';
 
 export default function PlotHooksTab({ settlement, publicDossier = false, playerView = false }) {
+  // THE PHONE PROSE FLOOR — the framing lines and every hook body. Bound above
+  // the empty-state early return so the hook order is stable on a town that
+  // surfaces no hooks. The hook's source name and its category tag are the card's
+  // furniture and keep their own steps.
+  const mobile = useIsMobile();
   const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
   // DS-HK-1: the state a hook is framed FROM, never the hook prose itself. One line per
   // category the page actually carries, then one per live escalation clock.
@@ -89,7 +96,7 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
           }}>
             <ProseBlock lines={framingLines.slice(0, FRAMING_CAP)}
               settlementName={settlement?.name} tier={settlement?.tier}
-              style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}/>
+              style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}/>
           </div>
         )}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -120,7 +127,7 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     {String(cat.label).toUpperCase()}
                   </span>
                 </div>
-                <div style={{ fontSize: FS.xxs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+                <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
                   {hook.text}
                 </div>
               </div>

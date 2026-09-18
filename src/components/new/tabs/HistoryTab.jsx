@@ -15,6 +15,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // four identity lenses each rendered one `<p>` per sentence; they are now one paragraph
 // each. The DRAW is unchanged — the same strings `drawnAtMount` ruled on in the reader.
 import ProseBlock from '../ProseBlock.jsx';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -350,7 +351,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                       const hookText = typeof hook==='object'?hook.hook||Ti(hook):hook;
                       return <div key={j} style={{display:'flex',gap:7,marginBottom:4}}>
                         <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>
-                        <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.45,margin:0}}>{hookText}</p>
+                        <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{hookText}</p>
                       </div>;
                     })}
                   </div>}
