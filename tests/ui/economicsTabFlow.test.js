@@ -210,6 +210,9 @@ import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
+import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 
 /**
  * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
@@ -280,6 +283,45 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
 }, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
 
+/**
+ * ⭐ THE ANCHOR AS THE PAGE PRINTS IT (the block weave, 2026-09-18). Every `DeskLines` position
+ * renders ONE woven paragraph, and from the second sentence on an opening settlement name is
+ * stood down to the tier noun. The anchor is therefore put through THE SHIPPED WEAVE at the
+ * index the DESK hands the renderer — the claim is unchanged in force and gains one more: the
+ * sentence reaches the DOM in the form the reader actually meets. A line that is not in the
+ * position's own list comes back UNCHANGED and still fails loudly.
+ * @param {string} sentence @param {ReadonlyArray<string|null|undefined>} lines
+ * @param {{name?: unknown, tier?: unknown}} settlement
+ */
+function onPage(sentence, lines, settlement) {
+  const kept = (lines || []).filter(Boolean);
+  const index = kept.indexOf(sentence);
+  if (index < 0) return sentence;
+  return weaveBlock(kept, {
+    settlementName: settlement.name, tierNoun: tierNounFor(settlement.tier),
+  }).sentences[index];
+}
+
+/**
+ * The four economy-desk positions `DeskLines` renders, each with the desk keys its call site
+ * hands over IN ORDER. Named once so the arm below drives exactly what the tabs drive.
+ */
+const DESK_LINE_MOUNTS = Object.freeze({
+  'resources.groundAndWorkings': ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'],
+  'services.catalogStanding': ['catalogStanding', 'impairedService'],
+  'economics.exportPosture': ['exportPosture'],
+  'daily_life.standingOfLiving': ['prosperityRung'],
+  'economics.commercialProfile': ['incomeMix', 'criminalLine', 'tradeProfile'],
+});
+
+/** The sentences one position draws for a settlement, in the order its call site lists them. */
+function positionLines(mount, settlement) {
+  const desk = economyDeskRead(settlement, { publicDossier: false, playerView: false });
+  return DESK_LINE_MOUNTS[mount]
+    .map((key) => drawnAtMount(mount, desk[key])?.sentence)
+    .filter(Boolean);
+}
+
 describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
   test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
     const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
@@ -289,13 +331,17 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     const pubText = pub.container.textContent;
     // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
     // moved rather than the first.
+    // The four lenses render as ONE woven paragraph, so each anchor is taken in the form the
+    // page prints it: `strengths` is the SECOND sentence and opens on the town's name, so what
+    // reaches the DOM is "The village has more than one thing…" (see `onPage`).
+    const lines = positionLines('resources.groundAndWorkings', GROUND);
     expectNoSeedFailures(collectSeedFailures(Object.entries({
       terrain: GROUND_LINES.terrain,
       strengths: GROUND_LINES.strengths,
       worth: GROUND_LINES.worth,
       workings: GROUND_LINES.workings,
     }), ([lens, line]) => expectPresentThenAbsent(
-      privText, pubText, line, `resources.groundAndWorkings :: ${lens}`,
+      privText, pubText, onPage(line, lines, GROUND), `resources.groundAndWorkings :: ${lens}`,
     )), 'all four resources lenses draw privately and none reaches a public dossier');
     // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
     // generator's own strategic-value line are the page's and are not corpus prose.
@@ -354,6 +400,59 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     expect(econ.container.textContent).not.toContain(GROUND_LINES.standing);
     expect(econ.container.textContent, 'the economics page did not render at all')
       .toContain('Comfortable');
+  });
+
+  /**
+   * ⭐ THE TWO NAME PROPS REACH EVERY `DeskLines` MOUNT (the weave's last car, 2026-09-18).
+   *
+   * The shared renderer weaves unconditionally, but it can only stand a repeated opening name
+   * down when its call site hands over `settlementName` and `tier` — and for one landing it did
+   * not, because all four of these tabs belonged to other lanes. A missing prop is INVISIBLE to
+   * every other arm in this file: the paragraph still renders, the sentences are all still
+   * there, and only the opening word differs. So each mount is driven here, by the exact desk
+   * keys its call site lists, and the DOM is compared against the WOVEN form.
+   */
+  test('every DeskLines mount renders its WOVEN paragraph, so the name props are threaded', () => {
+    useStore.setState({ campaigns: [] });
+    /** @type {Array<[string, any, object]>} */
+    const renders = [
+      ['resources.groundAndWorkings', ResourcesTab, { settlement: GROUND, publicDossier: false }],
+      ['services.catalogStanding', ServicesTab, { settlement: GROUND, services: GROUND.availableServices, publicDossier: false }],
+      ['economics.exportPosture', EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+      ['daily_life.standingOfLiving', DailyLifeTab, { settlement: GROUND, publicDossier: false }],
+      ['economics.commercialProfile', EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+    ];
+    let judged = 0;
+    const failures = collectSeedFailures(renders, ([mount, Tab, props]) => {
+      const lines = positionLines(mount, GROUND);
+      if (lines.length === 0) return; // R-DST-K: a position the corpus is silent about.
+      judged += 1;
+      const woven = weaveBlock(lines, {
+        settlementName: GROUND.name, tierNoun: tierNounFor(GROUND.tier),
+      }).paragraph;
+      const text = render(e(Tab, props)).container.textContent;
+      cleanup();
+      expect(text, `${mount}: the page does not carry its woven paragraph`).toContain(woven);
+    });
+    expectNoSeedFailures(failures, 'every DeskLines mount renders the paragraph the weave produces');
+    expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
+  });
+
+  test('…and the stand-down really fires in a tab, not only in the weave\'s own unit test', () => {
+    // NON-VACUITY WITH A NAMED SUBJECT. `resources.groundAndWorkings` is the one position this
+    // fixture draws more than one lens at, and its SECOND lens opens on the town's name — so
+    // this is the arm that would red if a call site dropped `settlementName`/`tier`.
+    useStore.setState({ campaigns: [] });
+    const lines = positionLines('resources.groundAndWorkings', GROUND);
+    expect(lines.length, 'the position stopped drawing more than one lens').toBeGreaterThan(1);
+    const stoodDown = onPage(GROUND_LINES.strengths, lines, GROUND);
+    expect(stoodDown, 'the strengths lens no longer opens on the name, so this arm is free')
+      .not.toBe(GROUND_LINES.strengths);
+    expect(stoodDown).toBe('The village has more than one thing it is good at, and the list is short enough that everybody here could recite it.');
+    const text = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false })).container.textContent;
+    expect(text, 'the tab renders the raw sentence, so the props did not reach DeskLines')
+      .not.toContain(GROUND_LINES.strengths); // anchored: the toContain below proves this same render carries the position
+    expect(text).toContain(stoodDown);
   });
 
   test('the ROUTER threads the public condition to all three new tabs', () => {

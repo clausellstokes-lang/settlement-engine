@@ -39,6 +39,9 @@ import {
   FaithCreedLines, FaithSeatLines, WarStandingLines, WarTreatyLines, warFaithDeskRungs,
 } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { DeskLines } from '../../src/components/new/tabs/WarFaithDesk.jsx';
+import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
+import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -185,6 +188,76 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
       expect(call.slice(0, 400)).toContain('publicDossier');
     });
   }
+
+  /**
+   * ⭐ THE TWO NAME PROPS REACH THIS DESK'S POSITIONS (the weave's last car, 2026-09-18).
+   *
+   * `DeskLines` weaves unconditionally, but it can only stand a REPEATED opening settlement
+   * name down when the wrapper hands it `settlementName` and `tier` — and for one landing no
+   * wrapper did, because both host tabs belonged to other lanes. A dropped prop is INVISIBLE
+   * to every other arm here: the paragraph still renders and every sentence is still in it.
+   *
+   * ⛔ THE RUNGS ARE HAND-BUILT ON PURPOSE, and it is the lawful idiom rather than a shortcut
+   * (`dossierMountRegistry.walker.test.js:640` hands the registry's reader the same shape).
+   * WHICH variant a pool draws is a function of the seed, and on this file's fixture no
+   * position happens to draw a second lens that OPENS on the name — so an arm built from the
+   * corpus would prove nothing today and would start proving something on a seed nobody chose.
+   * Two rungs whose sentences are the test's own make the claim exact and seed-free: this
+   * renderer, at this mount, stands the second opening down. `war.standing` is a SENTENCE row
+   * in the registry, so `drawnAtMount` passes both rungs through.
+   */
+  test('DeskLines stands a repeated opening name down when the wrapper hands it the settlement', () => {
+    const line = (text) => legibilityRung('', { blockId: 'DS-WAR-1', poolKey: 'test', angle: 'plain', text }, []);
+    const rungs = [
+      line('Steinmark is at war in the way a town can be at war without seeing any.'),
+      line('Steinmark carries a light mark from its fighting and is very nearly clear of it.'),
+    ];
+    const town = { ...SETTLEMENT, tier: 'town' };
+    const withName = render(e(DeskLines, {
+      mount: 'war.standing', rungs, settlementName: town.name, tier: town.tier,
+    })).container.textContent;
+    cleanup();
+    // ONE paragraph, and the SECOND opening stood down — the whole claim, in the DOM.
+    expect(withName).toBe(weaveBlock(rungs.map((r) => r.sentence), {
+      settlementName: town.name, tierNoun: tierNounFor(town.tier),
+    }).paragraph);
+    expect(withName).toContain('The town carries a light mark');
+    // …and the FIRST sentence keeps its name, so the paragraph still says who it is about.
+    expect(withName).toContain('Steinmark is at war');
+    // WITHOUT the props the same rungs still WEAVE and simply do not stand down — which is
+    // exactly the invisible failure this arm exists to catch, pinned from both sides.
+    const without = render(e(DeskLines, { mount: 'war.standing', rungs })).container.textContent;
+    expect(without).toContain('Steinmark carries a light mark');
+  });
+
+  test('…and every wrapper hands its settlement through, at every mount', () => {
+    // STRUCTURAL, per position: each wrapper is rendered with a real desk AND a settlement, and
+    // its paragraph is compared against the weave of its own drawn lines. This fires whether or
+    // not a stand-down is available on the fixture, which the arm above cannot.
+    const town = { ...SETTLEMENT, tier: 'town' };
+    const war = deskAt(WAR_READINGS, false);
+    const faith = deskAt(FAITH_READINGS, false);
+    /** @type {Array<[string, any, object, string[]]>} */
+    const positions = [
+      ['war.standing', WarStandingLines, war, ['warStatus', 'warExhaustion', 'warMobilization', 'warOccupation', 'warHoldings']],
+      ['war.treaties', WarTreatyLines, war, ['treatyTerm', 'treatyFraying', 'treatyDocument']],
+      ['faith.patronSeat', FaithSeatLines, faith, ['patronRank', 'patronCults', 'devotion', 'pietyArc', 'standings', 'sink', 'mandate', 'faithDark']],
+      ['faith.creedStanding', FaithCreedLines, faith, ['creedStanding', 'creedLegitimacy', 'creedNiche', 'creedFall']],
+    ];
+    let judged = 0;
+    for (const [mount, Component, desk, keys] of positions) {
+      const lines = keys.map((k) => desk[k]?.sentence).filter(Boolean);
+      if (lines.length === 0) continue; // R-DST-K
+      judged += 1;
+      const woven = weaveBlock(lines, {
+        settlementName: town.name, tierNoun: tierNounFor(town.tier),
+      }).paragraph;
+      const text = render(e(Component, { desk, settlement: town })).container.textContent;
+      cleanup();
+      expect(text, `${mount}: the wrapper does not render the paragraph the weave produces`).toBe(woven);
+    }
+    expect(judged, 'no position spoke on these fixtures, so the arm judged nothing').toBe(4);
+  });
 
   test('the ROUTER threads publicDossier to both host tabs', () => {
     const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');

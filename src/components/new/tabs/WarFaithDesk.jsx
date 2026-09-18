@@ -118,9 +118,12 @@ export function warFaithDeskRungs({
  *
  * The shape is `EconomicsGlance.DeskLines` deliberately: one idiom for "a position that is
  * a paragraph", so a reader who has met one has met both.
- * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string}} props
+ * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string,
+ *   settlementName?: unknown, tier?: unknown}} props `settlementName` and `tier` are the
+ *   town's own `name` and `tier`; without them the sentences still join and no opening name
+ *   is stood down, so a call site that has not caught up cannot break.
  */
-export function DeskLines({ mount, rungs, testId }) {
+export function DeskLines({ mount, rungs, testId, settlementName, tier }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
   // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
@@ -131,14 +134,13 @@ export function DeskLines({ mount, rungs, testId }) {
   // keys, and two lenses drawing the same line now simply both appear in it rather than
   // colliding.
   //
-  // ⚠ IT WEAVES BUT DOES NOT YET STAND THE NAME DOWN, on the same SCOPE line as its twin:
-  // the stand-down needs `settlement.name` and `settlement.tier`, and the five wrappers below
-  // are called from WarTab.jsx and FaithTab.jsx, which this lane does not own. Each wrapper
-  // takes one `settlement` prop and threads `settlementName`/`tier` through when their owner
-  // is free. Deliberately deferred — documented, not a bug to re-find.
+  // ⭐ THE NAME NOW REACHES HERE, through one `settlement` prop on each wrapper below. It was
+  // deferred at the weave's first landing because the wrappers are called from WarTab.jsx and
+  // FaithTab.jsx, which belonged to other lanes. Both props stay OPTIONAL: a caller that omits
+  // them gets the join and no stand-down, never an error.
   return (
     <div data-testid={testId} style={{ margin: '0 0 12px' }}>
-      <ProseBlock lines={lines} style={{
+      <ProseBlock lines={lines} settlementName={settlementName} tier={tier} style={{
         color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
         margin: '0 0 6px', fontStyle: 'italic',
       }}/>
@@ -147,18 +149,20 @@ export function DeskLines({ mount, rungs, testId }) {
 }
 
 /** The war tab's standing paragraph — DS-WAR-1's five lenses at one position. */
-export function WarStandingLines({ desk }) {
-  return <DeskLines mount={STANDING_MOUNT} testId="war-desk-standing" rungs={[
-    desk.warStatus, desk.warExhaustion, desk.warMobilization, desk.warOccupation,
-    desk.warHoldings,
-  ]} />;
+export function WarStandingLines({ desk, settlement = null }) {
+  return <DeskLines mount={STANDING_MOUNT} testId="war-desk-standing"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.warStatus, desk.warExhaustion, desk.warMobilization, desk.warOccupation,
+      desk.warHoldings,
+    ]} />;
 }
 
 /** The war tab's treaty paragraph — DS-WAR-2's clause, fraying and document lenses. */
-export function WarTreatyLines({ desk }) {
-  return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties" rungs={[
-    desk.treatyTerm, desk.treatyFraying, desk.treatyDocument,
-  ]} />;
+export function WarTreatyLines({ desk, settlement = null }) {
+  return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.treatyTerm, desk.treatyFraying, desk.treatyDocument,
+    ]} />;
 }
 
 /**
@@ -184,11 +188,12 @@ export function WarDormantNote({ desk, fallback }) {
 }
 
 /** The faith tab's patron-seat paragraph — DS-FTH-1's seven lenses at one position. */
-export function FaithSeatLines({ desk }) {
-  return <DeskLines mount={PATRON_SEAT_MOUNT} testId="faith-desk-seat" rungs={[
-    desk.patronRank, desk.patronCults, desk.devotion, desk.pietyArc, desk.standings,
-    desk.sink, desk.mandate, desk.faithDark,
-  ]} />;
+export function FaithSeatLines({ desk, settlement = null }) {
+  return <DeskLines mount={PATRON_SEAT_MOUNT} testId="faith-desk-seat"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.patronRank, desk.patronCults, desk.devotion, desk.pietyArc, desk.standings,
+      desk.sink, desk.mandate, desk.faithDark,
+    ]} />;
 }
 
 /**
@@ -196,10 +201,11 @@ export function FaithSeatLines({ desk }) {
  * Rendered beside the niche rows, which is where the standing and legitimacy words the
  * corpus is talking about already appear.
  */
-export function FaithCreedLines({ desk }) {
-  return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed" rungs={[
-    desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
-  ]} />;
+export function FaithCreedLines({ desk, settlement = null }) {
+  return <DeskLines mount={CREED_STANDING_MOUNT} testId="faith-desk-creed"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[
+      desk.creedStanding, desk.creedLegitimacy, desk.creedNiche, desk.creedFall,
+    ]} />;
 }
 
 /**
@@ -217,8 +223,9 @@ export function FaithCreedLines({ desk }) {
  * not a fact about the town, so the two are not twins the way the war dormant note and its
  * fallback are.
  */
-export function FaithTeaserLines({ desk }) {
-  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser" rungs={[desk.faithTeaser]} />;
+export function FaithTeaserLines({ desk, settlement = null }) {
+  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser"
+    settlementName={settlement?.name} tier={settlement?.tier} rungs={[desk.faithTeaser]} />;
 }
 
 /**

@@ -162,8 +162,11 @@ export default function EconomicsGlance({
  * @param {object} props
  * @param {string} props.mount the position id, as the registry spells it
  * @param {ReadonlyArray<object|null>} props.rungs the lenses, in reading order
+ * @param {unknown} [props.settlementName] the town's own name — `settlement.name`. Absent, the
+ *   sentences still join into one paragraph and no opening name is stood down.
+ * @param {unknown} [props.tier] the town's tier token — `settlement.tier`.
  */
-export function DeskLines({ mount, rungs }) {
+export function DeskLines({ mount, rungs, settlementName, tier }) {
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
   // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18). Every lens of a
@@ -172,16 +175,15 @@ export function DeskLines({ mount, rungs }) {
   // That whole class is gone with the list: one paragraph needs no keys, and two identical
   // sentences now simply both appear in it. The `<p>`'s look is unchanged.
   //
-  // ⚠ THIS POSITION WEAVES BUT DOES NOT YET STAND THE NAME DOWN, and that is a SCOPE line
-  // rather than an oversight. The stand-down needs `settlement.name` and `settlement.tier`,
-  // and every call site of this component (EconomicsTab, ServicesTab, ResourcesTab,
-  // DailyLifeTab) is owned by another lane in this program — this component's own API had to
-  // stay unchanged. Each call site needs exactly one edit when its owner is free:
-  // `settlementName={s?.name} tier={s?.tier}` threaded to the props below. Deliberately
-  // deferred — documented, not a bug to re-find.
+  // ⭐ THE TWO NAME PROPS ARE OPTIONAL AND ADDITIVE, which is what let this land after the
+  // renderers. They were deferred at the weave's first landing because all four call sites
+  // (EconomicsTab, ServicesTab, ResourcesTab, DailyLifeTab) belonged to other lanes; they are
+  // threaded now. A caller that omits them still gets the JOIN — one paragraph instead of a
+  // column of one-sentence ones — and simply no stand-down, so nothing here can break on a
+  // call site that has not caught up.
   return (
     <div style={{margin:'0 0 12px'}}>
-      <ProseBlock lines={lines}
+      <ProseBlock lines={lines} settlementName={settlementName} tier={tier}
         style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 6px',fontStyle:'italic'}}/>
     </div>
   );

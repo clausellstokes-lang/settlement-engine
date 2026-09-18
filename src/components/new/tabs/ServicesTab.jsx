@@ -124,7 +124,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           Additive — the counts strip, the category grid and the absence chips below are the
           DATUM and are untouched. Silent on a settlement with no catalog at all, because the
           tab itself returns early there (R-DST-K). */}
-      <DeskLines mount="services.catalogStanding" rungs={[deskProse.catalogStanding, deskProse.impairedService]} />
+      <DeskLines mount="services.catalogStanding" settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding, deskProse.impairedService]} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>

@@ -69,7 +69,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           and the ONE resource line the reader meets first in the section below. The DS-ECO-12
           shape, not a new one. Additive: the terrain word, the strengths chips and the
           generator's own strategic-value line all stay exactly where they are. */}
-      <DeskLines mount="resources.groundAndWorkings" rungs={[deskProse.terrainIdentity, deskProse.economicStrengths, deskProse.strategicValue, deskProse.exploitation]} />
+      <DeskLines mount="resources.groundAndWorkings" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.terrainIdentity, deskProse.economicStrengths, deskProse.strategicValue, deskProse.exploitation]} />
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>

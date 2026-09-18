@@ -246,11 +246,11 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       {patronRank && <PatronSeatBlock patron={patronRank} contested={!!model.contested} />}
       {/* ── faith.patronSeat (DS-FTH-1) — rank, cults, devotion, the arc, standings,
           the sink and the mandate, in the town's own voice ── */}
-      <FaithSeatLines desk={deskProse} />
+      <FaithSeatLines desk={deskProse} settlement={settlement} />
       {model.hasEmbed && model.ranks.length > 0 && <NicheOccupancyBlock ranks={model.ranks} depth={deepening.byName} desk={deskProse} />}
       {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy, the niche contest and
           the patron fall, beside the rows those words already appear in ── */}
-      <FaithCreedLines desk={deskProse} />
+      <FaithCreedLines desk={deskProse} settlement={settlement} />
       {/* W-FAITH F7c — the cumulative field, band words only; absent when the
           projection is (dark world, nothing authored, or a dead-magic dial). */}
       {model.hasEmbed && deepening.fieldRows.length > 0 && <FieldBlock rows={deepening.fieldRows} />}
@@ -289,7 +289,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
               The call to action above is product furniture rather than a fact about the
               town, so the corpus line sits UNDER it instead of replacing it — unlike the
               war tab's dormant note, whose fallback IS a fact and is therefore replaced. ── */}
-          <FaithTeaserLines desk={deskProse} />
+          <FaithTeaserLines desk={deskProse} settlement={settlement} />
         </div>
       )}
     </div>

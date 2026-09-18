@@ -341,7 +341,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         foodRung={deskProse.foodTile} seasonRung={deskProse.granaryTile} />
 
       {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line, trade) ── */}
-      <DeskLines mount="economics.commercialProfile" rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.tradeProfile]} />
+      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.tradeProfile]} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
@@ -377,7 +377,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             LABEL and stays; this is the town's own account of the same reading. The section
             itself is the surface, so a town with no trade rosters at all renders neither
             (R-DST-K). */}
-        <DeskLines mount="economics.exportPosture" rungs={[deskProse.exportPosture]} />
+        <DeskLines mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]} />
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>

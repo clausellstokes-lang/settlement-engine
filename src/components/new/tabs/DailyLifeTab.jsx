@@ -194,7 +194,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           there, R-DST-A) and it does NOT speak on overview (DS-GEN-3's five `prosperity:`
           pools already speak about the rung at overview.systemsHealth — measured, not
           assumed). Additive: every anchor fact and the AI narrative below are untouched. */}
-      <DeskLines mount="daily_life.standingOfLiving" rungs={[deskProse.prosperityRung]} />
+      <DeskLines mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]} />
 
       {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
       {/* Unsaved settlements (Create page) get a slim inline hint instead of

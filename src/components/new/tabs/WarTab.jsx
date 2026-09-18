@@ -575,7 +575,7 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       {!hasWar && martialCrises.length > 0 && <MartialCrisisBlock crises={martialCrises} />}
       {hasWar && <WarBlock war={war} nameFor={nameFor} />}
       {/* ── war.standing (DS-WAR-1) — the martial record in the town's own voice ── */}
-      <WarStandingLines desk={deskProse} />
+      <WarStandingLines desk={deskProse} settlement={settlement} />
       {war && war.wars.length > 0 && <WarsBlock wars={war.wars} sid={sid} nameFor={nameFor} />}
       {hasMuster && <MusterBlock musterLine={war.musterLine} armyStatus={war.armyStatus} martial={war.martial} />}
       {war && war.unit && (
@@ -587,7 +587,7 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       {war && war.beliefs.length > 0 && <BeliefsBlock beliefs={war.beliefs} />}
       {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
       {/* ── war.treaties (DS-WAR-2) — the clause that is under the most strain ── */}
-      {hasTreaties && <WarTreatyLines desk={deskProse} />}
+      {hasTreaties && <WarTreatyLines desk={deskProse} settlement={settlement} />}
       {!anything && (
         // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest. The corpus line
         // REPLACES the plain sentence rather than standing under it: both say the town is
