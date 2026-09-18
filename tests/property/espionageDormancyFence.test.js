@@ -200,7 +200,9 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * read the one generated pressureSentence; src/generators/narrativeText.js carried three
  * templates that made a bare commodity label the subject of a number-sensitive verb, and all
  * three became invariant clauses. On THIS corpus 3 of 360 rows move; 360/360 hashes stay
- * distinct. `a0c145b2…` -> `38a26ac1…`.
+ * distinct. `a0c145b2…` -> `38a26ac1…` (the record's cause quotes the LANE-TIP chain
+ * `f13df68e…` -> `38a26ac1…`, measured before the consist carried the second movement; the
+ * door re-measured on the consist and wrote this figure, as the record itself instructs).
  *
  * ── 2026-09-18, THE CONTENT-COHERENCE FIXES (owner-signed, through the door) ────────────
  * THE SECOND MOVEMENT SINCE THE GENESIS FREEZE, and like the first it is a signed re-record
@@ -214,7 +216,9 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * role catalog's generalist bucket filing any role into any faction, and D3 rewrote eight plot
  * hooks out of the rolled-table register. D4 and D4b moved nothing here: they are a display
  * read-model. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
- * `f13df68e…` -> `a0c145b2…`.
+ * `f13df68e…` -> `a0c145b2…` (the record's cause quotes `4f764737…`, the D1–D4 lane-tip
+ * measurement taken before D1b moved 441 further rows of the same corpus; the door
+ * re-measured on the consist and wrote this figure).
  *
  * ── 2026-09-17, THE DOSSIER CONTRADICTIONS (owner-signed, through the door) ────────────
  * THE FIRST MOVEMENT OF THIS CONSTANT SINCE THE GENESIS FREEZE, AND IT DID NOT WAIT FOR THE
