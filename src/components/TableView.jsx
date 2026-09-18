@@ -32,7 +32,8 @@ import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
-import useIsMobile, { proseFontSize } from '../hooks/useIsMobile.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header

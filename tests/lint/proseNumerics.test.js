@@ -219,11 +219,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // `{rel.strength}` re-addresses 132 -> 136 and `{rel.tension}` 139 -> 143; the Power tab's
 // basis-caption grouping adds thirty-three lines ABOVE every row PowerStrata.jsx owns, so its
 // distribution-bar pair re-addresses 189 -> 222, `{pct}` 191 -> 224 and `{r.power}`
-// 232 -> 265; the phone prose floor adds eight lines above TableView's `{pressure}`
-// (236 -> 244) and eight above SessionMode's `{n?.power || 0}` (436 -> 444). Path, category
-// and snippet are byte-identical in all eight, the census stays at 225 against a 225 ceiling,
-// and no category count moves. The whole baseline diff is sixteen lines, eight -/+ pairs,
-// `"line"` values and nothing else.
+// 232 -> 265; the phone prose floor adds nine lines above TableView's `{pressure}`
+// (236 -> 245) and nine above SessionMode's `{n?.power || 0}` (436 -> 445), and one more above
+// npcComponents' pair (so 132 -> 137 and 139 -> 144) when the floor helper moved out of
+// `hooks/useIsMobile.js` into its own `design/proseScale.js` leaf and each consumer's single
+// import line became two. Path, category and snippet are byte-identical in all eight, the
+// census stays at 225 against a 225 ceiling, and no category count moves. The whole baseline
+// diff is sixteen lines, eight -/+ pairs, `"line"` values and nothing else.
 // ══ LOWERED BY TE-HERALD-1, THE HUMANIZATION WAVE (owner directive, ODQ §754.3;
 //    boundary ruled §763.2) ═══════════════════════════════════════════════════════
 // This is the wave the four sentences frozen above were "owed". The debt named in the

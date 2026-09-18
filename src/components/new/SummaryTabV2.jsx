@@ -28,7 +28,8 @@ import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuic
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
 import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
-import useIsMobile, { proseFontSize } from '../../hooks/useIsMobile.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];

@@ -19,7 +19,7 @@
   },
   {
     "path": "src/components/TableView.jsx",
-    "line": 244,
+    "line": 245,
     "category": "floatInterpolation",
     "snippet": "{pressure}"
   },
@@ -385,13 +385,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 136,
+    "line": 137,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 143,
+    "line": 144,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -703,7 +703,7 @@
   },
   {
     "path": "src/components/session/SessionMode.jsx",
-    "line": 444,
+    "line": 445,
     "category": "floatInterpolation",
     "snippet": "{n?.power || 0}"
   },

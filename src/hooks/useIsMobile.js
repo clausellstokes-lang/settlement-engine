@@ -51,45 +51,6 @@ export function getIsMobile(breakpoint = DEFAULT_BREAKPOINT) {
   return getStore(breakpoint).matches;
 }
 
-// ── THE PHONE PROSE FLOOR ─────────────────────────────────────────────────────
-// Measured on a 375px phone (2026-09-18): the dossier's reading text — the NPC
-// card's wants, secrets and constraints, the quick guide's defining truths and
-// pressure, the table-night card bodies, the Services tab's absence notes — sat
-// at 10, 11, 12 and 13px. Those steps were chosen on a wide screen, where a
-// paragraph has 600px of measure and 12px still scans; on a 343px column the
-// same step is the size the reader has to bring the phone closer for, and the
-// dossier IS the read-at-the-table surface.
-//
-// The floor applies to PROSE and to nothing else. Labels, eyebrows, badges,
-// counts and chips keep their own scale: raising them would flatten the
-// hierarchy that makes the prose findable in the first place, and they are
-// glanced at rather than read.
-
-/** The smallest a dossier prose paragraph may render below the breakpoint (px). */
-export const PHONE_PROSE_FLOOR = 14;
-
-/**
- * A prose size for the width the reader is actually at. Pure, so a surface can
- * call it once per paragraph without a hook per call site, and so it can be
- * tested without a viewport.
- *
- * Takes the DESKTOP size (an FS token) rather than returning one size for
- * everything, so a surface keeps its own typographic steps wherever they already
- * clear the floor — the ladder is preserved, only its bottom rungs lift.
- *
- * NO TOKEN IS IMPORTED HERE, deliberately: this module is a zero-import leaf that
- * dozens of components pull in, and importing the theme from it would drag the
- * token module into every one of their typecheck and bundle surfaces.
- *
- * @param {number} desktopSize the size this prose renders at on a wide screen
- * @param {boolean} mobile     the viewport flag, from `useIsMobile()`
- * @returns {number} the size to render at now
- */
-export function proseFontSize(desktopSize, mobile) {
-  if (!mobile) return desktopSize;
-  return desktopSize < PHONE_PROSE_FLOOR ? PHONE_PROSE_FLOOR : desktopSize;
-}
-
 /**
  * Reactive mobile-width flag, backed by a single shared matchMedia listener per
  * breakpoint. Updates on resize AND orientation change. All consumers across the

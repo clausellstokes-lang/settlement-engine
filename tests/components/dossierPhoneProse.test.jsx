@@ -23,7 +23,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { proseFontSize, PHONE_PROSE_FLOOR } from '../../src/hooks/useIsMobile.js';
+import { proseFontSize, PHONE_PROSE_FLOOR } from '../../src/design/proseScale.js';
 
 function installMatchMedia(matches) {
   window.matchMedia = vi.fn((query) => ({
