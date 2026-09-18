@@ -214,7 +214,7 @@ export default function AboutManifesto() {
         <Covenant
           claim="Your world can never be locked inside this tool."
           mechanism="Worlds export as print-ready PDFs, virtual-tabletop maps, and structured data. Exports you download are yours permanently. If you cancel, your saved settlements are not deleted out from under you."
-          receipt={<>Downgrade retention is pinned to the database itself: saved settlements stay retrievable for {RETENTION_MONTHS} months after a downgrade (source: migration 023), and downloaded exports survive anything that happens to the service.</>}
+          receipt={<>Downgrade retention is pinned to the database itself: saved settlements stay retrievable for {RETENTION_MONTHS} months after a downgrade (source: migration 023), and downloaded exports survive anything that happens to the service. The whole promise is published as the <A href="/covenant">Portability Covenant</A>, and every line of it is bound to the capability that keeps it.</>}
         />
         <Covenant
           claim="The engine can never resolve a named character&rsquo;s fate."
@@ -350,9 +350,11 @@ export default function AboutManifesto() {
           built to be inspected. Open the <A href="/compendium">Compendium</A> and read the catalogs
           the engine renders from its own registries. Read the{' '}
           <A href="/compendium?tab=operations">operation registry</A> and see exactly what the engine
-          can and cannot do. When you are ready, <A href="/pricing">pricing</A> is plain-spoken and
-          the ownership terms are on the page: you never need a subscription to keep what you made,
-          and you are never charged for a task that produced nothing.
+          can and cannot do. If you find a fact this world states that does not trace back to a
+          cause, that is the one bug we want most: the <A href="/bounty">contradiction bounty</A> is
+          a standing invitation to send it. When you are ready, <A href="/pricing">pricing</A> is
+          plain-spoken and the ownership terms are on the page: you never need a subscription to
+          keep what you made, and you are never charged for a task that produced nothing.
         </p>
         <ForgeExactDemo />
         {/* The promised credits roll — dormant until a founder opts in (170). */}

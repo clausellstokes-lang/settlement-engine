@@ -16,6 +16,9 @@
  * `en` tree, so tests and the copy linter still see one complete registry and
  * the strings stay single-sourced.
  *
+ * BECAUSE IT IS EAGER, EVERY KEY HERE IS PAID FOR AT FIRST PAINT. Keys that no
+ * surface resolves are deleted rather than parked (four were, on 2026-09-18).
+ *
  * FIRST-PAINT LAW: never import copy/index.js (or en.js) from any module in
  * the eager graph — that re-drags the whole registry into the entry closure
  * (tests/build/vendorPdfLazy.test.js's byte budget will fail). If eager shell
@@ -24,19 +27,26 @@
  */
 
 export const footer = {
-  tagline:  'A simulator for Dungeon Masters.',
   antiAi:   'Simulated, not AI-generated.',
   about:    'About',
+  // The Practical Guide (/about/guide) and the public roadmap (/roadmap) had ZERO
+  // inbound links outside the route registry: reachable only by typing the URL or
+  // finding them in the sitemap. Neither has a top-nav block, so the ribbon is
+  // their door — which is exactly the job routes.js already credits it with.
+  guide:    'Guide',
+  roadmap:  'Roadmap',
   pricing:  'Pricing',
-  compendium: 'Compendium',
-  gallery:  'Gallery',
-  discord:  'Discord',
   privacy:  'Privacy',
   terms:    'Terms',
   refunds:  'Refunds',
   contact:  'Feedback & support',
   copyright: '© {year} SettlementForge',
 };
+// DELETED 2026-09-18 with the orphan-route sweep: `tagline`, `compendium`,
+// `gallery` and `discord` were resolved by nothing. This module is EAGER (the
+// first-paint entry chunk reads it), so an unused string here is not free — it is
+// bytes every visitor downloads for a link that does not exist. `refunds` stays:
+// PurchaseModal resolves it.
 
 // The namespaces the eager shell may read. Keyed so call sites keep the exact
 // same dotted keys they used against the full registry ('footer.pricing').

@@ -1,8 +1,8 @@
 /**
  * LegalRibbonRow.jsx — the app's one legal/commercial footer row (LD-3).
  *
- * Pricing · Feedback & support · Terms · Privacy · About, above the copyright and
- * the "Simulated, not AI-generated." line. Lifted VERBATIM out of App.jsx's global
+ * Pricing · Feedback & support · Terms · Privacy · About · Guide · Roadmap, above the
+ * copyright and the "Simulated, not AI-generated." line. Lifted VERBATIM out of App.jsx's global
  * footer when LD-3 (2026-08-01) ordered the landing page to end on its painting:
  * the landing stopped rendering the global footer, so this row became something
  * the landing band could carry WITHOUT forking the copy or the routes.
@@ -103,6 +103,20 @@ export default function LegalRibbonRow({
             bottom bar's five seats and About yielded its seat by priority. */}
         <Button variant="ghost" size="sm" onClick={() => onNavigate('about-what-this-is')} style={link}>
           {t('footer.about')}
+        </Button>
+        <Sep />
+        {/* ⛔ THE TWO ORPHANS (2026-09-18). /about/guide (the Practical Guide) and
+            /roadmap had NO inbound link anywhere outside lib/routes.js: neither
+            carries a `nav:` block, nothing on any page pointed at either, and the
+            only ways in were the sitemap and typing the URL. They sit beside About
+            because the Guide IS the About family's operational half, and the
+            roadmap is the one page that says what is coming. */}
+        <Button variant="ghost" size="sm" onClick={() => onNavigate('about-guide')} style={link}>
+          {t('footer.guide')}
+        </Button>
+        <Sep />
+        <Button variant="ghost" size="sm" onClick={() => onNavigate('roadmap')} style={link}>
+          {t('footer.roadmap')}
         </Button>
       </nav>
       {showHome && (

@@ -79,6 +79,10 @@ export const ROUTES = Object.freeze([
   // already in the world 404s or lands on the wrong half.
   { view: 'about',                 path: '/about',                 title: 'About' },
   { view: 'about-what-this-is',    path: '/about/what-this-is',    title: 'What this Is',                  nav: { label: 'About',      order: 70 } },
+  // The Practical Guide. FOOTER-LINKED as of 2026-09-18 (components/footer/
+  // LegalRibbonRow.jsx, key footer.guide): before that it had no inbound link
+  // anywhere outside this table, so the only ways in were the sitemap and typing
+  // the URL. No top-nav block (About holds the family's one cell), no guard.
   { view: 'about-guide',           path: '/about/guide',           title: 'Practical Guide' },
   // Retired: the pre-split About page. Kept so old links resolve; the redirect
   // effect forwards it (with its ?tab= deep link translated to an anchor).
@@ -89,19 +93,26 @@ export const ROUTES = Object.freeze([
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
   // THE FOUNDERS' HALL — thirty numbered chairs, all by invitation, none ever
-  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, footer-linked (no
-  // top-nav block), no guard. Lazy route; its chair read is fail-closed
+  // sold (docs/DESIGN_FOUNDERS_HALL.md). Public + indexable, no top-nav block, no
+  // guard. IT IS NOT FOOTER-LINKED, and this line said it was until 2026-09-18:
+  // its real inbound links are the About page's covenant band and the First
+  // Hundred roll, both of which name it in prose. Lazy route; the chair read is
+  // fail-closed
   // (components/founders/FoundersHallPage.jsx). The PATH stays /founders on
   // purpose — the page's design changed, its address did not, so every link and
   // index entry already in the world still lands.
   { view: 'founders',              path: '/founders',              title: "The Founders' Hall" },
   // The First Hundred: the founding-cohort honor roll (an unpriced acknowledgment of
-  // early members, distinct from the paid Founder seats). Public + indexable, no
-  // top-nav block, no guard. Reached by direct link + the sitemap (it links out to
-  // the Founders page). Lazy route; renders only the committed opted-in roll.
+  // early members, distinct from the Founder chairs, which are given and never sold).
+  // Public + indexable, no top-nav block, no guard. LINKED FROM THE FOUNDERS' HALL
+  // since 2026-09-18 — the cross-link ran one way (this page named the Hall, the Hall
+  // said nothing back), so the roll had no inbound link outside this table. Lazy
+  // route; renders only the committed opted-in roll.
   { view: 'first-hundred',         path: '/first-hundred',         title: 'The First Hundred' },
   // The public roadmap: rendered only from the committed vNext ledger. Public +
-  // indexable, no top-nav block, no guard. Lazy route.
+  // indexable, no top-nav block, no guard. FOOTER-LINKED as of 2026-09-18
+  // (LegalRibbonRow, key footer.roadmap); before that it had no inbound link
+  // outside this table. Lazy route.
   { view: 'roadmap',               path: '/roadmap',               title: 'Roadmap' },
   // THE SEED POST (V-13): a shareable world lives at /world/<code>. Public + no
   // guard — the code regenerates the identical world client-side (no server
@@ -115,14 +126,21 @@ export const ROUTES = Object.freeze([
   { view: 'privacy',               path: '/privacy',               title: 'Privacy Policy' },
   { view: 'refunds',               path: '/refunds',               title: 'Refunds' },
   // R-7/R-9 — the portability covenant + the contradiction bounty. Public +
-  // indexable trust pages (footer-linked, no top-nav, no guard); content is
-  // claims-parity-bound to real product capabilities (components/legal/*).
+  // indexable trust pages (no top-nav, no guard); content is claims-parity-bound
+  // to real product capabilities (components/legal/*). NEITHER IS FOOTER-LINKED,
+  // and this line said both were until 2026-09-18, when they got the real doors it
+  // was describing: /covenant from the Terms "Your content" section and the About
+  // page's lock-in promise, /bounty from the covenant's no-lock-in section and the
+  // About page's closing invitation.
   { view: 'covenant',              path: '/covenant',              title: 'Portability Covenant' },
   { view: 'bounty',                path: '/bounty',                title: 'Contradiction Bounty' },
   // V-18 — the DM Screen: an at-the-table DM tool (letter + dossier +
   // ledger + auspice) with a player-safe face. Reads the active settlement/
   // campaign; degrades to a placeholder when nothing is open. Noindex app tool
-  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
+  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard — noindex because
+  // it has no stable content of its own to index, NOT because it is internal. It
+  // is a real DM-facing surface, and the Practical Guide's navigation reference
+  // has linked it since 2026-09-18 (it had no inbound link before that).
   { view: 'screen',                path: '/screen',                title: 'The DM Screen' },
   // The dedicated competitor pages were deleted; App's redirect effect bounces
   // every `compare*` view to the "How We Compare" section of What this Is

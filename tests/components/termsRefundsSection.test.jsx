@@ -67,6 +67,23 @@ describe('TermsPage — Refunds and cancellation subsection', () => {
   });
 });
 
+describe('TermsPage — the trust page it points at', () => {
+  afterEach(() => cleanup());
+
+  // /covenant was a declared public route with no inbound link outside
+  // lib/routes.js, whose comment called it "footer-linked" while no footer carried
+  // it. The Terms "Your content" section is where ownership is stated, so it is
+  // where the covenant that spells ownership out belongs.
+  it('the content section opens the Portability Covenant', () => {
+    const { container } = render(<TermsPage />);
+    expect(container.textContent.length, 'the Terms page rendered almost nothing').toBeGreaterThan(400);
+    const section = container.querySelector('#terms-content').closest('section');
+    const link = section.querySelector('a[href="/covenant"]');
+    expect(link, 'the covenant has no door from the Terms content section').toBeTruthy();
+    expect(link.textContent).toBe('Portability Covenant');
+  });
+});
+
 describe('TermsPage — /refunds alias scrolls to the subsection', () => {
   let origScrollIntoView;
 

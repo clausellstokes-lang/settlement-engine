@@ -361,6 +361,12 @@ function Reference() {
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
       ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
+      // V-18 the DM Screen is a REAL DM-facing surface (letter, dossier, session
+      // ledger, auspice, and a player-safe face you can turn to the table), and it
+      // had no inbound link anywhere outside lib/routes.js. It stays noindex, which
+      // is a crawler posture, not a verdict on who it is for: it reads whatever
+      // settlement is open, so there is nothing stable for an index to point at.
+      ['DM Screen', <>At-the-table view of whatever you have open: the Chronicler&rsquo;s Letter, the dossier at a glance, the session ledger, and the auspice, with a player-safe face you can turn around. <a href="/screen" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Open the DM Screen</a>.</>],
       ['About','What this is (the trust page) and this Practical Guide.'],
     ]},
     { heading: 'Settlement Detail Tabs', rows: [
@@ -456,7 +462,19 @@ export default function HowToUse() {
           content, so de-collapsing preserves it exactly (design §3). */}
       <GuideSection unit="quick" heading="Quick Start"><QuickStart /></GuideSection>
       <GuideSection unit="power" heading="Power User"><PowerUser /></GuideSection>
-      <GuideSection unit="living" heading="The Living World"><LivingWorldTab /></GuideSection>
+      <GuideSection unit="living" heading="The Living World">
+        {/* THE WORD THE GUIDE NEVER SAID (2026-09-18). Everything downstream of
+            here — the Realm, the chronicle, advancing time — acts on CANON
+            settlements, and the guide described all of it without once naming the
+            act that puts a settlement there. One sentence, at the top of the
+            section the act unlocks. */}
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+          A settlement you forge is a draft until you mark it canon from your{' '}
+          <a href="/settlements" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Library</a>;
+          canon is what joins the Realm, takes events, and keeps a chronicle.
+        </p>
+        <LivingWorldTab />
+      </GuideSection>
       <GuideSection unit="ref" heading="Reference"><Reference /></GuideSection>
       <GuideSection unit="faq" heading="Frequently asked questions"><Faq /></GuideSection>
     </Page>

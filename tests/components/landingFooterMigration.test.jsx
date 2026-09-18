@@ -211,6 +211,23 @@ describe('the row itself: one copy truth', () => {
     expect(t('footer.terms')).not.toBe('footer.terms');
   });
 
+  // ⛔ THE TWO ORPHANS (2026-09-18). /about/guide and /roadmap had ZERO inbound
+  // links outside lib/routes.js — no nav block, no page pointing at either — so
+  // the only ways in were the sitemap and typing the URL. The ribbon is now the
+  // door routes.js already credited it with, and these arms are what keeps it one.
+  test('the Guide and the Roadmap are in the row, and each routes to its own view', () => {
+    const onNavigate = vi.fn();
+    render(<LegalRibbonRow isMobile={false} onNavigate={onNavigate} />);
+    for (const [key, view] of [['footer.guide', 'about-guide'], ['footer.roadmap', 'roadmap']]) {
+      const label = t(key);
+      expect(label, `${key} must resolve to real copy, never the key string`).not.toBe(key);
+      const button = screen.getByText(label).closest('button');
+      expect(button, `${label} is not in the footer row`).toBeTruthy();
+      button.click();
+      expect(onNavigate).toHaveBeenCalledWith(view);
+    }
+  });
+
   test('Feedback & support opens the panel through the app-wide event', () => {
     const seen = vi.fn();
     window.addEventListener('sf:open-feedback', seen);

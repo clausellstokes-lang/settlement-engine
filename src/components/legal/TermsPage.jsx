@@ -96,6 +96,13 @@ export default function TermsPage({ scrollToId = null } = {}) {
           generation seed and private configuration are never exposed on them.
           You can unpublish gallery content from your account.
         </LegalP>
+        <LegalP>
+          What that ownership means in practice is set out in the{' '}
+          <a href="/covenant">Portability Covenant</a>: generating without an
+          account, exporting everything you have made as one file, importing it
+          back, and deletion that deletes. Every promise on that page is bound to
+          the capability that keeps it.
+        </LegalP>
       </LegalSection>
 
       <LegalSection heading="Subscriptions and purchases" id="terms-billing">

@@ -553,6 +553,37 @@ describe('About split — the anchor landing, on the OTHER page', () => {
   });
 });
 
+// ⛔ THE ORPHAN-ROUTE SWEEP (2026-09-18). /covenant, /bounty and /screen were
+// declared public routes that NOTHING linked to outside lib/routes.js, and two of
+// the three had a routes.js comment calling them "footer-linked" while no footer
+// carried them. The About family is where the trust pages belong, and the Guide is
+// where a keeper looks a surface up, so these are the doors that were cut. Each arm
+// carries its own non-vacuity control: the page must have rendered real prose.
+describe('About split — the trust pages the About family opens', () => {
+  it('the What this Is page links the covenant and the contradiction bounty', async () => {
+    const { container } = await renderWhatThisIs();
+    expect(container.textContent.length, 'the page rendered almost nothing').toBeGreaterThan(400);
+    const hrefs = [...container.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'));
+    expect(hrefs, 'the portability covenant has no door from the About page').toContain('/covenant');
+    expect(hrefs, 'the contradiction bounty has no door from the About page').toContain('/bounty');
+  });
+
+  it('the Practical Guide links the DM Screen and names canon in the living-world section', async () => {
+    const { container } = await renderGuide();
+    expect(container.textContent.length, 'the guide rendered almost nothing').toBeGreaterThan(400);
+    const hrefs = [...container.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'));
+    expect(hrefs, 'the DM Screen has no door from the guide').toContain('/screen');
+
+    // The guide described the Realm, the chronicle and advancing time without ever
+    // naming the act that puts a settlement there. The sentence lives in the
+    // section the act unlocks, so it is asserted inside THAT section, not the page.
+    const living = container.querySelector(`#${anchorFor('living')}`);
+    expect(living, 'the living-world section is gone').toBeTruthy();
+    expect(living.textContent).toMatch(/canon/);
+    expect(living.textContent).toMatch(/Library/);
+  });
+});
+
 describe('About split — pin 5: the About ▾ dropdown (DEFERRED, with reason)', () => {
   // DEFERRED — DOCUMENTED, NOT A BUG TO RE-FIND. Design §4/§5's fifth pin asserts
   // the dropdown's three items (What this Is · Practical Guide · Founders) are

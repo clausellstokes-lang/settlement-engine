@@ -39,6 +39,7 @@ import {
   HALL_CHAIR_COUNT, buildHallRoll, hallCount, showsRequestControl,
   chairNumeral, seatedLabel,
 } from '../../lib/foundersHall.js';
+import { viewToPath } from '../../lib/routes.js';
 import { PAGE_MAX, SP, FS, sans, serif_, EMPTY_VALUE } from '../theme.js';
 
 /** The glance line. Held and open come from ONE count object — they cannot drift. */
@@ -92,7 +93,7 @@ function HallTable({ roll }) {
   );
 }
 
-export default function FoundersHallPage({ onNavigate: _onNavigate }) {
+export default function FoundersHallPage({ onNavigate }) {
   const auth = useStore((s) => s.auth);
   const [chairs, setChairs] = useState([]);
   const [openChair, setOpenChair] = useState(null);
@@ -184,6 +185,23 @@ export default function FoundersHallPage({ onNavigate: _onNavigate }) {
             </p>
           )}
         </div>
+
+        {/* THE RETURN LEG (2026-09-18). /first-hundred already said "the founder
+            chairs are a separate thing, with their own page" and linked HERE; the
+            Hall said nothing back, so the honor roll had no inbound link anywhere
+            outside lib/routes.js. The two rolls are INDEPENDENT (§8), and the line
+            says so rather than implying a ladder from one to the other. */}
+        <p style={{ ...quietLineStyle, color: HALL.faint, marginTop: SP.xl }}>
+          The First Hundred is a different roll, and an open one: an unpriced
+          thank-you to the first hundred people to make a home here.{' '}
+          <a
+            href={viewToPath('first-hundred')}
+            onClick={(e) => { if (onNavigate) { e.preventDefault(); onNavigate('first-hundred'); } }}
+            style={{ color: HALL.gold, fontWeight: 700 }}
+          >
+            Read the roll
+          </a>.
+        </p>
       </Page>
 
       <ChairDrawer chair={openChair} onClose={() => setOpenChair(null)} />
