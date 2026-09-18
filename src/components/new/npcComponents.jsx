@@ -271,7 +271,16 @@ function NPCInlineCard({
   // temperament, and a second ambition or ideal that differs from the one the
   // read-model chose. The filter runs here rather than in normalizeNpcTraits
   // because the dossier entity index reads that same trait list.
-  const printedWants = new Set(wants.map(w => String(w).trim().toLowerCase()));
+  // ⛔ BOTH SPELLINGS, BECAUSE THE TWO ROWS DO NOT AGREE ON ONE. `readWants`
+  // humanizes a want that is a bank token — `secure_office` becomes `Secure
+  // office` — while the chip's value comes straight out of normalizeNpcTraits and
+  // is still the RAW token. Keyed on the humanized form alone, a person whose
+  // `goal` field holds a bank token printed `Goal: secure_office` beside `Wants
+  // Secure office`: the same goal twice, wearing the other spelling, which is the
+  // exact defect this filter exists to stop. Measured, not supposed.
+  const printedWants = new Set(
+    [...(interiority?.wants || []), ...wants].map(w => String(w).trim().toLowerCase()),
+  );
   const publicTraits = traits.filter(t => (
     t.visibility !== 'gm' && !printedWants.has(String(t.value).trim().toLowerCase())
   ));

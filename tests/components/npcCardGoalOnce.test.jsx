@@ -133,6 +133,27 @@ describe('NPCInlineCard — the goal is printed once', () => {
     expect(screen.getByText(/Loyalty: the old charter/)).toBeTruthy();
   });
 
+  it('a goal STORED AS A BANK TOKEN prints once, in one spelling', () => {
+    // The Wants line humanizes a want that is a bank token (`secure_office` ->
+    // `Secure office`); the chip's value comes straight out of normalizeNpcTraits
+    // and is still the raw token. A filter keyed on one spelling let this person
+    // print `Goal: secure_office` beside `Wants Secure office`.
+    const text = renderExpanded({
+      id: 'n5',
+      name: 'Wren Calder',
+      role: 'Clerk',
+      goal: 'secure_office',
+      personality: { flaw: 'keeps two ledgers' },
+    });
+
+    expect(wantsLine()).toBe('Wants Secure office');
+    // The flaw chip anchors the absence: it travels the same publicTraits map, so
+    // an emptied chip row cannot read as a cured one.
+    expectAbsentWithAnchor(text, 'Goal:', 'Flaw:', 'the NPC card trait chips');
+    expect(occurrences(text, 'Secure office')).toBe(1);
+    expect(occurrences(text, 'secure_office')).toBe(0);
+  });
+
   it('a person carrying only a declared goal FACET still states a want', () => {
     // npcInteriority reads authored goal PROSE only, so without the facet read
     // this person would state nothing at all.
