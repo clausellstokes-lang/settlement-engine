@@ -390,6 +390,47 @@ describe('the print desk reads the screen\'s own desks', () => {
 
   });
 
+  test('the live chapter renders against a PARTIAL slice instead of throwing', () => {
+    // ⚠ THE SMALLEST LIVE WORLD THERE IS: `hasLive` and nothing else. Every other field this
+    // chapter reads is absent, which is what a slice looks like the day a producer grows a
+    // field before a consumer does, or the day a world is played far enough to be live and no
+    // further. Three separate hand-built stubs for the arm above each died here — on
+    // `posture.label`, then `besiegingTargets`, then `tradeWars` — so the chapter is held to
+    // the guard its own siblings already had.
+    const bare = { hasLive: true };
+    const prose = buildPrintProse(patron, { faithUnlocked: true });
+    let rendered;
+    expect(() => {
+      rendered = FaithWar({
+        settlement: patron, narrativeMode: false, stateProse: prose,
+        vm: { ...VM_FOR(patron), liveWorld: bare },
+      });
+    }, 'a partial live slice threw instead of rendering what it carries').not.toThrow();
+    expect(rendered, 'a partial slice rendered nothing at all').toBeTruthy();
+
+    // AND IT STILL CARRIES ITS CONTENT: the guard must not have turned the chapter into an
+    // empty shell. The faith paragraph it was fed is in the tree.
+    const texts = [];
+    const walk = (node) => {
+      if (node == null || typeof node === 'boolean') return;
+      if (typeof node === 'string' || typeof node === 'number') { texts.push(String(node)); return; }
+      if (Array.isArray(node)) { node.forEach(walk); return; }
+      if (typeof node === 'object') {
+        if (typeof node.type === 'function') { try { walk(node.type(node.props)); } catch { /* sub-tree */ } return; }
+        walk(node.props?.children);
+      }
+    };
+    walk(rendered);
+    expect(texts.join('\u0000')).toContain(prose.faith['faith.patronSeat']);
+
+    // NO BEHAVIOUR CHANGE ON A FULL SLICE: the producer's own output renders as it did.
+    const full_ = buildPdfLiveWorld({ settlement: patron, campaign: null });
+    expect(() => FaithWar({
+      settlement: patron, narrativeMode: false, stateProse: prose,
+      vm: { ...VM_FOR(patron), liveWorld: full_ },
+    })).not.toThrow();
+  });
+
   test('REACHABILITY: the variant that drops chapter 07 still has a page for the faith prose', () => {
     // ⭐ REVIEW 5's FINDING. `campaign_state` sets `identityDailyLife: false` while keeping
     // `faithWar: 'if-canon'`, so on premium + canon + a live world the faith prose has exactly

@@ -90,7 +90,22 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
-  const { posture, exhaustion, standing, tradeWars, deity, pantheon, realmArcs } = lw;
+  const { exhaustion, standing, deity } = lw;
+  // ⚠ SIX FIELDS THIS CHAPTER USED TO READ UNGUARDED, now guarded the way every sibling on
+  // this slice already was (review 5's incidental finding). `posture.label` (the strip),
+  // `besiegingTargets` / `besiegedBy` (the war front) and `tradeWars` (the prizes) were read
+  // straight off `lw`, while `rumors`, `beliefs`, `treaties`, `tradePressure`, `livePantheon`,
+  // `cults` and `contestOdds` a few lines down all take an `Array.isArray` or `|| null`. A
+  // PARTIAL slice therefore threw instead of rendering the parts it did carry — measured:
+  // three separate attempts to render this chapter against a minimal live world each died on
+  // a different one of these. No behaviour change on a full slice, where every one of them is
+  // already the shape the producer emits.
+  const posture = lw.posture || {};
+  const tradeWars = Array.isArray(lw.tradeWars) ? lw.tradeWars : [];
+  const besiegingTargets = Array.isArray(lw.besiegingTargets) ? lw.besiegingTargets : [];
+  const besiegedBy = Array.isArray(lw.besiegedBy) ? lw.besiegedBy : [];
+  const pantheon = Array.isArray(lw.pantheon) ? lw.pantheon : [];
+  const realmArcs = Array.isArray(lw.realmArcs) ? lw.realmArcs : [];
   // Per-settlement living pantheon (cults + standings + legitimacy + contest + mandate).
   const livePantheon = Array.isArray(lw.livePantheon) ? lw.livePantheon : [];
   const contestOdds = Array.isArray(lw.contestOdds) ? lw.contestOdds : null;
@@ -167,18 +182,18 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
       </View>
 
       {/* ── Live war front ────────────────────────────────────────────── */}
-      {(lw.besiegingTargets.length > 0 || lw.besiegedBy.length > 0 || lw.occupied) && (
+      {(besiegingTargets.length > 0 || besiegedBy.length > 0 || lw.occupied) && (
         <View style={{ marginBottom: space.sm }}>
-          {lw.besiegingTargets.length > 0 && (
+          {besiegingTargets.length > 0 && (
             <Line label="At war." tone="bad">
-              Its army besieges {lw.besiegingTargets.join(', ')}.
+              Its army besieges {besiegingTargets.join(', ')}.
             </Line>
           )}
-          {lw.besiegedBy.length > 0 && (
+          {besiegedBy.length > 0 && (
             <Line label="Under siege." tone="bad">
-              {lw.besiegedBy.length >= 2
-                ? `A coalition of ${lw.besiegedBy.join(', ')} holds the walls.`
-                : `${lw.besiegedBy[0]} lays siege.`}
+              {besiegedBy.length >= 2
+                ? `A coalition of ${besiegedBy.join(', ')} holds the walls.`
+                : `${besiegedBy[0]} lays siege.`}
             </Line>
           )}
           {lw.occupied && (
