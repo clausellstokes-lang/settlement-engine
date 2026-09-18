@@ -2,11 +2,14 @@
  * pendingSaveDraft.js — a crash/stall safety net for the one place a refresh
  * destroys real work: a generated dossier that is mid-save.
  *
- * The generated settlement is deliberately NOT persisted in the store (it is a
- * large object; the store's partialize skips it on purpose). So if the Save
- * button stalls — historically a hung Supabase write with no timeout wedged it
- * forever — and the user refreshes to recover, the dossier and every edit go
- * with it.
+ * A SIGNED-IN keeper's generated settlement is deliberately NOT persisted in the
+ * store: the partialize carries the draft for the ANONYMOUS tier only, because
+ * that tier has no library to keep one in (store/persistProjection.js, 2026-09-18
+ * — this sentence used to say "generated worlds are skipped" flatly, and half of
+ * it stopped being true that day). So if the Save button stalls — historically a
+ * hung Supabase write with no timeout wedged it forever — and the user refreshes
+ * to recover, the dossier and every edit go with it. This net is for them; the
+ * anonymous draft survives a reload on its own.
  *
  * The net: write the save payload to localStorage the instant before the network
  * call, and clear it the instant the save lands. If the page is reloaded while a
