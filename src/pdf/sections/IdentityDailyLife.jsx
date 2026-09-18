@@ -56,8 +56,17 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
         sub={id.tier || null}
       />
 
-      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ──
+          ⭐ THE FAITH POSITIONS RENDER HERE, AND THE REASON IS REACHABILITY (review 4).
+          They were drawn from FaithWar.jsx, which returns null on a dormant `vm.liveWorld`
+          and is gated by `faithChapterVisible` on `included && hasLiveWorld && faithUnlocked`
+          — so on a measured 12 of 12 generated settlements the builder composed a faith
+          position and NOT ONE of them could reach a page. The PDF has no faith chapter
+          outside that premium live-world one, and DS-FTH-1/2/3 are facts about what the town
+          IS, so chapter 07 is where they belong. The premium seam is untouched: the builder
+          withholds the two deity-naming positions unless `faithUnlocked`. ── */}
       <StateProse stateProse={stateProse} tab="daily_life" />
+      <StateProse stateProse={stateProse} tab="faith" />
 
       {/* ── Anchor facts ─────────────────────────────────────── */}
       {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||

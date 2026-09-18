@@ -304,7 +304,12 @@ export async function generateSettlementPDF(settlement, options = {}) {
     // lenses (DS-STR-2's lifecycle and origin) fall silent, which is what an unplayed world
     // honestly is. Plain strings only, so the worker's structured clone is untouched and the
     // main-thread fallback receives the identical props object.
-    stateProse: buildPrintProse(normalizedSettlement, { worldState: campaign?.worldState || null }),
+    stateProse: buildPrintProse(normalizedSettlement, {
+      worldState: campaign?.worldState || null,
+      // The premium faith seam, so the builder withholds the two deity-naming positions on a
+      // free / lapsed / anonymous export exactly as the Faith & War chapter withholds itself.
+      faithUnlocked,
+    }),
   };
 
   let blob;

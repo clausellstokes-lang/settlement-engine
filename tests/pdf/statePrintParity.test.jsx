@@ -28,7 +28,12 @@ import { describe, test, expect, beforeAll } from 'vitest';
 import React from 'react';
 
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { StateProse } from '../../src/pdf/primitives/StateProse.jsx';
+import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
+import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
+import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
+import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 
@@ -112,6 +117,7 @@ function screenWeave(settlement, lines) {
   }).paragraph;
 }
 
+const VM_FOR = (s) => buildViewModel({ settlement: s, phase: 'canon', eventLog: [] });
 const OPTS = (s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm' });
 const PAID = { publicDossier: false, playerView: false };
 
@@ -120,7 +126,7 @@ const PAID = { publicDossier: false, playerView: false };
  * the builder keys them. Assembled from the readers and desks the TABS use, so a divergence
  * between this and `buildPrintProse` is a real divergence and not a tautology.
  */
-function screenProse(s) {
+function screenProse(s, faithUnlocked = false) {
   const o = OPTS(s);
   const stresses = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).filter(Boolean);
   const general = generalDeskLines(s, {
@@ -226,6 +232,28 @@ function screenProse(s) {
   set('history.identity', screenWeave(s, general.history.identityLines));
   set('history.founded', screenWeave(s, [general.history.foundedLine, general.history.recordLine]));
   set('plot_hooks.framing', screenWeave(s, general.hooks.framingLines.slice(0, 3)));
+
+  // THE FAITH POSITIONS, through the same reading FaithTab hands the desk. `faith.teaser` is
+  // the patron-less town's own voice and names no god, so it is NOT behind the premium seam;
+  // the two that can name a patron or a creed are.
+  const fm = faithPanelModel(s);
+  const fa = warFaithStateProse(s, {
+    faith: fm,
+    hasPatron: !!fm.hasEmbed,
+    patronFallCause: fm.patronFallSentence
+      ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === fm.patronFallSentence)
+      : undefined,
+  }, o);
+  set('faith.teaser', screenParagraph(s, 'faith.teaser', [fa.faithTeaser]));
+  if (faithUnlocked) {
+    set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
+      fa.patronRank, fa.patronCults, fa.devotion, fa.pietyArc,
+      fa.standings, fa.sink, fa.mandate, fa.faithDark,
+    ]));
+    set('faith.creedStanding', screenParagraph(s, 'faith.creedStanding', [
+      fa.creedStanding, fa.creedLegitimacy, fa.creedNiche, fa.creedFall,
+    ]));
+  }
   return out;
 }
 
@@ -270,12 +298,14 @@ describe('the print desk reads the screen\'s own desks', () => {
     const printed = flat(buildPrintProse(full, {}));
     const screen = screenProse(full);
     const drift = Object.entries(printed)
-      // THREE EXCLUSIONS, each with a reason rather than a shrug. The neighbour network and
-      // the faith positions are assembled from readings this arm does not re-derive (the
-      // tab's own merged link list; `faithPanelModel`), and `overview.notableConnection`
-      // reaches the builder as STRINGS through the general desk reader, so no provenance
-      // survives for `deferredCell` to read. All three have their own arms below.
-      .filter(([mount]) => mount !== 'relationships.network' && !mount.startsWith('faith.')
+      // TWO EXCLUSIONS, each with a reason rather than a shrug. `relationships.network` is
+      // built from lists no caller can lawfully supply yet (see printProse.js's seam note),
+      // and `overview.notableConnection` reaches the builder as STRINGS through the general
+      // desk reader, so no provenance survives for `deferredCell` to read. Both have their
+      // own arms below. ⭐ THE FAITH POSITIONS ARE NO LONGER EXCLUDED: review 4 found them
+      // built on every export and reachable on none, and an arm that skipped them is exactly
+      // how that went unnoticed.
+      .filter(([mount]) => mount !== 'relationships.network'
         && mount !== 'overview.notableConnection')
       .filter(([mount, p]) => screen[mount] !== p)
       .map(([mount, p]) => `${mount}\n  PRINT : ${p}\n  SCREEN: ${screen[mount] ?? '(nothing)'}`);
@@ -288,7 +318,7 @@ describe('the print desk reads the screen\'s own desks', () => {
     const printed = flat(buildPrintProse(sparse, {}));
     const screen = screenProse(sparse);
     const drift = Object.entries(printed)
-      .filter(([mount]) => mount !== 'relationships.network' && !mount.startsWith('faith.')
+      .filter(([mount]) => mount !== 'relationships.network'
         && mount !== 'overview.notableConnection')
       .filter(([mount, p]) => screen[mount] !== p)
       .map(([mount, p]) => `${mount}\n  PRINT : ${p}\n  SCREEN: ${screen[mount] ?? '(nothing)'}`);
@@ -297,6 +327,47 @@ describe('the print desk reads the screen\'s own desks', () => {
     // matter, because an all-silent fixture would make the arm above vacuous here.
     expect(Object.keys(printed).length).toBeGreaterThan(0);
     expect(Object.keys(printed).length).toBeLessThan(20);
+  });
+
+  test('REACHABILITY: the faith prose renders from a chapter a reader actually gets', () => {
+    // ⛔ THE ARM REVIEW 4 FOUND MISSING. The builder composes a faith position for a deity-free
+    // town (the common case — the whole review corpus is deity-free), and it used to draw from
+    // FaithWar.jsx, which returns null unless `vm.liveWorld` is live AND the export is premium.
+    // So the prose was built on every export and reachable on none. These arms hold BOTH ends:
+    // the position is built, and the chapter that renders it is one that renders.
+    const prose = buildPrintProse(full, {});
+    expect(prose.faith?.['faith.teaser'], 'the deity-free town composed no faith position')
+      .toBeTruthy();
+
+    // The premium seam: the two deity-naming positions stay behind `faithUnlocked`.
+    expect(prose.faith['faith.patronSeat']).toBeUndefined();
+    expect(prose.faith['faith.creedStanding']).toBeUndefined();
+
+    // FaithWar draws NOTHING now — proved by its own off-state, which is the state every
+    // export without a live campaign is in.
+    expect(FaithWar({ settlement: full, narrativeMode: false, vm: { liveWorld: null } }),
+      'the live chapter is exactly where the faith prose could not be reached').toBeNull();
+
+    // And chapter 07, which every full variant carries, does render it.
+    const chapter = IdentityDailyLife({
+      settlement: full, narrativeMode: false, vm: VM_FOR(full), stateProse: prose,
+    });
+    const texts = [];
+    const walk = (node) => {
+      if (node == null || typeof node === 'boolean') return;
+      if (typeof node === 'string' || typeof node === 'number') { texts.push(String(node)); return; }
+      if (Array.isArray(node)) { node.forEach(walk); return; }
+      if (typeof node === 'object') {
+        if (typeof node.type === 'function') { try { walk(node.type(node.props)); } catch { /* chapter sub-tree */ } return; }
+        walk(node.props?.children);
+      }
+    };
+    walk(chapter);
+    const joined = texts.join('\u0000');
+    expect(joined, 'the faith paragraph did not reach the rendered chapter')
+      .toContain(prose.faith['faith.teaser']);
+    expect(joined, 'the daily-life paragraph regressed out of the chapter')
+      .toContain(prose.daily_life['daily_life.standingOfLiving']);
   });
 
   test('PURITY: the builder is a function of its inputs', () => {

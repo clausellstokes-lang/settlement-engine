@@ -23,7 +23,6 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
-import { StateProse } from '../primitives/StateProse.jsx';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -86,7 +85,7 @@ function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
-export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
+export function FaithWar({ settlement, narrativeMode, vm }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
@@ -129,12 +128,12 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
       />
       <ChapterHeadline tone={lw.atWar ? 'bad' : 'gold'}>{headline}</ChapterHeadline>
 
-      {/* ── The mounted state prose. THE FAITH HALF ONLY: the three `war.*` positions are
-          print-deferred (see printProse.js's ruling block) because their reading is
-          assembled inside WarTab from the campaigns store, so the builder emits no `war`
-          tab and this renders nothing for it. ── */}
-      <StateProse stateProse={stateProse} tab="faith" />
-      <StateProse stateProse={stateProse} tab="war" />
+      {/* ⛔ NO MOUNTED STATE PROSE IS DRAWN HERE, and both halves of that are deliberate.
+          The three `war.*` positions are print-deferred (see printProse.js's ruling block),
+          so the builder emits no `war` tab at all. The FAITH positions used to draw here and
+          COULD NOT BE REACHED: this chapter returns null on a dormant `vm.liveWorld`, which
+          is every export without a live campaign, so they render from chapter 07 instead —
+          see IdentityDailyLife.jsx. ── */}
 
       {/* ── Posture / exhaustion / standing strip ─────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>

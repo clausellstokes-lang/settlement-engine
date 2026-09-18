@@ -183,7 +183,7 @@ export function SettlementPDF({
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}

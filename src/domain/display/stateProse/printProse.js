@@ -288,7 +288,11 @@ function weave(lines, r) {
  *
  * @param {object|null|undefined} settlement the NORMALIZED settlement the export is about
  * @param {{worldState?: object|null, neighbours?: ReadonlyArray<object>|null,
- *   crossEngagements?: ReadonlyArray<object>|null}} [ctx] `worldState` is the owning campaign's, threaded
+ *   crossEngagements?: ReadonlyArray<object>|null, faithUnlocked?: boolean}} [ctx]
+ *   `faithUnlocked` is the premium faith seam, mirroring the screen's FaithSection and the
+ *   PDF's own Faith & War gate: FALSE (the default) withholds the two positions that can name
+ *   a patron or a creed, so a free, lapsed or anonymous export carries no deity name through
+ *   this route either. `worldState` is the owning campaign's, threaded
  *   only on a premium canon export. Absent, the two world-fed lenses (DS-STR-2's lifecycle
  *   and origin) fall silent, which is a true statement about an unplayed world rather than a
  *   gap — the same answer the screen gives a settlement with no campaign.
@@ -595,7 +599,17 @@ export function buildPrintProse(settlement, ctx = {}) {
     ...general.relationships.engagementLines,
   ]);
 
-  put('faith', 'faith.patronSeat', [
+  // ⛔ THE PREMIUM FAITH SEAM, HELD HERE TOO (owner §885.3 + the Faith & War chapter's own
+  // gate). `faithUnlocked` false ⇒ the two positions that can NAME a patron or a creed are
+  // withheld, exactly as the live chapter withholds itself, so a free / lapsed / anonymous
+  // export never carries a deity name by this route.
+  //
+  // ⭐ `faith.teaser` IS NOT GATED WITH THEM, and that is the block's own design rather than a
+  // hole in the seam: DS-FTH-2 is the PATRON-LESS town's voice, its four authored variants
+  // name no creed and no god because it was written for exactly that town, and it is the one
+  // faith position the common case — a deity-free settlement — can ever draw.
+  const faithSeam = ctx.faithUnlocked === true;
+  if (faithSeam) put('faith', 'faith.patronSeat', [
     printed('faith.patronSeat', faith.patronRank),
     printed('faith.patronSeat', faith.patronCults),
     printed('faith.patronSeat', faith.devotion),
@@ -606,7 +620,7 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('faith.patronSeat', faith.faithDark),
   ]);
   put('faith', 'faith.teaser', [printed('faith.teaser', faith.faithTeaser)]);
-  put('faith', 'faith.creedStanding', [
+  if (faithSeam) put('faith', 'faith.creedStanding', [
     printed('faith.creedStanding', faith.creedStanding),
     printed('faith.creedStanding', faith.creedLegitimacy),
     printed('faith.creedStanding', faith.creedNiche),

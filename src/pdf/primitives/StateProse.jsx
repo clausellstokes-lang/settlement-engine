@@ -47,57 +47,84 @@ import { proseToPlainText } from './ProseText.jsx';
 import { type, palette, pt } from '../theme.js';
 
 /**
- * Mount id → the heading the SCREEN prints over that position (OverviewTab.jsx:291,
- * HistoryTab.jsx:132, PowerTab.jsx:379/392/403/415, WarFaithDesk.jsx and the tabs' own
- * `Section title=` strings).
+ * ⭐ THE KICKERS, IN TWO MAPS, BECAUSE THERE ARE TWO DIFFERENT FACTS HERE (review 4).
+ *
+ * The first map is the SCREEN'S OWN HEADING, copied character for character from the string
+ * the tab renders directly above that position — a `Section title=` or the inline eyebrow
+ * `div`. Those are quoted, not paraphrased: a page that writes "Live trade flow" where the
+ * dossier writes "Live Trade Flow" is the two surfaces disagreeing about one label, which is
+ * the whole defect this car exists to close one level down.
+ *
+ * The second map is PRINT-NATIVE, and it exists because most mounted positions have NO
+ * heading on screen at all: the `DeskLines` idiom renders a bare italic paragraph inside a
+ * card whose surroundings say what it is about. A chapter has no cards, so it must name the
+ * position or run three unrelated paragraphs together. These strings are therefore the print
+ * surface's own, and they are marked as such so nobody "aligns" them with a screen string
+ * that does not exist.
+ *
+ * ⛔ NO `war.*` ROWS. The three war positions are print-deferred by the chair's ruling (see
+ * printProse.js), so the builder emits no `war` tab and a kicker for one would be a label for
+ * a paragraph that cannot exist.
  * @type {Readonly<Record<string, string>>}
  */
-const KICKER_OF = Object.freeze({
+const SCREEN_KICKER = Object.freeze({
+  // OverviewTab.jsx — the inline eyebrows and its own Section titles
   'overview.ground': 'The ground and the company it keeps',
-  'overview.crisisBanners': 'Active crisis',
   'overview.stressorLifecycle': 'The pressure from outside',
   'overview.activeConditions': 'What the town is living through',
-  'overview.origin': 'Settlement origin',
-  'overview.conflicts': 'Tensions & conflicts',
-  'overview.warnings': 'Coherence notes',
-  'overview.populationDirection': 'Population',
-  'overview.notableConnection': 'Notable connection',
-  'power.legitimacyBanner': 'Public legitimacy',
+  'overview.origin': 'Settlement Origin',
+  'overview.conflicts': 'Tensions & Conflicts',
+  'overview.warnings': 'Coherence Notes · First Survey',
+  // PowerTab.jsx
+  'power.legitimacyBanner': 'Public Legitimacy',
   'power.stabilityHeader': 'Stability',
   'power.criminalUnderside': 'The quieter arithmetic',
   'power.rulingStructure': 'The shape of authority',
   'power.succession': 'Rule and succession',
-  'defense.postureHeader': 'Defense posture',
-  'defense.publicOrder': 'Public order',
-  'defense.threatAssessment': 'Threat assessment',
-  'defense.militaryStatus': 'Military status',
-  'defense.armedForces': 'Armed forces',
+  // DefenseTab.jsx
+  'defense.postureHeader': 'Guard Assessment',
+  'defense.threatAssessment': 'Threat Assessment',
+  'defense.militaryStatus': 'Military Status',
   'defense.wallRationale': 'Fortifications',
-  'defense.criminalStructure': 'Criminal architecture',
-  'defense.supportingCapabilities': 'Supporting capabilities',
-  'viability.verdict': 'Verdict',
-  'viability.magicDependency': 'Magic dependency',
-  'economics.prosperityHeader': 'Prosperity',
-  'economics.foodSecurity': 'Food security',
-  'economics.commercialProfile': 'The commercial profile',
-  'economics.shadowEconomy': 'Shadow economy',
-  'economics.tradeFlow': 'Live trade flow',
-  'economics.exportPosture': 'Export posture',
-  'economics.craftReason': 'Economic flows',
-  'resources.groundAndWorkings': 'The ground and its workings',
-  'services.catalogStanding': 'The catalog and its absences',
-  'daily_life.standingOfLiving': 'Standing of living',
+  'defense.criminalStructure': 'Criminal Architecture & Public Order',
+  'defense.supportingCapabilities': 'Supporting Capabilities',
+  // EconomicsTab.jsx
+  'economics.foodSecurity': 'Food Security',
+  'economics.tradeFlow': 'Live Trade Flow',
+  // HistoryTab.jsx / PlotHooksTab.jsx
   'history.identity': 'What the years have made of it',
-  'history.founded': 'Founding and record',
-  'plot_hooks.framing': 'What this town offers',
-  'relationships.network': 'The neighbour network',
-  'war.standing': 'War standing',
-  'war.treaties': 'Treaties',
-  'war.dormantNote': 'At peace',
-  'faith.patronSeat': 'The patron seat',
-  'faith.teaser': 'Faith',
-  'faith.creedStanding': "The creed's standing",
+  'plot_hooks.framing': 'Plot hooks',
 });
+
+/**
+ * The positions the screen gives no heading — print's own labels. See the note above.
+ * @type {Readonly<Record<string, string>>}
+ */
+const PRINT_KICKER = Object.freeze({
+  'overview.crisisBanners': 'The crisis on the books',
+  'overview.populationDirection': 'Which way the roll is going',
+  'overview.notableConnection': 'The tie the town names first',
+  'defense.publicOrder': 'Public order',
+  'defense.armedForces': 'What the town can field',
+  'viability.verdict': 'The verdict, in the town\'s own voice',
+  'viability.magicDependency': 'What the arcane holds up',
+  'economics.prosperityHeader': 'How the town is doing',
+  'economics.commercialProfile': 'The commercial profile',
+  'economics.shadowEconomy': 'The unrecorded share',
+  'economics.exportPosture': 'What goes out',
+  'economics.craftReason': 'Why the craft is here',
+  'resources.groundAndWorkings': 'The ground and its workings',
+  'services.catalogStanding': 'The catalogue and its absences',
+  'daily_life.standingOfLiving': 'The standing of living',
+  'history.founded': 'How it began, and what the record carries',
+  'relationships.network': 'The neighbours it keeps',
+  'faith.patronSeat': 'The patron seat',
+  'faith.teaser': 'What the town keeps faith with',
+  'faith.creedStanding': 'The creed\'s standing',
+});
+
+/** The label over one position, from whichever map owns it. */
+const kickerOf = (mount) => SCREEN_KICKER[mount] || PRINT_KICKER[mount];
 
 /**
  * Every position one chapter carries, in page order.
@@ -120,12 +147,12 @@ export function StateProse({ stateProse, tab }) {
     <>
       {entries.map(([mount, paragraph]) => (
         <Callout key={mount} tone="gold">
-          {KICKER_OF[mount] && (
+          {kickerOf(mount) && (
             <Text style={{
               ...type.label, textTransform: 'none', color: palette.gold,
               fontSize: pt['7.5'], marginBottom: 3,
             }}>
-              {KICKER_OF[mount]}
+              {kickerOf(mount)}
             </Text>
           )}
           <Text style={{ ...type.prose, fontStyle: 'italic' }}>
