@@ -1295,8 +1295,8 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         authSrc.indexOf('authUnsubscribe = authService.onAuthChange('),
       );
       expect(initAuthBody).toContain('settleBootAnonDraft(set)');
-      // anchored: the call above is real, so the absent subscription is a moved
-      // wiring rather than a deleted feature.
+      // The live call inside initAuth is asserted above, so the absent
+      // anchored: subscription is wiring that MOVED, not a feature deleted.
       expect(indexSrc).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
     });
 
