@@ -40,6 +40,11 @@ import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
+import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
+import MarketPricesSection from '../../src/components/new/tabs/MarketPricesSection.jsx';
+import { PowerSuccessionSection } from '../../src/components/dossier/EngineSections.jsx';
+import SessionMode from '../../src/components/session/SessionMode.jsx';
 
 /** Deliberately lower case, with the reason. Anything else that starts lower is a defect. */
 const ALLOWED = new Set([
@@ -85,11 +90,13 @@ function labelLeaves(root) {
     if (text.split(/\s+/).length > 5) continue;
     const weight = Number(el.style.fontWeight || 0);
     if (weight < 700) continue;                                 // a meta tag is not emphasised
-    // An element that carries its OWN accessible name is a deliberate abbreviation, not a
-    // leaked token: PowerStrata's coup weight reads "w 13" to the eye and
-    // aria-label="Coup weight 13" to a screen reader, which is the whole point of it.
-    if (el.getAttribute('aria-label')) continue;
-    out.push(text);
+    // An element that carries its OWN accessible name is a deliberate abbreviation:
+    // PowerStrata's coup weight reads "w 13" to the eye and aria-label="Coup weight 13"
+    // to a screen reader, which is the whole point of it. So the ACCESSIBLE NAME is
+    // judged in the visible text's place — never waved through, or the next token pill
+    // regresses silently the moment someone gives it a label.
+    const aria = el.getAttribute('aria-label');
+    out.push(aria ? aria.trim() : text);
   }
   return out;
 }
@@ -100,6 +107,13 @@ const TABS = [
   ['War', (s) => <WarTab settlement={s} />],
   ['Economics', (s) => <EconomicsTab economicState={s.economicState} settlement={s} />],
   ['Viability', (s) => <ViabilityTab settlement={s} />],
+  // The surfaces this lane's own token cures landed on — each needs an arm of its own,
+  // or the cure is pinned only where the first sweep happened to look.
+  ['Overview', (s) => <OverviewTab settlement={s} />],
+  ['Causes', (s) => <SubstrateTab settlement={s} />],
+  ['Succession', (s) => <PowerSuccessionSection settlement={s} />],
+  ['MarketPrices', (s) => <MarketPricesSection prices={s.economicState?.marketPrices || { highlight: null, exports: [], imports: [] }} />],
+  ['SessionMode', (s) => <SessionMode settlement={s} onClose={() => {}} />],
 ];
 
 describe('the dossier renders words, not engine tokens', () => {
@@ -134,6 +148,11 @@ describe('the two casing helpers', () => {
     expect(tokenCase('criminal_opportunity')).toBe('Criminal opportunity');
     expect(tokenCase('npc')).toBe('NPC');
     expect(tokenCase('npcs')).toBe('NPCs');
+    // WORD-WISE: an initialism inside a phrase survives, which a whole-string guard missed.
+    expect(tokenCase('npc contacts')).toBe('NPC contacts');
+    expect(tokenCase('NPC contacts')).toBe('NPC contacts');
+    expect(tokenCase('ai notes')).toBe('AI notes');
+    expect(tokenCase('Black Market')).toBe('Black market');
     // Already a word: left alone rather than re-cased into something else.
     expect(tokenCase('Essential')).toBe('Essential');
     // Not a string, or empty: handed straight back, never coerced.

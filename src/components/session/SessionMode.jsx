@@ -38,7 +38,7 @@ import { proseFontSize } from '../../design/proseScale.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
-import { literaryTitle } from '../new/labelLadder.js';
+import { literaryTitle, tokenCase } from '../new/labelLadder.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -323,7 +323,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     borderLeft: `2px solid ${BORDER}`,
                   }}>
                     <div style={{ ...literaryTitle(FS.sm), color: INK }}>
-                      {truth.label}
+                      {tokenCase(truth.label)}
                     </div>
                     <div style={{
                       marginTop: 2,
@@ -468,7 +468,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   return (
                     <Card key={i} accent={cat.color}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 2 }}>
-                        <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{hook.source}</span>
+                        <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tokenCase(hook.source)}</span>
                         <span style={{ fontSize: FS.nano, fontWeight: 800, color: cat.color, letterSpacing: '0.08em', flexShrink: 0 }}>{String(cat.label).toUpperCase()}</span>
                       </div>
                       <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{hook.text}</div>

@@ -21,7 +21,7 @@
  * unconditionally when present.
  */
 
-import { literaryTitle } from './new/labelLadder.js';
+import { literaryTitle, tokenCase } from './new/labelLadder.js';
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
@@ -206,7 +206,7 @@ export default function TableView({ settlement, onClose }) {
                     ...literaryTitle(FS.xs),
                     color: CREAM_FAINT, marginRight: 5,
                   }}>
-                    {truth.label}
+                    {tokenCase(truth.label)}
                   </span>
                   <span style={{
                     fontSize: proseFontSize(FS.xs, mobile), color: CREAM_BODY, lineHeight: 1.45,

@@ -278,7 +278,7 @@ export function PowerSuccessionSection({ settlement }) {
               {/* Each contender is a rival FACTION → its Power row (rename-safe). */}
               <span style={{ flex: 1 }}><EntityLink id={factionIdFromName(c.name)} type="faction" fallback={c.name} style={{ color: BODY }} /></span>
               <span style={{ color: MUTED }}>{c.archetype}</span>
-              <span style={{ fontWeight: 700, color: INK }}>w {c.weight}</span>
+              <span aria-label={`Coup weight ${c.weight}`} style={{ fontWeight: 700, color: INK }}>w {c.weight}</span>
             </div>
           ))}
         </div>

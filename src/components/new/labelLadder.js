@@ -63,6 +63,14 @@ import { FS, serif_ } from '../theme.js';
  * rather than omitted because these sites are spread INTO an existing style object and
  * a stale tracking would otherwise survive the change.
  */
+export const LITERARY_TITLE = Object.freeze({
+  fontFamily: serif_,
+  fontSize: FS.lg,
+  fontWeight: 600,
+  letterSpacing: 'normal',
+  lineHeight: 1.3,
+});
+
 /**
  * The dossier's type steps, ascending. `literaryTitle` walks this to find "one step above".
  * @type {ReadonlyArray<number>}
@@ -86,14 +94,6 @@ export function literaryTitle(bodySize = 13) {
   const next = STEPS.find((s) => s > bodySize);
   return { ...LITERARY_TITLE, fontSize: next === undefined ? bodySize : next };
 }
-
-export const LITERARY_TITLE = Object.freeze({
-  fontFamily: serif_,
-  fontSize: FS.lg,
-  fontWeight: 600,
-  letterSpacing: 'normal',
-  lineHeight: 1.3,
-});
 
 /**
  * A frozen band word as a rung-3 status value: 'STRONG' reads 'Strong', 'ACTIVE CRISIS'
@@ -145,6 +145,11 @@ const INITIALISMS = Object.freeze({ npc: 'NPC', npcs: 'NPCs', dm: 'DM', ai: 'AI'
  */
 export function tokenCase(token) {
   if (typeof token !== 'string' || !token) return token;
-  const flat = token.replace(/_/g, ' ');
-  return INITIALISMS[flat.toLowerCase()] || statusCase(flat);
+  // WORD-WISE, not whole-string. A whole-string guard only catches a token that IS an
+  // initialism, so the moment one appears inside a phrase — 'NPC contacts', 'AI notes',
+  // and every user-authored custom-content category that reaches an institution or
+  // viability row — sentence case flattened it to 'Npc contacts'. Sentence-case first,
+  // then lift each word the estate knows.
+  return statusCase(token.replace(/_/g, ' '))
+    .replace(/[A-Za-z]+/g, (word) => INITIALISMS[word.toLowerCase()] || word);
 }
