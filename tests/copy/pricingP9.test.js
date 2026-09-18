@@ -148,9 +148,17 @@ describe('AuthModal blurb leads with the simulation (size on the free line)', ()
 });
 
 describe('footer links restored', () => {
-  it('exposes About / Pricing / Compendium / Gallery / legal footer keys', () => {
-    for (const key of ['about', 'pricing', 'compendium', 'gallery', 'contact', 'privacy', 'terms']) {
-      expect(typeof en.footer[key]).toBe('string');
+  // ⛔ THE LIST IS THE ROW'S, NOT A WISH (2026-09-18). It named `compendium` and
+  // `gallery`, and the footer has never linked either: both hold a top-nav cell
+  // (routes.js NAV), so a footer copy of them would be a duplicate door. The keys
+  // were resolved by nothing, in an EAGER first-paint module, and this pin was the
+  // only thing keeping them alive — a green assertion about a link that does not
+  // exist. The list is now the labels components/footer/LegalRibbonRow.jsx really
+  // renders, `guide` and `roadmap` included: those two routes had no inbound link
+  // at all before the same sweep, which is why the row grew as the registry shrank.
+  it('exposes every label the legal footer row renders', () => {
+    for (const key of ['about', 'guide', 'roadmap', 'pricing', 'contact', 'privacy', 'terms']) {
+      expect(typeof en.footer[key], `footer.${key} is missing`).toBe('string');
       expect(en.footer[key].length).toBeGreaterThan(0);
     }
   });

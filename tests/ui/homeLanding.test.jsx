@@ -271,8 +271,7 @@ describe('HomeLanding — scrollable landing', () => {
     expect(screen.getByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
 
     // ⛔ THE REGRESSION THIS PIN EXISTS FOR: the label the decorative cards wore.
-    // Anchored on the live sibling above — a landing that rendered nothing would
-    // have reddened there first, so this absence cannot pass vacuously.
+    // anchored: the three curated sample names and the Founding Worlds heading are asserted PRESENT on this same render above, so a landing that rendered nothing reds there first
     expect(container.textContent).not.toMatch(/\(placeholder\)/);
     // And the fixtures themselves are gone from the registry, not merely unused.
     expectAbsentWithAnchor(Object.keys(landing.commons), 'cards', 'votes', 'landing.commons copy block');

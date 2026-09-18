@@ -94,21 +94,28 @@ async function loadPanel() {
 // sentence twice, one line apart, under the card header. The panel keeps it (the
 // modal reads the same key from the same writer); the pages dropped their copy.
 describe('the full-page auth routes render the shared subtitle exactly once', () => {
-  test.each([
-    ['../../src/components/auth/SignInPage.jsx', 'auth.signinSubtitle', undefined],
-    ['../../src/components/auth/RegisterPage.jsx', 'auth.signupSubtitle', { tier: 'Wanderer' }],
-  ])('%s', async (modulePath, key, vars) => {
-    installMatchMedia(false);
-    vi.resetModules();
-    const { t: copy } = await import('../../src/copy/index.js');
-    const RoutePage = (await import(modulePath)).default;
-    render(<RoutePage />);
+  // One parameterless test looping over the rows in its body, never `test.each`:
+  // the lighting census's each/for park debt is shrink-only and a new `each` call
+  // raises it (tests/lint/sovereigntyLightingContract.walker.test.js).
+  test('/signin and /register each print their subtitle once', async () => {
+    const routes = [
+      ['../../src/components/auth/SignInPage.jsx', 'auth.signinSubtitle', undefined],
+      ['../../src/components/auth/RegisterPage.jsx', 'auth.signupSubtitle', { tier: 'Wanderer' }],
+    ];
+    for (const [modulePath, key, vars] of routes) {
+      installMatchMedia(false);
+      vi.resetModules();
+      const { t: copy } = await import('../../src/copy/index.js');
+      const RoutePage = (await import(modulePath)).default;
+      const { unmount } = render(<RoutePage />);
 
-    const sentence = copy(key, vars);
-    // Control: the sentence is real copy and the page rendered it at all. Without
-    // this, a page that crashed to nothing would green the count below.
-    expect(sentence).not.toBe(key);
-    expect(screen.getAllByText(sentence).length, `${key} is rendered more than once`).toBe(1);
+      const sentence = copy(key, vars);
+      // Control: the sentence is real copy and the page rendered it at all. Without
+      // this, a page that crashed to nothing would green the count below.
+      expect(sentence, `${key} did not resolve`).not.toBe(key);
+      expect(screen.getAllByText(sentence).length, `${key} is rendered more than once`).toBe(1);
+      unmount();
+    }
   });
 });
 

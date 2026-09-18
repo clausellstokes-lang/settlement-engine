@@ -205,6 +205,7 @@ describe('the Terms page states the covenant, not a sale', () => {
     // And no price figure anywhere in the Founder section (F22: numbers live on
     // Pricing) — the chair count is the section's only numeral.
     const section = heading.closest('section');
+    // anchored: this same section's heading and four covenant sentences are asserted PRESENT above, so an empty section reds there first
     expect(section.textContent).not.toMatch(/\$\d/);
   });
 });
