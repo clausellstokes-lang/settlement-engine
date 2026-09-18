@@ -163,10 +163,14 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
   // its increments moves here, and the analytics events are untouched.
   const fullLeft = anonFullRemaining();
   const rerollsLeft = anonRerollRemaining();
+  // Both nouns inflect off their own live count, from the registry's two forms
+  // (copy/index.js t() has no plural helper). Neither number is spelled into a
+  // sentence, so raising either cap can never render "2 free settlement today".
+  const settlements = t(fullLeft === 1 ? 'hero.v2.settlementOne' : 'hero.v2.settlementMany');
+  const rerollWord = t(rerollsLeft === 1 ? 'hero.v2.rerollOne' : 'hero.v2.rerollMany');
   const freeTodayLine = fullLeft > 0
-    ? t(rerollsLeft === 0 ? 'hero.v2.sublineNoRerolls'
-      : rerollsLeft === 1 ? 'hero.v2.sublineOneReroll'
-      : 'hero.v2.subline', { full: fullLeft, rerolls: rerollsLeft })
+    ? t(rerollsLeft === 0 ? 'hero.v2.sublineNoRerolls' : 'hero.v2.subline',
+      { full: fullLeft, rerolls: rerollsLeft, settlements, rerollWord })
     : t('hero.v2.sublineRerolls', { rerolls: rerollsLeft });
 
   // Tier 8.8 — fire HOMEPAGE_VIEW once per session when the hero

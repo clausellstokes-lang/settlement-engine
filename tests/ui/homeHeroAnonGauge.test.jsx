@@ -106,25 +106,52 @@ describe('HomeHero — the free-today line tells the truth about the two buckets
     return render(<HomeHero onSignIn={() => {}} onNavigate={() => {}} />);
   };
 
+  // The line is read straight off the rendered node, so every arm below is the
+  // sentence a visitor actually gets, not a registry lookup agreeing with itself.
+  const renderedLine = (container) => {
+    const hit = [...container.querySelectorAll('span')]
+      .map((el) => el.textContent)
+      .find((txt) => /^\(.*\)$/.test(txt || ''));
+    return hit || '';
+  };
+
   it('a fresh visitor is told one settlement and two rerolls, never "3 of 3"', () => {
-    renderAnon();
-    expect(screen.getByText(`(${t('hero.v2.subline', { full: 1, rerolls: 2 })})`)).toBeTruthy();
+    const { container } = renderAnon();
+    expect(renderedLine(container)).toBe('(1 free settlement today, plus 2 rerolls)');
     // ⛔ THE DEFECT: the sum of the two caps, rendered as one interchangeable
     // allowance. Anchored by the live assertion above, which reads the same node.
     expect(screen.queryByText(/3 of 3 free today/)).toBeNull();
   });
 
-  it('one reroll spent reads in the singular', () => {
+  it('one reroll left reads in the singular', () => {
     anonLeft.reroll = 1;
-    renderAnon();
-    expect(screen.getByText(`(${t('hero.v2.sublineOneReroll', { full: 1, rerolls: 1 })})`)).toBeTruthy();
+    const { container } = renderAnon();
+    expect(renderedLine(container)).toBe('(1 free settlement today, plus 1 reroll)');
+  });
+
+  // ⛔ THE CAP-RAISE GUARD. The first cut hardcoded the singular noun and the
+  // reroll count into the sentence, so raising DEFAULT_DAILY_FULL_CAP would have
+  // rendered "2 free settlement today" on the funnel's hottest line. Both nouns now
+  // inflect off their own live count, which is what this arm holds: a bucket count
+  // this product has never shipped, rendering correctly anyway.
+  it('a raised full cap inflects BOTH nouns, never "2 free settlement"', () => {
+    anonLeft.full = 2;
+    anonLeft.reroll = 1;
+    const { container } = renderAnon();
+    expect(renderedLine(container)).toBe('(2 free settlements today, plus 1 reroll)');
+  });
+
+  it('no rerolls left drops the clause rather than saying "0 rerolls"', () => {
+    anonLeft.reroll = 0;
+    const { container } = renderAnon();
+    expect(renderedLine(container)).toBe('(1 free settlement today)');
   });
 
   it('the full run spent, rerolls left: the line switches to the rerolls', () => {
     anonLeft.full = 0;
     anonLeft.reroll = 2;
-    renderAnon();
-    expect(screen.getByText(`(${t('hero.v2.sublineRerolls', { rerolls: 2 })})`)).toBeTruthy();
+    const { container } = renderAnon();
+    expect(renderedLine(container)).toBe(`(${t('hero.v2.sublineRerolls', { rerolls: 2 })})`);
     expect(screen.queryByText(/free settlement today/)).toBeNull();
   });
 

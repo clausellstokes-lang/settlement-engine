@@ -83,10 +83,23 @@ export const en = Object.freeze({
       // after one settlement. Three states, three sentences, each counting down
       // from the live counter; the at-cap copy (hero.anonCap.*) takes over when
       // both buckets are spent.
-      subline:          '{full} free settlement today, plus {rerolls} rerolls',
-      sublineOneReroll: '{full} free settlement today, plus 1 reroll',
-      sublineNoRerolls: '{full} free settlement today',
+      //
+      // ⛔ BOTH NOUNS INFLECT, AND NEITHER COUNT IS SPELLED IN THE STRING. The
+      // first cut hardcoded the singular ('{full} free settlement today') and the
+      // reroll count ('plus 1 reroll'), so raising DEFAULT_DAILY_FULL_CAP to 2
+      // would have rendered "2 free settlement today" — a cap change silently
+      // producing broken copy on the funnel's hottest line. The registry has no
+      // plural helper (copy/index.js t() does {token} interpolation and nothing
+      // else), so the two nouns are two forms each, chosen by the caller and
+      // interpolated: the words stay in the registry where a translator can reach
+      // them, and no number is written into a sentence.
+      subline:          '{full} free {settlements} today, plus {rerolls} {rerollWord}',
+      sublineNoRerolls: '{full} free {settlements} today',
       sublineRerolls:   'Rerolls left today: {rerolls}',
+      settlementOne:    'settlement',
+      settlementMany:   'settlements',
+      rerollOne:        'reroll',
+      rerollMany:       'rerolls',
     },
     // ── Anonymous cap framed as an unlock ───────────────────────────────
     // ⛔ THE UNLOCK NAMED SIZES THE READER ALREADY HAD. TIER_GATE.anon.maxTier is
