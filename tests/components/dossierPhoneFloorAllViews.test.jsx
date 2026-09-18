@@ -103,15 +103,45 @@ beforeAll(() => {
   };
 }, 120_000);
 
+/**
+ * ⛔ THE VIEWPORT IS ONE CONTROLLED SOURCE, NOT A FRESH MOCK PER TEST — AND THE
+ * FOURTH THING THIS INSTRUMENT GOT WRONG.
+ *
+ * `hooks/useIsMobile.js` keeps a MODULE-LEVEL store per breakpoint: the first
+ * `useIsMobile()` of the module's life calls `window.matchMedia` once, caches
+ * `{ mql, matches }` in a `Map`, and every later hook instance reads that cache
+ * instead of the global. So replacing `window.matchMedia` with a second, fresh
+ * mock — which is what this helper used to do — CANNOT reach a store that has
+ * already been built: the desktop walk below ran under the MOBILE flag, and
+ * passed only because the pre-sweep dossier had sub-14px prose either way.
+ * Floor the last passage and the anchor inverts and fails, which is how it was
+ * found — the guard against a vacuous mobile assertion was itself vacuous.
+ *
+ * The cure is a mock that behaves like a real MediaQueryList: ONE object whose
+ * `matches` is a live getter over `viewport`, which records the store's own
+ * `change` listener and NOTIFIES it when the flag flips. The cached store then
+ * updates exactly as it does in a browser on resize, and `installMatchMedia`
+ * means what it says at both widths.
+ */
+const viewport = { matches: true, listeners: new Set() };
+
 function installMatchMedia(matches) {
-  window.matchMedia = vi.fn((query) => ({
-    media: query,
-    matches,
-    addEventListener: () => {},
-    removeEventListener: () => {},
-    addListener: () => {},
-    removeListener: () => {},
-  }));
+  viewport.matches = matches;
+  if (!window.matchMedia?.SF_CONTROLLED) {
+    const mock = vi.fn((query) => ({
+      media: query,
+      get matches() { return viewport.matches; },
+      addEventListener: (_type, fn) => viewport.listeners.add(fn),
+      removeEventListener: (_type, fn) => viewport.listeners.delete(fn),
+      addListener: (fn) => viewport.listeners.add(fn),
+      removeListener: (fn) => viewport.listeners.delete(fn),
+    }));
+    mock.SF_CONTROLLED = true;
+    window.matchMedia = mock;
+  }
+  // A real query notifies on flip; this is what carries the new width into the
+  // module-level store the hook already built.
+  for (const fn of viewport.listeners) fn({ matches });
 }
 
 function freshStore() {
@@ -278,7 +308,7 @@ describe('THE PHONE PROSE FLOOR — every dossier view', () => {
   test('desktop is untouched — the SAME walk still measures the shipped small steps', async () => {
     installMatchMedia(false);
     const { container } = render(<OutputContainer settlement={town} readOnly />);
-    const { violations, visited } = await walkEveryView(container);
+    const { violations, visited, measured } = await walkEveryView(container);
 
     // The floor is a PHONE rule, and this is the liveness anchor for the run
     // above. Above the breakpoint the dossier keeps its own smaller steps, so
@@ -286,6 +316,10 @@ describe('THE PHONE PROSE FLOOR — every dossier view', () => {
     // `proseFontSize` would be raising every width and the mobile assertion
     // would be proving nothing about mobile.
     expect(visited.length).toBeGreaterThanOrEqual(MIN_VIEWS);
+    // The same anti-vacuity floor the mobile walk asserts: a desktop walk that
+    // measured almost nothing would satisfy the line below by accident.
+    expect(measured, 'the desktop scan found almost no passages — the dossier did not render')
+      .toBeGreaterThanOrEqual(MIN_PROSE_BLOCKS);
     expect(
       violations.length,
       'desktop no longer renders ANY prose below 14px — the floor has stopped being '
