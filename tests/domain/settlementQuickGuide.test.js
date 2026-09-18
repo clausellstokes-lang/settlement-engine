@@ -194,6 +194,46 @@ describe('composeSettlementQuickGuide', () => {
       .toBe('Barebones is a settlement.');
   });
 
+  it('a label named for an Object.prototype member cannot print a native function', () => {
+    // ⛔ THE LOOKUP WAS A BARE `MAP[lead]` ON A USER-DERIVED STRING. `culturalIdentity.label`
+    // comes off the record, so a custom or legacy identity leading with `constructor`,
+    // `toString`, `valueOf` or `hasOwnProperty` read Object.prototype's member back — each
+    // of them TRUTHY, so the FUNCTION was returned as the article and interpolated:
+    //   "X is function Object() { [native code] } constructor village of 9 people."
+    for (const label of ['constructor', 'toString', '__proto__', 'valueOf', 'hasOwnProperty']) {
+      const sentence = composeSettlementQuickGuide({
+        name: 'X', tier: 'village', population: 9, culturalIdentity: { label },
+      }).identitySentence;
+      expect(sentence, label).toMatch(/^X is an? /);
+      expect(sentence, label).not.toMatch(/native code|\[object Object\]/);
+    }
+  });
+
+  it('the sound lists are whole words, because a prefix cannot hear the vowel after it', () => {
+    const lead = (label) => composeSettlementQuickGuide({
+      name: 'X', tier: 'village', population: 9, culturalIdentity: { label },
+    }).identitySentence.match(/^X is (an?) /)[1];
+
+    // ⛔ THE PREFIX SPELLING OVER-FIRED ON ALL THREE OF THESE. `/^uni/` cannot tell
+    // `unified` (/juː/, 'a') from `uninhabited` (/ʌ/, 'an'), and `/^one/` swallowed
+    // `Oneiric`; the distinction is the vowel that FOLLOWS, which a prefix never sees.
+    expect(lead('Uninhabited')).toBe('an');
+    expect(lead('Unimportant')).toBe('an');
+    expect(lead('Oneiric')).toBe('an');
+    // …while the words that really do open with a consonant sound still take 'a'.
+    expect(lead('European-inspired')).toBe('a');
+    expect(lead('Unified-Clans')).toBe('a');
+    expect(lead('One-Road')).toBe('a');
+
+    // ⛔ AND THERE WAS NO SILENT-H LIST AT ALL, so every one of these took 'a'.
+    expect(lead('Honest')).toBe('an');
+    expect(lead('Hourglass')).toBe('an');
+    expect(lead('Heir')).toBe('an');
+    // The ordinary h is untouched.
+    expect(lead('Highland')).toBe('a');
+    expect(lead('Hill-Clans')).toBe('a');
+  });
+
   it('falls through to historical character when the scope is not a term list', () => {
     // The mixed-culture profile's scope is a sentence about blending, not the
     // `<article> <terms> design grammar.` shape. Its label already carries the

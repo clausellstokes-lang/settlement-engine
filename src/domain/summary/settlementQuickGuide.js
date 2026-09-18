@@ -221,20 +221,41 @@ const ARTICLE_BY_LEAD = Object.freeze({
 });
 
 /**
- * Written vowels that open with a consonant SOUND, so they take 'a': European,
- * eulogy, ewe, one-street, once-great, unified, useful, usual, utopian, ubiquitous.
- * Deliberately short and literal - a general pronunciation model is not something
- * this file should be carrying, and every word the product mints is in the map above.
+ * ⛔ WHOLE WORDS, NOT PREFIXES. The first spelling of this rule matched `/^(?:eu|one|uni|…)/`
+ * and over-fired on every word that merely STARTS that way: "a uninhabited hamlet",
+ * "a unimportant village", "a Oneiric-inspired town". A prefix cannot tell `unified`
+ * (/juː/, takes 'a') from `uninhabited` (/ʌ/, takes 'an'), because the distinction is
+ * the vowel that follows, not the letters that open. Both lists are therefore keyed on
+ * the lead's first WORD and are kept as short as the defect allows.
  */
-const CONSONANT_SOUND_LEAD = /^(?:eu|ewe|one|once|uni|use|usu|uto|ubi|ufo)/i;
+/** Written vowels that open with a consonant sound, so they take 'a'. */
+const CONSONANT_SOUND_WORDS = new Set([
+  'european', 'euphoric', 'eulogy', 'eucalyptus', 'ewe', 'one', 'once',
+  'unified', 'union', 'united', 'unique', 'uniform', 'unit', 'universal',
+  'university', 'unicorn', 'usual', 'useful', 'utopian', 'ubiquitous',
+]);
+/** Written consonants that open with a vowel sound, so they take 'an'. The silent h. */
+const VOWEL_SOUND_WORDS = new Set([
+  'heir', 'heiress', 'heirloom', 'honest', 'honesty', 'honour', 'honor',
+  'honourable', 'honorable', 'honorary', 'hour', 'hourglass', 'hourly',
+]);
 
-/** @param {string} descriptors @returns {'a' | 'an'} */
+/**
+ * @param {string} descriptors
+ * @returns {'a' | 'an'}
+ */
 function articleFor(descriptors) {
   const lead = descriptors.split(' ')[0] || '';
-  const known = ARTICLE_BY_LEAD[lead];
-  if (known) return known;
-  if (CONSONANT_SOUND_LEAD.test(lead)) return 'a';
-  return /^[aeiou]/i.test(lead) ? 'an' : 'a';
+  // ⛔ `Object.hasOwn`, NEVER A BARE LOOKUP. `descriptors` carries a user-derived
+  // `culturalIdentity.label`, and a plain-object read of it returns Object.prototype's
+  // members for a label leading with `constructor`, `toString`, `valueOf` or
+  // `hasOwnProperty` - each of them TRUTHY, so the function itself was returned and
+  // printed: "X is function Object() { [native code] } constructor village of 9 people."
+  if (Object.hasOwn(ARTICLE_BY_LEAD, lead)) return ARTICLE_BY_LEAD[lead];
+  const word = (lead.match(/[a-z]+/i) || [''])[0].toLowerCase();
+  if (CONSONANT_SOUND_WORDS.has(word)) return 'a';
+  if (VOWEL_SOUND_WORDS.has(word)) return 'an';
+  return /^[aeiou]/.test(word) ? 'an' : 'a';
 }
 
 /**
