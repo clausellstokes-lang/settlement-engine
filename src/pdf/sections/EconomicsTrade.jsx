@@ -28,6 +28,7 @@ import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 function renderedTradeLabel(economy, direction, item) {
   const ownership = tradeLabelOwnership(economy, direction, item);
@@ -46,7 +47,7 @@ function renderedTradeLabel(economy, direction, item) {
   return label(item);
 }
 
-export function EconomicsTrade({ settlement, narrativeMode, vm }) {
+export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
   const e = vm.economics;
 
   return (
@@ -60,6 +61,9 @@ export function EconomicsTrade({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone={economicsTone(e)}>
         {economicsHeadline(e)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="economics" />
 
       <StatStrip
         stats={[

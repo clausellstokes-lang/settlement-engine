@@ -22,6 +22,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { StatusCard } from '../primitives/Visuals.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { humanize, label, plural, upper } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const SERVICE_CATEGORY_ORDER = [
   'lodging', 'food', 'equipment', 'magic', 'healing',
@@ -55,7 +56,7 @@ const SERVICE_CAT_TONE = {
   criminal: 'bad',
 };
 
-export function Services({ settlement, narrativeMode, vm }) {
+export function Services({ settlement, narrativeMode, vm, stateProse }) {
   const s = vm.services || {};
   const cats = SERVICE_CATEGORY_ORDER
     .map(k => ({ key: k, items: normalizeServiceList(s.available?.[k]) }))
@@ -74,6 +75,9 @@ export function Services({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         What players can actually purchase here. Match a need to the right counter.
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="services" />
 
       {cats.length === 0 && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>

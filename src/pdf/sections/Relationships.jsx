@@ -26,6 +26,7 @@ import { relColor } from '../../components/settlements/relationshipColors.js';
 import {
   cap, label, hookText, humanize, prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const REL_LABELS = {
   rival:            'Rival',
@@ -39,7 +40,7 @@ const REL_LABELS = {
   criminal_network: 'Criminal Network',
 };
 
-export function Relationships({ settlement, narrativeMode, vm }) {
+export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
   const r = vm.relationships;
   const hasAny =
     r.neighbours?.length > 0 ||
@@ -62,6 +63,9 @@ export function Relationships({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         {relationshipsHeadline({ all: r.neighbours || [] })}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="relationships" />
 
       {!hasAny && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>

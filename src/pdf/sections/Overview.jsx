@@ -31,8 +31,9 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
+import { StateProse } from '../primitives/StateProse.jsx';
 
-export function Overview({ settlement, narrativeMode, vm }) {
+export function Overview({ settlement, narrativeMode, vm, stateProse }) {
   const o = vm.overview;
   const id = vm.identity;
 
@@ -90,6 +91,9 @@ export function Overview({ settlement, narrativeMode, vm }) {
           { label: 'STABILITY',  value: cap(o.stability) },
         ]}
       />
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="overview" />
 
       {/* ── Active crises ─────────────────────────────────────────── */}
       {o.stress.length > 0 && (

@@ -24,6 +24,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const FOUNDING_FIELDS = [
   { key: 'origin',           label: 'ORIGIN' },
@@ -37,7 +38,7 @@ const FOUNDING_FIELDS = [
 // render an empty header strip when the engine emits `{ summary: '' }` etc.
 const nonBlank = (v) => typeof v === 'string' ? v.trim().length > 0 : !!v;
 
-export function HistoryFounding({ settlement, narrativeMode, vm }) {
+export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   const h = vm.history;
   const events = [...(h.events || [])].sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0));
   const hasFoundingDetail = FOUNDING_FIELDS.some(f => nonBlank(h.founding?.[f.key]));
@@ -55,6 +56,9 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         {historyHeadline(h)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="history" />
 
       {/* ── Age + character ──────────────────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 8, marginBottom: space.sm }} wrap={false}>

@@ -26,6 +26,7 @@ import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { factionIdFromName } from '../../lib/entities.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 /**
  * Render a conflict/tension party as a link to its faction card when the party
@@ -47,7 +48,7 @@ function PartyRef({ party, index, style }) {
   return <Text style={style}>{name}</Text>;
 }
 
-export function PowerStructure({ settlement, narrativeMode, vm }) {
+export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
@@ -64,6 +65,9 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone={powerTone(p)}>
         {powerHeadline(p, vm.identity)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="power" />
 
       {/* ── Legitimacy banner ─────────────────────────────────────── */}
       {p.legitimacy && (

@@ -23,6 +23,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 import { tickCalendarLabel, tickDurationLabel } from '../../domain/display/humanizeEngineTokens.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -85,7 +86,7 @@ function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
-export function FaithWar({ settlement, narrativeMode, vm }) {
+export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
 
@@ -127,6 +128,13 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         sub={lw.hasLive ? 'live campaign state' : 'pantheon'}
       />
       <ChapterHeadline tone={lw.atWar ? 'bad' : 'gold'}>{headline}</ChapterHeadline>
+
+      {/* ── The mounted state prose. THE FAITH HALF ONLY: the three `war.*` positions are
+          print-deferred (see printProse.js's ruling block) because their reading is
+          assembled inside WarTab from the campaigns store, so the builder emits no `war`
+          tab and this renders nothing for it. ── */}
+      <StateProse stateProse={stateProse} tab="faith" />
+      <StateProse stateProse={stateProse} tab="war" />
 
       {/* ── Posture / exhaustion / standing strip ─────────────────────── */}
       <View style={{ flexDirection: 'row', gap: 6, marginBottom: space.sm }}>

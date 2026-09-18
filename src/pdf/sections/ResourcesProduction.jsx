@@ -22,12 +22,13 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
 import { cap, label, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const _STATUS_TONE = { full: 'good', partial: 'warn', unexploited: 'bad' };
 const VALUE_TONE  = { 'very high': 'good', high: 'good', medium: 'warn', low: 'muted' };
 const SEVERITY_TONE = { high: 'bad', medium: 'warn', low: 'muted' };
 
-export function ResourcesProduction({ settlement, narrativeMode, vm }) {
+export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse }) {
   const r = vm.resources;
 
   // Group chain rows by status for sectioning
@@ -53,6 +54,9 @@ export function ResourcesProduction({ settlement, narrativeMode, vm }) {
             clause silently dropped. Pass the keys the function actually expects. */}
         {resourcesHeadline({ exportPotential: r.exportPotential, nearbyDepleted: r.nearbyDepleted })}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="resources" />
 
       {/* ── Strategic value ────────────────────────────────────── */}
       {r.strategicValue && (

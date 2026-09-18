@@ -21,6 +21,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
 const FORCE_GROUPS = [
@@ -31,7 +32,7 @@ const FORCE_GROUPS = [
   { key: 'arcane', label: 'ARCANE DEFENSE', accent: palette.ai },
 ];
 
-export function DefenseSecurity({ settlement, narrativeMode, vm }) {
+export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   const d = vm.defense;
 
   // Criminal capture arrives as a ladder string ('none' → 'adversarial' →
@@ -59,6 +60,9 @@ export function DefenseSecurity({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone={defenseTone(d)}>
         {defenseHeadline(d, vm.identity)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="defense" />
 
       {/* ── Military status override ──────────────────────────────── */}
       {d.militaryStress && (

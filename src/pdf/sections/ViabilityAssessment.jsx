@@ -21,6 +21,7 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, noteText, smart, humanize, upper, safe } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -28,7 +29,7 @@ const SEVERITY_TONE = {
   note: 'muted', info: 'muted', low: 'muted',
 };
 
-export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
+export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse }) {
   const v = vm.viability;
   const verdict = verdictOf(v);
   const issues = v.issues || [];
@@ -50,6 +51,9 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone={viabilityTone(v)}>
         {viabilityHeadline(v)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="viability" />
 
       {/* ── Verdict callout ────────────────────────────────── */}
       <Callout tone={verdict.tone} kicker="VERDICT" title={verdict.label}>

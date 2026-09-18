@@ -23,8 +23,9 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { smart, humanize, num } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
-export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
+export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
   const d = vm.daily;
   const a = id.anchor || {};
@@ -54,6 +55,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
         accent={accent}
         sub={id.tier || null}
       />
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="daily_life" />
 
       {/* ── Anchor facts ─────────────────────────────────────── */}
       {(a.governingName || a.prosperity || a.safety || a.culturalNotes ||

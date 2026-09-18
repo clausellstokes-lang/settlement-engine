@@ -16,6 +16,7 @@ import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
+import { StateProse } from '../primitives/StateProse.jsx';
 
 const SOURCE_LABELS = {
   npc:          { label: 'NPC',          tone: 'cool' },
@@ -35,7 +36,7 @@ const PRIORITY_TONE = {
   low: 'muted', minor: 'muted',
 };
 
-export function PlotHooks({ settlement, narrativeMode, vm }) {
+export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
   const hooks = vm.hooks?.all || [];
   const tensions = vm.hooks?.tensions || [];
 
@@ -63,6 +64,9 @@ export function PlotHooks({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         {hooksHeadline(vm.hooks)}
       </ChapterHeadline>
+
+      {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
+      <StateProse stateProse={stateProse} tab="plot_hooks" />
 
       {hooks.length === 0 && (
         <Text style={{ ...type.body, color: palette.muted, fontStyle: 'italic' }}>
