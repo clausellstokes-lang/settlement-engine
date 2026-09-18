@@ -100,24 +100,25 @@ export function useGalleryPageState(routeSlug = null) {
   // bail instead of appending stale-query pages onto a fresh result set.
   const queryGenRef = useRef(0);
 
-  useEffect(() => {
-    let cancelled = false;
+  // THE ONE LIST LOADER, shared by the query effect and the reader's "Try again"
+  // so the two can never drift apart. Every call takes the next generation
+  // token: a superseded call may still settle, but it may not write.
+  const loadList = useCallback((query) => {
     const gen = ++queryGenRef.current;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- spinner on query change
     setListLoading(true); // show the spinner immediately on a query change
-    const mine = !!galleryQuery.filters?.mine;
-    const unlistedMine = !!galleryQuery.filters?.unlistedMine;
-    const featuredOnly = !!galleryQuery.filters?.featuredOnly;
+    const mine = !!query.filters?.mine;
+    const unlistedMine = !!query.filters?.unlistedMine;
+    const featuredOnly = !!query.filters?.featuredOnly;
     // Owner/curated lists each return their whole set at once (no pagination).
     const oneShot = mine || unlistedMine || featuredOnly;
     let run;
     if (unlistedMine) run = fetchMyUnlistedDossiers().then(list => ({ items: list, hasMore: false, total: list.length }));
     else if (featuredOnly) run = fetchFeaturedGallery().then(list => ({ items: list, hasMore: false, total: list.length }));
     else if (mine) run = fetchMyGallery();
-    else run = fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
-    run
+    else run = fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...query });
+    return run
       .then(res => {
-        if (cancelled || queryGenRef.current !== gen) return;
+        if (queryGenRef.current !== gen) return;
         setItems(res.items);
         setTotal(res.total ?? res.items.length);
         setHasMore(oneShot ? false : res.hasMore);
@@ -130,13 +131,36 @@ export function useGalleryPageState(routeSlug = null) {
         // The console gets the whole error; `listError` stays truthy so the list
         // can branch, and GalleryList renders the house line (gallery.loadError).
         console.error('[gallery] list fetch failed', err);
-        if (!cancelled && queryGenRef.current === gen) setListError(err?.message || String(err));
+        if (queryGenRef.current !== gen) return;
+        setListError(err?.message || String(err));
+        // ⛔ AND THE PREVIOUS QUERY'S RESULT GOES WITH IT. Those tiles and that
+        // count answer a question the reader is no longer asking: left standing
+        // under the error line they read as a successful result for the NEW
+        // query — a filter that was never applied, a search that never ran. A
+        // failed load has no rows; the error is the whole state. (A failed
+        // loadMore is the opposite case — see the note in loadMore below.)
+        setItems([]);
+        setTotal(0);
+        setHasMore(false);
+        setPage(0);
       })
       .finally(() => {
-        if (!cancelled && queryGenRef.current === gen) setListLoading(false);
+        if (queryGenRef.current === gen) setListLoading(false);
       });
-    return () => { cancelled = true; };
-  }, [galleryQuery]);
+  }, []);
+
+  useEffect(() => {
+    void loadList(galleryQuery);
+    // Cleanup bumps the token, and THAT is what retires an in-flight load on a
+    // query change or an unmount: a superseded promise finds `gen` behind the
+    // current one and writes nothing. It replaces the old local `cancelled`
+    // flag and covers loadMore's snapshot by the same rule.
+    return () => { queryGenRef.current += 1; };
+  }, [galleryQuery, loadList]);
+
+  // The reader's recovery: re-run the CURRENT query through the same loader.
+  // House copy only — the control never shows the backend's words.
+  const retryList = useCallback(() => { void loadList(galleryQuery); }, [loadList, galleryQuery]);
 
   // The slug whose dossier is currently open or in-flight. The route-sync
   // effect reads this to avoid re-fetching a dossier openDossier just opened:
@@ -234,7 +258,17 @@ export function useGalleryPageState(routeSlug = null) {
       setTotal(res.total ?? total);
       setHasMore(res.hasMore);
       setPage(nextPage);
+      // A SUCCESSFUL PAGE RETIRES THE ERROR LINE. Without this the try never
+      // cleared `listError`, so one failed page left the house line on screen
+      // for the rest of the session: every later page could succeed and the
+      // reader would still be told the gallery could not be loaded.
+      setListError(null);
     } catch (err) {
+      console.error('[gallery] list page fetch failed', err);
+      // The rows already on screen belong to THIS query and are still true, so
+      // a failed NEXT page keeps them and adds the error line above them. Only
+      // a failed query change (loadList) clears the result, because only there
+      // do the rows answer a question the reader has stopped asking.
       if (queryGenRef.current === gen) setListError(err?.message || String(err));
     } finally {
       if (queryGenRef.current === gen) setListLoading(false);
@@ -394,6 +428,7 @@ export function useGalleryPageState(routeSlug = null) {
     actionError,
     actionNotice,
     loadMore,
+    retryList,
     openDossier,
     backToList,
     toggleArrayFilter,

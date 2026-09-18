@@ -865,6 +865,8 @@ export const en = Object.freeze({
     emptyFilteredBody: 'No settlements match your filters.',
     clearFilters: 'Clear filters',
     loadError:    'The gallery could not be loaded. Try again in a moment.',
+    // The recovery beside that line: re-runs the reader's current query.
+    retry:        'Try again',
     backToList:   'Back to gallery',
   },
 

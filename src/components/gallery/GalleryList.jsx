@@ -55,6 +55,7 @@ export default function GalleryList({
   filters,
   voteBusyId,
   loadMore,
+  onRetryList,
   openDossier,
   toggleArrayFilter,
   toggleBoolFilter,
@@ -101,10 +102,28 @@ export default function GalleryList({
           {/* The house line, not the backend's. `listError` carries the raw
               PostgREST/network message; the hook consoles it for diagnosis and
               the reader gets the register's own sentence (P10/P11 — a reader is
-              never shown a transport string they cannot act on). */}
+              never shown a transport string they cannot act on).
+              THE RETRY SITS BESIDE THE ALERT, NOT INSIDE IT: the alert element's
+              whole text must stay the house sentence, or a screen reader
+              announces "…Try again" as part of the message and the P10/P11
+              guarantee — that the alert IS the house line and nothing else —
+              stops being checkable. */}
           {listError && (
-            <div role="alert" style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, marginBottom: SP.md, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
-              {t('gallery.loadError')}
+            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: SP.md, marginBottom: SP.md }}>
+              <div role="alert" style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
+                {t('gallery.loadError')}
+              </div>
+              {onRetryList && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={onRetryList}
+                  busy={listLoading}
+                  disabled={listLoading}
+                >
+                  {t('gallery.retry')}
+                </Button>
+              )}
             </div>
           )}
           {/* First-paint loading: the empty state is gated behind !listLoading and

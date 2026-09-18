@@ -27,7 +27,7 @@
  *   a successful EMPTY listing       → the empty state
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 import { en } from '../../src/copy/en.js';
 
@@ -103,6 +103,18 @@ async function findEmptyGalleryPanel() {
   return screen.findByText(en.gallery.emptyBody);
 }
 
+/**
+ * One listing row. `totalCount` is the server's own total, which is what
+ * fetchPublicGalleryViaRpc turns into `hasMore` — so a single row with a total
+ * of 48 offers "Load more" without fabricating 24 tiles.
+ */
+function listingRow(name, totalCount = 1) {
+  return {
+    data: [{ id: name, public_slug: name.toLowerCase(), name, tier: 'town', total_count: totalCount }],
+    error: null,
+  };
+}
+
 describe('the gallery list surface — a failed read is not an empty gallery', () => {
   test('an RPC that resolves { error } draws the house error line, not the invitation', async () => {
     // THE SWALLOWED CASE, in the shape a real outage actually takes: supabase-js
@@ -164,5 +176,67 @@ describe('the gallery list surface — a failed read is not an empty gallery', (
       'list_gallery_dossiers',
       expect.objectContaining({ page_number: 0 }),
     );
+  });
+});
+
+describe('the gallery list surface — the error state is recoverable and never stale', () => {
+  test('a successful page retires the error line a failed page put up', async () => {
+    // loadMore's try never cleared `listError`, so ONE failed page left the
+    // house line on screen for the rest of the session: every later page could
+    // succeed and the reader was still told the gallery could not be loaded.
+    mocks.supa.rpc
+      .mockResolvedValueOnce(listingRow('Alpha', 48))
+      .mockResolvedValueOnce({ data: null, error: { message: 'second page exploded' } })
+      .mockResolvedValueOnce(listingRow('Beta', 48));
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    expect(await screen.findByText('Alpha')).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Load more' }));
+    expect(await findHouseErrorLine()).toBeTruthy();
+    // A failed NEXT page keeps the rows it already has: they belong to this
+    // same query and are still true. Only a failed query change clears them.
+    expect(screen.getByText('Alpha')).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Load more' }));
+    expect(await screen.findByText('Beta')).toBeTruthy();
+    expect(screen.queryByRole('alert')).toBeNull();
+  });
+
+  test('a failed query change leaves no rows or count from the query before it', async () => {
+    mocks.supa.rpc
+      .mockResolvedValueOnce(listingRow('Alpha'))
+      .mockResolvedValueOnce({ data: null, error: { message: 'facet query failed' } });
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    expect(await screen.findByText('Alpha')).toBeTruthy();
+    expect(screen.getByText('1 public settlement')).toBeTruthy();
+
+    // Applying a tier facet is a NEW query — and it fails.
+    fireEvent.click(screen.getByRole('button', { name: 'Town' }));
+    expect(await findHouseErrorLine()).toBeTruthy();
+
+    // The previous query's tile and count must not stand under the error line
+    // as though the facet had been applied and returned them.
+    expect(screen.queryByText('Alpha')).toBeNull();
+    expect(screen.getByText('0 public settlements')).toBeTruthy();
+  });
+
+  test('Try again re-runs the failed query and clears the error line', async () => {
+    mocks.supa.rpc
+      .mockResolvedValueOnce({ data: null, error: { message: 'first attempt failed' } })
+      .mockResolvedValueOnce(listingRow('Alpha'));
+
+    render(<GalleryPage onNavigate={() => {}} />);
+    const alert = await findHouseErrorLine();
+
+    // The control is the house's own word, and it sits BESIDE the alert so the
+    // alert's whole text stays the house sentence (checked in findHouseErrorLine).
+    expect(alert.textContent).toBe(en.gallery.loadError);
+    fireEvent.click(screen.getByRole('button', { name: en.gallery.retry }));
+
+    expect(await screen.findByText('Alpha')).toBeTruthy();
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(mocks.supa.rpc).toHaveBeenCalledTimes(2);
   });
 });
