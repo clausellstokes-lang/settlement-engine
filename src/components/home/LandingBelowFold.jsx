@@ -9,13 +9,15 @@
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
  * to six REAL published gallery settlements (W-L2/3, fetched on mount, ranked
  * by top_voted — the strongest signal gallery.js tracks), falling back to the
- * Create page's three curated Founding Worlds. Spec constraints held: tokens only
+ * Create page's three curated Founding Worlds — which arrive on their OWN chunk
+ * (React.lazy behind a height-reserving Suspense boundary), so single-sourcing the
+ * strip costs this chunk nothing. Spec constraints held: tokens only
  * (§3.1); gold the only brand accent, violet ONLY in §03 + the faith chip in
  * the §04 chronicle (§3.2); Lucide icons, no emoji (§3.5); every control routes
  * and decorative chips are plain spans (§3.8); <section aria-labelledby> + h2.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
@@ -37,7 +39,18 @@ import { fetchPublicGallery } from '../../lib/gallery.js';
 // The commons fallback IS the Create page's Founding Worlds strip — the same
 // component, so the heading, the lead-in, the three curated samples and the
 // 'Fork this sample' wiring are single-sourced rather than restated here.
-import FoundingWorlds from '../generate/FoundingWorlds.jsx';
+//
+// ⛔ LAZY, NOT STATIC, AND THE MODULE'S OWN HEADER IS THE REASON. FoundingWorlds
+// documents itself as a create-surface component on the LAZY CREATE CHUNK, and it
+// records a byte hazard it already paid for once (MG-3f leak L8: importing the
+// saves-panel helpers dragged a helper set toward the first-paint closure, cured by
+// moving the one rule it needed into a dependency-free leaf). A static edge from
+// here would have charged the LANDING chunk for that whole closure — useStore, the
+// anon counter, SAMPLE_SETTLEMENTS and the config-migration leaf — on every visit,
+// to render a strip most visitors never reach and, once the gallery has three
+// published towns, nobody reaches. The dynamic import keeps the two surfaces
+// single-sourced without making the landing pay for the create page's closure.
+const FoundingWorlds = lazy(() => import('../generate/FoundingWorlds.jsx'));
 import {
   MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
@@ -158,6 +171,12 @@ const creamTailFade = (isMobile) => {
 // below it the Founding Worlds trio fills the row honestly.
 const COMMONS_SLOTS = 6;      // owner order 2026-07-21, ledger 4f71743a
 const COMMONS_MIN_REAL = 3;   // below this the curated trio shows instead
+// The strip's own height, reserved while the lazy fallback chunk arrives: one row
+// of real-row cards is the 150px scene box plus the 52px footer row plus the card's
+// two hairline rules. Reserving it means the swap-in moves nothing below it, which
+// is the same zero-layout-shift property the deleted decorative cards used to hold
+// — kept here without holding it by fabricating content.
+const COMMONS_ROW_H = 150 + 52 + 2;
 
 // A real row without its own gallery image keeps the strip's painted-scene box
 // (same height, zero layout shift). The scene is DERIVED from the row's own
@@ -176,8 +195,15 @@ function GalleryCards({ onNavigate }) {
 
   const real = (tiles || []).slice(0, COMMONS_SLOTS);
   // Not landed yet, unreachable, or a gallery too thin to fill a row: the
-  // curated trio. It carries its own heading and lead-in (the Create page's).
-  if (real.length < COMMONS_MIN_REAL) return <FoundingWorlds onNavigate={onNavigate} />;
+  // curated trio. It carries its own heading and lead-in (the Create page's), and
+  // it arrives on its own chunk behind a height-reserving boundary.
+  if (real.length < COMMONS_MIN_REAL) {
+    return (
+      <Suspense fallback={<div aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />}>
+        <FoundingWorlds onNavigate={onNavigate} />
+      </Suspense>
+    );
+  }
 
   return (
     <div style={{
