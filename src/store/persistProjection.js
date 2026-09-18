@@ -41,7 +41,16 @@
  * they are the same value, and the merge refuses anything that is not a genuine
  * envelope (absent, `true`, a string, a stale `{}`) — see persistMerge.js. The
  * second half of the gate, for a blob that IS anonymous but a session that turns
- * out not to be, lives at the boot auth resolution in store/index.js.
+ * out not to be, lives at the boot auth resolution (store/anonDraftGate.js).
+ *
+ * ⛔ AND "ANONYMOUS TIER" IS NOT THE SAME QUESTION AS "AN ANONYMOUS WORLD".
+ * Sign-out sets tier 'anon' and deliberately leaves the editor's settlement
+ * standing — eviction routes through the same path and must never destroy unsaved
+ * work. Gating on the tier alone therefore stashed the DEPARTING ACCOUNT's loaded
+ * world, possibly one of their saves, into this device's storage for the next
+ * anonymous visitor to boot into. clearAuth bars that exact object by reference
+ * (`signedInWorld`), so it stays on screen and never reaches the envelope, while a
+ * world the anonymous visitor generates afterwards is a new object and persists.
  *
  * ⚠ The whole settlement is persisted, not a projection of it. A restored draft
  * must be byte-identical to the one generated, or saving after a reload would
@@ -68,7 +77,12 @@ export function partializeStoreState(state) {
     advanceAutoResolve: state.advanceAutoResolve,
     // The anonymous draft, as ONE envelope (see the header). Null — never a bare
     // settlement, never a lone flag — for every signed-in tier and whenever there
-    // is no draft to keep.
-    anonDraft: state.auth?.tier === 'anon' && settlement ? { settlement, lastSeed } : null,
+    // is no draft to keep. THREE conditions, not one: the tier says anonymous,
+    // there is no user behind it (belt and braces on the same fact), and the world
+    // is not one a signed-in session left behind at sign-out (authSlice.clearAuth
+    // bars it by reference, because sign-out sets tier 'anon' without clearing the
+    // editor — see the header).
+    anonDraft: state.auth?.tier === 'anon' && !state.auth.user
+      && settlement && settlement !== state.signedInWorld ? { settlement, lastSeed } : null,
   };
 }

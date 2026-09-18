@@ -207,6 +207,19 @@ export const createAuthSlice = (set, get) => ({
       // Other slices may not be present in isolated unit tests.
     }
     set(state => {
+      // ⛔ THE DEPARTING ACCOUNT'S WORLD IS NOT AN ANONYMOUS DRAFT. Sign-out sets
+      // tier 'anon' while leaving the editor's settlement standing — deliberately,
+      // because eviction routes through here and must NEVER destroy unsaved work
+      // (see evictSession). But the persist projection writes an `anonDraft` for
+      // an anonymous tier, so without this the very next store write would stash
+      // the departing account's loaded world — possibly one of their SAVES — into
+      // this device's localStorage, and the next anonymous visitor would boot into
+      // it. So the world stays on screen and is BARRED from the envelope by
+      // reference; a world the anonymous visitor generates afterwards is a new
+      // object and persists normally. Guarded on a real user so initAuth's
+      // no-session branch, which also lands here at boot, cannot bar a legitimately
+      // restored anonymous draft.
+      if (state.auth?.user) state.signedInWorld = state.settlement ?? null;
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.

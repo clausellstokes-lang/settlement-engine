@@ -286,6 +286,7 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   pulseUndoStack: 'session-scoped pulse undo stack — a reload clears it (src/store/campaignWorldPulseSlice.js)',
   proposalUndoStack: 'session-scoped proposal-apply undo ring, separate from pulseUndoStack by construction — a reload clears it (src/store/campaignWorldPulseSlice.js)',
   restoredAnonDraft: 'the settlement THIS reload adopted from a persisted anonymous draft, held by reference so the boot auth resolution can drop it if the session turns out to be signed in; it is a one-reload marker and persisting it would re-arm a gate that has already been spent (src/store/settlementSlice.js)',
+  signedInWorld: 'the world a signed-in session left in the editor at sign-out, held by reference so the projection refuses to stash it as an anonymous draft; it is a bar against a WRITE, and persisting the bar would outlive the object it names (src/store/settlementSlice.js)',
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1084,6 +1085,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     settlement: null,
     lastSeed: null,
     restoredAnonDraft: null,
+    signedInWorld: null,
     someSliceMethod: () => {},
   });
 
@@ -1296,6 +1298,36 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // anchored: the call above is real, so the absent subscription is a moved
       // wiring rather than a deleted feature.
       expect(indexSrc).not.toMatch(/subscribe\(\s*\(s\)\s*=>\s*s\.auth\?\.loading/);
+    });
+
+    // ⛔ SIGN-OUT. clearAuth sets tier 'anon' and LEAVES the editor's world
+    // standing on purpose — eviction comes through the same door and must never
+    // destroy unsaved work. Gating the envelope on the tier alone therefore
+    // stashed the DEPARTING ACCOUNT's loaded world (possibly one of their saves)
+    // for the next anonymous visitor on the device to boot into.
+    test("a signed-in account's world never lands in storage after sign-out", () => {
+      // The world is still on screen (nothing destroyed) and the tier is now anon
+      // — the exact state clearAuth leaves behind — but it is barred by reference.
+      const afterSignOut = {
+        ...currentStub(), auth: { tier: 'anon', user: null }, settlement: draft,
+        lastSeed: 'sf-seed-1', signedInWorld: draft,
+      };
+      expect(partializeOf(afterSignOut).anonDraft).toBeNull();
+      // And the bar is not a blanket off-switch: a world the anonymous visitor
+      // generates AFTERWARDS is a new object, so it persists normally.
+      const generatedAfter = { ...draft };
+      expect(partializeOf({ ...afterSignOut, settlement: generatedAfter }).anonDraft)
+        .toEqual({ settlement: generatedAfter, lastSeed: 'sf-seed-1' });
+    });
+
+    test('a lingering user record alone bars the envelope, tier notwithstanding', () => {
+      // Belt and braces on the same fact: a tier that reads 'anon' while a user
+      // object is still attached is a half-applied transition, not an anonymous
+      // session, and half-applied is not a state to persist a world from.
+      const halfApplied = {
+        ...currentStub(), auth: { tier: 'anon', user: { id: 'u1' } }, settlement: draft,
+      };
+      expect(partializeOf(halfApplied).anonDraft).toBeNull();
     });
 
     test('a quota error on the persist write is swallowed, never thrown at the caller', () => {

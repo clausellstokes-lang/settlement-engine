@@ -165,9 +165,18 @@ export const createSettlementSlice = (set, get) => ({
   // again). It exists because a rehydrate finishes before Supabase resolves the
   // session: the draft has to be adoptable immediately and droppable a moment
   // later if the session turns out to be signed in. Never persisted — the
-  // partialize is an allowlist. (It shares this line because the file sits at its
-  // frozen max-lines ceiling; the comment, not the packing, is the explanation.)
-  settlement:    null, restoredAnonDraft: null,
+  // partialize is an allowlist.
+  //
+  // `signedInWorld` is SESSION-ONLY too: the world a signed-in session left in the
+  // editor at sign-out, held BY REFERENCE so the persist projection can refuse to
+  // stash it as an anonymous draft (authSlice.clearAuth records it). Sign-out sets
+  // tier 'anon' without clearing the editor — on purpose, eviction comes through
+  // the same door and must never destroy unsaved work — so the tier alone cannot
+  // answer "is this an anonymous world".
+  //
+  // (The three share this line because the file sits at its frozen max-lines
+  // ceiling; the comment, not the packing, is the explanation.)
+  settlement:    null, restoredAnonDraft: null, signedInWorld: null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,
