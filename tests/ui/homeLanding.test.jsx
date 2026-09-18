@@ -31,7 +31,7 @@ import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
-import { landing } from '../../src/copy/landing.js';
+import { landing, tl } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
 import { SAMPLE_SETTLEMENTS } from '../../src/data/sampleSettlements.js';
 import { SP } from '../../src/components/theme.js';
@@ -45,7 +45,19 @@ vi.mock('../../src/lib/analytics.js', () => ({
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
-afterEach(cleanup);
+// THE COMMONS STRIP fetches the public gallery on below-fold mount. jsdom has no
+// Supabase config, so the REAL module resolves empty — the fallback state every
+// other test in this file reads. This mock KEEPS that default (items: []) and lets
+// the real-rows arm below hand the strip three published towns, which is the other
+// half of the rule: three or more real rows and the real rows render.
+const galleryRows = vi.hoisted(() => ({ items: [] }));
+vi.mock('../../src/lib/gallery.js', () => ({
+  fetchPublicGallery: async () => ({
+    items: galleryRows.items, hasMore: false, total: galleryRows.items.length,
+  }),
+}));
+
+afterEach(() => { cleanup(); galleryRows.items = []; });
 
 function renderLanding(props = {}) {
   return render(
@@ -256,6 +268,27 @@ describe('HomeLanding — scrollable landing', () => {
   // pinned each plate's seed + style + town stamp. Both the plates and the section that
   // showed them are removed, so neither arm has a subject. The realm-map preview plates
   // in the same directory are a DIFFERENT surface and still ship.
+
+  test('three or more real published rows: the strip renders the real towns', async () => {
+    galleryRows.items = [
+      { slug: 'ashford-9f2',    name: 'Ashford-on-Vell', tier: 'town',    population: 1840, netVotes: 12, imageUrl: '' },
+      { slug: 'harrowgate-3a1', name: 'Harrowgate',      tier: 'city',    population: 9200, netVotes: 7,  imageUrl: '' },
+      { slug: 'pellmoor-77c',   name: 'Pellmoor',        tier: 'village', population: 610,  netVotes: 3,  imageUrl: '' },
+    ];
+    renderLanding();
+    await screen.findByText(landing.commons.h2);
+
+    for (const row of galleryRows.items) {
+      expect(await screen.findByText(row.name), `missing real row: ${row.name}`).toBeTruthy();
+    }
+    // Each real row carries its vote count (registry copy) and a REAL route out.
+    expect(screen.getByText(tl('commons.votes', { n: 12 }))).toBeTruthy();
+    expect(screen.getAllByRole('button', { name: landing.commons.open })).toHaveLength(3);
+    // ...and the curated trio yields to them: the samples are the FALLBACK, not a
+    // permanent strip. (queryByRole returns null, so this negative carries its own
+    // liveness — the three row names above are asserted present on the same render.)
+    expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
+  });
 
   test('commons fallback renders the curated Founding Worlds, never invented towns', async () => {
     const { container } = renderLanding();

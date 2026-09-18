@@ -282,7 +282,16 @@ const CEILINGS = Object.freeze({
   // LegalRibbonRow mount) left the product. Nothing was restyled and nothing was added:
   // the footer's own rgba border stays in App.jsx, outside this scan. borderRadius 84,
   // boxShadow 59 and tintedCallouts 160 measured unchanged.
-  borderRadius: 84,     // the rounded-card tell — plates are rule-framed, not rounded
+  // LOWERED BY THE COMMONS DE-FICTION (2026-09-18) — a REMOVAL win, banked in the same
+  // act: borderRadius 84->83. The landing's decorative commons cards were deleted (six
+  // invented towns labelled '(placeholder)'), and the DECORATIVE 'Fork' chip that rode
+  // each one carried the only borderRadius in that strip. Nothing was restyled and
+  // nothing rounded was added: the fallback is the Create page's existing Founding
+  // Worlds strip, whose plates are rule-framed by construction, and the real-row cards
+  // keep the same token radii they already had. The shrink-only rule reads a shrink as a
+  // win to LOCK, so it is lowered here rather than left slack. boxShadow, rgbaLiterals
+  // and tintedCallouts measured unchanged by the same act.
+  borderRadius: 83,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the
                         // walk-completions fold: order-14 collapsed two gallery
