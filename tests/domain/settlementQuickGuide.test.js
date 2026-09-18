@@ -8,6 +8,7 @@
 import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composeSettlementQuickGuide } from '../../src/domain/summary/settlementQuickGuide.js';
+import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 
 function completeSettlement() {
   return generateSettlementPipeline(
@@ -108,6 +109,58 @@ describe('composeSettlementQuickGuide', () => {
       'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built around '
       + 'a civic-ritual plaza, tribute, and market-and-waterworks.',
     );
+  });
+
+  it('gives EVERY authored culture scope a phrase, and none of them dangles', () => {
+    // THE COVERAGE PIN lives here rather than in the composer: settlementQuickGuide
+    // is a headless leaf and src/data/cultureProfiles.js is lazily chunked away from
+    // the first paint, so the map is keyed on the authored string and this test is
+    // what makes a reworded scope loud instead of silently unphrased.
+    const unphrased = [];
+    for (const [key, profile] of Object.entries(CULTURE_PROFILES)) {
+      const guide = composeSettlementQuickGuide({
+        name: 'Testholm',
+        tier: 'village',
+        population: 400,
+        culturalIdentity: { label: profile.label, scope: profile.scope },
+      });
+      // The fallback is recognisable: it ends at the population with nothing after it.
+      if (/ of 400 people\.$/.test(guide.identitySentence)) unphrased.push(key);
+    }
+    // ⛔ ALL ELEVEN, WITH NO EXCEPTION. The blended profile is NOT in this corpus -
+    // `materializeCulturalIdentity` synthesises it at generation time from two keys -
+    // so the only scope allowed to reach the no-scope fallback is not reachable from
+    // here, and every row that IS here must carry a phrase.
+    expect(unphrased, 'every authored scope needs a row in SCOPE_PHRASE').toEqual([]);
+    expect(Object.keys(CULTURE_PROFILES)).toHaveLength(11);
+
+    // The four ADJECTIVE STACKS - the shape a mechanical term-lift turned into a
+    // dangling modifier ("built around a timber-and-stone and guild-and-estate").
+    const say = (key) => composeSettlementQuickGuide({
+      name: 'Testholm',
+      tier: 'village',
+      population: 400,
+      culturalIdentity: { label: CULTURE_PROFILES[key].label, scope: CULTURE_PROFILES[key].scope },
+    }).identitySentence;
+    expect(say('germanic')).toBe(
+      'Testholm is a Germanic-inspired village of 400 people, built in timber and stone, '
+      + 'and run by guild and estate.',
+    );
+    expect(say('norse')).toBe(
+      'Testholm is a Norse-inspired village of 400 people, built around the hall and the '
+      + 'water, on assembly and what the season allows.',
+    );
+    expect(say('east_asian')).toBe(
+      'Testholm is an East-Asian-inspired village of 400 people, built in wards and '
+      + 'courtyards, ordered by bureau and lineage.',
+    );
+    expect(say('steppe')).toBe(
+      'Testholm is a Steppe-inspired village of 400 people, built for a pastoral life '
+      + 'half-settled and half-moving, held by clan and caravan.',
+    );
+
+    // The article follows the label rather than being hardcoded 'a'.
+    expect(say('arabic')).toMatch(/^Testholm is an Arabic-inspired village/);
   });
 
   it('falls through to historical character when the scope is not a term list', () => {

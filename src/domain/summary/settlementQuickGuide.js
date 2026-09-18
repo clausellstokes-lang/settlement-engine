@@ -166,45 +166,89 @@ function composeIdentity(settlement) {
     ? ''
     : ` of ${formatCount(population)} ${population === 1 ? 'person' : 'people'}`;
 
-  const grammar = designGrammarPhrase(scope);
-  if (grammar) {
-    return sentence(
-      `${name} is a ${descriptors}${populationPhrase}, built around ${grammar}`,
-    );
+  // ⚠ THE ARTICLE WAS HARDCODED 'a', AND TWO OF THE ELEVEN LABELS START WITH A
+  // VOWEL: every Arabic-inspired and East-Asian-inspired settlement read "is a
+  // Arabic-inspired village" on the DM's first screen. Not a new defect and not
+  // this tranche's, but it is in the one sentence this tranche exists to make
+  // read correctly, and it is display-only.
+  const article = /^[aeiou]/i.test(descriptors) ? 'an' : 'a';
+
+  const phrase = scopePhrase(scope);
+  if (phrase) {
+    return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
 
   const historicalCharacter = cleanText(settlement.history?.historicalCharacter);
   if (historicalCharacter) {
     return sentence(
-      `${name} is a ${descriptors}${populationPhrase}, ${lowerLead(firstSentence(historicalCharacter))}`,
+      `${name} is ${article} ${descriptors}${populationPhrase}, ${lowerLead(firstSentence(historicalCharacter))}`,
     );
   }
 
-  return sentence(`${name} is a ${descriptors}${populationPhrase}`);
+  return sentence(`${name} is ${article} ${descriptors}${populationPhrase}`);
 }
 
 /**
- * A culture profile authors its `scope` as `<article> <terms> design grammar.`
- * (src/data/cultureProfiles.js). A GM wants the TERMS; "design grammar" is the
- * engine's own filing word for them, and the guide used to read the whole string
- * out — "expressed through civic-ritual plaza, tribute, market-and-waterworks
- * design grammar" — which puts a category label in front of a reader twice over.
- * This lifts the authored terms and hands them back as a plain noun list.
+ * THE ELEVEN AUTHORED SCOPES, each with the phrase the identity sentence carries.
  *
- * A scope that is NOT that shape yields '' and the identity sentence falls
- * through to the historical-character form it already uses for a settlement with
- * no scope at all. The mixed-culture profile is the live case: its scope is a
- * sentence about blending rather than a term list, and its `label` already says
- * "Germanic + Latin", so the blend is still on the page.
+ * A culture profile's `scope` (src/data/cultureProfiles.js) is authored as
+ * `<article> <terms> design grammar.`, and the guide used to read the whole string
+ * out - "expressed through civic-ritual plaza, tribute, market-and-waterworks design
+ * grammar" - which puts the engine's own filing word in front of a reader.
  *
- * @param {string} scope
- * @returns {string} e.g. 'a civic-ritual plaza, tribute, and market-and-waterworks'
+ * ⚠ LIFTING THE TERMS MECHANICALLY IS WHAT THIS REPLACES, AND WHY. Four of the
+ * eleven scopes are ADJECTIVE STACKS, not noun lists: germanic's "timber-and-stone,
+ * guild-and-estate", norse's "maritime", east-asian's "bureaucratic-and-lineage" and
+ * steppe's "pastoral, mobile-sedentary" all modify the head noun the parse was
+ * throwing away, so "built around a timber-and-stone and guild-and-estate" came out
+ * a dangling modifier. A derived rule cannot tell the two shapes apart, and the
+ * shapes are a property of authored copy rather than of the grammar. So the phrase
+ * is AUTHORED per scope, once, here - display only, keyed on the EXACT authored
+ * string so a scope that is reworded stops matching and is caught rather than
+ * silently paraphrased.
+ *
+ * ⛔ THE MIXED PROFILE IS DELIBERATELY ABSENT. Its scope is a sentence about
+ * blending rather than a term list, and its `label` already says "Germanic-inspired +
+ * Latin-inspired", so the blend is on the page either way; an unmapped scope yields
+ * '' and the identity sentence falls through to the historical-character form it
+ * already uses for a settlement carrying no scope at all.
+ *
+ * The map is NOT derived from CULTURE_PROFILES here on purpose: this module is a
+ * headless leaf and src/data/cultureProfiles.js is lazily chunked away from the
+ * first paint (tests/build/cultureProfilesLazy.test.js). The coverage pin lives in
+ * tests/domain/settlementQuickGuide.test.js, which imports the corpus and asserts
+ * every authored scope but the blend has a phrase here.
+ *
+ * @type {Readonly<Record<string, string>>}
  */
-function designGrammarPhrase(scope) {
-  const shaped = /^(an?)\s+(.+?)\s+design grammar\.?$/i.exec(scope);
-  if (!shaped) return '';
-  const terms = shaped[2].split(',').map((term) => term.trim()).filter(Boolean);
-  return terms.length ? `${shaped[1].toLowerCase()} ${joinClauses(terms)}` : '';
+const SCOPE_PHRASE = Object.freeze({
+  'A timber-and-stone, guild-and-estate design grammar.':
+    'built in timber and stone, and run by guild and estate',
+  'A masonry, civic-square, patronage-and-law design grammar.':
+    'built in masonry around a civic square, and run by patronage and law',
+  'A kin-district, assembly, pastoral-and-earthwork design grammar.':
+    'built around kin districts and an assembly ground, on pasture and earthwork',
+  'A courtyard, waterworks, endowed-institution-and-caravan design grammar.':
+    'built around courtyards and waterworks, on endowed institutions and the caravan road',
+  'A hall, maritime, assembly-and-seasonal-survival design grammar.':
+    'built around the hall and the water, on assembly and what the season allows',
+  'A timber-compound, communal-land, river-and-forest design grammar.':
+    'built in timber compounds on common land, between river and forest',
+  'A ward, courtyard, bureaucratic-and-lineage design grammar.':
+    'built in wards and courtyards, ordered by bureau and lineage',
+  'A civic-ritual plaza, tribute, market-and-waterworks design grammar.':
+    'built around a civic-ritual plaza, tribute, and market-and-waterworks',
+  'A tank-and-bazaar, occupational-quarter, temple-and-guild design grammar.':
+    'built around the tank and the bazaar, in quarters by trade, under temple and guild',
+  'A pastoral, mobile-sedentary, clan-and-caravan design grammar.':
+    'built for a pastoral life half-settled and half-moving, held by clan and caravan',
+  'An agora, harbor, civic-association-and-hillside design grammar.':
+    'built around the agora and the harbour, on hillside ground and civic association',
+});
+
+/** @param {string} scope @returns {string} */
+function scopePhrase(scope) {
+  return SCOPE_PHRASE[scope] || '';
 }
 
 /**
@@ -541,14 +585,4 @@ function sentence(value) {
   const text = cleanText(value);
   if (!text) return '';
   return /[.!?]$/.test(text) ? text : `${text}.`;
-}
-
-/** Serial-comma join of any length. The three-clause spelling this replaces
- *  silently DROPPED a fourth term; no caller reached four, and no reader of the
- *  output could have seen that it had.
- *  @param {string[]} clauses @returns {string} */
-function joinClauses(clauses) {
-  if (clauses.length <= 1) return clauses[0] || '';
-  if (clauses.length === 2) return `${clauses[0]} and ${clauses[1]}`;
-  return `${clauses.slice(0, -1).join(', ')}, and ${clauses[clauses.length - 1]}`;
 }
