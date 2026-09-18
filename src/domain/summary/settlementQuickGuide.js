@@ -166,9 +166,10 @@ function composeIdentity(settlement) {
     ? ''
     : ` of ${formatCount(population)} ${population === 1 ? 'person' : 'people'}`;
 
-  if (scope) {
+  const grammar = designGrammarPhrase(scope);
+  if (grammar) {
     return sentence(
-      `${name} is a ${descriptors}${populationPhrase}, expressed through ${lowerLead(stripArticle(scope))}`,
+      `${name} is a ${descriptors}${populationPhrase}, built around ${grammar}`,
     );
   }
 
@@ -180,6 +181,30 @@ function composeIdentity(settlement) {
   }
 
   return sentence(`${name} is a ${descriptors}${populationPhrase}`);
+}
+
+/**
+ * A culture profile authors its `scope` as `<article> <terms> design grammar.`
+ * (src/data/cultureProfiles.js). A GM wants the TERMS; "design grammar" is the
+ * engine's own filing word for them, and the guide used to read the whole string
+ * out — "expressed through civic-ritual plaza, tribute, market-and-waterworks
+ * design grammar" — which puts a category label in front of a reader twice over.
+ * This lifts the authored terms and hands them back as a plain noun list.
+ *
+ * A scope that is NOT that shape yields '' and the identity sentence falls
+ * through to the historical-character form it already uses for a settlement with
+ * no scope at all. The mixed-culture profile is the live case: its scope is a
+ * sentence about blending rather than a term list, and its `label` already says
+ * "Germanic + Latin", so the blend is still on the page.
+ *
+ * @param {string} scope
+ * @returns {string} e.g. 'a civic-ritual plaza, tribute, and market-and-waterworks'
+ */
+function designGrammarPhrase(scope) {
+  const shaped = /^(an?)\s+(.+?)\s+design grammar\.?$/i.exec(scope);
+  if (!shaped) return '';
+  const terms = shaped[2].split(',').map((term) => term.trim()).filter(Boolean);
+  return terms.length ? `${shaped[1].toLowerCase()} ${joinClauses(terms)}` : '';
 }
 
 /**
@@ -250,23 +275,54 @@ function composeMaterialTruth(settlement) {
   const topExport = cleanText(firstText(economy.primaryExports));
   const situation = cleanText(economy.situationDesc);
 
+  // The three fields were spliced in as bare labels and joined with "and", which
+  // printed the generator's own vocabulary at the reader: "Struggling economy and
+  // deficit — active famine food security." Each field becomes a clause of an
+  // actual sentence instead. The fields, their precedence and the source path are
+  // unchanged — only the rendering.
   const clauses = [];
-  if (prosperity) clauses.push(`${prosperity} economy`);
-  if (food) clauses.push(`${food.toLowerCase()} food security`);
-  if (topExport) clauses.push(`${lowerLead(topExport)} as a leading export`);
+  if (prosperity) clauses.push(`the economy is ${prosperity.toLowerCase()}`);
+  if (food) clauses.push(foodSecurityClause(food));
 
-  const text = clauses.length
-    ? sentence(joinClauses(clauses))
-    : (situation ? sentence(situation) : 'Its material condition is not yet recorded.');
+  let text = clauses.length ? upperLead(clauses.join('; ')) : '';
+  if (topExport) {
+    const exportClause = `Its leading export is ${lowerLead(topExport)}`;
+    text = text ? `${sentence(text)} ${exportClause}` : exportClause;
+  }
 
   return fact(
     'material_life',
     'How it lives',
-    text,
-    clauses.length
+    text
+      ? sentence(text)
+      : (situation ? sentence(situation) : 'Its material condition is not yet recorded.'),
+    text
       ? 'economicState.prosperity|foodSecurity|primaryExports'
       : 'economicState.situationDesc',
   );
+}
+
+/**
+ * THE SIX LABELS `generateFoodSecurity` CAN EMIT (src/generators/foodGenerator.js),
+ * each as the clause a sentence can carry. Keyed by the label lowercased with its
+ * dash normalized, so a legacy save's hyphen cannot miss the famine row. A label
+ * outside the ladder names itself rather than vanishing.
+ *
+ * @type {Readonly<Record<string, string>>}
+ */
+const FOOD_SECURITY_CLAUSE = Object.freeze({
+  'deficit - active famine': 'food is in deficit and famine is active',
+  deficit: 'food is in deficit',
+  'import-dependent': 'the food supply depends on imports',
+  pressured: 'the food supply is under pressure',
+  surplus: 'there is food to spare',
+  secure: 'the food supply is secure',
+});
+
+/** @param {string} label @returns {string} */
+function foodSecurityClause(label) {
+  const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');
+  return FOOD_SECURITY_CLAUSE[key] || `the food supply is ${label.toLowerCase()}`;
 }
 
 /**
@@ -465,8 +521,8 @@ function lowerLead(value) {
 }
 
 /** @param {string} value @returns {string} */
-function stripArticle(value) {
-  return value.replace(/^(?:a|an|the)\s+/i, '');
+function upperLead(value) {
+  return value ? value[0].toUpperCase() + value.slice(1) : '';
 }
 
 /** @param {string} value @returns {string} */
@@ -487,9 +543,12 @@ function sentence(value) {
   return /[.!?]$/.test(text) ? text : `${text}.`;
 }
 
-/** @param {string[]} clauses @returns {string} */
+/** Serial-comma join of any length. The three-clause spelling this replaces
+ *  silently DROPPED a fourth term; no caller reached four, and no reader of the
+ *  output could have seen that it had.
+ *  @param {string[]} clauses @returns {string} */
 function joinClauses(clauses) {
   if (clauses.length <= 1) return clauses[0] || '';
   if (clauses.length === 2) return `${clauses[0]} and ${clauses[1]}`;
-  return `${clauses[0]}, ${clauses[1]}, and ${clauses[2]}`;
+  return `${clauses.slice(0, -1).join(', ')}, and ${clauses[clauses.length - 1]}`;
 }

@@ -93,6 +93,87 @@ describe('composeSettlementQuickGuide', () => {
     expect(guide.entryPoint.text).toContain('currently recorded');
   });
 
+  it('names the culture\'s design terms without reading the filing word out', () => {
+    const guide = composeSettlementQuickGuide({
+      name: 'Edznaxochitl',
+      tier: 'hamlet',
+      population: 130,
+      culturalIdentity: {
+        label: 'Mesoamerican-inspired',
+        scope: 'A civic-ritual plaza, tribute, market-and-waterworks design grammar.',
+      },
+    });
+
+    expect(guide.identitySentence).toBe(
+      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built around '
+      + 'a civic-ritual plaza, tribute, and market-and-waterworks.',
+    );
+  });
+
+  it('falls through to historical character when the scope is not a term list', () => {
+    // The mixed-culture profile's scope is a sentence about blending, not the
+    // `<article> <terms> design grammar.` shape. Its label already carries the
+    // blend, so the guide takes the character sentence rather than printing prose
+    // written for a different slot.
+    const guide = composeSettlementQuickGuide({
+      name: 'Nassenfurt',
+      tier: 'village',
+      population: 400,
+      culturalIdentity: {
+        label: 'Germanic-inspired + Latin-inspired',
+        scope: 'A locally blended design grammar; both traditions remain visible.',
+      },
+      history: { historicalCharacter: 'Founded at a ford and never moved from it.' },
+    });
+
+    expect(guide.identitySentence).toBe(
+      'Nassenfurt is a Germanic-inspired + Latin-inspired village of 400 people, '
+      + 'founded at a ford and never moved from it.',
+    );
+  });
+
+  it('states how a settlement lives as a sentence, over every food-security label', () => {
+    const lives = (prosperity, label, primaryExports) => composeSettlementQuickGuide({
+      economicState: { prosperity, foodSecurity: { label }, primaryExports },
+    }).definingTruths[2].text;
+
+    // The six labels foodGenerator.js can emit, each as a clause rather than a
+    // spliced field name ("deficit — active famine food security").
+    expect(lives('Struggling', 'Deficit — Active Famine')).toBe(
+      'The economy is struggling; food is in deficit and famine is active.',
+    );
+    expect(lives('Poor', 'Deficit')).toBe('The economy is poor; food is in deficit.');
+    expect(lives('Moderate', 'Import-Dependent')).toBe(
+      'The economy is moderate; the food supply depends on imports.',
+    );
+    expect(lives('Comfortable', 'Pressured')).toBe(
+      'The economy is comfortable; the food supply is under pressure.',
+    );
+    expect(lives('Prosperous', 'Surplus')).toBe(
+      'The economy is prosperous; there is food to spare.',
+    );
+    expect(lives('Wealthy', 'Secure')).toBe(
+      'The economy is wealthy; the food supply is secure.',
+    );
+
+    // A label outside the ladder (a legacy save) names itself rather than vanishing.
+    expect(lives('Poor', 'Rationed')).toBe('The economy is poor; the food supply is rationed.');
+
+    // The export is the third field this fact has always read, and it keeps its
+    // place and its source path.
+    const withExport = composeSettlementQuickGuide({
+      economicState: {
+        prosperity: 'Moderate',
+        foodSecurity: { label: 'Secure' },
+        primaryExports: ['Wool'],
+      },
+    }).definingTruths[2];
+    expect(withExport.text).toBe(
+      'The economy is moderate; the food supply is secure. Its leading export is wool.',
+    );
+    expect(withExport.sourcePath).toBe('economicState.prosperity|foodSecurity|primaryExports');
+  });
+
   it('recognizes the actual conflict prose keys when pressureSentence is absent', () => {
     const guide = composeSettlementQuickGuide({
       conflicts: [{ desc: 'The guild has barricaded the counting house.' }],
