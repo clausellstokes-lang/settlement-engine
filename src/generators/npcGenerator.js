@@ -1510,7 +1510,7 @@ export const generateNPCs = (
 
   const TIER_MANDATORY_ROLES = {
     thorp: ['Elder', thorpSecondRole],
-    hamlet: ['Elder', 'Parish Priest'],
+    hamlet: ['Elder', 'Priest'],
     village: ['Mayor', 'Guard Captain'],
     town: ['Mayor', 'Guard Captain', 'High Priest'],
     city: ['Mayor', 'Guard Captain', 'High Priest', 'Wealthiest Merchant'],
@@ -1526,13 +1526,13 @@ export const generateNPCs = (
     indebted: ['Moneylender'],
     recently_betrayed: ['Chief Magistrate'],
     infiltrated: [],
-    plague_onset: ['Healer', 'Parish Priest'],
+    plague_onset: ['Healer', 'Priest'],
     succession_void: ['Council Member', 'Chief Magistrate'],
     monster_pressure: ['Garrison Commander', 'Retired Adventurer'],
     insurgency: ['Chief Magistrate', 'Corrupt Official'],
     mass_migration: ['Guild Master', 'Healer'],
     wartime: ['Garrison Commander', 'Guild Master'],
-    religious_conversion: ['Parish Priest', 'Council Member'],
+    religious_conversion: ['Priest', 'Council Member'],
     slave_revolt: ['Garrison Commander', 'Guard Captain'],
   };
 

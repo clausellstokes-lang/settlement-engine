@@ -288,7 +288,7 @@ export const POWER_ROLES_BY_CATEGORY = {
       requiresInstKeyword: ['barracks', 'garrison', 'monastery', 'cathedral'],
     },
     {
-      role: "Parish Priest",
+      role: "Priest",
       title: "priest",
       priority: 6,
       minTier: "hamlet",

@@ -1485,12 +1485,20 @@ export const INSTITUTION_SERVICES = {
     "Traveller's prayer": { on: false, p: 0.8, desc: "Spoken prayer for safe passage and fair weather." },
     "Donation accepted": { on: false, p: 0.5, desc: "Small offerings left at the shrine. Accumulated and forwarded to the parish." }
   },
+  // ⚠ SETTING-AGNOSTIC NAMING. The product is setting-agnostic and its faith layer is
+  // CULTURE, never theology, so a service menu may name a RITE but never a particular
+  // world's liturgy: a Mesoamerican-inspired hamlet listed "Baptism", "Sunday mass" and
+  // a "Sacrament of entry" beside its own cultural titles. The rites themselves are real
+  // settlement facts (entry to the faith gates civil recognition; the weekly gathering is
+  // attended; the priest hears a confession), so they stay — under names any culture can
+  // wear. The INSTITUTION key cannot follow: it is also its catalog id
+  // (institutionalCatalog.slugifyInstitutionName), so renaming it would re-key the join.
   "Access to parish church": {
-    "Sunday mass": { on: true, p: 1.0, desc: "Weekly mass. Attendance expected of all residents." },
-    "Baptism": { on: true, p: 0.9, desc: "Sacrament of entry into the faith. Required for most civil recognition." },
-    "Marriage ceremony": { on: true, p: 0.9, desc: "Church-sanctioned marriage, legally binding." },
-    "Last rites": { on: true, p: 0.9, desc: "Funeral rites and burial. The church manages the graveyard." },
-    "Confession": { on: false, p: 0.6, desc: "Private confession to the priest. Absolution granted." }
+    "Weekly rite": { on: true, p: 1.0, desc: "The weekly service. Attendance expected of all residents." },
+    "Rite of entry": { on: true, p: 0.9, desc: "The rite that admits a person to the faith. Required for most civil recognition." },
+    "Marriage ceremony": { on: true, p: 0.9, desc: "Marriage sanctioned by the faith, legally binding." },
+    "Last rites": { on: true, p: 0.9, desc: "Funeral rites and burial. The priest manages the graveyard." },
+    "Confession": { on: false, p: 0.6, desc: "Private confession to the priest. The fault is heard and released." }
   },
   "Monastery": {
     "Pilgrim shelter": { on: true, p: 1.0, desc: "Food and a bed for pilgrims and travelers. Free or by donation." },

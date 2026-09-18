@@ -36,7 +36,7 @@ describe('roleToCategory', () => {
     ['Guard Captain', 'military'],
     ['City Watch Chief', 'military'],
     ['Garrison Commander', 'military'],
-    ['Parish Priest', 'religious'],
+    ['Priest', 'religious'],
     ['High Priest', 'religious'],
     ['Bishop', 'religious'],
     ['Guild Archmage', 'magic'],

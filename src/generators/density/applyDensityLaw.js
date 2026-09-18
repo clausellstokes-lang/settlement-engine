@@ -358,7 +358,8 @@ export function disperseNamedRoster(input) {
  * it already exists, and the density law does not get to second-guess it.
  *
  * ⚠ AN EARLIER DRAFT RANKED BY `influence` AND IT DEMOTED THE SETTLEMENT'S OWN
- * LEADER. Measured on `dens-e2e-hamlet-005`: the Parish Priest carries a higher
+ * LEADER. Measured on `dens-e2e-hamlet-005`: the hamlet's Priest (then spelled
+ * 'Parish Priest', renamed for the setting-agnostic law) carries a higher
  * influence band than the Elder, so the priest took the Feudal Stewardship's
  * only seat and the ELDER — the settlement's head — was pushed into the
  * Merchant Guilds. Under v1 that seed put the Elder in the government house.
