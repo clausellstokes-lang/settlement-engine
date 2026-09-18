@@ -36,6 +36,9 @@ import { tl } from '../../copy/landing.js';
 // so it adds nothing to the first-paint closure.
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
+// The one client-side truth about what the gallery can return. gallery.js already
+// pulls this module, so reading it here costs the chunk nothing.
+import { isConfigured as galleryBackendConfigured } from '../../lib/supabase.js';
 // The commons fallback IS the Create page's Founding Worlds strip — the same
 // component, so the heading, the lead-in, the three curated samples and the
 // 'Fork this sample' wiring are single-sourced rather than restated here.
@@ -206,10 +209,26 @@ const SAMPLE_PLATE_H = 216;  // measured 211 at 1440, 206-223 at 375
 const SAMPLE_LEAD_H = 18;    // the lead-in at FS.sm / 1.5, one line at desktop
 const SAMPLE_HEAD_H = 19;    // the h2 block at FS.lg
 
+// ⛔ WHICH SHAPE TO HOLD BEFORE THE ANSWER ARRIVES. The section's height genuinely
+// depends on what the fetch returns, so SOME reserve is a guess — but the guess has
+// one checkable input, and holding the wrong box merely MOVES the jump from the
+// Suspense swap to the settle moment, which is what the first cut did. With no
+// configured backend (local development, and any build without gallery credentials)
+// fetchPublicGallery cannot return a row at all: it returns `{ items: [] }` without a
+// request, so the curated strip is CERTAIN and its footprint is the right box to
+// hold. With a backend configured, real rows are the designed state and the row grid
+// is the right box.
+// ⚠ THE RESIDUAL, NAMED: a configured backend whose gallery is still EMPTY (the
+// launch morning) takes the row reserve and shifts once when the fetch settles thin.
+// Nothing on the client can know that before asking, and the alternative — holding
+// the curated box for everyone — just moves the same shift onto the real-rows path,
+// which is the state the section is designed around and the one it ends in.
+const EXPECT_THIN_GALLERY = !galleryBackendConfigured;
+
 /** The curated strip's own footprint, held while its chunk is in flight. */
-function FoundingWorldsReserve() {
+function FoundingWorldsReserve({ testId }) {
   return (
-    <div aria-hidden="true" style={{
+    <div data-testid={testId} data-reserve="curated" aria-hidden="true" style={{
       maxWidth: 960, margin: '0 auto', width: '100%', padding: `${SP.lg}px ${SP.md}px`,
     }}>
       <div style={{ height: SAMPLE_HEAD_H, marginBottom: SP.xs }} />
@@ -232,6 +251,14 @@ function GalleryCards({ onNavigate }) {
   const [tiles, setTiles] = useState(null); // null = the fetch has not settled yet
   useEffect(() => {
     let live = true;
+    // PREFETCH, ON THE PATH THAT WILL RENDER IT ONLY. Deciding after the fetch fixed
+    // the "requested on every visit" defect and created a serial one: the chunk was
+    // then requested strictly AFTER the gallery round-trip, so on the very path that
+    // shows the strip it arrived a round-trip late. Warming it at mount overlaps the
+    // two, and by the time the fetch settles `lazy` resolves without suspending, so
+    // the reserve never flashes. It is NOT warmed when real rows are expected, which
+    // is what keeps the chunk off the common path in the first place.
+    if (EXPECT_THIN_GALLERY) import('../generate/FoundingWorlds.jsx').catch(() => {});
     fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
       .then((r) => { if (live) setTiles((r?.items || []).slice(0, COMMONS_SLOTS)); })
       .catch(() => { if (live) setTiles([]); });
@@ -244,10 +271,12 @@ function GalleryCards({ onNavigate }) {
   // mounted immediately, React requested the chunk, and every landing visit paid a
   // second serial round-trip for a strip that was about to be replaced by real rows.
   // The lazy import then bought nothing at all. While the fetch is in flight the
-  // section holds its own row height and mounts NOTHING, so the chunk is requested
-  // only in the state that actually renders it.
+  // section mounts NOTHING and holds the footprint of whatever that path will end in
+  // (EXPECT_THIN_GALLERY, above), so the settle is one layout change and not two.
   if (tiles === null) {
-    return <div data-testid="commons-awaiting-gallery" aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />;
+    return EXPECT_THIN_GALLERY
+      ? <FoundingWorldsReserve testId="commons-awaiting-gallery" />
+      : <div data-testid="commons-awaiting-gallery" data-reserve="rows" aria-hidden="true" style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0`, minHeight: COMMONS_ROW_H }} />;
   }
 
   const real = tiles.slice(0, COMMONS_SLOTS);

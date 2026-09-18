@@ -284,8 +284,13 @@ describe('HomeLanding — scrollable landing', () => {
     renderLanding();
     await screen.findByText(landing.commons.h2);
 
-    // In flight: the section holds its own height and mounts nothing.
-    expect(screen.getByTestId('commons-awaiting-gallery')).toBeTruthy();
+    // In flight: the section mounts nothing and holds the footprint of the state
+    // this path ENDS in. jsdom has no gallery backend, so fetchPublicGallery cannot
+    // return a row and the curated strip is certain — holding the row grid's box
+    // here would only move the jump from the Suspense swap to the settle moment,
+    // which is the defect this arm pins shut. The attribute IS the choice.
+    const reserve = screen.getByTestId('commons-awaiting-gallery');
+    expect(reserve.getAttribute('data-reserve')).toBe('curated');
     expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
     expect(screen.queryByText(SAMPLE_SETTLEMENTS[0].name)).toBeNull();
 
