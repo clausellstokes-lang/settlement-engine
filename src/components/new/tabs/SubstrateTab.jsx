@@ -75,7 +75,7 @@ function BandPill({ variable, band }) {
   return (
     <span data-band={band} style={{
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
-      fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
+      fontSize: FS.pico, fontWeight: 800,
       color: swatch.white, background: tone,
     }}>{word}</span>
   );

@@ -59,7 +59,7 @@ function PatronSeatBlock({ patron, contested }) {
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.07em' }}>The patron seat</span>
         {contested && (
-          <span style={{ marginLeft: 'auto', fontSize: FS.xxs, fontWeight: 800, color: RED, textTransform: 'uppercase' }}>contested</span>
+          <span style={{ marginLeft: 'auto', fontSize: FS.xxs, fontWeight: 800, color: RED }}>contested</span>
         )}
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, marginTop: 6 }}>

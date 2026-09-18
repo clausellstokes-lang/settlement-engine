@@ -239,7 +239,6 @@ export function FaithNicheGlance({ desk }) {
     <div data-testid="faith-desk-niche-glance" style={{
       border: `1px solid ${BORDER}`, background: CARD, padding: '6px 10px', marginBottom: 6,
       color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700,
-      textTransform: 'uppercase', letterSpacing: '0.06em',
     }}>
       {`The patron's standing · ${drawn.glance}`}
       {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{`: ${drawn.sentence}`}</span>}

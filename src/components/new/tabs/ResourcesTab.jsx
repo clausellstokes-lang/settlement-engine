@@ -47,12 +47,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:160}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:terrainColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:4}}>Terrain</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:swatch.inkMag,lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
             {res.strategicValue&&<div style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Economic Strengths</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {[...res.economicStrengths].sort((a,b)=>(a||'').localeCompare(b||'')).map((s,i)=>(
                 <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:swatch.success,background:swatch['#E0F0E4'],border:'1px solid #a8d8b0',padding:'2px 9px'}}>✓ {s}</span>

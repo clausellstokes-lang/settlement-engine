@@ -8,6 +8,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { statusCase } from '../labelLadder.js';
 import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
@@ -304,7 +305,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{background:readiness.background,border:`1px solid ${readiness.border}`,borderLeft:`4px solid ${readiness.color}`,padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:16,flexWrap:'wrap'}}>
           <div style={{flexShrink:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:4}}>Defensive Posture</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
             <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{readiness.label}</div>
             <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
               {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
@@ -312,7 +313,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>
           {guardAssessment&&<div style={{flex:1,minWidth:200}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Guard Assessment</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Guard assessment</div>
             <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
           </div>}
         </div>
@@ -327,8 +328,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       {/* ── ACTIVE MILITARY STATUS (stress override) ─────────────────────── */}
       {stressStatus&&<div style={{background:`${stressStatus.colour}0e`,border:`2px solid ${stressStatus.colour}`,padding:'12px 16px',marginBottom:14,display:'flex',gap:12,alignItems:'flex-start'}}>
         <div style={{flexShrink:0,textAlign:'center',minWidth:80}}>
-          <div style={{fontSize:FS.xxs,fontWeight:800,color:stressStatus.colour,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Military Status</div>
-          <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{stressStatus.posture}</div>
+          <div style={{fontSize:FS.xxs,fontWeight:800,color:stressStatus.colour,marginBottom:2}}>Military status</div>
+          <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{statusCase(stressStatus.posture)}</div>
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
           {stressObj?.summary&&<p style={{fontSize: FS['12.5'],color:swatch['#3A2A10'],lineHeight:1.5,margin:'0 0 4px'}}>{stressObj.summary}</p>}
@@ -351,7 +352,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({label,color,assess},i)=>{
             const sc = threatScores[label]||0;
-            const badge = scoreBand(sc);
+            const badge = statusCase(scoreBand(sc));
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
             const rowLine = threatSentenceFor(label);
@@ -403,12 +404,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                               : intScore>=40 ? 'Adequate Public Order'
                               : intScore>=20 ? 'Weak Public Order'
                               : 'Critical: Order Failing';
-            const orderBadge  = intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL';
+            const orderBadge  = statusCase(intScore>=65?'STRONG':intScore>=40?'ADEQUATE':intScore>=20?'WEAK':'CRITICAL');
             return (
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,padding:'10px 14px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
                   <div style={{flexShrink:0,minWidth:130}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Internal Security · First Survey</div>
+                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,marginBottom:2}}>Internal security · first survey</div>
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
                       <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px',letterSpacing:'0.04em'}}>{orderBadge}</span>
@@ -429,7 +430,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure: {csd.label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,marginBottom:3}}>Criminal Structure: {csd.label}</div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
@@ -446,7 +447,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal institutions as power structures */}
           {crimInsts.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Active Criminal Operations</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
                 const note = criminalOpNote(name);
@@ -462,7 +463,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
               Criminal Faction: Power {crimFaction.power||0}
             </div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
@@ -477,7 +478,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
           {crimeTypes.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Active Crime Patterns</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimeTypes.map((ct,i)=>(
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
@@ -490,7 +491,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Safety-derived plot hooks */}
           {sp.plotHooks?.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Order & Crime Plot Hooks</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {sp.plotHooks.map((h,i)=>(
                 <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:FS.sm,color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
@@ -525,7 +526,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Fortifications</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],marginBottom:6}}>Fortifications</div>
             {walls.map((w,i)=><ForceCard key={i} inst={w} accent="#4a3a1a"/>)}
           </div>}
           {!hasAnyFort&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',marginBottom:10,fontSize:FS.md,color:swatch.inkMag3}}>
@@ -534,19 +535,19 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* DS-DEF-11: why the wall, or why not — beside the works themselves. */}
           {wallLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{wallLine}</p>}
           {mainForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Standing Forces</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:6}}>Standing forces</div>
             {[...new Map(mainForces.map(m=>[m.name,m])).values()].map((w,i)=><ForceCard key={i} inst={w} accent="#8b1a1a"/>)}
           </div>}
           {mercForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A3A1A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Contracted Forces</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A3A1A'],marginBottom:6}}>Contracted forces</div>
             {mercForces.map((w,i)=><ForceCard key={i} inst={w} accent="#5a3a1a"/>)}
           </div>}
           {charterForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#3A1A7A'],textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Monster Response (Charter)</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#3A1A7A'],marginBottom:6}}>Monster response (charter)</div>
             {charterForces.map((w,i)=><ForceCard key={i} inst={w} accent="#3a1a7a"/>)}
           </div>}
           {magicDef.length>0&&<div style={{marginBottom:6}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Arcane Defense</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:6}}>Arcane defense</div>
             {magicDef.map((w,i)=><ForceCard key={i} inst={w} accent="#5a2a8a"/>)}
           </div>}
           {!hasAnyForce&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',fontSize:FS.md,color:swatch.inkMag3}}>
@@ -589,7 +590,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    <span style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{scoreBand(cap.score)}</span>
+                    <span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{statusCase(scoreBand(cap.score))}</span>
                   </div>}
                 </div>
                 <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
@@ -605,7 +606,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
             return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,padding:'9px 13px',marginBottom:6}}>
-              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
+              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
               <div style={{fontSize:FS.md,color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
             </div>;
           })}

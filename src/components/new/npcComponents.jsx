@@ -151,7 +151,7 @@ export function ConflictCard({conflict:c}) {
   const [_open,_setOpen]=useState(false);
   // THE PHONE PROSE FLOOR — the description and the stakes sentence.
   const mobile = useIsMobile();
-  const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
+  const intStyle={high:{color:'#8b1a1a',label:'High tension'},moderate:{color:'#a0762a',label:'Moderate tension'},low:{color:'#1a5a28',label:'Low tension'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
@@ -364,7 +364,7 @@ function NPCInlineCard({
                 // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
                 // "Compromised". Falls back to the plain badge when the pulse never touched it.
                 <span style={{
-                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                  fontWeight:800,
                   ...(compromiseLc?.tone === 'muted'
                     ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
                     : compromiseLc?.tone === 'exposed'
@@ -374,7 +374,7 @@ function NPCInlineCard({
                 }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
-                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
+                  fontWeight:800,color:swatch.inkMag3,
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
@@ -397,7 +397,7 @@ function NPCInlineCard({
             <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
               {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
               <span style={{
-                fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                fontWeight:800,
                 color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
               }}>{wBadge}</span>
               <span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>

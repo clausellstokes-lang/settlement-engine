@@ -53,7 +53,7 @@ function ImpactRow({ accent, title, body }) {
       color: OINK.body,
       lineHeight: 1.5,
     }}>
-      <b style={{ color: accent, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</b>{' '}
+      <b style={{ color: accent }}>{title}</b>{' '}
       {body}
     </div>
   );

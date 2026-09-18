@@ -19,7 +19,7 @@
   },
   {
     "path": "src/components/TableView.jsx",
-    "line": 245,
+    "line": 244,
     "category": "floatInterpolation",
     "snippet": "{pressure}"
   },
@@ -121,19 +121,19 @@
   },
   {
     "path": "src/components/dossier/EngineSections.jsx",
-    "line": 102,
+    "line": 113,
     "category": "floatInterpolation",
     "snippet": "{model.cap.score}"
   },
   {
     "path": "src/components/dossier/EngineSections.jsx",
-    "line": 110,
+    "line": 121,
     "category": "floatInterpolation",
     "snippet": "{model.storageMonths.toFixed(1)}"
   },
   {
     "path": "src/components/dossier/EngineSections.jsx",
-    "line": 164,
+    "line": 174,
     "category": "floatInterpolation",
     "snippet": "{model.readiness.score}"
   },
@@ -403,7 +403,7 @@
   },
   {
     "path": "src/components/new/tabs/DefenseTab.jsx",
-    "line": 466,
+    "line": 467,
     "category": "floatInterpolation",
     "snippet": "{crimFaction.power||0}"
   },
@@ -553,31 +553,31 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 274,
+    "line": 275,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 340,
+    "line": 341,
     "category": "floatInterpolation",
     "snippet": "{governing.power}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 469,
+    "line": 470,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 469,
+    "line": 470,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 506,
+    "line": 507,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -703,7 +703,7 @@
   },
   {
     "path": "src/components/session/SessionMode.jsx",
-    "line": 445,
+    "line": 442,
     "category": "floatInterpolation",
     "snippet": "{n?.power || 0}"
   },

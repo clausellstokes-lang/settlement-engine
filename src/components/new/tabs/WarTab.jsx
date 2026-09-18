@@ -198,7 +198,7 @@ function WarsBlock({ wars, sid, nameFor }) {
           <div key={war.key} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
               <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>{war.name}</strong>
-              <span style={{ marginLeft: 'auto', color: onAttack ? GOLD : RED, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase' }}>
+              <span style={{ marginLeft: 'auto', color: onAttack ? GOLD : RED, fontSize: FS.pico, fontWeight: 800 }}>
                 {onAttack ? 'attacking' : 'defending'}
               </span>
             </div>
@@ -272,7 +272,7 @@ function UnitEntry({ unit, includeGroundTruth }) {
     <article data-testid="war-unit" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>The host, {roleWord} {destName}</strong>
-        <span data-testid="war-unit-staleness" style={{ marginLeft: 'auto', color: STALENESS_TONE[stalenessBand] || MUTED, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+        <span data-testid="war-unit-staleness" style={{ marginLeft: 'auto', color: STALENESS_TONE[stalenessBand] || MUTED, fontSize: FS.pico, fontWeight: 800, whiteSpace: 'nowrap' }}>
           word {stalenessBand}
         </span>
       </div>
@@ -358,7 +358,7 @@ function TreatyBlock({ treaties, sid }) {
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
               <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
               <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>
-              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase' }}>{doc.complianceState}</span>
+              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800 }}>{doc.complianceState}</span>
             </div>
             {doc.termLines.map((term) => (
               <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>

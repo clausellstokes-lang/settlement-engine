@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
+import { LITERARY_TITLE } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
@@ -69,7 +70,7 @@ function saveIdOfSettlement(settlement) {
 function ChainRow({ label, children }) {
   return (
     <div style={{display:'flex',alignItems:'baseline',gap:10}}>
-      <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em',flex:'0 0 72px'}}>{label}</span>
+      <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,flex:'0 0 72px'}}>{label}</span>
       <span style={{fontSize:FS.sm,color:swatch.inkMag,lineHeight:1.5,minWidth:0}}>{children}</span>
     </div>
   );
@@ -94,7 +95,7 @@ function RulingChainBlock({ settlement }) {
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
       padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
     }}>
-      <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.07em'}}>
+      <div style={{...LITERARY_TITLE,color:swatch.inkMag}}>
         Who runs this place?
       </div>
       {chain.power && (
@@ -267,8 +268,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:leg.color,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>
-                Public Legitimacy
+              <div style={{fontSize:FS.micro,fontWeight:700,color:leg.color,marginBottom:2}}>
+                Public legitimacy
               </div>
               <div style={{display:'flex',alignItems:'baseline',gap:8}}>
                 <span style={{fontSize: FS['28'],fontWeight:800,color:leg.color,lineHeight:1}}>{leg.score}</span>
@@ -277,7 +278,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             </div>
             {/* Breakdown chips */}
             <div style={{flex:1,minWidth:180}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>
+              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
                 Score breakdown (base 50)
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
@@ -329,18 +330,18 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>Stability</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
             <div style={{fontSize:FS.lg,fontWeight:700,color:stabilityColor,lineHeight:1.3}}>{m}</div>
           </div>
           {governing && <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:3}}>Governing Authority</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
               <span style={{fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{governing.faction}</span>
               <span style={{fontSize:FS.xs,fontWeight:700,color:stabilityColor}}>
                 {governing.powerLabel || ''} ({governing.power})
               </span>
               {governing.modifier && (
-                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.03em'}}>
+                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
                   {governing.modifier}
                 </span>
               )}
@@ -349,7 +350,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           {/* Criminal capture state badge */}
           {crimCapture && crimCapture !== 'none' && (
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Criminal Capture</div>
+              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
               <span style={{fontSize:FS.xxs,fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
                 {captureStyle.label}
               </span>
@@ -376,7 +377,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           ONE position, so the registry silences them together. */}
       {undersideLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The quieter arithmetic</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
           <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -389,7 +390,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           played reads the DORMANT line — which is true, not a fallback. */}
       {blocLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Sides and combinations</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
           <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -400,7 +401,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           calls itself. Three pools of ONE block at ONE position. */}
       {structureLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The shape of authority</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The shape of authority</div>
           <ProseBlock lines={structureLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -412,7 +413,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           position; the registry silences them together. */}
       {successionLines.length > 0 && (
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Rule and succession</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Rule and succession</div>
           <ProseBlock lines={successionLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -541,7 +542,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           {conflicts.map((c,i) => {
             const iHigh = c.intensity==='high', iLow = c.intensity==='low';
             const intColor = iHigh?'#8b1a1a':iLow?'#1a5a28':'#a0762a';
-            const intLabel = iHigh?'HIGH TENSION':iLow?'LOW TENSION':'MODERATE';
+            const intLabel = iHigh?'High tension':iLow?'Low tension':'Moderate';
             return (
               <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
@@ -552,7 +553,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                 {c.stakes && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
                 {c.plotHooks?.length > 0 && (
                   <div style={{borderTop:`1px solid ${intColor}30`,paddingTop:8}}>
-                    <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Plot Hooks</div>
+                    <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
                     {c.plotHooks.map((hook,j) => (
                       <div key={j} style={{display:'flex',gap:6,marginBottom:4}}>
                         <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>

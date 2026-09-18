@@ -13,6 +13,7 @@ import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 import { normalizeStressor } from '../../../domain/worldPulse/stressorsCore.js';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
+import { LITERARY_TITLE, statusCase } from '../labelLadder.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -93,7 +94,7 @@ function ScoreRow({ label, score }) {
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
         <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{scoreBand(n)}</span>
+        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{statusCase(scoreBand(n))}</span>
       </div>
       <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
@@ -105,7 +106,7 @@ function ScoreRow({ label, score }) {
 function StatusTag({ label, value, _color, accent }) {
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
-      <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
+      <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
@@ -288,7 +289,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             identity strip; only the arrangement changed. */}
       {siteLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The ground and the company it keeps</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -301,7 +302,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px',letterSpacing:'0.06em'}}>ACTIVE CRISIS</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px'}}>Active crisis</span>
               </div>
               <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:FS.xs,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
@@ -348,7 +349,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           worldState.stressors is written by the pulse, never by generation. */}
       {stressorLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>The pressure from outside</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The pressure from outside</div>
           <ProseBlock lines={stressorLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -360,7 +361,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           whether it is running out. Five pools of ONE block at ONE position. */}
       {conditionLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the town is living through</div>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
           <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -450,7 +451,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div>
               <div style={{display:'flex',gap:6,alignItems:'baseline',flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'HIGH':'MODERATE'}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
               </div>
               {c.issue&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
               {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
@@ -519,7 +520,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
 
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
+        <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
         {/* ── DS-REL-2 (overview.notableConnection) ───────────────────────────
             TWO LENSES AT ONE POSITION: the tie the town names first, and how
             much of its roll this town's own conditions made. The phrasing below
@@ -538,17 +539,17 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
         <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
           {ra.terrain&&<div style={{flex:'1 1 100px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Terrain</div>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Terrain</div>
             <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag}}>{ra.terrain}</div>
           </div>}
           {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Strengths</div>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Strengths</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
               {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
             </div>
           </div>}
           {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Strategic Value</div>
+            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
             <div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
           </div>}
         </div>
@@ -646,7 +647,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
               const cc=getCatColor(cat);
               return <div key={cat}>
-                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{cat} ({insts.length})</div>
+                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,marginBottom:4}}>{cat} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                   {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;

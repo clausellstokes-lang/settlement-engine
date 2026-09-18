@@ -140,7 +140,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                   onClick: () => setOpenIdx(isExp ? null : i),
                   onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenIdx(isExp ? null : i); } },
                 } : {})}>
-                <span style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: accent, background: `${accent}14`, border: `1px solid ${accent}40`, padding: '1px 6px', flexShrink: 0 }}>
+                <span style={{ fontSize: FS.micro, fontWeight: 800, color: accent, background: `${accent}14`, border: `1px solid ${accent}40`, padding: '1px 6px', flexShrink: 0 }}>
                   {isRuler ? 'Ruler' : 'Contender'}
                 </span>
                 <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
@@ -148,7 +148,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                 </span>
                 <span style={{ fontSize: FS.micro, fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[p.archetype] || 'Faction'}</span>
                 {p.powerLabel && (
-                  <span style={{ fontSize: FS.micro, fontWeight: 700, color: powerLabelColor(p.powerLabel), background: `${powerLabelColor(p.powerLabel)}12`, border: `1px solid ${powerLabelColor(p.powerLabel)}30`, padding: '1px 5px', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  <span style={{ fontSize: FS.micro, fontWeight: 700, color: powerLabelColor(p.powerLabel), background: `${powerLabelColor(p.powerLabel)}12`, border: `1px solid ${powerLabelColor(p.powerLabel)}30`, padding: '1px 5px', flexShrink: 0 }}>
                     {p.powerLabel}
                   </span>
                 )}
@@ -165,7 +165,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
 
               {isExp && hasSupport && (
                 <div id={`power-card-${i}-detail`} style={{ padding: '2px 12px 10px 14px', background: swatch['#FAF8F4'] }}>
-                  <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 5 }}>
+                  <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, marginBottom: 5 }}>
                     Institutions behind this power ({support.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -264,7 +264,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
                     aria-label={`${r.name} holds power, jump to its power card`}
                     onClick={(e) => { e.stopPropagation(); jumpToPower(r.name); }}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
-                    style={{ minHeight: 0, borderRadius: 0, fontSize: FS.micro, fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                    style={{ minHeight: 0, borderRadius: 0, fontSize: FS.micro, fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
                     {'↑ Holds power'}
                   </Button>
                 )}
@@ -320,7 +320,7 @@ export function TheWeb({ groups }) {
             <div key={g.kind} style={{ border: `1px solid ${meta.color}30`, borderLeft: `3px solid ${meta.color}` }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '4px 10px', background: meta.bg, borderBottom: `1px solid ${meta.color}20` }}>
                 <span aria-hidden="true" style={{ fontSize: FS.xs, color: meta.color, fontWeight: 800 }}>{meta.glyph}</span>
-                <span style={{ fontSize: FS.xs, fontWeight: 800, color: meta.color, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{meta.label}</span>
+                <span style={{ fontSize: FS.xs, fontWeight: 800, color: meta.color }}>{meta.label}</span>
                 <span style={{ fontSize: FS.xxs, color: MUTED }}>({g.edges.length})</span>
               </div>
               <div>

@@ -202,8 +202,7 @@ export default function TableView({ settlement, onClose }) {
                   borderLeft: `2px solid ${FIELD_RULE}`,
                 }}>
                   <span style={{
-                    fontSize: FS.nano, fontWeight: 800,
-                    letterSpacing: '0.07em', textTransform: 'uppercase',
+                    fontSize: FS.xs, fontWeight: 700,
                     color: CREAM_FAINT, marginRight: 5,
                   }}>
                     {truth.label}
@@ -252,7 +251,6 @@ export default function TableView({ settlement, onClose }) {
               {stressors.map((s, i) => (
                 <span key={i} style={{
                   fontSize: FS.micro, fontWeight: 800,
-                  letterSpacing: '0.04em', textTransform: 'uppercase',
                   color: LAMP_ACCENTS.RED, background: 'transparent',
                   border: `1px solid ${LAMP_ACCENTS.RED}`,
                   padding: '3px 8px',

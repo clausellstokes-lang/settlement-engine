@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, serif, Collapsible, Section, Empty } from '../Primitives';
+import { LITERARY_TITLE } from '../labelLadder.js';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -129,7 +130,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           DS-GEN-16 above, and two blocks narrating each row in turn is the page
           repeating itself about one fact. */}
       {identityLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-        <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>What the years have made of it</div>
+        <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the years have made of it</div>
         <ProseBlock lines={identityLines} settlementName={r.name} tier={r.tier}
           style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
       </div>}
@@ -144,7 +145,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             return (
             <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${accent}`,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
               <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:event.summary?4:0}}>
-                <span style={{fontSize:FS.xs,fontWeight:800,color:accent,textTransform:'uppercase',letterSpacing:'0.05em'}}>
+                <span style={{fontSize:FS.xs,fontWeight:800,color:accent}}>
                   {String(event.title||'Event').replace(/_/g,' ')}
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
@@ -245,7 +246,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
                 {/* Header */}
                 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color,textTransform:'uppercase',letterSpacing:'0.05em'}}>{tm.label}</span>
+                  <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color}}>{tm.label}</span>
                   {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
                     <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
                   ))}
@@ -258,7 +259,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 </div>}
                 {/* Plot hooks — inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
-                  <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Plot Hooks</div>
+                  <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
                   <div style={{display:'flex',flexDirection:'column',gap:4}}>
                     {t.plotHooks.map((hook,j)=>(
                       <div key={j} style={{display:'flex',gap:7,alignItems:'flex-start'}}>
@@ -285,7 +286,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               {label:'How survived',value:founding.overcoming},
             ].filter(f=>f.value).map(({label,value})=>(
               <div key={label}>
-                <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:5}}>{label}:</span>
+                <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,marginRight:5}}>{label}:</span>
                 <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{value}</span>
               </div>
             ))}
@@ -325,14 +326,14 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                     <div style={{flex:1,minWidth:120}}>
                       <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
                         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
-                        {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color,textTransform:'uppercase',letterSpacing:'0.04em'}}>{typeLabel}</span>}
+                        {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color}}>{typeLabel}</span>}
                         {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
                       </div>
                       <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
                     </div>
                     <div style={{flexShrink:0,textAlign:'right'}}>
                       <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>
-                      <div style={{fontSize:FS.micro,color:yrsColor,textTransform:'uppercase',letterSpacing:'0.04em',marginTop:1}}>{yrsLabel}</div>
+                      <div style={{fontSize:FS.micro,color:yrsColor,marginTop:1}}>{yrsLabel}</div>
                     </div>
                     <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0,paddingTop:2}}>{isExp?'▲':'▼'}</span>
                   </div>
@@ -340,11 +341,11 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                 {/* Expanded detail */}
                 {isExp&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
                   {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
-                    <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em'}}>Lasting Effects: </span>
+                    <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
                     <span style={{fontSize: FS['11.5'],color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
                   </div>}
                   {evt.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${ec.border}`,paddingTop:8,marginTop:4}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Plot Hooks</div>
+                    <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
                     {evt.plotHooks.map((hook,j)=>{
                       const hookText = typeof hook==='object'?hook.hook||Ti(hook):hook;
                       return <div key={j} style={{display:'flex',gap:7,marginBottom:4}}>

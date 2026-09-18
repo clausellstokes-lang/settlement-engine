@@ -34,7 +34,7 @@ const RULE = OINK.hairline;     // the feint annal ruling (decorative)
 // no rounded card chrome. Colour is never the sole channel; the stamp text
 // (Party / Edit / World) and the row title both carry the source.
 function stamp(color) {
-  return { fontSize: FS.micro, color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' };
+  return { fontSize: FS.micro, color, border: `1px solid ${color }`, padding: '0 5px', fontWeight: 800};
 }
 
 /**
@@ -72,7 +72,7 @@ export default function ChronicleTab({ entries = [] }) {
                   {event.relativeLabel && (
                     <span style={{ fontSize: FS.micro, fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
                   )}
-                  <span style={{ fontSize: FS.xs, fontWeight: 800, color: accent, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <span style={{ fontSize: FS.xs, fontWeight: 800, color: accent }}>
                     {humanizeIfToken(event.title, 'Event')}
                   </span>
                   {event.partyCaused
@@ -104,13 +104,13 @@ export default function ChronicleTab({ entries = [] }) {
                       <AffectedSettlements ids={event.address.affectedSettlementIds} />
                     ) : Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 ? (
                       <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
-                        <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Affects </span>
+                        <span style={{ fontWeight: 800 }}>Affects </span>
                         {event.address.affectedSettlements.join(', ')}
                       </div>
                     ) : null}
                     {event.address.reason && (
                       <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
-                        <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Because </span>
+                        <span style={{ fontWeight: 800 }}>Because </span>
                         {String(event.address.reason).replace(/_/g, ' ')}
                       </div>
                     )}

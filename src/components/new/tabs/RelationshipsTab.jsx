@@ -277,7 +277,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
         </div>
         {/* From filter (only when neighbours exist) */}
         {neighbours.length>0&&<div style={{display:'flex',gap:5,marginBottom:12,flexWrap:'wrap',paddingBottom:10,borderBottom:'1px solid #f0e8d8',alignItems:'center'}}>
-          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',flexShrink:0}}>From:</span>
+          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,flexShrink:0}}>From:</span>
           {['all',...allSettlements].map(name=>(
             <Button key={name} onClick={()=>setFromFilter(name)}
               variant={fromFilter===name?'primary':'secondary'} size="sm"

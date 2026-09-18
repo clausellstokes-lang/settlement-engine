@@ -38,7 +38,7 @@ function Movement(q) {
           through its phrase alone — a STEADY chip beside "a shade above" would
           contradict itself. */}
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{q.tag}</span>
       )}
     </div>
   );
@@ -52,7 +52,7 @@ function TradeColumn({ heading, color, quotes }) {
   const steady = quotes.filter(q => q.movement === 'usual');
   return (
     <div>
-      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>{heading}</div>
+      <div style={{fontSize:FS.xxs,fontWeight:700,color,marginBottom:4}}>{heading}</div>
       {moved.map(Movement)}
       {steady.length > 0 && (
         <div style={{fontSize:FS.sm,color:swatch.inkMag2,padding:'3px 0'}}>

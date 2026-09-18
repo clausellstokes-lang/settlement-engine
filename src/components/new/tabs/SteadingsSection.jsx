@@ -57,7 +57,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
     <div style={{ marginTop: 14 }}>
       {grade ? (
         <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.danger}`, padding: '8px 12px', marginBottom: 10 }}>
-          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger }}>
             {GRADE_LABEL[grade] || 'Remnant'}
           </div>
           {desk.remnantLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginBottom: 4 }}>{desk.remnantLine}</div>}

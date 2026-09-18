@@ -276,7 +276,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
   });
 
   test('⛔ THE OVERVIEW NEVER PRINTS "NO CRISIS" BESIDE ITS OWN CRISIS BANNER (owner order 2026-09-17)', () => {
-    // The Kamalavalli contradiction: a Politically Fractured card with its ACTIVE CRISIS badge,
+    // The Kamalavalli contradiction: a Politically Fractured card with its Active crisis badge,
     // then "There is no crisis on the books…". Driven over generated crisis towns in the DOM,
     // with the no-crisis pool's every member filled for the town, so no wording escapes.
     const crisisConfigs = [
@@ -296,10 +296,10 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
           publicDossier: false, playerView, worldState: null,
         })).container.textContent;
         cleanup();
-        if (!text.includes('ACTIVE CRISIS')) continue;
+        if (!text.includes('Active crisis')) continue;
         judged += 1;
         for (const sentence of noCrisis) {
-          expectAbsentWithAnchor(text, sentence, 'ACTIVE CRISIS', `${town.name} prints a no-crisis line beside its own crisis banner`);
+          expectAbsentWithAnchor(text, sentence, 'Active crisis', `${town.name} prints a no-crisis line beside its own crisis banner`);
         }
       }
     }
@@ -319,7 +319,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expect(pub).toContain('The Guild');
     expect(pub).toContain('The Council');
     expect(pub).toContain('Labor control');
-    expect(pub).toContain('HIGH');
+    expect(pub).toContain('High');
     // The Notable Connection DATUM survives too — only the banded sentence above it goes.
     expect(pub).toContain('Mugain and Felix are connected by something neither discusses openly.');
   });

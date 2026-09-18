@@ -555,8 +555,6 @@ function ChangeDock({ readOnly = false }) {
             color: MUTED,
             fontSize: FS.xxs,
             fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
           }}>
             Recent results
           </div>

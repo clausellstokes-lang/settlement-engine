@@ -56,7 +56,7 @@ function CompassPanel({ compass }) {
 
       {redFlags.length > 0 && (
         <div style={{ marginBottom: twist ? 12 : 0 }}>
-          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.danger, marginBottom: 4 }}>
             Red flags
           </div>
           {redFlags.map((r, i) => (
@@ -67,7 +67,7 @@ function CompassPanel({ compass }) {
 
       {twist && (
         <div>
-          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch['#A0762A'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch['#A0762A'], marginBottom: 4 }}>
             If the session is dragging
           </div>
           <BulletRow color="#a0762a">{twist}</BulletRow>

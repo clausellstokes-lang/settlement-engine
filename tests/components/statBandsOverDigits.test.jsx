@@ -26,16 +26,22 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
-import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { scoreBand, scoreColor } from '../../src/domain/display/defenseScoreBands.js';
+import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
 
+// TWO SPELLINGS OF ONE LADDER, and the difference is the point. BANDS is the vocabulary
+// `defenseScoreBands.js` FREEZES ("the frozen four; never extend") and the PDF prints;
+// BAND_RE is what the dossier RENDERS, which since the label ladder landed is rung 3's
+// sentence case (components/new/labelLadder.js `statusCase`). The domain arm below reads
+// the first, every render arm reads the second.
 const BANDS = ['STRONG', 'ADEQUATE', 'WEAK', 'CRITICAL'];
-const BAND_RE = /^(STRONG|ADEQUATE|WEAK|CRITICAL)$/;
+const BAND_RE = /^(Strong|Adequate|Weak|Critical)$/;
 
 /** The five Systems Health rows and the score key each one reads. */
 const SCORE_ROWS = [
@@ -113,7 +119,10 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       expect(value).toMatch(BAND_RE);
       // ...and it is the band of THIS row's score, not a neighbour's.
       const n = Math.min(100, Math.max(0, scores[key] || 0));
-      expect(value).toBe(scoreBand(n));
+      // DERIVED, not retyped: rung 3 re-cases the frozen vocabulary at the render site
+      // (components/new/labelLadder.js), and the pin reads the same two functions the
+      // component does, so the band still cannot drift to a neighbour's score.
+      expect(value).toBe(statusCase(scoreBand(n)));
       // ...and the retired digit is gone from the whole row.
       expect(row.textContent).toBe(`${label}${value}`);
       expect(row.textContent).not.toMatch(/\d/);
@@ -141,7 +150,7 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
     expect(text).not.toMatch(/ratio\s*[\d.]+/i);
     expect(text).not.toContain('×');
     // The typed reads that carry the same fact are still there.
-    expect(text).toMatch(/Internal Security · First Survey/);
+    expect(text).toMatch(/Internal security · first survey/);
     expect(text).toMatch(/(Strong|Adequate|Weak) Public Order|Critical: Order Failing/);
   });
 
@@ -163,8 +172,15 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     for (const label of ['Economic Backing', 'Magical Capability']) {
       const labelEl = screen.getByText(label);
       const row = labelEl.closest('div').parentElement;
-      const bandEls = within(row).queryAllByText(BAND_RE);
-      expect(bandEls.length, `${label} must show exactly one band word`).toBe(1);
+      // ADDRESSED, NOT DISAMBIGUATED BY CASE. The band used to be the row's only word in
+      // capitals, so matching the vocabulary found it and nothing else. Now that rung 3
+      // reads in sentence case (components/new/labelLadder.js) the band and the row's own
+      // STATUS word can be the same string — Economic Backing's status ladder is
+      // Well-funded/Adequate/Underfunded/Critical and it overlaps the band's Adequate and
+      // Critical — so the pin names the band's own element and then checks its word.
+      const bands = row.querySelectorAll('[data-sf-cap-band]');
+      expect(bands.length, `${label} must show exactly one band element`).toBe(1);
+      expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
     const bars = screen.getByText('Economic Backing').closest('div').parentElement;

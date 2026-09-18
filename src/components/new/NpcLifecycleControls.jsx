@@ -212,8 +212,6 @@ export default function NpcLifecycleControls({
             fontSize: FS.micro,
             fontWeight: 700,
             color: swatch.danger,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
             marginBottom: 3,
           }}>
             The party&apos;s hand: {npc?.name || 'this captive'} is held
@@ -253,8 +251,6 @@ export default function NpcLifecycleControls({
             fontSize: FS.micro,
             fontWeight: 700,
             color: MUTED,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
             marginBottom: 3,
           }}>
             On the road: {npc?.name || 'this traveller'} is away

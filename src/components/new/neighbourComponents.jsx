@@ -58,25 +58,24 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
       </button>
       {open&&<div style={{padding:'12px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${st.border}`}}>
         {link.cause&&<div style={{marginBottom:10}}>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Cause</div>
+          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Cause</div>
           <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.cause}</p>
         </div>}
         {link.diplomaticStatus&&<div style={{marginBottom:10}}>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Diplomatic Status</div>
+          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Diplomatic status</div>
           <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.diplomaticStatus}</p>
         </div>}
         {(link.tensions?.length>0||link.opportunities?.length>0)&&<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:10,marginBottom:10}}>
           {link.tensions?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',padding:'8px 10px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>Tensions</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:5}}>Tensions</div>
             {link.tensions.map((t,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.4}}>▸ {t}</div>)}
           </div>}
           {link.opportunities?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',padding:'8px 10px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>Opportunities</div>
-            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}
-          </div>}
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,marginBottom:5}}>Opportunities</div>
+            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}          </div>}
         </div>}
         {link.npcConnections?.length>0&&<div>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>NPC Connections</div>
+          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,marginBottom:6}}>NPC connections</div>
           {link.npcConnections.map((conn,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'10px 12px',marginBottom:6}}>
               <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:8,flexWrap:'wrap'}}>
@@ -104,7 +103,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
           ))}
         </div>}
         {link.tradeGoods?.length>0&&<div style={{marginTop:8}}>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>Trade Goods</div>
+          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Trade goods</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:4}}>{link.tradeGoods.map((g,i)=><Tag key={i} color="#1a5a28">{g}</Tag>)}</div>
         </div>}
         {link.plotHooks?.length>0&&<div style={{marginTop:8}}>
@@ -117,7 +116,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
             .filter(rx => rx.partnerSettlement === _pn || rx.linkId === link.linkId);
           const _c = relColor(link.relationshipType);
           return _isr.length>0 ? <div style={{marginTop:10,borderTop:`1px solid ${_c}20`,paddingTop:8}}>
-            <div style={{fontSize:FS.xxs,fontWeight:800,color:_c,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>
+            <div style={{fontSize:FS.xxs,fontWeight:800,color:_c,marginBottom:6}}>
               Known Contacts ({_isr.length})
             </div>
             {_isr.map((rx,i)=>{

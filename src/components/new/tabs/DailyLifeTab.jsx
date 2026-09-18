@@ -26,7 +26,7 @@ function AnchorFact({ label, value, accent }) {
       borderLeft: `3px solid ${accent || '#c8b89a'}`,
       padding: '5px 9px',
     }}>
-      <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
+      <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, marginBottom: 1 }}>{label}</div>
       <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
     </div>
   );

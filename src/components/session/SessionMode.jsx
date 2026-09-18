@@ -38,6 +38,7 @@ import { proseFontSize } from '../../design/proseScale.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
+import { LITERARY_TITLE } from '../new/labelLadder.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -321,11 +322,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     paddingLeft: 9,
                     borderLeft: `2px solid ${BORDER}`,
                   }}>
-                    <div style={{
-                      fontSize: FS.nano, fontWeight: 800,
-                      letterSpacing: '0.07em', textTransform: 'uppercase',
-                      color: MUTED,
-                    }}>
+                    <div style={{ ...LITERARY_TITLE, color: INK }}>
                       {truth.label}
                     </div>
                     <div style={{
@@ -391,7 +388,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       flex: '1 1 140px', padding: '8px 10px', background: swatch.white,
                       border: `1px solid ${BORDER}`,
                     }}>
-                      <div style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: MUTED }}>{name}</div>
+                      <div style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED }}>{name}</div>
                       <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.lg, color: BAND_TONE[d.band] || INK }}>
                         {d.band || d.value}
                       </div>

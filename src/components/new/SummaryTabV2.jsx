@@ -30,6 +30,7 @@ import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { proseFontSize } from '../../design/proseScale.js';
+import { LITERARY_TITLE } from './labelLadder.js';
 
 const GOLD = swatch['#8C6F32'];
 const INK = swatch['#1B1408'];
@@ -165,11 +166,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                   borderLeft: `2px solid ${BORDER}`,
                 }}
               >
-                <div style={{
-                  fontSize: FS.nano, fontWeight: 800,
-                  letterSpacing: '0.09em', textTransform: 'uppercase',
-                  color: MUTED,
-                }}>
+                <div style={{ ...LITERARY_TITLE, color: INK_DEEP }}>
                   {truth.label}
                 </div>
                 <div style={{
@@ -198,11 +195,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             border: `1px solid ${BORDER}`,
             borderLeft: `3px solid ${RED}`,
           }}>
-            <div style={{
-              fontSize: FS.nano, fontWeight: 800,
-              letterSpacing: '0.09em', textTransform: 'uppercase',
-              color: RED,
-            }}>
+            <div style={{ ...LITERARY_TITLE, color: RED }}>
               {guide.immediatePressure.label}
             </div>
             <div style={{

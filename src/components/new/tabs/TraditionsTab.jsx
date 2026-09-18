@@ -73,7 +73,7 @@ function TraditionRow({ rec, preview }) {
         </h4>
         <span style={{
           marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
-          letterSpacing: '0.04em', textTransform: 'uppercase', whiteSpace: 'nowrap',
+ whiteSpace: 'nowrap',
         }}>
           {humanizeMotif(rec.coreMotif?.element)} · {humanizeMotif(rec.coreMotif?.act)}
         </span>
