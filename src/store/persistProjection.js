@@ -48,9 +48,15 @@
  * standing — eviction routes through the same path and must never destroy unsaved
  * work. Gating on the tier alone therefore stashed the DEPARTING ACCOUNT's loaded
  * world, possibly one of their saves, into this device's storage for the next
- * anonymous visitor to boot into. clearAuth bars that exact object by reference
- * (`signedInWorld`), so it stays on screen and never reaches the envelope, while a
- * world the anonymous visitor generates afterwards is a new object and persists.
+ * anonymous visitor to boot into. clearAuth raises `signedInWorld`, so that world
+ * stays on screen and never reaches the envelope, while a world the anonymous
+ * visitor generates afterwards retracts the claim and persists normally.
+ *
+ * ⚠ `signedInWorld` is a CLAIM, not a reference to the barred object, for the
+ * same reason `restoredAnonDraft` is: under immer any mutation replaces
+ * `state.settlement`, so a reference test would miss after a single edit and the
+ * bar would fail OPEN — leaking the departing account's world. Only the generate
+ * action retracts it, because only a new world is genuinely not theirs.
  *
  * ⚠ The whole settlement is persisted, not a projection of it. A restored draft
  * must be byte-identical to the one generated, or saving after a reload would
@@ -83,6 +89,6 @@ export function partializeStoreState(state) {
     // bars it by reference, because sign-out sets tier 'anon' without clearing the
     // editor — see the header).
     anonDraft: state.auth?.tier === 'anon' && !state.auth.user
-      && settlement && settlement !== state.signedInWorld ? { settlement, lastSeed } : null,
+      && settlement && !state.signedInWorld ? { settlement, lastSeed } : null,
   };
 }

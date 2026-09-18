@@ -159,24 +159,30 @@ export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   // `settlement` is the current generated settlement object.
   //
-  // `restoredAnonDraft` is SESSION-ONLY: the settlement this reload adopted from
-  // a persisted ANONYMOUS draft, held BY REFERENCE (persistMerge.js sets it;
-  // store/index.js spends it at the boot auth resolution and it is never set
-  // again). It exists because a rehydrate finishes before Supabase resolves the
-  // session: the draft has to be adoptable immediately and droppable a moment
-  // later if the session turns out to be signed in. Never persisted — the
-  // partialize is an allowlist.
+  // The other two are SESSION-ONLY CLAIMS about what is in the editor, and they
+  // are deliberately FLAGS rather than references to the settlement: under immer
+  // every mutation replaces that object, so an identity test would miss after a
+  // single edit and both gates would fail OPEN — the direction that keeps a
+  // stranger's world, or leaks a departing account's.
   //
-  // `signedInWorld` is SESSION-ONLY too: the world a signed-in session left in the
-  // editor at sign-out, held BY REFERENCE so the persist projection can refuse to
-  // stash it as an anonymous draft (authSlice.clearAuth records it). Sign-out sets
-  // tier 'anon' without clearing the editor — on purpose, eviction comes through
-  // the same door and must never destroy unsaved work — so the tier alone cannot
-  // answer "is this an anonymous world".
+  // `restoredAnonDraft` — this reload adopted a persisted ANONYMOUS draft and
+  // nobody has claimed it since (persistMerge.js raises it). It exists because a
+  // rehydrate finishes before Supabase resolves the session: the draft must be
+  // adoptable at once and droppable a moment later if the session turns out to be
+  // signed in (anonDraftGate.js). Retracted by a sign-in/sign-up (they signed in
+  // to keep it) or by generating a new world.
   //
-  // (The three share this line because the file sits at its frozen max-lines
-  // ceiling; the comment, not the packing, is the explanation.)
-  settlement:    null, restoredAnonDraft: null, signedInWorld: null,
+  // `signedInWorld` — a signed-in session left this world in the editor at
+  // sign-out, so the persist projection must never stash it as an anonymous draft
+  // (authSlice.clearAuth raises it). Sign-out sets tier 'anon' without clearing
+  // the editor, on purpose: eviction comes through the same door and must never
+  // destroy unsaved work, so the tier alone cannot answer "is this an anonymous
+  // world". Retracted only by generating a new world.
+  //
+  // Neither is persisted — the partialize is an allowlist. (The three share this
+  // line because the file sits at its frozen max-lines ceiling; the comment, not
+  // the packing, is the explanation.)
+  settlement:    null, restoredAnonDraft: false, signedInWorld: false,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,

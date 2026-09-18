@@ -316,6 +316,14 @@ export async function generateSettlementAction(set, get, seedOverride) {
       state.settlement = withFaith;
       state.activeSaveId = null;
       state.lastSeed = seed;
+      // A NEWLY MINTED WORLD IS THE VISITOR'S OWN, so it retracts both persistence
+      // claims about what is in the editor: the anonymous draft this reload may
+      // have adopted (anonDraftGate.js) and the world a signed-in session left
+      // behind at sign-out (authSlice.clearAuth). Store-level bookkeeping only —
+      // the pipeline, its inputs and its output are untouched, so same-seed
+      // identity is unaffected.
+      state.restoredAnonDraft = false;
+      state.signedInWorld = false;
       // RETIRED-DARK (owner row WK-2): the full pipeline context is
       // function-bearing and cannot cross a worker boundary, so it is nulled on
       // BOTH transports rather than captured on one. Nulling it only off-thread

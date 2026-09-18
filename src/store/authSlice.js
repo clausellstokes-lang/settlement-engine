@@ -214,12 +214,13 @@ export const createAuthSlice = (set, get) => ({
       // an anonymous tier, so without this the very next store write would stash
       // the departing account's loaded world — possibly one of their SAVES — into
       // this device's localStorage, and the next anonymous visitor would boot into
-      // it. So the world stays on screen and is BARRED from the envelope by
-      // reference; a world the anonymous visitor generates afterwards is a new
-      // object and persists normally. Guarded on a real user so initAuth's
-      // no-session branch, which also lands here at boot, cannot bar a legitimately
-      // restored anonymous draft.
-      if (state.auth?.user) state.signedInWorld = state.settlement ?? null;
+      // it. So the world stays on screen and is BARRED from the envelope by a
+      // CLAIM — not by a reference to the object, which immer replaces on every
+      // mutation, so one edit would make the bar fail OPEN. Only the generate
+      // action retracts it, because only a new world is genuinely not theirs.
+      // Guarded on a real user so initAuth's no-session branch, which also lands
+      // here at boot, cannot bar a legitimately restored anonymous draft.
+      if (state.auth?.user) state.signedInWorld = !!state.settlement;
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
@@ -479,6 +480,9 @@ export const createAuthSlice = (set, get) => ({
         alignSavedSettlementsOwner(get, result.user?.id);
         activateOutboxOwner(result.user?.id);
         set(state => {
+          // THEY SIGNED UP TO KEEP THIS DRAFT, so it is theirs: retract the
+          // anonymous-draft claim before initAuth's resolution can settle it.
+          state.restoredAnonDraft = false;
           state.auth = {
             user: result.user, session: result.session,
             tier: resolveTier(result.tier, result.role), role: result.role || 'user',
@@ -510,6 +514,12 @@ export const createAuthSlice = (set, get) => ({
       alignSavedSettlementsOwner(get, result.user?.id);
       activateOutboxOwner(result.user?.id);
       set(state => {
+        // THEY SIGNED IN TO KEEP THIS DRAFT, so it is theirs: retract the
+        // anonymous-draft claim before initAuth's resolution can settle it.
+        // Without this the race was DEFERRED, not cured — on a slow getSession()
+        // the visitor signs in, initAuth resolves afterwards, and the boot guard
+        // dropped the very world they had just signed in to save.
+        state.restoredAnonDraft = false;
         state.auth = {
           user: result.user, session: result.session,
           tier: result.tier, role: result.role || 'user',

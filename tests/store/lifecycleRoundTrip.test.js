@@ -285,8 +285,8 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   pendingEditReceipts: 'session-only idempotency/correlation receipts; authoritative receipts live in snapshots and event logs',
   pulseUndoStack: 'session-scoped pulse undo stack — a reload clears it (src/store/campaignWorldPulseSlice.js)',
   proposalUndoStack: 'session-scoped proposal-apply undo ring, separate from pulseUndoStack by construction — a reload clears it (src/store/campaignWorldPulseSlice.js)',
-  restoredAnonDraft: 'the settlement THIS reload adopted from a persisted anonymous draft, held by reference so the boot auth resolution can drop it if the session turns out to be signed in; it is a one-reload marker and persisting it would re-arm a gate that has already been spent (src/store/settlementSlice.js)',
-  signedInWorld: 'the world a signed-in session left in the editor at sign-out, held by reference so the projection refuses to stash it as an anonymous draft; it is a bar against a WRITE, and persisting the bar would outlive the object it names (src/store/settlementSlice.js)',
+  restoredAnonDraft: 'a CLAIM that THIS reload adopted a persisted anonymous draft and nobody has claimed it since; settled at the boot auth resolution, retracted by a sign-in/sign-up or by generating a world. A FLAG, never the settlement object: immer replaces that on every mutation, so a reference would fail OPEN after one edit and keep a stranger draft. Persisting it would re-arm a gate already spent (src/store/settlementSlice.js)',
+  signedInWorld: 'a CLAIM that a signed-in session left its world in the editor at sign-out, so the projection refuses to stash it as an anonymous draft; a FLAG for the same fail-open reason, retracted only by generating a new world. It is a bar against a WRITE, and persisting it would outlive the session it describes (src/store/settlementSlice.js)',
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1084,8 +1084,8 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // The anonymous draft's slice defaults (settlementSlice).
     settlement: null,
     lastSeed: null,
-    restoredAnonDraft: null,
-    signedInWorld: null,
+    restoredAnonDraft: false,
+    signedInWorld: false,
     someSliceMethod: () => {},
   });
 
@@ -1150,8 +1150,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expectByteEqual(merged.settlement, draft);
       expect(merged.lastSeed).toBe('sf-seed-1');
       // The envelope is a transport: the merge spends it into the one-reload
-      // marker the boot auth resolution reads, BY REFERENCE.
-      expect(merged.restoredAnonDraft).toBe(merged.settlement);
+      // CLAIM the boot auth resolution settles. A flag, never the object — immer
+      // replaces that on every mutation, so a reference would fail OPEN.
+      expect(merged.restoredAnonDraft).toBe(true);
     });
 
     // A plain loop, not test.each: the each-family park debt is a frozen,
@@ -1187,7 +1188,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       const merged = mergePersistedState(legacy, currentStub());
       expect(merged.settlement).toBeNull();
       expect(merged.lastSeed).toBeNull();
-      expect(merged.restoredAnonDraft).toBeNull();
+      expect(merged.restoredAnonDraft).toBe(false);
     });
 
     // ⛔ THE GATE HAS TWO HALVES AND THIS IS THE ONE THAT WAS MISSING. A WRITE
@@ -1213,7 +1214,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         const merged = mergePersistedState({ ...blob }, currentStub());
         expect(merged.settlement, label).toBeNull();
         expect(merged.lastSeed, label).toBeNull();
-        expect(merged.restoredAnonDraft, label).toBeNull();
+        expect(merged.restoredAnonDraft, label).toBe(false);
       }
     });
 
@@ -1234,53 +1235,92 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(resolveBootAnonDraft({ ...adopted, auth: { tier: 'anon' } }).drop).toBe(false);
     });
 
-    test('the boot resolution never drops a world generated since the reload', () => {
+    test('the boot resolution drops on a standing claim alone, and on nothing else', () => {
       const adopted = mergePersistedState(
         JSON.parse(JSON.stringify(partializeOf({
           ...currentStub(), auth: { tier: 'anon' }, settlement: draft, lastSeed: 'sf-seed-1',
         }))),
         currentStub(),
       );
-      // A fresh generation replaces the object, so the identity check misses and
-      // the world stays — even for a signed-in tier. Reference, not deep equality.
-      const generatedSince = { ...draft };
+      // A world generated since the reload is protected by the RETRACTED CLAIM
+      // (the generate action clears it), never by the object's identity — that
+      // was the fail-open: one edit also changes the object.
       expect(resolveBootAnonDraft({
-        ...adopted, settlement: generatedSince, auth: { tier: 'premium' },
+        ...adopted, settlement: { ...draft }, restoredAnonDraft: false, auth: { tier: 'premium' },
       }).drop).toBe(false);
-      // And with no marker at all there is nothing to drop.
+      // The claim still standing under a signed-in tier is the whole test.
+      expect(resolveBootAnonDraft({ ...adopted, auth: { tier: 'premium' } }).drop).toBe(true);
+      // And with no claim at all there is nothing to drop.
       expect(resolveBootAnonDraft({
-        settlement: draft, restoredAnonDraft: null, auth: { tier: 'premium' },
+        settlement: draft, restoredAnonDraft: false, auth: { tier: 'premium' },
       }).drop).toBe(false);
     });
 
-    // ⛔ THE RACE THE FIRST CUT LOST. The marker used to be spent on the first
-    // `auth.loading` true→false edge, read as "the boot check finished". It is
-    // not: authSignIn and authSignUp drive the same edge. On a slow getSession()
-    // an anonymous visitor who submits the sign-in form FIRST drives it first —
-    // and the guard fired with tier 'free' and dropped the draft they had just
-    // signed in to keep. Three arms: the spend is idempotent, it is wired ONLY to
-    // initAuth, and nothing else can reach it.
-    test('spending the marker is a one-shot that drops only a signed-in boot adoption', () => {
-      const run = (seed) => {
-        let state = seed;
-        settleBootAnonDraft((recipe) => { const next = { ...state }; recipe(next); state = next; });
-        return state;
-      };
-      // Signed-in boot: the adopted draft goes, and the marker is spent.
-      const dropped = run({ settlement: draft, lastSeed: 's', restoredAnonDraft: draft, auth: { tier: 'free' } });
+    // ⛔ THE RACE, AND THE TWO WAYS THE GATE GOT IT WRONG BEFORE.
+    //   1. It was spent on the first `auth.loading` true→false edge — which
+    //      authSignIn and authSignUp also drive — so a sign-in that beat a slow
+    //      getSession() spent it early.
+    //   2. Moving the spend into initAuth only DEFERRED that: nothing on the
+    //      sign-in path retracted the claim, so initAuth resolved afterwards and
+    //      dropped the very draft the visitor had just signed in to keep.
+    // The claim is now retracted by the events that make the world theirs.
+    const spend = (seed) => {
+      let state = seed;
+      settleBootAnonDraft((recipe) => { const next = { ...state }; recipe(next); state = next; });
+      return state;
+    };
+
+    test('a RETURNING signed-in boot drops the stranger draft; an anonymous boot keeps it', () => {
+      const dropped = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' } });
       expect(dropped.settlement).toBeNull();
       expect(dropped.lastSeed).toBeNull();
-      expect(dropped.restoredAnonDraft).toBeNull();
+      expect(dropped.restoredAnonDraft).toBe(false);
 
-      // Anonymous boot: the draft stays, and the marker is still spent, so a
-      // LATER sign-in cannot come back for it.
-      const kept = run({ settlement: draft, lastSeed: 's', restoredAnonDraft: draft, auth: { tier: 'anon' } });
+      const kept = spend({ settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'anon' } });
       expect(kept.settlement).toBe(draft);
-      expect(kept.restoredAnonDraft).toBeNull();
+      expect(kept.restoredAnonDraft).toBe(false);
       // Spending twice is a no-op — initAuth is HMR/remount-safe and may rerun.
-      let again = kept;
-      settleBootAnonDraft((recipe) => { const next = { ...again }; recipe(next); again = next; });
-      expect(again.settlement).toBe(draft);
+      expect(spend(kept).settlement).toBe(draft);
+    });
+
+    test('signing in BEFORE the session resolves keeps the draft that was signed in for', () => {
+      // The live sequence: anon boot adopts the draft, getSession() is still in
+      // flight, the visitor submits the sign-in form, THEN initAuth resolves.
+      const adopted = { settlement: draft, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'anon' } };
+      // authSignIn/authSignUp retract the claim as they publish the session.
+      const afterSignIn = { ...adopted, restoredAnonDraft: false, auth: { tier: 'free' } };
+      const afterInitAuth = spend(afterSignIn);
+      expect(afterInitAuth.settlement).toBe(draft);
+      expect(afterInitAuth.lastSeed).toBe('s');
+      // And the retraction is real code on both paths, not a fixture's invention.
+      const authSrc = readSrc('src/store/authSlice.js');
+      for (const fn of ['authSignUp: async', 'authSignIn: async']) {
+        const body = authSrc.slice(authSrc.indexOf(fn), authSrc.indexOf(fn) + 1800);
+        expect(body, fn).toContain('state.restoredAnonDraft = false;');
+      }
+    });
+
+    test('an in-place edit before the session resolves does NOT rescue a stranger draft', () => {
+      // THE FAIL-OPEN THE REFERENCE MARKER HAD. immer replaces state.settlement on
+      // every mutation, so an identity test read one edit as "generated since" and
+      // kept a stranger's world for a signed-in account to save. The claim does not
+      // care what was done to the world — only whether anyone claimed it.
+      const editedSinceAdoption = { ...draft, name: 'Renamed by whoever sat down' };
+      const dropped = spend({
+        settlement: editedSinceAdoption, lastSeed: 's', restoredAnonDraft: true, auth: { tier: 'free' },
+      });
+      expect(dropped.settlement).toBeNull();
+      expect(dropped.lastSeed).toBeNull();
+    });
+
+    test('generating a new world retracts both claims, in the action itself', () => {
+      // A minted world is the visitor's own, so it ends the adopted-draft claim
+      // AND the sign-out bar. One store-level line in the generate action; the
+      // pipeline, its inputs and its output are untouched.
+      const genSrc = readSrc('src/store/settlementGenerateAction.js');
+      const commit = genSrc.slice(genSrc.indexOf('state.settlement = withFaith;'));
+      expect(commit).toContain('state.restoredAnonDraft = false;');
+      expect(commit).toContain('state.signedInWorld = false;');
     });
 
     test('the spend is wired to initAuth alone, never to a generic loading edge', () => {
@@ -1310,13 +1350,18 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // — the exact state clearAuth leaves behind — but it is barred by reference.
       const afterSignOut = {
         ...currentStub(), auth: { tier: 'anon', user: null }, settlement: draft,
-        lastSeed: 'sf-seed-1', signedInWorld: draft,
+        lastSeed: 'sf-seed-1', signedInWorld: true,
       };
       expect(partializeOf(afterSignOut).anonDraft).toBeNull();
-      // And the bar is not a blanket off-switch: a world the anonymous visitor
-      // generates AFTERWARDS is a new object, so it persists normally.
+      // EDITING IT DOES NOT LIFT THE BAR. The bar used to name the object, and
+      // immer replaces that on every mutation, so one rename leaked the departing
+      // account's world into this device's storage.
+      const editedAfterSignOut = { ...draft, name: 'Renamed after sign-out' };
+      expect(partializeOf({ ...afterSignOut, settlement: editedAfterSignOut }).anonDraft).toBeNull();
+      // And the bar is not a blanket off-switch: the generate action retracts it,
+      // so a world the anonymous visitor forges afterwards persists normally.
       const generatedAfter = { ...draft };
-      expect(partializeOf({ ...afterSignOut, settlement: generatedAfter }).anonDraft)
+      expect(partializeOf({ ...afterSignOut, settlement: generatedAfter, signedInWorld: false }).anonDraft)
         .toEqual({ settlement: generatedAfter, lastSeed: 'sf-seed-1' });
     });
 

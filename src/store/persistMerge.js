@@ -47,12 +47,12 @@ export function mergePersistedState(persistedState, currentState) {
   const persisted = /** @type {Record<string, any>} */ (persistedState || {});
   const current = /** @type {Record<string, any>} */ (currentState || {});
   // THE ANONYMOUS DRAFT, LIFTED OUT OF ITS ENVELOPE (2026-09-18). The envelope is
-  // a TRANSPORT and is consumed here: the draft becomes live state, and the
-  // marker is spent so nothing downstream can mistake a stale copy for a fresh
-  // claim. `restoredAnonDraft` holds the restored settlement BY REFERENCE, which
-  // is what lets the boot auth resolution (store/index.js) tell "the draft this
-  // reload adopted" from "a world the visitor generated since" — a fresh
-  // generation replaces the object, so the identity check can never drop it.
+  // a TRANSPORT and is consumed here: the draft becomes live state, and
+  // `restoredAnonDraft` is raised as a CLAIM — "this reload adopted an anonymous
+  // draft and nobody has claimed it since" — for the boot auth resolution to
+  // settle (store/anonDraftGate.js). It is deliberately a flag and NOT the
+  // settlement object: immer replaces that object on every mutation, so an
+  // identity test would miss after any edit and the gate would fail OPEN.
   const anonDraft = readAnonDraft(persisted.anonDraft);
   const configExplicitFields = Object.hasOwn(persisted, 'configExplicitFields')
     ? normalizeUserContentTunableIntent(persisted.configExplicitFields)
@@ -84,6 +84,6 @@ export function mergePersistedState(persistedState, currentState) {
     // cannot smuggle a top-level `settlement` past the envelope check.
     settlement:        anonDraft ? anonDraft.settlement : (current.settlement ?? null),
     lastSeed:          anonDraft ? anonDraft.lastSeed : (current.lastSeed ?? null),
-    restoredAnonDraft: anonDraft ? anonDraft.settlement : null,
+    restoredAnonDraft: !!anonDraft,
   };
 }
