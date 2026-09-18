@@ -23,6 +23,7 @@ import { proseFontSize } from '../../../design/proseScale.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -88,14 +89,20 @@ function institutionBadge(inst) {
 // the sanctioned precedent: label left, band right, bar carries the magnitude.
 // The colour ladder moves with it (was a local 70/45/25 twin, now the shared
 // 65/40/20 the PDF prints) so the word and the colour can never disagree.
-function ScoreRow({ label, score }) {
+/**
+ * @param {{ label: string, score: number, status?: string }} props
+ *   status: a row whose word is NOT a grade of its own bar — it is the same PRESENCE read
+ *   the Defense tab's capability row shows, and it wins over the band word. ONE NAME, ONE
+ *   FACT: this row and that one carry the same label, so they must answer the same question.
+ */
+function ScoreRow({ label, score, status }) {
   const n = Math.min(100, Math.max(0, score || 0));
   const c = scoreColor(n);
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
         <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{statusCase(scoreBand(n))}</span>
+        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{status || statusCase(scoreBand(n))}</span>
       </div>
       <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
@@ -143,6 +150,10 @@ function worldStressorFor(worldState, settlementId) {
 export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false, worldState = null}) {
   const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
+  // The SAME derivation the Defense tab's capability row reads, called rather than copied,
+  // so the two rows cannot drift apart in wording. `defenseDisplay.js` is already in the
+  // dossier's graph (DefenseTab imports it) and this tab is lazy, so it costs no new bytes.
+  const magicPresence = deriveSupportingCapabilities(r).find((c) => c.label === 'Magical Capability')?.status;
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
   // this call composes eleven of the desk's blocks, and from car 3 it composes them THROUGH
@@ -409,7 +420,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           <ScoreRow label="Monster Defense" score={scores.monster}/>
           <ScoreRow label="Internal Security" score={scores.internal}/>
           <ScoreRow label="Economic Resilience" score={scores.economic}/>
-          <ScoreRow label="Magical Capability" score={scores.magical}/>
+          {/* ⛔ THE ONE ROW HERE WHOSE WORD IS NOT ITS BAR'S GRADE. It shares its label
+              with the Defense tab's capability row, and that row is a PRESENCE read — is
+              there an arcane institution — while this one was banding `scores.magical`,
+              which the engine derives either way. Two tabs, one name, two answers: the
+              Overview said "Strong" where Defense said "None". The word now comes from the
+              same derivation Defense uses, so the name means one thing in both places. The
+              bar keeps the score beside it; only the word-grade, which cannot be true of an
+              absence, gives way. */}
+          <ScoreRow label="Magical Capability" score={scores.magical} status={magicPresence}/>
           {/* Owner order (2026-07-22): the Enforcement Ratio (a raw safetyRatio
               float) is replaced by Food Security — a typed band from the food
               generator (economicState.foodSecurity.label / .color), the same

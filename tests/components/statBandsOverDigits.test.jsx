@@ -116,6 +116,11 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       const row = labelEl.parentElement;
       const value = row.lastElementChild.textContent;
 
+      // ONE NAME, ONE FACT. Every row here bands its own score EXCEPT Magical Capability,
+      // whose word is the presence read the Defense tab's capability row shows — the two
+      // rows share a label, so they must answer the same question. Its own arm is below.
+      if (label === 'Magical Capability') continue;
+
       // The band renders...
       expect(value).toMatch(BAND_RE);
       // ...and it is the band of THIS row's score, not a neighbour's.
@@ -238,6 +243,37 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     ).toEqual(['Adequate', 'Critical']);
     // ...and they are not the SAME ladder, so the band still says something of its own.
     expect(statuses).not.toEqual(bandWords);
+  });
+});
+
+describe('Magical Capability — one name, one fact, across both tabs', () => {
+  test.each(CASES.map(([n]) => n))('%s: the Overview and the Defense row say the same word', (name) => {
+    const settlement = settlements.find(([n]) => n === name)[1];
+    const cap = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Magical Capability');
+
+    const { container } = render(<OverviewTab settlement={settlement} />);
+    const overviewLabel = [...container.querySelectorAll('span')].find((el) => el.textContent === 'Magical Capability');
+    expect(overviewLabel, 'the Systems Health row must render').toBeTruthy();
+    const overviewWord = overviewLabel.parentElement.lastElementChild.textContent;
+    cleanup();
+
+    render(<DefenseTab settlement={settlement} />);
+    fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+    const defenseLabel = screen.getByText('Magical Capability');
+    const defenseRow = defenseLabel.closest('div').parentElement;
+    const defenseWord = defenseRow.querySelector('[data-sf-cap-status]')?.textContent;
+
+    expect(overviewWord, `${name}: the two tabs must answer the same question`).toBe(defenseWord);
+    expect(overviewWord, `${name}: and that answer is the presence read`).toBe(cap.status);
+
+    // THE POINT OF THE RULING: where there is no arcane institution, NO surface may put a
+    // word-grade on the magic score. 'None' is not a band word, and that is the whole cure.
+    if (!cap.score && cap.status === 'None') {
+      // Stated positively: the walker bans a bare negative, and "is it one of the four"
+      // is a membership question anyway.
+      expect(BANDS.map(statusCase).includes(overviewWord),
+        `${name}: a no-magic town reads as the grade "${overviewWord}"`).toBe(false);
+    }
   });
 });
 
