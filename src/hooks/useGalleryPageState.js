@@ -125,6 +125,11 @@ export function useGalleryPageState(routeSlug = null) {
         setListError(null);
       })
       .catch(err => {
+        // The RAW backend message is a DIAGNOSTIC, never reader copy (P10/P11):
+        // it went straight onto the page as "Could not load the gallery: <PGRST…>".
+        // The console gets the whole error; `listError` stays truthy so the list
+        // can branch, and GalleryList renders the house line (gallery.loadError).
+        console.error('[gallery] list fetch failed', err);
         if (!cancelled && queryGenRef.current === gen) setListError(err?.message || String(err));
       })
       .finally(() => {

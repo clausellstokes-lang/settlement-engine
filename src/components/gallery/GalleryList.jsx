@@ -19,6 +19,7 @@ import {
   serif_,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
 import { activeFilterCount, GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import GalleryCard from './GalleryCard.jsx';
 import GallerySidebar from './GallerySidebar.jsx';
@@ -97,9 +98,13 @@ export default function GalleryList({
             loading={listLoading}
             disabled={!!filters.mine}
           />
+          {/* The house line, not the backend's. `listError` carries the raw
+              PostgREST/network message; the hook consoles it for diagnosis and
+              the reader gets the register's own sentence (P10/P11 — a reader is
+              never shown a transport string they cannot act on). */}
           {listError && (
-            <div style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, marginBottom: SP.md, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
-              Could not load the gallery: {listError}
+            <div role="alert" style={{ borderLeft: `2px solid ${RED}`, paddingLeft: SP.md, color: RED, marginBottom: SP.md, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, lineHeight: 1.5 }}>
+              {t('gallery.loadError')}
             </div>
           )}
           {/* First-paint loading: the empty state is gated behind !listLoading and
@@ -128,9 +133,15 @@ export default function GalleryList({
                 <p style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic', display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'center' }}>
                   <span>{isFiltered ? t('gallery.emptyFilteredBody') : t('gallery.emptyBody')}</span>
                   {!isFiltered && (
-                    <Button
-                      variant="ghost" size="sm"
-                      aria-label="Dismiss the gallery invitation"
+                    // The dismiss control had NEITHER children nor an icon, so it
+                    // rendered as an empty labelled box. It is now the house's
+                    // icons-off-safe affordance: IconButton's unicode TEXT TWIN
+                    // (IconsContext — a lucide `icon` would be suppressed here,
+                    // since only the Realm map subtree turns glyphs on, which is
+                    // exactly how the control came to be empty).
+                    <IconButton
+                      glyph="×" size="sm" tone="ghost"
+                      label="Dismiss the gallery invitation"
                       onClick={() => { markGuidanceDismissed('gallery_empty_invitation'); setInvited(false); }}
                     />
                   )}
