@@ -53,7 +53,11 @@ const WRAPS = Object.freeze({
   'src/components/account/AccountSeatTransferPanel.jsx': 2,
   'src/components/account/AccountSubscriptionSection.jsx': 1,
   'src/components/account/ReferralRedeemBlocks.jsx': 1,
-  'src/components/compendium/CustomContentGate.jsx': 1,
+  // 2 since 2026-09-18: the ANONYMOUS arm gained its own tier door ("See
+  // Cartographer"), which is the same conversion CTA the signed-in free arm
+  // renders and therefore the same launch-locked site. Both carry the
+  // closed-only wrap idiom.
+  'src/components/compendium/CustomContentGate.jsx': 2,
   'src/components/dossier/DossierSessionNotices.jsx': 1,
   'src/components/gallery/GalleryDetail.jsx': 1,
   'src/components/generate/PlaceInRegionCard.jsx': 1,

@@ -100,6 +100,17 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     expectLockedWithPill(screen.getByText('Upgrade to Premium', { selector: 'button' }));
   });
 
+  // The ANONYMOUS arm used to be a bare sentence with no control at all. It now
+  // carries both doors, and they are governed differently on purpose: making an
+  // account is not a purchase and stays live, while the tier door is the same
+  // conversion CTA every sibling renders and closes until launch.
+  it('CustomContentUpsell: the anonymous tier door is locked, its Sign in is not', () => {
+    setStore({ setPurchaseModalOpen: vi.fn() });
+    render(<CustomContentUpsell existingCount={0} isAnon />);
+    expectLockedWithPill(screen.getByText('See Cartographer', { selector: 'button' }));
+    expectLiveWithoutPill(screen.getByText('Sign in', { selector: 'button' }));
+  });
+
   it('PlaceInRegionCard: the non-premium "Upgrade" teaser CTA', () => {
     setStore({
       config: {},
