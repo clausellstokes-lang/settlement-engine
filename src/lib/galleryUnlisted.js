@@ -68,8 +68,11 @@ export async function revokeSettlementUnlisted(settlementId) {
  */
 export async function fetchMyUnlistedDossiers() {
   if (!isConfigured) return [];
+  // A LIST the gallery page renders (the PRIVATE/UNLISTED filter), so it obeys
+  // gallery.js's list-fetch failure contract: a failed read throws rather than
+  // reading to the page as "you have no unlisted worlds".
   const { data, error } = await supabase.rpc('list_my_unlisted_dossiers');
-  if (error) { console.error('[gallery] my-unlisted listing failed:', error); return []; }
+  if (error) throw new Error(error.message || 'Could not load your unlisted settlements');
   return (data || []).map(row => ({
     id: row.id, slug: row.unlisted_slug, name: row.name, tier: row.tier,
     publishedAt: row.published_at, unlisted: true,

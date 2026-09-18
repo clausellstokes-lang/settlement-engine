@@ -278,6 +278,25 @@ export async function fetchGalleryMap(slug) {
   return data || null;
 }
 
+// ── THE LIST-FETCH FAILURE CONTRACT ─────────────────────────────────────────
+// "No rows" and "the read failed" are DIFFERENT FACTS, and the gallery page
+// renders them differently: a truthy `listError` draws the house error line
+// (gallery.loadError), zero rows draws "Be the first to publish one". Every LIST
+// fetcher the page runs — fetchPublicGallery, fetchMyGallery,
+// fetchFeaturedGallery and fetchMyUnlistedDossiers (galleryUnlisted.js) —
+// therefore THROWS when its RPC returns `{ error }`, which is both the write-path
+// idiom above and the contract useGalleryPageState's own `.catch` already
+// expected. Before this they each swallowed the error and returned an empty
+// shape, so an unreachable database was indistinguishable from an empty gallery
+// and the house line was unreachable.
+//
+// THE UNCONFIGURED CASE STAYS EMPTY, deliberately: local mode has no gallery to
+// fail at, and the raw 'Supabase not configured' string is a diagnostic that must
+// never reach a reader. The early `!isConfigured` returns below are that case.
+// ENRICHMENTS still swallow (votes, reactions, comments, more-by-creator, the
+// unlisted/campaign detail fallbacks) — a missing decoration must not blank a
+// dossier that loaded.
+
 /**
  * Fetch the public gallery listing.
  *
@@ -290,6 +309,7 @@ export async function fetchGalleryMap(slug) {
  * @param {string} [opts.search='']            - Search query.
  * @param {Object} [opts.filters]              - Filter object; arrays + booleans.
  * @returns {Promise<{ items: Array<Object>, hasMore: boolean, total: number | null }>}
+ *   Resolves empty ONLY when Supabase is unconfigured; a failed read rejects.
  */
 export async function fetchPublicGallery({
   page = 0,
@@ -301,8 +321,7 @@ export async function fetchPublicGallery({
 } = {}) {
   if (!isConfigured) return { items: [], hasMore: false, total: 0 };
 
-  const rpcResult = await fetchPublicGalleryViaRpc({ page, pageSize, excludeCurated, sort, search, filters });
-  return rpcResult || { items: [], hasMore: false, total: 0 };
+  return fetchPublicGalleryViaRpc({ page, pageSize, excludeCurated, sort, search, filters });
 }
 
 /**
@@ -313,10 +332,8 @@ export async function fetchPublicGallery({
 export async function fetchMyGallery() {
   if (!isConfigured) return { items: [], hasMore: false, total: 0 };
   const { data, error } = await supabase.rpc('list_my_gallery_dossiers');
-  if (error) {
-    console.error('[gallery] my-settlements listing failed:', error);
-    return { items: [], hasMore: false, total: 0 };
-  }
+  // A LIST the page renders — throws, per the list-fetch failure contract.
+  if (error) throw new Error(error.message || 'Could not load your settlements');
   const rows = data || [];
   return { items: rows.map(sanitizeTile), hasMore: false, total: rows.length };
 }
@@ -380,10 +397,8 @@ export async function fetchFeaturedGallery() {
   if (!isConfigured) return [];
 
   const { data, error } = await supabase.rpc('list_featured_dossiers');
-  if (error) {
-    console.error('[gallery] featured listing failed:', error);
-    return [];
-  }
+  // A LIST the page renders — throws, per the list-fetch failure contract.
+  if (error) throw new Error(error.message || 'Could not load the featured settlements');
 
   return (data || []).map(row => ({
     id:          row.id,
@@ -871,10 +886,11 @@ async function fetchPublicGalleryViaRpc({ page, pageSize, excludeCurated, sort, 
     filters: normalizeGalleryFilters(filters),
     exclude_curated: excludeCurated,
   });
-  if (error) {
-    if (import.meta?.env?.DEV) console.warn('[gallery] RPC listing failed, falling back:', error.message);
-    return null;
-  }
+  // There is nothing to fall back TO: the direct-table read was removed as a
+  // privacy boundary (pinned by tests/lib/gallery.test.js and the privacy
+  // contract test), so a failed listing IS a failed listing. Throw, per the
+  // list-fetch failure contract above.
+  if (error) throw new Error(error.message || 'Could not load the gallery');
   const rows = data || [];
   const total = Number(rows[0]?.total_count) || rows.length;
   return {

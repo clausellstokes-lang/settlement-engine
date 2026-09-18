@@ -73,7 +73,15 @@ function GalleryHubContent({ hub }) {
         setTotal(Number(r.total) || 0);
         setHasMore(!!r.hasMore);
       })
-      .catch((e) => { if (!ignore) setError(e?.message || t('errors.galleryLoadFail')); })
+      // The hub's own house line, never the backend's words (P10/P11). This arm
+      // only became REACHABLE when the list fetchers stopped swallowing their RPC
+      // errors (src/lib/gallery.js, the list-fetch failure contract); until then
+      // a failed hub read looked like an empty collection, and `e?.message` would
+      // now have put a raw PostgREST/transport string on a crawlable page.
+      .catch((e) => {
+        console.error('[gallery] hub list fetch failed', e);
+        if (!ignore) setError(t('errors.galleryLoadFail'));
+      })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
   }, [hub, page]);
