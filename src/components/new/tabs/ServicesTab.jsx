@@ -124,7 +124,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
         <div style={{flex:1,minWidth:0}}>
-          <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>
+          {/* The two spans were separated by margin ALONE, so the strip's accessible
+              name and any copy/paste of it read "15 servicesacross 8 categories".
+              The space is a real text node; the margin keeps the optical gap. */}
+          <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>{' '}
           <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories</span>
         </div>
         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
@@ -141,7 +144,13 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={15}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Search services"
-            placeholder='Search services, "healing", "horse", "fence", "wizard"…'
+            // The four-example placeholder is cut off mid-word on a phone
+            // ('…"horse", "fenc'), which reads as a rendering fault rather than a
+            // hint. Two examples fit a 375px field; the accessible name above is
+            // the same on both, so nothing is lost to a screen reader.
+            placeholder={mobile
+              ? 'Search services, "healing", "horse"…'
+              : 'Search services, "healing", "horse", "fence", "wizard"…'}
             style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
