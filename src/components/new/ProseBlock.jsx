@@ -33,18 +33,17 @@
  * all arrive here as an empty list and render NOTHING (R-DST-K) — which is why there is no
  * empty-state branch.
  *
- * ⚠ PHONE SIZING IS A FLOOR, NEVER A RESIZE. At ≤640px the paragraph reads at 14px or the
- * site's own size, whichever is LARGER; above the breakpoint the site's size is untouched to
- * the pixel. The dossier's dense bands legitimately run at 11–12px, and body prose at 11px
- * on a phone is the thing the owner's mobile pass is closing — but a site that already reads
- * at 15px must not be pulled DOWN to a floor, so the floor is a max and not an assignment.
+ * ⚠ PHONE SIZING IS A FLOOR, NEVER A RESIZE. At ≤640px the paragraph reads at the phone
+ * prose floor or the site's own size, whichever is LARGER; above the breakpoint the site's
+ * size is untouched to the pixel. The floor itself is THE ONE the rest of the dossier uses —
+ * `design/proseScale.js`, the zero-import leaf the dossier-UI car gave every prose call site —
+ * so a phone reader meets one floor everywhere, and a site that already reads above it is
+ * never pulled DOWN (the floor is a max and not an assignment).
  */
 import { FS } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 import { tierNounFor, weaveBlock } from '../../domain/display/stateProse/weaveBlock.js';
-
-/** The phone floor for dossier body prose (owner's mobile pass, 2026-09-18). */
-const MOBILE_FLOOR = FS['14'];
 
 /**
  * One mounted position, woven into one paragraph.
@@ -67,7 +66,7 @@ export default function ProseBlock({ lines, settlementName, tier, style, testId 
   if (!paragraph) return null;
   const base = typeof style?.fontSize === 'number' ? style.fontSize : FS.md;
   return (
-    <p data-testid={testId} style={{ ...style, fontSize: mobile ? Math.max(base, MOBILE_FLOOR) : base }}>
+    <p data-testid={testId} style={{ ...style, fontSize: proseFontSize(base, mobile) }}>
       {paragraph}
     </p>
   );
