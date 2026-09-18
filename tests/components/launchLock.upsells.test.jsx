@@ -254,15 +254,20 @@ describe('launch lock: upsell CTAs are disabled and wear the pill while purchase
     expectLiveWithoutPill(screen.getByText('Import', { selector: 'button' }));
   });
 
-  it('RealmDashboard: the free tier "Upgrade to run the Realm" is locked, the anonymous sign-in is not', () => {
+  it('RealmDashboard: the tier door is locked for both tiers, the anonymous sign-in is not', () => {
     setStore({ savedSettlements: [], setActivePricingMoment: vi.fn() });
     render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="free" onUpgrade={vi.fn()} />);
     expect(screen.getByTestId('realm-dashboard-locked')).toBeTruthy();
-    expectLockedWithPill(screen.getByText('Upgrade to run the Realm', { selector: 'button' }));
+    expectLockedWithPill(screen.getByText('See Cartographer', { selector: 'button' }));
 
-    // Signing in (making an account) is not a purchase: live, no pill.
+    // The anonymous viewer gets BOTH doors, governed differently: the tier door
+    // is the same conversion CTA and closes with it, while signing in (making an
+    // account) is not a purchase and stays live. The old single CTA read "Sign
+    // in to unlock the Realm", which was live but untrue — signing in does not
+    // unlock the Realm.
     cleanup();
-    render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="anon" onUpgrade={vi.fn()} />);
-    expectLiveWithoutPill(screen.getByText('Sign in to unlock the Realm', { selector: 'button' }));
+    render(<RealmDashboard campaign={null} canManageCampaigns={false} tier="anon" onUpgrade={vi.fn()} onSignIn={vi.fn()} />);
+    expectLockedWithPill(screen.getByText('See Cartographer', { selector: 'button' }));
+    expectLiveWithoutPill(screen.getByText('Sign in', { selector: 'button' }));
   });
 });

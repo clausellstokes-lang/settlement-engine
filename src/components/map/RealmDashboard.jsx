@@ -22,10 +22,8 @@
  * mutation, no rng, no wall clock.
  */
 
-import { useEffect } from 'react';
 import { Lock, Sparkles, Globe, Flame, Users, ArrowUp, ArrowRight } from 'lucide-react';
 
-import { useStore } from '../../store/index.js';
 import {
   liveSieges,
   warExhaustionStandings,
@@ -44,12 +42,13 @@ import { hasPantheon } from './PantheonPanel.jsx';
 import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
 import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
-import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
-import Button from '../primitives/Button.jsx';
-import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
-import { purchasesOpen } from '../../lib/launchGate.js';
+import { AMBER_DEEP, BODY, CARD, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+// THE ONE locked-Realm gate, shared with the desktop settlement palette. Static
+// within this already-lazy dashboard chunk (the FP-R idiom above): a lazy() here
+// would mint a preload entry and tip the first-paint ratchet.
+import RealmLockedGate from './RealmLockedGate.jsx';
 // V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
 // lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
 // tip the first-paint ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
@@ -179,10 +178,14 @@ function lastTickConflictDelta(worldState) {
 }
 
 /**
- * The locked teaser shown to anon / free users. Reachable (not hidden) — fires the
- * map_realm_teaser pricing moment once on mount, then offers an Upgrade CTA.
+ * The locked teaser shown to anon / free users. Reachable (not hidden). The card
+ * itself is RealmLockedGate — the ONE gate, shared with the desktop Realm's
+ * settlement palette, so the two surfaces can never drift into two sets of words
+ * (it was phone-only until 2026-09-18). This wrapper supplies the two things the
+ * leaf deliberately does not compute: the lock mark (the leaf imports no lucide,
+ * so it stays out of the icons-off rosters) and the viewer's own Conflict band.
  */
-function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
+function RealmDashboardLocked({ tier, onUpgrade, onSignIn, campaign }) {
   // P9 — turn the limit into a PREVIEW: when a free-tier user already has a
   // campaign, compute their OWN realm's Conflict band (the dashboard's pure
   // selectors run on any worldState) and show it blurred/read-only above the
@@ -200,91 +203,14 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
       })
     : null;
 
-  // Purchases stay closed until launch (lib/launchGate.js): the free tier's
-  // "Upgrade to run the Realm" CTA is disabled and wears the Available at launch
-  // pill. The anonymous "Sign in to unlock the Realm" is account creation, not a
-  // purchase, and stays live.
-  const upgradeClosed = tier !== 'anon' && !purchasesOpen();
-
-  useEffect(() => {
-    let cancelled = false;
-    import('../../lib/pricingMoments.js')
-      .then(({ triggerPricingMoment }) => {
-        if (cancelled) return;
-        const setActive = useStore.getState().setActivePricingMoment;
-        triggerPricingMoment('map_realm_teaser', setActive, { tier });
-      })
-      .catch(() => { /* never block the teaser render */ });
-    return () => { cancelled = true; };
-  }, [tier]);
-
   return (
-    <div data-testid="realm-dashboard-locked" style={{
-      display: 'grid', gap: SP.md,
-      padding: SP.lg,
-      border: `1px solid ${GOLD}`,
-      background: CARD_ALT,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Lock size={16} color={GOLD} />
-        <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 950 }}>
-          The Realm comes alive with Cartographer
-        </h3>
-      </div>
-      <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.55 }}>
-        This is the living simulation. Advance time and the region runs for years:
-        wars ignite and burn themselves out, faiths win converts, trade routes flip,
-        and a chronicle writes itself. Explore the map below. The live controls and
-        the world pulse unlock with Cartographer.
-      </p>
-      {/* A real, read-only preview of the GM's own realm (P9): the Conflict band
-          their world is in right now, blurred just enough to read as locked. The
-          aria-label keeps the actual band available to assistive tech. */}
-      {previewTension && (
-        <div
-          data-testid="realm-locked-preview"
-          aria-label={`Your realm's conflict band: ${previewTension.label} (unlock to read live)`}
-          style={{
-            display: 'grid', gap: 3,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: CARD, borderLeft: `3px solid ${previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : GOLD}`,
-          }}
-        >
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            Conflict · your realm
-          </span>
-          <span aria-hidden style={{
-            color: previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : INK,
-            fontFamily: sans, fontSize: FS.lg, fontWeight: 950, lineHeight: 1.15,
-            filter: 'blur(3px)', userSelect: 'none',
-          }}>
-            {previewTension.label}
-          </span>
-        </div>
-      )}
-      {/* Body color (not SECOND) so the three value props clear AA 4.5:1 on
-          parchment — these are load-bearing benefit prose, not quiet scent (P7). */}
-      <ul style={{ margin: 0, paddingLeft: 18, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.7 }}>
-        <li>Advance the realm month by month and watch the chronicle fill</li>
-        <li>The self-ending war layer: sieges, coalitions, conquest</li>
-        <li>The living pantheon: deities contest converts and rise</li>
-      </ul>
-      <div>
-        <Button variant="primary" size="md" disabled={upgradeClosed} style={upgradeClosed ? { flexWrap: 'wrap' } : undefined} onClick={() => {
-          // P9 — clicking "run the Realm" IS the advance attempt: fire the
-          // simulation-intent moment (cooldown-guarded), then route to the
-          // canonical premium-value surface.
-          import('../../lib/pricingMoments.js')
-            .then(({ triggerPricingMoment }) =>
-              triggerPricingMoment('first_advance_attempt', useStore.getState().setActivePricingMoment, { tier }))
-            .catch(() => {});
-          onUpgrade?.();
-        }}>
-          {tier === 'anon' ? 'Sign in to unlock the Realm' : 'Upgrade to run the Realm'}
-          {upgradeClosed && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
-        </Button>
-      </div>
-    </div>
+    <RealmLockedGate
+      tier={tier}
+      icon={<Lock size={16} color={GOLD} />}
+      onUpgrade={onUpgrade}
+      onSignIn={onSignIn}
+      previewTension={previewTension}
+    />
   );
 }
 
@@ -294,14 +220,15 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
  * @param {boolean} props.canManageCampaigns  premium/elevated → live dashboard
  * @param {string} props.tier      auth tier (drives the locked-teaser moment + CTA)
  * @param {() => void} [props.onUpgrade]  route to the premium-value surface
+ * @param {() => void} [props.onSignIn]   route to the sign-in surface (the anon door)
  */
 export default function RealmDashboard({
-  campaign, canManageCampaigns, tier, onUpgrade, nameById,
+  campaign, canManageCampaigns, tier, onUpgrade, onSignIn, nameById,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
 }) {
   // Locked preview for anon / free — REACHABLE, not hidden.
   if (!canManageCampaigns) {
-    return <RealmDashboardLocked tier={tier} onUpgrade={onUpgrade} campaign={campaign} />;
+    return <RealmDashboardLocked tier={tier} onUpgrade={onUpgrade} onSignIn={onSignIn} campaign={campaign} />;
   }
 
   // No campaign selected yet — the SAME actionable gold callout every other Realm

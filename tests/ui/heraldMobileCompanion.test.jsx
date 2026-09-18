@@ -81,9 +81,12 @@ afterEach(() => {
 });
 
 describe('flagged mobile Herald companion', () => {
+  // Both tiers reach the tier door; only its lock state differs by build (pinned
+  // in launchLock.upsells). The anonymous viewer ALSO gets a live "Sign in",
+  // which is why the pressed control here is named per tier rather than assumed.
   test.each([
-    ['free', /Upgrade to run the Realm/i],
-    ['anon', /Sign in to unlock the Realm/i],
+    ['free', /^See Cartographer$/],
+    ['anon', /^See Cartographer$/],
   ])('keeps the established locked Dashboard and makes no Decisions promise to a %s viewer', async (tier, ctaName) => {
     const onUpgrade = vi.fn();
     readModelSpy.mockReturnValue({

@@ -63,7 +63,11 @@ const WRAPS = Object.freeze({
   'src/components/generate/PlaceInRegionCard.jsx': 1,
   'src/components/home/LandingBelowFold.jsx': 1,
   'src/components/instant/InstantWorldEntry.jsx': 1,
-  'src/components/map/RealmDashboard.jsx': 1,
+  // The locked-Realm gate moved OUT of RealmDashboard.jsx into its own leaf on
+  // 2026-09-18 so the desktop palette could render the same card: the pill and
+  // its wrapping Button host moved with it, which is why RealmDashboard no
+  // longer appears here and RealmLockedGate does.
+  'src/components/map/RealmLockedGate.jsx': 1,
   'src/components/pricing/PricingMomentCard.jsx': 1,
   // the Subscribe CTA wraps; the credit-pack tile's pill sets whiteSpace: 'normal'
   'src/components/pricing/PricingTierCards.jsx': 2,

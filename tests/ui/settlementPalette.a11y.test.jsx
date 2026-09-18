@@ -24,16 +24,28 @@ import React from 'react';
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, fireEvent, screen, act } from '@testing-library/react';
 
-// SettlementPalette pulls setSelectedBurgId / hover setters off the store.
-vi.mock('../../src/store/index.js', () => ({
-  useStore: (selector) => selector({
-    setSelectedBurgId: vi.fn(),
-    setHoveredSettlementId: vi.fn(),
-    clearHoveredSettlementId: vi.fn(),
-  }),
+// SettlementPalette pulls setSelectedBurgId / hover setters off the store; the
+// locked gate reads setActivePricingMoment off getState when a control is used.
+const storeState = {
+  setSelectedBurgId: vi.fn(),
+  setHoveredSettlementId: vi.fn(),
+  clearHoveredSettlementId: vi.fn(),
+  setActivePricingMoment: vi.fn(),
+};
+vi.mock('../../src/store/index.js', () => {
+  const useStore = (selector) => selector(storeState);
+  useStore.getState = () => storeState;
+  return { useStore };
+});
+
+// The post-launch (open) behaviour of the gate's tier door. Its pre-launch
+// closed state is pinned in tests/components/launchLock.upsells.test.jsx.
+vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({
+  ...(await importOriginal()), purchasesOpen: () => true,
 }));
 
 import SettlementPalette from '../../src/components/map/SettlementPalette.jsx';
+import { REALM_GATE_HEADING } from '../../src/components/map/RealmLockedGate.jsx';
 
 afterEach(cleanup);
 
@@ -112,5 +124,67 @@ describe('F28 slice 2 — SettlementPalette keyboard honesty', () => {
     render(<SettlementPalette saves={SAVES} placements={{ b1: { settlementId: 's1' } }} />);
     const card = screen.getByRole('button', { name: /Springhaven/i });
     expect(card.getAttribute('aria-label')).toMatch(/already placed on the map/i);
+  });
+});
+
+// ── THE DESKTOP REALM GATE (2026-09-18) ──────────────────────────────────────
+// An anon or free viewer can hold no campaign at all (useWorldMapCampaignModel
+// hands them an empty list), yet the palette invited them to "Start a campaign"
+// behind a button whose only outcome was a toast naming an upgrade with no way
+// to reach one. The phone had been honest about this since the mobile gate
+// landed. Now the desk shows the SAME card — literally the same component.
+describe('the desktop Realm gate for a non-entitled viewer', () => {
+  test('an anonymous viewer gets the honest gate, not a campaign invitation', () => {
+    const onNavigate = vi.fn();
+    render(
+      <SettlementPalette
+        saves={[]} placements={{}}
+        canManageCampaigns={false} tier="anon"
+        onNavigate={onNavigate}
+        onCreateCampaign={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByTestId('realm-palette-locked')).toBeTruthy();
+    expect(screen.getByText(REALM_GATE_HEADING)).toBeTruthy();
+    // anchored: the gate above IS on screen, so a missing invitation is a withheld one rather than an empty palette
+    expect(screen.queryByText(/Start a campaign to place settlements/i)).toBeNull();
+    // anchored: same live gate; the dead-end control is gone, not merely unfound
+    expect(screen.queryByRole('button', { name: /Create a campaign/i })).toBeNull();
+    // It never claims that signing in unlocks the Realm.
+    expect(screen.queryByRole('button', { name: /unlock the Realm/i })).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: /^See Cartographer$/ }));
+    expect(onNavigate).toHaveBeenCalledWith('pricing');
+    fireEvent.click(screen.getByRole('button', { name: /^Sign in$/ }));
+    expect(onNavigate).toHaveBeenCalledWith('signin');
+  });
+
+  test('a free viewer gets the tier door and no sign-in door', () => {
+    const onNavigate = vi.fn();
+    render(
+      <SettlementPalette
+        saves={[]} placements={{}}
+        canManageCampaigns={false} tier="free"
+        onNavigate={onNavigate}
+        onCreateCampaign={vi.fn()}
+      />,
+    );
+    expect(screen.getByRole('button', { name: /^See Cartographer$/ })).toBeTruthy();
+    // anchored: the tier door above proves the gate rendered, so the absent sign-in door is a tier decision
+    expect(screen.queryByRole('button', { name: /^Sign in$/ })).toBeNull();
+  });
+
+  test('an entitled viewer keeps the campaign invitation and sees no gate', () => {
+    render(
+      <SettlementPalette
+        saves={[]} placements={{}}
+        canManageCampaigns tier="premium"
+        onCreateCampaign={vi.fn()}
+      />,
+    );
+    expect(screen.getByText(/Start a campaign to place settlements/i)).toBeTruthy();
+    // anchored: the invitation above is live, so the absent gate is a real branch and not an unmounted palette
+    expect(screen.queryByTestId('realm-palette-locked')).toBeNull();
   });
 });

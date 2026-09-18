@@ -70,6 +70,10 @@ function WorldMapStageImpl({
   onCreateCampaign,
   onSelectCampaign,
   hasCampaigns = false,
+  // Entitlement, for the palette's locked-Realm gate. Defaults TRUE so an
+  // isolated mount renders exactly the pre-gate stage.
+  canManageCampaigns = true,
+  tier,
 }) {
   // Store-derived values read directly (formerly prop-drilled from WorldMap).
   const placements    = useStore(s => s.mapState.placements);
@@ -175,6 +179,8 @@ function WorldMapStageImpl({
               onCreateCampaign={onCreateCampaign}
               onSelectCampaign={onSelectCampaign}
               hasCampaigns={hasCampaigns}
+              canManageCampaigns={canManageCampaigns}
+              tier={tier}
               onKeyboardPlace={handleKeyboardPlace}
               announcerRef={announceRef}
               onAutoplace={handleAutoplace}

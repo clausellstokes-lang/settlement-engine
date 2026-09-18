@@ -25,6 +25,7 @@
  * @param {boolean} props.canManageCampaigns   premium/elevated → live dashboard
  * @param {string} props.tier                  auth tier (drives the locked teaser)
  * @param {() => void} [props.onUpgrade]       route to the premium-value surface
+ * @param {() => void} [props.onSignIn]        route to the sign-in surface (the anon door)
  * @param {Map<string,string>} props.nameById  settlement-id → name for the dashboard
  * @param {Array<any>} [props.saves]            active campaign member saves for the flagged Herald
  * @param {() => void} [props.onCreateCampaign] empty-state: mint a campaign
@@ -91,7 +92,7 @@ function CopyRealmLink() {
 }
 
 export default function RealmMobileGate({
-  campaign, canManageCampaigns, tier, onUpgrade, nameById,
+  campaign, canManageCampaigns, tier, onUpgrade, onSignIn, nameById,
   saves = [],
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
 }) {
@@ -156,6 +157,7 @@ export default function RealmMobileGate({
             canManageCampaigns={canManageCampaigns}
             tier={tier}
             onUpgrade={onUpgrade}
+            onSignIn={onSignIn}
             nameById={nameById}
             onCreateCampaign={onCreateCampaign}
             onSelectCampaign={onSelectCampaign}

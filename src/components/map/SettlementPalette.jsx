@@ -7,12 +7,17 @@
  */
 
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
+import { Lock, MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
 import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+// THE ONE locked-Realm gate — the same card the phone shows, not a second copy
+// of its words. Static: this palette is itself lazy, and the gate is a leaf
+// (theme + Button + the launch pill), so it costs the palette chunk almost
+// nothing and never drags the dashboard's selectors behind it.
+import RealmLockedGate from './RealmLockedGate.jsx';
 import { threatDisplay, isCalmThreat } from './settlementThreat.js';
 
 // S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
@@ -30,6 +35,9 @@ export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
   onKeyboardPlace, announcerRef, onAutoplace,
+  // Entitlement, threaded from WorldMap through the stage. Defaults TRUE so an
+  // isolated mount (tests, harnesses) renders exactly the pre-gate palette.
+  canManageCampaigns = true, tier,
 }) {
   const [query, setQuery] = useState('');
   // F28 → E-I — the placement live region. F28 made Enter honest (it selected
@@ -126,13 +134,38 @@ export default function SettlementPalette({
         )}
       </div>
 
+      {/* THE DESKTOP GATE. An anon or free viewer cannot hold a campaign at all
+          (useWorldMapCampaignModel hands them an empty list), so the empty state
+          below invited them to "Start a campaign" behind a "Create a campaign"
+          button whose only possible outcome was a toast naming an upgrade with no
+          way to reach it. The phone has been honest about this since the mobile
+          gate landed; the desk had not. Same card, same words, one component. */}
+      {!canManageCampaigns && (
+        <div style={{ margin: SP.sm, marginBottom: 0 }}>
+          <RealmLockedGate
+            tier={tier}
+            icon={<Lock size={16} color={GOLD} />}
+            testId="realm-palette-locked"
+            // useRealmInspector already fires map_realm_teaser once per Realm
+            // visit for exactly this viewer (it took the job over when the
+            // Herald was withheld until a realm's first advance). Firing again
+            // here would be a second moment for one arrival.
+            fireEntryMoment={false}
+            onUpgrade={() => onNavigate?.('pricing')}
+            onSignIn={() => onNavigate?.('signin')}
+          />
+        </div>
+      )}
+
       {/* No-campaign prompt — placement needs an active campaign. This is an
           ACTIONABLE empty state (P1/P8): it carries a real first click here
           instead of pointing at the toolbar — a primary "Create a campaign"
           when none exist, "Select a campaign" when some do. It REUSES the ONE
           shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
-          so "no campaign" looks the same on every surface. */}
-      {!activeCampaign && (
+          so "no campaign" looks the same on every surface. Withheld from a
+          non-entitled viewer, who gets the gate above instead of an invitation
+          they cannot accept. */}
+      {!activeCampaign && canManageCampaigns && (
         <div style={{ margin: SP.sm, marginBottom: 0 }}>
           <CampaignEmptyState
             lead="Start a campaign to place settlements"

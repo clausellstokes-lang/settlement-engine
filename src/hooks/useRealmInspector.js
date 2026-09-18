@@ -271,6 +271,15 @@ export function useRealmInspector({
     if (typeof onNavigate === 'function') onNavigate('pricing');
   }, [onNavigate]);
 
+  // The ANON door on the same locked state. It is deliberately NOT handleUpgrade
+  // under another name: the gate's old single CTA told an anonymous viewer that
+  // signing in would unlock the Realm, and it does not — the Realm is
+  // Cartographer's. Signing in is a true, free, separate thing, so it gets its
+  // own control and its own destination.
+  const handleSignIn = useCallback(() => {
+    if (typeof onNavigate === 'function') onNavigate('signin');
+  }, [onNavigate]);
+
   // Open the Inspector at a given section (used by the advance flow).
   const openInspectorAt = useCallback((section) => {
     setInspectorSection(section);
@@ -289,6 +298,7 @@ export function useRealmInspector({
     handleApplyPreset,
     rulesEditBlocked,
     handleUpgrade,
+    handleSignIn,
     showSimulationRules,
     setShowSimulationRules,
   };

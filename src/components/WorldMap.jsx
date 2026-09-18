@@ -204,7 +204,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const {
     inspectorOpen, setInspectorOpen, inspectorSection, setInspectorSection,
     inspectorSize, setInspectorSize, heraldAvailable,
-    openInspectorAt, handleApplyPreset, handleUpgrade, showSimulationRules, setShowSimulationRules,
+    openInspectorAt, handleApplyPreset, handleUpgrade, handleSignIn, showSimulationRules, setShowSimulationRules,
   } = useRealmInspector({
     canManageCampaigns,
     pendingMapWorkspace,
@@ -487,7 +487,7 @@ export default function WorldMap({ onNavigate } = {}) {
 
   // Empty-state activation (P1/P8): the no-campaign states get a real first click
   // (create-and-select / select-first). Hooked out to hold the size ratchet.
-  const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast });
+  const campaignActivation = useCampaignActivation({ activeCampaigns, handleSelectCampaign, showToast, onNavigate });
 
   // Premium / elevated auto-resume: on a cold Realm entry, reopen the campaign
   // the user last used so its map loads first (sets the active id; the mount-sync
@@ -770,7 +770,7 @@ export default function WorldMap({ onNavigate } = {}) {
           campaign={activeCampaign}
           canManageCampaigns={canManageCampaigns}
           tier={authTier}
-          onUpgrade={handleUpgrade}
+          onUpgrade={handleUpgrade} onSignIn={handleSignIn}
           nameById={nameById} saves={activeSaves}
           {...campaignActivation}
         />
@@ -862,7 +862,10 @@ export default function WorldMap({ onNavigate } = {}) {
             mapFrameUrl={mapFrameUrl}
             bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
             onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
-            mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap}
+            // canManageCampaigns + tier drive the palette's locked-Realm gate: an
+            // anon/free viewer gets the SAME honest card the phone shows instead
+            // of a campaign invitation they cannot accept.
+            mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap} canManageCampaigns={canManageCampaigns} tier={authTier}
             {...campaignActivation}
           />
         </FeatureErrorBoundary>
