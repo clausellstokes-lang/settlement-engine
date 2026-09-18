@@ -168,6 +168,59 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     expect(woven.sentences[2]).toBe('AxDy (Old) is a different place.');
   });
 
+  it('THE PRONOUN BRANCH: a line that already names its own tier noun takes "It", never "The <noun>"', () => {
+    // ⭐ THE WORST READING MEASURED before the chair's ruling (2026-09-18) — the weave printed
+    // "The town is a town, in the ordinary sense", which is a sentence telling a reader that a
+    // town is a town. The pronoun is what that case is worth.
+    const worst = weaveBlock(
+      ['Adham holds the ford.', 'Adham is a town, in the ordinary sense, and the ordinariness is accurate.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(worst.sentences[1]).toBe('It is a town, in the ordinary sense, and the ordinariness is accurate.');
+    // A POSSESSIVE takes "Its", with no apostrophe — the possessive of a pronoun, not of a noun.
+    const possessive = weaveBlock(
+      ['Nothing hems Adham in.', 'Adham\'s record still marks each hard season as bearing on the town.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(possessive.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+    // CASE-INSENSITIVE: the noun counts wherever the line capitalises it.
+    const capitalised = weaveBlock(
+      ['Nothing hems Adham in.', 'Adham keeps a court. Town business is settled in it.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(capitalised.sentences[1]).toBe('It keeps a court. Town business is settled in it.');
+  });
+
+  it('…and the branch is WHOLE-WORD: a longer word carrying the noun is not the noun', () => {
+    // "townsfolk" and "towns" are different words, so these keep "The town" rather than taking
+    // the pronoun. The split-on-non-letters identity is what makes that true by construction.
+    const plural = weaveBlock(
+      ['Adham holds the ford.', 'Adham supports work that only towns of a certain seriousness support.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(plural.sentences[1]).toBe('The town supports work that only towns of a certain seriousness support.');
+    const folk = weaveBlock(
+      ['Adham holds the ford.', 'Adham keeps its townsfolk fed through a hard season.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(folk.sentences[1]).toBe('The town keeps its townsfolk fed through a hard season.');
+    // …and a line naming a DIFFERENT tier's noun is not naming its own.
+    const other = weaveBlock(
+      ['Adham holds the ford.', 'Adham buys its grain from a village three days out.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(other.sentences[1]).toBe('The town buys its grain from a village three days out.');
+  });
+
+  it('SENTENCE 0 is untouched by the pronoun branch too', () => {
+    const woven = weaveBlock(
+      ['Adham is a town, in the ordinary sense.', 'Adham is a town, in the ordinary sense.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('town') },
+    );
+    expect(woven.sentences[0]).toBe('Adham is a town, in the ordinary sense.');
+    expect(woven.sentences[1]).toBe('It is a town, in the ordinary sense.');
+  });
+
   it('JOINS ALONE when there is no name or no known tier — it renames nothing on a guess', () => {
     const lines = ['Fionnshaw sits in easy country.', 'Fionnshaw keeps no market.'];
     const joined = 'Fionnshaw sits in easy country. Fionnshaw keeps no market.';

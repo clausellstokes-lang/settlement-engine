@@ -44,21 +44,26 @@
  * rather than guessing a word. That is FINITE-SEMANTICS held at the display layer: the
  * finite set is the engine's own.
  *
- * ⚠⚠ ONE MEASURED SIDE EFFECT, RECORDED RATHER THAN QUIETLY CARRIED — it is not a bug to
- * re-find, and the cure is one predicate whenever the chair wants it. Over 48 generated
- * settlements (6 tiers x 4 cultures x 2 seeds) and the seven woven positions of the general
- * desk: 760 sentences, 218 of them stood down (28.7%), and in 17 of those 218 (7.8%) the
- * SAME tier noun appears again later in the same sentence. Every one of the seventeen is at
- * tier `town`, because the corpus writes "the town" generically about a settlement of any
- * size. The worst reading measured is
+ * ⭐⭐ THE PRONOUN BRANCH (the chair's ruling, 2026-09-18), and the measurement that bought it.
+ * Over 48 generated settlements (6 tiers x 4 cultures x 2 seeds) and the seven woven positions
+ * of the general desk: 760 sentences, 218 of them stood down (28.7%) — and in a measured
+ * minority of those the SAME tier noun appeared AGAIN later in the same line, because the
+ * corpus writes "the town" generically about a settlement of any size. The worst reading was
  *
  *   "The town is a town, in the ordinary sense, and the ordinariness is accurate."
  *
- * The cure, if it is wanted, is to skip the stand-down when the sentence's remainder already
- * carries the noun — one predicate at the `woven` map below, no other rule touched. It is
- * NOT applied here because the arrangement was specified rule by rule and this leaf must
- * behave exactly as it is written to; the number is recorded so that decision is made on
- * evidence rather than on a reading someone happens to meet.
+ * So the stand-in is CHOSEN rather than fixed. Where the line already names the tier noun as a
+ * whole word, the opening becomes "It" — "Its" for a possessive — so that sentence now reads
+ * "It is a town, in the ordinary sense". Everywhere else it is still "The <noun>". Sentence 0
+ * is untouched by either branch, and no other character moves under either.
+ *
+ * ⚠ TWO THINGS THE NEXT READER SHOULD KNOW ABOUT THIS BRANCH. (1) It tests the WHOLE LINE's
+ * remainder rather than one grammatical sentence: a composed unit is ONE entry here and may
+ * carry several sentences, and the conservative direction is the pronoun, which can never
+ * repeat a noun. (2) A pronoun takes its referent from what precedes it, so on a line whose
+ * predecessor ended on some other noun, "It" can be read as that noun. That is a real cost of
+ * the ruling and it is written down rather than left to be discovered; what it was weighed
+ * against is a sentence that tells the reader a town is a town.
  *
  * PURE HEADLESS LEAF: no React, no store, one import — the canonical tier list.
  *
@@ -107,11 +112,39 @@ function escapeForRegExp(text) {
  * spelled in UNICODE LETTER CLASSES rather than `\w` on purpose: `\w` is ASCII-only, so a
  * town called Ford inside a sentence opening "Fordé…" would read as a word boundary that is
  * not one, and the estate's name generators emit diacritics freely.
+ *
+ * ⚠ THE LOOKAHEAD IS SPELLED POSITIVELY — `(?=[^…]|$)` rather than `(?!…)` — and the reason
+ * is a register rather than taste. `tests/copy/voiceMechanics.test.js` is an exact, per-file,
+ * shrink-only ratchet on exclamation points in `src/domain` string literals, and a negative
+ * lookahead puts a bare `!` inside this template. The ratchet's own instruction for a file
+ * that grew is REWRITE, never bank, so the construct is rewritten. The two forms are exactly
+ * equivalent, end of string included: `(?!X)` succeeds where no character matches X, and the
+ * `|$` alternative is what carries that same case here.
  * @param {string} name
  * @returns {RegExp}
  */
 function openingNameMatcher(name) {
-  return new RegExp(`^${escapeForRegExp(name)}(’s|'s)?(?![\\p{L}\\p{N}_])`, 'u');
+  return new RegExp(`^${escapeForRegExp(name)}(’s|'s)?(?=[^\\p{L}\\p{N}_]|$)`, 'u');
+}
+
+/**
+ * Does this text already name the tier noun as a WHOLE WORD? — the pronoun branch's test.
+ *
+ * ⛔ SPLIT RATHER THAN MATCHED, and the reason is the two constraints this predicate sits
+ * between. A bordered match wants a lookbehind and a lookahead, the negative forms of which
+ * put a bare `!` in a `src/domain` string literal and move the `voiceMechanics` ratchet; and
+ * `\b` is ASCII-only, so it reads a boundary inside a diacritic that is not one. Splitting on
+ * the same unicode letter/number class the matcher above uses gets whole-word identity by
+ * CONSTRUCTION — no boundary to spell, no bang, and "towns" is correctly not "town".
+ *
+ * `toLowerCase` is the case-insensitive read and NOT a locale API: it is the unconditional
+ * Unicode mapping, so it answers the same on every host, which is what THE PROMISE needs.
+ * @param {string} text the line's remainder, after the opening name
+ * @param {string} noun the tier noun, already lower-case
+ * @returns {boolean}
+ */
+function namesTierNoun(text, noun) {
+  return text.toLowerCase().split(/[^\p{L}\p{N}_]+/u).includes(noun);
 }
 
 /**
@@ -157,8 +190,13 @@ export function weaveBlock(lines, options = {}) {
     if (index === 0 || !opening) return line;
     return line.replace(
       opening,
-      /** @param {string} _match @param {string|undefined} possessive */
-      (_match, possessive) => `The ${noun}${possessive || ''}`,
+      /** @param {string} match @param {string|undefined} possessive */
+      (match, possessive) => {
+        // THE PRONOUN BRANCH (the chair's ruling): a line that already names its own tier noun
+        // takes "It"/"Its" instead, so the weave cannot produce "The town is a town".
+        if (namesTierNoun(line.slice(match.length), noun)) return possessive ? 'Its' : 'It';
+        return `The ${noun}${possessive || ''}`;
+      },
     );
   });
   return Object.freeze({
