@@ -111,13 +111,44 @@ describe('tonightAtTheTable', () => {
     expect(tonightAtTheTable(set).length).toBeLessThanOrEqual(6);
   });
 
-  it('long bodies get truncated with an ellipsis', () => {
+  // ── NO BODY IS CLIPPED (2026-09-18) ───────────────────────────────────────
+  // Every body used to pass through a blind character slice: 80 for an NPC's
+  // secret or want, 120 for a hook, a twist and an annotation, 160 for the red
+  // flag. The cut ignored word boundaries, so a cheat sheet a DM reads aloud
+  // mid-sentence ended in "…selling the gra…" with the rest nowhere on the
+  // surface. The cards carry the whole thought; the surfaces scroll.
+  it('carries a long hook whole — no ellipsis, nothing lost', () => {
+    const text = 'The vault was emptied last night and the only key hangs on the reeve\'s own belt, '
+      + 'which is why the watch has spent the morning questioning everyone except the reeve.';
     const set = {
-      npcs: [{ name: 'X', power: 9, role: 'r', plotHooks: ['a'.repeat(200)] }],
+      npcs: [{ name: 'X', power: 9, role: 'r', plotHooks: [text] }],
     };
     const out = tonightAtTheTable(set);
     const hook = out.find(e => e.kind === 'HOOK');
-    expect(hook.body.length).toBeLessThanOrEqual(120);
-    expect(hook.body.endsWith('…')).toBe(true);
+    expect(hook.body).toBe(text);
+    expect(hook.body.endsWith('…')).toBe(false);
+  });
+
+  it('no row of a long settlement ends in an ellipsis', () => {
+    const long = (lead) => `${lead} ${'and the debt is older than anyone still drawing breath in this valley '.repeat(4)}`.trim();
+    const set = {
+      npcs: [
+        { name: 'A', power: 9, role: 'reeve', secret: { what: long('Skims the tithe') }, plotHooks: [long('A midnight muster')] },
+        { name: 'B', power: 8, role: 'factor', goal: { short: long('Corner the grain trade') } },
+        { name: 'C', power: 7, role: 'clerk', secret: { what: long('Forged the charter') } },
+      ],
+      history: { legacyAnnotations: [{ eventName: 'The hidden lever', annotation: long('An old debt resurfaces') }] },
+      economicState: {
+        activeChains: [{
+          chainId: 'salt', needLabel: 'Salt', status: 'blocked',
+          failureConsequences: long('The pans have stood empty since the spring floods'),
+        }],
+      },
+    };
+    const out = tonightAtTheTable(set);
+    expect(out.length).toBeGreaterThan(0);
+    for (const row of out) {
+      expect(row.body.endsWith('…'), `${row.kind} body was clipped: ${row.body}`).toBe(false);
+    }
   });
 });

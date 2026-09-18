@@ -15,6 +15,15 @@
  *
  * Returns an array of `{ kind, title, body }` entries, capped at 6 so
  * the right column doesn't outgrow the left.
+ *
+ * ⛔ NO BODY IS CLIPPED (2026-09-18). Every body used to pass through a blind
+ * `truncate(text, n)` — an 80/120/160-character slice plus an ellipsis, taken
+ * with no regard for where a word ended. A cheat sheet a DM reads mid-sentence
+ * at the table is exactly the surface that must not end in "…the reeve has been
+ * selling the gra…": the reader cannot recover the rest, because these entries
+ * are the only place the thought is stated in this form. The cards carry the
+ * complete thought and the surfaces scroll instead (TableView's body is an
+ * overflow-auto column, SessionMode's and the Summary aside's likewise).
  */
 
 import { collectPlotHooks } from '../dossier/plotHooks.js';
@@ -103,8 +112,8 @@ export function tonightAtTheTable(settlement) {
     const secret = npcSecretText(npc);
     const want = npc.goal?.short || npc.want || '';
     const trait = secret
-      ? `secret: ${truncate(secret, 80)}`
-      : (want ? `wants: ${truncate(want, 80)}` : (role || 'major NPC'));
+      ? `secret: ${secret}`
+      : (want ? `wants: ${want}` : (role || 'major NPC'));
     out.push({
       kind: 'NPC',
       title: npc.name || 'Unnamed NPC',
@@ -121,7 +130,7 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'HOOK',
       title: hook.source || hook.role || 'Plot hook',
-      body:  truncate(hook.text || '', 120),
+      body:  String(hook.text || ''),
     });
   }
 
@@ -134,13 +143,13 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'TWIST',
       title: annotation.eventName || 'The hidden thread',
-      body:  truncate(annotation.annotation, 120),
+      body:  String(annotation.annotation),
     });
   } else if (ranked.length > 2 && npcSecretText(ranked[2])) {
     out.push({
       kind: 'TWIST',
       title: /** @type {string} */ (ranked[2].name),
-      body:  truncate(npcSecretText(ranked[2]), 120),
+      body:  npcSecretText(ranked[2]),
     });
   }
 
@@ -156,20 +165,10 @@ export function tonightAtTheTable(settlement) {
     out.push({
       kind: 'RED',
       title: `Don't mention ${good}`,
-      body:  truncate(`NPCs go cold mid-sentence. Reason: ${reason}`, 160),
+      body:  `NPCs go cold mid-sentence. Reason: ${reason}`,
     });
   }
 
   return out.slice(0, MAX_ENTRIES);
 }
 
-/**
- * @param {unknown} s
- * @param {number} n
- * @returns {string}
- */
-function truncate(s, n) {
-  const str = String(s || '');
-  if (str.length <= n) return str;
-  return str.slice(0, Math.max(0, n - 1)).trimEnd() + '…';
-}
