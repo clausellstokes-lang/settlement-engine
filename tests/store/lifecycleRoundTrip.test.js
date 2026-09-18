@@ -1135,14 +1135,20 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(merged.lastSeed).toBe('sf-seed-1');
     });
 
-    test.each(['free', 'premium', undefined])('a %s viewer\'s draft is NOT persisted', (tier) => {
-      const projected = partializeOf({
-        ...currentStub(), auth: tier ? { tier } : undefined, settlement: draft, lastSeed: 'sf-seed-1',
-      });
-      // The KEYS are still there (the shape never forks); the values are not.
-      expect(Object.hasOwn(projected, 'settlement')).toBe(true);
-      expect(projected.settlement).toBeNull();
-      expect(projected.lastSeed).toBeNull();
+    // A plain loop, not test.each: the each-family park debt is a frozen,
+    // shrink-only ceiling in the lighting contract and a new `each` call raises
+    // it (tests/lint/sovereigntyLightingContract.walker).
+    test('no signed-in tier persists its draft, and the KEYS are still there', () => {
+      for (const tier of ['free', 'premium', undefined]) {
+        const label = tier || 'a viewer with no auth record';
+        const projected = partializeOf({
+          ...currentStub(), auth: tier ? { tier } : undefined, settlement: draft, lastSeed: 'sf-seed-1',
+        });
+        // The KEYS are still there (the shape never forks); the values are not.
+        expect(Object.hasOwn(projected, 'settlement'), label).toBe(true);
+        expect(projected.settlement, label).toBeNull();
+        expect(projected.lastSeed, label).toBeNull();
+      }
     });
 
     test('a blob written BEFORE the draft was persisted rehydrates to the slice default', () => {
