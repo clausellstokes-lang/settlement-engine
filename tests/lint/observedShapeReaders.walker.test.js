@@ -119,6 +119,7 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { describe, expect, test, beforeAll } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { OBSERVED_SHAPE_BANK_LITERAL } from './observedShapeBank.literal.js';
 
 import {
   buildObservedCorpus,
@@ -135,6 +136,7 @@ import {
   provenanceDriftOf, isDetectorSourcePath, DETECTOR_INPUT_PATHS,
   scannerToolFiles as scannerToolFilesOf, subjectFiles as subjectFilesOf,
   sourceFiles as sourceFilesOf,
+  BANK_LITERAL_MODULE, bankOf,
   BASELINE_SCAN_MODE, BASELINE_SCHEMA, CLASS_A_PROTECTED_IDENTITIES, cohortOf, compare,
   EXACT_SCAN_EXCLUDED_SCOPE,
   EXPLAINED_WRITER_EXEMPTIONS,
@@ -174,15 +176,25 @@ const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
 //     REGISTER, because `baselineOf` re-derives all three from ONE scan and a
 //     lawful `--write` may only shrink them. Read them from there and the
 //     `--write` moves both sides of the assertion in a single act.
-//   * the BANK (`bankedReads`/`taggedRows`) keeps its LITERAL at the register
-//     pin below, because the bank is the one figure a derived re-freeze may
-//     never RAISE — only the governed reasoned path may — so a literal is
-//     exactly right there and a red on it is the governed event, announced.
+//   * the BANK (`bankedReads`/`taggedRows`, and the same pair per declared
+//     identity) keeps its LITERAL, because the bank is the one figure a derived
+//     re-freeze may never RAISE — only the governed reasoned path may — so a
+//     literal is exactly right there and a red on it is the governed event,
+//     announced. ⭐ SINCE SCHEMA 20 THAT LITERAL LIVES IN ITS OWN HAND-OWNED
+//     MODULE, `tests/lint/observedShapeBank.literal.js`, and the instrument's
+//     `--write` READS IT: a write whose register would disagree with it is
+//     REFUSED before a byte moves (`assertBankTwins`). The literal stranded once
+//     more after this block was written — the schema-19 re-freeze `fe021a487`
+//     moved the register 62/41 → 60/39 in a one-file commit and this suite was
+//     red at the tip for three commits (`1637f85d1`) — which is the case for
+//     making the ACT read the twin rather than trusting a lane to remember it.
 //
 // NOTHING BECOMES A SELF-COMPARISON. `registerFigures()` reads the FROZEN
 // register; the triple arm compares it against a LIVE full-tree scan, and the
 // bank arm compares the register's persisted `rowTags` against the governed
-// literal. Two independent productions on each side of both assertions.
+// literal module. Two independent productions on each side of both assertions —
+// and the module is pinned below to be a BARE literal, so it cannot quietly
+// become a third reading of the register.
 /** The register's tagged rows, one derivation shared by every consumer. */
 const registerRowTagRows = () => Object.entries(baseline.rowTags).flatMap(([file, row]) => (
   Object.keys(row).map((identity) => ({
@@ -331,83 +343,70 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // GROW except by the governed reasoned path. A frozen number is therefore the right
     // instrument here — a red on it is that governed event announcing itself — whereas
     // the tree-shaped triple below reads the register, which the `--write` owns.
-    expect({
+    //
+    // ⭐⭐ SINCE SCHEMA 20 THE LITERAL IS A MODULE THE WRITE READS. It used to be spelled
+    // inline here, and it stranded: the schema-19 re-freeze `fe021a487` moved the register
+    // 62/41 → 60/39 touching exactly ONE file, this line stayed at 62/41, and the walker
+    // was RED AT THE TIP ITSELF for three commits (`1637f85d1`), blocking every later
+    // lane's gate. The instrument's `--write` now imports `observedShapeBank.literal.js`
+    // and REFUSES to freeze a register whose bank disagrees with it (`assertBankTwins`),
+    // so a lane that moves the bank moves the literal in the same commit or the register
+    // does not move at all. THE LITERAL IS STILL HAND-WRITTEN AND STILL NOT DERIVED — the
+    // module is pinned as a bare literal two arms below; this arm keeps comparing the
+    // register's persisted `rowTags` against it, two productions as before.
+    //
+    // THE LEDGER OF MOVES, kept here because it explains why the literal holds what it
+    // holds and no derivation can supply that:
+    //   • 44/31 → 60/40 at the schema-9 mint — the four declared eventLog identities.
+    //   • +2/+2 at the schema-11 mint — the ninth identity, `isCriminal on incomeSources`,
+    //     a new identity in two files.
+    //   • +2/+1 at the schema-12 mint (ODQ §819) — genesisDiplomacy.js joins the
+    //     neighbourNetwork row. ⚠ +2 READS but only +1 ADDRESS, which is the shape a
+    //     BANK-BY-RULE admission has and a new DECLARATION does not: this added one file
+    //     to an identity that already had 24.
+    //   • 64/43 → 62/41 at the schema-17 rung — the governed migration DELETED the two
+    //     banked `isCriminal on incomeSources` addresses (EconomicsTab.jsx, treasury.js)
+    //     because the stress-loaded topology pass made their writer OBSERVABLE, so the
+    //     reads stopped being findings at all. A shrink of a bank is as much a governed
+    //     event as a growth.
+    //   • 62/41 → 60/39 at the schema-19 rung (2026-09-17) — `factions on locks` retired
+    //     with its deleted writer; its two addresses (src/domain/locksPreservation.js ×1,
+    //     src/domain/worldPulse/coup.js ×1, both tagged `CR-OSR-SCHEMA-6 / M8 — re-triaged
+    //     out of class (a)`) left the estate with the lock controls. The retirement
+    //     (c4661fe48) moved every LIVE-side pin and deliberately left this one for the
+    //     re-freeze; the rung (ae8bc5e29) declared the move in prose; the re-freeze
+    //     (fe021a487) executed it and touched only the register. Hence the module.
+    //   • schema 20 (2026-09-18) — the fence rung. Moves no row; the literal holds.
+    const registerBank = {
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
-    // ⭐ 64/43 → 62/41 AT THE SCHEMA-17 RUNG, and this is the literal doing exactly the
-    // job its note describes: the governed migration DELETED the two banked
-    // `isCriminal on incomeSources` addresses (EconomicsTab.jsx, treasury.js) because the
-    // stress-loaded topology pass made their writer OBSERVABLE, so the reads stopped being
-    // findings at all. A shrink of a bank is as much a governed event as a growth, and the
-    // red on this line is that event announcing itself.
-    // ⭐ 62/41 → 60/39 ON 2026-09-17 AT THE SCHEMA-19 RUNG, AND THIS LINE IS WHERE THAT
-    // GOVERNED EVENT WENT UNANNOUNCED FOR THREE COMMITS. The retirement (c4661fe48) moved
-    // every LIVE-side pin the same day — `live.explainedWriters.banked` 62 → 60, the
-    // clear-outright figure, the exact banked list, both per-identity maps — and
-    // deliberately left THIS one, saying so in the map below: "the register's two tagged
-    // rows leave when the governed re-freeze absorbs them, which is what moves the 62/41
-    // literal above to 60/39". The rung (ae8bc5e29) then DECLARED the move in the
-    // migration script's own docblock — "the banked reads go 62 → 60 across 41 → 39
-    // tagged addresses" — and the re-freeze (fe021a487) executed it, absorbing both rows.
-    // ⛔ BUT fe021a487 TOUCHED EXACTLY ONE FILE, the register. So the register went to
-    // 60/39 while this twin stayed at 62/41, and the walker landed RED AT THE TIP ITSELF,
-    // before any later lane's first car — the same failure mode the block at the head of
-    // this section was written about, recurring in the one figure that block exempted.
-    // The two addresses are `factions on locks` in src/domain/locksPreservation.js (×1)
-    // and src/domain/worldPulse/coup.js (×1), both tagged `CR-OSR-SCHEMA-6 / M8 —
-    // re-triaged out of class (a)`, both reads deleted outright by the owner's 2026-09-17
-    // order; neither file reads the `locks` shape's `factions` key at this tree at all.
-    // ⚠ THIS IS A SHRINK AND ONLY A SHRINK, which is exactly why moving it by hand is
-    // lawful: the bank may never be RAISED except by the governed reasoned path, and the
-    // path that LOWERED it ran to completion three commits ago. The figure is READ OFF
-    // the re-frozen register, never predicted from the delta — and the literal STAYS a
-    // literal, because deriving it from the register is the one change that would make
-    // the NEXT bank move silent.
-    }).toEqual({ reads: 60, addresses: 39 }); // +2/+1: genesisDiplomacy.js joins the
-    // neighbourNetwork row at the schema-12 mint (ODQ §819). ⚠ +2 READS but only +1
-    // ADDRESS, which is the shape a BANK-BY-RULE admission has and a new DECLARATION
-    // does not: the ninth identity added two of each because it was a new identity in
-    // two files; this adds one file to an identity that already had 24.
-    // ⚠ THE PER-IDENTITY MAP IS THE POINT, NOT THE TOTAL. 60/40 is the same
-    // arithmetic as 44/31 plus 16/9, and a total alone cannot tell a bank that
-    // grew by the four declared eventLog identities from one that grew by four
-    // of anything else. The schema-9 mint's whole ruling is WHICH rows joined.
-    expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
-      const matches = persistedTags.filter((row) => row.identity === identity);
-      return [identity, {
-        reads: matches.reduce((sum, row) => sum + row.count, 0),
-        addresses: matches.length,
-      }];
-    }))).toEqual({
-      // ⛔ `factions on locks` LEFT THE ROSTER ON 2026-09-17 — its writer,
-      // src/components/dossier/LockControls.jsx, was deleted with the dossier's lock
-      // controls, so gate 0 could no longer read it and the exemption was RETIRED.
-      // It stood here at 2 reads / 2 addresses (locksPreservation.js, coup.js). This
-      // map is keyed BY THE ROSTER, so the entry leaves as soon as the declaration
-      // does; the register's two tagged rows leave when the governed re-freeze
-      // absorbs them, which is what moves the 62/41 literal above to 60/39.
-      'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
-      'stresses on settlement': { reads: 4, addresses: 3 },
-      'worldPulse on campaignState': { reads: 2, addresses: 2 },
-      'appliedAt on eventLog': { reads: 1, addresses: 1 },
-      'deltas on eventLog': { reads: 2, addresses: 1 },
-      'event on eventLog': { reads: 9, addresses: 4 },
-      'narrativeSummary on eventLog': { reads: 4, addresses: 3 },
-      // ⭐ THE NINTH IS NOW UNEXERCISED, AND ZERO IS THE HONEST READING. It banked two
-      // reads across two addresses — the flag read in treasury.js's `isCriminalIncome` and
-      // the guard it sits behind — on the ground that its writer was a GENERATOR branch the
-      // corpus never took. Schema 17's stress-loaded topology pass makes the corpus take it,
-      // so the reads are no longer findings and there is nothing left to bank. ⛔ THE ENTRY
-      // IS PINNED AT 0/0 RATHER THAN REMOVED FROM THIS MAP: the map is built from
-      // EXPLAINED_WRITER_EXEMPTIONS, whose roster is now EIGHT, and a declaration that
-      // banks nothing is precisely what this arm should be able to say out loud.
-      // ⚠ "THE NINTH" IS ITS HISTORICAL POSITION, NOT ITS INDEX TODAY — it was declared
-      // ninth and is now first, because `factions on locks` was retired ahead of it on
-      // 2026-09-17. The two cases are worth telling apart: this one keeps its
-      // declaration because its WRITER IS STILL THERE and merely became observable;
-      // that one lost its writer outright, which gate 0 refuses rather than tolerates.
-      'isCriminal on incomeSources': { reads: 0, addresses: 0 },
-    });
+      // ⚠ THE PER-IDENTITY MAP IS THE POINT, NOT THE TOTAL. 60/40 is the same arithmetic
+      // as 44/31 plus 16/9, and a total alone cannot tell a bank that grew by the four
+      // declared eventLog identities from one that grew by four of anything else. The
+      // schema-9 mint's whole ruling is WHICH rows joined — so the map is keyed BY THE
+      // ROSTER, and a declaration that banks nothing says 0/0 out loud: `isCriminal on
+      // incomeSources` has banked nothing since schema 17 made its writer observable, and
+      // it is still DECLARED because its writer is still there; `factions on locks` lost
+      // its writer outright and is gone from roster and map alike. The two cases are
+      // worth telling apart, which is why a 0/0 entry is kept rather than removed.
+      byIdentity: Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => {
+        const matches = persistedTags.filter((row) => row.identity === identity);
+        return [identity, {
+          reads: matches.reduce((sum, row) => sum + row.count, 0),
+          addresses: matches.length,
+        }];
+      })),
+    };
+    expect(registerBank).toEqual(OBSERVED_SHAPE_BANK_LITERAL);
+    // The module's map is keyed by the roster and nothing else — an entry for a retired
+    // declaration, or a missing one for a live declaration, is a stale map even at a
+    // matching total.
+    expect(Object.keys(OBSERVED_SHAPE_BANK_LITERAL.byIdentity).sort())
+      .toEqual(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity).sort());
+    // ⭐ THE INSTRUMENT'S OWN DERIVATION AGREES WITH THIS FILE'S. `bankOf` is what the
+    // `--write` compares against the module; if it ever disagreed with the hand-rolled
+    // derivation above, the fence would be guarding a different figure than this arm.
+    expect(bankOf(baseline.inventory, baseline.rowTags)).toEqual(registerBank);
     // ⭐ THE SCHEMA-9 GENESIS STAMPED ONE REASON ONTO ALL FOUR NEW ROWS AND LEFT
     // THE FOUR OLDER ONES ALONE. `assertExplainedWriterTagTransition` then makes a
     // reason unchangeable without numeric growth, so genesis is the only moment
@@ -435,6 +434,38 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     // Forward slashes only: a backslashed key reads differently on POSIX and
     // Windows CI — spurious reds on one, unlimited headroom on the other.
     expect(rows.filter(([f]) => f.includes('\\'))).toEqual([]);
+  });
+
+  test('the bank literal module is a BARE literal the write can read, never a derivation', () => {
+    // ⛔ THE ONE WAY THE FENCE COULD GO VACUOUS is the module quietly becoming a third
+    // reading of the register — an import of the baseline, a `readFileSync`, a helper that
+    // sums rowTags. Then `--write` would compare the register with itself and the register
+    // arm above would too, and the next bank move would be silent. So the file is held to
+    // a grammar a derivation cannot satisfy: comments stripped, one exported frozen object,
+    // no call other than `Object.freeze(`, integers at every leaf, a total that is the sum
+    // of its own map.
+    const source = readFileSync(join(ROOT, BANK_LITERAL_MODULE), 'utf8');
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '').trim();
+    expect(code.startsWith('export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({')).toBe(true);
+    expect(code.endsWith('});')).toBe(true);
+    expect(code.split('export const ')).toHaveLength(2);
+    const freezes = code.split('Object.freeze(').length - 1;
+    expect(freezes).toBeGreaterThan(0);
+    expect(code.split('(').length - 1, 'a call other than Object.freeze( is a derivation').toBe(freezes);
+    // anchored: this arm has just proved `code` is the live exported literal (startsWith, endsWith and the paren count all hold), so a negative over the same string cannot pass vacuously
+    expect(code).not.toMatch(/\bimport\b|\brequire\b|\bawait\b|=>|\breadFile|\bprocess\b|\bfetch\b/);
+    const leaves = (value) => (typeof value === 'object' && value !== null
+      ? Object.values(value).flatMap(leaves)
+      : [value]);
+    expect(leaves(OBSERVED_SHAPE_BANK_LITERAL).every((leaf) => Number.isInteger(leaf) && leaf >= 0)).toBe(true);
+    expect(Object.isFrozen(OBSERVED_SHAPE_BANK_LITERAL)).toBe(true);
+    expect(Object.keys(OBSERVED_SHAPE_BANK_LITERAL).sort()).toEqual(['addresses', 'byIdentity', 'reads']);
+    const rows = Object.values(OBSERVED_SHAPE_BANK_LITERAL.byIdentity);
+    expect(rows.reduce((sum, row) => sum + row.reads, 0)).toBe(OBSERVED_SHAPE_BANK_LITERAL.reads);
+    expect(rows.reduce((sum, row) => sum + row.addresses, 0)).toBe(OBSERVED_SHAPE_BANK_LITERAL.addresses);
+    // The instrument names the very file this suite imports — a renamed module would
+    // otherwise leave the write reading nothing while this arm read the old bytes.
+    expect(BANK_LITERAL_MODULE).toBe('tests/lint/observedShapeBank.literal.js');
   });
 
   test('the retired count-only row form is REFUSED, and multiplicity is ACCEPTED', () => {

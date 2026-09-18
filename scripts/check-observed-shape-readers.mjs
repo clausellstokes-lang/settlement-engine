@@ -77,7 +77,7 @@ import {
   closeSync, constants, existsSync, fsyncSync, lstatSync, openSync, readFileSync,
   readdirSync, renameSync, statSync, unlinkSync, writeFileSync,
 } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, relative, resolve } from 'node:path';
 import { buildObservedCorpus } from './lib/observed-shape-corpus.mjs';
 import {
@@ -92,11 +92,12 @@ import {
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
+  RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema19Baseline,
+  validateSchema20Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -119,7 +120,7 @@ import {
 } from './lib/observed-shape-governance.mjs';
 import { scanReaders as scanLegacyReaders } from './lib/legacy-reader-shape-scan.mjs';
 import { scanReaders } from './lib/reader-shape-scan.mjs';
-import { validateMigrationBundle } from './migrate-observed-shape-readers.mjs';
+import { declaredBankOf, validateMigrationBundle } from './migrate-observed-shape-readers.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
@@ -149,8 +150,11 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     that carries the register. Moves no row (RETIRED).
  * 19 = schema 18's topology and tag law re-governed to a declared M8/M9 bank of EIGHT:
  *     `factions on locks` is RETIRED because the owner's 2026-09-17 order deleted its
- *     writer. Absorbs the six-row estate shrink the same deletion caused.
- *     THE LIVE AUTHORITY.
+ *     writer. Absorbs the six-row estate shrink the same deletion caused (RETIRED).
+ * 20 = schema 19's topology and tag law UNCHANGED, re-governed to a `--write` that refuses
+ *     to freeze a bank its hand-owned twins do not already state (`assertBankTwins`: the
+ *     walker's literal module on every write, the rung's declared post-bank on a
+ *     migration write). Moves no row. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -165,6 +169,7 @@ export {
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
+  RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1344,7 +1349,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema19Baseline(baseline);
+  validateSchema20Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -1478,6 +1483,136 @@ export function explainedWriterNotice(explainedWriters, entries = EXPLAINED_WRIT
     + ` across ${explainedWriters.bankedIdentities.length} of them on this scan.`
     + ' Each entry names its writer and its key must still be written there, in one of the four measured'
     + ' write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.';
+}
+
+/**
+ * ⭐⭐ THE BANK FENCE (schema 20) — THE WRITE REFUSES TO STRAND THE BANK'S HAND-OWNED TWINS.
+ *
+ * ── THE DEFECT, THREE TIMES ──────────────────────────────────────────────────
+ * The walker keeps HAND-OWNED twins of register figures, and a twin went stale three
+ * separate times, each landing the suite red at a commit whose diff explained nothing:
+ * TE-INSTR-1 (the triple `reads`/`identities`/`files`, literal beside a register that
+ * held the same three), the WAR landing `18df1bb3d` (the triple moved beneath a train in
+ * flight), and `1637f85d1` on 2026-09-18 — the schema-19 re-freeze `fe021a487` moved the
+ * register's bank 62/41 -> 60/39 touching exactly ONE file, the walker's literal stayed at
+ * 62/41, and the walker was RED AT THE TIP ITSELF, blocking every later lane's gate until
+ * three lanes had independently reproduced it against a pristine archive.
+ *
+ * The triple was cured by reading it from the register (TE-INSTR-1 repair 2). The BANK
+ * could not be: it is the one figure a derived re-freeze may never RAISE, so it keeps a
+ * hand-written literal by ruling, and a red on that literal is the governed event
+ * announcing itself. The ruling is sound and is NOT undone here — deriving the bank from
+ * the register would make the walker's arm a self-comparison and silence the next move.
+ *
+ * ── WHY THE TWIN STRANDS, STRUCTURALLY ───────────────────────────────────────
+ * The act that moves the register is THIS SCRIPT'S `--write`, a tool run, landed in a
+ * commit of its own; the reasoning that knows the new figure is a rung docblock, prose;
+ * and the twin lives in a test file the tool never read. Three homes, no edge between
+ * them. Nothing short of the write itself reading the twin fires at the moment of the
+ * act: a pre-commit hook resolves to the MAIN checkout's `.husky/pre-commit` in every
+ * worktree (husky's shim reads `$(dirname "$(dirname "$0")")`), and a test-time assertion
+ * fires at the next tip — which is the failure, not the fence.
+ *
+ * ── THE FENCE: THREE INDEPENDENT PRODUCTIONS, PAIRWISE COMPARED ─────────────
+ *   1. THE LITERAL — `tests/lint/observedShapeBank.literal.js`, hand-owned, the whole
+ *      register-side bank declaration: the total pair AND the per-identity map (the
+ *      walker held BOTH by hand, and a fence on the total alone would have let the map
+ *      strand at the very next move). The walker pins that file to be a BARE literal —
+ *      no import, no call — so it can never quietly become a derivation.
+ *   2. THE REGISTER — derived by this write from one scan (`bankOf`).
+ *   3. THE DECLARATION — at a rung, the migration script's `declaredBankOf(target)`: the
+ *      post-bank the rung author MEASURED and wrote down as data, where it used to be a
+ *      sentence in the docblock.
+ * Every `--write` (plain shrink, `--raise-explained-writer`, `--migrate-schema`) refuses
+ * unless LITERAL equals REGISTER; a migration write additionally refuses unless the
+ * DECLARATION equals REGISTER. The walker keeps asserting REGISTER equals LITERAL at the
+ * gate. Nothing is derived from the register on the literal's side; a lane that moves
+ * the bank moves the literal IN THE SAME COMMIT, or the register does not move at all.
+ *
+ * ⚠ THE LITERAL MODULE IS NOT A GOVERNED INPUT, ON PURPOSE. `dirtyInputsFor` watches
+ * `src/`, the register and the eleven tool files; `tests/lint/` is none of those, so a
+ * lane edits the literal FIRST, then runs the write on what is still a clean chain, and
+ * commits both together. Making the module a detector input would cost a rung per bank
+ * shrink, which is a heavier law than the one it replaces.
+ */
+export const BANK_LITERAL_MODULE = 'tests/lint/observedShapeBank.literal.js';
+
+/**
+ * The bank of a register: banked reads across tagged addresses, and the same pair per
+ * DECLARED identity in roster order — a declaration that banks nothing reads 0/0 rather
+ * than vanishing, because "declared and unexercised" and "retired" are different facts.
+ * `rowTags` decides which addresses are banked; `inventory` supplies their multiplicity.
+ */
+export function bankOf(inventory, rowTags, entries = EXPLAINED_WRITER_EXEMPTIONS) {
+  const addresses = Object.entries(rowTags || {}).flatMap(([file, row]) => (
+    Object.keys(row).map((identity) => ({ file, identity, count: inventory[file][identity] }))
+  ));
+  const byIdentity = {};
+  for (const { identity } of entries) {
+    const matches = addresses.filter((address) => address.identity === identity);
+    byIdentity[identity] = {
+      reads: matches.reduce((sum, address) => sum + address.count, 0),
+      addresses: matches.length,
+    };
+  }
+  return {
+    reads: addresses.reduce((sum, address) => sum + address.count, 0),
+    addresses: addresses.length,
+    byIdentity,
+  };
+}
+
+const bankPhrase = ({ reads, addresses }) => (
+  `${reads} banked read(s) across ${addresses} tagged address(es)`
+);
+
+/** The default `readBankLiteral`: the hand-owned module, imported fresh at write time. */
+async function readBankLiteralModule() {
+  const module = await import(pathToFileURL(join(ROOT, BANK_LITERAL_MODULE)).href);
+  return module.OBSERVED_SHAPE_BANK_LITERAL;
+}
+
+/**
+ * The fence itself, run against the baseline a `--write` is ABOUT to freeze and before a
+ * byte is written. Pure over its arguments so the sentinel can drive every refusal.
+ * Returns the derived bank so the write can say what it froze.
+ */
+export function assertBankTwins({
+  next, literal, declared, migration, targetSchema = BASELINE_SCHEMA,
+}) {
+  const derived = bankOf(next.inventory, next.rowTags);
+  if (!literal || typeof literal !== 'object') {
+    throw new Error(`observed-shape bank fence: ${BANK_LITERAL_MODULE} did not yield the hand-owned bank literal;`
+      + ' the write cannot prove the walker\'s twins agree with the register it would freeze.');
+  }
+  if (canonicalJson(literal) !== canonicalJson(derived)) {
+    const drift = Object.keys(derived.byIdentity)
+      .filter((identity) => (
+        canonicalJson(derived.byIdentity[identity]) !== canonicalJson(literal.byIdentity?.[identity])
+      ))
+      .map((identity) => `    ${identity}: register ${JSON.stringify(derived.byIdentity[identity])},`
+        + ` literal ${JSON.stringify(literal.byIdentity?.[identity] ?? null)}`);
+    throw new Error(`observed-shape bank fence: this write would freeze a register banking ${bankPhrase(derived)},`
+      + ` but ${BANK_LITERAL_MODULE} declares ${bankPhrase({ reads: literal.reads, addresses: literal.addresses })}.\n`
+      + (drift.length ? `  per-identity disagreement:\n${drift.join('\n')}\n` : '')
+      + '  The hand-owned literal MUST move in the same commit as the register: edit that module to the register\'s\n'
+      + '  figures above (a shrink is lawful by hand; a growth only ever arrives through --raise-explained-writer or\n'
+      + '  a governed rung, and this write IS that landing), then re-run this write. tests/lint is not a governed\n'
+      + '  input, so the chain stays clean. Never derive the literal from the register — that silences the next move.');
+  }
+  if (migration) {
+    if (!declared || !Number.isSafeInteger(declared.bankedReads) || !Number.isSafeInteger(declared.taggedRows)) {
+      throw new Error(`observed-shape bank fence: the schema-${targetSchema} rung declares no post-move bank;`
+        + ' every rung from 19 onward states its bank as data (`declaredBankOf` in migrate-observed-shape-readers.mjs).');
+    }
+    if (declared.bankedReads !== derived.reads || declared.taggedRows !== derived.addresses) {
+      throw new Error(`observed-shape bank fence: the schema-${targetSchema} rung declares a post-move bank of`
+        + ` ${declared.bankedReads} banked read(s) across ${declared.taggedRows} tagged address(es), but this re-freeze`
+        + ` measured ${bankPhrase(derived)}. A rung's bank is MEASURED, never predicted from the delta: re-measure,`
+        + ' correct the declaration, and re-cut the rung before its write.');
+    }
+  }
+  return derived;
 }
 
 export function sourceFiles(root = ROOT) {
@@ -2585,19 +2720,19 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 19 = schema 18\'s topology and tag law, UNCHANGED, re-governed to a declared',
-      'M8/M9 bank of EIGHT rather than nine. `factions on locks` is RETIRED: the owner\'s',
-      '2026-09-17 order removed every lock control from the dossier and deleted',
-      '`src/components/dossier/LockControls.jsx`, which was the entry\'s named writer, so',
-      'gate 0 could no longer read it and the exemption had to be DELETED rather than',
-      're-pointed — there was no other writer to point it at. This rung retunes nothing, adds',
-      'no mechanism and declares no identity; it RETIRES one and absorbs the estate shrink the',
-      'same deletion caused. Its reconciliation moves SIX rows, five GONE and one DECREASED,',
-      'all on the `locks` shape and all in two files, with NEW and INCREASED both ZERO — a row',
-      'added here would mean the retirement changed a verdict rather than recording one.',
+      'SCHEMA 20 = schema 19\'s topology and tag law, UNCHANGED, re-governed to a `--write` that',
+      'REFUSES to freeze a bank its hand-owned twins do not already state. The walker keeps the',
+      'bank as a LITERAL by ruling (a derived re-freeze may never raise it), and that literal',
+      'stranded at the schema-19 re-freeze: the register moved 62/41 -> 60/39 in a one-file',
+      'commit and the suite was red at its own tip. From this rung the write compares the bank',
+      'it is about to freeze — banked reads across tagged addresses, and the same pair per',
+      'declared identity — against tests/lint/observedShapeBank.literal.js on EVERY write, and',
+      'against the rung\'s own declared post-bank (`declaredBankOf`) on a migration write, and',
+      'refuses before a byte moves. This rung retunes nothing, adds no mechanism, declares and',
+      'retires no identity, and moves NO row: inventory and rowTags are byte-identical to 19\'s.',
       'Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
-      'subset of declared.',
+      `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
       'CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12',
       'language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside',
@@ -2605,7 +2740,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–18 are the RETIRED numeric predecessors.',
+      'Schemas 4–19 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2779,7 +2914,11 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema19Baseline,
+    validateBaseline: validateSchema20Baseline,
+    // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
+    // every refusal: the literal module and the migration script's declared post-bank.
+    readBankLiteral: readBankLiteralModule,
+    declaredBankFor: declaredBankOf,
     assertExplainedWriterRowTags,
     validateBaselineHistory,
     committedInputManifestsFor,
@@ -3126,8 +3265,17 @@ export async function run(argv = [], overrides = {}) {
       predecessorBaseline: baseline,
       raiseReason: command.raiseReason,
     });
+    // ⭐⭐ THE BANK FENCE — the last law before the bytes move, and the reason the walker's
+    // twins can no longer strand behind a one-file re-freeze. See `assertBankTwins`.
+    const bank = assertBankTwins({
+      next,
+      literal: await runtime.readBankLiteral(),
+      declared: command.migrationFlag ? runtime.declaredBankFor(BASELINE_SCHEMA) : null,
+      migration: Boolean(command.migrationFlag),
+    });
     runtime.writeBaseline(next, baselineText);
-    console.log(`froze ${scan.findings.length} finding(s) / ${next.identities} identit(ies) across ${Object.keys(next.inventory).length} file(s)`);
+    console.log(`froze ${scan.findings.length} finding(s) / ${next.identities} identit(ies) across ${Object.keys(next.inventory).length} file(s);`
+      + ` bank ${bankPhrase(bank)}, and ${BANK_LITERAL_MODULE} agrees`);
     return 0;
   }
 

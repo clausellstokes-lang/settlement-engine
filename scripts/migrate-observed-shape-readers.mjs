@@ -161,6 +161,20 @@
  *     ELEVEN detector inputs were byte-identical before this rung was written. See
  *     `LINEAGE_REANCHOR_SCANNER_DELTA_PATHS`.
  *
+ *   schema 18 -> 19 (RETIRED) the same tagged numeric reconciliation, re-governing the
+ *     register to a declared M8/M9 bank of EIGHT after the owner's 2026-09-17 order
+ *     deleted the writer of `factions on locks`. It moves six rows, every one an estate
+ *     shrink. Its full rationale lives beside `EXEMPTION_RETIREMENT_TARGET_SCHEMA`.
+ *
+ *   schema 19 -> 20 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG
+ *     WHOSE SUBJECT IS THE WRITE. Nothing about what the instrument sees or declares
+ *     moves; what moves is what `--write` will consent to freeze: a register whose bank
+ *     the walker's hand-owned literal module does not already state is REFUSED before a
+ *     byte moves, and a migration write is refused unless the rung's own declared
+ *     post-bank (`DECLARED_BANK_BY_TARGET`) agrees with the measurement. It moves NO row.
+ *     Its full rationale — the third stale twin, and why nothing short of the write can
+ *     fence it — lives beside `BANK_FENCE_TARGET_SCHEMA`.
+ *
  * In every family, the predecessor baseline and scan artifacts are
  * canonical, content-addressed inputs sharing one committed source, execution
  * tree, executed corpus and scan configuration. The legacy detector is the
@@ -204,6 +218,7 @@ import {
   validateSchema16Baseline,
   validateSchema17Baseline,
   validateSchema18Baseline,
+  validateSchema19Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -525,6 +540,79 @@ export const LINEAGE_REANCHOR_TARGET_SCHEMA = 18;
  *  `migrate-observed-shape-readers.mjs`, which is itself a member. See
  *  `EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS`. */
 export const EXEMPTION_RETIREMENT_TARGET_SCHEMA = 19;
+
+/* ⭐⭐ THE SCHEMA 19 → 20 RUNG — THE BANK FENCE (2026-09-18).
+ *
+ *  WHAT MOVED, AND IT IS THE WRITE — the first rung whose subject is neither the detector
+ *  (11, 13–16), the corpus (17), the receipt (18) nor the declared roster (9, 11, 19) but
+ *  the act that lands a register: `check-observed-shape-readers.mjs --write`, in every
+ *  mode, now REFUSES to freeze a bank the walker's hand-owned literal does not already
+ *  state, and a `--migrate-schema` write additionally refuses unless the rung's own
+ *  declared post-bank agrees. See `assertBankTwins` there and `DECLARED_BANK_BY_TARGET`
+ *  below.
+ *
+ *  ⭐ WHY THE INSTRUMENT NEEDED IT. The walker keeps the register's bank as a LITERAL by
+ *  ruling — a derived re-freeze may never RAISE the bank, so a hand-written figure is the
+ *  right instrument and a red on it is the governed event announcing itself. That literal
+ *  went stale at the very rung before this one: `fe021a487` re-froze the register at
+ *  schema 19 and took the bank 62/41 → 60/39, touching exactly ONE file, and the walker's
+ *  twin stayed at 62/41 — RED AT THE TIP ITSELF, before any later lane's first car, until
+ *  three lanes had independently reproduced it against a pristine archive (`1637f85d1`).
+ *  It was the THIRD stale twin in that file's history (TE-INSTR-1; the WAR landing
+ *  `18df1bb3d`), and the first two were cured by reading the triple from the register — a
+ *  cure the bank cannot take without becoming a self-comparison. The structural cause is
+ *  that the figure's three homes — the rung's docblock (prose), the walker's literal (a
+ *  test file) and the register (a tool's output) — had no edge between them. This rung
+ *  draws the edges: the docblock's figure becomes DATA the write checks, and the literal
+ *  becomes a MODULE the write reads. Both are still hand-written; neither is derived.
+ *
+ *  ⛔ NOTHING SHORT OF THE WRITE FIRES AT THE MOMENT OF THE ACT. A pre-commit hook was
+ *  weighed and refused with evidence: husky's shim resolves `.husky/pre-commit` from the
+ *  MAIN checkout for every worktree (`$(dirname "$(dirname "$0")")/$n`), so a hook fence
+ *  would be governed by whichever branch the main checkout happens to be on. A test-time
+ *  assertion fires at the next tip, which is the failure this rung exists to prevent. And
+ *  the write is a detector source, so the fence costs exactly this rung — a no-row rung of
+ *  rung 18's shape.
+ *
+ *  ⛔ THIS RUNG MOVES NO ROW, AND THAT IS ITS FENCE. Like 13–16 and 18, and unlike 17 and
+ *  19, its reconciliation must be EMPTY — `predecessorGone`, `predecessorNew`,
+ *  `predecessorIncreased` and `predecessorDecreased` all 0 — and the bank it declares below
+ *  is the bank schema 19 froze, so `inventory` and `rowTags` come out byte-identical. The
+ *  write proves that itself: this rung's re-freeze is the fence's first live exercise.
+ *
+ *  Its delta is THREE instrument paths, the bookkeeping set every verdict-only rung moves:
+ *  the checker (the fence, its live-validator binding, its `_doc` and schema index), the
+ *  baseline library (the 19 → 20 bump, the retired-19 constant and its re-bound validator)
+ *  and this rung. MEASURED against the predecessor's own recorded manifest and re-measured
+ *  after the set was written, because writing it changes this file, which is itself a
+ *  member. See `BANK_FENCE_SCANNER_DELTA_PATHS`. */
+export const BANK_FENCE_TARGET_SCHEMA = 20;
+
+/**
+ * ⭐⭐ THE DECLARED POST-BANK — what a rung's docblock used to say in a sentence, as data
+ * the write can refuse against. From 19 onward every rung states the bank its re-freeze
+ * must land: banked reads across tagged addresses. `check-observed-shape-readers.mjs`
+ * refuses a `--migrate-schema` write whose freshly derived bank disagrees with the live
+ * target's entry, so a figure PREDICTED FROM THE DELTA rather than measured stops the mint
+ * instead of landing as a stale sentence.
+ *
+ * ⚠ ONLY MEASURED FIGURES ENTER. 19's pair is read off the register `fe021a487` froze
+ * (60 banked reads across 39 tagged addresses, over seven of eight declared identities);
+ * 20 moves no row and declares the same. Rungs before 19 recorded no data figure and none
+ * is transcribed from their prose here — a backfilled number nobody measured would be the
+ * stale-numeral class this table exists to refuse. A rung that moves the bank adds its own
+ * entry; a rung that does not carries its predecessor's figure forward BY HAND, so the
+ * declaration is always a statement and never a default.
+ */
+export const DECLARED_BANK_BY_TARGET = Object.freeze({
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+  [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
+});
+
+/** The declared post-bank of a target, or `null` for a rung that predates the law. */
+export function declaredBankOf(targetSchema) {
+  return DECLARED_BANK_BY_TARGET[targetSchema] ?? null;
+}
 
 /**
  * The complete, reviewed detector transition admitted by the retired 6→7 mint.
@@ -851,6 +939,28 @@ export const EXEMPTION_RETIREMENT_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The 19 → 20 delta — the bookkeeping set, THREE paths:
+ *   - `check-observed-shape-readers.mjs` — the bank fence (`bankOf`, `assertBankTwins`,
+ *     the write reading the literal module), the live-validator binding moving from
+ *     `validateSchema19Baseline` to `validateSchema20Baseline`, the register's `_doc`
+ *     header and the schema index;
+ *   - `observed-shape-baseline.mjs` — the 19 → 20 bump, the retired-19 constant and its
+ *     re-bound validator;
+ *   - `migrate-observed-shape-readers.mjs` — this rung and `DECLARED_BANK_BY_TARGET`.
+ *
+ * ⛔ THREE RATHER THAN FOUR, as 15 → 16, 17 → 18 and 18 → 19 were three: the subject is
+ * the write, which lives in a bookkeeping file. The literal module the write reads is a
+ * test-side file and NOT a governed input, by design (a bank shrink must stay a hand
+ * edit, not a rung). An extra path here, or one of these three remaining byte-identical,
+ * is a different migration and fails closed.
+ */
+export const BANK_FENCE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -885,6 +995,8 @@ const LINEAGE_REANCHOR_SCANNER_TRANSITION_POLICY =
   'schema-17-to-18-exact-scanner-transition-v1';
 const EXEMPTION_RETIREMENT_SCANNER_TRANSITION_POLICY =
   'schema-18-to-19-exact-scanner-transition-v1';
+const BANK_FENCE_SCANNER_TRANSITION_POLICY =
+  'schema-19-to-20-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -922,6 +1034,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [STRESS_TOPOLOGY_TARGET_SCHEMA]: COMPANION_GATE_TARGET_SCHEMA,
   [LINEAGE_REANCHOR_TARGET_SCHEMA]: STRESS_TOPOLOGY_TARGET_SCHEMA,
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: LINEAGE_REANCHOR_TARGET_SCHEMA,
+  [BANK_FENCE_TARGET_SCHEMA]: EXEMPTION_RETIREMENT_TARGET_SCHEMA,
 });
 
 /**
@@ -968,6 +1081,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 18
   // as schema 18 after the live number moves past it.
   [LINEAGE_REANCHOR_TARGET_SCHEMA]: validateSchema18Baseline,
+  // The schema-20 rung's own predecessor. `validateSchema19Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 19
+  // as schema 19 after the live number moves past it.
+  [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: validateSchema19Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -1449,6 +1566,18 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // re-recorded anywhere in that same landing is exactly the movement targets 9 and 10
     // declared reviewable. Refusing it would refuse the retirement for a movement that
     // belongs to the owner's change rather than to the instrument.
+    reviewableUnscannedMovement: true,
+  })],
+  [BANK_FENCE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: BANK_FENCE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: BANK_FENCE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never
+    // retroactive. `unscannedInputDigestOf` is the SUBJECT tree minus the SCAN tree, and
+    // the subject tree is `src/**`; this rung touches three files under `scripts/` and a
+    // test-side literal module, none of them subject paths, so the digest cannot move BY
+    // THIS RUNG. The permission is carried because the class is lawful, not because this
+    // rung exercises it.
     reviewableUnscannedMovement: true,
   })],
   [STABLE_CORE_TARGET_SCHEMA, Object.freeze({
@@ -2503,7 +2632,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : EXEMPTION_RETIREMENT_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : BANK_FENCE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -2511,8 +2640,10 @@ export function run(argv = process.argv.slice(2)) {
     GENESIS_TIES_TARGET_SCHEMA, DEAD_DEPENDENCY_TARGET_SCHEMA,
     PRESET_LIGHT_TARGET_SCHEMA, STABLE_CORE_TARGET_SCHEMA,
     COMPANION_GATE_TARGET_SCHEMA, STRESS_TOPOLOGY_TARGET_SCHEMA,
-    LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (live exemption-retirement leaf),`
+    LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
+    BANK_FENCE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${BANK_FENCE_TARGET_SCHEMA} (live bank-fence leaf),`
+      + ` ${EXEMPTION_RETIREMENT_TARGET_SCHEMA} (retired exemption-retirement leaf),`
       + ` ${LINEAGE_REANCHOR_TARGET_SCHEMA} (retired lineage-reanchor leaf),`
       + ` ${STRESS_TOPOLOGY_TARGET_SCHEMA} (retired stress-topology leaf),`
       + ` ${COMPANION_GATE_TARGET_SCHEMA} (retired companion-gate leaf),`

@@ -291,7 +291,17 @@ export const RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA = 17;
  *  this constant exists so a schema-18 PREDECESSOR is still validated as schema 18 after
  *  the live number moves past it. */
 export const RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA = 18;
-export const BASELINE_SCHEMA = 19;
+/** The RETIRED exemption-retirement definition — schema 20's predecessor. Same tagged
+ *  topology envelope and the same eight-identity declared bank; schema 20 re-governs it to
+ *  a `--write` that REFUSES to freeze a bank its hand-owned twins do not already state —
+ *  the walker's literal module on every write and, at a rung, the rung's own declared
+ *  post-bank. Like 13, 14, 15, 16 and 18 — and unlike 17 and 19 — it moves no row at all:
+ *  the fence is a law on the WRITE, not on the detector, and the register it re-freezes is
+ *  byte-identical in inventory and rowTags. Never redefined, never deleted — a live
+ *  baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-19
+ *  PREDECESSOR is still validated as schema 19 after the live number moves past it. */
+export const RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA = 19;
+export const BASELINE_SCHEMA = 20;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -840,11 +850,10 @@ export function validateSchema17Baseline(baseline) {
   );
 }
 
-/** The RETIRED authority — schema 18's tagged envelope re-governed to a declared M8/M9
- *  bank of EIGHT rather than nine. Re-bound to its own LITERAL now that the authority has
- *  moved to 19, exactly as its predecessors were: a retired validator that reads
- *  `BASELINE_SCHEMA` stops validating the rung it is named after the moment the number
- *  moves. */
+/** RETIRED — schema 18's tagged envelope re-governed to a declared M8/M9 bank of EIGHT
+ *  rather than nine. Bound to its own LITERAL, exactly as every retired validator above is:
+ *  a retired validator that reads `BASELINE_SCHEMA` stops validating the rung it is named
+ *  after the moment the number moves. */
 export function validateSchema18Baseline(baseline) {
   return validateLeafBaseline(
     baseline,
@@ -853,10 +862,21 @@ export function validateSchema18Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 19's tagged envelope, re-governed by schema 20 to a write
+ *  that refuses to strand the bank's hand-owned twins. Re-bound to its own LITERAL now that
+ *  the authority has moved to 20, for the same reason as every retired validator above. */
+export function validateSchema19Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema19Baseline(baseline) {
+export function validateSchema20Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

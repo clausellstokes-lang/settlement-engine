@@ -16,7 +16,10 @@ import {
   assertExplainedWriterTagTransition,
   assertLanguageSurfaceResidualKeys,
   assertShapeFamilyDebtPreserved,
+  assertBankTwins,
   authoredInputHistoryCommits,
+  BANK_LITERAL_MODULE,
+  bankOf,
   BASELINE_SCAN_MODE,
   BASELINE_SCHEMA,
   CLASS_A_PROTECTED_IDENTITIES,
@@ -38,6 +41,7 @@ import {
   RETIRED_PROSE_REGEN_BASELINE_SCHEMA,
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
+  RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -64,6 +68,7 @@ import {
   validateSchema15Baseline,
   validateSchema18Baseline,
   validateSchema19Baseline,
+  validateSchema20Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -77,6 +82,10 @@ import {
   scannerToolDigestOf,
   validateScanArtifact,
 } from '../../scripts/lib/observed-shape-governance.mjs';
+import {
+  BANK_FENCE_TARGET_SCHEMA,
+  declaredBankOf,
+} from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
 const HASH_B = 'b'.repeat(64);
@@ -194,6 +203,27 @@ const pathOf = (file) => {
   return marker >= 0 ? normalized.slice(marker + 6) : normalized;
 };
 
+/**
+ * The bank a fixture's findings derive to, as the write will see it — by the SAME rule
+ * `rowTagsOf` applies: every declared identity present in the inventory is tagged. Used
+ * to satisfy the bank fence's hand-owned sides by default, so an arm about something
+ * else is not refused by a twin it never moved; the fence arms below override it.
+ */
+const bankOfFindings = (findings) => {
+  const inventory = artifactInventoryOf(BASELINE_SCAN_MODE, findings);
+  const declared = new Set(EXPLAINED_WRITER_EXEMPTIONS.map(({ identity }) => identity));
+  const rowTags = {};
+  for (const [file, row] of Object.entries(inventory)) {
+    for (const identity of Object.keys(row)) {
+      if (!declared.has(identity)) continue;
+      if (!rowTags[file]) rowTags[file] = {};
+      rowTags[file][identity] = { reason: 'fixture', rule: 'explained-writer' };
+    }
+  }
+  return bankOf(inventory, rowTags);
+};
+const declaredPairOf = ({ reads, addresses }) => ({ bankedReads: reads, taggedRows: addresses });
+
 const scanRuntime = ({ corpus = healthyCorpus(), findings = [findingOf()], stats = healthyStats() } = {}) => {
   const calls = [];
   const writes = [];
@@ -227,6 +257,11 @@ const scanRuntime = ({ corpus = healthyCorpus(), findings = [findingOf()], stats
       baselineExists: () => { calls.push('baseline-exists'); return true; },
       readBaseline: () => { calls.push('baseline-read'); throw new Error('baseline read'); },
       writeBaseline: () => { calls.push('baseline-write'); throw new Error('baseline write'); },
+      // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, satisfied by default from the fixture's own
+      // findings (lazily — an exact-origin fixture never reaches a write). The fence arms
+      // override both to construct the stale and mismatched cases.
+      readBankLiteral: async () => bankOfFindings(findings),
+      declaredBankFor: () => declaredPairOf(bankOfFindings(findings)),
     },
   };
 };
@@ -1330,6 +1365,102 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
   });
 
   /**
+   * ⭐⭐ THE BANK FENCE (schema 20) — THE WRITE READS THE WALKER'S TWIN AND REFUSES TO
+   * STRAND IT. Driven through the real write path with the two hand-owned sides
+   * overridden, because the failure this fences is precisely "the tool could not see the
+   * twin": a fence proved only on `assertBankTwins` in isolation would not prove the
+   * write calls it before the bytes move.
+   */
+  test('the bank fence: a --write whose register would disagree with the hand-owned literal is REFUSED before the write, naming both sides', async () => {
+    const file = 'src/lib/saves.js';
+    const held = leafFindingOf({ file, key: 'ghost', shapes: ['record'] });
+    const banked = leafFindingOf({ file, key: 'neighbourNetwork', shapes: ['settlement'], pos: 40 });
+    const bankedTwice = leafFindingOf({ file, key: 'neighbourNetwork', shapes: ['settlement'], pos: 50 });
+
+    // THE POSITIVE ARM FIRST, so the refusals below are refusals of the fence and not of
+    // some other law: a lawful shrink of the bank (two banked reads become one) whose
+    // literal was moved in the same act lands, and the frozen register banks 1/1.
+    const moved = maintenanceRuntime({ current: [held, banked], frozen: [held, banked, bankedTwice] });
+    await expect(run(['--write'], moved.overrides)).resolves.toBe(0);
+    expect(moved.baselineWrites).toHaveLength(1);
+    expect(bankOf(moved.baselineWrites[0].inventory, moved.baselineWrites[0].rowTags)).toMatchObject({
+      reads: 1, addresses: 1, byIdentity: { 'neighbourNetwork on settlement': { reads: 1, addresses: 1 } },
+    });
+
+    // THE STRANDED TWIN — the exact shape of fe021a487: the register shrinks 2/1 → 1/1 and
+    // the literal still says 2/1. Refused, nothing written, both figures in the message.
+    const stranded = maintenanceRuntime({ current: [held, banked], frozen: [held, banked, bankedTwice] });
+    stranded.overrides.readBankLiteral = async () => bankOfFindings([held, banked, bankedTwice]);
+    await expect(run(['--write'], stranded.overrides)).rejects.toThrow(
+      /bank fence: this write would freeze a register banking 1 banked read\(s\) across 1 tagged address\(es\), but tests\/lint\/observedShapeBank\.literal\.js declares 2 banked read\(s\) across 1 tagged address\(es\)[\s\S]*neighbourNetwork on settlement[\s\S]*MUST move in the same commit/,
+    );
+    expect(stranded.baselineWrites).toHaveLength(0);
+
+    // THE SECOND TWIN — a total that agrees while the per-identity map does not. This is
+    // the case a fence on the total alone would have waved through.
+    const swapped = maintenanceRuntime({ current: [held, banked], frozen: [held, banked] });
+    const agreed = bankOfFindings([held, banked]);
+    swapped.overrides.readBankLiteral = async () => ({
+      ...agreed,
+      byIdentity: {
+        ...agreed.byIdentity,
+        'neighbourNetwork on settlement': { reads: 0, addresses: 0 },
+        'stresses on settlement': { reads: 1, addresses: 1 },
+      },
+    });
+    await expect(run(['--write'], swapped.overrides))
+      .rejects.toThrow(/bank fence[\s\S]*per-identity disagreement[\s\S]*stresses on settlement/);
+    expect(swapped.baselineWrites).toHaveLength(0);
+
+    // A MODULE THAT YIELDS NOTHING is refused too — a missing or renamed literal must not
+    // read as "no twin to keep", which would be the fence failing open.
+    const missing = maintenanceRuntime({ current: [held, banked], frozen: [held, banked] });
+    missing.overrides.readBankLiteral = async () => undefined;
+    await expect(run(['--write'], missing.overrides)).rejects.toThrow(/did not yield the hand-owned bank literal/);
+    expect(missing.baselineWrites).toHaveLength(0);
+
+    // THE REASONED RAISE IS FENCED THE SAME WAY: the bank may grow through it, and the
+    // literal must already say so.
+    const raisedStale = maintenanceRuntime({ current: [held, banked, bankedTwice], frozen: [held, banked] });
+    raisedStale.overrides.readBankLiteral = async () => bankOfFindings([held, banked]);
+    await expect(run([
+      '--write', '--raise-explained-writer=CR-H26 focused maintenance',
+    ], raisedStale.overrides)).rejects.toThrow(/bank fence: this write would freeze a register banking 2 banked read\(s\)/);
+    expect(raisedStale.baselineWrites).toHaveLength(0);
+  });
+
+  test('the bank fence: a migration write is refused unless the rung DECLARED the bank it measures, and the live rung declares one', () => {
+    // The pure fence over a synthetic register, so every refusal is named without a
+    // full migration drive; the write-path wiring is proved by the arm above and by the
+    // schema-20 genesis itself, which ran through it.
+    const next = {
+      inventory: { 'src/a.js': { 'neighbourNetwork on settlement': 2, 'ghost on record': 1 } },
+      rowTags: { 'src/a.js': { 'neighbourNetwork on settlement': { reason: 'r', rule: 'explained-writer' } } },
+    };
+    const literal = bankOf(next.inventory, next.rowTags);
+    expect(literal).toMatchObject({ reads: 2, addresses: 1 });
+    expect(assertBankTwins({ next, literal, declared: null, migration: false })).toEqual(literal);
+    expect(assertBankTwins({
+      next, literal, declared: { bankedReads: 2, taggedRows: 1 }, migration: true, targetSchema: 20,
+    })).toEqual(literal);
+    // Predicted from the delta rather than measured: refused, and the rung is re-cut.
+    expect(() => assertBankTwins({
+      next, literal, declared: { bankedReads: 3, taggedRows: 1 }, migration: true, targetSchema: 20,
+    })).toThrow(/schema-20 rung declares a post-move bank of 3 banked read\(s\) across 1 tagged address\(es\), but this re-freeze measured 2 banked read\(s\) across 1 tagged address\(es\)[\s\S]*MEASURED, never predicted/);
+    // A rung that declared nothing cannot re-freeze at all.
+    expect(() => assertBankTwins({ next, literal, declared: null, migration: true, targetSchema: 20 }))
+      .toThrow(/schema-20 rung declares no post-move bank/);
+    // ⛔ THE LIVE RUNG DECLARES ITS BANK, AND SO DOES THE ONE IT RETIRED — 19's is the
+    // figure `fe021a487` froze, read off that register, never predicted.
+    expect(declaredBankOf(BANK_FENCE_TARGET_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(BANK_FENCE_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
+    expect(declaredBankOf(18)).toBeNull();
+    // The instrument names the module the walker imports.
+    expect(BANK_LITERAL_MODULE).toBe('tests/lint/observedShapeBank.literal.js');
+  });
+
+  /**
    * GATE 1 — `git log --all -S"<key>:" -- src/` returning ZERO means no human
    * ever supplied the field, so an authored-input (M8) story is IMPOSSIBLE. It
    * can only CLOSE the hypothesis, never open it, which is why it is a
@@ -1377,7 +1508,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // removed every dossier lock control deleted its named writer, and gate 0 refuses an
     // entry whose writer it cannot read. Its reconciliation is NOT empty: six rows move,
     // because the ESTATE shrank, not because the instrument's reach changed.
-    expect(BASELINE_SCHEMA).toBe(19);
+    // ⭐ SCHEMA 20 (2026-09-18): schema 19's envelope re-governed to a `--write` that refuses
+    // to freeze a bank its hand-owned twins do not already state — the walker's literal
+    // module on every write, the rung's declared post-bank on a migration write. A law on
+    // the WRITE, not the detector; verdict-only, its reconciliation is EMPTY.
+    expect(BASELINE_SCHEMA).toBe(20);
+    expect(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA).toBe(19);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
     expect(RETIRED_PROSE_REGEN_BASELINE_SCHEMA).toBe(10);
@@ -1393,10 +1529,13 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     const live = validBaseline({ corpus, stats, frozen: [leafFindingOf()] });
     expect(live.schema).toBe(BASELINE_SCHEMA);
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
-    // rung, 18 at the exemption-retirement rung; the LIVE envelope is validated by 19 now.
-    expect(validateSchema19Baseline(live)).toBe(live);
-    // … and 18 keeps its own literal, so it refuses the live envelope it used to accept.
+    // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
+    // envelope is validated by 20 now.
+    expect(validateSchema20Baseline(live)).toBe(live);
+    // … and 18 and 19 keep their own literals, so each refuses the live envelope it used
+    // to accept.
     expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
+    expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1530,7 +1669,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(19);
+    expect(BASELINE_SCHEMA).toBe(20);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 
