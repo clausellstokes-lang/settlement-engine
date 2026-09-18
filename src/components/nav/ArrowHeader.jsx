@@ -50,10 +50,18 @@
  * accessible name. aria-current follows `view === id`, as the retired ribbon did. The home
  * control keeps its name, "SettlementForge home", and stays outside the nav. On phones and
  * coarse pointers every control grows to 44 x 44 (downward, into the transparent space under
- * the band, which main's reserve keeps clear of content). The active page is underlined with
- * a PARCH_100 rule under its painted word (8.3:1 or more on those rows of wood), kept in that
- * colour under forced colours (the ground is the painting, which forced colours leave alone).
- * Hover draws a soft glow on the word or plate itself (ArrowControl), on devices that hover.
+ * the band, which main's reserve keeps clear of content). ON A FINE POINTER EVERY CONTROL
+ * STILL TAKES 40 ROWS, the same way: below about 1255 px of page the painted band is under
+ * 40 px tall (32.6 at 1024), so the six words were smaller targets on a laptop than the
+ * guideline floor while phones were already padded to 44. The floor grows the BOX only —
+ * height, never x or width — so the painted word, its plaque and its glow stay exactly where
+ * the geometry puts them.
+ *
+ * The active page carries a PARCH_100 PLAQUE under its painted word (arrowGeometry.js
+ * PLAQUE_ROWS: ten rows at 8.49:1 on those rows of wood, the SIGN IN slip's own motif rather
+ * than a new painting), kept in that colour under forced colours (the ground is the painting,
+ * which forced colours leave alone). Hover — and keyboard focus — draws a soft glow on the
+ * word or plate itself (ArrowControl), on devices that hover.
  *
  * THE FIRST FRAME. The width store is read during the first render, before the app is in the
  * document, so a classic scrollbar that appears once the page is tall is not in that width.
@@ -78,6 +86,12 @@ import {
 
 /** The touch target floor (Apple HIG / Material; e2e/mobile-pointer-targets.spec.js). */
 const TOUCH_TARGET = 44;
+
+/**
+ * The fine-pointer target floor. Height only: padTarget also re-centres x and grows width,
+ * and the nav rects run binding to binding with no room between them.
+ */
+const POINTER_TARGET = 40;
 
 /**
  * The bottom bar's height as App.jsx renders it: a 44 px seat plus its 1 px top rule (measured
@@ -142,7 +156,9 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
   const layout = layoutArrow({ clientWidth, full: !narrow, short });
   const roomy = phone || coarsePointer();
   /** @param {{ x: number, y: number, w: number, h: number }} r */
-  const target = (r) => (roomy ? padTarget(r, TOUCH_TARGET, layout.width) : r);
+  const target = (r) => (roomy
+    ? padTarget(r, TOUCH_TARGET, layout.width)
+    : { ...r, h: Math.max(r.h, POINTER_TARGET) });
   const { bandPx, hangPx, barbHangPx, mode } = layout;
   const feather = useSyncExternalStore(onScroll, readFeather, serverFeather);
   const [, reflow] = useReducer((n) => n + 1, 0);
@@ -179,7 +195,7 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
               {NAV.map(({ id, label }) => {
                 const rect = target(hits.nav[id]);
                 const active = view === id;
-                const rule = hits.underline[id];
+                const rule = hits.plaque[id];
                 return (
                   <ArrowControl
                     key={id}

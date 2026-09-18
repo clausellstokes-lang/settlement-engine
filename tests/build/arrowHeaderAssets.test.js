@@ -47,7 +47,7 @@ import {
   ARROW_FILLER_SRC, ARROW_STRIP_SRC, BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, CUTS, FE,
   FEATHER_FROM, FEATHER_X1, FILLER_H, FILLER_W, GLOW_PAD, HANG_H, LOGO_PLATE, NAV_HIT, NAV_WORD,
   PLATE, PLATE_RIVETS, ROW0_OPAQUE, SLIP, SLOT_TONE, SEAM_BAND_TO, SEAM_HANG_FROM, STRIP_H,
-  STRIP_W, UNDERLINE_ROW, WOOD_RUNS, WORD_ROWS,
+  PLAQUE_PAD, PLAQUE_ROWS, STRIP_W, UNDERLINE_ROW, WOOD_RUNS, WORD_ROWS,
 } from '../../src/components/nav/arrowGeometry.js';
 import { legacy } from '../../src/design/tokens.js';
 
@@ -297,7 +297,7 @@ describe('(d) cuts, wood runs and words', () => {
       if (inked[0] !== word.x0 || inked[inked.length - 1] !== word.x1 - 1) {
         failures.push(`${id}: lettering spans ${inked[0]}..${inked[inked.length - 1] + 1}, table says ${word.x0}..${word.x1}`);
       }
-      // Lettering rows: caps and descenders only, never on the underline rows.
+      // Lettering rows: caps and descenders only, never on the plaque's rows.
       let top = STRIP_H, bottom = -1;
       for (const x of columns(word)) {
         for (let y = 14; y < 61; y += 1) {
@@ -305,9 +305,11 @@ describe('(d) cuts, wood runs and words', () => {
         }
       }
       if (top < WORD_ROWS.top || bottom >= WORD_ROWS.bottom) failures.push(`${id}: lettering rows ${top}..${bottom}`);
-      for (const x of columns(word)) {
-        for (let y = UNDERLINE_ROW - 1; y < UNDERLINE_ROW + 3; y += 1) {
-          if (luma(px(strip, x, y)) < 0.45 * ROW_MEDIAN[y]) failures.push(`${id}: ink on underline row ${y} at ${x}`);
+      // The plaque covers its own columns for all of its rows, so lettering anywhere under
+      // it would be hidden by the active-page mark rather than marked by it.
+      for (const x of columns({ x0: word.x0 - PLAQUE_PAD, x1: word.x1 + PLAQUE_PAD })) {
+        for (let y = UNDERLINE_ROW - 1; y < UNDERLINE_ROW + PLAQUE_ROWS; y += 1) {
+          if (luma(px(strip, x, y)) < 0.45 * ROW_MEDIAN[y]) failures.push(`${id}: ink on plaque row ${y} at ${x}`);
         }
       }
     }
@@ -474,14 +476,17 @@ describe('(g) contrast on real wood pixels', () => {
     expect(contrast(INK, PARCH_100)).toBeGreaterThan(15);
   });
 
-  it('the underline rows under every word take PARCH_100 at 8:1 or more and refuse INK', () => {
+  it("the plaque's ten rows under every word take PARCH_100 at 8:1 or more and refuse INK, pad included", () => {
     const failures = [];
     for (const [id, word] of Object.entries(NAV_WORD)) {
       const values = [];
-      for (let y = UNDERLINE_ROW; y < UNDERLINE_ROW + 2; y += 1) for (const x of columns(word)) values.push(lum(px(strip, x, y)));
+      const field = { x0: word.x0 - PLAQUE_PAD, x1: word.x1 + PLAQUE_PAD };
+      for (let y = UNDERLINE_ROW; y < UNDERLINE_ROW + PLAQUE_ROWS; y += 1) for (const x of columns(field)) values.push(lum(px(strip, x, y)));
       const parch = contrast(PARCH_100, percentile(values, 0.99));
       const ink = contrast(INK, percentile(values, 0.01));
       if (parch < 8 || ink >= 1.5) failures.push(`${id}: PARCH_100 ${parch.toFixed(2)}, INK ${ink.toFixed(2)}`);
+      // The plaque must also stay inside the rows PARCH_100 clears 3:1 on at all (37 to 66).
+      if (UNDERLINE_ROW + PLAQUE_ROWS > 67) failures.push(`${id}: plaque leaves the certified rows`);
     }
     expect(failures).toEqual([]);
   });

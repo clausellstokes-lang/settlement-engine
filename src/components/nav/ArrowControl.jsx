@@ -14,6 +14,11 @@
  *     bronze is 1.26:1 on the median wood. So the ring is INK (--sf-focus, set here) with a
  *     PARCH_100 band just inside it while the control has keyboard focus; the two tones
  *     are about 15:1 against each other, so one of them always contrasts with the wood.
+ *   - KEYBOARD FOCUS LIGHTS THE SAME GLOW the pointer does, beside the ring. The ring says
+ *     "focus is here"; the glow is what makes the painted WORD itself brighter, and a
+ *     keyboard reader had the ring without it. The two states are independent — leaving with
+ *     the pointer does not put out a glow the keyboard lit — and a tap still lights nothing,
+ *     because the pointer half is gated on a device that really hovers.
  *   - HOVER IS A SOFT GLOW ON THE WORD OR PLATE, not a wash over the whole region: a radial
  *     PARCH_100 light (the house color-mix idiom, no translucent literal) inside the glow box
  *     the header passes, fading out before the box's edge, so the bindings and the plain wood
@@ -90,7 +95,7 @@ export default function ArrowControl({ rect, glow, children, style, onFocus, onB
         ...style,
       }}
     >
-      {lit && glow && (
+      {(lit || ring) && glow && (
         <span
           aria-hidden="true"
           data-sf-arrow-glow=""
