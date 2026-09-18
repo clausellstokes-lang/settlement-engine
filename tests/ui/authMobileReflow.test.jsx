@@ -39,7 +39,10 @@ function installMatchMedia(initialMatches) {
 }
 
 // A minimal store stub: AuthPanel reads a handful of actions; none fire here.
+// `auth` is read by the full-page routes (SignInPage / RegisterPage), which
+// redirect once a session exists — 'anon' keeps them on the form.
 const storeState = {
+  auth: { tier: 'anon', loading: false },
   authSignUp: vi.fn(),
   authSignIn: vi.fn(),
   authResetPassword: vi.fn(),
@@ -58,6 +61,9 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
+
+// The full-page auth routes navigate on mount once authed; keep them inert.
+vi.mock('../../src/hooks/useRoute.js', () => ({ navigate: vi.fn(), navigatePath: vi.fn() }));
 
 beforeEach(() => {
   // Hide OAuth so the panel renders its plainest single-column form.
@@ -81,6 +87,30 @@ async function loadPanel() {
   vi.resetModules();
   return (await import('../../src/components/auth/AuthPanel.jsx')).default;
 }
+
+// ⛔ THE DOUBLED SUBTITLE (cured 2026-09-18). AuthPanel renders auth.signinSubtitle
+// / auth.signupSubtitle itself, and the two full-page routes ALSO passed the same
+// token to AuthPageShell's `subtitle`, so /signin and /register each printed the
+// sentence twice, one line apart, under the card header. The panel keeps it (the
+// modal reads the same key from the same writer); the pages dropped their copy.
+describe('the full-page auth routes render the shared subtitle exactly once', () => {
+  test.each([
+    ['../../src/components/auth/SignInPage.jsx', 'auth.signinSubtitle', undefined],
+    ['../../src/components/auth/RegisterPage.jsx', 'auth.signupSubtitle', { tier: 'Wanderer' }],
+  ])('%s', async (modulePath, key, vars) => {
+    installMatchMedia(false);
+    vi.resetModules();
+    const { t: copy } = await import('../../src/copy/index.js');
+    const RoutePage = (await import(modulePath)).default;
+    render(<RoutePage />);
+
+    const sentence = copy(key, vars);
+    // Control: the sentence is real copy and the page rendered it at all. Without
+    // this, a page that crashed to nothing would green the count below.
+    expect(sentence).not.toBe(key);
+    expect(screen.getAllByText(sentence).length, `${key} is rendered more than once`).toBe(1);
+  });
+});
 
 describe('AuthModal — mobile scroll-bound', () => {
   test('mobile: the dialog is height-bounded and the form body scrolls', async () => {

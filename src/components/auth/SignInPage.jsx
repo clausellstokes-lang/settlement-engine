@@ -42,12 +42,18 @@ export default function SignInPage() {
 
   return (
     <AuthPageShell
-      // Route title + subtitle through the shared auth tokens (cross-surface
-      // consistency, mirroring RegisterPage): the page formerly hand-wrote both,
-      // drifting from the modal/panel copy. Wording stays owned by the copy/voice
-      // workstream — this is the structural fix so page and modal read identically.
+      // Route the title through the shared auth token (cross-surface consistency,
+      // mirroring RegisterPage): the page formerly hand-wrote it, drifting from the
+      // modal/panel copy.
+      //
+      // ⛔ NO `subtitle` HERE, DELIBERATELY (2026-09-18). AuthPanel renders
+      // auth.signinSubtitle itself, directly under this card header (AuthPanel.jsx,
+      // the <p> above the error slot), so passing the same token to the shell
+      // printed the sentence TWICE, one line apart, on every visit to /signin. The
+      // panel keeps it because the panel is the shared writer — the modal renders
+      // the same line from the same key — so dropping it here leaves exactly one
+      // copy on both surfaces instead of removing it from one.
       title={t('auth.modalTitle')}
-      subtitle={t('auth.signinSubtitle')}
       footer={
         // Two subordinate cross-links: the primary path stays the in-card CTA.
         // The direct "Forgot your password?" link (P8) makes reset a visible

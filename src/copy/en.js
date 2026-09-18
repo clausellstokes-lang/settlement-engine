@@ -89,9 +89,14 @@ export const en = Object.freeze({
       sublineRerolls:   'Rerolls left today: {rerolls}',
     },
     // ── Anonymous cap framed as an unlock ───────────────────────────────
+    // ⛔ THE UNLOCK NAMED SIZES THE READER ALREADY HAD. TIER_GATE.anon.maxTier is
+    // 'town' (store/authSlice.js), so an anonymous visitor reaches thorp through
+    // town already — the headline one line up says so. What signing in actually
+    // adds is city and metropolis (TIER_GATE.free.maxTier 'capital'), plus saves.
+    // "reach thorp through metropolis" sold back three sizes the reader had spent.
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      body:       'Sign in (free) to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -102,7 +107,7 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      unlockTpl: '{signin} to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -179,9 +184,14 @@ export const en = Object.freeze({
   auth: {
     modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
-    subtitle: 'Saves, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbourhood System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
+    // THE SYSTEM IS CALLED THE NEIGHBOUR SYSTEM everywhere it is documented: the
+    // Compendium tab (CompendiumPanel.jsx), its search category, and the Practical
+    // Guide's reference row. Only these auth strings and the checklist said
+    // "Neighbourhood System", which is a different phrase for the same feature on
+    // the two surfaces a new account meets first.
+    subtitle: 'Saves, larger settlements, and the Neighbour System.',
+    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbour System.',
+    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbour System.',
     resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
@@ -648,7 +658,7 @@ export const en = Object.freeze({
       itemRead:        'Read three different tabs',
       itemRail:        'Tap a step in the simulation rail',
       itemSave:        'Save the dossier',
-      itemNeighbour:   'Link a second settlement (Neighbourhood System)',
+      itemNeighbour:   'Link a second settlement (Neighbour System)',
       completeBadge:   'Complete',
     },
   },
@@ -1272,7 +1282,9 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      // The sizes signing in ADDS (see hero.capUnlock): anon already reaches thorp
+      // through town, so naming them here sold the reader what they had.
+      body:     'Sign in (free) to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
