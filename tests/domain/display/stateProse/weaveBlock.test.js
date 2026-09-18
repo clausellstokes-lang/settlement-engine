@@ -168,7 +168,7 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     expect(woven.sentences[2]).toBe('AxDy (Old) is a different place.');
   });
 
-  it('THE PRONOUN BRANCH: a line that already names its own tier noun takes "It", never "The <noun>"', () => {
+  it('THE PRONOUN BRANCH: a line that already names a settlement tier takes "It", never "The <noun>"', () => {
     // ⭐ THE WORST READING MEASURED before the chair's ruling (2026-09-18) — the weave printed
     // "The town is a town, in the ordinary sense", which is a sentence telling a reader that a
     // town is a town. The pronoun is what that case is worth.
@@ -204,12 +204,43 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
       { settlementName: 'Adham', tierNoun: tierNounFor('town') },
     );
     expect(folk.sentences[1]).toBe('The town keeps its townsfolk fed through a hard season.');
-    // …and a line naming a DIFFERENT tier's noun is not naming its own.
-    const other = weaveBlock(
-      ['Adham holds the ford.', 'Adham buys its grain from a village three days out.'],
+    // …and a word that merely CONTAINS a tier is not a tier: "cityward" is not "city".
+    const contains = weaveBlock(
+      ['Adham holds the ford.', 'Adham sends its wool cityward every spring.'],
       { settlementName: 'Adham', tierNoun: tierNounFor('town') },
     );
-    expect(other.sentences[1]).toBe('The town buys its grain from a village three days out.');
+    expect(contains.sentences[1]).toBe('The town sends its wool cityward every spring.');
+  });
+
+  it('ANY TIER counts, not only this settlement\'s — the village-is-a-town reading', () => {
+    // ⭐ THE CHAIR'S SECOND RULING (2026-09-18). The first cut of the branch asked only about
+    // the settlement's OWN noun, so a VILLAGE whose line said "town" — which is how the corpus
+    // writes about a settlement of any size — still came back as "The village is a town, in
+    // the ordinary sense". That is the same defect one tier over, and the pronoun is what it
+    // is worth. Measured before the ruling: 69 of 218 stand-downs named another tier's noun.
+    const village = weaveBlock(
+      ['Weißmoor holds the ford.', 'Weißmoor is a town, in the ordinary sense, and the ordinariness is accurate.'],
+      { settlementName: 'Weißmoor', tierNoun: tierNounFor('village') },
+    );
+    expect(village.sentences[1]).toBe('It is a town, in the ordinary sense, and the ordinariness is accurate.');
+    // The CONTRASTIVE readings the ruling was weighed against read correctly with it too.
+    const contrastive = weaveBlock(
+      ['Adham holds the ford.', 'Adham keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('thorp') },
+    );
+    expect(contrastive.sentences[1]).toBe('It keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.');
+    // …and a possessive across tiers still takes "Its".
+    const possessive = weaveBlock(
+      ['Nothing hems Adham in.', 'Adham\'s record still marks each hard season as bearing on the town.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('thorp') },
+    );
+    expect(possessive.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+    // A line naming NO tier at all keeps "The <noun>", so the arm above is discriminating.
+    const none = weaveBlock(
+      ['Adham holds the ford.', 'Adham buys its grain from a steading three days out.'],
+      { settlementName: 'Adham', tierNoun: tierNounFor('thorp') },
+    );
+    expect(none.sentences[1]).toBe('The thorp buys its grain from a steading three days out.');
   });
 
   it('SENTENCE 0 is untouched by the pronoun branch too', () => {

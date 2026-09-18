@@ -52,10 +52,12 @@
  *
  *   "The town is a town, in the ordinary sense, and the ordinariness is accurate."
  *
- * So the stand-in is CHOSEN rather than fixed. Where the line already names the tier noun as a
- * whole word, the opening becomes "It" — "Its" for a possessive — so that sentence now reads
- * "It is a town, in the ordinary sense". Everywhere else it is still "The <noun>". Sentence 0
- * is untouched by either branch, and no other character moves under either.
+ * So the stand-in is CHOSEN rather than fixed. Where the line already names A SETTLEMENT TIER
+ * as a whole word — any of them, not only this settlement's own, which is the chair's second
+ * ruling and the reason `namesAnyTierNoun` reads `TIER_ORDER` whole — the opening becomes "It",
+ * or "Its" for a possessive. That sentence now reads "It is a town, in the ordinary sense".
+ * Everywhere else it is still "The <noun>". Sentence 0 is untouched by either branch, and no
+ * other character moves under either.
  *
  * ⚠ TWO THINGS THE NEXT READER SHOULD KNOW ABOUT THIS BRANCH. (1) It tests the WHOLE LINE's
  * remainder rather than one grammatical sentence: a composed unit is ONE entry here and may
@@ -128,7 +130,19 @@ function openingNameMatcher(name) {
 }
 
 /**
- * Does this text already name the tier noun as a WHOLE WORD? — the pronoun branch's test.
+ * Does this text already name A SETTLEMENT TIER as a WHOLE WORD? — the pronoun branch's test.
+ *
+ * ⭐ ANY TIER, NOT ONLY THIS SETTLEMENT'S (the chair's second ruling, 2026-09-18), and the
+ * measurement is the whole argument. The first cut of this branch asked only about the
+ * settlement's OWN noun, and on the same 48-settlement corpus that left 69 of 218 stand-downs
+ * putting `The <noun>` into a line that names a DIFFERENT tier — because the corpus writes
+ * "the town" generically about a settlement of any size, which is five tiers out of six. Most
+ * of the sixty-nine read correctly, and read correctly with the pronoun too ("It keeps few
+ * institutions because it needs few; what a larger town does with buildings, this one does
+ * with acquaintance"). One class did not, and it is the reading this branch exists to
+ * prevent, one tier over from where the first cut caught it:
+ *
+ *   "The village is a town, in the ordinary sense, and the ordinariness is accurate."
  *
  * ⛔ SPLIT RATHER THAN MATCHED, and the reason is the two constraints this predicate sits
  * between. A bordered match wants a lookbehind and a lookahead, the negative forms of which
@@ -140,11 +154,11 @@ function openingNameMatcher(name) {
  * `toLowerCase` is the case-insensitive read and NOT a locale API: it is the unconditional
  * Unicode mapping, so it answers the same on every host, which is what THE PROMISE needs.
  * @param {string} text the line's remainder, after the opening name
- * @param {string} noun the tier noun, already lower-case
  * @returns {boolean}
  */
-function namesTierNoun(text, noun) {
-  return text.toLowerCase().split(/[^\p{L}\p{N}_]+/u).includes(noun);
+function namesAnyTierNoun(text) {
+  const words = new Set(text.toLowerCase().split(/[^\p{L}\p{N}_]+/u));
+  return TIER_ORDER.some((tier) => words.has(tier));
 }
 
 /**
@@ -192,9 +206,10 @@ export function weaveBlock(lines, options = {}) {
       opening,
       /** @param {string} match @param {string|undefined} possessive */
       (match, possessive) => {
-        // THE PRONOUN BRANCH (the chair's ruling): a line that already names its own tier noun
-        // takes "It"/"Its" instead, so the weave cannot produce "The town is a town".
-        if (namesTierNoun(line.slice(match.length), noun)) return possessive ? 'Its' : 'It';
+        // THE PRONOUN BRANCH (the chair's rulings): a line that already names ANY settlement
+        // tier takes "It"/"Its" instead, so the weave can produce neither "The town is a town"
+        // nor "The village is a town".
+        if (namesAnyTierNoun(line.slice(match.length))) return possessive ? 'Its' : 'It';
         return `The ${noun}${possessive || ''}`;
       },
     );
