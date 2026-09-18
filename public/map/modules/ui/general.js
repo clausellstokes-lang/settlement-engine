@@ -89,6 +89,20 @@ function showElementLockTip(event) {
 
 const onMouseMove = debounce(handleMouseMove, 100);
 function handleMouseMove() {
+  // SettlementForge fork patch: this handler outlives the packed graph it reads.
+  // restoreDefaultEvents() (modules/ui/editors.js) binds it from the
+  // DOMContentLoaded block in main.js, which runs as soon as checkLoadParameters
+  // returns — and that function fires generateMapOnLoad() WITHOUT awaiting it. So
+  // the viewbox is listening for the whole of the first generation, and again for
+  // the whole of every regeneration, while generate() has already cleared `pack`.
+  // findCell() does not report "no cell" in that window: it THROWS
+  // ("Pack cells not found"), uncaught, from a d3 event listener — which in the
+  // embedded Realm surfaced as console errors in the host page on nothing worse
+  // than moving the mouse across a map that was still being built. No packed
+  // graph means there is no cell under the pointer to describe, which is exactly
+  // the nothing the `i === undefined` line below already treats as "say nothing".
+  // Mirrors findCell's own predicate (`!pack.cells?.p`) so the two cannot drift.
+  if (!window.pack?.cells?.p) return;
   const point = d3.mouse(this);
   const i = findCell(point[0], point[1]); // pack cell id
   if (i === undefined) return;
