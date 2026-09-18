@@ -307,6 +307,7 @@ export default function AccountMenu({
         id={plateId}
         rect={control}
         glow={glow}
+        paintedH={layout.bandPx}
         onClick={toggleMenu}
         onKeyDown={onPlateKey}
         aria-haspopup="menu"
