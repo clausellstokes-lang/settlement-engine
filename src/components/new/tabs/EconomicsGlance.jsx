@@ -80,6 +80,8 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The prosperity header and the at-a-glance tile row.
@@ -105,6 +107,7 @@ export default function EconomicsGlance({
   granary, granaryColor, treasury,
   headerRung = null, economyRung = null, foodRung = null, seasonRung = null,
 }) {
+  const mobile = useIsMobile();
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
 
   return (
@@ -127,8 +130,8 @@ export default function EconomicsGlance({
             </div>}
           </div>
         </div>
-        {eco.situationDesc&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
-        {header?.sentence&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:'8px 0 0',fontStyle:'italic'}}>{header.sentence}</p>}
+        {eco.situationDesc&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
+        {header?.sentence&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'8px 0 0',fontStyle:'italic'}}>{header.sentence}</p>}
       </div>
 
       {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
@@ -142,7 +145,7 @@ export default function EconomicsGlance({
             <div style={{fontSize:FS.xxs,fontWeight:700,color,marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
             {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
-            {drawn?.sentence&&<div style={{fontSize:FS.xxs,color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{drawn.sentence}</div>}
+            {drawn?.sentence&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{drawn.sentence}</div>}
           </div>
         ))}
       </div>

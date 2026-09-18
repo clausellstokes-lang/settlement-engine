@@ -17,6 +17,7 @@ import { LITERARY_TITLE, statusCase } from '../labelLadder.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
@@ -265,10 +266,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {/* DS-POP-3 at `overview.populationDirection` — the direction of the roll read
             against the approach, beside the head count and the access word above. Silent
             until the ring carries two readings, which is what the ring honestly is. */}
-        {populationLine&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,fontStyle:'italic',margin:'0 0 6px',lineHeight:1.5}}>{populationLine}</p>}
+        {populationLine&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,fontStyle:'italic',margin:'0 0 6px',lineHeight:1.5}}>{populationLine}</p>}
         {/* Row 2: character + spatial */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
-          {hist.historicalCharacter&&<p style={{fontSize:FS.sm,color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
+          {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
           <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
             {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
             {r.spatialLayout?.layout&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
@@ -312,8 +313,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px'}}>Active crisis</span>
               </div>
-              <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-              <p style={{fontSize:FS.xs,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
+              <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
+              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
               {(() => {
                 // DS-STR-1, per banner. The desk keys on v.type — the stable machine
                 // identity — never on the label, because two of the fifteen labels differ
@@ -337,7 +338,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                   r, v, { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience },
                 ));
                 return drawn?.sentence ? (
-                  <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
+                  <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
                 ) : null;
               })()}
             </div>
@@ -383,7 +384,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             pulse writeback; Food Security is the declared-live exception,
             re-graded every tick — same carve-out grammar as DefenseTab's
             Threat Assessment caption (Wave R-0). */}
-        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
+        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
@@ -399,7 +400,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}
@@ -446,7 +447,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>
             <div>
-              <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
+              <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
               {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
                 {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
               </div>}
@@ -461,11 +462,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
               </div>
-              {c.issue&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
+              {c.issue&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
               {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
                   badge and issue all still carry their own words; this bands the same
                   quarrel in the town's voice beside them. */}
-              {conflictLines[i]&&<p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5,margin:'4px 0 0',fontStyle:'italic'}}>{conflictLines[i]}</p>}
+              {conflictLines[i]&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'4px 0 0',fontStyle:'italic'}}>{conflictLines[i]}</p>}
             </div>
           </div>;
         })}
@@ -473,9 +474,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
 
       {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
       {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
+        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:proseFontSize(FS.md,mobile),color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
         {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
-        {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
+        {r.pressureSentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
         {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
             R-DST-W4-g: `arrivalScene` is a first-impression artifact composed
             once at generation and never touched here; this is what the approach
@@ -520,8 +521,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen={false} accent="#6b5340">
         <div style={{borderLeft:'3px solid #c8b89a',paddingLeft:12}}>
           {Array.isArray(r.settlementReason)
-            ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
-            :<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{Ti(r.settlementReason?.primary||r.settlementReason)}</p>
+            ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
+            :<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{Ti(r.settlementReason?.primary||r.settlementReason)}</p>
           }
         </div>
       </Section>}
@@ -536,7 +537,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             means. See notableConnectionPoolKey / flagDrivenPoolKey. */}
         <ProseBlock lines={connectionLines} settlementName={r.name} tier={r.tier}
           style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}/>
-        <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
+        <p style={{fontSize: proseFontSize(FS['12.5'],mobile),...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
             reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
             navigation control). Falls back to nothing when no navigator is wired. */}
@@ -558,7 +559,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           </div>}
           {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
             <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
-            <div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
+            <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
           </div>}
         </div>
       </Section>}
@@ -576,7 +577,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           {r.spatialLayout.quarters.map((q,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
               <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
-              <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
+              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
               {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
             </div>
           ))}
@@ -594,13 +595,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {r.coherenceNotes?.length>0&&<div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
-            <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
+            <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
         {r.coherenceNotes?.filter(n=>n.severity!=='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#F0F4FD'],border:'1px solid #a0b4d4',borderLeft:'3px solid #1a3a8b',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{color:swatch['#1A3A8B'],flexShrink:0}}>ℹ</span>
-            <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
+            <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
         {/* ── DS-GEN-7, the record disagreeing with itself, in the town's voice ──
@@ -620,7 +621,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
               " Consider: …" form the PDF's format.js renders, so the two surfaces
               can never disagree on this copy's shape. The joined-words defect
               ("…incursions.. ConsiderPalisade") lived here — §767.3(b). */}
-          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{String(v.reason||'').trim().replace(/\.+$/,'')}.{v.suggested?.length>0&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{' '}Consider: {v.suggested.join(', ')}.</span>}</div>)}
+          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#1A2A5A'],marginBottom:3}}>{String(v.reason||'').trim().replace(/\.+$/,'')}.{v.suggested?.length>0&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{' '}Consider: {v.suggested.join(', ')}.</span>}</div>)}
         </div>}
       </div>}
 

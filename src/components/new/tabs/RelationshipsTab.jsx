@@ -3,6 +3,8 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import { relColor } from '../../settlements/relationshipColors.js';
 import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
 import { serif, Section } from '../Primitives';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
@@ -12,6 +14,7 @@ import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
+  const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
   // Conflicts: from saved links + live-generated for unsaved settlements.
@@ -189,7 +192,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
 
       {/* Inter-Settlement NPC Contacts */}
       {(()=>{const npcContacts=interSettlementRels.filter(x=>!x.type);return npcContacts.length>0&&<Section title={`Cross-Settlement Contacts (${npcContacts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Named NPCs with documented ties to figures in linked settlements. Links are removed when neighbours are delinked.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -217,7 +220,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
 
       {/* Cross-Settlement Engagements */}
       {crossConflicts.length>0&&<Section title={`Cross-Settlement Engagements (${crossConflicts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Conflicts and faction engagements between this settlement and its neighbours. Removed when the link is broken.
         </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -243,8 +246,8 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
                   {isFaction ? 'faction' : (c.conflictNature||'conflict')}
                 </span>
               </div>
-              {c.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
-              {relDesk.engagementLines[i]&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.5,fontStyle:'italic',marginTop:4}}>{relDesk.engagementLines[i]}</div>}
+              {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
+              {relDesk.engagementLines[i]&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5,fontStyle:'italic',marginTop:4}}>{relDesk.engagementLines[i]}</div>}
             </div>;
           })}
         </div>
@@ -261,7 +264,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
 
       {/* NPC Relationships */}
       {rels.length>0&&<Section title={`NPC Relationships (${rels.length})`} collapsible defaultOpen>
-        <p style={{fontSize:FS.xs,color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
+        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
           Internal relationships within {settlementName}. Cross-settlement NPC ties appear in each neighbour card above.
         </p>
         {/* Type filter */}
@@ -300,7 +303,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
               {conn.neighbourNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.neighbourNPCRole})</span>}
               {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
             </div>
-            {conn.description&&<div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
+            {conn.description&&<div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
           </div>
         ))}
       </Section>}

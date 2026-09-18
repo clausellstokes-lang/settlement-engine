@@ -15,8 +15,11 @@ import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
 import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 export default function AnonTierTeaser({ onSignIn }) {
+  const mobile = useIsMobile();
   const tiers = getVisibleTiers();
 
   // One quiet comparison strip subordinate to the unlock card's headline, not
@@ -75,13 +78,13 @@ export default function AnonTierTeaser({ onSignIn }) {
                 {priceSub && <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{priceSub}</span>}
               </div>
               {tagline && (
-                <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
+                <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
                   {tagline}
                 </p>
               )}
               <ul style={{ listStyle: 'none', padding: 0, margin: `${SP.xs}px 0 0`, display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
                 {features.map((f, i) => (
-                  <li key={i} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.4 }}>
+                  <li key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.4 }}>
                     {'·'} {f}
                   </li>
                 ))}
