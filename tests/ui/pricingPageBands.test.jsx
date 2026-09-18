@@ -107,10 +107,33 @@ describe('PricingPage — the five-band drift contract', () => {
     const months = getFounderBreakEvenMonths();
     expect(months).toBe(Math.ceil(TIERS.founder.priceCents / TIERS.cartographer.priceCents));
     expect(text).toContain(tp('band2.charter.sustainability', { seats: 30 }));
+    // ⛔ EACH FACT ONCE, INSIDE THE BAND. It stated the cap three times and the
+    // invitation twice within five rendered lines, the counter's unavailable-count
+    // fallback being a verbatim repeat of the lead's second clause. Scoped to the
+    // charter SECTION: the band-5 FAQ answers "Can I buy a Founder chair?" and
+    // names the cap there legitimately, far down the page.
+    const charter = container.querySelector('#founder-charter-name').closest('section');
+    expect(charter, 'the charter band did not render').toBeTruthy();
+    expect(charter.textContent.match(/30 chairs/g) || [], 'the chair cap is stated more than once in the band').toHaveLength(1);
+    expect(charter.textContent.match(/all by invitation/g) || [], 'the invitation is stated more than once in the band').toHaveLength(1);
     // anchored: the line above asserts this same rendered text CONTAINS the charter sustainability sentence, so the page is proven rendered
     expect(text).not.toContain(`$${TIERS.founder.priceCents / 100}`);
     // The failure policy renders verbatim (the verified-refund promise).
     expect(text).toContain(tp('band3.taskMenu.failurePolicy'));
+  });
+
+  // ⛔ SURVEYOR SITS IN THE TIER ROW AND HAS NO COLUMN IN THE PLAN TABLE, so a
+  // reader comparing plans was left to guess what happened to the third band. The
+  // table takes a note rather than a column: the ladder's surveyor-stages row
+  // already reads 'per task' under both plan columns, and a third column would
+  // repeat one value down an empty table and imply a subscription that does not
+  // exist.
+  it('the comparison table says where Surveyor went', () => {
+    const { container } = renderPage();
+    const table = container.querySelector('#comparison-heading').closest('section');
+    expect(table, 'the comparison band did not render').toBeTruthy();
+    expect(table.textContent).toContain(tp('band4.heading'));
+    expect(table.textContent, 'Surveyor is unexplained in the plan table').toContain(tp('band4.surveyorNote'));
   });
 
   it('the bundle lead carries the single-dossier price label', () => {

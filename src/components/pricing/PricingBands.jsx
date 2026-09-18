@@ -282,6 +282,14 @@ export function ComparisonTable() {
           ))}
         </table>
       </div>
+      {/* Surveyor is in the tier row above but has no column here, and a reader
+          comparing plans should not have to guess why. A note, not a column: the
+          ladder's own surveyor-stages row already reads 'per task' under both
+          plan columns, so a third column would repeat one value down an empty
+          table and imply a subscription that does not exist. */}
+      <p style={{ margin: `${SP.md}px 0 0`, fontSize: FS.sm, color: BODY, fontStyle: 'italic', textAlign: 'center' }}>
+        {tp('band4.surveyorNote')}
+      </p>
     </section>
   );
 }

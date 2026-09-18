@@ -47,12 +47,21 @@ export const pricingPage = {
       // forbids "remaining" as sale vocabulary, and the Hall already renders
       // "N of 30 chairs held". The two surfaces now speak one vocabulary.
       // Numbers stay interpolated from FOUNDER_SEAT_CAP; none is typed here.
+      //
+      // ⛔ EACH FACT ONCE (2026-09-18). The band said "{seats} chairs" three times
+      // and "all by invitation" twice inside five rendered lines: the lead, the
+      // sustainability sentence, and the counter (whose unavailable-count fallback
+      // was a VERBATIM repeat of the lead's second clause). Repetition on a band
+      // that sells nothing reads as insistence. The lead is now the one place that
+      // states the cap and the invitation; the sustainability line makes its own
+      // point; the fallback says what it is actually for, which is that the live
+      // count could not be read.
       name: 'The Founder Charter',
       lead: 'Everything Cartographer runs, for as long as SettlementForge runs. {seats} chairs, all by invitation.',
-      sustainability: '{seats} chairs, and no more. The Hall is a place in the credits, not a revenue lane.',
+      sustainability: 'The Hall is a place in the credits, not a revenue lane.',
       capNote: 'A chair is given, never sold.',
       chairsHeld: '{held} of {seats} chairs held.',
-      chairsFallback: '{seats} chairs, all by invitation.',
+      chairsFallback: 'Chairs held are counted in the Hall.',
       credits: 'A seated chair carries {credits} credits.',
       cta: 'Request a chair',
     },
@@ -140,6 +149,14 @@ export const pricingPage = {
     },
     included: 'Included',
     notIncluded: 'Not included',
+    // ⛔ SURVEYOR SITS IN THE TIER ROW AND HAD NO COLUMN HERE, so a reader who
+    // compared the plans met two columns and was left to guess what happened to the
+    // third band above. It gets a NOTE rather than a column because it is not a
+    // plan: THE ENTITLEMENT LADDER's own `surveyor-stages` row already reads
+    // 'per task' under BOTH plan columns (config/entitlementLadder.js), which is
+    // the whole fact. A third column would have repeated one value down an empty
+    // table and implied a subscription that does not exist.
+    surveyorNote: 'Surveyor has no column here because it is not a plan: its AI tasks are priced per task, on either plan, with no subscription.',
   },
 
   // ── Band 5 — the objection-first FAQ ─────────────────────────────────────
