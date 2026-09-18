@@ -5,9 +5,12 @@
  * narrativeGenerator.js so the two stop maintaining divergent copies of the
  * same role/keyword tables.
  *
- * Two concerns live here:
+ * Three concerns live here:
  *  1. roleToCategory(role)        — classify an NPC role string into a category.
- *  2. institutionCategoryFlags()  — derive criminal/magic/religion presence from
+ *  2. factionPoolCategory(npc, r) — the category the NPC→faction gate reads, which
+ *                                   falls back to the ROLE when the role catalog
+ *                                   filed the NPC under its generalist bucket.
+ *  3. institutionCategoryFlags()  — derive criminal/magic/religion presence from
  *                                   institution catalog metadata (group category +
  *                                   tags), not brittle name substrings.
  *
@@ -115,6 +118,49 @@ export function roleTakesMerchantStress(role) {
   if (!r) return false;
   if (roleToCategory(r) === 'economy') return true;
   return MERCHANT_STRESS_KEYWORDS.some(kw => r.includes(kw));
+}
+
+// ─── The faction-pool gate ────────────────────────────────────────────────────
+
+/** The one word the gate below needs and the shared map above must not gain. */
+const GATE_MERCENARY_ROLE = /\b(?:mercenar(?:y|ies)|sellsword)\b/;
+
+/**
+ * THE FACTION-POOL CATEGORY — the category npcGenerator's NPC→faction gate should
+ * read, which is NOT always the one the role catalog filed the NPC under.
+ *
+ * POWER_ROLES_BY_CATEGORY files roughly a third of its rows under the generalist
+ * `other` bucket, and getUpgradeOpportunities stamps that BUCKET key onto every row
+ * it emits. mergeNPCLists' CATEGORY_COMPAT reads `other` as `null`, and `null` there
+ * means "any faction at all" — so the one role table that says least about its
+ * holders was the one the compatibility gate stopped reading, and a steppe village
+ * printed the result: "Khurelbaatar Mangghud — Kheshig — Mercenary-for-Hire ·
+ * Religious Authorities". A generalist row still SAYS what its holder does, so when
+ * the catalog declines to classify the NPC this classifies the ROLE instead. A role
+ * the keyword map cannot place either returns 'other', and the pool stays
+ * unrestricted exactly as before.
+ *
+ * ⚠ 'mercenary' IS READ HERE AND DELIBERATELY NOT ADDED TO ROLE_CATEGORY_KEYWORDS
+ * ABOVE — which is why the gate lives in this file and not somewhere a future editor
+ * would have to guess. That map also selects npcGenerator's stress-goal overrides,
+ * whose `mil` arm is a garrison officer's goal ("keep unit cohesion as conscription
+ * pulls away experienced soldiers") — a sentence a sword who sells himself by the
+ * season must not inherit. Widening the shared map would have cured the faction and
+ * broken the goal in the same edit.
+ *
+ * ⛔ IT NARROWS A POOL, IT DOES NOT DRAW. Pure and deterministic; npcGenerator's
+ * single capacity-weighted roll keeps its count and its position in the stream, and
+ * the existing relax cascade still catches a pool this empties.
+ *
+ * @param {{ category?: unknown }} npc
+ * @param {string} roleLower the NPC's role, lowercased
+ * @returns {string} category
+ */
+export function factionPoolCategory(npc, roleLower) {
+  const bucket = String(npc?.category || 'other').toLowerCase();
+  if (bucket !== 'other') return bucket;
+  if (GATE_MERCENARY_ROLE.test(roleLower)) return 'military';
+  return roleToCategory(roleLower);
 }
 
 // ─── Institution-metadata category detection ──────────────────────────────────
