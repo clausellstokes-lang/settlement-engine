@@ -33,6 +33,7 @@
  * tab's job — this file reads NO deity data.
  */
 
+import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../../domain/display/warStatus.js';
@@ -199,7 +200,7 @@ function WarsBlock({ wars, sid, nameFor }) {
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
               <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>{war.name}</strong>
               <span style={{ marginLeft: 'auto', color: onAttack ? GOLD : RED, fontSize: FS.pico, fontWeight: 800 }}>
-                {onAttack ? 'attacking' : 'defending'}
+                {onAttack ? 'Attacking' : 'Defending'}
               </span>
             </div>
             {war.line && <div style={{ color: SECOND, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5, marginTop: 3 }}>{war.line}</div>}
@@ -273,7 +274,7 @@ function UnitEntry({ unit, includeGroundTruth }) {
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>The host, {roleWord} {destName}</strong>
         <span data-testid="war-unit-staleness" style={{ marginLeft: 'auto', color: STALENESS_TONE[stalenessBand] || MUTED, fontSize: FS.pico, fontWeight: 800, whiteSpace: 'nowrap' }}>
-          word {stalenessBand}
+          Word {stalenessBand}
         </span>
       </div>
       <div style={{ color: BODY, fontSize: FS.xxs, lineHeight: 1.5, marginTop: 4 }}>
@@ -358,7 +359,7 @@ function TreatyBlock({ treaties, sid }) {
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
               <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
               <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>
-              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800 }}>{doc.complianceState}</span>
+              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800 }}>{tokenCase(doc.complianceState)}</span>
             </div>
             {doc.termLines.map((term) => (
               <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>

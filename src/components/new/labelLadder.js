@@ -63,6 +63,30 @@ import { FS, serif_ } from '../theme.js';
  * rather than omitted because these sites are spread INTO an existing style object and
  * a stale tracking would otherwise survive the change.
  */
+/**
+ * The dossier's type steps, ascending. `literaryTitle` walks this to find "one step above".
+ * @type {ReadonlyArray<number>}
+ */
+const STEPS = Object.freeze([7, 8, 9, 10, 11, 12, 13, 15, 17, 20, 24]);
+
+/**
+ * The literary title for a body of a GIVEN size — one step above it on the scale above.
+ *
+ * ⛔ WHY THIS IS A FUNCTION AND NOT JUST THE CONSTANT (review, 2026-09-18). The constant
+ * below is one step above FS.md, the size the dossier's prose blocks read at, and that is
+ * right wherever the body IS FS.md. It was spread over two bodies that are not: the quick
+ * guide's defining truths read at FS.xs and its pressure line at FS.sm, so a 15 px title
+ * stood four steps over an 11 px body and broke the very rule it was named for. A title
+ * that does not know its body cannot be one step above it.
+ *
+ * @param {number} [bodySize] the size of the prose this title opens
+ * @returns {import('react').CSSProperties}
+ */
+export function literaryTitle(bodySize = 13) {
+  const next = STEPS.find((s) => s > bodySize);
+  return { ...LITERARY_TITLE, fontSize: next === undefined ? bodySize : next };
+}
+
 export const LITERARY_TITLE = Object.freeze({
   fontFamily: serif_,
   fontSize: FS.lg,
@@ -91,4 +115,36 @@ export const LITERARY_TITLE = Object.freeze({
 export function statusCase(word) {
   if (typeof word !== 'string' || !word) return word;
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+}
+
+/**
+ * The estate's initialisms, for the one job sentence-casing cannot do by rule.
+ * @type {Readonly<Record<string, string>>}
+ */
+const INITIALISMS = Object.freeze({ npc: 'NPC', npcs: 'NPCs', dm: 'DM', ai: 'AI', pdf: 'PDF' });
+
+/**
+ * A MACHINE TOKEN as a rung-3 value: 'blockade' reads 'Blockade', 'criminal_opportunity'
+ * reads 'Criminal opportunity', 'npc' reads 'NPC'.
+ *
+ * ⛔ WHY THIS EXISTS BESIDE `statusCase`. Both sentence-case a word, and for most inputs
+ * they agree. They differ on the one input that matters: a token vocabulary may contain an
+ * INITIALISM, and `statusCase('npc')` is 'Npc'. That is exactly the failure its own docblock
+ * warns about, which is why it says it must never be swept — so the swept case gets its own
+ * function rather than a caveat nobody reads at the call site.
+ *
+ * THE REASON EITHER IS NEEDED (review, 2026-09-18): several pills rendered a raw engine
+ * token and relied on `textTransform` to make it look like a word. 'attacking', 'surplus',
+ * 'dear', 'defaulted' and 'blockade' all read as English in capitals and as debug output in
+ * sentence case, so removing the transform exposed the token underneath. The token is still
+ * the token — nothing is renamed, no `data-*` hook moves, and the machine vocabulary in
+ * `data-band` and friends is untouched. Only the word the reader sees is cased.
+ *
+ * @param {unknown} token a machine token from a finite vocabulary
+ * @returns {unknown} the same token as a displayable word, or the input unchanged
+ */
+export function tokenCase(token) {
+  if (typeof token !== 'string' || !token) return token;
+  const flat = token.replace(/_/g, ' ');
+  return INITIALISMS[flat.toLowerCase()] || statusCase(flat);
 }

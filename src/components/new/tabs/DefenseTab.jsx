@@ -412,7 +412,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                     <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,marginBottom:2}}>Internal security · first survey</div>
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
-                      <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px',letterSpacing:'0.04em'}}>{orderBadge}</span>
+                      <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px'}}>{orderBadge}</span>
                     </div>
                     {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
                   </div>
@@ -430,7 +430,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,marginBottom:3}}>Criminal Structure: {csd.label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {csd.label}</div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
@@ -464,7 +464,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'9px 13px'}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
-              Criminal Faction: Power {crimFaction.power||0}
+              Criminal faction: power {crimFaction.power||0}
             </div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
             {(crimCapture === 'corrupted' || crimCapture === 'capture') && (

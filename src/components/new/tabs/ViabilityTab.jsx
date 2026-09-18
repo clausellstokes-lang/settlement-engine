@@ -1,3 +1,4 @@
+import { tokenCase } from '../labelLadder.js';
 import React, { useMemo } from 'react';
 import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
@@ -284,7 +285,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         {criticalIssues.map((issue,i)=>(
           <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger}}>{issue.category}</span>}
+              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
             <p style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
@@ -309,7 +310,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sb = sevBg(issue.severity);
           return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{issue.category}</span>}
+              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
@@ -344,7 +345,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sc = sevColor(wobj.severity||'warning');
           return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{wobj.category}</span>}
+              {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
             {wobj.description&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}

@@ -23,7 +23,7 @@ import EntityLink from '../primitives/EntityLink.jsx';
 import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
-import { LITERARY_TITLE } from '../new/labelLadder.js';
+import { literaryTitle, tokenCase } from '../new/labelLadder.js';
 import {
   FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, swatch } from '../theme.js';
 
@@ -43,7 +43,7 @@ function BandPill({ band }) {
       display: 'inline-block', padding: '1px 7px', fontSize: FS.xxs,
       fontWeight: 800, color: swatch.white,
       background: BAND_COLOR[band] || MUTED,
-    }}>{band}</span>
+    }}>{tokenCase(band)}</span>
   );
 }
 
@@ -63,7 +63,7 @@ function SectionShell({ title, accent = GOLD, testid, literary = false, children
     }}>
       <div style={{
         ...(literary
-          ? { ...LITERARY_TITLE, color: INK }
+          ? { ...literaryTitle(FS.sm), color: INK }
           : { fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }),
         background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
       }}>{title}</div>
@@ -134,7 +134,7 @@ export function EconomicsGranarySection({ settlement }) {
             <span key={f} style={{
               fontSize: FS.xxs, fontWeight: 700, color: f === 'blockade' ? RED : GOLD,
               background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 6px',
-            }}>{f}</span>
+            }}>{tokenCase(f)}</span>
           ))}
         </div>
       )}

@@ -157,8 +157,12 @@ describe('Status-band foreground legibility on card (WCAG AA 4.5:1)', () => {
 });
 
 // Settlement threat pills (SettlementPalette / DossierHeaderRow, via the shared
-// threatDisplay helper). The pill is two-channel (uppercase label + tint), but the
-// LABEL TEXT itself must still clear AA on the card. embattled's raw hue (#C87060)
+// threatDisplay helper). The pill used to be two-channel (uppercase label + tint) and
+// this arm was the second channel's guarantee. THE UPPERCASE IS GONE — the label ladder
+// (2026-09-18) took `textTransform` off DossierHeaderRow's threat pill, because colour
+// and weight carry a rung-3 value and case does not. That makes this arm MORE load
+// bearing, not less: the tint is now the only other channel, so the LABEL TEXT itself
+// must clear AA on the card. embattled's raw hue (#C87060)
 // fails as text (3.43:1) — the helper uses the darkened #A0492F as the -text step
 // while #C87060 stays the fill, the exact fill-vs-text split the rest of the app
 // follows. Pinned so a future palette edit can't reintroduce the unreadable pill.

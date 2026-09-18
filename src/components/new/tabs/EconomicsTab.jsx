@@ -1,3 +1,4 @@
+import { tokenCase } from '../labelLadder.js';
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
@@ -153,7 +154,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
-                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{chain.needLabel}</span>
+                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{tokenCase(chain.needLabel)}</span>
                 <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
 
@@ -222,8 +223,8 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>service</span>
-                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>export</span>}
+                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>Service</span>
+                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>Export</span>}
                   <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag2}}>
@@ -530,7 +531,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             return <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
               <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>
               <div style={{flex:1}}>
-                {cat&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginRight:6}}>{cat}</span>}
+                {cat&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginRight:6}}>{tokenCase(cat)}</span>}
                 <span style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.5}}>{text}</span>
               </div>
             </div>;
@@ -720,7 +721,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {crimChains.map((c,i)=>(
                   <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
-                    {humanizeToken(c.chainId)} · {displayLabel('supplyChainStatus', c.status)}
+                    {tokenCase(humanizeToken(c.chainId))} · {displayLabel('supplyChainStatus', c.status)}
                   </span>
                 ))}
               </div>

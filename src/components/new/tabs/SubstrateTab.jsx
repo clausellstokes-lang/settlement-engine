@@ -15,6 +15,7 @@
  * short note rather than a fabricated grid.
  */
 
+import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
@@ -77,7 +78,7 @@ function BandPill({ variable, band }) {
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
       fontSize: FS.pico, fontWeight: 800,
       color: swatch.white, background: tone,
-    }}>{word}</span>
+    }}>{tokenCase(word)}</span>
   );
 }
 

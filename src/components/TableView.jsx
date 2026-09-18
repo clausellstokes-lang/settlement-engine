@@ -21,6 +21,7 @@
  * unconditionally when present.
  */
 
+import { literaryTitle } from './new/labelLadder.js';
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
@@ -202,7 +203,7 @@ export default function TableView({ settlement, onClose }) {
                   borderLeft: `2px solid ${FIELD_RULE}`,
                 }}>
                   <span style={{
-                    fontSize: FS.xs, fontWeight: 700,
+                    ...literaryTitle(FS.xs),
                     color: CREAM_FAINT, marginRight: 5,
                   }}>
                     {truth.label}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
-import { LITERARY_TITLE } from '../labelLadder.js';
+import { LITERARY_TITLE, literaryTitle, tokenCase } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
@@ -95,7 +95,7 @@ function RulingChainBlock({ settlement }) {
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
       padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
     }}>
-      <div style={{...LITERARY_TITLE,color:swatch.inkMag}}>
+      <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
         Who runs this place?
       </div>
       {chain.power && (
@@ -289,7 +289,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                     color:      v > 0 ? '#1a5a28' : v < 0 ? '#8b1a1a' : '#9c8068',
                     border: `1px solid ${v > 0 ? '#a8d8b0' : v < 0 ? '#e8c0c0' : '#e0d0b0'}`,
                   }}>
-                    {k} {v > 0 ? `+${v}` : v}
+                    {tokenCase(k)} {v > 0 ? `+${v}` : v}
                   </div>
                 ))}
               </div>

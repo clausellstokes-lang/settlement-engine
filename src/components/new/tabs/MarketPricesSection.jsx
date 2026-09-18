@@ -15,6 +15,7 @@
  * into a single quiet line — a column of identical "its usual price" rows would
  * bury the movements the section exists to surface.
  */
+import { tokenCase } from '../labelLadder.js';
 import { FS, swatch, MUTED, GOLD_DEEP } from '../../theme.js';
 import { Section } from '../Primitives';
 
@@ -38,7 +39,7 @@ function Movement(q) {
           through its phrase alone — a STEADY chip beside "a shade above" would
           contradict itself. */}
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{q.tag}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{tokenCase(q.tag)}</span>
       )}
     </div>
   );

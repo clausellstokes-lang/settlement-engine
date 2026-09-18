@@ -13,7 +13,7 @@ import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 import { normalizeStressor } from '../../../domain/worldPulse/stressorsCore.js';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
-import { LITERARY_TITLE, statusCase } from '../labelLadder.js';
+import { LITERARY_TITLE, literaryTitle, statusCase, tokenCase } from '../labelLadder.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -290,7 +290,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             identity strip; only the arrangement changed. */}
       {siteLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
+          <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
           {/* THE LEAD PARAGRAPH reads one step above the dossier's body prose (FS.lg over
               FS.md), on the phone as well as the desktop. It is the first thing a DM reads —
               it sits second, directly under the identity strip — and at FS.md it was the same
@@ -529,7 +529,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
 
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
-        <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
+        <div style={{...literaryTitle(FS.sm),color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
         {/* ── DS-REL-2 (overview.notableConnection) ───────────────────────────
             TWO LENSES AT ONE POSITION: the tie the town names first, and how
             much of its roll this town's own conditions made. The phrasing below
@@ -656,7 +656,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
               const cc=getCatColor(cat);
               return <div key={cat}>
-                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,marginBottom:4}}>{cat} ({insts.length})</div>
+                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                   {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;

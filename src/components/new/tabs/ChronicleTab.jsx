@@ -34,7 +34,7 @@ const RULE = OINK.hairline;     // the feint annal ruling (decorative)
 // no rounded card chrome. Colour is never the sole channel; the stamp text
 // (Party / Edit / World) and the row title both carry the source.
 function stamp(color) {
-  return { fontSize: FS.micro, color, border: `1px solid ${color }`, padding: '0 5px', fontWeight: 800};
+  return { fontSize: FS.micro, color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800};
 }
 
 /**

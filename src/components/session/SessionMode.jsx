@@ -38,7 +38,7 @@ import { proseFontSize } from '../../design/proseScale.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
-import { LITERARY_TITLE } from '../new/labelLadder.js';
+import { literaryTitle } from '../new/labelLadder.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -322,7 +322,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     paddingLeft: 9,
                     borderLeft: `2px solid ${BORDER}`,
                   }}>
-                    <div style={{ ...LITERARY_TITLE, color: INK }}>
+                    <div style={{ ...literaryTitle(FS.sm), color: INK }}>
                       {truth.label}
                     </div>
                     <div style={{
