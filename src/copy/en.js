@@ -1466,18 +1466,12 @@ export const en = Object.freeze({
     claimed:  'This settlement’s PDF is yours. You bought it before you signed up.',
   },
 
-  // ── Workshop (P107 / CP-2) ───────────────────────────────────────────────
-  // OUR-side surface copy retained (the /workshop route + ModeSelector wiring
-  // still resolve these). Their tree deleted its Workshop block; we keep ours
-  // so no surviving OUR consumer sees a missing key. Surface waves drop this
-  // together with the Workshop feature if it is fully retired.
-  workshop: {
-    navLabel:       'Workshop',
-    locked:         'Workshop unlocks with Cartographer.',
-    lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
-    upgradeCta:     'Upgrade to Cartographer',
-    samplePreview:  'See a sample →',
-  },
+  // ⚰ Workshop (P107 / CP-2) — REMOVED 2026-09-18. The block was kept "so no
+  // surviving OUR consumer sees a missing key", but the Workshop feature is
+  // fully retired: /workshop is a DEMOTED DESTINATION that redirects to Create
+  // (lib/routes.js redirectForView), the ModeSelector wiring it named is gone,
+  // and a census of src/ found no reader of any `workshop.*` key. Dead copy is
+  // a maintenance tax and a translation cost, so the keys go with the feature.
 
   // ── Sample dossier proof card (P128 / H-2) ───────────────────────────────
   // Renders below HomeHero for anonymous visitors. Three callouts, each
