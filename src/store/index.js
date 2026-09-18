@@ -171,13 +171,15 @@ export const useStore = create(
   ),
 );
 
-// THE READ HALF OF THE ANONYMOUS-DRAFT GATE is NOT wired here. It used to be — a
-// subscription on the first `auth.loading` true→false edge — and that edge is not
-// the boot question: authSignIn and authSignUp drive it too, so a sign-in that
-// beat a slow getSession() spent the marker and dropped the draft the visitor had
-// just signed in to keep. The spend now lives inside initAuth's own resolution
-// (store/anonDraftGate.js, called from authSlice.js), which is the one place the
-// boot question is actually answered.
+// THE ANONYMOUS-DRAFT GATE HAS NO READ HALF TO WIRE HERE, and that is the point
+// of the 2026-09-18 rule. A subscription on the first `auth.loading` true→false
+// edge used to drop an adopted draft once the session resolved signed-in; that
+// edge is not the boot question (authSignIn and authSignUp drive it too), so the
+// spend moved into initAuth, and then needed a sign-in retraction, a
+// sessionStorage stash across OAuth redirects and a whole-settlement clear to be
+// correct. None of it exists now: the world carries its own `draftOrigin` and the
+// projection reads it (store/persistProjection.js), so every boot simply adopts
+// what the device kept and nothing is ever taken off the screen.
 
 // Wire the dependencyEngine to read customContent from this store.
 // This is the only edge that connects the (store-agnostic) generator's

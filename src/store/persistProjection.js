@@ -31,40 +31,49 @@
  * ⛔ ONE KEY, NOT TWO PLUS A FLAG — AND THE REASON IS A BUG THIS SHAPE CLOSES.
  * The first cut wrote `settlement` and `lastSeed` as top-level keys, gated on the
  * tier at WRITE time. The READ had no such gate: mergePersistedState restores by
- * top-level spread, and rehydrate runs BEFORE Supabase resolves the session, so a
- * returning SIGNED-IN user booted with a previous anonymous session's draft in
- * the editor and could save a world they never generated. A gate on one side of a
- * round trip is not a gate.
+ * top-level spread, so a returning user booted with a previous anonymous session's
+ * draft in the editor. A gate on one side of a round trip is not a gate. The draft
+ * now travels as ONE envelope, and the merge refuses anything that is not a
+ * genuine envelope (absent, `true`, a string, a stale `{}`) — see persistMerge.js.
  *
- * The draft now travels as ONE envelope whose PRESENCE is the claim "an anonymous
- * session wrote this". Nothing can separate the marker from the payload, because
- * they are the same value, and the merge refuses anything that is not a genuine
- * envelope (absent, `true`, a string, a stale `{}`) — see persistMerge.js. The
- * second half of the gate, for a blob that IS anonymous but a session that turns
- * out not to be, lives at the boot auth resolution (store/anonDraftGate.js).
+ * ⭐⭐ THE ONE RULE (2026-09-18) — AND WHAT IT REPLACED. The envelope is written
+ * when, and only when, the world in the editor was BORN ANONYMOUS and nobody is
+ * signed in right now. Both halves are read off facts that are already true:
+ * `settlement.draftOrigin`, stamped at the birth by settlementGenerateAction.js
+ * and carried on the world itself, and `auth.user`.
  *
- * ⛔ AND "ANONYMOUS TIER" IS NOT THE SAME QUESTION AS "AN ANONYMOUS WORLD".
+ * Every earlier cut asked the same question with SESSION CLAIMS standing beside
+ * the world — `restoredAnonDraft`, `signedInWorld` — and each one needed raising,
+ * retracting at a chokepoint, stashing across an OAuth redirect and spending at a
+ * boot resolution in another module. They were flags rather than references
+ * because immer replaces `state.settlement` on every mutation, so a reference test
+ * missed after one edit and the gate failed OPEN. A field ON the world needs none
+ * of that: it survives the mutation that replaces the object (it is copied with
+ * it), it survives the rehydrate (it is inside the persisted payload), and it is
+ * still true a second after the session resolves. There is no drop at the boot
+ * resolution, no claim and no stash: a device's anonymous draft belongs to the
+ * device, and a signed-in person who finds it on screen keeps or clears it.
+ *
+ * ⛔ AND "ANONYMOUS TIER" IS NOT THE SAME QUESTION AS "AN ANONYMOUS WORLD" —
+ * which is why the condition names the ORIGIN and the USER, never the tier.
  * Sign-out sets tier 'anon' and deliberately leaves the editor's settlement
- * standing — eviction routes through the same path and must never destroy unsaved
- * work. Gating on the tier alone therefore stashed the DEPARTING ACCOUNT's loaded
- * world, possibly one of their saves, into this device's storage for the next
- * anonymous visitor to boot into. clearAuth raises `signedInWorld`, so that world
- * stays on screen and never reaches the envelope, while a world the anonymous
- * visitor generates afterwards retracts the claim and persists normally.
+ * standing (eviction routes through the same path and must never destroy unsaved
+ * work). A tier-only gate therefore stashed the DEPARTING ACCOUNT's loaded world,
+ * possibly one of their saves, into this device's storage for the next anonymous
+ * visitor to boot into. That world's origin is 'account', so it is refused here
+ * by the same one rule — no sign-out-time bar to raise, and nothing to retract.
  *
- * ⚠ THE INVARIANT IS PER-TAB, AND THAT IS THE CONTAINMENT. localStorage is
- * shared across a device's tabs, so two tabs can hold different ideas of what is
- * in "the" editor and the last write wins the envelope. What bounds it is that
- * the READ side is per-tab too: every tab adopts the envelope at its own boot and
- * settles it at its own initAuth, so a signed-in tab still drops what it adopted.
- * The worst a second tab can do is stash a draft the first tab would not have —
- * never hand one to a signed-in session that refuses it.
+ * ⚠ A SIGNED-IN WRITE NULLS THE KEY RATHER THAN LEAVING THE STORED ENVELOPE
+ * STANDING, and that is deliberate. zustand's persist writes the WHOLE projection
+ * on every store write, so the first write after an in-page sign-in replaces the
+ * stored envelope with `null`. The draft stays on screen and is the person's to
+ * keep or clear; the DEVICE stops remembering it, because from that moment the
+ * library is where their worlds live and saving is a deliberate act.
  *
- * ⚠ `signedInWorld` is a CLAIM, not a reference to the barred object, for the
- * same reason `restoredAnonDraft` is: under immer any mutation replaces
- * `state.settlement`, so a reference test would miss after a single edit and the
- * bar would fail OPEN — leaking the departing account's world. Only the generate
- * action retracts it, because only a new world is genuinely not theirs.
+ * ⚠ THE INVARIANT IS PER-DEVICE, AND THE LAST WRITE WINS. localStorage is shared
+ * across a device's tabs, so two anonymous tabs can hold different drafts and the
+ * last store write owns the envelope. That is the whole exposure now: whatever the
+ * envelope holds, it was born anonymous on this device, and every boot adopts it.
  *
  * ⚠ The whole settlement is persisted, not a projection of it. A restored draft
  * must be byte-identical to the one generated, or saving after a reload would
@@ -90,13 +99,18 @@ export function partializeStoreState(state) {
     // World play-mode preference; additive and absent-tolerant on older blobs.
     advanceAutoResolve: state.advanceAutoResolve,
     // The anonymous draft, as ONE envelope (see the header). Null — never a bare
-    // settlement, never a lone flag — for every signed-in tier and whenever there
-    // is no draft to keep. THREE conditions, not one: the tier says anonymous,
-    // there is no user behind it (belt and braces on the same fact), and the world
-    // is not one a signed-in session left behind at sign-out (authSlice.clearAuth
-    // bars it by reference, because sign-out sets tier 'anon' without clearing the
-    // editor — see the header).
-    anonDraft: state.auth?.tier === 'anon' && !state.auth.user
-      && settlement && !state.signedInWorld ? { settlement, lastSeed } : null,
+    // settlement, never a lone flag — whenever anyone is signed in and whenever
+    // the world in the editor was not born anonymous. TWO conditions and no
+    // session flags: nobody is signed in NOW, and this world's own stamp says an
+    // anonymous session made it. A world with no stamp (a legacy object reaching
+    // the editor through a non-generate door) is not 'anon', so it fails closed.
+    // ⚠ The value expression must keep OPENING on `state.` — the persist-shape
+    // walker (tests/store/lifecycleRoundTrip) discovers this projection's keys by
+    // scanning the return block for a key followed by a `state` member read, so a
+    // key whose value opens on a local reads to it as a REMOVED persisted key.
+    // (Which is also why this note may not spell that pattern out: the scan would
+    // count the example as a key.)
+    anonDraft: state.auth?.user == null && settlement?.draftOrigin === 'anon'
+      ? { settlement, lastSeed } : null,
   };
 }

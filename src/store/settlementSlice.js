@@ -102,7 +102,7 @@ import {
   _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, foldRegeneratedRoster, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
+  sectionLocked, foldRegeneratedRoster, planTimelineUndo, bindActiveSaveId, claimSettlementForAccount } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -159,30 +159,22 @@ export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   // `settlement` is the current generated settlement object.
   //
-  // The other two are SESSION-ONLY CLAIMS about what is in the editor, and they
-  // are deliberately FLAGS rather than references to the settlement: under immer
-  // every mutation replaces that object, so an identity test would miss after a
-  // single edit and both gates would fail OPEN — the direction that keeps a
-  // stranger's world, or leaks a departing account's.
+  // ⭐ IT CARRIES ITS OWN `draftOrigin` — 'anon' or 'account' — stamped at its
+  // birth by settlementGenerateAction.js and re-stamped by
+  // claimSettlementForAccount when a signed-in person saves, opens or canonizes
+  // it. That one field is the whole anonymous-draft persistence rule
+  // (store/persistProjection.js): the device remembers a world born anonymous
+  // while nobody is signed in, and nothing else.
   //
-  // `restoredAnonDraft` — this reload adopted a persisted ANONYMOUS draft and
-  // nobody has claimed it since (persistMerge.js raises it). It exists because a
-  // rehydrate finishes before Supabase resolves the session: the draft must be
-  // adoptable at once and droppable a moment later if the session turns out to be
-  // signed in (anonDraftGate.js). Retracted by a sign-in/sign-up (they signed in
-  // to keep it) or by generating a new world.
-  //
-  // `signedInWorld` — a signed-in session left this world in the editor at
-  // sign-out, so the persist projection must never stash it as an anonymous draft
-  // (authSlice.clearAuth raises it). Sign-out sets tier 'anon' without clearing
-  // the editor, on purpose: eviction comes through the same door and must never
-  // destroy unsaved work, so the tier alone cannot answer "is this an anonymous
-  // world". Retracted only by generating a new world.
-  //
-  // Neither is persisted — the partialize is an allowlist. (The three share this
-  // line because the file sits at its frozen max-lines ceiling; the comment, not
-  // the packing, is the explanation.)
-  settlement:    null, restoredAnonDraft: false, signedInWorld: false,
+  // It REPLACED two session flags that used to sit on this line —
+  // `restoredAnonDraft` and `signedInWorld` — each a CLAIM about what was in the
+  // editor, each needing to be raised, retracted at a swap chokepoint, stashed
+  // across an OAuth redirect and spent at the boot auth resolution. They were
+  // flags rather than references because immer replaces `state.settlement` on
+  // every mutation, so a reference test missed after one edit and the gate failed
+  // OPEN. A field ON the world is copied forward by that same mutation, rides
+  // inside the persisted payload, and is still true after the session resolves.
+  settlement:    null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,
@@ -871,6 +863,9 @@ export const createSettlementSlice = (set, get) => ({
         state.eventLog = [];
       }
       state.canonizedAt = new Date().toISOString();
+      // Making a world canon while signed in is a deliberate act of ownership, so
+      // it stops being this device's anonymous draft (settlementSliceHelpers.js).
+      claimSettlementForAccount(state);
     });
     // Persist so canon sticks across reload and the library reflects it.
     get().persistActiveSaveLifecycle?.();
@@ -1554,10 +1549,15 @@ export const createSettlementSlice = (set, get) => ({
     // "the gods were always there, latent in the seed". Idempotent (a save that
     // already carries live embeds is unchanged) + tier-gated (free/anon load the
     // save verbatim, faith latent + private).
-    const loadedSettlement = save.settlement
-      ? activateFaithIfEntitled(save.settlement, get)
-      : null;
+    const loadedSettlement = save.settlement ? activateFaithIfEntitled(save.settlement, get) : null;
     state.settlement     = loadedSettlement || state.settlement;
+    // A world opened OUT OF THE LIBRARY is the account's, whatever origin its blob
+    // was written with — the stamp lands on the in-editor world at the save, so a
+    // row saved before that existed still reads 'anon' inside. Without this, a
+    // signed-in keeper who opens such a save and then signs out would have their
+    // own saved world stashed as this device's anonymous draft: the exact leak the
+    // retired `signedInWorld` bar existed to stop (settlementSliceHelpers.js).
+    claimSettlementForAccount(state);
     state.activeSaveId   = save.id || null;
     // Recover the seed from the save (row column first, then the blob's stamped
     // `_seed`), and NEVER fall back to the stale session seed (finding F2): the

@@ -456,8 +456,47 @@ export function bindActiveSaveId(get, set, saveId) {
     // alongside a bound save id is a second, unreachable history the pending-edit
     // owner scope has already stopped resolving receipts against.
     if (transfers) state.draftVersionHistory = [];
+    // THE WORLD IS NOW A ROW IN THE ACCOUNT'S LIBRARY, so it stops being this
+    // device's anonymous draft. Deliberately NOT gated on `transfers`: that
+    // transition is about a draft TIMELINE, while this is about a save existing
+    // at all, and a save made from a world with no snapshots is just as much the
+    // account's. See claimSettlementForAccount for why one field beats a flag.
+    claimSettlementForAccount(state);
   });
   return transfers ? persistSaveUpdate(saveId, { versionHistory }) : undefined;
+}
+
+/**
+ * claimSettlementForAccount — the world in the editor became THIS ACCOUNT'S, so
+ * its origin stamp says so from here on (store/persistProjection.js reads it and
+ * stops writing the device's anonymous-draft envelope for it).
+ *
+ * A world born anonymous is persisted as this device's draft. Saving it, opening
+ * it from the library, and making it canon while signed in are the same act in
+ * product terms: a deliberate one that makes the world the account's. After it
+ * the device must stop offering that world to the next anonymous visitor — and
+ * the design this replaced needed a separate sign-out-time bar (`signedInWorld`)
+ * to arrange exactly that. Re-stamping the world keeps ONE fact in ONE place, on
+ * the object it describes, where a swap replaces it and immer copies it forward.
+ *
+ * GUARDED ON A REAL USER, never on the tier: sign-out sets tier 'anon' while
+ * leaving the world standing, and an anonymous visitor's own canon draft is
+ * still the device's to keep.
+ *
+ * ⛔ IT RE-ASSIGNS, IT DOES NOT WRITE IN PLACE, and that is not style. At the
+ * hydrateFromSave door the world has JUST been assigned onto the draft from a
+ * save, so it is still the plain object the cache holds — and immer FREEZES what
+ * it produces, so `state.settlement.draftOrigin = …` throws
+ * "Cannot assign to read only property" there (caught by this lane's own arm
+ * before it could ship). Assigning a fresh object is correct at every door: where
+ * the world IS a draft, immer finalizes the child drafts the spread carries.
+ *
+ * @param {*} state the Immer store draft
+ */
+export function claimSettlementForAccount(state) {
+  if (!state?.auth?.user || !state.settlement) return;
+  if (state.settlement.draftOrigin === 'account') return;
+  state.settlement = { ...state.settlement, draftOrigin: 'account' };
 }
 
 /**
