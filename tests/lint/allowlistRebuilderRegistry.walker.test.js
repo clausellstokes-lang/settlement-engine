@@ -1043,7 +1043,11 @@ const CLASS_ROSTER = Object.freeze([
   Object.freeze({
     module: 'src/store/persistProjection.js', fn: 'partializeStoreState', status: 'lossy',
     reason: 'the device-local zustand partialize — it IS the persistence door, and excluding auth,'
-      + ' capabilities, reporter leases and generated worlds by construction is its documented point.',
+      + ' capabilities and reporter leases by construction is its documented point. ONE generated'
+      + ' world crosses it since 2026-09-18: the ANONYMOUS draft, whole and unprojected, because'
+      + ' /create promises an anonymous visitor their first dossier and that tier has no library to'
+      + ' keep it in. Every signed-in tier still writes null, so the exclusion holds wherever a save'
+      + ' exists to hold the world instead.',
   }),
   Object.freeze({
     module: 'src/store/settlementSliceHelpers.js', fn: 'pickleCampaignState', status: 'unpaired',

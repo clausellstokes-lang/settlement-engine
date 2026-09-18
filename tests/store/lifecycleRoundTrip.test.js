@@ -139,6 +139,29 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Persisted as an
   // additive top-level key (persistProjection.js), absent-tolerant on rehydrate.
   'advanceAutoResolve',
+  // THE ANONYMOUS DRAFT (2026-09-18), with its written reason per the header's
+  // rule 3 — and it is the one entry here that IS a generated world, so the
+  // reason is longer than its neighbours'.
+  //
+  // It is NOT a family moved out of SESSION_ONLY_FAMILIES: `settlement` was
+  // never registered there. It was an unpersisted slice default, and the defect
+  // was that /create promises an anonymous visitor "Your first dossier is yours
+  // to keep" while a refresh took it — an anonymous account has maxSaves 0
+  // (authSlice TIER_GATE), so no library held it and nothing else did either.
+  //
+  // Why it MAY persist: it is the viewer's OWN world, device-local like every
+  // other key here; it is scoped to the anonymous tier, so no signed-in cohort's
+  // draft is duplicated outside their library; it is absent from `config`, so it
+  // cannot reach the generator as input; it is written WHOLE rather than
+  // projected, so a restored draft is byte-identical to the generated one and a
+  // save after a reload writes exactly what a save before it would; and its
+  // ABSENCE in an older blob rehydrates to the slice's `null` through the
+  // top-level spread, the same cohort-fork safety advanceAutoResolve gets.
+  // Measured before it was written: a TOWN at 4,000 population is 141,607–192,830 B.
+  //
+  // `lastSeed` rides with it because a draft without the seed it was drawn from
+  // is a world whose provenance the reload silently dropped.
+  'settlement', 'lastSeed',
 ]);
 
 /**
@@ -1048,6 +1071,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // Realm directive 7 (J-D7): the slice default a blob written before the mode
     // existed must rehydrate to.
     advanceAutoResolve: false,
+    // The anonymous draft's slice defaults (settlementSlice).
+    settlement: null,
+    lastSeed: null,
     someSliceMethod: () => {},
   });
 
@@ -1068,10 +1094,71 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // `instantKnobPins` — a current-shape blob carries it whole.
       displayPrefs: { realmMagicChoice: 'yes', instantKnobPins: { realmSize: false, tone: false, mapKind: false } },
       advanceAutoResolve: true,
+      // The anonymous-draft keys are UNCONDITIONAL in the projection — always
+      // present, null when they do not apply — so a current-shape blob carries
+      // them even for a signed-in cohort. That is the point: the persisted SHAPE
+      // never forks by tier, only its values do.
+      settlement: null,
+      lastSeed: null,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
     const rePartialized = Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, merged[k]]));
     expectByteEqual(rePartialized, blob);
+  });
+
+  // ── THE ANONYMOUS DRAFT (2026-09-18), both directions, through the REAL
+  // partialize + merge pair. The point of persisting it is that /create's
+  // promise ("Your first dossier is yours to keep") survives a reload for the
+  // one cohort that has no library; the point of it being safe is that it is
+  // scoped to that cohort and that a blob written before it existed is
+  // indistinguishable from a fresh install.
+  describe('the anonymous draft', () => {
+    // A stand-in world: what matters to the projection is that the WHOLE object
+    // makes the round trip, not what is inside it.
+    const draft = Object.freeze({
+      name: 'Ashford', tier: 'town', population: 4000,
+      institutions: [{ id: 'i1', name: 'The Salt Hall' }],
+      config: { settType: 'town' },
+    });
+
+    test('an anonymous draft survives partialize -> rehydrate BYTE-identically', () => {
+      const projected = partializeOf({
+        ...currentStub(), auth: { tier: 'anon' }, settlement: draft, lastSeed: 'sf-seed-1',
+      });
+      expectByteEqual(projected.settlement, draft);
+      expect(projected.lastSeed).toBe('sf-seed-1');
+
+      const merged = mergePersistedState(JSON.parse(JSON.stringify(projected)), currentStub());
+      // Byte-identical, not merely deep-equal: a save taken after a reload must
+      // write exactly what a save taken before it would have written.
+      expectByteEqual(merged.settlement, draft);
+      expect(merged.lastSeed).toBe('sf-seed-1');
+    });
+
+    test.each(['free', 'premium', undefined])('a %s viewer\'s draft is NOT persisted', (tier) => {
+      const projected = partializeOf({
+        ...currentStub(), auth: tier ? { tier } : undefined, settlement: draft, lastSeed: 'sf-seed-1',
+      });
+      // The KEYS are still there (the shape never forks); the values are not.
+      expect(Object.hasOwn(projected, 'settlement')).toBe(true);
+      expect(projected.settlement).toBeNull();
+      expect(projected.lastSeed).toBeNull();
+    });
+
+    test('a blob written BEFORE the draft was persisted rehydrates to the slice default', () => {
+      const legacy = {
+        config: { ...DEFAULT_CONFIG },
+        configExplicitFields: {},
+        institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+        displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
+        advanceAutoResolve: false,
+      };
+      // anchored: the sibling key proves the blob really is the pre-draft shape
+      expect(Object.hasOwn(legacy, 'settlement')).toBe(false);
+      const merged = mergePersistedState(legacy, currentStub());
+      expect(merged.settlement).toBeNull();
+      expect(merged.lastSeed).toBeNull();
+    });
   });
 
   // ── Realm directive 7 (J-D7): the full-auto-resolve play mode, both directions.

@@ -34,7 +34,7 @@
 
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 
 import { createAuthSlice }       from './authSlice.js';
 import { createConfigSlice }     from './configSlice.js';
@@ -68,6 +68,34 @@ import { setCrashForensics }        from '../lib/errorReporter.js';
 import { buildCrashForensics }      from '../lib/crashForensics.js';
 import { saves as savesService }    from '../lib/saves.js';
 
+/**
+ * THE PERSIST DOOR, MADE NON-FATAL (2026-09-18).
+ *
+ * zustand's persist calls setItem inside the store's own `set`, so a throw from
+ * localStorage propagates straight out of whatever action wrote — including the
+ * generation action. That was survivable while the blob was a few kB of config;
+ * it is not now that an ANONYMOUS DRAFT rides it (store/persistProjection.js),
+ * because a quota error is a real outcome for a world-sized value and a
+ * generation that throws on its last line is the worst possible failure.
+ *
+ * So every door is wrapped: a blocked, full, or absent localStorage degrades to
+ * "this device does not remember", never to a broken generate. Behaviourally
+ * identical to the default `createJSONStorage(() => localStorage)` in every case
+ * where localStorage works.
+ */
+const resilientLocalStorage = {
+  getItem: (name) => {
+    try { return globalThis.localStorage?.getItem(name) ?? null; } catch { return null; }
+  },
+  setItem: (name, value) => {
+    // QuotaExceededError, Safari private mode, a blocked third-party context.
+    try { globalThis.localStorage?.setItem(name, value); } catch { /* the device just does not remember */ }
+  },
+  removeItem: (name) => {
+    try { globalThis.localStorage?.removeItem(name); } catch { /* nothing to undo */ }
+  },
+};
+
 export const useStore = create(
   devtools(
     subscribeWithSelector(
@@ -95,6 +123,9 @@ export const useStore = create(
         })),
         {
           name: 'settlementforge',
+          // The default storage with every access wrapped — see the comment on
+          // resilientLocalStorage above.
+          storage: createJSONStorage(() => resilientLocalStorage),
           // store-6: an explicit persist version + a migrate hook, so a future
           // persisted-shape change has a real upgrade seam instead of silently
           // forking returning users. v2 adds the JSON-safe, field-level config
