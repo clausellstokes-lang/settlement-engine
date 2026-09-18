@@ -188,6 +188,17 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
       expect(statusEl, `${label} must render its status`).toBeTruthy();
       expect(bands.length, `${label} must never render a second band`).toBeLessThanOrEqual(1);
 
+      // A PRESENCE READ HAS NO MAGNITUDE, so it has no bar and no band: `score: null` is
+      // how this list spells "there is nothing here to grade" (Legal Infrastructure,
+      // Medical Readiness, Logistics & Supply — and, since the magic row stopped borrowing
+      // the engine's magical score, Magical Capability when the town has no arcane
+      // institution). Such a row must show its status and nothing else.
+      if (cap.score === null) {
+        expect(bands.length, `${label} is a presence read and must carry no band`).toBe(0);
+        expect(statusEl.textContent, `${label} must still say what is there`).toBeTruthy();
+        continue;
+      }
+
       const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
       if (bands.length === 1) {
         expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);

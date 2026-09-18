@@ -223,7 +223,21 @@ export function deriveSupportingCapabilities(settlement) {
     {
       label: 'Magical Capability',
       status: f.hasMagicInst ? 'Arcane support' : 'None',
-      color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: scores.magical || 0,
+      // ⛔ A PRESENCE READ OF `None` CANNOT SIT BESIDE A BAR THAT SAYS `Strong`. This row's
+      // STATUS is a presence read — is there a magical institution here — while its score
+      // was `scores.magical`, which the engine derives whether or not one exists. A town
+      // with no arcane institution and a magical score of 66 therefore rendered
+      // "Magical Capability · None" against a two-thirds bar banded Strong: two facts, one
+      // row, wearing one label.
+      //
+      // The fix is the shape THIS LIST ALREADY USES for every other presence read. Legal
+      // Infrastructure, Medical Readiness and Logistics & Supply all carry `score: null`
+      // and render no bar, because "is there a court" has no magnitude. Magical Capability
+      // was the only presence read that also carried one. It now has a bar exactly when
+      // there is something for the bar to measure, and `scores.magical` is untouched — the
+      // Systems Health row on the Overview still reads it, because THAT row is labelled by
+      // the score and not by the institution.
+      color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: f.hasMagicInst ? (scores.magical || 0) : null,
       note: f.hasMagicInst ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.` : 'Conventional defense only. Invisible threats go undetected and unanswered.',
     },
     {
