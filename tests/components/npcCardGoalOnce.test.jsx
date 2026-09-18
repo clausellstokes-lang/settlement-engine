@@ -15,6 +15,7 @@
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { NPCCategoryGroup } from '../../src/components/new/npcComponents.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(cleanup);
 
@@ -66,9 +67,12 @@ describe('NPCInlineCard — the goal is printed once', () => {
       name: 'Hesta Roal',
       role: 'Factor',
       goal: { short: GOAL },
+      personality: { flaw: 'never forgives a slight' },
     });
 
-    expect(text).not.toContain('Goal:');
+    // The flaw chip is the liveness anchor: it travels the SAME publicTraits map
+    // the goal chip used to, so an emptied chip row cannot read as a fixed one.
+    expectAbsentWithAnchor(text, 'Goal:', 'Flaw:', 'the NPC card trait chips');
     expect(occurrences(text, GOAL)).toBe(1);
   });
 
