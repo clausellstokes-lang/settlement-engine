@@ -1146,7 +1146,10 @@ export const en = Object.freeze({
   save: {
     button:        'Save',
     primary:       'Save Draft',
-    signupButton:  'Save this town (free account) →',
+    // THE NOUN FOLLOWS THE TIER (ODQ §934.22 item 3). This key had NO consumer and said
+    // something different from the live button beside it, which is how a village came to be
+    // asked to save a 'town'. One string now, filled from the settlement's own tier.
+    signupButton:  'Save this {tierNoun}. Free account →',
     afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
     successTpl:    'Saved as {settlementName}. Find it in Settlements.',
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',

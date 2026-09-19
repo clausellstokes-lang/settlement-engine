@@ -171,11 +171,16 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     expect(bareTypographic.sentences[1]).toBe('The village\u2019 market lives off through-traffic.');
     // A line that NAMES A TIER still takes the plain form when the apostrophe is bare — the
     // bare test runs FIRST, so the pronoun branch cannot reach it.
+    // ⭐ THE TAIL MOVED WITH §934.22 item 3, AND SAYING SO IS THE POINT OF THIS NOTE. The
+    // fixture line ends "…as bearing on the town", and `tierVoice` now speaks that generic
+    // noun in the settlement's own — which is the whole cure, arriving in a fixture that was
+    // written before it existed. What this arm asserts is UNCHANGED: a bare apostrophe takes
+    // the plain `The <noun>` form and never the pronoun.
     const namesTier = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\' record still marks each hard season as bearing on the town.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(namesTier.sentences[1]).toBe('The village\' record still marks each hard season as bearing on the town.');
+    expect(namesTier.sentences[1]).toBe('The village\' record still marks each hard season as bearing on the village.');
     const atEnd = weaveBlock(['Nothing hems Kilcross in.', 'Kilcross\''], { settlementName: 'Kilcross', tierNoun: VILLAGE });
     expect(atEnd.sentences[1]).toBe('The village\'');
   });
@@ -194,11 +199,13 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
     );
     expect(sFormTypographic.sentences[1]).toBe('The village\u2019s market lives off through-traffic.');
     // …and it still reaches the pronoun branch, which the bare form does not.
+    // The tail reads 'the village' since §934.22 item 3 (see the note in the arm above); the
+    // branch under test — apostrophe-s reaching the pronoun — is unchanged.
     const pronoun = weaveBlock(
       ['Nothing hems Kilcross in.', 'Kilcross\'s record still marks each hard season as bearing on the town.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(pronoun.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+    expect(pronoun.sentences[1]).toBe('Its record still marks each hard season as bearing on the village.');
   });
 
   it('an apostrophe MID-WORD is not a possessive, and the name is still stood down', () => {
@@ -308,12 +315,15 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
       { settlementName: 'Adham', tierNoun: tierNounFor('thorp') },
     );
     expect(contrastive.sentences[1]).toBe('It keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.');
-    // …and a possessive across tiers still takes "Its".
+    // …and a possessive across tiers still takes "Its" — on a tail that §934.22 item 3 now
+    // speaks as 'the thorp'. ⭐ AND THE BRANCH IS STILL REACHED FOR THE RIGHT REASON: the
+    // remainder names a tier either way, so what this arm proves (any tier counts, not only
+    // this settlement's) is the same fact it proved before the noun moved.
     const possessive = weaveBlock(
       ['Nothing hems Adham in.', 'Adham\'s record still marks each hard season as bearing on the town.'],
       { settlementName: 'Adham', tierNoun: tierNounFor('thorp') },
     );
-    expect(possessive.sentences[1]).toBe('Its record still marks each hard season as bearing on the town.');
+    expect(possessive.sentences[1]).toBe('Its record still marks each hard season as bearing on the thorp.');
     // A line naming NO tier at all keeps "The <noun>", so the arm above is discriminating.
     const none = weaveBlock(
       ['Adham holds the ford.', 'Adham buys its grain from a steading three days out.'],
@@ -365,5 +375,119 @@ describe('THE OWNER\'S VALLEPAGUS TRIPLE (2026-09-18) — the reading this exist
       const tail = source.slice(source.indexOf(' '));
       expect(woven.sentences[i].endsWith(tail), `sentence ${i + 1} lost its body`).toBe(true);
     }
+  });
+});
+
+/**
+ * ── THE TIER NOUN IN THE CORPUS'S OWN SENTENCES (ODQ §934.22 item 3) ──────────────────
+ *
+ * THE DEFECT (the second browser pass, 2026-09-19). Kolstad is a VILLAGE of 633, and its
+ * Defense tab read "The town's plan for an army is to not be interesting to one". The
+ * sentence is the corpus's own (DS-DEF-2); the corpus writes 'the town' about a settlement of
+ * any size, 1,101 whole-word `town` against 2 `village` across the whole pool document.
+ *
+ * WHAT THE ARMS BELOW ARE FOR. `tierVoice` is a substitution over reader-facing prose, so
+ * every arm is a place it could corrupt a sentence rather than improve it: a COMPARISON to
+ * somewhere else being re-pointed at this settlement, a compound noun ('the town watch')
+ * losing its meaning, a plural or a longer word being caught by a loose boundary, and a TOWN
+ * — where the corpus's word is already right — rendering anything but the identical string.
+ */
+describe('the settlement speaks in its own tier noun', () => {
+  const KOLSTAD = "The town's plan for an army is to not be interesting to one, and everybody here can state the plan.";
+
+  it('stands the corpus\'s generic noun down to the settlement\'s own, possessive and all', () => {
+    expect(weaveBlock([KOLSTAD], { settlementName: 'Kolstad', tierNoun: VILLAGE }).paragraph)
+      .toBe("The village's plan for an army is to not be interesting to one, and everybody here can state the plan.");
+  });
+
+  it('reaches sentence 0 and a lone line — a one-lens position is as entitled to its noun as a three-lens one', () => {
+    // ⛔ THE NARROWED ONE-LINE CONTRACT, pinned. Before §934.22 a single line came back
+    // character for character; it now comes back in the settlement's noun, and only a TOWN
+    // comes back by identity (the arm below).
+    const woven = weaveBlock([KOLSTAD, 'Kolstad keeps no market worth the name.'], {
+      settlementName: 'Kolstad', tierNoun: VILLAGE,
+    });
+    expect(woven.sentences[0]).toContain("The village's plan");
+  });
+
+  it('a TOWN renders the identical string, which is what keeps every town in the estate unmoved', () => {
+    // anchored: the SAME line on a village IS moved by the first arm above, so this is not a
+    // substitution that has simply stopped working.
+    const town = weaveBlock([KOLSTAD], { settlementName: 'Kolstad', tierNoun: tierNounFor('town') });
+    expect(town.paragraph).toBe(KOLSTAD);
+  });
+
+  it('an unknown tier substitutes NOTHING rather than guessing a rung', () => {
+    expect(weaveBlock([KOLSTAD], { settlementName: 'Kolstad', tierNoun: tierNounFor('village-ish') }).paragraph)
+      .toBe(KOLSTAD);
+  });
+
+  it('⛔ a COMPARISON to somewhere else is left exactly as the corpus wrote it', () => {
+    // 87 `a town` and 3 `every town` stand in the corpus, and every one of them is about
+    // somewhere that is NOT this settlement. Re-pointing them would rewrite the comparison
+    // into nonsense: "what a larger village does with buildings" on a village.
+    const lines = [
+      'It keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.',
+      'It is a town, in the ordinary sense, and the ordinariness is accurate.',
+      'Every town on this road keeps the same market day.',
+    ];
+    const woven = weaveBlock(lines, { settlementName: 'Kolstad', tierNoun: VILLAGE });
+    expect(woven.sentences).toEqual(lines);
+  });
+
+  it('⛔ an ADJECTIVE refuses the substitution; a COMPOUND does NOT, which is why the corpus was grepped', () => {
+    // TWO DIFFERENT FACTS, PINNED TOGETHER because they are easy to confuse.
+    //  (1) The determiner must sit IMMEDIATELY before the noun, so 'the whole town' (2
+    //      occurrences in the corpus) is refused rather than guessed into 'the whole village'.
+    //  (2) A COMPOUND is NOT refused: 'the town watch' becomes 'the village watch'. That is
+    //      the one substitution this leaf makes that could change a meaning, which is exactly
+    //      why 'the town' + watch/walls/gates/guard/council/hall/square/crier/militia/charter/
+    //      market was grepped over the WHOLE pool document and found ZERO times. The capital
+    //      spelling an institution name would carry ('the Town watch') cannot match at all.
+    const lines = [
+      'The town watch keeps the gates, and the whole town turns out for the fair.',
+      'The Town watch is a proper name and never moves.',
+    ];
+    expect(weaveBlock(lines, { settlementName: 'Kolstad', tierNoun: VILLAGE }).sentences).toEqual([
+      'The village watch keeps the gates, and the whole town turns out for the fair.',
+      'The Town watch is a proper name and never moves.',
+    ]);
+  });
+
+  it('⛔ a plural, a longer word and a name are never caught', () => {
+    const line = 'Townsfolk from the townships and from Newtown come to the towns nearby.';
+    expect(weaveBlock([line], { settlementName: 'Kolstad', tierNoun: VILLAGE }).paragraph).toBe(line);
+  });
+
+  it('two references in ONE line both move — the boundary is re-emitted, not consumed', () => {
+    expect(weaveBlock(['The town has walls and this town knows what they cost.'], {
+      settlementName: 'Kolstad', tierNoun: tierNounFor('hamlet'),
+    }).paragraph).toBe('The hamlet has walls and this hamlet knows what they cost.');
+  });
+
+  it('the noun runs BEFORE the stand-down, so a stood-down line takes the pronoun rather than repeating itself', () => {
+    // ⭐ THE ORDERING THE WEAVE DEPENDS ON. Line 2 opens on the name AND names the corpus's
+    // generic noun in its remainder. With the noun spoken first, `namesAnyTierNoun` reads the
+    // text the READER meets and routes the opening to "It" — never "The village keeps the
+    // village's granary full".
+    const woven = weaveBlock([
+      'Kolstad sits in country that offers no argument against it.',
+      "Kolstad keeps the town's granary full.",
+    ], { settlementName: 'Kolstad', tierNoun: VILLAGE });
+    expect(woven.sentences[1]).toBe("It keeps the village's granary full.");
+  });
+
+  it('every canonical tier speaks its own noun, and the vocabulary is the engine\'s', () => {
+    const spoken = TIER_ORDER.map((tier) => weaveBlock(['The town has walls.'], {
+      settlementName: 'Kolstad', tierNoun: tierNounFor(tier),
+    }).paragraph);
+    expect(spoken).toEqual([
+      'The thorp has walls.',
+      'The hamlet has walls.',
+      'The village has walls.',
+      'The town has walls.',
+      'The city has walls.',
+      'The metropolis has walls.',
+    ]);
   });
 });

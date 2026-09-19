@@ -67,11 +67,27 @@
  * the ruling and it is written down rather than left to be discovered; what it was weighed
  * against is a sentence that tells the reader a town is a town.
  *
- * PURE HEADLESS LEAF: no React, no store, one import — the canonical tier list.
+ * ⭐⭐ AND SINCE ODQ §934.22 item 3, ONE MORE THING HAPPENS HERE, TO EVERY LINE. The weave's
+ * stand-down only ever touched an opening NAME. The browser pass found the other half of the
+ * same defect: the corpus writes 'the town' about a settlement of any size (1,101 whole-word
+ * `town` against 3 `hamlet` and 2 `village` across the whole pool document), so a village
+ * read "The town's plan for an army…" in its own dossier. `tierVoice.js` speaks those
+ * definite and demonstrative references in the settlement's own noun; its docblock carries
+ * the measurement, the three classes it refuses, and the residual risk.
+ *
+ * ⛔ THE ONE-LINE CONTRACT BELOW IS THEREFORE NARROWED, DELIBERATELY AND IN THE OPEN. It used
+ * to read "a position that drew a single lens renders exactly what it rendered before,
+ * character for character". A position that draws one lens is exactly as entitled to its own
+ * tier noun as one that draws three, so the guarantee is now: a single line is not WOVEN, and
+ * on a TOWN it is returned by identity. That second half is what keeps every town in the
+ * estate byte-identical, and it is why the suite proves the cure on a PAIR.
+ *
+ * PURE HEADLESS LEAF: no React, no store, two imports — the canonical tier list and the noun.
  *
  * @enforced-by tests/domain/display/stateProse/weaveBlock.test.js
  */
 import { TIER_ORDER } from '../../../data/constants.js';
+import { speakTierNoun } from './tierVoice.js';
 
 /**
  * The noun a tier is called by in a sentence, or null for a tier this build does not know.
@@ -212,11 +228,18 @@ function namesAnyTierNoun(text) {
  * @returns {WovenBlock}
  */
 export function weaveBlock(lines, options = {}) {
+  const noun0 = typeof options.tierNoun === 'string' ? options.tierNoun.trim() : '';
+  // THE SETTLEMENT'S OWN NOUN, FIRST AND ON EVERY LINE — index 0 included, single lines
+  // included. It runs BEFORE the stand-down on purpose: `namesAnyTierNoun` then reads the
+  // text the READER will meet, so a line whose remainder has just become "the village…"
+  // takes the pronoun rather than opening "The village … the village's".
   const kept = (Array.isArray(lines) ? lines : [])
-    .filter((line) => typeof line === 'string' && line.trim() !== '');
-  // ONE LINE IS NOT A WEAVE. Returning it verbatim is what makes this safe to route every
-  // position through: a position that drew a single lens renders exactly what it rendered
-  // before, character for character.
+    .filter((line) => typeof line === 'string' && line.trim() !== '')
+    .map((line) => speakTierNoun(line, noun0));
+  // ONE LINE IS NOT A WEAVE. Nothing is joined and no name is stood down, which is what makes
+  // this safe to route every position through — and on a TOWN, whose noun is the corpus's own,
+  // `speakTierNoun` returned the line by identity, so such a position renders exactly what it
+  // rendered before, character for character.
   if (kept.length <= 1) {
     return Object.freeze({
       paragraph: kept.length === 1 ? kept[0] : '',
@@ -224,7 +247,7 @@ export function weaveBlock(lines, options = {}) {
     });
   }
   const name = typeof options.settlementName === 'string' ? options.settlementName.trim() : '';
-  const noun = typeof options.tierNoun === 'string' ? options.tierNoun.trim() : '';
+  const noun = noun0;
   // NO NAME OR NO NOUN ⇒ THE JOIN ALONE, which is the honest half of the fix rather than a
   // fallback: the sentences still read as one paragraph, and nothing is renamed on a guess.
   const opening = name && noun ? openingNameMatcher(name) : null;

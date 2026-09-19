@@ -585,10 +585,19 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
       judged += 1;
       const text = render(e(Tab, props)).container.textContent;
       cleanup();
-      // The FIRST line keeps its name under every weave, so this is a DRAW claim and cannot
+      // The FIRST line keeps its NAME under every weave, so this is a DRAW claim and cannot
       // be mistaken for a thread claim by a later reader.
+      //
+      // ⭐ THROUGH `onPage` SINCE ODQ §934.22 item 3, AND THE CLAIM IS UNCHANGED IN FORCE.
+      // The raw drawn sentence used to reach the DOM byte for byte at index 0; `tierVoice`
+      // now speaks the corpus's generic 'the town' in the settlement's own noun, and it does
+      // so on sentence 0 like every other. Thornwall is a VILLAGE, so its terrain line stopped
+      // matching itself. `onPage` is this file's own existing answer to exactly this question
+      // — it puts the anchor through THE SHIPPED WEAVE at the index the desk hands over — and
+      // a sentence that is not in the position's list still comes back unchanged and still
+      // fails loudly.
       expect(text, `${mount}: the page does not carry the first sentence its desk drew`)
-        .toContain(lines[0]);
+        .toContain(onPage(lines[0], lines, GROUND));
     });
     expectNoSeedFailures(failures, 'every DeskLines mount draws and reaches the page');
     expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
