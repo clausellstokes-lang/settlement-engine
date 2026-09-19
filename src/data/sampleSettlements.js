@@ -42,13 +42,13 @@
  *                 ignores both). Each config also pins `culture` and
  *                 `customName` (real wizard dials) so the fork's names and
  *                 settlement name match the card, and MAY pin nearby-resource
- *                 state (Black Crag marks iron `depleted`) when a defining
- *                 resource trait must survive the per-user fork suffix rather
- *                 than ride the random depletion roll. Plus a seed so forks
- *                 are reproducible within a session — each user still gets a
- *                 different SETTLEMENT because the seed is suffixed with the
- *                 user id at fork time (they share the card's name, not its
- *                 people or history).
+ *                 state (Black Crag marks iron `depleted`, Cnocby its mountain
+ *                 timber) when a defining resource trait must survive the
+ *                 per-user fork suffix rather than ride the random depletion
+ *                 roll. Plus a seed so forks are reproducible within a session
+ *                 — each user still gets a different SETTLEMENT because the
+ *                 seed is suffixed with the user id at fork time (they share
+ *                 the card's name, not its people or history).
  */
 
 export const SAMPLE_SETTLEMENTS = Object.freeze([
@@ -106,26 +106,54 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
       seed:                  'blackcrag-016',
     },
   },
+  // ⛔ CNOCBY REPLACED THORNWELL HERE (owner order ODQ §934.30, 2026-09-19: "Have
+  // Cnocby replace Thornwell in the create page and the library as well"). Cnocby
+  // is the town the LANDING PAGE is built around — the landing fixture's seed
+  // lf-033 (src/components/home/landingFixture.js), the one a visitor reads four
+  // artifacts about before they ever reach /create. Offering them Thornwell at
+  // the door meant the first forkable thing in the product was a place they had
+  // never heard of, while the place they HAD just read about was unreachable.
+  //
+  // ⚠ THIS IS A CURATED SEED, NOT A COPY OF THE FIXTURE, and the difference is
+  // the fork: forkSeedFor() suffixes every fork with the user id, so no sample
+  // ever re-derives its canonical settlement (that is the whole design — "they
+  // share the card's name, not their people or history"). What travels is the
+  // CHARACTER, which lives in the dials. These dials are lf-033's own RESOLVED
+  // config, read off the fixture run: a celtic mountain village the road reaches,
+  // heartland threat, and the criminal dial the highest of the five.
+  //
+  // ⚠ AND THE CARD'S ONE PROMISE IS PINNED, for Black Crag's reason. "The good
+  // timber was cut out" is a depletion ROLL, so under a pure seed it would hold
+  // in some forks and not others. nearbyResources + mountain_timber DEPLETED are
+  // real wizard dials (the four-state resource picker), and with them the claim
+  // holds 12/12 across suffixed forks (measured 2026-09-19). The inn, the market
+  // and the faction conflict are NOT pinned and NOT promised: they held 6/12,
+  // 8/12 and 8/12, so the teaser says nothing about them.
   {
-    id:      'sample-thornwell',
-    name:    'Thornwell',
+    id:      'sample-cnocby',
+    name:    'Cnocby',
     tier:    'village',
-    terrain: 'forest',
-    teaser:  "A forest village a week from the nearest road, where every cottage bars its door twice and the hunter's lodge kills more wolves than the militia has ever fought men.",
-    tags:    ['Frontier', 'Monster pressure', 'Self-reliant'],
+    terrain: 'mountain',
+    teaser:  'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
+    tags:    ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
     config: {
       settType:         'village',
-      tradeRouteAccess: 'isolated',
-      terrainOverride:  'forest',
-      monsterThreat:    'plagued',
-      culture:          'germanic',
-      customName:       'Thornwell',
-      priorityMilitary: 60,
-      priorityReligion: 45,
-      priorityEconomy:  30,
-      priorityCriminal: 20,
-      priorityMagic:    35,
-      seed:             'thornwell-034',
+      tradeRouteAccess: 'road',
+      terrainOverride:  'mountain',
+      monsterThreat:    'heartland',
+      culture:          'celtic',
+      customName:       'Cnocby',
+      // lf-033's resolved priority roll, kept exactly — the landing's Cnocby is
+      // the town these five numbers make.
+      priorityMilitary: 47,
+      priorityReligion: 23,
+      priorityEconomy:  49,
+      priorityCriminal: 64,
+      priorityMagic:    21,
+      nearbyResourcesRandom: false,
+      nearbyResources:       ['mountain_timber', 'alpine_pasture', 'hunting_grounds', 'ancient_grove', 'stone_quarry'],
+      nearbyResourcesState:  { mountain_timber: 'depleted' },
+      seed:                  'cnocby-033a',
     },
   },
 ]);

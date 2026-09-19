@@ -2,7 +2,7 @@
 /**
  * foundingWorlds.test.jsx — the create-landing sample strip pins.
  *
- * The cards render the Mossgate / Black Crag / Thornwell sample trio (imported
+ * The cards render the Mossgate / Black Crag / Cnocby sample trio (imported
  * from src/data/sampleSettlements.js — the same source the Library empty-state
  * uses), and 'Fork this sample' drives the SAME fork wiring as the Library
  * (SettlementsPanel.forkSample): the sample's config loaded WITHOUT its seed, then

@@ -6,11 +6,23 @@
  *   1. Every sample has the fields the UI reads (name, teaser, tags, config).
  *   2. Sample configs match the live generator's config shape.
  *   3. forkSeedFor produces stable, user-distinguished seeds.
+ *
+ * And, since 2026-09-19 (ODQ §934.30): the trio's third card is CNOCBY, the
+ * landing page's own fixture town, asserted against the fixture rather than
+ * against literals — plus the one behaviour the swap changed, which is that a
+ * save forked from the retired Thornwell still carries `_forkedFromSample:
+ * 'sample-thornwell'` in its persisted config and must stay valid.
  */
 
 import { describe, it, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../src/data/sampleSettlements.js';
-import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { DEFAULT_CONFIG, isAllowedConfigKey } from '../../src/store/configSlice.js';
+// The landing page's frozen town. The third curated sample IS that town (ODQ
+// §934.30), so the card's dials are asserted against the fixture rather than
+// against literals — a regenerated fixture that moved off village/road/mountain
+// reds here instead of quietly leaving the card describing a different place.
+import { fixture as landingFixture } from '../../src/components/home/landingFixture.js';
 
 describe('SAMPLE_SETTLEMENTS shape contract', () => {
   it('ships three samples (matches Tier 8.2 spec)', () => {
@@ -74,6 +86,57 @@ describe('SAMPLE_SETTLEMENTS shape contract', () => {
       expect(typeof sample.config.seed).toBe('string');
       expect(sample.config.seed.length).toBeGreaterThan(8);
     }
+  });
+
+  // ── ODQ §934.30 item 5 — CNOCBY IS THE THIRD CARD, AND THORNWELL IS GONE ───
+  // The owner: "Have Cnocby replace Thornwell in the create page and the
+  // library as well." Both surfaces (FoundingWorlds on /create, SampleDashboard
+  // in the Library) map this array, so the swap is a data change and this is
+  // where it is pinned.
+  it('the curated trio offers the landing page its own town, not a stranger', () => {
+    const byId = new Map(SAMPLE_SETTLEMENTS.map((s) => [s.id, s]));
+    const cnocby = byId.get('sample-cnocby');
+    expect(cnocby, 'the landing fixture town is not offered as a curated sample').toBeTruthy();
+    // The card names the same place the landing's four artifacts are about.
+    expect(cnocby.name).toBe(landingFixture.town.name);
+    // …and its dials are that town's RESOLVED config, not a lookalike: the
+    // fixture is generated at settType village from a road-reached mountain
+    // site, and the card must not drift off it.
+    expect(cnocby.tier).toBe(landingFixture.town.tier);
+    expect(cnocby.config.settType).toBe(landingFixture.forge.config.settType);
+    expect(cnocby.config.customName).toBe(landingFixture.town.name);
+    // The eyebrow the landing prints is "<route> <tier> · <terrain>", derived
+    // from the same dials — so it anchors all three of them at once.
+    expect(cnocby.config.terrainOverride).toBe(cnocby.terrain);
+    expect(landingFixture.town.eyebrow)
+      .toBe(`${cnocby.config.tradeRouteAccess} ${cnocby.tier} · ${cnocby.terrain}`);
+
+    // THE REMOVAL, anchored on a sibling that travels the same array: Mossgate
+    // proves the trio is live and correctly keyed, so "no Thornwell" cannot
+    // pass because the array emptied.
+    expectAbsentWithAnchor([...byId.keys()], 'sample-thornwell', 'sample-mossgate', 'curated sample ids');
+    expectAbsentWithAnchor(SAMPLE_SETTLEMENTS.map((s) => s.name), 'Thornwell', 'Mossgate', 'curated sample names');
+  });
+
+  // ⚠ THE BEHAVIOUR CHANGE, STATED AND TRACED. Every fork stamps
+  // `_forkedFromSample: <sample id>` into the PERSISTED store config
+  // (FoundingWorlds.jsx / SettlementsPanel.jsx), so saves made before today
+  // carry `'sample-thornwell'` for a sample that no longer exists. That stamp is
+  // WRITE-ONLY in this codebase — traced 2026-09-19: two writers, zero readers;
+  // nothing looks it up in SAMPLE_SETTLEMENTS, branches on it, or displays it.
+  // It survives an updateConfig patch only because `isAllowedConfigKey` admits
+  // the whole underscore rider family, which is a shape rule and not a registry
+  // of ids. So a Thornwell fork in an existing save stays valid, and this arm is
+  // what would red if someone later made the stamp load-bearing without noticing
+  // that a retired id is still out there in people's browsers.
+  it('a legacy fork stamp for a retired sample stays admissible (existing saves keep working)', () => {
+    expect(isAllowedConfigKey('_forkedFromSample'), 'the fork stamp stopped being an admitted config key').toBe(true);
+    // The retired id is not resolvable, and nothing may require that it is.
+    expect(SAMPLE_SETTLEMENTS.find((s) => s.id === 'sample-thornwell')).toBeUndefined();
+    // forkConfigFor is the one function that reads a sample's config on the fork
+    // path; handed a shape it cannot resolve it answers an empty bag rather than
+    // throwing, which is what keeps a stale stamp inert rather than fatal.
+    expect(forkConfigFor({ id: 'sample-thornwell' })).toEqual({});
   });
 
   it('sample ids are unique', () => {
