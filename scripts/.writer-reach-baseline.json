@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "e7590db8e990c697ec6904d155c3a48e2bc036c4",
+ "frozenAtSha": "b1ec5588c6edbbd6f213dbf430e5d5cf56fd99fe",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 8560,
   "transitionCount": 14496
  },
- "shapesDigest": "44fc73f1b012b60c5aaf7b290fe4917edd89a2493f35016b849d7136752077a8",
- "detectorDigest": "7142135443926d4be8879f34e0926a79dd9b6712674cf4015e0ec4abd6a3218e",
- "verdictDigest": "24521d81f266619e9375afa9e684bf5babfd9b85f16e8530f4eb45e59671a537",
+ "shapesDigest": "aeb73dc28d89b6db7a220d9affee6b8bfa99ede4e1b0e9d347d084e24a8b595b",
+ "detectorDigest": "33cf653ce6689525b7c5be11aeca1ebc6f189890f0c20b0a6fd06e2f9a2ad68b",
+ "verdictDigest": "1b213ab210cc0f7af004ca70f397a5e87baf8834a99c367bedded8fb37bedecb",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,38 +72,38 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 709,
+  "web-display": 714,
   "web-transitive": 903,
-  "dossier-pdf": 406,
+  "dossier-pdf": 411,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 322,
+  "foundry": 323,
   "json-export": 8,
   "news": 29
  },
  "population": {
-  "judged": 6532,
+  "judged": 6537,
   "lit": 572,
-  "litName": 4667,
-  "dark": 1293,
+  "litName": 4670,
+  "dark": 1295,
   "thinKeys": 9144,
   "thinShapes": 962,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1613,
-  "sites": 38905,
-  "propRead": 36839,
+  "files": 1618,
+  "sites": 38840,
+  "propRead": 36775,
   "elemRead": 0,
-  "destructure": 2052,
+  "destructure": 2051,
   "inOp": 14,
-  "rGrades": 5957,
-  "nGrades": 888887,
-  "resolvedReceivers": 6724
+  "rGrades": 5971,
+  "nGrades": 885932,
+  "resolvedReceivers": 6737
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 494,
+ "reviewableDarkCount": 496,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -1714,6 +1714,12 @@
    "rows": 420
   },
   {
+   "identity": "effectiveAgriculture on foodSecurity",
+   "key": "effectiveAgriculture",
+   "shape": "foodSecurity",
+   "rows": 420
+  },
+  {
    "identity": "elected_reeve on leaderNpcIds",
    "key": "elected_reeve",
    "shape": "leaderNpcIds",
@@ -3223,6 +3229,12 @@
    "identity": "magicMilitarized on flags",
    "key": "magicMilitarized",
    "shape": "flags",
+   "rows": 420
+  },
+  {
+   "identity": "magicOffset on foodSecurity",
+   "key": "magicOffset",
+   "shape": "foodSecurity",
    "rows": 420
   },
   {
@@ -8725,11 +8737,14 @@
   "color on foodSecurity": "dossier-pdf=N foundry=N web-display=R web-transitive=N",
   "dailyNeed on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "dailyProduction on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
+  "deficit on foodSecurity": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "deficitPct on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "diversityNote on foodSecurity": "",
+  "effectiveAgriculture on foodSecurity": "",
   "foodRatio on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "hasFamine on foodSecurity": "",
   "hasSiege on foodSecurity": "",
+  "importCoverage on foodSecurity": "dossier-pdf=N foundry=N web-display=N",
   "importDependency on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "importNote on foodSecurity": "",
   "importPct on foodSecurity": "",
@@ -8739,9 +8754,11 @@
   "isSurplus on foodSecurity": "web-transitive=R",
   "label on foodSecurity": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=R world-book=N",
   "magicNote on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "magicOffset on foodSecurity": "",
   "magicSupplement on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "magicTradeChannel on foodSecurity": "dossier-pdf=R foundry=R web-transitive=R",
   "prosperityMod on foodSecurity": "",
+  "rawDeficit on foodSecurity": "dossier-pdf=N foundry=N web-display=N",
   "resilienceScore on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "stockpile on foodSecurity": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "storageMonths on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -14403,6 +14420,16 @@
    ],
    "previousCohort": 1323,
    "cohort": 1324
+  },
+  {
+   "charter": "§934.15",
+   "sha": "b1ec5588c6edbbd6f213dbf430e5d5cf56fd99fe",
+   "admitted": [
+    "effectiveAgriculture on foodSecurity",
+    "magicOffset on foodSecurity"
+   ],
+   "previousCohort": 1289,
+   "cohort": 1291
   }
  ]
 }
