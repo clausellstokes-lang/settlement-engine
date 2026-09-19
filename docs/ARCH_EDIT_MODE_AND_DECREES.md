@@ -33,7 +33,11 @@ Rules: no component imports `dmLayer.js` or `registry.js` directly except throug
 // free-cascade (§12.3): typeable, but names are JOIN KEYS — a change is a typed op
 // (rename-faction / rename-npc / rename-settlement) that runs the existing rename cascade.
 /** @typedef {{ card: string, field: string, kind: FieldKind, pool?: string, label: string,
- *   group: string, maxLength?: number, readersProof?: string }} FieldDeclaration */
+ *   group: string, maxLength?: number, readersProof?: string,
+ *   provenance: 'root', writer: string }} FieldDeclaration */
+// `provenance` is always 'root' by construction (§14): the declaration census admits a field only
+// when its `writer` (a generator step, by symbol) reads nothing but the seed and the dials; the
+// walker refuses a derived field, so a declaration for one cannot exist.
 /** @typedef {{ id: string, source: 'catalogue'|'generator'|'world'|'literal', values?: readonly string[],
  *   read?: (world) => string[], roll?: (world, seed, n) => string }} PoolSource */
 /** @typedef {{ type: string, target: EntityRef, payload: Record<string, unknown>,
@@ -85,7 +89,7 @@ State: `{ editMode: { active: boolean, saveId: string|null }, dmLayer, decrees }
 
 ## 8. Instruments (walkers under tests/lint, censuses under tests/build)
 
-1. `editDeclarations.walker` — every card rendering a pencil has a declaration; every `pool` field names a pool in `POOLS`.
+1. `editDeclarations.walker` — every card rendering a pencil has a declaration; every `pool` field names a pool in `POOLS`; every declared field is a ROOT (its named writer reads no other world fact — measured from the writer-reach and observed-shape data and the generators' reads), and a derived field is REFUSED (§14).
 2. `flavorFields.census` — every `free` field has zero readers under `src/generators`, `src/domain/worldPulse`, `src/domain/causalState`, `src/domain/edit/guards*`, and the registers, measured by PROPERTY READS (the writer-reach and observed-shape data) AND by VALUE JOINS (the rename cascade's join list): a field the cascade joins on may only be `free-cascade` (§12.3); a proof string per row.
 3. `opGuardCoverage.walker` — every op type declares its guard coverage (rules or `'none, stated'`).
 4. `decreeCause.walker` — every applied decree carries a chronicle line with a cause; overrides carry `overrode`.
@@ -96,7 +100,7 @@ State: `{ editMode: { active: boolean, saveId: string|null }, dmLayer, decrees }
 
 ## 9. The initial catalogues (seed content for lane A)
 
-- **Card types with declarations:** institution (name free-cascade; class pool; standing pool; note free), npc (name free-cascade with the generator's roll; role pool from the world's institutions; disposition pool; note free), faction (name free-cascade; archetype pool; power via the totality guard; stance pool), power seat (holder pool over factions/npcs), system state cards (typed states only: security, food security, order). Names are join keys (§12.3).
+- **Card types with declarations (ROOT facts only, §14):** institution (name free-cascade; class pool; standing pool; note free), npc (name free-cascade with the generator's roll; role pool from the world's institutions; disposition pool; note free), faction (name free-cascade; archetype pool; power share as a root under the totality guard; stance pool), power seat (holder pool over factions/npcs). The system-state cards are STRUCK (derived). Names are join keys (§12.3). Every derived card renders provenance in place of a pencil, from the holder table's producer citations.
 - **Pools:** `institution.class` (the generator's catalogue — `getInstitutionalCatalog` / `getInstitutionsForTier`, tier-gated; never the display seam behind `institutionDisplayName`), `name.<culture>` (the generator), `npc.role`, `faction.archetype`, `stance`, `cause.remove` (died, left, burned, dissolved, seized), `commodity` (the resource catalogue behind `resourceDisplayName`, read at its source), `deity` (the pantheon), `tier`.
 - **Op types (first twenty):** set-field, add-institution, remove-institution, add-npc, remove-npc, add-faction, remove-faction, set-power-holder, rebalance-power, set-relationship, declare-war (on-stage / phantom), make-peace, open-trade, close-trade, send-force, recall-force, resolve-outcome (victory/defeat/stalemate/truce), found-phantom, promote-phantom, set-state.
 
