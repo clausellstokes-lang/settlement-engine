@@ -978,6 +978,11 @@
     "tests/lint/promptCompactionParity.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/refusalNoticeCoverage.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE REFUSAL-REGISTER WALKER (owner ruling, ODQ \u00a7934.24(c): no gate refuses silently). Its catching power is EXECUTED ON EVERY GATE RUN by its sibling tests/components/refusalNotice.test.jsx, which is not a mock harness: it drives the REAL generation lane (store/settlementGenerateAction.js) against a hand-built store, with the REAL anonymous counter (lib/anonGenCounter.js) reading real localStorage, and only the engine transport stubbed. It proves, per registered reason, that the lane records it and that the notice renders it as an announced alert -- daily cap, tier (with the size and the ceiling interpolated), generationFailed, and staleBuild told apart from it by the shipped isChunkLoadError predicate. This walker adds the TOTALITY the runtime tests cannot see: a reason with no copy, a copy row with no reason, a reason nothing raises, a surface that reads lastRefusal without rendering the notice, a SECOND renderer of the refusals.* copy, and -- the habitat arm -- any module outside the generation lane calling anonAtCap(), which is how the class began (four surfaces, four hand-rolled pre-flights, three of them answering a refusal by navigating with nothing said). Its own anti-vacuity arm asserts the corpus, the register and the notice file are all non-empty, and the CAP_READERS_ADMITTED roster is exact in both directions so a stale admission cannot linger as spare budget. A STANDING SWEEP PLANT IS NOT OFFERED because every target -- the generation lane, copy/en.js, and the four Create/landing surfaces -- is a file concurrent lanes hold uncommitted work in, and check_caught's revert is a `git checkout --` that would discard it. Promote to kind:mutation when the sweep gains a target outside those files.",
+      "kindNote": "rationale rather than a standing sweep plant: the runtime half runs the real lane and the real counter on every gate, which is strictly more often than the weekly sweep, and every plant this walker needs lands in a file another lane is editing concurrently."
+    },
     "tests/lint/rawButtonBaseline.test.js": {
       "kind": "uncovered"
     },

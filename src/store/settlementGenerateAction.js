@@ -36,6 +36,23 @@ import { generateSeed } from '../kernel/prng.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
+import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
+import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
+import { isChunkLoadError } from '../lib/staleDeploy.js';
+
+/**
+ * The DISPLAY label for a size token, and the ceiling label for an account tier.
+ * Both frozen maps are keyed by literal unions, so a plain `string` index is a type
+ * error at the call site; narrowing once here keeps the refusal sites readable and
+ * keeps a raw tier token off the page when a map has no row.
+ * @param {string|undefined} token
+ */
+const sizeLabelOf = (token) => (token
+  ? (/** @type {Record<string, string>} */ (SIZE_LABEL)[token] || token) : '');
+/** @param {string|undefined} tier */
+const ceilingLabelOf = (tier) => (tier
+  ? (/** @type {Record<string, { maxSizeLabel: string }>} */ (TIER_FACTS)[tier]?.maxSizeLabel || '') : '');
+import { SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
 import {
@@ -59,6 +76,7 @@ import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } fro
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
 
+
 /**
  * The in-thread half of the ONE code path. Imported lazily so the happy worker
  * path never fetches the engine chunk on the main thread at all.
@@ -76,9 +94,19 @@ async function inThreadGeneration(request, onStep) {
  * @param {(fn: (draft: any) => void) => void} set
  * @param {() => any} get
  * @param {string} [seedOverride]
+ * @param {{ intent?: string }} [options] who is asking (lib/generationIntent.js); only
+ *   the anonymous daily cap reads it, and only to exempt a curated sample fork.
  * @returns {Promise<any>} the activated settlement, or null when a gate refused
  */
-export async function generateSettlementAction(set, get, seedOverride) {
+export async function generateSettlementAction(set, get, seedOverride, options) {
+  // A refusal from a PREVIOUS attempt must not outlive this one: the reader clicked
+  // again, and whatever they read before is now either cured or about to be re-raised.
+  set(state => { state.lastRefusal = null; });
+  // ⛔ SAMPLE FORKS ARE EXEMPT FROM THE ANONYMOUS DAILY CAP (owner ruling, ODQ
+  // §934.24(b)) — and from nothing else. `intentOf` fails CLOSED: anything it does not
+  // recognise reads as an ordinary generation, so the exemption must be asked for by
+  // its exact name and an older or mistyped caller is still capped.
+  const isSampleFork = intentOf(options) === GENERATION_INTENT_SAMPLE_FORK;
   const state = get();
   const { config, institutionToggles, categoryToggles, goodsToggles, servicesToggles } = state;
   const neighbor = state.importedNeighbour;
@@ -88,6 +116,15 @@ export async function generateSettlementAction(set, get, seedOverride) {
   if (settType && settType !== 'random' && settType !== 'custom') {
     if (!state.isTierAllowed(settType)) {
       console.warn(`Tier "${settType}" not allowed for current user tier.`);
+      // …and SAY so where the reader clicked. The sentence names the size asked for
+      // and the ceiling this account reaches, both as display labels off the config
+      // (never a raw tier token, never a hand-typed ceiling).
+      set(s => {
+        s.lastRefusal = refusalOf(REFUSAL_REASONS.TIER, {
+          size: sizeLabelOf(settType),
+          max: ceilingLabelOf(state.auth?.tier) || sizeLabelOf(state.maxAllowedTier?.()),
+        });
+      });
       return null;
     }
   }
@@ -101,8 +138,13 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // the right bucket (reroll vs. full) after a successful run.
   const isAnon = state.auth?.tier === 'anon';
   const hadSettlement = !!state.settlement;
-  if (isAnon && anonAtCap()) {
+  // ⛔ THE SAMPLE FORK DOES NOT PASS THROUGH THIS GATE (ODQ §934.24(b)). It also never
+  // reaches the two increments at the bottom, so the counter is not merely bypassed on
+  // the way in — a fork leaves the day's allowance BYTE-IDENTICAL, which is the half
+  // an exemption written only here would have got wrong.
+  if (!isSampleFork && isAnon && anonAtCap()) {
     console.warn('[settlementSlice] anonymous daily generation cap reached.');
+    set(s => { s.lastRefusal = refusalOf(REFUSAL_REASONS.DAILY_CAP); });
     return null;
   }
 
@@ -226,6 +268,19 @@ export async function generateSettlementAction(set, get, seedOverride) {
         step_name: lastStepId ?? /** @type {any} */ (genErr)?.stepId ?? undefined,
       });
     }).catch(() => {});
+    // The throw still PROPAGATES — that behaviour is unchanged, and callers that
+    // already catch it keep catching it. What is added is the record, so a surface
+    // that does NOT catch (three of them did not) still has something to render.
+    //
+    // ⚠ AND IT NAMES WHICH FAILURE. A tab that outlived a deploy fails on a chunk it
+    // can no longer fetch, and "try once more" is FALSE advice there — only a reload
+    // helps. `isChunkLoadError` is the same pure predicate lib/staleDeploy.js gives
+    // HomeHero, so the two surfaces cannot disagree about what happened.
+    set(s => {
+      s.lastRefusal = refusalOf(isChunkLoadError(genErr)
+        ? REFUSAL_REASONS.STALE_BUILD
+        : REFUSAL_REASONS.GENERATION_FAILED);
+    });
     throw genErr;
   }
   const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
@@ -245,6 +300,14 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // so reading it off the carried settlement is the same read as before.
   if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(withRoster?.tier)) {
     console.warn(`Resolved tier "${withRoster?.tier}" exceeds this account's cap — generation discarded.`);
+    // A DIFFERENT sentence from the pre-flight refusal on purpose: the reader picked
+    // nothing wrong here, the roll came out too big and the finished town was thrown
+    // away. Telling them "you asked for too much" would be false.
+    set(s => {
+      s.lastRefusal = refusalOf(REFUSAL_REASONS.RESOLVED_TIER, {
+        size: sizeLabelOf(withRoster?.tier),
+      });
+    });
     return null;
   }
   // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
@@ -379,7 +442,11 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // Count this anonymous generation against the daily cap. A regeneration
   // (a settlement was already on screen) spends a reroll; the first
   // generation of the day spends the full allowance. Only on success.
-  if (isAnon && withRoster) {
+  // ⛔ AND A SAMPLE FORK SPENDS NOTHING (ODQ §934.24(b)) — the write half of the
+  // exemption. A fork that was let past the gate above but still incremented here
+  // would burn the reader's real allowance for a curated seed, which is the exemption
+  // failing on its second lifecycle path while passing on its first.
+  if (!isSampleFork && isAnon && withRoster) {
     if (hadSettlement) incrementAnonReroll();
     else incrementAnonFull();
   }

@@ -42,7 +42,7 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import { anonAtCap } from '../../lib/anonGenCounter.js';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
@@ -111,16 +111,22 @@ function ForgeExactButton({ onNavigate }) {
   const setWizardMode = useStore(s => s.setWizardMode);
   const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
   const clearNeighbour = useStore(s => s.clearNeighbour);
-  const authTier = useStore(s => s.auth.tier);
+  // ⛔ THE LANE REFUSES AND SAYS WHY (ODQ §934.24(c)). The hand-rolled cap pre-flight
+  // that used to sit in this handler navigated to /create with NOTHING said — one of
+  // four copies of the same silent refusal the 2026-09-19 walk found. The gate lives
+  // in the generation lane, which is where it was always enforced; this surface reads
+  // the reason it recorded and renders it where the reader clicked.
+  const lastRefusal = useStore(s => s.lastRefusal);
+  const clearRefusal = useStore(s => s.clearRefusal);
   const [forging, setForging] = useState(false);
 
   const forgeExact = async () => {
     if (forging) return;
+    clearRefusal?.();
     // W-DOC: the landing funnel LANDED — landing_funnel_used
     // feature:'fixture_forge' via the SM-5-pattern lazy helper (the seed is the
     // fixture's constant — provenance, not user data).
     trackLandingFixtureForge({ seed: fixture.seed });
-    if (authTier === 'anon' && anonAtCap()) { onNavigate('generate'); return; }
     setForging(true);
     try {
       // Replay EVERY recorded generation input (mode, slider mode, neighbour,
@@ -130,19 +136,29 @@ function ForgeExactButton({ onNavigate }) {
       setRandomSliderMode(fixture.forge.randomSliderMode);
       clearNeighbour();
       updateConfig({ ...fixture.forge.config });
-      await generate(fixture.seed);
-    } catch (e) {
-      console.error('[LandingArtifacts] fixture forge failed:', e);
-    } finally {
+      const forged = await generate(fixture.seed);
+      // ⛔ A REFUSAL NEVER NAVIGATES. The old `finally` navigated on EVERY path, so a
+      // refused or failed forge still threw the reader at /create with no settlement
+      // and no reason — which is indistinguishable, from the chair, from nothing
+      // happening at all.
+      if (!forged) { setForging(false); return; }
       setForging(false);
       onNavigate('generate');
+    } catch (e) {
+      console.error('[LandingArtifacts] fixture forge failed:', e);
+      setForging(false);
     }
   };
 
   return (
-    <Button variant="secondary" size="sm" busy={forging} onClick={forgeExact}>
-      {tl('brief.forgeExact')}
-    </Button>
+    // The control and its refusal are ONE block: the notice renders directly beneath
+    // the button the reader pressed, never on another page.
+    <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: SP.sm }}>
+      <Button variant="secondary" size="sm" busy={forging} onClick={forgeExact}>
+        {tl('brief.forgeExact')}
+      </Button>
+      <RefusalNotice refusal={lastRefusal} />
+    </span>
   );
 }
 

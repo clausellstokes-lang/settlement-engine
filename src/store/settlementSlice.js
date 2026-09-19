@@ -218,8 +218,8 @@ export const createSettlementSlice = (set, get) => ({
   // overlay reads `pipelineHistory` to animate; the wizard hides the
   // dossier until this flag drops. Cleared on a fresh generate so the
   // reveal fires once per generation.
-  pipelineRevealActive: false,
-  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }),
+  pipelineRevealActive: false, lastRefusal: null,
+  dismissPipelineReveal: () => set(state => { state.pipelineRevealActive = false; }), clearRefusal: () => set(state => { state.lastRefusal = null; }),
 
   // P103 / X-2 — Active pricing moment. usePricingMoment opens these via
   // setActivePricingMoment({ headline, body, reason }); the
@@ -376,8 +376,18 @@ export const createSettlementSlice = (set, get) => ({
   // the activated settlement, or null when a tier or cap gate refused. It was
   // already async and every caller already awaits it; the one observable
   // difference is that resolution takes a macrotask rather than a microtask.
-  generateSettlement: (seedOverride) =>
-    loadGenerateLane().then(lane => lane.generateSettlementAction(set, get, seedOverride)),
+  // ⛔ NO GATE REFUSES SILENTLY (ODQ §934.24(c)) — `lastRefusal` / `clearRefusal` are
+  // declared beside pipelineRevealActive above, FOLDED ONTO ITS LINES because this file
+  // sits exactly at its shrink-only size baseline (816 effective lines, eslint.config.js)
+  // and a baseline may never be raised to admit a new member. The lane records a
+  // registered reason id (lib/refusalReasons.js) plus its sentence's facts; a surface
+  // renders it through components/primitives/RefusalNotice.jsx where the reader clicked.
+  // SESSION-ONLY by construction — persistProjection.js names its persisted keys one by
+  // one and this is not among them — and cleared at the start of every attempt.
+  // `options` is additive; the documented contract is unchanged. `options.intent` names
+  // WHO is asking (lib/generationIntent.js).
+  generateSettlement: (seedOverride, options) =>
+    loadGenerateLane().then(lane => lane.generateSettlementAction(set, get, seedOverride, options)),
 
   setSettlement: (settlement) =>
     set(state => {

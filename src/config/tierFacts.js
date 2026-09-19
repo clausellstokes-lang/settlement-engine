@@ -28,7 +28,11 @@ import { TIERS, SINGLE_DOSSIER } from './pricing.js';
 // as "Metropolis" to the reader (the size ladder's last rung). Anon alone is
 // capped at Town (the no-account funnel ceiling); a free account unlocks every
 // size. Pinned to TIER_GATE.{tier}.maxTier by the contract test.
-const SIZE_LABEL = Object.freeze({
+// EXPORTED (2026-09-19, ODQ §934.24): the refusal sentences name the size a reader
+// asked for and the ceiling their account reaches, and both must be the DISPLAY
+// label, never the raw token — `capital` reads as "Metropolis". Total over every
+// token TIER_GATE can hold, so a refusal can never print a bare tier id at a reader.
+export const SIZE_LABEL = Object.freeze({
   thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
   town: 'Town', city: 'City', capital: 'Metropolis', metropolis: 'Metropolis',
 });

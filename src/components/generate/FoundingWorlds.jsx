@@ -16,6 +16,22 @@
  *
  * Rule-framed plate idiom (no radius, no tint fills) so the deep-craft kill-list
  * stays tolerance-0.
+ *
+ * ⛔ A FORK IS A CURATED SEED, NOT A FREE GENERATION (owner ruling, ODQ §934.24(b)).
+ * It passes `intent: 'sampleFork'`, which the generation lane reads to skip the
+ * anonymous daily cap AND to leave the day's allowance unspent. The TIER gate still
+ * applies — a City sample is still beyond an account-less visit — and every real
+ * generation still spends and is still bound by the cap.
+ *
+ * ⛔ AND NO REFUSAL IS SILENT (ODQ §934.24(c)). This action had THREE silent exits and
+ * the 2026-09-19 walk found all of them at once: the cap check called
+ * `onNavigate('generate')`, which on /create — where this strip renders — is a
+ * navigation to the page the reader is already looking at; the null return from a
+ * tier-gated generation was DISCARDED and it navigated anyway, with nothing forged;
+ * and a throw had no catch at all, escaping as an unhandled rejection while `finally`
+ * cleared the spinner as if the work had finished. Every one of them now raises the
+ * lane's registered reason through primitives/RefusalNotice.jsx, above the cards,
+ * and a refusal NEVER navigates.
  */
 import { useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -23,7 +39,8 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, sans, serif_, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
-import { anonAtCap } from '../../lib/anonGenCounter.js';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { GENERATION_INTENT_SAMPLE_FORK } from '../../lib/generationIntent.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampleSettlements.js';
 
 // MG-3f (leak L8): this file used to INLINE the Library's migrateConfig verbatim, for a
@@ -38,8 +55,10 @@ export default function FoundingWorlds({ onNavigate }) {
   const mobile = useIsMobile();
   const generate = useStore((s) => s.generateSettlement);
   const updateConfig = useStore((s) => s.updateConfig);
-  const authTier = useStore((s) => s.auth.tier);
   const authUserId = useStore((s) => s.auth.user?.id);
+  // The lane records WHY it refused; this surface only renders it.
+  const lastRefusal = useStore((s) => s.lastRefusal);
+  const clearRefusal = useStore((s) => s.clearRefusal);
   const [busyId, setBusyId] = useState(null);
 
   // 'Fork this sample' — identical wiring to the Library's SettlementsPanel.forkSample:
@@ -51,14 +70,21 @@ export default function FoundingWorlds({ onNavigate }) {
   // to the wizard where the existing upgrade path lives.
   const forkSample = (sample) => async () => {
     if (busyId) return;
-    if (authTier === 'anon' && anonAtCap()) { onNavigate?.('generate'); return; }
+    clearRefusal?.();
     setBusyId(sample.id);
     try {
       const seed = forkSeedFor(sample, authUserId);
-      // The seed is the generation argument, never a config key (forkConfigFor).
+      // The seed is the generation argument, never a config key (forkConfigFor); the
+      // INTENT is an argument for the same reason — the config is persisted, so an
+      // exemption stamped there would outlive the fork that earned it.
       updateConfig({ ...normalizeConfig(forkConfigFor(sample)), _forkedFromSample: sample.id });
-      await generate(seed);
+      const forged = await generate(seed, { intent: GENERATION_INTENT_SAMPLE_FORK });
+      // A refusal is already recorded by the gate that made it; rendering it is all
+      // that is left, and NAVIGATING AWAY FROM IT is what left the reader with nothing.
+      if (!forged) return;
       onNavigate?.('generate');
+    } catch {
+      // The lane records the reason before it re-throws; the notice below renders it.
     } finally {
       setBusyId(null);
     }
@@ -75,6 +101,9 @@ export default function FoundingWorlds({ onNavigate }) {
       <p style={{ margin: `0 0 ${SP.md}px`, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
         Start somewhere already alive. Fork one of these curated settlements into your own draft: no two the same, all deterministic from their seed.
       </p>
+      {/* The refusal sits directly under the lead-in, above the cards the reader
+          clicked, announced as well as shown (role=alert inside the notice). */}
+      <RefusalNotice refusal={lastRefusal} style={{ marginBottom: SP.md }} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: SP.md }}>
         {SAMPLE_SETTLEMENTS.map((sample) => (
           <article key={sample.id}

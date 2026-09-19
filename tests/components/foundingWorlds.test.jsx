@@ -10,20 +10,36 @@
  * order 2026-07-21, ledger 13da1e95.) The seed left the config patch on 2026-09-16:
  * a `seed` in the persisted config made the pipeline refuse every later generation
  * in that browser (tests/store/generateStrayConfigSeed.test.js runs the real path).
+ *
+ * ⚠ AND THE CALL GAINED A SECOND ARGUMENT ON 2026-09-19 (owner ruling, ODQ
+ * §934.24(b)): a fork of a curated sample is a CURATED SEED, not a free generation,
+ * so it declares `{ intent: 'sampleFork' }` and the generation lane reads that to
+ * skip the anonymous daily cap AND to leave the day's allowance unspent. The intent
+ * is an ARGUMENT and never a config key — the config is persisted, so an exemption
+ * stamped there would outlive the fork that earned it, which is the same shape as
+ * the `seed` bug above. The patch assertion below still refuses a `seed`, and now
+ * refuses an `intent` beside it.
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
 
 const actions = {
   generateSettlement: vi.fn(() => Promise.resolve({ name: 'x', tier: 'town' })),
   updateConfig: vi.fn(),
   auth: { tier: 'premium' },
+  lastRefusal: null,
+  clearRefusal: vi.fn(),
 };
 vi.mock('../../src/store/index.js', () => {
   function useStore(selector) { return selector(actions); }
   useStore.getState = () => actions;
   return { useStore };
 });
+// The strip no longer reads the counter at all: the gate lives in the generation
+// lane (ODQ §934.24(c) — four surfaces used to hand-roll this check, three of them
+// answering a refusal by navigating with nothing said). The mock is kept so the
+// module graph is unchanged if anything downstream still pulls it in.
 vi.mock('../../src/lib/anonGenCounter.js', () => ({ anonAtCap: () => false }));
 
 function installMatchMedia() {
@@ -69,7 +85,9 @@ describe('FoundingWorlds', () => {
     // The seed is the generation ARGUMENT and never rides the config patch.
     const patch = actions.updateConfig.mock.calls.at(-1)[0];
     expect(Object.hasOwn(patch, 'seed')).toBe(false);
-    await waitFor(() => expect(actions.generateSettlement).toHaveBeenCalledWith(seed));
+    expect(Object.hasOwn(patch, 'intent'), 'the intent rode the PERSISTED config').toBe(false);
+    await waitFor(() => expect(actions.generateSettlement)
+      .toHaveBeenCalledWith(seed, { intent: GENERATION_INTENT_SAMPLE_FORK }));
     await waitFor(() => expect(onNavigate).toHaveBeenCalledWith('generate'));
   });
 });

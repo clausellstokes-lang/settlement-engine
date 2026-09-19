@@ -23,7 +23,7 @@ import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx'
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME, HEADER_H } from './theme.js';
 import { t } from '../copy/index.js';
-import { anonAtCap } from '../lib/anonGenCounter.js';
+import RefusalNotice from './primitives/RefusalNotice.jsx';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -104,6 +104,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
+  // The lane's recorded reason for the last refusal (store/settlementGenerateAction.js).
+  const lastRefusal = useStore(s => s.lastRefusal);
   const [generating, setGenerating] = useState(false);
   // State disables the visible controls; the ref closes the same-tick window
   // before React can render that disabled state.
@@ -184,14 +186,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   }, []);
 
   const handleGenerate = useCallback(async () => {
-    // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
-    // 3/day allowance as the first generation (enforced in the store), so
-    // when an anon is already at cap, route to the sign-in/unlock flow
-    // rather than dead-clicking — generateSettlement would no-op anyway.
-    if (authTier === 'anon' && anonAtCap()) {
-      if (typeof onSignIn === 'function') onSignIn();
-      return;
-    }
+    // ⛔ THE CAP PRE-FLIGHT IS GONE FROM HERE (ODQ §934.24(c)). It was one of FOUR
+    // hand-rolled copies of the same check across four surfaces, and it opened the
+    // auth modal without ever saying WHY the reader was being asked to sign in. The
+    // gate has always been enforced in the generation lane; the lane now records the
+    // reason too, and the notice below renders it with 'Sign in' as its door.
     if (generatingRef.current) return;
     generatingRef.current = true;
     setGenerating(true);
@@ -222,7 +221,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     } catch { /* analytics must never affect generation */ }
     try {
       const generated = await generate();
-      if (!generated) throw new Error('Generation completed without a settlement.');
+      // ⛔ A REFUSAL IS NOT AN ERROR, AND TURNING ONE INTO AN ERROR IS HOW THE REASON
+      // WAS LOST. This used to throw on a null, which landed the reader on the generic
+      // "we couldn't generate" line for what was actually a known, explainable gate —
+      // the daily cap, or a size above the account's ceiling. The lane has recorded
+      // which; RefusalNotice below says it.
+      if (!generated) return;
       generatedThisSession.current = true;
       clearLoadedFromSave();
       setShowOutput(true); // show output after generation
@@ -233,7 +237,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       generatingRef.current = false;
       setGenerating(false);
     }
-  }, [generate, clearLoadedFromSave, authTier, onSignIn]);
+    // `authTier`/`onSignIn` left the dependency list with the cap pre-flight: the
+    // gate is the lane's now, and onSignIn is read in the render as the notice's door.
+  }, [generate, clearLoadedFromSave]);
 
   /**
    * Exit the generated dossier. `back` returns to the config you generated
@@ -438,7 +444,19 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             pre-generate branch re-renders — without this block the click was a
             silent dead-end. Carried by the Deep Craft clerk's-note idiom (no
             tinted wash); the Generate button below is the retry affordance. */}
-        {generateError && (
+        {/* A recorded REFUSAL wins over the generic error line: it knows which gate
+            refused and can name the door. The two are exclusive so a reader never
+            gets a reason and a shrug at the same time. */}
+        {lastRefusal ? (
+          <RefusalNotice
+            refusal={lastRefusal}
+            actions={typeof onSignIn === 'function' ? (
+              <Button type="button" variant="primary" size="sm" onClick={onSignIn} style={{ minHeight: 44 }}>
+                {t('auth.button.signIn')}
+              </Button>
+            ) : null}
+          />
+        ) : generateError && (
           <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
             {generateError}
           </ClerkNote>

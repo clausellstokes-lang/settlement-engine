@@ -395,6 +395,44 @@ export const en = Object.freeze({
     legal: 'By continuing you agree to the Terms and Privacy Policy.',
   },
 
+  // ── Refusals ──────────────────────────────────────────────────────────────
+  // ⛔ NO GATE REFUSES SILENTLY (owner ruling, ODQ §934.24(c)). Every reason a gate
+  // may refuse is registered in lib/refusalReasons.js and says its piece HERE, in one
+  // block, rendered by components/primitives/RefusalNotice.jsx wherever the reader
+  // clicked. Before this, four surfaces each hand-rolled the same anonymous-cap
+  // pre-flight and three of them answered it by navigating with nothing said.
+  //
+  // EACH LINE NAMES THE REASON AND THE DOOR, and every tier fact in one is
+  // INTERPOLATED (config/tierFacts.js) so it can never drift from the gate that is
+  // actually enforcing it (store/authSlice.js TIER_GATE).
+  //
+  // ⚠ `bodyRef` RATHER THAN A SECOND COPY OF A SENTENCE. Two of these failures already
+  // have their words in `errors.*`, written for exactly them and pinned by the
+  // error-copy register. Those reasons point at the existing key instead of restating
+  // it; the walker follows the pointer and proves it resolves.
+  refusals: {
+    dailyCap: {
+      rubric: 'Free settlements',
+      body:   'Today’s free settlements are spent. Sign in — it is free — to keep forging, and to reach city and metropolis.',
+    },
+    tier: {
+      rubric: 'A bigger settlement',
+      body:   'A {size} is past what this account forges; it reaches up to a {max}. Sign in (free) to reach city and metropolis.',
+    },
+    resolvedTier: {
+      rubric: 'A bigger settlement',
+      body:   'That roll came out a {size}, past what this account forges, so it was not kept. Pick a size yourself, or sign in (free) to reach every one.',
+    },
+    generationFailed: {
+      rubric:  'Generation failed',
+      bodyRef: 'errors.forgeStart',
+    },
+    staleBuild: {
+      rubric:  'Generation failed',
+      bodyRef: 'errors.forgeUpdated',
+    },
+  },
+
   // ── Pricing ───────────────────────────────────────────────────────────────
   pricing: {
     eyebrow:      'Plans',
