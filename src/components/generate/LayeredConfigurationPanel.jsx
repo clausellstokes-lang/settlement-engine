@@ -18,8 +18,21 @@
  * though the linear step wizard is gone. The `config` step id corresponds to the
  * Foundations/Fine-tune block (always mounted) and is reported on mount.
  *
- * Size is NOT gated — free accounts already generate up to metropolis; this panel
- * reintroduces no size gate. The anon HomeHero instant path never reaches here.
+ * Size is NOT gated for an ACCOUNT — free accounts already generate up to metropolis.
+ *
+ * ⛔ THE PRE-GENERATION OPTIONS ARE LOCKED FOR AN ANONYMOUS VISITOR (the owner, §934.34:
+ * "only hamlet, village, and town can be accessed without signing in and only with
+ * everything on random"). NOTHING IS HIDDEN — the owner's law. Every control is drawn
+ * exactly as an account sees it and DISABLED, with the reason written above them through
+ * the estate's one refusal notice, so a visitor can see what an account is for instead of
+ * meeting a shorter page and never learning there was more.
+ *
+ * ⚠ A DISABLED CONTROL IS A COURTESY, NEVER THE GATE. `config` is persisted, so a stored
+ * or hand-edited config can still reach a forge; the RULE is enforced at the one point
+ * every generation funnels through (store/settlementGenerateAction.js), which forces the
+ * random configuration. This panel is the half a reader can see.
+ *
+ * @enforced-by tests/ui/anonPreGenLocked.test.jsx
  */
 
 import { useEffect, useState } from 'react';
@@ -34,6 +47,8 @@ import ResetConstraintsButton from './ResetConstraintsButton.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
+import RefusalNotice from '../primitives/RefusalNotice.jsx';
+import { REFUSAL_REASONS, refusalOf } from '../../lib/refusalReasons.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, SP } from '../theme.js';
@@ -166,6 +181,10 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
   // (advancedOnDesktop === advanced when not mobile), so its render is unchanged.
   const mobile = useIsMobile();
   const advancedOnDesktop = advanced && !mobile;
+  // §934.34 — the pre-generation options belong to an account. Read through the store's
+  // own selector so this panel carries no second copy of the rule.
+  const canCustomize = useStore((s) => (typeof s.canCustomizePreGeneration === 'function'
+    ? s.canCustomizePreGeneration() : true));
   // The Foundations/Fine-tune block is always mounted — report its step id once
   // on mount so the funnel's `config` step still registers without the linear wizard.
   useEffect(() => {
@@ -176,6 +195,26 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
 
   return (
     <div data-testid="layered-configuration-panel" style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* ⛔ THE REASON, ABOVE THE CONTROLS IT EXPLAINS (§934.34). Rendered through the
+          estate's ONE refusal notice so an anonymous visitor meets the same voice here as
+          at every other gate, and the sentence names the sizes an account reaches from
+          the same derivation the hero's does. */}
+      {!canCustomize && (
+        <div data-testid="pre-gen-locked-notice" style={{ marginBottom: SP.md }}>
+          <RefusalNotice refusal={refusalOf(REFUSAL_REASONS.PRE_GEN_LOCKED)} />
+        </div>
+      )}
+      {/* ⛔ ONE FIELDSET, NOT A DISABLED PROP ON EVERY CONTROL. `disabled` on a fieldset
+          disables every form control inside it — including ones added tomorrow — which is
+          the difference between a rule and a sweep somebody has to remember to extend.
+          The border/padding/margin resets keep the rendered box identical to the <div> it
+          replaces, so an account's panel is byte-identical to what it was. */}
+      <fieldset
+        disabled={!canCustomize}
+        data-testid="pre-gen-options"
+        data-pre-gen-locked={!canCustomize ? '' : undefined}
+        style={{ border: 0, padding: 0, margin: 0, minWidth: 0, display: 'flex', flexDirection: 'column' }}
+      >
       {/* Exact-seed input (Advanced only, top of the panel): forge a world from a
           seed, and copy the current draft's seed. THE PROMISE made a surface. */}
       {advanced && <SeedField />}
@@ -251,6 +290,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
           <PlaceInRegionCard />
         </div>
       )}
+      </fieldset>
     </div>
   );
 }

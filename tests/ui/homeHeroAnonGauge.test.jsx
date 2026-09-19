@@ -24,7 +24,9 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import { t } from '../../src/copy/index.js';
-import { ANON_SIZES, SIZE_LABEL, signInUnlocksSizes } from '../../src/config/tierFacts.js';
+import {
+  ANON_SIZES, SIZE_LABEL, signInUnlocksClause, signInUnlocksSizes,
+} from '../../src/config/tierFacts.js';
 
 // WelcomeBackCard + AnonTierTeaser are out of scope (they self-gate and never
 // render in these scenarios); stub them to null so their service-layer import
@@ -176,8 +178,11 @@ describe('HomeHero — the free-today line tells the truth about the two buckets
     const text = container.textContent;
     expect(text, 'the at-cap block did not render').toContain(t('hero.anonCap.spent'));
     expect(signInUnlocksSizes(), 'the derivation lost the thorpe').toContain('thorpe');
-    expect(text).toContain(`to unlock ${signInUnlocksSizes()} and`);
-    expect(text).toMatch(new RegExp(`to unlock ${signInUnlocksSizes()} and\\s*save up to`));
+    // ⚠ THE CLAUSE GREW A THIRD PART (the owner, §934.34): pre-generation configuration
+    // is a sign-in unlock too, so the sentence is composed from THREE facts rather than
+    // two. This arm reads the composition, not a copy of the words.
+    expect(signInUnlocksClause(), 'the clause lost the customize promise').toContain('to customize');
+    expect(text).toContain(`to unlock ${signInUnlocksClause()}.`);
     // anchored: the spent line and the unlock sentence are both asserted PRESENT on this same render above, so a block that failed to render reds there first
     expect(text).not.toMatch(/thorp through metropolis/);
     // …and the sizes the reader already spent are not sold back to them.

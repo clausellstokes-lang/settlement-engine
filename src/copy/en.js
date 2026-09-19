@@ -451,6 +451,15 @@ export const en = Object.freeze({
       rubric: 'Not this account',
       body:   'The developer admin panel is open to the team only. Nothing is missing from your account; this page simply is not part of it.',
     },
+    // ⛔ THE PRE-GENERATION OPTIONS ARE AN ACCOUNT'S (the owner, §934.34: "only hamlet,
+    // village, and town can be accessed without signing in and only with everything on
+    // random"). Nothing is hidden — the options are drawn and disabled, and this is the
+    // sentence beside them. `{sizes}` comes from the same derivation every other unlock
+    // sentence reads, so the two halves of the offer cannot drift.
+    preGenLocked: {
+      rubric: 'Everything on random',
+      body:   'Without an account a settlement forges with every dial rolled — you choose the size and the simulator does the rest. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
+    },
     // ⛔ THE REALM LEAVES THE PHONE (the owner, ODQ §934.26). The first sentence is the
     // owner's own words. The second is the DOOR — the gate law's "every gate ends in an
     // action" — and it is deliberately written to be true whether or not a settlement is

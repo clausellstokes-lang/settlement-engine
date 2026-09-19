@@ -39,6 +39,7 @@ import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGe
 import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
 import { isChunkLoadError } from '../lib/staleDeploy.js';
+import { DEFAULT_CONFIG } from './configSlice.js';
 
 /**
  * The DISPLAY label for a size token, and the ceiling label for an account tier.
@@ -108,7 +109,59 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // its exact name and an older or mistyped caller is still capped.
   const isSampleFork = intentOf(options) === GENERATION_INTENT_SAMPLE_FORK;
   const state = get();
-  const { config, institutionToggles, categoryToggles, goodsToggles, servicesToggles } = state;
+  const {
+    config: storedConfig,
+    institutionToggles: storedInstitutionToggles,
+    categoryToggles: storedCategoryToggles,
+    goodsToggles: storedGoodsToggles,
+    servicesToggles: storedServicesToggles,
+  } = state;
+  // ⛔ AN ANONYMOUS GENERATION IS EVERYTHING ON RANDOM (the owner, §934.34: "only hamlet,
+  // village, and town can be accessed without signing in and only with everything on
+  // random"). The SIZE is theirs; every other dial rolls.
+  //
+  // ⭐ THE FORCING IS HERE, NOT IN THE WIZARD, AND THAT IS THE WHOLE POINT. `config` is
+  // PERSISTED (store/persistProjection.js), so a disabled control is a courtesy and never
+  // a gate: a stored config from a session that once had an account, a hand-edited
+  // localStorage blob, or the Library's "Apply Saved Configuration" can all put a
+  // customized config in front of an anonymous forge. That is the 2026-09-16 production
+  // bug's exact shape — a value that survived one lifecycle path and ghosted another — so
+  // the rule is enforced at the ONE point every full generation funnels through, and the
+  // stored config is left untouched (a reader who signs in gets their dials back).
+  //
+  // "Everything on random" is not invented here: DEFAULT_CONFIG already IS that shape —
+  // settType random, random_trade, random_culture, random_threat, every priority at 50,
+  // resources and stresses rolling, no custom name and no constraint bags. So the
+  // anonymous config is the defaults with the reader's own size on top, which also means
+  // this can never drift from what the wizard calls "random".
+  //
+  // ⛔ A CURATED SAMPLE FORK IS NOT THE READER'S CONFIGURATION, AND FORCING RANDOM ON IT
+  // WOULD HAVE DESTROYED IT. `forkConfigFor(sample)` replays the PRODUCT'S own config for
+  // one of the three curated worlds — the owner ruled the fork a curated seed, not a free
+  // generation (§934.24(b)) — so rolling its dials would have handed an anonymous reader
+  // a random town under a curated town's name. The exemption is asked for by the same
+  // fail-closed intent the cap uses, so an ordinary generation cannot borrow it. (None of
+  // the three samples is a thorpe — town, city, village — so §934.34's floor changes
+  // nothing about them; the TIER gate still applies to a fork, which is why the city
+  // sample already refuses for an anonymous reader.)
+  const canCustomize = isSampleFork || (typeof state.canCustomizePreGeneration === 'function'
+    ? state.canCustomizePreGeneration()
+    : true);
+  const config = canCustomize
+    ? storedConfig
+    : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };
+  // The four constraint bags are the Deep-constraints grids — the same class of
+  // pre-generation input as `config`, persisted beside it (store/toggleSlice.js's own
+  // scope contract says so), and each one EMPTY means "force nothing, forbid nothing",
+  // which is what random means for them. An anonymous forge therefore takes four empty
+  // bags, not the reader's stored ones.
+  const institutionToggles = canCustomize ? storedInstitutionToggles : {};
+  const categoryToggles = canCustomize ? storedCategoryToggles : {};
+  const goodsToggles = canCustomize ? storedGoodsToggles : {};
+  const servicesToggles = canCustomize ? storedServicesToggles : {};
+  // An IMPORTED NEIGHBOUR is a pre-generation input too — and it is already premium-only
+  // (TIER_GATE.{tier}.neighbour is false for anon and free), so it is left exactly as it
+  // was: a second gate here would be a second source for a rule that already has one.
   const neighbor = state.importedNeighbour;
 
   // Tier gate check

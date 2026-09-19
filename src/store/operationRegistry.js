@@ -564,6 +564,13 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   // is the wall) and sessionEvicted is excluded from the persist partialize — the same
   // K-D EXEMPT class (transient session flag) as the standing setAuthModalOpen.
   evictSession: { slice: 'authSlice', reason: 'transient single-session eviction banner flag + local sign-out; excluded from persist partialize' },
+  // NO GATE REFUSES SILENTLY (ODQ §934.24(c)). `lastRefusal` is the reason a gate gave,
+  // recorded so the surface the reader clicked can say it; this clears it. Session-only
+  // BY CONSTRUCTION — store/persistProjection.js names its keys one by one and this is
+  // not among them — so a reload lands with no refusal on screen. The same K-D EXEMPT
+  // class as focusEntity / clearFocusedEntity above: ephemeral view state, no durable or
+  // saved record anywhere behind it.
+  clearRefusal: { slice: 'settlementSlice', reason: 'clears the transient gate-refusal record a surface renders; excluded from the persist partialize' },
 });
 
 /** The committed exempt ceiling (shrink-only; lower it as actions are adopted). */
@@ -612,7 +619,15 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // and then DELETED before landing — it had no product caller (the two paths that lower
 // the flag are already inside an immer draft and clear the field directly), so it would
 // have bought a second exempt row for dead API.
-export const EXEMPT_CEILING = 69;
+// 69 -> 70 (ODQ §934.24(c), banked late): `clearRefusal`, the clearer of the transient
+// gate-refusal record. ⚠ THE ROW IS OWED BY THE REFUSAL LANDING AND WAS NOT PAID THERE —
+// this walker was not in that car's receipt list, so the action shipped unclassified and
+// the completeness gate has been red on every run since. Recorded here rather than
+// quietly: the raise is not this lane's work, it is this lane paying an inherited debt in
+// the act of finding it. Measured on this tree: 70 exempt entries. Same transient
+// view-state class as focusEntity / setAuthModalOpen; shrink-only from here, and adopting
+// it into the operation surface lowers the ceiling again.
+export const EXEMPT_CEILING = 70;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

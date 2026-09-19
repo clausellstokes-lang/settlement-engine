@@ -36,7 +36,7 @@ import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
 import {
-  ANON_SIZES, SIZE_LADDER, TIER_FACTS, SINGLE_DOSSIER_PRICE, signInUnlocksSizes,
+  ANON_SIZES, SIZE_LADDER, SINGLE_DOSSIER_PRICE, signInUnlocksClause,
 } from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
@@ -431,12 +431,16 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
                     anonymous sizes are hamlet, village and town (the spent line
                     directly above says exactly that), so a THORPE is also something
                     signing in unlocks — the owner's correction of 2026-09-19.
-                    `signInUnlocksSizes()` is the ladder minus the anonymous set
-                    (config/tierFacts.js), Oxford-joined, so the sentence follows a
-                    ceiling that moves instead of stranding a stale list. */}
-                <b>Sign in (free)</b> to unlock {signInUnlocksSizes()} and
-                save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
-                PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
+                    `signInUnlocksClause()` composes THREE facts from
+                    config/tierFacts.js — the ladder minus the anonymous set, the
+                    pre-generation options, and the free save cap — with the estate's
+                    Oxford joiner. Each part drops out on its own if the facts stop
+                    carrying it, so the sentence can never promise what the gate
+                    refuses. "to customize" is the wizard's own options (§934.34), NOT
+                    the Compendium's custom content, which stays premium. */}
+                <b>Sign in (free)</b> to unlock {signInUnlocksClause()}. Keep any
+                dossier&apos;s PDF for {SINGLE_DOSSIER_PRICE}, or export freely with
+                Cartographer.
               </div>
               <Button
                 type="button"

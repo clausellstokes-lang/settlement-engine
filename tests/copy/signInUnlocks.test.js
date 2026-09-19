@@ -76,7 +76,11 @@ describe('THE DERIVATION', () => {
 
 describe('THE SENTENCES THAT NAME THEM', () => {
   test('the hero renders the derivation and holds no list of its own', () => {
-    expect(HERO, 'the at-cap sentence stopped deriving its sizes').toMatch(/signInUnlocksSizes\(\)/);
+    // §934.34 folded the sizes into the whole clause (sizes + customize + saves), so the
+    // hero now reads the composition. Either spelling is the derivation; a typed list is
+    // not, which is what the negatives below refuse.
+    expect(HERO, 'the at-cap sentence stopped deriving its sizes')
+      .toMatch(/signInUnlocks(Sizes|Clause)\(\)/);
     expect(
       /unlock city and metropolis/.test(HERO),
       'the hero has a hand-typed size list again — that list is how the thorpe went missing',

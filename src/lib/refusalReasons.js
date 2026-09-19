@@ -67,6 +67,14 @@ export const REFUSAL_REASONS = Object.freeze({
    */
   STAFF_ONLY: 'staffOnly',
   /**
+   * ⛔ THE PRE-GENERATION OPTIONS BELONG TO AN ACCOUNT (the owner, §934.34). Raised by
+   * the wizard beside its own locked controls, not by a gate the reader tripped: the
+   * options are DRAWN and disabled — nothing is hidden — and this is the reason written
+   * next to them. Like the Realm's, it is a property of the surface and carries no vars
+   * of its own; its sentence interpolates the shared `{sizes}` default.
+   */
+  PRE_GEN_LOCKED: 'preGenLocked',
+  /**
    * ⛔ THE REALM IS NOT A PHONE SURFACE (the owner, ODQ §934.26: "No realm view for
    * phone but it can be viewed on a tablet").
    *
