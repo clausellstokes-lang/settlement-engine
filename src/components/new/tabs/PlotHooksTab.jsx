@@ -128,7 +128,7 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     {tokenCase(hook.source)}
                   </span>
                   <span style={{
-                    fontSize: FS['7.5'], fontWeight: 800,
+                    fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
                     color: cat.color, letterSpacing: '0.08em', flexShrink: 0,
                   }}>
                     {/* ⛔ THIS LINE DESTROYED THE ONE WORD THE LADDER PROTECTS. The category

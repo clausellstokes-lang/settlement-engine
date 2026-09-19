@@ -4,7 +4,7 @@ import { relColor } from '../../settlements/relationshipColors.js';
 import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
 import { serif, Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
@@ -174,7 +174,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     <div>
 
       {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
-        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:FS.xxs,color:MUTED}}>DM truth</summary><div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
+        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
       </Section>}
 
       {/* Neighbour Network */}
@@ -201,15 +201,15 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
             return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
-                {isr.npcRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.npcRole})</span>}
-                <span style={{fontSize:FS.xs,color:MUTED,margin:'0 2px'}}>↔</span>
+                {isr.npcRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({isr.npcRole})</span>}
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,margin:'0 2px'}}>↔</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:c}}>{isr.partnerName}</span>
-                {isr.partnerRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.partnerRole})</span>}
-                <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic',flexShrink:0}}>{isr.partnerSettlement}</span>
+                {isr.partnerRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({isr.partnerRole})</span>}
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:'auto',fontStyle:'italic',flexShrink:0}}>{isr.partnerSettlement}</span>
               </div>
               {isr.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
               <div style={{marginTop:4}}>
-                <span style={{fontSize:FS.xxs,fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'1px 8px'}}>
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'1px 8px'}}>
                   {(isr.relType||'linked').replace(/_/g,' ')}
                 </span>
               </div>
@@ -234,15 +234,15 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction
                   ? <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.factionName}</span>
-                      <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerFactionName}</span>
-                      <span style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic'}}>({c.partnerSettlement})</span></>
+                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,fontStyle:'italic'}}>({c.partnerSettlement})</span></>
                   : <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.npcName}</span>
-                      <span style={{fontSize:FS.xs,color:MUTED}}>({c.npcRole})</span>
-                      <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>({c.npcRole})</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
-                      <span style={{fontSize:FS.xs,color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
-                <span style={{fontSize:FS.xxs,fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
                   {isFaction ? 'faction' : (c.conflictNature||'conflict')}
                 </span>
               </div>
@@ -256,7 +256,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
       {/* Emergent conditions banner */}
       {!neighboursOnly&&<>
       {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'10px 14px',marginBottom:16}}>
-        <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
+        <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
         <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
         </p>
@@ -280,7 +280,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
         </div>
         {/* From filter (only when neighbours exist) */}
         {neighbours.length>0&&<div style={{display:'flex',gap:5,marginBottom:12,flexWrap:'wrap',paddingBottom:10,borderBottom:'1px solid #f0e8d8',alignItems:'center'}}>
-          <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,flexShrink:0}}>From:</span>
+          <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,flexShrink:0}}>From:</span>
           {['all',...allSettlements].map(name=>(
             <Button key={name} onClick={()=>setFromFilter(name)}
               variant={fromFilter===name?'primary':'secondary'} size="sm"
@@ -297,11 +297,11 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
           <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
               <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{conn.primaryNPCName}</span>
-              {conn.primaryNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
-              <span style={{fontSize:FS.xs,color:MUTED,margin:'0 4px'}}>↔</span>
+              {conn.primaryNPCRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,margin:'0 4px'}}>↔</span>
               <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.info}}>{conn.neighbourNPCName||'Unknown'}</span>
-              {conn.neighbourNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.neighbourNPCRole})</span>}
-              {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:FS.xxs,color:MUTED,marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
+              {conn.neighbourNPCRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({conn.neighbourNPCRole})</span>}
+              {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
             </div>
             {conn.description&&<div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
           </div>
@@ -317,7 +317,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
             <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag,marginBottom:6}}>{fac.name}</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {(fac.members||[]).map(m=>(
-                <span key={m.id||m.name} style={{fontSize:FS.xs,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'2px 9px'}}>
+                <span key={m.id||m.name} style={{fontSize:chromeFontSize(FS.xs, mobile),color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'2px 9px'}}>
                   {m.name} <span style={{color:MUTED}}>({m.role})</span>
                 </span>
               ))}

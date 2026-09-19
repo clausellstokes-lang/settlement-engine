@@ -19,7 +19,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
@@ -181,7 +181,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           </div>
           {/* Quick metric pills */}
           <div style={{display:'flex',gap:6,flexWrap:'wrap',flexShrink:0}}>
-            {metrics.criticalIssueCount>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
+            {metrics.criticalIssueCount>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
             
             
           </div>
@@ -210,7 +210,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                   ? 'Generation receipt: coherent, with authored tensions'
                   : 'Generation receipt: coherent'}
             </span>
-            <span style={{fontSize:FS.xxs,color:MUTED}}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>
               culture {generationReceipt.cultureProfile} · themes {generationReceipt.contentProfile}
             </span>
           </div>
@@ -226,7 +226,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
             </div>
           )}
           {(generationReceipt.checks||[]).filter(item=>item.status==='fail').map(item=>(
-            <div key={item.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+            <div key={item.id} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
               {item.label}: {item.findings.length} finding{item.findings.length===1?'':'s'}
             </div>
           ))}
@@ -293,7 +293,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {structViolations.length>0&&<Section title={`Structural Crises · First Survey (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
           <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-            <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
+            <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
               {v2.institution||v2.group}
             </div>
             <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
@@ -306,16 +306,16 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         {criticalIssues.map((issue,i)=>(
           <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
+              {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
             <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
             {issue.priorityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:3}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
                   <span style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
@@ -331,14 +331,14 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sb = sevBg(issue.severity);
           return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
+              {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
             <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
                   <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}
@@ -366,7 +366,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           const sc = sevColor(wobj.severity||'warning');
           return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
-              {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
+              {wobj.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
             {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
@@ -374,7 +374,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
-                  <span style={{color:swatch.success,flexShrink:0,fontSize:FS.xs}}>→</span>
+                  <span style={{color:swatch.success,flexShrink:0,fontSize:chromeFontSize(FS.xs, mobile)}}>→</span>
                   <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2}}>{fix}</span>
                 </div>
               ))}

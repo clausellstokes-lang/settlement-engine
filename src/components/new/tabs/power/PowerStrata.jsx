@@ -30,7 +30,7 @@ import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
 import { derivePowerStrata, groupRelationships } from '../../../../domain/dossier/powerStrata.js';
 import useIsMobile from '../../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
 
 // The parchment seam between flush cards. Imported (never a re-declared hex) so
 // it tracks the design token — the forked-color rule.
@@ -145,32 +145,32 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                   onClick: () => setOpenIdx(isExp ? null : i),
                   onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setOpenIdx(isExp ? null : i); } },
                 } : {})}>
-                <span style={{ fontSize: FS.micro, fontWeight: 800, color: accent, background: `${accent}14`, border: `1px solid ${accent}40`, padding: '1px 6px', flexShrink: 0 }}>
+                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: accent, background: `${accent}14`, border: `1px solid ${accent}40`, padding: '1px 6px', flexShrink: 0 }}>
                   {isRuler ? 'Ruler' : 'Contender'}
                 </span>
                 <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
                   <EntityLink id={factionIdFromName(p.name)} type="faction" fallback={p.name} style={{ color: swatch.inkMag }} />
                 </span>
-                <span style={{ fontSize: FS.micro, fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[p.archetype] || 'Faction'}</span>
+                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[p.archetype] || 'Faction'}</span>
                 {p.powerLabel && (
-                  <span style={{ fontSize: FS.micro, fontWeight: 700, color: powerLabelColor(p.powerLabel), background: `${powerLabelColor(p.powerLabel)}12`, border: `1px solid ${powerLabelColor(p.powerLabel)}30`, padding: '1px 5px', flexShrink: 0 }}>
+                  <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerLabelColor(p.powerLabel), background: `${powerLabelColor(p.powerLabel)}12`, border: `1px solid ${powerLabelColor(p.powerLabel)}30`, padding: '1px 5px', flexShrink: 0 }}>
                     {p.powerLabel}
                   </span>
                 )}
                 {isRuler && risk && (
-                  <span aria-label={`Coup risk: ${risk.label}`} style={{ fontSize: FS.micro, fontWeight: 700, color: risk.color, background: `${risk.color}12`, border: `1px solid ${risk.color}40`, padding: '1px 5px', flexShrink: 0 }}>
+                  <span aria-label={`Coup risk: ${risk.label}`} style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: risk.color, background: `${risk.color}12`, border: `1px solid ${risk.color}40`, padding: '1px 5px', flexShrink: 0 }}>
                     {risk.label}
                   </span>
                 )}
                 {!isRuler && Number.isFinite(p.weight) && (
-                  <span aria-label={`Coup weight ${p.weight}`} style={{ fontSize: FS.xs, fontWeight: 700, color: accent, flexShrink: 0, minWidth: 34, textAlign: 'right' }}>w {p.weight}</span>
+                  <span aria-label={`Coup weight ${p.weight}`} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: accent, flexShrink: 0, minWidth: 34, textAlign: 'right' }}>w {p.weight}</span>
                 )}
-                {hasSupport && <span style={{ fontSize: FS.xxs, color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
+                {hasSupport && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
               </div>
 
               {isExp && hasSupport && (
                 <div id={`power-card-${i}-detail`} style={{ padding: '2px 12px 10px 14px', background: swatch['#FAF8F4'] }}>
-                  <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, marginBottom: 5 }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: swatch.inkMag3, marginBottom: 5 }}>
                     Institutions behind this power ({support.length})
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
@@ -185,7 +185,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                               Services tab printed twelve errors for was SILENT here. Both were already
                               flex children, so the box is identical. */}
                           {group.edges.map((edge, si) => (
-                            <div key={si} style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
+                            <div key={si} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
                               <InstitutionLink name={edge.name} settlement={settlement} />
                             </div>
                           ))}
@@ -238,7 +238,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
           return (
             <div key={i} role="img" aria-label={`${r.name}: ${pct} percent (power ${r.power})`}
               style={{ flex: Math.max(pct, 1), background: c, display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-              {pct > 9 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.white, userSelect: 'none' }}>{pct}</span>}
+              {pct > 9 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.white, userSelect: 'none' }}>{pct}</span>}
             </div>
           );
         })}
@@ -265,7 +265,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
                   onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
                 } : {})}>
                 <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
-                {f.legitimacyCrisis && <span style={{ fontSize: FS.xxs, color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
+                {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
                 <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
                   <InstitutionLink name={r.name} settlement={settlement} />
                 </div>
@@ -274,20 +274,20 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
                     aria-label={`${r.name} holds power, jump to its power card`}
                     onClick={(e) => { e.stopPropagation(); jumpToPower(r.name); }}
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
-                    style={{ minHeight: 0, borderRadius: 0, fontSize: FS.micro, fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
+                    style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
                     {'↑ Holds power'}
                   </Button>
                 )}
-                <span style={{ fontSize: FS.micro, fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
-                <span style={{ fontSize: FS.xs, fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
-                {expandable && <span style={{ fontSize: FS.xxs, color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
+                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
+                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
+                {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
               </div>
 
               {matchedGroups.map((fg, gi) => (
                 <div key={gi} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
-                  <span style={{ fontSize: FS.xxs, color: c }}>{'↳'}</span>
-                  <span style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
-                  <span style={{ fontSize: FS.xxs, color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
                 </div>
               ))}
 
@@ -329,9 +329,9 @@ export function TheWeb({ groups }) {
           return (
             <div key={g.kind} style={{ border: `1px solid ${meta.color}30`, borderLeft: `3px solid ${meta.color}` }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '4px 10px', background: meta.bg, borderBottom: `1px solid ${meta.color}20` }}>
-                <span aria-hidden="true" style={{ fontSize: FS.xs, color: meta.color, fontWeight: 800 }}>{meta.glyph}</span>
-                <span style={{ fontSize: FS.xs, fontWeight: 800, color: meta.color }}>{meta.label}</span>
-                <span style={{ fontSize: FS.xxs, color: MUTED }}>({g.edges.length})</span>
+                <span aria-hidden="true" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: meta.color, fontWeight: 800 }}>{meta.glyph}</span>
+                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: meta.color }}>{meta.label}</span>
+                <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>({g.edges.length})</span>
               </div>
               <div>
                 {g.edges.map((e, i) => {
@@ -342,12 +342,12 @@ export function TheWeb({ groups }) {
                         <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>
                           <EntityLink id={factionIdFromName(e.pair[0])} type="faction" fallback={e.pair[0]} style={{ color: swatch.inkMag }} />
                         </span>
-                        <span aria-hidden="true" style={{ fontSize: FS.xs, color: meta.color, fontWeight: 800 }}>{meta.glyph}</span>
+                        <span aria-hidden="true" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: meta.color, fontWeight: 800 }}>{meta.glyph}</span>
                         <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>
                           <EntityLink id={factionIdFromName(e.pair[1])} type="faction" fallback={e.pair[1]} style={{ color: swatch.inkMag }} />
                         </span>
                         {e.direction && (
-                          <span style={{ fontSize: FS.micro, fontWeight: 600, color: MUTED, background: swatch['#FAF8F4'], border: `1px solid ${SEAM}`, padding: '0 5px', flexShrink: 0 }}>{e.direction}</span>
+                          <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, background: swatch['#FAF8F4'], border: `1px solid ${SEAM}`, padding: '0 5px', flexShrink: 0 }}>{e.direction}</span>
                         )}
                       </div>
                       {e.narrative && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, margin: '3px 0 0' }}>{e.narrative}</p>}

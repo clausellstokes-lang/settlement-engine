@@ -13,7 +13,7 @@ import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, d
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -327,7 +327,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
           {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
         </div>
-        {i.source&&i.source!=='generated'&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
+        {i.source&&i.source!=='generated'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
       </div>
     </div>
   );
@@ -340,15 +340,15 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <div style={{background:readiness.background,border:`1px solid ${readiness.border}`,borderLeft:`4px solid ${readiness.color}`,padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:16,flexWrap:'wrap'}}>
           <div style={{flexShrink:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
             <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{readiness.label}</div>
             <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-              {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
-              {ra.strategicValue&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
+              {ra.terrain&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
+              {ra.strategicValue&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
             </div>
           </div>
           {guardAssessment&&<div style={{flex:1,minWidth:200}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Guard assessment</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Guard assessment</div>
             <p style={{fontSize: proseFontSize(FS['12.5'], isMobile),color:swatch.inkMag2,lineHeight:1.6,margin:0}}>{guardAssessment}</p>
           </div>}
         </div>
@@ -363,7 +363,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       {/* ── ACTIVE MILITARY STATUS (stress override) ─────────────────────── */}
       {stressStatus&&<div style={{background:`${stressStatus.colour}0e`,border:`2px solid ${stressStatus.colour}`,padding:'12px 16px',marginBottom:14,display:'flex',gap:12,alignItems:'flex-start'}}>
         <div style={{flexShrink:0,textAlign:'center',minWidth:80}}>
-          <div style={{fontSize:FS.xxs,fontWeight:800,color:stressStatus.colour,marginBottom:2}}>Military status</div>
+          <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:stressStatus.colour,marginBottom:2}}>Military status</div>
           <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{statusCase(stressStatus.posture)}</div>
         </div>
         <div style={{flex:1,borderLeft:`1px solid ${stressStatus.colour}40`,paddingLeft:12}}>
@@ -371,13 +371,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {stressObj?.viabilityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
           <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.xs,color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
+            style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
         </div>
       </div>}
 
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
         <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
         {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
             readiness sentences used to print here as five paragraphs, one per row, ABOVE the
@@ -407,8 +407,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                   <div style={{width:72,height:6,background:swatch['#E8DCC8'],overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color}}/>
                   </div>
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:badgeColor,background:`${badgeColor}15`,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
-                  <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
+                  <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:badgeColor,background:`${badgeColor}15`,padding:'1px 4px',letterSpacing:'0.03em',flexShrink:0,width:54,textAlign:'center',display:'inline-block'}}>{badge}</span>
+                  <span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>
                 </div>
                 {/* DS-DEF-2 for THIS row, in the town's own voice, under the bar it is about.
                     A row whose pool the corpus is silent about shows nothing here (R-DST-K);
@@ -444,12 +444,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,padding:'10px 14px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
                   <div style={{flexShrink:0,minWidth:130}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,marginBottom:2}}>Internal security · first survey</div>
+                    <div style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:orderColor,marginBottom:2}}>Internal security · first survey</div>
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
-                      <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px'}}>{orderBadge}</span>
+                      <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px'}}>{orderBadge}</span>
                     </div>
-                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
+                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
                   </div>
                   {(sp.safetyDesc||orderBeside||surveyBeside)&&<div style={{flex:1,minWidth:160}}>
                     {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The
@@ -465,7 +465,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {csd.label}</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {csd.label}</div>
             <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 
@@ -482,7 +482,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal institutions as power structures */}
           {crimInsts.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
                 const note = criminalOpNote(name);
@@ -498,7 +498,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal faction power dynamics + capture state note */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
               Criminal faction: power {crimFaction.power||0}
             </div>
             <div style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5}}>{crimFaction.desc}</div>
@@ -513,11 +513,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
           {crimeTypes.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimeTypes.map((ct,i)=>(
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
-                  <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
                   <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
                 </div>
               ))}
@@ -526,7 +526,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Safety-derived plot hooks */}
           {sp.plotHooks?.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {sp.plotHooks.map((h,i)=>(
                 <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
@@ -550,7 +550,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               {magicDef.length>0&&`${magicDef.length} arcane`}
             </span>
           </span>
-          <span style={{fontSize:FS.xs,color:MUTED}}>{showForces?'▲':'▼'}</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:MUTED}}>{showForces?'▲':'▼'}</span>
         </Button>
 
         {showForces&&<div>
@@ -561,7 +561,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
           </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#4A3A1A'],marginBottom:6}}>Fortifications</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#4A3A1A'],marginBottom:6}}>Fortifications</div>
             {walls.map((w,i)=><ForceCard key={i} inst={w} accent="#4a3a1a"/>)}
           </div>}
           {!hasAnyFort&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',marginBottom:10,fontSize:proseFontSize(FS.md, isMobile),color:swatch.inkMag3}}>
@@ -570,19 +570,19 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {/* DS-DEF-11: why the wall, or why not — beside the works themselves. */}
           {wallLine&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag3,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{wallLine}</p>}
           {mainForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,marginBottom:6}}>Standing forces</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.danger,marginBottom:6}}>Standing forces</div>
             {[...new Map(mainForces.map(m=>[m.name,m])).values()].map((w,i)=><ForceCard key={i} inst={w} accent="#8b1a1a"/>)}
           </div>}
           {mercForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A3A1A'],marginBottom:6}}>Contracted forces</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#5A3A1A'],marginBottom:6}}>Contracted forces</div>
             {mercForces.map((w,i)=><ForceCard key={i} inst={w} accent="#5a3a1a"/>)}
           </div>}
           {charterForces.length>0&&<div style={{marginBottom:10}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#3A1A7A'],marginBottom:6}}>Monster response (charter)</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#3A1A7A'],marginBottom:6}}>Monster response (charter)</div>
             {charterForces.map((w,i)=><ForceCard key={i} inst={w} accent="#3a1a7a"/>)}
           </div>}
           {magicDef.length>0&&<div style={{marginBottom:6}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:6}}>Arcane defense</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Arcane defense</div>
             {magicDef.map((w,i)=><ForceCard key={i} inst={w} accent="#5a2a8a"/>)}
           </div>}
           {!hasAnyForce&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',fontSize:proseFontSize(FS.md, isMobile),color:swatch.inkMag3}}>
@@ -645,13 +645,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${cap.color}`,padding:'8px 12px'}}>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
-                  {!noteOpensOnStatus&&<span data-sf-cap-status="" style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>}
+                  <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
+                  {!noteOpensOnStatus&&<span data-sf-cap-status="" style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:cap.color}}>{cap.status}</span>}
                   {cap.score!==null&&<div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6}}>
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    {band!==null&&<span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{band}</span>}
+                    {band!==null&&<span data-sf-cap-band="" style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:cap.color,fontWeight:700}}>{band}</span>}
                   </div>}
                 </div>
                 <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
@@ -668,7 +668,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
             return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,padding:'9px 13px',marginBottom:6}}>
-              <div style={{fontSize:FS.xs,fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
+              <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
               <div style={{fontSize:proseFontSize(FS.md, isMobile),color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
             </div>;
           })}

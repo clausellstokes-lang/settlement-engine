@@ -19,7 +19,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -75,7 +75,7 @@ function ChainRow({ label, children }) {
   const mobile = useIsMobile();
   return (
     <div style={{display:'flex',alignItems:'baseline',gap:10}}>
-      <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,flex:'0 0 72px'}}>{label}</span>
+      <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.inkMag3,flex:'0 0 72px'}}>{label}</span>
       <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag,lineHeight:1.5,minWidth:0}}>{children}</span>
     </div>
   );
@@ -279,7 +279,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:leg.color,marginBottom:2}}>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:leg.color,marginBottom:2}}>
                 Public legitimacy
               </div>
               <div style={{display:'flex',alignItems:'baseline',gap:8}}>
@@ -289,13 +289,13 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             </div>
             {/* Breakdown chips */}
             <div style={{flex:1,minWidth:180}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
                 Score breakdown (base 50)
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {Object.entries(leg.breakdown || {}).map(([k,v]) => (
                   <div key={k} style={{
-                    fontSize:FS.xxs, fontWeight:700, padding:'2px 8px',
+                    fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, padding:'2px 8px',
                     background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
                     color:      v > 0 ? '#1a5a28' : v < 0 ? '#8b1a1a' : '#9c8068',
                     border: `1px solid ${v > 0 ? '#a8d8b0' : v < 0 ? '#e8c0c0' : '#e0d0b0'}`,
@@ -341,18 +341,18 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
             <div style={{fontSize:FS.lg,fontWeight:700,color:stabilityColor,lineHeight:1.3}}>{m}</div>
           </div>
           {governing && <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
               <span style={{fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{governing.faction}</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:stabilityColor}}>
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:stabilityColor}}>
                 {governing.powerLabel || ''} ({governing.power})
               </span>
               {governing.modifier && (
-                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
                   {governing.modifier}
                 </span>
               )}
@@ -361,8 +361,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           {/* Criminal capture state badge */}
           {crimCapture && crimCapture !== 'none' && (
             <div style={{flexShrink:0}}>
-              <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
-              <span style={{fontSize:FS.xxs,fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
+              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
+              <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
                 {captureStyle.label}
               </span>
             </div>
@@ -477,7 +477,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                         // Churn badge: the explainer rides aria-label (screen-reader-complete,
                         // touch-safe) — never a native title (the shrink-only title= census).
                         <span aria-label="Leadership churn: recent turnover at the top erodes effective power"
-                          style={{fontSize:FS.micro,fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
+                          style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
                           unstable {Math.round(instab*100)}%
                         </span>
                       )}
@@ -510,12 +510,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                     <div style={{display:'flex',flexDirection:'column',gap:2}}>
                       {rungs.map((rung, j) => (
                         <div key={rung.npcId} style={{display:'flex',alignItems:'center',gap:8,padding:'1px 0 1px 15px'}}>
-                          <span style={{fontSize:FS.micro,color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
-                          <span style={{fontSize:FS.xs,fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{rung.name}</span>
+                          <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
+                          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{rung.name}</span>
                           <div style={{flex:1,height:6,background:`${c}20`,overflow:'hidden'}}>
                             <div style={{width:`${Math.round(rung.standing*100)}%`,height:'100%',background:c}}/>
                           </div>
-                          <span style={{fontSize:FS.micro,color:MUTED,width:28,flexShrink:0,textAlign:'right'}}>{Math.round(rung.standing*100)}</span>
+                          <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,width:28,flexShrink:0,textAlign:'right'}}>{Math.round(rung.standing*100)}</span>
                         </div>
                       ))}
                     </div>
@@ -537,7 +537,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                 {t.factions?.length > 0 && (
                   <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
                     {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
+                      <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
                     ))}
                   </div>
                 )}
@@ -558,13 +558,13 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                   <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
+                  <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
                 {c.issue  && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
                 {c.stakes && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
                 {c.plotHooks?.length > 0 && (
                   <div style={{borderTop:`1px solid ${intColor}30`,paddingTop:8}}>
-                    <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
+                    <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
                     {c.plotHooks.map((hook,j) => (
                       <div key={j} style={{display:'flex',gap:6,marginBottom:4}}>
                         <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>

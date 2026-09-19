@@ -15,7 +15,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // four identity lenses each rendered one `<p>` per sentence; they are now one paragraph
 // each. The DRAW is unchanged — the same strings `drawnAtMount` ruled on in the reader.
 import ProseBlock from '../ProseBlock.jsx';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -146,16 +146,16 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             return (
             <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${accent}`,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
               <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:event.summary?4:0}}>
-                <span style={{fontSize:FS.xs,fontWeight:800,color:accent}}>
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:800,color:accent}}>
                   {String(event.title||'Event').replace(/_/g,' ')}
                 </span>
-                {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
+                {event.at&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>PARTY</span>
+                  ? <span title="Caused by the party" style={{fontSize:chromeFontSize(FS.micro, mobile),color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>PARTY</span>
                   : event.source==='manual'
-                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800}}>EDIT</span>
-                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}
-                {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
+                    ? <span title="A change you authored" style={{fontSize:chromeFontSize(FS.micro, mobile),color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800}}>EDIT</span>
+                    : <span title="The world engine produced this" style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}
+                {event.severity&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),color:swatch['#5A3010'],background:swatch['#FDF4EC'],padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
             </div>
@@ -166,14 +166,14 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
 
       {/* ── VISUAL TIMELINE ──────────────────────────────────────────────── */}
       {age>0&&eventsTimeline.length>0&&<div style={{marginBottom:16}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Historical Timeline</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Historical Timeline</div>
         <div style={{position:'relative',height:36,background:swatch['#F0EAD8'],overflow:'visible',marginTop:14,marginBottom:20}}>
           {/* Axis line */}
           <div style={{position:'absolute',top:'50%',left:0,right:0,height:2,background:swatch['#D0B880'],transform:'translateY(-50%)'}}/>
           {/* "Founded" */}
-          <div style={{position:'absolute',left:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600}}>FOUNDED</div>
+          <div style={{position:'absolute',left:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600}}>FOUNDED</div>
           {/* "Now" */}
-          <div style={{position:'absolute',right:0,bottom:-16,fontSize:FS.micro,color:MUTED,fontWeight:600}}>NOW</div>
+          <div style={{position:'absolute',right:0,bottom:-16,fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,fontWeight:600}}>NOW</div>
           {/* Event dots + year labels with collision avoidance */}
           {(() => {
             // Sort by position to detect collisions
@@ -206,7 +206,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                   position:'absolute',left:`${te.pct}%`,
                   top: te.labelAbove ? 1 : 27,
                   transform:'translateX(-50%)',
-                  fontSize:FS.micro,fontWeight:600,
+                  fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,
                   color:te.ec.color,
                   whiteSpace:'nowrap',
                   lineHeight:1,
@@ -223,12 +223,12 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
         <div style={{display:'flex',gap:8,marginTop:22,flexWrap:'wrap'}}>
           {[...new Set(eventsTimeline.map(te=>te.type))].map(type=>{
             const ec = ALL_EC[type]||ALL_EC.political;
-            return <span key={type} style={{display:'flex',alignItems:'center',gap:4,fontSize:FS.xxs,color:swatch.inkMag3}}>
+            return <span key={type} style={{display:'flex',alignItems:'center',gap:4,fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3}}>
               <div style={{width:8,height:8,background:ec.color,flexShrink:0}}/>
               {ec.label}
             </span>;
           })}
-          <span style={{display:'flex',alignItems:'center',gap:4,fontSize:FS.xxs,color:swatch.inkMag3}}>
+          <span style={{display:'flex',alignItems:'center',gap:4,fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3}}>
             <div style={{width:10,height:10,background:MUTED,border:'2px solid #fff',outline:'2px solid #9c8068',flexShrink:0}}/>
             Still relevant today ()
           </span>
@@ -247,20 +247,20 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
                 {/* Header */}
                 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color}}>{tm.label}</span>
+                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:tm.color}}>{tm.label}</span>
                   {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
-                    <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
+                    <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
                   ))}
                 </div>
                 {/* Description */}
                 <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
                 {/* Factions */}
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
-                  {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
+                  {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
                 </div>}
                 {/* Plot hooks — inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
-                  <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
+                  <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
                   <div style={{display:'flex',flexDirection:'column',gap:4}}>
                     {t.plotHooks.map((hook,j)=>(
                       <div key={j} style={{display:'flex',gap:7,alignItems:'flex-start'}}>
@@ -287,7 +287,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               {label:'How survived',value:founding.overcoming},
             ].filter(f=>f.value).map(({label,value})=>(
               <div key={label}>
-                <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,marginRight:5}}>{label}:</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginRight:5}}>{label}:</span>
                 <span style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{value}</span>
               </div>
             ))}
@@ -319,7 +319,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
                 {/* Anchored banner */}
                 {isAnchored&&<div style={{background:ec.color,padding:'3px 12px',display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}>STILL RELEVANT TODAY</span>
+                  <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.white,letterSpacing:'0.06em'}}>STILL RELEVANT TODAY</span>
                 </div>}
                 {/* Event header */}
                 <div style={{padding:'10px 14px'}}>
@@ -327,26 +327,26 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                     <div style={{flex:1,minWidth:120}}>
                       <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
                         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
-                        {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color}}>{typeLabel}</span>}
-                        {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
+                        {evtName!==typeLabel&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:ec.color}}>{typeLabel}</span>}
+                        {sev&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
                       </div>
                       <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
                     </div>
                     <div style={{flexShrink:0,textAlign:'right'}}>
                       <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>
-                      <div style={{fontSize:FS.micro,color:yrsColor,marginTop:1}}>{yrsLabel}</div>
+                      <div style={{fontSize:chromeFontSize(FS.micro, mobile),color:yrsColor,marginTop:1}}>{yrsLabel}</div>
                     </div>
-                    <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0,paddingTop:2}}>{isExp?'▲':'▼'}</span>
+                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{isExp?'▲':'▼'}</span>
                   </div>
                 </div>
                 {/* Expanded detail */}
                 {isExp&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
                   {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
-                    <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
-                    <span style={{fontSize: FS['11.5'],color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
+                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
+                    <span style={{fontSize: chromeFontSize(FS['11.5'], mobile),color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
                   </div>}
                   {evt.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${ec.border}`,paddingTop:8,marginTop:4}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
+                    <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,marginBottom:5}}>Plot hooks</div>
                     {evt.plotHooks.map((hook,j)=>{
                       const hookText = typeof hook==='object'?hook.hook||Ti(hook):hook;
                       return <div key={j} style={{display:'flex',gap:7,marginBottom:4}}>

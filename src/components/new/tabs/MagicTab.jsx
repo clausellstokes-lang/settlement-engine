@@ -14,7 +14,7 @@ import { deriveMagicPosture } from '../../../domain/display/dossierViewModel.js'
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -73,7 +73,7 @@ export default function MagicTab({ settlement }) {
             background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
           }}>
             <div style={{
-              fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Envelope</div>
             <div style={{ padding: `0 ${SP.md}px` }}>
@@ -88,7 +88,7 @@ export default function MagicTab({ settlement }) {
             background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
           }}>
             <div style={{
-              fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
@@ -104,7 +104,7 @@ export default function MagicTab({ settlement }) {
               background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
               padding: `${SP.sm}px ${SP.md}px`,
             }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SLATE, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SLATE, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
                 Deity &amp; magic
               </div>
               {magicCoupling.map((line, i) => (

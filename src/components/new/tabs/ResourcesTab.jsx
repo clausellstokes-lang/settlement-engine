@@ -53,15 +53,15 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:160}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:swatch.inkMag,lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
             {res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {[...res.economicStrengths].sort((a,b)=>(a||'').localeCompare(b||'')).map((s,i)=>(
-                <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:swatch.success,background:swatch['#E0F0E4'],border:'1px solid #a8d8b0',padding:'2px 9px'}}>✓ {s}</span>
+                <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.success,background:swatch['#E0F0E4'],border:'1px solid #a8d8b0',padding:'2px 9px'}}>✓ {s}</span>
               ))}
             </div>
           </div>}
@@ -85,27 +85,27 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {unexploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em'}}>UNEXPLOITED</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em'}}>UNEXPLOITED</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
-                <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
               {/* Chain flow */}
               <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
                 {(chain.intermediateGoods||[]).map((g,j)=>(
                   <React.Fragment key={j}>
-                    <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>
-                    <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
+                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
                   </React.Fragment>
                 ))}
                 {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
                   <React.Fragment key={j}>
-                    <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>
-                    <span style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
+                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
                   </React.Fragment>
                 ))}
               </div>
-              {chain.processingInstitutions?.length>0&&<div style={{fontSize:FS.xs,color:swatch['#5A3A10']}}>
+              {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
                 Needs: {chain.processingInstitutions.join(', ')}
               </div>}
             </div>
@@ -115,14 +115,14 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {partExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em'}}>PARTIAL</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em'}}>PARTIAL</span>
                 <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
-                <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
               <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
                 {(chain.intermediateGoods||[]).map((g,j)=>(
-                  <React.Fragment key={j}><span style={{fontSize:FS.xxs,color:MUTED}}>→</span><span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
+                  <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
                 ))}
               </div>
             </div>
@@ -132,9 +132,9 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {fullExploited.map((chain,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em'}}>✓ FULLY EXPLOITED</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em'}}>✓ FULLY EXPLOITED</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
-                <span style={{fontSize:FS.xxs,fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
             </div>
           ))}
@@ -154,22 +154,22 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted. Consumed locally, export potential reduced</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
-                  ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',padding:'2px 9px',fontWeight:600}}>{fmtKey(rk)}</span>)}
+                  ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',padding:'2px 9px',fontWeight:600}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant. Full export potential</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=>customSet.has(rk)
-                  ? <span key={i} style={{fontSize:FS.xs,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
+                  ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{r2.replace(/_/g,' ')}</span>)}
+                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{r2.replace(/_/g,' ')}</span>)}
               </div>
             </div>}
           </>;
@@ -212,7 +212,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             return <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:gbg,border:`1px solid ${gc}40`,borderLeft:`3px solid ${gc}`}}>
               <span style={{fontSize:FS.sm,color:gc,flexShrink:0}}>{sev==='high'?'':''}</span>
               <div style={{flex:1}}>
-                {chain&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize',marginRight:6}}>{chain}:</span>}
+                {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,textTransform:'capitalize',marginRight:6}}>{chain}:</span>}
                 <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{impact}</span>
               </div>
             </div>;

@@ -6,7 +6,7 @@ import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import { tokenCase } from '../labelLadder.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem} from '../serviceComponents';
@@ -137,10 +137,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories</span>
         </div>
         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-          {totalImpaired>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
-          {totalDegraded>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
-          {missing.length>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
-          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
+          {totalImpaired>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
+          {totalDegraded>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
+          {missing.length>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
+          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
         </div>
       </div>
 
@@ -169,11 +169,11 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
               : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',padding:'10px 14px'}}>
-                  <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
                       <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
-                      <span style={{fontSize:FS.xxs,color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
                   ))}
                 </div>
@@ -187,7 +187,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
         {/* ── CATEGORY HEALTH GRID ────────────────────────────────────────── */}
         {(totalImpaired>0||totalDegraded>0||missing.length>0) && (
           <div style={{marginBottom:14}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
             <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
               {catOrder.map(cat => {
                 const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
@@ -210,10 +210,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                       }
                     }}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
-                      <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{cs.total}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
-                    {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
+                    {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
                       {hasImp&&`${cs.imp} impaired`}{hasDeg&&`${cs.deg} reduced`}
                     </div>}
                   </div>
@@ -224,9 +224,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
                     </div>
-                    <div style={{marginTop:3,fontSize:FS.xxs,fontWeight:700,color:swatch['#7A5010']}}>not available</div>
+                    <div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A5010']}}>not available</div>
                   </div>
                 );
               })}
@@ -277,10 +277,10 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                       its capitals and "Standing forces" beneath it does not. "Category Status"
                       above is this surface's one eyebrow and is untouched. */}
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor}}>{tokenCase(meta.label)}</span>
-                  <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
-                  {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
-                  {!hasImp&&hasDeg&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
-                  <span style={{fontSize:FS.xxs,color:isCriminal?'#8a5050':'#9c8068',marginLeft:'auto'}}>{open?'▲':'▼'}</span>
+                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
+                  {hasImp&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
+                  {!hasImp&&hasDeg&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
+                  <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#8a5050':'#9c8068',marginLeft:'auto'}}>{open?'▲':'▼'}</span>
                 </button>
 
                 {open && <div style={{padding:'10px 14px'}}>
@@ -307,7 +307,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           })}
         </div>
 
-        <p style={{fontSize:FS.xs,color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
+        <p style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
           {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · custom':''}
         </p>
       </>}

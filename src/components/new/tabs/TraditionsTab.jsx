@@ -27,7 +27,7 @@ import {
   BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 const OUTCOME_LABEL = {
   triumph: 'a triumph', good: 'well kept', modest: 'modestly kept',
@@ -77,7 +77,7 @@ function TraditionRow({ rec, preview }) {
           {rec.name}
         </h4>
         <span style={{
-          marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
+          marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
  whiteSpace: 'nowrap',
         }}>
           {humanizeMotif(rec.coreMotif?.element)} · {humanizeMotif(rec.coreMotif?.act)}
@@ -86,7 +86,7 @@ function TraditionRow({ rec, preview }) {
       <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         Kept in {describeTraditionWindow(rec.window)}.
       </div>
-      <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+      <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
         <span>Owner: {owner}</span>
         <span>Last held: {outcome}</span>
       </div>
