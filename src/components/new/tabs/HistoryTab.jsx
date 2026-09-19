@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, serif, Collapsible, Section, Empty } from '../Primitives';
-import { LITERARY_TITLE } from '../labelLadder.js';
+import { LITERARY_TITLE, tokenCase } from '../labelLadder.js';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -240,7 +240,11 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
           {currentTensions.map((t,i)=>{
-            const tm = TENSION_META[t.type] || {color:'#b8860b',label:t.type||'Tension'};
+            // The table above names ten tension types and the engine writes more than ten
+            // (the campaign path adds `external_threat` and its siblings), so the fallback
+            // was printing the raw kind. A kind the table has not styled still reads as a
+            // phrase rather than as an identifier.
+            const tm = TENSION_META[t.type] || {color:'#b8860b',label:tokenCase(t.type)||'Tension'};
             const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
             const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
             const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';

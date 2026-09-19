@@ -505,13 +505,13 @@
           },
           {
                     "path": "src/components/new/tabs/EconomicsTab.jsx",
-                    "line": 736,
+                    "line": 741,
                     "category": "percentToken",
                     "snippet": "`Shadow Economy: ${bmc}% capture`"
           },
           {
                     "path": "src/components/new/tabs/EconomicsTab.jsx",
-                    "line": 742,
+                    "line": 747,
                     "category": "percentToken",
                     "snippet": "{bmc}"
           },

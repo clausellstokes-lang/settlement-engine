@@ -445,6 +445,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // DefenseSecurity carry no row that moved — DefenseSecurity's pair sits at 238, ABOVE the
 // edited line. Path, category and snippet byte-identical on both; the census holds at 218
 // against a 218 ceiling and no category count moves.
+// BROWSER PASS 3's RAW-KEY MOUNTS (2026-09-19, lane 36 car 4) — TWO PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION. Threading `resourceDisplayName` through the Resource
+// Exploitation pills puts five lines of rationale above the Shadow Economy section, so
+// EconomicsTab's two `bmc` rows re-address 736 -> 741 and 742 -> 747. The car's seven other
+// files carry no banked row at all. Path, category and snippet byte-identical; the census
+// holds at 218 against a 218 ceiling. ⚠ THE RATIONALE IS A `//` BLOCK INSIDE THE RENDER AND
+// NOT A `{/* … */}` IN THE JSX, which is a lint fact worth writing down: max-lines skips
+// comments, and a JSX comment container is CODE — the first draft took that file to 601
+// against its 600 ceiling and the pre-commit hook refused it.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

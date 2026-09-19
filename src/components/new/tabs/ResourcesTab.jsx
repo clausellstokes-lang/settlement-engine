@@ -7,6 +7,12 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+// THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
+// town ('desert_salt', 'glass_sand', 'mountain_timber') and the processing names are
+// institution keys; both are PRINTS here, and nothing on this tab matches on them.
+import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
 
 /**
  * @param {object} props
@@ -86,12 +92,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em'}}>UNEXPLOITED</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
               {/* Chain flow */}
               <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
                 {(chain.intermediateGoods||[]).map((g,j)=>(
                   <React.Fragment key={j}>
                     <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
@@ -106,7 +112,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                 ))}
               </div>
               {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
-                Needs: {chain.processingInstitutions.join(', ')}
+                Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
               </div>}
             </div>
           ))}
@@ -116,11 +122,11 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em'}}>PARTIAL</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
               <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
                 {(chain.intermediateGoods||[]).map((g,j)=>(
                   <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
                 ))}
@@ -133,7 +139,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
               <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em'}}>✓ FULLY EXPLOITED</span>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,textTransform:'capitalize'}}>{chain.rawResource}</span>
+                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
             </div>
@@ -204,15 +210,24 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           ))}
           {/* Structural gaps */}
           {(res.gaps||[]).map((g,i)=>{
-            const chain = typeof g==='object'?g.chain:'';
-            const impact = typeof g==='object'?g.impact||(g.missing||[]).join(', '):''+g;
+            // ⛔ THE GAP'S `impact` IS GENERATED PROSE WITH A KEY IN IT — resourceGenerator
+            // writes "Glassblower exists but lacks access to glass_sand" — so it takes the
+            // same seam the upstream note does rather than a producer fix, which would move
+            // the golden and re-spell every saved world. The subject opens its row and takes
+            // a capital; the one inside the sentence does not.
+            const gapWord = (id, at) => {
+              const word = String(resourceDisplayName(id));
+              return at === 0 ? word : word.charAt(0).toLowerCase() + word.slice(1);
+            };
+            const chain = typeof g==='object'?resourceDisplayName(g.chain):'';
+            const impact = engineKeysInText(typeof g==='object'?g.impact||(g.missing||[]).join(', '):''+g, gapWord);
             const sev = typeof g==='object'?g.severity:'low';
             const gc = sev==='high'?'#8b1a1a':sev==='medium'?'#a0762a':'#6b5340';
             const gbg = sev==='high'?'#fdf4f4':sev==='medium'?'#faf4e8':'#f7f0e4';
             return <div key={i} style={{display:'flex',gap:8,padding:'8px 12px',background:gbg,border:`1px solid ${gc}40`,borderLeft:`3px solid ${gc}`}}>
               <span style={{fontSize:FS.sm,color:gc,flexShrink:0}}>{sev==='high'?'':''}</span>
               <div style={{flex:1}}>
-                {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,textTransform:'capitalize',marginRight:6}}>{chain}:</span>}
+                {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,marginRight:6}}>{chain}:</span>}
                 <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{impact}</span>
               </div>
             </div>;

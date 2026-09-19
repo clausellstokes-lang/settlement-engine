@@ -5,6 +5,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
 export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
@@ -69,7 +70,10 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>
-             Needs <strong>{r.resource}</strong>
+            {/* The dependency's `resource` is a catalogue KEY on thirteen of this tab's rows
+                (`oasis_water`, `camel_herds`, `glass_sand`); `depReasons` is keyed by the raw
+                name above and stays that way — only the printed word goes through the seam. */}
+             Needs <strong>{resourceDisplayName(r.resource)}</strong>
             {r.impact&&<span style={{fontStyle:'italic',marginLeft:4}}>{truncateAtWord(r.impact, 70)}</span>}
           </p>;
         })()}

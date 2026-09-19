@@ -7,6 +7,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { tokenCase } from './labelLadder.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -221,10 +222,11 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         )}
       </div>
 
-      {/* Upstream note */}
+      {/* Upstream note — the generator joins CHAIN IDS into this sentence, so the seam
+          resolves them against the same table the nodes above are drawn from. */}
       {chain.upstreamNote && (
         <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>
-          ↑ {chain.upstreamNote}
+          ↑ {supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS)}
         </div>
       )}
     </div>

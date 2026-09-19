@@ -215,7 +215,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                   : 'Generation receipt: coherent'}
             </span>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>
-              culture {generationReceipt.cultureProfile} · themes {generationReceipt.contentProfile}
+              {/* ⛔ THE RECEIPT STORES THE PROFILE'S KEY, AND IT SHOULD: the coherence record
+                  is an audit trail, and `south_asian` is what the generator was asked for.
+                  The settlement's own materialized identity carries that key's authored
+                  LABEL ('South-Asian-inspired'), so the reader gets the word and the record
+                  keeps the key. `tokenCase` covers a legacy save with no identity. */}
+              culture {s.culturalIdentity?.label || tokenCase(generationReceipt.cultureProfile)} · themes {tokenCase(generationReceipt.contentProfile)}
             </span>
           </div>
           <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>

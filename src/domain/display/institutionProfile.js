@@ -26,6 +26,7 @@ import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
+import { resourceDisplayName } from './resourceDisplayName.js';
 
 /**
  * @typedef {Object} InstitutionContribution
@@ -166,7 +167,11 @@ function chainsProcessedBy(inst) {
       (Array.isArray(chain.processingInstitutions) && chain.processingInstitutions.includes(inst.name));
     if (!supports) continue;
     const product = chain.finalProducts?.[0] || chain.intermediateGoods?.[0] || null;
-    out.push(product ? `${chain.rawResource} → ${product}` : String(chain.rawResource || ''));
+    // The chain's `rawResource` is a catalogue KEY, and this string is built for a reader
+    // rather than stored — the Services tab's institution card printed "oasis_water → dried
+    // dates" off it (browser pass 3). Composed through the seam, so the key never leaves.
+    const resource = resourceDisplayName(chain.rawResource);
+    out.push(product ? `${resource} → ${product}` : String(resource || ''));
   }
   return out;
 }

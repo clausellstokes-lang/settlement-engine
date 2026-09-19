@@ -21,6 +21,7 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -161,7 +162,7 @@ function ChainRow({ chain, instNames, primaryExports }) {
 
       {chain.upstreamNote ? (
         <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>
-          · {safe(chain.upstreamNote)}
+          · {safe(supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS))}
         </Text>
       ) : null}
     </View>

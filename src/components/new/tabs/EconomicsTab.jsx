@@ -656,6 +656,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         const full = [...(res.exploitation?.fullyExploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
         const part = [...(res.exploitation?.partiallyExploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
         const unex = [...(res.exploitation?.unexploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
+        // THE THREE PILL ROWS BELOW PRINT `rawResource`, WHICH IS A CATALOGUE KEY AS OFTEN AS
+        // it is a word (browser pass 3: `hot_springs_mineral`, `mountain_timber`). The seam
+        // beside the Imports pills already knows every one of them, and a value it does not
+        // name still leaves cased rather than raw. The SORT above keys on the raw field, as
+        // it must: the order is the engine's, only the printed word is the reader's.
         if(full.length===0&&part.length===0&&unex.length===0) return null;
         return <Section title="Resource Exploitation" collapsible defaultOpen={false}>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -664,7 +669,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 ✓ Fully Exploited ({full.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {full.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {full.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'2px 8px'}}>{resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'))}</span>)}
               </div>
             </div>}
             {part.length>0&&<div>
@@ -673,7 +678,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {part.map((r,i)=>{
-                const name = r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?');
+                const name = resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'));
                 const missing = r.processingInstitutions?.length
                   ? '' : r.dependsOn?.length ? ' (needs: '+r.dependsOn.slice(0,2).join(', ')+')' : '';
                 return <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',padding:'2px 8px'}}>{name}{missing}</span>;
@@ -685,7 +690,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 ○ Unexploited Opportunity ({unex.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {unex.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {unex.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',padding:'2px 8px'}}>{resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'))}</span>)}
               </div>
             </div>}
           </div>
