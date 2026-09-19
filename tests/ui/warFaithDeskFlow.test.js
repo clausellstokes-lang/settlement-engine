@@ -205,13 +205,27 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
    * Two rungs whose sentences are the test's own make the claim exact and seed-free: this
    * renderer, at this mount, stands the second opening down. `war.standing` is a SENTENCE row
    * in the registry, so `drawnAtMount` passes both rungs through.
+   *
+   * ⛔⛔ AND THE RUNG TEXT IS UNMISTAKABLY SYNTHETIC, which is a correction (review 10). The
+   * first cut wrote two sentences that READ like the corpus — "Steinmark carries a light mark
+   * from its fighting…" — and one of them ALIGNED with a DS-WAR-1 pool member on 21 fixed
+   * characters, so `proseDrawnAnchors.walker.test.js` counted this file as pinning literal
+   * state prose and reddened. That walker is right to: a reader cannot tell an invented war
+   * sentence from a drawn one, and neither can the next person to re-seed this fixture. A
+   * hand-built rung must therefore announce itself IN ITS OWN WORDS, and nothing in the six
+   * state leaves can align with a sentence that talks about being a fixture. The assertions
+   * below are computed from these two constants for the same reason — a literal repeated
+   * from a rung is a literal a corpus could one day grow into.
    */
   test('DeskLines stands a repeated opening name down when the wrapper hands it the settlement', () => {
     const line = (text) => legibilityRung('', { blockId: 'DS-WAR-1', poolKey: 'test', angle: 'plain', text }, []);
-    const rungs = [
-      line('Steinmark is at war in the way a town can be at war without seeing any.'),
-      line('Steinmark carries a light mark from its fighting and is very nearly clear of it.'),
-    ];
+    const NAME = SETTLEMENT.name;
+    // ⚠ THE SECOND LINE'S REMAINDER NAMES NO TIER NOUN, deliberately: `weaveBlock` reaches
+    // for "It"/"Its" instead of "The <noun>" when the line already names any tier, and this
+    // arm is about the tier-noun branch.
+    const OPENING = `${NAME} is a fixture this test wrote, and no pool in the corpus holds it.`;
+    const SECOND = `${NAME} is named a second time on purpose, so the weave has an opening to stand down.`;
+    const rungs = [line(OPENING), line(SECOND)];
     const town = { ...SETTLEMENT, tier: 'town' };
     const withName = render(e(DeskLines, {
       mount: 'war.standing', rungs, settlementName: town.name, tier: town.tier,
@@ -221,13 +235,14 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
     expect(withName).toBe(weaveBlock(rungs.map((r) => r.sentence), {
       settlementName: town.name, tierNoun: tierNounFor(town.tier),
     }).paragraph);
-    expect(withName).toContain('The town carries a light mark');
+    expect(withName, 'the second opening did not become the tier noun')
+      .toContain(`The ${town.tier}${SECOND.slice(NAME.length)}`);
     // …and the FIRST sentence keeps its name, so the paragraph still says who it is about.
-    expect(withName).toContain('Steinmark is at war');
+    expect(withName, 'the opening sentence lost its name').toContain(OPENING);
     // WITHOUT the props the same rungs still WEAVE and simply do not stand down — which is
     // exactly the invisible failure this arm exists to catch, pinned from both sides.
     const without = render(e(DeskLines, { mount: 'war.standing', rungs })).container.textContent;
-    expect(without).toContain('Steinmark carries a light mark');
+    expect(without, 'the unthreaded renderer stood the name down anyway').toContain(SECOND);
   });
 
   test('…and every wrapper hands its settlement through, at every mount', () => {

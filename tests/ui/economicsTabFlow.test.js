@@ -486,7 +486,23 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     const stoodDown = onPage(GROUND_LINES.strengths, lines, GROUND);
     expect(stoodDown, 'the strengths lens no longer opens on the name, so this arm is free')
       .not.toBe(GROUND_LINES.strengths);
-    expect(stoodDown).toBe('The village has more than one thing it is good at, and the list is short enough that everybody here could recite it.');
+    // ⛔ THE EXPECTED FORM IS COMPUTED FROM THE DRAWN MEMBER, NEVER TYPED (car 8a-13's rule,
+    // and `proseDrawnAnchors.walker.test.js` is what keeps it so). This assertion used to
+    // pin the stood-down sentence as a LITERAL — 105 characters of DS-ECO-11's own wording —
+    // which is the class that habitat removal exists to end: NEVER TRIM lets the pool grow,
+    // an appended variant wins the draw, and the literal reds while the desk, the contract
+    // and the paid-surface gate this arm guards are all perfectly well.
+    //
+    // The claim does not weaken. It gains a premise and states the TRANSFORMATION instead of
+    // the result: the drawn member opens on the name, and the stand-down is that same member
+    // with its opening name replaced by the tier phrase and nothing else touched. A re-index
+    // or a rewording moves the member and the expectation together; a weave that started
+    // dropping words, renaming mid-sentence, or reaching for the pronoun still reds.
+    expect(GROUND_LINES.strengths.startsWith(GROUND.name),
+      'the drawn member stopped opening on the name, so there is no stand-down to expect')
+      .toBe(true);
+    expect(stoodDown, 'the stand-down is not the drawn member with its opening name replaced')
+      .toBe(`The ${GROUND.tier}${GROUND_LINES.strengths.slice(GROUND.name.length)}`);
     const text = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false })).container.textContent;
     expect(text, 'the tab renders the raw sentence, so the props did not reach DeskLines')
       .not.toContain(GROUND_LINES.strengths); // anchored: the toContain below proves this same render carries the position
