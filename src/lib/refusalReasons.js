@@ -45,6 +45,16 @@ export const REFUSAL_REASONS = Object.freeze({
   /** The size asked for is above this account's ceiling — refused BEFORE the engine runs. */
   TIER: 'tier',
   /**
+   * The size asked for is BELOW this account's FLOOR (§934.34: a thorpe requires an
+   * account). A different fact from TIER and it needs its own sentence, because TIER's
+   * says the opposite: `isTierAllowed` refuses a RANGE, and for the one tier with a
+   * floor above rung 0 the ceiling sentence read "A Thorpe is past what this account
+   * forges; it reaches up to a Town" — a refusal that told the reader their thorpe was
+   * too big. Raised wherever the refused rank is under the floor, on the picker path
+   * and on the resolved-roll path alike.
+   */
+  TIER_TOO_SMALL: 'tierTooSmall',
+  /**
    * A 'random'/'custom' sentinel RESOLVED above the ceiling, so the finished settlement
    * was discarded rather than committed. A different fact from TIER and it needs its own
    * sentence: the reader picked nothing wrong, the roll came out too big.

@@ -891,6 +891,32 @@ export const createAuthSlice = (set, get) => ({
     return rank >= minRank && rank <= maxRank;
   },
 
+  /**
+   * ⛔ WHICH BOUND REFUSED — because the two owe the reader OPPOSITE sentences.
+   * `isTierAllowed` answers one boolean over a RANGE, so the gate that read it could
+   * only raise the CEILING's refusal, and on the one rung with a floor above it that
+   * sentence was false: an anonymous visitor asking for a thorpe was told "A Thorpe is
+   * past what this account forges; it reaches up to a Town". This answers the other
+   * half, and it lives HERE rather than at the gate because TIER_RANK is this slice's
+   * table and nothing outside it should learn to rank a size.
+   *
+   * Asked only about a size already refused, and FAIL-CLOSED in the same direction as
+   * `isTierAllowed`: a sentinel, an unknown token or an unknown floor answers `false`,
+   * which leaves the ceiling's sentence exactly where it stood before this existed.
+   *
+   * @param {string} settlementTier
+   * @returns {boolean} true only when the size is under this account's floor
+   */
+  isTierBelowFloor: (settlementTier) => {
+    if (staffUnlocksPaidFeatures(get().auth.role)) return false;
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return false;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank < minRank;
+  },
+
   /** Whether the user can afford AI features (developers get unlimited) */
   canAffordAI: (feature) => {
     if (staffUnlocksPaidFeatures(get().auth.role)) return true;

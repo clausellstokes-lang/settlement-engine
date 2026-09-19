@@ -53,6 +53,16 @@ const sizeLabelOf = (token) => (token
 /** @param {string|undefined} tier */
 const ceilingLabelOf = (tier) => (tier
   ? (/** @type {Record<string, { maxSizeLabel: string }>} */ (TIER_FACTS)[tier]?.maxSizeLabel || '') : '');
+/**
+ * Was the refusal the FLOOR rather than the ceiling? Asked only of a size the gate has
+ * already refused. The slice owns the rank table and answers; a store that predates the
+ * selector (or a hand-built one in a test) answers `false`, which is exactly the
+ * behaviour this gate had before the floor had its own sentence.
+ * @param {any} st the store state the gate is reading
+ * @param {string|undefined} token
+ */
+const belowFloor = (st, token) => typeof st?.isTierBelowFloor === 'function'
+  && st.isTierBelowFloor(token) === true;
 import { SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
@@ -172,11 +182,23 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       // …and SAY so where the reader clicked. The sentence names the size asked for
       // and the ceiling this account reaches, both as display labels off the config
       // (never a raw tier token, never a hand-typed ceiling).
+      //
+      // ⛔ WHICH BOUND REFUSED DECIDES WHICH SENTENCE (§934.34). `isTierAllowed` is one
+      // boolean over a RANGE, and raising the ceiling's reason for every refusal made the
+      // product tell an anonymous visitor "A Thorpe is past what this account forges; it
+      // reaches up to a Town" — the opposite of the truth, on the one rung the floor
+      // exists for. The slice answers which bound it was; a floor refusal gets its own
+      // reason and names the floor instead of a ceiling the reader never approached.
       set(s => {
-        s.lastRefusal = refusalOf(REFUSAL_REASONS.TIER, {
-          size: sizeLabelOf(settType),
-          max: ceilingLabelOf(state.auth?.tier) || sizeLabelOf(state.maxAllowedTier?.()),
-        });
+        s.lastRefusal = belowFloor(state, settType)
+          ? refusalOf(REFUSAL_REASONS.TIER_TOO_SMALL, {
+            size: sizeLabelOf(settType),
+            min: sizeLabelOf(state.minAllowedTier?.()),
+          })
+          : refusalOf(REFUSAL_REASONS.TIER, {
+            size: sizeLabelOf(settType),
+            max: ceilingLabelOf(state.auth?.tier) || sizeLabelOf(state.maxAllowedTier?.()),
+          });
       });
       return null;
     }
@@ -356,10 +378,21 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // A DIFFERENT sentence from the pre-flight refusal on purpose: the reader picked
     // nothing wrong here, the roll came out too big and the finished town was thrown
     // away. Telling them "you asked for too much" would be false.
+    //
+    // ⛔ AND THE ROLL CAN LAND UNDER THE FLOOR TOO, where "past what this account
+    // forges" is false the other way round: 'random' draws from the whole ladder, whose
+    // first rung is `thorp`, and an anonymous visitor's floor is above it. Same fact as
+    // the pre-flight's, reached by a different door, so it is the same sentence.
+    const rolled = get();
     set(s => {
-      s.lastRefusal = refusalOf(REFUSAL_REASONS.RESOLVED_TIER, {
-        size: sizeLabelOf(withRoster?.tier),
-      });
+      s.lastRefusal = belowFloor(rolled, withRoster?.tier)
+        ? refusalOf(REFUSAL_REASONS.TIER_TOO_SMALL, {
+          size: sizeLabelOf(withRoster?.tier),
+          min: sizeLabelOf(rolled.minAllowedTier?.()),
+        })
+        : refusalOf(REFUSAL_REASONS.RESOLVED_TIER, {
+          size: sizeLabelOf(withRoster?.tier),
+        });
     });
     return null;
   }

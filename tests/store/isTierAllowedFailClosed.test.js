@@ -12,6 +12,13 @@
  * user's max) and the explicitly-allowlisted wizard sentinels ('random' /
  * 'custom') pass. Every other unranked value — undefined, typos, tampered
  * strings — is denied.
+ *
+ * ⛔ THE GATE IS A RANGE SINCE §934.34 (car e7c85a66b), AND THIS FILE HAD NOT BEEN
+ * TOLD. `TIER_GATE.anon.minTier` became 'hamlet' — a thorpe requires an account — so
+ * `isTierAllowed('thorp')` at an anonymous visitor went from true to false while the
+ * arm below still asserted the old answer with the old arithmetic in its comment
+ * ("0 <= 3"). The floor is asserted here now, in both directions, because a
+ * permission gate with an unpinned bound is half a gate.
  */
 import { describe, it, expect } from 'vitest';
 import { create } from 'zustand';
@@ -26,13 +33,42 @@ function makeStore() {
 describe('isTierAllowed fails CLOSED for unknown tiers (finding #12)', () => {
   it('still gates RANKED tiers by the user max (anon caps at town)', () => {
     const store = makeStore();
-    // anon maxAllowedTier is 'town' (rank 3).
-    expect(store.getState().isTierAllowed('thorp')).toBe(true);   // 0 <= 3
-    expect(store.getState().isTierAllowed('hamlet')).toBe(true);  // 1 <= 3
-    expect(store.getState().isTierAllowed('town')).toBe(true);    // 3 <= 3
+    // anon is a RANGE: minAllowedTier 'hamlet' (rank 1) .. maxAllowedTier 'town' (rank 3).
+    expect(store.getState().isTierAllowed('thorp')).toBe(false);  // 0 >= 1 -> no (§934.34)
+    expect(store.getState().isTierAllowed('hamlet')).toBe(true);  // 1 in [1, 3]
+    expect(store.getState().isTierAllowed('town')).toBe(true);    // 3 in [1, 3]
     expect(store.getState().isTierAllowed('city')).toBe(false);   // 4 <= 3 -> no
     expect(store.getState().isTierAllowed('capital')).toBe(false); // 5 <= 3 -> no
     expect(store.getState().isTierAllowed('metropolis')).toBe(false); // 5 <= 3
+  });
+
+  it('names WHICH bound refused, because the two owe opposite sentences', () => {
+    // ⛔ A RANGE REFUSES FOR TWO REASONS AND THE READER MUST BE TOLD THE RIGHT ONE. With
+    // one boolean the gate could only raise the ceiling's copy, which told an anonymous
+    // visitor asking for a thorpe that it was "past what this account forges".
+    const store = makeStore();
+    expect(store.getState().isTierBelowFloor('thorp'), 'the floor refusal is not named as one').toBe(true);
+    expect(store.getState().isTierBelowFloor('hamlet')).toBe(false); // the floor itself is allowed
+    expect(store.getState().isTierBelowFloor('city'), 'a CEILING refusal must not read as a floor one').toBe(false);
+    // A free account has no floor above rung 0, so nothing is ever below it.
+    store.setState(s => { s.auth.tier = 'free'; });
+    expect(store.getState().isTierBelowFloor('thorp')).toBe(false);
+  });
+
+  it('the floor question fails CLOSED exactly as the range does', () => {
+    const store = makeStore();
+    // Sentinels, unknown tokens and an unranked floor all answer "not a floor refusal",
+    // which leaves the ceiling's sentence where it stood before the floor had its own.
+    for (const value of ['random', 'custom', 'not-a-tier', '', undefined, null, 42, {}]) {
+      expect(store.getState().isTierBelowFloor(value), String(value)).toBe(false);
+    }
+    const orig = store.getState().minAllowedTier;
+    store.setState(s => { s.minAllowedTier = () => 'not-a-real-tier'; });
+    expect(store.getState().isTierBelowFloor('thorp')).toBe(false);
+    store.setState(s => { s.minAllowedTier = orig; });
+    // …and an elevated role bypasses the floor with the ceiling.
+    store.setState(s => { s.auth.role = 'admin'; });
+    expect(store.getState().isTierBelowFloor('thorp')).toBe(false);
   });
 
   it('a higher-tier account gates ranked tiers by ITS larger max', () => {

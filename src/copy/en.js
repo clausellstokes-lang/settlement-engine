@@ -433,6 +433,16 @@ export const en = Object.freeze({
       rubric: 'A bigger settlement',
       body:   'A {size} is past what this account forges; it reaches up to a {max}. Sign in (free) to reach {sizes}.',
     },
+    // ⛔ THE FLOOR IS NOT THE CEILING, AND THE CEILING'S SENTENCE WAS FALSE ON IT
+    // (§934.34). `isTierAllowed` refuses a RANGE; for a thorpe at an anonymous visitor
+    // the refusal came from the FLOOR and the copy raised was `tier`, which reads "A
+    // Thorpe is past what this account forges; it reaches up to a Town". Its own reason,
+    // its own sentence: what this size costs is an account, not an upgrade, and the
+    // floor is named so the reader knows where the forge starts without one.
+    tierTooSmall: {
+      rubric: 'A smaller settlement',
+      body:   'A {size} takes an account. Without one the forge starts at a {min}. Sign in (free) to reach {sizes}.',
+    },
     resolvedTier: {
       rubric: 'A bigger settlement',
       body:   'That roll came out a {size}, past what this account forges, so it was not kept. Pick a size yourself, or sign in (free) to reach every one.',

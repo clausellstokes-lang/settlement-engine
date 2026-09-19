@@ -31,9 +31,25 @@ vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => H.mobile, getI
 vi.mock('../../src/lib/analytics.js', () => ({
   track: vi.fn(), Funnel: {}, EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
+// THE ENGINE, stubbed at the transport seam the lane calls. Every arm below is about a
+// gate that answers BEFORE the engine, and the one arm that gets past both bounds is
+// asserting exactly that — a real pipeline run would add a minute and prove none of it.
+vi.mock('../../src/lib/generationClient.js', () => ({
+  runGeneration: async () => ({
+    result: {
+      settlement: { name: 'Forged', tier: 'thorp' },
+      preservation: null,
+      resolvedConfig: { settType: 'thorp' },
+      pipelineHistory: [],
+    },
+  }),
+}));
+
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { TIER_GATE } from '../../src/store/authSlice.js';
+import { TIER_GATE, createAuthSlice } from '../../src/store/authSlice.js';
 import { ANON_SIZES, SIZE_LADDER } from '../../src/config/tierFacts.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import { REFUSAL_REASONS } from '../../src/lib/refusalReasons.js';
@@ -69,6 +85,26 @@ describe('THE GATE — one range, one capability flag', () => {
     // a single flag would have made one of those wrong.
     expect(TIER_GATE.free.customContent).toBe(false);
     expect(TIER_GATE.free.preGenOptions).not.toBe(TIER_GATE.free.customContent);
+  });
+
+  test('the FLOOR and the CEILING are different refusals, and say opposite things', () => {
+    // ⛔ ONE BOOLEAN OVER A RANGE COULD ONLY RAISE ONE SENTENCE, AND IT WAS THE WRONG
+    // ONE HERE (§934.34). A thorpe is refused from BELOW; the ceiling's copy reads
+    // "A Thorpe is past what this account forges; it reaches up to a Town".
+    const floor = refusalCopy(REFUSAL_REASONS.TIER_TOO_SMALL, { size: 'Thorpe', min: 'Hamlet' });
+    expect(floor, 'the floor reason renders nothing').not.toBeNull();
+    expect(floor.body).toContain('A Thorpe takes an account');
+    expect(floor.body).toContain('starts at a Hamlet');
+    expect(floor.body).toMatch(/sign in \(free\)/i);
+    // anchored: floor.body is proven on the three lines above to be the real, filled
+    // sentence, so what it does NOT say is a real absence rather than an empty string.
+    expect(floor.body, 'the floor still wears the ceiling\'s words').not.toContain('past what this account forges');
+
+    const ceiling = refusalCopy(REFUSAL_REASONS.TIER, { size: 'City', max: 'Town' });
+    expect(ceiling.body).toContain('past what this account forges');
+    // anchored: ceiling.body is proven on the line above to carry the ceiling sentence.
+    expect(ceiling.body, 'the ceiling borrowed the floor\'s words').not.toContain('takes an account');
+    expect(ceiling.rubric).not.toBe(floor.rubric);
   });
 
   test('the refusal that explains it resolves to real words', () => {
@@ -184,6 +220,68 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     expect(DEFAULT_CONFIG.nearbyResourcesRandom).toBe(true);
     expect(DEFAULT_CONFIG.selectedStressesRandom).toBe(true);
     expect(DEFAULT_CONFIG.customName).toBe('');
+  });
+
+  /**
+   * ⛐ THE REAL GATE, DRIVEN BY THE REAL LANE. The store is hand-built (the lane wants a
+   * dozen keys a real app supplies), but every gate ANSWER comes from a live
+   * `createAuthSlice`, so a floor that moves in TIER_GATE moves this pin with it. Only
+   * the engine is stubbed: a real pipeline run per case would put a minute on the gate
+   * and prove nothing about a refusal raised before the engine is reached.
+   */
+  function laneStore(tier, settType) {
+    const gate = create(immer((...a) => ({ ...createAuthSlice(...a) })));
+    gate.setState((s) => { s.auth.tier = tier; });
+    const ask = (name) => (...args) => gate.getState()[name](...args);
+    const state = {
+      config: { ...DEFAULT_CONFIG, settType },
+      institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+      importedNeighbour: null, settlement: null, locks: null, activeSaveId: null,
+      randomSliderMode: false, auth: { tier, user: null }, lastRefusal: null,
+      canCustomizePreGeneration: ask('canCustomizePreGeneration'),
+      isTierAllowed: ask('isTierAllowed'),
+      isTierBelowFloor: ask('isTierBelowFloor'),
+      minAllowedTier: ask('minAllowedTier'),
+      maxAllowedTier: ask('maxAllowedTier'),
+    };
+    return { state, set: (fn) => { fn(state); }, get: () => state };
+  }
+
+  async function runLane(store) {
+    const { generateSettlementAction } = await import('../../src/store/settlementGenerateAction.js');
+    try {
+      return await generateSettlementAction(store.set, store.get, undefined, undefined);
+    } catch {
+      return null;
+    }
+  }
+
+  test('a thorpe is refused by the FLOOR, and told so in the floor\'s own words', async () => {
+    const store = laneStore('anon', 'thorp');
+    expect(await runLane(store), 'a thorpe was forged for an anonymous visitor').toBeNull();
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER_TOO_SMALL);
+    const said = refusalCopy(store.state.lastRefusal.reason, store.state.lastRefusal.vars).body;
+    expect(said).toContain('A Thorpe takes an account');
+    expect(said).toContain('starts at a Hamlet');
+    // anchored: `said` is proven on the two lines above to be the real, filled sentence.
+    expect(said, 'the reader is told their thorpe is too BIG').not.toContain('past what this account forges');
+  });
+
+  test('a city is refused by the CEILING, and still gets the ceiling\'s sentence', async () => {
+    const store = laneStore('anon', 'city');
+    expect(await runLane(store)).toBeNull();
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER);
+    const said = refusalCopy(store.state.lastRefusal.reason, store.state.lastRefusal.vars).body;
+    expect(said).toContain('A City is past what this account forges');
+    expect(said).toContain('it reaches up to a Town');
+  });
+
+  test('a free account forges a thorpe: the floor is anon\'s alone', async () => {
+    const store = laneStore('free', 'thorp');
+    // The engine is not stubbed here, so assert the GATE rather than the forge: the lane
+    // reached past both bounds without recording a refusal.
+    await runLane(store);
+    expect(store.state.lastRefusal, 'a free account was refused its thorpe').toBeNull();
   });
 
   test('the generation lane forces it there, and exempts the curated sample fork', async () => {

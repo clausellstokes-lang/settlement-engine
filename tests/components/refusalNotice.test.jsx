@@ -53,15 +53,22 @@ afterEach(() => { cleanup(); window.localStorage.clear(); vi.restoreAllMocks(); 
  * A store the lane can drive: immer-free `set(fn)` over a plain object, which is all
  * the lane uses it for.
  */
-function makeStore({ tier = 'anon', maxTier = 'town', settType = 'town' } = {}) {
+function makeStore({
+  tier = 'anon', maxTier = 'town', minTier = tier === 'anon' ? 'hamlet' : 'thorp', settType = 'town',
+} = {}) {
   const RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
+  const sentinel = (t) => t === 'random' || t === 'custom';
   const state = {
     config: { settType },
     institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
     importedNeighbour: null, settlement: null, locks: null, activeSaveId: null,
     randomSliderMode: false, auth: { tier, user: null }, lastRefusal: null,
     maxAllowedTier: () => maxTier,
-    isTierAllowed: (t) => t === 'random' || t === 'custom' || RANK[t] <= RANK[maxTier],
+    // ⛔ THE GATE IS A RANGE (§934.34). Modelled here as a range rather than a ceiling
+    // so this store cannot accidentally prove a sentence the shipped gate never raises.
+    minAllowedTier: () => minTier,
+    isTierAllowed: (t) => sentinel(t) || (RANK[t] >= RANK[minTier] && RANK[t] <= RANK[maxTier]),
+    isTierBelowFloor: (t) => !sentinel(t) && RANK[t] !== undefined && RANK[t] < RANK[minTier],
   };
   const set = (fn) => { fn(state); };
   const get = () => state;
@@ -81,7 +88,7 @@ describe('the refusal register reaches a reader', () => {
   test('every registered reason resolves to real words (no dotted key, no blank)', () => {
     expect(REFUSAL_REASON_IDS.length).toBeGreaterThanOrEqual(5);
     for (const reason of REFUSAL_REASON_IDS) {
-      const copy = refusalCopy(reason, { size: 'City', max: 'Town' });
+      const copy = refusalCopy(reason, { size: 'City', max: 'Town', min: 'Hamlet' });
       expect(copy, `${reason} resolves to nothing`).not.toBeNull();
       expect(copy.rubric.length, `${reason} rubric is blank`).toBeGreaterThan(2);
       expect(copy.body.length, `${reason} body is blank`).toBeGreaterThan(20);
@@ -96,7 +103,7 @@ describe('the refusal register reaches a reader', () => {
 
   test('every registered reason RENDERS as an announced notice', () => {
     for (const reason of REFUSAL_REASON_IDS) {
-      const { unmount } = render(<RefusalNotice refusal={refusalOf(reason, { size: 'City', max: 'Town' })} />);
+      const { unmount } = render(<RefusalNotice refusal={refusalOf(reason, { size: 'City', max: 'Town', min: 'Hamlet' })} />);
       const alert = screen.getByRole('alert');
       expect(alert.textContent, `${reason} rendered nothing`).toContain(refusalCopy(reason).rubric);
       unmount();
@@ -141,6 +148,27 @@ describe('the lane records a reason for every gate it closes', () => {
     expect(said).toContain('City');
     expect(said).toContain('Town');
     expect(said).toMatch(/sign in/i);
+  });
+
+  test('TIER TOO SMALL: the FLOOR refusal says the opposite of the ceiling\'s', async () => {
+    // ⛔ THE CEILING'S SENTENCE WAS FALSE ON THE ONE RUNG THE FLOOR EXISTS FOR
+    // (§934.34): a thorpe is refused BELOW the range, and the reader was told it was
+    // "past what this account forges; it reaches up to a Town".
+    const store = makeStore({ settType: 'thorp' });
+    const result = await runLane(store);
+    expect(result).toBeNull();
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER_TOO_SMALL);
+    expect(store.state.lastRefusal.vars).toMatchObject({ size: 'Thorpe', min: 'Hamlet' });
+    expect(engine.run, 'the engine ran despite the floor').not.toHaveBeenCalled();
+
+    render(<RefusalNotice refusal={store.state.lastRefusal} />);
+    const said = screen.getByRole('alert').textContent;
+    expect(said).toContain('Thorpe');
+    expect(said).toContain('Hamlet');
+    expect(said).toMatch(/sign in/i);
+    // anchored: `said` is proven three lines up to carry Thorpe, Hamlet and a sign-in
+    // door, so it is a real sentence and the absence below is a real absence.
+    expect(said, 'the floor refusal still speaks the ceiling\'s sentence').not.toContain('past what this account forges');
   });
 
   test('GENERATION FAILED: a throw is recorded before it propagates', async () => {
