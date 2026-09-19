@@ -86,7 +86,6 @@ const OUTSIDE_THE_CENSUS = Object.freeze({
     'leaves shared with the landing, auth and gallery, where the phone floors are not the '
     + 'ruling in force; flooring them here would move surfaces this census has no order about',
   'src/components/settlement/': 'the deity, faith and version panels of the settlement editor, not the dossier read',
-  'src/components/settlements/': 'the saved-settlement list',
   'src/components/gallery/': 'the gallery share surfaces',
   'src/components/map/': 'the map pane and its own controls',
   'src/components/brand/': 'the brand mark',

@@ -276,14 +276,14 @@ const CEILINGS = Object.freeze({
   // rather than left slack — leaving them would let a future surface re-spend the budget
   // the map vacated.
   // LOWERED BY THE PINNED FOOTER (owner order 2026-09-16): a REMOVAL win, banked in the
-  // same act: rgbaLiterals 166->163. The owner's order put the app's one global footer on
+  // same act: rgbaLiterals 166->158. The owner's order put the app's one global footer on
   // the landing, so the landing band's own footer strip (LandingBelowFold's LandingFooter:
   // its rgba top rule, its rgba ghost-link tone and the rgba row-colour override on its
   // LegalRibbonRow mount) left the product. Nothing was restyled and nothing was added:
   // the footer's own rgba border stays in App.jsx, outside this scan. borderRadius 84,
   // boxShadow 59 and tintedCallouts 160 measured unchanged.
   // LOWERED BY THE COMMONS DE-FICTION (2026-09-18) — a REMOVAL win, banked in the same
-  // act: borderRadius 84->83. The landing's decorative commons cards were deleted (six
+  // act: borderRadius 84->82. The landing's decorative commons cards were deleted (six
   // invented towns labelled '(placeholder)'), and the DECORATIVE 'Fork' chip that rode
   // each one carried the only borderRadius in that strip. Nothing was restyled and
   // nothing rounded was added: the fallback is the Create page's existing Founding
@@ -291,7 +291,7 @@ const CEILINGS = Object.freeze({
   // keep the same token radii they already had. The shrink-only rule reads a shrink as a
   // win to LOCK, so it is lowered here rather than left slack. boxShadow, rgbaLiterals
   // and tintedCallouts measured unchanged by the same act.
-  borderRadius: 83,     // the rounded-card tell — plates are rule-framed, not rounded
+  borderRadius: 82,     // the rounded-card tell — plates are rule-framed, not rounded
                         // (100->86 on the 2026-07-22 zero-exemption refinement: 15
                         // flat-enforcing zero lines left the count; 86->85 at the
                         // walk-completions fold: order-14 collapsed two gallery
@@ -299,7 +299,7 @@ const CEILINGS = Object.freeze({
   boxShadow: 59,        // print has no z-axis — depth is ink, never elevation
                         // (72->69 at LANE PW's burn-down: five z-axis lifts struck,
                         // four of them carrying an rgba that fell with them)
-  rgbaLiterals: 163,    // off-palette translucent washes — ink tones come from the ramp
+  rgbaLiterals: 158,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 160,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
