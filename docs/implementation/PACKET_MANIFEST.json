@@ -30728,9 +30728,10 @@
     },
     {
       "id": "EM-P3",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P3.md",
       "verifiedBase": "4928be0ab7210dff47429af788670f80947d36ad",
+      "landedAt": "f4e5b64c5f1aad56710f21891bccb1943d05633b",
       "changeManifest": [
         {
           "action": "CREATE",

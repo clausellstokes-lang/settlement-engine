@@ -2,10 +2,11 @@
 
 **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: 1cf5442719f2236320068afb6b4bab2b4ea49f3b08457c04ccf5eaae6a11faf6 — stamped by the chair at promotion; §P2 rows 10–11, which this packet is the first to carry, landed at `4da740b52`)
 
-- **Status:** READY
+- **Status:** `LANDED`
   ⚠ The status value stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs:297`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Packet version:** 2 (pre-proved at the tip, then amended under the chair's rulings of 2026-09-19 — P-27)
+- **Landed at:** `f4e5b64c5f1aad56710f21891bccb1943d05633b` — train EM-T3; built under sealed dispatch by an Opus build lane; the generation worker re-minted 1,401,128 to 1,401,208 (+80 B, bound 412), the engine 196 B smaller, the eager first-paint set byte-identical at 268; strict dist 538
   **What version 2 changed and why.** An Opus pre-proof lane re-measured this packet against the
   build branch's tip `a41a0e109` (evidence P-15…P-27). Not one declared source path had moved, so
   every verified fact and every line number survived unchanged. Four things did change.
