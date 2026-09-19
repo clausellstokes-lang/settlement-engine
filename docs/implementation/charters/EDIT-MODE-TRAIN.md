@@ -24,10 +24,11 @@ Each packet below is written to READY by an Opus pre-proof lane that verifies ev
 |---|---|---|
 | **EM-T1** | EM-B3b | none |
 | **EM-T2** | EM-P0 (alone: the pipeline's spine) | none (goldens byte-identical by construction) |
-| **EM-T3** | EM-P2 · EM-P3 · EM-B3a · EM-A2a | the lighting census's test-file tuple (each member's predicted delta); EM-P2's mutation-coverage row |
+| **EM-T3** | EM-P2 · EM-P3 · EM-B3a · EM-B1d (the vocabulary widening: `jailed` and `ruined` into the two typedefs + seven consumers + a union-totality walker; an approved override of nine files at ≤3 lines each) | the lighting census's test-file tuple (each member's predicted delta); EM-P2's and EM-B1d's mutation-coverage rows |
 | **EM-T4** | EM-P1 (alone: persisted shape; the golden door executed once by the chair over the measured movers) | the measured golden suites; the identity round-trip |
-| **EM-T5** | EM-A1 · EM-A2b · EM-B1a · EM-P1b | the lighting tuple; EM-A1's mutation-coverage row; B1a's vocabulary consumers |
-| then | EM-B2a → EM-B1b, EM-A3 → EM-B2b, EM-B4 (by dependency; the `dmLayer on settlement` exemptions mint at B2a's terminal) | per member |
+| **EM-T5** | EM-A1 · EM-A2b · EM-B1a (after B1d: its op rows spell the final vocabularies) · EM-P1b | the lighting tuple; EM-A1's mutation-coverage row |
+| **EM-T6** | EM-A2a · EM-B2a (the `dmLayer on settlement` exemptions mint at its terminal) | per member |
+| then | EM-B1b, EM-A3 → EM-B2b, EM-B4 (by dependency) | per member |
 
 A draft waits in the chair kit until its train is next and its manifest paths are free (the just-in-time rule; the validator refuses a path held by two non-terminal packets).
 
