@@ -360,19 +360,29 @@ export default function App() {
   }, [authLoading, authTier, setCreditBalance, initAuth]);
 
   // ── Auth guards ────────────────────────────────────────────────────────────
-  // Gated routes redirect once the session has resolved. 'auth' views bounce
-  // anonymous visitors to /signin carrying ?next= (so they return post-login);
-  // 'elevated' views bounce non-developers home. Waits on authLoading so we don't
-  // act during the initial session check.
+  // 'auth' views bounce anonymous visitors to /signin carrying ?next= (so they
+  // return post-login). That redirect STAYS: it is a door, not a refusal — the
+  // reader is sent somewhere that can actually resolve their problem, and they
+  // land back where they were aiming.
+  //
+  // ⛔ 'elevated' VIEWS NO LONGER BOUNCE ANYONE (ODQ §934.24(c) + §934.28). This
+  // branch used to `navigate('generate', { replace: true })`, so a member — or
+  // anyone — who opened /admin was silently replaced onto /create: a refusal
+  // answered by navigating, with nothing said, which is the exact class
+  // lib/refusalReasons.js and primitives/RefusalNotice.jsx were built against.
+  // A staff role cannot be bought or signed up for, so there is nowhere useful
+  // to send them; the route says why instead, where the reader is (AppViews'
+  // admin branch renders <StaffOnlyPage/>). Nothing is loosened: AdminPanel
+  // still mounts only for `isElevated`, its own body re-checks the role, and
+  // every read and write it makes is role-gated and audited server-side.
+  //
+  // Waits on authLoading so we don't act during the initial session check.
   useEffect(() => {
     if (authLoading) return;
-    const guard = guardForView(view);
-    if (guard === 'auth' && authTier === 'anon') {
+    if (guardForView(view) === 'auth' && authTier === 'anon') {
       navigate('signin', { replace: true, search: `?next=${encodeURIComponent(viewToPath(view))}` });
-    } else if (guard === 'elevated' && !isElevated) {
-      navigate('generate', { replace: true });
     }
-  }, [view, authTier, isElevated, authLoading]);
+  }, [view, authTier, authLoading]);
 
   // ── Demoted destinations → redirect to their new homes ─────────────────────
   // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the

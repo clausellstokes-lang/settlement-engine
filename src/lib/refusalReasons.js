@@ -54,6 +54,18 @@ export const REFUSAL_REASONS = Object.freeze({
   GENERATION_FAILED: 'generationFailed',
   /** The throw was a chunk of a previous build — this tab outlived a deploy. */
   STALE_BUILD: 'staleBuild',
+  /**
+   * A STAFF-ONLY destination reached by an account that is not staff (ODQ
+   * §934.28). Not a paid gate and not an upgrade path — no tier buys it, so its
+   * sentence offers no door; it simply says the page is not this account's.
+   *
+   * ⛔ IT EXISTS BECAUSE THE GUARD USED TO ANSWER BY NAVIGATING. The 'elevated'
+   * route guard bounced a non-staff visitor at /admin to /create with nothing
+   * said — the exact shape this register was built against, three of whose four
+   * original offenders "answered a refusal by navigating". The guard no longer
+   * moves anyone; the route says why, where the reader is.
+   */
+  STAFF_ONLY: 'staffOnly',
 });
 
 /** The ids, as an array, for walkers and for exhaustiveness checks. */

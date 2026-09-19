@@ -13,7 +13,14 @@
  *   (d) Upgrade shows for the free tier only: locked with the launch pill while purchases are
  *       closed (aria-disabled, so the arrow keys still reach it, and a click or Enter does
  *       nothing), live and routing once they open (the launch lock is preserved);
- *   (e) Admin panel shows only for elevated accounts and routes to admin;
+ *   (e) the Developer Admin Panel row shows only for STAFF accounts and routes to admin.
+ *       ODQ §934.28 (the owner): "move the developer tab that existed in the previous
+ *       header to part of the dropdown under account for developers and admin". The
+ *       retired header carried it as a Shield IconButton titled "Developer Admin
+ *       Panel"; the row that replaced it read "Admin panel", which is why the owner
+ *       could not find the tab they had asked to be moved. The NAME is pinned here so a
+ *       rename cannot silently lose it again — and so is the measured fact that NO row
+ *       in this menu renders an icon, so nobody re-adds the Shield believing it shows;
  *   (f) keys: Enter, Space or ArrowDown opens and focuses the first row, ArrowUp the last;
  *       the arrows, Home and End move among every row, the locked one included; Escape and
  *       choosing a row return focus to the plate; Tab closes; aria-controls names the open
@@ -27,6 +34,7 @@
 import React from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { layoutArrow, padTarget } from '../../src/components/nav/arrowGeometry.js';
 import { AVAILABLE_AT_LAUNCH } from '../../src/components/primitives/AvailableAtLaunchPill.jsx';
@@ -146,21 +154,48 @@ describe('(d) Upgrade: free tier only, and launch-locked', () => {
   });
 });
 
-describe('(e) Admin panel: elevated accounts only', () => {
-  test('shows for an elevated account, last, and routes to admin', () => {
+describe('(e) Developer Admin Panel: staff accounts only', () => {
+  const ROW = 'Developer Admin Panel';
+
+  test('shows for a staff account, last, under the old tab\'s name, and routes to admin', () => {
     const { plate, calls } = renderPlate({ isElevated: true, displayName: null });
     expect(plate.getAttribute('aria-label')).toBe('Account menu, Developer');
     fireEvent.click(plate);
-    expect(rowNames().at(-1)).toBe('Admin panel');
-    fireEvent.click(screen.getByRole('menuitem', { name: 'Admin panel' }));
+    expect(rowNames().at(-1)).toBe(ROW);
+    fireEvent.click(screen.getByRole('menuitem', { name: ROW }));
     expect(calls.onAdmin).toHaveBeenCalledTimes(1);
   });
 
-  test('NEGATIVE CONTROL: a member account has no Admin row', () => {
+  test('NO ROW IN THIS MENU RENDERS AN ICON — the icons-off gate drops all four', () => {
+    // ⛔ WHY THIS IS PINNED RATHER THAN FIXED. A §934.28 draft gave the row the
+    // retired header tab's Shield so it would "match its siblings". It would
+    // have matched them in SOURCE and in nothing a reader sees: primitives/
+    // IconsContext.js suppresses lucide everywhere outside the Realm map, and
+    // Button drops its `icon` prop when the gate is off — and this menu renders
+    // in the header, outside the map's Provider. So the three icons the menu
+    // already passes (Settings, CreditCard, MessageSquare) reach the DOM no more
+    // than a fourth would have. Measured here so the next author who reaches for
+    // a glyph reads the measurement instead of repeating the draft.
+    const { plate } = renderPlate({ isElevated: true });
+    fireEvent.click(plate);
+    const rows = screen.getAllByRole('menuitem');
+    expect(rows.length, 'presence control: the staff menu rendered its rows').toBe(4);
+    for (const row of rows) {
+      expect(
+        row.querySelector('svg'),
+        `${row.textContent} rendered a glyph — has the icons-off gate moved?`,
+      ).toBeNull();
+    }
+  });
+
+  test('NEGATIVE CONTROL: a member account has no Developer row', () => {
     const { plate } = renderPlate({ isElevated: false });
     fireEvent.click(plate);
-    expect(rowNames().length, 'presence control: the menu rendered its rows').toBe(3);
-    expect(rowNames().includes('Admin panel')).toBe(false);
+    const names = rowNames();
+    expect(names.length, 'presence control: the menu rendered its rows').toBe(3);
+    // Anchored: 'Account' travels the same render path, so the exclusion cannot
+    // pass merely because the menu failed to render at all.
+    expectAbsentWithAnchor(names, ROW, 'Account', 'the signed-in member menu');
   });
 });
 
@@ -187,7 +222,7 @@ describe('(f) the menu-button keys', () => {
     expect(document.activeElement.textContent).toBe('Account');
     fireEvent.keyDown(document.activeElement, { key: 'Escape' });
     fireEvent.keyDown(plate, { key: 'ArrowUp' });
-    expect(document.activeElement.textContent).toBe('Admin panel');
+    expect(document.activeElement.textContent).toBe('Developer Admin Panel');
   });
 
   test('arrows wrap, Home and End jump, and the locked Upgrade row is a stop that says it is locked', () => {
@@ -196,7 +231,7 @@ describe('(f) the menu-button keys', () => {
     const focused = () => document.activeElement.getAttribute('aria-label') || document.activeElement.textContent;
     const menu = screen.getByRole('menu');
     fireEvent.keyDown(menu, { key: 'End' });
-    expect(focused()).toBe('Admin panel');
+    expect(focused()).toBe('Developer Admin Panel');
     fireEvent.keyDown(menu, { key: 'ArrowUp' });
     // The locked Upgrade row is discoverable (WAI-ARIA APG): focus lands on it and it reads
     // its pill, and Enter on it does nothing.
@@ -206,11 +241,11 @@ describe('(f) the menu-button keys', () => {
     expect(focused()).toBe('Manage subscription & credits, 7 credits remaining');
     fireEvent.keyDown(menu, { key: 'ArrowDown' });
     fireEvent.keyDown(menu, { key: 'ArrowDown' });
-    expect(focused()).toBe('Admin panel');
+    expect(focused()).toBe('Developer Admin Panel');
     fireEvent.keyDown(menu, { key: 'ArrowDown' });
     expect(focused(), 'ArrowDown wraps to the first row').toBe('Account');
     fireEvent.keyDown(menu, { key: 'ArrowUp' });
-    expect(focused(), 'ArrowUp wraps to the last row').toBe('Admin panel');
+    expect(focused(), 'ArrowUp wraps to the last row').toBe('Developer Admin Panel');
     fireEvent.keyDown(menu, { key: 'Home' });
     expect(focused()).toBe('Account');
   });

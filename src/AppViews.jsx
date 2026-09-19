@@ -50,6 +50,10 @@ const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.js
 const WorldMap         = campaignLazy(() => import('./components/WorldMap.jsx'));
 const AccountPage      = campaignLazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'));
+// What a NON-staff visitor meets at a staff-only route. Lazy so the refusal
+// machinery (RefusalNotice → ClerkNote → the copy registry) stays off the
+// first-paint closure.
+const StaffOnlyPage    = lazy(() => import('./components/StaffOnlyPage.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = campaignLazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
@@ -145,7 +149,14 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           routeMessageId={params.message}
         />
       ) : null)}
-      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
+      {/* ⛔ THE STAFF ROUTE SAYS NO OUT LOUD (ODQ §934.24(c) + §934.28). This used to
+          render `null` for a non-staff visitor while App's guard effect replaced them
+          onto /create — a refusal answered by navigating, with nothing said, which is
+          the class lib/refusalReasons.js exists against. The guard no longer moves
+          anyone at an 'elevated' route; the refusal is rendered here instead, where
+          the reader is. `isElevated` is IDENTITY (staff), not the §934.28 paid unlock,
+          so revoking that unlock can never close the admin panel. */}
+      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersHallPage onNavigate={setView} />}

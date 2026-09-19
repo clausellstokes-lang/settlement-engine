@@ -431,6 +431,12 @@ export const en = Object.freeze({
       rubric:  'Generation failed',
       bodyRef: 'errors.forgeUpdated',
     },
+    // No door and no price: the admin panel is not sold, so this sentence must
+    // not read as an upgrade prompt. It says whose page it is and stops.
+    staffOnly: {
+      rubric: 'Not this account',
+      body:   'The developer admin panel is open to the team only. Nothing is missing from your account; this page simply is not part of it.',
+    },
   },
 
   // ── Pricing ───────────────────────────────────────────────────────────────

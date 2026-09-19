@@ -35,7 +35,33 @@
  *                                      a click or Enter on it does nothing. Pricing once
  *                                      open. App passes the booleans; the tier comparison
  *                                      stays in App.jsx.
- *   - Admin panel, elevated only     → /admin
+ *   - Developer Admin Panel, staff only → /admin. THE OWNER'S ORDER (ODQ §934.28):
+ *                                      "since the arrow is filled up, move the developer
+ *                                      tab that existed in the previous header to part of
+ *                                      the dropdown under account for developers and
+ *                                      admin". The retired header carried it as a Shield
+ *                                      IconButton in the right cluster, titled "Developer
+ *                                      Admin Panel" (App.jsx before e22f9e329); the arrow
+ *                                      left no room for it, and the row it became here
+ *                                      wore neither that name nor that icon, so the owner
+ *                                      could not find the tab they had asked to be moved.
+ *                                      IT NOW CARRIES THE NAME — AND DELIBERATELY NOT THE
+ *                                      SHIELD. The icons-off gate (primitives/
+ *                                      IconsContext.js) suppresses lucide everywhere but
+ *                                      the Realm map, and Button drops its `icon` prop
+ *                                      when the gate is off, so THIS MENU'S FOUR ICONS
+ *                                      (Settings, CreditCard, MessageSquare and the
+ *                                      Shield a §934.28 draft added here) never reach the
+ *                                      DOM at all — the menu renders outside the map's
+ *                                      Provider. Adding a fifth dead glyph to make the row
+ *                                      "match its siblings" would have matched them in
+ *                                      source and in nothing a reader sees. The three
+ *                                      standing ones are left alone: removing them is a
+ *                                      separate, wider cleanup than this order.
+ *                                      Its presence is decided by the account's ROLE
+ *                                      rather than its tier — staff identity, never the
+ *                                      paid unlock, so revoking §934.28's unlock cannot
+ *                                      take the admin panel away (lib/staffEntitlements.js).
  *
  * THE MENU-BUTTON PATTERN, complete: Enter, Space or ArrowDown on the plate opens the menu
  * and focuses the first row (ArrowUp, the last); ArrowUp / ArrowDown / Home / End move among
@@ -376,7 +402,7 @@ export default function AccountMenu({
             </MenuRow>
           )}
           {isElevated && (
-            <MenuRow label="Admin panel" onClick={choose(onAdmin)} />
+            <MenuRow label="Developer Admin Panel" onClick={choose(onAdmin)} />
           )}
         </div>
       )}
