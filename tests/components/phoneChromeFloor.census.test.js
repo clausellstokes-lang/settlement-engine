@@ -239,7 +239,14 @@ const ROUTE_BASELINE = Object.freeze({
   '/realm':                 { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
   '/map':                   { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
-  '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
+  // floored 991 -> 992 (review wave 2 car 3, 2026-09-19): the Library's sample fork used to
+  // answer EVERY null with the purchase modal, so it now renders the estate's refusal notice
+  // above the cards — primitives/RefusalNotice.jsx, which mounts generate/ClerkNote.jsx, and
+  // ClerkNote carries exactly ONE floored site (`chromeFontSize(FS.xs, mobile)`). The line is
+  // FLOORED, not bare: `bare` holds at 0, so nothing sub-floor shipped with it. The same
+  // component was already in /create's, /home's and the Realm's closures, which is why this
+  // is the only route that moved.
+  '/settlements':           { roots: 1, files: 206, floored: 992, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },

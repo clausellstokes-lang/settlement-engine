@@ -25,7 +25,7 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen, act } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -75,7 +75,12 @@ describe('MECHANISM — clearing the record takes the sentence off the page', ()
 });
 
 describe('WIRING — App clears it on every route change', () => {
-  const APP = readFileSync(fileURLToPath(new URL('../../src/App.jsx', import.meta.url)), 'utf8');
+  // ⚠ `process.cwd()`, NOT `new URL(…, import.meta.url)`. Under this suite's jsdom
+  // environment `import.meta.url` is not a file: URL, and `fileURLToPath` throws "The URL
+  // must be of scheme file" at module evaluation — the whole file fails to collect rather
+  // than failing an assertion. Every source-reading walker in the estate uses the cwd
+  // idiom (refusalNoticeCoverage.walker, invitationOnlyTiers.census); this now does too.
+  const APP = readFileSync(join(process.cwd(), 'src/App.jsx'), 'utf8');
 
   /**
    * Does this source bind the store's clearer AND call it from an effect keyed on `view`?
