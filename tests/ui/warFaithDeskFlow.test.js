@@ -30,14 +30,43 @@
  * the flag over reds here rather than leaking silently.
  */
 import React from 'react';
-import { describe, test, expect, afterEach } from 'vitest';
+import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+/**
+ * ⭐⭐ THE DESK OVERRIDE, AND WHY THE PAGE-LEVEL ARMS AT THE END OF THIS FILE NEED ONE.
+ *
+ * WarTab and FaithTab read this desk themselves, through their own single gated call site,
+ * so a hand-built rung can only reach a real page by being handed back from that call. The
+ * mock spreads the real module — every wrapper, `DeskLines` and the registry constants come
+ * through untouched — and replaces exactly one export.
+ *
+ * ⚠ IT IS A PASSTHROUGH UNTIL A TEST ASKS FOR IT. `current` is null for every other arm in
+ * this file, so they run against the shipped desk as before; and the public-dossier gate is
+ * honoured even while overridden, so the §885.3 dark arms cannot be softened by it.
+ */
+const deskOverride = vi.hoisted(() => ({ current: null }));
+vi.mock('../../src/components/new/tabs/WarFaithDesk.jsx', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    warFaithDeskRungs: (args) => (
+      deskOverride.current && !args?.publicDossier
+        ? deskOverride.current
+        : actual.warFaithDeskRungs(args)
+    ),
+  };
+});
+
 import {
-  FaithCreedLines, FaithSeatLines, WarStandingLines, WarTreatyLines, warFaithDeskRungs,
+  FaithCreedLines, FaithSeatLines, FaithTeaserLines, WarStandingLines, WarTreatyLines,
+  warFaithDeskRungs,
 } from '../../src/components/new/tabs/WarFaithDesk.jsx';
+import WarTab from '../../src/components/new/tabs/WarTab.jsx';
+import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import { useStore } from '../../src/store/index.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { DeskLines } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
@@ -45,7 +74,7 @@ import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/wea
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
-afterEach(cleanup);
+afterEach(() => { cleanup(); deskOverride.current = null; });
 
 const SETTLEMENT = Object.freeze({ id: 'steinmark', name: 'Steinmark', _seed: 'steinmark' });
 
@@ -103,9 +132,15 @@ const deskAt = (readings, publicDossier) => warFaithDeskRungs({
   settlement: SETTLEMENT, readings, publicDossier, playerView: false,
 });
 
-/** @param {any} Component @param {object} readings @param {boolean} publicDossier */
+/**
+ * ⚠ THE SETTLEMENT IS HANDED OVER HERE TOO, and it is not decoration: since review 12 the
+ * five wrappers REQUIRE the prop and throw by name in a dev build without it (see
+ * `requireSettlement` in WarFaithDesk.jsx). These arms are about the public gate rather than
+ * the name thread, so the fixture's own settlement is what they pass.
+ * @param {any} Component @param {object} readings @param {boolean} publicDossier
+ */
 const html = (Component, readings, publicDossier) => render(
-  e(Component, { desk: deskAt(readings, publicDossier) }),
+  e(Component, { desk: deskAt(readings, publicDossier), settlement: SETTLEMENT }),
 ).container.innerHTML;
 
 describe('the war & faith desk goes dark on a free anonymous dossier', () => {
@@ -245,10 +280,20 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
     expect(without, 'the unthreaded renderer stood the name down anyway').toContain(SECOND);
   });
 
-  test('…and every wrapper hands its settlement through, at every mount', () => {
-    // STRUCTURAL, per position: each wrapper is rendered with a real desk AND a settlement, and
-    // its paragraph is compared against the weave of its own drawn lines. This fires whether or
-    // not a stand-down is available on the fixture, which the arm above cannot.
+  /**
+   * ⛔ THIS ARM NO LONGER CLAIMS TO PROVE THE NAME THREAD (review 12). It compared each
+   * wrapper's DOM against `weaveBlock`'s output and called that a proof that `settlement`
+   * had been handed over. It was not: two of these four positions draw a SINGLE line on
+   * these fixtures, and a one-line weave is the line — so the comparison held identically
+   * with the prop and without it. An arm that cannot fail for the reason it names is worse
+   * than no arm, because it is counted as coverage.
+   *
+   * What it really measures is a DRAW, and that is worth keeping: each wrapper is mounted
+   * with a real desk and prints what that desk drew. It therefore asserts the FIRST drawn
+   * sentence, which no weave ever renames — a claim with no dependency on the thread. The
+   * thread is proven at the end of this file, at the WRAPPER and at the PAGE.
+   */
+  test('every wrapper mounts its position and prints the first sentence its desk drew', () => {
     const town = { ...SETTLEMENT, tier: 'town' };
     const war = deskAt(WAR_READINGS, false);
     const faith = deskAt(FAITH_READINGS, false);
@@ -264,12 +309,10 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
       const lines = keys.map((k) => desk[k]?.sentence).filter(Boolean);
       if (lines.length === 0) continue; // R-DST-K
       judged += 1;
-      const woven = weaveBlock(lines, {
-        settlementName: town.name, tierNoun: tierNounFor(town.tier),
-      }).paragraph;
       const text = render(e(Component, { desk, settlement: town })).container.textContent;
       cleanup();
-      expect(text, `${mount}: the wrapper does not render the paragraph the weave produces`).toBe(woven);
+      expect(text, `${mount}: the wrapper does not print the first sentence its desk drew`)
+        .toContain(lines[0]);
     }
     expect(judged, 'no position spoke on these fixtures, so the arm judged nothing').toBe(4);
   });
@@ -327,17 +370,21 @@ describe('the wrappers thread the settlement, non-vacuously at every speaking po
     const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
     const desk = { [keys[0]]: rungs[0], [keys[1]]: rungs[1] };
 
-    // THE LIVENESS ANCHOR IS THE SAME RENDERER WITHOUT THE PROPS — what every one of these
-    // wrappers produced before the thread landed. It proves the raw sentence is reachable at
-    // this mount, so its absence below is the stand-down rather than a position gone dark.
-    const unthreaded = render(e(DeskLines, { mount, rungs })).container.textContent;
+    // ⛔ THE LIVENESS ANCHOR IS THE SAME WRAPPER, DRIVEN WITH ONE RUNG (review 12). It used
+    // to be a bare `DeskLines` render, which proves the RENDERER can print the sentence and
+    // says nothing about whether the WRAPPER still mounts the position — so a wrapper that
+    // had stopped mounting it passed the absence half vacuously. One rung through the wrapper
+    // itself puts the raw sentence in its DOM verbatim (a one-line weave is the line), which
+    // is the claim the anchor needs: this wrapper, at this mount, can print this.
+    const oneRung = render(e(Wrapper, {
+      desk: { [keys[0]]: rungs[1] }, settlement: TOWN,
+    })).container.textContent;
     cleanup();
-    expect(unthreaded, `${mount}: the bare renderer drew nothing, so the anchor is dead`)
-      .toContain(OPENER);
+    expect(oneRung, `${mount}: the wrapper does not mount this position at all`).toContain(REPEAT);
 
     const text = render(e(Wrapper, { desk, settlement: TOWN })).container.textContent;
     cleanup();
-    expectPresentThenAbsent(unthreaded, text, REPEAT, `${mount}: the raw name-opening sentence`);
+    expectPresentThenAbsent(oneRung, text, REPEAT, `${mount}: the raw name-opening sentence`);
     expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
     expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
     expect(text, `${mount}: the position did not render the woven paragraph`)
@@ -363,5 +410,91 @@ describe('the wrappers thread the settlement, non-vacuously at every speaking po
     // the weave having stopped working.
     expect(weaveBlock([OPENER, REPEAT], { settlementName: TOWN.name, tierNoun: tierNounFor(TOWN.tier) }).paragraph)
       .toContain(STOOD_DOWN);
+  });
+});
+
+/**
+ * ── ⭐⭐ THE NAME THREAD, PROVEN ON THE PAGE (review 12) ─────────────────────────────────
+ *
+ * ⛔ THE DEFECT THIS CLOSES IS THE THREAD'S OWN SHAPE, ONE LEVEL UP. Every arm above renders
+ * a WRAPPER and hands it a settlement itself, and the five wrappers used to declare
+ * `settlement = null`. So deleting `settlement={settlement}` at WarTab.jsx:579 — or at either
+ * of FaithTab's two ungated sites — lost the stand-down ON THE PAGE while this whole file
+ * stayed green. A proof that stops one component short of the reader is not a proof.
+ *
+ * Two things close it together, and both are executed here. The wrappers now REQUIRE the prop
+ * (`requireSettlement`, which throws by name in a dev or test build), so a dropped prop can no
+ * longer be silent anywhere; and the three UNGATED page positions are driven through WarTab
+ * and FaithTab themselves, with the name and tier coming from production code rather than from
+ * the test.
+ *
+ * ⚠ THE TWO GATED POSITIONS ARE NOT DRIVEN HERE, and the reason is the page state rather than
+ * the thread. `war.treaties` renders only behind `hasTreaties` (a live campaign treaty) and
+ * `faith.teaser` only behind the honest-absence branch (a premium viewer with no embed); both
+ * are page conditions this file's fixture does not reach. They are closed by the CONTRACT arm
+ * below instead, which is the stronger of the two halves anyway: it fires wherever the wrapper
+ * is mounted, gate or no gate.
+ */
+describe('the name thread reaches the PAGE, not only the wrapper', () => {
+  const TOWN = Object.freeze({ ...SETTLEMENT, tier: 'town' });
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+  const OPENER = `${TOWN.name} is a fixture this test wrote, and no pool in the corpus holds it.`;
+  const REPEAT = `${TOWN.name} is named a second time on purpose, so the weave has an opening to stand down.`;
+  const STOOD_DOWN = `The ${TOWN.tier}${REPEAT.slice(TOWN.name.length)}`;
+
+  /** [mount, blockId, the two desk keys the page's wrapper reads first, the PAGE component]. */
+  const PAGES = [
+    ['war.standing', 'DS-WAR-1', ['warStatus', 'warExhaustion'], WarTab],
+    ['faith.patronSeat', 'DS-FTH-1', ['patronRank', 'patronCults'], FaithTab],
+    ['faith.creedStanding', 'DS-FTH-3', ['creedStanding', 'creedLegitimacy'], FaithTab],
+  ];
+
+  test('every ungated page position stands the repeated opening name down, on the page', () => {
+    useStore.setState({ campaigns: [], savedSettlements: [] });
+    let judged = 0;
+    for (const [mount, blockId, keys, Page] of PAGES) {
+      judged += 1;
+      const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
+
+      // THE LIVENESS ANCHOR IS THE PAGE ITSELF, driven with ONE rung: a one-line weave is the
+      // line, so the raw sentence lands in the page's DOM verbatim and proves this page still
+      // mounts this position. A tab that stopped mounting it reds HERE, not silently below.
+      deskOverride.current = Object.freeze({ [keys[0]]: rungs[1] });
+      const oneRung = render(e(Page, { settlement: TOWN, saveId: null })).container.textContent;
+      cleanup();
+      expect(oneRung, `${mount}: the PAGE does not mount this position at all`).toContain(REPEAT);
+
+      deskOverride.current = Object.freeze({ [keys[0]]: rungs[0], [keys[1]]: rungs[1] });
+      const text = render(e(Page, { settlement: TOWN, saveId: null })).container.textContent;
+      cleanup();
+      expectPresentThenAbsent(oneRung, text, REPEAT, `${mount}: the raw name-opening sentence on the page`);
+      expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
+      expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
+    }
+    expect(judged, 'the page table emptied, so the loop judged nothing').toBe(3);
+  });
+
+  test('THE CONTRACT: every wrapper refuses to render without a settlement, by name', () => {
+    // ⛔ THE `= null` DEFAULTS ARE GONE AND THE REFUSAL IS EXECUTED, not declared. This is what
+    // closes the two GATED positions and every future call site at once: a host tab that drops
+    // the prop can no longer render a subtly wrong paragraph, because in a dev or test build
+    // the wrapper throws and says which one and why. The production branch is dead code —
+    // `import.meta.env.DEV` is replaced with the literal `false` by the build.
+    const WRAPPERS = [
+      ['WarStandingLines', WarStandingLines], ['WarTreatyLines', WarTreatyLines],
+      ['FaithSeatLines', FaithSeatLines], ['FaithCreedLines', FaithCreedLines],
+      ['FaithTeaserLines', FaithTeaserLines],
+    ];
+    for (const [name, Wrapper] of WRAPPERS) {
+      expect(() => render(e(Wrapper, { desk: {} })), `${name} rendered without a settlement`)
+        .toThrow(new RegExp(`^${name}: the .settlement. prop is required`));
+      cleanup();
+      // ANCHOR: the SAME wrapper with a settlement renders without throwing, so the refusal
+      // above is the guard discriminating rather than the component being broken.
+      expect(() => render(e(Wrapper, { desk: {}, settlement: TOWN })), `${name} cannot render at all`)
+        .not.toThrow();
+      cleanup();
+    }
+    expect(WRAPPERS.length, 'a wrapper left the table without leaving the module').toBe(5);
   });
 });

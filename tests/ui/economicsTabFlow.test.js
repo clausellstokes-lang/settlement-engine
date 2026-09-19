@@ -250,7 +250,6 @@ import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
 import { SILENT_ECONOMY_DESK } from '../../src/components/new/economyDeskRead.js';
-import { DeskLines } from '../../src/components/new/tabs/EconomicsGlance.jsx';
 
 /**
  * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
@@ -441,16 +440,20 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
   });
 
   /**
-   * ⭐ THE TWO NAME PROPS REACH EVERY `DeskLines` MOUNT (the weave's last car, 2026-09-18).
+   * ⛔ THIS ARM NO LONGER CLAIMS TO PROVE THE NAME THREAD, and the retitling is the fix
+   * (review 12). It used to compare each mount's DOM against `weaveBlock`'s output and say
+   * that proved `settlementName`/`tier` had reached the call site. It did not: four of these
+   * five positions draw a SINGLE line on this fixture, and a one-line weave is the line —
+   * so the comparison held identically with the props and without them. An arm that cannot
+   * fail for the reason it names is worse than no arm, because it is counted as coverage.
    *
-   * The shared renderer weaves unconditionally, but it can only stand a repeated opening name
-   * down when its call site hands over `settlementName` and `tier` — and for one landing it did
-   * not, because all four of these tabs belonged to other lanes. A missing prop is INVISIBLE to
-   * every other arm in this file: the paragraph still renders, the sentences are all still
-   * there, and only the opening word differs. So each mount is driven here, by the exact desk
-   * keys its call site lists, and the DOM is compared against the WOVEN form.
+   * What it really measures is a DRAW, and that is worth keeping: every mount the tabs list
+   * is reached, its desk speaks, and the page prints what was drawn. So it asserts the FIRST
+   * drawn sentence, which the weave never renames whatever else it does — a claim with no
+   * dependency on the thread at all. The thread is proven at the end of this file, where a
+   * hand-built two-line block makes a dropped prop visible.
    */
-  test('every DeskLines mount renders its WOVEN paragraph, so the name props are threaded', () => {
+  test('every DeskLines mount the tabs list draws, and the page prints what was drawn', () => {
     useStore.setState({ campaigns: [] });
     /** @type {Array<[string, any, object]>} */
     const renders = [
@@ -465,14 +468,14 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
       const lines = positionLines(mount, GROUND);
       if (lines.length === 0) return; // R-DST-K: a position the corpus is silent about.
       judged += 1;
-      const woven = weaveBlock(lines, {
-        settlementName: GROUND.name, tierNoun: tierNounFor(GROUND.tier),
-      }).paragraph;
       const text = render(e(Tab, props)).container.textContent;
       cleanup();
-      expect(text, `${mount}: the page does not carry its woven paragraph`).toContain(woven);
+      // The FIRST line keeps its name under every weave, so this is a DRAW claim and cannot
+      // be mistaken for a thread claim by a later reader.
+      expect(text, `${mount}: the page does not carry the first sentence its desk drew`)
+        .toContain(lines[0]);
     });
-    expectNoSeedFailures(failures, 'every DeskLines mount renders the paragraph the weave produces');
+    expectNoSeedFailures(failures, 'every DeskLines mount draws and reaches the page');
     expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
   });
 
@@ -611,21 +614,23 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
     const failures = collectSeedFailures(SITES, ([mount, blockId, keys, Tab, props]) => {
     useStore.setState({ campaigns: [] });
     const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
+
+    // ⛔ THE LIVENESS ANCHOR IS THE PAGE ITSELF, DRIVEN WITH ONE RUNG (review 12). It used to
+    // be a bare `DeskLines` render, which proves the RENDERER can print the sentence and says
+    // nothing about whether the TAB still mounts the position — so a tab that had stopped
+    // mounting it entirely passed the absence half vacuously. Driving the same tab with a
+    // single rung puts the raw sentence on the page verbatim (a one-line weave is the line),
+    // which is the exact claim the anchor needs: this page, at this mount, can print this.
+    deskOverride.current = Object.freeze({ ...SILENT_ECONOMY_DESK, [keys[0]]: rungs[1] });
+    const oneRung = render(e(Tab, props)).container.textContent;
+    cleanup();
+    expect(oneRung, `${mount}: the tab does not mount this position at all`).toContain(REPEAT);
+
     deskOverride.current = Object.freeze({
       ...SILENT_ECONOMY_DESK, [keys[0]]: rungs[0], [keys[1]]: rungs[1],
     });
-
-    // THE LIVENESS ANCHOR IS THE SAME RENDERER WITHOUT THE PROPS. `DeskLines` is driven
-    // directly with these exact rungs and no name, which is what the call site produced
-    // before this thread landed — so the raw sentence is demonstrably reachable at this
-    // mount, and its absence from the tab below is the stand-down and not an empty page.
-    const unthreaded = render(e(DeskLines, { mount, rungs })).container.textContent;
-    cleanup();
-    expect(unthreaded, `${mount}: the bare renderer drew nothing, so the anchor is dead`)
-      .toContain(OPENER);
-
     const text = render(e(Tab, props)).container.textContent;
-    expectPresentThenAbsent(unthreaded, text, REPEAT, `${mount}: the raw name-opening sentence`);
+    expectPresentThenAbsent(oneRung, text, REPEAT, `${mount}: the raw name-opening sentence`);
     expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
     // …and the FIRST line keeps its name, so the paragraph still says who it is about.
     expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
