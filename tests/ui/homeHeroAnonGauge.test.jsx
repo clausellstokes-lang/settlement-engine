@@ -24,6 +24,7 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import { t } from '../../src/copy/index.js';
+import { ANON_SIZES, SIZE_LABEL, signInUnlocksSizes } from '../../src/config/tierFacts.js';
 
 // WelcomeBackCard + AnonTierTeaser are out of scope (they self-gate and never
 // render in these scenarios); stub them to null so their service-layer import
@@ -160,14 +161,31 @@ describe('HomeHero — the free-today line tells the truth about the two buckets
   // line directly above it says "You've explored hamlet, village, town" — so
   // "unlock thorp through metropolis" sold three of them back. This is the sentence
   // that actually renders; the registry twin (hero.anonCap.unlockTpl) is unrendered.
+  //
+  // ⚠ AND THEN IT SOLD TWO OF THREE (the owner, 2026-09-19). The correction above
+  // over-corrected: the anonymous sizes are hamlet, village and town, so a THORPE is
+  // ALSO something signing in unlocks, and the replacement list — "city and metropolis"
+  // — was short by one. Hand-typed lists is the class; the sentence now interpolates
+  // `signInUnlocksSizes()` (config/tierFacts.js: the ladder minus the anonymous set,
+  // Oxford-joined), and THIS ARM READS THE SAME DERIVATION rather than a third copy of
+  // the words, so a ceiling that moves cannot leave the pin behind.
   it('at cap, the unlock names the sizes signing in ADDS', () => {
     anonLeft.full = 0;
     anonLeft.reroll = 0;
     const { container } = renderAnon();
     const text = container.textContent;
     expect(text, 'the at-cap block did not render').toContain(t('hero.anonCap.spent'));
-    expect(text).toMatch(/to unlock city and metropolis and\s*save up to/);
+    expect(signInUnlocksSizes(), 'the derivation lost the thorpe').toContain('thorpe');
+    expect(text).toContain(`to unlock ${signInUnlocksSizes()} and`);
+    expect(text).toMatch(new RegExp(`to unlock ${signInUnlocksSizes()} and\\s*save up to`));
     // anchored: the spent line and the unlock sentence are both asserted PRESENT on this same render above, so a block that failed to render reds there first
     expect(text).not.toMatch(/thorp through metropolis/);
+    // …and the sizes the reader already spent are not sold back to them.
+    for (const key of ANON_SIZES) {
+      expect(
+        signInUnlocksSizes(),
+        `the unlock sentence offers ${key}, which an anonymous visitor already had`,
+      ).not.toContain(SIZE_LABEL[key].toLowerCase());
+    }
   });
 });

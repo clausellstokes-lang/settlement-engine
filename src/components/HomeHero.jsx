@@ -35,14 +35,18 @@ import { recoverFromChunkError } from '../lib/staleDeploy.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
-import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
+import {
+  ANON_SIZES, SIZE_LADDER, TIER_FACTS, SINGLE_DOSSIER_PRICE, signInUnlocksSizes,
+} from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
-// Sizes per audience. Anonymous gets the Wanderer-tier ceiling
-// (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
-// six-tier ladder. Order matters — the picker renders left-to-right.
-const ANON_SIZES = ['hamlet', 'village', 'town'];
-const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+// Sizes per audience, READ FROM THE FACTS rather than restated here (ODQ, the owner
+// 2026-09-19). The anonymous set — hamlet, village, town — used to be a literal in this
+// file while the at-cap sentence below named its own list, which is how that sentence
+// came to omit the thorpe a sign-in really unlocks. Both now derive from
+// config/tierFacts.js, so the gauge a visitor sees and the sentence that tells them what
+// they are missing cannot disagree. Order matters — the picker renders left-to-right.
+const ALL_SIZES = SIZE_LADDER;
 
 // ── THE GAUGE (Deep Craft cluster 1) ─────────────────────────────────────────
 // One scale-rule strip replaces the size cards: the viewer's entitled stations
@@ -421,15 +425,16 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
                 color: INK, lineHeight: 1.4,
               }}>
-                {/* ⛔ THE SIZES SIGNING IN ADDS, NOT THE ONES ALREADY SPENT.
-                    TIER_GATE.anon.maxTier is 'town' (store/authSlice.js), so this
-                    reader has already had thorp through town — the spent line
-                    directly above says so in the same breath ("You've explored
-                    hamlet, village, town."). "unlock thorp through metropolis" sold
-                    three of them back. The registry twin (hero.anonCap.unlockTpl)
-                    was corrected on 2026-09-18; this is the sentence that actually
-                    renders, and it now agrees with it. */}
-                <b>Sign in (free)</b> to unlock city and metropolis and
+                {/* ⛔ THE SIZES SIGNING IN ADDS, DERIVED AND NEVER TYPED.
+                    The list was hand-written here and read "city and metropolis",
+                    which sold a reader two of the three they were owed: the
+                    anonymous sizes are hamlet, village and town (the spent line
+                    directly above says exactly that), so a THORPE is also something
+                    signing in unlocks — the owner's correction of 2026-09-19.
+                    `signInUnlocksSizes()` is the ladder minus the anonymous set
+                    (config/tierFacts.js), Oxford-joined, so the sentence follows a
+                    ceiling that moves instead of stranding a stale list. */}
+                <b>Sign in (free)</b> to unlock {signInUnlocksSizes()} and
                 save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
                 PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
               </div>

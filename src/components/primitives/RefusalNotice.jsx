@@ -38,6 +38,7 @@
  */
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { tOptional } from '../../copy/index.js';
+import { signInUnlocksSizes } from '../../config/tierFacts.js';
 import { isRefusalReason } from '../../lib/refusalReasons.js';
 
 /**
@@ -53,7 +54,14 @@ export function refusalCopy(reason, vars = null) {
   if (!isRefusalReason(reason)) return null;
   const rubric = tOptional(`refusals.${reason}.rubric`);
   const ref = tOptional(`refusals.${reason}.bodyRef`);
-  const body = ref ? tOptional(ref, vars ?? undefined) : tOptional(`refusals.${reason}.body`, vars ?? undefined);
+  // ⭐ `{sizes}` IS A DEFAULT VAR, SO A REFUSAL CAN NAME WHAT SIGNING IN UNLOCKS WITHOUT
+  // ITS RAISER KNOWING THE LADDER (the owner, 2026-09-19). Two of these sentences typed
+  // "city and metropolis" and were short a thorpe, the same defect as the hero's — and
+  // the gates that raise them (the daily cap, the tier door) have no business holding the
+  // size ladder. The gate's OWN vars are spread last, so a raiser that passes `sizes`
+  // still wins: a fact measured at the gate always beats a default computed here.
+  const withDefaults = { sizes: signInUnlocksSizes(), ...(vars ?? {}) };
+  const body = ref ? tOptional(ref, withDefaults) : tOptional(`refusals.${reason}.body`, withDefaults);
   if (!rubric || !body) return null;
   return { rubric, body };
 }

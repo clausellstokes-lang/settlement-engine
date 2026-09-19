@@ -32,8 +32,12 @@ import { TIERS, SINGLE_DOSSIER } from './pricing.js';
 // asked for and the ceiling their account reaches, and both must be the DISPLAY
 // label, never the raw token — `capital` reads as "Metropolis". Total over every
 // token TIER_GATE can hold, so a refusal can never print a bare tier id at a reader.
+// ⚠ `thorp` READS AS "Thorpe" (2026-09-19). The wizard's own size list has always said
+// so (copy/en.js `generate.sizes.thorp`), and this table said "Thorp" — two spellings of
+// one rung, one of them on the refusal sentences lane 28 wired. The reader-facing label
+// is the wizard's, so the two now agree; the TOKEN is untouched.
 export const SIZE_LABEL = Object.freeze({
-  thorp: 'Thorp', hamlet: 'Hamlet', village: 'Village',
+  thorp: 'Thorpe', hamlet: 'Hamlet', village: 'Village',
   town: 'Town', city: 'City', capital: 'Metropolis', metropolis: 'Metropolis',
 });
 
@@ -41,6 +45,66 @@ export const SIZE_LABEL = Object.freeze({
 // ('town'); held here for the display layer and pinned to it by the contract test.
 export const ANON_MAX_TIER = 'town';
 export const ANON_MAX_SIZE_LABEL = SIZE_LABEL[ANON_MAX_TIER];
+
+/**
+ * THE SIZE LADDER, in the order the wizard offers it and spells it — the SAME six tokens
+ * as copy/en.js `generate.sizes` and the hero's gauge, which is why the display layer can
+ * read one ladder instead of three. (`capital` is the pricing catalog's synonym for the
+ * top rung and resolves to the same label; it is not a seventh size.)
+ * @type {ReadonlyArray<string>}
+ */
+export const SIZE_LADDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+
+/**
+ * ⛔ THE SIZES AN ANONYMOUS VISITOR ACTUALLY GETS (the owner, 2026-09-19: "a free account
+ * unlocks THORPE as well — the anonymous tiers are hamlet, village, town").
+ *
+ * THIS IS A FACT THE GATE DOES NOT CARRY, AND THAT IS WHY IT IS WRITTEN DOWN HERE.
+ * store/authSlice.js TIER_GATE expresses the anon cap as a CEILING — `maxTier: 'town'`
+ * against a rank table where thorp is rank 0 — so by the gate alone an anonymous visitor
+ * could pick a thorpe. The product does not offer them one: the at-cap line has said
+ * "You've explored hamlet, village, town." since it was written, and the owner has now
+ * stated the rule. A ceiling cannot express "a floor as well", so the offered SET lives
+ * here, beside the other display facts, rather than being inferred from a number that
+ * cannot mean it.
+ *
+ * ⚠ RECORDED FOR THE CHAIR: the GATE therefore still permits `thorp` for anon
+ * (authSlice.js TIER_GATE.anon.maxTier = 'town', TIER_RANK.thorp = 0). Tightening the
+ * gate to match this set is an enforcement change, not a copy one, and is the chair's.
+ * @type {ReadonlyArray<string>}
+ */
+export const ANON_SIZES = Object.freeze(['hamlet', 'village', 'town']);
+
+/**
+ * WHAT SIGNING IN ADDS: the ladder minus what an anonymous visitor already had. Derived,
+ * so a ceiling that moves rewrites every sentence that names it instead of stranding one.
+ * @type {ReadonlyArray<string>}
+ */
+export const SIGN_IN_UNLOCKS = Object.freeze(SIZE_LADDER.filter((key) => !ANON_SIZES.includes(key)));
+
+/**
+ * The estate's list joiner, with the Oxford comma: "a", "a and b", "a, b, and c".
+ * Written here because the tree had no shared one — the only other joiner
+ * (domain/display/warRemembrance.js) joins on ", and " and so drops the comma at two
+ * items, which is a different rule for a different voice.
+ * @param {ReadonlyArray<string>} parts
+ * @returns {string}
+ */
+export function oxfordList(parts) {
+  const items = parts.filter(Boolean);
+  if (items.length <= 1) return items[0] || '';
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+/**
+ * The sentence fragment naming the sizes a free account unlocks, in the running voice
+ * those sentences use (lower case, Oxford-joined): "thorpe, city, and metropolis".
+ * @returns {string}
+ */
+export function signInUnlocksSizes() {
+  return oxfordList(SIGN_IN_UNLOCKS.map((key) => SIZE_LABEL[key].toLowerCase()));
+}
 
 // PDF-export posture (owner ruling 2026-07-13): only premium exports FREELY and
 // without limit ('unlimited'); anon + free pay per dossier ($2.99, the single-
