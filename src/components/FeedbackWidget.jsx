@@ -23,13 +23,15 @@
  * theme vocabulary only — no new raw colors.
  */
 import { useState, useEffect } from 'react';
-import { X, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { deriveGenerationId } from '../lib/generationTelemetry.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomClearance, aboveFooter, aboveBottomNav } from './theme.js';
 import Button from './primitives/Button.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
+import { useDialogDismiss } from './primitives/useDialogFocusTrap.js';
 
 export default function FeedbackWidget({ visible = true }) {
   const auth = useStore(s => s.auth);
@@ -44,6 +46,17 @@ export default function FeedbackWidget({ visible = true }) {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(null);
+
+  const reset = () => { setMessage(''); setEmail(''); setError(null); setSent(false); };
+  const handleClose = () => { setOpen(false); reset(); };
+
+  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). This panel is an anchored
+  // corner surface, NOT a modal — it has no scrim and the page behind it stays live — so
+  // it takes the non-modal half of the dialog lifecycle: Escape dismisses, focus returns
+  // to the footer control that opened it, and Tab is deliberately NOT trapped, because a
+  // reader who opens feedback while reading a dossier must still be able to reach the
+  // dossier. Before this the panel had neither: the only way out was a 24px ghost ×.
+  const panelRef = useDialogDismiss(open, handleClose);
 
   // The floating button was retired (order W2-a-REVISED). The panel now opens from
   // the footer's 'Feedback & support' control, which dispatches this app-wide event.
@@ -64,9 +77,6 @@ export default function FeedbackWidget({ visible = true }) {
   const generationRef = generationId
     || (lastSeed != null || generatedAt != null ? deriveGenerationId(lastSeed, generatedAt) : null);
 
-  const reset = () => { setMessage(''); setEmail(''); setError(null); setSent(false); };
-
-  const handleClose = () => { setOpen(false); reset(); };
 
   const handleSubmit = async () => {
     if (!canSubmit) return;
@@ -114,8 +124,10 @@ export default function FeedbackWidget({ visible = true }) {
 
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-label="Send feedback"
+      tabIndex={-1}
       style={{
         ...anchor,
         width: isMobile ? 'calc(100vw - 32px)' : 340,
@@ -130,7 +142,14 @@ export default function FeedbackWidget({ visible = true }) {
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>
           Feedback &amp; support
         </span>
-        <Button variant="ghost" size="sm" icon={<X size={16} />} onClick={handleClose} aria-label="Close feedback" />
+        {/* ⭐ THE EXIT (owner order, ODQ §934.31). This was a ghost icon-only Button at
+            `size="sm"` — a 24px box with no chrome, which the owner opened the panel and
+            could not find. It is now the house close control: the word "Close" as its
+            accessible name, the × text twin so it survives icons-off, and a ≥44×44 tap
+            target on a phone. Escape and focus restoration arrive with it (the hook
+            above) — a close button that worked while Escape did not would be half a
+            door. */}
+        <DialogClose onClose={handleClose} subject="feedback" />
       </div>
 
       {sent ? (

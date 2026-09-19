@@ -19,6 +19,7 @@ import { navigate } from '../hooks/useRoute.js';
 import { saves as savesService } from '../lib/saves.js';
 import { t } from '../copy/index.js';
 import Button from './primitives/Button.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from './theme.js';
 import { captureSavedSettlementsHydration } from '../store/savedSettlementsHydration.js';
@@ -165,7 +166,11 @@ export default function CommandPalette({ onClose }) {
           display: 'flex', flexDirection: 'column', maxHeight: '70vh',
         }}
       >
-        <div style={{ padding: SP.sm, background: PARCH, borderBottom: `1px solid ${BORDER}` }}>
+        {/* THE HOUSE EXIT (owner order, ODQ §934.31). The palette had no visible way
+            out at all: Escape, a backdrop click, or nothing. Both of those are
+            invisible affordances, and on a phone the backdrop is most of what a reader
+            can see but not what they reach for. The × now sits beside the field. */}
+        <div style={{ padding: SP.sm, background: PARCH, borderBottom: `1px solid ${BORDER}`, display: 'flex', alignItems: 'center', gap: SP.sm }}>
           <input
             value={query}
             /* eslint-disable-next-line jsx-a11y/no-autofocus -- a command palette exists to receive typing the instant it opens. */
@@ -185,6 +190,7 @@ export default function CommandPalette({ onClose }) {
               fontFamily: sans, fontSize: FS.md, color: INK, outline: 'none',
             }}
           />
+          <DialogClose onClose={onClose} subject="the command palette" />
         </div>
 
         {results.length > 0 ? (

@@ -48,6 +48,7 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { OutcomeCard, SmallButton } from './WorldPulsePrimitives.jsx';
@@ -146,6 +147,11 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
               What you leave unruled stays on the docket.
             </p>
           </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). The foot of this dialog carries a
+              button whose WORD changes with the row count ("Close" when nothing is
+              gathered, "Set the rest aside" when something is) — a door that renames
+              itself is not a door. The header now carries the constant one. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.lg, display: 'grid', gap: SP.sm }}>

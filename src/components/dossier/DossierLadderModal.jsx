@@ -25,6 +25,7 @@ import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, SP, sans } from '../theme.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { t } from '../../copy/index.js';
 import { SINGLE_DOSSIER, TIERS } from '../../config/pricing.js';
@@ -96,13 +97,19 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
           background: CARD, boxShadow: ELEV[3], fontFamily: sans,
         }}
       >
-        <header style={{ padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
+        <header style={{ padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT, display: 'flex', alignItems: 'flex-start', gap: SP.md }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
           <h2 id="dossier-ladder-title" style={{ margin: 0, color: INK, fontSize: FS.lg, lineHeight: 1.25, fontWeight: 900 }}>
             {t('dossierExport.ladder.title')}
           </h2>
           <p style={{ margin: `${SP.xs}px 0 0`, color: BODY, fontSize: FS.sm, lineHeight: 1.45 }}>
             {t('dossierExport.ladder.intro')}
           </p>
+          </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). This dialog's only way out was a
+              ghost button at the FOOT of a scrolling list of purchase rungs — below the
+              fold on a phone, and reading as a fifth choice rather than a door. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>

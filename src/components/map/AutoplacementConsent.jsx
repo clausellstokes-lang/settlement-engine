@@ -45,6 +45,7 @@ import { resolveTerrain } from '../../domain/resolveTerrain.js';
 import { isCanonSave } from '../../domain/campaign/canon.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import {
   GOLD, INK, BODY, MUTED, SECOND, BORDER, CARD, CARD_ALT, RED, sans, FS, SP,
 } from '../theme.js';
@@ -219,6 +220,12 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
               Every change is listed below before anything happens. Nothing is written until you confirm.
             </p>
           </div>
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). This dialog's only way out was a
+              secondary button below a scrolling list of proposed placements — on a phone,
+              past the fold, and reading as one more choice rather than a door. The
+              header now carries the constant one. Nothing is written by closing: the
+              consent is the confirm button, and this is the way back out of the question. */}
+          <DialogClose onClose={onClose} />
         </header>
 
         <div style={{ flex: 1, overflowY: 'auto', minHeight: 0 }}>

@@ -33,6 +33,7 @@ import {
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import PendingChangesBar from './PendingChangesBar.jsx';
 import Button from '../primitives/Button.jsx';
+import { useDialogDismiss } from '../primitives/useDialogFocusTrap.js';
 import EntityLink from '../primitives/EntityLink.jsx';
 import {
   BORDER, FOOTER_INSET, ARROW_BARB_CLEAR, BOTTOM_NAV_H,
@@ -222,26 +223,19 @@ function EntityInspector({ readOnly = false }) {
   const entry = focusedEntity?.id ? index?.resolve?.(focusedEntity.id) : null;
   const why = useMemo(() => recordedWhy(entry), [entry]);
   const connections = useMemo(() => connectionsFor(entry, index), [entry, index]);
-  const panelRef = useRef(null);
-  const returnFocusRef = useRef(null);
+  // ⭐ ONE DIALOG LIFECYCLE, NOT A PRIVATE ONE (owner order, ODQ §934.31). This panel
+  // hand-rolled its own Escape listener and focus restore — correct behaviour, written
+  // a second time, in a file no walker could join to the primitive. It now rides the
+  // shared non-modal hook, which owns the Escape (through the SAME open-dialog stack
+  // every modal uses, so an Escape meant for a modal stacked above it is no longer
+  // answered twice) and the focus restore. The focus-IN stays local and explicit: this
+  // inspector is a takeover on a phone, and moving focus into it is the point.
+  const panelRef = useDialogDismiss(!!entry, () => clearFocusedEntity?.());
 
   useEffect(() => {
-    if (!entry) return undefined;
-    const active = globalThis.document?.activeElement;
-    if (globalThis.HTMLElement && active instanceof globalThis.HTMLElement) {
-      returnFocusRef.current = active;
-    }
+    if (!entry) return;
     panelRef.current?.focus?.({ preventScroll: true });
-
-    const onKeyDown = (event) => {
-      if (event.key !== 'Escape') return;
-      event.preventDefault();
-      clearFocusedEntity?.();
-      globalThis.queueMicrotask?.(() => returnFocusRef.current?.focus?.());
-    };
-    globalThis.window?.addEventListener?.('keydown', onKeyDown);
-    return () => globalThis.window?.removeEventListener?.('keydown', onKeyDown);
-  }, [entry, clearFocusedEntity]);
+  }, [entry, panelRef]);
 
   if (!entry) return null;
 
@@ -251,10 +245,9 @@ function EntityInspector({ readOnly = false }) {
     setEditMode?.(true);
     navigateToEntity?.(entry.id);
   };
-  const closeInspector = () => {
-    clearFocusedEntity?.();
-    globalThis.queueMicrotask?.(() => returnFocusRef.current?.focus?.());
-  };
+  // The × and Escape now take the same road: clear the focused entity, and let the
+  // shared hook hand focus back to whatever opened the inspector.
+  const closeInspector = () => { clearFocusedEntity?.(); };
 
   return (
     <aside

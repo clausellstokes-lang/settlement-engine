@@ -21,10 +21,10 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
+import { Crown, UserPlus, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
-import IconButton from '../primitives/IconButton.jsx';
+import DialogClose from '../primitives/DialogClose.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
@@ -127,7 +127,9 @@ export default function SuccessorPrompt() {
           <h2 id="succession-title" style={titleStyle}>
             <Crown size={16} aria-hidden="true" color={GOLD} /> A leader is gone.
           </h2>
-          <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={dismiss} />
+          {/* THE HOUSE EXIT (owner order, ODQ §934.31). "Dismiss" at 24px was this
+              dialog's only door and named a different verb from every sibling. */}
+          <DialogClose onClose={dismiss} />
         </header>
 
         <div style={{ padding: SP.md }}>
