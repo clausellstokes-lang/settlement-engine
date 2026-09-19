@@ -525,7 +525,10 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Power":       { measured: 29, sub14: 27 },
   "Systems/Defense":     { measured: 26, sub14: 25 },
   "Systems/Resources":   { measured:  4, sub14:  4 },
-  "Systems/Outlook":     { measured:  4, sub14:  4 },
+  // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
+  // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
+  // forty-five characters and is measured — and it is prose, so it takes the prose floor.
+  "Systems/Outlook":     { measured:  5, sub14:  5 },
   "Systems/Causes":      { measured:  2, sub14:  2 },
   "Systems/Magic":       { measured:  1, sub14:  1 },
   "World/NPCs":          { measured: 46, sub14: 46 },
@@ -575,7 +578,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Power":       { prose: 27, chrome: 2, sub14: 0, sub12: 0 },
   "Systems/Defense":     { prose: 26, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Resources":   { prose:  3, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Outlook":     { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/NPCs":          { prose: 45, chrome: 1, sub14: 1, sub12: 0 },

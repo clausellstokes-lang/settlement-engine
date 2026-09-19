@@ -214,7 +214,9 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
                   ? 'Generation receipt: coherent, with authored tensions'
                   : 'Generation receipt: coherent'}
             </span>
-            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>
+            {/* A sentence now, not a token pair — 'culture South-Asian-inspired · themes Grounded'
+                reads as prose, so it takes the prose floor (14px on a phone), not chrome's. */}
+            <span style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED}}>
               {/* ⛔ THE RECEIPT STORES THE PROFILE'S KEY, AND IT SHOULD: the coherence record
                   is an audit trail, and `south_asian` is what the generator was asked for.
                   The settlement's own materialized identity carries that key's authored

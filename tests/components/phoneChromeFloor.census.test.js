@@ -246,13 +246,18 @@ const ROUTE_BASELINE = Object.freeze({
   // FLOORED, not bare: `bare` holds at 0, so nothing sub-floor shipped with it. The same
   // component was already in /create's, /home's and the Realm's closures, which is why this
   // is the only route that moved.
-  '/settlements':           { roots: 1, files: 206, floored: 992, ruled: 4, bare: 0 },
+  // floored 992 -> 991 and /gallery 795 -> 794 (browser pass 3, lane 36 cars 3/4/6, 2026-09-19):
+  // the dossier closure both routes open lost ONE floored span net — status and key mounts
+  // re-expressed through statusCase and the label seams, and the Power tab's raw coup-weight
+  // span retired. `bare` holds at 0 on both, so nothing sub-floor shipped; the routes lane 36
+  // re-recorded on its own base already carry the move, which is why only these two fell.
+  '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 154, floored: 795, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 154, floored: 794, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
