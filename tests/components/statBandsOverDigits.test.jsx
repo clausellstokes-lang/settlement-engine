@@ -264,14 +264,17 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
 
   /**
    * ONE NUMBER, ONE VERDICT, AT EVERY THRESHOLD OF BOTH LADDERS — deterministically, rather
-   * than through whatever the four fixtures happen to roll (their econScores never land inside
-   * the window where the two ladders disagree).
+   * than through whatever the four fixtures happen to roll (their econScores never land on
+   * the cut points at all).
    *
-   * Economic Backing's status grades econScore at 65/40/25; the shared band grades the SAME
-   * number at 65/40/20. The first cure folded the band only where the two WORDS were equal,
-   * and this arm is what that missed: at 20-24 the row printed "Critical" beside "Weak", at
-   * 25-39 "Underfunded" beside "Weak", and from 65 "Well-funded" beside "Strong". Each score
-   * below is a threshold of one ladder or the other, or sits inside the window between them.
+   * Economic Backing's status and the shared band grade the SAME econScore in two
+   * vocabularies. The first cure folded the band only where the two WORDS were equal, and
+   * this arm is what that missed: the row went on printing "Underfunded" beside "Weak" and
+   * "Well-funded" beside "Strong" — and, while the two ladders still cut at different scores
+   * (status 65/40/25, band 65/40/20), "Critical" beside "Weak" at 20-24. ODQ §934.14 closed
+   * that last gap at the source by giving both ladders one set of cut points; this arm
+   * remains the one that proves the ROW says its grade once, whatever the cut points are.
+   * Each score below is a threshold of the ladder or sits between two of them.
    *
    * CASE-BLIND ON PURPOSE: case is what hid the first form of this defect (a capitalised band
    * beside a sentence-case status read as two different marks), so a grade word counts however
@@ -298,6 +301,61 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     }
     // NON-VACUITY: the sweep really crossed every rung of the status ladder.
     expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+  });
+
+  /**
+   * ⛔⛔ THE TWO LADDERS ARE ONE LADDER (ODQ §934.14) — PINNED OVER THE WHOLE RANGE, not at
+   * the cut points, because a cut point is exactly where a sampled arm agrees by luck.
+   *
+   * `deriveSupportingCapabilities` grades `scores.economic` into this row's four words and
+   * `scoreBand` grades the SAME number into the four readiness words. They are one ladder in
+   * two vocabularies, so their intervals must COINCIDE — and they did not: the status ladder
+   * cut at 65/40/25 against the band's 65/40/20, which put 20-24 into "Critical" on this row
+   * and "Weak" on the Threat Assessment and the Overview, one score carrying two verdicts.
+   * The cure was structural (both ladders now read `SCORE_BAND_CUTS`), so this arm's job is
+   * to hold the CORRESPONDENCE rather than to re-match digits: if a future move splits them
+   * again — by restoring a literal, by re-cutting one ladder, by adding a rung — the integer
+   * where they part is named here.
+   *
+   * ⚠ IT IS A DOMAIN ARM, NOT A RENDER ARM, deliberately. DefenseTab drops this row's band
+   * (`STATUS_IS_THE_GRADE`), so the contradiction is INVISIBLE on this tab and a rendered
+   * assertion could never see it. The reader who meets it is on the Overview or in the PDF,
+   * reading the band word for the same score — which is the producer, and is what this reads.
+   */
+  test('the status ladder and the band ladder cut at the same scores, at every integer 0-100', () => {
+    const base = settlements.find(([n]) => n === 'city')[1];
+    /** The one correspondence: this row's word ⇄ the shared ladder's word. */
+    const TWIN = Object.freeze({
+      'Well-funded': 'STRONG', Adequate: 'ADEQUATE', Underfunded: 'WEAK', Critical: 'CRITICAL',
+    });
+    const reached = new Set();
+    /** @type {Map<string, Set<string>>} band word → every note the row printed inside it. */
+    const notesPerBand = new Map();
+
+    for (let economic = 0; economic <= 100; economic += 1) {
+      const cap = deriveSupportingCapabilities(withScores(base, { economic }))
+        .find((c) => c.label === 'Economic Backing');
+      const band = scoreBand(economic);
+      expect(TWIN[cap.status], `econScore ${economic}: status "${cap.status}" is not a rung of this row's ladder`)
+        .toBeTruthy();
+      expect(TWIN[cap.status], `econScore ${economic}: the row says "${cap.status}" where the shared ladder says "${band}"`)
+        .toBe(band);
+      reached.add(cap.status);
+      if (!notesPerBand.has(band)) notesPerBand.set(band, new Set());
+      notesPerBand.get(band).add(cap.note);
+    }
+
+    // THE NOTE FOLLOWS THE SAME CUT. It is a fourth place the grade lands (the status pill
+    // stands down when the note opens on the grade), so a note that moved at a different
+    // score would re-open the defect one line below the one this arm just closed.
+    for (const [band, notes] of notesPerBand) {
+      expect([...notes], `the note changes inside the ${band} interval, so it cuts elsewhere than the ladder`)
+        .toHaveLength(1);
+    }
+
+    // NON-VACUITY, both halves: every rung was really crossed, and every band really met.
+    expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+    expect([...notesPerBand.keys()].sort()).toEqual([...BANDS].sort());
   });
 
   /**

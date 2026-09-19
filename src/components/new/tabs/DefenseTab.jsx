@@ -111,12 +111,20 @@ export const THREAT_ROW_KEY = Object.freeze({
  * WHAT the status is. Arcane Support's status says whether arcane practitioners are on the
  * rolls at all — a presence read — so its band is the only word that grades the bar, and it
  * keeps it. Economic Backing's status IS a grade: `deriveSupportingCapabilities` grades the
- * SAME econScore into Well-funded / Adequate / Underfunded / Critical at 65/40/25 that the band
- * grades into Strong / Adequate / Weak / Critical at 65/40/20. Printed together they are one
- * number's verdict said twice — the same word where the ladders share one ("Adequate …
- * Adequate"), a synonym pair everywhere else ("Well-funded … Strong", "Underfunded … Weak"),
- * and at econScore 20-24, where the status ladder has fallen to Critical and the band has not,
- * two verdicts that DISAGREE ("Critical … Weak").
+ * SAME econScore into Well-funded / Adequate / Underfunded / Critical that the band grades
+ * into Strong / Adequate / Weak / Critical, and since ODQ §934.14 both read ONE set of cut
+ * points (`SCORE_BAND_CUTS` in defenseScoreBands.js — the band ladder's, which is canonical).
+ * Printed together they are therefore one number's verdict said twice in two vocabularies —
+ * the same word where the ladders share one ("Adequate … Adequate") and a synonym pair
+ * everywhere else ("Well-funded … Strong", "Underfunded … Weak").
+ *
+ * ⭐ THE DISAGREEMENT THIS COMMENT USED TO RECORD IS GONE AT THE SOURCE. The status ladder
+ * cut at 65/40/25 while the band cut at 65/40/20, so at econScore 20-24 the two printed
+ * verdicts that CONTRADICTED each other ("Critical … Weak"). Dropping the band hid that pair
+ * on this row but left the Threat Assessment and the Overview reading the other verdict off
+ * the same score; §934.14 re-cut the status ladder onto the band's thresholds instead. The
+ * fold below still stands, because two vocabularies grading one bar is a duplication whether
+ * or not they agree — it is now only a duplication, never a contradiction.
  *
  * So a row named here renders NO band: its status gives the grade in the row's own vocabulary
  * and the bar carries the magnitude. No digit comes back, so R-5b item #20's law — the word,
@@ -623,12 +631,15 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                printing "Well-funded … Strong" and "Underfunded … Weak" — and "Critical …
                Weak" at econScore 20-24, two verdicts on one bar that disagree. The rule now
                keys on what the status IS, not on how it happens to be spelled.
-               ⚠ WHAT THIS DOES NOT CURE, recorded rather than reached for: Economic Backing's
-               status ladder turns Critical below 25 and the shared ladder below 20, so at
-               econScore 20-24 this row's "Critical" still sits on the same tab as the Threat
-               Assessment's "Economic Survival · Weak". Aligning the two is a re-grading inside
-               `deriveSupportingCapabilities` (src/domain, owner-gated), and it would move the
-               PDF's printed status as well. */
+               ⭐ AND THE DEFERRAL THIS COMMENT CARRIED IS CLOSED (ODQ §934.14). It recorded
+               that the status ladder turned Critical below 25 while the shared ladder turned
+               below 20, so this row's "Critical" could sit on the same tab as the Threat
+               Assessment's "Economic Survival · Weak" — a disagreement the band fold above
+               could not reach, because it lived in `deriveSupportingCapabilities` and was read
+               by two OTHER surfaces. The owner ruled the band ladder canonical; the status
+               ladder now reads `SCORE_BAND_CUTS` rather than restating digits, so the two
+               cannot part again. The words, and the PDF's printed status, are unchanged
+               except on 20-24, which now reads Underfunded on every surface at once. */
             const band = cap.score !== null && !STATUS_IS_THE_GRADE.includes(cap.label)
               ? statusCase(scoreBand(cap.score)) : null;
             /* ⛔ AND THE NOTE IS THE OTHER PLACE THE GRADE CAN LAND. Economic Backing's

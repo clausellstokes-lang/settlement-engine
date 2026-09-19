@@ -12,7 +12,7 @@
  */
 
 import { buildThreatAssessment } from './threatAssessment.js';
-import { scoreBand, scoreColor } from './defenseScoreBands.js';
+import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
@@ -215,10 +215,35 @@ export function deriveSupportingCapabilities(settlement) {
 
   const caps = [
     {
+      // ⛔⛔ ONE NUMBER, ONE SET OF CUT POINTS (ODQ §934.14, the owner's ruling on the two
+      // ladders). This row grades `scores.economic` in its own four words, and the shared
+      // band ladder grades the SAME number in the four readiness words — so the two are one
+      // ladder wearing two vocabularies, and they must cut in the same places or the tab
+      // contradicts itself. They did not: this row turned Critical below 25 and the band
+      // ladder turns Critical below 20, so at econScore 20-24 the capability row printed
+      // "Critical" while the Threat Assessment and the Overview printed "Weak" off the same
+      // score. DefenseTab's `STATUS_IS_THE_GRADE` fold hid the pair on THIS row by dropping
+      // its band, but the disagreement was never local to the row — the other two surfaces
+      // went on reading the other verdict.
+      //
+      // THE BAND LADDER IS CANONICAL, so the cut points come from it and the WORDS stay
+      // this row's own: Well-funded ⇔ Strong, Adequate ⇔ Adequate, Underfunded ⇔ Weak,
+      // Critical ⇔ Critical, at every integer 0-100. `SCORE_BAND_CUTS` is READ rather than
+      // restated, which is the whole point of the fix: a future move of the band ladder
+      // carries this row with it instead of leaving it behind a second time.
+      //
+      // ⚠ THE NOTE FOLLOWS THE SAME CUT, deliberately. It is a fourth place the grade
+      // lands (DefenseTab stands the status pill down when the note opens on the grade), so
+      // a note that changed at a different score would re-open the defect one line lower.
       label: 'Economic Backing',
-      status: econScore >= 65 ? 'Well-funded' : econScore >= 40 ? 'Adequate' : econScore >= 25 ? 'Underfunded' : 'Critical',
+      status: econScore >= SCORE_BAND_CUTS.strong ? 'Well-funded'
+        : econScore >= SCORE_BAND_CUTS.adequate ? 'Adequate'
+          : econScore >= SCORE_BAND_CUTS.weak ? 'Underfunded' : 'Critical',
       color: scoreColor(econScore), score: econScore,
-      note: econScore >= 65 ? 'Full pay, maintained equipment, reserve capacity.' : econScore >= 40 ? 'Adequate upkeep, some shortfalls.' : econScore >= 25 ? 'Irregular pay, worn equipment, morale risk.' : 'Cannot sustain forces. Systemic breakdown.',
+      note: econScore >= SCORE_BAND_CUTS.strong ? 'Full pay, maintained equipment, reserve capacity.'
+        : econScore >= SCORE_BAND_CUTS.adequate ? 'Adequate upkeep, some shortfalls.'
+          : econScore >= SCORE_BAND_CUTS.weak ? 'Irregular pay, worn equipment, morale risk.'
+            : 'Cannot sustain forces. Systemic breakdown.',
     },
     {
       // ⛔⛔ THE LABEL IS THE QUESTION THIS ROW ASKS, AND IT IS NOT THE OVERVIEW'S QUESTION

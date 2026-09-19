@@ -25,18 +25,48 @@
  */
 
 /**
+ * ⛔ THE THREE CUT POINTS, WRITTEN ONCE, BECAUSE SPELLING THEM TWICE IS HOW THEY DRIFTED
+ * (ODQ §934.14). The ladder above says the 65/40/20 set "wins" — and it did, for the three
+ * surfaces that were re-pointed at this leaf. What the re-point missed is that
+ * `defenseDisplay`'s Economic Backing row keeps a ladder of its OWN words over the SAME
+ * `scores.economic`, and that ladder was left grading at 65/40/25. The two disagreed on a
+ * real interval: at 20-24 the capability row read "Critical" while the Threat Assessment and
+ * the Overview read "Weak", one number carrying two verdicts on one tab.
+ *
+ * So the numbers stop being literals anywhere. `scoreColor`, `scoreBand` and the status
+ * ladder in `defenseDisplay.deriveSupportingCapabilities` all READ these three fields, which
+ * means the cure is structural rather than a second matching of digits: there is no longer a
+ * copy that CAN fall behind, because there is no longer a copy.
+ *
+ * ⚠ AN OBJECT, NOT THREE NAMED SCALARS, AND THE INSTRUMENT IS THE REASON. The tuning
+ * register's P2 population (tests/lint/tuningRegister.walker.test.js) counts module-top-level
+ * `const UPPER_SNAKE = <numeric>;` per file under `src/domain` and is shrink-only, so three
+ * bare constants would be three new debts for a change that REMOVES duplication. One frozen
+ * table is the shape the register is built to want. It is deliberately not named `*_TUNING`
+ * either: that suffix is the register's P1 trigger, and these are not tuning values the owner
+ * signs — they are the band ladder's own definition, the thing the four frozen words MEAN.
+ *
+ * @type {Readonly<{ strong: number, adequate: number, weak: number }>}
+ */
+export const SCORE_BAND_CUTS = Object.freeze({ strong: 65, adequate: 40, weak: 20 });
+
+/**
  * Band colour for a 0-100 defence-system score.
  * @type {(n: number) => string}
  */
 export const scoreColor = (n) =>
-  n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';
+  n >= SCORE_BAND_CUTS.strong ? '#1a5a28'
+    : n >= SCORE_BAND_CUTS.adequate ? '#a0762a'
+      : n >= SCORE_BAND_CUTS.weak ? '#8a4010' : '#8b1a1a';
 
 /**
  * Band word for a 0-100 defence-system score. The frozen four; never extend.
  * @type {(n: number) => string}
  */
 export const scoreBand = (n) =>
-  n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
+  n >= SCORE_BAND_CUTS.strong ? 'STRONG'
+    : n >= SCORE_BAND_CUTS.adequate ? 'ADEQUATE'
+      : n >= SCORE_BAND_CUTS.weak ? 'WEAK' : 'CRITICAL';
 
 /**
  * THE OVERALL DEFENCE SCORE — the rounded mean of the numeric score values, and the ONE
