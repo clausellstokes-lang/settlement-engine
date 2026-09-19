@@ -50,8 +50,19 @@
  *
  * Zero imports beyond the token shim, and no React: the dossier's tab files all reach
  * this, and a heavier leaf would follow them into the first-paint closure.
+ *
+ * ── WHERE RUNGS 2 AND 3 ACTUALLY LIVE NOW (the PDF lane, 2026-09-18) ─────────────────
+ * `statusCase` and `tokenCase` were lifted to `domain/display/labelCase.js` and are
+ * RE-EXPORTED here, so every screen call site below and in the tabs is unchanged and this
+ * docblock is still where the ladder is explained. They had to move because this file
+ * imports the screen's type scale (`../theme.js`) for the literary title, `src/pdf` may not
+ * reach into `src/components`, and the paid document was therefore still shouting the words
+ * the screen had learned to speak. The style object stayed: it is keyed to the screen's px
+ * scale and the PDF's rung is its own serif at its own point sizes.
  */
 import { FS, serif_ } from '../theme.js';
+
+export { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 
 /**
  * THE LITERARY SECTION TITLE. Spread it, then add the site's own colour and margin:
@@ -96,60 +107,9 @@ export function literaryTitle(bodySize = 13) {
 }
 
 /**
- * A frozen band word as a rung-3 status value: 'STRONG' reads 'Strong', 'ACTIVE CRISIS'
- * reads 'Active crisis'.
- *
- * ⛔ THE WORDS ARE NOT TOUCHED, ONLY THE CASE, AND ONLY HERE. Several of these
- * vocabularies are frozen all-caps constants in `domain/display/*` that the PDF and the
- * public projection read as well (`defenseScoreBands.js` says of its own four: "the
- * frozen four; never extend"). Re-casing them at the source would change what those
- * other surfaces print; re-casing them at the one rung that renders them to a DM on
- * screen changes exactly what the ruling asked to change.
- *
- * Applied deliberately, never swept: an initialism ('NPC') would come back wrong, which
- * is why this is a named call at a known site and not a transform over every label.
- *
- * @param {unknown} word a band word from a frozen display vocabulary
- * @returns {unknown} the same word in sentence case, or the input unchanged
+ * RUNGS 2 AND 3 — `statusCase` and `tokenCase` — ARE RE-EXPORTED AT THE TOP OF THIS FILE
+ * from `domain/display/labelCase.js`, which is where their docblocks and the frozen-
+ * vocabulary law now live. Import them from here or from there; they are the same two
+ * functions, and the screen and the paid PDF both call them so that one word has one
+ * spelling on both surfaces.
  */
-export function statusCase(word) {
-  if (typeof word !== 'string' || !word) return word;
-  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-}
-
-/**
- * The estate's initialisms, for the one job sentence-casing cannot do by rule.
- * @type {Readonly<Record<string, string>>}
- */
-const INITIALISMS = Object.freeze({ npc: 'NPC', npcs: 'NPCs', dm: 'DM', ai: 'AI', pdf: 'PDF' });
-
-/**
- * A MACHINE TOKEN as a rung-3 value: 'blockade' reads 'Blockade', 'criminal_opportunity'
- * reads 'Criminal opportunity', 'npc' reads 'NPC'.
- *
- * ⛔ WHY THIS EXISTS BESIDE `statusCase`. Both sentence-case a word, and for most inputs
- * they agree. They differ on the one input that matters: a token vocabulary may contain an
- * INITIALISM, and `statusCase('npc')` is 'Npc'. That is exactly the failure its own docblock
- * warns about, which is why it says it must never be swept — so the swept case gets its own
- * function rather than a caveat nobody reads at the call site.
- *
- * THE REASON EITHER IS NEEDED (review, 2026-09-18): several pills rendered a raw engine
- * token and relied on `textTransform` to make it look like a word. 'attacking', 'surplus',
- * 'dear', 'defaulted' and 'blockade' all read as English in capitals and as debug output in
- * sentence case, so removing the transform exposed the token underneath. The token is still
- * the token — nothing is renamed, no `data-*` hook moves, and the machine vocabulary in
- * `data-band` and friends is untouched. Only the word the reader sees is cased.
- *
- * @param {unknown} token a machine token from a finite vocabulary
- * @returns {unknown} the same token as a displayable word, or the input unchanged
- */
-export function tokenCase(token) {
-  if (typeof token !== 'string' || !token) return token;
-  // WORD-WISE, not whole-string. A whole-string guard only catches a token that IS an
-  // initialism, so the moment one appears inside a phrase — 'NPC contacts', 'AI notes',
-  // and every user-authored custom-content category that reaches an institution or
-  // viability row — sentence case flattened it to 'Npc contacts'. Sentence-case first,
-  // then lift each word the estate knows.
-  return statusCase(token.replace(/_/g, ' '))
-    .replace(/[A-Za-z]+/g, (word) => INITIALISMS[word.toLowerCase()] || word);
-}
