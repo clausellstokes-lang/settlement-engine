@@ -30351,9 +30351,10 @@
     },
     {
       "id": "EM-B3a",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3a.md",
       "verifiedBase": "4da740b5227b90bd1dec8e903a8361755d482c00",
+      "landedAt": "668d87512f539ad1c866ec3d9327d6d41f3d8d2f",
       "changeManifest": [
         {
           "action": "MODIFY",
