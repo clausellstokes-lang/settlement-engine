@@ -100,8 +100,8 @@ describe('THE GATE — one range, one capability flag', () => {
     expect(floor.body).toContain('A Thorpe takes an account');
     expect(floor.body).toContain('starts at a Hamlet');
     expect(floor.body).toMatch(/sign in \(free\)/i);
-    // anchored: floor.body is proven on the three lines above to be the real, filled
-    // sentence, so what it does NOT say is a real absence rather than an empty string.
+    // floor.body is proven on the three lines above to be the real, filled sentence, so
+    // anchored: what it does NOT say is a real absence rather than an empty string.
     expect(floor.body, 'the floor still wears the ceiling\'s words').not.toContain('past what this account forges');
 
     const ceiling = refusalCopy(REFUSAL_REASONS.TIER, { size: 'City', max: 'Town' });

@@ -166,8 +166,8 @@ describe('the lane records a reason for every gate it closes', () => {
     expect(said).toContain('Thorpe');
     expect(said).toContain('Hamlet');
     expect(said).toMatch(/sign in/i);
-    // anchored: `said` is proven three lines up to carry Thorpe, Hamlet and a sign-in
-    // door, so it is a real sentence and the absence below is a real absence.
+    // `said` is proven three lines up to carry Thorpe, Hamlet and a sign-in door, so it is
+    // anchored: a real sentence, and the absence below is a real absence in it.
     expect(said, 'the floor refusal still speaks the ceiling\'s sentence').not.toContain('past what this account forges');
   });
 
