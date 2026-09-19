@@ -334,9 +334,99 @@ export function injectMp4Xmp(buf, packet) {
   return Buffer.concat([buf, head, payload]);
 }
 
+/* ─────────────────────────── injector 4: PNG iTXt ──────────────────────────── */
+
+/**
+ * The keyword the XMP specification reserves for the packet inside a PNG `iTXt`
+ * chunk. It is part of the chunk's data and therefore part of its CRC.
+ */
+const PNG_XMP_KEYWORD = 'XML:com.adobe.xmp';
+const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+
+/**
+ * PNG's CRC-32, table-built here rather than taken from zlib.crc32: that helper
+ * only exists from Node 20.15, and a provenance tool must not be the reason a
+ * supported runtime stops writing credits.
+ */
+const PNG_CRC_TABLE = (() => {
+  const table = new Int32Array(256);
+  for (let n = 0; n < 256; n += 1) {
+    let c = n;
+    for (let k = 0; k < 8; k += 1) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    table[n] = c;
+  }
+  return table;
+})();
+
+function pngCrc32(buf) {
+  let c = 0xffffffff;
+  for (let i = 0; i < buf.length; i += 1) c = PNG_CRC_TABLE[(c ^ buf[i]) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+
+/** Every chunk in a PNG, as {type, start, size} over the whole chunk including CRC. */
+export function pngChunks(buf) {
+  if (!buf.subarray(0, 8).equals(PNG_SIGNATURE)) throw new Error('not a PNG: bad signature');
+  const out = [];
+  let off = 8;
+  while (off + 12 <= buf.length) {
+    const length = buf.readUInt32BE(off);
+    const type = buf.toString('latin1', off + 4, off + 8);
+    const size = 12 + length;
+    if (off + size > buf.length) throw new Error(`PNG chunk ${type} overruns the file`);
+    out.push({ type, start: off, size });
+    off += size;
+    if (type === 'IEND') break;
+  }
+  if (off !== buf.length) throw new Error('PNG chunk chain does not end at EOF');
+  return out;
+}
+
+/** True when the PNG already carries an XMP iTXt, so injection must be a no-op. */
+export function pngHasXmp(buf) {
+  return pngChunks(buf).some(
+    (c) => c.type === 'iTXt'
+      && buf.toString('latin1', c.start + 8, c.start + 8 + PNG_XMP_KEYWORD.length) === PNG_XMP_KEYWORD,
+  );
+}
+
+/**
+ * Splice an XMP `iTXt` chunk into a PNG, immediately before the first IDAT.
+ *
+ * Not one byte of the image is rewritten: PNG is a chunk chain with no absolute
+ * offsets in it, so an insertion between two untouched halves leaves the IDAT
+ * stream — and therefore the decode — exactly as it was. This injector exists
+ * because sharp CANNOT carry XMP into a PNG: .keepMetadata() through a
+ * WebP -> PNG re-encode drops the packet (measured 2026-09-19), so a crop of
+ * credited art would otherwise ship uncredited.
+ */
+export function injectPngXmp(buf, packet) {
+  if (pngHasXmp(buf)) return buf;
+  const chunks = pngChunks(buf);
+  const firstIdat = chunks.find((c) => c.type === 'IDAT');
+  if (!firstIdat) throw new Error('not a PNG: no IDAT chunk');
+
+  // keyword \0 compressionFlag compressionMethod languageTag \0 translatedKeyword \0 text
+  const data = Buffer.concat([
+    Buffer.from(PNG_XMP_KEYWORD, 'latin1'),
+    Buffer.from([0x00, 0x00, 0x00, 0x00, 0x00]),
+    Buffer.from(packet, 'utf8'),
+  ]);
+  const head = Buffer.alloc(8);
+  head.writeUInt32BE(data.length, 0);
+  head.write('iTXt', 4, 'latin1');
+  const crc = Buffer.alloc(4);
+  crc.writeUInt32BE(pngCrc32(Buffer.concat([head.subarray(4), data])), 0);
+  return Buffer.concat([
+    buf.subarray(0, firstIdat.start), head, data, crc, buf.subarray(firstIdat.start),
+  ]);
+}
+
 /* ─────────────────────────────── the roster run ────────────────────────────── */
 
-const INJECTORS = { jpg: injectJpegXmp, jpeg: injectJpegXmp, webp: injectWebpXmp, mp4: injectMp4Xmp };
+const INJECTORS = {
+  jpg: injectJpegXmp, jpeg: injectJpegXmp, webp: injectWebpXmp, mp4: injectMp4Xmp, png: injectPngXmp,
+};
 
 /** The one place that decides a file may be written to. Refuses `present` and `n/a`. */
 export function injectableRows(register) {

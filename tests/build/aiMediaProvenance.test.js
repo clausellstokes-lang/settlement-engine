@@ -2,9 +2,10 @@
  * tests/build/aiMediaProvenance.test.js — the AI-MEDIA PROVENANCE FLOOR.
  *
  * The estate shipped 52 AI-generated files, 74,168,828 bytes of them, all produced
- * on one paid Higgsfield account on 2026-07-18. (Two more joined on 2026-09-16: the
- * painted arrow header's strip and filler under public/brand/arrow, cut from a painting
- * the owner made with OpenAI's image service and credited by the injector that day.)
+ * on one paid Higgsfield account on 2026-07-18. (Four more joined from one OpenAI-made
+ * painting the owner supplied: the arrow header's strip and filler on 2026-09-16, and on
+ * 2026-09-19 the wax seal and the plaque cut out of that same header, all credited by the
+ * injector on the day they entered.)
  * Two tracked image pipelines
  * (scripts/optimize-backgrounds.mjs and scripts/optimize-landing-backgrounds.mjs)
  * re-encode that media with sharp, and sharp DROPS EXIF, XMP, IPTC and ICC
@@ -107,10 +108,16 @@ const register = JSON.parse(readFileSync(REGISTER_PATH, 'utf8'));
  * The roots the register is required to cover, completely. `public/brand/arrow` joined on
  * 2026-09-16 with the painted arrow header: two cuts of an OpenAI-generated painting whose
  * C2PA manifest the cut removed, credited by the injector the same day.
+ *
+ * WIDENED to the whole of `public/brand` on 2026-09-19 (ODQ §934.17), when the brand
+ * derivatives came down from that same painting: the wax seal and the plaque are cuts of
+ * credited AI art and belong under the completeness arm, not beside it. A root that stopped
+ * one directory short of them would have let two painted files enter uncatalogued — the
+ * exact way the June 2026 cohort became unattributable.
  */
 const MEDIA_ROOTS = [
   'public/backgrounds',
-  'public/brand/arrow',
+  'public/brand',
   'public/evolution',
   'public/media/journey-legs/bg',
   'public/videos',
@@ -133,9 +140,10 @@ const COHORT_A_COUNT = 23;
 
 /**
  * Every AI file the estate ships: the 6 that kept their marking + the 46 restored on
- * 2026-08-24 + the 2 arrow-header cuts credited on 2026-09-16.
+ * 2026-08-24 + the 2 arrow-header cuts credited on 2026-09-16 + the 2 brand derivatives
+ * cut from the same painting and credited on 2026-09-19.
  */
-const PRESENT_COUNT = 54;
+const PRESENT_COUNT = 56;
 
 /**
  * The six that never lost their marking. They are called out separately because
@@ -176,9 +184,13 @@ const SHARP_SCRIPTS = {
     mode: 'synthesise',
     reason: 'builds a paper-grain tile from a raw RGBA buffer it generates itself',
   },
-  'gen-organic-logo.mjs': {
-    mode: 'synthesise',
-    reason: 'rasterises estate-authored SVG strings into the favicon and OG PNGs',
+  'derive-brand-marks.mjs': {
+    mode: 'reencode',
+    reason:
+      'cuts the wax seal and the plaque out of the painted arrow header and builds the icon '
+      + 'set and the share cards from them, so it reads shipped AI art and its outputs carry '
+      + 'the credit (the two painted crops are registered rows; sharp cannot write XMP into a '
+      + 'PNG, so the script stamps them with the committed injector instead)',
   },
 };
 
@@ -690,6 +702,8 @@ describe('no pipeline in scripts/ may strip provenance', () => {
   it('the scan really found the sharp scripts (it is not looking at nothing)', () => {
     expect(usingSharp.length).toBeGreaterThan(0);
     expect(usingSharp).toContain('optimize-backgrounds.mjs');
+    // The brand derivatives read the painted header, so their pipeline is in scope too.
+    expect(usingSharp).toContain('derive-brand-marks.mjs');
   });
 
   it('every script that uses sharp is declared in the roster', () => {

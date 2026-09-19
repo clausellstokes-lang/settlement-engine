@@ -1,29 +1,28 @@
 /**
- * tests/design/organicLogo.test.js — THE HOUSE DEVICE contract (owner-approved
- * final mark, 2026-07-18).
+ * tests/design/organicLogo.test.js — THE HOUSE DEVICE contract (the 2026-07-18 mark,
+ * still the dossier's vector charter mark after the 2026-09-19 brand re-cut).
  *
  * Pins: the canonical geometry (ring broken at the roofline chord, the station
  * triangle, the seal-point at the triangle's centroid); the mark NEVER carries
- * text; the heavy favicon weight is a REDRAW (heavier strokes), never a scale;
- * the one-ink variant still reads; the seal-point is the rubric oxblood, never
- * the destructive red; the golden SVG set is byte-stable; and the shipped public
- * assets exist in their correct formats (the ogImageRaster idiom for rasters).
- * The eager header component (components/brand/HouseDevice.jsx) is pinned
- * byte-equal to the canonical paths so the two sources can never drift.
+ * text; the heavy weight is a REDRAW (heavier strokes), never a scale; the one-ink
+ * variant still reads; the seal-point is the rubric oxblood, never the destructive
+ * red; and the golden SVG set is byte-stable. Every eager module that inlines the
+ * silhouette is pinned byte-equal to the canonical paths so the sources cannot drift.
+ *
+ * NOT here any more: the shipped icons and share cards. They are cuts of the owner's
+ * arrow painting as of ODQ §934.17 and are pinned by
+ * tests/build/brandDerivatives.test.js — see the note above the inliner block.
  */
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import {
-  DEVICE_PATHS, DEVICE_DOT, DEVICE_WEIGHTS, houseDevice, faviconSvg,
-  appleTouchIconSvg, ogImageSvg, devicePalette, HOUSE_MOTTO,
+  DEVICE_PATHS, DEVICE_DOT, DEVICE_WEIGHTS, houseDevice, devicePalette, HOUSE_MOTTO,
 } from '../../src/design/organic/logo.js';
 import { RUBRIC } from '../../src/design/organic/rubrication.js';
 import { color } from '../../src/design/tokens.js';
 import { logoSamples, LOGO_DIR } from '../../scripts/gen-organic-logo.mjs';
-
-const PUB = resolve(process.cwd(), 'public');
 
 describe('the device — canonical geometry', () => {
   it('ring + skyline + triangle follow the approved geometry (hand-inked within tolerance)', () => {
@@ -46,11 +45,11 @@ describe('the device — canonical geometry', () => {
   });
 
   it('the mark NEVER carries text (no text/tspan in any device variant)', () => {
-    for (const svg of Object.values(logoSamples())) {
+    const variants = Object.values(logoSamples());
+    expect(variants.length, 'no variants rendered, so the scan proves nothing').toBeGreaterThan(0);
+    for (const svg of variants) {
       expect(/<text|<tspan/i.test(svg)).toBe(false);
     }
-    expect(/<text/i.test(faviconSvg())).toBe(false);
-    expect(/<text/i.test(appleTouchIconSvg())).toBe(false);
   });
 
   it('the seal-point is the rubric oxblood — never the destructive red', () => {
@@ -78,48 +77,20 @@ describe('the golden SVG set (byte-stable drift guard)', () => {
   });
 });
 
-describe('the shipped public assets (format contracts, not byte-goldens)', () => {
-  const isPng = (buf) => buf.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
-  const pngDims = (buf) => ({ w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) });
-
-  it('favicon.svg is the heavy redraw with the embedded color-scheme swap', () => {
-    const svg = readFileSync(resolve(PUB, 'favicon.svg'), 'utf-8');
-    expect(svg).toContain('prefers-color-scheme: dark');
-    expect(svg).toContain(`stroke-width="${DEVICE_WEIGHTS.heavy.ring}"`);
-    expect(svg).toContain(devicePalette('light').ink);
-    expect(svg).toContain(devicePalette('dark').ink);
-  });
-
-  it('favicon.ico is a 2-image ICO container', () => {
-    const ico = readFileSync(resolve(PUB, 'favicon.ico'));
-    expect(ico.readUInt16LE(0)).toBe(0);
-    expect(ico.readUInt16LE(2)).toBe(1);   // type icon
-    expect(ico.readUInt16LE(4)).toBe(2);   // 16 + 32
-  });
-
-  it('favicon-dark.png (the Safari fallback) is a 32px PNG', () => {
-    const buf = readFileSync(resolve(PUB, 'favicon-dark.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 32, h: 32 });
-  });
-
-  it('apple-touch-icon.png is 180px full-bleed', () => {
-    const buf = readFileSync(resolve(PUB, 'apple-touch-icon.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 180, h: 180 });
-    // The SVG source keeps the device inside the central-80% maskable safe zone.
-    expect(appleTouchIconSvg()).toContain('translate(18,18) scale(2.25)');
-  });
-
-  it('og-craft.png is the declared 1200×630 social raster', () => {
-    const buf = readFileSync(resolve(PUB, 'og-craft.png'));
-    expect(isPng(buf)).toBe(true);
-    expect(pngDims(buf)).toEqual({ w: 1200, h: 630 });
-    // The og SOURCE carries the wordmark as adjacent TYPE (allowed — it is beside
-    // the mark, not inside the device group).
-    expect(ogImageSvg()).toContain('SettlementForge');
-  });
-});
+/*
+ * ⚠ THE SHIPPED-ASSET ARMS MOVED, THEY DID NOT LAPSE. This file used to pin
+ * public/favicon.svg, favicon.ico, favicon-dark.png, apple-touch-icon.png and
+ * og-craft.png as renders of this device. The owner's 2026-09-19 order (ODQ §934.17)
+ * cut every one of them out of the arrow painting instead, so they are no longer this
+ * device's output and pinning them here would be reading the wrong source. Their
+ * contracts — existence, format, declared size, determinism from the master — live in
+ * tests/build/brandDerivatives.test.js. favicon.svg, favicon-dark.png and
+ * og-default.svg are gone from the tree entirely; the ICO's 16 px layer is the painted
+ * seal too, so the device draws no shipped icon at any size.
+ *
+ * What this file still owns is the DRAWN DEVICE: its geometry, its golden SVG set, and
+ * the eager modules that inline it.
+ */
 
 describe('every eager module that INLINES the device pins to the canonical paths', () => {
   // ⚠️ A SET, NOT A FILE. This pin used to name HouseDevice.jsx alone, and the moment
