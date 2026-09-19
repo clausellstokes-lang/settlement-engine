@@ -206,3 +206,13 @@ An Opus reviewer refuted the design and the architecture against the consist at 
 **One edge, ruled by default.** A faction's power share is a chosen share the guard renormalizes; it stays a ROOT under the totality guard. Vetoable.
 
 **What this changes in the train.** EM-A1 declares five cards (world facts first) from the decision-fork registry and the wizard's option sets; EM-A2's pools are the choosers' candidate sets and the wizard's option sets; EM-B2 is pinned re-derivation — the load-bearing packet — and the lane MEASURES whether the pipeline's derivation steps run from the record's rosters without re-drawing (the culture fact is the one to expect to bite: the prose voice and the naming culture are read in many places, and the packet names every reader), STOPPING with the measured contradiction if they cannot, so that a pipeline-seam packet can precede it; EM-F2's promotion is a forge with the phantom's layer.
+
+## 15. Entity states: exile, jail, ruin, impairment (the owner, ODQ §934.46; 2026-09-19)
+
+An NPC carries a `status` and an institution a `state`, both typed roots set from a pool, both read by the derivations, both events on a canonized town.
+
+- **NPC status** ∈ { present, exiled, jailed, dead, departed, missing }. A jailed or exiled holder cannot keep a seat: the holder guard offers a successor (`fulfil`) or `proceed`; an exile may return by a later decree.
+- **Institution state** ∈ { active, impaired, ruined, destroyed, abandoned, under-construction }. An impaired or ruined institution's services and standing fall in the derivations that read it (the economy desk already reads an impaired institution); a destroyed one stands in the record as a ruin the town remembers.
+- **Destruction is a state; removal is erasure.** Both stay available, each with a cause from the removal pool. The record keeps what was destroyed; it forgets what was removed.
+- **Ops:** `set-npc-status` and `set-institution-state` join the home set (EM-B1a); `add-institution` is "created". The vocabularies are FINITE-SEMANTICS pools, never free text, and the readers that consume them are named in the packet that adds each field.
+
