@@ -1,0 +1,16 @@
+{
+  "_doc": "THE RECORD OF THE 2026-09-19 LAYOUT SACRED-HOUSE ORDER, the third act under ODQ §934.22 (after the parish-church and religious-quarter-text records, deliberately not folded into either): the spatial generator's village layout lines said 'church' outright — 'Church and green above the tideline', 'a clearing settlement: church, green, and dwellings' — so a Mesoamerican village read as a parish. The desert line already derived its sacred house from what the settlement holds; every line now does, naming the house the settlement actually has (its church, its temple, a wayside shrine) or none. Same seed, different layout sentence: the golden master and the espionage-dormancy fence re-record under this record and no other.",
+  "ownerWords": "the dossier is setting-agnostic: faith is culture, never a real-world religion named where the settlement holds no such house (§934.22, the surface-leaks order; the deity doctrine)",
+  "ownerDate": "2026-09-19",
+  "odqRow": "§934.22",
+  "cause": "THE THIRD BROWSER PASS READ 'Church and green above the tideline, a harbour lane leading down to the water' ON A MESOAMERICAN VILLAGE (Muultepec). src/generators/spatialGenerator.js spelled 'church' outright in its village layout lines and 'cathedral hill' in its riverside city line, while its desert line derived the sacred house from the settlement's own institutions. Lane 36's car ceca6a18a makes every layout row derive from the roster. Measured at the consist: 12 golden configs moved, all city|<culture>|riverside|river|civilized across the twelve cultures ('cathedral hill' → 'church hill' / 'temple hill' / 'the high ground'); no village or town config moved, because a church-holding settlement composes the identical string. The espionage-dormancy fence did not move (21/21 plain). The lane did NOT re-record; the chair re-records here.",
+  "seat": "lane 36, the browser-pass-3 lane (Opus 5, branch fix-pass3-2026-09-19, base 1d5c79a34); the chair executes the door writes from the committed consist tree",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    }
+  ]
+}
