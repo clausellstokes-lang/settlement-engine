@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 import { INK, BODY, MUTED, BORDER, GOLD, GOLD_BG, CARD_ALT, SP, FS, sans } from '../theme.js';
 import { getUsageEvents, getPriceEstimates, estimateUsd } from '../../lib/surveyorByok.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const fmtInt = (n) => (Number(n) || 0).toLocaleString('en-US');
 const fmtUsd = (n) => `$${(Number(n) || 0).toFixed(2)}`;
@@ -140,7 +140,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
         </div>
       )}
 
-      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
+      <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
         Costs are <strong>estimates</strong> from a maintained price table. No provider exposes a live balance,
         so this meter is your <em>trend</em>. Your provider’s console is the source of truth.
       </div>

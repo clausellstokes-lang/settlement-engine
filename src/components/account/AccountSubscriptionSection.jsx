@@ -18,7 +18,7 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -85,7 +85,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(124,58,237,0.06)',
               borderTop: '1px solid rgba(124,58,237,0.20)',
-              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> unlimited saves,
               neighbours, custom content, and unlimited PDF/JSON export.
@@ -113,7 +113,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(124,58,237,0.10)',
               borderTop: '1px solid rgba(124,58,237,0.25)',
-              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Try Narrate.</b> Turn this town's data
               into table-ready prose.{' '}
@@ -147,7 +147,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(208,128,32,0.10)',
               borderTop: '1px solid rgba(208,128,32,0.30)',
-              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: proseFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: AMBER }}>
                 {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}

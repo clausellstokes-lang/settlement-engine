@@ -279,7 +279,7 @@ function BrokenDependenciesRow({ items }) {
         padding: '6px 9px',
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
-        fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#7A4F0F'], lineHeight: 1.5,
+        fontSize: proseFontSize(FS.xs, mobile), color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
       <strong>Broken dependencies:</strong> {items.join(' · ')}

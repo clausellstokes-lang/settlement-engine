@@ -224,7 +224,7 @@ export default function ShareToGallery({
       padding: '7px 9px', marginTop: SP.xs,
       border: `1px solid ${BORDER2}`,
       background: CARD_ALT, color: BODY,
-      fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), lineHeight: 1.45,
+      fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45,
     }}>
       {shareNarrated && hasNarrative
         ? <Globe size={12} style={{ marginTop: 1, flexShrink: 0, color: GREEN }} />

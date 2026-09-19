@@ -356,7 +356,7 @@ export default function StructuredCampaignReconciliation({
           color: BODY,
           background: CARD_ALT,
           fontFamily: sans,
-          fontSize: chromeFontSize(FS.xs, mobile),
+          fontSize: proseFontSize(FS.xs, mobile),
           lineHeight: 1.45,
         }}>
           {recoveryNotice}
@@ -512,7 +512,7 @@ export default function StructuredCampaignReconciliation({
               color: BODY,
               background: CARD_ALT,
               fontFamily: sans,
-              fontSize: chromeFontSize(FS.xs, mobile),
+              fontSize: proseFontSize(FS.xs, mobile),
               lineHeight: 1.45,
             }}>
               {typeof executeDraft !== 'function'

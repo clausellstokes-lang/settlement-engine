@@ -218,7 +218,7 @@ export function ImportMembershipTransfers({ session }) {
       padding: SP.sm,
       color: BODY,
       fontFamily: sans,
-      fontSize: chromeFontSize(FS.xs, mobile),
+      fontSize: proseFontSize(FS.xs, mobile),
       lineHeight: 1.45,
     }}>
       <strong style={{ color: INK }}>Exclusive membership changes</strong>

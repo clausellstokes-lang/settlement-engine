@@ -13,7 +13,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 import { statusCase } from '../new/labelLadder.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Labels + one-line descriptions only. Polarity is NOT re-declared here — it is
 // read from bands.js (DIM_POLARITY), the single source the band itself is
@@ -148,7 +148,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
           inside `isOpen` is exactly where they are not looking. */}
       {scaleNote && (
         <div style={{
-          marginTop: 2, fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+          marginTop: 2, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, fontStyle: 'italic',
         }}>
           {scaleNote}
         </div>
@@ -157,7 +157,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
         <div style={{
           marginTop: SP.xs, padding: SP.xs,
           background: swatch.white, border: `1px solid ${BORDER}`,
-          fontSize: chromeFontSize(FS.xxs, mobile), color: INK, fontFamily: sans, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xxs, mobile), color: INK, fontFamily: sans, lineHeight: 1.5,
         }}>
           <div style={{ fontStyle: 'italic', color: MUTED, marginBottom: 4 }}>
             {meta.desc} {BAND_HINT[dim.band]}

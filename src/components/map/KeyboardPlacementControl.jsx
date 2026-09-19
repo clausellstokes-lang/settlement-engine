@@ -35,7 +35,7 @@ import { PLACEMENT_REJECT_COPY } from '../../hooks/useMapBridge.js';
 import { clamp01 } from '../../kernel/math.js';
 import { GOLD, INK, PARCH_100, FS, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Fractional step per arrow press (2% of the map container; Shift = 10%).
 const STEP = 0.02;
@@ -209,7 +209,7 @@ export default function KeyboardPlacementControl({
       <div style={{
         position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)',
         background: INK, color: PARCH_100, border: `1px solid ${GOLD}`,
-        padding: '6px 10px', fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, lineHeight: 1.45,
+        padding: '6px 10px', fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, lineHeight: 1.45,
         maxWidth: 320, textAlign: 'center',
       }}
       >

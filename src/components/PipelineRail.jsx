@@ -133,7 +133,7 @@ export function StepRow({ entry, isLast, traces }) {
                 padding: '6px 8px',
                 background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
-                fontSize: chromeFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
+                fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
                   {traceTargetLabel(trace)}{' '}

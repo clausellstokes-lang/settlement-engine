@@ -376,7 +376,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
                       padding: SP.sm,
                       color: BODY,
                       fontFamily: sans,
-                      fontSize: chromeFontSize(FS.xs, mobile),
+                      fontSize: proseFontSize(FS.xs, mobile),
                       lineHeight: 1.45,
                       display: 'flex',
                       flexDirection: 'column',

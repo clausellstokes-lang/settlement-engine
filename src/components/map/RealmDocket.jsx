@@ -74,7 +74,7 @@ export default function RealmDocket({ campaign }) {
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
           padding: SP.sm, border: `1px dashed ${BORDER}`,
-          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmDocket')}</span>
           <Button

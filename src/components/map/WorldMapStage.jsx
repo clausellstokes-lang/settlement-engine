@@ -23,7 +23,7 @@ import { MAP_MODES } from '../../store/mapSlice.js';
 import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, swatch, PARCH_100 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
 // C2L surface 2 — the reality-mode scroll-unfurl backdrop over the booting FMG
@@ -398,7 +398,7 @@ function WorldMapStageImpl({
                     padding: '8px 12px', background: INK,
                     color: PARCH_100,
                     border: `1px solid ${GOLD}`,
-                    fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.45,
+                    fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45,
                     pointerEvents: 'none', maxWidth: 220,
                   }}
                 >

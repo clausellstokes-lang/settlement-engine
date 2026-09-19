@@ -107,6 +107,7 @@ const propOf = (obj, name) => obj.properties?.find(
   (p) => p.type === 'Property' && !p.computed && (p.key?.name ?? p.key?.value) === name,
 );
 const numOf = (node) => (node?.type === 'Literal' && typeof node.value === 'number' ? node.value : null);
+const strOf = (node) => (node?.type === 'Literal' && typeof node.value === 'string' ? node.value : null);
 
 /**
  * ⭐ THE RENDERED ARM'S OWN PREDICATE, READ OFF THE SOURCE STYLE OBJECT.
@@ -129,7 +130,16 @@ export function proseShaped(styleObj, elementName) {
   if (weight != null && weight >= 700) return false;
   const padded = !!propOf(styleObj, 'padding') || !!propOf(styleObj, 'paddingLeft');
   const grounded = !!propOf(styleObj, 'background') || !!propOf(styleObj, 'backgroundColor') || !!propOf(styleObj, 'border');
-  if (padded && grounded) return false;                      // the pill
+  // ⛔ THE PILL IS INLINE, AND DROPPING THAT WORD COST 25 READING LINES. The rendered
+  // arm's own pill test is `inline && padded && grounded`; this one asked only the
+  // last two, so a BLOCK notice card — bordered, tinted, a paragraph inside it — was
+  // read as a chip and took the 12px floor while the walk would have demanded 14.
+  // None of the 25 was in the dossier, because the dossier's cards are <p> inside the
+  // box rather than text on the box; every other route is full of them. The predicate
+  // now says what the walk says.
+  const display = strOf(propOf(styleObj, 'display')?.value) || '';
+  const inline = elementName === 'span' || /inline/.test(display);
+  if (inline && padded && grounded) return false;            // the pill
   const lineHeight = numOf(propOf(styleObj, 'lineHeight')?.value);
   return (lineHeight != null && lineHeight >= 1.4) || elementName === 'p' || elementName === 'ProseBlock';
 }
@@ -183,11 +193,11 @@ export function bindsIdentifier(node, name) {
 
 /**
  * Every `fontSize` property in one source file, judged.
- * @returns {{bare: any[], chrome: any[], prose: any[], ruled: any[], misclassified: any[], outOfScope: any[]}}
+ * @returns {{bare: any[], chrome: any[], prose: any[], ruled: any[], suppressed: any[], misclassified: any[], outOfScope: any[]}}
  */
 export function censusOfSource(src, rel) {
   const lines = src.split('\n');
-  const found = { bare: [], chrome: [], prose: [], ruled: [], misclassified: [], outOfScope: [] };
+  const found = { bare: [], chrome: [], prose: [], ruled: [], suppressed: [], misclassified: [], outOfScope: [] };
   let ast;
   // A parse failure THROWS rather than skipping the file: a scanner that
   // silently drops what it cannot read is the vacuity this census exists against.
@@ -217,9 +227,13 @@ export function censusOfSource(src, rel) {
         found.outOfScope.push(`${where}  \`${flag.name}\` is not bound in any enclosing scope  ::  ${snippet}`);
       }
 
-      if (helper === 'chromeFontSize' && !ruledAt(lines, line)
-          && proseShaped(node.parent, enclosingElement(node))) {
-        found.misclassified.push(`${where}  ${px}px  ::  ${snippet}`);
+      if (helper === 'chromeFontSize' && proseShaped(node.parent, enclosingElement(node))) {
+        // A ruling here does not exempt a site from the floor — the line is floored
+        // either way — it overrides the CLASS, which is the higher floor. That is
+        // still an exception, so it is collected and RULINGS must name it; the
+        // misclassification is only reported when nobody wrote a reason.
+        found[ruledAt(lines, line) ? 'suppressed' : 'misclassified']
+          .push(`${where}  ${px}px  ::  ${snippet}`);
       }
       return;
     }
@@ -234,7 +248,7 @@ export function censusOfSource(src, rel) {
 
 /** An empty census tally, for accumulating across files. */
 export const emptyCensus = () => ({
-  bare: [], chrome: [], prose: [], ruled: [], misclassified: [], outOfScope: [],
+  bare: [], chrome: [], prose: [], ruled: [], suppressed: [], misclassified: [], outOfScope: [],
 });
 
 export { PHONE_CHROME_FLOOR };

@@ -124,7 +124,7 @@ export default function RealmVerbComposer({ campaign }) {
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
           padding: SP.sm, border: `1px dashed ${BORDER}`,
-          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmOrders')}</span>
           <Button
@@ -150,7 +150,7 @@ export default function RealmVerbComposer({ campaign }) {
       </div>
 
       {active && !active.verdict.available && (
-        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
+        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
           {/* Grayed-WITH-REASON (design LAW): unavailability teaches. */}
           {active.verdict.reasons.join(' ')} {active.verdict.unlocks.join(' ')}
         </div>

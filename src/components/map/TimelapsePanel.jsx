@@ -136,7 +136,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
         style={{ width: '100%', accentColor: GOLD }}
       />
 
-      <div data-testid="timelapse-frame-summary" style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), lineHeight: 1.5, padding: SP.xs, background: CARD, border: `1px solid ${BORDER2}` }}>
+      <div data-testid="timelapse-frame-summary" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5, padding: SP.xs, background: CARD, border: `1px solid ${BORDER2}` }}>
         {activeFrame && activeFrame.pulses.length > 0
           ? <>Struck: {struckNames.join(', ')}{activeFrame.pulses.length > 3 ? ` +${activeFrame.pulses.length - 3}` : ''}. </>
           : 'A quiet advance. '}

@@ -333,7 +333,7 @@ export default function AutoplacementConsent({ saves = [], onClose, announce }) 
                         data-testid={`reterrain-${m.settlementId}`}
                         style={{
                           marginLeft: 24, padding: SP.xs, border: `1px solid ${BORDER}`,
-                          background: CARD_ALT, color: SECOND, fontSize: chromeFontSize(FS.xxs, mobile), lineHeight: 1.5,
+                          background: CARD_ALT, color: SECOND, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5,
                         }}
                       >
                         <strong style={{ color: INK, fontWeight: 700 }}>{m.options.reterrain.label}.</strong>{' '}

@@ -151,7 +151,7 @@ export default function PantheonPanel({ campaign }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Realm Arcs</div>
                 {arcs.map((line, i) => (
-                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
+                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                     {line}
                   </div>
                 ))}
@@ -185,7 +185,7 @@ export default function PantheonPanel({ campaign }) {
                   const aStrength = Math.round(deityTierStrength(tierById.get(String(c.aId))) * 100);
                   const bStrength = Math.round(deityTierStrength(tierById.get(String(c.bId))) * 100);
                   return (
-                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
+                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, background: CARD, color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                       <strong>{deityName(settlementItems, c.aId)}</strong> ({c.aSeats} seat{c.aSeats === 1 ? '' : 's'}, {aStrength}% strength)
                       {' vs '}
                       <strong>{deityName(settlementItems, c.bId)}</strong> ({c.bSeats} seat{c.bSeats === 1 ? '' : 's'}, {bStrength}% strength)

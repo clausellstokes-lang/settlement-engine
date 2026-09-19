@@ -225,7 +225,7 @@ function SiegeRow({ siege }) {
     ? `${coalition.slice(0, 2).join(', ')} +${coalition.length - 2}`
     : coalition.join(' and ');
   return (
-    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
+    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
       <strong>{siege?.targetName || 'A settlement'}</strong> under siege
       {named ? <span style={{ color: BODY }}> by {named}</span> : null}
     </div>

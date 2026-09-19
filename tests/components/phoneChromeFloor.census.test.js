@@ -148,7 +148,7 @@ function surveyOf(files) {
   for (const rel of files) {
     const one = censusOfFile(rel);
     acc.floored += one.chrome.length + one.prose.length;
-    acc.ruled += one.ruled.length;
+    acc.ruled += one.ruled.length + one.suppressed.length;
     acc.bare += one.bare.length;
   }
   return acc;
@@ -171,7 +171,7 @@ const MEASURED = Object.fromEntries(
 /** Every component file any surface reaches, once. */
 const CENSUS_FILES = [...new Set(SURFACES.flatMap((s) => s.files))].sort();
 const CENSUS = (() => {
-  const all = { bare: [], chrome: [], prose: [], ruled: [], misclassified: [], outOfScope: [] };
+  const all = { bare: [], chrome: [], prose: [], ruled: [], suppressed: [], misclassified: [], outOfScope: [] };
   for (const rel of CENSUS_FILES) {
     const one = censusOfFile(rel);
     for (const key of Object.keys(all)) all[key].push(...one[key]);
@@ -217,9 +217,13 @@ const CENSUS = (() => {
  * surface cannot quietly grow new violations behind the name of the lane fixing
  * the old ones. When that lane lands, the number goes to 0 and `owner` goes with it.
  *
- * MEASURED 2026-09-19 against this tree, after the estate sweep: 514 component
- * files over 36 routes and the shell, 138 sub-floor sites left, all of them on
- * the three surfaces lane 28 owns.
+ * RE-MEASURED 2026-09-19 ON THE CONSIST (lane 34's composition). Lane 29 measured
+ * its own branch; these rows are this tree, 35 cars later, and the drift is those
+ * cars' — new files on nine surfaces, a second root on /realm, /map and /admin, and
+ * lane 28's shared ClerkNote site floored in the consist (/realm and /map bare 1 ->
+ * 0). Nothing here raises a floor; every number is a count.
+ *   554 component files over 36 routes and the shell, 127 sub-floor sites left,
+ *   all of them still on the three surfaces lane 28 owns (98 + 19 + 10).
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -227,21 +231,21 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate, src/components/home, src/components/pricing or the
   // /create-only panels in src/components — none of it is reachable from any
   // other route except the four ClerkNote sites the Realm shares, named below.
-  '/create':                { roots: 1, files: 163, floored: 738, ruled: 3, bare: 109, owner: 'lane 28 — the create page + the tier picker' },
-  '/home':                  { roots: 1, files: 17, floored: 2, ruled: 3, bare: 22, owner: 'lane 28 — the landing' },
-  '/pricing':               { roots: 1, files: 14, floored: 6, ruled: 3, bare: 11, owner: 'lane 28 — the pricing page' },
+  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 98, owner: 'lane 28 — the create page + the tier picker' },
+  '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
+  '/pricing':               { roots: 1, files: 14, floored: 7, ruled: 3, bare: 10, owner: 'lane 28 — the pricing page' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
-  '/realm':                 { roots: 1, files: 150, floored: 483, ruled: 1, bare: 1, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
-  '/map':                   { roots: 1, files: 150, floored: 483, ruled: 1, bare: 1, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/realm':                 { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
+  '/map':                   { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
 
-  '/settlements':           { roots: 1, files: 205, floored: 990, ruled: 3, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
-  '/about/what-this-is':    { roots: 1, files: 14, floored: 4, ruled: 1, bare: 0 },
+  '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
-  '/admin':                 { roots: 1, files: 26, floored: 85, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 153, floored: 794, ruled: 3, bare: 0 },
+  '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
+  '/gallery':               { roots: 1, files: 154, floored: 795, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
@@ -274,7 +278,7 @@ const ROUTE_BASELINE = Object.freeze({
 
   // App.jsx's own chrome. It is on the list because it renders on every route and
   // AppViews names none of it — the exact shape of hole this rewrite closes.
-  '(shell)':                { roots: 1, files: 60, floored: 138, ruled: 3, bare: 0 },
+  '(shell)':                { roots: 1, files: 61, floored: 138, ruled: 3, bare: 0 },
 });
 
 /**
@@ -296,6 +300,13 @@ const RULINGS = Object.freeze({
   'src/components/primitives/Badge.jsx': { count: 2, why: 'the desktop size ladder; floored at the `SIZES[size]` read inside Badge' },
   'src/components/primitives/Button.jsx': { count: 1, why: 'the desktop size ladder; floored at the `SIZES[size]` read inside Button' },
   'src/components/primitives/FounderBadge.jsx': { count: 2, why: 'the desktop size ladder; floored at the `SIZES[size]` read inside FounderBadge' },
+  // Lane 28's, and it surfaces here only in the composed tree: it is a CLASS ruling on a
+  // chromeFontSize call, which the arm collected for the first time in the car above.
+  'src/components/generate/FoundingWorlds.jsx': { count: 1, why: 'two- and three-word tag chips glanced at beside the teaser, whose 1.5 line-height alone reads as prose to the shape heuristic' },
+  // The one CLASS ruling. `pillStyle` is a detached style factory, so this arm sees
+  // no element for it and reads the box as a block card; its single consumer is a
+  // `<span role="tooltip">`, which is the inline chip the pill test is about.
+  'src/components/BuyThisDossier.jsx': { count: 1, why: 'an inline tooltip pill, consumed on a <span> the source scanner cannot see from a detached factory' },
 });
 
 // ── the arms ─────────────────────────────────────────────────────────────────
@@ -391,7 +402,11 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
 
   test('every written ruling is registered, with its reason and its count', () => {
     const byFile = new Map();
-    for (const line of CENSUS.ruled) {
+    // BOTH KINDS. A ruling on a bare literal exempts the site from the floor; a
+    // ruling on a helper call overrides the CLASS the site is held to. The second
+    // is a smaller act and it is still an act, and it was unregistered for exactly
+    // one commit — which is one commit of an exception nobody had to justify.
+    for (const line of [...CENSUS.ruled, ...CENSUS.suppressed]) {
       const rel = line.slice(0, line.indexOf(':'));
       byFile.set(rel, (byFile.get(rel) || 0) + 1);
     }
@@ -489,6 +504,26 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
       'control.jsx',
     );
     expect(pill.misclassified, 'a padded, grounded pill is misread as prose').toEqual([]);
+
+    // THE PILL IS INLINE. The same box as a <div> is a notice card, not a chip, and
+    // the rendered arm holds it to the prose floor — this is the 25-site class.
+    const blockCard = censusOfSource(
+      'export const A = ({ mobile }) => <div style={{ fontSize: chromeFontSize(FS.xs, mobile), '
+      + 'lineHeight: 1.5, padding: 2, background: g }}>x</div>;',
+      'control.jsx',
+    );
+    expect(blockCard.misclassified.length, 'a BLOCK padded card is read as a pill — the inline test is gone').toBe(1);
+
+    // A written ruling moves that site from "unexplained" to "registered", and the
+    // two buckets must never both claim it.
+    const ruledCard = censusOfSource(
+      '// phone-floor: it is really an inline tooltip\n'
+      + 'export const A = ({ mobile }) => <div style={{ fontSize: chromeFontSize(FS.xs, mobile), '
+      + 'lineHeight: 1.5, padding: 2, background: g }}>x</div>;',
+      'control.jsx',
+    );
+    expect(ruledCard.misclassified, 'a ruled class-override is still reported as unexplained').toEqual([]);
+    expect(ruledCard.suppressed.length, 'a ruled class-override is no longer collected for RULINGS').toBe(1);
   });
 
   test('the derivation reaches the surfaces it is supposed to reach (executed controls)', () => {

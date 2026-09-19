@@ -328,6 +328,9 @@ const captionStyle = (mobile) => ({ fontSize: proseFontSize(FS.xs, mobile), colo
 const pillStyle = (mobile) => ({
   position: 'absolute', bottom: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
   whiteSpace: 'nowrap', padding: '4px 10px',
+  // Its one consumer is an inline <span> carrying role="tooltip" — which a source
+  // scanner cannot see from a detached factory, so it reads the box as a block card.
+  // phone-floor: an inline tooltip chip, not a card; it keeps the chrome floor.
   background: INK, color: PARCH, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, lineHeight: 1.4,
   pointerEvents: 'none', transition: 'opacity 0.15s ease', zIndex: 5,
 });

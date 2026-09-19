@@ -1,6 +1,6 @@
 import { BODY, FS, swatch } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export function definitionIdOf(item) {
   return String(item?.definitionId || item?.id || '');
@@ -39,7 +39,7 @@ export function StatusNotice({ children }) {
         borderLeft: `3px solid ${swatch.success}`,
         background: `${swatch.success}0d`,
         color: BODY,
-        fontSize: chromeFontSize(FS.xs, mobile),
+        fontSize: proseFontSize(FS.xs, mobile),
         lineHeight: 1.45,
       }}
     >
@@ -60,7 +60,7 @@ export function ErrorNotice({ children }) {
         borderLeft: `3px solid ${swatch.danger}`,
         background: `${swatch.danger}0d`,
         color: BODY,
-        fontSize: chromeFontSize(FS.xs, mobile),
+        fontSize: proseFontSize(FS.xs, mobile),
         lineHeight: 1.45,
       }}
     >

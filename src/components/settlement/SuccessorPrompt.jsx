@@ -28,7 +28,7 @@ import DialogClose from '../primitives/DialogClose.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function SuccessorPrompt() {
   const mobile = useIsMobile();
@@ -180,7 +180,7 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
-              fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: swatch['#7A4F0F'],
+              fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,
