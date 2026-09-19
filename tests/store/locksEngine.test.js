@@ -53,6 +53,11 @@ const stubSlice = () => ({
   institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
   customContent: {}, importedNeighbour: null, campaigns: [], campaignsLoaded: true,
   isTierAllowed: () => true,
+  // A free account customizes its pre-generation dials (§934.34: 'customize' is free with
+  // an account). The generate action fails CLOSED when a store cannot answer this — a
+  // hand-built store without the selector is treated as an anonymous forge, everything on
+  // random — so the stub must say what the real slice says for the account it models.
+  canCustomizePreGeneration: () => true,
   canSave: () => true,
   maxSaves: () => 50,
   setPurchaseModalOpen: () => {},
