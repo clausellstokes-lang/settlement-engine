@@ -1,6 +1,27 @@
 import { useEffect, useRef } from 'react';
 
 /**
+ * ⭐ A FOCUS TARGET MAY NAME A TAB INSTEAD OF AN ENTITY (ODQ §934.26).
+ *
+ * The Realm leaves the phone, and /realm answers with a notice whose door is the
+ * dossier's Relationships tab (components/map/RealmPhoneNotice.jsx) — a surface that
+ * wants to land on a TAB and has no entity to name. Rather than mint a second store
+ * action (and the operation-registry row and EXEMPT_CEILING raise that come with one),
+ * that door stamps the SAME transient `focusEntity` target under a reserved `tab:`
+ * prefix, and this hook honours it.
+ *
+ * ⛔ THE PREFIX IS RESERVED, NOT MERELY UNUSED. Entity ids are built by
+ * domain/dossier/entityLinks.js from a type and a slug (`faction.iron_guild`, `npc_3`);
+ * none begins `tab:`, and tests/components/realmPhoneNotice.test.jsx asserts that over
+ * the real index so the two namespaces cannot collide.
+ *
+ * The existing guard does the rest: a tab that is not present on THIS settlement fails
+ * `allTabs.some(...)` and the request waits rather than selecting nothing — so a door to
+ * Relationships on a settlement that has no relational content is a no-op, never a lie.
+ */
+const TAB_TARGET = /^tab:(.+)$/;
+
+/**
  * useCrossSettlementFocus — land a CROSS-SETTLEMENT inspector-link navigation on
  * the right tab + card once this dossier mounts (INSPECTOR-ADDRESS-WEB, owner
  * 2026-07-22).
@@ -31,7 +52,8 @@ export function useCrossSettlementFocus({ focusedEntity, index, allTabs, saveId,
     if (!fe?.id) return;
     const guard = `${saveId ?? ''}:${fe.ts}`;
     if (handledRef.current === guard) return;
-    const entry = index?.resolve?.(fe.id);
+    const asTab = TAB_TARGET.exec(fe.id);
+    const entry = asTab ? { tab: asTab[1], anchor: null } : index?.resolve?.(fe.id);
     if (!entry || !allTabs.some(t => t.id === entry.tab)) return; // not here yet / gated -> wait
     handledRef.current = guard;
     if (entry.tab !== activeTab) setActiveTab(entry.tab, 'entity_link');

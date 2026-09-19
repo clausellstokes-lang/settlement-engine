@@ -29,7 +29,7 @@ import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
-import { allowsFloatingFeedback, guardForView, redirectForView, viewToPath, NAV } from './lib/routes.js';
+import { allowsFloatingFeedback, barNav, guardForView, redirectForView, viewToPath, NAV_FLOW } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import {
   GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
@@ -78,18 +78,18 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // lazy so both stay off first paint; each self-gates on `visible`.
 const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
 
-// Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
-// NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
-// falls past the slice. REALM is restored to the bar (owner walk ruling, ODQ
-// §767.3(f)): a phone user must reach the realm from the product's core flow,
-// and the Realm has carried an honest phone surface since RealmMobileGate (the
-// read-only dashboard + companion) — the old "too constrained for small
-// screens" omission described a workspace that no longer answers for the whole
-// route. About yields its bar seat by priority (lowest, evicted by the 5-seat
-// cap below) and keeps its mobile door in the footer's LegalRibbonRow. From 640 to
-// 1023 px the bar shows all six seats (the painted words show from 1024 up).
+// ⭐ THE BAR'S ITEMS COME FROM lib/routes.js `barNav`, WHICH IS THE PAINTING'S OWN ORDER
+// (owner, ODQ §934.26 + its addendum). The explicit MOBILE_NAV_PRIORITY array that used
+// to live here is retired with the Realm's phone seat: it existed only to choose which
+// tab the five-seat cap evicted, and with five destinations for five seats there is
+// nothing to evict. Its retirement is also what makes "one order everywhere" true —
+// the array had Gallery before Compendium while the painting has them the other way.
 // Welcome/home is reached via the painted arrow's home control.
-const MOBILE_NAV_PRIORITY = ['generate', 'settlements', 'realm', 'gallery', 'compendium', 'about-what-this-is'];
+//
+// THE HAIRLINE (§934.26: "with a hairline after the working pair (Create, Library)
+// before the reference pages"). The bar's own top rule, written once and read twice, so
+// the divider is the same ink as the edge above it and the raw-colour budget is unmoved.
+const BAR_RULE = '1px solid rgba(160,118,42,0.25)';
 
 // Is there a persisted Supabase session token on this device? A member returning
 // to the bare root should wait for their session to restore (so they aren't
@@ -537,11 +537,15 @@ export default function App() {
   };
 
   // Nav is derived wholesale from routes.js (each ROUTES entry with a `nav` block).
-  // Adding / relabelling / reordering a tab is a one-place edit in routes.js.
-  const mobileNav = MOBILE_NAV_PRIORITY
-    .map(id => NAV.find(item => item.id === id))
-    .filter(Boolean)
-    .slice(0, isMobile ? 5 : 6);
+  // Adding / relabelling / reordering a tab is a one-place edit in routes.js. On the
+  // phone the Realm leaves the bar (§934.26); the tablet keeps all six seats.
+  const mobileNav = barNav(isMobile);
+  // THE HAIRLINE'S SEAT, DERIVED AND NEVER COUNTED (§934.26: "a hairline after the
+  // working pair (Create, Library) before the reference pages"). The working run is the
+  // create flow, and NAV_FLOW already says what it is; the rule goes on the FIRST cell
+  // whose predecessor does not feed it. Writing `i === 2` would put the hairline in the
+  // wrong place the day a destination is added, which is the drift this bar just left.
+  const referenceFrom = mobileNav.findIndex((item, i) => i > 0 && NAV_FLOW[mobileNav[i - 1].id] !== item.id);
 
   // Per-view painted background. On the Create page a generation flow blows up the
   // chosen settlement scene; see src/config/pageBackgrounds.js + index.css.
@@ -599,13 +603,16 @@ export default function App() {
           <nav aria-label="Primary" style={{
             position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
             background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-            borderTop: '1px solid rgba(160,118,42,0.25)',
+            borderTop: BAR_RULE,
             display: 'flex',
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
             {mobileNav.map(({ id, label }, i) => {
               const active = view === id;
+              // Phone only: on the tablet the Realm is still part of the working run and
+              // the flow chevrons carry the same reading without a rule.
+              const opensReference = isMobile && i === referenceFrom;
               return (
                 <button
                   key={id}
@@ -623,8 +630,13 @@ export default function App() {
                     minHeight: 44,
                     padding: `${SP.sm + 2}px 2px`,
                     background: active ? GOLD_BG : 'transparent',
-                    border: 'none',
+                    // LONGHANDS ONLY (design/edgedBox.js's law, ODQ §934.22 item 4a): the
+                    // retired `border: 'none'` sat beside a varying `borderTop`, and the
+                    // left edge now varies too. Four sides, each written once.
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
+                    borderRight: 'none',
+                    borderBottom: 'none',
+                    borderLeft: opensReference ? BAR_RULE : 'none',
                     cursor: 'pointer',
                     color: active ? GOLD : PARCH_100,
                     // ⭐ THE CHROME FLOOR REACHES THE PRIMARY NAV (ODQ §934.22 item 2).
@@ -644,7 +656,10 @@ export default function App() {
                   }}
                 >
                   <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
-                  {/* Flow chevrons: Create feeds Library and Library feeds Realm, both drawn. */}
+                  {/* Flow chevrons, by NAV_FLOW's adjacency guard: on the tablet Create
+                      feeds Library and Library feeds Realm, so both draw; on the phone the
+                      Realm is not a seat, so only the first draws and the hairline above
+                      says where the working pair ends. */}
                   <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
                 </button>
               );
@@ -664,7 +679,17 @@ export default function App() {
         <main id="main-content" ref={mainRef} tabIndex={-1} className="app-route-main" style={{
           flex: 1, outline: 'none',
           paddingTop: view === 'home' ? `${isMobile ? SP.md : SP.lg}px` : `calc(${ARROW_HANG} + ${isMobile ? SP.md : SP.lg}px)`,
-          paddingRight: `${isMobile ? SP.md : SP.xxl}px`, paddingBottom: `${isMobile ? CHROME.mainPadMobile : SP.lg}px`, paddingLeft: `${isMobile ? SP.md : SP.xxl}px`,
+          paddingRight: `${isMobile ? SP.md : SP.xxl}px`,
+          // ⭐ THE PHONE'S LAST ELEMENT IS REACHABLE (the owner, 2026-09-19: "note how the
+          // See Cartographer and the button for instant generate settlements are cut off
+          // and can't be scrolled down to"). The reserve was the bare number
+          // CHROME.mainPadMobile (100) — enough today, but a constant that knows nothing
+          // about the bar it is clearing, so a taller bar or a device with a deeper home
+          // indicator would silently eat the page's last control. It is now the MAXIMUM of
+          // that reserve and the bar's own measured height plus its safe-area inset, so it
+          // can never be smaller than the chrome it clears and never shrinks from today.
+          paddingBottom: isMobile ? `max(${CHROME.mainPadMobile}px, ${BOTTOM_NAV_H})` : `${SP.lg}px`,
+          paddingLeft: `${isMobile ? SP.md : SP.xxl}px`,
         }}>
           {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
               from inside Suspense. Without a boundary here that throw escapes to the

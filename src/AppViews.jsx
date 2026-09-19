@@ -48,6 +48,9 @@ const HowToUse        = lazy(() => import('./components/HowToUse'));
 // operational half is HowToUse above, now /about/guide.
 const AboutWhatThisIs = lazy(() => import('./components/about/AboutWhatThisIs.jsx'));
 const WorldMap         = campaignLazy(() => import('./components/WorldMap.jsx'));
+// THE REALM LEAVES THE PHONE (owner, ODQ §934.26). Lazy like every other view body, and
+// a leaf: on the width where it renders, WorldMap's whole graph is never reached.
+const RealmPhoneNotice = lazy(() => import('./components/map/RealmPhoneNotice.jsx'));
 const AccountPage      = campaignLazy(() => import('./components/AccountPage.jsx'));
 const AdminPanel       = campaignLazy(() => import('./components/AdminPanel.jsx'));
 // What a NON-staff visitor meets at a staff-only route. Lazy so the refusal
@@ -128,9 +131,17 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           one frame before the redirect effect upgrades the URL to /realm, so
           there's no blank flash. The Realm map is the ONE icons-on surface — the
           IconsContext.Provider opts this subtree in; everything else renders
-          icons-off via the default (false) IconsContext. */}
-      {(view === 'realm' || view === 'map') && (
-        <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
+          icons-off via the default (false) IconsContext.
+
+          ⛔ ON A PHONE THE ROUTE ANSWERS INSTEAD OF RENDERING (owner, ODQ §934.26:
+          "No realm view for phone but it can be viewed on a tablet"). The branch is
+          HERE rather than inside WorldMap because the order is about the DESTINATION,
+          not about the workspace's layout: at phone width the realm is not a place
+          this product goes, and the map's whole chunk is never fetched to say so.
+          The address is kept — never a redirect — and the notice is never blank. */}
+      {(view === 'realm' || view === 'map') && (isMobile
+        ? <RealmPhoneNotice />
+        : <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
       {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
       {/* THE ABOUT FAMILY. `howto`, `about` and the compare* views are retired

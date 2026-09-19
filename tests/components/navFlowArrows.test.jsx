@@ -13,21 +13,27 @@
  * now the owner's arrow painting (components/nav/ArrowHeader.jsx), whose six painted
  * words are the primary nav from 1024 px up; the painting carries no drawn mark of
  * ours, so NavFlowArrow never mounts in the header. The bottom bar (below 1024 px)
- * keeps NavFlowArrow untouched and is the live behavioural pin:
+ * keeps NavFlowArrow untouched and is the live behavioural pin.
  *
- *   • painted header (1024 px and up)   Create · Library · Realm · …  → NO arrows
- *   • bottom bar (below 1024 px)         Create · Library · Realm · …  → both arrows
+ * ⚠️ SURFACE CHANGE, 2026-09-19 (the owner, ODQ §934.26, SUPERSEDING §767.3(f) on
+ * exactly this point): "I would remove the realm from the phone. No realm view for
+ * phone but it can be viewed on a tablet." So the one bar is now two compositions, and
+ * the adjacency guard — the reason this file exists — is what makes that cost no edit:
+ *
+ *   • painted header (1024 px and up)  Create · Library · Realm · …    → NO arrows
+ *   • tablet bar (640 to 1023 px)      Create · Library · Realm · …    → BOTH arrows
+ *   • phone bar (below 640 px)         Create · Library | Compendium…  → ONE arrow
+ *
+ * On the phone, Library's declared successor (Realm) is not the cell rendered next, so
+ * the second chevron correctly does not draw and a hairline marks the working pair's
+ * end instead. NAV_FLOW itself is UNCHANGED: the flow is still Create → Library →
+ * Realm, and the guard reads it against each surface rather than against an ordering.
+ * That is the whole argument for writing it as a relation, and this file is where it is
+ * paid for.
  *
  * The retired ribbon's journey marks (the seam dividers and the fletched band) left
  * with the ribbon. Welcome is still not a nav cell: the arrow's nock and logo plate
  * are the home control.
- *
- * The bar CARRIES Realm (owner walk ruling, ODQ §767.3(f): a phone user must reach
- * the realm from the core flow; About yielded its phone seat by priority and kept a
- * footer door), so the full Create → Library → Realm flow draws BOTH chevrons on the
- * one live mount. Pinning both surfaces in one file is still the point: a future
- * NAV/priority reorder that breaks the pairing reds here, and a header re-mount of
- * the arrow reds as a double-drawn journey mark.
  *
  * App.jsx is a pure layout shell over the Zustand store + path router, so the
  * store, the route hook, the breakpoint hook and the routed view are stubbed —
@@ -44,6 +50,11 @@ import NavFlowArrow from '../../src/components/nav/NavFlowArrow.jsx';
 const H = vi.hoisted(() => ({
   route: { view: 'generate', params: {}, legacy: false, notFound: false },
   isMobile: false,
+  // The painted arrow's OWN switch is useIsMobile(1024); the bar's composition is
+  // useIsMobile() at 640. They were one flag here until §934.26 made the phone and the
+  // tablet different bars, so the two breakpoints are now driven apart (the
+  // pinnedFooter.test.jsx idiom). `narrow: null` follows isMobile, as before.
+  narrow: null,
   storeState: null,
 }));
 
@@ -67,7 +78,9 @@ vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { auth: { getUser: () => Promise.resolve({ data: { user: null } }) } },
 }));
 
-vi.mock('../../src/hooks/useIsMobile', () => ({ default: () => H.isMobile }));
+vi.mock('../../src/hooks/useIsMobile', () => ({
+  default: (bp) => (bp === 1024 ? (H.narrow ?? H.isMobile) : H.isMobile),
+}));
 
 vi.mock('../../src/lib/stripe.js', () => ({
   checkCheckoutResult: () => null,
@@ -143,6 +156,7 @@ const arrows = (container) => [...container.querySelectorAll('[data-testid^="nav
 beforeEach(() => {
   H.route = { view: 'generate', params: {}, legacy: false, notFound: false };
   H.isMobile = false;
+  H.narrow = null;
   H.storeState = makeState();
   window.history.replaceState(null, '', '/create');
 });
@@ -199,7 +213,9 @@ describe('the painted header (1024 px and up): the words are the nav, and no flo
   });
 });
 
-describe('the bottom bar (below 1024 px): the core flow reads whole (§767.3(f))', () => {
+describe('the bottom bar (below 1024 px): two compositions, one flow declaration', () => {
+  // The default in this block is the PHONE (both flags mobile); the tablet arms raise
+  // `narrow` on their own, which is the only place the two breakpoints differ.
   beforeEach(() => { H.isMobile = true; });
 
   test('the surviving chevron hangs off the tab that FEEDS, not the one that receives', () => {
@@ -238,34 +254,126 @@ describe('the bottom bar (below 1024 px): the core flow reads whole (§767.3(f))
     expect(onActive).not.toBe(onResting);
   });
 
-  test('the whole core flow draws: Create → Library → Realm, and no arrow past Realm (§767.3(f))', () => {
+  test('the TABLET bar draws the whole core flow: Create → Library → Realm, and nothing past it', () => {
+    // 640 to 1023 px: the painted words have left the header but the Realm is still a
+    // destination (§934.26: "it can be viewed on a tablet"), so the flow reads whole.
+    H.isMobile = false;
+    H.narrow = true;
     const { container } = render(<App />);
 
-    // Pin the composition first: Realm holds the third seat (About yielded its
-    // seat by priority and kept its footer door), so the assertions below are
-    // about the arrows and not about a bar that lost a tab. The footer ribbon
-    // now carries its own About button, so the census excludes the footer nav —
-    // this pin is about the BAR's seats.
+    // Pin the composition first, so the assertions below are about the arrows and not
+    // about a bar that lost a tab. The footer ribbon carries its own About button, so
+    // the census excludes the footer nav — this pin is about the BAR's seats.
     const labels = [...container.querySelectorAll('button')]
       .filter((b) => !b.closest('nav[aria-label="Footer"]'))
       .map((b) => b.textContent.trim())
       .filter((txt) => ['Create', 'Library', 'Gallery', 'Compendium', 'About', 'Realm'].includes(txt));
-    expect(labels).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium']);
-    // And the About door really does survive in the footer (the eviction's
-    // other half — losing it there would strand About on mobile entirely).
-    const footerAbout = [...container.querySelectorAll('nav[aria-label="Footer"] button')]
-      .map((b) => b.textContent.trim());
-    expect(footerAbout).toContain('About');
+    expect(labels).toEqual(['Create', 'Library', 'Realm', 'Compendium', 'Gallery', 'About']);
 
     // Both flow chevrons draw — the saved settlement's journey reads whole.
     expect(screen.getByTestId('nav-flow-generate-settlements')).toBeTruthy();
     expect(screen.getByTestId('nav-flow-settlements-realm')).toBeTruthy();
-    // And nothing teaches a false step past the flow's end (Realm → Gallery).
-    expect(screen.queryByTestId('nav-flow-realm-gallery')).toBeNull();
+    // And nothing teaches a false step past the flow's end (Realm → Compendium).
+    expect(screen.queryByTestId('nav-flow-realm-compendium')).toBeNull();
     expect(arrows(container).map((a) => a.dataset.testid)).toEqual([
       'nav-flow-generate-settlements',
       'nav-flow-settlements-realm',
     ]);
+  });
+
+  test('the PHONE bar drops the Realm, so the second chevron stops drawing by the guard alone (§934.26)', () => {
+    const { container } = render(<App />);
+
+    // The owner's five, in the painting's order, and no Realm among them.
+    const labels = [...container.querySelectorAll('button')]
+      .filter((b) => !b.closest('nav[aria-label="Footer"]'))
+      .map((b) => b.textContent.trim())
+      .filter((txt) => ['Create', 'Library', 'Gallery', 'Compendium', 'About', 'Realm'].includes(txt));
+    expect(labels).toEqual(['Create', 'Library', 'Compendium', 'Gallery', 'About']);
+
+    // ⭐ THE GUARD IS THE POINT. NAV_FLOW still says Library feeds Realm; Realm is simply
+    // not the cell rendered next here, so the chevron that would teach a false step is
+    // withheld with no edit to the flow declaration.
+    expect(NAV_FLOW.settlements, 'the flow declaration itself moved').toBe('realm');
+    expect(arrows(container).map((a) => a.dataset.testid)).toEqual(['nav-flow-generate-settlements']);
+    // anchored: the surviving chevron above proves the bar really drew its marks, so this
+    // absence is the guard working and not an unrendered bar.
+    expect(screen.queryByTestId('nav-flow-settlements-realm')).toBeNull();
+    expect(screen.queryByTestId('nav-flow-settlements-compendium')).toBeNull();
+  });
+
+  test('the hairline replaces the withheld chevron, on the phone only', () => {
+    // §934.26: "a hairline after the working pair (Create, Library) before the reference
+    // pages". The rule lives on the cell that OPENS the reference run, so exactly one
+    // bar cell carries a left border and it is Compendium's.
+    const seats = (root) => [...root.querySelectorAll('nav[aria-label="Primary"] button')];
+    const phone = render(<App />);
+    const ruled = seats(phone.container).filter((b) => b.style.borderLeft && b.style.borderLeft !== 'none');
+    expect(seats(phone.container).length, 'presence control: the phone bar drew its seats').toBe(5);
+    expect(ruled.map((b) => b.textContent.trim())).toEqual(['Compendium']);
+    phone.unmount();
+
+    H.isMobile = false;
+    H.narrow = true;
+    const tablet = render(<App />);
+    expect(seats(tablet.container).length, 'presence control: the tablet bar drew its seats').toBe(6);
+    // anchored: the tablet's six seats are asserted above, so an empty rule list here is
+    // measured against a bar that really rendered.
+    expect(seats(tablet.container).filter((b) => b.style.borderLeft && b.style.borderLeft !== 'none')).toEqual([]);
+  });
+
+});
+
+/**
+ * ⛔ ABOUT APPEARS ONCE PER SURFACE (the owner, ODQ §934.26 addendum).
+ *
+ * About used to hold a footer door BECAUSE the bar's five-seat cap evicted it. The cap is
+ * gone with the Realm's phone seat, so About has a seat at every width the bar draws and a
+ * painted plate above 1024 — and the footer link had quietly become the second door on
+ * every surface. The rule is enforced by ONE predicate over the ONE nav order
+ * (components/footer/LegalRibbonRow.jsx `footerLinks`), and these arms measure the WHOLE
+ * DOCUMENT, which is the only place the duplication was ever visible.
+ */
+describe('ABOUT APPEARS ONCE PER SURFACE (§934.26 addendum)', () => {
+  /** Every control in the document whose visible name is exactly About. */
+  const aboutControls = (container) => [...container.querySelectorAll('button')]
+    .filter((b) => b.textContent.trim() === 'About');
+
+  test('at 1440 there is exactly one About, and it is the painted plate', () => {
+    const { container } = render(<App />);
+    // Positive control: the header really drew its six painted words, so "exactly one"
+    // is measured against a rendered nav and not against a page that failed.
+    const painted = [...container.querySelectorAll('header nav button')].map((b) => b.textContent.trim());
+    expect(painted).toEqual(NAV.map((n) => n.label));
+
+    const abouts = aboutControls(container);
+    expect(abouts).toHaveLength(1);
+    expect(abouts[0].closest('header'), 'the one About is not in the header').not.toBeNull();
+    expect(abouts[0].closest('nav[aria-label="Footer"]'), 'About is still in the footer row').toBeNull();
+  });
+
+  test('at 375 there is exactly one About, and it is the bar seat', () => {
+    H.isMobile = true;
+    const { container } = render(<App />);
+    // Positive control: the phone bar drew its five seats.
+    expect(container.querySelectorAll('nav[aria-label="Primary"] button')).toHaveLength(5);
+
+    const abouts = aboutControls(container);
+    expect(abouts).toHaveLength(1);
+    expect(abouts[0].closest('nav[aria-label="Primary"]'), 'the one About is not in the bar').not.toBeNull();
+    expect(abouts[0].closest('footer'), 'About is still in the phone footer').toBeNull();
+  });
+
+  test('the footer keeps its own destinations at both widths (it lost a duplicate, not a row)', () => {
+    for (const mobile of [false, true]) {
+      H.isMobile = mobile;
+      const view = render(<App />);
+      const labels = [...view.container.querySelectorAll('nav[aria-label="Footer"] button')]
+        .map((b) => b.textContent.trim());
+      expect(labels, `the footer row emptied at ${mobile ? 375 : 1440}`)
+        .toEqual(['Pricing', 'Feedback & support', 'Terms', 'Privacy', 'Guide', 'Roadmap']);
+      view.unmount();
+    }
   });
 });
 

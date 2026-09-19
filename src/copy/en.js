@@ -109,14 +109,17 @@ export const en = Object.freeze({
       rerollMany:       'rerolls',
     },
     // ── Anonymous cap framed as an unlock ───────────────────────────────
-    // ⛔ THE UNLOCK NAMED SIZES THE READER ALREADY HAD. TIER_GATE.anon.maxTier is
-    // 'town' (store/authSlice.js), so an anonymous visitor reaches thorp through
-    // town already — the headline one line up says so. What signing in actually
-    // adds is city and metropolis (TIER_GATE.free.maxTier 'capital'), plus saves.
-    // "reach thorp through metropolis" sold back three sizes the reader had spent.
+    // ⛔ THE UNLOCK NAMED SIZES THE READER ALREADY HAD, AND THEN TOO FEW. The first
+    // cut said "reach thorp through metropolis" and sold back three sizes the reader
+    // had spent; the correction said "city and metropolis" and was short a THORPE,
+    // because the anonymous sizes are the three the headline names and a thorpe is not
+    // among them (the owner, 2026-09-19). ⚠ THIS STRING IS NOT INTERPOLATED — nothing
+    // supplies it vars — so the list is written out, and tests/copy/signInUnlocks.test.js
+    // binds it to config/tierFacts.js signInUnlocksSizes(): the words cannot drift from
+    // the derivation without redding.
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      body:       'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -127,7 +130,12 @@ export const en = Object.freeze({
     anonCap: {
       signin:    'Sign in (free)',
       spent:     'You’ve explored hamlet, village, town.',
-      unlockTpl: '{signin} to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      // ⛔ THE SIZES ARE INTERPOLATED, NEVER TYPED (the owner, 2026-09-19). This twin
+      // said "city and metropolis" and so did the sentence that renders (HomeHero) —
+      // both owed the reader a THORPE as well, since the anonymous sizes are the three
+      // `spent` names. `{sizes}` comes from config/tierFacts.js signInUnlocksSizes(),
+      // the ladder minus the anonymous set, so a ceiling that moves rewrites this line.
+      unlockTpl: '{signin} to reach {sizes} and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
@@ -410,14 +418,20 @@ export const en = Object.freeze({
   // have their words in `errors.*`, written for exactly them and pinned by the
   // error-copy register. Those reasons point at the existing key instead of restating
   // it; the walker follows the pointer and proves it resolves.
+  // ⛔ `{sizes}` IS SUPPLIED BY THE NOTICE, NOT BY THE GATE (the owner, 2026-09-19).
+  // Two of these sentences typed the sizes a sign-in unlocks and so carried the same
+  // stale list the hero did. primitives/RefusalNotice.jsx's `refusalCopy` injects
+  // config/tierFacts.js signInUnlocksSizes() as a DEFAULT var for every reason, so a
+  // refusal can name them without its raiser having to know the ladder — and a raiser
+  // that passes its own `sizes` still wins, because the gate's facts beat a default.
   refusals: {
     dailyCap: {
       rubric: 'Free settlements',
-      body:   'Today’s free settlements are spent. Sign in, free, to keep forging and to reach city and metropolis.',
+      body:   'Today’s free settlements are spent. Sign in, free, to keep forging and to reach {sizes}.',
     },
     tier: {
       rubric: 'A bigger settlement',
-      body:   'A {size} is past what this account forges; it reaches up to a {max}. Sign in (free) to reach city and metropolis.',
+      body:   'A {size} is past what this account forges; it reaches up to a {max}. Sign in (free) to reach {sizes}.',
     },
     resolvedTier: {
       rubric: 'A bigger settlement',
@@ -436,6 +450,15 @@ export const en = Object.freeze({
     staffOnly: {
       rubric: 'Not this account',
       body:   'The developer admin panel is open to the team only. Nothing is missing from your account; this page simply is not part of it.',
+    },
+    // ⛔ THE REALM LEAVES THE PHONE (the owner, ODQ §934.26). The first sentence is the
+    // owner's own words. The second is the DOOR — the gate law's "every gate ends in an
+    // action" — and it is deliberately written to be true whether or not a settlement is
+    // open: the notice's control renders only when one is, and this sentence names where
+    // the same relational facts live on a phone rather than promising a map.
+    realmNeedsTablet: {
+      rubric: 'The Realm',
+      body:   'The realm map opens on a tablet or larger screen. Your world is saved and waiting, exactly here, when you next sit down at one.',
     },
   },
 
@@ -500,10 +523,18 @@ export const en = Object.freeze({
         // literal text (ODQ §934.22 item 1). `standing` is the cure at the source and
         // is DELIBERATELY NOT SPELLED LIKE A PRICE — a key named price* is a key
         // something can render as one, which is exactly why the two above stay gone.
-        // The words are the landing closer strip's own Founder badge
-        // (copy/landing.js closer.tiers), so the two surfaces speak one vocabulary,
-        // and they quote no money, which the purchases-locked law also requires.
-        standing:    'By invitation',
+        // ⭐ THE OWNER'S APPROVED WORDS (ODQ §934.24(3), verbatim): "the Founder card
+        // under the purchase lock says what it means — 'A founding place, held until
+        // launch' — not a price that does not resolve." Lane 28's interim 'By invitation'
+        // (the landing closer strip's Founder badge) said HOW a chair is come by; these
+        // say that and WHEN, which is the half a reader under the lock actually needs.
+        // The badge's own words are untouched — this is the card's focal slot, not the
+        // badge — and neither quotes money, which the purchases-locked law requires.
+        standing:    'A founding place, held until launch',
+        // The sub-line beneath the slot. `standingSub` is deliberately NOT spelled
+        // priceSub: a key named price* is a key something can render as one, which is
+        // exactly why the Founder's two price keys stay deleted (above).
+        standingSub: 'Opens with the launch',
         tagline:     'Thirty chairs in the credits, for as long as SettlementForge runs.',
         cta:         'Request a chair',
         chairsHeld:  '{held} of 30 chairs held.',
@@ -1363,9 +1394,10 @@ export const en = Object.freeze({
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      // The sizes signing in ADDS (see hero.capUnlock): anon already reaches thorp
-      // through town, so naming them here sold the reader what they had.
-      body:     'Sign in (free) to reach city and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      // The sizes signing in ADDS (see hero.capUnlock). Written out because this
+      // moment's card renders the string with no vars; bound to the derivation by
+      // tests/copy/signInUnlocks.test.js so it cannot drift from it.
+      body:     'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
@@ -1481,6 +1513,10 @@ export const en = Object.freeze({
     },
     howThisWasBuilt: 'How this was simulated',
     backToList:      'Back to settlements',
+    // THE PHONE'S DOOR OUT OF THE REALM (ODQ §934.26). The realm map does not open on a
+    // phone, but the relational web it draws is also a dossier tab that does, so the
+    // refusal ends in this action rather than in an apology.
+    relationshipsDoor: 'Open the relationship web',
     editModeOn:      'Edit mode',
     editModeOff:     'View mode',
     pendingTpl:      '{count} unsaved {noun}',

@@ -66,6 +66,17 @@ export const REFUSAL_REASONS = Object.freeze({
    * moves anyone; the route says why, where the reader is.
    */
   STAFF_ONLY: 'staffOnly',
+  /**
+   * ⛔ THE REALM IS NOT A PHONE SURFACE (the owner, ODQ §934.26: "No realm view for
+   * phone but it can be viewed on a tablet").
+   *
+   * The only reason here raised by a ROUTE rather than by a gate in the generation
+   * lane, and it belongs in this register for the same reason the others do: the
+   * alternative was a blank page or a silent redirect, which is the class this file
+   * exists against wearing a different coat. It carries no `vars`: the sentence states
+   * a property of the surface, not of the reader's request.
+   */
+  REALM_NEEDS_TABLET: 'realmNeedsTablet',
 });
 
 /** The ids, as an array, for walkers and for exhaustiveness checks. */

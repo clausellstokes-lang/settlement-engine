@@ -55,8 +55,8 @@ export const ROUTES = Object.freeze([
   // untouched — /home still resolves, still titles, still canonicalizes from '/' —
   // only its top-nav metadata is retired, which is what removes it from NAV and so
   // from every surface that derives from NAV. The mobile bottom nav never carried it
-  // (App.jsx MOBILE_NAV_PRIORITY names five ids, none of them 'home'), so this is a
-  // desktop-only change by construction rather than by a second exclusion list. One
+  // (it derives from NAV too — `barNav` below), so this is a desktop-only change by
+  // construction rather than by a second exclusion list. One
   // consequence is deliberate: on the landing page NO nav cell is active, because no
   // cell claims that view.
   { view: 'home',                  path: '/home',                  title: 'Welcome' },
@@ -233,9 +233,13 @@ export const NAV = Object.freeze(
  *
  * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
  * draws its flow mark ONLY when the successor named here is the tab actually
- * rendered next ON THAT SURFACE. The bottom bar (below 1024 px) runs Create ·
- * Library · Realm, so both marks draw there. An arrow pointing at the wrong
- * neighbour teaches a false lesson about where the work goes. The painted arrow
+ * rendered next ON THAT SURFACE. On the TABLET bar (640 to 1023 px) that is
+ * Create · Library · Realm, so both marks draw. On the PHONE the Realm is not a
+ * destination at all (§934.26, `barNav` below), so Library's successor there is
+ * Compendium and the second mark correctly does not draw — the guard handles the
+ * owner's order with no edit, which is why it is written as a relation. An arrow
+ * pointing at the wrong neighbour teaches a false lesson about where the work
+ * goes, and a hairline after the working pair takes its place. The painted arrow
  * header (1024 px and up) draws no flow mark: its words are the owner's painting,
  * and NAV's order is pinned to the painted order instead
  * (tests/components/arrowGeometry.test.js). See components/nav/NavFlowArrow.jsx.
@@ -245,6 +249,48 @@ export const NAV_FLOW = Object.freeze({
   generate: 'settlements',
   settlements: 'realm',
 });
+
+/**
+ * ⛔ WHAT THE PHONE'S BAR LEAVES OUT (the owner, ODQ §934.26: "I would remove the realm
+ * from the phone. No realm view for phone but it can be viewed on a tablet").
+ *
+ * The Realm is a desktop map-editing canvas. Below the estate's mobile breakpoint it is
+ * not a destination at all — no seat in the bar, no plate in the header — and /realm
+ * answers with an honest notice instead (components/map/RealmPhoneNotice.jsx). From the
+ * breakpoint up (tablet, then desktop) it is a first-class destination again.
+ *
+ * SIGN IN IS NOT LISTED HERE AND CANNOT BE: the owner's order says the bar filters "Realm
+ * and Sign In", and Sign In is filtered BY CONSTRUCTION — it is an auth route with no
+ * `nav` block, so it never enters NAV in the first place. The walker asserts that rather
+ * than trusting this comment (tests/lint/phoneBarOrder.walker.test.js).
+ * @type {ReadonlyArray<string>}
+ */
+export const PHONE_NAV_EXCLUDED = Object.freeze(['realm']);
+
+/**
+ * ⭐ THE BOTTOM BAR'S DESTINATIONS, FROM THE ONE ORDER THERE IS.
+ *
+ * The owner's §934.26 ADDENDUM: "i swap compendium before gallery because that is also
+ * how it is on the desktop arrow" — one order everywhere, built from ONE constant so the
+ * painted header and the phone bar cannot drift. That constant is NAV (above), which is
+ * itself derived from the ROUTES table's `nav.order` and is what the painting's hit
+ * regions are pinned to (tests/components/arrowGeometry.test.js).
+ *
+ * ⛔ THIS REPLACED AN EXPLICIT PRIORITY ARRAY IN App.jsx. `MOBILE_NAV_PRIORITY` named
+ * five or six ids in a hand-kept order and sliced them; it existed so that About, and
+ * only About, was the seat evicted at the five-seat cap. With the Realm off the phone
+ * there is nothing to evict — five destinations for five seats — so the eviction device
+ * and the second order it carried both go, and the drift they made possible goes with
+ * them. Its one visible consequence is declared: the TABLET's bar now reads Compendium
+ * before Gallery, as the painting does, where the retired priority array had them the
+ * other way round.
+ *
+ * @param {boolean} phone true below the estate's mobile breakpoint (useIsMobile()).
+ * @returns {ReadonlyArray<{ id: string, label: string, order: number }>}
+ */
+export function barNav(phone) {
+  return phone ? NAV.filter((item) => !PHONE_NAV_EXCLUDED.includes(item.id)) : NAV;
+}
 
 /** True if `view` is a declared view id. */
 export function isKnownView(view) {
