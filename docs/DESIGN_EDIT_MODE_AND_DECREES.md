@@ -125,3 +125,18 @@ The owner's word (2026-09-19): "keep it open because we still have a lot more si
 - **New surfaces** (the map, the realm, the VTT) emit ops through the same boundary; the single-mutation-path instrument refuses anything else.
 
 Order of the programs, as the owner set it: the 2026-09-18 consist's push → this program (guards before surfaces) → the simulator's build-out, with the public-path review running as a read-only walk beside them.
+
+## 11. Lifecycle and edges — integrated by the chair's judgment (the owner, 2026-09-19 ~21:2x: "integrate them according to your best judgment")
+
+- **Travel (the owner's rule):** edits do not show when a settlement is forked, imported, or put in the gallery. The DM's layer and the decree registry live only in the owner's save (and its cloud copy); a fork, an import and the gallery projection carry the seed's world alone. Consequence stated once: a personal backup export cannot restore edits under this rule; if the owner wants that, the export may carry the layer while every import still strips it — a one-line change to the import path, not a model change.
+- **Migration of what exists:** existing saves' Change Dock pending changes and inline edits are folded into the registry (pending) and the layer (plain edits on drafts) by a governed migration through the observed-shape door, in lane B before any surface.
+- **Scheduling:** an entry carries an optional `when` (a tick index or a season), defaulting to the next advance; the registry orders by `when` then `orderIndex`; guards treat a scheduled entry's prerequisites at its own tick.
+- **Contention on one field:** two entries that set the same fact in one sequence raise a `contention` guard ("two entries set the miller's name") with keep-first / keep-last / keep-both-in-order; the last applied wins if the DM proceeds.
+- **The chronicle's voice:** authored pools for the table's hand ("by the table's hand", "overnight, by means the town does not understand", the off-stage forms, the follows-from joins), under the prose program's law, in lane E with the tick.
+- **Seeded rolls:** "roll another" is seeded from the settlement seed, the entry id and a roll counter, so reopening a card reproduces its rolls and the golden isolation holds.
+- **Spatial edits:** out of this design; the town map's own tools emit the same ops when they arrive (extension point §10).
+- **Free-text hygiene:** plain text only, a length limit per field, a font-coverage check against the PDF's embedded faces at save, and a walker that no free field reaches a derivation.
+- **The player projection:** the layer and the chronicle carry the dossier's existing secrecy classes; a player-safe export scrubs what the DM has not revealed, through the same denylists the gallery uses.
+- **The Surveyor's accounting:** a proposal costs its credit at compile; applying it from the registry costs nothing more; the registry shows the credit already spent beside a Surveyor entry.
+- **Bulk and templates:** a realm-level op ("the crown raises the levy") is a later op type over several settlements' registries; named as an extension, not built in the first program.
+- **Learning from edits:** count edits by op type and card type, no content, from the first lane; the counts are the generator's best signal of what it gets wrong.
