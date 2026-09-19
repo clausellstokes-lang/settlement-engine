@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "e3bf05f324e093a53b8640da30645b18d37f3629",
+ "frozenAtSha": "5123689dff88b48a9948ba4160736aa87ba2d3c3",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "aeb73dc28d89b6db7a220d9affee6b8bfa99ede4e1b0e9d347d084e24a8b595b",
  "detectorDigest": "a416334292debcf0c2606030cb38f4765ab54c5bccde7f50ccb25401fdc90128",
- "verdictDigest": "eba4580dbc4112f4e16b8617f8e77cf73d3b08a4aadb2945edea03e3686fd4d7",
+ "verdictDigest": "6c84a6f0a6524f148184528f22183b94200b8da8166247afa119ff22a23c4519",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 724,
+  "web-display": 725,
   "web-transitive": 907,
-  "dossier-pdf": 417,
+  "dossier-pdf": 418,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 328,
@@ -91,15 +91,15 @@
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1632,
-  "sites": 38880,
-  "propRead": 36812,
+  "files": 1633,
+  "sites": 38877,
+  "propRead": 36809,
   "elemRead": 0,
   "destructure": 2054,
   "inOp": 14,
-  "rGrades": 5977,
-  "nGrades": 886430,
-  "resolvedReceivers": 6743
+  "rGrades": 5981,
+  "nGrades": 886152,
+  "resolvedReceivers": 6747
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
@@ -8884,7 +8884,7 @@
   "percentage on incomeSources": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "priorityNote on incomeSources": "dossier-pdf=N foundry=N web-display=N",
   "source on incomeSources": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=N",
-  "weight on incomeSources": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
+  "weight on incomeSources": "dossier-pdf=N foundry=N news=N web-transitive=N",
   "last on industrial": "web-transitive=N",
   "since on industrial": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on industrial": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -13397,7 +13397,7 @@
   "startupCost on plan": "web-transitive=N",
   "state on plan": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "underwayTick on plan": "",
-  "weight on plan": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
+  "weight on plan": "dossier-pdf=N foundry=N news=N web-transitive=N",
   "category on plotHooks": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
   "hook on plotHooks": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "severity on plotHooks": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
@@ -13671,7 +13671,7 @@
   "summary on recentMemory": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "tick on recentMemory": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "type on recentMemory": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "weight on recentMemory": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
+  "weight on recentMemory": "dossier-pdf=N foundry=N news=N web-transitive=N",
   "asymmetry on relationshipMemory": "web-transitive=N",
   "dailyLifeWeight on relationshipMemory": "dossier-pdf=N foundry=N web-transitive=N",
   "flowProfile on relationshipMemory": "web-transitive=N",
