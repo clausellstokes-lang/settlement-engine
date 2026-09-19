@@ -800,8 +800,13 @@ export const createAuthSlice = (set, get) => ({
 
   // ── Permission queries (elevated roles bypass all gates) ──────────────────
   canSave: () => {
-    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
-    const { tier } = get().auth;
+    // The staff unlock opens every PAID gate, but a save needs a real session as
+    // well: the server refuses an unauthenticated insert, and under the dev-only
+    // preview persona (a role with no user) the client would otherwise offer a
+    // door it knows cannot open, then say nothing loud enough (browser pass 3,
+    // 2026-09-19). With no session the anonymous save door renders — the truth.
+    const { role, user, tier } = get().auth;
+    if (staffUnlocksPaidFeatures(role)) return Boolean(user);
     return TIER_GATE[tier]?.maxSaves > 0;
   },
 

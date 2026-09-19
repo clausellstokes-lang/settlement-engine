@@ -89,6 +89,20 @@ describe('1. ACTIVE — the persona seats the role the client gates read', () =>
     expect(s.auth.role).toBe('admin');
   });
 
+  test('the persona opens the PAID gates but not the SAVE door: a save needs a real session', async () => {
+    vi.stubEnv('VITE_PREVIEW_ROLE', 'admin');
+    const s = await freshSlice();
+    // The role is previewed and the paid surface is open (asserted above) — but the
+    // server refuses an unauthenticated insert, so the client must not offer the real
+    // save arm to a session that has no user, then present the refusal as silence
+    // (browser pass 3, 2026-09-19: "Save to Library" did nothing under the persona).
+    expect(s.auth.user).toBeNull();
+    expect(s.canSave(), 'no session, no save door — the anonymous door renders instead').toBe(false);
+    s.setAuth({ id: 'real-user' }, { access_token: 'real-token' }, 'free', 'user', 'Alice');
+    expect(s.auth.role, 'the preview still seats the role').toBe('admin');
+    expect(s.canSave(), 'a real session under the staff unlock saves').toBe(true);
+  });
+
   test('every auth writer honours it — sign-out included', async () => {
     // The §934.28 recon found authSignIn alone skipping resolveTier, so the
     // per-writer sweep is the pin, not an afterthought.
