@@ -412,12 +412,17 @@ export default function AccountMenu({
           {PREVIEW_PERSONA_LABEL && (
             <div
               data-sf-preview-persona=""
+              // A RULED NOTE IN THE PAGE'S OWN INK, NOT A TINTED WASH (the owner's tome
+              // law). The slip started as a gold-tinted band, which is a dashboard's way of
+              // saying "notice this" and reads as SaaS chrome inside a menu that is otherwise
+              // parchment and rules. The scribe's way is the rule and the ink: the label sits
+              // on the menu's own ground, in gold text over a gold rule, and carries the same
+              // signal with one less surface. `GOLD_TXT` is the AA-measured gold ink.
               style={{
                 padding: `4px ${SP.md}px`,
                 marginBottom: 2,
-                background: GOLD_BG,
                 borderBottom: `1px solid ${GOLD_TXT}`,
-                color: INK,
+                color: GOLD_TXT,
                 fontFamily: sans,
                 fontSize: PHONE_CHROME_FLOOR,
                 fontWeight: 700,
