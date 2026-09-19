@@ -135,7 +135,28 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // generation worker, where it belongs; nothing eager re-merged. A buy-back inside those two
 // files is the named alternative; the rise is offered for the owner's ratification like the
 // mints it follows. The ceiling stays MONOTONE-DOWN from this value.
-export const WORKER_BUNDLE_CEILING_BYTES = 1401128;
+// 1,401,128 → 1,401,208 (2026-09-19, EM-P3's build lane, under the standing conditional ruling of
+// ODQ §934.19 addendum 2 and the EDIT-MODE-TRAIN charter's amendment of 2026-09-19): +80 B minified,
+// ATTRIBUTED PER MODULE by a control build on this packet's own base tree (af36a626d, whose src/ and
+// tests/ are byte-identical to the verified base 4928be0ab — the one commit between them is the
+// docs-only promotion) against this tip, both built with `npm run build`. A whole-build sweep over
+// all 545 emitted chunks finds exactly THREE modules whose rendered length moved ANYWHERE, and all
+// three are EM-P3's own manifest paths: src/generators/steps/resolveConfig.js 14,417 → 14,304 (the
+// two literals left it), src/data/worldFactOptions.js new → 2,500 (they arrived), and
+// src/components/gallery/galleryUtils.js 4,987 → 4,990 in the gallery's own lazy chunk, which is not
+// in this bundle at all. This worker: 230 → 231 modules, nothing left it. The bytes are EM-P3's two
+// world-fact option lists (TERRAIN_WEIGHTS and CULTURES) moving to their one home, which the
+// generator still reads — generation data in the generation worker, where it belongs.
+// ⭐ THE CURE WAS THE PLACEMENT BEFORE IT WAS THE CEILING. The citation index WORLD_FACT_SOURCES is
+// an index of OTHER modules' addresses that this worker never reads, so it was placed in the
+// domain-reachable leaf src/domain/worldFactOptions.js instead: measured, that leaf and
+// galleryUtils.js appear nowhere in this bundle, and the alternative (the map beside the lists)
+// priced 428 B more into a zero-slack ceiling for bytes the worker would never execute. Nothing
+// eager re-merged: the eager first-paint set is byte-identical at 268 modules and engine-core's
+// chunk hash did not move; the lazy engine SHRANK 678,131 → 677,935 B. A buy-back inside
+// resolveConfig.js is the named alternative; the rise is offered for the owner's ratification like
+// the mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+export const WORKER_BUNDLE_CEILING_BYTES = 1401208;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
