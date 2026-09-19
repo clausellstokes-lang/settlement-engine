@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 201;
+export const MIGRATION_TRAIN_REPO_HEAD = 202;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -546,6 +546,40 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: 'has_surveyor_entitlement' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'edit-registry-public-denylist',
+    from: 202,
+    to: 202,
+    purpose: 'Design §12.4 (the settlement editor and the decree registry, ODQ §934.36): '
+      + 'ONE re-stated SECURITY DEFINER function. public._gallery_world_snapshot_is_safe is '
+      + '136\'s body VERBATIM plus two hard_deny members (dmLayer, decrees) and one '
+      + 'alternation alternative (.*decrees.*), so a stored gallery world snapshot carrying '
+      + 'the settlement editor\'s two DM-private save-time keys is rejected SERVER-side. It '
+      + 'is the third of three hand-mirrored denylists and it lands FIRST: the drift test is '
+      + 'one-directional (every client token needs a covering SQL alternative, never the '
+      + 'reverse), so the server may refuse a key before a client token exists but never '
+      + 'after. It creates no table, no column, no policy and no row, and re-points '
+      + 'publish_map (089) and the saved_maps guard (091) by name with no signature change '
+      + 'and no re-grant. DEPLOYMENT remains the owner\'s manual act (`supabase db push` '
+      + 'plus the applied-head bump in that same act), and until it the repo head sits two '
+      + 'migrations ahead of the applied head by design.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 201, this wave is one re-stated function and its own @rollback annotation '
+        + 'spells the whole reversal out: recreate 136\'s body verbatim, i.e. the same '
+        + 'function with the two hard_deny members and the one alternation alternative '
+        + 'removed — which is why 202 classifies as documented-manual-reversal rather than '
+        + 'taking the wave policy. Nothing is destroyed on reversal: the function holds no '
+        + 'state and no row was minted; the only consequence is that a stored gallery '
+        + 'snapshot carrying the editor\'s keys is accepted server-side exactly as today.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: '_gallery_world_snapshot_is_safe' }),
     ]),
   }),
 ]);
