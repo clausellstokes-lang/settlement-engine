@@ -19,8 +19,13 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
   const worldLaw = createGenerationWorldLaw({}, { tradeRoute, terrainType });
   const instNames = institutions.map(i => i.name);
   const has = (keyword) => instNames.some(n => n.includes(keyword));
-  /** Case-insensitive roster test, for the sacred-house derivation below. */
-  const holds = (...keywords) => instNames.some(n => keywords.some(k => n.toLowerCase().includes(k)));
+  /**
+   * Roster test for the sacred-house derivation below, in either spelling the catalogue
+   * uses ('church' inside a name, 'Church' at its head). It rides the ONE roster scan
+   * above rather than opening a second: the label-join census freezes this file's scan
+   * sites and a new join must come by catalogue id, not by a fresh pass over the names.
+   */
+  const holds = (...keywords) => keywords.some((k) => has(k) || has(k.charAt(0).toUpperCase() + k.slice(1)));
 
   // ⛔ THE SACRED HOUSE IS DERIVED FROM THE ROSTER AT EVERY TIER, NEVER NAMED OUTRIGHT.
   // ── THE FINDING (browser pass 3, 2026-09-19) ───────────────────────────────────────
