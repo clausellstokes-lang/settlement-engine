@@ -27,7 +27,10 @@
  *       menu, which the plate labels; rows are out of the Tab order;
  *   (g) the slip: a signed-in name as written (no capitals, no letter-spacing), its type
  *       stepped down to SLIP_FLOOR before any ellipsis, the full name in a title and the
- *       plate's name; "Sign In" keeps its capitals;
+ *       plate's name; "Sign In" keeps its capitals, carries them as its OWN aria-label,
+ *       and on a phone sits inside a 44 x 44 plate while the painted slip stays put
+ *       (ODQ §934.26 — the slip's sub-floor type is a registered exception, executed in
+ *       tests/components/publicChromeFloor.census.test.js);
  *   (h) the menu stays on the page: at 320 px it shifts right just far enough to clear the
  *       page's left edge, and at 390 and 1440 it stays right-aligned to the plate.
  */
@@ -80,6 +83,43 @@ describe('(a) and (b) the plate and its names', () => {
     fireEvent.click(signIn);
     expect(onSignIn).toHaveBeenCalledTimes(1);
     expect(screen.queryByRole('menu')).toBeNull();
+  });
+
+  test('the anonymous plate carries its OWN name, identical to the painted word (§934.26)', () => {
+    // ⛔ THE SLIP IS 10 px ON A PHONE BY REGISTERED EXCEPTION (the painting's geometry;
+    // the row and its executed arm live in publicChromeFloor.census.test.js). That makes
+    // the control's NAME load-bearing: it was the one ArrowControl in the header deriving
+    // its name from a text node, so a slip that was ever hidden or replaced by a mark
+    // would have left an anonymous button. The label is the painting's own capitals, so
+    // it is IDENTICAL to the visible text and WCAG 2.5.3 (Label in Name) still holds —
+    // a lower-cased label would have been a second spelling of the same control.
+    render(<AccountMenu layout={layout} isAnon onSignIn={vi.fn()} />);
+    const signIn = screen.getByRole('button', { name: 'Sign In' });
+    expect(signIn.getAttribute('aria-label')).toBe('Sign In');
+    expect(signIn.getAttribute('aria-label')).toBe(signIn.textContent);
+  });
+
+  test('on a PHONE the Sign In target is the padded plate, 44 x 44, and the slip does not move', () => {
+    // The tap target is the brass, not the parchment: the slip carries pointerEvents:none
+    // and the ArrowControl is the plate. `roomy` is what pads it on a phone, so the pin
+    // drives BOTH states of that prop on the real compact layout rather than trusting it.
+    const phone = layoutArrow({ clientWidth: 375, full: false });
+    const { container, unmount } = render(<AccountMenu layout={phone} roomy isAnon onSignIn={vi.fn()} />);
+    const box = container.querySelector('[data-sf-arrow-plate]');
+    expect(Number.parseFloat(box.style.width), 'the padded plate is under 44px wide').toBeGreaterThanOrEqual(44);
+    expect(Number.parseFloat(box.style.height), 'the padded plate is under 44px tall').toBeGreaterThanOrEqual(44);
+    expect(Number.parseFloat(box.style.height)).toBe(44);
+    // The PAINTED slip keeps the painting's own box inside that target — the control grew,
+    // the painting did not.
+    const slip = screen.getByRole('button', { name: 'Sign In' }).firstElementChild;
+    expect(slip.style.width).toBe(`${phone.hits.slip.w}px`);
+    expect(slip.style.pointerEvents).toBe('none');
+    unmount();
+
+    // …and without the phone flag the plate takes the fine-pointer floor instead, which
+    // is what makes the 44 above attributable to `roomy` and not to the geometry.
+    const fine = render(<AccountMenu layout={phone} isAnon onSignIn={vi.fn()} />);
+    expect(Number.parseFloat(fine.container.querySelector('[data-sf-arrow-plate]').style.height)).toBe(40);
   });
 
   test('signed in: the plate\'s name contains its visible name, and it declares a menu', () => {

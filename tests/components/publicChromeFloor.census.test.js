@@ -35,6 +35,15 @@
  * reader looking at it; FEWER is a floored line that has gone back to a bare literal
  * or left the surface. Both take a re-measure and a note, which is the point.
  *
+ * ⛔ AND THERE IS ONE REGISTERED EXCEPTION, WHICH IS EXECUTED RATHER THAN PROMISED.
+ * §934.24(4) allows exceptions "only by a registry row that names why", and §934.26 made
+ * one: the painted Sign In slip keeps the painting's own 10 px, because the slip is under
+ * 12 px TALL at every phone width and raising the type would mean re-cutting the owner's
+ * painting. The row is in EXCEPTIONS below and its arm re-derives the claim from the
+ * shipped geometry on every run — live, forced, and paid for by a 44 x 44 control — so a
+ * re-cut that made 12 px fit REDS and the exception retires instead of outliving its
+ * cause.
+ *
  * ⚠ WHAT NO TEST HERE CAN SEE, SAID PLAINLY. jsdom computes no layout, so nothing
  * below proves the 391px page stopped overflowing, or that a 12px "COMPENDIUM" still
  * fits its fifth of a phone before the ellipsis takes it. Those are measurements for
@@ -53,6 +62,7 @@ import {
 } from './phoneFloorCensus.shared.mjs';
 import { PHONE_PROSE_FLOOR, chromeFontSize, proseFontSize } from '../../src/design/proseScale.js';
 import { legacy } from '../../src/design/tokens.js';
+import { layoutArrow, padTarget, slipFont } from '../../src/components/nav/arrowGeometry.js';
 
 const ROOT = process.cwd();
 
@@ -97,6 +107,45 @@ const ROSTER = Object.freeze({
     surface: "the signed-in /create card above the hero",
     chrome: 1, prose: 0, ruled: 0,
   },
+  'src/components/AccountMenu.jsx': {
+    surface: "the painted arrow's brass plate — the Sign In slip on every page, and the signed-in name",
+    chrome: 0, prose: 0, ruled: 0,
+  },
+});
+
+/**
+ * ⛔ THE EXCEPTION REGISTER (the chair's ruling on lane 28's stop, ODQ §934.26).
+ *
+ * "One rule, one instrument, exceptions only by a registry row that names why"
+ * (§934.24(4)). This is that registry, and it holds exactly one row.
+ *
+ * A written `// phone-floor:` ruling — the census's other escape — is the right shape for
+ * a site the scanner CAN see. It is the wrong shape here twice over: the slip's size is a
+ * function call (`slipFont(layout.s)`), which the scanner deliberately does not claim
+ * because only a literal can be judged from source, so the ruling would absolve nothing
+ * and nobody would notice when it stopped being true; and the reason is not local to a
+ * line, it is the PAINTING'S GEOMETRY, which a comment cannot keep honest.
+ *
+ * So the row is EXECUTED instead of asserted. Its arm re-derives the exception from the
+ * shipped geometry on every gate run, in both directions:
+ *   - LIVE   — the slip really renders below the floor at the phone widths named;
+ *   - FORCED — a 12 px line really does not fit the painted slip at those widths;
+ *   - PAID   — the control really is at least 44 x 44 there, which is what makes a 10 px
+ *              word usable rather than merely small.
+ * If the painting is ever re-cut so that 12 px fits, FORCED reds and the exception must
+ * be retired — the opposite of an exemption that outlives its cause.
+ */
+const EXCEPTIONS = Object.freeze({
+  'the painted Sign In slip': Object.freeze({
+    file: 'src/components/AccountMenu.jsx',
+    site: 'nav/arrowGeometry.js slipFont(layout.s), drawn at AccountMenu.jsx `slipStyle`',
+    reason: "the painting's own geometry, §934.26: the slip is under 12 px TALL at every "
+      + 'phone width, so a 12 px line cannot fit it; raising the type means growing the '
+      + "plate, which means re-cutting the owner's painting, and the header law forbids it. "
+      + 'The control is the whole plate, padded to 44 x 44 on a phone.',
+    /** The widths the exception is claimed at (the four lane 28 measured). */
+    widths: Object.freeze([320, 375, 391, 430]),
+  }),
 });
 
 function censusOfRoster() {
@@ -201,6 +250,62 @@ describe('THE PHONE FLOORS ON THE PUBLIC CHROME — the bottom nav and /create',
     expect(chromeFontSize(legacy.FS.xxs, true)).toBe(PHONE_CHROME_FLOOR);
     expect(chromeFontSize(legacy.FS.xs, true)).toBe(PHONE_CHROME_FLOOR);
     expect(proseFontSize(legacy.FS.xs, true)).toBe(PHONE_PROSE_FLOOR);
+  });
+
+  test('THE EXCEPTION REGISTER: every row names a roster file and a reason', () => {
+    const rows = Object.entries(EXCEPTIONS);
+    expect(rows.length, 'the exception register is empty — delete it, or the arm below is vacuous').toBe(1);
+    for (const [name, row] of rows) {
+      expect(ROSTER[row.file], `"${name}" excepts ${row.file}, which is not in the roster`).toBeTruthy();
+      expect(existsSync(join(ROOT, row.file)), `"${name}" excepts a file that is gone`).toBe(true);
+      expect(row.reason.length, `"${name}" has no written reason`).toBeGreaterThan(40);
+      expect(row.reason, `"${name}" does not cite the order that granted it`).toMatch(/§934\.26/);
+      expect(row.widths.length, `"${name}" claims no widths`).toBeGreaterThanOrEqual(3);
+      // The excepted site must still BE in the file it names: a row pointing at a site
+      // that has moved reads as coverage while covering nothing.
+      const src = readFileSync(join(ROOT, row.file), 'utf8');
+      expect(src, `"${name}" names a site ${row.file} no longer draws`).toMatch(/fontSize:\s*slipFont\(/);
+    }
+  });
+
+  test('THE EXCEPTION IS LIVE, FORCED AND PAID FOR (executed over the shipped geometry)', () => {
+    const row = EXCEPTIONS['the painted Sign In slip'];
+    const measured = row.widths.map((cw) => {
+      const layout = layoutArrow({ clientWidth: cw, full: false });
+      const plate = padTarget(layout.hits.plate, 44, layout.width);
+      return {
+        cw,
+        font: slipFont(layout.s),
+        // The slip's CONTENT box: its 1 px rule on each side (and 3 px of side padding,
+        // which only narrows it) — the box a line of type has to fit inside.
+        slipH: layout.hits.slip.h - 2,
+        slipW: layout.hits.slip.w - 2 - 6,
+        target: { w: plate.w, h: plate.h },
+      };
+    });
+
+    for (const m of measured) {
+      // LIVE: without this the register would be a stale row nobody noticed.
+      expect(m.font, `the slip is no longer sub-floor at ${m.cw}px — RETIRE the exception`)
+        .toBeLessThan(PHONE_CHROME_FLOOR);
+      // FORCED: the painting cannot hold a floor-sized line. lineHeight is 1 on the slip
+      // (AccountMenu `slipStyle`), so the floor needs PHONE_CHROME_FLOOR px of height.
+      expect(m.slipH, `a ${PHONE_CHROME_FLOOR}px line now FITS the painted slip at ${m.cw}px — RETIRE the exception`)
+        .toBeLessThan(PHONE_CHROME_FLOOR);
+      // PAID: the control is the plate, and it clears the touch floor in both directions.
+      expect(m.target.h, `the Sign In target is under 44px tall at ${m.cw}px`).toBeGreaterThanOrEqual(44);
+      expect(m.target.w, `the Sign In target is under 44px wide at ${m.cw}px`).toBeGreaterThanOrEqual(44);
+    }
+
+    // ⛔ THE EXCEPTION IS BOUNDED, AND THE BOUNDARY IS MEASURED. slipFont reaches the
+    // floor at s >= 0.55, which is clientWidth >= 0.55 x 1135 = 624.25 — inside the phone
+    // band but above every phone this claims. A re-cut that moved that crossover DOWN
+    // would silently widen the exception, so the crossover itself is pinned.
+    expect(slipFont(layoutArrow({ clientWidth: 624, full: false }).s)).toBeLessThan(PHONE_CHROME_FLOOR);
+    expect(slipFont(layoutArrow({ clientWidth: 625, full: false }).s)).toBe(PHONE_CHROME_FLOOR);
+    // …and the sizes really are the four lane 28 measured, not a different ladder.
+    expect(measured.map((m) => m.font)).toEqual([10, 10, 10, 10]);
+    expect(measured.map((m) => Number(m.slipW.toFixed(2)))).toEqual([32.04, 38.92, 40.92, 45.8]);
   });
 
   test('the detectors discriminate, and a written ruling is honoured (executed controls)', () => {

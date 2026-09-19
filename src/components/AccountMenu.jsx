@@ -81,15 +81,17 @@ import {
 import Button from './primitives/Button.jsx';
 import AvailableAtLaunchPill from './primitives/AvailableAtLaunchPill.jsx';
 import ArrowControl from './nav/ArrowControl.jsx';
-import { padTarget } from './nav/arrowGeometry.js';
+import { padTarget, slipFont } from './nav/arrowGeometry.js';
 import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
 
 /** @param {number} n */
 const px = (n) => `${n}px`;
 
-/** The slip's type size follows the arrow's scale (the slip is 36 strip rows tall). */
-const slipFont = (s) => (s >= 0.55 ? 12 : s >= 0.4 ? 11 : 10);
+// The slip's type size is a fact about the PAINTING, so it lives with the painting's
+// other numbers (nav/arrowGeometry.js `slipFont`) — which also lets the phone-floor
+// census execute it without mounting a React tree. Its registered sub-floor exception
+// (ODQ §934.26) is written out there, beside the geometry that forces it.
 
 /**
  * The smallest size a signed-in name steps down to before it takes an ellipsis: the house
@@ -271,7 +273,14 @@ export default function AccountMenu({
   if (isAnon) {
     return (
       <div ref={ref} data-sf-arrow-plate="" style={plateBox}>
-        <ArrowControl rect={control} glow={glow} paintedH={layout.bandPx} onClick={onSignIn}>
+        {/* ⭐ THE NAME IS ON THE CONTROL, NOT ONLY IN THE SLIP (ODQ §934.26). The plate
+            was the one ArrowControl in the header deriving its accessible name from a
+            text node — every other one (home, each painted word, the signed-in plate)
+            carries an explicit label — so a slip that was ever hidden, replaced by a
+            mark, or shrunk out of the accessibility tree would leave an anonymous
+            button. The label is the painting's own capitals, so it is IDENTICAL to the
+            visible text and WCAG 2.5.3 (Label in Name) holds exactly as before. */}
+        <ArrowControl rect={control} glow={glow} paintedH={layout.bandPx} aria-label="Sign In" onClick={onSignIn}>
           <span style={slipStyle}>Sign In</span>
         </ArrowControl>
       </div>

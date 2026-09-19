@@ -356,6 +356,36 @@ export const PLATE_RIVETS = Object.freeze([
 export const SLIP = Object.freeze({ x0: 1683, x1: 1825, y0: 13, y1: 49 });
 
 /**
+ * THE SLIP'S TYPE SIZE, which is a fact about the PAINTING and so lives with the
+ * painting's other numbers (it moved here from components/AccountMenu.jsx, which draws
+ * the slip, so a census can execute it without mounting a React tree).
+ *
+ * ⛔ IT RETURNS 10 ON A PHONE, BELOW THE 12 px CHROME FLOOR, AND THAT IS A REGISTERED
+ * EXCEPTION rather than an oversight (ODQ §934.26; the row is in
+ * tests/components/publicChromeFloor.census.test.js, where the floor is enforced).
+ *
+ * The compact arrow's scale is clientWidth / 1135. MEASURED by executing layoutArrow()
+ * over the shipped geometry — the slip's CONTENT box, after its 1 px border and 3 px
+ * side padding:
+ *
+ *     cw=320  s=0.2819  font 10  32.04 x  8.15 css px
+ *     cw=375  s=0.3304  font 10  38.92 x  9.89 css px
+ *     cw=391  s=0.3445  font 10  40.92 x 10.40 css px
+ *     cw=430  s=0.3789  font 10  45.80 x 11.64 css px
+ *
+ * A 12 px line at lineHeight 1 needs 12 px of HEIGHT, and the slip is under 12 px tall at
+ * every one of those widths; "SIGN IN" at 12 px bold uppercase would want roughly 50 px
+ * of the 38.92 available at 375. Raising the type means growing the plate, which means
+ * re-cutting the owner's painting, and the header law forbids that. The word keeps the
+ * painting's own size; the CONTROL is the whole plate, padded to at least 44 x 44 on a
+ * phone (`padTarget`), so the target is usable even where the word is small.
+ *
+ * @param {number} s the layout's scale (CSS px per strip px)
+ * @returns {number} CSS px
+ */
+export const slipFont = (s) => (s >= 0.55 ? 12 : s >= 0.4 ? 11 : 10);
+
+/**
  * @typedef {{ x: number, y: number, w: number, h: number }} Rect
  * @typedef {{
  *   x: number, w: number, from: number, to: number,
