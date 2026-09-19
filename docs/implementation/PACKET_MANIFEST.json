@@ -31112,140 +31112,199 @@
       "id": "EM-B1d",
       "status": "READY",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1d.md",
-      "_verifiedBaseNote": "⛔ THE CHAIR STAMPS THIS, AND IT MUST BE THE TIP, NOT d31af2cee. Measured by the Opus pre-proof lane at a41a0e109bdee8fe3a0df082bf35b36d2399301e: `scripts/mutation-coverage-manifest.json` is a REGISTER row, REGISTER !== 'CREATE', so it sits in the substrate assertAncestorAndSubstrate diffs (implementation-session.mjs:185-196) — and it moved +4/-0 in the window at 429ceed54 (EM-P0's landed row). Dispatching with the base at d31af2cee therefore THROWS `verified-base descendant changed declared substrate: scripts/mutation-coverage-manifest.json`. Setting verifiedBase to a41a0e109 makes head === verifiedBase and the whole arm returns early at :184. ⚠ This value and the packet Markdown's `Verified base` row must be substituted TOGETHER — the validator compares them (implementation-packets.mjs:889).",
-      "verifiedBase": "32f1ba048546370f7337fe571671c4ba5eadabf1",
+      "verifiedBase": "50e1f237b985d9288d9a7cabcf2f8467f23c5e48",
       "changeManifest": [
         {
-          "_note": "UNION 1 — `jailed` joins the NpcStatus typedef (:30) with a gloss naming the seat rule (design §15:217: 'a jailed or exiled holder cannot keep a seat'). RULED (ODQ §934.47 add. 6, option J1): a verdict handed down and the status it leaves are THE SAME WORD BY DESIGN — the verdict IS the event, the status its consequence. The union goes to seven. This is a JSDoc typedef edit, so under skipComments it changes ZERO effective lines (add. 7 names that reading). ⛔⛔ THIS EDIT ALONE STALES TWO COMMITTED EDGE-SHARED BUNDLES — see the two REGENERATE rows; the obligation is INPUT membership, not entry-hood, and it was PROVED BY EXECUTION (evidence §16).",
+          "_note": "UNION + VOCABULARY. `jailed` joins the NpcStatus typedef in codepoint order (a JSDoc comment: ZERO effective lines under skipComments), AND the new availability vocabulary is minted here: export const NPC_UNAVAILABLE_STATUSES = Object.freeze(['dead','exiled','jailed','removed']), placed immediately above IMPORTANCE_WEIGHT. ⭐ PLACEMENT MEASURED (packet §3.2, evidence §1): npcs.js is ABSENT from the generation worker's 220-module static closure and NO module inside that closure imports it, so the zero-slack ceiling (1,401,208, EXACT) cannot be touched and the tree-shaking question is MOOT BY PLACEMENT; it is NOT under /src/generators/ so the lazy engine is untouched; it IS in EAGER_FIRST_PAINT_MODULES, where the measured margin is 8,770 B against a ≤60 B bound. Its comment MUST carry both sentences of packet §6 (unavailability is NOT the house-roster reading). ⛔ This edit alone stales two committed edge-shared bundles — see the seven generated rows.",
           "action": "MODIFY",
           "path": "src/domain/entities/npcs.js"
         },
         {
-          "_note": "ROSTER_ABSENT_STATUSES (:75) gains 'jailed' — one token inside the frozen array; its only consumer is its own file's ABSENT set at :77, RE-MEASURED at a41a0e109 and still true. Design §15's seat law.",
+          "_note": "⛔ COMMENT ONLY — THE FROZEN ARRAY IS BYTE-IDENTICAL. ROSTER_ABSENT_STATUSES stays exactly ['dead','exiled','removed']. THE VERSION-5 RULING: this constant answers whether a figure is off their HOUSE'S roster, so that an empty roster DISSOLVES the house, and this file's own R18 law admits only IRREVERSIBLE causes to an irreversible consequence. A verdict ends, so `jailed` is REVERSIBLE and stays PRESENT. The docblock's judgment list gains the row `jailed — REVERSIBLE (a verdict ends). PRESENT.` naming design §15 and EM-B1f, and its vocabulary sentence names seven members. Version 4 put `jailed` on the absent line and would have dissolved a house on a reversible verdict.",
           "action": "MODIFY",
           "path": "src/domain/density/factionLifecycle.js"
         },
         {
-          "_note": "The successor-eligibility filter (:63, inside inferSuccessors at :50) admits `jailed`. PREFERRED FORM: import ROSTER_ABSENT_STATUSES and test membership, replacing three literals with one read — which is also what makes the walker's second arm pass without an exemption. ⭐ THE NEW IMPORT EDGE IS CLOSURE-NEUTRAL, PROVED BY CONSTRUCTION: successors.js and factionLifecycle.js are BOTH already in vite.config.js's EAGER_FIRST_PAINT_MODULES (measured true/true), and that set is a transitive-closure fixpoint, so the edge adds zero modules to first paint.",
+          "_note": "The eligibility filter at :63 (inside inferSuccessors at :50) becomes !NPC_UNAVAILABLE_STATUSES.includes(n.status) — ONE read replacing three literals, and the read is the AVAILABILITY vocabulary, never the house roster. ⭐ The one new runtime import edge is same-directory and CLOSURE-NEUTRAL BY CONSTRUCTION: successors.js and npcs.js are both already in vite.config.js EAGER_FIRST_PAINT_MODULES (measured), and that set is a transitive-closure fixpoint, so the edge adds zero modules to first paint. Version 4 had to add an entities -> density edge; version 5 does not.",
           "action": "MODIFY",
           "path": "src/domain/entities/successors.js"
         },
         {
-          "_note": "⛔ THE FOREIGN-SPELLING CURE (ODQ §934.47 add. 5). rosterPersonAvailable (:95) tests ['dead','killed','missing','exiled','imprisoned'] at :98 — and NEITHER `killed` NOR `imprisoned` is an NpcStatus member. 'killed'->'dead', 'imprisoned'->'jailed', and the list READS a union instead of spelling literals. ⚠ ONE READING CHANGES: an NPC stored as 'imprisoned' or 'killed' becomes AVAILABLE, because the vocabulary never contained either word and no writer assigns one to `.status` (A6 states it; R4 asks the chair to ratify).",
+          "_note": "⛔ THE FOREIGN-SPELLING CURE (ODQ §934.47 add. 5). rosterPersonAvailable (:95) tests ['dead','killed','missing','exiled','imprisoned'] at :98, and NEITHER `killed` NOR `imprisoned` is an NpcStatus member. Derive a module-scope UNAVAILABLE_STATUSES = new Set([...NPC_UNAVAILABLE_STATUSES, 'missing']) and read it; the function body must then contain NO status string literal. ⭐ EXTEND THE EXISTING `../entities/npcs.js` IMPORT CLAUSE (the file already imports importanceWeight from it) — add no import line, and add no new module edge at all. TWO READINGS CHANGE, both measured inert: an NPC stored as 'imprisoned'/'killed' becomes AVAILABLE (no writer assigns either to .status), and 'removed' joins the refusal (no writer assigns 'removed' to an NPC .status — the two live writers target institutions).",
           "action": "MODIFY",
           "path": "src/domain/worldPulse/envoyCasting.js"
         },
         {
-          "_note": "LOST_NPC_STATUS (:79, read at :147 and :172) gains 'jailed'. Its own header explains it extends successor ineligibility with 'missing' and 'retired', so the addition follows that stated intent rather than widening it.",
+          "_note": "LOST_NPC_STATUS (:79, read at :147 and :172) gains 'jailed' and stays a LITERAL set. It thereby becomes TOTAL over all six non-'active' NpcStatus members, which its header must say, so the walker's T1 arm needs no reasoned omission for this row.",
           "action": "MODIFY",
           "path": "src/domain/worldPulse/magicFormsPractitioner.js"
         },
         {
-          "_note": "THE UNION-TOTALITY WALKER, in the tests/lint/chooserTotality.walker.test.js shape (SCAN_ROOTS at :64). T1: every roster row found live at its declared path+symbol, each member set a subset of NpcStatus, and EntityStatus asserted UNCHANGED at its five (ODQ 934.47 add. 7). T2 IS THE CHAIR'S R6' MATCHER: strip comments; flag every src file (tests excluded) containing 'dead', 'exiled' or 'retired' — THE TRIGGER SET, DERIVED as the live typedef's members that are members of no other declared vocabulary; every flagged file must be a row of the 8-row consumer roster (its enumeration total, or a one-line reasoned omission) or of the exemption register naming its foreign vocabulary. MEASURED AT a41a0e109 (evidence 22): homonyms are 'active' (74 files, 11 foreign vocabularies), 'removed' (30, 8), 'missing' (5, 3x STASIS_REASONS), 'jailed' (3, 3x the verdict union); trigger 'dead' (8 files, 0 foreign), 'exiled' (4, 0), 'retired' (1, 0). The trigger flags EXACTLY 8 files: this packet's five, plus THREE consumers the compile roster missed — warSeatBooks.js:102, npcLadderState.js:206, npcLadderKernel.js:660, all `status === 'dead'` paired with isOffStage(). ALL EIGHT ARE GENUINE CONSUMERS, so THE EXEMPTION REGISTER IS EMPTY and is authored INLINE. THE DECLARED CANNOT-CATCH, in the walker's header: a consumer enumerating ONLY homonyms is invisible, because triggering on them costs ~60 exemptions that say only 'this is ACTIVE_STAGES, not NpcStatus'. Measured: NO such site exists at the tip (the one probe hit, crisisLifecycle.js `n.status === 'active'`, is a STRESSOR via normalizeStressor, and is a single positive test — total by construction). TWO DELIBERATE READS OF npcs.js: the trigger strips comments so it flags the code writer at :159 (status: 'dead'), while the union parse reads the JSDoc typedef on purpose. ARMS: exactness (roster u register SET-EQUAL both directions to the live flagged set), guard-the-guard (an exempted file still contains its vocabulary; a roster file still contains a trigger token), and the typedef read LIVE so a new member reds every roster file that omits it. ONE literal describe, four straight-line `it`; .each/looped/conditional/nested registration forbidden (EM-PREAMBLE P3.4). Budget ~110 effective of 250.",
+          "_note": "THE UNION-TOTALITY WALKER, in the tests/lint/chooserTotality.walker.test.js shape. T1: every roster row resolves live at path+symbol; the DISCOVERED enumerators (a file spelling >= 2 distinct non-'active' members) equal the roster's literal enumerator rows BOTH DIRECTIONS; every literal row is total or carries a one-line reasoned omission; every union-read row is unflagged, imports NPC_UNAVAILABLE_STATUSES and spells no retired foreign word; EntityStatus asserted UNCHANGED at its five. T2 IS THE CHAIR'S R6' MATCHER, VERBATIM in the header: strip comments; flag every src file (tests excluded) containing 'dead', 'exiled' or 'retired' — the TRIGGER SET, DERIVED as the live typedef's members belonging to no other declared vocabulary. ⭐ TWO CONTRACT RULES THE BUILD LANE ESTABLISHED: (a) every roster row declares `spelling` ('literals' | 'union-read') and the walker CHECKS it against the tree, so a cured consumer stays on the roster as the record that it is cured and a regression to hand-spelled literals reds; (b) a vocabulary DECLARED INSIDE a roster file is this union's OWN, never foreign — without it envoyCasting's own derived set counts itself a homonym. RE-DERIVED UNDER THE v5 SHAPE (evidence §2): homonyms 'active' (11 foreign vocabularies), 'removed' (8), 'missing' (3), 'jailed' (3); TRIGGER exactly {dead, exiled, retired}; FLAGGED 6 files; roster 8 rows (6 literals + 2 union-read); DISCOVERED enumerators 3 (npcs.js JOINS); exemption register EMPTY and authored inline, its checker proved on a planted row. ONE literal describe, FOUR straight-line `it`; .each/looped/conditional/nested registration forbidden (EM-PREAMBLE §P3.4). Budget ~235 effective of 250 (v4's executed 232 plus the roster change).",
           "action": "CREATE",
           "path": "tests/lint/statusUnionTotality.walker.test.js"
         },
         {
-          "_note": "THE MUTATION-COVERAGE ROW, re-priced at the tip: tests/lint is the FIRST of the ENFORCER_DIRS (mutationCoverage.shared.mjs:36) and the meta-test asserts every enumerated file owns an `invariants` entry. ⛔ RE-MEASURED: 705 rows at a41a0e109 (704 at d31af2cee; EM-P0's row landed at 429ceed54), so this packet's row is 705 -> 706, NOT 704 -> 705. ⛔ SURGICALLY, never re-serialised whole. INSERTION POINT, NAMED: the invariants object is NOT sorted (verified: default sort false, localeCompare false) and no test enforces an order — but the new key's alphabetical slot falls between two FILE-ADJACENT rows, so insert the complete four-line block immediately AFTER the close of \"tests/lint/dossierMountRegistry.walker.test.js\" (:70-73) and immediately BEFORE \"tests/lint/stepPresentationEngineFence.walker.test.js\" (:74). That yields a pure +4 / -0 diff, the exact shape EM-P0's landed row produced. Anchor on the two key NAMES, never the line numbers. SHAPE: {\"kind\":\"rationale\",\"rationale\":\"<executed mutant account, >=40 chars>\"} — the inline form (mutationCoverageManifest.test.js:121-124 accepts inline `rationale` or a `ref` resolving in manifest.rationales). The rationale carries the EXECUTED account, which is why §8 writes it AFTER the mutants. ⛔ PLACEMENT IS JUST-IN-TIME AND THE PATH IS CURRENTLY RESERVED: at a41a0e109 the holder is EM-P2 at status STALE (idx 187); STALE is not in TERMINAL_PACKET_STATUSES {LANDED, SUPERSEDED}, so it reserves as READY does. EM-A1 is NOT PLACED IN THE TREE AT ALL — version 1's claim that EM-A1 held it at DRAFT was wrong. Placing EM-B1d today prints: `duplicate change path across packets: scripts/mutation-coverage-manifest.json (EM-P2, EM-B1d)`. THE CHAIR DECIDES (withdrawing the stale EM-P2 to the kit is the precedent).",
+          "_note": "⛔ THE EXISTING EXACT PIN AT :1005 IS UNCHANGED — expect(ROSTER_ABSENT_STATUSES).toEqual(['dead','exiled','removed']) stays exactly as committed, because version 5 does not move that array. ADD ONE `it` beside it pinning the near-miss as law: isOnRoster({status:'jailed'}) is TRUE, and a house whose only figure is jailed reads 'crewed' via factionLifecycleStateOf with readFactionLifecycle raising NO reaction. The helpers (house, figure, v2Cfg, isOnRoster, factionLifecycleStateOf, readFactionLifecycle) are all already in scope in that file. Pair the not.toContain('jailed') negative with a one-line `// anchored:` reason naming the sibling exact-equality pin as the liveness anchor (tests/lint/negativeAssertionAnchor.walker.test.js). +1 test title, +0 suite titles.",
+          "action": "TEST",
+          "path": "tests/generators/densityLaw.test.js"
+        },
+        {
+          "_note": "⛔ ONE TOKEN, at the `busy` fixture (:559): { ...ROSTER[2], status: 'imprisoned' } becomes status: 'jailed'. The assertion is UNCHANGED and the refusal is still reached, BY READING: UNAVAILABLE_STATUSES = new Set([...NPC_UNAVAILABLE_STATUSES, 'missing']) = {dead, exiled, jailed, removed, missing}, so rosterPersonAvailable lowercases 'jailed', finds it in the set and returns false; castableRoster skips the person and the suite's toEqual([]) holds. The fixture's two siblings are unaffected (one is refused on whereabouts.state === 'travelling', the other on status 'dead', still in the set). WHY IT IS OWED: R4 ratified the retirement of 'imprisoned' on a src/-only measurement; this committed FIXTURE assigns it and asserts the refusal, so the spelling must follow the vocabulary.",
+          "action": "TEST",
+          "path": "tests/domain/espionageMission.test.js"
+        },
+        {
+          "_note": "THE MUTATION-COVERAGE ROW. tests/lint is the FIRST of the ENFORCER_DIRS (mutationCoverage.shared.mjs:36) and the meta-test asserts every enumerated file owns an `invariants` entry. MEASURED at 58fcfe614: 705 rows, so this packet is 705 -> 706. ⛔ SURGICALLY, never re-serialised whole: insert the complete four-line block immediately AFTER the close of \"tests/lint/dossierMountRegistry.walker.test.js\" and immediately BEFORE \"tests/lint/stepPresentationEngineFence.walker.test.js\" — anchor on the key NAMES, never line numbers (the object is NOT sorted and no test enforces an order). EXECUTED at v4 and reproducible: a pure +4 / -0 diff. SHAPE {\"kind\":\"rationale\",\"rationale\":\"<executed mutant account, >=40 chars>\"}; the rationale is written AFTER the mutants because it carries their executed account.",
           "action": "REGISTER",
           "path": "scripts/mutation-coverage-manifest.json"
         },
         {
-          "_note": "⛔⛔ DIRTY-BUILD OBLIGATION, PROVED BY EXECUTION (evidence §16) — the compile lane resolved this on ENTRY-HOOD and was wrong; the test is INPUT membership. scripts/build-edge-shared.mjs:79-80 hashes every input's RAW SOURCE TEXT (comments included) and tests/edgeFunctions/aiCharterBundle.freshness.test.js:91-97 recomputes exactly that over the live tree. aiCharterBundle.meta.json lists 114 inputs INCLUDING src/domain/entities/npcs.js. Applying row 1 in memory moves the sourceHash 237061fd5e0b3d71 -> f56a7d2120c34290, so row 1 ALONE reds this PLAIN (not dist-gated) suite. REGENERATE with `npm run build:edge-shared` immediately after row 1; never hand-edit. Both the .js and its .meta.json move (the banner carries the hash too).",
+          "_note": "Generated by `npm run build:edge-shared`; NEVER hand-edited. STALED BY ROW 1, proved by execution: build-edge-shared.mjs:79-80 hashes every input's RAW SOURCE TEXT and this bundle's meta lists src/domain/entities/npcs.js among 114 inputs, so even a JSDoc-only edit moves its sourceHash. ⛔ The predicted hash VALUE is deliberately not pinned here: it hashes the gloss bytes and therefore differs per author. The claim is staleness.",
           "action": "MODIFY",
           "path": "supabase/functions/_shared/aiCharterBundle.js"
         },
         {
-          "_note": "The sidecar meta regenerated in the SAME `npm run build:edge-shared` run as its bundle. It carries generatedAt, entry, sourceHash and the 114-entry inputs list; the freshness suite asserts banner hash === meta hash === a live recomputation. Never hand-edit.",
+          "_note": "Generated in the SAME `npm run build:edge-shared` run; never hand-edited. Carries generatedAt, entry, sourceHash and the 114-entry inputs list; the freshness suite asserts banner hash === meta hash === a live recomputation over the worktree.",
           "action": "MODIFY",
           "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
         },
         {
-          "_note": "⛔⛔ THE SECOND STALED BUNDLE, same mechanism, same proof. aiOutputSchemaBundle.meta.json lists 115 inputs INCLUDING src/domain/entities/npcs.js; row 1 moves its sourceHash bac86bfd077b5b43 -> b44dd839381fd0c7. The other three committed bundles (aiGrounding 74 inputs, analyticsEvents 2, intentAtlas 2) do NOT list npcs.js and were measured UNMOVED — if `npm run build:edge-shared` changes any artifact beyond the four named here, that is a STOP.",
+          "_note": "Generated in the same run; never hand-edited. THE SECOND STALED BUNDLE, same mechanism: its meta lists src/domain/entities/npcs.js among 115 inputs.",
           "action": "MODIFY",
           "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
         },
         {
-          "_note": "The second sidecar meta, regenerated in the same run. Never hand-edit.",
+          "_note": "Generated in the same run; never hand-edited. The second sidecar meta.",
           "action": "MODIFY",
           "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+        },
+        {
+          "_note": "Generated in the same run; never hand-edited. ⭐ ITS sourceHash IS UNMOVED (9788abb8fdb7287e — npcs.js is not among its 74 inputs); the ONLY changed bytes are `generatedAt`. IT IS STILL OWED, and that is measured: tests/edgeFunctions/edgeSharedBundleReproducibility.test.js asserts 'all bundles share a single build window', and committing the two staled bundles WITHOUT this re-stamp left a 25,614.1 s spread and a red. Version 4 declared four artifacts, and BOTH sealed verbs (check:packet, implementation:resume) refused with `sealed foreign work drifted` because they run build:edge-shared themselves. Precedent: ddcfb1f59, ee8ac6c3c, 58b466afc, 167887d38 each carried seven _shared paths.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+        },
+        {
+          "_note": "Generated in the same run; never hand-edited. ⭐ sourceHash UNMOVED (0a6ba64ce0b8d5e2); only `generatedAt` changes. Owed for the single-build-window pin — see the aiGroundingBundle row.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+        },
+        {
+          "_note": "Generated in the same run; never hand-edited. ⭐ sourceHash UNMOVED (9136e063f280d77f); only `generatedAt` changes. Owed for the single-build-window pin — see the aiGroundingBundle row.",
+          "action": "MODIFY",
+          "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
         }
       ],
       "requiredSymbols": [
         {
-          "_note": "UNION 1, the six-member typedef `jailed` joins: 'active'|'dead'|'missing'|'exiled'|'retired'|'removed' at :30. RE-PROVEN AT a41a0e109: grep -cF 'NpcStatus' src/domain/entities/npcs.js -> 3.",
+          "_note": "THE SIX-MEMBER TYPEDEF `jailed` joins.",
           "path": "src/domain/entities/npcs.js",
           "symbol": "NpcStatus"
         },
         {
-          "_note": "THE ROSTER-ABSENCE SET at :75, Object.freeze(['dead','exiled','removed']), consumed at :77 as ABSENT. Its ONLY consumer is its own file — re-measured at a41a0e109 — which is why widening it is a one-file act and why successors.js is invited to read it rather than spell three literals. RE-PROVEN: grep -cF -> 1.",
+          "_note": "The live writer that stamps status: 'dead' at :159 — the CODE the trigger flags npcs.js on, as distinct from the typedef COMMENT the union parse reads.",
+          "path": "src/domain/entities/npcs.js",
+          "symbol": "export function killNpc"
+        },
+        {
+          "_note": "The first runtime statement of the module: the anchor NPC_UNAVAILABLE_STATUSES is minted immediately above. ⛔ The new constant itself is NOT named here — a READY packet names only what its deliverable PRESERVES (PACKET_STANDARD, the requiredSymbols clause).",
+          "path": "src/domain/entities/npcs.js",
+          "symbol": "const IMPORTANCE_WEIGHT = {"
+        },
+        {
+          "_note": "⛔ THE ARRAY VERSION 5 PRESERVES BYTE-IDENTICAL: Object.freeze(['dead','exiled','removed']), consumed at :77 as ABSENT. Named so the no-change is provable from the manifest.",
           "path": "src/domain/density/factionLifecycle.js",
           "symbol": "export const ROSTER_ABSENT_STATUSES"
         },
         {
-          "_note": "⛔ THE FOREIGN-SPELLING SITE add. 5 cures, at :95; its body tests ['dead','killed','missing','exiled','imprisoned'] at :98, two of which are not NpcStatus members. Named so the cure is provable from the manifest. RE-PROVEN: grep -cF -> 1.",
-          "path": "src/domain/worldPulse/envoyCasting.js",
-          "symbol": "export function rosterPersonAvailable"
-        },
-        {
-          "_note": "THE PRACTITIONER-LOSS SET at :79, new Set(['dead','removed','exiled','missing','retired']), read at :147 and :172; its header records that it extends successor ineligibility with 'missing' and 'retired'. RE-PROVEN: grep -cF -> 1.",
-          "path": "src/domain/worldPulse/magicFormsPractitioner.js",
-          "symbol": "const LOST_NPC_STATUS"
-        },
-        {
-          "_note": "THE SUCCESSOR ENTRY POINT at :50, whose :63 filter this packet widens — named by its export rather than by the inner line, per navigate-by-symbol. RE-PROVEN: grep -cF -> 1.",
+          "_note": "The successor entry point at :50 whose :63 filter this packet re-points at the availability vocabulary.",
           "path": "src/domain/entities/successors.js",
           "symbol": "export function inferSuccessors"
         },
         {
-          "_note": "THE OBLIGATION'S SOURCE at :36 — `tests/lint` is the FIRST entry, and the meta-test asserts every file under those dirs owns an invariants entry, which is why the walker owes its row at compile. RE-PROVEN: grep -cF -> 1.",
-          "path": "tests/lint/mutationCoverage.shared.mjs",
-          "symbol": "export const ENFORCER_DIRS"
+          "_note": "⛔ THE FOREIGN-SPELLING SITE add. 5 cures, at :95.",
+          "path": "src/domain/worldPulse/envoyCasting.js",
+          "symbol": "export function rosterPersonAvailable"
         },
         {
-          "_note": "THE WALKER SHAPE BOTH ARMS COPY at :64 — declared equals discovered, BOTH directions, full offender list (HB-1's A7/A8). RE-PROVEN: grep -cF 'const SCAN_ROOTS' -> 1.",
-          "path": "tests/lint/chooserTotality.walker.test.js",
-          "symbol": "const SCAN_ROOTS"
+          "_note": "The module-scope anchor the derived UNAVAILABLE_STATUSES set is declared beside.",
+          "path": "src/domain/worldPulse/envoyCasting.js",
+          "symbol": "const IDENTITY_SEPARATOR"
         },
         {
-          "_note": "⭐ ADDED AT PRE-PROOF, because the deliverable CALLS it and must find it unchanged: A1 asserts EntityStatus still parses to EXACTLY its five (active, destroyed, impaired, removed, vacant) — ODQ §934.47 add. 7, 'B1d's first arm pins EntityStatus unchanged at five'. The walker reads this typedef from source, so a silent widening here reds A1. RE-PROVEN AT a41a0e109: grep -cF 'EntityStatus' src/domain/entities/status.js -> 4. ⛔ This file is a requiredSymbol (PRESERVE), NOT a change-manifest row — the packet makes no edit to it.",
+          "_note": "The practitioner-loss set at :79, read at :147 and :172.",
+          "path": "src/domain/worldPulse/magicFormsPractitioner.js",
+          "symbol": "const LOST_NPC_STATUS"
+        },
+        {
+          "_note": "PINNED UNCHANGED at five by A1 — addendum 6/7 made structural.",
           "path": "src/domain/entities/status.js",
           "symbol": "EntityStatus"
         },
         {
-          "_note": "⭐ ADDED AT PRE-PROOF: the verdict union's exported constant, which T2's exemption roster names BY NAME (add. 6). The walker must find it present to justify the exemption; an exemption declared over a file that no longer holds the verdict is a stale guard. RE-PROVEN AT a41a0e109: grep -cF 'export const HOLDING_VERDICT' -> 1 (at :104).",
+          "_note": "= 'jailed', the verdict union T2 names as exempt BY STRUCTURE (jailed is a homonym excluded from the trigger).",
           "path": "src/domain/worldPulse/npcVerdictTable.js",
           "symbol": "export const HOLDING_VERDICT"
+        },
+        {
+          "_note": "ROSTER ROW, NOT EDITED: pairs === 'dead' with isOffStage at :102. Its reasoned omission names EM-B1f.",
+          "path": "src/domain/worldPulse/warSeatBooks.js",
+          "symbol": "function rosterNpcById"
+        },
+        {
+          "_note": "ROSTER ROW, NOT EDITED: the rung filter at :206, parameter literally named excludeDead, paired with isOffStage at :201.",
+          "path": "src/domain/worldPulse/npcLadderState.js",
+          "symbol": "export function eligibleMembersOf"
+        },
+        {
+          "_note": "ROSTER ROW, NOT EDITED: the eligibility walk at :660.",
+          "path": "src/domain/worldPulse/npcLadderKernel.js",
+          "symbol": "function advanceLitLadder"
+        },
+        {
+          "_note": "⛔ THE PIN VERSION 5 PRESERVES. Named so that any future edit to it is visible at the manifest level; the packet adds a sibling `it` and does not touch this one.",
+          "path": "tests/generators/densityLaw.test.js",
+          "symbol": "the absent-status line is EXACT in both directions"
+        },
+        {
+          "_note": "tests/lint is the FIRST entry — the reason the walker owes a mutation-coverage row.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "_note": "The register-walker shape this packet copies: a declared table asserted SET-EQUAL to a live scan in both directions.",
+          "path": "tests/lint/chooserTotality.walker.test.js",
+          "symbol": "const SCAN_ROOTS"
         }
       ],
       "acceptanceCases": [
         {
           "id": "A1",
-          "case": "GUARD-THE-GUARD; THE UNION EXACT; ENTITYSTATUS PINNED. The walk is asserted non-empty first. NpcStatus parses to exactly SEVEN (active, dead, exiled, jailed, missing, removed, retired) — an exact sorted list, never a length, PARSED FROM ITS TYPEDEF SOURCE FILE so a typedef edit reds here — and all seven are asserted distinct. ⛔ EntityStatus is asserted UNCHANGED at its five (active, destroyed, impaired, removed, vacant) — ODQ §934.47 add. 7's ruling that the two vocabularies stay apart, made structural, so a later lane cannot quietly widen it here."
+          "case": "GUARD-THE-GUARD; THE UNION EXACT; ENTITYSTATUS PINNED; THE PLACEMENT ASSERTED. The walk is asserted non-empty first. NpcStatus parses to exactly SEVEN (active, dead, exiled, jailed, missing, removed, retired) — an exact sorted list, never a length, parsed FROM ITS TYPEDEF SOURCE so a typedef edit reds here — and all seven are distinct. EntityStatus is asserted UNCHANGED at its five. ⭐ NPC_UNAVAILABLE_STATUSES is asserted to be exported FROM src/domain/entities/npcs.js, so a later lane that relocates it into the generation worker closure must re-price packet §3.2 rather than discover the zero-slack ceiling at a terminal."
         },
         {
           "id": "A2",
-          "case": "T1 — DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS. Every one of the four roster rows is found live at its declared path+symbol (a moved or deleted enumerator reds), and each one's member set is a subset of NpcStatus, reported as a full offender list. A FIFTH enumerator planted in a scratch file is CONVICTED — which is what makes the walker a guard against the next consumer rather than a snapshot of this one."
+          "case": "T1 — DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS. Every roster row resolves live at path+symbol (a moved or deleted enumerator reds). The THREE discovered enumerators (files spelling >= 2 distinct non-'active' members) equal the roster's literal enumerator rows in both directions. Every literal row's enumeration is total over the live typedef's non-'active' members or carries its one-line reasoned omission naming what it leaves out; every union-read row is unflagged, imports NPC_UNAVAILABLE_STATUSES, and spells no retired foreign word. Full offender lists, never a first failure."
         },
         {
           "id": "A3",
-          "case": "T2 — THE R6' TRIGGER, THE ROSTER'S TOTALITY, AND THE EMPTY REGISTER. The trigger set is DERIVED from the live typedef (its members belonging to no other declared vocabulary) and asserted to be exactly {dead, exiled, retired} — if a future member is unique to the union it joins automatically, and the arm reds if the set comes out empty or single. The flagged set is asserted SET-EQUAL, BOTH DIRECTIONS, to roster u register: an unlisted flagged file reds by name AND a stale row reds. All EIGHT flagged files are roster rows; the exemption register is EMPTY. Each roster row's enumeration must contain every non-active member of the live typedef or carry its one-line reasoned omission — so adding 'jailed' to the typedef REDS every roster file that does not list it, which is the whole point. GUARD-THE-GUARD, THREE ARMS: the matcher is proved to fire on a planted literal before any negative is asserted; an exempted file must still contain the vocabulary it names; a roster file must still contain a trigger token. Planting 'imprisoned' back into envoyCasting.js REDS with its file:line, and so does a fresh 'killed'. THE CANNOT-CATCH IS ASSERTED, NOT ASSUMED: the walker pins that no homonym-only site is semantically an NpcStatus enumeration at the tip."
+          "case": "T2 — THE R6' TRIGGER, THE SET-EQUALITY, AND THE EMPTY REGISTER. The trigger is DERIVED from the live typedef (members belonging to no other declared vocabulary, where a vocabulary declared inside a roster file is this union's OWN) and asserted to be exactly {dead, exiled, retired}, with a floor arm that reds if it comes out empty or single. Every homonym must name at least one foreign vocabulary. The FLAGGED set is asserted SET-EQUAL, BOTH DIRECTIONS, to the roster's literal rows u the register: an unlisted flagged file reds by name AND a stale row reds. The register is EMPTY and its checker is proved on a planted row. The verdict union's three files are asserted to still spell 'jailed' and to still be UNFLAGGED — the exemption is structural and measured, not assumed. The matcher is proved to fire on a planted literal BEFORE any negative is asserted, and planting 'imprisoned' or 'killed' back into a cured row REDS with its file:line."
         },
         {
           "id": "A4",
-          "case": "A CONSUMER THAT UNDER-ENUMERATES IS CONVICTED. Removing 'jailed' from ROSTER_ABSENT_STATUSES reds T1 by name; removing it from LOST_NPC_STATUS reds T1 by name. This is the arm that makes the widening irreversible-by-accident."
+          "case": "A CONSUMER THAT UNDER-ENUMERATES IS CONVICTED. Removing 'jailed' from NPC_UNAVAILABLE_STATUSES reds T1 by name; removing it from LOST_NPC_STATUS reds T1 by name. Proved twice: on synthetic sources inside the walker, so the green is not a snapshot of itself, and by the planted mutants M2' and M6."
         },
         {
           "id": "A5",
-          "case": "THE SEAT LAW, EXECUTED (design §15:217). A jailed NPC is ineligible as a successor (inferSuccessors) and absent from the roster (factionLifecycle.js's ABSENT set) — asserted THROUGH THE REAL FUNCTIONS, not by re-reading the constant. Anchored by an `active` NPC in the same arm who IS eligible, so the arm cannot pass on an empty roster."
+          "case": "⭐⭐ THE TWO READINGS ARE SEPARATE, EXECUTED THROUGH THE REAL FUNCTIONS — the version-5 ruling made machinery, and neither file alone can express it. AVAILABILITY (in the walker): a jailed NPC is ineligible in inferSuccessors and refused by rosterPersonAvailable, anchored by an active figure who IS eligible and IS castable, so the arm cannot pass on an empty roster. HOUSE MEMBERSHIP (in tests/generators/densityLaw.test.js's new `it`): the same jailed figure is ON the roster (isOnRoster true), a house whose only figure is jailed reads 'crewed' via factionLifecycleStateOf, and readFactionLifecycle raises NO reaction — a reversible verdict never dissolves a house (R18)."
         },
         {
           "id": "A6",
-          "case": "envoyCasting.js READS THE UNION AND SPELLS NOTHING. rosterPersonAvailable refuses a `jailed` NPC and a `dead` one, admits an `active` one, and a source scan proves the function body contains NO status string literal. The behaviour for the two retired spellings is stated: an NPC stored as 'imprisoned' or 'killed' is now ADMITTED, which is the correct reading of a value the vocabulary never contained (R4 asks the chair to ratify it)."
+          "case": "envoyCasting.js READS THE UNION AND SPELLS NOTHING. rosterPersonAvailable refuses a jailed NPC and a dead one, admits an active one, and a source scan proves the FUNCTION BODY contains no status string literal. The behaviour for the two retired spellings is stated: an NPC stored as 'imprisoned' or 'killed' is now ADMITTED, the correct reading of a value the vocabulary never contained; and 'removed' now joins the refusal, measured inert because no writer assigns it to an NPC .status."
         },
         {
           "id": "A7",
-          "case": "⛔ NOTHING MOVES. generatorGoldenMaster and dossierProseManifest are bytewise unchanged (the fixture digest asserted before and at the tip). The inertness is proved rather than argued: a scan shows NO writer in src/ assigns 'jailed' to a `.status` — its live sites are all the verdict union's — so every widened predicate is unreachable on existing data, with the matcher proved live on a planted writer. ⭐ No union but NpcStatus changes, so no behaviour-shift measurement is owed (ODQ §934.47 add. 6). ⭐ The edge-shared regeneration is asserted here too: exactly FOUR artifacts move and their two sourceHashes land on f56a7d2120c34290 and b44dd839381fd0c7."
+          "case": "⛔ NOTHING MOVES: GOLDENS, PROSE MANIFEST, AND THE INERTNESS CLAIM. generatorGoldenMaster and dossierProseManifest are bytewise unchanged (fixture digests before and at the tip). The inertness is proved rather than argued: a scan shows NO writer in src/ assigns 'jailed' to a .status — every live site is the verdict union's — so every widened predicate is unreachable on existing data, with the writer matcher proved live on a planted writer first."
         }
       ],
       "checks": [
@@ -31276,7 +31335,8 @@
           "--pool=threads",
           "--maxWorkers=2",
           "tests/property/generatorGoldenMaster.test.js",
-          "tests/property/dossierProseManifest.test.js"
+          "tests/property/dossierProseManifest.test.js",
+          "tests/property/npcs.property.test.js"
         ],
         [
           "npx",
@@ -31284,7 +31344,32 @@
           "run",
           "--pool=threads",
           "--maxWorkers=2",
-          "tests/domain/advanceWorkerByteIdentity.test.js"
+          "tests/generators/densityLaw.test.js",
+          "tests/generators/roleCategory.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/advanceWorkerByteIdentity.test.js",
+          "tests/domain/entities.test.js",
+          "tests/domain/successors.test.js",
+          "tests/domain/magicFormsPractitioner.test.js",
+          "tests/domain/espionageMission.test.js",
+          "tests/domain/roadsParticipation.test.js",
+          "tests/domain/envoyDiplomacy.test.js",
+          "tests/domain/warSeatBooks.test.js",
+          "tests/domain/npcLadderKernel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/copy/voiceMechanics.test.js"
         ],
         [
           "npx",
@@ -31294,7 +31379,9 @@
           "src/domain/entities/successors.js",
           "src/domain/worldPulse/envoyCasting.js",
           "src/domain/worldPulse/magicFormsPractitioner.js",
-          "tests/lint/statusUnionTotality.walker.test.js"
+          "tests/lint/statusUnionTotality.walker.test.js",
+          "tests/generators/densityLaw.test.js",
+          "tests/domain/espionageMission.test.js"
         ],
         [
           "npm",
