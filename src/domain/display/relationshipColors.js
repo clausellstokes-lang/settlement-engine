@@ -93,12 +93,20 @@ export const REL_RGB = Object.freeze({
   neutral:          [107, 83,  64],
 });
 
-/** Hex for a relationship type, falling back to the neutral hue. */
+/**
+ * Hex for a relationship type, falling back to the neutral hue.
+ * @param {string} type a canonical relationship type (unknown types read neutral)
+ * @returns {string}
+ */
 export function relColor(type) {
-  return REL_HEX[type] || REL_HEX.neutral;
+  return /** @type {Readonly<Record<string, string>>} */ (REL_HEX)[type] || REL_HEX.neutral;
 }
 
-/** RGB channels for a relationship type, falling back to the neutral hue. */
+/**
+ * RGB channels for a relationship type, falling back to the neutral hue.
+ * @param {string} type a canonical relationship type (unknown types read neutral)
+ * @returns {readonly number[]}
+ */
 export function relRgb(type) {
-  return REL_RGB[type] || REL_RGB.neutral;
+  return /** @type {Readonly<Record<string, readonly number[]>>} */ (REL_RGB)[type] || REL_RGB.neutral;
 }
