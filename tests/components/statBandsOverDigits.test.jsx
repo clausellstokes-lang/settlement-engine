@@ -467,6 +467,10 @@ describe('SummaryTab defence tile — the averaged raw score is retired', () => 
 
     const s = settlement.defenseProfile.scores;
     const avg = Math.round((s.military + s.monster + s.internal + s.economic + s.magical) / 5);
-    expect(text).toContain(`Systems average: ${scoreBand(avg)}`);
+    // THROUGH THE LADDER, NOT A LITERAL. `scoreBand` still returns the frozen capitals —
+    // that is the vocabulary, and re-casing it at the SOURCE would move the public
+    // projection with it. The tile re-cases at the RENDER rung, so the pin reads the same
+    // two functions the tile does and cannot drift from either one.
+    expect(text).toContain(`Systems average: ${statusCase(scoreBand(avg))}`);
   });
 });
