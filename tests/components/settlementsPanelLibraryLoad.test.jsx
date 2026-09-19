@@ -10,6 +10,9 @@
  *      load, and discards the previous owner's in-flight result.
  *   3. MEMBERSHIP + SORT: numeric/string-equivalent ids join once, and campaign
  *      folders retain the selected Library sort.
+ *   4. THE FORK DOOR BINDS (ODQ §934.14): forking a sample as a signed-in
+ *      keeper does not merely WRITE a library row, it makes that row the
+ *      active save — the fourth create chokepoint, and the one that did not.
  */
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, waitFor, fireEvent, within } from '@testing-library/react';
@@ -108,6 +111,10 @@ vi.mock('../../src/store/index.js', () => {
 
 const { saves } = await import('../../src/lib/saves.js');
 const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
+// The PRODUCTION bind door, driven directly by the fork arms at the foot of this
+// file. Imported after the store mock above so it sees the same module graph the
+// panel does.
+const { bindActiveSaveId } = await import('../../src/store/settlementSliceHelpers.js');
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
@@ -235,5 +242,102 @@ describe('SettlementsPanel library load — correctness-3', () => {
     fireEvent.click(unassignedSelection);
     expect(campaignSelection.checked).toBe(true);
     expect(unassignedSelection.checked).toBe(true);
+  });
+});
+
+/**
+ * ── THE FOURTH CHOKEPOINT BINDS (ODQ §934.14) ───────────────────────────────
+ *
+ * Four doors in this app turn a world into a library row: BuyThisDossier,
+ * SaveToLibraryButton, the surveyor's ConstructionPanel, and the sample fork
+ * here. Three of them stamp the id `savesService.save` hands back as the ACTIVE
+ * save; the fork wrote the row and dropped the id on the floor, so the keeper
+ * who had just forked a sample was left holding a saved world the app still
+ * treated as an unbound draft — the exit dialog calling it unsaved, the AI
+ * lifecycle's `activeSaveId === saveId` guards never matching it, the durable
+ * purchase rung not advancing, and any pre-fork draft timeline never handed over.
+ *
+ * ⭐ IT BINDS THROUGH THE REAL DOOR, AND THAT IS WHY THIS ARM IMPORTS
+ * `bindActiveSaveId` RATHER THAN STUBBING `setActiveSaveId` WITH A SETTER. A
+ * hand-rolled `vi.fn` that assigns `activeSaveId` would pass whether the panel
+ * called the store's action or assigned the field itself, and would prove
+ * nothing about the two things the door does BESIDES stamping the id — handing
+ * a draft timeline to the new row, and CLAIMING the world for the account. The
+ * mock store therefore routes the action into the production helper, so the
+ * claim is executed here rather than imitated.
+ *
+ * ⚠ WHAT THE `draftOrigin` HALF DOES AND DOES NOT PROVE, said plainly. In the
+ * live app the generate action has usually stamped 'account' already for a
+ * signed-in keeper, so this field has a second writer. The fixture starts it at
+ * `null` — the fails-closed state `resetSettlementIdentity` leaves behind — so
+ * the arm reads the DOOR's claim and not the other writer's. The arm that dies
+ * when the bind is removed is the `activeSaveId` one; this one dies with it and
+ * additionally catches a bind re-routed around `claimSettlementForAccount`.
+ */
+describe('SettlementsPanel — the sample fork binds the row it just created', () => {
+  /** The panel's own dynamic import of mapEdits is real; nothing else here is. */
+  const forkedWorld = { name: 'Mossgate (forked)', tier: 'town', _config: { settType: 'town' } };
+
+  function forkStore(user) {
+    const state = baseStore(user);
+    state.canSave = () => true;
+    state.maxSaves = () => 10;
+    // The live generate action installs the world and answers "whose session
+    // made this?". The fixture installs the world and DECLINES to answer, so
+    // the claim below is the only writer of `draftOrigin` in this test.
+    state.settlement = null;
+    state.draftOrigin = null;
+    state.activeSaveId = null;
+    state.draftVersionHistory = [];
+    state.generateSettlement = vi.fn(async () => {
+      state.settlement = forkedWorld;
+      return forkedWorld;
+    });
+    // The production door, driven against this plain mock: `get` hands it the
+    // fixture, `set` applies the same mutator the immer store would.
+    state.setActiveSaveId = (saveId) => bindActiveSaveId(
+      () => storeState,
+      (mutate) => { mutate(storeState); },
+      saveId,
+    );
+    return state;
+  }
+
+  async function forkTheFirstSample() {
+    saves.list.mockResolvedValueOnce([]);
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    const forkButton = (await screen.findAllByRole('button', { name: /Fork this sample/ }))[0];
+    fireEvent.click(forkButton);
+    await waitFor(() => expect(saves.save).toHaveBeenCalledTimes(1));
+  }
+
+  test('a signed-in fork makes the new row the active save and claims the world', async () => {
+    storeState = forkStore({ id: 'owner-A' });
+    saves.save.mockResolvedValueOnce('save-from-fork');
+
+    await forkTheFirstSample();
+
+    await waitFor(() => expect(storeState.activeSaveId).toBe('save-from-fork'));
+    expect(storeState.draftOrigin, 'the forked world is the account\'s, not the device\'s draft')
+      .toBe('account');
+    // THE ROW IT BOUND IS THE ROW IT WROTE: the id came back from the save call
+    // this click made, not from anything the fixture pre-seeded.
+    expect(saves.save).toHaveBeenCalledWith(expect.objectContaining({ tier: 'town' }));
+  });
+
+  test('CONTROL: a keeper who cannot save writes no row, so there is none to bind', async () => {
+    storeState = forkStore({ id: 'owner-A' });
+    storeState.canSave = () => false;
+
+    saves.list.mockResolvedValueOnce([]);
+    render(<SettlementsPanel onNavigate={() => {}} />);
+    const forkButton = (await screen.findAllByRole('button', { name: /Fork this sample/ }))[0];
+    fireEvent.click(forkButton);
+    await waitFor(() => expect(storeState.generateSettlement).toHaveBeenCalledTimes(1));
+
+    // NON-VACUITY FOR THE ARM ABOVE: the binding is not something this harness
+    // does on every fork — with no save there is no id, and none is stamped.
+    expect(saves.save).not.toHaveBeenCalled();
+    expect(storeState.activeSaveId, 'no row was written, so nothing may be bound').toBe(null);
   });
 });

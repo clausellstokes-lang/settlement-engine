@@ -64,6 +64,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const generateSettlement = useStore(s => s.generateSettlement);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
+  // The fork door's half of the create chokepoint (ODQ §934.14). Read the same
+  // way the three sibling doors read it (BuyThisDossier, SaveToLibraryButton,
+  // ConstructionPanel) so there is one access pattern to recognise.
+  const setActiveSaveId = useStore(s => s.setActiveSaveId);
 
   // Campaign store
   const campaigns = useStore(s => s.campaigns);
@@ -126,7 +130,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
    *      towns; this populates the
    *      store's `settlement` so the Create view shows the result.
    *   3. If the user can save (signed-in, under cap), persist the fork
-   *      to their library immediately — "generate AND save" in one tap.
+   *      to their library immediately — "generate AND save" in one tap —
+   *      and BIND the returned id as the active save, so the row the tap
+   *      just created is the one the rest of the app is looking at.
    *   4. Navigate to the Create view to reveal the dossier.
    * If generation returns null (e.g. an anon/free user forking the city
    * sample, which is tier-gated above town), open the purchase modal so
@@ -167,12 +173,33 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // Lazy import keeps first-paint byte-identical.
         const { newSettlementMapEdits } = await import('../domain/townMap/mapEdits.js');
         const minted = result.mapEdits ? result : { ...result, mapEdits: newSettlementMapEdits() };
-        await savesService.save({
+        const newSaveId = await savesService.save({
           name: minted.name || sample.name,
           tier: minted.tier || sample.tier,
           settlement: minted,
           config: minted._config || forkedConfig,
         });
+        // ⭐ BIND THE NEW ROW THROUGH THE SAME DOOR THE OTHER THREE CREATE
+        // CHOKEPOINTS USE (ODQ §934.14). This was the fourth, and the only one
+        // that saved without binding: it wrote a real library row and left
+        // `activeSaveId` null, so the world the keeper had just forked went on
+        // being an UNBOUND draft. Everything keyed to the active save then read
+        // the wrong answer about it — the exit dialog calls a saved world
+        // unsaved, the AI lifecycle's `activeSaveId === saveId` guards never
+        // match the row, the durable-purchase rung does not advance, and a draft
+        // timeline made before the fork is never handed over to the new row.
+        //
+        // `setActiveSaveId` → `bindActiveSaveId` also CLAIMS the world for the
+        // account (claimSettlementForAccount), which matters on the anonymous
+        // path even though this branch is gated on `canSave`: a visitor who
+        // signs in mid-generation reaches here with `draftOrigin` already
+        // 'account' from the generate action, and the claim keeps the two
+        // writers agreeing rather than depending on which ran last.
+        //
+        // No try/catch shape changes around it: `bindActiveSaveId` swallows its
+        // own persist rejection and reports it, so the promise it returns cannot
+        // reject and the discarded return value is not a leak.
+        if (typeof setActiveSaveId === 'function') setActiveSaveId(newSaveId);
       } catch (e) {
         console.error('[SettlementsPanel] fork auto-save failed:', e);
       }
@@ -184,6 +211,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   }, [
     authUser?.id, updateConfig, generateSettlement, canSave,
     clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
+    setActiveSaveId,
   ]);
 
   const [deleteId, setDeleteId] = useState(null);
