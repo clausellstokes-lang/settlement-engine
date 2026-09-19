@@ -441,6 +441,13 @@ export function generateFoodSecurity(tier, institutions, config) {
     importCoverage:  Math.round(importCoverage),
     magicOffset:     Math.round(magicOffset),
     deficit:         Math.round(deficit),
+    // The multiplier dailyProduction was actually computed with: terrain capacity
+    // + the resource/institution bonus + any registered custom producers, capped
+    // at 2.0. NOT geographyData's agricultureCapacity, which the view reported
+    // beside a production figure that number does not explain (TERRAIN_AGRI above
+    // and TERRAIN_DATA.agricultureCapacity are different tables — plains 1.0 vs
+    // 1.5, riverside 0.9 vs 1.3, hills 0.6 vs 0.9).
+    effectiveAgriculture: effectiveAgri,
 
     // Source chains
     chains,

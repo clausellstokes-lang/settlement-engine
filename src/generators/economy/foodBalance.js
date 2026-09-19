@@ -495,7 +495,21 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       deficit: Math.round(deficit),
       deficitPercent: Math.round(deficitPercent),
       surplus: Math.round(Math.max(surplusFinal, 0)),
-      agricultureModifier: agriCap,
+      // THE MULTIPLIER THE PRODUCTION FIGURE BESIDE IT WAS COMPUTED WITH, which
+      // is the only reading under which the Economics tab's "Agriculture
+      // modifier: X%" and the PDF's "Ag mod X" explain anything. This field
+      // carried geographyData's terrain agricultureCapacity, and once the
+      // canonical writer took over production that table stopped being the one
+      // in play: foodGenerator's TERRAIN_AGRI reads plains 1.0 where
+      // geographyData reads 1.5, riverside 0.9 where it reads 1.3, hills 0.6
+      // where it reads 0.9. 376 of the golden master's 525 configurations
+      // printed a modifier their own production contradicts. The canonical
+      // effective multiplier (terrain + resource/institution bonus + registered
+      // custom producers) replaces it; the fallback path, which has no canonical
+      // writer, keeps reporting the capacity its own local model used.
+      agricultureModifier: Number.isFinite(foodSecurity?.effectiveAgriculture)
+        ? foodSecurity.effectiveAgriculture
+        : agriCap,
       stressModifier: productionMult < 1 ? productionMult : undefined,
       importCoverage: importCoverageFinal > 0 ? Math.round(importCoverageFinal) : undefined,
       rawDeficit: rawDeficitFinal > deficit ? Math.round(rawDeficitFinal) : undefined,
