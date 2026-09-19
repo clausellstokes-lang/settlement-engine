@@ -14,6 +14,7 @@ import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The four positions below mapped
 // their drawn sentences to one `<p>` EACH; ProseBlock weaves each position into one
 // paragraph. The DRAW is unchanged — these are the same strings `drawnAtMount` ruled on.
@@ -237,7 +238,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       rulingStructure: null, governingTitle: null,
       blocPresence: null, blocGlue: null, blocEnd: null,
     })
-    : powerStateProse(s, deskReadings, { seed: String(s?._seed ?? s?.id ?? ''), audience });
+    : powerStateProse(s, deskReadings, {
+      seed: String(s?._seed ?? s?.id ?? ''), audience, tierNoun: tierNounFor(s?.tier),
+    });
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
