@@ -23,6 +23,8 @@ import { type, palette, space, pt } from '../theme.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { scoreBand } from '../../domain/display/defenseScoreBands.js';
+import { statusCase } from '../../components/new/labelLadder.js';
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
 const FORCE_GROUPS = [
@@ -372,9 +374,15 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                   {sc.note}
                 </Text>
               </View>
+              {/* ⛔ THE BAND WORD, NEVER THE DIGIT (R-5b item #20, applied here at last). This
+                  printed `Math.round(sc.score)` — a bare 0-100 — beside a row whose screen
+                  twin prints the band word from the shared ladder, so one number read as two
+                  verdicts across the two surfaces and the PDF was the one still speaking in
+                  digits. It now prints exactly what `DefenseTab` prints for the same score,
+                  through the same two functions, so the surfaces cannot drift by a word. */}
               {sc.score != null && (
-                <Text style={{ ...type.numeric, fontSize: pt['10'], color: sc.color, marginLeft: 6 }}>
-                  {Math.round(sc.score)}
+                <Text style={{ ...type.caption, fontSize: pt['8'], color: sc.color, fontWeight: 700, marginLeft: 6 }}>
+                  {statusCase(scoreBand(Math.min(100, Math.max(0, sc.score))))}
                 </Text>
               )}
             </View>

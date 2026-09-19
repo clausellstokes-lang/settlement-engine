@@ -234,11 +234,15 @@ export function deriveSupportingCapabilities(settlement) {
       // 144 large settlements. Two facts, two names — this one is ARCANE SUPPORT, which is
       // the only thing `hasMagicInst` can answer, and the Overview keeps the other name.
       //
-      // ⚠ THE STATUS VOCABULARY DID NOT MOVE. It has always been `Arcane support` / `None`,
-      // so the label is now the row's own word rather than a wider claim the read cannot
-      // support; nothing downstream has to learn a new status spelling.
+      // ⛔ AND THE STATUS SAYS SOMETHING THE LABEL DOES NOT (the owner's fold of lane 6's
+      // capability row). After the rename the row printed "Arcane Support · Arcane support ·
+      // <band>" — the status word had become the LABEL, differing only in a capital, which is
+      // the same row saying one thing twice that the Economic Backing fold exists to stop. The
+      // presence vocabulary is therefore `Present` / `None`: the label names the FACT the row
+      // reads and the status answers WHETHER it is here, so the two words carry two readings
+      // and the band beside them carries the third. The note text is untouched.
       label: 'Arcane Support',
-      status: f.hasMagicInst ? 'Arcane support' : 'None',
+      status: f.hasMagicInst ? 'Present' : 'None',
       // A PRESENCE READ HAS NO MAGNITUDE, which is the shape THIS LIST ALREADY USES for
       // every other one. Legal Infrastructure, Medical Readiness and Logistics & Supply all
       // carry `score: null` and render no bar, because "is there a court" has no size. So

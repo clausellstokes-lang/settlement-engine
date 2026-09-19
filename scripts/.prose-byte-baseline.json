@@ -55,7 +55,7 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 154577,
+      "raw": 154563,
       "gzip": 23039,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
@@ -120,9 +120,9 @@
       "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",
       "leaf": "src/data/dossierStateProse/defense.generated.js",
       "fromRaw": 111827,
-      "toRaw": 154577,
+      "toRaw": 154563,
       "gzipAfter": 23039,
-      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against. ⚠ AMENDED 2026-09-18 (owner §934.9): `toRaw` reads 154577 rather than the 154593 this car measured, because a LATER car took 16 bytes back off the same leaf and the ratchet refuses a declared row for a shrink (\"a shrink needs no declaration, only a lowered row\") while the chain must still terminate at the committed number. The 16 bytes are two pool KEYS spelled differently — `Magical Capability: Arcane support|None` became `Arcane Support: Arcane support|None`, so the corpus key matches the display label the review-10 car moved; the Overview's Systems Health row owns the name `Magical Capability` for a different fact. Not one variant, vid, face or attach set was edited, the four occurrences are 4 bytes shorter each, and both pools are DS-DEF-6 BLOCKED pools that `defenseSupportingProse` cannot emit over its whole input space, so no cell moves for any town and generatorGoldenMaster passes plain."
+      "reason": "the RENDER half of the schema: a `poolMeta` row per pool (role, variantCount, faceCounts, vids, readsCount where the census records a reading, attach) and a `vid` on every variant. Key-by-key against c45a46a78 the corpus is 0 ADDED / 0 REMOVED / 0 CHANGED pools and the only keys added anywhere are `poolMeta` on a block and `vid` on a variant; the manifest is byte-identical on 525 towns x 2 audiences and the classifier reports UNCHANGED on all 73,284 cells. ARCH §10 priced a render-only `poolMeta {role}` at +51,994 B over the six; the full RENDER half measures +243,318 B, which is 34.6 per cent of the corpus and 8.7 per cent of the §10 ceiling the six leaves are apportioned against. ⚠ AMENDED 2026-09-18 (owner §934.9): `toRaw` reads 154563 rather than the 154593 this car measured, because a LATER car took 16 bytes back off the same leaf and the ratchet refuses a declared row for a shrink (\"a shrink needs no declaration, only a lowered row\") while the chain must still terminate at the committed number. The 16 bytes are two pool KEYS spelled differently — `Magical Capability: Arcane support|None` became `Arcane Support: Arcane support|None`, so the corpus key matches the display label the review-10 car moved; the Overview's Systems Health row owns the name `Magical Capability` for a different fact. Not one variant, vid, face or attach set was edited, the four occurrences are 4 bytes shorter each, and both pools are DS-DEF-6 BLOCKED pools that `defenseSupportingProse` cannot emit over its whole input space, so no cell moves for any town and generatorGoldenMaster passes plain. A SECOND 14 bytes came off in the same landing when the owner ruled the presence row's status vocabulary `Present` / `None`, which re-keys the pool `Arcane Support: Arcane support` → `Arcane Support: Present`; the same reasoning applies unchanged."
     },
     {
       "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only",

@@ -2761,7 +2761,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3
         }
       ],
-      "Arcane Support: Arcane support": [
+      "Arcane Support: Present": [
         {
           "angle": "ledger",
           "text": "{settlement} has arcane provision behind its defenses: detection, warding and the ability to answer a spell with something other than a shield.",
@@ -3266,7 +3266,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         ],
         "attach": []
       },
-      "Arcane Support: Arcane support": {
+      "Arcane Support: Present": {
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [

@@ -30,6 +30,10 @@ import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx'
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { defenseSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
+import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
+import { statusCase } from '../../src/components/new/labelLadder.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SEED = 'pdf-smoke-2026-05';
@@ -276,5 +280,48 @@ describe('IdentityDailyLife — the magic word-grade with no writer is gone', ()
       Object.keys(metropolisSettlement.defenseProfile), 'magicalCapability', 'scores',
       'generateDefenseProfile output (metropolis)',
     );
+  });
+});
+
+/**
+ * ── THE PDF'S CAPABILITY ROWS SPEAK IN BAND WORDS, NOT DIGITS (owner fold, 2026-09-18) ──
+ *
+ * `DefenseSecurity.jsx` printed `Math.round(sc.score)` beside each Supporting Capabilities
+ * row while its screen twin printed the band word from the shared ladder — R-5b item #20's
+ * law held on one surface and not the other, so one number read as two verdicts depending on
+ * where a DM met it. The PDF now prints exactly what the screen prints, through the same two
+ * functions.
+ *
+ * ⚠ THE PIN LIVES HERE RATHER THAN IN statBandsOverDigits.test.jsx, deliberately: that file
+ * is being re-cut by the peer capability-row car on the consist, and a pin that can sit
+ * clear of a contended file should.
+ */
+describe('DefenseSecurity — the capability score is a band word on the page', () => {
+  function texts(node, out = []) {
+    if (node == null || node === false || node === true) return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const c of node) texts(c, out); return out; }
+    if (typeof node?.type === 'function') { texts(node.type({ ...node.props }), out); return out; }
+    if (node?.props?.children != null) texts(node.props.children, out);
+    return out;
+  }
+
+  test('every scored capability row prints its band word, and no bare digit survives', () => {
+    for (const [name, settlement, vm] of [
+      ['village', villageSettlement, villageVm], ['metropolis', metropolisSettlement, metropolisVm],
+    ]) {
+      const caps = deriveSupportingCapabilities(settlement).filter((c) => c.score !== null);
+      expect(caps.length, `${name}: no scored capability row, so this arm judges nothing`)
+        .toBeGreaterThan(0);
+      const printed = texts(DefenseSecurity({ settlement, vm })).map((t) => t.trim());
+      for (const capRow of caps) {
+        const band = statusCase(scoreBand(Math.min(100, Math.max(0, capRow.score))));
+        expect(printed, `${name}: ${capRow.label} does not print its band word`).toContain(band);
+        // …and the digit it replaced is not on the page as a standalone value. The anchor is
+        // the band assertion just above: the row demonstrably rendered.
+        expectAbsentWithAnchor(printed, String(Math.round(capRow.score)), band,
+          `${name}: ${capRow.label}'s retired digit`);
+      }
+    }
   });
 });

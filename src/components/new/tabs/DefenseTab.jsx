@@ -612,7 +612,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>{
             /* R-5b item #20: the bare 0-100 digit beside this bar is the score's band word
-               from the shared ladder. Arcane Support's status ("Arcane support" / "None")
+               from the shared ladder. Arcane Support's status ("Present" / "None")
                is a presence read, not a grade, so there the band is the only word that says
                how good the bar actually is. (That row was called `Magical Capability` until
                review 10; the Overview's Systems Health row owns that name, and the two ask

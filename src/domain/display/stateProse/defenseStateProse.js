@@ -1409,7 +1409,7 @@ export function defenseStateProse(settlement, options = {}) {
 export const DEF6_C3_BLOCKED_POOLS = Object.freeze([
   'Economic Backing: Well-funded', 'Economic Backing: Adequate',
   'Economic Backing: Underfunded', 'Economic Backing: Critical',
-  'Arcane Support: Arcane support', 'Arcane Support: None',
+  'Arcane Support: Present', 'Arcane Support: None',
   'Legal Infrastructure: Court + Prison', 'Legal Infrastructure: Court only',
   'Legal Infrastructure: Prison only', 'Legal Infrastructure: None',
   'Medical Readiness: Hospital present', 'Medical Readiness: Clergy care',
