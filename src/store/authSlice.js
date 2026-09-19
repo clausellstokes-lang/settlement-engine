@@ -26,6 +26,15 @@
  * to false and every gate below reverts to TIER_GATE for staff too; nothing in
  * this file needs editing. Read that module's header for exactly what the switch
  * reaches and what it deliberately does not.
+ *
+ * ⛔ AND THERE IS A DEV-ONLY PREVIEW PERSONA (ODQ §934.35): `VITE_PREVIEW_ROLE`
+ * in the dev server's `.env.local` seats 'admin' or 'developer' as the ROLE every
+ * writer below resolves through, so a local preview renders the admin surface
+ * with NO account, NO password and NO claim to the server — the session stays
+ * whatever it really is and the server keeps every one of its own gates. It is
+ * `import.meta.env.DEV`-guarded, so a production build eliminates it entirely.
+ * Full rationale at `previewPersonaRole()` below; operator instructions in
+ * docs/DEPLOY.md ("Local preview — the DEV-only admin persona").
  */
 
 import { auth as authService } from '../lib/auth.js';
@@ -92,6 +101,66 @@ const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
 function resolveTier(tier, role) {
   return staffUnlocksPaidFeatures(role) ? 'premium' : (tier || 'free');
 }
+
+/**
+ * ⛔ THE DEV-ONLY PREVIEW PERSONA (ODQ §934.35). The owner asked for "a dummy
+ * admin account for our preview purposes only". NOBODY CREATES AN ACCOUNT HERE —
+ * this is a VIEW, not an identity. It supplies the ROLE that the client's own
+ * gates read, so a preview session renders the admin surface (the Developer
+ * Admin Panel row, /admin, every tier gate open) while the SESSION stays exactly
+ * what it really is: anonymous, or whoever is genuinely signed in.
+ *
+ * ⛔ NOTHING IS CLAIMED TO THE SERVER, AND THAT IS THE WHOLE SAFETY ARGUMENT.
+ * The persona is read HERE and nowhere else. No request header, no body field,
+ * no JWT claim and no profiles write carries it; the Supabase client is
+ * constructed from the anon key alone and is never handed a persona. So every
+ * server gate — RLS, current_user_is_privileged(), the audited admin-actions
+ * function, has_surveyor_entitlement() — answers for the REAL caller and refuses
+ * a persona exactly as it refuses any stranger. A preview admin can SEE the
+ * admin chrome; it cannot read or write one row it was not already entitled to.
+ * That asymmetry is deliberate: it is what makes a dummy admin safe to have.
+ *
+ * ⛔ IT CANNOT EXIST IN PRODUCTION. The branch is `import.meta.env.DEV && …`,
+ * and Vite replaces `import.meta.env.DEV` with the literal `false` in a
+ * production build, so Rollup eliminates the whole body as dead code — the
+ * shipped bundle contains neither this mechanism nor the variable's name.
+ * tests/build/previewPersonaAbsent.test.js proves that against the real dist,
+ * and tests/store/previewPersona.test.js proves the predicate is inert with DEV
+ * false and that nothing injects it into a request.
+ *
+ * SET IT in the preview worktree's `.env.local` (gitignored, .gitignore:5),
+ * which the dev server loads by Vite's default env handling:
+ *     VITE_PREVIEW_ROLE=admin      # or: developer
+ * Any other value — including a plausible one like 'owner' or 'staff' — is
+ * REFUSED by isStaffRole and reads as no persona at all (fail-closed).
+ *
+ * The account menu shows "PREVIEW PERSONA · admin" while it is active, so no one
+ * can mistake the preview for a real session.
+ *
+ * @returns {string|null} 'admin' | 'developer' while previewing, else null
+ */
+function previewPersonaRole() {
+  if (import.meta.env.DEV && import.meta.env.VITE_PREVIEW_ROLE) {
+    const asked = String(import.meta.env.VITE_PREVIEW_ROLE).trim();
+    return isStaffRole(asked) ? asked : null;
+  }
+  return null;
+}
+
+/**
+ * THE ONE PLACE A ROLE IS DECIDED for client-side state. Every auth writer below
+ * goes through it, so the persona cannot be honoured on one path and forgotten
+ * on another — the bug shape §934.28 had just cured on the TIER path, where
+ * authSignIn alone skipped resolveTier.
+ *
+ * With no persona this is exactly the `role || 'user'` every writer used before.
+ *
+ * @param {string|null|undefined} role the role from the authenticated profile
+ * @returns {string}
+ */
+function resolveRole(role) {
+  return previewPersonaRole() || role || 'user';
+}
 let authUnsubscribe = null;
 // M-9d — teardown for the single-session validation loop (focus/visibility + interval).
 let sessionValidationCleanup = null;
@@ -122,8 +191,11 @@ export const createAuthSlice = (set, get) => ({
   auth: {
     user: null,           // Supabase user object (null = anonymous)
     session: null,        // Supabase session
-    tier: 'anon',         // 'anon' | 'free' | 'premium'
-    role: 'user',         // 'user' | 'developer' | 'admin'
+    // §934.35: a DEV preview persona seats its role (and therefore its tier)
+    // from the first frame, before any auth resolves. With no persona both
+    // resolvers are the identity they always were ('anon' / 'user').
+    tier: resolveTier('anon', resolveRole(null)),   // 'anon' | 'free' | 'premium'
+    role: resolveRole(null),                        // 'user' | 'developer' | 'admin'
     displayName: null,    // custom display name (from profiles table)
     isFounder: false,     // founder lifetime grant (from profiles table)
     avatarUrl: null,      // optional profile avatar URL
@@ -165,8 +237,8 @@ export const createAuthSlice = (set, get) => ({
       state.auth = {
         user,
         session,
-        tier: resolveTier(tier, role),
-        role: role || 'user',
+        tier: resolveTier(tier, resolveRole(role)),
+        role: resolveRole(role),
         displayName: displayName || null,
         isFounder: Boolean(isFounder),
         avatarUrl: avatarUrl || null,
@@ -237,7 +309,7 @@ export const createAuthSlice = (set, get) => ({
       // EVERY DOOR THAT MAKES A WORLD AN ACCOUNT'S SAYS SO: the post-signup
       // SAVE_SETTLEMENT intent did not, and left exactly this leak open (cured at
       // its handler in store/index.js).
-      state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
+      state.auth = { user: null, session: null, tier: resolveTier('anon', resolveRole(null)), role: resolveRole(null), displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.
       state.dossierEntitlements = {};
@@ -345,7 +417,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
@@ -398,8 +470,8 @@ export const createAuthSlice = (set, get) => ({
         }
         set(state => {
           state.auth = {
-            user, session, tier: resolveTier(tier, role),
-            role: role || 'user',
+            user, session, tier: resolveTier(tier, resolveRole(role)),
+            role: resolveRole(role),
             displayName: displayName || null,
             isFounder: Boolean(isFounder),
             avatarUrl: avatarUrl || null,
@@ -502,7 +574,7 @@ export const createAuthSlice = (set, get) => ({
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
-            tier: resolveTier(result.tier, result.role), role: result.role || 'user',
+            tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
             displayName: result.displayName || null,
             isFounder: Boolean(result.isFounder),
             avatarUrl: result.avatarUrl || null,
@@ -545,7 +617,7 @@ export const createAuthSlice = (set, get) => ({
           // TIER_GATE read refused them until the auth-state listener happened
           // to land and repair it. A race decided whether staff saw the paid
           // surface. It resolves here now, like its four siblings.
-          tier: resolveTier(result.tier, result.role), role: result.role || 'user',
+          tier: resolveTier(result.tier, resolveRole(result.role)), role: resolveRole(result.role),
           displayName: result.displayName || null,
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,

@@ -82,8 +82,31 @@ import Button from './primitives/Button.jsx';
 import AvailableAtLaunchPill from './primitives/AvailableAtLaunchPill.jsx';
 import ArrowControl from './nav/ArrowControl.jsx';
 import { padTarget, slipFont } from './nav/arrowGeometry.js';
+import { PHONE_CHROME_FLOOR } from '../design/proseScale.js';
 import UnreadMessageBadge, { unreadMessagesLabel } from './account/UnreadMessageBadge.jsx';
 import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
+
+/**
+ * ⛔ THE DEV-ONLY PREVIEW PERSONA MARKER (ODQ §934.35). The owner asked for "a
+ * dummy admin account for our preview purposes only"; store/authSlice.js seats
+ * the ROLE from VITE_PREVIEW_ROLE while the SESSION stays whatever it really is,
+ * and nothing is ever claimed to the server. A preview that LOOKS like a real
+ * admin session and is not one must say so on its face, or someone will read a
+ * screenshot as proof that production works — so the menu wears this.
+ *
+ * Computed at MODULE level, not in the component: `import.meta.env.DEV` is the
+ * literal `false` in a production build, so this folds to `null` and the JSX
+ * below it folds away with it — no hook runs, no element is created, and the
+ * variable's name never reaches the bundle
+ * (tests/build/previewPersonaAbsent.test.js).
+ *
+ * It deliberately re-reads the env rather than reading the store: the authority
+ * is authSlice's resolveRole, this is a LABEL, and a label that could disagree
+ * with the store by being wired to it is worse than one that cannot.
+ */
+const PREVIEW_PERSONA_LABEL = import.meta.env.DEV && import.meta.env.VITE_PREVIEW_ROLE
+  ? `PREVIEW PERSONA \u00b7 ${String(import.meta.env.VITE_PREVIEW_ROLE).trim()}`
+  : null;
 
 /** @param {number} n */
 const px = (n) => `${n}px`;
@@ -386,6 +409,25 @@ export default function AccountMenu({
             padding: 6, zIndex: 1200,
           }}
         >
+          {PREVIEW_PERSONA_LABEL && (
+            <div
+              data-sf-preview-persona=""
+              style={{
+                padding: `4px ${SP.md}px`,
+                marginBottom: 2,
+                background: GOLD_BG,
+                borderBottom: `1px solid ${GOLD_TXT}`,
+                color: INK,
+                fontFamily: sans,
+                fontSize: PHONE_CHROME_FLOOR,
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {PREVIEW_PERSONA_LABEL}
+            </div>
+          )}
           <MenuRow
             icon={<Settings size={15} />}
             label="Account"
