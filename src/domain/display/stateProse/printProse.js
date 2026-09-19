@@ -326,13 +326,13 @@ export function buildPrintProse(settlement, ctx = {}) {
   // CELL, which is finer than an audience flag and is what the doc actually rules on.
   // `tierNoun` is the settlement's own noun (§934.22 addendum): the desks speak it, so the
   // printed dossier carries the same sentence the screen does, from the same producer.
-  const opts = { seed, audience: /** @type {'dm'} */ ('dm'), tierNoun: tierNounFor(r.tier) };
+  const opts = { seed, audience: /** @type {'dm'} */ ('dm'), tierNoun: tierNounFor(/** @type {{ tier?: string }} */ (r).tier) };
   // ⛔ AND `publicDossier` IS FALSE, STATED. An export is a PAID artifact by construction —
   // §885.3's free anonymous gallery viewer has no export button — so the desks draw.
   // `tierNoun` rides with the paid flags because the two component-layer desk readers below
   // (`generalDeskLines`, `economyDeskRead`) forward it rather than deriving it — see the
   // note at `economyDeskRead`. A printed dossier is a reader's surface, so it carries it.
-  const paid = { publicDossier: false, playerView: false, tierNoun: tierNounFor(r.tier) };
+  const paid = { publicDossier: false, playerView: false, tierNoun: tierNounFor(/** @type {{ tier?: string }} */ (r).tier) };
 
   // ── THE GENERAL DESK, through its ONE caller, exactly as seven tabs read it ─────────
   // MIRRORS `OverviewTab.jsx:149` exactly, including the one-or-many read: the record carries

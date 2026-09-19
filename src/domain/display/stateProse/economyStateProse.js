@@ -866,7 +866,7 @@ export function leadingGoodNoun(exports_) {
  *   `exportPosture` is `deriveExportPosture`'s, `notableAbsences` is
  *   `deriveNotableAbsences`'s, and `impairedInstitution` is one name out of the impairment
  *   sets `computeChainSets` builds for ServicesTab.
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * The last key is `foodSecurityRung`, NOT `foodSecurity`, and the difference is load
  * bearing rather than cosmetic. Every other key here names a SURFACE or a RUNG; that one
  * named an ENGINE RECORD — `economicState.foodSecurity`, a real container with `label`

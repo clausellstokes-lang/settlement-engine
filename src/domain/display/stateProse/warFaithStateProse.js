@@ -772,7 +772,7 @@ export function nicheContestPoolKey(ranks) {
  *
  * @param {{name?: unknown}|null|undefined} settlement the town, read ONLY for its name
  * @param {WarFaithReadings} [readings] the canonical readings, as their owners return them
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<Record<string, object|null>>}
  */
 export function warFaithStateProse(settlement, readings = {}, options = {}) {

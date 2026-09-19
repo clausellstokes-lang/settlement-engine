@@ -569,7 +569,7 @@ export function disasterRowPoolKey(granary, hospital, church) {
  * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
  *   defenseProfile?: {scores?: {economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
  *   economic: object|null, disaster: object|null}>}
  */
@@ -745,7 +745,7 @@ export function strategicPrizePoolKey(terrain) {
  *   resourceAnalysis?: {terrain?: unknown}|null,
  *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null
  *   }|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
  */
 export function defensePostureProse(settlement, options = {}) {
@@ -858,7 +858,7 @@ export function criminalCapturePoolKey(captureState) {
  * @param {{name?: string, powerStructure?: {government?: unknown,
  *   criminalCaptureState?: unknown}|null}|null|undefined} settlement
  * @param {unknown} structureKey
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{structure: object|null, capture: object|null}>}
  */
 export function defenseCriminalProse(settlement, structureKey, options = {}) {
@@ -983,7 +983,7 @@ export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
  * @param {{name?: string, tier?: unknown, institutions?: unknown,
  *   config?: {monsterThreat?: unknown}|null,
  *   defenseProfile?: {economicGates?: {military?: unknown}|null}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{rationale: object|null}>}
  */
 export function defenseWallRationaleProse(settlement, options = {}) {
@@ -1105,7 +1105,7 @@ export function viabilityUnderStressPoolKey(stress, viable) {
  *
  * @param {{name?: string, stress?: unknown,
  *   economicViability?: {viable?: unknown}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{override: object|null, viability: object|null}>}
  */
 export function defenseMilitaryStatusProse(settlement, options = {}) {
@@ -1269,7 +1269,7 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  *
  * @param {{name?: string, institutions?: unknown,
  *   config?: {monsterThreat?: unknown}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{fortification: object|null, force: object|null, contracted: object|null,
  *   charter: object|null, arcane: object|null}>}
  */
@@ -1308,7 +1308,7 @@ export function defenseForcesProse(settlement, options = {}) {
  *
  * @param {{name?: string, economicState?: {safetyProfile?: {safetyLabel?: unknown,
  *   safetyDesc?: unknown}|null}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{publicOrder: object|null, firstSurvey: object|null}>}
  */
 export function defenseStateProse(settlement, options = {}) {
@@ -1503,7 +1503,7 @@ export function navalDefensePoolKey(navy, port, blockaded) {
  * @param {{name?: string, config?: {tradeRouteAccess?: unknown}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null,
  *   foodSecurity?: {stockpile?: {blockaded?: unknown}|null}|null}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{logistics: object|null, naval: object|null}>}
  */
 export function defenseSupportingProse(settlement, options = {}) {
@@ -1657,7 +1657,7 @@ export function magicDependencyPoolKey(magicDependency, namedChain) {
  *
  * @param {{name?: string, defenseProfile?: {magicDependency?: unknown}|null,
  *   economicState?: {activeChains?: unknown}|null}|null|undefined} settlement
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{arcaneReliance: object|null}>}
  */
 export function defenseMagicDependencyProse(settlement, options = {}) {

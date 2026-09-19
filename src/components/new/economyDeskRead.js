@@ -83,7 +83,7 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
  * could never draw it. Two tabs disagreeing about who is reading would be the real defect.
  *
  * @param {object|null|undefined} settlement
- * @param {{publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
  *   foodBalance?: object|null, granaryOutlook?: object|null, flowDrift?: object|null,
  *   impairedInstitution?: string|null}} [options]
  *   `impairedInstitution` is ONE house out of the impairment sets ServicesTab already builds

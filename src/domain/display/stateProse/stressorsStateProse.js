@@ -466,7 +466,7 @@ export function stressorOriginPoolKey(stressor) {
  * @param {{banners?: unknown, conditions?: ReadonlyArray<object>|null,
  *   worldStressor?: WorldStressorView|null}} [readings] the caller selects and normalizes
  *   the world stressor; see DS-STR-2 above for why the desk does not reach for it
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{crisisArity: object|null, crisisFraming: object|null,
  *   conditionSeverity: object|null, conditionDirection: object|null,
  *   conditionArchetype: object|null, conditionProvenance: object|null,
@@ -528,7 +528,7 @@ export function stressorsStateProse(settlement, readings = {}, options = {}) {
  *
  * @param {{name?: string}|null|undefined} settlement
  * @param {{type?: unknown, label?: unknown}|null|undefined} banner one `settlement.stress[]` entry
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {object|null}
  */
 export function crisisBannerRung(settlement, banner, options = {}) {

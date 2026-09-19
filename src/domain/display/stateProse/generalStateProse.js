@@ -1714,7 +1714,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   caller had no typed statement of what the desk needs handed to it. Each row names only
  *   the fields this desk actually reads off it — `intensity` for the pool cut, `parties` /
  *   `issue` / `stakes` for the slots — so a producer change to any of them lands here
- * @param {{seed?: string, audience?: string}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {

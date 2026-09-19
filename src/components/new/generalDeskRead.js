@@ -143,7 +143,7 @@ function line(mount, rung) {
  * THE READ. One desk call per render, gated, with every position's lines drawn.
  *
  * @param {object|null|undefined} settlement the record the tab already holds
- * @param {{publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
  *   stresses?: ReadonlyArray<{type?: unknown}|null>,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null,
