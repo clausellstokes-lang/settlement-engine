@@ -1,0 +1,31 @@
+export const meta = {
+  name: 'build-cycle-5',
+  description: 'WR-7c ratification · legacy desks continue · operator messages',
+  phases: [{ title: 'Build', detail: '3 lanes, implement then verify' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS (war volume §10): ${MF} on claude/composite-r4 only; pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (full logs for walker diffs, never diff gate-tails); goldens before wiring; STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". Best-over-safe. Everything DARK. Prior lane journals (wf_06885ccd-bcf, wf_eb76f827-7da, wf_d1abb4a9-5c5, wf_d56f4b25-ab4) hold the era's precedents — read your lane's history first.`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE A — WR-7c RATIFICATION + THE COMPROMISE ROUND (war volume §5 WR-7c — read whole): two-level authority (majority vote of the coalition's legitimate powers; the coalition may veto a member's own ruler), each member voting on ITS OWN picture (K4 absolute — no merged estimate; the structural prohibition is code, not convention), envoy testimony on the credibility ladder, the per-round acceptance-band widening + home-front drain as the endogenous terminator (law L — no round limit), THE UNANIMOUS-IN-JUDGMENT-SPLIT-IN-FACT pin (every member wanting the same outcome for incompatible believed reasons). Build on WR-7b's landed substrate (negotiationPictures, the envoy states); K3 pin set extends to every new module; sizes: new logic in leaves (the baseline is EXACT now — any growth reds immediately); one pathspec commit + queue row. Also fold the two cosmetic commit-body corrections from the cycle-4 verifier into the queue row (the 9,588 figure's set/meaning; the parent-naming). Return {lane:'A WR-7c', commits, gates, stopReports, notes}.`,
+    {label:'laneA:wr7c', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run gates; adversarially prove K4 (grep for any cross-picture merge/average; the split-in-fact pin must FAIL when you neuter the per-picture isolation in scratch); the widening terminator is endogenous (no counter cap); sizes green; commit pathspec-clean. Return {lane:'A verify', verdict, findings}.`,
+      {label:'laneA:verify5', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE B — THE LEGACY RETROFIT CONTINUES (the population desk landed @ 1b9b2b10 — read that commit as your pattern). This cycle: the next TWO desks by firing cadence — the WAR/EVENTS desk kinds and the ECONOMY/TRADE desk kinds from docs/content/RECEIPT_POOLS_LEGACY.md. Same discipline per desk: variant-1 byte-equality verified against live strings (STOP on drift), seeded per-entity selection, goldens captured before wiring with the per-kind plan quoted in the commit body, the repetition-envelope pin per desk. ALSO: anchor the 5 guard rows your slice-1 test file added against the frozen-0 ceiling (the cycle-4 verifier's undisclosed finding — anchor or annotate per the walker's own discipline, in your first commit). Return {lane:'B legacy-2', commits, gates, stopReports, notes}.`,
+    {label:'laneB:legacy2', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Verify per desk: byte-equality of anchors, determinism (same seed twice), the golden plan matches the diff, the guard rows anchored; run one desk's repetition-envelope pin with its mutant control. Return {lane:'B verify', verdict, findings}.`,
+      {label:'laneB:verify5', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: owner-ordered implementation. ${P10}
+LANE C — OPERATOR MESSAGES (the next dictation-corpus surface; find + read its design doc in ${MF}/docs — grep 'operator message'). Implement per spec end to end: components, store/service wiring, audience/premium gates, tests; new store actions → operationRegistry + gen:compendium-data same-commit; the payload-boundary veil seam (VH-1's architecture) applies to any new public-facing payload this surface emits. DO NOT touch war/envoy, legacy-retrofit, or hooks files. Pathspec commits per slice. Return {lane:'C operator-messages', commits, gates, stopReports, notes}.`,
+    {label:'laneC:operator', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run gates; check the spec's invariants; any public payload passes the veil seam (probe with a vector term); compendium freshness; pathspec-clean. Return {lane:'C verify', verdict, findings}.`,
+      {label:'laneC:verify5', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

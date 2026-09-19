@@ -1,0 +1,37 @@
+export const meta = {
+  name: 'wave-e-satellite-topography',
+  description: 'Wave E: satellite births derive placement and resources from map topography (directive 4 / J-D4)',
+  phases: [{ title: 'Build', detail: 'one Opus implementer, the satellite lane deepening', model: 'opus' }],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const SCHEMA = {
+  type: 'object',
+  required: ['agent', 'fixes'],
+  properties: {
+    agent: { type: 'string' },
+    fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } },
+    behavior_shifts: { type: 'array', items: { type: 'string' } },
+    discovered: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+phase('Build')
+const result = await agent(`You are an Opus IMPLEMENTER for SettlementForge. WAVE E of the realm-directives program: SATELLITE TOPOGRAPHY. BINDING LAW: docs/DESIGN_REALM_DIRECTIVES.md directive 4 + J-D4 ("satellites sample spatial rasters READ-ONLY at a seeded draw inside the orbit annulus; they never join the frozen spatial digest; resource derivation uses the sampled topography through the existing resource-strike vocabulary"). Worktree: ${ROOT} branch claude/composite-r4 (HEAD past a19d2d77) — verify with \`git -C ${ROOT} rev-parse --abbrev-ref HEAD\`; stop on mismatch.
+
+⚠️ A long-running soak node process may be live: never touch artifacts/soak/**, never kill processes; focused vitest only, one at a time; timeout-shaped reds get ONE isolation re-run.
+
+CONTEXT: the satellite lane lives in src/domain/worldPulse/settlementLifecycleKernel.js (satellite births: boom/prosperity/resource-strike/migration-overflow triggers; steading mint, seeded naming, conservation-exact transfers; satellites are cosmetic-placement orbiters via-parent, NOT digest members). The spatial rasters live in src/domain/spatial/ (terrain, water, slope; the frozen integer-quantized digest). The resource-strike vocabulary is W-DISCOVERY's (rg resource_discovery / resourceStrike). The subsystem-certification registry (src/domain/certification/, place lane file) now guards all rule keys — extend the settlementLifecycleEnabled row's aliveness/invariants if your changes add observable channels; do NOT mint a new rule key (this deepens an existing gated lane).
+
+IMPLEMENT (J-D4, the whole of it):
+1. SEEDED TOPOGRAPHIC PLACEMENT: the satellite's position draw inside the orbit annulus becomes topography-aware — sample the spatial rasters READ-ONLY at candidate points (seeded candidate set, bounded count) and weight by suitability (water proximity for fisher steadings, valley floor vs cliff, terrain class). The digest is NEVER touched; satellites remain non-members with via-parent routing. Placement stays deterministic: same world, same tick, same satellite site.
+2. TOPOGRAPHIC RESOURCES: the newborn steading's starting resources derive from the SAMPLED topography through the existing resource-strike vocabulary (a riverside steading leans fishing/mill; a hillside one leans quarry/ore per the strike tables) — authored mapping table (closed vocabulary, no free-form), replacing whatever generic/parent-copied assignment exists today. Parent-inheritance remains a WEIGHTED component (people bring their trades), not the whole.
+3. CONSERVATION + DORMANCY UNTOUCHED: population transfers stay exact (the property pin must stay green); flag-off behavior byte-identical (the fenced dormancy goldens stay green UNTOUCHED — if one reds, your change violates dormancy: fix the change).
+4. THE CANONICAL STORY (pin it): a resource-strike-triggered satellite lands NEAR its strike (the mining camp sits at the seam, not a random orbit point) — the design's founding example made testable.
+5. PINS with executed negative controls (revert/red/restore/green, quoted): topographic placement determinism; suitability weighting actually weights (a water-heavy annulus births waterside steadings at the designed rate — a seeded distribution check using the existing envelope idioms if proportionate, else a fixture pin); resource derivation follows sampled terrain (riverside ⇒ fishing-class strike, hillside ⇒ quarry-class); strike-proximity (item 4); conservation still exact; dormancy goldens green.
+6. Herald: the birth news may name the topography in-world ("a fishing steading takes root on the west bank") — extend the existing steading news composition if present; legibility law; no em dashes in string literals.
+
+HARD RULES: no migrations, no git mutations, no full suites/builds, no golden re-records, no ratchet raises, determinism laws (seeded forks, labels under the satellite lane's existing stream family), headless domain, 800-line ceiling (split leaves if needed), anchored negatives, JSON-round-trip for persistence pins. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts stated plainly (lit-path output changes are THE POINT — state them; goldens must not shift because the lane is dark in golden fixtures — verify), judgment calls vetoable, discovered adjacencies.`, { label: 'wE:satellite-topography', phase: 'Build', schema: SCHEMA, model: 'opus' })
+
+return { results: [result].filter(Boolean) }

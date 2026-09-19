@@ -1,0 +1,68 @@
+export const meta = {
+  name: 'wave-r1-destruction-honesty',
+  description: 'Capability Remediation Wave R-1: destruction/undo honesty — uncanonize tombstone, named-fate consent, destroy-lane parity, proposal-undo ring, paid-copy + G5 remainder',
+  phases: [
+    { title: 'Fix', detail: '3 file-disjoint Fable lanes' },
+    { title: 'Verify', detail: 'one Opus adversarial skeptic per lane', model: 'opus' },
+    { title: 'Gate', detail: 'joint single-threaded gate vs 285/285 baseline' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order 2026-07-26: "fix it all thoroughly"; this is Wave R-1 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-1 section first). Verify the brief's claims against code; the code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree (concurrent sessions commit under you): NO git mutations of ANY kind (stash/add/commit/checkout/restore/clean/reset ALL FORBIDDEN); re-read every file immediately before editing; touch ONLY your lane's files — out-of-lane needs become reported deferrals, never edits.
+THE AUDIT: docs/SETTLEMENT_CAPABILITY_ATLAS.md (12.5k lines — Grep/offset reads only). Read your findings' rows before fixing.
+LAWS: NO same-seed output drift (anything that would move a golden = STOP + defer as owner-gated); NO persistence-shape changes (session-only structures are fine; anything serialized into saves/supabase = STOP + defer); closure budget ~54B — no new eager imports, new logic = lazy leaf; sizeBaseline ceilings EXACT (JSX comments count; net-zero combine if capped); copy changes = one string each, vetoable; new/changed store actions or registry rows → check gen:compendium-data regen; new dispatcher edit kinds → COMMITTABLE_EDIT_KINDS; doctrine: never resolve a named character's fate — the consent barrier serves this law.
+TESTING: single-threaded ALWAYS (--no-file-parallelism); exit codes unmasked; every fix ships pins. Gate baseline: verify:dist 285/285 GREEN — any red is a regression. Label CONFIRMED/PLAUSIBLE; verbatim test output; end on evidence.`
+
+const LANES = [
+  {
+    key: 'destruction-honesty',
+    files: 'src/store/settlementSlice.js (uncanonize + destroySavedSettlement regions) · the consent-barrier module and the named-fate call sites you enumerate · the confirm-gate UI surfaces of the three settlement-death lanes · new test files. You may READ but NOT edit src/store/operationRegistry.js — report desired row/comment updates as deferrals for the registry-sync step.',
+    brief: `LANE AB — DESTRUCTION HONESTY. Three findings:
+1. UNCANONIZE SESSION TOMBSTONE (atlas queue #25; Grep "uncanonize" in the atlas): uncanonize() wipes state.eventLog irrecoverably (settlementSlice.js ~:1425-1440) while canonize is its registered inverse. Add a SESSION-ONLY (in-memory, never serialized) eventLog snapshot taken at uncanonize; when canonize runs and the tombstone matches the same settlement identity, restore the log. Stays 'action-partial' across reload — that is correct and already the registry's claim. Identity-match carefully (same save/settlement, not just "latest"). Pins: uncanonize→canonize round-trip restores the log in-session; reload-shaped state (fresh store) does NOT falsely claim restore; foreign-settlement tombstone never applies.
+2. NAMED-FATE CONSENT BARRIER (atlas queue #2; Grep "consent" and "named" in the atlas Part VI/VII): the atlas found THREE paths that delete a named character without passing the consent barrier the doctrine requires. Enumerate them from the atlas rows (then re-derive from code — the atlas is a dated snapshot), and route each through the EXISTING consent barrier mechanism (find its current spelling — reuse, do not invent a sibling). No new capability: same deletions, now consented. Pins per path: unconsented dispatch refused/prompted, consented dispatch proceeds.
+3. DESTROY-LANE CONFIRM PARITY (atlas queue #4, VI.10 #148 — the THREE-lane settlement-terminal-death census: composer DESTROY_SETTLEMENT, destroySavedSettlement, realm proposal lane): converge the confirm gates (each lane's destructive confirm proportionate and consistent — the atlas records which lane lacks what) and make each lane's recovery MESSAGING match its actual recovery model (composer-pipeline vs registry-op vs staged-proposal). Do NOT add or remove lanes; do NOT touch the realm lane's proposal mechanics — only its confirm/recovery copy if inconsistent. Pins: each lane's confirm gate fires; recovery copy matches the registry/atlas truth.`,
+  },
+  {
+    key: 'proposal-ring',
+    files: 'src/store/campaignWorldPulseDeferred.js · the applyWorldPulseProposal seam · src/components/map/WorldMapToolbar.jsx + src/components/UndoHistoryPanel.jsx (labeling strings) · src/store/operationRegistry.js (the applyWorldPulseProposal row ONLY, plus row-comment updates other lanes report) · tests/store/pulseUndoAdvertising.test.js + new test files',
+    brief: `LANE C — THE REAL PROPOSAL-UNDO ARMING (carried from R-0; read the R-0 registry row comment + atlas queue #5 evidence first). R-0 proved arming into the shared PULSE_UNDO_CAP=10 advance stack floods it and mislabels advance-only copy. Build it right:
+1. A SEPARATELY BOUNDED proposal-undo ring: session-only, per-campaign, its own cap (pick small, e.g. 5, and document why), structurally INCAPABLE of evicting advance snapshots (separate storage, not a partition of the same array — prove by construction).
+2. Arm applyWorldPulseProposal against the ring: apply → snapshot pushed to the proposal ring; undo pops the newest PROPOSAL snapshot; the advance stack is untouched by proposal traffic. Update the registry row (undoToken + undoState 'action', honest description — one string) and mirror to the compendium artifact if projected.
+3. LABELED SURFACES: undo affordances and history rows must name which act they revert — proposal entries labeled distinctly from advance entries in WorldMapToolbar + UndoHistoryPanel (the R-0 mislabel finding listed the exact strings; keep each edit one string). A proposal apply does not move the tick — the history row must not render as a new calendar step.
+4. PINS (the R-0 verifier's requirement plus yours): advance once + apply 11 proposals → the pre-advance snapshot is STILL reachable and restores pre-advance state; proposal undo restores pre-apply state; ring cap eviction drops oldest PROPOSAL only; undo ordering across mixed advance/proposal history is coherent and labeled.
+Beware: WorldMapToolbar/UndoHistoryPanel may be near sizeBaseline ceilings; net-zero combine if needed. If another lane's deferral asks for registry row-comment updates, apply them here verbatim at the end.`,
+  },
+  {
+    key: 'paid-copy-g5',
+    files: 'src/components/settlement/VersionsTab.jsx (pitch strings) · the eventNarrativeSnapshots write/display surface you locate (disclosure string) · src/components/new/tabs/ViabilityTab.jsx + OverviewTab.jsx (G5 framing strings) · src/pdf/sections/DefenseSecurity.jsx (VULNERABILITIES header region) · src/domain/display/threatAssessment.js + defenseDisplay.js (ASSESS; edit only if pattern-level fix is one-string-per-site clean) · new test files',
+    brief: `LANE D — PAID-SURFACE COPY HONESTY + G5 REMAINDER.
+1. VERSIONSTAB PITCH (atlas queue #18; Grep "VersionsTab" in the atlas): the paid pitch sells manual snapshots and side-by-side diff; NEITHER exists. Interim copy-only repair (recorded vetoable JUDGMENT in the plan): remove/reword the nonexistent-feature claims to sell only what ships. One string per claim. The build-vs-copy decision stays in the owner queue — say so in a code comment.
+2. EVENTNARRATIVESNAPSHOTS CAP DISCLOSURE (atlas row A20): the paid AI narrative archive silently keeps only the last 10 (MAX_EVENT_NARRATIVE_SNAPSHOTS, FIFO). Find where users encounter these narratives; add the minimal honest disclosure (one string, e.g. retention note at that surface). The READER mount is Wave R-2 — do not build it; if no current display surface exists, put the disclosure where the narrative is generated/offered and record that R-2 will carry it to the reader.
+3. G5 FROZEN-RECORD REMAINDER (atlas queue #28 family; the five: economicViability, structuralViolations, structuralSuggestions, coherenceNotes, magicDependency): R-0 fixed DefenseTab + the PDF caption. Fix the remaining render sites — ViabilityTab/OverviewTab framing for the records they render, PDF DefenseSecurity VULNERABILITIES header (:379 region) — first-survey framing per fieldManifest displayRules, one string per site, guards must stay green.
+4. ASSESS threatAssessment.js:102-160 and defenseDisplay.js:190-293 present-tense prose: if an honest fix is a clean per-site string set, do it; if it needs structural rework (template/grammar changes), DEFER with the evidence and the recommended shape.
+Run: fieldManifest guards + pdf parity suites + your pins, single-threaded.`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+log('Wave R-1: destruction honesty, proposal-undo ring, paid-copy + G5 remainder')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER for lane ${l.key}. Fixer reports: files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, behaviorShift="${r.behaviorShift}", deferrals=${JSON.stringify(r.deferrals)}. The lane's brief:\n${l.brief}\nRepo READ-ONLY except running tests. For each numbered item: verify it landed, re-derive the code facts with fresh greps, RUN the pins yourself, and attempt refutation — lifecycle paths (create/read/persist/REGEN/undo/restore/reload), same-seed drift, persistence-shape leaks (is the "session-only" structure really never serialized? check the persist envelope), eager imports, exact ceilings, consent-barrier bypass routes the fixer missed, mixed advance/proposal undo ordering, identity-mismatch tombstone application. Check the fixer stayed in-lane (git diff name-only attribution vs foreign WIP). MUST_FIX only for real unresolved items; PASS_WITH_NOTES for deferable observations.`, { label: 'verify:' + l.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END GATE. Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked: all R-1 lane test files + the R-0 pin files (tests/store/operationRegistry.walker.test.js, tests/store/pulseUndoAdvertising.test.js, tests/components/frozenTenseDefenseCopy.test.js, tests/store/deityWriteGate.test.js, tests/components/deityPanelManifestParity.test.jsx, tests/architecture/surveyorCommandBoundary.test.js) + tests/joins/fieldManifest.test.js + tests/architecture/ + pdf parity suites + tests/lint/sizeBaseline.test.js + npm run build && npm run verify:dist single-threaded. Baseline 285/285 green. Report every red verbatim, attributed baseline/foreign/THIS-WAVE.`, { label: 'gate:r1', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), gate }

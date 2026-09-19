@@ -1,0 +1,1055 @@
+{
+  "registryVersion": 1,
+  "researchWaveId": "historical-urbanism-wave-1",
+  "capturedAt": "2026-08-20",
+  "records": [
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-BRAUNSCHWEIG-COMPONENTS",
+      "place": { "name": "Braunschweig", "polityOrRegion": "Lower Saxony, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1000, "toYear": 1400, "label": "Medieval formation and union of the five component towns" },
+      "source": {
+        "publicationId": "Braunschweig - Deutscher Historischer Staedteatlas 4",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Braunschweig.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2013; second edition 2014",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is supported by the official project text and phase-map explanation rather than a measured sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No cartographic symbols are used for this text-level claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas identifies five initially independent component towns whose later union retained district structure, establishing multi-nuclear accretion and persistent seams as possible historical processes.",
+        "mechanismIds": ["component.multi-nuclear-accretion", "component.merger-persistent-seams"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The official atlas description explicitly identifies five initially independent component towns." },
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "District extent belongs to the atlas's interpretive phase synthesis and is not imported here as geometry." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Medieval component towns within the later Braunschweig urban body", "omissions": ["No component boundary coordinates or prevalence inference are retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-GB-YORK-EXTRAMURAL",
+      "place": { "name": "York", "polityOrRegion": "England, United Kingdom", "atlasProgramId": "britain-htt" },
+      "representedPeriod": { "fromYear": 1250, "toYear": 1350, "label": "York around 1300" },
+      "source": {
+        "publicationId": "British Historic Towns Atlas: York c.1300",
+        "publisher": "Historic Towns Trust and City of York Historic Environment Record",
+        "url": "https://her.york.gov.uk/api/LibraryLink5WebServiceProxy/FetchResourceFromStub/6-7-4-9-4_654a983aaee43f0-67494_9ad579f479a3bba.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "INTERPRETIVE_RECONSTRUCTION",
+        "scale": { "kind": "DECLARED", "denominator": 5000 },
+        "legend": { "kind": "DECLARED", "ref": "York c.1300 sheet legend, including probable built-up frontage and precincts with uncertain boundaries" },
+        "geometryLineage": "INTERPRETIVE_ONLY",
+        "planimetricQuality": "SCHEMATIC",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "York c.1300 map sheet",
+        "rights": { "mode": "CITATION_ONLY", "note": "Claim-sized paraphrase only; no sheet geometry, symbols, styling, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The c.1300 reconstruction marks probable built-up frontage and urban institutions outside York's walled circuit, so a dated defensive boundary must not be treated as the complete limit of settlement or urban function.",
+        "mechanismIds": ["fortification.dated-circuit-project"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "APPROXIMATE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The legend expressly qualifies the extramural built-up frontage as probable." },
+        { "aspect": "EXTENT", "level": "HYPOTHETICAL", "basis": "The sheet is an interpretive reconstruction and does not establish exact occupied limits." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "York within and immediately outside the c.1300 circuit", "omissions": ["No frontage polygon, wall line, precinct boundary, or coordinate is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["COUNTEREXAMPLE", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-GB-YORK-SOURCE-LIMITS",
+      "place": { "name": "York", "polityOrRegion": "England, United Kingdom", "atlasProgramId": "britain-htt" },
+      "representedPeriod": { "fromYear": 900, "toYear": 1600, "label": "Methodological limits of York's reconstructed historical maps" },
+      "source": {
+        "publicationId": "York Historic Town Atlas: Notes on the cartography",
+        "publisher": "Historic Towns Trust and City of York Historic Environment Record",
+        "url": "https://her.york.gov.uk/api/LibraryLink5WebServiceProxy/FetchResourceFromStub/6-7-4-8-2_e77c84b20b01b7a-67482_26ef00296744d9a.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "WRITTEN_GAZETTEER",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record cites the prose cartographic-method note, not geometry from any one 1:5000 sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The claim concerns the editors' stated limits, not a legend category." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "ORIGINAL_SOURCE_STATE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise methodological paraphrase and citation metadata only." }
+      },
+      "claim": {
+        "statement": "York's cartographic note states that the earlier period maps are less secure, some early sheets are especially speculative, street widths and river courses are indicative, and lack of archaeological finds is not proof of historical absence.",
+        "mechanismIds": ["cartography.source-interpretation-separation"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "These limitations are explicitly stated by the atlas cartographers." },
+        { "aspect": "ALIGNMENT", "level": "UNKNOWN", "basis": "The note warns that several reconstructed alignments are indicative or speculative." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Editorial methodology for York maps 2-11", "omissions": ["No inferred feature is treated as surveyed geometry.", "Uninvestigated areas cannot support negative evidence."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "MECHANISM_DESIGN", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-GB-YORK-SYMBOLIC-FRONTAGE",
+      "place": { "name": "York", "polityOrRegion": "England, United Kingdom", "atlasProgramId": "britain-htt" },
+      "representedPeriod": { "fromYear": 1100, "toYear": 1600, "label": "Cartographic representation of probable built-up frontage" },
+      "source": {
+        "publicationId": "York Historic Town Atlas: Notes on the cartography",
+        "publisher": "Historic Towns Trust and City of York Historic Environment Record",
+        "url": "https://her.york.gov.uk/api/LibraryLink5WebServiceProxy/FetchResourceFromStub/6-7-4-8-2_e77c84b20b01b7a-67482_26ef00296744d9a.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "WRITTEN_GAZETTEER",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record cites the prose explanation of a symbol rather than measuring a map sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The explanatory note, rather than a copied legend swatch, supports the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "ORIGINAL_SOURCE_STATE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Textual paraphrase only; no frontage band, plot geometry, legend artwork, or pixels are copied." }
+      },
+      "claim": {
+        "statement": "For York's 1100-1600 maps, built-up frontage is a symbolic street-edge tone: it can witness the analytical distinction between occupied frontage and rear land, but the mapped band cannot establish building or plot depth.",
+        "mechanismIds": ["parcel.frontage-backland"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The cartographic note explicitly explains what the frontage tone is intended to communicate." },
+        { "aspect": "EXTENT", "level": "UNKNOWN", "basis": "The note expressly disallows inference of depth from the symbol." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "York atlas cartographic convention for maps covering 1100-1600", "omissions": ["No parcel depth, building footprint, frontage width, or occupancy density is recoverable from this record."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-HU-BUDA-MULTIPLE-MARKETS",
+      "place": { "name": "Buda", "polityOrRegion": "Budapest, Hungary", "atlasProgramId": "hungary-hhta" },
+      "representedPeriod": { "fromYear": 1240, "toYear": 1541, "label": "Medieval Buda before Ottoman occupation" },
+      "source": {
+        "publicationId": "Végh András, Buda I. kötet, 1686-ig / Part I to 1686, Hungarian Atlas of Historic Towns no. 4 (2015), Topography",
+        "publisher": "Hungarian Atlas of Historic Towns",
+        "url": "https://www.varosatlasz.hu/images/pdf/atlaszok/budaI/03_Helyrajz_Topography_Buda1.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is taken from the scholarly topographical discussion rather than measured from a sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No cartographic symbol is used for the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "Topography discussion of quarters and weekly markets",
+        "rights": { "mode": "CITATION_ONLY", "note": "Claim-sized paraphrase and publication metadata only; no plan content is copied." }
+      },
+      "claim": {
+        "statement": "Medieval Buda had two weekly market foci associated with its German and Hungarian quarters, demonstrating that market activity can be distributed among socially distinct components rather than forced into one universal centre.",
+        "mechanismIds": ["market.multiple-foci"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The topographical study explicitly identifies two weekly markets." },
+        { "aspect": "FUNCTION", "level": "LIKELY", "basis": "Their association with the two quarters is the publication's historical interpretation; exact origins are not fully known." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Medieval walled town and its German and Hungarian quarters", "omissions": ["No market polygon, stall layout, catchment, or activation frequency is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-HU-BUDA-WALL-BEFORE-PLOTS",
+      "place": { "name": "Buda", "polityOrRegion": "Budapest, Hungary", "atlasProgramId": "hungary-hhta" },
+      "representedPeriod": { "fromYear": 1240, "toYear": 1300, "label": "Foundation and early parcelisation of the castle town" },
+      "source": {
+        "publicationId": "Végh András, Buda I. kötet, 1686-ig / Part I to 1686, Hungarian Atlas of Historic Towns no. 4 (2015), Topography",
+        "publisher": "Hungarian Atlas of Historic Towns",
+        "url": "https://www.varosatlasz.hu/images/pdf/atlaszok/budaI/03_Helyrajz_Topography_Buda1.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The sequencing claim is stated in the scholarly topographical discussion, not measured from map geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No legend category is used in the temporal claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "Topography discussion of wall, streets and plots",
+        "rights": { "mode": "CITATION_ONLY", "note": "Claim-sized paraphrase only; no wall, street, or parcel geometry is ingested." }
+      },
+      "claim": {
+        "statement": "The Buda study interprets the enclosing wall, adjusted to the hill, as preceding the formation of the surviving street-and-plot system; this is a specific witness that fortification can constrain later parcelisation.",
+        "mechanismIds": ["fortification.wall-precedes-parcelization"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "DATE", "level": "LIKELY", "basis": "Relative sequence is argued by the publication, but it is not a direct contemporaneous survey." },
+        { "aspect": "ALIGNMENT", "level": "UNKNOWN", "basis": "No alignment is carried into the registry." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Castle Hill wall, streets and plots discussed in the topography", "omissions": ["No wall-to-parcel offsets or reconstructed lot lines are stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-HU-KOSZEG-HYDRAULICS",
+      "place": { "name": "Kőszeg", "polityOrRegion": "Vas County, Hungary", "atlasProgramId": "hungary-hhta" },
+      "representedPeriod": { "fromYear": 1200, "toYear": 1800, "label": "Medieval and early-modern water system and urban development" },
+      "source": {
+        "publicationId": "Hungarian Atlas of Historic Towns: Kőszeg A.3.1, Urban development until the end of the eighteenth century",
+        "publisher": "Hungarian Atlas of Historic Towns",
+        "url": "https://www.varosatlasz.hu/images/pdf/atlaszok/koszeg/A-3-1_Koszeg.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "INTERPRETIVE_RECONSTRUCTION",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "Kőszeg A.3.1 bilingual sheet legend" },
+        "geometryLineage": "INTERPRETIVE_ONLY",
+        "planimetricQuality": "SCHEMATIC",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "A.3.1",
+        "rights": { "mode": "CITATION_ONLY", "note": "Only a qualitative mechanism claim and sheet metadata are retained; no stream, ditch, mill, parcel, or street geometry is copied." }
+      },
+      "claim": {
+        "statement": "Kőszeg's historical-development reconstruction treats natural and managed watercourses, defensive water and water-powered sites as connected constraints on the town's access, industry and form.",
+        "mechanismIds": ["substrate.hydraulic-spine", "economy.hydraulic-production-chain"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "APPROXIMATE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The atlas reconstructs the water features and their urban relationships from multiple historical sources." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "The reconstruction is not treated as source-measured geometry and no alignment is retained." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic core, watercourses, defences and adjacent productive sites represented on A.3.1", "omissions": ["No hydraulic network geometry or feature dimensions are stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-HU-KOSZEG-WETLAND-EXPANSION",
+      "place": { "name": "Kőszeg", "polityOrRegion": "Vas County, Hungary", "atlasProgramId": "hungary-hhta" },
+      "representedPeriod": { "fromYear": 1200, "toYear": 1800, "label": "Medieval and early-modern growth across wet ground and enclosure phases" },
+      "source": {
+        "publicationId": "Hungarian Atlas of Historic Towns: Kőszeg A.3.2, Urban development detail",
+        "publisher": "Hungarian Atlas of Historic Towns",
+        "url": "https://www.varosatlasz.hu/images/pdf/atlaszok/koszeg/A-3-2_Koszeg.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "INTERPRETIVE_RECONSTRUCTION",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "Kőszeg A.3.2 bilingual sheet legend" },
+        "geometryLineage": "INTERPRETIVE_ONLY",
+        "planimetricQuality": "SCHEMATIC",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "A.3.2",
+        "rights": { "mode": "CITATION_ONLY", "note": "Qualitative phase relationship and sheet metadata only; no wetland, wall, street, or parcel geometry is copied." }
+      },
+      "claim": {
+        "statement": "Kőszeg's phase reconstruction relates expansion beyond an earlier core to low, wet ground managed by drainage and to later enclosure, supporting wetland conversion and successive fortification as contingent linked operations.",
+        "mechanismIds": ["substrate.wetland-reclamation", "fortification.successive-enclosure"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "APPROXIMATE"
+      },
+      "certainty": [
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "The atlas distinguishes growth and enclosure phases but their precise limits remain interpretive." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "Broad historical phases are supported; exact conversion dates for every area are not asserted." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic core, adjacent low ground and reconstructed enclosure phases on A.3.2", "omissions": ["No reclamation polygon, drainage line, or wall alignment is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-CARLINGFORD-RIBBON",
+      "place": { "name": "Carlingford", "polityOrRegion": "County Louth, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 1835, "toYear": 1835, "label": "Town plan around 1835" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 27: Carlingford, Map 2",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/carlingford/",
+        "accessedAt": "2026-08-20",
+        "baseMapDate": "c.1835",
+        "role": "BASE_CADASTRE",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "IHTA Carlingford Map 2 legend" },
+        "geometryLineage": "REDRAWN_SOURCE",
+        "planimetricQuality": "SURVEYED",
+        "editorialState": "EDITORIALLY_SUPPLEMENTED",
+        "sheetOrPage": "Map 2",
+        "rights": { "mode": "CITATION_ONLY", "note": "The registry stores only a qualitative observation of the c.1835 base map; no linework, parcel geometry, symbology, or pixels are copied." }
+      },
+      "claim": {
+        "statement": "The c.1835 base map directly shows a narrow linear settlement corridor compressed between steep ground and Carlingford Lough, with parcels and access arranged across that constrained strip; medieval dating of individual surviving lines requires separate evidence.",
+        "mechanismIds": ["substrate.topographic-ribbon"],
+        "evidenceMode": "DIRECTLY_DEPICTED",
+        "geometryStatus": "SOURCE_MEASURED"
+      },
+      "certainty": [
+        { "aspect": "ALIGNMENT", "level": "OBSERVED_EXISTING", "basis": "The c.1835 surveyed base records the then-existing street and parcel arrangement." },
+        { "aspect": "DATE", "level": "UNKNOWN", "basis": "The base map alone does not date each line or parcel to the medieval period." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Mapped c.1835 urban strip between slope and lough", "omissions": ["No copied geometry or quantitative corridor dimensions.", "No inference that every mapped line is medieval."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-DOWNPATRICK-NONCIRCULAR",
+      "place": { "name": "Downpatrick", "polityOrRegion": "County Down, Northern Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 1833, "toYear": 1833, "label": "Town plan around 1833" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 8: Downpatrick, Map 2",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/downpatrick/",
+        "accessedAt": "2026-08-20",
+        "baseMapDate": "c.1833",
+        "role": "BASE_CADASTRE",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "IHTA Downpatrick Map 2 legend" },
+        "geometryLineage": "REDRAWN_SOURCE",
+        "planimetricQuality": "SURVEYED",
+        "editorialState": "EDITORIALLY_SUPPLEMENTED",
+        "sheetOrPage": "Map 2",
+        "rights": { "mode": "CITATION_ONLY", "note": "Qualitative base-map observation only; no street, parcel, or enclosure linework is copied." }
+      },
+      "claim": {
+        "statement": "The c.1833 base map shows a Y- or fan-shaped street core rather than a mechanically circular or radial visible system; this is a counterexample to imposing circular geometry on every settlement with monastic origins, but it does not disprove a lost earlier enclosure.",
+        "mechanismIds": ["settlement.inherited-sacred-enclosure"],
+        "evidenceMode": "DIRECTLY_DEPICTED",
+        "geometryStatus": "SOURCE_MEASURED"
+      },
+      "certainty": [
+        { "aspect": "ALIGNMENT", "level": "OBSERVED_EXISTING", "basis": "The nineteenth-century surveyed base depicts the surviving Y- or fan-shaped street system." },
+        { "aspect": "EXISTENCE", "level": "UNKNOWN", "basis": "Absence of a circular form on this late base is not evidence that no earlier enclosure existed." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Mapped c.1833 urban core", "omissions": ["Earlier erased earthworks and unexcavated enclosure evidence are outside the direct observation.", "No geometry is copied."], "absenceIsEvidence": false },
+      "allowedUses": ["COUNTEREXAMPLE", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-DUBLIN-PHASES",
+      "place": { "name": "Dublin", "polityOrRegion": "County Dublin, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 600, "toYear": 1610, "label": "Gaelic, Viking, Hiberno-Norse and Anglo-Norman development to 1610" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 11: Dublin, Part I, to 1610",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/dublin-part-i-to-1610/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim synthesises the atlas essay and phase discussion rather than treating the c.1846-47 base as medieval geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No phase colour or map symbol is ingested for the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Textual phase synthesis only; no development-map or base-map geometry is copied." }
+      },
+      "claim": {
+        "statement": "Dublin developed through overlapping Gaelic ford-and-market, ecclesiastical, Viking, Hiberno-Norse and Anglo-Norman components whose routes and inherited places conditioned later phases; the locations of some early nuclei and their internal layouts remain hypothetical.",
+        "mechanismIds": ["component.multi-nuclear-accretion"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The successive cultural and functional components are supported by the atlas synthesis." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "Some early Gaelic and longphort locations and street chronology are explicitly uncertain." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historical synthesis of Dublin's core and adjacent early nuclei to 1610", "omissions": ["No component boundary, route line, shoreline, or phase polygon is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-FETHARD-FRONTAGE-BACKLAND",
+      "place": { "name": "Fethard", "polityOrRegion": "County Tipperary, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 1840, "toYear": 1840, "label": "Town plan around 1840" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 13: Fethard, Map 2",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/fethard/",
+        "accessedAt": "2026-08-20",
+        "baseMapDate": "c.1840",
+        "role": "BASE_CADASTRE",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "IHTA Fethard Map 2 legend" },
+        "geometryLineage": "REDRAWN_SOURCE",
+        "planimetricQuality": "SURVEYED",
+        "editorialState": "EDITORIALLY_SUPPLEMENTED",
+        "sheetOrPage": "Map 2",
+        "rights": { "mode": "CITATION_ONLY", "note": "Qualitative observation only; no cadastral parcel or building geometry, symbology, or pixels are copied." }
+      },
+      "claim": {
+        "statement": "The c.1840 base directly shows dense Main Street frontage with long, narrow parcels extending approximately perpendicular into rear backland; the observation concerns the nineteenth-century surviving fabric and does not independently date every boundary as medieval.",
+        "mechanismIds": ["parcel.frontage-backland"],
+        "evidenceMode": "DIRECTLY_DEPICTED",
+        "geometryStatus": "SOURCE_MEASURED"
+      },
+      "certainty": [
+        { "aspect": "ALIGNMENT", "level": "OBSERVED_EXISTING", "basis": "Map 2 is a standardised 1:2500 redrawing of the surveyed c.1840 base." },
+        { "aspect": "DATE", "level": "UNKNOWN", "basis": "Survival on a c.1840 map alone does not establish the origin date of each parcel edge." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Mapped Main Street frontage and rear parcels around 1840", "omissions": ["No parcel measurements or geometry are retained.", "No claim that every observed line is medieval."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-FETHARD-WALL-ROUTES",
+      "place": { "name": "Fethard", "polityOrRegion": "County Tipperary, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 1200, "toYear": 1600, "label": "Medieval borough, burgages and later walled circuit" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 13: Fethard",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/fethard/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is taken from the atlas's historical analysis, not from measuring a map." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No map symbol is used in the relative-sequence claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Claim-sized historical paraphrase only; no wall, gate, route, river, or parcel geometry is copied." }
+      },
+      "claim": {
+        "statement": "Fethard's later wall was fitted tightly around an existing burgage extent and local river or escarpment constraints, with gates meeting external approaches; it witnesses route-gate coordination and dated wall projects while countering a rule that walls always precede plots.",
+        "mechanismIds": ["access.route-gate-suburb", "fortification.dated-circuit-project", "fortification.wall-precedes-parcelization"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "LIKELY", "basis": "The atlas analysis relates gates to approaches and the later circuit to existing burgage extent." },
+        { "aspect": "DATE", "level": "HYPOTHETICAL", "basis": "Murage grants and later fabric do not supply an exact construction date for every surviving wall segment." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Medieval borough extent, later circuit, approaches and topographic edges discussed by the atlas", "omissions": ["No gate coordinates, wall alignment, segment date, or suburb footprint is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "COUNTEREXAMPLE", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-GALWAY-RECLAMATION",
+      "place": { "name": "Galway", "polityOrRegion": "County Galway, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 1200, "toYear": 1900, "label": "Port growth, shoreline change and reclamation" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 28: Galway",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/galway/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record paraphrases the issue essay and growth synthesis rather than measuring Map 28." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No growth-map colour or boundary is ingested." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Textual synthesis only; no shoreline, dock, reclamation, or growth geometry is copied." }
+      },
+      "claim": {
+        "statement": "Galway's shore, docks and successive reclamation altered the amount and position of buildable port land; shoreline must therefore be a time-varying substrate coupled to port growth rather than an immutable border.",
+        "mechanismIds": ["substrate.wetland-reclamation", "shore.port-reclamation"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The atlas synthesis explicitly documents dock and reclamation phases." },
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "Growth mapping supports broad phase extents, not exact footprints for every coloured area." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic port, shore and reclaimed areas treated in the Galway atlas", "omissions": ["No exact palaeoshoreline, fill polygon, dock edge, or date per parcel is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-KELLS-INHERITED-ENCLOSURE",
+      "place": { "name": "Kells", "polityOrRegion": "County Meath, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 800, "toYear": 1300, "label": "Monastic settlement and later urban reuse" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 4: Kells",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/kells/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is the atlas author's morphological interpretation, not a direct reading of the c.1836 base." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No map symbol is used in the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Textual paraphrase only; no inferred enclosure or street geometry is copied." }
+      },
+      "claim": {
+        "statement": "At Kells, curving streets, slope and later parcel boundaries are used to infer reuse of a monastic enclosure by the later town; internal pre-Norman streets and parts of the enclosure alignment remain unconfirmed.",
+        "mechanismIds": ["settlement.inherited-sacred-enclosure"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The inherited enclosure is a published morphological inference supported by several later traces." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "Its precise line and internal early street layout lack complete archaeological confirmation." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic core and putative monastic enclosure discussed in the Kells atlas", "omissions": ["No circular template, enclosure radius, street graph, or parcel line is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-KILKENNY-COMPONENTS",
+      "place": { "name": "Kilkenny", "polityOrRegion": "County Kilkenny, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 600, "toYear": 1600, "label": "Ecclesiastical, castle-borough and trans-river components" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 10: Kilkenny",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/kilkenny/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim synthesises the atlas essay and development map rather than measuring the c.1842 base." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No development-map symbol or boundary is copied." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Claim-sized synthesis only; no route, bridge, market, precinct, parcel, or phase geometry is ingested." }
+      },
+      "claim": {
+        "statement": "Kilkenny's cathedral-centred Irishtown, castle-centred Hightown and St John's across the Nore were sequentially distinct components with their own institutional or market foci, later connected by routes and bridges while retaining seams.",
+        "mechanismIds": ["component.multi-nuclear-accretion", "component.merger-persistent-seams", "precinct.institutional-immunity", "access.crossing-hinge", "market.multiple-foci"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The atlas identifies and narrates the distinct named urban components." },
+        { "aspect": "FUNCTION", "level": "LIKELY", "basis": "Institutional, market and crossing relationships are historically interpreted from multiple source classes." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Irishtown, Hightown, St John's and their Nore crossings", "omissions": ["No component polygon, seam width, market catchment, bridge geometry, or activation weight is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IE-TRIM-CROSSING",
+      "place": { "name": "Trim", "polityOrRegion": "County Meath, Ireland", "atlasProgramId": "ireland-ihta" },
+      "representedPeriod": { "fromYear": 400, "toYear": 1600, "label": "Ecclesiastical, castle-borough and crossing-linked components" },
+      "source": {
+        "publicationId": "Irish Historic Towns Atlas no. 14: Trim",
+        "publisher": "Royal Irish Academy",
+        "url": "https://www.ria.ie/irish-historic-towns-atlas/trim/",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim uses the atlas essay's plan-unit analysis and growth synthesis, not measurements from the c.1836 base." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No growth-map legend category is copied into the registry." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Textual synthesis only; no ford, bridge, route, precinct, wall, or component geometry is ingested." }
+      },
+      "claim": {
+        "statement": "Trim is interpreted as a composite of independently caused plan units, including castle-borough and ecclesiastical components tied together by a ford or bridge hinge and approach routes; exact early crossing and enclosure positions remain uncertain.",
+        "mechanismIds": ["component.multi-nuclear-accretion", "precinct.institutional-immunity", "access.crossing-hinge"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The atlas author explicitly analyses the town as a composite of plan units." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "Positions of the earliest ford, enclosure and some routes are not fully resolved." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Trim's castle, borough, ecclesiastical nuclei and Boyne crossing context", "omissions": ["No component boundaries, ford location, bridge line, precinct shape, or route geometry is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-IT-CINGOLI-GEOREFERENCE",
+      "place": { "name": "Cingoli", "polityOrRegion": "Marche, Italy", "atlasProgramId": "italy-asci" },
+      "representedPeriod": { "fromYear": 1835, "toYear": 1835, "label": "Gregorian cadastre and modern atlas interpretation" },
+      "source": {
+        "publicationId": "Atlante storico delle città italiane: Marche, Cingoli",
+        "publisher": "EUM Edizioni Università di Macerata",
+        "url": "https://eum.unimc.it/it/catalogo/atlante-storico-delle-citt-italiane-marche-cingoli/1022",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record cites the official publication description of the source workflow, not a cartographic measurement." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No legend category is used in this provenance claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Publication-method metadata and paraphrase only; no cadastral image, GIS transform, vector, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The Cingoli atlas workflow uses the 1835 Gregorian cadastre as a historical source within a modern GIS and interpretive apparatus, exemplifying the need to preserve provenance between original cadastre, georeferencing and later analytical layers.",
+        "mechanismIds": ["cartography.source-interpretation-separation"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The official catalogue describes the cadastral source and atlas processing workflow." },
+        { "aspect": "ALIGNMENT", "level": "UNKNOWN", "basis": "No transform model, ground-control count or error statistic is published in this citation record." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Publication-level methodology for the Cingoli atlas", "omissions": ["No georeference parameters, GCPs, derived vectors, or correctness claim are stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "MECHANISM_DESIGN", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-PL-BIECZ-FORTIFICATION-UNCERTAINTY",
+      "place": { "name": "Biecz", "polityOrRegion": "Lesser Poland Voivodeship, Poland", "atlasProgramId": "poland-ahmp" },
+      "representedPeriod": { "fromYear": 1250, "toYear": 1375, "label": "Charter-period layout to the middle of the fourteenth century" },
+      "source": {
+        "publicationId": "Atlas Historyczny Miast Polskich: Biecz, sheet 3.3",
+        "publisher": "Atlas Historyczny Miast Polskich, Nicolaus Copernicus University in Toruń",
+        "url": "https://atlasmiast.umk.pl/pliki/biecz/AHMP_Biecz_3.3.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "INTERPRETIVE_RECONSTRUCTION",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "Biecz sheet 3.3 legend distinguishing theoretical charter layout, actual demarcation, confirmed and hypothetical fortification, alleged outer bailey, waterways and routes" },
+        "geometryLineage": "INTERPRETIVE_ONLY",
+        "planimetricQuality": "SCHEMATIC",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "3.3",
+        "rights": { "mode": "CITATION_ONLY", "note": "Only legend distinctions and a qualitative ridge-form claim are stored; no route, wall, parcel, watercourse, or theoretical grid geometry is copied." }
+      },
+      "claim": {
+        "statement": "Biecz's reconstruction distinguishes theoretical charter intent from actual demarcation and confirmed wall or rampart from hypothetical and merely alleged defences; the realised town follows its ridge and inherited routes rather than a perfect module.",
+        "mechanismIds": ["fortification.dated-circuit-project", "planning.intent-realization-deformation", "substrate.topographic-ribbon"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "APPROXIMATE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The sheet separately encodes confirmed, hypothetical and alleged defensive elements rather than collapsing them." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "Some fortification lines and the theoretical charter module are explicitly interpretive." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "The represented period is a scholarly phase range, not an exact construction date for each segment." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Charter-period ridge town, routes, waterways and defensive interpretations on sheet 3.3", "omissions": ["No theoretical grid, rampart, wall, route, watercourse, or parcel geometry is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "COUNTEREXAMPLE", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-PL-STARY-SACZ-PLAN-REALIZATION",
+      "place": { "name": "Stary Sącz", "polityOrRegion": "Lesser Poland Voivodeship, Poland", "atlasProgramId": "poland-ahmp" },
+      "representedPeriod": { "fromYear": 1357, "toYear": 1358, "label": "Regulation plan of 1357-1358 and its realised form" },
+      "source": {
+        "publicationId": "Atlas Historyczny Miast Polskich: Stary Sącz, sheets 3-5",
+        "publisher": "Atlas Historyczny Miast Polskich, Nicolaus Copernicus University in Toruń",
+        "url": "https://atlasmiast.umk.pl/pliki/stary_sacz/AHMP_Stary_Sacz_3_5.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "INTERPRETIVE_RECONSTRUCTION",
+        "scale": { "kind": "DECLARED", "denominator": 2500 },
+        "legend": { "kind": "DECLARED", "ref": "Stary Sącz sheets 3-5 legend distinguishing theoretical red modular lines from realised streets, blocks, plots, waterways and inherited features" },
+        "geometryLineage": "INTERPRETIVE_ONLY",
+        "planimetricQuality": "SCHEMATIC",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "Sheets 3-5",
+        "rights": { "mode": "CITATION_ONLY", "note": "Only qualitative source distinctions are retained; no theoretical module, street, block, parcel, watercourse, or monastery geometry is copied." }
+      },
+      "claim": {
+        "statement": "The Stary Sącz sheet explicitly separates a theoretical 1357-1358 regulation module from realised streets and parcels; inherited routes, water and the monastery deform the ideal, while long street-front plots continue into rear land.",
+        "mechanismIds": ["parcel.frontage-backland", "planning.intent-realization-deformation"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "APPROXIMATE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "The atlas legend and reconstruction distinguish intended module and realised fabric." },
+        { "aspect": "ALIGNMENT", "level": "HYPOTHETICAL", "basis": "The theoretical module is an analytical reconstruction, not a surviving surveyed layout." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "The regulation is dated to 1357-1358, while survival and alteration of individual lines vary." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Regulated core, monastery edge, routes, water and parcel pattern represented on sheets 3-5", "omissions": ["No module dimensions, parcel geometry, street centreline, monastery boundary, or watercourse line is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-BRAUNSCHWEIG-HYDROLOGY",
+      "place": { "name": "Braunschweig", "polityOrRegion": "Lower Saxony, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 800, "toYear": 1400, "label": "Early and medieval settlement development in the Oker floodplain" },
+      "source": {
+        "publicationId": "Braunschweig - Deutscher Historischer Staedteatlas 4, interactive phase-map explanation",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Braunschweig.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2013; second edition 2014",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The official explanatory text supports the hydraulic claim; no sheet geometry is recorded." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The claim does not depend on a copied legend or symbol." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The phase-map explanation states that the river floodplain shaped the earliest settlement nuclei, while later canalisation of Oker branches altered streets and parcels; water therefore acted as substrate rather than decoration.",
+        "mechanismIds": ["substrate.hydraulic-spine"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The official explanation explicitly describes the floodplain as formative and later canalisation as a mapped intervention." },
+        { "aspect": "ALIGNMENT", "level": "LIKELY", "basis": "Exact historic channel alignments are part of the reconstruction and are not retained here." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Inner-city settlement area and Oker floodplain", "omissions": ["No channel centreline or inferred medieval shoreline is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-DORTMUND-ARCHAEOLOGY-COVERAGE",
+      "place": { "name": "Dortmund", "polityOrRegion": "North Rhine-Westphalia, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 500, "toYear": 1800, "label": "Archaeological evidence used in the preindustrial development synthesis" },
+      "source": {
+        "publicationId": "Dortmund - Deutscher Historischer Staedteatlas 5, Siedlungsentwicklung I",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Dortmund.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2017; second edition 2018",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "This record captures the official coverage warning, not map geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The coverage warning is prose and has no legend dependency." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Coverage metadata and concise paraphrase only; no archaeological point locations or map pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas warns that archaeological excavation areas and find points are documented almost entirely within the inner city, apart from a small northern area, so an exterior blank cannot be treated as evidence of no settlement.",
+        "mechanismIds": ["evidence.coverage-aware-absence"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXTENT", "level": "CERTAIN", "basis": "The official module explicitly states the geographic limitation of the archaeological documentation." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Primarily Dortmund's historic inner city, plus a small northern area", "omissions": ["Most areas outside the inner city lack documented excavation and find coverage in this layer."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-HERRNHUT-PLANNED",
+      "place": { "name": "Herrnhut", "polityOrRegion": "Saxony, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1722, "toYear": 1800, "label": "Foundation and early development of the Moravian settlement" },
+      "source": {
+        "publicationId": "Herrnhut und Herrnhuter Siedlungen - Deutscher Historischer Staedteatlas 3",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Herrnhut.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2009",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The official project and map explanation provide the planned-settlement claim without a declared scale for this text record." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No map symbols are imported for the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "Herrnhut's deliberately symmetric foundation plan and repeated communal design principles provide a control case against assuming that every settlement must accrete from multiple independent nuclei, while also showing that planning is realised with some variation.",
+        "mechanismIds": ["component.multi-nuclear-accretion", "planning.intent-realization-deformation"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The official atlas describes Herrnhut as a planned refugee and religious community with recurring design principles." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "The official page contains an internal 1708/1722 founding-date inconsistency; this record uses the map explanation's 1722 date." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Herrnhut and the comparative Moravian settlement series", "omissions": ["No universal claim is made from the selected planned settlements."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "COUNTEREXAMPLE", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-MAGDEBURG-GROUP-CITY",
+      "place": { "name": "Magdeburg", "polityOrRegion": "Saxony-Anhalt, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1050, "toYear": 1850, "label": "Developmental states of the group city" },
+      "source": {
+        "publicationId": "Magdeburg - Deutscher Historischer Staedteatlas 7, Entwicklungsstaende der Gruppenstadt",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Magdeburg.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2024",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is from the official explanation of a chronological interactive synthesis." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No interactive-layer symbols or geometry are copied into the registry." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas describes Magdeburg as a group city formed from several independent early-medieval component towns whose extents, destruction and relocation continued to shape the later city.",
+        "mechanismIds": ["component.multi-nuclear-accretion", "component.merger-persistent-seams"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The official module explicitly identifies independent component towns." },
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "The atlas explicitly warns that early settlement surfaces are less certain than later mapped phases." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Magdeburg component settlements and later urban body", "omissions": ["No reconstructed component boundaries are retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-MAGDEBURG-RUPTURE",
+      "place": { "name": "Magdeburg", "polityOrRegion": "Saxony-Anhalt, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1631, "toYear": 1750, "label": "Destruction in 1631 and phased reconstruction" },
+      "source": {
+        "publicationId": "Magdeburg - Deutscher Historischer Staedteatlas 7, Wiederaufbau nach 1631",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Magdeburg.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2024",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record uses the official reconstruction narrative rather than map measurements." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No thematic colours or geometry are reproduced." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The 1631 conquest and fire caused catastrophic destruction across all settlement components, followed by an approximately century-long reconstruction and a later baroque-fortress programme; urban change was discontinuous rather than incremental.",
+        "mechanismIds": ["rupture.discontinuous-rebuild"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "DATE", "level": "CERTAIN", "basis": "The official atlas dates the destructive fire to 10 May 1631 and identifies later reconstruction phases." },
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "The source calls the destruction fatal across all settlement parts, while exact parcel-by-parcel effects are not asserted here." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Magdeburg's historic settlement components and reconstructed old town", "omissions": ["No parcel-level destruction or reconstruction sequence is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-MAGDEBURG-SOURCE-INTERPRETATION",
+      "place": { "name": "Magdeburg", "polityOrRegion": "Saxony-Anhalt, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1552, "toYear": 1850, "label": "Historic source maps and their differing planimetric limits" },
+      "source": {
+        "publicationId": "Magdeburg - Deutscher Historischer Staedteatlas 7, historical-map comparison",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Magdeburg.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2024",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim compares several sources with different scales and representational modes." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The methodological comparison does not rely on one legend." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Source-critical facts and concise paraphrase only; no historic map geometry or imagery is ingested." }
+      },
+      "claim": {
+        "statement": "The official atlas identifies the 1552 Rentz source as a distorted oblique view, the 1632 Guericke plan as covering only the old town, and early reconstructed phases as less certain than later mapped phases; source, transformed display and interpretation are not interchangeable.",
+        "mechanismIds": ["cartography.source-interpretation-separation"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The atlas explicitly states the distinct representational and coverage limitations of the named sources." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic maps used in the Magdeburg atlas", "omissions": ["No transformation parameters or source-map pixels are retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-MUEHLHAUSEN-GATE-SUBURB",
+      "place": { "name": "Muehlhausen", "polityOrRegion": "Thuringia, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 900, "toYear": 1800, "label": "Medieval-to-preindustrial settlement growth and suburb formation" },
+      "source": {
+        "publicationId": "Muehlhausen/Th. - Deutscher Historischer Staedteatlas 6",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Muehlhausen.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2020",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim is a conservative reading of the official project and phase-map explanation, not a measured gate-route sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No map symbols are imported." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas treats Muehlhausen as initially separate old and new towns with intensive suburb formation, and its development synthesis includes old routes; this supports route- and gate-related extra-mural growth as a case possibility, not a universal pattern.",
+        "mechanismIds": ["access.route-gate-suburb"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The official atlas description identifies intensive suburb formation." },
+        { "aspect": "ALIGNMENT", "level": "LIKELY", "basis": "The gate-route relationship is part of the atlas interpretation and is not represented as measured geometry here." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Old town, new town and preindustrial suburbs", "omissions": ["No gate, route or suburb boundary is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-MUEHLHAUSEN-WALL-GENERATIONS",
+      "place": { "name": "Muehlhausen", "polityOrRegion": "Thuringia, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 900, "toYear": 1800, "label": "Successive growth, enclosure and major-fire phases" },
+      "source": {
+        "publicationId": "Muehlhausen/Th. - Deutscher Historischer Staedteatlas 6, settlement-development module",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Muehlhausen.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2020",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record captures the phase synthesis rather than wall geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No phase colour or wall symbol is copied." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "Muehlhausen's separate old and new towns, later growth phases and mapped major fires witness that enclosure and urban fabric can be revised through successive projects and abrupt destructive events rather than one timeless circuit.",
+        "mechanismIds": ["fortification.successive-enclosure", "rupture.discontinuous-rebuild"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "LIKELY", "basis": "Successive enclosed components and fire extents derive from the atlas phase interpretation." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "Individual enclosure and fire phases require the atlas apparatus; no exact dates are promoted here." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Historic old town, new town and principal growth phases", "omissions": ["No wall segment, fire perimeter or phase polygon is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-QUEDLINBURG-PRECINCTS",
+      "place": { "name": "Quedlinburg", "polityOrRegion": "Saxony-Anhalt, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 800, "toYear": 1500, "label": "Formation of the collegiate town, old town, new town and outer settlements" },
+      "source": {
+        "publicationId": "Quedlinburg - Deutscher Historischer Staedteatlas 1",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Quedlinburg.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2006",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The official project and phase description support the precinct claim without importing map geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No legend categories are copied." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no atlas geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas treats the Ottonian collegiate town, old town, new town and settlement areas outside the gates as differentiated components, supporting the possibility that an institutional precinct remains morphologically distinct within later urban growth.",
+        "mechanismIds": ["precinct.institutional-immunity"],
+        "evidenceMode": "SCHOLARLY_INTERPRETED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The official atlas identifies the collegiate town and successive named settlement areas." },
+        { "aspect": "EXTENT", "level": "LIKELY", "basis": "Their exact medieval boundaries belong to the interpretive phase map and are not retained." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Collegiate town, old town, new town and principal outer settlement areas", "omissions": ["No jurisdictional boundary or immunity polygon is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DE-SCHWERIN-CENSORED-BLANKS",
+      "place": { "name": "Schwerin", "polityOrRegion": "Mecklenburg-Vorpommern, Germany", "atlasProgramId": "germany-dhsta" },
+      "representedPeriod": { "fromYear": 1980, "toYear": 1993, "label": "DDR-era and reunification-era cadastral comparison source" },
+      "source": {
+        "publicationId": "Schwerin - Deutscher Historischer Staedteatlas 2, city-plan comparison",
+        "publisher": "Institut fuer vergleichende Staedtegeschichte, University of Muenster",
+        "url": "https://www.uni-muenster.de/Staedtegeschichte/atlanten/deutscher_historischer_staedteatlas/Schwerin.shtml",
+        "accessedAt": "2026-08-20",
+        "sourceDate": "2007; online explanation updated through 2021 imagery",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The record captures an explicit source-coverage warning rather than plan geometry." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The meaning of the white areas is explained in prose, not inferred from a legend." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Coverage metadata and concise paraphrase only; no map geometry or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "The atlas explains that large white areas in the 1980/93 source were created by secrecy rules that omitted military, police and other installations, so mapped blankness is not evidence of physical absence.",
+        "mechanismIds": ["evidence.coverage-aware-absence"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The official module directly explains why the white areas exist." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Schwerin plan assembled from 1980/93 cadastral sources", "omissions": ["Military, police and other secret installations were deliberately not mapped."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-DK-RIBE-HYDRAULIC-STREET",
+      "place": { "name": "Ribe", "polityOrRegion": "Southern Jutland, Denmark", "atlasProgramId": "denmark-medieval-towns" },
+      "representedPeriod": { "fromYear": 700, "toYear": 1300, "label": "Early settlement, river crossing and medieval mill-dam street" },
+      "source": {
+        "publicationId": "Ribes middelalderlige byplan",
+        "publisher": "HistoriskAtlas.dk",
+        "url": "https://historiskatlas.dk/Ribes_middelalderlige_byplan_%283020%29",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The cited official public-atlas entry is a textual archaeological and historical synthesis." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "The claim is asserted in the explanatory text, not derived from cartographic symbology." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no plan geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "Ribe's centre shifted across the river, and a mid-thirteenth-century mill dam became a principal street while channels, crossings and mills organised movement and production; hydraulic infrastructure could become the urban spine itself.",
+        "mechanismIds": ["substrate.hydraulic-spine", "access.crossing-hinge", "economy.hydraulic-production-chain"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "FUNCTION", "level": "CERTAIN", "basis": "The synthesis explicitly identifies the mill dam as a main street and describes the connected mills and channels." },
+        { "aspect": "DATE", "level": "LIKELY", "basis": "The dam-street transformation is assigned to the middle of the thirteenth century." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Medieval river town, crossings, principal streets and hydraulic works", "omissions": ["No channel width, mill footprint or street centreline is stored."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    },
+    {
+      "recordVersion": 1,
+      "recordId": "HE-FR-AGEN-SUCCESSIVE-ENCLOSURES",
+      "place": { "name": "Agen", "polityOrRegion": "Nouvelle-Aquitaine, France", "atlasProgramId": "france-ahvf" },
+      "representedPeriod": { "fromYear": 900, "toYear": 1500, "label": "Medieval nuclei and four successive enclosures" },
+      "source": {
+        "publicationId": "Agen, de la ville medievale a la ville moderne - EN3CLICS synthesis",
+        "publisher": "Ausonius, Universite Bordeaux Montaigne",
+        "url": "https://ausonius.u-bordeaux-montaigne.fr/images/pdf/EN3CLICS/Lavaud.pdf",
+        "accessedAt": "2026-08-20",
+        "role": "THEMATIC_ANALYSIS",
+        "scale": { "kind": "NOT_APPLICABLE", "reason": "The claim comes from the official explanatory synthesis, not a single scaled sheet." },
+        "legend": { "kind": "NOT_APPLICABLE", "reason": "No legend categories are used in the claim." },
+        "geometryLineage": "NO_GEOMETRY",
+        "planimetricQuality": "UNKNOWN",
+        "editorialState": "COMPOSITE",
+        "sheetOrPage": "Medieval development discussion",
+        "rights": { "mode": "CITATION_ONLY", "note": "Concise paraphrase and source metadata only; no plan geometry, symbols, or pixels are ingested." }
+      },
+      "claim": {
+        "statement": "Agen accumulated four medieval enclosures: an episcopal city and market, a distinct Saint-Caprais canonical precinct, a twelfth-century rampart absorbing eastern growth, and a Hundred Years War circuit joining previously separate urban parts.",
+        "mechanismIds": ["fortification.successive-enclosure"],
+        "evidenceMode": "TEXT_ASSERTED",
+        "geometryStatus": "NONE"
+      },
+      "certainty": [
+        { "aspect": "EXISTENCE", "level": "CERTAIN", "basis": "The official synthesis explicitly enumerates four enclosure phases and the components they incorporated." },
+        { "aspect": "ALIGNMENT", "level": "LIKELY", "basis": "Exact alignments belong to the historical-plan interpretation and are not stored." }
+      ],
+      "coverage": { "kind": "TEXTUAL_SCOPE", "description": "Medieval city, canonical precinct and later joined urban extent", "omissions": ["No enclosure polygon, wall segment or gate location is retained."], "absenceIsEvidence": false },
+      "allowedUses": ["POSSIBILITY_WITNESS", "VALIDATION_CASE"],
+      "prohibitedUses": ["DIRECT_GEOMETRY_COPY", "PIXEL_STYLE_COPY", "UNIVERSAL_RULE", "UNREGISTERED_PREVALENCE_PRIOR"]
+    }
+  ]
+}

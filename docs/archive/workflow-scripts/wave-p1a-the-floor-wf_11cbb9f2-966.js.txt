@@ -1,0 +1,32 @@
+export const meta = {
+  name: 'wave-p1a-the-floor',
+  description: 'P1a — THE FLOOR: remove the integer deadband attractor, open the descent path, disposition the promotion mint',
+  phases: [{ title: 'Build', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const BRIEF = [
+  'You are an Opus IMPLEMENTER for SettlementForge. SLICE P1a of the DEMOGRAPHIC ENGINE: THE FLOOR. Read docs/DESIGN_DEMOGRAPHIC_ENGINE.md section 0 (the grounded defect anatomy - BINDING) and the P1a slice charter in section 11. The 300-year soak bifurcation is ONE defect: an uncapped rate read through an integer deadband. P1 (just landed) cures the runaway top when demographicsEnabled is lit; YOUR slice cures the frozen bottom.',
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch. FOREIGN, never touch: wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests, and artifacts/soak/**. Focused vitest only, one at a time.',
+  '',
+  'THE GROUNDED FACTS (verified 2026-08-01, all cited in the design doc section 0):',
+  '- populationDynamics.js:303-305: `rawDelta = Math.round(pop * rate * magnitude)` then `if (Math.abs(delta) < Math.max(2, Math.round(pop * 0.001))) return null` - below ~2,500 people a declining settlement freezes forever when its delta rounds inside the deadband. Equilibrium pop* = 1.5 / (|monthlyRate| x magnitude). The soak 200-500 floor reproduces at pressure 0.68-0.70.',
+  '- The terminal-death lane has a THORP-TIER PRECONDITION (settlementLifecycleFirstClass.js circa :364) - a nonviable town at 300 people can NEVER die because 300 is above the thorp ceiling of 60.',
+  '- Tier demotion ALREADY EXISTS on three paths; the primary (tierResourceDynamics tierEligibility, streak-gated, tierDriftEnabled=true by default) is the sanctioned descent. Do NOT add a second demotion writer.',
+  '- tierOutcomeApply.js:308-316: PROMOTION MINTS population up to the new tier minimum, self-annotated "a deliberate (unconserved) mint" - this violates wave P law 4.',
+  '',
+  'IMPLEMENT (all behind demographicsEnabled - the dark path stays byte-identical BY OBJECT IDENTITY, extending P1 dormancy fence):',
+  '1. KILL THE ATTRACTOR: when demographicsEnabled is lit, the DECLINE side must not freeze. P1 owns growth; you own decline: route the decline lane through the demographic kernel step (deaths/emigration continue at any population - the kernel already computes integer terms without a deadband) OR accumulate fractional decline across ticks in the kernel own state so |delta|>=1 eventually emits. Choose, record the choice vetoably, pin it: a fixture at the measured frozen equilibrium (pop 300, pressure 0.70) must RESUME declining when lit, and must stay frozen when dark (the negative control proving the fence).',
+  '2. OPEN THE DESCENT: lit-path only, replace the terminal lane thorp-tier precondition with the viability ladder logic (design section 7b): a nonviable settlement DEMOTES first through the EXISTING tier-drift eligibility (extend its inputs with demographic pressure when lit - one writer, never a fork), and terminal death becomes reachable at the bottom of the ladder. The floored-six shape (town at 300 people frozen forever) must instead descend: town -> village -> hamlet -> thorp -> (existing terminal lane). Pin the full descent on a 300-tick fixture.',
+  '3. DISPOSITION THE PROMOTION MINT (law 4): when demographicsEnabled is lit, promotion must NOT mint people - the earned-promotion law (design section 5) says the population must already be there. Lit: tierOutcomeApply raises tier WITHOUT touching population (the conservation-exact demotion already behaves this way - make promotion symmetric). Dark: byte-identical legacy behavior INCLUDING the mint (a golden depends on it). Pin both arms.',
+  '4. Extend the demographicsEnabled certification row: the new invariants (no frozen nonzero equilibrium on decline; promotion conserves when lit; descent reachable). Extend, never re-author.',
+  '',
+  'PINS with executed negative controls (revert/red/restore/green, quoted): the unfreeze pin (the floored equilibrium resumes decline lit, stays frozen dark); the descent pin (300-tick nonviable town reaches thorp and the terminal lane); promotion-conserves-lit + promotion-mints-dark (both arms); no second demotion writer (source census: tier transitions have exactly the existing writers); H3-floor still holds (descent never draws below resident named cast); dormancy object identity; seed-family determinism.',
+  '',
+  'HARD RULES: no migrations; no git mutations; no full suites/builds; NO ratchet raises; ZERO any-casts in new/touched domain code (declare conditional keys on the OWNING typedef); kernel math primitives; no em dashes in src/domain string literals; the golden law - dark worlds byte-identical, generation goldens and all dormancy goldens untouched; if you touch anything the edge bundles bake in, reseal via npm run build:edge-shared. Return dense structured data: statuses, files, verbatim test tails, negative-control quotes, behavior shifts plainly, judgment calls vetoable, discovered.',
+].join('\n')
+
+phase('Build')
+const r = await agent(BRIEF, { label: 'P1a:the-floor', phase: 'Build', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

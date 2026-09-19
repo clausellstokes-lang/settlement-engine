@@ -1,0 +1,65 @@
+export const meta = {
+  name: 'fp-cycle5-es4-distant-source',
+  description: 'ES-4 — the distant source. Third member of the CR-WR10-H lighting discharge and the payoff of the nine-wave critical path.',
+  phases: [
+    { title: 'ES-4', detail: 'a non-neighbour pair appraised known:true through a completed mission' },
+    { title: 'Verify', detail: 'adversarial verification + the marker really registers' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE; a doc overstatement is a STOP-and-report, never a silent correction. Work in ${TREE}. Hard-gate with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ USE THE SCRIPTS. \`sh scripts/gate-mutex.sh --wait\` before EVERY vitest run (⛔ never hand-spell \`ps aux | grep -c "[v]itest"\` — it matches your own command line). \`sh scripts/ratchet-inventory.sh <walker> <base> [head]\` for the ratchet half of attribution (⛔ never hand-read an inventory: vitest never prints the MEMBERS of a failed array assertion, and four waves have written false receipts reconstructing from the cardinality). Read gates ONLY via \`sh scripts/gate-tail.sh\`; ⚠ never read an exit code through a pipe.
+⚠ zsh does NOT word-split unquoted parameters — \`npx vitest run $FILES\` silently runs ONE file and reports a meaningless green. Route through \`sh\` or spell every path.
+⛔ DO NOT EDIT, STAGE OR COMMIT \`docs/FABLE_VALIDATION_QUEUE.md\`. Compose your row and RETURN IT AS TEXT.
+
+⚠⚠ THE FIVE PIN-VACUITY SHAPES THAT HAVE SHIPPED IN THIS PROGRAM. Audit your own pins against every one before reporting:
+ 1. COMPARES A FUNCTION AGAINST ITSELF — two calls with identical arguments, or two fixtures differing in a field the reader never reads.
+ 2. OPERATORS THAT PASS ON EQUALITY — \`toBeGreaterThan(0)\` where you meant "moved". Use STRICT inequality and assert the exact expected value on both sides.
+ 3. A CLAIM IN A HEADER THAT NO PIN IMPLEMENTS. A COMMENT IS NOT A PIN.
+ 4. TWO GUARDS OVER ONE JOB, each invisible behind the other. Delete each ALONE and confirm each reds alone.
+ 5. ⭐ CEILING SATURATION (named yesterday) — both operands clamped at a bound, so equality holds no matter what the code does. Cure: choose fixture values with HEADROOM, state the claim on a slot that discriminates, and add an anti-vacuity guard asserting the value stays off its bound. ⚠ And a term that can only ever be ZERO is not an unpinned arm — it is UNREACHABLE, and a green battery cannot tell the two apart.
+
+PROTOCOL: NEVER stash/reset/clean/checkout-family — use \`cp\` backups and \`cmp\`-proven restores. EXPLICIT PATHSPECS; verify \`git diff --cached --name-only\` against your EXPECTED set BY NAME AND COUNT (\`git add\` aborts ATOMICALLY on one bad pathspec, silently if stderr is suppressed). Commit message via file; trailer \`Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>\`. python3 byte-scan for NUL bytes. Strict ceiling 1313; NEW modules carry a per-file ZERO strict baseline — satisfy by NARROWING, never a cast. ⛔ Do NOT tighten the shared domain-strict ratchet even when it reports slack (standing precedent, four times recorded). tests/fixtures/, pulseKernel.js, applyWorldPulse.js UNTOUCHABLE. Navigate by SYMBOL. ⚠ The anchored-negatives walker's \`// anchored:\` lookback is EXACTLY ONE LINE — a two-line reason silently fails to exempt, and that has bitten twice.
+
+⛔ THE REPO GATE IS RED AT BASE — 42 files / 69 tests over the full suite. NOT YOURS. "Pre-existing" is EMPIRICAL: re-run against a \`git archive\` of your OWN PARENT, and ⚠ COMPARE LIKE WITH LIKE — archive against archive, NEVER archive against live. That mismatch is exactly what made the last wave's receipt false.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE. If you are about to write a figure you did not execute, stop and execute it.`
+
+phase('ES-4')
+const build = await agent(LAWS + `
+
+YOU ARE THE ES-4 IMPLEMENTER — THE DISTANT SOURCE. This is the THIRD MEMBER of the CR-WR10-H lighting discharge and the payoff of a nine-wave critical path: SP-D → ES-1 → ES-2 → ES-3 → ES-4. Everything before it has landed and been repaired. Rides SP-B/SP-B2's flags; mints NOTHING.
+
+⚠⚠ ELEVEN COMMITS IN THIS REPO CARRY "ES-4" IN THEIR SUBJECT AND THE WAVE HAS NOT LANDED. Commit \`8a4b0aef\` says verbatim "THE WAVE DID NOT LAND" — those eleven built and hardened the LIGHTING INSTRUMENT over ten cuts, not the wave. NEVER infer from the log that any part of ES-4 exists; verify by module and symbol.
+
+NORMATIVE SPEC: the ES-4 block of \`docs/DESIGN_FP_ARCH_ES.md\` — navigate by SYMBOL; that volume's §1 forbids line-number navigation. Read it whole, plus the ES-3 leaves you will consume (\`espionageProducts.js\`, \`espionageProductStage.js\`, \`espionageTap.js\`) AT THE TREE, never from their reports.
+
+⛔⛔ THE LIGHTING RECIPE IS EXACT, AND A PIN IN THE WRONG SHAPE "CARRIES THE TOKEN AND LIGHTS NOTHING". Read the header clauses of \`tests/lint/sovereigntyLightingContract.walker.test.js\` YOURSELF and satisfy them literally. As measured, the marker \`ES-4-DISTANT-SOURCE-EVIDENCE\` must stand in an \`it\`/\`test\` TITLE — NEVER a \`describe\` title — inside \`tests/domain/espionageDistantSourceEs4.test.js\`, one of exactly three entries in \`EVIDENCE_FILE_ADDRESSES\`. The \`it\` identifier must be imported from 'vitest' UNRENAMED and UNSHADOWED; the call statically registered STRAIGHT-LINE (no return, throw, conditional, loop, or bare await); a function-body second argument with NO options bag; the callback taking NO parameters. ⚠ A renamed vitest import was once credited while vitest registered ZERO rows — that is why the instrument took ten cuts.
+
+⚠ THE LIGHTING CENSUS IN THAT WALKER IS AN EXACT EXECUTED SELF-ASSERTION and your new test file WILL move it. Re-measure AT YOUR OWN PARENT, never an older tree. FIVE lanes have re-recorded it in the last day and one wrote a provenance that was arithmetically impossible. Decompose the cause by construction — which layer moved and why the others cannot — and state the method you used.
+
+THE CHARTER: prove the SOURCE. A non-neighbour (court, holding) pair appraised \`known: true\` through a COMPLETED confirmation mission — that is, knowledge that could ONLY have come from espionage, about a pair too distant for rumour to reach. PINS: the four-leg totality plus the degraded-arm re-run against espionage-fed rows; the NON-NEIGHBOUR DIFFERENTIAL (the same pair must NOT be known without the mission — that differential is the whole wave, so make certain it cannot go vacuous); the axis-drift scan.
+
+⛔ DO NOT LIGHT ANY FLAG, and do not edit \`DEFAULT_SIMULATION_RULES\`. Lighting is owner-held at the terminal soak. Your job is to prove the condition is SATISFIABLE; you never satisfy it by lighting.
+
+Wave-end attribution per the LAWS, ratchet half BY THE SCRIPT. COMPOSE your ledger row and RETURN IT AS TEXT.
+
+RETURN JSON: {commits, files, lightingProof, gates, goldenShifts, stopReports, judgments, vacuitySelfAudit, ledgerRowText, notes}.`, { label: 'build:ES-4', phase: 'ES-4', model: 'opus' })
+
+phase('Verify')
+const verdict = await agent(LAWS + `
+
+⚠⚠ VERIFIER DISCIPLINE. Do EVERY execution inside a \`git archive\` of the exact commit you are verifying; symlink node_modules; \`rm -f\` THE SYMLINK before removing the tree. Never edit the live tree — mutants go in disposable archives only. ⚠ RE-RUN EVERY GATE THE REPORT QUOTES, AT THE COMMITTED SHA: four false receipts have landed in this program in one day, and the code was fine every time — the defects were in the receipts. Use the ratchet script; do not hand-read. ⚠ A MUTANT THAT PLANTS NOTHING GREENS — assert bytes changed before measuring.
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR ES-4. Default posture: the implementer is WRONG until executed evidence says otherwise. REFUTE. The implementer reported: ` + JSON.stringify(build).slice(0, 12000) + `
+
+⛔ THE SINGLE MOST IMPORTANT CHECK, because this wave's entire purpose is to satisfy a lighting condition: VERIFY THE MARKER ACTUALLY REGISTERS. Run the lighting walker and confirm it reports the ES-4 evidence SATISFIED. Then MUTATE the pin into a \`describe\` title and confirm the walker STOPS crediting it. Then mutate the vitest import to a renamed binding and confirm it stops crediting it. **A marker that lights nothing is the exact failure this instrument was built over ten cuts to catch, and a wave that appears to discharge a lighting condition without doing so is the worst possible outcome here** — it would let a flag be lit later on evidence that never existed.
+
+THEN: (1) THE NON-NEIGHBOUR DIFFERENTIAL IS THE WAVE — prove it cannot go vacuous. Confirm the pair is genuinely NOT known without the mission (seeded, non-empty, both arms driven), and audit it against all FIVE vacuity shapes, especially CEILING SATURATION and the unreachable-term case. (2) Every other pin non-vacuous by planted mutant. (3) Dormancy byte-identity run by you. (4) Guard doors deleted INDIVIDUALLY. (5) Lifecycle totality by executed round-trip. (6) NO flag minted or lit and DEFAULT_SIMULATION_RULES untouched. (7) Wave-end attribution both granularities, archive-vs-archive, ratchet half via the script. (8) strict 1313 and per-file zero; byte-scans; staged-set completeness by name and count.
+
+A finding is only a finding if you EXECUTED the thing that proves it. RETURN structured JSON only.`, { label: 'verify:ES-4', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { build, verdict }

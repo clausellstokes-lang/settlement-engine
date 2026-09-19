@@ -1,0 +1,26 @@
+export const meta = {
+  name: 'batch6-reconcile',
+  description: 'Final build batch reconciliation: five registration/doc/a11y reds',
+  phases: [{ title: 'Fix', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const BRIEF = [
+  'You are an Opus IMPLEMENTER for SettlementForge. The FINAL build batch (I3+I4, K2, K3, K4 — landed uncommitted) is gate-red on FIVE items. Everything substantive passed: 2,082 files green, no golden moved, typecheck clean.',
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch. FOREIGN, never touch: wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests, and artifacts/soak/** (a completed 300-year receipt lives there and is irreplaceable evidence). Focused vitest only, one at a time; a timeout-shaped red gets ONE isolation re-run.',
+  '',
+  'THE FIVE REDS:',
+  '1. tests/ui/uiA11yWave5.test.jsx - an accessibility red on new UI. Read the failure, fix the COMPONENT (never the assertion): jsx-a11y is error-level here, icon-only controls need accessible names, and any Suspense fallback must NARRATE (the loading-narration ratchet is tolerance-0).',
+  '2. tests/lint/ruinFilterRoster.walker.test.js - new roster readers from the K slices read raw .institutions. Route through liveInstitutions()/isLiveInstitution() from src/domain/institutions/institutionRoster.js, and RECORD THE REASONING IN SOURCE (the K1 hasPrison precedent: a flattened gaol cannot hold a prisoner; the I2 precedent: a ruined house has no correspondents, but an IMPAIRED one still trades). If a reader genuinely must see ruins, exempt it with the reason class saying why.',
+  '3. tests/domain/roadsParticipation.test.js - new worldPulse .npcs readers are undispositioned. Disposition each HONESTLY in the census with a one-line written reason (the npcLedger / stripNpcInfluence / npcDmVerbs precedents). Never a bare list entry.',
+  '4. tests/docs/architectureFreshness.test.js - a count in ARCHITECTURE.md is stale against the tree. Read the test to see which fact it derives from the filesystem and correct the DOC to match (never the reverse).',
+  '5. tests/docs/enforcedByExists.test.js - an @enforced-by comment names a test path that does not exist. Either point it at the real pin or write the pin it promises. An @enforced-by that names nothing is a claim with no enforcement, which is the exact class this repo forbids.',
+  '',
+  'HARD RULES: NO ratchet/baseline/budget raises and no widenings - every fix is a registration with a written reason, a canonical-accessor adoption, a component fix, or a doc correction; no migrations; no git mutations; no full suites/builds; no golden re-records; if you touch a store action run operationRegistry then gen:compendium-data then generate-sitemap then build:edge-shared IN ORDER; if you touch anything the edge bundles bake in, reseal them before declaring done; JSX 600 / js 800; ZERO any-casts in new domain files; anchored negatives; no em dashes in src/domain or src/data string literals.',
+  'FINISH by re-running all five formerly-red files and quoting their pass lines. Return dense structured data: per-red status, files, verbatim test tails, notes, discovered.',
+].join('\n')
+
+phase('Fix')
+const r = await agent(BRIEF, { label: 'batch6:reconcile', phase: 'Fix', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

@@ -1,0 +1,22 @@
+export const meta = {
+  name: 'trade-vs-war-parity-survey',
+  description: 'Survey trade\'s code depth against the war system\'s robustness dimensions',
+  phases: [{ title: 'Survey', detail: '3 read-only surveyors over minifold' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const PRE = `VERIFY-FIRST: read-only surveyor for the SettlementForge Fable chair (owner-authorized). Tree: ${MF} (claude/composite-r4; two-writer tree — Sol is live; read freely, edit NOTHING, no git, no gates; focused vitest allowed). Label CONFIRMED (read/executed) vs PLAUSIBLE. Structured output; file:line evidence.`
+const SCHEMA = { type:'object', required:['findings','summary'], properties:{
+  findings:{type:'array',items:{type:'object',required:['dimension','verdict','evidence'],properties:{
+    dimension:{type:'string'},verdict:{type:'string'},evidence:{type:'string'},detail:{type:'string'}}}},
+  summary:{type:'string'}}}
+
+phase('Survey')
+const r = await parallel([
+  () => agent(`${PRE}
+TASK: TRADE MECHANICS INVENTORY. Survey everything trade in src/domain/: tradeFlow, commodityFlow, entrepots, supplyShipments, smuggle, seaLanes, the M6 lanes (tolls, refusal, embargo), routeNetwork* flows (J program: goods/population/military classes, charters, self-sufficiency), K4 substitution, foodBalance imports, goodsCatalog/supplyChainData, treaty economic terms (tribute/resource_share/trade_exclusivity/market_access/toll_exemption in peaceTerms). For each: what it DOES, what state it owns, whether flows are conserved, and what its receipts say. End with: the mechanics-layer verdict — is trade's PHYSICAL layer (things moving) as real as war's (armies moving)?`, {label:'trade-mechanics', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: TRADE AGENCY + EPISTEMICS SURVEY — the war-parity dimensions. War has: (1) a typed casus taxonomy (13 reasons + mirrors, walker-enforced, warReasons.js) — does trade have a typed TRADE-RELATIONSHIP/pact vocabulary? Are there peacetime trade AGREEMENTS as first-class artifacts (like treaties), or do trade terms exist only as war outcomes? (2) DELIBERATIVE AGENCY — settlementStrategy's chooser: which TRADE verbs does it hold (grep the move enumeration), and is there any trade-pact negotiation path? The review found realmPressure's trade-agreement propensity UNWIRED (warReasons.js:788-790 sole consumer) — confirm current state. (3) EPISTEMICS — does ANY trade decision route through belief (believed prices/scarcity/routes), or does commerce read true state everywhere (grep truthFor/belief reads in trade modules)? (4) LIFECYCLE — do trade relationships form/strain/dissolve organically (beyond J's route charters): embargo entry/exit, partner switching (tradeWar.js's contest), pact decay? (5) ACTORS' BOOKS — do merchant seats/factions act with their own interests anywhere (M6b entrepot greed, guild factions)? Verdict per dimension: BUILT / PARTIAL / ABSENT with evidence.`, {label:'trade-agency', phase:'Survey', schema:SCHEMA}),
+  () => agent(`${PRE}
+TASK: MEASUREMENT + VARIETY PARITY. War is getting (WR-9): duration envelopes, endings-mix vocabulary, deciding-term histograms. Survey what trade MEASUREMENT exists: J2's realm self-sufficiency observation, any trade-variety envelopes, soak observations of commerce (grep behavioralContract + certification rows for trade/economy observations), the v5 receipt fields touching trade, tickScanBudget coverage of trade lanes. Also: trade's Herald presence — which trade news kinds exist (WHAT_PHRASES trade entries), and does trade tell stories at war's narrative density (count news-emission sites in trade modules vs war modules — a rough sites-per-module comparison)? Verdict: is trade's OBSERVABILITY at war's (planned) level?`, {label:'trade-measurement', phase:'Survey', schema:SCHEMA}),
+])
+return { results: r.filter(Boolean) }

@@ -1,0 +1,26 @@
+export const meta = {
+  name: 'first-paint-reclaim',
+  description: 'Reclaim the first-paint budget: de-eager the wave D/F/G derivations pulled into the entry closure',
+  phases: [{ title: 'Reclaim', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+phase('Reclaim')
+const r = await agent(`You are an Opus IMPLEMENTER for SettlementForge. THE CONSTITUTIONAL FIRST-PAINT RATCHET IS RED and must be RECLAIMED, never raised (the budget is owner-gated — raising it is forbidden to you absolutely, no matter how well justified).
+
+MEASURED STATE (executed, quoted): tests/build/vendorPdfLazy.test.js reports first-paint static closure = 1,056,635 B against CLOSURE_BUDGET_BYTES 1,040,000 (over by 16,635). Chunk breakdown: index 602,063 · vendor-react 193,156 · data 125,804 · engine-core 96,074 · vendor-state 17,038 · kernel 12,238 · content-identity 5,349 · vendor-icons 4,913. Before the recent waves the closure measured 1,035,454 (margin 4,546), so roughly 21 kB of NEW eager weight arrived with waves D (CREATE_ROUTE), F (gathered adjudication), G (autoplacement), J1/H1 (engine ledgers).
+
+Worktree: ${ROOT} branch claude/composite-r4 — verify; stop on mismatch. A soak + concurrent sessions are live: never touch artifacts/soak/**; the wizard-news files (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + tests) are FOREIGN — never touch. No git mutations. No full suite.
+
+PRIME SUSPECTS (verify by measurement, do not assume): the STORE is eager, so any store file that statically imports a new domain derivation drags it in — src/store/mapSlice.js → src/domain/realm/autoplacement.js + placementRaster.js + lowDiscrepancy.js (wave G); src/store/userRouteCharter.js / canonRouteCommandBilateral.js → src/domain/roads/userRoutes.js (wave D); wave F's gatheredDocket.js; and any component NOT behind React.lazy (AutoplacementConsent.jsx, the charter-road card).
+
+METHOD (the house pattern — read tests/build/vendorPdfLazy.test.js's header ledger and the existing precedents first):
+1. MEASURE FIRST: \`npm run build\` then \`VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js\` to reproduce, and use the repo's own analysis to attribute bytes per module (the test/scripts already know how to walk the static closure — reuse that machinery rather than guessing).
+2. DE-EAGER at the seam: the sanctioned cure is the loadEngine idiom — a store action dynamically \`await import()\`s the heavy derivation at call time; the module stays out of the entry graph. Apply it to each confirmed offender. ⚠️ RECORDED HAZARD: "a lazy chunk importing an eager module re-parents the closure" — import LEAVES, never barrels, and re-measure after each change (VERIFY_DIST=1 or you see nothing).
+3. Components: any new wave UI must be React.lazy with a NARRATED Suspense fallback (the loadingNarrationRatchet is tolerance-0 at 41 — do not add a silent fallback={null}) and a build pin carrying the SECOND assertion when its parent is itself lazy (the 5-layer tests/build/*Lazy.test.js recipe).
+4. TARGET: closure back UNDER 1,040,000 with margin ≥ 4,000 B. Quote the final measured number. If after honest de-eagering you cannot reach the budget, STOP and report exactly what remains and why — do NOT raise the budget, do NOT weaken the test.
+5. Add/extend lazy pins so each de-eagered module can never silently return to the entry closure (absence+presence sentinel PAIRS — a pure absence assertion can be faked by tree-shaking).
+
+HARD RULES: no budget/ratchet raises of any kind; no migrations; no golden re-records; behavior must be identical (de-eagering is a load-order change only — if a store action becomes async, verify EVERY caller awaits it and pin that the un-awaited-promise class cannot bite: the '.changed off an un-awaited promise lies silently' hazard is recorded and real); JSX 600 / js 800; anchored negatives; no em dashes in src/domain|src/data string literals. Run the focused build suites + the touched features' functional pins. Return dense structured data: statuses, files, the measured before/after closure numbers, verbatim test tails, behavior shifts, judgment calls, discovered.`, { label: 'reclaim:first-paint', phase: 'Reclaim', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

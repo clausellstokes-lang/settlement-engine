@@ -1,0 +1,117 @@
+export const meta = {
+  name: 'three-surface-compare-opus-fable',
+  description: 'Compendium/Realm/Account three-way comparison — Opus surveys, Fable adversarial verification',
+  phases: [
+    { title: 'Survey', detail: 'two Opus readers per surface', model: 'opus' },
+    { title: 'Verify', detail: 'one Fable verifier per surface', model: 'fable' },
+  ],
+}
+
+const OURS = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-euclid-6b4519'
+const THEIRS = '/Users/cstokes/Desktop/settlement-generator/settlement-engine'
+
+const SURVEY_SCHEMA = {
+  type: 'object',
+  required: ['topic', 'structure', 'deltas', 'notable'],
+  properties: {
+    topic: { type: 'string' },
+    structure: { type: 'string', description: 'top-to-bottom outline with file:line anchors; include button/feature placements and gates' },
+    deltas: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['what', 'ours', 'alt', 'assessment'],
+        properties: {
+          what: { type: 'string' },
+          ours: { type: 'string' }, alt: { type: 'string' },
+          assessment: { type: 'string', description: 'which is better and why; note parity-ledger coverage (W4/RP rows) and whether later waves already landed it' },
+        },
+      },
+    },
+    notable: { type: 'string' },
+  },
+}
+
+const VERIFY_SCHEMA = {
+  type: 'object',
+  required: ['surface', 'verified_deltas', 'corrections', 'faith_seam', 'adoption_summary'],
+  properties: {
+    surface: { type: 'string' },
+    verified_deltas: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['what', 'verdict', 'evidence', 'disposition'],
+        properties: {
+          what: { type: 'string' },
+          verdict: { type: 'string', enum: ['CONFIRMED', 'CORRECTED', 'REFUTED'] },
+          evidence: { type: 'string', description: 'the file:line you personally re-checked' },
+          disposition: { type: 'string', description: 'already-landed / in-flight-W5 / net-new-adoptable / W4-class / fence-blocked / ours-better-keep / owner-decision' },
+        },
+      },
+    },
+    corrections: { type: 'string', description: 'survey claims you refuted or corrected, with proof' },
+    faith_seam: { type: 'string', description: 'your own check: does any reference surface show deity names to free/anon; exact gates cited' },
+    adoption_summary: { type: 'string', description: 'the final owner-facing summary for this surface: what to adopt, from which lineage, in what order' },
+  },
+}
+
+const COMMON = `SettlementForge three-lineage analysis. READ-ONLY — do not modify any file.
+Trees: OURS (live floor) = ${OURS} (branch claude/festive-tesla-cd6657; NOTE a W5.4 agent is concurrently editing map/SettlementPalette.jsx, map/AnnotateToolbar.jsx, map/settlementThreat.js, design/tokens.js, dossier/DossierHeaderRow.jsx — treat those five as in-flight, cite but do not weigh their mid-edit state). EXPORT = ${THEIRS} (fix/holistic-remediation). MASTER (GitHub, the owner-ratified design reference) = \`git show master:<path>\` inside OURS.
+Byte-identity facts (pre-computed): compendium/** and region/** are IDENTICAL between master and export. Account diverges on: account/AccountDataPrivacySection.jsx, account/AccountProfileSection.jsx, AccountPage.jsx. Map diverges on: map/MapLegend.jsx, map/PlacementDetailCard.jsx, map/RealmDashboard.jsx, map/SimulationRulesDialog.jsx, WorldMap.jsx. On diverging files master is the ratified design.
+Focus: LAYOUT, DESIGN, BUTTON/FEATURE PLACEMENT — what renders where, order, gates (anon/free/premium/elevated), hierarchy, empty/loading states, mobile strategy. The parity ledger (2026-07-11) classified these areas but LINE NUMBERS AND STATUSES HAVE DRIFTED — several W4 waves landed since (e.g. W4d 'Account gets Security, Data, and real support' commit fc156134). Verify the LIVE tree, not the ledger.`
+
+const SURFACES = [
+  {
+    key: 'compendium',
+    ours: `${COMMON}
+
+TOPIC: OUR compendium. Trace src/components/CompendiumPanel.jsx (shell: tabs/segmented/SEO/deeplinks/mobile chrome), compendium/* (CatalogTabs incl. whether a Living-World tab exists now, CompendiumGlobalSearch, CustomContent/CustomContentManager, SupplyChainsManager, Dependencies, HelpPopover + its flag state in lib/flags.js, ContentPackBar/CustomContentGate/DeityEffectPreview/PantheonActivationStrip/FactionEventBanner — present now? tests/components/pantheonActivationStrip.test.jsx exists, so check what landed), data/entityVocabulary.js + lib/contentPacks.js presence. Full visual stack + placements + gates.`,
+    ref: `${COMMON}
+
+TOPIC: the reference compendium (EXPORT tree — byte-identical to master here, so this IS the ratified design). Trace ${THEIRS}/src/components/CompendiumPanel.jsx (per-tab SEO, ?mode=custom deeplink, Segmented catalog/custom, MobileTabStrip, DesktopOnlyGate chrome, ReadOnlyCustomContentList), compendium/ContentPackBar.jsx + lib/contentPacks.js + data/entityVocabulary.js (content-pack system), CustomContentGate.jsx (premium gate), DeityEffectPreview.jsx, PantheonActivationStrip.jsx, FactionEventBanner.jsx, CustomItemAttributes.jsx, customCategories.js, CatalogTabs Living-World tab, HelpPopover always-on. Full visual stack + placements + gates, especially the deity-related surfaces' gating.`,
+  },
+  {
+    key: 'realm',
+    ours: `${COMMON}
+
+TOPIC: OUR realm/world-map. Trace src/components/WorldMap.jsx (shell), map/WorldMapStage.jsx (layers/legend/palette mounts), map/RealmDashboard.jsx (dashboard cards + LivingWorldGates), map/RealmInspector.jsx (inspector tabs — War&Resolve present now? W4 landed war/faith surfacing since the ledger), map/WorldMapToolbar.jsx (advance/multi-tick/resume/auto-resolve chrome), map/WorldPulsePanel.jsx (results tab structure), map/LayersPanel.jsx (toggles), map/MapOverlay.jsx + WarFaithMapOverlay/RelationshipEdges (war-faith visual layer wired?), map/AssignDeityFromMap.jsx presence, region/**. FENCED (read-only, note only): SimulationRulesDialog.jsx, domain/worldPulse/**, store/campaignWorldPulseSlice.js. Full visual stack + placements + gates.`,
+    ref: `${COMMON}
+
+TOPIC: the reference realm/world-map — EXPORT tree for the identical files, MASTER for the five diverging ones (MapLegend, PlacementDetailCard, RealmDashboard, SimulationRulesDialog, WorldMap — extract master's via git show and DIFF against export; report master-vs-export deltas separately, master ratified). Trace the same surfaces as the ours-reader (${THEIRS}/src/components/map/**, WorldMap.jsx, region/**) with button/feature placements + gates: inspector tab set incl. War&Resolve + Assign-deity/steer-realm chips, dashboard cards, LayersPanel toggle set, PlacementDetailCard, the SimulationRulesDialog engine-gates/focus-trap/collapsible groups (read-only — OUR file is fenced to a concurrent wave; note deltas for the manager). Faith seam: what deity names render where, under what gate.`,
+  },
+  {
+    key: 'account',
+    ours: `${COMMON}
+
+TOPIC: OUR account surface. Trace src/components/AccountPage.jsx (IA: single scroll or left-rail now? W4d landed Security/Data/support — verify), account/* (AccountNav?, AccountSecuritySection?, AccountDataPrivacySection?, AccountTickets/AccountSupportSection, AccountPreferencesSection?, AccountProfileSection, AccountRecoveryQuestionsSection, AccountSubscriptionSection, ReferralRedeemBlocks?, AccountEmailPreferencesSection [OURS-only, keep], AccountFAQ), src/components/AccountMenu.jsx (header chip: rows, sign-out?, credits?). Full visual stack + placements + gates; list orphans with 0-importer proof.`,
+    ref: `${COMMON}
+
+TOPIC: the reference account surface — EXPORT tree baseline, MASTER for the three diverging files (AccountPage.jsx, account/AccountDataPrivacySection.jsx, account/AccountProfileSection.jsx — git show master:<path>, DIFF against export, report master-vs-export deltas separately, master ratified). Trace ${THEIRS}/src/components/AccountPage.jsx (left-rail AccountNav IA + mobile tab strip + focus mgmt), account/AccountNav.jsx, AccountSecuritySection (change password/linked identities/sign-out-everywhere/2FA stub placements), AccountDataPrivacySection (export/import/bulk-delete/delete-account/visibility defaults), AccountTickets + AccountSupportSection (FAQ-first + ticket thread UI), AccountPreferencesSection, ReferralRedeemBlocks via AccountSubscriptionSection, AccountProfileSection (external_name/private names/avatar escaping/model-cost annotations), AccountMenu.jsx (sign-out row/roving focus/compact credits). Full visual stack + placements + gates.`,
+  },
+]
+
+const results = await pipeline(
+  SURFACES,
+  s => parallel([
+    () => agent(s.ours, { label: `survey:${s.key}:ours`, phase: 'Survey', model: 'opus', schema: SURVEY_SCHEMA }),
+    () => agent(s.ref,  { label: `survey:${s.key}:ref`,  phase: 'Survey', model: 'opus', schema: SURVEY_SCHEMA }),
+  ]),
+  (surveys, s) => {
+    const [ours, ref] = surveys.filter(Boolean)
+    return agent(`${COMMON}
+
+You are the FABLE VERIFIER for the ${s.key.toUpperCase()} surface. Two Opus surveys are below (ours-reader, then reference-reader). Your job is ADVERSARIAL VERIFICATION, not summary:
+1. Re-check every load-bearing claim yourself — at minimum 8 spot-checks per survey: open the cited file at the cited line and confirm the code says what the survey claims (quote 1 line each). Refute or correct anything wrong.
+2. Grep-verify every orphan/0-importer and every ALREADY-LANDED claim yourself.
+3. Run your own faith-seam check on the reference surfaces (deity names to free/anon? exact gate).
+4. Check fence contact: would any proposed adoption touch map/SimulationRulesDialog.jsx, domain/worldPulse/**, store/campaignWorldPulseSlice.js, or SettlementDetail.jsx? Mark those fence-blocked.
+5. Produce the final verified delta table with dispositions (already-landed / in-flight-W5 / net-new-adoptable / W4-class / fence-blocked / ours-better-keep / owner-decision) and a dense owner-facing adoption summary for this surface.
+
+SURVEY A (ours-reader): ${JSON.stringify(ours)}
+
+SURVEY B (reference-reader): ${JSON.stringify(ref)}`, { label: `verify:${s.key}`, phase: 'Verify', model: 'fable', schema: VERIFY_SCHEMA })
+  },
+)
+
+return { results: results.filter(Boolean) }

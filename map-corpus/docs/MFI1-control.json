@@ -1,0 +1,3216 @@
+{
+ "instrument": "MFI1-footprints",
+ "mode": "control",
+ "headline": {
+  "mass": {
+   "runs": 9,
+   "pitches_px": [
+    33.0,
+    44.0,
+    66.0
+   ],
+   "seeds": [
+    11,
+    12,
+    13
+   ],
+   "recovery_rate_min": 0.973,
+   "recovery_rate_median": 0.9875,
+   "merge_rate_max": 0.0382,
+   "split_rate_max": 0.0,
+   "split_rate_median": 0.0,
+   "spurious_rate_max": 0.0539,
+   "rect_measured_p50": 0.9211,
+   "rect_bias_p50": -0.0789,
+   "rect_adj_measured_p50": 0.9258,
+   "lshape_measured_p50": 0.7039,
+   "wedge_measured_p50": 0.5565,
+   "ellipse_measured_p50": 0.7711,
+   "note": "A PERFECT rectangle does not read 1.000 through this extractor: the ink outline is excluded from the fill, so the measured value is the erosion bias below. Read the corpus figures against THIS ceiling, not against 1.0."
+  },
+  "region": {
+   "runs": 9,
+   "pitches_px": [
+    33.0,
+    44.0,
+    66.0
+   ],
+   "seeds": [
+    11,
+    12,
+    13
+   ],
+   "recovery_rate_min": 0.9427,
+   "recovery_rate_median": 0.9688,
+   "merge_rate_max": 0.0382,
+   "split_rate_max": 0.1351,
+   "split_rate_median": 0.1187,
+   "spurious_rate_max": 0.1925,
+   "rect_measured_p50": 0.9272,
+   "rect_bias_p50": -0.0728,
+   "rect_adj_measured_p50": 0.9258,
+   "lshape_measured_p50": 0.7027,
+   "wedge_measured_p50": 0.5605,
+   "ellipse_measured_p50": 0.7706,
+   "note": "A PERFECT rectangle does not read 1.000 through this extractor: the ink outline is excluded from the fill, so the measured value is the erosion bias below. Read the corpus figures against THIS ceiling, not against 1.0."
+  }
+ },
+ "headline_all_pitches": {
+  "mass": {
+   "runs": 12,
+   "pitches_px": [
+    22.0,
+    33.0,
+    44.0,
+    66.0
+   ],
+   "seeds": [
+    11,
+    12,
+    13
+   ],
+   "recovery_rate_min": 0.973,
+   "recovery_rate_median": 0.9874,
+   "merge_rate_max": 0.0382,
+   "split_rate_max": 0.0,
+   "split_rate_median": 0.0,
+   "spurious_rate_max": 0.1762,
+   "rect_measured_p50": 0.9169,
+   "rect_bias_p50": -0.083,
+   "rect_adj_measured_p50": 0.918,
+   "lshape_measured_p50": 0.6749,
+   "wedge_measured_p50": 0.5646,
+   "ellipse_measured_p50": 0.7715,
+   "note": "A PERFECT rectangle does not read 1.000 through this extractor: the ink outline is excluded from the fill, so the measured value is the erosion bias below. Read the corpus figures against THIS ceiling, not against 1.0."
+  },
+  "region": {
+   "runs": 12,
+   "pitches_px": [
+    22.0,
+    33.0,
+    44.0,
+    66.0
+   ],
+   "seeds": [
+    11,
+    12,
+    13
+   ],
+   "recovery_rate_min": 0.875,
+   "recovery_rate_median": 0.9497,
+   "merge_rate_max": 0.0382,
+   "split_rate_max": 0.1351,
+   "split_rate_median": 0.1161,
+   "spurious_rate_max": 0.3206,
+   "rect_measured_p50": 0.9239,
+   "rect_bias_p50": -0.0761,
+   "rect_adj_measured_p50": 0.9199,
+   "lshape_measured_p50": 0.6826,
+   "wedge_measured_p50": 0.568,
+   "ellipse_measured_p50": 0.7707,
+   "note": "A PERFECT rectangle does not read 1.000 through this extractor: the ink outline is excluded from the fill, so the measured value is the erosion bias below. Read the corpus figures against THIS ceiling, not against 1.0."
+  }
+ },
+ "operating_point": {
+  "target_pitch_px": 40.0,
+  "min_safe_pitch_px": 33.0
+ },
+ "runs": [
+  {
+   "seed": 11,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 47.1,
+    "body_thr": 171.6,
+    "region_split": {
+     "regions": 182,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 201,
+    "components_kept": 189,
+    "dropped": {
+     "area_low": 12,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0193
+   },
+   "planted": 160,
+   "extracted": 189,
+   "matched": 156,
+   "recovery_rate": 0.975,
+   "spurious": 33,
+   "spurious_rate": 0.1746,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7719,
+     "rect_measured_p10": 0.7492,
+     "rect_measured_p90": 0.7975,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0132
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6646,
+     "rect_measured_p10": 0.6063,
+     "rect_measured_p90": 0.6982,
+     "rect_analytic_p50": 0.7757,
+     "bias_p50": -0.1111
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 43,
+     "recovery_rate": 0.9773,
+     "rect_measured_p50": 0.8803,
+     "rect_measured_p10": 0.798,
+     "rect_measured_p90": 0.9306,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1197
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8732,
+     "rect_measured_p10": 0.8397,
+     "rect_measured_p90": 0.9038,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1268
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 17,
+     "recovery_rate": 0.85,
+     "rect_measured_p50": 0.8183,
+     "rect_measured_p10": 0.7238,
+     "rect_measured_p90": 0.9246,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1817
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6122,
+     "rect_measured_p10": 0.5906,
+     "rect_measured_p90": 0.638,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1122
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 48.3,
+    "body_thr": 172.0,
+    "region_split": {
+     "regions": 184,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 201,
+    "components_kept": 193,
+    "dropped": {
+     "area_low": 8,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0202
+   },
+   "planted": 160,
+   "extracted": 193,
+   "matched": 159,
+   "recovery_rate": 0.9938,
+   "spurious": 34,
+   "spurious_rate": 0.1762,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7748,
+     "rect_measured_p10": 0.739,
+     "rect_measured_p90": 0.7906,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0102
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6644,
+     "rect_measured_p10": 0.6099,
+     "rect_measured_p90": 0.7271,
+     "rect_analytic_p50": 0.7825,
+     "bias_p50": -0.118
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 43,
+     "recovery_rate": 0.9773,
+     "rect_measured_p50": 0.8751,
+     "rect_measured_p10": 0.7415,
+     "rect_measured_p90": 0.9258,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1249
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8881,
+     "rect_measured_p10": 0.8163,
+     "rect_measured_p90": 0.9087,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1119
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8791,
+     "rect_measured_p10": 0.758,
+     "rect_measured_p90": 0.9248,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1209
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6208,
+     "rect_measured_p10": 0.5959,
+     "rect_measured_p90": 0.6483,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1208
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 47.5,
+    "body_thr": 170.8,
+    "region_split": {
+     "regions": 181,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 197,
+    "components_kept": 188,
+    "dropped": {
+     "area_low": 9,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.021
+   },
+   "planted": 160,
+   "extracted": 188,
+   "matched": 157,
+   "recovery_rate": 0.9812,
+   "spurious": 31,
+   "spurious_rate": 0.1649,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7651,
+     "rect_measured_p10": 0.7432,
+     "rect_measured_p90": 0.7888,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0197
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6178,
+     "rect_measured_p10": 0.5248,
+     "rect_measured_p90": 0.6852,
+     "rect_analytic_p50": 0.7619,
+     "bias_p50": -0.1441
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 42,
+     "recovery_rate": 0.9545,
+     "rect_measured_p50": 0.9077,
+     "rect_measured_p10": 0.7816,
+     "rect_measured_p90": 0.9286,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0923
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8823,
+     "rect_measured_p10": 0.7868,
+     "rect_measured_p90": 0.9095,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1177
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 19,
+     "recovery_rate": 0.95,
+     "rect_measured_p50": 0.8726,
+     "rect_measured_p10": 0.7871,
+     "rect_measured_p90": 0.9166,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1274
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6116,
+     "rect_measured_p10": 0.543,
+     "rect_measured_p90": 0.6336,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1116
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.5,
+    "body_thr": 198.9,
+    "region_split": {
+     "regions": 1461,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.2,
+     "regions_fill": 195
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 169,
+    "components_kept": 167,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 2,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0559
+   },
+   "planted": 160,
+   "extracted": 167,
+   "matched": 158,
+   "recovery_rate": 0.9875,
+   "spurious": 9,
+   "spurious_rate": 0.0539,
+   "merged_labels": 1,
+   "merged_planted": 2,
+   "merge_rate": 0.0125,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7451,
+     "rect_measured_p10": 0.7209,
+     "rect_measured_p90": 0.7973,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.04
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6834,
+     "rect_measured_p10": 0.6103,
+     "rect_measured_p90": 0.7671,
+     "rect_analytic_p50": 0.7827,
+     "bias_p50": -0.0993
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9005,
+     "rect_measured_p10": 0.7273,
+     "rect_measured_p90": 0.9525,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0995
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 22,
+     "recovery_rate": 0.9167,
+     "rect_measured_p50": 0.928,
+     "rect_measured_p10": 0.9081,
+     "rect_measured_p90": 0.9453,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.072
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9124,
+     "rect_measured_p10": 0.792,
+     "rect_measured_p90": 0.9525,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0876
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5695,
+     "rect_measured_p10": 0.5232,
+     "rect_measured_p90": 0.5879,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0695
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.6,
+    "body_thr": 199.0,
+    "region_split": {
+     "regions": 1429,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.2,
+     "regions_fill": 184
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 167,
+    "components_kept": 167,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0511
+   },
+   "planted": 160,
+   "extracted": 167,
+   "matched": 159,
+   "recovery_rate": 0.9938,
+   "spurious": 8,
+   "spurious_rate": 0.0479,
+   "merged_labels": 1,
+   "merged_planted": 2,
+   "merge_rate": 0.0125,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7673,
+     "rect_measured_p10": 0.7325,
+     "rect_measured_p90": 0.809,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0175
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6664,
+     "rect_measured_p10": 0.5969,
+     "rect_measured_p90": 0.7532,
+     "rect_analytic_p50": 0.7812,
+     "bias_p50": -0.1147
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9191,
+     "rect_measured_p10": 0.7486,
+     "rect_measured_p90": 0.9478,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0809
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 23,
+     "recovery_rate": 0.9583,
+     "rect_measured_p50": 0.9017,
+     "rect_measured_p10": 0.7781,
+     "rect_measured_p90": 0.9351,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0983
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9102,
+     "rect_measured_p10": 0.6745,
+     "rect_measured_p90": 0.9515,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0898
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5777,
+     "rect_measured_p10": 0.555,
+     "rect_measured_p90": 0.5988,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0777
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 84.1,
+    "body_thr": 190.1,
+    "region_split": {
+     "regions": 347,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 184
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 163,
+    "components_kept": 163,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0532
+   },
+   "planted": 160,
+   "extracted": 163,
+   "matched": 160,
+   "recovery_rate": 1.0,
+   "spurious": 3,
+   "spurious_rate": 0.0184,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7669,
+     "rect_measured_p10": 0.7567,
+     "rect_measured_p90": 0.7897,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.018
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7039,
+     "rect_measured_p10": 0.6242,
+     "rect_measured_p90": 0.7654,
+     "rect_analytic_p50": 0.7834,
+     "bias_p50": -0.0796
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9272,
+     "rect_measured_p10": 0.8294,
+     "rect_measured_p90": 0.9494,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0728
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9154,
+     "rect_measured_p10": 0.8638,
+     "rect_measured_p90": 0.9329,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0846
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.942,
+     "rect_measured_p10": 0.8563,
+     "rect_measured_p90": 0.9548,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.058
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5773,
+     "rect_measured_p10": 0.5682,
+     "rect_measured_p90": 0.6025,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0773
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 157,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.3,
+    "body_thr": 198.2,
+    "region_split": {
+     "regions": 1426,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 188
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 156,
+    "components_kept": 155,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0987
+   },
+   "planted": 157,
+   "extracted": 155,
+   "matched": 153,
+   "recovery_rate": 0.9745,
+   "spurious": 2,
+   "spurious_rate": 0.0129,
+   "merged_labels": 3,
+   "merged_planted": 6,
+   "merge_rate": 0.0382,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7738,
+     "rect_measured_p10": 0.7477,
+     "rect_measured_p90": 0.7922,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0113
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6559,
+     "rect_measured_p10": 0.5606,
+     "rect_measured_p90": 0.7713,
+     "rect_analytic_p50": 0.7713,
+     "bias_p50": -0.1154
+    },
+    "rect": {
+     "planted": 42,
+     "recovered": 42,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9264,
+     "rect_measured_p10": 0.8226,
+     "rect_measured_p90": 0.9674,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0736
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 21,
+     "recovery_rate": 0.875,
+     "rect_measured_p50": 0.9258,
+     "rect_measured_p10": 0.7744,
+     "rect_measured_p90": 0.9387,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0742
+    },
+    "rect_ridge": {
+     "planted": 19,
+     "recovered": 18,
+     "recovery_rate": 0.9474,
+     "rect_measured_p50": 0.9225,
+     "rect_measured_p10": 0.8117,
+     "rect_measured_p90": 0.9658,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0775
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5597,
+     "rect_measured_p10": 0.5215,
+     "rect_measured_p90": 0.5696,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0597
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 158,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.7,
+    "body_thr": 205.6,
+    "region_split": {
+     "regions": 1429,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 181
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 157,
+    "components_kept": 157,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0902
+   },
+   "planted": 158,
+   "extracted": 157,
+   "matched": 156,
+   "recovery_rate": 0.9873,
+   "spurious": 1,
+   "spurious_rate": 0.0064,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.0253,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7804,
+     "rect_measured_p10": 0.7639,
+     "rect_measured_p90": 0.793,
+     "rect_analytic_p50": 0.7852,
+     "bias_p50": -0.0047
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7174,
+     "rect_measured_p10": 0.5911,
+     "rect_measured_p90": 0.7668,
+     "rect_analytic_p50": 0.8011,
+     "bias_p50": -0.0836
+    },
+    "rect": {
+     "planted": 42,
+     "recovered": 42,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9211,
+     "rect_measured_p10": 0.7723,
+     "rect_measured_p90": 0.9607,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0789
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 22,
+     "recovery_rate": 0.9167,
+     "rect_measured_p50": 0.9113,
+     "rect_measured_p10": 0.7855,
+     "rect_measured_p90": 0.9508,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0887
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9123,
+     "rect_measured_p10": 0.7771,
+     "rect_measured_p90": 0.9617,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0877
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5522,
+     "rect_measured_p10": 0.4727,
+     "rect_measured_p90": 0.5747,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0522
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.3,
+    "body_thr": 200.4,
+    "region_split": {
+     "regions": 1720,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 193
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 165,
+    "components_kept": 164,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.097
+   },
+   "planted": 160,
+   "extracted": 164,
+   "matched": 157,
+   "recovery_rate": 0.9812,
+   "spurious": 7,
+   "spurious_rate": 0.0427,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.025,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7627,
+     "rect_measured_p10": 0.7146,
+     "rect_measured_p90": 0.7913,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0223
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6523,
+     "rect_measured_p10": 0.6048,
+     "rect_measured_p90": 0.7304,
+     "rect_analytic_p50": 0.74,
+     "bias_p50": -0.0877
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9108,
+     "rect_measured_p10": 0.7781,
+     "rect_measured_p90": 0.9622,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0892
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 22,
+     "recovery_rate": 0.9167,
+     "rect_measured_p50": 0.9205,
+     "rect_measured_p10": 0.7085,
+     "rect_measured_p90": 0.9505,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0795
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 19,
+     "recovery_rate": 0.95,
+     "rect_measured_p50": 0.8875,
+     "rect_measured_p10": 0.8003,
+     "rect_measured_p90": 0.9573,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1125
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5565,
+     "rect_measured_p10": 0.5083,
+     "rect_measured_p90": 0.5722,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0565
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 119,
+    "n_adjacent": 14
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 110.1,
+    "body_thr": 196.3,
+    "region_split": {
+     "regions": 1364,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.7,
+     "regions_fill": 143
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 120,
+    "components_kept": 119,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1503
+   },
+   "planted": 119,
+   "extracted": 119,
+   "matched": 119,
+   "recovery_rate": 1.0,
+   "spurious": 0,
+   "spurious_rate": 0.0,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7723,
+     "rect_measured_p10": 0.7435,
+     "rect_measured_p90": 0.7847,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0127
+    },
+    "lshape": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.72,
+     "rect_measured_p10": 0.6334,
+     "rect_measured_p90": 0.7929,
+     "rect_analytic_p50": 0.79,
+     "bias_p50": -0.07
+    },
+    "rect": {
+     "planted": 35,
+     "recovered": 35,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9429,
+     "rect_measured_p10": 0.8291,
+     "rect_measured_p90": 0.9758,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0571
+    },
+    "rect_adj": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9547,
+     "rect_measured_p10": 0.8951,
+     "rect_measured_p90": 0.9655,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0453
+    },
+    "rect_ridge": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9352,
+     "rect_measured_p10": 0.8783,
+     "rect_measured_p90": 0.9745,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0648
+    },
+    "wedge": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5348,
+     "rect_measured_p10": 0.4954,
+     "rect_measured_p90": 0.5455,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0348
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 111,
+    "n_adjacent": 16
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.8,
+    "body_thr": 204.9,
+    "region_split": {
+     "regions": 1264,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.6,
+     "regions_fill": 130
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 110,
+    "components_kept": 109,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1389
+   },
+   "planted": 111,
+   "extracted": 109,
+   "matched": 108,
+   "recovery_rate": 0.973,
+   "spurious": 1,
+   "spurious_rate": 0.0092,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.036,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.773,
+     "rect_measured_p10": 0.7477,
+     "rect_measured_p90": 0.7853,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0121
+    },
+    "lshape": {
+     "planted": 17,
+     "recovered": 17,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7212,
+     "rect_measured_p10": 0.6215,
+     "rect_measured_p90": 0.7871,
+     "rect_analytic_p50": 0.7845,
+     "bias_p50": -0.0633
+    },
+    "rect": {
+     "planted": 30,
+     "recovered": 30,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9148,
+     "rect_measured_p10": 0.7723,
+     "rect_measured_p90": 0.9683,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0852
+    },
+    "rect_adj": {
+     "planted": 16,
+     "recovered": 13,
+     "recovery_rate": 0.8125,
+     "rect_measured_p50": 0.9426,
+     "rect_measured_p10": 0.8571,
+     "rect_measured_p90": 0.9717,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0574
+    },
+    "rect_ridge": {
+     "planted": 16,
+     "recovered": 16,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9349,
+     "rect_measured_p10": 0.8609,
+     "rect_measured_p90": 0.9722,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0651
+    },
+    "wedge": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5362,
+     "rect_measured_p10": 0.4897,
+     "rect_measured_p90": 0.5539,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0362
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "mass",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 121,
+    "n_adjacent": 20
+   },
+   "diag": {
+    "mode": "mass",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.0,
+    "body_thr": 198.3,
+    "region_split": {
+     "regions": 1652,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.7,
+     "regions_fill": 145
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 121,
+    "components_kept": 121,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1455
+   },
+   "planted": 121,
+   "extracted": 121,
+   "matched": 121,
+   "recovery_rate": 1.0,
+   "spurious": 0,
+   "spurious_rate": 0.0,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 0,
+   "split_rate": 0.0,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7711,
+     "rect_measured_p10": 0.7571,
+     "rect_measured_p90": 0.7877,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0138
+    },
+    "lshape": {
+     "planted": 23,
+     "recovered": 23,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7234,
+     "rect_measured_p10": 0.6557,
+     "rect_measured_p90": 0.7681,
+     "rect_analytic_p50": 0.7784,
+     "bias_p50": -0.055
+    },
+    "rect": {
+     "planted": 31,
+     "recovered": 31,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9303,
+     "rect_measured_p10": 0.8251,
+     "rect_measured_p90": 0.9689,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0697
+    },
+    "rect_adj": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9541,
+     "rect_measured_p10": 0.8131,
+     "rect_measured_p90": 0.9683,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0459
+    },
+    "rect_ridge": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9267,
+     "rect_measured_p10": 0.7561,
+     "rect_measured_p90": 0.9673,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0733
+    },
+    "wedge": {
+     "planted": 15,
+     "recovered": 15,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5415,
+     "rect_measured_p10": 0.4987,
+     "rect_measured_p90": 0.5475,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0415
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 47.1,
+    "body_thr": 171.6,
+    "region_split": {
+     "regions": 182,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 209,
+    "components_kept": 195,
+    "dropped": {
+     "area_low": 14,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0189
+   },
+   "planted": 160,
+   "extracted": 195,
+   "matched": 140,
+   "recovery_rate": 0.875,
+   "spurious": 55,
+   "spurious_rate": 0.2821,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 10,
+   "split_rate": 0.0625,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7719,
+     "rect_measured_p10": 0.7492,
+     "rect_measured_p90": 0.7975,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0132
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.663,
+     "rect_measured_p10": 0.6045,
+     "rect_measured_p90": 0.696,
+     "rect_analytic_p50": 0.7757,
+     "bias_p50": -0.1127
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 43,
+     "recovery_rate": 0.9773,
+     "rect_measured_p50": 0.8803,
+     "rect_measured_p10": 0.798,
+     "rect_measured_p90": 0.9306,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1197
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8732,
+     "rect_measured_p10": 0.8397,
+     "rect_measured_p90": 0.9038,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1268
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 1,
+     "recovery_rate": 0.05,
+     "rect_measured_p50": 0.7647,
+     "rect_measured_p10": 0.7647,
+     "rect_measured_p90": 0.7647,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.2353
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6155,
+     "rect_measured_p10": 0.5923,
+     "rect_measured_p90": 0.6426,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1155
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 48.3,
+    "body_thr": 172.0,
+    "region_split": {
+     "regions": 184,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 217,
+    "components_kept": 209,
+    "dropped": {
+     "area_low": 8,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0199
+   },
+   "planted": 160,
+   "extracted": 209,
+   "matched": 142,
+   "recovery_rate": 0.8875,
+   "spurious": 67,
+   "spurious_rate": 0.3206,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 17,
+   "split_rate": 0.1062,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7748,
+     "rect_measured_p10": 0.739,
+     "rect_measured_p90": 0.7906,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0102
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6608,
+     "rect_measured_p10": 0.6087,
+     "rect_measured_p90": 0.7223,
+     "rect_analytic_p50": 0.7825,
+     "bias_p50": -0.1217
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 43,
+     "recovery_rate": 0.9773,
+     "rect_measured_p50": 0.8751,
+     "rect_measured_p10": 0.7415,
+     "rect_measured_p90": 0.9258,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1249
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8881,
+     "rect_measured_p10": 0.8163,
+     "rect_measured_p90": 0.9087,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1119
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 3,
+     "recovery_rate": 0.15,
+     "rect_measured_p50": 0.8982,
+     "rect_measured_p10": 0.8846,
+     "rect_measured_p90": 0.8986,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1018
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6208,
+     "rect_measured_p10": 0.5959,
+     "rect_measured_p90": 0.6483,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1208
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 22.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 47.5,
+    "body_thr": 170.8,
+    "region_split": {
+     "regions": 181,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.3,
+     "regions_fill": 180
+    },
+    "cell_pitch_px": 22.0,
+    "components_labelled": 213,
+    "components_kept": 202,
+    "dropped": {
+     "area_low": 11,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0206
+   },
+   "planted": 160,
+   "extracted": 202,
+   "matched": 141,
+   "recovery_rate": 0.8812,
+   "spurious": 61,
+   "spurious_rate": 0.302,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 15,
+   "split_rate": 0.0938,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7651,
+     "rect_measured_p10": 0.7432,
+     "rect_measured_p90": 0.7888,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0197
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6081,
+     "rect_measured_p10": 0.5202,
+     "rect_measured_p90": 0.6817,
+     "rect_analytic_p50": 0.7619,
+     "bias_p50": -0.1538
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 42,
+     "recovery_rate": 0.9545,
+     "rect_measured_p50": 0.9077,
+     "rect_measured_p10": 0.7816,
+     "rect_measured_p90": 0.9286,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0923
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.8823,
+     "rect_measured_p10": 0.7868,
+     "rect_measured_p90": 0.9095,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.1177
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 3,
+     "recovery_rate": 0.15,
+     "rect_measured_p50": 0.9002,
+     "rect_measured_p10": 0.8695,
+     "rect_measured_p90": 0.9102,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0998
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6178,
+     "rect_measured_p10": 0.5917,
+     "rect_measured_p90": 0.6472,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.1178
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.5,
+    "body_thr": 198.9,
+    "region_split": {
+     "regions": 1461,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.2,
+     "regions_fill": 195
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 187,
+    "components_kept": 184,
+    "dropped": {
+     "area_low": 1,
+     "area_high": 0,
+     "edge": 2,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.055
+   },
+   "planted": 160,
+   "extracted": 184,
+   "matched": 151,
+   "recovery_rate": 0.9437,
+   "spurious": 33,
+   "spurious_rate": 0.1793,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 20,
+   "split_rate": 0.125,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7443,
+     "rect_measured_p10": 0.7142,
+     "rect_measured_p90": 0.7963,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0408
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6957,
+     "rect_measured_p10": 0.6072,
+     "rect_measured_p90": 0.7697,
+     "rect_analytic_p50": 0.7827,
+     "bias_p50": -0.0869
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9007,
+     "rect_measured_p10": 0.7335,
+     "rect_measured_p90": 0.9525,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0993
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 23,
+     "recovery_rate": 0.9583,
+     "rect_measured_p50": 0.9277,
+     "rect_measured_p10": 0.9028,
+     "rect_measured_p90": 0.9453,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0723
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 12,
+     "recovery_rate": 0.6,
+     "rect_measured_p50": 0.9147,
+     "rect_measured_p10": 0.8965,
+     "rect_measured_p90": 0.9384,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0853
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5729,
+     "rect_measured_p10": 0.5593,
+     "rect_measured_p90": 0.5928,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0729
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.6,
+    "body_thr": 199.0,
+    "region_split": {
+     "regions": 1429,
+     "paper_med_L": 237.4,
+     "paper_med_chroma": 24.2,
+     "regions_fill": 184
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 184,
+    "components_kept": 184,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0503
+   },
+   "planted": 160,
+   "extracted": 184,
+   "matched": 155,
+   "recovery_rate": 0.9688,
+   "spurious": 29,
+   "spurious_rate": 0.1576,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 19,
+   "split_rate": 0.1187,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7673,
+     "rect_measured_p10": 0.7266,
+     "rect_measured_p90": 0.8072,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0175
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6621,
+     "rect_measured_p10": 0.5955,
+     "rect_measured_p90": 0.7517,
+     "rect_analytic_p50": 0.7812,
+     "bias_p50": -0.1191
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9213,
+     "rect_measured_p10": 0.774,
+     "rect_measured_p90": 0.9485,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0787
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9042,
+     "rect_measured_p10": 0.8189,
+     "rect_measured_p90": 0.935,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0958
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 15,
+     "recovery_rate": 0.75,
+     "rect_measured_p50": 0.9132,
+     "rect_measured_p10": 0.7028,
+     "rect_measured_p90": 0.9365,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0868
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5777,
+     "rect_measured_p10": 0.5563,
+     "rect_measured_p90": 0.5957,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0777
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 33.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 84.1,
+    "body_thr": 190.1,
+    "region_split": {
+     "regions": 347,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 184
+    },
+    "cell_pitch_px": 33.0,
+    "components_labelled": 182,
+    "components_kept": 182,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0528
+   },
+   "planted": 160,
+   "extracted": 182,
+   "matched": 155,
+   "recovery_rate": 0.9688,
+   "spurious": 27,
+   "spurious_rate": 0.1484,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 19,
+   "split_rate": 0.1187,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7657,
+     "rect_measured_p10": 0.7558,
+     "rect_measured_p90": 0.787,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0192
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7027,
+     "rect_measured_p10": 0.6226,
+     "rect_measured_p90": 0.7643,
+     "rect_analytic_p50": 0.7834,
+     "bias_p50": -0.0807
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9272,
+     "rect_measured_p10": 0.835,
+     "rect_measured_p90": 0.9494,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0728
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 24,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9154,
+     "rect_measured_p10": 0.8638,
+     "rect_measured_p90": 0.9329,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0846
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 15,
+     "recovery_rate": 0.75,
+     "rect_measured_p50": 0.9244,
+     "rect_measured_p10": 0.9059,
+     "rect_measured_p90": 0.9456,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0756
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5777,
+     "rect_measured_p10": 0.5682,
+     "rect_measured_p90": 0.6025,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0777
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 157,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.3,
+    "body_thr": 198.2,
+    "region_split": {
+     "regions": 1426,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 188
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 173,
+    "components_kept": 172,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0977
+   },
+   "planted": 157,
+   "extracted": 172,
+   "matched": 148,
+   "recovery_rate": 0.9427,
+   "spurious": 24,
+   "spurious_rate": 0.1395,
+   "merged_labels": 3,
+   "merged_planted": 6,
+   "merge_rate": 0.0382,
+   "split_planted": 18,
+   "split_rate": 0.1146,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7732,
+     "rect_measured_p10": 0.7409,
+     "rect_measured_p90": 0.7901,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0119
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6695,
+     "rect_measured_p10": 0.6037,
+     "rect_measured_p90": 0.7705,
+     "rect_analytic_p50": 0.7713,
+     "bias_p50": -0.1018
+    },
+    "rect": {
+     "planted": 42,
+     "recovered": 42,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9264,
+     "rect_measured_p10": 0.8187,
+     "rect_measured_p90": 0.9674,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0736
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 21,
+     "recovery_rate": 0.875,
+     "rect_measured_p50": 0.9258,
+     "rect_measured_p10": 0.7688,
+     "rect_measured_p90": 0.9387,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0742
+    },
+    "rect_ridge": {
+     "planted": 19,
+     "recovered": 13,
+     "recovery_rate": 0.6842,
+     "rect_measured_p50": 0.9219,
+     "rect_measured_p10": 0.8034,
+     "rect_measured_p90": 0.9506,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0781
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5605,
+     "rect_measured_p10": 0.5457,
+     "rect_measured_p90": 0.5687,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0605
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 158,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.7,
+    "body_thr": 205.6,
+    "region_split": {
+     "regions": 1429,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 181
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 177,
+    "components_kept": 177,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0893
+   },
+   "planted": 158,
+   "extracted": 177,
+   "matched": 151,
+   "recovery_rate": 0.9557,
+   "spurious": 26,
+   "spurious_rate": 0.1469,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.0253,
+   "split_planted": 20,
+   "split_rate": 0.1266,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7785,
+     "rect_measured_p10": 0.763,
+     "rect_measured_p90": 0.7917,
+     "rect_analytic_p50": 0.7852,
+     "bias_p50": -0.0067
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7108,
+     "rect_measured_p10": 0.5989,
+     "rect_measured_p90": 0.7661,
+     "rect_analytic_p50": 0.8011,
+     "bias_p50": -0.0902
+    },
+    "rect": {
+     "planted": 42,
+     "recovered": 42,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9316,
+     "rect_measured_p10": 0.7686,
+     "rect_measured_p90": 0.9607,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0684
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 22,
+     "recovery_rate": 0.9167,
+     "rect_measured_p50": 0.9113,
+     "rect_measured_p10": 0.782,
+     "rect_measured_p90": 0.9508,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0887
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 15,
+     "recovery_rate": 0.75,
+     "rect_measured_p50": 0.9259,
+     "rect_measured_p10": 0.739,
+     "rect_measured_p90": 0.9548,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0741
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.554,
+     "rect_measured_p10": 0.5125,
+     "rect_measured_p90": 0.5738,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.054
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 44.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 160,
+    "n_adjacent": 24
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.3,
+    "body_thr": 200.4,
+    "region_split": {
+     "regions": 1720,
+     "paper_med_L": 237.3,
+     "paper_med_chroma": 24.4,
+     "regions_fill": 193
+    },
+    "cell_pitch_px": 44.0,
+    "components_labelled": 188,
+    "components_kept": 187,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.0954
+   },
+   "planted": 160,
+   "extracted": 187,
+   "matched": 151,
+   "recovery_rate": 0.9437,
+   "spurious": 36,
+   "spurious_rate": 0.1925,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.025,
+   "split_planted": 18,
+   "split_rate": 0.1125,
+   "by_kind": {
+    "ellipse": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7634,
+     "rect_measured_p10": 0.7088,
+     "rect_measured_p90": 0.7893,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0216
+    },
+    "lshape": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.6491,
+     "rect_measured_p10": 0.6029,
+     "rect_measured_p90": 0.7295,
+     "rect_analytic_p50": 0.74,
+     "bias_p50": -0.0909
+    },
+    "rect": {
+     "planted": 44,
+     "recovered": 44,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9165,
+     "rect_measured_p10": 0.7892,
+     "rect_measured_p90": 0.9626,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0835
+    },
+    "rect_adj": {
+     "planted": 24,
+     "recovered": 22,
+     "recovery_rate": 0.9167,
+     "rect_measured_p50": 0.9243,
+     "rect_measured_p10": 0.7431,
+     "rect_measured_p90": 0.9505,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0757
+    },
+    "rect_ridge": {
+     "planted": 20,
+     "recovered": 13,
+     "recovery_rate": 0.65,
+     "rect_measured_p50": 0.9026,
+     "rect_measured_p10": 0.7993,
+     "rect_measured_p90": 0.9484,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0974
+    },
+    "wedge": {
+     "planted": 26,
+     "recovered": 26,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5631,
+     "rect_measured_p10": 0.5351,
+     "rect_measured_p90": 0.5766,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0631
+    }
+   }
+  },
+  {
+   "seed": 11,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 11,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 119,
+    "n_adjacent": 14
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 110.1,
+    "body_thr": 196.3,
+    "region_split": {
+     "regions": 1364,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.7,
+     "regions_fill": 143
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 135,
+    "components_kept": 134,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 1,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1493
+   },
+   "planted": 119,
+   "extracted": 134,
+   "matched": 118,
+   "recovery_rate": 0.9916,
+   "spurious": 16,
+   "spurious_rate": 0.1194,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 14,
+   "split_rate": 0.1176,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7706,
+     "rect_measured_p10": 0.7401,
+     "rect_measured_p90": 0.7846,
+     "rect_analytic_p50": 0.785,
+     "bias_p50": -0.0144
+    },
+    "lshape": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7188,
+     "rect_measured_p10": 0.6537,
+     "rect_measured_p90": 0.7924,
+     "rect_analytic_p50": 0.79,
+     "bias_p50": -0.0713
+    },
+    "rect": {
+     "planted": 35,
+     "recovered": 35,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9424,
+     "rect_measured_p10": 0.8186,
+     "rect_measured_p90": 0.9758,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0576
+    },
+    "rect_adj": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9547,
+     "rect_measured_p10": 0.8922,
+     "rect_measured_p90": 0.9655,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0453
+    },
+    "rect_ridge": {
+     "planted": 14,
+     "recovered": 13,
+     "recovery_rate": 0.9286,
+     "rect_measured_p50": 0.9279,
+     "rect_measured_p10": 0.8916,
+     "rect_measured_p90": 0.961,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0721
+    },
+    "wedge": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5383,
+     "rect_measured_p10": 0.5098,
+     "rect_measured_p90": 0.5497,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0383
+    }
+   }
+  },
+  {
+   "seed": 12,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 12,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 111,
+    "n_adjacent": 16
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.8,
+    "body_thr": 204.9,
+    "region_split": {
+     "regions": 1264,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.6,
+     "regions_fill": 130
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 125,
+    "components_kept": 125,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1378
+   },
+   "planted": 111,
+   "extracted": 125,
+   "matched": 109,
+   "recovery_rate": 0.982,
+   "spurious": 16,
+   "spurious_rate": 0.128,
+   "merged_labels": 2,
+   "merged_planted": 4,
+   "merge_rate": 0.036,
+   "split_planted": 15,
+   "split_rate": 0.1351,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.773,
+     "rect_measured_p10": 0.7457,
+     "rect_measured_p90": 0.7848,
+     "rect_analytic_p50": 0.7851,
+     "bias_p50": -0.0121
+    },
+    "lshape": {
+     "planted": 17,
+     "recovered": 17,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7246,
+     "rect_measured_p10": 0.6195,
+     "rect_measured_p90": 0.7864,
+     "rect_analytic_p50": 0.7845,
+     "bias_p50": -0.0599
+    },
+    "rect": {
+     "planted": 30,
+     "recovered": 30,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9284,
+     "rect_measured_p10": 0.7947,
+     "rect_measured_p90": 0.9683,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0716
+    },
+    "rect_adj": {
+     "planted": 16,
+     "recovered": 14,
+     "recovery_rate": 0.875,
+     "rect_measured_p50": 0.94,
+     "rect_measured_p10": 0.8565,
+     "rect_measured_p90": 0.9709,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.06
+    },
+    "rect_ridge": {
+     "planted": 16,
+     "recovered": 16,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9276,
+     "rect_measured_p10": 0.8795,
+     "rect_measured_p90": 0.9628,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0724
+    },
+    "wedge": {
+     "planted": 14,
+     "recovered": 14,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5377,
+     "rect_measured_p10": 0.5314,
+     "rect_measured_p90": 0.5516,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0377
+    }
+   }
+  },
+  {
+   "seed": 13,
+   "mode": "region",
+   "params": {
+    "longside": 3000,
+    "r_solid": 3,
+    "r_bridge": 3,
+    "delta_L": 12.0,
+    "delta_C": 10.0,
+    "r_open": 3,
+    "hole_cells": 0.25,
+    "a_min_cells": 0.06,
+    "a_max_cells": 20.0,
+    "green_max": 3.0,
+    "blue_max": 2.0,
+    "edge_margin": 2
+   },
+   "control_meta": {
+    "pitch": 66.0,
+    "line": 4,
+    "seed": 13,
+    "canvas": [
+     2600,
+     1900
+    ],
+    "n_planted": 121,
+    "n_adjacent": 20
+   },
+   "diag": {
+    "mode": "region",
+    "win_px": [
+     2600,
+     1900
+    ],
+    "ink_thr": 109.0,
+    "body_thr": 198.3,
+    "region_split": {
+     "regions": 1652,
+     "paper_med_L": 237.1,
+     "paper_med_chroma": 24.7,
+     "regions_fill": 145
+    },
+    "cell_pitch_px": 66.0,
+    "components_labelled": 135,
+    "components_kept": 135,
+    "dropped": {
+     "area_low": 0,
+     "area_high": 0,
+     "edge": 0,
+     "green": 0,
+     "blue": 0,
+     "degenerate": 0
+    },
+    "body_share": 0.1441
+   },
+   "planted": 121,
+   "extracted": 135,
+   "matched": 120,
+   "recovery_rate": 0.9917,
+   "spurious": 15,
+   "spurious_rate": 0.1111,
+   "merged_labels": 0,
+   "merged_planted": 0,
+   "merge_rate": 0.0,
+   "split_planted": 13,
+   "split_rate": 0.1074,
+   "by_kind": {
+    "ellipse": {
+     "planted": 18,
+     "recovered": 18,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7708,
+     "rect_measured_p10": 0.7555,
+     "rect_measured_p90": 0.7877,
+     "rect_analytic_p50": 0.7849,
+     "bias_p50": -0.0141
+    },
+    "lshape": {
+     "planted": 23,
+     "recovered": 23,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.7232,
+     "rect_measured_p10": 0.6554,
+     "rect_measured_p90": 0.7678,
+     "rect_analytic_p50": 0.7784,
+     "bias_p50": -0.0552
+    },
+    "rect": {
+     "planted": 31,
+     "recovered": 31,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9303,
+     "rect_measured_p10": 0.8168,
+     "rect_measured_p90": 0.9689,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0697
+    },
+    "rect_adj": {
+     "planted": 20,
+     "recovered": 20,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.9541,
+     "rect_measured_p10": 0.8096,
+     "rect_measured_p90": 0.9683,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.0459
+    },
+    "rect_ridge": {
+     "planted": 14,
+     "recovered": 13,
+     "recovery_rate": 0.9286,
+     "rect_measured_p50": 0.927,
+     "rect_measured_p10": 0.7644,
+     "rect_measured_p90": 0.9725,
+     "rect_analytic_p50": 1.0,
+     "bias_p50": -0.073
+    },
+    "wedge": {
+     "planted": 15,
+     "recovered": 15,
+     "recovery_rate": 1.0,
+     "rect_measured_p50": 0.5413,
+     "rect_measured_p10": 0.5117,
+     "rect_measured_p90": 0.5468,
+     "rect_analytic_p50": 0.5,
+     "bias_p50": 0.0413
+    }
+   }
+  }
+ ]
+}

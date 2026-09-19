@@ -1,0 +1,70 @@
+export const meta = {
+  name: 'phase-v-verify-round2',
+  description: 'Opus verification of the 21 new non-duplicate round-2 code findings',
+  phases: [{ title: 'Verify', detail: '2 lenses per high, 1 per medium', model: 'opus' }],
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object', required: ['id', 'verdict', 'severity_final', 'evidence', 'fix_blast', 'fix_recommendation'],
+  properties: {
+    id: { type: 'string' },
+    verdict: { enum: ['CONFIRMED', 'REFUTED', 'PARTIAL'] },
+    corrected_statement: { type: 'string' },
+    severity_final: { enum: ['critical', 'high', 'medium', 'low', 'none'] },
+    evidence: { type: 'string', description: 'Executed/traced proof, file:line quotes. Max 120 words.' },
+    fix_blast: { type: 'object', required: ['goldens_shift', 'eager_bytes_risk', 'schema_or_persistence', 'owner_gated'],
+      properties: { goldens_shift: { type: 'boolean' }, eager_bytes_risk: { type: 'boolean' }, schema_or_persistence: { type: 'boolean' }, owner_gated: { type: 'boolean' }, notes: { type: 'string' } } },
+    fix_recommendation: { type: 'string', description: 'Bold-over-safe fix shape within the constitution, max 100 words' },
+  },
+}
+
+const PREAMBLE = `You are an Opus 4.8 adversarial VERIFIER on SettlementForge (repo /Users/cstokes/Desktop/settlement-engine, branch review-fixes-2026-07-08 — SHARED tree: READ + run read-only commands/tests only; NEVER edit/create/stage/commit repo files; scratch only under /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/049d4c82-58c0-4be1-956a-d47c628ee704/scratchpad/).
+Try to REFUTE the finding; only what survives is CONFIRMED. Read the full register entry: search docs/COMPREHENSIVE_REVIEW_2026-07-13.md for the [id] (it appears in the ROUND 2 register near the bottom). Read whole enclosing scopes + real consumer searches (string spellings, re-exports, dynamic access). Check deferral ledgers (playbook 0.0.2/0.6/0.8; round-21 plan) — a sound deliberate deferral = REFUTED with a note; an unsound one = CONFIRMED with context. Execute proof where cheap (existing vitest files, node repros on pure modules); never the full gate. Constitution: same-seed byte-identity, dormancy, premium seam, endogeneity, first-paint ratchet, any-cast 2252; boundaries: world-only, aggregate-only mortality, deity=alignment. Return only the schema object.
+
+`
+
+const HIGHS = [
+  { id: 'code-quality-1', t: 'Entity-ref token pipeline half-merged: server injects entity tokens into narrative prose; client renderers exist only on master', w: 'supabase/functions/generate-narrative/index.ts:1737' },
+  { id: 'content-immersion-1', t: 'Player-facing rumor fiction renders raw engine tokens as the rumor subject', w: 'src/domain/display/settlementRumors.js:127' },
+  { id: 'content-immersion-2', t: 'Crier voice sidecar proclaims plague arrivals as market-shortage trade news', w: 'src/domain/display/newsVoice.js:194' },
+]
+const MEDS = [
+  { id: 'sim-logic-counterparts-10', t: 'dramatic_campaign preset lights zero drama systems (OPEN + intensity only)', w: 'src/domain/worldPulse/simulationRules.js:215' },
+  { id: 'determinism-constitution-3', t: 'Purity bans and source scans do not cover src/workers', w: 'eslint.config.js:292' },
+  { id: 'code-quality-2', t: 'Orphaned-module census: ~12 dead files (~1,100 lines) beyond the register six', w: 'src/components/gallery/MapGalleryDetail.jsx:1' },
+  { id: 'code-quality-3', t: 'Eight roadmap-era domain read-models (~1,780 lines) tested-but-unconsumed, one header falsely claims a live consumer', w: 'src/domain/pipelineRail.js:5' },
+  { id: 'code-quality-4', t: 'clamp/clamp01 re-implemented ~30 times with divergent NaN semantics', w: 'src/domain/worldPulse/foodStockpile.js:47' },
+  { id: 'code-quality-5', t: 'slugify in 8 variants, several identity-bearing; join-compatibility by copy-discipline', w: 'src/domain/events/mutateHelpers.js:130' },
+  { id: 'code-quality-6', t: 'Barrel hygiene: region/index.js wildcard-exports feed engine + graph internals; worldPulse/index.js 22-module barrel with one consumer', w: 'src/domain/region/index.js:1' },
+  { id: 'code-quality-7', t: 'Domain layer has no size ratchet; warDeployment.js 2,024 lines with a ~930-line function', w: 'src/domain/worldPulse/warDeployment.js:1092' },
+  { id: 'test-quality-3', t: 'Four spatial goldens self-mint on a missing manifest — deleting the fixture re-pins silently green', w: 'tests/property/spatialDigestGolden.test.js:52' },
+  { id: 'test-quality-4', t: 'M10b living progression untested — pause-on-major during catch-up zero coverage', w: 'tests/store/catchUpCampaignWorld.test.js:109' },
+  { id: 'test-quality-5', t: 'WorldPulsePanel on-open catch-up trigger has no component test', w: 'src/components/map/WorldPulsePanel.jsx:1' },
+  { id: 'test-quality-6', t: 'No test exercises two movers together; M10b weakened that deferral', w: 'tests/domain/simulationRulesPreset.stability.test.js:142' },
+  { id: 'test-quality-7', t: 'Known pipeline.property flake lacks the house per-test timeout override', w: 'tests/property/pipeline.property.test.js:123' },
+  { id: 'test-quality-8', t: 'Paid-flow verification thin at edges: live purchase lane skeleton; 3 of 7 money coverage floors ~0', w: 'vite.config.js:601' },
+  { id: 'content-immersion-4', t: 'namingData pools contaminated: modern/cross-culture/wrong-category names reach output', w: 'src/data/namingData.js:2521' },
+  { id: 'content-immersion-5', t: 'wizardNews card body is system-log register between diegetic headline and crier quote', w: 'src/domain/region/wizardNews.js:409' },
+  { id: 'content-immersion-6', t: 'Plague taking hold can never be MAJOR news (and mints a nonexistent minor tier) while trade cascades rank MAJOR', w: 'src/domain/worldPulse/pestilenceKernel.js:281' },
+  { id: 'build-tooling-docs-3', t: 'check-domain-strict.mjs passes green when tsc fails to run at all', w: 'scripts/check-domain-strict.mjs:31' },
+  { id: 'build-tooling-docs-4', t: 'sf-bridge.js (1,205 lines incl. the spatial capture seam) outside every gate except an acorn parse', w: 'public/map/sf-bridge.js:863' },
+]
+
+phase('Verify')
+const results = await pipeline(
+  [...HIGHS.map(f => ({ ...f, sev: 'high' })), ...MEDS.map(f => ({ ...f, sev: 'medium' }))],
+  f => {
+    const base = PREAMBLE + 'FINDING [' + f.id + '] (surveyor severity ' + f.sev + '): ' + f.t + ' @ ' + f.w + '\nSet id="' + f.id + '".'
+    if (f.sev === 'high') {
+      return parallel([
+        () => agent(base + '\nLENS: existence/reproduction.', { label: 'vA:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+        () => agent(base + '\nLENS: independent re-derivation + blast radius + best fix shape.', { label: 'vB:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus', effort: 'high' }),
+      ]).then(vs => ({ id: f.id, severity_surveyed: f.sev, verdicts: vs.filter(Boolean) }))
+    }
+    return agent(base + '\nLENS: full — existence, severity, deferral-check, blast radius.', { label: 'v:' + f.id, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' })
+      .then(v => ({ id: f.id, severity_surveyed: f.sev, verdicts: v ? [v] : [] }))
+  }
+)
+const flat = results.filter(Boolean)
+log('Round-2 verified: ' + flat.length + '/21')
+return { count: flat.length, results: flat }

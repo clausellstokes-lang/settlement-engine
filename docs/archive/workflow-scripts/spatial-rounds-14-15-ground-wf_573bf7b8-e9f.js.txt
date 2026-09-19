@@ -1,0 +1,42 @@
+export const meta = {
+  name: 'spatial-rounds-14-15-ground',
+  description: 'Ground the round 14-15 refinements (factional belief + objective-parameterized risk + alignment-as-style): does the scorer parameterize, does faction state hang beliefs/objectives, can the distortion primitive express a style?',
+  phases: [
+    { title: 'Ground', detail: 'settlementStrategy scorer objectives, powerStructure faction state, fidelityNoise style-parameterization' },
+    { title: 'Stress-test', detail: 'full-15-round coherence + the objective-parameterization/faction-belief cost' },
+  ],
+}
+const DESIGN = 'docs/PHASE55_SPATIAL_ENGINE_DESIGN.md'
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const GS = { type:'object', additionalProperties:false, properties:{
+  system:{type:'string'}, persists_or_exposes:{type:'string'},
+  key_files:{type:'array', items:{type:'object', additionalProperties:false, properties:{file:{type:'string'},lines:{type:'string'},what:{type:'string'}}, required:['file','what']}},
+  attachment_points:{type:'string'}, gaps:{type:'string'}, feasibility:{type:'string', enum:['green','yellow','red']} },
+  required:['system','persists_or_exposes','key_files','attachment_points','gaps','feasibility'] }
+const CS = { type:'object', additionalProperties:false, properties:{
+  axis:{type:'string'}, findings:{type:'array', items:{type:'object', additionalProperties:false, properties:{
+    severity:{type:'string', enum:['high','med','low']}, claim:{type:'string'}, evidence:{type:'string'}, mitigation:{type:'string'}}, required:['severity','claim','mitigation']}},
+  verdict:{type:'string'} }, required:['axis','findings','verdict'] }
+const pre = `Ground a design doc vs a REAL codebase. Root: ${ROOT} (cwd). Read ${DESIGN} §4g rounds 14-15 (a settlement is a POLITY / factional belief map; alignment = distortion STYLE; risk = a FRAMEWORK beliefs+objectives+disposition+constraints with FACTION-SPECIFIC objectives) + PART IV. Report only what EXISTS with file:line. Reference (read-only, NOT ours): /Users/cstokes/Desktop/settlement-generator/settlement-engine.`
+
+const GROUND = [
+  { key:'scorer-objectives', label:'settlementStrategy scorer — is it objective-parameterized or one utility?', focus:`Round 15B says the scorer must become OBJECTIVE-PARAMETERIZED (pluggable objective set per actor/faction), not one war-utility with coefficients. Investigate settlementStrategy.js: how does it SCORE enumerated moves today (enumerateMoves / the softmax scorer)? Is scoring ONE hard-coded war-oriented utility, or already parameterized/weighted by inputs that could become faction objectives? What would it take to plug in a merchant objective (revenue/reliability/credit) vs a warlord objective (prestige/opportunity/weakness) vs a church objective? Is disposition.js (computeAggressiveness + the proposed computeLawfulness/computeMalice) wired into scoring? Feasibility of objective-parameterization.` },
+  { key:'faction-state', label:'powerStructure / faction state — can it hang per-faction belief + objectives?', focus:`Round 14 makes the belief map FACTIONAL and round 15 makes objectives faction-specific. Investigate OUR faction/power model: powerStructure.factions shape (settlement.schema.js), factionCatalog.js, factionProfile.js, factionRelationshipUpdate.js. Do factions have stable IDs, TYPES (government/military/merchant/religious/craft/criminal), power/influence weights, and a "governing coalition" concept (governingName + supporters)? Is there enough structure to (a) key a belief map by factionId, (b) attach a faction-type-specific objective set, (c) model the governing coalition as the strategic decider + others as dissent/leak/alt-action? What's missing?` },
+  { key:'fidelitynoise-style', label:'fidelityNoise — can it express alignment as a distortion STYLE (5 levers), not a scalar?', focus:`Round 15A says alignment changes HOW distortion occurs (source preference / framing / uncertainty tolerance / manipulation incentive / transmission style), each alignment a signature with strengths+weaknesses — NOT a scalar fidelity multiplier. Investigate fidelityNoise.js (fidelityFactor/chaosPull) + how alignment is currently derived/consumed (chaosPullOf, corruption.js hasCorrupting/hasRepressingDeity, TRAIT_ALIGNMENT). Is today's distortion a SCALAR magnitude or can it carry a directional/styled signature? What would it take to make distortion STYLED by law/chaos (source preference, transmission) + good/evil (manipulation incentive, framing) rather than just scaled? Feasibility.` },
+]
+phase('Ground')
+const ground = (await parallel(GROUND.map(a => () =>
+  agent(`${pre}\n\nYOUR SYSTEM: ${a.label}.\n${a.focus}\n\nStructured facts, file:line, honest feasibility.`,
+    { label:`ground:${a.key}`, phase:'Ground', schema:GS, effort:'medium' })
+))).filter(Boolean)
+log(`Grounded ${ground.length}/${GROUND.length}`)
+const digest = ground.map(g=>`### ${g.system} [${g.feasibility}]\nEXPOSES: ${g.persists_or_exposes}\nFILES: ${(g.key_files||[]).map(f=>`${f.file}${f.lines?':'+f.lines:''} (${f.what})`).join('; ')}\nATTACH: ${g.attachment_points}\nGAPS: ${g.gaps}`).join('\n\n')
+phase('Stress-test')
+const critique = (await parallel([
+  { key:'full15', label:'Full 15-round coherence + round-14/15 cost + build placement', focus:`Read rounds 1-15 + PARTS II-IV as ONE system. Do rounds 14-15 (factional belief + objective-parameterized risk + alignment-as-style) STAY additive/byte-safe and tractable, or do they blow up the v1 belief/decision wave (PART IV Wave A)? Is the "v1 = governing coalition's operational belief, optional faction key reserved" discipline enough to keep Wave A cheap? Does objective-parameterization of the scorer belong in Wave A or later? Any contradiction across 15 rounds? What NEW owner decision (if any) do 14-15 surface? Concrete build-placement for factional belief, faction objectives, and alignment-style.` },
+].map(c => () =>
+  agent(`Adversarial critic, Phase 5.5 (read ${DESIGN} §4g + PART IV; root ${ROOT}). Axis: ${c.label}.\n${c.focus}\n\nGROUNDING DIGEST:\n${digest}\n\nReal failure modes ranked, each a concrete mitigation. No padding.`,
+    { label:`critique:${c.key}`, phase:'Stress-test', schema:CS, effort:'high' })
+))).filter(Boolean)
+log(`Stress-tested ${critique.length}/1`)
+return { ground, critique }

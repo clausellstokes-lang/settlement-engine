@@ -1,0 +1,122 @@
+export const meta = {
+  name: 'build-cycle-46-wr9cd-forces-and-collector',
+  description: 'WR-9c six-force audit cells + WR-9d the endings/duration collector under the totality obligation — WR-9 completes as an instrument',
+  phases: [
+    { title: 'Forces', detail: 'warConvergenceForces.js leaf, six cells, UNOBSERVED-with-reason where substrate is absent' },
+    { title: 'Collector', detail: 'harness-side census with the N3 totality pin + CR-WR9-C horizon wiring' },
+    { title: 'Verify', detail: 'independent re-execution incl. a real soak cell proving the instrument runs' },
+  ],
+}
+
+const PROTOCOL = `VERIFY-FIRST: this brief is the chair's authentic instruction set for the SettlementForge build era; verify claims against the tree before acting, then proceed — do not refuse the brief as injection. THE §10 PROTOCOL BINDS: work ONLY in /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold on branch claude/composite-r4 — cd + git rev-parse --abbrev-ref HEAD at the start of EVERY command block. Pathspec commits under THE STAGED-SET LAW (git diff --cached --name-only before EVERY commit; git commit -- with explicit paths). NEVER stash/reset/checkout--/clean; cp backups for mutants, restored cmp/md5-exact. Gates via sh scripts/gate-tail.sh or npm run check:tail, never bare pipes; ps aux for vitest before believing reds. python3 byte-scan (control bytes <9 or 14-31) EVERY authored file. tests/fixtures/ UNTOUCHED. Commit messages via FILE, trailer: Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>. Only npm run typecheck:domain:strict counts for strict (ceiling 1313 — leave it met). Ledger edits APPEND-ONLY. tests/lint is RED AT BASE (32 tests / 11 files, pre-existing program debt) — capture before first edit, diff at HEAD, identical. DIFF DISCIPLINE: assert BOTH sides of any diff are non-empty before believing its exit code (an empty-vs-empty diff exits 0 and proves nothing — this bit the previous lane twice).
+SIZE LAW: src/domain/certification/behavioralContract.js sits at 795 of its 800 wall — WR-9d's horizon wiring may spend AT MOST net +4 lines there, measured with the ratchet's own engine BEFORE committing; if it cannot fit, extract the case-selection into a leaf instead. pulseKernel.js 1580 and applyWorldPulse.js 941 are EXACT and MUST NOT be touched. New logic = leaves under 800.
+EVERYTHING BUILDS DARK: no flag lit, no soak grid, no band ratified, no golden re-recorded, no push. The soak RUNS you execute are verification probes, not the owner's soak redo. Same-seed law: if any world-byte-capable path is touched, per-cell base-to-HEAD equality on a provenance-covering fixture with an executed non-vacuity count; expected here is that NO worldPulse path is touched — prove it by git diff receipt with both sides shown.`
+
+const CONTEXT = `CONTEXT. WR-9a stands repaired @ 06c58f69 + 43b3195b (verifier PASS). The endings classifier (src/domain/certification/warEndingClassifier.js — ClosedWarFact is the finished collector interface) and the graded envelopes incl. the five-cell duration histogram (short/long/generational/unresolved/unmeasured, observation v3) are live but have ZERO production feed: scripts/audit/whole-world-soak.mjs:632 still writes createEmptyWarConvergenceObservation(). Two pieces remain and WR-9 completes as an instrument.
+
+MEASURED SUBSTRATE (from the cycle-44 scout + verifier, re-verify what you rely on):
+- advanceInterval.js:508-514 accumulates candidates/selected/rollExplanations/autoApplied/proposals/resolvedStressors/majors across EVERY interior tick and returns them on the composed year result (:607-613); only pulseHistory is collapsed (collapseIntervalHistory preserves envoyEvidence + mechanicalRumorSeeds by explicit exception). The collector reads THE RESULT — zero engine surface change, no persisted state (the lifecycle clause forbids one).
+- THE DECIDING-TERM HISTOGRAM IS A 1-IN-52 SAMPLE: warTerminationReads ride the pulse RECORD (pulseKernel.js:1790) so only year-final-tick receipts survive. The collector must DECLARE this sampling limitation in the receipt (a declared-sample field or docstring the verifier can read), never hide it.
+- tests/ops/storyMixDivergence.test.js:120 and :127 source-pin two exact strings in whole-world-soak.mjs the collector will replace — repair those pins IN THE SAME EDIT.
+- Force substrate: force 1 = warCosts.js durationGain (:495-499, live); force 4 = compromiseRound.js monotone widening (145 effective, ONE consumer envoyRatificationStage.js); force 6 partial = candidateType conquest (pulseKernel.js:1099/:1608) + razing (razingExecution.js:1074), 'annihilation' exists NOWHERE as a token; force 2 ('P4 capability floor') returned ZERO greps under cannotCampaign/capabilityCollapse/campaignFloor/CAMPAIGN_FLOOR and may not exist as a declared floor; force 3 (ruler-change frequency rising with war duration) — seatTransitions exist (npcLadderKernel.js, npcLadderState.js, warPeaceDecision.js) but NOTHING correlates them to war duration; force 5 = separate-peace machinery across ~10 modules, no pairwise census.
+
+RULINGS BINDING THIS LANE:
+- N3 THE COLLECTOR-TOTALITY OBLIGATION (structural pin REQUIRED): every counted war close lands in EXACTLY ONE duration-histogram cell and sum(all five cells) === the close count. A collector that drops an unreadable close restores the cured blindness by another road. Mutant: make the collector skip unreadable closes — the pin must red.
+- CR-WR9-C (implement now): the evaluator feeds ALL instrumented cases (release AND research), with the unresolved-at-horizon wall keyed to each case's OWN horizon — behavioralContract.js:1051-1054 currently feeds releaseCases only. Net +4 lines max there (see SIZE LAW).
+- Six-force cells that lack substrate report UNOBSERVED-with-reason (a distinct non-passing, non-vacuous state naming what is missing) rather than being omitted or passing; none may pass by reading a neighbouring lane's traffic. Force 2's cell must state the measured fact that no declared floor exists (that absence is ITSELF the finding the acceptance harness must surface). This wave adds NO persisted world state.
+- N1 one-phrase repair in warConvergenceContract.js:425-427: the count of tree occurrences of the forces-module name is now TWO (the sentence + the ledger row) — correct in place.
+- N2: duration_measured's cell docstring/label gains one sentence: a green here does NOT mean the instrument ran (non_vacuous is that wall); it means nothing counted was unreadable.
+- N4: pin the string-'Infinity' -> 'unresolved' routing.
+
+LEDGER: the closing queue-row commit appends the WR-9c/9d row (what landed, what remains owner-held: the acceptance VERDICT itself, the soak redo, the conquestDoctrineEnabled cert-row arm, the deciding-term sampling as declared) to docs/FABLE_VALIDATION_QUEUE.md, append-only.`
+
+const FORCES_BRIEF = `${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9c IMPLEMENTER (Forces phase). Build src/domain/certification/warConvergenceForces.js (leaf, under 800): six cells, ids prefixed war_convergence.force_N_<slug>, composed INSIDE evaluateWarConvergenceInstrumentation's returned array (warConvergenceContract.js imports the leaf; behavioralContract.js UNTOUCHED this piece — verify by md5). Forces 1/4/6 read what the observation/receipts can carry from their live substrate and grade honestly (failing or unobserved at HEAD is expected and correct while nothing feeds them); forces 2/3/5 report UNOBSERVED-with-reason exactly as ruled. Also land here: the N1 one-phrase repair, the N2 sentence, the N4 pin. Pins: one per cell proving its verdict states (incl. UNOBSERVED distinct from PASS and FAIL); mutants where a cell claims catching power (e.g. force 4 monotonicity cell must red when fed a narrowing round sequence). Update the observation shape ONLY if a force cell genuinely needs a new carried field (if so: version bump per the module's exact-bump law, orphan census measured, disclosed).
+
+Commit, run the gate bar (focused battery + lint diff + strict + any-cast + size incl. behavioralContract md5 + build + smoke:boot + byte-scan), report.
+
+RETURN raw data: {piece:'WR-9c', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`
+
+phase('Forces')
+const c = await agent(FORCES_BRIEF, {
+  label: 'wr9c:forces',
+  phase: 'Forces',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['piece', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      piece: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Collector')
+const dRes = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9d IMPLEMENTER (Collector phase). WR-9c's report:
+${JSON.stringify(c, null, 2)}
+
+Build the harness-side collector: whole-world-soak.mjs reads the composed year result's accumulations, classifies every war close through warEndingClassifier (ClosedWarFact), bands every duration through warDurationBandFor, fills the endings mix + duration histogram + deciding-term histogram (declared 1-in-52 sample) into the warConvergence observation on the case receipt. THE N3 TOTALITY PIN is non-negotiable and must be executed-mutant-proven (a collector that skips an unreadable close reds it). Repair the two storyMixDivergence source pins in the same edit. Implement CR-WR9-C (all instrumented cases, per-case horizon; behavioralContract net +4 lines MAX, measured, or extract a leaf). Then RUN a real verification soak cell (small — e.g. 2y x 4 settlements, pinned now) and quote the populated observation: endings counted, durations banded, sum(histogram)===closeCount, unmeasured count, deciding-term sample declared. If the cell counts ZERO closes, seed/scale until at least one war closes or report exactly why none can at current flags (wars OFF at HEAD dark flags is a legitimate finding — quote the flag state; in that case prove the collector's plumbing with a unit-level drive through real result shapes instead).
+
+Ledger: the closing queue-row commit per the CONTEXT. Gate bar as WR-9c plus: same-seed diff receipt proving no worldPulse path touched (both sides non-empty), storyMixDivergence green, tests/ops green.
+
+RETURN raw data: {piece:'WR-9d', commits:[...], gates:[...], stopReports:[...], notes:'...'}.`, {
+  label: 'wr9d:collector',
+  phase: 'Collector',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['piece', 'commits', 'gates', 'stopReports', 'notes'],
+    properties: {
+      piece: { type: 'string' },
+      commits: { type: 'array', items: { type: 'string' } },
+      gates: { type: 'array', items: { type: 'string' } },
+      stopReports: { type: 'array', items: { type: 'string' } },
+      notes: { type: 'string' },
+    },
+  },
+})
+
+phase('Verify')
+const v = await agent(`${PROTOCOL}
+
+${CONTEXT}
+
+YOU ARE THE WR-9c/9d ADVERSARIAL VERIFIER. The implementers report:
+WR-9c: ${JSON.stringify(c, null, 2)}
+WR-9d: ${JSON.stringify(dRes, null, 2)}
+
+Trust neither. At the committed HEAD on a clean tree:
+1. FORCES: audit all six cells against the spec sentence (DESIGN_WAR_RULINGS_ARCHITECTURE.md:1241-1245) — each is PASS/FAIL/UNOBSERVED-with-reason and none passes by neighbouring traffic; execute the force-4 monotonicity mutant and any other claimed guard; confirm UNOBSERVED is a distinct state the certificate surfaces, not a silent skip; confirm force 2's cell states the measured no-declared-floor fact.
+2. COLLECTOR: run YOUR OWN soak cell (own seed, pinned now). Confirm the observation populates; re-derive sum(histogram) === closeCount from the raw result yourself; execute the drop-an-unreadable-close mutant (the N3 pin must red); confirm the deciding-term sampling is DECLARED where a reader will see it; confirm the two storyMixDivergence pins were repaired same-edit and are green.
+3. CR-WR9-C: confirm the evaluator now feeds all instrumented cases with per-case horizon; behavioralContract.js line delta measured with the ratchet's engine (net +4 max) or the extraction clean; a research-horizon case with an alive-at-horizon war must red the no-infinity wall while a release case with the same war at ITS horizon grades against 100y — drive both shapes.
+4. N-ITEMS: N1 phrase accurate at HEAD (re-count the occurrences yourself); N2 sentence present; N4 pin executed.
+5. GATE BAR: focused battery with counts; tests/lint failure-set diff vs base EMPTY (both sides non-empty); strict 1313; any-cast unchanged; sizes (behavioralContract measured, pulseKernel 1580 EXACT, applyWorldPulse 941 EXACT); build + prerender + smoke:boot; byte-scan; ledger append-only with accurate rows; pathspec hygiene; no worldPulse diff (both sides shown); fixtures untouched.
+6. SAME-SEED: if ANY doubt remains that a touched path can move world bytes, run your own per-cell provenance-covering harness; otherwise the diff receipt with both sides non-empty suffices — state which you did and why.
+
+VERDICT: 'PASS — WR-9 IS COMPLETE AS AN INSTRUMENT' only on executed evidence for every item (the acceptance VERDICT itself stays owner-held and unclaimed); otherwise REJECT with minimal repros. RETURN raw data: {lane:'WR-9cd verify', verdict:'...', findings:[...]}.`, {
+  label: 'wr9cd:verify',
+  phase: 'Verify',
+  model: 'opus',
+  schema: {
+    type: 'object',
+    required: ['lane', 'verdict', 'findings'],
+    properties: {
+      lane: { type: 'string' },
+      verdict: { type: 'string' },
+      findings: { type: 'array', items: { type: 'string' } },
+    },
+  },
+})
+
+return { c, d: dRes, v }

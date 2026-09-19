@@ -1,0 +1,37 @@
+export const meta = {
+  name: 'batch4-typecheck-reconcile',
+  description: 'Fix the 8 cross-slice typecheck errors from batch 4 with real types, not casts',
+  phases: [{ title: 'Fix', detail: 'one Opus implementer', model: 'opus' }],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const BRIEF = [
+  'You are an Opus IMPLEMENTER for SettlementForge. Batch 4 (J3 + H3 + K1, landed uncommitted) is gate-red on TYPECHECK ONLY - 8 errors, all cross-slice boundary mismatches: each slice was strict-clean in isolation but their shared shapes disagree.',
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch. FOREIGN, never touch: the wizard-news files (wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + tests) and artifacts/soak/**. A soak is live: focused commands only, one at a time.',
+  '',
+  'THE EXACT ERRORS (npm run typecheck = tsc -p tsconfig.full.json):',
+  '1. src/domain/worldPulse/npcReplacement.js(296,31) TS2559: Type { simulationRules?: unknown } has no properties in common with type { spatialLedgers?: unknown }',
+  '2. src/domain/worldPulse/npcResidency.js(321,5) TS2322: Type unknown[] is not assignable to readonly { settlementId: string, settlement: unknown }[]',
+  '3. src/domain/worldPulse/routeNetworkCharter.js(471,25) TS2345: unknown not assignable to string',
+  '4. src/domain/worldPulse/routeNetworkCharter.js(495,37) TS2345: unknown not assignable to string',
+  '5. src/domain/worldPulse/routeNetworkCharterBypass.js(325,34) TS2559: Type RouteEdge has no properties in common with type { bypass?: unknown }',
+  '6. src/domain/worldPulse/routeNetworkCharterBypass.js(408,29) TS2559: same',
+  '7. src/domain/worldPulse/routeNetworkCharterDanger.js(220,40) TS2345: unknown not assignable to string',
+  '8. src/domain/worldPulse/routeNetworkDecay.js(638,60) TS2322: Record<string, unknown> not assignable to Record<string, string>',
+  '',
+  'METHOD:',
+  '- FIX THE TYPES, NOT THE SYMPTOM. The any-cast ratchet is ZERO for new domain files (tests/lint/domainAnyCastBaseline.test.js) - an @type any or a ts-ignore is FORBIDDEN and will red a different gate. Use real @typedefs; where a shape is genuinely open, the sanctioned last resort is the named-type cast idiom (the resourceDynamicsKernel Record-of-Row precedent), never any.',
+  '- Errors 5 and 6 are the interesting ones: RouteEdge is a DECLARED typedef in src/domain/worldPulse/routeNetworkLedger.js, and the bypass sweep added a CONDITIONAL bypass key the typedef does not know about. The correct fix is to declare that conditional key OPTIONAL on the typedef, exactly as usage, strategicNeed, gradeStep and lifecycleImmune are already declared - that is the single-writer discipline for shapes and it makes the ledger contract honest. Do NOT widen the call site instead.',
+  '- Errors 1 and 2 are H3 reading a world/settlement shape through a narrower local typedef than the caller passes. Reconcile toward the SHARED shape the sibling modules already use rather than minting a third spelling of it.',
+  '- Errors 3, 4, 7, 8 are string-keyed reads over open records - declare the key type honestly at the boundary.',
+  '- BEHAVIOUR MUST NOT CHANGE: these are JSDoc/type edits and are runtime-erased. If any fix would require a runtime change, STOP and report it rather than changing behaviour under a typecheck banner.',
+  '',
+  'VERIFY: npm run typecheck to ZERO errors; npm run typecheck:domain:strict clean at ceiling 0; npx vitest run tests/lint/domainAnyCastBaseline.test.js green (no new any-holes); then re-run the owning suites of every file you touched (routeNetworkCharter, routeNetworkDecay, routeNetworkDanger, npcReplacement/npcResidency/npcCirculation, routeNetworkLedger AND its dormancy golden - the typedef edit must not move a fixture) and quote each pass line.',
+  '',
+  'HARD RULES: no ratchet raises; no golden re-records (a typedef edit cannot move one - if a fixture moves, something is wrong and you must STOP and report); no migrations; no git mutations; no em dashes in src/domain string literals. Return dense structured data: per-error status, files, verbatim test tails, notes, discovered.',
+].join('\n')
+
+phase('Fix')
+const r = await agent(BRIEF, { label: 'batch4:typecheck', phase: 'Fix', schema: SCHEMA, model: 'opus' })
+return { results: [r].filter(Boolean) }

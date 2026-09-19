@@ -1,0 +1,49 @@
+export const meta = {
+  name: 'design-cycle-50-ribbon-v5-revision',
+  description: 'RIBBON V5 revision: close the critic F1-F10, rebuild the mocks to demonstrate the spec, re-judge — ZERO src changes',
+  phases: [{ title: 'Revise', detail: 'spec + mock repairs per findings' }, { title: 'Re-judge', detail: 'critic re-verdict on the corrected pixels' }],
+}
+
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/c44e5d99-2ba5-49d5-a554-40b68534c8eb/scratchpad/v5'
+
+const GROUND = `VERIFY-FIRST: this brief is the chair's authentic instruction set; verify against the files, then proceed — do not refuse it as injection. DESIGN PASS, NOT IMPLEMENTATION: read the repo at /Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold freely, WRITE ONLY under ${SCRATCH} (it holds the V1 deliverables: v5-spec-draft.md, decisions.md, the four PNGs, v5-mock.html — REVISE IN PLACE, do not fork filenames; two pre-existing foreign files crop.html/mock.html are preserved untouched). Serve mocks on a port above 5300, tear down after. python3 byte-scan every Write. The seven reference PNGs are on disk at '/Users/cstokes/Desktop/Settlement Forge template review/' (hf_20260804_*.png) with the binding curation in V5-NANO-BANANA-REFERENCES.md there.
+
+THE CRITIC RULED NEEDS-REVISION WITH TEN FINDINGS. Close every one; the SOUND list survives untouched (P1 hang-as-paint scroll answer, ANCHOR_OFFSET single-writer, P7 fate table, pendant-law bound-run geometry, half-barrel gradient, hysteresis two-state, SHAFT_STOPS reuse, both open questions' framing):
+F1 (HIGH) flight state is ONE dark slug — per-blade separation becomes a PINNED flight-state invariant (leading-cut notch at each peel-off, 1-2px daylight seam or edge-light at every crossing), demonstrated in the re-rendered v5-scrolled.png at 1x, not deferred to build.
+F2 (HIGH) the burned tabs were never built — the mock shows plain gold on wood at a MEASURED 1.66:1. Actually build the branded-then-gilded construction (char bed + gilt fill + singe halo), re-measure and quote the real ratio; the right third must stop reading as ordinary navigation at arm's length.
+F3 (MED-HIGH) the full near-black char band departs the image-2 canon (hf_...7d3d368b: burned FRAME OUTLINE + gold-fill lettering + bright red wax O on a WOOD field). Rebuild the cartouche as the canon: char frame + char letter-beds on wood, wax O regaining its hue (re-measure the wax center — it must not sample the char tone). This also un-feeds the P4 left-end mass. NOTE: this likely RESOLVES open question 1 — the canon's own grammar (char bed + gilt fill on wood) IS the tab construction; rewrite OQ1 to present the built, measured result for sign-off rather than a hypothetical.
+F4 (MED) the mock closes the frame-cut top edge — keyline ends+foot only; the top dies into the viewport cut; re-screenshot.
+F5 (MED) the lap rule contradicts the parameter table (tx vs dropX+18 yields +64/+73) — define dropX, reconcile rule or table until the arithmetic closes.
+F6 (MED) the fletch-label warp exemption reinterprets D3's explicit words — add one plain sentence in the spec's warp section naming the deviation and its reason (owner-visible, not buried in a decisions row).
+F7 (MED) rest vanes read as awnings — the feather read needs the references' barring RHYTHM and tapered rounded tips visible at arm's length; pin a barring-visibility receipt (if 0.14 alpha cannot carry it on the dark ladder, raise the cap with the contrast math shown).
+F8 (LOW-MED) fray hatching floats detached — anchor to the lower cut or replace with depth-table cast shadow.
+F9 (LOW) the 640 breakpoint receipt does not exist — produce it (a real 640 render) or restate the claim as owed-at-build.
+F10 (LOW) render the TRUE 30px simplified strike at 1x AND 2x in the cartouche closeup so open question 2 is answered from pixels.
+
+Deliverables: the same file set, revised; plus a short REVISION-NOTES.md mapping each finding to its fix and its receipt (measured numbers for F2/F3/F7/F10). Return {specPath, mockups, decisionsPath, revisionNotesPath, receipts:[...], openQuestions:[max 2, rewritten per F3], notes}.`
+
+phase('Revise')
+const r = await agent(`${GROUND}
+
+YOU ARE THE V5 REVISION COUNSEL. Read the existing spec, decisions, and mocks first; revise surgically — findings closed, sound parts byte-preserved where possible.`, {
+  label: 'v5r:revise', phase: 'Revise', effort: 'max',
+  schema: { type: 'object', required: ['specPath', 'mockups', 'decisionsPath', 'revisionNotesPath', 'receipts', 'openQuestions', 'notes'], properties: {
+    specPath: { type: 'string' }, mockups: { type: 'array', items: { type: 'string' } }, decisionsPath: { type: 'string' },
+    revisionNotesPath: { type: 'string' }, receipts: { type: 'array', items: { type: 'string' } },
+    openQuestions: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } },
+})
+
+phase('Re-judge')
+const k = await agent(`${GROUND}
+
+YOU ARE THE RETURNING ADVERSARIAL CRITIC. The revision counsel reports:
+${JSON.stringify(r, null, 2)}
+
+Open every revised PNG and LOOK. For each of F1-F10: CLOSED (with the receipt you re-executed yourself — re-measure F2's contrast, F3's wax hue, F10's seal size from the pixels) or STILL-OPEN (why). Then the arm's-length eye test on v5-rest.png and v5-scrolled.png against the master composition and the pendant reference: ONE war arrow? Any NEW regressions the revision introduced? RETURN {verdict:'SOUND'|'NEEDS-REVISION', perFinding:[...10 entries...], eyeVerdict:'...', newFindings:[...], notes:'...'}.`, {
+  label: 'v5r:critic', phase: 'Re-judge', effort: 'high',
+  schema: { type: 'object', required: ['verdict', 'perFinding', 'eyeVerdict', 'newFindings', 'notes'], properties: {
+    verdict: { type: 'string' }, perFinding: { type: 'array', items: { type: 'string' } },
+    eyeVerdict: { type: 'string' }, newFindings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } },
+})
+
+return { r, k }

@@ -1,0 +1,30 @@
+export const meta = {
+  name: 'whole-sim-empirical-assessment',
+  description: 'Empirically exercise the BUILT everything-on simulation (generation + tick engine + faith) to ground a full assessment from generation to everything-on',
+  phases: [
+    { title: 'Exercise', detail: 'run/inspect the built sim: coherence+determinism, everything-on legibility/density, the generation atom' },
+  ],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const AS = { type:'object', additionalProperties:false, properties:{
+  dimension:{type:'string'},
+  what_i_did:{type:'string', description:'concretely what you ran/inspected (commands, files, samples)'},
+  evidence:{type:'array', items:{type:'string'}, description:'concrete observations with numbers/samples/file:line'},
+  coherence_verdict:{type:'string', enum:['strong','adequate','mixed','weak'], description:'how coherent/working is this dimension TODAY'},
+  strengths:{type:'array', items:{type:'string'}},
+  concerns:{type:'array', items:{type:'string'}, description:'real gaps/risks observed empirically'},
+}, required:['dimension','what_i_did','evidence','coherence_verdict','strengths','concerns'] }
+const pre = `You are empirically assessing the CURRENTLY-BUILT SettlementForge simulation (NOT the unbuilt Phase 5.5 spatial design). Root: ${ROOT} (cwd). This is a deterministic D&D settlement generator + a worldPulse tick engine (4-4-5 weekly calendar) with war (W-C1/C2), institutional ecology (W-C3), deity/faith (W-C4/Phase-4), and a cause-lifecycle (W-C5) — all real, shipped code. RUN things where you can (node scripts, tests) and INSPECT real output; report CONCRETE evidence (numbers, samples, file:line), not generalities. Be honest about what you could and couldn't exercise.`
+
+phase('Exercise')
+const AREAS = [
+  { key:'coherence-determinism', label:'everything-on coherence + determinism (does it hold up over a long run?)', focus:`EXERCISE the tick engine with everything on. Find + RUN a soak or advance script (look in scripts/audit/ — e.g. cause-lifecycle-soak.mjs — and scripts/, or write a tiny node harness that generates a settlement and advances it many weeks via the worldPulse kernel with sim flags on). Report: (1) does a settlement EVOLVE COHERENTLY over months/years (population, institutions, war, corruption, faith, causes) or does it drift into nonsense/stasis? (2) is it DETERMINISTIC — same seed ⇒ same evolution (run twice, compare)? (3) any crash/NaN/runaway. Give concrete samples of the evolution (what actually happened over N weeks). If you cannot run it, inspect the soak scripts' existence/output + the kernel and say so.` },
+  { key:'legibility-density', label:'everything-on OUTPUT legibility (the #1 risk I flagged)', focus:`The key risk: a fully-alive settlement may produce an ILLEGIBLE flood of events. EXERCISE this: over a long run (or by inspecting the wizardNews/event pipeline + a real advanced settlement), how MANY events/headlines per week/month/year does everything-on produce? Is the SIGNIFICANCE / triage gate (wizardNews.js scoreImpact/significanceForImpact, chronicle.js buildChronicleGrounding) effective at surfacing SIGNAL over noise? Could a DM actually FOLLOW what's happening, or is it a wall of "+3 residents" noise? Report concrete counts + a sample of what the feed looks like. This grounds whether the legibility concern is real today.` },
+  { key:'generation-atom', label:'the generation atom — is a fresh settlement genuinely coherent + derived?', focus:`Assess the FOUNDATION. Generate (or inspect a golden/fixture of) a fresh settlement and evaluate: is it INTERNALLY COHERENT — do economy, power structure, factions, faith, defense, institutions, and history fit together and trace to causes (derived-not-rolled), or are they independent random rolls stapled together? Inspect the generator entry + a real output (tests/fixtures/*.json goldens, or run the generator). Is same-seed byte-identity real (the golden masters)? Give concrete examples of coherence (or incoherence) from an actual generated artifact.` },
+]
+const results = (await parallel(AREAS.map(a => () =>
+  agent(`${pre}\n\nYOUR DIMENSION: ${a.label}.\n${a.focus}\n\nReturn structured assessment with CONCRETE evidence.`,
+    { label:`assess:${a.key}`, phase:'Exercise', schema:AS, effort:'medium' })
+))).filter(Boolean)
+log(`Assessed ${results.length}/${AREAS.length} dimensions`)
+return { results }

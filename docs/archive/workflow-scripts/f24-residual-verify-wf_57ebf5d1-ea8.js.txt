@@ -1,0 +1,116 @@
+export const meta = {
+  name: 'f24-residual-verify',
+  description: 'Adversarially verify the F24 comma/emoji corruption fix set and sweep for residual instances',
+  phases: [
+    { title: 'Sweep', detail: 'independent multi-angle hunts + adversarial diff/guard review' },
+    { title: 'Verify', detail: 'skeptic verification of each finding' },
+  ],
+}
+
+const REPO = '/Users/cstokes/Desktop/settlement-engine'
+
+const COMMON = `You are auditing the git checkout at ${REPO} (branch review-fixes-2026-07-08). Work READ-ONLY: do not edit, create, or delete any file in that repo; do not run npm scripts that write (no build). You may run git/grep/read commands freely (use git -C ${REPO} ...; note your shell cwd may reset between commands, so always use absolute paths). Your final message is machine-consumed data, not prose for a human.
+
+Background: a typography reformat once corrupted the codebase: em-dashes ('—') became the literal ', ' (comma-space) and emoji were deleted in place (leaving stray leading/trailing spaces or empty-string icon props). The PDF side (src/pdf) is already pinned by tests and is OUT OF SCOPE. A fix pass was JUST applied to the working tree (visible via git -C ${REPO} diff). The two modified files under src/generators/power/ are unrelated concurrent work — ignore them entirely.`
+
+const FINDINGS = {
+  type: 'object', required: ['findings'], additionalProperties: false,
+  properties: { findings: { type: 'array', items: {
+    type: 'object', required: ['file', 'line', 'what', 'why_suspect'], additionalProperties: false,
+    properties: {
+      file: { type: 'string' }, line: { type: 'integer' },
+      what: { type: 'string', description: 'the exact code fragment' },
+      why_suspect: { type: 'string', description: 'evidence this is corruption, not intent' },
+    },
+  } } },
+}
+
+const VERDICT = {
+  type: 'object', required: ['isReal', 'reasoning'], additionalProperties: false,
+  properties: {
+    isReal: { type: 'boolean' },
+    reasoning: { type: 'string' },
+    suggestedFix: { type: 'string' },
+  },
+}
+
+const REVIEW = {
+  type: 'object', required: ['issues'], additionalProperties: false,
+  properties: { issues: { type: 'array', items: {
+    type: 'object', required: ['file', 'summary', 'severity'], additionalProperties: false,
+    properties: {
+      file: { type: 'string' }, line: { type: 'integer' },
+      summary: { type: 'string' },
+      severity: { enum: ['blocker', 'minor', 'info'] },
+    },
+  } } },
+}
+
+const HUNTERS = [
+  { key: 'comma-placeholder', prompt: `${COMMON}
+
+Hunt for SURVIVING comma-space placeholder corruption in the working tree (post-fix state), across all app-side src/ EXCEPT src/pdf and src/generators/power. Search many angles, not just one grep: (1) "|| ', '" and "||', '" and "?? ', '"; (2) "return ', '"; (3) ternary fallbacks "? ', '" / ": ', '" where the branch is a missing-value placeholder rather than a list joiner; (4) template literals containing a bare \\\${x || ', '} or similar; (5) JSX text nodes that OPEN with ", " (pattern like '>, Word'); (6) default parameter values = ', '; (7) object property defaults like label: x || ', '. For each hit, read surrounding context and classify: legitimate JOINER between list items (e.g. .join(', '), .split(', ') on genuinely comma-separated data, {k > 0 ? ', ' : ''} separators) vs PLACEHOLDER for a missing value. Report ONLY placeholder usages that remain unfixed. Return findings: [] if none survive.` },
+  { key: 'emoji-artifact', prompt: `${COMMON}
+
+Hunt for SURVIVING stripped-emoji artifacts in src/components (working tree, post-fix state): (1) JSX text starting with a single space right after a tag close, e.g. '}}> Label' where the space is a leftover from a deleted emoji — but EXCLUDE cases where the leading space is intentional sentence separation (the element follows a text node or inline sibling mid-sentence; e.g. src/components/new/tabs/ServicesTab.jsx line ~114 ' Missing categories:' follows 'Nothing matching ...' and was judged INTENTIONAL — double-check that judgement and report if you disagree); (2) props like icon="" or icon={''}; (3) ternaries yielding only bare space strings like t?' ':n?' ':''; (4) render templates '{a} {b}' where a is always the empty string; (5) trailing lone spaces inside chips/badges. Classify each: artifact vs intentional. Report ONLY genuine artifacts still unfixed. Return findings: [] if none.` },
+  { key: 'emdash-data-mismatch', prompt: `${COMMON}
+
+Hunt for em-dash/comma DATA-FORMAT MISMATCHES between generators and UI in the working tree: generators emit labels containing ' — ' (e.g. src/generators/safetyProfile.js builds 'Controlled — Occupation Curfew'). Find component/lib code that parses such generator-produced strings with the WRONG delimiter: .split(', '), .includes(', '), .startsWith(', '), indexOf(', '), or comparisons that assume comma-space where the producer emits an em-dash (or vice versa). For each suspect, trace the actual producer of the string being parsed and verify which delimiter the data really contains. Exclude src/pdf and src/generators/power. Report only real mismatches remaining after the fix pass. Return findings: [] if none.` },
+  { key: 'fix-crosscheck', prompt: `${COMMON}
+
+Cross-check the applied fix set. Run git -C ${REPO} diff and verify EVERY intended fix below is present and exactly right in the working tree; also flag anything in the diff that goes beyond this list (other than the src/generators/power files, which you must ignore):
+1. src/components/ConfigurationPanel.jsx: option text '— Choose an archetype —'; 'Depleted' chip lost its leading space.
+2. src/components/new/tabs/OverviewTab.jsx: safetyLabel split on '—'; badge text '— resilience relies…'; ScoreRow lost its icon prop (definition AND 5 call sites); labels 'Enforcement Ratio', 'Food Deficit', 'Structural Issues', 'Suggestions' lost leading spaces.
+3. src/components/new/tabs/DailyLifeTab.jsx: value || EMPTY_VALUE (imported from ../../theme.js).
+4. src/components/settlement/VersionsTab.jsx: formatTs returns EMPTY_VALUE (imported from ../theme.js).
+5. src/components/map/QuickInspector.jsx, PlacementDetailCard.jsx, SettlementPalette.jsx: tier fallback EMPTY_VALUE (imported from ../theme.js).
+6. src/components/new/SummaryTab.jsx: SitTile lost icon prop (definition + 3 call sites); Power value splits on '—'; Economy value eco.prosperity||EMPTY_VALUE and sub splits economicComplexity on '—'; Defense value dp.readiness?.label||EMPTY_VALUE; EMPTY_VALUE imported.
+7. src/components/compendium/CatalogTabs.jsx: description fallback EMPTY_VALUE, imported.
+8. src/components/new/tabs/EconomicsTab.jsx: 'Blue = re-exported transit goods' leading space gone; the space-only icon ternary and its {imp}{icon} usage removed; 'Terrain cannot produce' and 'Settlement necessity' leading spaces gone.
+9. src/components/new/tabs/ResourcesTab.jsx: 'DEPLETED. Consumed locally…' leading space gone.
+10. src/components/new/tabs/HistoryTab.jsx: 'STILL RELEVANT TODAY' leading space gone.
+11. eslint.config.js: new no-restricted-syntax block scoped to src/components/**/*.{js,jsx} with 4 selectors (|| fallback, ?? fallback, return, JSXText first-child opening with comma).
+Verify each import edit didn't break the import (EMPTY_VALUE actually exported from src/components/theme.js, correct relative path per file). Report as findings any omission, typo, or unintended change (file+line+what+why_suspect). Return findings: [] if the diff is exactly right.` },
+]
+
+const REVIEWERS = [
+  { key: 'diff-adversarial', effort: 'high', prompt: `${COMMON}
+
+Adversarially review git -C ${REPO} diff (ignore src/generators/power changes) for REGRESSIONS the fix pass could have introduced. Attack angles, at minimum: (a) formatTs in VersionsTab now returns EMPTY_VALUE ('—') — read every consumer of formatTs/buildVersionTimeline and any test pinning its output; (b) OverviewTab/SummaryTab now split on '—' — what renders when the label contains NO em-dash, and does any splitter get fed user/custom strings containing em-dashes that should NOT be truncated (check what powStab / ps?.stability and eco.economicComplexity actually contain by reading their generators)? (c) ScoreRow/SitTile icon prop removal — grep the ENTIRE repo (including tests) for any other usage passing icon to these components; (d) the EMPTY_VALUE fallbacks — does any consumer branch on the exact string ', ' anywhere (tests, snapshots, storage)? (e) removed leading spaces — could any removed space have been load-bearing for layout/word separation (check each site's siblings)? (f) tests that snapshot or assert the old strings (search tests/ for 'Choose an archetype', 'resilience relies', 'Enforcement Ratio', 'Food Deficit', 'STILL RELEVANT', etc.). Report issues with severity blocker/minor/info. Empty issues array if clean.` },
+  { key: 'guard-evasion', effort: 'high', prompt: `${COMMON}
+
+Review the NEW no-restricted-syntax block at the end of eslint.config.js (the F24 comma-placeholder guard, scoped to src/components/**/*.{js,jsx}). Tasks: (1) FLAT-CONFIG AUDIT — read the whole eslint.config.js and confirm no other config object sets 'no-restricted-syntax' for files matching src/components/** (flat config is last-wins per rule; a later overlapping block would silently disable this guard, and this guard must not disable the src/generators + src/domain determinism blocks — confirm their file globs don't overlap). (2) FALSE-POSITIVE AUDIT — run: cd ${REPO} && npx eslint src/components --rule-filter or just npx eslint src/components 2>&1 | grep 'no-restricted-syntax' (read-only) and confirm zero hits; specifically confirm src/components/PipelineRail.jsx (joiner {k > 0 ? ', ' : ''}) is not flagged. (3) EVASION ENUMERATION — statically enumerate realistic ways the corruption class could re-enter WITHOUT tripping the 4 selectors (e.g. template-literal fallback x || \\\`, \\\`, ternary fallback cond ? v : ', ', JSXText ', ...' that is not the first child, const PLACEHOLDER = ', ' assigned then used, .jsx files outside src/components rendering UI). You may test selector behavior with: echo '<code>' | npx eslint --stdin --stdin-filename ${REPO}/src/components/__probe.jsx — this writes NO file. For each gap, judge whether it is a realistic regression vector worth hardening or an acceptable residual given the joiner false-positive tradeoff. Report issues (severity info for acceptable gaps, minor/blocker for real holes worth fixing). Empty issues array if the guard is sound.` },
+]
+
+phase('Sweep')
+const results = await parallel([
+  ...HUNTERS.map(h => () => agent(h.prompt, { label: `hunt:${h.key}`, phase: 'Sweep', schema: FINDINGS })),
+  ...REVIEWERS.map(r => () => agent(r.prompt, { label: `review:${r.key}`, phase: 'Sweep', schema: REVIEW, effort: r.effort })),
+])
+const hunterOut = results.slice(0, HUNTERS.length).filter(Boolean)
+const reviewOut = results.slice(HUNTERS.length).filter(Boolean)
+
+const raw = hunterOut.flatMap(r => r.findings)
+const seen = new Set()
+const deduped = raw.filter(f => { const k = `${f.file}:${f.line}`; if (seen.has(k)) return false; seen.add(k); return true })
+log(`hunters: ${raw.length} raw findings, ${deduped.length} deduped; reviewers: ${reviewOut.flatMap(r => r.issues).length} issues`)
+
+phase('Verify')
+const verified = await parallel(deduped.map(f => () =>
+  agent(`${COMMON}
+
+A hunter claims this is surviving F24-class corruption. Try to REFUTE it — default to isReal=false if uncertain. Read the file and its full surrounding context, trace the data producer if the claim involves parsing, and check git history if intent is unclear.
+
+Claim: ${f.file}:${f.line} — ${f.what}
+Rationale: ${f.why_suspect}
+
+isReal=true ONLY if you are confident this is genuine corruption (placeholder/artifact/mismatch) still present in the working tree that should be fixed.`, { label: `verify:${f.file.split('/').pop()}:${f.line}`, phase: 'Verify', schema: VERDICT })
+    .then(v => ({ ...f, verdict: v }))
+))
+
+const confirmed = verified.filter(Boolean).filter(x => x.verdict.isReal)
+return {
+  confirmedResiduals: confirmed,
+  refuted: verified.filter(Boolean).filter(x => !x.verdict.isReal).map(x => ({ file: x.file, line: x.line, what: x.what, why: x.verdict.reasoning })),
+  reviewIssues: reviewOut.flatMap(r => r.issues),
+}

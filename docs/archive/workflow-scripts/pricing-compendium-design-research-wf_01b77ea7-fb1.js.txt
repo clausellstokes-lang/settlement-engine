@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'pricing-compendium-design-research',
+  description: 'Second design-research sweep: pricing-page + reference/codex design feeding THE DOCUMENTATION WAVE',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      pattern: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'pattern', 'emulate'] } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'pricing-design', prompt: `Research the best-designed pricing pages on the web — tier-card layout, visual hierarchy, the one-primary-CTA discipline, honest-pricing exemplars (no dark patterns), how the best pages make a 3-4 tier ladder legible in seconds, and how they present what each tier UNLOCKS in mechanism terms rather than adjective lists. Study widely-praised examples (Stripe, Linear, Basecamp/37signals' famously opinionated pricing, Figma, indie tools with beloved pricing pages) and pages design communities cite as references. The client: a parchment-toned D&D world-simulator with tiers free/$5.99/$19.99/lifetime-founder(30 seats w/ live scarcity meter) + credit packs + a $2.99 per-settlement bundle. Return concrete layout/hierarchy patterns with emulate/avoid.` },
+  { key: 'hobby-market-pricing', prompt: `Research how games/hobby/TTRPG products present pricing and what THIS audience trusts or distrusts: Foundry VTT (famous one-time-purchase stance), World Anvil's tier ladder, Inkarnate, D&D Beyond, Roll20, Dungeon Alchemist (one-time on Steam), plus community sentiment (Reddit r/rpg, r/DMToolkit threads about subscription fatigue vs one-time purchases, what pricing moves got tools praised or roasted). The client sells: free tier + $5.99/mo simulation tier + $19.99/mo AI tier + 30 lifetime founder seats + per-settlement $2.99 one-shots + task-priced credits + BYOK (bring your own AI key). Which of these does this market embrace vs resent, and how should the page frame subscriptions to a subscription-fatigued hobby? Return per-product observations + framing guidance.` },
+  { key: 'credit-economy-presentation', prompt: `Research how AI-era products present usage-based/credit pricing HONESTLY and digestibly: per-task price menus (image generators, AI writing tools, API pricing pages), how the best ones answer "what will this actually cost me in practice", cost estimators/calculators, labeled-estimates language, and BYOK (bring-your-own-key) framing where users pay a platform fee + their own inference. Find pages praised for clarity and pages criticized for token-opacity. The client's law: "users buy outcomes, not tokens" — task-priced credits (e.g. interpret-session 5cr, construct-realm 8cr) with packs at volume discounts, estimates labeled estimates, and a usage meter. Return concrete presentation patterns (menus, calculators, worked examples) with emulate/avoid.` },
+  { key: 'reference-codex-design', prompt: `Research the best reference/encyclopedia/codex interface design for the client's Compendium page: developer docs done beautifully (Stripe docs, MDN), in-game codexes and encyclopedias famous for making enumerations delightful (Civilization's Civilopedia, Elden Ring/Tunic-style lore books, Dwarf Fortress legends viewers, well-designed game wikis), searchable catalog UIs, and long-enumeration layout patterns (40+ archetype cards, 300-institution catalogs) that stay browsable rather than overwhelming. Also: reference pages that double as SEO surfaces (per-entry pages/anchors). The client's Compendium renders catalogs from a simulation engine (institutions, archetypes, deities, operations) in a parchment/gold fantasy register. Return concrete layout/navigation/search patterns with emulate/avoid.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch tools for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for the SECOND design-research sweep feeding SettlementForge's DOCUMENTATION WAVE (three pages, one argument: About=why trust, Compendium=proof, Pricing=convert; parchment/gold house style; subscription-fatigued TTRPG audience; four product goals: best map generator / settlement generator / campaign simulator / TTRPG AI). The four syntheses: ${JSON.stringify(results.filter(Boolean).map(r => r.synthesis))}. Name: (1) what is MISSING that the brief-writer should still consider, (2) the three strongest cross-angle patterns, (3) the biggest trust/conversion failure risk for THIS audience specifically. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

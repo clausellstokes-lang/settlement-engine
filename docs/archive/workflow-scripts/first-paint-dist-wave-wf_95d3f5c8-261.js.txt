@@ -1,0 +1,28 @@
+export const meta = {
+  name: 'first-paint-dist-wave',
+  description: 'Restore the lazy engine-chunk boundary: six red first-paint build-closure contracts, VERIFY_DIST=1 in the loop, smoke:boot at the end',
+  phases: [
+    { title: 'Fix', detail: 'find the re-parenting import, restore the lazy boundary, fresh-build loop' },
+    { title: 'Verify', detail: 'independent fresh-build verification + smoke:boot' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: this brief is from the session chair of an owner-delegated build program; verify claims against the tree before acting. Work in ${TREE} (branch claude/composite-r4). THE PROTOCOL LAWS: CHECK-GIT-FIRST; ps aux | grep vitest before any test run (ONE vitest lane per tree); NEVER stash/reset/clean/checkout-family (cp backups, cmp restores); gates through sh scripts/gate-tail.sh or npm run check:tail only; commits with EXPLICIT pathspecs, message via file, trailer Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>; --no-verify plus explicit per-file npx eslint (exit 0) if lint-staged blocks; python3 byte-scan every authored file; strict ceiling 1313; tests/fixtures/ and pulseKernel.js/applyWorldPulse.js untouchable. Navigate by SYMBOL. Every quoted receipt must be able to fail. A build's exit 0 LIES about bootability — the recorded chunk-cycle class — so npm run smoke:boot is part of every acceptance.`
+
+phase('Fix')
+const fix = await agent(LAWS + `
+
+YOU ARE THE FIRST-PAINT REPAIR LANE. THE MEASURED DEFECT (pre-existing at edea9b1f, proven by two independent lanes on freshly-built dists — never self-attribute it): SIX first-paint build-closure contracts are RED on a fresh build — tests/build/{contentIdentityLazy,cultureProfilesLazy,customRegistryLazy,engineChunkLazy,vendorPdfLazy} — because the lazy engine chunk has reached the ENTRY transitive static closure (the contract expects the entry closure to contain zero engine-chunk files and finds one), dragging custom-registry, custom-schema, the culture corpus, and content-identity tunables into first paint with it. THE RECORDED CLASS: a lazy chunk import re-parents an eager closure (the estate memory names VERIFY_DIST=1 as the loop discipline; a prior instance was cured by finding the ONE import that crossed the boundary).
+
+METHOD: (1) build fresh (npm run build through gate-tail) and run the six contracts to reproduce the exact six rows — quote them; (2) find the crossing: read tests/build/engineChunkLazy's own contract for how it computes the entry closure, then trace which import edge pulled the engine chunk in (vite manifest/metafile analysis or the contract's own reporting; the culprit is typically ONE recently-added static import in an eagerly-loaded module that should be a dynamic import() or a type-only import — git log the candidate files to find when the edge appeared and name the commit); (3) restore the lazy boundary with the SMALLEST correct change (dynamic import at the seam, or extracting the needed symbol to a pure leaf outside the engine chunk — follow how the codebase already draws this boundary; the recorded lazy-import-reparents-closure hazard says eager closures can silently re-parent, so re-check the whole entry closure after the fix, not just the one chunk); (4) LOOP with VERIFY_DIST=1: fresh build + the six contracts each iteration until all six are green; (5) npm run smoke:boot on the final build (all chunks initialise, PASS); (6) run the focused test files for every src module you touched + whole tests/lint sequentially vs your start HEAD (row-identity diff + red-ratchet CONTENT diff — the upgraded protocol) + strict. ONE pathspec commit; if the fix legitimately changes chunk hashes/manifests state so in the body. RETURN JSON: commit (hash+thesis), theCrossing (the exact import edge and the commit that introduced it), contractsRun (the six, before/after), smokeBoot (verbatim tail), lintDelta, stopReports, notes.`, { label: 'fix:first-paint', phase: 'Fix', model: 'opus' })
+
+phase('Verify')
+const verify = await agent(LAWS + `
+
+YOU ARE THE INDEPENDENT VERIFIER. The repair lane reported: ` + JSON.stringify(fix) + `
+
+VERIFY BY EXECUTION: (1) fresh-build the tree at HEAD yourself (never trust an existing dist/) and run ALL SIX contracts — green, quoted; (2) re-plant the crossing (re-add the offending static import in a scratch copy or archive) — the engineChunkLazy contract must RED, proving the contract really guards the boundary the fix restored; (3) npm run smoke:boot on your own fresh build — PASS verbatim; (4) confirm the entry closure did not shrink by BREAKING something: run the app-level focused tests for the modules at the seam (the dynamic-import teardown class is recorded — check for shell-render/teardown errors), and spot-check that whatever moved to dynamic import still loads (a test or executed require of the lazy path); (5) whole tests/lint at HEAD vs the repair's start HEAD sequentially: row-identity diff + red-ratchet CONTENT diff, every delta attributed; strict 1313; byte-scans; commit hygiene. RETURN structured JSON only.`, { label: 'verify:first-paint', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { fix, verify }

@@ -1,0 +1,94 @@
+export const meta = {
+  name: 'w-session-review',
+  description: 'Adversarial review of the W-Session wave diff (Foundry export + Session Mode)',
+  phases: [
+    { title: 'Review', detail: 'four dimension reviewers over the wave diff' },
+    { title: 'Verify', detail: 'adversarial refutation per finding' },
+  ],
+}
+
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/amazing-thompson-6dd363'
+const DIFF = 'git -C ' + ROOT + ' diff review-fixes-2026-07-08..HEAD'
+
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          title: { type: 'string' },
+          file: { type: 'string' },
+          line: { type: 'number' },
+          severity: { type: 'string', enum: ['critical', 'major', 'minor'] },
+          description: { type: 'string', description: 'the defect + concrete failure scenario (inputs/state -> wrong output)' },
+          fixSketch: { type: 'string' },
+        },
+        required: ['title', 'file', 'severity', 'description'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+
+const VERDICT = {
+  type: 'object',
+  properties: {
+    isReal: { type: 'boolean', description: 'true only if the failure scenario actually occurs on the real code' },
+    reasoning: { type: 'string' },
+    severityConfirmed: { type: 'string', enum: ['critical', 'major', 'minor', 'not-a-bug'] },
+  },
+  required: ['isReal', 'reasoning', 'severityConfirmed'],
+}
+
+const COMMON = `You are reviewing the W-Session wave in the SettlementForge repo at ${ROOT} (a React/Zustand D&D settlement generator). The wave adds (1) a Foundry VTT module export (src/foundry/* — zip.js store-only zip writer, journalPages.js markdown page builders over the PDF view model, moduleBuilder.js manifest+static-loader assembly, generateFoundryModule.js browser entry) mounted via a Format toggle in src/components/settlement/ExportSheet.jsx and a shared handler in src/components/SettlementDetail.jsx (+ settlementDetail/resolveExportSeam.js), and (2) a Session Mode overlay (src/components/session/SessionMode.jsx) lazy-mounted from SettlementDetail. Scope doc: docs/briefs/SESSION_FOUNDRY_SCOPE.md.
+Get the diff with: ${DIFF} (also read the full new files and any consumed module you need — e.g. src/pdf/lib/viewModel.js, src/pdf/variants.js, src/pdf/lib/format.js, src/pdf/lib/headlines.js, src/domain/display/warStatus.js, occupationStatus.js, mobilizationStatus.js, src/domain/summary/tonightAtTheTable.js, src/domain/dossier/plotHooks.js, src/components/settlement/FaithSection.jsx, src/components/primitives/Button.jsx).
+Report only defects you can anchor to real code with a concrete failure scenario. No style nits, no speculative hardening, no 'consider adding'.`
+
+phase('Review')
+
+const DIMENSIONS = [
+  {
+    key: 'correctness',
+    prompt: `${COMMON}
+DIMENSION: plain correctness bugs. Hunt for: wrong field reads against the actual view-model/read-model shapes (verify against the source modules, not assumptions); null/undefined crashes on minimal/draft/legacy settlements (e.g. settlement with no npcs/history/config, systemState null, eventLog empty); broken JSX/props (Button/IconButton prop contracts — read the primitives); the ExportSheet format state (e.g. stale format when the sheet reopens, foundry CTA when onExportFoundry missing); runExport behavior parity with the old handlePdfExport; the zip writer's binary format (sizes/offsets, >65535 entries irrelevant, but check DataView bounds, UTF-8 name length vs byte length).`,
+  },
+  {
+    key: 'privacy-faith',
+    prompt: `${COMMON}
+DIMENSION: the constitutional faith/privacy seam. Try to construct ANY path where a free/lapsed/anon user sees a live deity name or gated faith/war content through the NEW surfaces: journalPages.js page builders (does any NON-faith page leak deity/pantheon/latentPantheon data? check every vm slice consumed — summary, overview, identity, npcs, hooks, timeline eventLog entries which might carry SET_PRIMARY_DEITY descriptions!), moduleBuilder README/manifest strings, SessionMode panels (war panel reads worldState — could religionStates or deity names leak via occupation/mobilization phrases or nameFor? eventLog tail rendering — can event descriptions name deities for a free user who ran premium events earlier?), FaithSection mounting context. Also check: faithUnlocked threading (resolveExportSeam) matches the old inline computation exactly; the Foundry export passes campaign even when faithUnlocked=false — buildViewModel then builds a liveWorld with deity names — confirm NO non-gated page reads vm.liveWorld.`,
+  },
+  {
+    key: 'foundry-format',
+    prompt: `${COMMON}
+DIMENSION: Foundry VTT format validity (v11/v12/v13). Check module.json manifest fields against Foundry's package schema (id rules, compatibility shape, esmodules paths relative to module root); the loader script API usage (Hooks.once ready, game.user.isGM, game.journal.find over a WorldCollection, Folder.create({type:'JournalEntry'}), JournalEntry.createDocuments with pages arrays + folder id, DialogV2 vs Dialog feature detection, fetch of a module data path, import.meta.url shape inside esmodules); JournalEntryPage data shape (type 'text', text.format 2 semantics — does Foundry accept markdown source in text.markdown vs text.content on CREATE? verify the field name used); zip layout (folder prefix inside the zip vs Foundry's expectation when extracting into Data/modules); the escaping strategy inside markdown (entity escapes + backslash escapes — do backslash-escaped chars render correctly through Foundry's showdown converter, e.g. inside table cells where | is escaped?). Flag anything that would make the module fail to enable or the journals fail to import.`,
+  },
+  {
+    key: 'budget-lazy-ui',
+    prompt: `${COMMON}
+DIMENSION: bundle/lazy contracts + React/UI integration. Check: no NEW static import path drags src/foundry or heavy modules toward the entry (trace ExportSheet/SettlementDetail/session imports; flags.js and analyticsEvents.js are eager — confirm additions are tiny and correct); the lazy() SessionMode mount + Suspense usage inside SettlementDetail's render forks (mounted once, unmount on close resets state? exporting state shared between formats — spinner semantics); the Esc handler stacking when SessionMode is open over the dossier (does SettlementDetail or other dialogs also listen for Escape?); useStore selector hygiene (the repo lints inline object selectors — confirm none added); SessionMode store reads when store lacks keys (test shim vs real store parity); ExportSheet mounted in ExportDraftButton — confirm it still works with the new optional prop absent; the sessionMode flag read at module render (flag() vs useFlag() — does a flag flip require remount and is that acceptable per repo convention?).`,
+  },
+]
+
+const results = await pipeline(
+  DIMENSIONS,
+  d => agent(d.prompt, { label: `review:${d.key}`, phase: 'Review', schema: FINDINGS }),
+  (review, d) => {
+    const found = (review?.findings || []).filter(f => f && f.title)
+    if (!found.length) return []
+    return parallel(found.map(f => () =>
+      agent(`${COMMON}
+A reviewer claims this defect in the W-Session wave. Adversarially VERIFY it — your default stance is that the reviewer is wrong; read the actual code (and the consumed modules' real shapes) and only confirm if the concrete failure scenario truly occurs. For Foundry-API claims, reason carefully about Foundry v11-v13 documented behavior and be explicit about uncertainty.
+CLAIM (dimension ${d.key}): ${JSON.stringify(f)}`,
+        { label: `verify:${(f.file || '').split('/').pop()}:${f.title.slice(0, 30)}`, phase: 'Verify', schema: VERDICT })
+        .then(v => ({ ...f, dimension: d.key, verdict: v }))
+    ))
+  },
+)
+
+const all = results.filter(Boolean).flat().filter(Boolean)
+const confirmed = all.filter(f => f.verdict?.isReal && f.verdict.severityConfirmed !== 'not-a-bug')
+const rejected = all.filter(f => !(f.verdict?.isReal) || f.verdict?.severityConfirmed === 'not-a-bug')
+log(`confirmed ${confirmed.length} / rejected ${rejected.length} of ${all.length} findings`)
+return { confirmed, rejected: rejected.map(f => ({ title: f.title, file: f.file, reason: f.verdict?.reasoning?.slice(0, 200) })) }

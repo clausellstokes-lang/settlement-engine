@@ -1,0 +1,58 @@
+export const meta = {
+  name: 'p4-typecheck-then-war-reasons',
+  description: 'Land P4 (9 typecheck errors) then add the three missing war reasons with their enforced peace mirrors',
+  phases: [
+    { title: 'Land P4', detail: 'fix the 9 cross-slice type errors', model: 'opus' },
+    { title: 'War reasons', detail: 'the three missing causes + mirrors', model: 'opus' },
+  ],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const SCHEMA = { type: 'object', required: ['agent', 'fixes'], properties: { agent: { type: 'string' }, fixes: { type: 'array', items: { type: 'object', required: ['finding', 'status', 'files', 'tests', 'notes'], properties: { finding: { type: 'string' }, status: { type: 'string', enum: ['fixed', 'skipped', 'deferred', 'blocked'] }, files: { type: 'array', items: { type: 'string' } }, tests: { type: 'string' }, notes: { type: 'string' } } } }, behavior_shifts: { type: 'array', items: { type: 'string' } }, discovered: { type: 'array', items: { type: 'string' } } } }
+
+const COMMON = [
+  'Worktree: ' + ROOT + ' branch claude/composite-r4 - verify with git rev-parse --abbrev-ref HEAD; stop on mismatch.',
+  'FOREIGN, never touch: wizardNews/settlementRumors/heraldRouting/informationStatecraft/momentum/supplyWebWarfare + their tests, and artifacts/soak/**. Focused vitest only, one at a time.',
+  'HARD RULES: no migrations; no git mutations; no full suites/builds; NO ratchet raises; ZERO any-casts (declare conditional keys on the OWNING typedef - the RouteBypass precedent); kernel math primitives; NO Math.pow or transcendentals in seeded paths (multiplication is correctly rounded, pow is implementation-approximated - the ratchet caught P3); determinism (keyed hashes or one accounted fork; seed-family totality, never single-seed); no em dashes in src/domain|src/data string literals; conditional worldState keys drop-when-empty; the golden law - if a change would move a generation or dormancy golden, STOP and report; reseal edge bundles via npm run build:edge-shared if you touch their inputs.',
+].join('\n')
+
+phase('Land P4')
+const p4 = await agent([
+  'You are an Opus IMPLEMENTER for SettlementForge. Wave P4 landed and its gate is red on TYPECHECK ONLY - 9 errors, all the same class the program has hit before: JSDoc that was not updated when a function gained parameters, and cross-slice shapes that disagree.',
+  '',
+  'THE NINE (npm run typecheck = tsc -p tsconfig.full.json):',
+  '1-2. warReasons.js scoreResourcePressure: its @param says {{ own01: number, foe01: number }} but P4 now passes capability01 and note. UPDATE THE TYPEDEF to match what the function accepts - both new params OPTIONAL, because absent capability01 must default to 1 so every pre-P4 caller stays byte-identical (that behaviour is already pinned; do not change it).',
+  '3. warReasons.js: a call site passes a union of the old and new arg shapes - reconcile once the typedef above is honest.',
+  '4. warReasons.js: a snapshot shape ({byId, regionalGraph}) is being handed to something expecting {settlements: [{id, settlement}]}. Find the real boundary and declare it correctly; do NOT widen a published contract to unknown just to silence it.',
+  '5. demographicsObservation.js: unknown passed where readonly unknown[] is wanted.',
+  '6. demographicsWar.js: unknown passed where Record<string, unknown> is wanted.',
+  '7-8. settlementLifecycleFirstClass.js: a viabilityGrade property is written and read on a typedef that declares only viabilityLadder. P4 added the named ladder (design section 7b) - declare viabilityGrade as an OPTIONAL property on the OWNING typedef, exactly as viabilityLadder already is.',
+  '9. settlementLifecycleFirstClass.js: LcSettlement is not assignable to DemoSettlement - reconcile toward the SHARED spelling the siblings already use rather than minting a third.',
+  '',
+  'METHOD: fix the TYPES, never the symptom. These are JSDoc/type edits and are runtime-erased - if any fix would need a runtime change, STOP and report rather than changing behaviour under a typecheck banner. Before declaring a shape, grep siblings for an existing spelling and CONVERGE on it.',
+  'VERIFY: npm run typecheck to ZERO; npm run typecheck:domain:strict clean at ceiling 0; tests/lint/domainAnyCastBaseline green; then re-run the owning suites of every file you touched (demographicsWorldsHand, warReasons, settlementLifecycleFirstClass, subsystemRowsGrowth, subsystemCertificationCorpus) and quote each pass line.',
+  '',
+  COMMON,
+].join('\n'), { label: 'P4:typecheck', phase: 'Land P4', schema: SCHEMA, model: 'opus' })
+
+phase('War reasons')
+const war = await agent([
+  'You are an Opus IMPLEMENTER for SettlementForge. THE OWNER HAS ORDERED THREE MISSING WAR CAUSES BUILT. A manager review of the eleven-reason taxonomy in src/domain/worldPulse/warReasons.js found that every existing reason is grievance-, fear-, or need-driven, and named three gaps. Close them.',
+  '',
+  'THE CONSTITUTIONAL CONSTRAINT, read it first: WAR_REASON_TYPES and PEACE_REASON_TYPES are walker-enforced for TOTALITY and BIJECTION through REASON_MIRRORS - every war reason MUST have a distinct peace mirror, and the tests assert totality, bijection and count parity. So three war reasons means three peace mirrors, and the mirror must be the SAME evidence read the other way, never a filler word.',
+  '',
+  'GAP 1 - PREDATION ON WEAKNESS (the real gap, build this one first and most carefully). The system models fear of the STRONG (fear_of_dominance, which reads BELIEVED strength-share) but has no appetite for the WEAK. A fat, peaceful, poorly-defended neighbour currently generates zero motive, which teaches players that being harmless is safe - the wrong lesson for a world with borders. Build the mirror-image of fear_of_dominance: a reason that scores on a neighbour BELIEVED weak relative to own capability. IT MUST BE EPISTEMIC exactly as fear_of_dominance is - route the foe reading through the SAME belief selector P4 used in demographicsWar.js so a court can covet a neighbour that is not actually weak, and so the self carve-out / omniscient fallback / absence-as-information all come for free. Score from real existing state (foe defense readiness, foe internal instability, own capability - the P4 capability term is the natural own-side read). SUGGESTED NAMES (yours to choose, record the choice vetoably): war `opportunity`, mirror `forbearance` - the same weakness seen and NOT taken, which is a real basis for peace and even patronage.',
+  '',
+  'GAP 2 - FAITH. There is no religious casus belli despite live faith machinery (faithSpreadEnabled, religionDynamicsEnabled). VERIFY THE SUBSTRATE FIRST: find what the faith system actually publishes per settlement (divergence? dominant rite? intensity?) and score from THAT, never from an invented field. Respect the DEITY DOCTRINE (no premade pantheon - every god is local) and FINITE SEMANTICS (closed vocabularies, banded, no free text). It must read 0 and be byte-identical when the faith flags are dark. SUGGESTED: war `sacred_claim`, mirror `common_rite`.',
+  '',
+  'GAP 3 - DYNASTIC CLAIM. legitimacy_hunger covers "my rule is weak, find me a war" but not "I hold a claim on their seat". ⚠️ VERIFY THE SUBSTRATE BEFORE BUILDING: this needs some notion of shared or contested lineage between two settlements powers. Search for it (rulingPower, succession, npcLadderContest, faction lineage). IF NO LINEAGE SUBSTRATE EXISTS, DO NOT INVENT ONE - implement gaps 1 and 2, and REPORT gap 3 as blocked with exactly what would be needed. Building a dynasty system under a war-reason banner is out of scope and I would rather have two honest causes than three with a fabricated one.',
+  '',
+  'FOR EVERY REASON YOU BUILD: a scorer beside its siblings returning {score, receipt} with the receipt in the house human voice (§14.4 legibility of motive - it must say WHY in-world, and P4 set the bar with "The court believes their granaries are full and the court is wrong about it."); wired into the live per-pair reason loop the way the existing eleven are; bounded 0..1; NO new cap or gain constant if an existing one fits (RESOURCE_ENVY_GAIN and the x1.30 war-factor cap already supply the banded appetite); deterministic - reasons are READS not rolls, there is no rng anywhere in that module and there must still be none.',
+  '',
+  'PINS with executed negative controls (revert/red/restore/green, quoted): totality + bijection + count parity still green with the new pairs; each new reason FIRES on a fixture built for it and reads ZERO on its opposite fixture; PREDATION IS EPISTEMIC (a court covets a neighbour it wrongly believes weak - and the receipt says so); each new reason is byte-identical when its own substrate is dark; the peace mirrors score on the same evidence read the other way (not stubs - prove each mirror can actually win); and THE DIVERSITY CHECK the review asked for: over a seed family, assert every reason CAN win at least once, so a reason that never fires reds instead of becoming decoration.',
+  '',
+  'GOLDEN WARNING: warLayerEnabled is TRUE in full_simulation. Check whether any golden or frozen fixture exercises the war layer before you finish - if a new reason would shift one, STOP and report rather than re-recording.',
+  '',
+  COMMON,
+].join('\n'), { label: 'war:three-causes', phase: 'War reasons', schema: SCHEMA, model: 'opus' })
+
+return { results: [p4, war].filter(Boolean) }

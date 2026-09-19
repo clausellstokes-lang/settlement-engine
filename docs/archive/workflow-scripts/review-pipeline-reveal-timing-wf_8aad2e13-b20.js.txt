@@ -1,0 +1,57 @@
+export const meta = {
+  name: 'review-pipeline-reveal-timing',
+  description: 'Adversarially review the elapsed-time rewrite of PipelineReveal',
+  phases: [
+    { title: 'Review', detail: 'three lenses over the diff' },
+    { title: 'Verify', detail: 'refute each finding', model: 'opus' },
+  ],
+}
+
+const FILE = 'src/components/generate/PipelineReveal.jsx'
+const CONTEXT = `The component was rewritten so the reveal animation derives its step index from wall-clock elapsed time instead of counting setInterval ticks, with a visibilitychange listener re-running the tick. Design intent (owner-confirmed): the reveal is deliberately NOT skippable — the tier-scaled wait is a deliberate product decision — but background-tab timer throttling must never stretch it past its rolled window. Foreground behavior must be byte-for-byte identical to the old logic: steps advance every 280ms, WOW_REVEAL_COMPLETED fires once when steps finish, onComplete fires at max(rolledTierWindow, stepsEnd+200ms). The old logic (for parity comparison) is visible via git diff.`
+
+const FINDINGS_SCHEMA = {
+  type: 'object',
+  required: ['findings'],
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['title', 'detail', 'severity'],
+        properties: {
+          title: { type: 'string' },
+          detail: { type: 'string', description: 'concrete failure scenario: inputs/state -> wrong behavior' },
+          severity: { enum: ['high', 'medium', 'low'] },
+        },
+      },
+    },
+  },
+}
+
+const VERDICT_SCHEMA = {
+  type: 'object',
+  required: ['refuted', 'reasoning'],
+  properties: {
+    refuted: { type: 'boolean', description: 'true if the finding does NOT hold up under scrutiny' },
+    reasoning: { type: 'string' },
+  },
+}
+
+const LENSES = [
+  { key: 'parity', prompt: `Working dir: this repo checkout. Run "git diff" and read ${FILE} in full. ${CONTEXT}\n\nLens: FOREGROUND PARITY. Compare old vs new logic tick-by-tick for a normal visible tab. Does the new elapsed-time derivation produce the same activeIndex sequence, the same analytics events (WOW_REVEAL_SHOWN once, WOW_REVEAL_COMPLETED once with same payload shape), and the same onComplete time as the old dwell math, including the 200ms-minimum-dwell case where steps.length*280 exceeds the rolled window? Also check the progress bar math still behaves. Report only real behavioral deviations, not style.` },
+  { key: 'lifecycle', prompt: `Working dir: this repo checkout. Run "git diff" and read ${FILE} in full. ${CONTEXT}\n\nLens: REACT LIFECYCLE & CLEANUP. Check: effect re-runs (deps [steps.length, onComplete, tier]) — does startedAtRef restamping or the guarded targetMsRef roll break anything vs before? Double-invoke under StrictMode? Listener leaks (is the visibilitychange listener always removed on unmount AND on internal completion)? setState after unmount? TDZ or closure hazards with "id" referenced inside tick before its const initializer runs? onComplete called more than once?` },
+  { key: 'throttle', prompt: `Working dir: this repo checkout. Run "git diff" and read ${FILE} in full. ${CONTEXT}\n\nLens: THE THROTTLING SCENARIO ITSELF. Walk through: user generates, tab hidden immediately; Chrome throttles interval to 1/sec, after 5 min to 1/min. Does the reveal now complete within ~1 tick of the rolled window? When the user returns mid-window or after the window, does visibilitychange settle up instantly (right frame or immediate onComplete)? Any case where the reveal still stalls for minutes, completes twice, or skips WOW_REVEAL_COMPLETED entirely? Also: what happens if the tab is hidden when the component mounts?` },
+]
+
+const results = await pipeline(
+  LENSES,
+  l => agent(l.prompt, { label: `review:${l.key}`, phase: 'Review', schema: FINDINGS_SCHEMA }),
+  (review, l) => parallel((review?.findings || []).map(f => () =>
+    agent(`Working dir: this repo checkout. Read ${FILE} in full and run "git diff" for the old logic. ${CONTEXT}\n\nAdversarially try to REFUTE this review finding. Default to refuted=true unless you can demonstrate a concrete failing scenario in the actual code as written.\n\nFinding (${f.severity}): ${f.title}\n${f.detail}`, { label: `verify:${l.key}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' })
+      .then(v => ({ ...f, lens: l.key, verdict: v }))
+  ))
+)
+
+const confirmed = results.flat().filter(Boolean).filter(f => f.verdict && !f.verdict.refuted)
+return { confirmed, totalRaw: results.flat().filter(Boolean).length }

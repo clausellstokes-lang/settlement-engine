@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "UCF1-PHYSICAL-CONTEXT-RUBRIC-1.2.0",
+  "rubricId": "UCF1-PHYSICAL-CONTEXT-RUBRIC",
+  "version": "1.2.0",
+  "classificationPolicy": {
+    "knownRequiresClosedEvidence": true,
+    "freeTextCannotAuthorizeTag": true,
+    "declaredTagsMustEqualResolvedEvidenceTags": true,
+    "unsupportedEvidenceDisposition": "UNKNOWN",
+    "authorityValuesAreFrozenInPrivateRegistry": true
+  },
+  "rules": [
+    {
+      "ruleId": "CTX-WD-P31-COASTAL",
+      "tag": "COASTAL_ESTUARINE",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P31",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P206-COASTAL",
+      "tag": "COASTAL_ESTUARINE",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P206",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P31-RIVER",
+      "tag": "RIVER_CROSSING",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P31",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P206-RIVER",
+      "tag": "RIVER_CROSSING",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P206",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P31-WETLAND",
+      "tag": "WETLAND_ENGINEERED_WATER",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P31",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P206-WETLAND",
+      "tag": "WETLAND_ENGINEERED_WATER",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P206",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P31-UPLAND",
+      "tag": "UPLAND_CONSTRAINED",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P31",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P706-UPLAND",
+      "tag": "UPLAND_CONSTRAINED",
+      "evidenceKind": "AUTHORITY_ITEM",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P706",
+      "qualificationMode": "FROZEN_AUTHORITY_VALUE_REGISTRY"
+    },
+    {
+      "ruleId": "CTX-WD-P2044-UPLAND",
+      "tag": "UPLAND_CONSTRAINED",
+      "evidenceKind": "AUTHORITY_QUANTITY",
+      "sourceId": "WIKIDATA",
+      "propertyId": "P2044",
+      "minimumValue": 250,
+      "unitId": "METRE"
+    }
+  ]
+}

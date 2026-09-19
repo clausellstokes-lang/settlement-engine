@@ -1,0 +1,79 @@
+export const meta = {
+  name: 'cycle2-cold-fmg-source',
+  description: 'Round 3 cycle 2: cold adversarial deep-review of the Azgaar-authored FMG source itself (generation core, IO/untrusted-load, editor UIs, dynamic/telemetry, supply-chain libs) — load-bearing axes',
+  phases: [
+    { title: 'FMG source sweep', detail: 'cold reviewers over the upstream-authored code regions' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const MAP = WT + '/public/map'
+const TIP = 'c8c5baa8'
+const SCRATCH = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/ff8b4b71-3ea5-4d7a-9793-42190018c11f/scratchpad'
+
+const REGIONS = [
+  {
+    key: 'fmg-gen-core',
+    charge: `THE GENERATION CORE + ORCHESTRATION. Review public/map/main.js (~1374 lines), versioning.js, config/, and the built top-level bundle index-*.js — the entry, map-generation orchestration, and global state (svg/pack/grid/cells/seed/regenerateMap). Hunt LOAD-BEARING defects: correctness bugs in generation that would hand our engine wrong geography; anywhere generation reads wall-clock time / Math.random / unseeded entropy that breaks the same-seed-same-world promise our engine depends on; unhandled throws that leave global state half-built; our 4 inline SF patches (search 'settlementforge'/'sf-') — are they correct and upgrade-safe? Do NOT file house-style/idiom findings against Azgaar's own code; DO file anything that is broken, non-deterministic, or dangerous.`,
+  },
+  {
+    key: 'fmg-io-untrusted',
+    charge: `THE UNTRUSTED I/O SURFACE (highest security priority). Review public/map/modules/io/ — load.js, save.js, export.js, cloud.js. FMG loads user-supplied and third-party .map / .json files. Adversarially trace an untrusted file end to end: is its content ever eval()'d, assigned to innerHTML, injected into the DOM, or written to storage and later re-rendered? Can a crafted .map file achieve XSS or code execution — which, on our shared auth/payment origin, is account-takeover-class? Trace the .map → parse → apply path and the export/cloud paths (any external endpoints, tokens, or credentials?). The program claims a prior 'cross-user map snapshot stored-XSS' fix — VERIFY it holds in the current tree, do not assume. Execute grep probes (innerHTML, eval, Function(, insertAdjacentHTML, document.write, dangerouslySet, JSON.parse-then-render).`,
+  },
+  {
+    key: 'fmg-ui-editors-a',
+    charge: `THE EDITOR UIs (part A). Review roughly the first half of public/map/modules/ui/ (46 files total — enumerate, sort, take ~files A–M). These are the map/cell/burg/culture/religion/river/route editors and panels. Hunt LOAD-BEARING defects only: DOM-injection sinks fed by user text (labels, names, notes → innerHTML/insertAdjacentHTML), event handlers that never detach (leaks), editors that mutate pack/cells in a way that could desync the geography our bridge later reads, and any editor path that can corrupt a map into an unloadable/nondeterministic state. Skip pure Azgaar-style nits. Coordinate: you cover files whose basename sorts A–M; a sibling covers N–Z.`,
+  },
+  {
+    key: 'fmg-ui-editors-b',
+    charge: `THE EDITOR UIs (part B). Review roughly the second half of public/map/modules/ui/ (basenames sorting N–Z of the 46 files — enumerate and sort first). Same adversarial charge as your sibling: DOM-injection sinks fed by user-controlled text, handler/listener leaks, editors that can desync or corrupt pack/cells state the bridge reads, nondeterminism introduced by an editor. Also check the tools/overview/style panels here. LOAD-BEARING defects only — not Azgaar house style.`,
+  },
+  {
+    key: 'fmg-dynamic-telemetry',
+    charge: `THE DYNAMIC / SELF-UPDATE / TELEMETRY SURFACE (security priority). Review public/map/modules/dynamic/ — auto-update.js, installation.js, supporters.js, export-json.js, heightmap-selection.js, hierarchy-tree.js, editors/, overview/. Adversarially answer: does the fork PHONE HOME or SELF-UPDATE at runtime (auto-update.js — does it fetch and execute remote code? that would be a live RCE vector on our origin)? Does it register a service worker (our patch claims to disable SW ~line 16 of main.js — VERIFY it's actually disabled everywhere, including here)? Does anything load external scripts, beacon analytics, or contact third-party endpoints (supporters.js, installation.js)? Also inspect libs/umami.js usage — is Azgaar's telemetry active on our origin, sending anything anywhere? Every external network touch from our origin is a finding. Execute grep probes (fetch, XMLHttpRequest, importScripts, navigator.serviceWorker, new Worker, script.src=, .register(, umami, track().`,
+  },
+  {
+    key: 'fmg-supply-chain',
+    charge: `THE SUPPLY CHAIN (libs/). Do NOT line-review minified blobs — audit them as a supply chain. Read public/map/libs/VENDOR-MANIFEST.json and scripts/validate-map-fork.mjs (find it in ${WT}/scripts): does the integrity gate actually cover every shipped lib, and does it run in CI (check ciCheckParity)? Then assess CURRENCY + CVE exposure of the pinned libraries (jQuery 3.1.1 — the manifest already flags CVE-2019-11358 / CVE-2020-11022 / CVE-2020-11023 as knowingly carried; verify jQuery is still actually loaded/needed, and whether the DOM-XSS CVEs are reachable given how the fork uses it; audit tinymce, dropbox-sdk, three, d3 versions against known advisories at your knowledge cutoff). umami.js: what is it and does it beacon? Findings = every reachable CVE, every unpinned/ungated lib, every lib we ship but don't use (droppable attack surface). Frame the jQuery upgrade/drop as a concrete recommendation. Execute: grep the fork for '$('/jQuery/tinymce/Dropbox/umami usage to prove reachability.`,
+  },
+]
+
+const FINDING = {
+  type: 'object', additionalProperties: false,
+  required: ['title', 'severity', 'claim', 'scenario', 'location', 'evidence'],
+  properties: {
+    title: { type: 'string', maxLength: 90 },
+    severity: { enum: ['must-fix', 'should-fix', 'polish'] },
+    claim: { type: 'string', maxLength: 350 },
+    scenario: { type: 'string', maxLength: 350 },
+    location: { type: 'string', maxLength: 160 },
+    evidence: { enum: ['executed', 'inspected'] },
+  },
+}
+
+const SCHEMA = {
+  type: 'object', additionalProperties: false,
+  required: ['region', 'health', 'findings', 'evidence_note'],
+  properties: {
+    region: { type: 'string', maxLength: 40 },
+    health: { enum: ['sound', 'sound-with-findings', 'concerning'] },
+    findings: { type: 'array', maxItems: 14, items: FINDING },
+    evidence_note: { type: 'string', maxLength: 400 },
+  },
+}
+
+const COLD = `YOU ARE A COLD ADVERSARIAL REVIEWER — no prior program context, and you must not acquire any. FORBIDDEN: /Users/cstokes/Desktop/settlement-engine/docs/ outside ${WT}; /Users/cstokes/.claude/projects/ (program memory); scratchpad files you did not create. Evidence base = the worktree at ${WT} (verify branch claude/composite-r4 tip ${TIP}; READ-ONLY — never edit, never touch git, never commit) plus probes under ${SCRATCH}/cold-fsrc-<your-region> (create it). YOUR SUBJECT is public/map/ — the Azgaar Fantasy Map Generator source, a MODIFIED MIT-licensed vendored fork that SHIPS TO THE SAME ORIGIN as the app's auth and payment surfaces (so a DOM-XSS or remote-code path in it is account-takeover-class, not cosmetic). SCOPING LAW (owner-set): review for LOAD-BEARING quality only — correctness, SECURITY, determinism, dead/divergent code, upgrade-safety. DO NOT file house-style, house-voice, or house-design-system findings against third-party idioms; that would poison the upstream upgrade path. NOTE: our own modifications + the sf-bridge + the app-side integration are covered by a SEPARATE fleet — focus on the Azgaar-authored code itself. Mark evidence:'executed' only when you ran the proof; executed evidence outranks inspection.`
+
+phase('FMG source sweep')
+const results = await parallel(REGIONS.map((r) => () => agent(
+  `${COLD}
+
+YOUR CHARGE — ${r.key}: ${r.charge}
+
+Read the region's real files IN FULL (enumerate them yourself; the charge names pointers, not a complete inventory). Report at most 14 findings, most material first, each with a concrete failure/exploit scenario and a file:line-style location; health = your verdict for the region; evidence_note = what you executed vs inspected.`,
+  { label: r.key, phase: 'FMG source sweep', schema: SCHEMA, model: 'opus' }
+)))
+
+const ok = results.filter(Boolean)
+log(`FMG source sweep returned ${ok.length}/${REGIONS.length} regions`)
+return { fmgSource: ok }

@@ -1,0 +1,63 @@
+export const meta = {
+  name: 'receipt-pool-corpus',
+  description: 'Author + verify the seeded receipt-pool content annexes for all 8 volumes under the voice contract',
+  phases: [
+    { title: 'Author', detail: '8 writers, one per volume — kind census + 4-6 variants each' },
+    { title: 'Verify', detail: '8 conformance fixers, same volume each' },
+  ],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const VOICE = `THE VOICE CONTRACT (binding; every variant is measured against it):
+REGISTER — the Bound-Book chronicle voice, as the corpus's own exemplars speak it:
+"Pilgrims on the road to Greyfen — the feast of the Lady fills every inn, and the tolls ring like bells." /
+"A legate of the Deep Forge arrived at court, and did not say all of why." /
+"House Verren is broken; its factors scattered to the quays." /
+"There was gold in the river, men said. There was war in the spring." /
+"They left in the famine year; their grandsons' silver raised the walls." /
+"He cornered the grain in the hungry season, and bought a mitre with the profit." /
+"no legate came; the Forge keeps its counsel" /
+"The road to the shrine ran red, and the faithful called it war."
+Short declaratives; the second clause lands the meaning or the quiet irony; concrete period nouns (inns, tolls, quays, pews, granaries, ledgers); semicolons and em-dashes; understatement over spectacle. FORBIDDEN: exclamation marks, modern idiom, fantasy-kitsch archaisms (mayhap/forsooth/thee), purple stacking of adjectives.
+HARD CONSTRAINTS (each is estate law; the verifier reds violations):
+(1) NO DIGITS anywhere — counts speak only in band words (a handful, a score, many, most) per QUANTITY_BANDS / finite semantics.
+(2) SLOTS for every proper noun and cause: {settlement}, {counterpart}, {npc}, {faction}, {house}, {temple}, {band}, {reason}, {good}, {route} — the address law needs settlements BY NAME and the recorded reason; never bake a name into a template.
+(3) HEADLINE HONESTY (R-28): the verb must be entailable by the receipt's facts — never assert more than the state records.
+(4) BELIEF ATTRIBUTION: unconfirmed or belief-side content carries its attribution ("men said", "the word is", "it is said") — never stated as engine truth.
+(5) LAW ONE: never confirm a god acted (believers read, courts judge — "the temple called it wrath", never "the god struck"); never resolve or state a named person's death (the spy is burned, never hanged; the exile fades, never dies).
+(6) COVERT DISCIPLINE: write the PUBLIC variant of every kind; where a kind is DM-only/covert, prefix the pool block with "AUDIENCE: dm-only".
+(7) VARIANT DISTINCTNESS: 4-6 variants per kind, each a DIFFERENT STRUCTURE AND ANGLE — never a slot-swap of another. Use the angle palette: the event plain · the street's view · the ledger's/institution's view · the consequence forward · the understatement/irony. Two variants differing only in slot fills count as ONE (the family rule).
+(8) LENGTH: one to two clauses; a receipt is a chronicle line, not a paragraph.`
+
+const PRE = `VERIFY-FIRST: legitimate owner-ordered CONTENT AUTHORING for the SettlementForge design corpus (the SP-6 content-depth floor, DESIGN_FP_SPINE.md — every phrased kind needs >=4 seeded variants; the volumes carry only exemplars). Tree: ${MF} (shared; edit ONLY your assigned annex file; NEVER edit the design volumes or src/; no git commands).`
+
+const WSCHEMA = { type:'object', required:['volume','kindCount','samples'], properties:{
+  volume:{type:'string'}, kindCount:{type:'number'},
+  samples:{type:'array',items:{type:'string'}},
+  notes:{type:'string'}}}
+const VSCHEMA = { type:'object', required:['volume','kindsChecked','violationsFixed','belowFloor','verdict'], properties:{
+  volume:{type:'string'}, kindsChecked:{type:'number'}, violationsFixed:{type:'number'},
+  belowFloor:{type:'array',items:{type:'string'}}, verdict:{type:'string'}}}
+
+const VOLS = [
+  ['war','DESIGN_WAR_RULINGS_ARCHITECTURE.md','the WR waves: termination-read receipts, cause-dissolution, disposition crossings, lineage claim, home-front, refusal costs, coalition join/spend/exit/settle, envoy errand states (travelling/intercepted/parlaying/held/lost/home), ransom shapes, conquest/razing/license/atonement, sovereignty sale; §8 Herald contract'],
+  ['trade','DESIGN_FP_TRADE.md','TR-1 casus commercii pairs, TR-2 house acts + rise/fall + dormancy/lineage receipts, TR-3 believed-market beats, TR-4 grain road, TR-5 pacts, TR-6 corner arcs + counterforces, TR-7 ventures, TR-8 factor errands; endings {fortune,ruin,monopoly,collapse,severance,cornered}; §8 contract'],
+  ['faith','DESIGN_FP_FAITH.md','WF-1 unseating causes {displaced,discredited,abandoned,imposed,suppressed}, WF-2 pilgrim season bands + legates, WF-3 stance consequences, WF-4 readings {wrath,test,abandonment,vindication,portent} + open/fulfilled/failed, WF-5 schism/underground, WF-6 term beats, WF-7 tithe {endowed,plundered}, WF-8 the 3x mint list (entry/eviction/suppression/resurgence/standing/legitimacy/piety crossings); endings mix of eight; §8 contract'],
+  ['populations','DESIGN_FP_POPULATIONS.md','POP-1 rush/bust/letters-home/turned_back(refused_at_the_wall)/homecoming, POP-2 commons rungs + refusal + answered petition, POP-3 departure memory {mourned,sent_forth,cast_out,scattered} + ties kept/lapsed, POP-4 plague arc (outbreak/burials/held/recovered), POP-5 road drama {harried,tolled,turned_back,sheltered,delayed,split} + permits, POP-6 arrival/recovery/remembrance/dwindled/exodus; seventeen-token mix; §8 contract'],
+  ['information','DESIGN_FP_INFORMATION.md','IN-0 plant {took,died_quiet,exposed,backfired} + intercept {read,refused,caught} + disclosure feed + HIDE toll, IN-2 lure {sprung,resisted,exposed_first,backfired}, IN-3 sweep {catch,clean_miss,witch_hunt} + vet + hide-as-answer, IN-4 courier {delivered,intercepted,lost,turned} + race {person,story,together}, IN-5 hums + arc phases + court_sat_still; the anonymity law is absolute; §8 contract'],
+  ['grammar','DESIGN_FP_GRAMMAR.md','GR-0 lapse/hollowed beats, GR-1 oath stamps ("the seat swore"), GR-2 formation {signed,refused,no_overlap,expired_unanswered} + NAP + war-overtaken, GR-4 succession question {honored + disavowed_by_succession + reaffirmed}, GR-5 {renewed,renegotiated,converted}, GR-6 mediation {brokered_back,brokered_terms,declined_to_broker,brokerage_failed}; pact endings vocabulary; §8 contract'],
+  ['interior','DESIGN_FP_INTERIOR.md','INT-1 books-standing receipts, INT-2 counsel {heeded,overridden}, INT-3 decision-grievance family + emigre {returned,faded,reconciled}, INT-4 attributed pressure + {paid_and_fell,paid_and_stood,paid_and_forgiven}, INT-5 memory beats, INT-6 burial family {buried_and_blessed,buried_and_borne,buried_and_answered,dug_up,lapsed_with_the_pair}, INT-7 legitimacy crossings; §8 contract'],
+  ['couplings','DESIGN_FP_COUPLINGS.md','CW-1 braid headline shapes, CW-2 walk-surface line grammar, the six signature stories Herald lines, cross-layer cascade beats the pairs name (CPL-1..21 receipt exemplars); note: only kinds this volume itself mints or exemplifies — do NOT duplicate kinds owned by other volumes, cross-reference them in notes instead'],
+]
+
+phase('Author')
+const results = await pipeline(
+  VOLS,
+  ([key, file, scope]) => agent(
+    `${PRE}\n${VOICE}\nASSIGNMENT (writer): read ${MF}/docs/${file} IN FULL. Build the KIND CENSUS for your volume: every phrased kind — endings tokens, receipt lines, news kinds, arc transitions, crossing beats — as the scope hints: ${scope}. Then AUTHOR the annex file ${MF}/docs/content/RECEIPT_POOLS_${key.toUpperCase()}.md (create docs/content/ if needed): a header noting the slot convention and the SP-6 floor, then one block per kind:\n### <kindId> (<wave>) — <surface/desk> — significance: <class>\nSLOTS: {..}\nAUDIENCE: public | dm-only\n1. <variant>\n2. <variant>\n(4-6 variants, angle-distinct per the contract; the volume's own exemplar sentence, where one exists, is variant 1 verbatim). Return {volume, kindCount, samples: 5 representative variants, notes: anything ambiguous you resolved}.`,
+    {label:`write:${key}`, phase:'Author', model:'opus', schema:WSCHEMA}),
+  (w, [key, file]) => agent(
+    `${PRE}\n${VOICE}\nASSIGNMENT (verifier — you are NOT the author; be adversarial): read ${MF}/docs/content/RECEIPT_POOLS_${key.toUpperCase()}.md AND ${MF}/docs/${file}. Check EVERY variant against the eight hard constraints; check every kind has >=4 angle-distinct variants (slot-swaps count as one — collapse them and author replacements in the same voice); check the census against the volume (missed phrased kinds get their block ADDED; kinds the volume does not spec get REMOVED). FIX violations in place in the annex file. Return {volume, kindsChecked, violationsFixed, belowFloor: kind ids you had to expand, verdict: one sentence}.`,
+    {label:`verify:${key}`, phase:'Verify', model:'opus', schema:VSCHEMA})
+)
+return { volumes: results.filter(Boolean) }

@@ -1,0 +1,32 @@
+export const meta = {
+  name: 'guidance-layer-design-recon',
+  description: 'Read-only census of every instructional fragment + the design-system substrate for the guidance layer',
+  phases: [{ title: 'Recon', detail: '3 read-only surveys: fragment census, design system + voice, teaching organs + analytics hooks' }],
+}
+
+const SCHEMA = {
+  type: 'object',
+  required: ['summary', 'facts', 'hazards', 'reuse', 'openQuestions'],
+  properties: {
+    summary: { type: 'string' },
+    facts: { type: 'array', items: { type: 'object', required: ['point', 'path'], properties: { point: { type: 'string' }, path: { type: 'string' } } } },
+    hazards: { type: 'array', items: { type: 'string' } },
+    reuse: { type: 'array', items: { type: 'string' } },
+    openQuestions: { type: 'array', items: { type: 'string' } },
+  },
+}
+
+const COMMON = `You are a READ-ONLY recon agent in /Users/cstokes/Desktop/settlement-engine (branch review-fixes-2026-07-08). Do NOT run tests/builds, write nothing, no git mutations. A parallel implementer (E1d) has unstaged work — ignore it. Read whole files. CONTEXT: we are DESIGNING (not building) THE GUIDANCE LAYER — consolidating ALL instructional/onboarding UI into one registry + hard concurrency budget + walker, triggered by user FIRSTS, voiced as scripted "Surveyor's notes" marginalia, under THE IMMERSION LAW: every hint must render in the product's own theme (never generic tooltip chrome), sit in margins/rest-points (never floating/dimming/mid-action), and pass the dissociation test ("could this be mistaken for the world's own furniture?"). Return the structured object: summary (<300 words), facts (exact components/functions + paths), hazards, reuse, openQuestions.`
+
+const BRIEFS = [
+  { key: 'fragment-census', prompt: `${COMMON}\n\nYOUR SLICE — THE COMPLETE INSTRUCTIONAL-FRAGMENT CENSUS (the consolidation denominator). Find EVERY place the UI currently instructs, hints, onboards, or explains-how-to: search src/components for tooltips, hint/tip/help/guide/howto/onboard/intro/welcome/whats-next/pill/badge-with-copy patterns; the HowToUse page (full structure); the About page; CompendiumPanel (structure + deep-link mechanics); ActionRail (the kept 'next best action' primitive — its consumers); PendingIntentions' explanatory copy; empty states across major surfaces (library empty, no-realm, docket empty, no-rumors, gallery empty — what each says today); the generate wizard's per-option hint prose; DesktopOnlyGate teaser copy; any first-run/localStorage-flagged UI (search localStorage keys for seen/dismissed/intro flags); upsell/UpsellOrEmpty copy sites (they teach tier boundaries); StaleNarrativeModal and similar explanatory modals. For each: what it teaches, its visual register, its trigger, its dismissal/persistence behavior. This census IS the migration inventory — completeness matters more than depth.` },
+  { key: 'design-system-voice', prompt: `${COMMON}\n\nYOUR SLICE — THE DESIGN SYSTEM + VOICE SUBSTRATE the immersion law binds to. Read src/components/theme.js in full (tokens: INK/GOLD/BORDER/FS, serif_/sans splits, swatch, spacing, motion if any); the primitives directory (Segmented, Card, Pill, Disclosure, StateBadge, Field — the chrome vocabulary); how the dossier renders prose vs chrome (ProseParagraph, the serif/sans register split in practice); the period-voice precedents (newsVoice categories/buckets structure, wizardNews voice, settlementRumors whatPhrase, chronicle voice) — the AUTHORED-VOICE idioms a scripted Surveyor's-notes persona would follow (bucket structure, register walkers, totality tests); any existing margin-note/annotation visual idiom in the dossier; the IconsContext posture; mobile primitives. Report: the exact token/primitive vocabulary a guidance whisper must be built from, and the voice-authoring idiom (how F3a-style voice categories are structured + walker-tested) the notes should imitate.` },
+  { key: 'teaching-organs-analytics', prompt: `${COMMON}\n\nYOUR SLICE — THE EXISTING TEACHING ORGANS + the measurement/persistence seams. Map the surfaces that already teach and that the guidance layer should route THROUGH rather than duplicate: grayed-with-reason (affordanceManifest predicates' reasons/unlocks rendering in ComposerNavigator), vetoProse, receipts/InstitutionCard honesty gates, the pressures rail, the While-You-Were-Away digest (could carry returner notes?), empty states as slots. Then the seams: (1) PERSISTENCE for seen-once/firsts — how the store persists small UI prefs (the persist partialize: config + toggle maps — what shape would a guidance-flags map take to ride it? is there a dismissed-flags precedent?); (2) ANALYTICS — the track/EVENTS registry + the enrich-existing-props doctrine + the 20B eager wall: which existing events could carry hint shown/dismissed/acted props, or does a guidance event exist; (3) the FIRSTS ledger — what user-progression facts are already derivable (first save, first canonize, first advance — from existing state) vs need new flags; (4) eager-bytes: which of these surfaces are eager vs lazy (the guidance registry must be a lazy leaf; empty states are inside lazy chunks?). Report exact seams + shapes.` },
+]
+
+phase('Recon')
+const results = await parallel(BRIEFS.map(b => () =>
+  agent(b.prompt, { label: `recon:${b.key}`, phase: 'Recon', schema: SCHEMA })
+    .then(r => ({ key: b.key, ...r }))
+))
+return { recon: results.filter(Boolean), missing: BRIEFS.filter((b,i)=>!results[i]).map(b=>b.key) }

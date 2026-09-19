@@ -1,0 +1,39 @@
+export const meta = {
+  name: 'build-cycle-12-grammar-closure',
+  description: 'Herald grammar closure: unreceipted-hop guard, ratchet cleanup, vocabulary edits · PT residuals',
+  phases: [{ title: 'Build', detail: '2 repair lanes, implement + verify each' }],
+}
+const MF = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const P10 = `THE §10 PROTOCOL BINDS: ${MF} on claude/composite-r4 only (cd + rev-parse first, every command block); pathspec commits of ONLY your lane files; no stash; focused vitest + gate-tail (ps aux | grep vitest first); strict: NEW files zero-ceiling, touched files never worsen (R-BLD-9); STOP-and-report; trailer "Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>". DARK, nothing pushed. CONCURRENCY: the war lane is live on src/domain/worldPulse/* (read-only for you); queue docs get concurrent edits (re-read, carve hunks).`
+const S = { type:'object', required:['lane','commits','gates','stopReports','notes'], properties:{lane:{type:'string'},commits:{type:'array',items:{type:'string'}},gates:{type:'array',items:{type:'string'}},stopReports:{type:'array',items:{type:'string'}},notes:{type:'string'}}}
+const V = { type:'object', required:['lane','verdict','findings'], properties:{lane:{type:'string'},verdict:{type:'string'},findings:{type:'array',items:{type:'string'}}}}
+phase('Build')
+const lanes = await parallel([
+  () => agent(`VERIFY-FIRST: chair-ruled implementation. ${P10}
+LANE HR — THE HERALD GRAMMAR CLOSURE (cycle-11 verifier findings, all chair-ruled):
+(1) HIGH, THE LIGHTING BLOCKER — THE UNRECEIPTED HOP: causeWalk.js emits UNRECEIPTED_HOP='an earlier cause' (a NOUN PHRASE, redacted:false) whenever provenance names a parent no pulseHistory record resolves (root sourceEventId, or aged past MAX_HISTORY=80); the composer feeds it into clause slots ("— in the wake of the day an earlier cause"). RULED: the composer treats an UNRECEIPTED hop as TERMINAL exactly as it treats REDACTED — drop the causal clause, never re-label; the walk's terminal seed says the honest thing ("the record does not reach further back" family — draw from the terminal pools). Guard by the EXPORTED constant, never the literal. SAME CLASS, SAME COMMIT: chronicleGraph's 'World pulse outcome'/'World pulse impact' noun-phrase fallbacks get the same guard wherever they can reach a clause slot. Pins: the verifier's shipped-path fixture (root + aged-out parent) composes grammatically at every tier; mutant un-guarding → red.
+(2) MEDIUM — THE EPISTEMIC RATCHET CLEANUP the lane owed: tests/domain/heraldCausalVoice.test.js carries +6 un-anchored negative assertions (lines ~396,486,489,516,517,533) and +4 bare seed loops; tests/ui/causalityPopup.test.jsx carries +5 un-anchored negatives (~192,193,198,225,226). Anchor every negative (tests/helpers/anchoredNegatives.js or on-line // anchored: with a TRUE structural reason) and register/convert the seed loops per seedLoopTotality's own instruction; both walkers must show the two files CLEAN, and run both walkers before/after quoting the counts.
+(3) VOCABULARY EDITS (ruled): refused::N restricts to the AT_ISSUE form (the FACT form reads as denial — a shade the gate edge does not carry; law-1's own prohibition); breached::N and breached-fwd forms recast so a past event is never "the promise that <event>" (the promise is the obligation, the event its breach). Update molds + the conformance fixtures; quote composed lines pre/post.
+(4) planted::F gains the one-line assertion binding the mold to its free-relative connective shape (the verifier's exact gap: a second F line would compose "believing was said when...").
+(5) RULED, DIRECTION SAFETY: poolForLink in the fwd direction restricts type-warranted pools (exposed/refused/breached and kin) to the direction-neutral families (followed/caused) — the fwd corpus lines presuppose the child and compose false claims ("and what came out was the truth that <child>"); the back direction keeps the full warrant. Record in the module + spine that fwd re-opens per pool when the corpus authors direction-safe fwd lines. Pin: a fwd draw over an exposure hop composes followed/caused form only.
+(6) THE SPINE RECORD: §6's "one permanent drop" corrected to TWO (planted-fwd also drops — planted::N is a declared hole); one line.
+(7) CONTROL BYTES: src/domain/display/heraldIndex.js:224 carries a raw 0x01 and :287 a raw 0x00 — the authored-NUL class again; cure with escapes byte-identical at runtime (the b8b6406c pattern), controlBytes green.
+One pathspec commit per coherent step. Flag stays DARK. Return {lane:'HR closure', commits, gates, stopReports, notes}.`,
+    {label:'laneHR:grammar-closure', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run the cycle-11 verifier's method: compose through the SHIPPED popup path (buildCauseWalk → heraldEntryProse) with a root-parent AND an aged-out-parent fixture — every tier grammatical, quote the lines; mutant un-guarding UNRECEIPTED_HOP → red. Both epistemic walkers run by YOU: the two test files at ZERO un-anchored/bare rows, and every added anchor's stated reason TRUE (spot-read all of them — a false anchor is worse than none). Vocabulary: compose refused/breached lines both directions pre/post and READ them; the fwd restriction pin proven with an exposure-hop fixture. controlBytes green + runtime byte-identity of the escaped strings (hash the emitted values pre/post). Strict + pathspec vs the war lane. Return {lane:'HR verify', verdict, findings}.`,
+      {label:'laneHR:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+  () => agent(`VERIFY-FIRST: chair-ruled repair implementation. ${P10}
+LANE PR — THE DOSSIER RESIDUALS (cycle-11 PT verifier, all confirmed by mutants):
+(R1) the reachability of the kernel's bands becomes MACHINE-CHECKED: a pin executing deriveProsperityLabel's real ladder asserting the emitted label set covers every band the kernel's pools key on (the verifier's LABELS-ladder mutant — deleting Struggling — must red it).
+(R2) the freshness consumer census needle fix: it matches only import specifiers containing 'display/economyFreshness.js', so any importer INSIDE src/domain/display/** is invisible ('../economyFreshness.js'); widen the needle to resolve relative specifiers (the verifier's __probe mutant must red).
+(R3) the dmFieldProjection byte-identity pin gains a whitespace/normalization-sensitive fixture (leading+trailing spaces, internal double space, an NFKC-divergent char) so trim/collapse/normalize mutants red — its docstring already forbids exactly these.
+(R4) the JSDoc object-literal guard: fix the comment/guard mismatch ((?!:) only excludes double-colon) — either make the guard skip JSDoc comment lines or correct the comment to the truth; the verifier's __mutantJsdoc fixture becomes the pin either way.
+(R5) one-line receipt correction in the queue/ledger row: stateProseKernel delta is 13 → 18 (+5), not 12 → 18.
+DO NOT touch Herald modules (lane HR owns them), worldPulse, or war files. One pathspec commit. Return {lane:'PR residuals', commits, gates, stopReports, notes}.`,
+    {label:'lanePR:dossier-residuals', phase:'Build', model:'opus', effort:'high', schema:S})
+    .then(r => agent(`VERIFY-FIRST: adversarial verifier. ${P10}
+Report: ${JSON.stringify(r)}. Re-run all four of the cycle-11 verifier's exact mutants (LABELS ladder, ../economyFreshness.js __probe, trim/collapse/NFKC on projectBesideDmField, __mutantJsdoc) — each must now red its pin; restore byte-identical each time. The receipt correction present and accurate. Full walker suite for the touched lint files green. Pathspec-clean. Return {lane:'PR verify', verdict, findings}.`,
+      {label:'lanePR:verify', phase:'Build', model:'opus', effort:'high', schema:V})),
+])
+return { lanes: lanes.filter(Boolean) }

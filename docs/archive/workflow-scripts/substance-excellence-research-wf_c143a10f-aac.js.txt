@@ -1,0 +1,29 @@
+export const meta = {
+  name: 'substance-excellence-research',
+  description: 'Fifth research sweep: the external SUBSTANCE benchmark — what makes simulated worlds deep — feeding ROUND 3 grading',
+  phases: [{ title: 'Research' }, { title: 'Critique' }],
+}
+const FINDINGS = {
+  type: 'object',
+  properties: {
+    findings: { type: 'array', items: { type: 'object', properties: {
+      source: { type: 'string' }, url: { type: 'string' },
+      principle: { type: 'string' }, emulate: { type: 'string' }, avoid: { type: 'string' },
+    }, required: ['source', 'principle', 'emulate'] } },
+    firstPrinciples: { type: 'array', items: { type: 'string' } },
+    synthesis: { type: 'string' },
+  },
+  required: ['findings', 'firstPrinciples', 'synthesis'],
+}
+phase('Research')
+const ANGLES = [
+  { key: 'emergent-narrative-canon', prompt: `Research the emergent-narrative simulation canon — what makes Dwarf Fortress, RimWorld, Crusader Kings III, Caves of Qud, and Wildermyth produce STORIES people retell: the design principles their creators have articulated (Tarn Adams interviews/talks, Tynan Sylvester's "RimWorld is a story generator" + his book Designing Games, CK3 design diaries on character-driven drama, the "anecdote factory" concept), academic/critical analysis of emergent narrative (why DF legends feel historical, why RimWorld colonists feel mourned), and the recognized failure modes (simulation depth nobody perceives, stat-soup without drama, the "ant farm" problem). FIRST PRINCIPLES: what specifically converts systemic depth into FELT narrative? The client: a deterministic D&D settlement/campaign simulator with causal receipts, provenance, factions, faiths, wars, economies. Return named principles + emulate/avoid for ROUND 3 graders to benchmark against.` },
+  { key: 'ttrpg-table-substance', prompt: `Research what makes worldbuilding substance ACTUALLY USEFUL at a TTRPG table — the GM-craft canon: the acclaimed GM guides (Sly Flourish's Return of the Lazy Dungeon Master, The Alexandrian's node-based design + "Don't Prep Plots", Matt Colville's Running the Game themes), what published-setting depth GMs praise vs never use (the "lonely lore" problem — deep books nobody opens at the table), fronts/threats from Dungeon World, faction clocks from Blades in the Dark, and community discussion of what settlement/NPC detail creates play vs shelf-weight. FIRST PRINCIPLES: which kinds of world-substance generate SESSIONS (hooks, tensions, secrets, consequences) vs which merely fill pages? The client generates settlement dossiers (economy, factions, NPCs w/ goals+secrets, history, stress) for live play. Return principles + emulate/avoid — the benchmark for whether the simulator's substance is TABLE-substance.` },
+  { key: 'living-world-history', prompt: `Research how the best world-simulators handle HISTORY AND TIME so the past stays meaningful: Dwarf Fortress legends mode's generated history (what makes procedurally-generated history readable and mythic), Crusader Kings' dynastic memory, games/systems where world-state visibly remembers player action years later (consequence persistence), the criticism literature on "history soup" (generated chronicles nobody reads) and what fixes it (protagonism, causality chains, stakes), and academic work on procedural history generation. FIRST PRINCIPLES: what makes generated history FEEL like history rather than a log file? The client has: a chronicle, provenance receipts (recorded causality), urban fabric (the map remembers), reframe (meaning drifts), lifespan-scaled memory. Return principles + emulate/avoid — the benchmark for whether the simulated past creates present meaning.` },
+  { key: 'depth-perception-gap', prompt: `Research the DEPTH-PERCEPTION GAP in simulation games — systems players never notice and the craft of making simulation legible: the documented cases (Dwarf Fortress's famously invisible systems, Ultima Ratio Regum's ambitions, Shadow of Mordor's Nemesis system as the SOLVED case — why Nemesis made systemic depth universally felt: named recurring adversaries, visible consequence, personal stakes), designer writing on surfacing simulation (juice vs information, the "show the roll" debate), and UX research on players' mental models of systemic games. FIRST PRINCIPLES: what makes a player CORRECTLY BELIEVE the world is deep (vs deeper than they think, vs shallower)? The client's known risk (two review rounds graded product legibility BELOW code depth): engine depth outrunning perceived depth. Return principles + emulate/avoid — the benchmark for the legibility half of substance.` },
+]
+const results = await parallel(ANGLES.map(a => () =>
+  agent(a.prompt + ' Use WebSearch and WebFetch for real, current sources. Cite URLs.', { label: `research:${a.key}`, phase: 'Research', schema: FINDINGS })))
+phase('Critique')
+const critic = await agent(`You are the completeness critic for the SUBSTANCE EXCELLENCE research sweep — the external benchmark for a deterministic D&D settlement/campaign simulator (causal receipts, provenance, factions/faiths/wars/economies, chronicle, map-memory) whose ROUND 3 review will grade substance against it. The four syntheses + first principles: ${JSON.stringify(results.filter(Boolean).map(r => ({s: r.synthesis, fp: r.firstPrinciples})))}. Name: (1) what is MISSING (esp. anything about DETERMINISM as a substance feature — same-seed reproducibility as story value — and multiplayer-of-one/DM-as-audience dynamics), (2) the FIVE strongest cross-angle principles ROUND 3's substance graders should hold the product to, (3) the one substance failure mode this specific product is most at risk of, and its test. Be concrete.`, { label: 'completeness-critic', phase: 'Critique' })
+return { angles: ANGLES.map((a, i) => ({ key: a.key, result: results[i] })), critic }

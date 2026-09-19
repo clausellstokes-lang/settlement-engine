@@ -1,0 +1,105 @@
+export const meta = {
+  name: 'process-changes-gate-and-writer-walker',
+  description: 'The two process changes: a shrink-only ratchet that restores the dark tail of npm run check, and the reader-without-a-writer walker proven against the three known defects.',
+  phases: [
+    { title: 'Gate', detail: 'the full-typecheck ratchet — restore the gate tail' },
+    { title: 'Walker', detail: 'reader-without-a-writer, proven on TCD-1/2/3' },
+    { title: 'Verify', detail: 'three adversarial lenses, read-only' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). Hard-gate every state-mutating compound with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ **THE MUTEX WAIT AND THE RUN ARE ONE \`&&\` CHAIN** — \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\`. Issued as two statements a wait TIMEOUT lets vitest start anyway. ⛔ **NEVER READ AN EXIT CODE THROUGH A PIPE** — that is what \`gate-tail.sh\` is for. ⛔ Never hand-spell the ps-grep.
+⚠ **EVERY FIGURE IS TAKEN IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA** (\`git archive -o f.tar <sha>\` + \`tar -xf\`, never through a pipe; \`git ls-tree -r <sha> | wc -l\` vs \`find -type f | wc -l\`; \`rm -f\` the node_modules SYMLINK before removing a tree; ONE archive at a time, disk is at 10 GiB).
+
+⛔⛔ **A SECOND BUILD LANE IS LIVE**: the typecheck defect burn, repairing TCD-1/2/3 in \`src/domain/rulingPower.js\`, \`src/domain/worldPulse/warSeatBooks.js\`, \`applyWorldPulse.js\`, \`envoyNegotiationPictureBuilder.js\`, \`lineageMemberBirth.js\`, \`lineageClaim.js\` and their test pins. **DO NOT EDIT ANY OF THOSE FILES.** Never stage, clean or stash a file you did not author. \`git add\` EXPLICIT PATHSPECS ONLY; before every commit verify \`git diff --cached --name-only\` against your EXPECTED set BY NAME AND COUNT — \`git add\` aborts ATOMICALLY on one bad pathspec, so a commit can claim three parts and land one.
+
+⚠ **RECEIPT LANGUAGE IS PART OF THE WORK.** Never call an edit "comment-only" unless comment-stripped text is byte-identical — verify, don't assert. Never report a net: report the SET DIFF, N removed / M introduced, and name the M.
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Gate')
+const gate = await agent(LAWS + `
+
+YOU ARE THE GATE RESTORATION LANE. This is the highest-leverage repair available in the program.
+
+**THE PROBLEM, MEASURED.** \`npm run check\` is an \`&&\` chain of 16 steps and \`npm run typecheck\` (\`tsc --noEmit -p tsconfig.full.json\`) is step 9. It went red on **2026-08-02 18:42 at commit \`7796954e\`** with 14 errors and stayed red; ~368 commits landed behind it and the count reached 351 (now 188 after a sibling lane's idiom sweep at \`e0c8646e\`). ⭐ **THE CONSEQUENCE IS BIGGER THAN THE TYPECHECK: because it is an \`&&\` chain, \`lint\`, \`test\`, \`build\` and \`verify:dist\` HAVE NOT RUN AS PART OF \`npm run check\` SINCE AUGUST 2.** The gate's whole tail is dark. **VERIFY THIS CLAIM YOURSELF before building on it** — read \`package.json\` and confirm the chain and the position.
+
+**THE CURE — EXTEND EXISTING PRIOR ART, DO NOT INVENT A SECOND ONE.** \`scripts/check-domain-strict.mjs\` (159 lines, with \`scripts/.domain-strict-baseline.json\`) is already exactly this pattern for the domain-strict variant: a per-file error-count ceiling that only ratchets down, wired into \`check\` as \`npm run typecheck:domain:strict\`. **READ IT IN FULL AND MIRROR IT** for \`tsconfig.full.json\`. It has features you MUST carry over, each of which exists because it was needed:
+- The **anti-vacuity sentinel** — tsc exits non-zero both for "found errors" and "could not run at all"; a non-zero exit with ZERO parsed diagnostics must FAIL CLOSED, never read as "0 errors".
+- The **scope sentinel** — if tsc's resolved file set no longer contains the files this ratchet governs, the ratchet is vacuously green and must fail loudly.
+- The **path-format hardening** — its regex matches the path segment anywhere and normalizes backslashes, because a tsc emitting absolute or Windows paths parsed to zero and went silently green.
+- The **testability seams** — env-var overrides for the baseline path and the tsc command, so a fail-closed meta-test can inject a fake tsc. **Write that meta-test.** A ratchet whose failure paths are never exercised is a ratchet nobody has proven works.
+- **BELOW-DEMANDS-RATCHET-DOWN** — when the real count drops below baseline, say so and name the update command.
+
+**WIRING.** Add \`typecheck:ratchet\` and \`typecheck:ratchet:update\`, and **replace the bare \`npm run typecheck\` in the \`check\` chain with the ratchet** so the tail runs again. ⚠ **KEEP \`npm run typecheck\` as a raw command** — burn lanes need the unfiltered list.
+
+⚠⚠ **A SIBLING LANE IS ACTIVELY LOWERING THE COUNT RIGHT NOW.** Take your baseline at YOUR OWN committed sha and state that sha in the baseline file and the commit body. The ratchet-down rule makes a stale-high baseline self-correcting — that is the design, not a defect — but say plainly in your report that the baseline is a HIGH-WATER MARK taken mid-burn and owes a tightening pass.
+
+**THE JUDGMENT YOU ARE EXECUTING, stated so it can be vetoed:** a ratchet that tolerates N errors is weaker than a boolean gate demanding zero — but a boolean gate nobody can pass tolerates infinity AND hides every step behind it. Record this in the commit body in that form.
+
+**PROVE IT:** run the ratchet green at your sha; plant a new error in a governed file and prove it REDS; run \`npm run check\` and report exactly how far it now gets (name the first failing step, if any — do not claim the whole gate passes unless you executed it and it did). Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'gate:typecheck-ratchet', phase: 'Gate', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, chainClaimVerified: { type: 'string' }, baselineSha: { type: 'string' }, baselineTotal: { type: 'number' }, sentinelsCarried: { type: 'array', items: { type: 'string' } }, metaTestPath: { type: 'string' }, mutantProof: { type: 'string' }, checkReachesStep: { type: 'string' }, filesTouched: { type: 'array', items: { type: 'string' } }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Walker')
+const walker = await agent(LAWS + `
+
+YOU ARE THE STRUCTURAL-PREVENTION LANE. Build the walker that removes a defect class's habitat.
+
+The gate lane just landed: ` + JSON.stringify(gate || {}).slice(0, 2500) + `
+
+**THE CLASS.** Three live bugs were found this week and all three are one shape: **a reader asks for a key that NO WRITER EVER PRODUCES, and it is invisible because the read is defensively guarded — so it degrades to a default instead of throwing.** They were found by accident, during a typecheck census that was looking for something else. The recorded \`faction-key-defect-class\` is a fourth instance. Nobody knows how many more exist.
+
+**THE THREE, WHICH ARE YOUR GROUND TRUTH:**
+- **TCD-1** — \`.id\` read on a \`RulingFaction\` at 9 sites (\`src/domain/rulingPower.js:225\`, \`src/domain/worldPulse/warSeatBooks.js:364\`/\`:401\`, \`applyWorldPulse.js:961\`). **0 of 78 generated faction rows carry \`.id\`.** Consequence: a NEWS ADDRESS LAW address-chain gap.
+- **TCD-2** — \`ownExportsOf\` (\`envoyNegotiationPictureBuilder.js:139\`) probes \`row.exports\` on \`economicState\`/\`economy\`/\`trade\`; two of those containers do not exist and the third never carries \`exports\`. The \`'known'\` arm is structurally dead.
+- **TCD-3** — \`satellite.foundingTier\` (\`lineageMemberBirth.js:178\`, \`lineageClaim.js:156\`) has no writer at all.
+
+⭐⭐ **YOUR ACCEPTANCE TEST IS NON-NEGOTIABLE AND IT IS HANDED TO YOU: THE WALKER MUST CATCH ALL THREE AT A SHA WHERE THEY STILL EXIST.** Take \`eca65c8a\` (or any pre-fix sha — the sibling lane is repairing them in the live tree right now, so DO NOT expect to find them at HEAD) in an integrity-counted archive, run your walker there, and **prove it reports all three.** A walker that cannot rediscover the three defects that motivated it is vacuous, and that is the single most likely way this lane fails. Run it at HEAD too and report the difference.
+
+**THE METHOD THAT ACTUALLY PROVED THESE — USE IT.** All three were proven by **EXECUTING THE REAL GENERATOR** and histogramming the keys actually present on each record shape, not by reading typedefs. Types were wrong or silent in every case. So: generate settlements across a seed set, collect the OBSERVED key set per record shape, extract the keys READ in source against those shapes, and flag reads whose key never appears in observed output.
+⚠ **DERIVE, DO NOT RESTATE** — the observed key set must be computed from a real generation run, never transcribed into a fixture. A fixture that mirrors the deriver produces dead arms (recorded class), and a hand-restated derivable goes stale and greens a shrink-only walker.
+⚠ Use a MULTI-SEED set and say how many; a single-seed pin is vacuous here because some keys are situational (\`modifier\`, \`isGoverning\`, \`modifiers\`, \`legitimacyCrisis\` appeared in some seeds only). **A key present in ANY seed is written; only a key present in NO seed is a finding.** Getting this backwards produces a flood of false positives and the walker will be turned off.
+
+**IT MUST BE SHRINK-ONLY.** It will find pre-existing violations beyond the three. Land it with a baseline inventory that can only shrink, mirroring the ratchets already in \`scripts/.*-baseline.json\` (read one first). Do NOT try to fix what it finds — **inventory them and report the list**; fixing is a separate wave.
+
+**HAZARDS THAT APPLY DIRECTLY, EACH RECORDED BECAUSE IT BIT:**
+- ⚠⚠ **ANY new test file reds the lighting CENSUS** — re-measure it off a \`git archive\` of your ACTUAL PARENT, never the live tree.
+- ⚠ New generation-tree tests must use \`tests/helpers/{anchoredNegatives,seedFailures}.js\` or the epistemic-prevention walkers red.
+- ⚠ A new walker needs its registry/manifest entry (the CW-0w registry split, schema v3 \`kinds[]\`) — find the registry and add the row, or a walker-named test reds the inclusion ratchet.
+- ⚠ \`sizeBaseline\` is tolerance-ZERO for new files; JSDoc is free in \`.js\` but a file that SHRINKS ratchets DOWN.
+- ⚠ Never author a raw NUL — a \`\\u0000\` spelling in a Write becomes a RAW NUL; byte-scan every file you write.
+
+**PROVE THE PIN REDS:** plant a synthetic reader of a key you have proven no writer produces, and watch the walker fail. A walker that stays green under its own mutant is not a walker.
+
+Gate through the mutex chain. Explicit pathspecs, staged set verified by name AND count. Commit body carries \`⏳ OPUS-ERA — FABLE SURVEY OWED\`.
+
+RETURN JSON.`, { label: 'walker:reader-without-writer', phase: 'Walker', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, caughtTCD1: { type: 'boolean' }, caughtTCD2: { type: 'boolean' }, caughtTCD3: { type: 'boolean' }, acceptanceSha: { type: 'string' }, seedCount: { type: 'number' }, inventorySize: { type: 'number' }, newFindings: { type: 'array', items: { type: 'string' } }, mutantProof: { type: 'string' }, registryRowAdded: { type: 'boolean' }, lightingCensusRemeasured: { type: 'string' }, gates: { type: 'array', items: { type: 'string' } }, commits: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const LENSES = [
+  { k: 'gate-really-restored', p: 'Did the gate tail actually come back? Execute `npm run check` yourself at the committed sha and report the FIRST failing step by name, or that it completed. Confirm the ratchet REDS on a planted error (plant one yourself — do not trust the claim) and that the anti-vacuity sentinel fires when tsc cannot run (fake the tsc command via the env seam and confirm it fails CLOSED, not green). Confirm `npm run typecheck` still exists raw. ⚠ A ratchet that cannot be reddened cannot be proven.' },
+  { k: 'walker-not-vacuous', p: 'Is the walker real or theatre? Re-run it YOURSELF in an integrity-counted archive at a PRE-FIX sha and independently confirm it reports TCD-1, TCD-2 and TCD-3 — this is the whole acceptance criterion. Then check the three vacuity shapes: (a) does its observed-key set come from a REAL generation run or from a fixture that mirrors the deriver? (b) is the seed set plural, and does it treat "present in ANY seed" as written? (c) plant a synthetic no-writer read and confirm it REDS. Also confirm the baseline inventory cannot silently GROW behind a failing row — the recorded red-ratchet hazard.' },
+  { k: 'blast-radius', p: 'What did these two land break? Diff the full typecheck error set across both commits. Check sizeBaseline, the domain-layer ratchets, the lighting census, and ratchet halves via `sh scripts/ratchet-inventory.sh`. Confirm the concurrent burn lane\'s files were NEVER touched: src/domain/rulingPower.js, worldPulse/warSeatBooks.js, applyWorldPulse.js, envoyNegotiationPictureBuilder.js, lineageMemberBirth.js, lineageClaim.js — any of those in these commits is a REJECT. Confirm package.json changes did not break any other script.' },
+]
+
+const verdicts = await parallel(LENSES.map(l => () => agent(LAWS + `
+
+YOU ARE AN ADVERSARIAL VERIFIER — ${l.k.toUpperCase()}. Default posture: WRONG until executed evidence. Try to REFUTE. **YOU ARE READ-ONLY — do not edit, stage or commit** (planting a mutant in a throwaway ARCHIVE is expected and fine; planting one in the shared tree is not).
+
+Gate lane reported: ` + JSON.stringify(gate || {}).slice(0, 5000) + `
+Walker lane reported: ` + JSON.stringify(walker || {}).slice(0, 6000) + `
+
+${l.p}
+
+⚠ Seven false receipts have landed here in two days and the code was nearly always fine — the defect was in the receipt. Re-run every gate and every count quoted, at the committed shas. Archives ONE AT A TIME, integrity-counted, deleted between.
+
+RETURN structured JSON only.`, { label: `verify:${l.k}`, phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })))
+
+const live = verdicts.filter(Boolean)
+const rejects = live.filter(v => v.verdict === 'REJECT')
+log(`verify: ${live.length}/3 returned, ${rejects.length} REJECT`)
+return { gate, walker, verdicts: live, verdict: rejects.length ? 'REJECT' : 'PASS' }

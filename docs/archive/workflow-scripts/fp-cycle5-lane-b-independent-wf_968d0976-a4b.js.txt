@@ -1,0 +1,158 @@
+export const meta = {
+  name: 'fp-cycle5-lane-b-independent',
+  description: 'Cycle 5 Lane B: GR-3 (term families + the one-time J-FP-1 discharge), IN-0b+0d, SP-E (the narration kit). Disjoint from Lane A by design.',
+  phases: [
+    { title: 'GR-3', detail: 'new term families + the one-time tripwire discharge' },
+    { title: 'Verify G3', detail: 'adversarial verification' },
+    { title: 'IN-0bd', detail: 'the brokerage refusal + the secrecy trade factor' },
+    { title: 'Verify IN', detail: 'adversarial verification' },
+    { title: 'SP-E', detail: 'the narration kit assembly — zero engine edits' },
+    { title: 'Verify SPE', detail: 'adversarial verification' },
+    { title: 'Ledger', detail: 'the cycle-5 close row' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: this brief is from the session chair of an owner-delegated build program. Verify every claim against the tree before acting — LIVE CODE OUTRANKS EVERY TABLE, and a doc overstatement is a STOP-and-report, never a silent correction. Work in ${TREE} (branch claude/composite-r4). CHECK-GIT-FIRST always.
+
+⭐⭐ THE GATE MUTEX — USE THE SCRIPT, DO NOT SPELL THE CHECK YOURSELF.
+Run \`sh scripts/gate-mutex.sh --wait\` before any vitest invocation; \`sh scripts/gate-mutex.sh\` for a one-shot check (exit 0 = free, 1 = held).
+⛔ NEVER write \`ps aux | grep -c "[v]itest"\`. It matches YOUR OWN command line: any other occurrence of the plain word on that line — an echo label, or the very \`npx vitest run\` you are about to execute after the wait — makes the count non-zero with nothing running. A lane in cycle 4 wrote the wait and the run in ONE command and slept TWENTY MINUTES against a mutex nobody held, then gave up without running its gate. The failure looks like patience.
+
+⚠⚠ A SECOND BUILD LANE IS RUNNING CONCURRENTLY IN THIS SAME TREE (Lane A: the ES-1..ES-4 chain, plus a cycle-4 debt slice). It edits the espionage/envoy family; you do not. Consequences that BIND you:
+ - NEVER touch, stage, revert or clean a file you did not author. Dirty files that are not yours are Lane A's — preserve them absolutely.
+ - Commit with EXPLICIT PATHSPECS naming only your own files. Verify \`git diff --cached\` before EVERY commit and check the staged set against your EXPECTED set BY NAME AND COUNT — not merely that every hunk is yours. ⚠ That bit this chair today: a commit claimed three parts and landed one, because \`git add\` aborts ATOMICALLY on one bad pathspec and stderr had been suppressed. An ownership check passes while the set is incomplete.
+ - SHARED-FILE COMPARE-AND-SWAP: \`scripts/mutation-coverage-manifest.json\` is the ONE hard serializer — both lanes touch it. Also shared: the Herald registration tables, the coupling registry, the ratchet baselines. Edit them LAST, immediately before your commit; re-read at HEAD immediately before splicing; if the on-disk text changed, DISCARD your splice and redo it against fresh text. ⚠ \`json.dumps\` on the manifest REFORMATS all ~1,972 lines — SPLICE THE RAW TEXT.
+ - HEAD may move under you mid-wave. Re-read it at the staging step.
+
+THE PROTOCOL LAWS (each has bitten): NEVER stash/reset/clean/checkout-family (use cp backups and cmp-proven restores; damaged tracked files restore via \`git show HEAD:path > path\`). Gates ONLY via \`sh scripts/gate-tail.sh <cmd>\` or \`npm run check:tail\` — a bare pipe reports the PIPE's status and has greenwashed red gates twice. Commit messages via file; trailer \`Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>\`. python3 byte-scan every authored file for NULs. New walkers need manifest entries. Strict ceiling 1313 EXACTLY, and NEW modules carry a PER-FILE ZERO strict baseline — satisfy it by NARROWING TYPES, never by a cast or an \`any\`. tests/fixtures/, pulseKernel.js and applyWorldPulse.js are UNTOUCHABLE. Navigate by SYMBOL — hand-keyed line addresses rot. ⚠ NEVER spell \`vitest list --json PATH\` with a space; always \`--json=PATH\` to a path OUTSIDE the repo.
+
+⛔ THE REPO GATE IS RED AT BASE — roughly 25 failing tests plus 3 lint errors and a red full typecheck. THIS IS NOT YOURS. "Pre-existing" is an EMPIRICAL claim you must EARN: re-run the exact failing command against a \`git archive\` of your start HEAD (symlink node_modules in; \`rm -f\` the SYMLINK before removing the tree) and cite that run. Never repair a foreign red; never claim one without the base-state receipt.
+
+⏳ OPUS-ERA MARKING: every ledger row carries "⏳ OPUS-ERA — FABLE SURVEY OWED" in its heading, with every chair-grade judgment itemized as a J-* entry.
+
+REPORTING: label every conclusion CONFIRMED (executed evidence quoted) or PLAUSIBLE. Never present the second as the first.`
+
+const VERIFIER_LAWS = `
+
+⚠⚠ VERIFIER DISCIPLINE. Two build lanes are writing this tree while you run.
+ - Do EVERY execution inside a \`git archive\` of the exact commit you are verifying: \`mkdir -p /tmp/v-$$ && git archive <sha> | tar -x -C /tmp/v-$$ && ln -s ${TREE}/node_modules /tmp/v-$$/node_modules\`. \`rm -f\` the SYMLINK BEFORE removing the tree or you delete the real node_modules.
+ - You MUST NOT assert tree-cleanliness and MUST NOT report dirty files as findings.
+ - You MUST NOT edit the live tree. Mutants go in disposable archive trees ONLY.
+ - Use \`sh scripts/gate-mutex.sh --wait\` before any run.
+ - ⚠ A MUTANT THAT PLANTS NOTHING GREENS. Every mutant must assert the file ACTUALLY CHANGED and abort if it did not; when you plant a process or fixture, verify it EXISTS before reading the result. This chair shipped a green negative control today that had planted nothing.
+ - ⚠ RUN EVERY PROPOSED REMEDY AS A MUTANT: a trusted verifier's executed remedy has been DEAD under the new architecture — planted, battery stayed green.
+ - Wave-end attribution: the wave's commit against a git-archive of its PARENT; row-identity diff EMPTY both directions except attributed, PLUS the red-ratchet CONTENT diff. ⚠ A red ratchet's inventory grows INVISIBLY behind a byte-identical fail row — extract the cardinalities inside the red rows from both logs and compare as a multiset. This hazard falsified a landed wave's "zero rows are this wave's" claim.`
+
+phase('GR-3')
+const gr3 = await agent(LAWS + `
+
+YOU ARE THE GR-3 IMPLEMENTER — THE NEW TERM FAMILIES + THE ONE-TIME J-FP-1 DISCHARGE. Rides \`pactFormationEnabled\`, which GR-2 minted this cycle at \`a18fdcfa\` — NO new flag key.
+
+WHY THIS WAVE IS SCHEDULED NOW: it carries a ONE-TIME tripwire discharge that gets more expensive every cycle it waits, because every later catalog-touching wave (TR-5, WF-6, POP-5b) must otherwise reason about a live tripwire.
+
+NORMATIVE SPEC: \`docs/DESIGN_FP_ARCH_GR.md\`'s GR-3 block. ⚠⚠ **ALSO READ ITS §6 SEAM 6 — it names \`couplingRegistry.js\` as an edit target that the GR-3 §5 paragraph OMITS. A §5-only reader misses it and lands an incomplete wave.**
+
+MEASURED STATE, verify then trust: \`TERM_CATALOG\` holds exactly 12 rows across 8 families, byte-matching \`WR10_FAMILIES_AT_LANDING\` in \`sovereigntyBundle.js\`, so \`catalogGrewSinceWr10()\` returns \`false\` today — which confirms GR-3 has not landed. Its homes are \`sovereigntyBundle.js\`, \`tests/lint/spTermLiteral.walker.test.js\` and \`tests/domain/sovereigntyBundleWr10.test.js\` (two \`expect(catalogGrewSinceWr10()).toBe(false)\` sites). ⚠ \`sovereigntyBundle.js\` is NOT edited — it widens MECHANICALLY because \`TERM_FAMILIES\` is derived. Do not hand-edit a derived set.
+
+CHARTER: rows land DIRECTLY in \`peaceTermsCatalog.js\` (measured 80/800 — ample) — five faith + three population + \`mutual_defense\`, each with its executor (the 7th \`grant\` executor kind consolidates in \`treatyEnforcement.js\`, 64/800), PLUS the three trade-rights rows (\`exclusivity\`, \`market_access\`, \`toll_exemption\`) as \`executor:'seam'\` under GRAMMAR-canonical spellings — the non_intervention mechanism: no producer means never drafted means byte-identical. TR-5 lands their executors and producers later.
+
+PINS: the no-producer-less-term walker with the seam-row exemption EXPLICIT; grant lift; Law One negatives; the freeze walker in the SAME commit; the found-writer pin on the V-18 readers; the J-GR-14 lighting pin; the war-door stacking pin across family x beneficiary. Four-fence + lit-mutant with EVERY guard door pinned INDIVIDUALLY. LIFECYCLE TOTALITY on any new persisted shape — create/read/persist/regenerate/undo/import, each by executed round-trip.
+
+⛔ VERIFY-AT-BUILD FIRST: confirm \`pactFormationEnabled\` and GR-2's pact writer family actually landed and read their REAL shapes from the tree, not from the volume. If GR-2's substrate is absent or differently shaped, STOP AND REPORT.
+
+Wave-end attribution per the LAWS. Ledger row with the ⏳ OPUS-ERA heading and J-* entries.
+
+RETURN JSON: {commits, files, gates, goldenShifts, stopReports, judgments, notes}.`, { label: 'build:GR-3', phase: 'GR-3', model: 'opus' })
+
+phase('Verify G3')
+const vgr3 = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR GR-3. Default posture: wrong until executed evidence. REFUTE. The implementer reported: ` + JSON.stringify(gr3).slice(0, 12000) + `
+
+VERIFY BY EXECUTION in git-archive trees: (1) THE DISCHARGE IS REAL — \`catalogGrewSinceWr10()\` returned false before and returns true after; BOTH \`expect(...).toBe(false)\` sites were updated in the SAME commit; the freeze walker landed with it. (2) \`sovereigntyBundle.js\` was NOT hand-edited — its family set widened by derivation (diff it; any manual edit is a REJECT). (3) The seam rows are producer-less and therefore never drafted — prove byte-identity of drafted output across the wave. (4) The §6 seam-6 \`couplingRegistry.js\` row landed. (5) Every pin non-vacuous — plant the mutant that should red each and confirm it reds. (6) Four-fence, guard doors individually, lit-mutant. (7) Wave-end attribution both granularities + the red-ratchet CONTENT diff; strict 1313 and per-file zero on new modules; byte-scans; staged-set completeness.
+
+RETURN structured JSON only.`, { label: 'verify:GR-3', phase: 'Verify G3', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('IN-0bd')
+const in0bd = await agent(LAWS + `
+
+YOU ARE THE IN-0b + IN-0d IMPLEMENTER — two paired INFO slices, TWO commits, one lane. Both ride EXISTING keys: IN-0b on \`informationBrokeragesEnabled\`, IN-0d on \`infoStatecraftEnabled\` (already manifested). NO new flag keys, so CQ5 does not bind you.
+
+NORMATIVE SPEC: \`docs/DESIGN_FP_ARCH_IN.md\` — the IN-0b and IN-0d blocks. Navigate by SYMBOL; read both whole.
+
+MEASURED HEADROOM, ample: \`brokerageServicesRules.js\` 231/800, \`brokerageServices.js\` 191/800; IN-0d mints a new \`secrecyTradeFactor.js\` (~100).
+
+SUBSTRATE CONFIRMED LIVE: \`claimFrom\` exists in \`brokerageServices.js\`; \`QUERY_REFUSALS\` holds exactly FIVE tokens — IN-0b must assert that set UNCHANGED.
+
+⛔⛔ VERIFY-AT-BUILD, MEASURED AND REPORTED: **the HIDE \`-0.7\` rivals'-reads factor that IN-0b is specified to wire DOES NOT EXIST under that spelling.** \`informationStatecraft.js\` has \`HIDE_STALENESS: 0.7\` and \`HIDE_WEAKNESS_W: 0.7\`, and NEITHER is an intercept-vagueness factor. The doc labels this new work, so it is not a contradiction — but there is NO CONSTANT TO REUSE. Do not bind to a lookalike constant because its value matches; that is how a coincidence becomes a coupling. Mint the new one and say so.
+
+IN-0d discharges SEAM 11 (\`secrecyTradeFactorOf\`), which the whole TRADE phase pre-pins against — get its contract right.
+
+PINS: IN-0b — the empty-outbound HONEST REFUSAL with a SEEDED-POSITIVE TWIN (an absence pin with an empty harness is vacuous); fog-compose (a HIDE court yields degraded or refused); the closed-vocabulary pin re-asserting \`QUERY_REFUSALS\` UNCHANGED; intercept-hum registration; dormancy. IN-0d — identity-1.0 outside HIDE; banded and capped; dark means trade bytes IDENTICAL (capture that fence FIRST, before wiring); seclusion hum registered; the \`secrecyTradeContractChangedSinceIn0d()\` tripwire.
+
+LIFECYCLE TOTALITY on every new field. Wave-end attribution. Ledger row with the ⏳ OPUS-ERA heading and J-* entries.
+
+RETURN JSON: {commits, files, gates, goldenShifts, stopReports, judgments, notes}.`, { label: 'build:IN-0b+0d', phase: 'IN-0bd', model: 'opus' })
+
+phase('Verify IN')
+const vin = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR IN-0b + IN-0d. Default posture: wrong until executed evidence. REFUTE. The implementer reported: ` + JSON.stringify(in0bd).slice(0, 12000) + `
+
+VERIFY BY EXECUTION: (1) \`QUERY_REFUSALS\` is UNCHANGED — five tokens, and the closed-vocabulary pin REDS when you add a sixth in an archive tree. (2) The honest-refusal pin has a SEEDED-POSITIVE TWIN and is non-vacuous — print the seeded state size; an empty harness is a REJECT. (3) IN-0d's dark arm: trade bytes IDENTICAL with the flag dark, hash-compared — and the fence was captured BEFORE wiring (check the commit order). (4) The new secrecy constant is genuinely new and not silently bound to \`HIDE_STALENESS\` or \`HIDE_WEAKNESS_W\` because their values coincide — grep the imports and REJECT a lookalike coupling. (5) The seam-11 contract matches what the TRADE volume pre-pins against. (6) The tripwire reds when the contract changes. (7) Every pin non-vacuous by planted mutant. (8) Wave-end attribution both granularities + red-ratchet CONTENT diff; strict per-file zero on the new module; byte-scans; staged-set completeness.
+
+RETURN structured JSON only.`, { label: 'verify:IN-0b+0d', phase: 'Verify IN', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('SP-E')
+const spe = await agent(LAWS + `
+
+YOU ARE THE SP-E IMPLEMENTER — THE NARRATION KIT ASSEMBLY. **NO FLAG. ZERO ENGINE BEHAVIOR CHANGES. ADDITIVE FILES ONLY.** The block states it outright: test estate plus one certification leaf plus the census scan.
+
+WHY IT IS SCHEDULED: it removes a structural blocker — every later volume currently copy-pastes the envoy kind-pool walker instead of importing a template — and it clears WY-1's queue position.
+
+NORMATIVE SPEC: \`docs/DESIGN_FP_ARCH_SP.md\`'s \`### SP-E\` block in §5, plus the compiled charter in \`DESIGN_FP_ARCHITECTURE.md\`. Navigate by SYMBOL.
+
+CHARTER: \`tests/helpers/kindPoolWalker.js\` (NEW — confirmed absent) generalizing \`tests/lint/envoyKindPools.walker.test.js\` (181 lines, the source it generalizes) — frequency-scaled floors BY IMPORT, never by transcription, with floors derived from the kind's OWN significance; the FREQUENCY-SCALED FLOOR walker; the PHRASE-REPETITION ENVELOPE soak instrument in its own certification leaf with a collapse mutant executed; and the \`heraldFeed.js\` significance-migration CENSUS.
+
+⛔⛔ J-SP-8 BINDS AND IT IS THE EASIEST THING HERE TO GET WRONG: the frequency-scaled floor lands **SHRINK-ONLY** over the roughly 269 legacy tokens. **THE WALKER MAY NOT RED THE ESTATE AT BIRTH.** Seed its baseline from the measured legacy inventory, then let it only shrink. A walker born red is a walker someone disables.
+
+⚠ \`src/components/map/heraldFeed.js\` is READ AND CENSUSED, NEVER EDITED. Note the path carries \`src/\`, which both docs omit. Its line 95 has NOT rotted — it still reads the ad-hoc significance mix the doc describes. The census NAMES the debt; each surface migrates in its own later wave.
+⚠ \`certification/warConvergenceContract.js\` is explicitly NOT edited. The doc calls it "an 820-line file measured" and that figure is STALE — it measures 515 effective / 953 raw, because SP-B2 added 133 raw lines after the doc's measurement. Do not inherit the number.
+
+PINS: the walker's own NEGATIVE CONTROLS — an unregistered kind reds, and a two-variant chronic kind reds EXACTLY AS an unregistered one (that is the constitution's own sentence, and it must be EXECUTED, not asserted); the envelope's collapse mutant; the exactly-once doc pins on the family scales.
+
+Wave-end attribution. Ledger row with the ⏳ OPUS-ERA heading and J-* entries.
+
+RETURN JSON: {commits, files, gates, stopReports, judgments, notes}.`, { label: 'build:SP-E', phase: 'SP-E', model: 'opus' })
+
+phase('Verify SPE')
+const vspe = await agent(LAWS + VERIFIER_LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER FOR SP-E. Default posture: wrong until executed evidence. REFUTE. The implementer reported: ` + JSON.stringify(spe).slice(0, 12000) + `
+
+VERIFY BY EXECUTION: (1) ZERO ENGINE CHANGE — numstat across the wave proves no \`src/domain\` behavior file was edited, and \`heraldFeed.js\` and \`warConvergenceContract.js\` are untouched. (2) THE WALKER DOES NOT RED THE ESTATE AT BIRTH — run it at HEAD and confirm green over the legacy inventory; a red-at-birth walker is a REJECT under J-SP-8. (3) It is genuinely SHRINK-ONLY — add a token in an archive tree and confirm it reds; remove one and confirm it stays green. (4) The negative controls are EXECUTED, not asserted: an unregistered kind reds, and a two-variant chronic kind reds exactly as an unregistered one — run BOTH. (5) Floors are derived BY IMPORT, not transcribed — a transcribed floor goes stale at its source; grep for duplicated constants. (6) The envelope's collapse mutant reds. (7) Wave-end attribution both granularities + red-ratchet CONTENT diff; byte-scans; staged-set completeness.
+
+RETURN structured JSON only.`, { label: 'verify:SP-E', phase: 'Verify SPE', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Ledger')
+const ledger = await agent(LAWS + `
+
+YOU ARE THE CYCLE-5 LANE-B LEDGER SLICE — docs and ledger ONLY, ZERO src, test, script or JSON edits.
+
+Lane B ran: GR-3 ` + JSON.stringify({ b: gr3, v: vgr3 }).slice(0, 7000) + `
+IN-0b+0d ` + JSON.stringify({ b: in0bd, v: vin }).slice(0, 7000) + `
+SP-E ` + JSON.stringify({ b: spe, v: vspe }).slice(0, 7000) + `
+
+⚠ A SIBLING LANE (Lane A: the ES-1..ES-4 chain plus a cycle-4 debt slice) IS LANDING COMMITS IN PARALLEL. Record ONLY Lane B's waves. Do not attribute, claim or repair anything Lane A landed — but DO note in your row that the cycle's full span includes Lane A commits you did not audit, so nobody reads your row as the whole cycle.
+
+DO THIS:
+(1) VERIFY EVERY CLAIM BEFORE RECORDING IT. \`git log --oneline\` the span; confirm every claimed sha EXISTS and touches the files claimed. A row recording an unlanded commit is worse than no row. Where a claim and the tree disagree, THE TREE WINS and you record the measured fact — cycle 4's close lost two claims that way and was better for it.
+(2) Append ONE Lane-B row to \`docs/FABLE_VALIDATION_QUEUE.md\` in the established format (read the tail first, and re-derive the tail address immediately before splicing — an anchor can still be UNIQUE and have stopped being the TAIL; uniqueness is not position). Heading MUST carry "⏳ OPUS-ERA — FABLE SURVEY OWED". Enumerate every J-* judgment as a POINTER with a one-line handle and a survey priority, never as a restatement. Record every DEFERRAL with its reason, phrased as deliberate so no successor files it as a bug.
+(3) Update the FP volume's §5 PROGRESS block — which cycle 4 established as the ONE home for progress — by SHA, stamped with the commit you measured at. Do not add markers to sibling volumes; cycle 4 recorded that those are not maintained as a set, so absence there proves nothing.
+(4) STATE THE GATE HONESTLY. If the cycle does not exit green, say so and classify every red as OURS or INHERITED with the base-state receipt that proves it. Cycle 4's close is the model: it named two reds as its own rather than laundering them.
+
+RETURN JSON: {commit, wavesLanded, redsOurs, redsInherited, deferrals, unverifiedClaims, notes}.`, { label: 'ledger:cycle-5-lane-b', phase: 'Ledger', model: 'opus' })
+
+return { gr3, vgr3, in0bd, vin, spe, vspe, ledger }

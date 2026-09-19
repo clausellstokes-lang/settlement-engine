@@ -1,0 +1,130 @@
+{
+ "instrument": "MFI1-towers",
+ "gap": "G-40(i)",
+ "exclusions": {
+  "plates_on_disk": 313,
+  "holdout_arm_proposed": 53,
+  "holdout_arm_minimal_swap": 53,
+  "holdout_arms_intersection": 25,
+  "holdout_union_excluded": 81,
+  "holdout_union_present_on_disk": 81,
+  "plates_admissible": 232,
+  "plates_excluded": 81,
+  "arithmetic": "313 on disk - 81 holdout = 232 admissible",
+  "scrub_34_naming_barred": 34,
+  "scrub_intersect_holdout": []
+ },
+ "status": "PLATE-SIDE EXTRACTION NOT DELIVERED \u2014 see the module docstring",
+ "hand_calibration": [
+  {
+   "plate": "hf324-town-bastide-halffilled",
+   "circuit": "hedged bank + ditch",
+   "towers": 0,
+   "uncertainty": 0,
+   "gates": 0,
+   "note": "no masonry circuit at all; the Lord's Court has corner buttresses, which are a building's, not the town circuit's"
+  },
+  {
+   "plate": "hf239-castra-town",
+   "circuit": "vallum et fossa (rampart + ditch)",
+   "towers": 0,
+   "uncertainty": 0,
+   "gates": 4,
+   "note": "playing-card plan, rounded corners, four gates, NO bastions"
+  },
+  {
+   "plate": "hf364-town-sacked-resettled",
+   "circuit": "masonry, round towers",
+   "towers": 10,
+   "uncertainty": 2,
+   "gates": 5,
+   "note": "towers spaced along straight and curved runs; gates drawn as double jambs"
+  },
+  {
+   "plate": "hf347-town-three-circuits",
+   "circuit": "masonry, round towers, smooth oval",
+   "towers": 17,
+   "uncertainty": 3,
+   "gates": 4,
+   "note": "the outer circuit is a smooth OVAL with no corners, and still carries towers at intervals -- the single clearest refutation of a corners-only rule. Two former towers survive INSIDE the fabric as 'TOWER DWELLING' circles, which is circuitDemotion's vocabulary drawn"
+  },
+  {
+   "plate": "hf331-town-dual-lordship",
+   "circuit": "masonry, D-shaped mural towers",
+   "towers": 25,
+   "uncertainty": 4,
+   "gates": 4,
+   "note": "towers at polygon angle points AND along straight runs; one labelled RUINOUS TOWER, one PRISON TOWER -- the corpus types its towers"
+  }
+ ],
+ "hand_summary": {
+  "n_plates": 5,
+  "n_with_zero_towers": 2,
+  "zero_tower_share": 0.4,
+  "towers_when_present_min": 10,
+  "towers_when_present_max": 25,
+  "towers_when_present_median": 17.0,
+  "method": "[E] eye count at 1500 px whole-plate render, uncertainty stated per row",
+  "status": "CALIBRATION SAMPLE, NOT A BAND. n=5, whole-plate resolution, one counter, no second reader. A band needs a zoom-resolution census with a stated sample and a second reader."
+ },
+ "prototype_probe": [
+  {
+   "plate": "hf324-town-bastide-halffilled",
+   "longside": 3000,
+   "ink_thr": 125.8,
+   "circuit_candidate": null,
+   "verdict": "NO RELIABLE CIRCUIT",
+   "hand_towers": 0
+  },
+  {
+   "plate": "hf239-castra-town",
+   "longside": 3000,
+   "ink_thr": 111.1,
+   "circuit_candidate": {
+    "r_wall": 3,
+    "skeleton_px": 206,
+    "bbox_span_px": 104.7,
+    "half_width_p50": 4.0,
+    "half_width_p90": 5.0,
+    "ribbon_ratio": 51.5,
+    "bulges_above_p90": 7
+   },
+   "verdict": "CANDIDATE FOUND \u2014 \u26d4 recovery UNMEASURED, spacing NOT reported",
+   "hand_towers": 0
+  },
+  {
+   "plate": "hf364-town-sacked-resettled",
+   "longside": 3000,
+   "ink_thr": 115.0,
+   "circuit_candidate": null,
+   "verdict": "NO RELIABLE CIRCUIT",
+   "hand_towers": 10
+  },
+  {
+   "plate": "hf347-town-three-circuits",
+   "longside": 3000,
+   "ink_thr": 88.2,
+   "circuit_candidate": null,
+   "verdict": "NO RELIABLE CIRCUIT",
+   "hand_towers": 17
+  },
+  {
+   "plate": "hf331-town-dual-lordship",
+   "longside": 3000,
+   "ink_thr": 124.0,
+   "circuit_candidate": {
+    "r_wall": 3,
+    "skeleton_px": 224,
+    "bbox_span_px": 242.3,
+    "half_width_p50": 3.61,
+    "half_width_p90": 4.24,
+    "ribbon_ratio": 62.1,
+    "bulges_above_p90": 9
+   },
+   "verdict": "CANDIDATE FOUND \u2014 \u26d4 recovery UNMEASURED, spacing NOT reported",
+   "hand_towers": 25
+  }
+ ],
+ "generated_side_spec": "See the module docstring. towers_per_unit_length = n / L(R); spacing_cv = sd(gaps)/mean(gaps) over the n closed-ring gaps; corner_share = share of towers within tol of a ring vertex whose exterior angle exceeds corner_deg. spacing_cv is the dimensionless comparison quantity; towers_per_unit_length must carry its unit.",
+ "headline_finding": "2 of 5 non-holdout walled plates carry a circuit with ZERO towers (an earth vallum and a hedged bank); of the 3 masonry circuits, all three space towers ALONG the run, and hf347's is a smooth oval with no corners at all. A corners-only tower rule is refuted as the governing rule by the corpus's own drawing."
+}

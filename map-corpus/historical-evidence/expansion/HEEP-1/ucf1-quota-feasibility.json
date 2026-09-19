@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "UCF1-QUOTA-FEASIBILITY-1.4.0",
+  "protocolId": "HEEP-1",
+  "protocolVersion": "1.1.0",
+  "frameVersion": "UCF-1.1.0",
+  "selectionRuleVersion": "UCF1-SELECT-1.4.0",
+  "status": "FROZEN_METADATA_SHORTFALL",
+  "europeanOnly": true,
+  "candidateFrame": {
+    "deduplicatedCandidateIdentities": 311,
+    "frameEligibleCandidates": 311,
+    "frameExcludedCandidates": 0,
+    "frameExcludedByReason": {},
+    "selectionEligibleSingletonClusterUnits": 257,
+    "excludedNonSingletonClusterUnits": 54,
+    "leakageClusters": 267,
+    "nonSingletonLeakageClusters": 10,
+    "frameCountryCount": 29,
+    "frameProgramCount": 18,
+    "selectionEligibleCountryCount": 29,
+    "selectionEligibleProgramCount": 16,
+    "framePriorSeen": 23,
+    "selectionEligiblePriorSeen": 14,
+    "macroRegions": {
+      "ATLANTIC_ARCHIPELAGO": 61,
+      "NORDIC_BALTIC": 40,
+      "WESTERN_CONTINENTAL": 69,
+      "CENTRAL_EASTERN_SOUTHEASTERN": 49,
+      "SOUTHERN_MEDITERRANEAN": 38
+    },
+    "indexPhases": {
+      "PRE_1200": 48,
+      "1200_1399": 35,
+      "1400_1599": 59,
+      "1600_1799": 61,
+      "1800_PLUS": 54,
+      "UNKNOWN": 0
+    },
+    "scaleFunction": {
+      "SMALL_LOCAL": 12,
+      "INTERMEDIATE_REGIONAL": 5,
+      "MAJOR_METROPOLITAN": 2,
+      "UNKNOWN": 238
+    },
+    "physicalContexts": {
+      "COASTAL_ESTUARINE": 57,
+      "RIVER_CROSSING": 39,
+      "WETLAND_ENGINEERED_WATER": 18,
+      "UPLAND_CONSTRAINED": 21,
+      "OTHER_INLAND": 0
+    },
+    "maximumSingleCountryCountWithinSelectionEligiblePool": 40,
+    "maximumSingleProgramCountWithinSelectionEligiblePool": 53
+  },
+  "selection": {
+    "selected": 0,
+    "reserves": 0,
+    "exactPrimaryStrataSealed": 0,
+    "holdoutAllocated": false,
+    "priorSlateInvalidated": true
+  },
+  "exactSolver": {
+    "solverVersion": "UCF1-EXACT-NESTED-SOLVER-1.0.0",
+    "formulationSha256": "489b50874daee0682896b82c5e5b55c0d9a7ad090723eda42a7861c160be633b",
+    "stableObjective": "LEXICOGRAPHIC_MINIMUM_TIE_HASH_SEQUENCE_WITHIN_EACH_LEGAL_TRANCHE",
+    "enumeration": "COMPLETE_INCLUDE_FIRST_DEPTH_FIRST",
+    "heuristicNodeOrTimeLimit": null,
+    "replacementPolicyVersion": "UCF1-FULL-VECTOR-REPLACEMENT-1.0.0",
+    "replacementRequirement": "PER_SLOT_EXACT_PRIMARY_STRATUM_QUEUE_PLUS_FULL_VECTOR_VALIDATION_AT_EVERY_AFFECTED_PREFIX",
+    "outcome": "UNSAT_BY_NECESSARY_POOL_BOUND",
+    "certificate": {
+      "certificateVersion": "UCF1-UNSAT-CERTIFICATE-1.0.0",
+      "verifiedBySelector": true,
+      "candidateCount": 257,
+      "candidateOrderCommitmentSha256": "8ab2510574ae409832c9c745792e4da9f3f2ab3c8a6e5e83ceaaf8c5afba20c6",
+      "proofRule": "AVAILABLE_LT_REQUIRED",
+      "violatedBoundCount": 20,
+      "violatedFamilies": [
+        "scale:SMALL_LOCAL",
+        "scale:INTERMEDIATE_REGIONAL",
+        "scale:MAJOR_METROPOLITAN",
+        "context:OTHER_INLAND"
+      ],
+      "legalPrefixes": [
+        80,
+        90,
+        100,
+        110,
+        120
+      ]
+    }
+  },
+  "legalPrefixes": [
+    {
+      "n": 80,
+      "pass": false,
+      "minimumRequiredPerScaleBand": 16,
+      "minimumRequiredPerPhysicalContext": 8,
+      "shortfalls": {
+        "SMALL_LOCAL": 4,
+        "INTERMEDIATE_REGIONAL": 11,
+        "MAJOR_METROPOLITAN": 14,
+        "OTHER_INLAND": 8
+      }
+    },
+    {
+      "n": 90,
+      "pass": false,
+      "minimumRequiredPerScaleBand": 18,
+      "minimumRequiredPerPhysicalContext": 9,
+      "shortfalls": {
+        "SMALL_LOCAL": 6,
+        "INTERMEDIATE_REGIONAL": 13,
+        "MAJOR_METROPOLITAN": 16,
+        "OTHER_INLAND": 9
+      }
+    },
+    {
+      "n": 100,
+      "pass": false,
+      "minimumRequiredPerScaleBand": 20,
+      "minimumRequiredPerPhysicalContext": 10,
+      "shortfalls": {
+        "SMALL_LOCAL": 8,
+        "INTERMEDIATE_REGIONAL": 15,
+        "MAJOR_METROPOLITAN": 18,
+        "OTHER_INLAND": 10
+      }
+    },
+    {
+      "n": 110,
+      "pass": false,
+      "minimumRequiredPerScaleBand": 22,
+      "minimumRequiredPerPhysicalContext": 11,
+      "shortfalls": {
+        "SMALL_LOCAL": 10,
+        "INTERMEDIATE_REGIONAL": 17,
+        "MAJOR_METROPOLITAN": 20,
+        "OTHER_INLAND": 11
+      }
+    },
+    {
+      "n": 120,
+      "pass": false,
+      "minimumRequiredPerScaleBand": 24,
+      "minimumRequiredPerPhysicalContext": 12,
+      "shortfalls": {
+        "SMALL_LOCAL": 12,
+        "INTERMEDIATE_REGIONAL": 19,
+        "MAJOR_METROPOLITAN": 22,
+        "OTHER_INLAND": 12
+      }
+    }
+  ],
+  "failureBoundary": {
+    "programLevelSynthesizedScaleClassesAccepted": false,
+    "landlockedCountryUsedAsOtherInlandEvidence": false,
+    "contentInspectionUsedToFillMetadataGaps": false,
+    "inventedMetadataUsedToFillQuotaGaps": false
+  }
+}

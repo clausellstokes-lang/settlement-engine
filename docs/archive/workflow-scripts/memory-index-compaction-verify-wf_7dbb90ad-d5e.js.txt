@@ -1,0 +1,236 @@
+export const meta = {
+  name: 'memory-index-compaction-verify',
+  description: 'Verify topic files carry every hook and check repo state before compacting MEMORY.md',
+  phases: [
+    { title: 'Verify detail carried' },
+    { title: 'Verify repo state' },
+    { title: 'Critic' },
+  ],
+}
+
+const MEM = '/Users/cstokes/.claude/projects/-Users-cstokes-Desktop-settlement-engine/memory'
+const REPO = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const CARRY_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['files'],
+  properties: {
+    files: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['file', 'exists', 'hooks', 'sharpest', 'verdict'],
+        properties: {
+          file: { type: 'string' },
+          exists: { type: 'boolean' },
+          hooks: {
+            type: 'array',
+            description: 'One entry per distinct hook/claim asserted in the MEMORY.md index line for this file',
+            items: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['hook', 'carriedInTopicFile', 'evidence'],
+              properties: {
+                hook: { type: 'string' },
+                carriedInTopicFile: { type: 'boolean' },
+                evidence: { type: 'string', description: 'Quoted snippet from the topic file proving it is carried, or "ABSENT"' },
+              },
+            },
+          },
+          sharpest: { type: 'string', description: 'The single sharpest actionable hook, <=140 chars, suitable as the sole index hook' },
+          verdict: { type: 'string', enum: ['SAFE_TO_COMPRESS', 'HOOK_ONLY_IN_INDEX', 'FILE_MISSING'] },
+        },
+      },
+    },
+  },
+}
+
+const carryPrompt = (label, lines) => `You are auditing a Claude auto-memory index for a compaction pass. DO NOT EDIT ANY FILE. Read only.
+
+Memory directory: ${MEM}
+The index is ${MEM}/MEMORY.md
+
+Below are index lines from MEMORY.md. Each line points at one or more topic .md files in the same directory and compresses several "hooks" (actionable claims: hazards, mechanisms, figures, commit hashes, rulings).
+
+For EACH topic file referenced in these lines:
+1. Read the FULL topic file at ${MEM}/<filename>.
+2. Decompose the index line's text for that file into its distinct hooks. Every clause separated by ";" or "·" or introduced by a warning glyph is normally a separate hook.
+3. For each hook, decide whether the TOPIC FILE BODY carries that same information (not necessarily verbatim — the substance must be recoverable by a cold reader). Quote the proving snippet.
+4. Report the single sharpest hook: the one claim that, if a future session read ONLY that, would most reliably keep it out of a trap. Max 140 chars.
+5. verdict: SAFE_TO_COMPRESS if EVERY hook is carried in the topic file; HOOK_ONLY_IN_INDEX if any hook exists solely in the index line (that hook must NOT be dropped); FILE_MISSING if the file does not exist.
+
+This matters: hooks that live only in the index would be permanently lost if the index line is trimmed. Be adversarial — do not credit a hook as "carried" on a loose thematic match. Require the specific fact (the number, the file path, the mechanism, the hash).
+
+Index lines to audit (${label}):
+${lines}`
+
+phase('Verify detail carried')
+
+const BATCHES = [
+  ['A: OSR pair', `- [⭐⭐ OSR RESOLVER-STATE-IDENTITY RULING](osr-resolver-state-identity-ruling.md) — four mechanisms RATIFIED; repair AUTHORIZED, BUILT and LANDED @ 6da84cfd; no cache key may embed monotone CONTENTS; recomputation-without-growth CURED — the block's remaining wall is genuine growth.
+- [⭐⭐ OSR IDENTITY REPAIR BUILT, GATE 2 STILL FAILS](osr-identity-repair-landed-and-growth-wall.md) — 92/92 and 1.02M memo hits, but the blocked read now dies of the ABSTRACT-STATE GROWTH BUDGET in ~145 s instead of never terminating, so the disease MOVED off recomputation-without-growth; the sound projection fires on 3 of 53 functions (P2's 543 to 13 is NOT reproducible soundly); mutants C and D prove the frame coordinate is UNPINNED by every one of the 92 tests.`],
+
+  ['B: STEP-12 family', `- [⭐⭐ STEP 12 = PER-TEST RATCHET; verify:dist RAN](step12-test-ratchet-landed.md) — never re-serialize mutation-coverage-manifest.json. BOTH its headline figures are STALE.
+- [⭐⭐ S12-W2 ORPHAN RECOVERED @ fd947d59 — all 8 LANDED](orphan-recovery-s12w2-landed.md) — remove the census row LAST (a row removed before relocation = disabled guard, no report); introducedAt attested by SHAPE not EXISTENCE.
+- [⭐⭐ STEP 12 MEASURED WHOLE @ 79419449](step12-measured-denominator-and-address-rot-class.md) — an inherited red-set was a TWO-DIRECTORY census reading as whole-suite; re-run the WHOLE step before inheriting a denominator; HAND-KEYED-ADDRESS ROT: code right, pin wrong, every time.`],
+
+  ['C: census/edge-bundle family', `- [⭐⭐ LIGHTING CENSUS RE-RECORDED @ 01a81a1e](sovereignty-lighting-census-rerecorded-01a81a1e.md) — the SEQUENCE hazard fired a THIRD time and ALL FOUR unasserted figures had drifted, so never patch \`files\` alone; \`parked\` broke an EIGHT-WAVE streak via a PRE-EXISTING file — a test.each parked it and pulled titles OUT, so a title layer can go DOWN with no file deleted; compare park SETS by identity, never by count.
+- [⭐⭐ SIX EDGE-BUNDLE ROWS WERE STALENESS, NOT BUILD ORDER — census 23 to 17 @ 08-10](edge-bundle-census-rows-were-staleness-not-build-order.md) — STEP 15 WAS ALREADY RED AT e4a21360: 51 UNBANKED ROWS, proven set-identical in a base archive; the meta-test's 58 green says NOTHING about it; the ordered post-build RELOCATION was a PROVEN NO-OP; read the hazard registry's own upgradePath before designing a cure; ORDINARY_TEST_CONTROL's >=5 floor is CENSUS-BOUNDED.
+- [⚠⚠ edge bundles = BUILT ARTIFACTS](dirty-tree-build-artifact-class.md) rebuild edge-shared IN the same commit, [always FIVE bundles](edge-shared-builder-rebuilds-five-bundles.md); DEPLOY = owner's train.`],
+
+  ['D: archive-census / gate-mutex family', `- [⚠⚠ AN ARCHIVE OF AN OLD SHA CAN FAKE-GREEN ITS OWN BASE HALF](gate-mutex-run-mode-absent-at-old-shas.md) — gate-mutex.sh --run did not exist before d7ec3885, so the flag falls to INSPECT, runs NO test and exits 0; the tell is an EMPTY LOG beside a green exit, and a base archive is SUPPOSED to pass — drive an old tree with the CURRENT tree's script, and diff the APPARATUS as well as the instrument.
+- [⚠⚠ ARCHIVE CENSUS: LINK THE WORKTREE'S OWN node_modules](archive-census-node-modules-leg.md) — main tree's lacks three+pg; the tell is a ZERO-TEST suite, never an assertion diff.
+- [⚠⚠ the gate-mutex check SELF-MATCHES](vitest-mutex-check-self-match.md) cure = scripts/gate-mutex.sh
+- [⚠⚠ Receipt-vacuity + shared-ratchet rules](receipt-vacuity-and-shared-ratchet-rules.md) 10 laws: per-file tsc = vacuum; CLOCK LAW; ARCHIVE-CENSUS LAW — never census a live shared tree
+- [⚠⚠ An ABSOLUTE-path substring pin reds on the CHECKOUT'S OWN directory name](absolute-path-substring-pin-fake-red.md) — archViewWall asserts !govPath.includes('/arch/') over an ABSOLUTE path, so an archive unpacked under a dir named arch fakes a real-looking architecture red; name census trees <LANE>/tree.
+ALSO read absolute-path-pin-poisoned-by-scratch-dir-name.md (NOT currently in the index) and report whether it duplicates absolute-path-substring-pin-fake-red.md.`],
+
+  ['E: landed build-era waves', `- [⭐⭐ MIGRATION DEBT RETIRED — the pin was INVERTED, not deleted](migration-debt-retired-owner-gated-discharge.md) — train 194 to 195, all THREE owner-gated rows gone (the third is in uncollectedSuites, NOT entries, and emptying it reds a SECOND anti-vacuity pin); the discharge's ANTI-AMNESTY ARM re-reads 195's cure off disk, so a revert reds it; a .down.sql fires classifyRollback's previously-untested data-safe-down-script branch.
+- [⭐⭐ WALKER/CENSUS SPLIT LANDED @ af8815e9](walker-census-split-landed.md) — FAILING TEST = DEBT, FAILING WALKER = DISABLED GUARD, never one freezing mechanism; EP-2/EP-6 "EXACT zero" RELAXED, owed back.
+- [⭐⭐ EP-q — CARRIER-CONDITIONAL armyId, STOP-ES2-1 CLOSED](epq-encounter-carrier-conditional-landed.md) — the venue vocabulary has FIVE homes and had ZERO parity checks; holdVenueFromEncounter FAILS CLOSED IN SILENCE; never dedupe the two homes by IMPORT (envoyK3BeliefSeam pins both import lists); the "CR-ES-2 both-homes" attribution is WRONG and the row's armyId figures were a HYBRID, not drift.
+- [⭐⭐ HB + WC + EP FOLD LANDED — 33 waves unblocked](hb-wc-ep-fold-landed.md) — a COUNT MUTANT on a literal goes VACUOUS when the count grows by design; Neighbour spelling load-bearing; snapshots DELETED @ cd6bccc6.`],
+
+  ['F: verification-hazard block', `- [⚠⚠ walker-scan textual blindness x2](walker-scan-textual-blindness-classes.md) — quoted source CONVICTS a data manifest (mask literal contents, spare the key); an injected-seam alias EMPTIES a literal census silently (derive bindings + non-vacuity pin).
+- [⭐⭐ DOOR 3 IS A POLARITY](door3-polarity-principle-landed.md) — recognition CREDITS, everything else PARKS; the instrument proves a pin RUNS, never that it ASSERTS — run every remedy as a MUTANT.
+- [⚠⚠ AN ENUMERATION ON THE CREDIT SIDE FAILS OPEN](credit-side-enumeration-fails-open.md) cure = a TOTAL positive predicate
+- [⭐⭐ DERIVE-DONT-RESTATE, and a mutant must CHANGE the file](derive-dont-restate-and-mutant-must-change.md)
+- [⚠⚠ first-match document pins retarget silently](first-match-document-pin-class.md)
+- [⚠ banding is lossy](lossy-banding-contradiction-class.md) one band per clause, comparison in WORDS.
+- [⚠⚠ a "dark" wave's DISPLAY surface escapes the flag](dark-wave-display-surface-escapes-the-flag.md) fail-closed on the premium AUTHORITY; one shipped always-on
+- [⚠⚠ vi.mock misses a dynamic import()](vitest-dynamic-import-escapes-module-mock.md) mock the LEAF
+- [⚠⚠ config-slot silent key traps](pipeline-config-slot-silent-key-traps.md) BIT AGAIN 08-07; gen + assert _seed AND tier cardinality
+- [⚠⚠ a single-writer CLAIM is not a guard](single-writer-claim-needs-a-behavioral-pin.md) drive the REAL writer
+- [⚠ stressor byId wrapper trap](stressor-kernel-byid-wrapper-trap.md)`],
+
+  ['G: pin-vacuity family', `- **Pin-vacuity family** — [⚠️⚠️ UNREACHABLE ARM = UNPINNED ARM + self-supplied ANCHOR](unreachable-arm-and-self-supplied-anchor.md) "// anchored:" must be the line IMMEDIATELY above · [conjunction-blind pairs](conjunction-coverage-blind-guard-pairs.md) · [empty-harness absence pins](harness-default-empty-state-vacuous-absence-pin.md) · [self-referential](self-referential-pin-class.md) · [unreachable conjunctions](unreachable-predicate-conjunction-class.md) · [STEP doesn't divide BOUND](loop-endpoint-unreachable-when-step-doesnt-divide-bound.md) · [fixture mirrors the deriver](fixture-mirrors-deriver-dead-arm-class.md) · [wave E](wave-e-hazard-classes.md) · [EPISTEMIC PREVENTION](epistemic-prevention-shipped.md) use tests/helpers/ or walkers red.
+For this family specifically: also report whether the nine files overlap enough that a SINGLE merged index line naming the family plus the two or three sharpest cross-cutting rules would preserve recall, or whether each file carries a genuinely distinct trap that a merged line would hide.`],
+
+  ['H: owner laws + endgame + forward risks', `- [THE PROMISE](the-promise-ratified.md) CONSTITUTIONAL — a seed is a STARTING world forever, lived history immutable, tuning owner-SIGNED · [product scope](product-scope-boundaries.md) world-only, sub-century, never a named character's fate, SETTING-AGNOSTIC · [DEITY DOCTRINE](deity-doctrine-no-premade-pool.md) faith = culture, NEVER theological · [FINITE-SEMANTICS](finite-semantics-law.md) typed buckets, AI = clerk never writer.
+- [fix philosophy](owner-fix-philosophy.md) · [risk appetite](owner-risk-appetite-directive.md) · [reporting](owner-reporting-table-preference.md) remaining-work table after every commit report · [stash](agent-stash-incident-2026-07-14.md) briefs FORBID git stash · [vocabulary](owner-vocabulary.md) · [marketing](owner-marketing-doctrine.md) experience-first.
+- [LEGIBILITY](legibility-law.md) · [GAME-GRADE UX](game-grade-ux-doctrine.md) · [G-program](game-grade-program-rearchitected.md) built flag-off · [NEWS ADDRESS LAW](news-address-law.md) · [REALM INSPECTOR = NEWSPAPER](realm-inspector-news-architecture.md) · [Herald](the-herald-shipped.md).
+- [E-A LIVE RULES](enforcer-ea-mutation-shipped.md) — untracked/dirty target -> rationale rows; a sweep plant is a TWO-FILE edit; SPLICE RAW TEXT.
+- [founder transfers](founder-seat-transfer-consideration.md) LEGAL SIGN-OFF = activation gate · [support email](support-email-destination-unconfirmed.md) owner confirms before deploy · [AI intent-atlas + tier ladder](ai-intent-atlas-and-tier-ladder-open.md) telemetry informs SUGGESTION never engine math · [dossier-editor + Atlas](dossier-editor-capability-atlas-verdict.md) atlas read-only.
+- [command-registry walkers](command-registry-consumer-evidence-walkers.md) · [faction-rename convergence](faction-rename-convergence-shipped.md) never cascade wizardNews or factions[].id · [design handoff folder](design-handoff-folder.md) Desktop "Settlement Forge template review".
+- [Master-merge ALREADY EXECUTED](master-merge-already-executed.md) · [reconciliation](reconciliation-decisions.md) 8 rulings stand · [REMEDIATION state](capability-remediation-program-state.md) R-0..R-5b closed; 529-killed agents leave PARTIAL EDITS, survey before resume.
+- [holistic review 07-30](holistic-review-2026-07-30.md) 2 highs · [remediation doc](exhaustive-remediation-architecture-doc.md) 202 REM items · [wave 8 + deploy-safety](wave8-landed-deploy-safety-sitting.md) · [survey 07-26](holistic-survey-2026-07-26.md)
+- [rulingStructure tradeRoute misnomer](rulingstructure-traderoute-misnomer.md) · [history reroll](history-reroll-preservation-shipped.md) · [spatialLedgers MANIFEST classification law](spatial-ledger-manifest-classification-law.md) · [barrel hop](barrel-hop-drags-the-whole-family.md) · [minifold tree is LIVE](minifold-tree-is-live.md) · [scratchpad shared](session-scratchpad-is-shared-between-lanes.md) · [gate state](generation-remediation-gate-state.md)`],
+]
+
+const carried = parallel(BATCHES.map(([label, lines]) => () =>
+  agent(carryPrompt(label, lines), { label: `carry:${label.split(':')[0]}`, phase: 'Verify detail carried', schema: CARRY_SCHEMA })
+))
+
+// ---- repo-state checks, independent of the carry audit ----
+
+const STATE_SCHEMA = {
+  type: 'object',
+  additionalProperties: false,
+  required: ['checks'],
+  properties: {
+    checks: {
+      type: 'array',
+      items: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['claim', 'status', 'evidence'],
+        properties: {
+          claim: { type: 'string' },
+          status: { type: 'string', enum: ['STILL_OPEN', 'CLOSED', 'INDETERMINATE'] },
+          evidence: { type: 'string', description: 'Command run + quoted output, or file:line' },
+        },
+      },
+    },
+  },
+}
+
+const statePrompt = (task) => `You are checking whether claims recorded in a Claude auto-memory index are STILL TRUE against the live repo. DO NOT EDIT ANY FILE and DO NOT run any state-mutating git command (no add/commit/checkout/stash/reset/clean). Read-only inspection only.
+
+Repo worktree: ${REPO} (branch claude/composite-r4, HEAD 9df7e428).
+Note this is a LIVE shared tree with uncommitted work from other sessions — never revert or modify anything.
+Memory directory (for reading the memory's own claims): ${MEM}
+
+Useful: \`git log --oneline\`, \`git log -- <path>\`, \`git show <sha>:<path>\`, grep, reading docs under docs/.
+Do NOT run the full test gate; it is expensive and this is a read-only audit. Static inspection of test files, docs, and git history is what is wanted.
+
+For each claim below, decide STILL_OPEN (the hazard/program is live and the index line must survive), CLOSED (the work finished / the hazard was structurally eliminated, so the index line can be folded into an archive), or INDETERMINATE. Quote the evidence — a command and its output, or a file:line.
+
+Bias toward STILL_OPEN when evidence is weak: wrongly dropping a live hazard is far more costly than keeping one extra index line.
+
+${task}`
+
+phase('Verify repo state')
+
+const state = parallel([
+  () => agent(statePrompt(`Claims to check:
+1. "SITE-COHERENCE PROGRAM OPEN @ 2e6d872f — 9 WAVES SIGNED, NONE started; 103/462 settlements contradict their terrain; Wave 3 MUST precede Wave 4". Has any wave of the site-coherence / walker-banking program started or landed since 2e6d872f? Look for the program's plan doc under docs/ and its git log.
+2. "CR-GR3B-1..4 + CR-IN0C-1..3 RULED — PENDING queue landing + packet recompile." Did the queue landing and packet recompile happen? Check docs/implementation/INDEX.md and the queue docs.
+3. "STEP 15 WAS ALREADY RED AT e4a21360: 51 UNBANKED ROWS". Is step 15 still red at HEAD 9df7e428? HEAD's commit message says six census rows retire by rebuild. Determine whether the 51-unbanked-row condition is resolved or still standing. Do NOT run the gate; inspect the step-15 test/script source and recent commits.`), { label: 'state:programs', phase: 'Verify repo state', schema: STATE_SCHEMA }),
+
+  () => agent(statePrompt(`Claims to check:
+1. "TYPECHECK RED + the READER-WITHOUT-A-WRITER class — an &&-chain red BLINDS every later step (5 days dark)". Commit e4a21360 says "both typecheck ratchets tighten to their measured floors". Is the typecheck gate currently GREEN at HEAD, i.e. is the specific &&-chain-blinding red cured? Inspect package.json scripts for && chains in the check pipeline, and the typecheck ratchet test/baseline files. Report whether the &&-chain STRUCTURAL hazard (one red blinds later steps) still exists in the scripts, separately from whether the tree is currently red.
+2. "TWO-TYPECHECKER RECEIPT LAW — TWO tsconfigs DISAGREE (0 vs 31)". Do two tsconfigs still disagree? Name them and the current counts if cheaply determinable from the ratchet baselines.
+3. "EP-2/EP-6 'EXACT zero' RELAXED, owed back" (from walker-census-split-landed.md @ af8815e9). Is the relaxation still in place, i.e. is the debt still owed? Grep the walker/census test files for EP-2 and EP-6.
+4. "FIRST-PAINT RE-MEASURED @ 1e4c493b — 3 reds; overage = ENTRY chunk's +29 eager modules". Are the first-paint budgets still red at HEAD? Inspect the first-paint budget test/config and recent commits touching it.`), { label: 'state:gates', phase: 'Verify repo state', schema: STATE_SCHEMA }),
+
+  () => agent(statePrompt(`Claims to check — these are the ones most likely to have been structurally cured, which would let the index line fold into an archive:
+1. "the gate-mutex check SELF-MATCHES — cure = scripts/gate-mutex.sh". Does scripts/gate-mutex.sh exist at HEAD and is the self-match cured (i.e. is this now MACHINERY rather than a live hazard)?
+2. "a RED ratchet's contents grow INVISIBLY — cure = scripts/ratchet-inventory.sh". Does scripts/ratchet-inventory.sh exist at HEAD?
+3. "regen history-beat loss STILL BROKEN, deferred" (regen-edit-loss-hazard.md). Is this still broken/deferred, or was it fixed? Grep for the regen/history-beat preservation code and any test pinning it.
+4. "until the webhook deploys, partial refunds claw back whole seats — issue none". Has the refund webhook been deployed or at least implemented at HEAD? Look for the webhook handler and any partial-refund logic.
+5. "pinnedNpcs regen mis-target LIVE" (from holistic-review-2026-07-30.md) and "mountain_pass both-arm fallthrough". Are these two still present in the code at HEAD?`), { label: 'state:cures', phase: 'Verify repo state', schema: STATE_SCHEMA }),
+
+  () => agent(`DO NOT EDIT ANY FILE. Read-only.
+
+Read these four archive index files in ${MEM} and report their exact structure so a new dated compaction section can be appended in the SAME established style:
+- archive-2026-08-build-era-index-detail.md
+- archive-pre-endgame-index.md
+- archive-2026-07-closed-lanes.md
+- archive-standing-hazards-index.md
+
+For each: report (a) the YAML frontmatter verbatim, (b) every heading with its line number, (c) the exact formatting convention used inside the most recent "compaction"/"fold" section (bullet style, glyph use, whether removed MEMORY.md lines are stored verbatim or reworded), (d) the last 15 lines verbatim so I know exactly where and how to append.
+
+Then answer: which of these four files is the correct destination for lines trimmed out of MEMORY.md's "THE BUILD ERA" section on 2026-08-10, and which is correct for lines trimmed out of the "Live program hazards" section? Justify from the files' own stated scope.
+
+Finally, list any index line currently in ${MEM}/MEMORY.md whose content is ALREADY duplicated inside one of these four archive files (so trimming it from MEMORY.md loses nothing at all). Quote the duplicate.`, { label: 'archive:structure', phase: 'Verify repo state', schema: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['files', 'destinationForBuildEra', 'destinationForLiveHazards', 'alreadyDuplicated'],
+    properties: {
+      files: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['file', 'frontmatter', 'headings', 'convention', 'tail'], properties: {
+        file: { type: 'string' }, frontmatter: { type: 'string' }, headings: { type: 'array', items: { type: 'string' } }, convention: { type: 'string' }, tail: { type: 'string' } } } },
+      destinationForBuildEra: { type: 'string' },
+      destinationForLiveHazards: { type: 'string' },
+      alreadyDuplicated: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['indexLine', 'archiveFile', 'quote'], properties: { indexLine: { type: 'string' }, archiveFile: { type: 'string' }, quote: { type: 'string' } } } },
+    },
+  } }),
+])
+
+const results = await Promise.all([carried, state])
+const [carryRes, stateRes] = results
+
+phase('Critic')
+
+const critic = await agent(`You are a completeness critic for a memory-index compaction audit. DO NOT EDIT ANY FILE.
+
+Context: ${MEM}/MEMORY.md is 20750 bytes and must be cut below 17510 bytes (~3240 bytes) WITHOUT losing recall. The rule the index states about itself: "PURE INDEX: pointer + sharpest hook only; topic files hold ALL detail and numbers — never restate a figure here."
+
+Here are the audit results gathered so far.
+
+CARRY AUDIT (does each topic file carry every hook currently in its index line?):
+${JSON.stringify(carryRes.filter(Boolean), null, 1).slice(0, 60000)}
+
+REPO STATE + ARCHIVE STRUCTURE:
+${JSON.stringify(stateRes.filter(Boolean), null, 1).slice(0, 40000)}
+
+Read ${MEM}/MEMORY.md yourself. Then answer, concretely:
+1. Which specific index lines are the highest-yield compaction targets — biggest byte saving per unit of recall risk? Give line numbers and estimated bytes saved.
+2. Which hooks MUST be preserved verbatim in the index because they exist nowhere else, or because losing them from the always-loaded index would let a trap fire before anyone opens a topic file?
+3. What did the carry audit MISS — any index line nobody audited, any topic file not read, any claim taken on trust?
+4. Is there any same-family merge opportunity the audit did not name?
+5. Name any risk in folding BUILD ERA lines into the archive file, given that section is labeled "freshest".
+
+Be specific and quantitative. Your output is a work plan, not prose.`, { label: 'critic', phase: 'Critic', effort: 'high' })
+
+return { carry: carryRes.filter(Boolean), state: stateRes.filter(Boolean), critic }

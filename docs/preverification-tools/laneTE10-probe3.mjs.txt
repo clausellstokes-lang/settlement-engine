@@ -1,0 +1,20 @@
+import { loadPacketManifest, validatePacketManifest } from '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold/scripts/implementation-packets.mjs';
+const root = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold';
+const SHARED = 'tests/domain/habitCurve.test.js';
+const base = () => loadPacketManifest({ rootDir: root });
+const M1rows = [{ action: 'MODIFY', path: 'src/domain/worldPulse/habit/habitCurve.js' }, { action: 'TEST', path: SHARED }];
+const M2rows = [{ action: 'CREATE', path: 'src/domain/worldPulse/habit/habitLedger.js' }, { action: 'TEST', path: SHARED }];
+const mk = (id, status, rows) => ({ id, status, packetPath: `docs/implementation/packets/fp/${id}.md`,
+  verifiedBase: 'e5ecc83dd443d13bdbc495d8cf701f93504fccdd', changeManifest: rows,
+  requiredSymbols: [{ path: SHARED, symbol: 'const HABIT_DARK_CLOSURE' }],
+  acceptanceCases: [{ id: 'A1', case: 'x' }], checks: [['node', '-v']] });
+for (const [label, s1, s2] of [['P1/I1/I2  HB-0B=READY  HB-2=READY', 'READY', 'READY'],
+                               ['T         HB-0B=LANDED HB-2=LANDED', 'LANDED', 'LANDED'],
+                               ['alt       HB-0B=LANDED HB-2=READY', 'LANDED', 'READY'],
+                               ['alt       HB-0B=READY  HB-2=DRAFT', 'READY', 'DRAFT']]) {
+  const m = base();
+  m.packets = [...m.packets, mk('HB-0B', s1, M1rows), mk('HB-2', s2, M2rows)];
+  const r = validatePacketManifest(m, { rootDir: root });
+  const dup = r.errors.filter((e) => e.startsWith('duplicate change path across packets'));
+  console.log(`${label}  ->  duplicate rows: ${dup.length}${dup.length ? '  ::  ' + dup[0] : ''}`);
+}

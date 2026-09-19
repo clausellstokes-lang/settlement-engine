@@ -1,0 +1,87 @@
+HF-M1 star audit of laneHF-CALIBRATION.md '## LANE HF-4c' section
+Method: for each row matching '- **hf<N> ...', take the longest run of U+2605 inside the
+row's FIRST bold run (the plate's own title block). Rows and marks listed verbatim.
+
+hf313   1★  spec-gate-anatomy ★ keeper, HALF-PLAN
+hf314   2★  spec-wall-head ★★ (the §214 wall-walk gap filled; the most technically correct plate of the wave)
+hf315   2★  spec-tower-variety ★★ (the §214 tower-variety gap filled)
+hf316   3★  town-many-names-AB ★★★ (the duplicate-name test, and a strong town keeper in its own right)
+hf317   2★  town-flood-marks-AB ★★ (the numeral test on the most numeral-prone subject in the corpus)
+hf318   3★  town-unequal-circuit-AB ★★★ — THE METHODOLOGICAL RESULT OF THE LANE: the polygon-circuit prior is CU
+hf319   3★  lod-ladder-4panel ★★★ (the most useful new FORMAT of the lane for a zooming renderer)
+hf320   3★  spec-street-hierarchy ★★★ (the street dictionary; completes hf303's roads column at zoom)
+hf321   3★  spec-field-boundaries ★★★ (the boundary dictionary)
+hf322   2★  spec-waterfront-edge ★★ (the water-edge dictionary; joins hf122)
+hf323   3★  spec-church-ladder ★★★ (the institution-scale ladder; one of the cleanest plates in the corpus)
+hf324   3★  town-bastide-halffilled ★★★ (the planted-town morphology; a real corpus hole filled)
+hf325   2★  town-castle-rank-zoned ★★ (rank as the shape-driver — new)
+hf326   2★  city-ward-walled-grid ★★ (the doubly-walled city — new)
+hf327   3★  city-mudbrick-river-caravan ★★★ (the best material-drives-geometry plate in the corpus)
+hf328   3★  city-causeway-ceremonial ★★★ (a NEW settlement-shape driver, and a REUSABLE CURE)
+hf329   2★  town-hilltown-contour ★★ keeper w/ HARD CULTURE-BAKE NOTE
+hf330   2★  town-citadel-cleared-wedge ★★ (the citadel wound)
+hf331   3★  town-dual-lordship ★★★ (the jurisdiction plate — the clearest demonstration in the corpus that one t
+hf332   3★  town-fishing-drying ★★★ (a PROCESS consuming more ground than the settlement)
+hf333   3★  town-drove-stances ★★★ (the movement-economy town, and one transferable texture rule)
+hf334   2★  town-record-and-mint ★★ (the administrative town — security as a plan-driver)
+hf335   3★  quarter-swallowed-village ★★★ (the best "the old place is still inside the new one" plate in the cor
+hf336   2★  town-abbey-suppressed ★★ (the broken-precinct drift)
+hf337   2★  lens-worn-folio ★★ (the folio-age lens, ~60% delivered — and a REFUSAL worth recording)
+hf338   3★  lens-unfinished-survey ★★★ (THE MOST NOVEL PLATE OF THE LANE)
+hf339   2★  lens-wet-season ★★ (a new register; and the FIRST OBSERVED FAILURE OF #17)
+hf340   3★  zoom-mill-complex ★★★ (the definitive mill-works reference)
+hf341   2★  zoom-inn-yard ★★ (the inn anatomy; floor-plan register)
+hf342   3★  zoom-civic-knot ★★★ (the regulatory furniture, nowhere else in the corpus)
+hf343   3★  zoom-tannery-dye-ground ★★★ (the definitive noxious-trade process plate)
+hf344   3★  zoom-churchyard ★★★ (burial-ground social geography; a rule a renderer can apply directly)
+hf345   3★  zoom-castle-bailey ★★★ (the bailey interior — a real §214 gap, thoroughly filled)
+hf346   3★  town-head-of-navigation ★★★ (the cleanest single-cause town plan in the corpus)
+hf347   2★  town-three-circuits ★★ keeper, MORPHOLOGY FLAG — use for evidence, not for shape
+hf348   3★  town-that-moved ★★★ (the relocation plate; and the corpus's best dating device)
+hf349   3★  terrain-karst-plateau ★★★
+hf350   3★  terrain-volcanic-ash ★★★ content, HARD CULTURE-BAKE NOTE
+hf351   3★  terrain-dune-coast ★★★
+hf352   3★  terrain-moor-peat ★★★
+hf353   3★  terrain-taiga-river ★★★ (the strongest new SYSTEMS concept of the wave)
+hf354   3★  terrain-salt-lake ★★★
+hf355   2★  terrain-lake-basin ★★ keeper, REGISTER FLAG
+hf356   3★  terrain-downs-and-vale ★★★ content (the best settlement-geography reasoning in the corpus), HARD CUL
+hf357   0★  terrain-loess-sunken-courts ⚠ SEMI-OBLIQUE keeper — grammar and morphology only (the TENTH oblique f
+hf358   2★  terrain-mangrove-tidal ★★ keeper, MIXED PROJECTION
+hf359   0★  terrain-altiplano ⚠ OBLIQUE — GRAMMAR ONLY (the ELEVENTH, and a NEW trigger identified)
+hf360   3★  countryside-commons-and-waste ★★★ (with hf291, the best institutional-geography plate in the corpus)
+hf361   2★  town-boom-collapsed ★★
+hf362   3★  city-after-great-fire ★★★ (the "property defeats the plan" argument, drawn not asserted)
+hf363   3★  town-market-moved ★★★
+hf364   3★  town-sacked-resettled ★★★ (the corpus's clearest proof that fabric is not plan)
+hf365   3★  town-frontier-decayed-walls ★★★
+hf366   3★  town-guild-quarters ★★★ (you can read the trade off the plot geometry alone)
+hf367   3★  port-foreign-enclaves ★★★
+hf368   3★  city-water-conduits ★★★ (the water-inequality argument, drawn)
+hf369   2★  town-refuse-and-drains ★★ (new subject, near-unusable lettering)
+hf370   3★  countryside-fuel-shed ★★★ (resource catchment with an exhaustion gradient)
+hf371   3★  countryside-grain-catchment ★★★ (the most directly implementable hinterland model in the corpus)
+hf372   3★  stress-siege-unequal-circuit ★★★ (the enumeration cure on the subject that defeated six previous pla
+hf373   3★  town-hilltown-CURE329 ★★★ (BOTH cures land on one plate)
+hf374   3★  city-unequal-circuit-metropolis ★★★ (the cure at METROPOLIS scale, where the prior was worst)
+hf375   3★  zoom-ward-wealth-gradient ★★★ CONTENT / ⛔ TITLE MUST BE REPLACED
+hf376   2★  spec-relief-conventions ★★ (the convention catalogue; oblique presentation)
+hf377   3★  spec-water-textures ★★★ (the water dictionary)
+hf378   3★  spec-density-ladder ★★★ (with hf319 and hf388, the third leg of the SCALE CONTRACT)
+hf379   3★  spec-ruin-stages ★★★ (the cleanest specimen sheet in the corpus)
+hf380   3★  town-two-faiths-shared ★★★ (setting-agnosticism HELD; the invented-names cure at n=2)
+hf381   3★  countryside-way-network ★★★ (the most implementable settlement-PLACEMENT rule in the corpus)
+hf382   3★  city-refugee-influx ★★★
+hf383   2★  town-charity-endowments ★★ (roster complete, endowment layer half-landed)
+hf384   3★  lens-dark-register-plan ★★★ (completes the lens shelf)
+hf385   3★  town-three-circuits-CURE347 ★★★ (the enumeration cure at n=4, on the hardest subject)
+hf386   3★  spec-projection-comparison ★★★ (THE CLASSIFICATION CAPSTONE)
+hf387   3★  lens-folio-mend-later-hand ★★★ (hf337's REFUSAL overcome — and a general prompt-architecture lesson)
+hf388   3★  spec-settlement-glyph-ladder ★★★ (the third leg of the SCALE CONTRACT)
+hf389   3★  city-metropolis-grain-max ★★★ — THE NEW METROPOLIS FLAGSHIP
+hf390   3★  spec-folio-sheet-index ★★★ (the folio conceit completed)
+
+TOTALS: rows=78  ***=55  **=20  *=1  none=2
+laneHF4-receipt.md §8 states: 'I awarded ★★★ to 41 of my 78.'  MEASURED: 55 of 78 (70.5%).
+
+***: hf316 hf318 hf319 hf320 hf321 hf323 hf324 hf327 hf328 hf331 hf332 hf333 hf335 hf338 hf340 hf342 hf343 hf344 hf345 hf346 hf348 hf349 hf350 hf351 hf352 hf353 hf354 hf356 hf360 hf362 hf363 hf364 hf365 hf366 hf367 hf368 hf370 hf371 hf372 hf373 hf374 hf375 hf377 hf378 hf379 hf380 hf381 hf382 hf384 hf385 hf386 hf387 hf388 hf389 hf390

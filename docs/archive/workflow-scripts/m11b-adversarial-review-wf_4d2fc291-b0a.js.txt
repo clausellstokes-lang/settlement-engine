@@ -1,0 +1,110 @@
+export const meta = {
+  name: 'm11b-adversarial-review',
+  description: 'Adversarial code review of the M11b calamity mover (7 dimensions → find → 3-refuter verify)',
+  phases: [
+    { title: 'Find', detail: '7 dimension finders over the M11b diff' },
+    { title: 'Verify', detail: '3 adversarial refuters per candidate' },
+  ],
+}
+
+const COMMIT = '62c81a0c' // the M11b commit
+const CONTEXT = `
+M11b — CALAMITY mover (Phase 5.5), commit ${COMMIT} on branch review-fixes-2026-07-08. Review ONLY
+this commit: run \`git show ${COMMIT}\` and read the enclosing functions; read the whole of
+src/domain/spatial/calamity.js (pure leaf) + src/domain/worldPulse/calamityKernel.js (adapter) as
+needed. Files: calamity.js (pure), calamityKernel.js (adapter), pulseKernel.js (dispatch ~line 1862),
++ 2 test files.
+DESIGN: a very rare instantaneous natural disaster with a fully EMERGENT economic tail (zero new
+persistent mechanism). Gated by rules.disastersEnabled (tolerant === true, ABSENT from
+DEFAULT_SIMULATION_RULES → flag off is a COMPLETE no-op, 0 eager, byte-identical). One seeded annual
+draw on a year-boundary crossing (disaster:\${id}:\${year}); the permanent stamp rides the
+settlement's own calamityHistory (NOT a new worldState ledger) and IS the cooldown record (no
+re-strike within COOLDOWN_YEARS). Terrain keys the type. The STRIKE selects K non-required
+institutions (K tier-capped 1..4): required filtered BEFORE the draw, codepoint-sorted; SUBSUMPTION-
+FIRST (UPGRADE_CHAINS greater DEMOTES → multi-instance category COLLAPSES to one → singleton
+DESTROYED). Bounded aggregate death (MAX .14) + a larger EXODUS (MAX .26; sum .40 < 1). The exodus
+routes through the M4 realized-debit path: build a population_emigration outcome (applyMode 'auto'),
+debit the origin, then collectRealizedEmigrationEvents → dispatchMigrations (which asserts
+Σarrivals+Σdeaths==Σdepartures); aspatial falls back to distributeMigrants. Emergent tail: broken
+activeChains → primaryExports drop lost goods → M2 sever; popToTier demote; a custom_crisis 'disaster
+response' condition feeds the existing legitimacy→coup pressure.
+CONSTITUTIONAL LAWS this mover MUST hold: (1) same-seed BYTE-IDENTITY (all goldens unchanged);
+(2) DORMANCY — flag off / absent ⇒ a TRUE no-op (no draw, NO rng fork consumed on the master, no key,
+no settlement touch, byte-identical); (3) first-paint closure ≤ 1,255,985, claimed 0 eager
+(disastersEnabled absent from DEFAULT; calamityHistory rides the settlement, not a new ledger);
+(4) DETERMINISM — seeded forks only (no Date.now/Math.random), codepoint-sorted mutation, the annual
+draw + year-boundary must be order-independent + reproducible; (5) AGGREGATE-population only — no named
+NPC touched; (6) the HARD BOUNDS: required NEVER selected, death+exodus fractions bounded < 1 (no
+annihilation), M4 conservation holds THROUGH the exodus (no mint, no destroy), the KEYSTONE tier-blind
+invariant (no \`tier\` read under src/domain/spatial/ — strikeCapForTier must live in the kernel).`
+
+const FINDINGS_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    findings: {
+      type: 'array',
+      items: {
+        type: 'object', additionalProperties: false,
+        properties: {
+          file: { type: 'string' }, line: { type: 'number' },
+          summary: { type: 'string' }, failure_scenario: { type: 'string' },
+          severity: { type: 'string', enum: ['high', 'med', 'low'] },
+        },
+        required: ['file', 'line', 'summary', 'failure_scenario', 'severity'],
+      },
+    },
+  },
+  required: ['findings'],
+}
+const VERDICT_SCHEMA = {
+  type: 'object', additionalProperties: false,
+  properties: {
+    refuted: { type: 'boolean' },
+    verdict: { type: 'string', enum: ['CONFIRMED', 'PLAUSIBLE', 'REFUTED'] },
+    reasoning: { type: 'string' },
+  },
+  required: ['refuted', 'verdict', 'reasoning'],
+}
+
+const DIMENSIONS = [
+  { key: 'correctness', focus: 'Line-by-line correctness of the pure engine (calamity.js) + adapter: the annual-hazard draw + year-boundary crossing, cooldown-via-stamp read, terrain typing, the K-selection, the death/exodus fraction math. Hunt inverted conditions, off-by-one on the year boundary, falsy-zero (year 0 / tier 0 / empty roster), a cooldown that never expires or expires instantly, a hazard that compounds wrong over N settlements, NaN from a divide.' },
+  { key: 'subsumption-hard-bounds', focus: 'The STRIKE invariants. Prove `required` institutions can NEVER be selected (filtered BEFORE the draw, on ALL paths). Prove subsumption is correct: an UPGRADE_CHAINS greater actually demotes to its LESSER (not skips/duplicates), a multi-instance category collapses to EXACTLY one survivor (codepoint-first, deterministic), a singleton is destroyed — no double-destroy, no orphaned chain, no off-by-one in K. Prove the death+exodus fractions are bounded < 1 on every path (no annihilation).' },
+  { key: 'dormancy-byte-identity', focus: 'Is the flag-off path a TRUE no-op? disastersEnabled absent ⇒ prove NO rng fork is consumed on the master (a consumed fork would perturb downstream draws → byte-drift), NO worldState key added, NO settlement touched, the dispatch returns the same refs. Also: does the year-boundary gate ever fire spuriously off-flag? Prove goldens byte-identical with the flag off.' },
+  { key: 'determinism', focus: 'Determinism + order-independence: the annual draw disaster:${id}:${year} keyed on stable composite parts; codepoint-sorted mutation everywhere; the partial-shuffle is seeded + stable; iteration over settlements/institutions/chains is order-stable; no Date.now/Math.random/argless Date; the year-boundary crossing computed from tick deterministically (not wall-clock).' },
+  { key: 'exodus-conservation', focus: 'The M4 realized-debit exodus (the highest-risk seam). Prove the origin is debited EXACTLY deaths+exodus (no more, no less), the population_emigration outcome is applyMode auto (so collectRealizedEmigrationEvents does NOT drop it), dispatchMigrations conserves (Σarrivals+Σdeaths==Σdepartures) and nothing is minted OR destroyed. Check the ASPATIAL fallback (distributeMigrants) also conserves. Look for a double-debit (origin debited by both applyPopulationOutcomeToSettlement AND the dispatch), or a path where the exodus is counted but never dispatched (destroy).' },
+  { key: 'cross-file-integration', focus: 'The pulseKernel dispatch (~1862): the const→let settlementUpdates change — is settlementUpdates correctly threaded (not clobbered by a later writer, not stale)? Are memoryState / wizardNews / rng / now the right in-scope vars? The fold-back (if changed → memoryState = ...; settlementUpdates = ...; appendWizardNewsEntries). The tail: does the custom_crisis condition carry the right keys to trigger the EXISTING legitimacy→coup path? Does the chain-reconcile actually sever the M2 link (primaryExports drop → producer index)? Does popToTier demote without forcing?' },
+  { key: 'budget-keystone', focus: 'The 0-eager claim + the KEYSTONE tier-blind invariant. Is disastersEnabled genuinely absent from DEFAULT_SIMULATION_RULES (no eager accessor)? Does calamityHistory ride the settlement object (not a new eager worldState key)? Does the new import chain (pulseKernel → calamityKernel → calamity) pull anything into first-paint? CRITICAL: grep calamity.js (src/domain/spatial/) for ANY `tier` read — the keystone forbids tier under spatial/; strikeCapForTier must live in the kernel. Flag any structural reason closure could grow or the tier-blind invariant is violated.' },
+]
+
+phase('Find')
+const results = await pipeline(
+  DIMENSIONS,
+  (d) => agent(
+    `You are an adversarial code reviewer. Review ONLY the M11b diff (\`git show ${COMMIT}\`, and read the enclosing functions + the full calamity.js/calamityKernel.js as needed).\n${CONTEXT}\n\nYOUR DIMENSION — ${d.key}: ${d.focus}\n\nReturn up to 6 candidate findings, each with a CONCRETE failure scenario (specific inputs/state → wrong output / crash / byte-drift / conservation-break / invariant-break / budget-growth). Only findings with a nameable failure scenario. If clean, return empty. No pure style.`,
+    { label: `find:${d.key}`, phase: 'Find', schema: FINDINGS_SCHEMA, model: 'opus' },
+  ),
+  (review, d) => parallel((review?.findings || []).map((f) => () =>
+    parallel([0, 1, 2].map((i) => () =>
+      agent(
+        `You are refuter #${i + 1} (of 3), adversarially trying to REFUTE a code-review finding on the M11b calamity mover. Default to refuted=true if not constructible from the actual code.\n${CONTEXT}\n\nTHE FINDING (dimension ${d.key}):\nfile: ${f.file}:${f.line}\nsummary: ${f.summary}\nfailure_scenario: ${f.failure_scenario}\n\nRead the actual code (git show ${COMMIT} + the file) and decide. REFUTED only if: factually wrong (quote the line), provably impossible (cite type/constant/guard/invariant), already handled (cite the guard), or pure style. Otherwise CONFIRMED (constructible now) or PLAUSIBLE (realistic rare path). refuted=true for REFUTED, false otherwise.`,
+        { label: `verify:${d.key}:${f.line}:r${i + 1}`, phase: 'Verify', schema: VERDICT_SCHEMA, model: 'opus' },
+      )
+    )).then((votes) => {
+      const v = votes.filter(Boolean)
+      return { ...f, dimension: d.key, votes: v, refutedCount: v.filter((x) => x.refuted).length, survives: v.filter((x) => x.refuted).length < 2 }
+    })
+  )),
+)
+
+const all = results.flat().filter(Boolean)
+const survivors = all.filter((f) => f.survives)
+const rank = { high: 0, med: 1, low: 2 }
+survivors.sort((a, b) => (rank[a.severity] ?? 3) - (rank[b.severity] ?? 3))
+log(`M11b review: ${all.length} candidates → ${survivors.length} survived 3-refuter verify`)
+return {
+  totalCandidates: all.length, survived: survivors.length,
+  findings: survivors.map((f) => ({
+    severity: f.severity, dimension: f.dimension, file: f.file, line: f.line,
+    summary: f.summary, failure_scenario: f.failure_scenario, refutedCount: f.refutedCount,
+  })),
+}

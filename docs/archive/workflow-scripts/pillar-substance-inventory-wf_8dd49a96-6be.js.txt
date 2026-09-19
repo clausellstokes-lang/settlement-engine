@@ -1,0 +1,30 @@
+export const meta = {
+  name: 'pillar-substance-inventory',
+  description: 'Substance inventory of the three BUILT pillars nobody has individually assessed: war, faith, trade — mechanics, content depth, thin spots',
+  phases: [
+    { title: 'Inventory', detail: '3 Opus inspectors: war, faith, trade — what is actually modeled, how deep the content runs, where it is thin' },
+  ],
+}
+const ROOT = '/Users/cstokes/Desktop/settlement-engine'
+const PS = { type:'object', additionalProperties:false, properties:{
+  pillar:{type:'string'},
+  mechanics_inventory:{type:'string', description:'what is ACTUALLY modeled end-to-end — the causal chain of this pillar as built, with file anchors'},
+  content_depth:{type:'string', description:'how rich the CONTENT is: vocabularies, variety, distinct states/kinds/prose — quantified where possible'},
+  standout:{type:'string', description:'the single most impressive/distinctive piece of substance in this pillar'},
+  thin_spots:{type:'array', items:{type:'string'}, description:'where the pillar is genuinely thin/shallow TODAY (vs its own docs or vs what a DM would expect) — honest'},
+  verdict:{type:'string', enum:['deep','solid','adequate','thin']},
+}, required:['pillar','mechanics_inventory','content_depth','standout','thin_spots','verdict'] }
+const pre = `You are an Opus inspector inventorying the SUBSTANCE of one simulation pillar in the BUILT engine at ${ROOT} (cwd, branch review-fixes-2026-07-08). Not seams, not feasibility — SUBSTANCE: what is actually modeled, how deep the content runs, what a DM actually gets. Read the real code + content tables + run a test/soak where it helps. Quantify (counts of kinds/states/lines) where possible. Be honest about thinness — this feeds the architect's owner-facing assessment.`
+
+phase('Inventory')
+const PILLARS = [
+  { key:'war', focus:`THE WAR PILLAR, end-to-end as built: martialReadiness → threat environment (W-C1) → mobilization/warPosture + reactions → settlementStrategy moves → deployment (warDeployment.js: supply integrity, morale, foodReserve, attrition, forage, levy, relief, sack) → siege (resolveSiegeVerdict) → conquest/occupation (W-C2 conquestFeeds, conscience foreclosure) → mercenary market → aftermath/rust. Inventory: how many distinct war states/verdicts/outcomes exist? Is there FIELD combat or only sieges? How do wars END (peace, exhaustion)? How rich is the war NEWS/hook content? What would a DM running a war campaign actually see across a year? Thin spots vs docs/PHASE55 §5 expectations.` },
+  { key:'faith', focus:`THE FAITH PILLAR as built (Phase 4 + W-C4): latent pantheon seeding → activation seam → deity axes (rank/alignment/temperament/domain) → religionState share ledgers → religiousContest / spread → faith events (miracle? schism? heresy?) → deity authoring UI → dormancy discipline. Inventory: how many deity archetypes/domains/temperaments? What faith EVENTS actually occur in the pulse (kinds + variety)? Conversion mechanics depth? Institution↔faith coupling (temples, clergy)? How rich is faith prose/news content? What does a DM with an activated pantheon actually experience over a year? Thin spots — e.g. doctrine/practice/ritual content, interfaith dynamics.` },
+  { key:'trade', focus:`THE TRADE PILLAR as built: resource chains at generation (resourceAnalysis→chains→economy) → RegionChannel trade edges → tradeSalience (critical/valuable gates) → tradeFlowsEnabled dynamics → supplyCompleteness/WAR_SUPPLY_CHAINS → foodStockpile → tradePressure read-model → tolls/economics? Inventory: how many goods/commodities exist? Are prices modeled or only salience bands? single-source or multi-source supply? What trade EVENTS occur (disruption, boom, new routes)? What does a DM see of trade in the dossier + news over a year? Thin spots vs the PHASE55 §4 supply-network design (multi-source, caravans, stockpile buffers beyond food).` },
+]
+const results = (await parallel(PILLARS.map(p => () =>
+  agent(`${pre}\n\nYOUR PILLAR: ${p.key.toUpperCase()}.\n${p.focus}\n\nReturn the structured inventory.`,
+    { label:`pillar:${p.key}`, phase:'Inventory', schema:PS, effort:'medium', model:'opus' })
+))).filter(Boolean)
+log(`Inventoried ${results.length}/3 pillars`)
+return { results }

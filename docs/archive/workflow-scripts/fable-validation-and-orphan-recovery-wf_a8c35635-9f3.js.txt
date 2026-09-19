@@ -1,0 +1,97 @@
+export const meta = {
+  name: 'fable-validation-and-orphan-recovery',
+  description: 'Clear the Fable-survey debt on 32 Opus-era commits, then recover the credit-killed lane orphan under Opus, with Fable signing off.',
+  phases: [
+    { title: 'Survey', detail: 'Fable validates 32 Opus-era commits / 23 owed rows', model: 'fable' },
+    { title: 'Recover', detail: 'Opus verifies and lands (or discards) the orphaned lane work' },
+    { title: 'Verify', detail: 'Opus adversarial verification' },
+    { title: 'Signoff', detail: 'Fable rules on the whole', model: 'fable' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+const BACKUP = '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/0be2ac61-89a4-425a-9361-67c3f5ab1681/scratchpad/ORPHAN-w9bfoizar'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4), HEAD \`abc5a78b\`. **Re-read HEAD yourself.** Hard-gate every state-mutating compound with the \`cd\` FIRST.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain. ⛔ NEVER read an exit code through a pipe (7 recorded instances, twice by the chair).
+⚠ EVERY figure in an INTEGRITY-COUNTED \`git archive\`, **\`git init\`ed and committed** — \`edgeSharedBundleReproducibility\`, \`committedSecretsScan\` and \`sovereigntyLightingContract\` shell out to git and a bare tar makes them LIE. Disk ~9 GiB; one archive at a time; \`rm -f\` the node_modules symlink before deleting.
+⛔ **THE TREE HAS TWELVE DIRTY FILES AND THEY HAVE TWO DIFFERENT OWNERS.** FOUR belong to an owner-started session and are UNTOUCHABLE: \`src/domain/worldPulse/{commercialReasons,pactProposals}.js\`, \`src/lib/spatialUsage.js\`, \`tests/lib/spatialUsage.test.js\`. EIGHT are ORPHANED work from a lane killed mid-task by a weekly credit limit. Full backup + 1491-line patch at \`${BACKUP}\`.
+⚠ Explicit pathspecs always; verify the staged set BY NAME AND COUNT before every commit — \`git add\` aborts ATOMICALLY on one bad pathspec.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Survey')
+const survey = await agent(`YOU ARE THE FABLE VALIDATION CHAIR. This is a READ-ONLY architectural validation. **Author no repo file; run no state-mutating command.** ` + LAWS + `
+
+**WHY YOU EXIST.** The owner's marking directive (2026-08-06): *all three verbs — architected, managed, validated — must be Fable's, or the row is owed a survey.* Opus then ran a full build era alone, **implementing AND verifying its own work**, marking every row \`⏳ OPUS-ERA — FABLE SURVEY OWED\`. Fable credit has returned and the owner's succession protocol says **the debt clears FIRST**. **32 commits** (\`01d50660\` 2026-08-06 → \`abc5a78b\` 2026-08-07) and **23 ledger rows** in \`docs/FABLE_VALIDATION_QUEUE.md\` carry the marker.
+
+⭐⭐ **YOUR VALUE IS THE INDEPENDENT ARCHITECTURAL READ, NOT A RE-RUN OF THE GATES.** Opus already proved these pass — 32 verifier agents, 71% reject rate, every finding chased. Do NOT re-execute what has been executed. **Ask the questions a self-verifying implementer structurally cannot ask about itself.**
+
+**THE SIX THAT MATTER MOST — rule on each, with the tree as evidence:**
+1. **IS A RATCHET THE RIGHT ARCHITECTURE, OR DID OPUS INSTITUTIONALISE DEBT?** Two were added — \`check-full-typecheck.mjs\` (per-file error ceilings) and \`check-test-ratchet.mjs\` (49 frozen failing tests). The reasoning was: a boolean gate nobody can pass gets ignored and then tolerates infinity. **Is that sound, or is a frozen failure census a permanent excuse wearing a ratchet's clothes?** The census has gone 49 → 40 → 35 in a day, which is evidence for; weigh it.
+2. **THE HAZARD REGISTRY — 83 classes, 52 still DOCUMENT.** Is the four-status taxonomy (MACHINERY/PARTIAL/DOCUMENT/ACCEPTED) the right frame? Is "instances per class" the right metric? **Is a registry of 83 entries a real instrument or a second memory estate that will rot the same way the first did?**
+3. **THE WALKER-CENSUS LAW AND ITS THREE-ARM IDENTIFIER.** A failing walker is a disabled guard; the identifier is a union of filename + header-title + structural arms, and a verifier already found it misses four more rows. **Is this converging or accreting epicycles?** If the shape is wrong, say so now — Opus is about to build a fourth arm.
+4. **WAS ANY OWNER-GATED CLASS SELF-RULED?** Read the 32 commits against the canonical list: deploys/pushes, migrations, schema/persistence shape, data deletion, security posture, paid-surface behaviour, new capability vs repair, owner-parked items. **Name any crossing.** Known-escalated and correctly held: migration 195's missing rollback, the satellite-mint \`foundingTier\` widening, the two docs that should leave the repo.
+5. **THE LAYERING REPAIR** (\`67f8a58e\`): a 39-module cycle cut at two edges, \`hookThemes.js\` relocated generators→domain, \`negotiationPictures.js\` split with the head deliberately NOT re-exporting the heavy half. First-paint 283→246 modules. **Architecturally right, or expedient?**
+6. **THE DECLARED GOLDEN SHIFTS** — TCD-1 moved 80% of war-seat receipts; TCD-2 moved 649/6,000 negotiation cells. Both declared with causes. **Are those the right calls under THE PROMISE (a seed is a starting world forever, lived history immutable, tuning owner-SIGNED)?**
+
+**ALSO:** flag any row whose marker should be CLEARED (the work is sound and validated), any that needs REWORK, and any where Opus's own reported confidence outran its evidence. ⚠ **Do not clear a row you did not actually examine** — a blanket clearance would repeat the exact defect the marking directive exists to prevent.
+
+RETURN JSON: per-row dispositions plus the six rulings.`, { label: 'fable:validation-survey', phase: 'Survey', model: 'fable', effort: 'high', schema: { type: 'object', required: ['rulings'], properties: { rulings: { type: 'array', items: { type: 'object', additionalProperties: true } }, rowsCleared: { type: 'array', items: { type: 'string' } }, rowsNeedingRework: { type: 'array', items: { type: 'string' } }, ownerGatedCrossings: { type: 'array', items: { type: 'string' } }, confidenceOverruns: { type: 'array', items: { type: 'string' } }, architecturalVerdict: { type: 'string' }, notes: { type: 'string' } } } })
+
+phase('Recover')
+const recover = await agent(LAWS + `
+
+YOU ARE THE ORPHAN RECOVERY LANE (implementation — Opus). A lane was killed mid-task by the weekly credit limit and left **eight files uncommitted**. Fable's validation survey ruled: ` + JSON.stringify(survey || {}).slice(0, 9000) + `
+⚠ If Fable ruled the walker-identifier shape WRONG, **stop and report rather than completing work built on it.**
+
+**THE ORPHAN**, at HEAD \`abc5a78b\`, backed up with a 1491-line patch at \`${BACKUP}\`:
+\`CONTRIBUTING.md\` +18/-6 · \`docs/FABLE_VALIDATION_QUEUE.md\` +230 · **\`scripts/.test-ratchet-baseline.json\` +0/−40** · \`tests/domain/roadsParticipation.test.js\` +103/-4 · \`tests/lint/domainAnyCastBaseline.test.js\` +196/-6 · \`tests/lint/sovereigntyLightingContract.walker.test.js\` +19/-9 · \`tests/lint/testRatchet.test.js\` +244/-50 · \`tests/lint/transcendentalMathBaseline.test.js\` +163/-4
+
+⛔⛔ **DO NOT LAND THIS ON TRUST. THE LANE DIED MID-TASK AND ITS STATE MAY BE INCOHERENT.** The number to fear is the baseline's **+0/−40**: it REMOVED census rows. If it removed rows without finishing the corresponding walker-inventory relocation, **the guards are genuinely off AND the census is silent about it** — strictly worse than the state it started from. **Establish coherence before anything else.**
+
+**THE RECOVERY PROCEDURE (recorded in docs/START_HERE.md §3k, proven on a real incident):** the work is already backed up. **Re-verify INDEPENDENTLY — the dead lane filed no report, so there is nothing to trust.** For each of the eight files: what was it trying to do, is that change complete, and does it hold?
+Then decide, per file, one of: **LAND** (complete and verified), **COMPLETE-THEN-LAND** (nearly done, finish it), or **DISCARD** (incoherent — restore from HEAD and re-do properly later). **State the disposition and the evidence for each.** A partial change landed because it was already written is the worst outcome available.
+
+**THE ACCEPTANCE, whatever you land:** (a) every census row removed must be justified — the walker's debt relocated to its own shrink-only inventory where a NEW violation still reds; **plant one and prove it**; (b) pre-existing debt unchanged, measured at a committed sha not the live tree; (c) the four owner files untouched.
+⚠⚠ \`domainAnyCastBaseline\` carries a recorded prohibition: **\`--update\` re-freezes the WHOLE tree and would bank \`commercialReasons.js\`'s 31 any-holes permanently.** ⚠ And the owner's live session is editing that very file — **measure at a committed sha.**
+
+Append a ledger row at the LIVE tail of \`docs/FABLE_VALIDATION_QUEUE.md\` (⚠ the orphan already edits that file — reconcile, do not clobber). Commit body carries the Fable-era marking Fable's survey prescribes.
+
+RETURN JSON.`, { label: 'opus:orphan-recovery', phase: 'Recover', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, coherenceVerdict: { type: 'string' }, perFileDisposition: { type: 'array', items: { type: 'string' } }, censusRowsRemovedJustified: { type: 'string' }, newViolationReds: { type: 'string' }, debtUnchanged: { type: 'string' }, ownerFilesUntouched: { type: 'boolean' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+const verify = await agent(LAWS + `
+
+YOU ARE THE ADVERSARIAL VERIFIER (Opus). Default posture: WRONG until executed evidence. REFUTE. READ-ONLY in the shared tree; mutants in throwaway archives. You hold the gate slot alone.
+
+Fable's survey: ` + JSON.stringify(survey || {}).slice(0, 6000) + `
+Recovery lane: ` + JSON.stringify(recover || {}).slice(0, 8000) + `
+
+**THE CENTRAL RISK IS A HALF-FINISHED LANE'S WORK LANDED BECAUSE IT WAS ALREADY WRITTEN.**
+1. **For EVERY census row the recovery landed as removed, prove the guard is back on** — plant a fresh violation of that walker yourself, in a file the lane never touched, and confirm it REDS. **Any row removed whose guard you cannot redden is a REJECT.**
+2. **Sweep the remaining census against the triage line** — does the row range over an OPEN tree-derived population (disabled guard) or a CLOSED per-member identity (legitimate debt)? Report every disabled guard you find, flagged or not. The last two verifiers each found rows in plain sight; that is the bar.
+3. **Confirm \`domainAnyCastBaseline\` was NOT blanket re-frozen** — the recorded prohibition says that banks 31 holes permanently.
+4. **Confirm the four owner files are untouched and unstaged.**
+5. **Confirm pre-existing debt was inventoried, not burned down** — rebuild each walker's detector from its own source and compare at a committed parent vs HEAD.
+6. Run \`npm run check\` stepwise, status captured immediately; report the first failing step by name. ⚠ Step 16 \`verify:dist\` is expected red on three inherited first-paint budgets — **REJECT if this round made any worse.**
+
+RETURN structured JSON only.`, { label: 'opus:verify', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, everyRemovedGuardReddens: { type: 'string' }, remainingDisabledGuards: { type: 'array', items: { type: 'string' } }, anyCastNotBlanketRefrozen: { type: 'boolean' }, ownerFilesUntouched: { type: 'boolean' }, debtUnchanged: { type: 'boolean' }, checkFirstFailingStep: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Signoff')
+const signoff = await agent(`YOU ARE THE FABLE VALIDATION CHAIR, RULING ON THE ROUND. READ-ONLY — author no repo file. ` + LAWS + `
+
+Your own earlier survey: ` + JSON.stringify(survey || {}).slice(0, 6000) + `
+Opus recovery: ` + JSON.stringify(recover || {}).slice(0, 6000) + `
+Opus verification: ` + JSON.stringify(verify || {}).slice(0, 6000) + `
+
+**RULE, as the validating chair:**
+1. **Which of the 23 owed ledger rows may now have their \`⏳ OPUS-ERA — FABLE SURVEY OWED\` marker CLEARED**, and which stay owed? ⚠ Clear only what you examined; a blanket clearance repeats the defect the directive exists to prevent.
+2. **Is the orphan recovery's disposition correct** — did Opus land anything it should have discarded, or discard anything worth completing?
+3. **Given everything, what is the RIGHT NEXT WAVE?** The build has been repairing its own gate for a day. **Name whether the program should keep hardening or return to building capability**, and say why. The queue holds ~100 remaining waves, nine owner-signed site-coherence waves not started, and several architected-not-built volumes.
+4. **State any standing architectural concern the owner should see** — including any place Opus's self-verification produced a systematic blind spot.
+
+RETURN structured JSON.`, { label: 'fable:signoff', phase: 'Signoff', model: 'fable', effort: 'high', schema: { type: 'object', required: ['markersCleared'], properties: { markersCleared: { type: 'array', items: { type: 'string' } }, markersStillOwed: { type: 'array', items: { type: 'string' } }, recoveryDispositionCorrect: { type: 'string' }, nextWaveRuling: { type: 'string' }, standingConcerns: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+return { survey, recover, verify, signoff }

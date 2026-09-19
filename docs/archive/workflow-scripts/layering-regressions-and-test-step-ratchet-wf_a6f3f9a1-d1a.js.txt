@@ -1,0 +1,94 @@
+export const meta = {
+  name: 'layering-regressions-and-test-step-ratchet',
+  description: 'Fix the three genuine layering regressions the walkers caught, then give step 12 the same shrink-only ratchet treatment that fixed step 9, so build and verify:dist become reachable.',
+  phases: [
+    { title: 'Layering', detail: 'the import cycle, the domain→generators edges, the first-paint leak' },
+    { title: 'Ratchet', detail: 'a per-test shrink-only baseline so the chain can reach steps 13-14' },
+    { title: 'Verify', detail: 'analysis fanned out, execution serialized' },
+  ],
+}
+
+const TREE = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const LAWS = `VERIFY-FIRST PREAMBLE: chair brief, owner-delegated build program. LIVE CODE OUTRANKS EVERY TABLE. Build tree ${TREE} (branch claude/composite-r4). Hard-gate every state-mutating compound with the \`cd\` FIRST: \`cd ${TREE} && [ "$(git branch --show-current)" = "claude/composite-r4" ] || exit 1\`.
+
+⭐ \`sh scripts/gate-mutex.sh --wait && sh scripts/gate-tail.sh <cmd>\` — ONE \`&&\` chain. ⛔ NEVER read an exit code through a pipe.
+⚠ **THE FULL SUITE TAKES ~710s / 2,350 files** — budget for it, run it detached or with a generous explicit timeout, and never conclude "it hung" from a killed shell.
+⚠ **EVERY FIGURE IN AN INTEGRITY-COUNTED \`git archive\` OF A COMMITTED SHA.** One at a time; \`rm -f\` the node_modules symlink before deleting; disk ~10 GiB.
+⚠ **A CENSUS SCOPED TO A SUBTREE READS EXACTLY LIKE A WHOLE-SUITE CENSUS IN THE REPORT THAT QUOTES IT.** This cost the chair a wrong brief one round ago: a real \`tests/domain\`+\`tests/lint\` figure of 23 was read as the whole step-12 set, which is 54. **Always state the SCOPE beside the number.**
+⚠ Check \`git status\` yourself; never stage a file you did not author; verify the staged set BY NAME AND COUNT before every commit.
+
+REPORTING: CONFIRMED (executed evidence quoted) or PLAUSIBLE.`
+
+phase('Layering')
+const layering = await agent(LAWS + `
+
+YOU ARE THE LAYERING REPAIR LANE. Three walkers caught three GENUINE regressions — the code is wrong, not the pins. These are real architecture defects that landed invisibly while the gate was dark.
+
+**L-1 — A NEW 39-MODULE IMPORT CYCLE ACROSS \`src/domain\`.** \`tests/architecture/layerBoundaries\` reports a cycle spanning \`src/domain/roads/state.js\` plus 38 \`worldPulse\` modules, including the whole \`peaceTerms\` / \`envoyErrand\` family. **Find the edge (or few edges) that CLOSE the cycle** — a 39-module cycle is almost never 39 problems; it is one or two back-edges into a module that should be a leaf. Cut those, and say which edge you cut and why that one.
+
+**L-2 — THREE NEW \`src/domain\` → \`src/generators\` EDGES**, all onto \`src/generators/hookThemes.js\`: from \`domain/dossier/hookRetention.js\`, \`domain/dossier/plotHooks.js\`, and \`domain/hookEscalation.js\`. \`tests/build/domainGeneratorsBoundary\` is correct to red — the domain is the pure kernel every other layer trusts and it must not reach up into generators.
+⛔ **THE CURE IS INVERSION, NEVER WIDENING THE BASELINE**: move the shared leaf DOWN (into domain, or into a neutral shared module both can import) or inject the function. ⚠ Recorded hazard: a store import inside \`src/domain\` trips FOUR ratchets at once — check what else your chosen shape touches before you commit to it.
+
+**L-3 — A FIRST-PAINT BUNDLE REGRESSION.** \`src/domain/spatial/distanceRead.js\` re-entered the static first-paint graph by this exact path: \`main.jsx → store/index.js → store/campaignSlice.js → domain/worldPulse/worldState.js → domain/worldPulse/warCoalitionLedger.js → distanceRead.js\`. \`tests/build/userRouteIdentityLeaf\` is right; this is a real bundle regression, not a pin fault. **Cure by importing the zero-import identity leaf** rather than the module that drags the graph in.
+
+**HOW TO WORK.** Read the full enclosing scope and the direct callers before editing — never from a grep window. **Run each fix as a MUTANT**: verify the plant actually changed the file, confirm the walker reds without your fix and greens with it, restore from backup with \`cmp\`. ⚠ Watch \`sizeBaseline\` (tolerance ZERO, and a file that SHRINKS ratchets DOWN) and the domain-layer ratchet set.
+⚠ **A LAYERING FIX CAN MOVE OUTPUT** if it changes import order in a module with module-level side effects. Measure the goldens and declare any shift with its cause; if a fix would move a paid surface or persisted schema, STOP and report.
+
+RETURN JSON.`, { label: 'layer:regressions', phase: 'Layering', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, l1EdgesCut: { type: 'array', items: { type: 'string' } }, l2Shape: { type: 'string' }, l3Cure: { type: 'string' }, baselineWidened: { type: 'boolean' }, goldenShift: { type: 'string' }, mutantProofs: { type: 'array', items: { type: 'string' } }, walkersGreenNow: { type: 'array', items: { type: 'string' } }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Ratchet')
+const ratchet = await agent(LAWS + `
+
+YOU ARE BUILDING THE STEP-12 RATCHET. **Apply the exact architectural move that fixed step 9, one step later.**
+
+The layering lane just landed: ` + JSON.stringify(layering || {}).slice(0, 3000) + `
+
+**THE SITUATION.** \`npm run check\` is a 14-step \`&&\` chain. Steps 1-11 are green. **Step 12 \`npm run test\` fails: ~35 files / ~49 tests across roughly TWELVE owning subsystems** (fewer now if the layering lane cleared some — re-measure, do not inherit). Behind it, **steps 13 \`build\` and 14 \`verify:dist\` have never run in the chain.** That matters more than it sounds: there is a recorded hazard that **\`build\` exits 0 while \`dist\` is un-bootable** (a chunk-cycle TDZ), and \`verify:dist\` plus \`smoke:boot\` are the guards for exactly that. **They have been dark since 2026-08-02.**
+
+Burning 35 files down is a dozen subsystem lanes plus owner-gated migration work — a program, not a task. **So do what step 9 did: make the gate PASSABLE and still REGRESSION-CATCHING.**
+
+**THE DESIGN.**
+- **Per-TEST identity, not per-file** — key on (file, full test name). A file-level allowlist hides every other test in that file.
+- ⛔ **RUN THE TESTS. NEVER SKIP THEM.** The ratchet reads results; it does not suppress execution. A skipped test is not debt, it is a hole.
+- **Shrink-only, with BELOW-DEMANDS-RATCHET-DOWN**: a baselined test that starts passing must prompt a re-freeze.
+- ⛔ **A NEW REGRESSION IS NEVER BASELINED.** Before freezing, **ATTRIBUTE each failing test** — which commit introduced it — and record the owning subsystem and the cause in the entry. An entry without an attribution is a defect being laundered into debt.
+- **Carry the step-9 hardenings** (read \`scripts/check-full-typecheck.mjs\`, which now has them): an **anti-vacuity sentinel** (a run that crashed, or reported zero tests, must FAIL CLOSED, never read as "nothing failed"), a **scope sentinel** (a collapse in total test count fails), **testability env seams**, and a **fail-closed meta-test** that exercises those paths with an injected fake runner.
+- ⚠ **Mark the three migration reds** (\`migrationRehearsal\`, \`deployRunbookFreshness\`, \`migrationRollbackDiscipline\` — one cause: migration 195 landed past the manifest head of 194, no \`.down.sql\`, stale DEPLOY.md) as **OWNER-GATED debt**, explicitly, so nobody "fixes" them.
+- ⚠ **\`tests/lint/observedShapeReaders.walker.test.js\` FAILS THE FULL SUITE BUT PASSES IN ISOLATION — that is a STRUCTURAL TIMEOUT under contention, not a ratchet red.** Do NOT baseline it as debt. **Fix it** (raise its own timeout, or cut its per-run work) and prove it green inside a full-suite run. Mislabelling a timeout as a failure is how a lane "repairs" a defect that does not exist.
+
+**WIRE IT INTO THE CHAIN** in place of the bare \`npm run test\`, keeping \`npm run test\` raw. **Then RUN \`npm run check\` END TO END and report what happens at steps 13 and 14** — quote the first failing step verbatim, or state that all 14 exit 0. ⚠ \`verify:dist\` has not run in months; **expect it to find something, and treat whatever it finds as the most valuable output of this lane.**
+
+**THE JUDGMENT, stated so it can be vetoed:** baselining ~35 failing tests is uncomfortable and weaker than fixing them. But they are already failing and already invisible; a baseline makes them COUNTED, ATTRIBUTED and SHRINK-ONLY, and it un-darkens the two steps that guard against shipping an un-bootable bundle. Record it in that form.
+
+RETURN JSON.`, { label: 'gate:test-ratchet', phase: 'Ratchet', model: 'opus', effort: 'high', schema: { type: 'object', required: ['landed'], properties: { landed: { type: 'boolean' }, baselinedTests: { type: 'number' }, everyEntryAttributed: { type: 'boolean' }, ownerGatedMarked: { type: 'array', items: { type: 'string' } }, timeoutFixedNotBaselined: { type: 'string' }, sentinelsCarried: { type: 'array', items: { type: 'string' } }, metaTestPath: { type: 'string' }, mutantProof: { type: 'string' }, checkCompletes: { type: 'boolean' }, firstFailingStep: { type: 'string' }, verifyDistFound: { type: 'string' }, commits: { type: 'array', items: { type: 'string' } }, stopReports: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+phase('Verify')
+// Verifiers fan out on ANALYSIS and serialize on EXECUTION — the amended concurrency law.
+// Only the first lens is licensed to hold the full-suite gate slot.
+const execVerdict = await agent(LAWS + `
+
+YOU ARE THE EXECUTION VERIFIER. **You alone hold the full-suite gate slot this round** — a sibling lens is doing static analysis only, so take the time you need.
+
+Layering: ` + JSON.stringify(layering || {}).slice(0, 4000) + `
+Ratchet: ` + JSON.stringify(ratchet || {}).slice(0, 5000) + `
+
+**Run \`npm run check\` yourself**, stepwise, in an integrity-counted archive at the final sha, reading each step's own exit code directly. Report every step by name. **If steps 13 and 14 now run, report EXACTLY what \`build\` and \`verify:dist\` say — that output has not been seen since 2026-08-02 and is the point of the whole exercise.** Also run \`npm run smoke:boot\` if it exists, given the recorded un-bootable-dist hazard.
+Then refute the ratchet: (a) plant a FRESH failure in a test that is NOT baselined and confirm it REDS; (b) inject a fake runner that reports zero tests and confirm it FAILS CLOSED rather than reading as clean; (c) confirm no test was SKIPPED rather than baselined — diff the executed test count against the parent; (d) confirm \`observedShapeReaders\` is genuinely green inside a real full-suite run and was not quietly baselined.
+
+RETURN structured JSON only.`, { label: 'verify:execution', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, checkCompletes: { type: 'boolean' }, buildOutput: { type: 'string' }, verifyDistOutput: { type: 'string' }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+const staticVerdict = await agent(LAWS + `
+
+YOU ARE THE STATIC VERIFIER. ⛔ **DO NOT RUN THE FULL SUITE** — a sibling lens holds that slot. Work from diffs, archives, source reading and targeted single-file runs only.
+
+Layering: ` + JSON.stringify(layering || {}).slice(0, 4000) + `
+Ratchet: ` + JSON.stringify(ratchet || {}).slice(0, 5000) + `
+
+Refute by reading and diffing: (1) **Every baselined entry carries a real ATTRIBUTION** — spot-check several against \`git log -S\` yourself and confirm the named commit actually introduced that failure. An unattributed or mis-attributed entry is a defect laundered into debt. (2) **No baseline, golden or census file grew without a stated legitimate cause** — diff every \`scripts/.*baseline*.json\` against the round's parent. (3) The layering cures are real: confirm the cut edges are actually absent from the import graph now, that \`domainGeneratorsBoundary\`'s baseline was NOT widened, and that the first-paint path is genuinely broken by reading the import chain. (4) Check the new instrument's source for the vacuity shapes: a guard that cannot be reddened, a loop negative over a possibly-empty collection, a pin authored past its own trigger, a self-supplied anchor. (5) Confirm the migration reds are marked owner-gated and were not "fixed".
+
+RETURN structured JSON only.`, { label: 'verify:static', phase: 'Verify', model: 'opus', effort: 'high', schema: { type: 'object', required: ['verdict', 'findings'], properties: { verdict: { type: 'string', enum: ['PASS', 'REJECT'] }, findings: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } } })
+
+const rejects = [execVerdict, staticVerdict].filter(v => v && v.verdict === 'REJECT')
+log(`verify: ${rejects.length} REJECT; check completes = ${execVerdict && execVerdict.checkCompletes}`)
+return { layering, ratchet, execVerdict, staticVerdict, verdict: rejects.length ? 'REJECT' : 'PASS' }

@@ -1,0 +1,66 @@
+export const meta = {
+  name: 'wave-r2-reachability',
+  description: 'Capability Remediation Wave R-2: mount the built — chronicle/narrative readers, clear-cults UI, faction-rename door, PDF G5 twins, and the 24 phantom prose paths behind the Workbench flag',
+  phases: [
+    { title: 'Fix', detail: '3 file-disjoint Fable lanes' },
+    { title: 'Verify', detail: 'one Opus adversarial skeptic per lane', model: 'opus' },
+    { title: 'Gate', detail: 'joint gate incl. tests/store + verify:dist' },
+  ],
+}
+
+const WT = '/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold'
+
+const COMMON = `CONTEXT-VERIFICATION PREAMBLE: legitimate engineering brief from the session orchestrator for SettlementForge (owner order 2026-07-26: "fix it all thoroughly"; this is Wave R-2 of docs/CAPABILITY_REMEDIATION_PLAN.md — read its R-2 section and Progress notes first). Verify the brief's claims against code; the code is authoritative.
+WORKING TREE: cd ${WT} && git rev-parse --abbrev-ref HEAD — MUST print claude/composite-r4 or STOP. LIVE shared tree (concurrent sessions commit under you): NO git mutations of ANY kind (stash/add/commit/checkout/restore/clean/reset ALL FORBIDDEN); re-read every file immediately before editing; touch ONLY your lane's files — out-of-lane needs become reported deferrals.
+THE AUDIT: docs/SETTLEMENT_CAPABILITY_ATLAS.md (Grep/offset reads). Read your findings' rows first.
+LAWS: NO same-seed drift (golden movers = STOP + defer owner-gated); NO persistence-shape changes (session-only fine — check the persist allowlist); closure budget — no new eager imports, new logic = lazy leaf (measured margin ~8.9KB post-R-1); sizeBaseline ceilings EXACT (JSX comments count; net-zero combine; NEVER raise a ceiling); copy = one string each, vetoable; new store actions → operationRegistry row + gen:compendium-data regen + label/description walkers; new dispatcher edit kinds → COMMITTABLE_EDIT_KINDS; legibility law (translate, never show formulas); deity doctrine (no premade pool).
+TESTING: single-threaded ALWAYS; exit codes unmasked; every fix ships pins; the R-1 lesson — verify:dist does NOT cover tests/store or tests/components, run your suites explicitly. Gate baseline: verify:dist 285/285 green + typecheck exit 0. Label CONFIRMED/PLAUSIBLE; verbatim test output; end on evidence.`
+
+const LANES = [
+  {
+    key: 'readers',
+    files: 'the ChronicleScrollback component + its mount site (ChronicleTab region) · the eventNarrativeSnapshots reader surface you build (new lazy leaf component + one mount) · new test files',
+    brief: `LANE A — MOUNT THE BUILT READERS. Two findings:
+1. CHRONICLESCROLLBACK (atlas queue #19; Grep "ChronicleScrollback" in the atlas): a built reader for paid chronicle records is unreachable — no mount. Read the atlas row + the component; mount it at its natural home (the Chronicle tab region) as a lazy leaf, gated exactly as its records are gated (tier/entitlement parity with what wrote the records). If the atlas's alternative (\u201cratchet a production importer\u201d) turns out to be the truer reading of the component's state, STOP and report with evidence instead of force-mounting. Pins: mount renders with records; empty state honest; gating parity.
+2. EVENTNARRATIVESNAPSHOTS READER (atlas row A20; R-1 added the write-side cap disclosure): the paid AI narrative archive (up to 10 per save, event-keyed) has ZERO readers. Build the minimal honest reader: a lazy leaf listing the archived narrative snapshots for the active save (event label + timestamp + the archived text), mounted where users already meet these narratives (the Chronicle/History region or the StaleNarrativeModal vicinity — pick the seam with evidence and record the choice as a vetoable JUDGMENT). Read-only; no new store actions if the existing state suffices. Retention note consistent with R-1's disclosure string. Pins: renders the archive for a save with snapshots; honest empty state; FIFO cap reflected (11th event shows 10).`,
+  },
+  {
+    key: 'prose-paths',
+    files: 'the flag-off Workbench surfaces (src/components/dossier/SettlementWorkbench.jsx + its inspector internals) · src/domain/userEdits.js (READ; edit only if a path registration is provably wrong) · the queueEdit producer seam · src/domain/pendingEdits.js ONLY if a genuinely new edit kind is required (COMMITTABLE_EDIT_KINDS law) · new test files',
+    brief: `LANE B — THE 24 PHANTOM PROSE PATHS (the program's biggest single item; atlas: 25 EDITABLE_FIELDS paths across 7 entity kinds — npc 4, faction 1, institution 1, hook 2, historicalEvent 2, currentTension 1, settlement 14 — with exactly 1 reachable today). Wire authored-prose editing through the FLAG-OFF Workbench EntityInspector (settlementWorkbench=false — no user-visible change until owner promotion; that is deliberate and required).
+METHOD (deep-work discipline; this is lifecycle-sensitive):
+1. Read the atlas narrative-evidence + workbench slices' rows for EDITABLE_FIELDS and the G-1 queue→admission→review→commit→receipt→undo spine. Reuse that spine EXACTLY — no parallel mechanism, no new writer.
+2. For EACH of the 24 paths, trace the full lifecycle BEFORE wiring: edit → queueEdit kind (existing kind or genuinely new?) → commit writer → persistence → REGEN survival (does _userEdits/_authored preservation cover this entity kind on the CURRENT branch? the NPC-branch regen fix is in this tree, uncommitted) → undo. WIRE ONLY the paths whose lifecycle holds end-to-end. A path whose edits would be destroyed by regen or lost on a lifecycle branch gets NOT wired but recorded in the inspector as a capability-with-hazard (and in your deferrals with the exact breaking path) — wiring a lossy path would be a quiet lie, the cardinal sin.
+3. New edit kinds (if any) go through COMMITTABLE_EDIT_KINDS + describePendingEdit with honest labels; check the 8 dead describePendingEdit labels finding before adding vocabulary.
+4. Pins per WIRED entity kind: edit→commit→persist round-trip; regen survival (execute the actual regen path, not a mock); undo restores; flag-off = zero rendered change with the flag down (render pin).
+Report the ledger: N of 24 wired, each unwired path with its exact lifecycle breaker. Expect ceilings: Workbench files may be near max-lines — lazy sub-leaves are the pattern.`,
+  },
+  {
+    key: 'doors-and-twins',
+    files: 'src/components/settlement/DeityAssignmentPanel.jsx (clear-cults control) · the faction-rename door site you choose on the EXISTING rename lane (read the atlas faction-rename rows first) · src/pdf/sections/ViabilityAssessment.jsx + src/pdf/sections/Overview.jsx (G5 framing strings) · new test files',
+    brief: `LANE C — SMALL DOORS + PDF TWINS. Three findings:
+1. CLEAR-CULTS UI (atlas: imposeCult(null) clears all cults; no UI path): add the control to DeityAssignmentPanel for entitled users — it must flow through the R-0 deityWriteGate (shed semantics: premium AND lapsed may clear, per the recorded lapsed-shed judgment; free refused). Respect the capacity-0 guard (control hidden when no cults exist is fine — honest empty behavior). Pins: entitled clear works; lapsed clear ALLOWED (shed); free refused; no-cults state honest.
+2. FACTION-RENAME DOOR (atlas queue #14 — the missing door HALF only; the convergence DIRECTION stays owner-queued): generated saves have no working door to the existing faction-rename lane. Read the atlas rows; add the minimal door on the EXISTING lane (do not build a second writer, do not converge the two lanes — that is the owner's ruling). If you find the "existing lane" is itself the dead renameFaction store path with zero callers, STOP and report with evidence — the door would need the owner's convergence ruling first, and that is a legitimate lane outcome.
+3. PDF G5 TWINS (carried from R-1): ViabilityAssessment.jsx renders structuralViolations (:36 region) and Overview.jsx renders G5 records unframed — apply the same first-survey framing as their web twins (one string per site; screen↔PDF parity suites + fieldManifest guards must stay green).`,
+  },
+]
+
+const FIX_SCHEMA = { type: 'object', required: ['filesTouched', 'pins', 'testsRun', 'testOutputTail', 'behaviorShift', 'deferrals'], properties: { filesTouched: { type: 'array', items: { type: 'string' } }, pins: { type: 'number' }, testsRun: { type: 'string' }, testOutputTail: { type: 'string' }, behaviorShift: { type: 'string' }, deferrals: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' }, error: { type: 'string' } } }
+const VERIFY_SCHEMA = { type: 'object', required: ['verdict', 'mustFix', 'checked'], properties: { verdict: { type: 'string', enum: ['PASS', 'PASS_WITH_NOTES', 'MUST_FIX'] }, mustFix: { type: 'array', items: { type: 'string' } }, checked: { type: 'array', items: { type: 'string' } }, notes: { type: 'string' } } }
+
+phase('Fix')
+log('Wave R-2: reachability — readers, prose paths behind the flag, small doors, PDF twins')
+const results = await pipeline(
+  LANES,
+  (l) => agent(COMMON + '\n\nYOUR LANE OWNS ONLY: ' + l.files + '\n\n' + l.brief, { label: 'fix:' + l.key, phase: 'Fix', schema: FIX_SCHEMA }),
+  (r, l) => r && !r.error
+    ? agent(COMMON + `\n\nYOU ARE THE OPUS ADVERSARIAL VERIFIER for lane ${l.key}. Fixer reports: files=${JSON.stringify(r.filesTouched)}, pins=${r.pins}, shift="${r.behaviorShift}", deferrals count=${(r.deferrals || []).length}. The lane's brief:\n${l.brief}\nRepo READ-ONLY except running tests. Per numbered item: verify landed, re-derive code facts with fresh greps, RUN the pins yourself, attempt refutation. Lane-specific attacks — readers: gating parity with the record writers (a free user must not read premium records), eager-import leaks, mount collisions with foreign WIP; prose-paths: pick 5 wired paths and execute the FULL lifecycle yourself (edit→commit→persist→REGEN→undo) — a wired path that loses edits on any branch is an automatic MUST_FIX; verify flag-down zero-change; verify no new writer bypassed the G-1 spine; doors: deityWriteGate parity (lapsed shed allowed, free refused), the rename door drives the live lane not the dead one, PDF parity suites green. Check in-lane containment via git status attribution. MUST_FIX only for real unresolved items.`, { label: 'verify:' + l.key, phase: 'Verify', model: 'opus', effort: 'high', schema: VERIFY_SCHEMA }).then((v) => ({ lane: l.key, fix: r, verify: v }))
+    : { lane: l.key, fix: r, verify: null, failed: true }
+)
+
+phase('Gate')
+const GATE_SCHEMA = { type: 'object', required: ['newReds', 'suitesRun', 'outputTail'], properties: { newReds: { type: 'array', items: { type: 'string' } }, suitesRun: { type: 'string' }, outputTail: { type: 'string' }, notes: { type: 'string' } } }
+const done = results.filter(Boolean)
+const gate = await agent(COMMON + `\n\nWAVE-END GATE (R-2). Touched: ${JSON.stringify(done.map((r) => r.fix && r.fix.filesTouched))}. Run single-threaded, exit codes unmasked: (1) tests/store/ FULL dir; (2) all R-0/R-1/R-2 pin files (grep tests/ for the wave pin files by name if needed); (3) tests/joins/fieldManifest.test.js; (4) tests/architecture/; (5) pdf parity suites; (6) tests/lint/sizeBaseline.test.js; (7) npm run typecheck; (8) npm run build && npm run verify:dist single-threaded. Baseline: 285/285 + typecheck 0. Report every red verbatim, attributed baseline/foreign/THIS-WAVE.`, { label: 'gate:r2', phase: 'Gate', schema: GATE_SCHEMA })
+
+return { lanes: done.map((r) => ({ lane: r.lane, failed: !!r.failed, pins: r.fix && r.fix.pins, behaviorShift: r.fix && r.fix.behaviorShift, verdict: r.verify && r.verify.verdict, mustFix: r.verify && r.verify.mustFix, deferrals: r.fix && r.fix.deferrals })), gate }

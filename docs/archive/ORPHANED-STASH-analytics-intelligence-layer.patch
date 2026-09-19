@@ -1,0 +1,1336 @@
+diff --git a/.gitignore b/.gitignore
+index adced5b9..f0dceb17 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -25,3 +25,4 @@ playwright/.cache/
+ 
+ .claude/tmp-digests/
+ sim-report.json
++deep-profile.json
+diff --git a/src/data/constants.js b/src/data/constants.js
+index 5e54c151..22f3685d 100644
+--- a/src/data/constants.js
++++ b/src/data/constants.js
+@@ -23,13 +23,11 @@ export const SEVERITY = {
+ export const tierAtLeast = (tier, min) =>
+   TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(min);
+ 
++// Derived from POPULATION_RANGES (single source of truth) so the two cannot
++// drift — the old hardcoded thorp cutoff (pop<=80) disagreed with thorp.max=60,
++// mis-tiering custom settlements of population 61–80.
+ export const popToTier = (pop) =>
+-  pop <= 80    ? 'thorp'
+-  : pop <= 400   ? 'hamlet'
+-  : pop <= 900   ? 'village'
+-  : pop <= 5000  ? 'town'
+-  : pop <= 25000 ? 'city'
+-  : 'metropolis';
++  TIER_ORDER.find(t => pop <= POPULATION_RANGES[t].max) || 'metropolis';
+ 
+ export const getMagicLevel = (priority = 50) =>
+   priority === 0  ? 'none'
+diff --git a/src/data/historyData.js b/src/data/historyData.js
+index f60f4784..c8be16ea 100644
+--- a/src/data/historyData.js
++++ b/src/data/historyData.js
+@@ -1102,6 +1102,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'The ailing ruler wants a final errand completed before naming a successor',
+       'Someone is poisoning the ruler slowly — and the physician knows',
+     ],
++    lastingEffects: [
++      "A contested branch of the old ruling line still disputes the current authority's legitimacy",
++      'The compromise that ended the crisis left a key office deliberately weakened',
++      'Loyalties hardened during the succession still split the leading families',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1113,6 +1118,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       "A hidden ledger documenting wage theft is circulating in the workers' quarter",
+       'A merchant is funding both the reform movement and the suppression of it',
+     ],
++    lastingEffects: [
++      'A wealth gap entrenched into custom still governs who may hold office',
++      "The workers' quarter and the merchant district remain socially walled apart",
++      'Wage and guild-due grievances resurface in every hard season',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1124,6 +1134,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'The reformist leader is being blackmailed into silence',
+       'Someone is staging miracles for one side — the question is who benefits',
+     ],
++    lastingEffects: [
++      'Two congregations still compete openly for converts and patronage',
++      'A disputed shrine or relic remains a flashpoint between the faiths',
++      'Old sectarian lines quietly shape trade and marriage alliances',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1135,6 +1150,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'A journeyman denied mastership has proof the exam was rigged',
+       'Someone is sabotaging both guilds to destabilize the market for a third party',
+     ],
++    lastingEffects: [
++      'The guild charter was rewritten to favour the victors, and the resentment lingers',
++      'A rival trade was driven out, its specialist skills lost to the settlement',
++      'Guild membership is still gatekept along the lines drawn in the conflict',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1146,6 +1166,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'A diplomatic channel exists that the war faction is suppressing',
+       'The threat has an agent already inside the settlement',
+     ],
++    lastingEffects: [
++      'Defensive works thrown up in the panic still ring the settlement',
++      'A standing watch or militia tradition dates from the alarm',
++      'Outsiders are met with a wariness the settlement never quite shed',
++    ],
+     severity: ['major', 'catastrophic'],
+   },
+   {
+@@ -1157,6 +1182,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'The scarcity was engineered — someone destroyed the competing supply route',
+       'An alternative source exists but the information is being suppressed',
+     ],
++    lastingEffects: [
++      'Rationing customs from the shortage survive as local rule',
++      'A dependence on imported supply was never undone',
++      'Hoarding habits left a lasting distrust of merchants and grain-factors',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1168,6 +1198,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'A guard captain is on the payroll of the criminal network',
+       'The vigilantes have begun targeting innocents based on bad information',
+     ],
++    lastingEffects: [
++      'A criminal network that took root in the chaos never fully left',
++      'The watch was expanded then, and its powers were never rolled back',
++      'Certain districts are still shunned after dark',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1179,6 +1214,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'An anti-magic agitator is secretly using magic themselves',
+       'Something was sealed away using magic years ago and the seal is weakening',
+     ],
++    lastingEffects: [
++      'Restrictions on arcane practice enacted then remain on the books',
++      'A warded or abandoned site from the affair is still avoided',
++      'Practitioners keep a low profile, wary of public sentiment',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1190,6 +1230,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       "A young reformer has uncovered records that undermine the old guard's legitimacy",
+       "The 'new idea' being promoted was actually tried once before — and failed badly",
+     ],
++    lastingEffects: [
++      'Older and younger factions still clash over custom and reform',
++      'A long-standing tradition was abandoned, and its loss is still mourned',
++      'Civic office skews to one generation, breeding quiet resentment in the other',
++    ],
+     severity: ['minor'],
+   },
+   {
+@@ -1201,6 +1246,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       "A key witness can be found — but won't speak without protection",
+       'The corruption goes higher than anyone yet suspects; the reformers are being used',
+     ],
++    lastingEffects: [
++      'Oversight measures imposed after the scandal still bind officials',
++      "A prominent family's name remains tainted by the affair",
++      'A reflexive cynicism makes every new appointment suspect',
++    ],
+     severity: ['major'],
+   },
+   {
+@@ -1216,6 +1266,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       "A creditor's agent is in town conducting a quiet assessment before enforcement",
+       'The debt could be voided — if someone can prove it was obtained through fraud',
+     ],
++    lastingEffects: [
++      "A creditor's agent still holds quiet leverage over civic decisions",
++      'Tolls or taxes raised to service the debt remain in force',
++      'The settlement now guards its ledgers and independence jealously',
++    ],
+     severity: ['major'],
+   },
+   {
+@@ -1232,6 +1287,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'Resistance fighters kept records that would expose people still in power',
+       'A former occupier officer has returned under a false identity',
+     ],
++    lastingEffects: [
++      'Administrative structures imposed by the occupier were never dismantled',
++      'Families who collaborated and those who resisted remain estranged',
++      'A garrison or fortification raised under occupation still stands',
++    ],
+     severity: ['major', 'catastrophic'],
+   },
+   {
+@@ -1248,6 +1308,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'An innocent person has been identified as a spy and is about to be executed',
+       "The agents' handler is someone in a position of trust — and the PCs have already met them",
+     ],
++    lastingEffects: [
++      'A culture of informing and suspicion outlived the original threat',
++      'Loyalty checks became a quiet condition of holding office',
++      'Newcomers are vetted with a thoroughness bordering on hostility',
++    ],
+     severity: ['major'],
+   },
+   {
+@@ -1264,6 +1329,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'Something of value was found on the disputed land — which is why the claim is suddenly being pressed',
+       "A forged document is about to be introduced as evidence; someone knows it's fake",
+     ],
++    lastingEffects: [
++      'Boundary markers from the claim are still contested in the courts',
++      'Two families maintain a cold feud over the original deed',
++      'Fortified holdings raised during the dispute remain garrisoned',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1280,6 +1350,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       "A series of 'accidents' targeting newcomers is being attributed to chance",
+       'An old family is deliberately inflaming tensions to drive out a newcomer who knows something',
+     ],
++    lastingEffects: [
++      'Established residents and later arrivals still keep to separate quarters',
++      'Civic privileges still distinguish old families from incomers',
++      'Flare-ups over work and housing trace back to the influx',
++    ],
+     severity: ['minor', 'major'],
+   },
+   {
+@@ -1296,6 +1371,11 @@ export const HISTORICAL_EVENTS_DATA = [
+       'One claimant has manufactured evidence of a mandate they actually lack',
+       'The vacuum is being maintained deliberately by an outside power that benefits from the instability',
+     ],
++    lastingEffects: [
++      'Power that rushed in to fill the gap never fully let go',
++      'Emergency measures from the interregnum hardened into permanent rule',
++      'Rival claimants to the empty seat still maneuver in the shadows',
++    ],
+     severity: ['major', 'catastrophic'],
+   },
+ ]
+@@ -1307,7 +1387,7 @@ export const EVENT_TYPE_NAMES = {
+   resource_scarcity:   'The Shortage',
+   guild_conflict:      'The Guild War',
+   corruption_scandal:  'The Scandal',
+-  infiltration_fear:   'The Occupation',
++  infiltration_fear:   'The Infiltration',
+   leadership_vacuum:   'The Interregnum',
+   occupation_legacy:   'The Occupation',
+   disputed_land:       'The Land Dispute',
+diff --git a/src/data/institutionalCatalog.js b/src/data/institutionalCatalog.js
+index df19affe..f18fe4ce 100644
+--- a/src/data/institutionalCatalog.js
++++ b/src/data/institutionalCatalog.js
+@@ -90,7 +90,7 @@ export const institutionalCatalog = {
+         baseChance: 0.3,
+         desc: 'Sharpened stakes encircling the settlement. Offers minimal protection but enough to deter casual raiders.',
+         tags: ['defense', 'fortification'],
+-        priorityCategory: 'defense',
++        priorityCategory: 'military',
+       },
+       'Communal root cellar': {
+         required: false,
+diff --git a/src/data/powerData.js b/src/data/powerData.js
+index b4f856f5..fc9f1dd2 100644
+--- a/src/data/powerData.js
++++ b/src/data/powerData.js
+@@ -37,6 +37,18 @@ export const FACTION_DESCRIPTORS = {
+     "The Underground",
+     "The Black Circle",
+   ],
++  crafts: [
++    "The Artisans' Compact",
++    "The Craftsmen's League",
++    "The Makers' Guild-Alliance",
++    "The Artificers' Circle",
++  ],
++  noble: [
++    "The Highborn Circle",
++    "The Peerage",
++    "The Old Houses",
++    "The Landed Bloc",
++  ],
+   other: [
+     "The Independent Bloc",
+     "The Free Alliance",
+diff --git a/src/data/stressTypes.js b/src/data/stressTypes.js
+index 49358273..72321e49 100644
+--- a/src/data/stressTypes.js
++++ b/src/data/stressTypes.js
+@@ -52,7 +52,7 @@ export const STRESS_TYPE_MAP = {
+   },
+   politically_fractured: {
+     label: "Politically Fractured",
+-    icon: "️",
++    icon: "",
+     colour: "#5a4a1a",
+     probability: 0.034,
+     requiresTier: null,
+@@ -80,7 +80,7 @@ export const STRESS_TYPE_MAP = {
+   },
+   recently_betrayed: {
+     label: "Recently Betrayed",
+-    icon: "️",
++    icon: "",
+     colour: "#6b1a2a",
+     probability: 0.027,
+     requiresTier: null,
+@@ -173,7 +173,7 @@ export const STRESS_TYPE_MAP = {
+   },
+   religious_conversion: {
+     label: "Religious Conversion",
+-    icon: "️",
++    icon: "",
+     colour: "#3a1a5a",
+     probability: 0.023,
+     requiresTier: null,
+@@ -200,7 +200,7 @@ export const STRESS_TYPE_MAP = {
+   },
+   slave_revolt: {
+     label: "Slave Revolt",
+-    icon: "️",
++    icon: "",
+     colour: "#6b1a1a",
+     probability: 0.012,
+     requiresTier: "town",
+diff --git a/src/domain/activeConditions.js b/src/domain/activeConditions.js
+index b89ac44b..21873664 100644
+--- a/src/domain/activeConditions.js
++++ b/src/domain/activeConditions.js
+@@ -46,7 +46,7 @@
+ // keys match factionRelationshipUpdate.js so a condition's archetype is
+ // directly applicable to recalculateFactionRelationships.
+ 
+-const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
++export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
+   plague: {
+     label: 'Plague',
+     description: 'A virulent illness spreads through the settlement.',
+diff --git a/src/domain/conditionPromotion.js b/src/domain/conditionPromotion.js
+index f68e8b42..ae093893 100644
+--- a/src/domain/conditionPromotion.js
++++ b/src/domain/conditionPromotion.js
+@@ -18,7 +18,7 @@
+  * replaces by stable id, so re-running promotion never duplicates a condition.
+  */
+ 
+-import { deriveActiveCondition, withActiveCondition, withoutActiveCondition } from './activeConditions.js';
++import { deriveActiveCondition, withActiveCondition, withoutActiveCondition, CONDITION_ARCHETYPE_TEMPLATES } from './activeConditions.js';
+ import { canonStressors } from './canonicalAccessors.js';
+ 
+ // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
+@@ -105,8 +105,49 @@ export function archetypeForStressor(stressor) {
+  * @param {{sourceEventType: string, eventId: string, detail?: string, archetype: string}} [origin]
+  * @returns {Object}
+  */
++/**
++ * Pure, deterministic per-settlement severity nudge from crisis drivers. Without
++ * it, every generation-derived condition fell back to the archetype's catalog
++ * defaultSeverity (0.45–0.65), collapsing severityBand to medium/high — 'low' and
++ * 'critical' were structurally unreachable at generation. The base default ±this
++ * modifier lets a dire settlement (plague threat + weak defense + food deficit)
++ * reach 'critical' and a calm one reach 'low'.
++ */
++function settlementSeverityModifier(settlement) {
++  // Asymmetric and conservative: base archetype defaults already sit at 0.45–0.7
++  // (medium/high), so a typical settlement (modifier ≈ 0) stays there. 'critical'
++  // (≥0.75) is reserved for the gravest archetypes when several crisis drivers
++  // genuinely stack; 'low' (<0.25) needs a calm, prosperous, well-defended place.
++  let m = 0;
++  const cfg = settlement.config || {};
++  const threat = cfg.monsterThreat || settlement.monsterThreat;
++  if (threat === 'plagued') m += 0.12;
++  else if (threat === 'heartland') m -= 0.12;
++  const sc = settlement.defenseProfile?.scores;
++  if (sc) {
++    const avg = ((sc.military || 0) + (sc.internal || 0) + (sc.economic || 0)) / 3;
++    if (avg < 30) m += 0.10;
++    else if (avg >= 75) m -= 0.10;
++  }
++  const food = settlement.economicState?.foodSecurity;
++  if (typeof food?.deficitPct === 'number' && food.deficitPct > 30) m += 0.10;
++  else if (food?.isSurplus) m -= 0.08;
++  const pros = settlement.economicState?.prosperity;
++  if (pros === 'Subsistence' || pros === 'Struggling' || pros === 'Poor') m += 0.06;
++  else if (pros === 'Prosperous' || pros === 'Wealthy') m -= 0.06;
++  return Math.max(-0.25, Math.min(0.18, m));
++}
++
++/** Generation-derived severity: archetype default nudged by settlement state. */
++function deriveGenerationSeverity(archetype, modifier) {
++  const tmpl = CONDITION_ARCHETYPE_TEMPLATES[archetype];
++  const base = tmpl ? tmpl.defaultSeverity : 0.45;
++  return Math.max(0, Math.min(1, +(base + modifier).toFixed(3)));
++}
++
+ export function promoteStressorsToConditions(settlement, origin = null) {
+   if (!settlement) return settlement;
++  const sevMod = settlementSeverityModifier(settlement);
+   // Collapse to ONE condition per archetype, keeping the highest severity. Two
+   // distinct stressors that map to the same archetype (e.g. "plague" + "fever
+   // outbreak" -> plague) describe one crisis; emitting two conditions would
+@@ -146,9 +187,11 @@ export function promoteStressorsToConditions(settlement, origin = null) {
+     }
+     next = withActiveCondition(next, {
+       archetype,
+-      // Carry the strongest stressor severity when present; else the catalog
+-      // default (deriveActiveCondition fills it from the archetype template).
+-      severity: severity == null ? undefined : severity,
++      // Carry the strongest stressor severity when present (event-authored);
++      // else derive a settlement-responsive severity from the archetype default
++      // nudged by crisis drivers (was undefined → flat catalog default, which
++      // made 'low'/'critical' bands unreachable at generation).
++      severity: severity == null ? deriveGenerationSeverity(archetype, sevMod) : severity,
+       triggeredAt: {
+         sourceEventType: authored ? origin.sourceEventType : 'GENERATION',
+         sourceEventTargetId: archetype,
+diff --git a/src/domain/corruption.js b/src/domain/corruption.js
+index f3d98e4e..6a9468a1 100644
+--- a/src/domain/corruption.js
++++ b/src/domain/corruption.js
+@@ -23,7 +23,7 @@ import { institutionHasTag, TAG } from '../lib/entities.js';
+ // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
+ // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
+ // to the engine's corruption vectors {greed, hunger_for_status, fear,
+-// forbidden_patron, fanaticism}. A flaw NOT in this map is not corruptible.
++// forbidden_patron}. A flaw NOT in this map is not corruptible.
+ const FLAW_VECTOR = Object.freeze({
+   greedy: 'greed',
+   corrupt: 'greed',
+diff --git a/src/domain/entities/successors.js b/src/domain/entities/successors.js
+index 71fd381d..4ffe69d3 100644
+--- a/src/domain/entities/successors.js
++++ b/src/domain/entities/successors.js
+@@ -101,8 +101,12 @@ function scoreCandidate(candidate, outInst, outFac) {
+   else if (candidate.importance === 'notable') score += 15;
+   // minor adds nothing extra — they only get counted via overlap
+ 
+-  // Influence score (if generated) breaks remaining ties
++  // Influence breaks remaining ties. Generated NPCs carry a string band
++  // (low/moderate/high); event-authored NPCs may carry a 0–100 number — handle both
++  // (the old number-only check silently scored 0 for every band-valued NPC).
++  const INFLUENCE_SCORE = { high: 7.5, moderate: 5, low: 2.5 };
+   if (typeof candidate.influence === 'number') score += Math.min(candidate.influence / 10, 10);
++  else if (INFLUENCE_SCORE[candidate.influence]) score += INFLUENCE_SCORE[candidate.influence];
+ 
+   return score;
+ }
+diff --git a/src/domain/factions/factionCatalog.js b/src/domain/factions/factionCatalog.js
+index 35076663..99fdb056 100644
+--- a/src/domain/factions/factionCatalog.js
++++ b/src/domain/factions/factionCatalog.js
+@@ -22,6 +22,8 @@ export const FACTION_CATEGORY_LABELS = Object.freeze({
+   religious:  'Religious',
+   magic:      'Magic',
+   criminal:   'Criminal',
++  crafts:     'Crafts',
++  noble:      'Noble',
+   other:      'Other',
+ });
+ 
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index e683cf78..48e198df 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -564,18 +564,32 @@ export function generateDefenseProfile(settlement) {
+   let chainMilBonus  = 0;
+   let chainEconBonus = 0;
+ 
+-  // Garrison chain: fully operational = +5 military, vulnerable (no provisions) = -5
++  // A military chain counts as healthy when it is operational/running, OR it is
++  // vulnerable ONLY because its upstream provisioning chain (food_processing→grain,
++  // fortification→stone) is absent/strained AND the settlement can provision via
++  // trade. A connected city's garrison is supplied by IMPORTS even when it has no
++  // local bakers/butchers (upstreamMissing) — the old flat -5 wrongly penalized that,
++  // killing the +5/+6/+4 credit at city/metropolis. But an ISOLATED settlement
++  // genuinely cannot import, so a missing/weak upstream there KEEPS the penalty.
++  // A real LOCAL impairment (trade dependency / active substitute) is never healthy.
++  const canProvision = (settlement.config?.tradeRouteAccess || settlement.tradeRoute || 'road') !== 'isolated';
++  const chainHealthy = (c) =>
++    !!c && (c.status === 'operational' || c.status === 'running' ||
++      (c.status === 'vulnerable' && !c.dependency && !c.substituteActive && canProvision &&
++        ((c.upstreamMissing && c.upstreamMissing.length) || (c.upstreamWeak && c.upstreamWeak.length))));
++
++  // Garrison chain: healthy = +5 military, genuinely vulnerable (no provisions) = -5
+   if (garrisonChain) {
+-    if (garrisonChain.status === 'operational' || garrisonChain.status === 'running') chainMilBonus  += 5;
++    if (chainHealthy(garrisonChain)) chainMilBonus  += 5;
+     else if (garrisonChain.status === 'vulnerable' || garrisonChain.status === 'impaired')  chainMilBonus  -= 5;
+   }
+-  // Fortification chain: operational = +6 military (walls maintained), impaired = -4
++  // Fortification chain: healthy = +6 military (walls maintained), impaired = -4
+   if (fortificationChain) {
+-    if (fortificationChain.status === 'operational' || fortificationChain.status === 'running') chainMilBonus  += 6;
++    if (chainHealthy(fortificationChain)) chainMilBonus  += 6;
+     else if (fortificationChain.status === 'impaired') chainMilBonus -= 4;
+   }
+-  // Mercenary chain active and healthy = +4 military (contract force available)
+-  if (mercenaryChain && (mercenaryChain.status === 'operational' || mercenaryChain.status === 'running')) {
++  // Mercenary chain healthy = +4 military (contract force available)
++  if (chainHealthy(mercenaryChain)) {
+     chainMilBonus += 4;
+   }
+   // Food processing chain healthy = +5 economic defense (logistics well-supplied)
+diff --git a/src/generators/economicGenerator.js b/src/generators/economicGenerator.js
+index dd7cab01..4bc07fcb 100644
+--- a/src/generators/economicGenerator.js
++++ b/src/generators/economicGenerator.js
+@@ -18,7 +18,7 @@ import { HISTORY_EVENTS } from '../data/historyData.js';
+ import { TRADE_DEPENDENCY_NEEDS, INSTITUTION_FINISHED_GOODS_DEMAND } from '../data/economicData.js';
+ export { HISTORY_EVENTS } from '../data/historyData.js';
+ 
+-import { SEVERITY, TIER_ORDER } from '../data/constants.js';
++import { SEVERITY, TIER_ORDER, tierAtLeast } from '../data/constants.js';
+ import { institutionalCatalog } from '../data/institutionalCatalog.js';
+ import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
+ import { generateFoodSecurity } from './foodGenerator.js';
+@@ -309,12 +309,19 @@ const generateStabilityScore = (population, terrain, institutions, config, foodB
+   const mustImport = terrain?.mustImport || config?.mustImport;
+   if (mustImport) {
+     mustImport.forEach((resource) => {
++      const bigTier = tierAtLeast(config?.tier, 'city');
+       const hasProcessor = institutions.some((i) => {
+         const n = (i.name || '').toLowerCase();
++        const t = i.tags || [];
++        const r = resource.toLowerCase();
++        // City/metro consolidate processors under renamed institutions ('City
++        // granaries', 'Specialized metalworkers') that the town-tier name needles
++        // miss — broaden via name + tag at city+ so large settlements register their
++        // genuine import reliance (was: 72.5% of metropolises reported ZERO deps).
+         return (
+-          (resource.toLowerCase().includes('grain') && n.includes('mill') && !n.includes('sawmill')) ||
+-          (resource.toLowerCase().includes('timber') && n.includes('sawmill')) ||
+-          (resource.toLowerCase().includes('metal') && (n.includes('smith') || n.includes('smelter')))
++          (r.includes('grain')  && ((n.includes('mill') && !n.includes('sawmill')) || (bigTier && n.includes('granar')))) ||
++          (r.includes('timber') && (n.includes('sawmill') || (bigTier && n.includes('carpenter')))) ||
++          (r.includes('metal')  && (n.includes('smith') || n.includes('smelter') || (bigTier && (n.includes('metalwork') || t.includes('metalwork')))))
+         );
+       });
+       if (hasProcessor) {
+@@ -342,6 +349,58 @@ const generateStabilityScore = (population, terrain, institutions, config, foodB
+     });
+   }
+ 
++  // Tier-scale baseline provisioning dependency. The per-capita food model lets a
++  // dense city/metropolis on fertile terrain appear self-sufficient (it "grows" its
++  // own staples within its walls), reporting zero import dependency — false: a real
++  // urban centre imports staple food + bulk materials from its hinterland. Without
++  // this, 72.5% of metropolises reported ZERO economic dependencies (tier-inverted).
++  if (tierAtLeast(config?.tier, 'city')) {
++    // Skip the staple-food baseline when buildFactionList's food model already shows a
++    // deficit (it emits a 'Food Production' DEPENDENCY that owns the grain import —
++    // foodBalance is computed there and passed in here), or when a per-resource grain
++    // import already fired. Prevents a cross-function double-count under stress: a
++    // famine on fertile terrain otherwise produced BOTH 'Food Import Requirement' and
++    // this baseline. (The earlier agri>=1 proxy missed the stress case.)
++    // >= 20 (not > 20): buildFactionList fires its 'Food Production' warning on the
++    // UNROUNDED deficit > 20, but foodBalance.deficitPercent is rounded (20.4 → 20),
++    // so a strict > 20 here let the boundary cases through and double-counted.
++    const foodDeficit = (foodBalance?.deficitPercent || 0) >= 20;
++    const hasGrainDep = warnings.some(w => w.severity === SEVERITY.DEPENDENCY && /grain|food/i.test(`${w.title} ${w.category || ''}`));
++    if (!hasGrainDep && !foodDeficit) {
++      warnings.push({
++        severity: SEVERITY.DEPENDENCY,
++        category: 'Provisioning at Scale',
++        title: 'Imports staple food at urban scale',
++        description: `A ${config.tier} cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding region.`,
++        impact: 'A disrupted supply line means hunger within days.',
++        suggestedFixes: ['Secure and protect the regional grain-supply network'],
++      });
++    }
++    // Bulk materials/fuel — every city/metro imports these at scale, so the headline
++    // metric is never a false zero for a dense urban centre (city was still 11.7% zero
++    // on grain/timber/metal-free mustImport terrains like hills before this floor).
++    warnings.push({
++      severity: SEVERITY.DEPENDENCY,
++      category: 'Provisioning at Scale',
++      title: 'Imports bulk materials and fuel',
++      description: `A ${config.tier} consumes building materials and fuel faster than any local hinterland can supply.`,
++      impact: 'Construction and industry stall when material convoys are interrupted.',
++      suggestedFixes: ['Diversify material supply routes and hold strategic reserves'],
++    });
++    // Imperial-scale finished goods & luxuries — metropolis throughput only (keeps
++    // metro dependency count above city).
++    if (config?.tier === 'metropolis') {
++      warnings.push({
++        severity: SEVERITY.DEPENDENCY,
++        category: 'Provisioning at Scale',
++        title: 'Imports finished goods and luxuries',
++        description: 'An imperial metropolis depends on a constant inflow of finished goods, textiles, and luxuries its populace and elite demand.',
++        impact: 'Shortfalls drive price spikes, unrest, and loss of prestige.',
++        suggestedFixes: ['Maintain long-haul trade relationships and bonded warehousing'],
++      });
++    }
++  }
++
+   return { issues, warnings, plotHooks: hooks };
+ };
+ 
+diff --git a/src/generators/factionDynamics.js b/src/generators/factionDynamics.js
+index 4c3b5681..72ba2abe 100644
+--- a/src/generators/factionDynamics.js
++++ b/src/generators/factionDynamics.js
+@@ -53,6 +53,18 @@ export const DEFENSE_CONTRIB = {
+   'Fortress':          +10,
+ };
+ 
++// Tier scaling for the defense contribution to public legitimacy. Small settlements
++// being "Vulnerable" is NORMAL, not governance failure — only at city+ does weak
++// defense represent a real policy failure. Exported so the assembleSettlement
++// defense-readiness patch scales the SAME way (an unscaled patch stamped spurious
++// small-tier crises onto the governing faction).
++export const legitimacyDefScale = (tier) =>
++  tier === 'thorp'   ? 0.3
++  : tier === 'hamlet'  ? 0.4
++  : tier === 'village' ? 0.6
++  : tier === 'town'    ? 0.85
++  : 1.0;
++
+ // Food security label → ±10
+ function foodContrib(label) {
+   if (!label) return 0;
+@@ -81,11 +93,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier) {
+   // Defense and food contributions are tier-scaled:
+   // Small settlements being "Vulnerable" or "food pressured" is NORMAL, not governance failure.
+   // Only at city+ scale do these represent actual policy failures.
+-  const defScale  = tier === 'thorp'   ? 0.3
+-                  : tier === 'hamlet'  ? 0.4
+-                  : tier === 'village' ? 0.6
+-                  : tier === 'town'    ? 0.85
+-                  : 1.0;
++  const defScale  = legitimacyDefScale(tier);
+   const foodScale = tier === 'thorp'   ? 0.4
+                   : tier === 'hamlet'  ? 0.5
+                   : tier === 'village' ? 0.65
+diff --git a/src/generators/factionRoles.js b/src/generators/factionRoles.js
+index c539fd14..575b0344 100644
+--- a/src/generators/factionRoles.js
++++ b/src/generators/factionRoles.js
+@@ -108,7 +108,11 @@ export function generateFactionStructuralNpcs(faction, institutions = []) {
+       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
+       linkedFactionIds: factionId ? [factionId] : [],
+       // Defaults for the structural fields the impairment engine reads.
+-      influence: def.importance === 'pillar' ? 75 : def.importance === 'key' ? 50 : 25,
++      // String band (not a number) so structural NPCs match the population NPCs'
++      // low/moderate/high vocabulary every display/sort/AI consumer expects —
++      // the prior numeric 75/50/25 silently failed every `influence === 'high'`
++      // filter and every band-keyed sort.
++      influence: def.importance === 'pillar' ? 'high' : def.importance === 'key' ? 'moderate' : 'low',
+       legitimacyContribution: def.importance === 'pillar' ? 30 : 10,
+       stabilityContribution:  def.importance === 'pillar' ? 25 : 8,
+       generatedAs: 'faction_structural',  // marker for migration / debugging
+diff --git a/src/generators/foodGenerator.js b/src/generators/foodGenerator.js
+index aaf1671e..2f17df57 100644
+--- a/src/generators/foodGenerator.js
++++ b/src/generators/foodGenerator.js
+@@ -83,7 +83,7 @@ export function generateFoodSecurity(tier, institutions, config) {
+   // ── Source chain diversity ────────────────────────────────────────────────
+   // Each independent chain is a fallback when others fail.
+   const chains = {
+-    'Grain & agriculture': hasSubsistence || hasFarmland || hasRes('grain_fields', 'fertile_floodplain') || hasInst('granary', 'grain', 'mill', 'bakery', 'brewery', 'distillery'),
++    'Grain & agriculture': hasSubsistence || hasFarmland || hasGranary || hasCityGranary || hasStateGranary || hasMill || hasRes('grain_fields', 'fertile_floodplain') || hasInst('grain', 'bakery', 'brewery', 'distillery'),
+     'Pastoral & livestock': hasPastoral || hasRes('grazing_land') || hasInst('butcher', 'livestock', 'slaughter', 'dairy', 'cheese', 'tanner', 'tannery'),
+     'Fishing & water':      hasFishing,
+     'Hunting & foraging':   hasHunting || hasOrchard || hasRes('hunting_grounds', 'foraging_areas'),
+diff --git a/src/generators/historyGenerator.js b/src/generators/historyGenerator.js
+index aad71b47..a562f976 100644
+--- a/src/generators/historyGenerator.js
++++ b/src/generators/historyGenerator.js
+@@ -570,6 +570,9 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
+     severity,
+     lastingEffects: selectedEffects,
+     plotHooks: selectedHooks,
++    // Always boolean so historicalEvents[] and eventsTimeline[] agree; the anchor
++    // pass overwrites this with true when it replaces an event.
++    anchored: false,
+   };
+ };
+ 
+@@ -773,6 +776,10 @@ const buildHistoricalEvent = (
+     ...tension,
+     description: substituteNames(tension.description),
+     factions: (tension.factions || []).map(substituteNames),
++    // Collapse the template's severity array to one value (matching the
++    // generateEventNarrative / resource-event shape) so currentTensions[].severity
++    // is a rendered string (e.g. PDF viewModel tension rows) instead of ['minor','major'].
++    severity: Array.isArray(tension.severity) ? pick(tension.severity) : tension.severity,
+   }));
+ };
+ 
+@@ -821,6 +828,24 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
+     return cats[0];
+   };
+ 
++  // Category → candidate event types. Shared by the main loop and the anchor pass
++  // so both pick a RANDOM template per category. The old code used .find() against
++  // these multi-element lists, which always returned the first-in-array template,
++  // collapsing 16 authored templates to ~8 distinct event names (8 never appeared).
++  const EVENT_CATEGORY_TYPES = {
++    economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict'],
++    political: [
++      'succession_crisis', 'corruption_scandal', 'infiltration_fear', 'leadership_vacuum',
++      'occupation_legacy', 'disputed_land', 'population_friction', 'generational_divide',
++    ],
++    disaster: ['external_threat'],
++    religious: ['religious_tension'],
++    magical: ['magical_controversy'],
++    occupation_infiltration: ['infiltration_fear'],
++    exile_return: ['occupation_legacy'],
++    demographic: ['population_friction'],
++  };
++
+   // Pick categories (no repeats)
+   const events = [];
+   const usedCats = new Set();
+@@ -834,29 +859,9 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
+     } while (usedCats.has(cat) && attempts < 5);
+     usedCats.add(cat);
+ 
+-    // Map category to an event type data object (simplified — use a generic template)
+-    const tmpl = HISTORICAL_EVENTS_DATA.find(e => {
+-      const typeMap = {
+-        economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict'],
+-        political: [
+-          'succession_crisis',
+-          'corruption_scandal',
+-          'infiltration_fear',
+-          'leadership_vacuum',
+-          'occupation_legacy',
+-          'disputed_land',
+-          'population_friction',
+-          'generational_divide',
+-        ],
+-        disaster: ['external_threat'],
+-        religious: ['religious_tension'],
+-        magical: ['magical_controversy'],
+-        occupation_infiltration: ['infiltration_fear'],
+-        exile_return: ['occupation_legacy'],
+-        demographic: ['population_friction'],
+-      };
+-      return (typeMap[cat] || []).includes(e.type);
+-    });
++    // Pick a random category-appropriate template (was .find() = first-in-array).
++    const candidates = HISTORICAL_EVENTS_DATA.filter(e => (EVENT_CATEGORY_TYPES[cat] || []).includes(e.type));
++    const tmpl = candidates.length ? candidates[randInt(0, candidates.length - 1)] : null;
+     if (!tmpl) continue;
+     // Skip if we've already used this exact event template name (prevents duplicates)
+     const tmplName = tmpl.name || tmpl.type || '';
+@@ -894,16 +899,6 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
+   // pick() turned that event's string severity into a single character. Every
+   // category the main loop can emit now maps to a real template; an unmapped one
+   // keeps its original event rather than the corrupting fallback.
+-  const ANCHOR_TYPE_MAP = {
+-    economic: 'economic_disparity',
+-    political: 'succession_crisis',
+-    disaster: 'external_threat',
+-    religious: 'religious_tension',
+-    magical: 'magical_controversy',
+-    occupation_infiltration: 'infiltration_fear',
+-    exile_return: 'occupation_legacy',
+-    demographic: 'population_friction',
+-  };
+   const anchoredOrder = [...events].sort((a, b) => a.yearsAgo - b.yearsAgo);
+   const anchoredTypes = new Set();
+ 
+@@ -914,8 +909,10 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
+ 
+     const contextTokens = generateTradeNarrative2(cat, context) || {};
+     if (_rng() < 0.6) {
+-      const anchorType = ANCHOR_TYPE_MAP[cat];
+-      const tmpl = anchorType ? HISTORICAL_EVENTS_DATA.find(e => e.type === anchorType) : null;
++      // Anchor to a RANDOM category-appropriate template (was a single fixed type
++      // per category, which re-collapsed the variety the main loop now produces).
++      const anchorPool = HISTORICAL_EVENTS_DATA.filter(e => (EVENT_CATEGORY_TYPES[cat] || []).includes(e.type));
++      const tmpl = anchorPool.length ? anchorPool[randInt(0, anchorPool.length - 1)] : null;
+       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
+       const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
+       if (replacement) {
+diff --git a/src/generators/npcGenerator.js b/src/generators/npcGenerator.js
+index d5b3ac4f..4005a7e4 100644
+--- a/src/generators/npcGenerator.js
++++ b/src/generators/npcGenerator.js
+@@ -1562,7 +1562,6 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
+     enemy: ['mild', 'serious', 'mortal'],
+     family: ['distant', 'close', 'inseparable'],
+     patron_client: ['nominal', 'significant', 'total dependence'],
+-    lover: ['casual', 'serious', 'passionate'],
+     mentor_student: ['formal', 'devoted', 'lifelong'],
+     debtor_creditor: ['minor', 'substantial', 'crushing'],
+     political: ['convenience', 'stable', 'unbreakable'],
+diff --git a/src/generators/priorityHelpers.js b/src/generators/priorityHelpers.js
+index 2483d77a..f1959ea5 100644
+--- a/src/generators/priorityHelpers.js
++++ b/src/generators/priorityHelpers.js
+@@ -53,6 +53,10 @@ const getInstitutionNames = (institutions = []) => {
+     hasBank:          hasAny(names, ['bank','money changer','counting','stock exchange']),
+     hasWarehouse:     hasAny(names, ['warehouse']),
+     hasPort:          names.some(n => PORT_INFRA_RE.test(n)),
++    // NOTE: no catalog institution currently maps to a standing navy/fleet, so this
++    // is inert by design. A shipyard BUILDS ships but is not a fleet, so it is left in
++    // hasPort only — folding it in here would falsely flip the Naval Defense readout to
++    // "Naval force controls sea approaches". Needs a real navy institution (content) to revive.
+     hasNavy:          hasAny(names, ['navy','major port']),
+     hasGranary:       hasAny(names, ['granar']),
+     hasHospital:      hasAny(names, ['hospital','monastery','healer','friary']),
+@@ -521,7 +525,11 @@ export const getStressFlags = (config = {}, institutions = []) => {
+   // ── magicFillsVoid ───────────────────────────────────────────────────────
+   // Arcane power fills the vacuum left by absent religion and weak economy.
+   const magicVoidCond  = pri.magic >= 68 && pri.religion <= 38 && pri.economy <= 42;
+-  const magicVoidInst  = (inst.hasMagesGuild || inst.hasWizardTower) && !inst.hasChurch;
++  // No MAJOR religious institution (a basic parish church/shrine still counts as
++  // present in hasChurch, which is ~100% at the town+ tiers mages' guilds need —
++  // so the old !hasChurch gate was unreachable). Religion-priority is already low
++  // via magicVoidCond (pri.religion <= 38).
++  const magicVoidInst  = (inst.hasMagesGuild || inst.hasWizardTower) && !inst.hasCathedral && !inst.hasMonastery;
+   const magicFillsVoid = magicVoidCond && magicVoidInst && fires(48);
+ 
+   // ── religiousFraud ───────────────────────────────────────────────────────
+@@ -534,7 +542,9 @@ export const getStressFlags = (config = {}, institutions = []) => {
+   // ── secularBrutalism ─────────────────────────────────────────────────────
+   // High military with no religious counterweight: rule by force, no moral framework.
+   const secularCond      = pri.military >= 70 && pri.religion <= 28 && pri.economy >= 32;
+-  const secularInst      = inst.hasGarrison && !inst.hasChurch;
++  // No MAJOR religious counterweight (cathedral/monastery); a basic parish church
++  // is ~universal at garrison tiers, so the old !hasChurch gate never fired.
++  const secularInst      = inst.hasGarrison && !inst.hasCathedral && !inst.hasMonastery;
+   const secularBrutalism = secularCond && secularInst && fires(50);
+ 
+   // ── merchantCriminalBlur ─────────────────────────────────────────────────
+diff --git a/src/generators/spatialGenerator.js b/src/generators/spatialGenerator.js
+index 2c413f84..49f42bff 100644
+--- a/src/generators/spatialGenerator.js
++++ b/src/generators/spatialGenerator.js
+@@ -16,7 +16,14 @@
+  */
+ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainType = 'plains') => {
+   const instNames = institutions.map(i => i.name);
+-  const has = (keyword) => instNames.some(n => n.includes(keyword));
++  // Case-insensitive substring match. Higher tiers re-case/re-word their
++  // institutions ('Multiple market squares', 'Craft guilds (100-150+)'), so a
++  // case-sensitive gate silently dropped Market/Artisan quarters at city+metro.
++  const has = (keyword) => { const k = keyword.toLowerCase(); return instNames.some(n => n.toLowerCase().includes(k)); };
++  // Case-insensitive landmark picker — mirrors has() so quarters at city/metro
++  // (lowercase/re-cased institution names) get populated landmark lists, not empty
++  // ones. Keys must be lowercase.
++  const landmarks = (...keys) => instNames.filter(n => { const l = n.toLowerCase(); return keys.some(k => l.includes(k)); }).slice(0, 3);
+ 
+   const quarters = [];
+ 
+@@ -26,9 +33,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
+       name:      'Market Quarter',
+       location:  'Central',
+       desc:      'Bustling center with merchant stalls, money changers, and crowds',
+-      landmarks: instNames
+-        .filter(n => n.includes('Market') || n.includes('Guild') || n.includes('Bank'))
+-        .slice(0, 3),
++      landmarks: landmarks('market', 'guild', 'bank'),
+     });
+   }
+ 
+@@ -38,10 +43,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
+       name:      'Religious Quarter',
+       location:  'Eastern district (traditional)',
+       desc:      'Churches, monasteries, quiet streets with priests and pilgrims',
+-      landmarks: instNames
+-        .filter(n => n.includes('church') || n.includes('Cathedral') ||
+-                     n.includes('monastery') || n.includes('Hospital'))
+-        .slice(0, 3),
++      landmarks: landmarks('church', 'cathedral', 'monastery', 'hospital'),
+     });
+   } else if (has('shrine') || has('Shrine')) {
+     quarters.push({
+@@ -115,9 +117,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
+       name:      'Artisan Quarter',
+       location:  'Between market and residential',
+       desc:      'Workshops, guild halls, apprentices learning trades',
+-      landmarks: instNames
+-        .filter(n => n.includes('Smith') || n.includes('Weaver') || n.includes('guild hall'))
+-        .slice(0, 3),
++      landmarks: landmarks('smith', 'weaver', 'craft', 'guild hall', 'artisan'),
+     });
+   }
+ 
+@@ -127,9 +127,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
+       name:      'Government Quarter',
+       location:  'Defensible high ground',
+       desc:      'Official buildings, courts, administrative offices',
+-      landmarks: instNames
+-        .filter(n => n.includes('hall') || n.includes('Court') || n.includes('Palace'))
+-        .slice(0, 3),
++      landmarks: landmarks('hall', 'court', 'palace'),
+     });
+   }
+ 
+@@ -139,10 +137,7 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
+       name:      "Mages' Quarter",
+       location:  'Isolated area (safety concerns)',
+       desc:      'Towers, arcane shops, strange lights and sounds at night',
+-      landmarks: instNames
+-        .filter(n => n.includes('Wizard') || n.includes('Mage') ||
+-                     n.includes('Enchanter') || n.includes('Alchemist'))
+-        .slice(0, 3),
++      landmarks: landmarks('wizard', 'mage', 'magic', 'enchant', 'alchemist', 'arcane'),
+     });
+   }
+ 
+diff --git a/src/generators/steps/assembleSettlement.js b/src/generators/steps/assembleSettlement.js
+index f6ebfa26..a7b08639 100644
+--- a/src/generators/steps/assembleSettlement.js
++++ b/src/generators/steps/assembleSettlement.js
+@@ -30,7 +30,7 @@ import { promoteStressorsToConditions, reapplyEventConditions } from '../../doma
+ // The canonical defense-readiness -> legitimacy table. This file used to carry a
+ // stale local copy that LACKED 'Lightly Defended', so the real-label patch below
+ // reverted that band's provisional contribution to 0 on every generated settlement.
+-import { DEFENSE_CONTRIB } from '../factionDynamics.js';
++import { DEFENSE_CONTRIB, legitimacyDefScale } from '../factionDynamics.js';
+ 
+ registerStep('assembleSettlement', {
+   // structuralValidationPass provides ctx.structural — the coherence receipt
+@@ -110,7 +110,10 @@ registerStep('assembleSettlement', {
+   if (settlement.powerStructure?.publicLegitimacy && settlement.defenseProfile?.readiness?.label) {
+     const realDefLabel = settlement.defenseProfile.readiness.label;
+     const provLeg      = settlement.powerStructure.publicLegitimacy;
+-    const realDefContrib = DEFENSE_CONTRIB[realDefLabel] ?? 0;
++    // Tier-scaled to match computePublicLegitimacy (factionDynamics) — an unscaled
++    // contribution here recomputed a too-low score at small tiers, deterministically
++    // stamping a spurious legitimacy crisis (28 vs the engine's tier-scaled 32).
++    const realDefContrib = Math.round((DEFENSE_CONTRIB[realDefLabel] ?? 0) * legitimacyDefScale(tier));
+     const delta = realDefContrib - (provLeg.breakdown?.defense ?? 0);
+ 
+     if (delta !== 0) {
+@@ -129,6 +132,22 @@ registerStep('assembleSettlement', {
+       provLeg.isContested         = newScore >= 30 && newScore < 45;
+       provLeg.isLegitimacyCrisis  = newScore < 30;
+       provLeg.governanceFractured = newScore < 30;
++
++      // Reconcile the governing faction's crisis tag with the recomputed
++      // governanceFractured. The provisional tag was set in generatePowerStructure
++      // using a provisional defense label; without this, lowering the real score
++      // below 30 leaves the governing faction UNtagged (settlement says crisis,
++      // faction doesn't), and raising it above 30 leaves a STALE crisis tag.
++      const gov = settlement.powerStructure.factions?.find(f => f.isGoverning);
++      if (gov) {
++        if (provLeg.governanceFractured) {
++          gov.legitimacyCrisis = true;
++          gov.crisisNote = gov.crisisNote || 'Governing authority is internally fractured. Real decisions are being made informally. The faction that appears to govern is not the faction that governs.';
++        } else if (gov.legitimacyCrisis) {
++          gov.legitimacyCrisis = false;
++          delete gov.crisisNote;
++        }
++      }
+     }
+   }
+ 
+diff --git a/src/generators/steps/corruptionPass.js b/src/generators/steps/corruptionPass.js
+index b75cdd73..5a5d2eb7 100644
+--- a/src/generators/steps/corruptionPass.js
++++ b/src/generators/steps/corruptionPass.js
+@@ -25,7 +25,6 @@ const CORRUPT_SHORT_GOAL = Object.freeze({
+   hunger_for_status: 'Trade quiet favours upward, buying a seat above their station.',
+   fear: 'Stay useful to the wrong people so they stay breathing.',
+   forbidden_patron: 'Answer, in secret, to a patron no one is meant to know.',
+-  fanaticism: 'Bend every rule for the cause and call the corruption devotion.',
+ });
+ 
+ function thievesGuildName(criminalInstitutions) {
+diff --git a/src/generators/steps/generateNarratives.js b/src/generators/steps/generateNarratives.js
+index 5c2653bb..daa6242b 100644
+--- a/src/generators/steps/generateNarratives.js
++++ b/src/generators/steps/generateNarratives.js
+@@ -17,6 +17,18 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js';
+ import { getTerrainType } from '../terrainHelpers.js';
+ import { recordTrace } from '../../domain/trace.js';
+ 
++// Catalog nearbyResource key → SPECIAL_RESOURCES feature key. The two vocabularies
++// differ (catalog 'magical_node' vs SPECIAL_RESOURCES 'magicalNode'), so the mapping
++// must be explicit — without it the special-resource feature effects never surfaced.
++const SPECIAL_RESOURCE_KEY_MAP = {
++  ancient_ruins:       'ancientRuins',
++  ancient_grove:       'holySite',
++  magical_node:        'magicalNode',
++  hot_springs:         'hotSprings',
++  hot_springs_mineral: 'hotSprings',
++  defended_pass:       'strategicPass',
++};
++
+ registerStep('generateNarratives', {
+   // economyReconcilePass (not generateEconomy): narratives must read the
+   // FINAL economicState, after the faction-pull reconciliation.
+@@ -32,7 +44,16 @@ registerStep('generateNarratives', {
+   const terrainT = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
+   const allowedResources = TERRAIN_DATA[terrainT]?.allowedResources?.slice(0, 7) || [];
+ 
+-  const resourceAnalysis = generateResourceAnalysis(terrainT, allowedResources, [], institutions, effectiveConfig);
++  // Thread the settlement's REAL special nearby resources into the feature-effects
++  // analysis (was hardcoded [], so resourceAnalysis.featureEffects was always empty
++  // despite magical_node / ancient_ruins / hot_springs being in nearbyResources).
++  // Deduped: hot_springs and hot_springs_mineral both map to 'hotSprings' and can
++  // co-occur, which would otherwise produce a doubled Terrain Effects row.
++  const specialResources = [...new Set(
++    (effectiveConfig.nearbyResources || []).map(k => SPECIAL_RESOURCE_KEY_MAP[k]).filter(Boolean)
++  )];
++
++  const resourceAnalysis = generateResourceAnalysis(terrainT, allowedResources, specialResources, institutions, effectiveConfig);
+   // Viability first: settlementReason is deficit-aware — an isolated settlement
+   // with a food shortfall must not claim self-sufficiency.
+   const economicViability = generateEconomicViability(
+diff --git a/supabase/functions/_shared/aiGroundingBundle.js b/supabase/functions/_shared/aiGroundingBundle.js
+index 3e3db7ed..90bc07e8 100644
+--- a/supabase/functions/_shared/aiGroundingBundle.js
++++ b/supabase/functions/_shared/aiGroundingBundle.js
+@@ -1,6 +1,6 @@
+ /**
+  * Auto-generated by scripts/build-edge-shared.mjs — DO NOT EDIT BY HAND.
+- * Source hash: 0d3a547af3d6bbce
++ * Source hash: 8498f1b18b7135b7
+  *
+  * Deno-importable bundle of src/domain/aiGrounding.js plus every transitive dep it reaches.
+  * Regenerate after editing any bundled module via:
+diff --git a/supabase/functions/_shared/aiGroundingBundle.meta.json b/supabase/functions/_shared/aiGroundingBundle.meta.json
+index e9108d88..e3de05c1 100644
+--- a/supabase/functions/_shared/aiGroundingBundle.meta.json
++++ b/supabase/functions/_shared/aiGroundingBundle.meta.json
+@@ -1,7 +1,7 @@
+ {
+-  "generatedAt": "2026-06-14T21:46:20.081Z",
++  "generatedAt": "2026-06-15T18:30:51.853Z",
+   "entry": "src/domain/aiGrounding.js",
+-  "sourceHash": "0d3a547af3d6bbce",
++  "sourceHash": "8498f1b18b7135b7",
+   "inputs": [
+     "src/data/constants.js",
+     "src/domain/activeConditions.js",
+diff --git a/tests/fixtures/generator-golden-master.json b/tests/fixtures/generator-golden-master.json
+index ddc10bb6..d0911f00 100644
+--- a/tests/fixtures/generator-golden-master.json
++++ b/tests/fixtures/generator-golden-master.json
+@@ -1,157 +1,157 @@
+ {
+-  "city|celtic|coastal|road|civilized|golden-master-v1": "310637aa38084fd98e196330ef00870ea7a0bc757b51b4ac3dafebe5be1f98df",
+-  "city|celtic|forest|road|civilized|golden-master-v1": "236d73aef5e7891b9e93e5f02fffe03b57be166ff6e1e61881b9688eb0d30143",
+-  "city|celtic|grassland|road|civilized|golden-master-v1": "952038070fcc0c1dbc5878a6e62a7934577e493b7615583aca9e60baad3a97a9",
+-  "city|celtic|mountains|road|civilized|golden-master-v1": "7dd9042bdc96ce5496c950d40f4fb3a4c1b9a56bbf7b7447a00f9d8c99bfda0e",
+-  "city|celtic|river|road|civilized|golden-master-v1": "d6bd29c6c541ad78365caaa3706905326768710da64f547cc25e6fcbbb61e0e2",
+-  "city|celtic|swamp|road|civilized|golden-master-v1": "3f696ccdb07239da9d164a23a070da041443ff5bc259f29130d1e9146005dd95",
+-  "city|germanic|coastal|road|civilized|golden-master-v1": "26c36b4d2e6e45786458ac11f9398868ca9e11f3e8aea9f22a2e1fb16349386a",
+-  "city|germanic|forest|road|civilized|golden-master-v1": "91f1c02c18f6fc7b02c1c6498a1f35bf490999104de49c2d136a7b0f779d0da6",
+-  "city|germanic|grassland|road|civilized|golden-master-v1": "20c9ba97ea769891c1a9fd6ffe4573d45c6e7e203b07783668f5623e6574357f",
+-  "city|germanic|mountains|road|civilized|golden-master-v1": "3f14f96ce6c9be049166b6d058c292747199253ee1246aef2bca8b513e2bcf28",
+-  "city|germanic|river|road|civilized|golden-master-v1": "5e5a137ac23697beae7ad0354b50926fee0927d1d0a7a34d02b61059807d428c",
+-  "city|germanic|swamp|road|civilized|golden-master-v1": "efda14e6171a45e7524fb1b3f884fff47ab31d02ed2ef34260f34b22fc04bb01",
+-  "city|mediterranean|coastal|road|civilized|golden-master-v1": "1c6fe062b35b3e0bafdb3ef49e45d81c72e1085b32d5f9187402ebcadad42146",
+-  "city|mediterranean|forest|road|civilized|golden-master-v1": "517cc36e41699610194afa0a24aec94a7dfcf9baeb7f2d8044e055c4944ecfec",
+-  "city|mediterranean|grassland|road|civilized|golden-master-v1": "64f1e991b9c149b9421350d81c0007550275fb05a14e11a0ce8b87b786a1dd5b",
+-  "city|mediterranean|mountains|road|civilized|golden-master-v1": "59e2ffaa91cb45415b5cb2faf935575e541d9e60c55a8301dc5c0663bc25f968",
+-  "city|mediterranean|river|road|civilized|golden-master-v1": "664219f1dd28766712ab6deed7af9613217e6775707971e0eeb60e9a8dc62f05",
+-  "city|mediterranean|swamp|road|civilized|golden-master-v1": "1a717faef169d77af40a6b90b0e5a128c0b5c3d78235c9553212f665c8ce2cf8",
+-  "city|norse|coastal|road|civilized|golden-master-v1": "6005ce0cbf3fb6660b6c5244ff88b997d2237ac12543db8d2f071909d4a96006",
+-  "city|norse|forest|road|civilized|golden-master-v1": "0ecc5e2065b82e0d20b480b2b7d49bb08acb68dbbe4b3c730157135be4f58146",
+-  "city|norse|grassland|road|civilized|golden-master-v1": "242338df83bd2cfe2cf0edad2214f95eae9874efdf109ace9e62c978365b1654",
+-  "city|norse|mountains|road|civilized|golden-master-v1": "fab7d45f02ad8151f4d95e6a5e50acb2943b086cff4649d9818ab55f0734fb21",
+-  "city|norse|river|road|civilized|golden-master-v1": "af3d0e5dc254b4fcf9c028641fe5bac8160b899baf65baac32869112835dd0dc",
+-  "city|norse|swamp|road|civilized|golden-master-v1": "ef3755eac6fe3c5fee07bfd812840573303a75fdd8e2aa2fe2844e90b007fe90",
+-  "hamlet|celtic|coastal|road|civilized|golden-master-v1": "2090d61a84fac1f48dcf3656a88eb4b8abc95a9c61d3aff44e1ac5e3b24d7238",
+-  "hamlet|celtic|forest|road|civilized|golden-master-v1": "dfb0e49e075a52a87cb5da4918849b715dd436da3ea5e33120858db675bdcbe4",
+-  "hamlet|celtic|grassland|road|civilized|golden-master-v1": "1cb0fd74637bd25a54d0acd911a7e233910e29e37dadf58be8ffc59ddc4a88bb",
+-  "hamlet|celtic|mountains|road|civilized|golden-master-v1": "3332c2b45250c55301fd252afe9e578f5245a57f4019c822148f58b99bcd873f",
+-  "hamlet|celtic|river|road|civilized|golden-master-v1": "6591b60db092e0acae584ba74e17d2e1ea831710b92947bb4c2cdf27ba54ec22",
+-  "hamlet|celtic|swamp|road|civilized|golden-master-v1": "238899b2a3c86a69095813053059fc3265e334226de5846edb05d8877b573597",
+-  "hamlet|germanic|coastal|road|civilized|golden-master-v1": "9a94bcc465f1eb97e24c12c857083741853e87f36c26c2c3d3aea9c8feff6a4d",
+-  "hamlet|germanic|forest|road|civilized|golden-master-v1": "4be31c55956bcbd11b4a0ef08905ea0ff1a2f40b2f9a0b8e9c294e064b25b405",
+-  "hamlet|germanic|grassland|road|civilized|golden-master-v1": "8e2501177c13d440dc489683f62b619effbd325f584855d673e4a69549569cd2",
+-  "hamlet|germanic|mountains|road|civilized|golden-master-v1": "ba52a054a9b2cb6e278d224e8a46c6875dd085322a88b2fff7782847adf4189c",
+-  "hamlet|germanic|river|road|civilized|golden-master-v1": "39e38a8807166a83dc04b8e3a61fc38c53c121b14e26f2b54fe38269ec7849c7",
+-  "hamlet|germanic|swamp|road|civilized|golden-master-v1": "ba53f98b6243bff2e7f6556ff767d399959e58c9846bc922ebe97a7afaaae404",
+-  "hamlet|mediterranean|coastal|road|civilized|golden-master-v1": "b3c16b1c2d37379430bba3dfe22605b0824a3d8aafe5812785cfcb627f0dcf12",
+-  "hamlet|mediterranean|forest|road|civilized|golden-master-v1": "a693e4859115f77e78b760f9a7227653cc12e74958fe4d55109172e97ac8671e",
+-  "hamlet|mediterranean|grassland|road|civilized|golden-master-v1": "bd35f26d6ec8240fbb948bd275a22026c6c3d0154dfa789e0ac890e1452f9f9e",
+-  "hamlet|mediterranean|mountains|road|civilized|golden-master-v1": "1cf7913743df941d9e4baf12254f335cedbe0241d4c8ba3358475eaf92aae67b",
+-  "hamlet|mediterranean|river|road|civilized|golden-master-v1": "69227bf1b26ea8c510e81e6783ec119809aa6a6ad5f5e193505ab846e163109f",
+-  "hamlet|mediterranean|swamp|road|civilized|golden-master-v1": "b9b2cfef3cfa7119e08cd53d7c785d26333bf2476ab6b50f32efc98c4407a356",
+-  "hamlet|norse|coastal|road|civilized|golden-master-v1": "d876f25bc9111707e0583b62e25bbc10d3ad5ce2b00e3627a3420fdd596d662f",
+-  "hamlet|norse|forest|road|civilized|golden-master-v1": "50ac3e5bd489709c874c56dc0638011bba959ac942a6dd4038624df6d5faea37",
+-  "hamlet|norse|grassland|road|civilized|golden-master-v1": "5ded08622f8cf7937ceeb5d71c7d4051a321e0adbd2288ea9bddb4a798189a68",
+-  "hamlet|norse|mountains|road|civilized|golden-master-v1": "a7242311f7476db05b2f66a4b6958df7385b267772beb8360b41d7b1c367e56e",
+-  "hamlet|norse|river|road|civilized|golden-master-v1": "a41c0ba9fdad05815f24822e704c6a782726db2e8142e111ec694af5d5f9b992",
+-  "hamlet|norse|swamp|road|civilized|golden-master-v1": "52b365fe8db10ac8a43348a0f8e8473601594304ff9388780fc912b3e9379b87",
+-  "metropolis|celtic|coastal|road|civilized|golden-master-v1": "bf0e85a7994dd4f5f17c38a517a6bd7acebfc39d5d2686c440f934a47d9a50b5",
+-  "metropolis|celtic|forest|road|civilized|golden-master-v1": "dd37f65c554e0cfb21289394a767bea04dd1805057140093f4224df645021bb5",
+-  "metropolis|celtic|grassland|road|civilized|golden-master-v1": "0a641246e15977f6c6b01af035afa124d8bd1557932f3a3389cd53d87ab333b8",
+-  "metropolis|celtic|mountains|road|civilized|golden-master-v1": "135bfbde86a09bd239cd43324a9db322e21b94638727929ebd7b17f34ea52169",
+-  "metropolis|celtic|river|road|civilized|golden-master-v1": "18460d0e6f35bf7071c233230b5ae73b62c3d6461e647ad4dc86bc9af54a3962",
+-  "metropolis|celtic|swamp|road|civilized|golden-master-v1": "d6742f908e0796a9dc079cb06e6a99be0a00f6c31f1bc4a80fb0e80d2caccafc",
+-  "metropolis|germanic|coastal|road|civilized|golden-master-v1": "3540ead658a748ad385fd1c69294d27adcdc24ae678ce5164c0a41d69cb4fd46",
+-  "metropolis|germanic|forest|road|civilized|golden-master-v1": "2d2d4eff1264dc36ed6c0b8034b1ae6b808154c53c54b4d62994d57e80351eeb",
+-  "metropolis|germanic|grassland|road|civilized|golden-master-v1": "1cbfcb194fc17e5896fff9a30ab12ddc0b26051e874911f05b33b65a404a43f5",
+-  "metropolis|germanic|mountains|road|civilized|golden-master-v1": "fb31d5f2a9695e78d8ac1877ff8dacf1a719e875f88e4f054ef068bc72fe9e3b",
+-  "metropolis|germanic|river|road|civilized|golden-master-v1": "280c3693cd1670ff60a0df86da04497f90c7dd7e0a8e93cbb8c614c08fdb5703",
+-  "metropolis|germanic|swamp|road|civilized|golden-master-v1": "f9c5cbd5184fa5c9f79311dc6d2ea64dfd7c093253036ea5717b2d358b252cf4",
+-  "metropolis|mediterranean|coastal|road|civilized|golden-master-v1": "46e35938f13886d3e0ce776efc4ec23b7471e242d6dc6cc43bbc96e1a7f7b4ab",
+-  "metropolis|mediterranean|forest|road|civilized|golden-master-v1": "49b987805f9e5b14551e49880f1cfc7fba6f4eb053f7f9e12c216dd416ced7c6",
+-  "metropolis|mediterranean|grassland|road|civilized|golden-master-v1": "2b66b626a89ebbd51d4f9c0576f633711c08fc6cfffe65bbe2967c3c7f96642e",
+-  "metropolis|mediterranean|mountains|road|civilized|golden-master-v1": "0a9342cc3ef091a7fed0fe5ed7a6bad622cd6bc5c11948ebebdee97899227219",
+-  "metropolis|mediterranean|river|road|civilized|golden-master-v1": "f566188652223446cf93832f18159863db0cc19b3120f2f708f922af17cae0c2",
+-  "metropolis|mediterranean|swamp|road|civilized|golden-master-v1": "b49110c99aedfb4f4d8aa88e640d18f15f35383af89ea98535c1bbb444d42618",
+-  "metropolis|norse|coastal|road|civilized|golden-master-v1": "f501fa3d6cb98c208e414bd201c81d4958fc179bdf3fbe3ecb0eb4652b0ec0c1",
+-  "metropolis|norse|forest|road|civilized|golden-master-v1": "31d3f4b8308ad5d2cdb96a069848a735ea9f73280516d4e015465d992461cea8",
+-  "metropolis|norse|grassland|road|civilized|golden-master-v1": "2418c0c064d53bd8c8c3493bc3f15817e1a4a799800081e9648047368afdbae8",
+-  "metropolis|norse|mountains|road|civilized|golden-master-v1": "1bbed57d63b4e6bd799944c140beda2dbeec691e603a722808d7559fa626eab4",
+-  "metropolis|norse|river|road|civilized|golden-master-v1": "61d6216102fb9f4803f773d8940e5d3410857e69c8c3549a9842f4b394f20ee8",
+-  "metropolis|norse|swamp|road|civilized|golden-master-v1": "2877218bc3c6b6f8d367ee395e6c0d0ad3e03c1022177aec53017544a0446fb7",
+-  "thorp|celtic|coastal|road|civilized|golden-master-v1": "669921710e2115771e696fe6f3d81476395879ecff9bee26301020f905823341",
+-  "thorp|celtic|forest|road|civilized|golden-master-v1": "3b371357bd0f63bc5dee5331e02f1198b741b1b7575132062a223f5c9d8f3d78",
+-  "thorp|celtic|grassland|road|civilized|golden-master-v1": "51bc7fbb84af7fa7a0a44b47b829730641b372359dfc0b6905833f8cad03641e",
+-  "thorp|celtic|mountains|road|civilized|golden-master-v1": "1a149ed8d8025c6c42f8ac737e2d9bff9e7aa33882ec84371bac36c31c52e55d",
+-  "thorp|celtic|river|road|civilized|golden-master-v1": "0652d897fafd7b18b84935202f2e3391d0c9f8fe16953334bb5df49ae4b5fab1",
+-  "thorp|celtic|swamp|road|civilized|golden-master-v1": "1f72659fe03646d53ab9f9c03f281325d14a46b1bd4665e3f244c1809318ed97",
+-  "thorp|germanic|coastal|road|civilized|golden-master-v1": "986e7f6a9ba6d820bac77cc18ba2a28a767fdfed3c3ef60ee1f869c7ec416cac",
+-  "thorp|germanic|forest|road|civilized|golden-master-v1": "0299bcbdea043845422a2801f529aeafccb688d20ae00f2d97e2290e7b299627",
+-  "thorp|germanic|grassland|road|civilized|golden-master-v1": "e4261cce54a65cc0c318be91bdbfda642d4f37c0bd382b524a551b962f9111a3",
+-  "thorp|germanic|mountains|road|civilized|golden-master-v1": "fc4e78f586d23a3868559aa07b13d20e1fc00a14d02ea79891b16783ceb67b52",
+-  "thorp|germanic|river|road|civilized|golden-master-v1": "9f32f592a567be20933b95a53f9c5519cba848ec83514cfb9fc2bf394dc42b7c",
+-  "thorp|germanic|swamp|road|civilized|golden-master-v1": "714cf6982d311f60a8ac088aacad8ebd698e21684e13443f6d8bd4c6cdf48bbc",
+-  "thorp|mediterranean|coastal|road|civilized|golden-master-v1": "03ff0b0187c4efb610b5fb2e1a7487648cef4fc0584393d3a50f96fd6d777ded",
+-  "thorp|mediterranean|forest|road|civilized|golden-master-v1": "98266b3dbe647eb8f499228f0e788d52e613ad89e9a024470457d3100709fb1e",
+-  "thorp|mediterranean|grassland|road|civilized|golden-master-v1": "52d0150abdc3c7279c0d4f44269ac8b434276579ab66e41cdd12a531d5c4e9db",
+-  "thorp|mediterranean|mountains|road|civilized|golden-master-v1": "dfdc834e007e96c7f8711adc7aeccd7ce6b35e3cd8fecaa5383d18b589485459",
+-  "thorp|mediterranean|river|road|civilized|golden-master-v1": "d96247bec632de47ebdfe1a7036549afad59d0675e00edae70ef5dc739ebe7d4",
+-  "thorp|mediterranean|swamp|road|civilized|golden-master-v1": "cb99834977b79c33466864406e03f813537678d36a8d53c1c70f9fb97b462674",
+-  "thorp|norse|coastal|road|civilized|golden-master-v1": "77fd38ba4eaf2d6a997543fa183d4d2eed892ab612943030075fce673bbc2c5a",
+-  "thorp|norse|forest|road|civilized|golden-master-v1": "378eec58543b3af2b2d34cff0be83a5e3045e89b944eaa4a425e4971e9e80059",
+-  "thorp|norse|grassland|road|civilized|golden-master-v1": "0e23072f4d840873ee05451fe8ebeb5b77c0d1c2ab18f882ba6371a5e4066354",
+-  "thorp|norse|mountains|road|civilized|golden-master-v1": "eafb9ae870314e648723934b5e52d03ba7671dd2595ce9d914191af4422402ca",
+-  "thorp|norse|river|road|civilized|golden-master-v1": "8be618943b4487aec4daacce682fecafb5fd52868802e838eab4162caf4f21d2",
+-  "thorp|norse|swamp|road|civilized|golden-master-v1": "f8b5855ab3964890857c1e220b9fde3620d21eadb2b210b2a117be3d8f532873",
+-  "town|celtic|coastal|road|civilized|golden-master-v1": "d814014d5d593eb53c6bc0fee7be487effabf728a7216009ff0c51de5b68ffc0",
+-  "town|celtic|forest|road|civilized|golden-master-v1": "17ea0cff82d2c13e0d5dd5e688d3bb79c4c5a8f99c15a23fb1d00ac8b17182be",
+-  "town|celtic|grassland|road|civilized|golden-master-v1": "972ed343fa5307ba9da76a1ef7f0c54557fa3b841f471dee4d3911908f4160fb",
+-  "town|celtic|mountains|road|civilized|golden-master-v1": "fa1ddf4b9c2ce16da37815ec0fa015b6b1dacdb6103c36f349afbd5a7aa8c3e6",
+-  "town|celtic|river|road|civilized|golden-master-v1": "a8f89f922aa5a866b611916a1320d32b25ad4877c4b3872e37a2095e04ba7478",
+-  "town|celtic|swamp|road|civilized|golden-master-v1": "aba8677234839c318f631e3754f260f5f793a2b3b21c365d08418f8087d1c527",
+-  "town|germanic|coastal|road|civilized|golden-master-v1": "82bf4493df8094b3bfba029d785c1179f9f6bf1cb74739695103b028be73d653",
+-  "town|germanic|forest|road|civilized|golden-master-v1": "f4412b35a4c302b9066a48895f4bb69a605e279ce70202074b1ed1a4c59bf410",
+-  "town|germanic|grassland|road|civilized|golden-master-v1": "852654ee37ad43909c547fc457233dde97ff583cd2775cc71e447ba034529899",
+-  "town|germanic|mountains|road|civilized|golden-master-v1": "82d01d31b42343a43317dc9a875b09327c89010bf0b110576910ef32123a600c",
+-  "town|germanic|river|crossroads|civilized|golden-master-v1": "392b7dcd37ca94d9ebb2f9b98010075a403fb252830e94d9b54849473342b8ed",
+-  "town|germanic|river|isolated|civilized|golden-master-v1": "5caf609c5bd85216b59b2cddefd4d168c09f77a5fd672063422a4ff6ff23357a",
+-  "town|germanic|river|none|civilized|golden-master-v1": "ef28b9b22da67d49467463bbc5b9b85a85e3664b8505216b5435c36e7e08005d",
+-  "town|germanic|river|port|civilized|golden-master-v1": "e4a9d93cc14d58f32f44d3b7d1063bcda75858e6f40d610756dd3f1f14293d0e",
+-  "town|germanic|river|river|civilized|golden-master-v1": "e6cdfb13ae5a866fc3ec56c99c58cf4a0f677015927eb69089b12263f419a235",
+-  "town|germanic|river|road|civilized|gm-seed-a": "ec4b5e7d521d8a8128e680507e8a65e1dcb3ca64fe99c9e542d14d2039421f60",
+-  "town|germanic|river|road|civilized|gm-seed-b": "2d850f67822bb922e55baaad98dbdb7cf237b1596022807a9aa71e18858c1e2e",
+-  "town|germanic|river|road|civilized|gm-seed-c": "1e4c8c9f62cb81316e00a636a1cf47ba3c84556e221e174813da5e8095dfc7df",
+-  "town|germanic|river|road|civilized|golden-master-v1": "a1fae28c02a7549bb0db82527d2fa0e836ae736e0c5bf0c984de4dd30c41b33b",
+-  "town|germanic|river|road|frontier|golden-master-v1": "5446db54a63177004a4a8a322e1c557a2865ba60017b943aeb38358d8965d2fb",
+-  "town|germanic|river|road|plagued|golden-master-v1": "b70b67a188d06280cc6f175855de32c1649a2091c3d64f0f66ce88ee4f66fdb6",
+-  "town|germanic|river|road|safe|golden-master-v1": "40bb395af9c1bcb43c50d0234957b149be40b6366e42632ba59a0e37d56e1a28",
+-  "town|germanic|swamp|road|civilized|golden-master-v1": "1b9df5020fc8ddab7a14aba0fc04535c0faa60480f8c39d99e772877232e9221",
+-  "town|mediterranean|coastal|road|civilized|golden-master-v1": "99c72b6e03332e9660b256aabf49662768040d1292318197df80b99754494608",
+-  "town|mediterranean|forest|road|civilized|golden-master-v1": "17234591703e53f084bb6c939d2f7d8a8cddbabec17b8db8ded037aaf947453e",
+-  "town|mediterranean|grassland|road|civilized|golden-master-v1": "a81ae0bd06709023f23722d3ec1c7985224adec9e3098ae6c2bf26ce0a5e0346",
+-  "town|mediterranean|mountains|road|civilized|golden-master-v1": "d00bb100a8dd447f80e3f10498114b2f6f523af7108872ac0479a6b09e40e721",
+-  "town|mediterranean|river|road|civilized|golden-master-v1": "a6272dc5ab12371fc68ff3f69efd4d12db242d6d9b42e0d9c0627172a8c3d5f0",
+-  "town|mediterranean|swamp|road|civilized|golden-master-v1": "19f3f03839c9b5e2f87128ba837d208238b54478ef714792b583979079d242c8",
+-  "town|norse|coastal|road|civilized|golden-master-v1": "a73a2eb949457774e58c0a1e4c04a1edd15e6a01b087af7ddd9c5aa9a9774878",
+-  "town|norse|forest|road|civilized|golden-master-v1": "17399f7237bea6c8a7a55d5e2a2f3b1844fbc00a5c2a1d9cbc364b01ebdb6949",
+-  "town|norse|grassland|road|civilized|golden-master-v1": "666c7062c5f301dbb6909b98ddb7c2a4db1cc4f5e55403d5ba39b780f5952f63",
+-  "town|norse|mountains|road|civilized|golden-master-v1": "6287850350f5bf1bafdccb8bfad0357152a61cb03aee02eed3e2f766c0b56e4f",
+-  "town|norse|river|road|civilized|golden-master-v1": "1cca3adbaed40fd82e118b8b7ea14a8210d89e4224ea4651003f7d5d3c07e51d",
+-  "town|norse|swamp|road|civilized|golden-master-v1": "088eef015cc5bbe82ab4b5f7c58df3634ea8f0bdb1a7f144115c2fb8480c1e7b",
+-  "village|celtic|coastal|road|civilized|golden-master-v1": "6f172e4fc735b456d6934c69e1a42a9029d035c8ad2ecce173b31c8287a8e533",
+-  "village|celtic|forest|road|civilized|golden-master-v1": "5046528ff60a48fbfc6d29e2aaed3a8ed8b2c3326cdf32ecf6123146a477b6f9",
+-  "village|celtic|grassland|road|civilized|golden-master-v1": "1447a38bfbafb8cc0d916e2eb2812642c394fc9f3251f96bd99d87384d16e225",
+-  "village|celtic|mountains|road|civilized|golden-master-v1": "bf99a6a7ed536f39a6e76a202fb1aa083aaf4ea4875662f119af2d14a7d65a38",
+-  "village|celtic|river|road|civilized|golden-master-v1": "822f241b7e0615aeb2229730f72ee89cdf2de3229dc0c1b83023c01e4cdac437",
+-  "village|celtic|swamp|road|civilized|golden-master-v1": "870d6a9e3248d3217edfd9ef8592f5e4f8dc1087a11076b8f0cabcd560615a2a",
+-  "village|germanic|coastal|road|civilized|golden-master-v1": "9170ffd40920c33ae322951ca6f15ff60b86c77005a15fd33c21a48c8ec0d716",
+-  "village|germanic|forest|road|civilized|golden-master-v1": "8d74258dbb25a3b311abfc8f7baf71fc7beee48815e7559bced1cd0d9039e110",
+-  "village|germanic|grassland|road|civilized|golden-master-v1": "c6551acb5b056c3205705b09d6b560034d4448a992eb38ee27f96f162263ed67",
+-  "village|germanic|mountains|road|civilized|golden-master-v1": "bebec65ad3a1b07e6ccc81772f99e05b3724336d11cd4672354da427a8e05554",
+-  "village|germanic|river|road|civilized|golden-master-v1": "3fea43385fde0b591d2db3517226e120eb0cf0e6e8e4a045023ae466720e4075",
+-  "village|germanic|swamp|road|civilized|golden-master-v1": "0a625b7192c6455b0f765deea6d90d0df72624a3bb86ab63b0d313aca6c8c9f0",
+-  "village|mediterranean|coastal|road|civilized|golden-master-v1": "d07dd4e81ac2edd68f0a55fb97215d0f64c5ee39f43f0f392022259fa0ca1463",
+-  "village|mediterranean|forest|road|civilized|golden-master-v1": "d5b12a44deb35908c9d2b51f56b90570de7b0487d7a0deb31deb96bb1252822d",
+-  "village|mediterranean|grassland|road|civilized|golden-master-v1": "397ad19aacd01270e0c2658f2bd92a78f2f48ab69e7190d5e38a0b6cc4e2e257",
+-  "village|mediterranean|mountains|road|civilized|golden-master-v1": "658d5e25743c072b7991883e71020ce062cff83ba4573b7b0a4669acc8e34aaa",
+-  "village|mediterranean|river|road|civilized|golden-master-v1": "4ca10fb60f6a4c21f31053de2c17580fd3870e8edcea35acfcae19490e2df906",
+-  "village|mediterranean|swamp|road|civilized|golden-master-v1": "fdeb1d60960fbf61ccd72705eed6dd250ae8b5c5a2e5b5bf73cbc8f2d19320f6",
+-  "village|norse|coastal|road|civilized|golden-master-v1": "ae0a58a367a9356c4b566c5cdc165531934e841a5152a224a531a9664efa1f88",
+-  "village|norse|forest|road|civilized|golden-master-v1": "0a53f7b841f36d3e3d8e523e0a2b825075a02ff23f5e9a5f5272c4da4c20e8b0",
+-  "village|norse|grassland|road|civilized|golden-master-v1": "d28b675957a156f97d8eb7a5494cd0ac6680535842814539b1e9a63dc554ff20",
+-  "village|norse|mountains|road|civilized|golden-master-v1": "12aa66a0a060a987e95a85987d33fe7203b854b88a791b8dee7c76adcfb0f922",
+-  "village|norse|river|road|civilized|golden-master-v1": "e78b9dee76babe4cc46a080ee1bdf44d0f4a6e93ef74ce00b4b10daa29d10554",
+-  "village|norse|swamp|road|civilized|golden-master-v1": "734b3cb0514d10d840190331f4bc3906d2200cc2311cba47168fe19c1102837d"
++  "city|celtic|coastal|road|civilized|golden-master-v1": "4522d18eabf555677b9e360162eb84bce9ced9634007760b264ab172b6c07599",
++  "city|celtic|forest|road|civilized|golden-master-v1": "3005d3667d32cc11de7382e0427642a94b0951304f8a96d9fe20e6f4af95c084",
++  "city|celtic|grassland|road|civilized|golden-master-v1": "776219392ac1f4411e885ee24aad8d1d20329c1a0f69c6a7031ca2205e006158",
++  "city|celtic|mountains|road|civilized|golden-master-v1": "1c438640a80b256d3219554cb5de2a041c81c5ec0a4de7737e67ebc168697fa0",
++  "city|celtic|river|road|civilized|golden-master-v1": "6f06fa90f8fd002e20eaaa0cc327d12812d41009a781760fb64700c1548ee82f",
++  "city|celtic|swamp|road|civilized|golden-master-v1": "0343607513fbf562563807f261be6da0250dc64b8e164222941c4199d5574974",
++  "city|germanic|coastal|road|civilized|golden-master-v1": "c11cf67b90370c1ff020b889361b90387bffcd4c49e737089ef5aa03f5ecb922",
++  "city|germanic|forest|road|civilized|golden-master-v1": "7ced7a2ebfc8b72cc9f579048c575227e22e1fc1f8806d4cfb6486bee5752e1b",
++  "city|germanic|grassland|road|civilized|golden-master-v1": "7af37fc5628dc387f0993ec54bc1484ba0e4ce615624da4d03bfc3fd0cef86fd",
++  "city|germanic|mountains|road|civilized|golden-master-v1": "83854c0a37483d1744f3aef82a7dc70c8480303e26eb71a95715e1aefe3566d6",
++  "city|germanic|river|road|civilized|golden-master-v1": "4a7206373d4b2edd76f2a957dc06cc8090a5a22c8806fd4d0fa292c0c504967c",
++  "city|germanic|swamp|road|civilized|golden-master-v1": "b2283aa2dcfa247811c12b2d291a8a4e0fee58c3e92e0d5428baa87de82f3b98",
++  "city|mediterranean|coastal|road|civilized|golden-master-v1": "0e0c23d8e6842c097c0f1a73b7d26363fa1f801122eba01b89d54d38ddefa2dd",
++  "city|mediterranean|forest|road|civilized|golden-master-v1": "67016ea558afb67ea86da286556cbe5c7b7f748a9693ef847d17111b85c7ccd5",
++  "city|mediterranean|grassland|road|civilized|golden-master-v1": "c940b671093e4aae0d73c309eaae037c3d85a7edce82de339b5ad821dac6105c",
++  "city|mediterranean|mountains|road|civilized|golden-master-v1": "577d1859bf16988fb59b7276fcc1db51404fe7328455afa95925f452a1bfe28f",
++  "city|mediterranean|river|road|civilized|golden-master-v1": "1f26fdd7914844387fa0d8007f47a16b1d80fb368ee1198b2e1de54ac32dab90",
++  "city|mediterranean|swamp|road|civilized|golden-master-v1": "1f56a171c001687b1c9d5dc9a95177fc1b9ae45dbef6282385b15e6553efac4a",
++  "city|norse|coastal|road|civilized|golden-master-v1": "54ae1b7c40a1149ed05438de5d8a00f78a6f83e63e2a1f5b1ef78fa013c54f29",
++  "city|norse|forest|road|civilized|golden-master-v1": "59a5ceffa8b8ed893d15341f153653308b45775f979a98e11a57edcf2db76caa",
++  "city|norse|grassland|road|civilized|golden-master-v1": "bc60313c42c69df18441736ff5e1a5ebad1bb7f425fdadf671ea1aa4602c4930",
++  "city|norse|mountains|road|civilized|golden-master-v1": "739cdc74aa6e47564436cc198947778a6d55b9a12203f73259fb8a42f7fc61e2",
++  "city|norse|river|road|civilized|golden-master-v1": "a934ddfa695b38a73d3cc06ffe17534149eed0437196e41b4e8d9cdfd81e4087",
++  "city|norse|swamp|road|civilized|golden-master-v1": "cfc55279166a517d2f900c9ccd314dbb7f74510532080e66953d89ac43653905",
++  "hamlet|celtic|coastal|road|civilized|golden-master-v1": "df4c79c0694e1e2e7b28c7bb630391fb573ad47da21573b52f31725c01a01910",
++  "hamlet|celtic|forest|road|civilized|golden-master-v1": "09f6090be5c29f83ff5633b83a4c5245648153f9227d00eb90132500c805c5d7",
++  "hamlet|celtic|grassland|road|civilized|golden-master-v1": "e78284ce44bde7532370b84a726d734739d4b25759e2feb1b98d4beb0018ba41",
++  "hamlet|celtic|mountains|road|civilized|golden-master-v1": "47a7b8a246189a5a296c09d8fec3cebe14b18930c1c311c14cac2089e53a7608",
++  "hamlet|celtic|river|road|civilized|golden-master-v1": "ff3ef8697536093c48292465ed97668825645878db73cdc86b26551519933f67",
++  "hamlet|celtic|swamp|road|civilized|golden-master-v1": "af275f643788ddc2cca64bff9443f141191afe1ab70adbdfb9293e711ea823fe",
++  "hamlet|germanic|coastal|road|civilized|golden-master-v1": "0539e9cfca752717c02112ec4c9a68df69deb4941d81f05f32a7efd8fe92f68d",
++  "hamlet|germanic|forest|road|civilized|golden-master-v1": "17b9b9a1d3a1261ec8ee4cf45efbb90aa86ab560a7120569904c4e17108dabf8",
++  "hamlet|germanic|grassland|road|civilized|golden-master-v1": "1d5cc887c6282070c9a717d0ec95c03656506cea8bf0e6cca286347747304295",
++  "hamlet|germanic|mountains|road|civilized|golden-master-v1": "f4a2d1355b80471450fcb7ddc11cb02de0c41cfa2251e457d81c18dc79c4e247",
++  "hamlet|germanic|river|road|civilized|golden-master-v1": "607e1a748dda799321a1d8d4c7021d4c7c09763b7240f84ce5da2cf25e32bbce",
++  "hamlet|germanic|swamp|road|civilized|golden-master-v1": "2b421fd57b2168c65b96d9323081d8e1972178db7d784a6bcf2b45a9c709a4ef",
++  "hamlet|mediterranean|coastal|road|civilized|golden-master-v1": "d566eca6f2944edb71a8e0d296b8ce6ec1860b20ec7ab797693a2ddc6c38f66f",
++  "hamlet|mediterranean|forest|road|civilized|golden-master-v1": "537797047b8a5e45ca676dbe131bba8fe63553d4581f918337f1a89ff110627b",
++  "hamlet|mediterranean|grassland|road|civilized|golden-master-v1": "c7fbd259ac77030bfc78336e362becdad92ef8f7f9aff681001347074b53cfd9",
++  "hamlet|mediterranean|mountains|road|civilized|golden-master-v1": "dda833ccd53edacff757cd165c3c48fa5f80c75741b08a92fa27b3a5a97852c2",
++  "hamlet|mediterranean|river|road|civilized|golden-master-v1": "90a61f9701964e6ae0c4f00e9ace6cca93ec235b35ac5ce5995e31b10636fe28",
++  "hamlet|mediterranean|swamp|road|civilized|golden-master-v1": "779dbffff9aaa398ee914934439e38285bf7cfa6fb7be4a5dc1b428f3987a97d",
++  "hamlet|norse|coastal|road|civilized|golden-master-v1": "c438c688024296e4d81d219bc24037dfd62076e53fcad149db0b8183fd8262a9",
++  "hamlet|norse|forest|road|civilized|golden-master-v1": "bd3f04e74c58afbf784eb6347f8a94da371ae0e0a725e852c843982d7250c882",
++  "hamlet|norse|grassland|road|civilized|golden-master-v1": "a603a7279387d107f1957e8dc5e311634f6392b0223894c56a72b4664b959c7b",
++  "hamlet|norse|mountains|road|civilized|golden-master-v1": "3711b265536207de6811e21eb2e372e53cb0480f259cc003dd9fb8fd22c4b3d5",
++  "hamlet|norse|river|road|civilized|golden-master-v1": "0c2caa568cb77430a411031f7f3b28983c1684aaf5ccac6d883a42dec20827f9",
++  "hamlet|norse|swamp|road|civilized|golden-master-v1": "e38cb36963f8721761b265c6ec259a4b33056dd6e74ba6ff0eece1ce9a20a1cf",
++  "metropolis|celtic|coastal|road|civilized|golden-master-v1": "fd3ded2aa7068e4bf35437095fa8242a0a27ed804016c16c27f0691b9a84e3be",
++  "metropolis|celtic|forest|road|civilized|golden-master-v1": "79e580a723a79665e2c338fb7a5a5a2cd0818bfa02b8ac12da34835ad872c227",
++  "metropolis|celtic|grassland|road|civilized|golden-master-v1": "b122599d0034222e0d39532d1d34551e6366b0bcdae58e318a51b15b5434c376",
++  "metropolis|celtic|mountains|road|civilized|golden-master-v1": "2dc8afdd6de407b30d20255ce36ab8c7900323ff220577567dec340a55e7028e",
++  "metropolis|celtic|river|road|civilized|golden-master-v1": "0ce46c8054c80d34d9bb782ccac22e28520d4f4ff5c7da95c2a5b53ca8ae67f2",
++  "metropolis|celtic|swamp|road|civilized|golden-master-v1": "7f591fcdfe9069a4d10842650488aef6aa0a950e09f5f4aaf6a2dd062e1a1b07",
++  "metropolis|germanic|coastal|road|civilized|golden-master-v1": "0e117631a29fde94793ee2c7be9eb5f5fdd2e37156a0ed05f930605e3ab8939c",
++  "metropolis|germanic|forest|road|civilized|golden-master-v1": "d1f6615c3d5dd413b291d426548ac48b340570b4f34b2cc75be126907394c1bc",
++  "metropolis|germanic|grassland|road|civilized|golden-master-v1": "39e4efa4157940480bb1c39f79d7dee6d9d70818477cd0c780ddbb64bed43b93",
++  "metropolis|germanic|mountains|road|civilized|golden-master-v1": "260d90decf599a7fb8238ed8f13e608971cd0fcc80e541c7c91cb8f75ee44acc",
++  "metropolis|germanic|river|road|civilized|golden-master-v1": "a3466a85d4530852547035cace19f01bbd496f77de3bcae02b04d96b563b10d0",
++  "metropolis|germanic|swamp|road|civilized|golden-master-v1": "17b3f2dce0ff01e8f4dedc804c9e753c3d0b3d1f890c30bb41242f438925bba9",
++  "metropolis|mediterranean|coastal|road|civilized|golden-master-v1": "29f4f0edfe8515cecc3d61ecc8f15756e111de11abcd9e1d496f8437d1d17eff",
++  "metropolis|mediterranean|forest|road|civilized|golden-master-v1": "cffc5083cc82cdc20e994a6194500fa92515771033494d5de0d1cfabd41b4f5a",
++  "metropolis|mediterranean|grassland|road|civilized|golden-master-v1": "26892a0aa4758b6df271b86cad4bf5a1913f16bae44b09d9c8b8a64fc5c6b9d9",
++  "metropolis|mediterranean|mountains|road|civilized|golden-master-v1": "f0c165243309b67ca7b6d21af0797c2ed1ebbe9f0e6537e81b4ec3952727c830",
++  "metropolis|mediterranean|river|road|civilized|golden-master-v1": "25e0daa1690ad32784da3303136b8249b5d0586a0009e77ef51806239559f3c3",
++  "metropolis|mediterranean|swamp|road|civilized|golden-master-v1": "58bde2faa6bb552c9828a37212c081152fbac9a33b3cd742b78ef530609f1778",
++  "metropolis|norse|coastal|road|civilized|golden-master-v1": "317c1188dd8a876749af06ca1f5f767da465c2ac6ec30ee08c44cf87aa68278b",
++  "metropolis|norse|forest|road|civilized|golden-master-v1": "0996a6a344a00a8f734a9b7b8d3dc74b6ca9501415ddcdd936e30816c0707807",
++  "metropolis|norse|grassland|road|civilized|golden-master-v1": "e652eacaa438347bc2c1cc3a4d5e678c17f49982f451c82cbeb69b50026d517e",
++  "metropolis|norse|mountains|road|civilized|golden-master-v1": "9e122040eedb8b63c956a50de210d8b672fa537e3154f591b5e090862629dfdd",
++  "metropolis|norse|river|road|civilized|golden-master-v1": "802c48bf9d56ffe0e5431109cbe588731affde3bd350844bd90e46e1d6fc5626",
++  "metropolis|norse|swamp|road|civilized|golden-master-v1": "94babb06bce62817200743c69e3ee85f0cfa66b6a2334517d5469d76305008c0",
++  "thorp|celtic|coastal|road|civilized|golden-master-v1": "c87eef3999e946eeea86bbe100a49a09018a1ff80c7d4ea32a095aaa0080954a",
++  "thorp|celtic|forest|road|civilized|golden-master-v1": "7d9c8e9c297ed242fe7fa1db985a9186f921d22e425ed2827cb5c889496d00e7",
++  "thorp|celtic|grassland|road|civilized|golden-master-v1": "8e8396426b24fe9e43dbe86220e74b3027fb7b45ed7bfa22dd78815a67c7201d",
++  "thorp|celtic|mountains|road|civilized|golden-master-v1": "de6519294f5d0dabed5b6bfbb924c64c03f1968fea492f3ebb2341612418e562",
++  "thorp|celtic|river|road|civilized|golden-master-v1": "7d33cc582ff3d07fe8df37cbefc21445d6a2004c4bd444958126b25abf8fb756",
++  "thorp|celtic|swamp|road|civilized|golden-master-v1": "a79c62a264b4cfbb020e94c6fc0a937620ce9c5e8d159ccbe16c0b9eba221097",
++  "thorp|germanic|coastal|road|civilized|golden-master-v1": "403294dc3b4b269548a51fe9114f821cf3a8bb631012d2cee6f46ba2dd367d55",
++  "thorp|germanic|forest|road|civilized|golden-master-v1": "4fb6d4556a1964b4ac0dc5f63c08c3f12c797bc19c53e6d43b02612e35e3c5cf",
++  "thorp|germanic|grassland|road|civilized|golden-master-v1": "4f4e2eb6527bde750d077147b7c1f0be687543edabd7e746a88a92f6b2a4f5cb",
++  "thorp|germanic|mountains|road|civilized|golden-master-v1": "09edde7d3c5c4e43fc5e1d056b1453dcb37544d56d639949d80327997f7d8d38",
++  "thorp|germanic|river|road|civilized|golden-master-v1": "c5a518d9e1cb72e0e74dafb6b04619b4854cacc3f871eb9b993ecbc8c7dee89b",
++  "thorp|germanic|swamp|road|civilized|golden-master-v1": "fc45b8f7d3e6b283a370c208d75392efc2b6c623ccf31a61f54f21aca70a7cc3",
++  "thorp|mediterranean|coastal|road|civilized|golden-master-v1": "494028be0da7ded76ee815a58bcf1c8f2a1ae84166936602ac973bcd9710dda8",
++  "thorp|mediterranean|forest|road|civilized|golden-master-v1": "bcac1cf64645081bfa3093ebf8dfa40a369248cf91e48988d1ed4a630a778fb3",
++  "thorp|mediterranean|grassland|road|civilized|golden-master-v1": "bae563a07f5e082a99380e279e68a3b57b0c2ad0be031911f2f9e169956c462d",
++  "thorp|mediterranean|mountains|road|civilized|golden-master-v1": "bfdf5554223551ded15955cab18a831cdfe8a267bca49d017d4239f42740e947",
++  "thorp|mediterranean|river|road|civilized|golden-master-v1": "bc79e8264578f6374dd28b7778251f04726615c2f4e955bb3cfe64c9e44f3103",
++  "thorp|mediterranean|swamp|road|civilized|golden-master-v1": "d361305d542dc2ee2a5f0e3aedfb71ec475e93b36e1250e7ab577ae1822e438f",
++  "thorp|norse|coastal|road|civilized|golden-master-v1": "194ce9a788ea788c6b293795e8cb7541b06464c94e77319e1bb45fb68d28cd05",
++  "thorp|norse|forest|road|civilized|golden-master-v1": "bf3a55e2b479108a5515d8bb50aaaec430f7296e68e87ca48342e1524ea6dbab",
++  "thorp|norse|grassland|road|civilized|golden-master-v1": "88a4938d4931672ffbaf9193b5ceed603741c4ba8f48518438e192b380cfabda",
++  "thorp|norse|mountains|road|civilized|golden-master-v1": "f37008388c6299b7e893e28edb9496dd219531d3eecdd7607a55e2802d6c3ba5",
++  "thorp|norse|river|road|civilized|golden-master-v1": "bba516b249a127824e3b15a7006cf1fbfab352853f361a236f1be6a88ed5edab",
++  "thorp|norse|swamp|road|civilized|golden-master-v1": "a487decd67e1dbba5ad477d18b9c209980335a03c99e2c66ea74861b75ab936a",
++  "town|celtic|coastal|road|civilized|golden-master-v1": "af1eaad43205bb8fb65210993fe34ddee3bb63fb1865dbf95a00b1098e86f82f",
++  "town|celtic|forest|road|civilized|golden-master-v1": "32ee1682f9e042e3a86ba24c86bb94b709e41a15722c2c51515d9518227bc235",
++  "town|celtic|grassland|road|civilized|golden-master-v1": "0db18a631ed24e60fb300cceaaa6eaf5a0763b40d08c6085fd0362c0fa97557a",
++  "town|celtic|mountains|road|civilized|golden-master-v1": "769946dccebcae63f7752b26b8ecad57bb486404ec4be6051b56357e3d1dda9c",
++  "town|celtic|river|road|civilized|golden-master-v1": "3b067735c0f4d65a315625f22550c298a82088cbf9cae776220f086885f0884e",
++  "town|celtic|swamp|road|civilized|golden-master-v1": "3f23a0fcb5fe1af502c30ec755268e42894378eb9aa2d40221270526c2ef939f",
++  "town|germanic|coastal|road|civilized|golden-master-v1": "18c0f3124214fea78d19df9f4a8dd724761c79df18ea397b968601a49c5d0610",
++  "town|germanic|forest|road|civilized|golden-master-v1": "c16df435d34594bdbb88e79145697e16272e19a3805268b52ef2d43a92970f80",
++  "town|germanic|grassland|road|civilized|golden-master-v1": "cbc2a06c684e4ddc47b31b7b8cdb59cae64c800e49f6e6f506be6cd695bc2649",
++  "town|germanic|mountains|road|civilized|golden-master-v1": "0cef58bb7ea5c35b0dcf8ba1716c715459e1d1c91572404f904e91a473429ab3",
++  "town|germanic|river|crossroads|civilized|golden-master-v1": "e7ccf50c845617a1afa3ab6d9efc46098d1a1a2d0ab62f142dfe5d61a8cd19b5",
++  "town|germanic|river|isolated|civilized|golden-master-v1": "b999f608bb68b4a0c2732470f4c95e6467813152ec8e711648905a6579a0d1bc",
++  "town|germanic|river|none|civilized|golden-master-v1": "7bc8b50d5486e52aedfb3a50b25faf025f546ce254d3a9ec10176a349be09c64",
++  "town|germanic|river|port|civilized|golden-master-v1": "e4ef313b6ef0de394bcd08fabd633ffad4f8e3ae207ecbfa05ae0b4d8bf55f2d",
++  "town|germanic|river|river|civilized|golden-master-v1": "51b038a65b3e4e90e91b6f0b0865d0562511d632586dee3f55f6fb775fb54c71",
++  "town|germanic|river|road|civilized|gm-seed-a": "d51f5587c343afcce75c64bfd4efec7b4ffd039d974700bce0e51559c38ee758",
++  "town|germanic|river|road|civilized|gm-seed-b": "4f856a209179ded81b285c723858341e5740938979c9241c1582b32337460576",
++  "town|germanic|river|road|civilized|gm-seed-c": "e51ca347d1f69c19bb76858d49617d92da25480f72d46b6256a75a13919f811d",
++  "town|germanic|river|road|civilized|golden-master-v1": "24c951ca34ae0c9ca2fece08157536bdc72603f7574cce825855e09ae0fb9e8e",
++  "town|germanic|river|road|frontier|golden-master-v1": "6833ebe6fc64f3058c5a7c6950aaccb9b2aa57582571c12ba53436a5a77c219f",
++  "town|germanic|river|road|plagued|golden-master-v1": "155b7b88235b279be247b68e3875842c1450fa0d432a56f3c0e10381d98c4f5c",
++  "town|germanic|river|road|safe|golden-master-v1": "fee22911a8f1c0b730fedda074fd92d8bc20cc018f98e6caea592fd8c46969d6",
++  "town|germanic|swamp|road|civilized|golden-master-v1": "df9641875cb753c6b9880b60f8b1eaf396390042549f26945b3ad29a21d99884",
++  "town|mediterranean|coastal|road|civilized|golden-master-v1": "4fa99c340d278e3d05c94b2dad677e580ef40ed6c917df2225275618cdad759c",
++  "town|mediterranean|forest|road|civilized|golden-master-v1": "65d423c04e4ca809bb6fd75080521ed7f0b19c1118482640b40af200ade37c80",
++  "town|mediterranean|grassland|road|civilized|golden-master-v1": "3ccb97bd2c62fe8e246c385772de8ca2ed471a1707b41d33d2f75796a4a52b2b",
++  "town|mediterranean|mountains|road|civilized|golden-master-v1": "c374e516b0d73720b56a5e661dfdf9a367d74bbf0d9fbc7009a3d4cfd58d19a7",
++  "town|mediterranean|river|road|civilized|golden-master-v1": "8e1cff44d2c424bdc525ab77c68935e3b5ca57e49d5d326fb1683cba979f17bb",
++  "town|mediterranean|swamp|road|civilized|golden-master-v1": "be055749a39a7c2f74ae3c27c7e30f94f5833e840563f11dcb5a7c53ac21b049",
++  "town|norse|coastal|road|civilized|golden-master-v1": "cc0c6958c3955e56f6e1f049df5e9f6001ee295e6347354eafe524312d0596cc",
++  "town|norse|forest|road|civilized|golden-master-v1": "0a011e623b557aee52d478704c6518ddd386b22210f52a9a03bea7b2a3ffa2aa",
++  "town|norse|grassland|road|civilized|golden-master-v1": "eef84315d79e22ed9c91d726216e1ae21b9336287757a9258a61c0c37ed029fc",
++  "town|norse|mountains|road|civilized|golden-master-v1": "47c3eb4eea3f614c8a45091f58ad7507a822e38a044bd6bea04fd0dfa33cb8ab",
++  "town|norse|river|road|civilized|golden-master-v1": "f6f1d1465020294ef32369afc3c8c0148c3ae735febceabc29ef1a9ea2036ab6",
++  "town|norse|swamp|road|civilized|golden-master-v1": "4aee109606d0b82c7933b8ba5fcdb53069e37ebcd8c26d7a8a51fa4531d2e85f",
++  "village|celtic|coastal|road|civilized|golden-master-v1": "5f96321382b688013518e3200dc73dbf6b73fa29144625d58fa08598e7d8995f",
++  "village|celtic|forest|road|civilized|golden-master-v1": "f75a5d89976b5040f59523c48376df5f4cfbd79f8db575edd75cb265722fb946",
++  "village|celtic|grassland|road|civilized|golden-master-v1": "6e28ec5244e878c2b546f9e6f3c8f74c5f0dcf5bb0200850797c4b7bad09188d",
++  "village|celtic|mountains|road|civilized|golden-master-v1": "26cf7b98cf13bc291b6d10af2669ad0de93f43e2e05285e6d22334a46eb5868e",
++  "village|celtic|river|road|civilized|golden-master-v1": "74027831cb1e24f600589d307f19564d4083ec4d4db4bd37bb5362f042c1a698",
++  "village|celtic|swamp|road|civilized|golden-master-v1": "35af9b853f5dac3e98b64f96ae72b06c93d94eff3059340275f74d6bf28df1b9",
++  "village|germanic|coastal|road|civilized|golden-master-v1": "8fc80b0668775396db01f7b1b837f46c7f13afab07c3b2c7501895df604e86f6",
++  "village|germanic|forest|road|civilized|golden-master-v1": "1a15a7318f28cf7a2b428d8a7d8c8c4ef8b3e58a0fef4152e39c67aecd5e563f",
++  "village|germanic|grassland|road|civilized|golden-master-v1": "430eab6b149a65c710b16e97c1b66d207d7749b9f12aef20ff4a312d364da258",
++  "village|germanic|mountains|road|civilized|golden-master-v1": "54fc4f9524a3ca6815bb23cf85fc2f4e1a4d437815bdb7f250b7228da2cdba2e",
++  "village|germanic|river|road|civilized|golden-master-v1": "91c67d3dce3965e48b4c4126a072698a6463f4106c9f15ba68d9c1f9167eb810",
++  "village|germanic|swamp|road|civilized|golden-master-v1": "e58a612aa08421de26f6870d120afa6ee1de6323080866afb07b604a82511a94",
++  "village|mediterranean|coastal|road|civilized|golden-master-v1": "7e73f28169f129873539a5f6ab33e48105a646e4523cdd0cbecab2c9a49d0ae6",
++  "village|mediterranean|forest|road|civilized|golden-master-v1": "9e840541d811179a8cef09d0385628046f9e42ce834978bcf6c1e5525fd13596",
++  "village|mediterranean|grassland|road|civilized|golden-master-v1": "a3368dbaeb4c457d2e0442b696d3a17c5184598d1d27175ca98f72e9392606de",
++  "village|mediterranean|mountains|road|civilized|golden-master-v1": "10329218210fd1e2b991ef21d6cf09141971f9b93053713dbd968ad661c162d7",
++  "village|mediterranean|river|road|civilized|golden-master-v1": "4e5533c755aeb403c9d7e868a9ee9c42767898db17d0cc2e42ee908d6378ccaa",
++  "village|mediterranean|swamp|road|civilized|golden-master-v1": "8d31ee79e5cabb64277a950d212fb7dca3197556c2fde9b172aae7bd5d8bb6ae",
++  "village|norse|coastal|road|civilized|golden-master-v1": "213531a6294a6e8068fe1b29669b1af1818b435397216f816fe75d8a1440a752",
++  "village|norse|forest|road|civilized|golden-master-v1": "4c7f961113cff1e007532e94bc8d12ad0c1ddc3828bfb5bbcdded57fef6cbb50",
++  "village|norse|grassland|road|civilized|golden-master-v1": "d00c6a1bb3971ca695e96a6f17b8cd1cbda20dce51954e3c9908bdc8b8d099d6",
++  "village|norse|mountains|road|civilized|golden-master-v1": "3e8af2e2cc2f69c447a8ec60cff35cc944e26fff4b30e497400ccf3697b23dcd",
++  "village|norse|river|road|civilized|golden-master-v1": "3cfe53b44999f4b16992796b1619c0560187e181f267fedef89ad157bf124434",
++  "village|norse|swamp|road|civilized|golden-master-v1": "97fe49026d62b30496002fce28e3d11a94f45785f3cc6d83ff54c173c067d6d3"
+ }
