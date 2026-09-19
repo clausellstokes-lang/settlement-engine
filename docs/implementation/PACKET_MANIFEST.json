@@ -31325,6 +31325,150 @@
           "typecheck:domain:strict"
         ]
       ]
+    },
+    {
+      "id": "EM-B1e",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B1e.md",
+      "verifiedBase": "fa931e5080b04795dc41ab97d952cbf2c6cd8727",
+      "changeManifest": [
+        {
+          "_note": "ONE EXPORTED WRITER OF THE PULSE'S RUIN SHAPE (ODQ §934.47 add. 7, option a). The module-private arrow `ruin` at :250 — declared inside the ALSO-private `applyStrikeToRoster` (:222), which is why the earlier ruling's 'name it by symbol' had no answer AND why A1's oracle cannot import the writer — is lifted to `export function ruinInstitution(inst, { reason, fate })` AT MODULE LEVEL IN THIS SAME FILE, and BOTH of its call sites (:282, :286, the only two) pass `fate: 'destroyed_by_disaster'` with their existing reason VERBATIM. ⛔ THE FIVE ADDED KEYS AND THEIR ORDER ARE LOAD-BEARING and do not change: status:'ruined', _worldPulseInactive:true, _worldPulseEconomyClosed:true, worldPulseFate:fate, remnantReason:reason — the preset witness (tests/simulation/presetLightingWitness.test.js) hashes 52 interior ticks of serialized world pulse, so key order is history; that premise is now CONFIRMED from the witness's own header, not merely asserted. ⛔ BOTH ARGUMENTS ARE REQUIRED WITH NO DEFAULT: a defaulted `fate` would let a caller silently stamp 'destroyed_by_disaster' on a record no disaster touched, which is the exact lie this packet exists to make impossible; absence/empty/non-string THROWS (the rngContext fail-closed precedent). ⛔ :274's DEMOTION branch is NOT a ruin site (no status:'ruined', no _worldPulseInactive) and is untouched; ⛔ :816's `ruin:` is an object KEY in a prose template in another function — RENAME BY HAND AT THREE SITES, never sweep. ⭐ max-lines MEASURED BY THE PRE-PROOF LANE, not deferred: 453 effective against the src/domain/** ceiling of 800 = 347 LINES OF HEADROOM (control: roadsKernel.js computes to exactly its frozen baseline 838), and there is no scripts/.size-baseline.json entry — so NO NEW LEAF is required and version 1's 'measure or STOP' is discharged. ⛔⛔ THE FUNCTION MUST STAY IN THIS FILE: tests/lint/ruinFilterRoster.walker.test.js enrols calamityKernel.js as a roster reader (READER_RE=/\\.institutions\\b/) and its ONLY compliance evidence is the token `_worldPulseInactive` at :251 — the exact line this packet moves. An in-file lift keeps it green; a lift to a new leaf strips the file's last compliance token and REDS that walker. If the function must leave this file the packet RETURNS TO THE CHAIR. ⛔ convergence.js (hot, 798/800) is neither touched, imported nor read — the chair's explicit exclusion, asserted by A7. ⭐ BUNDLE BUDGETS PRICED (§P2 row 11): this path lands in NO BUDGETED CHUNK — NOT in the generation worker's closure (WORKER_BUNDLE_CEILING_BYTES=1401208, zero slack; 220 static / 228 static+dynamic modules), NOT in the lazy engine (< 679_000; that chunk's rule is id.includes('/src/generators/') at vite.config.js:862), NOT in the first-paint eager closure (the repo's own computeEagerModuleGraph, 243 modules) — only in src/workers/advanceInterval.worker.js, which has NO ceiling today. Measured +270 B minified (esbuild, edited region; +185 B structural since an exported name cannot be mangled, +85 B A3's guard) — the figure TOOL-3 needs, see R6. ⭐ EDGE-SHARED (§P2 row 10): NOT OWED, proved twice — 0 of 405 inputs across the five committed metas, AND an independent static+dynamic walk from each of the five entries (a strict superset of each meta: 76/2/125/2/126 vs 74/2/114/2/115) reaches it from none. No supabase/functions/_shared/** path is written by this packet or by any command in `checks`.",
+          "action": "MODIFY",
+          "path": "src/domain/worldPulse/calamityKernel.js"
+        },
+        {
+          "_note": "THE ACCEPTANCE — seven arms, ONE literal describe, seven straight-line `it`, no .each / runIf / nested describe (§P3.4), copying tests/domain/institutionFounding.test.js's describe('MF-T2Q …') + seven `it`. A1 IS THE PACKET'S WHOLE CLAIM AND ITS GUARD: the post-refactor calamity record is JSON.stringify-IDENTICAL to a pre-edit record captured at step 1 — same five keys, same values, same ORDER — for BOTH call sites, with a guard-the-guard arm asserting the oracle non-empty and containing \"status\":\"ruined\" first so it cannot pass on an empty capture. ⭐ THE ORACLE CANNOT IMPORT THE WRITER (both it and its enclosing function are module-private): drive the exported advanceCalamity (:567) with a controlled rng, copying tests/domain/calamity.kernel.integration.test.js's runStrike (:110) + struckOf (:125), which reaches BOTH arms — :146 is the collapse site :282, :170/:173 the destroy site :286. A2 proves the decree's own fate and cause flow through with NO disaster vocabulary anywhere. A3 proves both arguments required and absence/empty/non-string throwing, every negative carrying `// anchored:` on the line above (negativeAssertionAnchor.walker's SCAN_ROOTS=['tests'] covers this path). A4 proves the goldens AND the preset witness unmoved by fixture digest — and ⛔ does NOT count tests/domain/advanceWorkerByteIdentity.test.js, which compares sync to structuredClone(sync) and would stay green if the ruin shape changed. ⭐ A6 IS REWRITTEN TO A SUFFICIENCY PROOF: rosterProvenance's free-text read (:258-259) and causeLifecycle.institutionDestroyed (:137) are driven for real, AND the same record with worldPulseFate DELETED still answers true — because _worldPulseInactive decides at :139 and 'ruined' decides again at :141. That proves the new value can never change a verdict, which is stronger than 'the readers branch on no value'. ⭐ A7's MATCHER IS FIXED AND NON-DISCRETIONARY: a COMMENT-ONLY strip that KEEPS string contents, matcher /status:\\s*'ruined'/ over src/**/*.{js,jsx} excluding *.test.*. MEASURED: raw bytes -> 4 hits (three are JSDoc prose), the estate's shared codeOnly -> 0 hits (it blanks string CONTENTS, so the obvious helper writes a vacuously-green arm), comment-only -> exactly 1. Both controls required: the matcher fires on a planted second writer and ignores a commented one. Plus the convergence.js import fence in both directions. ⓘ tests/ is deliberately OUT of A7's scope: 28 legitimate hand-built fixtures live there (R7).",
+          "action": "CREATE",
+          "path": "tests/domain/ruinInstitution.test.js"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE ANCHOR EXPORT that locates the ruin arrow's home. `ruin` itself is module-private (a const arrow inside the ALSO-private applyStrikeToRoster) and CANNOT be named as a requiredSymbol — that is precisely the measured fact that made option (a) necessary. strikeCapForTier (:196) is the nearest preceding export and pins the file's identity so a rename or a file move is detectable from the manifest. POST-EDIT SIMULATION: the packet's edit is confined to :250-253 and the two call sites, so this text is untouched — PRESENT after the build. Proven present at the tip: grep -c -> 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function strikeCapForTier"
+        },
+        {
+          "_note": "⭐ ADDED BY THE PRE-PROOF LANE — A LANDED PACKET ALREADY PINS THIS FILE. A scan of the live 188-entry PACKET_MANIFEST.json found MF-T2R (LANDED) holding exactly this (path, symbol) pair on the very file this packet MODIFIES. By the standard — a symbol the deliverable must find unchanged is a required symbol — the row joins this packet so the landed pin is discharged from this manifest too, not only from MF-T2R's. POST-EDIT SIMULATION: :492, a different function from the edited region — PRESENT after the build. No retiredSymbols row is owed anywhere in this packet: the only symbol it removes is the module-private `ruin`, which is named in no manifest at any status. Proven present at the tip: grep -c -> 1.",
+          "path": "src/domain/worldPulse/calamityKernel.js",
+          "symbol": "export function forceCalamityStrike"
+        },
+        {
+          "_note": "THE SEPARATION THIS PACKET MAKES ENFORCEABLE. Its file states the law at :210 — \"'removed'/'destroyed' is the composer's own STATUS_REMOVED vocabulary, 'remnant'/'ruined' is the pulse's\" — and INACTIVE_STATUSES (:81) is the pulse-side set that reads the ruin shape: Object.freeze(['removed','destroyed','remnant','ruined']). ⭐ Note it ALREADY CONTAINS 'ruined', which is why this packet owes no typedef member for it (EM-B1d §2a routes the institution-state contract to EM-B1a; EntityStatus is NOT widened per add. 6). Named so the law's home is findable from the manifest rather than from packet prose. ⓘ Two homonym INACTIVE_STATUSES sets exist elsewhere (stressors.js:569, stressorGates.js:47, holding resolved/dormant/residual) — not this one. This file is NOT in the change manifest; POST-EDIT: PRESENT. Proven present at the tip: grep -c -> 1.",
+          "path": "src/domain/provenance/rosterProvenance.js",
+          "symbol": "const INACTIVE_STATUSES"
+        },
+        {
+          "_note": "THE FATE READER'S OPEN TYPEDEF, and half the answer to the ruling's conditional: causeLifecycle.js declares `worldPulseFate?: unknown` in its InstLike typedef (:69) and tests only truthiness at :139. It enumerates nothing, which is why adding 'ruined_by_decree' needs no MODIFY row and names no consumers. ⭐ THE PRE-PROOF LANE READ ITS CONSEQUENCE, not just its shape: the :139 read lives in institutionDestroyed (:137), whose true verdict means a criminal institution's arrangement can no longer be sustained (:131-133) — an NPC's criminal leash severs. It is INERT for this writer BY CONSTRUCTION, because ruinInstitution emits _worldPulseInactive:true, status:'ruined' and the fate together, and institutionDestroyed returns true at its FIRST check (:139's _worldPulseInactive) and again at its LAST (:141, 'ruined' ∈ NONSTANDING_STATUS) — three independently-sufficient signals, so the fate value never decides. A6 proves this by deleting the key and re-asserting. ⛔ The DESIGN consequence (a decree is an authored act joined to an irreversible one; undo must restore the leashes) is EM-B1a's, raised as R9. This file is NOT in the change manifest; POST-EDIT: PRESENT. Proven present at the tip: grep -c 'worldPulseFate' -> 2.",
+          "path": "src/domain/worldPulse/causeLifecycle.js",
+          "symbol": "worldPulseFate"
+        },
+        {
+          "_note": "THE UNION THIS PACKET DOES NOT TOUCH, named so the separation is provable from the manifest: EntityStatus = 'active'|'impaired'|'removed'|'destroyed'|'vacant' — FIVE, and `ruined` is NOT among them and is not added here or anywhere (ODQ §934.47 add. 6; EM-B1d's A1 independently asserts it UNCHANGED at its five). ⚠ WATCH ITEM R8: EM-B1d v5 may home a new exported vocabulary in THIS FILE. That is not a changeManifest collision, but this path is part of THIS packet's dispatch SUBSTRATE (implementation-session.mjs:185-195 unions requiredSymbols paths in), so an EM-B1d landing that touches it invalidates this packet's stamped base. The cure is ORDER, not a workaround: EM-B1d lands first, EM-B1e is placed after. This file is NOT in the change manifest; POST-EDIT: PRESENT. Proven present at the tip: grep -c -> 4.",
+          "path": "src/domain/entities/status.js",
+          "symbol": "EntityStatus"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "BYTE-EQUALITY — the packet's whole claim and its prevention guard. The record the calamity path produces after the refactor is JSON.stringify-IDENTICAL to the pre-edit record captured at step 1: the same five added keys, the same values, IN THE SAME ORDER, asserted for BOTH call sites. ⭐ The oracle is captured through the EXPORTED advanceCalamity (:567) with a controlled rng — the writer and its enclosing applyStrikeToRoster are both module-private and cannot be imported — copying tests/domain/calamity.kernel.integration.test.js's runStrike (:110) + struckOf (:125), which reach the collapse arm (:282) and the destroy arm (:286). Guard-the-guard: the oracle string is asserted non-empty and to contain \"status\":\"ruined\" before the equality, so the arm cannot pass on an empty capture."
+        },
+        {
+          "id": "A2",
+          "case": "THE DM'S FATE AND CAUSE FLOW THROUGH. ruinInstitution(inst, { reason: \"Razed by the table's hand.\", fate: 'ruined_by_decree' }) returns status:'ruined', _worldPulseInactive:true, _worldPulseEconomyClosed:true, worldPulseFate:'ruined_by_decree', remnantReason:\"Razed by the table's hand.\" — the decree's own words, with NO disaster vocabulary anywhere in the record, asserted by name."
+        },
+        {
+          "id": "A3",
+          "case": "BOTH ARGUMENTS ARE REQUIRED; ABSENCE THROWS. A missing fate, a missing reason, an empty string, a non-string of either, and a bare ruinInstitution(inst) each THROW — never a coerced value and never a silent 'destroyed_by_disaster'. Anchored by the valid call in the same arm so the negatives cannot pass on a broken import; every negative carries `// anchored:` on the line immediately above (tests/lint/negativeAssertionAnchor.walker.test.js scans SCAN_ROOTS=['tests'], so this CREATE is in scope)."
+        },
+        {
+          "id": "A4",
+          "case": "THE PULSE'S HISTORY DOES NOT MOVE. generatorGoldenMaster and dossierProseManifest are bytewise unchanged, AND the preset witness is unmoved — asserted as the digests of tests/fixtures/generator-golden-master.json and ⭐ tests/fixtures/preset-lighting-witness-golden.json before and at the tip. The witness is the instrument that actually covers this path: it hashes 52 interior one-week ticks of world pulse per preset and its header states it HAS NO CAPTURE ARM AND NO ENV SPELLING, so a move cannot be quietly re-recorded. ⛔ tests/domain/advanceWorkerByteIdentity.test.js is NOT counted as protection here: it compares sync to structuredClone(sync), both sides running the same code, so it would stay green if the ruin shape changed."
+        },
+        {
+          "id": "A5",
+          "case": "PURITY, AND THE INPUT UNMUTATED. inst is proved unmutated against a pre-call clone (deep-equal), the function returns a NEW object (not.toBe), identical inputs give toEqual results, and 100 calls change nothing observable."
+        },
+        {
+          "id": "A6",
+          "case": "THE DECREE FATE IS INERT AT ITS CONSUMERS — BY SUFFICIENCY, PROVED NOT ASSERTED. Through the REAL functions with a disaster-ruined control beside the decree one: rosterProvenance's fate/cause read (:258-259) returns the decree's fate and cause as FREE TEXT, and causeLifecycle.institutionDestroyed (:137) answers true. ⭐ THE SUFFICIENCY ARM: the same record with worldPulseFate DELETED still answers true — because _worldPulseInactive decides at :139 and 'ruined' decides again at :141 (NONSTANDING_STATUS). That proves ruined_by_decree needs no vocabulary row in the strongest form available: not merely that the readers do not branch on it, but that its value can never change a verdict."
+        },
+        {
+          "id": "A7",
+          "case": "ONE WRITER, AND THE EXCLUSION HONOURED. A source scan proves status:'ruined' is written in EXACTLY ONE PLACE in src/ — ruinInstitution. ⛔ THE MATCHER IS FIXED AND NON-DISCRETIONARY: a COMMENT-ONLY strip that KEEPS string contents, matcher /status:\\s*'ruined'/ over src/**/*.{js,jsx} excluding *.test.*. MEASURED at the tip over 2,246 files: raw bytes -> 4 hits (three are JSDoc prose describing the shape), the estate's shared codeOnly helper -> 0 hits (it blanks string CONTENTS, so the obvious implementation is VACUOUSLY GREEN), comment-only -> exactly 1. Both controls are required, not optional: the matcher is proved live on a PLANTED second writer and proved to IGNORE a commented one. And the import fence: calamityKernel.js neither imports nor references src/domain/worldPulse/convergence.js (the chair's explicit exclusion), asserted in both directions."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/ruinInstitution.test.js",
+          "tests/domain/calamity.test.js",
+          "tests/domain/calamity.kernel.integration.test.js",
+          "tests/domain/ruinFilter.probe.test.js",
+          "tests/domain/institutionStatusModel.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/simulation/presetLightingWitness.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/ruinFilterRoster.walker.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/worldPulse/calamityKernel.js",
+          "tests/domain/ruinInstitution.test.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "node",
+          "scripts/check-writer-reach.mjs"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ]
+      ]
     }
   ]
 }
