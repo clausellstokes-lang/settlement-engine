@@ -30573,7 +30573,7 @@
     },
     {
       "id": "EM-B3b",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3b.md",
       "verifiedBase": "80a05c849493f2dc9ad28f3b65043d5c0cf50c39",
       "changeManifest": [
@@ -30704,7 +30704,8 @@
           "scripts/ops/migrationRehearsalCore.mjs",
           "tests/ops/migrationRehearsal.test.js"
         ]
-      ]
+      ],
+      "landedAt": "ac46d2daffb8e5a43d4dea429fe0202444eb64ae"
     },
     {
       "id": "EM-B3",

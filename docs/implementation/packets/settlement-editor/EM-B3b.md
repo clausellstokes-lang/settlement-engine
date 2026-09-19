@@ -1,9 +1,10 @@
 # Settlement editor / wave 1 — EM-B3b: the SQL mirror and its train — migration 202 teaches the net-current gallery scanner to deny `decrees`, and registers itself in the rehearsal train and the three doc heads, with the applied head left at 200 for the owner's hand
 
-- **Status:** `READY`
+- **Status:** `LANDED`
 - **Packet version:** `1`
 - **Verified base:** `fixes-2026-09-18-consist` at `80a05c849493f2dc9ad28f3b65043d5c0cf50c39`
 - **Last revalidated:** 2026-09-19 at `80a05c849493f2dc9ad28f3b65043d5c0cf50c39` by the chair at promotion — re-pinned from d31af2cee under J-T1: every path in §7 and every suite in §10 proved byte-identical across the window by `git diff --stat` (the chair) and by blob id (the lane's E0).
+- **Landed:** 2026-09-19 at `ac46d2daffb8e5a43d4dea429fe0202444eb64ae` on `fixes-2026-09-18-consist` (train EM-T1, member 1; the build lane's §12 receipt is in the chair kit's findings/EM-B3b.receipt.md; the terminal gate is check 2 run 13 on the tip that follows the LANDED flip).
 - **Depends on:** `NONE.` This packet stands alone at the base and is the FIRST of the split to land.
 - **Collision group:** `NONE.` No packet in the manifest names any of its six paths; zero non-terminal packets exist estate-wide (E14). **`EM-B3a` shares not one path with it** — that disjointness is what makes the split a split. Sequence: **B2 → B3b → B3a → B4**.
 - **Commit authority:** `edits only; the chair commits`
