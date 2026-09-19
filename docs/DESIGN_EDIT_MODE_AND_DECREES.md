@@ -44,9 +44,10 @@ Corrections and DM-minted entities live in a persisted overlay keyed by entity i
 ### 2.5 The registry (persisted, ordered)
 A persisted key on the saved settlement: `decrees: [{ id, op, status, addedBy, orderedAt, appliedAt?, chronicleRef?, overrode?: guardId[] }]`. Ordered; reorderable (up/down); entries removable until applied (withdrawn entries are kept for the record). The registry is part of the save, so it survives reload, sign-in and export; it never prints in the PDF while pending.
 
-### 2.6 Application
-- **Corrections** apply on Save: the store writer updates the layer; dependents re-derive immediately (the regeneration delta's machinery, scoped to the change); no chronicle entry; the card re-renders.
-- **Events** apply at the tick: the pulse's head takes the pending decrees in order, applies each as a cause, then runs the simulation; each applied decree yields a chronicle entry written by the prose engine with cause = the table's hand (`offStage` when the counterparty is a phantom; `overrode` when a guard was proceeded past — "overnight, by means the town does not understand"). The advance report speaks the regeneration card's vocabulary: direct effects, propagated effects, what was kept.
+### 2.6 Application — THE CANON RULE (the owner, 2026-09-19 ~20:0x)
+**The settlement's state decides the effect, not the field.** Edit mode has two settings behind one tag: a settlement that is NOT canonized takes plain edits that apply on Save; a CANONIZED settlement turns every edit into an event applied at the next advance. The per-field `effect` declaration of §2.1 is therefore withdrawn: a field declares only `pool | free`; the modal's tag reads the settlement's state ("Draft — edits apply now" / "Canon — edits become events at the next advance"). The paragraphs below describe the two settings.
+- **Plain edits (a draft)** apply on Save: the store writer updates the layer; dependents re-derive immediately (the regeneration delta's machinery, scoped to the change); no chronicle entry; the card re-renders.
+- **Events (a canonized settlement)** apply at the tick: the pulse's head takes the pending decrees in order, applies each as a cause, then runs the simulation; each applied decree yields a chronicle entry written by the prose engine with cause = the table's hand (`offStage` when the counterparty is a phantom; `overrode` when a guard was proceeded past — "overnight, by means the town does not understand"). The advance report speaks the regeneration card's vocabulary: direct effects, propagated effects, what was kept.
 
 ### 2.7 Guards (suggestive, never refusing)
 `src/domain/edit/guards.js`: `evaluateGuards(queue, world) → [{ entryId, kind: 'prerequisite' | 'contradiction' | 'duration' | 'range', message, offers: ['fulfil', 'self', 'proceed'] }]`. Rules live in `guardRules.js` and REUSE the estate's authored knowledge: the structural validator's tier rules (a cathedral wants a city; a parish church wants a priest), faction-power totality (adding a faction asks "how much, from whom" or the engine rebalances and shows it as an inserted entry), the tier ranges for section counts, and durations the simulation knows. Coverage is honest: no rule, no guard, and the absence is stated. "Fulfil it for me" inserts a visible, seeded, editable entry marked as added by the guard. "Proceed" records the override on the entry. Cancel is always the DM's own choice.
@@ -96,7 +97,7 @@ Build C before D: the guards are the game. A through C are domain and store work
 
 ## 8. Open decisions (the owner's)
 
-1. Which tier gets edit mode (the free account, or Cartographer), and whether phantoms and the Surveyor share that gate.
+1. ~~Which tier gets edit mode~~ — RULED 2026-09-19: the editor, its door and plain edits are all behind the Cartographer gate, with events, phantoms and the Surveyor.
 2. Whether a correction to a *derived* fact (one the engine computed) is allowed at all, or only to record facts — the chair's default: allowed, recorded in the layer, and the delta card shows what it displaced.
 3. The registry's cap per tick, if any (the chair's default: none; the guards speak, the DM decides).
 4. Whether pending decrees may print in the PDF as "pending" (the chair's default: no).
