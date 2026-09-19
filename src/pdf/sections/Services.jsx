@@ -24,6 +24,7 @@ import { type, palette, space, pt } from '../theme.js';
 import { humanize, label, plural, stripZwnj } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 const SERVICE_CATEGORY_ORDER = [
   'lodging', 'food', 'equipment', 'magic', 'healing',
@@ -269,9 +270,12 @@ function normalizeServiceList(raw) {
 
 function svcLabel(svc) {
   if (!svc) return '';
-  if (typeof svc === 'string') return humanize(svc);
-  return humanize(svc.name || svc.label || '') ||
-         (svc.institution ? humanize(svc.institution) : '');
+  // §934.13 — every arm goes through the label seam. `humanize` returns any string
+  // containing whitespace unchanged, so it composes with the seam's authored case
+  // rather than title-casing 'Access to a house of worship'.
+  if (typeof svc === 'string') return humanize(institutionDisplayName(svc));
+  return humanize(institutionDisplayName(svc)) ||
+         (svc.institution ? humanize(institutionDisplayName(svc.institution)) : '');
 }
 
 export default Services;

@@ -10,6 +10,7 @@ import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compend
 import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // Gold-as-TEXT clears AA only at the darker token (#7A5A1A, 6.16:1 on card); the
 // lighter #a0762a passes as a fill/border but FAILS as text (3.98:1). The Tag
@@ -261,7 +262,10 @@ export function InstitutionsTab({ _config, search }) {
   const filtered = useMemo(() => {
     if (!search) return all.slice(0, 48);
     const q = search.toLowerCase();
-    return all.filter(i => (i.name||'').toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
+    // §934.13 — the DISPLAYED label is searchable too, or a reader who types the words
+    // printed on the card in front of them gets no results. The raw key stays searchable
+    // so a DM who knows the engine's spelling still finds the entry.
+    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
   }, [all, search]);
   // A catalog-load failure (no data AND nothing was searched) is a real error,
   // not an empty result — surface it as such with a reload affordance (P10).
@@ -299,7 +303,7 @@ export function InstitutionsTab({ _config, search }) {
       {filtered.map(inst => (
         <div key={inst.name} style={{ border:`1px solid ${BOR}`, padding:'8px 10px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
-            <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{inst.name}</span>
+            <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}

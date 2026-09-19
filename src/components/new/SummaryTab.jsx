@@ -14,6 +14,7 @@ import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from 
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -378,9 +379,11 @@ function SummaryTab({ settlement:r }) {
             <div key={cat} style={{marginBottom:10}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:catColor(cat),marginBottom:5}}>{tokenCase(cat)} ({instByCat[cat].length})</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
+                {/* §934.13 — sorted and printed through the label seam; the anchor id below
+                    keeps the RAW institution, because it is an identity, not a word. */}
+                {[...instByCat[cat]].sort((a,b)=>institutionDisplayName(a).localeCompare(institutionDisplayName(b))).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';
-                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:chromeFontSize(FS.xs, isMobile),padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{inst.name}</span>;
+                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:chromeFontSize(FS.xs, isMobile),padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{institutionDisplayName(inst)}</span>;
                 })}
               </div>
             </div>

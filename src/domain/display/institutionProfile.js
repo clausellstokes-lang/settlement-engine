@@ -25,6 +25,7 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
+import { institutionDisplayName } from './institutionDisplayName.js';
 
 /**
  * @typedef {Object} InstitutionContribution
@@ -290,5 +291,14 @@ export function deriveInstitutionProfile(institution, settlement = {}) {
     });
   }
 
-  return { name, oneLiner: identityForInstitution(inst), contributions };
+  // ⛔ THE RETURNED `name` IS THE DISPLAY LABEL; the local `name` above stays the RAW
+  // catalogue key on purpose, because the two reads that use it (GATED_GOODS_BY_INSTITUTION,
+  // serviceCountFor) are MATCHERS against catalogue data that still spells the key the old
+  // way. §934.13's seam is a read-time label, never a rename. The `|| name` keeps the
+  // 'Institution' fallback for an institution with no name at all.
+  return {
+    name: institutionDisplayName(inst) || name,
+    oneLiner: identityForInstitution(inst),
+    contributions,
+  };
 }

@@ -4,6 +4,7 @@ import InstitutionLink from '../primitives/InstitutionLink.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
 export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
@@ -12,7 +13,11 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // and the institution attribution keep their own steps: they are the row's
   // scannable furniture, and this row repeats dozens of times down the tab.
   const mobile = useIsMobile();
+  // ⛔ TWO BINDINGS, AND THE SPLIT IS THE POINT (§934.13). `name` stays the RAW service
+  // key because it is a LOOKUP below — impaired/degraded/vulnerable sets and depReasons are
+  // all keyed by the engine's spelling. `displayName` is the only one that reaches the page.
   const name  = typeof svc === 'string' ? svc : svc?.name || '';
+  const displayName = institutionDisplayName(name);
   const desc  = typeof svc === 'object' ? (svc.desc || '') : '';
   const inst  = typeof svc === 'object' ? (svc.institution || '') : '';
   // §14 — services the user authored (or produced by a custom institution) carry
@@ -42,7 +47,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
     }}>
       <div style={{flex:1,minWidth:0}}>
         <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
-          <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
+          <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{displayName}</span>
           {isCustom&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
           {statusLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
           {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',padding:'0 5px',flexShrink:0}}>{depthLabel}</span>}

@@ -22,6 +22,7 @@ import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
@@ -201,7 +202,10 @@ export function servicesSlice(active) {
   const detailed = institutions.map(inst => ({
     // Phase-D anchor identity — matches the index entry built off this raw inst.
     id: inst?.id || entityIdFor('institution', inst),
-    name: inst?.name || inst?.label || 'Institution',
+    // §934.13 — the slice carries the DISPLAY label, so the paid document and the screen
+    // print one word. The anchor `id` just above is built from the RAW inst and is
+    // untouched: it is an identity, not a word.
+    name: institutionDisplayName(inst) || 'Institution',
     category: inst?.category || 'other',
     subCategory: inst?.subCategory || inst?.type || null,
     status: inst?.status || 'healthy',

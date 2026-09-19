@@ -11,6 +11,7 @@ import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
 import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 import { economyDeskRead } from '../economyDeskRead.js';
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
@@ -344,7 +345,10 @@ function buildLocalDailyLifeNarrative(ctx) {
       ? 'doors are barred early and strangers are studied before they are welcomed'
       : 'ordinary errands carry a careful awareness of who controls the street';
 
-  const institutions = Object.values(ctx.keyInsts || {}).flat().slice(0, 5);
+  // §934.13 — these names land inside a SENTENCE the reader reads, so they take the seam
+  // like any other print. `keyInsts` holds raw catalogue keys (dailyLifeLogic pushes
+  // `i.name`), and nothing downstream matches on them.
+  const institutions = Object.values(ctx.keyInsts || {}).flat().map(institutionDisplayName).filter(Boolean).slice(0, 5);
   const anchors = listText(institutions, 'the market, shrine, workshop, and watch post');
   const stress = ctx.stressTypes.length
     ? `The talk of the day keeps returning to ${listText(ctx.stressTypes.map(humanize), 'the current strain')}.`

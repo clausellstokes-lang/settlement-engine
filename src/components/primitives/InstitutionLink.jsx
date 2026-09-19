@@ -51,6 +51,7 @@ import { GOLD } from '../theme.js';
 import {
   deriveInstitutionProfile, resolveInstitutionByName,
 } from '../../domain/display/institutionProfile.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 /**
  * @param {Object} props
@@ -63,7 +64,9 @@ import {
 export default function InstitutionLink({ name, institution, settlement, children, style }) {
   const [open, setOpen] = useState(false);
 
-  const label = children ?? institution?.name ?? name ?? 'Institution';
+  // §934.13 — the seam renders the label; `resolveInstitutionByName` below keeps the RAW
+  // name, because it looks the institution up in data that still spells the key the old way.
+  const label = children ?? (institutionDisplayName(institution ?? name) || 'Institution');
   const inst = useMemo(
     () => institution || resolveInstitutionByName(name ?? institution?.name, settlement),
     [institution, name, settlement],
@@ -92,7 +95,7 @@ export default function InstitutionLink({ name, institution, settlement, childre
         onKeyDown={onKeyDown}
         aria-haspopup="dialog"
         aria-expanded={open}
-        title={`View ${inst.name || label} profile`}
+        title={`View ${institutionDisplayName(inst) || label} profile`}
         style={{
           display: 'inline',
           minHeight: 0,

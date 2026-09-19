@@ -31,6 +31,7 @@ import {
   buildInteriorModel, buildInteriorSvg, applyInteriorEdits, hasDrawableInterior,
 } from '../../domain/interior/index.js';
 import { DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 /** A human label for an interior KIND (the header subtitle). */
 const KIND_LABEL = {
@@ -63,7 +64,9 @@ export default function InteriorView({
 
   if (!institution || !settlement) return null;
 
-  const name = (institution && typeof institution.name === 'string' && institution.name) || 'Institution';
+  // §934.13 — the heading AND the image's alt text read the display label. `buildInteriorModel`
+  // above keeps the raw institution: the interior is keyed off the catalogue name.
+  const name = institutionDisplayName(institution) || 'Institution';
   const kindLabel = (model && KIND_LABEL[model.meta?.kind]) || 'Interior';
   const dataUrl = svg ? `data:image/svg+xml;utf8,${encodeURIComponent(svg)}` : null;
 

@@ -19,6 +19,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -204,7 +205,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-            {inst.name}
+            {institutionDisplayName(inst)}
           </Text>
           {isCustom && (
             <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>

@@ -4,9 +4,12 @@
  * deriveInstitutionProfile pulls an institution's identity from the settlement's
  * REAL generated data. These pins run it over two fully generated settlements and
  * assert the shape + honesty of what it derives:
- *   - name echoes the institution; oneLiner is the Phase 5 authored identity from
- *     the vocabulary side-car (a clean, non-empty string for catalog institutions)
- *     or null for content with no authored identity (never fabricated);
+ *   - name is the institution's DISPLAY label (ODQ §934.13: `deriveInstitutionProfile`
+ *     feeds the InstitutionCard's heading and aria-label, so it renders what a reader
+ *     should see, not the raw catalogue key — for all but the parish-church family the
+ *     two are the same string); oneLiner is the Phase 5 authored identity from the
+ *     vocabulary side-car (a clean, non-empty string for catalog institutions) or null
+ *     for content with no authored identity (never fabricated);
  *   - every contribution is one of the four real domains with non-empty label+detail;
  *   - the derivation actually fires (some institutions gain contributions), and the
  *     defence/economy/power signals map to the settlement's own structures.
@@ -18,6 +21,9 @@ import {
   deriveInstitutionProfile, resolveInstitutionByName,
 } from '../../../src/domain/display/institutionProfile.js';
 import { INSTITUTION_IDENTITY } from '../../../src/domain/display/institutionVocabulary.js';
+import {
+  institutionDisplayName, INSTITUTION_DISPLAY_NAMES,
+} from '../../../src/domain/display/institutionDisplayName.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 const DOMAINS = new Set(['economy', 'defense', 'power', 'services']);
@@ -35,7 +41,16 @@ describe('deriveInstitutionProfile — shape + honesty', () => {
       let authored = 0;
       for (const inst of insts) {
         const p = deriveInstitutionProfile(inst, settlement);
-        expect(p.name).toBe(inst.name);
+        // ⭐ THE ONE-TIME SHIFT (ODQ §934.13, 2026-09-19). This pin read
+        // `expect(p.name).toBe(inst.name)` — the profile echoed the raw key. The
+        // parish-church car made `p.name` the DISPLAY label, so for the five
+        // parish-church keys the echo is legitimately false and this line would have
+        // been a false red. The property worth keeping is not the echo but the
+        // HONESTY behind it: the card names THIS institution and fabricates nothing.
+        expect(p.name).toBe(institutionDisplayName(inst));
+        // …and for everything outside the mapped family the echo still holds exactly,
+        // which is the assertion that would catch a seam wired to the wrong field.
+        if (!(inst.name in INSTITUTION_DISPLAY_NAMES)) expect(p.name).toBe(inst.name);
         // oneLiner is the authored identity or null — never fabricated. When
         // present it is the exact vocabulary string for this institution.
         if (p.oneLiner === null) {

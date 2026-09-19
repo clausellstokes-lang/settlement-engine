@@ -6,6 +6,7 @@ import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { tokenCase } from './labelLadder.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -202,7 +203,9 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
         {/* Institution nodes */}
         {insts.map((inst, i) => (
           <React.Fragment key={i}>
-            <InstNode name={inst.name} present={inst.present} st={st} />
+            {/* §934.13 — the NODE's word is the display label; `inst.present` above was
+                computed from the raw name against the settlement's raw roster. */}
+            <InstNode name={institutionDisplayName(inst.name)} present={inst.present} st={st} />
             {i < insts.length - 1 && <Arrow color={st.border} />}
           </React.Fragment>
         ))}

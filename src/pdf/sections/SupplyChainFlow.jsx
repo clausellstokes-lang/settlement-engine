@@ -20,6 +20,7 @@ import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -140,7 +141,7 @@ function ChainRow({ chain, instNames, primaryExports }) {
               dashed={!inst.present}
               italic={!inst.present}
             >
-              {safe(inst.name)}{inst.present ? '' : ' (missing)'}
+              {safe(institutionDisplayName(inst.name))}{inst.present ? '' : ' (missing)'}
             </Node>
             {i < insts.length - 1 ? <Connector /> : null}
           </View>

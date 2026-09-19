@@ -17,9 +17,7 @@ import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance } from '.
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
-import {
-  customSupplyChainPresentation,
-} from '../../../domain/content/customSupplyChainPresentation.js';
+import { customSupplyChainPresentation } from '../../../domain/content/customSupplyChainPresentation.js';
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
 import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
@@ -27,6 +25,7 @@ import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE calle
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -237,7 +236,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
                 <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2}}>
-                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
+                  <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.map(institutionDisplayName).join(' · ')}
                 </div>
                 <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:1}}>{svc.output}</div>
               </div>

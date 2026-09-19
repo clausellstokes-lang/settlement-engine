@@ -33,6 +33,7 @@ import Button from '../../primitives/Button.jsx';
 // stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 
 // ── The institution provenance badge (R-5b item #10) ───────────────────
 // The pill used to badge only the GENERATION source tag, so a forge the living
@@ -680,7 +681,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
               return <div key={cat}>
                 <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                  {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
+                  {/* Sorted by the DISPLAYED label (§934.13): sorting by the raw key would
+                      file 'House of worship' under P and the reader would see an
+                      alphabetical list that is not alphabetical. Copied before sorting —
+                      `byCategory` holds the arrays this render derives from. */}
+                  {[...insts].sort((a,b)=>institutionDisplayName(a).localeCompare(institutionDisplayName(b))).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;
                     const badge = institutionBadge(inst);
                     const base = {fontSize:chromeFontSize(FS.xs, mobile),padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
@@ -688,7 +693,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
                     return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
-                      {inst.name}
+                      {institutionDisplayName(inst)}
                       {isCustom
                         ? <span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
                         : (badge.label&&<span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
