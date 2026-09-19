@@ -346,7 +346,8 @@ function SummaryTab({ settlement:r }) {
             {spatial.quarters.map((q,i)=><div key={i} style={{display:'flex',gap:8,alignItems:'baseline'}}>
               <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch['#1A4A2A'],flexShrink:0,minWidth:130}}>{q.name}</span>
               <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag3}}>{q.location}</span>
-              {q.landmarks?.length>0&&<span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED}}>{q.landmarks.slice(0,2).join(', ')}</span>}
+              {/* The quarter's landmarks are raw catalogue keys (see OverviewTab's note). */}
+              {q.landmarks?.length>0&&<span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED}}>{q.landmarks.slice(0,2).map(institutionDisplayName).join(', ')}</span>}
             </div>)}
           </div>}
           {spatial?.tradeAccess&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:second,margin:'0 0 6px',fontStyle:'italic'}}>Access: {spatial.tradeAccess}</p>}

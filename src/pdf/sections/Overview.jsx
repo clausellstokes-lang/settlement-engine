@@ -30,6 +30,7 @@ import {
   cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -409,7 +410,12 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
               )}
               {q.landmarks?.length > 0 && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
-                  Landmarks: {q.landmarks.map(l => label(l)).filter(Boolean).join(', ')}
+                  {/* A LANDMARK IS A RAW CATALOGUE KEY (spatialGenerator fills it from
+                    * `instNames`), so this line printed 'Parish churches (2-5)' in the paid
+                    * document while `Institutions.jsx` printed 'Houses of worship (2-5)' two
+                    * chapters later. `label` composes with the seam rather than replacing it:
+                    * `humanize` returns any string containing whitespace unchanged. */}
+                  Landmarks: {q.landmarks.map(l => label(institutionDisplayName(l))).filter(Boolean).join(', ')}
                 </Text>
               )}
             </View>

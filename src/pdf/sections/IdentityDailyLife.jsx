@@ -23,6 +23,7 @@ import {
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { smart, humanize, num } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -451,7 +452,9 @@ function QuarterCard({ q, idx }) {
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`identity.quarter.${idx}.landmark.${j}`}
-                  defaultValue={typeof lm === 'string' ? lm : (lm?.name || lm?.label || '')}
+                  // The seam, not the raw key: a landmark is an institution name and this is
+                  // the value the DM reads AND writes over in the fillable field.
+                  defaultValue={institutionDisplayName(typeof lm === 'string' ? lm : lm)}
                   style={{ ...type.body, fontSize: pt['8.5'] }}
                 />
               </View>

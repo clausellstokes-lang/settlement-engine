@@ -601,7 +601,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
               <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
               <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
-              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
+              {/* A QUARTER'S LANDMARK IS A RAW CATALOGUE KEY. spatialGenerator fills `landmarks`
+                * by filtering `instNames`, so the Religious Quarter's bullet printed 'Parish
+                * churches (2-5)' — the very word §934.13's seam exists to keep off a reader's
+                * page — while the roster pill eighty lines below already read 'Houses of worship
+                * (2-5)'. One settlement, two spellings of one institution, on the same tab. */}
+              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {institutionDisplayName(lm)}</p>)}
             </div>
           ))}
         </div>

@@ -295,7 +295,7 @@ export function deriveSupportingCapabilities(settlement) {
       label: 'Medical Readiness',
       status: f.hasHospital ? 'Hospital present' : f.hasChurch ? 'Clergy care' : 'None',
       color: f.hasHospital ? '#1a5a28' : f.hasChurch ? '#7a5010' : '#8b1a1a', score: null,
-      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Parish care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
     },
     {
       label: 'Logistics & Supply',
