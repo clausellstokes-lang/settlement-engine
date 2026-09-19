@@ -8,7 +8,7 @@
  * source; this module adds no behaviour of its own.
  */
 import { flag } from '../../lib/flags.js';
-import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, magicFoodChannelWord } from '../../domain/display/dossierViewModel.js';
 
 /**
  * settlement.stress is sometimes an array, sometimes a single stress
@@ -32,6 +32,27 @@ function coveragePct(ic, rd) {
   return ic > 0 ? Math.round((ic / (rd || ic)) * 100) : null;
 }
 
+// ODQ §934.20 — THE THIRD CHANNEL, CARRIED INTO PRINT. `coveragePct` above is the
+// PDF's "imports cover X% of gap", and until now that was the whole account the
+// print gave of a covered gap: the magical food offset the writer credits
+// (foodBalance.magicFoodOffset, druidic/divine/arcane applied to what trade leaves
+// uncovered) reached no PDF chapter at all, so a reader could not close the
+// arithmetic between the printed deficit and the printed coverage. Both arms
+// publish it — the flag-off killswitch path reads the record directly, exactly as
+// it does for coveragePct and deficitPct — and the channel WORD comes from the one
+// reader the screen uses, so the two surfaces cannot name the same offset
+// differently. `null` when the record credits no magic, so the chapters' existing
+// `> 0` / `!= null` gates print nothing where there is nothing to print.
+// Private: foodCore below is its only reader (the coveragePct idiom above).
+function magicCore(offset, note) {
+  const lb = Number(offset);
+  const credited = Number.isFinite(lb) && lb > 0;
+  return {
+    magicOffset: credited ? Math.round(lb) : null,
+    magicChannel: credited ? magicFoodChannelWord(note) : null,
+  };
+}
+
 /**
  * Food-balance core fields, shared by the raw + active slices. Behind the
  * canonicalViewModel flag these come from the display model (which reads the
@@ -51,6 +72,7 @@ export function foodCore(viability) {
       importCoverage: m.importCoverage,
       rawDeficit: m.rawDeficit,
       coveragePct: coveragePct(m.importCoverage, m.rawDeficit),
+      ...magicCore(m.magicFoodOffset, m.magicFoodNote),
       deficitPct: m.deficitPct,
       display:    m.display,
       detail:     m.detail,
@@ -70,6 +92,7 @@ export function foodCore(viability) {
     importCoverage: fb?.importCoverage ?? null,
     rawDeficit: fb?.rawDeficit ?? null,
     coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
+    ...magicCore(fb?.magicFoodOffset, fb?.magicFoodNote),
     // The residual share of daily need — the SAME "% of need" the flag-on branch
     // and the screen show. ⚠ fb.deficitPercent was once the engine's GROSS,
     // pre-import figure, and this comment used to say so; the single-writer wave

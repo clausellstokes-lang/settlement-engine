@@ -45,6 +45,13 @@ import { hasOpenTreasury, treasuryBandOf } from '../worldPulse/treasury.js';
 import { swatch } from '../../design/tokens.js';
 
 export { deriveExportPosture } from './exportPosture.js';
+// ODQ §934.20 — THE FOOD BALANCE BAR'S GEOMETRY, beside the food FIGURES this file
+// already derives. The bar and the sentence under it are one fact drawn twice, so
+// the run widths are cut from the same published fields `deriveFoodBalance` reads
+// and the tail IS its `deficitPct`. Re-exported here (the exportPosture idiom
+// above) so the Economics tab and the PDF economics chapters reach one arithmetic
+// through the one display import they already carry.
+export { foodBarSegments, magicFoodChannelWord } from './foodBalanceBar.js';
 
 const VIABILITY_LABEL = Object.freeze({
   not_viable:      'Not viable',

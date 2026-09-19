@@ -359,6 +359,27 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
 //       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
 //       than inherited from HER-7's figures.
+// ODQ §934.20 (the food-bar car, 2026-09-19) — EIGHTEEN PURE LINE MOVES IN ONE FILE, NO
+// CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
+// magical food offset the record credits, so the tab gains a nine-line rationale block
+// above its prose and loses three decorative JSX comment lines inside the bar; the
+// eighteen rows EconomicsTab.jsx owns re-address 393 -> 402, 395 -> 404, 534 -> 542,
+// 535 -> 543, 536 -> 544, 541 -> 549, 543 -> 551, 544 -> 552, 545 -> 553, 724 -> 732 and
+// 730 -> 738. Same shape as CR-FP-2's eighty-eight, HK-1's six and TE-CH-4's one: path,
+// category and snippet are byte-identical on every one, the census stays at 224 against a
+// 224 ceiling, no category count moves, and the whole baseline diff is thirty-six lines,
+// eighteen -/+ pairs.
+// ⛔ THE NEW CLAUSES CARRY FIGURES AND STILL BANK NOTHING, which is the half worth reading.
+// bc32a5a97 could only add a NUMBER-FREE magic clause; this car needed the reader to add the
+// figures up, so the clause now names the offset in lb/day. It costs no row because of WHERE
+// each one lands: on :551 the clause sits past `snippetOf`'s 237-character truncation (which
+// ends at "...Residual sho"), so the frozen prefix is unchanged; on :552 it stays CONCATENATED
+// outside the literal, leaving that node's 101 bytes untouched; and `formatCount(...)` is not
+// a numeric-formatting call to this detector, which is why the sibling "+ N imported" chip has
+// never been a row either. The PDF chapters take the same clause through `smart(...)` with no
+// per-cent token, so Overview.jsx:566 and EconomicsTrade.jsx:534/:539 do not move at all.
+// MEASURED, not assumed: live 224 rows, exact-equal to this baseline, 0 added and 0 removed
+// on path + category + snippet.
 const REVIEWED_TOTAL_CEILING = 224;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

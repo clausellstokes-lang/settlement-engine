@@ -539,6 +539,18 @@ function FoodBalanceBlock({ fb }) {
                 imports cover {fb.coveragePct}% of gap
               </Text>
             )}
+            {/* ODQ §934.20 — THE THIRD CHANNEL. The two lines above account for the
+                gap by trade alone, so on a settlement whose shortfall is partly closed
+                by druidic, divine or arcane provision the printed deficit and the
+                printed coverage did not add up and nothing on the page said why. The
+                offset is the writer's own published field (foodBalance.magicFoodOffset)
+                carried through foodCore, in the same lb/day idiom as the DEFICIT figure
+                above it; the screen names the same channel in the same words. */}
+            {fb.magicOffset != null && (
+              <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted }}>
+                {fb.magicChannel} provision covers {smart(fb.magicOffset)}
+              </Text>
+            )}
           </View>
         )}
         {fb.surplus > 0 && (

@@ -581,6 +581,12 @@ function FoodBalanceBar({ fb }) {
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], marginTop: 1 }}>
           Deficit: {smart(fb.deficit)}
           {fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}
+          {/* ODQ §934.20 — the magical channel, on the same line as the trade one, so
+              the chapter's deficit and its coverage add up. Appended as its own node:
+              the coverage clause above is frozen byte-for-byte by the prose-numerics
+              baseline, and this clause carries no numeral of its own — the offset
+              prints through `smart`, the lb/day idiom the Deficit figure already uses. */}
+          {fb.magicOffset != null ? ` · ${fb.magicChannel} provision covers ${smart(fb.magicOffset)}` : ''}
         </Text>
       )}
       {fb?.surplus > 0 && (

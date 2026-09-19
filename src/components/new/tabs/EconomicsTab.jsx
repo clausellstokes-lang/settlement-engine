@@ -13,7 +13,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/criminalOpRole.js';
 import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
-import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance } from '../../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance, foodBarSegments } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
@@ -301,6 +301,15 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // rather than re-deriving one from the published pounds, so this tab, the PDF
   // chapter, Daily Life and the AI brief carry one number. (A+ pdf.3, one source.)
   const fbal = deriveFoodBalance(s);
+  // ODQ §934.20 — THE PICTURE AND THE FIGURE ARE FED FROM ONE FIELD. The balance
+  // bar drew production and imports and stopped, so the magical food offset the
+  // writer credits (foodBalance.magicFoodOffset — druidic/divine/arcane, applied
+  // to what trade leaves uncovered) fell into the undrawn tail: a town at 773 of
+  // 1,014 lb/day with 169 imported drew a 7% tail beside a sentence stating a 4%
+  // residual, and both were honest about their own arithmetic. The runs now come
+  // from the record's own fields and the tail IS `fbal.deficitPct`, the residual
+  // every surface states (foodBalanceBar.js carries the arithmetic and the why).
+  const foodBar = foodBarSegments(fb, fbal.deficitPct);
   // Terrain-critical imports (things this terrain physically cannot produce)
   const terrainCriticals = (() => {
     const res = s?.resourceAnalysis;
@@ -517,18 +526,17 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
-        {/* Balance bar */}
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
             {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
+            {fb.magicFoodOffset>0&&<span style={{color:swatch.info}}>+ {formatCount(fb.magicFoodOffset)} by {foodBar.magicChannel} provision</span>}
             <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
           </div>
           <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
-            {/* Production bar */}
-            <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
-            {/* Import coverage overlay */}
-            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A']}}/>}
+            <div style={{height:'100%',width:`${foodBar.production}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
+            {foodBar.imports>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production}%`,height:'100%',width:`${foodBar.imports}%`,background:swatch['#2A5A8A']}}/>}
+            {foodBar.magic>0&&<div style={{position:'absolute',top:0,left:`${foodBar.production+foodBar.imports}%`,height:'100%',width:`${foodBar.magic}%`,background:swatch.info}}/>}
           </div>
           <div style={{display:'flex',justifyContent:'space-between',gap:8,color:MUTED,marginTop:3}}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile)}}>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
@@ -540,8 +548,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.${fb.magicFoodOffset>0?' Magical provision closes the remainder of the gap.':''}`
-              : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?' Magical provision closes the remainder of the gap.':'')
+              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
+              : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
             : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'Daily needs are met, with no surplus: production, imports and any magical provision cover the day between them.'
           }
         </div>

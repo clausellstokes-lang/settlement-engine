@@ -18,7 +18,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
@@ -268,7 +268,11 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(text).toContain(`Production covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of food needs`);
     expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
     expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
-    expect(text).toContain('Magical provision closes the remainder of the gap.');
+    // ODQ §934.20 — the clause now carries the FIGURE, not just the fact. bc32a5a97 could
+    // only say "closes the remainder": a reader could not add up production, imports and the
+    // residual and land on the printed number without it. The fixture names no channel, so
+    // the neutral word stands rather than a guessed adjective.
+    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by magical provision.`);
     // The arithmetic the three clauses plus the magic clause now describe.
     expect((fb.dailyNeed - fb.dailyProduction - fb.importCoverage - fb.magicFoodOffset) / fb.dailyNeed * 100)
       .toBe(fb.deficitPercent);
@@ -283,7 +287,7 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     })).container.textContent;
     expect(mundane).toContain('Residual shortfall is 20%');
     // anchored: the deficit sentence is pinned PRESENT on this same `mundane` payload one line above
-    expect(mundane).not.toContain('Magical provision');
+    expect(mundane).not.toContain('comes by');
     cleanup();
     // A severed route takes the OTHER branch — "Production deficit of X%" — where the
     // same silence understated the gap: 40% of need is missing and magic closes half.
@@ -292,7 +296,7 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       saveId: null, publicDossier: true,
     })).container.textContent;
     expect(severed).toContain('Production deficit of 20%');
-    expect(severed).toContain('Magical provision closes the remainder of the gap.');
+    expect(severed).toContain('A further 200 lbs/day comes by magical provision.');
   });
 
   /**
@@ -319,6 +323,80 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // The readout's own percentage is the residual share of NEED, and it is the
     // one the dossier model publishes rather than a second derivation.
     expect(container.textContent).toContain(`Production deficit of ${Math.round((fb.deficit / fb.dailyNeed) * 100)}%`);
+  });
+
+  /**
+   * ODQ §934.20 — THE PICTURE AND THE FIGURE ARE FED FROM ONE FIELD, in the owner's own
+   * numbers. The bar drew production and imports and stopped, so the THIRD channel the
+   * record credits — `foodBalance.magicFoodOffset`, the druidic/divine/arcane provision
+   * the writer applies to what trade leaves uncovered — fell into the undrawn tail: a
+   * world at 773 of 1,014 lb/day with 169 imported drew a 7% tail beside a sentence
+   * stating a 4% residual. Both were honest about their own arithmetic; only one of them
+   * could be true of the settlement.
+   *
+   * ⛔ THE PIN IS THE SUM, not three separate widths. A per-run assertion passes on a bar
+   * whose runs are individually right and collectively wrong, which is exactly the state
+   * this car found. So the runs are read off the rendered track, pinned to the record's
+   * own channels, and their complement is pinned to the number the sentence prints.
+   */
+  const FOOD_TRACK = (container) => [...container.querySelectorAll('div')]
+    .find((node) => node.style.height === '10px' && node.style.position === 'relative');
+  const RUN_WIDTHS = (track) => [...track.children].map((node) => Number(node.style.width.replace('%', '')));
+
+  test("the bar draws every channel the record credits, and its tail is the residual the sentence states", () => {
+    useStore.setState({ campaigns: [] });
+    // 1,014 lb/day needed against 773 grown: a 241 lb gap. Trade lands 169 of it and a
+    // divine provision closes 31 more, leaving 41 lb uncovered — 4% of need, which is
+    // what `deficitPercent` carries and what every surface prints.
+    const fb = {
+      dailyProduction: 773, dailyNeed: 1014, deficit: 41, deficitPercent: 4, surplus: 0,
+      importCoverage: 169, magicFoodOffset: 31, rawDeficit: 241, agricultureModifier: 1,
+      magicFoodNote: 'Divine provision supplements food shortfall',
+    };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const track = FOOD_TRACK(container);
+    expect(track, 'the food balance track did not render').toBeTruthy();
+    const runs = RUN_WIDTHS(track);
+    // Production, trade, magical provision — each run the share of NEED its own label states.
+    expect(runs).toEqual([76, 17, 3]);
+    expect(runs[0]).toBe(Math.round((fb.dailyProduction / fb.dailyNeed) * 100));
+    expect(runs[1]).toBe(Math.round((fb.importCoverage / fb.dailyNeed) * 100));
+    // THE TAIL IS THE SENTENCE'S OWN NUMBER. This is the owner's finding, as an equation.
+    expect(100 - runs.reduce((sum, run) => sum + run, 0)).toBe(fb.deficitPercent);
+    // The runs TILE: each starts where the last ended, so nothing is drawn twice and no
+    // beige shows between two channels that are both credited.
+    expect([...track.children].slice(1).map((node) => node.style.left)).toEqual(['76%', '93%']);
+
+    const text = container.textContent;
+    // The label under the bar names the channel in the "+ 169 imported" idiom...
+    expect(text).toContain(`+ ${fb.importCoverage} imported`);
+    expect(text).toContain(`+ ${fb.magicFoodOffset} by divine provision`);
+    // ...and the sentence states every figure the reader needs to close the arithmetic:
+    // 76% of 1,014 is the production, 70% of the 241 gap is the import, 31 lb is the
+    // provision, and 241 − 169 − 31 = 41 lb is the 4% residual it prints.
+    expect(text).toContain('Production covers 76% of food needs');
+    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
+    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by divine provision.`);
+    expect(fb.rawDeficit - fb.importCoverage - fb.magicFoodOffset).toBe(fb.deficit);
+  });
+
+  test('a gap carried by trade alone draws no magic run and names no channel', () => {
+    useStore.setState({ campaigns: [] });
+    // The same world without a magical channel: the whole covered gap is trade's, and
+    // the tail is the larger residual that follows. A magic run drawn here would be a
+    // channel the record does not credit.
+    const fb = {
+      dailyProduction: 773, dailyNeed: 1014, deficit: 72, deficitPercent: 7, surplus: 0,
+      importCoverage: 169, rawDeficit: 241, agricultureModifier: 1,
+    };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const runs = RUN_WIDTHS(FOOD_TRACK(container));
+    expect(runs).toEqual([76, 17]);
+    expect(100 - runs.reduce((sum, run) => sum + run, 0)).toBe(fb.deficitPercent);
+    // The channel is named nowhere — anchored on the import chip, which travels the same
+    // label row and would vanish under the same drift.
+    expectAbsentWithAnchor(container.textContent, 'provision', `+ ${fb.importCoverage} imported`, 'no magic credited');
   });
 
   test('the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab', () => {
