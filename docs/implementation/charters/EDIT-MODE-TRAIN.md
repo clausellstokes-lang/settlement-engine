@@ -16,6 +16,21 @@ Each packet below is written to READY by an Opus pre-proof lane that verifies ev
 
 **EM-P3b** (after wave 1): trade access gets its one list (`TRADE_ACCESS`, minted with its decision-fork row and its mechanism-coverage row) and the world-facts card declares it. EM-P2's registry row is `{forkId, module, symbol, outputKey}` (EM-A1 joins on `(cardShape, outputKey)`; symbols resolve against source). EM-A1 declares ONLY fields that exist on the record or that a wave-1 packet creates (§934.47 addendum): the lane enumerates them from the record shape and the generators' choosers; the pencil half of its walker waits for wave 4's nameable cards. EM-A3's census is a LIVE scan of the derivation roots, never a read of the baselines.
 
+**EM-P1b** (after EM-P1): the three convicted readers (locksPreservation.js, characterDrift.js, characterEdit.js) take the stable id. **EM-B4b** (wave 4, with the surfaces): the inline-edit surface's derived and history paths retire — `EDITABLE_FIELDS`, `QUEUE_WIRED_PROSE_PATHS` in lockstep, `historyPreservation.js`'s reroll filter re-pointed, `WorkbenchProseEditor`'s lever leaves the screen in the same wave.
+
+## The train plan (§934.47 addendum 4)
+
+| train | members (collision-disjoint; each pre-proved at the train's base) | interior reds named |
+|---|---|---|
+| **EM-T1** | EM-B3b | none |
+| **EM-T2** | EM-P0 (alone: the pipeline's spine) | none (goldens byte-identical by construction) |
+| **EM-T3** | EM-P2 · EM-P3 · EM-B3a · EM-A2a | the lighting census's test-file tuple (each member's predicted delta); EM-P2's mutation-coverage row |
+| **EM-T4** | EM-P1 (alone: persisted shape; the golden door executed once by the chair over the measured movers) | the measured golden suites; the identity round-trip |
+| **EM-T5** | EM-A1 · EM-A2b · EM-B1a · EM-P1b | the lighting tuple; EM-A1's mutation-coverage row; B1a's vocabulary consumers |
+| then | EM-B2a → EM-B1b, EM-A3 → EM-B2b, EM-B4 (by dependency; the `dmLayer on settlement` exemptions mint at B2a's terminal) | per member |
+
+A draft waits in the chair kit until its train is next and its manifest paths are free (the just-in-time rule; the validator refuses a path held by two non-terminal packets).
+
 EM-B2 splits: **EM-B2a** (`pinsFrom(record)`, `rederive(record, config, layer)` over the four card kinds through EM-P0's mode, the isolation property) and **EM-B2b** (`config′` world-fact changes + the delta card's DM-fields section). **EM-B4** is an IN-APP save migration (the estate's `migrateSaveToV*` pattern, unconditional on read and write) folding `_userEdits` into `dmLayer.roots` by the §14 classification, derived and history edits into `dmLayer.notes` (owner decision B), the Change Dock retired without migration.
 
 ## Wave 1 — declarations, pools, ops, the layer (headless)
