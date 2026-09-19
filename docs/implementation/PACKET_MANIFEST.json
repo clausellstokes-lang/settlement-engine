@@ -30875,9 +30875,9 @@
     },
     {
       "id": "EM-P0",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P0.md",
-      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "verifiedBase": "05ef465507141fd5f4564c597056eafa01b8cedd",
       "changeManifest": [
         {
           "_note": "THE PINNED MODE. `runPipeline(initialContext, rng, options)` today iterates getStepOrder() and calls step.fn for EVERY step unconditionally; it accepts no record and the module holds no skip, reuse, pin or preserve branch. It gains ONE option, `pins`, keyed on the steps' declared `provides` DATA KEYS — never on a step NAME, which is the precise defect the estate already convicted: runPipeline's own docblock records that getAffectedSteps/rerunAffected was 'dead, untested, and buggy (it keyed on step names while callers think in data keys)', was retired, and left the instruction 'build them on an explicit per-step reads/provides data-dependency graph'. That graph exists and strict mode enforces it. Six rules: seed ctx with the pins; skip a step whose whole non-empty `provides` is pinned; ALWAYS take rng.fork(name) even when skipping; never skip a step with empty `provides` (it exists for its `mutates`); ⛔ REFUSE a PARTIAL pin with a named throw rather than letting Object.assign silently overwrite it; strict mode untouched. Measured 113 effective lines (eslint Linter, skipBlankLines+skipComments) against the 800 src/generators layer ceiling, no size-baseline entry.",

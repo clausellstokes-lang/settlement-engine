@@ -1,16 +1,16 @@
 # Settlement editor / EM-P0 — THE PIPELINE SEAM: `runPipeline` gains a pinned mode keyed on the declared `provides` graph, the population step splits its draw from its derivations, and fresh generation is byte-identical
 
-- **Status:** DRAFT
+- **Status:** READY
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Packet version:** 1
-- **Verified base:** `fixes-2026-09-18-consist` at `d31af2ceebf643818201b2e2ab4a556765d2fc7c`
-- **Last revalidated:** 2026-09-19 11:4x EDT at `d31af2cee`; the charter's Wave 0 read at `1d2da8c95`. Every measured `src/`, `tests/` and `scripts/` path is byte-identical across that window by object id (`EM-B2.evidence.md` §E0, §E12, §E14 — the `PACKET_STANDARD.md` J-T1 shape)
+- **Verified base:** `fixes-2026-09-18-consist` at `05ef465507141fd5f4564c597056eafa01b8cedd`
+- **Last revalidated:** 2026-09-19 at `05ef465507141fd5f4564c597056eafa01b8cedd` by the chair at promotion — re-pinned from d31af2cee under J-T1 (every §7 path, the step files and the goldens byte-identical across the window by `git diff --stat`).
 - **Depends on:** `NONE` — this is the train's first car
 - **Collision group:** ⚠ **THE PIPELINE'S SPINE. RIDES ALONE IN ITS TRAIN** (charter Wave 0). It reserves `src/generators/pipeline.js` and `src/generators/steps/generatePopulation.js`; no other packet may hold either while it is non-terminal
 - **Commit authority:** edits only; the chair commits
 - **Baseline posture:** measured — `src/generators/pipeline.js` **113** effective lines and `src/generators/steps/generatePopulation.js` **142**, both by eslint's own `Linter` under `max-lines` with `skipBlankLines` + `skipComments`; neither carries a `scripts/.size-baseline.json` entry and the `src/generators/**` layer ceiling is 800 (`eslint.config.js:684-689`). The golden master fixture holds **525** rows. The lighting census tuple is `2645 / 383 / 2262 / 25009 / 6670` at `e5a27a1a5`
-- **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: TO BE STAMPED BY THE CHAIR)
+- **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: fece7560b7418c607f41717c9955aef87ad7496add1ee7dc863d1f038d3cd60e)
 - **Evidence:** `EM-P0.evidence.md` — every verified row receipted by command and output.
 
 ---
