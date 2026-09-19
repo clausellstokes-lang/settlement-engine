@@ -11,7 +11,7 @@ import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
-import { relationshipsDeskLists } from '../relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
+import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
@@ -45,10 +45,21 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
   // They were three memos here — the live-conflict derivation, the typed-engagement merge
   // and the neighbour merge — and being here is precisely why the PAID PDF printed nothing
   // at `relationships.network` on a saved world: a headless builder cannot reach into a tab.
-  // The assembly moved WHOLE to `components/new/relationshipsDeskRead.js`, unchanged line
-  // for line, and `printProse.js` calls the same function. The prose on the page and the
-  // cards below it therefore cannot describe two different sets — which is the property
-  // these consts were written for in the first place.
+  // The assembly moved WHOLE to a sibling, unchanged line for line, and `printProse.js`
+  // calls the same function. The prose on the page and the cards below it therefore cannot
+  // describe two different sets — which is the property these consts were written for in the
+  // first place.
+  //
+  // ⭐ AND THE SIBLING IS NOW A DOMAIN MODULE (ODQ §934.16): the owner ruled that a
+  // domain-side reader of the relationship keys is bought with a governed register migration
+  // rather than refused, so the assembler sits at
+  // `domain/display/stateProse/relationshipsDeskRead.js` and this tab reads DOWN into the
+  // shared layer instead of the PDF's headless builder reaching UP into this one.
+  // ⚠ ONE READ LEFT WITH IT, and this list is shorter for it: the assembler no longer merges
+  // `settlement.crossSettlementConflicts`. Nothing in `src/` writes that key — the generator
+  // that mints those rows writes them into `interSettlementRelationships` — so the cards
+  // below draw the engagements the record's own writers produced, plus the live derivation.
+  // A record authored before the merge moved loses its legacy rows HERE as well as in print.
   //
   // STILL ABOVE THE `!r` EARLY RETURN, for the reason the SEAM car 3g note recorded: the
   // desk read has to be a `useMemo` (ARCH §4.1, X-F9) and a hook may not sit after an early

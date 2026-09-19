@@ -46,7 +46,7 @@ import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
-import { relationshipsDeskLists } from '../../src/components/new/relationshipsDeskRead.js';
+import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import {
   defenseCriminalProse, defenseForcesProse, defenseMagicDependencyProse,
   defenseMilitaryStatusProse, defensePostureProse, defenseStateProse,
@@ -329,18 +329,24 @@ let linked;
  * ⭐⭐ THE SAVED WORLD — the ONLY shape `relationships.network` can draw on, and the reason
  * this fixture is hand-built rather than generated (ODQ §934.9).
  *
- * `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts` are all
- * written at SAVE time — by `src/lib/saves.js`, the neighbour back-link, the link / undo /
- * import paths — and NEVER by the generation pipeline. Every other fixture in this file is a
- * generated town, so all three lists are empty on them and DS-REL-1 is silent: an arm using
- * `full` would pass whether the position printed or not, which is exactly the vacuity the
- * position's old blanket exclusion hid. This record carries all three POPULATED, so the arm
- * below can only pass on prose that actually drew.
+ * `neighbourNetwork` and `interSettlementRelationships` are written at SAVE time — by
+ * `src/lib/saves.js`, the neighbour back-link, the link / undo / import paths — and NEVER by
+ * the generation pipeline. Every other fixture in this file is a generated town, so both
+ * lists are empty on them and DS-REL-1 is silent: an arm using `full` would pass whether the
+ * position printed or not, which is exactly the vacuity the position's old blanket exclusion
+ * hid. This record carries both POPULATED, so the arms below can only pass on prose that
+ * actually drew.
  *
- * The rows are the shape `tests/ui/generalDeskTabFlow.test.js` already drives the screen
- * side of DS-REL-1 with, plus a `crossSettlementConflicts` row that fixture does not carry —
- * the inbound-legacy list, which nothing in the estate writes any more and every reader
- * still merges.
+ * The rows are the shape `tests/ui/generalDeskTabFlow.test.js` already drives the screen side
+ * of DS-REL-1 with.
+ *
+ * ⛔ AND ONE KEY IS HERE TO PROVE IT IS **NOT** READ (ODQ §934.16). `crossSettlementConflicts`
+ * has NO writer anywhere in `src/` — the generator that mints those rows writes them into
+ * `interSettlementRelationships`, and `tests/lint/writerReach.walker.test.js` carries the key
+ * in its own `unwritten` roster — so the domain-side assembler derives the conflicts and does
+ * not merge the key. The row below is a `faction_engagement` IDENTICAL IN SHAPE to the one in
+ * `interSettlementRelationships` that DOES draw, so the arm asserting its silence is about the
+ * KEY and not about the row.
  */
 const LINK_ROWS = Object.freeze({
   neighbourNetwork: Object.freeze([Object.freeze({
@@ -349,20 +355,15 @@ const LINK_ROWS = Object.freeze({
     description: 'A standing arrangement.',
     npcConnections: Object.freeze([Object.freeze({ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' })]),
   })]),
-  interSettlementRelationships: Object.freeze([Object.freeze({
-    type: 'faction_engagement', factionName: 'The Guild', partnerFactionName: 'The Wardens',
-    partnerSettlement: 'Thornmere', relType: 'rival', description: 'Two houses, one quarrel.',
-  })]),
   // TWO ROWS, and the pair is the point. DS-REL-1's engagement lens speaks for
   // `faction_engagement` ONLY (`generalStateProse.js:1531` returns no pool for anything
-  // else), so the first row draws and the second is a realistic legacy row that draws
-  // nothing — which is what lets the arm below tell "the list is merged" from "the list is
-  // merged and everything in it is shouted".
-  crossSettlementConflicts: Object.freeze([
+  // else), so the first row draws and the second is a realistic row that draws nothing —
+  // which is what lets the arm below tell "the list is merged" from "the list is merged and
+  // everything in it is shouted".
+  interSettlementRelationships: Object.freeze([
     Object.freeze({
-      type: 'faction_engagement', factionName: 'The Ledger', partnerFactionName: 'The Hollow',
-      partnerSettlement: 'Thornmere', relType: 'rival',
-      description: 'An older quarrel nobody has closed.',
+      type: 'faction_engagement', factionName: 'The Guild', partnerFactionName: 'The Wardens',
+      partnerSettlement: 'Thornmere', relType: 'rival', description: 'Two houses, one quarrel.',
     }),
     Object.freeze({
       type: 'conflict', factionName: 'The Ledger', partnerSettlement: 'Ashfen', relType: 'rival',
@@ -370,6 +371,11 @@ const LINK_ROWS = Object.freeze({
       description: 'A border nobody ever surveyed.',
     }),
   ]),
+  crossSettlementConflicts: Object.freeze([Object.freeze({
+    type: 'faction_engagement', factionName: 'The Ledger', partnerFactionName: 'The Hollow',
+    partnerSettlement: 'Thornmere', relType: 'rival',
+    description: 'An older quarrel nobody has closed.',
+  })]),
 });
 
 beforeAll(() => {
@@ -460,10 +466,10 @@ describe('the print desk reads the screen\'s own desks', () => {
     // carries all three AFTER normalization before asking what it printed.
     expect(linked.neighbourNetwork, 'the saved fixture lost its neighbour network')
       .toHaveLength(1);
-    expect(linked.interSettlementRelationships, 'the saved fixture lost its faction engagement')
-      .toHaveLength(1);
-    expect(linked.crossSettlementConflicts, 'the saved fixture lost its legacy rows')
+    expect(linked.interSettlementRelationships, 'the saved fixture lost its engagement rows')
       .toHaveLength(2);
+    expect(linked.crossSettlementConflicts, 'the saved fixture lost its NOT-READ control row')
+      .toHaveLength(1);
 
     const paragraph = flat(buildPrintProse(linked, {}))['relationships.network'];
     expect(paragraph, 'the paid PDF printed NOTHING at relationships.network on a linked world')
@@ -481,28 +487,63 @@ describe('the print desk reads the screen\'s own desks', () => {
       'a generated town with no links still printed a neighbour standing').toBeUndefined();
   });
 
-  test('all three save-time lists reach the printed paragraph, each proved by its own removal', () => {
+  test('both save-time lists reach the printed paragraph, each proved by its own removal', () => {
     const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
     const whole = at(linked);
     expect(whole, 'the whole-fixture paragraph is the control and it did not draw').toBeTruthy();
 
     // ⭐ ONE REMOVAL AT A TIME, because a fixture that only proved the UNION would pass with
-    // two of the three lists dead. `crossSettlementConflicts` is the one that matters most
-    // here: nothing in the estate writes it any more, every reader still merges it, and a
-    // cure that quietly dropped it would be invisible to a union arm.
-    for (const key of ['neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts']) {
+    // one of the two lists dead.
+    for (const key of ['neighbourNetwork', 'interSettlementRelationships']) {
       const without = at(normalizeSettlement({ ...linked, [key]: [] }));
       expect(without, `dropping ${key} did not move the printed paragraph, so it contributes nothing`)
         .not.toBe(whole);
     }
 
-    // ⛔ AND THE MERGE DOES NOT PROMOTE WHAT THE CORPUS DOES NOT SPEAK FOR. The legacy list's
-    // second row is `type: 'conflict'`, whose partner is a settlement named NOWHERE else in
-    // the fixture — DS-REL-1 has no pool for it, so its counterpart must not reach the page,
-    // while the faction engagement beside it must. Anchored on the counterpart both typed
-    // engagements share, so an empty paragraph cannot satisfy the absence.
+    // ⛔ AND THE MERGE DOES NOT PROMOTE WHAT THE CORPUS DOES NOT SPEAK FOR. The engagement
+    // list's second row is `type: 'conflict'`, whose partner is a settlement named NOWHERE
+    // else in the fixture — DS-REL-1 has no pool for it, so its counterpart must not reach
+    // the page, while the faction engagement beside it must. Anchored on the counterpart both
+    // typed engagements share, so an empty paragraph cannot satisfy the absence.
     expectAbsentWithAnchor(whole, 'Ashfen', 'Thornmere',
       'DS-REL-1 speaks for faction engagements: a conflict-typed row draws no sentence');
+  });
+
+  test('`crossSettlementConflicts` is DELIBERATELY NOT READ, and the key is why, not the row', () => {
+    // ⭐⭐ THE PIN FOR ODQ §934.16, AND IT IS A BEHAVIOUR CHANGE RECORDED RATHER THAN HIDDEN.
+    // The component-side assembler this one replaced merged `settlement.crossSettlementConflicts`
+    // alongside the two save-time lists. NOTHING IN `src/` WRITES THAT KEY — the deterministic
+    // generator that mints those rows writes them into `interSettlementRelationships`
+    // (`domain/relationships/neighbourBackLink.js`), and `tests/lint/writerReach.walker.test.js`
+    // carries it in its own `unwritten` roster — so the domain reader DERIVES the conflicts and
+    // leaves the key alone. A record authored before the merge moved therefore stops
+    // contributing its legacy rows to DS-REL-1. ⚠ `src/pdf/lib/viewModel.js` still reads the
+    // key for the printed Relationships SECTION, so that surface keeps those rows and the
+    // prose no longer does. Vetoable: re-admitting the read is one line plus an ordinary
+    // observed-shape row.
+    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+    const whole = at(linked);
+    expect(whole, 'the control paragraph did not draw').toBeTruthy();
+
+    // 1. THE ASSERTION: emptying the key moves NOTHING, because nothing read it.
+    expect(at(normalizeSettlement({ ...linked, crossSettlementConflicts: [] })),
+      'the assembler merged `crossSettlementConflicts` again — that key has no writer in src/,'
+      + ' so re-admitting the read is a governed register row, not a silent restore')
+      .toBe(whole);
+
+    // 2. ⛔ THE CONTROL THAT MAKES (1) ABOUT THE KEY AND NOT THE ROW. Without it, a row the
+    //    desk could never speak for would satisfy (1) forever and the arm would prove nothing.
+    //    The SAME row, moved into the list that IS read, must move the paragraph.
+    const legacyRow = linked.crossSettlementConflicts[0];
+    expect(legacyRow?.type, 'the control row stopped being an engagement').toBe('faction_engagement');
+    const promoted = at(normalizeSettlement({
+      ...linked,
+      crossSettlementConflicts: [],
+      interSettlementRelationships: [...linked.interSettlementRelationships, legacyRow],
+    }));
+    expect(promoted,
+      'the NOT-READ control row draws nothing even from the list that IS read, so arm (1) is vacuous')
+      .not.toBe(whole);
   });
 
   test('REACHABILITY: the faith prose renders from a chapter a reader actually gets', () => {

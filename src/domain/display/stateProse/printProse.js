@@ -41,7 +41,7 @@
  * desk reader in the estate uses) and the audience is `'dm'` — the pools doc's §0e
  * "DM-truth by default", and the PDF has no player view to read.
  *
- * ── ⚠ TWO CROSS-LAYER IMPORTS, DELIBERATE AND NARROW ─────────────────────────────────
+ * ── ⚠ TWO CROSS-LAYER IMPORTS, DELIBERATE AND NARROW — AND IT WAS THREE ──────────────
  * `generalDeskRead.js` and `economyDeskRead.js` live under `src/components` for one reason:
  * the registry's ARM 2 admits exactly ONE component file per desk that imports its corpus
  * leaf and calls it. They are PLAIN MODULES — no React, no DOM, no store — and they own the
@@ -50,6 +50,12 @@
  * A domain module reaching into `src/components` inverts the layer; a second copy of two
  * desks' argument assembly would be worse, and the estate's own rule ("a second derivation
  * of the same fact is a fork that drifts") decides it.
+ * ⭐ THE THIRD ONE IS GONE (ODQ §934.16, the owner's order). DS-REL-1's list assembler was
+ * the same shape of import and is now `./relationshipsDeskRead.js`, a sibling in THIS tree:
+ * the owner ruled that a domain-side reader of the relationship keys is bought with a
+ * governed register migration rather than refused, so the register paid for it and the layer
+ * inversion went away. The two above are what is left, and each is held by ARM 2 rather than
+ * by the register.
  *
  * ── ⚠⚠ FOUR DESKS ARE ASSEMBLED HERE AND THAT IS A DEFERRAL, NOT A DESIGN ────────────
  * `power`, `defense`, `stressors` and `warFaith` have no `*DeskRead.js` sibling: their
@@ -88,7 +94,7 @@ import { deriveEscalationClocks } from '../../hookEscalation.js';
 // The two desk readers the screen uses, imported rather than re-derived. See the docblock.
 import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
-import { relationshipsDeskLists } from '../../../components/new/relationshipsDeskRead.js';
+import { relationshipsDeskLists } from './relationshipsDeskRead.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
 import { HOOK_FRAMING } from '../hookFraming.js';
 
@@ -292,7 +298,7 @@ function weave(lines, r) {
  *   ⚠ `neighbours` and `crossEngagements` USED TO LIVE HERE and are gone on purpose: nothing
  *   ever supplied them, so `relationships.network` printed nothing on a saved world for the
  *   whole life of the seam. They are derived from the settlement by
- *   `components/new/relationshipsDeskRead.js`, which is the one assembler the screen reads
+ *   `./relationshipsDeskRead.js`, which is the one assembler the screen reads
  *   too — see the note at the general desk's call below.
  *   `faithUnlocked` is the premium faith seam, mirroring the screen's FaithSection and the
  *   PDF's own Faith & War gate: FALSE (the default) withholds the two positions that can name
@@ -336,19 +342,21 @@ export function buildPrintProse(settlement, ctx = {}) {
     populationTrend: populationTrendBand(/** @type {{populationHistory?: unknown}} */ (r).populationHistory),
     hookCategories: collectPlotHooks(r).map((h) => h && h.category),
     clockIds: deriveEscalationClocks(r).map((c) => c && c.id),
-    // ⭐ DS-REL-1'S TWO LISTS, THROUGH THE SIBLING THIS FILE MAY NOT INLINE (ODQ §934.9).
-    // THIS FILE STILL MAY NOT REACH FOR THEM, and the reason is a MEASURED ratchet red
-    // rather than taste: `neighbourNetwork`, `interSettlementRelationships` and
-    // `crossSettlementConflicts` are all written at SAVE time, so no world the observed-shape
+    // ⭐ DS-REL-1'S TWO LISTS, THROUGH THE SIBLING THIS FILE STILL MAY NOT INLINE — but the
+    // sibling is now a DOMAIN one (ODQ §934.16, the owner's order). The reads are still not
+    // spelled here, and the reason is still a MEASURED ratchet: `neighbourNetwork` and
+    // `interSettlementRelationships` are written at SAVE time, so no world the observed-shape
     // corpus generates carries one and `check-observed-shape-readers.mjs` convicts a reader
-    // of all three — measured, three NEW identities against THIS file on the first run. So
-    // the reads live in `components/new/relationshipsDeskRead.js`, beside the frozen rows the
-    // register already carries across that tree, and this file takes the assembled lists —
-    // the `lifecycleStatus` cure `generalDeskRead.js:223-232` spells, applied here.
-    // ⚠ THE COMMENT THIS REPLACES CLAIMED `src/components/` IS AN EXCLUDED SCOPE. It is not,
-    // and the gate says so in its own success notice: CR-OSR-SCOPE-1 removes that tree from
-    // EXACT resolution only, and the CR-OSR-FREEZE-7 UI cohort is ENFORCED. What makes the
-    // sibling lawful is that its reads are ALREADY BANKED THERE, not that the tree is unseen.
+    // of both. What changed is WHO PAYS. The first cure hid the reads in `src/components`,
+    // where the register had already banked rows for them, and wrote "MAY NOT MOVE TO
+    // src/domain" into the sibling's header. The owner ruled the other way — "if a future car
+    // wants a domain-side reader of the relationship keys, it is a governed register
+    // migration" — so the reads moved DOWN to `./relationshipsDeskRead.js` and a schema rung
+    // admitted them. One assembler still, one derivation still; the layer inversion is gone.
+    // ⚠ AND `src/components/` WAS NEVER AN EXCLUDED SCOPE — CR-OSR-SCOPE-1 removes that tree
+    // from EXACT resolution only, and the CR-OSR-FREEZE-7 UI cohort is ENFORCED. The first
+    // cure was lawful because its reads were already banked there, not because the tree was
+    // unseen; this one is lawful because the register was asked and said yes.
     // ⛔ AND THE LISTS ARE NOT A `ctx` KEY. They were, and nothing ever supplied them, which
     // is exactly why the position printed nothing on a saved world for as long as the seam
     // existed. A caller-supplied override would also be a second way to produce lists this

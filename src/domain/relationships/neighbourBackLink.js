@@ -154,3 +154,61 @@ export function buildNeighbourBackLink(entry, existingSaves) {
     partner: { id: partnerSave.id, name: partnerSave.name, tier: partnerSave.tier, settlement: partnerSettlement },
   };
 }
+
+// ── THE LIVE (UNSAVED) HALF OF THE SAME DERIVATION ───────────────────────────
+/** The frozen empty answer, so a silent settlement allocates nothing and cannot be mutated. */
+const NO_LIVE_ENGAGEMENTS = /** @type {ReadonlyArray<Record<string, unknown>>} */ (
+  Object.freeze([])
+);
+
+/**
+ * The engagements a settlement has with a LIVE, unsaved generator neighbour.
+ *
+ * ⛔ WHY IT LIVES HERE AND NOT BESIDE ITS READER (ODQ §934.16, lane 22). Its reader is
+ * `domain/display/stateProse/relationshipsDeskRead.js`, and a NEW `src/domain` file
+ * importing `src/generators/**` is a fresh edge on a SHRINK-ONLY ratchet
+ * (`tests/build/domainGeneratorsBoundary.test.js`, whose own refusal message says to invert
+ * the coupling rather than widen the baseline). This module already holds the estate's ONE
+ * lawful edge to `generators/crossSettlementConflicts.js` — it is the module that mints the
+ * SAVED half of exactly these rows, forty lines up — so the live half belongs beside it and
+ * the reader takes a domain→domain import. No boundary moves for the print desk.
+ *
+ * A generated town carries `neighborRelationship` and no link rows; a saved one carries the
+ * rows. Deriving these keeps an unsaved settlement's prose and cards identical to the saved
+ * settlement's, which is what the screen already did.
+ *
+ * ⛔ THE SEED IS THE PAIR'S STABLE IDENTITY (`_seed` / `id`), never the transient `{name}`
+ * shape — the determinism note `crossSettlementConflicts.js:5-14` records why: the ambient
+ * RNG fallback made the same pair render different conflicts on every mount.
+ *
+ * PURE: no clock, no ambient RNG, no store, no React.
+ *
+ * @param {{ _seed?: unknown, id?: unknown, name?: unknown, npcs?: unknown, factions?: unknown,
+ *   neighborRelationship?: { id?: unknown, name?: unknown, relationshipType?: unknown,
+ *     npcs?: unknown, factions?: unknown } | null } | null | undefined} settlement
+ * @returns {ReadonlyArray<Record<string, unknown>>}
+ */
+export function liveNeighbourEngagements(settlement) {
+  const nr = settlement?.neighborRelationship;
+  if (!settlement || !nr?.name) return NO_LIVE_ENGAGEMENTS;
+  try {
+    const own = {
+      _seed: settlement._seed,
+      id: settlement.id,
+      name: settlement.name || '',
+      npcs: settlement.npcs || [],
+      factions: settlement.factions || [],
+    };
+    const partner = {
+      id: nr.id, name: nr.name, npcs: nr.npcs || [], factions: nr.factions || [],
+    };
+    const { forA } = generateCrossSettlementConflictsDeterministic(
+      own, partner, nr.relationshipType || 'neutral', 'live',
+    );
+    return forA;
+  } catch {
+    // A malformed partner record must not take the tab or the export down with it; the
+    // position simply draws on what did resolve.
+    return NO_LIVE_ENGAGEMENTS;
+  }
+}
