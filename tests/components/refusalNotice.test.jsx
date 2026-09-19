@@ -88,6 +88,8 @@ describe('the refusal register reaches a reader', () => {
       // A dotted key path is what `t()` renders when it cannot resolve.
       expect(/^[a-z]+(\.[a-zA-Z]+)+$/.test(copy.body), `${reason} body is a raw key`).toBe(false);
       // An un-substituted placeholder is loud on purpose in `t()`; it must not ship.
+      // anchored: copy.body is proven present and longer than 20 characters two lines up, so a
+      // miss here is a real absence of `{placeholder}` in a real body, never an empty string.
       expect(copy.body, `${reason} body has an unfilled placeholder`).not.toMatch(/\{[a-z]+\}/i);
     }
   });
