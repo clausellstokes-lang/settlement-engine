@@ -174,7 +174,7 @@ export const HOLDER_SOURCES = Object.freeze({
   localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:822', read: true }),
   isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:878', read: true }),
   activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:821', read: true }),
-  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:544', read: true }),
+  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:558', read: true }),
   economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:499', read: true }),
   strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
   exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:417', read: true }),
