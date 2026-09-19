@@ -104,7 +104,7 @@ import { useOperatorMessages } from './account/OperatorMessagesProvider.jsx';
  * is authSlice's resolveRole, this is a LABEL, and a label that could disagree
  * with the store by being wired to it is worse than one that cannot.
  */
-const PREVIEW_PERSONA_LABEL = import.meta.env.DEV && import.meta.env.VITE_PREVIEW_ROLE
+const PREVIEW_PERSONA_LABEL = import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_PREVIEW_ROLE
   ? `PREVIEW PERSONA \u00b7 ${String(import.meta.env.VITE_PREVIEW_ROLE).trim()}`
   : null;
 

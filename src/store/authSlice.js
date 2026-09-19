@@ -157,7 +157,9 @@ function resolveTier(tier, role) {
  * @returns {string|null} 'admin' | 'developer' while previewing, else null
  */
 function previewPersonaRole() {
-  if (import.meta.env.DEV && import.meta.env.VITE_PREVIEW_ROLE) {
+  // MODE !== 'test': a vitest run also reports DEV, and the preview worktree's .env.local
+  // would otherwise seat every anonymous test visitor as staff (measured 2026-09-19).
+  if (import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_PREVIEW_ROLE) {
     const asked = String(import.meta.env.VITE_PREVIEW_ROLE).trim();
     return isStaffRole(asked) ? asked : null;
   }

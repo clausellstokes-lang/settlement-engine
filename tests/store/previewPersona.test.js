@@ -42,6 +42,12 @@ async function freshSlice() {
   return state;
 }
 
+// The dev server reports MODE 'development'; vitest reports 'test', and the persona is
+
+// inert there by design — so every arm that expects the persona stands for the server.
+
+beforeEach(() => { vi.stubEnv('MODE', 'development'); });
+
 afterEach(() => {
   vi.unstubAllEnvs();
   vi.resetModules();
@@ -140,14 +146,15 @@ describe('2. INERT — with DEV false the persona does not exist', () => {
     // The production guarantee is DEAD-CODE ELIMINATION, and that only holds if
     // Vite can constant-fold the test. `import.meta.env.DEV` becomes the literal
     // `false` at build time; anything indirected through a variable would not
-    // fold, would survive minification, and would ship the mechanism.
+    // fold, would survive minification, and would ship the mechanism. MODE !== 'test' sits
+    // second: DEV folds to `false` first and takes the whole conjunction with it.
     const slice = readFileSync(join(ROOT, 'src/store/authSlice.js'), 'utf8');
     expect(slice).toMatch(
-      /if \(import\.meta\.env\.DEV && import\.meta\.env\.VITE_PREVIEW_ROLE\)/,
+      /if \(import\.meta\.env\.DEV && import\.meta\.env\.MODE !== 'test' && import\.meta\.env\.VITE_PREVIEW_ROLE\)/,
     );
     const menu = readFileSync(join(ROOT, 'src/components/AccountMenu.jsx'), 'utf8');
     expect(menu).toMatch(
-      /import\.meta\.env\.DEV && import\.meta\.env\.VITE_PREVIEW_ROLE/,
+      /import\.meta\.env\.DEV && import\.meta\.env\.MODE !== 'test' && import\.meta\.env\.VITE_PREVIEW_ROLE/,
     );
   });
 });
@@ -198,5 +205,15 @@ describe('3. NEVER CLAIMED — nothing sends the persona anywhere', () => {
       'src/components/AccountMenu.jsx',   // the visible marker
       'src/store/authSlice.js',           // the role resolution
     ]);
+  });
+
+  test('the persona is inert under vitest even with the switch set — a test run is not the dev server', () => {
+    // anchored: the switch is set below and DEV is what vitest reports; only MODE separates a test from the preview.
+    vi.stubEnv('VITE_PREVIEW_ROLE', 'admin');
+    vi.stubEnv('DEV', true);
+    vi.stubEnv('MODE', 'test');
+    expect(import.meta.env.MODE).toBe('test');
+    expect(import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_PREVIEW_ROLE).toBeFalsy();
+    vi.unstubAllEnvs();
   });
 });
