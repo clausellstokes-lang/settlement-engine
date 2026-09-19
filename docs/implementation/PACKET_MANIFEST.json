@@ -10335,7 +10335,7 @@
       "changeManifest": [
         {
           "action": "MODIFY",
-          "path": "src/components/settlements/relationshipColors.js"
+          "path": "src/domain/display/relationshipColors.js"
         },
         {
           "action": "MODIFY",
@@ -10392,15 +10392,15 @@
           "symbol": "every converged surface actually REACHES the canonical module (not merely lacks a table)"
         },
         {
-          "path": "src/components/settlements/relationshipColors.js",
+          "path": "src/domain/display/relationshipColors.js",
           "symbol": "export function relColor"
         },
         {
-          "path": "src/components/settlements/relationshipColors.js",
+          "path": "src/domain/display/relationshipColors.js",
           "symbol": "export function relRgb"
         },
         {
-          "path": "src/components/settlements/relationshipColors.js",
+          "path": "src/domain/display/relationshipColors.js",
           "symbol": "export const REL_RGB"
         }
       ],
