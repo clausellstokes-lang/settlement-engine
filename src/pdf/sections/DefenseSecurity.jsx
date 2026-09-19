@@ -24,7 +24,6 @@ import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
-import { statusCase } from '../../components/new/labelLadder.js';
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
 const FORCE_GROUPS = [
