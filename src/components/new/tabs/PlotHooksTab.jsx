@@ -24,7 +24,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import { tokenCase } from '../labelLadder.js';
+import { tokenCase, nameOrTokenCase } from '../labelLadder.js';
 import { HOOK_FRAMING } from '../../../domain/display/hookFraming.js';
 
 /**
@@ -140,8 +140,15 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     {/* THE ONLY SITE IN THIS LADDER THAT WAS SHOUTING NOTHING AND STILL
                         WRONG: it printed the RAW ENGINE TOKEN, so a source read "npc" in
                         lower case where SessionMode:471 and the PDF's PlotHooks both print
-                        "NPC". tokenCase is the one function that gets both halves right. */}
-                    {tokenCase(hook.source)}
+                        "NPC".
+
+                        ⛔ AND IT IS THE ONE SITE WHERE A PLAIN `tokenCase` IS ALSO WRONG
+                        (browser pass 3): this field is `npc.name` for an NPC hook and
+                        `parties.join(' vs ')` for a faction one, so sentence-casing it
+                        printed "Sita goswami" on the card while the Power tab printed
+                        "Sita Goswami". `nameOrTokenCase` cases the token and leaves the
+                        name exactly as its generator spelled it. */}
+                    {nameOrTokenCase(hook.source)}
                   </span>
                   <span style={{
                     fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,

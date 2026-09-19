@@ -52,7 +52,7 @@ import { resolve } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { SAFETY_BANDS, STABILITY_BANDS } from '../../src/domain/display/labelBands.js';
 import { TABLE_KIND_LABEL } from '../../src/domain/summary/tonightAtTheTable.js';
-import { tokenCase, statusCase } from '../../src/components/new/labelLadder.js';
+import { tokenCase, statusCase, nameOrTokenCase } from '../../src/components/new/labelLadder.js';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import WarTab from '../../src/components/new/tabs/WarTab.jsx';
@@ -63,6 +63,7 @@ import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MarketPricesSection from '../../src/components/new/tabs/MarketPricesSection.jsx';
 import { PowerSuccessionSection } from '../../src/components/dossier/EngineSections.jsx';
 import SessionMode from '../../src/components/session/SessionMode.jsx';
+import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 
 /** Deliberately lower case, with the reason. Anything else that starts lower is a defect. */
 const ALLOWED = new Set([
@@ -298,5 +299,58 @@ describe('the two casing helpers', () => {
     // The difference that earns the second function: statusCase cannot know an initialism.
     expect(statusCase('npc')).toBe('Npc');
     expect(tokenCase('npc')).toBe('NPC');
+  });
+});
+
+/**
+ * A town with exactly the two hook sources that pull in opposite directions: a PERSON, whose
+ * name is whatever the culture's generator spelled, and an ENGINE CATEGORY, which is a bare
+ * snake_case id. Hand-built rather than forged, because a generated town's hook list is its
+ * own luck and this arm needs both shapes on one card every run.
+ */
+const HOOK_SOURCE_TOWN = Object.freeze({
+  name: 'Ashcombe',
+  tier: 'village',
+  npcs: [{
+    name: 'Sita Goswami',
+    role: 'Mayor',
+    plotHooks: ['She holds the only key to the tithe barn, and will not say why.'],
+  }],
+  economicViability: {
+    plotHooks: [{ hook: 'The caravans have stopped coming through the pass.', category: 'trade_route' }],
+  },
+});
+
+describe('a hook source is a name or a token, and the card may not confuse the two', () => {
+  test("the Plot Hooks card keeps an NPC's own spelling and still cases an engine category", () => {
+    // THE DEFECT (browser pass 3, 2026-09-19): this mount ran `hook.source` through
+    // `tokenCase`, which is right for the economic hook's 'trade_route' and wrong for the
+    // NPC hook's name — the card said "Sita goswami" while the Power tab two clicks away
+    // said "Sita Goswami", off the same generated person.
+    const { container } = render(<PlotHooksTab settlement={HOOK_SOURCE_TOWN} />);
+    const text = container.textContent || '';
+    expect(text, 'the card rendered no hooks at all').toContain('Sita Goswami');
+    // anchored: the line above proves the NPC hook rendered, so the absence below is real.
+    expect(text).not.toContain('Sita goswami');
+    expect(text, 'the engine category still has to become a word').toContain('Trade route');
+    // anchored: the assertion above proves the economic hook rendered.
+    expect(text).not.toContain('trade_route');
+    cleanup();
+  }, 60000);
+
+  test('nameOrTokenCase cases a token and hands a written name straight back', () => {
+    expect(nameOrTokenCase('trade_route')).toBe('Trade route');
+    expect(nameOrTokenCase('npc')).toBe('NPC');
+    expect(nameOrTokenCase('criminal-opportunity')).toBe('Criminal-opportunity');
+    // Anything a writer has already cased — a generated person, a joined pair, an authored
+    // source label — is returned byte-identical. This is the half `tokenCase` gets wrong.
+    expect(nameOrTokenCase('Sita Goswami')).toBe('Sita Goswami');
+    expect(nameOrTokenCase('Safety & Crime')).toBe('Safety & Crime');
+    expect(nameOrTokenCase('Reeve Alder & Brother Tomas')).toBe('Reeve Alder & Brother Tomas');
+    expect(tokenCase('Sita Goswami'), 'the function it replaced still lower-cases the surname')
+      .toBe('Sita goswami');
+    // Not a string, or empty: handed straight back, like its two siblings.
+    expect(nameOrTokenCase('')).toBe('');
+    expect(nameOrTokenCase(null)).toBe(null);
   });
 });

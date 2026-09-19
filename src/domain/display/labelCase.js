@@ -83,3 +83,30 @@ export function tokenCase(token) {
   return String(statusCase(token.replace(/_/g, ' ')))
     .replace(/[A-Za-z]+/g, (word) => INITIALISMS[word.toLowerCase()] || word);
 }
+
+/**
+ * A value that may be EITHER a machine token or a generated proper name: the token is cased,
+ * the name is handed back exactly as it was written.
+ *
+ * ⛔ WHY THIS IS NOT JUST `tokenCase` (browser pass 3, 2026-09-19). `tokenCase` sentence-cases
+ * the whole string, which is right for a value drawn from a finite machine vocabulary and
+ * wrong for a value that is sometimes a PERSON. The Plot Hooks card's source is the one field
+ * in the dossier that holds both: `collectPlotHooks` writes `npc.name` there for an NPC hook
+ * and a lower-case engine category there for an economic one, so one `tokenCase` at that mount
+ * printed "Sita goswami" on the card while the Power tab printed "Sita Goswami" two tabs over.
+ * A name is not a token and cannot be re-cased by rule — 'de Vries', 'al-Rashid' and every
+ * culture's own particle are correct as generated and wrong as anything else.
+ *
+ * THE TEST IS LEXICAL AND DELIBERATELY SO. A capital anywhere in the string means a writer
+ * (the name generator, or an author writing 'Safety & Crime') already chose its case; only an
+ * all-lower-case string can be the snake/kebab/bare id this casing exists for. Nothing here
+ * can guess a name from a label, so the rule errs toward LEAVING WRITTEN TEXT ALONE, which is
+ * the failure that costs a reader nothing.
+ *
+ * @param {unknown} value a machine token, or a name as its generator spelled it
+ * @returns {unknown} the token as a displayable word, or the name untouched
+ */
+export function nameOrTokenCase(value) {
+  if (typeof value !== 'string' || !value) return value;
+  return /[A-Z]/.test(value) ? value : tokenCase(value);
+}

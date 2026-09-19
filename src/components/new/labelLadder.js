@@ -62,7 +62,7 @@
  */
 import { FS, serif_ } from '../theme.js';
 
-export { statusCase, tokenCase } from '../../domain/display/labelCase.js';
+export { statusCase, tokenCase, nameOrTokenCase } from '../../domain/display/labelCase.js';
 
 /**
  * THE LITERARY SECTION TITLE. Spread it, then add the site's own colour and margin:
@@ -112,4 +112,8 @@ export function literaryTitle(bodySize = 13) {
  * vocabulary law now live. Import them from here or from there; they are the same two
  * functions, and the screen and the paid PDF both call them so that one word has one
  * spelling on both surfaces.
+ *
+ * `nameOrTokenCase` rides with them for the one field that holds a token OR a generated
+ * NAME (the Plot Hooks card's source). It is not a fourth rung: it is rung 3 with the
+ * proper names spared, and its docblock is beside the other two.
  */
