@@ -30719,6 +30719,347 @@
         "EM-B3a",
         "EM-B3b"
       ]
+    },
+    {
+      "id": "EM-A1",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-A1.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/types.js",
+          "symbol": "FieldKind, FieldDeclaration (JSDoc typedefs, including provenance and writer)"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/edit/fieldDeclarations.js",
+          "symbol": "FIELD_DECLARATIONS, declarationsFor, isEditableCard"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/domain/editDeclarations.test.js",
+          "symbol": "acceptance cases A1, A2, A3, A4, A7 and the zero-importer dormancy case"
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lint/editDeclarations.walker.test.js",
+          "symbol": "acceptance cases A5, A5b, A6 — the pencil arm, the pool arm and the ROOT arm"
+        },
+        {
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json",
+          "symbol": "invariants['tests/lint/editDeclarations.walker.test.js']"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town')"
+        },
+        {
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateNPCs"
+        },
+        {
+          "path": "src/generators/economy/upgradeOpportunities.js",
+          "symbol": "export const getUpgradeOpportunities"
+        },
+        {
+          "path": "src/generators/power/rulingStructure.js",
+          "symbol": "export const generatePowerStructure"
+        },
+        {
+          "path": "src/generators/power/rulingStructure.js",
+          "symbol": "export const renormalizeFactionPower"
+        },
+        {
+          "path": "src/generators/power/governanceNarrative.js",
+          "symbol": "export const buildGovernanceLabels"
+        },
+        {
+          "path": "src/generators/power/factionCategories.js",
+          "symbol": "export const inferFactionCategory"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_RENAME_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const FACTION_RENAME_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NON_CASCADED_SURFACES"
+        },
+        {
+          "path": "src/domain/factionRename.js",
+          "symbol": "export const NPC_NON_CASCADED_SURFACES"
+        },
+        {
+          "path": "src/components/primitives/InstitutionCard.jsx",
+          "symbol": "export default function InstitutionCard"
+        },
+        {
+          "path": "src/components/new/tabs/NPCsTab.jsx",
+          "symbol": "export function NPCsTab"
+        },
+        {
+          "path": "src/components/new/tabs/power/PowerStrata.jsx",
+          "symbol": "export function TheFactions"
+        },
+        {
+          "path": "src/generators/lookups.js",
+          "symbol": "export const getInstitutionsForTier"
+        },
+        {
+          "path": "src/generators/lookups.js",
+          "symbol": "export const getInstitutionalCatalog"
+        },
+        {
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "path": "src/domain/entities/npcs.js",
+          "symbol": "{'active'|'dead'|'missing'|'exiled'|'retired'|'removed'} NpcStatus"
+        },
+        {
+          "path": "src/components/new/npcComponents.jsx",
+          "symbol": "function NPCInlineCard({"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "MAIN BEHAVIOUR — declarationsFor returns each declared card type's authored rows in authored order, frozen, and isEditableCard is true for exactly those types"
+        },
+        {
+          "id": "A2",
+          "case": "ABSENT AND UNKNOWN — undefined, empty string, an unknown type, a number and the two prototype names all return the SAME frozen empty array by identity, with no throw and no prototype walk"
+        },
+        {
+          "id": "A3",
+          "case": "THE RECORD IS THE DENOMINATOR — every declared field either appears on its card's record in a corpus this test generates at village, town and city, or names a creating wave-1 packet id, and the failure message names the field and the card"
+        },
+        {
+          "id": "A4",
+          "case": "THE KIND, PROVENANCE AND VOCABULARY LAW — pool iff kind pool, maxLength iff free or free-cascade, readersProof iff free, provenance is the literal root or world-fact, writer is a path-hash-symbol string, group non-empty, no duplicate card-and-field pair; AND the two respelled vocabularies hold: npc.status's pool equals the live NpcStatus set plus jailed, and institution.state declares its five members with its creating packet named"
+        },
+        {
+          "id": "A5",
+          "case": "THE PENCIL AND POOL ARMS — the pencil arm asserts an exactly-empty found set over a proven non-empty corpus at this pencil-free wave, and the pool arm asserts its own subject explicitly rather than passing on an empty one"
+        },
+        {
+          "id": "A5b",
+          "case": "THE ROOT ARM AND ITS GUARD-THE-GUARD — every declared writer passes the closed-vocabulary predicate over its own source, and a planted npc.role row naming generateNPCs as its writer REDS, with the message naming the field and the offending world-fact identifier"
+        },
+        {
+          "id": "A6",
+          "case": "THE PREDICATE'S VOCABULARY CANNOT ROT — WORLD_FACT_PARAMS and WORLD_FACT_READS are non-empty and frozen, and every member is matched by at least one real generator signature in the tree, so a dead token cannot pad the list"
+        },
+        {
+          "id": "A7",
+          "case": "PURITY AND IDENTITY — repeated calls return the same array by identity and the table is deep-frozen, so a write throws in strict mode"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/domain/editDeclarations.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/editDeclarations.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/negativeAssertionAnchor.walker.test.js",
+          "tests/lint/sovereigntyLightingContract.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/edit/types.js",
+          "src/domain/edit/fieldDeclarations.js",
+          "tests/domain/editDeclarations.test.js",
+          "tests/lint/editDeclarations.walker.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "EM-P3",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-P3.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "src/data/worldFactOptions.js",
+          "symbol": "TERRAIN_WEIGHTS, TERRAINS, CULTURES, TRADE_ACCESS, WORLD_FACT_SOURCES"
+        },
+        {
+          "action": "CREATE",
+          "path": "src/domain/worldFactOptions.js",
+          "symbol": "the boundary re-export block"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/generators/steps/resolveConfig.js",
+          "symbol": "TERRAIN_WEIGHTS, CULTURES — the two literals become an import plus a re-export under the same names"
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/components/gallery/galleryUtils.js",
+          "symbol": "TERRAIN_OPTIONS, CULTURE_OPTIONS — derived from the canonical home, names unchanged"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/components/gallery/facetAlignment.test.js",
+          "symbol": "acceptance cases A1 through A5, added to the existing contract"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/generators/steps/resolveConfig.js",
+          "symbol": "export const TERRAIN_WEIGHTS"
+        },
+        {
+          "path": "src/generators/steps/resolveConfig.js",
+          "symbol": "export const CULTURES"
+        },
+        {
+          "path": "src/components/gallery/galleryUtils.js",
+          "symbol": "export const TERRAIN_OPTIONS"
+        },
+        {
+          "path": "src/components/gallery/galleryUtils.js",
+          "symbol": "export const CULTURE_OPTIONS"
+        },
+        {
+          "path": "src/data/cultureProfiles.js",
+          "symbol": "export const CULTURE_PROFILE_KEYS"
+        },
+        {
+          "path": "src/data/monsterThreat.js",
+          "symbol": "export const MONSTER_THREAT_TIERS"
+        },
+        {
+          "path": "src/data/stressTypes.js",
+          "symbol": "export const STRESS_TYPE_MAP"
+        },
+        {
+          "path": "src/data/resourceData.js",
+          "symbol": "export const RESOURCE_DATA"
+        },
+        {
+          "path": "src/data/tradeGoodsData.js",
+          "symbol": "export const GOODS_CATEGORIES"
+        },
+        {
+          "path": "src/data/institutionServices.js",
+          "symbol": "export const INSTITUTION_SERVICES"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "ONE SOURCE — terrain and culture are equal AS ARRAYS, same members and same order, across every live spelling, asserted in both directions"
+        },
+        {
+          "id": "A2",
+          "case": "THE EXISTING ARMS STILL HOLD — the three pre-existing culture assertions of the facet-alignment contract pass unchanged against the new source"
+        },
+        {
+          "id": "A3",
+          "case": "GUARD-THE-GUARD — a planted extra member in the gallery's derived list REDS A1, naming the fact and the divergent member"
+        },
+        {
+          "id": "A4",
+          "case": "THE CITATION MAP IS HONEST — WORLD_FACT_SOURCES has exactly eight keys, every path exists, and every symbol is present verbatim in its file"
+        },
+        {
+          "id": "A5",
+          "case": "ORDER IS LOAD-BEARING — the terrain weights array is equal element-for-element to the pre-move literal, with the reason in the failure message because weightedPick reads position"
+        },
+        {
+          "id": "A6",
+          "case": "IDENTITY — the generator golden master and the dossier prose manifest do not move, because the packet relocates values and changes none"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/components/gallery/facetAlignment.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/resolveConfigReceipts.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/data/worldFactOptions.js",
+          "src/domain/worldFactOptions.js",
+          "src/generators/steps/resolveConfig.js",
+          "src/components/gallery/galleryUtils.js",
+          "tests/components/gallery/facetAlignment.test.js"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
