@@ -7,7 +7,7 @@ import { EditableText } from '../primitives/EditableText.jsx';
 import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
@@ -120,12 +120,19 @@ export function NPCCategoryGroup({
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
-  // THE PHONE PROSE FLOOR — the card's two paragraphs AND the role line beneath
-  // the names. The role line was left at its own step when this floor first
-  // landed, on the reading that it was furniture; the whole-dossier acceptance
-  // test measured it at 11px and 45+ characters, which is a passage a reader
-  // reads rather than glances at. The names, the kind badge and the emergent tag
-  // keep their own steps.
+  // THE TWO PHONE FLOORS — the card's two paragraphs take the PROSE floor; the
+  // role line beneath the names takes the CHROME floor.
+  //
+  // ⚠ THE ROLE LINE HAS NOW BEEN RULED TWICE, AND THE SECOND RULING STANDS. It
+  // was left at 11px when the floor first landed (furniture); the whole-dossier
+  // test then measured it at 45+ characters and it was promoted to 14px prose;
+  // that promotion put it one pixel under the 15px NAMES it sits beneath and
+  // erased the step the card is read by. It is furniture that is long enough to
+  // read, which is exactly the class `chromeFontSize` was cut for: 12px on the
+  // phone, still two clear steps below the name. `data-sf-chrome` DECLARES the
+  // classification to the floor test rather than leaving it to be guessed from
+  // CSS — the line carries no pill, no case and no weight to infer it from.
+  // The names, the kind badge and the emergent tag keep their own steps.
   const mobile = useIsMobile();
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
@@ -138,7 +145,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
               {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
             </div>
-            <div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+            <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
           <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>

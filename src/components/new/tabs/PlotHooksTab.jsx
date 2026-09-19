@@ -23,7 +23,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // why this position is also CAPPED, which no other position is.
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * ⭐ THE FRAMING CAP, AND THE RULING BEHIND IT (owner finding 4, 2026-09-18).
@@ -114,7 +114,9 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
                   <span style={{
-                    fontFamily: SERIF, fontWeight: 700, fontSize: FS['11.5'],
+                    // The source NAME — furniture, and long enough to be read
+                    // (a conflict source reads "X vs Y"), so it takes the chrome floor.
+                    fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
                     color: INK, minWidth: 0, overflow: 'hidden',
                     textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>

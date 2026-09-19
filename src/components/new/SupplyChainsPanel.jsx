@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 
@@ -326,6 +327,10 @@ export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
 }
 
 function Legend() {
+  // THE PHONE CHROME FLOOR — a legend is decoded at a glance, not read, but the
+  // whole strip runs past forty-five characters, so it is furniture that is long
+  // enough to need the 12px floor rather than the 14px prose one.
+  const mobile = useIsMobile();
   const items = [
     { dot: '●', color: '#1a5a28', label: 'Running' },
     { dot: '◐', color: '#8a5010', label: 'Vulnerable. Upstream imported' },
@@ -334,7 +339,7 @@ function Legend() {
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: FS.xxs, color: swatch.inkMag3 }}>
+    <div data-sf-chrome="" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>
       {items.map((it, i) => (
         <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>

@@ -6,7 +6,7 @@ import { formatCount } from '../../../domain/formatNumber.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -95,9 +95,11 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
-  // THE PHONE PROSE FLOOR — a chain's impairment line, its entrepot note and its
-  // magic substitution note. The chain name, the need tag and the status pill are
-  // the card's furniture and keep their own steps.
+  // THE TWO PHONE FLOORS — a chain's impairment line, its entrepot note and its magic
+  // substitution note take the PROSE floor. Its `Via` institution LIST and its income
+  // attribution take the CHROME floor, declared with `data-sf-chrome` because a list of
+  // house names and a percentage carry no case, weight or box to infer a class from.
+  // The chain name, the need tag and the status pill keep their own steps.
   const mobile = useIsMobile();
   // Guard: a single malformed income entry (no string `source`) must not throw
   // and white-screen the whole tab — in the live generate flow this section is
@@ -169,7 +171,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
                 <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,marginBottom:2}}>Via</div>
-                  <div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
+                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
                 </div>
                 {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,marginBottom:2}}>Outputs</div>
@@ -207,7 +209,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Income contribution */}
               {incomeEntry && (
-                <div style={{fontSize:FS.xxs,color:swatch.inkMag3,marginTop:4}}>
+                <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
                 </div>
               )}
@@ -249,6 +251,16 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
 export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null, publicDossier = false, playerView = false}) {
   const s = settlement;
+  // ⭐ THE FOUR TRADE CHIPS TAKE THE CHROME FLOOR, NOT THE PROSE ONE, AND THE REASON IS THE
+  // PAIR RATHER THAN THE CHIP. A goods name can run long — this generator ships "Scholarly
+  // services (research access, rare texts)", 47 characters — so the whole-dossier floor test
+  // measured a chip as a passage and the sweep raised it to 14px. That put the 600-weight
+  // ordinary chip at the size of the sentences around it, and LOUDER than its 700-weight gold
+  // custom sibling in the same row, which the test could not see because weight >= 700 read as
+  // chrome and dropped out of the scan. A chip is a pill: bounded, tinted, glanced along a row.
+  // It reads at 12px on the phone — up from 11, so the long name is still easier than it
+  // shipped — and both branches take the same call so the pair can never disagree again.
+  // The income note's own floor, and why the row stacks to carry it, are at that row.
   const mobile = useIsMobile();
   // M6d FLOW-DERIVED ECONOMICS — thread worldState the RumorsTab way: read the owning
   // campaign's worldState from the store and project the arrivals tally through the
@@ -400,8 +412,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     : ownership.mixed
                       ? 'Also an exact custom endpoint'
                       : undefined;
-                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                  return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                  return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                 })}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
@@ -425,8 +437,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                       : ownership.mixed
                         ? 'Also an exact custom endpoint'
                         : undefined;
-                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                    return <span key={i} title={title} style={{fontSize:proseFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                    return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
