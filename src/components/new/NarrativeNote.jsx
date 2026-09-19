@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { sans } from './Primitives';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * NarrativeNote — per-tab addendum from the Narrative Refinement layer.
@@ -41,10 +41,10 @@ export function NarrativeNote({ note }) {
           cursor: 'pointer', textAlign: 'left',
         }}
       >
-        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>
-        <span style={{ fontSize: FS.xs, color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {/* Body */}

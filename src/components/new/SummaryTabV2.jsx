@@ -29,7 +29,7 @@ import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
 import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { literaryTitle, tokenCase } from './labelLadder.js';
 
 const GOLD = swatch['#8C6F32'];
@@ -96,7 +96,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         </h1>
         <div style={{
           marginTop: 2,
-          fontSize: FS.xxs, color: MUTED,
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED,
           letterSpacing: '0.04em',
         }}>
           {String(settlement.tier || 'SETTLEMENT').toUpperCase()}
@@ -139,7 +139,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         {/* LEFT — one identity, three truths, one pressure. */}
         <div style={{ flex: mobile ? '0 0 auto' : 1.2, minWidth: 0 }}>
           <div style={{
-            fontSize: FS.micro, fontWeight: 800,
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
             letterSpacing: '0.14em', textTransform: 'uppercase',
             color: GOLD,
           }}>
@@ -221,14 +221,14 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             marginBottom: 2,
           }}>
             <span style={{
-              fontSize: FS.micro, fontWeight: 800,
+              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: AMBER,
             }}>
               Tonight at the table
             </span>
             <span style={{ flex: 1 }} />
-            <span style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic' }}>
+            <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontStyle: 'italic' }}>
               cheat sheet
             </span>
           </div>
@@ -244,13 +244,13 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               alignItems: 'baseline', gap: 6,
             }}>
               <span style={{
-                fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
+                fontFamily: serif, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
                 color: INK,
               }}>
                 {guide.entryPoint.label}
               </span>
               <span style={{
-                fontSize: FS['7.5'], fontWeight: 800,
+                fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
                 color: AMBER, letterSpacing: '0.08em',
               }}>
                 HOOK
@@ -286,14 +286,14 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                 alignItems: 'baseline', gap: 6,
               }}>
                 <span style={{
-                  fontFamily: serif, fontWeight: 700, fontSize: FS['11.5'],
+                  fontFamily: serif, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
                   color: INK, minWidth: 0, overflow: 'hidden',
                   textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}>
                   {person.name}
                 </span>
                 <span style={{
-                  fontSize: FS['7.5'], fontWeight: 800,
+                  fontSize: chromeFontSize(FS['7.5'], mobile), fontWeight: 800,
                   color: GREEN, letterSpacing: '0.08em',
                   flexShrink: 0,
                 }}>
@@ -302,7 +302,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               </div>
               <div style={{
                 marginTop: 1,
-                fontSize: FS.nano, color: MUTED, lineHeight: 1.35,
+                fontSize: chromeFontSize(FS.nano, mobile), color: MUTED, lineHeight: 1.35,
               }}>
                 {person.role}
               </div>

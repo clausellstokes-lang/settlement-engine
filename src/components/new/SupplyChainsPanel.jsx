@@ -41,7 +41,9 @@ const Arrow = ({ color = '#9c8068' }) => (
 );
 
 // ── Node: resource ────────────────────────────────────────────────────────────
-const ResourceNode = ({ icon, label, depleted, st }) => (
+const ResourceNode = ({ icon, label, depleted, st }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 4,
     background: depleted ? '#fdf8ec' : st.bg,
@@ -50,55 +52,65 @@ const ResourceNode = ({ icon, label, depleted, st }) => (
     opacity: depleted ? 0.75 : 1,
   }}>
     {icon && <span style={{ fontSize: FS.md }}>{icon}</span>}
-    <span style={{ fontSize: FS.xs, fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: depleted ? '#8a5010' : st.color }}>
       {label}{depleted ? ' (depleted)' : ''}
     </span>
   </div>
-);
+  );
+};
 
 // ── Node: institution ─────────────────────────────────────────────────────────
-const InstNode = ({ name, present, st }) => (
+const InstNode = ({ name, present, st }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: present ? st.bg : '#f8f5f0',
     border: `1px ${present ? 'solid' : 'dashed'} ${present ? st.border : '#c8b898'}`,
     padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xs, fontWeight: present ? 700 : 400,
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: present ? 700 : 400,
       color: present ? st.color : '#9c8068',
       fontStyle: present ? 'normal' : 'italic' }}>
       {name}{!present ? ' (missing)' : ''}
     </span>
   </div>
-);
+  );
+};
 
 // ── Node: import ──────────────────────────────────────────────────────────────
-const ImportNode = ({ label }) => (
+const ImportNode = ({ label }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: swatch['#FAF8F4'], border: '1px dashed #a0b0d8',
     padding: '3px 8px', flexShrink: 0,
   }}>
-    <span style={{ fontSize: FS.xs, fontWeight: 600, color: swatch.info }}>Import: {label}</span>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600, color: swatch.info }}>Import: {label}</span>
   </div>
-);
+  );
+};
 
 // ── Node: output / export ─────────────────────────────────────────────────────
-const OutputNode = ({ label, isExport }) => (
+const OutputNode = ({ label, isExport }) => {
+  const mobile = useIsMobile();
+  return (
   <div style={{
     display: 'flex', alignItems: 'center', gap: 3,
     background: isExport ? '#f0faf2' : '#faf8f4',
     border: `1px solid ${isExport ? '#88c880' : '#d8c8a8'}`,
     padding: '3px 8px', flexShrink: 0,
   }}>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success }}>↗</span>}
-    <span style={{ fontSize: FS.xs, fontWeight: isExport ? 700 : 500,
+    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success }}>↗</span>}
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: isExport ? 700 : 500,
       color: isExport ? '#1a5a28' : '#6b5340' }}>
       {label}
     </span>
-    {isExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
+    {isExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, marginLeft: 2 }}>EXPORT</span>}
   </div>
-);
+  );
+};
 
 // ── Single chain row ──────────────────────────────────────────────────────────
 export function ChainRow({ chain, instNames, primaryExports, mobile }) {
@@ -152,9 +164,9 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
             An unguarded span emitted an empty box that still ate the flex gap. */}
         {chain.resourceIcon && <span style={{ fontSize: FS.sm }}>{chain.resourceIcon}</span>}
         <span style={{ fontSize: FS.sm, fontWeight: 700, color: st.color, flex: 1 }}>{chain.label}</span>
-        {hasExport && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
-        {missing.length > 0 && <span style={{ fontSize: FS.micro, color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
-        <span style={{ fontSize: FS.micro, fontWeight: 700, color: st.color }}>{st.dot}</span>
+        {hasExport && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.success, background: swatch['#E8F5EC'], border: '1px solid #a8d8b0', padding: '1px 5px' }}>EXPORT</span>}
+        {missing.length > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: swatch.info, background: swatch['#FAF8F4'], border: '1px solid #a0b0d8', padding: '1px 5px' }}>imported</span>}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: st.color }}>{st.dot}</span>
       </div>
     );
   }
@@ -208,7 +220,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
 
       {/* Upstream note */}
       {chain.upstreamNote && (
-        <div style={{ marginTop: 4, fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic' }}>
+        <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>
           ↑ {chain.upstreamNote}
         </div>
       )}
@@ -244,10 +256,10 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1 }}>
           {tokenCase(needLabel || needKey)}
         </span>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
-        <span style={{ fontSize: FS.micro, color: MUTED }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
+        {impaired > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
+        {vulnerable > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>{open ? '▲' : '▼'}</span>
       </Button>
 
       {open && (

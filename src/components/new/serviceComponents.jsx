@@ -2,7 +2,7 @@ import { FS, swatch, GOLD_TINT, GOLD_DEEP } from '../theme.js';
 import { truncateAtWord } from '../../lib/text.js';
 import InstitutionLink from '../primitives/InstitutionLink.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
@@ -43,9 +43,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
       <div style={{flex:1,minWidth:0}}>
         <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
           <span style={{fontSize: FS['12.5'],fontWeight:600,color:isCriminal?'#c06060':'#1c1409'}}>{name}</span>
-          {isCustom&&<span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
-          {statusLabel&&<span style={{fontSize:FS.micro,fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
-          {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:FS.micro,fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',padding:'0 5px',flexShrink:0}}>{depthLabel}</span>}
+          {isCustom&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em',flexShrink:0}}>✦</span>}
+          {statusLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:statusColor,background:`${statusColor}18`,padding:'0 5px',letterSpacing:'0.04em',flexShrink:0}}>{statusLabel}</span>}
+          {(isImp||isDeg||isVul)&&depthLabel&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch.inkMag3,background:swatch['#F0E8D8'],border:'1px solid #c8b89a',padding:'0 5px',flexShrink:0}}>{depthLabel}</span>}
         </div>
         {desc&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:isCriminal?'#8a5050':'#9c8068',lineHeight:1.3,margin:'1px 0 0'}}>{desc}</p>}
         {/* ⛔ THE ATTRIBUTION LINE IS A `<div>`, AND IT IS NOT A STYLE CHOICE. Its child
@@ -60,7 +60,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
             honest element for a line whose child may open a dialog. The two paragraphs above
             keep their `<p>`: their children are inline-only.
             @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
-        {inst&&<div style={{fontSize:FS.xxs,color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
+        {inst&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>

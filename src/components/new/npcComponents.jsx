@@ -71,6 +71,7 @@ export function NPCCategoryGroup({
   canAuthorNpc = false,
 }) {
   const [open, setOpen] = useState(true);
+  const mobile = useIsMobile();
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
   const filtered = group.filter(npc => {
@@ -96,11 +97,11 @@ export function NPCCategoryGroup({
     <div style={{marginBottom:14}}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
-        <span style={{fontSize:FS.xs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
         {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
+          <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
         }
-        <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
       {open && sorted.map((npc, index) => (
@@ -141,13 +142,13 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
+              <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
             </div>
             <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
-          <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>
       </button>
       {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
@@ -167,7 +168,7 @@ export function ConflictCard({conflict:c}) {
   return (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
-        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
       <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
@@ -321,10 +322,10 @@ function NPCInlineCard({
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
-            <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
             {nativeRole}
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
             {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
@@ -352,7 +353,7 @@ function NPCInlineCard({
             <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
           </span>
         )}
-        <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
       </button>
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
@@ -365,11 +366,11 @@ function NPCInlineCard({
           )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
           {(npc.corrupt || npc.ousted) && (
-            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
               {npc.corrupt ? (
                 // W-C5: the lifecycle stage tunes the badge — a historicized compromise
                 // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
@@ -405,7 +406,7 @@ function NPCInlineCard({
           {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the
               mover wrote the mirror; DM-SECRET by construction (§15). */}
           {wLine && (
-            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:chromeFontSize(FS.xs, mobile)}}>
               {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
               <span style={{
                 fontWeight:800,
@@ -446,7 +447,7 @@ function NPCInlineCard({
           )}
           {(npc.secret || authorEditMode) && (
             <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
-              <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
+              <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
               {canAuthorNpc ? (
                 <EditableText
                   value={secretText}

@@ -13,6 +13,7 @@ import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE s
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -43,6 +44,9 @@ function characterSentence(r) {
 
 // ── Stacked faction power bar ─────────────────────────────────────────────────
 function FactionBar({ factions }) {
+  // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
+  // empty-roster early return so the hook order is stable.
+  const mobile = useIsMobile();
   const total = factions.reduce((s,f)=>s+(f.power||0),0)||100;
   if (!factions.length) return null;
   const modStyle={
@@ -57,7 +61,7 @@ function FactionBar({ factions }) {
           const pct=Math.round((f.power||0)/total*100);
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
           return <div key={i} style={{flex:pct,background:c,display:'flex',alignItems:'center',justifyContent:'center',minWidth:pct>5?undefined:0,overflow:'hidden'}}>
-            {pct>11&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,padding:'0 3px'}}>{pct}%</span>}
+            {pct>11&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.white,padding:'0 3px'}}>{pct}%</span>}
           </div>;
         })}
       </div>
@@ -70,9 +74,9 @@ function FactionBar({ factions }) {
             <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.faction}</span>
             {mods.slice(0,2).map((mod,j)=>{
               const ms=modStyle[mod]||{c:'#6b5340',bg:'#f5f0e8',br:'#c8b89a',label:mod};
-              return <span key={j} style={{fontSize:FS.micro,fontWeight:600,color:ms.c,background:ms.bg,border:`1px solid ${ms.br}`,padding:'0 4px',letterSpacing:'0.03em',textTransform:'uppercase',flexShrink:0}}>{ms.label}</span>;
+              return <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:ms.c,background:ms.bg,border:`1px solid ${ms.br}`,padding:'0 4px',letterSpacing:'0.03em',textTransform:'uppercase',flexShrink:0}}>{ms.label}</span>;
             })}
-            <span style={{fontSize:FS.xs,fontWeight:700,color:c,flexShrink:0}}>{f.power}%</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:c,flexShrink:0}}>{f.power}%</span>
           </div>;
         })}
       </div>
@@ -84,11 +88,12 @@ function FactionBar({ factions }) {
 // Extracted to module scope so React Compiler can memoize it cleanly.
 // Used as <SitTile/> in the SITUATION ROW below.
 function SitTile({ label, value, color, sub }) {
+  const mobile = useIsMobile();
   return (
     <div style={{flex:1,minWidth:0,background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px'}}>
-      <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
+      <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
       <div style={{fontSize:FS.sm,fontWeight:700,color:ink,lineHeight:1.3,marginBottom:sub?2:0}}>{value}</div>
-      {sub&&<div style={{fontSize:FS.xxs,color:muted,lineHeight:1.3}}>{sub}</div>}
+      {sub&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:muted,lineHeight:1.3}}>{sub}</div>}
     </div>
   );
 }
@@ -169,7 +174,7 @@ function SummaryTab({ settlement:r }) {
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:10,marginBottom:8}}>
           <div style={{minWidth:0,flex:1}}>
             <div style={{...serif,fontSize:isMobile?22:28,fontWeight:600,color:swatch['#C49A3C'],lineHeight:1.1,marginBottom:4}}>{name}</div>
-            <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {formatCount(pop)} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
+            <div style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {formatCount(pop)} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
           <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
             {copied?'✓ Copied':'Copy'}
@@ -186,11 +191,11 @@ function SummaryTab({ settlement:r }) {
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'14px 16px',background:`${v.colour}10`}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:8}}>
               <span style={{...serif,fontSize: FS['18'],fontWeight:700,color:v.colour}}>{v.label}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
+              <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:swatch.white,background:v.colour,padding:'2px 7px',letterSpacing:'0.07em'}}>ACTIVE CRISIS</span>
             </div>
             <p style={{fontSize:FS.md,color:ink,lineHeight:1.55,marginBottom:8}}>{v.summary}</p>
             <div style={{borderTop:`1px solid ${v.colour}35`,paddingTop:8}}>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:v.colour,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:6}}>Hook:</span>
+              <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:v.colour,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:6}}>Hook:</span>
               <span style={{fontSize:FS.sm,color:swatch['#3A2A10'],fontStyle:'italic',lineHeight:1.45}}>{v.crisisHook}</span>
             </div>
           </div>
@@ -199,13 +204,13 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── ARRIVAL SCENE ────────────────────────────────────────────────── */}
       {r.arrivalScene&&<div style={{background:swatch.inkMag,padding:'14px 18px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:8}}>Arrival</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:8}}>Arrival</div>
         <p style={{...serif,fontSize: FS['14'],color:swatch['#F0E8D8'],lineHeight:1.8,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
       </div>}
 
       {/* Pressure sentence if no arrivalScene */}
       {r.pressureSentence&&!r.arrivalScene&&<div style={{background:stresses.length?'#faf6ef':'#1c1409',border:stresses.length?'1px solid #e0d0b0':'1px solid #3a2a10',borderLeft:stresses.length?'3px solid #a0762a':undefined,padding:'10px 14px',marginBottom:14}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Current Situation</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Current Situation</div>
         <p style={{fontSize:FS.md,color:stresses.length?'#3a2a10':'#f0e8d8',lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>
       </div>}
 
@@ -227,22 +232,22 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>
-        <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Power & Conflict</div>
         <FactionBar factions={allFactions.slice(0,5)}/>
-        {ps?.recentConflict&&<p style={{fontSize:FS.xs,color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
+        {ps?.recentConflict&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.danger,marginTop:8,lineHeight:1.4}}>{ps.recentConflict}</p>}
         {allConflicts.length>0&&<>
           <div style={{height:1,background:swatch['#C0CCE8'],margin:'10px 0'}}/>
-          <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>Active Conflicts</div>
+          <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:6}}>Active Conflicts</div>
           <div style={{display:'flex',flexDirection:'column',gap:5}}>
             {allConflicts.map((c,i)=>{
               const iHigh=c.intensity==='high';
               return <div key={i} style={{display:'flex',alignItems:'flex-start',gap:8,padding:'6px 8px',background:swatch['#FAF8F4'],borderLeft:`3px solid ${iHigh?'#8b1a1a':'#a0762a'}`}}>
                 <div style={{flex:1,minWidth:0}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:ink}}>{c.parties?.[0]}</span>
-                  <span style={{fontSize:FS.xs,color:muted}}> vs </span>
+                  <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:muted}}> vs </span>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:ink}}>{c.parties?.[1]}</span>
-                  <span style={{fontSize:FS.xxs,fontWeight:700,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf4e8',padding:'0 4px',marginLeft:6}}>{iHigh?'HIGH':'MOD'}</span>
-                  {c.issue&&<p style={{fontSize:FS.xs,color:second,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
+                  <span style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf4e8',padding:'0 4px',marginLeft:6}}>{iHigh?'HIGH':'MOD'}</span>
+                  {c.issue&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:second,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
                 </div>
               </div>;
             })}
@@ -252,14 +257,14 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── PROMINENT RELATIONSHIP ────────────────────────────────────────── */}
       {pr?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:12}}>
-        <div style={{fontSize:FS.xxs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{pr.phrasing}</p>
-        <p style={{fontSize:FS.xxs,color:muted,margin:'5px 0 0'}}>→ See Relationships tab for the full web.</p>
+        <p style={{fontSize:proseFontSize(FS.xxs, isMobile),color:muted,margin:'5px 0 0'}}>→ See Relationships tab for the full web.</p>
       </div>}
 
       {/* ── KEY FIGURES (roster grid) ─────────────────────────────────────── */}
       <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #3d2b1a',padding:'12px 14px',marginBottom:12}}>
-        <div style={{fontSize:FS.xxs,fontWeight:800,color:swatch.inkMag2,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Key Figures</div>
+        <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:swatch.inkMag2,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:10}}>Key Figures</div>
         {topNPCs.length>0
           ?<div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:'8px 16px'}}>
             {topNPCs.map((v,i)=>{
@@ -271,13 +276,13 @@ function SummaryTab({ settlement:r }) {
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{display:'flex',alignItems:'baseline',gap:5,marginBottom:2,flexWrap:'wrap'}}>
                     <span style={{fontSize:FS.md,fontWeight:700,color:ink}}>{v.name}</span>
-                    <span style={{fontSize:FS.xxs,color:muted}}>{v.title}</span>
-                    {v.influence==='high'&&<span style={{fontSize:FS.micro,color:gold,fontWeight:700}}>●●●</span>}
+                    <span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:muted}}>{v.title}</span>
+                    {v.influence==='high'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),color:gold,fontWeight:700}}>●●●</span>}
                   </div>
                   {visibleTraits.length>0&&<div style={{display:'flex',gap:3,flexWrap:'wrap',marginBottom:3}}>
-                    {visibleTraits.map((t,j)=><span key={`${t.key}-${j}`} title={t.value} style={{fontSize:FS.xxs,color:second,background:swatch['#EDE3CC'],padding:'0 4px'}}>{t.label}: {t.value}</span>)}
+                    {visibleTraits.map((t,j)=><span key={`${t.key}-${j}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:second,background:swatch['#EDE3CC'],padding:'0 4px'}}>{t.label}: {t.value}</span>)}
                   </div>}
-                  {(v.goal?.short||v.goals?.[0])&&<p style={{fontSize:FS.xs,color:swatch.inkMag2,margin:0,lineHeight:1.3}}>
+                  {(v.goal?.short||v.goals?.[0])&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch.inkMag2,margin:0,lineHeight:1.3}}>
                     <span style={{color:gold,fontWeight:700}}>→ </span>{v.goal?.short||v.goals?.[0]}
                   </p>}
                 </div>
@@ -290,14 +295,14 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── PLOT HOOKS (collapsible) ───────────────────────────────────────── */}
       {allHooks.length>0&&<div style={{border:'1px solid #c8b0e0',borderLeft:'3px solid #5a2a8a',overflow:'hidden',marginBottom:12}}>
-        <Button variant="ghost" aria-expanded={hooksOpen} aria-pressed={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{hooksOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
+        <Button variant="ghost" aria-expanded={hooksOpen} aria-pressed={hooksOpen} onClick={()=>setHooksOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:muted}}>{hooksOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:hooksOpen?'#f4f0fd':'#f8f4fd',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
+          <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.magic,textTransform:'uppercase',letterSpacing:'0.06em'}}>Plot Hooks ({allHooks.length})</span>
         </Button>
         {hooksOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #c8b0e0'}}>
           <div style={{display:'flex',gap:5,flexWrap:'wrap',marginBottom:10}}>
             {Object.entries(hookCounts).map(([cat,count])=>{
               const meta=PLOT_HOOK_CATEGORIES[cat]||PLOT_HOOK_CATEGORIES.tension;
-              return <span key={cat} style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,background:`${meta.color}12`,border:`1px solid ${meta.color}30`,padding:'1px 6px'}}>{meta.label} {count}</span>;
+              return <span key={cat} style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:meta.color,background:`${meta.color}12`,border:`1px solid ${meta.color}30`,padding:'1px 6px'}}>{meta.label} {count}</span>;
             })}
           </div>
           <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -307,14 +312,14 @@ function SummaryTab({ settlement:r }) {
               <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:ANCHOR_OFFSET}}>
                 <span style={{width:4,alignSelf:'stretch',background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
                 <div style={{flex:1,minWidth:0}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,marginRight:6}}>{tokenCase(v.source)}</span>
-                  {v.role&&<span style={{fontSize:FS.xxs,color:muted,marginRight:6}}>{v.role}</span>}
-                  {v.sub&&<span style={{fontSize:FS.xxs,color:v.accent?meta.color:muted,fontStyle:v.accent?'normal':'italic'}}>{v.sub}</span>}
+                  <span style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:meta.color,marginRight:6}}>{tokenCase(v.source)}</span>
+                  {v.role&&<span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:muted,marginRight:6}}>{v.role}</span>}
+                  {v.sub&&<span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:v.accent?meta.color:muted,fontStyle:v.accent?'normal':'italic'}}>{v.sub}</span>}
                   <span style={{fontSize:FS.md,color:ink,lineHeight:1.5}}>{v.text}</span>
                   {v.links?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:4}}>
                     {v.links.slice(0,4).map((link,j)=>{
                       const anchor=entityAnchor(link.kind, { id:link.id, name:link.label });
-                      return <a key={`${link.kind}-${j}`} href={`#${anchor}`} style={{fontSize:FS.micro,fontWeight:700,color:meta.color,background:`${meta.color}10`,border:`1px solid ${meta.color}25`,padding:'1px 5px',textDecoration:'none'}}>{link.label}</a>;
+                      return <a key={`${link.kind}-${j}`} href={`#${anchor}`} style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:meta.color,background:`${meta.color}10`,border:`1px solid ${meta.color}25`,padding:'1px 5px',textDecoration:'none'}}>{link.label}</a>;
                     })}
                   </div>}
                 </div>
@@ -326,26 +331,26 @@ function SummaryTab({ settlement:r }) {
 
       {/* ── SETTING accordion ─────────────────────────────────────────────── */}
       {(firstQuarter||spatial?.layout||hist?.historicalCharacter||Array.isArray(reason))&&<div style={{border:'1px solid #c8d8b0',overflow:'hidden',marginBottom:10}}>
-        <Button variant="ghost" aria-expanded={settingOpen} aria-pressed={settingOpen} onClick={()=>setSettingOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:FS.xs,color:muted}}>{settingOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
+        <Button variant="ghost" aria-expanded={settingOpen} aria-pressed={settingOpen} onClick={()=>setSettingOpen(v=>!v)} fullWidth trailingIcon={<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:muted}}>{settingOpen?'▲':'▼'}</span>} style={{justifyContent:'space-between',padding:'9px 13px',background:settingOpen?'#edf5e8':'#f4faf0',border:'none',borderRadius:0,WebkitTapHighlightColor:'transparent'}}>
+          <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Setting & Context</span>
         </Button>
         {settingOpen&&<div style={{padding:'12px 14px',borderTop:'1px solid #c8d8b0'}}>
           {/* Layout + historical character */}
           {(spatial?.layout||hist?.historicalCharacter)&&<div style={{display:'flex',gap:16,flexWrap:'wrap',marginBottom:8}}>
-            {spatial?.layout&&<p style={{fontSize:FS.xs,fontWeight:600,color:swatch.inkMag2,margin:0,flex:'1 1 140px'}}>{spatial.layout}</p>}
-            {hist?.historicalCharacter&&<p style={{fontSize:FS.xs,color:second,fontStyle:'italic',margin:0,flex:'1 1 120px'}}>{hist.historicalCharacter}</p>}
+            {spatial?.layout&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),fontWeight:600,color:swatch.inkMag2,margin:0,flex:'1 1 140px'}}>{spatial.layout}</p>}
+            {hist?.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:second,fontStyle:'italic',margin:0,flex:'1 1 120px'}}>{hist.historicalCharacter}</p>}
           </div>}
           {/* All quarters listed compactly */}
           {spatial?.quarters?.length>0&&<div style={{display:'flex',flexDirection:'column',gap:5,marginBottom:10}}>
             {spatial.quarters.map((q,i)=><div key={i} style={{display:'flex',gap:8,alignItems:'baseline'}}>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],flexShrink:0,minWidth:130}}>{q.name}</span>
-              <span style={{fontSize:FS.xs,color:swatch.inkMag3}}>{q.location}</span>
-              {q.landmarks?.length>0&&<span style={{fontSize:FS.xxs,color:MUTED}}>{q.landmarks.slice(0,2).join(', ')}</span>}
+              <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch['#1A4A2A'],flexShrink:0,minWidth:130}}>{q.name}</span>
+              <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag3}}>{q.location}</span>
+              {q.landmarks?.length>0&&<span style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED}}>{q.landmarks.slice(0,2).join(', ')}</span>}
             </div>)}
           </div>}
-          {spatial?.tradeAccess&&<p style={{fontSize:FS.xs,color:second,margin:'0 0 6px',fontStyle:'italic'}}>Access: {spatial.tradeAccess}</p>}
+          {spatial?.tradeAccess&&<p style={{fontSize:proseFontSize(FS.xs, isMobile),color:second,margin:'0 0 6px',fontStyle:'italic'}}>Access: {spatial.tradeAccess}</p>}
           {Array.isArray(reason)&&reason.length>0&&<div>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Why This Settlement Exists</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:4}}>Why This Settlement Exists</div>
             {reason.map((line,i)=><p key={i} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,paddingLeft:10,borderLeft:'2px solid #e0d0b0',margin:'0 0 4px'}}>{line}</p>)}
           </div>}
           {r.pressureSentence&&stresses.length>0&&<div style={{marginTop:10,background:swatch['#F7F0E4'],borderLeft:'3px solid #a0762a',padding:'7px 10px'}}>
@@ -358,24 +363,24 @@ function SummaryTab({ settlement:r }) {
       <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
         <button type="button" aria-expanded={instOpen} onClick={()=>setInstOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
-            <span style={{fontSize:FS.xs,color:muted}}>{g.length} total</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:second,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:muted}}>{g.length} total</span>
           </div>
           <div style={{display:'flex',gap:8,alignItems:'center'}}>
             {catOrder.filter(c=>instByCat[c]?.length).map(c=>(
-              <span key={c} style={{fontSize:FS.xxs,fontWeight:600,color:catColor(c),background:`${catColor(c)}15`,padding:'1px 6px'}}>{instByCat[c].length}</span>
+              <span key={c} style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:600,color:catColor(c),background:`${catColor(c)}15`,padding:'1px 6px'}}>{instByCat[c].length}</span>
             ))}
-            <span style={{fontSize:FS.xs,color:muted,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:muted,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
           </div>
         </button>
         {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
           {catOrder.filter(cat=>instByCat[cat]?.length).map(cat=>(
             <div key={cat} style={{marginBottom:10}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:catColor(cat),marginBottom:5}}>{tokenCase(cat)} ({instByCat[cat].length})</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:catColor(cat),marginBottom:5}}>{tokenCase(cat)} ({instByCat[cat].length})</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';
-                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:FS.xs,padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{inst.name}</span>;
+                  return <span id={entityAnchor('institution', inst)} key={i} style={{fontSize:chromeFontSize(FS.xs, isMobile),padding:'2px 8px',background:`${srcColor}10`,border:`1px solid ${srcColor}30`,color:ink,fontWeight:500,scrollMarginTop:ANCHOR_OFFSET}}>{inst.name}</span>;
                 })}
               </div>
             </div>

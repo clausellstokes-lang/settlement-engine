@@ -29,6 +29,8 @@
 
 import { FS, MUTED } from '../theme.js';
 import { economyFreshnessNote } from '../../domain/display/economyFreshness.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {object} props
@@ -44,7 +46,10 @@ export default function EconomyFreshnessNote({
   margin = '0 0 10px',
   color = MUTED,
 }) {
+  // THE PHONE CHROME FLOOR — a dated freshness note read beneath a tally, bound
+  // above the no-note early return so the hook order is stable on a fresh town.
+  const mobile = useIsMobile();
   const text = economyFreshnessNote(settlement, variant);
   if (!text) return null;
-  return <p style={{fontSize:FS.xxs,color,fontStyle:'italic',margin}}>{text}</p>;
+  return <p style={{fontSize:proseFontSize(FS.xxs, mobile),color,fontStyle:'italic',margin}}>{text}</p>;
 }
