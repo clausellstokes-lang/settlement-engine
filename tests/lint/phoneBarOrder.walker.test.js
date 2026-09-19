@@ -96,6 +96,7 @@ describe('THE PHONE BAR — one order, derived from the painting', () => {
     expect(authRoutes, 'presence control: the auth routes are still declared').toContain('signin');
     const navIds = NAV.map((item) => item.id);
     for (const view of authRoutes) {
+      // anchored: navIds is the live nav table's own id list, and the presence control above proved authRoutes still declares signin.
       expect(navIds, `${view} reached the nav table — an auth route must carry no nav block`).not.toContain(view);
     }
   });

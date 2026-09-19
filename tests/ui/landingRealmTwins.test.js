@@ -75,6 +75,7 @@ describe('the landing realm photograph and its WebP twin', () => {
     // falling back between them, so naming both twins here would make a capable
     // engine download the PNG as well — the double-download the shared probe
     // exists to prevent.
+    // anchored: the same css was proven to name the WebP twin four lines above, so the PNG's absence is a real one.
     expect(css, 'both twins are named, so a capable engine fetches both').not.toContain(`${PNG}'`);
     // The plate still sits underneath, and it is not a twin.
     expect(css, 'the parchment plate is no longer beneath the photograph').toContain(REALM_MAP_PLATE);

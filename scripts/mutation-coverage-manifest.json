@@ -2774,12 +2774,14 @@
       "kindNote": "rationale entries carry EXECUTED evidence; the in-file controls above run on every ordinary run."
     },
     "tests/build/landingFixtureFreshness.test.js": {
-      "kind": "mutation",
-      "label": "landing-fixture/a fixture regenerated from a moved tree reds the freshness arm (the emitter's --check)"
+      "kind": "rationale",
+      "rationale": "THE LANDING FIXTURE'S FRESHNESS (ODQ 934.30 car 1). Its catching power is EXECUTED IN THE TEST BODY: the emitter's own --check arm (scripts/generate-landing-fixture.mjs) re-derives the fixture from the live engine and the test asserts the committed bytes equal the derivation, so a fixture that outlives a generator change reds with the moved fields named (lane 33 measured 13 moved fields at the tip before regenerating). WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the target is a GENERATED file — a sweep plant that edited it would be undone by the very regeneration the arm exists to demand, and the sweep's revert is a checkout over a file a concurrent lane may regenerate. Recorded 2026-09-19 by the chair.",
+      "kindNote": "rationale rather than a standing sweep plant: the invariant's target is generated, and regeneration is the check."
     },
     "tests/copy/landingProseGrounding.test.js": {
-      "kind": "mutation",
-      "label": "landing-copy/prose quoting a fixture fact reds when the fixture's field or the copy's beat moves (pairs bind both sides)"
+      "kind": "rationale",
+      "rationale": "THE LANDING PROSE IS GROUNDED IN THE FIXTURE (ODQ 934.30 car 8). Its catching power is EXECUTED IN THE TEST BODY: every quoted fact in src/copy/landing.js is bound to the field of the regenerated fixture it came from — the population as digits and as words, the week count, the six advance events by week number and headline noun as PAIRS (the engine writes 'criminal' where the prose says 'crime', so each pair binds both sides and neither passes alone), the receipts, the neighbour names, the retired keys — so a regeneration that moves a field reds the sentence that went stale, and a rewrite that drops a fact reds against the field. WHY A RATIONALE RATHER THAN A STANDING SWEEP PLANT: the two sides of every binding are a generated file and the copy dictionary, both surfaces a concurrent lane holds, and the sweep's revert is a checkout. Recorded 2026-09-19 by the chair.",
+      "kindNote": "rationale rather than a standing sweep plant: both sides of the binding are shared surfaces; the in-body pair bindings are the substitute."
     }
   },
   "meta": {

@@ -77,6 +77,7 @@ describe('THE GATE — one range, one capability flag', () => {
     expect(copy.body).toContain('every dial rolled');
     // The sizes come from the shared derivation, so the two halves of the offer agree.
     expect(copy.body).toContain('thorpe, city, and metropolis');
+    // anchored: copy.body was just proven to carry the derived sizes, so an unreplaced {sizes} would be a real leak in a real body.
     expect(copy.body, 'the sentence still carries an uninterpolated placeholder').not.toContain('{sizes}');
   });
 });

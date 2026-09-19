@@ -757,7 +757,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/ui/economicsTabFlow.test.js': 1,
   'tests/ui/heraldForecast.test.jsx': 2,
   'tests/ui/heraldHeadline.test.jsx': 5,
-  'tests/ui/homeHeroAnonGauge.test.jsx': 3,
   'tests/ui/howToUseLivingWorld.test.jsx': 2,
   'tests/ui/libraryLivingSurface.test.jsx': 1,
   'tests/ui/mapDirtyFingerprint.test.js': 1,

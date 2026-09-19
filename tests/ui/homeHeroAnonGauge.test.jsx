@@ -83,8 +83,11 @@ describe('HomeHero — the anon gauge law', () => {
     expect(values).toContain('village');
     expect(values).toContain('town');
     // …and the three capped stations are NOT rendered at all (the law).
+    // anchored: values carries hamlet, village and town (proven above) and has exactly three entries (proven below).
     expect(values).not.toContain('thorp');
+    // anchored: the same values list, proven populated above and exactly three long below.
     expect(values).not.toContain('city');
+    // anchored: the same values list, proven populated above and exactly three long below.
     expect(values).not.toContain('metropolis');
     expect(values).toHaveLength(3);
   });
@@ -187,10 +190,8 @@ describe('HomeHero — the free-today line tells the truth about the two buckets
     expect(text).not.toMatch(/thorp through metropolis/);
     // …and the sizes the reader already spent are not sold back to them.
     for (const key of ANON_SIZES) {
-      expect(
-        signInUnlocksSizes(),
-        `the unlock sentence offers ${key}, which an anonymous visitor already had`,
-      ).not.toContain(SIZE_LABEL[key].toLowerCase());
+      // anchored: signInUnlocksSizes() is the derived unlock list this file proves non-empty and thorpe-bearing above.
+      expect(signInUnlocksSizes(), `the unlock sentence offers ${key}, which an anonymous visitor already had`).not.toContain(SIZE_LABEL[key].toLowerCase());
     }
   });
 });
