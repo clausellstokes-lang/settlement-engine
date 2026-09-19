@@ -14,12 +14,19 @@
 ## incoming volume's own sections.
 ## ⛔⛔ **LANDING IS NOT SEALING, AND THIS VOLUME IS NOT SEALED.** It is a DRAFT
 ## AT ROUND SEVEN — line 3 below says `DRAFT for the validation chair`, there is
-## no §9 and no attestation block, and REVISION 6's four rulings are confirmed by
-## nobody. The fold gives it a canonical home, a queue position and a wave count;
-## it does not close it. Open at landing: 5 chair questions (§7), 4 owner-gated
-## parked rows (§7a, count pinned at four by chair ruling P4), 2 chair-owed
-## dispositions (§7b), 1 recorded deferral. A reader who reads "landed" as
-## "sealed" has been warned here first.
+## no §9 and no attestation block. ⏱ SUPERSEDED BY THE SEVENTH PASS
+## (2026-08-07, recorded below the REVISION 6 block): REVISION 6's four
+## rulings were adversarially confirmed and E5 is CLOSED under binding
+## conditions C1/C2/C3 (`EP_CHAIR_RULINGS.md` + the round-7 confirm are
+## the record). The fold gives it a canonical home, a queue position and
+## a wave count. State at the seventh pass: ALL FIVE §7 chair questions
+## RULED (Q1=ARM A · Q2=LINEAR-WITH-DISCARD · Q3=ACCEPT-AND-DECLARE ·
+## Q4=`advanceEpochEnabled` · Q5 split), both §7b dispositions ruled
+## (B1=(a) · B2=(a)); 4 owner-gated parked rows (§7a, count pinned at
+## four by chair ruling P4) remain owner-queue entries; 1 recorded
+## deferral. A reader who reads "landed" as "sealed" has been warned
+## here first — and a reader who reads "open" as current has now been
+## warned too.
 ## ⛔ EP CAN NEVER SHARE A CYCLE — it is the only program that edits
 ## `pulseKernel.js`, where PRNG call order IS the stream identity.
 ## ✅ §5's VERIFY-AT-FOLD banner CAME DUE AND WAS DISCHARGED AT THIS FOLD: the
@@ -218,6 +225,18 @@
 ## QUEUE POSITION: POST-FOLD. §5 is written against the LIVE `docs/SOL_QUEUE.md` and the
 ## fold package's own insertion text; every count there is marked MEASURED or
 ## VERIFY-AT-FOLD, never inherited (§5 preamble).
+
+## ⭐⭐ THE SEVENTH PASS — THE ROUND-7 CONFIRM + E5 CLOSURE (2026-08-07).
+## The adversarial confirmation REVISION 6 lacked: all four G-rulings
+## re-measured and confirmed; E5 ("whether EP builds without a round-7
+## closure") CLOSED under binding conditions C1 (the DM-door pin repair
+## — approval-door, three guardrails, mint-only mutant, the
+## FORCE_RESETTLE two-family row — wave-scoped, lands BEFORE slice A
+## builds), C2 (the draw-count parity claim EXECUTED before EP-1 lands;
+## a divergence is a STOP-and-report, never a repair in place) and C3
+## (EP's rows compose LAST in every parent table). The full record:
+## `EP_CHAIR_RULINGS.md` + the round-7 confirm document. This block is
+## the pointer, not the restatement.
 
 ---
 
@@ -440,8 +459,13 @@ ENTROPY-ROOT census (anchored on reads of `worldState.rngSeed` however the recei
 variable is named, followed across module boundaries to EVERY consumer) rather than a
 `createPRNG` census. **THE CENSUS IS CLOSED BY TWO CONSECUTIVE EMPTY SWEEPS**, executed:
 sweep A enumerated all 68 textual `rngSeed` occurrences in `src` and dispositioned each;
-sweep B enumerated all **37** `createPRNG` call sites in `src/domain` (⚠ revision 2 said
-38 — RE-RUN AND CORRECTED, chair ruling P7), all 13 `hash01` consumer modules and all
+sweep B enumerated all `createPRNG` call sites in `src/domain`
+(⚠ RE-DERIVE-AT-COMPILE — this figure ROTS: 37 at the closure re-run,
+**38 measured at `a6fd6395`** with a second in-window mover since; the
+whole-src count moved 47 → **48**; the closure table is the METHOD
+record, never the numbers — C-EPF-1's baseline-derivation law), all
+`hash01` consumer modules (13 at the sweep, **+1 in-window** — the
+volume's TEN was refuted) and all
 **32** hash-helper definitions in `src` (⚠ revision 2 said 31 — corrected); sweep C
 matched every
 `(hash01|fnv1a32|fnv1a|hashUnit)` and `createPRNG` key template containing a
@@ -1682,7 +1706,7 @@ that law asked for in the first place.
 > **THE GATE, BY SYMBOL (MEASURED at HEAD).** File `tests/lib/spatialLedgerCoverage.walker.test.js`,
 > `describe('spatialUsage ledger-coverage walker (lib-infra-copy-1)')`. Its
 > **`writtenLedgerKeys()`** walks `join(ROOT, 'src', 'domain')` recursively, excluding only
-> the accessor DEFINITION `src/domain/spatial/distanceRead.js` (`ACCESSOR_DEF`), and resolves
+> the accessor DEFINITION `src/domain/spatial/spatialLedgerAccess.js` (`ACCESSOR_DEF` — the walker's own constant; the `distanceRead.js` cite this line carried contradicted the block's own quotation two paragraphs later), and resolves
 > BOTH spellings of a write — **`WRITE_LITERAL_RE`** (a quoted key) and **`WRITE_CONST_RE`**
 > (an UPPER_SNAKE `_LEDGER` / `_KEY` / `_LEDGER_KEY` identifier, resolved to its string value
 > through **`ledgerKeyConstants()`**). Its test
@@ -2976,9 +3000,13 @@ different epochs composes EIGHT DIFFERENT family-1 keys LIT — including a diff
 choice — and BYTE-IDENTICAL keys DARK, equal to the LITERAL strings HEAD produces, under the
 four hostile seed inputs**; the SINGLE-WRITER source scan over `src` with an executed
 second-writer plant (a `setSpatialLedger(…, 'advanceEpoch', …)` anywhere but the leaf REDS);
-⭐ **the DM-DOOR pin (§3b.1b's J-EP-15): `mintRealmVerbProposal` on a NEVER-LIT world composes
-today's literal key, and on a lit world composes the key bearing that world's own `latest`
-epoch** — both directions, so the door's behaviour is recorded rather than found.
+⭐ **the DM-DOOR pin — REPAIRED PER C1 (round-7 E5 ruling; the spelling
+this block previously carried was VACUOUS): the pin drives the APPROVAL
+DOOR, not the mint alone, and lands WITH the round's THREE guardrails,
+the mint-only mutant and the FORCE_RESETTLE two-family row — wave-scoped,
+landing BEFORE slice A builds. `EP_CHAIR_RULINGS.md` E5/C1 carries the
+full repaired spelling; this block points and does not restate** — both
+directions, so the door's behaviour is recorded rather than found.
 *Dormancy, slice A:* the per-site suite of §3b.3 over the FIFTEEN family-1 compositions with
 the ledger absent under four hostile seed inputs, ⭐ **plus the M3 arm the writer adds** — over
 an ASPATIAL fixture, a multi-tick advance with the flag ABSENT leaves `Object.keys(worldState)`
@@ -3264,8 +3292,11 @@ the live volume … a wrong count in a header is exactly the kind of inherited p
 > PLAUSIBLE 75/66, **the tree wins and the disagreement is a STOP-and-report**, not a
 > silent re-base. EP's rows compose AFTER the fold's rows in every table.
 
-1. **FP §3 THE FLAG FAMILY — row 53** (MEASURED: 43 live + 1 ES + 8 WY = 52; EP is next):
-   `| 53 | advanceEpochEnabled | EP-1 | the advance-epoch stream segment: living futures
+1. **FP §3 THE FLAG FAMILY — row 63, THE LANDED ROW** (the volume's own
+   promotion banner records 63; the drafted "row 53" arithmetic is
+   superseded — re-confirm the flag arithmetic by counting the landed
+   §3 table, rulings §5.3 step 6, BINDING on EP-0):
+   `| 63 | advanceEpochEnabled | EP-1 | the advance-epoch stream segment: living futures
    on every user advance, recorded nonces for byte-exact replay |`. The existing-flags
    paragraph gains: "`advanceEpochEnabled` has no upstream conjunction — it gates a
    stream segment, not a subject; EP-3's side-channel disposition may not light before
@@ -3657,8 +3688,12 @@ read site is inside `pulseKernel.js` (§0.3 R9, RS-2), so Arm A now costs **two 
 token edits on the banked pulse mouth plus ONE DECLARED NEW LINE there (J-EP-11)** — the
 only line this entire program adds to that file. Arm B costs zero kernel edits by
 construction, because it re-roots nothing in family 2. **The recommendation is UNCHANGED —
-Arm A — but the trade the chair is signing is now "one line on `pulseKernel.js`" and not
-"no kernel cost", and J-EP-11 records both the refused alternatives and the veto path
+Arm A. ⏱ PRICE SUPERSEDED (G1/J-EP-14, revision 6/round 7): the +1
+pulseKernel line moved into slice A under EITHER arm, so Arm A buys
+ZERO new `pulseKernel.js` lines — the Q1 ruling's own §1 states the
+corrected trade at length; this paragraph's "one line on
+`pulseKernel.js`" framing is the revision-3 price, kept as history.
+J-EP-11 records both the refused alternatives and the veto path
 (Arm B for row 1 alone).**
 
 **Q2 — The branching model.** LINEAR-WITH-DISCARD vs KEEP-BOTH-TIMELINES.
@@ -3704,7 +3739,12 @@ provenance ids — its own wave in the regen-preservation family, not here.
 ---
 
 ## §7a OWNER-GATED PARKED ROWS (extracted from EP-4 by chair ruling R7; each carries a
-## recommendation, none builds inside this program)
+## recommendation). ⏱ AUTHORITY RECONCILED (EP-F round): rows 1-3 are
+## SIGNED by the 2026-08-06 blanket sign-off; row 4 is ESCALATED. The
+## sign-off wins on AUTHORITY, this volume wins on SEQUENCING — signed
+## rows build as their OWN waves in owner-queue order, never as EP-4
+## slices; "none builds inside this program" remains true of EP's own
+## waves and is stale as a statement of authority.
 
 **A wave may not absorb an owner-gated class by calling it a repair.** These **FOUR** rows
 leave EP entirely and become owner-queue entries; EP-4 re-scopes to the remainder (§4).
@@ -3749,7 +3789,7 @@ revision 6 on** (B1 and B2), and every statement of it in this volume says TWO.
 | 1 | `src/kernel/prng.js` (the delimiter law) | `epochSuffix` is a NEW SEGMENT in a ROOT composition, never a change to `fork`'s derivation; the `epoch` family may not alias any frozen embedded-delimiter family | `prngForkLabelDelimiter.test.js` gains an `epoch` row; a change to `fork` reds it |
 | 2 | `pulseKernel.js` (R-BLD-10) | ⭐ **THE CONTRACT IS §3b.1's ENUMERATED TOKEN-EDIT LIST, not a number** (chair ruling P1; ⭐ **the list GREW in revision 4, chair ruling T1**): **SIX** edits in EP-1 at ZERO new lines, **THREE** more in EP-3 — ⭐ **the WRITER's ONE call site (edit 9) in SLICE A and the two re-roots (7, 8) in SLICE B, revision 6's split under chair ruling G1** — all three at zero new lines, at a DECLARED +1 for the leaf import, bought in SLICE A (J-EP-11); **NINE total**. Stage order and PRNG CALL ORDER untouched in every one; the seam comment cites R-BLD-10 | `sizeBaseline` tolerance-zero both directions **against the DECLARED figure per wave (EP-1: +0; ⭐ EP-3 slice A: +1; EP-3 slice B: +0)** + a source pin asserting the R-BLD-10 citation appears EXACTLY ONCE + **an edit-inventory pin: the wave's diff on this file touches ONLY the enumerated lines — ⭐ NINE of them, re-counted in revision 4 — and an unlisted edit is a STOP.** ⚠ **THE EDIT-INVENTORY PIN IS THE ONE THAT MOVED**, and it is the reason the count is stated rather than described: a pin frozen at EIGHT would have PASSED a slice-B diff that omitted the writer entirely, which is exactly the state revision 3 shipped |
 | 3 | `advanceMultiTick` (a real default-on flag) | EP absorbs nothing; every EP fence FIXES its state (J-EP-7) | a fence that does not pin it fails the anchored arm of fence 4 |
-| 4 | The dormancy estate (32 goldens · 27 fixtures · 8 oracle suites · 4 four-fence sets) | dark ⇒ no new serialized key, no changed string ⇒ zero re-records | any golden that moves is a STOP-and-report, never a re-record (FP §10.4) |
+| 4 | The dormancy estate (⚠ RE-DERIVE-AT-COMPILE — the published 32 · 27 · 8 · 4 set was refuted by fresh census: **53 goldens · 16 fixtures · 49 oracle suites · 12 four-fence sets measured at the EP-F round**, per the wave's own "VERIFY, do not assume" instruction; count at EP-1's own base) | dark ⇒ no new serialized key, no changed string ⇒ zero re-records | any golden that moves is a STOP-and-report, never a re-record (FP §10.4) |
 | 5 | `tests/store/advanceFullAutoResolve.test.js` (two cross-store byte-equality claims) | taught `options.epoch`, never weakened | the pins stay as strict as today; a relaxed assertion is a rejected diff |
 | 6 | The OUT-OF-DENOMINATOR class (`tradition:owner`, `tradition:drift`, `tradition:genesis`, `custom:window`, `xconflict:`, `successor:`, the `src/domain/display/` `fnv1a32` prose pickers, `grammarReceipt`'s `sourceEventId`) | deliberately epoch-invariant — identity facts must not wobble; VERIFIED none reads `worldState.rngSeed` | the ENTROPY-ROOT census walker classifies them; a reclassification needs a chair row |
 | 7 | Debugging tools / any consumer indexing pulse records | the cross-epoch key is the PAIR `(id, epoch)`; `pulseIdFor` stays epoch-blind (J-EP-4) | a consumer keying on `id` alone across an undo boundary is a documented ambiguity, pinned |

@@ -58,7 +58,7 @@ LANDING.** `src/domain/worldPulse/warSeatBooks.js` (515 lines) is WR-5's pure
 ruler/realm objective read. Exports: `readWarSeatBooks({worldState, snapshot,
 actorId, opponentId})` and `authoritySignatureFor(...)`. Return shape (measured):
 `{ interestKind:'realm'|'seat'|'patron', settlementWeight01, seatWeight01,
-patronWeight01, securityBand:'secure'|'contested'|'precarious'|'unseated',
+patronWeight01, securityBand:'secure'|'holding'|'precarious'|'unseated' (⚠ CORRECTED at the INT-F round — the drafted `'contested'` is not a member; the real vocabulary spells `'holding'`),
 lawfulness01/malice01 + bands, continueBias01, peaceBias01, factionId?,
 factionName?, patron* fields }`. It already composes THE THREE §2-row-10
 substrates: security from legitimacy (0.35) + faction share (0.25) + standing
@@ -128,12 +128,17 @@ composition below that touches grievance reads must declare its relationship to
 `memoryWeaveEnabled` explicitly** (§2). A dormancy proof that ignores it proves
 the wrong conjunction.
 
-**Also re-measured, still true:** SP-1..SP-7 spine infrastructure remains ABSENT
-(`postureOf`/`riskToleranceOf` grep hits only in roads modules — a different
-posture; no generic errand kernel, no confidence-stock family, no narration kit,
-no temporal walker). WR-7's envoy errands EXIST but with the closed war
+**⏱ SUPERSEDED BY LANDINGS (INT-F round):** SP-1, SP-3 and SP-4 are
+LANDED (the generic errand kernel is `errandMint.js` on the spine;
+posture reads are `courtPostureOf`/`courtRiskAppetiteOf` — CR-C4-1's
+renames, walker-guarded). The BUILD-PRECONDITION list this section
+carried is DISCHARGED, and INT-3b itself is LANDED on the spine host
+(§54's six-path shape SIGNED; §58's STOP ratified and relanded; §65's
+chain `fc8451c4 → 8401efbc → 28d2824b → d5a6c009`; the
+`emigreErrand.js` row flipped `built:true`). Historical record: WR-7's
+envoy errands predated the spine with the closed war
 vocabulary `ENVOY_PURPOSES = ['sue', 'self_parlay']`
-(envoyErrandVocabulary.js:119) — a candidate host for INT-3b but NOT SP-1
+(envoyErrandVocabulary.js:119) — once a candidate host for INT-3b, NOT SP-1
 (open question Q1). The volume's BUILD-PRECONDITION list therefore still binds:
 INT-3b (SP-1), the posture consumptions (SP-4), the SP-5 grammar, SP-6 kit, SP-7
 walker are all still unbuilt — every wave below names its degraded arm or STOP
@@ -144,9 +149,12 @@ condition for them.
 ## §2 FLAG FAMILY — law-2 shape and manifest timing (measured against the live manifest law)
 
 **Measured manifest reality (differs from the briefed idiom in one respect):**
-`ENGINE_GATED_VIRTUAL_RULE_KEYS` (simulationRules.js) holds FIVE members today
-(beliefAxesEnabled, conquestDoctrineEnabled, infoStatecraftEnabled,
-migrationRumorsEnabled, sovereigntyTradeEnabled) with matching rows in
+`ENGINE_GATED_VIRTUAL_RULE_KEYS` (simulationRules.js) holds TWENTY
+members at the INT-F stamp (⚠ RE-DERIVE at each wave's own base — the
+drafted FIVE and its hand list are the 08-04 survey; the manifest is
+walker-enforced BOTH WAYS, with `settlementPoliticsEnabled` a member at
+`simulationRules.js:278` and its authored row at
+`subsystemRowsVirtual.js:925`, the VIRTUAL lane) with matching rows in
 subsystemRowsVirtual.js. The five dark WR flags are NOT members — they certify
 in the subsystemRowsWar.js LANE instead ("Lane placement is free …
 the totality walker asserts the PARTITION, not the address"). The binding
@@ -154,11 +162,20 @@ precedent is the WW-A comment inside the manifest itself: a flag joins **in the
 SAME commit as its first real gate read AND its certification row —
 "certification tracking reality instead of preceding it."**
 
-**JUDGMENT (vetoable):** the six INT flags certify in a NEW lane file
-`subsystemRowsInterior.js` (subsystemRowsWar's shape, the add-a-row protocol in
-subsystemRowsWaves.js), and each joins `ENGINE_GATED_VIRTUAL_RULE_KEYS` in the
-same commit as its first real gate read + its lane row, with the walker
-asserting exactly that one-key delta. Rationale: the virtual cohort is the
+**⛔ RULED (§92.2, superseding the lane JUDGMENT this section carried —
+C-INTF-1's instance application):** the six INT flags are VIRTUAL keys;
+each certification row lands IN `subsystemRowsVirtual.js` with its
+`VIRTUAL_RULES` twin — `subsystemRowsInterior.js` is NOT minted
+(§P8.3's conditional STOP resolved: no new lane file without a chair
+ruling, and the ruling went the in-file way). Each flag wave lands, IN
+ITS OWN COMMIT: the manifest key + the authored row + the twin + the
+first strict by-name gate read, and prices the §49/§50 three-bill
+((a) `tests/domain/subsystemRowsVirtual.test.js` in the manifest with
+its three module-scope literal edits — bijection pin at `:407` at this
+stamp, navigate by symbol; (b) the SEVEN edge-shared bundle MODIFY rows
++ `npm run build:edge-shared`; (c) the literal `<flag>: true` drive in
+the acceptance file). The one-key delta re-measures against the landed
+manifest count at each wave's own base. Rationale: the virtual cohort is the
 correct manifest for engine-gated virtual rules; the lane file keeps the
 interior's evidence rows out of the war lane. (Open question Q4 offers the
 chair the alternative.)
@@ -283,7 +300,7 @@ second evaluator wearing a shim's clothing; a rename breaks filename-anchored
 war pins and invites the concurrent-lane revert class). The volume's module-name
 clause is satisfied by the one-evaluator PROPERTY, recorded here as the
 naming ruling. Non-war consumers import `readWarSeatBooks` directly.
-- **Files + budgets:** warSeatBooks.js (515 raw — headroom exists; new exports
+- **Files + budgets:** warSeatBooks.js (⚠ RE-MEASURE-AT-COMPILE — 588 raw at the INT-F stamp, was 515 at the survey; re-argue the budget at compile; new exports
   only, target ≤ +80 lines: the generalized `booksStandingOf` band projection +
   the change-gate signature). New leaves: `seatBooksReceipt.js` (≤200 — the
   banded receipt composer + agreement deadband + change-gate memory read),
@@ -337,7 +354,7 @@ extended settlementPolitics.js (§4 differential burden :638, succession glue
   touch factionPairLedger.js:148's caller list, coordinate by build order).
 - **Flag + fences:** same-flag completion — the four-fence set pins BOTH
   compositions dark (politics off / factionCompetition off) AND the
-  quiet_local PRESET NEGATIVE (S5: `factionCompetitionEnabled:false` at
+  quiet_local AND static_campaign PRESET NEGATIVES (⛔ C-INTF-5: `static_campaign` ALSO sets `factionCompetitionEnabled: false` — `simulationRules.js:517` beside quiet_local's `:477`; a pin covering ONE of TWO presets is half a guard; S5: `factionCompetitionEnabled:false` at
   simulationRules.js:345 ⇒ zero blocs, zero counsel, INT-3's bloc lane empty,
   while re-read/demand/émigré arms still function — the declared degraded arm,
   pinned, which the dormancy golden cannot catch).
@@ -385,11 +402,17 @@ STOP-and-report if tempted to mint pact state here).
   join-margin receipt — both small files, headroom real, but coup.js is
   live-lit: FENCE GOLDEN FIRST. The verdict receipt composer is a new leaf
   `decisionJoinReceipt.js` (≤180).
-- **INT-3b (second commit) — THE ÉMIGRÉ: BLOCKED as specced.** SP-1 is absent;
-  the envoy family's vocabulary is closed war-scope (ENVOY_PURPOSES
-  ['sue','self_parlay'] — R-note). Open question Q1 rules the host. Until
-  ruled: INT-3b does not build. The volume's own law ("the vocabulary never
-  leads the events") backs the hold. STOP-and-report is the SUCCESS mode here.
+- **INT-3b (second commit) — THE ÉMIGRÉ: ⭐ LANDED (history note).**
+  The BLOCKED-as-specced posture was correct and then DISCHARGED BY
+  EVENT: SP-1 landed, Q1 went MOOT, and INT-3b LANDED on the spine
+  host exactly as the refusal prescribed (§54's six-path shape SIGNED;
+  §58 STOP ratified, reland ordered and executed; §65's chain
+  `fc8451c4 → 8401efbc → 28d2824b → d5a6c009`; the `ambitious` row
+  flipped `built:true` with `emigreErrand.js`, taking the exact-path
+  INTERIOR layer home at `couplingInclusion.walker.test.js:217` — the
+  precedent every future INT leaf copies). The refusal-to-widen half
+  is standing law (HZ-VOCABFREEZE). The original hold text is
+  preserved by this note, not restated.
 - **Pins:** BOTH polarities at pact grain (sign-party vs refuse-party — the war
   polarity pins exist in WR-5's suite; verify then extend); THE JOIN NEGATIVE
   (hardest — a coup from pure legitimacy collapse with NO live decision
@@ -451,7 +474,7 @@ constants threadable; the module's own header still documents the deferral.
   threads {halfLifeTicks, maxLookbackTicks} × memoryHorizonMultiplierOf through
   collectMemories' call sites; ≤ +40 lines; FENCE GOLDEN FIRST, J-INT-6);
   npcLadderState.js (932 — originHolderId stamp at the inheritance sites
-  :264-266/:306/:386, ≤ +15); new leaf `foundingWound.js` (≤180 —
+  the `inherited: true` MINT sites — `npcLadderState.js:555`/`:572` at the INT-F stamp; ⚠ the drafted :264-266/:306/:386 are DECAY-CARRY sites mislabeled "the inheritance sites"; navigate by `inherited: true`, ≤ +15); new leaf `foundingWound.js` (≤180 —
   foundingWoundOf(pairKey) + grudgeLineageOf over stored {type, tick} rows).
   NOTE the existing decay math uses Math.pow (relationshipMemory.js:128) —
   pre-existing; the seam SCALES CONSTANTS ONLY and introduces no new
@@ -525,12 +548,20 @@ harness location at build and adopt its pattern.
 - **Files:** crossing detector = new leaf `legitimacyCrossings.js` (≤200 —
   reads the stock AFTER existing writers, hysteresis on the existing band
   edges, one receipt per crossing, cause-typed reseed case); certification =
-  the new `subsystemRowsInterior.js` lane (§2 JUDGMENT) with the
+  the `subsystemRowsVirtual.js` VIRTUAL lane (⛔ the `subsystemRowsInterior.js`
+  spelling is superseded — §92.2/C-INTF-1; see §2's RULED block) with the
   crossing-has-a-hit invariant (the a_coup_verdict discipline pointed at the
   typed-hit vocabulary from S1's writer census); the interior envelopes TOTAL
   over all 20 declared endings tokens by family + the TWO-PART tempo envelope
-  (regression floor per-settlement-year on the named 4-settlement fixture —
-  0.005/settlement-year baseline; fresh floor-AND-ceiling band over new kinds).
+  (⛔ NO hardcoded floor — the envelope-registration law, C-INTF-6: an INT
+  envelope REGISTERS a `distribution-envelopes.manifest.json` entry with the
+  full field set and `baseMeasurementN >= 400` AND joins the frozen
+  shrink-only totality roster in `distributionEnvelopePower.test.js`; the
+  drafted 0.005/settlement-year literal is exactly what the landed envelope
+  machinery forbids; ⚠ census note: `subsystemRowsGrowth.js:59` carries the
+  literal `'legitimacy_pressure'` as an EMERGENT_EVENT_TYPES member, not a
+  rule row — exclude it from any INT-7 census grep; fresh floor-AND-ceiling
+  band over new kinds).
 - **Pins:** crossing-has-a-hit walker; hysteresis negative (oscillation within
   a band ⇒ ZERO crossings — seed the oscillation); reseed crossing cause-typed
   as the transfer's, never a phantom hit; dormancy for the flag; every envelope
@@ -575,7 +606,7 @@ war-grade pool shape to copy (S24).
   ratchet baselines are SHARED surfaces (receipt-vacuity/shared-ratchet laws —
   re-measure at the publishing commit, per-file claims never inherited).
 
-**Build order:** INT-1 → INT-2 → INT-3a (→ INT-3b when Q1 unblocks) → INT-4 →
+**Build order:** INT-1 → INT-2 → INT-3a (INT-3b: ⭐ LANDED out of order — see its history note) → INT-4 →
 INT-5 (parallel with INT-4 by path — the only sanctioned parallelism) → INT-6
 (slice 1 then 2) → INT-7 → INT-8. The lighting order is §3 of the volume,
 unchanged; nothing here lights a flag, runs a soak, or ratifies a band.
@@ -613,11 +644,14 @@ the neighbor's spec + a tripwire pin on this side):**
 8. **FAITH stance choices (OPEN DEFERRAL — the one unreserved seam):** INT-1
    pins the ABSENCE (no faith-family module imports the books; census-asserted)
    — the pin's red IS the lift signal, per §3's rule in the volume.
-9. **SP-4b posture formula:** the books term is ABSENT-not-zero until
-   `seatBooksEnabled` lights; the spine owns the degraded-arm sentence — INT-1
-   lands the cycle-absence import pin NOW (no postureOf import) so the seam is
-   pinned from this side before SP-4 exists; if SP-4 lands without the
-   degraded-arm sentence, STOP-and-report.
+9. **SP-4b posture formula (⏱ SP-4 LANDED WITH the degraded-arm
+   sentence — the STOP is discharged from the spine's side):** the books
+   term is ABSENT-not-zero until `seatBooksEnabled` lights. The pin is
+   re-specced BY SYMBOL against the landed surface:
+   `seatBooksReceipt.js`/`warSeatBooks.js` import NOTHING from
+   `strategicPosture.js` — the landed reads are
+   `courtPostureOf`/`courtRiskAppetiteOf` (CR-C4-1), and the tripwire
+   now guards the LIT coupling, not the landing.
 10. **GRAMMAR oath-holder identity (J-INT-10):** INT-3's heir clause ships
     dormant at settlement grain; the pin asserts the clause's dormancy AND its
     activation shape, so GRAMMAR's landing lights it without an interior edit.
@@ -625,22 +659,35 @@ the neighbor's spec + a tripwire pin on this side):**
     succession trigger it would consume and ships the consumption dormant;
     STOP-and-report if tempted to write credibility state from an interior
     module (INFO owns the writer).
-12. **CW-0 registry (LIVE — couplingRegistry.js, schema v2):** every INT wave
-    landing a cross-layer read adds its row IN THE SAME COMMIT; the walker
-    already reds a read with no row. The interior's §6 rows map onto CPL-6,
-    CPL-11, CPL-15, CPL-18, CPL-20, CPL-21 — WR-5 has already claimed four
-    CPL-6/CPL-21 rows; INT rows are NEW rows on the same pairs (schema v2
-    permits multiple independently-owned reads per directional pair — measured
-    in the registry header).
+12. **CW-0 registry (LIVE — a 178-line composing head over PER-VOLUME
+    DESK LEAVES, schema v4; the drafted "couplingRegistry.js, schema
+    v2" single-file picture is superseded):** every INT wave landing a
+    cross-layer read executes §P2(b)'s FIVE-PART act IN THE SAME
+    COMMIT — leaf + head import/spread/named re-export + exact-list
+    pin + baseline entry + both-names-in-manifest (the OQ §35
+    validator rule); the walker already reds a read with no row. The
+    interior's §6 rows map onto CPL-6, CPL-11, CPL-15, CPL-18, CPL-20,
+    CPL-21 — WR-5's rows live WAR-SIDE in `couplingRegistryWar.js`
+    (:208/:151 at the INT-F stamp — the drafted `couplingRegistry.js`
+    row cites are re-pointed there); INT's CPL-6/CPL-21 additions
+    follow the landed-leaf precedent or mint
+    `couplingRegistryInterior.js` ONCE, the chair signing which at the
+    first cross-layer INT wave (§54.3: X5 is RESOLVED-NOT-PAID — the
+    first cross-layer-reading INT wave pays the mint). Schema v4
+    permits multiple independently-owned reads per directional pair.
 
 ---
 
 ## §6 OPEN CHAIR QUESTIONS (max 4, each with recommendation)
 
-**Q1 — INT-3b's errand host.** SP-1's generic errand kernel is absent; WR-7's
-envoy family exists with the closed war vocabulary
-(`ENVOY_PURPOSES ['sue','self_parlay']`). Build INT-3b on a widened envoy
-vocabulary, or hold for SP-1? **Recommendation: HOLD.** The envoy purposes are a
+**Q1 — INT-3b's errand host. ⏱ MOOT BY EVENT (INT-F round):** INT-3b
+LANDED on the spine host (§54/§58/§65) exactly as the HOLD
+recommendation prescribed; the refusal-to-widen half is standing law
+(HZ-VOCABFREEZE). Kept as history: SP-1's generic errand kernel was
+absent; WR-7's envoy family existed with the closed war vocabulary
+(`ENVOY_PURPOSES ['sue','self_parlay']`). The question was: build
+INT-3b on a widened envoy vocabulary, or hold for SP-1?
+**Recommendation (validated by event): HOLD.** The envoy purposes are a
 foreign program's closed, walker-asserted vocabulary; widening it from the
 interior is exactly the cross-program write the estate forbids. INT-3b stays
 blocked-and-recorded until SP-1 lands or the chair commissions the
@@ -661,7 +708,10 @@ every existing golden byte-identical) as the standing ruling in
 FABLE_VALIDATION_QUEUE.md, so INT-8 is never blocked; the owner may later
 upgrade to the re-record arm with the field-level diff quoted per WR-0b.
 
-**Q4 — Flag certification cohort.** The §2 JUDGMENT places the six INT flags in
+**Q4 — Flag certification cohort. ⏱ CLOSED BY STANDING LAW (§92.2;
+C-INTF-1 the instance application — no chair discretion remains beyond
+signing the instance; see §2's RULED block).** Kept as history: the §2
+JUDGMENT placed the six INT flags in
 ENGINE_GATED_VIRTUAL_RULE_KEYS + a new `subsystemRowsInterior.js` lane (WW-A
 precedent: manifest + row in the same commit as the first real gate read). The
 alternative is the war pattern (lane rows only, no manifest membership — the

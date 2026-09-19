@@ -52,10 +52,10 @@ that builds on it).
 
 | # | Claim | Live receipt | Verdict |
 |---|---|---|---|
-| S17 | "TERM_CATALOG's economic family is EXACTLY four ... at peaceTerms.js:164-191" | The FAMILY claim holds: `{tribute, reparations, restitution, resource_share}` all `family: 'economic', stream: true` — but at **`peaceTermsCatalog.js:142-151`**, NOT peaceTerms.js. The catalog was EXTRACTED (an R2-style leaf split already executed); peaceTerms.js re-exports at :1153. `sovereignty_transfer` (family `sovereignty_transfer`) joined at :185 since the survey. **TR-5's rows land in peaceTermsCatalog.js** (80 effective lines — cheap), never back in peaceTerms | **REFUTED** (location; family membership VERIFIED) |
+| S17 | "TERM_CATALOG's economic family is EXACTLY four ... at peaceTerms.js:164-191" | The FAMILY claim holds: `{tribute, reparations, restitution, resource_share}` all `family: 'economic', stream: true` — but at **`peaceTermsCatalog.js:142-151`**, NOT peaceTerms.js. The catalog was EXTRACTED (an R2-style leaf split already executed); peaceTerms.js re-exports at :1153. `sovereignty_transfer` (family `sovereignty_transfer`) joined since the survey (⚠ RE-DERIVE addresses at compile: the economic four at `:160/:161/:168/:169`, `sovereignty_transfer` at `:203` at the TL-F stamp — every `:line` in this row rots; navigate by symbol). **TR-5's rows land in peaceTermsCatalog.js** (80 effective lines — cheap), never back in peaceTerms | **REFUTED** (location; family membership VERIFIED) |
 | S18 | trade_exclusivity / market_access / toll_exemption return ZERO hits tree-wide | Re-grepped BOTH spellings each (`trade_exclusivity\|tradeExclusivity`, `market_access\|marketAccess`, `toll_exemption\|tollExemption`): zero src hits | VERIFIED ABSENT |
 | S19 | 52-week treaty year + legacy-12 provenance markers (WR-0c item 4) | `treatyClock.js:6-7` — `LEGACY_TREATY_TICKS_PER_YEAR = 12`, `CURRENT_TREATY_TICKS_PER_YEAR = INTERVAL_WEEKS.one_year`; `treatyTicksPerYearOf` :22 | VERIFIED |
-| S20 | peaceTerms "at 794/800 lines" (the R2 net-zero premise) | Effective (comment/blank-stripped) count TODAY: **766/800** (wc -l 1181). The extraction (S17) bought headroom; the R2 net-zero-seam-lines law still binds (measure with the enforcer Linter AT the publishing commit — never inherit this figure) | **REFUTED** (stale figure; law unchanged) |
+| S20 | peaceTerms "at 794/800 lines" (the R2 net-zero premise) | Effective (comment/blank-stripped) count — ⚠ RE-DERIVE-AT-COMPILE with the enforcer Linter, never inherit: **797/800 at the TL-F stamp** (three effective lines; a TR-5 seam of ≥4 effective lines is leaf-first or the wave STOPs). The extraction (S17) bought headroom; the R2 net-zero-seam-lines law still binds (measure with the enforcer Linter AT the publishing commit — never inherit this figure) | **REFUTED** (stale figure; law unchanged) |
 | S21 | Typed channels: the trade triple | `graph.js:47-64 REGIONAL_CHANNEL_TYPES` — trade_dependency, export_market, trade_route (exact) | VERIFIED |
 | S22 | trade_partner relationship rules | `relationshipEvolution.js:48+ RELATIONSHIP_RULE_MATRIX` ("neutral_to_trade_partner" …) | VERIFIED |
 | S23 | tradeWar: hysteresis + FLIP_COOLDOWN 6; escalation deposits a war INTENT through the one opener | `FLIP_COOLDOWN_TICKS = 6` tradeWar.js:81 (exact); escalation block :620-670 deposits `warIntent: { fromId, targetId }` at :670 (claim :500-599) — WR-0c item 3 confirmed landed | VERIFIED/MOVED |
@@ -82,16 +82,16 @@ that builds on it).
 | S34 | WR-7 envoy estate + WR-7b hold writer landed — TR-8's substrate | `envoyErrand{Offer,Records,Evidence,Vocabulary}.js`, `foreignGuestHold.js` (one writer), `envoyDiplomacyEnabled: false` simulationRules.js:472 | VERIFIED |
 | S35 | Treaties carry the orientation reader + victor-free mint road | `treatyOrientation.js` — `TREATY_ORIENTATION_KINDS = ['unknown','wartime','sale']`, `treatyOrientationOf` :120 (CR-WR10-G, landed @ e564e135) | VERIFIED |
 | S36 | TR-5 degradation contract pinned BOTH ways with tripwire | `catalogGrewSinceWr10()` sovereigntyBundle.js:166 (derives families from `TERM_FAMILIES` at call time, peaceTermsCatalog.js:77 import); pins tests/domain/sovereigntyBundleWr10.test.js:321, :388 | VERIFIED |
-| S37 | War taxonomy parallel: "war's 13↔13 has no commercial sibling" | `warReasonTaxonomy.js:24-60` — the live taxonomy is **16↔16** (lineage_claim, alliance_obligation, atrocity_answer + mirrors landed since the survey). The "no commercial sibling" half stands (commercialReasons: zero hits). NO TR pin may hard-code war's count | **REFUTED** (count; the bijection discipline and the absence both stand) |
+| S37 | War taxonomy parallel: "war's 13↔13 has no commercial sibling" | `warReasonTaxonomy.js` — ⚠ RE-DERIVE-AT-COMPILE: **16↔16 at the TL-F stamp** and moving (lineage_claim, alliance_obligation, atrocity_answer + mirrors joined since the survey); NO TR pin may hard-code war's count. The "no commercial sibling" half stands (commercialReasons: zero hits). NO TR pin may hard-code war's count | **REFUTED** (count; the bijection discipline and the absence both stand) |
 
 ### 1f 2026-08 estate mechanics (not in the volume's census; binding on every wave)
 
 | # | Fact | Receipt |
 |---|---|---|
-| S38 | Flag manifest home: `ENGINE_GATED_VIRTUAL_RULE_KEYS`, five members today; **a member also owes a certification row or a declared-pending entry** (the manifest's own comment) | `simulationRules.js:185` (beliefAxes/conquestDoctrine/infoStatecraft/migrationRumors/sovereigntyTrade); comment :180-182 |
+| S38 | Flag manifest home: `ENGINE_GATED_VIRTUAL_RULE_KEYS` — ⚠ DERIVE FRESH at each wave's base (TWENTY at the TL-F stamp; the drafted five is the 08-04 survey); **a member owes its AUTHORED certification row IN `subsystemRowsVirtual.js` with its `VIRTUAL_RULES` twin — the "declared-pending entry" door is STRUCK (C-TLF-1: both pending surfaces frozen-and-pinned empty; the backlog capped 17/17 shrink-only; the model case already converted at `:858`)** | `simulationRules.js:185` (beliefAxes/conquestDoctrine/infoStatecraft/migrationRumors/sovereigntyTrade); comment :180-182 |
 | S39 | All 8 TR flags + `syndicateHousesEnabled` return zero engine hits — clean namespace | multi-spelling grep, zero src hits |
-| S40 | Size-ratchet currency is ESLint EFFECTIVE lines: baseline holds pulseKernel **1580** / applyWorldPulse **941** / settlementStrategy **812** (wc -l reads 2820/1291/1360 — do not confuse the two); engine layer ceiling **800**, components **600** | `scripts/.size-baseline.json` (15 entries); `eslint.config.js:513` (600), :563-573 (800) |
-| S41 | **beliefMap.js is a HOT FILE: 771/800 effective** — TR-3/SP-2 work CANNOT land inside it (see Q3) | measured this date |
+| S40 | Size-ratchet currency is ESLint EFFECTIVE lines: baseline holds pulseKernel **1580** / applyWorldPulse **941** / settlementStrategy **812** (wc -l reads 2820/1291/1360 — do not confuse the two); engine layer ceiling **800**, components **600** | `scripts/.size-baseline.json` (⚠ RE-DERIVE — TEN entries at the TL-F stamp, was 15); `eslint.config.js:513` (600), :563-573 (800) |
+| S41 | **beliefMap.js is a HOT FILE: ⚠ RE-DERIVE — 778/800 effective at the TL-F stamp (1582 raw), 22 lines of headroom** — TR-3/SP-2 work CANNOT land inside it (see Q3) | re-measure at the compile's own base |
 | S42 | Keyed-hash determinism helper: `hash01` | `region/contestMath.js:45` |
 | S43 | Spatial-ledger conditional materialization primitives | `getSpatialLedger`/`setSpatialLedger` spatial/distanceRead.js:166/:180; drop pattern supplyKernel.js:577-581 |
 | S44 | New-kernel mount road (pulseKernel/applyWorldPulse are ZERO-EDIT): existing in-cycle hosts | pulseKernel imports `advanceSettlementSupply` :64 + `advanceEntrepotLayer` :65 (landed before the bank); commonsVoiceKernel mounts inside `assizeKernel.js`; the WR-10 stage mounts via the treaty mint fold + `sovereigntyTransfer.js` leaf |
@@ -134,7 +134,7 @@ sequences it). Every flag, identically:
 |---|---|---|---|---|
 | `casusCommerciiEnabled` | TR-1 | TR-1's one commit | — | **YES** |
 | `merchantHousesEnabled` | TR-2 | TR-2's one commit | TR-1 | **YES** (after TR-1) |
-| `believedMarketsEnabled` | TR-3 | TR-3's one commit | **SP-2 landed** + TR-1 | NO — SP-2 unbuilt (S46) |
+| `believedMarketsEnabled` | TR-3 | TR-3's one commit | **SP-2 landed** + TR-1 | ⚠ RE-DERIVE at compile — the SP-2 precondition is SATISFIED (SP-B 08-05); gate = TR-1 + the C-TLF-1 bill |
 | `foodCaravansEnabled` | TR-4 | slice-1 commit | `commodityFlowEnabled` + `demographicsEnabled` (both exist: S3, simulationRules.js:579); collapse arm additionally `routeLifecycleEnabled` (dark ⇒ honest permanent zero) | **YES** |
 | `tradePactsEnabled` | TR-5 | TR-5's one commit | **SP-3 landed** + TR-1 (+ TR-4 for grain_provision's physical arm; dark-TR-4 = the named conserved-rate degraded read) + **GR-3 rows** | NO — SP-3/GR-3 unbuilt |
 | `corneringEnabled` | TR-6 | TR-6's one commit | TR-2 + TR-3 + TR-4 + `commonsVoiceEnabled` (exists BUILT/DARK: S27) | NO — via TR-3 |
@@ -288,7 +288,7 @@ the publishing commit (S40).
 - **Collision:** FAITH's tithe executor will READ house books (CPL-7/CPL-12 —
   TR builds a read surface only, §5 seam 9); INT-1 seatBooks absent-not-zero.
 
-### TR-3 — BELIEVED MARKETS (`believedMarketsEnabled`) — BLOCKED on SP-2 (S46)
+### TR-3 — BELIEVED MARKETS (`believedMarketsEnabled`) — ⚠ RE-DERIVE the blocker at compile: the SP-2 precondition is SATISFIED (SP-B, 2026-08-05); the real gates are the intra-TR chain (TR-1) + the flag-certification bill (C-TLF-1)
 - **New leaves:** `beliefScarcity.js` (the SP-2 subject-family instance as a
   SIBLING leaf — beliefMap.js is 771/800 and receives NET-ZERO seam lines only,
   S41/Q3; ~300 eff); `dispatchDestination.js` (the WHERE composer — Seam
@@ -356,7 +356,7 @@ the publishing commit (S40).
   validation chair at build time per T3 — never silently ruled (Q2);
   supplyWebWarfare/tradeWar untouched (T9).
 
-### TR-5 — THE PACT LANE (`tradePactsEnabled`) — BLOCKED on SP-3 + GR-3
+### TR-5 — THE PACT LANE (`tradePactsEnabled`) — ⚠ RE-DERIVE the blockers at compile: the SP-3 and GR-3 preconditions are SATISFIED (landed 08-05/08-06); the real gates are the intra-TR chain + C-TLF-1's bill + this block's CORRECTED discharge (see below)
 - **New leaves:** `commercialTermExecutors.js` (five executors as lazy siblings
   consuming peaceTerms exports — R2; ~300 eff); `tradeDemandTrigger.js` (the
   crossing: believed-dear × salient good × realmPressure01 hunger arm × posture
@@ -364,12 +364,31 @@ the publishing commit (S40).
   peaceTermsCatalog.js (80 eff → ~110: the five rows — S17's corrected home;
   spelling CANONICAL IN GRAMMAR §4, this program points, never re-derives);
   peaceTerms.js NET-ZERO seam lines only (766/800, S20).
-- **THE WR-10 DISCHARGE (same commit, non-optional):** the catalog rows TRIP
-  `catalogGrewSinceWr10()` BY DESIGN (S36). This commit therefore also: widens
-  the bundle per sovereigntyBundle.js's own header instruction, retires the
-  no-growth pins (sovereigntyBundleWr10.test.js:321/:388) per their headers,
-  and DELETES the war volume's §3 CR-WR10-B dependency row as that row itself
-  instructs. A TR-5 that lands the rows without this discharge is REJECTED.
+- **THE WR-10 DISCHARGE — RE-CHARTERED ON MEASURED STATE (C-TLF-2; the
+  drafted instructions rotted, the design did not):** (1) TR-5 ADOPTS
+  the three GRAMMAR-minted rows at `peaceTermsCatalog.js:285-287`
+  (`exclusivity`, `market_access`, `toll_exemption` — spelling
+  canonical in GRAMMAR §4) and mints ONLY the genuinely-absent
+  remainder of its five; the draft spellings are FORBIDDEN tree-wide
+  by `sovereigntyBundleWr10.test.js` PIN 2 and are written NOWHERE,
+  comments included. (2) The tripwire is ALREADY TRUE (GR-3;
+  `sovereigntyBundle.js:56-58`) — no pin retirement exists to execute;
+  instead TR-5's commit CARRIES THE TWO DESIGNED FLIPS: PIN 5 ("the
+  trade-rights rows stay producer-less until TR-5 lands") and
+  `peaceTermsGrantTerms.test.js:273-274` both red the day TR-5 lands
+  BY DESIGN — their re-pointing is priced into the wave, with the
+  reachability obligation moving into TR-5's own pins. (3) The war
+  volume's CR-WR10-B blockquote is AMENDED "HALF DISCHARGED… TR-5
+  STILL OWED" → "DISCHARGED", NEVER deleted (11 consumer files);
+  `DESIGN_FP_ARCHITECTURE.md:2349`'s stale retire-and-delete
+  instruction gets the same amendment (both are `docs/**.md` writes
+  under the CLAIM_RE law, and both ride TR-5's OWN commit, not this
+  sitting). (4) `peaceTerms.js` stands at 797/800 — any head seam ≥ 4
+  effective lines is leaf-first or the wave STOPs; the rows land in
+  `peaceTermsCatalog.js`. (5) Scope (executors + producers + the
+  demand trigger + the `realmPressure01` dead-consumer landing) is
+  UNCHANGED. A TR-5 that lands rows without THIS discharge is
+  REJECTED.
 - **Pins:** below-threshold mints NO proposal (both reachability arms); T-5
   TELLABLE end-to-end (pact forms → delivery lands → realmPressure falls →
   war-motive weight falls; five subsystems, receipts at every link) + the same
@@ -391,7 +410,7 @@ the publishing commit (S40).
   any WR lane in flight (STOP-and-report on conflict, T9); negotiationPictures
   consumed never duplicated (S33).
 
-### TR-6 — THE CORNER + FAMINE SPECULATOR (`corneringEnabled`) — BLOCKED via TR-3
+### TR-6 — THE CORNER + FAMINE SPECULATOR (`corneringEnabled`) — gated by the INTRA-TR chain (via TR-3; ⚠ the underlying spine blockers are all SATISFIED at the TL-F stamp — the chain and C-TLF-1's bill are what remain)
 - **New leaves:** `cornerGate.js` (the INDEPENDENT truth-side supply census —
   denominator never from the house's own interests; ~200 eff);
   `cornerComposer.js` (Seam Three's whitelisted composer: belief motive, truth
@@ -425,9 +444,13 @@ the publishing commit (S40).
   DM stock edits move the truth census next read (state-derived gate).
 - **Collision:** commonsVoiceKernel CONSUMED (its header law: no new writer —
   the seizure writer is TR's own leaf); commodityFlow writer-family census
-  grows by exactly one (the shrink-only census admits it in the same commit).
+  lands AT N+1 WITH the census (⚠ C-TLF-3: the commodityFlow
+  writer-family census this line assumed DOES NOT EXIST — TR-6 AUTHORS
+  the shrink-only source-scan census, the T4/`storageMonths` shape with
+  an executed third-writer plant, asserting exactly the measured set in
+  the same commit).
 
-### TR-7 — VENTURES (`venturesEnabled`) — BLOCKED via TR-3
+### TR-7 — VENTURES (`venturesEnabled`) — gated by the INTRA-TR chain (via TR-3; ⚠ spine blockers all SATISFIED at the TL-F stamp)
 - **New leaves:** `ventureLedger.js` (the plan GRAMMAR re-implemented at house
   grain — demographicsPlans.js untouched per its :21 fence, S31/J-TR-12; ~350
   eff); `ventureLegs.js` (M6a/M8 dispatch binding — the road prices duration;
@@ -446,7 +469,7 @@ the publishing commit (S40).
 - **Collision:** demographicsPlans.js ZERO edits (the fence); INT-1 seam
   reserved here.
 
-### TR-8 — THE TRAVELING FACTOR (`factorErrandsEnabled`; two slices) — BLOCKED on SP-1
+### TR-8 — THE TRAVELING FACTOR (`factorErrandsEnabled`; two slices) — ⚠ RE-DERIVE the blocker at compile: the SP-1 precondition is SATISFIED (the errand spine is BUILT; the reserved `ERRAND_CONSUMERS` factors row is the landing surface); real gates: TR-5 + TR-7 + C-TLF-1's bill
 - **Slice 1 new leaves:** `commercialErrands.js` (SP-1 purpose `commercial`;
   kinds {pact proposal/renewal — the TR-5 call-site suppression switch, WR-7a
   idiom verbatim; venture supercargo; fair circuit with ARRIVAL-grade belief
@@ -572,9 +595,11 @@ that says it, so no later wave re-derives the join.
 
 ## §6 OPEN CHAIR QUESTIONS (max 4, each with recommendation)
 
-- **Q1 — Pre-spine partial build?** TR-1, TR-2, TR-4 and TR-9's contract
-  module measured buildable against today's tree (§2); TR-3/5/6/7/8 are
-  spine-blocked (SP-1/2/3 unbuilt, S46). RECOMMENDATION: hold SPINE §5
+- **Q1 — Pre-spine partial build? ⏱ THE PREMISE MOVED (TL-F round):**
+  TR-1, TR-2, TR-4 and TR-9's contract module measured buildable at the
+  survey; the TR-3/5/6/7/8 spine blockers are all SATISFIED since
+  08-05/08-06 — the buildability list re-derives at compile from the
+  INTRA-TR chain + C-TLF-1's bill, not from spine absence. RECOMMENDATION: hold SPINE §5
   sequencing as ordered; if the owner wants TRADE motion early, authorize
   exactly TR-1 + TR-9's contract module (ledger + contract, no physics, no
   cross-program seams) and nothing further — TR-4 deserves the spine-era soak

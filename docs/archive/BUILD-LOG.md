@@ -6,11 +6,57 @@ it contains, so a successor reading only the ledger can see the whole build
 history without checking out the other branch.
 
 - Build branch: `claude/composite-r4`
-- HEAD: `7958cd33`
-- Commits: 3225
-- Working tree at refresh: 0 dirty entries
+- HEAD: `6cd18ad3`
+- Commits: 3271
+- Working tree at refresh: 1 dirty entries
 
 ```
+6cd18ad3 2026-08-14 HB-2B T: flip HB-2 LANDED, regenerate the capsule, close the train
+de214782 2026-08-14 HB-2B I2 (HB-2): the habit ledger, the gate ladder's first door, and the flag
+46f1c942 2026-08-14 HB-2B P1b: flip HB-0B LANDED and promote HB-2 READY (CR-HB2B-SPLITP, OQ §44)
+c777a158 2026-08-14 HB-2B I1 (HB-0B): the three structural bounds, minted in their one lawful home
+3ad7c082 2026-08-14 HB-2B P1a: promote HB-0B READY alone under CR-HB2B-SPLITP (OQ §44)
+e5ecc83d 2026-08-14 INFRA-2 T: regenerate the base-state capsule at the train's last content commit
+5bcca49a 2026-08-14 INFRA-2 M4: the coupling-registration template check, as an inventory ratchet
+04d1ae93 2026-08-14 INFRA-2 M3: parse the hot-file ceilings from PACKET_STANDARD, fail-closed
+2fd9ac04 2026-08-14 INFRA-2 M2: re-point the ruin-filter discovery scan through codeOnly()
+fd8e4dc7 2026-08-14 INFRA-2 M1: the preamble law batch (delete-clause, §31 preflight, non-code-token scans)
+79ab59b4 2026-08-14 docs(hb-1p T): land the hb-1p train — HB-1 flipped, capsule regenerated in ONE terminal commit
+1013d58b 2026-08-14 feat(hb-1p I1): HB-1 — the action vocabularies, the brancher REGISTER, and the fork registry
+dfd7b0ae 2026-08-14 docs(hb-1p P1): promote HB-1 READY and repair HB-0's stale requiredSymbols pin
+f6749fad 2026-08-14 docs(hb-1 T''): regenerate the base-state capsule at the prefix terminal
+e205fb52 2026-08-14 docs(hb-1 T'): land the hb-1 PREFIX — HB-0 flipped, census re-derived at the prefix state
+e188760b 2026-08-14 feat(hb-1 I1): HB-0 — the habit substrate, dark by construction
+436f138e 2026-08-14 docs(hb-1 P1): promote HB-0 READY, sign the HB family preamble, correct the INDEX HB prose
+6784bf62 2026-08-14 docs: land the gap-1 train terminal (GAP-1 flipped, capsule generated)
+152d3f19 2026-08-14 feat: widen the engine-gated census detector past its canonical receiver
+ea98c42f 2026-08-14 docs: promote GAP-1 as the gap-1 train's single member
+5d6a0e7c 2026-08-14 docs: land the infra-1 train terminal (M1 + M2 + M3 flipped, capsule generated)
+cfcc2fa2 2026-08-14 feat: land INFRA-M3-IP1, the sourcemap guard, and re-derive the whole census
+2bb7c161 2026-08-14 docs: promote INFRA-M3-IP1 as infra-1 train member 3
+b713b05c 2026-08-14 feat: land INFRA-M2-CAPSULE, the base-state capsule generator
+ec153f56 2026-08-14 docs: promote INFRA-M2-CAPSULE as infra-1 train member 2
+e6eb4c5d 2026-08-14 docs: land INFRA-M1-DOCS, the §28 documentary substrate
+af2cf566 2026-08-14 docs: promote INFRA-M1-DOCS as infra-1 train member 1
+60083174 2026-08-14 docs: promote and land the gr-4b-ii train (GR-4B-II-W2 + the GR preamble)
+7b54c038 2026-08-14 test: re-derive the whole lighting census at the gr-4b-ii train terminal
+b3602c15 2026-08-14 feat: speak the reaffirmed voice on the dismiss road
+039f8380 2026-08-14 docs: correct the two GR-4 honor pools (A-23, CR-GR4B-16)
+d383aa3c 2026-08-14 docs: record GR-4b-iii-b landing; stamp the first base-state capsule
+770167c5 2026-08-14 feat: render open succession dossier lines
+cdd4bf52 2026-08-14 docs: promote GR-4b-iii-b packet
+2dd09360 2026-08-14 docs: finish A-22 succession exemplar cure
+c39d2413 2026-08-14 docs: correct succession dossier pool
+4a1a3707 2026-08-14 docs: record GR-4b-iii-a landing
+7e7d5205 2026-08-13 feat: voice opened succession questions
+4bc44f8e 2026-08-13 docs: complete GR-4B-IIIA v2 authority
+b40dbd09 2026-08-13 docs: correct GR-4b-iii-a order proof
+9be50ffe 2026-08-13 docs: promote GR-4b-iii-a packet
+955acd7a 2026-08-13 docs: correct GR-4b opening corpus
+7a589733 2026-08-13 docs: record GR-4d v2 landing
+a17d0a02 2026-08-13 feat: implement GR-4d lit succession decision
+fcf1efbd 2026-08-13 docs: amend GR-4d authority topology
+6f1cac10 2026-08-13 docs: promote GR-4d implementation packet
 7958cd33 2026-08-13 docs: record GR-4e landing
 c5ef5c19 2026-08-13 fix: consume treaty fractures on next pulse
 3339188b 2026-08-13 docs: promote GR-4e treaty fracture handoff
@@ -365,50 +411,4 @@ a70c9284 2026-08-04 WR-9d: the instrument counts its first real war — and the 
 cb1ea74f 2026-08-04 Queue: correct WR-9c's focused-battery figure — 98, not the 97 captured before the last pin
 c0ae5eb7 2026-08-04 Queue: WR-9c's row — and CR-WR9-D, the chair premise about force 2 that the tree disproved
 7a3c51ef 2026-08-04 WR-9c: the six forces learn which of them cannot be measured — five cells that grade, one that names the substrate it does not have, and a chair premise the tree refuted
-43b3195b 2026-08-04 Queue: WR-9r's three chair rulings, and the correction for a measurement fd222269's commit body got wrong
-06c58f69 2026-08-04 WR-9r: the duration histogram learns to say "I could not read this" — unmeasurable becomes its own diagnosis, and Infinity stops being a short war
-d7a6a16b 2026-08-04 Queue: WR-9's row, and the certification repair that measured itself into a STOP
-fd222269 2026-08-04 WR-9a: the endings vocabulary learns to be filled — a classifier for five keys the engine never spoke, and two envelopes that fail honestly
-98edbc9f 2026-08-04 Lane V4D R-3: two docstrings stop over-claiming — the wound ladder in the sentence that makes the claim, and a law that was one notch stronger than its proof
-273ffbba 2026-08-04 Lane V4D R-2a: the blend pins take the RIBBON as their subject, not the whole shell
-39ba6590 2026-08-04 Queue: WZ-5's row is corrected -- "WR-8 CLOSES" was premature, verification rejected it, and this is what closes it
-1b7c1eac 2026-08-04 Lane WZ-5r: the ghost-write cure learns which language it is being spoken to in -- the graph's tokens stop at the relationship plane's door
-358a8956 2026-08-04 Lane V4D R-2: the whipping hung on one unpinned line — the blend gets a pin, a fall-back, and a list that cannot drift
-a2dbdd36 2026-08-04 Lane V4D R-1: the plaque survived on the phone — the burn's vertical axis becomes the bar's
-5ddd0d08 2026-08-04 Lane V4C piece 4: R7's horn cross-nock, BUILT AND SHOWN — one module, one element, and an honest verdict that it barely reads at 100%
-5acf5e93 2026-08-04 Lane V4C piece 3: the counsel pass — the plaque had an internal edge, the seal was two point seven pixels too wide, and the hang had no outline on a dark hero
-e36588c7 2026-08-04 Queue: lane WZ-5's row -- WR-8 CLOSES, the atrocity casus gets its producer, and a ghost-write class measured at seven sites dies at the writer
-db779d5e 2026-08-04 Lane WZ-5 piece 2: the ghost-write class dies at the writer -- the relationship plane can no longer be handed a key it cannot type
-dd86e5f9 2026-08-04 Lane V4C piece 2: the whipping becomes thread — the crest that was never on screen, and one diagonal that says somebody tied this
-19dd07e2 2026-08-04 Lane WZ-5 piece 1 (4d): the atrocity casus gets its producer -- the world hears about the fire, and outrage arrives at news speed
-653be592 2026-08-04 Lane V4C piece 1: the wood gets its finishes — two more turbulence passes, one writer, and a budget that is SPENT rather than declared
-506598af 2026-08-04 Lane WZ-4 piece 2 (4b): the deterrent is priced before the act — and WR-6's web is CONSUMED, never rebuilt
-23e89b18 2026-08-04 Lane V4B piece 2 (the feather): the one-curve law, the splits, and the fray stops drawing where nothing can see it
-2654984a 2026-08-04 Lane WZ-4 piece 1 (4a): the world judges the razing on each observer's own axis — and a ghost-write class is closed on the way
-334bef48 2026-08-04 Lane V4B piece 1: the war arrow's lean is MIRRORED — the frame retires, the four slashes become identical parallels, and the active mark moves to the binding
-32035947 2026-08-04 Queue: lane WZ-3's row — the false premise corrected, the leak caught before it bit, and the three quarters of item 4 that are measured rather than guessed
-e5ceb2f2 2026-08-04 Lane WZ-3 piece 4: the razing gets a Herald home — the world's biggest event was unroutable
-2d24ac3d 2026-08-04 Lane WZ-3 piece 3: the five WD leaves get REAL lit walkthroughs — and the record that said they were covered is corrected
-6a9038c9 2026-08-04 The ribbon V4 spec leaves the session scratchpad: the war-arrow design law becomes a repo document
-b43986b5 2026-08-04 Lane WZ-3 piece 2: the razing's licenses come home — the spread lands, the unwired ledger retires, and a tick that burns two towns keeps both
-898d1c0b 2026-08-04 Lane V4 piece 1: the war arrow goes to cedar — the ink register dies, the wordmark is gilded, and the plate retires
-d5b0fca8 2026-08-04 Lane WZ-3 piece 1: the lint pair resolves by restructure — the analysis that blocked it was false on both legs
-af1b9d38 2026-08-03 Queue: lane WZ-2's rulings, the razing's mouth, and the two stops that keep WR-8 open
-172e5f22 2026-08-03 Lane WZ-2 piece 3: the license ledger is built, conserved and returned — and STOPPED one line short, on a gate that is not size
-6f1bada6 2026-08-03 Lane WZ-2 piece 2: the razing gets its mouth — a victor that burns mints no occupation, and the town it burned stays burned
-d5ec720e 2026-08-03 Lane PW piece 1: the sticky bar draws its ring inside its own box — five clipped top edges close, and the bronze is measured on wood
-4423cbda 2026-08-03 Lane WZ-2 piece 1: three paths nobody had ever run, and two rulings that were true about the wrong thing
-7bee2e93 2026-08-03 Lane PW piece 3: the deep-craft burn-down — five z-axis lifts struck, and not one ceiling raised
-47d4643d 2026-08-03 Lane PW piece 2: the raw-button census true-up — one stale grandfather leaves, and the plate that was never guilty is not booked
-e932223d 2026-08-03 Queue: lane WZ-1's three rulings, and the three findings that say WR-8 does not close here
-86d83f6e 2026-08-03 Lane WZ-1: the razing's assembly layer — the law keeps its purity, and something else pays for it
-90ba2974 2026-08-03 Lane FS piece 4: the fletch cell's focus ring comes back inside its own box — and the ring that was there was failing 1.4.11 anyway
-f2c10742 2026-08-03 Edge bundles: five artifacts rebuilt from ONE clean committed tree, and the dirty-build class loses its habitat
-1c99d925 2026-08-03 Lane FS piece 3: the AA floor stops being one number and becomes every rider's own — and four real shortfalls fall out of the derivation
-2f4a716e 2026-08-03 Lane FS piece 2: PLATE_LIGHT_DEG stops being a docstring and becomes the single writer — one light, and the band turns to face it
-ea5771cc 2026-08-03 Lane FS piece 1: the band stops being corrugated metal — the comb becomes a whisper and the vane becomes the material
-1514c52a 2026-08-03 Lane EB: the icon sweep's test leftover — E2.2 stops freezing the dead slot and starts forbidding it
-f444cf8b 2026-08-03 Lane WD-7: W8-D's two tails — a capability anyone could spend, and a law that was only true above a line nobody had drawn
-560c9120 2026-08-03 Lane WD-2: the army record and the sack leave the head — 724 → 658 — and THREE REGISTRATION GUARDS ARE REPAIRED, one of which had been red for four commits
-ff7052f0 2026-08-03 Lane WD-5: the refusal aftermath leaves the head, and warDeployment.js CROSSES UNDER ITS CEILING — 846 → 724, baseline entry DELETED
 ```

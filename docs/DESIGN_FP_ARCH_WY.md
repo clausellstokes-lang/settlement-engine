@@ -439,7 +439,11 @@ nothing and the caravan layer must never bind to it). What WY adds:
   re-ruled, and never a count):** the routed TR queue row reads "T7 fences
   the grep-derived `importDependency` consumer census of the food ledger,
   SHRINK-ONLY" — a count-of-N row would be stale the day a fourth reader
-  lands. Members at THIS head, for the record: `foodStockpile.js`
+  lands. (⚠ R8 pointer: the census omits the PRODUCER —
+  `foodGenerator.js` ×4 — and the normalizer home — `foodLedger.js` ×3;
+  the census row fences whatever the build-day grep finds, and the
+  build-day grep must include both.) Members at THIS head, for the
+  record: `foodStockpile.js`
   blockadePct (one of T7's two named sites); `demographicsRates.js`
   `foodCapacityOf` (unfenced — feeds K_food, the demographic carrying
   capacity that actually bounds population); AND `magicSubstitution.js`
@@ -498,7 +502,11 @@ the netted `flow_migration` arm is unfenced. What WY adds (WY-4):
   departure — `projectReligionStateOntoSettlement` is a pure read away,
   including the unaffiliated bucket) and `causeReceipt` (the launching
   stressor/exodus receipt, frozen at dispatch — a render-time read of
-  current stressors would lie once the stressor clears). Both ride
+  current stressors would lie once the stressor clears; ⚠ DIVERGENCE
+  NOTE, C-WYF-4 item 2: `causeReceipt` is an EXISTING spelling on a
+  DIFFERENT record family — `realmItemReadModel.js` /
+  `SettlementWorkbench.jsx`, exactly 2 files — the F5 mint is a
+  DIFFERENT shape; never join the two by spelling). Both ride
   `migrationCargoEnabled`; both enter `columnOf`'s conditional
   carry-through IN THE SAME COMMIT as their writer with the
   round-trip-THROUGH-ENQUEUE pin (RF-1 — the whitelist normalizer rebuilds
@@ -560,7 +568,7 @@ ledger held at departTick, reconstructed from arrival records, zero fields.
 | F6 | `experience` | `worldState.deployments[homeId]` | warArmyRecord seed/refresh (beside `readiness`, same conditional idiom — omitted when no martial record) | none needed: conditional beside an existing conditional; byte-identical for every world without a martial record | WY-8 |
 | F7 | `experience` | `spatialLedgers.armyTransit[]` | armyTransitKernel's existing copy site | same | WY-8 |
 | F8 | `prizeCargo` ({good: units} integer map, conserved) | `spatialLedgers.armyTransit[]` | armyCaravanSeizure (this program's new encounter arm, E14) | `caravanSeizureEnabled` | WY-6 |
-| F9 | `supplyCargo` ({goodClass: units} integer map over the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type; conserved, F8's shape precedent) | `spatialLedgers.armyTransit[]` | NEW `armySupply.js` — the ONE writer module; every mint (march dispatch from origin stores, debited), decrement (consumption), and credit (reinforcement cargo, rest replenishment) routes through it | `armySupplyEnabled` | WY-8 (slice 8a) |
+| F9 | `supplyCargo` ({goodClass: units} integer map over the CLOSED goods vocabulary — food = grain class, armor = crafted class, no new resource type; conserved, F8's shape precedent) | `spatialLedgers.armyTransit[]` | NEW `worldPulse/armySupply.js` (C-WYF-2: `src/domain/war/` does not exist and is not minted for a one-module family — the writer homes beside `supplyWebWarfare.js`, the twin-note pairing) — the ONE writer module; every mint (march dispatch from origin stores, debited), decrement (consumption), and credit (reinforcement cargo, rest replenishment) routes through it | `armySupplyEnabled` | WY-8 (slice 8a) |
 
 Plus ONE frozen-digest datum, not a record field: `spatialDigest.kmScale`
 (WY-1; stamped at canonization by the digest builder AND CARRIED FORWARD
@@ -673,7 +681,15 @@ any route-position id (C6 — refused as a class, see 2d).
 ### 2c The mapState surface (client-side, per-campaign persisted)
 
 **No new layer keys.** The shipped `travelers` key and its
-`travelersFilter` are KEPT and widened: the sub-layer set becomes the four
+`travelersFilter` (⚠ C-WYF-4: `travelersFilter` is UNDECLARED —
+written on demand by `setLayerFilter`, `mapSlice.js:328-330`, which
+has NO declared-key guard; `DEFAULT_LAYERS` does not carry it, so
+WY-0's walker cannot see it. WY-0 DECLARES it — `travelersFilter:
+null` joins `DEFAULT_LAYERS` (the `:103` comment already documents
+null = all sub-layers) or `setLayerFilter` gains `toggleLayer`'s
+declared-key guard — and the walker's census domain is the UNION of
+declared keys and source-scanned `setLayerFilter`-written keys) are
+KEPT and widened: the sub-layer set becomes the four
 owner layers `['armies', 'caravans', 'persons', 'populations']`
 (JUDGMENT, vetoable: reusing the key preserves every old campaign's toggle
 state and avoids four new DEFAULT_LAYERS keys; the label rename is
@@ -767,7 +783,7 @@ a canvas `<title>`), so the chevron cannot quietly return.
 > are omitted FAIL-CLOSED from every player-facing surface and export.
 
 The chokepoints exist and are BOUND, not re-invented: engine-side,
-`hidden: true` on a leg (five fail-closed filters already consume it) and
+`hidden: true` on a leg (⚠ RE-DERIVE-AT-COMPILE: EIGHT fail-closed filters at the WY-F stamp — the drafted five rotted; count fresh, never inherit) and
 the covert envoy/errand records; render-side, `viewerSeesDmSecrets(ctx)` —
 with the census-1 hole CLOSED in WY-9: every map call site supplies
 `ownerUserId`/`viewerUserId` (today's `{isOwner: !!auth?.user}` proves a
@@ -858,7 +874,10 @@ worker-safe returns (data only — the nameById lesson); field-level
 conditional facets (present only when the record carries them — the
 declared-absent grammar at the field level). The kind registry is
 `entityLinks.KIND_PREFIX` EXTENDED (army/caravan/population/treaty join
-npc/faction/institution) so identity and facet-set share one registry and
+npc/faction/institution — ⚠ PREREQUISITE: `KIND_PREFIX` is
+MODULE-LOCAL at `entityLinks.js:13` today; the one-line EXPORT is
+priced into WY-7's charter, C-WYF-2 item 3 — "share one registry" is
+unbuildable without it) so identity and facet-set share one registry and
 the popup↔dossier deep-link gets id prefixes for free.
 
 **The walker:** NEW `tests/lint/wayfareMirror.walker.test.js`, copied from
@@ -1288,7 +1307,11 @@ via seizure-EV; partnership via risk/cost/information — the
 market_access/toll_exemption term families' route-cost effect measured
 once TR-5 is landed; the payoff named: pair-wise caravan density is the
 ambient relationship read, no label, consistent with the ambiguity law);
-certification rows for the eight WY flags. Pins: floor-never-beats-
+certification-row AMENDMENTS for the eight WY flags (⛔ C-WYF-5, the
+§92.2 instance: each row LANDS AT ITS MINTING WAVE in
+`subsystemRowsVirtual.js` with its twin — WY-11 AMENDS the landed rows
+with envelopes and dispositive channels, never lands them as a batch).
+Pins: floor-never-beats-
 interdiction (executed); envelope reachability both ends; flag-census
 rows. Mutants: envelope-collapse plant. Order: after TR-9 (the EV/pact
 substrate complete); degraded arms declared if built earlier.
@@ -1344,7 +1367,7 @@ army-facets wave — 2k lands HERE, r3; slices: 8a the supply train
 [engine, `armySupplyEnabled`], 8b the mirror [surface; the wave's original
 body plus the supply facet]).
 **Slice 8a — THE SUPPLY TRAIN (2k; engine; flag `armySupplyEnabled`; F9).**
-Files: NEW `src/domain/war/armySupply.js` (~140 eff — the ONE writer for
+Files: NEW `src/domain/worldPulse/armySupply.js` (C-WYF-2 re-home — `src/domain/war/` does not exist; no new top-level domain directory for a one-module family; ~140 eff — the ONE writer for
 every F9 mutation, §2b's clause is the spec): march-dispatch mint debiting
 origin stores through commodityFlow's one stock-write seam (2i grounding —
 a bled home sends empty wagons, surplus-gated, visible in the manifest);
@@ -1382,9 +1405,17 @@ engine WY-3 (the stock-write seam and cargo idiom it reuses).
 Files: `armyProjection.js` grown from armyStrength (audience parameter;
 UNIT_SOURCES registry; the declared-absent provenance shape; the retreat
 JOIN; the belief block; the commander-name anchored negative); M1's two
-conditional stamp lines (warArmyRecord + armyTransitKernel); NEW
-`hasMartialRecord` absence predicate (M2); the ARMY CONDITION band ladder
-(M4 — new vocabulary, owner tuning row); the SUPPLY band (2k: F9 through
+conditional stamp lines (warArmyRecord + armyTransitKernel); the
+`hasMartialRecord` absence predicate (M2 — ⚠ NOT NEW: the spelling
+already exists module-local at `opportunism.js:122` with the volume's
+exact intent documented in-file; EXPORT-AND-REUSE, never a second
+spelling — C-WYF-2 item 2); the ARMY CONDITION band ladder
+(M4 — ⛔ COLLISION RECORDED (C-WYF-3): `armyStrength.js:94-98` already
+exports a supply-worded `CONDITION_BANDS` deriving from a DIFFERENT
+quantity; the collision is three layers deep (name / quantity / model)
+and the rename is measured FREE (zero external consumers) — the M4
+mint executes C-WYF-3's cure, never lands a second same-name
+vocabulary; owner tuning row); the SUPPLY band (2k: F9 through
 the WY-8 band ladder for field armies; home arm derives fresh from the
 town's own stores — "provisioned from stores"; declared-absent where the
 flag is dark or the record is old) joins the army popup facet table AND
@@ -1481,7 +1512,10 @@ map-only import census executed. Order: last surface wave.
    TR-4 VERIFIES and extends it to the grain rows, never re-lands it."
    WY-6 lands after #26 TR-4; WY-11 lands after #31 TR-9. WY-4 lands in
    PHASE 6 immediately after #42 POP-1 (shared columnOf amendments compose
-   by order); WY-5 lands after WY-4. The wave count amends 68 → 75
+   by order); WY-5 lands after WY-4. ⏱ ARITHMETIC SUPERSEDED-BY-FOLD (the
+2026-08-07 fold executed these insertions; the parent's LIVE footer is
+the count — "111 waves ordered" at the WY-F stamp; never re-derive
+from this section's 68 → 75
    (post-ES; 60 → 67 if WY lands first — land ES first, it is the older
    debt).
 4. **SOL_QUEUE §2 LANE B — the WY surface block** joins beside the LD
