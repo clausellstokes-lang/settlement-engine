@@ -163,9 +163,23 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                     {risk.label}
                   </span>
                 )}
-                {!isRuler && Number.isFinite(p.weight) && (
-                  <span aria-label={`Coup weight ${p.weight}`} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: accent, flexShrink: 0, minWidth: 34, textAlign: 'right' }}>w {p.weight}</span>
-                )}
+                {/* ⛔ THE COUP WEIGHT IS GONE FROM THE READER'S VIEW (browser pass 3), and the
+                    row above is why it could be. This span printed the raw engine scalar —
+                    "w 41.25", "w 26.4", "w 19" — beside `powerLabel`, which is the SAME fact
+                    in the typed band the rest of the dossier speaks in. FINITE-SEMANTICS
+                    calls the band the reader's answer and the float the engine's, so the
+                    abbreviation was carrying nothing the chip did not already say, in the one
+                    register the estate has ruled out.
+
+                    ⚠ NOT REPLACED BY A PERCENT SHARE, which was the other option on the
+                    table. A share is a new number in reader prose, and the prose-numerics
+                    ratchet's ceilings only fall — trading an unbanked float for a banked
+                    percent would have cost the estate a row to say what 'Contender' and the
+                    power chip already say. THE FIELD ITSELF IS UNTOUCHED: `rulingPowerCoup`
+                    still computes it, still sorts the challengers by it
+                    (`byWeightDescThenName`) and still samples the winner in proportion to it,
+                    and `powerStrata` still carries it onto the entry. The reader gets the
+                    ORDER the weight decides; they no longer get the weight. */}
                 {hasSupport && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
               </div>
 

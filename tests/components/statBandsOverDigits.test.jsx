@@ -25,6 +25,8 @@
  * structural half carrying the manifest entry).
  */
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
@@ -35,6 +37,8 @@ import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab, STATUS_IS_THE_GRADE } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
+import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import { PowerSuccessionSection } from '../../src/components/dossier/EngineSections.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // TWO SPELLINGS OF ONE LADDER, and the difference is the point. BANDS is the vocabulary
@@ -612,5 +616,62 @@ describe('SummaryTab defence tile — the averaged raw score is retired', () => 
     // projection with it. The tile re-cases at the RENDER rung, so the pin reads the same
     // two functions the tile does and cannot drift from either one.
     expect(text).toContain(`Systems average: ${statusCase(scoreBand(avg))}`);
+  });
+});
+
+// ── The coup weight, retired from both of its mounts (browser pass 3, 2026-09-19) ─────────
+/**
+ * A FOURTH RETIREMENT, in the same shape as the three this file opened with. The Power tab's
+ * "The Powers" rows and the Succession section's contender list both printed the raw coup
+ * weight — "w 41.25", "w 26.4", "w 19" — an engine scalar beside `powerLabel`, which says the
+ * same thing in the typed band vocabulary the rest of the dossier speaks.
+ *
+ * ⛔ THE PROSE-NUMERICS RATCHET COULD NOT SEE EITHER OF THEM, and that is the reason this arm
+ * is worth its lines: `proseNumericsWalk.js`'s FLOAT_TOKENS names `power`, `score`, `standing`
+ * and thirty more, and does NOT name `weight` — so the ratchet's ceilings did not fall when
+ * these two came out, and would not have risen when they went in. Adding the token is not this
+ * lane's call (four `${x.weight}` sites in `warReceiptPools.js` would red on arrival and a
+ * ceiling may never be raised to absorb them); the gap is reported to the chair. Until it is
+ * closed, THIS is the instrument that holds the class.
+ */
+describe('The Powers — the seat is contested in words, never in coup weights', () => {
+  const WEIGHT_RE = /\bw\s\d/;
+
+  test('neither the Power tab nor the Succession section prints a raw coup weight', () => {
+    let sawContender = false;
+    for (const [name, settlement] of settlements) {
+      for (const [surface, el] of [
+        ['Power', <PowerTab powerStructure={settlement.powerStructure} settlement={settlement} />],
+        ['Succession', <PowerSuccessionSection settlement={settlement} />],
+      ]) {
+        const { container } = render(el);
+        for (let pass = 0; pass < 4; pass += 1) {
+          const shut = [...container.querySelectorAll('[aria-expanded="false"]')];
+          if (shut.length === 0) break;
+          for (const b of shut) fireEvent.click(b);
+        }
+        const text = container.textContent || '';
+        if (/Contender|Contenders/.test(text)) sawContender = true;
+        expect(WEIGHT_RE.test(text), `${name} / ${surface} still prints a coup weight`).toBe(false);
+        // The accessible name carried the same digits, and a screen reader is a reader.
+        const labels = [...container.querySelectorAll('[aria-label]')]
+          .map((n) => n.getAttribute('aria-label') || '');
+        expect(labels.filter((l) => /^Coup weight/.test(l)),
+          `${name} / ${surface} still labels a coup weight`).toEqual([]);
+        cleanup();
+      }
+    }
+    // ⛔ ANTI-VACUITY: a town with no challenger renders no contender row at all, and an arm
+    // that only ever saw uncontested seats would pass on nothing. One of the four must have
+    // a contest.
+    expect(sawContender, 'no town in this fixture set rendered a contender row').toBe(true);
+  }, 120000);
+
+  test('the weight is retired from DISPLAY only — the derivation still ranks by it', () => {
+    // The same split the safetyRatio arm above pins: the engine keeps its scalar, the reader
+    // gets its consequence. `byWeightDescThenName` is the order the reader actually sees.
+    const src = readFileSync(resolve(process.cwd(), 'src/domain/rulingPowerCoup.js'), 'utf8');
+    expect(src).toContain('byWeightDescThenName');
+    expect(src).toContain('b.weight - a.weight');
   });
 });

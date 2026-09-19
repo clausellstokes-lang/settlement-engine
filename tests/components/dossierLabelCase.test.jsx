@@ -120,10 +120,12 @@ function labelLeaves(root) {
     const weight = Number(el.style.fontWeight || 0);
     if (weight < 700) continue;                                 // a meta tag is not emphasised
     // An element that carries its OWN accessible name is a deliberate abbreviation:
-    // PowerStrata's coup weight reads "w 13" to the eye and aria-label="Coup weight 13"
-    // to a screen reader, which is the whole point of it. So the ACCESSIBLE NAME is
-    // judged in the visible text's place — never waved through, or the next token pill
-    // regresses silently the moment someone gives it a label.
+    // PowerStrata's coup-risk badge reads "Contested" to the eye and
+    // aria-label="Coup risk: Contested" to a screen reader, which is the whole point of
+    // it. So the ACCESSIBLE NAME is judged in the visible text's place — never waved
+    // through, or the next token pill regresses silently the moment someone gives it a
+    // label. (The example this comment used to name, the "w 13" coup weight, was retired
+    // from the reader's view by browser pass 3 — the rule outlived its first instance.)
     const aria = el.getAttribute('aria-label');
     const shown = aria ? aria.trim() : text;
     out.push(shown);

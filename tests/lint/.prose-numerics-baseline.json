@@ -553,25 +553,25 @@
           },
           {
                     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                    "line": 255,
+                    "line": 269,
                     "category": "floatInterpolation",
                     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
           },
           {
                     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                    "line": 255,
+                    "line": 269,
                     "category": "percentToken",
                     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
           },
           {
                     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                    "line": 257,
+                    "line": 271,
                     "category": "floatInterpolation",
                     "snippet": "{pct}"
           },
           {
                     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                    "line": 298,
+                    "line": 312,
                     "category": "floatInterpolation",
                     "snippet": "{r.power}"
           },

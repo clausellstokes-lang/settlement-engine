@@ -454,6 +454,18 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // NOT A `{/* … */}` IN THE JSX, which is a lint fact worth writing down: max-lines skips
 // comments, and a JSX comment container is CODE — the first draft took that file to 601
 // against its 600 ceiling and the pre-commit hook refused it.
+// BROWSER PASS 3's COUP WEIGHTS (2026-09-19, lane 36 car 6) — THREE PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION, AND A REPORTED GAP IN THIS WALKER. Retiring the raw coup
+// weight from the two rows that printed it ("w 41.25") leaves a rationale where the span was,
+// so PowerStrata's four rows re-address 255 -> 269 (both categories), 257 -> 271 and
+// 298 -> 312; EngineSections' three rows sit above its edited line and do not move.
+// ⛔ THE CEILINGS DID NOT FALL, AND THAT IS THE FINDING. Neither retired site was ever in this
+// census: `proseNumericsWalk.js`'s FLOAT_TOKENS names `power`, `score` and `standing` but NOT
+// `weight`, while the walker's own `namesAScalar` regex two hundred lines below DOES name it —
+// the file's two instruments disagree about one token. Adding it is not a lane's call: four
+// `${x.weight}` interpolations in `worldPulse/warReceiptPools.js` would red on arrival, and a
+// ceiling may never be raised to absorb them. The class is held meanwhile by a behaviour arm
+// (tests/components/statBandsOverDigits.test.jsx), which convicts a planted weight.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

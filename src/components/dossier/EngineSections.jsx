@@ -277,8 +277,13 @@ export function PowerSuccessionSection({ settlement }) {
             <div key={i} style={{ fontSize: FS.xs, color: BODY, display: 'flex', gap: SP.sm }}>
               {/* Each contender is a rival FACTION → its Power row (rename-safe). */}
               <span style={{ flex: 1 }}><EntityLink id={factionIdFromName(c.name)} type="faction" fallback={c.name} style={{ color: BODY }} /></span>
+              {/* THE SECOND MOUNT OF THE SAME RAW SCALAR, and it is here because the census
+                  went looking rather than because a browser pass met it: this section printed
+                  the same "w 41.25" the Power tab's own row did. The list is ORDERED by that
+                  weight (`byWeightDescThenName`), which is the reader's share of it; the
+                  coefficient above says the same thing about the seat and keeps to the same
+                  law — "the legibility law wants the consequence, not the arithmetic". */}
               <span style={{ color: MUTED }}>{c.archetype}</span>
-              <span aria-label={`Coup weight ${c.weight}`} style={{ fontWeight: 700, color: INK }}>w {c.weight}</span>
             </div>
           ))}
         </div>
