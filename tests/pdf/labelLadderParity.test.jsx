@@ -320,9 +320,12 @@ function screenText(/** @type {string} */ town) {
 }
 
 describe('the paid document descends the same label ladder as the screen', () => {
-  test.each(CASES.map(([town]) => [town]))(
-    '%s: no band or status word reaches the page shouting',
-    (town) => {
+  test('no band or status word reaches the page shouting, on every fixture town', () => {
+    // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table: a file that parks on the
+    // each-family credits NO titles to the lighting census, which made these pins
+    // invisible to it. Every row and every assertion is unchanged, and each message
+    // already names its town, so a failure still says which row broke.
+    for (const [town] of CASES) {
       const leaves = printLeaves(town);
       // ANTI-VACUITY FIRST: an empty walk would pass every absence below.
       expect(leaves.length, 'the four chapters rendered no text at all, so absence proves nothing')
@@ -356,12 +359,15 @@ describe('the paid document descends the same label ladder as the screen', () =>
         .filter((word) => LADDER_WORDS.includes(word.toUpperCase()));
       expect(spoken.length, `${town}: no status word reached the page, so the arm is vacuous`)
         .toBeGreaterThan(0);
-    },
-  );
+    }
+  });
 
-  test.each(CASES.map(([town]) => [town]))(
-    '%s: every status word the screen prints, the print prints IDENTICALLY',
-    (town) => {
+  test('every status word the screen prints, the print prints IDENTICALLY, on every fixture town', () => {
+    // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table: a file that parks on the
+    // each-family credits NO titles to the lighting census, which made these pins
+    // invisible to it. Every row and every assertion is unchanged, and each message
+    // already names its town, so a failure still says which row broke.
+    for (const [town] of CASES) {
       const printed = printLeaves(town).map((leaf) => rendered(leaf));
       const screened = screenText(town).map((leaf) => rendered(leaf));
       expect(screened.length, 'the screen rendered nothing, so parity proves nothing')
@@ -389,13 +395,16 @@ describe('the paid document descends the same label ladder as the screen', () =>
           `${town}: the screen prints "${word}" and the document prints it differently`,
         ).toContain(word);
       }
-    },
-  );
+    }
+  });
 
 
-  test.each(CASES.map(([town]) => [town]))(
-    '%s: a band word SMUGGLED INTO A SENTENCE is caught on both surfaces',
-    (town) => {
+  test('a band word SMUGGLED INTO A SENTENCE is caught on both surfaces, on every fixture town', () => {
+    // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table: a file that parks on the
+    // each-family credits NO titles to the lighting census, which made these pins
+    // invisible to it. Every row and every assertion is unchanged, and each message
+    // already names its town, so a failure still says which row broke.
+    for (const [town] of CASES) {
       // ⛔ WHY LEAF EQUALITY IS NOT ENOUGH. `SummaryTab` printed
       // `Systems average: ${scoreBand(defScore)}` — the frozen 'STRONG' interpolated into a
       // sentence, so NO leaf ever equalled it and every arm above walked straight past. A
@@ -425,8 +434,8 @@ describe('the paid document descends the same label ladder as the screen', () =>
       }
       expect([...new Set(offenders)],
         `${town}: a frozen band word reached a sentence in capitals`).toEqual([]);
-    },
-  );
+    }
+  });
 
   test('the frozen vocabularies are re-cased at the RENDER rung, never at the source', () => {
     // If someone "cures" the shout by editing the constant, the public projection and the

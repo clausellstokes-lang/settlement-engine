@@ -117,19 +117,33 @@ const TABS = [
 ];
 
 describe('the dossier renders words, not engine tokens', () => {
-  test.each(
-    CASES.flatMap(([town]) => TABS.map(([tab, render_]) => [town, tab, render_])),
-  )('%s / %s: no label or pill begins in lower case', (town, tab, render_) => {
-    const settlement = settlements.get(town);
-    const { container } = render(render_(settlement));
-    expandAll(container);
+  // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table. A file that parks on the
+  // each-family credits NO titles to the lighting census, so every pin below was invisible
+  // to it. Both rows and every assertion are unchanged, and the message already names the
+  // town and the tab, so a failure still says exactly which pair broke.
+  //
+  // ⚠ THE LOOP CLEANS UP AFTER ITSELF. `afterEach` fires once per TEST, not once per row, so
+  // without this each iteration would leave its tree mounted and the next would render on
+  // top of it — the containers stay distinct, but the DOM would grow for twenty renders.
+  test('no label or pill begins in lower case, on every town and every tab', () => {
+    const ROWS = CASES.flatMap(([townName]) => TABS.map(([tabName, renderFn]) => [townName, tabName, renderFn]));
+    for (const [town, tab, render_] of ROWS) {
+      const settlement = settlements.get(town);
+      const { container } = render(render_(settlement));
+      expandAll(container);
 
-    const leaves = labelLeaves(container);
-    SEEN.push(...leaves);
+      const leaves = labelLeaves(container);
+      SEEN.push(...leaves);
 
-    const offenders = [...new Set(leaves.filter((t) => /^[a-z]/.test(t) && !ALLOWED.has(t)))];
-    expect(offenders, `${tab} renders a raw token where a word belongs`).toEqual([]);
-  });
+      const offenders = [...new Set(leaves.filter((t) => /^[a-z]/.test(t) && !ALLOWED.has(t)))];
+      expect(offenders, `${town} / ${tab} renders a raw token where a word belongs`).toEqual([]);
+      cleanup();
+    }
+    // ⚠ AN EXPLICIT TIMEOUT, because folding a table into one test folds its BUDGET too.
+    // Twenty full tab renders with every disclosure expanded used to be twenty tests with
+    // 20s each; they are now one test, and the global 20s would fail this as a TIMEOUT under
+    // parallel load rather than as the label defect it exists to catch.
+  }, 120000);
 
   // ANTI-VACUITY, ONCE AND GLOBALLY rather than per tab. A tab may legitimately render
   // nothing — WarTab on a town at peace is empty by design, and asserting a label count
