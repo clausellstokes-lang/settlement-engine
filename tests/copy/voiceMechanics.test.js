@@ -133,10 +133,15 @@ const UPDATE = process.env.UPDATE_VOICE_BASELINE === '1';
 
 // ── Tier 1: the runtime registry walk (hard zero) ────────────────────────────
 
-/** @param {unknown} v @param {string} path @param {Array<{path:string,text:string}>} out */
+/**
+ * ⚠ THE WHOLE STRING IS CARRIED, not the first 80 characters, and the truncation moved to the
+ * message below. The declared-exception table pins a string by its EXACT text, and a table
+ * that matched a prefix would exempt every sentence that merely started the same way.
+ * @param {unknown} v @param {string} path @param {Array<{path:string,text:string}>} out
+ */
 function walkValues(v, path, out) {
   if (typeof v === 'string') {
-    if (v.includes('—') || v.includes('!')) out.push({ path, text: v.slice(0, 80) });
+    if (v.includes('—') || v.includes('!')) out.push({ path, text: v });
   } else if (Array.isArray(v)) {
     v.forEach((x, i) => walkValues(x, `${path}[${i}]`, out));
   } else if (v && typeof v === 'object') {
@@ -547,18 +552,104 @@ function parsesWithEspree(src) {
   }
 }
 
+// ── TIER 1's DECLARED EXCEPTIONS (ODQ §934.26) ───────────────────────────────
+//
+// ⛔ NAMED BY PATH, PINNED BY TEXT, AND COUNT-PINNED — never a key exemption and
+// never a budget. Tier 1 is a HARD ZERO and stays one: the only way past it is a
+// row here that names the exact registry path, quotes the string in full, and
+// declares exactly how many em dashes and exclamation points that string carries.
+// A different sentence at the same path, one more bang inside the same sentence,
+// or a path the registry no longer resolves all RED — the first two through the
+// arm below, the third through its anti-vacuity sibling, so a row cannot outlive
+// the copy it was written for.
+//
+// ⚠ WHY TIER 1 HAS AN EXCEPTION AT ALL, AND WHY IT IS THE ONLY TIER THAT COULD.
+// The line is the OWNER'S, verbatim, punctuation included: he replaced two bullets
+// on the locked-Realm gate with one sentence and it ends on a bang. The words had
+// to live somewhere, and the alternative home — a string literal inside the gate
+// component — falls under the Tier-3 JSX ratchet, whose bang budget is ZERO and
+// which carries no allowlist at all. There the only two ways past are rewriting
+// the owner's words or raising a budget, and this lane may do neither. So the
+// sentence is declared in the registry and its exception is declared here, beside
+// it, where the next reader meets the reason and the count together.
+const REGISTRY_OWNER_COPY = Object.freeze({
+  'en.realmGate.valueLines[1]': Object.freeze({
+    text: 'Access wars, religion, trade, the world!',
+    em: 0,
+    bang: 1,
+    why: '§934.26 (the owner\'s verbatim copy) — the locked-Realm gate\'s second value line, '
+      + 'his own words and his own punctuation, read by src/components/map/RealmLockedGate.jsx.',
+  }),
+});
+
+/**
+ * Is this finding the exact string a row was declared for, carrying exactly the marks it
+ * declared? Anything else — a rewrite at the same path, a second bang in the same sentence —
+ * is not what was declared and is not exempt.
+ * @param {{path: string, text: string}} finding
+ */
+function isDeclaredOwnerCopy(finding) {
+  const row = REGISTRY_OWNER_COPY[finding.path];
+  if (!row || row.text !== finding.text) return false;
+  return (finding.text.match(/—/g) || []).length === row.em
+    && (finding.text.match(/!/g) || []).length === row.bang;
+}
+
+/** Every registry finding, across every registry, as one list. */
+function allRegistryFindings() {
+  /** @type {Array<{path:string,text:string}>} */
+  const found = [];
+  for (const [name, obj] of Object.entries(REGISTRIES)) walkValues(obj, name, found);
+  return found;
+}
+
 describe('E2 voiceMechanics — the copy registries carry no em dash and no exclamation point', () => {
   for (const [name, obj] of Object.entries(REGISTRIES)) {
     it(`${name} registry is clean`, () => {
       /** @type {Array<{path:string,text:string}>} */
-      const bad = [];
-      walkValues(obj, name, bad);
+      const found = [];
+      walkValues(obj, name, found);
+      const bad = found.filter((b) => !isDeclaredOwnerCopy(b));
       expect(
         bad,
-        `\nRewrite per docs/VOICE_AND_TONE.md §6 (no em dash, no exclamation point):\n${bad.map((b) => `  ${b.path}: "${b.text}"`).join('\n')}\n`,
+        `\nRewrite per docs/VOICE_AND_TONE.md §6 (no em dash, no exclamation point):\n${bad.map((b) => `  ${b.path}: "${b.text.slice(0, 80)}"`).join('\n')}\n`,
       ).toEqual([]);
     });
   }
+
+  it('every declared exception is still the exact string, at the exact path, with the exact counts', () => {
+    // ANTI-VACUITY. A row whose copy was rewritten, moved or deleted stops exempting anything
+    // and starts hiding the fact that it is dead. This is the arm that makes the table
+    // shrink-only in practice: the only way to remove a row is to remove the sentence.
+    const found = allRegistryFindings();
+    /** @type {string[]} */
+    const diffs = [];
+    for (const [path, row] of Object.entries(REGISTRY_OWNER_COPY)) {
+      const hit = found.find((b) => b.path === path);
+      if (!hit) {
+        diffs.push(`${path}: declared, but no registry string at that path carries an em dash or a bang`);
+        continue;
+      }
+      if (hit.text !== row.text) {
+        diffs.push(`${path}: declared "${row.text}" but the registry now reads "${hit.text}"`);
+        continue;
+      }
+      const em = (hit.text.match(/—/g) || []).length;
+      const bang = (hit.text.match(/!/g) || []).length;
+      if (em !== row.em || bang !== row.bang) {
+        diffs.push(`${path}: declared em:${row.em} bang:${row.bang}, measured em:${em} bang:${bang}`);
+      }
+    }
+    expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+  });
+
+  it('a declared exception exempts ONLY the sentence it declared (positive control)', () => {
+    const [path, row] = Object.entries(REGISTRY_OWNER_COPY)[0];
+    expect(isDeclaredOwnerCopy({ path, text: row.text }), 'the declared string').toBe(true);
+    expect(isDeclaredOwnerCopy({ path, text: `${row.text}!` }), 'one more bang').toBe(false);
+    expect(isDeclaredOwnerCopy({ path, text: 'Something else entirely!' }), 'another sentence').toBe(false);
+    expect(isDeclaredOwnerCopy({ path: `${path}x`, text: row.text }), 'another path').toBe(false);
+  });
 });
 
 describe('E2 voiceMechanics — src/data + src/domain string-literal ratchet (shrink-only)', () => {

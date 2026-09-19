@@ -311,7 +311,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               const allowed = isTierAllowed(key);
               return (
                 <option key={key} value={key} disabled={!allowed}>
-                  {`${SIZE_LABEL[key]} (${popRange(key)})${allowed ? '' : ' — sign in'}`}
+                  {`${SIZE_LABEL[key]} (${popRange(key)})${allowed ? '' : ' · sign in'}`}
                 </option>
               );
             })}

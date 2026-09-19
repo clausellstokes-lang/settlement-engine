@@ -32,6 +32,7 @@
  */
 
 import { useStore } from '../../store/index.js';
+import { tx } from '../../copy/index.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
@@ -48,19 +49,25 @@ export const REALM_GATE_HEADING = 'The Realm comes alive with Cartographer';
  * THE OWNER (2026-09-19) replaced the second and third with ONE line, in his own words
  * and his own punctuation: the two bullets "The self-ending war layer: sieges,
  * coalitions, conquest" and "The living pantheon: deities contest converts and rise"
- * became "Access wars, religion, trade, the world!". The first is unchanged.
+ * became one sentence ending on an exclamation point. The first is unchanged.
  *
  * ⛔ EXPORTED, AND THAT IS THE POINT. This card is the ONE locked-Realm gate — the phone
  * dashboard and the desktop palette both render THIS component, so there is no second
  * copy of the words to forget. The list is exported so a pin can hold the words in one
  * place rather than retyping them, which is how the old pair would have survived in a
  * test after leaving the screen.
+ *
+ * ⭐ AND THE WORDS LIVE IN THE COPY REGISTRY (`en.realmGate.valueLines`), not in this file.
+ * The owner's line ends on an exclamation point, which VOICE_AND_TONE §6 bans. The ban is
+ * enforced in BOTH places, but only the registry can carry a declared exception: the Tier-3
+ * JSX ratchet's bang budget is zero and it has no allowlist at all, so a component literal
+ * is a red with nowhere to write down WHY it is the owner's. The registry's arm takes a
+ * named, count-pinned row quoting the sentence and citing §934.26. So the words are declared
+ * once, where the exception is readable beside them, and this const is the surface's read of
+ * them — still exported, so the palette's a11y pin holds them in one place as before.
  * @type {ReadonlyArray<string>}
  */
-export const REALM_GATE_VALUE_LINES = Object.freeze([
-  'Advance the realm month by month and watch the chronicle fill',
-  'Access wars, religion, trade, the world!',
-]);
+export const REALM_GATE_VALUE_LINES = Object.freeze(tx('realmGate.valueLines') || []);
 
 export default function RealmLockedGate({
   tier, icon = null, onUpgrade, onSignIn, previewTension = null,

@@ -468,7 +468,7 @@ export const en = Object.freeze({
     // sentence reads, so the two halves of the offer cannot drift.
     preGenLocked: {
       rubric: 'Everything on random',
-      body:   'Without an account a settlement forges with every dial rolled — you choose the size and the simulator does the rest. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
+      body:   'Without an account a settlement forges with every dial rolled: you choose the size and the simulator does the rest. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
     },
     // ⛔ THE REALM LEAVES THE PHONE (the owner, ODQ §934.26). The first sentence is the
     // owner's own words. The second is the DOOR — the gate law's "every gate ends in an
@@ -479,6 +479,22 @@ export const en = Object.freeze({
       rubric: 'The Realm',
       body:   'The realm map opens on a tablet or larger screen. Your world is saved and waiting, exactly here, when you next sit down at one.',
     },
+  },
+
+  // ⛔ THE LOCKED-REALM GATE'S VALUE LINES — THE OWNER'S OWN WORDS, AND THIS IS THE ONE
+  // PLACE THEY LIVE (ODQ §934.26). He replaced two bullets with one sentence, in his own
+  // punctuation, and it ends on an exclamation point — which VOICE_AND_TONE §6 bans
+  // everywhere. So the line is declared HERE, where `tests/copy/voiceMechanics.test.js`
+  // holds a NAMED, COUNT-PINNED allowlist row for it citing this section and quoting the
+  // sentence. Spelled as a component literal instead — which is where it landed first — the
+  // same bang falls under the Tier-3 JSX ratchet, whose budget is ZERO and which has no
+  // allowlist at all: one home, one declaration, one exception, readable beside the words.
+  // `RealmLockedGate.jsx` reads this list and exports it for the palette's a11y pin.
+  realmGate: {
+    valueLines: [
+      'Advance the realm month by month and watch the chronicle fill',
+      'Access wars, religion, trade, the world!',
+    ],
   },
 
   // ── Pricing ───────────────────────────────────────────────────────────────
