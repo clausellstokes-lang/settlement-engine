@@ -66,11 +66,11 @@ import {
   captureCampaignSession,
   isCurrentCampaignSession,
 } from './campaignSliceShared.js';
+import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
 /** Whether the importing user may create campaigns (premium / elevated only). */
 function canImportCampaigns(auth) {
-  const role = auth?.role;
-  return auth?.tier === 'premium' || role === 'developer' || role === 'admin';
+  return auth?.tier === 'premium' || staffUnlocksPaidFeatures(auth?.role);
 }
 
 function accountChangedImportResult(previousAccountSaveCount = 0) {

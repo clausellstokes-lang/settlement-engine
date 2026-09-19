@@ -22,6 +22,7 @@ import {
   captureCampaignSession,
   isCurrentCampaignSession,
 } from './campaignSliceShared.js';
+import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
 // ── Trust and session boundaries ─────────────────────────────────────────────
 
@@ -119,11 +120,9 @@ async function cleanupImportedSaves(saveIds, ownerId) {
  */
 export async function importGalleryMapImpl(get, slug, expectedSession = null) {
   const initialState = get();
-  const role = initialState.auth?.role;
   const canCreate = (
     initialState.auth?.tier === 'premium'
-    || role === 'developer'
-    || role === 'admin'
+    || staffUnlocksPaidFeatures(initialState.auth?.role)
   );
   if (!canCreate) {
     throw new Error('Importing maps is a premium feature.');
@@ -222,11 +221,9 @@ export async function importGalleryMapImpl(get, slug, expectedSession = null) {
  */
 export async function importGalleryMapWithCampaignImpl(get, set, slug) {
   const initialState = get();
-  const role = initialState.auth?.role;
   const canCreate = (
     initialState.auth?.tier === 'premium'
-    || role === 'developer'
-    || role === 'admin'
+    || staffUnlocksPaidFeatures(initialState.auth?.role)
   );
   if (!canCreate) {
     throw new Error('Importing campaigns is a premium feature.');

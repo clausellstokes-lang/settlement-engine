@@ -1770,6 +1770,10 @@
     "tests/security/snapshotDenylistDrift.test.js": {
       "kind": "uncovered"
     },
+    "tests/security/staffUnlockSurveyorEntitlement.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/supportTickets.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

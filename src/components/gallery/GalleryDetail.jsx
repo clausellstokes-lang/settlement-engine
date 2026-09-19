@@ -22,6 +22,7 @@ import GalleryMoreByCreator from './GalleryMoreByCreator.jsx';
 import GalleryReactionChips from './GalleryReactionChips.jsx';
 import GalleryReportDialog from './GalleryReportDialog.jsx';
 import VoteButton from './VoteButton.jsx';
+import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
 
 const PublicDossierView = React.lazy(() => import('../PublicDossierView.jsx'));
 
@@ -137,7 +138,7 @@ export default function GalleryDetail({
   // Importing another DM's settlement is a premium feature (parity with map
   // import); sharing your own to the gallery is free. tier==='premium' covers
   // Cartographer + Founder; dev/admin pass for testing.
-  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  const isPremium = auth?.tier === 'premium' || staffUnlocksPaidFeatures(auth?.role);
   // Base eligibility: an owner-opted-in importable dossier the signed-in viewer
   // doesn't already own. A non-premium viewer still sees an "Import (premium)"
   // upgrade next-step (not a dead-end) that routes to pricing.

@@ -34,6 +34,7 @@ import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
 
 // The age-band vocabulary (domain/ageBands.js), read as a world's age.
 const WORLD_AGE_LABELS = Object.freeze({
@@ -62,7 +63,7 @@ export default function GalleryCampaigns({ onNavigate }) {
   const auth = useStore(s => s.auth);
   const importGalleryMapWithCampaign = useStore(s => s.importGalleryMapWithCampaign);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
-  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  const isPremium = auth?.tier === 'premium' || staffUnlocksPaidFeatures(auth?.role);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);

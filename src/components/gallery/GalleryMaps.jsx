@@ -23,13 +23,14 @@ import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS } from './galleryMapsFilters.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
+import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
   const importGalleryMap = useStore(s => s.importGalleryMap);
   const importGalleryMapWithCampaign = useStore(s => s.importGalleryMapWithCampaign);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
-  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  const isPremium = auth?.tier === 'premium' || staffUnlocksPaidFeatures(auth?.role);
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);

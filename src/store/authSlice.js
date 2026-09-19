@@ -16,11 +16,20 @@
  *   'developer' – full bypass of all tier restrictions, admin panel access
  *   'admin'     – admin panel access, user management
  *
- * Developers/admins bypass ALL tier gates automatically.
+ * Developers/admins bypass ALL tier gates automatically — WHILE THE UNLOCK STANDS.
  * AI features are gated by credits (creditsSlice), not tier — except developers get unlimited.
+ *
+ * ⛔ THE STAFF BYPASS IS THE OWNER'S TEMPORARY ORDER, NOT A PROPERTY OF THE ROLE
+ * (ODQ §934.28: "enable all paid for features (for right now) to all developers
+ * and admin for testing purposes"). It is spelled ONCE, in
+ * src/lib/staffEntitlements.js, behind STAFF_UNLOCK_ALL_PAID. Flip that constant
+ * to false and every gate below reverts to TIER_GATE for staff too; nothing in
+ * this file needs editing. Read that module's header for exactly what the switch
+ * reaches and what it deliberately does not.
  */
 
 import { auth as authService } from '../lib/auth.js';
+import { isStaffRole, staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 import { activateOutboxOwner } from './outbox.js';
 import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
@@ -63,15 +72,25 @@ const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 
 // for every account tier (ported master fix).
 const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
 
-/** Roles that bypass all tier restrictions */
-const ELEVATED_ROLES = ['developer', 'admin'];
+// ⛔ THE ROLE QUESTION HAS ONE HOME: src/lib/staffEntitlements.js. This slice used
+// to keep its own `ELEVATED_ROLES = ['developer','admin']` and ten call sites
+// spelling `ELEVATED_ROLES.includes(...)`, while eight other modules hand-copied
+// the same disjunction — the drift class the premium-gate census exists against,
+// and with no single line anyone could flip to take a temporary unlock back.
+// ODQ §934.28 made the unlock temporary by the owner's own words ("for right
+// now"), so the two questions now come from the one module:
+//   isStaffRole(role)             IDENTITY — is this account staff? Never switched.
+//   staffUnlocksPaidFeatures(role) ENTITLEMENT — does staff get the paid surface?
+//                                  Governed by STAFF_UNLOCK_ALL_PAID.
 
-// Elevated roles (admin / developer) carry a perpetual Cartographer (premium)
-// status: they never pay, and their account reads as Cartographer everywhere
-// `auth.tier` is consulted. Whatever billing tier the profile reports is
-// overridden to 'premium' for these roles.
+// An UNLOCKED staff account (admin / developer) carries a perpetual Cartographer
+// (premium) status: they never pay, and their account reads as Cartographer
+// everywhere `auth.tier` is consulted. Whatever billing tier the profile reports
+// is overridden to 'premium' for those roles. With the unlock revoked this
+// returns the account's real billing tier, so every gate below answers from
+// TIER_GATE exactly as it does for a member.
 function resolveTier(tier, role) {
-  return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
+  return staffUnlocksPaidFeatures(role) ? 'premium' : (tier || 'free');
 }
 let authUnsubscribe = null;
 // M-9d — teardown for the single-session validation loop (focus/visibility + interval).
@@ -296,10 +315,14 @@ export const createAuthSlice = (set, get) => ({
     return held;
   },
 
-  // ── Role queries ──────────────────────────────────────────────────────────
+  // ── Role queries (IDENTITY — never governed by the paid-unlock switch) ────
+  // These answer "is this account staff", which the admin panel, the account
+  // menu's Developer row and the elevated route guard ask. Revoking a testing
+  // convenience must never lock the owner out of the admin panel, so the kill
+  // switch deliberately does not reach them.
   isDeveloper: () => get().auth.role === 'developer',
-  isAdmin: () => ELEVATED_ROLES.includes(get().auth.role),
-  isElevated: () => ELEVATED_ROLES.includes(get().auth.role),
+  isAdmin: () => isStaffRole(get().auth.role),
+  isElevated: () => isStaffRole(get().auth.role),
   /** Whether the user's account tier grants premium benefits (unlimited
    *  chronicle history, supply chains, custom content, etc.). Orthogonal to
    *  role — an elevated role is checked separately via isElevated(). */
@@ -513,7 +536,16 @@ export const createAuthSlice = (set, get) => ({
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
-          tier: result.tier, role: result.role || 'user',
+          // ⛔ THE ONE PATH THAT DID NOT RESOLVE THE TIER (found in the §934.28
+          // recon). Every other writer — setAuth, initAuth, authSignUp and the
+          // onAuthChange SIGNED_IN/TOKEN_REFRESHED handler — passes the profile
+          // tier through resolveTier, so a staff account reads 'premium'. This
+          // one wrote `result.tier` raw, so a developer/admin signing in with a
+          // password briefly held their REAL billing tier ('free') and every
+          // TIER_GATE read refused them until the auth-state listener happened
+          // to land and repair it. A race decided whether staff saw the paid
+          // surface. It resolves here now, like its four siblings.
+          tier: resolveTier(result.tier, result.role), role: result.role || 'user',
           displayName: result.displayName || null,
           isFounder: Boolean(result.isFounder),
           avatarUrl: result.avatarUrl || null,
@@ -677,19 +709,19 @@ export const createAuthSlice = (set, get) => ({
 
   // ── Permission queries (elevated roles bypass all gates) ──────────────────
   canSave: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.maxSaves > 0;
   },
 
   canUseNeighbour: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.neighbour === true;
   },
 
   canExport: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.export === true;
   },
@@ -703,32 +735,32 @@ export const createAuthSlice = (set, get) => ({
   // fire the map_realm_teaser pricing moment. The stored layers.chains default
   // is untouched, so an upgrade restores the layer without re-toggling.
   canUseMapChains: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.mapChains === true;
   },
 
   /** Whether the user can create/edit custom Compendium content (premium gate). */
   canUseCustomContent: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.customContent === true;
   },
 
   maxAllowedTier: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return 'metropolis';
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'metropolis';
     const { tier } = get().auth;
     return TIER_GATE[tier]?.maxTier || 'village';
   },
 
   maxSaves: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return Infinity;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return Infinity;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.maxSaves ?? 0;
   },
 
   isTierAllowed: (settlementTier) => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     // Sentinels resolve to a concrete tier at generation; the post-resolution
     // re-gate checks that. Unknown non-sentinel tiers FAIL CLOSED.
     if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
@@ -741,7 +773,7 @@ export const createAuthSlice = (set, get) => ({
 
   /** Whether the user can afford AI features (developers get unlimited) */
   canAffordAI: (feature) => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     return get().canAfford(feature);
   },
 });

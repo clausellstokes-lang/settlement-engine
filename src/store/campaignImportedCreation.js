@@ -22,6 +22,7 @@ import {
   localWrite,
   newCampaignId,
 } from './campaignSliceShared.js';
+import { staffUnlocksPaidFeatures } from '../lib/staffEntitlements.js';
 
 export function buildNewCampaign(current, name, initial = {}) {
   const id = newCampaignId();
@@ -80,10 +81,8 @@ export async function createImportedCampaignWithReceipt({
   initial = {},
 }) {
   const current = get();
-  const role = current.auth?.role;
   const canCreate = current.auth?.tier === 'premium'
-    || role === 'developer'
-    || role === 'admin';
+    || staffUnlocksPaidFeatures(current.auth?.role);
   if (!canCreate) {
     return {
       ok: false,
