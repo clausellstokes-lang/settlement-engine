@@ -1177,7 +1177,17 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // (locksPreservation.js, coup.js) are no longer banked. ⚠ They are not merely
     // unbanked: they left the estate with the lock controls, so they are also two of
     // the six STALE rows the governed re-freeze must absorb. MEASURED off this scan.
-    expect(live.explainedWriters.banked).toBe(60);
+    // ⭐ 60 → 61 AT THE SCHEMA-21 RUNG (2026-09-18, ODQ §934.9), and it is the FIRST note
+    // above's shape rather than the second: the roster did NOT move (still eight entries,
+    // same writers, same rulings). DS-REL-1's list assembler
+    // (src/components/new/relationshipsDeskRead.js) reads the already-declared
+    // `neighbourNetwork on settlement` once, and bank-by-rule tags that address from the
+    // existing declaration — so this figure moves while EXPLAINED_WRITER_EXEMPTIONS does
+    // not, and the two arms below still pin the roster. The file's other two reads
+    // (`interSettlementRelationships`, `crossSettlementConflicts`) are UNDECLARED and are
+    // admitted as ORDINARY rows, so they add nothing here: that is exactly the difference
+    // this figure exists to show. MEASURED off this scan.
+    expect(live.explainedWriters.banked).toBe(61);
     expect(Object.entries(corpus.shapes)
       .filter(([, shape]) => shape.keys.includes('source'))
       .map(([name]) => name)).toEqual([
@@ -1375,7 +1385,13 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // (locksPreservation.js, coup.js) left the estate with the lock controls, which
       // is why they show up as STALE rows the re-freeze must absorb rather than as
       // rows that merely stopped being banked.
-      'neighbourNetwork on settlement': { reads: 38, addresses: 25 },
+      // ⭐ 38/25 → 39/26 AT THE SCHEMA-21 RUNG (ODQ §934.9): DS-REL-1's list assembler,
+      // src/components/new/relationshipsDeskRead.js, is a 26th address. This is the LIVE
+      // side of the same move the register pin above records, and the two are deliberately
+      // measured from different sources — this map from the live scan's tagged addresses,
+      // the register's from the frozen rowTags — so a re-freeze that moved one without the
+      // other would still red here.
+      'neighbourNetwork on settlement': { reads: 39, addresses: 26 },
       'stresses on settlement': { reads: 4, addresses: 3 },
       'worldPulse on campaignState': { reads: 2, addresses: 2 },
       'appliedAt on eventLog': { reads: 1, addresses: 1 },
@@ -1402,7 +1418,9 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
     // bank and therefore cannot satisfy the live count asserted above.
     const bankedIdentities = new Set(live.explainedWriters.bankedIdentities);
     const clearOutright = live.findings.filter((finding) => !bankedIdentities.has(identityOf(finding)));
-    expect(clearOutright).toHaveLength(live.findings.length - 60);
+    // − 61 from the schema-21 rung, moving with the banked figure pinned above rather than
+    // being a second hand-held copy of it.
+    expect(clearOutright).toHaveLength(live.findings.length - 61);
     expect(inventoryOf(clearOutright)).not.toEqual(liveInventory);
   });
 
