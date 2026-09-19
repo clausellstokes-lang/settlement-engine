@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
-import { relColor } from '../../settlements/relationshipColors.js';
+import { relColor } from '../../../domain/display/relationshipColors.js';
 import { serif, Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';

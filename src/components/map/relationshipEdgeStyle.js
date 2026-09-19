@@ -5,7 +5,7 @@
  * RelationshipEdges (the lines on the map) and MapLegend (the key) both read from
  * here, so the drawn line and the legend that explains it can never disagree on a
  * color, dash, or label (P11). REL_EDGE_STYLE derives its hues from the canonical
- * cross-surface palette (settlements/relationshipColors.js) so the map line, the
+ * cross-surface palette (domain/display/relationshipColors.js) so the map line, the
  * dossier neighbour chip, and the PDF relationship line share ONE muted parchment
  * hue per type; this module owns the edge METADATA (width/dash/priority/arrow) and
  * the type LIST. criminal_network is a real canonical relationship type that was
@@ -13,7 +13,7 @@
  * pulse-minted war/faith channel styling.
  */
 
-import { relColor } from '../settlements/relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 
 // Edge METADATA (color/width/dash/priority/arrow) + the type LIST. Colors derive
 // from the canonical brand palette (relColor) so the map line, the dossier chip,

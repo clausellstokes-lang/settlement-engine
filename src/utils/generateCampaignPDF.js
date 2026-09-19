@@ -18,7 +18,7 @@ import { resolveSettlementCulture } from '../domain/resolveCulture.js';
 import { autoLayout } from './graphLayout.js';
 import { slugify } from '../kernel/slugify.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
-import { REL_RGB, relRgb } from '../components/settlements/relationshipColors.js';
+import { REL_RGB, relRgb } from '../domain/display/relationshipColors.js';
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';

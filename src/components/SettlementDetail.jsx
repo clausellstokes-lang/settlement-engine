@@ -78,7 +78,7 @@ import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffec
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
-import { REL_HEX, relColor } from './settlements/relationshipColors.js';
+import { REL_HEX, relColor } from '../domain/display/relationshipColors.js';
 import { track, EVENTS } from '../lib/analytics.js';
 
 // §67.2: the copy that stood here carried the canonical VALUES but was missing

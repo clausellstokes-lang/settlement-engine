@@ -23,7 +23,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
 import { useStore } from '../../store/index.js';
-import { relColor } from './relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 import { track, EVENTS } from '../../lib/analytics.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
 

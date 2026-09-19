@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
-import { relColor } from '../settlements/relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';

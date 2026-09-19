@@ -43,6 +43,24 @@
  * in theme.js (no GOLD/INK equivalent), so they live here as the canonical
  * cross-surface source rather than being re-forked per component.
  *
+ * ⛔ WHY IT MOVED OUT OF `components/settlements/` (2026-09-19). It was already the
+ * cross-surface source — its own header names the PDF as a reader — but it lived
+ * under `src/components`, and `src/pdf` MAY NOT REACH INTO `src/components`: the paid
+ * document renders in its own worker off its own theme. So the one module the PDF and
+ * the screen were required to share was the one module the PDF was not allowed to
+ * import, and `sections/Relationships.jsx` imported it anyway. That crossing went
+ * unnoticed because tests/architecture/layerBoundaries.test.js did not mention
+ * `src/pdf` at all; the same blind spot let a duplicate `statusCase` import land in
+ * `sections/DefenseSecurity.jsx` and break that module's parse.
+ *
+ * The cure is the ordinary one and the same `labelCase.js` took: THE PURE PART COMES
+ * DOWN to the layer both surfaces already share. This file imports NOTHING, so the
+ * move costs no dependency; `src/pdf` reads a dozen `domain/display/*` modules
+ * already, so it sits on an edge that exists rather than opening a new one. No
+ * re-export shim was left behind — this module is only the palette, so a shim would
+ * be indirection with no second reason to exist, and all seven importers were
+ * repointed instead.
+ *
  *   REL_HEX[type]      → "#rrggbb" for the web surfaces (card + detail).
  *   REL_RGB[type]      → [r,g,b]   for jsPDF (which takes numeric channels).
  *   relColor(type)     → hex with a neutral fallback.

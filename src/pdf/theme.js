@@ -79,7 +79,7 @@ export const factionColors = {
 // Meanwhile the jsPDF exporter beside it (utils/generateCampaignPDF.js) painted
 // the canonical set, so ONE PRODUCT SHIPPED TWO PDF SYSTEMS THAT DISAGREED WITH
 // EACH OTHER about what an alliance looks like. Every surface now reads
-// components/settlements/relationshipColors.js, which is a bijection with the
+// domain/display/relationshipColors.js, which is a bijection with the
 // engine's own relationship vocabulary.
 
 // ── Font registration ────────────────────────────────────────────────────────

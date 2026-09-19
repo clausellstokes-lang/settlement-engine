@@ -22,7 +22,7 @@ import { relationshipsHeadline } from '../lib/headlines.js';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { relColor } from '../../components/settlements/relationshipColors.js';
+import { relColor } from '../../domain/display/relationshipColors.js';
 import {
   label, hookText, humanize, prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
