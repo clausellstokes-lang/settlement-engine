@@ -1017,6 +1017,24 @@ describe('D2b — §810.4 R18/R20: a faction exists exactly as long as its roste
     expect(isOnRoster({ status: 'missing' })).toBe(true);
   });
 
+  it('⭐ a JAILED figure stays ON the roster — a reversible verdict never dissolves a house (EM-B1d)', () => {
+    // EM-B1d widened NpcStatus with `jailed` and deliberately did NOT put it on the absent
+    // line. Design §15's "a jailed or exiled holder cannot keep a seat" is a fact about
+    // AVAILABILITY — it lives in NPC_UNAVAILABLE_STATUSES (entities/npcs.js), which DOES carry
+    // the word — while this constant answers house MEMBERSHIP, whose consequence (dissolution)
+    // is permanent. R18 admits only irreversible causes to it, and a verdict ends.
+    expect(isOnRoster({ status: 'jailed' }), 'a jailed figure must keep their place in the house').toBe(true);
+    // anchored: the sibling arm above pins ROSTER_ABSENT_STATUSES by exact equality in both directions, which proves this array is live and correctly shaped; this line names the one word that must never join it
+    expect(ROSTER_ABSENT_STATUSES, 'the absent line admits only IRREVERSIBLE causes (R18)').not.toContain('jailed');
+    const s = {
+      config: v2Cfg,
+      powerStructure: { factions: [house('The Weavers')] },
+      npcs: [figure('Ilse', 'The Weavers', 'jailed')],
+    };
+    expect(factionLifecycleStateOf(s, s.powerStructure.factions[0]), 'a house whose only figure is jailed was dissolved').toBe('crewed');
+    expect(readFactionLifecycle(s, { tick: 1 }).reactions, 'a reversible verdict raised a lifecycle reaction').toEqual([]);
+  });
+
   it('the reader NEVER mutates the settlement it reads (state, never fate)', () => {
     const s = {
       config: v2Cfg,

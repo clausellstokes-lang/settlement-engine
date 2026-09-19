@@ -27,11 +27,18 @@
 
 /** @typedef {'minor'|'notable'|'key'|'pillar'} NpcImportance */
 
-/** @typedef {'active'|'dead'|'missing'|'exiled'|'retired'|'removed'} NpcStatus
+/** @typedef {'active'|'dead'|'exiled'|'jailed'|'missing'|'removed'|'retired'} NpcStatus
+ *
+ * Authored in codepoint order, so a future member is a one-token diff.
  *
  * 'removed' comes from the shared entity lifecycle (see entities/status.js
  * EntityStatus — "NPC departed"); the rest are NPC-specific. Successor
- * inference treats dead/removed/exiled NPCs as ineligible.
+ * inference treats dead/removed/exiled/jailed NPCs as ineligible.
+ *
+ * 'jailed' is the DM's own act and the court's verdict (design §15, EM-B1d):
+ * "a jailed or exiled holder cannot keep a seat: the holder guard offers a
+ * successor (fulfil) or proceed; an exile may return by a later decree."
+ * Captivity as a per-layer fact is NOT this word (design §15:313).
  */
 
 /** @typedef {Object} NpcStructural
@@ -76,6 +83,26 @@
  */
 
 import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+
+/**
+ * THE STATUSES THAT MEAN A FIGURE CANNOT ACT, HOLD A PLACE, OR SUCCEED (design §15: "a jailed
+ * or exiled holder cannot keep a seat: the holder guard offers a successor (fulfil) or
+ * proceed; an exile may return by a later decree").
+ *
+ * ⛔ THIS IS NOT THE HOUSE-ROSTER READING, and the two must never be merged again.
+ * `ROSTER_ABSENT_STATUSES` (density/factionLifecycle.js) answers a different question — is the
+ * figure off their house's roster, so that an empty roster DISSOLVES the house — and R18 admits
+ * only IRREVERSIBLE causes to that irreversible consequence. A verdict ends, so `jailed` is
+ * UNAVAILABLE but still ON the roster: a house whose last figure is jailed stays `crewed`.
+ * Participation is a THIRD question, cured once at `isOffStage` (roads/state.js §8) by EM-B1f.
+ *
+ * 'missing' and 'retired' are deliberately absent: a missing figure may walk back through the
+ * gate, and a retired elder may still be named a successor. A consumer that wants them says so
+ * itself — `envoyCasting.js` adds 'missing' for the dispatch reading and explains why there.
+ *
+ * @type {readonly NpcStatus[]}
+ */
+export const NPC_UNAVAILABLE_STATUSES = Object.freeze(['dead', 'exiled', 'jailed', 'removed']);
 
 const IMPORTANCE_WEIGHT = {
   minor:   0.0,  // suppresses propagation entirely
