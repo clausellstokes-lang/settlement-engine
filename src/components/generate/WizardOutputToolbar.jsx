@@ -24,6 +24,7 @@ import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, FS, HEADER_H } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SimulationDrawer = lazy(() => import('../dossier/SimulationDrawer.jsx'));
 
@@ -168,7 +169,11 @@ export function WizardOutputToolbar({
         }}>
           {settlement.name || 'Untitled Settlement'}
         </div>
-        <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        {/* THE TITLE STRIP'S SECOND LINE TAKES THE PHONE CHROME FLOOR (browser pass 3).
+            Tracked uppercase at FS.xxs is 10 px, and at 375 wide this was the tier and the
+            population — the two facts the strip exists to carry — under the estate's 12 px
+            floor for chrome. The name above it is FS.lg and needs no floor. */}
+        <div style={{ fontSize: chromeFontSize(FS.xxs, isMobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           {settlement.tier || 'Settlement'} &middot; Pop. {settlement.population != null ? formatCount(settlement.population) : '?'}
         </div>
       </div>

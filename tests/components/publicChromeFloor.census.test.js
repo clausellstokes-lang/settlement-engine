@@ -103,6 +103,16 @@ const ROSTER = Object.freeze({
     surface: 'the /create sample strip: each card name, its size·terrain meta, its teaser and its tags',
     chrome: 2, prose: 1, ruled: 0,
   },
+  // ⭐ THE POST-GENERATE HALF OF THE SAME PAGE (browser pass 3, 2026-09-19). /create does not
+  // stop at the hero: once a town is forged this toolbar is what stays pinned to the top of
+  // it, and its second line — the tier and the population, tracked uppercase at FS.xxs — was
+  // 10 px at 375 wide. It fell between the two censuses exactly as the roster's docblock
+  // predicts a file can: the dossier census governs `src/components/new` and this is not that,
+  // and this roster had only the pre-generate surfaces.
+  'src/components/generate/WizardOutputToolbar.jsx': {
+    surface: "the post-generate title strip pinned above the dossier: the settlement's name, its tier and its population",
+    chrome: 1, prose: 0, ruled: 0,
+  },
   'src/components/home/WelcomeBackCard.jsx': {
     surface: "the signed-in /create card above the hero",
     chrome: 1, prose: 0, ruled: 0,
