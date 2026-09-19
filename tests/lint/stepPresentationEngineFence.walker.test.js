@@ -34,6 +34,23 @@
  * of its own (the WORKER_LAZY_EDGES table in tests/build/generationWorkerLazy.test.js is frozen
  * at one row and says so).
  *
+ * ⛔ AND THE SPECIFIER IS NOT ALWAYS A QUOTED STRING, which review 13 (2026-09-18) probed and
+ * the first cut of these arms missed. Two more shapes read past a quote-anchored matcher:
+ *
+ *     await import(`./stepMetadata.js`);   // a BACKTICK specifier, no substitution
+ *     await import(specifier);             // a COMPUTED specifier, resolvable only at runtime
+ *
+ * The first is now matched like its quoted twins. The second cannot be: no grep can say what
+ * `specifier` holds. So it is met with a MEASUREMENT instead of a matcher - the engine dirs
+ * carry 24 dynamic imports and EVERY ONE of them is a plain string literal, so the population
+ * of computed specifiers there is ZERO and is frozen at zero below.
+ *
+ * ⚠ THAT FLOOR IS A REGISTER, NOT A NEW PROHIBITION, and the distinction is deliberate: this
+ * lane found no walker governing computed specifiers anywhere in src/, so banning them outright
+ * across five directories is not a fence's call to make. What the arm says is narrower and true:
+ * today there are none, one would be the only shape that could reach this module invisibly, and
+ * the first to land must be named and read rather than arrive unannounced.
+ *
  * ⚠ ANCHORED BOTH WAYS. A scan that finds nothing passes for two very different reasons —
  * the law holds, or the walk is broken and reads no files at all. So the arms below assert
  * that the sweep really read the engine trees (a file count floor plus a sentinel symbol
@@ -91,12 +108,34 @@ const namesSymbol = (file) => SYMBOLS.some((symbol) => file.code.includes(symbol
  * THE WHOLESALE FORMS, which take every export at once and name none of them.
  * Each is anchored on the module's own path so an unrelated `export *` is not caught.
  */
-const HOME_SPECIFIER = /['"][^'"]*stepMetadata\.js['"]/.source;
+const HOME_SPECIFIER = /['"`][^'"`]*stepMetadata\.js['"`]/.source;
 const STAR_REEXPORT = new RegExp(`export\\s*\\*(?:\\s+as\\s+\\w+)?\\s*from\\s*${HOME_SPECIFIER}`);
 const NAMESPACE_IMPORT = new RegExp(
   `import\\s*\\*\\s*as\\s+\\w+\\s*from\\s*${HOME_SPECIFIER}`
   + `|\\bimport\\s*\\(\\s*${HOME_SPECIFIER}\\s*\\)`,
 );
+
+/** A dynamic import whose whole specifier is a plain string literal, backticks included. */
+const LITERAL_DYNAMIC = /^\s*import\s*\(\s*(?:'[^']*'|"[^"]*"|`[^`$\\]*`)\s*[,)]/;
+/** Every `import(` opening, opaque ones included — the idiom the dist ceiling test uses. */
+const DYNAMIC_OPENING = /\bimport\s*\(/g;
+
+/** Source with comments stripped, so a matcher never answers to a code sample in prose. */
+const bodyOf = (code) => code.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+
+/**
+ * Dynamic imports in `code` whose specifier is NOT a plain string literal.
+ * @returns {string[]} the opening of each offending call, for the failure message
+ */
+function computedDynamicImports(code) {
+  const body = bodyOf(code);
+  const out = [];
+  for (const match of body.matchAll(DYNAMIC_OPENING)) {
+    const tail = body.slice(match.index, match.index + 240);
+    if (!LITERAL_DYNAMIC.test(tail)) out.push(tail.split('\n')[0].trim().slice(0, 100));
+  }
+  return out;
+}
 
 /** Files in the engine trees, minus the module the tables live in. */
 const engineFiles = () => SOURCES
@@ -182,6 +221,38 @@ describe('the rail\'s words never cross into the generation worker (STEP_PRESENT
       `${offenders.join(', ')} takes stepMetadata.js as a namespace object. A namespace is a `
       + 'reference to EVERY export, so rollup keeps STEP_PRESENTATION and the rail\'s words ride '
       + 'into the worker unnamed. Import the bindings the engine actually uses.',
+    ).toEqual([]);
+  });
+
+  it('no dynamic import in the engine trees has a COMPUTED specifier', () => {
+    // ANCHOR BOTH WAYS. The three literal shapes are accepted and the two opaque ones are
+    // refused, so neither an empty result nor a full one can come from a dead matcher.
+    expect(computedDynamicImports("await import('./a.js');"), 'single quotes').toEqual([]);
+    expect(computedDynamicImports('await import("./a.js");'), 'double quotes').toEqual([]);
+    expect(computedDynamicImports('await import(`./a.js`);'), 'backticks').toEqual([]);
+    expect(computedDynamicImports('await import(spec);'), 'a variable').toHaveLength(1);
+    expect(computedDynamicImports('await import(`./${name}.js`);'), 'a substitution')
+      .toHaveLength(1);
+    // ...and it does not answer to a code sample sitting in a comment.
+    expect(computedDynamicImports('// await import(spec);\nconst x = 1;'), 'prose').toEqual([]);
+
+    // ANCHOR ON THE POPULATION: the sweep must still SEE the literal dynamic imports it is
+    // measuring against, or "zero computed" would be true of a walk that read nothing.
+    const literalSites = engineFiles()
+      .concat(SOURCES.filter((f) => f.path === HOME))
+      .reduce((n, f) => n + (bodyOf(f.code).match(DYNAMIC_OPENING) || []).length, 0);
+    expect(literalSites, 'the engine dirs lost their dynamic imports, so this arm measures nothing')
+      .toBeGreaterThanOrEqual(20);
+
+    const offenders = engineFiles()
+      .flatMap((f) => computedDynamicImports(f.code).map((site) => `${f.path}: ${site}`));
+    expect(
+      offenders,
+      `${offenders.join(' | ')} — a dynamic import whose specifier is computed. THIS IS A `
+      + 'REGISTER, NOT A BAN: the engine dirs carry no computed specifier today, and one is the '
+      + 'only shape that could pull stepMetadata.js (and STEP_PRESENTATION with it) into the '
+      + 'generation worker without any grep in this file being able to say so. Name it here with '
+      + 'a reason and confirm it cannot resolve stepMetadata.js.',
     ).toEqual([]);
   });
 

@@ -1546,6 +1546,30 @@ check_caught "step-presentation/a barrel re-exports stepMetadata.js wholesale an
 perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep } from '..\/generators\/steps\/stepMetadata.js';\nimport * as stepMetaNamespace from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
 check_caught "step-presentation/the worker entry takes stepMetadata.js as a namespace and every export is kept" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees takes stepMetadata.js as a NAMESPACE"
 
+# 109. THE SPECIFIER IS NOT ALWAYS A QUOTED STRING (review 13). Plants #106-#108 are anchored on
+#      a specifier in single or double quotes; a BACKTICK specifier with no substitution is the
+#      same import and walks past all three matchers. Nothing else changes: the module is loaded
+#      whole, the namespace holds every export, STEP_PRESENTATION survives. The perl program is
+#      single-quoted so the backticks stay literal to the shell (\x27 is the apostrophe).
+#      Measured with a cp backup and a cp restore (never the checkout family; md5
+#      d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 7 passed; planted => 2 red
+#      (the namespace arm by name and the exact-readers arm), 5 passed; restored => 7 passed.
+perl -0pi -e 's/import \{ metaForStep \} from \x27\.\.\/generators\/steps\/stepMetadata\.js\x27;/import { metaForStep } from \x27..\/generators\/steps\/stepMetadata.js\x27;\nconst stepMetaTpl = await import(`..\/generators\/steps\/stepMetadata.js`);/' src/workers/generationRequest.js
+check_caught "step-presentation/a BACKTICK specifier walks past every quote-anchored matcher" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees takes stepMetadata.js as a NAMESPACE"
+
+# 110. AND THE SHAPE NO GREP CAN READ (review 13). A COMPUTED specifier - here the path assembled
+#      from two fragments and joined, so the module name never appears in the file at all - is the
+#      one form that defeats every matcher in the fence by construction. ⭐ THE PROOF IS THAT THIS
+#      PLANT REDS EXACTLY ONE ARM: the symbol, re-export and namespace arms all stay GREEN, which
+#      is precisely the hole, and only the computed-specifier register sees it. That register is a
+#      MEASUREMENT rather than a ban (the engine dirs carry 24 dynamic imports and zero computed
+#      specifiers today), because no walker in src/ governs the shape and a fence may not invent
+#      an estate-wide prohibition on its own.
+#      Measured with a cp backup and a cp restore (md5 d95215a51793f8a3fdd6639ef9d2bc54 before and
+#      after): clean => 7 passed; planted => 1 red, 6 passed; restored => 7 passed.
+perl -0pi -e 's/import \{ metaForStep \} from \x27\.\.\/generators\/steps\/stepMetadata\.js\x27;/import { metaForStep } from \x27..\/generators\/steps\/stepMetadata.js\x27;\nconst stepMetaSpec = [\x27..\/generators\/steps\/step\x27, \x27Metadata.js\x27].join(\x27\x27);\nconst stepMetaAny = await import(stepMetaSpec);/' src/workers/generationRequest.js
+check_caught "step-presentation/a COMPUTED specifier pulls the module in and no grep can say so" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no dynamic import in the engine trees has a COMPUTED specifier"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
