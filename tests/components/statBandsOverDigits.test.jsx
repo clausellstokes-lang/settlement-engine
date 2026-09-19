@@ -33,7 +33,7 @@ import { scoreBand, scoreColor } from '../../src/domain/display/defenseScoreBand
 import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
-import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { DefenseTab, STATUS_IS_THE_GRADE } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -188,6 +188,14 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
 });
 
 describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
+  /** Economic Backing's own status ladder, as `deriveSupportingCapabilities` spells it. */
+  const ECON_STATUS_LADDER = ['Well-funded', 'Adequate', 'Underfunded', 'Critical'];
+
+  /** A fixture town with some of its defence scores moved and nothing else touched. */
+  const withScores = (s, moved) => ({
+    ...s, defenseProfile: { ...s.defenseProfile, scores: { ...s.defenseProfile.scores, ...moved } },
+  });
+
   test.each(CASES.map(([n]) => n))('%s: every scored capability row says its grade exactly once', (name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     render(<DefenseTab settlement={settlement} />);
@@ -235,14 +243,18 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
         continue;
       }
 
-      const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
-      if (bands.length === 1) {
+      // ONE NUMBER, ONE VERDICT. A row whose status IS the grade of its score takes no band,
+      // because the band would grade the same number a second time in a second vocabulary,
+      // and it says its own status exactly once. A presence read beside a bar keeps the band,
+      // because there the band is the only word that grades the bar.
+      if (STATUS_IS_THE_GRADE.includes(label)) {
+        expect(bands.length, `${label}'s status already grades this bar, so a band grades it twice`).toBe(0);
+        expect(said, `${label} must say its own grade exactly once`).toEqual([cap.status]);
+      } else {
+        const implied = statusCase(scoreBand(Math.min(100, Math.max(0, cap.score || 0))));
+        expect(bands.length, `${label} is graded by its band alone, so the band must render`).toBe(1);
         expect(bands[0].textContent, `${label}'s band must read a band word`).toMatch(BAND_RE);
         expect(bands[0].textContent, `${label}'s band must be THIS row's score`).toBe(implied);
-      } else {
-        // The band may be dropped for ONE reason: the grade is already said elsewhere in
-        // the row. A row that lost its grade for any other reason is the defect this catches.
-        expect(said, `${label} dropped its band without the row saying that word`).toContain(implied);
       }
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
@@ -250,19 +262,74 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/);
   });
 
-  // REACHABILITY, deterministically rather than through whatever the fixtures happen to
-  // roll: the fold above is dead code unless the two ladders really can produce the same
-  // word. Economic Backing grades econScore at 65/40/25 into the first list;
-  // `scoreBand` grades the SAME number at 65/40/20 into the second.
-  test('Economic Backing\'s status ladder and the band ladder overlap, so the fold is reachable', () => {
-    const statuses = ['Well-funded', 'Adequate', 'Underfunded', 'Critical'];
-    const bandWords = [100, 65, 40, 20, 0].map((n) => statusCase(scoreBand(n)));
-    expect(
-      statuses.filter((w) => bandWords.includes(w)),
-      'the ladders stopped overlapping — the fold in DefenseTab is now dead code, remove it',
-    ).toEqual(['Adequate', 'Critical']);
-    // ...and they are not the SAME ladder, so the band still says something of its own.
-    expect(statuses).not.toEqual(bandWords);
+  /**
+   * ONE NUMBER, ONE VERDICT, AT EVERY THRESHOLD OF BOTH LADDERS — deterministically, rather
+   * than through whatever the four fixtures happen to roll (their econScores never land inside
+   * the window where the two ladders disagree).
+   *
+   * Economic Backing's status grades econScore at 65/40/25; the shared band grades the SAME
+   * number at 65/40/20. The first cure folded the band only where the two WORDS were equal,
+   * and this arm is what that missed: at 20-24 the row printed "Critical" beside "Weak", at
+   * 25-39 "Underfunded" beside "Weak", and from 65 "Well-funded" beside "Strong". Each score
+   * below is a threshold of one ladder or the other, or sits inside the window between them.
+   *
+   * CASE-BLIND ON PURPOSE: case is what hid the first form of this defect (a capitalised band
+   * beside a sentence-case status read as two different marks), so a grade word counts however
+   * it is cased.
+   */
+  test('Economic Backing says ONE grade at every score, in its own vocabulary', () => {
+    const base = settlements.find(([n]) => n === 'city')[1];
+    const ladderWords = [...ECON_STATUS_LADDER, ...BANDS.map((w) => statusCase(w))];
+    const GRADE_RE = new RegExp(`\\b(?:${ladderWords.join('|')})\\b`, 'gi');
+    const reached = new Set();
+    for (const economic of [0, 19, 20, 22, 24, 25, 30, 39, 40, 50, 64, 65, 80, 100]) {
+      const settlement = withScores(base, { economic });
+      const cap = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Economic Backing');
+      render(<DefenseTab settlement={settlement} />);
+      fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+      const row = screen.getByText('Economic Backing').closest('div').parentElement;
+      const leaves = [...row.querySelectorAll('*')]
+        .filter((el) => el.children.length === 0 && el.textContent.trim());
+      const graded = leaves.flatMap((el) => el.textContent.match(GRADE_RE) || []).map((w) => w.toLowerCase());
+      expect(graded, `econScore ${economic}: the row reads "${leaves.map((el) => el.textContent.trim()).join(' | ')}"`)
+        .toEqual([cap.status.toLowerCase()]);
+      reached.add(cap.status);
+      cleanup();
+    }
+    // NON-VACUITY: the sweep really crossed every rung of the status ladder.
+    expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+  });
+
+  /**
+   * THE CLASSIFICATION IS TOTAL. `STATUS_IS_THE_GRADE` is a label list in DefenseTab.jsx, and
+   * a label list goes stale silently: a renamed row, a new scored row, or a presence read that
+   * becomes a grade. So it is judged here by behaviour. Every numeric score of each fixture town
+   * is moved across the ladder, and a scored row whose STATUS moves with it is a grade. Those
+   * rows, and only those, may drop the band.
+   */
+  test('the rows that take no band are exactly the rows whose status moves with their score', () => {
+    const moving = new Set();
+    const still = new Set();
+    for (const [, base] of settlements) {
+      /** @type {Map<string, Set<string>>} */
+      const statuses = new Map();
+      for (const v of [0, 22, 30, 50, 70, 100]) {
+        const every = Object.fromEntries(Object.entries(base.defenseProfile.scores)
+          .filter(([, n]) => typeof n === 'number').map(([k]) => [k, v]));
+        for (const cap of deriveSupportingCapabilities(withScores(base, every))) {
+          if (cap.score === null) continue;
+          if (!statuses.has(cap.label)) statuses.set(cap.label, new Set());
+          statuses.get(cap.label).add(cap.status);
+        }
+      }
+      for (const [label, seen] of statuses) (seen.size > 1 ? moving : still).add(label);
+    }
+    // NON-VACUITY, both sides: a presence read and a grade were both judged.
+    expect(still.size, 'no scored presence read in the fixtures, so only one side was judged').toBeGreaterThan(0);
+    expect([...moving].sort(), 'a row that grades its own score still takes a band, or a presence read lost one')
+      .toEqual([...STATUS_IS_THE_GRADE].sort());
+    // …and no label lands on both sides, one town grading what another only detects.
+    expect([...still].filter((label) => moving.has(label))).toEqual([]);
   });
 });
 

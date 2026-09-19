@@ -403,7 +403,7 @@
     },
     {
         "path": "src/components/new/tabs/DefenseTab.jsx",
-        "line": 475,
+        "line": 502,
         "category": "floatInterpolation",
         "snippet": "{crimFaction.power||0}"
     },

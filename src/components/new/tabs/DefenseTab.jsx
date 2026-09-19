@@ -102,6 +102,33 @@ export const THREAT_ROW_KEY = Object.freeze({
   'Disasters & Famine': 'disaster',
 });
 
+/**
+ * ⭐ THE CAPABILITY ROWS WHOSE STATUS IS ALREADY THE GRADE (owner finding, 2026-09-18: the
+ * duplicate band word on the Supporting Capabilities rows).
+ *
+ * A scored capability row has two words it could put beside its bar: its own `status`, and
+ * the shared ladder's band word for its score (R-5b item #20). Whether both belong depends on
+ * WHAT the status is. Arcane Support's status says whether arcane practitioners are on the
+ * rolls at all — a presence read — so its band is the only word that grades the bar, and it
+ * keeps it. Economic Backing's status IS a grade: `deriveSupportingCapabilities` grades the
+ * SAME econScore into Well-funded / Adequate / Underfunded / Critical at 65/40/25 that the band
+ * grades into Strong / Adequate / Weak / Critical at 65/40/20. Printed together they are one
+ * number's verdict said twice — the same word where the ladders share one ("Adequate …
+ * Adequate"), a synonym pair everywhere else ("Well-funded … Strong", "Underfunded … Weak"),
+ * and at econScore 20-24, where the status ladder has fallen to Critical and the band has not,
+ * two verdicts that DISAGREE ("Critical … Weak").
+ *
+ * So a row named here renders NO band: its status gives the grade in the row's own vocabulary
+ * and the bar carries the magnitude. No digit comes back, so R-5b item #20's law — the word,
+ * never the digit — still holds on every row.
+ *
+ * ⚠ A LABEL LIST, KEPT TOTAL BY BEHAVIOUR. tests/components/statBandsOverDigits.test.jsx moves
+ * every score of real generated towns and asserts that the scored rows whose status MOVES with
+ * the score are exactly this list, so a renamed row, a new scored row, or a presence read that
+ * turns into a grade reds there instead of quietly printing two verdicts again.
+ */
+export const STATUS_IS_THE_GRADE = Object.freeze(['Economic Backing']);
+
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
@@ -590,25 +617,27 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                how good the bar actually is. (That row was called `Magical Capability` until
                review 10; the Overview's Systems Health row owns that name, and the two ask
                different questions — see `deriveSupportingCapabilities`.)
-               ⛔ BUT THE BAND AND THE STATUS ARE NOT ALWAYS TWO FACTS. Economic Backing's
-               status ladder (Well-funded / Adequate / Underfunded / Critical, at 65/40/25)
-               is a second grading of THE SAME econScore the band grades at 65/40/20, and the
-               two vocabularies share Adequate and Critical — so a town in either of those
-               bands printed one word twice on one row. That was invisible while the band
-               shouted in capitals and the status did not; sentence case (the label ladder,
-               2026-09-18) made it plain. The row now says each reading ONCE: where the band
-               would only repeat the status, the bar speaks for itself and the status is the
-               grade. Where they genuinely differ (econScore 25-39 reads Underfunded against
-               a Weak bar) both still show, because then they are two readings. */
-            const band = cap.score !== null ? statusCase(scoreBand(cap.score)) : null;
-            const bandRepeatsStatus = band !== null && band === cap.status;
-            /* ⛔ AND THE NOTE IS THE THIRD PLACE THE GRADE CAN LAND. Economic Backing's
+               ⛔ A ROW WHOSE STATUS IS ALREADY THE GRADE TAKES NO BAND (`STATUS_IS_THE_GRADE`
+               above says which rows, and why). The first cure here folded the band only where
+               its word EQUALLED the status, which stopped "Adequate … Adequate" but kept
+               printing "Well-funded … Strong" and "Underfunded … Weak" — and "Critical …
+               Weak" at econScore 20-24, two verdicts on one bar that disagree. The rule now
+               keys on what the status IS, not on how it happens to be spelled.
+               ⚠ WHAT THIS DOES NOT CURE, recorded rather than reached for: Economic Backing's
+               status ladder turns Critical below 25 and the shared ladder below 20, so at
+               econScore 20-24 this row's "Critical" still sits on the same tab as the Threat
+               Assessment's "Economic Survival · Weak". Aligning the two is a re-grading inside
+               `deriveSupportingCapabilities` (src/domain, owner-gated), and it would move the
+               PDF's printed status as well. */
+            const band = cap.score !== null && !STATUS_IS_THE_GRADE.includes(cap.label)
+              ? statusCase(scoreBand(cap.score)) : null;
+            /* ⛔ AND THE NOTE IS THE OTHER PLACE THE GRADE CAN LAND. Economic Backing's
                middle band reads status "Adequate" over the note "Adequate upkeep, some
-               shortfalls." — the same word twice, one line apart, which the band fold above
-               cannot see because it only compares the band with the status. When the PROSE
-               opens on the grade, the prose is the better place for it: it says the word
-               once and then says what the word means. So the pill stands down and the note
-               carries the grade. */
+               shortfalls." — the same word twice, one line apart, which the band rule above
+               does not touch because it only decides the band. When the PROSE opens on the
+               grade, the prose is the better place for it: it says the word once and then
+               says what the word means. So the pill stands down and the note carries the
+               grade. */
             const noteOpensOnStatus = typeof cap.note === 'string' && typeof cap.status === 'string'
               && cap.status.length > 0
               && new RegExp(`^${cap.status.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(cap.note.trim());
@@ -622,7 +651,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    {!bandRepeatsStatus&&<span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{band}</span>}
+                    {band!==null&&<span data-sf-cap-band="" style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{band}</span>}
                   </div>}
                 </div>
                 <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>
