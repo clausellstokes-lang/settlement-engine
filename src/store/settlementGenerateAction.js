@@ -63,7 +63,34 @@ const ceilingLabelOf = (tier) => (tier
  */
 const belowFloor = (st, token) => typeof st?.isTierBelowFloor === 'function'
   && st.isTierBelowFloor(token) === true;
+/**
+ * ⛔ THE RUNGS A 'random' ROLL MAY ACTUALLY HAND THIS ACCOUNT.
+ *
+ * The generator's ladder starts at `thorp`; an anonymous visitor's gate starts at
+ * `hamlet`. So one roll in six was resolved, populated, staffed, narrated — and then
+ * DISCARDED by the post-resolution re-gate below, which answered a reader who had asked
+ * for nothing in particular with a refusal about a size they never picked. The roll is
+ * the generator's and stays there; what crosses is the RANGE, asked of the gate itself
+ * so this lane holds no second copy of the rule.
+ *
+ * `null` when the account reaches the whole ladder, and `null` when the range admits
+ * NOTHING (a gate that refuses every size is a gate misconfiguration, not a pool): in
+ * both cases the generator draws from TIER_ORDER exactly as it always has, so an
+ * uncapped generation — and every golden — is byte-identical.
+ *
+ * @param {any} st the store state the gate is reading
+ * @returns {string[]|null}
+ */
+const allowedTierPoolOf = (st) => {
+  if (typeof st?.isTierAllowed !== 'function') return null;
+  const pool = TIER_ORDER.filter((rung) => st.isTierAllowed(rung) === true);
+  return pool.length > 0 && pool.length < TIER_ORDER.length ? pool : null;
+};
 import { SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
+// THE LADDER the generator's 'random' rolls over, read here so the pool this lane sends
+// is cut from the same array `resolveConfig` picks from rather than from a parallel list.
+// No new first-paint cost: components/HomeHero.jsx already holds this leaf eagerly.
+import { TIER_ORDER } from '../data/constants.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
 import {
@@ -204,6 +231,12 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     }
   }
 
+  // ⛔ ONE ROLL IN SIX WAS BEING THROWN AWAY. Measured BEFORE the engine runs, because
+  // that is the point: the post-resolution re-gate below discards a FINISHED settlement,
+  // so the only cure that saves the work is one that reaches the roll. The gate answers
+  // which rungs it admits; a full-ladder account gets `null` and changes nothing.
+  const allowedTiers = allowedTierPoolOf(state);
+
   // Anonymous daily generation cap (Tier 7.2). Every full-settlement
   // generation funnels through this action, so this is the single point
   // of enforcement. A *regeneration* (a settlement is already on screen)
@@ -281,6 +314,12 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // flat 50s — and never writes the rolls back into the stored config.
     ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
+    // ⛔ A CAPPED ACCOUNT'S 'random' ROLLS INSIDE ITS OWN RANGE (§934.34). Threaded only
+    // for the sentinel that actually rolls, and only when the range is narrower than the
+    // ladder, so every other generation reaches the pipeline byte-identical. 'custom' is
+    // deliberately NOT covered: its size comes from the reader's own population figure,
+    // and a roll cannot be blamed for a number they typed.
+    ...(settType === 'random' && allowedTiers ? { _allowedTiers: allowedTiers } : {}),
   });
 
   const contentRuntimeOptions = await loadSettlementContentRuntimeOptions(state);
@@ -373,6 +412,12 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // could never select directly. Generators/goldens untouched: this only
   // blocks the COMMIT of an over-cap result. The carry never rewrites `tier`,
   // so reading it off the carried settlement is the same read as before.
+  //
+  // ⛐ IT IS NO LONGER THE ROUTINE OUTCOME OF A 'random' FORGE, and that is the point of
+  // `_allowedTiers` above: this branch used to fire on one anonymous roll in six, spending
+  // a whole generation to produce a refusal. It stays as the fail-closed BACKSTOP for
+  // 'custom' (a population the reader typed), for a pool the gate could not supply, and
+  // for any future path that reaches the pipeline around the pool.
   if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(withRoster?.tier)) {
     console.warn(`Resolved tier "${withRoster?.tier}" exceeds this account's cap — generation discarded.`);
     // A DIFFERENT sentence from the pre-flight refusal on purpose: the reader picked
@@ -380,9 +425,10 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // away. Telling them "you asked for too much" would be false.
     //
     // ⛔ AND THE ROLL CAN LAND UNDER THE FLOOR TOO, where "past what this account
-    // forges" is false the other way round: 'random' draws from the whole ladder, whose
-    // first rung is `thorp`, and an anonymous visitor's floor is above it. Same fact as
-    // the pre-flight's, reached by a different door, so it is the same sentence.
+    // forges" is false the other way round. Since the roll draws from `_allowedTiers`
+    // this branch should now be unreachable for a capped account — but it is the LAST
+    // gate before a commit and it fails closed, so it states the right fact rather than
+    // the convenient one: same fact as the pre-flight's, reached by a different door.
     const rolled = get();
     set(s => {
       s.lastRefusal = belowFloor(rolled, withRoster?.tier)
