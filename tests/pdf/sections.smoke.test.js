@@ -29,6 +29,8 @@ import { Cover } from '../../src/pdf/sections/Cover.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
+import { defenseSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SEED = 'pdf-smoke-2026-05';
 
@@ -195,5 +197,84 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     expect(text).not.toContain('+0 units'); // anchored: 'Balanceford' asserted present above — the chapter rendered, so this absence is a suppression
     expect(text).not.toContain('Surplus of 0 units'); // anchored: same anchor ('Balanceford' above)
     expect(text).not.toContain('Balanced'); // anchored: same anchor ('Balanceford' above) — no food data means NO third word either
+  });
+});
+
+/**
+ * ── THE DEAD MAGIC READER (review 10, 2026-09-18) ────────────────────────────────────
+ *
+ * Chapter 02's anchor panel carried a `MAGIC` chip fed by `identity.anchor.magicalCapability`,
+ * which was read from `defenseProfile.magicalCapability` — A KEY NO WRITER PRODUCES.
+ * `generateDefenseProfile` returns scores, readiness, institutions, magicDependency,
+ * traditions, chainModifiers and economicGates; the world pulse re-spreads `scores` alone;
+ * no save shape carries the key. The read was guarded (`|| null`) so it never threw — it
+ * simply resolved to null on every settlement ever exported, and the chip never printed.
+ *
+ * ⛔ THE PIN IS ON THE CHIP LABELS, NOT ON THE PAGE TEXT, and the difference matters: the
+ * same chapter renders a `Magic-dependent` TAG a few lines below from the live
+ * `magicDependency` flag, so a text-level search for the word would either collide with a
+ * fact that IS written or pass only by the accident of letter case. The anchor row's labels
+ * are the exact surface the chip lived on, so that is what is read.
+ */
+describe('IdentityDailyLife — the magic word-grade with no writer is gone', () => {
+  /** Every KeyValRow label in a chapter's element tree, in render order. */
+  function chipLabels(node, out = []) {
+    if (node == null || typeof node !== 'object') return out;
+    if (Array.isArray(node)) { for (const c of node) chipLabels(c, out); return out; }
+    if (Array.isArray(node?.props?.pairs)) {
+      for (const pair of node.props.pairs) if (pair?.label) out.push(String(pair.label).toUpperCase());
+    }
+    if (typeof node?.type === 'function') { chipLabels(node.type({ ...node.props }), out); return out; }
+    if (node?.props?.children != null) chipLabels(node.props.children, out);
+    return out;
+  }
+
+  test('the view model offers no magicalCapability, on either slice that used to carry it', () => {
+    // The ANCHOR slice (the chip's own feed) and the DEFENSE body slice both declared it.
+    // `magicDependency` is the sibling that travels the same `dp?.` read on the same object,
+    // so it proves the slice is built and correctly keyed rather than merely absent.
+    expectAbsentWithAnchor(
+      Object.keys(villageVm.identity.anchor), 'magicalCapability', 'magicDependency',
+      'the chapter-02 anchor slice',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(defenseSlice(villageSettlement)), 'magicalCapability', 'magicDependency',
+      'the PDF defense body slice',
+    );
+    // …and the threadbare save, which is the shape a resurrected field would first show on.
+    expectAbsentWithAnchor(
+      Object.keys(sparseVm.identity.anchor), 'magicalCapability', 'magicDependency',
+      'the chapter-02 anchor slice on a threadbare save',
+    );
+  });
+
+  test('the rendered chapter prints no MAGIC chip, for a full settlement or a sparse one', () => {
+    // A REAL generated village: the sibling chips are the liveness anchor — the anchor row
+    // rendered and chose its labels, so the exclusion is a removal and not an empty page.
+    expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
+      settlement: villageSettlement, vm: villageVm,
+    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated village');
+    expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
+      settlement: metropolisSettlement, vm: metropolisVm,
+    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated metropolis');
+    // ⚠ THE THREADBARE SAVE IS NOT ASSERTED HERE, and the reason is the anchor rather than
+    // the claim. Its whole anchor-facts panel is gated on having any anchor fact at all, so
+    // it renders NO KeyValRow — the collection is legitimately empty, no sibling label
+    // travels this path, and an exclusion over an empty list is the vacuity this helper
+    // exists to refuse. The sparse shape is covered on the VIEW MODEL instead, one arm up,
+    // where `magicDependency` is a real sibling.
+  });
+
+  test('THE WRITER REALLY IS ABSENT — the generated profile has no such key', () => {
+    // The claim the deletion rests on, executed rather than reasoned. `scores` is the
+    // sibling key that proves the profile was generated and is correctly shaped.
+    expectAbsentWithAnchor(
+      Object.keys(villageSettlement.defenseProfile), 'magicalCapability', 'scores',
+      'generateDefenseProfile output',
+    );
+    expectAbsentWithAnchor(
+      Object.keys(metropolisSettlement.defenseProfile), 'magicalCapability', 'scores',
+      'generateDefenseProfile output (metropolis)',
+    );
   });
 });

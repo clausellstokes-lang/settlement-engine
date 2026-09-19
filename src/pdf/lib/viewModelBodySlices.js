@@ -187,8 +187,11 @@ export function defenseSlice(active) {
       .map((violation) => typeof violation.reason === 'string' ? violation.reason.trim() : '')
       .filter(Boolean),
     // Surfaced for defenseHeadline (it reads def.magicDependency).
+    // ⛔ ITS TWIN `magicalCapability` IS GONE: no writer produces the key (see the note
+    // in viewModel.js's anchor slice), and nothing read THIS copy of it at all — the one
+    // reader in the estate took the anchor's. A slice field with no writer and no reader
+    // is not a seam waiting to be used; it is a claim the record does not support.
     magicDependency: !!dp?.magicDependency,
-    magicalCapability: dp?.magicalCapability || null,
   };
 }
 

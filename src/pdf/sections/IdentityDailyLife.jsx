@@ -110,7 +110,19 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
                     : null,
               a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,
               a.defenseScoreAvg != null ? { label: 'SCORE AVG', value: smart(a.defenseScoreAvg) } : null,
-              a.magicalCapability ? { label: 'MAGIC', value: humanize(a.magicalCapability) } : null,
+              /* ⛔ THE `MAGIC` CHIP IS GONE, AND IT IS A DELETION RATHER THAN A REPAIR.
+                 It printed `humanize(a.magicalCapability)`, and `defenseProfile.magicalCapability`
+                 HAS NO WRITER: `generateDefenseProfile` returns scores/readiness/institutions/
+                 magicDependency/traditions/chainModifiers/economicGates and nothing else, the
+                 world pulse only ever re-spreads `scores`, and no save shape carries the key —
+                 the observed-shape ratchet has it frozen as a reader-with-no-writer finding in
+                 both view-model files. So the chip was dead on every settlement ever exported.
+                 The reader-without-writer dock's ruling is REMOVE, not keep warm: a guarded read
+                 of a key nothing produces is an arm that can never run, and leaving it invites a
+                 later car to "fix" it by inventing a writer for a fact the Defense tab already
+                 owns. The magic facts the dossier really has are elsewhere on the page-set —
+                 `magicDependency` is the tag six lines below, and the Defense tab's Arcane
+                 Support row is the presence read. ── */
             ].filter(Boolean)}
           />
           {a.magicDependency && (

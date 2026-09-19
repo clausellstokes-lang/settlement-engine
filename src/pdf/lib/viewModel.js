@@ -294,7 +294,13 @@ function identitySlice(s, canonical = s) {
       foodSurplus:    food.available ? (food.surplus ?? null) : null,
       culturalNotes:  canonical?.culturalNotes ?? s?.culturalNotes ?? null,
       magicDependency: !!dp?.magicDependency,
-      magicalCapability: dp?.magicalCapability || null,
+      // ⛔ `magicalCapability` IS NOT HERE, and its absence is the finding. It read
+      // `dp?.magicalCapability`, which NO WRITER PRODUCES — `generateDefenseProfile`
+      // returns scores/readiness/institutions/magicDependency/traditions/chainModifiers/
+      // economicGates, the world pulse re-spreads only `scores`, and the observed-shape
+      // ratchet carried it as a reader-with-no-writer finding on this file. Its one
+      // consumer was the chapter-02 MAGIC chip, which therefore never printed on any
+      // settlement. Removed rather than kept warm (the reader-without-writer dock).
       defenseLabel:   dp?.readiness?.label || null,
       defenseScoreAvg: avgScore(dp?.scores),
       activeStress:   stressArray(s).map(x => x?.label || x?.icon).filter(Boolean),
