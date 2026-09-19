@@ -4,6 +4,16 @@
 
 Each packet below is written to READY by an Opus pre-proof lane that verifies every "verified fact" row against the tree (file:line), fills the change manifest and required symbols, and runs the sealed dispatch; the chair validates and cuts. Collision groups serialize. Every packet lands with its instruments green and the chair's compose.
 
+## Wave 0 — the prerequisites the compile measured (§934.47)
+
+| id | outcome (one behaviour family) | CREATE / MODIFY / TEST | required symbols (existing) | collision |
+|---|---|---|---|---|
+| **EM-P0** the pipeline seam | `runPipeline` gains a pinned mode: the deriving steps run from a GIVEN roster (`initialContext` pre-populated with the record's institutions, NPCs, factions and seats) and the root-writing steps are skipped or take the pinned output; `generateNPCs`'s root half and deriving half are separated at the seam; fresh generation (no pins) is byte-identical — the golden master and the prose manifest are the standing proof | M `src/generators/pipeline.js` (`runPipeline`, one option), the population step's root/derive split; T `tests/generators/pipelinePinnedMode.test.js` + the goldens plain | `runPipeline`, `rng.fork`, `generateNPCs` | ⚠ the pipeline's spine; alone in its train |
+| **EM-P1** stable identity — OWNER-GATED (§934.47 A) | every NPC, institution and faction carries a permanent id minted from the step's own stream at generation (`npc:<n>`, `inst:<n>`, `fac:<n>` by the seed's order, never by name or position) and, for existing saves, minted on first read by the in-app migration (unconditional); readers that join by name or index take the id (the three convicted sites first) | M the three generators' minting, `src/lib/saves.js`'s in-app migration (v3), the convicted readers; T identity round-trip + the goldens (ids are new keys; the golden fixtures re-record ONCE under a signed record naming this cause) | `migrateSaveToV2`, `generateNPCs`, `generateFactions`, the institution roster writer | ⚠ persisted shape; waits on the owner's word |
+| **EM-P2** generation's choosers registered | every `rng.fork(name)` step and every `createPRNG`/`pickRandom` site in `src/generators` that writes a root joins the decision-fork registry with its output key; the entropy census's whole-src figure is re-measured | M the registry file (rows only), T the registry walker's new arm | `HABIT_FORK_REGISTRY` (the registry's real symbol), the entropy census | none |
+
+EM-B2 splits: **EM-B2a** (`pinsFrom(record)`, `rederive(record, config, layer)` over the four card kinds through EM-P0's mode, the isolation property) and **EM-B2b** (`config′` world-fact changes + the delta card's DM-fields section). **EM-B4** is an IN-APP save migration (the estate's `migrateSaveToV*` pattern, unconditional on read and write) folding `_userEdits` into `dmLayer.roots` by the §14 classification, derived and history edits into `dmLayer.notes` (owner decision B), the Change Dock retired without migration.
+
 ## Wave 1 — declarations, pools, ops, the layer (headless)
 
 | id | outcome (one behaviour family) | CREATE / MODIFY / TEST | required symbols (existing) | collision |
