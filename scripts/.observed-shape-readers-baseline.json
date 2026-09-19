@@ -9,19 +9,31 @@
   "That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.",
   "Detector changes require a new governed instrument migration.",
   "The RETIRED schema-3 exact \"<key> on <shape> @ <origin> # <site>\" spelling cannot enter this file.",
-  "SCHEMA 20 = schema 19's topology and tag law, UNCHANGED, re-governed to a `--write` that",
-  "REFUSES to freeze a bank its hand-owned twins do not already state. The walker keeps the",
-  "bank as a LITERAL by ruling (a derived re-freeze may never raise it), and that literal",
-  "stranded at the schema-19 re-freeze: the register moved 62/41 -> 60/39 in a one-file",
-  "commit and the suite was red at its own tip. From this rung the write compares the bank",
-  "it is about to freeze — banked reads across tagged addresses, and the same pair per",
-  "declared identity — against tests/lint/observedShapeBank.literal.js on EVERY write, and",
-  "against the rung's own declared post-bank (`declaredBankOf`) on a migration write, and",
-  "refuses before a byte moves. This rung retunes nothing, adds no mechanism, declares and",
-  "retires no identity, and moves NO row: inventory and rowTags are byte-identical to 19's.",
+  "SCHEMA 20 (RETIRED) held the BANK FENCE: the write REFUSES to freeze a bank its",
+  "hand-owned twins do not already state — tests/lint/observedShapeBank.literal.js on",
+  "EVERY write, and the rung's own declared post-bank (`declaredBankOf`) on a migration",
+  "write — because the walker keeps the bank as a LITERAL by ruling and that literal",
+  "stranded at the schema-19 re-freeze (62/41 -> 60/39 in a one-file commit, red at its",
+  "own tip). The fence stands; 20 itself moved no row.",
+  "SCHEMA 21 = schema 20's topology, tag law and eight-identity declared roster, all",
+  "UNCHANGED, re-governed to a register that ADMITS THREE ROWS. ODQ §934.9 lit the paid",
+  "PDF's `relationships.network` position, which had been mounted and starved: its two",
+  "lists now come from src/components/new/relationshipsDeskRead.js, and that assembler",
+  "reads `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`",
+  "— three keys written when a world is SAVED, LINKED or IMPORTED and never by the",
+  "generation pipeline this instrument executes, so the scan convicts every reader of them",
+  "and is RIGHT to. Three NEW rows, one read each, all in that one file; nothing moves",
+  "anywhere else. One of the three is the DECLARED identity `neighbourNetwork on",
+  "settlement`, so its row is auto-tagged like all 25 of its siblings and the bank GROWS",
+  "60 -> 61 reads across 39 -> 40 tagged addresses — the first bank growth since the fence",
+  "was minted, and therefore its first real exercise. The other two stay ORDINARY rows,",
+  "matching the estate's own treatment of those identities (7 ordinary rows for",
+  "`interSettlementRelationships`, 1 for `crossSettlementConflicts`), and",
+  "`crossSettlementConflicts` could not be declared even if the posture changed: NOTHING",
+  "in src/ writes that key, and gate 0 refuses an entry whose named writer does not.",
   "Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`",
   "has banked nothing since schema 17 made its writer observable, and banked is always a",
-  "subset of declared. This envelope banks 60 banked read(s) across 39 tagged address(es).",
+  "subset of declared. This envelope banks 61 banked read(s) across 40 tagged address(es).",
   "The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —",
   "CR-OSR-FREEZE-6 shape-family union (M6), the M11 DOM-global receiver exclusion, the M12",
   "language-surface residual — while M8/M9 findings stay present under sparse rowTags. All are inside",
@@ -29,7 +41,7 @@
   "An untagged row means: a guarded read, of a real record rather than browser or language surface,",
   "of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.",
   "A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.",
-  "Schemas 4–19 are the RETIRED numeric predecessors."
+  "Schemas 4–20 are the RETIRED numeric predecessors."
  ],
  "corpusMeta": {
   "configs": 4,
@@ -44,16 +56,16 @@
  },
  "digests": {
   "corpusMeta": "2ef657c8f5a9218ab81c47dc0bc66756055cffcaef2ab01edad1a8e630b37ca1",
-  "inventory": "3204a835812901e3e5e36d94e5aaf5feeea2200c8cefff7a1bbd6328ee03fa7a",
-  "manifests": "03e40b0d16beeddca6a35b8b4e2dc8722cc5bbaafae69cf6cb6d02d0c41224e1",
-  "migrationReview": "60c5b5c4d7f68b84475c2ff81ac395e1b44acfee44ae620ea5d3787d5b79c96e",
-  "rowTags": "8427f5f8abc388216f691aca8da33643a74e36d78113075d0d9008774b660705",
-  "scanStats": "ab90b0a39a5fdda44b3c87426adcf69ea99b61ff746a8fc4caed1dbf6fc57998",
-  "sentinel": "2c53ad15ee811c15b19551045a0326cce76c59d316ae74b3662980bf682017d6"
+  "inventory": "977fd60a81655e256335461c2b89a6589b0fc4daa537a6d783092ac707ed3817",
+  "manifests": "1e1574f74be1d80fe943f6d5da368a379785c422c85ccaa6cf1b082a567c42d3",
+  "migrationReview": "f0934999a0db9942f0d52aae76d87f000a909f4e7b5b397409815136f95ef5d8",
+  "rowTags": "e84ef63c6537f024b53058aeb78fec73a11a1dade2a65e7d70e185127c2a1344",
+  "scanStats": "8abc3944be97e732a5e2100a3911de6bc692e9d4a3d77c8d1283bae7cf4f6d98",
+  "sentinel": "17b789bc820ae95a426cf6502c45f44b080ec2aaea34547f9b95a1a9526f1039"
  },
  "frozen": "2026-09-19",
- "frozenAtSha": "bad3a909e5f2a4383a9c2ee5036fa916d1a64a80",
- "identities": 1390,
+ "frozenAtSha": "1f780ad2226ad409a3712849769eebf69441ae18",
+ "identities": 1393,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -189,6 +201,11 @@
   },
   "src/components/new/neighbourComponents.jsx": {
    "interSettlementRelationships on settlement": 1
+  },
+  "src/components/new/relationshipsDeskRead.js": {
+   "crossSettlementConflicts on settlement": 1,
+   "interSettlementRelationships on settlement": 1,
+   "neighbourNetwork on settlement": 1
   },
   "src/components/new/tabs/EconomicsTab.jsx": {
    "customChains on economicState": 1,
@@ -2221,7 +2238,7 @@
  "manifests": {
   "detectorTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "bdac8a7058451eb78617f4162fa649795f5fdd7b4a0bef328b1ab0db1e6b86c3",
+   "digest": "347eade10f6aa3c597d94b0740a6a8edb038ded41bed1e13d44fc2f1ea3eb5b6",
    "entries": [
     {
      "mode": "100644",
@@ -2240,8 +2257,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "a08fb0abc9baebda62b1661cf17c2e6439bd1e72a3188d39e1333336695e5d35",
-     "size": 178452,
+     "sha256": "30b8db8079fef139fc1e989417ce098c1f83ab5d201384f30b7b20fa07b686bc",
+     "size": 180070,
      "type": "file"
     },
     {
@@ -2261,8 +2278,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "39789eff0773ea027d87dcf6e06c9627433f3f03a31788e16cd168d177b28c84",
-     "size": 60379,
+     "sha256": "03486c3d36d7d943ce08b3107928849f65aead9eb8eeaa4e6aa1886681e5b07f",
+     "size": 61726,
      "type": "file"
     },
     {
@@ -2289,8 +2306,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "3d8d670bd6f751ef0c02e2ac27cb11e5bc95472e16b74027a4cde3a8060469ed",
-     "size": 146593,
+     "sha256": "2e38ab0a35c57bceb0634e58b0c7cc4dd281167f0002956760620ca89c9fdc76",
+     "size": 154360,
      "type": "file"
     },
     {
@@ -2304,7 +2321,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0d4af2e279b08a33ef581400274ee68af786be1e6908b18fceb0995c13ce1d34",
+   "digest": "5d2be4cf43bb44de64fa09acaf1e5d05be2922dd74fb50522a06ad53b24285b4",
    "entries": [
     {
      "mode": "100644",
@@ -2323,8 +2340,8 @@
     {
      "mode": "100644",
      "path": "scripts/check-observed-shape-readers.mjs",
-     "sha256": "a08fb0abc9baebda62b1661cf17c2e6439bd1e72a3188d39e1333336695e5d35",
-     "size": 178452,
+     "sha256": "30b8db8079fef139fc1e989417ce098c1f83ab5d201384f30b7b20fa07b686bc",
+     "size": 180070,
      "type": "file"
     },
     {
@@ -2344,8 +2361,8 @@
     {
      "mode": "100644",
      "path": "scripts/lib/observed-shape-baseline.mjs",
-     "sha256": "39789eff0773ea027d87dcf6e06c9627433f3f03a31788e16cd168d177b28c84",
-     "size": 60379,
+     "sha256": "03486c3d36d7d943ce08b3107928849f65aead9eb8eeaa4e6aa1886681e5b07f",
+     "size": 61726,
      "type": "file"
     },
     {
@@ -2372,8 +2389,8 @@
     {
      "mode": "100644",
      "path": "scripts/migrate-observed-shape-readers.mjs",
-     "sha256": "3d8d670bd6f751ef0c02e2ac27cb11e5bc95472e16b74027a4cde3a8060469ed",
-     "size": 146593,
+     "sha256": "2e38ab0a35c57bceb0634e58b0c7cc4dd281167f0002956760620ca89c9fdc76",
+     "size": 154360,
      "type": "file"
     },
     {
@@ -5227,6 +5244,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/relationshipsDeskRead.js",
+     "sha256": "9451d176b793579929b651f325ad75a983619c3c19c7205e2140216c5dc94a6e",
+     "size": 8111,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/serviceComponents.jsx",
      "sha256": "d2cc0dcff543d825c98b23dc1e83af80ecc18f4bcfe4bf966350246790c56557",
      "size": 6032,
@@ -5354,8 +5378,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "92dbdf2f524e7b0a586f4b6cf16e8424d5066772bfe8beacec1ed7775ac00745",
-     "size": 21526,
+     "sha256": "c2c61c57c4d621854b3517ce824b4f94a10a684fed3352711570b90c853cc566",
+     "size": 19447,
      "type": "file"
     },
     {
@@ -8861,8 +8885,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "fd03d846fa4ae1d666d34dc7f9e0bd6bd408e4557369c813eb458c415e0c18f0",
-     "size": 37054,
+     "sha256": "6309e501425abb4ad8768bfde86183781a8d4ce8beec295d70329da3de579e8b",
+     "size": 37446,
      "type": "file"
     },
     {
@@ -17983,7 +18007,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "21a3d265a34dd1ca87b91cda52f7ffcee4b36e8decf3a3338aa993d08b9ca452",
+   "digest": "824053e8e85194653298c0c75de5e8697f78af657ebbcb8157cd5eebe0a7689b",
    "entries": [
     {
      "mode": "100644",
@@ -20836,6 +20860,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/relationshipsDeskRead.js",
+     "sha256": "9451d176b793579929b651f325ad75a983619c3c19c7205e2140216c5dc94a6e",
+     "size": 8111,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/serviceComponents.jsx",
      "sha256": "d2cc0dcff543d825c98b23dc1e83af80ecc18f4bcfe4bf966350246790c56557",
      "size": 6032,
@@ -20963,8 +20994,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "92dbdf2f524e7b0a586f4b6cf16e8424d5066772bfe8beacec1ed7775ac00745",
-     "size": 21526,
+     "sha256": "c2c61c57c4d621854b3517ce824b4f94a10a684fed3352711570b90c853cc566",
+     "size": 19447,
      "type": "file"
     },
     {
@@ -24351,8 +24382,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "fd03d846fa4ae1d666d34dc7f9e0bd6bd408e4557369c813eb458c415e0c18f0",
-     "size": 37054,
+     "sha256": "6309e501425abb4ad8768bfde86183781a8d4ce8beec295d70329da3de579e8b",
+     "size": 37446,
      "type": "file"
     },
     {
@@ -33466,7 +33497,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "57fbacd74a2f20eb9cfd707152416ad2eae558c3d4e8330047acb82d55aa8286",
+   "digest": "1622dd0536d059a5e9adeb2019806708b0d0f779746cd3c297c1aea253585597",
    "entries": [
     {
      "mode": "100644",
@@ -36319,6 +36350,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/new/relationshipsDeskRead.js",
+     "sha256": "9451d176b793579929b651f325ad75a983619c3c19c7205e2140216c5dc94a6e",
+     "size": 8111,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/new/serviceComponents.jsx",
      "sha256": "d2cc0dcff543d825c98b23dc1e83af80ecc18f4bcfe4bf966350246790c56557",
      "size": 6032,
@@ -36446,8 +36484,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "92dbdf2f524e7b0a586f4b6cf16e8424d5066772bfe8beacec1ed7775ac00745",
-     "size": 21526,
+     "sha256": "c2c61c57c4d621854b3517ce824b4f94a10a684fed3352711570b90c853cc566",
+     "size": 19447,
      "type": "file"
     },
     {
@@ -39953,8 +39991,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/printProse.js",
-     "sha256": "fd03d846fa4ae1d666d34dc7f9e0bd6bd408e4557369c813eb458c415e0c18f0",
-     "size": 37054,
+     "sha256": "6309e501425abb4ad8768bfde86183781a8d4ce8beec295d70329da3de579e8b",
+     "size": 37446,
      "type": "file"
     },
     {
@@ -49068,30 +49106,30 @@
   }
  },
  "migrationReview": {
-  "bundleDigest": "992cababd2f3c9d800daea4b4d275a239068f17f6bc702a467bf34fd840163bf",
+  "bundleDigest": "960e99dcb49ea831dcdf4d903425b64d99c709c43b08ec329c6b77aafce67031",
   "corpusDigest": "2027915cb4408bf1053d1f6cd3c3a8616dd5318d848bd62dbb0b301df0efe21a",
-  "currentArtifactDigest": "c563195b9d66695b3d2b1253e88ee8c6cc9b8da0af7d735fe3934874777c748e",
-  "currentDetectorDigest": "bdac8a7058451eb78617f4162fa649795f5fdd7b4a0bef328b1ab0db1e6b86c3",
-  "currentFindingsDigest": "a6b35d1170392f95e4dac3b11effdf5f0a06fb31636b9a9e3e8deef345ca02f8",
-  "currentScannerSha": "bad3a909e5f2a4383a9c2ee5036fa916d1a64a80",
-  "currentScannerToolDigest": "8fbe181b94ebac138874074a086c4130f2cab5b32259d9c354298a83b9809e5d",
-  "detectorTreeDigest": "bdac8a7058451eb78617f4162fa649795f5fdd7b4a0bef328b1ab0db1e6b86c3",
-  "executionTreeDigest": "0d4af2e279b08a33ef581400274ee68af786be1e6908b18fceb0995c13ce1d34",
+  "currentArtifactDigest": "f815faea64730a1eaa832709a5b05c5ca6b91a2abc25853412225a0088564332",
+  "currentDetectorDigest": "347eade10f6aa3c597d94b0740a6a8edb038ded41bed1e13d44fc2f1ea3eb5b6",
+  "currentFindingsDigest": "485c0e0d564a1bb13bbfd2f9bed2298b7675d1d00b93d03f767bec2e0f9f2d54",
+  "currentScannerSha": "1f780ad2226ad409a3712849769eebf69441ae18",
+  "currentScannerToolDigest": "d097bd07d85d587cb506f860eca28012aadfccd72014b8f3f995072b9f0fdcdb",
+  "detectorTreeDigest": "347eade10f6aa3c597d94b0740a6a8edb038ded41bed1e13d44fc2f1ea3eb5b6",
+  "executionTreeDigest": "5d2be4cf43bb44de64fa09acaf1e5d05be2922dd74fb50522a06ad53b24285b4",
   "legacyAlgorithmBaseSha": "6e7acc4dd88a43cb608f40bc77db3b2130a1e2de",
-  "legacyArtifactDigest": "c563195b9d66695b3d2b1253e88ee8c6cc9b8da0af7d735fe3934874777c748e",
-  "legacyDetectorDigest": "bdac8a7058451eb78617f4162fa649795f5fdd7b4a0bef328b1ab0db1e6b86c3",
-  "legacyScannerSha": "bad3a909e5f2a4383a9c2ee5036fa916d1a64a80",
-  "legacyScannerToolDigest": "8fbe181b94ebac138874074a086c4130f2cab5b32259d9c354298a83b9809e5d",
-  "predecessorBaselineDigest": "7ed9ba61a1d30fcb4b8702911bdcd54cf1c5e02d39f61a719fc3f9f124361c4b",
-  "predecessorBaselineTextSha256": "cc55c237f05cf685d30a937d24393a4618cbad36c8aaae50edda7cd1e89802ca",
+  "legacyArtifactDigest": "f815faea64730a1eaa832709a5b05c5ca6b91a2abc25853412225a0088564332",
+  "legacyDetectorDigest": "347eade10f6aa3c597d94b0740a6a8edb038ded41bed1e13d44fc2f1ea3eb5b6",
+  "legacyScannerSha": "1f780ad2226ad409a3712849769eebf69441ae18",
+  "legacyScannerToolDigest": "d097bd07d85d587cb506f860eca28012aadfccd72014b8f3f995072b9f0fdcdb",
+  "predecessorBaselineDigest": "bcca9a650cd565a5ea1a64ecd4c33e0eed74e984baace3495d13c845020de3ce",
+  "predecessorBaselineTextSha256": "22f55670cdee649ab7f854c99a4d8538d5fbbed3b53742de0f7c069ef9f7908a",
   "predecessorInventoryDigest": "3204a835812901e3e5e36d94e5aaf5feeea2200c8cefff7a1bbd6328ee03fa7a",
-  "reportDigest": "55ed0d5f64d835f850eb853c9d2c3af348a82684eb8341bc20fe908fed14ce34",
-  "reviewDigest": "a3783b2dfb61d551496c8a8171db99a8cc5de4584f112306edd9dbc5eb2f8878",
+  "reportDigest": "a302e326a375361a771b927ce3f412ee2e8a00301f8aa3f12b6a18a8e01b7aa9",
+  "reviewDigest": "07f9927f8bfff97bce52b2c33d5f4ee3aca2a2d3a6c5b0bfd885770891ca197c",
   "scanConfigDigest": "cef0ab59a909576cf6a8820ada14f6afba8acad45fe13dd7b91b60f4c63335fc",
-  "scanTreeDigest": "21a3d265a34dd1ca87b91cda52f7ffcee4b36e8decf3a3338aa993d08b9ca452",
-  "sourceTreeDigest": "57fbacd74a2f20eb9cfd707152416ad2eae558c3d4e8330047acb82d55aa8286",
-  "subjectSha": "bad3a909e5f2a4383a9c2ee5036fa916d1a64a80",
-  "targetInventoryDigest": "3204a835812901e3e5e36d94e5aaf5feeea2200c8cefff7a1bbd6328ee03fa7a"
+  "scanTreeDigest": "824053e8e85194653298c0c75de5e8697f78af657ebbcb8157cd5eebe0a7689b",
+  "sourceTreeDigest": "1622dd0536d059a5e9adeb2019806708b0d0f779746cd3c297c1aea253585597",
+  "subjectSha": "1f780ad2226ad409a3712849769eebf69441ae18",
+  "targetInventoryDigest": "977fd60a81655e256335461c2b89a6589b0fc4daa537a6d783092ac707ed3817"
  },
  "minRows": 40,
  "originMinRows": 8,
@@ -49109,6 +49147,12 @@
    }
   },
   "src/components/map/RelationshipEdges.jsx": {
+   "neighbourNetwork on settlement": {
+    "reason": "CR-OSR-FREEZE-6-R2 / M9",
+    "rule": "explained-writer"
+   }
+  },
+  "src/components/new/relationshipsDeskRead.js": {
    "neighbourNetwork on settlement": {
     "reason": "CR-OSR-FREEZE-6-R2 / M9",
     "rule": "explained-writer"
@@ -49322,23 +49366,23 @@
   }
  },
  "scanStats": {
-  "files": 2211,
-  "reads": 127937,
-  "resolved": 9732,
-  "unresolved": 118205
+  "files": 2212,
+  "reads": 127933,
+  "resolved": 9742,
+  "unresolved": 118191
  },
  "scannerProvenance": {
-  "detectorDigest": "bdac8a7058451eb78617f4162fa649795f5fdd7b4a0bef328b1ab0db1e6b86c3",
-  "executionTreeDigest": "0d4af2e279b08a33ef581400274ee68af786be1e6908b18fceb0995c13ce1d34",
-  "scanTreeDigest": "21a3d265a34dd1ca87b91cda52f7ffcee4b36e8decf3a3338aa993d08b9ca452",
-  "sourceTreeDigest": "57fbacd74a2f20eb9cfd707152416ad2eae558c3d4e8330047acb82d55aa8286",
+  "detectorDigest": "347eade10f6aa3c597d94b0740a6a8edb038ded41bed1e13d44fc2f1ea3eb5b6",
+  "executionTreeDigest": "5d2be4cf43bb44de64fa09acaf1e5d05be2922dd74fb50522a06ad53b24285b4",
+  "scanTreeDigest": "824053e8e85194653298c0c75de5e8697f78af657ebbcb8157cd5eebe0a7689b",
+  "sourceTreeDigest": "1622dd0536d059a5e9adeb2019806708b0d0f779746cd3c297c1aea253585597",
   "unscannedInputDigest": "0ab30b6829125d995edbeb367f82d949450a27952990adede460720b9df862cc"
  },
- "schema": 20,
+ "schema": 21,
  "sentinel": {
-  "resolvedReads": 9732,
+  "resolvedReads": 9742,
   "totalKeys": 6532,
   "usableShapes": 337
  },
- "total": 1964
+ "total": 1967
 }
