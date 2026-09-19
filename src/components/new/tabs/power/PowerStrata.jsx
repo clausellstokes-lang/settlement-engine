@@ -179,10 +179,15 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                         {/* The basis, said once for the whole group. */}
                         <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, marginBottom: 2 }}>{group.why}</div>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 8, borderLeft: `1px solid ${SEAM}` }}>
+                          {/* A BLOCK CONTAINER, because InstitutionLink renders the card BESIDE its
+                              trigger — see that primitive's docblock. These two were `<span>`, which
+                              React's DOM-nesting validator does not check, so the same defect the
+                              Services tab printed twelve errors for was SILENT here. Both were already
+                              flex children, so the box is identical. */}
                           {group.edges.map((edge, si) => (
-                            <span key={si} style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
+                            <div key={si} style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
                               <InstitutionLink name={edge.name} settlement={settlement} />
-                            </span>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -261,9 +266,9 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
                 } : {})}>
                 <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
                 {f.legitimacyCrisis && <span style={{ fontSize: FS.xxs, color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
-                <span style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
+                <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
                   <InstitutionLink name={r.name} settlement={settlement} />
-                </span>
+                </div>
                 {r.isPower && (
                   <Button variant="ghost" size="sm"
                     aria-label={`${r.name} holds power, jump to its power card`}
