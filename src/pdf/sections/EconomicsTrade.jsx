@@ -27,6 +27,7 @@ import { flag } from '../../lib/flags.js';
 import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
+import { statusCase } from '../../domain/display/labelCase.js';
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -286,12 +287,12 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                   <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{c.name}</Text>
                   <Text style={{ color: palette.gold, fontSize: pt['8'], marginLeft: 3 }}>*</Text>
                   <Text style={{
-                    ...type.label,
+                    ...type.label_plain,
                     color: activationColor,
                     fontSize: pt['7.5'],
                     marginLeft: 5,
                   }}>
-                    {String(c.activationLabel || 'Needs reevaluation').toUpperCase()}
+                    {statusCase(String(c.activationLabel || 'Needs reevaluation'))}
                   </Text>
                 </View>
                 {flow ? (

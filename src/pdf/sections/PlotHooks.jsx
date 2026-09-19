@@ -14,6 +14,7 @@ import {
 } from '../primitives/Dense.jsx';
 import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
+import { tokenCase } from '../../domain/display/labelCase.js';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
@@ -76,7 +77,7 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
 
       {/* ── Source groups ────────────────────────────────────── */}
       {order.map(source => {
-        const cfg = SOURCE_LABELS[source] || { label: source.toUpperCase(), tone: 'gold' };
+        const cfg = SOURCE_LABELS[source] || { label: source, tone: 'gold' };
         const list = (grouped[source] || []).filter(h => hookText(h?.hook).trim().length > 0);
         if (!list.length) return null;
         return (
@@ -91,7 +92,7 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
               }}
               wrap={false}
             >
-              <Pill tone={cfg.tone}>{cfg.label}</Pill>
+              <Pill tone={cfg.tone}>{tokenCase(cfg.label)}</Pill>
               <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['8'] }}>
                 {list.length} hook{list.length === 1 ? '' : 's'}
               </Text>

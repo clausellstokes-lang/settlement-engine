@@ -16,6 +16,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
 import {
   ChapterBand, KeyValRow, HairRule, Tag,
 } from '../primitives/Dense.jsx';
@@ -86,10 +87,10 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           </Text>
           <KeyValRow
             pairs={[
-              a.governingName    ? { label: 'GOVERNING',  value: humanize(a.governingName) } : null,
-              a.prosperity       ? { label: 'PROSPERITY', value: humanize(a.prosperity) } : null,
-              a.complexity       ? { label: 'COMPLEXITY', value: humanize(a.complexity) } : null,
-              a.safety           ? { label: 'SAFETY',     value: humanize(a.safety) } : null,
+              a.governingName    ? { label: 'Governing',  value: humanize(a.governingName) } : null,
+              a.prosperity       ? { label: 'Prosperity', value: humanize(a.prosperity) } : null,
+              a.complexity       ? { label: 'Complexity', value: humanize(a.complexity) } : null,
+              a.safety           ? { label: 'Safety',     value: humanize(a.safety) } : null,
             ].filter(Boolean)}
           />
           <KeyValRow
@@ -102,14 +103,14 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               // settlement in balance. The no-data case is nulled upstream in
               // viewModel.js, so a missing row here means "not calculated".
               a.foodDeficit > 0
-                ? { label: 'FOOD',  value: `−${num(a.foodDeficit)} units` }
+                ? { label: 'Food',  value: `−${num(a.foodDeficit)} units` }
                 : a.foodSurplus > 0
-                  ? { label: 'FOOD',  value: `+${num(a.foodSurplus)} units` }
+                  ? { label: 'Food',  value: `+${num(a.foodSurplus)} units` }
                   : (a.foodDeficit != null || a.foodSurplus != null)
-                    ? { label: 'FOOD',  value: 'Balanced' }
+                    ? { label: 'Food',  value: 'Balanced' }
                     : null,
-              a.defenseLabel     ? { label: 'DEFENSE',   value: humanize(a.defenseLabel) } : null,
-              a.defenseScoreAvg != null ? { label: 'SCORE AVG', value: smart(a.defenseScoreAvg) } : null,
+              a.defenseLabel     ? { label: 'Defense',   value: humanize(a.defenseLabel) } : null,
+              a.defenseScoreAvg != null ? { label: 'Score avg', value: smart(a.defenseScoreAvg) } : null,
               /* ⛔ THE `MAGIC` CHIP IS GONE, AND IT IS A DELETION RATHER THAN A REPAIR.
                  It printed `humanize(a.magicalCapability)`, and `defenseProfile.magicalCapability`
                  HAS NO WRITER: `generateDefenseProfile` returns scores/readiness/institutions/
@@ -170,14 +171,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           >
             <Text
               style={{
-                ...type.label,
+                ...type.label_plain,
                 color: palette.muted,
                 width: 100,
                 fontSize: pt['7.5'],
-                letterSpacing: 0.2,
               }}
             >
-              {r.label.toUpperCase()}
+              {tokenCase(r.label)}
             </Text>
             <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['9.5'] }}>
               {r.value}
@@ -251,14 +251,13 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               <View key={`p-${i}`} style={{ marginBottom: space.sm }} wrap={false}>
                 <Text
                   style={{
-                    ...type.label,
+                    ...type.label_plain,
                     color: accent,
                     fontSize: pt['9'],
-                    letterSpacing: 0.2,
                     marginBottom: 2,
                   }}
                 >
-                  {p.time.toUpperCase()}
+                  {tokenCase(p.time)}
                 </Text>
                 <EditableProse
                   name={`daily.${p.time.toLowerCase()}`}
@@ -326,14 +325,14 @@ function CultureRows({ culture }) {
         >
           <Text
             style={{
-              ...type.label,
+              ...type.label_plain,
               color: palette.muted,
               width: 78,
               fontSize: pt['7'],
               marginRight: 5,
             }}
           >
-            {label.toUpperCase()}
+            {tokenCase(label)}
           </Text>
           <Text style={{ ...type.body, color: palette.ink, flex: 1, fontSize: pt['8.5'] }}>
             {value}
@@ -389,8 +388,8 @@ function GenerationCoherence({ receipt }) {
       </Text>
       {failed.map(check => (
         <View key={check.id || check.label} style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
-            {check.label.toUpperCase()}
+          <Text style={{ ...type.label_plain, color: palette.bad, fontSize: pt['7'] }}>
+            {tokenCase(check.label)}
           </Text>
           {check.findings.map((finding, index) => (
             <Text
@@ -404,8 +403,8 @@ function GenerationCoherence({ receipt }) {
       ))}
       {reviewJudgments.map(judgment => (
         <View key={judgment.id || judgment.label} style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['7'] }}>
-            {`${judgment.label.toUpperCase()}: NEEDS REVIEW`}
+          <Text style={{ ...type.label_plain, color: palette.bad, fontSize: pt['7'] }}>
+            {`${tokenCase(judgment.label)}: Needs review`}
           </Text>
           <Text style={{ ...type.body, color: palette.second, fontSize: pt['8'] }}>
             {judgment.summary || 'Formal judgment needs review.'}

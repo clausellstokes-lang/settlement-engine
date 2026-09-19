@@ -12,6 +12,7 @@ import { useStore } from '../../store/index.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { BAND_COLOR, BAND_HINT, dimensionPolarity } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
+import { statusCase } from '../new/labelLadder.js';
 
 // Labels + one-line descriptions only. Polarity is NOT re-declared here — it is
 // read from bands.js (DIM_POLARITY), the single source the band itself is
@@ -115,11 +116,17 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
           {meta.label}
         </span>
         <span style={{ flex: 1 }} />
+        {/* RUNG 3, THE STATUS VALUE — sentence case, colour and weight carrying the
+            meaning (components/new/labelLadder.js). This strip is the one rung-3 site the
+            screen's own ladder car missed, and the miss was invisible while the PDF shouted
+            too: `SystemStateSnapshot`'s DimensionCard is this element's print twin and the
+            two are pinned to agree CHARACTER FOR CHARACTER, so descending one without the
+            other would have opened the divergence that lane exists to close. The card's
+            eyebrow above keeps its capitals; this is a datum, not a section. */}
         <span style={{
           fontSize: FS.xxs, fontWeight: 800, color, fontFamily: sans,
-          letterSpacing: '0.04em', textTransform: 'uppercase',
         }}>
-          {dim.band}
+          {statusCase(dim.band)}
         </span>
         <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginLeft: 4, opacity: 0.7 }}>
           {dim.value}

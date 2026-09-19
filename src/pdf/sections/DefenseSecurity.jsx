@@ -20,6 +20,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
+import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -136,8 +137,14 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
             <View style={{ width: 56, height: 4, backgroundColor: palette.border, borderRadius: 2, marginRight: 6, overflow: 'hidden' }}>
               <View style={{ width: `${Math.max(0, Math.min(100, row.score))}%`, height: '100%', backgroundColor: row.barColor }} />
             </View>
+            {/* `row.status` is `scoreBand(score)` — 'STRONG' / 'ADEQUATE' / 'WEAK' /
+                'CRITICAL', the frozen four that `defenseScoreBands.js` forbids extending.
+                Nothing here uppercased it: it arrives shouting from the vocabulary, which
+                is why this site has no `.toUpperCase()` to delete. The screen re-cases it
+                at the render rung (OverviewTab, DefenseTab) and leaves the constant alone;
+                so does this. */}
             <Text style={{ ...type.pill, fontSize: pt['7.5'], color: row.statusColor }}>
-              {row.status}
+              {statusCase(row.status)}
             </Text>
           </View>
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
@@ -157,8 +164,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           if (!forces.length) return null;
           return (
             <View key={group.key} style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
-                {group.label}
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: group.accent, marginBottom: 2 }}>
+                {tokenCase(group.label)}
               </Text>
               {forces.map((force, i) => (
                 <View
@@ -250,8 +257,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                 borderRadius: 2,
               }}
             >
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
-                CRIMINAL STRUCTURE · {d.criminalStructure.label}
+              <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
+                Criminal structure · {d.criminalStructure.label}
               </Text>
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
                 {d.criminalStructure.note}
