@@ -57,7 +57,22 @@ export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 // parchment. NOTE: the SVG lives on the composite TIP, not this branch's base — it
 // arrives when W1 folds onto the tip, so this references the path as a string (a
 // worktree-local load 404s until the fold; that is expected).
-const REALM_MAP_PREVIEW = "url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
+// ⛔ IT IS A PHOTOGRAPH OF THE PRODUCT NOW (owner order ODQ §934.30 item 5: "the
+// realm clock map should actually be made and a screenshot of Cnocby in a drawn
+// out map made in the realm with other generated settlements … with the realm
+// clock advance time box over that"). The plate above is real generated output,
+// but it is a DIFFERENT renderer at a DIFFERENT seed: a visitor met Cnocby in
+// four artifacts and then looked at a map of Fallowmere, somewhere else entirely.
+// realm-cnocby.png is the running app's own Realm view of the fixture's five
+// settlements, cut in Chromium by scripts/capture-landing-realm.mjs and recorded
+// in realm-cnocby.provenance.json (seed, tip, what was in frame).
+//
+// TWO LAYERS, AND THE ORDER IS THE FALLBACK. CSS paints the FIRST background
+// image on top and simply skips one that fails to load, so the parchment plate
+// shows through for anyone served the page before the capture lands — a missing
+// photograph degrades to the old map rather than to a grey box. The "Realm clock
+// / Advance time" block is positioned over this box unchanged (RealmMapCard).
+const REALM_MAP_PREVIEW = "url('/landing-maps/realm-cnocby.png'), url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
 
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
@@ -278,28 +293,63 @@ export function VoiceCards() {
   );
 }
 
-// ── 04 · Realm — why-trace card (real band deltas, real causes) ──────────────
-export function WhyTraceCard() {
-  const deltas = fixture.realm.whyTrace || [];
+// ── 04 · Realm — the advance-time card (what the weeks DID, not what moved) ──
+//
+// ⛔ EVENTS, NOT DELTAS (owner order ODQ §934.30 item 4: "the advance time
+// shouldn't describe deltas but should describe actual events that have
+// happened as we have designed"). This card used to render fixture.realm.whyTrace
+// — three causal BAND crossings, each headed by an internal axis name and a pair
+// of band chips, with reason lines that read "Pressure increased". That is a
+// readout of a variable, and a visitor who has never seen the engine has no way
+// to want it. It now renders fixture.realm.advance: the town's OWN applied pulse
+// events across the same run, which is what the product's own Chronicle and
+// advance report show a player after every advance.
+//
+// THE HONESTY LINE (the chair's ruling): every entry is a record the shipped
+// pulse produced for this settlement. Nothing here is written, and a thin run
+// renders a thin card — the landing's whole claim is that the facts on it came
+// out of the engine.
+//
+// THE SEASON FRAME is AdvanceReport's own (its "chapters" altitude): the weeks
+// are grouped under the calendar season they fell in, using the SAME
+// tickCalendarLabel helper the report uses, resolved in the emitter so this
+// surface stays a renderer. One season is the common case at twelve weeks
+// (13 weeks to a season), so the label rides the header's mono slot and the
+// per-chapter heading appears only when a run actually crosses a season.
+export function AdvanceTimeCard() {
+  const entries = fixture.realm.advance || [];
+  // Chapters in the order they happened. Built by a fold rather than a group-by
+  // so a run that re-enters a season (a multi-year advance) reads as two
+  // chapters, which is what a reader lived.
+  const chapters = [];
+  for (const entry of entries) {
+    const open = chapters[chapters.length - 1];
+    if (open && open.season === entry.season) open.entries.push(entry);
+    else chapters.push({ season: entry.season, entries: [entry] });
+  }
   return (
     <div style={{ ...cardStyle, padding: '20px 22px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, marginBottom: SP.md }}>
         <span style={eyebrowGold}>{tl('realm.whyTraceTitle', { week: fixture.weeks })}</span>
-        <span style={monoTag}>{tl('realm.whyTraceTag')}</span>
+        <span style={monoTag}>{chapters[0]?.season}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
-        {deltas.map((d) => (
-          <div key={d.axis} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{d.axis}</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <Chip tone="neutral">{d.from}</Chip>
-                <Chip tone={d.tone}>{d.to}</Chip>
-              </span>
-            </div>
-            <span style={{ fontFamily: serif_, fontStyle: 'italic', fontSize: FS['14.5'], lineHeight: 1.5, color: BODY }}>
-              {d.reason}
-            </span>
+        {chapters.map((chapter, ci) => (
+          <div key={chapter.season + ci} style={{ display: 'flex', flexDirection: 'column', gap: 13 }}>
+            {chapters.length > 1 && (
+              <span style={{ ...eyebrowGold, color: MUTED, letterSpacing: '0.08em' }}>{chapter.season}</span>
+            )}
+            {chapter.entries.map((entry) => (
+              <div key={entry.week + entry.headline} style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+                  <Chip tone="neutral">{entry.week}</Chip>
+                  <span style={{ fontFamily: sans, fontSize: FS['12.5'], fontWeight: 800, color: SECOND }}>{entry.headline}</span>
+                </div>
+                <span style={{ fontFamily: serif_, fontSize: FS['14.5'], lineHeight: 1.5, color: BODY }}>
+                  {entry.text}
+                </span>
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -374,6 +424,15 @@ export function RealmMapCard() {
           <span style={{ fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: INK }}>{tl('realm.chronicleTitle')}</span>
           <span style={monoTag}>{tl('realm.chronicleTag')}</span>
         </div>
+        {/* ⛔ THE TWO CARDS NOW SAY DIFFERENT THINGS, AND THE READER IS TOLD WHICH.
+            Since ODQ §934.30 item 4 the advance-time card carries the TOWN'S own
+            events; this chronicle is the REGION's band — the neighbours. Without
+            a line naming that, two lists of engine sentences side by side read as
+            one list printed twice, which is the defect shape the 09-18 walk kept
+            finding. Approved in the copy draft (owner, 2026-09-19). */}
+        <p style={{ margin: `0 0 ${SP.md}px`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED, lineHeight: 1.5 }}>
+          {tl('realm.regionLine')}
+        </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           {chronicle.map((entry, i) => (
             <div key={i} style={{ background: CARD_ALT, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: '10px 13px' }}>

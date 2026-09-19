@@ -55,8 +55,9 @@ import { isConfigured as galleryBackendConfigured } from '../../lib/supabase.js'
 // single-sourced without making the landing pay for the create page's closure.
 const FoundingWorlds = lazy(() => import('../generate/FoundingWorlds.jsx'));
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, AdvanceTimeCard, RealmMapCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
+import { settlementCardImage, tierStockImage } from '../../domain/display/tierStockImage.js';
 
 const MONO = fontFamily.mono;
 const CONTENT_MAX = 1080; // spec §4 content column
@@ -73,6 +74,38 @@ const capsLink = {
   fontFamily: sans, fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.04em',
   textTransform: 'uppercase', color: GOLD_TXT,
 };
+
+/**
+ * ⛔ ONE ASK AT THE TOP, ONE AT THE END (owner, 2026-09-19, taking the copy
+ * draft's recommendation). The page used to close every section with its own
+ * primary button — five asks in five stops, which is what made it read as five
+ * pitches instead of one account. The three MIDDLE asks are gone; what stands in
+ * their place carries the reader to the NEXT STOP of the same account.
+ *
+ * ⚠ NOTHING BECAME UNREACHABLE, and that was the condition for doing it:
+ *   • forging  — the hero CTA, the closer CTA, and the brief card's own
+ *                "Forge this exact town" all still forge;
+ *   • pricing  — `voice.pricingLink` and `closer.fullPricing` both still route;
+ *   • gallery  — every real published row in the commons strip carries its own
+ *                'Open' button (commons.open).
+ * If any of those three doors is ever removed, the ask it replaced has to come
+ * back with it.
+ *
+ * It scrolls rather than navigates because that is what "read on" means, and it
+ * is a real control (a button, not a decorative span — §3.8).
+ */
+function ReadOn({ to, children }) {
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={() => document.getElementById(to)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+      style={{ ...capsLink }}
+    >
+      {children}
+    </Button>
+  );
+}
 
 // The track minimum is capped at the column's own width: on a 390px phone the stop's
 // content box is 366px, and a bare 380px minimum pushed the page 2px sideways.
@@ -166,7 +199,7 @@ const creamTailFade = (isMobile) => {
 // data-driven, and the gallery is empty before launch. The rule now:
 //   • THREE OR MORE real published rows → render the real rows, up to six;
 //   • fewer than three → render the Create page's three curated Founding Worlds
-//     (Mossgate / Black Crag / Thornwell), with its heading, its copy and its
+//     (Mossgate / Black Crag / Cnocby), with its heading, its copy and its
 //     real 'Fork this sample' action. They are real generations from real seeds,
 //     so the fallback offers the visitor something true to do instead of
 //     something false to look at.
@@ -205,7 +238,14 @@ const COMMONS_ROW_H = 150 + 52 + 2;
 // duplication the lazy seam exists to avoid. So the reserve is exact at desktop and
 // about 39px short on a 375 phone, against a 796px section. The defect this replaces
 // reserved 204px at both: about 92px out at 1440 and about 592px out at 375.
-const SAMPLE_PLATE_H = 216;  // measured 211 at 1440, 206-223 at 375
+// ⚠ RAISED BY CONSTRUCTION ON 2026-09-19, NOT RE-MEASURED (ODQ §934.32). The
+// curated card gained a FIXED 120px tier plate above its heading, inside a flex
+// column whose gap is SP.sm (8) — so the plate is exactly 128px taller than the
+// measured 216, and the arithmetic is exact rather than estimated precisely
+// because the image height is pinned in FoundingWorlds.jsx
+// (SAMPLE_PLATE_IMAGE_H) instead of riding an aspect ratio. The residual named
+// below (the lead-in reflowing on a phone) is unchanged by this.
+const SAMPLE_PLATE_H = 216 + 120 + 8;  // measured 211 at 1440, 206-223 at 375; + the tier plate + its gap
 const SAMPLE_LEAD_H = 18;    // the lead-in at FS.sm / 1.5, one line at desktop
 const SAMPLE_HEAD_H = 19;    // the h2 block at FS.lg
 
@@ -245,7 +285,14 @@ function FoundingWorldsReserve({ testId }) {
 // A real row without its own gallery image keeps the strip's painted-scene box
 // (same height, zero layout shift). The scene is DERIVED from the row's own
 // tier, never invented: it is the card's backdrop, not a claim about the town.
-const SCENE_FOR_TIER = { thorp: 'thorpe', hamlet: 'thorpe', village: 'village', town: 'village', city: 'city', metropolis: 'city', capital: 'city' };
+//
+// ⛔ THE SIX-TO-THREE MAP THAT LIVED HERE IS NOW THE ESTATE'S ONE COPY (owner
+// order ODQ §934.32). It was written for this card alone, and the gallery grid,
+// the sample cards and the share meta were each about to grow their own — four
+// maps that would drift, so a village would be painted one way on the landing
+// and another on its own gallery page. It moved verbatim (including the
+// `capital` alias the ladder does not carry) into
+// src/domain/display/tierStockImage.js, which the other three now read too.
 
 function GalleryCards({ onNavigate }) {
   const [tiles, setTiles] = useState(null); // null = the fetch has not settled yet
@@ -300,7 +347,7 @@ function GalleryCards({ onNavigate }) {
         <div key={tile.slug} style={{ ...cardStyle, boxShadow: ELEV[1], overflow: 'hidden' }}>
           <div style={{
             position: 'relative', height: 150,
-            backgroundImage: tile.imageUrl ? `url('${tile.imageUrl}')` : SCENE(SCENE_FOR_TIER[tile.tier] || 'village'),
+            backgroundImage: `url('${settlementCardImage(tile.imageUrl, tile.tier) || tierStockImage('village')}')`,
             backgroundSize: 'cover', backgroundPosition: 'center',
           }}>
             <span style={{
@@ -379,7 +426,14 @@ function fillTierBody(body) {
 }
 
 function TierStrip() {
-  const tiers = tl('closer.tiers') || [];
+  // ⛔ PUBLIC TIERS ONLY (owner, ODQ §934.24 addendum). The filter reads the
+  // TIER'S OWN `invitationOnly` flag, never the spelling 'Founder', so the rule
+  // is about what a tier IS and a second invitation-only tier is covered the day
+  // it is added. It is the same flag lane 31's `isInvitationOnly` predicate
+  // (src/config/pricing.js, car 06d04c7c4) reads; that module is not on this
+  // branch, so this filters inline rather than minting a rival named predicate.
+  // Repoint it at `isInvitationOnly` when that car composes in.
+  const tiers = (tl('closer.tiers') || []).filter((tier) => !tier.invitationOnly);
   return (
     <div style={{
       // Owner order (2026-07-22): a TWO-BY-TWO grid (Wanderer + Cartographer on
@@ -470,19 +524,24 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <p style={{ ...proseStyle, fontStyle: 'italic', fontSize: FS['16'], color: SECOND, marginBottom: SP.xl }}>
               {tl('forge.axiom')}
             </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('generate')}>{tl('forge.cta')}</Button>
-              <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('forge.micro')}</span>
-            </div>
-            {/* THE ANON SIZE CEILING (§363.1). It sits DIRECTLY under the CTA row
-                because that row is where the promise is made: "No account needed"
-                is true, and this is the one sentence that says what the free door
-                actually opens onto. Always visible — no cap, no state, no hover.
-                Same understated disclosure idiom as §03's aiNote (§3.1 tokens
-                only, no new design-system motion). */}
+            {/* THE ANON SIZE CEILING (§363.1). It sits with "No account needed",
+                which is the promise it qualifies: that line is true, and this is
+                the one sentence that says what the free door actually opens onto.
+                ⚠ THE TWO USED TO BRACKET A PRIMARY CTA and the ceiling's whole
+                placement rationale was "directly under the CTA row, because that
+                row is where the promise is made". The row is gone (ONE ask at the
+                top, one at the end), so the promise and its disclosure now stand
+                as one block — which is what they always were. Always visible: no
+                cap, no state, no hover, same understated idiom as §03's aiNote. */}
+            <p style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, color: SECOND }}>
+              {tl('forge.micro')}
+            </p>
             <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>
               {tl('forge.ceiling')}
             </p>
+            <div style={{ marginTop: SP.lg }}>
+              <ReadOn to="voice">{tl('forge.readOn')}</ReadOn>
+            </div>
           </div>
           {/* Owner order (2026-07-22): the Instant Draft widget slot now hosts the
               Cnocby sample-draft card (MiniDossierCard), relocated from §02. The
@@ -557,6 +616,18 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
             <h2 id="sf-realm-title" style={h2Style(isMobile)}>{tl('realm.h2')}</h2>
             <p style={proseStyle}>{tl('realm.body1')}</p>
             <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('realm.body2')}</p>
+            {/* ⛔ THIS ASK IS DELIBERATELY STILL HERE, AND THE LANE REFUSED TO
+                REMOVE IT. The approved draft cut the three MIDDLE section asks to
+                read-on links (one ask at the top, one at the end), and the other
+                two are cut. This one is not, because "See Cartographer" is not
+                only a section ask: it is CONTROL #5 OF THE OWNER'S PURCHASE
+                LOCKOUT (2026-09-16, "disable all purchase buttons on the website
+                until we are ready to launch … a pill that says available at
+                launch"), pinned in both states by
+                tests/components/launchLock.libraryHeaderLanding.test.jsx. Deleting
+                it deletes a lock instrument, and rewriting that census to match a
+                copy change is how a lock quietly stops being enforced. The chair
+                and the owner rule on it; a lane does not. See .lane-resume.md. */}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
               <Button variant="primary" disabled={!purchasesAreOpen} onClick={() => onNavigate('pricing')} style={purchasesAreOpen ? undefined : { flexWrap: 'wrap' }}>
                 {tl('realm.cta')}
@@ -565,7 +636,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('realm.micro')}</span>
             </div>
           </div>
-          <WhyTraceCard />
+          <AdvanceTimeCard />
         </div>
         <RealmMapCard />
       </section>
@@ -585,7 +656,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <GalleryCards onNavigate={onNavigate} />
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: SP.xxl }}>
-            <Button variant="primary" onClick={() => onNavigate('gallery')}>{tl('commons.cta')}</Button>
+            <ReadOn to="closer">{tl('commons.readOn')}</ReadOn>
           </div>
         </div>
       </section>

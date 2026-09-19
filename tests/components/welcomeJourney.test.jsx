@@ -69,13 +69,41 @@ describe('THE WELCOME FLOOR — the journey renders from stills, film absent', (
   // 'You have just watched this town grow.'") — the ruling that added it (THE
   // FILM RULING's stop-4 line) is superseded; copy + render + pin removed together.
 
-  test('every section CTA is present and functional before any video byte', async () => {
+  // ⛔ THIS ARM WOULD HAVE GONE VACUOUS RATHER THAN RED, WHICH IS WHY IT IS
+  // REWRITTEN AND NOT JUST REPOINTED. It read `landing.forge.cta` and
+  // `landing.commons.cta`, and the one-narrative rewrite (ODQ §934.30 item 3,
+  // approved 2026-09-19) DELETED both keys: the three middle section asks became
+  // read-on links so the page carries one ask at the top and one at the end.
+  // A deleted key is `undefined`, and `getByRole('button', { name: undefined })`
+  // matches EVERY button on the page — so this test would have gone on passing
+  // while measuring nothing at all. The controls are named explicitly below and
+  // the keys are asserted non-empty first, so an `undefined` name cannot happen
+  // again silently.
+  test('the page\'s two asks and its hand-offs are real controls before any video byte', async () => {
     renderLanding();
-    // The hero + section forge CTAs and the closer CTA all resolve as real
-    // buttons with the film absent (the floor carries the whole funnel).
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
-    expect(screen.getAllByRole('button', { name: landing.forge.cta }).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByRole('button', { name: landing.commons.cta }).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByRole('button', { name: landing.closer.cta }).length).toBeGreaterThanOrEqual(1);
+
+    // ANTI-VACUITY: every name below must be a real string, or the queries that
+    // follow would match indiscriminately.
+    const named = {
+      hero: landing.hero.cta,
+      closer: landing.closer.cta,
+      forgeReadOn: landing.forge.readOn,
+      commonsReadOn: landing.commons.readOn,
+      realm: landing.realm.cta,
+    };
+    for (const [role, name] of Object.entries(named)) {
+      expect(typeof name === 'string' && name.length > 0, `landing copy key for "${role}" is missing`).toBe(true);
+    }
+
+    // THE TWO ASKS: the hero's and the closer's, both forging, both real buttons.
+    expect(screen.getAllByRole('button', { name: named.hero }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole('button', { name: named.closer }).length).toBeGreaterThanOrEqual(1);
+    // THE HAND-OFFS: read-on links are controls, not decorative spans (§3.8).
+    expect(screen.getAllByRole('button', { name: named.forgeReadOn }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole('button', { name: named.commonsReadOn }).length).toBeGreaterThanOrEqual(1);
+    // The one middle ask that survived: it is launch-locked, so it renders as a
+    // DISABLED button until purchases open — present, and deliberately inert.
+    expect(screen.getAllByRole('button', { name: new RegExp(named.realm) }).length).toBeGreaterThanOrEqual(1);
   });
 });

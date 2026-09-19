@@ -13,9 +13,12 @@
  *     ("Forge this exact town") renders as a real button;
  *   - the hero primary CTA label equals landing.hero.cta for an anon visitor;
  *   - FIXTURE SHAPE: the frozen module carries non-empty derived artifacts
- *     (brief town + hooks, voice receipts + narration, why-trace deltas,
- *     chronicle, pins), an anon-ceiling settType, and engine version markers
- *     (the regen-policy drift signal);
+ *     (brief town + hooks, voice receipts + narration, why-trace deltas, the
+ *     town's own advance events, chronicle, pins), an anon-ceiling settType, and
+ *     engine version markers (the regen-policy drift signal). The fixture's
+ *     FRESHNESS — that those facts are the ones the engine still derives — is a
+ *     different question, and tests/build/landingFixtureFreshness.test.js asks
+ *     it: a stale fixture has a perfect shape;
  *   - the mono seed provenance tag renders (determinism is the promise);
  *   - COMMONS FALLBACK: with the gallery unreachable (jsdom → supabase
  *     unconfigured) the strip renders the Create page's three curated Founding
@@ -249,6 +252,16 @@ describe('HomeLanding — scrollable landing', () => {
       expect(d.from).not.toBe(d.to);
       expect(d.reason).toBeTruthy();
     }
+    // The advance timeline: the town's OWN applied pulse events (ODQ §934.30
+    // item 4). Week labels are the reader's unit; the season frame is the
+    // advance report's chapter idiom.
+    expect(fixture.realm.advance.length).toBeGreaterThanOrEqual(3);
+    for (const e of fixture.realm.advance) {
+      expect(e.week).toMatch(/^Week \d+$/);
+      expect(e.season).toMatch(/^the \w+ of year \d+$/);
+      expect(e.headline).toBeTruthy();
+      expect(e.text).toBeTruthy();
+    }
     // Chronicle + pins: real applied events, real generated names.
     expect(fixture.realm.chronicle.length).toBeGreaterThanOrEqual(3);
     for (const c of fixture.realm.chronicle) {
@@ -257,6 +270,86 @@ describe('HomeLanding — scrollable landing', () => {
     }
     expect(fixture.realm.pins.length).toBeGreaterThanOrEqual(2);
     expect(fixture.realm.pins[0].name).toBe(fixture.town.name);
+  });
+
+  // ── ODQ §934.30 item 4 — THE ADVANCE-TIME CARD SHOWS EVENTS, NOT DELTAS ────
+  // The owner: "the advance time shouldn't describe deltas but should describe
+  // actual events that have happened as we have designed." The card rendered
+  // fixture.realm.whyTrace — three causal BAND crossings headed by an internal
+  // axis name ("Trade connectivity: adequate → critical") whose reason lines read
+  // "Pressure increased". It now renders fixture.realm.advance: the town's own
+  // APPLIED pulse events, the records the in-app Chronicle and advance report
+  // show. Both halves are pinned here, because "it stopped showing deltas" and
+  // "it shows the events" are different regressions.
+  test("the advance-time card renders the town's real events with their weeks, and no band delta", async () => {
+    renderLanding();
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+
+    const entries = fixture.realm.advance;
+    // ANTI-VACUITY: the fixture must actually carry events, or every assertion
+    // below is a loop over nothing and a negative over an empty card.
+    expect(entries.length, 'the fixture carries no advance events — regenerate it').toBeGreaterThanOrEqual(3);
+
+    // The card is the one headed by the advance-time title; its footer line is
+    // the sibling that proves we grabbed the card and not a stray wrapper.
+    const card = screen.getByText(tl('realm.whyTraceTitle', { week: fixture.weeks })).closest('div').parentElement;
+    expect(card.textContent, 'the advance-time card was not found').toContain(landing.realm.derivedLine);
+
+    // POSITIVE, FIRST: every event the run produced is on the card, with the week
+    // it happened in and the sentence the engine wrote for it.
+    for (const entry of entries) {
+      expect(within(card).getByText(entry.week), `missing week label: ${entry.week}`).toBeTruthy();
+      expect(card.textContent, `missing event headline: ${entry.headline}`).toContain(entry.headline);
+      expect(card.textContent, `missing event text: ${entry.text}`).toContain(entry.text);
+    }
+    // The season frame (AdvanceReport's chapter idiom), from the emitter's use of
+    // tickCalendarLabel — not a literal spelled here.
+    expect(card.textContent, 'the season frame is missing').toContain(entries[0].season);
+
+    // NEGATIVE, ANCHORED on an event headline that travels the same render path:
+    // the delta vocabulary is gone from this card. `whyTrace` is still emitted, so
+    // the axis name below is a member the fixture really can produce — this pins
+    // that it is not rendered HERE, not that it stopped existing.
+    const text = card.textContent;
+    expectAbsentWithAnchor(text, 'increased', entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, 'decreased', entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, fixture.realm.whyTrace[0].axis, entries[0].headline, 'advance-time card copy');
+    expectAbsentWithAnchor(text, fixture.realm.whyTrace[0].reason, entries[0].headline, 'advance-time card copy');
+  });
+
+  // ── ODQ §934.24 addendum — AN INVITATION-ONLY TIER LEAVES THE PUBLIC PATH ──
+  // The Founders' Hall is given and never sold, so a logged-out visitor was being
+  // shown an offer they cannot accept on the page whose job is to get them
+  // forging. The row stays in the registry (the tier exists) and the STRIP stops
+  // listing it, keyed on the tier's own `invitationOnly` flag rather than on the
+  // spelling 'Founder' — the same flag lane 31's `isInvitationOnly` predicate
+  // reads, so a second invitation-only tier is covered the day it is added.
+  test('the closer strip lists public tiers only', async () => {
+    renderLanding();
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+
+    const all = landing.closer.tiers;
+    const publicTiers = all.filter((tier) => !tier.invitationOnly);
+    const invited = all.filter((tier) => tier.invitationOnly);
+    // ANTI-VACUITY, BOTH WAYS: the registry must still carry an invitation-only
+    // tier (or this test proves nothing) and must still carry public ones (or the
+    // strip rendering nothing would pass).
+    expect(invited.length, 'no invitation-only tier remains — this pin has no subject').toBeGreaterThanOrEqual(1);
+    expect(publicTiers.length, 'the closer strip has no public tiers left').toBeGreaterThanOrEqual(3);
+
+    // getAllByText, not getByText: 'Cartographer' is ALSO the realm section's
+    // gold waypoint pill (landing.realm.waypointPill), so the tier name is
+    // legitimately on the page twice and a singular query throws on the page
+    // being correct.
+    const names = screen.getAllByText(/./).map((el) => el.textContent);
+    for (const tier of publicTiers) {
+      expect(screen.getAllByText(tier.name).length, `missing public tier: ${tier.name}`).toBeGreaterThanOrEqual(1);
+    }
+    for (const tier of invited) {
+      // The anchor is a PUBLIC tier name that travels the same registry array and
+      // the same renderer, so this absence cannot pass because the strip vanished.
+      expectAbsentWithAnchor(names, tier.name, publicTiers[0].name, 'the landing closer tier strip');
+    }
   });
 
   test('the mono seed provenance tag renders on the artifacts', async () => {
@@ -330,15 +423,24 @@ describe('HomeLanding — scrollable landing', () => {
   test('commons fallback renders the curated Founding Worlds, never invented towns', async () => {
     const { container } = renderLanding();
     await screen.findByText(landing.commons.h2);
+    // The Create page's own heading + lead-in travel with the strip (one source).
+    expect(await screen.findByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
     // jsdom has no Supabase config → fetchPublicGallery resolves empty → fewer
     // than three real rows → the Create page's curated trio renders instead of
     // the deleted decorative cards. Names come from the DATA module, so this is a
     // data assertion, never a literal edit.
+    //
+    // ⚠ SCOPED TO §04 SINCE 2026-09-19, AND THAT MAKES IT STRONGER. This read
+    // `findByText(sample.name)` across the whole page, which threw the moment
+    // Cnocby became a curated sample (ODQ §934.30 item 5): the fixture town's
+    // name is now on the landing several times over — the brief card, the copy,
+    // and the strip. `within` the commons section asserts what the arm always
+    // MEANT, which is that the trio renders HERE, not merely somewhere.
+    const commons = container.querySelector('#commons');
+    expect(commons, 'the commons section did not render').toBeTruthy();
     for (const sample of SAMPLE_SETTLEMENTS) {
-      expect(await screen.findByText(sample.name), `missing curated sample: ${sample.name}`).toBeTruthy();
+      expect(within(commons).getAllByText(sample.name).length, `missing curated sample: ${sample.name}`).toBeGreaterThanOrEqual(1);
     }
-    // The Create page's own heading + lead-in travel with the strip (one source).
-    expect(screen.getByRole('heading', { name: 'Founding Worlds' })).toBeTruthy();
 
     // ⛔ THE REGRESSION THIS PIN EXISTS FOR: the label the decorative cards wore.
     // anchored: the three curated sample names and the Founding Worlds heading are asserted PRESENT on this same render above, so a landing that rendered nothing reds there first
