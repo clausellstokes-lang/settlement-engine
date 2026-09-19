@@ -4,7 +4,7 @@
 
 **Three things the chair adds before the document.**
 
-1. **The per-tab charge was a defect found by this recon and it is FIXED DARK (Scribe wave W5b, landed 2026-09-15 ~05:1x at `lane-scribe` `600771812`, sealed `refs/preserve/scribe-w5b-2026-09-15`; migration 203 written, never applied).** One render is one edge invocation per firing tab, and each invocation runs its own `spend_credits('dossierProse')`; migration 202's header and the Redraw button both say five credits a render, and no test pins the whole-render total. One render is now one server-minted charge, the free render covers the whole render, the redraw is capped at three per epoch, and an operator-tunable daily floor exists (default five, decision 6). Decision 2 below is therefore a confirmation, not a choice.
+1. **The per-tab charge is a defect found by this recon and it is being fixed dark now (Scribe wave W5b, dispatched the same hour).** One render is one edge invocation per firing tab, and each invocation runs its own `spend_credits('dossierProse')`; migration 202's header and the Redraw button both say five credits a render, and no test pins the whole-render total. Until W5b lands, no live render may be billed. It stays decision 2 below because the owner should see it.
 
 2. **The daily render cap.** The drafting seat says no daily cap ever existed. That is true of the design, the rulings and the code; it is not true of the record. The OWNER proposed it in chat at ~08:5x on 2026-09-14 ("they can only generate and/or regenerate a settlement once per day. Because of the new increased costs.") as a question, never signed and never built. Decision 6 below is where it is decided, with the chair's default of five a day rather than one.
 

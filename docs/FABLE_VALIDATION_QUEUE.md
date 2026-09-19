@@ -490,8 +490,7 @@ closed and are ruled out of this lane below. Six rulings.
   into the leaf as variant 1, or have the selector compute the fallback and PREPEND it.
   Transcription was rejected — it creates 107 strings that can drift from the function
   that generates them, and twelve of them are mutilated slugs nobody would notice going
-  stale (⛔ **SUPERSEDED at §894: those twelve are repaired**; the reasoning for PREPENDING
-  over transcription is unaffected and still correct). Prepending makes index 0 *be* the live computation, so the byte-identity anchor
+  stale. Prepending makes index 0 *be* the live computation, so the byte-identity anchor
   cannot drift by construction. The §3 arm already had this property (its index 0 stays
   in `WHAT_PHRASES`); §4 now has the same property from the other direction.
 - **J-LEG-WIRE-14 — ONE SELECTOR SERVES BOTH ARMS.** `whatPhrase` now calls a single
@@ -508,14 +507,10 @@ closed and are ruled out of this lane below. Six rulings.
   so does a NEW mutilation introduced by a future `WHAT_STRIP_PREFIX` edit. The widening
   still improves all twelve: the slug stops being the only voice and becomes one of six or
   eight, which is a strict gain available without the gated change.
-  ⛔ **SUPERSEDED at §894.** The twelve ARE repaired; LEG-7 was a lane note, not an owner
-  ruling (§892), so the gate this row rests on never existed. The roster's two-sided
-  agreement still holds and still reds a silent repair — that half of the row stands.
 - **J-LEG-WIRE-16 — ATTRIBUTION IS LONGEST-MATCH, AND THE THREE NESTING CANONICALS ARE
   FROZEN.** On the §4 arm index 0 is a bare de-underscored token, so it can legitimately
   sit inside its own variants — 'hostile' inside 'an edge the record carries as hostile'
-  (⛔ **SUPERSEDED at §894: the nesting set is now TWO, not three** — de-slugging removed
-  one attribution ambiguity outright). Scanning a pool in order would then
+  (3 kinds: hostile, patron, institution_capture). Scanning a pool in order would then
   attribute that headline to the canonical and UNDER-REPORT the widening, making the
   live-path pin weaker than it looks. The harness sorts by length descending instead, and
   pins two facts: no two AUTHORED variants nest (measured: zero), and the canonical-nesting

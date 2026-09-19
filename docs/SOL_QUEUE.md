@@ -77,79 +77,21 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
 
 ## 4. Open work, in the order the chair would take it
 
-> ⚠ **THIS FILE EXISTS ON BOTH BRANCHES (ODQ §338.4).** Rows 2–5 below were corrected on
-> the BUILD SLOT (`claude/composite-r4`, LONG TAIL #30 car 1, `935b3d94b`) and on THIS
-> ledger copy by the chair at the same collection (2026-09-15 ~06:2x), so the two copies
-> agree; any later correction must land on both or the stale figure is re-read from the
-> other branch.
-
 1. **In flight at handoff:** a lane closing the census — anchoring the un-anchored
    negatives in `tests/lint/testRatchet.test.js` (a TWO-file cure; the walker also
    reds on a row offending BELOW its ceiling), re-freezing the OSR baseline for a
    LAWFUL 12-row shrink, and hardening the ratchet against the scope-collapse
    disguise. Its work may be sitting uncommitted — check `git status` first.
-2. ⛔⛔ **THE CLASS-(a) WORKLIST IS DERIVED, NEVER RESTATED — and the figure this row
-   used to carry is the reason the rule exists.** This line read *"the 21 remaining
-   reader-without-writer defects the schema-4 triage confirmed (2 of 23 repaired)"*
-   from 2026-08-11 until 2026-09-15, and in that time it **MIS-DISPATCHED TWO LANES**:
-   Lane C on 2026-08-11 (which measured the HEAD baseline at SEVEN and recorded that
-   believing the brief "would have cost a day chasing already-dead reads"), and the
-   long-tail card of 2026-09-14, which restated 21 again from this row.
-   ⛔ **The ONLY authority on outstanding class-(a) debt is
-   `scripts/.observed-shape-readers-baseline.json` AT HEAD**, joined against
-   `CLASS_A_PROTECTED_IDENTITIES` (`scripts/check-observed-shape-readers.mjs`). **Run
-   the join.** Never quote a count out of this row, a brief, a card or a memory — the
-   law is at `memory/osr-class-a-worklist-is-the-baseline-not-the-brief.md`, and
-   `memory/osr-171-growth-rows-triaged.md` is the original triage's HISTORY, not a
-   worklist. The join is now PINNED as machinery in
-   `tests/lint/observedShapeReaders.walker.test.js` ("the LIVE class-(a) worklist is
-   exactly the rows the register still holds"), which reds in BOTH directions, so this
-   row can never silently go stale again.
-   **MEASURED 2026-09-15 at `f73bdbf16` (schema 18, `frozenAtSha bc441dccc`) the join
-   returns THREE rows — and every one is a DELIBERATE STOP documented AT THE READ:**
-   - `coalitionEvidence on outcome` — `src/domain/worldPulse/warCoalitionEvidence.js`
-     (1 read): the tolerant family read
-     `metadata.coalitionEvidence ?? outcome.coalitionEvidence`, refuted twice.
-   - `hooks on settlement` **and** `supplyChains on settlement` —
-     `src/domain/aiOverlayVerifier.js` (1 read each): a **FENCE**, not a display read;
-     the in-file note above the two `compareEntityArrays` calls records the non-repair.
-     ⛔ **OWNER-OWED (ODQ §338.2)** — re-pointing it alters an anti-hallucination guard
-     on a PAID AI surface and removing the arms is FAIL-OPEN. Leave them banked.
-   The other eighteen identities are repaired or re-triaged (`c74048e4`, `e429a4e8`,
-   `5afe9b2e`, `aed0fc0e`, `904b7bb0` — three of them were live user-visible holes),
-   so this row must never again be read as naming them. ⚠ Any *new* writer-side-vs-
-   reader-side call is still new architecture and still owes a row.
-3. ~~**The `locks` cluster is OWNER-GATED, not yours or the chair's**~~ — ⛔ **REFUTED
-   BY MEASUREMENT 2026-08-11 (chair rulings H28/H29 and CR-OSR-SCHEMA-6); NOTHING HERE
-   IS OPEN.** `locks.institutions` no longer exists: the reader was deleted by owner
-   ruling and its absence is the finding, recorded in place at
-   `src/domain/locksPreservation.js` (the RAW persisted key still rides through
-   persistence BY DESIGN — pruning it would be a migration, and migrations stay
-   owner-gated). `locks.factions` is not a defect either: its writer is the **dynamic
-   `setLock(key, …)`** behind the `WORLD_LOCKS` admission list in
-   `src/components/dossier/LockControls.jsx`, which a name-grep could not see, so the
-   row was re-triaged out of class (a) into `EXPLAINED_WRITER_EXEMPTIONS`
-   (`scripts/check-observed-shape-readers.mjs`, mechanism `admission-list`). **The coup
-   shield does arm from the UI**; the claim that it "can never arm FROM THE UI" was the
-   mis-triage, and no capability has to be deleted or added.
-4. ✅ **The UNREVIEWED-UI cohort is CLOSED — per-row triaged, ruled, and now ENFORCED
-   rather than excluded.** ODQ §338.1 (zero of the eventLog 33 are defects; 4 bank
-   under M9, 22 are one `normalizeEntry` polymorphic mis-binding) and §346.1 (the
-   minKeys 8→7 cure path REFUTED by measurement) close the triage; CR-OSR-FREEZE-7
-   hands the heuristic leg the UNFILTERED file census with no scope exclusion, so
-   `src/components/` is under direct gate enforcement and CR-OSR-SCOPE-1 removes it
-   from EXACT resolution only. ⚠ **TAKE THE FIGURE FROM THE RUN, NOT FROM THIS LINE** —
-   `node scripts/check-observed-shape-readers.mjs` prints the filtered reading on every
-   scan (50 files / 128 identities / 192 reads, measured 2026-09-15 at `f73bdbf16`),
-   and the walker pins the filtered/raw GAP rather than either absolute, because one
-   absolute cannot tell a filter change from an estate shrink. Both earlier figures on
-   this line ("162-identity", then "51/128/193") went stale exactly as a transcribed
-   number does; a cohort figure quoted without naming WHICH READING it is stays
-   unusable.
-5. ✅ **M6 IS LANDED AND RUNNING**, not waiting (CR-OSR-FREEZE-6-R1). The shape-family
-   filter clears rows on every scan and announces its own clearing in the CLI's output,
-   under the zero-erasure control `assertClassADebtPreserved`, which refuses the scan
-   outright if any filter would erase a class-(a) row.
+2. **The 21 remaining reader-without-writer defects** the schema-4 triage confirmed
+   (2 of 23 repaired). Each writer-side-vs-reader-side call is new architecture and
+   owes a row. See `memory/osr-171-growth-rows-triaged.md`.
+3. **The `locks` cluster is OWNER-GATED, not yours or the chair's** — `locks.factions`
+   /`locks.institutions` reach a coup shield that can never arm FROM THE UI; the fix
+   is either deleting a working capability or adding a new one. Ask; do not choose.
+4. **The 162-identity UNREVIEWED-UI cohort** banked in the genesis, awaiting per-row
+   triage.
+5. **M6 as a follow-on freeze** (CR-OSR-FREEZE-6-R1) — the re-key tool and its
+   negative control are already built and waiting.
 6. **The ES tail** (ES-5b insertion reconciliation → ES-6 → ES-7 → CW-3), then the
    remaining corpus in this queue's own dependency order.
 7. **THE TERMINAL PHASE IS NOT YOURS AND NOT THE CHAIR'S** — §4 below stands
@@ -528,14 +470,10 @@ volumes corrected @ 36862650 + fdf43790):
       triples keeping live interp keys. Per J-LEG-WIRE-12 these were deliberately
       NOT bundled into the R1 wiring; treat them as their own wave with their own
       golden plan.
-    - ✅ **DEFECT-1/2/3's de-slugging of the twelve §4 anchors is DONE at §894**
-      (`coup_detat` now reads "a seizure of the seat"). **LEG-7 was never an owner
-      ruling** — the §892 retrovalidation walk proved it a lane-authored wiring note,
-      so there was no owner word here to protect. The repair took `FALLBACK_CANONICALS`,
-      a frozen twelve-entry map consulted BEFORE the strip, leaving pool order and
-      length untouched so every existing seed still draws the same index.
-    - ⛔ **STILL OPEN:** DEFECT-8's digit retirement. It REPLACES a live string rather
-      than widening a pool; do not repair it opportunistically.
+    - ⛔ **STILL OWNER-GATED (LEG-7):** DEFECT-1/2/3's de-slugging of the twelve
+      MUTILATED §4 anchors (`coup_detat` still renders "detat") and DEFECT-8's
+      digit retirement. Each REPLACES a live string rather than widening a pool.
+      The twelve are frozen by test roster; do not repair them opportunistically.
 23a. **THE WAR AMENDMENTS: CONVENIENCE + TRIBUTE + STATECRAFT + EXPANSION**
     (DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md, final 2026-08-03 — cohesion-checked
     against all seven volumes, 128 findings folded, re-verified, residuals
