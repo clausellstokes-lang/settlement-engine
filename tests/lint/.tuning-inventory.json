@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "21fe864fa475f929bcf9dc3e3728e256ce3c6d7f",
-  "measuredBy": "Fable 5.1 chair — §900 desk landing",
-  "date": "2026-09-05",
-  "note": "IRREGULAR_TUNING (SEAT-78, a draft row), the two-band CHANCE_MEETING_NEWS_TUNING (ENC-4b), TUNEREG-2 three tables (the desk consist): no ceiling rises; P3 per file shrink-only; taken on the clean tree after register car 2",
+  "measuredAtSha": "959faad1984dbac7f5aab43749e9184d1d4e2772",
+  "measuredBy": "chair-fable-5.1 (session 923472dc)",
+  "date": "2026-09-19",
+  "note": "the 2026-09-18 fixes consist: dependents of eight tables moved (the print desk, the desk reads, the weave); no tuning value moved; the print desk carries no dial",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -728,7 +728,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 437,
+      "line": 438,
       "spanDigest": "3812788e098c702a89d72a5b51c0007f969391069da9b98b2fdd4f2e789ff838",
       "leaves": {
         "value": 50
@@ -742,7 +742,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 438,
+      "line": 439,
       "spanDigest": "a6b1340215d65b0c4945f4b657854f6756ff2217a648606b9e467ee5ac00bbda",
       "leaves": {
         "value": 20
@@ -756,13 +756,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 915,
+      "line": 929,
       "spanDigest": "d8ad20f683ec92a4a0b123ebd6748169b8712e96577f567cd56d3cdd08f76113",
       "leaves": {
         "value": 0.05
       },
       "dependents": [
-        "src/components/new/generalDeskRead.js"
+        "src/components/new/generalDeskRead.js",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -770,13 +771,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 362,
+      "line": 363,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx"
+        "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -784,13 +786,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 578,
+      "line": 579,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx"
+        "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -798,13 +801,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 580,
+      "line": 581,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx"
+        "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -812,13 +816,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 582,
+      "line": 583,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx"
+        "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -826,13 +831,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 584,
+      "line": 585,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
       },
       "dependents": [
-        "src/components/new/tabs/PowerTab.jsx"
+        "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -840,13 +846,14 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 258,
+      "line": 278,
       "spanDigest": "7ba947e7a8eeeeaf7c1099788047bdabcfe31b570173434bd82b0f9d83263184",
       "leaves": {
         "value": 0.25
       },
       "dependents": [
-        "src/components/new/tabs/OverviewTab.jsx"
+        "src/components/new/tabs/OverviewTab.jsx",
+        "src/domain/display/stateProse/printProse.js"
       ],
       "namedDependents": []
     },
@@ -1283,6 +1290,7 @@
       },
       "dependents": [
         "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
         "src/domain/spatial/navalLayer.js",
