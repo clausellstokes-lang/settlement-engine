@@ -186,6 +186,18 @@ The owner, 2026-09-19 17:05 EDT, to a chair that had two lanes running: *"rememb
 
 **Rulings that belong to OTHER packets, recorded here so their compiles carry them:** `set-faction-power` renormalises (design §22.2 item 8) — the power-share op's packet; the NEWCOMER is enriched once at birth on a stream keyed by its stable id (item 9) — EM-B1b, after EM-P1; the delta card's copy for the three numbers (item 12) — the EM-D family; **FIX-G1** (NEW, a PARALLEL lane: the generator's viability summary counts six dependencies beside a list of five on one town row — measured first; a cure that moves the prose golden waits at the owner's signed door).
 
+## Amendments of 2026-09-19 17:26 EDT — A CORRECTION TO THE TRAIN ORDER: EM-A2a PRECEDES EM-A2b; EM-B1e FLOATS (ODQ §934.47 addendum 21)
+
+Measured from the compiled drafts while planning the pre-proof pipeline (kit `packets-waiting/`): **EM-A2b's change manifest MODIFIES `src/domain/edit/pools.js` and `tests/domain/editPools.test.js`, which EM-A2a CREATES**, and A2b's own header says `Depends on: EM-P3 and EM-A2a — this packet APPENDS rows to A2a's POOLS`; EM-A2a in turn depends on EM-A1 (a `pool` field names a pool id). The train table above — the original plan's rows for EM-T5 and EM-T6, copied unchanged into the sequencing amendment — carries A2b in T5 and A2a in T6: the wrong way round; the sealed dispatch would have refused A2b for a missing substrate. CORRECTED:
+
+| when | members, in order |
+|---|---|
+| **EM-T5** | EM-A1 → **EM-A2a** · EM-P1b (with the three name-keyed choice sites) · EM-B3c |
+| **EM-T6** | **EM-B1f** (first — it blocks EM-B1a) → **EM-A2b** → EM-B1a |
+| **floating** | **EM-B1e** (the pulse's one ruin writer): its header says `Depends on: NONE`, its two paths touch no other member's — it is pre-proofed NOW and built whenever the slot would otherwise wait for a READY packet, joining whichever train is open |
+
+Everything else in the sequencing amendment stands. The lesson, taken into the pre-proof pipeline: a train table is a CLAIM until it is checked against the members' change manifests — the chair diffs every train's order against `changeManifest` CREATE/MODIFY pairs before its first member is promoted.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
