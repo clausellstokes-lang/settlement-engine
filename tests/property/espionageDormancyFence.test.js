@@ -189,6 +189,18 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-19, THE READER MET 'CHURCHES, MONASTERIES' IN A QUARTER CARD (owner-signed, through the door) ────
+ * THE SIXTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
+ * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
+ * the one window this file's STOP still names. The owner's order: "the parish church is
+ * a house of worship on every surface" (2026-09-19); the record is
+ * docs/shift-records/2026-09-19-religious-quarter-text.json (odqRow §934.22). THE MOVER,
+ * IN THE RECORD'S OWN WORDS, because the record is the authority and this paragraph does
+ * not paraphrase it: THE READER MET 'Churches, monasteries' IN A QUARTER CARD WHOSE OWN
+ * BULLET NOW READS 'Houses of worship (2-5)'.
+ * On THIS corpus 346 of 360 rows move; 360/360 hashes stay distinct. `91a60437…` ->
+ * `0d5dac61…`.
+ *
  * ── 2026-09-19, THE READER STOPPED MEETING 'PARISH CHURCH' IN THE SENTE… (owner-signed, through the door) ────
  * THE FIFTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones before
  * it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a spend of
@@ -327,7 +339,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '91a60437b452d3f185b7766c739d4bd61641568349a2a32aacf863a444c62e6a';
+const PRE_COUPLING_CORPUS_SHA = '0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
