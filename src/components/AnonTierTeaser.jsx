@@ -16,7 +16,7 @@ import { t, tierPriceSlot, tx } from '../copy/index.js';
 import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { proseFontSize } from '../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 export default function AnonTierTeaser({ onSignIn }) {
   const mobile = useIsMobile();
@@ -35,7 +35,7 @@ export default function AnonTierTeaser({ onSignIn }) {
       textAlign: 'center',
     }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.10em',
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, letterSpacing: '0.10em',
         textTransform: 'uppercase', color: GOLD_TXT, marginBottom: SP.lg,
       }}>
         What a free account unlocks
@@ -81,7 +81,9 @@ export default function AnonTierTeaser({ onSignIn }) {
                 <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK, lineHeight: 1 }}>
                   {priceLabel}
                 </span>
-                {priceSub && <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{priceSub}</span>}
+                {/* "forever" / "per month" — the unit beside the price, read on a phone and
+                    drawn at 11px until the floor reached this page. */}
+                {priceSub && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>{priceSub}</span>}
               </div>
               {tagline && (
                 <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>

@@ -32,6 +32,8 @@ import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
 import { recoverFromChunkError } from '../lib/staleDeploy.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
 import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
@@ -66,6 +68,10 @@ function popFigure(size) {
 }
 
 function GaugeStation({ value, label, active, onClick, onHover }) {
+  // Bound HERE rather than threaded from HomeHero: the station is a real component
+  // and the hook fans into the one shared matchMedia store, so a sixth station costs
+  // no listener.
+  const mobile = useIsMobile();
   return (
     <button
       type="button"
@@ -97,7 +103,11 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
         {label}
       </div>
       <div style={{
-        fontSize: FS.xxs, color: BODY, marginTop: 1,
+        // The station's population band ("61–400") is the figure the reader compares
+        // the sizes BY, and it drew at 10px on a phone. Chrome, not prose: it is a
+        // figure under a label, and raising it to the prose step would flatten it into
+        // the station name above it.
+        fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, marginTop: 1,
         fontVariantNumeric: 'oldstyle-nums', letterSpacing: '0.01em',
         opacity: active ? 1 : 0.8,
       }}>
@@ -108,6 +118,9 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
 }
 
 export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
+  // ABOVE EVERY EARLY RETURN, once for the component (the phone-floor census asserts
+  // the flag is really bound at each site that reads it).
+  const mobile = useIsMobile();
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
@@ -401,7 +414,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
           // (TIER_FACTS/SINGLE_DOSSIER_PRICE) so they can never drift from the cap.
           <>
             <div style={{ maxWidth: 460, margin: '0 auto', textAlign: 'center' }}>
-              <div style={{ fontSize: FS.xs, color: BODY, marginBottom: SP.sm }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginBottom: SP.sm }}>
                 {t('hero.anonCap.spent')}
               </div>
               <div style={{
@@ -462,7 +475,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
             )}
             {isAnon && (
               <p style={{
-                margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
+                margin: `${SP.sm}px auto 0`, fontSize: proseFontSize(FS.xs, mobile), color: BODY,
                 fontStyle: 'italic',
               }}>
                 {t('hero.ctaSubline')}
@@ -480,7 +493,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       {isAnon && (
         <p style={{
           margin: `${SP.lg}px auto 0`, maxWidth: 480,
-          fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+          fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
         }}>
           {t('hero.note')}
           {onSignIn && (

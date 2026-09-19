@@ -22,6 +22,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { X } from 'lucide-react';
 import useIsMobile from './hooks/useIsMobile';
+import { chromeFontSize } from './design/proseScale.js';
 import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
 import useChromeInsets from './hooks/useChromeInsets.js';
 import { useStore } from './store/index.js';
@@ -616,9 +617,20 @@ export default function App() {
                     borderTop: active ? `2px solid ${GOLD}` : '2px solid transparent',
                     cursor: 'pointer',
                     color: active ? GOLD : PARCH_100,
-                    fontSize: FS.xxs, fontWeight: active ? 700 : 500,
+                    // ⭐ THE CHROME FLOOR REACHES THE PRIMARY NAV (ODQ §934.22 item 2).
+                    // Below 1024px the painted words leave the header and THIS bar is the
+                    // whole of the primary nav — and it drew its destinations at 10px, the
+                    // smallest chrome on the phone, on the one control every page depends on.
+                    // The floor law (design/proseScale.js) had only ever been applied inside
+                    // the dossier. Desktop is untouched: chromeFontSize is the identity above
+                    // the breakpoint.
+                    fontSize: chromeFontSize(FS.xxs, isMobile), fontWeight: active ? 700 : 500,
                     fontFamily: sans,
-                    letterSpacing: '0.02em', textTransform: 'uppercase',
+                    // The 0.02em tracking exists to open up 10px capitals. At the 12px floor
+                    // it is no longer earning its width, and the widest label (COMPENDIUM, ten
+                    // characters in a fifth of a 391px page) needs every pixel of the cell
+                    // before the ellipsis below takes it. Dropped on the phone only.
+                    letterSpacing: isMobile ? 'normal' : '0.02em', textTransform: 'uppercase',
                   }}
                 >
                   <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>

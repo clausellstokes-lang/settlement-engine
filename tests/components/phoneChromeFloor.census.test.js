@@ -45,15 +45,22 @@
  */
 
 import { describe, expect, test } from 'vitest';
-import { parse } from 'espree';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 
-import { legacy } from '../../src/design/tokens.js';
-import { PHONE_CHROME_FLOOR } from '../../src/design/proseScale.js';
+// ⭐ THE RULE ITSELF LIVES IN ONE PLACE (2026-09-19, ODQ §934.22 item 2). It was
+// written here and it is still this file's rule; it moved to a sibling leaf the day a
+// SECOND surface had to be held to it — the phone's bottom nav and the Create page
+// (tests/components/publicChromeFloor.census.test.js). Everything that made this file
+// what it is stayed: the tree, the boundary ruling against the dossier's own import
+// graph, the anti-vacuity floors and every executed control below. Only the scanner
+// left, so the two censuses cannot drift into two rules wearing one name.
+import {
+  PHONE_CHROME_FLOOR, SUB_FLOOR_KEYS, censusOfSource, walkSource,
+} from './phoneFloorCensus.shared.mjs';
 
-// The repo root under vitest. NOT `import.meta.url`: a jsdom environment rewrites
-// it to a `/@fs/…` dev-server path, which readdirSync cannot open — the same trap
+// The repo root under vitest. NOT `import.meta.url`: a jsdom environment rewrites it
+// to a `/@fs/…` dev-server path, which readdirSync cannot open — the same trap
 // the InstitutionLink census documents.
 const ROOT = process.cwd();
 
@@ -62,12 +69,6 @@ const CENSUS_TREE = 'src/components/new';
 
 /** The acceptance test whose surface this file is the source-side twin of. */
 const ACCEPTANCE_TEST = 'tests/components/dossierPhoneFloorAllViews.test.jsx';
-
-/** The two helpers a sub-floor size may pass through. */
-const HELPERS = new Set(['chromeFontSize', 'proseFontSize']);
-
-/** The declared ruling that takes a site out of the census, on its line or the one above. */
-const RULING = /\/\/\s*phone-floor:/;
 
 /**
  * ⛔ EVERY OTHER DIRECTORY THE DOSSIER'S GRAPH REACHES, AND WHY IT IS OUT.
@@ -94,202 +95,7 @@ const OUTSIDE_THE_CENSUS = Object.freeze({
 
 // ── the walk ─────────────────────────────────────────────────────────────────
 
-/** Every `.js`/`.jsx` source file under `dir`, tests excluded. */
-function walkSource(dir, out = []) {
-  for (const entry of readdirSync(dir)) {
-    const p = join(dir, entry);
-    if (statSync(p).isDirectory()) walkSource(p, out);
-    else if (/\.jsx?$/.test(entry) && !/\.test\./.test(entry)) out.push(p);
-  }
-  return out;
-}
-
-/** espree with the settings eslint.config.js itself uses, so what parses here parses there. */
-function parseSource(src) {
-  return parse(src, {
-    ecmaVersion: 2024, sourceType: 'module', loc: true, ecmaFeatures: { jsx: true },
-  });
-}
-
-/** Depth-first over every AST node, with a `parent` link threaded on the way down. */
-function eachNode(ast, visit) {
-  const stack = [{ node: ast, parent: null }];
-  while (stack.length) {
-    const { node, parent } = stack.pop();
-    if (!node || typeof node.type !== 'string') continue;
-    node.parent = parent;
-    visit(node);
-    for (const key in node) {
-      if (key === 'loc' || key === 'range' || key === 'parent') continue;
-      const v = node[key];
-      if (Array.isArray(v)) {
-        for (const child of v) if (child && typeof child.type === 'string') stack.push({ node: child, parent: node });
-      } else if (v && typeof v.type === 'string') {
-        stack.push({ node: v, parent: node });
-      }
-    }
-  }
-}
-
-// ── the rule ─────────────────────────────────────────────────────────────────
-
-/** The FS keys that render below the chrome floor — DERIVED from the two modules that own them. */
-const SUB_FLOOR_KEYS = new Set(
-  Object.entries(legacy.FS).filter(([, px]) => px < PHONE_CHROME_FLOOR).map(([key]) => key),
-);
-
-/**
- * The px a `fontSize` VALUE node renders at when it is a literal, or null when it
- * is anything else (a helper call, a ternary, a prop, an identifier). Only a
- * literal can be judged from source, and only a literal is claimed.
- */
-function literalPx(node) {
-  if (!node) return null;
-  if (node.type === 'MemberExpression' && node.object?.type === 'Identifier' && node.object.name === 'FS') {
-    const key = node.computed
-      ? (node.property?.type === 'Literal' ? String(node.property.value) : null)
-      : node.property?.name;
-    return key != null && SUB_FLOOR_KEYS.has(key) ? legacy.FS[key] : null;
-  }
-  if (node.type === 'Literal' && typeof node.value === 'number') {
-    return node.value < PHONE_CHROME_FLOOR ? node.value : null;
-  }
-  return null;
-}
-
-/** True when a `// phone-floor:` ruling sits on this line or the one above it. */
-function ruledAt(lines, line) {
-  return RULING.test(lines[line - 1] || '') || RULING.test(lines[line - 2] || '');
-}
-
-const propOf = (obj, name) => obj.properties?.find(
-  (p) => p.type === 'Property' && !p.computed && (p.key?.name ?? p.key?.value) === name,
-);
-const numOf = (node) => (node?.type === 'Literal' && typeof node.value === 'number' ? node.value : null);
-
-/**
- * ⭐ THE RENDERED ARM'S OWN PREDICATE, READ OFF THE SOURCE STYLE OBJECT.
- *
- * `dossierPhoneFloorAllViews.isChrome` judges a rendered element by case,
- * tracking, weight, or being an inline padded grounded pill. A line that
- * predicate calls PROSE takes the 14px floor there — so a source that wrapped it
- * in `chromeFontSize` has written 12 where the walk demands 14, and reds only
- * once that line grows past 45 characters. Thirty-seven sites were in exactly
- * that state when this arm first ran.
- *
- * It is a HEURISTIC over source and it says so: it is the reason a site may carry
- * a `// phone-floor:` ruling, which this arm honours exactly as the census does.
- */
-function proseShaped(styleObj, elementName) {
-  if (!styleObj || styleObj.type !== 'ObjectExpression') return false;
-  if (propOf(styleObj, 'textTransform')?.value?.value === 'uppercase') return false;
-  if (propOf(styleObj, 'letterSpacing')) return false;
-  const weight = numOf(propOf(styleObj, 'fontWeight')?.value);
-  if (weight != null && weight >= 700) return false;
-  const padded = !!propOf(styleObj, 'padding') || !!propOf(styleObj, 'paddingLeft');
-  const grounded = !!propOf(styleObj, 'background') || !!propOf(styleObj, 'backgroundColor') || !!propOf(styleObj, 'border');
-  if (padded && grounded) return false;                      // the pill
-  const lineHeight = numOf(propOf(styleObj, 'lineHeight')?.value);
-  return (lineHeight != null && lineHeight >= 1.4) || elementName === 'p' || elementName === 'ProseBlock';
-}
-
-/** The JSX element a node sits inside, by name, or null at the top of the tree. */
-function enclosingElement(node) {
-  for (let n = node.parent; n; n = n.parent) {
-    if (n.type === 'JSXOpeningElement') {
-      const name = n.name;
-      return name?.type === 'JSXIdentifier' ? name.name : null;
-    }
-  }
-  return null;
-}
-
-/**
- * Is `name` bound anywhere in the scope chain above `node`?
- *
- * Hand-rolled rather than pulled from eslint-scope, which is transitive: espree
- * is the direct dependency this repo's walkers already stand on. It answers the
- * one question asked of it — a function parameter (through any destructuring
- * shape), or a declaration in an enclosing body.
- */
-function bindsIdentifier(node, name) {
-  const inPattern = (pattern) => {
-    if (!pattern) return false;
-    switch (pattern.type) {
-      case 'Identifier': return pattern.name === name;
-      case 'AssignmentPattern': return inPattern(pattern.left);
-      case 'RestElement': return inPattern(pattern.argument);
-      case 'ArrayPattern': return pattern.elements.some(inPattern);
-      case 'ObjectPattern': return pattern.properties.some(
-        (p) => (p.type === 'RestElement' ? inPattern(p.argument) : inPattern(p.value)),
-      );
-      default: return false;
-    }
-  };
-  const declares = (statements) => (statements || []).some((s) => {
-    if (s.type === 'VariableDeclaration') return s.declarations.some((d) => inPattern(d.id));
-    if (s.type === 'FunctionDeclaration' || s.type === 'ClassDeclaration') return s.id?.name === name;
-    if (s.type === 'ImportDeclaration') return s.specifiers.some((sp) => sp.local?.name === name);
-    return false;
-  });
-  for (let n = node.parent; n; n = n.parent) {
-    if (/Function(Declaration|Expression)$|ArrowFunctionExpression/.test(n.type) && n.params?.some(inPattern)) return true;
-    if (Array.isArray(n.body) && declares(n.body)) return true;
-    if (n.type === 'Program' && declares(n.body)) return true;
-  }
-  return false;
-}
-
-/**
- * Every `fontSize` property in one source file, judged.
- * @returns {{bare: any[], chrome: any[], prose: any[], ruled: any[], misclassified: any[], outOfScope: any[]}}
- */
-export function censusOfSource(src, rel) {
-  const lines = src.split('\n');
-  const found = { bare: [], chrome: [], prose: [], ruled: [], misclassified: [], outOfScope: [] };
-  let ast;
-  // A parse failure THROWS rather than skipping the file: a scanner that
-  // silently drops what it cannot read is the vacuity this census exists against.
-  try { ast = parseSource(src); } catch (e) { throw new Error(`${rel} did not parse: ${e.message}`, { cause: e }); }
-
-  eachNode(ast, (node) => {
-    if (node.type !== 'Property' || node.computed) return;
-    if ((node.key?.name ?? node.key?.value) !== 'fontSize') return;
-    const value = node.value;
-    const line = value.loc.start.line;
-    const where = `${rel}:${line}`;
-    const snippet = (lines[line - 1] || '').trim().slice(0, 100);
-
-    if (value.type === 'CallExpression' && value.callee?.type === 'Identifier' && HELPERS.has(value.callee.name)) {
-      const px = literalPx(value.arguments[0]);
-      if (px == null) return;                                // a helper over a non-literal: nothing to claim
-      const helper = value.callee.name;
-      found[helper === 'chromeFontSize' ? 'chrome' : 'prose'].push({ where, px, snippet });
-
-      // The viewport flag must be a real binding, or this site throws on first
-      // render. The chain is walked from the PROPERTY, not from its value: this
-      // walk threads `parent` as it pops, so a node's own link is set and its
-      // not-yet-popped children's are not — reading the chain from `value` found
-      // `undefined` at step one and called all 551 sites unbound.
-      const flag = value.arguments[1];
-      if (flag?.type === 'Identifier' && !bindsIdentifier(node, flag.name)) {
-        found.outOfScope.push(`${where}  \`${flag.name}\` is not bound in any enclosing scope  ::  ${snippet}`);
-      }
-
-      if (helper === 'chromeFontSize' && !ruledAt(lines, line)
-          && proseShaped(node.parent, enclosingElement(node))) {
-        found.misclassified.push(`${where}  ${px}px  ::  ${snippet}`);
-      }
-      return;
-    }
-
-    const px = literalPx(value);
-    if (px == null) return;
-    if (ruledAt(lines, line)) found.ruled.push(`${where}  ${px}px  ::  ${snippet}`);
-    else found.bare.push(`${where}  ${px}px  ::  ${snippet}`);
-  });
-  return found;
-}
+export { censusOfSource };
 
 function censusOfTree() {
   const all = { bare: [], chrome: [], prose: [], ruled: [], misclassified: [], outOfScope: [] };

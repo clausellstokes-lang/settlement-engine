@@ -18,6 +18,8 @@
  * stays tolerance-0.
  */
 import { useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, sans, serif_, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
@@ -33,6 +35,7 @@ import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampl
 import { migrateSettlementConfig as normalizeConfig } from '../../lib/settlementConfigMigration.js';
 
 export default function FoundingWorlds({ onNavigate }) {
+  const mobile = useIsMobile();
   const generate = useStore((s) => s.generateSettlement);
   const updateConfig = useStore((s) => s.updateConfig);
   const authTier = useStore((s) => s.auth.tier);
@@ -78,10 +81,14 @@ export default function FoundingWorlds({ onNavigate }) {
             style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, flexWrap: 'wrap' }}>
               <h3 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.md, fontWeight: 900 }}>{sample.name}</h3>
-              <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, textTransform: 'capitalize' }}>{sample.tier} · {sample.terrain}</span>
+              <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), textTransform: 'capitalize' }}>{sample.tier} · {sample.terrain}</span>
             </div>
-            <p style={{ margin: 0, color: BODY, fontFamily: serif_, fontStyle: 'italic', fontSize: FS.xs, lineHeight: 1.5 }}>{sample.teaser}</p>
-            <ul style={{ margin: 0, padding: `0 0 0 ${SP.md}px`, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.5 }}>
+            <p style={{ margin: 0, color: BODY, fontFamily: serif_, fontStyle: 'italic', fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>{sample.teaser}</p>
+            <ul style={{
+              margin: 0, padding: `0 0 0 ${SP.md}px`, color: MUTED, fontFamily: sans,
+              // phone-floor: the tags are two- and three-word CHIPS glanced at beside the teaser, not a passage — chrome, though the 1.5 line-height reads as prose to the census's shape heuristic.
+              fontSize: chromeFontSize(FS.xxs, mobile), lineHeight: 1.5,
+            }}>
               {sample.tags.map((tag) => <li key={tag}>{tag}</li>)}
             </ul>
             <div style={{ flex: 1 }} />
