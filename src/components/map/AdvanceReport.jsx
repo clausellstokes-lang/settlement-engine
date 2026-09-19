@@ -40,6 +40,7 @@ import Button from '../primitives/Button.jsx';
 // V-4 THE CAUSE-WALK — STATIC within this already-lazy chunk (the FP-R idiom:
 // a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
 import CauseWalkPanel from './CauseWalkPanel.jsx';
+import { edged } from '../../design/edgedBox.js';
 
 const CLASS_LABEL = {
   war: 'War', succession_coup: 'Succession', plague: 'Plague', calamity: 'Calamity',
@@ -294,7 +295,8 @@ function DecreeCard({ decree, within }) {
 function DecreeCluster({ cluster }) {
   return (
     <div data-testid="chronicle-decree-cluster" style={{
-      border: `1px solid ${cluster.selfConflict ? RED : AMBER}`, borderLeft: `3px solid ${cluster.selfConflict ? RED : AMBER}`,
+      // LONGHANDS ONLY — the shorthand varies with `selfConflict` (see the walker).
+      ...edged(`1px solid ${cluster.selfConflict ? RED : AMBER}`, `3px solid ${cluster.selfConflict ? RED : AMBER}`),
       background: AMBER_BG, padding: '8px 10px', display: 'grid', gap: 5,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>

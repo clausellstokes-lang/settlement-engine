@@ -42,6 +42,7 @@ import {
   storyItems,
 } from './heraldCommandSelectors.js';
 import { specialistSectionForStoryTopic } from './heraldCommandSourceParity.js';
+import { edged } from '../../design/edgedBox.js';
 
 /**
  * Bound the initial archive DOM independently of campaign history depth. The
@@ -272,8 +273,8 @@ function BriefingCard({ item, onSection, lead = false }) {
         display: 'grid',
         gap: SP.xs,
         padding: SP.sm,
-        border: `1px solid ${blocking ? GOLD : BORDER}`,
-        borderLeft: `3px solid ${blocking ? RED : BORDER2}`,
+        // LONGHANDS ONLY — the shorthand varies with `blocking` (see the walker).
+        ...edged(`1px solid ${blocking ? GOLD : BORDER}`, `3px solid ${blocking ? RED : BORDER2}`),
         background: CARD_ALT,
       }}
     >

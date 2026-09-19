@@ -123,7 +123,12 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
   return (
     <div style={{
       display: 'grid', gap: 3, minWidth: 0,
-      padding: focal ? `${SP.sm}px ${SP.md}px` : `2px 0`,
+      // LONGHANDS ONLY: `padding` varies with `focal` while `paddingLeft` is set beside
+      // it, so on the render that flips `focal` React warns and the left inset the accent
+      // border needs is reset from under it (tests/lint/styleShorthandLonghand.walker.test.js).
+      paddingTop: focal ? SP.sm : 2,
+      paddingRight: focal ? SP.md : 0,
+      paddingBottom: focal ? SP.sm : 2,
       gridColumn: focal ? '1 / -1' : undefined,
       borderLeft: accent ? `3px solid ${accent}` : 'none',
       paddingLeft: accent ? SP.sm : (focal ? SP.md : 0),

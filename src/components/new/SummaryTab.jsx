@@ -15,6 +15,7 @@ import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { edged } from '../../design/edgedBox.js';
 
 // Tier 7.19 — `second` was the per-file body-copy alias for '#6b5340'.
 // Routing it through `BODY` from tabConstants centralises future contrast
@@ -210,7 +211,7 @@ function SummaryTab({ settlement:r }) {
       </div>}
 
       {/* Pressure sentence if no arrivalScene */}
-      {r.pressureSentence&&!r.arrivalScene&&<div style={{background:stresses.length?'#faf6ef':'#1c1409',border:stresses.length?'1px solid #e0d0b0':'1px solid #3a2a10',borderLeft:stresses.length?'3px solid #a0762a':undefined,padding:'10px 14px',marginBottom:14}}>
+      {r.pressureSentence&&!r.arrivalScene&&<div style={{background:stresses.length?'#faf6ef':'#1c1409',...edged(stresses.length?'1px solid #e0d0b0':'1px solid #3a2a10',stresses.length?'3px solid #a0762a':undefined),padding:'10px 14px',marginBottom:14}}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:gold,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Current Situation</div>
         <p style={{fontSize:FS.md,color:stresses.length?'#3a2a10':'#f0e8d8',lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>
       </div>}

@@ -217,6 +217,13 @@ async function renderPdfBlobOnMainThread(props) {
       setTimeout(resolve, 0);
     }
   });
+  // ⛔ THE VENDOR GLOBALS, ON THIS PATH TOO. The worker imports pdfWorkerShim first
+  // for `window`; the `Buffer` half of that shim is NOT worker-specific — the missing
+  // global is read by @react-pdf/layout's image path wherever it runs, so the main
+  // thread needs it exactly as much (see the shim's docblock). Dynamic, and awaited
+  // BEFORE the renderer resolves, so the eager first-paint closure is untouched and
+  // the global is in place before any render reads it.
+  await import('./pdfWorkerShim.js');
   const [{ pdf }, { SettlementPDF }] = await Promise.all([
     import('@react-pdf/renderer'),
     import('../pdf/SettlementPDF.jsx'),

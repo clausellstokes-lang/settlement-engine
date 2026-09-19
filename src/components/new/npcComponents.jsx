@@ -1,5 +1,6 @@
 import { Fragment, useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
+import { edged } from '../../design/edgedBox.js';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
@@ -314,8 +315,9 @@ function NPCInlineCard({
   return (
     <div id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
-      border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
-      borderLeft:`3px solid ${isPinned ? pinColor : color}`,
+      // LONGHANDS ONLY — the shorthand varies with `isPinned`, and pinning a card is
+      // exactly the re-render on which React would reset the 3px accent beside it.
+      ...edged(`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`, `3px solid ${isPinned ? pinColor : color}`),
       marginBottom:6,overflow:'hidden',
     }}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
