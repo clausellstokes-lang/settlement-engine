@@ -33,14 +33,11 @@ import {
  * whose payload was dropped) and an array all read as NOT ANONYMOUS, so the
  * draft is not adopted rather than adopted on a guess.
  *
- * THE ORIGIN IS BACKFILLED WHEN THE PAYLOAD PREDATES IT, and only then. A world
- * born under the current build carries `draftOrigin` inside the payload, and
- * `?? 'anon'` re-assigns an existing key without moving it, so the restored draft
- * stays BYTE-IDENTICAL to the one generated. A payload written by the claim-era
- * build has no stamp at all, and the envelope it sits in was only ever written
- * for an anonymous session — so its presence is what the stamp would have said.
- * Without this bridge such a draft would be adopted on the boot and then dropped
- * by the very next store write, because the projection would read no origin.
+ * THE PAYLOAD IS LIFTED VERBATIM. The draft's ORIGIN is not inside it and never
+ * was: it is derived below from the fact that an envelope was adopted at all,
+ * which is the only thing this envelope has ever meant. Copying the payload to
+ * stamp it would also cost the byte-identity the whole design rests on — a save
+ * taken after a reload must write exactly what a save taken before it would.
  *
  * @param {unknown} envelope the blob's `anonDraft` value
  * @returns {{ settlement: any, lastSeed: any }|null}
@@ -49,8 +46,7 @@ export function readAnonDraft(envelope) {
   if (!envelope || typeof envelope !== 'object' || Array.isArray(envelope)) return null;
   const draft = /** @type {Record<string, any>} */ (envelope);
   if (!draft.settlement) return null;
-  const settlement = { ...draft.settlement, draftOrigin: draft.settlement.draftOrigin ?? 'anon' };
-  return { settlement, lastSeed: draft.lastSeed ?? null };
+  return { settlement: draft.settlement, lastSeed: draft.lastSeed ?? null };
 }
 
 export function mergePersistedState(persistedState, currentState) {
@@ -100,5 +96,12 @@ export function mergePersistedState(persistedState, currentState) {
     // cannot smuggle a top-level `settlement` past the envelope check.
     settlement:        anonDraft ? anonDraft.settlement : (current.settlement ?? null),
     lastSeed:          anonDraft ? anonDraft.lastSeed : (current.lastSeed ?? null),
+    // THE ORIGIN, DERIVED — never read out of the blob, so a hand-edited one cannot
+    // assert it. Adopting the envelope IS the claim that an anonymous session wrote
+    // this world; anything else in the editor after a rehydrate came from a source
+    // an account owns, so 'account' is the fail-closed answer. Written AFTER the
+    // spread for the same reason as its neighbours: it is session state, absent from
+    // the projection, and a blob carrying it must not smuggle one past.
+    draftOrigin:       anonDraft ? 'anon' : 'account',
   };
 }

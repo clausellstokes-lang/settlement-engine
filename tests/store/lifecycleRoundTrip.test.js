@@ -173,8 +173,8 @@ const ZUSTAND_PERSIST_KEYS = Object.freeze([
   // is a world whose provenance the reload silently dropped.
   //
   // ⭐ WHEN IT IS WRITTEN IS ONE RULE (2026-09-18): the world in the editor was
-  // BORN ANONYMOUS (`settlement.draftOrigin === 'anon'`, stamped at its birth and
-  // carried on the world) and nobody is signed in right now. There is no second
+  // BORN ANONYMOUS (`state.draftOrigin === 'anon'` — a TRANSIENT store-root field,
+  // never a key on the world and never persisted) and nobody is signed in now. There is no second
   // half at the boot auth resolution any more — every boot adopts what the device
   // kept, because a device's anonymous draft belongs to the device.
   'anonDraft',
@@ -296,11 +296,10 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   // ⚰ RETIRED 2026-09-18: `restoredAnonDraft` and `signedInWorld`. Two SESSION
   // CLAIMS about what was in the editor — one raised by the rehydrate for a boot
   // resolution to spend, one raised at sign-out to bar a write — replaced by a
-  // single field ON the world, `settlement.draftOrigin`. It is not a session-only
-  // FAMILY because it is not a family at all: it rides inside the `anonDraft`
-  // envelope's payload like every other settlement key. Their rows are deleted
-  // rather than kept, because a registry row for a key no code writes is exactly
-  // the staleness this file's header calls a red.
+  // single DERIVED root field, `draftOrigin`, whose own row is below. Their rows
+  // are deleted rather than kept, because a registry row for a key no code writes
+  // is exactly the staleness this file's header calls a red.
+  draftOrigin: "whose session put the world in the editor — 'anon' or 'account'. Set at the birth (settlementGenerateAction), DERIVED on every rehydrate (persistMerge: 'anon' iff that boot adopted the envelope), re-stamped by claimSettlementForAccount when a signed-in person saves/opens/canonizes, and nulled at the swap chokepoint so an unanswering door fails closed. It MUST NOT persist: it is derived from the adoption, and a persisted copy would outlive the session it describes and could assert an origin a hand-edited blob chose (src/store/settlementSlice.js)",
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1098,6 +1097,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // The anonymous draft's slice defaults (settlementSlice).
     settlement: null,
     lastSeed: null,
+    draftOrigin: null,
     someSliceMethod: () => {},
   });
 
@@ -1132,11 +1132,18 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   // ── THE ANONYMOUS DRAFT (2026-09-18) — ONE RULE, DRIVEN THROUGH THE REAL SLICES.
   //
   // THE RULE: the device keeps the world in the editor when that world was BORN
-  // ANONYMOUS (`settlement.draftOrigin === 'anon'`, stamped at its birth by the
-  // generate action) and nobody is signed in right now. Every boot adopts what
-  // the device kept, whatever the session turns out to be; a signed-in person who
-  // finds a draft on screen keeps or clears it themselves, and saving, opening or
-  // canonizing it while signed in makes it the account's.
+  // ANONYMOUS (`state.draftOrigin === 'anon'`) and nobody is signed in right now.
+  // Every boot adopts what the device kept, whatever the session turns out to be;
+  // a signed-in person who finds a draft on screen keeps or clears it themselves,
+  // and saving, opening or canonizing it while signed in makes it the account's.
+  //
+  // ⛔ `draftOrigin` IS TRANSIENT STORE-ROOT STATE (ODQ §934.8), never a key on the
+  // settlement and never persisted. A stamp on the world would ride into every save
+  // row and into the observed-shape corpus, and the generated object would stop
+  // being byte-identical to the pipeline's. It is set at the birth, DERIVED on every
+  // rehydrate, re-stamped when a signed-in person makes the world theirs, and nulled
+  // at the swap chokepoint — so a door that installs a world and answers nothing
+  // leaves `null`, which is not 'anon', and fails CLOSED.
   //
   // ⛔ WHAT THESE ARMS REPLACED, so a future reader does not reintroduce it. The
   // predecessor carried two SESSION CLAIMS beside the world — `restoredAnonDraft`
@@ -1145,9 +1152,8 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   // the settlement-swap chokepoint, a sessionStorage stash with a 30-minute TTL to
   // carry the claim across an OAuth redirect, and a whole-settlement clear for the
   // drop. Each piece existed to keep a claim honest across a boundary the claim
-  // could not cross. A field ON the world crosses all of them: immer copies it
-  // forward on every mutation, the envelope carries it through the reload, and it
-  // is still true after the session resolves.
+  // could not cross. One DERIVED root field crosses all of them: every door that
+  // installs a world answers the question, and the swap chokepoint unanswers it.
   //
   // THE ARMS DRIVE THE REAL AUTH + SETTLEMENT SLICES COMPOSED OVER IMMER, and the
   // three arms that need a world drive the REAL generate action and the REAL
@@ -1159,15 +1165,14 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     // does construct it.
     const { resilientLocalStorage } = await import('../../src/store/index.js');
 
-    // Two stand-in worlds, stamped the way a birth stamps them. What matters to
-    // the projection is the stamp and that the WHOLE object makes the round trip.
-    const anonWorld = Object.freeze({
+    // One stand-in world, carrying NO origin of its own — the origin is a fact
+    // about the session, held at the store root. What matters to the projection is
+    // that the WHOLE object makes the round trip untouched.
+    const world = Object.freeze({
       name: 'Ashford', tier: 'town', population: 4000,
       institutions: [{ id: 'i1', name: 'The Salt Hall' }],
       config: { settType: 'town' },
-      draftOrigin: 'anon',
     });
-    const accountWorld = Object.freeze({ ...anonWorld, draftOrigin: 'account' });
     const USER = Object.freeze({ id: 'u-1', email: 'keeper@example.com' });
 
     // The REAL slices, composed over a stub of only the cross-slice state they
@@ -1205,7 +1210,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
       advanceAutoResolve: false,
     });
-    const anonBlob = () => ({ ...bareBlob(), anonDraft: { settlement: anonWorld, lastSeed: 'sf-seed-1' } });
+    const anonBlob = () => ({ ...bareBlob(), anonDraft: { settlement: world, lastSeed: 'sf-seed-1' } });
 
     // This suite runs in the NODE environment (no `@vitest-environment jsdom`), and
     // node has neither web storage, so a storage-backed arm installs its own shim
@@ -1236,16 +1241,21 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // holds this world and nothing else would).
       expect(store.getState().auth.user).toBeNull();
 
-      const world = await store.getState().generateSettlement('anon-seed-1');
-      expect(world.draftOrigin).toBe('anon');
-      // THE RETURN AND THE EDITOR AGREE. Callers save the return value, so a stamp
-      // applied only to store state would make a save-after-generate write a world
-      // whose origin differs from the one on screen.
-      expect(store.getState().settlement.draftOrigin).toBe('anon');
+      const born = await store.getState().generateSettlement('anon-seed-1');
+      expect(store.getState().draftOrigin).toBe('anon');
+      // ⛔ AND THE WORLD ITSELF CARRIES NOTHING. The origin is a fact about the
+      // SESSION; the settlement is persisted into saves and read by the
+      // observed-shape corpus, so a stamp on it would ride into both and the
+      // committed object would stop being the pipeline's. Anchored on a key the
+      // pipeline really does produce, so this cannot pass against an empty object.
+      expectAbsentWithAnchor(Object.keys(born), 'draftOrigin', 'name', 'the generated world');
+      expect(store.getState().settlement).toBe(born);
 
       const blob = deviceWrite(store);
       expect(blob.anonDraft.lastSeed).toBe('anon-seed-1');
-      expect(blob.anonDraft.settlement.name).toBe(world.name);
+      expect(blob.anonDraft.settlement.name).toBe(born.name);
+      // anchored: the envelope's payload is the generated object verbatim, which the byte-compare below re-proves after the round trip
+      expect(Object.keys(blob.anonDraft.settlement)).not.toContain('draftOrigin');
 
       const rebooted = bootFrom(blob);
       // Byte-identical, not merely deep-equal: a save taken after a reload must
@@ -1255,15 +1265,19 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // …and the adopted draft is still the device's, so it survives the NEXT
       // write too. A boot that adopted and then lost it on the first store write
       // would look identical at the moment of the reload.
-      expect(deviceWrite(rebooted).anonDraft.settlement.name).toBe(world.name);
+      expect(deviceWrite(rebooted).anonDraft.settlement.name).toBe(born.name);
+      // The rehydrate DERIVES the origin from the adoption itself — nothing in the
+      // blob asserts it, so a hand-edited one cannot claim it.
+      expect(rebooted.getState().draftOrigin).toBe('anon');
     });
 
     test("a signed-in generation stamps 'account' and the device keeps nothing", async () => {
       const store = liveStore();
       store.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
 
-      const world = await store.getState().generateSettlement('account-seed-1');
-      expect(world.draftOrigin).toBe('account');
+      const born = await store.getState().generateSettlement('account-seed-1');
+      expect(store.getState().draftOrigin).toBe('account');
+      expectAbsentWithAnchor(Object.keys(born), 'draftOrigin', 'name', 'the generated world');
 
       const blob = deviceWrite(store);
       // The KEY is still there — the persisted SHAPE never forks by cohort, only
@@ -1274,12 +1288,12 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
 
     test('an anonymous draft survives an in-page sign-in on screen, and the device then lets it go', () => {
       const store = bootFrom(anonBlob());
-      expect(store.getState().settlement).toEqual(anonWorld);
+      expect(store.getState().settlement).toEqual(world);
 
       // The in-page doors end by publishing the session; nothing in that path
       // touches the editor, which is the whole of rule 3.
       store.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
-      expect(store.getState().settlement).toEqual(anonWorld);
+      expect(store.getState().settlement).toEqual(world);
 
       // ⭐ THE DECIDED ANSWER, PINNED. zustand's persist writes the WHOLE
       // projection on every store write, so the envelope is not "left standing
@@ -1292,20 +1306,20 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // anchored: signing out again re-offers it, because a world born anonymous
       // and never saved is still this device's draft.
       store.getState().clearAuth();
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: anonWorld, lastSeed: 'sf-seed-1' });
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
     });
 
     test("a signed-in account's world never lands in storage, and sign-out does not change that", async () => {
       const store = liveStore();
       store.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
-      store.getState().setSettlement(accountWorld);
+      store.getState().setSettlement(world);
       expect(deviceWrite(store).anonDraft).toBeNull();
 
       // Sign-out LEAVES THE WORLD ON SCREEN on purpose — eviction comes through
       // the same door and must never destroy unsaved work — and sets tier 'anon'.
       store.getState().clearAuth();
       expect(store.getState().auth.tier).toBe('anon');
-      expect(store.getState().settlement).toEqual(accountWorld);
+      expect(store.getState().settlement).toEqual(world);
       // …and the world's own stamp, not a sign-out-time bar, is what refuses it.
       expect(deviceWrite(store).anonDraft).toBeNull();
 
@@ -1313,13 +1327,13 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // and immer replaces that on every mutation, so one rename leaked the
       // departing account's world into this device's storage.
       store.setState((state) => { state.settlement.name = 'Renamed after sign-out'; });
-      expect(store.getState().settlement).not.toBe(accountWorld);
+      expect(store.getState().settlement).not.toBe(world);
       expect(deviceWrite(store).anonDraft).toBeNull();
 
       // And it is not a blanket off-switch: a world the anonymous visitor forges
       // afterwards is born 'anon' and persists normally.
       const forged = await store.getState().generateSettlement('post-signout-1');
-      expect(forged.draftOrigin).toBe('anon');
+      expect(store.getState().draftOrigin).toBe('anon');
       expect(deviceWrite(store).anonDraft.lastSeed).toBe('post-signout-1');
     });
 
@@ -1329,7 +1343,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
 
       // The real draft→save hand-off every create chokepoint funnels through.
       store.getState().setActiveSaveId('save-1');
-      expect(store.getState().settlement.draftOrigin).toBe('account');
+      expect(store.getState().draftOrigin).toBe('account');
 
       store.getState().clearAuth();
       expect(deviceWrite(store).anonDraft).toBeNull();
@@ -1342,8 +1356,8 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // stashed as this device's anonymous draft.
       const store = liveStore();
       store.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
-      store.getState().hydrateFromSave({ id: 'save-9', settlement: anonWorld, seed: 'sf-seed-1' });
-      expect(store.getState().settlement.draftOrigin).toBe('account');
+      store.getState().hydrateFromSave({ id: 'save-9', settlement: world, seed: 'sf-seed-1' });
+      expect(store.getState().draftOrigin).toBe('account');
 
       store.getState().clearAuth();
       expect(deviceWrite(store).anonDraft).toBeNull();
@@ -1354,14 +1368,14 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       keeper.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
       keeper.getState().canonize();
       expect(keeper.getState().phase).toBe('canon');
-      expect(keeper.getState().settlement.draftOrigin).toBe('account');
+      expect(keeper.getState().draftOrigin).toBe('account');
 
       // The claim is guarded on a REAL USER, never on the tier: an anonymous
       // visitor making their own draft canon has not handed it to an account.
       const visitor = bootFrom(anonBlob());
       visitor.getState().canonize();
-      expect(visitor.getState().settlement.draftOrigin).toBe('anon');
-      expect(deviceWrite(visitor).anonDraft).toEqual({ settlement: anonWorld, lastSeed: 'sf-seed-1' });
+      expect(visitor.getState().draftOrigin).toBe('anon');
+      expect(deviceWrite(visitor).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
     });
 
     test('a redirect sign-in door writes nothing to the device, and the return boot still has the draft', async () => {
@@ -1391,38 +1405,61 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // resolution left to drop it, which is the bug the stash existed to paper
       // over (three cuts in a row got that drop's edges wrong).
       const returned = bootFrom(anonBlob());
-      expect(returned.getState().settlement).toEqual(anonWorld);
+      expect(returned.getState().settlement).toEqual(world);
       returned.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
-      expect(returned.getState().settlement).toEqual(anonWorld);
+      expect(returned.getState().settlement).toEqual(world);
       expect(returned.getState().lastSeed).toBe('sf-seed-1');
     });
 
-    test('no signed-in session persists a draft, whatever the world\'s own stamp says', () => {
+    test('no signed-in session persists a draft, however the origin reads', () => {
       // The USER is the whole of the second condition: a tier that reads 'anon'
       // while a user object is still attached is a half-applied transition, and
       // half-applied is not a state to persist a world from.
+      const anon = { ...currentStub(), settlement: world, lastSeed: 'sf-seed-1', draftOrigin: 'anon' };
       for (const [label, auth] of [
         ['a free account', { tier: 'free', user: USER }],
         ['a premium account', { tier: 'premium', user: USER }],
         ['a half-applied anonymous tier', { tier: 'anon', user: USER }],
       ]) {
-        const projected = partializeOf({ ...currentStub(), auth, settlement: anonWorld, lastSeed: 'sf-seed-1' });
+        const projected = partializeOf({ ...anon, auth });
         expect(Object.hasOwn(projected, 'anonDraft'), label).toBe(true);
         expect(projected.anonDraft, label).toBeNull();
       }
-      // anchored: the SAME world with no user attached is written, so each refusal
+      // anchored: the SAME state with no user attached is written, so each refusal
       // above is the user, not the fixture.
-      expect(partializeOf({ ...currentStub(), auth: { tier: 'anon', user: null }, settlement: anonWorld, lastSeed: 'sf-seed-1' }).anonDraft)
-        .toEqual({ settlement: anonWorld, lastSeed: 'sf-seed-1' });
+      expect(partializeOf({ ...anon, auth: { tier: 'anon', user: null } }).anonDraft)
+        .toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
     });
 
-    test('a world with no origin stamp fails closed, and an anonymous session with no draft writes null', () => {
-      // A legacy object reaching the editor through a non-generate door carries no
-      // stamp. Absent is not 'anon', so it is not persisted on a guess.
-      const unstamped = { ...anonWorld };
-      delete unstamped.draftOrigin;
-      expect(partializeOf({ ...currentStub(), auth: { tier: 'anon' }, settlement: unstamped }).anonDraft).toBeNull();
-      expect(partializeOf({ ...currentStub(), auth: { tier: 'anon' }, settlement: null }).anonDraft).toBeNull();
+    test('the origin is DERIVED and NEVER persisted, so no blob can assert one', () => {
+      // It is absent from the projection by construction — the registry arm above
+      // proves that over the whole key list — and a blob that carries one anyway
+      // cannot smuggle it past the merge, which writes the derived answer AFTER the
+      // spread. A persisted origin would outlive the session it describes.
+      const projected = partializeOf({ ...currentStub(), auth: { tier: 'anon', user: null }, settlement: world, draftOrigin: 'anon' });
+      expect(projected.anonDraft).toEqual({ settlement: world, lastSeed: null });
+      // `anonDraft` is the anchor on purpose: it is the key this very state PUT in
+      // the projection, so it travels the same path the excluded one would have.
+      expectAbsentWithAnchor(Object.keys(projected), 'draftOrigin', 'anonDraft', 'the persist projection');
+      const smuggled = mergePersistedState({ ...bareBlob(), draftOrigin: 'anon' }, currentStub());
+      expect(smuggled.draftOrigin).toBe('account');
+    });
+
+    test('a door that installs a world without answering the question fails CLOSED', () => {
+      // setSettlement is a real non-generate load path (the Library's "apply saved
+      // configuration", the wizard's restore). It routes through the swap
+      // chokepoint, which NULLS the origin — and null is not 'anon', so the device
+      // keeps nothing rather than guessing.
+      const store = bootFrom(anonBlob());
+      // anchored: the boot really did adopt a draft this device was keeping
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
+      store.getState().setSettlement({ ...world, name: 'Arrived by another door' });
+      expect(store.getState().draftOrigin).toBeNull();
+      expect(deviceWrite(store).anonDraft).toBeNull();
+      // …and clearing the editor leaves nothing to write either.
+      store.getState().clearSettlement();
+      expect(store.getState().draftOrigin).toBeNull();
+      expect(deviceWrite(store).anonDraft).toBeNull();
     });
 
     test('a blob written BEFORE the draft was persisted rehydrates to the slice default', () => {
@@ -1432,27 +1469,20 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       const merged = mergePersistedState(legacy, currentStub());
       expect(merged.settlement).toBeNull();
       expect(merged.lastSeed).toBeNull();
+      // Nothing was adopted, so the derived answer is the fail-closed one.
+      expect(merged.draftOrigin).toBe('account');
     });
 
-    test('an envelope whose payload predates the stamp is adopted AND survives the next write', () => {
-      // THE ONE-TIME BRIDGE. The claim-era build wrote the envelope for anonymous
-      // sessions only and stamped nothing inside it, so its presence is what the
-      // stamp would have said. Without the backfill such a draft is adopted on the
-      // boot and dropped by the very next store write — the reload would look
-      // right and the world would vanish a keystroke later.
-      const unstamped = { ...anonWorld };
-      delete unstamped.draftOrigin;
-      const store = bootFrom({ ...bareBlob(), anonDraft: { settlement: unstamped, lastSeed: 'sf-seed-1' } });
-      expect(store.getState().settlement.draftOrigin).toBe('anon');
-      expect(deviceWrite(store).anonDraft).toEqual({
-        settlement: { ...unstamped, draftOrigin: 'anon' }, lastSeed: 'sf-seed-1',
-      });
-      // …and a CURRENT payload is not re-ordered by the same backfill: `?? ` over
-      // an existing key keeps its position, so the round trip stays byte-exact.
-      expectByteEqual(
-        mergePersistedState({ ...bareBlob(), anonDraft: { settlement: anonWorld, lastSeed: 's' } }, currentStub()).settlement,
-        anonWorld,
-      );
+    test('the payload is lifted VERBATIM, and the adoption itself is what says \'anon\'', () => {
+      // No bridge and no backfill are needed for an envelope written by any earlier
+      // build: adopting one IS the claim that an anonymous session wrote the world,
+      // which is the only thing this envelope has ever meant. Nothing is copied, so
+      // the restored draft is byte-identical to the generated one — a save after a
+      // reload writes exactly what a save before it would.
+      const store = bootFrom(anonBlob());
+      expect(store.getState().draftOrigin).toBe('anon');
+      expectByteEqual(store.getState().settlement, world);
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
     });
 
     test('a stale, half-migrated or hand-edited envelope is refused outright', () => {
@@ -1466,9 +1496,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         ['a bare true', { anonDraft: true }],
         ['a string', { anonDraft: 'yes' }],
         ['an empty object', { anonDraft: {} }],
-        ['an array', { anonDraft: [{ settlement: anonWorld }] }],
+        ['an array', { anonDraft: [{ settlement: world }] }],
         ['an envelope with no settlement', { anonDraft: { lastSeed: 'sf-seed-1' } }],
-        ['a pre-envelope top-level settlement', { settlement: anonWorld, lastSeed: 'sf-seed-1' }],
+        ['a pre-envelope top-level settlement', { settlement: world, lastSeed: 'sf-seed-1' }],
       ];
       for (const [label, blob] of notEnvelopes) {
         const merged = mergePersistedState({ ...blob }, currentStub());
@@ -1489,7 +1519,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         expect(() => resilientLocalStorage.setItem('settlementforge', '{}')).not.toThrow();
         const store = liveStore();
         const world = await store.getState().generateSettlement('quota-seed-1');
-        expect(world.draftOrigin).toBe('anon');
+        expect(store.getState().draftOrigin).toBe('anon');
         expect(store.getState().settlement).toBe(world);
       } finally {
         globalThis.localStorage.setItem = realSetItem;

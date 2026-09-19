@@ -37,23 +37,30 @@
  * now travels as ONE envelope, and the merge refuses anything that is not a
  * genuine envelope (absent, `true`, a string, a stale `{}`) — see persistMerge.js.
  *
- * ⭐⭐ THE ONE RULE (2026-09-18) — AND WHAT IT REPLACED. The envelope is written
- * when, and only when, the world in the editor was BORN ANONYMOUS and nobody is
- * signed in right now. Both halves are read off facts that are already true:
- * `settlement.draftOrigin`, stamped at the birth by settlementGenerateAction.js
- * and carried on the world itself, and `auth.user`.
+ * ⭐⭐ THE ONE RULE (2026-09-18, ODQ §934.8) — AND WHAT IT REPLACED. The envelope
+ * is written when, and only when, the world in the editor was BORN ANONYMOUS and
+ * nobody is signed in right now: `state.draftOrigin === 'anon' && auth.user ==
+ * null`. Nothing else ever writes it.
+ *
+ * `draftOrigin` is TRANSIENT STORE-ROOT STATE, and deliberately not a key on the
+ * settlement. It is set at the birth (settlementGenerateAction.js), DERIVED on
+ * every rehydrate (persistMerge.js: 'anon' when this boot adopted the envelope,
+ * 'account' otherwise), re-stamped when a signed-in person makes the world theirs
+ * (claimSettlementForAccount), and nulled at the settlement-swap chokepoint, so a
+ * door that installs a world without answering the question fails CLOSED. It is
+ * absent from this projection on purpose — a derived session fact that persisted
+ * itself could outlive the session it describes.
  *
  * Every earlier cut asked the same question with SESSION CLAIMS standing beside
  * the world — `restoredAnonDraft`, `signedInWorld` — and each one needed raising,
  * retracting at a chokepoint, stashing across an OAuth redirect and spending at a
  * boot resolution in another module. They were flags rather than references
  * because immer replaces `state.settlement` on every mutation, so a reference test
- * missed after one edit and the gate failed OPEN. A field ON the world needs none
- * of that: it survives the mutation that replaces the object (it is copied with
- * it), it survives the rehydrate (it is inside the persisted payload), and it is
- * still true a second after the session resolves. There is no drop at the boot
- * resolution, no claim and no stash: a device's anonymous draft belongs to the
- * device, and a signed-in person who finds it on screen keeps or clears it.
+ * missed after one edit and the gate failed OPEN. One derived root field needs
+ * none of that, and unlike a stamp ON the world it never rides into a save row or
+ * into the observed-shape corpus: there is no drop at the boot resolution, no
+ * claim and no stash — a device's anonymous draft belongs to the device, and a
+ * signed-in person who finds it on screen keeps or clears it.
  *
  * ⛔ AND "ANONYMOUS TIER" IS NOT THE SAME QUESTION AS "AN ANONYMOUS WORLD" —
  * which is why the condition names the ORIGIN and the USER, never the tier.
@@ -101,17 +108,18 @@ export function partializeStoreState(state) {
     advanceAutoResolve: state.advanceAutoResolve,
     // The anonymous draft, as ONE envelope (see the header). Null — never a bare
     // settlement, never a lone flag — whenever anyone is signed in and whenever
-    // the world in the editor was not born anonymous. TWO conditions and no
-    // session flags: nobody is signed in NOW, and this world's own stamp says an
-    // anonymous session made it. A world with no stamp (a legacy object reaching
-    // the editor through a non-generate door) is not 'anon', so it fails closed.
+    // the world in the editor was not born anonymous. TWO conditions: nobody is
+    // signed in NOW, and the editor's recorded origin says an anonymous session
+    // made this world. A world installed by a door that set no origin leaves it
+    // null, which is not 'anon', so it fails closed. ⚠ `draftOrigin` is read here
+    // and is NOT itself a persisted key — see the header.
     // ⚠ The value expression must keep OPENING on `state.` — the persist-shape
     // walker (tests/store/lifecycleRoundTrip) discovers this projection's keys by
     // scanning the return block for a key followed by a `state` member read, so a
     // key whose value opens on a local reads to it as a REMOVED persisted key.
     // (Which is also why this note may not spell that pattern out: the scan would
     // count the example as a key.)
-    anonDraft: state.auth?.user == null && settlement?.draftOrigin === 'anon'
+    anonDraft: state.auth?.user == null && state.draftOrigin === 'anon' && settlement
       ? { settlement, lastSeed } : null,
   };
 }

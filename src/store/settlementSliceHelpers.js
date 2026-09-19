@@ -483,20 +483,19 @@ export function bindActiveSaveId(get, set, saveId) {
  * leaving the world standing, and an anonymous visitor's own canon draft is
  * still the device's to keep.
  *
- * ⛔ IT RE-ASSIGNS, IT DOES NOT WRITE IN PLACE, and that is not style. At the
- * hydrateFromSave door the world has JUST been assigned onto the draft from a
- * save, so it is still the plain object the cache holds — and immer FREEZES what
- * it produces, so `state.settlement.draftOrigin = …` throws
- * "Cannot assign to read only property" there (caught by this lane's own arm
- * before it could ship). Assigning a fresh object is correct at every door: where
- * the world IS a draft, immer finalizes the child drafts the spread carries.
+ * ⛔ IT WRITES A STORE-ROOT FIELD, NOT A KEY ON THE WORLD (ODQ §934.8). Stamping
+ * the settlement would put a session fact into every save row and into the
+ * observed-shape corpus, and an earlier cut of this helper that did so also had
+ * to re-assign the whole object rather than write in place: at the hydrateFromSave
+ * door the world is the plain — immer-FROZEN — object the cache holds, so an
+ * in-place write throws "Cannot assign to read only property". A root field has
+ * neither problem.
  *
  * @param {*} state the Immer store draft
  */
 export function claimSettlementForAccount(state) {
   if (!state?.auth?.user || !state.settlement) return;
-  if (state.settlement.draftOrigin === 'account') return;
-  state.settlement = { ...state.settlement, draftOrigin: 'account' };
+  state.draftOrigin = 'account';
 }
 
 /**

@@ -251,14 +251,16 @@ export function resetSettlementIdentity(state, { preservePendingEdits = false } 
   state.pendingSuccession     = null;
   state.canonEventCommandFence = null;
   state.draftVersionHistory   = [];
-  // ⛔ NO PERSISTENCE CLAIMS ARE RETRACTED HERE, because there are none to hold.
-  // Two session flags about what was in the editor (`restoredAnonDraft`,
-  // `signedInWorld`) used to be reset at this chokepoint, precisely because a
-  // claim standing beside the world went stale the moment the world was swapped.
-  // The anonymous-draft rule now reads the world's OWN stamp
-  // (`settlement.draftOrigin`), which is replaced along with the world by every
-  // door that routes through here — so the staleness the retraction existed to
-  // cure cannot arise.
+  // WHOSE SESSION PUT THE WORLD IN THE EDITOR (store/persistProjection.js reads it
+  // to decide whether this device keeps the draft). A swap installs a DIFFERENT
+  // world, so the previous answer is stale by definition — and nulling it here
+  // rather than re-answering it is what makes the rule fail CLOSED: `null` is not
+  // 'anon', so a door that installs a world and answers nothing persists nothing.
+  // The three doors that DO answer (generate, the rehydrate merge, and
+  // claimSettlementForAccount at save/bind/hydrate/canon) each write it after this
+  // chokepoint has run. Two session CLAIMS used to be retracted here instead
+  // (`restoredAnonDraft`, `signedInWorld`); this is the one fact that replaced them.
+  state.draftOrigin           = null;
   // The generation-id spine is per-generation identity: a loaded/new settlement
   // must never inherit the prior generation's id (a save re-derives its own from
   // seed + generatedAt; a fresh generate mints one after the pipeline).

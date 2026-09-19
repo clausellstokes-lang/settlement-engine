@@ -159,22 +159,25 @@ export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   // `settlement` is the current generated settlement object.
   //
-  // ⭐ IT CARRIES ITS OWN `draftOrigin` — 'anon' or 'account' — stamped at its
-  // birth by settlementGenerateAction.js and re-stamped by
-  // claimSettlementForAccount when a signed-in person saves, opens or canonizes
-  // it. That one field is the whole anonymous-draft persistence rule
+  // `draftOrigin` beside it is WHOSE SESSION PUT IT THERE — 'anon' or 'account' —
+  // and it is the whole anonymous-draft persistence rule
   // (store/persistProjection.js): the device remembers a world born anonymous
-  // while nobody is signed in, and nothing else.
+  // while nobody is signed in, and nothing else. Set at the birth
+  // (settlementGenerateAction), DERIVED on every rehydrate (persistMerge: 'anon'
+  // iff that boot adopted the envelope), re-stamped by claimSettlementForAccount
+  // when a signed-in person saves, opens or canonizes the world, and nulled by
+  // resetSettlementIdentity on every swap — so a door that installs a world and
+  // answers nothing leaves `null`, which is not 'anon', and fails CLOSED.
   //
-  // It REPLACED two session flags that used to sit on this line —
-  // `restoredAnonDraft` and `signedInWorld` — each a CLAIM about what was in the
-  // editor, each needing to be raised, retracted at a swap chokepoint, stashed
-  // across an OAuth redirect and spent at the boot auth resolution. They were
-  // flags rather than references because immer replaces `state.settlement` on
-  // every mutation, so a reference test missed after one edit and the gate failed
-  // OPEN. A field ON the world is copied forward by that same mutation, rides
-  // inside the persisted payload, and is still true after the session resolves.
-  settlement:    null,
+  // ⛔ NOT A KEY ON THE SETTLEMENT (ODQ §934.8): the world is persisted into saves
+  // and read by the observed-shape corpus, so a session fact stamped on it would
+  // ride into every row and every shape register — and the generated object would
+  // no longer be byte-identical to the pipeline's. ⛔ AND NOT PERSISTED: it is
+  // derived on rehydrate, and a derived session fact that persisted itself would
+  // outlive the session it describes. It REPLACED two claims that sat on this line
+  // (`restoredAnonDraft`, `signedInWorld`), each of which had to be raised,
+  // retracted, stashed across an OAuth redirect and spent at the boot resolution.
+  settlement:    null, draftOrigin: null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,
@@ -1551,13 +1554,6 @@ export const createSettlementSlice = (set, get) => ({
     // save verbatim, faith latent + private).
     const loadedSettlement = save.settlement ? activateFaithIfEntitled(save.settlement, get) : null;
     state.settlement     = loadedSettlement || state.settlement;
-    // A world opened OUT OF THE LIBRARY is the account's, whatever origin its blob
-    // was written with — the stamp lands on the in-editor world at the save, so a
-    // row saved before that existed still reads 'anon' inside. Without this, a
-    // signed-in keeper who opens such a save and then signs out would have their
-    // own saved world stashed as this device's anonymous draft: the exact leak the
-    // retired `signedInWorld` bar existed to stop (settlementSliceHelpers.js).
-    claimSettlementForAccount(state);
     state.activeSaveId   = save.id || null;
     // Recover the seed from the save (row column first, then the blob's stamped
     // `_seed`), and NEVER fall back to the stale session seed (finding F2): the
@@ -1580,6 +1576,13 @@ export const createSettlementSlice = (set, get) => ({
     // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
     // stable generation id from the save's seed + generatedAt.
     resetSettlementIdentity(state, { preservePendingEdits: true });
+    // A world opened OUT OF THE LIBRARY is the account's. ⚠ IT MUST RUN AFTER the
+    // chokepoint above, which nulls the origin on every swap; claiming before it
+    // would be wiped a line later. Without the claim a signed-in keeper who opens a
+    // save and then signs out would have their own saved world stashed as this
+    // device's anonymous draft — the leak the retired `signedInWorld` bar existed
+    // to stop (settlementSliceHelpers.js).
+    claimSettlementForAccount(state);
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),

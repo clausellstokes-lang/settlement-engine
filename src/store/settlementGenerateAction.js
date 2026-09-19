@@ -288,31 +288,13 @@ export async function generateSettlementAction(set, get, seedOverride) {
   // rng-free, tier-gated — the golden (generator output) is untouched because
   // this fires in the STORE, after the pipeline.
   const withFaith = activateFaithIfEntitled(reconciled, get);
-  // ⭐ THE WORLD CARRIES ITS OWN ORIGIN (2026-09-18). A birth is the only place
-  // the answer to "whose session made this?" is known for certain, so it is
-  // recorded ON THE WORLD rather than kept as a session flag beside it. Every
-  // earlier cut of this gate kept a claim in store state — `restoredAnonDraft`,
-  // `signedInWorld` — and every one of them had to be raised, retracted, stashed
-  // across a redirect and spent at a boot resolution by a different module. A
-  // field on the object travels with the object through rehydrate, through a
-  // save, through immer's replace-on-every-mutation, and needs none of that.
-  //
-  // READ FRESH, not off the `state` snapshot at the top of this action: a
-  // generation awaits the engine, and a visitor who signs in while it runs has
-  // an account by the time it commits — the world is theirs, and 'account' is
-  // the honest stamp. STAMPED ON THE RETURNED OBJECT TOO, because callers save
-  // the return value (see the note at the bottom of this file): a stamp applied
-  // only to store state would make a save-after-generate write a world whose
-  // origin differs from the one in the editor — the same-path/other-path split
-  // this codebase has been bitten by before.
-  const withOrigin = { ...withFaith, draftOrigin: get().auth?.user ? 'account' : 'anon' };
   // Derive the SystemState immediately so the UI never sees a settlement
   // without its accompanying state snapshot. The domain function is
   // pure — no store, no React — and tolerant of partial inputs, so a
   // sparse settlement still produces a usable state.
   let systemState = null;
   try {
-    systemState = deriveSystemState(withOrigin);
+    systemState = deriveSystemState(withFaith);
   } catch (e) {
     console.warn('[settlementSlice] deriveSystemState failed:', e);
   }
@@ -331,9 +313,28 @@ export async function generateSettlementAction(set, get, seedOverride) {
       // that folds the settlement in, so the map and the roster can never
       // disagree. See domain/locksPreservation.js for the identity split.
       remapLocksAfterGenerate(state, _preservation);
-      state.settlement = withOrigin;
+      state.settlement = withFaith;
       state.activeSaveId = null;
       state.lastSeed = seed;
+      // ⭐ THE ORIGIN OF THE WORLD IN THE EDITOR (2026-09-18, ODQ §934.8). A birth is
+      // the only moment the answer to "whose session made this?" is known for certain,
+      // and the whole anonymous-draft persistence rule reads it
+      // (store/persistProjection.js): the device keeps a world born anonymous while
+      // nobody is signed in, and nothing else.
+      //
+      // ⛔ IT IS STORE-ROOT STATE AND IT IS NOT ON THE SETTLEMENT. An earlier cut
+      // stamped it onto the world itself, which reads well and is wrong twice over: the
+      // settlement is PERSISTED into saves and read by the observed-shape corpus, so a
+      // session fact would ride into every row and every shape register — and the world
+      // this action commits would no longer be byte-identical to the one the pipeline
+      // produced. A root field says the same thing about the same instant and travels
+      // nowhere it does not belong. `resetSettlementIdentity` nulls it on every swap,
+      // so a door that installs a world without answering this question fails CLOSED.
+      //
+      // READ OFF THE DRAFT, not the snapshot at the top of this action: generation
+      // awaits the engine, and a visitor who signs in while it runs has an account by
+      // the time it commits — the world is theirs, and 'account' is the honest answer.
+      state.draftOrigin = state.auth?.user ? 'account' : 'anon';
       // RETIRED-DARK (owner row WK-2): the full pipeline context is
       // function-bearing and cannot cross a worker boundary, so it is nulled on
       // BOTH transports rather than captured on one. Nulling it only off-thread
@@ -455,9 +456,10 @@ export async function generateSettlementAction(set, get, seedOverride) {
   }).catch(() => {});
 
   // Return the activated settlement so a caller that saves the return value
-  // persists the SAME faith-active, origin-stamped shape the store holds
-  // (state.settlement = withOrigin). Generation telemetry above intentionally
-  // reads `reconciled` (generator truth — activation and the origin stamp are
-  // post-pipeline store overlays).
-  return withOrigin;
+  // persists the SAME faith-active shape the store holds (state.settlement =
+  // withFaith). Generation telemetry above intentionally reads `reconciled`
+  // (generator truth — activation is a post-pipeline store overlay). The draft's
+  // ORIGIN is deliberately not here: it describes the session, not the world, so
+  // it lives at the store root and never reaches a caller that saves this object.
+  return withFaith;
 }
