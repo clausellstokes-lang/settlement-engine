@@ -154,6 +154,8 @@ export default function App() {
   const initAuth = useStore(s => s.initAuth);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
+  // ⛔ A REFUSAL BELONGS TO THE CLICK THAT RAISED IT (see the route effect below).
+  const clearRefusal = useStore(s => s.clearRefusal);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
@@ -387,6 +389,24 @@ export default function App() {
       navigate('signin', { replace: true, search: `?next=${encodeURIComponent(viewToPath(view))}` });
     }
   }, [view, authTier, authLoading]);
+
+  // ── A refusal does not travel ────────────────────────────────────────
+  // ⛔ IT LEAKED ACROSS PAGES (adversarial review of the second wave). `lastRefusal` is
+  // ONE record on the store and every surface renders it on MOUNT, but only the three
+  // surfaces that raise it clear it at click time. So refusing a city fork in the Library
+  // and then opening /create showed the reader a standing accusation about a click they
+  // made on another page — a sentence with no cause in front of them.
+  //
+  // Cleared HERE rather than scoped to the raising surface, because a refusal is a fact
+  // about a CLICK and a route change ends the click: scoping would mean stamping a route
+  // onto the record and teaching every renderer to compare it, which is four more places
+  // to keep in step for the same answer. `view` is the router's own signal (the auth
+  // guard, the head and the canonical-URL upgrade all key on it), so this runs exactly
+  // when the reader arrives somewhere new — including the first render, where there is
+  // nothing to clear and clearing is free.
+  useEffect(() => {
+    clearRefusal?.();
+  }, [view, clearRefusal]);
 
   // ── Demoted destinations → redirect to their new homes ─────────────────────
   // The Workshop, the standalone World Map, and (since THE ABOUT SPLIT) the
