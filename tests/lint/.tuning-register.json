@@ -2297,11 +2297,6 @@
         "sites": 1,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
         "cause": "T13 Car P-prime replaced a bare computed population bonus with the named constant POPULATION_SATURATION, so this file's +1 unregistered-named is the counterpart of its own -1 bare-decimal win in the same commit. The register is scoring the act it exists to encourage; the name earns its register row when the owner signs the estate, not by a landing."
-      },
-      "src/domain/display/stateProse/printProse.js": {
-        "sites": 1,
-        "introducedAt": "776d5162808a89dcc22fd4d4812884fb5fa1a0d0",
-        "cause": "The print desk (2026-09-18, the PDF's caller-side state prose) names FRAMING_CAP = 3, the paid document's twin of PlotHooksTab's FRAMING_CAP: at most three hook framing lines print, as the screen shows. The dial is a product rule, not a tuned value; it is declared here so the file's +1 unregistered-named is a stated fact rather than a silent ceiling breach, and it may only fall."
       }
     },
     "bareDecimals": {

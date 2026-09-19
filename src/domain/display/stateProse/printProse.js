@@ -90,6 +90,7 @@ import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
 import { relationshipsDeskLists } from '../../../components/new/relationshipsDeskRead.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
+import { HOOK_FRAMING } from '../hookFraming.js';
 
 /**
  * ⭐⭐ THE CHAIR'S PRINT RULING, 2026-09-18, under the owner's "impliment every fix" —
@@ -263,13 +264,12 @@ function patronFallCauseOf(sentence) {
 }
 
 /**
- * THE FRAMING CAP — `PlotHooksTab.jsx:52`'s ruling, held here too. DS-HK-1 draws one line per
- * hook category plus one per live escalation clock, so a busy town reaches ten framing
- * sentences; composer order puts the category lines first, so the first three frame the hooks
- * the page actually carries. The PDF has the same problem for the same reason and takes the
- * same answer, rather than printing a page of preamble above the hook list.
+ * THE FRAMING CAP — `PlotHooksTab.jsx`'s ruling, held ONCE in hookFraming.js and read here:
+ * DS-HK-1 draws one line per hook category plus one per live escalation clock, so a busy
+ * town reaches ten framing sentences; composer order puts the category lines first, so the
+ * first three frame the hooks the page actually carries. The PDF has the same problem for
+ * the same reason and takes the same answer from the same home.
  */
-const FRAMING_CAP = 3;
 
 /**
  * One woven position.
@@ -593,7 +593,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('history', 'history.identity', identityLines);
   put('history', 'history.founded', [foundedLine, recordLine]);
 
-  put('plot_hooks', 'plot_hooks.framing', general.hooks.framingLines.slice(0, FRAMING_CAP));
+  put('plot_hooks', 'plot_hooks.framing', general.hooks.framingLines.slice(0, HOOK_FRAMING.cap));
 
   // DS-REL-1 draws an inner PAIR per link (the standing, then the named-people line) plus one
   // line per typed engagement. The screen renders each pair beside its own neighbour card;
