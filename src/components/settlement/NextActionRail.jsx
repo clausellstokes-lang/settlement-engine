@@ -26,7 +26,7 @@
 
 import { useState } from 'react';
 import {
-  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Drama, Image as ImageIcon, Share2, Lock,
+  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Drama, Share2, Lock,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
@@ -256,16 +256,9 @@ function computeItems({
     };
     items.push(exportIsPurchase && !purchasesAreOpen ? lockForLaunch(exportItem) : exportItem);
   }
-  // Export Image — the free PNG share card (relocated from the header). Not
-  // premium-gated; sharing is the growth loop.
-  if (handlers.onExportImage) {
-    items.push({
-      id: 'export_image', Icon: ImageIcon,
-      label: t('export.imageCta'),
-      hint:  'A one-card PNG (name, tier, headline stats) for Discord or a forum.',
-      onClick: handlers.onExportImage,
-    });
-  }
+  // Export Image — WITHHELD (the owner, 2026-09-19): the share card belongs to the map it
+  // was drawn for, and that map is still being made. The handler plumbing stays so the
+  // rung returns by restoring this block; nothing renders until then.
   // Share to Gallery — publish / manage the public listing (relocated from the
   // header). Label mirrors the old button (published → manage the listing).
   if (handlers.onShare) {

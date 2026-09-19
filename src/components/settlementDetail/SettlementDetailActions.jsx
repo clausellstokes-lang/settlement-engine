@@ -77,15 +77,7 @@ export default function SettlementDetailActions({
         // via the ExportUnlockDialog popup) rather than exporting freely.
         <BuyThisDossier settlement={settlement} saveId={saveId} />
       )}
-      <Button
-        variant="secondary"
-        size="sm"
-        busy={imageExporting}
-        onClick={onExportImage}
-        title={t('export.imageTitle')}
-      >
-        {imageExporting ? t('export.imageBusy') : t('export.imageCta')}
-      </Button>
+      {/* Export Image — WITHHELD (the owner, 2026-09-19): its map is still being made. */}
       {saveId && (
         <Button
           variant="info"

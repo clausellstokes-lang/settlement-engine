@@ -83,11 +83,13 @@ describe('NextActionRail — the "Actions" panel census', () => {
     // Session Mode + the premium-gated Edit rung are present (Edit shows the lock label).
     expect(screen.getByRole('button', { name: 'Session Mode' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Edit (Cartographer)' })).toBeTruthy();
-    // Export Image + Share may sit under "Show more" (5-item cap) — reveal them.
+    // Share may sit under "Show more" (5-item cap) — reveal it.
     const more = screen.queryByRole('button', { name: /show \d+ more/i });
     if (more) fireEvent.click(more);
-    expect(screen.getByRole('button', { name: 'Export Image' })).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Share to Gallery' })).toBeTruthy();
+    // Export Image is WITHHELD (the owner, 2026-09-19): its map is still being made.
+    // anchored: Share to Gallery is proven present on the line above, so this rail rendered.
+    expect(screen.queryByRole('button', { name: 'Export Image' })).toBeNull();
   });
 
   test('with purchases open, a free owner\'s Edit (Cartographer) and Export rungs are live, unpilled, and fire their handlers', () => {
