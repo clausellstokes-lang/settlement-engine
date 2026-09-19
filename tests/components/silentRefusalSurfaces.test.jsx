@@ -24,10 +24,17 @@
  *
  * EACH ARM CARRIES ITS CONTROL: a real THROW must still reach `errors.forgeStart`, and
  * the purchase modal must still open for the one reason that has a door to sell.
+ *
+ * ⚠ ONE ARM IS NOT ABOUT SILENCE, and it is here because it is the same click. The
+ * Library's fork also omitted the curated-seed INTENT (ODQ §934.24(b)) that its twin on
+ * /create passes, so the same fork spent the day's allowance on one surface and was
+ * exempt on the other. Pinned beside the refusal arms rather than in a file of its own:
+ * one mount, one click, two properties of the same handler.
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
+import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
 import { REFUSAL_REASONS, refusalOf } from '../../src/lib/refusalReasons.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
@@ -208,7 +215,7 @@ describe('SeedField — the exact-seed forge says why it stopped', () => {
   });
 });
 
-describe('The Library fork — a null is not always a price', () => {
+describe('The Library fork — a null is not always a price, and a fork is not a generation', () => {
   async function renderPanel() {
     const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
     render(<SettlementsPanel onNavigate={() => {}} />);
@@ -225,6 +232,23 @@ describe('The Library fork — a null is not always a price', () => {
       storeState.setPurchaseModalOpen,
       'a spent daily allowance was answered with a checkout',
     ).not.toHaveBeenCalled();
+  });
+
+  test('the fork declares its curated-seed INTENT, as the create strip already did', async () => {
+    // ⛔ THE SAME CLICK ON TWO SURFACES MUST COST THE SAME (ODQ §934.24(b)). FoundingWorlds
+    // has passed the intent since the ruling; this door had not, so forking Mossgate from
+    // the Library spent the day's allowance while forking it from /create did not.
+    storeState.generateSettlement = vi.fn(async () => ({ name: 'Forked', tier: 'town' }));
+    fireEvent.click(await renderPanel());
+
+    await waitFor(() => expect(storeState.generateSettlement).toHaveBeenCalledTimes(1));
+    const [seed, options] = storeState.generateSettlement.mock.calls[0];
+    expect(typeof seed, 'the seed is still the generation ARGUMENT').toBe('string');
+    expect(options, 'the Library fork is capped like an ordinary generation')
+      .toEqual({ intent: GENERATION_INTENT_SAMPLE_FORK });
+    // …and it never rides the persisted config, where it would outlive the fork.
+    const patch = storeState.updateConfig.mock.calls.at(-1)[0];
+    expect(Object.hasOwn(patch, 'intent'), 'the INTENT reached the persisted config').toBe(false);
   });
 
   test('CONTROL: the TIER refusal still opens the door it can actually sell', async () => {

@@ -25,6 +25,7 @@ import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkConfigFor, forkSeedFor } from '../data/sampleSettlements.js';
+import { GENERATION_INTENT_SAMPLE_FORK } from '../lib/generationIntent.js';
 import {
   migrateConfig, findSaveById, saveCountBand, dayGapBand,
   canonPhaseOf, lastEditedMs, hasAiData,
@@ -164,7 +165,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
     let result = null;
     try {
-      result = await generateSettlement(seed);
+      // ⛔ A FORK OF A CURATED SAMPLE IS A CURATED SEED, NOT A FREE GENERATION (owner
+      // ruling, ODQ §934.24(b)) — and this door was the one that had not been told.
+      // generate/FoundingWorlds.jsx has passed the intent since the ruling landed; the
+      // Library's identical fork did not, so the SAME click spent the day's allowance on
+      // one surface and was exempt on the other. `intentOf` fails closed, so the
+      // exemption has to be asked for by its exact name, which is why the omission was
+      // silent. The intent rides the ARGUMENT and never the persisted config: `config` is
+      // persisted, so an exemption stamped there would outlive the fork that earned it.
+      result = await generateSettlement(seed, { intent: GENERATION_INTENT_SAMPLE_FORK });
     } catch (e) {
       console.error('[SettlementsPanel] fork generate failed:', e);
     }
