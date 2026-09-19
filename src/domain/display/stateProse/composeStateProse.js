@@ -76,6 +76,7 @@ import {
   fillSlots,
   hashKey,
   variantIsAudible,
+  speakTierNoun,
 } from './stateProseKernel.js';
 // ⭐ THE FIRST OF ARCH §4.1's THREE FROZEN LEAVES, WIRED (REWRITE car 8a-11, SITTING §U c-5).
 // It is not a lexicon and it is not `src/domain/prose/`: it is this composer's own data leaf,
@@ -84,7 +85,6 @@ import {
 // so the edge costs ONE file and 2,046 bytes, against the four files and 150,231 bytes a
 // lexicon import was priced at and refused at car 8a-4. The leaf imports nothing itself.
 import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.js';
-import { speakTierNoun } from './tierVoice.js';
 
 /**
  * One piece of a composed unit — the provenance row a manifest cell carries.
