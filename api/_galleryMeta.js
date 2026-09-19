@@ -28,9 +28,9 @@ import { resolveSettlementTerrain, terrainOrNull } from '../src/domain/resolveTe
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
-// House-sealed share card, matching index.html + src/lib/seo.js (was the
-// pre-seal og-default.png). Used as the fallback when a gallery slug has no
-// dynamic per-settlement card.
+// The painted share card (the plaque cut out of the arrow header, ODQ §934.17),
+// matching index.html + src/lib/seo.js. Used as the fallback when a gallery slug
+// has no dynamic per-settlement card.
 const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
 
 // Slugs are opaque URL-safe ids (migration 008 `_make_public_slug`). This is the

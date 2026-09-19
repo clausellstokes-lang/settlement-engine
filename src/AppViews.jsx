@@ -92,15 +92,16 @@ const RoadmapPage       = lazy(() => import('./components/howto/RoadmapPage.jsx'
 const WorldPage         = lazy(() => import('./components/WorldPage.jsx'));
 
 export function Loading() {
-  // The diegetic loading emblem — the still house device over the plain word
-  // (owner placement addendum #2: no spinner-replacement theatrics; a still ink
-  // mark, reduced-motion safe by construction since nothing animates).
+  // The diegetic loading emblem — the still house mark over the plain word (owner
+  // placement addendum #2: no spinner-replacement theatrics; a still mark,
+  // reduced-motion safe by construction since nothing animates). Decorative here:
+  // the word beside it already says what is happening, so the seal takes alt=''.
   // data-sf-route-loading is the e2e hook for "the view's chunk has not arrived": the shell and
   // its footer render before the lazy view, so a test that measures the page end must wait for
   // this fallback to leave first (e2e/pinned-footer.spec.js, e2e/arrow-header.spec.js settleRoute).
   return (
     <div data-sf-route-loading="" style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
-      <HouseDevice size={40} mode="light" weight="standard" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
+      <HouseDevice size={40} alt="" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
       Loading...
     </div>
   );

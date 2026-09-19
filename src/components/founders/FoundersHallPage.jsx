@@ -40,6 +40,7 @@ import {
   chairNumeral, seatedLabel,
 } from '../../lib/foundersHall.js';
 import { viewToPath } from '../../lib/routes.js';
+import HouseDevice from '../brand/HouseDevice.jsx';
 import { PAGE_MAX, SP, FS, sans, serif_, EMPTY_VALUE } from '../theme.js';
 
 /** The glance line. Held and open come from ONE count object — they cannot drift. */
@@ -135,6 +136,10 @@ export default function FoundersHallPage({ onNavigate }) {
             it does not route through PageHeader (whose INK title is built for
             parchment and would be unreadable here). */}
         <header style={{ marginBottom: SP.xl }}>
+          {/* The house seal at the head of the roll — the same painted wax the tab
+              icon and the dossier cover carry (ODQ §934.17). Decorative: the title
+              under it already names the Hall, so it takes alt=''. */}
+          <HouseDevice size={44} alt="" style={{ display: 'block', marginBottom: SP.sm }} />
           <p style={{ ...numeralStyle, margin: `0 0 ${SP.xs}px` }}>By invitation, I&ndash;XXX</p>
           <h1 style={{
             margin: 0, fontFamily: serif_, fontSize: FS['28'], fontWeight: 700,

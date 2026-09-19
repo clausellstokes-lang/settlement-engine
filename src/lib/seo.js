@@ -33,10 +33,10 @@ export const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RP
 
 // The site-default unfurl card (1200×630 PNG). Raster, because Facebook, X,
 // LinkedIn, Slack, Discord et al. do not rasterize SVG.
-// The house-sealed share card (the station device + wordmark), matching the
-// static og:image in index.html. Previously og-default.png (the pre-seal
-// wordmark-only card) — a JS-rendered route or a fallback then served the old
-// image while the static unfurl showed the seal.
+// The PAINTED share card (ODQ §934.17): the arrow header's plaque — wordmark and
+// wax seal together — under Lora type, matching the static og:image in index.html.
+// It kept this path through the re-cut on purpose: og-craft.png is the URL every
+// unfurl cache in the wild already holds, and moving it would blank them.
 export const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
 export const OG_IMAGE_ALT_DEFAULT = 'SettlementForge: living settlements for game masters';
 

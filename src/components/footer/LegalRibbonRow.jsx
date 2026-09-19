@@ -122,7 +122,7 @@ export default function LegalRibbonRow({
       {showHome && (
         <Button variant="ghost" size="sm" onClick={() => onNavigate('home')}
           aria-label="SettlementForge home" style={{ minHeight: isMobile ? 44 : undefined, minWidth: isMobile ? 44 : undefined }}>
-          <HouseDevice size={20} />
+          <HouseDevice size={20} alt="" />
         </Button>
       )}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>

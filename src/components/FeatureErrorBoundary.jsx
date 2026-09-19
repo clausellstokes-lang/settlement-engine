@@ -98,9 +98,10 @@ export default class FeatureErrorBoundary extends Component {
             fontFamily: sans,
           }}
         >
-          {/* The clerk's-slip stamp — the house device holds the fiction even
-              when a view fails (owner placement addendum #3). */}
-          <HouseDevice size={22} mode="light" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
+          {/* The clerk's-slip stamp — the house mark holds the fiction even when a
+              view fails (owner placement addendum #3). Decorative beside the title
+              that follows it, so it takes alt=''. */}
+          <HouseDevice size={22} alt="" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
           <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
           <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
             The rest of the realm stands. Try again, or turn elsewhere.
