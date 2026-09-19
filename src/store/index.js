@@ -62,7 +62,7 @@ import { createAccountImportSlice } from './accountImportSlice.js';
 // eager by construction: the bodies dynamic-import on first use.
 import { createNpcVerbsSlice }      from './npcVerbsSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
-import { partializeStoreState }    from './persistProjection.js';
+import { partializeStoreState, PERSIST_KEY } from './persistProjection.js';
 import { setCustomContentSource }   from '../lib/customContentSource.js';
 import { setCrashForensics }        from '../lib/errorReporter.js';
 import { buildCrashForensics }      from '../lib/crashForensics.js';
@@ -122,7 +122,9 @@ export const useStore = create(
           ...createNpcVerbsSlice(set, get),
         })),
         {
-          name: 'settlementforge',
+          // Taken from the projection, which must read this key back to tell its own
+          // tab's draft from another tab's (persistProjection.js). One spelling.
+          name: PERSIST_KEY,
           // The default storage with every access wrapped — see the comment on
           // resilientLocalStorage above.
           storage: createJSONStorage(() => resilientLocalStorage),

@@ -97,7 +97,7 @@ import {
 } from '../../src/domain/worldPulse/worldState.js';
 import { hydratePersistedWorldState } from '../../src/domain/worldPulse/worldStateHydration.js';
 import { mergePersistedState } from '../../src/store/persistMerge.js';
-import { partializeStoreState } from '../../src/store/persistProjection.js';
+import { partializeStoreState, PERSIST_KEY } from '../../src/store/persistProjection.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
@@ -1196,6 +1196,23 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
 
     /** What persist writes on EVERY store write: the projection, serialized. */
     const deviceWrite = (store) => JSON.parse(JSON.stringify(partializeOf(store.getState())));
+    /** What persist really does on a write: the projection, serialized, INTO the
+     *  device's storage under the persist key. Two live stores over one storage is
+     *  exactly what two tabs are — one localStorage, two module graphs — so the
+     *  arms below can read the slot back the way the projection now does. */
+    const deviceCommit = (store) => {
+      const blob = deviceWrite(store);
+      // zustand's `{ state, version }` wrapper; the version is irrelevant to the
+      // read (it walks `.state.anonDraft`) and its shape is pinned against the REAL
+      // middleware in the post-signup arm below rather than assumed here.
+      globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({ state: blob, version: 2 }));
+      return blob;
+    };
+    /** The envelope the DEVICE is holding, straight off storage. */
+    const readSlot = () => {
+      const raw = globalThis.localStorage.getItem(PERSIST_KEY);
+      return raw ? JSON.parse(raw).state.anonDraft : null;
+    };
     /** What persist does on a boot: the custom merge over a fresh store. */
     const bootFrom = (blob) => {
       const store = liveStore();
@@ -1386,6 +1403,14 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       live.getState().clearAuth();
       expect(partializeOf(live.getState()).anonDraft).toBeNull();
       live.getState().clearSettlement();
+
+      // ⭐ AND WHILE THE REAL PERSISTED STORE IS DRIVEN HERE, THE WRAPPER IS PINNED.
+      // The projection now READS this key back (persistProjection.js), so the two-tab
+      // arms below have to hand-build what the middleware writes. This makes that
+      // hand-build a CHECKED copy: the middleware's own blob, read off the device.
+      const wrapper = JSON.parse(globalThis.localStorage.getItem(PERSIST_KEY));
+      expect(Object.keys(wrapper).sort()).toEqual(['state', 'version']);
+      expect(Object.hasOwn(wrapper.state, 'anonDraft')).toBe(true);
     });
 
     test('opening a save from the library claims it, whatever origin its blob carries', () => {
@@ -1544,6 +1569,145 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
         expect(merged.settlement, label).toBeNull();
         expect(merged.lastSeed, label).toBeNull();
       }
+    });
+
+    // ── ⭐⭐ THE TWO-TAB SLOT (2026-09-19) — THE ELSE-BRANCH IS NO LONGER A BARE NULL.
+    //
+    // persist writes the WHOLE projection on every store write, so for as long as the
+    // else-branch wrote `null` it was a write ABOUT a slot that might not be this
+    // tab's. Tab A holds an anonymous world and takes the slot; tab B — another
+    // anonymous world, same device — takes it next; A then signs in, and A's next
+    // write nulled the slot. B's draft was gone and A had never held it.
+    //
+    // The rule now compares IDENTITY: (a) born anonymous with nobody signed in writes
+    // this world, exactly as before; (b) otherwise a slot holding THIS world is
+    // retired; (c) otherwise the stored envelope is written back untouched.
+
+    test("two anonymous tabs: signing in and saving in one never takes the other tab's draft", () => {
+      globalThis.localStorage.removeItem(PERSIST_KEY);
+      const worldA = { ...world, id: 'w-ashford', name: 'Ashford' };
+      const worldB = { ...world, id: 'w-bellhollow', name: 'Bellhollow' };
+
+      // TAB A — an anonymous world on screen. Case (a): its write takes the slot.
+      const a = liveStore();
+      a.setState((state) => { state.settlement = worldA; state.lastSeed = 'seed-a'; state.draftOrigin = 'anon'; });
+      expect(deviceCommit(a).anonDraft).toEqual({ settlement: worldA, lastSeed: 'seed-a' });
+
+      // TAB B — a DIFFERENT anonymous world on the same device. One slot, and the
+      // last case-(a) write owns it. That half is unchanged and is not the defect.
+      const b = liveStore();
+      b.setState((state) => { state.settlement = worldB; state.lastSeed = 'seed-b'; state.draftOrigin = 'anon'; });
+      expect(deviceCommit(b).anonDraft).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+
+      // ⭐ A SIGNS IN — the write that used to eat B's draft. A's world is not what
+      // the slot holds, so A has no standing to retire it.
+      a.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
+      expect(deviceCommit(a).anonDraft).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+
+      // …and A SAVING does not take it either. The claim retires A's OWN world, and
+      // A's own world is still not the one in the slot.
+      a.getState().setActiveSaveId('save-a');
+      expect(a.getState().draftOrigin).toBe('account');
+      expect(deviceCommit(a).anonDraft).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+
+      // ⭐ AND THE HOLDER STILL GIVES IT BACK, which is what keeps (c) from being a
+      // leak: B signs in and saves, so the world being claimed IS the world in the
+      // slot — that write, and only that write, nulls it.
+      b.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
+      b.getState().setActiveSaveId('save-b');
+      expect(b.getState().draftOrigin).toBe('account');
+      expect(deviceCommit(b).anonDraft).toBeNull();
+      expect(readSlot()).toBeNull();
+    });
+
+    test('the slot is retired only by the tab whose world it holds — the id leads, so a rename keeps the claim', () => {
+      const holding = (settlement, lastSeed) => {
+        globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({
+          state: { anonDraft: { settlement, lastSeed } }, version: 2,
+        }));
+      };
+      /** The projection over a signed-in tab — i.e. every write that is not case (a). */
+      const signedInWrite = (settlement, lastSeed) => partializeOf({
+        ...currentStub(), auth: { tier: 'free', user: USER }, settlement, lastSeed, draftOrigin: 'anon',
+      }).anonDraft;
+
+      const held = { ...world, id: 'w-ashford', name: 'Ashford' };
+
+      // (b) the slot holds THIS world → the claim retires it, as it always did.
+      holding(held, 'seed-a');
+      expect(signedInWrite(held, 'seed-a')).toBeNull();
+
+      // …and a RENAME does not lose the claim. `settlement.id` is seed-stable and
+      // rename-stable, so a name-first identity would hand a visitor's own slot to
+      // the "another tab's draft" branch and strand it there.
+      holding(held, 'seed-a');
+      expect(signedInWrite({ ...held, name: 'Ashford-upon-Wold' }, 'seed-a')).toBeNull();
+
+      // (c) a different id is a different world, whatever it is called.
+      holding(held, 'seed-a');
+      expect(signedInWrite({ ...held, id: 'w-other' }, 'seed-a'))
+        .toEqual({ settlement: held, lastSeed: 'seed-a' });
+
+      // THE UN-NORMALISED FALLBACK — an imported or hand-built world with no id at
+      // all, where name + seed carry the identity between them.
+      const idless = { ...world };
+      holding(idless, 'seed-a');
+      expect(signedInWrite(idless, 'seed-a')).toBeNull();
+      holding(idless, 'seed-a');
+      expect(signedInWrite({ ...idless, name: 'Bellhollow' }, 'seed-a'))
+        .toEqual({ settlement: idless, lastSeed: 'seed-a' });
+      holding(idless, 'seed-a');
+      expect(signedInWrite(idless, 'seed-b'))
+        .toEqual({ settlement: idless, lastSeed: 'seed-a' });
+      globalThis.localStorage.removeItem(PERSIST_KEY);
+    });
+
+    test("an unreadable device blob keeps nothing, and a cleared editor leaves another tab's draft standing", () => {
+      const signedInWrite = (settlement, lastSeed) => partializeOf({
+        ...currentStub(), auth: { tier: 'free', user: USER }, settlement, lastSeed, draftOrigin: 'anon',
+      }).anonDraft;
+      const held = { ...world, id: 'w-bellhollow', name: 'Bellhollow' };
+
+      // FAIL CLOSED on everything that is not a readable envelope: there is no
+      // draft to protect, so the answer is the bare null the branch always wrote.
+      // The guard is `readAnonDraft`, the SAME one the rehydrate uses, so the read
+      // and the write cannot disagree about what an envelope is.
+      for (const [label, raw] of [
+        ['no blob at all', null],
+        ['unparseable JSON', '{ not json'],
+        ['no state wrapper', JSON.stringify({ version: 2 })],
+        ['a null slot', JSON.stringify({ state: { anonDraft: null }, version: 2 })],
+        ['a stale empty envelope', JSON.stringify({ state: { anonDraft: {} }, version: 2 })],
+        ['a bare true', JSON.stringify({ state: { anonDraft: true }, version: 2 })],
+        ['an array', JSON.stringify({ state: { anonDraft: [{ settlement: held }] }, version: 2 })],
+      ]) {
+        if (raw === null) globalThis.localStorage.removeItem(PERSIST_KEY);
+        else globalThis.localStorage.setItem(PERSIST_KEY, raw);
+        expect(signedInWrite({ ...world }, 'seed-x'), label).toBeNull();
+      }
+      // anchored: the SAME projection over the SAME state writes the stored envelope back the moment the blob really is one, so each refusal above is the blob rather than the fixture
+      globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({
+        state: { anonDraft: { settlement: held, lastSeed: 'seed-b' } }, version: 2,
+      }));
+      expect(signedInWrite({ ...world }, 'seed-x')).toEqual({ settlement: held, lastSeed: 'seed-b' });
+
+      // ⚠ THE DECIDED RESIDUAL (persistProjection.js header, 2026-09-19). A CLEARED
+      // editor has no world to compare — the swap chokepoint nulls the world AND the
+      // origin — so the slot cannot be shown to be this tab's and is LEFT STANDING.
+      // Nulling on an empty editor is the flap again: it would eat the draft above on
+      // a guess. Resurrecting a draft is an annoyance; eating one is data loss.
+      const store = bootFrom(anonBlob());
+      store.getState().clearSettlement();
+      expect(store.getState().settlement).toBeNull();
+      expect(store.getState().draftOrigin).toBeNull();
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: held, lastSeed: 'seed-b' });
+
+      // …and the next generation takes the slot back through case (a), which is why
+      // the residual is an annoyance rather than a trap.
+      const fresh = { ...world, id: 'w-fresh', name: 'Fresh Hollow' };
+      store.setState((state) => { state.settlement = fresh; state.lastSeed = 'seed-fresh'; state.draftOrigin = 'anon'; });
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: fresh, lastSeed: 'seed-fresh' });
+      globalThis.localStorage.removeItem(PERSIST_KEY);
     });
 
     test('a quota error on the persist write is swallowed, and generation is unaffected', async () => {
