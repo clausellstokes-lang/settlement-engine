@@ -1,8 +1,9 @@
 # Settlement editor / EM-B1e — the pulse's ruin shape gets ONE exported writer, so the DM's decree and the disaster leave the same record
 
-- **Status:** READY
+- **Status:** `LANDED`
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
+- **Landed at:** `8f714cf3ceabef10c735f23b05783c7cddfcba34` — the pulse's ruin shape has ONE exported writer, `ruinInstitution(inst, { reason, fate })`, both arguments required and neither defaulted; both calamity records BYTE-IDENTICAL across the refactor (captured through the exported `advanceCalamity` before the first edit and after the last); all three goldens unmoved, the preset witness above all; +4 effective lines (the raw +41 is JSDoc); two mutants convicted (key order → only A1; the fate guard → only A3); `check:packet` 14/14 and `implementation:resume` exit 0; built in a second slot worktree in the slot's idle window while EM-B1d version 5 was drafted. Minified +437 B in the uncapped `advanceInterval.worker` (TOOL-3 prices it).
 - **Packet version:** 2
   > **WHAT VERSION 2 CHANGED AND WHY.** Re-measured whole against the build branch's tip by an Opus
   > pre-proof lane. **Not one verified fact about the tree was refuted** — all four declared paths
