@@ -2100,6 +2100,11 @@
       "kind": "rationale",
       "ref": "src-scan-totality-inline-controls-2026-08-03"
     },
+    "tests/lint/nameListColumns.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE NAME-LIST CENSUS (owner order 2026-09-19, the two-or-three-columns order). Its catching power is EXECUTED IN THE TEST BODY rather than claimed, and by the control a source scanner can run that an external plant cannot: `listSitesOf` is a PURE FUNCTION OF ONE SOURCE STRING, so the last arm feeds it seven hand-written sources and asserts the verdict on each. A plain short-row list IS found (exactly 1 site); a `<p>` prose row is NOT; a flexWrap chip container is NOT; a map whose result is joined into a string is NOT; a percentage-width bar track is NOT; a delegating row IS found AND names its component; and the enclosure predicate answers true for a site inside a <NameColumns> element and false for one outside it. Three of the four assertion arms above it assert an EMPTY list, which is exactly what a scanner that stopped scanning also produces, and those seven controls are what makes those greens readable. The remaining arms are a totality/staleness pair over a frozen ruling table (a new list site reds; a ruling whose site vanished reds) plus three non-vacuity floors measured against this tree (27 files, 30 sites, 4 columned rows). WHY IT DEFERS TO RATIONALE RATHER THAN kind:'mutation': scripts/mutation-sweep.sh reverts every plant with `git checkout --` against a live shared worktree, which this program's shared-tree protocol forbids outright - the standing reason already recorded at wcoin2-treasury-conservation-executed-2026-08-30.",
+      "kindNote": "rationale entries carry EXECUTED evidence; the controls are in the test body."
+    },
     "tests/lint/namedPersonTransitTotality.walker.test.js": {
       "kind": "rationale",
       "ref": "src-scan-totality-inline-controls-2026-08-03"

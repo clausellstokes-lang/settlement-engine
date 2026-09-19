@@ -40,6 +40,7 @@ import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import NameColumns from '../../primitives/NameColumns.jsx';
 
 const PantheonPanel = lazy(() => import('../../map/PantheonPanel.jsx'));
 
@@ -165,18 +166,25 @@ function FieldBlock({ rows }) {
       <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
         Divine influence
       </div>
-      {rows.map((r) => (
-        <div key={r.channel} data-testid="faith-field-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-          <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
-            {r.channelWord}
-          </span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
-            {' · '}
-            <span style={{ color: r.direction === 'blessed' ? GREEN : RED, fontWeight: 700 }}>{r.direction}</span>
-            {' · '}{r.band}
-          </span>
-        </div>
-      ))}
+      {/* ⭐ THE CHANNELS RUN IN COLUMNS (owner order 2026-09-19 — "sections like these
+          … in two or three columns to conserve space"). A row is a channel word and
+          two band words; the pantheon moves up to nine of them, and nine full-width
+          lines of three words each is the shape the order names. Below six the
+          primitive renders the single column this block rendered before. */}
+      <NameColumns count={rows.length}>
+        {rows.map((r) => (
+          <div key={r.channel} data-testid="faith-field-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
+            <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
+              {r.channelWord}
+            </span>
+            <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
+              {' · '}
+              <span style={{ color: r.direction === 'blessed' ? GREEN : RED, fontWeight: 700 }}>{r.direction}</span>
+              {' · '}{r.band}
+            </span>
+          </div>
+        ))}
+      </NameColumns>
     </div>
   );
 }

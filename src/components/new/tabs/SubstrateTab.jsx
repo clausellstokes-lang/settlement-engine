@@ -21,6 +21,7 @@ import { causalBandWord, deriveCausalState, variablePolarity } from '../../../do
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
@@ -161,7 +162,14 @@ export default function SubstrateTab({ settlement }) {
           fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
         }}>Settlement foundations</div>
-        <div style={{ padding: `0 ${SP.md}px` }}>
+        {/* ⭐ THE FOUNDATIONS RUN IN COLUMNS (owner order 2026-09-19 — "sections like
+            these … in two or three columns to conserve space"). Sixteen rows of a
+            label and a band word is sixteen lines of page for sixteen readings, and
+            the reading is a glance rather than a passage. NameColumns keeps DOM order
+            as reading order DOWN each column, so the model's own row order survives.
+            Each row keeps its flex box, so the band word still sits at the right edge
+            of its column exactly as it sat at the right edge of the page. */}
+        <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => (
             <div key={row.key} data-substrate-row style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -171,7 +179,7 @@ export default function SubstrateTab({ settlement }) {
               <BandPill variable={row.key} band={row.band} />
             </div>
           ))}
-        </div>
+        </NameColumns>
       </div>
     </div>
   );

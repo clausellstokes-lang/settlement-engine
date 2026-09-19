@@ -15,6 +15,7 @@ import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import NameColumns from '../../primitives/NameColumns.jsx';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -76,11 +77,16 @@ export default function MagicTab({ settlement }) {
               fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Envelope</div>
-            <div style={{ padding: `0 ${SP.md}px` }}>
+            {/* ⭐ THE ENVELOPE RUNS IN COLUMNS (owner order 2026-09-19 — "sections like
+                these … in two or three columns to conserve space"). Six facets, each a
+                label and one typed word, took six full-width lines. At six rows the
+                primitive's own floor gives two columns and never three: three columns
+                of two is a caption with orphans under it. */}
+            <NameColumns count={FACET_ORDER.length} style={{ padding: `0 ${SP.md}px` }}>
               {FACET_ORDER.map(key => (
                 <Facet key={key} label={FACET_LABEL[key]} value={posture[key]} />
               ))}
-            </div>
+            </NameColumns>
           </div>
 
           {/* The 4 role lines. */}
