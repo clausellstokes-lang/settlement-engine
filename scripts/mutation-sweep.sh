@@ -45,6 +45,7 @@ results=()
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
   src/workers/generationRequest.js
+  src/generators/steps/index.js
   src/domain/prose/composedWalker.js
   src/domain/prose/passageShapes.js
   src/domain/display/stateProse/composeStateProse.js
@@ -1519,6 +1520,31 @@ check_caught "launch-pill-host/the Instant World reach loses its wrap and clips 
 #      2 red (the engine-tree ban and the exact-readers arm), 2 passed; restored => 4 passed.
 perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep, STEP_PRESENTATION } from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
 check_caught "step-presentation/an engine module reaches the rail's words and 2.9 kB returns to the worker bundle" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees names the table or its accessor"
+
+# 107. THE SAME FENCE, THE WHOLESALE DOOR (review 12). A name-grep is not a fence: an engine
+#      module can take BOTH tables without writing either name. `export * from
+#      './stepMetadata.js'` in the steps barrel is the most plausible shape of it - the barrel
+#      already exists to re-export the pipeline's steps - and a star re-export is a reference to
+#      every export, so rollup keeps STEP_PRESENTATION while plant #106's symbol arms stay GREEN
+#      and the 2.9 kB comes back unannounced. None existed in the tree when this was planted.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 0882db64d89137ab5a916d3a35945055 before and after): clean => 6 passed; planted =>
+#      2 red (the wholesale re-export arm by name and the exact-readers arm), 4 passed;
+#      restored byte-identical => 6 passed.
+perl -0pi -e "s/import '\.\/resolveConfig\.js';/export * from '.\/stepMetadata.js';\nimport '.\/resolveConfig.js';/" src/generators/steps/index.js
+check_caught "step-presentation/a barrel re-exports stepMetadata.js wholesale and the rail's words ride in unnamed" src/generators/steps/index.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees RE-EXPORTS stepMetadata.js wholesale"
+
+# 108. THE OTHER HALF OF THE SAME DOOR (review 12). A NAMESPACE IMPORT is the import-side twin
+#      of #107 and it lands in the worker's own entry, which already imports this module for
+#      `metaForStep` - so the regression is one extra line beside a line that belongs there.
+#      The dynamic form `await import('./stepMetadata.js')` is refused by the same arm and is
+#      the QUIETEST of the three: it splits rather than inlines, so it would not move the byte
+#      ceiling at all, and a new worker lazy edge is its own byte decision (WORKER_LAZY_EDGES is
+#      frozen at one row). Measured with a cp backup and a cp restore (md5
+#      d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 6 passed; planted => 2 red
+#      (the namespace arm by name and the exact-readers arm), 4 passed; restored => 6 passed.
+perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep } from '..\/generators\/steps\/stepMetadata.js';\nimport * as stepMetaNamespace from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
+check_caught "step-presentation/the worker entry takes stepMetadata.js as a namespace and every export is kept" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees takes stepMetadata.js as a NAMESPACE"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

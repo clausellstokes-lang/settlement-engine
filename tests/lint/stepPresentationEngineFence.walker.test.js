@@ -19,6 +19,21 @@
  * So the fence is a SOURCE-LEVEL scan, running on every plain suite: the only readers of
  * `STEP_PRESENTATION` outside its own module are under `src/components/`.
  *
+ * ⛔ AND IT REFUSES THE WHOLESALE FORMS, BECAUSE A NAME-GREP ALONE IS NOT A FENCE. Review 12
+ * (2026-09-18) found the hole while the tree was still clean of it: an engine module can take
+ * BOTH tables without ever writing either name -
+ *
+ *     export * from './stepMetadata.js';                  // a barrel re-export
+ *     import * as stepMeta from './stepMetadata.js';      // a namespace import
+ *     const stepMeta = await import('./stepMetadata.js'); // the same namespace, lazily
+ *
+ * A namespace object is a reference to every export, so rollup keeps `STEP_PRESENTATION` and
+ * the 2.9 kB returns with the symbol arms still green. The third form is here with the other
+ * two on purpose: it splits rather than inlines, so it would not move the bundle ceiling at
+ * all - which makes it the QUIETEST of the three, and a new worker lazy edge is a byte decision
+ * of its own (the WORKER_LAZY_EDGES table in tests/build/generationWorkerLazy.test.js is frozen
+ * at one row and says so).
+ *
  * ⚠ ANCHORED BOTH WAYS. A scan that finds nothing passes for two very different reasons —
  * the law holds, or the walk is broken and reads no files at all. So the arms below assert
  * that the sweep really read the engine trees (a file count floor plus a sentinel symbol
@@ -72,6 +87,22 @@ const SOURCES = walk(join(ROOT, 'src')).map((p) => ({ path: rel(p), code: readFi
 
 const namesSymbol = (file) => SYMBOLS.some((symbol) => file.code.includes(symbol));
 
+/**
+ * THE WHOLESALE FORMS, which take every export at once and name none of them.
+ * Each is anchored on the module's own path so an unrelated `export *` is not caught.
+ */
+const HOME_SPECIFIER = /['"][^'"]*stepMetadata\.js['"]/.source;
+const STAR_REEXPORT = new RegExp(`export\\s*\\*(?:\\s+as\\s+\\w+)?\\s*from\\s*${HOME_SPECIFIER}`);
+const NAMESPACE_IMPORT = new RegExp(
+  `import\\s*\\*\\s*as\\s+\\w+\\s*from\\s*${HOME_SPECIFIER}`
+  + `|\\bimport\\s*\\(\\s*${HOME_SPECIFIER}\\s*\\)`,
+);
+
+/** Files in the engine trees, minus the module the tables live in. */
+const engineFiles = () => SOURCES
+  .filter((f) => ENGINE_DIRS.some((d) => f.path.startsWith(`${d}/`)))
+  .filter((f) => f.path !== HOME);
+
 describe('the rail\'s words never cross into the generation worker (STEP_PRESENTATION fence)', () => {
   it('the walk really reads the engine trees, so an absence below means something', () => {
     // ANCHOR 1: the sweep found files at all, in every tree it claims to cover.
@@ -117,10 +148,50 @@ describe('the rail\'s words never cross into the generation worker (STEP_PRESENT
     ).toEqual([]);
   });
 
+  it('no module in the engine trees RE-EXPORTS stepMetadata.js wholesale', () => {
+    // ANCHOR: the matcher fires on the shape it claims to refuse, so an empty result below
+    // is the law holding rather than a regex that matches nothing.
+    expect(STAR_REEXPORT.test("export * from './stepMetadata.js';"), 'the matcher is dead').toBe(true);
+    expect(STAR_REEXPORT.test("export * as steps from '../generators/steps/stepMetadata.js';"))
+      .toBe(true);
+    // ...and it is ANCHORED ON THIS MODULE, so an unrelated barrel line is not swept up.
+    expect(STAR_REEXPORT.test("export * from './pipeline.js';"), 'the matcher is too broad')
+      .toBe(false);
+
+    const offenders = engineFiles().filter((f) => STAR_REEXPORT.test(f.code)).map((f) => f.path);
+    expect(
+      offenders,
+      `${offenders.join(', ')} re-exports stepMetadata.js with \`export *\`. A star re-export `
+      + 'carries STEP_PRESENTATION into the generation worker without naming it, so the symbol '
+      + 'arms above stay green while the 2.9 kB comes back. Re-export the two names the engine '
+      + 'uses (metaForStep, STEP_METADATA) instead of the module.',
+    ).toEqual([]);
+  });
+
+  it('no module in the engine trees takes stepMetadata.js as a NAMESPACE', () => {
+    // ANCHOR: both namespace shapes, static and dynamic, match; an unrelated module does not.
+    expect(NAMESPACE_IMPORT.test("import * as m from './stepMetadata.js';"), 'static form')
+      .toBe(true);
+    expect(NAMESPACE_IMPORT.test("const m = await import('../generators/steps/stepMetadata.js');"),
+      'dynamic form').toBe(true);
+    expect(NAMESPACE_IMPORT.test("import * as m from './pipeline.js';"), 'too broad').toBe(false);
+
+    const offenders = engineFiles().filter((f) => NAMESPACE_IMPORT.test(f.code)).map((f) => f.path);
+    expect(
+      offenders,
+      `${offenders.join(', ')} takes stepMetadata.js as a namespace object. A namespace is a `
+      + 'reference to EVERY export, so rollup keeps STEP_PRESENTATION and the rail\'s words ride '
+      + 'into the worker unnamed. Import the bindings the engine actually uses.',
+    ).toEqual([]);
+  });
+
   it('every reader outside stepMetadata.js is a component, and today that is the rail alone', () => {
     // The stronger statement, and the one that survives a new tree appearing under src/:
     // the ban above names five directories, this arm names the one that is ALLOWED.
-    const readers = SOURCES.filter((f) => f.path !== HOME).filter(namesSymbol).map((f) => f.path);
+    const readers = SOURCES
+      .filter((f) => f.path !== HOME)
+      .filter((f) => namesSymbol(f) || STAR_REEXPORT.test(f.code) || NAMESPACE_IMPORT.test(f.code))
+      .map((f) => f.path);
     // ⭐ EXACT, NOT A SUBSET. The rail is the only reason either name exists, and a second
     // reader is a design question (two surfaces printing the pipeline) rather than a typo —
     // it should red here and be admitted deliberately, not arrive unannounced.
