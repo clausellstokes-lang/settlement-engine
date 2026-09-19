@@ -138,7 +138,22 @@ export function useDialogDismiss(open, onDismiss) {
 
     const onKey = (event) => {
       if (trapStack[trapStack.length - 1] !== token) return;
-      if (event.key === 'Escape') onDismissRef.current?.();
+      if (event.key !== 'Escape') return;
+      onDismissRef.current?.();
+      // ⭐ AND FOCUS GOES HOME ON THE KEY ITSELF, not only when the popover finally comes
+      // down. The order is "close on Escape and hand focus back to whatever opened it", and
+      // the teardown below can only answer the second half once the CALLER's state has
+      // settled — which is a different moment, and on a caller whose dismiss is deferred,
+      // re-rendered or externally owned it may be much later or never. The Entity Inspector
+      // is exactly that shape (`SettlementWorkbench` clears a store field and waits to be
+      // re-rendered without an entry), and its reader was left holding a focus ring inside a
+      // panel that had already answered them.
+      // ⛔ ONLY IF FOCUS IS STILL INSIDE, which is the same question the teardown asks and
+      // for the same reason: a non-modal never took focus, so a reader who had moved on must
+      // not be yanked back. And the two cannot fight — after this hands focus to the opener,
+      // focus is neither inside the popover nor on <body>, so the teardown declines.
+      const live = typeof document !== 'undefined' ? document.activeElement : null;
+      if (node && live && node.contains?.(live)) restoreRef.current?.focus?.();
     };
     window.addEventListener('keydown', onKey);
     return () => {
