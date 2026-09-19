@@ -411,6 +411,13 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     //     re-freeze; the rung (ae8bc5e29) declared the move in prose; the re-freeze
     //     (fe021a487) executed it and touched only the register. Hence the module.
     //   • schema 20 (2026-09-18) — the fence rung. Moves no row; the literal holds.
+    //   • 60/39 → 61/40 at the schema-21 rung (2026-09-18, ODQ §934.9) — the relationships
+    //     mount. Lighting the paid PDF's `relationships.network` put DS-REL-1's list
+    //     assembler at src/components/new/relationshipsDeskRead.js, which reads three
+    //     save-time keys; one of them, `neighbourNetwork`, is a DECLARED identity, so its
+    //     row is tagged like all 25 of its siblings and the bank grows by that one address.
+    //     ⭐ THE FIRST MOVE THE FENCE ITSELF POLICED: the literal moved in the rung's own
+    //     commit, and the write refused until it and `declaredBankOf(21)` both said 61/40.
     const registerBank = {
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,

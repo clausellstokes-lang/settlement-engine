@@ -301,7 +301,18 @@ export const RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA = 18;
  *  baseline is validated against BASELINE_SCHEMA, and this constant exists so a schema-19
  *  PREDECESSOR is still validated as schema 19 after the live number moves past it. */
 export const RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA = 19;
-export const BASELINE_SCHEMA = 20;
+/** The RETIRED bank-fence definition — schema 21's predecessor. Same tagged topology
+ *  envelope, the same eight-identity declared roster and the same fence on the write;
+ *  schema 21 re-governs it to a register that ADMITS THREE ROWS, the reads DS-REL-1's list
+ *  assembler makes of three save-time keys the generation corpus can never observe a writer
+ *  for. Unlike 20 — and like 17 and 19 — it MOVES ROWS: three NEW, all in one new file, and
+ *  one of them is a declared identity, so it is also the first rung to GROW the bank
+ *  (60/39 -> 61/40) and therefore the fence's first real exercise. Never redefined, never
+ *  deleted — a live baseline is validated against BASELINE_SCHEMA, and this constant exists
+ *  so a schema-20 PREDECESSOR is still validated as schema 20 after the live number moves
+ *  past it. */
+export const RETIRED_BANK_FENCE_BASELINE_SCHEMA = 20;
+export const BASELINE_SCHEMA = 21;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -873,10 +884,22 @@ export function validateSchema19Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 20's tagged envelope, re-governed by schema 21 to a
+ *  register that admits the relationships assembler's three rows. Re-bound to its own
+ *  LITERAL now that the authority has moved to 21, for the same reason as every retired
+ *  validator above. */
+export function validateSchema20Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_BANK_FENCE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema20Baseline(baseline) {
+export function validateSchema21Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

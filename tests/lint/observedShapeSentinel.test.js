@@ -42,6 +42,7 @@ import {
   RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA,
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+  RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -69,6 +70,7 @@ import {
   validateSchema18Baseline,
   validateSchema19Baseline,
   validateSchema20Baseline,
+  validateSchema21Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -85,6 +87,7 @@ import {
 import {
   BANK_FENCE_TARGET_SCHEMA,
   declaredBankOf,
+  RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1453,10 +1456,16 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // A rung that declared nothing cannot re-freeze at all.
     expect(() => assertBankTwins({ next, literal, declared: null, migration: true, targetSchema: 20 }))
       .toThrow(/schema-20 rung declares no post-move bank/);
-    // ⛔ THE LIVE RUNG DECLARES ITS BANK, AND SO DOES THE ONE IT RETIRED — 19's is the
-    // figure `fe021a487` froze, read off that register, never predicted.
+    // ⛔ THE LIVE RUNG DECLARES ITS BANK, AND SO DO THE TWO IT RETIRED — 19's is the
+    // figure `fe021a487` froze, read off that register, never predicted; 20 moved no row
+    // and carried it forward BY HAND.
+    // ⭐ AND 21 IS THE FIRST DECLARATION THAT IS A MOVE, which is what makes the two arms
+    // above more than a shape test: the live rung admits one DECLARED-identity address and
+    // its pair differs from its predecessor's, so a stale carry-forward would now red.
     expect(declaredBankOf(BANK_FENCE_TARGET_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(BANK_FENCE_TARGET_SCHEMA));
+    expect(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(RELATIONSHIPS_MOUNT_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_BANK_FENCE_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
     expect(declaredBankOf(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA)).toEqual({ bankedReads: 60, taggedRows: 39 });
     expect(declaredBankOf(18)).toBeNull();
     // The instrument names the module the walker imports.
@@ -1515,7 +1524,13 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // to freeze a bank its hand-owned twins do not already state — the walker's literal
     // module on every write, the rung's declared post-bank on a migration write. A law on
     // the WRITE, not the detector; verdict-only, its reconciliation is EMPTY.
-    expect(BASELINE_SCHEMA).toBe(20);
+    // ⭐ SCHEMA 21 (2026-09-18, ODQ §934.9): schema 20's envelope, tag law and roster all
+    // UNCHANGED, re-governed to a register that ADMITS THE THREE ROWS of DS-REL-1's list
+    // assembler. Its reconciliation is NOT empty and, unlike 17 and 19, it moves UPWARD:
+    // three NEW rows in one new file, one of them a declared identity, so the bank grows
+    // 60/39 -> 61/40 and the fence minted at 20 has its first real disagreement to catch.
+    expect(BASELINE_SCHEMA).toBe(21);
+    expect(RETIRED_BANK_FENCE_BASELINE_SCHEMA).toBe(20);
     expect(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA).toBe(19);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
     expect(RETIRED_TREASURY_ADMISSION_BASELINE_SCHEMA).toBe(11);
@@ -1534,11 +1549,12 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema20Baseline(live)).toBe(live);
-    // … and 18 and 19 keep their own literals, so each refuses the live envelope it used
-    // to accept.
+    expect(validateSchema21Baseline(live)).toBe(live);
+    // … and 18, 19 and 20 keep their own literals, so each refuses the live envelope it
+    // used to accept.
     expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
+    expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
     expect(assertExplainedWriterRowTags(live)).toBe(live);
     expect(() => validateSchema4Baseline(live)).toThrow(/noncanonical fields/);
     expect(() => validateSchema5Baseline(live)).toThrow(/noncanonical fields/);
@@ -1672,7 +1688,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(20);
+    expect(BASELINE_SCHEMA).toBe(21);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

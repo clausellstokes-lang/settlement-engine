@@ -93,11 +93,12 @@ import {
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+  RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema20Baseline,
+  validateSchema21Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -154,7 +155,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 20 = schema 19's topology and tag law UNCHANGED, re-governed to a `--write` that refuses
  *     to freeze a bank its hand-owned twins do not already state (`assertBankTwins`: the
  *     walker's literal module on every write, the rung's declared post-bank on a
- *     migration write). Moves no row. THE LIVE AUTHORITY.
+ *     migration write). Moves no row (RETIRED).
+ * 21 = schema 20's topology, tag law and declared roster UNCHANGED, re-governed to a
+ *     register that ADMITS THE THREE ROWS of DS-REL-1's list assembler — the reads of
+ *     `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`
+ *     that light `relationships.network` in the paid PDF. Three NEW rows in one new file,
+ *     one of them a DECLARED identity, so it is the first rung to GROW the bank
+ *     (60/39 -> 61/40) and the fence's first real exercise. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -170,6 +177,7 @@ export {
   RETIRED_GENESIS_TIES_BASELINE_SCHEMA,
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+  RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1349,7 +1357,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema20Baseline(baseline);
+  validateSchema21Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2720,16 +2728,28 @@ export function baselineOf({
       'That derived re-freeze may only lower or delete rows; the governed reasoned path may raise tagged rows only.',
       'Detector changes require a new governed instrument migration.',
       'The RETIRED schema-3 exact "<key> on <shape> @ <origin> # <site>" spelling cannot enter this file.',
-      'SCHEMA 20 = schema 19\'s topology and tag law, UNCHANGED, re-governed to a `--write` that',
-      'REFUSES to freeze a bank its hand-owned twins do not already state. The walker keeps the',
-      'bank as a LITERAL by ruling (a derived re-freeze may never raise it), and that literal',
-      'stranded at the schema-19 re-freeze: the register moved 62/41 -> 60/39 in a one-file',
-      'commit and the suite was red at its own tip. From this rung the write compares the bank',
-      'it is about to freeze — banked reads across tagged addresses, and the same pair per',
-      'declared identity — against tests/lint/observedShapeBank.literal.js on EVERY write, and',
-      'against the rung\'s own declared post-bank (`declaredBankOf`) on a migration write, and',
-      'refuses before a byte moves. This rung retunes nothing, adds no mechanism, declares and',
-      'retires no identity, and moves NO row: inventory and rowTags are byte-identical to 19\'s.',
+      'SCHEMA 20 (RETIRED) held the BANK FENCE: the write REFUSES to freeze a bank its',
+      'hand-owned twins do not already state — tests/lint/observedShapeBank.literal.js on',
+      'EVERY write, and the rung\'s own declared post-bank (`declaredBankOf`) on a migration',
+      'write — because the walker keeps the bank as a LITERAL by ruling and that literal',
+      'stranded at the schema-19 re-freeze (62/41 -> 60/39 in a one-file commit, red at its',
+      'own tip). The fence stands; 20 itself moved no row.',
+      'SCHEMA 21 = schema 20\'s topology, tag law and eight-identity declared roster, all',
+      'UNCHANGED, re-governed to a register that ADMITS THREE ROWS. ODQ §934.9 lit the paid',
+      'PDF\'s `relationships.network` position, which had been mounted and starved: its two',
+      'lists now come from src/components/new/relationshipsDeskRead.js, and that assembler',
+      'reads `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`',
+      '— three keys written when a world is SAVED, LINKED or IMPORTED and never by the',
+      'generation pipeline this instrument executes, so the scan convicts every reader of them',
+      'and is RIGHT to. Three NEW rows, one read each, all in that one file; nothing moves',
+      'anywhere else. One of the three is the DECLARED identity `neighbourNetwork on',
+      'settlement`, so its row is auto-tagged like all 25 of its siblings and the bank GROWS',
+      '60 -> 61 reads across 39 -> 40 tagged addresses — the first bank growth since the fence',
+      'was minted, and therefore its first real exercise. The other two stay ORDINARY rows,',
+      'matching the estate\'s own treatment of those identities (7 ordinary rows for',
+      '`interSettlementRelationships`, 1 for `crossSettlementConflicts`), and',
+      '`crossSettlementConflicts` could not be declared even if the posture changed: NOTHING',
+      'in src/ writes that key, and gate 0 refuses an entry whose named writer does not.',
       'Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -2740,7 +2760,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–19 are the RETIRED numeric predecessors.',
+      'Schemas 4–20 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2914,7 +2934,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema20Baseline,
+    validateBaseline: validateSchema21Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

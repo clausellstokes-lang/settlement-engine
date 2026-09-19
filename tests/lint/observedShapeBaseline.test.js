@@ -23,6 +23,7 @@ import {
   RETIRED_STRESS_TOPOLOGY_BASELINE_SCHEMA,
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
+  RETIRED_BANK_FENCE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -45,6 +46,7 @@ import {
   validateSchema18Baseline,
   validateSchema19Baseline,
   validateSchema20Baseline,
+  validateSchema21Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -316,7 +318,14 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // write. The first rung whose subject is the WRITE rather than the detector, the
     // corpus, the receipt or the roster. Verdict-only like 13–16 and 18 — its
     // reconciliation is EMPTY, and inventory and rowTags are byte-identical to 19's.
-    expect(BASELINE_SCHEMA).toBe(20);
+    // ⭐ SCHEMA 21 (2026-09-18, ODQ §934.9). Schema 20's envelope, tag law and roster
+    // UNCHANGED, re-governed to a register that ADMITS THREE ROWS — DS-REL-1's list
+    // assembler, lit so the paid PDF's `relationships.network` prints on a saved world.
+    // The first rung since 17 and 19 to move rows, the first EVER to move them UPWARD, and
+    // the first to GROW the bank (60/39 -> 61/40), which is the bank fence's first real
+    // exercise: 20 minted the fence and declared the same pair it inherited.
+    expect(BASELINE_SCHEMA).toBe(21);
+    expect(RETIRED_BANK_FENCE_BASELINE_SCHEMA).toBe(20);
     expect(RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA).toBe(19);
     expect(RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA).toBe(18);
     expect(RETIRED_GENESIS_TIES_BASELINE_SCHEMA).toBe(12);
@@ -541,6 +550,14 @@ function validSchema18Baseline_fixture() {
 function validSchema19Baseline_fixture() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-20 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-19 fixtures above record. */
+function validSchema20Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_BANK_FENCE_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -793,9 +810,15 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 20 now.
     const exemptionRetirement = validSchema19Baseline_fixture();
     expect(validateSchema19Baseline(exemptionRetirement)).toBe(exemptionRetirement);
-    expect(validateSchema20Baseline(live)).toBe(live);
+    // ⭐ 20 IS RETIRED at the schema-21 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 21 now.
+    const bankFence = validSchema20Baseline_fixture();
+    expect(validateSchema20Baseline(bankFence)).toBe(bankFence);
+    expect(validateSchema21Baseline(live)).toBe(live);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
-    expect(() => validateSchema20Baseline(exemptionRetirement)).toThrow(/is not schema 20/);
+    expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
+    expect(() => validateSchema21Baseline(exemptionRetirement)).toThrow(/is not schema 21/);
+    expect(() => validateSchema21Baseline(bankFence)).toThrow(/is not schema 21/);
     expect(() => validateSchema7Baseline(baseline)).toThrow(/is not schema 7/);
     expect(() => validateSchema8Baseline(retired)).toThrow(/is not schema 8/);
     // ⚠ EVERY ADJACENT PAIR IS PINNED IN BOTH DIRECTIONS FOR ONE REASON: FOUR
