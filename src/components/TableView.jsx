@@ -26,7 +26,7 @@ import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
-import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { tonightAtTheTable, prosperityLabel, TABLE_KIND_LABEL } from '../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
@@ -58,10 +58,10 @@ const sans = '"Nunito", system-ui, sans-serif';
 
 // The four lamp-tone kind accents (moss/gold/slate/ember), legible on UMBER_CARD.
 const KIND_ACCENT = LAMP_ACCENTS;
-// DISPLAY words only — the model tokens (`kind: 'RED'`, domain/tonightAtTheTable.js) are
-// untouched. 'NPC' keeps its letters because it is an initialism; 'RED' is spelled out
-// because a bare 'Red' on an umber card reads as a colour rather than a red herring.
-const KIND_LABEL = { NPC: 'NPC', HOOK: 'Hook', TWIST: 'Twist', RED: 'Red herring' };
+// DISPLAY words only — the model tokens are untouched. The map moved to the domain module
+// that owns the kind union (ODQ §934.22 item 4) because SessionMode rendered the raw token
+// beside this one's word; its docblock carries the reasons the words are what they are.
+const KIND_LABEL = TABLE_KIND_LABEL;
 
 export default function TableView({ settlement, onClose }) {
   // Shared modal focus management (M12): focus-in on open, Tab/Shift+Tab cycling

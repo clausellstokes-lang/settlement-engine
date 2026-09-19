@@ -35,7 +35,7 @@ import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { proseFontSize } from '../../design/proseScale.js';
-import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
+import { tonightAtTheTable, TABLE_KIND_LABEL } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
 import { literaryTitle, tokenCase } from '../new/labelLadder.js';
@@ -369,7 +369,11 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   <Card key={i} accent={KIND_ACCENT[row.kind] || GOLD_ACCENT}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 3 }}>
                       <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0 }}>{row.title}</span>
-                      <span style={{ fontSize: FS.nano, fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', flexShrink: 0 }}>{row.kind}</span>
+                      {/* THE EYEBROW IDIOM (ODQ §934.22 item 4): the WORD is 'Hook', the CAPITALS are the
+                      * style's. This badge printed the raw model token with no transform under
+                      * it — literal caps in the string, which is the one thing rung 1 forbids,
+                      * and the reason the cheat sheet said 'Hook' where this said 'HOOK'. */}
+                    <span style={{ fontSize: FS.nano, fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>{TABLE_KIND_LABEL[row.kind] || row.kind}</span>
                     </div>
                     <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{row.body}</div>
                   </Card>

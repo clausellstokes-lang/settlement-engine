@@ -26,6 +26,19 @@
  * EMPHASISED leaves (fontWeight 700+), which is what a label or a pill is and what a meta
  * tag is not. `ALLOWED` below carries the deliberate exceptions, each with its reason.
  *
+ * ── THE OTHER END OF THE SAME RULE (ODQ §934.22 item 4, the second browser pass) ──────
+ * This file caught a label that began in LOWER case. It could not catch one that began in
+ * Title Case, and the browser pass found the class sitting in plain sight: "Very Safe" and
+ * "Well-Defended" on the dossier, beside "Strong" and "Adequate" one card over. The reason
+ * they survived the ladder is the ladder's own law — THE FROZEN VOCABULARIES ARE RE-CASED AT
+ * THE RUNG THAT RENDERS THEM, NEVER AT THE SOURCE — so `safetyProfile.js` still declares
+ * 'Very Safe' and `defenseGenerator.js` still declares 'Well-Defended', correctly, and the
+ * defect is a MISSING CALL at a render site. A missing call is invisible to a source grep
+ * (there is nothing to find) and invisible to the ALL-CAPS arm in
+ * tests/pdf/labelLadderParity.test.jsx, because Title Case is not capitals. The second
+ * describe below walks the same rendered pages and convicts a multiword status whose second
+ * word is capitalised.
+ *
  * Collapsed sections render no children at all (`Primitives.jsx` renders `{open && children}`),
  * so every closed disclosure is opened first: a defect inside a fold is still a defect.
  */
@@ -33,7 +46,12 @@ import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { SAFETY_BANDS, STABILITY_BANDS } from '../../src/domain/display/labelBands.js';
+import { TABLE_KIND_LABEL } from '../../src/domain/summary/tonightAtTheTable.js';
 import { tokenCase, statusCase } from '../../src/components/new/labelLadder.js';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
@@ -59,6 +77,14 @@ const CASES = [
 
 /** Every label the sweep looked at, for the one global anti-vacuity arm below. */
 const SEEN = [];
+
+/**
+ * The same leaves, WITH the style that decides whether their capitals are the word's or
+ * the stylesheet's. Kept beside `SEEN` rather than replacing it: the lower-case arm has
+ * only ever needed the text, and widening its input would move an arm nobody asked to move.
+ * @type {Array<{ text: string, transform: string }>}
+ */
+const SEEN_RICH = [];
 
 const settlements = new Map();
 beforeAll(() => {
@@ -96,7 +122,9 @@ function labelLeaves(root) {
     // judged in the visible text's place — never waved through, or the next token pill
     // regresses silently the moment someone gives it a label.
     const aria = el.getAttribute('aria-label');
-    out.push(aria ? aria.trim() : text);
+    const shown = aria ? aria.trim() : text;
+    out.push(shown);
+    SEEN_RICH.push({ text: shown, transform: String(el.style.textTransform || '') });
   }
   return out;
 }
@@ -153,6 +181,95 @@ describe('the dossier renders words, not engine tokens', () => {
     expect(SEEN.length, 'the sweep found almost no labels — it is testing nothing').toBeGreaterThan(200);
     expect(new Set(SEEN).size, 'the sweep saw one label repeated, not a page').toBeGreaterThan(40);
   });
+});
+
+/**
+ * THE READINESS LADDER'S SIX LABELS, transcribed from `defenseGenerator.js`'s band cascade.
+ * They are not exported (the generator returns `{ score, label, color, … }` on the
+ * settlement), so the arm below re-reads the generator's SOURCE and reds if a label here has
+ * no counterpart there — a transcription that cannot fall behind silently.
+ */
+const READINESS_LABELS = Object.freeze([
+  'Fortress', 'Well-Defended', 'Defensible', 'Lightly Defended', 'Vulnerable', 'Undefended',
+]);
+
+// ⚠ `process.cwd()`, NOT `import.meta.url`. This file runs in the JSDOM environment, where
+// `import.meta.url` is an http URL and `fileURLToPath` throws 'The URL must be of scheme
+// file' before a single arm runs — the same resolution the golden-master suite uses.
+const GENERATOR_SRC = resolve(process.cwd(), 'src/generators/defenseGenerator.js');
+
+/** Every frozen band word that is MULTIWORD and Title-Cased at its source. */
+const TITLE_CASE_BANDS = Object.freeze([
+  ...SAFETY_BANDS, ...STABILITY_BANDS, ...READINESS_LABELS,
+].filter((band) => /[ -]/.test(band) && band !== statusCase(band)));
+
+describe('the dossier speaks a status, it does not Title-Case one', () => {
+  test('the band vocabulary this arm walks is real, and still spelled this way at its source', () => {
+    // ⛔ GUARD THE GUARD. Every arm below is a search for members of this list; if the list
+    // were empty, or named words no producer emits, they would all pass on nothing. The
+    // readiness labels are checked against the generator's own source because they are the
+    // only ones this file transcribes.
+    const src = readFileSync(GENERATOR_SRC, 'utf8');
+    const missing = READINESS_LABELS.filter((l) => !src.includes(`'${l}'`));
+    expect(missing, 'a readiness label this file names is no longer in the generator').toEqual([]);
+    // FOUR at this tip — 'Very Safe', 'Enforced Order', 'Well-Defended', 'Lightly Defended'
+    // — and the floor is the measured number rather than a comfortable one, so a vocabulary
+    // rename that emptied the list would red here instead of passing on nothing.
+    expect(TITLE_CASE_BANDS.length, 'no multiword Title-Case band left to walk').toBeGreaterThanOrEqual(4);
+    expect(TITLE_CASE_BANDS).toContain('Very Safe');
+    expect(TITLE_CASE_BANDS).toContain('Well-Defended');
+  });
+
+  test('no rendered label prints a frozen band in its DECLARED case', () => {
+    // The producers are RIGHT to declare 'Very Safe' — `labelCase.js` states the law: the
+    // frozen vocabularies are re-cased at the rung that renders them, never at the source.
+    // So a band appearing on the page in its declared spelling is a MISSING CALL at a render
+    // site, which is exactly what the browser pass met on the Overview and Defense tabs.
+    const offenders = new Set();
+    for (const { text } of SEEN_RICH) {
+      for (const band of TITLE_CASE_BANDS) {
+        if (text.includes(band)) offenders.add(`${text}  (contains the declared "${band}")`);
+      }
+    }
+    expect([...offenders]).toEqual([]);
+  });
+
+  test('and the sweep really did render that vocabulary, so the arm above is not vacuous', () => {
+    // ⛔ WITHOUT THIS, a page that rendered no status at all would pass the arm above. The
+    // check is over the WHOLE band vocabulary rather than the four multiword ones, and
+    // deliberately: which band a fixture draws is the fixture's luck ('Safe' and 'Defensible'
+    // are as likely as 'Very Safe'), and an arm that pinned luck would red on a tuning change
+    // that broke nothing. What must hold is that these pages render STATUSES, in the
+    // ladder's case.
+    const vocabulary = [...SAFETY_BANDS, ...STABILITY_BANDS, ...READINESS_LABELS]
+      .map((b) => String(statusCase(b)));
+    const found = vocabulary.filter((c) => SEEN_RICH.some(({ text }) => text.includes(c)));
+    expect(found.length, 'the sweep rendered no status band at all — it is testing nothing')
+      .toBeGreaterThan(0);
+  });
+});
+
+describe('a badge\'s capitals belong to its style, never to its word', () => {
+  test("the Tonight card's kind badge carries the display word and an uppercase transform", () => {
+    // THE DEFECT (§934.22 item 4): this badge rendered the raw model token 'HOOK' with
+    // `textTransform` unset, so the cheat sheet said 'Hook' and the session card shouted the
+    // same entry's kind. Literal capitals in a string cannot be re-cased by anything
+    // downstream, which is the whole reason rung 1 puts them in the stylesheet.
+    const settlement = settlements.get('city');
+    const { container } = render(<SessionMode settlement={settlement} onClose={() => {}} />);
+    const badges = [...container.querySelectorAll('#sf-session-tonight span')]
+      .filter((el) => Object.values(TABLE_KIND_LABEL).includes((el.textContent || '').trim()));
+    // anchored: the card must have rendered badges at all, or "no offenders" means nothing.
+    expect(badges.length, 'the Tonight section rendered no kind badge').toBeGreaterThan(0);
+    for (const el of badges) {
+      const text = (el.textContent || '').trim();
+      expect(Object.values(TABLE_KIND_LABEL), `"${text}" is not one of the display words`).toContain(text);
+      expect(el.style.textTransform, `"${text}" gets its case from the string, not the style`).toBe('uppercase');
+      // The raw token never reaches the page except where the token IS the display word.
+      if (!/^[A-Z]+$/.test(text)) expect(text).not.toBe(text.toUpperCase());
+    }
+    cleanup();
+  }, 60000);
 });
 
 describe('the two casing helpers', () => {

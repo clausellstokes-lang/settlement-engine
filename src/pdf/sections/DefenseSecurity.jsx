@@ -87,9 +87,12 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
       {/* ── Readiness strip ──────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'Readiness', value: d.readiness?.label },
+          // RUNG 3, BOTH SURFACES (ODQ §934.22 item 4): the screen's own badge is cased, and
+          // a page that prints 'Well-Defended' where the tab prints 'Well-defended' is the
+          // two-spellings defect this file's parity suite exists to refuse.
+          { label: 'Readiness', value: statusCase(d.readiness?.label) },
           { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
-          { label: 'Safety', value: cap(d.safetyLabel) },
+          { label: 'Safety', value: statusCase(d.safetyLabel) },
           { label: 'Watch to population', value: smart(d.safetyRatio) },
           { label: 'Food resilience', value: smart(d.foodResilience) },
         ]}

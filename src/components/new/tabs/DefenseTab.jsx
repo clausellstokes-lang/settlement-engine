@@ -349,7 +349,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <div style={{display:'flex',alignItems:'flex-start',gap:16,flexWrap:'wrap'}}>
           <div style={{flexShrink:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
-            <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{readiness.label}</div>
+            <div style={{fontSize:FS.h1,fontWeight:700,color:readiness.color,lineHeight:1.1,marginBottom:6}}>{statusCase(readiness.label)}</div>
             <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
               {ra.terrain&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
               {ra.strategicValue&&<span style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{ra.strategicValue.split(' - ')[0]}</span>}
@@ -457,7 +457,10 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
                       <span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px'}}>{orderBadge}</span>
                     </div>
-                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
+                    {/* The MATCH reads the raw label, the PRINT is cased — the same split the institution
+                        seam draws. `safetyProfile.js` declares 'Very Safe' and composes
+                        '<strain> — <Condition>'; rung 3 is sentence case on both halves. */}
+                    {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),color:MUTED,marginTop:5,fontStyle:'italic'}}>{statusCase(safetyLabel)}</div>}
                   </div>
                   {(sp.safetyDesc||orderBeside||surveyBeside)&&<div style={{flex:1,minWidth:160}}>
                     {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The

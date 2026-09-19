@@ -122,7 +122,13 @@ function StatusTag({ label, value, _color, accent }) {
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
-      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
+      {/* RUNG 3 CASES ITS OWN VALUE (ODQ §934.22 item 4). The ladder descended the rung-3
+        * PILL and left the frozen VOCABULARIES in the case their producers declare them —
+        * `safetyProfile.js` writes 'Very Safe', `defenseGenerator.js` writes
+        * 'Well-Defended' — so a Title-Case multiword status kept shouting in a quieter
+        * register than capitals and neither walker could see it. Cased HERE rather than at
+        * the four call sites, so the next StatusTag cannot repeat it. */}
+      <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
     </div>
   );
 }

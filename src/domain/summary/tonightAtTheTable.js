@@ -89,6 +89,25 @@ function npcSecretText(npc) {
 /** @typedef {{ kind: 'NPC'|'HOOK'|'TWIST'|'RED', title: string, body: string }} TableEntry */
 
 /**
+ * THE DISPLAY WORD FOR EACH KIND — beside the union it belongs to, and NOT in either
+ * renderer (ODQ §934.22 item 4).
+ *
+ * ⛔ WHY IT MOVED HERE. `TableView.jsx` held this map privately while `SessionMode.jsx`
+ * rendered the raw `row.kind`, so the same entry read 'Hook' on the cheat sheet and 'HOOK'
+ * on the session card — a literal ALL-CAPS string with no `textTransform` under it, which is
+ * the one thing the label ladder's rung-1 rule forbids: capitals come from the STYLE, never
+ * from the word, or nothing downstream can case the word again. The model TOKEN is untouched;
+ * `kind: 'RED'` is still 'RED' everywhere the engine reads it.
+ *
+ * 'NPC' keeps its letters because it is an initialism; 'RED' is spelled out because a bare
+ * 'Red' on an umber card reads as a colour rather than a red herring.
+ * @type {Readonly<Record<'NPC'|'HOOK'|'TWIST'|'RED', string>>}
+ */
+export const TABLE_KIND_LABEL = Object.freeze({
+  NPC: 'NPC', HOOK: 'Hook', TWIST: 'Twist', RED: 'Red herring',
+});
+
+/**
  * @param {TableSettlement | null | undefined} settlement
  * @returns {TableEntry[]}
  */

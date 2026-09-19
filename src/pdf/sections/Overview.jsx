@@ -30,6 +30,7 @@ import {
   cap, smart, label, noteText, hookText, finite, safePct, humanize, safe,
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
+import { statusCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
@@ -88,9 +89,12 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
         stats={[
           { label: 'Population', value: populationFmt, sublabel: id.tier },
           { label: 'Age',        value: ageFmt, sublabel: id.terrain },
-          { label: 'Prosperity', value: cap(o.prosperity), tone: o.prosperityTone },
-          { label: 'Safety',     value: cap(o.safety), tone: o.safetyTone },
-          { label: 'Stability',  value: cap(o.stability) },
+          // RUNG 3 (ODQ §934.22 item 4). `cap` only lifts the FIRST character, so a frozen
+          // Title-Case band ('Very Safe', 'Enforced Order') printed here exactly as its
+          // producer declares it while the screen's own tiles were cased. One rung, one case.
+          { label: 'Prosperity', value: statusCase(o.prosperity), tone: o.prosperityTone },
+          { label: 'Safety',     value: statusCase(o.safety), tone: o.safetyTone },
+          { label: 'Stability',  value: statusCase(o.stability) },
         ]}
       />
 

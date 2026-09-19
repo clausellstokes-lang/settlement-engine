@@ -219,7 +219,7 @@ function SummaryTab({ settlement:r }) {
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <SitTile label="Power" value={stabilityBandOf(powStab) ?? powStab.trim()} color={powColor} sub={allFactions[0]?.faction}/>
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||(complexityBandOf(eco.economicComplexity) ?? eco.economicComplexity)}/>
-        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${statusCase(scoreBand(defScore))}`:undefined}/>
+        <SitTile label="Defense" value={statusCase(dp.readiness?.label)||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${statusCase(scoreBand(defScore))}`:undefined}/>
       </div>
 
       {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest
