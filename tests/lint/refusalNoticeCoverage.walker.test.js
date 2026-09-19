@@ -30,6 +30,30 @@
  *                refusal. A reason recorded on a page with no notice is a refusal
  *                the reader never sees.
  *
+ * ⛔ ARM 3'S DENOMINATOR WAS SELF-FULFILLING, AND THAT IS WHY IT PROVED NOTHING
+ * (adversarial review of the second wave). It read "every file that reads
+ * `lastRefusal`" and then asked whether those files render the notice — but a surface
+ * that never learned about the register reads no `lastRefusal`, so the three silent
+ * ones (HomeHero, SettlementsPanel, SeedField) were not in the set being measured.
+ * The walker was green over the exact defect it was written for.
+ *
+ * The denominator is now derived from the STORE'S OWN GENERATION ENTRY POINT: a
+ * component that binds `s.generateSettlement` can receive a refusal, because that action
+ * is the one thing in the tree that records one. That is a fact about the surface rather
+ * than about how much of the cure it happens to have adopted, so a NEW caller is in the
+ * denominator on the day it lands and must either render the notice or be admitted by
+ * name with a reason. ARM 3c drives the detector over PLANTED sources so a walker that
+ * stopped convicting reds here rather than in production.
+ *
+ * ⚠ KNOWN EDGE, STATED BECAUSE IT HID ONE OF THE THREE. The walk is per FILE. Measured
+ * against the consist base 13ab242e3, this denominator convicts HomeHero.jsx and
+ * SettlementsPanel.jsx — exactly the two surfaces that rendered no notice at all — but
+ * NOT generate/LayeredConfigurationPanel.jsx, whose SeedField refused in silence while
+ * the same file mounted the notice for a different reason a few lines above. A file-level
+ * walker cannot see a second control inside a surface that already says something. The
+ * per-CONTROL property is proved where controls exist: tests/components/
+ * silentRefusalSurfaces.test.jsx clicks each one and reads the DOM back.
+ *
  * …and the fourth arm is the habitat: NO surface may hand-roll the cap pre-flight
  * again. `anonAtCap()` is admitted in the generation lane (where the gate belongs)
  * and on the ONE surface that uses it to choose what to RENDER rather than to refuse
@@ -43,6 +67,7 @@ import { join, relative } from 'node:path';
 
 import { REFUSAL_REASON_IDS } from '../../src/lib/refusalReasons.js';
 import { en } from '../../src/copy/index.js';
+import { codeOnly } from '../helpers/codeOnlySource.js';
 
 const ROOT = process.cwd();
 
@@ -66,6 +91,30 @@ const CAP_READERS_ADMITTED = Object.freeze({
     + 'free-today line reads the two buckets to say how much is left. Neither is a refusal.',
 });
 
+/**
+ * ⛔ THE STORE'S GENERATION ENTRY POINT — the ONE action in this tree that records a
+ * refusal (store/settlementGenerateAction.js is its body). A component that binds it can
+ * receive one, whether or not it has ever heard of `lastRefusal`.
+ *
+ * The lookahead is load-bearing: `generateSettlementPDF` and `generateSettlementPipeline`
+ * are different calls with no gate behind them, and a bare prefix match would drag four
+ * export surfaces and the Surveyor's direct-pipeline probe into a denominator they have
+ * no business in. The leading dot is load-bearing too — it matches the store READ
+ * (`useStore(s => s.generateSettlement)`), not whatever local name the caller gave it.
+ */
+const GENERATION_ENTRY_RE = /\.generateSettlement(?![A-Za-z0-9_$])/;
+
+/**
+ * Surfaces that may be handed a refusal and deliberately do not render it, BY NAME.
+ *
+ * Empty today, and that is the honest state: all seven generation callers render the
+ * notice. The mechanism exists because the alternative to a named exception is a widened
+ * detector — and a detector widened to stay green is exactly how arm 3's denominator came
+ * to measure its own adoption. A row here must say WHY the reader is not told.
+ * @type {Readonly<Record<string, string>>}
+ */
+const GENERATION_CALLERS_ADMITTED = Object.freeze({});
+
 function walkSource(dir, out = []) {
   for (const entry of readdirSync(dir)) {
     const p = join(dir, entry);
@@ -78,6 +127,39 @@ function walkSource(dir, out = []) {
 const SOURCES = walkSource(join(ROOT, 'src'))
   .map((abs) => ({ rel: relative(ROOT, abs).replace(/\\/g, '/'), src: readFileSync(abs, 'utf8') }))
   .sort((a, b) => a.rel.localeCompare(b.rel));
+
+/**
+ * THE DENOMINATOR, as a function over SOURCE ROWS so the plants below can drive the same
+ * code the live walk drives. A surface qualifies two ways, and both are needed: it BINDS
+ * the store's generation entry point (it can be handed a refusal), or it already READS
+ * `lastRefusal` (a route-raised reason — the Realm's and the admin route's — reaches a
+ * page that never generates anything).
+ *
+ * Read through `codeOnly`: a call cannot execute from inside a comment, and three of the
+ * files that merely DISCUSS `generateSettlement` in prose would otherwise be convicted for
+ * describing it.
+ * @param {{rel: string, src: string}[]} files
+ * @returns {string[]}
+ */
+function refusalSurfacesIn(files) {
+  return files
+    .filter(({ rel, src }) => rel.startsWith('src/components/') && rel !== NOTICE
+      && (GENERATION_ENTRY_RE.test(codeOnly(src)) || /\blastRefusal\b/.test(codeOnly(src))))
+    .map((f) => f.rel)
+    .sort();
+}
+
+/**
+ * Of those, the ones that say NOTHING: no notice mounted and no admission on record.
+ * @param {{rel: string, src: string}[]} files
+ * @param {Readonly<Record<string, string>>} [admitted]
+ * @returns {string[]}
+ */
+function silentSurfacesIn(files, admitted = GENERATION_CALLERS_ADMITTED) {
+  const srcOf = new Map(files.map((f) => [f.rel, f.src]));
+  return refusalSurfacesIn(files)
+    .filter((rel) => !(rel in admitted) && !/<RefusalNotice\b/.test(codeOnly(srcOf.get(rel) || '')));
+}
 
 /** `dailyCap` -> `DAILY_CAP`, the register's own SCREAMING_SNAKE spelling. */
 function screamingOf(id) {
@@ -156,20 +238,59 @@ describe('THE REFUSAL REGISTER — every reason has words, a raiser and a render
   });
 
   test('3. RENDERED: the notice is mounted on every surface that can receive a refusal', () => {
-    // A surface can receive one when it reads `lastRefusal` off the store.
-    const readers = SOURCES.filter(({ rel, src }) => rel.startsWith('src/components/')
-      && rel !== NOTICE && /\blastRefusal\b/.test(src)).map((f) => f.rel);
-    expect(readers.length, 'no surface reads lastRefusal — the register reaches no reader')
-      .toBeGreaterThanOrEqual(4);
-    const withoutNotice = readers.filter((rel) => {
-      const src = SOURCES.find((f) => f.rel === rel).src;
-      return !/<RefusalNotice\b/.test(src);
-    });
+    const surfaces = refusalSurfacesIn(SOURCES);
+    // ANTI-VACUITY: the denominator is the tree's generation callers, so an entry point
+    // that was renamed (or a strip that broke) empties it and every arm below goes green
+    // on nothing. Measured against this tree: seven callers, all rendering the notice.
     expect(
-      withoutNotice,
-      '\nA surface reads `lastRefusal` but never renders <RefusalNotice>. Reading the reason and '
-      + 'not showing it is the defect with an extra step:\n'
-      + `${withoutNotice.join('\n')}\n`,
+      surfaces.length,
+      'no component binds the store\'s generation entry point — has `generateSettlement` '
+      + 'been renamed? The denominator is empty, so this arm proves nothing.',
+    ).toBeGreaterThanOrEqual(7);
+    const silent = silentSurfacesIn(SOURCES);
+    expect(
+      silent,
+      '\nA surface can be handed a refusal and never renders <RefusalNotice>. The lane answers '
+      + 'a gate by returning null, so a caller that does not render the recorded reason IS the '
+      + 'silent refusal — whether or not it has ever read `lastRefusal`:\n'
+      + `${silent.join('\n')}\n`
+      + 'Render the notice where the reader clicked, or admit the surface by name in '
+      + 'GENERATION_CALLERS_ADMITTED with the reason the reader is not told.\n',
+    ).toEqual([]);
+  });
+
+  test('3a. no stale admission: every named exception is still a generation surface', () => {
+    const surfaces = refusalSurfacesIn(SOURCES);
+    expect(
+      Object.keys(GENERATION_CALLERS_ADMITTED).filter((rel) => !surfaces.includes(rel)),
+      'GENERATION_CALLERS_ADMITTED names a file that can no longer receive a refusal — delete '
+      + 'the stale row rather than leaving a standing permission nothing needs',
+    ).toEqual([]);
+  });
+
+  test('3c. GUARD-THE-GUARD: the detector convicts a planted silent caller', () => {
+    const CALLER = 'const forge = useStore((s) => s.generateSettlement);\nawait forge();';
+    const planted = [
+      { rel: 'src/components/PlantedSilent.jsx', src: CALLER },
+      { rel: 'src/components/PlantedSaying.jsx', src: `${CALLER}\nreturn <RefusalNotice refusal={r} />;` },
+      // A file that only TALKS about the entry point is prose, not a call site.
+      { rel: 'src/components/PlantedProse.jsx', src: '// s.generateSettlement is called by its parent' },
+      // …and the two homonyms that have no gate behind them.
+      { rel: 'src/components/PlantedPdf.jsx', src: 'const p = useStore((s) => s.generateSettlementPDF);\np();' },
+      { rel: 'src/components/PlantedPipeline.jsx', src: 'core.generateSettlementPipeline(cfg, null, { seed });' },
+    ];
+    expect(
+      refusalSurfacesIn(planted),
+      'the denominator no longer sees a plain generation caller, or it now sees prose and the PDF',
+    ).toEqual(['src/components/PlantedSaying.jsx', 'src/components/PlantedSilent.jsx']);
+    expect(
+      silentSurfacesIn(planted, {}),
+      'a planted caller that renders NOTHING was not convicted — the walker has stopped walking',
+    ).toEqual(['src/components/PlantedSilent.jsx']);
+    // …and the named admission really is the escape hatch it claims to be.
+    expect(
+      silentSurfacesIn(planted, { 'src/components/PlantedSilent.jsx': 'planted, for this arm' }),
+      'an admitted surface was convicted anyway',
     ).toEqual([]);
   });
 
