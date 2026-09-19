@@ -551,9 +551,24 @@ export const PREDICATES = [
       const e = (j && j.entries) || {};
       return { label: 'files with baselined-red tests', items: [...new Set(Object.values(e).map((r) => r.file))] };
     },
+    // ⭐ THE VICTORY ASSERTION (PACKET_STANDARD.md, "Burning a census row"): when the ratchet's
+    // baselined-red census is EMPTY the population is exactly zero BY DESIGN — the win was banked
+    // (2026-09-19, the census fell 1 → 0) — and an empty population here is the eradication this
+    // predicate exists to reach, not the silence its self-check arm C refuses. The predicate stays
+    // ARMED: a row reappearing in the baseline re-populates it, and the self-check's synthetic
+    // plants one so the firing is proved every run even while the census is zero.
+    victory: (ctx) => {
+      const j = ctx.json('scripts/.test-ratchet-baseline.json');
+      const n = Object.keys((j && j.entries) || {}).length;
+      return n === 0
+        ? 'the baselined-red census is ZERO (the ratchet\'s win banked 2026-09-19): no file carries a'
+          + ' baselined-red row, so no edit can hide inside one; a row reappearing re-arms this predicate'
+        : null;
+    },
     run(ctx, cs) {
       const j = ctx.json('scripts/.test-ratchet-baseline.json');
-      const entries = (j && j.entries) || {};
+      // The self-check may PLANT a baseline row (see `synthetic`) so the firing is proved at zero.
+      const entries = cs.planted || (j && j.entries) || {};
       const byFile = new Map();
       for (const row of Object.values(entries)) {
         if (!byFile.has(row.file)) byFile.set(row.file, []);
@@ -576,7 +591,13 @@ export const PREDICATES = [
     synthetic: (ctx) => {
       const j = ctx.json('scripts/.test-ratchet-baseline.json');
       const row = Object.values((j && j.entries) || {})[0];
-      return row ? { changes: [{ status: 'M', path: row.file, oldPath: null }] } : null;
+      if (row) return { changes: [{ status: 'M', path: row.file, oldPath: null }] };
+      // The census is zero: plant one row so the predicate is proved to fire when a member appears.
+      const file = 'tests/ops/migrationRehearsal.test.js';
+      return {
+        changes: [{ status: 'M', path: file, oldPath: null }],
+        planted: { 'self-check::planted': { file, test: 'a planted baselined-red row (the self-check\'s own)' } },
+      };
     },
   },
   {

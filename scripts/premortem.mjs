@@ -339,6 +339,7 @@ function derivationCensus() {
 
 async function selfCheck() {
   const problems = [];
+  const victories = []; // declared-empty populations that are victories, not silences
   const registry = loadRegistry();
   if (!registry || registry.classes.length === 0) {
     // A registry of ZERO classes parses fine and would send every predicate down the
@@ -383,8 +384,17 @@ async function selfCheck() {
       let pop = null;
       try { pop = p.population(ctx); } catch (e) { problems.push(`${p.id}: population() threw: ${e.message}`); }
       if (pop && (!Array.isArray(pop.items) || pop.items.length === 0)) {
-        problems.push(`${p.id}: derived population "${pop.label}" is EMPTY. This is the silent failure`
-          + ' this arm exists for: an empty population matches nothing and reads as an all-clear.');
+        // A predicate may DECLARE that an empty population is a victory (PACKET_STANDARD.md,
+        // "Burning a census row": the control converts to the victory assertion, names what was
+        // eradicated, and stays armed). The declaration is a function that returns the sentence
+        // only while the emptiness is the victory; anything shorter than a sentence is refused.
+        const victory = typeof p.victory === 'function' ? p.victory(ctx) : null;
+        if (typeof victory === 'string' && victory.trim().length >= 40) {
+          victories.push(`${p.id}: ${victory}`);
+        } else {
+          problems.push(`${p.id}: derived population "${pop.label}" is EMPTY. This is the silent failure`
+            + ' this arm exists for: an empty population matches nothing and reads as an all-clear.');
+        }
       }
     }
     // D. synthetic firing — reddening the guard on purpose, every run.
@@ -392,7 +402,7 @@ async function selfCheck() {
       let synth = null;
       try { synth = p.synthetic(ctx); } catch (e) { problems.push(`${p.id}: synthetic() threw: ${e.message}`); }
       if (synth) {
-        const cs = { changes: synth.changes, added: new Map(synth.added || []) };
+        const cs = { changes: synth.changes, added: new Map(synth.added || []), planted: synth.planted || null };
         let rows = [];
         try { rows = p.run(ctx, cs) || []; } catch (e) { problems.push(`${p.id}: run() threw on its own synthetic: ${e.message}`); }
         if (rows.length === 0) {
@@ -425,6 +435,7 @@ async function selfCheck() {
     console.error('whole round exists to stop.');
     process.exit(1);
   }
+  for (const v of victories) console.log(`[premortem] VICTORY (an empty population by design, still armed): ${v}`);
   console.log(`[premortem] SELF-CHECK OK — ${PREDICATES.length} predicates`
     + ` (${census.derived} derived, ${census.authored} authored of which ${census.hybrid} hybrid),`
     + ` ${covered.size}/${registry.classes.length} registry classes routed to a trigger,`
