@@ -269,7 +269,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           {e.customChains.map((c, i) => {
             const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
               .filter(Boolean)
-              .map((n) => label(n) || String(n))
+              .map((n) => label(institutionDisplayName(n) || n) || String(n))
               .join(' » ');
             const activationColor = c.activationState === 'active'
               ? palette.good
