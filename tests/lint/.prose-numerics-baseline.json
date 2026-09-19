@@ -361,25 +361,25 @@
         },
         {
                 "path": "src/components/new/SummaryTab.jsx",
-                "line": 65,
+                "line": 74,
                 "category": "floatInterpolation",
                 "snippet": "{pct}"
         },
         {
                 "path": "src/components/new/SummaryTab.jsx",
-                "line": 65,
+                "line": 74,
                 "category": "percentToken",
                 "snippet": "{pct}"
         },
         {
                 "path": "src/components/new/SummaryTab.jsx",
-                "line": 80,
+                "line": 89,
                 "category": "floatInterpolation",
                 "snippet": "{f.power}"
         },
         {
                 "path": "src/components/new/SummaryTab.jsx",
-                "line": 80,
+                "line": 89,
                 "category": "percentToken",
                 "snippet": "{f.power}"
         },
@@ -589,25 +589,25 @@
         },
         {
                 "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                "line": 239,
+                "line": 243,
                 "category": "floatInterpolation",
                 "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
         },
         {
                 "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                "line": 239,
+                "line": 243,
                 "category": "percentToken",
                 "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
         },
         {
                 "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                "line": 241,
+                "line": 245,
                 "category": "floatInterpolation",
                 "snippet": "{pct}"
         },
         {
                 "path": "src/components/new/tabs/power/PowerStrata.jsx",
-                "line": 282,
+                "line": 286,
                 "category": "floatInterpolation",
                 "snippet": "{r.power}"
         },

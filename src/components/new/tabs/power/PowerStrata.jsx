@@ -232,7 +232,6 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
   const mobile = useIsMobile();
   if (!roster.length) return null;
   const factionGroups = settlement?.factions || [];
-  const total = roster.reduce((n, r) => n + (r.power || 0), 0) || 100;
   const powerGold = powerAccent('ruler');
 
   const jumpToPower = (name) => {
@@ -245,7 +244,12 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
       {/* Distribution bar — the whole roster by power share (the flat view, demoted to an overview). */}
       <div style={{ display: 'flex', height: 18, overflow: 'hidden', marginBottom: 10, gap: 1 }}>
         {roster.map((r, i) => {
-          const pct = Math.round((r.power || 0) / total * 100);
+          // ODQ §934.20 — the same second derivation SummaryTab carried, on the same
+          // declared unit (domain/factionPowerShare.js: `factions[].power` IS the integer
+          // percent share). The distribution run said `{pct}` while the roster row below it
+          // said `{r.power}`, and this card prints both — so a lived roster the pulse has
+          // moved off 100 showed one faction two numbers. The declared share is read once.
+          const pct = Math.max(0, Math.min(100, Math.round(r.power || 0)));
           const c = FACTION_COLORS[i % FACTION_COLORS.length];
           return (
             <div key={i} role="img" aria-label={`${r.name}: ${pct} percent (power ${r.power})`}

@@ -359,8 +359,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
 //       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
 //       than inherited from HER-7's figures.
-// ODQ §934.20 (the food-bar car, 2026-09-19) — EIGHTEEN PURE LINE MOVES IN ONE FILE, NO
-// CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
+// ODQ §934.20 (the chart-proportion consist, 2026-09-19) — TWENTY-SIX PURE LINE MOVES ACROSS
+// THREE FILES, NO CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
 // magical food offset the record credits, so the tab gains a nine-line rationale block
 // above its prose and loses three decorative JSX comment lines inside the bar; the
 // eighteen rows EconomicsTab.jsx owns re-address 393 -> 402, 395 -> 404, 534 -> 542,
@@ -378,6 +378,17 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // a numeric-formatting call to this detector, which is why the sibling "+ N imported" chip has
 // never been a row either. The PDF chapters take the same clause through `smart(...)` with no
 // per-cent token, so Overview.jsx:566 and EconomicsTrade.jsx:534/:539 do not move at all.
+// THE OTHER EIGHT MOVES are the faction share bars, and they are the same shape. SummaryTab
+// and PowerStrata each re-normalised `factions[].power` — a DECLARED unit
+// (domain/factionPowerShare.js: an integer percent share, renormalised by
+// rulingStructure.normalizeAndAnnotateFactions) — and then printed the re-derivation INSIDE
+// the run while the legend beside it printed the field. Reading the declared share once
+// costs each file a rationale comment and refunds it the roster-sum line, so SummaryTab.jsx
+// re-addresses 65 -> 74 and 80 -> 89, and PowerStrata.jsx 239 -> 243, 241 -> 245 and
+// 282 -> 286. Not one of the five snippets changed: the aria-label on :243 still reads
+// `${pct} percent (power ${r.power})`, which is now two spellings of ONE number rather than
+// two numbers, and re-wording it would have been the only way to bank a row where there is
+// no debt to bank.
 // MEASURED, not assumed: live 224 rows, exact-equal to this baseline, 0 added and 0 removed
 // on path + category + snippet.
 const REVIEWED_TOTAL_CEILING = 224;

@@ -49,7 +49,6 @@ function FactionBar({ factions }) {
   // THE PHONE CHROME FLOOR — the modifier chips and the share figure, above the
   // empty-roster early return so the hook order is stable.
   const mobile = useIsMobile();
-  const total = factions.reduce((s,f)=>s+(f.power||0),0)||100;
   if (!factions.length) return null;
   const modStyle={
     occupied:{c:'#8b1a1a',bg:'#fdf0f0',br:'#d4a0a0',label:'occupied'},
@@ -60,7 +59,17 @@ function FactionBar({ factions }) {
     <div>
       <div style={{display:'flex',height:20,overflow:'hidden',gap:1,marginBottom:10}}>
         {factions.map((f,i)=>{
-          const pct=Math.round((f.power||0)/total*100);
+          // ODQ §934.20 — ONE NUMBER PER FACTION. `factions[].power` is a DECLARED unit:
+          // domain/factionPowerShare.js records it as an integer percent share 0-100,
+          // minted by rulingStructure.normalizeAndAnnotateFactions, which renormalises the
+          // whole roster with Math.round((power / totalPower) * 100). Re-normalising it here
+          // was a SECOND derivation of a published field, and the two disagreed in print on
+          // the same row: the run carried `{pct}%` while the legend beside it carried
+          // `{f.power}%`. They agree only while the roster sums to exactly 100 — and
+          // applyWorldPulseFactionRoster adds and subtracts whole points across campaign
+          // years with no renormalisation and no floor, which that leaf's own header names
+          // as the reachable case. The declared share is read, clamped, and printed once.
+          const pct=Math.max(0,Math.min(100,Math.round(f.power||0)));
           const c=FACTION_COLORS[i%FACTION_COLORS.length];
           return <div key={i} style={{flex:pct,background:c,display:'flex',alignItems:'center',justifyContent:'center',minWidth:pct>5?undefined:0,overflow:'hidden'}}>
             {pct>11&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.white,padding:'0 3px'}}>{pct}%</span>}
