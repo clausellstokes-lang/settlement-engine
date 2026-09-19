@@ -64,6 +64,8 @@ import MarketPricesSection from '../../src/components/new/tabs/MarketPricesSecti
 import { PowerSuccessionSection } from '../../src/components/dossier/EngineSections.jsx';
 import SessionMode from '../../src/components/session/SessionMode.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
+import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
+import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
 
 /** Deliberately lower case, with the reason. Anything else that starts lower is a defect. */
 const ALLOWED = new Set([
@@ -143,6 +145,9 @@ const TABS = [
   ['Succession', (s) => <PowerSuccessionSection settlement={s} />],
   ['MarketPrices', (s) => <MarketPricesSection prices={s.economicState?.marketPrices || { highlight: null, exports: [], imports: [] }} />],
   ['SessionMode', (s) => <SessionMode settlement={s} onClose={() => {}} />],
+  // The World group's Daily Life strip (browser pass 3): it prints the readiness band on an
+  // anchor fact, and no arm here had ever rendered it.
+  ['DailyLife', (s) => <DailyLifeTab settlement={s} />],
 ];
 
 describe('the dossier renders words, not engine tokens', () => {
@@ -194,14 +199,32 @@ const READINESS_LABELS = Object.freeze([
   'Fortress', 'Well-Defended', 'Defensible', 'Lightly Defended', 'Vulnerable', 'Undefended',
 ]);
 
+/**
+ * THE FOOD-SECURITY AND CRIMINAL-STRUCTURE VOCABULARIES, transcribed the same way and for the
+ * same reason: neither is exported (the food band rides on `economicState.foodSecurity.label`,
+ * the criminal one on a frozen table inside `defenseDisplay.js`), and browser pass 3 met both
+ * in their declared case — "Import-Dependent" in Overview's Systems Health and
+ * "Semi-Organized" on Defense. The guard arm re-reads both sources, so a transcription cannot
+ * fall behind silently.
+ */
+const FOOD_SECURITY_LABELS = Object.freeze([
+  'Deficit \u2014 Active Famine', 'Deficit', 'Import-Dependent', 'Pressured', 'Surplus', 'Secure',
+]);
+const CRIMINAL_STRUCTURE_LABELS = Object.freeze([
+  'Organized Syndicate', 'Semi-Organized Networks', 'Diffuse Criminal Presence',
+]);
+
 // ⚠ `process.cwd()`, NOT `import.meta.url`. This file runs in the JSDOM environment, where
 // `import.meta.url` is an http URL and `fileURLToPath` throws 'The URL must be of scheme
 // file' before a single arm runs — the same resolution the golden-master suite uses.
 const GENERATOR_SRC = resolve(process.cwd(), 'src/generators/defenseGenerator.js');
+const FOOD_SRC = resolve(process.cwd(), 'src/generators/foodGenerator.js');
+const CRIMINAL_SRC = resolve(process.cwd(), 'src/domain/display/defenseDisplay.js');
 
 /** Every frozen band word that is MULTIWORD and Title-Cased at its source. */
 const TITLE_CASE_BANDS = Object.freeze([
   ...SAFETY_BANDS, ...STABILITY_BANDS, ...READINESS_LABELS,
+  ...FOOD_SECURITY_LABELS, ...CRIMINAL_STRUCTURE_LABELS,
 ].filter((band) => /[ -]/.test(band) && band !== statusCase(band)));
 
 describe('the dossier speaks a status, it does not Title-Case one', () => {
@@ -213,6 +236,12 @@ describe('the dossier speaks a status, it does not Title-Case one', () => {
     const src = readFileSync(GENERATOR_SRC, 'utf8');
     const missing = READINESS_LABELS.filter((l) => !src.includes(`'${l}'`));
     expect(missing, 'a readiness label this file names is no longer in the generator').toEqual([]);
+    const foodSrc = readFileSync(FOOD_SRC, 'utf8');
+    expect(FOOD_SECURITY_LABELS.filter((l) => !foodSrc.includes(`'${l}'`)),
+      'a food-security label this file names is no longer in the generator').toEqual([]);
+    const crimSrc = readFileSync(CRIMINAL_SRC, 'utf8');
+    expect(CRIMINAL_STRUCTURE_LABELS.filter((l) => !crimSrc.includes(`'${l}'`)),
+      'a criminal-structure label this file names is no longer in the classifier').toEqual([]);
     // FOUR at this tip — 'Very Safe', 'Enforced Order', 'Well-Defended', 'Lightly Defended'
     // — and the floor is the measured number rather than a comfortable one, so a vocabulary
     // rename that emptied the list would red here instead of passing on nothing.
@@ -242,8 +271,10 @@ describe('the dossier speaks a status, it does not Title-Case one', () => {
     // are as likely as 'Very Safe'), and an arm that pinned luck would red on a tuning change
     // that broke nothing. What must hold is that these pages render STATUSES, in the
     // ladder's case.
-    const vocabulary = [...SAFETY_BANDS, ...STABILITY_BANDS, ...READINESS_LABELS]
-      .map((b) => String(statusCase(b)));
+    const vocabulary = [
+      ...SAFETY_BANDS, ...STABILITY_BANDS, ...READINESS_LABELS,
+      ...FOOD_SECURITY_LABELS, ...CRIMINAL_STRUCTURE_LABELS,
+    ].map((b) => String(statusCase(b)));
     const found = vocabulary.filter((c) => SEEN_RICH.some(({ text }) => text.includes(c)));
     expect(found.length, 'the sweep rendered no status band at all — it is testing nothing')
       .toBeGreaterThan(0);
@@ -353,4 +384,68 @@ describe('a hook source is a name or a token, and the card may not confuse the t
     expect(nameOrTokenCase('')).toBe('');
     expect(nameOrTokenCase(null)).toBe(null);
   });
+});
+
+describe('the three mounts browser pass 3 met, each pinned to the band it must re-case', () => {
+  // ⛔ EACH FIXTURE PINS THE BAND RATHER THAN HOPING THE SEED ROLLS IT. The sweep above is a
+  // net; these are the three specific mounts the pass read in their declared case, and an arm
+  // that waited for a generated town to produce 'Import-Dependent' would pass vacuously on
+  // most seeds and red on a tuning change that broke nothing.
+  test('Overview → Systems Health speaks the food band instead of declaring it', () => {
+    const s = settlements.get('village');
+    const fixture = {
+      ...s,
+      economicState: {
+        ...s.economicState,
+        foodSecurity: { ...(s.economicState?.foodSecurity || {}), label: 'Import-Dependent', color: '#8a3010', resilienceScore: 42 },
+      },
+    };
+    const { container } = render(<OverviewTab settlement={fixture} />);
+    expandAll(container);
+    const text = container.textContent || '';
+    expect(text, 'the Food Security row did not render').toContain('Import-dependent');
+    // anchored: the line above proves the row rendered, so this absence is about the case.
+    expect(text).not.toContain('Import-Dependent');
+    // ⭐ AND THE DATA IS UNMOVED — the state-prose pools key on the declared spelling
+    // (`foodSecurity.label: Import-Dependent`), which is why this is cured at the mount.
+    expect(fixture.economicState.foodSecurity.label).toBe('Import-Dependent');
+    cleanup();
+  }, 60000);
+
+  test('World → Daily Life speaks the readiness band on its anchor strip', () => {
+    const s = settlements.get('village');
+    const dp = s.defenseProfile || {};
+    const fixture = {
+      ...s,
+      defenseProfile: { ...dp, readiness: { ...(dp.readiness || {}), label: 'Well-Defended', color: '#1a3a6a' } },
+    };
+    const { container } = render(<DailyLifeTab settlement={fixture} />);
+    const text = container.textContent || '';
+    expect(text, 'the Defense anchor fact did not render').toContain('Well-defended');
+    // anchored: the line above proves the anchor fact rendered.
+    expect(text).not.toContain('Well-Defended');
+    // The reader that keys the daily-life prose off this label still sees the declared
+    // spelling, which is the whole reason the case is made at the mount.
+    expect(extractSettlementContext(fixture).defenseReadinessLabel).toBe('Well-Defended');
+    cleanup();
+  }, 60000);
+
+  test('Defense speaks the criminal-structure classification', () => {
+    // THE ROSTER IS REPLACED, NOT APPENDED TO, because `deriveCriminalStructure` is a
+    // CASCADE: the forged city already carries a thieves' guild, which outranks a smuggling
+    // ring and would have pinned 'Organized Syndicate' instead of the band this arm names.
+    // One institution, one branch, one answer.
+    const s = settlements.get('city');
+    const fixture = {
+      ...s,
+      institutions: [{ id: 'inst-smug', name: 'Smuggling ring', category: 'Criminal', status: 'healthy' }],
+    };
+    const { container } = render(<DefenseTab settlement={fixture} />);
+    expandAll(container);
+    const text = container.textContent || '';
+    expect(text, 'the criminal-structure row did not render').toContain('Semi-organized networks');
+    // anchored: the line above proves the row rendered.
+    expect(text).not.toContain('Semi-Organized');
+    cleanup();
+  }, 60000);
 });

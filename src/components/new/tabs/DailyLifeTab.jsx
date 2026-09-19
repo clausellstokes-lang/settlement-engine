@@ -14,6 +14,7 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
+import { statusCase } from '../labelLadder.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -176,8 +177,13 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         {ctx.tradeRoute && (
           <AnchorFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#5a3a1a' />
         )}
+        {/* ⛔ RUNG 3 IS CASED AT THIS CALL SITE, NEVER INSIDE `AnchorFact` (browser pass 3).
+            The sibling `StatusTag` on Overview cases its own value because every value it
+            takes is a frozen band word; this strip is not that — "Governed by" holds a
+            generated FACTION NAME, and `statusCase` inside the component would print "The
+            ashford guild". Only the readiness band is a band. */}
         {ctx.defenseReadinessLabel && (
-          <AnchorFact label="Defense" value={ctx.defenseReadinessLabel} accent='#1a3a6a' />
+          <AnchorFact label="Defense" value={statusCase(ctx.defenseReadinessLabel)} accent='#1a3a6a' />
         )}
         <AnchorFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?'#6b5340':ctx.magicBand==='high'?'#5a2a8a':ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
         {ctx.stressTypes.length > 0 && (

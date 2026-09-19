@@ -437,6 +437,14 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // the §934.22 note above says the same thing about its eleven inherited stale addresses, and
 // the lesson repeats — a cure five lines away in the same file re-addresses banked debt, and
 // only this register's own run can see it.
+// BROWSER PASS 3's STATUS MOUNTS (2026-09-19, lane 36 car 3) — TWO MORE PURE LINE MOVES, NO
+// CEILING CHANGE, NO DEBT MOTION. Casing the readiness band at the Daily Life anchor strip
+// costs that file one import line and a five-line rationale, so `{storeAiProgress || …}`
+// re-addresses 262 -> 268; the criminal-structure rationale on DefenseTab adds four lines
+// above `{crimFaction.power||0}`, which re-addresses 514 -> 518. OverviewTab and the PDF's
+// DefenseSecurity carry no row that moved — DefenseSecurity's pair sits at 238, ABOVE the
+// edited line. Path, category and snippet byte-identical on both; the census holds at 218
+// against a 218 ceiling and no category count moves.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

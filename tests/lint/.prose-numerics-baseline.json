@@ -361,13 +361,13 @@
           },
           {
                     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-                    "line": 262,
+                    "line": 268,
                     "category": "floatInterpolation",
                     "snippet": "{storeAiProgress || 'Regenerating…'}"
           },
           {
                     "path": "src/components/new/tabs/DefenseTab.jsx",
-                    "line": 514,
+                    "line": 518,
                     "category": "floatInterpolation",
                     "snippet": "{crimFaction.power||0}"
           },

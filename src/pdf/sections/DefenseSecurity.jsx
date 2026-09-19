@@ -262,8 +262,10 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                 borderRadius: 2,
               }}
             >
+              {/* Parity with the screen's Defense tab, which cases the same classifier word
+                  at its own mount: one status, one spelling, both surfaces. */}
               <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette.bad, marginBottom: 1 }}>
-                Criminal structure · {d.criminalStructure.label}
+                Criminal structure · {statusCase(d.criminalStructure.label)}
               </Text>
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
                 {d.criminalStructure.note}

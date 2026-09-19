@@ -464,7 +464,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {csd.label}</div>
+            {/* The classifier's own vocabulary is Title-Cased at its source
+                (`defenseDisplay.js`: 'Semi-Organized Networks'), which is correct there and
+                shouting here — rung 3 cases it at the mount, as the readiness badge above
+                already does. The PDF's line says the same word the same way. */}
+            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:csd.color,marginBottom:3}}>Criminal structure: {statusCase(csd.label)}</div>
             <p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 

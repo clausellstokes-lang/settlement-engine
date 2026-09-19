@@ -455,7 +455,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           {eco.foodSecurity?.label&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
               <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
-              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{eco.foodSecurity.label}</span>
+              {/* RUNG 3 AGAIN, at the one status in this section that is NOT a StatusTag
+                  (browser pass 3). `foodGenerator` declares 'Import-Dependent' and is right
+                  to — the state-prose pools key on the declared spelling — so the case is
+                  made here, beside the three tags above that already make it. */}
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{statusCase(eco.foodSecurity.label)}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
               <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:eco.foodSecurity.color||swatch.inkMag2}}/>
