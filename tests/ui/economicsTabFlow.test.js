@@ -213,6 +213,32 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(container.textContent).toContain('Production deficit of');
   });
 
+  /**
+   * ODQ §934.15 — "make sure that the food deficit math and the band visual are
+   * correct". The balance bar is the band visual on this tab, and a bar drawn from
+   * a different number than the sentence beside it is the defect class this pins:
+   * the filled run IS production ÷ need, the figure the readout states, and the
+   * blue import run that sits on top of it IS the imported quantity against the
+   * same need — never a share of the gap, which would overrun the track.
+   */
+  test('the food balance bar is drawn from the same arithmetic the readout states', () => {
+    useStore.setState({ campaigns: [] });
+    const { container } = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
+    const fb = SPEAKING.economicViability.metrics.foodBalance;
+    // The track is the only 10px-high bar on the tab; its first child is the
+    // production run. Addressing it by geometry keeps the pin off class names the
+    // tab does not carry.
+    const track = [...container.querySelectorAll('div')]
+      .find((node) => node.style.height === '10px' && node.style.position === 'relative');
+    expect(track, 'the food balance track did not render').toBeTruthy();
+    const production = track.firstElementChild;
+    expect(production.style.width).toBe(`${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}%`);
+    expect(production.style.width).toBe('60%'); // 600 / 1000 — the ratio, spelled out
+    // The readout's own percentage is the residual share of NEED, and it is the
+    // one the dossier model publishes rather than a second derivation.
+    expect(container.textContent).toContain(`Production deficit of ${Math.round((fb.deficit / fb.dailyNeed) * 100)}%`);
+  });
+
   test('the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab', () => {
     const router = readFileSync(ROUTER_SRC, 'utf8');
     // The condition is still computed where it always was...
