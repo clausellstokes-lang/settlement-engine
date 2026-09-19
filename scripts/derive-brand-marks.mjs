@@ -78,7 +78,12 @@
  * the register's `_derived_marks` block names them and what they descend from, and
  * tests/build/brandDerivatives.test.js keeps that block honest.
  *
- * Regenerate: node scripts/derive-brand-marks.mjs
+ * Regenerate:  node scripts/derive-brand-marks.mjs
+ * Verify:      node scripts/derive-brand-marks.mjs --out <dir>
+ *   writes the same ten files under <dir>, mirroring their repo-relative paths and
+ *   touching nothing in the tree. That is how the test re-runs the derivation and
+ *   diffs it against the committed bytes without racing another suite reading
+ *   public/ — and it is how a reviewer checks the art without a dirty worktree.
  *
  * @enforced-by tests/build/brandDerivatives.test.js
  */
@@ -86,12 +91,10 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-
 import { buildXmpPacket, injectPngXmp } from './inject-ai-provenance.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PUBLIC = resolve(ROOT, 'public');
-const BRAND = resolve(PUBLIC, 'brand');
 const FONTS = resolve(PUBLIC, 'fonts');
 
 /** The master. Served as painted; never re-cut by this script. */
@@ -334,8 +337,12 @@ export function outlineLine(font, text, size, color) {
 async function main() {
   const { default: sharp } = await import('sharp');
   const fontkit = await import('fontkit');
-  mkdirSync(BRAND, { recursive: true });
-  mkdirSync(resolve(ROOT, dirname(PDF_SEAL_MODULE)), { recursive: true });
+
+  // --out <dir> mirrors the repo-relative paths under <dir> and leaves the tree alone.
+  const outAt = process.argv.indexOf('--out');
+  const OUT_ROOT = outAt >= 0 && process.argv[outAt + 1] ? resolve(process.argv[outAt + 1]) : ROOT;
+  mkdirSync(resolve(OUT_ROOT, 'public', 'brand'), { recursive: true });
+  mkdirSync(resolve(OUT_ROOT, dirname(PDF_SEAL_MODULE)), { recursive: true });
 
   const strip = readFileSync(resolve(ROOT, STRIP));
   const register = JSON.parse(readFileSync(resolve(ROOT, 'scripts', 'ai-media-provenance.json'), 'utf8'));
@@ -353,7 +360,7 @@ async function main() {
   const emit = (rel, buf) => {
     const row = register.assets[rel];
     const out = row ? injectPngXmp(buf, buildXmpPacket(rel, row)) : buf;
-    writeFileSync(resolve(ROOT, rel), out);
+    writeFileSync(resolve(OUT_ROOT, rel), out);
     wrote.push(`${rel} ${out.length}`);
     return out;
   };
@@ -439,7 +446,7 @@ async function main() {
     + ` */\n`
     + `/** The seal at ${PDF_SEAL_PX}px, disc-masked, as an inline PNG data URI. */\n`
     + `export const BRAND_SEAL_PNG = 'data:image/png;base64,${pdfSeal.toString('base64')}';\n`;
-  writeFileSync(resolve(ROOT, PDF_SEAL_MODULE), pdfModule);
+  writeFileSync(resolve(OUT_ROOT, PDF_SEAL_MODULE), pdfModule);
   wrote.push(`${PDF_SEAL_MODULE} ${Buffer.byteLength(pdfModule)}`);
 
   /* ── 5. the share cards: the plaque under Lora type ────────────────────────── */
