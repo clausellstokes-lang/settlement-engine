@@ -77,10 +77,15 @@ function Host({ hook }) {
   );
 }
 
-describe.each([
+// A body loop rather than describe.each over runtime values: the lighting census reads a
+// describe.each whose table binds FUNCTIONS as a context-parameter closure it cannot prove,
+// and the estate holds that shape at zero files (the walker's latent-closure arm). The two
+// suites keep their titles and their arms exactly.
+const DISMISS_HOOKS = [
   ['useDialogDismiss (non-modal)', useDialogDismiss],
   ['useDialogFocusTrap (modal)', useDialogFocusTrap],
-])('%s — Escape closes and focus goes home', (_name, hook) => {
+];
+for (const [name, hook] of DISMISS_HOOKS) describe(`${name} — Escape closes and focus goes home`, () => {
   it('Escape dismisses the popover', () => {
     render(<Host hook={hook} />);
     fireEvent.click(screen.getByTestId('opener'));
