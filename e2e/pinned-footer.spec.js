@@ -426,7 +426,10 @@ test('Tab to the tucked home button reveals the whole footer without scrolling, 
   await settleChrome(page);
   await scrollToY(page, 0);
 
-  await page.locator('footer nav[aria-label="Footer"] button', { hasText: 'About' }).focus();
+  // ⚠ 'About' LEFT THE FOOTER ROW (the owner, ODQ §934.26 addendum: a destination the
+  // primary nav already shows is not drawn twice). Privacy is the band link this arm
+  // now focuses; nothing else about the reveal it measures changes.
+  await page.locator('footer nav[aria-label="Footer"] button', { hasText: 'Privacy' }).focus();
   await raf(page);
   const before = await footerBox(page);
   expect(before.scrollY, 'focusing a band link does not scroll').toBe(0);
@@ -477,8 +480,14 @@ test('focusing footer controls mid-page never scrolls the document', async ({ pa
     await raf(page);
     await record();
   }
+  // ⚠ RE-DERIVED, AND THE OLD LIST WAS ALREADY STALE. It named About (which left the row
+  // under ODQ §934.26's addendum) and omitted Guide and Roadmap, which joined it on
+  // 2026-09-18 — so after five Tabs from Pricing the focus had not reached the home
+  // button for some time. The row today is Pricing · Feedback & support · Terms ·
+  // Privacy · Guide · Roadmap; five Tabs from the first therefore end on Roadmap, and
+  // what this arm measures — that focusing a band control never scrolls — is unchanged.
   expect(seen.map((s) => s.active), 'presence control: focus walked the whole footer')
-    .toEqual(['Pricing', 'Feedback & support', 'Terms', 'Privacy', 'About', 'SettlementForge home']);
+    .toEqual(['Pricing', 'Feedback & support', 'Terms', 'Privacy', 'Guide', 'Roadmap']);
   expect(seen.map((s) => s.scrollY)).toEqual([2000, 2000, 2000, 2000, 2000, 2000]);
 });
 
@@ -521,7 +530,12 @@ test('phones keep the in-flow footer, and the landing Terms link clears the bott
   await freshPage(page);
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/home', { waitUntil: 'domcontentloaded' });
-  await page.waitForSelector('#closer', { state: 'attached' });
+  // ⚠ THE SETTLE MOVED (ODQ §934.27): at phone width the landing's below-fold chunk is
+  // NOT MOUNTED, so #closer never attaches and this wait would time out on a page doing
+  // exactly what the owner ordered. The hero is the whole landing here and it is the
+  // eager part, so it is what settles. The footer is App chrome rather than below-fold
+  // content, so it still renders — which is what the rest of this arm measures.
+  await page.waitForSelector('section.sf-landing-hero', { state: 'attached' });
   await settleChrome(page, { pinned: false });
 
   const state = await page.evaluate(() => ({

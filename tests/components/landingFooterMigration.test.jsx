@@ -31,8 +31,10 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { t } from '../../src/copy/footer.js';
-import LegalRibbonRow from '../../src/components/footer/LegalRibbonRow.jsx';
+import LegalRibbonRow, { footerLinks } from '../../src/components/footer/LegalRibbonRow.jsx';
+import { barNav } from '../../src/lib/routes.js';
 import { landing } from '../../src/copy/landing.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const H = vi.hoisted(() => ({
   route: { view: 'compendium', params: {}, legacy: false, notFound: false },
@@ -226,6 +228,48 @@ describe('the row itself: one copy truth', () => {
       button.click();
       expect(onNavigate).toHaveBeenCalledWith(view);
     }
+  });
+
+  /**
+   * ⛔ ABOUT APPEARS ONCE PER SURFACE (the owner, ODQ §934.26 addendum). The row's About
+   * link existed because the bar's five-seat cap used to evict About; the cap left with
+   * the Realm's phone seat, so About is in the primary nav at EVERY width and this link
+   * had become the second door. `footerLinks` decides it with ONE predicate over the ONE
+   * nav order, so the rule is a live derivation rather than a deletion.
+   */
+  test('About is absent from the row at BOTH widths, and its siblings are not', () => {
+    for (const [label, isMobile] of [['1440', false], ['375', true]]) {
+      const view = render(<LegalRibbonRow isMobile={isMobile} onNavigate={() => {}} />);
+      const labels = [...view.container.querySelectorAll('nav[aria-label="Footer"] button')]
+        .map((b) => b.textContent.trim());
+      // ANCHORED: Pricing is asserted PRESENT in the same collection, so "no About"
+      // cannot pass because the row rendered nothing at all.
+      expectAbsentWithAnchor(labels, t('footer.about'), t('footer.pricing'), `the footer row at ${label}`);
+      expectAbsentWithAnchor(labels, t('footer.about'), t('footer.roadmap'), `the footer row at ${label}`);
+      view.unmount();
+    }
+  });
+
+  test('the predicate defers to the primary nav, and only to it', () => {
+    // The rule is "a destination the primary nav already shows at this width", so the
+    // answer is derived from barNav rather than from a list of ids. Both widths are
+    // driven, because the nav's own set differs between them.
+    for (const isMobile of [false, true]) {
+      const shown = new Set(barNav(isMobile).map((item) => item.id));
+      const rows = footerLinks(isMobile);
+      // Nothing the nav shows survives…
+      expect(rows.filter((r) => r.view && shown.has(r.view)), `a nav destination is drawn twice at ${isMobile ? 375 : 1440}`).toEqual([]);
+      // …and nothing the nav does NOT show was dropped.
+      const dropped = ['footer.pricing', 'footer.contact', 'footer.terms', 'footer.privacy', 'footer.guide', 'footer.roadmap']
+        .filter((key) => !rows.some((r) => r.key === key));
+      expect(dropped, 'the predicate dropped a link the nav never shows').toEqual([]);
+      // It really is filtering — an identity function would satisfy both arms above.
+      expect(rows.some((r) => r.key === 'footer.about')).toBe(false);
+    }
+    // ⛔ THE DERIVATION, NOT THE SNAPSHOT: About is hidden because it is IN the nav. If it
+    // ever leaves, the link must come back with no edit to the footer.
+    expect(barNav(false).map((i) => i.id)).toContain('about-what-this-is');
+    expect(barNav(true).map((i) => i.id)).toContain('about-what-this-is');
   });
 
   test('Feedback & support opens the panel through the app-wide event', () => {
