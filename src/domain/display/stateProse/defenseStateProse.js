@@ -1377,6 +1377,12 @@ export function defenseStateProse(settlement, options = {}) {
  *                         arrives invisible arrives unopposed…"
  *       DS-DEF-5 `ABSENT` "{settlement}'s defense is conventional throughout. What arrives
  *                         unseen here goes undetected and therefore unanswered."
+ * ⚠ THE MAGIC LENS IS KEYED `Arcane Support` SINCE REVIEW 10 (owner §934.9). It was
+ * `Magical Capability`, which is the OVERVIEW row's name for a different fact — the world
+ * magic slider's score — while this lens reads the narrow arcane roster `hasMagicInst`. The
+ * display label moved first; the corpus key follows it here, so the blocked-pool declaration
+ * and the live row can still be read as one thing. The STATUS vocabulary is untouched.
+ *
  *   ECONOMIC BACKING    ⇄ `defense.threatAssessment` (DS-DEF-2 row 4, economicRowPoolKey).
  *     Both band `defenseProfile.scores.economic`; DS-DEF-2's own STRONG line already says
  *     "the garrison can be kept paid while they last", which is this lens's whole subject.
@@ -1403,7 +1409,7 @@ export function defenseStateProse(settlement, options = {}) {
 export const DEF6_C3_BLOCKED_POOLS = Object.freeze([
   'Economic Backing: Well-funded', 'Economic Backing: Adequate',
   'Economic Backing: Underfunded', 'Economic Backing: Critical',
-  'Magical Capability: Arcane support', 'Magical Capability: None',
+  'Arcane Support: Arcane support', 'Arcane Support: None',
   'Legal Infrastructure: Court + Prison', 'Legal Infrastructure: Court only',
   'Legal Infrastructure: Prison only', 'Legal Infrastructure: None',
   'Medical Readiness: Hospital present', 'Medical Readiness: Clergy care',
@@ -1418,7 +1424,7 @@ export const DEF6_C3_BLOCKED_POOLS = Object.freeze([
  */
 export const DEF6_FACT_SPOKEN_AT = Object.freeze({
   'Economic Backing': 'defense.threatAssessment',
-  'Magical Capability': 'defense.armedForces',
+  'Arcane Support': 'defense.armedForces',
   'Legal Infrastructure': 'defense.threatAssessment',
   'Medical Readiness': 'defense.threatAssessment',
 });

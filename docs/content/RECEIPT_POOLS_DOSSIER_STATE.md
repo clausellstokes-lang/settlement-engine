@@ -2941,7 +2941,7 @@ may not say the contract is failing unless the economic arm supplies that.
 
 **RECEIPT:** `src/domain/display/defenseDisplay.js:183-250` (`deriveSupportingCapabilities`) · rendered `src/components/new/tabs/DefenseTab.jsx:330-357`
 **STATE-KEY:** six rows — `Economic Backing` (`Well-funded` / `Adequate` /
-`Underfunded` / `Critical`) · `Magical Capability` (`Arcane support` / `None`) ·
+`Underfunded` / `Critical`) · `Arcane Support` (`Arcane support` / `None`) ·
 `Legal Infrastructure` (`Court + Prison` / `Court only` / `Prison only` /
 `None`) · `Medical Readiness` (`Hospital present` / `Clergy care` / `None`) ·
 `Logistics & Supply` (`Granary present` / `No reserves`, modulated by port and
@@ -2978,12 +2978,12 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 2. `[unfolding]` The town has stopped being able to pay for its own defense and has not yet stopped having one, and the gap between those two facts is closing.
 3. `[street]` Nobody at {settlement} is being paid to defend it, and the people still doing it are doing it for reasons the town cannot rely on.
 
-**`Magical Capability: Arcane support`**
+**`Arcane Support: Arcane support`**
 1. `[ledger]` {settlement} has arcane provision behind its defenses: detection, warding and the ability to answer a spell with something other than a shield.
 2. `[street]` The town has people it calls on for the things soldiers cannot do, and calls on them rarely enough that it still counts as remarkable.
 3. `[counterforce]` What the walls at {settlement} cannot see is somebody's charge rather than nobody's, and the town would learn of such a thing from an account rendered rather than from an alarm raised.
 
-**`Magical Capability: None`**
+**`Arcane Support: None`**
 1. `[ledger]` {settlement}'s defense is entirely conventional. Anything that arrives invisible arrives unopposed, because there is nothing here that would know.
 2. `[counterforce]` Nothing has exploited the gap at {settlement}, and the gap is complete. Whatever has spared the town, it was not a ward.
 3. `[street]` The town's answer to anything it cannot see at {settlement} is to find out afterwards, and nothing in its arrangements offers it any other answer.

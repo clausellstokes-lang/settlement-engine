@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "e114adbcff0e25a6f11089904438fb459822aa82297abd91a0ab96dcd30e939d",
       "src/domain/display/stateProse/powerStateProse.js": "25683c4233065281f1e879c284249d5b2165fcf0c3e39235e093717dccb0c95a",
       "src/domain/display/stateProse/economyStateProse.js": "19782d3f280828fdd9b6ad1270aa647edcf3ea2e5696fc61e6c8918f9feff9f4",
-      "src/domain/display/stateProse/defenseStateProse.js": "753a06d862a7d7762e9bcf14f4d17cf153c66d7ea5b8606f0bbe489443d2fec9",
+      "src/domain/display/stateProse/defenseStateProse.js": "6d2782f3af924b72ff0d7f7795e9538c3f790005d6dadbded4ace26623c3ea6f",
       "src/domain/display/stateProse/stressorsStateProse.js": "0cb857d36b213ee0c4daa3453eb68ab1627a8f6985f3bf71224ce0a1cadd745e",
       "src/domain/display/stateProse/warFaithStateProse.js": "cf003edcea618016dbd640dbe5ca3c68e5dae52fe08ac3af4dd23ac80995f9d8",
       "src/domain/display/stateProse/dossierMounts.js": "f1a6d55018640598c321f0dd5bfcb6354645748d0dc6e8d610b3dc088e2baef1"
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1160
+    "producerIndexFiles": 1159
   },
   "totals": {
     "pools": 708,
@@ -3830,7 +3830,7 @@
     },
     {
       "block": "DS-DEF-6",
-      "pool": "Magical Capability: Arcane support",
+      "pool": "Arcane Support: Arcane support",
       "slotsFilled": [
         "settlement"
       ],
@@ -3874,7 +3874,7 @@
     },
     {
       "block": "DS-DEF-6",
-      "pool": "Magical Capability: None",
+      "pool": "Arcane Support: None",
       "slotsFilled": [
         "settlement"
       ],
@@ -48178,7 +48178,7 @@
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
-      "subject": "Magical Capability: Arcane support",
+      "subject": "Arcane Support: Arcane support",
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
@@ -48186,7 +48186,7 @@
     {
       "tier": "THIN",
       "block": "DS-DEF-6",
-      "subject": "Magical Capability: None",
+      "subject": "Arcane Support: None",
       "fields": [],
       "readingFunction": "(unresolved)",
       "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"

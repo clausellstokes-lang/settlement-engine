@@ -2761,7 +2761,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3
         }
       ],
-      "Magical Capability: Arcane support": [
+      "Arcane Support: Arcane support": [
         {
           "angle": "ledger",
           "text": "{settlement} has arcane provision behind its defenses: detection, warding and the ability to answer a spell with something other than a shield.",
@@ -2785,7 +2785,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 3
         }
       ],
-      "Magical Capability: None": [
+      "Arcane Support: None": [
         {
           "angle": "ledger",
           "text": "{settlement}'s defense is entirely conventional. Anything that arrives invisible arrives unopposed, because there is nothing here that would know.",
@@ -3266,7 +3266,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         ],
         "attach": []
       },
-      "Magical Capability: Arcane support": {
+      "Arcane Support: Arcane support": {
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
@@ -3281,7 +3281,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         ],
         "attach": []
       },
-      "Magical Capability: None": {
+      "Arcane Support: None": {
         "role": "spine",
         "variantCount": 3,
         "faceCounts": [
