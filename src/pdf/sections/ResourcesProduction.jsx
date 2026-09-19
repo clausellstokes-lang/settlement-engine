@@ -21,6 +21,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch, factionColors } from '../theme.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -80,7 +81,11 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
             {r.terrainAdvantages?.length > 0 ? (
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
                 {r.terrainAdvantages.map((t, i) => (
-                  <Tag key={`adv-${i}`} tone="good">{label(t)}</Tag>
+                  // THE RESOURCE LABEL SEAM (ODQ §934.22 item 2): these lists hold a MIX of
+                  // authored phrases, bare commodity words and raw RESOURCE_DATA keys, and
+                  // `humanize` could only GUESS a spelling from the key ('Hot Springs
+                  // Mineral') that disagreed with the catalogue ('Mineral Hot Springs').
+                  <Tag key={`adv-${i}`} tone="good">{resourceDisplayName(t)}</Tag>
                 ))}
               </View>
             ) : (
@@ -96,7 +101,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
             {r.terrainCriticals?.length > 0 ? (
               <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
                 {r.terrainCriticals.map((t, i) => (
-                  <Tag key={`crit-${i}`} tone="bad">{label(t)}</Tag>
+                  <Tag key={`crit-${i}`} tone="bad">{resourceDisplayName(t)}</Tag>
                 ))}
               </View>
             ) : (

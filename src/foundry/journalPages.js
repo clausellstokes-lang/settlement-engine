@@ -30,6 +30,7 @@ import {
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
+import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -255,8 +256,10 @@ function economicsPage(vm) {
     '',
     kv('Prosperity', e.prosperity),
     kv('Complexity', e.economicComplexity),
-    kv('Exports', (e.primaryExports || []).map(x => label(x)).filter(Boolean).join(', ')),
-    kv('Imports', (e.primaryImports || []).map(x => label(x)).filter(Boolean).join(', ')),
+    // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
+    // authored phrase, and the VTT journal printed both exactly as the record spells them.
+    kv('Exports', (e.primaryExports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Imports', (e.primaryImports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,

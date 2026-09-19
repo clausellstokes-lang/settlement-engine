@@ -31,6 +31,7 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 
@@ -349,6 +350,12 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── Geography ─────────────────────────────────────────────── */}
+      {/* THE RESOURCE LABEL SEAM (ODQ §934.22 item 2). These three lists are
+        * `resourceAnalysis`'s own persisted strings and they arrive as a MIX: authored
+        * phrases, bare lower-case commodity words, and raw RESOURCE_DATA keys. `humanize`
+        * could only GUESS a spelling from the key ('Hot Springs Mineral'), which agreed with
+        * neither the catalogue ('Mineral Hot Springs') nor the screen. The seam is the
+        * catalogue, and it cases every value the same way. */}
       {(o.geography?.terrainAdvantages?.length > 0 || o.geography?.terrainCriticals?.length > 0 || o.geography?.nearbyResources?.length > 0) && (
         <View style={{ marginTop: space.sm }} wrap={false}>
           <HairRule />
@@ -363,7 +370,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   items={o.geography.terrainAdvantages}
                   tone="good"
                   emptyText="None"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
@@ -374,7 +381,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   items={o.geography.terrainCriticals}
                   tone="bad"
                   emptyText="None"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
@@ -385,7 +392,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   items={o.geography.nearbyResources?.slice(0, 6) || []}
                   tone="muted"
                   emptyText="None recorded"
-                  itemRender={(it) => label(it)}
+                  itemRender={(it) => resourceDisplayName(it)}
                 />
               </View>
             }
