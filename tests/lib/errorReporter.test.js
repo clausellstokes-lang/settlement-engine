@@ -176,18 +176,30 @@ describe('benign browser notices are not application errors', () => {
     };
   }
 
-  it.each(NOTICES)('drops %s from the error log AND the network', async (notice) => {
-    const { beacon, reportError } = await loadWithEndpoint();
+  // One parameterless test looping over NOTICES in its body, with a per-notice
+  // assertion label — NOT `it.each`. A registration callback that declares a row
+  // parameter parks the whole file in the lighting census's each-family debt
+  // (tests/lint/sovereigntyLightingContract.walker.test.js), whose ceiling only
+  // ever shrinks. Every notice and every assertion is kept.
+  it('drops each known notice from the error log AND the network', async () => {
     const { logged, debugged } = spyConsole();
-    // The window 'error' listener forwards `e.error || e.message`; this notice
-    // carries no Error object, so a bare string is what actually arrives.
-    reportError(notice, { kind: 'window.error' });
-    expect(beacon).not.toHaveBeenCalled();
-    expect(logged).not.toHaveBeenCalled();
-    // …but the suppression itself is discoverable, once, at debug level.
-    expect(debugged).toHaveBeenCalledTimes(1);
-    expect(String(debugged.mock.calls[0][0])).toContain('ResizeObserver loop');
-    expect(debugged.mock.calls[0][1]).toBe(notice);
+    for (const notice of NOTICES) {
+      // Per-notice isolation: a fresh module (so the once-per-page-load debug
+      // breadcrumb re-arms) and counters cleared, since vi.spyOn hands back the
+      // SAME spy on a second call and its calls would otherwise accumulate.
+      logged.mockClear();
+      debugged.mockClear();
+      const { beacon, reportError } = await loadWithEndpoint();
+      // The window 'error' listener forwards `e.error || e.message`; this notice
+      // carries no Error object, so a bare string is what actually arrives.
+      reportError(notice, { kind: 'window.error' });
+      expect(beacon, notice).not.toHaveBeenCalled();
+      expect(logged, notice).not.toHaveBeenCalled();
+      // …but the suppression itself is discoverable, once, at debug level.
+      expect(debugged, notice).toHaveBeenCalledTimes(1);
+      expect(String(debugged.mock.calls[0][0]), notice).toContain('ResizeObserver loop');
+      expect(debugged.mock.calls[0][1], notice).toBe(notice);
+    }
   });
 
   it('announces the dropped class ONCE per page load, however many notices arrive', async () => {
