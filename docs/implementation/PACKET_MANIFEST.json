@@ -31110,9 +31110,10 @@
     },
     {
       "id": "EM-B1d",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1d.md",
       "verifiedBase": "50e1f237b985d9288d9a7cabcf2f8467f23c5e48",
+      "landedAt": "95e494bdb9c9481a5cf866188b322a75213d1551",
       "changeManifest": [
         {
           "_note": "UNION + VOCABULARY. `jailed` joins the NpcStatus typedef in codepoint order (a JSDoc comment: ZERO effective lines under skipComments), AND the new availability vocabulary is minted here: export const NPC_UNAVAILABLE_STATUSES = Object.freeze(['dead','exiled','jailed','removed']), placed immediately above IMPORTANCE_WEIGHT. ⭐ PLACEMENT MEASURED (packet §3.2, evidence §1): npcs.js is ABSENT from the generation worker's 220-module static closure and NO module inside that closure imports it, so the zero-slack ceiling (1,401,208, EXACT) cannot be touched and the tree-shaking question is MOOT BY PLACEMENT; it is NOT under /src/generators/ so the lazy engine is untouched; it IS in EAGER_FIRST_PAINT_MODULES, where the measured margin is 8,770 B against a ≤60 B bound. Its comment MUST carry both sentences of packet §6 (unavailability is NOT the house-roster reading). ⛔ This edit alone stales two committed edge-shared bundles — see the seven generated rows.",
@@ -31384,11 +31385,6 @@
           "tests/domain/espionageMission.test.js"
         ],
         [
-          "npm",
-          "run",
-          "build:edge-shared"
-        ],
-        [
           "node",
           "scripts/check-observed-shape-readers.mjs"
         ],
@@ -31410,6 +31406,11 @@
           "npm",
           "run",
           "typecheck:domain:strict"
+        ],
+        [
+          "npm",
+          "run",
+          "build:edge-shared"
         ]
       ]
     },
