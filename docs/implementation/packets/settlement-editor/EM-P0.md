@@ -1,6 +1,6 @@
 # Settlement editor / EM-P0 — THE PIPELINE SEAM: `runPipeline` hands `pins` to every step, each chooser consults them, and `generatePopulation` keeps ONE registration and ONE stream with its root/derive seam moved inside
 
-- **Status:** READY
+- **Status:** LANDED
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
 - **Packet version:** 2
@@ -8,6 +8,7 @@
   ledger `c22c25efc`). §0R records the refutation and what replaced it.
 - **Verified base:** `fixes-2026-09-18-consist` at `d9497e90fef775c1282fc9de6b1b2cee1b46882a`
 - **Last revalidated:** 2026-09-19 at `d9497e90fef775c1282fc9de6b1b2cee1b46882a` by the chair at promotion — re-pinned from d31af2cee under J-T1 (the eight measured paths byte-identical across the window by `git diff --stat`; the lane's object-id proof).
+- **Landed:** 2026-09-19 at `429ceed54d3eea87b0d05ed2b37ffbbb92f37911` on `fixes-2026-09-18-consist` (train EM-T2, alone; the build lane's §12 receipt is in the chair kit's findings/EM-P0.receipt.md; the goldens byte-identical — 525 rows, 41 sampled, 0 moved; the sealed verbs refused on the lighting refreeze the packet scheduled inside itself — ruled: the census re-derives at the terminal, never inside a packet; the terminal is check 2 run 15).
 - **Depends on:** `NONE`. ⭐ Measured in §0R.4: **EM-P0 defines the pin key spelling and EM-P2 registers against it**, not the reverse, so the train order stands — T1 = P0 (alone), T2 = P2, T3 = P1 (alone)
 - **Collision group:** ⚠ **THE PIPELINE'S SPINE. RIDES ALONE IN ITS TRAIN.** It reserves `src/generators/pipeline.js` and `src/generators/steps/generatePopulation.js`
 - **Commit authority:** edits only; the chair commits

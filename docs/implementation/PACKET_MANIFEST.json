@@ -30875,7 +30875,7 @@
     },
     {
       "id": "EM-P0",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P0.md",
       "verifiedBase": "d9497e90fef775c1282fc9de6b1b2cee1b46882a",
       "changeManifest": [
@@ -31071,7 +31071,8 @@
           "scripts/implementation-packets.mjs",
           "validate"
         ]
-      ]
+      ],
+      "landedAt": "429ceed54d3eea87b0d05ed2b37ffbbb92f37911"
     }
   ]
 }

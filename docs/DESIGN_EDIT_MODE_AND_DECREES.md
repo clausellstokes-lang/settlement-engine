@@ -251,3 +251,29 @@ An NPC carries a `status` and an institution a `state`, both typed roots set fro
 
 **Build.** Wave 3 gains **EM-E7 — missions**: `send-on-mission` over the casting and espionage forks (measured against `envoyCasting.js` and the espionage layer's registered forks), the away-on-mission status (measured: whether `NpcStatus` needs a value or the roster's absence set already covers it), the return at the tick. Wave 4's surfaces place the seals per card as above.
 
+## 18. Preconditions on the seals (the owner, ODQ §934.50; 2026-09-19)
+
+**The rule.** Some acts only make sense in a state of the world: one cannot accept a peace nobody offered. An op's `requires` (§2.3) therefore has TWO KINDS, and the two are handled by different parts of the editor.
+
+**World-state conditions decide which seals a card offers.** They are read from the record and the campaign, not from the registry: a pending peace offer from the counterparty; a force in the field; a siege in progress; a plot in motion; an envoy arrived; an open route; trade with that partner; an existing belief; a person present. A seal whose condition does not hold is not offered — this is not a guard refusing an act but the world's state determining which acts exist, exactly as the war card itself exists only for a town at war.
+
+| card | seal | world-state condition |
+|---|---|---|
+| war | Sue for peace | a war in progress with a counterparty (real or phantom) |
+| war | Accept the peace · Refuse it | a PENDING offer from the counterparty |
+| war | Direct the force · Resupply | a force in the field (resupply: with a supply line) |
+| war | Let the siege fall · hold | a siege in progress |
+| war | Let the coup fail · succeed | a plot in motion (or "Stir a coup" from the event catalogue first) |
+| trade | Receive the envoy · Turn the envoy away | an envoy arrived |
+| trade | Direct trade | an open route |
+| trade | Embargo | trade with that partner |
+| rumour | Confirm it · Cast doubt · Twist it | an existing belief entry |
+| person | Send on a mission | the person present (status active) and a target |
+| chronicle | Schedule an event | always (from the catalogue; `when` at or after the next tick) |
+
+**Registry conditions stay with the guards, suggestive as ruled (§2.7, §934.36).** Staging "the enemy sues for peace" and "accept the peace" in one tick is judged by the connection guard folded: reorder, fulfil, or proceed. Nothing blocks.
+
+**The DM still authors any sequence — as explicit acts.** When a seal is missing, the card says why in the herald's voice and names the act that would create the condition: "No peace has been offered. Make them sue for it, or wait." "Make them sue for peace" is itself a directive: a pin on the counterparty's own peace fork for a real neighbour, or a declared, record-only offer for a phantom (§13). Once staged, the acceptance appears and the registry orders the two. The precondition is never a wall; it is the next step, shown. The same holds for "Stir a coup", "Send an envoy to us" (a phantom's envoy, record-only until it arrives at the tick) and "Open a route".
+
+**What this changes in the build.** EM-B1a/B1b: `requires` becomes `{ world: [...], registry: [...] }`, the world half spelled as predicates over the record and the campaign by symbol; EM-D1: the seals read the world half and render the herald's reason line for a missing seal; EM-E4: the "make them" directives on the counterparty's forks join the off-stage set (record-only on a phantom).
+
