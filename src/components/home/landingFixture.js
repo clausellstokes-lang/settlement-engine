@@ -7,7 +7,9 @@
  * grounded EXCLUSIVELY in the derived receipts in voice.receipts. It lives in
  * the generator script (STOCK_NARRATION) and must be re-grounded whenever the
  * fixture is regenerated. Regenerate with:
- *   npx vite-node scripts/generate-landing-fixture.mjs -- --seed lf-033 --emit
+ *   node scripts/generate-landing-fixture.mjs --seed lf-033 --emit
+ * and verify with:
+ *   node scripts/generate-landing-fixture.mjs --check
  *
  * Provenance: seed `lf-033`, 12 one-week ticks of advanceCampaignWorld
  * over a 5-settlement region (fixture town + 4 neighbors), engine
@@ -17,7 +19,12 @@
  * store forge action as every other generation, so the artifact is a promise
  * an anonymous visitor can verify in one click. REGEN POLICY: regenerate this
  * fixture whenever engine generation output changes (goldens regen = signal),
- * or the frozen artifact and the button's live output will drift apart.
+ * or the frozen artifact and the button's live output will drift apart —
+ * tests/build/landingFixtureFreshness.test.js is what makes that drift RED.
+ *
+ * realm.advance is the TOWN'S OWN applied pulse events across those weeks (the
+ * landing's advance-time card shows what happened, not which band moved); the
+ * why-trace is kept beside it as the proof that a change carries its cause.
  *
  * Consumed ONLY by the lazy landing chunk (LandingBelowFold) — never imported
  * eagerly (first-paint budget).
@@ -39,6 +46,8 @@ export const fixture = {
       "population": 1500,
       "tradeRouteAccess": "random_trade",
       "culture": "random_culture",
+      "contentProfile": "grounded",
+      "contentBoundaries": null,
       "settlementAgeMode": "auto",
       "settlementAgeYears": 0,
       "monsterThreat": "random_threat",
@@ -67,8 +76,8 @@ export const fixture = {
     "population": 412,
     "tier": "village",
     "eyebrow": "road village · mountain",
-    "prose": "The road into Cnocby becomes a street at a point you can't precisely identify. The settlement grows around you gradually.",
-    "pressure": "Rónnat Sullivan is about to call it in.",
+    "prose": "Cnocby smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A proper village, large enough to have a market and small enough that strangers are noticed: earth-banked enclosures and older rounded foundations remain visible between newer halls.",
+    "pressure": "Odhrán MacCarthy's relationship with Nuada Walsh is more complicated than their public roles suggest. Nuada Walsh now operates in ways Odhrán MacCarthy would not approve of. Neither discusses the divergence directly.",
     "hooks": [
       {
         "kind": "NPC",
@@ -81,31 +90,31 @@ export const fixture = {
         "kind": "Hook",
         "tone": "warning",
         "tag": "derived · factions",
-        "text": "A neutral figure is being pressured by both The Free Alliance and The Establishment to take a side before the next council session."
+        "text": "A neutral figure is being pressured by both The Grey Council and The Establishment to take a side before the next council session."
       }
     ],
-    "hooksMore": 9
+    "hooksMore": 7
   },
   "voice": {
     "receipts": [
       {
         "label": "conflict",
-        "text": "The Free Alliance × The Establishment · succession to a council seat · stakes: political influence"
+        "text": "The Grey Council × The Establishment · control of the market licensing process · stakes: commercial supremacy"
       },
       {
         "label": "route",
-        "text": "road · Picked from pool: road, road, road, isolated, isolated."
+        "text": "road · Picked from coherence-safe pool: road, road, road, isolated, isolated."
       },
       {
         "label": "resource",
-        "text": "mountain_timber · present but depleted (Tier-weighted depletion (20%) marked this resource as depleted.)"
+        "text": "mountain_timber · present but depleted (The accessible mountain stands have been cleared faster than they can regrow.)"
       },
       {
         "label": "institution",
-        "text": "travelers_inn · selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)"
+        "text": "travelers_inn · selected (Base chance 59% lifted by ×1.01 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain timber that raised the travelers’ inn is mostly cut out. What remains worth holding is the seat: the Free Alliance and the Establishment both want the council chair, and both are leaning on the same neutral name to declare before the session. Rónnat Sullivan is about to call something in, and half the inn seems to know what. The mayor wants the cracks mended while the weather holds; no one asks which cracks he means."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. What is left worth holding is the licence book: the Grey Council and the Establishment both want the market licensing, and both are leaning on the same neutral name to declare before the session. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so."
   },
   "realm": {
     "whyTrace": [
@@ -114,7 +123,7 @@ export const fixture = {
         "from": "adequate",
         "to": "critical",
         "tone": "danger",
-        "reason": "Wartime pressure disrupts trade flows. Criminal pressure disrupts trade flows."
+        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
       },
       {
         "axis": "Religious authority",
@@ -128,7 +137,45 @@ export const fixture = {
         "from": "adequate",
         "to": "strained",
         "tone": "warning",
-        "reason": "Public legitimacy 25 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Criminal pressure erodes communal trust. Public legitimacy 32 colors trust."
+      }
+    ],
+    "advance": [
+      {
+        "week": "Week 1",
+        "season": "the spring of year 1",
+        "headline": "Cnocby turns to the faith of Vael",
+        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
+      },
+      {
+        "week": "Week 2",
+        "season": "the spring of year 1",
+        "headline": "Wartime pressure takes hold",
+        "text": "Cnocby shows enough conflict pressure for a new condition to emerge."
+      },
+      {
+        "week": "Week 4",
+        "season": "the spring of year 1",
+        "headline": "Religious conversion fracture has passed",
+        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
+      },
+      {
+        "week": "Week 7",
+        "season": "the spring of year 1",
+        "headline": "Nuada Walsh protects",
+        "text": "Nuada Walsh's protect followers goal advances through protect."
+      },
+      {
+        "week": "Week 10",
+        "season": "the spring of year 1",
+        "headline": "Criminal pressure takes hold",
+        "text": "Cnocby shows enough criminal pressure for a new condition to emerge."
+      },
+      {
+        "week": "Week 12",
+        "season": "the spring of year 1",
+        "headline": "Trade route strain takes hold",
+        "text": "Cnocby shows enough trade pressure for a new condition to emerge."
       }
     ],
     "chronicle": [
@@ -142,7 +189,7 @@ export const fixture = {
         "kind": "stressor",
         "tone": "war",
         "week": "Week 2",
-        "text": "Cnocby shows enough conflict pressure for a new condition to emerge."
+        "text": "Betrayal shock is beginning to take root in Keshigordu."
       },
       {
         "kind": "trade",
@@ -163,7 +210,7 @@ export const fixture = {
         "to": "Cnocby",
         "type": "border incident",
         "tone": "danger",
-        "week": "Week 12"
+        "week": "Week 4"
       }
     ],
     "pins": [
