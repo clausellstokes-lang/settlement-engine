@@ -67,6 +67,40 @@ export const GUIDANCE_SURFACES = Object.freeze([
 ]);
 
 /**
+ * ⭐ THE PAGE OF ORIGIN (owner order, ODQ §934.29): "if you leave that page where it
+ * happens, then the pop up does not follow you to the next page; if you return to that
+ * page, then it will come back until you dismiss it."
+ *
+ * A whisper is born of a MOMENT, and a moment happens on a PAGE. `origin` names the
+ * route view id(s) whose page opened that moment — the "Save this settlement" forward
+ * moves belong to the Create page where the world was forged, the library invitation to
+ * the Library, the realm teaching to the Realm. Off its origin the whisper is not
+ * eligible at all, so leaving the page takes it away and returning brings it back; only
+ * the explicit close retires it, through the device-local `sf:guidance:*` dismissal that
+ * outlives the route, the reload and the session (src/lib/guidance.js).
+ *
+ * ⛔ FAIL-CLOSED, AND THAT IS THE POINT. `isWhisperEligible` refuses a whisper whose
+ * caller supplied NO route, because the defect this law exists against was exactly a
+ * host that never asked which page it was on: PostGenCoach was mounted in the App shell
+ * (src/App.jsx), self-gating on "a settlement exists", so one generation left a fixed
+ * card floating over the Library, the Gallery, the Compendium and the account page until
+ * it was dismissed. A route-less context must therefore show NOTHING, never everything.
+ *
+ * These are route VIEW IDS from src/lib/routes.js (the `view` column), not paths — the
+ * walker cross-checks every declared origin against that table, so a renamed route reds
+ * here instead of silently orphaning a whisper.
+ */
+export const GUIDANCE_ORIGINS = Object.freeze([
+  'generate',     // /create — the forge, and the dossier it opens onto
+  'settlements',  // /settlements — the library, and a saved dossier re-read
+  'home',         // /home — the signed-in welcome
+  'gallery',      // /gallery — the community gallery
+  'realm',        // /realm — the realm hub
+  'map',          // /map — the realm's map alias (routes.js REDIRECTS map → realm,
+                  //   but the view id exists and a deep link lands on it first)
+]);
+
+/**
  * @typedef {Object} GuidanceTrigger
  * @property {string} [first] - the firsts-map milestone that GATES eligibility
  *   (e.g. 'first_generate'); the whisper is eligible only once the milestone is
@@ -91,14 +125,26 @@ export const GUIDANCE_SURFACES = Object.freeze([
  *   'teaching' class, false otherwise.
  * @property {string}  component     — the host component that mounts this whisper
  *   (the source-census cross-check).
+ * @property {ReadonlyArray<string>} origin — the route view id(s) whose page opened this
+ *   whisper's moment (GUIDANCE_ORIGINS). REQUIRED: a whisper with no origin renders
+ *   nowhere, because a hint that belongs to no page belongs to every page.
+ * @property {boolean} [summoned] - true when the reader OPENS this whisper themselves
+ *   (HelpPopover's topic hints: a "?" beside a config label). A summoned whisper is not
+ *   an unbidden pop-up, so it is addressed by id and sits OUTSIDE the one-at-a-time page
+ *   budget — otherwise clicking "?" on the Create page would be silently swallowed by
+ *   whatever teaching band happened to outrank it. Default false.
  */
 
 /** @param {GuidanceWhisper} w */
 const whisper = (w) => Object.freeze({
   glossaryRef: null,
   newbornOnly: w.budgetClass === 'teaching',
+  summoned: false,
   ...w,
   trigger: Object.freeze({ ...w.trigger }),
+  // Frozen so a consumer cannot push a route onto a whisper's origin at runtime and
+  // re-open the follow-me-everywhere defect one mutation at a time.
+  origin: Object.freeze([...(w.origin || [])]),
 });
 
 /**
@@ -113,6 +159,10 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'dossier_first_callouts',
     surface: 'dossier',
+    // The dossier is reached two ways and the band belongs to both: GenerateWizard
+    // mounts OutputContainer on /create the moment a world is forged, and
+    // SettlementDetail mounts the same container on /settlements/:id.
+    origin: ['generate', 'settlements'],
     lane: 'reader',
     register: 'plain',
     trigger: {
@@ -134,6 +184,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'postgen_read_dossier',
     surface: 'dossier',
+    origin: ['generate', 'settlements'],
     lane: 'reader',
     register: 'plain',
     trigger: { first: 'first_generate' },
@@ -145,6 +196,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'postgen_watch_simulated',
     surface: 'dossier',
+    origin: ['generate', 'settlements'],
     lane: 'reader',
     register: 'plain',
     trigger: { first: 'first_generate' },
@@ -156,6 +208,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'postgen_save_it',
     surface: 'dossier',
+    origin: ['generate', 'settlements'],
     lane: 'reader',
     register: 'plain',
     trigger: { first: 'first_generate' },
@@ -175,6 +228,10 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'wizard_next_steps',
     surface: 'wizard-postgen',
+    // ⭐ THE ORDER'S OWN CASE (§934.29). The forward moves are born at the forge, so
+    // they belong to /create and nowhere else. This whisper's host used to be mounted
+    // in the App shell and followed the reader to every route in the product.
+    origin: ['generate'],
     lane: 'builder',
     register: 'plain',
     trigger: {
@@ -192,6 +249,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'home_welcome_back',
     surface: 'home',
+    origin: ['home'],
     lane: 'keeper',
     register: 'plain',
     trigger: {
@@ -211,6 +269,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_trade_route',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.tradeRoute.body', glossaryRef: 'trade-routes',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -218,6 +277,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_terrain',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.terrain.body', glossaryRef: 'terrain',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -225,6 +285,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_culture',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.culture.body', glossaryRef: 'cultures',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -232,6 +293,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_monster_threat',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.monsterThreat.body', glossaryRef: 'threat',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -239,6 +301,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_magic_level',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.magicLevel.body', glossaryRef: 'magic',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -246,6 +309,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'config_tier',
     surface: 'config', lane: 'builder', register: 'plain',
+    origin: ['generate'], summoned: true,
     trigger: {}, priority: 10, newbornOnly: false,
     body: 'guidance.compendium.tier.body', glossaryRef: 'tiers',
     budgetClass: 'wayfinding', component: 'HelpPopover',
@@ -259,6 +323,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'library_empty_invitation',
     surface: 'library',
+    origin: ['settlements'],
     lane: 'reader',
     register: 'note',
     trigger: { condition: (ctx) => (ctx.data.savedCount || 0) === 0 },
@@ -273,6 +338,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'gallery_empty_invitation',
     surface: 'gallery', lane: 'reader', register: 'plain',
+    origin: ['gallery'],
     trigger: {}, priority: 40, newbornOnly: false,
     body: 'gallery.emptyBody', glossaryRef: null,
     budgetClass: 'wayfinding', component: 'GalleryList',
@@ -282,6 +348,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'realm_empty_invitation',
     surface: 'realm', lane: 'sovereign', register: 'plain',
+    origin: ['realm', 'map'],
     trigger: {}, priority: 40, newbornOnly: false,
     body: 'guidance.invitations.realm', glossaryRef: null,
     budgetClass: 'wayfinding', component: 'CampaignEmptyState',
@@ -292,6 +359,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'realm_orders_teaching',
     surface: 'realm', lane: 'sovereign', register: 'plain',
+    origin: ['realm', 'map'],
     trigger: {}, priority: 45,
     body: 'guidance.realmOrders', glossaryRef: null,
     budgetClass: 'teaching', component: 'RealmVerbComposer',
@@ -299,6 +367,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
   whisper({
     id: 'realm_docket_teaching',
     surface: 'realm', lane: 'sovereign', register: 'plain',
+    origin: ['realm', 'map'],
     trigger: {}, priority: 44,
     body: 'guidance.realmDocket', glossaryRef: null,
     budgetClass: 'teaching', component: 'RealmDocket',
@@ -385,6 +454,9 @@ export const GUIDANCE_REGISTRY = Object.freeze({
  * @property {boolean} isNewborn — true when the user is NOT a veteran (no saves);
  *   gates newbornOnly whispers.
  * @property {Record<string, unknown>} data - surface-specific signals for condition().
+ * @property {string} route — the ACTIVE route view id (src/lib/routes.js `view`). A
+ *   whisper is eligible only on a page it declares as an origin; a missing route makes
+ *   every whisper ineligible (fail-closed — see the GUIDANCE_ORIGINS header).
  */
 
 /** Whispers targeting a surface, highest-priority first. @param {string} surface */
@@ -400,11 +472,37 @@ export function whispersForSurface(surface) {
  * @param {GuidanceContext} ctx
  */
 export function isWhisperEligible(w, ctx) {
+  // ⭐ THE PAGE OF ORIGIN IS THE FIRST QUESTION (§934.29), and it is asked FAIL-CLOSED:
+  // no declared origin, or no route on the context, means this whisper renders nowhere.
+  // The alternative — treating "I don't know what page this is" as "show it" — is the
+  // exact shape of the defect the order cures.
+  if (!isWhisperOnRoute(w, ctx.route)) return false;
   if (ctx.isDismissed(w.id)) return false;
   if (w.newbornOnly && !ctx.isNewborn) return false;
   if (w.trigger.first && !ctx.firstAvailable(w.trigger.first)) return false;
   if (w.trigger.condition && !w.trigger.condition(ctx)) return false;
   return true;
+}
+
+/**
+ * Is this whisper's moment one that happened on `route`? Total and fail-closed: an
+ * absent route, an empty origin, or a route the whisper does not claim all answer no.
+ * @param {GuidanceWhisper} w
+ * @param {string|null|undefined} route the active route view id
+ * @returns {boolean}
+ */
+export function isWhisperOnRoute(w, route) {
+  if (!route) return false;
+  const origin = w?.origin;
+  if (!Array.isArray(origin) || origin.length === 0) return false;
+  return origin.includes(route);
+}
+
+/** Every whisper whose page of origin includes `route`, highest-priority first. */
+export function whispersForRoute(route) {
+  return GUIDANCE_WHISPERS
+    .filter((w) => isWhisperOnRoute(w, route))
+    .sort((a, b) => b.priority - a.priority);
 }
 
 /**
@@ -419,6 +517,32 @@ export function isWhisperEligible(w, ctx) {
 export function selectWhisper(surface, ctx) {
   for (const w of whispersForSurface(surface)) {
     if (isWhisperEligible(w, ctx)) return w;
+  }
+  return null;
+}
+
+/**
+ * ⭐ THE PAGE BUDGET (§934.29, "one hint at a time"): the single UNBIDDEN whisper a page
+ * may show, across every surface that page hosts, chosen by priority — never a stack.
+ *
+ * The per-surface budget above is not enough on its own, because one page hosts several
+ * surfaces: /create carries `dossier` (the teaching band), `wizard-postgen` (the forward
+ * moves) and `config` at once, and two of those would otherwise open together on a
+ * newborn's first forge. Priority decides, and the loser waits for the winner to be
+ * closed rather than stacking beside it.
+ *
+ * ⚠ SUMMONED WHISPERS ARE NOT IN THIS BUDGET and must not be: HelpPopover's six config
+ * hints open because the reader clicked "?" beside a label. Folding them in would mean a
+ * teaching band outranking a question the reader just asked out loud.
+ *
+ * @param {string} route the active route view id
+ * @param {GuidanceContext} ctx
+ * @returns {GuidanceWhisper|null}
+ */
+export function selectPageWhisper(route, ctx) {
+  for (const w of whispersForRoute(route)) {
+    if (w.summoned) continue;
+    if (isWhisperEligible(w, { ...ctx, route })) return w;
   }
   return null;
 }

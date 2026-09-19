@@ -21,10 +21,18 @@
  *
  * Positioning: a stacked banner at the top of the dossier tab content; the
  * content is what teaches (the inline-anchor approach was too brittle).
+ *
+ * ⭐ PAGE OF ORIGIN (ODQ §934.29). The band declares `origin: ['generate','settlements']`
+ * — the two routes that mount a dossier (GenerateWizard's OutputContainer on /create,
+ * SettlementDetail's on /settlements/:id). It reads the live route and hands it to the
+ * registry, because eligibility is FAIL-CLOSED on the route: a host that does not say
+ * which page it is on shows nothing. That is deliberate — the defect the order cures was
+ * a host that never asked.
  */
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
+import { useRoute } from '../../hooks/useRoute.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -50,6 +58,7 @@ const CALLOUTS = [
 const WHISPER = GUIDANCE_REGISTRY.whispers.find((w) => w.id === WHISPER_ID);
 
 export default function FirstDossierCallouts() {
+  const { view: route } = useRoute();
   const tier = useStore(s => s.auth.tier);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
   const settlement = useStore(s => s.settlement);
@@ -64,6 +73,7 @@ export default function FirstDossierCallouts() {
   // gate (has generated), the tier/savedCount condition, and the newborn gate.
   // Firsts are DERIVED from store signals (no eager firsts-map growth).
   const eligible = WHISPER && isWhisperEligible(WHISPER, {
+    route,                           // the page of origin gate (§934.29)
     isDismissed: () => false,        // handled by the local mirror above
     firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
     isNewborn: deriveGuidanceNewborn(savedCount),

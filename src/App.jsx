@@ -59,8 +59,12 @@ const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.js
 const SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx'));
 
 // The post-generate coach hosts the guidance registry's single wizard-postgen
-// whisper (the "what's next" moves). Self-gates on a settlement + the unified
-// sf:guidance dismissal; lazy keeps it off first paint (byte budget).
+// whisper (the "what's next" moves). It is mounted INSIDE <main>, keyed by the route
+// (ODQ §934.29: a pop-up belongs to its page of origin — leaving unmounts it, returning
+// mounts it fresh, and only the explicit close retires it). Lazy keeps it off first
+// paint (byte budget) and, just as importantly, keeps the guidance registry — a
+// zero-import lazy leaf — out of the entry closure, which is why the shell cannot hold
+// the origin table itself and the host asks the registry instead.
 const PostGenCoach = lazy(() => import('./components/PostGenCoach.jsx'));
 
 // The two DEV panels are always-mounted but NOT first-paint critical (they
@@ -557,7 +561,7 @@ export default function App() {
           until focused (.skip-link in index.css), it lets keyboard/SR users jump
           past the header/nav straight to <main id="main-content">. */}
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /><PostGenCoach /></Suspense>
+      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /></Suspense>
       <div
         // Painted clean views (home/settlements/gallery/compendium/pricing/account/
         // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream
@@ -731,6 +735,14 @@ export default function App() {
                 authLoading={authLoading}
                 params={params}
               />
+              {/* ⭐ THE PAGE'S OWN HINT (ODQ §934.29). The post-generate coach lives in
+                  the page's content flow, not in the shell's fixed chrome, so on a phone
+                  it sits inside what the reader is scrolling rather than over the bottom
+                  bar. `key={view}` makes the scoping STRUCTURAL: navigating away really
+                  unmounts it (its step position goes with it) and returning mounts it
+                  fresh, re-reading the dismissal. Which pages it may appear on is the
+                  registry's to say, not the shell's — the host asks. */}
+              <PostGenCoach key={view} />
             </Suspense>
           </FeatureErrorBoundary>
         </main>

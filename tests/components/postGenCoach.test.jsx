@@ -13,10 +13,22 @@
  *   - dismissal rides the UNIFIED sf:guidance store (not master's bespoke
  *     sf.postGenCoachDismissedAt), and the legacy sf:dismissed_whats_next
  *     dismissal read-once-migrates (WizardNextSteps' retained behaviour).
+ *
+ * ⭐ AND THE PAGE OF ORIGIN (owner order, ODQ §934.29). This coach was the order's own
+ * case: mounted in the App shell, it floated over every route in the product until
+ * dismissed. The `describe` at the foot walks the owner's four clauses through the real
+ * component — leave and it goes, return and it comes back, close and it is gone for good
+ * — driving the REAL router (window.history + the shell's own `sf:navigate` event) rather
+ * than a stubbed route, so the pin measures the wiring and not a prop.
+ *
+ * ⚠ jsdom's default location is `/`, which src/lib/routes.js resolves to DEFAULT_VIEW
+ * ('generate') — the coach's page of origin. That is why the pins above need no
+ * navigation; it is asserted outright in the origin block so the convenience cannot
+ * quietly become the reason they pass.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent, act } from '@testing-library/react';
 
 vi.mock('../../src/store/index.js', () => {
   const data = {
@@ -100,6 +112,11 @@ describe('PostGenCoach — what\'s-next steps', () => {
 
   it('shows the library save framing for signed-in users who can save', () => {
     useStore.__set({ canSave: () => true, auth: { tier: 'premium' } });
+    // THE PAGE BUDGET (§934.29): a signed-in newborn's first dossier is taught by the
+    // callouts band, which outranks this coach 60 to 50 on the same page. The band is
+    // dismissed here so the coach's own framing is what this pin measures — the ordering
+    // itself is pinned in the origin block below.
+    localStorage.setItem('sf:guidance:dossier_first_callouts', '1');
     render(<PostGenCoach />);
     clickNextUntil(() => screen.queryByText(/Save it to your library/i));
     expect(screen.getByText(/Save it to your library/i)).toBeTruthy();
@@ -137,5 +154,95 @@ describe('PostGenCoach — what\'s-next steps', () => {
     const view = render(<PostGenCoach />);
     expect(view.container.firstChild).toBeNull();
     expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
+  });
+});
+
+// ── THE PAGE OF ORIGIN (ODQ §934.29) ──────────────────────────────────────────────
+// Driven through the real router: `navigateTo` pushes a path and fires the same
+// `sf:navigate` event src/hooks/useRoute.js subscribes to, so a mounted coach re-renders
+// exactly as it does in the product.
+function navigateTo(path) {
+  // ⛔ WRAPPED IN act(). `useRoute` is a useSyncExternalStore subscription, so the event
+  // below is an EXTERNAL store update: React schedules the re-render but testing-library
+  // never flushes it, and the assertion that follows reads the pre-navigation DOM. The
+  // first draft of these pins failed exactly that way — the coach "followed" the reader
+  // to /gallery in the test while behaving correctly in the product.
+  act(() => {
+    window.history.pushState(null, '', path);
+    window.dispatchEvent(new Event('sf:navigate'));
+  });
+}
+
+describe('PostGenCoach — the page of origin (ODQ §934.29)', () => {
+  beforeEach(() => {
+    try { localStorage.clear(); } catch { /* no-op */ }
+    navigateTo('/create');
+    useStore.__set({
+      settlement: { tier: 'Village' },
+      canSave: () => false,
+      auth: { tier: 'anon' },
+      activeSaveId: null,
+      savedSettlements: [],
+    });
+  });
+  afterEach(() => { cleanup(); navigateTo('/'); });
+
+  it('the unnavigated default really is /create (the convenience, stated outright)', () => {
+    navigateTo('/');
+    const { container } = render(<PostGenCoach />);
+    expect(container.firstChild, 'the bare root resolves to the coach\'s own page').not.toBeNull();
+  });
+
+  it('LEAVE — a mounted coach disappears the moment the route changes', () => {
+    const view = render(<PostGenCoach />);
+    expect(view.container.firstChild).not.toBeNull();
+    navigateTo('/settlements');
+    expect(view.container.firstChild, 'the coach followed the reader to the Library').toBeNull();
+    navigateTo('/gallery');
+    expect(view.container.firstChild, 'the coach followed the reader to the Gallery').toBeNull();
+  });
+
+  it('RETURN — it comes back on /create, undismissed', () => {
+    const view = render(<PostGenCoach />);
+    navigateTo('/gallery');
+    expect(view.container.firstChild).toBeNull();
+    navigateTo('/create');
+    expect(view.container.firstChild, 'leaving the page must not retire the coach').not.toBeNull();
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBeNull();
+  });
+
+  it('DISMISS — the explicit close retires it, and returning does NOT bring it back', () => {
+    const view = render(<PostGenCoach />);
+    fireEvent.click(screen.getByRole('button', { name: /got it from here/i }));
+    expect(view.container.firstChild).toBeNull();
+    navigateTo('/gallery');
+    navigateTo('/create');
+    expect(view.container.firstChild).toBeNull();
+    // …and on a fresh mount, which is what a reload is.
+    cleanup();
+    const reloaded = render(<PostGenCoach />);
+    expect(reloaded.container.firstChild).toBeNull();
+  });
+
+  it('a dossier route that is NOT this whisper\'s origin shows nothing either', () => {
+    // /settlements/:id mounts the same dossier the forge opens onto, and the callouts band
+    // is registered for it — but the forward MOVES belong to the forge. A saved dossier is
+    // not a just-forged one.
+    navigateTo('/settlements/westhollow');
+    const { container } = render(<PostGenCoach />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('THE BUDGET — a signed-in newborn sees the callouts band first, the coach after', () => {
+    useStore.__set({ canSave: () => true, auth: { tier: 'free' }, savedSettlements: [] });
+    const blocked = render(<PostGenCoach />);
+    expect(
+      blocked.container.firstChild,
+      'the coach stacked beside the higher-priority first-dossier teaching band',
+    ).toBeNull();
+    cleanup();
+    localStorage.setItem('sf:guidance:dossier_first_callouts', '1');
+    const freed = render(<PostGenCoach />);
+    expect(freed.container.firstChild, 'the coach never arrived after the band was closed').not.toBeNull();
   });
 });

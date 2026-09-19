@@ -21,27 +21,52 @@
  * frame, ramp tones) — the same material tokens the WizardNextSteps card used —
  * NOT master's dark-ink rgba-wash floating card, which the kill-list forbids.
  *
- * Visibility: a settlement is on screen AND the unified guidance dismissal
- * (sf:guidance:wizard_next_steps) is not set. Renders nothing otherwise, so it
- * is safe to mount unconditionally at the App level. The pure step builder is
- * src/components/generate/nextSteps.js (unit-tested in wizardNextSteps.test.js).
+ * ⭐ THE PAGE OF ORIGIN (owner order, ODQ §934.29). This coach USED TO BE THE ORDER'S
+ * OWN EXAMPLE. It was mounted in the App shell (src/App.jsx, beside the sync banners)
+ * and self-gated on nothing but "a settlement exists", so one generation left a fixed
+ * card floating over the Library, the Gallery, the Compendium, the account page and
+ * every legal page until it was dismissed — the pop-up following the reader off the
+ * page where its moment happened. It now:
+ *   • reads the ACTIVE ROUTE and renders only on its registered origin (/create, where
+ *     the world was forged). Leave, and it is gone; come back, and it is there again.
+ *   • asks the registry's PAGE BUDGET rather than only its own surface, so it never
+ *     stacks beside a higher-priority band on the same page (the first-dossier teaching
+ *     callouts outrank it at 60 to 50 and it waits for them to be closed).
+ *   • sits INSIDE the page's content flow on a phone instead of floating over the
+ *     chrome, and keeps the lifted bottom-right card on the desktop.
+ * Only the explicit close retires it, through the device-local sf:guidance:* dismissal,
+ * which outlives the route change, the reload and the session (src/lib/guidance.js).
+ *
+ * Visibility: a settlement is on screen, the route is this whisper's page of origin,
+ * the page budget picks this whisper, AND the unified guidance dismissal
+ * (sf:guidance:wizard_next_steps) is not set. Renders nothing otherwise. The pure step
+ * builder is src/components/generate/nextSteps.js (unit-tested in wizardNextSteps.test.js).
  *
  * @enforced-by tests/domain/guidanceRegistry.walker.test.js (this is the
  *   registered host of the wizard_next_steps whisper — imports guidance + names
  *   the whisper id, so the walker's mounted/wired check passes)
+ * @enforced-by tests/lint/guidanceOrigin.walker.test.js (the origin law: every
+ *   whisper declares a page, and no guidance host is mounted in the app shell)
+ * @enforced-by tests/components/postGenCoach.test.jsx (leave → gone, return → back,
+ *   close → gone forever)
  */
 
 import { useState } from 'react';
-import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, CHROME, bottomClearance, aboveFooter, aboveBottomNav } from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, aboveFooter, aboveBottomNav } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
+import { useRoute } from '../hooks/useRoute.js';
 import Button from './primitives/Button.jsx';
-import IconButton from './primitives/IconButton.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
+import { useDialogDismiss } from './primitives/useDialogFocusTrap.js';
 import { buildNextSteps } from './generate/nextSteps.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../lib/guidance.js';
+import {
+  selectPageWhisper, deriveGuidanceFirst, deriveGuidanceNewborn,
+} from '../domain/display/guidanceRegistry.js';
 
 // The wizard-postgen whisper this coach hosts (the guidance-registry id + the
 // unified dismissal stem). Naming it here is also what the walker's host-wired
@@ -56,18 +81,51 @@ export default function PostGenCoach() {
   const activeSaveId = useStore(s => s.activeSaveId);
   const savedSettlements = useStore(s => s.savedSettlements);
 
+  // The ACTIVE PAGE. The coach asks which route it is on rather than assuming the
+  // whole product is its page — the §934.29 cure. `useRoute` is the same
+  // useSyncExternalStore subscription the shell uses, so a navigation re-renders
+  // this component and the answer below changes with it.
+  const { view: route } = useRoute();
+
   // Read the dismissal once on mount so a fresh dismiss this session doesn't
   // re-hide the coach mid-flow.
   const [alreadyDismissed] = useState(() => isGuidanceDismissed(WHISPER_ID));
   const [step, setStep] = useState(0);
   const [dismissedThisSession, setDismissedThisSession] = useState(false);
-  // Mobile: the card must clear the fixed bottom nav + safe area (§767.3(g) —
-  // measured 21px of the card sitting over the nav at 375px with bottom:24).
+  // Escape puts the hint away FOR NOW; only the × retires it (§934.29). The two are
+  // deliberately different doors onto the same card: a reader pressing Escape is
+  // clearing their screen, not answering "never show me this again". This state dies
+  // with the mount, and the mount is keyed to the route (src/App.jsx), so returning to
+  // /create brings the hint back exactly as leaving the page does.
+  const [hiddenThisVisit, setHiddenThisVisit] = useState(false);
+  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). The coach is NOT modal — it
+  // sits in the page's own flow on a phone and beside it on the desktop — so it takes
+  // the non-modal half of the lifecycle: Escape dismisses and focus goes back, Tab is
+  // never trapped. Trapping here would strand a reader inside a hint about the dossier
+  // they are trying to read.
+  const cardRef = useDialogDismiss(!hiddenThisVisit, () => setHiddenThisVisit(true));
+  // Phone: the card leaves the chrome entirely and sits in the page's own scroll
+  // flow (§934.29), so it can never cover the bottom bar or the hero. Desktop keeps
+  // the lifted bottom-right card.
   const isMobile = useIsMobile();
 
   if (alreadyDismissed) return null;
   if (dismissedThisSession) return null;
+  if (hiddenThisVisit) return null;
   if (!settlement) return null;
+
+  // ⭐ THE PAGE BUDGET decides, not this component. Off its origin route the registry
+  // returns something else (or nothing) and the coach renders nothing; on /create it
+  // yields to any higher-priority unbidden whisper rather than stacking beside it.
+  // Every signal here is derived from store fields this component already reads.
+  const savedCount = Array.isArray(savedSettlements) ? savedSettlements.length : 0;
+  const pageWhisper = selectPageWhisper(route, {
+    isDismissed: isGuidanceDismissed,
+    firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
+    isNewborn: deriveGuidanceNewborn(savedCount),
+    data: { tier: authTier, savedCount, hasSettlement: !!settlement },
+  });
+  if (pageWhisper?.id !== WHISPER_ID) return null;
 
   // Each forward "what's next" move (save, export, refine, place) is its own
   // panel — one idea per screen. "Generate another" is the builder's detached
@@ -96,23 +154,35 @@ export default function PostGenCoach() {
     if (step > 0) setStep(s => s - 1);
   }
 
+  // THE DESKTOP CARD — lifted bottom-right chrome. The COACH layer (900). The feedback
+  // panel (FeedbackWidget) sits one step above at 910 so, when both bottom-right panels
+  // are shown together, stacking is deterministic (M10). See the Z_LAYERS manifest
+  // (scripts/.ui-a11y-contract.json). aboveFooter lifts it over the pinned footer (owner
+  // order 2026-09-16) and aboveBottomNav clears the bottom bar from 640 to 1023 px (0px
+  // from 1024 up).
+  const floating = {
+    position: 'fixed',
+    bottom: aboveFooter(aboveBottomNav(24)), right: 24, zIndex: 900,
+    width: 340, maxWidth: 'calc(100vw - 48px)',
+  };
+  // THE PHONE CARD — in the page's own scroll container (§934.29). No fixed position, so
+  // there is no bottom bar to clear and no hero to cover: it is part of the page, and it
+  // leaves with the page. `bottomClearance`/`CHROME.fabLift` went with the fixed phone
+  // branch; the bottom-anchored-chrome census still reads ONE lifted site here (the
+  // desktop card above), which is what its register claims.
+  const inPage = {
+    position: 'relative',
+    width: '100%', marginTop: SP.xl, marginBottom: SP.md,
+  };
+
   return (
     <div
+      ref={cardRef}
       role="dialog"
       aria-labelledby="postgen-coach-title"
+      tabIndex={-1}
       style={{
-        position: 'fixed',
-        // The COACH layer (900). The feedback panel (FeedbackWidget) sits one
-        // step above at 910 so, when both bottom-right panels are shown
-        // together, stacking is deterministic (M10). See the Z_LAYERS manifest
-        // (scripts/.ui-a11y-contract.json).
-        // Mobile bottom offset rides the house clearance helper so the card
-        // sits above the bottom nav + home indicator, like every other fixed
-        // bottom overlay (§767.3(g)). aboveFooter lifts it over the desktop pinned
-        // footer (owner order 2026-09-16); the inset is 0px on phones. From 640 to 1023 px
-        // the desktop value also clears the bottom bar (aboveBottomNav; 0px from 1024 up).
-        bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(24)), right: 24, zIndex: 900,
-        width: 340, maxWidth: 'calc(100vw - 48px)',
+        ...(isMobile ? inPage : floating),
         background: CARD,
         border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK,
@@ -134,13 +204,13 @@ export default function PostGenCoach() {
         <span style={{ fontSize: FS.xs, color: MUTED, flex: 1, minWidth: 0 }}>
           {guide.headline}
         </span>
-        <IconButton
-          Icon={X}
-          label="Dismiss what's next"
-          onClick={close}
-          tone="default"
-          size="lg"
-        />
+        {/* ⭐ THE SAME DOOR AS EVERY OTHER POP-UP (owner order, ODQ §934.31). This hint's
+            explicit dismissal IS a dialog close, so it wears the house control rather
+            than a private label: "Dismiss what's next" named a verb no other surface
+            used, and a reader cannot learn an exit that is worded once. Closing here is
+            still the ONLY thing that retires the hint (§934.29) — Escape and navigation
+            put it away for now, the × puts it away for good. */}
+        <DialogClose onClose={close} tone="default" />
       </div>
 
       {/* Body — one forward move per panel. */}

@@ -393,7 +393,14 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
 
 describe('budget pin — one whisper per surface, ever', () => {
   // A newborn on a fresh first dossier: every dossier whisper is eligible.
+  // ⭐ `route` JOINED THIS FIXTURE WITH THE PAGE-OF-ORIGIN LAW (ODQ §934.29). Eligibility
+  // is now FAIL-CLOSED on the route — a context that cannot say which page it is on shows
+  // nothing — so a route-less fixture makes every whisper ineligible and this budget pin
+  // measures an empty set. '/create' is where a first dossier is forged, which is the
+  // moment this pin was always describing. The fail-closed behaviour itself is pinned in
+  // tests/lint/guidanceOrigin.walker.test.js; here it must simply be satisfied.
   const newbornDossierCtx = {
+    route: 'generate',
     isDismissed: () => false,
     firstAvailable: () => true,
     isNewborn: true,
@@ -422,6 +429,9 @@ describe('budget pin — one whisper per surface, ever', () => {
 describe('firsts-backfill pin — a veteran sees no newborn hints', () => {
   // A veteran: NOT newborn, every first behind them, nothing dismissed.
   const veteranCtx = {
+    // On the dossier's own page (§934.29), so this pin keeps measuring the NEWBORN gate
+    // rather than passing because the route gate refused everything first.
+    route: 'generate',
     isDismissed: () => false,
     firstAvailable: () => true,
     isNewborn: false,
