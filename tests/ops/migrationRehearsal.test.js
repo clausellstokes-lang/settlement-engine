@@ -75,8 +75,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(200);
-    expect(plan.pendingCount).toBe(79);
+    expect(plan.repoHead).toBe(201);
+    expect(plan.pendingCount).toBe(80);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -97,17 +97,18 @@ describe('bounded migration rehearsal plan', () => {
       [198, 198],
       [199, 199],
       [200, 200],
+      [201, 201],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 79 }, (_, index) => 122 + index),
+      Array.from({ length: 80 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
-    expect(plan.waves.at(-9)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'surveyor-probe-and-tier-price')).toMatchObject({
       id: 'surveyor-probe-and-tier-price',
       from: 191,
       to: 192,
@@ -119,7 +120,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'spend_credits',
       }],
     });
-    expect(plan.waves.at(-8)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'bilateral-user-route-command')).toMatchObject({
       id: 'bilateral-user-route-command',
       from: 193,
       to: 193,
@@ -131,7 +132,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'assert_create_route_half',
       }],
     });
-    expect(plan.waves.at(-7)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'operator-messages-consent-and-courier')).toMatchObject({
       id: 'operator-messages-consent-and-courier',
       from: 194,
       to: 194,
@@ -155,7 +156,7 @@ describe('bounded migration rehearsal plan', () => {
         name: 'list_my_operator_messages',
       }],
     });
-    expect(plan.waves.at(-6)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'civility-guard-and-public-identity')).toMatchObject({
       id: 'civility-guard-and-public-identity',
       from: 195,
       to: 195,
@@ -177,7 +178,7 @@ describe('bounded migration rehearsal plan', () => {
     // diagnostic soak harness; no running code path reads the table, which is why its
     // forward-only posture is cheap and why reversing it is nonetheless a
     // data-destroying act that must be deliberate.
-    expect(plan.waves.at(-5)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'simulation-metrics-storage')).toMatchObject({
       id: 'simulation-metrics-storage',
       from: 196,
       to: 196,
@@ -199,7 +200,7 @@ describe('bounded migration rehearsal plan', () => {
     // existing column, and its whole risk is WHICH rows. Its `expectedObjects` is
     // therefore a single already-existing table, and the thing an operator must
     // actually review is the predicate, not the DDL.
-    expect(plan.waves.at(-4)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'consent-person-adjacent-default')).toMatchObject({
       id: 'consent-person-adjacent-default',
       from: 197,
       to: 197,
@@ -227,7 +228,7 @@ describe('bounded migration rehearsal plan', () => {
     // together: the durable aggregate that must exist BEFORE the window shortens, and
     // the two prune/maintenance functions that decide what disappears. Pinning only
     // the table would let a rehearsal call the wave "additive".
-    expect(plan.waves.at(-3)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'retention-numbers')).toMatchObject({
       id: 'retention-numbers',
       from: 198,
       to: 198,
@@ -284,13 +285,29 @@ describe('bounded migration rehearsal plan', () => {
     // wall, the 049/056 idiom. No table, no column, no function, no row; the JS wall
     // and migration 185 already enforce the same law, so this is its only
     // not-yet-true-in-production half. Deployment stays the owner's manual act.
-    expect(plan.waves.at(-1)).toMatchObject({
+    expect(plan.waves.find((wave) => wave.id === 'deity-authored-character-check')).toMatchObject({
       id: 'deity-authored-character-check',
       from: 200,
       to: 200,
       expectedObjects: [{
         kind: 'table',
         name: 'public.custom_content',
+      }],
+    });
+    // ⭐ THE NEW TAIL WAVE (201, ODQ §934.28): one re-stated SECURITY DEFINER function —
+    // has_surveyor_entitlement() is 139's body plus the staff disjunct, checked before the
+    // entitlement row. No table, no column, no policy, no row, no entitlement minted; the
+    // nine edge functions that gate on it are untouched. Deployment stays the owner's manual
+    // act, so the applied head (200) sits behind this repo head by design until then.
+    // Every earlier pin above now re-points BY ID (the relative `at(-N)` pins rotted the
+    // moment this wave was appended — exactly the class the 199 comment warned about).
+    expect(plan.waves.at(-1)).toMatchObject({
+      id: 'staff-unlock-surveyor-entitlement',
+      from: 201,
+      to: 201,
+      expectedObjects: [{
+        kind: 'function',
+        name: 'has_surveyor_entitlement',
       }],
     });
     // …and 199, like 197, takes its posture from its OWN annotation rather than the wave
@@ -388,6 +405,27 @@ describe('bounded migration rehearsal plan', () => {
     }
   });
 
+  it('plans from a wave boundary the ledger has reached, and refuses a head inside a wave', () => {
+    // Production sits at 200 (wave 200's `to`) since the owner's 2026-09-16 push: the live
+    // plan starts THERE and carries only the waves past it, without rebasing the train's
+    // historical record. A head inside a wave has no checked-in wave describing the
+    // remainder, so it is still refused with the boundaries named.
+    const live = buildMigrationRehearsalPlan({
+      migrationDirectory: MIGRATIONS,
+      rollbackDirectory: ROLLBACK,
+      appliedHead: 200,
+    });
+    expect(live).toMatchObject({ appliedHead: 200, repoHead: 201, pendingCount: 1 });
+    expect(live.waves.map(({ id, from, to }) => [id, from, to])).toEqual([
+      ['staff-unlock-surveyor-entitlement', 201, 201],
+    ]);
+    expect(() => buildMigrationRehearsalPlan({
+      migrationDirectory: MIGRATIONS,
+      rollbackDirectory: ROLLBACK,
+      appliedHead: 150,
+    })).toThrow(/wave boundaries are 121, 136, 156, .*200, 201, but the ledger says 150/);
+  });
+
   it('stages no migration beyond the selected wave boundary', () => {
     const snapshot = captureWaveWorkspaceSnapshot(plan);
     const staged = stageWaveWorkspace(136, snapshot);
@@ -395,8 +433,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 200,
-      migrationCount: 200,
+      repoHead: 201,
+      migrationCount: 201,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -518,7 +556,7 @@ describe('clone admission is positive and source-bound', () => {
     const liveAppliedHead = JSON.parse(readFileSync(join(ROOT, 'supabase', 'applied-head.json'), 'utf8')).appliedHead;
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: liveAppliedHead,
-      repoHead: 200,
+      repoHead: 201,
     });
   });
 });

@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 200;
+export const MIGRATION_TRAIN_REPO_HEAD = 201;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -513,6 +513,41 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({ kind: 'table', name: 'public.custom_content' }),
     ]),
   }),
+  Object.freeze({
+    id: 'staff-unlock-surveyor-entitlement',
+    from: 201,
+    to: 201,
+    purpose: 'ODQ §934.28 (the owner: every paid feature unlocked for developers and admins, '
+      + 'for now): ONE re-stated SECURITY DEFINER function. public.has_surveyor_entitlement() '
+      + 'is 139\'s body verbatim plus a single disjunct — `or public.current_user_is_privileged()` '
+      + '— checked BEFORE the entitlement row so a staff account never depends on one existing. '
+      + 'That function is the gate nine edge functions and surveyor_byok_set (159) route through, '
+      + 'so curing it here makes the client\'s staff predicate and the server agree by construction '
+      + 'instead of by vigilance. It creates no table, no column, no policy and no row; it mints '
+      + 'no entitlement, leaves the surveyor_stage_enabled() kill switch and has_dossier_entitlement '
+      + '(108) untouched, and opens no purchase. The role it honours is not client-writable (018\'s '
+      + 'profiles UPDATE policy pins role; 061 locks the moderation columns). Reviewed at the '
+      + '2026-09-18 fixes landing when the scope sentinel demanded the manifest extend; DEPLOYMENT '
+      + 'remains the owner\'s manual act (`supabase db push` plus the applied-head bump in the same '
+      + 'act), and until it the repo head sits visibly ahead of the applied head by design.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 199, this wave is one re-stated function and its own @rollback annotation spells '
+        + 'the whole reversal out: recreate 139\'s body verbatim, i.e. the same function with the '
+        + 'privileged disjunct removed — which is why 201 classifies as documented-manual-reversal '
+        + 'rather than taking the wave policy. Nothing is destroyed on reversal: the function holds '
+        + 'no state and no row was minted, and the only consequence is that staff accounts are '
+        + 'refused on the AI layer exactly as they were before 201 — the state production is in '
+        + 'until the owner applies it. The client\'s companion switch, STAFF_UNLOCK_ALL_PAID in '
+        + 'src/lib/staffEntitlements.js, is one line in the other direction.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'has_surveyor_entitlement' }),
+    ]),
+  }),
 ]);
 
 const MIGRATION_FILE = /^(\d+)_.*\.sql$/;
@@ -658,10 +693,20 @@ export function buildMigrationRehearsalPlan({
       waves: Object.freeze([]),
     });
   }
-  if (appliedHead !== MIGRATION_TRAIN_BASE_HEAD) {
+  // The checked-in train keeps every wave it ever planned — the historical record of
+  // how 122–200 reached production is part of what this file attests. Production
+  // catching up to a WAVE BOUNDARY (the owner's 2026-09-16 push took the ledger to
+  // 200, exactly wave 200's `to`) therefore does not rebase the train: the live plan
+  // simply starts at that boundary and carries the waves past it. A ledger head that
+  // sits INSIDE a wave is still refused, because no checked-in wave describes the
+  // half-applied remainder and inventing one here would be the rehearsal lying about
+  // what it is about to run.
+  const boundaries = [MIGRATION_TRAIN_BASE_HEAD, ...waves.map((wave) => wave.to)];
+  if (!boundaries.includes(appliedHead)) {
     throw new Error(
-      `The checked-in wave train starts at applied head ${MIGRATION_TRAIN_BASE_HEAD}, `
-      + `but the ledger says ${appliedHead}. Rebase and review the wave boundaries.`,
+      `The checked-in wave train starts at applied head ${MIGRATION_TRAIN_BASE_HEAD} `
+      + `and its wave boundaries are ${boundaries.join(', ')}, but the ledger says `
+      + `${appliedHead}. Rebase and review the wave boundaries.`,
     );
   }
   if (repoHead !== MIGRATION_TRAIN_REPO_HEAD) {
@@ -673,7 +718,7 @@ export function buildMigrationRehearsalPlan({
 
   const pending = files.filter((migration) => migration.number > appliedHead);
   const covered = [];
-  const plannedWaves = waves.map((wave) => {
+  const plannedWaves = waves.filter((wave) => wave.from > appliedHead).map((wave) => {
     const migrations = pending
       .filter((migration) =>
         migration.number >= wave.from && migration.number <= wave.to)
