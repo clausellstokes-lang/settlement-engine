@@ -94,11 +94,12 @@ import {
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
+  RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema21Baseline,
+  validateSchema22Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -161,7 +162,17 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`
  *     that light `relationships.network` in the paid PDF. Three NEW rows in one new file,
  *     one of them a DECLARED identity, so it is the first rung to GROW the bank
- *     (60/39 -> 61/40) and the fence's first real exercise. THE LIVE AUTHORITY.
+ *     (60/39 -> 61/40) and the fence's first real exercise (RETIRED).
+ * 22 = schema 21's topology, tag law and declared roster UNCHANGED, re-governed to a
+ *     register that FOLLOWS that same assembler DOWN A LAYER. ODQ §934.16: a domain-side
+ *     reader of the relationship keys is a governed register migration, so the assembler
+ *     moved to `src/domain/display/stateProse/` and its `neighbourNetwork` and
+ *     `interSettlementRelationships` rows moved with it; ODQ §934.18 then made the printed
+ *     Relationships block derive its engagements too, retiring the LAST read of
+ *     `crossSettlementConflicts` in the estate. TWO rows move address, TWO are deleted, and
+ *     NO row is added anywhere. The identity `crossSettlementConflicts on settlement`
+ *     reaches ZERO addresses. The bank does not move (61/40): the declared identity changes
+ *     address and not count. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -178,6 +189,7 @@ export {
   RETIRED_LINEAGE_REANCHOR_BASELINE_SCHEMA,
   RETIRED_EXEMPTION_RETIREMENT_BASELINE_SCHEMA,
   RETIRED_BANK_FENCE_BASELINE_SCHEMA,
+  RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1357,7 +1369,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema21Baseline(baseline);
+  validateSchema22Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2734,22 +2746,41 @@ export function baselineOf({
       'write — because the walker keeps the bank as a LITERAL by ruling and that literal',
       'stranded at the schema-19 re-freeze (62/41 -> 60/39 in a one-file commit, red at its',
       'own tip). The fence stands; 20 itself moved no row.',
-      'SCHEMA 21 = schema 20\'s topology, tag law and eight-identity declared roster, all',
-      'UNCHANGED, re-governed to a register that ADMITS THREE ROWS. ODQ §934.9 lit the paid',
-      'PDF\'s `relationships.network` position, which had been mounted and starved: its two',
-      'lists now come from src/components/new/relationshipsDeskRead.js, and that assembler',
-      'reads `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`',
-      '— three keys written when a world is SAVED, LINKED or IMPORTED and never by the',
-      'generation pipeline this instrument executes, so the scan convicts every reader of them',
-      'and is RIGHT to. Three NEW rows, one read each, all in that one file; nothing moves',
-      'anywhere else. One of the three is the DECLARED identity `neighbourNetwork on',
-      'settlement`, so its row is auto-tagged like all 25 of its siblings and the bank GROWS',
-      '60 -> 61 reads across 39 -> 40 tagged addresses — the first bank growth since the fence',
-      'was minted, and therefore its first real exercise. The other two stay ORDINARY rows,',
-      'matching the estate\'s own treatment of those identities (7 ordinary rows for',
-      '`interSettlementRelationships`, 1 for `crossSettlementConflicts`), and',
-      '`crossSettlementConflicts` could not be declared even if the posture changed: NOTHING',
-      'in src/ writes that key, and gate 0 refuses an entry whose named writer does not.',
+      'SCHEMA 21 (RETIRED) ADMITTED THREE ROWS: ODQ §934.9 lit the paid PDF\'s',
+      '`relationships.network` position, which had been mounted and starved, and its two',
+      'lists came from a list assembler under src/components/new/ reading `neighbourNetwork`,',
+      '`interSettlementRelationships` and `crossSettlementConflicts` — keys written when a',
+      'world is SAVED, LINKED or IMPORTED and never by the generation pipeline this instrument',
+      'executes. One was the DECLARED identity `neighbourNetwork on settlement`, so the bank',
+      'grew 60/39 -> 61/40, the fence\'s first real exercise.',
+      'SCHEMA 22 = schema 21\'s topology, tag law and eight-identity declared roster, all',
+      'UNCHANGED, re-governed to a register that FOLLOWS THAT ASSEMBLER DOWN A LAYER. Rung 21',
+      'admitted its rows where they landed; the owner then ruled the arrangement itself (ODQ',
+      '§934.16): "if a future car wants a domain-side reader of the relationship keys, it is a',
+      'governed register migration". A `src/domain` print builder was importing a',
+      '`src/components` module on the paid export path, and the register was what held that',
+      'inversion in place. So the assembler is now',
+      'src/domain/display/stateProse/relationshipsDeskRead.js and its two reads move with it,',
+      'ADDRESS ONLY — one read each, the same spelling, the same identities. ODQ §934.18 then',
+      'cured the other half: the printed Relationships block fed its cards from the PERSISTED',
+      '`crossSettlementConflicts`, which NO WRITER IN src/ PRODUCES, so a linked world printed',
+      'nothing where the screen drew engagements and a legacy record printed a fossil. Both',
+      'surfaces now derive from the one assembler, and that read is gone from',
+      'src/pdf/lib/viewModel.js.',
+      'THE NET IS A SHRINK AND NOTHING ELSE: two rows change file, two are DELETED, and no row',
+      'is added to any file that did not already carry it. The identity',
+      '`crossSettlementConflicts on settlement` reaches ZERO addresses in the estate and',
+      'leaves the register entirely — the strongest outcome available to a reader-with-no-',
+      'writer ratchet, since the class it names is now unreachable rather than merely banked.',
+      '⛔ AND THE ROSTER DOES NOT MOVE. `interSettlementRelationships on settlement` COULD be',
+      'declared — it has a real in-src property writer at',
+      'domain/relationships/neighbourBackLink.js — but the roster is keyed by IDENTITY, not by',
+      'address, so declaring it would auto-tag the SEVEN ordinary rows the estate has carried',
+      'since schema 4 and move them into the enforced bank: a change of enforcement posture',
+      'over rows this rung did not cause. Schema 21 refused that and the refusal STANDS; the',
+      'moved row is ORDINARY, exactly like its seven siblings. The bank is therefore unmoved at',
+      '61 reads across 40 tagged addresses — `neighbourNetwork on settlement` changes address',
+      'and not count — which is the fence proving a MOVE is not a growth.',
       'Of the eight declared bank entries SEVEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -2760,7 +2791,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–20 are the RETIRED numeric predecessors.',
+      'Schemas 4–21 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -2934,7 +2965,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema21Baseline,
+    validateBaseline: validateSchema22Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

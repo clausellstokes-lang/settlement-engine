@@ -418,6 +418,14 @@ describe('reader-with-no-writer ratchet: the frozen inventory', () => {
     //     row is tagged like all 25 of its siblings and the bank grows by that one address.
     //     ⭐ THE FIRST MOVE THE FENCE ITSELF POLICED: the literal moved in the rung's own
     //     commit, and the write refused until it and `declaredBankOf(21)` both said 61/40.
+    //   • 61/40 → 61/40 at the schema-22 rung (2026-09-19, ODQ §934.16 + §934.18) — the
+    //     domain reader. The owner ruled that a domain-side reader of the relationship keys
+    //     is bought with a governed migration, so the same assembler moved to
+    //     src/domain/display/stateProse/relationshipsDeskRead.js. ⚠ THE LITERAL DOES NOT
+    //     MOVE AND THAT IS THE ENTRY WORTH HAVING: the declared identity changed ADDRESS and
+    //     not count, so a register that genuinely moved rows left the bank exactly where it
+    //     was. A rung that had reasoned "+1 -1 = 0" instead of measuring would have been
+    //     right by luck; `declaredBankOf(22)` is read off the live scan at the subject.
     const registerBank = {
       reads: persistedTags.reduce((sum, row) => sum + row.count, 0),
       addresses: persistedTags.length,
