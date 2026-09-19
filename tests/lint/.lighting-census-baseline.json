@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f0451b021ded7ccdba9de53c417281adf921cf2f",
-  "measuredBy": "the chair (Fable 5.1, session 923472dc)",
+  "measuredAtSha": "baf8ccc1da4f7e327ad1d4d053ad814a830a90bf",
+  "measuredBy": "EM-P0",
   "date": "2026-09-19",
-  "note": "train EM-T1's terminal: the ratchet test's census-population arms converted to victory forms (94→83 titles; a5a5fddb7); files/parked/credited/suiteTitles unmoved",
-  "files": 2645,
+  "note": "EM-P0: one new test file (the pinned-mode battery)",
+  "files": 2646,
   "parked": 383,
-  "credited": 2262,
-  "titles": 24998,
-  "suiteTitles": 6670
+  "credited": 2263,
+  "titles": 25005,
+  "suiteTitles": 6671
 }
