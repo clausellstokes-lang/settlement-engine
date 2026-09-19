@@ -24,6 +24,7 @@ import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label, hookText } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
+// ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
 const FORCE_GROUPS = [
