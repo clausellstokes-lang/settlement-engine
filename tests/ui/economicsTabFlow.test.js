@@ -12,7 +12,7 @@
  *     section renders BESIDE the generation baseline (which still renders).
  */
 import React from 'react';
-import { describe, test, expect, afterEach } from 'vitest';
+import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +22,40 @@ import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
+
+/**
+ * ⭐⭐ THE DESK OVERRIDE, AND WHY THE ARMS AT THE END OF THIS FILE NEED ONE.
+ *
+ * The stand-down `DeskLines` performs is INVISIBLE unless a position draws TWO lines whose
+ * second OPENS on the settlement's name, and on this file's fixture only ONE of the five
+ * economy positions does. Review 10 measured the consequence: the arm that drives all five
+ * "renders its WOVEN paragraph" compared the DOM against `weaveBlock`'s own output, and for
+ * four of them `weaveBlock` returns the lone line VERBATIM — so the comparison held with the
+ * props and without them. A structural claim, asserted vacuously.
+ *
+ * ⛔ AND A BETTER FIXTURE CANNOT FIX IT, which is why the desk is overridden rather than the
+ * settlement re-shaped. WHICH variant a pool draws is a function of the seed, so an arm built
+ * from the corpus would prove nothing today and would start proving something on a seed
+ * nobody chose. The rungs are HAND-BUILT instead — the `dossierMountRegistry` idiom
+ * (`warFaithDeskFlow.test.js`) — and pushed through the REAL call sites by intercepting the
+ * one function every one of these tabs reads its desk from.
+ *
+ * ⚠ IT IS A PASSTHROUGH UNTIL A TEST ASKS FOR IT. `current` is null for every other arm in
+ * this file, so they run against the shipped desk exactly as before; and the public-dossier
+ * gate is honoured even while overridden, so the §885.3 arms cannot be softened by it.
+ */
+const deskOverride = vi.hoisted(() => ({ current: null }));
+vi.mock('../../src/components/new/economyDeskRead.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    economyDeskRead: (settlement, options = {}) => (
+      deskOverride.current && !options.publicDossier
+        ? deskOverride.current
+        : actual.economyDeskRead(settlement, options)
+    ),
+  };
+});
 
 const e = React.createElement;
 
@@ -36,6 +70,7 @@ const SETTLEMENT = { id: 'forge_town', name: 'Forge Town', economicState: ECO };
 const initialCampaigns = useStore.getState().campaigns;
 afterEach(() => {
   cleanup();
+  deskOverride.current = null;
   useStore.setState({ campaigns: initialCampaigns });
 });
 
@@ -213,6 +248,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
+import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
+import { SILENT_ECONOMY_DESK } from '../../src/components/new/economyDeskRead.js';
+import { DeskLines } from '../../src/components/new/tabs/EconomicsGlance.jsx';
 
 /**
  * THE FIXTURE CARRIES NO `_seed` AND NO `id`, so every draw is CANONICAL-AT-ZERO (kernel law
@@ -502,5 +540,102 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     // the label trap, pinned in the UI suite as well as the desk suite.
     expect(real.config.terrainType).toBe('plains');
     expect(real.resourceAnalysis.terrain).toBe('Plains');
+  });
+});
+
+/**
+ * ── ⭐⭐ THE NAME THREAD, PROVEN WHERE IT CAN FAIL (review 10, 2026-09-18) ──────────────
+ *
+ * The arm above ("every DeskLines mount renders its WOVEN paragraph") is STRUCTURAL and it
+ * is vacuous at four of its five sites, because `weaveBlock` returns a lone line verbatim and
+ * this fixture draws exactly one line at four of them. These arms cannot be: each drives its
+ * real call site with a TWO-LINE hand-built block whose second line opens on the town's name,
+ * so dropping `settlementName`/`tier` at that site puts the raw sentence in the DOM and reds
+ * the anchored negative.
+ *
+ * ⛔ TWO OF THE FIVE ECONOMY SITES ARE ABSENT FROM THIS SUITE, AND THAT IS A FINDING RATHER
+ * THAN AN OMISSION. `economics.exportPosture` (`rungs={[deskProse.exportPosture]}`) and
+ * `daily_life.standingOfLiving` (`rungs={[deskProse.prosperityRung]}`) pass exactly ONE rung
+ * BY CONSTRUCTION, and `weaveBlock` returns a single line verbatim. The two props are
+ * therefore provably INERT at those sites today — no rung list, hand-built or drawn, can make
+ * them change a character — so no behavioural arm is possible there and the structural one
+ * above is the whole of what can be claimed. The day either call site grows a second lens,
+ * it belongs in the table below.
+ */
+describe('DeskLines — the name props reach the real call sites, non-vacuously', () => {
+  const NAME = GROUND.name;
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+
+  /** The first sentence keeps its name; the SECOND is the one that must stand down. */
+  const OPENER = `${NAME} sits where two cart roads meet.`;
+  const REPEAT = `${NAME} keeps a market on the green and a smith at the ford.`;
+  const STOOD_DOWN = `The ${GROUND.tier} keeps a market on the green and a smith at the ford.`;
+
+  /**
+   * Each row is [mount, blockId, the desk keys the call site hands over, the Tab, its props].
+   * The keys are read off the call site itself, so a site that re-orders or renames its rungs
+   * reds here rather than silently testing a position nobody renders.
+   */
+  const SITES = [
+    ['resources.groundAndWorkings', 'DS-ECO-11', ['terrainIdentity', 'economicStrengths'],
+      ResourcesTab, { settlement: GROUND, publicDossier: false }],
+    ['services.catalogStanding', 'DS-SUP-3', ['catalogStanding', 'impairedService'],
+      ServicesTab, { settlement: GROUND, services: GROUND.availableServices, publicDossier: false }],
+    ['economics.commercialProfile', 'DS-ECO-12', ['incomeMix', 'criminalLine'],
+      EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
+  ];
+
+  /**
+   * ⚠ A PLAIN TEST LOOPING OVER THE ROWS, NEVER `test.each` — the sovereignty lighting
+   * walker's own prescription. An `each` call would park this file on the each-family debt,
+   * whose ceiling is frozen and may only shrink. `collectSeedFailures` keeps what `each`
+   * was for: every site is driven, and a red names all of them rather than the first.
+   */
+  test('every multi-rung economy call site stands the repeated opening name down, through its own tab', () => {
+    const failures = collectSeedFailures(SITES, ([mount, blockId, keys, Tab, props]) => {
+    useStore.setState({ campaigns: [] });
+    const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
+    deskOverride.current = Object.freeze({
+      ...SILENT_ECONOMY_DESK, [keys[0]]: rungs[0], [keys[1]]: rungs[1],
+    });
+
+    // THE LIVENESS ANCHOR IS THE SAME RENDERER WITHOUT THE PROPS. `DeskLines` is driven
+    // directly with these exact rungs and no name, which is what the call site produced
+    // before this thread landed — so the raw sentence is demonstrably reachable at this
+    // mount, and its absence from the tab below is the stand-down and not an empty page.
+    const unthreaded = render(e(DeskLines, { mount, rungs })).container.textContent;
+    cleanup();
+    expect(unthreaded, `${mount}: the bare renderer drew nothing, so the anchor is dead`)
+      .toContain(OPENER);
+
+    const text = render(e(Tab, props)).container.textContent;
+    expectPresentThenAbsent(unthreaded, text, REPEAT, `${mount}: the raw name-opening sentence`);
+    expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
+    // …and the FIRST line keeps its name, so the paragraph still says who it is about.
+    expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
+    // …and the whole position reads as the ONE paragraph the weave produces.
+    expect(text, `${mount}: the position did not render the woven paragraph`)
+      .toContain(weaveBlock([OPENER, REPEAT], {
+        settlementName: NAME, tierNoun: tierNounFor(GROUND.tier),
+      }).paragraph);
+    });
+    expect(SITES.length, 'the site table emptied, so the loop judged nothing').toBe(3);
+    expectNoSeedFailures(failures, 'every multi-rung DeskLines call site threads the name');
+  });
+
+  test('THE TWO SINGLE-RUNG SITES ARE INERT BY CONSTRUCTION, and the source says so', () => {
+    // The claim the describe's header makes, executed rather than asserted in prose: each of
+    // these call sites passes a one-element rung list, and a one-line weave is the line.
+    const econ = readFileSync(join(HERE, '../../src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
+    const daily = readFileSync(join(HERE, '../../src/components/new/tabs/DailyLifeTab.jsx'), 'utf8');
+    expect(econ).toContain('mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]}');
+    expect(daily).toContain('mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    // …and the weave really does return a lone line verbatim, which is what makes them inert.
+    expect(weaveBlock([REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
+      .toBe(REPEAT);
+    // ANCHOR: the same weave with TWO lines does stand the second down, so the identity above
+    // is the one-line rule and not the weave having stopped working.
+    expect(weaveBlock([OPENER, REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
+      .toContain(STOOD_DOWN);
   });
 });

@@ -268,3 +268,85 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
     }
   });
 });
+
+/**
+ * ── ⭐⭐ THE NAME THREAD, PROVEN AT EVERY WRAPPER (review 10, 2026-09-18) ────────────────
+ *
+ * The two arms above are each half a proof. The first drives `DeskLines` DIRECTLY, so it says
+ * nothing about whether the five WRAPPERS hand the settlement over; the second drives the
+ * wrappers but compares the DOM against `weaveBlock`'s own output — and on this fixture two of
+ * the four positions draw a single line, for which `weaveBlock` returns the line verbatim with
+ * the props or without them. Review 10 measured the result as vacuous at nine of ten sites
+ * across the two renderers.
+ *
+ * These arms put a HAND-BUILT two-line block through each wrapper, so the claim is the one
+ * that matters — the wrapper's `settlement` prop reaches the renderer — and a dropped prop
+ * puts the raw name-opening sentence in the DOM.
+ */
+describe('the wrappers thread the settlement, non-vacuously at every speaking position', () => {
+  const TOWN = Object.freeze({ ...SETTLEMENT, tier: 'town' });
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+
+  const OPENER = `${TOWN.name} keeps its gate shut after dark.`;
+  const REPEAT = `${TOWN.name} pays for that watch out of the market dues.`;
+  const STOOD_DOWN = `The ${TOWN.tier} pays for that watch out of the market dues.`;
+
+  /** [mount, blockId, the two desk keys the wrapper reads first, the wrapper]. */
+  const WRAPPERS = [
+    ['war.standing', 'DS-WAR-1', ['warStatus', 'warExhaustion'], WarStandingLines],
+    ['war.treaties', 'DS-WAR-2', ['treatyTerm', 'treatyFraying'], WarTreatyLines],
+    ['faith.patronSeat', 'DS-FTH-1', ['patronRank', 'patronCults'], FaithSeatLines],
+    ['faith.creedStanding', 'DS-FTH-3', ['creedStanding', 'creedLegitimacy'], FaithCreedLines],
+  ];
+
+  /**
+   * ⚠ A PLAIN TEST LOOPING OVER THE ROWS, NEVER `test.each` — the sovereignty lighting
+   * walker's own prescription, and the idiom every other arm in this file already uses. An
+   * `each` call would park this file on the each-family debt, whose ceiling is frozen and
+   * may only shrink. Every `expect` below names its mount, so a red still says which.
+   */
+  test('every speaking wrapper hands the settlement through, and the second opening stands down', () => {
+    let judged = 0;
+    for (const [mount, blockId, keys, Wrapper] of WRAPPERS) {
+    judged += 1;
+    const rungs = [line(blockId, OPENER), line(blockId, REPEAT)];
+    const desk = { [keys[0]]: rungs[0], [keys[1]]: rungs[1] };
+
+    // THE LIVENESS ANCHOR IS THE SAME RENDERER WITHOUT THE PROPS — what every one of these
+    // wrappers produced before the thread landed. It proves the raw sentence is reachable at
+    // this mount, so its absence below is the stand-down rather than a position gone dark.
+    const unthreaded = render(e(DeskLines, { mount, rungs })).container.textContent;
+    cleanup();
+    expect(unthreaded, `${mount}: the bare renderer drew nothing, so the anchor is dead`)
+      .toContain(OPENER);
+
+    const text = render(e(Wrapper, { desk, settlement: TOWN })).container.textContent;
+    cleanup();
+    expectPresentThenAbsent(unthreaded, text, REPEAT, `${mount}: the raw name-opening sentence`);
+    expect(text, `${mount}: the tier-noun stand-down is not on the page`).toContain(STOOD_DOWN);
+    expect(text, `${mount}: the opening sentence lost its name`).toContain(OPENER);
+    expect(text, `${mount}: the position did not render the woven paragraph`)
+      .toBe(weaveBlock([OPENER, REPEAT], {
+        settlementName: TOWN.name, tierNoun: tierNounFor(TOWN.tier),
+      }).paragraph);
+    }
+    expect(judged, 'the wrapper table emptied, so the loop judged nothing').toBe(4);
+  });
+
+  test('faith.teaser is INERT by construction, and that is measured rather than assumed', () => {
+    // `FaithTeaserLines` passes `rungs={[desk.faithTeaser]}` — ONE rung — and `weaveBlock`
+    // returns a lone line verbatim, so no rung list can make `settlementName`/`tier` change a
+    // character there. No behavioural arm is possible at this position; the structural claim
+    // (the prop is passed) is the whole of what can be held, and this is it.
+    const source = readFileSync(join(HERE, '../../src/components/new/tabs/WarFaithDesk.jsx'), 'utf8');
+    const teaser = source.slice(source.indexOf('export function FaithTeaserLines'));
+    expect(teaser.slice(0, 400)).toContain('rungs={[desk.faithTeaser]}');
+    expect(teaser.slice(0, 400)).toContain('settlementName={settlement?.name}');
+    expect(weaveBlock([REPEAT], { settlementName: TOWN.name, tierNoun: tierNounFor(TOWN.tier) }).paragraph)
+      .toBe(REPEAT);
+    // ANCHOR: two lines DO stand down, so the identity above is the one-line rule rather than
+    // the weave having stopped working.
+    expect(weaveBlock([OPENER, REPEAT], { settlementName: TOWN.name, tierNoun: tierNounFor(TOWN.tier) }).paragraph)
+      .toContain(STOOD_DOWN);
+  });
+});
