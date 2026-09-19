@@ -193,7 +193,14 @@ export default function CommandPalette({ onClose }) {
               fontFamily: sans, fontSize: FS.md, color: INK, outline: 'none',
             }}
           />
-          <DialogClose onClose={onClose} subject="the command palette" />
+          {/* ⛔ THE DOOR IS OUT OF THE TAB ORDER, AND BOTH HALVES OF THAT ARE REQUIRED.
+              §934.31 gives every dialog a labelled close control and the dialog-exit walker
+              admits no exemption, so the × stays. SB5 gives this combobox exactly ONE tab
+              stop — the input — and a second sequential stop inside the overlay breaks the
+              roving model the options depend on. `tabIndex={-1}` keeps both: the × is a real
+              labelled button for a pointer and for a screen reader, and the keyboard's door
+              out of a combobox is Escape, which `useDialogFocusTrap` already answers. */}
+          <DialogClose onClose={onClose} subject="the command palette" tabIndex={-1} />
         </div>
 
         {results.length > 0 ? (
