@@ -30573,9 +30573,9 @@
     },
     {
       "id": "EM-B3b",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3b.md",
-      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "verifiedBase": "80a05c849493f2dc9ad28f3b65043d5c0cf50c39",
       "changeManifest": [
         {
           "action": "CREATE",

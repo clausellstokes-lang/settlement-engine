@@ -1,14 +1,14 @@
 # Settlement editor / wave 1 — EM-B3b: the SQL mirror and its train — migration 202 teaches the net-current gallery scanner to deny `decrees`, and registers itself in the rehearsal train and the three doc heads, with the applied head left at 200 for the owner's hand
 
-- **Status:** `DRAFT`
+- **Status:** `READY`
 - **Packet version:** `1`
-- **Verified base:** `fixes-2026-09-18-consist` at `d31af2ceebf643818201b2e2ab4a556765d2fc7c`
-- **Last revalidated:** 2026-09-19 at `d31af2ceebf643818201b2e2ab4a556765d2fc7c`; every measured path proved byte-identical to the chair's later docs-only tips in `EM-B3.evidence.md` §E0. The two chair cars this packet copies — `1d5c79a34` (the train) and `87b87c406` (the docs) — are ancestors of the base.
+- **Verified base:** `fixes-2026-09-18-consist` at `80a05c849493f2dc9ad28f3b65043d5c0cf50c39`
+- **Last revalidated:** 2026-09-19 at `80a05c849493f2dc9ad28f3b65043d5c0cf50c39` by the chair at promotion — re-pinned from d31af2cee under J-T1: every path in §7 and every suite in §10 proved byte-identical across the window by `git diff --stat` (the chair) and by blob id (the lane's E0).
 - **Depends on:** `NONE.` This packet stands alone at the base and is the FIRST of the split to land.
 - **Collision group:** `NONE.` No packet in the manifest names any of its six paths; zero non-terminal packets exist estate-wide (E14). **`EM-B3a` shares not one path with it** — that disjointness is what makes the split a split. Sequence: **B2 → B3b → B3a → B4**.
 - **Commit authority:** `edits only; the chair commits`
 - **Baseline posture:** `measured.` The net-current scanner and its 33 alternatives, executed through the drift test's own extractors (E6); the rehearsal train's constants, wave shape and test pins, read out of the chair's own two cars (E19); `supabase/applied-head.json` read whole (E19); the three doc figures and the freshness regex that admits them (E19). **No gate was run by this lane, and none is claimed.**
-- **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` (SHA-256: TO BE STAMPED BY THE CHAIR)
+- **Preamble:** `docs/implementation/preambles/EM-PREAMBLE.md` (SHA-256: fece7560b7418c607f41717c9955aef87ad7496add1ee7dc863d1f038d3cd60e)
 
 > ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
 > (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
