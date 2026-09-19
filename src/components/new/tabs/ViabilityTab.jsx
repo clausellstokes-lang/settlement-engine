@@ -139,9 +139,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
   // ONE VERDICT, BOTH SURFACES. This tab used to fork inline on `viable` and print its own
   // words ('NOT COHERENT' / 'COHERENT' / 'MARGINAL COHERENCE') while the paid PDF printed
-  // 'Viable' / 'Not viable' / 'Fragile' / 'Collapsing' from its own private `verdictOf`.
-  // Two vocabularies for one derived fact, and this side could not say 'Fragile' at all.
-  // The shared leaf owns the word, the tone and the glyph; the palette below stays local.
+  // them through its own private `verdictOf`. Two vocabularies for one derived fact. The
+  // shared leaf owns the word, the tone and the glyph; the palette below stays local.
+  // ⚠ THE LEAF'S FOURTH AND FIFTH WORDS ARE GONE (2026-09-19): `verdictOf` also carried
+  // 'Fragile' / 'Collapsing' branches keyed on a `verdict` field NOTHING WRITES, which the
+  // observed-shape ratchet convicted the moment the lift moved them into the scanned tree.
+  // The leaf reads `viable` and nothing else now — see its own note for the measurement.
   const verdict = viabilityVerdict(v);
 
   return (

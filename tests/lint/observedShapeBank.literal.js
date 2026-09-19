@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 61,
-  addresses: 40,
+  reads: 60,
+  addresses: 39,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -46,8 +46,7 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     // 2026-09-17; banks nothing since schema 17's stress-loaded corpus pass made its
     // writer observable.
     'isCriminal on incomeSources': Object.freeze({ reads: 0, addresses: 0 }),
-    // 38/25 -> 39/26 at rung 21: DS-REL-1's list assembler is a 26th address.
-    'neighbourNetwork on settlement': Object.freeze({ reads: 39, addresses: 26 }),
+    'neighbourNetwork on settlement': Object.freeze({ reads: 38, addresses: 25 }),
     'stresses on settlement': Object.freeze({ reads: 4, addresses: 3 }),
     'worldPulse on campaignState': Object.freeze({ reads: 2, addresses: 2 }),
     'appliedAt on eventLog': Object.freeze({ reads: 1, addresses: 1 }),

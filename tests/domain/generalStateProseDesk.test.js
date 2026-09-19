@@ -1227,9 +1227,19 @@ describe('the viability verdict and the hook framing', () => {
       "return { tone: 'bad', label: 'Not viable', glyph: '✗' };",
       'the NOT-VIABLE arm of the shared verdict',
     );
+    // ⚠ THE MARGINAL ARM LOST ITS `verdict` SPELLING ON 2026-09-19, and the anchor follows
+    // the arm rather than the string it used to be written in. It read
+    // `label: String(tokenCase(v?.verdict ? String(v.verdict) : 'Uncertain'))` — a
+    // fall-through that consulted `verdict` and `verdictTone`, two keys MEASURED to have no
+    // writer anywhere in src/ (a generated `economicViability` carries only dependencies,
+    // issues, metrics, plotHooks, suggestions, summary, viable, warnings). The
+    // observed-shape ratchet convicted them once the lift moved them into the scanned tree,
+    // and the doctrine is cure rather than admit. The ARM IS UNCHANGED in every way this
+    // test cares about: an absent verdict is still MARGINAL, still 'Uncertain', still the
+    // third of three states. Its full pin lives in tests/pdf/labelLadderParity.test.jsx.
     mustExtract(
       src('src/domain/display/viabilityVerdict.js'),
-      "label: String(tokenCase(v?.verdict ? String(v.verdict) : 'Uncertain'))",
+      "return { tone: 'warn', label: 'Uncertain', glyph: '' };",
       'the MARGINAL fall-through arm of the shared verdict',
     );
     // The contradiction count: two pools, and a non-number is NOT a zero.

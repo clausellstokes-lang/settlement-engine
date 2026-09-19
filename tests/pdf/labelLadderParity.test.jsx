@@ -47,6 +47,10 @@
  * that throws fails the arm that walked it, because a crashed chapter and a silent one must
  * never look alike.
  */
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -55,6 +59,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { statusCase, tokenCase } from '../../src/domain/display/labelCase.js';
+import { viabilityVerdict } from '../../src/domain/display/viabilityVerdict.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -468,5 +473,75 @@ describe('the paid document descends the same label ladder as the screen', () =>
     const anyUpper = leaves.filter((leaf) => leaf.transform === 'uppercase');
     expect(anyUpper.length, 'the walker saw no uppercase style at all — it is not reading styles')
       .toBeGreaterThan(0);
+  });
+});
+
+/**
+ * ⭐⭐ THE VIABILITY VERDICT READS ONE KEY (2026-09-19, the ODQ §934.9 lane's cure).
+ *
+ * `domain/display/viabilityVerdict.js` is the label ladder's single derivation for the
+ * coherence word, lifted out of `ViabilityAssessment`'s private `verdictOf`. The lift
+ * carried `verdict` / `verdictTone` branches with it, and MEASUREMENT killed them: over
+ * 1,299 observed shapes a generated `economicViability` carries
+ * ["dependencies","issues","metrics","plotHooks","suggestions","summary","viable","warnings"]
+ * and nothing in `src/` writes either key onto that record, so 'Fragile' and 'Collapsing'
+ * were unreachable on BOTH surfaces. The observed-shape ratchet convicted them as
+ * reader-without-writer rows the moment the lift moved them into the scanned tree; the
+ * doctrine is cure, not admit, so they are gone.
+ *
+ * THESE ARMS HOLD BOTH HALVES — what the module MAY READ, and what it MUST RETURN — because
+ * either alone rots. A behaviour-only pin passes while a dead key creeps back in beside it;
+ * a source-only pin passes while the mapping drifts.
+ */
+describe('the coherence verdict is derived from `viable` alone', () => {
+  const SRC = readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/display/viabilityVerdict.js'),
+    'utf8',
+  );
+  /** The module's executable body: the docblocks NAME the retired keys on purpose. */
+  const BODY = SRC.slice(SRC.indexOf('export function viabilityVerdict'));
+
+  test('SOURCE: the module reads no key of its argument but `viable`', () => {
+    // THE ANCHOR IS THE `viable` READ ITSELF. Without it this arm passes just as well on an
+    // empty file, on a renamed export, or on a module that stopped reading its argument at
+    // all — which is the exact vacuity `expectAbsentWithAnchor` exists to refuse.
+    for (const dead of ['verdictTone', 'verdict']) {
+      expectAbsentWithAnchor(
+        BODY, dead, 'viable',
+        `viabilityVerdict reads \`${dead}\` again — a key MEASURED to have no writer`,
+      );
+    }
+    // And the read set is closed rather than merely missing those two: every `v?.<key>` in
+    // the body names `viable`. A new dead key under a new name would red here.
+    const read = [...BODY.matchAll(/\bv\?\.([A-Za-z_$][\w$]*)/g)].map((m) => m[1]);
+    expect(read.length, 'the body reads nothing off its argument — the walker is blind')
+      .toBeGreaterThan(0);
+    expect([...new Set(read)]).toEqual(['viable']);
+  });
+
+  test('MAPPING: three states, and everything that is not a boolean is the third', () => {
+    expect(viabilityVerdict({ viable: true })).toEqual({ tone: 'good', label: 'Viable', glyph: '✓' });
+    expect(viabilityVerdict({ viable: false })).toEqual({ tone: 'bad', label: 'Not viable', glyph: '✗' });
+    const third = { tone: 'warn', label: 'Uncertain', glyph: '' };
+    // ⚠ THE RETIRED KEYS ARE PRESENT IN THESE THREE INPUTS ON PURPOSE. A slice carrying the
+    // shapes `pdf/lib/viewModel.js` still synthesises must now be IGNORED, not obeyed — that
+    // is what makes the deletion a behaviour pin and not just a source pin.
+    expect(viabilityVerdict({ verdict: 'fragile' }), 'a dead token reached the label').toEqual(third);
+    expect(viabilityVerdict({ verdict: 'collapsing' }), 'a dead token reached the label').toEqual(third);
+    expect(viabilityVerdict({ verdictTone: 'muted' }), 'a dead tone reached the page').toEqual(third);
+    for (const empty of [undefined, null, {}, { viable: null }, { viable: 'yes' }]) {
+      expect(viabilityVerdict(empty)).toEqual(third);
+    }
+    // PARITY, WHICH IS THE WHOLE POINT OF THE LEAF: the print slice's synthesised verdict
+    // keys are derived from `viable`, so a slice and the raw record agree state for state.
+    for (const viable of [true, false, undefined]) {
+      const slice = {
+        viable,
+        verdict: viable === true ? 'viable' : viable === false ? 'notViable' : null,
+        verdictTone: viable === true ? 'good' : viable === false ? 'bad' : 'muted',
+      };
+      expect(viabilityVerdict(slice), `the page and the tab disagree at viable=${viable}`)
+        .toEqual(viabilityVerdict({ viable }));
+    }
   });
 });
