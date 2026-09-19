@@ -86,6 +86,19 @@
  * construction; the 6,439 B of room bought here is room in the WORKER, spent by the next
  * car that adds authored content, and it is measured before it is spent.
  *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-09-18 FIXES CONSIST (Fable chair, ODQ §934.19; the
+ * consist's final tip 2b0322992, lockfile-clean; a control build at the worker-headroom car's own
+ * consist position 96cfd7e17 reproduced its mint to the byte — 1,398,705, generation.worker-CXHCiqmL.js):
+ * 1,398,705 -> 1,399,318 bytes. The 613 B are the cars composed after that car, and they are the
+ * owner's content cures, counted in the bundle: the parish-church text cure (§934.13) puts twelve
+ * "house of worship" strings here where there were none; the food writer publishes the split it
+ * carries (§934.15; `importCoverage` 1 -> 4); the article decided by sound; the label ladder in its
+ * shared home; the verdict reading `viable` alone; the hook-framing table. Nothing eager re-merged
+ * and no authoring vocabulary rode along (the two finds above are still out); lanes 22–24 added 0 B.
+ * The capability is the owner's order ("impliment every fix"); the rise is declared here, in the
+ * ledger row, in the report and the pull request, and is vetoable — a veto returns the constant and
+ * takes a headroom hunt (a shrink) in its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
  * @enforced-by this test
  */
 
@@ -101,9 +114,10 @@ const ASSETS = join(DIST, 'assets');
 const DIST_EXISTS = existsSync(DIST) && existsSync(ASSETS);
 const REQUIRE_DIST = process.env.VERIFY_DIST === '1';
 const SENTINEL = 'settlementforge:generation:worker-v1';
-/** Measured 1,398,705 B by the worker-headroom car, 2026-09-18 (generation.worker-CXHCiqmL.js,
- *  lockfile-clean worktree); monotone-down — see the docblock for what was removed. */
-export const WORKER_BUNDLE_CEILING_BYTES = 1398705;
+/** Measured 1,399,318 B by the chair at the 2026-09-18 fixes consist's final tip (2b0322992,
+ *  generation.worker-DNFpfUQI.js, lockfile-clean; ODQ §934.19); monotone-down — see the docblock
+ *  for what the bytes are. */
+export const WORKER_BUNDLE_CEILING_BYTES = 1399318;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

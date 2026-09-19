@@ -764,8 +764,16 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // lines of genuinely new generation code (densityRoll, applyDensityLaw,
     // densityAscension, successionGrammar, titularSuccession) to the lazy engine,
     // where generation code belongs. T12's tip was green on this row.
+    // CEILING RAISE 676_000 -> 677_000 (CHAIR RULING 2026-09-19, ODQ §934.19, OFFERED FOR
+    // RATIFICATION as the two above were): measured 676,321 at the 2026-09-18 fixes consist's
+    // final tip (2b0322992, lockfile-clean); the control build at the worker-headroom car's
+    // consist position (96cfd7e17) read 675,865, so the +456 B are the owner's content cures
+    // composed after it (the parish-church text, the food writer's published split, the
+    // article-by-sound rule, the label ladder) — generation text, where it belongs. Nothing
+    // eager re-merged: the first-paint closure arm above is green on the same build. The
+    // ~700 B cross-environment margin the two prior raises carried is kept.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(676_000);
+    expect(size).toBeLessThan(677_000);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
