@@ -30722,195 +30722,6 @@
       ]
     },
     {
-      "id": "EM-A1",
-      "status": "DRAFT",
-      "packetPath": "docs/implementation/packets/settlement-editor/EM-A1.md",
-      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
-      "changeManifest": [
-        {
-          "action": "CREATE",
-          "path": "src/domain/edit/types.js",
-          "symbol": "FieldKind, FieldDeclaration (JSDoc typedefs, including provenance and writer)"
-        },
-        {
-          "action": "CREATE",
-          "path": "src/domain/edit/fieldDeclarations.js",
-          "symbol": "FIELD_DECLARATIONS, declarationsFor, isEditableCard"
-        },
-        {
-          "action": "CREATE",
-          "path": "tests/domain/editDeclarations.test.js",
-          "symbol": "acceptance cases A1, A2, A3, A4, A7 and the zero-importer dormancy case"
-        },
-        {
-          "action": "CREATE",
-          "path": "tests/lint/editDeclarations.walker.test.js",
-          "symbol": "acceptance cases A5, A5b, A6 — the pencil arm, the pool arm and the ROOT arm"
-        },
-        {
-          "action": "REGISTER",
-          "path": "scripts/mutation-coverage-manifest.json",
-          "symbol": "invariants['tests/lint/editDeclarations.walker.test.js']"
-        }
-      ],
-      "requiredSymbols": [
-        {
-          "path": "src/generators/npcGenerator.js",
-          "symbol": "const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town')"
-        },
-        {
-          "path": "src/generators/npcGenerator.js",
-          "symbol": "export const generateNPCs"
-        },
-        {
-          "path": "src/generators/economy/upgradeOpportunities.js",
-          "symbol": "export const getUpgradeOpportunities"
-        },
-        {
-          "path": "src/generators/power/rulingStructure.js",
-          "symbol": "export const generatePowerStructure"
-        },
-        {
-          "path": "src/generators/power/rulingStructure.js",
-          "symbol": "export const renormalizeFactionPower"
-        },
-        {
-          "path": "src/generators/power/governanceNarrative.js",
-          "symbol": "export const buildGovernanceLabels"
-        },
-        {
-          "path": "src/generators/power/factionCategories.js",
-          "symbol": "export const inferFactionCategory"
-        },
-        {
-          "path": "src/domain/factionRename.js",
-          "symbol": "export const NPC_RENAME_SURFACES"
-        },
-        {
-          "path": "src/domain/factionRename.js",
-          "symbol": "export const FACTION_RENAME_SURFACES"
-        },
-        {
-          "path": "src/domain/factionRename.js",
-          "symbol": "export const NON_CASCADED_SURFACES"
-        },
-        {
-          "path": "src/domain/factionRename.js",
-          "symbol": "export const NPC_NON_CASCADED_SURFACES"
-        },
-        {
-          "path": "src/components/primitives/InstitutionCard.jsx",
-          "symbol": "export default function InstitutionCard"
-        },
-        {
-          "path": "src/components/new/tabs/NPCsTab.jsx",
-          "symbol": "export function NPCsTab"
-        },
-        {
-          "path": "src/components/new/tabs/power/PowerStrata.jsx",
-          "symbol": "export function TheFactions"
-        },
-        {
-          "path": "src/generators/lookups.js",
-          "symbol": "export const getInstitutionsForTier"
-        },
-        {
-          "path": "src/generators/lookups.js",
-          "symbol": "export const getInstitutionalCatalog"
-        },
-        {
-          "path": "tests/lint/mutationCoverage.shared.mjs",
-          "symbol": "export const ENFORCER_DIRS"
-        },
-        {
-          "path": "src/domain/entities/npcs.js",
-          "symbol": "{'active'|'dead'|'missing'|'exiled'|'retired'|'removed'} NpcStatus"
-        },
-        {
-          "path": "src/components/new/npcComponents.jsx",
-          "symbol": "function NPCInlineCard({"
-        }
-      ],
-      "acceptanceCases": [
-        {
-          "id": "A1",
-          "case": "MAIN BEHAVIOUR — declarationsFor returns each declared card type's authored rows in authored order, frozen, and isEditableCard is true for exactly those types"
-        },
-        {
-          "id": "A2",
-          "case": "ABSENT AND UNKNOWN — undefined, empty string, an unknown type, a number and the two prototype names all return the SAME frozen empty array by identity, with no throw and no prototype walk"
-        },
-        {
-          "id": "A3",
-          "case": "THE RECORD IS THE DENOMINATOR — every declared field either appears on its card's record in a corpus this test generates at village, town and city, or names a creating wave-1 packet id, and the failure message names the field and the card"
-        },
-        {
-          "id": "A4",
-          "case": "THE KIND, PROVENANCE AND VOCABULARY LAW — pool iff kind pool, maxLength iff free or free-cascade, readersProof iff free, provenance is the literal root or world-fact, writer is a path-hash-symbol string, group non-empty, no duplicate card-and-field pair; AND the two respelled vocabularies hold: npc.status's pool equals the live NpcStatus set plus jailed, and institution.state declares its five members with its creating packet named"
-        },
-        {
-          "id": "A5",
-          "case": "THE PENCIL AND POOL ARMS — the pencil arm asserts an exactly-empty found set over a proven non-empty corpus at this pencil-free wave, and the pool arm asserts its own subject explicitly rather than passing on an empty one"
-        },
-        {
-          "id": "A5b",
-          "case": "THE ROOT ARM AND ITS GUARD-THE-GUARD — every declared writer passes the closed-vocabulary predicate over its own source, and a planted npc.role row naming generateNPCs as its writer REDS, with the message naming the field and the offending world-fact identifier"
-        },
-        {
-          "id": "A6",
-          "case": "THE PREDICATE'S VOCABULARY CANNOT ROT — WORLD_FACT_PARAMS and WORLD_FACT_READS are non-empty and frozen, and every member is matched by at least one real generator signature in the tree, so a dead token cannot pad the list"
-        },
-        {
-          "id": "A7",
-          "case": "PURITY AND IDENTITY — repeated calls return the same array by identity and the table is deep-frozen, so a write throws in strict mode"
-        }
-      ],
-      "checks": [
-        [
-          "npx",
-          "vitest",
-          "run",
-          "--pool=threads",
-          "--maxWorkers=2",
-          "tests/domain/editDeclarations.test.js"
-        ],
-        [
-          "npx",
-          "vitest",
-          "run",
-          "--pool=threads",
-          "--maxWorkers=2",
-          "tests/lint/editDeclarations.walker.test.js",
-          "tests/lint/mutationCoverageManifest.test.js",
-          "tests/lint/negativeAssertionAnchor.walker.test.js",
-          "tests/lint/sovereigntyLightingContract.walker.test.js"
-        ],
-        [
-          "npx",
-          "eslint",
-          "src/domain/edit/types.js",
-          "src/domain/edit/fieldDeclarations.js",
-          "tests/domain/editDeclarations.test.js",
-          "tests/lint/editDeclarations.walker.test.js"
-        ],
-        [
-          "npm",
-          "run",
-          "typecheck:domain:strict"
-        ],
-        [
-          "npm",
-          "run",
-          "typecheck:ratchet"
-        ],
-        [
-          "node",
-          "scripts/implementation-packets.mjs",
-          "validate"
-        ]
-      ]
-    },
-    {
       "id": "EM-P3",
       "status": "DRAFT",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P3.md",
@@ -31054,6 +30865,186 @@
           "npm",
           "run",
           "typecheck:ratchet"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
+    },
+    {
+      "id": "EM-P0",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-P0.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [
+        {
+          "_note": "THE PINNED MODE. `runPipeline(initialContext, rng, options)` today iterates getStepOrder() and calls step.fn for EVERY step unconditionally; it accepts no record and the module holds no skip, reuse, pin or preserve branch. It gains ONE option, `pins`, keyed on the steps' declared `provides` DATA KEYS — never on a step NAME, which is the precise defect the estate already convicted: runPipeline's own docblock records that getAffectedSteps/rerunAffected was 'dead, untested, and buggy (it keyed on step names while callers think in data keys)', was retired, and left the instruction 'build them on an explicit per-step reads/provides data-dependency graph'. That graph exists and strict mode enforces it. Six rules: seed ctx with the pins; skip a step whose whole non-empty `provides` is pinned; ALWAYS take rng.fork(name) even when skipping; never skip a step with empty `provides` (it exists for its `mutates`); ⛔ REFUSE a PARTIAL pin with a named throw rather than letting Object.assign silently overwrite it; strict mode untouched. Measured 113 effective lines (eslint Linter, skipBlankLines+skipComments) against the 800 src/generators layer ceiling, no size-baseline entry.",
+          "action": "MODIFY",
+          "path": "src/generators/pipeline.js"
+        },
+        {
+          "_note": "THE POPULATION SPLIT — THE ONE STEP THAT NEEDS SURGERY. Measured off the declared graph, exactly THREE steps are root-writing: assembleInstitutions (provides institutions, catalogForTier, generationRepairs), generatePower (provides powerIntent, powerStructure) and generatePopulation (provides npcs, relationships, factions, conflicts). The first two are skipped GENERICALLY and are not edited at all. generatePopulation alone provides BOTH roots (npcs, factions) and derivations (relationships, conflicts) from one body, so it splits into TWO registerStep calls IN THIS SAME FILE: `drawPopulation` (deps unchanged, provides ['npcs'], the generateNPCs call and the densityMassTarget roll verbatim) and `generatePopulation` (deps ['drawPopulation'], provides ['relationships','factions','conflicts']). ⭐ THE NAME STAYS ON THE DERIVING HALF so the three steps that deps on it — assembleSettlement.js:82, corruptionPass.js:43, generateNarratives.js:23 — resolve unchanged and are NOT edited, and steps/index.js is NOT edited because both registrations live in the file it already imports. ⛔⛔ THE ONE REAL RISK: a new step name forks a NEW stream, so THE ROOT HALF MUST FORK THE STRING 'generatePopulation', not its own name; A7 convicts a wrong spelling. The seam needs no generator refactor — generateRelationships is already a separate export and generateFactions already lives in power/factionGrouping.js, and both take the roster as their first argument. Measured 142 effective lines.",
+          "action": "MODIFY",
+          "path": "src/generators/steps/generatePopulation.js"
+        },
+        {
+          "_note": "THE BATTERY — A1–A7. A1 is the packet's whole promise: an unpinned run and a `pins: {}` run are BYTE-IDENTICAL to the committed 525-row golden fixture and the prose manifest is unmoved. A5 is the determinism proof the mode rests on: `const stepRng = rng.fork(name);` (pipeline.js:165) forks each step's stream BY NAME, so a skip shifts no other step's draws — asserted, not assumed, with a control that a skipped step still takes its fork. A4 drives the partial-pin refusal in both its throwing and its onStrictViolation form. Flat literal it(...) only, per EM-PREAMBLE §P3.4. ⭐ tests/generators IS one of the eight mutationCoverage ENFORCER_DIRS, so this file OWES the manifest row below (111 files live there today).",
+          "action": "CREATE",
+          "path": "tests/generators/pipelinePinnedMode.test.js"
+        },
+        {
+          "_note": "THE MUTATION-COVERAGE ROW tests/generators/pipelinePinnedMode.test.js owes, because tests/generators is an ENFORCER_DIR and enumerateInvariants picks every *.test.js under one. Added SURGICALLY beside its siblings; ⛔ the manifest is never re-serialised whole.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE RUNNER this packet gives a pinned mode. It runs all 23 registered steps unconditionally today and accepts no record — the measured reason EM-B2's rederive had nothing to attach to.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function runPipeline"
+        },
+        {
+          "_note": "The topological walk over each step's deps. Unchanged: the new step joins the graph through deps, and the order is never re-sorted by hand.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function getStepOrder"
+        },
+        {
+          "_note": "The registry the split's second registration uses. It throws on a duplicate name, which is what makes a mis-split loud.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "export function registerStep"
+        },
+        {
+          "_note": "⭐ THE SAFETY FACT THE WHOLE MODE RESTS ON: every step draws from a stream forked by its own NAME, so skipping a step cannot shift any other step's draws. A5 asserts it rather than assuming it; if this line changes, the packet is STALE.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "const stepRng = rng.fork(name);"
+        },
+        {
+          "_note": "THE SEAM STEP — the only one of the three root-writing steps that provides both roots and derivations from one body, and therefore the only one edited.",
+          "path": "src/generators/steps/generatePopulation.js",
+          "symbol": "registerStep('generatePopulation', {"
+        },
+        {
+          "_note": "ROOT-WRITING STEP NOT EDITED — named so the generic skip's coverage is checkable and an unnecessary edit here is visible.",
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs']"
+        },
+        {
+          "_note": "ROOT-WRITING STEP NOT EDITED — same reason.",
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "provides: ['powerIntent', 'powerStructure']"
+        },
+        {
+          "_note": "THE ROOT HALF of the population seam. It takes NO roster and draws one; it is called only by drawPopulation after the split and its body does not move.",
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateNPCs = ("
+        },
+        {
+          "_note": "THE DERIVING HALF, ALREADY SEPARATE: its FIRST argument is the roster, so it already runs from a GIVEN roster and needs no change.",
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
+        },
+        {
+          "_note": "THE SECOND DERIVING HALF, already in another module and already taking the roster first. Between these two symbols the seam is a step boundary rather than a refactor.",
+          "path": "src/generators/power/factionGrouping.js",
+          "symbol": "export const generateFactions = (npcs, relationships) => {"
+        },
+        {
+          "_note": "The golden's hashing seam over the 525-row committed fixture. A1 asserts byte-identity of what it produces, which is this packet's entire promise.",
+          "path": "tests/property/generatorGoldenMaster.test.js",
+          "symbol": "function hashFor(config)"
+        },
+        {
+          "_note": "The prose manifest's committed fixture address — the second golden A1 holds unchanged.",
+          "path": "tests/property/dossierProseManifest.test.js",
+          "symbol": "const MANIFEST_REL"
+        },
+        {
+          "_note": "The eight enforcer dirs. tests/generators is one, which is why this packet's test file owes a mutation-coverage row and EM-B2's tests/domain file did not.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "⛔ THE NULL CHANGE, THE PACKET'S WHOLE PROMISE: with no `pins` and with `pins: {}`, generateSettlementPipeline's output is BYTE-IDENTICAL to tests/fixtures/generator-golden-master.json across the 525-row corpus and tests/fixtures/dossier-prose-manifest-golden.json is unmoved."
+        },
+        {
+          "id": "A2",
+          "case": "THE PIN REPRODUCES THE RECORD: generate a settlement, pass its npcs / institutions / powerIntent / powerStructure / factions back as pins at the same seed, and the resulting settlement is byte-for-byte the first one."
+        },
+        {
+          "id": "A3",
+          "case": "THE SKIP REALLY SKIPS: with a whole step's provides pinned and an onStep spy attached, that step's name never reaches onStep and the pinned values survive into the final settlement unmodified."
+        },
+        {
+          "id": "A4",
+          "case": "⛔ THE PARTIAL PIN REFUSES: pins holding `relationships` but not `factions` or `conflicts` throws with the exact message naming the step, its whole provides and the supplied subset; under onStrictViolation it reports { step, kind: 'pin', keys } and does not throw."
+        },
+        {
+          "id": "A5",
+          "case": "⛔ THE FORK IS PER-NAME: with one step skipped by a pin, every OTHER step's output is identical to the unpinned run — a skip shifts no stream, because rng.fork(name) keys by name. Control: a skipped step still takes its fork."
+        },
+        {
+          "id": "A6",
+          "case": "IDEMPOTENCY AND PURITY: three identical pinned calls produce byte-identical output, and neither `pins` nor `initialContext` is mutated."
+        },
+        {
+          "id": "A7",
+          "case": "⛔ THE SPLIT DREW NOTHING NEW: drawPopulation + generatePopulation together provide exactly npcs, relationships, factions and conflicts; getStepOrder() still resolves assembleSettlement, corruptionPass and generateNarratives; and the settlement is byte-identical to the unsplit run — which is what proves the root half forked the string 'generatePopulation' rather than its own name."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/generators/pipelinePinnedMode.test.js",
+          "tests/generators/assemblyCoherenceRngIsolation.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/sovereigntyLightingContract.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/generators/pipeline.js",
+          "src/generators/steps/generatePopulation.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
         ],
         [
           "node",
