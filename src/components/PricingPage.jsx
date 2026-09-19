@@ -28,7 +28,7 @@ import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } fr
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import useLivePricing from '../hooks/useLivePricing.js';
 import {
-  getVisibleTiers, getActivePacks, SINGLE_DOSSIER, TIERS,
+  getVisibleTiers, getActivePacks, isInvitationOnly, SINGLE_DOSSIER, TIERS,
 } from '../config/pricing.js';
 import { tp } from '../copy/pricingPage.js';
 import { t } from '../copy/index.js';
@@ -342,7 +342,15 @@ export default function PricingPage({ onNavigate }) {
           // Free / Cartographer / Surveyor — the Founder leaves the row and
           // renders below as the charter band (a different KIND of object), so
           // the subscription decision stays a three-way scan (ruling #3).
-          const rowTiers = tiers.filter(tier => tier.key !== 'founder');
+          //
+          // ⛔ BY THE TIER'S OWN FLAG, NOT BY ITS NAME (the owner, 2026-09-19). This read
+          // `tier.key !== 'founder'`, which is a fact about ONE SPELLING — and the Create
+          // page's teaser, which had no such line, drew the card it was excluding. The
+          // predicate now lives in config/pricing.js and both surfaces read it, so the
+          // rule holds for a fourth tier of the same kind. Behaviour here is unchanged:
+          // the Founder is still the only invitation-only tier, and the charter band
+          // below is untouched.
+          const rowTiers = tiers.filter(tier => !isInvitationOnly(tier));
           const ctas = rowTiers.map(tier => ({ tier, cta: ctaFor(tier) }));
           // P8 — the region carries EXACTLY ONE dominant primary, chosen for the
           // most important purchasable action (never a manage/current self-state,

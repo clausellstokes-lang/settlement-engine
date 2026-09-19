@@ -186,9 +186,18 @@ export function tOptional(key, vars) {
  * resolver means a tier's slot is answered the same way wherever it is drawn.
  *
  * A tier that carries a price renders it. A tier that carries none renders its
- * STANDING instead (how the tier is come by), and has no sub-line — which is also why
- * the Founder card no longer forces a 391px page 52px wider than its own viewport:
- * the sub-line it was overflowing with was the unbreakable key text.
+ * STANDING instead (how the tier is come by, and when it opens), and its sub-line comes
+ * from the standing too — which is also why the Founder card no longer forces a 391px
+ * page 52px wider than its own viewport: the sub-line it was overflowing with was the
+ * unbreakable key text.
+ *
+ * ⛔ THE TWO LADDERS NEVER MIX, AND THAT IS WHAT THE `??` CHAIN IS DOING. A tier reads
+ * EITHER as a price (priceLabel + priceSub) or as a standing (standing + standingSub);
+ * the sub-line follows whichever answered the slot, so a tier can never print a price
+ * over a standing's sub-line or the reverse. Reading the two independently is exactly
+ * how the Founder came to ask for a deleted `priceSub` in the first place (ODQ §934.22
+ * item 1), and tests/components/lockedPriceSlots.census.test.js pins the pairing per
+ * tier rather than per call site.
  *
  * Returns empty/null rather than a key on a tier the registry knows nothing about: a
  * dotted path in a 32px focal slot is the worst of both worlds, and
@@ -198,10 +207,12 @@ export function tOptional(key, vars) {
  * @returns {{ label: string, sub: string|null }}
  */
 export function tierPriceSlot(tierKey) {
-  const label = tOptional(`pricing.tiers.${tierKey}.priceLabel`)
-    ?? tOptional(`pricing.tiers.${tierKey}.standing`)
-    ?? '';
-  return { label, sub: tOptional(`pricing.tiers.${tierKey}.priceSub`) };
+  const price = tOptional(`pricing.tiers.${tierKey}.priceLabel`);
+  if (price !== null) return { label: price, sub: tOptional(`pricing.tiers.${tierKey}.priceSub`) };
+  return {
+    label: tOptional(`pricing.tiers.${tierKey}.standing`) ?? '',
+    sub: tOptional(`pricing.tiers.${tierKey}.standingSub`),
+  };
 }
 
 // Re-export the raw map for test imports and for code that needs to

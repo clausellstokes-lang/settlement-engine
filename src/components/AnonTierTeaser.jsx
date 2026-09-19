@@ -2,16 +2,28 @@
  * AnonTierTeaser.jsx — Inline subscription telegraphing for the anon cap.
  *
  * Shown beneath the "Sign in to unlock" card on the Create page once an
- * anonymous visitor exhausts their daily generations. It surfaces the three
+ * anonymous visitor exhausts their daily generations. It surfaces the PUBLIC
  * subscription tiers (NOT the AI-credit packs) so a capped visitor sees what
  * an account unlocks before they leave. Anonymous visitors can't check out
  * directly, so every card routes to sign-in.
  *
- * Reuses the pricing tier data + copy (getVisibleTiers / pricing.tiers.*),
+ * ⛔ THE FOUNDER IS NOT AMONG THEM (the owner, 2026-09-19: "an invitation-only tier does
+ * not appear on the public path"). This teaser used to walk `getVisibleTiers()` WHOLE,
+ * so an anonymous visitor at their daily cap was shown a Founder Lifetime card — a tier
+ * with no price, no checkout and no path from this page, offered at the one reader who
+ * has least standing to ask for it. It now reads `getPublicTiers()`, which filters on
+ * the TIER'S OWN `invitationOnly` flag rather than on the spelling 'founder', so the rule
+ * holds for a fourth tier of the same kind. The Founders' Hall, the pricing page's
+ * charter band and a founder's own account state are untouched — those are where the
+ * owner invites, not listings of an offer.
+ *
+ * Reuses the pricing tier data + copy (getPublicTiers / pricing.tiers.*),
  * presented compactly for the hero rather than the full pricing-page layout.
  * Colors come from theme tokens (no raw hex) so visual-budget lint stays clean.
+ *
+ * @enforced-by tests/components/invitationOnlyTiers.census.test.jsx
  */
-import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
+import { getPublicTiers, getTierDisplayName } from '../config/pricing.js';
 import { t, tierPriceSlot, tx } from '../copy/index.js';
 import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
@@ -20,7 +32,7 @@ import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 export default function AnonTierTeaser({ onSignIn }) {
   const mobile = useIsMobile();
-  const tiers = getVisibleTiers();
+  const tiers = getPublicTiers();
 
   // One quiet comparison strip subordinate to the unlock card's headline, not
   // three bordered cards inside the hero's own bordered card. A single top
@@ -48,13 +60,16 @@ export default function AnonTierTeaser({ onSignIn }) {
       }}>
         {tiers.map(tier => {
           const name = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
-          // ⛔ NOT `t()` ON THE TWO PRICE KEYS. This teaser walks getVisibleTiers()
-          // WHOLE — the Founder included, unlike the pricing page's row, which filters
-          // it out — and the Founder's price keys were deleted by ruling. `t()` renders
-          // the key it cannot resolve, so this card printed
+          // ⛔ NOT `t()` ON THE TWO PRICE KEYS. This teaser used to walk getVisibleTiers()
+          // WHOLE — the Founder included — and the Founder's price keys were deleted by
+          // ruling. `t()` renders the key it cannot resolve, so this card printed
           // `pricing.tiers.founder.priceLabel` and `.priceSub` as literal text at every
-          // width (ODQ §934.22 item 1). tierPriceSlot answers a price-less tier with its
-          // standing and no sub-line.
+          // width (ODQ §934.22 item 1). The tier has since left this surface altogether
+          // (the docblock's invitation-only rule), but the RESOLVER stays: a price-less
+          // tier is answered by its STANDING and the standing's own sub-line, and the two
+          // ladders never mix — a tier reads as a price or as a standing, label and
+          // sub-line together. Keeping it here is what stops the raw keys returning the
+          // day any other tier loses a price.
           const { label: priceLabel, sub: priceSub } = tierPriceSlot(tier.key);
           const tagline = t(`pricing.tiers.${tier.key}.tagline`);
           const features = (tx(`pricing.tiers.${tier.key}.features`) || []).slice(0, 3);

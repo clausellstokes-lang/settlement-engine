@@ -57,9 +57,12 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
   // simulation-variant tagline, then the legacy tagline.
   const tagline  = audienceLine || variantTagline || t(`pricing.tiers.${tier.key}.tagline`);
   // The focal slot through the ONE resolver (copy/index.js): a tier that carries no
-  // price carries its STANDING, and has no sub-line. Reading the two price keys with
-  // `t()` here printed the Founder's dotted key paths wherever this card drew that
-  // tier — the anon teaser does, on /create (ODQ §934.22 item 1).
+  // price carries its STANDING and the standing's own sub-line. Reading the two price
+  // keys with `t()` here printed the Founder's dotted key paths wherever this card drew
+  // that tier — the anon teaser does, on /create (ODQ §934.22 item 1). Under the purchase
+  // lock the Founder's slot is the owner's approved words (§934.24(3)); what every tier
+  // slot says while purchases are locked is ruled in
+  // tests/components/lockedPriceSlots.census.test.js.
   const { label: priceLabel, sub: priceSub } = tierPriceSlot(tier.key);
   const name       = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
 

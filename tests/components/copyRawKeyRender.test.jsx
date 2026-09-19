@@ -72,7 +72,7 @@ vi.mock('../../src/store/index.js', () => {
 
 import AnonTierTeaser from '../../src/components/AnonTierTeaser.jsx';
 import PricingPage from '../../src/components/PricingPage.jsx';
-import { getVisibleTiers } from '../../src/config/pricing.js';
+import { getPublicTiers, getVisibleTiers } from '../../src/config/pricing.js';
 import { tierPriceSlot } from '../../src/copy/index.js';
 
 /**
@@ -102,6 +102,7 @@ describe('no rendered surface prints a copy key', () => {
     expect(RAW_KEY.test('hero.anonCap.spent')).toBe(true);
     // …and against text the product really renders, which must NOT match.
     for (const real of [
+      'A founding place, held until launch', 'Opens with the launch',
       'By invitation', 'Free', 'forever', '$5.99', 'per month',
       'You’ve explored hamlet, village, town.', 'Wanderer', '61–400',
       'Start free', 'Most popular',
@@ -114,10 +115,13 @@ describe('no rendered surface prints a copy key', () => {
     const { container } = render(<AnonTierTeaser onSignIn={() => {}} />);
     const nodes = textNodes(container);
     // ANTI-VACUITY: the teaser draws a name, a price slot, a tagline, three features
-    // and a CTA for each visible tier. A floor well under that still refuses an empty
+    // and a CTA for each PUBLIC tier. A floor well under that still refuses an empty
     // render, which is the shape a thrown lazy chunk would leave behind.
+    // ⚠ THE DENOMINATOR IS `getPublicTiers()` SINCE 2026-09-19: the owner took the
+    // invitation-only Founder off this surface, so a floor counted over the whole
+    // catalogue would be measuring a card the teaser is now right not to draw.
     expect(nodes.length, 'the teaser rendered almost no text — did it throw?')
-      .toBeGreaterThanOrEqual(3 * getVisibleTiers().length);
+      .toBeGreaterThanOrEqual(3 * getPublicTiers().length);
     expect(
       rawKeysIn(container),
       '\nThe Create page teaser is printing copy KEYS at the reader. A key renders when '
@@ -159,8 +163,20 @@ describe('no rendered surface prints a copy key', () => {
     // A chair is given, never sold (copy/en.js). The cure for the raw keys was NOT to
     // put priceLabel/priceSub back — that would re-arm every surface to quote a price
     // for a thing that is not for sale, which the purchases-locked law also forbids.
+    //
+    // THE WORDS MOVED ONCE, BY THE OWNER'S OWN ORDER (ODQ §934.24(3), verbatim: "the
+    // Founder card under the purchase lock says what it means — 'A founding place, held
+    // until launch'"). Lane 28's interim 'By invitation' said HOW a chair is come by;
+    // these say that and WHEN. The SUB-LINE is no longer null: it resolves from
+    // `standingSub`, the standing ladder's own second line, never from priceSub. The
+    // per-tier rulings and the rest of the catalogue live in
+    // tests/components/lockedPriceSlots.census.test.js; this arm keeps the ONE fact this
+    // file is about — the Founder's slot is words, not a key and not a price.
     const { label, sub } = tierPriceSlot('founder');
-    expect(label).toBe('By invitation');
-    expect(sub).toBeNull();
+    expect(label).toBe('A founding place, held until launch');
+    expect(sub).toBe('Opens with the launch');
+    expect(RAW_KEY.test(label), 'the Founder focal slot reads as a raw key').toBe(false);
+    expect(RAW_KEY.test(sub), 'the Founder sub-line reads as a raw key').toBe(false);
+    expect(/[$£€]|\d/.test(`${label} ${sub}`), 'the Founder slot quotes money').toBe(false);
   });
 });
