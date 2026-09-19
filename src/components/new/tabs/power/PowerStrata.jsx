@@ -25,6 +25,7 @@ import { Section } from '../../Primitives.jsx';
 import { FACTION_COLORS } from '../../tabConstants.js';
 import Button from '../../../primitives/Button.jsx';
 import InstitutionLink from '../../../primitives/InstitutionLink.jsx';
+import NameColumns from '../../../primitives/NameColumns.jsx';
 import EntityLink from '../../../primitives/EntityLink.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
@@ -178,18 +179,29 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                       <div key={group.why}>
                         {/* The basis, said once for the whole group. */}
                         <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, marginBottom: 2 }}>{group.why}</div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingLeft: 8, borderLeft: `1px solid ${SEAM}` }}>
+                        {/* ⭐ THE NAMES RUN IN COLUMNS (owner order 2026-09-19, on this exact
+                            list: "could we also have sections like these be in two or three
+                            columns to conserve space?"). A merchant power with twenty-five
+                            houses behind it printed twenty-five full-width lines for
+                            twenty-five words. The caption above is said once per group either
+                            way; this is the other half of the same economy.
+                            ⚠ THE FLEX COLUMN HAD TO GO, not be decorated: a flex container
+                            ignores `column-count` outright, so the rows would have stayed one
+                            per line with the property quietly inert. NameColumns is a block
+                            box and the row spacing moves from the flex `gap` to the row's own
+                            margin, which is what a multi-column box can express. */}
+                        <NameColumns count={group.edges.length} style={{ paddingLeft: 8, borderLeft: `1px solid ${SEAM}` }}>
                           {/* A BLOCK CONTAINER, because InstitutionLink renders the card BESIDE its
                               trigger — see that primitive's docblock. These two were `<span>`, which
                               React's DOM-nesting validator does not check, so the same defect the
                               Services tab printed twelve errors for was SILENT here. Both were already
                               flex children, so the box is identical. */}
                           {group.edges.map((edge, si) => (
-                            <div key={si} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45 }}>
+                            <div key={si} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, lineHeight: 1.45, marginBottom: 3 }}>
                               <InstitutionLink name={edge.name} settlement={settlement} />
                             </div>
                           ))}
-                        </div>
+                        </NameColumns>
                       </div>
                     ))}
                   </div>
