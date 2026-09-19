@@ -323,21 +323,25 @@ const CHART_CENSUS = Object.freeze([
     // min + span × p, with span = age − 0.
     verdict: 'one-source', sharedOn: ['age'],
   },
+  // ── CURED 2026-09-19 (the §934.29 consist). This row was REPORTED: `fillPct` was
+  //    `dimensionPolarity(key) === 'lower_is_better' ? 100 - dim.value : dim.value` while
+  //    the figure printed in the same row was the RAW `dim.value`, so a card reading
+  //    "Volatility · Critical · 88" drew a bar 12 % full and nothing said so. The chair
+  //    ruled that THE BAR DRAWS THE NUMBER IT PRINTS and the row states the scale where the
+  //    dimension runs the other way. The run is now `dim.value` itself — the same expression
+  //    as the figure, which is why this grades one-source rather than derived — and the
+  //    always-visible caption carries `dimensionScaleNote(dimKey)` ("lower is better") from
+  //    domain/state/bands.js, beside the polarity it reads. The SCREEN TWIN
+  //    (src/components/settlement/SystemStateBar.jsx) took the identical cure off the same
+  //    leaf in the same commit: it is outside CENSUS_TREES, so this census never saw it, but
+  //    both files' headers pin the two surfaces to agree and curing one alone would have
+  //    manufactured the disagreement they forbid.
   {
     id: 'pdf-system-state-dimension',
     path: 'src/pdf/sections/SystemStateSnapshot.jsx', dim: 'width',
-    drawn: '`${fillPct}%`',
+    drawn: '`${dim.value}%`',
     figure: 'dim.value',
-    verdict: 'reported',
-    why: 'ONE FIELD, INVERTED ARITHMETIC, AND NOTHING SAYS SO. `fillPct` is'
-      + ' `dimensionPolarity(key) === \'lower_is_better\' ? 100 - dim.value : dim.value`, while the'
-      + ' figure printed in the same row is the RAW `dim.value`. Three of the four dimensions'
-      + ' (volatility, externalThreat, resourcePressure — domain/state/bands.js DIM_POLARITY) are'
-      + ' lower-is-better, so a card reading "Volatility · Critical · 88" draws a bar 12 % full.'
-      + ' The inversion is deliberate (the run is a HEALTH bar, matching the polarity-oriented'
-      + ' band word beside it) and the raw score is the engine value; what is missing is any'
-      + ' statement that the two run opposite ways. The cure is a caption or a second figure,'
-      + ' which is a print-layout decision for the chair, not a display repair this lane takes.',
+    verdict: 'one-source', sharedOn: ['value'],
   },
   // ── NOT CHARTS (the detector's own false positives, kept rather than filtered)
   {
@@ -368,10 +372,18 @@ const CHART_CENSUS = Object.freeze([
   },
 ]);
 
-/** The frozen disagreement set: shrink-only, exact. A NEW one cannot land quietly. */
+/**
+ * The frozen disagreement set: shrink-only, exact. A NEW one cannot land quietly.
+ *
+ * ⭐ SHRUNK 2 → 1 on 2026-09-19: `pdf-system-state-dimension` was cured (see its row above)
+ * and comes out of the set in the same commit that cured it, so the win is banked rather
+ * than becoming spare budget. What remains is `overview-food-security-bar`, which is NOT
+ * curable from display — re-cutting its label off `resilienceScore` is a domain re-grade
+ * and re-drawing its run off the deficit contradicts the owner order of 2026-07-22 recorded
+ * at OverviewTab.jsx. Its door is the owner's.
+ */
 const REPORTED_DISAGREEMENTS = Object.freeze([
   'overview-food-security-bar',
-  'pdf-system-state-dimension',
 ]);
 
 // ── THE DETECTOR (shared by the live walk and the anti-vacuity plants) ────────

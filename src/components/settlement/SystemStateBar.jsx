@@ -10,7 +10,7 @@
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { BAND_COLOR, BAND_HINT, dimensionPolarity } from '../../domain/state/bands.js';
+import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 import { statusCase } from '../new/labelLadder.js';
 
@@ -85,12 +85,14 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
 function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
   const meta = DIM_META[dimKey];
   const color = BAND_COLOR[dim.band] || MUTED;
-  // For "lower is better" dims (volatility, threat, pressure), render
-  // the bar from the right so bigger values look heavier and a "good"
-  // value reads as a small bar — matches DM intuition. This is the SAME
-  // orientation the band word is computed from, so a full bar and a
-  // "Stable" word now always mean the same thing.
-  const fillPct = dimensionPolarity(dimKey) === 'lower_is_better' ? (100 - dim.value) : dim.value;
+  // ⭐ THE BAR DRAWS THE NUMBER IT PRINTS (bands.js dimensionScaleNote, the §934.20
+  // chart-census cure). This row used to fill from `100 - dim.value` for the three
+  // lower-is-better dimensions while printing the raw value two spans to the left, so
+  // "Volatility · Critical · 88" drew a bar 12 % full. The run is now the same expression
+  // as the figure, and where the dimension runs the other way the row says so under the
+  // bar. The print twin (src/pdf/sections/SystemStateSnapshot.jsx) took the identical cure
+  // in the same commit, off this same leaf, because the two surfaces are pinned to agree.
+  const scaleNote = dimensionScaleNote(dimKey);
 
   return (
     <div
@@ -134,10 +136,20 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       </div>
       <div style={{ height: 4, background: swatch['#E7D7B8'], overflow: 'hidden' }}>
         <div style={{
-          height: '100%', width: `${fillPct}%`,
+          height: '100%', width: `${dim.value}%`,
           background: color, transition: 'width 200ms',
         }} />
       </div>
+      {/* The scale note sits UNDER THE BAR, not behind the disclosure: the reader who
+          needs it is the one looking at a long bar on a bad dimension, and the caption
+          inside `isOpen` is exactly where they are not looking. */}
+      {scaleNote && (
+        <div style={{
+          marginTop: 2, fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+        }}>
+          {scaleNote}
+        </div>
+      )}
       {isOpen && (
         <div style={{
           marginTop: SP.xs, padding: SP.xs,

@@ -21,7 +21,7 @@ import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { BAND_COLOR, BAND_HINT, dimensionPolarity } from '../../domain/state/bands.js';
+import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { causalBandWord, deriveCausalState, SYSTEM_VARIABLES } from '../../domain/causalState.js';
 import { humanize } from '../lib/format.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
@@ -153,7 +153,10 @@ function DimensionCard({ dimKey, dim }) {
   const meta = DIM_META[dimKey];
   if (!dim || !meta) return null;
   const color = BAND_COLOR[dim.band] || palette.muted;
-  const fillPct = dimensionPolarity(dimKey) === 'lower_is_better' ? (100 - dim.value) : dim.value;
+  // THE BAR DRAWS THE NUMBER IT PRINTS (see bands.js dimensionScaleNote): the run below is
+  // `dim.value`, the same expression the figure beside the label reads, and the caption
+  // carries the scale note where the dimension runs the other way.
+  const scaleNote = dimensionScaleNote(dimKey);
 
   return (
     <View
@@ -184,10 +187,10 @@ function DimensionCard({ dimKey, dim }) {
         </View>
         {/* Bar */}
         <View style={{ height: 3, backgroundColor: swatch['#E7D7B8'], marginBottom: 4 }}>
-          <View style={{ width: `${fillPct}%`, height: '100%', backgroundColor: color }} />
+          <View style={{ width: `${dim.value}%`, height: '100%', backgroundColor: color }} />
         </View>
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 3 }}>
-          {meta.desc} {BAND_HINT[dim.band]}
+          {meta.desc}{scaleNote ? ` (${scaleNote})` : ''} {BAND_HINT[dim.band]}
         </Text>
         {dim.drivers?.length > 0 && (
           <View style={{ marginBottom: 2 }}>
