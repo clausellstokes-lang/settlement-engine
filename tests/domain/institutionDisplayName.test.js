@@ -61,9 +61,7 @@ describe('institutionDisplayName — the parish-church family', () => {
 
   test('no mapped label still says "parish" or "church"', () => {
     for (const label of Object.values(INSTITUTION_DISPLAY_NAMES)) {
-      // anchored: the loop asserts over a non-empty frozen map whose size is pinned
-      // by the catalogue-completeness test below, so an emptied map cannot go vacuous.
-      expect(label).not.toMatch(/parish|church/i);
+      expect(label).not.toMatch(/parish|church/i); // anchored: the map is asserted non-empty right below, and its keys are pinned to the catalogue, so an emptied map cannot make this loop vacuous
     }
     expect(Object.keys(INSTITUTION_DISPLAY_NAMES).length).toBeGreaterThan(0);
   });
