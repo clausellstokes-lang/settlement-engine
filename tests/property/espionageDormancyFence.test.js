@@ -189,6 +189,18 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-09-19, THE VIEW RE-DERIVED THREE NUMBERS ITS WRITER ALREADY HELD (owner-signed, through the door) ────
+ * THE FOURTH MOVEMENT OF THIS CONSTANT since the genesis freeze, and like the ones
+ * before it a signed re-record under tests/helpers/goldenRecordDoor.js rather than a
+ * spend of the one window this file's STOP still names. The owner's order: "make sure
+ * that the food deficit math and the band visual are correct" (2026-09-19); the record
+ * is docs/shift-records/2026-09-19-food-balance-arithmetic.json (odqRow §934.15). THE
+ * MOVER, IN THE RECORD'S OWN WORDS, because the record is the authority and this
+ * paragraph does not paraphrase it: THE VIEW RE-DERIVED THREE NUMBERS ITS WRITER ALREADY
+ * HELD, AND GOT TWO OF THEM WRONG.
+ * On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct. `38a26ac1…` ->
+ * `6ffc462c…`.
+ *
  * ── 2026-09-18, THE PRESSURE-SENTENCE AGREEMENT (owner-signed, through the door) ─────────
  * THE THIRD MOVEMENT SINCE THE GENESIS FREEZE, and like the two before it a signed re-record
  * under tests/helpers/goldenRecordDoor.js rather than a spend of the one window this file's STOP
@@ -304,7 +316,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '38a26ac1ca7b7e5bb81d9e7795851b57ca32d50f5a36d78b41e564ccd731f196';
+const PRE_COUPLING_CORPUS_SHA = '6ffc462c6a73f85ca2396053bacadb71d3e1904a265bdc9c90a6e59b5d71d089';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
