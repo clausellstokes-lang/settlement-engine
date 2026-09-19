@@ -39,7 +39,13 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
     quarters.push({
       name:      'Religious Quarter',
       location:  'Eastern district (traditional)',
-      desc:      'Churches, monasteries, quiet streets with priests and pilgrims',
+      // ⛔ GENERATED TEXT, NOT A LABEL (ODQ §934.22 item 1(d)). This string is SPREAD ONTO
+      // the hashed settlement as `spatialLayout.quarters[].desc`, so no read-time seam can
+      // reach it and moving it MOVES THE GOLDEN — the shift is recorded at
+      // docs/shift-records/2026-09-19-religious-quarter-text.json. The quarter's own NAME
+      // ('Religious Quarter') and its `has('church')` gate are untouched: the gate reads the
+      // raw catalogue key, which §934.13 ruled stays the identifier.
+      desc:      'Houses of worship, cloisters, quiet streets with priests and pilgrims',
       landmarks: instNames
         .filter(n => n.includes('church') || n.includes('Cathedral') ||
                      n.includes('monastery') || n.includes('Hospital'))

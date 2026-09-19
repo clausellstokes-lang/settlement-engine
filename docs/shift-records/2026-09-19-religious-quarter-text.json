@@ -1,0 +1,22 @@
+{
+  "_doc": "THE RECORD OF THE 2026-09-19 RELIGIOUS-QUARTER TEXT ORDER, beside docs/shift-records/2026-09-19-parish-church-text.json and deliberately NOT folded into it: that record has had its act, and a record is never edited after one, only joined by a new record that says what moved next. This is the ONE remaining setting-specific sentence the parish-church order did not reach, because it is not an institution label at all - it is a QUARTER description, authored in spatialGenerator.js and spread onto the hashed settlement. The lane does NOT execute the act: the chair runs UPDATE_GOLDEN and the door from the committed tree. THE SAME TWO GATES STAND BETWEEN THIS RECORD AND ITS ACT: espionage-dormancy-fence refuses its own movement as a STOP outside a named chartered window, and the fence hash below was measured on the LANE's tree - the chair re-measures on the consist and uses that figure.",
+  "ownerWords": "the parish church is a house of worship on every surface",
+  "ownerDate": "2026-09-19",
+  "odqRow": "§934.22",
+  "cause": "THE READER MET 'Churches, monasteries' IN A QUARTER CARD WHOSE OWN BULLET NOW READS 'Houses of worship (2-5)'. §934.13 cured the institution LABEL with a read-time seam and §934.13's text half (the 2026-09-19 parish-church record) moved 23 authored strings across five data files; neither could reach this one, because src/generators/spatialGenerator.js:42 is GENERATOR TEXT - `spatialLayout.quarters[].desc` is spread onto the settlement at generation and persisted, so no display seam sees it and every saved world carries the old sentence. WHAT MOVED: EXACTLY ONE authored string, the Religious Quarter's description, 'Churches, monasteries, quiet streets with priests and pilgrims' -> 'Houses of worship, cloisters, quiet streets with priests and pilgrims'. 'Cloisters' rather than 'monasteries' because the monastery catalogue keys are matched by substring across six generators and the word in the SENTENCE was the setting-specific half of the pair; 'priests and pilgrims' stays, because both are setting-agnostic office words the product uses everywhere. WHAT DELIBERATELY DID NOT MOVE: the quarter's NAME ('Religious Quarter'), its `has('church') || has('Cathedral') || has('monastery')` gate, and the `landmarks` filter - all three read the raw catalogue KEY, which §934.13 ruled stays the identifier ~158 sites match by substring. The Roadside Shrine's own description was read and is already setting-agnostic. MEASURED, SINGLE-VARIABLE, on this lane's tree by generating both corpora twice - once with spatialGenerator.js restored to da6d49662, once with the edit - and hashing each settlement exactly as the two suites do. 453 OF 525 ROWS MOVE on generator-golden-master. BY TIER: thorp 12/84, hamlet 84/84, village 84/84, town 105/105, city 84/84, metropolis 84/84 - the thorp shortfall is the tier that draws no religious institution in most of its configurations, and it is the SAME 453 the parish-church record measured, because both movers ride the same population of settlements that have a Religious Quarter at all. THE 525-KEY SET IS IDENTICAL before and after. TOTALITY CONTROL, EXECUTED NOT ASSUMED: with spatialGenerator.js restored, this box reproduces DRIFT 0 of 525 against the committed manifest AND reproduces the fence's committed constant 91a60437b452d3f185b7766c739d4bd61641568349a2a32aacf863a444c62e6a EXACTLY, so the movement is attributable to this one string and to nothing else the lane carries. ON THE FENCE'S OWN 360-SETTLEMENT DRIVEN CORPUS, 346 OF 360 ROWS carry the moved sentence (thorp 46/60; hamlet, village, town, city and metropolis 60/60 each). 360/360 hashes stay DISTINCT on both sides, so the generator has not stopped seeing its seed. The constant reads 91a60437b452d3f185b7766c739d4bd61641568349a2a32aacf863a444c62e6a -> 0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430 AT THE LANE'S TIP; the chair re-measures on the consist and writes THAT figure, because the constant is written from the tree the act runs in.",
+  "seat": "lane 27, the surface-leaks lane (Opus 5, branch fix-surface-leaks-2026-09-19, base da6d49662); the chair executes the door writes from the committed tree",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}
