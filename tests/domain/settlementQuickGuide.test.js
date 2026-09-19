@@ -256,45 +256,88 @@ describe('composeSettlementQuickGuide', () => {
     }
   });
 
-  it('the sound lists are whole words, because a prefix cannot hear the vowel after it', () => {
+  /**
+   * ── ⭐⭐ THE ARTICLE BATTERY (review 10, 2026-09-18) ─────────────────────────────────
+   *
+   * THE ARM THIS REPLACES pinned fifteen words against a `uni-` PREFIX behind an eighteen-word
+   * exception set, and every one of the fifteen passed while the rule was wrong about a whole
+   * word class: measured against a dictionary, 538 of 542 `un` + vowel words came out "a"
+   * ("a uninspired", "a unintended", "a unimaginable"), because a negative list can only name
+   * the exceptions somebody thought of and `un-` is an open class. Nine of the twenty-six
+   * single-letter initialisms were wrong too, and nothing looked at them at all.
+   *
+   * So the rule is inverted — 'an' is the default for a written vowel, the consonant-SOUND
+   * words are a positive list, and an all-capital run is decided on the NAME of its first
+   * letter — and the pin is a BATTERY rather than a handful, because the defect was never a
+   * wrong answer on a word somebody had considered. Every row below is `[lead, article]`, and
+   * a table is used so a red names the word rather than a line number.
+   */
+  it('THE ARTICLE BATTERY: every class the rule must decide, one row per word', () => {
     const lead = (label) => composeSettlementQuickGuide({
       name: 'X', tier: 'village', population: 9, culturalIdentity: { label },
     }).identitySentence.match(/^X is (an?) /)[1];
 
-    // ⛔ THE PREFIX SPELLING OVER-FIRED ON ALL THREE OF THESE. `/^uni/` cannot tell
-    // `unified` (/juː/, 'a') from `uninhabited` (/ʌ/, 'an'), and `/^one/` swallowed
-    // `Oneiric`; the distinction is the vowel that FOLLOWS, which a prefix never sees.
-    expect(lead('Uninhabited')).toBe('an');
-    expect(lead('Unimportant')).toBe('an');
-    expect(lead('Oneiric')).toBe('an');
-    // …while the words that really do open with a consonant sound still take 'a'.
-    expect(lead('European-inspired')).toBe('a');
-    expect(lead('Unified-Clans')).toBe('a');
-    expect(lead('One-Road')).toBe('a');
+    /** @type {Array<[string, 'a'|'an']>} */
+    const BATTERY = [
+      // ── THE CLASS THE OLD RULE LOST: `un` + a vowel-initial word, which is unbounded.
+      ['Uninspired', 'an'], ['Unintended', 'an'], ['Unimaginable', 'an'], ['Uninhabited', 'an'],
+      ['Unimportant', 'an'], ['Unopposed', 'an'], ['Unarmed', 'an'], ['Unowned', 'an'],
+      ['Uneasy', 'an'], ['Unequal', 'an'], ['Unusual', 'an'], ['Unearthly', 'an'],
+      ['Uninvited', 'an'], ['Unerring', 'an'], ['Uneven', 'an'],
+      // ── THE /juː/ POSITIVE LIST: a written vowel said with a consonant.
+      ['Uniform', 'a'], ['Unified', 'a'], ['Unique', 'a'], ['Unit', 'a'], ['United', 'a'],
+      ['Universe', 'a'], ['Universal', 'a'], ['University', 'a'], ['Union', 'a'],
+      ['Unicorn', 'a'], ['Unicycle', 'a'], ['Unilateral', 'a'], ['Unicode', 'a'],
+      ['Unisex', 'a'], ['Unison', 'a'], ['Unicameral', 'a'], ['Unanimous', 'a'],
+      ['Usurper', 'a'], ['Usury', 'a'], ['Usual', 'a'], ['Useful', 'a'], ['Utopia', 'a'],
+      ['Utensil', 'a'], ['Ubiquitous', 'a'], ['Ufo', 'a'], ['Eucharist', 'a'], ['Eunuch', 'a'],
+      ['Euphemism', 'a'], ['Eulogy', 'a'], ['European-inspired', 'a'], ['Ewe', 'a'],
+      // ── ONE / ONCE, and the word the old prefix swallowed beside them.
+      ['One-Road', 'a'], ['Once-Fort', 'a'], ['Oneiric', 'an'],
+      // ── THE `ur-` FAMILY, which needs the vowel after it and must not take `urn`.
+      ['Uranium', 'a'], ['Urine', 'a'], ['Urea', 'a'],
+      ['Urn', 'an'], ['Urban', 'an'], ['Urge', 'an'],
+      // ── WRITTEN CONSONANTS SAID WITH A VOWEL — the silent h, and the American herb.
+      ['Heir', 'an'], ['Honest', 'an'], ['Honour', 'an'], ['Hour', 'an'], ['Herb', 'an'],
+      // …and the ordinary h beside them, which must NOT move.
+      ['Hotel', 'a'], ['Highland', 'a'], ['Herd', 'a'], ['Honeycomb', 'a'], ['Hill-Clans', 'a'],
+      // ── THE LETTER RUN IS READ FROM THE START OF THE LEAD, never from the middle.
+      ['8-Isle', 'an'], ['7-Hills', 'a'],
+      // ── INITIALISMS, by the NAME of the first letter. Three of these were wrong before.
+      ['FMG', 'an'], ['URL', 'a'], ['SOS', 'an'], ['USA', 'a'], ['UNICEF', 'a'],
+      ['NPC', 'an'], ['PDF', 'a'], ['HTML', 'an'], ['XP', 'an'], ['GM', 'a'],
+      // ── PROPER NOUNS, which reach the rule because no authored map can hold them.
+      ['Umbrian-inspired', 'an'], ['Oceanic-inspired', 'an'], ['Ironhold', 'an'],
+      ['Ashfen', 'an'], ['Elderwyn', 'an'], ['Kilcross', 'a'], ['Thornwall', 'a'],
+      // ── ALL-CAPS AUTHORED WORDS, which must be read as words and not spelled out.
+      ['VILLAGE', 'a'], ['METROPOLIS', 'a'], ['THORP', 'a'], ['TOWN', 'a'], ['CITY', 'a'],
+      ['HAMLET', 'a'], ['SETTLEMENT', 'a'],
+      ['ARABIC-INSPIRED', 'an'], ['EAST-ASIAN-INSPIRED', 'an'], ['GERMANIC-INSPIRED', 'a'],
+    ];
 
-    // ⛔ AND THERE WAS NO SILENT-H LIST AT ALL, so every one of these took 'a'.
-    expect(lead('Honest')).toBe('an');
-    expect(lead('Hourglass')).toBe('an');
-    expect(lead('Heir')).toBe('an');
-    // The ordinary h is untouched.
-    expect(lead('Highland')).toBe('a');
-    expect(lead('Hill-Clans')).toBe('a');
-
-    // ⛔ THE WHOLE-WORD LISTS ALONE DROPPED WORDS THE PREFIX RULE HAD RIGHT, so the prefix
-    // stays as a LAST RESORT behind its exception set. Each of these opens with a written
-    // vowel and a consonant sound, and none of them is in the word list.
-    for (const word of ['Usurper', 'Usury', 'Utopia', 'Ufo', 'Unicameral', 'Unanimous',
-      'Universe', 'Eucharist', 'Eunuch', 'Euphemism']) {
-      expect(lead(word), word).toBe('a');
+    // ── THE TWENTY-SIX SINGLE LETTERS, derived rather than typed: twelve letter names open
+    // with a vowel sound (ay ee ef aitch eye el em en oh ar es ex) and fourteen do not — `U`
+    // among them, which is why "an URL" was wrong.
+    for (const letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+      BATTERY.push([letter, 'AEFHILMNORSX'.includes(letter) ? 'an' : 'a']);
     }
-    // …and the exception set is what stops that prefix over-firing again.
-    for (const word of ['Uninhabited', 'Unimportant', 'Oneiric', 'Unusual', 'Uneven']) {
-      expect(lead(word), word).toBe('an');
+
+    // ── EVERY AUTHORED CULTURE LABEL AND TIER NOUN IN THE CORPUS, read from the corpus so a
+    // relabelled culture cannot slip past the battery by being renamed out of it.
+    for (const profile of Object.values(CULTURE_PROFILES)) {
+      BATTERY.push([profile.label, /^[AEIOU]/.test(profile.label) && !/^Eu/.test(profile.label) ? 'an' : 'a']);
+    }
+    for (const tier of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis', 'settlement']) {
+      BATTERY.push([tier, 'a']);
     }
 
-    // The letter-run is read from the START of the lead, never from the middle of it.
-    expect(lead('8-Isle')).toBe('an');   // "an eight-Isle"
-    expect(lead('7-Hills')).toBe('a');   // "a seven-Hills"
+    expect(BATTERY.length, 'the battery shrank below the class count it was written to cover')
+      .toBeGreaterThanOrEqual(60);
+    // COLLECT-THEN-ASSERT: a red names EVERY word that moved, not the first one.
+    const wrong = BATTERY
+      .filter(([label, article]) => lead(label) !== article)
+      .map(([label, article]) => `${label}: got "${lead(label)}", expected "${article}"`);
+    expect(wrong, `${wrong.length} of ${BATTERY.length} leads take the wrong article`).toEqual([]);
   });
 
   it('falls through to historical character when the scope is not a term list', () => {

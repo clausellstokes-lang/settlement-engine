@@ -229,43 +229,94 @@ const ARTICLE_BY_LEAD = Object.freeze({
  * the lead's first WORD and are kept as short as the defect allows.
  */
 /**
- * Whole words that open with a consonant SOUND behind a written vowel, so they take 'a'.
- * The list is not exhaustive and is not meant to be: it holds the words a settlement
- * label plausibly opens with, and the PREFIX rule below catches the long tail.
+ * ⭐⭐ THE RULE IS INVERTED FROM HERE ON (review 10, 2026-09-18), and the measurement is the
+ * whole argument. The previous cut asked "does this look like a consonant-sound word?" with a
+ * `uni-` PREFIX behind an eighteen-word exception set — a NEGATIVE list against an open class.
+ * Measured against a dictionary: 538 of 542 `un` + vowel words came out wrong ("a uninspired",
+ * "a unintended", "a unimaginable"), because the exception set can only ever name the handful
+ * somebody thought of, and `un-` is the most productive negating prefix in English.
+ *
+ * So the polarity is reversed. `an` is now the DEFAULT for a written vowel, which is right for
+ * the whole open `un-` class at once, and the words that break it are POSITIVE lists that can
+ * only shrink the answer where somebody has actually looked. A missing entry now costs one
+ * wrong article on one unusual word instead of an entire word class.
+ */
+
+/**
+ * Whole words that open with a written vowel and a CONSONANT sound — exact spellings the
+ * stems below cannot safely reach, because their own prefix is shared with a word that takes
+ * the other article ("one" against "oneiric", "ewe" against "ewer" is fine but "ew" is not).
  */
 const CONSONANT_SOUND_WORDS = new Set([
-  'european', 'euphoric', 'eulogy', 'eucalyptus', 'eucharist', 'eunuch', 'euphemism',
-  'ewe', 'one', 'once', 'unanimous', 'unified', 'union', 'united', 'unique', 'uniform',
-  'unit', 'unicameral', 'universal', 'universe', 'university', 'unicorn', 'usual',
-  'useful', 'usurper', 'usury', 'utopia', 'utopian', 'ubiquitous', 'ufo',
-]);
-/** Written consonants that open with a vowel sound, so they take 'an'. The silent h. */
-const VOWEL_SOUND_WORDS = new Set([
-  'heir', 'heiress', 'heirloom', 'honest', 'honesty', 'honour', 'honor',
-  'honourable', 'honorable', 'honorary', 'hour', 'hourglass', 'hourly',
-]);
-/**
- * The long tail, as a last resort: most words opening `eu-`, `uni-`, `use-`, `usu-`,
- * `uto-`, `ubi-`, `ufo-`, `one-` carry the consonant sound and take 'a'.
- */
-const CONSONANT_SOUND_PREFIX = /^(?:eu|ewe|one|once|uni|use|usu|uto|ubi|ufo)/;
-/**
- * ⛔ AND THE WORDS THAT MATCH THAT PREFIX AND STILL TAKE 'an'. This set is the whole
- * reason the prefix may be kept: `uni-` cannot tell `unified` (/juː/) from `uninhabited`
- * (/ʌn/ + `inhabited`), and `one-` swallows `oneiric`, because the sound is decided by
- * the vowel that FOLLOWS the prefix, which a prefix never sees. Anything listed here
- * skips the prefix rule and falls to the plain written-vowel default.
- */
-const PREFIX_EXCEPTIONS = new Set([
-  'oneiric', 'unaccounted', 'unarmed', 'unbroken', 'uneasy', 'unequal', 'unended',
-  'unending', 'unimportant', 'uninhabited', 'uninterested', 'unopposed', 'unowned',
-  'unusual', 'unusable', 'uninvited', 'unearthly', 'unerring', 'uneven',
+  'one', 'ones', 'oneself', 'once', 'ewe', 'ewer', 'ouija',
 ]);
 
 /**
- * The article the identity sentence takes, decided in five steps: the words the product
- * mints, then the two sound lists, then the prefix rule behind its exception set, then
- * the written vowel.
+ * ⭐ THE POSITIVE LIST, AS STEMS — every written-vowel opening that is really said with a
+ * consonant, enumerated rather than guessed. Each stem is chosen so that NO word starting
+ * with it takes 'an': `unit` reaches unit/unite/unity/united/unitary, `univ` reaches
+ * universe/universal/university/univalent/univocal, `use` reaches use/used/useful/user, and
+ * none of them can be reached by `un` + a vowel-initial word.
+ *
+ * ⛔ WHY THERE IS NO BARE `uni` STEM, WHICH IS THE WHOLE LESSON. `uni` cannot tell `uniform`
+ * (/juː/) from `uninspired` (/ʌn/ + `inspired`), because the sound is decided by what FOLLOWS
+ * and both are followed by a consonant letter. The old spelling kept the bare prefix and tried
+ * to subtract the exceptions; this one never admits the ambiguous prefix in the first place.
+ * A `uni-` word the list misses falls to 'an', which is wrong for that ONE word rather than
+ * for the five hundred the prefix was swallowing.
+ *
+ * `ur[aeio]` is the /jʊər/ family — urine, uranium, urea, ureter, urology — and it requires the
+ * vowel, so `urn`, `urban` and `urge` are untouched and still take 'an'/'a' by the rules below.
+ */
+const CONSONANT_SOUND_STEMS =
+  /^(?:eu|ewe|ouija|ubiq|ufo|uku|unanim|unicam|unicel|unico(?:de|rn)|unicycl|unifi|unifor|unify|unilater|unilingu|unio|uniqu|unisex|unison|unit|univ|ur[aeio]|usa|use|usu|ute|util|utop)/;
+
+/**
+ * The other positive list: written CONSONANTS that open with a vowel sound, so they take 'an'.
+ * The silent h, plus the American `herb`. Exact words, never a stem — `her`, `herd`, `Herbert`
+ * and `honeycomb` all open with the ordinary consonant and must not be caught.
+ */
+const VOWEL_SOUND_WORDS = new Set([
+  'heir', 'heiress', 'heirloom', 'honest', 'honesty', 'honestly',
+  'honour', 'honor', 'honourable', 'honorable', 'honorary', 'honorific',
+  'hour', 'hourglass', 'hourly', 'herb', 'herbs', 'herbal', 'herbalist', 'herbaceous',
+]);
+
+/**
+ * ⭐ AN INITIALISM IS READ LETTER BY LETTER, so its article answers to the NAME of its first
+ * letter and not to the letter itself. Nine of the twenty-six were wrong before this existed:
+ * "a FMG" (ef), "an URL" (you), "a SOS" (es). These twelve letter names open with a vowel
+ * sound — ay, ee, ef, aitch, eye, el, em, en, oh, ar, es, ex — and every other letter, `U`
+ * included, opens with a consonant one.
+ */
+const LETTER_NAME_TAKES_AN = new Set(['A', 'E', 'F', 'H', 'I', 'L', 'M', 'N', 'O', 'R', 'S', 'X']);
+
+/**
+ * The authored map, read again without regard to case.
+ *
+ * ⚠ IT IS A SECOND LOOKUP AND NOT A REPLACEMENT. The exact read above stays first so authored
+ * copy is decided byte-for-byte as it always was; this one catches the same authored words in
+ * a custom label's own casing — `METROPOLIS`, `Village`, `ARABIC-INSPIRED` — which would
+ * otherwise fall through to the initialism rule and be spelled out letter by letter.
+ * @type {Readonly<Record<string, 'a' | 'an'>>}
+ */
+const ARTICLE_BY_LEAD_LOWER = Object.freeze(Object.fromEntries(
+  Object.entries(ARTICLE_BY_LEAD).map(([lead, article]) => [lead.toLowerCase(), article]),
+));
+
+/**
+ * The article the identity sentence takes, decided in six steps: the words the product mints
+ * (exactly, then in any casing), the two sound lists, the letter name of an initialism, and
+ * finally the written vowel — which now means 'an'.
+ *
+ * ⚠ THE ONE CLASS IT STILL GETS WRONG, said plainly rather than left to be discovered: an
+ * ORDINARY WORD written in full capitals and absent from both sound lists is read as an
+ * initialism, so a custom label of "MARKET TOWN" is decided on the name of `M` and comes out
+ * "an MARKET TOWN". The two sound lists and the authored map are consulted FIRST precisely to
+ * keep the common cases out of that branch (`HONEST`, `HOUR`, `EUROPEAN`, `USA`, `VILLAGE` and
+ * every authored culture label are all decided before the letter name is ever asked for), and
+ * the alternative — dropping the letter-name rule — is nine wrong articles across the
+ * twenty-six single letters and every acronym the product will ever be handed.
  *
  * @param {string} descriptors
  * @returns {'a' | 'an'}
@@ -278,13 +329,20 @@ function articleFor(descriptors) {
   // `hasOwnProperty` - each of them TRUTHY, so the function itself was returned and
   // printed: "X is function Object() { [native code] } constructor village of 9 people."
   if (Object.hasOwn(ARTICLE_BY_LEAD, lead)) return ARTICLE_BY_LEAD[lead];
+  const leadLower = lead.toLowerCase();
+  if (Object.hasOwn(ARTICLE_BY_LEAD_LOWER, leadLower)) return ARTICLE_BY_LEAD_LOWER[leadLower];
   // ⚠ ANCHORED. An unanchored `/[a-z]+/` takes the first letter-run ANYWHERE in the
   // lead, so "8-Isle" was decided on `Isle` and came out "an 8-Isle" - the article has
   // to answer to the character the reader actually says first.
-  const word = (lead.match(/^[^a-z]*([a-z]+)/i)?.[1] || '').toLowerCase();
+  const raw = lead.match(/^[^a-z]*([a-z]+)/i)?.[1] || '';
+  const word = raw.toLowerCase();
   if (VOWEL_SOUND_WORDS.has(word)) return 'an';
-  if (CONSONANT_SOUND_WORDS.has(word)) return 'a';
-  if (!PREFIX_EXCEPTIONS.has(word) && CONSONANT_SOUND_PREFIX.test(word)) return 'a';
+  if (CONSONANT_SOUND_WORDS.has(word) || CONSONANT_SOUND_STEMS.test(word)) return 'a';
+  // THE INITIALISM, decided on the first letter's NAME. A run written entirely in capitals
+  // that neither sound list claims is spelled out by a reader, so `FMG` is "ef-em-gee".
+  if (/^[A-Z]+$/.test(raw)) return LETTER_NAME_TAKES_AN.has(raw[0]) ? 'an' : 'a';
+  // THE DEFAULT, AND THE INVERSION: a written vowel takes 'an' unless something above knew
+  // better. This is the line that gets the whole open `un-` class right.
   return /^[aeiou]/.test(word) ? 'an' : 'a';
 }
 
