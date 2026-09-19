@@ -498,7 +498,10 @@ export function isWhisperOnRoute(w, route) {
   return origin.includes(route);
 }
 
-/** Every whisper whose page of origin includes `route`, highest-priority first. */
+/**
+ * Every whisper whose page of origin includes `route`, highest-priority first.
+ * @param {string} route
+ */
 export function whispersForRoute(route) {
   return GUIDANCE_WHISPERS
     .filter((w) => isWhisperOnRoute(w, route))
