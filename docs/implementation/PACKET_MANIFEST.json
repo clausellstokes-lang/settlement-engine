@@ -31076,7 +31076,7 @@
     },
     {
       "id": "EM-P2",
-      "status": "READY",
+      "status": "STALE",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P2.md",
       "verifiedBase": "00fab686d31dd7bfaeb8363caa49921fb70c63e8",
       "changeManifest": [
