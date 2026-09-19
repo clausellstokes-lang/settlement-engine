@@ -159,12 +159,14 @@ const KIND_ACCENT = {
   save:     BODY,
 };
 
+// Rung-3 tags on a timeline ENTRY, not the timeline's axis words: sentence case, with
+// the accent colour carrying the kind. The engine keys are untouched.
 const KIND_LABEL = {
-  snapshot: 'SNAPSHOT',
-  canonize: 'CANON',
-  export:   'EXPORT',
-  edit:     'EDIT',
-  save:     'SAVE',
+  snapshot: 'Snapshot',
+  canonize: 'Canon',
+  export:   'Export',
+  edit:     'Edit',
+  save:     'Save',
 };
 
 export default function VersionsTab({ save }) {
@@ -401,7 +403,7 @@ export default function VersionsTab({ save }) {
                   fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.06em',
                   color: accent,
                 }}>
-                  {KIND_LABEL[e.kind] || 'EVENT'} · {formatTs(e.ts)}
+                  {KIND_LABEL[e.kind] || 'Event'} · {formatTs(e.ts)}
                 </div>
                 <div style={{
                   fontFamily: serif_, fontSize: FS.md, fontWeight: 600,

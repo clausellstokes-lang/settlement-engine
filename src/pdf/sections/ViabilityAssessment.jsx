@@ -22,6 +22,7 @@ import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, noteText, smart, humanize, stripZwnj, safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
+import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
@@ -32,7 +33,7 @@ const SEVERITY_TONE = {
 
 export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse }) {
   const v = vm.viability;
-  const verdict = verdictOf(v);
+  const verdict = viabilityVerdict(v);
   const issues = v.issues || [];
   const warnings = (v.warnings || []).filter(Boolean);
   const violations = v.structuralViolations || [];
@@ -341,15 +342,6 @@ function IssueRow({ iss, idx }) {
       </View>
     </View>
   );
-}
-
-function verdictOf(v) {
-  const verdict = (v.verdict || '').toLowerCase();
-  if (v.viable === true || verdict === 'viable') return { tone: 'good', label: 'Viable' };
-  if (v.viable === false || verdict === 'notviable') return { tone: 'bad', label: 'Not Viable' };
-  if (verdict === 'fragile') return { tone: 'warn', label: 'Fragile' };
-  if (verdict === 'collapsing') return { tone: 'bad', label: 'Collapsing' };
-  return { tone: v.verdictTone || 'warn', label: cap(v.verdict || 'Uncertain') };
 }
 
 function formatVal(val) {

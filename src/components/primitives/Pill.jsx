@@ -37,7 +37,6 @@ export default function Pill({
         padding: '2px 8px', borderRadius: R.md,
         background: bg, color,
         fontFamily: sans, fontSize: FS.xs, fontWeight: 700,
-        textTransform: 'uppercase', letterSpacing: '0.04em',
         whiteSpace: 'nowrap',
         ...(absolute ? { position: 'absolute' } : null),
         ...style,

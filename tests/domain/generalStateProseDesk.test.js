@@ -1208,11 +1208,29 @@ describe('the viability verdict and the hook framing', () => {
     expect(viabilityVerdictPoolKey(false)).toBe('viable: false: the arithmetic does not close');
     expect(viabilityVerdictPoolKey(undefined)).toBe('the MARGINAL arm: neither verdict returned');
     expect(viabilityVerdictPoolKey(null)).toBe('the MARGINAL arm: neither verdict returned');
-    // The tab's own three-way headline is the mirror this totality is FOR.
+    // The three-way headline is the mirror this totality is FOR — and it MOVED. The tab
+    // forked inline on `viable` and printed its own words while the paid PDF printed four
+    // different ones from a private `verdictOf`; both now read ONE derivation, so the anchor
+    // follows it there and the tab is anchored on the fact that it reads it.
     mustExtract(
       src('src/components/new/tabs/ViabilityTab.jsx'),
-      "viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'",
-      'the three-way verdict headline in ViabilityTab.jsx',
+      'const verdict = viabilityVerdict(v);',
+      'the viability tab reads the ONE shared verdict derivation',
+    );
+    mustExtract(
+      src('src/domain/display/viabilityVerdict.js'),
+      "return { tone: 'good', label: 'Viable', glyph: '✓' };",
+      'the VIABLE arm of the shared verdict',
+    );
+    mustExtract(
+      src('src/domain/display/viabilityVerdict.js'),
+      "return { tone: 'bad', label: 'Not viable', glyph: '✗' };",
+      'the NOT-VIABLE arm of the shared verdict',
+    );
+    mustExtract(
+      src('src/domain/display/viabilityVerdict.js'),
+      "label: String(tokenCase(v?.verdict ? String(v.verdict) : 'Uncertain'))",
+      'the MARGINAL fall-through arm of the shared verdict',
     );
     // The contradiction count: two pools, and a non-number is NOT a zero.
     expect(criticalIssuePoolKey(2)).toBe('criticalIssueCount: critical contradictions on the record');

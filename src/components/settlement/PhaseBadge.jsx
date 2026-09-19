@@ -87,7 +87,8 @@ export default function PhaseBadge({ chipOnly = false }) {
             fontSize: FS.xs, fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
           }}
         >
-          {c.label.toUpperCase()}
+          {/* Rung 3: COLORS already writes 'Draft'/'Canon'; the transform was the shout. */}
+          {c.label}
           {phase === 'canon' && eventCount > 0 && (
             <span style={{ opacity: 0.7, marginLeft: 4 }}>· {eventCount}</span>
           )}

@@ -85,11 +85,11 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
       {/* ── Readiness strip ──────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'READINESS', value: d.readiness?.label },
-          { label: 'SCORE AVG', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
-          { label: 'SAFETY', value: cap(d.safetyLabel) },
-          { label: 'WATCH:POP', value: smart(d.safetyRatio) },
-          { label: 'FOOD RES.', value: smart(d.foodResilience) },
+          { label: 'Readiness', value: d.readiness?.label },
+          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+          { label: 'Safety', value: cap(d.safetyLabel) },
+          { label: 'Watch to population', value: smart(d.safetyRatio) },
+          { label: 'Food resilience', value: smart(d.foodResilience) },
         ]}
       />
 

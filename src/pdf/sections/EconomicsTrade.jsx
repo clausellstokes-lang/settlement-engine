@@ -68,10 +68,10 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
 
       <StatStrip
         stats={[
-          { label: 'PROSPERITY', value: cap(e.prosperity) || '–' },
-          { label: 'COMPLEXITY', value: cap(e.economicComplexity) || '–' },
-          { label: 'OUTPUT', value: smart(e.economyOutput) },
-          { label: 'TRADE', value: cap(e.tradeAccess) || '–' },
+          { label: 'Prosperity', value: cap(e.prosperity) || '–' },
+          { label: 'Complexity', value: cap(e.economicComplexity) || '–' },
+          { label: 'Output', value: smart(e.economyOutput) },
+          { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
 

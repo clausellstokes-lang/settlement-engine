@@ -358,8 +358,8 @@ function FactionCard({ faction, index, entityIndex }) {
         <Text style={{ ...type.body_em, fontSize: pt['10.5'], color: palette.ink, flex: 1 }}>{f.name}</Text>
         <View style={{ flexDirection: 'row', gap: 4 }}>
           {f.category && <Tag tone="muted">{cap(f.category)}</Tag>}
-          {f.isGoverning && <Tag tone="gold">GOVERNING</Tag>}
-          <Pill tone="gold">PWR {f.power}</Pill>
+          {f.isGoverning && <Tag tone="gold">Governing</Tag>}
+          <Pill tone="gold">Power {f.power}</Pill>
         </View>
       </View>
       <BarMeter

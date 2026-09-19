@@ -30,8 +30,13 @@
  * imports, and roster C of IconsContext.js names it for the same reason.
  *
  * Nothing is lost when the icon goes: the two channels IconsContext documents as
- * surviving — the kind's COLOR and the uppercase TEXT label (P7) — are both
- * still here, and the label is what the pins and assistive tech already read.
+ * surviving — the kind's COLOR and the TEXT label (P7) — are both still here, and
+ * the label is what the pins and assistive tech already read.
+ *
+ * ⚠ THE LABEL IS NO LONGER UPPERCASED (the label ladder, 2026-09-18). It is a rung-3
+ * STATUS VALUE in a badge, where colour and weight already carry the meaning, and
+ * `src/copy/en.js` writes these words in sentence case at the source. The badge was
+ * shouting a word the copy table had already set correctly.
  */
 
 import { tx } from '../../copy/index.js';
@@ -77,7 +82,7 @@ export default function StateBadge({ kind, size = 'md', tooltip, suffix }) {
         whiteSpace: 'nowrap',
       }}
     >
-      {label.toUpperCase()}
+      {label}
       {suffix != null && (
         <span style={{ opacity: 0.7, marginLeft: 4 }} aria-hidden="true">· {suffix}</span>
       )}

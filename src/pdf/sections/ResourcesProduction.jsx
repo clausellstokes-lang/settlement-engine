@@ -150,7 +150,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           </Text>
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
-              kicker="DEPLETED"
+              kicker="Depleted"
               hint="consumed locally · export potential reduced"
               tone="bad"
               items={r.nearbyDepleted}
@@ -159,7 +159,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           )}
           {r.nearbyAbundant?.length > 0 && (
             <ResourceRow
-              kicker="ABUNDANT"
+              kicker="Abundant"
               hint="full export potential"
               tone="good"
               items={r.nearbyAbundant}
@@ -168,7 +168,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           )}
           {r.availableCommodities?.length > 0 && (
             <ResourceRow
-              kicker="COMMODITIES AVAILABLE"
+              kicker="Commodities available"
               hint="processed/refined in this settlement"
               tone="muted"
               items={r.availableCommodities}
@@ -405,7 +405,10 @@ function ResourceRow({ kicker, hint, tone, items, customNames = [] }) {
   return (
     <View style={{ marginBottom: 4 }}>
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-        <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
+        {/* RUNG 3 — 'Depleted' / 'Abundant' are the resource's STATE, not a section name.
+            This is why the ladder judges the SLOT by what its callers pass: Callout's kicker
+            is a block eyebrow and keeps its capitals, and this one does not. */}
+        <Text style={{ ...type.label_plain, fontSize: pt['7.5'], color: palette[tone] || palette.muted }}>
           {kicker}
         </Text>
         {hint && (

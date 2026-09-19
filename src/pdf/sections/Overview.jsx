@@ -84,11 +84,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       {/* ── Identity strip ───────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'POPULATION', value: populationFmt, sublabel: id.tier },
-          { label: 'AGE',        value: ageFmt, sublabel: id.terrain },
-          { label: 'PROSPERITY', value: cap(o.prosperity), tone: o.prosperityTone },
-          { label: 'SAFETY',     value: cap(o.safety), tone: o.safetyTone },
-          { label: 'STABILITY',  value: cap(o.stability) },
+          { label: 'Population', value: populationFmt, sublabel: id.tier },
+          { label: 'Age',        value: ageFmt, sublabel: id.terrain },
+          { label: 'Prosperity', value: cap(o.prosperity), tone: o.prosperityTone },
+          { label: 'Safety',     value: cap(o.safety), tone: o.safetyTone },
+          { label: 'Stability',  value: cap(o.stability) },
         ]}
       />
 

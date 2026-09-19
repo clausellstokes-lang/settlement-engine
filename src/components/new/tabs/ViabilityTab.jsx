@@ -1,4 +1,5 @@
 import { tokenCase } from '../labelLadder.js';
+import { viabilityVerdict } from '../../../domain/display/viabilityVerdict.js';
 import React, { useMemo } from 'react';
 import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
@@ -28,6 +29,13 @@ import { proseFontSize } from '../../../design/proseScale.js';
  * NAMED-chain pool is a more specific rung of the same reading, not a second sentence.
  */
 const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
+
+// The verdict palette, keyed on the SHARED tone token so the colour and the word can no
+// longer disagree. The words live in domain/display/viabilityVerdict.js; these do not,
+// because the page has its own palette for the same three tones.
+const VERDICT_BG     = { good: '#f0faf4', warn: '#fdf8e8', bad: '#fdf4f4' };
+const VERDICT_BORDER = { good: '#a8d8b0', warn: '#e0c860', bad: '#e8c0c0' };
+const VERDICT_INK    = { good: '#1a5a28', warn: '#b8860b', bad: '#8b1a1a' };
 
 export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false, playerView = false}) {
   // THE PHONE PROSE FLOOR — the verdict summary, the what-this-checks caption,
@@ -129,7 +137,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // display chokepoint (src/lib/proseSeams.js) so no surface can drift.
   const _cleanHook = h => normalizePlotHook(typeof h==='object' ? h.hook||Ti(h) : String(h));
 
-  const viable = v.viable;
+  // ONE VERDICT, BOTH SURFACES. This tab used to fork inline on `viable` and print its own
+  // words ('NOT COHERENT' / 'COHERENT' / 'MARGINAL COHERENCE') while the paid PDF printed
+  // 'Viable' / 'Not viable' / 'Fragile' / 'Collapsing' from its own private `verdictOf`.
+  // Two vocabularies for one derived fact, and this side could not say 'Fragile' at all.
+  // The shared leaf owns the word, the tone and the glyph; the palette below stays local.
+  const verdict = viabilityVerdict(v);
 
   return (
     <div style={{...sans}}>
@@ -137,16 +150,16 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
       {/* ── VIABILITY VERDICT ────────────────────────────────────────────── */}
       <div style={{
-        background: viable===false ? '#fdf4f4' : viable===true ? '#f0faf4' : '#fdf8e8',
-        border: `2px solid ${viable===false?'#e8c0c0':viable===true?'#a8d8b0':'#e0c860'}`,
-        borderLeft: `6px solid ${viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b'}`,
+        background: VERDICT_BG[verdict.tone] || VERDICT_BG.warn,
+        border: `2px solid ${VERDICT_BORDER[verdict.tone] || VERDICT_BORDER.warn}`,
+        borderLeft: `6px solid ${VERDICT_INK[verdict.tone] || VERDICT_INK.warn}`,
         padding: '14px 18px', marginBottom: 14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:6}}>
-              <span style={{fontSize: FS['22'],fontWeight:800,color:viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b',lineHeight:1}}>
-                {viable===false ? '✗ NOT COHERENT' : viable===true ? '✓ COHERENT' : 'MARGINAL COHERENCE'}
+              <span style={{fontSize: FS['22'],fontWeight:800,color:VERDICT_INK[verdict.tone] || VERDICT_INK.warn,lineHeight:1}}>
+                {verdict.glyph ? `${verdict.glyph} ` : ''}{verdict.label}
               </span>
             </div>
             {summaryClean&&<p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}

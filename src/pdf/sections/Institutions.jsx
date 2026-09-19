@@ -55,20 +55,20 @@ export function Institutions({ settlement, narrativeMode, vm }) {
       {/* ── Health header ────────────────────────────────────── */}
       <StatStrip
         stats={[
-          { label: 'TOTAL', value: detailed.length },
-          { label: 'CATEGORIES', value: categories.length },
+          { label: 'Total', value: detailed.length },
+          { label: 'Categories', value: categories.length },
           {
-            label: 'IMPAIRED',
+            label: 'Impaired',
             value: s.totals?.impaired ?? 0,
             tone: (s.totals?.impaired ?? 0) > 0 ? 'bad' : 'muted',
           },
           {
-            label: 'DEGRADED',
+            label: 'Degraded',
             value: s.totals?.degraded ?? 0,
             tone: (s.totals?.degraded ?? 0) > 0 ? 'warn' : 'muted',
           },
           {
-            label: 'VULNERABLE',
+            label: 'Vulnerable',
             value: s.totals?.vulnerable ?? 0,
             tone: (s.totals?.vulnerable ?? 0) > 0 ? 'warn' : 'muted',
           },
@@ -244,7 +244,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.products?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>PRODUCES</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Produces</Text>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.products.slice(0, 6).map(p => label(p) || humanize(String(p))).filter(Boolean).join(', ')}
           </Text>
@@ -253,7 +253,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.requirements?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.warn }}>NEEDS</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.warn }}>Needs</Text>
           <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
             {inst.requirements.slice(0, 6).map(r => label(r) || humanize(String(r))).filter(Boolean).join(', ')}
           </Text>
@@ -273,7 +273,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.pressures?.length > 0 && (
         <View style={{ marginTop: 1 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.bad }}>PRESSURES</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.bad }}>Pressures</Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
             {inst.pressures.slice(0, 4).map((p, i) => (
               <Tag key={`pr-${idx}-${i}`} tone="warn">{label(p) || humanize(String(p))}</Tag>
@@ -284,7 +284,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 
       {inst.plotHooks?.length > 0 && (
         <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label, fontSize: pt['7'], color: palette.gold }}>HOOKS</Text>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.gold }}>Hooks</Text>
           {inst.plotHooks.slice(0, 2).map((h, i) => {
             const t = hookText(h);
             if (!t) return null;

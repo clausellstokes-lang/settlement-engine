@@ -601,7 +601,9 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
       priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`,
     )), 'all three DS-GEN-11 lenses draw privately and none reaches a public dossier');
     // The DATUM survives the gate: the headline and the pill keep their own words.
-    expect(pub).toContain('NOT COHERENT');
+    // The word moved with the lift: both surfaces now read domain/display/viabilityVerdict.js,
+    // which speaks the verdict at rung 3 ('Not viable') instead of the tab's old private shout.
+    expect(pub).toContain('Not viable');
     expect(pub).toContain('2 critical');
   });
 

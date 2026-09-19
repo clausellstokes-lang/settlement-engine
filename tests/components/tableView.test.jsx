@@ -47,7 +47,8 @@ describe('TableView', () => {
     expect(screen.getByText('Maren')).toBeTruthy();
     expect(screen.getByText('NPC')).toBeTruthy();
     expect(screen.getByText('The Salt Debt')).toBeTruthy();
-    expect(screen.getByText('HOOK')).toBeTruthy();
+    // The DISPLAY word descended with the label ladder; the model token stays 'HOOK'.
+    expect(screen.getByText('Hook')).toBeTruthy();
   });
 
   it('falls back gracefully when there are no entries', () => {
