@@ -413,7 +413,7 @@ export const en = Object.freeze({
   refusals: {
     dailyCap: {
       rubric: 'Free settlements',
-      body:   'Today’s free settlements are spent. Sign in — it is free — to keep forging, and to reach city and metropolis.',
+      body:   'Today’s free settlements are spent. Sign in, free, to keep forging and to reach city and metropolis.',
     },
     tier: {
       rubric: 'A bigger settlement',
