@@ -41,6 +41,8 @@ import BulkActionBar from './settlements/BulkActionBar.jsx';
 import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
 import { useOwnerScopedSaves } from '../hooks/useOwnerScopedSaves.js';
 import Button from './primitives/Button.jsx';
+import RefusalNotice from './primitives/RefusalNotice.jsx';
+import { REFUSAL_REASONS } from '../lib/refusalReasons.js';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import UnassignedLedger from './settlements/UnassignedLedger.jsx';
@@ -67,6 +69,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const generateSettlement = useStore(s => s.generateSettlement);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
+  // The lane records WHY it refused; this surface only renders it (and, for the ONE
+  // reason that has a purchase door, opens that door as well).
+  const lastRefusal = useStore(s => s.lastRefusal);
+  const clearRefusal = useStore(s => s.clearRefusal);
   // The fork door's half of the create chokepoint (ODQ §934.14). Read the same
   // way the three sibling doors read it (BuyThisDossier, SaveToLibraryButton,
   // ConstructionPanel) so there is one access pattern to recognise.
@@ -137,12 +143,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
    *      and BIND the returned id as the active save, so the row the tap
    *      just created is the one the rest of the app is looking at.
    *   4. Navigate to the Create view to reveal the dossier.
-   * If generation returns null (e.g. an anon/free user forking the city
-   * sample, which is tier-gated above town), open the purchase modal so
-   * the button always yields a visible result instead of silently dying.
+   * ⛔ A NULL IS NOT ALWAYS A PRICE (adversarial review of the second wave). This
+   * handler answered EVERY null with the purchase modal, on the guess that a fork can
+   * only fail by tier — so an anonymous reader whose day's allowance was spent, or
+   * anyone whose engine chunk failed to load, was shown a checkout for a problem money
+   * does not solve. The lane names its reason; only `tier` has a door worth selling, and
+   * every other reason is SAID where the reader clicked.
    */
   const forkSample = useCallback(async (sample) => {
     if (!sample?.config || forkingId) return;
+    clearRefusal?.();
     setForkingId(sample.id);
     const seed = forkSeedFor(sample, authUser?.id);
     // The seed is the generation argument, never a config key (forkConfigFor).
@@ -160,10 +170,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
 
     if (!result) {
-      // Tier-gated (anon/free forking a city) or a generation error.
-      // Surface the upgrade path rather than leaving the click inert.
       setForkingId(null);
-      setPurchaseModalOpen(true);
+      // ⛐ READ THE REASON OFF THE STORE, NOT OFF A SELECTOR CLOSURE. The gate recorded
+      // it DURING the await above, so the `lastRefusal` this callback closed over is the
+      // value from before the click. `getState()` is the estate's idiom for exactly this
+      // (App.jsx's front-door effects read it the same way).
+      const refused = useStore.getState().lastRefusal;
+      // The size door is the only one a purchase opens. Everything else — the day's
+      // allowance, a failed engine chunk, a tab that outlived a deploy — is rendered by
+      // the notice below, which is already mounted above the cards the reader clicked.
+      if (refused?.reason === REFUSAL_REASONS.TIER) setPurchaseModalOpen(true);
       return;
     }
 
@@ -214,7 +230,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   }, [
     authUser?.id, updateConfig, generateSettlement, canSave,
     clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
-    setActiveSaveId,
+    setActiveSaveId, clearRefusal,
   ]);
 
   const [deleteId, setDeleteId] = useState(null);
@@ -735,7 +751,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // Gated on campaigns too: a campaign-first user (campaigns made before
         // any settlement is saved) falls through to the campaign folders below
         // instead of seeing a "you have nothing" sample.
-        <div style={{ marginTop:SP.xl }}><SampleDashboard onFork={forkSample} forkingId={forkingId} tier={authTier} /></div>
+        <div style={{ marginTop:SP.xl }}>
+          {/* The reason, above the cards the reader clicked — FoundingWorlds' idiom, and
+              the only thing that was missing here when a fork came back null. */}
+          <RefusalNotice refusal={lastRefusal} style={{ marginBottom: SP.md }} />
+          <SampleDashboard onFork={forkSample} forkingId={forkingId} tier={authTier} />
+        </div>
       ) : (filteredSaves.length === 0 && saves.length > 0) ? (
         // The library has saves, but none survive the active search/filters.
         // Offer a recovery CTA rather than a silent dead-end (no inert list).

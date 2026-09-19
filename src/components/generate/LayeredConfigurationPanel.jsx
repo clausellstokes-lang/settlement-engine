@@ -98,11 +98,22 @@ function DeepSection({ id, label, hint, collapsedHint, Panel }) {
  * so the configSeamContract stays intact. GenerateWizard swaps to the output view on
  * the new settlement (its settlement-change effect). The current draft's seed
  * (store lastSeed) is shown for copying so a rolled world can be reproduced or shared.
+ *
+ * ⛔ IT REFUSED IN SILENCE (adversarial review of the second wave). `await generate(seed)`
+ * took no null, caught no throw, and cleared the spinner either way: an anonymous visitor
+ * typing a seed with the day's allowance spent watched the button think and then stop,
+ * with nothing said — the exact class lib/refusalReasons.js was built against, on a
+ * surface the cure had not reached. Wired here EXACTLY as generate/FoundingWorlds.jsx
+ * wires it: clear the previous reason at the click, render the gate's recorded one where
+ * the reader clicked, and never answer a refusal by doing nothing.
  */
 function SeedField() {
   const generate = useStore((s) => s.generateSettlement);
   const setRandomSliderMode = useStore((s) => s.setRandomSliderMode);
   const lastSeed = useStore((s) => s.lastSeed);
+  // The lane records WHY it refused; this surface only renders it.
+  const lastRefusal = useStore((s) => s.lastRefusal);
+  const clearRefusal = useStore((s) => s.clearRefusal);
   const [value, setValue] = useState('');
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -110,10 +121,19 @@ function SeedField() {
   const forge = async () => {
     const seed = value.trim();
     if (!seed || busy) return;
+    // A refusal from a previous attempt must not outlive this click. (The lane clears it
+    // too; doing it here as well is what keeps the notice from showing the old reason
+    // while the engine chunk is still in flight.)
+    clearRefusal?.();
     setBusy(true);
     try {
       setRandomSliderMode(true);
+      // A null is a GATE: the reason is already recorded and the notice below renders it.
+      // Nothing else is owed — and in particular not a navigation, which is how three of
+      // the four original offenders answered a refusal.
       await generate(seed);
+    } catch {
+      // The lane records the reason before it re-throws; the notice below renders it.
     } finally {
       setBusy(false);
     }
@@ -148,6 +168,8 @@ function SeedField() {
           Forge seed
         </Button>
       </div>
+      {/* The reason, under the control the reader used, announced as well as shown. */}
+      <RefusalNotice refusal={lastRefusal} style={{ margin: `${SP.sm}px ${SP.xs}px 0` }} />
       {lastSeed != null && (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.xs, padding: `0 ${SP.xs}px`, flexWrap: 'wrap' }}>
           <span style={{ fontSize: FS.xs, color: MUTED }}>Current draft seed</span>

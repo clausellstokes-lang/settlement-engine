@@ -31,6 +31,7 @@ import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
+import RefusalNotice from './primitives/RefusalNotice.jsx';
 import { recoverFromChunkError } from '../lib/staleDeploy.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
@@ -134,6 +135,14 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
   // settlement; SettlementsPanel reads selectedSettlementId on mount and
   // opens the matching save in detail view.
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
+  // ⛔ A GATE'S REASON IS NOT A FAILURE, AND THIS SURFACE USED TO OVERWRITE IT
+  // (adversarial review of the second wave). `generate()` returns null when a gate
+  // refuses, having ALREADY recorded which one; the hero turned that null into a
+  // hand-made throw and rendered `errors.forgeStart` — "The forge stalled… Try once
+  // more" — over the day's-allowance or the size sentence the reader actually needed.
+  // "Try once more" is false advice at a cap: the retry cannot succeed.
+  const lastRefusal = useStore(s => s.lastRefusal);
+  const clearRefusal = useStore(s => s.clearRefusal);
 
   // Variant: signed-in users see instant generation across all sizes;
   // anonymous users see the marketing hero with the funnel framing.
@@ -204,6 +213,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
     if (generatingRef.current) return;
     generatingRef.current = true;
     setBeginError(null);
+    clearRefusal?.();
     setGenerating(true);
     try {
       // Instant generation has NO config-mode origin: the roll begins from the
@@ -216,7 +226,11 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       setWizardMode(null);
       updateConfig({ settType: pickedSize });
       const generated = await generate();
-      if (!generated) throw new Error('Generation completed without a settlement.');
+      // ⛔ A NULL IS A GATE, NOT A STALL. The lane recorded WHICH gate before it returned,
+      // and the notice below renders that. Manufacturing a throw here put the generic
+      // failure sentence on top of the real reason, so the one surface that knew the most
+      // about the refusal said the least.
+      if (!generated) return;
       if (isAnon) {
         // Counting the generation against the daily cap is owned by
         // generateSettlement now (so wizard "Regenerate Draft" and the
@@ -475,12 +489,20 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
             {/* Plain-language failure surface (P10). The Deep Craft clerk's-note
                 idiom (no tinted wash, role=alert passed through); the CTA above IS
                 the retry. First-click failures are the most fragile funnel point. */}
-            {beginError && (
+            {/* ONE NOTICE, AND WHICH ONE IS A DECISION RATHER THAN A RACE. A real throw
+                leaves BOTH a `beginError` and a lane-recorded reason; `beginError` wins
+                because this surface's own handler knows more — recoverFromChunkError has
+                already asked whether a new build is live and may have reloaded. A refusal
+                throws nothing, so the recorded reason is the only thing to say, and it is
+                said here rather than swallowed. */}
+            {beginError ? (
               <div style={{ marginTop: SP.sm, textAlign: 'left' }}>
                 <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
                   {beginError}
                 </ClerkNote>
               </div>
+            ) : (
+              <RefusalNotice refusal={lastRefusal} style={{ marginTop: SP.sm, textAlign: 'left' }} />
             )}
             {isAnon && (
               <p style={{
