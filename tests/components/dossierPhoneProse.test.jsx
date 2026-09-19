@@ -13,8 +13,17 @@
  * everywhere would be as wrong as no floor:
  *   • below the breakpoint every prose paragraph clears 14px;
  *   • above it every size is byte-identical to what shipped;
- *   • CHROME is untouched at both widths — labels, eyebrows and counts keep
- *     their own scale, which is what makes the prose findable.
+ *   • CHROME KEEPS ITS OWN, LOWER FLOOR — labels, eyebrows and counts stay two
+ *     steps under the prose, which is what makes the prose findable.
+ *
+ * ⭐ THAT THIRD LINE USED TO READ "chrome is untouched at both widths", AND THE
+ * CHAIR AMENDED IT (2026-09-18). "Keeps its own scale" had been read as "may
+ * render at any size", so a sweep had only two moves for a long piece of
+ * furniture — leave it at 10px, or promote it to prose at 14px, flattening it
+ * into the sentence it labels. `proseScale.js` gained `PHONE_CHROME_FLOOR` and
+ * `chromeFontSize`: on a phone PROSE >= 14px and CHROME >= 12px, and the
+ * DIFFERENCE between them is the hierarchy. Desktop is still the identity at
+ * both, which is what the paired cases below prove.
  *
  * jsdom has no matchMedia, so a controllable fake is installed and the modules
  * are reset per case: useIsMobile keeps one shared store per breakpoint and
@@ -23,7 +32,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
-import { proseFontSize, PHONE_PROSE_FLOOR } from '../../src/design/proseScale.js';
+import { proseFontSize, PHONE_CHROME_FLOOR, PHONE_PROSE_FLOOR } from '../../src/design/proseScale.js';
 
 function installMatchMedia(matches) {
   window.matchMedia = vi.fn((query) => ({
@@ -93,10 +102,37 @@ describe('the NPC card', () => {
     expect(px(screen.getByText('Wants').parentElement)).toBe(11);
   });
 
-  it('leaves the trait chips alone at BOTH widths — chrome is not prose', async () => {
+  /**
+   * ⭐ RE-AIMED AT THE AMENDED RULING (2026-09-18). This asserted 10px at BOTH
+   * widths and was titled "chrome is not prose", which was the right reading
+   * while `proseScale.js` said chrome was EXEMPT. The chair then amended it —
+   * chrome carries a floor of its own, 12px — because "keeps its own scale" had
+   * been read as "may render at any size", and the sweep that followed had only
+   * two moves for a long piece of furniture: leave it at 10px or promote it to
+   * prose at 14px.
+   *
+   * The chip is still NOT prose, and that is what this now proves properly: it
+   * takes the CHROME floor on a phone, two steps below the 14px the wants line
+   * above it takes, and its own 10px step on a desktop. Asserting one number at
+   * both widths could not tell those two rules apart.
+   */
+  const secretChip = (container) =>
+    [...container.querySelectorAll('span')].find((s) => /^Secret: $/.test(s.textContent));
+
+  it('takes the CHROME floor on a phone — furniture, floored, but never prose', async () => {
     installMatchMedia(true);
     const { container } = await renderCard();
-    const chip = [...container.querySelectorAll('span')].find((s) => /^Secret: $/.test(s.textContent));
+    const chip = secretChip(container);
+    expect(chip, 'the Secret label chip should still render').toBeTruthy();
+    expect(px(chip)).toBe(PHONE_CHROME_FLOOR);
+    expect(px(chip), 'the chip was promoted to prose, flattening it into the line it labels')
+      .toBeLessThan(PHONE_PROSE_FLOOR);
+  });
+
+  it('keeps its own 10px step on a desktop — the floors are a phone rule', async () => {
+    installMatchMedia(false);
+    const { container } = await renderCard();
+    const chip = secretChip(container);
     expect(chip, 'the Secret label chip should still render').toBeTruthy();
     expect(px(chip)).toBe(10);
   });

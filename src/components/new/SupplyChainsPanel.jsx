@@ -355,9 +355,26 @@ function Legend() {
     { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
   ];
   return (
-    <div data-sf-chrome="" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>
+    // ⛔ THE SIZE BELONGS TO EACH ITEM, NOT TO THE STRIP (review 13). It sat on the
+    // container, so the floor test measured ONE element whose text was all five
+    // labels run together — a 120-character line with two full stops in it, which
+    // is a sentence by every signal an instrument has, and a legend by every
+    // signal a reader has. The `data-sf-chrome` marker was what stopped that
+    // reading, and a marker whose whole job is to contradict the evidence is the
+    // unbounded escape the walker now refuses. Moving the size down to the items
+    // makes the measurement match the thing: five short labels, each glanced at,
+    // none of them long enough to be read. The strip keeps the layout and nothing
+    // else, so it carries no size for anything to measure.
+    //
+    // ⚠ AND NO ITEM CARRIES `data-sf-chrome` EITHER. It would be refused — each one
+    // wraps its own dot glyph, which is an element carrying its own text — and it
+    // was never doing any work: at under forty-five characters a legend item is
+    // below the bound at which the floor test measures anything at all. What keeps
+    // these five at 12px on a phone is `chromeFontSize` and the source census that
+    // demands it, not a declaration to a walker that never looks at them.
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', color: swatch.inkMag3 }}>
       {items.map((it, i) => (
-        <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+        <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xxs, mobile) }}>
           <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>
           {it.label}
         </span>

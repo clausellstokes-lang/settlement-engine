@@ -209,7 +209,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Income contribution */}
               {incomeEntry && (
-                <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
+                <div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:4}}>
                   Contributes to <strong>{incomeEntry.source}</strong> - {incomeEntry.percentage}% of income
                 </div>
               )}

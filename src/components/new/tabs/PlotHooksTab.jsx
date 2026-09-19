@@ -118,8 +118,23 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     // The source NAME — furniture, and long enough to be read
                     // (a conflict source reads "X vs Y"), so it takes the chrome floor.
                     fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
-                    color: INK, minWidth: 0, overflow: 'hidden',
-                    textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                    color: INK, minWidth: 0,
+                    // ⛔ A FLOOR INSIDE A CLAMP SHOWS LESS, NOT MORE — the same finding the
+                    // Economics income row took (2026-09-18), in the same shape. The floor
+                    // raises this name from 11.5px to 12px on the phone, and a `nowrap`
+                    // ellipsis inside a shared flex row is a function of the size: bigger
+                    // text in the same sliver means FEWER characters before the cut. The
+                    // one change made to help a phone reader would have handed them less of
+                    // the source than they had at 11.5px.
+                    //
+                    // On the phone the name WRAPS instead. There is room for it to: the row
+                    // is `space-between` with a `flexShrink: 0` kicker beside it, so the
+                    // name owns the rest of the 343px column and a two-line source costs one
+                    // line of card. Desktop keeps the clamp unchanged — above the breakpoint
+                    // the card is wide, the name fits, and the ellipsis never fires.
+                    ...(mobile
+                      ? { overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal' }
+                      : { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }),
                   }}>
                     {/* THE ONLY SITE IN THIS LADDER THAT WAS SHOUTING NOTHING AND STILL
                         WRONG: it printed the RAW ENGINE TOKEN, so a source read "npc" in
