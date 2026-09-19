@@ -296,10 +296,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
   const fb = via?.metrics?.foodBalance;
-  // Deficit % MUST come from the canonical display model (residual ÷ daily need),
-  // the same value the PDF prints — NOT the engine's gross metrics.foodBalance
-  // .deficitPercent (deficit ÷ adjustedNeed, pre-import), which disagrees with the
-  // PDF on every import-dependent settlement. (A+ pdf.3 — one fact, one source.)
+  // Deficit % MUST come from the canonical display model, the same value the PDF
+  // prints. Since ODQ §934.15 that model states the RECORD'S own residual share
+  // rather than re-deriving one from the published pounds, so this tab, the PDF
+  // chapter, Daily Life and the AI brief carry one number. (A+ pdf.3, one source.)
   const fbal = deriveFoodBalance(s);
   // Terrain-critical imports (things this terrain physically cannot produce)
   const terrainCriticals = (() => {

@@ -70,11 +70,18 @@ export function foodCore(viability) {
     importCoverage: fb?.importCoverage ?? null,
     rawDeficit: fb?.rawDeficit ?? null,
     coveragePct: coveragePct(fb?.importCoverage, fb?.rawDeficit),
-    // Residual deficit ÷ daily need — the SAME "% of need" the flag-on branch and
-    // the screen show. NOT the engine's gross fb.deficitPercent (deficit ÷
-    // adjustedNeed, pre-import), which disagrees on every import-dependent
-    // settlement. (A+ pdf.2 — one fact, one derivation, even on the killswitch path.)
-    deficitPct: legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
+    // The residual share of daily need — the SAME "% of need" the flag-on branch
+    // and the screen show. ⚠ fb.deficitPercent was once the engine's GROSS,
+    // pre-import figure, and this comment used to say so; the single-writer wave
+    // made it the residual, and ODQ §934.15 measured the two agreeing on 513 of
+    // the golden master's 525 configurations and differing by one point on the
+    // twelve smallest, where re-deriving from integer pounds loses the fraction.
+    // So the record's own figure comes first here too, and the derivation stays
+    // as the arm for a record that carries none. (A+ pdf.2 — one fact, one
+    // derivation, even on the killswitch path.)
+    deficitPct: Number.isFinite(fb?.deficitPercent) && fb.deficitPercent > 0 && legacyDef > 0
+      ? Math.round(fb.deficitPercent)
+      : legacyNeed > 0 && legacyDef > 0 ? Math.round((legacyDef / legacyNeed) * 100) : null,
   };
 }
 
