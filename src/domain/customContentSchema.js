@@ -8,13 +8,24 @@
  * treated as a second semantic schema.
  *
  * ⛔ WHY EVERY DERIVED `_KEYS` CONSTANT BELOW CARRIES A ROLLUP PURE ANNOTATION, AND
- * WHY THAT IS NOT DECORATION. Five ENGINE modules import this file, and all five want exactly
- * two symbols from it: `passesTierGate` (`lib/dependencyEngine.js`,
- * `generators/steps/assembleInstitutions.js`, `generators/steps/economyReconcilePass.js`,
- * `generators/services/institutionServices.js`) and `tradeCategoryLabelOf`
- * (`domain/content/customTradeEndpointProjection.js`). Not one engine, worker, kernel
- * or data module reads a single authoring vocabulary below - they are the compendium
- * editor's and the deity panel's, and they are the main thread's alone.
+ * WHY THAT IS NOT DECORATION. EIGHT non-UI modules import this file, and all eight want
+ * exactly two symbols from it (counted by grep, 2026-09-18; an earlier draft of this
+ * paragraph said five and named four - it had missed `resolveResources`,
+ * `customSupplyChainActivation` and `foldTradeCategories`, which is precisely the kind of
+ * hand-kept roster this file should not have asserted without re-measuring):
+ *
+ *   `passesTierGate`       - `lib/dependencyEngine.js`, `generators/steps/assembleInstitutions.js`,
+ *                            `generators/steps/economyReconcilePass.js`,
+ *                            `generators/steps/resolveResources.js`,
+ *                            `generators/services/institutionServices.js`,
+ *                            `domain/content/customSupplyChainActivation.js`
+ *   `tradeCategoryLabelOf` - `domain/content/customTradeEndpointProjection.js`,
+ *                            `domain/region/foldTradeCategories.js`
+ *
+ * Seven of the eight are inside the generation worker's static graph;
+ * `foldTradeCategories.js` is the one that is not. Not one engine, worker, kernel or data
+ * module reads a single authoring vocabulary below - they are the compendium editor's, the
+ * deity panel's and the gallery map's, and they are the main thread's alone.
  *
  * Rollup could not drop them all the same, and the reason is worth writing down
  * because it recurs: a `const X = Object.freeze(Y.map(f))` lets rollup drop the

@@ -167,46 +167,63 @@ describe('composeSettlementQuickGuide', () => {
     expect(say('arabic')).toMatch(/^Testholm is an Arabic-inspired village/);
   });
 
-  it('pins every authored scope by digest, so a reworded one is caught before its paraphrase lies', () => {
-    // ⛔ WHY A DIGEST, AND WHY HERE. SCOPE_PHRASE used to be KEYED ON THE AUTHORED
-    // SCOPE STRING, which is what made a reworded scope fall out of the map and reach
-    // the fallback - loud, and never a paraphrase of terms that had moved. That key
-    // also made src/domain/summary/settlementQuickGuide.js a SECOND MINT of the
-    // culture corpus, and FP-G16 (tests/build/cultureProfilesLazy.test.js) says a
-    // corpus sentence stands in exactly ONE source module. Keying the map on the
-    // profile id cured the law and cost the reword-catch, so the catch is rebuilt
-    // here: tests/ is outside FP-G16's walk of src/, and a digest is not the sentence,
-    // so nothing is re-minted anywhere.
+  it('pins the authored scope SENTENCES by digest, so a reword is caught and a re-key is not', () => {
+    // ⛔ THE CONTRACT, STATED, BECAUSE THE FIRST CUT OF THIS PIN OVERREACHED. It answers
+    // to the scope PROSE and to nothing else: one digest over the eleven scope sentences
+    // in the corpus's own profile-key order. Therefore
+    //   • REWORD a scope  -> RED. That is the whole purpose. SCOPE_PHRASE is a paraphrase
+    //     of a scope's terms, and once the map is keyed on the profile id a reworded scope
+    //     no longer falls out of it - it silently keeps a paraphrase that may now be WRONG.
+    //   • RE-KEY a profile (rename `east_asian`, say) while the wording stands -> GREEN,
+    //     because no sentence moved. The earlier per-key digest table red on that, which
+    //     made it a pin on the KEYS - a thing the coverage arm above already owns, and
+    //     owns better, since it drives the live map rather than a frozen copy of it.
+    // Coverage ("every profile key but the blend has a phrase") is the arm above; this one
+    // is words. The two together are the property the authored-string key used to buy.
     //
-    // ⚠ RE-RECORDING A ROW IS A CONTENT DECISION, NEVER A FORMALITY. A red row means
-    // that profile's scope was reworded: read it against its phrase in SCOPE_PHRASE,
-    // move the phrase if the terms moved, and only then re-record the digest, with the
-    // reason written down.
-    const SCOPE_DIGESTS = Object.freeze({
-      germanic: '8f77e1e230c2',
-      latin: '0cc8af355b91',
-      celtic: '97f678c09dc6',
-      arabic: 'ec62973a94cd',
-      norse: '253f6b4f125f',
-      slavic: '88544e6afb3e',
-      east_asian: '1bc9c02eb27e',
-      mesoamerican: '14cd6f9f9589',
-      south_asian: '65b29d3cfde9',
-      steppe: 'd12074bc3157',
-      greek: '5434eac6f1bb',
-    });
-    const digest = (text) => createHash('sha256').update(text).digest('hex').slice(0, 12);
+    // ⚠ RE-RECORDING IS A CONTENT DECISION, NEVER A FORMALITY: read the changed scope
+    // against its phrase in SCOPE_PHRASE, move the phrase if the terms moved, and only
+    // then re-record, with the reason written down.
+    const SCOPE_TEXT_DIGEST = '912bcf91c35b';
+    const scopesInKeyOrder = Object.values(CULTURE_PROFILES).map((profile) => profile.scope);
+    const digest = (parts) => createHash('sha256').update(parts.join('\n')).digest('hex').slice(0, 12);
 
     expect(
-      Object.fromEntries(
-        Object.entries(CULTURE_PROFILES).map(([key, profile]) => [key, digest(profile.scope)]),
-      ),
+      digest(scopesInKeyOrder),
       'an authored culture scope moved - re-read its SCOPE_PHRASE paraphrase before re-recording',
-    ).toEqual(SCOPE_DIGESTS);
+    ).toBe(SCOPE_TEXT_DIGEST);
 
-    // ANCHOR: the digest answers to the TEXT, so a constant or empty hash cannot
-    // satisfy the table above for the wrong reason.
-    expect(digest(`${CULTURE_PROFILES.germanic.scope} `)).not.toBe(SCOPE_DIGESTS.germanic);
+    // ANCHOR: the digest answers to the TEXT, so a constant or empty hash cannot satisfy
+    // the pin above for the wrong reason.
+    expect(scopesInKeyOrder).toHaveLength(11);
+    expect(digest([...scopesInKeyOrder.slice(0, 10), `${scopesInKeyOrder[10]} `]))
+      .not.toBe(SCOPE_TEXT_DIGEST);
+  });
+
+  it('composes a WHOLE sentence for a record carrying no culture key at all', () => {
+    // ⛔ NO WRITER MAKES ONE - `materializeOne` stamps `key` on every identity it builds -
+    // but an imported or hand-edited save is not this leaf's to trust, and the answer for it
+    // must not be a sentence that stops mid-clause. SCOPE_PHRASE is keyed on the profile id
+    // (FP-G16: a corpus sentence stands in exactly one source module), so a record carrying
+    // the old `scope` and no `key` finds no phrase and must take the SAME door the blend
+    // takes: the historical-character form, then the bare population form.
+    const say = (culturalIdentity, history) => composeSettlementQuickGuide({
+      name: 'Testholm', tier: 'village', population: 400, culturalIdentity, ...(history ? { history } : {}),
+    }).identitySentence;
+    const keyless = { label: 'Germanic-inspired', scope: 'A design grammar of some kind.' };
+
+    expect(say(keyless, { historicalCharacter: 'Founded at a ford and never moved from it.' })).toBe(
+      'Testholm is a Germanic-inspired village of 400 people, founded at a ford and never moved from it.',
+    );
+    expect(say(keyless)).toBe('Testholm is a Germanic-inspired village of 400 people.');
+    // The blend reaches the same two forms, so the keyless record is not a special case.
+    expect(say({ key: 'mixed', label: 'Germanic-inspired + Latin-inspired' }))
+      .toBe('Testholm is a Germanic-inspired + Latin-inspired village of 400 people.');
+    // And every one of them ends in a full stop rather than trailing off.
+    for (const sentence of [say(keyless), say(keyless, { historicalCharacter: 'Founded at a ford.' }),
+      say({ key: 'mixed', label: 'Germanic-inspired + Latin-inspired' })]) {
+      expect(sentence.endsWith('.'), sentence).toBe(true);
+    }
   });
 
   it('takes the article from the SOUND, not from the letter', () => {

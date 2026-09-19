@@ -44,6 +44,7 @@ results=()
 # tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
 # deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
+  src/workers/generationRequest.js
   src/domain/prose/composedWalker.js
   src/domain/prose/passageShapes.js
   src/domain/display/stateProse/composeStateProse.js
@@ -1499,6 +1500,25 @@ check_caught "arrow-header/a retired header height regains a consumer" src/compo
 #      2 red, the WRAPS and EXEMPT exact arms, 6 passed; restored cmp-identical => 8 passed.
 perl -0pi -e "s/          style=\{premiumReachClosed \? \{ flexWrap: 'wrap' \} : undefined\}\n//" src/components/instant/InstantWorldEntry.jsx
 check_caught "launch-pill-host/the Instant World reach loses its wrap and clips in the Realm sidebar" src/components/instant/InstantWorldEntry.jsx "npx vitest run tests/lint/launchPillHostWrap.walker.test.js --no-file-parallelism" "EXEMPT is exact: an un-wrapped Button host not named here clips when its box is narrow"
+
+# 106. THE RAIL'S WORDS MAY NOT CROSS INTO THE GENERATION WORKER. The worker-headroom car
+#      split stepMetadata.js in two: STEP_METADATA's summary(ctx) closures run in the worker,
+#      STEP_PRESENTATION's 22 labels + 22 descriptions are the Pipeline Rail's and belong to
+#      the main thread. The worker reads meta.summary alone and emits { id, index, summary },
+#      so the words were 2.9 kB of copy riding into dist/assets/generation.worker-*.js for a
+#      thread that renders nothing. The regression is ONE IMPORT and it is silent: the tables
+#      stay split, the rail still works, the bytes come back. The byte ceiling in
+#      tests/build/generationWorkerLazy.test.js is DIST-GATED, so it is mute on every run that
+#      does not build, and it reports "over by N bytes" rather than naming the module.
+#      Plant the import the worker's own entry would most plausibly grow.
+#      ⭐ THE FENCE TAKES BOTH NAMES, and the plant is why that matters: the rail reaches the
+#      table through presentationForStep() and never names STEP_PRESENTATION, so a fence on the
+#      table alone would have watched a name nothing uses while the accessor stood open.
+#      Measured before landing with a cp backup and a cp restore (never the checkout family;
+#      md5 d95215a51793f8a3fdd6639ef9d2bc54 before and after): clean => 4 passed; planted =>
+#      2 red (the engine-tree ban and the exact-readers arm), 2 passed; restored => 4 passed.
+perl -0pi -e "s/import \{ metaForStep \} from '\.\.\/generators\/steps\/stepMetadata\.js';/import { metaForStep, STEP_PRESENTATION } from '..\/generators\/steps\/stepMetadata.js';/" src/workers/generationRequest.js
+check_caught "step-presentation/an engine module reaches the rail's words and 2.9 kB returns to the worker bundle" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no module in the engine trees names the table or its accessor"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

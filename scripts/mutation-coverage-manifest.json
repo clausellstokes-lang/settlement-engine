@@ -71,6 +71,10 @@
       "kind": "mutation",
       "label": "dossier-mounts/a corpus block leaves the dark list with no mount"
     },
+    "tests/lint/stepPresentationEngineFence.walker.test.js": {
+      "kind": "mutation",
+      "label": "step-presentation/an engine module reaches the rail's words and 2.9 kB returns to the worker bundle"
+    },
     "tests/lint/goldenFreeze.walker.test.js": {
       "kind": "mutation",
       "label": "golden-freeze/the exclusion roster loses a spelling while reading as maintained"

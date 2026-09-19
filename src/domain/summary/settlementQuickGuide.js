@@ -379,6 +379,16 @@ function articleFor(descriptors) {
  * reword one and the pin reds, naming the profile whose paraphrase below must be
  * re-read before the digest is re-recorded.
  *
+ * ⚠ AND A RECORD WITH NO `key` AT ALL TAKES THE SAME DOOR, WHICH IS THE POINT OF PUTTING
+ * THE FALL-THROUGH BELOW A MISSING LOOKUP RATHER THAN BESIDE IT. No writer produces one -
+ * `materializeOne` stamps `key` on every identity it makes - but an imported or
+ * hand-edited save is not this leaf's to trust, and the answer for it must be a WHOLE
+ * SENTENCE. Measured, on a record carrying `label` and `scope` and no `key`: with a
+ * historical character it reads "… of 400 people, founded at a ford and never moved.",
+ * and without one it stops at the population, which is the same terminal form a
+ * settlement carrying no culture at all has always taken. Both are pinned in
+ * tests/domain/settlementQuickGuide.test.js.
+ *
  * ⛔ THE MIXED PROFILE IS DELIBERATELY ABSENT. `materializeCulturalIdentity`
  * synthesises it at generation time under `key: 'mixed'` - it is not in the corpus -
  * and its scope is a sentence about blending rather than a term list, while its
