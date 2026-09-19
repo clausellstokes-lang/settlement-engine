@@ -367,7 +367,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "More than one monastery, and no two of the same order.",
   ],
   "city|Religious|Parish churches (10-30)": [
-    "A church to every quarter.",
+    "A house of worship to every quarter.",
     "One for each neighbourhood.",
   ],
   "hamlet|Crafts|Carpenter (part-time)": [
@@ -507,8 +507,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Comes by on occasion. The smallest magic and no higher.",
   ],
   "hamlet|Religious|Access to parish church": [
-    "The nearest church is the village's, a typical 2-5km off.",
-    "No church of its own; the village one lies a usual 2-5km away.",
+    "The nearest house of worship is the village's, a typical 2-5km off.",
+    "None of its own; the village's lies a usual 2-5km away.",
   ],
   "hamlet|Religious|Wayside shrine": [
     "A plain spot for prayer. No clergy.",
@@ -611,8 +611,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Five to ten major monasteries, their scholarly, contemplative, and charitable work carried out on a grand scale.",
   ],
   "metropolis|Religious|Parish churches (50-100+)": [
-    "Parish churches in the hundreds, across every district. No neighbourhood is without the faith.",
-    "Hundreds of parishes, one church to each, so that faith runs through every quarter of the city.",
+    "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
+    "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
   ],
   "thorp|Criminal|Local fence": [
     "Someone here takes goods and never asks their history. The name is common knowledge. It is simply not spoken aloud.",
@@ -679,8 +679,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Water from a well or spring, a bare 2-4 gallons per person daily.",
   ],
   "thorp|Religious|Access to parish church": [
-    "Services mean a 2-5km walk to the village church.",
-    "The nearest church is the village's, a 2-5km walk away for services.",
+    "Services mean a 2-5km walk to the village house of worship.",
+    "The nearest house of worship is the village's, a 2-5km walk away for services.",
   ],
   "thorp|Religious|Wayside shrine": [
     "A modest prayer marker. No clergy in residence.",
@@ -1015,8 +1015,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "An order living in common. It may keep a hospital or a school.",
   ],
   "town|Religious|Parish churches (2-5)": [
-    "Several parishes, each with its church.",
-    "The town divided among a handful of parishes.",
+    "Several quarters, each with its house of worship.",
+    "The town divided among a handful of congregations.",
   ],
   "town|Religious|Small hospital": [
     "Tends the sick poor. Generally in religious hands.",
@@ -1255,8 +1255,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "A gated ground at the settlement edge, tended household by household. Families lie in rows by house rather than by standing, which is custom here and not want.",
   ],
   "town|Religious|Parish burial grounds": [
-    "Ground beside each parish church, with burial beyond the gate where a parish has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
-    "Each parish buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
+    "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
+    "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
   ],
   "city|Religious|Burial grounds and charnel house": [
     "The grounds inside the walls filled generations back, so the dead are lifted when their term is up and their bones stacked to make room. New ground lies outside the gates.",
@@ -1264,7 +1264,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "metropolis|Religious|Cemetery network": [
     "Burial has left the walls: grounds beyond every gate, each with its road and its gatekeepers, and a trade in plots the revenue office keeps an eye on.",
-    "One central roll now holds what the parishes can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment.",
+    "One central roll now holds what the local grounds can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment.",
   ],
   "village|Religious|Parish church": [
     "The hub of village life. Built in stone. Tithes are compulsory.",
