@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "e5a27a1a5e83569e198ab36e0879ee70fdaefe8a",
+  "measuredAtSha": "f0451b021ded7ccdba9de53c417281adf921cf2f",
   "measuredBy": "the chair (Fable 5.1, session 923472dc)",
   "date": "2026-09-19",
-  "note": "2026-09-19 fixes consist, lanes 35-37: seven new files (suites, seams, a shift record) — files 2638→2645; no title moved by hand",
+  "note": "train EM-T1's terminal: the ratchet test's census-population arms converted to victory forms (94→83 titles; a5a5fddb7); files/parked/credited/suiteTitles unmoved",
   "files": 2645,
   "parked": 383,
   "credited": 2262,
-  "titles": 25009,
+  "titles": 24998,
   "suiteTitles": 6670
 }
