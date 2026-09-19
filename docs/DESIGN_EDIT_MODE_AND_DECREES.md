@@ -104,3 +104,17 @@ Build C before D: the guards are the game. A through C are domain and store work
 ## 9. Risks, plainly
 
 Apply-at-advance without the correction split would frustrate the first DM who fixes a name; the split is load-bearing. Pools feel like a cage until the compendium is fluent; the valve must ship with the door. The guard rules must start small and true; a false warning costs more trust than a missing one. The pulse must treat decrees as first-class causes or the chronicle lies. Immediate re-derivation for corrections must be scoped, or a rename re-forges the town. And this is new capability, not repair: it is a program, gated on the owner's word, after the push and the public-path review.
+
+## 10. Kept open — extension points for the simulator to come
+
+The owner's word (2026-09-19): "keep it open because we still have a lot more simulator to build out. But we're building this first." So the design is a living contract, and every later system joins it through declarations, never through a second door:
+
+- **New op types** register in the op catalogue with their effect, prerequisites, conflicts and duration; the modal, the registry and the guards pick them up without UI work.
+- **New pools** register in the pool catalogue; a field's declaration points at a pool id, so a system that adds a vocabulary (a new institution class, a new stance, a new cause) is editable the day it exists.
+- **New guard rules** register against op types and reuse the simulator's own knowledge as it grows (durations, capacities, supply, casualties); coverage is stated per op type, so unfinished coverage is visible, not silent.
+- **New chronicle causes** register with the cause vocabulary; the cause walker holds every applied decree to one.
+- **New phantom kinds** register with their rolled traits; promotion by seed stays the one rule.
+- **New tick semantics** (seasons, projects with duration, multi-settlement resolution) hook the same head-of-tick application; decrees remain the first causes of a tick.
+- **New surfaces** (the map, the realm, the VTT) emit ops through the same boundary; the single-mutation-path instrument refuses anything else.
+
+Order of the programs, as the owner set it: the 2026-09-18 consist's push → this program (guards before surfaces) → the simulator's build-out, with the public-path review running as a read-only walk beside them.
