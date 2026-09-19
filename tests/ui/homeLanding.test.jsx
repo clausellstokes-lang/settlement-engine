@@ -34,7 +34,7 @@ import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing, tl } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
 import { SAMPLE_SETTLEMENTS } from '../../src/data/sampleSettlements.js';
-import { SP } from '../../src/components/theme.js';
+import { BOTTOM_NAV_H, FOOTER_INSET } from '../../src/components/theme.js';
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
 // helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
@@ -141,31 +141,36 @@ describe('HomeLanding — scrollable landing', () => {
   // grid's track minimum is capped at the column, so a 390px phone no longer scrolls
   // sideways. jsdom has no layout and its CSSOM drops mask declarations, so these read
   // the style props React rendered; e2e/visual-polish.spec.js measures both in Chromium.
+  // ⚠ THIS ARM USED TO RUN AT BOTH WIDTHS, AND NOW RUNS AT ONE. At phone width the
+  // below-fold chunk is NOT MOUNTED (ODQ §934.27, pinned in its own block at the end of
+  // this file), so there are no cream stops there to measure and the mobile pass would
+  // wait out its timeout on a page behaving exactly as ordered. ⛔ THE CONSEQUENCE,
+  // RECORDED RATHER THAN HIDDEN: LandingBelowFold's own `isMobile` branches — this tail
+  // height among them — are now unreachable in production, because its ONE mount is
+  // gated on `!isMobile`. Retiring them is a separate, larger edit in a file other lanes
+  // hold work in; it is deliberately deferred and written down, not a bug to re-find.
   test('cream stops fade their empty tails into the film, and the two-column track never exceeds its column', async () => {
     const renderedStyle = (el) => {
       const key = Object.keys(el).find((k) => k.startsWith('__reactProps$'));
       return (key && el[key].style) || {};
     };
-    for (const isMobile of [false, true]) {
-      const { container, unmount } = renderLanding({ isMobile });
-      await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
-      const tailPx = isMobile ? SP.xxl * 2 : 84;
-      const cream = [...container.querySelectorAll('section.sf-landing-scene-cream')];
-      expect(cream.map((section) => section.id)).toEqual(['forge', 'voice', 'realm', 'commons']);
-      for (const section of cream) {
-        expect(section.style.paddingBottom, `${section.id} tail height`).toBe(`${tailPx}px`);
-        const style = renderedStyle(section);
-        expect(style.WebkitMaskImage, `${section.id} carries the prefixed mask too`).toBe(style.maskImage);
-        expect(style.maskImage, `${section.id} fades its tail`).toMatch(new RegExp(`^linear-gradient\\(.+ calc\\(100% - ${tailPx}px\\), transparent\\)$`));
-      }
-      const closer = container.querySelector('#closer');
-      expect(renderedStyle(closer).maskImage).toBeUndefined();
-      const grids = [...container.querySelectorAll('#forge > div, #realm > div')].filter((el) => /380px/.test(el.style.gridTemplateColumns));
-      expect(grids.length).toBe(2);
-      for (const grid of grids) {
-        expect(grid.style.gridTemplateColumns).toBe('repeat(auto-fit, minmax(min(380px, 100%), 1fr))');
-      }
-      unmount();
+    const { container } = renderLanding({ isMobile: false });
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+    const tailPx = 84;
+    const cream = [...container.querySelectorAll('section.sf-landing-scene-cream')];
+    expect(cream.map((section) => section.id)).toEqual(['forge', 'voice', 'realm', 'commons']);
+    for (const section of cream) {
+      expect(section.style.paddingBottom, `${section.id} tail height`).toBe(`${tailPx}px`);
+      const style = renderedStyle(section);
+      expect(style.WebkitMaskImage, `${section.id} carries the prefixed mask too`).toBe(style.maskImage);
+      expect(style.maskImage, `${section.id} fades its tail`).toMatch(new RegExp(`^linear-gradient\\(.+ calc\\(100% - ${tailPx}px\\), transparent\\)$`));
+    }
+    const closer = container.querySelector('#closer');
+    expect(renderedStyle(closer).maskImage).toBeUndefined();
+    const grids = [...container.querySelectorAll('#forge > div, #realm > div')].filter((el) => /380px/.test(el.style.gridTemplateColumns));
+    expect(grids.length).toBe(2);
+    for (const grid of grids) {
+      expect(grid.style.gridTemplateColumns).toBe('repeat(auto-fit, minmax(min(380px, 100%), 1fr))');
     }
   });
 
@@ -341,5 +346,91 @@ describe('HomeLanding — scrollable landing', () => {
     // And the fixtures themselves are gone from the registry, not merely unused.
     expectAbsentWithAnchor(Object.keys(landing.commons), 'cards', 'votes', 'landing.commons copy block');
     expectAbsentWithAnchor(Object.keys(landing.commons), 'fork', 'open', 'landing.commons copy block');
+  });
+});
+
+/**
+ * ⛔ THE PHONE LANDING IS THE HERO ALONE (the owner, ODQ §934.27).
+ *
+ * "for the landing page, I only want this part to show, not the other scroll down" — the
+ * headline, the one paragraph, the two actions, the free line — "and its background image
+ * as the only one."
+ *
+ * NOT HIDDEN, NOT MOUNTED. React.lazy requests its chunk on MOUNT, so a `display:none` or
+ * a CSS media query would still make the phone fetch the below-fold chunk, the scroll
+ * film and every painting the five scenes name. That is the difference these arms measure,
+ * and it is measurable in jsdom precisely because it is a MOUNT question and not a layout
+ * one: the below-fold's root is either in the tree or it is not.
+ */
+describe('HomeLanding — §934.27: at phone width the hero is the whole page', () => {
+  /** The four texts the owner named, read from the registry rather than as literals. */
+  const HERO_TEXTS = () => [landing.hero.h1a + landing.hero.h1b, landing.hero.sub, landing.hero.reassure];
+
+  test("the hero's four texts are all there", () => {
+    const { container } = renderLanding({ isMobile: true });
+    const h1 = container.querySelectorAll('h1');
+    expect(h1).toHaveLength(1);
+    expect(h1[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
+    expect(screen.getByText(landing.hero.sub)).toBeTruthy();
+    expect(screen.getByText(landing.hero.reassure)).toBeTruthy();
+    // The two actions: the forge CTA and Sign in (the latter only while signed out).
+    expect(screen.getByRole('button', { name: landing.hero.cta })).toBeTruthy();
+    expect(screen.getByRole('button', { name: landing.hero.signin })).toBeTruthy();
+    for (const text of HERO_TEXTS()) {
+      expect(container.textContent, `the hero lost: ${text}`).toContain(text);
+    }
+  });
+
+  test('the below-fold root is ABSENT — the chunk is never reached for', async () => {
+    const { container } = renderLanding({ isMobile: true });
+    // ⛔ ANTI-VACUITY, and it is the whole arm: the negative is anchored on the hero,
+    // which is asserted present on THIS render, so "the closer heading is missing"
+    // cannot pass because the page failed to render.
+    const rendered = [...container.querySelectorAll('h1, h2')].map((h) => h.textContent);
+    expectAbsentWithAnchor(
+      rendered,
+      landing.closer.h2,
+      landing.hero.h1a + landing.hero.h1b,
+      'the phone landing renders the hero and nothing below the fold',
+    );
+    for (const id of ['forge', 'voice', 'realm', 'commons', 'closer']) {
+      expect(container.querySelector(`#${id}`), `the below-fold section #${id} mounted on a phone`).toBeNull();
+    }
+    expect(container.querySelectorAll('section.sf-landing-scene-cream')).toHaveLength(0);
+    // A microtask turn: React.lazy resolves on mount, so if anything had mounted the
+    // chunk its content would arrive by now rather than after this assertion.
+    await Promise.resolve();
+    expect(container.querySelector('#closer'), 'the below-fold arrived a tick later').toBeNull();
+  });
+
+  test('the hero painting is the ONLY image on the page', () => {
+    const { container } = renderLanding({ isMobile: true });
+    // ⚠ READ THE STYLE REACT RENDERED, NOT THE CSSOM. The hero's scene is a CUSTOM
+    // PROPERTY (`--sf-scene`), and jsdom's CSSOM is lossy about those exactly as it is
+    // about the mask declarations the cream-stop arm above reads this way; a CSSOM read
+    // could return nothing and call an unchecked page clean. This is the same
+    // `__reactProps$` idiom, applied to every element rather than to one.
+    const urls = [...container.querySelectorAll('*')].flatMap((el) => {
+      const key = Object.keys(el).find((k) => k.startsWith('__reactProps$'));
+      const style = (key && el[key].style) || {};
+      return Object.values(style)
+        .filter((v) => typeof v === 'string')
+        .flatMap((v) => [...v.matchAll(/url\((['"]?)([^'")]+)\1\)/g)].map((m) => m[2]));
+    });
+    expect(urls.length, 'the phone landing paints no image at all — is the hero scene gone?').toBe(1);
+    expect(urls[0]).toMatch(/still-0-desk/);
+    expect(container.querySelectorAll('img, picture, video')).toHaveLength(0);
+  });
+
+  test('the hero fills the band between the header and the bar', () => {
+    const { container } = renderLanding({ isMobile: true });
+    const hero = container.querySelector('section[aria-labelledby="sf-hero-title"]');
+    expect(hero.style.minHeight).toBe(`calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`);
+  });
+
+  test('TABLET AND DESKTOP ARE UNCHANGED: the below fold still mounts', async () => {
+    const { container } = renderLanding({ isMobile: false });
+    expect(await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 })).toBeTruthy();
+    expect(container.querySelector('#forge'), 'the below fold stopped mounting above the phone').not.toBeNull();
   });
 });

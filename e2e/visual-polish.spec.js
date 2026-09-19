@@ -114,8 +114,40 @@ test('(c) every cream stop fades its empty tail into the film, so no plain strip
   }
 });
 
-test('the phone landing does not scroll sideways', async ({ page }) => {
+test('the phone landing does not scroll sideways, and is the hero alone (§934.27)', async ({ page }) => {
+  // ⚠ THIS ARM USED TO WAIT FOR #commons. The owner's §934.27 order takes the below-fold
+  // OFF the phone entirely — "I only want this part to show, not the other scroll down" —
+  // so the wait would time out on a page that is behaving exactly as ordered. It settles
+  // on the hero instead, and adds the order's own two measurements while it is there: no
+  // below-fold section mounted, and one painted image on the page.
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.waitForSelector('section.sf-landing-hero', { timeout: 30_000 });
+  await settleRoute(page);
+  const m = await page.evaluate(() => ({
+    scroll: document.documentElement.scrollWidth,
+    client: document.documentElement.clientWidth,
+    belowFold: ['forge', 'voice', 'realm', 'commons', 'closer'].filter((id) => document.getElementById(id)),
+    heroMinH: getComputedStyle(document.querySelector('section.sf-landing-hero')).minHeight,
+    images: [...document.querySelectorAll('*')]
+      .flatMap((el) => [...String(el.getAttribute('style') || '').matchAll(/url\((['"]?)([^'")]+)\1\)/g)])
+      .map((x) => x[2])
+      .concat([...document.querySelectorAll('img, picture, video')].map((el) => el.tagName)),
+  }));
+  expect(m.scroll).toBeLessThanOrEqual(m.client);
+  expect(m.belowFold, 'a below-fold section mounted at phone width').toEqual([]);
+  // The hero really fills the band: a min-height in px, at least most of the viewport.
+  expect(Number.parseFloat(m.heroMinH)).toBeGreaterThan(600);
+  // "and its background image as the only one" — the hero's scene, and nothing else.
+  expect(m.images).toHaveLength(1);
+  expect(m.images[0]).toMatch(/still-0-desk/);
+});
+
+test('the TABLET landing keeps the below fold, and its two-column track never exceeds its column', async ({ page }) => {
+  // 640 to 1023 px: the below fold still mounts (§934.27 moves the phone only), so the
+  // grid-track measurement the phone arm used to carry lives here, at the narrowest width
+  // that still draws it — which is also the tightest column the track has to fit.
+  await page.setViewportSize({ width: 640, height: 900 });
   await page.goto('/');
   await page.waitForSelector('#commons', { timeout: 30_000 });
   await settleRoute(page);

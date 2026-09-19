@@ -15,6 +15,20 @@
  * module — read here for the hero, and never rides the first-paint entry closure
  * (this module is itself lazy-loaded by AppViews).
  *
+ * ⛔ ON A PHONE THE HERO IS THE WHOLE PAGE (the owner, ODQ §934.27: "for the landing
+ * page, I only want this part to show, not the other scroll down … and its background
+ * image as the only one"). Below the estate's mobile breakpoint the below-fold chunk is
+ * NOT MOUNTED — not hidden — so the phone never reaches for it or for the paintings its
+ * five scenes name, the hero fills the band between the arrow header and the bottom bar,
+ * and the scroll cue leaves with the road it pointed down. Tablet and desktop are
+ * unchanged. Pinned at both widths in tests/ui/homeLanding.test.jsx.
+ *
+ * ⚠ ONE CONSEQUENCE, DEFERRED AND WRITTEN DOWN: LandingBelowFold's own `isMobile`
+ * branches are now unreachable, since its ONE mount is gated on `!isMobile`. Retiring
+ * them is a separate edit in a file concurrent lanes hold work in; the prop keeps being
+ * passed honestly (it really is false there) rather than being hard-coded, so the day
+ * the gate moves nothing has to be un-lied.
+ *
  * (This wholesale rewrite replaced the flag-gated single-hero + V2 bands; the
  * landing no longer forks on flag('landingV2') — see src/lib/flags.js.)
  */
@@ -82,10 +96,22 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
           // painted header, so on desktop it is sized to the viewport less the pinned
           // footer's floating band (useChromeInsets, 1024 px and up) and the bottom bar
           // (640 to 1023 px): its bottom edge IS the band's (or the bar's) top edge at every
-          // viewport height. Phones keep the 86vh rule. It is inline here, in this lazy
-          // chunk, rather than a rule in the injected sheet, because the first-paint entry
-          // closure has no bytes to spare.
-          minHeight: isMobile ? undefined : `calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`,
+          // viewport height. It is inline here, in this lazy chunk, rather than a rule in
+          // the injected sheet, because the first-paint entry closure has no bytes to spare.
+          //
+          // ⭐ THE PHONE TAKES THE SAME RULE NOW (ODQ §934.27: "the hero fills the viewport
+          // between the arrow header … and the bottom bar"). It used to fall through to
+          // index.css's 86vh, which was right while five more scenes waited below — the
+          // short hero was the promise that scrolling was worth it. With nothing below the
+          // fold there is nothing to promise, and 14vh of page ground under the painting
+          // would read as the page having failed to load. The length is the same
+          // expression as desktop's: on a phone FOOTER_INSET is 0px (the footer is in the
+          // flow, pinnedFooter.test.jsx (d)) and BOTTOM_NAV_H is the bar plus its safe
+          // area (ArrowHeader.arrowVarValues), so it resolves to exactly the band between
+          // the two chromes at every phone height. The `.sf-landing-hero` 86vh rule in
+          // index.css stays: an inline min-height wins over it, and it is still the
+          // pre-hydration floor the eager sheet paints with.
+          minHeight: `calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`,
           // Lift the hero above the fixed film backdrop (zIndex 0, mounted in the
           // lazy below-fold): the hero owns its own eager still-0 paint (LCP), the
           // backdrop only shows through the transparent travel legs below.
@@ -136,28 +162,48 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
           </div>
         </div>
         {/* Scroll cue → #forge. The bounce is on .sf-landing-cue (killed under
-            prefers-reduced-motion, spec §9/§10). */}
-        <a
-          href="#forge"
-          onClick={scrollToForge}
-          style={{ marginTop: 'auto', paddingTop: SP.xxl, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, textDecoration: 'none' }}
-        >
-          <span style={{
-            fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
-            color: 'rgba(251,245,230,0.65)', whiteSpace: 'nowrap',
-          }}>
-            {tl('hero.scrollCue')}
-          </span>
-          <span className="sf-landing-cue" style={{ display: 'inline-flex' }}>
-            <ChevronDown size={18} color={GOLD} aria-hidden="true" />
-          </span>
-        </a>
+            prefers-reduced-motion, spec §9/§10).
+
+            ⛔ IT LEAVES WITH THE ROAD IT POINTS DOWN (ODQ §934.27). On a phone #forge is
+            not mounted, so this anchor would resolve to nothing: `scrollToForge` finds no
+            element and swallows the click, and a reader who used the keyboard would follow
+            a link into an empty fragment and change the URL for it. A cue to scroll on a
+            page with nothing below the fold is a promise the page cannot keep. */}
+        {!isMobile && (
+          <a
+            href="#forge"
+            onClick={scrollToForge}
+            style={{ marginTop: 'auto', paddingTop: SP.xxl, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, textDecoration: 'none' }}
+          >
+            <span style={{
+              fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              color: 'rgba(251,245,230,0.65)', whiteSpace: 'nowrap',
+            }}>
+              {tl('hero.scrollCue')}
+            </span>
+            <span className="sf-landing-cue" style={{ display: 'inline-flex' }}>
+              <ChevronDown size={18} color={GOLD} aria-hidden="true" />
+            </span>
+          </a>
+        )}
       </section>
 
-      {/* ══ Everything below the fold — one lazy chunk ══ */}
-      <Suspense fallback={<div aria-hidden="true" style={{ minHeight: '50vh' }} />}>
-        <LandingBelowFold isMobile={isMobile} onNavigate={onNavigate} onSignIn={onSignIn} />
-      </Suspense>
+      {/* ══ Everything below the fold — one lazy chunk, and NOT MOUNTED ON A PHONE ══
+          ⛔ THE OWNER (ODQ §934.27): "for the landing page, I only want this part to show,
+          not the other scroll down … and its background image as the only one." The ruling
+          as built: "everything below the fold is NOT MOUNTED at phone width (so the phone
+          fetches none of it — the build's own law that the landing never fetches a painting
+          it does not show)".
+
+          NOT HIDDEN — NOT MOUNTED, and the difference is the whole order. React.lazy
+          requests its chunk when the component MOUNTS, so `display:none` or a CSS
+          media query would still have the phone pay for the film backdrop, the five
+          scene sections and every painting they name. The gate is on the mount. */}
+      {!isMobile && (
+        <Suspense fallback={<div aria-hidden="true" style={{ minHeight: '50vh' }} />}>
+          <LandingBelowFold isMobile={isMobile} onNavigate={onNavigate} onSignIn={onSignIn} />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -58,7 +58,6 @@ import {
   FOOTER_LINKS_ATTR, FOOTER_TUCKED_BOTTOM, FOOTER_TUCK_VAR, HEADER_H, HEADER_HEIGHT_VAR, aboveBottomNav, aboveFooter,
   bottomClearance,
 } from '../../src/components/theme.js';
-import { landing } from '../../src/copy/landing.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const H = vi.hoisted(() => ({
@@ -283,12 +282,18 @@ describe('(c) phones keep the in-flow footer; the landing hero letterboxes on de
     expect(container.querySelectorAll('[data-testid="legal-ribbon-row"]').length).toBe(1);
   });
 
-  test('mobile /home: the landing gets the same in-flow footer, one row, and no letterbox', async () => {
+  test('mobile /home: the landing gets the same in-flow footer, one row, and the hero letterboxes too', async () => {
     H.isMobile = true;
     H.route = { view: 'home', params: {}, legacy: false, notFound: false };
     window.history.replaceState(null, '', '/');
     const { container } = render(<App />);
-    await screen.findByText(landing.closer.h2, {}, { timeout: 8000 });
+    // ⚠ THE WAIT MOVED, AND THE REASON IS THE ORDER (ODQ §934.27: "I only want this part
+    // to show, not the other scroll down"). This arm used to settle on the below-fold's
+    // closer heading; at phone width that chunk is NEVER MOUNTED, so waiting for it would
+    // hang for the full timeout and then fail on a page that is behaving correctly. The
+    // hero is the whole landing here, and it is eager, so it is what settles.
+    const hero = await screen.findByRole('heading', { level: 1 });
+    expect(hero.textContent, 'presence control: the hero really rendered').toContain('thousand choices');
 
     const footer = container.querySelector('footer');
     expect(footer).not.toBeNull();
@@ -296,12 +301,19 @@ describe('(c) phones keep the in-flow footer; the landing hero letterboxes on de
     expect(footer.style.paddingBottom).toBe(`${CHROME.footerPadMobile}px`);
     expect(container.querySelectorAll('[data-testid="legal-ribbon-row"]').length).toBe(1);
 
-    const hero = container.querySelector('section[aria-labelledby="sf-hero-title"]');
-    expect(hero.classList.contains('sf-landing-hero')).toBe(true);
+    const heroSection = container.querySelector('section[aria-labelledby="sf-hero-title"]');
+    expect(heroSection.classList.contains('sf-landing-hero')).toBe(true);
     // Above the landing's lifted roots (the hero's own inline z 1), and so above the film (z 0).
-    expect(hero.style.zIndex, 'presence control: the hero is lifted over the film').toBe('1');
-    expect(Number(footer.style.zIndex), 'above the landing film and its z-1 roots').toBeGreaterThan(Number(hero.style.zIndex));
-    expect(hero.style.minHeight, 'phones keep the 86vh rule from index.css').toBe('');
+    expect(heroSection.style.zIndex, 'presence control: the hero is lifted over the film').toBe('1');
+    expect(Number(footer.style.zIndex), 'above the landing film and its z-1 roots').toBeGreaterThan(Number(heroSection.style.zIndex));
+    // ⚠ THE LETTERBOX REACHES THE PHONE (§934.27: the hero "fills the viewport between the
+    // arrow header … and the bottom bar"). It used to fall through to index.css's 86vh,
+    // which was right while five more scenes waited below the fold; with nothing below it,
+    // 14vh of page ground under the painting reads as a page that failed to load. The
+    // expression is the desktop one, and it resolves correctly on a phone because
+    // FOOTER_INSET is 0px here (arm (d) below) and BOTTOM_NAV_H is the bar plus its
+    // safe area.
+    expect(heroSection.style.minHeight).toBe(`calc(100vh - ${FOOTER_INSET} - ${BOTTOM_NAV_H})`);
   });
 
   test('640 to 1023 px /terms: the footer lies in the flow with its desktop look, and the page clears the bottom bar', () => {
