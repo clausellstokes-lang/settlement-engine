@@ -20,6 +20,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -335,8 +336,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       {/* ── STABILITY + GOVERNING AUTHORITY HEADER ───────────────────────── */}
       <div style={{
         background: isCritical?'#fdf4f4': isStable?'#f0faf4':'#fdf8e8',
-        border: `1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`,
-        borderLeft: `4px solid ${stabilityColor}`,
+        ...edged(`1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`, `4px solid ${stabilityColor}`),
         padding:'12px 16px', marginBottom:14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>

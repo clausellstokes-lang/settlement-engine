@@ -37,12 +37,20 @@
  * That is the shape every one of the eighteen live sites had.
  *
  * ── THE OWED REGISTER ──────────────────────────────────────────────────────────
- * Twelve of the eighteen live sites are in files this lane may not edit — ten in the
- * dossier tabs and one in a PDF section, each owned by a concurrent lane. They are
- * frozen in `OWED` by FILE and COUNT (never by line: line numbers churn under every
- * unrelated edit and would make this a nuisance gate). The register is EXACT IN BOTH
- * DIRECTIONS: a new site in a listed file reds, and a CURED one reds too, demanding
- * the row be lowered so the win is banked. Every other file in src/ is held at zero.
+ * The sites live in files their author may not edit, so they are frozen in `OWED` by
+ * FILE and COUNT (never by line: line numbers churn under every unrelated edit and would
+ * make this a nuisance gate). The register is EXACT IN BOTH DIRECTIONS: a new site in a
+ * listed file reds, and a CURED one reds too, demanding the row be lowered so the win is
+ * banked. Every other file in src/ is held at zero.
+ *
+ * ⭐ IT HAS BEEN PAID DOWN, 12 -> 1 (ODQ §934.22 item 4a, second pass). The nine dossier
+ * tabs and the PDF section were cured through the same `edged()` idiom the first pass
+ * used, longhands only, each box byte-identical. What remains is ONE site —
+ * src/components/new/tabs/EconomicsTab.jsx:540, the food-balance narrative card — in the
+ * one file the curing lane was forbidden to touch (lane 25 holds it under ODQ §934.23).
+ * The shape is the same as the nine: `border` varies with `foodDeficit` beside a
+ * `borderLeft` accent, so the 3px food-colour edge is flattened to 1px on exactly the
+ * render where a deficit appears. Its cure is `...edged(...)` and nothing else.
  *
  * @enforced-by itself (the executed controls below prove the detector both ways)
  */
@@ -74,22 +82,16 @@ const FAMILIES = Object.freeze({
 });
 
 /**
- * ⛔ THE OWED REGISTER — file → number of live sites, for the files this walker's
- * author was not permitted to edit (ODQ §934.22 lane boundary: the dossier tabs are
- * lanes 25–27's, the PDF sections are lane 26's). Each row is a DEBT, not a licence.
- * Exact in both directions; drive every row to zero and delete it.
+ * ⛔ THE OWED REGISTER — file → number of live sites, for the files a curing lane was
+ * not permitted to edit (the ODQ §934.22/§934.23 lane boundaries). Each row is a DEBT,
+ * not a licence. Exact in both directions; drive every row to zero and delete it.
+ *
+ * SHRUNK 12 -> 1 on 2026-09-19 (the nine dossier tabs and the PDF section cured through
+ * `edged()`). The last row is EconomicsTab, which lane 25 holds; its one site is
+ * `border` varying with `foodDeficit` beside the food-colour `borderLeft`.
  */
 const OWED = Object.freeze({
-  'src/components/new/tabs/DailyLifeTab.jsx': 1,
-  'src/components/new/tabs/DefenseTab.jsx': 2,
   'src/components/new/tabs/EconomicsTab.jsx': 1,
-  'src/components/new/tabs/HistoryTab.jsx': 1,
-  'src/components/new/tabs/OverviewTab.jsx': 1,
-  'src/components/new/tabs/PowerTab.jsx': 1,
-  'src/components/new/tabs/ServicesTab.jsx': 1,
-  'src/components/new/tabs/SubstrateTab.jsx': 1,
-  'src/components/new/tabs/ViabilityTab.jsx': 2,
-  'src/pdf/sections/Institutions.jsx': 1,
 });
 
 function walkSource(dir, out = []) {
@@ -197,6 +199,11 @@ describe('THE SHORTHAND/LONGHAND CLASS — a varying shorthand never sits beside
     // nothing, which is what a moved tree or a broken parser produces. These floors
     // are the measurement at landing (2026-09-19: 2,230 files, 233 shorthand/longhand
     // co-occurrences), tightened toward reality and never relaxed.
+    // RE-MEASURED at the OWED 12 -> 1 paydown, same day: 2,238 files, 215 pairs. The
+    // DENOMINATOR fell by design — curing a site through `edged()` removes the
+    // shorthand, so the co-occurrence it was half of stops existing. The floors are
+    // deliberately NOT tightened onto 215: this number is meant to keep falling as the
+    // class burns down, and a floor that tracked it would red on every cure.
     expect(SCAN.files, 'the src tree is empty — has it moved?').toBeGreaterThanOrEqual(2200);
     expect(SCAN.pairs, 'the walk found almost no shorthand/longhand pairs — the shape it looks for changed')
       .toBeGreaterThanOrEqual(200);

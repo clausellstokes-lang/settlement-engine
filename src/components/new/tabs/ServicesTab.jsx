@@ -14,6 +14,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { compareCodepoint } from '../../../domain/deterministicSort.js';
+import { edged } from '../../../design/edgedBox.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -326,8 +327,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
             return (
               <div key={cat} id={'svc-cat-'+cat} style={{
                 background: isCriminal?'#1a0a0a':`${meta.accent}08`,
-                border:`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,
-                borderLeft:`3px solid ${accentColor}`,
+                ...edged(`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,`3px solid ${accentColor}`),
                 overflow:'hidden'
               }}>
                 {/* Category toggle — bespoke: full-width header row with left-aligned

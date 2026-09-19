@@ -13,6 +13,7 @@ import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { edged } from '../../../design/edgedBox.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -25,8 +26,7 @@ function AnchorFact({ label, value, accent }) {
     <div style={{
       flex: '1 1 100px', minWidth: 0,
       background: accent ? `${accent}0d` : '#faf8f4',
-      border: `1px solid ${accent ? `${accent}30` : BORDER}`,
-      borderLeft: `3px solid ${accent || '#c8b89a'}`,
+      ...edged(`1px solid ${accent ? `${accent}30` : BORDER}`, `3px solid ${accent || '#c8b89a'}`),
       padding: '5px 9px',
     }}>
       <div style={{ fontSize: chromeFontSize(FS['8.5'], mobile), fontWeight: 700, color: accent || MUTED, marginBottom: 1 }}>{label}</div>

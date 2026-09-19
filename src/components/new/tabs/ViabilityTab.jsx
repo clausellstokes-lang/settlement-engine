@@ -20,6 +20,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 /**
  * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
@@ -154,8 +155,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {/* ── VIABILITY VERDICT ────────────────────────────────────────────── */}
       <div style={{
         background: VERDICT_BG[verdict.tone] || VERDICT_BG.warn,
-        border: `2px solid ${VERDICT_BORDER[verdict.tone] || VERDICT_BORDER.warn}`,
-        borderLeft: `6px solid ${VERDICT_INK[verdict.tone] || VERDICT_INK.warn}`,
+        ...edged(`2px solid ${VERDICT_BORDER[verdict.tone] || VERDICT_BORDER.warn}`, `6px solid ${VERDICT_INK[verdict.tone] || VERDICT_INK.warn}`),
         padding: '14px 18px', marginBottom: 14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
@@ -200,8 +200,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {generationReceipt&&(
         <div style={{
           background:generationReceipt.status==='needs_review'?'#fdf4f4':'#f4faf5',
-          border:`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,
-          borderLeft:`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`,
+          ...edged(`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`),
           padding:'10px 14px',
           marginBottom:12,
         }}>

@@ -16,6 +16,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 // each. The DRAW is unchanged — the same strings `drawnAtMount` ruled on in the reader.
 import ProseBlock from '../ProseBlock.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 // Party-attribution accent (matches EventComposer): a heraldic crimson distinct
 // from the gold brand accent and the purple AI tint.
@@ -311,8 +312,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             const yrsLabel = recencyLabel(evt.yearsAgo||0);
             return (
               <div key={i} style={{
-                border:`1px solid ${isAnchored?ec.color+'60':ec.border}`,
-                borderLeft:`3px solid ${ec.color}`,
+                ...edged(`1px solid ${isAnchored?ec.color+'60':ec.border}`,`3px solid ${ec.color}`),
                 overflow:'hidden',
                 background: isAnchored?ec.bg:'#faf8f4',
                 cursor:'pointer',

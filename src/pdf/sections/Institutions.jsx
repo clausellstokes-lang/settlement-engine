@@ -20,6 +20,7 @@ import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { edged } from '../../design/edgedBox.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -193,8 +194,7 @@ function InstitutionCard({ inst, idx, entityIndex }) {
       id={anchor}
       style={{
         padding: 5,
-        border: `0.4pt solid ${isCustom ? palette.gold : palette.border}`,
-        borderLeft: `2pt solid ${palette[tone] || palette.muted}`,
+        ...edged(`0.4pt solid ${isCustom ? palette.gold : palette.border}`, `2pt solid ${palette[tone] || palette.muted}`),
         borderRadius: 2,
         backgroundColor: isCustom ? palette.goldBg : palette.card,
         minHeight: 60,

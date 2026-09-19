@@ -14,6 +14,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -405,7 +406,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
               // would have made the button's accessible name a whole paragraph. The row keeps
               // every handler, its `tabIndex`, its padding and its mobile reflow, so
               // tests/components/dossierMobileGate.test.jsx still finds exactly what it pins.
-              <div key={i} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4'}}>
+              <div key={i} style={{...edged(`1px solid ${isExp?color+'60':'#e0d0b0'}`,`3px solid ${color}`),overflow:'hidden',background:isExp?`${color}06`:'#faf8f4'}}>
                 <div role="button" tabIndex={0} style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined,cursor:'pointer'}}
                   onClick={()=>setExpandedThreat(isExp?null:i)}
                   onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
@@ -681,7 +682,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         ?<Section title={`Vulnerabilities · First Survey (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
           {defViolations.map((v,i)=>{
             const crit=v.severity==='error'||v.severity==='critical';
-            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',border:`1px solid ${crit?'#e8c0c0':'#e0c860'}`,borderLeft:`3px solid ${crit?'#8b1a1a':'#b8860b'}`,padding:'9px 13px',marginBottom:6}}>
+            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',...edged(`1px solid ${crit?'#e8c0c0':'#e0c860'}`,`3px solid ${crit?'#8b1a1a':'#b8860b'}`),padding:'9px 13px',marginBottom:6}}>
               <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
               <div style={{fontSize:proseFontSize(FS.md, isMobile),color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
             </div>;

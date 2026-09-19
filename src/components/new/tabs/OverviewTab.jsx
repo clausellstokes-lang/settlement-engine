@@ -34,6 +34,7 @@ import Button from '../../primitives/Button.jsx';
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { edged } from '../../../design/edgedBox.js';
 
 // ── The institution provenance badge (R-5b item #10) ───────────────────
 // The pill used to badge only the GENERATION source tag, so a forge the living
@@ -120,7 +121,7 @@ function ScoreRow({ label, score }) {
 function StatusTag({ label, value, _color, accent }) {
   const mobile = useIsMobile();
   return (
-    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
+    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
       {/* RUNG 3 CASES ITS OWN VALUE (ODQ §934.22 item 4). The ladder descended the rung-3
         * PILL and left the frozen VOCABULARIES in the case their producers declare them —

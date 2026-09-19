@@ -23,6 +23,7 @@ import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN,
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { edged } from '../../../design/edgedBox.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -141,8 +142,7 @@ export default function SubstrateTab({ settlement }) {
       {/* Pressures callout — the systems the model flags strained-or-worse. */}
       <div data-testid="substrate-pressures" style={{
         background: CARD_ALT,
-        border: `1px solid ${pressures.length ? BORDER : BORDER2}`,
-        borderLeft: `3px solid ${pressures.length ? RED : GREEN}`,
+        ...edged(`1px solid ${pressures.length ? BORDER : BORDER2}`, `3px solid ${pressures.length ? RED : GREEN}`),
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
       }}>
         {pressures.length ? (
