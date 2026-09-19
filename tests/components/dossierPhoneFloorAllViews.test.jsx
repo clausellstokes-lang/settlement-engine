@@ -325,13 +325,13 @@ async function walkEveryView(container) {
         const p = container.querySelector(`#sf-panel-${tabId}`);
         expect(p, `${groupName}/${tabName} never mounted its own panel`).toBeTruthy();
         // ⛔ NO FALLBACK-WORDING ASSERTION HERE, and its removal is a repair.
-        // This line read `expect(text).not.toMatch(/Opening the simulation
-        // record|Loading settlement view/)`. The second wording exists NOWHERE in
-        // src/; the first is gated to a public dossier, which this walk is not;
-        // and `#sf-panel-<id>` is rendered INSIDE the Suspense boundary, so a
-        // panel and a fallback cannot be mounted at once — the assertion could
-        // not fail, on any settlement, at either width. The panel-length floor
-        // below is the real wait and is what actually proves the chunk resolved.
+        // This line used to deny the panel two lazy-fallback wordings. One of
+        // them exists NOWHERE in src/; the other is gated to a public dossier,
+        // which this walk is not; and `#sf-panel-<id>` is rendered INSIDE the
+        // Suspense boundary, so a panel and a fallback cannot be mounted at once
+        // — the denial could not fail, on any settlement, at either width. The
+        // panel-length floor below is the real wait, and is what actually proves
+        // the chunk resolved.
         const text = p.textContent || '';
         expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
       }, { timeout: 10_000 });
