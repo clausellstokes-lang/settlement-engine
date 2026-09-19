@@ -142,7 +142,7 @@ Order of the programs, as the owner set it: the 2026-09-18 consist's push → th
 - **Bulk and templates:** a realm-level op ("the crown raises the levy") is a later op type over several settlements' registries; named as an extension, not built in the first program.
 - **Learning from edits:** count edits by op type and card type, no content, from the first lane; the counts are the generator's best signal of what it gets wrong.
 
-## 12. The adversarial review's findings and the chair's rulings (2026-09-19 ~23:2x)
+## 12. The adversarial review's findings and the chair's rulings (2026-09-19 ~08:2x EDT)
 
 An Opus reviewer refuted the design and the architecture against the consist at 13ab242e3. Thirteen findings; each is ruled here and the architecture is amended to match. Where a section above disagrees with this one, THIS SECTION GOVERNS.
 
