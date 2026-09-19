@@ -367,7 +367,7 @@
           },
           {
                     "path": "src/components/new/tabs/DefenseTab.jsx",
-                    "line": 518,
+                    "line": 505,
                     "category": "floatInterpolation",
                     "snippet": "{crimFaction.power||0}"
           },
@@ -517,31 +517,31 @@
           },
           {
                     "path": "src/components/new/tabs/PowerTab.jsx",
-                    "line": 287,
+                    "line": 290,
                     "category": "floatInterpolation",
                     "snippet": "{leg.score}"
           },
           {
                     "path": "src/components/new/tabs/PowerTab.jsx",
-                    "line": 352,
+                    "line": 355,
                     "category": "floatInterpolation",
                     "snippet": "{governing.power}"
           },
           {
                     "path": "src/components/new/tabs/PowerTab.jsx",
-                    "line": 481,
+                    "line": 484,
                     "category": "floatInterpolation",
                     "snippet": "{Math.round(instab*100)}"
           },
           {
                     "path": "src/components/new/tabs/PowerTab.jsx",
-                    "line": 481,
+                    "line": 484,
                     "category": "percentToken",
                     "snippet": "{Math.round(instab*100)}"
           },
           {
                     "path": "src/components/new/tabs/PowerTab.jsx",
-                    "line": 519,
+                    "line": 522,
                     "category": "floatInterpolation",
                     "snippet": "{Math.round(rung.standing*100)}"
           },
@@ -1165,25 +1165,25 @@
           },
           {
                     "path": "src/pdf/sections/EconomicsTrade.jsx",
-                    "line": 542,
+                    "line": 552,
                     "category": "floatInterpolation",
                     "snippet": "{fb.deficitPct}"
           },
           {
                     "path": "src/pdf/sections/EconomicsTrade.jsx",
-                    "line": 542,
+                    "line": 552,
                     "category": "percentToken",
                     "snippet": "{fb.deficitPct}"
           },
           {
                     "path": "src/pdf/sections/EconomicsTrade.jsx",
-                    "line": 547,
+                    "line": 557,
                     "category": "floatInterpolation",
                     "snippet": "{fb.coveragePct}"
           },
           {
                     "path": "src/pdf/sections/EconomicsTrade.jsx",
-                    "line": 547,
+                    "line": 557,
                     "category": "percentToken",
                     "snippet": "{fb.coveragePct}"
           },
