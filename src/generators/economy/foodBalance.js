@@ -285,18 +285,53 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     dailyProductionFinal = foodSecurity.dailyProduction;
     dailyNeedFinal       = foodSecurity.dailyNeed;
     surplusFinal         = dailyProductionFinal - dailyNeedFinal;
-    rawDeficitFinal      = Math.max(0, -surplusFinal);
+    // The writer's own gap where it publishes one. Re-deriving it from the
+    // ROUNDED production/need pair costs up to a pound, which is nothing on a
+    // city and a percentage point and a half on a thorp whose whole daily need
+    // is sixty pounds — and that pound then bit through the clamp below and
+    // split the residual percentage between the Economics tab and the Daily
+    // Life tab on 12 of the golden master's 525 configurations.
+    rawDeficitFinal      = Number.isFinite(foodSecurity.rawDeficit)
+      ? Math.max(0, foodSecurity.rawDeficit)
+      : Math.max(0, -surplusFinal);
     // foodSecurity returns deficitPct (rounded) + dailyNeed, not a deficit-lbs
     // field; reconstruct the lbs from them. deficitPct === 0 ⇔ deficit === 0, so
     // the SIGN is preserved exactly. Clamp into [0, rawDeficit].
     const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
     deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
     deficitPercent = cDeficitPct;
-    // Rebuild attribution so importCoverage + magicFoodOffset === rawDeficit − deficit.
+    // WHO CARRIES THE COVERED PORTION. The writer publishes its own split
+    // (foodSecurity.importCoverage / .magicOffset, lb/day), so read it: a view
+    // that re-derives a number its writer already holds is a second source of
+    // truth, and this one was wrong twice over. Its `canImportFood` gate tested
+    // the LOCAL rawDeficit — the figure the canonical block three lines above has
+    // just SUPERSEDED — so a settlement whose local model saw a surplus while the
+    // canonical model saw a real gap was credited with zero imports and a magical
+    // offset covering the whole gap: measured at 52 of the golden master's 525
+    // configurations, each one dropping its "+ N imported" chip, its import-bar
+    // segment, its "Trade covers X% of gap" caption and its importChannel from
+    // both the Economics tab and the PDF chapter. Its rate ladder also lacked the
+    // writer's low-agri terrain boost, so even where the gate opened the split
+    // between channel and magic was off.
+    //
+    // The covered TOTAL stays anchored to deficitPct (the band's own number), so
+    // the sign law above is untouched; only its attribution is read rather than
+    // guessed. Proportions are applied to the covered total so the two channels
+    // still sum EXACTLY to rawDeficit − deficit.
     const totalCoverage = Math.max(0, rawDeficitFinal - deficit);
-    const importPortion = canImportFood
-      ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
-      : 0;
+    const cImport = Math.max(0, Number(foodSecurity.importCoverage) || 0);
+    const cMagic  = Math.max(0, Number(foodSecurity.magicOffset) || 0);
+    const canonicalSplit = Number.isFinite(foodSecurity.importCoverage)
+      && Number.isFinite(foodSecurity.magicOffset)
+      && (cImport + cMagic) > 0;
+    // Settlements persisted before the writer published its split carry only
+    // deficitPct, so the original reconstruction stays as the arm that reads
+    // them — with the import gate now asking about the CANONICAL gap.
+    const importPortion = canonicalSplit
+      ? Math.min(totalCoverage, Math.round(totalCoverage * (cImport / (cImport + cMagic))))
+      : (importCoverageRate > 0 && rawDeficitFinal > 0
+        ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
+        : 0);
     const magicResidual = Math.max(0, totalCoverage - importPortion);
     if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
       importCoverageFinal  = importPortion;

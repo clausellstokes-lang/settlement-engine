@@ -427,6 +427,21 @@ export function generateFoodSecurity(tier, institutions, config) {
     dailyNeed:       Math.round(dailyNeed),
     dailyProduction: Math.round(dailyProduction),
 
+    // ── The gap and how it is carried, in lb/day ──────────────────────────────
+    // The viability foodBalance (generators/economy/foodBalance.js) is a VIEW of
+    // this record, and it used to RECONSTRUCT this split from the rounded
+    // deficitPct plus a rate ladder of its own. Two spellings of one split drift,
+    // and this one had drifted on two axes: that ladder never took the low-agri
+    // terrain boost applied at the importCoverageRate above, and its import gate
+    // asked whether the VIEW'S OWN superseded local model saw a gap — so on a
+    // connected route whose local model read a surplus, the whole covered portion
+    // was credited to magic and the import channel vanished from the dossier.
+    // The writer publishes its own split instead of being guessed at.
+    rawDeficit:      Math.round(rawDeficit),
+    importCoverage:  Math.round(importCoverage),
+    magicOffset:     Math.round(magicOffset),
+    deficit:         Math.round(deficit),
+
     // Source chains
     chains,
     activeChains,
