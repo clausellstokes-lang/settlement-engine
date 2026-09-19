@@ -398,6 +398,7 @@ describe('bounded migration rehearsal plan', () => {
       expect(
         readFileSync(join(ROOT, 'tests', 'security', fixture), 'utf8'),
         `${fixture} gained a decree* token — re-measure what the new alternative now rejects`,
+      // anchored: the positive control two lines up proved the fixture is read and non-empty (its length is asserted), so an absent token is a measured absence, not an unread file
       ).not.toMatch(/decree/i);
     }
   });
