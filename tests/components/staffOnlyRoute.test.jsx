@@ -64,6 +64,7 @@ describe('the staff-only refusal', () => {
     expect(screen.queryAllByRole('link')).toEqual([]);
     const words = screen.getByRole('alert').textContent.toLowerCase();
     for (const sell of ['upgrade', 'pricing', 'subscribe', 'cartographer', '$']) {
+      // anchored: `words` is the rendered alert's own text (getByRole('alert') above throws when absent).
       expect(words, `the refusal must not sell: "${sell}"`).not.toContain(sell);
     }
   });

@@ -109,6 +109,7 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
     expect([...ANON_SIZES]).toEqual(SIZE_LADDER.slice(rung(TIER_GATE.anon.minTier), rung(TIER_GATE.anon.maxTier) + 1));
     expect([...ANON_SIZES]).toEqual(['hamlet', 'village', 'town']);
     // …and a thorpe is on the OTHER side of the floor, which is the whole ruling.
+    // anchored: ANON_SIZES was just proven equal to ['hamlet', 'village', 'town'], so this absence is a real one.
     expect(ANON_SIZES).not.toContain('thorp');
     expect(SIGN_IN_UNLOCKS).toContain('thorp');
   });

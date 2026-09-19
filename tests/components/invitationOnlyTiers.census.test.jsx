@@ -210,6 +210,7 @@ describe('THE TEASER — the surface the owner walked', () => {
       expectAbsentWithAnchor(names, 'Founder', 'Cartographer', `the at-cap teaser at ${label}`);
       // …and none of the Founder card's own copy survives by another route.
       for (const phrase of ['By invitation', 'A founding place', 'chairs in the credits', 'Request a chair']) {
+        // anchored: the teaser rendered — expectAbsentWithAnchor above proved Cartographer present in its names.
         expect(text, `the teaser still carries Founder copy: ${phrase}`).not.toContain(phrase);
       }
     });
