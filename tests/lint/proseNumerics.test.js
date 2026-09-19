@@ -401,6 +401,25 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // byte, because the clamp was never on the figure — it was on the sentence beside it.
 // MEASURED, not assumed: live 224 rows, exact-equal to this baseline, 0 added and 0 removed
 // on path + category + snippet.
+// ODQ §934.22 (the label-seam car, 2026-09-19) — THIRTY-NINE PURE LINE MOVES ACROSS SEVEN
+// FILES, NO CEILING CHANGE, NO DEBT MOTION, AND ELEVEN OF THEM WERE ALREADY OWED.
+// ⛔ THE CONSIST TIP WAS RED ON THIS RATCHET BEFORE THIS LANE REBASED ONTO IT, and that is
+// measured rather than alleged: scanning 2ac3c9c5f's own `src/` against 2ac3c9c5f's own
+// committed baseline yields 224 live rows against 224 banked and ELEVEN STALE ADDRESSES —
+// DefenseTab.jsx:510, PowerStrata.jsx:239/:241/:282, SessionMode.jsx:442,
+// DefenseSecurity.jsx:235 and Overview.jsx:566 (three rows). The label-seam cars moved lines
+// above them and did not re-address. Nothing was added and nothing fell; it is the address
+// rot this file's CR-FP-2 note already names, inherited rather than authored. It is cured
+// here because a lane cannot leave its own branch red on a ratchet it can close mechanically,
+// and it is NAMED here because a debt that is silently absorbed is a debt nobody reviewed.
+// THIS CAR'S OWN SHARE is the other twenty-eight: threading `resourceDisplayName` and
+// `institutionDisplayName` costs EconomicsTab.jsx one import line and a seven-line rationale
+// above the Imports pills (204 -> 205, 212 -> 213, 401 -> 402, 403 -> 404, 538 -> 545,
+// 539 -> 546, 540 -> 547, 545 -> 552, 547 -> 554, 548 -> 555, 549 -> 556, 728 -> 735,
+// 734 -> 741) and EconomicsTrade.jsx two imports and a six-line rationale inside
+// `renderedTradeLabel` (304 -> 312, 427 -> 435, 534 -> 542, 539 -> 547).
+// MEASURED: path, category and snippet byte-identical on all thirty-nine, 0 added and 0
+// removed, the census at 224 against a 224 ceiling and no category count moved.
 const REVIEWED_TOTAL_CEILING = 224;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

@@ -53,27 +53,11 @@ const THREADED = Object.freeze({
   'src/pdf/sections/ResourcesProduction.jsx': 'the terrain ADVANTAGES and CRITICALS tags',
   'src/pdf/sections/Overview.jsx': "the Geography chapter's advantages, criticals and nearby lists",
   'src/foundry/journalPages.js': "the VTT journal's Exports and Imports rows",
+  // ODQ §934.22 item 2 — threaded by lane 25 (the two rows this file used to carry as OWED).
+  'src/components/new/tabs/EconomicsTab.jsx': 'the Imports pills on the Trade Profile',
+  'src/pdf/sections/EconomicsTrade.jsx': 'the EXPORTS and IMPORTS bullet lists',
 });
 
-/**
- * ⛔ THE READERS THIS LANE COULD NOT EDIT, NAMED SO THEY CANNOT BE FORGOTTEN. Both belong to
- * another lane of the 2026-09-18 consist, and a lane that edits a file it does not own is how
- * two lanes silently overwrite each other. The counts are EXACT in both directions: when the
- * owing lane threads the line the count falls, this arm REDS, and the row must be deleted. A
- * debt that goes quiet when it is paid is a debt nobody ever pays.
- */
-const OWED_ELSEWHERE = Object.freeze({
-  'src/components/new/tabs/EconomicsTab.jsx': {
-    rawPrints: 1,
-    line: ':445  the Imports pill map — wrap each `imp` in resourceDisplayName(imp) (the sort stays on the RAW values so the order does not move)',
-    owner: 'lane 25 (EconomicsTab.jsx), ODQ §934.22 item 2',
-  },
-  'src/pdf/sections/EconomicsTrade.jsx': {
-    rawPrints: 2,
-    line: ':114 / :125  the EXPORTS and IMPORTS BulletLists — itemRender={(item) => renderedTradeLabel(e, …, resourceDisplayName(item))}, or resolve the label inside renderedTradeLabel so the custom-endpoint ownership read still sees the RAW string',
-    owner: 'lane 25 (EconomicsTrade.jsx), ODQ §934.22 item 2',
-  },
-});
 
 /** A machine token: what no reader may ever be shown. */
 const MACHINE_TOKEN = /^[a-z_]+$/;
@@ -167,15 +151,32 @@ describe('the resource label seam — the installation holds', () => {
     });
   }
 
-  test('the two lines lane 25 owes are exactly where they were left', () => {
-    for (const [file, row] of Object.entries(OWED_ELSEWHERE)) {
-      const source = readFileSync(join(ROOT, file), 'utf8');
-      const threaded = source.includes(SEAM_MODULE);
-      expect(threaded, `${file}: ${row.owner} — apply \`${row.line}\`, then DELETE this row`).toBe(false);
-      // anchored: the trade lists are still IN that file, so a row cannot go quiet merely
-      // because the code moved somewhere this census does not look.
-      expect(/primary(?:Imports|Exports)/.test(source), `${file} no longer renders a trade list`).toBe(true);
-    }
+  /**
+   * ODQ §934.22 item 2 — THE DEBT IS PAID, SO THE ROWS CAME OUT AND THE ARM TURNED OVER.
+   * This test used to assert that neither file had the seam yet, because both belonged to
+   * lane 25 and a lane that edits a file it does not own is how two lanes overwrite each
+   * other. Lane 25 threaded both, so the two rows moved into THREADED above (which asserts
+   * the import AND a use) and what is left here is the half that map cannot see: the seam
+   * resolves the PRINTED label while the MATCH — the sort, the necessity and terrain tests,
+   * the custom-endpoint ownership read — still runs on the RAW persisted string. That split
+   * is the whole design, and a cure that resolved the label before the match would have
+   * broken `availableResourceSatisfies` silently.
+   */
+  test('the two readers lane 25 owed resolve the LABEL and still match on the RAW value', () => {
+    const tab = readFileSync(join(ROOT, 'src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
+    // The ownership read and the terrain test take `imp`; only the printed pill takes the seam.
+    expect(tab).toContain("tradeLabelOwnership(eco,'imports',imp)");
+    expect(tab).toContain('const impLabel=resourceDisplayName(imp);');
+    // The exclusion below measures the SPLIT, not an empty file: the two `toContain` lines
+    // above read this same payload and would red first if the list stopped rendering.
+    // anchored: `const impLabel=resourceDisplayName(imp);` is pinned PRESENT on this same source one line above
+    expect(tab).not.toContain("tradeLabelOwnership(eco,'imports',impLabel)");
+
+    const pdf = readFileSync(join(ROOT, 'src/pdf/sections/EconomicsTrade.jsx'), 'utf8');
+    expect(pdf).toContain('const ownership = tradeLabelOwnership(economy, direction, item);');
+    expect(pdf).toContain('const shown = label(resourceDisplayName(item));');
+    // anchored: both of the lines above are asserted PRESENT on this same payload.
+    expect(pdf).not.toContain('tradeLabelOwnership(economy, direction, shown)');
   });
 });
 

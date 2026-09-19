@@ -254,32 +254,6 @@ const ALLOWED_WORD_SITES = Object.freeze({
   },
 });
 
-/**
- * ⛔ THE TWO LINES THIS LANE COULD NOT WRITE, NAMED SO THEY CANNOT BE FORGOTTEN.
- *
- * `chain.processingInstitutions[]` is the raw catalogue key persisted into
- * `economicState.activeChains[]`, and the browser pass met it as "Faith & Worship — Via:
- * Parish church · Monastery · Almshouse". `SupplyChainsPanel.jsx` already threads the same
- * field (`institutionDisplayName(inst.name)`, :208), so the cure is one call at each of the
- * two remaining readers — both of which belong to ANOTHER LANE in the 2026-09-18 consist,
- * and a lane that edits a file it does not own is how two lanes silently overwrite each
- * other. The arm below therefore asserts the defect is EXACTLY where it was left: two files,
- * one raw print each. When the owing lane threads them the count goes to zero, this reds, and
- * the rows come out.
- * @type {Readonly<Record<string, { count: number, line: string, owner: string }>>}
- */
-const OWED_ELSEWHERE = Object.freeze({
-  'src/components/new/tabs/EconomicsTab.jsx': {
-    count: 1,
-    line: ":173  {chain.processingInstitutions.join(' · ')} ⇒ {chain.processingInstitutions.map(institutionDisplayName).join(' · ')}",
-    owner: 'lane 25 (EconomicsTab.jsx), ODQ §934.22 item 1(b)',
-  },
-  'src/pdf/sections/EconomicsTrade.jsx': {
-    count: 1,
-    line: ":227  c.processingInstitutions.map(label) ⇒ c.processingInstitutions.map((n) => label(institutionDisplayName(n)))",
-    owner: 'lane 25 (EconomicsTrade.jsx), ODQ §934.22 item 1(b)',
-  },
-});
 
 /** The WORD, in every form the browser pass met it: plural, adjectival, possessive. */
 const WORD = /parish/i;
@@ -401,13 +375,26 @@ describe('the institution label seam — the WORD does not reach a reader', () =
     }
   });
 
-  test('the two lines lane 25 owes are exactly where they were left', () => {
-    for (const [file, row] of Object.entries(OWED_ELSEWHERE)) {
+  /**
+   * ODQ §934.22 item 1(b) — THE DEBT IS PAID, SO THE ROW CAME OUT AND THE ARM TURNED OVER.
+   * This test used to assert the defect was EXACTLY where §934.13 left it: two files, one raw
+   * `processingInstitutions` print each, owed to lane 25 because a lane that edits a file it
+   * does not own is how two lanes overwrite each other. Lane 25 threaded both — EconomicsTab's
+   * "Via" row and the PDF chapter's PROC row — so the owed map is gone and the SAME counter now
+   * asserts ZERO. It is the stronger claim: a debt row goes quiet when it is paid, a zero does
+   * not, and this one reds the moment a raw print comes back to either file.
+   */
+  test('the two lines lane 25 owed are threaded — the counter reads zero on both', () => {
+    for (const file of [
+      'src/components/new/tabs/EconomicsTab.jsx',
+      'src/pdf/sections/EconomicsTrade.jsx',
+    ]) {
       const source = readFileSync(join(ROOT, file), 'utf8');
-      expect(
-        countRawChainInstitutionPrints(source),
-        `${file}: ${row.owner} — apply \`${row.line}\`, then DELETE this row`,
-      ).toBe(row.count);
+      // anchored: the field is still rendered in that file (asserted below), so a zero cannot
+      // mean the reader was deleted rather than cured.
+      expect(countRawChainInstitutionPrints(source), `${file} prints a raw processingInstitutions list again`).toBe(0);
+      expect(/processingInstitutions/.test(source), `${file} no longer renders the chain's institutions`).toBe(true);
+      expect(source.includes(SEAM_MODULE), `${file} no longer reads the seam`).toBe(true);
     }
   });
 });

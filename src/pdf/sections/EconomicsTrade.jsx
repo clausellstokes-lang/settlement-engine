@@ -28,24 +28,32 @@ import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
 import { statusCase } from '../../domain/display/labelCase.js';
+import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 function renderedTradeLabel(economy, direction, item) {
+  // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
+  // below stays on the RAW `item`, because `tradeLabelOwnership` matches custom endpoints
+  // against the persisted string; only the words a reader sees are resolved. Resolving here
+  // rather than at each `itemRender` call site is what keeps that split in ONE place, and it
+  // is the shape tests/lint/resourceLabelSeam.census.test.js's owed row named.
   const ownership = tradeLabelOwnership(economy, direction, item);
+  const shown = label(resourceDisplayName(item));
   if (ownership.customOnly) {
     const members = ownership.members.length
       ? ` (incl. ${ownership.members.join(', ')})`
       : '';
-    return `${label(item)}${members}  *`;
+    return `${shown}${members}  *`;
   }
   if (ownership.mixed) {
     const customPart = ownership.members.length
       ? `incl. ${ownership.members.join(', ')}`
       : 'also an exact custom endpoint';
-    return `${label(item)} (${customPart} *)`;
+    return `${shown} (${customPart} *)`;
   }
-  return label(item);
+  return shown;
 }
 
 export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
@@ -224,7 +232,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               status={c.status}
               statusLabel={cap(c.status)}
               meta={[
-                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map(label).filter(Boolean).join(', ') } : null,
+                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
                 c.outputs?.length ? { label: 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,

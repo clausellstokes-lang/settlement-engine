@@ -26,6 +26,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -170,7 +171,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
                 <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Via</div>
-                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.join(' · ')}</div>
+                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.map(institutionDisplayName).join(' · ')}</div>
                 </div>
                 {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Outputs</div>
@@ -454,13 +455,19 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
                     const ownership=tradeLabelOwnership(eco,'imports',imp);
+                    // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The
+                    // sort above, the necessity/terrain tests and the ownership read all stay on
+                    // the RAW value (`resourceAnalysis.imports.critical` carries catalogue KEYS —
+                    // camel_herds, hot_springs_mineral — and availableResourceSatisfies matches
+                    // against those very strings); only the label a reader sees is resolved.
+                    const impLabel=resourceDisplayName(imp);
                     const title=ownership.members.length
                       ? `incl. ${ownership.members.join(', ')}`
                       : ownership.mixed
                         ? 'Also an exact custom endpoint'
                         : undefined;
-                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
-                    return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{impLabel}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                    return <span key={i} title={title} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{impLabel}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
