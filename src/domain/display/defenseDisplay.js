@@ -195,7 +195,7 @@ export function deriveCriminalStructure(settlement) {
 }
 
 /**
- * Supporting-capabilities cards (economic backing, magical, legal, medical,
+ * Supporting-capabilities cards (economic backing, arcane support, legal, medical,
  * logistics, and naval when coastal). Computed from defense scores + institution
  * presence flags (economicState.compound.inst). Returns an array of
  * { label, status, color, score|null, note }.
@@ -221,24 +221,40 @@ export function deriveSupportingCapabilities(settlement) {
       note: econScore >= 65 ? 'Full pay, maintained equipment, reserve capacity.' : econScore >= 40 ? 'Adequate upkeep, some shortfalls.' : econScore >= 25 ? 'Irregular pay, worn equipment, morale risk.' : 'Cannot sustain forces. Systemic breakdown.',
     },
     {
-      label: 'Magical Capability',
-      status: f.hasMagicInst ? 'Arcane support' : 'None',
-      // ⛔ A PRESENCE READ OF `None` CANNOT SIT BESIDE A BAR THAT SAYS `Strong`. This row's
-      // STATUS is a presence read — is there a magical institution here — while its score
-      // was `scores.magical`, which the engine derives whether or not one exists. A town
-      // with no arcane institution and a magical score of 66 therefore rendered
-      // "Magical Capability · None" against a two-thirds bar banded Strong: two facts, one
-      // row, wearing one label.
+      // ⛔⛔ THE LABEL IS THE QUESTION THIS ROW ASKS, AND IT IS NOT THE OVERVIEW'S QUESTION
+      // (review 10, 2026-09-18). It was called `Magical Capability`, which is also the name
+      // of the Overview's Systems Health row — and the two read different facts. THIS row
+      // is a NARROW presence read: `compound.inst.hasMagicInst` is
+      // `wizard|mage|alchemist|enchant|arcane|academy of magic|scroll scribe|spellcasting|
+      // hedge wizard` and nothing else. The Overview's row bands `scores.magical`, which
+      // `defenseGenerator` drives from the WORLD MAGIC SLIDER over a much wider presence
+      // (healer, monastery, cathedral, druid, divine, healing all count), so a town with no
+      // arcane institution at all can score 49 there. One name over two facts produced the
+      // defect the review measured: "None" printed in amber beside a half-full bar on 27 of
+      // 144 large settlements. Two facts, two names — this one is ARCANE SUPPORT, which is
+      // the only thing `hasMagicInst` can answer, and the Overview keeps the other name.
       //
-      // The fix is the shape THIS LIST ALREADY USES for every other presence read. Legal
-      // Infrastructure, Medical Readiness and Logistics & Supply all carry `score: null`
-      // and render no bar, because "is there a court" has no magnitude. Magical Capability
-      // was the only presence read that also carried one. It now has a bar exactly when
-      // there is something for the bar to measure, and `scores.magical` is untouched — the
-      // Systems Health row on the Overview still reads it, because THAT row is labelled by
+      // ⚠ THE STATUS VOCABULARY DID NOT MOVE. It has always been `Arcane support` / `None`,
+      // so the label is now the row's own word rather than a wider claim the read cannot
+      // support; nothing downstream has to learn a new status spelling.
+      label: 'Arcane Support',
+      status: f.hasMagicInst ? 'Arcane support' : 'None',
+      // A PRESENCE READ HAS NO MAGNITUDE, which is the shape THIS LIST ALREADY USES for
+      // every other one. Legal Infrastructure, Medical Readiness and Logistics & Supply all
+      // carry `score: null` and render no bar, because "is there a court" has no size. So
+      // does this row when the answer is no, and `scores.magical` is untouched either way —
+      // the Overview's Systems Health row still bands it, because THAT row is labelled by
       // the score and not by the institution.
       color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: f.hasMagicInst ? (scores.magical || 0) : null,
-      note: f.hasMagicInst ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.` : 'Conventional defense only. Invisible threats go undetected and unanswered.',
+      // ⚠ THE NOTE ANSWERS THE SAME NARROW QUESTION THE LABEL DOES. It used to say
+      // "Conventional defense only. Invisible threats go undetected and unanswered." — a
+      // claim about the settlement's WHOLE magical posture, which this flag cannot make: a
+      // cathedral is not arcane, and a town with a cathedral, a healer and no wizard reads
+      // `hasMagicInst === false` while being anything but conventional. The note now says
+      // what is missing (arcane practitioners) and what follows from that specifically.
+      note: f.hasMagicInst
+        ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.`
+        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
       label: 'Legal Infrastructure',

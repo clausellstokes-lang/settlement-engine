@@ -585,9 +585,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>{
             /* R-5b item #20: the bare 0-100 digit beside this bar is the score's band word
-               from the shared ladder. Magical Capability's status ("Arcane support" /
-               "None") is a presence read, not a grade, so there the band is the only word
-               that says how good the bar actually is.
+               from the shared ladder. Arcane Support's status ("Arcane support" / "None")
+               is a presence read, not a grade, so there the band is the only word that says
+               how good the bar actually is. (That row was called `Magical Capability` until
+               review 10; the Overview's Systems Health row owns that name, and the two ask
+               different questions — see `deriveSupportingCapabilities`.)
                ⛔ BUT THE BAND AND THE STATUS ARE NOT ALWAYS TWO FACTS. Economic Backing's
                status ladder (Well-funded / Adequate / Underfunded / Critical, at 65/40/25)
                is a second grading of THE SAME econScore the band grades at 65/40/20, and the

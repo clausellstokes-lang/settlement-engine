@@ -35,6 +35,7 @@ import { statusCase } from '../../src/components/new/labelLadder.js';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // TWO SPELLINGS OF ONE LADDER, and the difference is the point. BANDS is the vocabulary
 // `defenseScoreBands.js` FREEZES ("the frozen four; never extend") and the PDF prints;
@@ -60,6 +61,25 @@ const CASES = [
   ['city', { settType: 'city', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' }, 'bands-city'],
   ['metropolis', { settType: 'metropolis', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' }, 'bands-metro'],
 ];
+
+/**
+ * THE CORPUS the "None beside a bar" arm walks: 102 settlements, SEVENTEEN PER TIER, each
+ * with its own seed. The tier is what moves the defect — `defenseGenerator` zeroes
+ * `scores.magical` for a thorp or hamlet with no magic presence and lets the world slider
+ * alone drive it from village up — so the split is per tier rather than a flat slice, which
+ * would have run out before it reached a metropolis. The culture and terrain cycle underneath
+ * so the institution rosters (and with them `hasMagicInst`) differ across the seventeen.
+ * @type {Array<[object, string]>}
+ */
+const CORPUS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].flatMap(
+  (settType, t) => ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian',
+    'mesoamerican', 'south_asian', 'steppe', 'greek']
+    .flatMap((culture, c) => ['forest', 'grassland', 'coastal'].map((terrain, x) => [
+      { settType, culture, terrain, tradeRouteAccess: ['road', 'port', 'isolated'][x] },
+      `corpus-${t}-${c}-${x}`,
+    ]))
+    .slice(0, 17),
+);
 
 /** @type {Array<[string, any]>} */
 const settlements = [];
@@ -116,10 +136,10 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       const row = labelEl.parentElement;
       const value = row.lastElementChild.textContent;
 
-      // ONE NAME, ONE FACT. Every row here bands its own score EXCEPT Magical Capability,
-      // whose word is the presence read the Defense tab's capability row shows — the two
-      // rows share a label, so they must answer the same question. Its own arm is below.
-      if (label === 'Magical Capability') continue;
+      // ONE NAME, ONE FACT, AND NO EXCEPTION (review 10). Magical Capability used to be
+      // skipped here, because it printed the Defense tab's PRESENCE word instead of its own
+      // grade. The two rows now carry two names for their two facts, so every row in this
+      // list bands its own score and this loop judges all five.
 
       // The band renders...
       expect(value).toMatch(BAND_RE);
@@ -173,10 +193,10 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
 
-    // Both scored rows (Economic Backing, Magical Capability) are present; the unscored
+    // Both scored rows (Economic Backing, Arcane Support) are present; the unscored
     // ones (no bar) carry no band and are untouched.
     const caps = deriveSupportingCapabilities(settlement);
-    for (const label of ['Economic Backing', 'Magical Capability']) {
+    for (const label of ['Economic Backing', 'Arcane Support']) {
       const labelEl = screen.getByText(label);
       const row = labelEl.closest('div').parentElement;
       const cap = caps.find((c) => c.label === label);
@@ -207,7 +227,7 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
       // A PRESENCE READ HAS NO MAGNITUDE, so it has no bar and no band: `score: null` is
       // how this list spells "there is nothing here to grade" (Legal Infrastructure,
       // Medical Readiness, Logistics & Supply — and, since the magic row stopped borrowing
-      // the engine's magical score, Magical Capability when the town has no arcane
+      // the engine's magical score, Arcane Support when the town has no arcane
       // institution). Such a row must still say what IS there.
       if (cap.score === null) {
         expect(bands.length, `${label} is a presence read and must carry no band`).toBe(0);
@@ -246,34 +266,172 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
   });
 });
 
-describe('Magical Capability — one name, one fact, across both tabs', () => {
-  test.each(CASES.map(([n]) => n))('%s: the Overview and the Defense row say the same word', (name) => {
-    const settlement = settlements.find(([n]) => n === name)[1];
-    const cap = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Magical Capability');
+/**
+ * ── TWO NAMES, TWO FACTS (review 10, 2026-09-18) ────────────────────────────────────
+ *
+ * The arm this replaces asserted that the Overview row and the Defense capability row "say
+ * the same word", which they did — because the Overview row had been made to PRINT the
+ * Defense row's word. The claim was therefore vacuous by construction: it compared a value
+ * against the derivation it was copied from, and it stayed green while the page printed
+ * "None" in amber beside a half-full bar on 27 of 144 large settlements.
+ *
+ * The two rows read two different facts. `scores.magical` is the WORLD MAGIC SLIDER over a
+ * wide presence (healer, monastery, cathedral, druid, divine, healing all count), so a town
+ * with no arcane institution can score 49; `compound.inst.hasMagicInst` is the narrow arcane
+ * roster. So they carry two names now, and the two arms below are what that costs:
+ * a UNIQUENESS pin, so neither name can drift back onto the other tab, and a CORPUS pin on
+ * the defect itself, which no naming rule can guarantee on its own.
+ */
+describe('Two names, two facts — the Overview score and the Defense presence read', () => {
+  /** Every label-ish leaf word rendered in a container, for a membership question. */
+  const labelsIn = (container) => [...container.querySelectorAll('span')]
+    .filter((el) => el.children.length === 0)
+    .map((el) => el.textContent.trim());
 
-    const { container } = render(<OverviewTab settlement={settlement} />);
-    const overviewLabel = [...container.querySelectorAll('span')].find((el) => el.textContent === 'Magical Capability');
-    expect(overviewLabel, 'the Systems Health row must render').toBeTruthy();
-    const overviewWord = overviewLabel.parentElement.lastElementChild.textContent;
+  test('the two label vocabularies are DISJOINT, so no name can answer two questions', () => {
+    // Derived from the shipped producers, not retyped: the Systems Health row list this
+    // file already drives, and the Defense tab's own capability list for a real town.
+    const systemsHealth = [...SCORE_ROWS.map(([label]) => label), 'Food Security'];
+    const capabilities = deriveSupportingCapabilities(settlements.find(([n]) => n === 'city')[1])
+      .map((c) => c.label);
+    expect(capabilities.length, 'the capability list is empty, so the overlap check is vacuous')
+      .toBeGreaterThan(3);
+    expect(
+      systemsHealth.filter((label) => capabilities.includes(label)),
+      'a label appears in BOTH lists — one name now answers two different questions',
+    ).toEqual([]);
+    // …and both names really are in play, so the disjointness is not the absence of one side.
+    expect(systemsHealth).toContain('Magical Capability');
+    expect(capabilities).toContain('Arcane Support');
+  });
+
+  test.each(CASES.map(([n]) => n))('%s: each magic name renders on exactly ONE tab', (name) => {
+    const settlement = settlements.find(([n]) => n === name)[1];
+
+    const { container: overview } = render(<OverviewTab settlement={settlement} />);
+    const overviewLabels = labelsIn(overview);
+    // 'Military Might' is the sibling ScoreRow: it proves the Systems Health block rendered,
+    // so the exclusion below is a name that is not here rather than a section that is not.
+    expectAbsentWithAnchor(overviewLabels, 'Arcane Support', 'Military Might',
+      `${name}: the Defense tab's presence-read name on the Overview`);
+    expect(overviewLabels, `${name}: the Overview's own magic row must render`)
+      .toContain('Magical Capability');
     cleanup();
 
-    render(<DefenseTab settlement={settlement} />);
+    const { container: defense } = render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
-    const defenseLabel = screen.getByText('Magical Capability');
-    const defenseRow = defenseLabel.closest('div').parentElement;
-    const defenseWord = defenseRow.querySelector('[data-sf-cap-status]')?.textContent;
+    const defenseLabels = labelsIn(defense);
+    // 'Economic Backing' is the sibling capability row: it proves the fold is open and the
+    // list rendered, which is exactly the drift that would make a bare exclusion vacuous.
+    expectAbsentWithAnchor(defenseLabels, 'Magical Capability', 'Economic Backing',
+      `${name}: the Overview's score-row name on the Defense tab`);
+    expect(defenseLabels, `${name}: the Defense tab's presence row must render`)
+      .toContain('Arcane Support');
+  });
+});
 
-    expect(overviewWord, `${name}: the two tabs must answer the same question`).toBe(defenseWord);
-    expect(overviewWord, `${name}: and that answer is the presence read`).toBe(cap.status);
+/**
+ * ── THE DEFECT ITSELF, OVER A CORPUS ────────────────────────────────────────────────
+ *
+ * A naming rule cannot promise this. What review 10 actually measured is a RENDERED
+ * CONTRADICTION: the word "None" — an absence — printed beside a bar with width, which is a
+ * magnitude. Whatever names the rows carry, that pairing is always a lie, so it is pinned
+ * as itself, over a corpus wide enough that the tiers and the magic slider both move.
+ *
+ * ⛔ THE WALK IS BOUNDED AT TWO ANCESTORS, and the bound is the whole reason the probe is
+ * honest. The two shapes put the bar at different distances — the Overview's ScoreRow holds
+ * its word in the header `div` and its bar in the NEXT sibling (two levels up from the
+ * word), while the Defense capability row holds the word and the bar in the SAME header
+ * (one level). Three levels would reach the Overview's score GRID and the Defense tab's caps
+ * COLUMN, where every OTHER row's bar lives — and the probe would then convict a bar-less
+ * "None" row of a neighbour's magnitude. Two levels is the largest reach that cannot leave
+ * the row, and it covers both shapes.
+ */
+describe('No rendered row says "None" beside a bar that has width', () => {
+  /** A bar, as BOTH renderers spell one: a filled inner div sized by inline percent. */
+  const barsIn = (el) => [...el.querySelectorAll('div')].filter(
+    (d) => d.style?.height === '100%' && /^\d+(\.\d+)?%$/.test(d.style?.width || ''),
+  );
 
-    // THE POINT OF THE RULING: where there is no arcane institution, NO surface may put a
-    // word-grade on the magic score. 'None' is not a band word, and that is the whole cure.
-    if (!cap.score && cap.status === 'None') {
-      // Stated positively: the walker bans a bare negative, and "is it one of the four"
-      // is a membership question anyway.
-      expect(BANDS.map(statusCase).includes(overviewWord),
-        `${name}: a no-magic town reads as the grade "${overviewWord}"`).toBe(false);
+  /**
+   * Every "None" in this container that sits beside a bar with width, as
+   * `<row text> :: <bar width>`. Empty is the passing answer.
+   */
+  function nonesBesideABar(container) {
+    const offenders = [];
+    for (const el of container.querySelectorAll('span, div')) {
+      if (el.children.length !== 0) continue;
+      if (el.textContent.trim() !== 'None') continue;
+      let scope = el.parentElement;
+      for (let up = 0; up < 2 && scope; up += 1, scope = scope.parentElement) {
+        const wide = barsIn(scope).filter((b) => parseFloat(b.style.width) > 0);
+        if (barsIn(scope).length === 0) continue; // no bar at this reach — widen once
+        if (wide.length > 0) offenders.push(`${scope.textContent.trim()} :: ${wide[0].style.width}`);
+        break; // the NEAREST reach that holds a bar is this word's row; never leave it
+      }
     }
+    return offenders;
+  }
+
+  test('THE PROBE IS LIVE: it convicts the defect as review 10 found it on the page', () => {
+    // The positive control, in the exact markup ScoreRow produced when it took a status
+    // word: an absence beside a two-thirds bar. A probe that cannot see this proves nothing
+    // about the corpus below, however green that corpus runs.
+    const { container } = render(
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <span>Magical Capability</span><span>None</span>
+        </div>
+        <div style={{ height: 6, overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: '66%' }} />
+        </div>
+      </div>,
+    );
+    expect(nonesBesideABar(container)).toEqual(['Magical CapabilityNone :: 66%']);
+    cleanup();
+    // …and a bar-less "None" row beside a SIBLING that has one is NOT convicted, which is
+    // the false positive the two-level bound exists to refuse.
+    const { container: sibling } = render(
+      <div>
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex' }}><span>Legal Infrastructure</span><span>None</span></div>
+        </div>
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ display: 'flex' }}><span>Economic Backing</span><span>Adequate</span></div>
+          <div style={{ height: 6 }}><div style={{ height: '100%', width: '71%' }} /></div>
+        </div>
+      </div>,
+    );
+    expect(nonesBesideABar(sibling)).toEqual([]);
+  });
+
+  test('over a generated corpus, neither tab ever pairs the word with a width', () => {
+    const offenders = [];
+    let nones = 0;
+    let barred = 0;
+    for (const [config, seed] of CORPUS) {
+      const settlement = generateSettlementPipeline(config, null, { seed, customContent: {} });
+      const { container: overview } = render(<OverviewTab settlement={settlement} />);
+      nones += [...overview.querySelectorAll('span')].filter((el) => el.textContent.trim() === 'None').length;
+      barred += barsIn(overview).filter((b) => parseFloat(b.style.width) > 0).length;
+      for (const hit of nonesBesideABar(overview)) offenders.push(`${seed} overview :: ${hit}`);
+      cleanup();
+
+      const { container: defense } = render(<DefenseTab settlement={settlement} />);
+      fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
+      nones += [...defense.querySelectorAll('span')].filter((el) => el.textContent.trim() === 'None').length;
+      barred += barsIn(defense).filter((b) => parseFloat(b.style.width) > 0).length;
+      for (const hit of nonesBesideABar(defense)) offenders.push(`${seed} defense :: ${hit}`);
+      cleanup();
+    }
+    // NON-VACUITY, both halves: the corpus really printed the word, and really drew bars
+    // with width. Without these the arm passes on a page-set that rendered nothing at all.
+    expect(nones, 'no settlement printed "None" anywhere — the corpus cannot show the defect')
+      .toBeGreaterThan(0);
+    expect(barred, 'no settlement drew a bar with width — the pairing is unreachable')
+      .toBeGreaterThan(0);
+    expect(offenders, `an absence is printed beside a magnitude on ${offenders.length} row(s)`)
+      .toEqual([]);
   });
 });
 
