@@ -1,6 +1,7 @@
 import { CARD_ALT, FS, GOLD, PARCH, serif_ } from '../theme.js';
 import { fallbackInitial } from './galleryUtils.js';
 import { settlementCardImage, tierStockImage } from '../../domain/display/tierStockImage.js';
+import { t } from '../../copy/index.js';
 
 /**
  * ⛔ A SHARED TOWN IS NEVER A LETTER ON A GRADIENT ANY MORE (owner order ODQ
@@ -25,7 +26,7 @@ export default function GalleryImage({ item, height = 170 }) {
       <img
         src={src}
         alt={stock
-          ? `A ${String(item?.tier || 'settlement').toLowerCase()} of the kind ${item?.name || 'this settlement'} is`
+          ? t('gallery.stockImageAlt', { tier: String(item?.tier || 'settlement').toLowerCase(), name: item?.name || 'this settlement' })
           : (item.imageAlt || item.name || 'Settlement image')}
         loading="lazy"
         style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: CARD_ALT }}

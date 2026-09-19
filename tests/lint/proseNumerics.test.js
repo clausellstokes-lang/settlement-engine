@@ -420,20 +420,40 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // `renderedTradeLabel` (304 -> 312, 427 -> 435, 534 -> 542, 539 -> 547).
 // MEASURED: path, category and snippet byte-identical on all thirty-nine, 0 added and 0
 // removed, the census at 224 against a 224 ceiling and no category count moved.
-const REVIEWED_TOTAL_CEILING = 224;
+// 2026-09-19 (the chair, at the 2026-09-18 fixes consist's final tip) — THE DEBT FELL BY SIX AND
+// THE CEILINGS FOLLOW IT DOWN: 224 -> 218, percentToken 56 -> 54, multiplier 10 -> 8,
+// twoDecimalScore 11 -> 9; floatInterpolation holds at 147. The six rows were the landing
+// fixture's — engine receipts in a GENERATED file, now scoped out of the authored-prose walk
+// (GENERATED_SOURCES above; its freshness is pinned by landingFixtureFreshness). The one NEW
+// leak of the wave — GalleryImage's stock-painting alt, a template in JSX — was humanized
+// through the copy dictionary (gallery.stockImageAlt), never banked. Ceilings only fall.
+const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,
-  percentToken: 56,
-  multiplier: 10,
-  twoDecimalScore: 11,
+  percentToken: 54,
+  multiplier: 8,
+  twoDecimalScore: 9,
   pushIndirection: 0,
 });
+
+/**
+ * GENERATED SOURCES ARE NOT AUTHORED PROSE. The landing fixture is written by
+ * scripts/generate-landing-fixture.mjs from a real generation and a real twelve-week pulse;
+ * its sentences are the ENGINE'S receipts ("Base chance 59% lifted by ×1.01 …") and its
+ * freshness is pinned by tests/build/landingFixtureFreshness.test.js. Humanizing them would
+ * falsify the receipt, and banking them would make a regeneration a prose-numerics event.
+ * So the walk skips them here and in the chair's re-address tool alike (2026-09-19, §934.30).
+ */
+const GENERATED_SOURCES = new Set(['src/components/home/landingFixture.js']);
 
 function walkSourceFiles(dir, out = []) {
   for (const entry of readdirSync(dir)) {
     const abs = join(dir, entry);
     if (statSync(abs).isDirectory()) walkSourceFiles(abs, out);
-    else if (/\.(?:js|jsx)$/.test(entry)) out.push(abs);
+    else if (/\.(?:js|jsx)$/.test(entry)) {
+      const rel = relative(ROOT, abs).replace(/\\/g, '/');
+      if (!GENERATED_SOURCES.has(rel)) out.push(abs);
+    }
   }
   return out;
 }
@@ -736,7 +756,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 225-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 218-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -751,7 +771,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 225 exceeds reviewed ceiling 224',
+      'total 219 exceeds reviewed ceiling 218',
       'floatInterpolation 148 exceeds reviewed ceiling 147',
     ]);
   });
