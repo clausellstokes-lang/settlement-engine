@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "9548afb7cc7141575c8cb5cdb3c2c76fde5afef5eaf8afc31d30f3985781b271",
+      "sha256": "31e53ecde6960d57b8c1e78e0a089975e1a95e6628d9e9f49a83f6d6017120fd",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934",
+      "ownerRow": "§934.15",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
