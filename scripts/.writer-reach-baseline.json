@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "b1ec5588c6edbbd6f213dbf430e5d5cf56fd99fe",
+ "frozenAtSha": "e3bf05f324e093a53b8640da30645b18d37f3629",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 14496
  },
  "shapesDigest": "aeb73dc28d89b6db7a220d9affee6b8bfa99ede4e1b0e9d347d084e24a8b595b",
- "detectorDigest": "33cf653ce6689525b7c5be11aeca1ebc6f189890f0c20b0a6fd06e2f9a2ad68b",
- "verdictDigest": "1b213ab210cc0f7af004ca70f397a5e87baf8834a99c367bedded8fb37bedecb",
+ "detectorDigest": "a416334292debcf0c2606030cb38f4765ab54c5bccde7f50ccb25401fdc90128",
+ "verdictDigest": "eba4580dbc4112f4e16b8617f8e77cf73d3b08a4aadb2945edea03e3686fd4d7",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,38 +72,38 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 714,
-  "web-transitive": 903,
-  "dossier-pdf": 411,
+  "web-display": 724,
+  "web-transitive": 907,
+  "dossier-pdf": 417,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 323,
+  "foundry": 328,
   "json-export": 8,
   "news": 29
  },
  "population": {
   "judged": 6537,
   "lit": 572,
-  "litName": 4670,
-  "dark": 1295,
+  "litName": 4671,
+  "dark": 1294,
   "thinKeys": 9144,
   "thinShapes": 962,
   "knownShapes": 337
  },
  "scanStats": {
-  "files": 1618,
-  "sites": 38840,
-  "propRead": 36775,
+  "files": 1632,
+  "sites": 38880,
+  "propRead": 36812,
   "elemRead": 0,
-  "destructure": 2051,
+  "destructure": 2054,
   "inOp": 14,
-  "rGrades": 5971,
-  "nGrades": 885932,
-  "resolvedReceivers": 6737
+  "rGrades": 5977,
+  "nGrades": 886430,
+  "resolvedReceivers": 6743
  },
  "registerDigest": "14a3b59541fe2288628da0a815192e34c8138d55f73e98ffefae63e902076501",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 496,
+ "reviewableDarkCount": 495,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -3229,12 +3229,6 @@
    "identity": "magicMilitarized on flags",
    "key": "magicMilitarized",
    "shape": "flags",
-   "rows": 420
-  },
-  {
-   "identity": "magicOffset on foodSecurity",
-   "key": "magicOffset",
-   "shape": "foodSecurity",
    "rows": 420
   },
   {
@@ -8754,7 +8748,7 @@
   "isSurplus on foodSecurity": "web-transitive=R",
   "label on foodSecurity": "campaign-pdf=N dossier-pdf=R foundry=N json-export=N news=N web-display=R web-transitive=R world-book=N",
   "magicNote on foodSecurity": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "magicOffset on foodSecurity": "",
+  "magicOffset on foodSecurity": "dossier-pdf=N web-display=N",
   "magicSupplement on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "magicTradeChannel on foodSecurity": "dossier-pdf=R foundry=R web-transitive=R",
   "prosperityMod on foodSecurity": "",
