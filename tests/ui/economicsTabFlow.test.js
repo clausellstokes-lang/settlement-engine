@@ -13,7 +13,7 @@
  */
 import React from 'react';
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -211,6 +211,88 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(container.textContent).toContain('lbs/day');
     // And the tab's OWN arithmetic readout below the balance bar is untouched.
     expect(container.textContent).toContain('Production deficit of');
+  });
+
+  /**
+   * ODQ §934.15, the chair's second ruling — THE NARRATIVE UNDER THE BAR MUST NOT
+   * STATE AN ARITHMETIC THAT DOES NOT CLOSE. Three states, three arms, and each
+   * fixture is chosen so the numbers the tab prints can be recomputed from it.
+   *
+   * ⛔ NO NEW INTERPOLATED FIGURE REACHES THIS PROSE, and no frozen row moved to
+   * build it: the prose-numerics law refuses a new numeral in reader prose, and
+   * `tests/lint/.prose-numerics-baseline.json` pins EconomicsTab.jsx:542/544/545/546
+   * by path + line + category + snippet. The magic clauses are number-free and land
+   * past the 237-character truncation on 542 and 544, and the balanced branch wraps
+   * the surplus template without touching its bytes, so the live census is 224 rows
+   * at base and 224 at tip with 0 added and 0 removed — measured, not assumed.
+   */
+  const withFood = (foodBalance) => ({
+    ...SPEAKING,
+    economicViability: { metrics: { foodBalance } },
+  });
+
+  test('a gap the town does not close itself is never called a surplus', () => {
+    useStore.setState({ campaigns: [] });
+    // Production short of need, the whole gap carried by imports: deficit 0 AND
+    // surplus 0. The tab used to fall through to the surplus template and print
+    // "Agricultural surplus of 0% above daily needs." to a town that does not feed
+    // itself — while the tile beside it already computed the word "Balanced".
+    const { container } = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 800, dailyNeed: 1000, deficit: 0, surplus: 0, importCoverage: 200, rawDeficit: 200, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    }));
+    // ⚠ THE FOOD SECTION IS `defaultOpen={!!fb.deficit}` AND Primitives renders
+    // `{open && children}`, so on a town that IS fed the narrative is behind a
+    // closed fold — the same trap the DS-ECO-9 note at EconomicsTab.jsx:505 records
+    // for the sentence above it. That is why this arm opens the fold: the defect
+    // was real for every reader who did, and a test that never opened it would
+    // have reported the false sentence as absent.
+    // anchored: the SAME string is asserted PRESENT three lines below, after the click — a payload that stopped rendering would red there.
+    expect(container.textContent).not.toContain('Daily needs are met');
+    fireEvent.click([...container.querySelectorAll('button')].find((b) => b.textContent.includes('Food Security')));
+    expect(container.textContent).toContain('Daily needs are met, with no surplus');
+    // The sentence above is read out of this very render, so the exclusion below
+    // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
+    expect(container.textContent).not.toContain('Agricultural surplus of');
+  });
+
+  test('the three-clause deficit sentence closes, because magic no longer covers the gap in silence', () => {
+    useStore.setState({ campaigns: [] });
+    // 600 produced against 1000 needed is a 400 lb gap; imports carry 200 of it and
+    // magic 80, leaving 120 — twelve per cent of need. Read without the magic
+    // clause, "covers 60%" and "imports cover 50% of the gap" read out to a 20%
+    // residual beside a printed 12%, which is the defect.
+    const fb = { dailyProduction: 600, dailyNeed: 1000, deficit: 120, deficitPercent: 12, surplus: 0, importCoverage: 200, magicFoodOffset: 80, rawDeficit: 400, agricultureModifier: 1 };
+    const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text).toContain(`Production covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of food needs`);
+    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
+    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
+    expect(text).toContain('Magical provision closes the remainder of the gap.');
+    // The arithmetic the three clauses plus the magic clause now describe.
+    expect((fb.dailyNeed - fb.dailyProduction - fb.importCoverage - fb.magicFoodOffset) / fb.dailyNeed * 100)
+      .toBe(fb.deficitPercent);
+  });
+
+  test('the magic clause is silent when no magic closes the gap, and speaks on the import-less branch', () => {
+    useStore.setState({ campaigns: [] });
+    // Same gap, carried by trade alone: the clause must not appear.
+    const mundane = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, importCoverage: 200, rawDeficit: 400, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    })).container.textContent;
+    expect(mundane).toContain('Residual shortfall is 20%');
+    // anchored: the deficit sentence is pinned PRESENT on this same `mundane` payload one line above
+    expect(mundane).not.toContain('Magical provision');
+    cleanup();
+    // A severed route takes the OTHER branch — "Production deficit of X%" — where the
+    // same silence understated the gap: 40% of need is missing and magic closes half.
+    const severed = render(e(EconomicsTab, {
+      settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, rawDeficit: 400, magicFoodOffset: 200, agricultureModifier: 1 }),
+      saveId: null, publicDossier: true,
+    })).container.textContent;
+    expect(severed).toContain('Production deficit of 20%');
+    expect(severed).toContain('Magical provision closes the remainder of the gap.');
   });
 
   /**
