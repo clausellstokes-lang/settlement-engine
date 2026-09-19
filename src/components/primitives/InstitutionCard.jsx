@@ -60,7 +60,29 @@ export default function InstitutionCard({ open, institution, settlement, onClose
         alignItems: 'center', justifyContent: 'center', padding: SP.lg,
         background: 'rgba(27,20,8,0.46)',
       }}
-      onMouseDown={(event) => { if (event.target === event.currentTarget) onClose?.(); }}
+      // ⛔ THE DIALOG IS A DOM DESCENDANT OF WHATEVER THE TRIGGER SITS IN, so every
+      // event inside it bubbles into that host. InstitutionLink is rendered inside
+      // PowerStrata's faction row — a `role="button"` div whose onClick toggles the
+      // row — so a reader who opened a profile and pressed Close TOGGLED THE ROW
+      // BEHIND THE CARD on the way out, and every click on the card's own body did
+      // the same. The trigger already stops its own click (that is why OPENING the
+      // card does not toggle); nothing stopped the card's.
+      //
+      // ⚠ KEYDOWN IS STOPPED FOR ENTER AND SPACE ONLY, AND THE LIMIT IS LOAD-BEARING.
+      // `useDialogFocusTrap` listens on WINDOW, and React's synthetic
+      // stopPropagation calls the native one — so a blanket keydown stop at this
+      // overlay would cut Escape-to-dismiss and Tab-trapping off from the very hook
+      // that makes this an aria-modal dialog. Enter and Space are exactly the two
+      // keys a `role="button"` host acts on, which is the same pair the trigger
+      // already stops.
+      //
+      // The structural cure is still to portal this card to document.body, and it is
+      // still deliberately deferred (see InstitutionLink's docblock): the trap owns
+      // focus restoration and three suites query this card inside their render
+      // container. Stopping propagation is the minimal cure and it is pinned.
+      onMouseDown={(event) => { event.stopPropagation(); if (event.target === event.currentTarget) onClose?.(); }}
+      onClick={(event) => event.stopPropagation()}
+      onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') event.stopPropagation(); }}
     >
       <section
         ref={cardRef}

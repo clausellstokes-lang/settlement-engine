@@ -32,7 +32,16 @@
  * focus trap and focus restoration, and three suites query it inside their render
  * container, so moving its mount point is its own car with its own proof. Until
  * then this docblock and the nesting pin are what keep the class closed.
+ *
+ * ⚠ AND THE CONTAINER IS NOT ONLY A TYPE — IT IS AN EVENT HOST. The trigger below
+ * stops its own click and its own Enter/Space, which is why OPENING a card inside
+ * PowerStrata's clickable faction row does not toggle that row. Nothing stopped
+ * the CARD's events, so every click the reader made on the open profile, Close
+ * included, toggled the row on the way out. `InstitutionCard`'s overlay now stops
+ * click, mousedown and Enter/Space at the dialog root — Escape and Tab are
+ * deliberately let through, because the focus trap listens on window.
  * @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx
+ * @enforced-by tests/components/institutionLinkBlockContainer.test.jsx
  */
 
 import { useMemo, useState } from 'react';

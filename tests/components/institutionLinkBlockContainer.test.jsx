@@ -29,10 +29,20 @@
  *
  * Neither is redundant: the census cannot execute, and the render cannot see a
  * file it does not mount.
+ *
+ * ⛔ AND THE CONTAINER DOES NOT ONLY HAVE A TYPE — IT HAS HANDLERS (review 13).
+ * The same in-place mount that made the wrapper a dialog's PARENT also made it
+ * the dialog's event host. PowerStrata's faction row is a `role="button"` div
+ * whose onClick toggles it, so every click inside the open profile — its body,
+ * its rows, and the Close button — bubbled into that row and toggled it behind
+ * the card. The last describe below is that class: it renders PowerStrata with
+ * its expand state held for real, opens a profile, closes it, and asserts the
+ * row is exactly as the reader left it.
  */
 
-import { describe, expect, test, vi } from 'vitest';
-import { render } from '@testing-library/react';
+import { afterEach, describe, expect, test, vi } from 'vitest';
+import { cleanup, fireEvent, render } from '@testing-library/react';
+import { useState } from 'react';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
@@ -68,13 +78,20 @@ function stripComments(source) {
 }
 
 /**
- * The JSX element enclosing `index`, by a tag-stack scan from the top of the
- * file. Attribute values are skipped with brace and quote depth so a `>` inside
- * `style={{…}}` cannot close a tag early.
+ * EVERY JSX element enclosing `index`, outermost first, by a tag-stack scan from
+ * the top of the file. Attribute values are skipped with brace and quote depth so
+ * a `>` inside `style={{…}}` cannot close a tag early.
  *
- * @returns {string|null} the enclosing tag name, or null at the top level.
+ * ⛔ THE WHOLE STACK, NOT THE TOP OF IT (review 13). This returned only the
+ * IMMEDIATE parent, so `<b><div><InstitutionLink/></div></b>` passed: the scan
+ * saw the `<div>`, called it a block container and stopped. The `<b>` is still a
+ * phrasing element and the browser still implies its close at the dialog's first
+ * block tag — the defect is two levels up rather than one, and one level was all
+ * this could see. Every ancestor is returned and every ancestor is judged.
+ *
+ * @returns {string[]} the enclosing tag names, outermost first (empty at the top level).
  */
-function enclosingTagAt(source, index) {
+function enclosingTagsAt(source, index) {
   const stack = [];
   let i = 0;
   while (i < index) {
@@ -103,11 +120,11 @@ function enclosingTagAt(source, index) {
       if (depth === 0 && c === '>') { j += 1; break; }
       j += 1;
     }
-    if (j > index) return stack.length ? stack[stack.length - 1] : null; // index is inside this tag
+    if (j > index) return [...stack];                       // index is inside this tag
     if (!selfClosing && !VOID_TAGS.has(open[1])) stack.push(open[1]);
     i = j;
   }
-  return stack.length ? stack[stack.length - 1] : null;
+  return [...stack];
 }
 
 function walkSrc(dir, out = []) {
@@ -118,6 +135,45 @@ function walkSrc(dir, out = []) {
   }
   return out;
 }
+
+afterEach(cleanup);
+
+// One pipeline settlement for every render below — a real one, because the roster
+// row this file is about only exists when the derivation produces factions with
+// resolvable institutions. Memoised: generating it per test is seconds each.
+let cachedTown = null;
+function town() {
+  cachedTown = cachedTown || generateSettlementPipeline(
+    { settType: 'city', terrain: 'grassland', tradeRouteAccess: 'road' },
+    null,
+    { seed: 'institution-link-block-container', customContent: {} },
+  );
+  return cachedTown;
+}
+
+/**
+ * PowerStrata with the roster's expand state held FOR REAL.
+ *
+ * The component takes `expandedFaction`/`setExpandedFaction` from its caller
+ * (PowerTab owns them so the NPC-faction focus affordance can drive them), so a
+ * harness that passed a constant and a no-op would make the row's aria-expanded
+ * a fixed string and every assertion about toggling vacuous.
+ */
+function StatefulStrata() {
+  const [expandedFaction, setExpandedFaction] = useState(null);
+  return (
+    <PowerStrata
+      settlement={town()}
+      powerStructure={town().powerStructure}
+      expandedFaction={expandedFaction}
+      setExpandedFaction={setExpandedFaction}
+      focusIndex={-1}
+      focusedRowRef={{ current: null }}
+    />
+  );
+}
+
+const renderStrata = () => render(<StatefulStrata />);
 
 describe('InstitutionLink renders a dialog, so its caller owes it a block container', () => {
   test('the source census: no call site sits inside phrasing content', () => {
@@ -134,10 +190,11 @@ describe('InstitutionLink renders a dialog, so its caller owes it a block contai
       let m;
       while ((m = re.exec(source)) !== null) {
         sites += 1;
-        const parent = enclosingTagAt(source, m.index);
+        const ancestors = enclosingTagsAt(source, m.index);
         const line = source.slice(0, m.index).split('\n').length;
-        if (parent && PHRASING_PARENTS.has(parent)) {
-          bad.push({ site: `${rel}:${line}`, parent });
+        const phrasing = ancestors.filter((tag) => PHRASING_PARENTS.has(tag));
+        if (phrasing.length) {
+          bad.push({ site: `${rel}:${line}`, parent: phrasing.join('> inside <') });
         }
       }
     }
@@ -154,38 +211,117 @@ describe('InstitutionLink renders a dialog, so its caller owes it a block contai
     ).toEqual([]);
   });
 
+  test('a phrasing ancestor ANY distance up is caught, not just the immediate parent', () => {
+    // ⛔ THE CONTROL FOR THE WHOLE-STACK SCAN. The census asserts an EMPTY list,
+    // which is also what a scan that resolves one level and stops produces once
+    // the tree is clean. These three sources are judged by the real function.
+    const direct = enclosingTagsAt('<span><InstitutionLink /></span>', 6);
+    expect(direct.filter((t) => PHRASING_PARENTS.has(t)), 'the immediate phrasing parent').toEqual(['span']);
+
+    const buried = '<b><div><InstitutionLink /></div></b>';
+    expect(
+      enclosingTagsAt(buried, buried.indexOf('<InstitutionLink')).filter((t) => PHRASING_PARENTS.has(t)),
+      'a phrasing grandparent behind a block parent — the shape the one-level scan passed',
+    ).toEqual(['b']);
+
+    const clean = '<div><section><InstitutionLink /></section></div>';
+    expect(
+      enclosingTagsAt(clean, clean.indexOf('<InstitutionLink')).filter((t) => PHRASING_PARENTS.has(t)),
+      'a genuinely block chain is reported as an offender',
+    ).toEqual([]);
+  });
+
   test('the render: no trigger on PowerStrata has an inline ancestor', () => {
-    const town = generateSettlementPipeline(
-      { settType: 'city', terrain: 'grassland', tradeRouteAccess: 'road' },
-      null,
-      { seed: 'institution-link-block-container', customContent: {} },
-    );
-    const { container } = render(
-      <PowerStrata
-        settlement={town}
-        powerStructure={town.powerStructure}
-        expandedFaction={null}
-        setExpandedFaction={() => {}}
-        focusIndex={-1}
-        focusedRowRef={{ current: null }}
-      />,
-    );
+    const { container } = renderStrata();
 
     const triggers = [...container.querySelectorAll('[aria-haspopup="dialog"]')];
     // ANTI-VACUITY: PowerStrata's roster is where the silent half of the class
     // lived, so a render that produced no trigger would prove nothing.
     expect(triggers.length, 'PowerStrata rendered no institution trigger').toBeGreaterThan(0);
 
+    // ⭐ EVERY ANCESTOR UP TO THE PANEL, BY TWO SIGNALS. The tag list is the HTML
+    // content model and is what the parser acts on; the computed `display: inline`
+    // is the one a COMPONENT wrapper hides — `<Row>` is not a tag this walk can
+    // name, but whatever it renders is, and a `<div style={{display:'inline'}}>`
+    // is a box no tag name would betray. The source census cannot resolve a
+    // component at all, which is exactly why this arm walks the real DOM.
     const offenders = triggers
-      .map((el) => {
+      .flatMap((el) => {
+        const label = (el.textContent || '').trim().slice(0, 40);
+        const found = [];
         for (let node = el.parentElement; node && node !== container; node = node.parentElement) {
           const tag = node.tagName.toLowerCase();
-          if (PHRASING_PARENTS.has(tag)) return `<${tag}> above "${(el.textContent || '').trim().slice(0, 40)}"`;
+          if (PHRASING_PARENTS.has(tag)) found.push(`<${tag}> above "${label}" (phrasing content)`);
+          else if (getComputedStyle(node).display === 'inline') found.push(`<${tag}> above "${label}" (display: inline)`);
         }
-        return null;
-      })
-      .filter(Boolean);
+        return found;
+      });
 
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
+  }, 60_000);
+});
+
+/**
+ * ⛔ THE SECOND CONSEQUENCE OF RENDERING THE CARD IN PLACE, AND THE ONE A READER
+ * ACTUALLY FELT.
+ *
+ * The card is not merely INSIDE a container that may be the wrong element type —
+ * it is inside a container that LISTENS. PowerStrata's faction row is a
+ * `role="button"` div whose onClick toggles it, and the card is a
+ * `position: fixed` overlay rendered as its DOM descendant. So every click the
+ * reader made on the open profile — its body, its contribution rows, and the
+ * Close button itself — bubbled into that row and toggled it. Opening the card
+ * was already safe because `InstitutionLink` stops its own trigger's click;
+ * nothing stopped the CARD's, and nobody had looked at the way out.
+ */
+describe('the open profile does not click through to the row behind it', () => {
+  test('closing the card leaves the faction row exactly as the reader left it', () => {
+    const { container } = renderStrata();
+
+    // Find a roster row that both EXPANDS and carries a resolving institution
+    // trigger — the two properties the defect needs, and neither is guaranteed
+    // of any particular faction on any particular seed.
+    const row = [...container.querySelectorAll('[role="button"][aria-expanded]')]
+      .find((el) => el.querySelector('[aria-haspopup="dialog"]'));
+    expect(row, 'no PowerStrata row both expands and holds an institution trigger').toBeTruthy();
+
+    fireEvent.click(row);
+    expect(row.getAttribute('aria-expanded'), 'the row did not open').toBe('true');
+
+    const trigger = row.querySelector('[aria-haspopup="dialog"]');
+    fireEvent.click(trigger);
+    const dialog = container.querySelector('[role="dialog"]');
+    expect(dialog, 'the institution profile did not open').toBeTruthy();
+    expect(row.getAttribute('aria-expanded'), 'opening the card toggled the row').toBe('true');
+
+    // A click on the card's own body is a click inside the row's box.
+    fireEvent.click(dialog.querySelector('h2'));
+    expect(row.getAttribute('aria-expanded'), 'a click on the card body toggled the row').toBe('true');
+    expect(container.querySelector('[role="dialog"]'), 'the card closed on its own heading').toBeTruthy();
+
+    // ⭐ THE ONE THE READER HITS. Close dismisses the card AND must leave the row
+    // open; without the overlay's stopPropagation this assertion reads 'false'.
+    const close = [...dialog.querySelectorAll('button')]
+      .find((b) => (b.getAttribute('aria-label') || b.textContent || '').includes('Close'));
+    expect(close, 'the card rendered no Close control').toBeTruthy();
+    fireEvent.click(close);
+    expect(container.querySelector('[role="dialog"]'), 'Close did not dismiss the card').toBeFalsy();
+    expect(row.getAttribute('aria-expanded'), 'Close toggled the row behind the card').toBe('true');
+  }, 60_000);
+
+  test('Escape still reaches the focus trap, which listens on window', () => {
+    // ⚠ THE LIMIT ON THE CURE, ASSERTED. `useDialogFocusTrap` binds keydown on
+    // WINDOW and React's synthetic stopPropagation calls the native one, so a
+    // blanket keydown stop at the overlay would have cut Escape and Tab off from
+    // the hook that makes this a modal at all. The overlay stops Enter and Space
+    // only; this is the arm that would red if that ever widened.
+    const { container } = renderStrata();
+    const trigger = container.querySelector('[aria-haspopup="dialog"]');
+    expect(trigger, 'PowerStrata rendered no institution trigger').toBeTruthy();
+    fireEvent.click(trigger);
+    expect(container.querySelector('[role="dialog"]'), 'the profile did not open').toBeTruthy();
+
+    fireEvent.keyDown(container.querySelector('[role="dialog"]'), { key: 'Escape' });
+    expect(container.querySelector('[role="dialog"]'), 'Escape no longer dismisses the card').toBeFalsy();
   }, 60_000);
 });
