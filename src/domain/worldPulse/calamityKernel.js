@@ -209,6 +209,45 @@ function lastStampYear(s) {
   return last;
 }
 
+// ── THE PULSE'S RUIN SHAPE, WRITTEN IN EXACTLY ONE PLACE ──────────────────────
+/**
+ * Ruin an institution the way the world pulse ruins one (ODQ §934.47 addendum 7).
+ *
+ * THERE IS EXACTLY ONE WRITER OF THIS SHAPE, and this is it. A disaster and a DM's
+ * decree must leave the SAME record, differing only in the two words they pass, so
+ * the calamity path below calls this and so does the editor's decree.
+ *
+ * ⛔ THE FIVE ADDED KEYS AND THEIR ORDER ARE LOAD-BEARING. The preset lighting
+ * witness is a byte golden that hashes 52 interior one-week ticks of world pulse, so
+ * a re-ordered serialization moves a golden that has no capture arm by design; and
+ * THE PROMISE makes lived history immutable, so the calamity record must stay
+ * byte-identical for a saved world.
+ *
+ * ⛔ `fate` AND `reason` ARE BOTH REQUIRED AND NEITHER IS DEFAULTED. A defaulted fate
+ * would let a caller silently stamp `destroyed_by_disaster` on a record no disaster
+ * touched, which is the exact lie this writer exists to make impossible. An absent,
+ * empty or non-string argument throws: a pulse writer fails closed, because a
+ * silently-wrong history is worse than a crash at the call site (the `rngContext`
+ * precedent).
+ *
+ * Pure: reads no world, draws no random number, reads no clock, and never mutates
+ * `inst`.
+ *
+ * @param {CalInstitution} inst the institution record to ruin
+ * @param {{ reason: string, fate: string }} opts
+ *   reason — what the roster shows as `remnantReason`
+ *   fate — what the roster shows as `worldPulseFate`; the caller's own word
+ * @returns {CalInstitution} a NEW record; `inst` is never mutated
+ */
+export function ruinInstitution(inst, { reason, fate }) {
+  if (typeof fate !== 'string' || fate === '') throw new TypeError('ruinInstitution: fate is required and must be a non-empty string. A pulse ruin record never defaults its fate.');
+  if (typeof reason !== 'string' || reason === '') throw new TypeError('ruinInstitution: reason is required and must be a non-empty string. A pulse ruin record never defaults its cause.');
+  return {
+    ...inst, status: 'ruined', _worldPulseInactive: true, _worldPulseEconomyClosed: true,
+    worldPulseFate: fate, remnantReason: reason,
+  };
+}
+
 // ── Apply ONE strike's institution fates to a settlement (pure over the roster) ─
 /**
  * Apply the subsumption-first fates to the roster: demote a greater to its lesser,
@@ -247,10 +286,6 @@ function applyStrikeToRoster(institutions, targets) {
   const removedNames = [];
   /** @type {import('../spatial/calamity.js').FatePlan[]} */
   const fates = [];
-  const ruin = (/** @type {CalInstitution} */ inst, /** @type {string} */ reason) => ({
-    ...inst, status: 'ruined', _worldPulseInactive: true, _worldPulseEconomyClosed: true,
-    worldPulseFate: 'destroyed_by_disaster', remnantReason: reason,
-  });
   for (const name of targets) {
     const idx = list.findIndex((i) => String(i.name) === name && String(i.status || 'active') === 'active');
     if (idx < 0) continue; // already fell (collapsed away by a prior target this strike)
@@ -279,11 +314,11 @@ function applyStrikeToRoster(institutions, targets) {
       // it IS the survivor). The survivor is the codepoint-first eligible sibling.
       for (const gone of plan.collapsedAway) {
         const gi = list.findIndex((i) => String(i.name) === gone && String(i.status || 'active') === 'active');
-        if (gi >= 0) { list[gi] = ruin(list[gi], 'Razed as the district collapsed to a single survivor after the disaster.'); removedNames.push(gone); }
+        if (gi >= 0) { list[gi] = ruinInstitution(list[gi], { reason: 'Razed as the district collapsed to a single survivor after the disaster.', fate: 'destroyed_by_disaster' }); removedNames.push(gone); }
       }
     } else {
       // DESTROY — the singleton is razed (hand of god).
-      list[idx] = ruin(list[idx], 'Destroyed outright by the disaster.');
+      list[idx] = ruinInstitution(list[idx], { reason: 'Destroyed outright by the disaster.', fate: 'destroyed_by_disaster' });
       removedNames.push(name);
     }
   }
