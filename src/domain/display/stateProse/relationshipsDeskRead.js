@@ -147,4 +147,41 @@ export function relationshipsDeskLists(settlement) {
   });
 }
 
+/**
+ * THE SAME ENGAGEMENTS, PROJECTED ONTO THE PRINTED CARD'S FIELDS (ODQ §934.18).
+ *
+ * ── THE DEFECT THIS EXISTS FOR ───────────────────────────────────────────────────────
+ * `pdf/lib/viewModel.js` fed its `crossConflicts` slice — the "Cross-settlement conflicts"
+ * block of `pdf/sections/Relationships.jsx` — from the PERSISTED
+ * `settlement.crossSettlementConflicts`. Nothing in `src/` writes that key. So on every
+ * LINKED world the screen showed the derived engagements and the printed section showed
+ * NOTHING, and on a record carrying the pre-merge fossil the PDF printed rows the screen
+ * had stopped drawing. Screen and PDF derive from ONE model; that was two.
+ *
+ * ⛔ THE PROJECTION LIVES HERE AND NOT IN THE VIEW MODEL, for the reason the rest of this
+ * module exists: a field map written in `src/pdf` is a SECOND derivation of the same fact,
+ * and the two would drift the first time an engagement grew a field. The section's markup
+ * is untouched — it already reads `{title, description}` with both optional.
+ *
+ * `title` is the pair exactly as the screen's card heads it ("A vs B"); `parties` is
+ * deliberately NOT emitted, because the caption would restate the title verbatim under it.
+ * The row's own `description` carries the roles, the partner settlement and the nature,
+ * which is what the screen's sub-line and badge carry.
+ *
+ * @param {Parameters<typeof relationshipsDeskLists>[0]} settlement
+ * @returns {ReadonlyArray<{title: string, description: string}>}
+ */
+export function relationshipEngagementCards(settlement) {
+  return relationshipsDeskLists(settlement).crossEngagements.map((row) => {
+    const text = (/** @type {unknown} */ value) => (typeof value === 'string' ? value : '');
+    const [own, partner] = row.type === 'faction_engagement'
+      ? [text(row.factionName), text(row.partnerFactionName)]
+      : [text(row.npcName), text(row.partnerName)];
+    return {
+      title: own && partner ? `${own} vs ${partner}` : (own || partner),
+      description: text(row.description),
+    };
+  }).filter((card) => card.title || card.description);
+}
+
 export default relationshipsDeskLists;

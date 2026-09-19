@@ -546,6 +546,38 @@ describe('the print desk reads the screen\'s own desks', () => {
       .not.toBe(whole);
   });
 
+  test('PRINT PARITY OF THE CARDS: the document\'s engagement block is fed by the assembler', () => {
+    // ⭐⭐ ODQ §934.18 — THE OTHER HALF OF THE DIVERGENCE, and the probe that proves the new
+    // feed is exercised rather than merely wired. `viewModel.relationshipsSlice` used to read
+    // the PERSISTED `crossSettlementConflicts` for the printed "Cross-settlement conflicts"
+    // block. Nothing in `src/` writes that key, so on a LINKED world the screen showed the
+    // derived engagements and the paid document showed none — and a record carrying the
+    // pre-merge fossil printed rows the screen had stopped drawing. Both surfaces now derive.
+    const vm = VM_FOR(linked);
+    const cards = vm.relationships.crossConflicts;
+
+    // NON-VACUITY FIRST: this fixture really reaches the new feed.
+    expect(cards.length, 'the linked fixture fed the engagement block nothing, so this arm proves nothing')
+      .toBeGreaterThan(0);
+    expect(cards.length).toBe(relationshipsDeskLists(linked).crossEngagements.length);
+    expect(cards.every((c) => typeof c.title === 'string' && typeof c.description === 'string')).toBe(true);
+
+    // THE GENERATED CONTROL: a town with no links draws no engagement block at all.
+    expect(VM_FOR(full).relationships.crossConflicts).toEqual([]);
+
+    // ⛔ THE FOSSIL IS SUPERSEDED. The fixture's `crossSettlementConflicts` row names a
+    // faction that appears nowhere else; the printed cards must not carry it, while the
+    // engagement the record's own writers produced must. Anchored, so an empty card list
+    // cannot satisfy the absence.
+    const printed = cards.map((c) => `${c.title} ${c.description}`).join(' | ');
+    expectAbsentWithAnchor(printed, 'The Hollow', 'The Guild',
+      'the printed engagement block still reads the writer-less crossSettlementConflicts key');
+
+    // ⛔ AND NOTHING PRINTS TWICE: the typed rows left "Shared figures & stories", which is
+    // written for the untyped NPC-contact rows, exactly as the screen divides the same list.
+    expect(vm.relationships.interSettlement.every((rel) => !rel.type)).toBe(true);
+  });
+
   test('REACHABILITY: the faith prose renders from a chapter a reader actually gets', () => {
     // ⛔ THE ARM REVIEW 4 FOUND MISSING. The builder composes a faith position for a deity-free
     // town (the common case — the whole review corpus is deity-free), and it used to draw from

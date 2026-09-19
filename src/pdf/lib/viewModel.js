@@ -30,6 +30,7 @@ import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { ownerGenerationContracts } from './generationContracts.js';
@@ -792,8 +793,19 @@ function relationshipsSlice(active) {
   const s = active || {};
   return {
     internal:        s?.relationships || [],
-    interSettlement: s?.interSettlementRelationships || [],
-    crossConflicts:  s?.crossSettlementConflicts || [],
+    // ⛔ THE UNTYPED HALF ONLY, and it is the screen's own split (ODQ §934.18). "Shared
+    // figures & stories" is written for the NPC-CONTACT rows (`rel.npcName`), which carry
+    // no `type`; the TYPED rows beside them are engagements and belong in the block below,
+    // which is exactly how `RelationshipsTab.jsx` divides the same list
+    // (`interSettlementRels.filter(x => !x.type)`). Without this the typed rows would print
+    // TWICE now that the engagement block is fed from the assembler.
+    interSettlement: (s?.interSettlementRelationships || []).filter((rel) => !rel?.type),
+    // ⭐ THE ENGAGEMENTS AS THE SCREEN DERIVES THEM, not a key nothing writes (ODQ §934.18).
+    // This read WAS `s?.crossSettlementConflicts`, and no writer in `src/` produces that
+    // key: on a linked world the screen drew engagements here and the paid document drew
+    // nothing, while a record carrying the pre-merge fossil printed rows the screen had
+    // stopped drawing. Both surfaces now come from the one assembler.
+    crossConflicts:  relationshipEngagementCards(s),
     crossNpcContacts: s?.crossSettlementNPCContacts || [],
     crossFactions:   s?.crossFactions || [],
     neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => {
