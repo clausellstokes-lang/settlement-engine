@@ -161,3 +161,24 @@ An Opus reviewer refuted the design and the architecture against the consist at 
 13. **Omissions now stated:** scheduling (`when`) touches the interval orchestrator and the two-phase commit, not one hook; the command boundary gains ONE generic decree adapter dispatching by op type, not twenty adapters; font coverage at save is new capability (a cmap read of the embedded faces), costed in lane D; the persisted-key instrument is named by its real path at pre-proof; the Change Dock ships flag-off, so the editor REPLACES it rather than merging it, and the migration folds inline edits and Surveyor state only.
 
 **Product rulings.** An APPLIED decree reopens READ-ONLY; only a rewind returns it to pending and editable — the pencil never rewrites what the chronicle recorded (THE PROMISE). Uncanonizing with applied decrees is guarded by the tombstone's own notice. The registry states the rewind's session limit. Guards judge folded worlds, so a queue of one and a queue of ten are judged alike.
+
+## 13. The phantom consequence rule (the owner, ODQ §934.43; 2026-09-19)
+
+**The rule.** A phantom counterparty can absorb an act but never return one. What leaves comes back by the estate's own procedures; what is declared is recorded; nothing from outside comes home.
+
+**What a phantom act produces — exactly two things.**
+1. **The home procedures.** A force sent against a phantom resolves won or lost (the DM's `resolve-outcome`, or rolled on the entry's own stream) and returns through the existing muster, casualty and upkeep mechanics exactly as any returning force does. An envoy returns. A caravan returns with neither loss nor gain. These are the home's own costs, acting on the home's own state.
+2. **The record.** The chronicle carries the declaration or the outcome in the herald's voice (§11's pools), marked off-stage.
+
+**What it never produces.** No war state, no treaty, no trade route, no envoy state, no faction-power or legitimacy shift derived from the phantom. Phantoms never enter the world pulse: no self-ending war starts against one, and no interval machinery carries one.
+
+**Consequence is the DM's, as a decree.** If the DM wants a defeat to shake the town, that is a typed op on the town itself, staged and guarded like any other. After a lost return the registry may OFFER it as a follows-from suggestion (a connection guard with `fulfil`); it never applies it on its own.
+
+**Reality is shown.** Every off-stage decree wears a PHANTOM or REAL badge in the registry. A REAL counterparty — a saved settlement in the same campaign — routes through the existing inter-settlement machinery (the campaign's wars, routes and relations) with full consequence; that path is the simulator's, not the editor's, and the editor only hands it the decree.
+
+**Promotion does not rewrite the past.** When a phantom is forged into a real settlement (§2.8), its earlier record-only outcomes stay record-only; consequence begins from the promotion forward (THE PROMISE).
+
+**Chair default, vetoable.** A returning force's own losses may move the settlement's defense readiness through the existing readiness derivation — the home's procedure on the home's force, not a consequence imported from the phantom.
+
+**What this simplifies.** The phantom packet (EM-F1) loses its phantom-side state and most of its guard rules; the op catalogue (EM-B1) carries one `consequence` policy per off-stage op — `home-procedures+record` for a phantom target, `world` for a real save — decided at apply time by the target's reality; the tick hook (EM-E1) applies that policy and nothing else.
+
