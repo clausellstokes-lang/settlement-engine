@@ -377,38 +377,34 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           {eco.incomeSources.map((src,i)=>{
             const isCrim = src.isCriminal;
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
-            // ⛔ A FLOOR INSIDE A CLAMP SHOWS LESS, NOT MORE (owner review, 2026-09-18).
-            // The revenue note took the phone prose floor, 10px to 14px — inside a 130px
-            // column that also carried `whiteSpace:nowrap` and `textOverflow:ellipsis`. The
-            // clamp is a function of the size: bigger text in the same sliver means FEWER
-            // characters before the ellipsis, so the one change made to help a phone reader
-            // handed them less of the sentence than they had at 10px. A floor and a clamp
-            // cannot both be right about the same line.
+            // ⛔ AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER (owner, ODQ §934.23). The
+            // 2026-09-18 car cured the PHONE, where a prose floor inside a clamp showed the
+            // reader LESS than the smaller type had, and left desktop on a 210px side column
+            // carrying `whiteSpace:nowrap` and `textOverflow:ellipsis` on BOTH the source and
+            // its description — so every desktop reader got "Payments in kind or coin from
+            // tenant farmers;…" and never the clause that says what it means. A clamp on a
+            // written sentence is not a layout choice; it is the product declining to print
+            // what it wrote.
             //
-            // On the phone the row therefore STACKS: the share bar takes the full width, and
-            // the source and its note sit beneath it with the whole 343px column to wrap
-            // into — so the note reads at 14px AND reads whole. Wrapping alone would not
-            // have done it: 14px prose reflowed inside a 130px sliver is a nine-line ribbon
-            // beside a 26px bar, which is worse than the truncation it replaces. The source
-            // name drops its own ellipsis with it, for the same reason — it was truncated
-            // only because the column was narrow.
-            //
-            // Desktop is BYTE-IDENTICAL: every changed value is behind `mobile`, and the row
-            // above the breakpoint keeps its bar, its 210px column and both clamps.
+            // THE GAZETTEER ENTRY, and it is ONE layout for both widths — the branch that
+            // used to fork on `mobile` collapses, because the phone's answer was the right
+            // answer everywhere. The share bar takes the full row with its percentage inside
+            // it exactly as before; beneath it runs ONE line in the muted prose face, the
+            // source in bold at its head and the description running on after it, wrapping
+            // when it must and never cut. The Criminal tag stays at the head of the line.
+            // Both phone floors are kept: the running line is proseFontSize (>= 14px on the
+            // phone) and the tag and the in-bar percentage are chromeFontSize (>= 12px).
             return (
-            <div key={i} style={{display:'flex',flexDirection:mobile?'column':'row',alignItems:mobile?'stretch':'center',gap:mobile?3:10}}>
-              <div style={{flex:1,background:swatch['#E8DCC8'],height:26,position:'relative',overflow:'hidden',minWidth:40}}>
+            <div key={i} style={{display:'flex',flexDirection:'column',gap:3}}>
+              <div style={{background:swatch['#E8DCC8'],height:26,position:'relative',overflow:'hidden'}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
                   {src.percentage>=8&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
                 </div>
                 {src.percentage<8&&<span style={{position:'absolute',left:`${src.percentage+1}%`,top:'50%',transform:'translateY(-50%)',fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:isCrim?'#4a1a4a':'#6b5340'}}>{src.percentage}%</span>}
               </div>
-              <div style={{width:mobile?'auto':210,flexShrink:0,minWidth:0}}>
-                <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>
-                  {isCrim&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>Criminal</span>}
-                  {src.source}
-                </div>
-                {src.desc&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:mobile?1.4:undefined,...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>{src.desc}</div>}
+              <div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,lineHeight:1.45}}>
+                {isCrim&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>Criminal</span>}
+                <strong style={{fontWeight:700,color:isCrim?'#4a1a4a':'#1c1409'}}>{src.source}</strong>{src.desc?` ${src.desc}`:''}
               </div>
             </div>
             );

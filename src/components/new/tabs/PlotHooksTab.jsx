@@ -127,14 +127,15 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     // one change made to help a phone reader would have handed them less of
                     // the source than they had at 11.5px.
                     //
-                    // On the phone the name WRAPS instead. There is room for it to: the row
-                    // is `space-between` with a `flexShrink: 0` kicker beside it, so the
-                    // name owns the rest of the 343px column and a two-line source costs one
-                    // line of card. Desktop keeps the clamp unchanged — above the breakpoint
-                    // the card is wide, the name fits, and the ellipsis never fires.
-                    ...(mobile
-                      ? { overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal' }
-                      : { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }),
+                    // ODQ §934.23 COLLAPSED THE BRANCH: the phone's answer was the right
+                    // answer at both widths. "Desktop keeps the clamp — above the breakpoint
+                    // the card is wide, the name fits, and the ellipsis never fires" was a
+                    // prediction about a generated string, not a proof about one; a conflict
+                    // source reads "X vs Y" and both halves are generated names, so no width
+                    // makes this provably short. The row is `space-between` with a
+                    // `flexShrink: 0` kicker beside it, so the name owns the rest of the
+                    // column and a two-line source costs one line of card at either width.
+                    overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal',
                   }}>
                     {/* THE ONLY SITE IN THIS LADDER THAT WAS SHOUTING NOTHING AND STILL
                         WRONG: it printed the RAW ENGINE TOKEN, so a source read "npc" in

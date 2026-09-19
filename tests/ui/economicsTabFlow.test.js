@@ -399,6 +399,75 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expectAbsentWithAnchor(container.textContent, 'provision', `+ ${fb.importCoverage} imported`, 'no magic credited');
   });
 
+  /**
+   * ODQ §934.23 — AUTHORED TEXT IS NEVER CLAMPED ON THE DOSSIER. The revenue rows carried
+   * `overflow:hidden` + `textOverflow:ellipsis` + `whiteSpace:nowrap` on the source AND its
+   * description inside a 210px desktop side column, so every desktop reader got "Payments in
+   * kind or coin from tenant farmers;…" and never the clause that says what it means. The
+   * 2026-09-18 car had already cured the PHONE by stacking the row; this arm pins the cure at
+   * BOTH widths, because the defect was never a width — it was a clamp on a written sentence.
+   *
+   * ⚠ THE VIEWPORT IS ONE CONTROLLED SOURCE. `hooks/useIsMobile.js` caches a MODULE-LEVEL
+   * store per breakpoint, so replacing `window.matchMedia` with a fresh mock cannot reach a
+   * store already built (the finding recorded at dossierPhoneFloorAllViews.test.jsx:145). The
+   * helper below is ONE MediaQueryList-shaped object whose `matches` is a live getter, and it
+   * NOTIFIES the store's own listener on flip — which is what carries the new width in.
+   */
+  const viewport = { matches: false, listeners: new Set() };
+  const atWidth = (matches) => {
+    viewport.matches = matches;
+    if (!window.matchMedia?.SF_ECON_CONTROLLED) {
+      const mock = vi.fn((query) => ({
+        media: query,
+        get matches() { return viewport.matches; },
+        addEventListener: (_t, fn) => viewport.listeners.add(fn),
+        removeEventListener: (_t, fn) => viewport.listeners.delete(fn),
+        addListener: (fn) => viewport.listeners.add(fn),
+        removeListener: (fn) => viewport.listeners.delete(fn),
+      }));
+      mock.SF_ECON_CONTROLLED = true;
+      window.matchMedia = mock;
+    }
+    for (const fn of viewport.listeners) fn({ matches });
+  };
+
+  // Eighty characters exactly — the length the owner's screenshot was cut at.
+  const LONG_DESC = 'Payments in kind or coin from tenant farmers; the primary revenue at this scale.';
+  const WITH_INCOME = {
+    ...SPEAKING,
+    economicState: {
+      ...SPEAKING.economicState,
+      incomeSources: [{ source: 'Agricultural Rents', percentage: 46, desc: LONG_DESC }],
+    },
+  };
+
+  test('the revenue description renders WHOLE, with no clamp, at desktop and at phone width', () => {
+    expect(LONG_DESC.length).toBe(80);
+    for (const mobile of [false, true]) {
+      useStore.setState({ campaigns: [] });
+      atWidth(mobile);
+      const { container } = render(e(EconomicsTab, { settlement: WITH_INCOME, saveId: null, publicDossier: true }));
+      const where = mobile ? 'phone' : 'desktop';
+      // THE WHOLE SENTENCE IS IN THE DOM. An ellipsis is painted by CSS, so the old markup
+      // would have satisfied a textContent check — which is why the clamp is asserted absent
+      // from the style of every element in the same breath.
+      expect(container.textContent, `${where}: the description is not rendered whole`).toContain(LONG_DESC);
+      expect(container.textContent, `${where}: the source name is not rendered whole`).toContain('Agricultural Rents');
+      const clamped = [...container.querySelectorAll('*')]
+        .filter((node) => node.style?.textOverflow === 'ellipsis' || node.style?.webkitLineClamp);
+      // anchored: the two positive assertions above read this very container, so an empty
+      // clamp list measures the markup rather than a tree that failed to render.
+      expect(clamped.map((n) => n.textContent.slice(0, 40)), `${where}: a clamp survives`).toEqual([]);
+      // ONE LINE, NOT TWO COLUMNS: the title and the description share a parent, which is the
+      // gazetteer shape the owner asked for and the thing a re-split would break.
+      const line = [...container.querySelectorAll('div')]
+        .find((node) => node.textContent === `Agricultural Rents ${LONG_DESC}`);
+      expect(line, `${where}: the title and the description are not one running line`).toBeTruthy();
+      cleanup();
+    }
+    atWidth(false);
+  });
+
   test('the ROUTER threads the public condition — OutputContainer hands publicDossier to the tab', () => {
     const router = readFileSync(ROUTER_SRC, 'utf8');
     // The condition is still computed where it always was...

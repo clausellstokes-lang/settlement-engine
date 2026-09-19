@@ -277,8 +277,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                         setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
                       }
                     }}>
+                    {/* ODQ §934.23 — no clamp on dossier text: this label may be the raw category token on a catalogue the taxonomy has not named (`Ts[cat] || {label:cat}`), so it is not provably short and it wraps instead of truncating. */}
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0}}>{meta.label}</span>
                       <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{cs.total}</span>
                     </div>
                     {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
@@ -292,7 +293,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 return (
                   <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
+                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0}}>{meta.label}</span>
                     </div>
                     <div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A5010']}}>not available</div>
                   </div>

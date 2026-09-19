@@ -511,7 +511,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                       {rungs.map((rung, j) => (
                         <div key={rung.npcId} style={{display:'flex',alignItems:'center',gap:8,padding:'1px 0 1px 15px'}}>
                           <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
-                          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{rung.name}</span>
+                          {/* ODQ §934.23 — no clamp on dossier text: an NPC name is generated and has no provable width, so the 42% column wraps it rather than cutting a person's name mid-word. */}
+                          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0}}>{rung.name}</span>
                           <div style={{flex:1,height:6,background:`${c}20`,overflow:'hidden'}}>
                             <div style={{width:`${Math.round(rung.standing*100)}%`,height:'100%',background:c}}/>
                           </div>

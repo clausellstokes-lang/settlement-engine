@@ -285,10 +285,11 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                 display: 'flex', justifyContent: 'space-between',
                 alignItems: 'baseline', gap: 6,
               }}>
+                {/* ODQ §934.23 — no clamp on dossier text: an NPC's name is generated and
+                    has no provable width, so it wraps beside the kicker rather than being cut. */}
                 <span style={{
                   fontFamily: serif, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
-                  color: INK, minWidth: 0, overflow: 'hidden',
-                  textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  color: INK, minWidth: 0,
                 }}>
                   {person.name}
                 </span>

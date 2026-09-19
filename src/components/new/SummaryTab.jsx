@@ -82,7 +82,8 @@ function FactionBar({ factions }) {
           const mods=(f.modifiers||[]).concat(f.modifier?[f.modifier]:[]);
           return <div id={entityAnchor('faction', { id:f.id || f.faction, name:f.faction })} key={i} style={{display:'flex',alignItems:'center',gap:7,scrollMarginTop:ANCHOR_OFFSET}}>
             <div style={{width:10,height:10,background:c,flexShrink:0}}/>
-            <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{f.faction}</span>
+            {/* ODQ §934.23 — no clamp on dossier text: a faction name is generated and has no provable width, so the legend row wraps it rather than truncating the body it names. */}
+            <span style={{fontSize:FS.sm,fontWeight:600,color:ink,flex:1,minWidth:0}}>{f.faction}</span>
             {mods.slice(0,2).map((mod,j)=>{
               const ms=modStyle[mod]||{c:'#6b5340',bg:'#f5f0e8',br:'#c8b89a',label:mod};
               return <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:ms.c,background:ms.bg,border:`1px solid ${ms.br}`,padding:'0 4px',letterSpacing:'0.03em',textTransform:'uppercase',flexShrink:0}}>{ms.label}</span>;

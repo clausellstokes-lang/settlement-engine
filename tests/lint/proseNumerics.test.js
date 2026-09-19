@@ -359,8 +359,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
 //       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
 //       than inherited from HER-7's figures.
-// ODQ §934.20 (the chart-proportion consist, 2026-09-19) — TWENTY-SIX PURE LINE MOVES ACROSS
-// THREE FILES, NO CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
+// ODQ §934.20 + §934.23 (the chart-proportion and no-clamp consist, 2026-09-19) — FORTY-SEVEN
+// PURE LINE MOVES ACROSS FOUR FILES, NO CEILING CHANGE, NO DEBT MOTION. The Economics tab's food balance bar now draws the
 // magical food offset the record credits, so the tab gains a nine-line rationale block
 // above its prose and loses three decorative JSX comment lines inside the bar; the
 // eighteen rows EconomicsTab.jsx owns re-address 393 -> 402, 395 -> 404, 534 -> 542,
@@ -389,6 +389,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // `${pct} percent (power ${r.power})`, which is now two spellings of ONE number rather than
 // two numbers, and re-wording it would have been the only way to bank a row where there is
 // no debt to bank.
+// AND TWENTY-ONE MORE WITH THE CLAMP CAR (ODQ §934.23, the same day). "Authored text is
+// never clamped on the dossier" collapses the Economics revenue row's desktop/phone branch
+// into one gazetteer line — the share bar full-width, the source in bold and its description
+// running on beneath it — which is FOUR effective lines shorter than the two-column row it
+// replaces, and adds one rationale comment to SummaryTab and one to PowerTab. So
+// EconomicsTab.jsx re-addresses BACKWARD (402->401, 404->403, 542->538, 543->539, 544->540,
+// 549->545, 551->547, 552->548, 553->549, 732->728, 738->734), SummaryTab.jsx 89->90 and
+// PowerTab.jsx 518->519. The direction is new; the shape is not. Not one snippet changed:
+// the income row's two `{src.percentage}` reads are carried into the new markup byte for
+// byte, because the clamp was never on the figure — it was on the sentence beside it.
 // MEASURED, not assumed: live 224 rows, exact-equal to this baseline, 0 added and 0 removed
 // on path + category + snippet.
 const REVIEWED_TOTAL_CEILING = 224;
