@@ -369,20 +369,38 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           {eco.incomeSources.map((src,i)=>{
             const isCrim = src.isCriminal;
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
+            // ⛔ A FLOOR INSIDE A CLAMP SHOWS LESS, NOT MORE (owner review, 2026-09-18).
+            // The revenue note took the phone prose floor, 10px to 14px — inside a 130px
+            // column that also carried `whiteSpace:nowrap` and `textOverflow:ellipsis`. The
+            // clamp is a function of the size: bigger text in the same sliver means FEWER
+            // characters before the ellipsis, so the one change made to help a phone reader
+            // handed them less of the sentence than they had at 10px. A floor and a clamp
+            // cannot both be right about the same line.
+            //
+            // On the phone the row therefore STACKS: the share bar takes the full width, and
+            // the source and its note sit beneath it with the whole 343px column to wrap
+            // into — so the note reads at 14px AND reads whole. Wrapping alone would not
+            // have done it: 14px prose reflowed inside a 130px sliver is a nine-line ribbon
+            // beside a 26px bar, which is worse than the truncation it replaces. The source
+            // name drops its own ellipsis with it, for the same reason — it was truncated
+            // only because the column was narrow.
+            //
+            // Desktop is BYTE-IDENTICAL: every changed value is behind `mobile`, and the row
+            // above the breakpoint keeps its bar, its 210px column and both clamps.
             return (
-            <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
+            <div key={i} style={{display:'flex',flexDirection:mobile?'column':'row',alignItems:mobile?'stretch':'center',gap:mobile?3:10}}>
               <div style={{flex:1,background:swatch['#E8DCC8'],height:26,position:'relative',overflow:'hidden',minWidth:40}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
                   {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
                 </div>
                 {src.percentage<8&&<span style={{position:'absolute',left:`${src.percentage+1}%`,top:'50%',transform:'translateY(-50%)',fontSize:FS.xxs,fontWeight:700,color:isCrim?'#4a1a4a':'#6b5340'}}>{src.percentage}%</span>}
               </div>
-              <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
-                <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+              <div style={{width:mobile?'auto':210,flexShrink:0,minWidth:0}}>
+                <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>
                   {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
                   {src.source}
                 </div>
-                {src.desc&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
+                {src.desc&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:mobile?1.4:undefined,...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>{src.desc}</div>}
               </div>
             </div>
             );
