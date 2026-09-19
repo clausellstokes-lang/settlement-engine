@@ -292,6 +292,26 @@ const VOWEL_SOUND_WORDS = new Set([
 const LETTER_NAME_TAKES_AN = new Set(['A', 'E', 'F', 'H', 'I', 'L', 'M', 'N', 'O', 'R', 'S', 'X']);
 
 /**
+ * ⭐ THE VOWEL LEADS, BY LETTER RATHER THAN BY ASCII RANGE (review 12).
+ *
+ * The default below used to ask `/^[aeiou]/`, which is a question about five ASCII bytes and
+ * not about vowels. A settlement label is the most likely string in the product to carry a
+ * letter outside that range — Île-de-France, Ürümqi, Ægir, Ærie, Ørsted, Óbuda, Åland — and
+ * every one of them came out "a". The set is the ASCII five plus the accented and ligature
+ * forms a Latin-script label actually reaches, so the rule answers about the letter the
+ * reader says. `ñ`, `š`, `ç` and `ý` are deliberately absent: they are consonants, and `y`
+ * is a consonant lead in English whatever diacritic it carries.
+ */
+const VOWEL_LEADS = new Set([
+  'a', 'e', 'i', 'o', 'u',
+  'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ā', 'ă', 'ą',
+  'è', 'é', 'ê', 'ë', 'ē', 'ĕ', 'ė', 'ę', 'ě',
+  'ì', 'í', 'î', 'ï', 'ĩ', 'ī', 'ĭ', 'į', 'ı',
+  'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ō', 'ŏ', 'ő', 'œ',
+  'ù', 'ú', 'û', 'ü', 'ũ', 'ū', 'ŭ', 'ů', 'ű', 'ų',
+]);
+
+/**
  * The authored map, read again without regard to case.
  *
  * ⚠ IT IS A SECOND LOOKUP AND NOT A REPLACEMENT. The exact read above stays first so authored
@@ -331,19 +351,29 @@ function articleFor(descriptors) {
   if (Object.hasOwn(ARTICLE_BY_LEAD, lead)) return ARTICLE_BY_LEAD[lead];
   const leadLower = lead.toLowerCase();
   if (Object.hasOwn(ARTICLE_BY_LEAD_LOWER, leadLower)) return ARTICLE_BY_LEAD_LOWER[leadLower];
-  // ⚠ ANCHORED. An unanchored `/[a-z]+/` takes the first letter-run ANYWHERE in the
-  // lead, so "8-Isle" was decided on `Isle` and came out "an 8-Isle" - the article has
-  // to answer to the character the reader actually says first.
-  const raw = lead.match(/^[^a-z]*([a-z]+)/i)?.[1] || '';
+  // ⚠ ANCHORED, AND UNICODE-AWARE. An unanchored run takes the first letters ANYWHERE in
+  // the lead, so "8-Isle" was decided on `Isle` and came out "an 8-Isle" - the article has
+  // to answer to the character the reader actually says first. ⛔ AND THE CLASS IS `\p{L}`,
+  // NOT `[a-z]`: the ASCII spelling treated every accented letter as a SEPARATOR, so
+  // "Île-de-France" skipped past `Î` and was decided on `le`, and "Ægir" on `gir` - both
+  // consonants, both wrong, and wrong in a way no ASCII test could ever show.
+  const raw = lead.match(/^[^\p{L}]*(\p{L}+)/u)?.[1] || '';
   const word = raw.toLowerCase();
   if (VOWEL_SOUND_WORDS.has(word)) return 'an';
   if (CONSONANT_SOUND_WORDS.has(word) || CONSONANT_SOUND_STEMS.test(word)) return 'a';
   // THE INITIALISM, decided on the first letter's NAME. A run written entirely in capitals
   // that neither sound list claims is spelled out by a reader, so `FMG` is "ef-em-gee".
+  // ⚠ THE TEST STAYS ASCII ON PURPOSE. `LETTER_NAME_TAKES_AN` holds the names of the
+  // twenty-six English letters and can answer for nothing else, so an all-capital run
+  // carrying a letter it has no name for - "ÜRÜMQI" - is better read as a WORD and sent to
+  // the vowel rule below, which gets it right, than spelled out against a name that does
+  // not exist.
   if (/^[A-Z]+$/.test(raw)) return LETTER_NAME_TAKES_AN.has(raw[0]) ? 'an' : 'a';
-  // THE DEFAULT, AND THE INVERSION: a written vowel takes 'an' unless something above knew
-  // better. This is the line that gets the whole open `un-` class right.
-  return /^[aeiou]/.test(word) ? 'an' : 'a';
+  // THE DEFAULT, AND THE INVERSION: a vowel LETTER takes 'an' unless something above knew
+  // better. This is the line that gets the whole open `un-` class right, and since review 12
+  // it asks `VOWEL_LEADS` rather than an ASCII range, so an accented or ligature vowel is a
+  // vowel here too.
+  return VOWEL_LEADS.has(word[0]) ? 'an' : 'a';
 }
 
 /**

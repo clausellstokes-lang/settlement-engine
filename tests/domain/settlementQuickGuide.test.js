@@ -330,6 +330,18 @@ describe('composeSettlementQuickGuide', () => {
       ['VILLAGE', 'a'], ['METROPOLIS', 'a'], ['THORP', 'a'], ['TOWN', 'a'], ['CITY', 'a'],
       ['HAMLET', 'a'], ['SETTLEMENT', 'a'],
       ['ARABIC-INSPIRED', 'an'], ['EAST-ASIAN-INSPIRED', 'an'], ['GERMANIC-INSPIRED', 'a'],
+      // ── THE LEAD IS A LETTER, NOT AN ASCII BYTE (review 12). The old `/^[^a-z]*([a-z]+)/i`
+      // treated every accented letter as a SEPARATOR, so "Île-de-France" was decided on `le`
+      // and "Ægir" on `gir` — both consonants, both wrong, and invisible to an ASCII battery.
+      ['Île-de-France', 'an'], ['Ürümqi', 'an'], ['Ægir', 'an'], ['ærie', 'an'],
+      ['Ørsted', 'an'], ['Óbuda', 'an'], ['Åland', 'an'], ['Œuvre', 'an'],
+      ['Élisabethville', 'an'], ['Älvdalen', 'an'], ['Îmbrun', 'an'],
+      // …and the accented CONSONANTS beside them, which must NOT move. `y` is a consonant
+      // lead in English whatever diacritic it carries.
+      ['Ñuble', 'a'], ['Škoda', 'a'], ['Çorum', 'a'], ['Ýrsholm', 'a'], ['Žarko', 'a'],
+      // An ALL-CAPITAL run carrying a letter the twenty-six English letter names cannot
+      // answer for is read as a WORD rather than spelled out — which is the right answer.
+      ['ÜRÜMQI', 'an'],
     ];
 
     // ── THE TWENTY-SIX SINGLE LETTERS, derived rather than typed: twelve letter names open
