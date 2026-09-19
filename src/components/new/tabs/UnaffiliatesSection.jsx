@@ -42,10 +42,13 @@ import { unaffiliateRows, wanderersDoorOpen } from '../../map/heraldWanderers.js
 import WandererVerbControls, { WandererUndoControl } from '../../map/WandererVerbControls.jsx';
 import { FS, swatch, MUTED, BODY, BORDER, BORDER2, CARD_ALT, sans } from '../../theme.js';
 import { serif } from '../Primitives';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 /** One person, as a card. Deliberately quieter than the Herald's register row: this is
  *  a sidebar in somebody else's dossier, not the page the register owns. */
 function UnaffiliateCard({ row, campaignId, seesSecrets }) {
+  const mobile = useIsMobile();
   return (
     <div
       data-testid="unaffiliate-row"
@@ -57,21 +60,21 @@ function UnaffiliateCard({ row, campaignId, seesSecrets }) {
         background: CARD_ALT,
       }}
     >
-      <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 900, color: swatch.inkMag }}>
+      <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, color: swatch.inkMag }}>
         {row.name}
         <span style={{ fontWeight: 600, color: MUTED, marginLeft: 6 }}>({row.title})</span>
       </div>
-      <div style={{ fontFamily: sans, fontSize: FS.xxs, color: BODY, lineHeight: 1.45 }}>
+      <div style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.45 }}>
         {row.whyLine} {row.notorietyLine}
       </div>
-      <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>{row.whenLine}</div>
+      <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{row.whenLine}</div>
       {row.whereaboutsLine && (
-        <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, fontWeight: 800 }}>
+        <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontWeight: 800 }}>
           {row.whereaboutsLine}
         </div>
       )}
       {row.dmLine && (
-        <div data-testid="unaffiliate-dm-line" style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
+        <div data-testid="unaffiliate-dm-line" style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic' }}>
           {row.dmLine}
         </div>
       )}
@@ -93,6 +96,7 @@ function UnaffiliateCard({ row, campaignId, seesSecrets }) {
  * @param {{ saveId?: string|null, settlement?: any, playerView?: boolean, publicDossier?: boolean }} props
  */
 export default function UnaffiliatesSection({ saveId = null, settlement = null, playerView = false, publicDossier = false }) {
+  const mobile = useIsMobile();
   const sid = saveId != null ? String(saveId)
     : (settlement?.id != null ? String(settlement.id) : null);
   const campaigns = useStore(s => s.campaigns);
@@ -123,7 +127,7 @@ export default function UnaffiliatesSection({ saveId = null, settlement = null, 
           card it was pressed in, so the control cannot live inside one. */}
       {seesSecrets && campaignId && <WandererUndoControl campaignId={campaignId} />}
       {rows.total === 0 ? (
-        <div style={{ border: `1px dashed ${BORDER}`, padding: 12, fontFamily: sans, fontSize: FS.xs, color: BODY, background: CARD_ALT }}>
+        <div style={{ border: `1px dashed ${BORDER}`, padding: 12, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, background: CARD_ALT }}>
           Nobody is sheltering here who does not belong to something here.
         </div>
       ) : (

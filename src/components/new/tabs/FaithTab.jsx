@@ -38,6 +38,8 @@ import {
 } from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BODY, BORDER, CARD, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../../theme.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 const PantheonPanel = lazy(() => import('../../map/PantheonPanel.jsx'));
 
@@ -51,18 +53,19 @@ function nicheWords(niche) {
 /** The patron seat + its legitimacy NOW — the §805 glance. Renders only from
  *  live ranks (a static embed keeps its patron line inside FaithSection). */
 function PatronSeatBlock({ patron, contested }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="faith-patron-seat" style={{
       background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
       padding: '12px 14px', marginBottom: 14,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.07em' }}>The patron seat</span>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.07em' }}>The patron seat</span>
         {contested && (
-          <span style={{ marginLeft: 'auto', fontSize: FS.xxs, fontWeight: 800, color: RED }}>contested</span>
+          <span style={{ marginLeft: 'auto', fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: RED }}>contested</span>
         )}
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, marginTop: 6 }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, marginTop: 6 }}>
         <strong style={{ color: INK }}>{patron.name}</strong>
         {' holds the seat. Its claim is '}
         <strong style={{ color: BAND_TONE[patron.band.tone] || BODY }}>{patron.band.label}</strong>
@@ -84,10 +87,11 @@ function PatronSeatBlock({ patron, contested }) {
  *  cause, muted so it reads as colour rather than alarm. Absent data renders
  *  nothing — the rows exist only where a deity authored something. */
 function DepthRows({ depth }) {
+  const mobile = useIsMobile();
   return (
     <>
       {depth.top3.length > 0 && (
-        <div data-testid="faith-depth-character" style={{ color: BODY, fontFamily: sans, fontSize: FS.pico, lineHeight: 1.5, marginTop: 4 }}>
+        <div data-testid="faith-depth-character" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), lineHeight: 1.5, marginTop: 4 }}>
           <span style={{ color: MUTED, fontWeight: 700 }}>Known for </span>
           {depth.top3.map((r, i) => (
             <span key={`${r.axisId}:${r.pole}`}>
@@ -99,7 +103,7 @@ function DepthRows({ depth }) {
         </div>
       )}
       {depth.gifts.map((g) => (
-        <div key={g.kind} data-testid={`faith-depth-${g.kind}`} style={{ color: BODY, fontFamily: sans, fontSize: FS.pico, lineHeight: 1.5, marginTop: 2 }}>
+        <div key={g.kind} data-testid={`faith-depth-${g.kind}`} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), lineHeight: 1.5, marginTop: 2 }}>
           <span style={{ color: g.kind === 'boon' ? GREEN : RED, fontWeight: 800, textTransform: 'capitalize' }}>{g.kind}</span>
           {' · '}{g.channelWord}{' · '}{g.strengthWord}
           {g.flaw && <span style={{ color: MUTED, fontStyle: 'italic' }}>{' · '}{g.flaw}</span>}
@@ -113,9 +117,10 @@ function DepthRows({ depth }) {
  *  W-FAITH F7c deepening rows (top-3 character, boon & bane) for any deity
  *  that authored them; a creed with nothing authored keeps its one-line row. */
 function NicheOccupancyBlock({ ranks, depth, desk }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="faith-niches" style={{ marginBottom: 14 }}>
-      <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
         Niche occupancy
       </div>
       {/* ── faith.nicheRow (DS-FTH-3, GLANCE) — the leaf's one glance position. These rows
@@ -134,10 +139,10 @@ function NicheOccupancyBlock({ ranks, depth, desk }) {
         const followingWord = shareBandLabel(d.share);
         return (
           <div key={d.name} data-testid="faith-niche-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-            <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>
+            <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
               {d.niche ? nicheWords(d.niche) : 'niche unrecorded'}
             </span>
-            <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+            <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
               {': '}{d.name}{d.isPatron ? ' (patron)' : ''} · {standingWord} · {followingWord}
             </span>
             {depth[d.name] && <DepthRows depth={depth[d.name]} />}
@@ -154,17 +159,18 @@ function NicheOccupancyBlock({ ranks, depth, desk }) {
  *  surface (see faithDeepening.fieldEffectRows). Dark world, no authored
  *  boon/bane, or a magic-dead dial ⇒ no projection ⇒ this block is absent. */
 function FieldBlock({ rows }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="faith-field-block" style={{ marginBottom: 14 }}>
-      <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
         Divine influence
       </div>
       {rows.map((r) => (
         <div key={r.channel} data-testid="faith-field-row" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>
+          <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>
             {r.channelWord}
           </span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile) }}>
             {' · '}
             <span style={{ color: r.direction === 'blessed' ? GREEN : RED, fontWeight: 700 }}>{r.direction}</span>
             {' · '}{r.band}
@@ -179,6 +185,7 @@ function FieldBlock({ rows }) {
  * @param {{ settlement: any, saveId?: string|null, playerView?: boolean, publicDossier?: boolean }} props
  */
 export default function FaithTab({ settlement, saveId = null, playerView = false, publicDossier = false }) {
+  const mobile = useIsMobile();
   const sid = saveId != null ? String(saveId)
     : (settlement?.id != null ? String(settlement.id) : null);
 
@@ -261,7 +268,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
           {/* The wait is WITNESSED, not confessed (the witnessed-wait ratchet's
               own instruction: narrate it in the world's voice). "Opening the …"
               is this estate's landed idiom for a door being opened for you. */}
-          <Suspense fallback={<div role="status" style={{ padding: 12, color: MUTED, fontFamily: sans, fontSize: FS.xs }}>Opening the realm pantheon…</div>}>
+          <Suspense fallback={<div role="status" style={{ padding: 12, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>Opening the realm pantheon…</div>}>
             <PantheonPanel campaign={pantheonCampaign} />
           </Suspense>
         </div>

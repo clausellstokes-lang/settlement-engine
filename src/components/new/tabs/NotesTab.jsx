@@ -5,6 +5,8 @@ import { FS, swatch } from '../../theme.js';
 import { t } from '../../../copy/index.js';
 import { sans } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 const BORDER = swatch['#E0D0B0'];
 const INK = swatch['#1C1409'];
@@ -26,6 +28,7 @@ const GOLD = swatch['#A0762A'];
  * dropping the text or freezing the textbox.
  */
 export default function NotesTab({ saveId, notes, section }) {
+  const mobile = useIsMobile();
   const updateDossierNotes = useStore(s => s.updateDossierNotes);
   const notesSourceKey = `${notes?.dmNotes || ''}|${notes?.aiGuidance || ''}`;
   const [draft, setDraft] = useState(() => ({
@@ -100,7 +103,7 @@ export default function NotesTab({ saveId, notes, section }) {
       <div style={{ display: 'grid', gap: 14 }}>
         {showDm && (
           <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#FAF8F4'] }}>
-            <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
+            <div style={{ ...sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               DM Notes
             </div>
             <textarea
@@ -115,7 +118,7 @@ export default function NotesTab({ saveId, notes, section }) {
 
         {showAi && (
           <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#F7F0E4'] }}>
-            <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
+            <div style={{ ...sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               Campaign Context
             </div>
             <textarea
@@ -125,7 +128,7 @@ export default function NotesTab({ saveId, notes, section }) {
               placeholder="How does this settlement fit your campaign? e.g. an orc warband hold with a militarized culture; the baron here owes the party a debt..."
               style={textareaStyle}
             />
-            <p style={{ margin: '8px 0 0', fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
+            <p style={{ margin: '8px 0 0', fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.5 }}>
               Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
             </p>
           </section>
@@ -144,13 +147,13 @@ export default function NotesTab({ saveId, notes, section }) {
               {saving ? 'Saving...' : saved ? 'Saved' : 'Save notes'}
             </Button>
             {error && (
-              <p role="alert" style={{ margin: 0, fontSize: FS.xs, color: swatch['#8B1A1A'], lineHeight: 1.5 }}>
+              <p role="alert" style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: swatch['#8B1A1A'], lineHeight: 1.5 }}>
                 {error}
               </p>
             )}
           </div>
         ) : (
-          <p style={{ margin: 0, fontSize: FS.xs, color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
+          <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: SECOND, fontStyle: 'italic', lineHeight: 1.5 }}>
             Type freely. Save this settlement to keep your notes with it.
           </p>
         )}

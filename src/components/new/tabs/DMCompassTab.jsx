@@ -15,6 +15,8 @@
 
 import { FS, swatch, MUTED } from '../../theme.js';
 import { Section } from '../Primitives';
+import { chromeFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
@@ -36,6 +38,7 @@ function BulletRow({ color, children }) {
 // ── Sub-panels ───────────────────────────────────────────────────────────────
 
 function CompassPanel({ compass }) {
+  const mobile = useIsMobile();
   const hooks    = Array.isArray(compass?.hooks)    ? compass.hooks    : [];
   const redFlags = Array.isArray(compass?.redFlags) ? compass.redFlags : [];
   const twist    = typeof  compass?.twist === 'string' ? compass.twist : '';
@@ -45,7 +48,7 @@ function CompassPanel({ compass }) {
     <Section title="DM Compass" accent="#6a2a9a">
       {hooks.length > 0 && (
         <div style={{ marginBottom: 12 }}>
-          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
             Adventure hooks
           </div>
           {hooks.map((h, i) => (
@@ -56,7 +59,7 @@ function CompassPanel({ compass }) {
 
       {redFlags.length > 0 && (
         <div style={{ marginBottom: twist ? 12 : 0 }}>
-          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.danger, marginBottom: 4 }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.danger, marginBottom: 4 }}>
             Red flags
           </div>
           {redFlags.map((r, i) => (
@@ -67,7 +70,7 @@ function CompassPanel({ compass }) {
 
       {twist && (
         <div>
-          <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch['#A0762A'], marginBottom: 4 }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch['#A0762A'], marginBottom: 4 }}>
             If the session is dragging
           </div>
           <BulletRow color="#a0762a">{twist}</BulletRow>
@@ -78,10 +81,11 @@ function CompassPanel({ compass }) {
 }
 
 function IdentityMarkersPanel({ markers }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(markers) || !markers.length) return null;
   return (
     <Section title="Identity Markers" accent="#1a5a28">
-      <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 6, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 6, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
         Concrete details to drop into a scene as you describe the place.
       </div>
       {markers.map((m, i) => (
@@ -92,16 +96,17 @@ function IdentityMarkersPanel({ markers }) {
 }
 
 function FrictionPointsPanel({ points }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(points) || !points.length) return null;
   return (
     <Section title="Friction Points" accent="#a0762a">
-      <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
         Small-scale grievances between named parties. Surface them in scenes to texture daily life.
       </div>
       {points.map((p, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: swatch['#FAF8F4'], border: '1px solid #d8c090'}}>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>
+            <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>
               {p.who}
             </div>
             <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, fontFamily: 'Georgia, serif' }}>
@@ -115,24 +120,25 @@ function FrictionPointsPanel({ points }) {
 }
 
 function ConnectionsMapPanel({ edges }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(edges) || !edges.length) return null;
   return (
     <Section title="Connections Map" accent="#2a3a7a">
-      <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
         Named ties between people, factions, and institutions. A map for the table's politics.
       </div>
       {edges.map((e, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '5px 10px', borderBottom: i < edges.length - 1 ? '1px solid #e0d0b0' : 'none', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: FS['11.5'], fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>
-          <span style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', padding: '0 4px', fontFamily: 'Georgia, serif' }}>{e.nature}</span>
+          <span style={{ fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic', padding: '0 4px', fontFamily: 'Georgia, serif' }}>{e.nature}</span>
           {e.via && (
             <>
-              <span style={{ fontSize: FS.xxs, color: MUTED }}>via</span>
-              <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontFamily: 'Nunito, sans-serif' }}>{e.via}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>via</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.inkMag2, fontFamily: 'Nunito, sans-serif' }}>{e.via}</span>
             </>
           )}
-          <span style={{ fontSize: FS.xxs, color: swatch.inkMag3 }}>&rarr;</span>
-          <span style={{ fontSize: FS['11.5'], fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.to}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>&rarr;</span>
+          <span style={{ fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.to}</span>
         </div>
       ))}
     </Section>

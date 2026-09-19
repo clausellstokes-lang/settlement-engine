@@ -307,7 +307,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           })}
         </div>
 
-        <p style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
+        <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
           {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · custom':''}
         </p>
       </>}

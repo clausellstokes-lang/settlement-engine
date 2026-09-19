@@ -371,7 +371,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {stressObj?.viabilityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:0,lineHeight:1.4}}>{stressObj.viabilityNote}</p>}
           {/* DS-DEF-8: what the override means for this town, in its own voice. */}
           <ProseBlock lines={statusLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:chromeFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
+            style={{fontSize:proseFontSize(FS.xs, isMobile),color:swatch['#3A2A10'],lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}/>
         </div>
       </div>}
 

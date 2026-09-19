@@ -13,7 +13,7 @@
 import { Section, Empty } from '../Primitives';
 import { FS } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { INK as OINK } from '../../../design/organic/ink.js';
 import { RUBRIC } from '../../../design/organic/rubrication.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
@@ -35,8 +35,8 @@ const RULE = OINK.hairline;     // the feint annal ruling (decorative)
 // A source stamp: small-caps in the source's tone inside a square hairline tag —
 // no rounded card chrome. Colour is never the sole channel; the stamp text
 // (Party / Edit / World) and the row title both carry the source.
-function stamp(color) {
-  return { fontSize: FS.micro, color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800};
+function stamp(color, mobile) {
+  return { fontSize: chromeFontSize(FS.micro, mobile), color, border: `1px solid ${color}`, padding: '0 5px', fontWeight: 800};
 }
 
 /**
@@ -76,16 +76,16 @@ export default function ChronicleTab({ entries = [] }) {
               <div key={event.id || i} id={chronicleAnchor(event)} style={{ borderLeft: `3px solid ${accent}`, borderBottom: `1px solid ${RULE}`, padding: '10px 12px' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: event.summary ? 4 : 0 }}>
                   {event.relativeLabel && (
-                    <span style={{ fontSize: FS.micro, fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
+                    <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: WORLD, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
                   )}
-                  <span style={{ fontSize: FS.xs, fontWeight: 800, color: accent }}>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: accent }}>
                     {humanizeIfToken(event.title, 'Event')}
                   </span>
                   {event.partyCaused
-                    ? <span title="Caused by the party" style={stamp(PARTY)}>Party</span>
+                    ? <span title="Caused by the party" style={stamp(PARTY, mobile)}>Party</span>
                     : event.source === 'manual'
-                      ? <span title="A change you authored" style={stamp(SRC_EDIT)}>Edit</span>
-                      : <span title="Driven by the wider world" style={stamp(WORLD)}>World</span>}
+                      ? <span title="A change you authored" style={stamp(SRC_EDIT, mobile)}>Edit</span>
+                      : <span title="Driven by the wider world" style={stamp(WORLD, mobile)}>World</span>}
                 </div>
                 {event.summary && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
                 {/* THE NEWS ADDRESS LAW (2026-07-22): a world entry states, beside its
@@ -109,13 +109,13 @@ export default function ChronicleTab({ entries = [] }) {
                     {Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0 ? (
                       <AffectedSettlements ids={event.address.affectedSettlementIds} />
                     ) : Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 ? (
-                      <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
+                      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: WORLD, lineHeight: 1.4 }}>
                         <span style={{ fontWeight: 800 }}>Affects </span>
                         {event.address.affectedSettlements.join(', ')}
                       </div>
                     ) : null}
                     {event.address.reason && (
-                      <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
+                      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: WORLD, lineHeight: 1.4 }}>
                         <span style={{ fontWeight: 800 }}>Because </span>
                         {String(event.address.reason).replace(/_/g, ' ')}
                       </div>

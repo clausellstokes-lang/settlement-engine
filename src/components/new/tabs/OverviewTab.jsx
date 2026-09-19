@@ -17,7 +17,7 @@ import { LITERARY_TITLE, literaryTitle, statusCase, tokenCase } from '../labelLa
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
@@ -100,13 +100,14 @@ function institutionBadge(inst) {
  * @param {{ label: string, score: number }} props
  */
 function ScoreRow({ label, score }) {
+  const mobile = useIsMobile();
   const n = Math.min(100, Math.max(0, score || 0));
   const c = scoreColor(n);
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
-        <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{statusCase(scoreBand(n))}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c }}>{statusCase(scoreBand(n))}</span>
       </div>
       <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
@@ -116,9 +117,10 @@ function ScoreRow({ label, score }) {
 }
 
 function StatusTag({ label, value, _color, accent }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
-      <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
+      <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
@@ -282,7 +284,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
           <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
-            {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
+            {ra.terrain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
             {r.spatialLayout?.layout&&<span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
@@ -322,7 +324,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px'}}>Active crisis</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px'}}>Active crisis</span>
               </div>
               <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
@@ -410,7 +412,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
-          <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
           <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
         </div>}
 
@@ -439,8 +441,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
               a live derivation — it is only its display here that is retired. */}
           {eco.foodSecurity?.label&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
-              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{eco.foodSecurity.label}</span>
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{eco.foodSecurity.label}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
               <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:eco.foodSecurity.color||swatch.inkMag2}}/>
@@ -469,7 +471,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div>
               <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
               {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
-                {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
+                {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
               </div>}
             </div>
           </div>
@@ -480,7 +482,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div>
               <div style={{display:'flex',gap:6,alignItems:'baseline',flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
+                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
               </div>
               {c.issue&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
               {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
@@ -568,17 +570,17 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
         <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
           {ra.terrain&&<div style={{flex:'1 1 100px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Terrain</div>
+            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Terrain</div>
             <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag}}>{ra.terrain}</div>
           </div>}
           {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Strengths</div>
+            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strengths</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
+              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
             </div>
           </div>}
           {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
+            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
             <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
           </div>}
         </div>
@@ -598,7 +600,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
               <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
               <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
-              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
+              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
             </div>
           ))}
         </div>
@@ -607,12 +609,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {/* Coherence notes (G5): sole web render site of the generation-frozen
             coherenceNotes record — the header carries the survey vintage. */}
-        {r.coherenceNotes?.length>0&&<div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
+        {r.coherenceNotes?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
@@ -635,7 +637,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           </div>
         )}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
           {/* The suggestion reads as two sentences: the reason (period-normalized —
               producers are inconsistent about trailing stops), then the same
               " Consider: …" form the PDF's format.js renders, so the two surfaces
@@ -649,19 +651,19 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
         <button type="button" onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
-            <span style={{fontSize:FS.xs,color:MUTED}}>{(r.institutions||[]).length} total</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{(r.institutions||[]).length} total</span>
           </div>
           <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
             {/* Top-5 category chips + an honest remainder: the visible chip counts
                 must SUM to the "N total" beside them — a bare slice(0,5) shipped a
                 page whose own arithmetic disagreed (§767.3(d), the 39-vs-40 gap). */}
             {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
-              <span key={cat} style={{fontSize:FS.xxs,fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
+              <span key={cat} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
             ))}
             {(()=>{const rest=Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(5).reduce((n,[,insts])=>n+insts.length,0);
-              return rest>0?<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:`${MUTED}15`,padding:'1px 5px'}}>+{rest} more</span>:null;})()}
-            <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
+              return rest>0?<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:MUTED,background:`${MUTED}15`,padding:'1px 5px'}}>+{rest} more</span>:null;})()}
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
           </div>
         </button>
         {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
@@ -676,20 +678,20 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
               const cc=getCatColor(cat);
               return <div key={cat}>
-                <div style={{fontSize:FS.xxs,fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
+                <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                   {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;
                     const badge = institutionBadge(inst);
-                    const base = {fontSize:FS.xs,padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
+                    const base = {fontSize:chromeFontSize(FS.xs, mobile),padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
                     const skin = isCustom
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
                     return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
                       {inst.name}
                       {isCustom
-                        ? <span style={{fontSize:FS.nano,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
-                        : (badge.label&&<span style={{fontSize:FS.nano,fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
+                        ? <span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                        : (badge.label&&<span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
                     </span>;
                   })}
                 </div>
@@ -697,7 +699,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             })}
           </div>
           {/* Legend */}
-          <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:FS.xxs,color:MUTED,flexWrap:'wrap'}}>
+          <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexWrap:'wrap'}}>
             {[['REQ',PROVENANCE_TONE.required,'Historically required'],['YOU',PROVENANCE_TONE.you,'Added by you'],['→',PROVENANCE_TONE.auto,'Auto-resolved dependency'],['WORLD',PROVENANCE_TONE.world,'Grown by the living world'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
               <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
             ))}

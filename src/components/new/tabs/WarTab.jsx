@@ -53,6 +53,8 @@ import { hasMartialRecord, readinessOf, experienceOf, rustOf } from '../../../do
 // disagree about whether this town has a patron. Only that BOOLEAN is taken: no deity name,
 // no axis, no rank reaches this file, so the header's claim above still holds exactly.
 import { faithPanelModel } from '../../settlement/faithPanelModel.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 // THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
 // does NOT call the desk itself: `warFaith` is one corpus leaf spanning two tabs, and the
 // mount walker admits exactly one caller per desk so the public-dossier gate stays in one
@@ -66,16 +68,18 @@ import {
 } from '../../theme.js';
 
 function Line({ strong, tone = BODY, children }) {
+  const mobile = useIsMobile();
   return (
-    <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, marginBottom: 5 }}>
+    <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, marginBottom: 5 }}>
       {strong && <strong style={{ color: tone }}>{strong} </strong>}{children}
     </div>
   );
 }
 
 function Eyebrow({ color = SECOND, children }) {
+  const mobile = useIsMobile();
   return (
-    <div style={{ fontSize: FS.xxs, fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
+    <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
       {children}
     </div>
   );
@@ -123,6 +127,7 @@ function MartialCrisisBlock({ crises }) {
 
 /** The war half — pure OUR light war read-models (moved verbatim from WarFaithTab). */
 function WarBlock({ war, nameFor }) {
+  const mobile = useIsMobile();
   const { status, exhaustionRaw, exhaustionBand, mobilization, occupied, holdings } = war;
   const besieged = status?.besiegedBy?.length > 0;
   const deploying = status?.besiegingTargets?.length > 0;
@@ -134,8 +139,8 @@ function WarBlock({ war, nameFor }) {
       padding: '12px 14px', marginBottom: 14,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
-        <span style={{ fontSize: FS.xxs, fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.07em' }}>War</span>
-        <span style={{ marginLeft: 'auto', fontSize: FS.xxs, fontWeight: 800, color: statusColor }}>{statusLabel}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.07em' }}>War</span>
+        <span style={{ marginLeft: 'auto', fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: statusColor }}>{statusLabel}</span>
       </div>
 
       {besieged && (
@@ -186,6 +191,7 @@ function WarBlock({ war, nameFor }) {
  *  war edges themselves (coalition joiners fold onto the origin pair; the typed
  *  casus rides each row's derived line). */
 function WarsBlock({ wars, sid, nameFor }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="war-wars" style={{ marginBottom: 14 }}>
       <Eyebrow color={RED}>{wars.length === 1 ? 'The war' : 'The wars'}</Eyebrow>
@@ -198,13 +204,13 @@ function WarsBlock({ wars, sid, nameFor }) {
         return (
           <div key={war.key} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-              <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>{war.name}</strong>
-              <span style={{ marginLeft: 'auto', color: onAttack ? GOLD : RED, fontSize: FS.pico, fontWeight: 800 }}>
+              <strong style={{ color: INK, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>{war.name}</strong>
+              <span style={{ marginLeft: 'auto', color: onAttack ? GOLD : RED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800 }}>
                 {onAttack ? 'Attacking' : 'Defending'}
               </span>
             </div>
-            {war.line && <div style={{ color: SECOND, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5, marginTop: 3 }}>{war.line}</div>}
-            <div style={{ color: BODY, fontSize: FS.xxs, lineHeight: 1.5, marginTop: 4 }}>
+            {war.line && <div style={{ color: SECOND, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5, marginTop: 3 }}>{war.line}</div>}
+            <div style={{ color: BODY, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5, marginTop: 4 }}>
               {allies.length > 0 && (<span><strong style={{ color: GREEN }}>Beside:</strong> {allies.join(', ')} · </span>)}
               <strong style={{ color: RED }}>Against:</strong> {enemies.join(', ')}
             </div>
@@ -268,31 +274,32 @@ const STALENESS_TONE = Object.freeze({ current: GREEN, aging: GOLD, stale: RED }
 /** One unit entry: the believed position + staleness band + source grade, with the
  *  DM-truth disclosure showing the true picture and the divergence. */
 function UnitEntry({ unit, includeGroundTruth }) {
+  const mobile = useIsMobile();
   const { roleWord, destName, believedAt, trueAt, staleness, stalenessBand, arrivedWord } = unit;
   return (
     <article data-testid="war-unit" style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-        <strong style={{ color: INK, fontSize: FS.xs, fontWeight: 800 }}>The host, {roleWord} {destName}</strong>
-        <span data-testid="war-unit-staleness" style={{ marginLeft: 'auto', color: STALENESS_TONE[stalenessBand] || MUTED, fontSize: FS.pico, fontWeight: 800, whiteSpace: 'nowrap' }}>
+        <strong style={{ color: INK, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>The host, {roleWord} {destName}</strong>
+        <span data-testid="war-unit-staleness" style={{ marginLeft: 'auto', color: STALENESS_TONE[stalenessBand] || MUTED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800, whiteSpace: 'nowrap' }}>
           Word {stalenessBand}
         </span>
       </div>
-      <div style={{ color: BODY, fontSize: FS.xxs, lineHeight: 1.5, marginTop: 4 }}>
+      <div style={{ color: BODY, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5, marginTop: 4 }}>
         {arrivedWord
           ? arrivedWord
           : <>Believed {believedAt.same ? 'at' : 'near'} <strong style={{ color: INK }}>{believedAt.name}</strong>.</>}
       </div>
-      <div style={{ color: SECOND, fontSize: FS.pico, fontWeight: 700, marginTop: 3 }}>
+      <div style={{ color: SECOND, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, marginTop: 3 }}>
         {staleness > 0
           ? `Last credible word, ${tickDurationLabel(staleness)} old. The courier line home is cut.`
           : 'Fresh word. The courier line home holds.'}
       </div>
       {includeGroundTruth && (
         <details style={{ marginTop: 8, border: `1px solid ${BORDER2}`, background: CARD_ALT, overflow: 'hidden' }}>
-          <summary style={{ cursor: 'pointer', padding: '5px 9px', color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+          <summary style={{ cursor: 'pointer', padding: '5px 9px', color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>
             DM truth
           </summary>
-          <div data-testid="war-unit-truth" style={{ padding: '7px 9px', color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.5 }}>
+          <div data-testid="war-unit-truth" style={{ padding: '7px 9px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5 }}>
             <div><strong style={{ color: INK }}>Where it truly stands:</strong> {trueAt.name}.</div>
             {trueAt.name !== believedAt.name ? (
               <div style={{ color: SECOND }}>
@@ -312,6 +319,7 @@ function UnitEntry({ unit, includeGroundTruth }) {
 /** DM-only: what this town privately believes of its neighbours (settlementBeliefs —
  *  fail-closed player projection, so this renders under includeGroundTruth alone). */
 function BeliefsBlock({ beliefs }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="war-beliefs" style={{ marginBottom: 14 }}>
       <Eyebrow color={GOLD}>DM · what this town believes of its neighbours</Eyebrow>
@@ -329,9 +337,9 @@ function BeliefsBlock({ beliefs }) {
         const stalenessWord = b.staleness;
         return (
           <div key={b.subjectId} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '8px 10px', marginBottom: 6 }}>
-            <span style={{ color: INK, fontSize: FS.xxs, fontWeight: 800 }}>{b.subjectName}</span>
-            <span style={{ color: BODY, fontSize: FS.xxs }}>{`: believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
-            <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>
+            <span style={{ color: INK, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>{b.subjectName}</span>
+            <span style={{ color: BODY, fontSize: chromeFontSize(FS.xxs, mobile) }}>{`: believed ${b.believed.strengthWord}, ${b.believed.readinessWord}`}</span>
+            <span style={{ color: MUTED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>
               {` · ${confidenceWord} · ${stalenessWord}${b.agoTicks > 0 ? `, heard ${tickDurationLabel(b.agoTicks)} ago` : ''}`}
             </span>
           </div>
@@ -344,6 +352,7 @@ function BeliefsBlock({ beliefs }) {
 /** The treaty half — the settlement's treaties as documents (W-PEACE-3 §13), moved
  *  verbatim from WarFaithTab. */
 function TreatyBlock({ treaties, sid }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="treaty-block" style={{ marginBottom: 14 }}>
       <Eyebrow>{treaties.length === 1 ? 'Treaty' : 'Treaties'}</Eyebrow>
@@ -357,23 +366,23 @@ function TreatyBlock({ treaties, sid }) {
         return (
           <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
-              <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
-              <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>
-              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800 }}>{tokenCase(doc.complianceState)}</span>
+              <strong style={{ color: BODY, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>{doc.title}</strong>
+              <span style={{ color: MUTED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700 }}>{role}</span>
+              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800 }}>{tokenCase(doc.complianceState)}</span>
             </div>
             {doc.termLines.map((term) => (
-              <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>
+              <div key={term.type} style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.5, marginBottom: 3 }}>
                 <strong style={{ color: term.fraying ? RED : BODY, textTransform: 'capitalize' }}>{term.label}</strong>
                 <span style={{ color: MUTED }}>{term.yearsRemaining > 0 ? ` · ${term.yearsRemaining}y left` : ' · lapsing'}</span>
                 <span style={{ color: SECOND, fontStyle: 'italic' }}>{` · ${term.strainLine}`}</span>
               </div>
             ))}
-            {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
+            {doc.frayingLine && <div style={{ color: RED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
             {/* GR-0 the longevity voice — null while the lifecycle-voice flag is dark. */}
-            {doc.ageLine && <div style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{doc.ageLine}</div>}
+            {doc.ageLine && <div style={{ color: SECOND, fontSize: chromeFontSize(FS.pico, mobile), fontStyle: 'italic', marginTop: 4 }}>{doc.ageLine}</div>}
             {/* GR-4b-iii-b the open-question dossier line — same block as the realm panel. */}
             {doc.successionLines.map((line, index) => (
-              <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontSize: FS.pico, fontStyle: 'italic', marginTop: 4 }}>{line}</div>
+              <div key={`${index}:${line}`} data-testid="treaty-succession-question-line" style={{ color: SECOND, fontSize: chromeFontSize(FS.pico, mobile), fontStyle: 'italic', marginTop: 4 }}>{line}</div>
             ))}
           </div>
         );

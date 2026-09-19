@@ -174,7 +174,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     <div>
 
       {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
-        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
+        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
       </Section>}
 
       {/* Neighbour Network */}

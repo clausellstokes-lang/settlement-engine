@@ -4,7 +4,7 @@ import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 import { sans } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
@@ -19,6 +19,7 @@ const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B53
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
 function AnchorFact({ label, value, accent }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       flex: '1 1 100px', minWidth: 0,
@@ -27,8 +28,8 @@ function AnchorFact({ label, value, accent }) {
       borderLeft: `3px solid ${accent || '#c8b89a'}`,
       padding: '5px 9px',
     }}>
-      <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, marginBottom: 1 }}>{label}</div>
-      <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
+      <div style={{ fontSize: chromeFontSize(FS['8.5'], mobile), fontWeight: 700, color: accent || MUTED, marginBottom: 1 }}>{label}</div>
+      <div style={{ fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
     </div>
   );
 }
@@ -238,7 +239,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         <div style={{
           background: swatch['#FAF8F4'], border: '1px solid #e8c0c0',
           padding: '12px 14px', marginBottom: 14,
-          fontSize: FS['11.5'], color: swatch.danger,
+          fontSize: chromeFontSize(FS['11.5'], mobile), color: swatch.danger,
         }}>
           <strong>Error:</strong> {error}
         </div>
@@ -253,7 +254,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
               zIndex: 20, background: INK, color: CARD,
               padding: '8px 16px', border: '1px solid #c4803c',
-              fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
+              fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>

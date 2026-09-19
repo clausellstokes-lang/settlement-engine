@@ -19,7 +19,7 @@ import { tokenCase } from '../labelLadder.js';
 import { FS, swatch, MUTED, GOLD_DEEP } from '../../theme.js';
 import { Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 // The crier's band → colour: dear = shortage, cheap = surplus, steady =
 // adequate. Sourced from the token swatch (exact-value keys) so the section
@@ -31,7 +31,9 @@ const PRICE_TAG_COLOR = {
 };
 
 /** @param {{ id:string,label:string,phrase:string,tag:'dear'|'steady'|'cheap' }} q */
-function Movement(q) {
+// NOT a component — `TradeColumn` calls it through `.map`, so it may hold no
+// hook of its own and takes the width its caller already bound.
+function Movement(q, mobile) {
   const color = PRICE_TAG_COLOR[q.tag] || GOLD_DEEP;
   return (
     <div key={q.id} style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',padding:'3px 0'}}>
@@ -41,7 +43,7 @@ function Movement(q) {
           through its phrase alone — a STEADY chip beside "a shade above" would
           contradict itself. */}
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{tokenCase(q.tag)}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color,background:`${color}15`,padding:'0 5px'}}>{tokenCase(q.tag)}</span>
       )}
     </div>
   );
@@ -58,8 +60,8 @@ function TradeColumn({ heading, color, quotes }) {
   const steady = quotes.filter(q => q.movement === 'usual');
   return (
     <div>
-      <div style={{fontSize:FS.xxs,fontWeight:700,color,marginBottom:4}}>{heading}</div>
-      {moved.map(Movement)}
+      <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,marginBottom:4}}>{heading}</div>
+      {moved.map(q => Movement(q, mobile))}
       {steady.length > 0 && (
         <div style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,padding:'3px 0'}}>
           <span style={{color:MUTED}}>At their usual prices: </span>

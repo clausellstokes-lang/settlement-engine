@@ -13,6 +13,8 @@ import {NarrativeNote} from '../NarrativeNote';
 import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function NPCsTab({
   npcs,
@@ -26,6 +28,7 @@ export function NPCsTab({
   playerView = false,
   publicDossier = false,
 }) {
+  const mobile = useIsMobile();
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
@@ -88,14 +91,14 @@ export function NPCsTab({
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{flex:1}}>
           <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span>
-          <span style={{fontSize:FS.xs,color:MUTED,marginLeft:8}}>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
             {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
           </span>
         </div>
         {pinnedCount > 0 && (
           <span
             title="Pinned NPCs are protected from AI rewrites. Their goal and secret won't be rewritten."
-            style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
+            style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
             {pinnedCount} PINNED
           </span>
         )}
@@ -151,7 +154,7 @@ export function NPCsTab({
         />
       ))}
 
-      <p style={{fontSize:FS.xs,color:MUTED,marginTop:8,fontStyle:'italic',textAlign:'right'}}>
+      <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:8,fontStyle:'italic',textAlign:'right'}}>
         {npcs.length} figures · tap any card to expand
       </p>
     

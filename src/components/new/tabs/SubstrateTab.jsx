@@ -21,7 +21,7 @@ import { causalBandWord, deriveCausalState, variablePolarity } from '../../../do
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -73,12 +73,13 @@ function healthOrientedScore(row) {
  * is the function that already existed to fix precisely this, and had no caller.
  */
 function BandPill({ variable, band }) {
+  const mobile = useIsMobile();
   const tone = BAND_TONE[band] || MUTED;
   const word = causalBandWord(variable, band);
   return (
     <span data-band={band} style={{
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
-      fontSize: FS.pico, fontWeight: 800,
+      fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800,
       color: swatch.white, background: tone,
     }}>{tokenCase(word)}</span>
   );
@@ -157,7 +158,7 @@ export default function SubstrateTab({ settlement }) {
       {/* The 16-variable grid. */}
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
         }}>Settlement foundations</div>
         <div style={{ padding: `0 ${SP.md}px` }}>

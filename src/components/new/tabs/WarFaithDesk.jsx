@@ -56,6 +56,8 @@
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 
 /** The war tab's three positions. Bound once so the reachability arm counts one literal. */
@@ -124,6 +126,7 @@ export function warFaithDeskRungs({
  *   is stood down, so a call site that has not caught up cannot break.
  */
 export function DeskLines({ mount, rungs, testId, settlementName, tier }) {
+  const mobile = useIsMobile();
   const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
   if (lines.length === 0) return null;
   // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
@@ -147,7 +150,7 @@ export function DeskLines({ mount, rungs, testId, settlementName, tier }) {
   return (
     <div data-testid={testId} style={{ margin: '0 0 12px' }}>
       <ProseBlock lines={lines} settlementName={settlementName} tier={tier} style={{
-        color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.6,
+        color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.6,
         margin: '0 0 6px', fontStyle: 'italic',
       }}/>
     </div>
@@ -298,12 +301,13 @@ export function FaithTeaserLines({ desk, settlement }) {
  * @param {{desk: Record<string, any>}} props
  */
 export function FaithNicheGlance({ desk }) {
+  const mobile = useIsMobile();
   const drawn = drawnAtMount(NICHE_ROW_MOUNT, desk.nicheRow);
   if (!drawn?.glance) return null;
   return (
     <div data-testid="faith-desk-niche-glance" style={{
       border: `1px solid ${BORDER}`, background: CARD, padding: '6px 10px', marginBottom: 6,
-      color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 700,
+      color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700,
     }}>
       {`The patron's standing · ${drawn.glance}`}
       {drawn.sentence && <span style={{ color: BODY, fontWeight: 400, textTransform: 'none' }}>{`: ${drawn.sentence}`}</span>}

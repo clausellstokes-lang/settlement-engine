@@ -475,7 +475,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           return <div style={{borderTop:'1px solid #e8d8b0',paddingTop:10,marginBottom:eco.localProduction?.length>0?12:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.info,marginBottom:6}}>↔ Trade with neighbours</div>
             {Object.entries(byPartner).map(([partner,g],i)=>(
-              <div key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
+              <div key={i} style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.5}}>
                 <strong style={{color:swatch.inkMag}}>{partner}</strong>
                 {g.imports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_IN_COLOR,fontWeight:800}}>←</span> {g.imports.join(', ')}</span>}
                 {g.exports.length>0&&<span style={{marginLeft:8}}><span style={{color:TRADE_OUT_COLOR,fontWeight:800}}>→</span> {g.exports.join(', ')}</span>}

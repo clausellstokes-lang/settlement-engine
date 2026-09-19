@@ -22,6 +22,8 @@
 
 import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
+import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 import {
   settlementRumors,
   activatedDeityNamesFrom,
@@ -40,6 +42,7 @@ const CONFIDENCE_LABEL = {
 const FRESHNESS_LABEL = { fresh: 'fresh', recent: 'recent', old: 'old news' };
 
 function RumorCard({ rumor, nameFor }) {
+  const mobile = useIsMobile();
   const major = rumor.significance === 'major';
   const truth = rumor.truth || null;
   return (
@@ -52,25 +55,25 @@ function RumorCard({ rumor, nameFor }) {
         <h4 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900, overflowWrap: 'anywhere' }}>
           {rumor.headline}
         </h4>
-        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, whiteSpace: 'nowrap' }}>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, whiteSpace: 'nowrap' }}>
           {FRESHNESS_LABEL[rumor.freshness] || rumor.freshness} · {rumor.distance}
         </span>
       </div>
       {rumor.detail && (
-        <p style={{ margin: '5px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+        <p style={{ margin: '5px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
           {rumor.detail}
         </p>
       )}
-      <div style={{ marginTop: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+      <div style={{ marginTop: 6, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
         {CONFIDENCE_LABEL[rumor.confidence] || rumor.confidence}
         {rumor.agoTicks > 0 && ` · heard ${rumor.agoTicks} ${rumor.agoTicks === 1 ? 'week' : 'weeks'} ago`}
       </div>
       {truth && (
         <details style={{ marginTop: 8, border: `1px solid ${BORDER2}`, background: CARD_ALT, overflow: 'hidden' }}>
-          <summary style={{ cursor: 'pointer', padding: '5px 9px', color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+          <summary style={{ cursor: 'pointer', padding: '5px 9px', color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>
             DM truth
           </summary>
-          <div style={{ padding: '7px 9px', color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.5 }}>
+          <div style={{ padding: '7px 9px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5 }}>
             {truth.trueHeadline && <div><strong style={{ color: INK }}>What happened:</strong> {truth.trueHeadline}</div>}
             <div>
               <strong style={{ color: INK }}>The road it took:</strong>{' '}
@@ -96,14 +99,15 @@ function RumorCard({ rumor, nameFor }) {
 }
 
 function Column({ title, rumors, emptyText, nameFor }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ minWidth: 0 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
         <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>{title}</h3>
-        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>{rumors.length}</span>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>{rumors.length}</span>
       </div>
       {rumors.length === 0 ? (
-        <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.xs, background: CARD_ALT }}>
+        <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), background: CARD_ALT }}>
           {emptyText}
         </div>
       ) : (
@@ -119,6 +123,7 @@ function Column({ title, rumors, emptyText, nameFor }) {
  * @param {{ settlement: any, saveId?: string|null, playerView?: boolean, publicDossier?: boolean }} props
  */
 export default function RumorsTab({ settlement, saveId = null, playerView = false, publicDossier = false }) {
+  const mobile = useIsMobile();
   const sid = saveId != null ? String(saveId)
     : (settlement?.id != null ? String(settlement.id) : null);
 
@@ -180,7 +185,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
 
   return (
     <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         What {settlement?.name || 'this settlement'} has heard, as it believes it. Word travels the
         trade roads, and the roads are long.
       </p>
