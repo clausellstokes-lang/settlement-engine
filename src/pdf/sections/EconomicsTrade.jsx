@@ -533,8 +533,18 @@ function FoodBalanceBlock({ fb }) {
           <Text style={{ ...type.caption, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>Not calculated</Text>
         </View>
         )}
-        {fb.deficit > 0 && (
+        {/* ⛔ THE CHANNEL IS CREDITED WHETHER OR NOT A GAP SURVIVES IT (adversarial
+            review of the second wave). This column used to be gated on `deficit > 0`
+            with the magic line INSIDE it — but domain/foodBalance.js subtracts the
+            offset when it computes the deficit, so the better the provision, the more
+            certainly the print hid it: a town whose shortfall magic closes ENTIRELY
+            reaches deficit 0 and printed no word of the channel that fed it, while the
+            screen credited it in the production row all along. The gate is now "there
+            is something to say", and the deficit half keeps its own gate, so a
+            settlement WITH a deficit prints exactly what it printed before. */}
+        {(fb.deficit > 0 || fb.magicOffset != null) && (
           <View style={{ flex: 1 }}>
+            {fb.deficit > 0 && (<>
             <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad }}>DEFICIT</Text>
             <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.bad }}>{smart(fb.deficit)}</Text>
             {fb.deficitPct != null && (
@@ -547,6 +557,7 @@ function FoodBalanceBlock({ fb }) {
                 imports cover {fb.coveragePct}% of gap
               </Text>
             )}
+            </>)}
             {/* ODQ §934.20 — THE THIRD CHANNEL. The two lines above account for the
                 gap by trade alone, so on a settlement whose shortfall is partly closed
                 by druidic, divine or arcane provision the printed deficit and the
