@@ -15,6 +15,8 @@ import Button from '../primitives/Button.jsx';
 // it stands in for the incoming tree's AMBER_DEEP (amber-700), which this
 // tree's palette does not mint. The note is small inline text, never a fill.
 import { INK, SECOND, BORDER, sans, SP, FS, swatch, AMBER } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {object} props
@@ -23,6 +25,7 @@ import { INK, SECOND, BORDER, sans, SP, FS, swatch, AMBER } from '../theme.js';
  *   surfaces are mounted in the same document (modal over pricing).
  */
 export default function ReferralIntentField({ referral, idPrefix = 'purchase' }) {
+  const mobile = useIsMobile();
   if (!referral.eligible) return null;
 
   const inputId = `${idPrefix}-referrer-account-id`;
@@ -43,7 +46,7 @@ export default function ReferralIntentField({ referral, idPrefix = 'purchase' })
             style={{
               display: 'flex', flexDirection: 'column', gap: SP.xs,
               flex: '1 1 200px', minWidth: 200,
-              fontSize: FS.xs, fontWeight: 700, color: SECOND,
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
             }}
           >
             {t('purchase.referredByLabel')}
@@ -78,7 +81,7 @@ export default function ReferralIntentField({ referral, idPrefix = 'purchase' })
         <div
           role="status"
           style={{
-            fontSize: FS.xs, lineHeight: 1.5, fontFamily: sans,
+            fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, fontFamily: sans,
             color: note.tone === 'ok' ? swatch['#2A7A2A'] : AMBER,
           }}
         >

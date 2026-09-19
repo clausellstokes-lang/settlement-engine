@@ -14,11 +14,13 @@ import { composeRoadSceneBrief, composeRoadScenePlayerBrief } from '../../domain
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, FS, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
-const selectStyle = {
-  fontSize: FS.xs, color: swatch.inkMag2, background: swatch['#FAF8F4'],
+const selectStyle = (mobile) => ({
+  fontSize: chromeFontSize(FS.xs, mobile), color: swatch.inkMag2, background: swatch['#FAF8F4'],
   border: `1px solid ${swatch['#EDE3CC']}`, padding: '4px 6px', maxWidth: '100%',
-};
+});
 
 /** A compact human line for one brief item (per section). Pure.
  *  Exported for the regression pin: an unrecognized item never renders raw JSON. */
@@ -52,6 +54,7 @@ export function itemLine(sectionId, it) {
 }
 
 export default function RoadScenePanel({ campaign }) {
+  const mobile = useIsMobile();
   const savedSettlements = useStore(s => s.savedSettlements);
   const selectedId = useStore(s => s.selectedSettlementId);
   const auth = useStore(s => s.auth);
@@ -86,10 +89,10 @@ export default function RoadScenePanel({ campaign }) {
   }, [seesSecrets, origin, dest, asPlayer, worldState, savedSettlements, regionalGraph]);
 
   if (!campaign) {
-    return <p style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>Stage the road once a campaign is live.</p>;
+    return <p style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile) }}>Stage the road once a campaign is live.</p>;
   }
   if (!seesSecrets) {
-    return <p style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>The road scene is the DM&apos;s own view. Sign in to your realm to stage a road.</p>;
+    return <p style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile) }}>The road scene is the DM&apos;s own view. Sign in to your realm to stage a road.</p>;
   }
 
   const onDress = async () => {
@@ -108,9 +111,9 @@ export default function RoadScenePanel({ campaign }) {
   };
 
   const pickerRow = (id, label, value, onChange, exclude) => (
-    <label htmlFor={id} style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: FS.micro, color: MUTED, fontWeight: 700 }}>
+    <label htmlFor={id} style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontWeight: 700 }}>
       {label}
-      <select id={id} aria-label={label} value={value} onChange={e => onChange(e.target.value)} style={selectStyle}>
+      <select id={id} aria-label={label} value={value} onChange={e => onChange(e.target.value)} style={selectStyle(mobile)}>
         <option value="">–</option>
         {members.filter(m => m.id !== exclude).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
       </select>
@@ -119,7 +122,7 @@ export default function RoadScenePanel({ campaign }) {
 
   return (
     <div style={{ display: 'grid', gap: SP.sm }} data-testid="road-scene-panel">
-      <div style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
+      <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.4 }}>
         Pick an origin and destination (or click a settlement on the map for the origin). The road
         is read from truth. Staging it writes nothing.
       </div>
@@ -131,26 +134,26 @@ export default function RoadScenePanel({ campaign }) {
       {/* V-25a — the DM previews (and can read aloud) the inhabitant view: the same road, but only
           what the party would themselves perceive. No covert movement, no secret war. */}
       <div role="group" aria-label="View the road as" style={{ display: 'flex', gap: SP.xs, alignItems: 'center', flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.micro, color: MUTED, fontWeight: 700 }}>View as</span>
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontWeight: 700 }}>View as</span>
         <Button variant={asPlayer ? 'ghost' : 'secondary'} size="sm" aria-pressed={!asPlayer} onClick={() => setAsPlayer(false)}>DM</Button>
         <Button variant={asPlayer ? 'secondary' : 'ghost'} size="sm" aria-pressed={asPlayer} onClick={() => setAsPlayer(true)}>Players</Button>
-        {asPlayer && <span style={{ fontSize: FS.micro, color: MUTED }}>What the party sees. No DM secrets.</span>}
+        {asPlayer && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>What the party sees. No DM secrets.</span>}
       </div>
 
       {origin && dest && origin === dest && (
-        <p style={{ color: MUTED, fontSize: FS.micro }}>Choose two different settlements.</p>
+        <p style={{ color: MUTED, fontSize: proseFontSize(FS.micro, mobile) }}>Choose two different settlements.</p>
       )}
 
       {brief && brief.sections.length === 0 && (
-        <p style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>No road runs between them; no land route joins the two.</p>
+        <p style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile) }}>No road runs between them; no land route joins the two.</p>
       )}
 
       {brief && brief.sections.map(sec => (
         <section key={sec.id} style={{ border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px` }}>
-          <h4 style={{ margin: '0 0 4px', fontSize: FS.xs, fontWeight: 800, color: SECOND, fontFamily: sans }}>{sec.title}</h4>
+          <h4 style={{ margin: '0 0 4px', fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: SECOND, fontFamily: sans }}>{sec.title}</h4>
           <ul style={{ margin: 0, paddingLeft: 16, display: 'grid', gap: 2 }}>
             {sec.items.map((it, i) => (
-              <li key={i} style={{ fontSize: FS.micro, color: BODY, lineHeight: 1.4 }}>{itemLine(sec.id, it)}</li>
+              <li key={i} style={{ fontSize: proseFontSize(FS.micro, mobile), color: BODY, lineHeight: 1.4 }}>{itemLine(sec.id, it)}</li>
             ))}
           </ul>
         </section>
@@ -162,12 +165,12 @@ export default function RoadScenePanel({ campaign }) {
             aria-label="Dress the road scene with grounded AI prose (spends credits)">
             {dressing ? 'Dressing…' : 'Dress with AI'}
           </Button>
-          <span style={{ fontSize: FS.micro, color: MUTED }}>Optional. Spends credits; the scene above stands on its own.</span>
+          <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>Optional. Spends credits; the scene above stands on its own.</span>
         </div>
       )}
-      {dressed?.error && <p style={{ color: swatch.danger, fontSize: FS.micro }}>{dressed.error}</p>}
+      {dressed?.error && <p style={{ color: swatch.danger, fontSize: proseFontSize(FS.micro, mobile) }}>{dressed.error}</p>}
       {dressed?.answer && (
-        <p style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, fontStyle: 'italic', borderLeft: `2px solid ${swatch['#A0762A']}`, paddingLeft: SP.sm }}>{dressed.answer}</p>
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, fontStyle: 'italic', borderLeft: `2px solid ${swatch['#A0762A']}`, paddingLeft: SP.sm }}>{dressed.answer}</p>
       )}
     </div>
   );

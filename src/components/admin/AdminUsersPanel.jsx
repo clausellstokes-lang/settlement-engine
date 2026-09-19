@@ -30,6 +30,8 @@ import AdminTwoKeyDialog from './AdminTwoKeyDialog.jsx';
 import AdminDirectMessageDialog from './AdminDirectMessageDialog.jsx';
 import {
   INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** Invoke an admin-actions edge action. Returns the data payload or throws. */
 async function callAdmin(body) {
@@ -64,6 +66,7 @@ function downloadBundle(bundle, userId, full) {
 }
 
 export default function AdminUsersPanel() {
+  const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [searching, setSearching] = useState(false);
@@ -298,7 +301,7 @@ export default function AdminUsersPanel() {
           <div role="row" style={{
             display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
             background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
-            fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+            fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
           }}>
             <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Name</span>
             <span role="columnheader" style={{ flex: 2, textAlign: 'left' }}>Email (masked)</span>
@@ -318,7 +321,7 @@ export default function AdminUsersPanel() {
               <span role="cell" title="Masked email" style={{ flex: 2, color: MUTED, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {u.email_masked || '–'}
               </span>
-              <span role="cell" style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: FS.xxs, textAlign: 'left' }}>{u.role}</span>
+              <span role="cell" style={{ flex: 1, color: MUTED, textTransform: 'uppercase', fontSize: chromeFontSize(FS.xxs, mobile), textAlign: 'left' }}>{u.role}</span>
             </Button>
           ))}
         </div>
@@ -373,7 +376,7 @@ export default function AdminUsersPanel() {
               padding: SP.md, marginBottom: SP.md,
               background: CARD_HDR, border: `1px solid ${BORDER2}`,
             }}>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Billing
               </span>
               <Stat size="sm" label="Tier" value={billing.tier || '–'} />
@@ -451,7 +454,7 @@ export default function AdminUsersPanel() {
 
           {/* Settlement moderation (id-driven; soft-delete-first, reversible) */}
           <div style={{ marginTop: SP.md, paddingTop: SP.md, borderTop: `1px solid ${BORDER2}`, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Settlement moderation (by settlement id):</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>Settlement moderation (by settlement id):</span>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Soft-delete settlement', body: 'Reversible: hides and unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
@@ -496,7 +499,7 @@ export default function AdminUsersPanel() {
 
           {/* Map / campaign moderation (a shared campaign is a saved_maps row) */}
           <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Map / campaign moderation (by map id):</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>Map / campaign moderation (by map id):</span>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Soft-delete map', body: 'Reversible: hides and unpublishes the map or campaign.', label: 'Map id', confirmLabel: 'Soft-delete' },
@@ -541,7 +544,7 @@ export default function AdminUsersPanel() {
 
           {/* Comment moderation (hidden comments render as an in-place tombstone) */}
           <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Comment moderation (by comment id):</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>Comment moderation (by comment id):</span>
             <Button variant="danger" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Remove comment', body: 'Reversible: the comment shows as a moderation tombstone in the thread.', label: 'Comment id', confirmLabel: 'Remove' },

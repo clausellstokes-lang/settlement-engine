@@ -15,6 +15,7 @@
 
 import { Field } from './Field.jsx';
 import { inputStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function AddNpcTraitFields({
   flaw, setFlaw,
@@ -23,22 +24,23 @@ export function AddNpcTraitFields({
   constraint, setConstraint,
   secret, setSecret,
 }) {
+  const mobile = useIsMobile();
   return (
     <>
       <Field label="Flaw" hint="A failing the table can lean on">
-        <input value={flaw} onChange={e => setFlaw(e.target.value)} placeholder="optional" aria-label="Flaw" style={inputStyle} />
+        <input value={flaw} onChange={e => setFlaw(e.target.value)} placeholder="optional" aria-label="Flaw" style={inputStyle(mobile)} />
       </Field>
       <Field label="Temperament" hint="Their dominant manner">
-        <input value={temperament} onChange={e => setTemperament(e.target.value)} placeholder="optional" aria-label="Temperament" style={inputStyle} />
+        <input value={temperament} onChange={e => setTemperament(e.target.value)} placeholder="optional" aria-label="Temperament" style={inputStyle(mobile)} />
       </Field>
       <Field label="Goals" hint="What they are working toward">
-        <input value={goals} onChange={e => setGoals(e.target.value)} placeholder="optional" aria-label="Goals" style={inputStyle} />
+        <input value={goals} onChange={e => setGoals(e.target.value)} placeholder="optional" aria-label="Goals" style={inputStyle(mobile)} />
       </Field>
       <Field label="Constraint" hint="What holds them back">
-        <input value={constraint} onChange={e => setConstraint(e.target.value)} placeholder="optional" aria-label="Constraint" style={inputStyle} />
+        <input value={constraint} onChange={e => setConstraint(e.target.value)} placeholder="optional" aria-label="Constraint" style={inputStyle(mobile)} />
       </Field>
       <Field label="Secret" hint="Known only to the GM">
-        <input value={secret} onChange={e => setSecret(e.target.value)} placeholder="optional" aria-label="Secret" style={inputStyle} />
+        <input value={secret} onChange={e => setSecret(e.target.value)} placeholder="optional" aria-label="Secret" style={inputStyle(mobile)} />
       </Field>
     </>
   );

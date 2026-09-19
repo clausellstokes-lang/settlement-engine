@@ -28,6 +28,8 @@ import GalleryCard from './GalleryCard.jsx';
 import Button from '../primitives/Button.jsx';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import { BORDER, CARD, FS, INK, INK_DEEP, MUTED, PAGE_MAX, SECOND, SP, sans, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const PAGE_SIZE = 24;
 
@@ -40,6 +42,7 @@ export default function GalleryHubPage({ routeHub }) {
 }
 
 function GalleryHubContent({ hub }) {
+  const mobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
@@ -128,7 +131,7 @@ function GalleryHubContent({ hub }) {
           {hub.blurb}
         </p>
         {total > 0 && (
-          <span style={{ color: MUTED, fontSize: FS.xs, fontWeight: 700 }}>
+          <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             {total} settlement{total === 1 ? '' : 's'}
           </span>
         )}
@@ -175,7 +178,7 @@ function GalleryHubContent({ hub }) {
       {/* The crawl mesh: every sibling hub, so an indexer (or reader) can walk
           the whole hub set from any entry point. */}
       <nav aria-label="More gallery collections" style={{ marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${BORDER}` }}>
-        <div style={{ color: SECOND, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+        <div style={{ color: SECOND, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
           More collections
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
@@ -189,7 +192,7 @@ function GalleryHubContent({ hub }) {
                 const [, facet, value] = h.path.split('/').slice(1); // ['gallery', facet, value?]
                 navigate('gallery', { params: { hub: { facet, ...(value ? { value } : {}) } } });
               }}
-              style={{ color: INK, fontSize: FS.xs, fontWeight: 700, textDecoration: 'underline', padding: '4px 6px' }}
+              style={{ color: INK, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textDecoration: 'underline', padding: '4px 6px' }}
             >
               {h.title}
             </a>

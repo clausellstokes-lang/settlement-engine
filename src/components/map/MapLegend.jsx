@@ -20,6 +20,8 @@ import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, SP, s
 import { REL_EDGE_STYLE, REL_TYPES, relChannelColor } from './relationshipEdgeStyle.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 import { LIFECYCLE_GLYPH_STYLE } from './lifecycleGlyphStyle.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // War/faith glyph hues pulled from the SAME regionalMapOverlay source the map
 // layer (WarFaithMapOverlay) draws, so the legend can never claim a color the
@@ -72,17 +74,19 @@ function Row({ children }) {
 }
 
 function Label({ children }) {
+  const mobile = useIsMobile();
   return (
-    <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.2 }}>
+    <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.2 }}>
       {children}
     </span>
   );
 }
 
 function GroupTitle({ children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
-      color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900,
+      color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900,
       textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2,
     }}>
       {children}
@@ -91,6 +95,7 @@ function GroupTitle({ children }) {
 }
 
 export default function MapLegend() {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false); // default-collapsed — clean first view
 
   return (
@@ -114,7 +119,7 @@ export default function MapLegend() {
         style={{
           display: 'flex', alignItems: 'center', gap: 7, width: '100%',
           borderRadius: 0,
-          background: CARD_ALT, color: INK, fontSize: FS.xs, fontWeight: 850,
+          background: CARD_ALT, color: INK, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850,
           justifyContent: 'flex-start',
         }}
       >
@@ -213,7 +218,7 @@ export default function MapLegend() {
               </svg>
               <Label>low → high</Label>
             </div>
-            <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.3 }}>
+            <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.3 }}>
               Ring size scales with an impact&apos;s severity.
             </span>
           </div>

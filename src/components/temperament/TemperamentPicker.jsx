@@ -13,8 +13,11 @@ import { sans, serif_, FS, SP, R, INK, BODY, MUTED, BORDER, CARD, GOLD_DEEP, GRE
 import Card from '../primitives/Card.jsx';
 import Button from '../primitives/Button.jsx';
 import { TEMPERAMENTS } from '../../domain/worldPulse/temperamentPresets.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 export default function TemperamentPicker() {
+  const mobile = useIsMobile();
   const campaigns = useStore((s) => s.campaigns);
   const activeCampaignId = useStore((s) => s.activeCampaignId);
   const updateRules = useStore((s) => s.updateCampaignSimulationRules);
@@ -56,13 +59,13 @@ export default function TemperamentPicker() {
               </div>
               <p style={{ fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.6, margin: `${SP.xs}px 0 0` }}>{t.description}</p>
               {applied === t.id && (
-                <p style={{ fontFamily: sans, fontSize: FS.xs, color: GREEN_DEEP, margin: `${SP.xs}px 0 0` }}>
+                <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: GREEN_DEEP, margin: `${SP.xs}px 0 0` }}>
                   The age is set. The world will move to this temper from here.
                 </p>
               )}
             </div>
           ))}
-          <p style={{ fontFamily: sans, fontSize: FS.xs, fontStyle: 'italic', margin: 0, color: GOLD_DEEP }}>
+          <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), fontStyle: 'italic', margin: 0, color: GOLD_DEEP }}>
             You can change the temper at any time; it shapes what comes, never what has already passed.
           </p>
         </div>

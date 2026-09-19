@@ -20,9 +20,12 @@ import { INK, MUTED as MUT, SECOND as SEC, serif_, sans, FS } from '../theme.js'
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug, ANCHOR_SCROLL_MARGIN } from './registrySlug.js';
 import { Row } from './primitives.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // ── CALAMITY — the one unified bucket, honestly ──────────────────────────────
 export function CalamityHub() {
+  const mobile = useIsMobile();
   const { calamity } = CD;
   return (
     <div id="calamity" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
@@ -34,11 +37,11 @@ export function CalamityHub() {
       <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '4px 0 8px' }}>Flavours</div>
       {calamity.flavors.map((f) => (
         <div key={f.key} id={`calamity-${slug(f.key)}`} style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
-          <Row label={f.title} lw={140}><code style={{ fontFamily: 'monospace', fontSize: FS.xs, color: MUT }}>{f.key}</code></Row>
+          <Row label={f.title} lw={140}><code style={{ fontFamily: 'monospace', fontSize: chromeFontSize(FS.xs, mobile), color: MUT }}>{f.key}</code></Row>
         </div>
       ))}
       <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '16px 0 8px' }}>Severity bands</div>
-      <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '0 0 8px', fontFamily: sans, maxWidth: '40em' }}>Scale multiplies the deaths and exodus a calamity rolls; k-factor caps how far the settlement can rebuild afterward. The moderate band is exactly 1 and 1, so a forced strike is identical to a natural one.</p>
+      <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUT, fontStyle: 'italic', margin: '0 0 8px', fontFamily: sans, maxWidth: '40em' }}>Scale multiplies the deaths and exodus a calamity rolls; k-factor caps how far the settlement can rebuild afterward. The moderate band is exactly 1 and 1, so a forced strike is identical to a natural one.</p>
       {calamity.severityBands.map((b) => (
         <Row key={b.key} label={b.key} lw={140}>scale ×{b.scale} · k-factor {b.kFactor}</Row>
       ))}

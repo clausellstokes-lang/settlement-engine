@@ -16,6 +16,8 @@ import {
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { heraldDestinationForSceneAction } from './heraldCommandNavigation.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** @param {unknown} value @returns {string} */
 function text(value) {
@@ -32,6 +34,7 @@ function causeText(cause, reference) {
 }
 
 export default function HeraldSceneContext({ context, onDismiss }) {
+  const mobile = useIsMobile();
   if (!context) return null;
   const destination = heraldDestinationForSceneAction(context.action);
   if (!destination.action) return null;
@@ -63,7 +66,7 @@ export default function HeraldSceneContext({ context, onDismiss }) {
         <div>
           <div style={{
             color: SECOND,
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 850,
             letterSpacing: '0.07em',
             textTransform: 'uppercase',
@@ -93,7 +96,7 @@ export default function HeraldSceneContext({ context, onDismiss }) {
           gap: '3px 8px',
           margin: 0,
           color: BODY,
-          fontSize: FS.xs,
+          fontSize: chromeFontSize(FS.xs, mobile),
         }}
       >
         <dt style={{ color: INK, fontWeight: 800 }}>Action</dt>
@@ -117,7 +120,7 @@ export default function HeraldSceneContext({ context, onDismiss }) {
       </dl>
 
       {references.length > 0 && (
-        <div style={{ display: 'grid', gap: 4, color: BODY, fontSize: FS.xs }}>
+        <div style={{ display: 'grid', gap: 4, color: BODY, fontSize: chromeFontSize(FS.xs, mobile) }}>
           <strong style={{ color: INK }}>Why this is here</strong>
           <ul style={{ margin: 0, paddingInlineStart: 18 }}>
             {references.map((reference) => {
@@ -133,7 +136,7 @@ export default function HeraldSceneContext({ context, onDismiss }) {
         </div>
       )}
 
-      <p style={{ margin: 0, color: SECOND, fontSize: FS.micro }}>
+      <p style={{ margin: 0, color: SECOND, fontSize: proseFontSize(FS.micro, mobile) }}>
         These are the portrait compiler’s recorded references. The Herald has
         not guessed a story identity for this place.
       </p>

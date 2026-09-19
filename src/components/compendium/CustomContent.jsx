@@ -45,6 +45,8 @@ import { CustomContentUpsell } from './CustomContentGate.jsx';
 // stays under the component-size ratchet; re-exported for existing import sites.
 export { CUSTOM_CATEGORIES } from './customCategoryDefs.js';
 import { CUSTOM_CATEGORIES, CATEGORY_BY_KEY } from './customCategoryDefs.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const campaignLazy = importer => createRetryableCampaignLazy(useStore, importer);
 const CampaignContentBindingLifecycle = campaignLazy(() => import(
@@ -84,6 +86,7 @@ function commandFailureMessage(receipt, fallback) {
 }
 
 export function CustomContentManager({ search, initialCat }) {
+  const mobile = useIsMobile();
   const customContent = useStore(s => s.customContent);
   const previewBaseContent = useStore(s => (
     s.activeContentEnvironmentContent ?? s.customContent ?? {}
@@ -411,7 +414,7 @@ export function CustomContentManager({ search, initialCat }) {
           a background sync showed no status, so a later sync error popped with no
           preceding process to end (P10). */}
       {customContentLoading && !customContentError && (
-        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 12px', marginBottom:10, fontSize:FS.xs, color:BODY, fontStyle:'italic' }}>
+        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 12px', marginBottom:10, fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontStyle:'italic' }}>
           Syncing your custom content…
         </div>
       )}
@@ -448,10 +451,10 @@ export function CustomContentManager({ search, initialCat }) {
           lane placement alone never implies tick-time mechanical authority. */}
       {AUTHORING_LANES.map((lane, li) => (
         <div key={lane.key} data-testid={`authoring-lane-${lane.key}`} style={{ marginBottom: li < AUTHORING_LANES.length - 1 ? SP.xl : SP.md }}>
-          <div style={{ fontSize:FS.xs, fontWeight:800, color: lane.key === 'living' ? swatch['#7A5A1A'] : INK, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:2 }}>
+          <div style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color: lane.key === 'living' ? swatch['#7A5A1A'] : INK, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:2 }}>
             {lane.label}
           </div>
-          <div style={{ fontSize:FS.xs, color:BODY, lineHeight:1.4, marginBottom:6 }}>{lane.blurb}</div>
+          <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:BODY, lineHeight:1.4, marginBottom:6 }}>{lane.blurb}</div>
           <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
             {lane.buckets.map(key => {
               const c = CATEGORY_BY_KEY[key];
@@ -459,9 +462,9 @@ export function CustomContentManager({ search, initialCat }) {
               const count = (customContent[c.key]||[]).length;
               return (
                 <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
-                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, fontSize:chromeFontSize(FS.xs, mobile), fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
                   {c.label}
-                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+                  {count > 0 && <span style={{ fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, background:`${c.color}20`, color:c.color, padding:'0 4px', marginLeft:2 }}>{count}</span>}
                 </button>
               );
             })}
@@ -499,14 +502,14 @@ export function CustomContentManager({ search, initialCat }) {
       {/* Built-in seed picker (clone a catalog entry into an editable draft). */}
       {!addingNew && !editingId && showSeeds && seedEntries.length > 0 && (
         <div data-testid="builtin-seed-picker" style={{ borderLeft:`3px solid ${swatch.magic}`, padding:'8px 10px', marginBottom:10, background:CARD, maxHeight:200, overflowY:'auto' }}>
-          <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:6 }}>
+          <div style={{ fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:6 }}>
             Clone a built-in {catDef.label.toLowerCase().replace(/s$/,'')} as a starting point
           </div>
           <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
             {seedEntries.map(entry => (
               <Button key={entry.refId} variant="ghost" size="sm" onClick={() => cloneFromSeed(entry)}
                 style={{ display:'flex', alignItems:'center', gap:6, justifyContent:'flex-start', textAlign:'left', border:`1px solid ${BOR}`, padding:'5px 8px', background:'transparent', color:INK }}>
-                <span style={{ fontSize:FS.xs, fontWeight:600, flex:1 }}>{entry.name}</span>
+                <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:600, flex:1 }}>{entry.name}</span>
                 {entry.subcategory && <Tag label={entry.subcategory} color={catDef.color}/>}
               </Button>
             ))}
@@ -594,7 +597,7 @@ export function CustomContentManager({ search, initialCat }) {
                 <IconButton glyph="✎" label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
                 <IconButton glyph="−" label="Archive item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
               </div>
-              {(item.description || item.portfolio) && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description || item.portfolio}</div>}
+              {(item.description || item.portfolio) && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description || item.portfolio}</div>}
               <CustomItemAttributes item={item} bucket={activeCat} />
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
               {/* Affects pills (stressors only) */}
@@ -602,7 +605,7 @@ export function CustomContentManager({ search, initialCat }) {
                 <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>
                   {item.affects.map((a, i) => (
                     <span key={i} style={{
-                      fontSize:FS.micro, fontWeight:700, color:swatch.danger,
+                      fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, color:swatch.danger,
                       // Translucent danger fill — was solid swatch.danger on
                       // swatch.danger text, rendering the label invisible.
                       background:`${swatch.danger}14`, border:'1px solid #8b1a1a44',

@@ -39,6 +39,8 @@ import Button from './primitives/Button.jsx';
 import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_, FOOTER_INSET, HEADER_H, BOTTOM_NAV_H } from './theme.js';
 import { trackLandingView } from '../lib/landingFunnelAnalytics.js';
 import { tl } from '../copy/landing.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // Everything below the hero fold, code-split into ONE lazy chunk so the hero is
 // the only first-paint work on the landing surface (spec §8).
@@ -68,6 +70,7 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
   // pattern — landing_funnel_used feature:'view', once per session, via the
   // lazy helper (lib/landingFunnelAnalytics.js). This LANDS the previously
   // dormant Funnel.welcomeView seam.
+  const mobile = useIsMobile();
   useEffect(() => {
     trackLandingView();
   }, []);
@@ -176,7 +179,7 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
             style={{ marginTop: 'auto', paddingTop: SP.xxl, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, textDecoration: 'none' }}
           >
             <span style={{
-              fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
+              fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase',
               color: 'rgba(251,245,230,0.65)', whiteSpace: 'nowrap',
             }}>
               {tl('hero.scrollCue')}

@@ -15,8 +15,11 @@ import { useCallback, useEffect, useId, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import { useStore } from '../../store/index.js';
 import { MUTED, SECOND, SP, FS, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function FounderCreditToggle() {
+  const mobile = useIsMobile();
   const isFounder = useStore((s) => s.isFounder?.() ?? false);
   const [listed, setListed] = useState(null); // null = unknown, bool = known
   const [available, setAvailable] = useState(true); // false ⇒ column/RPC undeployed
@@ -65,7 +68,7 @@ export default function FounderCreditToggle() {
           onChange={(e) => onChange(e.target.checked)} />
         List my name in the founders credits
       </label>
-      <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, paddingLeft: 24 }}>
+      <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, paddingLeft: 24 }}>
         Your public gallery name appears in the credits on the About page.
       </span>
     </div>

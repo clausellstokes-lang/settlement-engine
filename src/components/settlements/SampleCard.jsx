@@ -1,5 +1,7 @@
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import { tierStockImage } from '../../domain/display/tierStockImage.js';
 
 // ⛔ THE LIBRARY'S EMPTY STATE SHOWED THREE TEXT PLATES (owner order ODQ
@@ -16,6 +18,7 @@ const SAMPLE_CARD_IMAGE_H = 96;
 // loads the sample's config into the wizard with a user-suffixed seed.
 
 export function SampleCard({ sample, onFork, forking }) {
+  const mobile = useIsMobile();
   return (
     <article style={{
       // Single-elevation surface: the colored left rail teaches phase (P5) and
@@ -44,7 +47,7 @@ export function SampleCard({ sample, onFork, forking }) {
           {sample.name}
         </h4>
         <span style={{
-          fontSize: FS.xs, fontWeight: 800, color: swatch['#7A5A1A'],
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: swatch['#7A5A1A'],
           background: 'rgba(201,162,76,0.14)',
           border: '1px solid rgba(201,162,76,0.45)',
           padding: '1px 6px', borderRadius: 999,
@@ -53,7 +56,7 @@ export function SampleCard({ sample, onFork, forking }) {
           Sample
         </span>
         <span style={{
-          marginLeft: 'auto', fontSize: FS.xs, color: MUTED,
+          marginLeft: 'auto', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED,
           textTransform: 'capitalize',
         }}>
           {sample.tier} · {sample.terrain}
@@ -68,7 +71,7 @@ export function SampleCard({ sample, onFork, forking }) {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
         {sample.tags.map(tag => (
           <span key={tag} style={{
-            fontSize: FS.xs, fontWeight: 700, color: SECOND,
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
             background: swatch['#FAF6EE'],
             border: `1px solid ${BORDER}`,
             padding: '1px 6px',

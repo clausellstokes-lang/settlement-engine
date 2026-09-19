@@ -43,6 +43,7 @@ import {
   sans,
   serif_,
 } from '../theme.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PAPER = swatch['#FFFBF5'];
 const MUTED = swatch.inkMag3;
@@ -294,7 +295,7 @@ function EntityInspector({ readOnly = false }) {
       }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            fontSize: FS.xxs,
+            fontSize: chromeFontSize(FS.xxs, mobile),
             color: MUTED,
             fontWeight: 800,
             textTransform: 'uppercase',
@@ -314,7 +315,7 @@ function EntityInspector({ readOnly = false }) {
               display: 'block',
               marginTop: 2,
               color: MUTED,
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
             }}
           >
             Inspect recorded state, provenance, connections, and available actions.
@@ -395,7 +396,7 @@ function EntityInspector({ readOnly = false }) {
           ) : (
             <p
               role="note"
-              style={{ margin: 0, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: 0, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               More than one legacy record shares this identity. It remains readable,
               but navigation and editing are disabled so SettlementForge does not guess.
@@ -404,7 +405,7 @@ function EntityInspector({ readOnly = false }) {
           {interactive && !readOnly && mobile && entry.type === 'npc' && (
             <p
               role="note"
-              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               NPC authoring remains available from this dossier on desktop.
             </p>
@@ -417,7 +418,7 @@ function EntityInspector({ readOnly = false }) {
             // hand-written text without warning. See QUEUE_WIRED_PROSE_PATHS.
             <p
               role="note"
-              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}
             >
               A character&rsquo;s secret can be hand-written on their card. Goal,
               personality, and role stay engine-managed for now. The NPC
@@ -452,6 +453,7 @@ function EntityInspector({ readOnly = false }) {
  * write-capability preflight, and a snapshot taken before any write.
  */
 function ChangeDock({ readOnly = false }) {
+  const mobile = useIsMobile();
   const queue = useStore(state => state.pendingEditsQueue || []);
   const receipts = useStore(state => state.pendingEditReceipts || []);
   const ownerKey = useStore(state => pendingEditOwnerScope(state).ownerKey);
@@ -517,7 +519,7 @@ function ChangeDock({ readOnly = false }) {
           >
             Change Dock
           </h2>
-          <span style={{ color: MUTED, fontSize: FS.xxs }}>
+          <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xxs, mobile) }}>
             This settlement only · each visible scope applies separately
           </span>
         </div>
@@ -530,7 +532,7 @@ function ChangeDock({ readOnly = false }) {
             margin: 0,
             padding: `${SP.sm}px ${SP.md}px 0`,
             color: MUTED,
-            fontSize: FS.xxs,
+            fontSize: proseFontSize(FS.xxs, mobile),
             lineHeight: 1.45,
           }}
         >
@@ -546,7 +548,7 @@ function ChangeDock({ readOnly = false }) {
           <div style={{
             marginBottom: 5,
             color: MUTED,
-            fontSize: FS.xxs,
+            fontSize: chromeFontSize(FS.xxs, mobile),
             fontWeight: 800,
           }}>
             Recent results
@@ -568,7 +570,7 @@ function ChangeDock({ readOnly = false }) {
                     {outcomeDetail ? `: ${outcomeDetail}` : ''}
                   </div>
                   {explanation && (
-                    <div style={{ color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+                    <div style={{ color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
                       <strong>Explanation</strong>{' '}
                       {words(explanation)}
                     </div>
@@ -588,12 +590,12 @@ function ChangeDock({ readOnly = false }) {
                 {undoButtonLabel(undoStatus)}
               </Button>
               {undoStatus === 'succeeded' && (
-                <span role="status" style={{ color: swatch.success, fontSize: FS.xxs }}>
+                <span role="status" style={{ color: swatch.success, fontSize: chromeFontSize(FS.xxs, mobile) }}>
                   The last applied batch was undone. The settlement now reflects its earlier snapshot.
                 </span>
               )}
               {undoStatus === 'failed' && (
-                <span role="alert" style={{ color: swatch.danger, fontSize: FS.xxs }}>
+                <span role="alert" style={{ color: swatch.danger, fontSize: chromeFontSize(FS.xxs, mobile) }}>
                   Undo was not completed. The applied result remains on record; you can try again.
                 </span>
               )}

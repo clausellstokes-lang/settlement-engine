@@ -23,6 +23,7 @@
 import { FIELD_INK } from '../../design/organic/ink.js';
 import { color, founderRingDeveloper, founderRingAdmin } from '../../design/tokens.js';
 import { FS, SP, sans, serif_ } from '../theme.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The Hall's grounds and inks. */
 export const HALL = Object.freeze({
@@ -53,10 +54,17 @@ export const RING_LABEL = Object.freeze({
   admin: 'Admin',
 });
 
-/** The engraved chair numeral: small caps, wide tracking, gold on dark. */
-export const numeralStyle = Object.freeze({
+/**
+ * The engraved chair numeral: small caps, wide tracking, gold on dark.
+ *
+ * A function of the viewport, not a frozen object: the numeral is chrome, so it
+ * takes the phone chrome floor (design/proseScale.js) below the breakpoint and
+ * its engraved desktop step above it.
+ * @param {boolean} mobile the viewport flag, from `useIsMobile()`
+ */
+export const numeralStyle = (mobile) => ({
   fontFamily: sans,
-  fontSize: FS.xxs,
+  fontSize: chromeFontSize(FS.xxs, mobile),
   fontWeight: 800,
   letterSpacing: '0.18em',
   textTransform: 'uppercase',
@@ -82,10 +90,14 @@ export const covenantProseStyle = Object.freeze({
   margin: 0,
 });
 
-/** A quiet supporting line (seating date, counters, notes). */
-export const quietLineStyle = Object.freeze({
+/**
+ * A quiet supporting line (seating date, counters, notes) — chrome, so it takes
+ * the phone chrome floor below the breakpoint and its own step above it.
+ * @param {boolean} mobile the viewport flag, from `useIsMobile()`
+ */
+export const quietLineStyle = (mobile) => ({
   fontFamily: sans,
-  fontSize: FS.xs,
+  fontSize: chromeFontSize(FS.xs, mobile),
   color: HALL.secondary,
   margin: 0,
 });

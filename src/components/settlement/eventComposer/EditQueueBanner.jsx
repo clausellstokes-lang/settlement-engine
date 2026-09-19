@@ -5,14 +5,17 @@
  */
 import { INK, BORDER, CARD, sans, FS, SP } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export default function EditQueueBanner({ onStop }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: 8,
       padding: SP.sm, marginBottom: SP.sm,
       border: `1px solid ${BORDER}`,
-      fontSize: FS.xxs, fontFamily: sans, color: INK, background: CARD,
+      fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: INK, background: CARD,
     }}>
       <span style={{ flex: 1 }}>
         Editing a queued order. Applying replaces it in place (same slot, same identity).

@@ -37,6 +37,8 @@ import { flag } from '../lib/flags.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
@@ -70,6 +72,7 @@ function resolveReturn() {
 
 export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }) {
   // Resolved once on mount — the URL params are stable for this landing.
+  const mobile = useIsMobile();
   const [ret] = useState(resolveReturn);
   const { sessionId, token } = ret;
 
@@ -285,7 +288,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         <Button variant="primary" size="lg" icon={<RefreshCw size={16} />} onClick={retryVerify}>
           Try again
         </Button>
-        <p style={{ margin: `${SP.md}px auto 0`, maxWidth: 420, fontSize: FS.xs, color: MUTED }}>
+        <p style={{ margin: `${SP.md}px auto 0`, maxWidth: 420, fontSize: proseFontSize(FS.xs, mobile), color: MUTED }}>
           Still stuck? <a href={supportMailto('Single dossier recovery')} style={{ color: GOLD, fontWeight: 600 }}>Email support</a>.
         </p>
       </div>
@@ -384,13 +387,13 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             <span style={{ fontSize: FS.sm, color: BODY }}>Single dossier</span>
             <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{SINGLE_DOSSIER.priceLabel}</span>
           </div>
-          <div style={{ fontSize: FS.xs, color: MUTED }}>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
             {new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date())}
           </div>
         </div>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
-          fontSize: FS.xs, color: MUTED, lineHeight: 1.55,
+          fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.55,
         }}>
           Receipt sent to the email you entered at checkout.
         </p>
@@ -438,7 +441,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       {/* The colophon — the maker's mark at the receipt's foot, under a rule. */}
       <div style={{
         marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${BORDER}`,
-        fontFamily: serif_, fontSize: FS.xs, letterSpacing: '0.14em',
+        fontFamily: serif_, fontSize: chromeFontSize(FS.xs, mobile), letterSpacing: '0.14em',
         textTransform: 'uppercase', color: MUTED,
       }}>
         SettlementForge

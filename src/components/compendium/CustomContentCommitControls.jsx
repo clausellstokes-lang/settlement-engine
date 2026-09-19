@@ -9,11 +9,13 @@
 
 import Button from '../primitives/Button.jsx';
 import { FS, MUTED as MUT } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
-const STATUS_STYLE = Object.freeze({
+const statusStyle = (mobile) => ({
   marginTop: 4,
   maxWidth: 260,
-  fontSize: FS.micro,
+  fontSize: chromeFontSize(FS.micro, mobile),
   color: MUT,
   lineHeight: 1.35,
 });
@@ -27,6 +29,7 @@ export default function CustomContentCommitControls({
   resetDraft,
   saveBusy,
 }) {
+  const mobile = useIsMobile();
   const hasName = Boolean(draft.name?.trim());
   const definitionIncomplete = hasName && !definitionReady;
   const statusMessage = definitionIncomplete
@@ -52,7 +55,7 @@ export default function CustomContentCommitControls({
           {editingId ? 'Create revision' : 'Add versioned definition'}
         </Button>
         {statusMessage && (
-          <div role="status" style={STATUS_STYLE}>
+          <div role="status" style={statusStyle(mobile)}>
             {statusMessage}
           </div>
         )}

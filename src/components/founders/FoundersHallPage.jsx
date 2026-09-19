@@ -42,14 +42,17 @@ import {
 import { viewToPath } from '../../lib/routes.js';
 import HouseDevice from '../brand/HouseDevice.jsx';
 import { PAGE_MAX, SP, FS, sans, serif_, EMPTY_VALUE } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The glance line. Held and open come from ONE count object — they cannot drift. */
 function HallCounter({ count }) {
+  const mobile = useIsMobile();
   return (
     <p
       aria-live="polite"
       style={{
-        margin: 0, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        margin: 0, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase', color: HALL.gold,
       }}
     >
@@ -62,15 +65,16 @@ function HallCounter({ count }) {
 
 /** The table rung of the ladder — folded away, but always reachable. */
 function HallTable({ roll }) {
+  const mobile = useIsMobile();
   if (roll.length === 0) return null;
-  const cell = { padding: `${SP.xs}px ${SP.md}px ${SP.xs}px 0`, textAlign: 'left', fontFamily: sans, fontSize: FS.xs, color: HALL.body };
+  const cell = { padding: `${SP.xs}px ${SP.md}px ${SP.xs}px 0`, textAlign: 'left', fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: HALL.body };
   return (
     <details style={{ marginTop: SP.lg }}>
-      <summary style={{ ...quietLineStyle, color: HALL.gold, cursor: 'pointer', fontWeight: 700 }}>
+      <summary style={{ ...quietLineStyle(mobile), color: HALL.gold, cursor: 'pointer', fontWeight: 700 }}>
         The roll, as a table
       </summary>
       <table style={{ marginTop: SP.sm, borderCollapse: 'collapse', width: '100%' }}>
-        <caption style={{ ...quietLineStyle, color: HALL.faint, textAlign: 'left', paddingBottom: SP.xs }}>
+        <caption style={{ ...quietLineStyle(mobile), color: HALL.faint, textAlign: 'left', paddingBottom: SP.xs }}>
           Every held chair, in the order the Hall shows them.
         </caption>
         <thead>
@@ -95,6 +99,7 @@ function HallTable({ roll }) {
 }
 
 export default function FoundersHallPage({ onNavigate }) {
+  const mobile = useIsMobile();
   const auth = useStore((s) => s.auth);
   const [chairs, setChairs] = useState([]);
   const [openChair, setOpenChair] = useState(null);
@@ -140,7 +145,7 @@ export default function FoundersHallPage({ onNavigate }) {
               icon and the dossier cover carry (ODQ §934.17). Decorative: the title
               under it already names the Hall, so it takes alt=''. */}
           <HouseDevice size={44} alt="" style={{ display: 'block', marginBottom: SP.sm }} />
-          <p style={{ ...numeralStyle, margin: `0 0 ${SP.xs}px` }}>By invitation, I&ndash;XXX</p>
+          <p style={{ ...numeralStyle(mobile), margin: `0 0 ${SP.xs}px` }}>By invitation, I&ndash;XXX</p>
           <h1 style={{
             margin: 0, fontFamily: serif_, fontSize: FS['28'], fontWeight: 700,
             color: HALL.ink, lineHeight: 1.12,
@@ -196,7 +201,7 @@ export default function FoundersHallPage({ onNavigate }) {
             Hall said nothing back, so the honor roll had no inbound link anywhere
             outside lib/routes.js. The two rolls are INDEPENDENT (§8), and the line
             says so rather than implying a ladder from one to the other. */}
-        <p style={{ ...quietLineStyle, color: HALL.faint, marginTop: SP.xl }}>
+        <p style={{ ...quietLineStyle(mobile), color: HALL.faint, marginTop: SP.xl }}>
           The First Hundred is a different roll, and an open one: an unpriced
           thank-you to the first hundred people to make a home here.{' '}
           <a

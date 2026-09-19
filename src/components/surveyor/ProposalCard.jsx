@@ -24,6 +24,8 @@ import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, SLATE, sans, SP, FS } fr
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { identityConsentNote } from '../../domain/intent/opVocabulary.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const OP_LABEL_TONE = { required: 'gold', inferred: 'info', optional: 'muted', uncertain: 'warning' };
 
@@ -40,6 +42,7 @@ const DEFAULT_LABELS = Object.freeze({
 const CONSENT_SENTENCE = 'This op touches a protected constraint. Tick to consent, or it will not apply.';
 
 export default function ProposalCard({ id, op, labels = {}, protectedFlags, decision, onDecide }) {
+  const mobile = useIsMobile();
   const requested = decision?.action;
   const action = ACTIONS.includes(requested) ? requested : 'pending';
   const flags = Array.isArray(protectedFlags)
@@ -76,7 +79,7 @@ export default function ProposalCard({ id, op, labels = {}, protectedFlags, deci
             opType for an unregistered/edited verb); the opType stays as a small
             monospace reference since it is the verb actually dispatched. */}
         <span style={{ fontSize: FS.sm, color: INK, fontFamily: sans, fontWeight: 700 }}>{operationLabel(op?.opType)}</span>
-        <code style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'monospace' }}>{op?.opType}</code>
+        <code style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: 'monospace' }}>{op?.opType}</code>
         {op?.label && <Badge tone={OP_LABEL_TONE[op.label] || 'muted'} size="sm">{op.label}</Badge>}
         {isProtected && <Badge tone="danger" size="sm">protected</Badge>}
         <span style={{ flex: 1 }} />
@@ -93,7 +96,7 @@ export default function ProposalCard({ id, op, labels = {}, protectedFlags, deci
           aria-label="Edit op type"
           value={editedType}
           onChange={(e) => emit({ action: 'edit', editedType: e.target.value })}
-          style={{ fontSize: FS.xs, fontFamily: sans, color: INK, border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px` }}
+          style={{ fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK, border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px` }}
         />
       )}
 
@@ -101,15 +104,15 @@ export default function ProposalCard({ id, op, labels = {}, protectedFlags, deci
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {Object.entries(params).map(([k, v]) => (
             <div key={k} style={{ display: 'flex', gap: SP.xs }}>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 78 }}>{k}</span>
-              <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{typeof v === 'object' ? JSON.stringify(v) : String(v)}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, minWidth: 78 }}>{k}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>{typeof v === 'object' ? JSON.stringify(v) : String(v)}</span>
             </div>
           ))}
         </div>
       )}
 
       {isProtected && (
-        <label htmlFor={`${id}-consent`} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, fontSize: FS.xs, color: RED, fontFamily: sans }}>
+        <label htmlFor={`${id}-consent`} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), color: RED, fontFamily: sans }}>
           <input
             id={`${id}-consent`}
             type="checkbox"

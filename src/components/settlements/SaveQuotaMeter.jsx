@@ -25,6 +25,8 @@ import { GOLD, GOLD_BG, INK, BODY, GOLD_TXT, FS, sans, swatch } from '../theme.j
 import { getTierDisplayName } from '../../config/pricing.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
@@ -40,6 +42,7 @@ export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns
  * }} props
  */
 export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn }) {
+  const mobile = useIsMobile();
   const isPremium = tier === 'premium' || max === Infinity;
   const isAnon = tier === 'anon';
   // Pre-launch lockout (lib/launchGate.js): Upgrade is a purchase control, so it
@@ -55,7 +58,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
         // add to the list's box-soup or out-rank the page header above it.
         display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
         padding: '7px 12px', background: swatch['#FBF5E6'],
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
@@ -126,7 +129,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
             // borderless meter strip re-introduced a box-on-tint and undercut the
             // strip's demotion (P5). GOLD_BG fill + bold GOLD_TXT carry it,
             // matching the card pips' tint-only pattern.
-            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: GOLD_TXT,
+            display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), color: GOLD_TXT,
             fontWeight: 700, background: GOLD_BG, padding: '2px 8px',
           }}>
             {PREMIUM_PITCH}

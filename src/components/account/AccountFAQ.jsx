@@ -22,6 +22,8 @@ import { BODY, MUTED, sans, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Disclosure from '../primitives/Disclosure.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
@@ -41,6 +43,7 @@ const Q_KEYS = [
 // Account page itself (the default), that link would point at the page the
 // reader is already on — a decoy — so the phrase stays plain text.
 export default function AccountFAQ({ linkAccount = false, onNavigate } = {}) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', gap: SP.sm,
@@ -64,7 +67,7 @@ export default function AccountFAQ({ linkAccount = false, onNavigate } = {}) {
         );
       })}
       <div style={{
-        marginTop: 4, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+        marginTop: 4, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
         fontFamily: sans,
       }}>
         {linkAccount

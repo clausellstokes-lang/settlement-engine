@@ -13,6 +13,8 @@ import {
   TIER_OPTIONS,
 } from './galleryUtils.js';
 import GalleryFilterShell, { SidebarSection } from './GalleryFilterShell.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function FilterChips({ options, value = [], onToggle }) {
   const selected = new Set(value);
@@ -38,6 +40,7 @@ function FilterChips({ options, value = [], onToggle }) {
 }
 
 function ToggleRow({ checked, label, onChange }) {
+  const mobile = useIsMobile();
   const inputId = useId();
   return (
     <label htmlFor={inputId} style={{
@@ -46,7 +49,7 @@ function ToggleRow({ checked, label, onChange }) {
       gap: 8,
       color: INK,
       fontFamily: sans,
-      fontSize: FS.xs,
+      fontSize: chromeFontSize(FS.xs, mobile),
       fontWeight: 850,
       cursor: 'pointer',
     }}>

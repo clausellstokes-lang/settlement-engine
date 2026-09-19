@@ -1,5 +1,7 @@
 import { FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // ── Button group state ─────────────────────────────────────────────────────
 // Three distinct buttons replace the old single action so view-toggling
@@ -28,13 +30,14 @@ export default function DossierNarrativeButtons({
     // moved to a slim hint line below the tab strip so the header stays
     // focused on what the user just generated. This avoids a teaser button
     // that can't actually fire.
+    const mobile = useIsMobile();
     if (!narrativeEnabled) return null;
 
     const costLabel = isConfigured ? ` (${getCost('narrative')} credits)` : '';
     const btnBase = {
       display: 'flex', alignItems: 'center', gap: 6,
       padding: '6px 14px',
-      fontSize: FS.xs, fontWeight: 800,
+      fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
       transition: 'all 0.2s', whiteSpace: 'nowrap',
       cursor: 'pointer',
@@ -51,7 +54,7 @@ export default function DossierNarrativeButtons({
             size="sm"
             onClick={runNarrativeLayer}
             title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
-            icon={<span style={{ fontSize: FS.xs }}>{'\u2726'}</span>}
+            icon={<span style={{ fontSize: chromeFontSize(FS.xs, mobile) }}>{'\u2726'}</span>}
           >
             {`Generate Narrative${costLabel}`}
           </Button>

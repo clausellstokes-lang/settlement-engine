@@ -46,6 +46,8 @@ import useAboutHashScroll from './about/useAboutHashScroll.js';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
 import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 // Responsive multi-column container for card/list-heavy section content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop page with as
@@ -122,6 +124,7 @@ export const SECTION_BLURBS = Object.freeze({
  * cannot list a section this page does not render, nor miss one it does.
  */
 function SectionNav() {
+  const mobile = useIsMobile();
   return (
     <nav aria-label="Sections of this guide" style={{ margin: '0 0 34px' }}>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
@@ -132,7 +135,7 @@ function SectionNav() {
             <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, marginBottom:4 }}>
               {u.heading}
             </div>
-            <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{SECTION_BLURBS[u.id]}</div>
+            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{SECTION_BLURBS[u.id]}</div>
           </a>
         ))}
       </div>
@@ -150,10 +153,11 @@ function SubHead({ children, size = FS.md }) {
 }
 
 function Step({ n, children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start' }}>
       <div style={{ width:22, height:22, borderRadius:'50%', background:GOLD, color:swatch.white,
-        fontSize:FS.xs, fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
+        fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, marginTop:1 }}>
         {n}
       </div>
       <p style={{ fontSize: FS['12.5'], color:INK, lineHeight:1.6, margin:0 }}>{children}</p>

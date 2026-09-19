@@ -18,6 +18,8 @@ import { RELATIONSHIP_SELECTIONS, relationshipDefinition, directionalRelationshi
 import { INK, SECOND, MUTED, sans, FS } from '../../theme.js';
 import { Field } from './Field.jsx';
 import { selectStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../../design/proseScale.js';
 
 /**
  * The OTHER saved settlements this one can still link to: every save that is not
@@ -35,11 +37,12 @@ export function linkableSiblings(savedSettlements, settlement, activeSaveId) {
 export function EventComposerLinkNeighbourField({
   settlement, savedSettlements, activeSaveId, partnerSaveId, setPartnerSaveId, linkRelType, setLinkRelType,
 }) {
+  const mobile = useIsMobile();
   const others = linkableSiblings(savedSettlements, settlement, activeSaveId);
   if (others.length === 0) {
     return (
       <Field label="Link a neighbour">
-        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, maxWidth: 320, fontFamily: sans, padding: '5px 0' }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, maxWidth: 320, fontFamily: sans, padding: '5px 0' }}>
           A link connects this settlement to another in your library. You have no other saved settlements to link yet.
         </div>
       </Field>
@@ -53,7 +56,7 @@ export function EventComposerLinkNeighbourField({
   return (
     <>
       <Field label="Neighbour" hint="Connect this settlement to another in your library">
-        <select value={partnerSaveId || ''} onChange={e => setPartnerSaveId(e.target.value)} style={selectStyle}>
+        <select value={partnerSaveId || ''} onChange={e => setPartnerSaveId(e.target.value)} style={selectStyle(mobile)}>
           <option value="">Pick a settlement…</option>
           {others.map(s => <option key={s.id} value={s.id}>{s.name}{s.tier ? ` (${s.tier})` : ''}</option>)}
         </select>
@@ -64,12 +67,12 @@ export function EventComposerLinkNeighbourField({
           ? `This settlement will be: ${phrase}`
           : 'If both settlements share a campaign, the link surfaces in the realm graph automatically'}
       >
-        <select value={linkRelType} onChange={e => setLinkRelType(e.target.value)} style={selectStyle}>
+        <select value={linkRelType} onChange={e => setLinkRelType(e.target.value)} style={selectStyle(mobile)}>
           {RELATIONSHIP_SELECTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </Field>
       {phrase && (
-        <span style={{ fontSize: FS.xxs, color: SECOND, alignSelf: 'flex-end', maxWidth: 200, lineHeight: 1.4 }}>
+        <span style={{ fontSize: proseFontSize(FS.xxs, mobile), color: SECOND, alignSelf: 'flex-end', maxWidth: 200, lineHeight: 1.4 }}>
           <span style={{ color: INK, fontWeight: 700 }}>{phrase}</span>
         </span>
       )}

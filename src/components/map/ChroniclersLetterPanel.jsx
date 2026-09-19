@@ -34,6 +34,8 @@ import { composeChroniclersLetter, letterToPlainText } from '../../domain/displa
 import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The R-17 export: a portable, house-voiced text file (the downloadBlob idiom,
  *  inlined so the panel drags no heavy export module). C2 (bar 18): the filename
@@ -58,6 +60,7 @@ function downloadLetter(text, tick) {
  * @param {'dm'|'player'|'public'} [props.audience]
  */
 export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
+  const mobile = useIsMobile();
   const markCampaignLettersRead = useStore((s) => s.markCampaignLettersRead);
 
   const letter = useMemo(() => composeChroniclersLetter({
@@ -73,10 +76,10 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
   return (
     <div data-testid="chroniclers-letter" style={{ display: 'grid', gap: SP.sm }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           <Mail size={13} /> The Chronicler’s Letter
         </div>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
           tick {letter.sinceTick} → {letter.throughTick}
         </span>
       </div>
@@ -89,10 +92,10 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
 
         {letter.deepened && (
           <div data-testid="letter-deepened" style={{ borderLeft: `2px solid ${GOLD}`, paddingLeft: 8 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850 }}>
               <Sparkles size={10} color={GOLD} /> {letter.deepened.lead}
             </div>
-            <ul style={{ margin: '3px 0 0', paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+            <ul style={{ margin: '3px 0 0', paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
               {letter.deepened.flags.map((f) => <li key={f}>{f}</li>)}
             </ul>
           </div>
@@ -100,18 +103,18 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
 
         {letter.sections.map((s) => (
           <div key={s.id} data-testid={`letter-section-${s.id}`}>
-            <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               {s.heading}
             </div>
             <ul style={{ margin: '3px 0 0', paddingLeft: 16, display: 'grid', gap: 3 }}>
               {s.lines.map((l) => (
-                <li key={l.id} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+                <li key={l.id} style={{ color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                   <span style={{ fontWeight: l.significance === 'major' ? 800 : 650 }}>{l.headline}</span>
-                  {l.significance === 'major' && <span style={{ color: RED, fontSize: FS.micro, fontWeight: 800 }}> · of great moment</span>}
-                  {(l.repeats || 1) > 1 && <span style={{ color: MUTED, fontSize: FS.micro }}> · so noted {l.repeats} times</span>}
-                  {l.summary ? <div style={{ color: BODY, fontSize: FS.micro, lineHeight: 1.4 }}>{l.summary}</div> : null}
+                  {l.significance === 'major' && <span style={{ color: RED, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}> · of great moment</span>}
+                  {(l.repeats || 1) > 1 && <span style={{ color: MUTED, fontSize: chromeFontSize(FS.micro, mobile) }}> · so noted {l.repeats} times</span>}
+                  {l.summary ? <div style={{ color: BODY, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>{l.summary}</div> : null}
                   {l.recalls ? (
-                    <div style={{ color: MUTED, fontSize: FS.micro, fontStyle: 'italic', lineHeight: 1.4 }}>
+                    <div style={{ color: MUTED, fontSize: proseFontSize(FS.micro, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
                       In this my earlier record returns, from {l.recalls.when}: {l.recalls.headline}.
                     </div>
                   ) : null}
@@ -122,11 +125,11 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
         ))}
 
         {letter.truncationNote ? (
-          <p data-testid="letter-truncation-note" style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic', lineHeight: 1.4 }}>
+          <p data-testid="letter-truncation-note" style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), fontStyle: 'italic', lineHeight: 1.4 }}>
             {letter.truncationNote}
           </p>
         ) : null}
-        <p style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontStyle: 'italic', borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
+        <p style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), fontStyle: 'italic', borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
           {letter.closing}
         </p>
       </div>
@@ -144,7 +147,7 @@ export default function ChroniclersLetterPanel({ campaign, audience = 'dm' }) {
           style={{ minHeight: undefined }}>
           <Download size={12} /> Export
         </Button>
-        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
           {letter.counts.total} new · {letter.counts.major} of moment
         </span>
       </div>

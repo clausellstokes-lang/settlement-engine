@@ -22,6 +22,8 @@ import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
 import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, swatch, PARCH_100 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
 // C2L surface 2 — the reality-mode scroll-unfurl backdrop over the booting FMG
@@ -76,6 +78,7 @@ function WorldMapStageImpl({
   tier,
 }) {
   // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const mobile = useIsMobile();
   const placements    = useStore(s => s.mapState.placements);
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const mapMode       = useStore(s => s.mapMode);
@@ -395,7 +398,7 @@ function WorldMapStageImpl({
                     padding: '8px 12px', background: INK,
                     color: PARCH_100,
                     border: `1px solid ${GOLD}`,
-                    fontSize: FS.xs, lineHeight: 1.45,
+                    fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.45,
                     pointerEvents: 'none', maxWidth: 220,
                   }}
                 >
@@ -424,7 +427,7 @@ function WorldMapStageImpl({
               <div style={{
                 position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)',
                 background: INK, color: PARCH_100, border: `1px solid ${GOLD}`,
-                padding: '6px 10px', fontSize: FS.xs,
+                padding: '6px 10px', fontSize: chromeFontSize(FS.xs, mobile),
               }}
               >
                 Readying the placement target…

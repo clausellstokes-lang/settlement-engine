@@ -7,6 +7,8 @@ import {
 import Button from './Button.jsx';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
   // Shared focus trap: focus-in on open, Tab cycling, Escape-to-cancel, and
@@ -183,6 +185,7 @@ export function ChoiceDialog({
   onChoose,
   onCancel,
 }) {
+  const mobile = useIsMobile();
   return (
     <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
@@ -208,7 +211,7 @@ export function ChoiceDialog({
           >
             <div style={{ fontSize: FS.sm, fontWeight: 900 }}>{choice.label}</div>
             {choice.description && (
-              <div style={{ marginTop: SP.xs, color: BODY, fontSize: FS.xs, lineHeight: 1.4 }}>
+              <div style={{ marginTop: SP.xs, color: BODY, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
                 {choice.description}
               </div>
             )}
@@ -233,6 +236,7 @@ export function TextInputDialog({
   onConfirm,
   onCancel,
 }) {
+  const mobile = useIsMobile();
   const inputId = useId();
   return (
     <Shell open={open} title={title} body={body} tone="default" onCancel={onCancel}>
@@ -246,7 +250,7 @@ export function TextInputDialog({
       >
         {label && (
           // eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting the input would break the flex layout
-          <label htmlFor={inputId} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+          <label htmlFor={inputId} style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
             {label}
           </label>
         )}

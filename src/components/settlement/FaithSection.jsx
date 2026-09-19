@@ -35,7 +35,7 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';;
 
 const TONE_COLOR = { good: GREEN, gold: GOLD, bad: RED };
 const TREND = {
@@ -46,10 +46,11 @@ const TREND = {
 
 /** A slim labelled 0..1 meter (dual-channel: bar width + the % in the label). */
 function Meter({ label, value, color = GOLD }) {
+  const mobile = useIsMobile();
   const pct = Math.round(Math.max(0, Math.min(1, value)) * 100);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>
         <span>{label}</span><span>{pct}%</span>
       </div>
       <div
@@ -95,7 +96,7 @@ function ActiveFaith({ model }) {
         <Sparkles size={16} color={GOLD} />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Faith</span>
         {!live && (
-          <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>· newly founded</span>
+          <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>· newly founded</span>
         )}
       </header>
 
@@ -117,7 +118,7 @@ function ActiveFaith({ model }) {
               size="sm"
               onClick={() => setFaithOpen((v) => !v)}
               aria-expanded={faithOpen}
-              style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, justifyContent: 'flex-start' }}
+              style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, justifyContent: 'flex-start' }}
             >
               {faithOpen ? '▾' : '▸'} How this faith couples ({effects.length})
             </Button>
@@ -135,7 +136,7 @@ function ActiveFaith({ model }) {
 
         {/* Cults */}
         {cults.length > 0 && (
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
             <strong>Cults:</strong>{' '}
             {cults.map((c, i) => (
               <span key={`${c.name}-${i}`}>
@@ -151,7 +152,7 @@ function ActiveFaith({ model }) {
         {/* Piety arc — the devotion reading + where it's headed + the drivers */}
         {piety && (
           <div data-testid="faith-piety" style={{ display: 'flex', flexDirection: 'column', gap: 7, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
-            <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+            <div style={{ color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
               <strong>Devotion:</strong>{' '}
               <span style={{ fontWeight: 800, textTransform: 'capitalize' }}>{piety.band}</span>
               {' · '}
@@ -176,9 +177,9 @@ function ActiveFaith({ model }) {
         {/* Pantheon standings — each creed's share + legitimacy band */}
         {ranks.length > 0 && (
           <div data-testid="pantheon-standings" style={{ display: 'flex', flexDirection: 'column', gap: 6, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
-            <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>Pantheon standings</div>
+            <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>Pantheon standings</div>
             {ranks.map((d) => (
-              <div key={d.name} style={{ fontFamily: sans, fontSize: FS.xxs, color: BODY, lineHeight: 1.4 }}>
+              <div key={d.name} style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4 }}>
                 <span style={{ fontWeight: 800, color: INK }}>{d.name}</span>
                 {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
                 <span style={{ color: TONE_COLOR[d.band.tone], fontWeight: 700 }}>{d.band.label}</span>{' '}
@@ -193,7 +194,7 @@ function ActiveFaith({ model }) {
               </div>
             ))}
             {unaffiliated != null && unaffiliated > 0 && (
-              <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, lineHeight: 1.4 }}>
+              <div style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, lineHeight: 1.4 }}>
                 Unaffiliated: {unaffiliated}% keep no god.
               </div>
             )}
@@ -211,7 +212,7 @@ function ActiveFaith({ model }) {
 
         {/* Divine mandate — faith → governance legitimacy */}
         {mandate && (
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
             <strong>Divine mandate:</strong>{' '}
             <span style={{ color: mandate.propping ? GREEN : RED, fontWeight: 700 }}>{mandate.phrase}</span>
           </div>
@@ -269,7 +270,7 @@ function FaithTeaser({ publicDossier }) {
             size="sm"
             disabled={!purchasesAreOpen}
             onClick={onUpsell}
-            style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, justifyContent: 'flex-start', ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}
+            style={{ background: 'none', border: 'none', padding: 0, minHeight: 32, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, justifyContent: 'flex-start', ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}
           >
             Awaken the pantheon →
             {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}

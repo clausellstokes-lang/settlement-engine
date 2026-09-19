@@ -17,6 +17,8 @@ import { forecastFingerprint } from '../../domain/worldPulse/forecastFingerprint
 import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const INTERVALS = Object.freeze([
   ['one_week', 'Week'], ['one_month', 'Month'], ['one_season', 'Season'], ['one_year', 'Year'],
@@ -33,6 +35,7 @@ function intervalLabel(interval) {
 }
 
 export default function RealmForecast({ campaign }) {
+  const mobile = useIsMobile();
   const saves = useStore(s => s.savedSettlements);
   const [interval, setSpan] = useState('one_month');
   const [running, setRunning] = useState(false);
@@ -97,7 +100,7 @@ export default function RealmForecast({ campaign }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 6,
-          fontSize: FS.xs, fontWeight: 800, fontFamily: sans, color: MUTED,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans, color: MUTED,
           letterSpacing: '0.06em', textTransform: 'uppercase',
         }}>
           <Telescope size={12} /> Forecast the pending future
@@ -128,7 +131,7 @@ export default function RealmForecast({ campaign }) {
               marginBottom: SP.sm,
               color: INK,
               fontFamily: sans,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               fontWeight: 800,
             }}
           >
@@ -137,7 +140,7 @@ export default function RealmForecast({ campaign }) {
           {stale && (
             <div style={{
               padding: SP.sm, marginBottom: SP.sm, border: `1px dashed ${BORDER}`,
-              fontSize: FS.xxs, fontFamily: sans, color: MUTED,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED,
             }}>
               The world or the docket changed underneath this forecast. It no longer speaks for the pending future. Run it again.
             </div>
@@ -145,7 +148,7 @@ export default function RealmForecast({ campaign }) {
           {(view.refusals || []).length > 0 && (
             <section
               aria-labelledby="realm-forecast-refusals"
-              style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginBottom: SP.sm }}
+              style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, marginBottom: SP.sm }}
             >
               <div id="realm-forecast-refusals" style={{ color: INK, fontWeight: 850 }}>
                 Orders currently expected to be refused
@@ -164,7 +167,7 @@ export default function RealmForecast({ campaign }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
             {view.digest.members.map(m => (
               <div key={m.saveId} style={{ padding: SP.sm, border: `1px solid ${BORDER}`, background: CARD }}>
-                <div style={{ fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700 }}>
+                <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK, fontWeight: 700 }}>
                   {m.name}
                   <span style={{ color: MUTED, fontWeight: 400, marginLeft: 8 }}>
                     {formatCount(m.populationBefore)} → {formatCount(m.populationAfter)}
@@ -172,7 +175,7 @@ export default function RealmForecast({ campaign }) {
                   </span>
                 </div>
                 {m.beats.slice(0, 5).map((b, i) => (
-                  <div key={i} style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: 2 }}>
+                  <div key={i} style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, marginTop: 2 }}>
                     {Number.isFinite(b.tick) ? `Week ${b.tick}: ` : ''}{b.headline}
                   </div>
                 ))}
@@ -186,24 +189,24 @@ export default function RealmForecast({ campaign }) {
           {(view.digest.realm || []).length > 0 && (
             <div style={{ marginTop: SP.sm, padding: SP.sm, border: `1px solid ${BORDER}`, background: CARD }}>
               <div style={{
-                fontSize: FS.xxs, fontWeight: 800, fontFamily: sans, color: MUTED,
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, fontFamily: sans, color: MUTED,
                 letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2,
               }}>
                 Across the realm
               </div>
               {view.digest.realm.slice(0, 6).map((b, i) => (
-                <div key={i} style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: 2 }}>
+                <div key={i} style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, marginTop: 2 }}>
                   {Number.isFinite(b.tick) ? `Week ${b.tick}: ` : ''}{b.headline}
                 </div>
               ))}
             </div>
           )}
           {view.digest.pauseMarkers.length > 0 && (
-            <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: SP.xs }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, marginTop: SP.xs }}>
               {view.digest.pauseMarkers.length} moment{view.digest.pauseMarkers.length === 1 ? '' : 's'} where the world would await your word (auto-resolved with defaults here).
             </div>
           )}
-          <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
+          <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
             This is a deterministic, bounded projection from the recorded snapshot through the selected interval.
             It includes the current docket and organic realm changes, assumes no later edits or party actions, and
             uses defaults where the world would await your word. A queued party action&apos;s wider realm ripple is

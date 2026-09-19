@@ -1,5 +1,7 @@
 import { FS, SP, INK, MUTED, sans, serif_ } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * primitives/Stat — one labelled figure, read as a clean ledger entry.
@@ -17,13 +19,14 @@ import { useIconsOn } from './IconsContext.js';
  * @param {'sm'|'md'} [props.size='md']
  */
 export default function Stat({ label, value, tone, icon: Icon, size = 'md' }) {
+  const mobile = useIsMobile();
   const iconsOn = useIconsOn();
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: SP.sm, minWidth: 0 }}>
       {iconsOn && Icon && <Icon size={size === 'sm' ? 14 : 16} aria-hidden="true" />}
       <div style={{ minWidth: 0 }}>
         <div style={{
-          fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
+          fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
           letterSpacing: '0.06em', textTransform: 'uppercase',
           color: MUTED, lineHeight: 1.2,
         }}>

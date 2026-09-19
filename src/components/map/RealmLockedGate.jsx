@@ -36,6 +36,8 @@ import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SP, sans } from '
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The gate's heading. Exported so a test pins the words in one place. */
 export const REALM_GATE_HEADING = 'The Realm comes alive with Cartographer';
@@ -68,6 +70,7 @@ export default function RealmLockedGate({
   // conversion CTA and closes with the pill exactly like its siblings; "Sign in"
   // is account creation, not a purchase, and stays live — the same split the
   // save meter and the compendium gate apply.
+  const mobile = useIsMobile();
   const purchasesAreOpen = purchasesOpen();
   const isAnon = tier === 'anon';
 
@@ -122,7 +125,7 @@ export default function RealmLockedGate({
             background: CARD, borderLeft: `3px solid ${previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : GOLD}`,
           }}
         >
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             Conflict · your realm
           </span>
           <span aria-hidden style={{
@@ -138,7 +141,7 @@ export default function RealmLockedGate({
           these are load-bearing benefit prose, not quiet scent (P7). The lines are
           REALM_GATE_VALUE_LINES above: two since the owner's 2026-09-19 order folded the
           war layer and the pantheon into one. */}
-      <ul style={{ margin: 0, paddingLeft: 18, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.7 }}>
+      <ul style={{ margin: 0, paddingLeft: 18, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.7 }}>
         {REALM_GATE_VALUE_LINES.map((line) => <li key={line}>{line}</li>)}
       </ul>
       {/* The gate ends in an ACTION. It used to promise an anonymous viewer that

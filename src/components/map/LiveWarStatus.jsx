@@ -46,6 +46,8 @@ import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED,
 import WarCausalBrief from './WarCausalBrief.jsx';
 import { AffectedSettlements } from './AddressChain.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function nameFor(nameById, id) {
   return nameById.get(String(id)) || String(id);
@@ -62,6 +64,7 @@ const TONE_ICON = { danger: Swords, trade: ArrowLeftRight, neutral: Flag };
 // rendered as LINKS below the detail so a DM can jump to each settlement's dossier.
 // The prose heading is left untouched (it stays authored copy off the voice census).
 function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
+  const mobile = useIsMobile();
   const accent = tone === 'danger' ? RED : tone === 'trade' ? BLUE : GOLD;
   const KindIcon = TONE_ICON[tone] || Flag;
   return (
@@ -74,8 +77,8 @@ function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
       background: CARD,
     }}>
       <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
-      {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
+      {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>{detail}</div>}
       {addressIds.length > 0 && (
         <div style={{ gridColumn: 2, marginTop: 2 }}>
           <AffectedSettlements ids={addressIds} label="Settlements" />
@@ -86,6 +89,7 @@ function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
 }
 
 export default function LiveWarStatus({ campaign, nameById = new Map() }) {
+  const mobile = useIsMobile();
   const worldState = campaign?.worldState || {};
   const regionalGraph = campaign?.regionalGraph || worldState.regionalGraph || null;
 
@@ -189,7 +193,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
         {standings.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             <Subhead label={REALM_CONTEST_RECORD_LABEL} />
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
               {REALM_CONTEST_RECORD_HELP}
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -202,7 +206,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                     border: `1px solid ${BORDER2}`,
                     background: aggressor ? swatch.dangerBg : CARD_ALT,
                     color: aggressor ? RED : BODY,
-                    fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
+                    fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
                   }}>
                     <RealmEntityLink settlementSaveId={s.id} label={nameFor(nameById, s.id)} style={{ color: 'inherit' }} />
                     <span>: {s.wins}W / {s.losses}L</span>
@@ -218,9 +222,10 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
 }
 
 function Subhead({ label }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
-      color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900,
+      color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900,
       textTransform: 'uppercase', letterSpacing: '0.06em',
       borderBottom: `1px solid ${BORDER}`, paddingBottom: 4,
     }}>

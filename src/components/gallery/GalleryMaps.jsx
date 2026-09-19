@@ -24,8 +24,11 @@ import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OP
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
 import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function GalleryMaps({ onNavigate }) {
+  const mobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const importGalleryMap = useStore(s => s.importGalleryMap);
   const importGalleryMapWithCampaign = useStore(s => s.importGalleryMapWithCampaign);
@@ -167,10 +170,10 @@ export default function GalleryMaps({ onNavigate }) {
                   {d.description && <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>{d.description}</div>}
                   {memberList.length > 0 && (
                     <div>
-                      <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: INK, margin: `${SP.xs}px 0` }}>Settlements ({memberList.length})</div>
+                      <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: INK, margin: `${SP.xs}px 0` }}>Settlements ({memberList.length})</div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
                         {memberList.map((mm, i) => (
-                          <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
+                          <span key={mm.old_id || i} style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
                             {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
                           </span>
                         ))}
@@ -241,21 +244,21 @@ export default function GalleryMaps({ onNavigate }) {
                 <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared map'} loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               ) : (
-                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: FS.xs, background: PARCH }}>
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: chromeFontSize(FS.xs, mobile), background: PARCH }}>
                   Generated terrain
                 </div>
               )}
-              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
+              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
                 {m.kind === 'map_with_campaign' ? 'Map + Campaign' : 'Blank map'}
               </span>
             </div>
             <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.xs, flex: 1 }}>
               <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{m.name || 'Untitled map'}</div>
-              {m.description && <div style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.4, maxHeight: 54, overflow: 'hidden' }}>{m.description}</div>}
+              {m.description && <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.4, maxHeight: 54, overflow: 'hidden' }}>{m.description}</div>}
               {Array.isArray(m.tags) && m.tags.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
                   {m.tags.slice(0, 4).map((t) => (
-                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
+                    <span key={t} style={{ fontSize: chromeFontSize(FS.pico, mobile), color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
                   ))}
                 </div>
               )}

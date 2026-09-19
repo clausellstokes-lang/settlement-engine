@@ -30,13 +30,15 @@ import { purchasesOpen } from '../../lib/launchGate.js';
 import {
   GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, FS, swatch, AMBER_DEEP } from '../theme.js';
 import { TINT_GOLD, TINT_VIOLET } from './accountTheme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Matches the "Purchase Credits" block-label idiom in the parent section.
-const BLOCK_LABEL = {
+const blockLabel = (mobile) => ({
   display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.md,
-  fontSize: FS.xs, fontWeight: 700, color: SECOND,
+  fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
   textTransform: 'uppercase', letterSpacing: '0.06em',
-};
+});
 
 /**
  * Referral pitch + the reader's own account ID with copy-to-clipboard.
@@ -44,6 +46,7 @@ const BLOCK_LABEL = {
  * @param {{ isFounder: boolean }} props.auth
  */
 export function ReferralCard({ auth }) {
+  const mobile = useIsMobile();
   const [copied, setCopied] = useState(false);
   // OURS doesn't thread account_number through auth state (THEIRS does), so the
   // card fetches the caller's own immutable handle once. null = still loading.
@@ -72,7 +75,7 @@ export function ReferralCard({ auth }) {
 
   return (
     <div style={{ marginTop: SP.lg }}>
-      <div style={BLOCK_LABEL}>{t('account.referralLabel')}</div>
+      <div style={blockLabel(mobile)}>{t('account.referralLabel')}</div>
       <div style={{
         background: GOLD_BG, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
@@ -107,7 +110,7 @@ export function ReferralCard({ auth }) {
             </Button>
           </div>
         ) : (
-          <span style={{ fontSize: FS.xs, color: SECOND }}>{t('account.referralNoId')}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND }}>{t('account.referralNoId')}</span>
         )}
       </div>
     </div>
@@ -121,6 +124,7 @@ export function ReferralCard({ auth }) {
  * @param {() => void} props.onNavigatePricing
  */
 export function RedeemBlock({ onNavigatePricing }) {
+  const mobile = useIsMobile();
   const [code, setCode] = useState('');
   const [checking, setChecking] = useState(false);
   const [note, setNote] = useState(null); // { tone: 'ok'|'warn', text }
@@ -184,12 +188,12 @@ export function RedeemBlock({ onNavigatePricing }) {
 
   return (
     <div style={{ marginTop: SP.lg }}>
-      <div style={BLOCK_LABEL}>{t('account.redeemLabel')}</div>
+      <div style={blockLabel(mobile)}>{t('account.redeemLabel')}</div>
       <div style={{
         background: TINT_VIOLET, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
-        <span style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
+        <span style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.5 }}>
           {t('account.redeemHint')}
         </span>
         <form onSubmit={apply} style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -222,7 +226,7 @@ export function RedeemBlock({ onNavigatePricing }) {
           <div
             role="status"
             style={{
-              fontSize: FS.xs, lineHeight: 1.5, fontFamily: sans,
+              fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, fontFamily: sans,
               color: note.tone === 'ok' ? swatch['#2A7A2A'] : AMBER_DEEP,
             }}
           >

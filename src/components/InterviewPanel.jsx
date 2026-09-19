@@ -25,6 +25,7 @@ import useIsMobile from '../hooks/useIsMobile.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
+import { chromeFontSize } from '../design/proseScale.js';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM (full truth)' },
@@ -46,6 +47,7 @@ function confidenceBand(v) {
 
 /** The receipt chips for a cited segment (→ V-4 cause-walk via the data-* refs). */
 function CitationChips({ citations }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
       {(Array.isArray(citations) ? citations : []).map((c, j) => (
@@ -55,7 +57,7 @@ function CitationChips({ citations }) {
           data-cite-ref={c.ref}
           data-cite-kind={c.kind}
           style={{
-            fontSize: FS.xs, color: GOLD, fontFamily: sans,
+            fontSize: chromeFontSize(FS.xs, mobile), color: GOLD, fontFamily: sans,
             border: `1px solid ${GOLD}`, padding: `0 ${SP.xs}px`,
           }}
         >
@@ -69,6 +71,7 @@ function CitationChips({ citations }) {
 /** THE TWO REGISTERS: cited segments carry receipt chips; conjecture segments are
  *  visibly marked as a guess (never dressed as record). */
 function AnswerSegments({ segments }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="interview-answer" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
       {(Array.isArray(segments) ? segments : []).map((seg, i) => (
@@ -79,7 +82,7 @@ function AnswerSegments({ segments }) {
           </div>
         ) : (
           <div key={i} data-testid="interview-conjecture" style={{ borderLeft: `2px dashed ${MUTED}`, paddingLeft: SP.sm }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
               Conjecture · not in the record
             </span>
             <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>{seg.text}</p>
@@ -91,6 +94,7 @@ function AnswerSegments({ segments }) {
 }
 
 export default function InterviewPanel({ open = false, onClose, initialQuestion = '' }) {
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const [question, setQuestion] = useState(initialQuestion);
   const [audience, setAudience] = useState('dm');
@@ -226,7 +230,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
         data-testid="interview-anchor"
         aria-label={scopeLabel}
         style={{
-          fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
+          fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, background: CARD_ALT,
           border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}
@@ -249,11 +253,11 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
             return (
               <div key={ti} style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
                 <div data-testid="interview-correspondence" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
+                  <span className="sf-smallcap" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
                   <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{turn.question}</p>
                 </div>
                 <AnswerSegments segments={r.segments} />
-                <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+                <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                   <span>{citedCount}/{r.segments?.length ?? 0} cited</span>
                   {band && <span>· {band}</span>}
                   {r.byok && <span aria-label="Answered on your own provider key">· BYOK</span>}
@@ -289,7 +293,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
       />
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           {cost} credit{cost === 1 ? '' : 's'} per answer
           {Number.isFinite(creditBalance) && <span> · {creditBalance} left</span>}
         </span>
@@ -300,7 +304,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
 
       {!hasThread && !loading && !question.trim() && suggestions.length > 0 && (
         <div data-testid="interview-suggestions" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Try asking
           </span>
           {suggestions.map((q, i) => (

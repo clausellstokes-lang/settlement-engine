@@ -15,8 +15,11 @@ import { planTimelineUndo } from '../../store/settlementSliceHelpers.js';
 import { t } from '../../copy/index.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function Timeline() {
+  const mobile = useIsMobile();
   const [undoError, setUndoError] = useState(null);
   const phase    = useStore(s => s.phase);
   const eventLog = useStore(s => s.eventLog);
@@ -52,7 +55,7 @@ export default function Timeline() {
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
@@ -66,7 +69,7 @@ export default function Timeline() {
 
       {clockBound && (
         <div style={{
-          fontSize: FS.xxs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+          fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, fontStyle: 'italic',
           lineHeight: 1.5, marginBottom: SP.sm,
         }}>
           On the world-map clock. Events resolve together at each World Pulse, and
@@ -76,7 +79,7 @@ export default function Timeline() {
 
       {undoError && (
         <div role="alert" style={{
-          fontSize: FS.xxs, color: SECOND, fontFamily: sans,
+          fontSize: proseFontSize(FS.xxs, mobile), color: SECOND, fontFamily: sans,
           lineHeight: 1.5, marginBottom: SP.sm,
         }}>
           {undoError}
@@ -85,7 +88,7 @@ export default function Timeline() {
 
       {eventLog.length === 0 ? (
         <div style={{
-          fontSize: FS.xs, color: MUTED, fontFamily: sans, fontStyle: 'italic',
+          fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, fontStyle: 'italic',
           padding: SP.sm, textAlign: 'center',
         }}>
           Apply an in-world event to start the campaign timeline. Founding history lives in the History tab.
@@ -110,6 +113,7 @@ function Entry({ entry, canUndo, onUndo }) {
   // destroySavedSettlement use a flat `timestamp` + flat `type` and carry no
   // `event` object. Fall back across both shapes so neither renders as
   // "Invalid Date" nor crashes on `entry.event.description`.
+  const mobile = useIsMobile();
   const ts = new Date(entry.appliedAt || entry.timestamp);
   return (
     <div style={{
@@ -119,11 +123,11 @@ function Entry({ entry, canUndo, onUndo }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
         <span style={{
-          fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans, flex: 1,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: INK, fontFamily: sans, flex: 1,
         }}>
           {entry.narrativeSummary || entry.event?.type || entry.type}
         </span>
-        <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans }}>
           {ts.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
         </span>
         {canUndo && (
@@ -139,12 +143,12 @@ function Entry({ entry, canUndo, onUndo }) {
         )}
       </div>
       {entry.event?.description && (
-        <div style={{ fontSize: FS.xxs, color: SECOND, fontFamily: sans, fontStyle: 'italic', marginTop: 2 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, fontFamily: sans, fontStyle: 'italic', marginTop: 2 }}>
           {entry.event.description}
         </div>
       )}
       {entry.deltas?.length > 0 && (
-        <ul style={{ margin: '4px 0 0', paddingLeft: 16, fontSize: FS.xxs, fontFamily: sans, color: INK, lineHeight: 1.6 }}>
+        <ul style={{ margin: '4px 0 0', paddingLeft: 16, fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: INK, lineHeight: 1.6 }}>
           {entry.deltas.slice(0, 4).map((d, i) => (
             <li key={i}>
               {d.explanation} <span style={{ color: MUTED }}>({d.before}→{d.after})</span>
@@ -153,7 +157,7 @@ function Entry({ entry, canUndo, onUndo }) {
         </ul>
       )}
       {entry.factionResponses?.length > 0 && (
-        <div style={{ marginTop: 4, fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5 }}>
+        <div style={{ marginTop: 4, fontSize: proseFontSize(FS.xxs, mobile), color: INK, fontFamily: sans, lineHeight: 1.5 }}>
           {entry.factionResponses.map((r, i) => (
             <div key={i}><strong style={{ color: GOLD }}>{r.factionName}</strong>: {r.response}</div>
           ))}

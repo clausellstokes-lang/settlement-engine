@@ -5,6 +5,8 @@ import {
   sans,
 } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const TONES = {
   neutral: { bg: CARD_ALT, fg: SECOND, border: BORDER },
@@ -17,8 +19,12 @@ const TONES = {
   ai: { bg: SLATE_BG, fg: SLATE_DEEP, border: BORDER },
 };
 
+// The DESKTOP ladder. The phone floor is applied where the ladder is READ, at the
+// `fontSize:` in the style below — the only place the viewport flag is bound.
 const SIZES = {
+  // phone-floor: floored at the read below.
   sm: { fontSize: FS.xxs, padding: `${SP.xs / 2}px ${SP.sm}px`, icon: 10 },
+  // phone-floor: floored at the read below.
   md: { fontSize: FS.xs, padding: `${SP.xs}px ${SP.sm}px`, icon: 12 },
 };
 
@@ -34,6 +40,7 @@ export default function Badge({
   const t = TONES[tone] || TONES.neutral;
   const s = SIZES[size] || SIZES.sm;
   const iconsOn = useIconsOn();
+  const mobile = useIsMobile();
 
   return (
     <span
@@ -48,7 +55,7 @@ export default function Badge({
         background: t.bg,
         color: t.fg,
         fontFamily: sans,
-        fontSize: s.fontSize,
+        fontSize: chromeFontSize(s.fontSize, mobile),
         fontWeight: 800,
         lineHeight: 1.2,
         whiteSpace: 'nowrap',

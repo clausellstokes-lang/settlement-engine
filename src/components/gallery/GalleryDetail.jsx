@@ -23,10 +23,12 @@ import GalleryReactionChips from './GalleryReactionChips.jsx';
 import GalleryReportDialog from './GalleryReportDialog.jsx';
 import VoteButton from './VoteButton.jsx';
 import { staffUnlocksPaidFeatures } from '../../lib/staffEntitlements.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PublicDossierView = React.lazy(() => import('../PublicDossierView.jsx'));
 
 function StatusMessage({ tone = 'info', children }) {
+  const mobile = useIsMobile();
   const cfg = tone === 'success'
     ? { border: GREEN, bg: GREEN_BG, color: GREEN }
     : tone === 'danger'
@@ -38,7 +40,7 @@ function StatusMessage({ tone = 'info', children }) {
     <div
       role={tone === 'danger' ? 'alert' : 'status'}
       aria-live={tone === 'danger' ? 'assertive' : 'polite'}
-      style={{ border: `1px solid ${cfg.border}`, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+      style={{ border: `1px solid ${cfg.border}`, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}
     >
       {children}
     </div>
@@ -69,6 +71,7 @@ export default function GalleryDetail({
   // Mobile is a read + light-act surface for a dossier: the public view, Import,
   // Vote, Share, and Report stay live, but the owner's ShareToGallery listing
   // editor (a full authoring form) defers to desktop.
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const [shared, setShared] = React.useState(false);
   const onShare = async () => {
@@ -158,10 +161,10 @@ export default function GalleryDetail({
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
       {ownedSave && (
         <div style={{ border: `1px solid ${GOLD}`, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Your gallery listing
           </div>
-          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             This is your published settlement. Edit the listing details (image, description, tags, DM-private visibility) or remove it from the gallery. The public dossier always reflects your current saved settlement.
           </p>
           {/* The listing editor (image crop, description, tags, visibility) is a
@@ -206,7 +209,7 @@ export default function GalleryDetail({
           <div style={{ padding: SP.xl, display: 'grid', gap: SP.md, alignContent: 'center' }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {dossier.tags?.map(tag => (
-                <span key={tag} style={{ border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, padding: '3px 7px', fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'capitalize' }}>
+                <span key={tag} style={{ border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, padding: '3px 7px', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850, textTransform: 'capitalize' }}>
                   {human(tag)}
                 </span>
               ))}
@@ -273,10 +276,10 @@ export default function GalleryDetail({
                 disabled={voteBusy}
                 onClick={() => onVote(dossier)}
               />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}>
                 {formatNumber(dossier.viewCount)} views
               </span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}>
                 {formatNumber(dossier.commentCount)} comments
               </span>
               <Button

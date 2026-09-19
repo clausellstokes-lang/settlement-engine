@@ -13,6 +13,8 @@
 import { X, Check } from 'lucide-react';
 import Button from '../../primitives/Button.jsx';
 import { INK, CARD, sans, FS, SP, swatch } from '../../theme.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export function ApplyControls({
   type, phase, isLinkNeighbour, canSubmit, settlement,
@@ -20,6 +22,7 @@ export function ApplyControls({
   pendingPreview, dismissPreview,
   onPreview, onApply, onAddToBatch,
 }) {
+  const mobile = useIsMobile();
   const isDestroy = type === 'DESTROY_SETTLEMENT';
   const destroyOk = !isDestroy || destroyConfirm.trim() === (settlement?.name || '').trim();
   const applyOk = destroyOk && canSubmit;
@@ -32,7 +35,7 @@ export function ApplyControls({
       </Button>
       {isDestroy && (
         <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, background: swatch.dangerBg }}>
-          <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
             {/* Wave R-1 (atlas queue #4): the recovery claim names the ACTUAL model —
                 undo from the Timeline, latest entry only — instead of the vague
                 "deliberate action". One string, vetoable. */}

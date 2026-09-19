@@ -8,6 +8,8 @@ import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import AdminTwoKeyDialog from './AdminTwoKeyDialog.jsx';
 import { INK, MUTED, BODY, RED, GREEN, BORDER, BORDER2, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const BROADCAST_CONFIRMATION_PHRASE = 'SEND TO ALL';
 
@@ -70,6 +72,7 @@ function formatCountdown(seconds) {
 }
 
 export default function AdminBroadcastPanel() {
+  const mobile = useIsMobile();
   const [template, setTemplate] = useState('product_update');
   const [subject, setSubject] = useState('News from SettlementForge');
   const [body, setBody] = useState('');
@@ -186,17 +189,17 @@ export default function AdminBroadcastPanel() {
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: SP.lg }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the editor layout */}
-          <label htmlFor={templateId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>Template</label>
+          <label htmlFor={templateId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>Template</label>
           <select id={templateId} aria-label="Broadcast template" value={template} onChange={(event) => chooseTemplate(event.target.value)} style={fieldStyle}>
             {Object.entries(BROADCAST_TEMPLATES).map(([key, value]) => <option key={key} value={key}>{value.label}</option>)}
           </select>
 
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the editor layout */}
-          <label htmlFor={subjectId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>Subject</label>
+          <label htmlFor={subjectId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>Subject</label>
           <input id={subjectId} aria-label="Broadcast subject" maxLength={160} value={subject} onChange={(event) => setSubject(event.target.value)} style={fieldStyle} />
 
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id; nesting would break the editor layout */}
-          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>Message</label>
+          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>Message</label>
           <textarea id={bodyId} aria-label="Broadcast message" maxLength={10000} rows={9} value={body} onChange={(event) => setBody(event.target.value)} style={{ ...fieldStyle, resize: 'vertical' }} />
 
           <Button variant="danger" size="sm" disabled={!valid || busy} onClick={queue}>Queue broadcast</Button>
@@ -204,12 +207,12 @@ export default function AdminBroadcastPanel() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
           <div aria-label="Broadcast Account preview" style={{ padding: SP.md, border: `1px solid ${BORDER}`, background: CARD_HDR }}>
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase' }}>Account preview · {messageClass}</div>
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textTransform: 'uppercase' }}>Account preview · {messageClass}</div>
             <div style={{ marginTop: SP.xs, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>{subject || 'Subject'}</div>
             <div style={{ marginTop: SP.xs, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>{body || 'Message'}</div>
           </div>
           <div aria-label="Broadcast email preview" style={{ padding: SP.md, border: `1px solid ${BORDER}`, background: swatch.white }}>
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase' }}>Email preview</div>
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, textTransform: 'uppercase' }}>Email preview</div>
             <div style={{ marginTop: SP.xs, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>{subject || 'Subject'}</div>
             <div style={{ marginTop: SP.xs, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, whiteSpace: 'pre-wrap' }}>
               {body || 'Message'}
@@ -231,7 +234,7 @@ export default function AdminBroadcastPanel() {
             <div key={id} style={{ display: 'flex', alignItems: 'center', gap: SP.md, padding: `${SP.sm}px 0`, borderTop: `1px solid ${BORDER2}` }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 700 }}>{row.subject || 'Broadcast'}</div>
-                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
                   {canceled ? 'Canceled' : remaining > 0 ? `Cancel window ${formatCountdown(remaining)}` : 'Delivery eligible'}
                 </div>
               </div>

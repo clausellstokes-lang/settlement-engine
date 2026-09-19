@@ -53,6 +53,8 @@ import RealmLockedGate from './RealmLockedGate.jsx';
 // lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
 // tip the first-paint ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
 import WorldCertificationPanel from '../settlement/WorldCertificationPanel.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
 
@@ -118,6 +120,7 @@ function tensionLabel({ worldState, regionalGraph, settlementCount, mobilizing =
 function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, valueTitle }) {
   // Two-channel severity (P7): color is paired with a glyph + a left accent
   // border so crisis/hot never reads on hue alone.
+  const mobile = useIsMobile();
   const valueColor = tone === 'crisis' ? RED : tone === 'hot' ? AMBER_DEEP : INK;
   const accent = tone === 'crisis' ? RED : tone === 'hot' ? AMBER_DEEP : null;
   return (
@@ -134,11 +137,11 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
       paddingLeft: accent ? SP.sm : (focal ? SP.md : 0),
       background: focal && accent ? CARD : undefined,
     }}>
-      <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {Icon && <Icon size={12} />}{label}
       </span>
       {delta && (
-        <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: delta.tone === 'crisis' ? RED : delta.tone === 'hot' ? AMBER_DEEP : SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.15 }}>
+        <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: delta.tone === 'crisis' ? RED : delta.tone === 'hot' ? AMBER_DEEP : SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.15 }}>
           {delta.rising ? <ArrowUp size={12} aria-hidden /> : <ArrowRight size={12} aria-hidden />}{delta.text}
         </span>
       )}
@@ -148,7 +151,7 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
             the card carries a single weapon/fire mark, not two. */}
         {focal && accent && <Flame size={16} aria-hidden />}{value}
       </span>
-      {sub && <span title={subTitle} style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>{sub}</span>}
+      {sub && <span title={subTitle} style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>{sub}</span>}
     </div>
   );
 }
@@ -232,6 +235,7 @@ export default function RealmDashboard({
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
 }) {
   // Locked preview for anon / free — REACHABLE, not hidden.
+  const mobile = useIsMobile();
   if (!canManageCampaigns) {
     return <RealmDashboardLocked tier={tier} onUpgrade={onUpgrade} onSignIn={onSignIn} campaign={campaign} />;
   }
@@ -317,7 +321,7 @@ export default function RealmDashboard({
         {/* The section heading is quiet scent (FS.xs uppercase), not a competing
             focal element — de-emphasizing it lets the focal Conflict value be the
             single dominant entry point in the panel (P4 de-emphasize-to-emphasize). */}
-        <h3 style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <h3 style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           State of the Realm
         </h3>
       </div>
@@ -419,7 +423,7 @@ export default function RealmDashboard({
           DM-christened canon label (when the persistence lane lands) replaces it. */}
       {hegemony.spheres.length > 0 && (
         <div data-testid="realm-hegemony" style={{ display: 'grid', gap: SP.xs }}>
-          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Spheres of influence
           </div>
           {hegemony.spheres.map((s) => (

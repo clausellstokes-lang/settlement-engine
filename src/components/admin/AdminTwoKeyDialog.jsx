@@ -9,8 +9,11 @@
 import { useEffect, useId, useState } from 'react';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { INK, MUTED, RED, BORDER, sans, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function AdminTwoKeyDialog({ config, onCancel, onConfirmed }) {
+  const mobile = useIsMobile();
   const [typedText, setTypedText] = useState('');
   const [password, setPassword] = useState('');
   const [value, setValue] = useState('');
@@ -72,7 +75,7 @@ export default function AdminTwoKeyDialog({ config, onCancel, onConfirmed }) {
       extra={config && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginBottom: SP.md }}>
           {config.valueLabel && (
-            <label htmlFor={valueId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+            <label htmlFor={valueId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans }}>
               {config.valueLabel}
               <input
                 id={valueId}
@@ -83,7 +86,7 @@ export default function AdminTwoKeyDialog({ config, onCancel, onConfirmed }) {
               />
             </label>
           )}
-          <label htmlFor={textId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+          <label htmlFor={textId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans }}>
             {config.confirmationLabel || `Retype the account id (${expectedText})`}
             <input
               id={textId}
@@ -96,7 +99,7 @@ export default function AdminTwoKeyDialog({ config, onCancel, onConfirmed }) {
               style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, background: swatch.white, color: INK }}
             />
           </label>
-          <label htmlFor={passwordId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+          <label htmlFor={passwordId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans }}>
             Your account password
             <input
               id={passwordId}

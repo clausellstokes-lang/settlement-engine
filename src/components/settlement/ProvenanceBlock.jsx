@@ -15,12 +15,15 @@
 import { useStore } from '../../store/index.js';
 import { FS, swatch, EMPTY_VALUE } from '../theme.js';
 import Card from '../primitives/Card.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {Object} props
  * @param {Object} [props.save]                  saved-settlement record
  */
 export default function ProvenanceBlock({ save }) {
+  const mobile = useIsMobile();
   const lastSeed     = useStore(s => s.lastSeed);
   const generatedAt  = useStore(s => s.generatedAt);
   const editedAt     = useStore(s => s.editedAt);
@@ -45,7 +48,7 @@ export default function ProvenanceBlock({ save }) {
   return (
     <Card kicker="Provenance" compact>
       <dl style={{ margin: 0, display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 8, rowGap: 4 }}>
-        <Row label="Seed">{lastSeed ? <code style={codeStyle}>{shortSeed(lastSeed)}</code> : EMPTY_VALUE}</Row>
+        <Row label="Seed">{lastSeed ? <code style={codeStyle(mobile)}>{shortSeed(lastSeed)}</code> : EMPTY_VALUE}</Row>
         <Row label="Generated">{fmt(generatedAt || save?.savedAt)}</Row>
         <Row label="Last edited">{fmt(editedAt) || EMPTY_VALUE}</Row>
         <Row label="Canonized">{fmt(canonizedAt) || 'Draft'}</Row>
@@ -57,10 +60,11 @@ export default function ProvenanceBlock({ save }) {
 }
 
 function Row({ label, children }) {
+  const mobile = useIsMobile();
   return (
     <>
       <dt style={{
-        fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3,
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: swatch.inkMag3,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         letterSpacing: '0.04em', textTransform: 'uppercase',
         whiteSpace: 'nowrap',
@@ -69,7 +73,7 @@ function Row({ label, children }) {
       </dt>
       <dd style={{
         margin: 0,
-        fontSize: FS.xs, color: swatch.inkMag,
+        fontSize: chromeFontSize(FS.xs, mobile), color: swatch.inkMag,
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}>
         {children}
@@ -93,8 +97,8 @@ function shortSeed(s) {
   return str.length > 12 ? str.slice(0, 12) + '…' : str;
 }
 
-const codeStyle = {
+const codeStyle = (mobile) => ({
   fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-  fontSize: FS.xxs, color: '#3a2a18',
+  fontSize: chromeFontSize(FS.xxs, mobile), color: '#3a2a18',
   background: '#f3ead8', padding: '1px 4px',
-};
+});

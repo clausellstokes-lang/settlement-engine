@@ -21,11 +21,14 @@
 import { MUTED, sans, FS } from '../../theme.js';
 import { Field } from './Field.jsx';
 import { selectStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export function EventComposerCorruptionFields({
   criminalOrgs, criminalOrg, setCriminalOrg, corruptScope, setCorruptScope,
   foreignSettlements = [], corruptBeneficiary = '', setCorruptBeneficiary,
 }) {
+  const mobile = useIsMobile();
   const isForeign = typeof corruptBeneficiary === 'string' && corruptBeneficiary.startsWith('foreign:');
   const foreignName = isForeign
     ? (foreignSettlements.find(o => `foreign:${o.id}` === corruptBeneficiary)?.name || 'a foreign court')
@@ -36,7 +39,7 @@ export function EventComposerCorruptionFields({
       {/* THE BENEFICIARY — who holds the leash. Only offered when foreign courts are known. */}
       {foreignSettlements.length > 0 && (
         <Field label="Beneficiary" hint="Who benefits: this settlement's own underworld, or a foreign court">
-          <select value={corruptBeneficiary || ''} onChange={e => setCorruptBeneficiary?.(e.target.value)} style={selectStyle}>
+          <select value={corruptBeneficiary || ''} onChange={e => setCorruptBeneficiary?.(e.target.value)} style={selectStyle(mobile)}>
             <option value="">This settlement&rsquo;s underworld</option>
             {foreignSettlements.map(o => (
               <option key={o.id} value={`foreign:${o.id}`}>{o.name} (foreign patron)</option>
@@ -47,19 +50,19 @@ export function EventComposerCorruptionFields({
 
       {isForeign ? (
         <Field label="Criminal organization" hint="A foreign leash needs no local organization. The channel is the patron court">
-          <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, padding: '6px 0' }}>
             The rot is leashed to <strong>{foreignName}</strong> through a covert channel. No local organization is required.
           </div>
         </Field>
       ) : criminalOrgs.length > 0 ? (
         <Field label="Criminal organization" hint="The organization that corrupts the chosen NPC">
-          <select value={criminalOrg || criminalOrgs[0]} onChange={e => setCriminalOrg(e.target.value)} style={selectStyle}>
+          <select value={criminalOrg || criminalOrgs[0]} onChange={e => setCriminalOrg(e.target.value)} style={selectStyle(mobile)}>
             {criminalOrgs.map(o => <option key={o} value={o}>{o}</option>)}
           </select>
         </Field>
       ) : (
         <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
-          <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
+          <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, padding: '6px 0' }}>
             This settlement has no criminal organization. Add one (e.g. a Thieves&rsquo; Guild) before imposing corruption, or choose a foreign patron above.
           </div>
         </Field>
@@ -72,7 +75,7 @@ export function EventComposerCorruptionFields({
             ? 'Their home institution is quietly compromised in-chain as well'
             : 'Only this individual is turned'}
         >
-          <select value={corruptScope} onChange={e => setCorruptScope(e.target.value)} style={selectStyle}>
+          <select value={corruptScope} onChange={e => setCorruptScope(e.target.value)} style={selectStyle(mobile)}>
             <option value="individual">This individual</option>
             <option value="individual_institution">Individual and their institution</option>
           </select>

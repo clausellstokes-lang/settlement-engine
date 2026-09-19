@@ -34,7 +34,7 @@ import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { proseFontSize } from '../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';;
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
@@ -161,7 +161,7 @@ export default function TableView({ settlement, onClose }) {
               {settlement?.name || 'Untitled settlement'}
             </h1>
             <div style={{
-              marginTop: 3, fontSize: FS.xxs, color: MUTED, letterSpacing: '0.04em',
+              marginTop: 3, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, letterSpacing: '0.04em',
             }}>
               {String(settlement?.tier || 'SETTLEMENT').toUpperCase()}
               {settlement?.population != null && (
@@ -254,7 +254,7 @@ export default function TableView({ settlement, onClose }) {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {stressors.map((s, i) => (
                 <span key={i} style={{
-                  fontSize: FS.micro, fontWeight: 800,
+                  fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
                   color: LAMP_ACCENTS.RED, background: 'transparent',
                   border: `1px solid ${LAMP_ACCENTS.RED}`,
                   padding: '3px 8px',
@@ -268,7 +268,7 @@ export default function TableView({ settlement, onClose }) {
           {/* Tonight at the table */}
           <div>
             <div style={{
-              fontSize: FS.micro, fontWeight: 800,
+              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
               color: LAMP_ACCENTS.HOOK, marginBottom: 8,
             }}>
@@ -304,7 +304,7 @@ export default function TableView({ settlement, onClose }) {
                           {row.title}
                         </span>
                         <span style={{
-                          fontSize: FS.nano, fontWeight: 800,
+                          fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800,
                           color: accent, letterSpacing: '0.08em', flexShrink: 0,
                         }}>
                           {KIND_LABEL[row.kind] || row.kind}
@@ -322,7 +322,7 @@ export default function TableView({ settlement, onClose }) {
 
           <div style={{
             marginTop: 'auto', paddingTop: 6,
-            fontSize: FS.xxs, color: CREAM_FAINT, textAlign: 'center', fontStyle: 'italic',
+            fontSize: chromeFontSize(FS.xxs, mobile), color: CREAM_FAINT, textAlign: 'center', fontStyle: 'italic',
           }}>
             Tap outside or press Esc to close
           </div>

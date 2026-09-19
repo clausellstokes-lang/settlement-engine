@@ -23,6 +23,8 @@ import IconButton from './IconButton.jsx';
 import { useIconsOn } from './IconsContext.js';
 import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 import { deriveInstitutionProfile } from '../../domain/display/institutionProfile.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Per-domain accent for a contribution row's tag chip.
 const DOMAIN_STYLE = {
@@ -45,6 +47,7 @@ export default function InstitutionCard({ open, institution, settlement, onClose
   // through a ref, so a background re-render that mints a new onClose identity
   // does NOT re-run the effect and yank focus out mid-read (the recorded
   // onClose-identity bug class this popover shared with GlossaryCard).
+  const mobile = useIsMobile();
   const cardRef = useDialogFocusTrap(open, onClose);
   const iconsOn = useIconsOn();
 
@@ -147,7 +150,7 @@ export default function InstitutionCard({ open, institution, settlement, onClose
                   <li key={`${c.domain}-${i}`} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
                       <span style={{
-                        fontSize: FS.xxs, fontWeight: 800, color: ds.fg, textTransform: 'uppercase',
+                        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: ds.fg, textTransform: 'uppercase',
                         letterSpacing: '0.06em', background: `${ds.fg}12`, border: `1px solid ${ds.fg}33`,
                         borderRadius: 3, padding: '1px 5px', flexShrink: 0,
                       }}>

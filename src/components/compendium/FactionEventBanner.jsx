@@ -16,27 +16,30 @@ import { navigate } from '../../hooks/useRoute.js';
 import { SECOND as SEC, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { CATEGORY_BY_KEY } from './customCategories.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const FACTION = CATEGORY_BY_KEY.factions?.color || SEC;
 
 export default function FactionEventBanner() {
+  const mobile = useIsMobile();
   return (
     <div style={{
       marginBottom: 10, padding: '9px 12px',
       background: `${FACTION}0F`, border: `1px solid ${FACTION}44`, borderLeft: `3px solid ${FACTION}`,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-        <span style={{ fontSize: FS.xxs, fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           Factions enter through an event
         </span>
       </div>
-      <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5 }}>
+      <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SEC, lineHeight: 1.5 }}>
         A custom faction is <strong>not</strong> rolled into a fresh generation. It arrives in an
         existing settlement or region through an in-world event (a coup, an arrival, a schism) you
         author in the Event Composer. The faction then lands with consequences, not out of thin air.
       </div>
       <div style={{ marginTop: 6 }}>
-        <Button variant="secondary" size="sm" onClick={() => navigate('settlements')} style={{ padding: '2px 8px', fontSize: FS.xxs }}>
+        <Button variant="secondary" size="sm" onClick={() => navigate('settlements')} style={{ padding: '2px 8px', fontSize: chromeFontSize(FS.xxs, mobile) }}>
           Open a settlement to compose an event &rarr;
         </Button>
       </div>

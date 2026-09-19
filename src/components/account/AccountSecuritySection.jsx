@@ -26,6 +26,7 @@ import {
 import { TINT_GOLD } from './accountTheme.js';
 import Section from './AccountSection.jsx';
 import Pill from '../primitives/Pill.jsx';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const PROVIDER_LABELS = { google: 'Google', discord: 'Discord', email: 'Email & password' };
 const LINKABLE = [
@@ -73,6 +74,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   // everywhere) and the linked-accounts rows have no wrap fallback, so a narrow
   // phone squeezes the copy against the button. `actionRow` stacks the action
   // below the text on mobile; desktop keeps the single centred row byte-identical.
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const actionRow = {
     display: 'flex',
@@ -266,7 +268,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                   Cancel
                 </Button>
               </div>
-              <div style={{ fontSize: FS.xs, color: MUTED }}>
+              <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
                 For your security we re-check your current password before changing it.
               </div>
             </div>
@@ -278,7 +280,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
           <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
             Linked accounts
           </div>
-          <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Sign in with any connected provider. You must keep at least one method connected.
           </p>
           {identityError && <div style={{ marginBottom: SP.sm }}><ErrorBanner>{identityError}</ErrorBanner></div>}
@@ -295,7 +297,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                     <span style={{ flex: isMobile ? '1 1 100%' : 1, fontSize: FS.sm, color: INK, fontWeight: 600 }}>{label}</span>
                     {linked ? (
                       <>
-                        <span style={{ fontSize: FS.xs, color: swatch.success, fontWeight: 700 }}>
+                        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.success, fontWeight: 700 }}>
                           Connected
                         </span>
                         <Button
@@ -316,7 +318,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 );
               })}
               {connectedProviders.has('email') && (
-                <div style={{ fontSize: FS.xs, color: BODY, marginTop: SP.xs }}>
+                <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, marginTop: SP.xs }}>
                   {PROVIDER_LABELS.email} is connected. You can also sign in with a one-time magic link from the sign-in screen.
                 </div>
               )}
@@ -332,7 +334,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                 Two-factor authentication
                 <Pill bg={TINT_GOLD} color={GOLD_TXT}>Coming soon</Pill>
               </div>
-              <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
                 Add an authenticator-app code on top of your password. We will let you know when it is ready.
               </div>
             </div>
@@ -353,7 +355,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
                   ? <span style={{ color: BODY }}> · signed in {formatSignedInAt(activeSession?.signedInAt)}</span>
                   : null}
               </div>
-              <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
                 Your account allows one active session at a time. Signing in on another device
                 signs this one out. Lost a device? Sign out everywhere to revoke every session.
               </div>
@@ -364,7 +366,7 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
           </div>
         </div>
 
-        <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
           Signed in as <span style={{ color: SECOND, fontWeight: 700 }}>{auth.user?.email}</span>.
         </div>
       </div>

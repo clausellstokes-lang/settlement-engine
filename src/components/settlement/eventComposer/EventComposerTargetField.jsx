@@ -21,6 +21,8 @@ import {
   TARGET_ENTITY_BY_EVENT, CUSTOM_RESOURCE_OPTION,
   inputStyle, selectStyle, pickedChipStyle,
 } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export function EventComposerTargetField({
   type, target, setTarget, setDesc, spec, settlement,
@@ -36,11 +38,12 @@ export function EventComposerTargetField({
   // the descriptor compendium, grouped by category and filtered the
   // same way. Both set the event target to the chosen name — no free
   // typing of names the engine already knows.
+  const mobile = useIsMobile();
   if (type === 'ADD_INSTITUTION') {
     return (
       <Field label="Institution" hint={target ? `Adding: ${target}` : 'Pick from the catalog'}>
         {target && (
-          <div style={pickedChipStyle}>
+          <div style={pickedChipStyle(mobile)}>
             <span>{target}</span>
             <IconButton Icon={X} label="Remove institution" title="Clear" onClick={() => { setTarget(''); setAddCategory(''); }} tone="ghost" size="sm" />
           </div>
@@ -60,7 +63,7 @@ export function EventComposerTargetField({
     return (
       <Field label="Stressor" hint={target ? `Applying: ${stressorPick?.name || target}` : 'Pick from the full catalog (incl. custom)'}>
         {target && (
-          <div style={pickedChipStyle}>
+          <div style={pickedChipStyle(mobile)}>
             <span>{stressorPick?.name || target}</span>
             <IconButton Icon={X} label="Remove stressor" title="Clear" onClick={() => { setTarget(''); setStressorPick(null); }} tone="ghost" size="sm" />
           </div>
@@ -79,14 +82,14 @@ export function EventComposerTargetField({
   if (type === 'CHANGE_RULING_POWER') {
     return (
       <Field label="New ruling power" hint={spec?.targetPrompt}>
-        <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
+        <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle(mobile)}>
           <option value="">Pick a faction</option>
           {rulingPowerOptions.map(o => (
             <option key={o.id} value={o.id}>{o.name}</option>
           ))}
         </select>
         {rulingPowerOptions.length === 0 && (
-          <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
             No other faction holds power here. Add a faction first.
           </span>
         )}
@@ -107,7 +110,7 @@ export function EventComposerTargetField({
     };
     return (
       <Field label="Faction" hint="Choose a faction that isn't here yet">
-        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle}>
+        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle(mobile)}>
           <option value="">Select a faction</option>
           {factionGroups.map(g => (
             <optgroup key={g.category} label={g.label}>
@@ -116,7 +119,7 @@ export function EventComposerTargetField({
           ))}
         </select>
         {factionGroups.length === 0 && (
-          <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
             Every catalogued faction is already present. Author a new one in your Compendium and it appears here.
           </span>
         )}
@@ -134,7 +137,7 @@ export function EventComposerTargetField({
           onChange={e => setTarget(e.target.value)}
           placeholder="Type a label or pick a suggestion"
           aria-label="Good"
-          style={inputStyle}
+          style={inputStyle(mobile)}
         />
         <datalist id="event-trade-good-suggestions">
           {tradeGoodSuggestions.map(n => <option key={n} value={n} aria-label={n} />)}
@@ -150,7 +153,7 @@ export function EventComposerTargetField({
         <select
           value={target}
           onChange={e => { setTarget(e.target.value); setCustomResourceName(''); }}
-          style={selectStyle}
+          style={selectStyle(mobile)}
         >
           <option value="">Pick a resource</option>
           {resourceCatalogOptions.map(o => (
@@ -164,7 +167,7 @@ export function EventComposerTargetField({
             onChange={e => setCustomResourceName(e.target.value)}
             placeholder='e.g. "Moonpetal grove"'
             aria-label="Custom resource name"
-            style={{ ...inputStyle, marginTop: 4 }}
+            style={{ ...inputStyle(mobile), marginTop: 4 }}
           />
         )}
       </Field>
@@ -181,7 +184,7 @@ export function EventComposerTargetField({
           <select
             value={target}
             onChange={e => { setTarget(e.target.value); setSwapWithNpcId(''); }}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="">Pick an NPC</option>
             {npcSwapGroups.map(g => (
@@ -198,7 +201,7 @@ export function EventComposerTargetField({
           <select
             value={swapWithNpcId}
             onChange={e => setSwapWithNpcId(e.target.value)}
-            style={selectStyle}
+            style={selectStyle(mobile)}
             disabled={!target}
           >
             <option value="">Pick the counterpart</option>
@@ -228,7 +231,7 @@ export function EventComposerTargetField({
         <select
           value={target}
           onChange={e => setTarget(e.target.value)}
-          style={selectStyle}
+          style={selectStyle(mobile)}
         >
           <option value="">Pick a {collectionKey.replace(/s$/, '')}</option>
           {targetOpts.map(o => (
@@ -248,7 +251,7 @@ export function EventComposerTargetField({
         onChange={e => setTarget(e.target.value)}
         placeholder={spec?.targetPrompt || 'optional'}
         aria-label="Target"
-        style={inputStyle}
+        style={inputStyle(mobile)}
       />
     </Field>
   );

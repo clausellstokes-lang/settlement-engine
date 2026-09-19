@@ -25,8 +25,11 @@ import PublicAvatar from '../primitives/PublicAvatar.jsx';
 import AccountIdentitySection from './AccountIdentitySection.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function RoleBadge({ role }) {
+  const mobile = useIsMobile();
   if (role === 'user') return null;
   const cfg = {
     developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
@@ -38,7 +41,7 @@ function RoleBadge({ role }) {
       display: 'inline-flex', alignItems: 'center', gap: 3,
       padding: '3px 10px',
       background: c.bg, color: c.color,
-      fontSize: FS.xs, fontWeight: 700,
+      fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>
       {c.label}
@@ -55,6 +58,7 @@ export default function AccountProfileSection({
   profileError, profileSaving, profileSaved,
   handleSaveProfilePreferences,
 }) {
+  const mobile = useIsMobile();
   return (
     <Section title="Profile">
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: SP.lg }}>
@@ -133,7 +137,7 @@ export default function AccountProfileSection({
               is non-accusatory and never echoes the matched word: checkCivility
               does not return it, so this surface could not echo it if it tried. */}
           {nameError && (
-            <div role="alert" style={{ marginTop: SP.xs, fontSize: FS.xs, color: swatch.danger, fontFamily: sans }}>
+            <div role="alert" style={{ marginTop: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), color: swatch.danger, fontFamily: sans }}>
               {nameError}
             </div>
           )}
@@ -161,7 +165,7 @@ export default function AccountProfileSection({
             a stale draft string there would have clobbered a freshly uploaded
             image on the next save. */}
         <AccountIdentitySection />
-        <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: FS.xs, fontWeight: 700, color: SECOND }}>
+        <label htmlFor="account-model-preference" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND }}>
           <span>AI model preference</span>
           <select
             id="account-model-preference"

@@ -34,6 +34,18 @@
  * is — so this amendment can only ever RAISE a phone size, never lower one, and
  * desktop stays the identity at both.
  *
+ * ⭐ AMENDED 2026-09-19 — THE FLOORS ARE THE ESTATE'S, NOT THE DOSSIER'S (ODQ
+ * §934.24, owner-approved: "the floors, estate-wide; one rule for every route").
+ * Everything above was written while the only surface held to a floor was the
+ * dossier, and the wording followed: "the dossier IS the read-at-the-table
+ * surface". It is not the only one a reader reads on a phone. The library's
+ * ledger heads, the gallery's cards, the compendium's entries, the account and
+ * admin desks, the legal pages, the Realm's map chrome and every modal the shell
+ * mounts were all sitting at 9, 10 and 11px for the same reason the dossier was —
+ * the step was chosen against a wide screen. The two floors below are unchanged;
+ * what changed is the SET they apply to, which is now derived from the router
+ * rather than named by hand (tests/components/phoneChromeFloor.census.test.js).
+ *
  * ⛔ WHY THIS IS ITS OWN MODULE AND NOT AN EXPORT ON `hooks/useIsMobile.js`,
  * WHERE IT WOULD OTHERWISE BELONG. It lived there for one commit and broke four
  * tests instantly. Nineteen test files mock that module as
@@ -49,7 +61,7 @@
  * their typecheck and bundle surfaces.
  */
 
-/** The smallest a dossier prose paragraph may render below the mobile breakpoint (px). */
+/** The smallest a prose paragraph may render below the mobile breakpoint (px), on any route. */
 export const PHONE_PROSE_FLOOR = 14;
 
 /**
@@ -70,7 +82,7 @@ export function proseFontSize(desktopSize, mobile) {
   return desktopSize < PHONE_PROSE_FLOOR ? PHONE_PROSE_FLOOR : desktopSize;
 }
 
-/** The smallest a dossier CHROME line may render below the mobile breakpoint (px). */
+/** The smallest a CHROME line may render below the mobile breakpoint (px), on any route. */
 export const PHONE_CHROME_FLOOR = 12;
 
 /**

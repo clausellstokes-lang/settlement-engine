@@ -1,4 +1,6 @@
 import { BODY, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export function definitionIdOf(item) {
   return String(item?.definitionId || item?.id || '');
@@ -25,6 +27,7 @@ export function readableFailure(receipt, fallback) {
 }
 
 export function StatusNotice({ children }) {
+  const mobile = useIsMobile();
   if (!children) return null;
   return (
     <div
@@ -36,7 +39,7 @@ export function StatusNotice({ children }) {
         borderLeft: `3px solid ${swatch.success}`,
         background: `${swatch.success}0d`,
         color: BODY,
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         lineHeight: 1.45,
       }}
     >
@@ -46,6 +49,7 @@ export function StatusNotice({ children }) {
 }
 
 export function ErrorNotice({ children }) {
+  const mobile = useIsMobile();
   if (!children) return null;
   return (
     <div
@@ -56,7 +60,7 @@ export function ErrorNotice({ children }) {
         borderLeft: `3px solid ${swatch.danger}`,
         background: `${swatch.danger}0d`,
         color: BODY,
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         lineHeight: 1.45,
       }}
     >

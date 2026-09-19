@@ -27,8 +27,11 @@ import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '..
 import DialogClose from '../primitives/DialogClose.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function SuccessorPrompt() {
+  const mobile = useIsMobile();
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
   const stageComposerIntent = useStore(s => s.stageComposerIntent);
@@ -147,7 +150,7 @@ export default function SuccessorPrompt() {
 
           {suggested.length > 0 && (
             <>
-              <div style={kickerStyle}>Suggested successors</div>
+              <div style={kickerStyle(mobile)}>Suggested successors</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>
                 {suggested.map(npc => (
                   <button
@@ -160,7 +163,7 @@ export default function SuccessorPrompt() {
                       <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>
                         {npc.name}
                       </div>
-                      <div style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, marginTop: 2 }}>
+                      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans, marginTop: 2 }}>
                         {npc.role || 'Notable figure'}
                         {npc.importance ? ` · ${npc.importance}` : ''}
                       </div>
@@ -177,7 +180,7 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
-              fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
+              fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
               No obvious successor among the existing NPCs. Appoint someone new,
@@ -202,7 +205,7 @@ export default function SuccessorPrompt() {
             variant="ghost"
             size="sm"
             onClick={dismiss}
-            style={{ textDecoration: 'underline', color: MUTED, fontSize: FS.xxs }}
+            style={{ textDecoration: 'underline', color: MUTED, fontSize: chromeFontSize(FS.xxs, mobile) }}
           >
             Leave the role vacant
           </Button>
@@ -234,11 +237,11 @@ const titleStyle = {
   margin: 0, display: 'flex', alignItems: 'center', gap: 6,
   fontSize: FS.md, fontWeight: 700, color: INK, fontFamily: sans,
 };
-const kickerStyle = {
-  fontSize: FS.xxs, fontWeight: 800,
+const kickerStyle = (mobile) => ({
+  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
   color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
   fontFamily: sans, marginBottom: 6,
-};
+});
 const successorBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 8,
   padding: '8px 10px',

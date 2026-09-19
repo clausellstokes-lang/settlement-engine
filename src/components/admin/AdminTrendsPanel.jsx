@@ -35,6 +35,8 @@ import {
   Empty, Select, Card, Kpi, MultiLineChart, StackedBarChart, BarList, Heatmap, MiniTable,
 } from './AdminTrendsCharts.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // ── catalog (mirrors the 040 allowlists) ─────────────────────────────────────
 const GRANULARITIES = ['day', 'week', 'month', 'quarter', 'year'];
@@ -119,6 +121,7 @@ const PRESETS = [
 const DEFAULT_METRICS = ['generations', 'active_users', 'saves'];
 
 export default function AdminTrendsPanel() {
+  const mobile = useIsMobile();
   const [from, setFrom] = useState(isoDaysAgo(30));
   const [to, setTo] = useState(todayIso());
   const [granularity, setGranularity] = useState('day');
@@ -276,17 +279,17 @@ export default function AdminTrendsPanel() {
             ))}
           </div>
           <input type="date" value={from} max={to} onChange={(e) => setFrom(e.target.value)} aria-label="From"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
-          <span style={{ color: MUTED, fontSize: FS.xs }}>→</span>
+            style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+          <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xs, mobile) }}>→</span>
           <input type="date" value={to} min={from} max={todayIso()} onChange={(e) => setTo(e.target.value)} aria-label="To"
-            style={{ fontFamily: sans, fontSize: FS.xs, color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
+            style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK, border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }} />
           <Select label="by" value={granularity} onChange={setGranularity} options={GRANULARITIES.map((g) => ({ key: g, label: g }))} />
           <Button variant="gold" size="sm" onClick={load} busy={loading}>{loading ? 'Loading…' : 'Refresh'}</Button>
         </div>
       </div>
-      {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</div>}
+      {refreshedAt && <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</div>}
       {softError && (
-        <p style={{ fontSize: FS.xs, color: swatch.danger || RED, fontFamily: sans, marginTop: SP.xs }}>
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.danger || RED, fontFamily: sans, marginTop: SP.xs }}>
           Some panels could not load: {softError}.
         </p>
       )}
@@ -306,7 +309,7 @@ export default function AdminTrendsPanel() {
       {signals.length > 0 && (
         <div style={{ border: `1px solid ${GOLD}`, background: GOLD_BG, padding: SP.md, margin: `0 0 ${SP.md}px` }}>
           <div style={{ fontFamily: serif_, fontSize: FS.sm, fontWeight: 700, color: INK_DEEP, marginBottom: SP.xs }}>Tuning signals</div>
-          <ul style={{ margin: 0, paddingLeft: SP.lg, fontFamily: sans, fontSize: FS.xs, color: SECOND, lineHeight: 1.6 }}>
+          <ul style={{ margin: 0, paddingLeft: SP.lg, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.6 }}>
             {signals.map((s, i) => <li key={i}>{s}</li>)}
           </ul>
         </div>
@@ -340,7 +343,7 @@ export default function AdminTrendsPanel() {
         <Card title="Combination heatmap" control={
           <div style={{ display: 'flex', gap: SP.xs }}>
             <Select value={rowField} onChange={setRowField} options={CONFIG_FIELDS} />
-            <span style={{ color: MUTED, fontSize: FS.xs, alignSelf: 'center' }}>×</span>
+            <span style={{ color: MUTED, fontSize: chromeFontSize(FS.xs, mobile), alignSelf: 'center' }}>×</span>
             <Select value={colField} onChange={setColField} options={CONFIG_FIELDS} />
           </div>
         }>
@@ -364,7 +367,7 @@ export default function AdminTrendsPanel() {
 
       {/* ── System behaviour: what the CODE does (pulse / stressor / variance) ── */}
       <h3 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK_DEEP, margin: `${SP.lg}px 0 ${SP.sm}px` }}>
-        System behaviour <span style={{ fontFamily: sans, fontSize: FS.xxs, fontWeight: 500, color: MUTED }}>(what the simulation records)</span>
+        System behaviour <span style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 500, color: MUTED }}>(what the simulation records)</span>
       </h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: SP.md }}>
         <Card title="World-pulse mutations">
@@ -379,7 +382,7 @@ export default function AdminTrendsPanel() {
 
         <Card title="Proposal accept vs block" control={
           proposalSummary.acceptRate != null
-            ? <span style={{ fontFamily: sans, fontSize: FS.xs, color: SECOND }}>
+            ? <span style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: SECOND }}>
                 {proposalSummary.acceptRate}% accepted <span style={{ color: MUTED }}>({fmtInt(proposalSummary.applied)}/{fmtInt(proposalSummary.total)})</span>
               </span>
             : null

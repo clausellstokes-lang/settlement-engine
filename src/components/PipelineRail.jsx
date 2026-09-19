@@ -40,6 +40,8 @@ import {
   traceTokenLabel,
 } from '../domain/display/tracePresentation.js';
 import { t } from '../copy/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
 const COG_COLOR = swatch['#8C6F32'];      // gold-700 (procedural, bronze cog)
@@ -51,6 +53,7 @@ const BODY = swatch['#4A3B22'];           // ink-600 (WCAG-passing)
 const MUTED = swatch['#6B5340'];
 
 export function StepRow({ entry, isLast, traces }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   // The rail's words only. `metaForStep` is the WORKER's half of stepMetadata.js and
   // carries no label or description: holding the two apart is what keeps 2.9 kB of
@@ -104,13 +107,13 @@ export function StepRow({ entry, isLast, traces }) {
           </span>
         </div>
         {entry.summary && (
-          <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
             {entry.summary}
           </div>
         )}
         {open && meta.description && (
           <div style={{
-            fontSize: FS.xs, fontStyle: 'italic',
+            fontSize: proseFontSize(FS.xs, mobile), fontStyle: 'italic',
             color: MUTED, marginTop: 6,
             fontFamily: serif_,
             lineHeight: 1.55,
@@ -130,7 +133,7 @@ export function StepRow({ entry, isLast, traces }) {
                 padding: '6px 8px',
                 background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
-                fontSize: FS.xs, color: BODY, lineHeight: 1.5,
+                fontSize: chromeFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
                   {traceTargetLabel(trace)}{' '}
@@ -146,7 +149,7 @@ export function StepRow({ entry, isLast, traces }) {
                         {c.effect ? <span style={{ color: MUTED }}> · {traceEffectLabel(c.effect)}</span> : null}
                         {c.reason ? (
                           <div style={{
-                            fontSize: FS['10.5'], fontStyle: 'italic',
+                            fontSize: chromeFontSize(FS['10.5'], mobile), fontStyle: 'italic',
                             color: MUTED, marginTop: 1,
                             fontFamily: serif_,
                           }}>
@@ -158,7 +161,7 @@ export function StepRow({ entry, isLast, traces }) {
                   </ul>
                 )}
                 {Array.isArray(trace.downstreamEffects) && trace.downstreamEffects.length > 0 && (
-                  <div style={{ marginTop: 4, fontSize: FS.xxs, color: MUTED }}>
+                  <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>
                     What this shaped:{' '}
                     {trace.downstreamEffects.map((d, k) => (
                       <span key={k}>
@@ -174,7 +177,7 @@ export function StepRow({ entry, isLast, traces }) {
               </div>
             ))}
             {stepTraces.length > 8 && (
-              <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic' }}>
                 + {stepTraces.length - 8} more decisions in this step
               </div>
             )}
@@ -191,6 +194,7 @@ export function StepRow({ entry, isLast, traces }) {
 // least one spine line is non-placeholder.
 
 function SimulationSpine({ settlement }) {
+  const mobile = useIsMobile();
   const rows = simulationSpineRows(settlement);
   if (!rows.length) return null;
   return (
@@ -206,7 +210,7 @@ function SimulationSpine({ settlement }) {
       }}
     >
       <div style={{
-        fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.08em',
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, letterSpacing: '0.08em',
         textTransform: 'uppercase', color: MUTED,
         marginBottom: 4,
       }}>
@@ -216,7 +220,7 @@ function SimulationSpine({ settlement }) {
         {rows.map(([label, body], i) => (
           <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
             <dt style={{
-              fontSize: FS.xxs, color: MUTED, fontWeight: 600,
+              fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontWeight: 600,
               letterSpacing: '0.04em',
             }}>
               {label}
@@ -235,6 +239,7 @@ function SimulationSpine({ settlement }) {
 }
 
 export default function PipelineRail({ compact = false, settlement: settlementProp = null }) {
+  const mobile = useIsMobile();
   const history = useStore(s => s.pipelineHistory);
   // Read the active settlement so trace lookups + the spine card have
   // their data source. Subscribes through useStore so a regeneration
@@ -281,7 +286,7 @@ export default function PipelineRail({ compact = false, settlement: settlementPr
             reads any step. Viewer mode has no step list, so no legend. */}
         {!viewerMode && <div style={{
           display: 'flex', gap: 14, marginTop: 10,
-          fontSize: FS.xxs, color: MUTED, fontWeight: 600,
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontWeight: 600,
           textTransform: 'uppercase', letterSpacing: '0.04em',
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>

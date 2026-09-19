@@ -30,6 +30,8 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { t } from '../../copy/index.js';
 import { SINGLE_DOSSIER, TIERS } from '../../config/pricing.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const CARTOGRAPHER_PRICE = `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}`;
 
@@ -42,6 +44,7 @@ const CARTOGRAPHER_PRICE = `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}
  * @param {boolean} [props.busy]              — one-time checkout redirect in flight.
  */
 export default function DossierLadderModal({ onClose, onCreateAccount, onCartographer, onOneTime, busy = false }) {
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(true, onClose);
   // Pre-launch lockout (lib/launchGate.js): the two purchase rungs (Cartographer and
   // the one-time download) render disabled and wear the Available at launch pill
@@ -140,7 +143,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
                     {rung.busy ? t('dossierExport.buySaved.busy') : rung.label}
                     {locked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
                   </span>
-                  <span style={{ display: 'block', marginTop: SP.xs, fontSize: FS.xs, color: BODY, lineHeight: 1.45, fontWeight: 500 }}>
+                  <span style={{ display: 'block', marginTop: SP.xs, fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.45, fontWeight: 500 }}>
                     {rung.description}
                   </span>
                 </span>

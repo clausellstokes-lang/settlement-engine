@@ -15,6 +15,7 @@ import Button from '../primitives/Button.jsx';
 import { GOLD, INK, BODY, BORDER_STRONG, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * Layout wrapper that is a no-op on desktop and a wrapping flex row on mobile.
@@ -47,6 +48,7 @@ function ActionGroup({ isMobile, mobileTrailing = false, children }) {
  * }} props
  */
 export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns }) {
+  const mobile = useIsMobile();
   const [moveOpen, setMoveOpen] = useState(false);
   const isMobile = useIsMobile();
   const selectedCount = bulk.selectedIds.size;
@@ -65,12 +67,12 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
     ? {
         display: 'flex', flexDirection: 'column', gap: SP.sm,
         padding: '8px 12px', background: swatch['#F5EDE0'],
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       }
     : {
         display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         padding: '8px 12px', background: swatch['#F5EDE0'],
-        fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
       };
 
   return (
@@ -103,7 +105,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                   Print has no z-axis; the drop shadow and its rgba went with it. */}
               {moveOpen && !disabled && (
                 <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER_STRONG}`, minWidth: 160, padding: 4 }}>
-                  {campaigns.length === 0 && <div style={{ padding: '5px 8px', fontSize: FS.xs, color: BODY }}>No campaigns yet</div>}
+                  {campaigns.length === 0 && <div style={{ padding: '5px 8px', fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>No campaigns yet</div>}
                   {campaigns.map(c => (
                     // No minHeight override: menu items inherit Button's sm floor so
                     // these (the only path to bulk add-to-campaign) aren't the
@@ -124,7 +126,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                         textAlign: 'left',
                         padding: '6px 8px',
                         gap: 4,
-                        fontSize: FS.xs,
+                        fontSize: chromeFontSize(FS.xs, mobile),
                         color: INK,
                         fontWeight: 400,
                       }}
@@ -173,7 +175,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
       {/* Export-error — a failed bulk export is no longer silent (P10); the
           selection is preserved (hook does not clear on failure) so retry works. */}
       {bulk.exportError && (
-        <div role="alert" style={{ padding: '6px 12px', fontSize: FS.xs, color: RED, background: RED_BG, fontFamily: sans }}>
+        <div role="alert" style={{ padding: '6px 12px', fontSize: chromeFontSize(FS.xs, mobile), color: RED, background: RED_BG, fontFamily: sans }}>
           {bulk.exportError}
         </div>
       )}

@@ -29,6 +29,7 @@ import { sans, FS, SP, swatch } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const AMBER = swatch['#D08020'];
 const AMBER_BG = swatch['#FBEAD0'];
@@ -177,7 +178,7 @@ export default function PendingChangesBar() {
           border: `1px solid ${AMBER}`,
           borderLeft: `3px solid ${AMBER}`,
           display: 'flex', alignItems: 'center', gap: SP.sm,
-          fontFamily: sans, fontSize: FS.xs, color: INK,
+          fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK,
           flexWrap: 'wrap',
         }}
       >
@@ -199,7 +200,7 @@ export default function PendingChangesBar() {
           ))
           : <span aria-hidden="true" style={{ flex: 1, minWidth: 0 }} />}
         {mobile ? (
-          <span style={{ flexBasis: '100%', color: swatch['#3A2F18'], fontSize: FS.xxs, lineHeight: 1.5 }}>
+          <span style={{ flexBasis: '100%', color: swatch['#3A2F18'], fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5 }}>
             Reviewing and saving these edits is best on a larger screen. Open this dossier on desktop to preview the cascade and commit.
           </span>
         ) : (

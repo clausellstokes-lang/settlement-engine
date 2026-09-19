@@ -24,6 +24,8 @@ import {
 import Badge from '../primitives/Badge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { FieldLabelBadge } from '../surveyor/surveyorPanelKit.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const ENTRY_LABEL_TONE = {
   required: 'gold',
@@ -54,6 +56,7 @@ function inputType(spec, value) {
 }
 
 function FieldEditor({ bucket, field, value, onChange }) {
+  const mobile = useIsMobile();
   const controlId = useId();
   const spec = getCustomContentField(bucket, field);
   const type = inputType(spec, value);
@@ -63,7 +66,7 @@ function FieldEditor({ bucket, field, value, onChange }) {
     style: {
       flex: 1,
       minWidth: 120,
-      fontSize: FS.xs,
+      fontSize: chromeFontSize(FS.xs, mobile),
       fontFamily: sans,
       color: INK,
       border: `1px solid ${BORDER}`,
@@ -76,7 +79,7 @@ function FieldEditor({ bucket, field, value, onChange }) {
     return (
       <label
         htmlFor={controlId}
-        style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontSize: FS.xs, color: BODY }}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}
       >
         <input
           id={controlId}
@@ -159,6 +162,7 @@ export default function ContentDraftEntry({
   decision,
   onDecide,
 }) {
+  const mobile = useIsMobile();
   const action = decision?.action || 'pending';
   const baseEntry = candidate?.entry && typeof candidate.entry === 'object'
     ? candidate.entry
@@ -185,7 +189,7 @@ export default function ContentDraftEntry({
         gap: 6,
       }}
     >
-      <legend style={{ padding: `0 ${SP.xs}px`, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+      <legend style={{ padding: `0 ${SP.xs}px`, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
         {category?.singular || category?.label || candidate?.bucket || `Entry ${index + 1}`}
         {baseEntry.name ? `: ${baseEntry.name}` : ''}
       </legend>
@@ -196,7 +200,7 @@ export default function ContentDraftEntry({
             {candidate.label}
           </Badge>
         )}
-        <span style={{ fontSize: FS.xs, color: candidate?.sourced ? GOLD : MUTED }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: candidate?.sourced ? GOLD : MUTED }}>
           {candidate?.sourced ? '◆ stated in your request' : '◇ inferred by the compiler'}
         </span>
         <span style={{ flex: 1 }} />
@@ -229,7 +233,7 @@ export default function ContentDraftEntry({
       </div>
 
       {candidate?.rationale && (
-        <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, lineHeight: 1.45 }}>
+        <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45 }}>
           {candidate.rationale}
         </p>
       )}
@@ -243,7 +247,7 @@ export default function ContentDraftEntry({
           const editable = action === 'edit' && truth.label !== 'unsupported';
           return (
             <div key={field} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 92 }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, minWidth: 92 }}>
                 {field.replace(/([A-Z])/g, ' $1')}
               </span>
               <FieldLabelBadge kind={truth.label} />
@@ -255,12 +259,12 @@ export default function ContentDraftEntry({
                   onChange={(next) => setField(field, next)}
                 />
               ) : (
-                <span style={{ fontSize: FS.xs, color: truth.label === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>
+                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: truth.label === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>
                   {displayedValue(value)}
                 </span>
               )}
               {truth.explanation && (
-                <span style={{ flexBasis: '100%', marginLeft: 100, fontSize: FS.micro, color: MUTED, lineHeight: 1.35 }}>
+                <span style={{ flexBasis: '100%', marginLeft: 100, fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.35 }}>
                   {truth.explanation}
                 </span>
               )}

@@ -42,6 +42,8 @@ import { navigate } from '../../hooks/useRoute.js';
 import {
   BORDER, BORDER2, CARD, CARD_ALT, FS, MUTED, PARCH, SECOND, SP, sans,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const MIN_SCALE = 1;
 const MAX_SCALE = 6;
@@ -165,6 +167,7 @@ function RealmIndexMap({ img, imageAlt, backdrop, pins, selectedId, onSelect }) 
  *   world, members, imageUrl, imageAlt).
  */
 export default function CampaignWorldView({ detail }) {
+  const mobile = useIsMobile();
   const d = detail || {};
   const members = useMemo(() => (Array.isArray(d.members) ? d.members : []), [d.members]);
   const snapshot = d.world?.snapshot || null;
@@ -259,7 +262,7 @@ export default function CampaignWorldView({ detail }) {
                 {m.name || 'Settlement'}{m.tier ? ` · ${m.tier}` : ''}
               </Button>
             ) : (
-              <span key={m.old_id} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
+              <span key={m.old_id} style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
                 {m.name || 'Settlement'}{m.tier ? ` · ${m.tier}` : ''}
               </span>
             ))}

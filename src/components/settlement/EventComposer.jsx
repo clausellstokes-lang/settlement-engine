@@ -56,12 +56,15 @@ import {
 // Clock-bound queue-refusal + batch-outcome helpers (store-hooks-state-1) — the
 // DM's-order-is-sacred surfacing, kept out of this file for the max-lines split.
 import { applyRefusalPayload, applyRefusalMessage, batchApplyOutcome, batchRefusalText } from './eventComposer/applyOutcome.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // onLink (= SettlementDetail's handleLink) is threaded in only so the folded
 // LINK_NEIGHBOUR pseudo-event can delegate to the neighbour-link cascade. With no
 // onLink handler wired the LINK_NEIGHBOUR entry simply does not appear — the whole
 // feature ships dormant until the fenced SettlementDetail.jsx passes it through.
 export default function EventComposer({ onLink = null }) {
+  const mobile = useIsMobile();
   const phase     = useStore(s => s.phase);
   const settlement = useStore(s => s.settlement);
   const previewEvent = useStore(s => s.previewEvent);
@@ -429,20 +432,17 @@ export default function EventComposer({ onLink = null }) {
   }
 
   return (
-    <div data-anchor="event-composer" style={{
-      background: CARD, border: `1px solid ${BORDER}`,
-      padding: SP.sm, marginTop: SP.sm,
-    }}>
+    <div data-anchor="event-composer" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: SP.sm, marginTop: SP.sm }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
         <Zap size={12} />
         Make Changes
       </div>
-      <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: -2, marginBottom: SP.sm, lineHeight: 1.4 }}>
+      <div style={{ fontSize: proseFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, marginTop: -2, marginBottom: SP.sm, lineHeight: 1.4 }}>
         {phase === 'canon'
           ? 'In-world events write to the campaign timeline.'
           : 'Draft: nothing is logged yet. Stage changes and preview their effect before you canonize.'}
@@ -461,7 +461,7 @@ export default function EventComposer({ onLink = null }) {
 
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'flex-end' }}>
         <Field label="Event">
-          <select value={type} onChange={e => switchType(e.target.value)} aria-label="Event type" style={selectStyle}>
+          <select value={type} onChange={e => switchType(e.target.value)} aria-label="Event type" style={selectStyle(mobile)}>
             {/* Predicate-driven verb list (§2): the manifest's authorable verbs.
                 Grayed-with-reason beats absent — an unavailable verb renders
                 disabled with WHY, so unavailability teaches instead of hiding.
@@ -479,7 +479,7 @@ export default function EventComposer({ onLink = null }) {
             {canLinkNeighbour && <option value="LINK_NEIGHBOUR">Link a neighbour</option>}
           </select>
           {!verbAvailability.available && (
-            <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, maxWidth: 260, lineHeight: 1.4 }}>
+            <span style={{ fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, maxWidth: 260, lineHeight: 1.4 }}>
               {[...verbAvailability.reasons, ...verbAvailability.unlocks].join(' ')}
             </span>
           )}
@@ -597,7 +597,7 @@ export default function EventComposer({ onLink = null }) {
         {/* §9b/§9g/§9h — relationship type for neighbour-targeted events */}
         {RELATIONSHIP_OPTIONS[type] && (
           <Field label="New relationship" hint="Sets this settlement's relationship with the chosen neighbour">
-            <select value={relationshipType || RELATIONSHIP_OPTIONS[type][0]} onChange={e => setRelationshipType(e.target.value)} style={selectStyle}>
+            <select value={relationshipType || RELATIONSHIP_OPTIONS[type][0]} onChange={e => setRelationshipType(e.target.value)} style={selectStyle(mobile)}>
               {RELATIONSHIP_OPTIONS[type].map(r => <option key={r} value={r}>{RELATIONSHIP_LABELS[r] || r}</option>)}
             </select>
           </Field>
@@ -613,7 +613,7 @@ export default function EventComposer({ onLink = null }) {
             importance === 'notable'? 'Small modifier on linked entity'   :
                                       'Flavor only. No engine effect'
           }>
-            <select value={importance} onChange={e => setImportance(e.target.value)} style={selectStyle}>
+            <select value={importance} onChange={e => setImportance(e.target.value)} style={selectStyle(mobile)}>
               <option value="minor">Minor</option>
               <option value="notable">Notable</option>
               <option value="key">Key</option>
@@ -646,7 +646,7 @@ export default function EventComposer({ onLink = null }) {
             const derivedImp = importanceForRole(role, roleOpts);
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
-                <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
+                <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle(mobile)}>
                   <option value="">Pick a role</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
@@ -655,14 +655,14 @@ export default function EventComposer({ onLink = null }) {
           }
           return (
             <Field label="Role" hint="e.g. High Priestess, Watch Captain">
-              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" aria-label="Role" style={inputStyle} />
+              <input value={role} onChange={e => setRole(e.target.value)} placeholder="optional" aria-label="Role" style={inputStyle(mobile)} />
             </Field>
           );
         })()}
 
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
-            <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
+            <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle(mobile)}>
               <option value="">None</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
@@ -679,7 +679,7 @@ export default function EventComposer({ onLink = null }) {
             quality === 'corrupt'           ? 'Capacity up, legitimacy hit' :
                                               'Faction-controlled appointment'
           }>
-            <select value={quality} onChange={e => setQuality(e.target.value)} style={selectStyle}>
+            <select value={quality} onChange={e => setQuality(e.target.value)} style={selectStyle(mobile)}>
               <option value="weak">Weak</option>
               <option value="competent">Competent</option>
               <option value="popular">Popular</option>
@@ -690,7 +690,7 @@ export default function EventComposer({ onLink = null }) {
         )}
 
         {(type === 'IMPAIR_INSTITUTION' || type === 'IMPAIR_FACTION') && (
-          <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.85, alignSelf: 'center', maxWidth: 240, lineHeight: 1.4 }}>
+          <span style={{ fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', color: MUTED, opacity: 0.85, alignSelf: 'center', maxWidth: 240, lineHeight: 1.4 }}>
             Applies a standard setback. Pick the target and (optionally) note what happened.
           </span>
         )}
@@ -698,7 +698,7 @@ export default function EventComposer({ onLink = null }) {
         {/* Description is not meaningful for the delegate-only LINK_NEIGHBOUR. */}
         {!isLinkNeighbour && (
           <Field label="Description" hint="optional">
-            <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle} />
+            <input value={description} onChange={e => setDesc(e.target.value)} placeholder="e.g. burned during a brawl" aria-label="Description" style={inputStyle(mobile)} />
           </Field>
         )}
 
@@ -712,7 +712,7 @@ export default function EventComposer({ onLink = null }) {
               padding: '5px 9px', cursor: 'pointer',
               border: `1px solid ${partyCaused ? PARTY : BORDER}`,
               background: partyCaused ? PARTY_BG : 'transparent',
-              color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,
+              color: partyCaused ? PARTY : MUTED, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, fontWeight: 700,
             }}
           >
             <input
@@ -746,14 +746,14 @@ export default function EventComposer({ onLink = null }) {
       {/* Apply refusal: a handler veto (§2) OR a clock-bound queue refusal
           (store-hooks-state-1) — both blocking, both keep the form. */}
       {applyRefusal && applyRefusal.forKey === currentKey && (
-        <div style={refusalBoxStyle}>
+        <div style={refusalBoxStyle(mobile)}>
           {applyRefusalMessage(applyRefusal, vetoProse)}
         </div>
       )}
 
       {/* Queued-vs-now (§5): plainly said, never silent. */}
       {queuesToNextAdvance && (
-        <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
+        <div style={{ marginTop: 6, fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
           {CLOCK_BOUND_SCOPE_NOTICE}
         </div>
       )}

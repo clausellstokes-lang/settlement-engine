@@ -1,5 +1,7 @@
 import { BODY, MUTED, BORDER, GOLD, FS, SP, sans } from '../theme.js';
 import { FieldLabelBadge, Eyebrow } from '../surveyor/surveyorPanelKit.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const LABELS = Object.freeze([
   'mechanical',
@@ -16,6 +18,7 @@ const LABELS = Object.freeze([
  * force merely because a model described it confidently.
  */
 export default function ContentInterpretation({ interpretation }) {
+  const mobile = useIsMobile();
   if (!interpretation) return null;
   const percent = Math.round((interpretation.mappingRate ?? 0) * 100);
   return (
@@ -44,7 +47,7 @@ export default function ContentInterpretation({ interpretation }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 3,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               color: BODY,
               fontFamily: sans,
             }}
@@ -58,7 +61,7 @@ export default function ContentInterpretation({ interpretation }) {
         <div
           key={`${entry.bucket}:${entry.index}`}
           style={{
-            fontSize: FS.xs,
+            fontSize: proseFontSize(FS.xs, mobile),
             color: BODY,
             fontFamily: sans,
             lineHeight: 1.45,
@@ -81,7 +84,7 @@ export default function ContentInterpretation({ interpretation }) {
       ))}
       {interpretation.assumptions.length > 0 && (
         <div style={{
-          fontSize: FS.xs,
+          fontSize: proseFontSize(FS.xs, mobile),
           color: MUTED,
           fontFamily: sans,
           lineHeight: 1.45,

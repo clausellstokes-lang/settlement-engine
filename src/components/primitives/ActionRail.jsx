@@ -23,6 +23,8 @@ import { FS, swatch, GOLD_DEEP, INK, CARD, BORDER, PARCH } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 import { useIconsOn } from './IconsContext.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const VISIBLE_CAP = 5;
 
@@ -45,6 +47,7 @@ const VISIBLE_CAP = 5;
  * @param {ActionRailItem[]} props.items
  */
 export default function ActionRail({ title = 'Next best action', items = [] }) {
+  const mobile = useIsMobile();
   const [showMore, setShowMore] = useState(false);
   const iconsOn = useIconsOn();
   if (!items.length) return null;
@@ -75,7 +78,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               gap: 4, padding: '4px 8px',
               background: 'transparent', border: 'none',
-              fontSize: FS.xs, fontWeight: 700,
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
               fontFamily: 'system-ui, -apple-system, sans-serif',
               color: swatch.inkMag3, cursor: 'pointer',
             }}
@@ -90,6 +93,7 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
 }
 
 function ActionRow({ item }) {
+  const mobile = useIsMobile();
   const Icon = item.Icon;
   const iconsOn = useIconsOn();
   const tone = item.primary ? primaryTone : secondaryTone;
@@ -132,7 +136,7 @@ function ActionRow({ item }) {
                 // S2r-c materials: flat parchment chip, hairline-ruled — no radius,
                 // palette tokens (the master rail's rounded + rgba tag is struck).
                 flexShrink: 0,
-                fontSize: FS.xxs, fontWeight: 700,
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                 letterSpacing: '0.02em',
                 padding: '1px 5px',
                 background: PARCH,
@@ -148,7 +152,7 @@ function ActionRow({ item }) {
             id={`${item.id}-hint`}
             style={{
               display: 'block',
-              fontSize: FS.xxs, fontWeight: 400, opacity: 0.85,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 400, opacity: 0.85,
               marginTop: 2, lineHeight: 1.35,
             }}
           >

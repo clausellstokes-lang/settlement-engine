@@ -37,6 +37,8 @@ import Segmented from '../primitives/Segmented.jsx';
 import Button from '../primitives/Button.jsx';
 import Badge from '../primitives/Badge.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // House-voice labels for the closed vocabulary (the chronicler's register).
 const KIND_LABELS = {
@@ -73,9 +75,10 @@ const selectStyle = {
   border: `1px solid ${SLATE_BG}`, background: CARD, color: INK,
   fontSize: FS.sm, fontFamily: sans,
 };
-const labelStyle = { display: 'block', fontSize: FS.xs, color: MUTED, fontFamily: sans, letterSpacing: '0.03em', marginBottom: SP.xs, textTransform: 'uppercase' };
+const labelStyle = (mobile) => ({ display: 'block', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, letterSpacing: '0.03em', marginBottom: SP.xs, textTransform: 'uppercase' });
 
 export default function TableLedgerPanel() {
+  const mobile = useIsMobile();
   const settlement = useStore((s) => s.settlement);
   const phase = useStore((s) => s.phase);
   const queue = useStore((s) => s.pendingEditsQueue || []);
@@ -179,7 +182,7 @@ export default function TableLedgerPanel() {
       </p>
 
       <div style={{ marginBottom: SP.md }}>
-        <span style={labelStyle}>What happened</span>
+        <span style={labelStyle(mobile)}>What happened</span>
         {/* A select, not the Segmented pill row: the vocabulary is eight kinds
             and Segmented is a 2-4 control whose cells never wrap, so the pills
             would run off the panel. The vocabulary stays CLOSED either way —
@@ -191,12 +194,12 @@ export default function TableLedgerPanel() {
         >
           {KIND_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
         </select>
-        <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.xs}px 0 0` }}>{KIND_HINTS[kind]}</p>
+        <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: `${SP.xs}px 0 0` }}>{KIND_HINTS[kind]}</p>
       </div>
 
       {spec.needsTarget && (
         <div style={{ marginBottom: SP.md }}>
-          <span style={labelStyle}>Who or what</span>
+          <span style={labelStyle(mobile)}>Who or what</span>
           <select id="tl-target" aria-label="Who or what" style={selectStyle} value={targetRef} onChange={(e) => setTargetRef(e.target.value)}>
             <option value="">{targetOptions.length ? 'Choose…' : 'Nothing here to name yet'}</option>
             {targetOptions.map((o) => <option key={o.ref} value={o.ref}>{o.label}</option>)}
@@ -206,30 +209,30 @@ export default function TableLedgerPanel() {
 
       {spec.needsMagnitude && (
         <div style={{ marginBottom: SP.md }}>
-          <span style={labelStyle}>How much</span>
+          <span style={labelStyle(mobile)}>How much</span>
           <Segmented options={BAND_OPTIONS} value={band} onChange={setBand} ariaLabel="Magnitude" />
         </div>
       )}
 
       <div style={{ marginBottom: SP.md }}>
-        <span style={labelStyle}>In your own words</span>
+        <span style={labelStyle(mobile)}>In your own words</span>
         <textarea
           id="tl-flavor" aria-label="In your own words" value={flavor} onChange={(e) => setFlavor(e.target.value)} rows={2}
           placeholder="The party bought the miller a season’s grain…"
           style={{ ...selectStyle, resize: 'vertical', minHeight: 44 }}
         />
-        <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.xs}px 0 0` }}>
+        <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: `${SP.xs}px 0 0` }}>
           Kept verbatim on the receipt. Never fed to the engine. Flavor only.
         </p>
       </div>
 
       {incidentNeedsCanon && (
-        <p style={{ fontFamily: sans, fontSize: FS.xs, color: AMBER_DEEP, margin: `0 0 ${SP.sm}px` }}>
+        <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: AMBER_DEEP, margin: `0 0 ${SP.sm}px` }}>
           Canonize this settlement to write a chronicle line.
         </p>
       )}
       {note && (
-        <p role="alert" style={{ fontFamily: sans, fontSize: FS.xs, color: RED, margin: `0 0 ${SP.sm}px` }}>{note}</p>
+        <p role="alert" style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: RED, margin: `0 0 ${SP.sm}px` }}>{note}</p>
       )}
 
       <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center' }}>
@@ -260,7 +263,7 @@ export default function TableLedgerPanel() {
 
       {tableEvents.length > 0 && (
         <div style={{ marginTop: SP.lg, borderTop: `1px solid ${SLATE_BG}`, paddingTop: SP.md }}>
-          <span style={labelStyle}>{tableEvents.length} recorded, awaiting the world</span>
+          <span style={labelStyle(mobile)}>{tableEvents.length} recorded, awaiting the world</span>
           <ul style={{ listStyle: 'none', margin: `${SP.xs}px 0 ${SP.md}px`, padding: 0, display: 'flex', flexDirection: 'column', gap: SP.xs }}>
             {tableEvents.map((e) => (
               <li key={e.id} style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontFamily: sans, fontSize: FS.sm, color: INK }}>
@@ -289,6 +292,7 @@ export default function TableLedgerPanel() {
  * @param {{ targets: any, onAccept: (record:any)=>void }} props
  */
 function TableClerkAffordance({ targets, onAccept }) {
+  const mobile = useIsMobile();
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState(/** @type {any} */ (null));
@@ -314,7 +318,7 @@ function TableClerkAffordance({ targets, onAccept }) {
           {busy ? 'Reading…' : 'Ask the clerk'}
         </Button>
         {result && !result.ok && (
-          <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.sm}px 0 0` }}>{result.error}</p>
+          <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: `${SP.sm}px 0 0` }}>{result.error}</p>
         )}
         {result && result.ok && (
           <div style={{ marginTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.xs }}>
@@ -326,7 +330,7 @@ function TableClerkAffordance({ targets, onAccept }) {
               </div>
             ))}
             {!(result.accepted || []).length && (
-              <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: 0 }}>The clerk found nothing it could bucket. Record it by hand.</p>
+              <p style={{ fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: 0 }}>The clerk found nothing it could bucket. Record it by hand.</p>
             )}
           </div>
         )}

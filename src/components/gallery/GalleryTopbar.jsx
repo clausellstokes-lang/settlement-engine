@@ -1,6 +1,8 @@
 import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
   BORDER, CARD, BODY, FS, INK, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * The search + sort + result-count strip shared by all three gallery tabs
@@ -23,6 +25,7 @@ export default function GalleryTopbar({
   error = false,
   countRef = null,
 }) {
+  const mobile = useIsMobile();
   const nounPlural = `${noun}s`;
   return (
     <div className="gallery-topbar" style={{
@@ -82,7 +85,7 @@ export default function GalleryTopbar({
         gridColumn: '1 / -1',
         color: BODY,
         fontFamily: sans,
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         fontWeight: 850,
         justifySelf: 'start',
       }}>
@@ -102,7 +105,7 @@ export default function GalleryTopbar({
           gridColumn: '1 / -1',
           color: BODY,
           fontFamily: sans,
-          fontSize: FS.xs,
+          fontSize: chromeFontSize(FS.xs, mobile),
           fontWeight: 750,
           justifySelf: 'start',
         }}>

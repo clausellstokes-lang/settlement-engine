@@ -27,6 +27,8 @@ import useLivePricing from '../../hooks/useLivePricing.js';
 import Button from '../primitives/Button.jsx';
 import {
   INK, MUTED, BODY, BORDER2, CARD_HDR, RED, GREEN, GOLD_TXT, sans, SP, FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Format an ISO timestamp for the "last updated" line, resilient to junk. */
 function formatUpdatedAt(iso) {
@@ -51,10 +53,11 @@ function candidateProvider(modelId) {
 
 /** Small labelled block wrapping a table/list; hidden when empty. */
 function ReportBlock({ title, count, children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ marginTop: SP.md }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans,
         textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs,
       }}>
         {title}{count != null ? ` (${count})` : ''}
@@ -65,12 +68,12 @@ function ReportBlock({ title, count, children }) {
 }
 
 /** Shared header-row style for the mini report tables. */
-const headRow = {
+const headRow = (mobile) => ({
   display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
   background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
-  fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase',
+  fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase',
   letterSpacing: '0.06em', fontFamily: sans,
-};
+});
 const bodyRow = {
   display: 'flex', gap: SP.sm, padding: `${SP.sm}px ${SP.md}px`,
   borderBottom: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK,
@@ -79,6 +82,7 @@ const tableWrap = { border: `1px solid ${BORDER2}`, overflow: 'hidden' };
 
 export default function AiPricingResyncPanel() {
   // This panel is lazy, so the live read never enters the first-paint graph.
+  const mobile = useIsMobile();
   const aiPricing = useLivePricing();
 
   const [dryRun, setDryRun] = useState(true);   // safe default: preview, don't write
@@ -155,14 +159,14 @@ export default function AiPricingResyncPanel() {
       }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: SP.md }}>
           <span style={{
-            fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans,
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
             Nightly auto-resync
           </span>
           {cron && (
             <span style={{
-              fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, fontFamily: sans,
               textTransform: 'uppercase', letterSpacing: '0.06em',
               padding: `2px ${SP.xs}px`,
               color: cron.enabled ? GREEN : MUTED,
@@ -209,7 +213,7 @@ export default function AiPricingResyncPanel() {
               <div style={{ color: MUTED }}>Last run: never</div>
             )}
             {cron.lastRun?.ok && cron.lastRun.summary?.warnings?.length > 0 && (
-              <ul style={{ margin: `${SP.xs}px 0 0`, paddingLeft: SP.lg, fontSize: FS.xs, color: RED, fontFamily: sans }}>
+              <ul style={{ margin: `${SP.xs}px 0 0`, paddingLeft: SP.lg, fontSize: chromeFontSize(FS.xs, mobile), color: RED, fontFamily: sans }}>
                 {cron.lastRun.summary.warnings.map((w, i) => <li key={i}>{w}</li>)}
               </ul>
             )}
@@ -251,7 +255,7 @@ export default function AiPricingResyncPanel() {
             background: CARD_HDR, border: `1px solid ${BORDER2}`,
           }}>
             <span style={{
-              fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, fontFamily: sans,
               textTransform: 'uppercase', letterSpacing: '0.06em',
               color: report.dryRun ? GOLD_TXT : GREEN,
             }}>
@@ -271,7 +275,7 @@ export default function AiPricingResyncPanel() {
           {report.creditChanges?.length > 0 && (
             <ReportBlock title="Credit changes" count={report.creditChanges.length}>
               <div style={tableWrap} role="table" aria-label="Credit changes">
-                <div style={headRow} role="row">
+                <div style={headRow(mobile)} role="row">
                   <span role="columnheader" style={{ flex: 2 }}>Profile</span>
                   <span role="columnheader" style={{ flex: 1 }}>Feature</span>
                   <span role="columnheader" style={{ flex: 1, textAlign: 'right' }}>Old → New</span>
@@ -297,7 +301,7 @@ export default function AiPricingResyncPanel() {
           {report.priceChanges?.length > 0 && (
             <ReportBlock title="Price changes" count={report.priceChanges.length}>
               <div style={tableWrap} role="table" aria-label="Price changes">
-                <div style={headRow} role="row">
+                <div style={headRow(mobile)} role="row">
                   <span role="columnheader" style={{ flex: 2 }}>Profile</span>
                   <span role="columnheader" style={{ flex: 1 }}>Field</span>
                   <span role="columnheader" style={{ flex: 1, textAlign: 'right' }}>Old → New</span>
@@ -340,7 +344,7 @@ export default function AiPricingResyncPanel() {
           {/* Candidate models parsed from a provider but outside the 8 profiles. */}
           {report.candidates?.length > 0 && (
             <ReportBlock title="Candidate models" count={report.candidates.length}>
-              <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.6 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.6 }}>
                 {report.candidates.map((c, i) => (
                   <span key={`${c.modelId}-${i}`} style={{ display: 'inline-block', marginRight: SP.md }}>
                     {candidateProvider(c.modelId)}/{c.modelId}

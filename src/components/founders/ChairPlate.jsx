@@ -24,6 +24,8 @@ import Button from '../primitives/Button.jsx';
 import { HALL, RING_TONE, RING_LABEL, numeralStyle, plateNameStyle, quietLineStyle, plateDelay } from './hallRegister.js';
 import { chairNumeral, seatedLabel } from '../../lib/foundersHall.js';
 import { SP, FS, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {Object} props
@@ -32,6 +34,7 @@ import { SP, FS, sans } from '../theme.js';
  * @param {(chair: object) => void} props.onOpen
  */
 export default function ChairPlate({ chair, index, onOpen }) {
+  const mobile = useIsMobile();
   const numeral = chairNumeral(chair.chair);
   const seated = seatedLabel(chair.seatedAt);
   const ring = chair.ringRole || null;
@@ -88,20 +91,20 @@ export default function ChairPlate({ chair, index, onOpen }) {
           fontWeight: 400,
         }}
       >
-        <span style={numeralStyle}>Seat {numeral}</span>
+        <span style={numeralStyle(mobile)}>Seat {numeral}</span>
         <span style={{ ...plateNameStyle, fontStyle: named ? 'normal' : 'italic' }}>
           {named ? chair.displayName : 'This chair is held'}
         </span>
         {ringLabel && (
           <span style={{
-            fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
+            fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
             letterSpacing: '0.08em', textTransform: 'uppercase',
             color: ringTone,
           }}>
             {ringLabel}
           </span>
         )}
-        {seated && <span style={quietLineStyle}>{seated}</span>}
+        {seated && <span style={quietLineStyle(mobile)}>{seated}</span>}
       </Button>
     </li>
   );

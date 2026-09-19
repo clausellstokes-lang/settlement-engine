@@ -16,8 +16,11 @@ import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { t } from '../../copy/index.js';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function GalleryReportDialog({ dossier, auth, disabled, onReport, label = 'settlement' }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState('unsafe_content');
   const [body, setBody] = useState('');
@@ -126,7 +129,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
               />
             </header>
             <div style={{ display: 'grid', gap: SP.md, padding: SP.lg }}>
-              <label htmlFor="gallery-report-reason" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+              <label htmlFor="gallery-report-reason" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
                 Reason
                 <select
                   id="gallery-report-reason"
@@ -145,7 +148,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                   {REPORT_REASON_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
                 </select>
               </label>
-              <label htmlFor="gallery-report-notes" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+              <label htmlFor="gallery-report-notes" style={{ display: 'grid', gap: 6, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
                 Notes
                 <textarea
                   id="gallery-report-notes"
@@ -167,7 +170,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                   }}
                 />
               </label>
-              <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
+              <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
                 Reports are reviewed by developer/admin accounts.
               </div>
               {error && (
@@ -176,7 +179,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport,
                 // role=alert (SB5): the failure appears after the user acts, so
                 // it must interrupt assistive tech (WCAG 4.1.3, the Alert
                 // primitive's tone→liveness contract).
-                <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>
+                <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.5 }}>
                   {error}
                 </div>
               )}

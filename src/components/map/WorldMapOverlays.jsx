@@ -15,6 +15,8 @@ import { t } from '../../copy/index.js';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
 import { realmHasAdvanced } from '../../lib/realmHeraldGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SimulationRulesDialog = lazy(() => import('./SimulationRulesDialog.jsx'));
 // THE GATHERED ADJUDICATION SCREEN (realm directive 7 / J-D7). A lazy leaf: a
@@ -66,6 +68,7 @@ export function WorldMapOverlays({
   // Only a campaign manager can hold an active campaign on this surface
   // (useWorldMapCampaignModel), so a campaign here is a writable one; the store
   // actions re-check the entitlement at the call site regardless.
+  const mobile = useIsMobile();
   const preAdvanceGates = !!activeCampaign?.id && !realmHasAdvanced(activeCampaign);
   return (
     <>
@@ -109,7 +112,7 @@ export function WorldMapOverlays({
                 flexShrink: 0,
                 background: 'rgba(255,255,255,0.16)', color: swatch.white,
                 border: '1px solid rgba(255,255,255,0.4)',
-                padding: '4px 10px', fontSize: FS.xs, fontWeight: 800,
+                padding: '4px 10px', fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
                 minHeight: undefined,
               }}
             >
@@ -160,7 +163,7 @@ export function WorldMapOverlays({
                 <div data-testid="advance-living-world" style={{ marginBottom: advanceExtra ? 10 : 0 }}>
                   {/* A perceptible wait inside an open dialog, so it is narrated. */}
                   <Suspense fallback={(
-                    <div role="status" style={{ fontSize: FS.xs, color: swatch.inkMag2, fontFamily: sans }}>
+                    <div role="status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.inkMag2, fontFamily: sans }}>
                       Laying out the living-world controls…
                     </div>
                   )}>

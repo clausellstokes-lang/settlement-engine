@@ -13,6 +13,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, serif_, SP, FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const COLUMNS = [
   { key: 'signature', label: 'Signature' },
@@ -31,6 +33,7 @@ function fmt(col, value) {
 }
 
 export default function AdminClientErrorsPanel() {
+  const mobile = useIsMobile();
   const [rows, setRows] = useState([]);
   const [alert, setAlert] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -71,7 +74,7 @@ export default function AdminClientErrorsPanel() {
         Client errors
       </h3>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
-        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
+        {refreshedAt && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
       {/* Always-visible alert banner (the ops threshold signal). Rule-framed
@@ -107,7 +110,7 @@ export default function AdminClientErrorsPanel() {
 
       {!loading && !error && rows.length > 0 && (
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: FS.xs }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%', fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
             <caption style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
               Client error reports grouped by signature
             </caption>

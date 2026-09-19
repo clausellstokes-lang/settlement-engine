@@ -34,11 +34,14 @@ import { Eye } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const CONFIDENCE_LABEL = { certain: 'certain', confident: 'confident', uncertain: 'uncertain', vague: 'only a vague sense' };
 const STALENESS_LABEL = { current: 'current', aging: 'aging', stale: 'stale' };
 
 function Pill({ children, tone }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center',
@@ -46,7 +49,7 @@ function Pill({ children, tone }) {
       border: `1px solid ${tone === 'warn' ? GOLD : BORDER2}`,
       background: tone === 'warn' ? GOLD_BG : CARD,
       color: tone === 'warn' ? GOLD : SECOND,
-      fontFamily: sans, fontSize: FS.micro, fontWeight: 800, whiteSpace: 'nowrap',
+      fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, whiteSpace: 'nowrap',
     }}>
       {children}
     </span>
@@ -54,6 +57,7 @@ function Pill({ children, tone }) {
 }
 
 function BeliefRow({ belief }) {
+  const mobile = useIsMobile();
   const b = belief.believed || {};
   const divergence = Array.isArray(belief.divergence) ? belief.divergence : [];
   return (
@@ -63,10 +67,10 @@ function BeliefRow({ belief }) {
       padding: '8px 10px',
     }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-        <strong style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, overflowWrap: 'anywhere' }}>
+        <strong style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, overflowWrap: 'anywhere' }}>
           {belief.subjectName}
         </strong>
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
           believed {b.strengthWord}, {b.readinessWord}
         </span>
       </div>
@@ -77,7 +81,7 @@ function BeliefRow({ belief }) {
         {b.faithLabel && <Pill>faith {b.faithLabel}</Pill>}
       </div>
       {divergence.length > 0 && (
-        <ul style={{ margin: '6px 0 0', paddingLeft: 15, color: SECOND, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.5 }}>
+        <ul style={{ margin: '6px 0 0', paddingLeft: 15, color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5 }}>
           {divergence.map((line, i) => <li key={i} style={{ marginBottom: 2 }}>{line}</li>)}
         </ul>
       )}
@@ -89,6 +93,7 @@ function BeliefRow({ belief }) {
  * @param {{ campaign: any, nameById?: Map<string, string> }} props
  */
 export default function BeliefDivergenceBand({ campaign, nameById }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   // includeGroundTruth convention: beliefs are DM knowledge. Premium / elevated only;
@@ -114,10 +119,10 @@ export default function BeliefDivergenceBand({ campaign, nameById }) {
 
   return (
     <section data-testid="belief-divergence-band" style={{ display: 'grid', gap: SP.sm }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         <Eye size={13} /> What they believe
       </div>
-      <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+      <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
         The fog of war, made watchable: each settlement&apos;s picture of the others, as it believes it.
       </p>
       {observers.map((o) => (
@@ -125,7 +130,7 @@ export default function BeliefDivergenceBand({ campaign, nameById }) {
           border: `1px solid ${BORDER}`, background: CARD_ALT, padding: '9px 11px',
           display: 'grid', gap: 6,
         }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
             {o.name} believes…
           </div>
           <div style={{ display: 'grid', gap: 6 }}>

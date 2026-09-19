@@ -30,12 +30,15 @@
  */
 import { GOLD, INK, SECOND as SEC, BORDER as BOR, CARD, serif_, FS, ANCHOR_OFFSET } from '../theme.js';
 import { anchorFor } from '../../lib/aboutMapping.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function Insight({ heading, children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
       padding:'10px 12px', background:CARD, marginBottom:14, breakInside:'avoid' }}>
-      <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase',
+      <div style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color:GOLD, textTransform:'uppercase',
         letterSpacing:'0.06em', marginBottom:5 }}>{heading}</div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:0 }}>{children}</p>
     </div>

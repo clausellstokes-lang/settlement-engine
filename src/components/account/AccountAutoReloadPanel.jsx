@@ -15,6 +15,8 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { INK, BODY, MUTED, SECOND, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import { AUTO_RELOAD_DEFAULTS, AUTO_RELOAD_LIMITS } from '../../lib/autoReloadClient.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const clampInt = (v, min, max, dflt) => {
   const n = parseInt(v, 10);
@@ -41,6 +43,7 @@ function Row({ label, htmlFor, children }) {
 const numInputStyle = { width: 84, padding: `${SP.xs}px ${SP.sm}px`, border: `1px solid ${BORDER}`, background: 'transparent', color: INK, fontFamily: sans, fontSize: FS.sm, textAlign: 'right' };
 
 export default function AccountAutoReloadPanel({ auth }) {
+  const mobile = useIsMobile();
   const signedIn = Boolean(auth?.user?.id);
   // THE LAUNCH GATE (lib/launchGate.js), ONE-WAY: enabling auto-reload authorises future
   // card charges, so it stays locked with the pill until launch; but turning an existing
@@ -114,7 +117,7 @@ export default function AccountAutoReloadPanel({ auth }) {
         <div style={{ fontSize: FS.sm, color: MUTED, padding: `${SP.sm}px 0` }}>Loading…</div>
       ) : (
         <div>
-          <p style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, margin: `0 0 ${SP.sm}px` }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, margin: `0 0 ${SP.sm}px` }}>
             When your balance falls below the threshold we top it back up to your target and charge
             your saved card. Off by default. To save or change a card, buy a credit pack with the
             &ldquo;save my card&rdquo; box checked, or use the billing portal above.
@@ -153,7 +156,7 @@ export default function AccountAutoReloadPanel({ auth }) {
               style={numInputStyle} />
           </Row>
 
-          <div style={{ fontSize: FS.xs, color: MUTED, marginTop: SP.sm, lineHeight: 1.6 }}>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, marginTop: SP.sm, lineHeight: 1.6 }}>
             <div>This month so far: ${(status.thisMonthSpentCents / 100).toFixed(2)} of ${form.capDollars}.00</div>
             {status.openAttempt && (
               <div style={{ paddingLeft: SP.md, borderLeft: `3px solid ${status.openAttempt.state === 'requires_action' ? swatch.danger : SECOND}`, marginTop: SP.xs }}>
@@ -176,7 +179,7 @@ export default function AccountAutoReloadPanel({ auth }) {
               {saving ? 'Saving…' : 'Save auto-reload'}
               {saveLocked && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
             </Button>
-            {saved && <span role="status" style={{ fontSize: FS.xs, color: swatch.success }}>Saved.</span>}
+            {saved && <span role="status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.success }}>Saved.</span>}
           </div>
         </div>
       )}

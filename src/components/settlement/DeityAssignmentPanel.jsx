@@ -50,6 +50,8 @@ import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // THE VOTIVE REGISTER (Deep Craft — the dossier's faith register voice): the
 // patron/cult assignment reads as a rule-framed dedication plate, not a rounded
@@ -73,9 +75,9 @@ const selectStyle = {
   width: '100%', padding: '5px 8px', border: `1px solid ${BORDER}`,
   fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD,
 };
-const headingStyle = {
-  fontSize: FS.xs, fontWeight: 700, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em',
-};
+const headingStyle = (mobile) => ({
+  fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em',
+});
 
 /**
  * Resolve an enum through its canonical authoring vocabulary. Longer labels
@@ -103,6 +105,7 @@ function snapLine(snap) {
 }
 
 export default function DeityAssignmentPanel() {
+  const mobile = useIsMobile();
   const settlement = useStore((s) => s.settlement);
   const customContent = useStore(customContentForActiveContext);
   const setPrimaryDeity = useStore((s) => s.setPrimaryDeity);
@@ -150,7 +153,7 @@ export default function DeityAssignmentPanel() {
   if (!canUseCustom && (currentSnap || cults.length)) {
     return (
       <div data-testid="deity-assignment-panel" style={wrapStyle}>
-        <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
+        <div style={{ ...headingStyle(mobile), marginBottom: 6 }}>{td('assign.patronHeading')}</div>
         {currentSnap && (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
             <div data-testid="deity-assignment-readonly" style={{ fontSize: FS.sm, color: INK, lineHeight: 1.5 }}>
@@ -167,13 +170,13 @@ export default function DeityAssignmentPanel() {
         {cults.length > 0 && (
           <div style={{ marginTop: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginBottom: 4 }}>
-              <span style={{ fontSize: FS.xs, color: SECOND }}>{td('assign.cultHeading')}</span>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND }}>{td('assign.cultHeading')}</span>
               <Button variant="ghost" size="sm" data-testid="cult-clear-all" aria-label={td('assign.clearAll')} onClick={() => imposeCult?.(null)} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
                 {td('assign.clearAll')}
               </Button>
             </div>
             {cults.map((c) => (
-              <div key={String(c._deityRef || c.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: FS.micro, color: SECOND, lineHeight: 1.4 }}>
+              <div key={String(c._deityRef || c.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: proseFontSize(FS.micro, mobile), color: SECOND, lineHeight: 1.4 }}>
                 <span><strong style={{ color: INK }}>{c.name}</strong>{snapLine(c) ? ` · ${snapLine(c)}` : ''}</span>
                 <Button variant="ghost" size="sm" aria-label={`${td('assign.remove')} ${c.name}`} onClick={() => imposeCult?.(null, String(c._deityRef || c.name || ''))} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
                   {td('assign.remove')}
@@ -182,7 +185,7 @@ export default function DeityAssignmentPanel() {
             ))}
           </div>
         )}
-        <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: 8, lineHeight: 1.45 }}>
+        <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginTop: 8, lineHeight: 1.45 }}>
           {td('assign.lapsedNote')}{' '}
           <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
             {td('assign.upsellCta')}
@@ -197,8 +200,8 @@ export default function DeityAssignmentPanel() {
   if (!canUseCustom) {
     return (
       <div data-testid="deity-assignment-panel" style={wrapStyle}>
-        <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
-        <div data-testid="deity-assignment-upsell" style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+        <div style={{ ...headingStyle(mobile), marginBottom: 6 }}>{td('assign.patronHeading')}</div>
+        <div data-testid="deity-assignment-upsell" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
           {td('assign.upsellPatron')}{' '}
           <Button variant="ghost" size="sm" disabled={!purchasesAreOpen} onClick={() => setPurchaseModalOpen?.(true)} style={{ background: 'none', border: 'none', padding: 0, minHeight: 0, color: DEITY_ACCENT, fontWeight: 800, ...(purchasesAreOpen ? null : { flexWrap: 'wrap' }) }}>
             {td('assign.upsellCta')}
@@ -246,9 +249,9 @@ export default function DeityAssignmentPanel() {
   return (
     <div data-testid="deity-assignment-panel" style={wrapStyle}>
       {/* Patron */}
-      <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
+      <div style={{ ...headingStyle(mobile), marginBottom: 6 }}>{td('assign.patronHeading')}</div>
       {deities.length === 0 && worldOptions.length === 0 ? (
-        <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>{td('assign.noneAuthored')}</div>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>{td('assign.noneAuthored')}</div>
       ) : (
         <>
           <select
@@ -270,17 +273,17 @@ export default function DeityAssignmentPanel() {
             )}
           </select>
           {worldOptions.length > 0 && (
-            <div data-testid="world-faiths-hint" style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
+            <div data-testid="world-faiths-hint" style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
               {td('assign.worldFaithsHint')}
             </div>
           )}
           {!patronVerb.available && (
-            <div data-testid="patron-verb-unavailable" style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
+            <div data-testid="patron-verb-unavailable" style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
               {[...patronVerb.reasons, ...patronVerb.unlocks].join(' ')}
             </div>
           )}
           {currentSnap && (
-            <div style={{ fontSize: FS.micro, color: SECOND, marginTop: 6, lineHeight: 1.4 }}>
+            <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: SECOND, marginTop: 6, lineHeight: 1.4 }}>
               <strong style={{ color: INK }}>{currentSnap.name}</strong>
               {snapLine(currentSnap) ? ` · ${snapLine(currentSnap)}` : ''}
             </div>
@@ -296,9 +299,9 @@ export default function DeityAssignmentPanel() {
       {(cults.length > 0 || (deities.length > 0 && currentSnap)) && (
         <div style={{ marginTop: 12, borderTop: `1px solid ${BORDER}`, paddingTop: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginBottom: 6 }}>
-            <span style={headingStyle}>{td('assign.cultHeading')}</span>
+            <span style={headingStyle(mobile)}>{td('assign.cultHeading')}</span>
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ fontSize: FS.micro, color: MUTED }}>{cults.length} / {cultCapacity}</span>
+              <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>{cults.length} / {cultCapacity}</span>
               {/* The clear-ALL-cults door (Wave R-2, atlas Gap 2b: the
                   imposeCult(null) path had no UI). Shed-direction write: the
                   store seam's deityWriteGate allows it for premium AND for a
@@ -316,7 +319,7 @@ export default function DeityAssignmentPanel() {
           {cults.length > 0 && (
             <div style={{ display: 'grid', gap: 4, marginBottom: 8 }}>
               {cults.map((c) => (
-                <div key={String(c._deityRef || c.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: FS.micro, color: SECOND, lineHeight: 1.4 }}>
+                <div key={String(c._deityRef || c.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: proseFontSize(FS.micro, mobile), color: SECOND, lineHeight: 1.4 }}>
                   <span><strong style={{ color: INK }}>{c.name}</strong>{snapLine(c) ? ` · ${snapLine(c)}` : ''}</span>
                   <Button variant="ghost" size="sm" aria-label={`${td('assign.remove')} ${c.name}`} onClick={() => imposeCult?.(null, String(c._deityRef || c.name || ''))} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
                     {td('assign.remove')}
@@ -335,12 +338,12 @@ export default function DeityAssignmentPanel() {
             // the silent no-op this guard has always closed. Belt and braces
             // with the manifest-parity line below; existing cults keep their
             // Remove buttons above (removal is the shed direction).
-            <div data-testid="cult-too-small" style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5 }}>{td('assign.tooSmall')}</div>
+            <div data-testid="cult-too-small" style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.5 }}>{td('assign.tooSmall')}</div>
           ) : !cultVerb.available ? (
             // Grayed-with-reason: the manifest's own refusal sentences (parity
             // with the composer's unavailable-verb line), replacing the panel's
             // former hand-derived capacity note.
-            <div data-testid="cult-verb-unavailable" style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5 }}>
+            <div data-testid="cult-verb-unavailable" style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.5 }}>
               {[...cultVerb.reasons, ...cultVerb.unlocks].join(' ')}
             </div>
           ) : (
@@ -356,7 +359,7 @@ export default function DeityAssignmentPanel() {
                 <option value="">{cultOptions.length ? td('assign.imposePlaceholder') : td('assign.noneToImpose')}</option>
                 {cultOptions.map((d) => <option key={d.refId} value={d.refId}>{d.name}</option>)}
               </select>
-              <div style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>{td('assign.cultHint')}</div>
+              <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, marginTop: 6, lineHeight: 1.4 }}>{td('assign.cultHint')}</div>
             </>
           )}
         </div>

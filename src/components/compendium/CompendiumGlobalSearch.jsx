@@ -19,6 +19,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { GOLD, INK, BODY, BORDER as BOR, CARD, PARCH, sans, FS, swatch } from '../theme.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { searchCompendium } from '../../domain/compendium/searchIndex.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Category → swatch. Kept as a variable map (not inline literals) so the
 // pills can be colour-coded without tripping the raw-color lint rule.
@@ -42,6 +43,7 @@ const CAT_COLOR = Object.freeze({
 });
 
 export default function CompendiumGlobalSearch({ onSelect }) {
+  const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -179,7 +181,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                     {r.term}
                   </span>
                   <span style={{
-                    fontSize: FS.xs, fontWeight: 700, color,
+                    fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color,
                     background: `${color}18`, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',

@@ -18,6 +18,8 @@ import { validateUserRoute } from '../../domain/roads/userRoutes.js';
 import { activeSpatialDigest } from '../../domain/spatial/distanceRead.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** Typed band to prose. The closed vocabulary is the domain's; the words are ours. */
 const REACH_PROSE = Object.freeze({
@@ -45,6 +47,7 @@ function refusalText(reason) {
 }
 
 export default function CharterRoadCard({ currentSave, allSaves }) {
+  const mobile = useIsMobile();
   const [selectedId, setSelectedId] = useState('');
   const [outcome, setOutcome] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -110,7 +113,7 @@ export default function CharterRoadCard({ currentSave, allSaves }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       <div style={{
-        fontSize: FS.xs, fontWeight: 700, color: SECOND, textTransform: 'uppercase',
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND, textTransform: 'uppercase',
         letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: 6,
       }}
       >
@@ -118,7 +121,7 @@ export default function CharterRoadCard({ currentSave, allSaves }) {
       </div>
       <label
         htmlFor="charter-road-endpoint"
-        style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 4 }}
+        style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 4 }}
       >
         Where should the road run?
         <select

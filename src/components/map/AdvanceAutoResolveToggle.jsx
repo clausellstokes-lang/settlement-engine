@@ -15,8 +15,11 @@
 
 import { useId } from 'react';
 import { BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, FS, GOLD, INK, PARCH_100, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 export function AdvanceAutoResolveToggle({ value, onChange }) {
+  const mobile = useIsMobile();
   const helpId = useId();
   const on = !!value;
   return (
@@ -35,7 +38,7 @@ export function AdvanceAutoResolveToggle({ value, onChange }) {
         >
           Auto-resolve every change
         </label>
-        <p id={helpId} style={{ margin: '3px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
+        <p id={helpId} style={{ margin: '3px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
           Auto-resolve every change, or pause at the big forks.
         </p>
       </div>

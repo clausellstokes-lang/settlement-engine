@@ -19,6 +19,8 @@ import {
   PAGE_MAX, INK, BODY, MUTED, GOLD_DEEP, GOLD_BG, GREEN_DEEP, GREEN_BG, BORDER, CARD,
   serif_, sans, FS, SP,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const STATUS_STYLE = {
   available: { color: GREEN_DEEP, bg: GREEN_BG },
@@ -27,10 +29,11 @@ const STATUS_STYLE = {
 };
 
 function StatusPill({ status }) {
+  const mobile = useIsMobile();
   const s = STATUS_STYLE[status] || STATUS_STYLE.exploring;
   return (
     <span style={{
-      fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.08em',
+      fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.08em',
       textTransform: 'uppercase', color: s.color, background: s.bg,
       border: status === 'exploring' ? `1px solid ${BORDER}` : 'none',
       padding: '3px 9px', borderRadius: 2, whiteSpace: 'nowrap',
@@ -60,6 +63,7 @@ function RoadmapRow({ entry }) {
 }
 
 export default function RoadmapPage({ onNavigate }) {
+  const mobile = useIsMobile();
   const entries = orderedRoadmap();
 
   // Header handed to PageHeader as a spread object so the tooltip census never sees a
@@ -95,7 +99,7 @@ export default function RoadmapPage({ onNavigate }) {
         <Button variant="primary" size="lg" onClick={() => onNavigate && onNavigate('generate')}>
           Forge a settlement
         </Button>
-        <span style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED }}>
+        <span style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           The best way to see where this is going is to build one.
         </span>
       </div>

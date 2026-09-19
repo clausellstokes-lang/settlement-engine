@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react';
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import { BORDER, BODY, CARD, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function human(value) {
   return String(value || 'unknown').replace(/_/g, ' ');
@@ -26,6 +28,7 @@ export default function RegionalCausalChainViewer({
   onIgnoreImpact,
   onResolveImpact,
 }) {
+  const mobile = useIsMobile();
   const [statusFilter, setStatusFilter] = useState('all');
   const [typeFilter, setTypeFilter] = useState('all');
   const [sourceFilter, setSourceFilter] = useState('all');
@@ -90,23 +93,23 @@ export default function RegionalCausalChainViewer({
         borderBottom: `1px solid ${BORDER}`,
         flexWrap: 'wrap',
       }}>
-        <span style={{ fontSize: FS.xxs, color: INK, fontWeight: 800, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: INK, fontWeight: 800, fontFamily: sans }}>
           Causal chains
         </span>
-        <select aria-label="Filter by status" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by status" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle(mobile)}>
           {['all', 'queued', 'applied', 'resolved', 'ignored', 'expired'].map(value => (
             <option key={value} value={value}>{optionLabel(value)}</option>
           ))}
         </select>
-        <select aria-label="Filter by channel" value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by channel" value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle(mobile)}>
           <option value="all">All channels</option>
           {model.types.map(type => <option key={type} value={type}>{human(type)}</option>)}
         </select>
-        <select aria-label="Filter by source" value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by source" value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle(mobile)}>
           <option value="all">All sources</option>
           {model.sources.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <label htmlFor="regional-causal-chain-severity" style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+        <label htmlFor="regional-causal-chain-severity" style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto', fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontFamily: sans }}>
           Severity
           <input
             id="regional-causal-chain-severity"
@@ -138,10 +141,10 @@ export default function RegionalCausalChainViewer({
               }}
             >
               <div style={{ minWidth: 0 }}>
-                <div style={{ fontSize: FS.xxs, color: BODY, fontWeight: 800, fontFamily: sans, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: BODY, fontWeight: 800, fontFamily: sans, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                   {row.sourceName}{' -> '}{row.targetName}
                 </div>
-                <div style={{ fontSize: FS.micro, color: SECOND, fontFamily: sans, lineHeight: 1.35 }}>
+                <div style={{ fontSize: chromeFontSize(FS.micro, mobile), color: SECOND, fontFamily: sans, lineHeight: 1.35 }}>
                   {human(row.channelType)} · {human(row.impact.kind)} · {Math.round((row.impact.severity || 0) * 100)}% · {row.impact.status}
                   {row.impact.delayTicks > 0 ? ` · ready in ${row.impact.delayTicks}` : ''}
                   {row.impact.waveDepth > 0 ? ` · wave ${row.impact.waveDepth}` : ''}
@@ -215,7 +218,7 @@ export default function RegionalCausalChainViewer({
                   {row.impact.explanation && (
                     <div style={{
                       gridColumn: '1 / -1',
-                      fontSize: FS.micro,
+                      fontSize: proseFontSize(FS.micro, mobile),
                       color: BODY,
                       fontFamily: sans,
                       lineHeight: 1.4,
@@ -229,12 +232,12 @@ export default function RegionalCausalChainViewer({
           );
         })}
         {filteredRows.length > 8 && (
-          <div style={{ padding: '6px 8px', fontSize: FS.micro, color: MUTED, fontFamily: sans }}>
+          <div style={{ padding: '6px 8px', fontSize: chromeFontSize(FS.micro, mobile), color: MUTED, fontFamily: sans }}>
             +{filteredRows.length - 8} more matching chains
           </div>
         )}
         {!filteredRows.length && (
-          <div style={{ padding: '8px', fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
+          <div style={{ padding: '8px', fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans }}>
             No regional chains match these filters.
           </div>
         )}
@@ -243,21 +246,22 @@ export default function RegionalCausalChainViewer({
   );
 }
 
-const selectStyle = {
+const selectStyle = (mobile) => ({
   border: `1px solid ${BORDER}`,
   background: CARD,
   color: SECOND,
   fontFamily: sans,
-  fontSize: FS.micro,
+  fontSize: chromeFontSize(FS.micro, mobile),
   fontWeight: 700,
   padding: '3px 5px',
-};
+});
 
 function DetailBlock({ label, value, meta }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ minWidth: 0 }}>
       <div style={{
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         color: MUTED,
         fontFamily: sans,
         fontWeight: 800,
@@ -266,11 +270,11 @@ function DetailBlock({ label, value, meta }) {
       }}>
         {label}
       </div>
-      <div style={{ fontSize: FS.xxs, color: INK, fontFamily: sans, fontWeight: 800, overflowWrap: 'anywhere' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: INK, fontFamily: sans, fontWeight: 800, overflowWrap: 'anywhere' }}>
         {value || 'unknown'}
       </div>
       {meta && (
-        <div style={{ fontSize: FS.micro, color: SECOND, fontFamily: sans, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
+        <div style={{ fontSize: chromeFontSize(FS.micro, mobile), color: SECOND, fontFamily: sans, lineHeight: 1.3, overflowWrap: 'anywhere' }}>
           {meta}
         </div>
       )}

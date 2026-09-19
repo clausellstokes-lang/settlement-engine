@@ -15,6 +15,8 @@ import { HeartHandshake, Swords, Home, Flame } from 'lucide-react';
 import { realmResolveSignals } from '../../domain/display/warResolve.js';
 import { Section } from './WorldPulsePrimitives.jsx';
 import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, AMBER, GOLD, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Map a signal band to a semantic tone. */
 const RESOLVE_TONE = { capitulating: 'danger', breaking: 'danger', wavering: 'warn', steady: 'neutral', resolute: 'good' };
@@ -28,14 +30,15 @@ const TONE_COLOR = {
 };
 
 function Chip({ label, value, tone = 'neutral' }) {
+  const mobile = useIsMobile();
   const c = TONE_COLOR[tone] || TONE_COLOR.neutral;
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'baseline', gap: 5, minHeight: 22, padding: '2px 8px',
       border: `1px solid ${c.border}`, background: c.bg, fontFamily: sans, whiteSpace: 'nowrap',
     }}>
-      <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</span>
-      <span style={{ color: c.fg, fontSize: FS.xxs, fontWeight: 800, textTransform: 'capitalize' }}>{value}</span>
+      <span style={{ color: MUTED, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{label}</span>
+      <span style={{ color: c.fg, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, textTransform: 'capitalize' }}>{value}</span>
     </span>
   );
 }
@@ -49,12 +52,13 @@ function cardAccent(sig) {
 }
 
 function StatusBadge({ sig }) {
-  if (sig.besieged) return <span style={badgeStyle(RED)}><Flame size={11} /> Under siege</span>;
-  if (sig.besieging?.length) return <span style={badgeStyle(GOLD)}><Swords size={11} /> On campaign</span>;
-  return <span style={badgeStyle(MUTED)}><Home size={11} /> At peace</span>;
+  const mobile = useIsMobile();
+  if (sig.besieged) return <span style={badgeStyle(RED, mobile)}><Flame size={11} /> Under siege</span>;
+  if (sig.besieging?.length) return <span style={badgeStyle(GOLD, mobile)}><Swords size={11} /> On campaign</span>;
+  return <span style={badgeStyle(MUTED, mobile)}><Home size={11} /> At peace</span>;
 }
-function badgeStyle(color) {
-  return { display: 'inline-flex', alignItems: 'center', gap: 4, color, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 };
+function badgeStyle(color, mobile) {
+  return { display: 'inline-flex', alignItems: 'center', gap: 4, color, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 };
 }
 
 function nameFor(id, nameById) {
@@ -62,6 +66,7 @@ function nameFor(id, nameById) {
 }
 
 function SettlementCard({ sig, nameById }) {
+  const mobile = useIsMobile();
   const accent = cardAccent(sig);
   const faith = sig.faith;
   const lead = sig.leadership;
@@ -85,22 +90,22 @@ function SettlementCard({ sig, nameById }) {
       </div>
 
       {sig.supply.note && (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>{sig.supply.note}</div>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>{sig.supply.note}</div>
       )}
 
       {sig.besieged && sig.besiegedBy?.length > 0 && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           Besieged by {sig.besiegedBy.map(id => nameFor(id, nameById)).join(', ')}.
         </div>
       )}
       {sig.besieging?.length > 0 && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           Besieging {sig.besieging.map(id => nameFor(id, nameById)).join(', ')}.
         </div>
       )}
 
       {faith?.patron?.name && (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
           Under {faith.patron.name}
           {(faith.patron.alignment || faith.patron.temper) ? ` (${[faith.patron.alignment, faith.patron.temper].filter(Boolean).join(', ')})` : ''}.
           {opposed.length > 0 && (
@@ -112,7 +117,7 @@ function SettlementCard({ sig, nameById }) {
       )}
 
       {(lead?.government || lead?.governingFaction) && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
           {lead.government || 'Ruled'}{lead.governingFaction?.name ? ` · ${lead.governingFaction.name}` : ''}
           {lead.figures?.length > 0 ? ` · ${lead.figures.map(f => f.name).filter(Boolean).join(', ')}` : ''}
         </div>
@@ -128,6 +133,7 @@ function SettlementCard({ sig, nameById }) {
  * @param {Map<string,string>} [props.nameById]
  */
 export default function WarResolveSection({ campaign, saves = [], nameById }) {
+  const mobile = useIsMobile();
   const signals = useMemo(() => {
     const worldState = campaign?.worldState || {};
     const regionalGraph = campaign?.regionalGraph || worldState.regionalGraph || null;
@@ -154,7 +160,7 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
     <div style={{ display: 'grid', gap: SP.md || 12 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <HeartHandshake size={14} style={{ color: GOLD }} />
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
           Resolve is the will to keep resisting; hope is the odds a besieged town faces; supply reads the granary and any circle or airship that runs the blockade.
         </span>
       </div>
@@ -175,7 +181,7 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
                 display: 'flex', alignItems: 'baseline', gap: 8, padding: '6px 10px',
                 background: CARD_ALT, border: `1px solid ${BORDER2}`, flexWrap: 'wrap',
               }}>
-                <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>{sig.name}</span>
+                <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>{sig.name}</span>
                 <span style={{ marginLeft: 'auto', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                   <Chip label="Resolve" value={sig.resolve.band} tone={RESOLVE_TONE[sig.resolve.band] || 'neutral'} />
                   <Chip label="Public" value={sig.sentiment.band} tone="neutral" />

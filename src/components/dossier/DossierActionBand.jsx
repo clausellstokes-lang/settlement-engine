@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react';
 import { FS, SP, swatch } from '../theme.js';
 import ShareToGallery from '../ShareToGallery.jsx';
 import BuyThisDossier from '../BuyThisDossier.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Simulation drawer trigger — lazy so its chunk only loads when opened.
 const SimulationDrawer = lazy(() => import('./SimulationDrawer.jsx'));
@@ -32,6 +34,7 @@ export default function DossierActionBand({
   // earned only when the strip flag is on, narrative can fire here, AND no other
   // surface is already carrying the pitch (the welcome card).
   // narrativeLayerStrip is GA (the labeled narrative strip is the only surface now).
+  const mobile = useIsMobile();
   const showNarrativePitch = narrativeEnabled && !suppressNarrativePitch;
   // In the embedded flow the only possible content is the narrative pitch — no
   // saveId means ShareToGallery self-gates to null, and Buy/How moved out — so
@@ -64,8 +67,8 @@ export default function DossierActionBand({
     >
       {showNarrativePitch && (
         <div style={{ flex: 1, minWidth: 200 }}>
-          <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#5A6E82'] }}>Narrative Layer</div>
-          <div style={{ fontSize: FS.xs, color: swatch['#4A3B22'], marginTop: 2, lineHeight: 1.4 }}>Turns the simulated dossier into prose your players will hear at the table.</div>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#5A6E82'] }}>Narrative Layer</div>
+          <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch['#4A3B22'], marginTop: 2, lineHeight: 1.4 }}>Turns the simulated dossier into prose your players will hear at the table.</div>
         </div>
       )}
       {showNarrativePitch && narrativeButtons}

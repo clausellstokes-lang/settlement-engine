@@ -2,6 +2,8 @@ import { infoModeOf, politicalAutonomyOf, realmMagicIsMundane, worldProgressionO
 import { domainState } from '../../domain/worldPulse/simulationProfile.js';
 import { BODY, BORDER2, CARD, FS, GOLD_BG, INK, MUTED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /*
  * SimulationRulesAxes — the §11 world-law AXIS cards and the per-domain
@@ -126,6 +128,7 @@ const DM_STATE_GLOBAL = 'Approval is realm-wide today: set “Who decides” to 
 // Built on the Button primitive (focus ring, disabled state, target size);
 // 'gold' variant marks the selected assumption.
 export function OptionChip({ label, selected, disabled, reason, onSelect, testId }) {
+  const mobile = useIsMobile();
   return (
     <Button
       size="sm"
@@ -138,7 +141,7 @@ export function OptionChip({ label, selected, disabled, reason, onSelect, testId
       style={{
         minHeight: 28,
         padding: '5px 10px',
-        fontSize: FS.xxs,
+        fontSize: chromeFontSize(FS.xxs, mobile),
         fontWeight: 900,
         ...(disabled && !selected ? { color: MUTED, opacity: 0.6 } : null),
       }}
@@ -155,10 +158,11 @@ export function OptionChip({ label, selected, disabled, reason, onSelect, testId
  * frozen_world_pauses_autonomy law (settings preserved; wakes on unfreeze).
  */
 export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetField, spatialMapped = false }) {
+  const mobile = useIsMobile();
   const frozen = worldProgressionOf(draft) === 'frozen';
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
         World laws
       </div>
       {AXES.map(axis => {
@@ -184,10 +188,10 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
             }}
           >
             <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
-              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+              <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>
                 {axis.title}
               </span>
-              <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+              <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
                 {axis.question}
               </span>
             </div>
@@ -211,13 +215,13 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
                 />
               ))}
             </div>
-            <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+            <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
               {axisLocked && frozenAutonomyLaw
                 ? frozenAutonomyLaw.message
                 : selectedOption?.[2]}
             </div>
             {derivedNote && (
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
                 {derivedNote}
               </div>
             )}
@@ -243,6 +247,7 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
  * before the question existed renders truthfully as a world of magic.
  */
 function RealmMagicStance({ draft }) {
+  const mobile = useIsMobile();
   const mundane = realmMagicIsMundane(draft);
   return (
     <div
@@ -250,20 +255,20 @@ function RealmMagicStance({ draft }) {
       style={{ display: 'grid', gap: 6, padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD }}
     >
       <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>Magic</span>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>Magic</span>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
           Does magic exist in these lands?
         </span>
       </div>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>
         {mundane ? 'A mundane world' : 'A world of magic'}
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
         {mundane
           ? 'No working magic anywhere in this realm. Gods and temples remain. Belief is not a spell.'
           : 'Mages, arcane orders, and enchanted trade belong in this realm.'}
       </div>
-      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
         Chosen at creation. New settlements follow it; regenerate the realm to change it.
       </div>
     </div>
@@ -277,13 +282,14 @@ function RealmMagicStance({ draft }) {
  * honestly deferred to the war-layer initiate/resolve split.
  */
 export function DomainRows({ draft, advanceBlocked, onSetDomain }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
       <div style={{ display: 'grid', gap: 2 }}>
-        <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           What moves on its own
         </div>
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
           Off holds a domain still (you can always introduce it yourself). On its own lets the world initiate. Turning a domain off never deletes anything.
         </div>
       </div>
@@ -311,8 +317,8 @@ export function DomainRows({ draft, advanceBlocked, onSetDomain }) {
               }}
             >
               <div style={{ minWidth: 90, flex: '1 1 120px' }}>
-                <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>{label}</div>
-                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750 }}>{description}</div>
+                <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>{label}</div>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>{description}</div>
               </div>
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 <OptionChip
@@ -380,14 +386,15 @@ const WAVE_MAP_NOTE = 'Sea routes wake once you canonize a map for this realm.';
  * its own); nothing is ever deleted. War-coupled waves lock until War is lit.
  */
 export function EngineWaves({ draft, advanceBlocked, spatialMapped = false, onSetField }) {
+  const mobile = useIsMobile();
   const warLit = draft.warLayerEnabled === true;
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
       <div style={{ display: 'grid', gap: 2 }}>
-        <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           Engine waves
         </div>
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.4 }}>
           The deep systems that make a realm feel alive. Turning one off never deletes anything. The world just stops doing it on its own.
         </div>
       </div>
@@ -429,8 +436,8 @@ export function EngineWaves({ draft, advanceBlocked, spatialMapped = false, onSe
                 style={{ marginTop: 2 }}
               />
               <div style={{ minWidth: 0, display: 'grid', gap: 2 }}>
-                <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>{label}</span>
-                <span style={{ color: warLocked ? MUTED : BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.35 }}>
+                <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>{label}</span>
+                <span style={{ color: warLocked ? MUTED : BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750, lineHeight: 1.35 }}>
                   {note}
                 </span>
               </div>

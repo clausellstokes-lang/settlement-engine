@@ -19,6 +19,8 @@ import { RULING_POWER_CAUSES } from '../../../domain/rulingPower.js';
 import { inferImportance } from '../../../domain/entities/npcs.js';
 import { Field } from './Field.jsx';
 import { selectStyle } from './EventComposerConstants.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 
 export function EventComposerSecondaryFields({
   type, tradeDirection, setTradeDirection, tradeEntrepot, setTradeEntrepot,
@@ -27,6 +29,7 @@ export function EventComposerSecondaryFields({
 }) {
   // KILL_NPC: importance is pulled from the chosen NPC and shown read-only, so the
   // DM sees the consequence tier before applying.
+  const mobile = useIsMobile();
   const killNpc = type === 'KILL_NPC' && target
     ? (settlement?.npcs || []).find(n => String(n.id || n.name) === String(target))
     : null;
@@ -39,7 +42,7 @@ export function EventComposerSecondaryFields({
           <select
             value={tradeDirection}
             onChange={e => { setTradeDirection(e.target.value); if (e.target.value !== 'export') setTradeEntrepot(false); }}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="export">Export</option>
             <option value="import">Import</option>
@@ -51,7 +54,7 @@ export function EventComposerSecondaryFields({
           <select
             value={tradeEntrepot ? 'transit' : 'local'}
             onChange={e => setTradeEntrepot(e.target.value === 'transit')}
-            style={selectStyle}
+            style={selectStyle(mobile)}
           >
             <option value="local">Local production</option>
             <option value="transit">Entrepôt transit</option>
@@ -66,7 +69,7 @@ export function EventComposerSecondaryFields({
           stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
                                           'A serious, active crisis'
         }>
-          <select value={stressorSeverity} onChange={e => setStressorSeverity(e.target.value)} style={selectStyle}>
+          <select value={stressorSeverity} onChange={e => setStressorSeverity(e.target.value)} style={selectStyle(mobile)}>
             <option value="minor">Minor</option>
             <option value="moderate">Moderate</option>
             <option value="severe">Severe</option>
@@ -82,7 +85,7 @@ export function EventComposerSecondaryFields({
           reliefMagnitude === 'token'    ? 'A token, enough to be remembered'        :
                                            'A measured share of the surplus'
         }>
-          <select value={reliefMagnitude} onChange={e => setReliefMagnitude(e.target.value)} style={selectStyle}>
+          <select value={reliefMagnitude} onChange={e => setReliefMagnitude(e.target.value)} style={selectStyle(mobile)}>
             <option value="token">Token</option>
             <option value="measured">Measured</option>
             <option value="generous">Generous</option>
@@ -99,7 +102,7 @@ export function EventComposerSecondaryFields({
           powerCause === 'appointment'? 'Installed by a higher authority' :
                                         'Seized by force. Loyalties re-sworn at swordpoint'
         }>
-          <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle}>
+          <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle(mobile)}>
             {RULING_POWER_CAUSES.map(c => (
               <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
             ))}
@@ -117,7 +120,7 @@ export function EventComposerSecondaryFields({
         }>
           <div style={{
             padding: '4px 8px', border: `1px solid ${BORDER}`,
-            fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180,
+            fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK, minWidth: 180,
             background: swatch['#FAF8F4'], fontWeight: 700,
             textTransform: 'capitalize', display: 'flex', alignItems: 'center',
           }}>

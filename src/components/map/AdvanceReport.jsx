@@ -41,6 +41,8 @@ import Button from '../primitives/Button.jsx';
 // a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
 import CauseWalkPanel from './CauseWalkPanel.jsx';
 import { edged } from '../../design/edgedBox.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const CLASS_LABEL = {
   war: 'War', succession_coup: 'Succession', plague: 'Plague', calamity: 'Calamity',
@@ -55,19 +57,21 @@ const STANDING_TONE = {
 // ── Small shared cells ───────────────────────────────────────────────────────
 
 function SectionTitle({ icon: Icon, children, tone = GOLD }) {
+  const mobile = useIsMobile();
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: tone, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: tone, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
       <Icon size={13} /> {children}
     </div>
   );
 }
 
 function Chip({ children, tone = SECOND, bg = CARD_ALT }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3, padding: '1px 7px',
       background: bg, color: tone,
-      fontFamily: sans, fontSize: FS.micro, fontWeight: 850, whiteSpace: 'nowrap',
+      fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, whiteSpace: 'nowrap',
     }}>{children}</span>
   );
 }
@@ -77,6 +81,7 @@ function Chip({ children, tone = SECOND, bg = CARD_ALT }) {
  *  the V-4 backward cause-walk for this receipt (its click does not bubble to the
  *  row's highlight). */
 function ReceiptRow({ node, resolveName, onHighlight, nodeId, canTrace, onTrace }) {
+  const mobile = useIsMobile();
   const ids = (node.settlementIds || node.receipt?.settlementIds || []).filter((id) => id && !String(id).includes(':'));
   const names = ids.map(resolveName).filter(Boolean);
   const canHighlight = ids.length > 0;
@@ -87,21 +92,21 @@ function ReceiptRow({ node, resolveName, onHighlight, nodeId, canTrace, onTrace 
       data-testid="cause-walk-trigger"
       aria-label="Trace the causes of this event"
       onClick={(e) => { e.stopPropagation(); onTrace(nodeId); }}
-      style={{ marginTop: 4, minHeight: undefined, padding: '1px 7px', border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, fontSize: FS.micro, fontWeight: 850 }}
+      style={{ marginTop: 4, minHeight: undefined, padding: '1px 7px', border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850 }}
     >
       <GitBranch size={9} /> Trace the causes
     </Button>
   ) : null;
   const body = (
     <>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.3 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, lineHeight: 1.3 }}>
         {node.headline}
       </div>
       {node.summary ? (
-        <p style={{ margin: '2px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>{node.summary}</p>
+        <p style={{ margin: '2px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.4 }}>{node.summary}</p>
       ) : null}
       {names.length > 0 && (
-        <div style={{ marginTop: 3, display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ marginTop: 3, display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
           <MapPin size={9} color={GOLD} /> {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
         </div>
       )}
@@ -154,9 +159,10 @@ function RelationshipChip({ row, resolveName }) {
 }
 
 function DeltaLead({ delta, resolveName }) {
+  const mobile = useIsMobile();
   if (!delta?.hasContent) {
     return (
-      <div data-testid="chronicle-delta-empty" style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+      <div data-testid="chronicle-delta-empty" style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
         Little changed in the standings.
       </div>
     );
@@ -186,6 +192,7 @@ function DeltaLead({ delta, resolveName }) {
 // ── Threads (§2) ─────────────────────────────────────────────────────────────
 
 function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const label = CLASS_LABEL[thread.dramaClass] || 'Thread';
   return (
@@ -195,7 +202,7 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <Chip tone={GOLD} bg={GOLD_BG}>{label}</Chip>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, flex: 1, minWidth: 0 }}>{thread.title}</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, flex: 1, minWidth: 0 }}>{thread.title}</span>
         <Button variant="ghost" size="sm" aria-expanded={open} aria-label={open ? 'Collapse thread' : 'Expand thread'} onClick={() => setOpen(v => !v)} style={{ minHeight: undefined, padding: 2 }}>
           {open ? <ChevronLeft size={13} /> : <ChevronRight size={13} />}
         </Button>
@@ -206,18 +213,18 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
           classes — is presented as co-located matters, never narrated as a
           chain the world did not demonstrate. */}
       {thread.looseWeave ? (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
           Separate matters on the same ground, set down together.
         </div>
       ) : (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
           <strong style={{ color: SECOND }}>Began</strong> {thread.arc.began}
           {thread.arc.turned && thread.arc.turned !== thread.arc.began ? <> · <strong style={{ color: SECOND }}>turned</strong> {thread.arc.turned}</> : null}
           {thread.arc.stands && thread.arc.stands !== thread.arc.turned ? <> · <strong style={{ color: SECOND }}>stands</strong> {thread.arc.stands}</> : null}
         </div>
       )}
       {thread.crossLinks?.length > 0 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: SLATE, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: SLATE, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
           <GitBranch size={10} /> touches
           {thread.crossLinks.slice(0, 3).map((l, i) => (
             <Chip key={i} tone={SLATE} bg={SLATE_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
@@ -239,6 +246,7 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
 // ── The Deputy's Diary (§4) ──────────────────────────────────────────────────
 
 function DeputyDiary({ diary }) {
+  const mobile = useIsMobile();
   if (!diary || diary.count === 0) return null;
   return (
     <div data-testid="chronicle-deputy-diary" style={{ display: 'grid', gap: 5 }}>
@@ -247,7 +255,7 @@ function DeputyDiary({ diary }) {
         {diary.verdicts.slice(0, 12).map((v, i) => (
           <div key={i} style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, flex: 1, minWidth: 0 }}>{v.headline}</span>
+              <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, flex: 1, minWidth: 0 }}>{v.headline}</span>
               {/* C2 (misc): reader words, not seam vocabulary — 'sealed' for a
                   ruling whose change is done, with the inference owned in-register. */}
               <Chip tone={v.reversibility === 'consumed' ? MUTED : GREEN}>
@@ -255,7 +263,7 @@ function DeputyDiary({ diary }) {
               </Chip>
             </div>
             {v.reversibilityInferred && (
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, marginTop: 2 }}>standing read from the record, not decreed</div>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), marginTop: 2 }}>standing read from the record, not decreed</div>
             )}
           </div>
         ))}
@@ -271,19 +279,20 @@ function StandingBadge({ standing }) {
 }
 
 function DecreeCard({ decree, within }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="chronicle-decree" style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '7px 9px', display: 'grid', gap: 4 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <Chip tone={AMBER} bg={AMBER_BG}><Landmark size={10} /> {humanizeToken(decree.kind)}</Chip>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{decree.landing.label}</span>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>{decree.landing.label}</span>
         <span style={{ flex: 1 }} />
         <StandingBadge standing={within || decree.standing} />
       </div>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700 }}>{decree.receipt?.headline || 'Your order'}</div>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>{decree.receipt?.headline || 'Your order'}</div>
       {decree.honestNull ? (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic' }}>{decree.finding}</div>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontStyle: 'italic' }}>{decree.finding}</div>
       ) : (
-        <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro }}>
+        <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
           {decree.coneSize} downstream {decree.coneSize === 1 ? 'effect' : 'effects'} <span style={{ color: MUTED }}>({decree.coneInferred === false ? 'recorded' : 'inferred'} cone)</span>
           {decree.breakingReason ? <> · <span style={{ color: RED }}>{decree.breakingReason}</span></> : null}
         </div>
@@ -293,6 +302,7 @@ function DecreeCard({ decree, within }) {
 }
 
 function DecreeCluster({ cluster }) {
+  const mobile = useIsMobile();
   return (
     <div data-testid="chronicle-decree-cluster" style={{
       // LONGHANDS ONLY — the shorthand varies with `selfConflict` (see the walker).
@@ -301,7 +311,7 @@ function DecreeCluster({ cluster }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <Chip tone={cluster.selfConflict ? RED : AMBER} bg={CARD}>{humanizeToken(cluster.relation)}</Chip>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>{cluster.jointStory}</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 850 }}>{cluster.jointStory}</span>
       </div>
       <div style={{ display: 'grid', gap: 4 }}>
         {cluster.decrees.map((d) => (
@@ -315,13 +325,14 @@ function DecreeCluster({ cluster }) {
 function DecreeSection({ decrees }) {
   // ALWAYS present (owner ruling) — even with zero decrees, the section renders
   // its honest empty line so the DM's choices are never lost.
+  const mobile = useIsMobile();
   return (
     <div data-testid="chronicle-decree-section" style={{
       border: `1px solid ${AMBER}`, background: CARD_ALT, padding: '9px 11px', display: 'grid', gap: 7,
     }}>
       <SectionTitle icon={Landmark} tone={AMBER}>Your decrees</SectionTitle>
       {decrees.total === 0 ? (
-        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
           You issued no orders this advance.
         </div>
       ) : (
@@ -358,6 +369,7 @@ const ALTITUDE_LABEL = { headline: 'Headline', chapters: 'Chapters', threads: 'T
 let reportSlipShown = false;
 
 export default function AdvanceReport({ campaign, nameFor }) {
+  const mobile = useIsMobile();
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
   const resolveName = nameFor || ((id) => String(id));
   const worldState = campaign?.worldState;
@@ -394,7 +406,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
     return (
       <div data-testid="advance-report-empty" style={{
         padding: SP.md, border: `1px dashed ${BORDER2}`,
-        color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
+        color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.5,
       }}>
         No advance to report yet. Advance the realm, and this page will set down what
         unfolded in the span: the headline, its chapters and threads, the receipts
@@ -415,7 +427,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
         </Button>
         <div style={{ flex: 1, textAlign: 'center', minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>{chronicle.headline}</div>
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
             the {chronicle.spanLabel} to {tickCalendarLabel(chronicle.tick)} · {safeIndex + 1} of {entries.length}
           </div>
         </div>
@@ -431,7 +443,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
           const active = activeAltitude === name;
           return (
             <Button key={name} variant="ghost" size="sm" aria-pressed={active} onClick={() => setAltitude(name)}
-              style={{ minHeight: undefined, padding: '2px 8px', border: `1px solid ${active ? GOLD : BORDER2}`, background: active ? GOLD : CARD, color: active ? INK : (isDefault ? SECOND : MUTED), fontSize: FS.micro, fontWeight: 850 }}>
+              style={{ minHeight: undefined, padding: '2px 8px', border: `1px solid ${active ? GOLD : BORDER2}`, background: active ? GOLD : CARD, color: active ? INK : (isDefault ? SECOND : MUTED), fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850 }}>
               {ALTITUDE_LABEL[name]}
             </Button>
           );
@@ -484,7 +496,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
       <DecreeSection decrees={decrees} />
 
       {/* ── Self-explaining footer (the whisper via an existing organ) ───── */}
-      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
         This report compresses, never truncates, what unfolded, scaled to the span.
         {hasRecordedEdges
           ? ' Causal links are recorded from the engine’s provenance ledger where marked, inferred from shared entities otherwise; click any receipt to find it on the map.'

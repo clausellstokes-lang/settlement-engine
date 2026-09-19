@@ -42,6 +42,8 @@ import {
 import Button from '../primitives/Button.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** How many entries a relationship shows before the reader asks for the rest. */
 const LINES_SHOWN = 6;
@@ -59,13 +61,14 @@ function whenLabel(tick) {
 
 /** One dated entry. The disclosure word rides an aria-label, never a bare badge. */
 function ChronicleLine({ line }) {
+  const mobile = useIsMobile();
   const covert = line.disclosure !== 'public';
   return (
     <div
       data-testid="relationship-chronicle-line"
       data-disclosure={line.disclosure}
       aria-label={TERM_HELP[line.disclosure] || TERM_HELP.unclassified}
-      style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}
+      style={{ display: 'flex', gap: 6, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}
     >
       <span aria-hidden="true" style={{ color: covert ? GOLD : SECOND, fontWeight: 900, flexShrink: 0 }}>
         {covert ? '◆' : '•'}
@@ -94,6 +97,7 @@ function standingWords(row) {
 
 /** One relationship: who, where it stands now, and everything it has been through. */
 function ChronicleRow({ row, nameFor }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const shown = open ? row.lines : row.lines.slice(0, LINES_SHOWN);
   const hidden = row.lines.length - shown.length;
@@ -105,14 +109,14 @@ function ChronicleRow({ row, nameFor }) {
       data-testid="relationship-chronicle-row"
       style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, padding: '8px 10px', display: 'grid', gap: 5 }}
     >
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.4 }}>
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.4 }}>
         {/* THE NEWS ADDRESS LAW: both parties named, and both navigable. */}
-        <RealmEntityLink settlementSaveId={row.from} label={nameFor(row.from)} style={{ fontSize: FS.xs }} />
+        <RealmEntityLink settlementSaveId={row.from} label={nameFor(row.from)} style={{ fontSize: chromeFontSize(FS.xs, mobile) }} />
         {' and '}
-        <RealmEntityLink settlementSaveId={row.to} label={nameFor(row.to)} style={{ fontSize: FS.xs }} />
+        <RealmEntityLink settlementSaveId={row.to} label={nameFor(row.to)} style={{ fontSize: chromeFontSize(FS.xs, mobile) }} />
         {`: ${standingWords(row)} today, after ${row.lineCount} recorded ${row.lineCount === 1 ? 'turn' : 'turns'}.`}
       </div>
-      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{span}</div>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>{span}</div>
       <div style={{ display: 'grid', gap: 3 }}>
         {shown.map((line) => <ChronicleLine key={line.id} line={line} />)}
       </div>
@@ -124,7 +128,7 @@ function ChronicleRow({ row, nameFor }) {
           style={{
             justifySelf: 'start', minHeight: undefined, padding: '1px 7px',
             border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND,
-            fontSize: FS.micro, fontWeight: 850,
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850,
           }}
         >
           {`Show the other ${hidden}`}
@@ -138,6 +142,7 @@ function ChronicleRow({ row, nameFor }) {
  * @param {{ campaign: any, nameById?: Map<string,string> }} props
  */
 export default function RelationshipChronicleSection({ campaign, nameById }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   // The covert half is DM knowledge — BeliefDivergenceBand's and
@@ -172,21 +177,21 @@ export default function RelationshipChronicleSection({ campaign, nameById }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         {/* Text twin, not a lucide glyph — the LU-2 icons-off doctrine, and it
             keeps the icon census untouched (PerspectiveStandings' own idiom). */}
-        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: FS.xs }}>❦</span>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: chromeFontSize(FS.xs, mobile) }}>❦</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           What {nameFor(observerId)} has survived
         </span>
         <select
           aria-label="Pick the settlement whose history to read"
           value={observerId}
           onChange={(e) => setPickedId(e.target.value)}
-          style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, color: INK, background: CARD, border: `1px solid ${BORDER2}`, padding: '2px 6px' }}
+          style={{ marginLeft: 'auto', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: INK, background: CARD, border: `1px solid ${BORDER2}`, padding: '2px 6px' }}
         >
           {ids.map(id => <option key={id} value={id}>{nameFor(id)}</option>)}
         </select>
       </div>
       {mine.length === 0 ? (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
           {nameFor(observerId)} has come through nothing the record kept. Other settlements have;
           pick one of them above.
         </div>
@@ -195,7 +200,7 @@ export default function RelationshipChronicleSection({ campaign, nameById }) {
           {mine.map(row => <ChronicleRow key={row.relationshipKey} row={row} nameFor={nameFor} />)}
         </div>
       )}
-      <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+      <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5 }}>
         Every entry here was written down when it happened and has not been thinned since
         {includeGroundTruth
           ? '. The gold entries are quiet business: yours to know, and not shown in a player-facing view.'

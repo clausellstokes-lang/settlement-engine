@@ -24,16 +24,19 @@ import { activeFilterCount, GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
 import GalleryCard from './GalleryCard.jsx';
 import GallerySidebar from './GallerySidebar.jsx';
 import GalleryTopbar from './GalleryTopbar.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 function StatusMessage({ tone = 'info', children }) {
   // The tinted status callout becomes a rubric-ruled note: a single drawn left
   // rule in the tone's ink (no wash, no radius). Alert/status semantics kept.
+  const mobile = useIsMobile();
   const color = tone === 'success' ? GREEN : tone === 'danger' ? RED : BLUE;
   return (
     <div
       role={tone === 'danger' ? 'alert' : 'status'}
       aria-live={tone === 'danger' ? 'assertive' : 'polite'}
-      style={{ borderLeft: `2px solid ${color}`, paddingLeft: SP.md, color, marginBottom: SP.md, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}
+      style={{ borderLeft: `2px solid ${color}`, paddingLeft: SP.md, color, marginBottom: SP.md, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.5 }}
     >
       {children}
     </div>

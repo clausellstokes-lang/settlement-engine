@@ -6,6 +6,8 @@ import { SampleCard } from './SampleCard.jsx';
 import SurveyorNote from '../guidance/SurveyorNote.jsx';
 import Button from '../primitives/Button.jsx';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // content-immersion-r2-3: the registered library_empty_invitation whisper — its
 // dismissal now rides the unified sf:guidance store (a mount-site concern per
@@ -20,6 +22,7 @@ const WHISPER_ID = 'library_empty_invitation';
  *   already reading, and keeping it is what an account is for.
  */
 export function SampleDashboard({ onFork, forkingId, tier }) {
+  const mobile = useIsMobile();
   const [invited, setInvited] = useState(() => !isGuidanceDismissed(WHISPER_ID));
   const isAnon = tier === 'anon';
   return (
@@ -44,7 +47,7 @@ export function SampleDashboard({ onFork, forkingId, tier }) {
         </div>
       )}
       <div style={{
-        fontSize: FS.xs, fontWeight: 800, color: MUTED,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED,
         textTransform: 'uppercase', letterSpacing: '0.06em',
         marginBottom: 10,
         textAlign: 'center',

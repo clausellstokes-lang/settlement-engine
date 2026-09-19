@@ -15,6 +15,8 @@ import HeraldHeadline, { HeraldGroupHeader } from './HeraldHeadline.jsx';
 import { groupBySettlement } from './heraldGrammar.js';
 import { partitionUrgent, sortGroupsAlphabetical } from './heraldFilter.js';
 import { BORDER, CARD_ALT, FS, GOLD, MUTED, RED, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Severity-first, then most-recent, then a stable id tiebreak (codepoint). */
 function ordered(items = []) {
@@ -45,6 +47,7 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
   // THE SORT LAW: the urgent pin (true cross-realm crises) floats above the alphabet;
   // the rest cluster by settlement, groups ordered alphabetically, severity-then-
   // recency within.
+  const mobile = useIsMobile();
   const { urgent, rest } = partitionUrgent(ordered(items));
   const groups = sortGroupsAlphabetical(groupBySettlement(rest, nameById || new Map()));
   return (
@@ -60,8 +63,8 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
             {urgent.length > 0 && (
               <div data-testid="herald-urgent-pin" style={{ display: 'grid', gap: 8, borderLeft: `3px solid ${RED}`, paddingLeft: 6 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderBottom: `1px solid ${GOLD}`, paddingBottom: 3 }}>
-                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Needs attention now</span>
-                  <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{urgent.length}</span>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Needs attention now</span>
+                  <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>{urgent.length}</span>
                 </div>
                 {urgent.map(item => (
                   <HeraldHeadline key={item.id} item={item} worldState={worldState} nameById={nameById} />
@@ -88,7 +91,7 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
             when a live filter actually hides reports; an unfiltered page carries
             no footer (the count chip in the heading already says the total). */}
         {narrowing && Number.isFinite(totalCount) && totalCount > items.length && (
-          <div data-testid="herald-filter-footer" style={{ marginTop: 8, color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
+          <div data-testid="herald-filter-footer" style={{ marginTop: 8, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
             {items.length === 0
               ? `All ${totalCount} report${totalCount === 1 ? '' : 's'} stand outside the current filter.`
               : `${items.length} of ${totalCount} reports shown; the rest stand outside the current filter.`}

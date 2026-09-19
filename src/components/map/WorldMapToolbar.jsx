@@ -30,6 +30,8 @@ import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_DEEP,
 import Button from '../primitives/Button.jsx';
 import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
 // Vision V-H (R-21): the visible session undo history — lazy overlay reading the
@@ -68,9 +70,10 @@ function Spacer({ grow = false }) {
 /** Inline eyebrow that front-loads a control's meaning (e.g. "Advance by" on the
  *  interval select). Keyword-first, uppercase, muted (P6). */
 function ClockLabel({ children }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
-      fontSize: FS.xs, fontWeight: 700, color: SECOND,
+      fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
       textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap',
     }}>
       {children}
@@ -82,10 +85,11 @@ function ClockLabel({ children }) {
  *  into scannable groups (P6) and provides the spacing that separates the
  *  destructive block from benign config (P8). */
 function MenuHeader({ children }) {
+  const mobile = useIsMobile();
   return (
     <span style={{
       marginTop: SP.xs, paddingTop: SP.xs,
-      fontSize: FS.xxs, fontWeight: 800, color: BODY,
+      fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: BODY,
       textTransform: 'uppercase', letterSpacing: '0.07em',
       fontFamily: sans,
     }}>
@@ -160,12 +164,13 @@ function MoreMenu({ children }) {
  *  role=progressbar with aria-valuenow/min/max + a spoken aria-label so the progress
  *  is conveyed to assistive tech, not just the gold fill (no color-only signal). */
 function AdvanceProgress({ done, total }) {
+  const mobile = useIsMobile();
   const safeTotal = Math.max(1, total || 0);
   const safeDone = Math.max(0, Math.min(safeTotal, done || 0));
   const pct = Math.round((safeDone / safeTotal) * 100);
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minWidth: 120 }}>
-      <span style={{ fontSize: FS.xs, fontWeight: 800, color: INK, whiteSpace: 'nowrap' }}>
+      <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: INK, whiteSpace: 'nowrap' }}>
         Advancing {safeDone} of {safeTotal}
       </span>
       <span
@@ -197,6 +202,7 @@ function AdvanceProgress({ done, total }) {
  *  loading skeleton. The remaining-tick count names how much is left; the chip is a
  *  real button (keyboard + SR operable), aria-label carries the full sentence. */
 function ResumeChip({ pausedAdvance, onResume, disabled }) {
+  const mobile = useIsMobile();
   const total = pausedAdvance?.ticksTotal || 0;
   const done = pausedAdvance?.ticksDone || 0;
   const remaining = Math.max(0, total - done);
@@ -212,7 +218,7 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
         minHeight: 40, padding: '5px 11px',
         border: `1px solid ${AMBER}`,
         background: CARD, color: AMBER_DEEP,
-        fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
         whiteSpace: 'nowrap',
       }}
     >
@@ -262,6 +268,7 @@ const MAP_CONTROL_HELP = Object.freeze([
 ]);
 
 function MapControlsHelp() {
+  const mobile = useIsMobile();
   return (
     <div
       role="note"
@@ -275,15 +282,15 @@ function MapControlsHelp() {
       {MAP_CONTROL_HELP.map(([group, items]) => (
         <div key={group} style={{ display: 'grid', gap: 3 }}>
           <span style={{
-            fontSize: FS.xxs, fontWeight: 800, color: SECOND,
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
           }}>
             {group}
           </span>
           {items.map(([name, desc]) => (
             <div key={name} style={{ display: 'grid', gap: 1 }}>
-              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{name}</span>
-              <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>{desc}</span>
+              <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>{name}</span>
+              <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 600, lineHeight: 1.45 }}>{desc}</span>
             </div>
           ))}
         </div>
@@ -344,6 +351,7 @@ function WorldMapToolbarImpl({
   handleApplyPreset,
 }) {
   // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const mobile = useIsMobile();
   const mapMode    = useStore(s => s.mapMode);
   const setMapMode = useStore(s => s.setMapMode);
   const mapLoading = useStore(s => s.mapLoading);
@@ -451,7 +459,7 @@ function WorldMapToolbarImpl({
                   minHeight: 40,
                   padding: '5px 9px',
                   border: `1px solid ${BORDER}`,
-                  background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                  background: CARD, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK,
                   cursor: 'pointer',
                 }}
               >
@@ -643,7 +651,7 @@ function WorldMapToolbarImpl({
                             minHeight: 40,
                             padding: '5px 10px',
                             border: `1px solid ${BORDER}`,
-                            background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
+                            background: CARD, fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans, color: INK,
                             cursor: 'pointer',
                           }}
                         >
@@ -717,7 +725,7 @@ function WorldMapToolbarImpl({
                         minWidth: 16, height: 16, padding: '0 4px',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                         background: AMBER, color: PARCH_100,
-                        fontSize: FS.xxs, fontWeight: 800,
+                        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
                         fontFamily: sans, lineHeight: 1,
                       }}
                     >
@@ -735,7 +743,7 @@ function WorldMapToolbarImpl({
 
         {/* Status line */}
         {mapLoading && (
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: BODY, fontSize: FS.xs }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: BODY, fontSize: chromeFontSize(FS.xs, mobile) }}>
             <Loader size={12} className="sf-spin" /> Loading…
           </span>
         )}
@@ -743,7 +751,7 @@ function WorldMapToolbarImpl({
             matches every other error surface with comfortable AA headroom,
             instead of the marginal one-off #C54A4A (4.57:1) (P7). */}
         {mapError && (
-          <span style={{ color: RED, fontSize: FS.xs, fontWeight: 700 }}>
+          <span style={{ color: RED, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             {String(mapError)}
           </span>
         )}

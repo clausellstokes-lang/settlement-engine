@@ -8,6 +8,8 @@ import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { BODY, MUTED, BORDER, FS, SP, sans } from '../theme.js';
 import { buildCustomContentUsage } from '../../domain/content/customContentUsage.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 function tierLabel(eligibility) {
   const from = eligibility?.tierMin;
@@ -49,6 +51,7 @@ function usageSummary(counts) {
 }
 
 export default function CustomContentUsageEcho({ bucket, item, customContent }) {
+  const mobile = useIsMobile();
   const savedSettlements = useStore((state) => state.savedSettlements || []);
   const campaigns = useStore((state) => state.campaigns || []);
   const usage = useMemo(() => buildCustomContentUsage({
@@ -73,7 +76,7 @@ export default function CustomContentUsageEcho({ bucket, item, customContent }) 
         paddingTop: SP.xs,
         borderTop: `1px solid ${BORDER}`,
         fontFamily: sans,
-        fontSize: FS.micro,
+        fontSize: proseFontSize(FS.micro, mobile),
         color: MUTED,
         lineHeight: 1.5,
       }}

@@ -26,6 +26,8 @@ import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
 import IconButton from './primitives/IconButton.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 const PURPLE = swatch['#7C3AED'];
 
@@ -53,6 +55,7 @@ export default function EntityPicker({
   maxSuggestions = 12,
 }) {
   // Normalize to an array of registry categories to pull suggestions from.
+  const mobile = useIsMobile();
   const cats = useMemo(
     () => (Array.isArray(categories) && categories.length ? categories : (category ? [category] : [])),
     [categories, category],
@@ -166,7 +169,7 @@ export default function EntityPicker({
                   padding: '2px 6px 2px 8px',
                   background: missing ? '#fdebec' : `${accent}14`,
                   border: `1px solid ${accent}55`,
-                  fontSize: FS.xs, fontWeight: 600,
+                  fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600,
                   color: accent, fontFamily: sans,
                 }}
               >
@@ -174,7 +177,7 @@ export default function EntityPicker({
                 <span>{label}</span>
                 {isCustom && !missing && (
                   <span style={{
-                    fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
+                    fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, letterSpacing: '0.05em',
                     background: `${PURPLE}28`, color: PURPLE,
                     padding: '0 3px',
                   }}>CUSTOM</span>
@@ -262,13 +265,13 @@ export default function EntityPicker({
                 {s.name}
               </span>
               {s.subcategory && (
-                <span style={{ fontSize: FS.xxs, color: MUTED }}>
+                <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>
                   {s.subcategory}
                 </span>
               )}
               {s.source === 'custom' && (
                 <span style={{
-                  fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
+                  fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, letterSpacing: '0.05em',
                   background: `${PURPLE}20`, color: PURPLE,
                   padding: '1px 4px',
                 }}>CUSTOM</span>
@@ -282,7 +285,7 @@ export default function EntityPicker({
       {focused && suggestions.length === 0 && query && (
         <div style={{
           marginTop: 4, padding: '6px 8px',
-          fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+          fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
           border: `1px dashed ${BORDER}`,
         }}>
           No matches in {cats.join(' / ') || 'catalog'}. Add a custom entry first if needed.
@@ -294,7 +297,7 @@ export default function EntityPicker({
         <div style={{
           marginTop: 6, padding: '4px 8px',
           background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
-          fontSize: FS.xxs, color: swatch.danger,
+          fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
           <AlertTriangle size={10} />

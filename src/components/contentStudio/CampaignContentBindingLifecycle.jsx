@@ -17,6 +17,8 @@ import {
   swatch,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function compactHash(value) {
   const hash = String(value || '');
@@ -33,6 +35,7 @@ function materializedCount(sample, side) {
 }
 
 function BindingRow({ binding, onReview }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex',
@@ -42,13 +45,13 @@ function BindingRow({ binding, onReview }) {
       border: `1px solid ${BOR}`,
       padding: '7px 9px',
     }}>
-      <span style={{ color: SEC, fontSize: FS.xs }}>
+      <span style={{ color: SEC, fontSize: chromeFontSize(FS.xs, mobile) }}>
         <strong>{binding.resolvedDefinitions?.length || 0}</strong>{' '}
         pinned definitions
       </span>
       <span style={{
         color: MUT,
-        fontSize: FS.micro,
+        fontSize: chromeFontSize(FS.micro, mobile),
         overflowWrap: 'anywhere',
       }}>
         {compactHash(binding.bindingHash)}
@@ -66,6 +69,7 @@ function BindingRow({ binding, onReview }) {
 }
 
 function ReviewPanel({ review, busy, onCancel, onConfirm }) {
+  const mobile = useIsMobile();
   if (!review) return null;
   const changes = review.definitionChanges || [];
   const visible = changes.slice(0, 10);
@@ -81,7 +85,7 @@ function ReviewPanel({ review, busy, onCancel, onConfirm }) {
         marginTop: 8,
       }}
     >
-      <div style={{ color: SEC, fontSize: FS.xs, lineHeight: 1.5 }}>
+      <div style={{ color: SEC, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         This review pins {review.plan.targetBinding.resolvedDefinitions.length}{' '}
         definitions. It changes {changes.length} definition{' '}
         {changes.length === 1 ? 'head' : 'heads'} and{' '}
@@ -91,7 +95,7 @@ function ReviewPanel({ review, busy, onCancel, onConfirm }) {
         <div style={{
           marginTop: 6,
           color: MUT,
-          fontSize: FS.micro,
+          fontSize: proseFontSize(FS.micro, mobile),
           lineHeight: 1.45,
         }}>
           Same-seed unsaved sample <strong style={{ color: SEC }}>
@@ -110,14 +114,14 @@ function ReviewPanel({ review, busy, onCancel, onConfirm }) {
           {visible.map(change => (
             <div
               key={change.definitionId}
-              style={{ color: MUT, fontSize: FS.micro }}
+              style={{ color: MUT, fontSize: chromeFontSize(FS.micro, mobile) }}
             >
               <strong style={{ color: SEC }}>{change.change}</strong>
               {' · '}{change.category} · {change.definitionId}
             </div>
           ))}
           {changes.length > visible.length && (
-            <span style={{ color: MUT, fontSize: FS.micro }}>
+            <span style={{ color: MUT, fontSize: chromeFontSize(FS.micro, mobile) }}>
               {changes.length - visible.length} additional definition changes
             </span>
           )}
@@ -152,6 +156,7 @@ function ReviewPanel({ review, busy, onCancel, onConfirm }) {
 }
 
 export default function CampaignContentBindingLifecycle() {
+  const mobile = useIsMobile();
   const activeCampaignId = useStore(state => state.activeCampaignId);
   const campaign = useStore(state => (
     (state.campaigns || []).find(candidate => (
@@ -266,14 +271,14 @@ export default function CampaignContentBindingLifecycle() {
       }}>
         <span style={{
           color: swatch.magic,
-          fontSize: FS.xxs,
+          fontSize: chromeFontSize(FS.xxs, mobile),
           fontWeight: 800,
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
         }}>
           Active campaign content
         </span>
-        <span style={{ color: SEC, fontSize: FS.xs }}>
+        <span style={{ color: SEC, fontSize: chromeFontSize(FS.xs, mobile) }}>
           <strong>{campaign.contentBinding.resolvedDefinitions.length}</strong>{' '}
           pinned definitions · {compactHash(campaign.contentBinding.bindingHash)}
         </span>
@@ -297,7 +302,7 @@ export default function CampaignContentBindingLifecycle() {
         <div id="campaign-content-binding-history" style={{ marginTop: 8 }}>
           <div style={{
             color: MUT,
-            fontSize: FS.micro,
+            fontSize: proseFontSize(FS.micro, mobile),
             lineHeight: 1.5,
           }}>
             Campaign simulation reads only this portable cutoff. Migrating never
@@ -338,7 +343,7 @@ export default function CampaignContentBindingLifecycle() {
           {message && (
             <div role="status" style={{
               color: SEC,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               marginTop: 8,
             }}>
               {message}
@@ -347,7 +352,7 @@ export default function CampaignContentBindingLifecycle() {
           {error && (
             <div role="alert" style={{
               color: swatch.danger,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               marginTop: 8,
             }}>
               {error}

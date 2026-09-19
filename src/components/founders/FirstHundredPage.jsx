@@ -29,8 +29,11 @@ import {
   PAGE_MAX, INK, BODY, MUTED, GOLD_DEEP, BORDER, CARD, CARD_ALT,
   serif_, sans, FS, SP,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function Honoree({ honoree }) {
+  const mobile = useIsMobile();
   return (
     <li style={{
       listStyle: 'none', background: CARD, border: `1px solid ${BORDER}`,
@@ -45,7 +48,7 @@ function Honoree({ honoree }) {
         </div>
       )}
       {honoree.since && (
-        <div style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED }}>
+        <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           Since {honoree.since}
         </div>
       )}
@@ -54,6 +57,7 @@ function Honoree({ honoree }) {
 }
 
 export default function FirstHundredPage({ onNavigate }) {
+  const mobile = useIsMobile();
   const honorees = listedHonorees(FIRST_HUNDRED);
   const remaining = firstHundredRemaining(FIRST_HUNDRED);
 
@@ -99,7 +103,7 @@ export default function FirstHundredPage({ onNavigate }) {
       {honorees.length > 0 ? (
         <>
           <div aria-live="polite" style={{
-            fontFamily: sans, fontSize: FS.xs, color: MUTED, marginBottom: SP.md,
+            fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginBottom: SP.md,
             letterSpacing: '0.04em', textTransform: 'uppercase', fontWeight: 700,
           }}>
             {`${honorees.length} of ${FIRST_HUNDRED_CAP} named`}
@@ -128,7 +132,7 @@ export default function FirstHundredPage({ onNavigate }) {
 
       <p style={{
         marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${GOLD_DEEP}`,
-        fontFamily: sans, fontSize: FS.xs, color: MUTED, lineHeight: 1.6,
+        fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.6,
       }}>
         A member is shown by the display name they chose, never by their account. The
         remaining places, quietly counted: {remaining}.

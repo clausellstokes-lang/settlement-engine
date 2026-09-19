@@ -25,6 +25,8 @@ import { chairNumeral, seatedLabel } from '../../lib/foundersHall.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { SP, FS, serif_, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {Object} props
@@ -32,6 +34,7 @@ import { SP, FS, serif_, sans } from '../theme.js';
  * @param {() => void} props.onClose
  */
 export default function ChairDrawer({ chair, onClose }) {
+  const mobile = useIsMobile();
   const open = Boolean(chair);
   const dialogRef = useDialogFocusTrap(open, onClose);
   if (!open) return null;
@@ -80,7 +83,7 @@ export default function ChairDrawer({ chair, onClose }) {
       >
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: SP.md }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, minWidth: 0 }}>
-            <span style={numeralStyle}>Seat {numeral}</span>
+            <span style={numeralStyle(mobile)}>Seat {numeral}</span>
             <h2
               id={titleId}
               style={{
@@ -93,13 +96,13 @@ export default function ChairDrawer({ chair, onClose }) {
             </h2>
             {ring && (
               <span style={{
-                fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
+                fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                 letterSpacing: '0.08em', textTransform: 'uppercase', color: RING_TONE[ring],
               }}>
                 {RING_LABEL[ring]}
               </span>
             )}
-            {seated && <span style={quietLineStyle}>{seated}</span>}
+            {seated && <span style={quietLineStyle(mobile)}>{seated}</span>}
           </div>
           <IconButton glyph="×" label="Close" onClick={onClose} tone="ghost" size="lg" />
         </div>
@@ -114,7 +117,7 @@ export default function ChairDrawer({ chair, onClose }) {
           </p>
         )}
 
-        <p style={{ ...quietLineStyle, color: HALL.faint, marginTop: 'auto' }}>
+        <p style={{ ...quietLineStyle(mobile), color: HALL.faint, marginTop: 'auto' }}>
           A chair is held by one founder, permanently. Nothing on this plate is shown
           without its holder&rsquo;s consent.
         </p>

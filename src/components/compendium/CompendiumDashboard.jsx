@@ -12,6 +12,8 @@ import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug } from './registrySlug.js';
 import { compareCodepoint } from '../../domain/deterministicSort.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Real, crawlable URL for a hub/entry — the A–Z is an HTML sitemap, so its links
 // are true hrefs (SEO + open-in-new-tab); onClick does the smooth in-page nav.
@@ -32,6 +34,7 @@ const CATALOGS = [
 ];
 
 export function CompendiumOverview({ onNavigate }) {
+  const mobile = useIsMobile();
   return (
     <div id="overview">
       <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
@@ -53,7 +56,7 @@ export function CompendiumOverview({ onNavigate }) {
                   running serif line — the lexicon register, not a chrome badge. */}
               <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums' }}>{c.count}</span>
             </div>
-            <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
+            <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
           </a>
         ))}
       </div>
@@ -90,6 +93,7 @@ function buildIndexEntries() {
 }
 
 export function AtoZIndex({ onNavigate }) {
+  const mobile = useIsMobile();
   const groups = useMemo(() => {
     const entries = buildIndexEntries().sort((a, b) => compareCodepoint(a.term.toLowerCase(), b.term.toLowerCase()));
     const byLetter = new Map();
@@ -116,7 +120,7 @@ export function AtoZIndex({ onNavigate }) {
               <a key={`${e.kind}-${e.term}`} href={hubHref(e.tab, e.anchor)} onClick={(ev) => onLink(ev, onNavigate, e.tab, e.anchor)}
                 style={{ textDecoration:'none', padding:'3px 0', cursor:'pointer', display:'flex', gap:6, alignItems:'baseline' }}>
                 <span style={{ fontSize:FS.sm, color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:2 }}>{e.term}</span>
-                <span style={{ fontSize:FS.xxs, color:MUT }}>{e.kind}</span>
+                <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUT }}>{e.kind}</span>
               </a>
             ))}
           </div>

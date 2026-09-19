@@ -60,6 +60,8 @@ import {
   proposalDetails,
 } from './WorldPulseData.js';
 import { gatheredDecisionRows, heldDocketPromise, judgmentPointerSentence } from './gatheredDocket.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TITLE_ID = 'gathered-adjudication-title';
 
@@ -71,6 +73,7 @@ const TITLE_ID = 'gathered-adjudication-title';
  * @param {() => void} props.onClose
  */
 export default function GatheredAdjudication({ open, campaign, sinceTick = null, onClose }) {
+  const mobile = useIsMobile();
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const saves = useStore(s => s.savedSettlements);
@@ -173,7 +176,7 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
                 <div style={{
                   display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4,
                   color: held ? SECOND : MUTED, fontFamily: sans,
-                  fontSize: FS.micro, fontWeight: 850,
+                  fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850,
                 }}>
                   {boundaryKnown && (held ? 'Still waiting from an earlier advance' : 'Raised this advance')}
                   {raisedLabel && <span style={{ color: MUTED, fontWeight: 700 }}>{boundaryKnown ? '· ' : ''}Raised in {raisedLabel}</span>}
@@ -220,7 +223,7 @@ export default function GatheredAdjudication({ open, campaign, sinceTick = null,
         }}>
           <span
             data-testid="gathered-held-promise"
-            style={{ flex: 1, minWidth: 0, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45 }}
+            style={{ flex: 1, minWidth: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}
           >
             {heldDocketPromise(rows.length)}
           </span>

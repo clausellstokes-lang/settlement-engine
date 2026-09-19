@@ -3,6 +3,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
 import { BORDER, CARD_ALT, FS, GOLD, INK, SP, sans } from '../theme.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * SidebarSection — the shared section header for a gallery filter facet: an
@@ -11,6 +12,7 @@ import { BORDER, CARD_ALT, FS, GOLD, INK, SP, sans } from '../theme.js';
  * 2026-07-22 — the Settlements / Maps / Campaigns filter panels must be one design).
  */
 export function SidebarSection({ title, count = 0, children }) {
+  const mobile = useIsMobile();
   return (
     <section style={{ display: 'grid', gap: 8 }}>
       <h3 style={{
@@ -20,7 +22,7 @@ export function SidebarSection({ title, count = 0, children }) {
         gap: 6,
         color: INK,
         fontFamily: sans,
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         fontWeight: 950,
         textTransform: 'uppercase',
         letterSpacing: 0,
@@ -38,7 +40,7 @@ export function SidebarSection({ title, count = 0, children }) {
             background: GOLD,
             color: INK,
             fontFamily: sans,
-            fontSize: FS.xxs,
+            fontSize: chromeFontSize(FS.xxs, mobile),
             fontWeight: 950,
           }}>
             {count}

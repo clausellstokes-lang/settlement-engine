@@ -34,7 +34,7 @@ import { formatCount } from '../../domain/formatNumber.js';
 import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { tonightAtTheTable, TABLE_KIND_LABEL } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
@@ -69,9 +69,10 @@ const BAND_TONE = {
 };
 
 function SectionTitle({ children }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
-      fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em',
+      fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, letterSpacing: '0.14em',
       textTransform: 'uppercase', color: AMBER, marginBottom: 10,
     }}>
       {children}
@@ -261,7 +262,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           }}>
             {settlement?.name || 'Untitled settlement'}
           </h1>
-          <div style={{ marginTop: 3, fontSize: FS.xxs, color: MUTED, letterSpacing: '0.04em' }}>
+          <div style={{ marginTop: 3, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, letterSpacing: '0.04em' }}>
             {String(settlement?.tier || 'SETTLEMENT').toUpperCase()}
             {settlement?.population != null && <> · {formatCount(settlement.population)} pop</>}
             {phase === 'canon' && <> · CANON</>}
@@ -284,7 +285,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
               onClick={() => document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" })}
               style={{
                 justifyContent: 'flex-start',
-                fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+                fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
                 letterSpacing: '0.08em', textTransform: 'uppercase', color: MUTED,
               }}
             >
@@ -373,7 +374,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       * style's. This badge printed the raw model token with no transform under
                       * it — literal caps in the string, which is the one thing rung 1 forbids,
                       * and the reason the cheat sheet said 'Hook' where this said 'HOOK'. */}
-                    <span style={{ fontSize: FS.nano, fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>{TABLE_KIND_LABEL[row.kind] || row.kind}</span>
+                    <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>{TABLE_KIND_LABEL[row.kind] || row.kind}</span>
                     </div>
                     <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{row.body}</div>
                   </Card>
@@ -392,7 +393,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       flex: '1 1 140px', padding: '8px 10px', background: swatch.white,
                       border: `1px solid ${BORDER}`,
                     }}>
-                      <div style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED }}>{name}</div>
+                      <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: MUTED }}>{name}</div>
                       <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.lg, color: BAND_TONE[d.band] || INK }}>
                         {d.band || d.value}
                       </div>
@@ -443,9 +444,9 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     <Card key={i} accent={GREEN}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8 }}>
                         <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK }}>{n?.name || 'Unnamed'}</span>
-                        <span style={{ fontSize: FS.nano, fontWeight: 800, color: MUTED, flexShrink: 0 }}>PWR {n?.power || 0}</span>
+                        <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: MUTED, flexShrink: 0 }}>PWR {n?.power || 0}</span>
                       </div>
-                      {(n?.role || n?.title) && <div style={{ fontSize: FS.xs, color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
+                      {(n?.role || n?.title) && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
                       {tell && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}>{tell}</div>}
                       {/* "Wants" reads the same way here as on the dossier NPC card and
                           as the SECRET label directly below: a bold inline label, no
@@ -453,7 +454,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       {goal && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}><span style={{ fontWeight: 800 }}>Wants</span> {goal}</div>}
                       {secret && (
                         <div style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: SLATE, lineHeight: 1.45 }}>
-                          <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: FS.nano }}>SECRET</span> {secret}
+                          <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: chromeFontSize(FS.nano, mobile) }}>SECRET</span> {secret}
                         </div>
                       )}
                     </Card>
@@ -474,7 +475,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 2 }}>
                         <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tokenCase(hook.source)}</span>
                         {/* The same 'NPCs' -> 'NPCS' break as PlotHooksTab's badge, on the DM-screen twin. */}
-                        <span style={{ fontSize: FS.nano, fontWeight: 800, color: cat.color, flexShrink: 0 }}>{tokenCase(cat.label)}</span>
+                        <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: cat.color, flexShrink: 0 }}>{tokenCase(cat.label)}</span>
                       </div>
                       <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{hook.text}</div>
                     </Card>
@@ -484,7 +485,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
             </section>
           )}
 
-          <div style={{ marginTop: 'auto', paddingTop: 8, fontSize: FS.xxs, color: MUTED, textAlign: 'center', fontStyle: 'italic' }}>
+          <div style={{ marginTop: 'auto', paddingTop: 8, fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textAlign: 'center', fontStyle: 'italic' }}>
             Press Esc to return to the dossier
           </div>
         </div>

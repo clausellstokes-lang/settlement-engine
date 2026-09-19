@@ -3,8 +3,11 @@ import { TIER_LABELS } from '../new/design.js';
 import { BORDER, CARD, FS, INK, MUTED, SP, sans, serif_ } from '../theme.js';
 import { human } from './galleryUtils.js';
 import GalleryImage from './GalleryImage.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function GalleryMoreByCreator({ items, onOpen }) {
+  const mobile = useIsMobile();
   if (!items?.length) return null;
   return (
     <section style={{ display: 'grid', gap: SP.md }}>
@@ -22,10 +25,10 @@ export default function GalleryMoreByCreator({ items, onOpen }) {
           >
             <GalleryImage item={item} height={100} />
             <div style={{ padding: SP.sm, display: 'grid', gap: 4 }}>
-              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950, overflowWrap: 'anywhere' }}>
+              <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950, overflowWrap: 'anywhere' }}>
                 {item.name || t('gallery.untitled')}
               </div>
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
                 {TIER_LABELS[item.tier] || human(item.tier)}
               </div>
             </div>

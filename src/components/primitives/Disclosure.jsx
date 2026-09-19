@@ -3,6 +3,8 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 import Badge from './Badge.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function Disclosure({
   title,
@@ -17,6 +19,7 @@ export default function Disclosure({
 }) {
   // a11y: the trigger names its panel (ported master fix — aria-controls pairs
   // with aria-expanded so AT users can jump to the disclosed region).
+  const mobile = useIsMobile();
   const panelId = useId();
   const [open, setOpen] = useState(defaultOpen);
   // Fire onFirstOpen once, the first time the section is revealed. Lets a
@@ -68,7 +71,7 @@ export default function Disclosure({
           ? <Icon size={14} color={MUTED} />
           : <span aria-hidden="true" style={{
               width: 14, flexShrink: 0, textAlign: 'center',
-              fontSize: FS.xs, lineHeight: 1, color: MUTED,
+              fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1, color: MUTED,
             }}>{open ? '▾' : '▸'}</span>}
         <span style={{
           flex: 1,

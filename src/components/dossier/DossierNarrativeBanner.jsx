@@ -1,7 +1,7 @@
 import { FS, swatch } from '../theme.js';
 import ProseParagraph from '../ProseParagraph.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { proseFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';;
 
 // ── Banner above tab content ──────────────────────────────────────────────
 // Thesis (identity-level prose) / per-tab note (lens) banner. Extracted
@@ -54,7 +54,7 @@ export default function DossierNarrativeBanner({
                   {/* One label vocabulary across every narrative-layer shell (the
                       action strip, this banner, the per-tab note): "Narrative
                       Layer" in one violet treatment. */}
-                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
                     Narrative Layer
                   </div>
                   {showThesis

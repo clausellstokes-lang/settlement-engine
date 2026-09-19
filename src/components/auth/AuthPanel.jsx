@@ -36,6 +36,7 @@ import {
   // the design-system Button primitive above can own the canonical name.
   Input, Checkbox, Button as AuthCTAButton, Alert, OAuthButton, OrDivider, GoogleGlyph, DiscordGlyph,
 } from './authUI.jsx';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // AuthPanel's internal mode vocabulary → the public route view id its
 // dedicated page lives at. The modal switches modes in place and never
@@ -54,6 +55,7 @@ export default function AuthPanel({
   onModeChange,             // (mode) => void — pages navigate; modal switches in place
   showTabs = true,          // modal shows the Sign In / Create Account toggle
 }) {
+  const mobile = useIsMobile();
   const authSignUp = useStore(s => s.authSignUp);
   const authSignIn = useStore(s => s.authSignIn);
   const authMagicLink = useStore(s => s.authMagicLink);
@@ -337,7 +339,7 @@ export default function AuthPanel({
       )}
 
       {!isConfigured && (
-        <div style={{ textAlign: 'center', fontSize: FS.xxs, color: MUTED, fontStyle: 'italic' }}>
+        <div style={{ textAlign: 'center', fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic' }}>
           {t('auth.localMode')}
         </div>
       )}

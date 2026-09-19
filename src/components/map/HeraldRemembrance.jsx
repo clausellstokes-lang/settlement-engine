@@ -65,6 +65,8 @@ import { remembranceRows } from './heraldRegister.js';
 import { Pill, Section } from './WorldPulsePrimitives.jsx';
 import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** The calm nothing-here state. A young realm has buried no one, and that is news. */
 function EmptyGraveyard() {
@@ -77,6 +79,7 @@ function EmptyGraveyard() {
 
 /** One fallen place: the name, how it is graded, when it fell, and the receipts. */
 function RemembranceRow({ row }) {
+  const mobile = useIsMobile();
   return (
     <div
       data-testid="remembrance-row"
@@ -97,20 +100,20 @@ function RemembranceRow({ row }) {
         />
         <Pill>{row.gradeLabel}</Pill>
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
+      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45, overflowWrap: 'anywhere' }}>
         {row.epitaph}
       </div>
-      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
         {row.whenLabel}
       </div>
       {row.receipts.length > 0 && (
         <dl style={{ margin: 0, display: 'grid', gap: 2 }}>
           {row.receipts.map(receipt => (
             <div key={receipt.id} style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
-              <dt style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <dt style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {receipt.label}
               </dt>
-              <dd style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, overflowWrap: 'anywhere' }}>
+              <dd style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), overflowWrap: 'anywhere' }}>
                 {receipt.detail}
               </dd>
             </div>
@@ -118,7 +121,7 @@ function RemembranceRow({ row }) {
         </dl>
       )}
       {row.receiptsRedacted && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
           The keeper&rsquo;s record of the cause is sealed to this reader.
         </div>
       )}
@@ -128,8 +131,9 @@ function RemembranceRow({ row }) {
 
 /** One line of a war's account. Kept out of the row so the layout reads as prose. */
 function WarClause({ children }) {
+  const mobile = useIsMobile();
   return (
-    <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.45, overflowWrap: 'anywhere' }}>
+    <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45, overflowWrap: 'anywhere' }}>
       {children}
     </div>
   );
@@ -137,6 +141,7 @@ function WarClause({ children }) {
 
 /** One war the realm wrote down: what it was called, how it ended, and what it cost. */
 function ConcludedWarRow({ row }) {
+  const mobile = useIsMobile();
   return (
     <div
       data-testid="concluded-war-row"
@@ -162,11 +167,11 @@ function ConcludedWarRow({ row }) {
       {row.engagements.length > 0 && (
         <WarClause>{`Remembered from the field: ${row.engagements.join(' ')}`}</WarClause>
       )}
-      <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+      <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
         {`${row.whenLabel} ${row.ranLabel}`}
       </div>
       {row.stagedNote && (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
           {row.stagedNote}
         </div>
       )}
@@ -174,10 +179,10 @@ function ConcludedWarRow({ row }) {
         <dl style={{ margin: 0, display: 'grid', gap: 2 }}>
           {row.receipts.map(receipt => (
             <div key={receipt.id} style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
-              <dt style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <dt style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {receipt.label}
               </dt>
-              <dd style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, overflowWrap: 'anywhere' }}>
+              <dd style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), overflowWrap: 'anywhere' }}>
                 {receipt.detail}
               </dd>
             </div>

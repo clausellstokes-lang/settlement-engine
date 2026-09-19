@@ -27,6 +27,8 @@ import { liveWarNames } from '../../domain/display/warAndRoadNames.js';
 import { renderTreatiesForSettlement } from '../../domain/display/treatyDocument.js';
 import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TERM_HELP = Object.freeze({
   siege: 'A live siege from the war ledgers: a public fact of the realm.',
@@ -36,10 +38,11 @@ const TERM_HELP = Object.freeze({
 });
 
 function Line({ kind, children }) {
+  const mobile = useIsMobile();
   return (
     <div
       aria-label={TERM_HELP[kind]}
-      style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, display: 'flex', gap: 6 }}
+      style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, display: 'flex', gap: 6 }}
     >
       <span style={{ color: kind === 'belief' ? GOLD : SECOND, fontWeight: 900, flexShrink: 0 }}>•</span>
       <span>{children}</span>
@@ -51,6 +54,7 @@ function Line({ kind, children }) {
  * @param {{ campaign: any, nameById?: Map<string,string> }} props
  */
 export default function PerspectiveStandings({ campaign, nameById }) {
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth?.tier);
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   // The believed half is DM knowledge (the includeGroundTruth convention).
@@ -114,21 +118,21 @@ export default function PerspectiveStandings({ campaign, nameById }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         {/* Text twin, not a lucide glyph (the LU-2 icons-off doctrine; also keeps
             the icon census untouched). */}
-        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: FS.xs }}>◉</span>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+        <span aria-hidden="true" style={{ color: GOLD, fontWeight: 900, fontSize: chromeFontSize(FS.xs, mobile) }}>◉</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
           The world as {nameFor(observerId)} knows it
         </span>
         <select
           aria-label="Pick the observing settlement"
           value={observerId}
           onChange={(e) => setPickedId(e.target.value)}
-          style={{ marginLeft: 'auto', fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, color: INK, background: CARD, border: `1px solid ${BORDER2}`, padding: '2px 6px' }}
+          style={{ marginLeft: 'auto', fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: INK, background: CARD, border: `1px solid ${BORDER2}`, padding: '2px 6px' }}
         >
           {ids.map(id => <option key={id} value={id}>{nameFor(id)}</option>)}
         </select>
       </div>
       {rows.length === 0 ? (
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic', lineHeight: 1.5 }}>
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
           {nameFor(observerId)} records no standing toward another settlement: no siege, no treaty{includeGroundTruth ? ', no modelled belief' : ''}.
         </div>
       ) : (

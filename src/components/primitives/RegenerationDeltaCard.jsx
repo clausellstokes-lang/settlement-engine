@@ -28,6 +28,8 @@
 import { useState } from 'react';
 import { causalBandWord } from '../../domain/causalState.js';
 import { FS, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const COLORS = Object.freeze({
   bg:        '#fffbf5',
@@ -74,6 +76,7 @@ function countItems(delta) {
  *   tests/domain/guidanceRegistry.walker.test.js).
  */
 export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What changed in the rerun' }) {
+  const mobile = useIsMobile();
   const [collapsed, setCollapsed] = useState(false);
 
   if (!delta || countItems(delta) === 0) return null;
@@ -99,12 +102,12 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
         }}
       >
         <span style={{
-          fontSize: FS.xs, fontWeight: 800, color: COLORS.gold,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: COLORS.gold,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           {heading}
         </span>
-        <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: COLORS.muted, flex: 1 }}>
           {summarizeCounts(delta)}
         </span>
         <button
@@ -113,7 +116,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
           aria-expanded={!collapsed}
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: COLORS.muted,
             padding: '2px 6px',
           }}
         >
@@ -128,7 +131,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
             style={{
               background: 'none', border: `1px solid ${COLORS.border}`,
               cursor: 'pointer',
-              fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: COLORS.muted,
               padding: '2px 7px',
             }}
           >
@@ -213,7 +216,7 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
             <div style={{
               marginTop: 6, paddingTop: 6,
               borderTop: `1px dashed ${COLORS.border}`,
-              fontSize: FS.xs, color: COLORS.muted, lineHeight: 1.5,
+              fontSize: proseFontSize(FS.xs, mobile), color: COLORS.muted, lineHeight: 1.5,
             }}>
               {delta.summary.map((line, i) => (
                 <div key={i}>· {line}</div>
@@ -227,12 +230,13 @@ export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What change
 }
 
 function Section({ title, items, color, describe, detail }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(items) || items.length === 0) return null;
   return (
     <section style={{ marginBottom: 8 }}>
       <h4 style={{
         margin: '4px 0',
-        fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.05em',
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.05em',
         textTransform: 'uppercase', color,
       }}>
         {title} ({items.length})
@@ -251,10 +255,10 @@ function Section({ title, items, color, describe, detail }) {
               borderBottom: idx === items.length - 1 ? 'none' : `1px solid ${COLORS.border}`,
             }}
           >
-            <span style={{ flex: 1, fontSize: FS['11.5'], color: COLORS.ink, fontWeight: 600 }}>
+            <span style={{ flex: 1, fontSize: chromeFontSize(FS['11.5'], mobile), color: COLORS.ink, fontWeight: 600 }}>
               {safeText(describe(item))}
             </span>
-            <span style={{ fontSize: FS['10.5'], color: COLORS.muted, textAlign: 'right' }}>
+            <span style={{ fontSize: chromeFontSize(FS['10.5'], mobile), color: COLORS.muted, textAlign: 'right' }}>
               {safeText(detail(item))}
             </span>
           </li>
@@ -265,6 +269,7 @@ function Section({ title, items, color, describe, detail }) {
 }
 
 function BrokenDependenciesRow({ items }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(items) || items.length === 0) return null;
   return (
     <div
@@ -274,7 +279,7 @@ function BrokenDependenciesRow({ items }) {
         padding: '6px 9px',
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
-        fontSize: FS.xs, color: swatch['#7A4F0F'], lineHeight: 1.5,
+        fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
       <strong>Broken dependencies:</strong> {items.join(' · ')}

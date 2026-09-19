@@ -28,6 +28,7 @@ import { GOLD, GOLD_SOFT, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROM
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SLATE = swatch['#5A6E82'];
 
@@ -54,6 +55,7 @@ const SLATE_REASONS = new Set([
 ]);
 
 export default function PricingMomentCard() {
+  const mobile = useIsMobile();
   const isMobile = useIsMobile();
   const activeMoment = useStore(s => s.activePricingMoment);
   const clearMoment = useStore(s => s.clearActivePricingMoment);
@@ -144,7 +146,7 @@ export default function PricingMomentCard() {
       }}
     >
       <div style={{
-        fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.14em',
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.14em',
         textTransform: 'uppercase', color: accent,
         marginBottom: 6,
       }}>

@@ -46,6 +46,8 @@ import RealmDocket from './RealmDocket.jsx';
 import AdvanceReport from './AdvanceReport.jsx';
 import TreatyPanel from './TreatyPanel.jsx';
 import ChroniclersLetterPanel from './ChroniclersLetterPanel.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // EXISTING lazy split preserved (same dynamic imports as the pre-Herald inspector).
 const RealmDashboard = lazy(() => import('./RealmDashboard.jsx'));
@@ -96,11 +98,12 @@ function DoorLensChip({ section }) {
 
 // A calm peacetime note (the War door's live-block empty tail).
 function PeacetimeNote({ campaign }) {
+  const mobile = useIsMobile();
   const worldState = campaign?.worldState || {};
   const regionalGraph = campaign?.regionalGraph || worldState.regionalGraph || null;
   if (hasLiveWarState({ worldState, regionalGraph })) return null;
   return (
-    <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5 }}>
+    <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.5 }}>
       The realm is at peace. No sieges, deployments, or trade wars are live.
     </div>
   );
@@ -109,6 +112,7 @@ function PeacetimeNote({ campaign }) {
 // The Dashboard's session-prep prose mode (absorbs the old Letter + the chronicle
 // feed + this advance's report). Toggled from the glance stats.
 function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns, tier, onUpgrade, nameById, emptyHandlers }) {
+  const mobile = useIsMobile();
   const [prose, setProse] = useState(false);
   const nameFor = (id) => nameById?.get(String(id)) || String(id);
   // THE FRONT-PAGE BANNER — the K most-severe live items cross-realm, severity-first
@@ -118,9 +122,9 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
     <div style={{ display: 'grid', gap: SP.md }}>
       {digest.length > 0 && (
         <div data-testid="dashboard-needs-attention" style={{ border: `1px solid ${GOLD}`, borderLeft: `3px solid ${RED}`, background: CARD_ALT, padding: SP.sm, display: 'grid', gap: 4 }}>
-          <div style={{ color: RED, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Needs attention</div>
+          <div style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Needs attention</div>
           {digest.map(item => (
-            <div key={item.id} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, overflowWrap: 'anywhere' }}>{item.headline}</div>
+            <div key={item.id} style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, overflowWrap: 'anywhere' }}>{item.headline}</div>
           ))}
         </div>
       )}
@@ -191,6 +195,7 @@ export default function HeraldBody({
   activeDecisionItemId = null,
   onOpenGatheredDocket = null,
 }) {
+  const mobile = useIsMobile();
   const showResolve = flag('warEconomySurfacing');
   const bySection = feed.bySection || {};
   // DESK-5 — the unfiltered per-door denominator for the footer sentence.
@@ -296,7 +301,7 @@ export default function HeraldBody({
     return (
       <div style={{ display: 'grid', gap: 12 }}>
         <div style={{ border: `1px dashed ${GOLD}`, background: CARD_ALT, padding: SP.sm }}>
-          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
             The forecast · amendable, not yet come to pass
           </div>
           <RealmDocket campaign={campaign} />
@@ -349,5 +354,5 @@ export default function HeraldBody({
     );
   }
 
-  return <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.xs, border: `1px dashed ${BORDER}` }}>Unknown section.</div>;
+  return <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), border: `1px dashed ${BORDER}` }}>Unknown section.</div>;
 }

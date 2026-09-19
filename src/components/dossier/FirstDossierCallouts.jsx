@@ -40,6 +40,8 @@ import {
   GUIDANCE_REGISTRY, isWhisperEligible, deriveGuidanceFirst, deriveGuidanceNewborn,
 } from '../../domain/display/guidanceRegistry.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const WHISPER_ID = 'dossier_first_callouts';
 const GREEN = swatch['#4A7A3A'];
@@ -59,6 +61,7 @@ const WHISPER = GUIDANCE_REGISTRY.whispers.find((w) => w.id === WHISPER_ID);
 
 export default function FirstDossierCallouts() {
   const { view: route } = useRoute();
+  const mobile = useIsMobile();
   const tier = useStore(s => s.auth.tier);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
   const settlement = useStore(s => s.settlement);
@@ -112,7 +115,7 @@ export default function FirstDossierCallouts() {
           >
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{
-                fontSize: FS.micro, fontWeight: 800,
+                fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
                 color: accent,
               }}>

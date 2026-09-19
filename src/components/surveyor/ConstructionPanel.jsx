@@ -19,6 +19,8 @@ import Segmented from '../primitives/Segmented.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ProposalSlipLine } from './surveyorPanelKit.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const SCOPE_OPTIONS = [{ id: 'settlement', label: 'Settlement' }, { id: 'realm', label: 'Realm' }];
 const DIMENSION_LABEL = {
@@ -30,6 +32,7 @@ const MAX_REVISE_ROUNDS = 2;
 const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`;
 
 export default function ConstructionPanel({ initialPrompt = '', initialScope }) {
+  const mobile = useIsMobile();
   const { creditBalance, ctx } = useSurveyorContext();
   const instantWorld = useStore((s) => s.instantWorld);
   const setActiveSaveId = useStore((s) => s.setActiveSaveId);
@@ -184,8 +187,8 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
             {configKeys.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>No registered config keys were emitted.</p>}
             {configKeys.map((k) => (
               <div key={k} style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
-                <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 130 }}>{k}</span>
-                <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{String(config[k])}</span>
+                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, minWidth: 130 }}>{k}</span>
+                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>{String(config[k])}</span>
               </div>
             ))}
           </div>
@@ -196,7 +199,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
               {unsupported.map((u, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <Badge tone="warning" size="sm">dropped</Badge>
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{String(u.key)}{u.reason ? `: ${u.reason}` : ''}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>{String(u.key)}{u.reason ? `: ${u.reason}` : ''}</span>
                 </div>
               ))}
             </div>
@@ -207,7 +210,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
               <Eyebrow>Declared targets</Eyebrow>
               {constraintKeys.map((dim) => (
                 <div key={dim} style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 130 }}>{DIMENSION_LABEL[dim] || dim}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, minWidth: 130 }}>{DIMENSION_LABEL[dim] || dim}</span>
                   <Badge tone={BAND_TONE[constraints[dim]] || 'muted'} size="sm">{constraints[dim]}</Badge>
                 </div>
               ))}
@@ -226,7 +229,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
           <Eyebrow>{deviations.length === 0 ? 'The draft matches your targets' : 'Where the draft deviates from your targets'}</Eyebrow>
           {generated.kind === 'realm' && (
-            <p style={{ margin: 0, fontSize: FS.xs, color: MUTED }}>{generated.count} settlements composed · nothing canonized yet.</p>
+            <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: MUTED }}>{generated.count} settlements composed · nothing canonized yet.</p>
           )}
           {deviations.length === 0 ? (
             <p data-testid="construct-nodeviations" style={{ margin: 0, fontSize: FS.sm, color: GREEN }}>◆ Every constrained dimension is on target.</p>
@@ -234,8 +237,8 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
             <div data-testid="construct-deviations" style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               {deviations.map((d, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, minWidth: 130 }}>{DIMENSION_LABEL[d.dimension] || d.dimension}</span>
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, minWidth: 130 }}>{DIMENSION_LABEL[d.dimension] || d.dimension}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                     is <b>{d.actual}</b>, you asked <b>{d.target}</b>. {d.direction} it
                   </span>
                 </div>
@@ -248,20 +251,20 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
               <Button variant="ai" size="sm" busy={loading} disabled={loading} onClick={revise}>
                 Revise (delta-only)
               </Button>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
                 Pass {round + 1} of {MAX_REVISE_ROUNDS}: sends only the {deviations.length} deviation{deviations.length === 1 ? '' : 's'} + the current config, no re-grounding.
               </span>
             </div>
           )}
           {!canRevise && deviations.length > 0 && (
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Revise budget spent. Commit as-is or refine your prompt.</span>
+            <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>Revise budget spent. Commit as-is or refine your prompt.</span>
           )}
 
           <Button variant="primary" size="sm" busy={committing} disabled={committing} onClick={commit}>
             {scope === 'realm' ? 'Place the realm' : 'Create the settlement'}
           </Button>
           {committed && (
-            <div data-testid="construct-committed" style={{ fontSize: FS.xs, color: committed.kind === 'error' ? RED : MUTED, fontFamily: sans, lineHeight: 1.5 }}>
+            <div data-testid="construct-committed" style={{ fontSize: proseFontSize(FS.xs, mobile), color: committed.kind === 'error' ? RED : MUTED, fontFamily: sans, lineHeight: 1.5 }}>
               {committed.kind !== 'error' && <span style={{ color: GREEN }}>◆ </span>}{committed.detail}
             </div>
           )}

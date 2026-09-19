@@ -27,6 +27,8 @@ import { navigate } from '../../hooks/useRoute.js';
 import { td } from '../../copy/deityAuthoring.js';
 import { BORDER, CARD, FS, GREEN, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const DEITY_ACCENT = swatch['#7C3AED'];
 
@@ -69,6 +71,7 @@ export function computePantheonActivation(state) {
 }
 
 function Milestone({ on, label, detail, action }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '6px 0' }}>
       <span aria-hidden="true" style={{ marginTop: 1, flexShrink: 0, fontSize: FS.sm, fontWeight: 800, lineHeight: 1.4, color: on ? GREEN : MUTED }}>
@@ -76,7 +79,7 @@ function Milestone({ on, label, detail, action }) {
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: on ? INK : MUTED, fontFamily: sans }}>{label}</div>
-        <div style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.45, fontFamily: sans }}>{detail}</div>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, lineHeight: 1.45, fontFamily: sans }}>{detail}</div>
       </div>
       {!on && action}
     </div>
@@ -84,6 +87,7 @@ function Milestone({ on, label, detail, action }) {
 }
 
 export default function PantheonActivationStrip() {
+  const mobile = useIsMobile();
   const customContent = useStore((s) => s.customContent);
   const settlement = useStore((s) => s.settlement);
   const savedSettlements = useStore((s) => s.savedSettlements);
@@ -100,7 +104,7 @@ export default function PantheonActivationStrip() {
       variant="secondary"
       size="sm"
       onClick={onClick}
-      style={{ flexShrink: 0, padding: '2px 8px', minHeight: 0, fontSize: FS.xxs, fontWeight: 800, color: DEITY_ACCENT }}
+      style={{ flexShrink: 0, padding: '2px 8px', minHeight: 0, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: DEITY_ACCENT }}
     >
       {label}
     </Button>
@@ -115,13 +119,13 @@ export default function PantheonActivationStrip() {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <span style={{ fontSize: FS.xs, fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em', flex: 1, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em', flex: 1, fontFamily: sans }}>
           {td('activation.heading')}
         </span>
         <span
           data-testid="pantheon-activation-badge"
           style={{
-            fontSize: FS.micro, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em',
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em',
             color: live ? GREEN : MUTED, background: `${live ? GREEN : MUTED}14`, padding: '1px 8px',
           }}
         >
@@ -153,7 +157,7 @@ export default function PantheonActivationStrip() {
       />
 
       {!live && (
-        <div style={{ fontSize: FS.micro, color: MUTED, fontStyle: 'italic', marginTop: 4, lineHeight: 1.4, fontFamily: sans }}>
+        <div style={{ fontSize: proseFontSize(FS.micro, mobile), color: MUTED, fontStyle: 'italic', marginTop: 4, lineHeight: 1.4, fontFamily: sans }}>
           {td('activation.dormantFoot')}
         </div>
       )}

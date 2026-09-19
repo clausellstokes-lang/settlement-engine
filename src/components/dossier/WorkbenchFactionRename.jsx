@@ -25,6 +25,8 @@ import { useStore } from '../../store/index.js';
 import { nameOf } from '../../domain/rulingPower.js';
 import Button from '../primitives/Button.jsx';
 import { BORDER, FS, SP, swatch, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const MUTED = swatch.inkMag3;
 
@@ -52,6 +54,7 @@ export function resolveFactionIndex(settlement, entry) {
 }
 
 export default function WorkbenchFactionRename({ entry }) {
+  const mobile = useIsMobile();
   const settlement = useStore(state => state.settlement);
   const queueEdit = useStore(state => state.queueEdit);
   const [open, setOpen] = useState(false);
@@ -95,13 +98,13 @@ export default function WorkbenchFactionRename({ entry }) {
         Name
       </h3>
       {factionIndex == null ? (
-        <p role="note" style={{ margin: 0, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+        <p role="note" style={{ margin: 0, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           This faction cannot be uniquely matched to the live settlement, so
           renaming is disabled rather than guessing.
         </p>
       ) : (
         <>
-          <p style={{ margin: '0 0 7px', color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <p style={{ margin: '0 0 7px', color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             A new name is staged for review first. When you commit it, it carries
             through the roster, the governing seat, every member and every
             neighbouring settlement that names this faction.
@@ -150,7 +153,7 @@ export default function WorkbenchFactionRename({ entry }) {
           style={{
             margin: '4px 0 0',
             color: note.tone === 'warn' ? swatch.danger : swatch.success,
-            fontSize: FS.xxs,
+            fontSize: proseFontSize(FS.xxs, mobile),
             lineHeight: 1.45,
           }}
         >

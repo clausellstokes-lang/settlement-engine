@@ -17,6 +17,8 @@ import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -35,6 +37,7 @@ export default function AccountSubscriptionSection({
   handlePurchase,
   onNavigatePricing,
 }) {
+  const mobile = useIsMobile();
   const isFree = !isElevated && auth.tier !== 'premium';
   // ⛔ THE HYDRATION GATE (LD-6 item 2, second half). `auth.tier` reads 'anon'/
   // 'free' until the session resolves, so mid-hydration a paying Cartographer is
@@ -66,7 +69,7 @@ export default function AccountSubscriptionSection({
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardCurrentTier')}
             </div>
             <div style={{
@@ -82,7 +85,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(124,58,237,0.06)',
               borderTop: '1px solid rgba(124,58,237,0.20)',
-              fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> unlimited saves,
               neighbours, custom content, and unlimited PDF/JSON export.
@@ -98,7 +101,7 @@ export default function AccountSubscriptionSection({
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardCredits')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#7C3AED'] }}>
@@ -110,7 +113,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(124,58,237,0.10)',
               borderTop: '1px solid rgba(124,58,237,0.25)',
-              fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: swatch['#7C3AED'] }}>Try Narrate.</b> Turn this town's data
               into table-ready prose.{' '}
@@ -127,14 +130,14 @@ export default function AccountSubscriptionSection({
           overflow: 'hidden',
         }}>
           <div style={{ padding: SP.lg, textAlign: 'center' }}>
-            <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
+            <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.xs }}>
               {t('account.cardSaves')}
             </div>
             <div style={{ fontSize: FS.xxl, fontWeight: 700, color: swatch['#2A7A2A'] }}>
               {activeSaves} / {maxSaves === Infinity ? '\u221E' : maxSaves}
             </div>
             {inactiveSaves > 0 && (
-              <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.xs }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: SP.xs }}>
                 {inactiveSaves} inactive retained
               </div>
             )}
@@ -144,7 +147,7 @@ export default function AccountSubscriptionSection({
               padding: `${SP.sm}px ${SP.md}px`,
               background: 'rgba(208,128,32,0.10)',
               borderTop: '1px solid rgba(208,128,32,0.30)',
-              fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
+              fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
               <b style={{ color: AMBER }}>
                 {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
@@ -191,7 +194,7 @@ export default function AccountSubscriptionSection({
         <div style={{ marginTop: SP.lg }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: SP.sm, marginBottom: SP.md,
-            fontSize: FS.xs, fontWeight: 700, color: SECOND,
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
             {t('account.purchaseCreditsLabel')}
@@ -234,13 +237,13 @@ export default function AccountSubscriptionSection({
                     <span style={{
                       position: 'absolute', top: -8, right: -4,
                       padding: '2px 6px', background: accent,
-                      color: swatch.white, fontSize: FS.micro, fontWeight: 800,
+                      color: swatch.white, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
                     }}>{p.discount}</span>
                   )}
                   <span style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</span>
-                  <span style={{ fontSize: FS.xxs, color: MUTED }}>credits</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>credits</span>
                   <span style={{ fontSize: FS.md, fontWeight: 700, color: accent }}>{p.price}</span>
-                  <span style={{ fontSize: FS.xxs, color: MUTED }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
                   {/* The pill wraps inside the tile with narrower side padding, so three
                       tiles still share a 375px phone row; narrower screens wrap the row. */}
                   {!purchasesAreOpen && (

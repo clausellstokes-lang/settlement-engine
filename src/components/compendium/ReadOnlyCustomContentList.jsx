@@ -20,8 +20,11 @@ import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import { Tag } from './primitives.jsx';
 import { CUSTOM_CATEGORIES } from './customCategoryDefs.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export default function ReadOnlyCustomContentList({ search, initialCat }) {
+  const mobile = useIsMobile();
   const customContent = useStore(state => state.customContent);
   // Seed the active bucket from a validated ?cat= deep-link; institutions otherwise.
   const [activeCat, setActiveCat] = useState(() => (
@@ -47,7 +50,7 @@ export default function ReadOnlyCustomContentList({ search, initialCat }) {
   return (
     <div style={{ marginTop: 16 }}>
       <div style={{
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         fontWeight: 700,
         color: MUT,
         textTransform: 'uppercase',
@@ -73,7 +76,7 @@ export default function ReadOnlyCustomContentList({ search, initialCat }) {
                 gap: 4,
                 padding: '4px 10px',
                 minHeight: 44,
-                fontSize: FS.xs,
+                fontSize: chromeFontSize(FS.xs, mobile),
                 fontWeight: activeCat === candidate.key ? 700 : 500,
                 fontFamily: 'inherit',
                 cursor: 'pointer',
@@ -85,7 +88,7 @@ export default function ReadOnlyCustomContentList({ search, initialCat }) {
             >
               {candidate.label}
               <span style={{
-                fontSize: FS.micro,
+                fontSize: chromeFontSize(FS.micro, mobile),
                 fontWeight: 700,
                 background: `${candidate.color}20`,
                 color: candidate.color,
@@ -129,7 +132,7 @@ export default function ReadOnlyCustomContentList({ search, initialCat }) {
                 {item.category && <Tag label={item.category} color={category.color} />}
               </div>
               {item.description && (
-                <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.4, marginTop: 4 }}>
+                <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SEC, lineHeight: 1.4, marginTop: 4 }}>
                   {item.description}
                 </div>
               )}

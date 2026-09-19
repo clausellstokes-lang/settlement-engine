@@ -54,6 +54,8 @@ import { BookOpen } from 'lucide-react';
 import { FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const BORDER = swatch['#E0D0B0'];
 const INK    = swatch['#1C1409'];
@@ -101,6 +103,7 @@ export function eventLabelFor(eventId, eventLog) {
  * @param {{ save: any }} props  the saved-settlement row (aiData + campaignState).
  */
 export default function NarrativeArchivePanel({ save }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const snapshots = Array.isArray(save?.aiData?.eventNarrativeSnapshots)
     ? save.aiData.eventNarrativeSnapshots
@@ -128,15 +131,15 @@ export default function NarrativeArchivePanel({ save }) {
         <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['14'], fontWeight: 600, color: INK, flex: 1 }}>
           Narrative Archive {snapshots.length > 0 ? `(${snapshots.length})` : ''}
         </span>
-        <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
           what the prose said before each event
         </span>
-        <span style={{ fontSize: FS.xs, color: MUTED }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{open ? '▲' : '▼'}</span>
       </Button>
 
       {open && (
         <div style={{ padding: '12px 14px', background: swatch['#FAF8F4'], maxHeight: 420, overflowY: 'auto' }}>
-          <p style={{ margin: '0 0 10px', fontSize: FS.xxs, color: MUTED, fontFamily: 'Nunito, sans-serif', lineHeight: 1.5 }}>
+          <p style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, fontFamily: 'Nunito, sans-serif', lineHeight: 1.5 }}>
             {RETENTION_NOTE}
           </p>
           {newestFirst.length === 0 ? (
@@ -160,11 +163,11 @@ export default function NarrativeArchivePanel({ save }) {
                   }}
                 >
                   <div
-                    style={{ fontSize: FS.xxs, fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'Nunito, sans-serif' }}
+                    style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: 'Nunito, sans-serif' }}
                   >
                     Before: {eventLabelFor(snap.eventId, eventLog)}
                   </div>
-                  <div style={{ fontSize: FS['10.5'], color: MUTED, fontFamily: 'Nunito, sans-serif', marginTop: 2 }}>
+                  <div style={{ fontSize: chromeFontSize(FS['10.5'], mobile), color: MUTED, fontFamily: 'Nunito, sans-serif', marginTop: 2 }}>
                     {absoluteTime(snap.ts)}
                   </div>
                   <p style={{ margin: '6px 0 0', fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>

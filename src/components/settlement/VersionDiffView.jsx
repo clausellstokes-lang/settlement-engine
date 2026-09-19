@@ -39,6 +39,8 @@ import { PROSE_FIELD_LABELS } from '../dossier/proseFieldLabels.js';
 import RegenerationDeltaCard from '../primitives/RegenerationDeltaCard.jsx';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, CARD, FS, GOLD, INK, MUTED, SP, sans, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * Identity and scale fields. These are not prose and not user-editable, but
@@ -128,6 +130,7 @@ export default function VersionDiffView({ earlier, later, onClose }) {
   // Hoisted so the memo dependencies name exactly the values the bodies read
   // (the React compiler refuses to preserve a memo whose declared deps are more
   // specific than the ones it infers from `earlier?.snapshot` inline).
+  const mobile = useIsMobile();
   const earlierPayload = earlier?.snapshot;
   const laterPayload = later?.snapshot;
 
@@ -180,7 +183,7 @@ export default function VersionDiffView({ earlier, later, onClose }) {
         }}>
           Comparing two snapshots
         </h4>
-        <span style={{ flex: 1, fontSize: FS.xs, color: MUTED }}>
+        <span style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>
           {earlier?.label || 'Snapshot'} ({stamp(earlier?.ts)}) to {later?.label || 'Snapshot'} ({stamp(later?.ts)})
         </span>
         {onClose && (
@@ -212,20 +215,20 @@ export default function VersionDiffView({ earlier, later, onClose }) {
               <div style={{ marginTop: derivedCount > 0 ? SP.md : 0 }}>
                 <h5 style={{
                   margin: `0 0 ${SP.xs}px`,
-                  fontSize: FS.xxs, fontWeight: 800, letterSpacing: '0.06em',
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: '0.06em',
                   textTransform: 'uppercase', color: GOLD,
                 }}>
                   What was written ({rows.length})
                 </h5>
                 <table style={{
                   width: '100%', borderCollapse: 'collapse',
-                  fontSize: FS.xs, color: BODY,
+                  fontSize: chromeFontSize(FS.xs, mobile), color: BODY,
                 }}>
                   <thead>
                     <tr>
-                      <th scope="col" style={HEAD_CELL}>Field</th>
-                      <th scope="col" style={HEAD_CELL}>Earlier</th>
-                      <th scope="col" style={HEAD_CELL}>Later</th>
+                      <th scope="col" style={headCell(mobile)}>Field</th>
+                      <th scope="col" style={headCell(mobile)}>Earlier</th>
+                      <th scope="col" style={headCell(mobile)}>Later</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -249,16 +252,16 @@ export default function VersionDiffView({ earlier, later, onClose }) {
   );
 }
 
-const HEAD_CELL = {
+const headCell = (mobile) => ({
   textAlign: 'left',
   padding: '4px 8px',
   borderBottom: `1px solid ${BORDER}`,
-  fontSize: FS.xxs,
+  fontSize: chromeFontSize(FS.xxs, mobile),
   fontWeight: 800,
   letterSpacing: '0.05em',
   textTransform: 'uppercase',
   color: MUTED,
-};
+});
 
 const BODY_CELL = {
   textAlign: 'left',

@@ -23,6 +23,8 @@ import Button from './primitives/Button.jsx';
 import { TIER_LABELS } from './new/design.js';
 import { INK, BORDER, sans, serif_, SP, FS, swatch, PARCH, PARCH_100 } from './theme.js';
 import { t } from '../copy/index.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // STRIP-1 (owner ruling, ODQ §725): the SM-4 gallery town-map opt-in is GONE.
 // A public dossier is the dossier — there is no [Dossier | Map] lens toggle and no
@@ -43,6 +45,7 @@ function formatDate(iso) {
 }
 
 export default function PublicDossierView({ dossier, onForge, showHeader = true }) {
+  const mobile = useIsMobile();
   if (!dossier || !dossier.settlement) {
     return (
       <div style={{
@@ -77,7 +80,7 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
           </h1>
           <div style={{
             display: 'flex', alignItems: 'center', gap: SP.md,
-            marginTop: 4, fontSize: FS.xs, color: MUTED,
+            marginTop: 4, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED,
             textTransform: 'capitalize',
           }}>
             <span>{tierLabel}</span>

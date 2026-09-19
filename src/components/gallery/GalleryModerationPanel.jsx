@@ -7,6 +7,8 @@ import Button from '../primitives/Button.jsx';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SECOND, SP, sans } from '../theme.js';
 import { formatDate, human } from './galleryUtils.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const STATUS_OPTIONS = [
   ['open', 'Open'],
@@ -16,6 +18,7 @@ const STATUS_OPTIONS = [
 ];
 
 function StatusPill({ status }) {
+  const mobile = useIsMobile();
   const active = status === 'open';
   return (
     <span style={{
@@ -27,7 +30,7 @@ function StatusPill({ status }) {
       background: active ? RED_BG : CARD_ALT,
       color: active ? RED : SECOND,
       fontFamily: sans,
-      fontSize: FS.xxs,
+      fontSize: chromeFontSize(FS.xxs, mobile),
       fontWeight: 900,
       textTransform: 'uppercase',
     }}>
@@ -56,6 +59,7 @@ function ActionButton({ children, tone = 'secondary', busy, icon, onClick }) {
 // comment) lives in the by-id admin tools; here a target is resolved or dismissed
 // (all its open reports move together). Rides the lazy AdminPanel chunk.
 function UnifiedReportQueue() {
+  const mobile = useIsMobile();
   const [targets, setTargets] = useState([]);
   const [busyKey, setBusyKey] = useState(null);
   const [error, setError] = useState(null);
@@ -99,7 +103,7 @@ function UnifiedReportQueue() {
         <Button variant="secondary" size="sm" onClick={load}>Refresh</Button>
       </div>
       {error && (
-        <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
+        <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
       )}
       {targets.length === 0 ? (
         <div style={{ padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
@@ -112,15 +116,15 @@ function UnifiedReportQueue() {
             return (
               <article key={key} style={{ display: 'grid', gap: 4, padding: SP.sm, border: `1px solid ${RED}`, background: CARD_ALT }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase' }}>{t.kind}</span>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, textTransform: 'uppercase' }}>{t.kind}</span>
                   <strong style={{ color: INK, fontFamily: sans, fontSize: FS.sm, overflowWrap: 'anywhere' }}>{t.label || t.target_id}</strong>
-                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{t.report_count} reports</span>
-                  {!t.is_public && <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>not public</span>}
+                  <span style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>{t.report_count} reports</span>
+                  {!t.is_public && <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>not public</span>}
                 </div>
-                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
                   {(Array.isArray(t.reasons) ? t.reasons : []).map(r => human(r)).join(', ')}
                 </div>
-                <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontStyle: 'italic' }}>
+                <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontStyle: 'italic' }}>
                   Take the item down from the user tools by id; here you can clear the reports.
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm }}>
@@ -137,6 +141,7 @@ function UnifiedReportQueue() {
 }
 
 export default function GalleryModerationPanel() {
+  const mobile = useIsMobile();
   const [status, setStatus] = useState('open');
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -212,7 +217,7 @@ export default function GalleryModerationPanel() {
       </div>
 
       {error && (
-        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}>
           {error}
         </div>
       )}
@@ -246,12 +251,12 @@ export default function GalleryModerationPanel() {
                     </strong>
                     <StatusPill status={report.status} />
                     {report.reportCount > 1 && (
-                      <span style={{ color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>
+                      <span style={{ color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>
                         {report.reportCount} reports
                       </span>
                     )}
                   </div>
-                  <div style={{ marginTop: 3, color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+                  <div style={{ marginTop: 3, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
                     {human(report.tier)} / {human(report.reason)} / {report.reporterLabel} / {formatDate(report.createdAt)}
                   </div>
                 </div>
@@ -271,7 +276,7 @@ export default function GalleryModerationPanel() {
                 </p>
               )}
               {!report.isPublic && (
-                <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontStyle: 'italic' }}>
+                <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontStyle: 'italic' }}>
                   This settlement is no longer public.
                 </div>
               )}

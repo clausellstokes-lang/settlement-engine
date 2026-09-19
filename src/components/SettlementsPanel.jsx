@@ -44,10 +44,13 @@ import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import UnassignedLedger from './settlements/UnassignedLedger.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
 export default function SettlementsPanel({ onNavigate, routeId }) {
+  const mobile = useIsMobile();
   const updateConfig = useStore(s => s.updateConfig);
   const setInstitutionToggles = useStore(s => s.setInstitutionToggles);
   const setCategoryToggles = useStore(s => s.setCategoryToggles);
@@ -711,7 +714,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           ) : (
             <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
               <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>} style={{ alignSelf:'flex-start' }}>New campaign</Button>
-              <span style={{ fontSize:FS.xs, color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
+              <span style={{ fontSize:chromeFontSize(FS.xs, mobile), color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
             </div>
           )}
         </div>

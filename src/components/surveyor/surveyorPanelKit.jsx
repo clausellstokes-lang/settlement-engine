@@ -12,6 +12,8 @@ import { t } from '../../copy/index.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans, serif_, SP, FS } from '../theme.js';
 import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * The per-field truth label. `flavor` remains an accepted compatibility alias
@@ -49,9 +51,10 @@ export function EarlyAccessBadge({ show = true }) {
 
 /** The BYOK tag — surfaced post-response (the client never sees the key; the edge reports it). */
 export function ByokTag({ byok }) {
+  const mobile = useIsMobile();
   if (!byok) return null;
   return (
-    <span aria-label="Answered on your own provider key" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+    <span aria-label="Answered on your own provider key" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
       · BYOK
     </span>
   );
@@ -64,12 +67,13 @@ export function ByokTag({ byok }) {
  * authority; it refunds/refuses), never a silently dead button.
  */
 export function MoneyLine({ cost, creditBalance, busy, disabled, onSubmit, submitLabel = 'Compile', busyLabel = 'Working…' }) {
+  const mobile = useIsMobile();
   const knownBalance = Number.isFinite(creditBalance);
   const short = knownBalance && creditBalance < cost;
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           {cost} credit{cost === 1 ? '' : 's'}
           {knownBalance && <span> · {creditBalance} left</span>}
         </span>
@@ -84,7 +88,7 @@ export function MoneyLine({ cost, creditBalance, busy, disabled, onSubmit, submi
         </Button>
       </div>
       {short && (
-        <span data-testid="surveyor-insufficient" style={{ fontSize: FS.xs, color: RED, fontFamily: sans }}>
+        <span data-testid="surveyor-insufficient" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: RED, fontFamily: sans }}>
           Not enough credits for this. You have {creditBalance}, this needs {cost}. Nothing is charged until it runs.
         </span>
       )}
@@ -98,6 +102,7 @@ export function MoneyLine({ cost, creditBalance, busy, disabled, onSubmit, submi
  * register — never a broken button. The refusal CLASS is surfaced quietly for honesty.
  */
 export function RefusalNote({ error, refusalClass, doors }) {
+  const mobile = useIsMobile();
   if (!error) return null;
   const paused = refusalClass === 'stage_disabled';
   return (
@@ -111,7 +116,7 @@ export function RefusalNote({ error, refusalClass, doors }) {
     >
       <p style={{ margin: 0, fontSize: FS.sm, color: RED, lineHeight: 1.45 }}>{error}</p>
       {(paused || (Array.isArray(doors) && doors.length > 0)) && (
-        <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>
           {paused ? 'This stage is paused. Nothing was charged.' : 'Nothing was charged.'}
         </span>
       )}
@@ -124,13 +129,14 @@ export function RefusalNote({ error, refusalClass, doors }) {
  * a gold rule, a plain "suggestion" label. Never a control, never the record.
  */
 export function MusingsBlock({ musings }) {
+  const mobile = useIsMobile();
   if (!Array.isArray(musings) || musings.length === 0) return null;
   return (
     <div
       data-testid="surveyor-musings"
       style={{ borderLeft: `2px solid ${GOLD}`, paddingLeft: SP.sm, display: 'flex', flexDirection: 'column', gap: 4 }}
     >
-      <span style={{ fontSize: FS.xs, color: GOLD, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+      <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: GOLD, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
         The Surveyor muses · suggestions, not the record
       </span>
       {musings.map((m, i) => (
@@ -149,8 +155,9 @@ export function MusingsBlock({ musings }) {
  * The line's copy is the owner's ruling text VERBATIM (copy registry surveyorDoor.proposed).
  */
 export function ProposalSlipLine() {
+  const mobile = useIsMobile();
   return (
-    <span data-testid="proposal-slip-line" className="sf-smallcap" style={{ fontSize: FS.xs, color: SLATE_DEEP, fontFamily: sans }}>
+    <span data-testid="proposal-slip-line" className="sf-smallcap" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: SLATE_DEEP, fontFamily: sans }}>
       {t('surveyorDoor.proposed')}
     </span>
   );
@@ -158,13 +165,14 @@ export function ProposalSlipLine() {
 
 /** The visible CONTEXT ANCHOR chip (what the Surveyor reads) — the §3c honesty made tangible. */
 export function AnchorChip({ label }) {
+  const mobile = useIsMobile();
   if (!label) return null;
   return (
     <div
       data-testid="surveyor-anchor"
       aria-label={label}
       style={{
-        fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
+        fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, background: CARD_ALT,
         border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       }}
@@ -176,8 +184,9 @@ export function AnchorChip({ label }) {
 
 /** A small section eyebrow used across the panels. */
 export function Eyebrow({ children }) {
+  const mobile = useIsMobile();
   return (
-    <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+    <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
       {children}
     </span>
   );
@@ -185,8 +194,9 @@ export function Eyebrow({ children }) {
 
 /** The reproducibility receipt line (engine version + seed) the accept→mint surfaces. */
 export function ReceiptLine({ engineVersion, seed, applied }) {
+  const mobile = useIsMobile();
   return (
-    <div data-testid="surveyor-receipt" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
+    <div data-testid="surveyor-receipt" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
       <span style={{ color: GREEN }}>◆</span> Reproducible: engine {engineVersion || 'unknown'}
       {seed != null && <span> · seed {String(seed)}</span>}
       {Number.isFinite(applied) && <span> · {applied} applied</span>}

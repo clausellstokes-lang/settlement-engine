@@ -30,6 +30,8 @@ import {
   commandViewCounts,
   filterRealmItems,
 } from './heraldCommandSelectors.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const MOBILE_VIEWS = Object.freeze([
   { id: 'briefing', label: 'Briefing', Icon: LayoutDashboard },
@@ -89,6 +91,7 @@ export default function HeraldMobileCompanion({
   onSelectCampaign,
   hasCampaigns = false,
 }) {
+  const mobile = useIsMobile();
   const canUseCustom = useStore(state => (
     typeof state.canUseCustomContent === 'function' ? state.canUseCustomContent() : false
   ));
@@ -170,7 +173,7 @@ export default function HeraldMobileCompanion({
         <span style={{
           color: BODY,
           fontFamily: sans,
-          fontSize: FS.micro,
+          fontSize: chromeFontSize(FS.micro, mobile),
           fontWeight: 750,
         }}>
           Field companion
@@ -192,7 +195,7 @@ export default function HeraldMobileCompanion({
             size="sm"
           >
             <view.Icon size={13} /> {view.label}
-            <span style={{ color: location.view === view.id ? SECOND : BODY, fontSize: FS.micro }}>
+            <span style={{ color: location.view === view.id ? SECOND : BODY, fontSize: chromeFontSize(FS.micro, mobile) }}>
               {commandCounts[view.id] || 0}
             </span>
           </IconButton>

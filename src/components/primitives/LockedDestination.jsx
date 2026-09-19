@@ -26,6 +26,8 @@ import { useStore } from '../../store/index.js';
 import { Funnel } from '../../lib/analytics.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import AvailableAtLaunchPill from './AvailableAtLaunchPill.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const PARCH = swatch['#FBF5E6'];
 const PARCH_GRAD_HI = swatch['#FCF6E7'];
@@ -64,6 +66,7 @@ export default function LockedDestination({
   secondaryLink,
   trackEvent,
 }) {
+  const mobile = useIsMobile();
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   // Purchases stay closed until launch (lib/launchGate.js): the upsell CTA is
   // disabled and wears the Available at launch pill. The pitch itself still renders.
@@ -110,7 +113,7 @@ export default function LockedDestination({
         padding: '3px 10px',
         background: SLATE_DIM,
         color: SLATE,
-        fontSize: FS.xxs, fontWeight: 800,
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase',
       }}>
         {eyebrow}

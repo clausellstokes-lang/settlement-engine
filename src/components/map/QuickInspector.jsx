@@ -35,6 +35,8 @@ import { FS, SLATE, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
 import { settlementSizeLabel } from '../../domain/display/humanizeEngineTokens.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
@@ -46,6 +48,7 @@ const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
 export default function QuickInspector() {
+  const mobile = useIsMobile();
   const hoveredId = useStore(s => s.hoveredSettlementId);
   const selectedId = useStore(s => s.selectedSettlementId);
   const saves = useStore(s => s.savedSettlements);
@@ -105,7 +108,7 @@ export default function QuickInspector() {
           {name}
         </div>
         <div style={{
-          fontSize: FS.micro, fontWeight: 800, color: GOLD,
+          fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: GOLD,
           letterSpacing: '0.08em', textTransform: 'uppercase',
           flexShrink: 0,
         }}>
@@ -113,13 +116,13 @@ export default function QuickInspector() {
         </div>
       </div>
       <div style={{
-        fontSize: FS.xxs, color: MUTED, marginTop: 1,
+        fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: 1,
       }}>
         {size} · {pop} pop
       </div>
       {pressure && (
         <div style={{
-          fontFamily: serif, fontSize: FS['11.5'],
+          fontFamily: serif, fontSize: proseFontSize(FS['11.5'], mobile),
           color: BODY, lineHeight: 1.5,
           marginTop: 6,
           display: '-webkit-box',
@@ -131,11 +134,11 @@ export default function QuickInspector() {
       )}
       {topHook && (
         <div style={{
-          fontSize: FS.xs, color: SLATE, marginTop: 6,
+          fontSize: chromeFontSize(FS.xs, mobile), color: SLATE, marginTop: 6,
           display: 'flex', gap: 5, alignItems: 'baseline',
         }}>
           <span style={{
-            fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.08em',
+            fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, letterSpacing: '0.08em',
             textTransform: 'uppercase', color: SLATE,
           }}>
             Hook

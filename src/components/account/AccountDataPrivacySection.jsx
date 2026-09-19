@@ -38,6 +38,8 @@ import {
   INK, BODY, BORDER, BORDER_STRONG, CARD, sans, SP, FS, swatch,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const DELETE_PHRASE = 'DELETE';
 
@@ -71,6 +73,7 @@ export default function AccountDataPrivacySection({
   canSave = false,
   maxSaves = 0,
 }) {
+  const mobile = useIsMobile();
   const [exported, setExported] = useState(false);
   const [exportBusy, setExportBusy] = useState(false);
   const [exportError, setExportError] = useState(null);
@@ -401,7 +404,7 @@ export default function AccountDataPrivacySection({
           <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
             Import my data
           </div>
-          <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Bring settlements, campaigns, and private custom content in from an export file.
             Imported records are added under this account, never overwriting unrelated work.
           </p>
@@ -426,7 +429,7 @@ export default function AccountDataPrivacySection({
                 />
               </label>
               {!canSave && (
-                <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 0` }}>
+                <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 0` }}>
                   Sign in or upgrade to import settlements into your library.
                 </p>
               )}
@@ -443,7 +446,7 @@ export default function AccountDataPrivacySection({
                   : ''}.
               </div>
               {importPreview.customContentArchiveCounts && (
-                <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+                <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5 }}>
                   Full ledger: {importPreview.customContentArchiveCounts.revisions} immutable revision{importPreview.customContentArchiveCounts.revisions === 1 ? '' : 's'}, {' '}
                   {importPreview.customContentArchiveCounts.archivedDefinitions} archived definition{importPreview.customContentArchiveCounts.archivedDefinitions === 1 ? '' : 's'}, {' '}
                   {importPreview.customContentArchiveCounts.packs} pack{importPreview.customContentArchiveCounts.packs === 1 ? '' : 's'} ({importPreview.customContentArchiveCounts.packVersions} version{importPreview.customContentArchiveCounts.packVersions === 1 ? '' : 's'}), and {' '}
@@ -451,13 +454,13 @@ export default function AccountDataPrivacySection({
                 </div>
               )}
               {importOverLimit && (
-                <div style={{ fontSize: FS.xs, color: swatch.info, lineHeight: 1.5 }}>
+                <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.info, lineHeight: 1.5 }}>
                   Your library has {remainingSlots} free slot{remainingSlots === 1 ? '' : 's'}; the first {remainingSlots} will be
                   imported and the rest skipped. Free up space or upgrade to bring in the rest.
                 </div>
               )}
               {importPreview.campaigns > 0 && auth?.tier !== 'premium' && (
-                <div style={{ fontSize: FS.xs, color: swatch.info, lineHeight: 1.5 }}>
+                <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.info, lineHeight: 1.5 }}>
                   Campaign import needs premium; campaigns in this file will be skipped.
                 </div>
               )}
@@ -503,7 +506,7 @@ export default function AccountDataPrivacySection({
                           + (importResult.campaignContentWarnings?.length || 0)
                         )} notices
                       </summary>
-                      <ul style={{ margin: `${SP.xs}px 0 0`, paddingLeft: SP.lg, fontSize: FS.xs, color: BODY }}>
+                      <ul style={{ margin: `${SP.xs}px 0 0`, paddingLeft: SP.lg, fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>
                         {(importResult.settlementsSkipped || []).map((s, i) => (
                           <li key={`s-${i}`}>{s.name}: {s.reason}</li>
                         ))}
@@ -546,13 +549,13 @@ export default function AccountDataPrivacySection({
           <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
             Export my data
           </div>
-          <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Download your saved settlements, campaigns, private custom content, received messages,
             and consent history as JSON. Very large service histories arrive in a second,
             export-only file so the account file stays safe to import.
           </p>
           {exportError && (
-            <div role="alert" style={{ fontSize: FS.xs, color: swatch.danger, marginBottom: SP.sm }}>
+            <div role="alert" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: swatch.danger, marginBottom: SP.sm }}>
               {exportError}
             </div>
           )}
@@ -575,7 +578,7 @@ export default function AccountDataPrivacySection({
           <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>
             Delete content
           </div>
-          <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+          <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
             Permanently remove all your saved content. This cannot be undone.
           </p>
           {confirmWipe ? (
@@ -613,7 +616,7 @@ export default function AccountDataPrivacySection({
             </div>
           ) : !deleteOpen ? (
             <>
-              <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
+              <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5 }}>
                 This requests permanent deletion of your account and all associated data. There is a short grace
                 window during which you can contact support to cancel.
               </p>
@@ -624,7 +627,7 @@ export default function AccountDataPrivacySection({
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm, paddingLeft: SP.md, borderLeft: `3px solid ${swatch.danger}` }}>
               {deleteError && <div role="alert" style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>{deleteError}</div>}
-              <span id="delete-confirm-label" style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.danger }}>
+              <span id="delete-confirm-label" style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.danger }}>
                 Type {DELETE_PHRASE} to confirm
               </span>
               <input
@@ -653,7 +656,7 @@ export default function AccountDataPrivacySection({
           )}
         </div>
 
-        <div style={{ fontSize: FS.xs, color: BODY }}>
+        <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY }}>
           Deleting your account erases your data per our privacy policy.
         </div>
       </div>

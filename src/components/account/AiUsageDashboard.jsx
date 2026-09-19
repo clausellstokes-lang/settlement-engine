@@ -11,6 +11,8 @@
 import { useEffect, useState } from 'react';
 import { INK, BODY, MUTED, BORDER, GOLD, GOLD_BG, CARD_ALT, SP, FS, sans } from '../theme.js';
 import { getUsageEvents, getPriceEstimates, estimateUsd } from '../../lib/surveyorByok.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const fmtInt = (n) => (Number(n) || 0).toLocaleString('en-US');
 const fmtUsd = (n) => `$${(Number(n) || 0).toFixed(2)}`;
@@ -50,16 +52,18 @@ export function aggregateUsage(events) {
 }
 
 function Kpi({ label, value, sub }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ flex: '1 1 120px', minWidth: 0, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD_ALT }}>
-      <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{label}</div>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans }}>{label}</div>
       <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, fontFamily: sans }}>{value}</div>
-      {sub && <div style={{ fontSize: FS.xs, color: MUTED }}>{sub}</div>}
+      {sub && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{sub}</div>}
     </div>
   );
 }
 
 function BarRow({ label, tokens, max }) {
+  const mobile = useIsMobile();
   const pct = max > 0 ? Math.round((tokens / max) * 100) : 0;
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
@@ -67,12 +71,13 @@ function BarRow({ label, tokens, max }) {
       <div style={{ flex: 1, height: 10, background: BORDER, overflow: 'hidden' }}>
         <div style={{ width: `${pct}%`, height: '100%', background: GOLD }} />
       </div>
-      <div style={{ width: 72, textAlign: 'right', fontSize: FS.xs, color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{fmtInt(tokens)}</div>
+      <div style={{ width: 72, textAlign: 'right', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{fmtInt(tokens)}</div>
     </div>
   );
 }
 
 export default function AiUsageDashboard({ provider = 'anthropic' }) {
+  const mobile = useIsMobile();
   const [events, setEvents] = useState(null);
   const [prices, setPrices] = useState({});
   const [error, setError] = useState(null);
@@ -135,7 +140,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
         </div>
       )}
 
-      <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
         Costs are <strong>estimates</strong> from a maintained price table. No provider exposes a live balance,
         so this meter is your <em>trend</em>. Your provider’s console is the source of truth.
       </div>

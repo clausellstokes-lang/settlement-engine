@@ -26,8 +26,11 @@ import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 export default function PurchaseModal({ onClose }) {
+  const mobile = useIsMobile();
   const creditBalance = useStore(s => s.creditBalance);
   const authTier      = useStore(s => s.auth.tier);
   const isElevated    = useStore(s => s.isElevated());
@@ -208,7 +211,7 @@ export default function PurchaseModal({ onClose }) {
           {/* Credit packs with volume discount */}
           <div style={{
             display: 'flex', alignItems: 'center', gap: SP.sm,
-            fontSize: FS.xs, fontWeight: 700, color: SECOND,
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: SECOND,
             textTransform: 'uppercase', letterSpacing: '0.06em',
           }}>
             <TrendingDown size={14} /> {t('purchase.packsHeading')}
@@ -249,7 +252,7 @@ export default function PurchaseModal({ onClose }) {
                       position: 'absolute', top: -10, right: -4,
                       padding: '2px 8px',
                       background: accentColor, color: swatch.white,
-                      fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
+                      fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, letterSpacing: '0.02em',
                     }}>
                       {p.discount}
                     </div>
@@ -257,9 +260,9 @@ export default function PurchaseModal({ onClose }) {
 
                   <div style={{ color: accentColor }}>{icon}</div>
                   <div style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</div>
-                  <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase' }}>Credits</div>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, textTransform: 'uppercase' }}>Credits</div>
                   <div style={{ fontSize: FS.xl, fontWeight: 700, color: accentColor }}>{p.price}</div>
-                  <div style={{ fontSize: FS.xxs, color: MUTED }}>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>
                     {loading === key ? 'Redirecting...' : p.perCredit + '/ea'}
                   </div>
                   {/* The launch pill wraps inside the tile, set compact: three tiles share
@@ -268,7 +271,7 @@ export default function PurchaseModal({ onClose }) {
                   {!purchasesAreOpen && (
                     <AvailableAtLaunchPill style={{
                       whiteSpace: 'normal', textAlign: 'center', overflowWrap: 'anywhere',
-                      padding: '2px 4px', letterSpacing: 0, fontSize: FS.xxs,
+                      padding: '2px 4px', letterSpacing: 0, fontSize: chromeFontSize(FS.xxs, mobile),
                     }} />
                   )}
                 </button>
@@ -292,7 +295,7 @@ export default function PurchaseModal({ onClose }) {
                   ? 'Save my card for automatic credit reloads'
                   : `Save my card for automatic credit reloads, ${AVAILABLE_AT_LAUNCH}`}
               />
-              <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+              <span style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
                 {!purchasesAreOpen && <AvailableAtLaunchPill style={{ marginRight: 6 }} />}
                 Save my card for automatic credit reloads. When your balance runs low we'll
                 top it back up to your target and charge this card. Off by default. Manage or
@@ -308,7 +311,7 @@ export default function PurchaseModal({ onClose }) {
             <RedeemCodeField code={redeemCode} onChange={handleRedeemChange} idPrefix="purchase-modal" />
           )}
           {redeemNotice && (
-            <div role="status" style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+            <div role="status" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
               {redeemNotice}
             </div>
           )}
@@ -347,7 +350,7 @@ export default function PurchaseModal({ onClose }) {
               the perimeterCaptcha flag is off. */}
           <CaptchaGate action="checkout" onToken={setCaptchaToken} className="captcha-checkout" />
 
-          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
+          <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
             Payments processed securely by Stripe. Credits never expire.
           </div>
 
@@ -355,7 +358,7 @@ export default function PurchaseModal({ onClose }) {
               behavior change). New tab so the checkout flow is never disrupted.
               The refund/cancellation policy lives in Terms §Refunds; /refunds
               resolves to it. */}
-          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5, marginTop: SP.xs }}>
+          <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, textAlign: 'center', lineHeight: 1.5, marginTop: SP.xs }}>
             <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.terms')}</a>
             {' · '}
             <a href="/refunds" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.refunds')}</a>

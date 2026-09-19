@@ -21,6 +21,7 @@ import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } fr
 // search) + the lazy per-entry head helpers — V-19 long-tail routing.
 import { COMPENDIUM_INDEX } from '../domain/compendium/searchIndex.js';
 import { setCompendiumEntryMeta, clearCompendiumEntryMeta } from '../lib/seoCompendium.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // The custom-content bucket keys a ?cat= deep-link may open (validated so an
 // arbitrary query value can never select a non-existent bucket).
@@ -124,6 +125,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
   // entry's section and its head matches the prerendered page. An id that is not
   // in the index resolves to null and the panel opens on the Overview; a REMOVED id
   // (REMOVED_ENTRY_IDS above) also has its dead address replaced, in the effect below.
+  const mobile = useIsMobile();
   const entryFromRoute = routeEntry
     ? COMPENDIUM_INDEX.find((e) => e.id === routeEntry) || null
     : null;
@@ -311,7 +313,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
         </Button>
         <Button onClick={()=>setMode('custom')} variant={mode==='custom'?'ai':'ghost'} size="sm" icon={<Sparkles size={13}/>} aria-pressed={mode==='custom'} style={{ flex:1 }}>
           My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background: swatch['#FAF8F4'], color:swatch['#7C3AED'], padding:'1px 6px' }}>{customContentCount}</span>}
+          {customContentCount > 0 && <span style={{ fontSize:chromeFontSize(FS.micro, mobile), fontWeight:700, background: swatch['#FAF8F4'], color:swatch['#7C3AED'], padding:'1px 6px' }}>{customContentCount}</span>}
         </Button>
       </div>
 
@@ -337,7 +339,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
             ) : (
             <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'11px 13px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'11px 13px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:chromeFontSize(FS.xs, mobile), fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>

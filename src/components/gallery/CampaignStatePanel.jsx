@@ -25,6 +25,8 @@
 import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_TXT, INK, SECOND, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /** Weeks in the durable year — the same calendar humanizeEngineTokens keeps. */
 const WEEKS_PER_YEAR = 52;
@@ -41,8 +43,9 @@ function human(value) {
 
 /** A small uppercase section heading with a leading glyph (Inspector scent). */
 function SectionHead({ children }) {
+  const mobile = useIsMobile();
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
       {children}
     </div>
   );
@@ -50,10 +53,11 @@ function SectionHead({ children }) {
 
 /** A neutral chip token, reused across the war and rule rows. */
 function Chip({ children, title }) {
+  const mobile = useIsMobile();
   return (
     <span
       title={title}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}
     >
       {children}
     </span>
@@ -121,28 +125,29 @@ function DashboardSection({ dashboard }) {
 
 /** One chronicle tick: its headlines, with the affected settlements named. */
 function ChronicleTick({ entry }) {
+  const mobile = useIsMobile();
   const headlines = Array.isArray(entry?.headlines) ? entry.headlines : [];
   const names = Array.isArray(entry?.affectedSettlementNames) ? entry.affectedSettlementNames : [];
   if (headlines.length === 0) return null;
   return (
     <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
-      <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {tickCalendarDetailLabel(Math.max(0, Math.floor(Number(entry?.tick) || 0)))}
       </div>
       {headlines.map((h, i) => (
         <div key={i}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.3 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.3 }}>
             {h?.headline || 'World pulse outcome'}
           </div>
           {h?.summary && (
-            <p style={{ margin: '3px 0 0', color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+            <p style={{ margin: '3px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
               {h.summary}
             </p>
           )}
         </div>
       ))}
       {names.length > 0 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800 }}>
           {names.slice(0, 4).join(', ')}{names.length > 4 ? ` +${names.length - 4}` : ''}
         </div>
       )}
@@ -170,6 +175,7 @@ function ChronicleSection({ chronicle }) {
 
 /** A single deity row: seats + win/loss, grouped under its tier. */
 function DeityRow({ deity }) {
+  const mobile = useIsMobile();
   const seats = Math.max(0, Math.floor(Number(deity?.seats) || 0));
   const wins = Math.max(0, Math.floor(Number(deity?.wins) || 0));
   const losses = Math.max(0, Math.floor(Number(deity?.losses) || 0));
@@ -178,7 +184,7 @@ function DeityRow({ deity }) {
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {deity?.name || 'Unnamed faith'}
       </span>
-      <span style={{ flexShrink: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+      <span style={{ flexShrink: 0, color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
         {seats} seat{seats === 1 ? '' : 's'} · {wins}W / {losses}L
       </span>
     </div>
@@ -190,6 +196,7 @@ function DeityRow({ deity }) {
  * the conversion win/loss record. Built from the sanitized snapshot.pantheon[].
  */
 function PantheonSection({ pantheon }) {
+  const mobile = useIsMobile();
   const deities = (Array.isArray(pantheon) ? pantheon : []).slice()
     .sort((a, b) => (Number(b?.seats) || 0) - (Number(a?.seats) || 0));
   if (deities.length === 0) return null;
@@ -200,7 +207,7 @@ function PantheonSection({ pantheon }) {
       <SectionHead>Pantheon</SectionHead>
       {TIER_ORDER.map(tier => byTier[tier].length > 0 && (
         <div key={tier} style={{ display: 'grid', gap: 5 }}>
-          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {TIER_LABEL[tier]} ({byTier[tier].length})
           </div>
           {byTier[tier].map((d, i) => <DeityRow key={d?.deityId || i} deity={d} />)}
@@ -212,12 +219,13 @@ function PantheonSection({ pantheon }) {
 
 /** The siege chips: one per besieged target, naming its coalition. */
 function SiegeRow({ siege }) {
+  const mobile = useIsMobile();
   const coalition = Array.isArray(siege?.coalitionNames) ? siege.coalitionNames : [];
   const named = coalition.length > 2
     ? `${coalition.slice(0, 2).join(', ')} +${coalition.length - 2}`
     : coalition.join(' and ');
   return (
-    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), lineHeight: 1.4 }}>
       <strong>{siege?.targetName || 'A settlement'}</strong> under siege
       {named ? <span style={{ color: BODY }}> by {named}</span> : null}
     </div>

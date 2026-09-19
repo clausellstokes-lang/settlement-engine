@@ -26,6 +26,8 @@ import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMap
 import { REL_TYPES } from './relationshipEdgeStyle.js';
 // POLIS-3 — the travel-rings legend, single-sourced from the layer's own bands.
 import { travelRingLegend } from './TravelRingsLayer.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
 const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
@@ -43,6 +45,7 @@ function human(value) {
 }
 
 export default function LayersPanel({ onClose }) {
+  const mobile = useIsMobile();
   const layers         = useStore(s => s.mapState.layers);
   const toggleLayer    = useStore(s => s.toggleLayer);
   const setLayerFilter = useStore(s => s.setLayerFilter);
@@ -117,7 +120,7 @@ export default function LayersPanel({ onClose }) {
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: SECOND,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
           Layers
@@ -211,7 +214,7 @@ export default function LayersPanel({ onClose }) {
               alignItems: 'center',
               gap: SP.xs,
               marginTop: 4,
-              fontSize: FS.xxs,
+              fontSize: chromeFontSize(FS.xxs, mobile),
               color: MUTED,
               fontFamily: sans,
               fontWeight: 700,
@@ -274,7 +277,7 @@ export default function LayersPanel({ onClose }) {
         />
         {layers.territory && (
           <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
-            <span style={{ fontFamily: sans, fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
+            <span style={{ fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.4 }}>
               Impressionistic: sampled dots suggest each settlement's reach by road
               (the canonized partition), not exact borders. Larger places read stronger.
             </span>
@@ -289,11 +292,11 @@ export default function LayersPanel({ onClose }) {
         />
         {layers.travelRings && (
           <div style={{ marginLeft: SP.md, marginBottom: SP.sm, display: 'grid', gap: 2 }}>
-            <span style={{ fontFamily: sans, fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
+            <span style={{ fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), color: MUTED, lineHeight: 1.4 }}>
               From the selected settlement, by road, this season. Select a settlement to see its rings.
             </span>
             {travelRingLegend().map(row => (
-              <span key={row.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: sans, fontSize: FS.micro, color: MUTED }}>
+              <span key={row.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>
                 {/* A RULE, NOT A RING. The band key was drawn as a rounded 8x8
                     circle and tripped the deep-craft kill list's radius ceiling
                     (85 > 84) — the rounded-plate tell this estate flattens on
@@ -320,7 +323,7 @@ export default function LayersPanel({ onClose }) {
         />
         <div style={{ height: 1, background: BORDER2, margin: `${SP.sm}px 0` }} />
         <div style={{
-          fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+          fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
           textTransform: 'uppercase', letterSpacing: '0.05em',
           padding: `0 ${SP.xs}px ${SP.xs}px`,
         }}>
@@ -381,6 +384,7 @@ function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
 }
 
 function FilterChip({ label, color, active, onClick }) {
+  const mobile = useIsMobile();
   return (
     <Button
       variant={active ? 'primary' : 'secondary'}
@@ -395,7 +399,7 @@ function FilterChip({ label, color, active, onClick }) {
         background: active ? color : 'transparent',
         color: active ? '#fff' : INK,
         border: `1px solid ${color}`,
-        fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, fontFamily: sans,
         boxShadow: 'none',
       }}
     >

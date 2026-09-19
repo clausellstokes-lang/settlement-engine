@@ -72,6 +72,8 @@ import RealmItemShadowDiagnostics from './RealmItemShadowDiagnostics.jsx';
 // lazy() here would mint a preload-manifest entry and tip the first-paint ratchet.
 import RoadScenePanel from './RoadScenePanel.jsx';
 import TimelapsePanel from './TimelapsePanel.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /** THE NAME (manager decision 2026-07-22, owner-vetoable). One exported constant so a
  *  veto is a one-string change; never scatter the literal. */
@@ -156,6 +158,7 @@ export function hasTreaties(campaign) {
 }
 
 function SectionTab({ active, label, Icon, count = null, onClick }) {
+  const mobile = useIsMobile();
   return (
     <IconButton
       onClick={onClick}
@@ -172,7 +175,7 @@ function SectionTab({ active, label, Icon, count = null, onClick }) {
             marginLeft: 2, minWidth: 15, textAlign: 'center', padding: '0 4px',
             border: `1px solid ${BORDER2}`, background: CARD,
             color: count === 0 ? BODY : GOLD, opacity: count === 0 ? 0.55 : 1,
-            fontFamily: sans, fontSize: FS.micro, fontWeight: 900,
+            fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 900,
           }}
         >
           {count}
@@ -210,6 +213,7 @@ export default function RealmInspector({
   inspectorSize = 'default', onSetSize,
   onOpenGatheredDocket = null,
 }) {
+  const mobile = useIsMobile();
   const saves = useStore(s => s.savedSettlements);
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
@@ -480,7 +484,7 @@ export default function RealmInspector({
     >
       {minimized ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: `${SP.xs}px ${SP.sm}px`, background: CARD }}>
-          <h2 id="realm-inspector-title" style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
+          <h2 id="realm-inspector-title" style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}>
             {HERALD_TITLE}
           </h2>
           <div role="group" aria-label="Herald sections" style={{ display: 'flex', gap: 4, flex: 1, minWidth: 0, overflow: 'hidden' }}>
@@ -506,7 +510,7 @@ export default function RealmInspector({
       <>
       <div style={{ display: 'grid', gap: SP.sm, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD }}>
         <header style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-          <h2 id="realm-inspector-title" style={{ flex: 1, margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+          <h2 id="realm-inspector-title" style={{ flex: 1, margin: 0, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {HERALD_TITLE}
           </h2>
           {/* THE DESK — the two tools, kept out of the paper. */}
@@ -592,7 +596,7 @@ export default function RealmInspector({
               onToggleFilters={() => setShowFilters(f => !f)}
             />
             <div role="group" aria-label="Time lens" style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-              <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lens</span>
+              <span style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lens</span>
               <LensButton active={timeLens === 'advance'} onClick={() => setTimeLens('advance')} label="This advance" />
               <LensButton active={timeLens === 'campaign'} onClick={() => setTimeLens('campaign')} label="Whole campaign" />
             </div>
@@ -601,7 +605,7 @@ export default function RealmInspector({
       </div>
 
       {advancing && (
-        <div role="status" style={{ padding: `${SP.xs}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+        <div role="status" style={{ padding: `${SP.xs}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT, color: GOLD, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800 }}>
           Advancing the realm… the paper updates when it settles.
         </div>
       )}
@@ -681,10 +685,11 @@ export default function RealmInspector({
 // The desk tool body (Stage the Road / Timelapse) — the panels are unchanged; only
 // their MOUNT moved out of the paper into this chrome-launched view.
 function DeskPanel({ tool, campaign, nameById, onClose, emptyHandlers }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
-        <div style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        <div style={{ flex: 1, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
           Desk · {tool.label}
         </div>
         <IconButton onClick={onClose} aria-label="Close the desk" size="sm"><X size={13} /></IconButton>

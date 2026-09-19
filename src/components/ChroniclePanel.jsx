@@ -24,6 +24,8 @@ import EmptyState from './primitives/EmptyState.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { nameOf } from '../domain/rulingPower.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
@@ -99,10 +101,11 @@ function conflictLine(c) {
 
 // Chip with label + icon.
 function Chip({ color, Icon, children, filled = false, title }) {
+  const mobile = useIsMobile();
   return (
     <span title={title} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '2px 8px', fontSize: FS.xxs, fontWeight: 800,
+      padding: '2px 8px', fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase',
       color: filled ? '#fff' : color,
       background: filled ? color : `${color}18`,
@@ -122,6 +125,7 @@ function FullEntryModal({ entry, onClose }) {
   // focus restore on unmount — the same contract PurchaseModal/AuthModal use.
   // Replaces the hand-rolled backdrop + card role=button (no focus trap, no
   // Escape) that this component carried before.
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(!!entry, onClose);
   if (!entry) return null;
   const s = entry.aiSettlement || {};
@@ -148,7 +152,7 @@ function FullEntryModal({ entry, onClose }) {
     if (!text) return null;
     return (
       <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
         <p style={{ margin: 0, fontSize: FS['12.5'], color: INK, lineHeight: 1.6, fontFamily: 'Georgia, serif', whiteSpace: 'pre-wrap' }}>{text}</p>
       </div>
     );
@@ -158,7 +162,7 @@ function FullEntryModal({ entry, onClose }) {
     if (!Array.isArray(arr) || !arr.length) return null;
     return (
       <div style={{ marginBottom: 14 }}>
-        <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
         <ul style={{ margin: 0, paddingLeft: 18, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
           {arr.map((item, i) => <li key={i} style={{ marginBottom: 3 }}>{formatter(item)}</li>)}
         </ul>
@@ -201,7 +205,7 @@ function FullEntryModal({ entry, onClose }) {
             </div>
             <div style={{ display: 'flex', gap: 6, marginTop: 4, alignItems: 'center', flexWrap: 'wrap' }}>
               <Chip color={meta.color} Icon={meta.Icon} filled>{meta.label}</Chip>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
                 {absoluteTime(entry.createdAt)} &middot; {relativeTime(entry.createdAt)}
               </span>
             </div>
@@ -212,7 +216,7 @@ function FullEntryModal({ entry, onClose }) {
         {/* Body */}
         <div style={{ padding: '16px 22px', overflowY: 'auto', flex: 1 }}>
           {entry.triggeredBy && (
-            <div style={{ marginBottom: 12, padding: '6px 10px', background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`, borderLeft: '3px solid #5A6E82', fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
+            <div style={{ marginBottom: 12, padding: '6px 10px', background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`, borderLeft: '3px solid #5A6E82', fontSize: chromeFontSize(FS.xs, mobile), color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
               <strong>Triggered by:</strong> {entry.triggeredBy}
             </div>
           )}
@@ -258,10 +262,10 @@ function FullEntryModal({ entry, onClose }) {
 
           {s.dmCompass && (
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>DM Compass</div>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>DM Compass</div>
               {Array.isArray(s.dmCompass.hooks) && s.dmCompass.hooks.length > 0 && (
                 <>
-                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: INK, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Hooks</div>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: INK, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Hooks</div>
                   <ul style={{ margin: 0, paddingLeft: 18, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
                     {s.dmCompass.hooks.map((h, i) => <li key={i} style={{ marginBottom: 2 }}>{h}</li>)}
                   </ul>
@@ -269,7 +273,7 @@ function FullEntryModal({ entry, onClose }) {
               )}
               {Array.isArray(s.dmCompass.redFlags) && s.dmCompass.redFlags.length > 0 && (
                 <>
-                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.danger, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Red flags</div>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.danger, marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Red flags</div>
                   <ul style={{ margin: 0, paddingLeft: 18, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>
                     {s.dmCompass.redFlags.map((r, i) => <li key={i} style={{ marginBottom: 2 }}>{r}</li>)}
                   </ul>
@@ -277,7 +281,7 @@ function FullEntryModal({ entry, onClose }) {
               )}
               {s.dmCompass.twist && (
                 <>
-                  <div style={{ fontSize: FS.xs, fontWeight: 700, color: swatch['#A0762A'], marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Twist</div>
+                  <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch['#A0762A'], marginTop: 6, marginBottom: 2, fontFamily: 'Nunito, sans-serif' }}>Twist</div>
                   <p style={{ margin: 0, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>{s.dmCompass.twist}</p>
                 </>
               )}
@@ -286,10 +290,10 @@ function FullEntryModal({ entry, onClose }) {
 
           {dl && Object.keys(dl).length > 0 && (
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Daily Life</div>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>Daily Life</div>
               {['dawn', 'morning', 'midday', 'evening', 'night'].map(k => dl[k] && (
                 <div key={k} style={{ marginBottom: 8 }}>
-                  <div style={{ fontSize: FS.xxs, fontWeight: 700, color: MUTED, textTransform: 'capitalize', fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>{k}</div>
+                  <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED, textTransform: 'capitalize', fontFamily: 'Nunito, sans-serif', marginBottom: 2 }}>{k}</div>
                   <p style={{ margin: 0, fontSize: FS.sm, color: INK, lineHeight: 1.55, fontFamily: 'Georgia, serif' }}>{dl[k]}</p>
                 </div>
               ))}
@@ -304,6 +308,7 @@ function FullEntryModal({ entry, onClose }) {
 // ── Entry card ──────────────────────────────────────────────────────────────
 
 function EntryCard({ entry, onOpen }) {
+  const mobile = useIsMobile();
   const meta = REASON_META[entry.reason] || REASON_META.initial;
   const isFull = entry.mode === 'full';
   const thesisText = entry.thesis || entry.summaryText || '(no thesis captured)';
@@ -324,7 +329,7 @@ function EntryCard({ entry, onOpen }) {
             ? 'Full snapshot retained. Open Read full to re-read the whole narrative.'
             : 'Thesis kept, the full snapshot rotated out. Summaries hold the through-line, not the full prose.'}
         >{isFull ? 'Full' : 'Summary'}</Chip>
-        <span style={{ fontSize: FS['10.5'], color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
+        <span style={{ fontSize: chromeFontSize(FS['10.5'], mobile), color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
           {relativeTime(entry.createdAt)}
         </span>
         <div style={{ flex: 1 }} />
@@ -340,7 +345,7 @@ function EntryCard({ entry, onOpen }) {
         )}
       </div>
       {entry.triggeredBy && (
-        <div style={{ fontSize: FS.xxs, color: swatch.ai, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif', marginBottom: 4 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.ai, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif', marginBottom: 4 }}>
           {entry.triggeredBy}
         </div>
       )}
@@ -354,6 +359,7 @@ function EntryCard({ entry, onOpen }) {
 // ── Main ────────────────────────────────────────────────────────────────────
 
 export default function ChroniclePanel({ entries }) {
+  const mobile = useIsMobile();
   const list = Array.isArray(entries) ? entries : [];
   const [open, setOpen] = useState(false);
   const [modalEntry, setModalEntry] = useState(null);
@@ -385,11 +391,11 @@ export default function ChroniclePanel({ entries }) {
           Narrative Chronicles {list.length > 0 ? `(${list.length})` : ''}
         </span>
         {list.length > 0 && (
-          <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: 'Nunito, sans-serif' }}>
             {fullCount} full{summaryCount > 0 ? ` · ${summaryCount} summary` : ''}
           </span>
         )}
-        <span style={{ fontSize: FS.xs, color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
       </button>
 
       {open && (

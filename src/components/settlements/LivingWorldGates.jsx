@@ -49,6 +49,8 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export const LIVING_WORLD_GATES = Object.freeze([
   Object.freeze({
@@ -113,6 +115,7 @@ const DIVERGENCE_NOTE = 'Terrain tools were used. Geography may have changed sin
  * "open the world map" note; open the map and the same control maps the realm.
  */
 function SpatialCanonGate({ campaign, canWrite }) {
+  const mobile = useIsMobile();
   const canonizeSpatial = useStore(s => s.canonizeCampaignWorldSpatial);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
@@ -192,14 +195,14 @@ function SpatialCanonGate({ campaign, canWrite }) {
               : mapped ? `Geography mapped, spatial canon v${version}` : 'Map geography'
         }
         onClick={onClick}
-        style={{ fontSize: FS.xxs, fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
+        style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
       >
         {owedRemap ? 'Re-map geography' : mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
       </Button>
       {showDivergence && (
         <span
           data-testid="spatial-canon-divergence"
-          style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}
+          style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, lineHeight: 1.4 }}
         >
           {DIVERGENCE_NOTE}
         </span>
@@ -207,13 +210,13 @@ function SpatialCanonGate({ campaign, canWrite }) {
       {showFoundings && (
         <span
           data-testid="spatial-canon-foundings"
-          style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}
+          style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, lineHeight: 1.4 }}
         >
           {foundings.phrase}
         </span>
       )}
       {note && (
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, lineHeight: 1.4 }}>
           {note}
         </span>
       )}
@@ -222,6 +225,7 @@ function SpatialCanonGate({ campaign, canWrite }) {
 }
 
 function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
+  const mobile = useIsMobile();
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
@@ -283,7 +287,7 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
         onClick={!canWrite ? handleLockedReach : undefined}
         readOnly={!canWrite}
       />
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, whiteSpace: 'nowrap' }}>
+      <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900, whiteSpace: 'nowrap' }}>
         {gate.label}
       </span>
     </label>
@@ -299,6 +303,7 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
  * dependency, and the spatial control speaks last.
  */
 function LivingWorldHelp() {
+  const mobile = useIsMobile();
   return (
     <div
       role="note"
@@ -307,15 +312,15 @@ function LivingWorldHelp() {
     >
       {LIVING_WORLD_GATES.map(g => (
         <div key={g.key} style={{ display: 'grid', gap: 1 }}>
-          <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{g.label}</span>
-          <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>
+          <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>{g.label}</span>
+          <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 600, lineHeight: 1.45 }}>
             {g.key === 'warLayerEnabled' ? `${g.description} ${DRIFT_REASON}` : g.description}
           </span>
         </div>
       ))}
       <div style={{ display: 'grid', gap: 1 }}>
-        <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>Map geography</span>
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>{GEOGRAPHY_HELP}</span>
+        <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900 }}>Map geography</span>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontWeight: 600, lineHeight: 1.45 }}>{GEOGRAPHY_HELP}</span>
       </div>
     </div>
   );
@@ -328,6 +333,7 @@ function LivingWorldHelp() {
  *   showHint: render the one-line explainer under the row (card surface).
  */
 export default function LivingWorldGates({ campaign, canWrite = false, showHint = false }) {
+  const mobile = useIsMobile();
   const [busyKey, setBusyKey] = useState(null);
   const [helpOpen, setHelpOpen] = useState(false);
   const rules = useMemo(
@@ -340,7 +346,7 @@ export default function LivingWorldGates({ campaign, canWrite = false, showHint 
   return (
     <div data-testid="living-world-gates" style={{ display: 'grid', gap: 4 }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: SP.xs }}>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, letterSpacing: 0.4, textTransform: 'uppercase' }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, letterSpacing: 0.4, textTransform: 'uppercase' }}>
           Living world
         </span>
         {LIVING_WORLD_GATES.map(gate => (
@@ -366,7 +372,7 @@ export default function LivingWorldGates({ campaign, canWrite = false, showHint 
       </div>
       {helpOpen && <LivingWorldHelp />}
       {showHint && driftOff && (
-        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
+        <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, lineHeight: 1.4 }}>
           Relationship drift is off: settlements keep evolving on their own, but the ties between them hold until you change them.
         </span>
       )}

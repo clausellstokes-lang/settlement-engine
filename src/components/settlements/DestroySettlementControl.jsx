@@ -51,6 +51,8 @@ import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, FS, SP, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 /**
  * The name the action will demand. Mirrors the helper's own resolution order so
@@ -66,6 +68,7 @@ export function expectedConfirmName(save) {
  * @param {{ save: any, onCancel: () => void, onDestroyed?: () => void }} props
  */
 export default function DestroySettlementControl({ save, onCancel, onDestroyed }) {
+  const mobile = useIsMobile();
   const destroySavedSettlement = useStore(s => s.destroySavedSettlement);
   const [typed, setTyped] = useState('');
   const [cause, setCause] = useState('');
@@ -95,7 +98,7 @@ export default function DestroySettlementControl({ save, onCancel, onDestroyed }
       <div style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 600, marginBottom: 5 }}>
         Record the destruction of {expected}?
       </div>
-      <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
+      <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
         This writes the settlement&rsquo;s destruction into its canon and cannot be undone.
         The dossier stays in your library, marked destroyed, so the campaign can still read
         what was there. Type its exact name to confirm.
@@ -117,7 +120,7 @@ export default function DestroySettlementControl({ save, onCancel, onDestroyed }
         />
       </div>
       {refusal && (
-        <div role="alert" style={{ fontSize: FS.xs, color: swatch.danger, lineHeight: 1.5, marginBottom: 8 }}>
+        <div role="alert" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.danger, lineHeight: 1.5, marginBottom: 8 }}>
           {refusal}
         </div>
       )}

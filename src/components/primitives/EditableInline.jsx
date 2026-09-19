@@ -43,6 +43,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FS, RED, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const GOLD = swatch['#C9A24C'];
 const GOLD_DIM = swatch['#D9B566'];
@@ -82,6 +84,7 @@ export default function EditableInline({
   provenance,
   className,
 }) {
+  const mobile = useIsMobile();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value ?? '');
   const [error, setError] = useState(null);
@@ -225,7 +228,7 @@ export default function EditableInline({
             position: 'absolute',
             top: '100%', left: 0,
             marginTop: 2,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
             color: RED,
             background: swatch.white,
             padding: '2px 6px',

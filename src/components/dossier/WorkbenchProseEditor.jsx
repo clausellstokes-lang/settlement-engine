@@ -23,6 +23,8 @@ import {
 import Button from '../primitives/Button.jsx';
 import { PROSE_FIELD_LABELS } from './proseFieldLabels.js';
 import { BORDER, FS, SP, swatch, serif_ } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const MUTED = swatch.inkMag3;
 
@@ -65,6 +67,7 @@ function resolveEntityIndex(settlement, kind, entry) {
 }
 
 function FieldRow({ field, entity, entityKind, entityIndex }) {
+  const mobile = useIsMobile();
   const queueEdit = useStore(state => state.queueEdit);
   const revertUserEditAction = useStore(state => state.revertUserEditAction);
   const [open, setOpen] = useState(false);
@@ -110,11 +113,11 @@ function FieldRow({ field, entity, entityKind, entityIndex }) {
   return (
     <li style={{ marginBottom: SP.sm }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.inkMag }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag }}>
           {field.label}
         </span>
         {edited && (
-          <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch['#6A2A9A'] }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch['#6A2A9A'] }}>
             Hand-written
           </span>
         )}
@@ -130,7 +133,7 @@ function FieldRow({ field, entity, entityKind, entityIndex }) {
         )}
       </div>
       {!open && (
-        <p style={{ margin: '2px 0 0', color: swatch.inkMag2, fontSize: FS.xs, lineHeight: 1.5 }}>
+        <p style={{ margin: '2px 0 0', color: swatch.inkMag2, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
           {asText(current) || <em style={{ color: MUTED }}>Nothing recorded yet.</em>}
         </p>
       )}
@@ -160,7 +163,7 @@ function FieldRow({ field, entity, entityKind, entityIndex }) {
             </Button>
           </div>
           {edited && original != null && (
-            <p style={{ margin: '4px 0 0', color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+            <p style={{ margin: '4px 0 0', color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
               The generated text is kept and can be restored at any time.
             </p>
           )}
@@ -172,7 +175,7 @@ function FieldRow({ field, entity, entityKind, entityIndex }) {
           style={{
             margin: '4px 0 0',
             color: note.tone === 'warn' ? swatch.danger : swatch.success,
-            fontSize: FS.xxs,
+            fontSize: proseFontSize(FS.xxs, mobile),
             lineHeight: 1.45,
           }}
         >
@@ -184,6 +187,7 @@ function FieldRow({ field, entity, entityKind, entityIndex }) {
 }
 
 export default function WorkbenchProseEditor({ entry }) {
+  const mobile = useIsMobile();
   const settlement = useStore(state => state.settlement);
   const entityKind = entry?.type;
   const fields = PROSE_FIELD_LABELS[entityKind];
@@ -204,13 +208,13 @@ export default function WorkbenchProseEditor({ entry }) {
         Write your own
       </h3>
       {entity == null ? (
-        <p role="note" style={{ margin: 0, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+        <p role="note" style={{ margin: 0, color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           This record cannot be uniquely matched to the live settlement, so
           authoring is disabled rather than guessing.
         </p>
       ) : (
         <>
-          <p style={{ margin: '0 0 7px', color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <p style={{ margin: '0 0 7px', color: MUTED, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             Your text is staged for review first. Nothing changes until you
             commit it, and the generated version is always kept for restore.
           </p>

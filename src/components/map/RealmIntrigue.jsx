@@ -17,11 +17,14 @@ import { realmPolitics, hasPolitics } from '../../domain/display/politicsRead.js
 import { realmCredibility, hasCredibility } from '../../domain/display/credibilityRead.js';
 import { BODY, BORDER2, CARD, FS, INK, MUTED, RED, GOLD, sans } from '../theme.js';
 import { AffectedSettlements } from './AddressChain.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function Subhead({ label }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
-      color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900,
+      color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 900,
       textTransform: 'uppercase', letterSpacing: '0.06em',
       borderBottom: `1px solid ${BORDER2}`, paddingBottom: 4,
     }}>
@@ -31,13 +34,14 @@ function Subhead({ label }) {
 }
 
 function Row({ accent, heading, detail, addressIds = [] }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${accent}`,
       background: CARD,
     }}>
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
-      {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
+      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
+      {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>{detail}</div>}
       {/* THE NEWS ADDRESS LAW: the settlement this bloc/standing sits in, LINKED. */}
       {addressIds.length > 0 && <div style={{ marginTop: 2 }}><AffectedSettlements ids={addressIds} label="Settlement" /></div>}
     </div>

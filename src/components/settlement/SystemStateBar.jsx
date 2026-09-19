@@ -13,6 +13,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 import { statusCase } from '../new/labelLadder.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Labels + one-line descriptions only. Polarity is NOT re-declared here — it is
 // read from bands.js (DIM_POLARITY), the single source the band itself is
@@ -41,6 +42,7 @@ export default function SystemStateBar() {
  * @param {{ systemState: any, title?: string }} props
  */
 export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
+  const mobile = useIsMobile();
   const [openKey, setOpenKey] = useState(null);
   // The four dimension tiles sit two-up on desktop. At mobile width that pair of
   // columns crushes each band label and number into an unreadable sliver, so the
@@ -57,7 +59,7 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
     >
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.xs,
       }}>
@@ -83,6 +85,7 @@ export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
 }
 
 function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
+  const mobile = useIsMobile();
   const meta = DIM_META[dimKey];
   const color = BAND_COLOR[dim.band] || MUTED;
   // ⭐ THE BAR DRAWS THE NUMBER IT PRINTS (bands.js dimensionScaleNote, the §934.20
@@ -114,7 +117,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: INK, fontFamily: sans }}>
           {meta.label}
         </span>
         <span style={{ flex: 1 }} />
@@ -126,11 +129,11 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
             other would have opened the divergence that lane exists to close. The card's
             eyebrow above keeps its capitals; this is a datum, not a section. */}
         <span style={{
-          fontSize: FS.xxs, fontWeight: 800, color, fontFamily: sans,
+          fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color, fontFamily: sans,
         }}>
           {statusCase(dim.band)}
         </span>
-        <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginLeft: 4, opacity: 0.7 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans, marginLeft: 4, opacity: 0.7 }}>
           {dim.value}
         </span>
       </div>
@@ -154,7 +157,7 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
         <div style={{
           marginTop: SP.xs, padding: SP.xs,
           background: swatch.white, border: `1px solid ${BORDER}`,
-          fontSize: FS.xxs, color: INK, fontFamily: sans, lineHeight: 1.5,
+          fontSize: chromeFontSize(FS.xxs, mobile), color: INK, fontFamily: sans, lineHeight: 1.5,
         }}>
           <div style={{ fontStyle: 'italic', color: MUTED, marginBottom: 4 }}>
             {meta.desc} {BAND_HINT[dim.band]}

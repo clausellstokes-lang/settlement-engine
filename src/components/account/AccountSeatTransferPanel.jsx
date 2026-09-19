@@ -22,6 +22,8 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { INK, BODY, MUTED, SECOND, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import { t } from '../../copy/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 const INCOMING_ACTIONABLE = ['initiated', 'nominee_verified', 'awaiting_payment'];
 const OUTGOING_LIVE = ['initiated', 'nominee_verified', 'awaiting_payment', 'cooling'];
@@ -62,6 +64,7 @@ export function noteAria(tone) {
 }
 
 function Note({ children, tone = 'muted' }) {
+  const mobile = useIsMobile();
   const color = tone === 'danger' ? swatch.danger : tone === 'success' ? swatch.success : MUTED;
   const accent = tone === 'danger' ? swatch.danger : SECOND;
   const aria = noteAria(tone);
@@ -69,7 +72,7 @@ function Note({ children, tone = 'muted' }) {
     <div
       role={aria.role}
       aria-live={aria['aria-live']}
-      style={{ paddingLeft: SP.md, borderLeft: `3px solid ${accent}`, fontSize: FS.xs, color, marginTop: SP.sm, lineHeight: 1.55 }}
+      style={{ paddingLeft: SP.md, borderLeft: `3px solid ${accent}`, fontSize: proseFontSize(FS.xs, mobile), color, marginTop: SP.sm, lineHeight: 1.55 }}
     >
       {children}
     </div>

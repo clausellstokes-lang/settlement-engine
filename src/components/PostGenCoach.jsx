@@ -67,6 +67,7 @@ import { isGuidanceDismissed, markGuidanceDismissed } from '../lib/guidance.js';
 import {
   selectPageWhisper, deriveGuidanceFirst, deriveGuidanceNewborn,
 } from '../domain/display/guidanceRegistry.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // The wizard-postgen whisper this coach hosts (the guidance-registry id + the
 // unified dismissal stem). Naming it here is also what the walker's host-wired
@@ -74,6 +75,7 @@ import {
 const WHISPER_ID = 'wizard_next_steps';
 
 export default function PostGenCoach() {
+  const mobile = useIsMobile();
   const settlement = useStore(s => s.settlement);
   // The save step's framing reads the same save/auth state the pure builder uses.
   const canSave = useStore(s => s.canSave());
@@ -201,7 +203,7 @@ export default function PostGenCoach() {
         }}>
           What&rsquo;s next
         </span>
-        <span style={{ fontSize: FS.xs, color: MUTED, flex: 1, minWidth: 0 }}>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, flex: 1, minWidth: 0 }}>
           {guide.headline}
         </span>
         {/* ⭐ THE SAME DOOR AS EVERY OTHER POP-UP (owner order, ODQ §934.31). This hint's
@@ -227,13 +229,13 @@ export default function PostGenCoach() {
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               width: 20, height: 20, borderRadius: '50%',
               background: `${GOLD}18`, border: `1px solid ${GOLD}`,
-              color: GOLD, fontSize: FS.xs, fontWeight: 700, lineHeight: 1,
+              color: GOLD, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, lineHeight: 1,
             }}
           >
             {safeStep + 1}
           </span>
           <span style={{
-            fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+            fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
             letterSpacing: '0.08em', textTransform: 'uppercase',
           }}>
             Step {safeStep + 1} of {total}

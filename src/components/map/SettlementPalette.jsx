@@ -19,6 +19,8 @@ import CampaignEmptyState from './CampaignEmptyState.jsx';
 // nothing and never drags the dashboard's selectors behind it.
 import RealmLockedGate from './RealmLockedGate.jsx';
 import { threatDisplay, isCalmThreat } from './settlementThreat.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
 // was orphaned when the owner's create-page walk fix unmounted its only card
@@ -39,6 +41,7 @@ export default function SettlementPalette({
   // isolated mount (tests, harnesses) renders exactly the pre-gate palette.
   canManageCampaigns = true, tier,
 }) {
+  const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   // F28 → E-I — the placement live region. F28 made Enter honest (it selected
   // and announced guidance instead of promising an impossible drag); E-I makes
@@ -90,7 +93,7 @@ export default function SettlementPalette({
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, color: SECOND,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: SECOND,
           textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6,
         }}>
           {activeCampaign ? activeCampaign.name : 'All Settlements'}
@@ -109,7 +112,7 @@ export default function SettlementPalette({
               width: '100%',
               padding: '6px 8px 6px 26px',
               border: `1px solid ${BORDER}`,
-              fontSize: FS.xs, fontFamily: sans,
+              fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans,
               background: CARD,
               outline: 'none',
               boxSizing: 'border-box',
@@ -192,7 +195,7 @@ export default function SettlementPalette({
             />
             <div style={{
               marginTop: SP.xs, padding: `0 ${SP.xs}px`,
-              fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5,
+              fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, lineHeight: 1.5,
               textAlign: 'center',
             }}>
               A campaign holds your map and its living world. Only canon settlements drop onto the map.
@@ -219,7 +222,7 @@ export default function SettlementPalette({
               padding: SP.md,
             }}>
               <MapPin size={20} color={MUTED} />
-              <div style={{ fontSize: FS.xs, color: SECOND, fontFamily: sans, lineHeight: 1.5 }}>
+              <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans, lineHeight: 1.5 }}>
                 No settlements yet. Generate one on the Create tab.
               </div>
               {typeof onNavigate === 'function' && (
@@ -236,7 +239,7 @@ export default function SettlementPalette({
           ) : (
             <div style={{
               padding: SP.md, textAlign: 'center',
-              fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+              fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic',
             }}>
               No matches.
             </div>
@@ -283,7 +286,7 @@ export default function SettlementPalette({
         style={{
           padding: `${SP.xs}px ${SP.md}px`,
           borderTop: `1px solid ${BORDER2}`,
-          fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+          fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic',
           textAlign: 'center',
         }}
       >
@@ -302,6 +305,7 @@ export default function SettlementPalette({
 // here and another in its dossier (P2).
 
 function SettlementCard({ save, placed, onSelect, onHover }) {
+  const mobile = useIsMobile();
   const settlement = save.settlement || {};
   const name = save.name || settlement.name || 'Untitled';
   const tier = save.tier || settlement.tier || EMPTY_VALUE;
@@ -394,7 +398,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
             <MapPin size={11} color={GOLD} title="Placed on map" />
           )}
         </div>
-        <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 1 }}>
+        <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: SECOND, marginTop: 1 }}>
           {tier} · {formatCount(pop)}
         </div>
         {(threat || stressLabel) && (
@@ -407,7 +411,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
                 // Fill/border use the lighter hue; the LABEL uses the audited
                 // -text step so the word clears 4.5:1 on the card (P7) — the
                 // embattled pill previously rendered its text at 3.43:1.
-                fontSize: FS.xxs, fontWeight: 800,
+                fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
                 color: threatTone.text,
                 background: `${threatTone.fill}1A`,
                 border: `1px solid ${threatTone.fill}55`,
@@ -421,7 +425,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
               <span
                 title={`Active stressor: ${stressLabel}`}
                 style={{
-                  fontSize: FS.xxs, fontWeight: 700,
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
                   color: swatch['#8A5A20'],
                   background: 'rgba(196,128,60,0.10)',
                   border: '1px solid rgba(196,128,60,0.30)',

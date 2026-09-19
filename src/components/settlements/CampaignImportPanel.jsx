@@ -33,6 +33,8 @@ import {
   createImportSession, addBlankRow, updateRow, setRowConfirmed, setRowSkipped,
   confirmedRecords, importSummary,
 } from '../../lib/campaignImport.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // Structured reconciliation pulls in hostile JSON admission and the settlement
 // migration seam. Keep that graph behind its own user action; opening the notes
@@ -42,12 +44,12 @@ const StructuredCampaignReconciliation = lazy(
 );
 
 // Rule-framed, not rounded (the house plate idiom): no radius, no tint fills.
-const fieldStyle = {
+const fieldStyle = (mobile) => ({
   padding: `${SP.xs}px ${SP.sm}px`, border: `1px solid ${BORDER}`,
-  background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, minHeight: 32,
-};
+  background: CARD, color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), minHeight: 32,
+});
 // Visible field descriptor (a11y names live on the controls themselves via aria-label).
-const descStyle = { fontSize: FS.xxs, fontWeight: 700, color: MUTED, fontFamily: sans };
+const descStyle = (mobile) => ({ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans });
 
 function currentTick(campaign) {
   const wt = Number(campaign?.worldState?.tick);
@@ -58,6 +60,7 @@ function currentTick(campaign) {
 
 /** One reviewable event row. Every control carries a label (keyboard-completable). */
 function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
+  const mobile = useIsMobile();
   const meta = TABLE_EVENT_META[row.kind] || { label: row.kind };
   return (
     <li style={{
@@ -67,40 +70,40 @@ function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
       display: 'flex', flexDirection: 'column', gap: SP.sm,
     }}>
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'center' }}>
-        <span style={descStyle}>What happened</span>
-        <select aria-label="What kind of event" value={row.kind} onChange={e => onPatch({ kind: e.target.value })} style={fieldStyle}>
+        <span style={descStyle(mobile)}>What happened</span>
+        <select aria-label="What kind of event" value={row.kind} onChange={e => onPatch({ kind: e.target.value })} style={fieldStyle(mobile)}>
           {TABLE_EVENT_KINDS.map(k => <option key={k} value={k}>{TABLE_EVENT_META[k]?.label || k}</option>)}
         </select>
-        <span style={descStyle}>How big</span>
-        <select aria-label="How big the event was" value={row.band} onChange={e => onPatch({ band: e.target.value })} style={fieldStyle}>
+        <span style={descStyle(mobile)}>How big</span>
+        <select aria-label="How big the event was" value={row.band} onChange={e => onPatch({ band: e.target.value })} style={fieldStyle(mobile)}>
           {MAGNITUDE_BANDS.map(b => <option key={b} value={b}>{b}</option>)}
         </select>
-        <span style={descStyle}>At tick</span>
+        <span style={descStyle(mobile)}>At tick</span>
         <input aria-label="At which tick" type="number" min={0} step={1} value={row.tick}
           onChange={e => onPatch({ tick: Math.max(0, Math.floor(Number(e.target.value) || 0)) })}
-          style={{ ...fieldStyle, width: 76 }} />
+          style={{ ...fieldStyle(mobile), width: 76 }} />
         {!row.confident && (
-          <span style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', fontFamily: sans }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontStyle: 'italic', fontFamily: sans }}>
             unsure, set it yourself
           </span>
         )}
       </div>
 
-      <span style={descStyle}>Your words (kept verbatim, shown in the chronicle, never changes the mechanics)</span>
+      <span style={descStyle(mobile)}>Your words (kept verbatim, shown in the chronicle, never changes the mechanics)</span>
       <textarea aria-label="Your words for this event, kept verbatim" value={row.flavor} rows={2}
         onChange={e => onPatch({ flavor: e.target.value })}
         placeholder="What the table remembers…"
-        style={{ ...fieldStyle, resize: 'vertical', fontFamily: serif_, fontSize: FS.sm }} />
+        style={{ ...fieldStyle(mobile), resize: 'vertical', fontFamily: serif_, fontSize: FS.sm }} />
 
       {settlements.length > 0 && (
         <fieldset style={{ border: 'none', padding: 0, margin: 0, display: 'flex', gap: SP.md, flexWrap: 'wrap' }}>
-          <legend style={{ ...descStyle, padding: 0 }}>Which settlements</legend>
+          <legend style={{ ...descStyle(mobile), padding: 0 }}>Which settlements</legend>
           {settlements.map(s => {
             const id = String(s.id);
             const on = row.settlementIds.includes(id);
             const label = s.name || s.settlement?.name || id;
             return (
-              <span key={id} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+              <span key={id} style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
                 <input type="checkbox" checked={on} aria-label={label}
                   onChange={() => onPatch({ settlementIds: on ? row.settlementIds.filter(x => x !== id) : [...row.settlementIds, id] })} />
                 {label}
@@ -120,7 +123,7 @@ function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
         <Button variant="ghost" size="sm" icon={<Trash2 size={12} />} onClick={() => onSkip(!row.skipped)}>
           {row.skipped ? 'Keep' : 'Skip'}
         </Button>
-        <span aria-hidden="true" style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
+        <span aria-hidden="true" style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontFamily: sans }}>
           {meta.label} · {row.band}
         </span>
       </div>
@@ -129,6 +132,7 @@ function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
 }
 
 export default function CampaignImportPanel({ campaign, settlements = [], onClose }) {
+  const mobile = useIsMobile();
   const importTableEvents = useStore(s => s.importTableEvents);
   // Notes and structured exports share the same campaign entry point but keep
   // separate trust models: notes propose table events; reconciliation admits
@@ -201,12 +205,12 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
         <div style={{ padding: SP.lg }}>
           {step === 'paste' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
-              <span style={{ fontSize: FS.xs, fontWeight: 900, color: INK, fontFamily: sans }}>
+              <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, color: INK, fontFamily: sans }}>
                 Your campaign notes
               </span>
               <textarea aria-label="Your campaign notes" value={notes} onChange={e => setNotes(e.target.value)} rows={8}
                 placeholder={'One event per line works best. For example:\nThe famine struck Ashford in the third winter.\nThe party bought grain and saved the granary.\nThe steward was exposed as corrupt.'}
-                style={{ ...fieldStyle, minHeight: 160, fontFamily: serif_, fontSize: FS.sm, resize: 'vertical' }} />
+                style={{ ...fieldStyle(mobile), minHeight: 160, fontFamily: serif_, fontSize: FS.sm, resize: 'vertical' }} />
               <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap', alignItems: 'center' }}>
                 <Button variant="primary" size="sm" icon={<ScrollText size={12} />} onClick={readNotes} disabled={!notes.trim()}>
                   Read the notes
@@ -228,13 +232,13 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
                 alignItems: 'flex-start',
                 gap: SP.sm,
               }}>
-                <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+                <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>
                   Already have a SettlementForge export?
                 </span>
                 <span style={{
                   color: MUTED,
                   fontFamily: sans,
-                  fontSize: FS.xxs,
+                  fontSize: proseFontSize(FS.xxs, mobile),
                   lineHeight: 1.45,
                 }}>
                   Compare its structured settlements with this campaign before anything is
@@ -254,7 +258,7 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
 
           {step === 'reconcile' && (
             <Suspense fallback={(
-              <div role="status" style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+              <div role="status" style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>
                 Opening structured reconciliation…
               </div>
             )}>
@@ -268,7 +272,7 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
 
           {step === 'review' && session && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-              <div role="status" style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>
+              <div role="status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, fontFamily: sans }}>
                 {summary.confirmed} of {summary.total} confirmed{summary.skipped ? ` · ${summary.skipped} skipped` : ''}. Only confirmed events are added.
               </div>
               <ul style={{ margin: 0, padding: 0 }}>
@@ -289,7 +293,7 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
                   Add {summary.confirmed} event{summary.confirmed === 1 ? '' : 's'} to the chronicle
                 </Button>
               </div>
-              {error && <div role="alert" style={{ fontSize: FS.xs, color: RED, fontFamily: sans }}>{error}</div>}
+              {error && <div role="alert" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: RED, fontFamily: sans }}>{error}</div>}
             </div>
           )}
 

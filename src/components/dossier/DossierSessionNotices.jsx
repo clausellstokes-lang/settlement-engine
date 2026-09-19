@@ -4,6 +4,8 @@ import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { AiOverlayViolations } from '../primitives/AiOverlayViolations.jsx';
 import { RegenerationDeltaCard } from '../primitives/RegenerationDeltaCard.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Session-level notices cluster (AI error, partial-refinement, verifier
 // findings, regenerate delta) — all session-scoped, not tab-scoped, so they
@@ -24,6 +26,7 @@ export default function DossierSessionNotices({
   regenDelta,
   onDismissRegenDelta,
 }) {
+  const mobile = useIsMobile();
   const hasAiError = !!aiError;
   const hasPartialFailure = !!(showNarrative && partialFailure && partialFailure.failedFields?.length > 0);
   const hasViolations = !!(showNarrative && violations && (violations.length || violations.summary));
@@ -49,7 +52,7 @@ export default function DossierSessionNotices({
             padding: '8px 12px',
             background: swatch.dangerBg,
             borderLeft: '3px solid ' + swatch.danger,
-            fontSize: FS.xs, color: swatch['#5A1A1A'],
+            fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#5A1A1A'],
             fontFamily: 'Nunito, sans-serif',
           }}
         >
@@ -72,7 +75,7 @@ export default function DossierSessionNotices({
             padding: '6px 0 6px 10px',
             background: 'rgba(196,128,60,0.08)',
             borderLeft: '3px solid rgba(196,128,60,0.85)',
-            fontSize: FS.xs, color: swatch['#8A5A20'],
+            fontSize: chromeFontSize(FS.xs, mobile), color: swatch['#8A5A20'],
             fontFamily: 'Nunito, sans-serif',
           }}
         >{`Partial refinement: ${partialFailure.failedFields.join(', ')} kept raw data.`}</div>

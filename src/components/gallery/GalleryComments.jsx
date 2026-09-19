@@ -10,6 +10,8 @@ import { checkCivility } from '../../lib/civility.js';
 import { t } from '../../copy/index.js';
 import DeleteConfirmation from '../DeleteConfirmation.jsx';
 import { formatDate, REPORT_REASON_OPTIONS } from './galleryUtils.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /**
  * CommentActions — the single per-comment overflow (kebab ⋮) menu that folds the
@@ -19,6 +21,7 @@ import { formatDate, REPORT_REASON_OPTIONS } from './galleryUtils.js';
  * Escape and outside-click close it; the items are keyboard-reachable buttons.
  */
 function CommentActions({ comment, canReport, onDelete, onReport }) {
+  const mobile = useIsMobile();
   const [open, setOpen] = useState(false);
   const [reporting, setReporting] = useState(false);
   const [reason, setReason] = useState('unsafe_content');
@@ -86,13 +89,13 @@ function CommentActions({ comment, canReport, onDelete, onReport }) {
       {reporting && (
         <form onSubmit={submitReport} style={{ position: 'absolute', right: 0, top: '100%', zIndex: 6, background: CARD, border: `1px solid ${BORDER}`, padding: SP.sm, width: 260, display: 'grid', gap: SP.sm }}>
           {/* eslint-disable-next-line jsx-a11y/label-has-for -- associated via htmlFor/id */}
-          <label htmlFor={reasonId} style={{ fontSize: FS.xs, fontWeight: 900, color: INK, fontFamily: sans }}>Reason</label>
+          <label htmlFor={reasonId} style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, color: INK, fontFamily: sans }}>Reason</label>
           <select id={reasonId} value={reason} onChange={e => setReason(e.target.value)} style={field}>
             {REPORT_REASON_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
           </select>
           <textarea aria-label="Report notes" value={body} onChange={e => setBody(e.target.value)} rows={3} maxLength={2000}
             placeholder="Add context for the moderation queue" style={{ ...field, resize: 'vertical' }} />
-          {err && <p role="alert" style={{ margin: 0, color: RED, fontSize: FS.xs, fontFamily: sans }}>{err}</p>}
+          {err && <p role="alert" style={{ margin: 0, color: RED, fontSize: proseFontSize(FS.xs, mobile), fontFamily: sans }}>{err}</p>}
           <div style={{ display: 'flex', gap: SP.sm, justifyContent: 'flex-end' }}>
             <Button variant="secondary" size="sm" onClick={() => setReporting(false)} disabled={busy}>Cancel</Button>
             <Button type="submit" variant="primary" size="sm" busy={busy}>Send report</Button>
@@ -104,6 +107,7 @@ function CommentActions({ comment, canReport, onDelete, onReport }) {
 }
 
 export default function GalleryComments({ dossier, auth, onCountChange }) {
+  const mobile = useIsMobile();
   const dossierId = dossier?.id || null;
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
@@ -205,7 +209,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
         <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.xl, fontWeight: 700 }}>
           Comments
         </h2>
-        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+        <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850 }}>
           {comments.length}
         </span>
       </div>
@@ -241,7 +245,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
             >
               {busy ? 'Posting...' : 'Post comment'}
             </Button>
-            <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 750 }}>
+            <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750 }}>
               {commentText.length}/2000
             </span>
           </div>
@@ -260,7 +264,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
             color: RED,
             padding: SP.sm,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
             fontWeight: 850,
           }}
         >
@@ -288,12 +292,12 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
         ) : (
           <article key={comment.id} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: SP.md, display: 'grid', gap: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+              <span style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 950 }}>
                 {comment.authorLabel}
               </span>
               {/* Date is read-content (a reader parses it), so BODY (AA), not the
                   chrome-only MUTED; de-emphasized by weight, not a sub-AA hue. */}
-              <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 600 }}>
+              <span style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 600 }}>
                 {formatDate(comment.createdAt)}
               </span>
               {confirmingId !== comment.id && (

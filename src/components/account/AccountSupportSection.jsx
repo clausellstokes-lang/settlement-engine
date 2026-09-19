@@ -17,14 +17,17 @@ import { SUPPORT_EMAIL, supportMailto } from '../../copy/support.js';
 import Section from './AccountSection.jsx';
 import AccountFAQ from './AccountFAQ.jsx';
 import AccountTickets from './AccountTickets.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function AccountSupportSection({ auth: _auth, operatorMessage = null } = {}) {
+  const mobile = useIsMobile();
   return (
     <Section title="Customer Support">
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
         {/* FAQ FIRST — self-resolve before opening a ticket. */}
         <div>
-          <div style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.sm }}>
+          <div style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: SP.sm }}>
             Frequently asked questions
           </div>
           <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginBottom: SP.md }}>

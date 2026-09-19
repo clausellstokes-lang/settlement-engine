@@ -19,6 +19,8 @@ import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 import RealmForecast from './RealmForecast.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // content-immersion-r2-3: the registered realm_docket_teaching whisper — its body
 // (guidance.realmDocket) was dead copy that rendered NOWHERE. It now mounts here,
@@ -36,6 +38,7 @@ function entryLabel(event, resolveTargetName) {
 }
 
 export default function RealmDocket({ campaign }) {
+  const mobile = useIsMobile();
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
   const saves = useStore(s => s.savedSettlements);
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -56,7 +59,7 @@ export default function RealmDocket({ campaign }) {
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xs, fontWeight: 800, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, fontFamily: sans,
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.sm,
       }}>
@@ -71,7 +74,7 @@ export default function RealmDocket({ campaign }) {
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
           padding: SP.sm, border: `1px dashed ${BORDER}`,
-          fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
+          fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmDocket')}</span>
           <Button
@@ -83,7 +86,7 @@ export default function RealmDocket({ campaign }) {
       )}
 
       {queue.length === 0 ? (
-        <p style={{ fontSize: FS.xxs, color: MUTED, margin: 0, fontStyle: 'italic' }}>
+        <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: 0, fontStyle: 'italic' }}>
           Nothing is staged. Orders queued on member settlements appear here in their recorded queue order.
         </p>
       ) : (
@@ -106,22 +109,22 @@ export default function RealmDocket({ campaign }) {
               }}>
                 <span style={{
                   padding: '1px 6px', border: `1px solid ${BORDER}`,
-                  fontSize: FS.xxs, fontFamily: sans, color: MUTED, whiteSpace: 'nowrap',
+                  fontSize: chromeFontSize(FS.xxs, mobile), fontFamily: sans, color: MUTED, whiteSpace: 'nowrap',
                 }}>
                   {name}
                 </span>
-                <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
+                <span style={{ flex: 1, fontSize: chromeFontSize(FS.xs, mobile), color: INK, fontFamily: sans }}>
                   {entryLabel(item.event, (id) => settlementById.get(String(id))?.name || null)}
                   {lapsed && (
                     <>
                       <span style={{
                         marginLeft: 8, padding: '1px 6px',
                         border: `1px solid ${BORDER}`, color: MUTED,
-                        fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
+                        fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, letterSpacing: '0.04em',
                       }}>
                         LAPSED: needs your attention
                       </span>
-                      <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
+                      <span style={{ display: 'block', fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, marginTop: 2 }}>
                         {lapsed} This order is currently expected to be refused. An earlier order can still change its
                         preconditions. Edit it from {name}&apos;s dossier, or cancel it here.
                       </span>
@@ -143,7 +146,7 @@ export default function RealmDocket({ campaign }) {
         </div>
       )}
 
-      <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
+      <p style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
         Every entry stays editable (from its settlement&apos;s dossier) and cancelable until the tick consumes it.
         Realm orders queue separately as pending proposals above.
       </p>

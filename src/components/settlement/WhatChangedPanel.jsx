@@ -23,6 +23,8 @@ import {
 import { INK as OINK } from '../../design/organic/ink.js';
 import { RUBRIC } from '../../design/organic/rubrication.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 // THE ERRATUM SLIP (Deep Craft — the dossier's correction-notice voice): the
 // "what changed" read is a rule-framed slip of corrections, not a rounded SaaS
@@ -59,6 +61,7 @@ function resolveStates({ before, after, priorSettlement, settlement }) {
  * }} props
  */
 export default function WhatChangedPanel({ settlement, priorSettlement, before, after, populationHistory }) {
+  const mobile = useIsMobile();
   const model = useMemo(() => {
     const { beforeState, afterState } = resolveStates({ before, after, priorSettlement, settlement });
     const deltas = beforeState && afterState ? compareCausalState(beforeState, afterState) : [];
@@ -99,7 +102,7 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
         textTransform: 'uppercase', letterSpacing: '0.06em',
       }}>
         What changed &amp; why
-        <span style={{ fontWeight: 600, fontSize: FS.xs, color: MUTED, marginLeft: SP.sm, textTransform: 'none', letterSpacing: 0 }}>
+        <span style={{ fontWeight: 600, fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginLeft: SP.sm, textTransform: 'none', letterSpacing: 0 }}>
           since the world last moved
         </span>
       </div>
@@ -147,7 +150,7 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
         {model.lenses.length > 0 && (
           <div data-testid="trend-lenses" style={{ marginTop: SP.sm, display: 'grid', gap: 3 }}>
             {model.lenses.map(lens => (
-              <div key={lens.id} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+              <div key={lens.id} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5 }}>
                 <strong>{lens.label}</strong>{' '}
                 <span style={{ color: lens.direction === 'rising' ? OINK.strong : lens.direction === 'falling' ? RUBRIC.rubric : MUTED, fontWeight: 700 }}>
                   {lens.reading}

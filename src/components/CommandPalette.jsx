@@ -23,6 +23,8 @@ import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from './theme.js';
 import { captureSavedSettlementsHydration } from '../store/savedSettlementsHydration.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize } from '../design/proseScale.js';
 
 // Routes surfaced as jump targets: the primary nav plus a few deep pages a DM
 // reaches often. Elevated-only (admin) is withheld; navigation's own guards still
@@ -76,6 +78,7 @@ function buildItems(savedSettlements) {
 }
 
 export default function CommandPalette({ onClose }) {
+  const mobile = useIsMobile();
   const dialogRef = useDialogFocusTrap(true, onClose);
   const savedSettlements = useStore((s) => s.savedSettlements);
   const savedSettlementsLoaded = useStore((s) => s.savedSettlementsLoaded);
@@ -219,7 +222,7 @@ export default function CommandPalette({ onClose }) {
                 <span style={{ flex: 1, minWidth: 0, color: INK, fontSize: FS.sm, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {it.label}
                 </span>
-                <span style={{ color: it.page ? GOLD : MUTED, fontSize: FS.xxs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
+                <span style={{ color: it.page ? GOLD : MUTED, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
                   {it.page ? t('palette.pageHint') : it.hint}
                 </span>
               </Button>

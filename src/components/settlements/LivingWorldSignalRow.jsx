@@ -19,6 +19,8 @@
 import { SECOND, FS, SP, sans, swatch } from '../theme.js';
 import { BAND_COLOR } from '../../domain/state/bands.js';
 import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const RED = swatch['#8B1A1A'];
 // War-weary + standing hues reuse the AA-vetted band steps so the war/faith
@@ -39,12 +41,13 @@ const CRISIS_TXT = swatch.white;
  * row (Von Restorff) so it out-weighs the faith / disposition / standing pips.
  */
 function Pip({ color, children, title, crisis = false }) {
+  const mobile = useIsMobile();
   return (
     <span
       title={title}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 3,
-        fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, fontFamily: sans,
         color: crisis ? CRISIS_TXT : color,
         background: crisis ? color : `${color}14`,
         padding: '1px 6px', whiteSpace: 'nowrap',

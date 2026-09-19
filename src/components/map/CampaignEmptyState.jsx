@@ -19,6 +19,8 @@ import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, sans } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { proseFontSize } from '../../design/proseScale.js';
 
 // content-immersion-r2-3: the registered realm_empty_invitation whisper — its body
 // (guidance.invitations.realm) was dead copy that rendered NOWHERE. On the true
@@ -27,6 +29,7 @@ import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, sans } from '../theme.js';
 const WHISPER_ID = 'realm_empty_invitation';
 
 export default function CampaignEmptyState({ lead, onCreateCampaign, onSelectCampaign, hasCampaigns = false }) {
+  const mobile = useIsMobile();
   const [invited, setInvited] = useState(() => !isGuidanceDismissed(WHISPER_ID));
   const isCreate = !hasCampaigns && typeof onCreateCampaign === 'function';
   const action = hasCampaigns && typeof onSelectCampaign === 'function'
@@ -50,7 +53,7 @@ export default function CampaignEmptyState({ lead, onCreateCampaign, onSelectCam
       )}
       {isCreate && invited && (
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, marginTop: SP.xs }}>
-          <span style={{ flex: 1, color: MUTED, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5, borderTop: `1px solid ${BORDER}`, paddingTop: SP.xs }}>
+          <span style={{ flex: 1, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5, borderTop: `1px solid ${BORDER}`, paddingTop: SP.xs }}>
             {t('guidance.invitations.realm')}
           </span>
           <Button

@@ -18,6 +18,8 @@ import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 import ChronicleScrollback from './ChronicleScrollback.jsx';
 import { severityBand } from './heraldFilter.js';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 function scopeLabel(scope) {
   if (scope === 'realm') return 'Realm';
@@ -53,6 +55,7 @@ function partitionThreads(threads = [], mineIds = new Set()) {
 }
 
 function MetaPill({ children, tone = 'neutral', wrap = false }) {
+  const mobile = useIsMobile();
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
   const color = tone === 'major' ? GOLD : tone === 'good' ? GREEN : SECOND;
   return (
@@ -65,7 +68,7 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
       background: bg,
       color,
       fontFamily: sans,
-      fontSize: FS.xxs,
+      fontSize: chromeFontSize(FS.xxs, mobile),
       fontWeight: 800,
       // `wrap` exists for the REASONS pills: the late-lane authors (momentum, webwar,
       // infowar) write full multi-clause sentences into `reasons` — the recorded-reason
@@ -81,6 +84,7 @@ function MetaPill({ children, tone = 'neutral', wrap = false }) {
 }
 
 function NewsEntry({ entry, compact = false }) {
+  const mobile = useIsMobile();
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
   // The settlements this update touches — LINKED (THE NEWS ADDRESS LAW's
@@ -167,7 +171,7 @@ function NewsEntry({ entry, compact = false }) {
             margin: '5px 0 0',
             color: BODY,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: proseFontSize(FS.xs, mobile),
             lineHeight: 1.45,
             overflowWrap: 'anywhere',
           }}>
@@ -183,7 +187,7 @@ function NewsEntry({ entry, compact = false }) {
             margin: '6px 0 0',
             color: MUTED,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: proseFontSize(FS.xs, mobile),
             fontStyle: 'italic',
             lineHeight: 1.45,
             overflowWrap: 'anywhere',
@@ -229,6 +233,7 @@ function NewsEntry({ entry, compact = false }) {
 // stages (oldest → newest) so a slow-burning story reads as ONE entry instead
 // of a wall of near-duplicates.
 function ThreadCard({ thread, compact = false, nameById }) {
+  const mobile = useIsMobile();
   const head = thread.head;
   if (!head) return null;
   if (thread.size <= 1) {
@@ -248,7 +253,7 @@ function ThreadCard({ thread, compact = false, nameById }) {
           padding: '6px 10px',
           color: SECOND,
           fontFamily: sans,
-          fontSize: FS.xxs,
+          fontSize: chromeFontSize(FS.xxs, mobile),
           fontWeight: 900,
           display: 'flex',
           alignItems: 'center',
@@ -268,6 +273,7 @@ function ThreadCard({ thread, compact = false, nameById }) {
 }
 
 function SectionHeader({ icon: Icon, title, count }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex',
@@ -289,7 +295,7 @@ function SectionHeader({ icon: Icon, title, count }) {
         marginLeft: 'auto',
         color: MUTED,
         fontFamily: sans,
-        fontSize: FS.xs,
+        fontSize: chromeFontSize(FS.xs, mobile),
         fontWeight: 800,
       }}>
         {count}
@@ -302,11 +308,12 @@ function SectionHeader({ icon: Icon, title, count }) {
 // arrive pre-ordered (major-first, then recency); each renders collapsed-with-
 // progression via ThreadCard.
 function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ minWidth: 0 }}>
       <SectionHeader icon={icon} title={title} count={threads.length} />
       {majorCount > 0 && (
-        <div style={{ marginTop: -4, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800 }}>
+        <div style={{ marginTop: -4, marginBottom: 10, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800 }}>
           {majorCount} significant {majorCount === 1 ? 'arc' : 'arcs'}
         </div>
       )}
@@ -324,6 +331,7 @@ function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById })
 }
 
 export default function WizardNewsPanel({ campaign }) {
+  const mobile = useIsMobile();
   const summary = useMemo(() => summarizeWizardNews(campaign?.wizardNews), [campaign?.wizardNews]);
   // Arc-threaded, then partitioned into the DM's own settlements vs the wider
   // realm. deriveNewsThreads already orders threads major-first then by recency
@@ -464,7 +472,7 @@ export default function WizardNewsPanel({ campaign }) {
             marginTop: 4,
             color: SECOND,
             fontFamily: sans,
-            fontSize: FS.xs,
+            fontSize: chromeFontSize(FS.xs, mobile),
             fontWeight: 700,
           }}>
             <span>{campaign.name}</span>
@@ -496,7 +504,7 @@ export default function WizardNewsPanel({ campaign }) {
           empty state on a fresh campaign. */}
       <div style={{ padding: '12px 16px 0' }}>
         {chronicleError && (
-          <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
+          <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:chromeFontSize(FS.xs, mobile), marginBottom:8 }}>
             {chronicleError}
           </div>
         )}

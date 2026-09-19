@@ -7,6 +7,8 @@
  */
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER2, MUTED, RED, sans, SP, FS } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * @param {{
@@ -15,6 +17,7 @@ import { BODY, BORDER2, MUTED, RED, sans, SP, FS } from '../theme.js';
  * }} props
  */
 export default function UnlistedShareBar({ copied = false, busy = false, error = null, onCopy, onRotate, onStop }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -25,7 +28,7 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         padding: '4px 9px',
         background: 'transparent', color: BODY,
         border: `1px solid ${BORDER2}`,
-        fontSize: FS.xs, fontWeight: 700,
+        fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
         textTransform: 'uppercase', letterSpacing: '0.05em',
       }}>
         Unlisted
@@ -49,11 +52,11 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         {busy ? 'Working…' : 'Stop sharing'}
       </Button>
       {error && (
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: RED }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xs, mobile), color: RED }}>
           {error}
         </span>
       )}
-      <span style={{ flexBasis: '100%', fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+      <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontStyle: 'italic' }}>
         Only people with this exact link can open it. It never appears in the public gallery.
         Rotate the link to revoke every copy you&apos;ve shared.
       </span>

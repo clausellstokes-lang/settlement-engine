@@ -2,6 +2,8 @@ import Card from '../primitives/Card.jsx';
 import { FS, swatch } from '../theme.js';
 import { t } from '../../copy/index.js';
 import { noteKeyFor, noteTopicForSurface, noteMomentFor } from '../../domain/display/guidanceNotes.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 /**
  * components/guidance/SurveyorNote — THE SURVEYOR'S-NOTES VISUAL GRAMMAR (W-GUIDE-2 §4).
@@ -36,6 +38,7 @@ import { noteKeyFor, noteTopicForSurface, noteMomentFor } from '../../domain/dis
  * grammar so it stays reusable across surfaces.
  */
 export default function SurveyorNote({ topic, moment, surface, signal, id = 'note', compact }) {
+  const mobile = useIsMobile();
   const resolvedTopic = topic || (surface ? noteTopicForSurface(surface) : null);
   const resolvedMoment = moment || noteMomentFor(signal);
   const key = noteKeyFor(resolvedTopic, resolvedMoment, id);
@@ -53,7 +56,7 @@ export default function SurveyorNote({ topic, moment, surface, signal, id = 'not
         </span>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{
-            fontSize: FS.micro, fontWeight: 800, color: ACCENT,
+            fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: ACCENT,
             textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6,
           }}>
             A Note from the Surveyor

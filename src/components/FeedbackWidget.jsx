@@ -32,8 +32,10 @@ import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomCle
 import Button from './primitives/Button.jsx';
 import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogDismiss } from './primitives/useDialogFocusTrap.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 export default function FeedbackWidget({ visible = true }) {
+  const mobile = useIsMobile();
   const auth = useStore(s => s.auth);
   const generationId = useStore(s => s.generationId);
   const lastSeed = useStore(s => s.lastSeed);
@@ -202,7 +204,7 @@ export default function FeedbackWidget({ visible = true }) {
           />
 
           {generationRef && (
-            <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+            <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
               This note will include a reference to the settlement you are viewing, so we can find it.
             </div>
           )}
@@ -212,7 +214,7 @@ export default function FeedbackWidget({ visible = true }) {
               on the payload above), disclosed in the same microcopy voice. Anonymous
               submitters send with just their email and no account id. */}
           {signedIn && (
-            <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+            <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.5 }}>
               Sent from your account, so we can follow up.
             </div>
           )}

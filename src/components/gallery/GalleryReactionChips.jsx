@@ -18,6 +18,8 @@
 import { REACTION_VOCAB, REACTION_LABELS } from '../../data/galleryReactionVocab.js';
 import Button from '../primitives/Button.jsx';
 import { BORDER2, CARD, GOLD_TXT, INK, sans, FS, SP } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 const SUMMARY_LIMIT = 3;
 
@@ -59,6 +61,7 @@ export default function GalleryReactionChips({ state, onReact, busyKey = null, i
 
 /** Read-only card digest: top non-zero reactions, capped at SUMMARY_LIMIT. */
 export function GalleryReactionSummary({ counts }) {
+  const mobile = useIsMobile();
   const entries = Object.entries(counts || {})
     .filter(([key, n]) => REACTION_LABELS[key] && Number(n) > 0)
     .sort((a, b) => (b[1] - a[1]) || (
@@ -77,7 +80,7 @@ export function GalleryReactionSummary({ counts }) {
             border: `1px solid ${BORDER2}`,
             background: CARD,
             color: INK,
-            fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
+            fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700,
           }}
         >
           {REACTION_LABELS[key]}

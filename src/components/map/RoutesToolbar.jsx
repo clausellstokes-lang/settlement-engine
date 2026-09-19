@@ -32,8 +32,11 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 // (relationshipEdgeStyle) — this toolbar used to show a gold "Client" dot beside a
 // purple drawn edge, a live cross-surface contradiction (P11).
 import { REL_TYPES } from './relationshipEdgeStyle.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function RoutesToolbar() {
+  const mobile = useIsMobile();
   const layers       = useStore(s => s.mapState?.layers);
   const setLayerFilter = useStore(s => s.setLayerFilter);
   const toggleLayer  = useStore(s => s.toggleLayer);
@@ -87,7 +90,7 @@ export default function RoutesToolbar() {
       }}>
         <LinkIcon size={13} color={GOLD} />
         <span style={{
-          fontSize: FS.xs, fontWeight: 800,
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
           color: GOLD, letterSpacing: '0.08em',
           textTransform: 'uppercase', fontFamily: sans,
         }}>
@@ -179,7 +182,7 @@ export default function RoutesToolbar() {
           background: 'rgba(162,52,52,0.08)',
           border: '1px solid rgba(162,52,52,0.35)',
           borderLeft: '3px solid #A23434',
-          fontSize: FS.xs, fontFamily: sans,
+          fontSize: chromeFontSize(FS.xs, mobile), fontFamily: sans,
         }}>
           <AlertTriangle size={11} color="#A23434" />
           <span style={{ color: swatch['#8A3434'], fontWeight: 700 }}>

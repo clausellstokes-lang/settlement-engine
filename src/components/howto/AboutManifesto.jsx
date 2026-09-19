@@ -40,6 +40,8 @@ import ForgeExactDemo from './ForgeExactDemo.jsx';
 import FoundersRoll from './FoundersRoll.jsx';
 import HouseColophon from '../organic/HouseColophon.jsx';
 import { anchorFor } from '../../lib/aboutMapping.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
@@ -54,11 +56,12 @@ const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans 
 // hides its heading. The guide page answered this at the split; this page did not,
 // and all seven of its anchors were landing blind until the repair tail.
 function Band({ id, eyebrow, title, children, first = false }) {
+  const mobile = useIsMobile();
   return (
     <section id={id} style={{ maxWidth: PROSE_MAX, margin: '0 auto', scrollMarginTop: ANCHOR_OFFSET,
       padding: first ? '4px 0 0' : '40px 0 0' }}>
       {eyebrow && (
-        <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
+        <div style={{ fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 6 }}>{eyebrow}</div>
       )}
       {title && (
@@ -80,12 +83,13 @@ function Caption({ children }) {
 // A covenant promise: what CANNOT happen, the mechanism that forbids it, and the
 // receipt a skeptic can open. The receipt is the load-bearing element.
 function Covenant({ claim, mechanism, receipt }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`,
       padding: '14px 16px', background: CARD, marginBottom: 12, breakInside: 'avoid' }}>
       <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, marginBottom: 6 }}>{claim}</div>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 8px', fontFamily: sans }}>{mechanism}</p>
-      <div style={{ fontSize: FS.xs, color: GOLD_TXT, fontWeight: 700, textTransform: 'uppercase',
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: GOLD_TXT, fontWeight: 700, textTransform: 'uppercase',
         letterSpacing: '0.06em', marginBottom: 3 }}>The receipt</div>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.55, margin: 0, fontFamily: sans }}>{receipt}</p>
     </div>

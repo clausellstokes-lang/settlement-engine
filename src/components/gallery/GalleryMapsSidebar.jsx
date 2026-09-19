@@ -17,6 +17,8 @@ import Button from '../primitives/Button.jsx';
 import { activeMapFilterCount, BACKDROP_OPTIONS } from './galleryMapsFilters.js';
 import { human } from './galleryUtils.js';
 import GalleryFilterShell, { SidebarSection } from './GalleryFilterShell.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 // Chips over [value, label] pairs (kind/backdrop). Text only — no icon — so the
 // chip reads as a glyph toggle, not a Realm-map control.
@@ -67,6 +69,7 @@ function TagChips({ options, value = [], onToggle }) {
 }
 
 function ToggleRow({ checked, label, onChange }) {
+  const mobile = useIsMobile();
   const inputId = useId();
   return (
     <label htmlFor={inputId} style={{
@@ -75,7 +78,7 @@ function ToggleRow({ checked, label, onChange }) {
       gap: SP.sm,
       color: INK,
       fontFamily: sans,
-      fontSize: FS.xs,
+      fontSize: chromeFontSize(FS.xs, mobile),
       fontWeight: 850,
       cursor: 'pointer',
     }}>

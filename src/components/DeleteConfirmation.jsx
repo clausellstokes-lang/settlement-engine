@@ -6,6 +6,8 @@
  */
 import { FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { proseFontSize } from '../design/proseScale.js';
 
 // Tier 7.19 — local BODY alias. The body-copy color used to be a
 // hard-coded '#6b5340' literal; surfacing it as a named constant means
@@ -15,6 +17,7 @@ import Button from './primitives/Button.jsx';
 const BODY = swatch['#6B5340'];
 
 export default function DeleteConfirmation({ entityName, details, onConfirm, onCancel }) {
+  const mobile = useIsMobile();
   return (
     <div style={{
       marginTop: 6, padding: '10px 12px',
@@ -24,7 +27,7 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
         Delete "{entityName}"?
       </div>
       {details && (
-        <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.5, marginBottom: 8 }}>
           {details}
         </div>
       )}

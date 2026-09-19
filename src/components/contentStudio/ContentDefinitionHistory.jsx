@@ -22,6 +22,8 @@ import {
   receiptIsConfirmed,
   StatusNotice,
 } from './customContentLifecycleSupport.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 /*
  * ContentDefinitionHistory — append-only inspection and recovery.
@@ -72,6 +74,7 @@ function RevisionRow({
   onCancel,
   onRestore,
 }) {
+  const mobile = useIsMobile();
   const label = revisionLabel(revision);
   const current = revision.isHead === true;
   return (
@@ -92,7 +95,7 @@ function RevisionRow({
         {current && (
           <span style={{
             color: swatch.success,
-            fontSize: FS.micro,
+            fontSize: chromeFontSize(FS.micro, mobile),
             fontWeight: 800,
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
@@ -100,14 +103,14 @@ function RevisionRow({
             Current
           </span>
         )}
-        <span style={{ marginLeft: 'auto', color: MUTED, fontSize: FS.micro }}>
+        <span style={{ marginLeft: 'auto', color: MUTED, fontSize: chromeFontSize(FS.micro, mobile) }}>
           {formatRevisionTime(revision.createdAt)}
         </span>
       </div>
       <div style={{
         marginTop: 3,
         color: SECOND,
-        fontSize: FS.xs,
+        fontSize: proseFontSize(FS.xs, mobile),
         lineHeight: 1.4,
       }}>
         {definitionName(revision.data)}
@@ -137,7 +140,7 @@ function RevisionRow({
             background: CARD,
           }}
         >
-          <div style={{ color: BODY, fontSize: FS.xs, lineHeight: 1.45 }}>
+          <div style={{ color: BODY, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
             Create a new current revision from {label.toLowerCase()}? The
             present head will remain in history.
           </div>
@@ -171,6 +174,7 @@ function RevisionRow({
 }
 
 export default function ContentDefinitionHistory({ category, item }) {
+  const mobile = useIsMobile();
   const listRevisions = useStore(state => state.listCustomContentRevisions);
   const rollback = useStore(state => state.rollbackCustomItem);
   const [open, setOpen] = useState(false);
@@ -285,7 +289,7 @@ export default function ContentDefinitionHistory({ category, item }) {
           aria-label={`Version history for ${definitionName(item)}`}
           style={PANEL_STYLE}
         >
-          <div style={{ color: SECOND, fontSize: FS.xs, lineHeight: 1.45 }}>
+          <div style={{ color: SECOND, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.45 }}>
             Restoring an earlier version appends a new current revision. Existing
             history remains unchanged and referenceable.
           </div>
@@ -294,14 +298,14 @@ export default function ContentDefinitionHistory({ category, item }) {
             <div role="status" aria-live="polite" style={{
               marginTop: 8,
               color: MUTED,
-              fontSize: FS.xs,
+              fontSize: chromeFontSize(FS.xs, mobile),
               fontStyle: 'italic',
             }}>
               Loading immutable history…
             </div>
           )}
           {!loading && loaded && revisions.length === 0 && (
-            <div style={{ marginTop: 8, color: MUTED, fontSize: FS.xs }}>
+            <div style={{ marginTop: 8, color: MUTED, fontSize: chromeFontSize(FS.xs, mobile) }}>
               No revision history is available for this definition.
             </div>
           )}

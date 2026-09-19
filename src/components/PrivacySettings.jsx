@@ -34,6 +34,8 @@ import { pushTelemetryConsent } from '../lib/consentSync.js';
 import { authSessionIdentity, captureAuthSessionFence, isAuthSessionFenceCurrent } from '../lib/authSessionFence.js';
 import { useStore } from '../store/index.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP } from './theme.js';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
 
 function Toggle({ on, disabled, onClick, label }) {
   return (
@@ -63,12 +65,13 @@ function Toggle({ on, disabled, onClick, label }) {
 // AccountPreferencesSection's PrefRow already removed. Matching it keeps the two
 // on-page toggle lists consistent (P5).
 function Row({ id, title, desc, on, disabled, note, onToggle }) {
+  const mobile = useIsMobile();
   return (
     <div style={{ display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.md}px 0` }}>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>{title}</div>
-        <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45, fontFamily: sans }}>{desc}</div>
-        {note && <div style={{ fontSize: FS.xs, color: MUTED, marginTop: 2, fontStyle: 'italic' }}>{note}</div>}
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45, fontFamily: sans }}>{desc}</div>
+        {note && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginTop: 2, fontStyle: 'italic' }}>{note}</div>}
       </div>
       <Toggle on={on} disabled={disabled} onClick={() => onToggle(id, !on)} label={title} />
     </div>
@@ -85,6 +88,7 @@ function Row({ id, title, desc, on, disabled, note, onToggle }) {
  *   (onboarding/consent) that still want the self-contained card.
  */
 export default function PrivacySettings({ bare = false }) {
+  const mobile = useIsMobile();
   const auth = useStore(state => state.auth);
   const ownerId = auth?.user?.id || null;
   const sessionIdentity = authSessionIdentity(auth);
@@ -158,14 +162,14 @@ export default function PrivacySettings({ bare = false }) {
           Privacy &amp; data
         </h3>
       )}
-      <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
+      <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
         Usage and settlement <em>structure</em> help improve the generator. Your private campaign
         text, NPC secrets, and notes are never collected. Research is on by default and anonymous;
         you can change this anytime, and deleting your account erases your data.
       </p>
 
       {dnt && (
-        <p style={{ fontSize: FS.xs, color: MUTED, margin: `0 0 ${SP.sm}px`, fontStyle: 'italic' }}>
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: `0 0 ${SP.sm}px`, fontStyle: 'italic' }}>
           Your browser sends “Do Not Track”, so all telemetry is off regardless of these toggles.
         </p>
       )}
@@ -197,7 +201,7 @@ export default function PrivacySettings({ bare = false }) {
       />
 
       {syncError && (
-        <p role="status" style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 0`, lineHeight: 1.45, fontFamily: sans }}>
+        <p role="status" style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, margin: `${SP.xs}px 0 0`, lineHeight: 1.45, fontFamily: sans }}>
           Saved on this device, but we could not reach your account just now, so your other
           devices still have the old setting. It will save next time you change it here.
         </p>

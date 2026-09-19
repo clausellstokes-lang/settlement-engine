@@ -44,8 +44,11 @@ import RealmDocket from './RealmDocket.jsx';
 import RealmVerbComposer from './RealmVerbComposer.jsx';
 import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 
 export default function WorldPulsePanel({ campaign, advancing = false }) {
+  const mobile = useIsMobile();
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
@@ -223,7 +226,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
               World Pulse
             </h2>
-            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+            <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
               <span>{campaign.name}</span>
               <span>Draft world</span>
             </div>
@@ -285,7 +288,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
             World Pulse
           </h2>
-          <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 700 }}>
+          <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 4, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700 }}>
             <span>{campaign.name}</span>
             <span>Tick {worldState.tick || 0}</span>
             <span>{human(worldState.calendar?.season || 'spring')}</span>
@@ -300,7 +303,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div role="status" style={{
           display: 'flex', alignItems: 'center', gap: 8,
           padding: '9px 16px', borderBottom: `1px solid ${BORDER}`,
-          background: GOLD_BG, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+          background: GOLD_BG, color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
         }}>
           <Activity size={14} color={GOLD} />
           Advancing the realm… the pulse below updates when it settles.
@@ -342,7 +345,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
           {paused && (
             <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
+              <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, lineHeight: 1.5 }}>
                 The advance paused for your word. {pendingMajors.length > 0
                   ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict. Keep each (it applies as recommended) or dismiss it, then resume the interval.`
                   : 'Resume or undo the advance to continue. Applying, dismissing, or naming here would be undone on resume.'}
@@ -593,7 +596,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   }}>
                     <Clock3 size={15} color={passed ? GOLD : MUTED} style={{ marginTop: 2 }} />
                     <div style={{ minWidth: 0 }}>
-                      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, overflowWrap: 'anywhere' }}>
+                      <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, overflowWrap: 'anywhere' }}>
                         {human(roll.candidateType)}
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 6 }}>
