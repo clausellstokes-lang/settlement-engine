@@ -184,6 +184,37 @@ function emptyServiceRecordsLike(serviceRecords) {
 }
 
 /**
+ * A saved-settlement entry as an EXPORT carries it: the DM's layer and the decree
+ * registry are the owner's own working save state and never leave it (EM-B3a;
+ * design §11 "edits do not travel"; ARCH §3 "a personal backup export omits them
+ * under the same rule"). This is the one seam through which either key could leave
+ * the account at all — every public projection already drops them by name — so the
+ * omission is spelled here and nowhere else.
+ *
+ * ⭐ REFERENCE-IDENTICAL WHEN THERE IS NOTHING TO DROP, and that is the contract
+ * rather than an optimisation. No writer of either key exists yet (the veil lands
+ * before the writer, by design), so today this branch is taken for 100% of real
+ * saves and an unedited account's export is byte-identical to the one it would have
+ * downloaded before this line existed. A shallow-copy-always helper would silently
+ * move the bytes of every export ever taken.
+ *
+ * The drop is a DESTRUCTURE, copied from importScrub.js's scrubImportedConfig,
+ * never a property read: that spelling is measured to add no row to the
+ * observed-shape reader register, which is what keeps this packet's register delta
+ * at zero. Presence is likewise inferred from the destructure's own result.
+ *
+ * @param {Record<string, any>} entry a save envelope
+ * @returns {Record<string, any>} the same entry, or a copy whose settlement lost both keys
+ */
+function withoutEditState(entry) {
+  const s = entry?.settlement;
+  if (!s || typeof s !== 'object' || Array.isArray(s)) return entry;
+  // eslint-disable-next-line no-unused-vars -- intentional drop of the two editor keys
+  const { dmLayer, decrees, ...rest } = /** @type {Record<string, any>} */ (s);
+  return Object.keys(rest).length === Object.keys(s).length ? entry : { ...entry, settlement: rest };
+}
+
+/**
  * Construct and prove an account-transfer artifact without downloading it.
  *
  * The proof uses the canonical full-ledger archive validator, not a looser
@@ -205,9 +236,9 @@ function emptyServiceRecordsLike(serviceRecords) {
  */
 export function preflightAccountExport(state = {}) {
   const auth = state.auth || {};
-  const settlements = Array.isArray(state.savedSettlements)
+  const settlements = (Array.isArray(state.savedSettlements)
     ? state.savedSettlements
-    : [];
+    : []).map(withoutEditState);
   const campaigns = Array.isArray(state.campaigns) ? state.campaigns : [];
   const contentCount = customContentCount(state.customContent);
   const parsedServiceRecords = state.serviceRecords

@@ -78,6 +78,19 @@ export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
   'deferredImpacts',
   'deferredWarFronts',
   'deferredPartyImpacts',
+  // THE SETTLEMENT EDITOR'S TWO PERSISTED KEYS (EM-B3a, design §11/§12.4). They are
+  // SETTLEMENT-RECORD keys rather than conditional ledgers — they ride the save blob
+  // (saves.js `row.data = entry.settlement`), never worldState — so they are listed
+  // HERE, inside the always-present block, and deliberately NOT in the conditional
+  // block below: worldSnapshotDenyCensus.test.js derives its expected set from
+  // CONDITIONAL_LEDGER_KEYS minus the public allowlist, and a member added to that
+  // block would have to be a real ledger or the derived comparison moves. Named
+  // explicitly so the three existing absence assertions cover them for free, and so
+  // a realm snapshot that ever did read a member's record cannot carry the DM's
+  // working edit state into a public surface. The client twin is publicSafe.js's
+  // PRIVATE_KEY_RE + the `full`-branch deletes; the server twin is migration 202.
+  'dmLayer',
+  'decrees',
   // every worldState CONDITIONAL_LEDGER_KEY except the public allowlist (registration
   // manifest — a new conditional ledger reds worldSnapshotDenyCensus.test.js until listed)
   'religionStates',

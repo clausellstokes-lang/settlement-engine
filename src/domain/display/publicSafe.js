@@ -98,7 +98,16 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // The denylist still only GROWS in the private-key direction — this narrows a token
 // that was over-broad, tightening it TO the genuinely-private keys, never removing a
 // private key from coverage.
-export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|tabNotes|\bnotes?\b|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
+// THE SETTLEMENT EDITOR (EM-B3a, design §12.4): `decrees` joins as ONE token, and
+// `dmLayer` gains NOTHING because it is ALREADY denied by the `\bdm` alternation
+// above (measured, not assumed — a second token for it would be the redundant guard
+// the preamble refuses). The token is unanchored and contains-semantic like every
+// private neighbour here, so `appliedDecrees` and `decreesApplied` are denied too.
+// COUPLED SQL TWIN, and it LANDED FIRST (EM-B3b, migration 202): the regex is pinned
+// token-⊆-SQL by snapshotDenylistDrift.test.js, so a client token added ahead of its
+// server alternative reds that suite — which is why 202's `_gallery_world_snapshot_is_safe`
+// amendment shipped before this line, never after it.
+export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|tabNotes|\bnotes?\b|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|decrees|seed|_config)/i;
 
 // ── Public NPC field allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the SQL npc_allowed array in
@@ -266,6 +275,24 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clone.dmNotes;
     delete clone.notes;
     delete clone.narrativeNotes;
+    // THE SETTLEMENT EDITOR'S WORKING STATE (EM-B3a, design §11: "edits do not
+    // travel"). `dmLayer` records which fields on this record are the DM's own and
+    // `decrees` is the ordered registry of what they have staged — the author's
+    // in-progress editing session, not a property of the town. Default mode already
+    // drops both through the fail-closed top-level allowlist; full mode skips that
+    // gate, so strip them explicitly here, exactly as dossierNotes above is.
+    //
+    // ⛔ AND THE OPT-IN DOES NOT COVER THEM, for the reason the customContentRoster
+    // block below records at length. `gallery_share_dm` is scoped, in the owner's
+    // own words at the toggle, to "Secrets, plot hooks, NPC goals and relationships,
+    // your DM notes, and the DM Compass" becoming publicly visible. That is a
+    // PUBLICATION SWITCH over authored DM CONTENT; it is not a transfer of the
+    // owner's working edit state, and no reader of a full share is entitled to the
+    // half-finished decrees sitting in their editor. Mirrored server-side by
+    // migration 202 (the world-snapshot scanner) — landed ahead of this client
+    // token, which is the lawful direction.
+    delete clone.dmLayer;
+    delete clone.decrees;
     // SEED POSTURE (099/121 → mirrored here, W-F8): a generation seed is CONFIDENTIAL in
     // every gallery view — even a DM-full share. The owner's opt-in reveals authored
     // DM-private content (secrets, hooks, compass); a seed replays the procedural output
