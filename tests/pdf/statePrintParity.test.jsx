@@ -270,6 +270,12 @@ function screenProse(s, faithUnlocked = false) {
 
   set('resources.groundAndWorkings', screenParagraph(s, 'resources.groundAndWorkings',
     ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'].map((k) => eco[k])));
+  // DS-SUP-3. Since 2026-09-19 the screen renders the catalog lens at the position and the
+  // IMPAIRED-HOUSE lens under that house's own service row (the owner's order; the
+  // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one
+  // paragraph in the desk's own order — the `relationships.network` precedent above, and the
+  // reason this stays `screenParagraph`: the parity claim is about WHICH SENTENCES the two
+  // surfaces carry, and the desk hands both to both.
   set('services.catalogStanding', screenParagraph(s, 'services.catalogStanding',
     [eco.catalogStanding, eco.impairedService]));
   set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving', [eco.prosperityRung]));

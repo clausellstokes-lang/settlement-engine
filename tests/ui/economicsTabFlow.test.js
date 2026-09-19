@@ -453,7 +453,14 @@ function onPage(sentence, lines, settlement) {
  */
 const DESK_LINE_MOUNTS = Object.freeze({
   'resources.groundAndWorkings': ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'],
-  'services.catalogStanding': ['catalogStanding', 'impairedService'],
+  // ⭐ ONE KEY SINCE 2026-09-19, AND THE SECOND ONE DID NOT DIE — it MOVED. DS-SUP-3's
+  // `impairedService` lens names ONE HOUSE by name, and the owner's order ("some other
+  // sections need the same adjustment") put it under that house's own service row, the way
+  // `defense.threatAssessment` renders under the bar it is about. It is the SAME position
+  // (`services.catalogStanding`, one registry row, one reachability literal) drawn where each
+  // of its two lenses belongs, so this table — which is about what ONE `DeskLines` call site
+  // hands over — now lists the catalog lens alone.
+  'services.catalogStanding': ['catalogStanding'],
   'economics.exportPosture': ['exportPosture'],
   'daily_life.standingOfLiving': ['prosperityRung'],
   'economics.commercialProfile': ['incomeMix', 'criminalLine', 'tradeProfile'],
@@ -680,14 +687,24 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
  * so dropping `settlementName`/`tier` at that site puts the raw sentence in the DOM and reds
  * the anchored negative.
  *
- * ⛔ TWO OF THE FIVE ECONOMY SITES ARE ABSENT FROM THIS SUITE, AND THAT IS A FINDING RATHER
- * THAN AN OMISSION. `economics.exportPosture` (`rungs={[deskProse.exportPosture]}`) and
- * `daily_life.standingOfLiving` (`rungs={[deskProse.prosperityRung]}`) pass exactly ONE rung
- * BY CONSTRUCTION, and `weaveBlock` returns a single line verbatim. The two props are
- * therefore provably INERT at those sites today — no rung list, hand-built or drawn, can make
- * them change a character — so no behavioural arm is possible there and the structural one
- * above is the whole of what can be claimed. The day either call site grows a second lens,
- * it belongs in the table below.
+ * ⛔ THREE OF THE FIVE ECONOMY SITES ARE ABSENT FROM THIS SUITE, AND THAT IS A FINDING RATHER
+ * THAN AN OMISSION. `economics.exportPosture` (`rungs={[deskProse.exportPosture]}`),
+ * `daily_life.standingOfLiving` (`rungs={[deskProse.prosperityRung]}`) and — since
+ * 2026-09-19 — `services.catalogStanding` (`rungs={[deskProse.catalogStanding]}`) pass
+ * exactly ONE rung BY CONSTRUCTION, and `weaveBlock` returns a single line verbatim. The two
+ * props are therefore provably INERT at those sites today — no rung list, hand-built or
+ * drawn, can make them change a character — so no behavioural arm is possible there and the
+ * structural one above is the whole of what can be claimed. The day any of the three call
+ * sites grows a second lens, it belongs in the table below.
+ *
+ * ⚠ THE SERVICES SITE JOINED THAT LIST BY A DELIBERATE MOVE, NOT BY LOSING A LENS. DS-SUP-3
+ * still draws both of its lenses; the second one now renders under the row of the house it
+ * names (the owner's 2026-09-19 order, the DefenseTab idiom), which is a second one-rung
+ * `DeskLines` rather than a second sentence in this paragraph. A consequence worth stating
+ * plainly: that sentence no longer stands its opening name down against the catalog line,
+ * because a one-line weave is the line. The shipped pool opens on `{institution}` rather than
+ * on the settlement, so no shipped wording moves; a future wording that opened on the town's
+ * name would print it, and re-homing it is the act that would owe an arm here.
  */
 describe('DeskLines — the name props reach the real call sites, non-vacuously', () => {
   const NAME = GROUND.name;
@@ -706,8 +723,6 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
   const SITES = [
     ['resources.groundAndWorkings', 'DS-ECO-11', ['terrainIdentity', 'economicStrengths'],
       ResourcesTab, { settlement: GROUND, publicDossier: false }],
-    ['services.catalogStanding', 'DS-SUP-3', ['catalogStanding', 'impairedService'],
-      ServicesTab, { settlement: GROUND, services: GROUND.availableServices, publicDossier: false }],
     ['economics.commercialProfile', 'DS-ECO-12', ['incomeMix', 'criminalLine'],
       EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
   ];
@@ -748,17 +763,24 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
         settlementName: NAME, tierNoun: tierNounFor(GROUND.tier),
       }).paragraph);
     });
-    expect(SITES.length, 'the site table emptied, so the loop judged nothing').toBe(3);
+    expect(SITES.length, 'the site table emptied, so the loop judged nothing').toBe(2);
     expectNoSeedFailures(failures, 'every multi-rung DeskLines call site threads the name');
   });
 
-  test('THE TWO SINGLE-RUNG SITES ARE INERT BY CONSTRUCTION, and the source says so', () => {
+  test('THE THREE SINGLE-RUNG SITES ARE INERT BY CONSTRUCTION, and the source says so', () => {
     // The claim the describe's header makes, executed rather than asserted in prose: each of
     // these call sites passes a one-element rung list, and a one-line weave is the line.
     const econ = readFileSync(join(HERE, '../../src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
     const daily = readFileSync(join(HERE, '../../src/components/new/tabs/DailyLifeTab.jsx'), 'utf8');
+    const services = readFileSync(join(HERE, '../../src/components/new/tabs/ServicesTab.jsx'), 'utf8');
     expect(econ).toContain('mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]}');
     expect(daily).toContain('mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    // ⚠ THE SERVICES SITE SPELLS ITS MOUNT AS A CONST, and the reason is the mount registry's
+    // own reachability arm: that id may appear ONCE as a whole string literal under
+    // src/components, and this tab now draws the position at two places. So the assertion is
+    // over the rung list, which is what inertness is about.
+    expect(services).toContain('mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]}');
+    expect(services).toContain('rungs={[deskProse.impairedService]}');
     // …and the weave really does return a lone line verbatim, which is what makes them inert.
     expect(weaveBlock([REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
       .toBe(REPEAT);

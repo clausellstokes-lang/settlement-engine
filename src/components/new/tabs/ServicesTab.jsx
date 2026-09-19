@@ -16,6 +16,47 @@ import { DeskLines } from './EconomicsGlance.jsx'; // the shared position render
 import { compareCodepoint } from '../../../domain/deterministicSort.js';
 
 /**
+ * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
+ *
+ * The mount registry's reachability arm counts this id as a WHOLE STRING LITERAL under
+ * `src/components` and refuses a position named twice — a second spelling reads as a
+ * second position for one block. This tab now draws the position at TWO PLACES (the
+ * catalog paragraph, and the impaired house's own row), which is one position rendered
+ * where each of its two lenses belongs, so the id is a const and the sites reference it.
+ */
+const CATALOG_MOUNT = 'services.catalogStanding';
+
+/**
+ * ⭐ THE CATEGORY'S RENDER ORDER, HOISTED, because two readers need the same answer.
+ *
+ * The list below is sorted impaired-first then by name, and the DS-SUP-3 join has to know
+ * which row comes FIRST for the named house — so the comparator cannot stay inline in the
+ * render. A second, quietly different copy is the fork this estate names by hand every
+ * time it finds one.
+ *
+ * @param {Set<string>} impaired @param {Set<string>} degraded
+ * @returns {(a: unknown, b: unknown) => number}
+ */
+function serviceOrder(impaired, degraded) {
+  const rank = (svc) => {
+    const name = typeof svc === 'string' ? svc : svc?.name || '';
+    const inst = typeof svc === 'object' ? svc?.institution || '' : '';
+    return (impaired.has(name) || impaired.has(inst)) ? 2
+      : (degraded.has(name) || degraded.has(inst)) ? 1 : 0;
+  };
+  return (a, b) => {
+    const diff = rank(b) - rank(a);
+    if (diff !== 0) return diff;
+    const na = typeof a === 'string' ? a : a?.name || '';
+    const nb = typeof b === 'string' ? b : b?.name || '';
+    return na.localeCompare(nb);
+  };
+}
+
+/** The institution a service entry names, or '' — the one spelling of that read. */
+const institutionOf = (svc) => (typeof svc === 'object' ? svc?.institution || '' : '');
+
+/**
  * @param {object} props
  * @param {object} props.services
  * @param {object} props.settlement
@@ -104,6 +145,29 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     .filter(inst => inst && impaired.has(inst))
     .sort(compareCodepoint)[0] || null;
   const deskProse = economyDeskRead(settlement, { publicDossier, playerView, impairedInstitution });
+  // ⭐ THE ROW DS-SUP-3'S SECOND LENS IS ABOUT (owner order 2026-09-19, the Defense idiom
+  // applied here). That lens names `{institution}` — ONE house, by name — and it printed in
+  // the catalog paragraph at the top of the tab, a screen and a half above the row that
+  // house's service sits on. A reader had to pair a sentence to a row by searching for a
+  // name. It now renders UNDER that row, in the town's own voice, exactly as
+  // `defense.threatAssessment` renders under the bar it is about.
+  //
+  // ⚠ THE JOIN IS BY INSTITUTION AND IT RESOLVES TO EXACTLY ONE ROW. A house may supply
+  // several services in several categories, and the sentence is about the HOUSE, so it is
+  // said once: at the first row, in the tab's OWN render order (catOrder, then
+  // `serviceOrder`), whose institution is the named one. A house with no rendered row at all
+  // draws nothing here rather than the wrong row's sentence — `impairedInstitution` is built
+  // from these same lists, so that case is the empty one.
+  const impairedRow = (() => {
+    if (!impairedInstitution) return null;
+    const cmp = serviceOrder(impaired, degraded);
+    for (const cat of catOrder) {
+      const hit = [...(services[cat] || [])].sort(cmp)
+        .find((svc) => institutionOf(svc) === impairedInstitution);
+      if (hit) return { cat, svc: hit };
+    }
+    return null;
+  })();
 
   const toggleCat = (cat) => setOpenCats(prev => ({...prev, [cat]: prev[cat] !== false ? false : true}));
   const isOpen = (cat) => openCats[cat] !== false; // default open
@@ -120,12 +184,16 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
 
       {/* ── THE CATALOG AND ITS ABSENCES (DS-SUP-3 at services.catalogStanding) ──
-          TWO LENSES AT ONE POSITION: where the town stands against what a place its rung is
-          expected to keep, and the one house that is open and short of what it works with.
-          Additive — the counts strip, the category grid and the absence chips below are the
-          DATUM and are untouched. Silent on a settlement with no catalog at all, because the
-          tab itself returns early there (R-DST-K). */}
-      <DeskLines mount="services.catalogStanding" settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding, deskProse.impairedService]} />
+          ONE LENS HERE: where the town stands against what a place its rung is expected to
+          keep. That is a fact about the CATALOG, so it frames the catalog.
+          ⛔ THE SECOND LENS LEFT THIS PARAGRAPH (owner order 2026-09-19). It names one house
+          by name, and a sentence about a named house printed at the top of a tab is a
+          sentence the reader has to go and find a row for. It renders under that house's own
+          row below — same position, same registry ruling, flipping this row to `glance`
+          still silences both together. The counts strip, the category grid and the absence
+          chips are the DATUM and are untouched. Silent on a settlement with no catalog at
+          all, because the tab itself returns early there (R-DST-K). */}
+      <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
@@ -286,19 +354,28 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 {open && <div style={{padding:'10px 14px'}}>
                   {isCriminal&&meta.note&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
                   <div style={{display:'flex',flexDirection:'column',gap:6}}>
-                    {[...list].sort((a,b) => {
-                      // Impaired items float to top within category
-                      const na = typeof a==='string'?a:a.name||'';
-                      const ia = typeof a==='object'?a.institution||'':'';
-                      const nb = typeof b==='string'?b:b.name||'';
-                      const ib = typeof b==='object'?b.institution||'':'';
-                      const aImp = (impaired.has(na)||impaired.has(ia))?2:(degraded.has(na)||degraded.has(ia))?1:0;
-                      const bImp = (impaired.has(nb)||impaired.has(ib))?2:(degraded.has(nb)||degraded.has(ib))?1:0;
-                      if (bImp!==aImp) return bImp-aImp;
-                      return na.localeCompare(nb);
-                    }).map((svc,i)=>(
-                      <ServiceItem key={i} svc={svc} accent={meta.accent} isCriminal={isCriminal}
-                        tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                    {/* The comparator is `serviceOrder` at module scope — the DS-SUP-3 join
+                        above resolves the first impaired-house row through the SAME function,
+                        so the sentence cannot land under a row the list did not put first. */}
+                    {[...list].sort(serviceOrder(impaired, degraded)).map((svc,i)=>(
+                      <React.Fragment key={i}>
+                        <ServiceItem svc={svc} accent={meta.accent} isCriminal={isCriminal}
+                          tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}/>
+                        {/* ── DS-SUP-3's SECOND LENS, UNDER THE ROW IT NAMES ──────────────
+                            The Defense idiom exactly (DefenseTab's `threatSentenceFor`): the
+                            sentence sits in the list, under the row, OUTSIDE any control — the
+                            row above is a plain card and the category's own toggle is its
+                            header, so nothing here lengthens a button's accessible name and
+                            nothing is folded away. A silent corpus renders nothing (R-DST-K);
+                            the row, its status pill and its chain chip are untouched either
+                            way. */}
+                        {deskProse.impairedService && impairedRow && impairedRow.cat === cat && impairedRow.svc === svc && (
+                          <div data-testid="services-impaired-house-line">
+                            <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name}
+                              tier={settlement?.tier} rungs={[deskProse.impairedService]} />
+                          </div>
+                        )}
+                      </React.Fragment>
                     ))}
                   </div>
                 </div>}
