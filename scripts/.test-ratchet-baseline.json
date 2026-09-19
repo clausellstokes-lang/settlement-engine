@@ -1,27 +1,9 @@
 {
   "_doc": "PER-TEST failure census for the source phase (all tests except tests/build/**). SHRINK-ONLY. A failing test ABSENT from `entries` is a REGRESSION and reds the gate. Every entry MUST carry a full attribution — subsystem, cause, introducedAt, class — or tests/lint/testRatchet.test.js refuses it. Every entry MUST also carry a `magnitude` array: a banked row freezes its EXISTENCE, and the magnitude is what freezes its SIZE, so the population behind a permitted red cannot grow invisibly (ODQ 854, TE-RATCHET-MAG). `--update` can only REMOVE entries and LOWER magnitude ceilings; adding one is a deliberate, attributed hand edit. See scripts/check-test-ratchet.mjs.",
-  "measuredAtSha": "48929d82d939f06a1cfe89335e7a355483c27690",
-  "totalTests": 32771,
-  "totalFiles": 2518,
+  "measuredAtSha": "b43dfb7719722cf224db0d181fd51e15a4f35d85",
+  "totalTests": 33558,
+  "totalFiles": 2586,
   "skippedCeiling": 1,
   "uncollectedSuites": {},
-  "entries": {
-    "tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master": {
-      "file": "tests/property/generatorGoldenMaster.test.js",
-      "test": "generator golden master (cross-build output stability) every config produces byte-identical output to the golden master",
-      "subsystem": "golden-freeze / generator golden master",
-      "cause": "DECLARED SAME-SEED TEXT SHIFT, owner-gated at the fixture: the src/ prose car (LGT-PROSE, cause (0) of the lighting wave's declarations; 1,001 reader sentences cured across 200 paths; emitted text moves on 133 engine-side paths; no rules value, preset or flag moved) changes every settlement's output text, so the committed generator-golden-master manifest moves on 525 of 525 rows (chair probe chair-tools/golden-count.mjs at the prose tip, CONTROL 0/525 at the base 272dbd2da). The fixture CANNOT be re-recorded before the freeze act: tests/helpers/goldenRecordDoor.js refuses an env var ([NO_SIGNATURE]) and, with a signed record, writes register-row values that tests/lint/goldenFreeze.walker.test.js:358 forbids while frozenAt is null. It regenerates at the owner-signed GENESIS, which records the lit + prose world (ledger §881.4). Declared in docs/GOLDEN_SHIFT_LEDGER.md and the §898 row; every control until the freeze is tree-vs-tree (lprobe/golden-control.sh, golden-count.mjs). Ruling: rulings/RULING-GOLDEN-PRE-FREEZE.md in the chair kit (refs/preserve/chair-tools-2026-09-05). Owner veto by name: 'sign the prose window now' or 'hold prose until the freeze'.",
-      "introducedAt": "e3f6029b2dc542281b048c9fd7ce6145516c7773",
-      "class": "owner-gated",
-      "magnitude": [
-        {
-          "name": "movedRows",
-          "kind": "capture",
-          "pattern": "\\((\\d+)\\) \\] to deeply equal \\[\\]",
-          "ceiling": 525,
-          "unit": "generator-golden-master rows whose settlement output hash differs from the committed manifest"
-        }
-      ]
-    }
-  }
+  "entries": {}
 }
