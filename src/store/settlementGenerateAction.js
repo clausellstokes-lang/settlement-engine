@@ -54,7 +54,7 @@ import {
 // settlementSlice.js's dynamic import, so importing the boundary here keeps it
 // on the lazy side with its callers (MEASURED, lane L-MAT: closure 239 -> 238).
 import { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
-import { activateFaithIfEntitled, resetSettlementIdentity } from './settlementLifecycleHelpers.js';
+import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } from './settlementLifecycleHelpers.js';
 
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
@@ -305,7 +305,10 @@ export async function generateSettlementAction(set, get, seedOverride) {
       // pendingSuccession, draftVersionHistory, generationId, …), then set this
       // run's own lifecycle fields below. Without this, the prior settlement's
       // queued edits / successor prompt / draft timeline survived onto the new town.
-      resetSettlementIdentity(state);
+      // The retiring identity is read HERE, before the swap below installs the new
+      // world, so the device can retire a slot still holding the world this
+      // generation replaces (store/persistProjection.js).
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
       // LOCKS ENGINE Phase B — rewrite the map to the world that now exists:
       // each locked NPC id becomes the id its subject inherited in the carry
       // above, an id nothing preserved is pruned, and every other key is kept

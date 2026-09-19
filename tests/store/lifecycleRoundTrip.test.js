@@ -299,6 +299,7 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   // single DERIVED root field, `draftOrigin`, whose own row is below. Their rows
   // are deleted rather than kept, because a registry row for a key no code writes
   // is exactly the staleness this file's header calls a red.
+  retiringDraftIdentity: "the identity of the world this tab's LAST SWAP took out of the editor, stamped by resetSettlementIdentity from the outgoing world BEFORE the door replaces it and read by the persist projection. It exists for one case: a clear ends with an empty editor, so nothing live can name the world being thrown away and the device would keep a draft the visitor just discarded. It MUST NOT persist — it is a claim about THIS session's last action, and a persisted copy would let a boot retire a slot on the strength of something a previous session did (src/store/settlementLifecycleHelpers.js)",
   draftOrigin: "whose session put the world in the editor — 'anon' or 'account'. Set at the birth (settlementGenerateAction), DERIVED on every rehydrate (persistMerge: 'anon' iff that boot adopted the envelope), re-stamped by claimSettlementForAccount when a signed-in person saves/opens/canonizes, and nulled at the swap chokepoint so an unanswering door fails closed. It MUST NOT persist: it is derived from the adoption, and a persisted copy would outlive the session it describes and could assert an origin a hand-edited blob chose (src/store/settlementSlice.js)",
 });
 
@@ -1662,7 +1663,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       globalThis.localStorage.removeItem(PERSIST_KEY);
     });
 
-    test("an unreadable device blob keeps nothing, and a cleared editor leaves another tab's draft standing", () => {
+    test('an unreadable or absent device blob keeps nothing, and a live one is written straight back', () => {
       const signedInWrite = (settlement, lastSeed) => partializeOf({
         ...currentStub(), auth: { tier: 'free', user: USER }, settlement, lastSeed, draftOrigin: 'anon',
       }).anonDraft;
@@ -1691,22 +1692,66 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       }));
       expect(signedInWrite({ ...world }, 'seed-x')).toEqual({ settlement: held, lastSeed: 'seed-b' });
 
-      // ⚠ THE DECIDED RESIDUAL (persistProjection.js header, 2026-09-19). A CLEARED
-      // editor has no world to compare — the swap chokepoint nulls the world AND the
-      // origin — so the slot cannot be shown to be this tab's and is LEFT STANDING.
-      // Nulling on an empty editor is the flap again: it would eat the draft above on
-      // a guess. Resurrecting a draft is an annoyance; eating one is data loss.
-      const store = bootFrom(anonBlob());
-      store.getState().clearSettlement();
-      expect(store.getState().settlement).toBeNull();
-      expect(store.getState().draftOrigin).toBeNull();
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: held, lastSeed: 'seed-b' });
+      // …and a slot this code cannot NAME is never retired either: `draftIdentity`
+      // returns null for it, and a null can never be matched, so it stands.
+      globalThis.localStorage.setItem(PERSIST_KEY, JSON.stringify({
+        state: { anonDraft: { settlement: { population: 40 }, lastSeed: null } }, version: 2,
+      }));
+      expect(signedInWrite({ population: 40 }, null)).toEqual({ settlement: { population: 40 }, lastSeed: null });
+      globalThis.localStorage.removeItem(PERSIST_KEY);
+    });
 
-      // …and the next generation takes the slot back through case (a), which is why
-      // the residual is an annoyance rather than a trap.
-      const fresh = { ...world, id: 'w-fresh', name: 'Fresh Hollow' };
-      store.setState((state) => { state.settlement = fresh; state.lastSeed = 'seed-fresh'; state.draftOrigin = 'anon'; });
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: fresh, lastSeed: 'seed-fresh' });
+    test("a clear retires this tab's own draft — and only its own", async () => {
+      // ⭐ THE CHOKEPOINT SPEAKS FOR THE WORLD IT REMOVED. A clear ends with an EMPTY
+      // editor and a null origin, so nothing live can name the world being thrown
+      // away. resetSettlementIdentity stamps its identity on the way out, and the
+      // projection falls back to that stamp when — and only when — the editor is
+      // empty. Without it the device kept a draft the visitor had just discarded and
+      // handed it back on the next reload.
+      globalThis.localStorage.removeItem(PERSIST_KEY);
+
+      // SINGLE TAB, through the REAL generate action and the REAL clear door.
+      const only = liveStore();
+      const born = await only.getState().generateSettlement('clear-seed-1');
+      expect(only.getState().draftOrigin).toBe('anon');
+      expect(deviceCommit(only).anonDraft.settlement.name).toBe(born.name);
+
+      only.getState().clearSettlement();
+      expect(only.getState().settlement).toBeNull();
+      expect(only.getState().draftOrigin).toBeNull();
+      // anchored: the stamp is the identity of the world the clear removed, and the
+      // assertion above proves the editor really is empty, so it is the only thing
+      // left that can name it
+      expect(only.getState().retiringDraftIdentity).toEqual(expect.any(String));
+      expect(deviceCommit(only).anonDraft).toBeNull();
+      expect(readSlot()).toBeNull();
+
+      // …so the next boot off what the device kept adopts nothing at all.
+      const rebooted = bootFrom({ ...bareBlob(), anonDraft: readSlot() });
+      expect(rebooted.getState().settlement).toBeNull();
+      expect(rebooted.getState().draftOrigin).toBe('account');
+
+      // TWO TABS — and the clear speaks for its OWN world only. A clears while the
+      // slot holds B's draft: B's world is not the one A retired, so it stands.
+      const worldA = { ...world, id: 'w-ashford', name: 'Ashford' };
+      const worldB = { ...world, id: 'w-bellhollow', name: 'Bellhollow' };
+      const a = liveStore();
+      a.setState((state) => { state.settlement = worldA; state.lastSeed = 'seed-a'; state.draftOrigin = 'anon'; });
+      expect(deviceCommit(a).anonDraft).toEqual({ settlement: worldA, lastSeed: 'seed-a' });
+      const b = liveStore();
+      b.setState((state) => { state.settlement = worldB; state.lastSeed = 'seed-b'; state.draftOrigin = 'anon'; });
+      expect(deviceCommit(b).anonDraft).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+
+      a.getState().clearSettlement();
+      expect(deviceCommit(a).anonDraft).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+      expect(readSlot()).toEqual({ settlement: worldB, lastSeed: 'seed-b' });
+
+      // ⛔ AND THE CLAIM CANNOT OUTLIVE ITS WINDOW. It is read only while the editor
+      // is empty, and the only way out of an empty editor is a door — which
+      // re-stamps this same field. Generating here proves the re-stamp: the new
+      // world's birth records what it replaced (nothing), so the stale claim is gone.
+      await a.getState().generateSettlement('clear-seed-2');
+      expect(a.getState().retiringDraftIdentity).toBeNull();
       globalThis.localStorage.removeItem(PERSIST_KEY);
     });
 

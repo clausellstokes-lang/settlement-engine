@@ -135,7 +135,7 @@ import {
 // version-history action bodies moved to two companions. Every action KEY still
 // lives on the slice literal below — only the bodies relocated.
 import {
-  _dimsSummary, rippleEventThroughWorld, activateFaithIfEntitled, resetSettlementIdentity,
+  _dimsSummary, rippleEventThroughWorld, activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf,
 } from './settlementLifecycleHelpers.js';
 import {
   recordSnapshotAction, revertToSnapshotAction,
@@ -177,7 +177,14 @@ export const createSettlementSlice = (set, get) => ({
   // outlive the session it describes. It REPLACED two claims that sat on this line
   // (`restoredAnonDraft`, `signedInWorld`), each of which had to be raised,
   // retracted, stashed across an OAuth redirect and spent at the boot resolution.
-  settlement:    null, draftOrigin: null,
+  //
+  // `retiringDraftIdentity` is the third member of this line and the shortest-lived:
+  // the identity of the world the LAST swap took out of the editor, stamped by
+  // resetSettlementIdentity and read by the same persistence rule. A clear ends with
+  // an empty editor, so without it the projection has nothing to compare and the
+  // device keeps a draft the visitor just threw away. Session-only, re-stamped on
+  // every swap, and spent by clearSettlement immediately after its own write.
+  settlement:    null, draftOrigin: null, retiringDraftIdentity: null,
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
   savedSettlementsOwnerId: null,
@@ -374,8 +381,6 @@ export const createSettlementSlice = (set, get) => ({
 
   setSettlement: (settlement) =>
     set(state => {
-      state.settlement = settlement;
-      state.activeSaveId = null;
       // store-5 identity hygiene: setSettlement is a NON-save load path (the
       // "Apply Saved Configuration & Regenerate" flow + a couple of reload paths).
       // Route the session residue through the single chokepoint, and reset the
@@ -383,7 +388,15 @@ export const createSettlementSlice = (set, get) => ({
       // previous view's canon phase / event log / locks / stamps — after viewing a
       // canon town, loading another here used to leave phase 'canon' (renames no-op,
       // a stale eventLog/successor ride an unrelated town).
-      resetSettlementIdentity(state);
+      //
+      // ⚠ IT RUNS FIRST, AND THAT IS LOAD-BEARING NOW: `retiringDraftOf` reads the
+      // world this door is about to replace, and one line down there is no outgoing
+      // world left to read. The chokepoint touches none of the fields this recipe
+      // assigns, so the move is behaviour-identical. A door that installs a world
+      // and passes nothing stamps null, which claims nothing (persistProjection.js).
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
+      state.settlement = settlement;
+      state.activeSaveId = null;
       state.phase        = 'draft';
       state.eventLog     = [];
       state.locks        = {};
@@ -401,13 +414,21 @@ export const createSettlementSlice = (set, get) => ({
 
   clearSettlement: () =>
     set(state => {
+      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
+      // the view entirely, leaving no residue of the prior settlement's identity.
+      //
+      // ⭐ AND IT RUNS FIRST, BEFORE THE NULLING, BECAUSE THIS IS THE DOOR THE STAMP
+      // EXISTS FOR. A clear is the one path that ends with an EMPTY editor, so the
+      // identity `retiringDraftOf` reads here is the only thing left that can name
+      // the world being thrown away — and naming it is what lets the device let go
+      // of it too (store/persistProjection.js). Four lines down there is nothing to
+      // read. Without it a visitor who cleared their own draft got it back on the
+      // next reload.
+      resetSettlementIdentity(state, { retiring: retiringDraftOf(state) });
       state.settlement = null;
       state.activeSaveId = null;
       state.lastSeed = null;
       state.lastCtx = null;
-      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
-      // the view entirely, leaving no residue of the prior settlement's identity.
-      resetSettlementIdentity(state);
       state.phase        = 'draft';
       state.eventLog     = [];
       state.locks        = {};
@@ -1575,6 +1596,10 @@ export const createSettlementSlice = (set, get) => ({
     // draftVersionHistory is a sibling to the DRAFT settlement only — a loaded save
     // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
     // stable generation id from the save's seed + generatedAt.
+    // No `retiring` claim: this door always leaves a world IN the editor, and the
+    // projection reads the claim only when the editor is empty, so one raised here
+    // could never be spent. The default null is the fail-closed answer and it also
+    // clears whatever the previous swap stamped.
     resetSettlementIdentity(state, { preservePendingEdits: true });
     // A world opened OUT OF THE LIBRARY is the account's. ⚠ IT MUST RUN AFTER the
     // chokepoint above, which nulls the origin on every swap; claiming before it

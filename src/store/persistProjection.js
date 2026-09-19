@@ -91,16 +91,22 @@
  *   (c) otherwise → write the stored envelope back UNTOUCHED. It is another tab's
  *       draft, and this tab has no standing to retire it.
  *
- * ⚠ (c) COVERS A CLEARED EDITOR TOO, AND THAT IS A WEIGHED TRADE RATHER THAN AN
- * OVERSIGHT. `clearSettlement` routes through the swap chokepoint, which nulls BOTH
- * the world and the origin — so at the moment of that write there is no "this world"
- * to compare, the slot cannot be shown to be this tab's, and it is left standing. A
- * visitor who clears and then reloads WITHOUT generating gets their draft back. The
- * alternative — null whenever the editor is empty — is the flap again, eating
- * another tab's draft on a guess. Resurrecting a draft is an annoyance the next
- * generation overwrites (case (a) runs at the birth); eating one is data loss.
- * Recorded so the next reader knows it was weighed: the cure is to give the swap
- * chokepoint the OUTGOING world's identity, never to null on absence.
+ * ⭐ AND A CLEARED EDITOR HAS STANDING TOO, THROUGH THE CHOKEPOINT (2026-09-19).
+ * `clearSettlement` ends with NO world and NO origin, so the first cut of this rule
+ * had nothing to compare and left the slot standing — a visitor who cleared their
+ * own draft got it back on the next reload, which is a regression a reader meets
+ * rather than a theoretical edge. The cure is where the knowledge is: the swap
+ * chokepoint reads the OUTGOING world's identity before the door replaces it and
+ * stamps `state.retiringDraftIdentity` (settlementLifecycleHelpers.js), and case (b)
+ * falls back to that identity WHEN AND ONLY WHEN the editor is empty. So a clear
+ * retires its own draft; a clear while another tab owns the slot still leaves that
+ * draft alone; and an empty editor with nothing retired touches nothing.
+ *
+ * ⛔ THE REJECTED ALTERNATIVE, recorded because it is the obvious one: nulling the
+ * slot whenever the editor is empty. That is the flap again — it eats another tab's
+ * draft on a guess, which is the data loss this whole rule exists to stop. The
+ * identity is what makes "I am throwing MY draft away" different from "my editor
+ * happens to be empty".
  *
  * ⚠ THE INVARIANT IS PER-DEVICE, AND THE SLOT STILL HOLDS EXACTLY ONE DRAFT.
  * localStorage is shared across a device's tabs, so two anonymous tabs can hold
@@ -142,11 +148,16 @@ export const PERSIST_KEY = 'settlementforge';
  * have been retired is an annoyance, and retiring one that was another tab's is the
  * data loss this whole rule exists to stop.
  *
+ * Exported because the SWAP CHOKEPOINT stamps the same identity for the world it
+ * is retiring (settlementLifecycleHelpers.js). One definition, two readers — a
+ * second spelling would let the recorder and the comparer disagree about which
+ * world a slot holds, which is the whole question this rule turns on.
+ *
  * @param {any} settlement the world to name
  * @param {any} lastSeed the seed it was drawn from, or null
  * @returns {string|null}
  */
-function draftIdentity(settlement, lastSeed) {
+export function draftIdentity(settlement, lastSeed) {
   if (!settlement) return null;
   const id = typeof settlement.id === 'string' && settlement.id !== '' ? settlement.id : null;
   const name = typeof settlement.name === 'string' && settlement.name !== '' ? settlement.name : null;
@@ -187,24 +198,48 @@ function storedAnonDraft() {
 }
 
 /**
- * Cases (b) and (c) of the header's rule: null the slot when it holds THIS tab's
- * world, and otherwise hand back exactly what is already there.
+ * Cases (b) and (c) of the header's rule: null the slot when it holds a world THIS
+ * TAB has standing over, and otherwise hand back exactly what is already there.
+ *
+ * THE WORLD ON SCREEN SPEAKS FOR ITSELF, AND ONLY AN EMPTY EDITOR FALLS BACK.
+ * When the editor holds a world, that world is the whole of this tab's standing.
+ * When it holds nothing — which is what a CLEAR leaves — there is no live world to
+ * name the thing being thrown away, and the slot would stand: a visitor who cleared
+ * their own draft got it back on the next reload. So an empty editor falls back to
+ * `retiringDraftIdentity`, the world this tab's last swap took OUT, stamped at the
+ * chokepoint (settlementLifecycleHelpers.js).
+ *
+ * ⭐ THE FALLBACK IS WHAT SPENDS THE CLAIM, and it is why no post-write consumption
+ * step exists. The claim is READ only while the editor is empty, and the only way
+ * out of an empty editor is a door — which re-stamps the field, to an identity or
+ * to null, at this same chokepoint. So it can never outlive the window it was
+ * raised for. A null written back from inside the projection would have to cross
+ * the persist middleware to be observed at all, and a claim that depends on
+ * middleware ordering to stay honest is exactly the machinery this design retired.
  *
  * Returning the stored envelope is what "leave it untouched" has to mean here —
  * persist writes the whole projection every time, so a slot is only preserved by
  * being re-emitted. The value is the object `readAnonDraft` lifted, so the bytes
  * that go back are the bytes that came out.
  *
+ * ⛔ AN UNNAMEABLE SLOT IS NEVER RETIRED. `null` is what `draftIdentity` returns
+ * for a world it cannot name, so comparing against it would make two unnameable
+ * worlds equal. The slot's own identity is resolved FIRST and a null one returns
+ * early, which is what keeps the null from ever matching anything.
+ *
  * @param {any} settlement the world in this tab's editor, or null
  * @param {any} lastSeed that world's seed, or null
+ * @param {any} retiring the identity this tab's last swap retired, or null — read
+ *   ONLY when the editor is empty
  * @returns {{ settlement: any, lastSeed: any }|null}
  */
-function retireOrKeepStoredDraft(settlement, lastSeed) {
+function retireOrKeepStoredDraft(settlement, lastSeed, retiring) {
   const stored = storedAnonDraft();
   if (!stored) return null;
-  const here = draftIdentity(settlement, lastSeed);
-  if (here !== null && here === draftIdentity(stored.settlement, stored.lastSeed)) return null;
-  return stored;
+  const slot = draftIdentity(stored.settlement, stored.lastSeed);
+  if (slot === null) return stored;
+  const here = settlement ? draftIdentity(settlement, lastSeed) : retiring;
+  return slot === here ? null : stored;
 }
 
 export function partializeStoreState(state) {
@@ -240,9 +275,10 @@ export function partializeStoreState(state) {
     // (Which is also why this note may not spell that pattern out: the scan would
     // count the example as a key.)
     // The else-branch is no longer a bare null: it retires the slot only when the
-    // slot holds THIS world, and otherwise re-emits what another tab put there.
+    // slot holds a world this tab has standing over — the one on screen, or the one
+    // its last swap retired — and otherwise re-emits what another tab put there.
     anonDraft: state.auth?.user == null && state.draftOrigin === 'anon' && settlement
       ? { settlement, lastSeed }
-      : retireOrKeepStoredDraft(settlement, lastSeed),
+      : retireOrKeepStoredDraft(settlement, lastSeed, state.retiringDraftIdentity),
   };
 }
