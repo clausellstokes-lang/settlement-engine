@@ -51,8 +51,10 @@ export default function UnassignedLedger({
             <tr>
               {selectMode && <th scope="col" style={{ ...ledgerTh(mobile), width:1 }}><span style={SR_ONLY}>Select</span></th>}
               <th scope="col" style={ledgerTh(mobile)}>Settlement</th>
-              <th scope="col" style={ledgerTh(mobile)}>Size</th>
-              <th scope="col" style={ledgerTh(mobile)}>Status</th>
+              {/* Size and Status fold into the Settlement cell at phone width (SettlementCard)
+                  — the heads follow the row, or the table announces columns it does not have. */}
+              {!mobile && <th scope="col" style={ledgerTh(mobile)}>Size</th>}
+              {!mobile && <th scope="col" style={ledgerTh(mobile)}>Status</th>}
               <th scope="col" style={ledgerTh(mobile)}>Health</th>
               <th scope="col" style={{ ...ledgerTh(mobile), textAlign:'right' }}><span style={SR_ONLY}>Actions</span></th>
             </tr>

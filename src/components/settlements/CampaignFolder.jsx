@@ -455,8 +455,9 @@ export function CampaignFolder({
                 <tr>
                   {selectMode && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Select</span></th>}
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Settlement</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Size</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Status</span></th>
+                  {/* Folded at phone width, exactly as the visible ledger's heads are. */}
+                  {!mobile && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Size</span></th>}
+                  {!mobile && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Status</span></th>}
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Health</span></th>
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Actions</span></th>
                 </tr>

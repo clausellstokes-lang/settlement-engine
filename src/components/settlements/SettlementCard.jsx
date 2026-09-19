@@ -208,7 +208,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const rowBg = active ? undefined : swatch['#EEE9DF'];
   // Column count for the full-width confirmation / recovery rows. The tally column
   // exists only in select mode: [tally?] settlement · tier · phase · standing · actions.
-  const colCount = (selectMode ? 1 : 0) + 4 + 1;
+  const colCount = (selectMode ? 1 : 0) + (mobile ? 2 : 4) + 1;
 
   return (
     <>
@@ -258,6 +258,27 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             {/* "name · world" — the owning campaign after the interpunct. */}
             {campaignName && <span style={{ fontSize:FS.sm, color:SECOND, whiteSpace:'nowrap', flexShrink:0 }}><span aria-hidden="true">· </span>{campaignName}</span>}
           </div>
+          {/* ⛔ THE FOLDED COLUMNS (browser pass 3, 2026-09-19). At phone width the Size and
+              Status cells below do not render — six columns of ledger measured 547 px inside a
+              375 px viewport, which put the page into horizontal scroll and pushed Health and
+              the Open button off the right edge (§934.26: every control reachable on the
+              phone, no horizontal page scroll). The two facts are NOT dropped, they move here,
+              which is the difference between collapsing a ledger and losing a column. */}
+          {mobile && (
+            <div style={{ marginTop:2, display:'flex', alignItems:'baseline', gap:SP.xs, flexWrap:'wrap', fontSize:FS.sm, color:BODY }}>
+              <span style={{ textTransform:'capitalize' }}>{s.tier}</span>
+              <span aria-hidden="true" style={{ color:MUTED }}>·</span>
+              {isCanon
+                ? <span style={{ ...rubric(mobile), color:GOLD_TXT }}>Canon</span>
+                : <span style={{ color:SECOND }}>Draft</span>}
+              {alreadyDestroyed && (
+                <>
+                  <span aria-hidden="true" style={{ color:MUTED }}>·</span>
+                  <span style={{ ...rubric(mobile), color:swatch.danger }}>Destroyed</span>
+                </>
+              )}
+            </div>
+          )}
           {/* Memo-line — the settlement's live situation, in the surveyor's italic. */}
           {memoLine && <div style={{ marginTop:2, fontStyle:'italic', fontSize:FS.sm, color:SECOND }}>{memoLine}</div>}
 
@@ -364,10 +385,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
           </div>
         </td>
 
-        {/* ── Tier */}
+        {/* ── Tier (desktop; folded into the name cell on a phone) */}
+        {!mobile && (
         <td style={LEDGER_CELL}>
           <span style={{ fontSize:FS.sm, color:BODY, textTransform:'capitalize', whiteSpace:'nowrap' }}>{s.tier}</span>
         </td>
+        )}
 
         {/* ── Phase — CANON as a small-caps rubric; drafts read quiet. A destroyed
             settlement stacks a danger rubric UNDER its phase word: destruction is a
@@ -381,6 +404,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             derivation that hides the destroy affordance, so the mark appears in the
             same repaint the affordance disappears in. A standing row renders exactly
             as before — the guard yields nothing. */}
+        {!mobile && (
         <td style={LEDGER_CELL}>
           {isCanon
             ? <span style={{ ...rubric(mobile), color:GOLD_TXT }}>Canon</span>
@@ -389,6 +413,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             <div style={{ ...rubric(mobile), color:swatch.danger, marginTop:2 }}>Destroyed</div>
           )}
         </td>
+        )}
 
         {/* ── Health — the worst health-band word (Stable / Strained / Vulnerable
             / Critical), each a click-to-learn glossary term via HealthPip. The
@@ -405,8 +430,11 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         {/* ── Action cluster — ONE primary (Open), rare actions behind a kebab
             overflow, destructive Delete demoted to a separated small ghost icon.
             Reactivation replaces Open for plan-inactive saves. */}
-        <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace:'nowrap' }}>
-          <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center' }}>
+        {/* `nowrap` is what made this cell un-shrinkable, so the ledger could only answer a
+            narrow viewport by scrolling the page. On a phone the cluster wraps instead: the
+            row gets taller, which is free, and every control stays on screen. */}
+        <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace: mobile ? 'normal' : 'nowrap' }}>
+          <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center', flexWrap: mobile ? 'wrap' : 'nowrap', justifyContent:'flex-end' }}>
           {!active && planInactive ? (
             <>
               <Button
