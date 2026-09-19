@@ -290,8 +290,13 @@ export function resourcesSlice(active) {
         chainRows.push({
           resource,
           status: which,
-          processing: item?.processing || item?.institution ||
-                      (item?.processingInstitutions || []).join(', ') || null,
+          // The PROCESSING names are institution keys and the chapter PRINTS them
+          // (ResourcesProduction's ChainRow), so they leave through the display seam here —
+          // the join happens in this line and the renderer can no longer tell one name from
+          // the next. Same rule as `servicesSlice` above: a print goes through the seam, and
+          // an unmapped name passes through as itself.
+          processing: institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
+                      (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
           output: item?.output || item?.product ||
                   (item?.finalProducts || item?.outputs || []).join(', ') || null,
           chainStatus: item?.chainStatus || null,

@@ -36,6 +36,8 @@ import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { statusCase } from '../../src/components/new/labelLadder.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { Services } from '../../src/pdf/sections/Services.jsx';
+import { resourcesSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
 import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
 const SEED = 'pdf-smoke-2026-05';
@@ -412,5 +414,76 @@ describe('institution label — screen↔print parity', () => {
       'House of worship', 'Houses of worship (2-5)',
       'Houses of worship (10-30)', 'Houses of worship (50-100+)',
     ]);
+  });
+
+  // ── THE CHAIN FLOW, WHICH THE FIRST INSTALL OF THE SEAM MISSED (browser pass 3) ────
+  /**
+   * The roster went through the seam; the SUPPLY-CHAIN rows did not, at two sites. Both
+   * print the very same `processingInstitutions` the screen's Economics tab already routes
+   * through `institutionDisplayName`, so the Canon Dossier read "BY local resource Parish
+   * church + Monastery" beside a screen that said "House of worship". The arms below walk
+   * the two shapes separately because the defects are at different layers: one is a PRINT
+   * in the chapter, the other is a JOIN in the slice that reaches the chapter as one string.
+   */
+  /** Text leaves of a @react-pdf element tree, calling each function component as it goes. */
+  function collectText(node, out = []) {
+    if (node == null || typeof node === 'boolean') return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
+    if (typeof node === 'object') {
+      if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+      return collectText(node.props?.children, out);
+    }
+    return out;
+  }
+
+  test("the Services chapter's chain flow prints the labelled institution, never the catalogue key", () => {
+    // A BARE services slice, so the only institution in the chapter's text is the one this
+    // arm put there — otherwise a stray 'parish' from the village's own roster would decide
+    // the result instead of the chain row.
+    const vm = {
+      ...villageVm,
+      services: {
+        available: {},
+        notableAbsences: [],
+        activeChains: [{
+          label: 'Cloth finishing',
+          resource: 'wool',
+          processingInstitutions: ['Parish church', 'Blacksmith'],
+          outputs: ['broadcloth'],
+          status: 'productive',
+        }],
+      },
+    };
+    const text = collectText(Services({ settlement: villageSettlement, narrativeMode: false, vm })).join(' ');
+    expect(text, 'the chapter rendered no chain flow at all').toContain('House of worship');
+    // anchored: the line above proves the flow rendered, so this absence is about the label.
+    expect(text).not.toMatch(/parish/i);
+    // The unmapped institution proves the seam is not rewriting every name it touches.
+    expect(text, 'the second processing institution must survive the seam').toContain('Blacksmith');
+  });
+
+  test('the resources slice joins DISPLAY names, because the chapter can no longer unjoin them', () => {
+    const fixture = {
+      ...villageSettlement,
+      resourceAnalysis: {
+        ...(villageSettlement.resourceAnalysis || {}),
+        exploitation: {
+          fullyExploited: [{
+            rawResource: 'wool',
+            processingInstitutions: ['Parish church', 'Blacksmith'],
+            finalProducts: ['broadcloth'],
+          }],
+          partiallyExploited: [],
+          unexploited: [],
+        },
+      },
+    };
+    const rows = resourcesSlice(fixture).chainRows;
+    expect(rows, 'the slice built no chain row to judge').toHaveLength(1);
+    expect(rows[0].processing).toBe('House of worship, Blacksmith');
+    // ⭐ AND THE MODEL UNDER IT IS UNMOVED — the seam reads, it never migrates.
+    expect(fixture.resourceAnalysis.exploitation.fullyExploited[0].processingInstitutions[0])
+      .toBe('Parish church');
   });
 });

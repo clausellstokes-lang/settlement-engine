@@ -221,9 +221,14 @@ function ChainCard({ chain }) {
           : chain.entrepot
             ? 'Entrepôt'
             : 'Active';
+  // ⛔ THE PROCESSING NAMES ARE CATALOGUE KEYS AND THIS IS A PRINT (§934.13, browser pass 3).
+  // `humanize` returns any string carrying whitespace unchanged, so this row printed the
+  // catalogue's own 'Parish church' into the paid document while the screen's Economics tab
+  // — which already routes the same field through the seam — said 'House of worship'. The
+  // seam goes BEFORE humanize so an unmapped institution still gets its casing.
   const flow = [
     chain.resource ? humanize(label(chain.resource)) : null,
-    (chain.processingInstitutions || []).map(humanize).join(' + ') || null,
+    (chain.processingInstitutions || []).map((n) => humanize(institutionDisplayName(n) || n)).join(' + ') || null,
     (chain.outputs || []).map(humanize).slice(0, 4).join(', ') || null,
   ].filter(Boolean).join(' \u00bb ');
 
