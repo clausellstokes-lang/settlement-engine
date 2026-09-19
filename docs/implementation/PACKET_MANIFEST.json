@@ -31073,6 +31073,153 @@
         ]
       ],
       "landedAt": "429ceed54d3eea87b0d05ed2b37ffbbb92f37911"
+    },
+    {
+      "id": "EM-P2",
+      "status": "READY",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-P2.md",
+      "verifiedBase": "d86aabae65d99cd07d90526f383cd25eca75b905",
+      "changeManifest": [
+        {
+          "_note": "THE SIBLING REGISTRY, AND WHY IT IS A SIBLING RATHER THAN A WIDENING — measured three ways. (a) BOTH stated laws are src/domain-scoped: habitForkRegistry.js:5 'Every weighted decision fork in `src/domain` is classified here' and chooserTotality.walker.test.js:5 'every weighted decision fork in `src/domain` is classified in the habit fork'. Widening SCAN_ROOTS falsifies two written laws at once. (b) THE THREE IDIOM SIGNATURES ARE THE SIMULATION'S AND MATCH NOTHING IN GENERATION: SOFTMAX_SAMPLE (softmaxWeights/stableSampleByWeight), KEYED_RACE (hash01), SCORE_EXTREMUM (a score-sorted [0]). Generation draws through rng.fork( (14 sites), pickRandom( (13) and createPRNG( (6). Pointed at src/generators the scan finds ZERO, so every generation row would land discovery:'checklist' — the half the registry's own header calls hand-maintained and blind — growing the blind half by dozens while the scanned half stays empty. (c) Its LEARN|STAY|DEFER|DEAD_CODE vocabulary asks whether a fork should ADAPT over time; a generation chooser draws once from a seed and never adapts, so its meaningful axis is the output KEY it writes. One row per root chooser of the three root-writing steps (assembleInstitutions → institutions; generatePower → powerIntent, powerStructure; drawPopulation → npcs; generatePopulation → factions) plus the 14 rng.fork( sub-choosers, whose fork NAME densityRoll.js:20 already treats as a key ('Every stage draws from its OWN keyed fork'). ⭐ THE ROW SHAPE (ODQ §934.47 addendum 2, from lane P1's declarations compile): EM-A1 joins on (cardShape, outputKey), so a row is {forkId, module, symbol, outputKey, cardShape, forkKey, discovery, reason} and `outputKey` is the RECORD PATH the chooser writes (npcs[].role, institutions[].category, powerStructure.seats[].holder) — not a ctx provides key. forkId/module/symbol/reason are spelled exactly as HABIT_FORK_REGISTRY spells them so the two registers read alike. ⛔ A FOURTH REASON FOR THE SIBLING, MEASURED: the existing row shape (actionVocabulary, arity, circumstanceClasses, closeOwed, closeSource, domain, forkId, reason, symbol) carries NO outputKey, and adding it as an optional would leave 43 simulation rows holding an empty optional forever while every generation row carries the only field EM-A1 joins on.",
+          "action": "CREATE",
+          "path": "src/domain/generation/generationForkRegistry.js"
+        },
+        {
+          "_note": "THE WALKER. Copies chooserTotality.walker.test.js's both-directions equality between the declared and the scanned set, and its self-proving arm (drive the auditor with synthetic broken registries before trusting the live one). A3 is the arm that keeps this packet honest: it asserts the EXISTING registry and walker are byte-identical to the base and still green — the sibling took nothing from them. A4 pins the root/derive line by asserting every row's outputKey is a `provides` key of a ROOT-WRITING step and never of a deriving one. ⭐ tests/lint IS an ENFORCER_DIR, so this file OWES the manifest row below (PACKET_STANDARD: 'A new tests/lint/ file carries one obligation'). ⛔ `symbol` RESOLVES AGAINST SOURCE, NEVER EXPORTS: `pickFirst` (src/generators/npcGenerator.js:240) is declared `const pickFirst = (...)`, is never exported, and is a real chooser (the NPC name draw) — an export-keyed resolver would miss it and every sibling like it. The walker resolves within the module's source, exactly as chooserTotality's own enclosingSymbol(code, index) does, and A2 drives pickFirst as a live arm. A4 additionally WALKS every row's outputKey against a generated settlement, because a record path is an assertion about the record and a typo would make a row that joins to nothing and silently cost EM-A1 a field.",
+          "action": "CREATE",
+          "path": "tests/lint/generationForkRegistry.walker.test.js"
+        },
+        {
+          "_note": "THE ENTROPY CENSUS'S FOUR FIGURES, RE-MEASURED BY EXECUTION. It pins READ_SITES at 23 entries (:350), 23 distinct ids (:351) and 22 measured read expressions (:375), and holds exactly ONE src/generators row — NC-1 at :185, 'a generator STEP-RNG fork seed — the MANDATORY control'. ⛔ Re-measure; never hand-compose a figure (the stale-numeral class these instruments exist to refuse). Already-credited file, so no new lighting-census file row from this row.",
+          "action": "TEST",
+          "path": "tests/lint/entropyRootCensus.walker.test.js"
+        },
+        {
+          "_note": "The mutation-coverage row the new tests/lint walker owes. Added SURGICALLY beside its siblings; ⛔ the manifest is never re-serialised whole.",
+          "action": "REGISTER",
+          "path": "scripts/mutation-coverage-manifest.json"
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "_note": "THE MODEL THE SIBLING COPIES AND THE ROW THAT PROVES IT CANNOT WIDEN: 43 rows over 32 distinct src/domain modules, ZERO naming src/generators, 296 effective lines. NOT EDITED — A3 asserts it byte-identical.",
+          "path": "src/domain/worldPulse/habitForkRegistry.js",
+          "symbol": "export const HABIT_FORK_REGISTRY"
+        },
+        {
+          "_note": "The existing walker's four src/domain scan roots. NOT EDITED; A3 asserts they still hold exactly those four, so a later lane cannot quietly widen them instead of maintaining the sibling.",
+          "path": "tests/lint/chooserTotality.walker.test.js",
+          "symbol": "const SCAN_ROOTS"
+        },
+        {
+          "_note": "ROOT-WRITING STEP 1 — its provides key `institutions` is the outputKey its choosers' rows carry.",
+          "path": "src/generators/steps/assembleInstitutions.js",
+          "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs']"
+        },
+        {
+          "_note": "ROOT-WRITING STEP 2 — outputKeys powerIntent and powerStructure.",
+          "path": "src/generators/steps/generatePower.js",
+          "symbol": "provides: ['powerIntent', 'powerStructure']"
+        },
+        {
+          "_note": "ROOT-WRITING STEP 3, as EM-P0 leaves it: drawPopulation provides npcs and generatePopulation provides relationships, factions, conflicts. ⚠ P2 depends on P0 for exactly this reason — a registry compiled first would bank a row for a step that does not exist, and its both-directions equality would red the moment P0 landed.",
+          "path": "src/generators/steps/generatePopulation.js",
+          "symbol": "registerStep('generatePopulation', {"
+        },
+        {
+          "_note": "The step-level fork, the outer scope of every row's key. NOT EDITED — this packet registers what draws and changes no draw.",
+          "path": "src/generators/pipeline.js",
+          "symbol": "const stepRng = rng.fork(name);"
+        },
+        {
+          "_note": "The census this packet re-measures: 23 read sites, 23 distinct ids, 22 measured read expressions, one src/generators control row.",
+          "path": "tests/lint/entropyRootCensus.walker.test.js",
+          "symbol": "const READ_SITES"
+        },
+        {
+          "_note": "The eight enforcer dirs — tests/lint is one, which is why the new walker owes its mutation-coverage row.",
+          "path": "tests/lint/mutationCoverage.shared.mjs",
+          "symbol": "export const ENFORCER_DIRS"
+        },
+        {
+          "_note": "⛔ THE MODULE-LOCAL CHOOSER THAT PROVES THE RESOLUTION RULE. Declared `const pickFirst = (...)` at :240 and NEVER exported, yet it is a real chooser — the NPC name draw, called at :106. Any resolver keyed on exports loses it and every sibling like it, which is why `symbol` resolves against SOURCE.",
+          "path": "src/generators/npcGenerator.js",
+          "symbol": "const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town') => {"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "BOTH DIRECTIONS: the declared row set EQUALS the live scan of src/generators under the three generation idioms (rng.fork(, pickRandom(, createPRNG() — an unregistered chooser reds, and a row naming a chooser the scan cannot find reds as STALE."
+        },
+        {
+          "id": "A2",
+          "case": "GUARD-THE-GUARD AND THE SOURCE RESOLUTION: five synthetic broken registries (missing reason, unresolvable module, duplicate module#symbol, unknown cardShape, malformed outputKey) each throw from assertGenerationForkRegistry naming the offending row; plus a live arm that the MODULE-LOCAL chooser pickFirst (npcGenerator.js:240, never exported) resolves — an export-keyed resolver reds here."
+        },
+        {
+          "id": "A3",
+          "case": "⛔ THE EXISTING INSTRUMENTS ARE UNTOUCHED: HABIT_FORK_REGISTRY and chooserTotality.walker.test.js are byte-identical to the base, SCAN_ROOTS still holds exactly its four src/domain roots, and the chooser-totality walker is GREEN — the sibling took nothing from it and neither stated law became false."
+        },
+        {
+          "id": "A4",
+          "case": "⛔ EVERY outputKey RESOLVES ON A REAL RECORD: each row's record path (npcs[].role, institutions[].category, powerStructure.seats[].holder, …) is walked against a generated settlement and resolves, and every one sits under a ROOT-WRITING step's output — none names a deriving step's product. A typo'd path reds here instead of silently costing EM-A1 a field."
+        },
+        {
+          "id": "A5",
+          "case": "IDEMPOTENCY: the walker run twice on an unchanged tree yields identical verdicts and identical row sets — the registry is data and the scan is pure."
+        },
+        {
+          "id": "A6",
+          "case": "⛔ THE CENSUS FIGURES ARE RE-MEASURED, NOT RE-TYPED: entropyRootCensus's four figures equal the executed measurement at this base, its NC-1 control row still resolves, and the walker is GREEN."
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lint/generationForkRegistry.walker.test.js",
+          "tests/lint/chooserTotality.walker.test.js",
+          "tests/lint/entropyRootCensus.walker.test.js",
+          "tests/lint/mutationCoverageManifest.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/generation/generationForkRegistry.js"
+        ],
+        [
+          "node",
+          "scripts/check-observed-shape-readers.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:ratchet"
+        ],
+        [
+          "npm",
+          "run",
+          "typecheck:domain:strict"
+        ],
+        [
+          "node",
+          "scripts/implementation-packets.mjs",
+          "validate"
+        ]
+      ]
     }
   ]
 }
