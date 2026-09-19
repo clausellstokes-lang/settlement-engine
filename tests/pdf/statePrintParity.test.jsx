@@ -46,6 +46,7 @@ import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
+import { relationshipsDeskLists } from '../../src/components/new/relationshipsDeskRead.js';
 import {
   defenseCriminalProse, defenseForcesProse, defenseMagicDependencyProse,
   defenseMilitaryStatusProse, defensePostureProse, defenseStateProse,
@@ -175,8 +176,12 @@ function screenProse(s, faithUnlocked = false) {
     populationTrend: populationTrendBand(s.populationHistory),
     hookCategories: collectPlotHooks(s).map((h) => h && h.category),
     clockIds: deriveEscalationClocks(s).map((c) => c && c.id),
-    neighbours: Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [],
-    crossEngagements: [],
+    // ⭐ THE REAL ASSEMBLER, NOT A STUB (ODQ §934.9). This used to hand the desk
+    // `s.neighbourNetwork` and an EMPTY engagement list, which is the shape the tab never
+    // uses — so even once the print side lit, the comparison would have been print-versus-
+    // a-third-thing. `RelationshipsTab.jsx` and `printProse.js` both call this exact
+    // function, so the screen side here is the screen's own derivation.
+    ...relationshipsDeskLists(s),
   });
   const eco = economyDeskRead(s, {
     ...PAID,
@@ -273,6 +278,15 @@ function screenProse(s, faithUnlocked = false) {
   set('history.founded', screenWeave(s, [general.history.foundedLine, general.history.recordLine]));
   set('plot_hooks.framing', screenWeave(s, general.hooks.framingLines.slice(0, 3)));
 
+  // DS-REL-1. The screen renders each inner pair beside its own neighbour card and each
+  // engagement line beside its own conflict row; print has no cards, so the position is one
+  // paragraph in the desk's own order — flattened here exactly as `RelationshipsTab.jsx`
+  // reads it and exactly as the builder writes it.
+  set('relationships.network', screenWeave(s, [
+    ...general.relationships.networkLines.flat(),
+    ...general.relationships.engagementLines,
+  ]));
+
   // THE FAITH POSITIONS, through the same reading FaithTab hands the desk. `faith.teaser` is
   // the patron-less town's own voice and names no god, so it is NOT behind the premium seam;
   // the two that can name a patron or a creed are.
@@ -309,6 +323,54 @@ let full;
 let sparse;
 let captured;
 let patron;
+let linked;
+
+/**
+ * ⭐⭐ THE SAVED WORLD — the ONLY shape `relationships.network` can draw on, and the reason
+ * this fixture is hand-built rather than generated (ODQ §934.9).
+ *
+ * `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts` are all
+ * written at SAVE time — by `src/lib/saves.js`, the neighbour back-link, the link / undo /
+ * import paths — and NEVER by the generation pipeline. Every other fixture in this file is a
+ * generated town, so all three lists are empty on them and DS-REL-1 is silent: an arm using
+ * `full` would pass whether the position printed or not, which is exactly the vacuity the
+ * position's old blanket exclusion hid. This record carries all three POPULATED, so the arm
+ * below can only pass on prose that actually drew.
+ *
+ * The rows are the shape `tests/ui/generalDeskTabFlow.test.js` already drives the screen
+ * side of DS-REL-1 with, plus a `crossSettlementConflicts` row that fixture does not carry —
+ * the inbound-legacy list, which nothing in the estate writes any more and every reader
+ * still merges.
+ */
+const LINK_ROWS = Object.freeze({
+  neighbourNetwork: Object.freeze([Object.freeze({
+    id: 'n1', name: 'Thornmere', neighbourName: 'Thornmere', neighbourTier: 'town',
+    relationshipType: 'patron', localRelationshipRole: 'client',
+    description: 'A standing arrangement.',
+    npcConnections: Object.freeze([Object.freeze({ primaryNPCName: 'Mugain', neighbourNPCName: 'Felix' })]),
+  })]),
+  interSettlementRelationships: Object.freeze([Object.freeze({
+    type: 'faction_engagement', factionName: 'The Guild', partnerFactionName: 'The Wardens',
+    partnerSettlement: 'Thornmere', relType: 'rival', description: 'Two houses, one quarrel.',
+  })]),
+  // TWO ROWS, and the pair is the point. DS-REL-1's engagement lens speaks for
+  // `faction_engagement` ONLY (`generalStateProse.js:1531` returns no pool for anything
+  // else), so the first row draws and the second is a realistic legacy row that draws
+  // nothing — which is what lets the arm below tell "the list is merged" from "the list is
+  // merged and everything in it is shouted".
+  crossSettlementConflicts: Object.freeze([
+    Object.freeze({
+      type: 'faction_engagement', factionName: 'The Ledger', partnerFactionName: 'The Hollow',
+      partnerSettlement: 'Thornmere', relType: 'rival',
+      description: 'An older quarrel nobody has closed.',
+    }),
+    Object.freeze({
+      type: 'conflict', factionName: 'The Ledger', partnerSettlement: 'Ashfen', relType: 'rival',
+      conflictNature: 'market boundary dispute',
+      description: 'A border nobody ever surveyed.',
+    }),
+  ]),
+});
 
 beforeAll(() => {
   // The same fixture the full-document render lane uses, so a divergence here and a crash
@@ -338,6 +400,9 @@ beforeAll(() => {
   // A town built to LIGHT the deferred cells — a captured seat (DS-DEF-4 `capture capture`,
   // DS-POW-6 "capture reached a LEADER") over a recognised criminal structure, so the
   // exclusion arm is proved against prose that would otherwise print.
+  // The same town after it has been SAVED and LINKED to a neighbour — see LINK_ROWS.
+  linked = normalizeSettlement({ ...full, name: 'Steinmark', ...LINK_ROWS });
+
   captured = normalizeSettlement({
     ...full,
     name: 'Captured Vale',
@@ -355,15 +420,17 @@ describe('the print desk reads the screen\'s own desks', () => {
     const printed = flat(buildPrintProse(full, {}));
     const screen = screenProse(full);
     const drift = Object.entries(printed)
-      // TWO EXCLUSIONS, each with a reason rather than a shrug. `relationships.network` is
-      // built from lists no caller can lawfully supply yet (see printProse.js's seam note),
-      // and `overview.notableConnection` reaches the builder as STRINGS through the general
-      // desk reader, so no provenance survives for `deferredCell` to read. Both have their
-      // own arms below. ⭐ THE FAITH POSITIONS ARE NO LONGER EXCLUDED: review 4 found them
-      // built on every export and reachable on none, and an arm that skipped them is exactly
-      // how that went unnoticed.
-      .filter(([mount]) => mount !== 'relationships.network'
-        && mount !== 'overview.notableConnection')
+      // ONE EXCLUSION, with a reason rather than a shrug: `overview.notableConnection`
+      // reaches the builder as STRINGS through the general desk reader, so no provenance
+      // survives for `deferredCell` to read. It has its own arm below. ⭐ THE FAITH
+      // POSITIONS ARE NOT EXCLUDED: review 4 found them built on every export and reachable
+      // on none, and an arm that skipped them is exactly how that went unnoticed.
+      // ⭐⭐ AND `relationships.network` IS NO LONGER EXCLUDED EITHER (ODQ §934.9). It was,
+      // because it was "built from lists no caller can lawfully supply yet" — the builder
+      // now calls the same assembler the tab does, so the position is compared like every
+      // other one. This fixture is a GENERATED town, so it proves the position does not
+      // DRIFT; the saved-world arm below is what proves it PRINTS.
+      .filter(([mount]) => mount !== 'overview.notableConnection')
       .filter(([mount, p]) => screen[mount] !== p)
       .map(([mount, p]) => `${mount}\n  PRINT : ${p}\n  SCREEN: ${screen[mount] ?? '(nothing)'}`);
     expect(drift, `the PDF and the dossier disagree about ${drift.length} position(s)`).toEqual([]);
@@ -375,8 +442,7 @@ describe('the print desk reads the screen\'s own desks', () => {
     const printed = flat(buildPrintProse(sparse, {}));
     const screen = screenProse(sparse);
     const drift = Object.entries(printed)
-      .filter(([mount]) => mount !== 'relationships.network'
-        && mount !== 'overview.notableConnection')
+      .filter(([mount]) => mount !== 'overview.notableConnection')
       .filter(([mount, p]) => screen[mount] !== p)
       .map(([mount, p]) => `${mount}\n  PRINT : ${p}\n  SCREEN: ${screen[mount] ?? '(nothing)'}`);
     expect(drift).toEqual([]);
@@ -384,6 +450,59 @@ describe('the print desk reads the screen\'s own desks', () => {
     // matter, because an all-silent fixture would make the arm above vacuous here.
     expect(Object.keys(printed).length).toBeGreaterThan(0);
     expect(Object.keys(printed).length).toBeLessThan(20);
+  });
+
+  test('PARITY: `relationships.network` PRINTS on a saved, linked world and equals the screen', () => {
+    // ⛔ NON-VACUITY FIRST, AND IT IS THE WHOLE ARM. A GENERATED world carries none of the
+    // three save-time lists, so this position is silent on every other fixture in this file
+    // and an arm built on one of them would pass whether the mount printed or not — which is
+    // precisely what the position's old blanket exclusion was hiding. Prove the fixture still
+    // carries all three AFTER normalization before asking what it printed.
+    expect(linked.neighbourNetwork, 'the saved fixture lost its neighbour network')
+      .toHaveLength(1);
+    expect(linked.interSettlementRelationships, 'the saved fixture lost its faction engagement')
+      .toHaveLength(1);
+    expect(linked.crossSettlementConflicts, 'the saved fixture lost its legacy rows')
+      .toHaveLength(2);
+
+    const paragraph = flat(buildPrintProse(linked, {}))['relationships.network'];
+    expect(paragraph, 'the paid PDF printed NOTHING at relationships.network on a linked world')
+      .toBeTruthy();
+    expect(paragraph.length, 'the position printed an empty paragraph').toBeGreaterThan(40);
+
+    // THE PARITY ITSELF: character for character what the dossier weaves for this position,
+    // from the screen's own desk reader and the same assembler the tab calls.
+    expect(paragraph).toBe(screenProse(linked)['relationships.network']);
+
+    // THE CONTROL THAT MAKES THE ASSERTION ABOUT THE LISTS RATHER THAN THE BUILDER: the same
+    // builder, the same town, no link rows — and the position is absent rather than empty
+    // (R-DST-K). A regression that lit the mount unconditionally would red here.
+    expect(flat(buildPrintProse(full, {}))['relationships.network'],
+      'a generated town with no links still printed a neighbour standing').toBeUndefined();
+  });
+
+  test('all three save-time lists reach the printed paragraph, each proved by its own removal', () => {
+    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+    const whole = at(linked);
+    expect(whole, 'the whole-fixture paragraph is the control and it did not draw').toBeTruthy();
+
+    // ⭐ ONE REMOVAL AT A TIME, because a fixture that only proved the UNION would pass with
+    // two of the three lists dead. `crossSettlementConflicts` is the one that matters most
+    // here: nothing in the estate writes it any more, every reader still merges it, and a
+    // cure that quietly dropped it would be invisible to a union arm.
+    for (const key of ['neighbourNetwork', 'interSettlementRelationships', 'crossSettlementConflicts']) {
+      const without = at(normalizeSettlement({ ...linked, [key]: [] }));
+      expect(without, `dropping ${key} did not move the printed paragraph, so it contributes nothing`)
+        .not.toBe(whole);
+    }
+
+    // ⛔ AND THE MERGE DOES NOT PROMOTE WHAT THE CORPUS DOES NOT SPEAK FOR. The legacy list's
+    // second row is `type: 'conflict'`, whose partner is a settlement named NOWHERE else in
+    // the fixture — DS-REL-1 has no pool for it, so its counterpart must not reach the page,
+    // while the faction engagement beside it must. Anchored on the counterpart both typed
+    // engagements share, so an empty paragraph cannot satisfy the absence.
+    expectAbsentWithAnchor(whole, 'Ashfen', 'Thornmere',
+      'DS-REL-1 speaks for faction engagements: a conflict-typed row draws no sentence');
   });
 
   test('REACHABILITY: the faith prose renders from a chapter a reader actually gets', () => {

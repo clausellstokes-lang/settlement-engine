@@ -88,6 +88,7 @@ import { deriveEscalationClocks } from '../../hookEscalation.js';
 // The two desk readers the screen uses, imported rather than re-derived. See the docblock.
 import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
+import { relationshipsDeskLists } from '../../../components/new/relationshipsDeskRead.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
 
 /**
@@ -287,8 +288,12 @@ function weave(lines, r) {
  * THE PRINT DESK.
  *
  * @param {object|null|undefined} settlement the NORMALIZED settlement the export is about
- * @param {{worldState?: object|null, neighbours?: ReadonlyArray<object>|null,
- *   crossEngagements?: ReadonlyArray<object>|null, faithUnlocked?: boolean}} [ctx]
+ * @param {{worldState?: object|null, faithUnlocked?: boolean}} [ctx]
+ *   ⚠ `neighbours` and `crossEngagements` USED TO LIVE HERE and are gone on purpose: nothing
+ *   ever supplied them, so `relationships.network` printed nothing on a saved world for the
+ *   whole life of the seam. They are derived from the settlement by
+ *   `components/new/relationshipsDeskRead.js`, which is the one assembler the screen reads
+ *   too — see the note at the general desk's call below.
  *   `faithUnlocked` is the premium faith seam, mirroring the screen's FaithSection and the
  *   PDF's own Faith & War gate: FALSE (the default) withholds the two positions that can name
  *   a patron or a creed, so a free, lapsed or anonymous export carries no deity name through
@@ -331,26 +336,25 @@ export function buildPrintProse(settlement, ctx = {}) {
     populationTrend: populationTrendBand(/** @type {{populationHistory?: unknown}} */ (r).populationHistory),
     hookCategories: collectPlotHooks(r).map((h) => h && h.category),
     clockIds: deriveEscalationClocks(r).map((c) => c && c.id),
-    // ⛔ DS-REL-1'S TWO LISTS ARRIVE OR THEY DO NOT — THIS FILE MAY NOT REACH FOR THEM, and
-    // the reason is a MEASURED ratchet red rather than taste. `RelationshipsTab.jsx:73-105`
-    // merges `neighbourNetwork`, `interSettlementRelationships` and `crossSettlementConflicts`
-    // into the lists it renders; all three are written at SAVE time, so no generated world
-    // carries one, and `check-observed-shape-readers.mjs` convicts a reader of all three —
-    // measured, three NEW identities against this file on the first run. The scan is right
-    // that no generated town carries them and the estate's accepted cure is the one
-    // `generalDeskRead.js:223-232` already spells for `lifecycleStatus`: read the field where
-    // the read is already accepted and hand it over. `src/components/` is the excluded scope
-    // (CR-OSR-SCOPE-1) and RelationshipsTab is that site.
-    // ⚠ SO THE SEAM IS OPEN AND NOTHING FEEDS IT YET: `relationships.network` prints nothing
-    // today. That is not a loss on any generated settlement — the lists are empty there, so
-    // the desk was silent anyway — but it IS a loss on a saved one, and it is recorded rather
-    // than carried quietly. THE ONE ACT THAT LIGHTS IT: a `relationshipsDeskRead.js` sibling
-    // under `src/components/new/` holding that merge, called by both RelationshipsTab and
-    // this builder's caller — the shape `generalDeskRead.js` and `economyDeskRead.js` already
-    // have, and the same act the four mirrored desks above are waiting on. Deliberately
-    // deferred — documented, not a bug to re-find.
-    neighbours: ctx.neighbours || [],
-    crossEngagements: ctx.crossEngagements || [],
+    // ⭐ DS-REL-1'S TWO LISTS, THROUGH THE SIBLING THIS FILE MAY NOT INLINE (ODQ §934.9).
+    // THIS FILE STILL MAY NOT REACH FOR THEM, and the reason is a MEASURED ratchet red
+    // rather than taste: `neighbourNetwork`, `interSettlementRelationships` and
+    // `crossSettlementConflicts` are all written at SAVE time, so no world the observed-shape
+    // corpus generates carries one and `check-observed-shape-readers.mjs` convicts a reader
+    // of all three — measured, three NEW identities against THIS file on the first run. So
+    // the reads live in `components/new/relationshipsDeskRead.js`, beside the frozen rows the
+    // register already carries across that tree, and this file takes the assembled lists —
+    // the `lifecycleStatus` cure `generalDeskRead.js:223-232` spells, applied here.
+    // ⚠ THE COMMENT THIS REPLACES CLAIMED `src/components/` IS AN EXCLUDED SCOPE. It is not,
+    // and the gate says so in its own success notice: CR-OSR-SCOPE-1 removes that tree from
+    // EXACT resolution only, and the CR-OSR-FREEZE-7 UI cohort is ENFORCED. What makes the
+    // sibling lawful is that its reads are ALREADY BANKED THERE, not that the tree is unseen.
+    // ⛔ AND THE LISTS ARE NOT A `ctx` KEY. They were, and nothing ever supplied them, which
+    // is exactly why the position printed nothing on a saved world for as long as the seam
+    // existed. A caller-supplied override would also be a second way to produce lists this
+    // module derives — the fork the two sibling desk readers exist to refuse — so the
+    // builder calls the one assembler, the same way it calls the other two desks.
+    ...relationshipsDeskLists(r),
     // `steadings` / `lifecycleStatus` / `ancientRuin` are the campaign store's and
     // `overview.steadings` is print-deferred by the ruling above, so none is supplied.
   });

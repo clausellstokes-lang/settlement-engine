@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { relColor } from '../../settlements/relationshipColors.js';
-import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
 import { serif, Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -12,35 +11,12 @@ import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
+import { relationshipsDeskLists } from '../relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
 
 export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
-  // Conflicts: from saved links + live-generated for unsaved settlements.
-  // NOTE: this hook must come BEFORE any early return so React's hooks-
-  // order invariant holds across renders. Previously `useMemo` followed
-  // `if (!r) return null;` (caught by rules-of-hooks). r-guard moved to
-  // a no-op input check inside the memo + a deferred final null check.
-  // Granular deps (r?.name, r?.npcs, etc.) deliberately replace the
-  // whole-`r` dep — `r` is a settlement object that re-allocates on
-  // many unrelated state changes and would over-invalidate the memo.
-  const liveConflicts = useMemo(() => {
-    const nr = r?.neighborRelationship;
-    if (!r || !nr?.name) return [];
-    try {
-      const relType = nr.relationshipType || 'neutral';
-      // Carry the settlement's stable identity (_seed / id) so the derived rng
-      // is seeded off identity, not the transient {name} shape — same seed ⇒
-      // same live conflicts on every mount/remount/export.
-      const settA = { _seed: r._seed, id: r.id, name: r.name||'', npcs: r.npcs||[], factions: r.factions||[] };
-      const settB = { id: nr.id, name: nr.name, npcs: nr.npcs||[], factions: nr.factions||[] };
-      const { forA } = generateCrossSettlementConflictsDeterministic(settA, settB, relType, 'live');
-      return forA;
-    } catch(e) { return []; }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [r?._seed, r?.id, r?.name, r?.neighborRelationship?.name, r?.npcs, r?.factions, r?.neighborRelationship]);
-
   // ── IN-1b: THE STANDING LINE ───────────────────────────────────────────────
   // What our OWN durable record says each counterpart has been shown of us. The
   // one gate stands a layer down at the collector, so nothing here reads it:
@@ -65,47 +41,29 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     return campaign ? neighbourMirrorLines({ worldState: campaign.worldState, settlementId: sid, counterpartIds: (campaign.settlementIds || []).map(String).filter(i => i !== sid), tick: campaign.worldState?.tick, nameFor: id => byId.get(String(id)) || String(id), includeGroundTruth }) : [];
   }, [sid, campaigns, savedSettlements, includeGroundTruth, publicDossier]);
 
-  // ⭐ THE TWO LISTS THE DS-REL-1 DESK READS, LIFTED ABOVE THE `!r` EARLY RETURN AND
-  // MEMOISED (SEAM car 3g). They were plain consts below the guard, which put them out of
-  // reach of any hook: the desk read has to be a `useMemo` (ARCH §4.1, X-F9 — from car 3 it
-  // composes eleven blocks through `composeStateProse` rather than through one kernel read,
-  // and that browser-side cost is unmeasured), and a hook may not sit after an early return.
-  // Both are PURE FUNCTIONS of `r` and `liveConflicts`, which is what makes the lift safe and
-  // the memo correct rather than merely cheap; memoising them also makes them stable
-  // dependencies instead of fresh arrays on every render. Nothing about their CONTENT moves.
-  // Only typed entries (conflict / faction_engagement) — not raw NPC contacts (which have no type)
-  const crossConflicts = useMemo(() => {
-    const raw = [
-      ...(r?.interSettlementRelationships||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-      ...(r?.crossSettlementConflicts||[]).filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-      ...liveConflicts.filter(x=>x.type==='conflict'||x.type==='faction_engagement'),
-    ];
-    const seen = new Set();
-    return raw.filter(x => {
-      const key = x.description?.slice(0,40)||x.conflictNature||'';
-      if(seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-  }, [r, liveConflicts]);
-  // Use unified neighbourNetwork array (generator's neighborRelationship is migrated to this at save time)
-  // Also include live generator output neighborRelationship for unsaved settlements
-  const neighbours = useMemo(() => {
-    const liveNR = r?.neighborRelationship;
-    const net    = r?.neighbourNetwork || [];
-    const liveEntry = liveNR?.name && !net.some(n => n.name === liveNR.name)
-      ? [{
-          id:               `live_${liveNR.name}`,
-          name:             liveNR.name,
-          neighbourName:    liveNR.name,
-          neighbourTier:    liveNR.tier || '',
-          relationshipType: liveNR.relationshipType || 'neutral',
-          description:      `Generated with ${liveNR.name} as neighbour (${(liveNR.relationshipType||'neutral').replace(/_/g,' ')}).`,
-          fromGeneration:   true,
-        }]
-      : [];
-    return [...net, ...liveEntry];
-  }, [r]);
+  // ⭐ THE TWO LISTS THE DS-REL-1 DESK READS, NOW THROUGH THEIR ONE ASSEMBLER (ODQ §934.9).
+  // They were three memos here — the live-conflict derivation, the typed-engagement merge
+  // and the neighbour merge — and being here is precisely why the PAID PDF printed nothing
+  // at `relationships.network` on a saved world: a headless builder cannot reach into a tab.
+  // The assembly moved WHOLE to `components/new/relationshipsDeskRead.js`, unchanged line
+  // for line, and `printProse.js` calls the same function. The prose on the page and the
+  // cards below it therefore cannot describe two different sets — which is the property
+  // these consts were written for in the first place.
+  //
+  // STILL ABOVE THE `!r` EARLY RETURN, for the reason the SEAM car 3g note recorded: the
+  // desk read has to be a `useMemo` (ARCH §4.1, X-F9) and a hook may not sit after an early
+  // return. The assembler takes `!r` itself and answers the frozen silent lists.
+  //
+  // ⚠ ONE DEPENDENCY WHERE THERE WERE TWO SHAPES, and it is a stated one-time change: the
+  // retired live-conflict memo carried GRANULAR deps (`r?._seed`, `r?.npcs`, …) to survive
+  // `r` re-allocating on unrelated state, while both merges already depended on the whole
+  // `r`. Collapsing to `[r]` therefore costs nothing on the merges and re-runs the live
+  // derivation on an `r` re-allocation. That derivation is PURE and seeded off the pair's
+  // stable identity, so the VALUE cannot move — only the recompute, and it early-returns
+  // for free on every settlement with no live `neighborRelationship`.
+  const relLists = useMemo(() => relationshipsDeskLists(r), [r]);
+  const crossConflicts = relLists.crossEngagements;
+  const neighbours = relLists.neighbours;
   // DS-REL-1 (`relationships.network`) — the town's own account of each standing it keeps
   // and of the engagements running between named houses. The lists are the ones this tab
   // ALREADY assembled above, so the prose and the cards cannot describe two different sets.
