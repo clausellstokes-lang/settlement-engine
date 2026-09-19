@@ -199,7 +199,7 @@ export function runPipeline(initialContext, rng, options = {}) {
         if (onStrictViolation) onStrictViolation({ step: name, kind: 'pin', keys: missing });
         else throw new Error(
           `Pipeline pins: step "${name}" has choosers [${choosers.join(', ')}] but pins supply `
-          + `only [${supplied.join(', ')}] — pin every chooser of a step or none of them.`,
+          + `only [${supplied.join(', ')}]. Pin every chooser of a step or none of them.`,
         );
       }
     }

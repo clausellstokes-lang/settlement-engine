@@ -37,6 +37,7 @@ import { resolveConfigWithUserContentTunables } from '../../src/domain/content/u
 import { withCustomContent } from '../../src/lib/dependencyEngine.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const GOLDEN_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
@@ -228,7 +229,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
     expect(() => runHeadless(createPRNG(SEED), { pins: partial })).toThrow(
       `Pipeline pins: step "${POPULATION_STEP}" has choosers [${CHOOSER_KEYS.join(', ')}] `
-      + 'but pins supply only [relationships] — pin every chooser of a step or none of them.',
+      + 'but pins supply only [relationships]. Pin every chooser of a step or none of them.',
     );
 
     const violations = [];
@@ -246,8 +247,11 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
   it('A5 — one stream, one step: no second registration and no second stream object', () => {
     const order = getStepOrder();
     expect(order.filter((name) => name === POPULATION_STEP)).toEqual([POPULATION_STEP]);
-    expect(order).not.toContain('drawPopulation');
-    expect(order).not.toContain('derivePopulation');
+    // THE ANCHOR IS THE ONE REGISTRATION: `generatePopulation` sits in the same live registry
+    // order the two retired half-step names would sit in, so it travels the same code path and
+    // the exclusion cannot go vacuous — an order that drifted away reds on the anchor instead.
+    expectAbsentWithAnchor(order, 'drawPopulation', POPULATION_STEP, 'A5: no split registration');
+    expectAbsentWithAnchor(order, 'derivePopulation', POPULATION_STEP, 'A5: no split registration');
 
     const instrumented = instrumentedRoot(SEED);
     runHeadless(instrumented.root);
