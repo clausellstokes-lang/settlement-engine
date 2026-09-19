@@ -123,7 +123,19 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // the §934.22 sacred-house derivation (every layout line derives the house the settlement
 // holds instead of saying 'church'). A buy-back inside that file is the named alternative;
 // the rise is offered for the owner's ratification like the mint it follows.
-export const WORKER_BUNDLE_CEILING_BYTES = 1399946;
+// 1,399,946 → 1,401,128 (2026-09-19, the chair, ODQ §934.19 addendum 2): +1,182 B minified,
+// ATTRIBUTED PER MODULE by a control build at train EM-T1's green terminal (ed9d99295)
+// against the EM-T2 cure tip (023eda2ec) — exactly TWO modules moved, and they are EM-P0's
+// two: src/generators/pipeline.js, 9,843 → 12,548 rendered bytes, and
+// src/generators/steps/generatePopulation.js, 6,864 → 9,702 rendered bytes. Nothing else in
+// the whole build moved a rendered byte. The bytes are EM-P0's pipeline seam (ODQ §934.47,
+// the owner's editor program): the runner hands `pins` to every step and refuses a partial
+// pin, and generatePopulation consults a pin at each of its four choosers (npcs,
+// relationships, factions, conflicts) on its ONE stream. That is generation code in the
+// generation worker, where it belongs; nothing eager re-merged. A buy-back inside those two
+// files is the named alternative; the rise is offered for the owner's ratification like the
+// mints it follows. The ceiling stays MONOTONE-DOWN from this value.
+export const WORKER_BUNDLE_CEILING_BYTES = 1401128;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

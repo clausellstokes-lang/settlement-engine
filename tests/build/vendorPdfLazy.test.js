@@ -772,8 +772,19 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // article-by-sound rule, the label ladder) — generation text, where it belongs. Nothing
     // eager re-merged: the first-paint closure arm above is green on the same build. The
     // ~700 B cross-environment margin the two prior raises carried is kept.
+    // CEILING RAISE 677_000 -> 679_000 (CHAIR RULING 2026-09-19, ODQ §934.19 addendum 2,
+    // OFFERED FOR RATIFICATION as the three above were): measured 678,131 at the EM-T2 cure
+    // tip (023eda2ec); the control build at train EM-T1's green terminal (ed9d99295) read
+    // 676,949, so the +1,182 B are EM-P0's pipeline seam (ODQ §934.47) — exactly TWO modules
+    // moved, and they are EM-P0's two: src/generators/pipeline.js, 9,843 -> 12,548 rendered
+    // bytes, and src/generators/steps/generatePopulation.js, 6,864 -> 9,702 rendered bytes
+    // (the runner hands `pins` to every step and refuses a partial pin; generatePopulation
+    // consults a pin at each of its four choosers on its one stream). That is generation
+    // code, where it belongs. Nothing eager re-merged: the first-paint closure arm above is
+    // green on the same build. The ~700 B cross-environment margin the three prior raises
+    // carried is kept — 678,131 + 700 = 678,831, under this ceiling.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(677_000);
+    expect(size).toBeLessThan(679_000);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
