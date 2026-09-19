@@ -254,7 +254,12 @@ export function generalDeskLines(settlement, options = {}) {
       // caller to supply a band without the window the gate depends on.
       populationTrend: options.populationTrend,
     },
-    { seed: String(r?._seed ?? r?.id ?? ''), audience: options.playerView ? 'player' : 'dm' },
+    {
+      seed: String(r?._seed ?? r?.id ?? ''),
+      audience: options.playerView ? 'player' : 'dm',
+      // FORWARDED, NEVER DERIVED — the sibling economy reader's note carries the reason.
+      tierNoun: options.tierNoun ?? null,
+    },
   );
 
   // ⚠ THE HISTORY GROUP IS DESTRUCTURED RATHER THAN CHAINED, and the reason is a measured

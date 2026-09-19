@@ -503,6 +503,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { economyDeskRead } from '../../src/components/new/economyDeskRead.js';
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
+import { speakTierNoun } from '../../src/domain/display/stateProse/tierVoice.js';
 import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
 import { SILENT_ECONOMY_DESK } from '../../src/components/new/economyDeskRead.js';
 
@@ -586,12 +587,16 @@ const GROUND_LINES = Object.freeze(drawnMembers({
  * @param {{name?: unknown, tier?: unknown}} settlement
  */
 function onPage(sentence, lines, settlement) {
-  const kept = (lines || []).filter(Boolean);
-  const index = kept.indexOf(sentence);
+  const noun = tierNounFor(settlement.tier);
+  // ⭐ AND BOTH SIDES ARE SPOKEN BEFORE THE LOOKUP (§934.22 addendum). `drawnMembers` reads
+  // the CORPUS, which writes "the town" about a settlement of any size; the desk returns that
+  // line in the settlement's OWN noun when its caller's bag asks for it, and in the corpus's
+  // when it does not. Speaking both here is idempotent, so the anchor is found — and rendered
+  // — in the form the page prints it whichever bag the desk was called with.
+  const kept = (lines || []).filter(Boolean).map((line) => speakTierNoun(line, noun));
+  const index = kept.indexOf(speakTierNoun(sentence, noun));
   if (index < 0) return sentence;
-  return weaveBlock(kept, {
-    settlementName: settlement.name, tierNoun: tierNounFor(settlement.tier),
-  }).sentences[index];
+  return weaveBlock(kept, { settlementName: settlement.name, tierNoun: noun }).sentences[index];
 }
 
 /**

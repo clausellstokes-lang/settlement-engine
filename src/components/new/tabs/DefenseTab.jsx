@@ -11,6 +11,7 @@ import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands
 import { statusCase } from '../labelLadder.js';
 import { defenseCriminalProse, defenseForcesProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -160,15 +161,22 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   const ra = r.resourceAnalysis || {};
+  // ⭐ THE DESK'S OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum). This tab reads eight
+  // defense blocks and every one of them was spelling the same three-line literal, so a
+  // field added to the bag had eight places to be forgotten — which is how the screen and
+  // the desk came to disagree about what to call a metropolis. `tierNoun` is the settlement's
+  // own noun: the desk speaks it, and the tab renders the sentence the desk returned.
+  const deskOpts = {
+    seed: String(r?._seed ?? r?.id ?? ''),
+    audience: playerView ? 'player' : 'dm',
+    tierNoun: tierNounFor(r.tier),
+  };
   // THE DEFENSE DESK. THE PUBLIC GATE (§885.3): a public gallery dossier is a PAID surface
   // and the `defense` tab is not filtered off one, so the desk is NOT DRAWN there. The
   // audience follows kernel law 2's fail-closed default, stated rather than defaulted.
   const deskProse = publicDossier
     ? Object.freeze({ publicOrder: null, firstSurvey: null })
-    : defenseStateProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseStateProse(r, deskOpts);
   // `drawnAtMount` routes the RUNG the projection carries; the `beside` line is only
   // rendered when the registry lets that rung speak, so flipping the row to `glance`
   // silences the machine line and leaves the DM's field untouched.
@@ -180,10 +188,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // frames no DM-editable field, so these are plain rungs rather than projections.
   const threatProse = publicDossier
     ? Object.freeze({ beasts: null, invasion: null, internal: null, economic: null, disaster: null })
-    : defenseThreatProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseThreatProse(r, deskOpts);
   // The sentence that belongs to ONE readiness row, or null. The registry still rules on
   // every rung exactly as it did when these were a flat list — flipping `defense.threatAssessment`
   // to `glance` silences all five together, under every bar at once.
@@ -195,10 +200,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // defaulted; DS-DEF-5 frames no DM-editable field, so these are plain rungs too.
   const forcesProse = publicDossier
     ? Object.freeze({ fortification: null, force: null, contracted: null, charter: null, arcane: null })
-    : defenseForcesProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseForcesProse(r, deskOpts);
   const forceLines = ['fortification', 'force', 'contracted', 'charter', 'arcane']
     .map((k) => drawnAtMount(FORCES_MOUNT, forcesProse[k])?.sentence).filter(Boolean);
   // DS-DEF-1, the posture header. Same public gate; it frames no DM-editable field either
@@ -206,10 +208,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // the Guard Assessment paragraph rather than over it.
   const postureProse = publicDossier
     ? Object.freeze({ posture: null, terrain: null, prize: null })
-    : defensePostureProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defensePostureProse(r, deskOpts);
   // ⚠ Like the public-order banner, these arrive already PROJECTED BESIDE the DM's field —
   // `guardEffectivenessDesc`, which `deriveGuardAssessment` returns verbatim just above. The
   // `beside` line is only taken when the registry lets that rung SPEAK, so flipping the row
@@ -221,29 +220,20 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // (the banner renders generator-authored `summary` / `viabilityNote`), so plain rungs.
   const statusProse = publicDossier
     ? Object.freeze({ override: null, viability: null })
-    : defenseMilitaryStatusProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseMilitaryStatusProse(r, deskOpts);
   const statusLines = ['override', 'viability']
     .map((k) => drawnAtMount(MILITARY_STATUS_MOUNT, statusProse[k])?.sentence).filter(Boolean);
   // DS-DEF-11, why the wall and why not. Same public gate; no DM-editable field, plain rung.
   const wallProse = publicDossier
     ? Object.freeze({ rationale: null })
-    : defenseWallRationaleProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseWallRationaleProse(r, deskOpts);
   const wallLine = drawnAtMount(WALL_RATIONALE_MOUNT, wallProse.rationale)?.sentence || null;
   // DS-DEF-6, the supporting capabilities. Same public gate as every other mount on this
   // tab; no DM-editable field, so plain rungs. Only the logistics and naval lenses are
   // read — the desk states, and the suite pins, why the other four must stay silent.
   const supportingProse = publicDossier
     ? Object.freeze({ logistics: null, naval: null })
-    : defenseSupportingProse(r, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseSupportingProse(r, deskOpts);
   const supportingLines = ['logistics', 'naval']
     .map((k) => drawnAtMount(SUPPORTING_MOUNT, supportingProse[k])?.sentence).filter(Boolean);
   const stresses = (Array.isArray(r.stress)?r.stress:r.stress?[r.stress]:[]).filter(Boolean);
@@ -300,10 +290,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // and the classification beneath it cannot be about two different readings.
   const criminalProse = publicDossier
     ? Object.freeze({ structure: null, capture: null })
-    : defenseCriminalProse(r, crimStructure, {
-      seed: String(r?._seed ?? r?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-    });
+    : defenseCriminalProse(r, crimStructure, deskOpts);
   const criminalLines = ['structure', 'capture']
     .map((k) => drawnAtMount(CRIMINAL_MOUNT, criminalProse[k])?.sentence).filter(Boolean);
 

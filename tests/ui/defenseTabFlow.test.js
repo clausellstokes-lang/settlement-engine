@@ -34,14 +34,22 @@ import {
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROUTER_SRC = join(HERE, '../../src/components/OutputContainer.jsx');
 
-/** The desk's own option bag, spelled exactly as both tabs spell it. */
-const opts = (s) => ({ seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm' });
+/**
+ * The desk's own option bag, spelled exactly as both tabs spell it — `tierNoun` included
+ * since §934.22's addendum, because that is the field that decides whether the sentence the
+ * desk returns is the sentence the tab renders. A bag here that had fallen behind the tabs'
+ * would make every arm below assert against a sentence no surface produces.
+ */
+const opts = (s) => ({
+  seed: String(s?._seed ?? s?.id ?? ''), audience: 'dm', tierNoun: tierNounFor(s?.tier),
+});
 
 /** Open a collapsed `Section` by its title, so its children reach the DOM. */
 function openSection(container, title) {

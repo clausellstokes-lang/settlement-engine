@@ -6,6 +6,7 @@ import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/s
 import { generalDeskLines } from '../generalDeskRead.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
@@ -198,6 +199,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // summary and hook never read the desk. The audience follows kernel law 2's fail-closed
   // default: an unstated audience reads as the player's, so it is stated.
   const deskAudience = playerView ? 'player' : 'dm';
+  // The settlement's own noun, resolved once for both of this tab's desk reads: the corpus
+  // writes 'the town' about a settlement of any size, and the desk speaks it (§934.22).
+  const deskTierNoun = tierNounFor(r?.tier);
   const deskSeed = String(r?._seed ?? r?.id ?? '');
   const stressorProse = publicDossier
     ? Object.freeze({
@@ -216,7 +220,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         // shape the simulation writes. Dark at birth: no generator writes worldState.
         worldStressor: worldStressorFor(worldState, r?.id),
       },
-      { seed: deskSeed, audience: deskAudience },
+      { seed: deskSeed, audience: deskAudience, tierNoun: deskTierNoun },
     );
   // ⛔ THE DESK'S `crisisFraming` RUNG IS NOT DRAWN HERE, and it must never be. It is the
   // annex's "ARITY — no banner" line ("There is no crisis on the books…"), which speaks only
@@ -356,7 +360,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 // or from content), so `deskSeed` is non-empty even on a gallery import, whose
                 // `_seed` IS nulled. This closes the trap, it does not move the page.
                 const drawn = publicDossier ? null : drawnAtMount(CRISIS_MOUNT, crisisBannerRung(
-                  r, v, { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience },
+                  r, v,
+                  { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience, tierNoun: deskTierNoun },
                 ));
                 return drawn?.sentence ? (
                   <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>

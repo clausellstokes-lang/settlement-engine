@@ -75,6 +75,20 @@
  * definite and demonstrative references in the settlement's own noun; its docblock carries
  * the measurement, the three classes it refuses, and the residual risk.
  *
+ * ⛔ THE RULE'S HOME IS NOW THE DESK, AND THIS CALL IS THE BACKSTOP UNDER IT (§934.22
+ * addendum). Speaking the noun HERE — at the renderer, after the desk had returned — meant
+ * the screen and the desk that drew it disagreed about what to call a metropolis, which is
+ * what `tests/ui/defenseTabFlow.test.js` reddens on: the tab printed "The metropolis
+ * believes…" where `defenseThreatProse` had returned "The town believes…". So the
+ * substitution moved UP, into `composeStateProse`, driven by the `tierNoun` the reader-facing
+ * option bags now carry — and every surface renders the sentence the desk returned.
+ * `speakTierNoun` STAYS here because it is IDEMPOTENT and TOTAL: a line the desk already
+ * spoke carries no generic `the town` left to match and comes back by identity, so this costs
+ * a scan and changes not one byte of a migrated caller's paragraph. What it still buys is a
+ * caller whose bag has not moved yet (PowerTab's, at the time of writing) — that surface
+ * keeps its reader's noun instead of silently regressing to the corpus's generic one. Remove
+ * it only when every desk bag carries `tierNoun`, and red the tab-flow suites deliberately.
+ *
  * ⛔ THE ONE-LINE CONTRACT BELOW IS THEREFORE NARROWED, DELIBERATELY AND IN THE OPEN. It used
  * to read "a position that drew a single lens renders exactly what it rendered before,
  * character for character". A position that draws one lens is exactly as entitled to its own

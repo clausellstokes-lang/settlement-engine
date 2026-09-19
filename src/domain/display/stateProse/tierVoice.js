@@ -53,6 +53,14 @@
  * byte-identically to the day before this file existed — which is also what makes the arm
  * that proves the cure non-vacuous a PAIR (a village and a town) rather than a single read.
  *
+ * ⭐ WHERE IT IS APPLIED (§934.22 addendum). At `composeStateProse`, on the finished unit,
+ * for a caller whose option bag carries `tierNoun` — so the sentence the DESK returns is the
+ * sentence the screen and the printed dossier render, and the three can never disagree. A
+ * caller that carries no noun gets the corpus's own word back, which is what keeps every
+ * committed register pinned to what the corpus wrote. `weaveBlock` still calls this leaf as
+ * the backstop under a bag that has not moved yet; the substitution is idempotent, so a line
+ * the desk already spoke returns by identity there.
+ *
  * PURE HEADLESS LEAF: no React, no store, no seed, no locale API, ZERO IMPORTS. THE PROMISE
  * is untouched — same seed and same state give the same sentences, and now the same noun.
  *

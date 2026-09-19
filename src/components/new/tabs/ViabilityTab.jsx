@@ -10,6 +10,7 @@ import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
 import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
@@ -67,6 +68,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
     : defenseMagicDependencyProse(s, {
       seed: String(s?._seed ?? s?.id ?? ''),
       audience: playerView ? 'player' : 'dm',
+      tierNoun: tierNounFor(s.tier),
     });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
 

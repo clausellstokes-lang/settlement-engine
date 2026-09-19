@@ -55,6 +55,7 @@
  */
 import { warFaithStateProse } from '../../../domain/display/stateProse/warFaithStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { BODY, BORDER, CARD, FS, MUTED, sans } from '../../theme.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -109,6 +110,7 @@ export function warFaithDeskRungs({
     ? SILENT
     : warFaithStateProse(settlement, readings, {
       seed: String(settlement?._seed ?? settlement?.id ?? ''), audience,
+      tierNoun: tierNounFor(settlement?.tier),
     });
 }
 
