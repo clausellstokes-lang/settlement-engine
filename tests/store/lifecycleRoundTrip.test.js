@@ -1349,6 +1349,45 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(deviceWrite(store).anonDraft).toBeNull();
     });
 
+    test('the POST-SIGNUP save claims the world, so the next sign-out stashes nothing', async () => {
+      // ⛔ THE CONVERSION PATH, AND THE ONE DOOR THAT DID NOT CLAIM. Generate
+      // anonymously, click "Save this town — free account", sign up: the
+      // SAVE_SETTLEMENT intent fires and its handler persisted the row without
+      // ever binding the save id, so the world stayed recorded as this device's
+      // ANONYMOUS draft. The next sign-out then wrote an account's library row
+      // into localStorage for the next visitor on a shared machine.
+      //
+      // Driven through the REAL registry and the REAL handler — registered here
+      // rather than awaited off the module's own floating registration, so the
+      // arm cannot race it — over the app's real store and the real local-mode
+      // saves service (this file forces LOCAL mode; services are never stubbed).
+      const storeModule = await import('../../src/store/index.js');
+      const intents = await import('../../src/lib/authIntents.js');
+      intents._resetForTests();
+      storeModule.registerAuthIntentHandlers(intents);
+      const live = storeModule.useStore;
+
+      live.setState((state) => { state.settlement = { ...world }; state.draftOrigin = 'anon'; });
+      live.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
+      // anchored: the world really is the device's anonymous draft at this point
+      expect(live.getState().draftOrigin).toBe('anon');
+
+      intents.setPending(intents.INTENTS.SAVE_SETTLEMENT, {
+        name: world.name, tier: world.tier, settlement: { ...world }, config: null,
+      });
+      const saveId = await intents.consume({ user: USER });
+      expect(saveId).toBeTruthy();
+
+      // The save bound its id through the same door the other three chokepoints
+      // use, and that door is what claims the world.
+      expect(live.getState().activeSaveId).toBe(saveId);
+      expect(live.getState().draftOrigin).toBe('account');
+
+      live.getState().clearAuth();
+      expect(partializeOf(live.getState()).anonDraft).toBeNull();
+      live.getState().clearSettlement();
+    });
+
     test('opening a save from the library claims it, whatever origin its blob carries', () => {
       // The stamp lands on the IN-EDITOR world at the save, so a row written
       // before that still reads 'anon' inside. Without this claim a keeper who

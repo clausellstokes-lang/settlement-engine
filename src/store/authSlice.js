@@ -210,10 +210,14 @@ export const createAuthSlice = (set, get) => ({
       // raised here — because the persist projection gated the anonymous-draft
       // envelope on the TIER, and sign-out sets tier 'anon', so the very next
       // store write stashed the departing account's loaded world (possibly one of
-      // their SAVES) into this device's localStorage. The projection now asks the
-      // WORLD where it came from (`settlement.draftOrigin`, stamped at its birth),
-      // and an account's world answers 'account' whoever is signed in a moment
-      // later — so there is no bar to raise here and nothing to retract anywhere.
+      // their SAVES) into this device's localStorage. The projection now reads
+      // `state.draftOrigin` — whose session put the world in the editor, a
+      // transient root field, never a key on the world — and an account's world
+      // answers 'account' whoever is signed in a moment later, so there is no bar
+      // to raise here and nothing to retract anywhere. ⚠ THAT ONLY HOLDS WHILE
+      // EVERY DOOR THAT MAKES A WORLD AN ACCOUNT'S SAYS SO: the post-signup
+      // SAVE_SETTLEMENT intent did not, and left exactly this leak open (cured at
+      // its handler in store/index.js).
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
       // the same device never reads the previous account's entitlements.

@@ -205,7 +205,7 @@ setCrashForensics(() => buildCrashForensics(useStore.getState()));
 // Register handlers for post-auth pending intents. Keep authIntents itself
 // lazy so GenerateWizard/authSlice do not create a mixed static/dynamic
 // chunk that Vite has to warn about.
-function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
+export function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
   registerHandler(INTENTS.SAVE_SETTLEMENT, async (payload, ctx) => {
     if (!payload || !payload.settlement) return null;
     try {
@@ -215,6 +215,24 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         settlement: payload.settlement,
         config: payload.config || null,
       });
+      // ⭐ BIND THE NEW SAVE ID THROUGH THE SAME DOOR EVERY OTHER CREATE
+      // CHOKEPOINT USES (2026-09-18). setActiveSaveId → bindActiveSaveId does two
+      // things this handler needs and did neither: it hands the session's draft
+      // TIMELINE over to the new row, and it CLAIMS the world in the editor for
+      // the account (claimSettlementForAccount). Without the claim the world the
+      // visitor just signed up to keep was still recorded as this device's
+      // ANONYMOUS draft, so the next sign-out stashed an account's library row in
+      // localStorage for the next visitor on a shared machine — the leak the
+      // retired `signedInWorld` bar used to cover. This is the conversion path:
+      // generate anonymously, click "Save this town — free account", sign up.
+      //
+      // Bound BEFORE the fire-and-forget telemetry below, which awaits a dynamic
+      // import that can reject: the claim must not depend on analytics resolving.
+      // setActiveSaveId's own docblock already described this intent as one of
+      // the four chokepoints that "already funnel through" it; that was the one
+      // claim in it which was not true.
+      try { useStore.getState().setActiveSaveId?.(result); }
+      catch (e) { console.warn('[authIntent.save-settlement] binding the save id failed:', e); }
       // F34 — this is the REAL post-signup save chokepoint. Fire the
       // first_save/third_save pricing moment + 'saved' research capture here
       // (the dead store saveSettlement action used to host them). Fire-and-forget.
