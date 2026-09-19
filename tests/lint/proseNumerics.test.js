@@ -427,6 +427,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // (GENERATED_SOURCES above; its freshness is pinned by landingFixtureFreshness). The one NEW
 // leak of the wave — GalleryImage's stock-painting alt, a template in JSX — was humanized
 // through the copy dictionary (gallery.stockImageAlt), never banked. Ceilings only fall.
+// BROWSER PASS 3's INSTITUTION SEAM (2026-09-19, lane 36 car 2) — ONE PURE LINE MOVE, NO
+// CEILING CHANGE, NO DEBT MOTION. Routing a supply chain's processing institutions through
+// `institutionDisplayName` puts a five-line rationale above `ChainCard`'s flow string in
+// Services.jsx, entirely ABOVE the one row that file owns, so `{flow}` re-addresses
+// 246 -> 251. Path, category and snippet are byte-identical, the census holds at 218 against
+// a 218 ceiling, and no category count moves. The whole baseline diff is two lines, one -/+
+// pair, a `"line"` value and nothing else. ⚠ THE LANE'S OWN CAR FOUND THIS, NOT THE CONSIST:
+// the §934.22 note above says the same thing about its eleven inherited stale addresses, and
+// the lesson repeats — a cure five lines away in the same file re-addresses banked debt, and
+// only this register's own run can see it.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,
