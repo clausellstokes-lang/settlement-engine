@@ -74,7 +74,12 @@ describe('mutation-coverage manifest — the totality contract (E-A)', () => {
     // so the floor tightens with it — left at 440 it would have gone on passing
     // with the entire admitted tree dropped back out of the walk.
     expect(enumerated.length).toBeGreaterThanOrEqual(630);
-    expect(sweepLabels.length).toBeGreaterThanOrEqual(61);
+    // 2026-09-18: 61 -> 121. The floor had not moved since the 2026-08-30 note
+    // above while the sweep grew to 121 plants, so SIXTY of them could have been
+    // deleted and this guard-the-guard would have gone on passing — the exact
+    // rot it exists to catch, one level up. Re-measured against this tree and
+    // tightened to it, as the paragraph above prescribes.
+    expect(sweepLabels.length).toBeGreaterThanOrEqual(121);
     expect(new Set(sweepLabels).size, 'duplicate labels in mutation-sweep.sh — labels are the join key and must be unique').toBe(sweepLabels.length);
   });
 

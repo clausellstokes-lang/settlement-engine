@@ -322,6 +322,11 @@
     "tests/components/mapOverlayThumbContract.test.jsx": {
       "kind": "uncovered"
     },
+    "tests/components/phoneChromeFloor.census.test.js": {
+      "kind": "mutation",
+      "label": "phone-floor/a sub-floor size loses its helper and renders at its desktop step on a phone",
+      "what": "The source-side twin of tests/components/dossierPhoneFloorAllViews.test.jsx, which can only measure a line once its own text reaches 45 characters — so whether a sub-12px size reds is decided by the fixture seed's string lengths and not by the source. At the census's first run 456 inline fontSize literals in src/components/new sat below the phone chrome floor while that rendered walk was green over all eighteen views. The plant un-wraps SubstrateTab's BandPill, whose 7px pico step is the smallest in the dossier and the only wrapped pico site in that file, so the perl anchor is unambiguous. Its three other arms (an unbound viewport flag, a prose-shaped line left on the chrome helper, and the executed detector controls) were each proved load-bearing by hand-mutation against the live tree in the same car."
+    },
     "tests/components/pipelineRailSpineProse.test.jsx": {
       "kind": "mutation",
       "label": "prose/spine frame word doubled into the body",

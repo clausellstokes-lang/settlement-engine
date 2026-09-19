@@ -91,6 +91,7 @@ MUTATED_FILES=(
   src/store/campaignImportedCreation.js
   src/domain/display/economyFreshness.js
   src/components/new/tabs/EconomicsTab.jsx
+  src/components/new/tabs/SubstrateTab.jsx
   src/store/operationRegistry.js
   src/store/aiChronicleAppend.js
   src/store/neighbourSlice.js
@@ -1569,6 +1570,19 @@ check_caught "step-presentation/a BACKTICK specifier walks past every quote-anch
 #      after): clean => 7 passed; planted => 1 red, 6 passed; restored => 7 passed.
 perl -0pi -e 's/import \{ metaForStep \} from \x27\.\.\/generators\/steps\/stepMetadata\.js\x27;/import { metaForStep } from \x27..\/generators\/steps\/stepMetadata.js\x27;\nconst stepMetaSpec = [\x27..\/generators\/steps\/step\x27, \x27Metadata.js\x27].join(\x27\x27);\nconst stepMetaAny = await import(stepMetaSpec);/' src/workers/generationRequest.js
 check_caught "step-presentation/a COMPUTED specifier pulls the module in and no grep can say so" src/workers/generationRequest.js "npx vitest run tests/lint/stepPresentationEngineFence.walker.test.js --no-file-parallelism" "no dynamic import in the engine trees has a COMPUTED specifier"
+
+# 111. THE PHONE CHROME FLOOR, AS A FACT ABOUT THE SOURCE. `dossierPhoneFloorAllViews` can only
+#      measure a line once its own text reaches 45 characters, so whether a sub-12px size is a
+#      violation is decided by the fixture seed's string lengths rather than by the source. The
+#      census (tests/components/phoneChromeFloor.census.test.js) reads source instead and demands
+#      every sub-floor `fontSize` literal pass through chromeFontSize/proseFontSize or carry a
+#      written `// phone-floor:` ruling. SubstrateTab's BandPill is the plant target because its
+#      7px pico step is the smallest in the dossier and the file holds exactly one wrapped pico
+#      site, so the anchor is unambiguous. Measured before landing with a cp backup and a cp
+#      restore (never the checkout family): clean => bare 0; planted => bare 1 naming
+#      SubstrateTab.jsx:82; restored byte-identical by md5 => bare 0.
+perl -0pi -e "s/fontSize: chromeFontSize\(FS\.pico, mobile\)/fontSize: FS.pico/" src/components/new/tabs/SubstrateTab.jsx
+check_caught "phone-floor/a sub-floor size loses its helper and renders at its desktop step on a phone" src/components/new/tabs/SubstrateTab.jsx "npx vitest run tests/components/phoneChromeFloor.census.test.js --no-file-parallelism" "every sub-floor size passes through a helper or carries a written ruling"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
