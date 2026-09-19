@@ -36,21 +36,20 @@
  * expression contains a conditional (`a ? b : c`) or a logical (`a && b`, `a || b`).
  * That is the shape every one of the eighteen live sites had.
  *
- * ── THE OWED REGISTER ──────────────────────────────────────────────────────────
- * The sites live in files their author may not edit, so they are frozen in `OWED` by
- * FILE and COUNT (never by line: line numbers churn under every unrelated edit and would
- * make this a nuisance gate). The register is EXACT IN BOTH DIRECTIONS: a new site in a
- * listed file reds, and a CURED one reds too, demanding the row be lowered so the win is
- * banked. Every other file in src/ is held at zero.
+ * ── THE OWED REGISTER — ⭐ PAID IN FULL, 2026-09-19 ────────────────────────────
+ * Twelve of the eighteen live sites were in files the walker's own author was not
+ * permitted to edit — eleven in the dossier tabs and one in a PDF section, each owned by
+ * a concurrent lane. They were frozen in `OWED` by FILE and COUNT (never by line: line
+ * numbers churn under every unrelated edit and would make this a nuisance gate), EXACT IN
+ * BOTH DIRECTIONS: a new site in a listed file reds, and a CURED one reds too, demanding
+ * the row be lowered so the win is banked rather than becoming spare budget.
  *
- * ⭐ IT HAS BEEN PAID DOWN, 12 -> 1 (ODQ §934.22 item 4a, second pass). The nine dossier
- * tabs and the PDF section were cured through the same `edged()` idiom the first pass
- * used, longhands only, each box byte-identical. What remains is ONE site —
- * src/components/new/tabs/EconomicsTab.jsx:540, the food-balance narrative card — in the
- * one file the curing lane was forbidden to touch (lane 25 holds it under ODQ §934.23).
- * The shape is the same as the nine: `border` varies with `foodDeficit` beside a
- * `borderLeft` accent, so the 3px food-colour edge is flattened to 1px on exactly the
- * render where a deficit appears. Its cure is `...edged(...)` and nothing else.
+ * All twelve are now cured, through `edged()` (src/design/edgedBox.js) at every site, and
+ * the register is EMPTY. It is deliberately kept as an empty object rather than deleted:
+ * the exactness arm still runs against it, so the register cannot quietly re-grow, and the
+ * "no file outside the owed register" arm now holds the WHOLE of src/ at zero.
+ * ⛔ AN EMPTY REGISTER IS NOT A DEAD ARM — it is the arm at its strongest. Do not re-add a
+ * row to make a new site green; cure the site.
  *
  * @enforced-by itself (the executed controls below prove the detector both ways)
  */
@@ -82,17 +81,19 @@ const FAMILIES = Object.freeze({
 });
 
 /**
- * ⛔ THE OWED REGISTER — file → number of live sites, for the files a curing lane was
- * not permitted to edit (the ODQ §934.22/§934.23 lane boundaries). Each row is a DEBT,
- * not a licence. Exact in both directions; drive every row to zero and delete it.
+ * ⛔ THE OWED REGISTER — file → number of live sites, for the files this walker's
+ * author was not permitted to edit (ODQ §934.22 lane boundary: the dossier tabs were
+ * lanes 25–27's, the PDF sections lane 26's). Each row was a DEBT, not a licence.
  *
- * SHRUNK 12 -> 1 on 2026-09-19 (the nine dossier tabs and the PDF section cured through
- * `edged()`). The last row is EconomicsTab, which lane 25 holds; its one site is
- * `border` varying with `foodDeficit` beside the food-colour `borderLeft`.
+ * ⭐ EMPTY SINCE 2026-09-19 (ODQ §934.29 consist, car 3). All twelve sites were cured
+ * with `edged()`, longhands only and the drawn box byte-identical, and every row came out
+ * in the same commit that paid it:
+ *   DailyLifeTab 1 · DefenseTab 2 · EconomicsTab 1 · HistoryTab 1 · OverviewTab 1 ·
+ *   PowerTab 1 · ServicesTab 1 · SubstrateTab 1 · ViabilityTab 2 · pdf/Institutions 1.
+ * Exact in both directions, still: a new site in ANY file now reds on the arm below, and
+ * there is no longer a row anywhere for one to hide behind.
  */
-const OWED = Object.freeze({
-  'src/components/new/tabs/EconomicsTab.jsx': 1,
-});
+const OWED = Object.freeze({});
 
 function walkSource(dir, out = []) {
   for (const entry of readdirSync(dir)) {
@@ -199,11 +200,6 @@ describe('THE SHORTHAND/LONGHAND CLASS — a varying shorthand never sits beside
     // nothing, which is what a moved tree or a broken parser produces. These floors
     // are the measurement at landing (2026-09-19: 2,230 files, 233 shorthand/longhand
     // co-occurrences), tightened toward reality and never relaxed.
-    // RE-MEASURED at the OWED 12 -> 1 paydown, same day: 2,238 files, 215 pairs. The
-    // DENOMINATOR fell by design — curing a site through `edged()` removes the
-    // shorthand, so the co-occurrence it was half of stops existing. The floors are
-    // deliberately NOT tightened onto 215: this number is meant to keep falling as the
-    // class burns down, and a floor that tracked it would red on every cure.
     expect(SCAN.files, 'the src tree is empty — has it moved?').toBeGreaterThanOrEqual(2200);
     expect(SCAN.pairs, 'the walk found almost no shorthand/longhand pairs — the shape it looks for changed')
       .toBeGreaterThanOrEqual(200);

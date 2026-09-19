@@ -27,6 +27,7 @@ import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the ge
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
+import { edged } from '../../../design/edgedBox.js';
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -548,7 +549,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           </div>
         </div>
         {/* Narrative */}
-        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
+        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
               ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
