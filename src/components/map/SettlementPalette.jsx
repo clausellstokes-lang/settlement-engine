@@ -81,8 +81,11 @@ export default function SettlementPalette({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0 }}>
-      {/* Header */}
+      {/* Header. `flexShrink: 0` so the search field keeps its own height when the
+          column is short — a header that can be squeezed is the other half of the
+          clipping class cured below. */}
       <div style={{
+        flexShrink: 0,
         padding: `${SP.sm}px ${SP.md}px`,
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
@@ -134,60 +137,78 @@ export default function SettlementPalette({
         )}
       </div>
 
-      {/* THE DESKTOP GATE. An anon or free viewer cannot hold a campaign at all
-          (useWorldMapCampaignModel hands them an empty list), so the empty state
-          below invited them to "Start a campaign" behind a "Create a campaign"
-          button whose only possible outcome was a toast naming an upgrade with no
-          way to reach it. The phone has been honest about this since the mobile
-          gate landed; the desk had not. Same card, same words, one component. */}
-      {!canManageCampaigns && (
-        <div style={{ margin: SP.sm, marginBottom: 0 }}>
-          <RealmLockedGate
-            tier={tier}
-            icon={<Lock size={16} color={GOLD} />}
-            testId="realm-palette-locked"
-            onUpgrade={() => onNavigate?.('pricing')}
-            onSignIn={() => onNavigate?.('signin')}
-          />
-        </div>
-      )}
+      {/* ⛔ ONE SCROLLER, AND EVERYTHING THAT CAN OVERFLOW IS INSIDE IT (the owner,
+          2026-09-19: "note how the See Cartographer and the button for instant generate
+          settlements are cut off and can't be scrolled down to").
 
-      {/* No-campaign prompt — placement needs an active campaign. This is an
-          ACTIONABLE empty state (P1/P8): it carries a real first click here
-          instead of pointing at the toolbar — a primary "Create a campaign"
-          when none exist, "Select a campaign" when some do. It REUSES the ONE
-          shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
-          so "no campaign" looks the same on every surface. Withheld from a
-          non-entitled viewer, who gets the gate above instead of an invitation
-          they cannot accept. */}
-      {!activeCampaign && canManageCampaigns && (
-        <div style={{ margin: SP.sm, marginBottom: 0 }}>
-          <CampaignEmptyState
-            lead="Start a campaign to place settlements"
-            onCreateCampaign={onCreateCampaign}
-            onSelectCampaign={onSelectCampaign}
-            hasCampaigns={hasCampaigns}
-          />
-          <div style={{
-            marginTop: SP.xs, padding: `0 ${SP.xs}px`,
-            fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5,
-            textAlign: 'center',
-          }}>
-            A campaign holds your map and its living world. Only canon settlements drop onto the map.
+          THE DEFECT, AS LAYOUT. This column has a FIXED height (it is `height: 100%` of
+          WorldMap's `calc(100vh - …)` shell) inside an ancestor with `overflow: hidden`
+          (WorldMapStage's panel), and the gate card and the empty state used to sit
+          BETWEEN the header and the only scrolling region — as flex items of the column,
+          not children of the scroller. When their content was taller than the space left,
+          the list's `flex: 1` collapsed toward zero and the cards were themselves squeezed
+          and then clipped by that `overflow: hidden`. Nothing could scroll to them,
+          because the one scroller was BELOW them. Their own last controls — "See
+          Cartographer" and the instant-world entry — were exactly what fell off.
+
+          THE CURE IS STRUCTURAL, NOT A PADDING. The header stays pinned (it is the search
+          field, and it is `flexShrink: 0` so it keeps its own height); everything else
+          moved INSIDE the single scrolling region below, so the column has exactly one
+          overflow and every element in it is reachable by scrolling to the end. */}
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: SP.sm }}>
+        {/* THE DESKTOP GATE. An anon or free viewer cannot hold a campaign at all
+            (useWorldMapCampaignModel hands them an empty list), so the empty state
+            below invited them to "Start a campaign" behind a "Create a campaign"
+            button whose only possible outcome was a toast naming an upgrade with no
+            way to reach it. The phone has been honest about this since the mobile
+            gate landed; the desk had not. Same card, same words, one component. */}
+        {!canManageCampaigns && (
+          <div style={{ marginBottom: SP.sm }}>
+            <RealmLockedGate
+              tier={tier}
+              icon={<Lock size={16} color={GOLD} />}
+              testId="realm-palette-locked"
+              onUpgrade={() => onNavigate?.('pricing')}
+              onSignIn={() => onNavigate?.('signin')}
+            />
           </div>
-          {/* S2r re-home (C5): the premium one-click realm composer, subordinate
-              to the Create/Select CTA above it. Self-gates on premium (a
-              non-premium reach fires the pricing moment); lazy, so the composer
-              never enters the palette chunk. isMobile is pinned false — the Realm
-              is desktop-gated, so this sidebar never renders on a phone. */}
-          <Suspense fallback={null}>
-            <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
-          </Suspense>
-        </div>
-      )}
+        )}
 
-      {/* List */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: SP.sm }}>
+        {/* No-campaign prompt — placement needs an active campaign. This is an
+            ACTIONABLE empty state (P1/P8): it carries a real first click here
+            instead of pointing at the toolbar — a primary "Create a campaign"
+            when none exist, "Select a campaign" when some do. It REUSES the ONE
+            shared CampaignEmptyState recipe (RealmInspector / RealmDashboard),
+            so "no campaign" looks the same on every surface. Withheld from a
+            non-entitled viewer, who gets the gate above instead of an invitation
+            they cannot accept. */}
+        {!activeCampaign && canManageCampaigns && (
+          <div style={{ marginBottom: SP.sm }}>
+            <CampaignEmptyState
+              lead="Start a campaign to place settlements"
+              onCreateCampaign={onCreateCampaign}
+              onSelectCampaign={onSelectCampaign}
+              hasCampaigns={hasCampaigns}
+            />
+            <div style={{
+              marginTop: SP.xs, padding: `0 ${SP.xs}px`,
+              fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5,
+              textAlign: 'center',
+            }}>
+              A campaign holds your map and its living world. Only canon settlements drop onto the map.
+            </div>
+            {/* S2r re-home (C5): the premium one-click realm composer, subordinate
+                to the Create/Select CTA above it. Self-gates on premium (a
+                non-premium reach fires the pricing moment); lazy, so the composer
+                never enters the palette chunk. isMobile is pinned false — the Realm
+                is desktop-gated, so this sidebar never renders on a phone. */}
+            <Suspense fallback={null}>
+              <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
+            </Suspense>
+          </div>
+        )}
+
+        {/* List */}
         {!filtered.length ? (
           saves.length === 0 ? (
             // Actionable no-settlements empty state: the hint keeps naming the

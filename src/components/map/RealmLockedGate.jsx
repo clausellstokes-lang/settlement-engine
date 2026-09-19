@@ -40,6 +40,26 @@ import { purchasesOpen } from '../../lib/launchGate.js';
 /** The gate's heading. Exported so a test pins the words in one place. */
 export const REALM_GATE_HEADING = 'The Realm comes alive with Cartographer';
 
+/**
+ * ⭐ THE GATE'S VALUE LINES, IN ONE PLACE FOR EVERY SURFACE THAT DRAWS THEM.
+ *
+ * THE OWNER (2026-09-19) replaced the second and third with ONE line, in his own words
+ * and his own punctuation: the two bullets "The self-ending war layer: sieges,
+ * coalitions, conquest" and "The living pantheon: deities contest converts and rise"
+ * became "Access wars, religion, trade, the world!". The first is unchanged.
+ *
+ * ⛔ EXPORTED, AND THAT IS THE POINT. This card is the ONE locked-Realm gate — the phone
+ * dashboard and the desktop palette both render THIS component, so there is no second
+ * copy of the words to forget. The list is exported so a pin can hold the words in one
+ * place rather than retyping them, which is how the old pair would have survived in a
+ * test after leaving the screen.
+ * @type {ReadonlyArray<string>}
+ */
+export const REALM_GATE_VALUE_LINES = Object.freeze([
+  'Advance the realm month by month and watch the chronicle fill',
+  'Access wars, religion, trade, the world!',
+]);
+
 export default function RealmLockedGate({
   tier, icon = null, onUpgrade, onSignIn, previewTension = null,
   testId = 'realm-dashboard-locked',
@@ -114,12 +134,12 @@ export default function RealmLockedGate({
           </span>
         </div>
       )}
-      {/* Body color (not SECOND) so the three value props clear AA 4.5:1 on
-          parchment — these are load-bearing benefit prose, not quiet scent (P7). */}
+      {/* Body color (not SECOND) so the value props clear AA 4.5:1 on parchment —
+          these are load-bearing benefit prose, not quiet scent (P7). The lines are
+          REALM_GATE_VALUE_LINES above: two since the owner's 2026-09-19 order folded the
+          war layer and the pantheon into one. */}
       <ul style={{ margin: 0, paddingLeft: 18, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.7 }}>
-        <li>Advance the realm month by month and watch the chronicle fill</li>
-        <li>The self-ending war layer: sieges, coalitions, conquest</li>
-        <li>The living pantheon: deities contest converts and rise</li>
+        {REALM_GATE_VALUE_LINES.map((line) => <li key={line}>{line}</li>)}
       </ul>
       {/* The gate ends in an ACTION. It used to promise an anonymous viewer that
           signing in would "unlock the Realm" — it does not; the Realm is

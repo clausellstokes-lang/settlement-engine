@@ -45,7 +45,8 @@ vi.mock('../../src/lib/launchGate.js', async (importOriginal) => ({
 }));
 
 import SettlementPalette from '../../src/components/map/SettlementPalette.jsx';
-import { REALM_GATE_HEADING } from '../../src/components/map/RealmLockedGate.jsx';
+import { REALM_GATE_HEADING, REALM_GATE_VALUE_LINES } from '../../src/components/map/RealmLockedGate.jsx';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(cleanup);
 
@@ -173,6 +174,73 @@ describe('the desktop Realm gate for a non-entitled viewer', () => {
     expect(screen.getByRole('button', { name: /^See Cartographer$/ })).toBeTruthy();
     // anchored: the tier door above proves the gate rendered, so the absent sign-in door is a tier decision
     expect(screen.queryByRole('button', { name: /^Sign in$/ })).toBeNull();
+  });
+
+  /**
+   * ⛔ THE GATE'S VALUE LINES (the owner, 2026-09-19). Two bullets — "The self-ending war
+   * layer: sieges, coalitions, conquest" and "The living pantheon: deities contest
+   * converts and rise" — became ONE line in the owner's own words and punctuation. The
+   * words are read from REALM_GATE_VALUE_LINES so this pin cannot go on asserting a
+   * sentence that has left the screen, and the two retired ones are named as LITERALS
+   * here on purpose: that is the only way to prove they are really gone.
+   */
+  test('the gate says the new line once, and neither retired bullet', () => {
+    render(
+      <SettlementPalette
+        saves={[]} placements={{}}
+        canManageCampaigns={false} tier="anon"
+        onNavigate={vi.fn()}
+        onCreateCampaign={vi.fn()}
+      />,
+    );
+    const items = [...screen.getByTestId('realm-palette-locked').querySelectorAll('li')]
+      .map((li) => li.textContent.trim());
+    expect(items).toEqual([...REALM_GATE_VALUE_LINES]);
+    expect(items.filter((line) => line === 'Access wars, religion, trade, the world!')).toHaveLength(1);
+    // ANCHORED on the surviving first bullet, which is asserted present in the same
+    // collection — so "the old bullets are gone" cannot pass on an empty list.
+    for (const retired of [
+      'The self-ending war layer: sieges, coalitions, conquest',
+      'The living pantheon: deities contest converts and rise',
+    ]) {
+      expectAbsentWithAnchor(items, retired, REALM_GATE_VALUE_LINES[0], 'the locked-Realm gate');
+    }
+  });
+
+  /**
+   * ⛔ EVERY CONTROL IN THE PALETTE IS INSIDE ITS ONE SCROLLER (the owner, 2026-09-19:
+   * "note how the See Cartographer and the button for instant generate settlements are
+   * cut off and can't be scrolled down to").
+   *
+   * The column has a fixed height inside an `overflow: hidden` ancestor, so a control
+   * that is a SIBLING of the scrolling region rather than a child of it cannot be
+   * reached at all when the column is short. jsdom computes no layout, so this cannot
+   * measure the clipping — what it CAN prove is the structural property that makes the
+   * clipping impossible: one scroller, and every control inside it.
+   */
+  test('the palette has exactly one scrolling region, and every control is inside it', () => {
+    const { container } = render(
+      <SettlementPalette
+        saves={[]} placements={{}}
+        canManageCampaigns={false} tier="anon"
+        onNavigate={vi.fn()}
+        onCreateCampaign={vi.fn()}
+      />,
+    );
+    const scrollers = [...container.querySelectorAll('div')]
+      .filter((el) => /auto|scroll/.test(el.style.overflowY || ''));
+    expect(scrollers, 'the palette should have exactly one scrolling region').toHaveLength(1);
+    const buttons = [...container.querySelectorAll('button')];
+    expect(buttons.length, 'presence control: the palette drew its controls').toBeGreaterThanOrEqual(2);
+    const stranded = buttons
+      .filter((b) => !scrollers[0].contains(b))
+      .map((b) => b.textContent.trim());
+    expect(
+      stranded,
+      '\nA palette control sits OUTSIDE the one scrolling region. In a fixed-height column '
+      + 'inside an `overflow: hidden` ancestor that control cannot be scrolled to — which is '
+      + 'exactly how "See Cartographer" and the instant-world entry were cut off.\n',
+    ).toEqual([]);
   });
 
   test('an entitled viewer keeps the campaign invitation and sees no gate', () => {

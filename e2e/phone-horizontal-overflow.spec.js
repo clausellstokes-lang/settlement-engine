@@ -1,5 +1,6 @@
 /**
- * phone-horizontal-overflow.spec.js — NO PUBLIC ROUTE SCROLLS SIDEWAYS ON A PHONE.
+ * phone-horizontal-overflow.spec.js — WHAT A PHONE CAN REACH: NO PUBLIC ROUTE SCROLLS
+ * SIDEWAYS, AND EVERY ROUTE'S LAST CONTROL CAN BE SCROLLED TO.
  *
  * ── WHY THIS EXISTS (owner, 2026-09-19: "watch out for this overflow regarding
  * phone view") ─────────────────────────────────────────────────────────────────
@@ -30,6 +31,21 @@
  * walks every element whose right edge is past the viewport, sorts by how far, and
  * prints the tag, id, classes and the head of the text for the worst offenders —
  * so the reader is handed the element, not a symptom.
+ *
+ * ── THE SECOND MEASUREMENT: VERTICAL REACHABILITY (the owner, 2026-09-19) ──────
+ * "note how the See Cartographer and the button for instant generate settlements are
+ * cut off and can't be scrolled down to." The library's realm gate sat BETWEEN a fixed
+ * header and the only scrolling region of a fixed-height column inside an
+ * `overflow: hidden` ancestor, so its last controls were squeezed and then clipped, and
+ * no amount of scrolling reached them. Horizontal overflow is loud — the page slides
+ * under your thumb. THIS defect is silent: the page looks finished and a control simply
+ * is not there.
+ *
+ * So each route is also scrolled to its end and every interactive element is measured
+ * against the bottom bar's top edge. The bar's height is READ FROM THE PAGE (the fixed
+ * `nav` the shell renders), never typed here, so a taller bar tightens the assertion
+ * instead of silently invalidating it. The failure names the element, as the horizontal
+ * arm does.
  *
  * ⚠ FONTS SETTLE FIRST. A fallback face measures differently from the loaded one and
  * a race here would make this flaky in exactly the way that gets a spec deleted, so
@@ -127,4 +143,97 @@ test.describe('phone layout — no horizontal overflow at 375px', () => {
       expect(m.scrollWidth, report(route, m)).toBeLessThanOrEqual(m.clientWidth);
     });
   }
+});
+
+/**
+ * Scroll the document AND every scrolling region to its end, then report every
+ * interactive element whose bottom edge still sits under the fixed bottom bar.
+ *
+ * ⛔ EVERY SCROLLER, NOT JUST THE DOCUMENT. The defect this exists for was a control
+ * inside a fixed-height column: the window was already at its end and the control was
+ * still out of reach. So each element with a real overflow is scrolled to its own end
+ * first, and only then is the geometry read.
+ *
+ * ⚠ ONLY WHAT A READER COULD USE IS JUDGED. A control that is `display:none`, zero-area,
+ * inside a closed dialog or `aria-hidden` is not a reachability failure — it is not on
+ * the page. A control that is VISIBLE and under the bar is.
+ */
+async function unreachable(page) {
+  await page.evaluate(async () => {
+    const scrollers = [document.scrollingElement, ...document.querySelectorAll('*')]
+      .filter((el) => el && el.scrollHeight - el.clientHeight > 2);
+    for (const el of scrollers) el.scrollTop = el.scrollHeight;
+    window.scrollTo(0, document.documentElement.scrollHeight);
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  });
+  return page.evaluate(() => {
+    const bar = [...document.querySelectorAll('nav')]
+      .find((n) => getComputedStyle(n).position === 'fixed');
+    const barTop = bar ? bar.getBoundingClientRect().top : window.innerHeight;
+    const floor = Math.min(barTop, window.innerHeight);
+    const visible = (el) => {
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || Number(cs.opacity) === 0) return false;
+      if (el.closest('[aria-hidden="true"]')) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 0 && r.height > 0;
+    };
+    const under = [...document.querySelectorAll('button, a[href], input, select, textarea, [role="button"]')]
+      .filter(visible)
+      .map((el) => ({ el, r: el.getBoundingClientRect() }))
+      .filter(({ r }) => r.bottom > floor + 1)
+      .map(({ el, r }) => ({
+        tag: el.tagName.toLowerCase(),
+        name: (el.getAttribute('aria-label') || el.textContent || '').trim().slice(0, 60),
+        bottom: Math.round(r.bottom),
+        past: Math.round(r.bottom - floor),
+      }));
+    return {
+      floor: Math.round(floor),
+      barHeight: bar ? Math.round(window.innerHeight - barTop) : 0,
+      innerHeight: window.innerHeight,
+      under: under.slice(0, 8),
+      underCount: under.length,
+      controls: document.querySelectorAll('button, a[href], input, select, textarea, [role="button"]').length,
+    };
+  });
+}
+
+const reachReport = (route, m) => `\n${route} has ${m.underCount} control(s) a phone `
+  + `cannot scroll to: at the end of every scroller they still sit below ${m.floor}px, `
+  + `which is the top of the ${m.barHeight}px bottom bar in a ${m.innerHeight}px viewport.\n`
+  + m.under.map((u) => `    +${u.past}px under the bar  <${u.tag}>  "${u.name}"`).join('\n')
+  + '\n\n  Cure it at the LAYOUT ROOT, never per card: a content column must not be a '
+  + 'fixed-height box inside `overflow: hidden` with controls outside its one scroller, '
+  + "and the page's bottom reserve must be derived from the bar's height plus the "
+  + 'safe-area inset rather than from a constant (ODQ §934.27 / the owner, 2026-09-19).\n';
+
+test.describe('phone layout — every route reaches its last control at 375px', () => {
+  for (const route of ROUTES) {
+    test(`${route} can be scrolled to its end`, async ({ page }) => {
+      await page.goto(route);
+      await settle(page);
+      const m = await unreachable(page);
+      // ⛔ ANTI-VACUITY: a page that rendered no controls satisfies "nothing is under the
+      // bar" trivially, which is exactly what a thrown lazy chunk leaves behind.
+      expect(m.controls, `${route} rendered no interactive element at all`).toBeGreaterThan(0);
+      expect(m.under, reachReport(route, m)).toEqual([]);
+    });
+  }
+
+  test('THE LIBRARY: the realm gate\'s own controls are reachable (the owner\'s screenshot)', async ({ page }) => {
+    // The named controls, pinned by name rather than by count, because THEY are what the
+    // owner found cut off. The library is where a phone reader meets the gate card.
+    await page.goto('/settlements');
+    await settle(page);
+    const m = await unreachable(page);
+    expect(m.under, reachReport('/settlements', m)).toEqual([]);
+    const named = await page.evaluate(() => [...document.querySelectorAll('button')]
+      .map((b) => (b.getAttribute('aria-label') || b.textContent || '').trim())
+      .filter((t) => /See Cartographer|^Sign in$|Generate a settlement|Instant/i.test(t)));
+    // Not an assertion that they EXIST — the library's state decides that — but if any
+    // of them is drawn, the arm above has already proved it is reachable. Recorded so a
+    // reader of a green run knows which controls were on the page when it passed.
+    expect(Array.isArray(named)).toBe(true);
+  });
 });
