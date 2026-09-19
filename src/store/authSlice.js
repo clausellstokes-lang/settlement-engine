@@ -845,10 +845,10 @@ export const createAuthSlice = (set, get) => ({
   /**
    * The SMALLEST size this account may forge. Only the anonymous row has a floor above
    * the ladder's first rung (§934.34: a thorpe requires an account); every other tier
-   * reaches the whole ladder, and an elevated role bypasses both bounds.
+   * reaches the whole ladder, and staff (behind STAFF_UNLOCK_ALL_PAID, §934.28) bypass both bounds.
    */
   minAllowedTier: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return 'thorp';
+    if (staffUnlocksPaidFeatures(get().auth.role)) return 'thorp';
     const { tier } = get().auth;
     return TIER_GATE[tier]?.minTier || 'thorp';
   },
@@ -861,7 +861,7 @@ export const createAuthSlice = (set, get) => ({
    * Compendium's authored content and stays premium.
    */
   canCustomizePreGeneration: () => {
-    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    if (staffUnlocksPaidFeatures(get().auth.role)) return true;
     const { tier } = get().auth;
     return TIER_GATE[tier]?.preGenOptions === true;
   },
