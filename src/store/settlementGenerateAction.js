@@ -32,7 +32,7 @@
  * differently, which is the fork this design exists to prevent.
  */
 
-import { generateSeed } from '../kernel/prng.js';
+import { createPRNG, generateSeed } from '../kernel/prng.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
 import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGenCounter.js';
@@ -64,19 +64,17 @@ const ceilingLabelOf = (tier) => (tier
 const belowFloor = (st, token) => typeof st?.isTierBelowFloor === 'function'
   && st.isTierBelowFloor(token) === true;
 /**
- * ⛔ THE RUNGS A 'random' ROLL MAY ACTUALLY HAND THIS ACCOUNT.
+ * ⛔ THE RUNGS A 'random' FORGE MAY ACTUALLY HAND THIS ACCOUNT.
  *
  * The generator's ladder starts at `thorp`; an anonymous visitor's gate starts at
  * `hamlet`. So one roll in six was resolved, populated, staffed, narrated — and then
  * DISCARDED by the post-resolution re-gate below, which answered a reader who had asked
- * for nothing in particular with a refusal about a size they never picked. The roll is
- * the generator's and stays there; what crosses is the RANGE, asked of the gate itself
- * so this lane holds no second copy of the rule.
+ * for nothing in particular with a refusal about a size they never picked.
  *
  * `null` when the account reaches the whole ladder, and `null` when the range admits
  * NOTHING (a gate that refuses every size is a gate misconfiguration, not a pool): in
- * both cases the generator draws from TIER_ORDER exactly as it always has, so an
- * uncapped generation — and every golden — is byte-identical.
+ * both cases the sentinel reaches the pipeline untouched and the generator's own roll
+ * runs exactly as it always has.
  *
  * @param {any} st the store state the gate is reading
  * @returns {string[]|null}
@@ -240,8 +238,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
 
   // ⛔ ONE ROLL IN SIX WAS BEING THROWN AWAY. Measured BEFORE the engine runs, because
   // that is the point: the post-resolution re-gate below discards a FINISHED settlement,
-  // so the only cure that saves the work is one that reaches the roll. The gate answers
-  // which rungs it admits; a full-ladder account gets `null` and changes nothing.
+  // so the only cure that saves the work is one that decides the size before it.
   const allowedTiers = allowedTierPoolOf(state);
 
   // Anonymous daily generation cap (Tier 7.2). Every full-settlement
@@ -306,8 +303,32 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // (data/sampleSettlements.js forkConfigFor). `seed`
   // stays an ADMITTED key: pruning it would change saved-config loads, which
   // tests/generators/configPatchAllowlistWalker.test.js records as a product call.
+  const seed = seedOverride || generateSeed();
+
   const birthInputs = { ...config };
   delete birthInputs.seed;
+  // ⛔ A CAPPED ACCOUNT'S 'random' IS AIMED HERE, NOT IN THE GENERATOR (§934.34).
+  //
+  // The obvious cure was to thread the range into `resolveConfig` and let its own roll
+  // draw from it. MEASURED, and REJECTED on the evidence: the generator would then read
+  // a config key the GENERATION corpus never writes (the store writes it), which
+  // tests/lint/observedShapeReaders.walker.test.js convicts as a reader with no writer
+  // — `_allowedTiers on config — 3 read(s)`, a NEW identity, and clearing it needs an
+  // explained-writer mint rather than a lane's edit. The roll is the generator's; the
+  // RANGE is this gate's; so the size a capped account gets is decided on this side of
+  // the boundary and the generator is left exactly as it was.
+  //
+  // DETERMINISTIC, and on its OWN stream. The draw is seeded from the generation's seed
+  // under a distinct namespace, so the same seed always aims at the same rung and not
+  // one draw of the world's own sequence is consumed. THE PROMISE holds: same seed,
+  // same config, same world.
+  //
+  // The SENTINEL ITSELF IS NOT REWRITTEN in `settType` above — the post-resolution
+  // re-gate still reads 'random' and stays armed as the backstop. Only what the pipeline
+  // is handed changes, and only for an account whose range is narrower than the ladder.
+  if (settType === 'random' && allowedTiers) {
+    birthInputs.settType = createPRNG(`${seed}:size-gate`).pick(allowedTiers);
+  }
   // (No geography-lock overlay since owner order 2026-09-17 retired the world locks: a
   // stored `geography: true` no longer re-rolls the previous town's ground.)
   const fullConfig = birthConfig({
@@ -321,12 +342,6 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // flat 50s — and never writes the rolls back into the stored config.
     ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
     ...(neighbor ? { _importedNeighbor: neighbor } : {}),
-    // ⛔ A CAPPED ACCOUNT'S 'random' ROLLS INSIDE ITS OWN RANGE (§934.34). Threaded only
-    // for the sentinel that actually rolls, and only when the range is narrower than the
-    // ladder, so every other generation reaches the pipeline byte-identical. 'custom' is
-    // deliberately NOT covered: its size comes from the reader's own population figure,
-    // and a roll cannot be blamed for a number they typed.
-    ...(settType === 'random' && allowedTiers ? { _allowedTiers: allowedTiers } : {}),
   });
 
   const contentRuntimeOptions = await loadSettlementContentRuntimeOptions(state);
@@ -340,7 +355,6 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // `generation.worker.js`. Idempotent and memoized on the seam's slot, so the
   // second generation onward pays nothing.
   await loadGenerationLawPayloads();
-  const seed = seedOverride || generateSeed();
 
   const request = {
     kind: GENERATION_REQUEST_KIND,
@@ -421,10 +435,10 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // so reading it off the carried settlement is the same read as before.
   //
   // ⛐ IT IS NO LONGER THE ROUTINE OUTCOME OF A 'random' FORGE, and that is the point of
-  // `_allowedTiers` above: this branch used to fire on one anonymous roll in six, spending
-  // a whole generation to produce a refusal. It stays as the fail-closed BACKSTOP for
-  // 'custom' (a population the reader typed), for a pool the gate could not supply, and
-  // for any future path that reaches the pipeline around the pool.
+  // the aim above: this branch used to fire on one anonymous roll in six, spending a whole
+  // generation to produce a refusal. It stays as the fail-closed BACKSTOP for 'custom' (a
+  // population the reader typed), for a range the gate could not supply, and for any
+  // future path that reaches the pipeline around the aim.
   if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(withRoster?.tier)) {
     console.warn(`Resolved tier "${withRoster?.tier}" exceeds this account's cap — generation discarded.`);
     // A DIFFERENT sentence from the pre-flight refusal on purpose: the reader picked
@@ -432,10 +446,10 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
     // away. Telling them "you asked for too much" would be false.
     //
     // ⛔ AND THE ROLL CAN LAND UNDER THE FLOOR TOO, where "past what this account
-    // forges" is false the other way round. Since the roll draws from `_allowedTiers`
-    // this branch should now be unreachable for a capped account — but it is the LAST
-    // gate before a commit and it fails closed, so it states the right fact rather than
-    // the convenient one: same fact as the pre-flight's, reached by a different door.
+    // forges" is false the other way round. Since a capped 'random' is aimed inside the
+    // range before the engine runs, this branch should now be unreachable there — but it
+    // is the LAST gate before a commit and it fails closed, so it states the right fact
+    // rather than the convenient one: the pre-flight's fact, reached by another door.
     const rolled = get();
     set(s => {
       s.lastRefusal = belowFloor(rolled, withRoster?.tier)

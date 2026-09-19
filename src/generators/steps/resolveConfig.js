@@ -85,26 +85,9 @@ registerStep('resolveConfig', {
   const goodsToggles       = config._goodsToggles       || {};
   const servicesToggles    = config._servicesToggles     || {};
 
-  // Resolve tier.
-  //
-  // ⛔ 'random' DRAWS FROM THE RUNGS THE CALLER MAY ACTUALLY BE HANDED (§934.34). The
-  // ladder starts at `thorp`, and an anonymous visitor's gate starts at `hamlet`, so one
-  // roll in six produced a finished settlement the store then THREW AWAY at its
-  // post-resolution re-gate: a full generation's work, and a refusal, for a size the
-  // reader never chose. The gate's own range reaches the roll as `_allowedTiers`
-  // (store/settlementGenerateAction.js), which is the only place that knows it.
-  //
-  // ⛔ ABSENT OR EMPTY MEANS THE WHOLE LADDER, AND THAT IS WHY THE GOLDEN IS UNMOVED.
-  // Nothing outside the store threads the key — not the golden corpus, not a replayed
-  // config, not the instant-world composer — so `rng.pick` sees the same TIER_ORDER
-  // array, at the same point in the stream, that it has always seen. An uncapped account
-  // threads nothing either: the store only sends a pool when it is NARROWER than the
-  // ladder, so a free account's roll is byte-identical too.
-  const tierPool = Array.isArray(config._allowedTiers) && config._allowedTiers.length
-    ? config._allowedTiers
-    : TIER_ORDER;
+  // Resolve tier
   const tier = config.settType === 'custom'  ? popToTier(config.population)
-             : config.settType === 'random'  ? rng.pick(tierPool)
+             : config.settType === 'random'  ? rng.pick(TIER_ORDER)
              : (config.settType || 'village');
 
   // Population
