@@ -70,6 +70,13 @@ import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { Services } from '../../src/pdf/sections/Services.jsx';
+// ── THE THREE PER-SITE SUBJECTS (car 5c) ─────────────────────────────────────────
+// Each is addressed DIRECTLY rather than through the four-chapter walk above, because
+// each carries one word at two different rungs and a by-word verdict cannot tell the
+// rungs apart. See the describe block at the foot of this file.
+import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
+import { SupplyChainFlow } from '../../src/pdf/sections/SupplyChainFlow.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
 
 // ── THE SCREEN SIDE, rendered as a DM sees it ────────────────────────────────────────
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
@@ -80,6 +87,7 @@ import ServicesTab from '../../src/components/new/tabs/ServicesTab.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 
 /**
  * Towns chosen to light different band ladders; every one is a FRESH generation, so no
@@ -543,5 +551,320 @@ describe('the coherence verdict is derived from `viable` alone', () => {
       expect(viabilityVerdict(slice), `the page and the tab disagree at viable=${viable}`)
         .toEqual(viabilityVerdict({ viable }));
     }
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// CAR 5c — THE THREE ARMS THAT A BY-WORD VERDICT CANNOT REACH
+//
+// Every arm above judges a leaf BY ITS WORD: it collects the page's text and asks
+// whether a frozen vocabulary entry arrived shouting. That is the right question for a
+// word that means one thing wherever it lands, and the wrong question for a word the
+// dossier uses at TWO DIFFERENT RUNGS — because the vocabulary arm sees only the word
+// and would convict the rung that is lawfully capitalised. The deferral recorded at
+// SHOUTED_FIELD_NAMES ("resolving this one needs a structural handle on the group
+// header") is exactly that shape, and the estate's recorded answer to it is to address
+// the ELEMENT rather than to disambiguate by case.
+//
+// So these three call their subject DIRECTLY and judge PER SITE. Nothing here is added
+// to `printLeaves`: the by-word walk keeps its own scope, and these sit beside it.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * THE VERDICT VOCABULARY, TRANSCRIBED rather than imported — the same reason
+ * SHOUTED_STATUS_WORDS is transcribed. These are the five labels
+ * `domain/display/viabilityVerdict.js` can return (its four named branches plus the
+ * `tokenCase` fallback, which reads 'Uncertain' for a settlement with no verdict at
+ * all). An arm that imported the labels would agree with the module whatever it said,
+ * and the point here is what the two SURFACES print.
+ * @type {ReadonlyArray<string>}
+ */
+const VERDICT_WORDS = Object.freeze(['Viable', 'Not viable', 'Fragile', 'Collapsing', 'Uncertain']);
+
+/**
+ * A leaf with any leading NON-LETTER run stripped: the screen's verdict heading prints
+ * the glyph and the word in ONE element ("✓ Viable"), so `textContent` carries both and
+ * a bare equality against the print side would fail on the tick rather than on the word.
+ * The glyph is deliberately NOT shared between the surfaces — `viabilityVerdict`'s
+ * docblock keeps the glyph and the colour local to each surface and shares only the WORD
+ * and the judgement — so stripping it is what puts the comparison on the shared thing.
+ * @param {unknown} text
+ * @returns {string}
+ */
+const wordOf = (text) => String(text).trim().replace(/^[^A-Za-z]+/, '').trim();
+
+/** Case-insensitive membership of the verdict vocabulary — the CASE is what is judged. */
+const isVerdict = (word) => VERDICT_WORDS.some((w) => w.toUpperCase() === String(word).toUpperCase());
+
+/** How many leaves printed exactly this word. Cardinality is how two rungs are told apart. */
+const countOf = (words, needle) => words.filter((w) => w === needle).length;
+
+describe('one fact, two surfaces, two rungs — the per-site arms', () => {
+  test('the coherence verdict is the SAME WORD in the same case on screen and in print, on every fixture town', () => {
+    // ONE NAMED TEST LOOPING ITS ROWS, never a parameterised table — the each-family
+    // park is frozen and a file that parks on it credits NO titles to the lighting census.
+    //
+    // ⛔ WHY THIS NEEDED AN ARM OF ITS OWN. The verdict used to have TWO VOCABULARIES for
+    // one derived fact: the tab forked inline on `viable` and printed '✗ NOT COHERENT' /
+    // '✓ COHERENT' / 'MARGINAL COHERENCE', while the paid page ran its own private
+    // `verdictOf()` and printed 'Viable' / 'Not Viable' / 'Fragile' / 'Collapsing'. That is
+    // not a case divergence the arms above could ever have caught — neither spelling is in
+    // any frozen band vocabulary, so no by-word walk was ever looking at them. The cure was
+    // `domain/display/viabilityVerdict.js`, one derivation both surfaces read; this is the
+    // arm that says the two surfaces still speak it.
+    //
+    // ⛔ AND IT READS NEITHER `verdict` NOR `verdictTone`. Both fields are on their way out
+    // of the derivation, so an arm that pinned them would have to be rewritten the day that
+    // lands. What is asserted is only what each surface PRINTS, which is the contract.
+    for (const [town] of CASES) {
+      const settlement = settlements.get(town);
+      const vm = viewModels.get(town);
+
+      const printed = collectStyled(
+        ViabilityAssessment({ settlement, narrativeMode: false, vm, stateProse: null }),
+      ).map((leaf) => rendered(leaf));
+
+      const { container } = render(<ViabilityTab settlement={settlement} />);
+      const screened = screenLeaves(container).map((leaf) => rendered(leaf));
+      cleanup();
+
+      // ── ANTI-VACUITY, BOTH SURFACES ──────────────────────────────────────────────
+      // The chapter has a polite shell for a settlement it cannot assess, and the tab has
+      // an `Empty` early return for a settlement with no `economicViability` at all —
+      // every assertion below would pass against either. The Callout's kicker is printed
+      // only by the REAL verdict callout, and the tab's own caption only by the real tab.
+      expect(printed, `${town}: the viability chapter printed no verdict callout at all`)
+        .toContain('VERDICT');
+      expect(
+        screened.some((w) => w.startsWith('This tab checks whether your settlement makes')),
+        `${town}: the viability tab rendered its empty state, so the parity below is vacuous`,
+      ).toBe(true);
+
+      // ── THE WORD, FOUND INDEPENDENTLY ON EACH SURFACE ────────────────────────────
+      // Each side is searched by the VOCABULARY, not by asking the shared module what to
+      // look for. Re-deriving the label and then hunting for it would agree with itself
+      // whatever the two renderers did, which is the tautology this file exists to refuse.
+      const printVerdicts = [...new Set(printed.filter((w) => isVerdict(wordOf(w))).map(wordOf))];
+      const screenVerdicts = [...new Set(screened.filter((w) => isVerdict(wordOf(w))).map(wordOf))];
+
+      expect(printVerdicts.length, `${town}: no verdict word reached the paid page`)
+        .toBeGreaterThan(0);
+      expect(screenVerdicts.length, `${town}: no verdict word reached the screen`)
+        .toBeGreaterThan(0);
+
+      // ONE READING PER SURFACE. Two distinct spellings on one surface is already the
+      // defect — 'Viable' beside 'VIABLE' would mean a second, un-descended render site.
+      expect(printVerdicts, `${town}: the paid page prints the verdict in more than one spelling`)
+        .toHaveLength(1);
+      expect(screenVerdicts, `${town}: the screen prints the verdict in more than one spelling`)
+        .toHaveLength(1);
+
+      // ── AND THE TWO SPELLINGS ARE ONE SPELLING, CHARACTER FOR CHARACTER ──────────
+      // Case-sensitive, deliberately: a case-insensitive compare is the assertion that
+      // would have passed all the way through the defect this file exists for.
+      expect(
+        printVerdicts[0],
+        `${town}: the screen reads "${screenVerdicts[0]}" and the document the DM paid for`
+        + ` reads "${printVerdicts[0]}" — one derived fact, two words`,
+      ).toBe(screenVerdicts[0]);
+    }
+  });
+
+  test('FOOD SECURITY is two words at two rungs, and each site is judged on its own', () => {
+    // ⛔ THE CLASS, AND WHY THE VOCABULARY ARM ABOVE HAD TO DEFER IT. The dossier says
+    // "food security" twice in one chapter, and both are correct:
+    //   RUNG 1  EconomicsTrade's CHAPTER EYEBROW — a section heading, shouted by the
+    //           ruling, and shouted by its STYLE (`type.label` carries the transform).
+    //   RUNG 2  SupplyChainFlow's chain-group HEADER — a field name, sentence case
+    //           through `tokenCase`, on `type.label_plain` which declares no transform.
+    // A by-word arm sees only the string, so admitting 'FOOD SECURITY' to the frozen
+    // vocabulary would convict the eyebrow for being right. The two are separated here by
+    // ELEMENT instead, which is the estate's recorded answer to exactly this shape.
+    const [town] = CASES[0];
+    const settlement = settlements.get(town);
+    const vm = viewModels.get(town);
+
+    // ── RUNG 2: the group header, called directly with a synthetic chain ─────────
+    // Direct, and with a hand-built chain, because grouping only happens at town+ and only
+    // when a chain actually carries this needKey — a fixture that happened not to forge a
+    // food chain would make the whole arm pass on an absence. `needLabel` is transcribed
+    // from `data/supplyChainData.js`, which declares it 'Food Security'.
+    const chainLeaves = collectStyled(SupplyChainFlow({
+      chains: [{
+        chainId: 'ladder-food-chain',
+        needKey: 'food_security',
+        needLabel: 'Food Security',
+        status: 'running',
+        resource: 'Grain',
+        processingInstitutions: [],
+        outputs: ['Bread'],
+      }],
+      instNames: [],
+      primaryExports: [],
+      tier: 'town',
+    }));
+    const chainWords = chainLeaves.map((leaf) => rendered(leaf));
+    expect(chainWords.length, 'the chain flow rendered nothing, so the rung-2 arm is vacuous')
+      .toBeGreaterThan(4);
+    expect(
+      chainWords,
+      'the chain group header stopped speaking its need label — rung 2 is a FIELD NAME and'
+      + ' reads "Food security", not "FOOD SECURITY" and not the raw needKey',
+    ).toContain('Food security');
+    // …and it is quiet by its STYLE too, not merely by the string it was handed. A
+    // regression to `type.label` would leave this word untouched and still shout it.
+    const headerLeaf = chainLeaves.find((leaf) => rendered(leaf) === 'Food security');
+    expect(headerLeaf.transform, 'the group header sits under an uppercase transform again')
+      .not.toBe('uppercase');
+
+    // ── RUNG 1: the chapter eyebrow, from the real chapter ──────────────────────
+    const econWords = collectStyled(
+      EconomicsTrade({ settlement, narrativeMode: false, vm, stateProse: null }),
+    ).map((leaf) => rendered(leaf));
+    expect(econWords.length, 'the economics chapter rendered no text at all').toBeGreaterThan(30);
+    expect(
+      econWords,
+      'the FOOD SECURITY chapter eyebrow lost its capitals — rung 1 is a SECTION heading and'
+      + ' keeps them by the ruling; it is not the same element as the chain group header',
+    ).toContain('FOOD SECURITY');
+
+    // ── THE TWO RUNGS ARE IN THE SAME CHAPTER AND STILL DISAGREE LAWFULLY ───────
+    // EconomicsTrade mounts SupplyChainFlow behind `pdfVisualChains`, so on this one page a
+    // DM reads the eyebrow shouting and the group header speaking. That is the whole reason
+    // a word-level verdict is the wrong instrument here, executed rather than asserted.
+    expect(
+      econWords.filter((w) => w === 'FOOD SECURITY').length,
+      'the chapter lost its eyebrow',
+    ).toBe(1);
+    expect(
+      econWords.filter((w) => w === 'Food security').length,
+      'the chain group header no longer reaches the page through its real parent — the two'
+      + ' rungs must BOTH be live for this arm to be proving anything',
+    ).toBeGreaterThan(0);
+
+    // ── AND THE BY-WORD VOCABULARY STILL CANNOT REACH EITHER OF THEM ────────────
+    // The frozen roster must keep refusing these two words, or the arms at the head of this
+    // file would start convicting the lawful eyebrow the moment someone "completed" the
+    // need-label list. Anchored on a SIBLING from the same declaration site: the other nine
+    // need labels do carry the pin, and they travel the identical path.
+    expectAbsentWithAnchor(
+      LADDER_WORDS,
+      'FOOD SECURITY',
+      'RAW MATERIALS & FUEL',
+      'the need-label roster admitted FOOD SECURITY, which convicts the rung-1 eyebrow',
+    );
+  });
+
+  test('the institutions chapter says IMPAIRED, REDUCED and VULNERABLE at three registers, each correct', () => {
+    // ⛔ THE SAME CLASS, ONE CHAPTER WIDE. `Institutions` prints these words three ways:
+    //   RUNG 2  the StatStrip COUNT COLUMNS — 'Impaired' / 'Degraded' / 'Vulnerable' are
+    //           the NAMES of the figures beneath them, sentence case on `type.label_plain`.
+    //   RUNG 3  the card's STATUS PILL (Institutions.jsx:~213) — `cap(status)` on
+    //           `type.pill`, which declares no transform.
+    //   COUNT   the category header's tags — "1 impaired", "1 reduced", "1 vulnerable",
+    //           lower case inside a phrase. REDUCED lives ONLY here: it is the display
+    //           rename of the `degraded` count, which the StatStrip column still calls
+    //           'Degraded'. The two are different facts wearing one number.
+    // Rungs 2 and 3 print the SAME STRING, so no by-word verdict can separate them. They
+    // are separated here by SITE and by CARDINALITY instead.
+    const [town] = CASES[1];
+    const settlement = settlements.get(town);
+    const vm = viewModels.get(town);
+
+    /**
+     * The chapter over a hand-built services slice. The fixture towns forge institutions
+     * that are uniformly healthy, and the status pill is gated on `status !== 'healthy'` —
+     * so on a real view model rung 3 NEVER RENDERS and every assertion about it would pass
+     * on an absence. The statuses are transcribed from the chapter's own STATUS_TONE map.
+     */
+    const chapter = (statuses) => collectStyled(Institutions({
+      settlement,
+      narrativeMode: false,
+      vm: {
+        ...vm,
+        entityIndex: undefined,
+        services: {
+          totals: { total: statuses.length, impaired: 1, degraded: 1, vulnerable: 1 },
+          detailed: statuses.map((status, i) => ({
+            id: `ladder-inst-${i}`, name: `House ${i + 1}`, category: 'economy', status,
+          })),
+        },
+      },
+    }));
+
+    // ── PASS A: the rungs made TELLABLE APART, so each can be pinned alone ───────
+    // The pill words here are chosen NOT to collide with any StatStrip column name, so a
+    // leaf bearing one can only have come from rung 3, and a leaf bearing a column name can
+    // only have come from rung 2. The category tally is all-healthy-or-other, so the count
+    // tags stay silent and do not muddy the cardinalities.
+    const apart = chapter(['critical', 'productive', 'stable', 'healthy']);
+    const apartWords = apart.map((leaf) => rendered(leaf));
+
+    expect(apartWords.length, 'the institutions chapter rendered no text at all')
+      .toBeGreaterThan(20);
+    // RUNG 2, alone: the count columns, once each, as words.
+    for (const column of ['Impaired', 'Degraded', 'Vulnerable']) {
+      expect(
+        countOf(apartWords, column),
+        `the StatStrip count column "${column}" is not printing exactly once as a field name`,
+      ).toBe(1);
+      const leaf = apart.find((l) => rendered(l) === column);
+      expect(leaf.transform, `the count column "${column}" is shouting again`).not.toBe('uppercase');
+    }
+    // RUNG 3, alone: the status pill, once per non-healthy card, through `cap`.
+    for (const pill of ['Critical', 'Productive', 'Stable']) {
+      expect(
+        countOf(apartWords, pill),
+        `the card status pill "${pill}" is not printing exactly once as a status value`,
+      ).toBe(1);
+      const leaf = apart.find((l) => rendered(l) === pill);
+      expect(leaf.transform, `the status pill "${pill}" is shouting again`).not.toBe('uppercase');
+    }
+    // The healthy card is gated out, so the pill really is per-status and not per-card.
+    expect(countOf(apartWords, 'Healthy'), 'a healthy card grew a status pill').toBe(0);
+
+    // ── PASS B: THE OVERLAP — the same word at two rungs, which is the whole point ──
+    const both = chapter(['impaired', 'degraded', 'vulnerable', 'healthy']);
+    const bothWords = both.map((leaf) => rendered(leaf));
+
+    for (const word of ['Impaired', 'Degraded', 'Vulnerable']) {
+      expect(
+        countOf(bothWords, word),
+        `"${word}" should reach this page TWICE — once as a StatStrip count column (rung 2)`
+        + ' and once as a card status pill (rung 3). A by-word walker sees one string and'
+        + ' cannot tell which is which, which is why both are pinned by site here.',
+      ).toBe(2);
+    }
+    // THE COUNT REGISTER, and REDUCED's only home. 'Degraded' names the column; the tag
+    // beside it renames the same number 'reduced' for a reader, in lower case inside a
+    // phrase. Both spellings are deliberate and neither is the other's drift.
+    for (const tag of ['impaired', 'reduced', 'vulnerable']) {
+      expect(
+        countOf(bothWords, tag),
+        `the category header's "${tag}" count tag is gone — REDUCED in particular lives`
+        + ' nowhere else in this chapter, so losing it loses the word entirely',
+      ).toBe(1);
+    }
+    expect(
+      countOf(bothWords, 'Reduced'),
+      'REDUCED grew a second, sentence-case register — it is a count tag, not a column name',
+    ).toBe(0);
+
+    // ── SO THE BY-WORD WALKER COULD JOIN, AND WOULD CONVICT NOTHING ─────────────
+    // The roster DOES carry all three words in their shouted form, so a site that regressed
+    // to capitals here would be caught the moment this chapter joined `printLeaves`. What
+    // the per-site arms above add is the reason none of the live sites is a regression.
+    for (const word of ['IMPAIRED', 'REDUCED', 'VULNERABLE']) {
+      expect(
+        LADDER_WORDS,
+        `the frozen roster dropped "${word}" — the arms above would stop catching a shout`,
+      ).toContain(word);
+    }
+    const shouting = [...new Set(bothWords.filter((w) => LADDER_WORDS.includes(w)))];
+    expect(
+      shouting,
+      'the institutions chapter shouts a word the ladder descended — every register above'
+      + ' is sentence case or lower case, so this list is the by-word verdict and it is empty',
+    ).toEqual([]);
   });
 });
