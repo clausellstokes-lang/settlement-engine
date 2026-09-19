@@ -69,7 +69,6 @@ through `role="status"` and an accessible name. Tests pin these in
 | Primitive                 | role         | aria-label / labelledby      |
 |---------------------------|--------------|------------------------------|
 | `StateBadge`              | status       | from `COPY.state.tooltips`   |
-| `BandPill`                | status       | computed from band + label   |
 | `CanonBadge`              | status       | computed from source+status  |
 | `RegenerationModeSelector`| group/radio  | per option                   |
 | `RegenerationDeltaCard`   | (region)     | aria-label="Regeneration delta" |

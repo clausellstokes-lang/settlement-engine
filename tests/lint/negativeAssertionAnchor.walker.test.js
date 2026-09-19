@@ -748,7 +748,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/store/tableEventCommit.test.js': 5,
   'tests/store/uncanonizeTombstone.test.js': 2,
   'tests/ui/AiOverlayViolations.test.jsx': 1,
-  'tests/ui/BandPill.test.jsx': 1,
   'tests/ui/CanonBadge.test.jsx': 2,
   'tests/ui/RegenerationDeltaCard.test.jsx': 1,
   'tests/ui/UndoHistoryPanel.test.jsx': 2,

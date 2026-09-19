@@ -151,12 +151,22 @@ describe('Tier 7.18 — Mobile rendering smoke', () => {
     expect(container).toBeDefined();
   });
 
-  test('BandPill at sm size is suitable for mobile', async () => {
-    const { BandPill } = await import('../../src/components/primitives/BandPill.jsx');
-    const { container } = render(<BandPill band="strained" size="sm" />);
-    const pill = container.querySelector('[role="status"]');
-    expect(pill).not.toBeNull();
-    // The sm size should still render the band label readably.
+  // RETARGETED onto the LIVE band pill (2026-09-18). This arm used to render
+  // `primitives/BandPill.jsx`, a component with zero production importers that its own
+  // tests were keeping warm; the component is deleted and the CONCERN — a band word still
+  // readable at 360px — moves onto the pill a DM actually meets, SubstrateTab's. That pill
+  // is a local, unexported function carrying no role, so it is addressed by `data-band`,
+  // the machine vocabulary the tab deliberately keeps on the element.
+  test('the live band pill still renders a readable band word at mobile width', async () => {
+    const SubstrateTab = (await import('../../src/components/new/tabs/SubstrateTab.jsx')).default;
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const settlement = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', terrainOverride: 'river', tradeRouteAccess: 'road' },
+      null, { seed: 'mobile-band-pill', customContent: {} },
+    );
+    const { container } = render(<SubstrateTab settlement={settlement} />);
+    const pill = container.querySelector('[data-band]');
+    expect(pill, 'the substrate tab drew no band pill at all').not.toBeNull();
     expect(pill.textContent.length).toBeGreaterThan(0);
   });
 

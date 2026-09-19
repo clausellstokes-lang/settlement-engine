@@ -92,12 +92,6 @@ describe('Tier 7.17 — Modal dialog a11y', () => {
 // state and looking for the attribute. Adding new primitives? Add a test here.
 
 describe('Tier 7.17 — Primitive a11y contracts', () => {
-  test('BandPill exposes role=status', async () => {
-    const { BandPill } = await import('../../src/components/primitives/BandPill.jsx');
-    const { container } = render(<BandPill band="strained" />);
-    expect(container.querySelector('[role="status"]')).not.toBeNull();
-  });
-
   test('CanonBadge exposes role=status for non-default tags', async () => {
     const { CanonBadge } = await import('../../src/components/primitives/CanonBadge.jsx');
     const entity = { source: 'user', canonStatus: 'canon' };
