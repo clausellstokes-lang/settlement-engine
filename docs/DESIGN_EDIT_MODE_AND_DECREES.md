@@ -234,3 +234,20 @@ An NPC carries a `status` and an institution a `state`, both typed roots set fro
 
 **Chair defaults, vetoable.** An automatic win settles the war's terms in the same act, from the fork's own vocabulary. A party-caused chronicle line reads "by the party's hand" from the herald's pools.
 
+## 17. Where the acts live, and missions (the owner, ODQ §934.49; 2026-09-19)
+
+**The rule.** Every act starts on the card of the thing it acts on. The dossier is organized by subject (§934.25), so the editor adds no director's console and no second surface: in edit mode a card that holds a first-hand fact wears a PENCIL (an edit, §14), a card that shows a process wears a SEAL (a directive, §16), and a derived card wears neither — a provenance note.
+
+**The seals, by card.**
+- The war card: "Sue for peace", "Accept the peace", "Refuse it", "Direct the force", "Resupply", "Let the siege fall" (or hold), "Let the coup fail" (or succeed) — each a `pin-fork` or a direction over the war layer's own forks and actions.
+- The trade card: "Receive the envoy", "Turn the envoy away", "Direct trade", "Embargo".
+- A rumour or belief row: "Confirm it" (correct), "Cast doubt" (confidence), "Twist it" (mutate to a recorded variant).
+- The chronicle's next-tick foot: "Schedule an event" from the pulse's own catalogue, with a `when`.
+- A person's card: "Send on a mission" — envoy (to whom: a real save or a phantom; about what: peace, trade, alliance) or spy (on whom), and every other mission the simulation's casting and espionage forks already know, never one they do not. The NPC's status reads away-on-mission until the return the tick resolves; the mission's outcome is pinned by the DM or rolled by the fork; the return follows the estate's own procedures (a caught spy is the espionage layer's business, not a new rule).
+
+**One pop-up shape for every seal.** Worded in the herald's voice ("What befalls this siege?") with the fork's own outcomes as the choices, a `when`, the cause toggle "the party did this" (`cause: 'party'`), and the forge's brown-and-gold scheme (§3). It never shows a fork id. Every act lands in the one registry at the dossier's foot, in order, with a PHANTOM/REAL badge where a counterparty is involved (§13).
+
+**What this fixes for intuition.** The DM never asks "where is the war console"; they look at the war. The same gesture edits a fact and directs a process, and the glyph tells them which. Missions are the one place a person and a process meet, and they live on the person.
+
+**Build.** Wave 3 gains **EM-E7 — missions**: `send-on-mission` over the casting and espionage forks (measured against `envoyCasting.js` and the espionage layer's registered forks), the away-on-mission status (measured: whether `NpcStatus` needs a value or the roster's absence set already covers it), the return at the tick. Wave 4's surfaces place the seals per card as above.
+
