@@ -182,3 +182,18 @@ An Opus reviewer refuted the design and the architecture against the consist at 
 
 **What this simplifies.** The phantom packet (EM-F1) loses its phantom-side state and most of its guard rules; the op catalogue (EM-B1) carries one `consequence` policy per off-stage op — `home-procedures+record` for a phantom target, `world` for a real save — decided at apply time by the target's reality; the tick hook (EM-E1) applies that policy and nothing else.
 
+## 14. Edit at the source, never at the derivation (the owner, ODQ §934.44; 2026-09-19)
+
+**The rule.** The world is a derivation graph rooted in the seed. A fact is editable only where it exists first — without prior knowledge of any other fact. A derivation is never editable, on any card.
+
+**Three kinds of fact, three behaviours.**
+1. **Seed-level** — tier, terrain, culture, trade access, the pre-generation dials. The wizard's door: changing one is a regeneration. The editor never touches them.
+2. **Root** — a fact a generator step writes from the seed and the dials, whose writer reads no other world fact: an NPC's name, role and disposition; an institution's name, class and standing; a faction's name, archetype and stance; a power seat's holder. The editor's pencils and pools live here. When a root changes, regeneration re-applies it (§12.5) and every derivation recomputes from it — which is what the layer-on-write exists for.
+3. **Derived** — the economy, the supply chains, the defense scores, food security, the system states, the history. Never editable. A derived card shows PROVENANCE where a pencil would be: "follows from X — change X", drawn from the wiring census's producer citations (`src/domain/prose/holderTable.js` and the census's mapping rows). The DM's lever on derived state is a DECREE — an event the simulator processes at the tick — never a plain edit. History is the chronicle's and immutable (THE PROMISE).
+
+**The declaration is derived, not hand-written.** EM-A1's `FIELD_DECLARATIONS` is admitted by a census of the producer graph: a field is declarable iff its writer reads nothing but the seed and the dials (measured from the writer-reach and observed-shape data and the generators' own reads). The declaration walker (`tests/lint/editDeclarations.walker.test.js`) REFUSES a derived field outright, so no lane can ever pencil a supply chain. The flavor census (EM-A3) keeps its half: a `free` field has zero derivation readers.
+
+**What leaves the editable set.** The system-state cards (security, food security, order) named in ARCH §9 are derived and are struck. The first card list is NPC, institution, faction, power seat; neighbours and phantoms are their own records (§2.8, §13).
+
+**One edge, ruled by default.** A faction's power share is partly derived (the shares renormalize to one hundred). It stays a ROOT under the totality guard: who is strong is a first fact; the rebalance is the guard's `fulfil` (`renormalizeFactionPower`). Vetoable.
+
