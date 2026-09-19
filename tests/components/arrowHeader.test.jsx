@@ -199,27 +199,43 @@ describe('(a) structure: the painting is the nav, and the doors keep their names
     expect(navButtons(container).map((b) => b.getAttribute('data-sf-arrow-region'))).toEqual(NAV.map((n) => n.id));
   });
 
-  test('aria-current marks the view\'s region only, and the current rule is drawn under that word alone', () => {
+  test('aria-current is the ONLY current-page signal: no parchment mark is drawn on the shaft', () => {
+    // Owner, 2026-09-19: of the active word's parchment plaque, "remove that as well", under
+    // "revert it back to the way before with no parchment". Both marks the header has worn —
+    // the 2 px PARCH_100 rule and the ten-row plaque that replaced it — are gone, so the
+    // current destination is announced and not painted.
     H.route = { view: 'settlements', params: {}, legacy: false, notFound: false };
     const { container } = render(<App />);
+    // Liveness anchor: the six regions really rendered and exactly one of them is current, so
+    // the absence below is measured against a live header rather than an empty one.
+    expect(navButtons(container).length).toBe(6);
     const current = navButtons(container).filter((b) => b.getAttribute('aria-current') === 'page');
     expect(current.map((b) => b.textContent.trim())).toEqual(['Library']);
-    const rules = container.querySelectorAll('header [data-sf-arrow-current]');
-    expect(rules.length).toBe(1);
-    expect(current[0].contains(rules[0])).toBe(true);
-    expect(rules[0].style.background).toBe(hexToRgb(PARCH_100));
-    expect(rules[0].getAttribute('aria-hidden')).toBe('true');
+    expect(container.querySelectorAll('header [data-sf-arrow-current]').length).toBe(0);
+    // Nothing inside the NAV paints the parchment, whatever it calls itself. Scoped to the
+    // nav on purpose: the SIGN IN slip on the brass plate is also PARCH_100 and STAYS — it is
+    // AccountMenu's label ground, not a current-page mark, and the owner removed only the latter.
+    const parchment = [...container.querySelectorAll('header nav *')]
+      .filter((el) => el.style?.background === hexToRgb(PARCH_100));
+    expect(parchment).toEqual([]);
+    expect(container.querySelector('header [data-sf-arrow-plate] span')?.style.background)
+      .toBe(hexToRgb(PARCH_100));
   });
 
-  test('the current rule keeps PARCH_100 under forced colours (its ground is the painting, which they leave alone)', () => {
-    // jsdom drops the property, so the pin reads React's own serialisation of the header.
+  test('the rendered header paints no PARCH_100 mark under the active word', () => {
+    // React's own serialisation, because jsdom drops forced-color-adjust and would hide a
+    // re-added mark that only differed in that property.
     const html = renderToStaticMarkup(
       <ArrowHeader view="settlements" onNavClick={() => {}} onHome={() => {}} account={{ isAnon: true, onSignIn: () => {} }} />,
     );
-    const rule = html.match(/<span aria-hidden="true" data-sf-arrow-current="" style="([^"]*)"/);
-    expect(rule, 'presence control: the rule rendered').not.toBeNull();
-    expect(rule[1]).toContain('forced-color-adjust:none');
-    expect(rule[1]).toContain('background:#F4EAD0');
+    // Anchored on the word that IS rendered: if the nav stopped rendering at all, the anchor
+    // fails rather than the absence passing vacuously. React serialises the token as hex.
+    expectAbsentWithAnchor(html, 'data-sf-arrow-current', 'Library', 'ArrowHeader active mark');
+    // Scoped to the nav: the SIGN IN slip on the brass plate is PARCH_100 too and stays.
+    const nav = html.slice(html.indexOf('<nav'), html.indexOf('</nav>'));
+    expectAbsentWithAnchor(nav, PARCH_100, 'Library', 'ArrowHeader parchment mark');
+    expect(html.slice(html.indexOf('</nav>')), 'the SIGN IN slip keeps its parchment')
+      .toContain(PARCH_100);
   });
 
   test('on a view with no painted word (the landing) no region is current', () => {

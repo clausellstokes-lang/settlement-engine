@@ -35,7 +35,7 @@ import {
   BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, COMPACT_MIN_SLOT, COMPACT_W, CUTS, FE, FEATHER_FROM,
   FEATHER_RAMP, FEATHER_X1, FILLER_W, FULL_MIN_VIEWPORT, GLOW_PAD, GLOW_ROWS, HANG_H, HOME, LOGO_PLATE, MIN_SHARE_PX,
   NAV_HIT, NAV_WORD, PLATE, PLATE_FIELD, PLATE_RIVETS, S_MAX, SHARES, SHORT_CAP, SLIP, SLOT_TONE,
-  STRIP_W, UNDERLINE_ROW, PLAQUE_ROWS, PLAQUE_PAD, WOOD_RUNS, WORD_FLOOR, WORD_ROWS, SEAM_BAND_TO, SEAM_HANG_FROM,
+  STRIP_W, WOOD_RUNS, WORD_FLOOR, WORD_ROWS, SEAM_BAND_TO, SEAM_HANG_FROM,
   featherShown, fullScale, layoutArrow, padTarget,
 } from '../../src/components/nav/arrowGeometry.js';
 import { NAV } from '../../src/lib/routes.js';
@@ -157,12 +157,13 @@ describe('(b) the measured tables agree with each other', () => {
     }
   });
 
-  it('the slip sits inside the plate field, clear of both rivets, and the plaque hangs under every descender without leaving the band', () => {
+  it('the slip sits inside the plate field, clear of both rivets', () => {
     expect(SLIP.x0 >= PLATE_FIELD.x0 && SLIP.x1 <= PLATE_FIELD.x1).toBe(true);
     expect(SLIP.y0 >= PLATE_FIELD.y0 && SLIP.y1 <= PLATE_FIELD.y1).toBe(true);
     expect(PLATE_RIVETS.map((r) => r.x1 <= SLIP.x0 || r.x0 >= SLIP.x1)).toEqual([true, true]);
-    expect(UNDERLINE_ROW).toBeGreaterThan(WORD_ROWS.bottom);
-    expect(UNDERLINE_ROW + PLAQUE_ROWS).toBeLessThan(BAND_H);
+    // The lettering stays inside the band it is painted on; nothing is drawn under it since
+    // the owner removed the active-page mark (2026-09-19), so no rect hangs below the word.
+    expect(WORD_ROWS.bottom).toBeLessThan(BAND_H);
   });
 
   it('the word floor sets the switch', () => {
@@ -275,7 +276,7 @@ describe('(e) the hit rectangles', () => {
     const failures = [];
     const ids = Object.keys(NAV_HIT);
     for (let cw = 1009; cw <= 3840; cw += 7) {
-      const { hits, s, share, width } = layoutArrow({ clientWidth: cw, full: true });
+      const { hits, s, share, width, mapX } = layoutArrow({ clientWidth: cw, full: true });
       const chain = [hits.home, ...ids.map((id) => hits.nav[id]), hits.plate];
       chain.forEach((r, i) => {
         if (r.x < -EPS || r.x + r.w > width + EPS) failures.push(`${cw}: rect ${i} out of bounds`);
@@ -288,15 +289,14 @@ describe('(e) the hit rectangles', () => {
         const want = (span.x1 - span.x0) * s + own * share;
         if (Math.abs(hits.nav[id].w - want) > EPS) failures.push(`${cw}: ${id} width ${hits.nav[id].w} vs ${want}`);
         if (hits.nav[id].w < 24) failures.push(`${cw}: ${id} narrower than 24 px`);
-        const u = hits.plaque[id];
-        if (u.x < hits.nav[id].x || u.x + u.w > hits.nav[id].x + hits.nav[id].w) failures.push(`${cw}: ${id} plaque outside its region`);
-        if (Math.abs(u.y - UNDERLINE_ROW * s) > EPS) failures.push(`${cw}: ${id} plaque row`);
-        // The plaque hangs DOWNWARD only: its top row is the word's baseline clearance and
-        // its ten rows stay inside the painted band at every scale.
-        if (Math.abs(u.h - PLAQUE_ROWS * s) > EPS) failures.push(`${cw}: ${id} plaque height ${u.h}`);
-        if (u.y + u.h > hits.nav[id].y + hits.nav[id].h + EPS) failures.push(`${cw}: ${id} plaque below the band`);
+        // The hit region is the control's whole box: it must contain the painted word it
+        // names, at every width. (It used to have to contain a plaque too; the owner removed
+        // that mark on 2026-09-19 and the region is now the only rect a word owns.)
         const word = NAV_WORD[id];
-        if (Math.abs(u.w - ((word.x1 - word.x0) + 2 * PLAQUE_PAD) * s) > EPS) failures.push(`${cw}: ${id} plaque width ${u.w}`);
+        const wordRect = { x: hits.nav[id].x, w: hits.nav[id].w };
+        if (mapX(word.x0) < wordRect.x - EPS || mapX(word.x1) > wordRect.x + wordRect.w + EPS) {
+          failures.push(`${cw}: ${id} lettering outside its hit region`);
+        }
       }
       const { slip, plate } = hits;
       if (slip.x < plate.x || slip.x + slip.w > plate.x + plate.w || slip.y < 0 || slip.y + slip.h > plate.h) failures.push(`${cw}: slip outside the plate`);
@@ -314,7 +314,6 @@ describe('(e) the hit rectangles', () => {
     for (const cw of [320, 390, 640, 1023]) {
       const { hits, width } = layoutArrow({ clientWidth: cw, full: false });
       expect(Object.keys(hits.nav)).toEqual([]);
-      expect(Object.keys(hits.plaque)).toEqual([]);
       expect(hits.home.x).toBe(0);
       expect(hits.home.w).toBeLessThanOrEqual(hits.plate.x);
       expect(hits.plate.x + hits.plate.w).toBeLessThanOrEqual(width + EPS);

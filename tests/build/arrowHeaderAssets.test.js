@@ -29,9 +29,10 @@
  *       each cut);
  *   (f) the slip field is clear of the plate's engraving and rivets;
  *   (g) contrast riders on real wood pixels, including the NEGATIVE ones that decide the
- *       header's focus and current-page marks: INK clears 3:1 on the upper band only,
- *       PARCH_100 on the lower band only, neither on rows 24 to 36, and the house bronze
- *       focus colour does not clear 3:1 on wood at all;
+ *       header's focus mark: INK clears 3:1 on the upper band only, PARCH_100 on the lower
+ *       band only, neither on rows 24 to 36, and the house bronze focus colour does not
+ *       clear 3:1 on wood at all. (The active-page plaque these rows once certified was
+ *       removed by the owner on 2026-09-19; the band riders stand on their own.)
  *   (h) the feather: nothing hangs below the band left of the barb outside the feather's
  *       columns, nothing opaque crosses the feather layer's right edge, and the rows the
  *       feather shares with the always-drawn hang are opaque but for two named ends.
@@ -47,7 +48,7 @@ import {
   ARROW_FILLER_SRC, ARROW_STRIP_SRC, BAND_H, BARB_HANG_H, BINDINGS, COMPACT_JOIN, CUTS, FE,
   FEATHER_FROM, FEATHER_X1, FILLER_H, FILLER_W, GLOW_PAD, HANG_H, LOGO_PLATE, NAV_HIT, NAV_WORD,
   PLATE, PLATE_RIVETS, ROW0_OPAQUE, SLIP, SLOT_TONE, SEAM_BAND_TO, SEAM_HANG_FROM, STRIP_H,
-  PLAQUE_PAD, PLAQUE_ROWS, STRIP_W, UNDERLINE_ROW, WOOD_RUNS, WORD_ROWS,
+  STRIP_W, WOOD_RUNS, WORD_ROWS,
 } from '../../src/components/nav/arrowGeometry.js';
 import { legacy } from '../../src/design/tokens.js';
 
@@ -297,7 +298,7 @@ describe('(d) cuts, wood runs and words', () => {
       if (inked[0] !== word.x0 || inked[inked.length - 1] !== word.x1 - 1) {
         failures.push(`${id}: lettering spans ${inked[0]}..${inked[inked.length - 1] + 1}, table says ${word.x0}..${word.x1}`);
       }
-      // Lettering rows: caps and descenders only, never on the plaque's rows.
+      // Lettering rows: caps and descenders only, inside the band WORD_ROWS names.
       let top = STRIP_H, bottom = -1;
       for (const x of columns(word)) {
         for (let y = 14; y < 61; y += 1) {
@@ -305,13 +306,6 @@ describe('(d) cuts, wood runs and words', () => {
         }
       }
       if (top < WORD_ROWS.top || bottom >= WORD_ROWS.bottom) failures.push(`${id}: lettering rows ${top}..${bottom}`);
-      // The plaque covers its own columns for all of its rows, so lettering anywhere under
-      // it would be hidden by the active-page mark rather than marked by it.
-      for (const x of columns({ x0: word.x0 - PLAQUE_PAD, x1: word.x1 + PLAQUE_PAD })) {
-        for (let y = UNDERLINE_ROW - 1; y < UNDERLINE_ROW + PLAQUE_ROWS; y += 1) {
-          if (luma(px(strip, x, y)) < 0.45 * ROW_MEDIAN[y]) failures.push(`${id}: ink on plaque row ${y} at ${x}`);
-        }
-      }
     }
     expect(failures).toEqual([]);
   });
@@ -474,21 +468,6 @@ describe('(g) contrast on real wood pixels', () => {
   it('NEGATIVE: on rows 24 to 36 neither clears 3:1, so a one-colour mark cannot span the band; the INK and PARCH_100 pair does (15:1 against each other)', () => {
     expect(rowsWhere(([ink, parch]) => ink < 3 && parch < 3)).toEqual([0, 1, 2, 3, ...Array.from({ length: 13 }, (_, i) => 24 + i), 67]);
     expect(contrast(INK, PARCH_100)).toBeGreaterThan(15);
-  });
-
-  it("the plaque's ten rows under every word take PARCH_100 at 8:1 or more and refuse INK, pad included", () => {
-    const failures = [];
-    for (const [id, word] of Object.entries(NAV_WORD)) {
-      const values = [];
-      const field = { x0: word.x0 - PLAQUE_PAD, x1: word.x1 + PLAQUE_PAD };
-      for (let y = UNDERLINE_ROW; y < UNDERLINE_ROW + PLAQUE_ROWS; y += 1) for (const x of columns(field)) values.push(lum(px(strip, x, y)));
-      const parch = contrast(PARCH_100, percentile(values, 0.99));
-      const ink = contrast(INK, percentile(values, 0.01));
-      if (parch < 8 || ink >= 1.5) failures.push(`${id}: PARCH_100 ${parch.toFixed(2)}, INK ${ink.toFixed(2)}`);
-      // The plaque must also stay inside the rows PARCH_100 clears 3:1 on at all (37 to 66).
-      if (UNDERLINE_ROW + PLAQUE_ROWS > 67) failures.push(`${id}: plaque leaves the certified rows`);
-    }
-    expect(failures).toEqual([]);
   });
 
   it('NEGATIVE: the house bronze focus colour does not reach 3:1 against the median wood of the band', () => {

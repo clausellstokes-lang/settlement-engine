@@ -54,14 +54,26 @@
  * STILL TAKES 40 ROWS, the same way: below about 1255 px of page the painted band is under
  * 40 px tall (32.6 at 1024), so the six words were smaller targets on a laptop than the
  * guideline floor while phones were already padded to 44. The floor grows the BOX only —
- * height, never x or width — so the painted word, its plaque and its glow stay exactly where
- * the geometry puts them.
+ * height, never x or width — so the painted word and its glow stay exactly where the geometry
+ * puts them.
  *
- * The active page carries a PARCH_100 PLAQUE under its painted word (arrowGeometry.js
- * PLAQUE_ROWS: ten rows at 8.49:1 on those rows of wood, the SIGN IN slip's own motif rather
- * than a new painting), kept in that colour under forced colours (the ground is the painting,
- * which forced colours leave alone). Hover — and keyboard focus — draws a soft glow on the
- * word or plate itself (ArrowControl), on devices that hover.
+ * THE ACTIVE PAGE CARRIES NO PAINTED MARK (owner, 2026-09-19: of the parchment plaque under
+ * the active word, "remove that as well", with "revert it back to the way before with no
+ * parchment"). Both marks this header has worn are gone: the 2 px PARCH_100 rule that came
+ * before, and the ten-row plaque that replaced it on 2026-09-18 because the rule measured one
+ * device pixel at the smallest scale. The owner's ground for removing them is the painting —
+ * the header is the arrow, and parchment laid over the shaft is not part of it.
+ *
+ * SO `aria-current="page"` IS THE WHOLE OF IT: assistive technology announces the current
+ * destination, and sighted readers have the page itself and the document title. This is a
+ * DELIBERATE, OWNER-DIRECTED reversal of the 2026-09-18 review's first finding ("the desktop
+ * nav painted onto the arrow shaft reads as decoration"), not an oversight, and it is not a
+ * WCAG 1.4.1 failure — nothing conveys the current page by colour alone, because on the shaft
+ * nothing conveys it at all. Do not re-add a mark here without the owner.
+ *
+ * Hover — and keyboard focus — still draws a soft glow on the word or plate itself
+ * (ArrowControl), on devices that hover, and the focus ring is untouched: those are focus and
+ * pointer affordances, not a current-page mark.
  *
  * THE FIRST FRAME. The width store is read during the first render, before the app is in the
  * document, so a classic scrollbar that appears once the page is tall is not in that width.
@@ -81,7 +93,7 @@ import useChromeWidth, { readChromeWidth } from './useChromeWidth.js';
 import { FULL_MIN_VIEWPORT, featherShown, layoutArrow, padTarget } from './arrowGeometry.js';
 import {
   ARROW_BARB_CLEAR_VAR, ARROW_CLEAR_VAR, ARROW_HANG_VAR, ARROW_VARS, BOTTOM_NAV_H_VAR, HEADER_H,
-  HEADER_HEIGHT_VAR, PARCH_100,
+  HEADER_HEIGHT_VAR,
 } from '../theme.js';
 
 /** The touch target floor (Apple HIG / Material; e2e/mobile-pointer-targets.spec.js). */
@@ -194,8 +206,6 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
             <nav aria-label="Primary">
               {NAV.map(({ id, label }) => {
                 const rect = target(hits.nav[id]);
-                const active = view === id;
-                const rule = hits.plaque[id];
                 return (
                   <ArrowControl
                     key={id}
@@ -203,20 +213,10 @@ export default function ArrowHeader({ view, onNavClick, onHome, account }) {
                     glow={within(hits.glow.nav[id], rect)}
                     paintedH={layout.bandPx}
                     data-sf-arrow-region={id}
-                    aria-current={active ? 'page' : undefined}
+                    aria-current={view === id ? 'page' : undefined}
                     onClick={() => onNavClick(id)}
                   >
                     <span className="sr-only">{label}</span>
-                    {active && (
-                      <span
-                        aria-hidden="true"
-                        data-sf-arrow-current=""
-                        style={{
-                          position: 'absolute', pointerEvents: 'none', background: PARCH_100, forcedColorAdjust: 'none',
-                          left: px(rule.x - rect.x), top: px(rule.y - rect.y), width: px(rule.w), height: px(rule.h),
-                        }}
-                      />
-                    )}
                   </ArrowControl>
                 );
               })}

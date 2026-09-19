@@ -47,6 +47,7 @@ import { resolveTownMapStyle, ILLUSTRATED_STYLE_ID, TOWN_MAP_STYLE_IDS } from '.
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 import { semantic } from '../../src/design/tokens.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // ── WCAG relative-luminance contrast ─────────────────────────────────────────
 function channel(c) {
@@ -445,9 +446,17 @@ describe('THE PAINTED ARROW HEADER: the plate slip and the ring tones (the fourt
     const control = READ('src/components/nav/ArrowControl.jsx');
     expect(control).toMatch(/'--sf-focus': INK,/);
     expect(control).toMatch(/outline: `2px solid \$\{PARCH_100\}`/);
-    // The active-page rule under a painted word is PARCH_100, the tone that clears the
-    // shaded rows it sits on (8.3:1 or more there, measured on the pixels).
-    expect(READ('src/components/nav/ArrowHeader.jsx')).toMatch(/background: PARCH_100,/);
+    // The ring is the only place the header spends PARCH_100 over the painted shaft. The
+    // active-page mark that also spent it — a 2 px rule, then a ten-row plaque — was removed
+    // by the owner on 2026-09-19 ("remove that as well"), so ArrowHeader no longer imports
+    // the token at all. Anchored on the import it DOES keep, so a header that stopped
+    // importing anything from the theme reds here instead of passing on an empty file.
+    // Comments stripped: the header's docblock NAMES the removed mark on purpose, and a
+    // prose mention must not read as a live paint.
+    const header = READ('src/components/nav/ArrowHeader.jsx').replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, '');
+    // Anchored on a sibling of the SAME theme import: if the header stopped importing from
+    // theme.js at all, the anchor fails rather than the absence passing on a gutted file.
+    expectAbsentWithAnchor(header, 'PARCH_100', 'HEADER_HEIGHT_VAR', 'ArrowHeader theme imports');
   });
 
   test('NEGATIVE CONTROL: the house bronze ring is not a slip tone (it is the tone the override replaces)', () => {

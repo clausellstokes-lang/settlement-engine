@@ -319,39 +319,20 @@ export const NAV_WORD = Object.freeze({
 export const WORD_ROWS = Object.freeze({ top: 19, baseline: 41, bottom: 50 });
 
 /**
- * The active-page PLAQUE's top row: below every descender, above the shaft's lower edge. On
- * these rows the wood is dark (INK does not contrast there; PARCH_100 does, measured by
- * tests/build/arrowHeaderAssets.test.js).
- */
-export const UNDERLINE_ROW = 52;
-
-/**
- * THE ACTIVE PAGE'S PLAQUE (review finding, 2026-09-18: "the desktop nav painted onto the
- * arrow shaft reads as decoration"). The mark used to be a 2-row hairline, which at the
- * smallest full-arrow scale is ONE device pixel of parchment under a painted word — present
- * in the DOM, invisible on the shaft.
+ * THE ACTIVE PAGE HAS NO MARK ON THE SHAFT (owner, 2026-09-19: "remove that as well", under
+ * "revert it back to the way before with no parchment").
  *
- * It is now a small parchment slip: THE SAME MOTIF THE HEADER ALREADY USES FOR SIGN IN,
- * where live text on the brass plate fails AA and sits on a PARCH_100 slip instead
- * (components/AccountMenu.jsx, SLIP above). Nothing is painted and nothing is redrawn — it
- * is the one flat colour the painting is already marked with, on rows the painting leaves
- * plain.
+ * This module carried two of them in turn and now carries neither. UNDERLINE_ROW with a 2-row
+ * PARCH_100 rule came first; the 2026-09-18 review found it invisible (one device pixel at the
+ * smallest full-arrow scale), and PLAQUE_ROWS / PLAQUE_PAD replaced it with a ten-row
+ * parchment slip at 8.49:1. The owner has since removed the whole idea: the header is the
+ * painting, and parchment laid over the shaft is not part of it.
  *
- * TEN ROWS AND SIX COLUMNS, BOTH MEASURED, NOT CHOSEN. The plaque grows DOWNWARD from
- * UNDERLINE_ROW into the shaft's shaded lower body and never upward into the lettering.
- * Rows [52, 62) are the tallest run that still takes PARCH_100 at 8:1 against the wood's
- * 99th percentile (8.49:1; twelve rows falls to 7.80 and fails the bar the hairline set),
- * they carry no lettering ink at all, and they stay inside the rows 37-66 band where
- * PARCH_100 clears 3:1 at all. Six columns of parchment past each word's ink is a CHOSEN
- * margin, not a maximum: the binding constraint is Compendium's own gaps, ten columns to
- * its left binding and eleven to its right, so ten would still fit and eleven would not.
- * The ceiling is enforced rather than asserted here — tests/components/arrowGeometry.test.js
- * holds every plaque inside its own hit region at every width from 1009 to 3840. tests/build/arrowHeaderAssets.test.js re-measures all of
- * it on the shipped pixels, so a re-cut of the art reds instead of shipping an invisible or
- * a lettering-covering mark.
+ * So there is no plaque rect in the layout and no constant for one. `aria-current="page"`
+ * (components/nav/ArrowHeader.jsx) is the only current-page signal the header emits. The hit
+ * regions, the hover/focus glow boxes and the focus ring are unaffected — they are pointer and
+ * focus affordances, not a current-page mark.
  */
-export const PLAQUE_ROWS = 10;
-export const PLAQUE_PAD = 6;
 
 /** The blank brass plate, ornament tip to ornament tip (the account's home at every width). */
 export const PLATE = Object.freeze({ x0: 1623, x1: 1877 });
@@ -404,7 +385,6 @@ export const SLIP = Object.freeze({ x0: 1683, x1: 1825, y0: 13, y1: 49 });
  *     nav: Record<string, Rect>,
  *     plate: Rect,
  *     slip: Rect,
- *     plaque: Record<string, Rect>,
  *     glow: { home: Rect, nav: Record<string, Rect>, plate: Rect },
  *   },
  *   mapX: (x: number) => number,
@@ -554,13 +534,10 @@ export function layoutArrow({ clientWidth, full, short = false }) {
   /** @type {Record<string, Rect>} */
   const nav = {};
   /** @type {Record<string, Rect>} */
-  const plaque = {};
-  /** @type {Record<string, Rect>} */
   const glowNav = {};
   if (full) {
     for (const [id, span] of Object.entries(NAV_HIT)) nav[id] = rect(span, 0, bandPx);
     for (const [id, span] of Object.entries(NAV_WORD)) {
-      plaque[id] = rect({ x0: span.x0 - PLAQUE_PAD, x1: span.x1 + PLAQUE_PAD }, UNDERLINE_ROW, PLAQUE_ROWS * s);
       glowNav[id] = rect({ x0: span.x0 - GLOW_PAD, x1: span.x1 + GLOW_PAD }, GLOW_ROWS.top, glowH);
     }
   }
@@ -582,7 +559,6 @@ export function layoutArrow({ clientWidth, full, short = false }) {
       nav,
       plate: rect(PLATE, 0, bandPx),
       slip: rect(SLIP, SLIP.y0, (SLIP.y1 - SLIP.y0) * s),
-      plaque,
       glow: {
         home: rect(LOGO_PLATE, GLOW_ROWS.top, glowH),
         nav: glowNav,
