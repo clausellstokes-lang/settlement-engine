@@ -30348,6 +30348,377 @@
           "validate"
         ]
       ]
+    },
+    {
+      "id": "EM-B3a",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B3a.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/publicSafe.js",
+          "_note": "PRIVATE_KEY_RE (:101) gains the single token `decrees` on the EXISTING line (+0 eff; `dmLayer` is already denied by `\\bdm`, measured), and toPublicSafe's `full` branch (:244-345) gains `delete clone.dmLayer;` and `delete clone.decrees;` beside `delete clone.narrativeNotes;` (+2 eff)."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "_note": "WORLD_SNAPSHOT_HARD_DENY (:68) gains 'dmLayer' and 'decrees' in its FIRST (always-present) block, after 'deferredPartyImpacts' and before the conditional-ledger block, so worldSnapshotDenyCensus's derived comparison is untouched (+2 eff). COVERT_KEY_RE is NOT edited."
+        },
+        {
+          "action": "MODIFY",
+          "path": "src/lib/accountData.js",
+          "_note": "one module-private pure helper `withoutEditState` plus one call inside preflightAccountExport (:206) over the settlements list, before the payload literal; a DESTRUCTURE-DROP in importScrub.js's spelling so the observed-shape register does not move; reference-identical when nothing is dropped (+6 eff)."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/store/decreeRegistryPersistence.test.js",
+          "_note": "the persistence round-trip battery: acceptance cases A1, A2, A4, A5, A6 as 5 literal-titled tests in 2 describes, no .each and no loop-generated test (EM-PREAMBLE 3.4). CREATE rather than TEST because the validator requires a non-CREATE row's path to exist at the base (implementation-packets.mjs:710); 134 landed rows use CREATE for a new test file."
+        },
+        {
+          "action": "CREATE",
+          "path": "tests/lib/editTravel.test.js",
+          "_note": "ARCH 8 instrument 8, a RUNTIME travel test and never a static walker: acceptance cases A3, A7, A8 as 3 literal-titled tests in 2 describes. Anchored negatives use lifecycleRoundTrip.test.js:1937's expectAbsentWithAnchor idiom with spatialLayout as the live anchor."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "src/store/persistProjection.js",
+          "symbol": "export function partializeStoreState"
+        },
+        {
+          "path": "src/store/persistMerge.js",
+          "symbol": "export function mergePersistedState"
+        },
+        {
+          "path": "src/domain/display/publicSafe.js",
+          "symbol": "export const PRIVATE_KEY_RE"
+        },
+        {
+          "path": "src/domain/display/publicSafe.js",
+          "symbol": "export const PUBLIC_TOPLEVEL_KEYS"
+        },
+        {
+          "path": "src/domain/display/publicSafe.js",
+          "symbol": "export function toPublicSafe"
+        },
+        {
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "symbol": "export const COVERT_KEY_RE"
+        },
+        {
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "symbol": "export const WORLD_SNAPSHOT_HARD_DENY"
+        },
+        {
+          "path": "src/domain/display/worldSnapshotPublic.js",
+          "symbol": "export function serializeWorldSnapshotPublic"
+        },
+        {
+          "path": "src/lib/accountData.js",
+          "symbol": "export function preflightAccountExport"
+        },
+        {
+          "path": "src/lib/accountData.js",
+          "symbol": "export function buildAccountExport"
+        },
+        {
+          "path": "src/lib/saves.js",
+          "symbol": "row.data = entry.settlement"
+        },
+        {
+          "path": "src/lib/importScrub.js",
+          "symbol": "export function scrubImportedTreasury"
+        },
+        {
+          "path": "src/lib/worldExport.js",
+          "symbol": "export function buildWorldExport"
+        },
+        {
+          "path": "src/lib/generationIntent.js",
+          "symbol": "export const GENERATION_INTENT_SAMPLE_FORK"
+        },
+        {
+          "path": "src/data/sampleSettlements.js",
+          "symbol": "export function forkConfigFor"
+        },
+        {
+          "path": "src/data/sampleSettlements.js",
+          "symbol": "export function forkSeedFor"
+        },
+        {
+          "path": "src/domain/normalizeSettlement.js",
+          "symbol": "export function normalizeSettlement"
+        },
+        {
+          "path": "tests/store/lifecycleRoundTrip.test.js",
+          "symbol": "const ZUSTAND_PERSIST_KEYS = Object.freeze(["
+        },
+        {
+          "path": "tests/security/snapshotDenylistDrift.test.js",
+          "symbol": "the net-current SQL sanitizer denies the \"%s\" key (membership)"
+        },
+        {
+          "path": "tests/security/worldSnapshotDenyCensus.test.js",
+          "symbol": "WORLD_SNAPSHOT_HARD_DENY"
+        },
+        {
+          "path": "tests/security/gallerySanitizeAllowlist.contract.test.js",
+          "symbol": "SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS"
+        },
+        {
+          "path": "tests/security/townMapEditsPublicDrop.test.js",
+          "symbol": "mapEdits is NOT an allowlisted top-level public key"
+        },
+        {
+          "path": "tests/lib/worldExport.test.js",
+          "symbol": "no worldState HARD-DENY ledger key appears anywhere in the player export"
+        },
+        {
+          "path": "tests/lib/importScrub.test.js",
+          "symbol": "is REFERENCE-IDENTICAL when there is nothing to strip"
+        },
+        {
+          "path": "supabase/migrations/136_world_snapshot_deny_census_lift.sql",
+          "symbol": "create or replace function public._gallery_world_snapshot_is_safe"
+        },
+        {
+          "path": "scripts/check-observed-shape-readers.mjs",
+          "symbol": "export const EXPLAINED_WRITER_EXEMPTIONS"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "A1",
+          "case": "a save whose settlement carries both edit keys survives save list writeAll list byte-exact with array order intact and mints no settlements column"
+        },
+        {
+          "id": "A2",
+          "case": "a settlement with neither key round-trips byte-identical and no hop materializes either key"
+        },
+        {
+          "id": "A3",
+          "case": "neither key is an allowlisted public top-level key and the default fail-closed projection drops both while keeping allowlisted content"
+        },
+        {
+          "id": "A4",
+          "case": "empty persists as empty and never collapses to absent while null and malformed legacy values read as absent inert and never throw"
+        },
+        {
+          "id": "A5",
+          "case": "a second save is byte-identical and a partial update leaves both keys byte-exact with nothing re-minted or re-ordered"
+        },
+        {
+          "id": "A6",
+          "case": "an account-origin world writes no anonymous envelope and an anon-origin envelope stays byte-identical to its world so the origin gate not a strip keeps edits out"
+        },
+        {
+          "id": "A7",
+          "case": "the three travel surfaces carry neither key a sample fork regenerated from its seed the account export string and a fully enabled public world snapshot"
+        },
+        {
+          "id": "A8",
+          "case": "the gallery share dm full projection drops both although the allowlist gate is skipped while a revealed DM field and an allowlisted sibling both survive"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/store/decreeRegistryPersistence.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/lib/editTravel.test.js",
+          "tests/lib/worldExport.test.js",
+          "tests/lib/importScrub.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/security/snapshotDenylistDrift.test.js",
+          "tests/security/worldSnapshotDenyCensus.test.js",
+          "tests/security/gallerySanitizeAllowlist.contract.test.js",
+          "tests/security/townMapEditsPublicDrop.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/property/generatorGoldenMaster.test.js",
+          "tests/property/dossierProseManifest.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "src/domain/display/publicSafe.js",
+          "src/domain/display/worldSnapshotPublic.js",
+          "src/lib/accountData.js",
+          "tests/store/decreeRegistryPersistence.test.js",
+          "tests/lib/editTravel.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EM-B3b",
+      "status": "DRAFT",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B3b.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [
+        {
+          "action": "CREATE",
+          "path": "supabase/migrations/202_edit_registry_public_denylist.sql",
+          "_note": "re-creates the net-current public._gallery_world_snapshot_is_safe from migration 136 with its body VERBATIM plus exactly two additive changes: 'dmLayer' and 'decrees' appended to hard_deny, and |.*decrees.* added to the private-channel alternation beside .*latentPantheon.*. No table, no column, no policy, no row, no re-grant. 136's header idiom, including the recorded reason the sibling dossier sanitizer _gallery_sanitize_public_json is deliberately left net-current. <=60 raw lines. The number is re-assigned at dispatch if 202 is taken, and every figure in the packet moves with it."
+        },
+        {
+          "action": "MODIFY",
+          "path": "scripts/ops/migrationRehearsalCore.mjs",
+          "_note": "MIGRATION_TRAIN_REPO_HEAD (:19) 201 -> 202 on the existing line (+0 eff), and ONE wave row appended to MIGRATION_WAVES (:30) copying the staff-unlock-surveyor-entitlement row field for field (id edit-registry-public-denylist, from/to 202, forward-only with its @rollback reversal spelled, expectedObjects naming the one function) (+34 eff). buildMigrationRehearsalPlan and every other function are NOT touched: the boundary cure already landed in 1d5c79a34."
+        },
+        {
+          "action": "TEST",
+          "path": "tests/ops/migrationRehearsal.test.js",
+          "_note": "five figures move inside the existing gap case and one tail pin is added: repoHead 201->202; pendingCount 80->81; [202,202] appended to the boundary list; Array.from length 80->81; the live-plan arm at :418 -> {appliedHead:200, repoHead:202, pendingCount:2}; plus plan.waves.find(wave => wave.id === 'edit-registry-public-denylist').toMatchObject in the 201 block's voice. No new describe. The historical at(-N) pins were already re-pointed by id in 1d5c79a34, so none rots."
+        },
+        {
+          "action": "DOC",
+          "path": "docs/DEPLOY.md",
+          "_note": "one line: Current migration head 201_staff_unlock_surveyor_entitlement.sql -> 202_edit_registry_public_denylist.sql. The freshness pin derives the head from disk."
+        },
+        {
+          "action": "DOC",
+          "path": "ARCHITECTURE.md",
+          "_note": "one line: the migrations row's parenthesised count (201) -> (202)."
+        },
+        {
+          "action": "DOC",
+          "path": "docs/CURRENT_STATE.md",
+          "_note": "the contiguous head (:5) 201 -> 202 and the migration-train gap (:79) to '202 ... 2 migrations ahead', naming 202 as design 12.4's gallery-scanner denial and saying it waits on the owner's supabase db push beside 201. The freshness regex already admits the plural (87b87c406 widened it to admit the singular), so tests/docs/architectureFreshness.test.js is NOT touched."
+        }
+      ],
+      "requiredSymbols": [
+        {
+          "path": "scripts/ops/migrationRehearsalCore.mjs",
+          "symbol": "export const MIGRATION_TRAIN_REPO_HEAD"
+        },
+        {
+          "path": "scripts/ops/migrationRehearsalCore.mjs",
+          "symbol": "export const MIGRATION_WAVES"
+        },
+        {
+          "path": "scripts/ops/migrationRehearsalCore.mjs",
+          "symbol": "export function buildMigrationRehearsalPlan"
+        },
+        {
+          "path": "tests/ops/migrationRehearsal.test.js",
+          "symbol": "covers the exact applied-head to repository-head gap in semantic waves"
+        },
+        {
+          "path": "supabase/applied-head.json",
+          "symbol": "\"appliedHead\""
+        },
+        {
+          "path": "supabase/migrations/136_world_snapshot_deny_census_lift.sql",
+          "symbol": "create or replace function public._gallery_world_snapshot_is_safe"
+        },
+        {
+          "path": "tests/security/snapshotDenylistDrift.test.js",
+          "symbol": "the net-current SQL sanitizer denies the \"%s\" key (membership)"
+        },
+        {
+          "path": "tests/docs/architectureFreshness.test.js",
+          "symbol": "migrations? ahead"
+        },
+        {
+          "path": "tests/docs/deployRunbookFreshness.test.js",
+          "symbol": "names the current migration head file"
+        },
+        {
+          "path": "docs/DEPLOY.md",
+          "symbol": "Current migration head"
+        }
+      ],
+      "acceptanceCases": [
+        {
+          "id": "B1",
+          "case": "the net-current server scanner rejects a stored snapshot carrying decrees at any depth and one carrying dmLayer so the third mirror is in place"
+        },
+        {
+          "id": "B2",
+          "case": "every existing pglite scanner and sanitizer fixture still passes because no fixture carries a decree token and the new alternative rejects nothing that exists"
+        },
+        {
+          "id": "B3",
+          "case": "the rehearsal plan reports repo head 202 pending count 2 a boundary list ending at 202 contiguous coverage from 122 and a tail wave matching by id"
+        },
+        {
+          "id": "B4",
+          "case": "the applied head stays 200 the repo head is 202 the gate surfaces exactly two pending migrations and the doc gap sentence reads two migrations ahead"
+        }
+      ],
+      "checks": [
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/ops/migrationRehearsal.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/docs/architectureFreshness.test.js",
+          "tests/docs/deployRunbookFreshness.test.js",
+          "tests/docs/docCounts.test.js",
+          "tests/docs/migrationAppliedHead.test.js"
+        ],
+        [
+          "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/security/snapshotDenylistDrift.test.js",
+          "tests/security/galleryWorldSnapshotScanner.pglite.test.js",
+          "tests/security/gallerySanitize.pglite.test.js"
+        ],
+        [
+          "npx",
+          "eslint",
+          "scripts/ops/migrationRehearsalCore.mjs",
+          "tests/ops/migrationRehearsal.test.js"
+        ]
+      ]
+    },
+    {
+      "id": "EM-B3",
+      "status": "SUPERSEDED",
+      "packetPath": "docs/implementation/packets/settlement-editor/EM-B3.md",
+      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "changeManifest": [],
+      "requiredSymbols": [],
+      "acceptanceCases": [],
+      "checks": [],
+      "supersededBy": [
+        "EM-B3a",
+        "EM-B3b"
+      ]
     }
   ]
 }
