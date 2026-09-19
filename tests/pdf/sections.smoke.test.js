@@ -29,12 +29,14 @@ import { Cover } from '../../src/pdf/sections/Cover.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
-import { defenseSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
+import { defenseSlice, servicesSlice } from '../../src/pdf/lib/viewModelBodySlices.js';
 import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
 import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { statusCase } from '../../src/components/new/labelLadder.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
 const SEED = 'pdf-smoke-2026-05';
 
@@ -323,5 +325,92 @@ describe('DefenseSecurity — the capability score is a band word on the page', 
           `${name}: ${capRow.label}'s retired digit`);
       }
     }
+  });
+});
+
+
+// ── THE INSTITUTION LABEL: SCREEN AND PRINT SAY ONE WORD (ODQ §934.13) ───────────────
+/**
+ * The parish-church ruling was a DISPLAY SEAM, which means its whole correctness claim is
+ * a RELATION between two surfaces rather than a string: the paid document and the screen
+ * must print the same label for the same institution, and the persisted settlement under
+ * both must be untouched.
+ *
+ * ⛔ WHY THIS IS NOT A GOLDEN OVER THE WORD. Pinning 'House of worship' here would pass
+ * just as happily if the PDF printed it and the screen printed the raw key. The arm that
+ * is worth having asserts PRINT === SCREEN, plus the separate fact that neither of them
+ * still says the setting-specific word.
+ */
+describe('institution label — screen↔print parity', () => {
+  /** The screen's own read: every roster pill, card heading and service row calls this. */
+  const screenLabel = (inst) => institutionDisplayName(inst);
+
+  test('a village carrying the parish church prints one label on both surfaces', () => {
+    // A FIXTURE, not a generated draw: the arm must light the institution rather than hope
+    // the seed rolls it. The shape is what assembleInstitutions persists.
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+        { id: 'inst-bs', name: 'Blacksmith', category: 'Crafts', source: 'generated', status: 'healthy' },
+      ],
+    };
+
+    const printed = servicesSlice(fixture).detailed;
+    expect(printed).toHaveLength(2);
+
+    for (const [i, inst] of fixture.institutions.entries()) {
+      // THE PARITY CLAIM, stated as the relation and not as a word.
+      expect(printed[i].name).toBe(screenLabel(inst));
+    }
+    expect(printed[0].name).toBe('House of worship');
+    // The unmapped institution proves the seam is not rewriting everything it touches.
+    expect(printed[1].name).toBe('Blacksmith');
+
+    // ⭐ AND THE MODEL UNDER BOTH IS UNMOVED — the seam reads, it never migrates.
+    expect(fixture.institutions[0].name).toBe('Parish church');
+  });
+
+  test('neither surface prints the setting-specific word', () => {
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+      ],
+    };
+    const printedName = servicesSlice(fixture).detailed[0].name;
+    expect(printedName).not.toMatch(/parish|church/i); // anchored: printedName is read off detailed[0] above (an emptied slice throws there) and the exact label is pinned on the next line
+    expect(printedName).toBe('House of worship');
+    expect(screenLabel(fixture.institutions[0])).toBe(printedName);
+  });
+
+  test('the Institutions chapter renders the labelled roster without throwing', () => {
+    const fixture = {
+      ...villageSettlement,
+      institutions: [
+        { id: 'inst-pc', name: 'Parish church', category: 'Religious', source: 'generated', status: 'healthy' },
+      ],
+    };
+    const vm = { ...villageVm, services: servicesSlice(fixture) };
+    expect(Institutions({ settlement: fixture, narrativeMode: false, vm })).toBeTruthy();
+  });
+
+  test('every scale variant and the access service agree across surfaces', () => {
+    const family = [
+      'Parish church', 'Parish churches (2-5)',
+      'Parish churches (10-30)', 'Parish churches (50-100+)',
+    ];
+    const fixture = {
+      ...villageSettlement,
+      institutions: family.map((name, i) => ({
+        id: `inst-${i}`, name, category: 'Religious', source: 'generated', status: 'healthy',
+      })),
+    };
+    const printed = servicesSlice(fixture).detailed.map((d) => d.name);
+    expect(printed).toEqual(family.map((n) => screenLabel({ name: n })));
+    expect(printed).toEqual([
+      'House of worship', 'Houses of worship (2-5)',
+      'Houses of worship (10-30)', 'Houses of worship (50-100+)',
+    ]);
   });
 });
