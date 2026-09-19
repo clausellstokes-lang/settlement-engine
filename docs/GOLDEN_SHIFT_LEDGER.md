@@ -2284,3 +2284,28 @@ its usage-window limit before it measured this witness, and the lane's fences fo
 `--amend`. The substance of the discipline — a stated legitimate cause, recorded here,
 by hand, with the row diff named field by field — is met; only the adjacency is not. It
 is flagged for the chair rather than papered over.
+
+## 2026-09-19 — preset-lighting-witness re-recorded: two rows, one field, the food writer's cause
+
+**Surface:** `tests/fixtures/preset-lighting-witness-golden.json` (registered as
+`preset-lighting-witness`; no capture arm, no env spelling — by hand, through the
+manifest's own RE-RECORD RECIPE, which re-runs `tests/simulation/presetLightingWitnessRun.js`).
+
+**Cause (stated, legitimate, signed elsewhere):** `docs/shift-records/2026-09-19-food-balance-arithmetic.json`
+(ODQ §934.15, ownerWords "make sure that the food deficit math and the band visual are
+correct"): the food writer `generateFoodSecurity` now publishes five fields it used to
+leave to the view (rawDeficit · importCoverage · magicOffset · deficit and their kin), and
+those fields ride in the settlement updates the world pulse emits.
+
+**The row diff, field by field:** `dramatic_campaign` and `full_simulation` moved in
+`settlementUpdatesSha256` only — the two presets whose pulse carries settlement updates.
+Every other row and every other field (rulesSha256, bornWorldSha256, worldStateSha256,
+wizardNewsSha256, regionalGraphSha256, the counts, the statuses) is byte-identical;
+`distinctWorldStateHashes` stays 8; the preset roster and the birth-successor constant are
+unchanged. This is the breadth the bit witness exists for: the pulse moved for a stated
+reason, and the diff names where.
+
+**Discipline:** re-recorded in the same commit as this entry, one commit after the cause
+landed on the consist (the cause was composed from a lane and the witness measured at the
+composed tip); no register act — the `preset-lighting-witness` row stays null as the
+freeze discipline requires.
