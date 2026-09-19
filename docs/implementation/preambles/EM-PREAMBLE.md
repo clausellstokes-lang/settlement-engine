@@ -62,7 +62,7 @@ Every row below is priced inside the member's own change manifest before dispatc
 | HZ-WORKTREE | a lane writes only in its own worktree and its one scratch root; the integration worktree and the ledger checkout are forbidden paths |
 | HZ-GATE-POLL | a lane at a gated run finishes its edits, stages, writes `.lane-resume.md` and STOPS (§934.33); it never polls the mutex |
 | HZ-STAMP | every time stamp is read from the clock in the same command that writes it |
-| HZ-DERIVED | a fact is editable only where it exists first (design §14): seed-level facts are the wizard's, ROOT facts (a writer that reads no other world fact) are the editor's, DERIVED facts are never editable on any card and show provenance instead of a pencil; the declaration census measures the writer's reads and the declaration walker refuses a derived field; the DM's lever on derived state is a decree at the tick |
+| HZ-DERIVED | a fact is editable only where it exists first (design §14): four kinds — SEED-LEVEL (the wizard's), ROOT (a registered decision-fork's CHOSEN output — the editor's), DERIVED (computed; never editable on any card; provenance instead of a pencil; moved by decrees at the tick), ANNOTATION (the layer only; zero readers). The declaration census reads the decision-fork registry and the walker refuses a derived field. THE LAYER ACTS AT THE CHOOSER during a draft's regeneration (an overridden root still consumes its draw; untouched roots identical; the goldens are the empty layer) — never a post-hoc patch on the record |
 
 ## §P6 · Mutant hygiene (lifted verbatim from `GR-PREAMBLE.md` §P6, with one EM amendment)
 
