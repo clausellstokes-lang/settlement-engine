@@ -112,8 +112,9 @@ export function institutionDisplayName(instOrName) {
   const raw = typeof instOrName === 'string'
     ? instOrName
     : (instOrName && typeof instOrName === 'object'
-      ? /** @type {{ name?: unknown, label?: unknown }} */ (instOrName).name
-        ?? /** @type {{ name?: unknown, label?: unknown }} */ (instOrName).label
+      // `name` is the only key an institution carries for its title; a `label` fallback was a
+      // read of a key no writer produces (the observed-shape ratchet convicted it), so it is gone.
+      ? /** @type {{ name?: unknown }} */ (instOrName).name
       : null);
   if (typeof raw !== 'string' || !raw) return '';
   if (Object.prototype.hasOwnProperty.call(INSTITUTION_DISPLAY_NAMES, raw)) {

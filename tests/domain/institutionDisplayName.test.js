@@ -112,10 +112,13 @@ describe('institutionDisplayName — pass-through', () => {
 });
 
 describe('institutionDisplayName — the shapes the estate actually hands it', () => {
-  test('an institution object resolves by .name, a slice row by .label', () => {
+  test('an institution object resolves by .name alone; a label-only object is not an institution', () => {
     expect(institutionDisplayName({ name: 'Parish church', category: 'Religious' }))
       .toBe('House of worship');
-    expect(institutionDisplayName({ label: 'Parish church' })).toBe('House of worship');
+    // No writer in the estate produces `label` on an institution (the observed-shape ratchet
+    // convicted the fallback), and both PDF callers hand the seam the institution itself — so
+    // a label-only object renders nothing rather than being read through a dead key.
+    expect(institutionDisplayName({ label: 'Parish church' })).toBe('');
   });
 
   test('case drift is tolerated, as it is in identityForInstitution', () => {
