@@ -448,6 +448,18 @@ export const en = Object.freeze({
       // voice forbids; the Hall counts chairs HELD, and so does this.
       founder: {
         name:        'Founder',
+        // ⛔ THE CARD'S FOCAL SLOT STILL HAS TO SAY SOMETHING, AND WHAT IT SAYS IS
+        // HOW A CHAIR IS COME BY — NOT WHAT ONE COSTS. Deleting priceLabel/priceSub
+        // (above) left the two tier-card readers calling t() on absent keys, and t()
+        // returns the KEY when it cannot resolve: the anon teaser on /create printed
+        // `pricing.tiers.founder.priceLabel` and `pricing.tiers.founder.priceSub` as
+        // literal text (ODQ §934.22 item 1). `standing` is the cure at the source and
+        // is DELIBERATELY NOT SPELLED LIKE A PRICE — a key named price* is a key
+        // something can render as one, which is exactly why the two above stay gone.
+        // The words are the landing closer strip's own Founder badge
+        // (copy/landing.js closer.tiers), so the two surfaces speak one vocabulary,
+        // and they quote no money, which the purchases-locked law also requires.
+        standing:    'By invitation',
         tagline:     'Thirty chairs in the credits, for as long as SettlementForge runs.',
         cta:         'Request a chair',
         chairsHeld:  '{held} of 30 chairs held.',

@@ -12,7 +12,7 @@
  * Colors come from theme tokens (no raw hex) so visual-budget lint stays clean.
  */
 import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
-import { t, tx } from '../copy/index.js';
+import { t, tierPriceSlot, tx } from '../copy/index.js';
 import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
@@ -48,8 +48,14 @@ export default function AnonTierTeaser({ onSignIn }) {
       }}>
         {tiers.map(tier => {
           const name = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
-          const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
-          const priceSub = t(`pricing.tiers.${tier.key}.priceSub`);
+          // ⛔ NOT `t()` ON THE TWO PRICE KEYS. This teaser walks getVisibleTiers()
+          // WHOLE — the Founder included, unlike the pricing page's row, which filters
+          // it out — and the Founder's price keys were deleted by ruling. `t()` renders
+          // the key it cannot resolve, so this card printed
+          // `pricing.tiers.founder.priceLabel` and `.priceSub` as literal text at every
+          // width (ODQ §934.22 item 1). tierPriceSlot answers a price-less tier with its
+          // standing and no sub-line.
+          const { label: priceLabel, sub: priceSub } = tierPriceSlot(tier.key);
           const tagline = t(`pricing.tiers.${tier.key}.tagline`);
           const features = (tx(`pricing.tiers.${tier.key}.features`) || []).slice(0, 3);
           const emphasised = tier.key === 'cartographer';

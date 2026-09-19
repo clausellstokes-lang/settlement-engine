@@ -152,6 +152,58 @@ export function tx(key) {
   return raw;
 }
 
+/**
+ * A copy string, or null when neither the active locale nor `en` carries the key.
+ *
+ * ⭐ THE DIFFERENCE FROM `t()` IS THE WHOLE POINT, AND IT IS NOT A STYLE CHOICE.
+ * `t()` treats a missing key as a TYPO: it warns in dev and renders the key text so
+ * the mistake is visible. That is right for a key every surface expects. It is wrong
+ * for a key whose ABSENCE IS THE FACT — and the registry has such keys, because a
+ * ruling can delete one (a chair is given, never sold, so the Founder tier carries no
+ * price). Asking `t()` for a deliberately-absent key prints its dotted path on the
+ * page and warns on every render; asking this returns null and the caller decides.
+ *
+ * Use it ONLY where absence is a legitimate answer. Anywhere else `t()`'s loud
+ * fallback is the behaviour you want.
+ *
+ * @param {string} key
+ * @param {Record<string, unknown>} [vars]
+ * @returns {string|null}
+ */
+export function tOptional(key, vars) {
+  const raw = resolveActive(key);
+  return typeof raw === 'string' ? interpolate(raw, vars) : null;
+}
+
+/**
+ * THE ONE RESOLVER FOR A TIER CARD'S FOCAL SLOT, for every surface that draws one.
+ *
+ * Two readers draw the slot — the pricing page's TierCard and the Create page's
+ * AnonTierTeaser — and before this existed each resolved `priceLabel` and `priceSub`
+ * itself with `t()`. When the Founder's two price keys were deleted by ruling, BOTH
+ * started printing raw dotted keys, and only one of them was noticed, because the
+ * pricing page filters the Founder out of its row and the teaser does not. One
+ * resolver means a tier's slot is answered the same way wherever it is drawn.
+ *
+ * A tier that carries a price renders it. A tier that carries none renders its
+ * STANDING instead (how the tier is come by), and has no sub-line — which is also why
+ * the Founder card no longer forces a 391px page 52px wider than its own viewport:
+ * the sub-line it was overflowing with was the unbreakable key text.
+ *
+ * Returns empty/null rather than a key on a tier the registry knows nothing about: a
+ * dotted path in a 32px focal slot is the worst of both worlds, and
+ * tests/components/copyRawKeyRender.test.jsx refuses one on either surface.
+ *
+ * @param {string} tierKey one of the `pricing.tiers.*` keys (wanderer/cartographer/founder)
+ * @returns {{ label: string, sub: string|null }}
+ */
+export function tierPriceSlot(tierKey) {
+  const label = tOptional(`pricing.tiers.${tierKey}.priceLabel`)
+    ?? tOptional(`pricing.tiers.${tierKey}.standing`)
+    ?? '';
+  return { label, sub: tOptional(`pricing.tiers.${tierKey}.priceSub`) };
+}
+
 // Re-export the raw map for test imports and for code that needs to
 // walk the tree (e.g., the copy linter that ensures every namespace
 // has the same keys across locales).

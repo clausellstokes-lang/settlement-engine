@@ -868,6 +868,11 @@
     "tests/lint/copyCorruption.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/copyKeyResolution.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "THE COPY-KEY RESOLUTION WALKER (ODQ \u00a7934.22 item 1). Its catching power is EXECUTED ON EVERY GATE RUN, not claimed and not deferred to a weekly sweep: the file's last arm, 'the detectors discriminate, and the bindings are really followed', hands scanCopyKeys SEVEN real source strings and asserts both directions. (1) a resolving key t('common.save') is NOT reported and IS counted; (2) the actual defect, t('pricing.tiers.founder.priceLabel') against a registry that deleted the key by ruling, IS reported -- this is the planted regression, planted as SOURCE rather than in a tracked file; (3) an `as` rename is followed; (4) a LOCAL t that no copy import bound is NOT scanned (the false-positive arm, without which the walker would report a hundred reduce accumulators and be switched off within a week); (5) tOptional is counted but never asserted, because absence is its contract; (6) a template-built key is counted as dynamic and not resolved from source; (7) tp resolves against the pricingPage table, not en. Three anti-vacuity floors (2,230 files, 520 literal keys, 35 dynamic) sit above them, so a scanner that stopped finding calls reds instead of passing on an empty walk. A STANDING SWEEP PLANT IS NOT OFFERED because every plant this walker needs lands in src/copy/en.js or a component that reads it -- shared modules concurrent lanes hold uncommitted work in, and check_caught's revert is a `git checkout --` that would discard it (the same reason customContentCharsetWiring and newsSubjectVocabulary carry rationales). Promote to kind:mutation when the sweep gains a target outside those files.",
+      "kindNote": "rationale rather than a standing sweep plant: the executed controls run in-suite on EVERY gate run, which is strictly more often than the weekly sweep, and the sweep's only available targets here are files other lanes edit concurrently."
+    },
     "tests/lint/couplingInclusion.walker.test.js": {
       "kind": "mutation",
       "label": "coupling/unregistered cross-layer import planted"

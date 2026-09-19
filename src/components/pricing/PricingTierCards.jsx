@@ -10,7 +10,7 @@ import { getTierDisplayName } from '../../config/pricing.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
-import { t, tx } from '../../copy/index.js';
+import { t, tierPriceSlot, tx } from '../../copy/index.js';
 import {
   GOLD, GOLD_DEEP, GOLD_SOFT, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
 } from '../theme.js';
@@ -56,8 +56,11 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
   // flag is on and a per-audience line is available. Falls back to the
   // simulation-variant tagline, then the legacy tagline.
   const tagline  = audienceLine || variantTagline || t(`pricing.tiers.${tier.key}.tagline`);
-  const priceLabel = t(`pricing.tiers.${tier.key}.priceLabel`);
-  const priceSub   = t(`pricing.tiers.${tier.key}.priceSub`);
+  // The focal slot through the ONE resolver (copy/index.js): a tier that carries no
+  // price carries its STANDING, and has no sub-line. Reading the two price keys with
+  // `t()` here printed the Founder's dotted key paths wherever this card drew that
+  // tier — the anon teaser does, on /create (ODQ §934.22 item 1).
+  const { label: priceLabel, sub: priceSub } = tierPriceSlot(tier.key);
   const name       = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
 
   // Content-as-hero (P1/P4/P6): the FIRST feature is the "why pay" benefit for
@@ -135,9 +138,11 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
         <span style={{ fontSize: FS['32'], fontFamily: serif_, fontWeight: 700, color: INK, lineHeight: 1 }}>
           {priceLabel}
         </span>
-        <span style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
-          {priceSub}
-        </span>
+        {priceSub && (
+          <span style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
+            {priceSub}
+          </span>
+        )}
       </div>
 
       {leadFeature && (
