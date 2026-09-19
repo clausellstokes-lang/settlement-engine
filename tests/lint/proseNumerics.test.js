@@ -25,6 +25,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // three in relationshipMemory.js's postureReasons, which the scanner had never
 // seen at all.
 //
+// 2026-09-19 — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 225 -> 224, floatInterpolation
+// 148 -> 147: DefenseSecurity.jsx's `{Math.round(sc.score)}` — the raw capability digit beside the
+// PDF's capability rows — was replaced by the band word the screen prints (R-5b item #20, the
+// 2026-09-18 fixes consist), so its row leaves the baseline as a CURE, never a bank. Every other
+// row kept its path, category and snippet at a new address (the build's line moves), regenerated
+// by the test's own scanner; the +1 arm below states the new figures.
+//
 // CR-FP-2 — THE ONE RULED RE-RECORD (FP cycle 1 close). 404 -> 413.
 //
 // This is a DELIBERATE upward move of three ceilings, recorded here because the
@@ -352,9 +359,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //       have shipped it blind. The measured golden movement is recorded in the SHIFT RECORD
 //       in `tests/property/rumorLedgerGolden.test.js`, re-measured at T8's own base rather
 //       than inherited from HER-7's figures.
-const REVIEWED_TOTAL_CEILING = 225;
+const REVIEWED_TOTAL_CEILING = 224;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 148,
+  floatInterpolation: 147,
   percentToken: 56,
   multiplier: 10,
   twoDecimalScore: 11,
@@ -683,8 +690,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 226 exceeds reviewed ceiling 225',
-      'floatInterpolation 149 exceeds reviewed ceiling 148',
+      'total 225 exceeds reviewed ceiling 224',
+      'floatInterpolation 148 exceeds reviewed ceiling 147',
     ]);
   });
 
