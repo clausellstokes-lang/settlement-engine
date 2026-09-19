@@ -21,7 +21,7 @@ A member packet names only its own *additional* sources. If two higher authoriti
 
 Every row below is priced inside the member's own change manifest before dispatch, never discovered at the terminal.
 
-1. **A new file under `src/domain/**` or `src/components/**` moves the sovereignty-lighting census** (`tests/lint/sovereigntyLightingContract.walker.test.js`, an exact file count). The member names it as an INTERIOR RED with the predicted delta; the census is re-derived whole once, at the train's terminal.
+1. **A new TEST file moves the sovereignty-lighting census** (`tests/lint/sovereigntyLightingContract.walker.test.js`: its `files` figure is the count of test files under `tests/`, and its title figures count literal `describe`/`it` titles — MEASURED at compile by lane P2, 2026-09-19; a new `src/` leaf moves nothing). The member names the move as an INTERIOR RED with the predicted tuple delta (files, credited, titles, suite titles); the census is re-derived whole once, at the train's terminal.
 2. **A new `tests/lint/` file owes its `scripts/mutation-coverage-manifest.json` row**, added surgically beside its siblings — the manifest is never re-serialised whole.
 3. **A new domain reader of a save-time key (`dmLayer`, `decrees`) owes an `EXPLAINED_WRITER_EXEMPTIONS` entry through the observed-shape migration-bundle door** with a declared mechanism. The register is content-addressed and history-bound: the mint is a CHAIR act on a branch cut at the integration tip, priced as a named REGISTER row the member does not execute.
 4. **New readers of settlement fields under `src/domain/edit/**` may move the writer-reach register** (`scripts/check-writer-reach.mjs`): a shrink is the plain `--write`; growth is a mint and a chair act. The member states which.
