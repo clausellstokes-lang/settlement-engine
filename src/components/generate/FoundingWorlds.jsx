@@ -3,7 +3,7 @@
  *
  * A small strip of hand-curated example settlements offered on the create flow so
  * a new DM witnesses depth in their first ten minutes. The trio is the SAME
- * Mossgate / Black Crag / Thornwell samples the Library's saves empty-state shows
+ * Mossgate / Black Crag / Cnocby samples the Library's saves empty-state shows
  * (imported from src/data/sampleSettlements.js — single source, zero string
  * duplication); 'Fork this sample' drives the SAME fork wiring as the Library
  * (SettlementsPanel.forkSample): load the sample's config with a user-suffixed
@@ -42,6 +42,21 @@ import { useStore } from '../../store/index.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../lib/generationIntent.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor, forkSeedFor } from '../../data/sampleSettlements.js';
+import { tierStockImage } from '../../domain/display/tierStockImage.js';
+
+/**
+ * ⛔ THE CURATED CARDS HAD NO PICTURE AT ALL (owner order ODQ §934.32: the stock
+ * tier images "should be the default image ... until an owner replaces that
+ * image"). Three text plates were the first thing a visitor was offered on
+ * /create and in the landing's commons fallback, on a page whose claim is depth.
+ *
+ * FIXED HEIGHT, DELIBERATELY. This strip's footprint is RESERVED by
+ * home/LandingBelowFold.jsx (SAMPLE_PLATE_H) while its lazy chunk is in flight,
+ * and a plate whose height depends on an image's aspect ratio would make that
+ * reserve unknowable and reintroduce the layout jump the reserve exists to stop.
+ * 120px + the card's SP.sm gap is exactly what the reserve there was raised by.
+ */
+const SAMPLE_PLATE_IMAGE_H = 120;
 
 // MG-3f (leak L8): this file used to INLINE the Library's migrateConfig verbatim, for a
 // real reason it recorded — importing settlements/helpers.js dragged the whole saves-panel
@@ -108,6 +123,17 @@ export default function FoundingWorlds({ onNavigate }) {
         {SAMPLE_SETTLEMENTS.map((sample) => (
           <article key={sample.id}
             style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+            {tierStockImage(sample.tier) && (
+              <img
+                src={tierStockImage(sample.tier)}
+                /* The painting stands for the TIER, and says so: it is not a
+                   picture of this settlement, and the alt text must not pretend
+                   it is (the same rule the gallery card follows). */
+                alt={`A ${sample.tier} of the kind ${sample.name} is`}
+                loading="lazy"
+                style={{ width: '100%', height: SAMPLE_PLATE_IMAGE_H, objectFit: 'cover', display: 'block' }}
+              />
+            )}
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, flexWrap: 'wrap' }}>
               <h3 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.md, fontWeight: 900 }}>{sample.name}</h3>
               <span style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), textTransform: 'capitalize' }}>{sample.tier} · {sample.terrain}</span>

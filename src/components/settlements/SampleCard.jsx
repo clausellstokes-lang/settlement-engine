@@ -1,5 +1,14 @@
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { tierStockImage } from '../../domain/display/tierStockImage.js';
+
+// ⛔ THE LIBRARY'S EMPTY STATE SHOWED THREE TEXT PLATES (owner order ODQ
+// §934.32). This is the first screen an account with no saves ever sees, and it
+// was the one place in the product where a settlement was offered with no
+// picture of any kind. The tier's stock painting is the default until the owner
+// replaces it; the height is fixed for the same reason as on /create — a card
+// whose height rides an aspect ratio cannot be reserved against.
+const SAMPLE_CARD_IMAGE_H = 96;
 
 // ── Sample dashboard ────────────────────────────────────────────────────────
 // Rendered in the saves empty state. Three teaser cards seed expectations
@@ -19,6 +28,14 @@ export function SampleCard({ sample, onFork, forking }) {
       display: 'flex', flexDirection: 'column', gap: 8,
       fontFamily: sans,
     }}>
+      {tierStockImage(sample.tier) && (
+        <img
+          src={tierStockImage(sample.tier)}
+          alt={`A ${sample.tier} of the kind ${sample.name} is`}
+          loading="lazy"
+          style={{ width: '100%', height: SAMPLE_CARD_IMAGE_H, objectFit: 'cover', display: 'block' }}
+        />
+      )}
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <h4 style={{
           margin: 0, fontFamily: serif_, fontSize: FS['16'], fontWeight: 600,

@@ -25,6 +25,7 @@
  */
 
 import { resolveSettlementTerrain, terrainOrNull } from '../src/domain/resolveTerrain.js';
+import { settlementCardImage } from '../src/domain/display/tierStockImage.js';
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
@@ -54,18 +55,39 @@ function humanize(v) {
 
 /**
  * The dynamic per-settlement OG card (Supabase `og-image` edge function), keyed
- * on the slug alone — so a valid card exists even without the DB row. Falls back
- * to the static default when no Supabase origin is configured.
+ * on the slug alone — so a valid card exists even without the DB row. Without a
+ * Supabase origin it falls back to the owner's own image, then the tier's stock
+ * painting (ODQ §934.32), and only then to the static house card.
  * @param {string} slug
  * @param {string} [supabaseUrl]
+ * @param {{ tier?: string, imageUrl?: string, image_url?: string, gallery_image_url?: string } | null} [dossier]
+ * @param {string} [origin]  the site origin, for absolutising a stock path
  * @returns {string}
  */
-export function galleryCardImage(slug, supabaseUrl) {
+export function galleryCardImage(slug, supabaseUrl, dossier, origin = ORIGIN) {
   if (supabaseUrl && isValidGallerySlug(slug)) {
     // encodeURIComponent is a no-op over the bounded charset — kept as
     // defense in depth so the bound is the only thing that has to hold.
     return `${supabaseUrl}/functions/v1/og-image?slug=${encodeURIComponent(slug)}`;
   }
+  // ⛔ NO SETTLEMENT UNFURLS AS THE HOUSE LOGO ANY MORE (owner order ODQ §934.32:
+  // the stock tier images are "the default image when they are shared"). Without
+  // a Supabase origin every shared town fell back to og-craft.png — the same
+  // plaque for a thorp and a metropolis — so a link to a real generated place
+  // previewed as an advertisement for the site.
+  //
+  // ⚠ AND THE DYNAMIC CARD IS DELIBERATELY STILL FIRST, which is a JUDGMENT the
+  // chair may overrule. The og-image edge function renders THIS settlement's own
+  // name and facts; the tier painting is a portrait of a KIND of place. Reading
+  // the owner's line as "the tier image outranks the rendered card" would demote
+  // a per-settlement artifact to a generic one on every production share, which
+  // is a loss of information and not what the order is trying to buy. So the
+  // tier painting replaces the GENERIC fallback and nothing else.
+  const own = dossier && (dossier.imageUrl || dossier.image_url || dossier.gallery_image_url);
+  const card = settlementCardImage(own, dossier && dossier.tier);
+  // A relative stock path must be absolutised: an OG consumer is a crawler on
+  // another host, and a root-relative og:image is simply dropped.
+  if (card) return card.startsWith('/') ? `${origin}${card}` : card;
   return OG_IMAGE_DEFAULT;
 }
 
@@ -87,7 +109,7 @@ export function buildGalleryMeta(slug, dossier, opts = {}) {
   const origin = opts.origin || ORIGIN;
   const supabaseUrl = opts.supabaseUrl || '';
   const url = isValidGallerySlug(slug) ? `${origin}/gallery/${encodeURIComponent(slug)}` : `${origin}/gallery`;
-  const image = galleryCardImage(slug, supabaseUrl);
+  const image = galleryCardImage(slug, supabaseUrl, dossier, origin);
 
   const name = dossier?.name || dossier?.settlement?.name || '';
   if (!name) {
