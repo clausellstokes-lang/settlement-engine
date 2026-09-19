@@ -500,11 +500,19 @@ export function getVisibleTiers() {
  * `tier.key !== 'founder'`, which is a fact about one spelling: a fourth tier of the same
  * kind would have to be remembered at every call site. This is the fact itself.
  *
- * @param {{ invitationOnly?: boolean }|null|undefined} tier
+ * ⚠ THE PARAMETER IS `unknown` ON PURPOSE, AND IT IS NOT LAZINESS. `{ invitationOnly?:
+ * boolean }` is a WEAK TYPE — every property optional — so TypeScript requires a
+ * candidate to share at least one property with it, and the two tiers that DO NOT carry
+ * the flag (which is exactly the answer "no") shared none: the predicate could not be
+ * asked about the tiers it exists to answer no for. It is also asked about shapes from
+ * outside the catalogue — a stale record, a hand-rolled `{ key: 'founder' }` — and must
+ * answer no rather than throw, which is what the census drives it with.
+ *
+ * @param {unknown} tier
  * @returns {boolean}
  */
 export function isInvitationOnly(tier) {
-  return Boolean(tier && tier.invitationOnly);
+  return Boolean(tier && /** @type {{ invitationOnly?: boolean }} */ (tier).invitationOnly);
 }
 
 /**

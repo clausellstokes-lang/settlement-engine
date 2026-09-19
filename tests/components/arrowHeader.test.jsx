@@ -45,7 +45,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { act, cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 
-import { NAV } from '../../src/lib/routes.js';
+import { NAV, barNav } from '../../src/lib/routes.js';
 import { layoutArrow } from '../../src/components/nav/arrowGeometry.js';
 import ArrowHeader, { arrowVarValues } from '../../src/components/nav/ArrowHeader.jsx';
 import { ARROW_GLOW } from '../../src/components/nav/ArrowControl.jsx';
@@ -495,14 +495,23 @@ describe('(g) the breakpoint arms', () => {
     expect(rootVar('--sf-bottom-nav-h'), 'the bar as rendered: a 44 px seat and its 1 px rule').toBe('calc(45px + env(safe-area-inset-bottom))');
   });
 
-  test('640 to 1023 px: the compact arrow, a six-seat bar in priority order, desktop paddings, and the page clears the bar', () => {
+  // ⚠ "IN PRIORITY ORDER" IS RETIRED (the owner, ODQ §934.26 addendum: "i swap compendium
+  // before gallery because that is also how it is on the desktop arrow"). The bar used to
+  // read a hand-kept priority array whose only job was choosing which seat the five-seat
+  // cap evicted, and which carried a SECOND ORDER as a side effect — Gallery before
+  // Compendium, where the painting has them the other way. The tablet's six seats are now
+  // the painting's own order, and this arm reads `barNav(false)` rather than a third copy
+  // of it, so a reorder in routes.js moves the pin with the bar.
+  test('640 to 1023 px: the compact arrow, a six-seat bar in the painting\'s order, desktop paddings, and the page clears the bar', () => {
     H.narrow = true;
     setClientWidth(800);
     const { container } = render(<App />);
     expect(header(container).getAttribute('data-sf-arrow-header')).toBe('compact');
     expect(header(container).querySelector('nav')).toBeNull();
     const seats = [...bottomBar(container).querySelectorAll('button')].map((b) => b.textContent.trim());
-    expect(seats).toEqual(['Create', 'Library', 'Realm', 'Gallery', 'Compendium', 'About']);
+    expect(seats).toEqual(barNav(false).map((item) => item.label));
+    expect(seats, 'the tablet keeps the Realm and every seat')
+      .toEqual(['Create', 'Library', 'Realm', 'Compendium', 'Gallery', 'About']);
     const main = container.querySelector('main#main-content');
     expect([main.style.paddingRight, main.style.paddingBottom, main.style.paddingLeft]).toEqual(['24px', '16px', '24px']);
     expect(main.style.paddingTop).toBe(`calc(${ARROW_HANG} + 16px)`);

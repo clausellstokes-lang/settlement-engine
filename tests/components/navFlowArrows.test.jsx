@@ -306,11 +306,17 @@ describe('the bottom bar (below 1024 px): two compositions, one flow declaration
     // §934.26: "a hairline after the working pair (Create, Library) before the reference
     // pages". The rule lives on the cell that OPENS the reference run, so exactly one
     // bar cell carries a left border and it is Compendium's.
+    // ⚠ THE PREDICATE IS THE RULE, NOT "borderLeft is set". Every seat now writes all four
+    // border longhands (the shorthand/longhand law), so `style.borderLeft` is non-empty on
+    // all five and jsdom normalises the 'none' ones to its own spelling. What separates the
+    // ruled cell is the BAR RULE itself — a 1px line — so that is what is matched.
     const seats = (root) => [...root.querySelectorAll('nav[aria-label="Primary"] button')];
+    const isRuled = (b) => /\b1px\s+solid\b/.test(b.style.borderLeft || '');
     const phone = render(<App />);
-    const ruled = seats(phone.container).filter((b) => b.style.borderLeft && b.style.borderLeft !== 'none');
     expect(seats(phone.container).length, 'presence control: the phone bar drew its seats').toBe(5);
-    expect(ruled.map((b) => b.textContent.trim())).toEqual(['Compendium']);
+    expect(seats(phone.container).map(isRuled), 'exactly one hairline, and it opens the reference run')
+      .toEqual([false, false, true, false, false]);
+    expect(seats(phone.container).filter(isRuled).map((b) => b.textContent.trim())).toEqual(['Compendium']);
     phone.unmount();
 
     H.isMobile = false;
@@ -319,7 +325,7 @@ describe('the bottom bar (below 1024 px): two compositions, one flow declaration
     expect(seats(tablet.container).length, 'presence control: the tablet bar drew its seats').toBe(6);
     // anchored: the tablet's six seats are asserted above, so an empty rule list here is
     // measured against a bar that really rendered.
-    expect(seats(tablet.container).filter((b) => b.style.borderLeft && b.style.borderLeft !== 'none')).toEqual([]);
+    expect(seats(tablet.container).filter(isRuled)).toEqual([]);
   });
 
 });

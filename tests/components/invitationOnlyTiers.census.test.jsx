@@ -89,8 +89,26 @@ function walkSource(dir, out = []) {
   return out;
 }
 
+/**
+ * The catalogue's OWN module is the definition site, not a reader: it declares both
+ * enumerators and `getPublicTiers` necessarily calls `getVisibleTiers`. Excluded by PATH
+ * rather than admitted by prose, because "the module that defines it" is a structural
+ * fact and not a judgement anyone should have to re-make — the same treatment
+ * tests/lint/refusalNoticeCoverage.walker.test.js gives the cap counter's own module.
+ */
+const CATALOGUE = 'src/config/pricing.js';
+
+/**
+ * Source with its comments stripped. Every arm below asks what a file DOES, and these
+ * files legitimately NAME the retired call in prose to say what they replaced — a check
+ * over raw text would red on its own explanation, which teaches people to delete the
+ * history instead of the code.
+ */
+const codeOf = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^[^\n'"`]*\/\/.*$/gm, '');
+
 const SOURCES = walkSource(join(ROOT, 'src'))
-  .map((abs) => ({ rel: relative(ROOT, abs).replace(/\\/g, '/'), src: readFileSync(abs, 'utf8') }));
+  .map((abs) => ({ rel: relative(ROOT, abs).replace(/\\/g, '/'), src: readFileSync(abs, 'utf8') }))
+  .map((f) => ({ ...f, code: codeOf(f.src) }));
 
 beforeEach(() => { H.mobile = false; window.localStorage.clear(); });
 afterEach(() => { cleanup(); });
@@ -132,7 +150,7 @@ describe('THE CENSUS — every surface that lists tiers', () => {
     // A module "lists tiers" when it reads the catalogue's enumerators. TIERS.<key> on
     // its own is a single-tier read (a price, a seat cap) and is not a listing.
     const readers = SOURCES
-      .filter(({ rel, src }) => rel.startsWith('src/') && /\bget(Visible|Public)Tiers\s*\(/.test(src))
+      .filter(({ rel, code }) => rel !== CATALOGUE && /\bget(Visible|Public)Tiers\s*\(/.test(code))
       .map((f) => f.rel)
       .sort();
     expect(
@@ -145,22 +163,25 @@ describe('THE CENSUS — every surface that lists tiers', () => {
 
   test('every admitted reader really filters, and the way its row says', () => {
     for (const [rel, row] of Object.entries(CATALOGUE_READERS)) {
-      const src = SOURCES.find((f) => f.rel === rel)?.src;
-      expect(src, `${rel} is gone — delete or re-point its row`).toBeTruthy();
+      const found = SOURCES.find((f) => f.rel === rel);
+      expect(found, `${rel} is gone — delete or re-point its row`).toBeTruthy();
+      const { code } = found;
+      // Anti-vacuity for the stripper: an emptied file would satisfy every negative below.
+      expect(code.length, `the comment stripper ate ${rel}`).toBeGreaterThan(200);
       if (row.rule === 'public') {
-        expect(src, `${rel} lists the catalogue WHOLE — it must read getPublicTiers()`)
+        expect(code, `${rel} lists the catalogue WHOLE — it must read getPublicTiers()`)
           .toMatch(/getPublicTiers\s*\(/);
-        expect(/getVisibleTiers\s*\(/.test(src), `${rel} still reaches for the whole catalogue`).toBe(false);
+        expect(/getVisibleTiers\s*\(/.test(code), `${rel} still reaches for the whole catalogue`).toBe(false);
       } else {
         // The pricing page keeps `getVisibleTiers()` (the charter band needs the Founder)
         // and filters its ROW through the shared predicate — never by a hard-coded id.
-        expect(src, `${rel} no longer filters its row by the shared predicate`)
+        expect(code, `${rel} no longer filters its row by the shared predicate`)
           .toMatch(/isInvitationOnly\s*\(/);
       }
       // ⛔ NOBODY FILTERS BY THE NAME ANY MORE. That line is the defect's other half:
       // it worked on one surface and was forgotten on the other.
       expect(
-        /key\s*!==\s*['"]founder['"]/.test(src),
+        /key\s*!==\s*['"]founder['"]/.test(code),
         `${rel} filters the tier list by the literal id 'founder' — use isInvitationOnly()`,
       ).toBe(false);
     }
