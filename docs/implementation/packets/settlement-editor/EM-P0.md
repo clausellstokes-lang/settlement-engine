@@ -1,9 +1,9 @@
 # Settlement editor / EM-P0 — THE PIPELINE SEAM: `runPipeline` gains a pinned mode keyed on the declared `provides` graph, the population step splits its draw from its derivations, and fresh generation is byte-identical
 
-- **Status:** READY
+- **Status:** STALE
   ⚠ The status value above stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs`) anchors the status row at end-of-line (J-TEWF1B-1).
-- **Packet version:** 1
+- **Packet version:** 1 (STALE 2026-09-19 12:4x: the build lane's STOP refuted §6 — the deriving half of the population step draws 67 times on the step's stream, so two registered steps cannot share one stream; re-cut as one registered step with an internal root/derive seam and pins consulted at every registered chooser inside it — ODQ §934.47 addendum 9)
 - **Verified base:** `fixes-2026-09-18-consist` at `05ef465507141fd5f4564c597056eafa01b8cedd`
 - **Last revalidated:** 2026-09-19 at `05ef465507141fd5f4564c597056eafa01b8cedd` by the chair at promotion — re-pinned from d31af2cee under J-T1 (every §7 path, the step files and the goldens byte-identical across the window by `git diff --stat`).
 - **Depends on:** `NONE` — this is the train's first car
