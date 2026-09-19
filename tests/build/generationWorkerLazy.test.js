@@ -117,7 +117,13 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 /** Measured 1,399,318 B by the chair at the 2026-09-18 fixes consist's final tip (2b0322992,
  *  generation.worker-DNFpfUQI.js, lockfile-clean; ODQ §934.19); monotone-down — see the docblock
  *  for what the bytes are. */
-export const WORKER_BUNDLE_CEILING_BYTES = 1399318;
+// 1,399,318 → 1,399,946 (2026-09-19, the chair, ODQ §934.19 addendum): +628 B minified,
+// ATTRIBUTED PER MODULE by a control build at the previous mint (d17f171b0) against the tip —
+// exactly ONE module moved: src/generators/spatialGenerator.js, 14,050 → 17,359 rendered bytes,
+// the §934.22 sacred-house derivation (every layout line derives the house the settlement
+// holds instead of saying 'church'). A buy-back inside that file is the named alternative;
+// the rise is offered for the owner's ratification like the mint it follows.
+export const WORKER_BUNDLE_CEILING_BYTES = 1399946;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
