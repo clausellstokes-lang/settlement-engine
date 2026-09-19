@@ -46,6 +46,7 @@ import RefusalNotice from '../primitives/RefusalNotice.jsx';
 import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
+import { preferredImageExt } from '../../config/pageBackgrounds.js';
 
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
@@ -72,7 +73,28 @@ export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 // shows through for anyone served the page before the capture lands — a missing
 // photograph degrades to the old map rather than to a grey box. The "Realm clock
 // / Advance time" block is positioned over this box unchanged (RealmMapCard).
-const REALM_MAP_PREVIEW = "url('/landing-maps/realm-cnocby.png'), url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
+export const REALM_MAP_BASE = '/landing-maps/realm-cnocby';
+export const REALM_MAP_PLATE = '/landing-maps/realm-preview.fallowmere.parchment.svg';
+
+/**
+ * The realm card's backdrop: the photograph in the ONE format this engine can
+ * decode, with the parchment plate beneath it.
+ *
+ * ⚠ THE TWO LAYERS ARE NOT A FORMAT FALLBACK — the twin selection above already
+ * settled the format, and CSS would fetch both if asked. The plate is a
+ * DIFFERENT kind of fallback: it paints if the photograph has not been cut yet
+ * (a worktree before `node scripts/capture-landing-realm.mjs` runs), so a
+ * missing capture degrades to the old map rather than to a grey box.
+ *
+ * Exported and parameterised so it is testable: the WebP probe answers 'png' in
+ * jsdom (no canvas encoder), which would make a rendered assertion about WebP
+ * vacuous. @enforced-by tests/ui/landingRealmTwins.test.js
+ *
+ * @param {string} [ext] the chosen extension; defaults to the engine's own
+ */
+export function realmMapPreview(ext = preferredImageExt('png')) {
+  return `url('${REALM_MAP_BASE}.${ext}'), url('${REALM_MAP_PLATE}')`;
+}
 
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
@@ -376,7 +398,7 @@ export function RealmMapCard() {
       {/* Map half */}
       <div style={{
         position: 'relative', minHeight: 320,
-        backgroundImage: REALM_MAP_PREVIEW, backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundImage: realmMapPreview(), backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', top: 14, left: 14, background: 'rgba(255,251,245,0.94)',
@@ -458,5 +480,5 @@ export function RealmMapCard() {
 
 // STRIP-1 (owner ruling, ODQ §725): the MapPlateCard — the landing page's frozen
 // settlement-map lens plates and their flip control — is REMOVED with the rest of
-// the legacy settlement map. The realm-map preview (REALM_MAP_PREVIEW above) is a
+// the legacy settlement map. The realm-map preview (realmMapPreview above) is a
 // DIFFERENT surface and stays.

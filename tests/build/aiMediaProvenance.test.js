@@ -184,6 +184,16 @@ const SHARP_SCRIPTS = {
     mode: 'synthesise',
     reason: 'builds a paper-grain tile from a raw RGBA buffer it generates itself',
   },
+  'capture-landing-realm.mjs': {
+    mode: 'reencode',
+    reason:
+      'quantizes the landing realm PHOTOGRAPH its own Playwright spec just took and emits its '
+      + 'WebP twin (ODQ §934.32 addendum). Its source is a screenshot of our own product, not '
+      + 'an AI painting, so there is no generator marking to carry — but keepMetadata() is '
+      + 'about the PIPELINE and not about what happens to be passing through it today, and a '
+      + 'sharp call that lived in e2e/ instead would be undeclared by accident rather than by '
+      + 'decision, which is what this roster exists to prevent',
+  },
   'derive-brand-marks.mjs': {
     mode: 'reencode',
     reason:

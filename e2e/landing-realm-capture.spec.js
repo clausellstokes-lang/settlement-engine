@@ -45,7 +45,7 @@
  *   node scripts/capture-landing-realm.mjs
  * which sets the flag, runs this file, and prints the dimensions and bytes.
  */
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, statSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -260,40 +260,15 @@ test('the landing realm map is captured from the running Realm view', async ({ p
   await stage.screenshot({ path: OUT_PNG, animations: 'disabled', caret: 'hide' });
 
   expect(existsSync(OUT_PNG), 'no PNG was written').toBe(true);
-
-  // ⛔ QUANTIZED TO THE 400 kB TARGET, AND THE METHOD MATTERS. Chromium writes a
-  // 24-bit PNG (906 kB measured) for what is a nearly FLAT illustration: parchment,
-  // a coastline, five markers and some lines. A palette PNG is the right encoding
-  // for that image and costs it almost nothing visually — this is NOT "re-cutting
-  // it worse", which would mean a smaller or blurrier photograph. sharp is already
-  // in this file for the pixel guard below; the ORIGINALS under public/backgrounds
-  // are untouched, and this output is the script's own, not a shipped painting
-  // being re-encoded.
-  {
-    const sharpMod = await import('sharp').then((m) => m.default);
-    const quantized = await sharpMod(readFileSync(OUT_PNG))
-      .png({ palette: true, quality: 90, effort: 9 })
-      .toBuffer();
-    if (quantized.length < statSync(OUT_PNG).size) writeFileSync(OUT_PNG, quantized);
-  }
+  // ⛔ THE SPEC PHOTOGRAPHS; IT DOES NOT ENCODE. Quantization, the WebP twin and
+  // the pixel guard all moved into scripts/capture-landing-realm.mjs (ODQ
+  // §934.32 addendum) so that every sharp pipeline this act uses lives under
+  // scripts/, where tests/build/aiMediaProvenance.test.js's roster can see it and
+  // demand its `.keepMetadata()`. A sharp call in e2e/ is outside that roster —
+  // undeclared by accident rather than by decision, which is the shape the roster
+  // exists to prevent. The script is the door, and its exit code is the receipt.
   const bytes = statSync(OUT_PNG).size;
 
-  // ⛔ THE PIXEL GUARD — THE ARM THAT WOULD HAVE CAUGHT THE BLACK PICTURE.
-  // Everything above this line passed on a capture that was three-quarters black,
-  // because every check was about the DOM and a screenshot is about pixels. This
-  // reads the bytes that were actually written and refuses a frame that is mostly
-  // one dark colour. It is deliberately loose (a legitimate realm is parchment
-  // and sea, never a black field) so it convicts the failure mode without
-  // pretending to judge the composition.
-  const png = await import('sharp').then((m) => m.default(readFileSync(OUT_PNG)));
-  const { channels } = await png.stats();
-  const meanLuma = (channels[0].mean + channels[1].mean + channels[2].mean) / 3;
-  expect(
-    meanLuma,
-    `the capture is ${Math.round(meanLuma)}/255 mean brightness — a realm map that dark is an`
-    + ' UNPAINTED CANVAS, not a photograph. The FMG iframe had not finished rendering, or the'
-    + ' viewport was never framed. Do not relax this number to get green.',
-  ).toBeGreaterThan(60);
 
   // THE SIDECAR (the owner's law, not the provenance walker's — public/landing-maps
   // is outside MEDIA_ROOTS). It records what would be needed to cut this again.

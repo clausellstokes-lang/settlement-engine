@@ -38,8 +38,25 @@
   "deviceScaleFactor": 2,
   "pixelWidth": 2280,
   "pixelHeight": 1124,
-  "bytes": 477946,
-  "tip": "6fcbd310e25ea7c38e210926f89931f8f455abde",
+  "tip": "8f0ac299364d88a60a10cde4d965e50101dcf8ff",
   "capturedAt": "2026-09-19",
-  "note": "Not AI art and not a drawing: a screenshot of the product rendering its own realm. Re-cut with `node scripts/capture-landing-realm.mjs`."
+  "note": "Not AI art and not a drawing: a screenshot of the product rendering its own realm. Re-cut with `node scripts/capture-landing-realm.mjs`.",
+  "files": {
+    "webp": {
+      "path": "public/landing-maps/realm-cnocby.webp",
+      "bytes": 123346,
+      "served": "first — the engine picks ONE format (src/config/pageBackgrounds.js probe)"
+    },
+    "png": {
+      "path": "public/landing-maps/realm-cnocby.png",
+      "bytes": 478138,
+      "served": "the fallback, for engines that cannot decode WebP"
+    }
+  },
+  "encoding": {
+    "capturedBytes": 906121,
+    "quantized": "sharp png palette q90 effort 9",
+    "webp": "sharp webp q80 effort 6",
+    "by": "scripts/capture-landing-realm.mjs (declared in SHARP_SCRIPTS)"
+  }
 }

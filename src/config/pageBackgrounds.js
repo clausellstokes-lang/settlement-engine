@@ -66,6 +66,24 @@ export function backgroundHref(name) {
   return `${BASE}/${name}.${bgExt()}`;
 }
 
+/**
+ * The best extension this engine can decode, for a .webp/<fallback> twin pair
+ * shipped OUTSIDE public/backgrounds — today the landing's realm photograph
+ * (public/landing-maps/realm-cnocby.{webp,png}, ODQ §934.32 addendum).
+ *
+ * ⛔ IT REUSES THE PROBE ABOVE, AND THAT IS THE WHOLE POINT. The alternative for
+ * a CSS background is a comma-separated `url(webp), url(png)` list, which is NOT
+ * a fallback: CSS LAYERS background images, so a capable engine would fetch and
+ * composite BOTH twins — more bytes to the engines the twin exists to save them
+ * for. One probe, one cached answer, one file, exactly as the paintings do it.
+ *
+ * @param {string} [fallback] the non-WebP extension of the pair ('jpg', 'png')
+ * @returns {string}
+ */
+export function preferredImageExt(fallback = 'jpg') {
+  return bgExt() === 'webp' ? 'webp' : fallback;
+}
+
 /** view id → background image basename. */
 export const PAGE_BACKGROUNDS = Object.freeze({
   generate:           'create',
