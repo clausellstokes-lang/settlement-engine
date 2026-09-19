@@ -30728,34 +30728,39 @@
     },
     {
       "id": "EM-P3",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P3.md",
-      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "verifiedBase": "4928be0ab7210dff47429af788670f80947d36ad",
       "changeManifest": [
         {
           "action": "CREATE",
           "path": "src/data/worldFactOptions.js",
-          "symbol": "TERRAIN_WEIGHTS, TERRAINS, CULTURES, TRADE_ACCESS, WORLD_FACT_SOURCES"
+          "symbol": "TERRAIN_WEIGHTS, TERRAINS, CULTURES — the option VALUES only. NO TRADE_ACCESS (EM-P3b's row) and NO WORLD_FACT_SOURCES (it would ride into the zero-slack generation worker; measured +206 B with the split vs +634 B without)"
         },
         {
           "action": "CREATE",
           "path": "src/domain/worldFactOptions.js",
-          "symbol": "the boundary re-export block"
+          "symbol": "the boundary re-export block plus WORLD_FACT_SOURCES (seven citation keys). No src/generators module may import this file: measured, that seeds ENGINE_SHARED_DOMAIN and puts both new files in the eager first-paint closure (268 -> 270)"
         },
         {
           "action": "MODIFY",
           "path": "src/generators/steps/resolveConfig.js",
-          "symbol": "TERRAIN_WEIGHTS, CULTURES — the two literals become an import plus a re-export under the same names"
+          "symbol": "TERRAIN_WEIGHTS, CULTURES — the two literals become an import from ../../data/worldFactOptions.js plus a re-export under the same names"
         },
         {
           "action": "MODIFY",
           "path": "src/components/gallery/galleryUtils.js",
-          "symbol": "TERRAIN_OPTIONS, CULTURE_OPTIONS — derived from the canonical home, names unchanged"
+          "symbol": "TERRAIN_OPTIONS, CULTURE_OPTIONS — derived from ../../domain/worldFactOptions.js, names unchanged; this is the domain leaf's production importer and it is not a first-paint module"
         },
         {
           "action": "TEST",
           "path": "tests/components/gallery/facetAlignment.test.js",
           "symbol": "acceptance cases A1 through A5, added to the existing contract"
+        },
+        {
+          "action": "TEST",
+          "path": "tests/build/generationWorkerLazy.test.js",
+          "symbol": "WORKER_BUNDLE_CEILING_BYTES — re-minted to the exact measured bundle (zero slack) by the build lane under the standing conditional ruling; bound: growth <= 412 B (the measured +206 B esbuild per-module estimate x2); constant and its dated attribution comment ONLY. Its dist arms are describe.runIf(DIST_EXISTS), so this file must be run with VERIFY_DIST=1 after a real build or the ceiling arm silently skips"
         }
       ],
       "requiredSymbols": [
@@ -30798,6 +30803,14 @@
         {
           "path": "src/data/institutionServices.js",
           "symbol": "export const INSTITUTION_SERVICES"
+        },
+        {
+          "path": "src/data/namingData.js",
+          "symbol": "export const NAMING_DATA"
+        },
+        {
+          "path": "tests/build/generationWorkerLazy.test.js",
+          "symbol": "export const WORKER_BUNDLE_CEILING_BYTES"
         }
       ],
       "acceptanceCases": [
@@ -30807,7 +30820,7 @@
         },
         {
           "id": "A2",
-          "case": "THE EXISTING ARMS STILL HOLD — the three pre-existing culture assertions of the facet-alignment contract pass unchanged against the new source"
+          "case": "THE EXISTING ARMS STILL HOLD — the pre-existing terrain and culture assertions of the facet-alignment contract pass unchanged against the new source"
         },
         {
           "id": "A3",
@@ -30815,7 +30828,7 @@
         },
         {
           "id": "A4",
-          "case": "THE CITATION MAP IS HONEST — WORLD_FACT_SOURCES has exactly eight keys, every path exists, and every symbol is present verbatim in its file"
+          "case": "THE CITATION MAP IS HONEST — WORLD_FACT_SOURCES' key set equals the seven named facts exactly, tradeAccess is absent with the charter cited, every path exists, and every symbol is present verbatim in its file"
         },
         {
           "id": "A5",
@@ -30824,6 +30837,10 @@
         {
           "id": "A6",
           "case": "IDENTITY — the generator golden master and the dossier prose manifest do not move, because the packet relocates values and changes none"
+        },
+        {
+          "id": "A7",
+          "case": "THE WORKER CEILING IS MEASURED, NOT RAISED — WORKER_BUNDLE_CEILING_BYTES equals the built bundle exactly (zero slack); the constant minus one REDS with the printed byte figure and is restored; the per-module attribution names only resolveConfig.js and worldFactOptions.js"
         }
       ],
       "checks": [
@@ -30854,12 +30871,23 @@
         ],
         [
           "npx",
+          "vitest",
+          "run",
+          "--pool=threads",
+          "--maxWorkers=2",
+          "tests/build/generationWorkerLazy.test.js",
+          "tests/build/vendorPdfLazy.test.js"
+        ],
+        [
+          "npx",
           "eslint",
           "src/data/worldFactOptions.js",
           "src/domain/worldFactOptions.js",
           "src/generators/steps/resolveConfig.js",
           "src/components/gallery/galleryUtils.js",
-          "tests/components/gallery/facetAlignment.test.js"
+          "tests/components/gallery/facetAlignment.test.js",
+          "tests/build/generationWorkerLazy.test.js",
+          "tests/build/vendorPdfLazy.test.js"
         ],
         [
           "npm",
