@@ -4,6 +4,7 @@ import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
+import { tokenCase } from '../labelLadder.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { proseFontSize } from '../../../design/proseScale.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
@@ -271,7 +272,11 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                   borderBottom:open?`1px solid ${isCriminal?'#3a1a1a':`${meta.accent}20`}`:'none',
                   cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'
                 }}>
-                  <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
+                  {/* A GROUP HEADER NESTED INSIDE THE CARD, not the card's eyebrow — the rule
+                      DefenseSecurity's pair already set: "ARMED FORCES & FORTIFICATIONS" keeps
+                      its capitals and "Standing forces" beneath it does not. "Category Status"
+                      above is this surface's one eyebrow and is untouched. */}
+                  <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor}}>{tokenCase(meta.label)}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
                   {!hasImp&&hasDeg&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}

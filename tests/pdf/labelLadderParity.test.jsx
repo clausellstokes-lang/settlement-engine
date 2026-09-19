@@ -64,12 +64,17 @@ import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.
 import { DefenseSecurity } from '../../src/pdf/sections/DefenseSecurity.jsx';
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
+import { Services } from '../../src/pdf/sections/Services.jsx';
 
 // ── THE SCREEN SIDE, rendered as a DM sees it ────────────────────────────────────────
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import ReadSystemStateBar from '../../src/components/settlement/ReadSystemStateBar.jsx';
+import ServicesTab from '../../src/components/new/tabs/ServicesTab.jsx';
+import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
+import SummaryTab from '../../src/components/new/SummaryTab.jsx';
+import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 
 /**
  * Towns chosen to light different band ladders; every one is a FRESH generation, so no
@@ -97,6 +102,57 @@ const SHOUTED_STATUS_WORDS = Object.freeze([
   'COLLAPSED', 'SURPLUS',                             // causalState CAUSAL_BANDS
   'RAMPANT', 'ACUTE', 'ELEVATED', 'CONTAINED', 'NEGLIGIBLE', // the lower-is-better terms
 ]);
+
+/**
+ * THE RUNG-2 FIELD-NAME VOCABULARIES, in the case they used to reach the page in.
+ *
+ * Three group-header families that were shouting on BOTH surfaces, transcribed from their
+ * own declaration sites: `tabConstants.Ts` / `Services.jsx`'s `SERVICE_CAT_LABEL` (the two
+ * differ in WORDS as well as case, so both spellings are listed), `supplyChainData.js`'s
+ * need labels, and `PlotHooks.jsx`'s `SOURCE_LABELS`.
+ * @type {ReadonlyArray<string>}
+ */
+const SHOUTED_FIELD_NAMES = Object.freeze([
+  // Service categories — screen (`Ts`) then the PDF's own shorter map.
+  'LODGING', 'FOOD & DRINK', 'EQUIPMENT', 'INFORMATION', 'HEALING', 'ENTERTAINMENT',
+  'EMPLOYMENT', 'MAGICAL SERVICES', 'TRANSPORTATION', 'LEGAL & FINANCIAL',
+  'CRIMINAL SERVICES', 'MAGIC', 'TRANSPORT', 'LEGAL', 'CRIMINAL',
+  // Supply-chain need groups.
+  //
+  // ⛔ 'FOOD SECURITY' IS DELIBERATELY ABSENT, and the reason is a defect class rather than
+  // an oversight. The dossier uses those two words at TWO DIFFERENT RUNGS: as the chain
+  // group header cured here, and as `EconomicsTrade:199`'s CHAPTER EYEBROW, which is rung 1
+  // and keeps its capitals by the ruling. A vocabulary arm judges a leaf by its word alone,
+  // so it cannot tell the two apart and would convict the eyebrow for being correct. The
+  // estate has met this before — the screen ladder's DefenseTab row "passed only because
+  // the band shouted" once two ladders overlapped — and its answer was to address the
+  // ELEMENT rather than disambiguate by case. The other nine need labels carry the pin;
+  // resolving this one needs a structural handle on the group header, which is recorded
+  // rather than bodged.
+  'RAW MATERIALS & FUEL', 'MANUFACTURING & CRAFTS', 'DEFENSE & SECURITY',
+  'TRADE & ENTREPÔT', 'KNOWLEDGE & INFORMATION', 'RELIGION & CIVIC',
+  'ENTERTAINMENT & CULTURE', 'ARCANE & MAGICAL', 'CRIMINAL ECONOMY',
+  // Plot-hook source chips. 'NPC' is deliberately in this list and is deliberately NOT a
+  // defect — see LADDER_WORDS.
+  'NPC', 'CONFLICT', 'UNDERWORLD', 'CRISIS', 'TENSION', 'RELATIONSHIP', 'HISTORY',
+  // The service-row status pill (`serviceComponents.jsx`), whose print twin
+  // (`Services.jsx`) already spoke these words while the screen shouted them.
+  'IMPAIRED', 'REDUCED',
+]);
+
+/**
+ * EVERY WORD THIS LADDER GOVERNS THAT IS ACTUALLY SHOUTING — and the filter is the point.
+ *
+ * ⛔ AN INITIALISM IS NOT A SHOUT. `tokenCase('NPC')` is 'NPC': the ladder preserves it on
+ * purpose, and an arm that convicted every all-caps leaf would red on the one word the
+ * ladder exists to protect. So a vocabulary entry counts as shouting only where the ladder
+ * would actually change it. This is computed rather than hand-maintained, so adding an
+ * initialism to `labelCase.js` cannot leave a stale exception behind in this file.
+ * @type {ReadonlyArray<string>}
+ */
+const LADDER_WORDS = Object.freeze(
+  [...SHOUTED_STATUS_WORDS, ...SHOUTED_FIELD_NAMES].filter((w) => tokenCase(w) !== w),
+);
 
 /**
  * Every text leaf of a react-pdf element tree WITH THE CASE TRANSFORM THAT WILL BE APPLIED
@@ -166,21 +222,34 @@ function rendered(/** @type {{ text: string, transform: string }} */ leaf) {
 }
 
 /**
- * Every visible leaf of a rendered SCREEN tree.
+ * Every visible leaf of a rendered SCREEN tree, WITH THE CASE TRANSFORM THAT WILL BE
+ * PAINTED OVER IT.
  *
- * ⚠ `textContent` is the AUTHORED string: a CSS `text-transform` is a paint-time effect and
- * jsdom does not fold it in. That is the right reading for this arm anyway — the screen's own
- * ladder pin (`tests/components/dossierLabelCase.test.jsx`) judges the authored word too, and
- * what this file needs from the screen is the word the ladder chose.
+ * ⛔ WHY THE TRANSFORM IS CLIMBED AND `textContent` IS NOT TRUSTED ALONE. `text-transform`
+ * is a PAINT-TIME effect: jsdom leaves `textContent` as the AUTHORED string, so a screen
+ * element styled `textTransform:'uppercase'` around the word "Lodging" reports "Lodging"
+ * while a DM sees "LODGING". An arm that read `textContent` alone would therefore call the
+ * two surfaces equal at the exact moment they diverge — which is how the screen half of
+ * this ladder stayed shouting after the print half had descended. The declaration is
+ * INHERITED in CSS, so the nearest ancestor that declares one wins; these components style
+ * inline, so `el.style.textTransform` is where it lives.
+ *
  * @param {HTMLElement} root
- * @returns {string[]}
+ * @returns {Array<{ text: string, transform: string }>}
  */
 function screenLeaves(root) {
   const out = [];
   for (const el of root.querySelectorAll('*')) {
     if (el.children.length > 0) continue;
     const text = (el.textContent || '').trim();
-    if (text) out.push(text);
+    if (!text) continue;
+    let transform = 'none';
+    for (let node = /** @type {HTMLElement|null} */ (el); node; node = node.parentElement) {
+      const declared = node.style?.textTransform;
+      if (declared) { transform = declared; break; }
+      if (node === root) break;
+    }
+    out.push({ text, transform });
   }
   return out;
 }
@@ -217,10 +286,14 @@ function printLeaves(/** @type {string} */ town) {
     ...collectStyled(DefenseSecurity(props)),
     ...collectStyled(EconomicsTrade(props)),
     ...collectStyled(IdentityDailyLife(props)),
+    // `SupplyChainFlow` is NOT called here on purpose: `EconomicsTrade:213` already mounts
+    // it (behind `pdfVisualChains`), so it arrives through its real parent. Calling it
+    // directly would need a hand-built `chains` prop and would prove less.
+    ...collectStyled(Services(props)),
   ];
 }
 
-/** The screen surfaces that render the same status vocabularies. */
+/** The screen surfaces that render the same vocabularies the four print chapters do. */
 function screenText(/** @type {string} */ town) {
   const s = settlements.get(town);
   const out = [];
@@ -229,6 +302,15 @@ function screenText(/** @type {string} */ town) {
     <DefenseTab settlement={s} />,
     <SubstrateTab settlement={s} />,
     <ReadSystemStateBar settlement={s} />,
+    // The three surfaces car 3 descended, each mounted as OutputContainer mounts it.
+    // EconomicsTab is what carries SupplyChainsPanel, so the need headers arrive the way
+    // a DM meets them rather than through a hand-built prop bundle.
+    <ServicesTab services={s.availableServices} settlement={s} />,
+    <EconomicsTab economicState={s.economicState} settlement={s} />,
+    <PlotHooksTab settlement={s} />,
+    // The flag-off summary. It is behind `summaryMagazineV2`, but it is the surface that
+    // proved leaf-equality alone is not enough: it interpolates a band word into a SENTENCE.
+    <SummaryTab settlement={s} />,
   ]) {
     const { container } = render(el);
     out.push(...screenLeaves(container));
@@ -262,7 +344,7 @@ describe('the paid document descends the same label ladder as the screen', () =>
       // substring arm would convict it for containing the word CRITICAL.
       const shouting = leaves
         .map((leaf) => rendered(leaf))
-        .filter((word) => SHOUTED_STATUS_WORDS.includes(word));
+        .filter((word) => LADDER_WORDS.includes(word));
       expect(
         [...new Set(shouting)],
         `${town}: the paid document shouts a status word the screen speaks`,
@@ -271,7 +353,7 @@ describe('the paid document descends the same label ladder as the screen', () =>
       // AND THE ARM IS NOT PASSING ON A PAGE WITH NO STATUS WORDS ON IT AT ALL.
       const spoken = leaves
         .map((leaf) => rendered(leaf))
-        .filter((word) => SHOUTED_STATUS_WORDS.includes(word.toUpperCase()));
+        .filter((word) => LADDER_WORDS.includes(word.toUpperCase()));
       expect(spoken.length, `${town}: no status word reached the page, so the arm is vacuous`)
         .toBeGreaterThan(0);
     },
@@ -281,13 +363,13 @@ describe('the paid document descends the same label ladder as the screen', () =>
     '%s: every status word the screen prints, the print prints IDENTICALLY',
     (town) => {
       const printed = printLeaves(town).map((leaf) => rendered(leaf));
-      const screened = screenText(town);
+      const screened = screenText(town).map((leaf) => rendered(leaf));
       expect(screened.length, 'the screen rendered nothing, so parity proves nothing')
         .toBeGreaterThan(50);
 
       /** A leaf that IS a status word, whatever its case, on either surface. */
       const statusOf = (/** @type {string[]} */ leaves) => new Set(
-        leaves.filter((w) => SHOUTED_STATUS_WORDS.includes(String(w).toUpperCase())),
+        leaves.filter((w) => LADDER_WORDS.includes(String(w).toUpperCase())),
       );
       const onScreen = statusOf(screened);
       const onPrint = statusOf(printed);
@@ -307,6 +389,42 @@ describe('the paid document descends the same label ladder as the screen', () =>
           `${town}: the screen prints "${word}" and the document prints it differently`,
         ).toContain(word);
       }
+    },
+  );
+
+
+  test.each(CASES.map(([town]) => [town]))(
+    '%s: a band word SMUGGLED INTO A SENTENCE is caught on both surfaces',
+    (town) => {
+      // ⛔ WHY LEAF EQUALITY IS NOT ENOUGH. `SummaryTab` printed
+      // `Systems average: ${scoreBand(defScore)}` — the frozen 'STRONG' interpolated into a
+      // sentence, so NO leaf ever equalled it and every arm above walked straight past. A
+      // shouted word hides just as well inside a template as it does behind a style.
+      //
+      // The rule is exact rather than a substring scan: a ladder word as a WHOLE WORD, in a
+      // leaf that is LONGER than the word, whose element is NOT uppercasing. That last
+      // clause is what spares rung 1 — an eyebrow like "CRITICAL DEPENDENCIES" is shouted BY
+      // ITS STYLE and keeps its capitals lawfully, while a word that arrives already in
+      // capitals inside ordinary-case text can only have come from the data.
+      const offenders = [];
+      for (const leaf of [...printLeaves(town), ...screenText(town)]) {
+        if (leaf.transform === 'uppercase') continue;
+        const text = leaf.text.trim();
+        // ⛔ AND THE LEAF MUST BE A SENTENCE, NOT A SHOUT. A rung-1 eyebrow is sometimes
+        // written as an ALL-CAPS LITERAL with no transform at all ("ACTIVE CRISIS"), and it
+        // keeps its capitals by the ruling. What this arm is hunting is a capitalised word
+        // sitting INSIDE ordinary-case text, where the caps can only have come from the
+        // data — so the leaf has to carry a lower-case letter somewhere to qualify.
+        if (!/[a-z]/.test(text)) continue;
+        for (const word of LADDER_WORDS) {
+          if (text === word) continue;
+          if (new RegExp(`(^|[^A-Za-z])${word}([^A-Za-z]|$)`).test(text)) {
+            offenders.push(`${word} in "${text.slice(0, 70)}"`);
+          }
+        }
+      }
+      expect([...new Set(offenders)],
+        `${town}: a frozen band word reached a sentence in capitals`).toEqual([]);
     },
   );
 
@@ -330,7 +448,7 @@ describe('the paid document descends the same label ladder as the screen', () =>
     const leaves = printLeaves(town);
     const transformed = leaves.filter(
       (leaf) => leaf.transform === 'uppercase'
-        && SHOUTED_STATUS_WORDS.includes(leaf.text.trim().toUpperCase()),
+        && LADDER_WORDS.includes(leaf.text.trim().toUpperCase()),
     );
     expect(
       transformed.map((leaf) => leaf.text.trim()),

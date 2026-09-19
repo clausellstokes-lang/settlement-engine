@@ -7,6 +7,7 @@ import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
 import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
+import { statusCase, tokenCase } from './labelLadder.js';
 import { stabilityBandOf, complexityBandOf } from '../../domain/display/labelBands.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
@@ -212,7 +213,7 @@ function SummaryTab({ settlement:r }) {
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <SitTile label="Power" value={stabilityBandOf(powStab) ?? powStab.trim()} color={powColor} sub={allFactions[0]?.faction}/>
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||(complexityBandOf(eco.economicComplexity) ?? eco.economicComplexity)}/>
-        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${scoreBand(defScore)}`:undefined}/>
+        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${statusCase(scoreBand(defScore))}`:undefined}/>
       </div>
 
       {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest
@@ -306,7 +307,7 @@ function SummaryTab({ settlement:r }) {
               <div id={entityAnchor('hook', { id:`${v.category}-${i}`, name:v.text.slice(0,40) })} key={i} style={{display:'flex',gap:10,alignItems:'flex-start',scrollMarginTop:ANCHOR_OFFSET}}>
                 <span style={{width:4,alignSelf:'stretch',background:meta.color,opacity:v.accent?1:0.55,flexShrink:0}}/>
                 <div style={{flex:1,minWidth:0}}>
-                  <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,textTransform:'uppercase',letterSpacing:'0.04em',marginRight:6}}>{v.source}</span>
+                  <span style={{fontSize:FS.xxs,fontWeight:700,color:meta.color,marginRight:6}}>{tokenCase(v.source)}</span>
                   {v.role&&<span style={{fontSize:FS.xxs,color:muted,marginRight:6}}>{v.role}</span>}
                   {v.sub&&<span style={{fontSize:FS.xxs,color:v.accent?meta.color:muted,fontStyle:v.accent?'normal':'italic'}}>{v.sub}</span>}
                   <span style={{fontSize:FS.md,color:ink,lineHeight:1.5}}>{v.text}</span>
@@ -370,7 +371,7 @@ function SummaryTab({ settlement:r }) {
         {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
           {catOrder.filter(cat=>instByCat[cat]?.length).map(cat=>(
             <div key={cat} style={{marginBottom:10}}>
-              <div style={{fontSize:FS.xxs,fontWeight:700,color:catColor(cat),textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>{cat} ({instByCat[cat].length})</div>
+              <div style={{fontSize:FS.xxs,fontWeight:700,color:catColor(cat),marginBottom:5}}>{tokenCase(cat)} ({instByCat[cat].length})</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {instByCat[cat].sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                   const srcColor=inst.source==='required'?gold:inst.source==='forced'?'#1a5a28':inst.source==='auto-resolved'?'#2a3a7a':'#6b5340';

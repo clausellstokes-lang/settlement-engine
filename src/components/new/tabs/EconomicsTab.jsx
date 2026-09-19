@@ -397,7 +397,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               </div>
               <div style={{width:mobile?'auto':210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>Criminal</span>}
                   {src.source}
                 </div>
                 {src.desc&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:mobile?1.4:undefined,...(mobile?null:{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'})}}>{src.desc}</div>}

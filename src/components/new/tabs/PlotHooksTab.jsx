@@ -24,6 +24,7 @@ import { generalDeskLines } from '../generalDeskRead.js';
 import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { tokenCase } from '../labelLadder.js';
 
 /**
  * ⭐ THE FRAMING CAP, AND THE RULING BEHIND IT (owner finding 4, 2026-09-18).
@@ -120,13 +121,21 @@ export default function PlotHooksTab({ settlement, publicDossier = false, player
                     color: INK, minWidth: 0, overflow: 'hidden',
                     textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                   }}>
-                    {hook.source}
+                    {/* THE ONLY SITE IN THIS LADDER THAT WAS SHOUTING NOTHING AND STILL
+                        WRONG: it printed the RAW ENGINE TOKEN, so a source read "npc" in
+                        lower case where SessionMode:471 and the PDF's PlotHooks both print
+                        "NPC". tokenCase is the one function that gets both halves right. */}
+                    {tokenCase(hook.source)}
                   </span>
                   <span style={{
                     fontSize: FS['7.5'], fontWeight: 800,
                     color: cat.color, letterSpacing: '0.08em', flexShrink: 0,
                   }}>
-                    {String(cat.label).toUpperCase()}
+                    {/* ⛔ THIS LINE DESTROYED THE ONE WORD THE LADDER PROTECTS. The category
+                        vocabulary carries 'NPCs' (`domain/dossier/plotHooks.js`), and
+                        `.toUpperCase()` printed it 'NPCS' — an initialism broken by the very
+                        transform the ladder removes. tokenCase returns 'NPCs' intact. */}
+                    {tokenCase(cat.label)}
                   </span>
                 </div>
                 <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>

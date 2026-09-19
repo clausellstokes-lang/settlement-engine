@@ -147,9 +147,13 @@ export function StateProse({ stateProse, tab }) {
     <>
       {entries.map(([mount, paragraph]) => (
         <Callout key={mount} tone="gold">
+          {/* `type.label_plain`, not `type.label` + `textTransform:'none'`. The hand-rolled
+              override turned the CAPITALS off and left the 0.2 TRACKING on, so every kicker
+              printed sentence case at a spacing cut for capitals — the precise error the
+              shared style exists to make unwritable. */}
           {kickerOf(mount) && (
             <Text style={{
-              ...type.label, textTransform: 'none', color: palette.gold,
+              ...type.label_plain, color: palette.gold,
               fontSize: pt['7.5'], marginBottom: 3,
             }}>
               {kickerOf(mount)}

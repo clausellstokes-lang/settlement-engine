@@ -5,6 +5,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
+import { tokenCase } from './labelLadder.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -236,9 +237,12 @@ function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNa
         }}
       >
         {needIcon && <span style={{ fontSize: FS['14'] }}>{needIcon}</span>}
-        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1,
-          textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          {needLabel || needKey}
+        {/* THE SAME WORD THE ECONOMICS TAB ALREADY SPEAKS. `EconomicsTab:164` renders this
+            exact `needLabel` through `tokenCase`, so the vocabulary's rung was already
+            settled; this header was the one screen home still shouting it, and the PDF's
+            `SupplyChainFlow` was shouting it too. */}
+        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1 }}>
+          {tokenCase(needLabel || needKey)}
         </span>
         <span style={{ fontSize: FS.xs, color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
         {impaired > 0 && <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}

@@ -469,7 +469,8 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                     <Card key={i} accent={cat.color}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 2 }}>
                         <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tokenCase(hook.source)}</span>
-                        <span style={{ fontSize: FS.nano, fontWeight: 800, color: cat.color, letterSpacing: '0.08em', flexShrink: 0 }}>{String(cat.label).toUpperCase()}</span>
+                        {/* The same 'NPCs' -> 'NPCS' break as PlotHooksTab's badge, on the DM-screen twin. */}
+                        <span style={{ fontSize: FS.nano, fontWeight: 800, color: cat.color, flexShrink: 0 }}>{tokenCase(cat.label)}</span>
                       </div>
                       <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{hook.text}</div>
                     </Card>

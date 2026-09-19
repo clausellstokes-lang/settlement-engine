@@ -186,10 +186,13 @@ function FullCard({ npc, index }) {
       {/* Identity meta line */}
       <KeyValRow
         pairs={[
-          npc.race ? { label: 'RACE', value: humanize(npc.race) } : null,
-          npc.gender ? { label: 'SEX', value: humanize(npc.gender) } : null,
-          npc.age ? { label: 'AGE', value: npc.age } : null,
-          npc.influenceLabel ? { label: 'INFL', value: npc.influenceLabel } : null,
+          npc.race ? { label: 'Race', value: humanize(npc.race) } : null,
+          npc.gender ? { label: 'Sex', value: humanize(npc.gender) } : null,
+          npc.age ? { label: 'Age', value: npc.age } : null,
+          // 'INFL' is SPELLED OUT rather than re-cased: tokenCase('INFL') is 'Infl',
+          // which is not a word, and an abbreviation that reads as a typo in sentence
+          // case has to become the word it abbreviates or stay an abbreviation.
+          npc.influenceLabel ? { label: 'Influence', value: npc.influenceLabel } : null,
         ].filter(Boolean)}
       />
 

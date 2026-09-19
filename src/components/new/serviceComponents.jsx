@@ -22,7 +22,10 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
   const isVul = !isImp && !isDeg && (vulnerable?.has(name) || vulnerable?.has(inst));
   const statusColor = isImp ? '#8b1a1a' : isDeg ? '#8a4010' : isVul ? '#7a5010' : null;
-  const statusLabel = isImp ? ' IMPAIRED' : isDeg ? ' REDUCED' : isVul ? ' VULNERABLE' : null;
+  // RUNG 3, THE STATUS VALUE — colour and weight carry the meaning in this pill, so the
+  // case does not have to. The print twin already speaks these words (`Services.jsx`
+  // renders 'Impaired'), so the screen was the half that was shouting.
+  const statusLabel = isImp ? ' Impaired' : isDeg ? ' Reduced' : isVul ? ' Vulnerable' : null;
   const depthLabel  = chainDepth && chainDepth > 1
     ? (chainDepth === 2 ? '2-order chain' : chainDepth === 3 ? '3-order chain' : chainDepth + '-order chain')
     : null;

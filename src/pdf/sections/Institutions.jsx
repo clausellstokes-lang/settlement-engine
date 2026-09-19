@@ -167,22 +167,22 @@ function InstitutionCard({ inst, idx, entityIndex }) {
   // shimmering gold row: a gold tint (goldBg) + gold outline + a ✦ marker.
   const isCustom = String(inst.source || '').toLowerCase() === 'custom';
   const meta = [
-    inst.subCategory ? { label: 'TYPE', value: humanize(inst.subCategory) } : null,
+    inst.subCategory ? { label: 'Type', value: humanize(inst.subCategory) } : null,
     inst.leader ? {
-      label: 'HEAD',
+      label: 'Head',
       value: typeof inst.leader === 'string' ? inst.leader : (inst.leader.name || label(inst.leader)),
     } : null,
     inst.building ? {
-      label: 'BLDG',
+      label: 'Building',
       value: typeof inst.building === 'string' ? inst.building : (inst.building.name || label(inst.building)),
     } : null,
-    inst.staffing ? { label: 'STAFF', value: inst.staffing } : null,
-    inst.capacity ? { label: 'CAP', value: inst.capacity } : null,
-    inst.prominence ? { label: 'SCALE', value: humanize(inst.prominence) } : null,
-    inst.chainDepth != null ? { label: 'CHAIN', value: `depth ${inst.chainDepth}` } : null,
-    inst.source ? { label: 'SOURCE', value: humanize(inst.source) } : null,
+    inst.staffing ? { label: 'Staff', value: inst.staffing } : null,
+    inst.capacity ? { label: 'Capacity', value: inst.capacity } : null,
+    inst.prominence ? { label: 'Scale', value: humanize(inst.prominence) } : null,
+    inst.chainDepth != null ? { label: 'Chain', value: `depth ${inst.chainDepth}` } : null,
+    inst.source ? { label: 'Source', value: humanize(inst.source) } : null,
     inst.founded ? {
-      label: 'EST',
+      label: 'Established',
       value: typeof inst.founded === 'number' ? `${inst.founded}` : inst.founded,
     } : null,
   ].filter(Boolean);

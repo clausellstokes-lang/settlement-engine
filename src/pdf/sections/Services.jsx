@@ -21,7 +21,8 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { StatusCard } from '../primitives/Visuals.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { humanize, label, plural, upper } from '../lib/format.js';
+import { humanize, label, plural, stripZwnj } from '../lib/format.js';
+import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 const SERVICE_CATEGORY_ORDER = [
@@ -158,7 +159,7 @@ function CategoryCard({ cat }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['9'] }}>
-          {upper(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key))}
+          {tokenCase(stripZwnj(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key)))}
         </Text>
         <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['7.5'] }}>
           {cat.items.length} option{cat.items.length === 1 ? '' : 's'}
