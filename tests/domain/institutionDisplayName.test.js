@@ -43,12 +43,14 @@ function everyCatalogueKey() {
 }
 
 /**
- * THE FAMILY PREDICATE, STATED AS A RULE RATHER THAN A LIST. A key is in the
- * parish-church family when it names a parish AND a church. 'Parish burial
- * grounds' matches the first and not the second, which is exactly why it is out:
- * §934.13 ruled the house-of-worship label, and a burial ground is not one.
+ * THE RULE, AND WHY IT WIDENED. The first cut matched /parish/ AND /church/ so that
+ * 'Parish burial grounds' stayed OUT by rule rather than by omission — a burial ground
+ * is not a house of worship, and naming it was not the lane's call. The chair ruled it
+ * ('Burial grounds'), so the predicate is now the whole word: NO CATALOGUE KEY
+ * CONTAINING 'parish' MAY REACH A READER. That is a stronger pin than the one it
+ * replaces, and it is the one a new variant of ANY shape now trips.
  */
-const isParishChurchKey = (key) => /parish/i.test(key) && /church/i.test(key);
+const isParishKey = (key) => /parish/i.test(key);
 
 describe('institutionDisplayName — the parish-church family', () => {
   test('every mapped key renders its setting-neutral label', () => {
@@ -89,11 +91,15 @@ describe('institutionDisplayName — pass-through', () => {
     expect(institutionDisplayName(custom)).toBe('The Parish of Unending Bells');
   });
 
-  test('"Parish burial grounds" is NOT mapped — it is not a house of worship', () => {
-    // §934.13 ruled the parish-CHURCH family. The burial ground is an adjacent
-    // finding reported to the chair, deliberately deferred — documented, not a bug
-    // to re-find. If it is later ruled, this expectation is the line that changes.
-    expect(institutionDisplayName('Parish burial grounds')).toBe('Parish burial grounds');
+  test('"Parish burial grounds" reads "Burial grounds" — the chair\'s ruling', () => {
+    // Reported by the first cut as an adjacent finding and ruled since. The sibling
+    // rungs are NOT touched: only the one carrying the setting-specific word moves.
+    expect(institutionDisplayName('Parish burial grounds')).toBe('Burial grounds');
+    expect(institutionDisplayName('Burial ground')).toBe('Burial ground');
+    expect(institutionDisplayName('Burial grounds and charnel house'))
+      .toBe('Burial grounds and charnel house');
+    expect(institutionDisplayName('Graveyard')).toBe('Graveyard');
+    expect(institutionDisplayName('Cemetery network')).toBe('Cemetery network');
   });
 
   test('nothing in, nothing out — no "undefined" ever reaches a page', () => {
@@ -137,17 +143,33 @@ describe('institutionDisplayName — the shapes the estate actually hands it', (
 });
 
 describe('institutionDisplayName — the enumeration is pinned to the catalogue', () => {
-  test('every parish-church key in the catalogue is mapped', () => {
-    const family = [...everyCatalogueKey()].filter(isParishChurchKey).sort();
+  test('every parish key in the catalogue is mapped', () => {
+    const family = [...everyCatalogueKey()].filter(isParishKey).sort();
     const mapped = Object.keys(INSTITUTION_DISPLAY_NAMES).sort();
     // A NEW scale variant added to the catalogue lands here as an unmapped key and
     // reds THIS file, instead of shipping 'Parish churches (100-200)' to a reader.
     expect(family).toEqual(mapped);
   });
 
-  test('the family is exactly the five keys the census found', () => {
-    const family = [...everyCatalogueKey()].filter(isParishChurchKey);
-    expect(family).toHaveLength(5);
+  test('the family is exactly the six keys the census found', () => {
+    const family = [...everyCatalogueKey()].filter(isParishKey);
+    expect(family).toHaveLength(6);
+  });
+
+  test('"Burial grounds" cannot meet "Burial ground" in one settlement', () => {
+    // The two labels are one letter apart, so the arm that makes the mapping safe is
+    // the LADDER: the catalogue gives each tier exactly one burial rung, and these two
+    // sit on different tiers. Re-derived from the catalogue, not asserted here — a
+    // future catalogue that put both in one tier reds this and the label is re-thought.
+    const tiersHolding = (name) => Object.entries(institutionalCatalog)
+      .filter(([, byCategory]) => Object.values(byCategory || {})
+        .some((byName) => byName && Object.prototype.hasOwnProperty.call(byName, name)))
+      .map(([tier]) => tier);
+    const singular = tiersHolding('Burial ground');
+    const parish = tiersHolding('Parish burial grounds');
+    expect(singular.length).toBeGreaterThan(0);
+    expect(parish.length).toBeGreaterThan(0);
+    expect(singular.filter((t) => parish.includes(t))).toEqual([]);
   });
 
   test('every mapped key is a REAL catalogue key — no orphan mappings', () => {
@@ -158,6 +180,8 @@ describe('institutionDisplayName — the enumeration is pinned to the catalogue'
   });
 
   test('no display label collides with an existing catalogue name', () => {
+    // 'Burial grounds' (plural) must not BE another entry; 'Burial ground' is a
+    // different string and is proved un-meetable by the ladder arm above.
     const keys = everyCatalogueKey();
     for (const label of Object.values(INSTITUTION_DISPLAY_NAMES)) {
       // A label that IS another institution's name would make two different

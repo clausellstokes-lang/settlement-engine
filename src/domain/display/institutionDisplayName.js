@@ -58,17 +58,27 @@
 /**
  * THE PARISH-CHURCH FAMILY → THE SETTING-NEUTRAL LABEL.
  *
- * Five catalogue keys, enumerated from `src/data/institutionalCatalog.js` and
- * `src/data/institutionServices.js`: the base entry, its three scale variants, and
- * the no-church-of-its-own SERVICE at thorp/hamlet. 'House of worship' collides
- * with no existing catalogue label (checked across the whole catalogue).
+ * Six catalogue keys, enumerated from `src/data/institutionalCatalog.js` and
+ * `src/data/institutionServices.js`: the base entry, its three scale variants, the
+ * no-church-of-its-own SERVICE at thorp/hamlet, and the town's burial ground.
+ * Neither 'House of worship' nor 'Burial grounds' collides with an existing
+ * catalogue label (checked across the whole catalogue).
  *
- * ⛔ 'Parish burial grounds' IS DELIBERATELY ABSENT. It matches /parish/ but it is
- * a burial ground, not a house of worship, and §934.13 ruled the parish-CHURCH
- * family only. Mapping it would invent a label the chair has not ruled on. It is
- * reported as an adjacent finding, not silently folded in — and the test's family
- * predicate (/parish/ AND /church/) is written so it stays out by rule rather than
- * by omission.
+ * ⛔ THE RULE IS NOW THE WHOLE WORD, NOT THE CHURCH FAMILY. The first cut mapped
+ * only the keys matching /parish/ AND /church/, and reported 'Parish burial
+ * grounds' to the chair as an adjacent finding rather than folding it in — a
+ * burial ground is not a house of worship, and inventing its label was not the
+ * lane's call. The chair ruled it: it takes 'Burial grounds'. So the pin is now the
+ * stronger and simpler one — NO CATALOGUE KEY CONTAINING 'parish' MAY REACH A
+ * READER — and the test enumerates /parish/i over the whole catalogue.
+ *
+ * ⚠ 'Burial grounds' SITS ONE LETTER FROM 'Burial ground', the thorp/hamlet rung of
+ * the same ladder. They can never appear together in a settlement: the burial rungs
+ * are one-per-tier (thorp+hamlet 'Burial ground', village Graveyard, town here, city
+ * 'Burial grounds and charnel house', metropolis 'Cemetery network'), which the test
+ * pins from the catalogue rather than asserting here. The Compendium's cross-tier
+ * browse is the one surface that shows both, where the category and the entry's own
+ * description distinguish them.
  *
  * @type {Readonly<Record<string, string>>}
  */
@@ -78,6 +88,7 @@ export const INSTITUTION_DISPLAY_NAMES = Object.freeze({
   'Parish churches (10-30)':    'Houses of worship (10-30)',
   'Parish churches (50-100+)':  'Houses of worship (50-100+)',
   'Access to parish church':    'Access to a house of worship',
+  'Parish burial grounds':      'Burial grounds',
 });
 
 /** Case-insensitive index, mirroring `identityForInstitution`'s tolerance. */
