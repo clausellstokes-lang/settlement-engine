@@ -19,6 +19,9 @@ import { inferImportance } from '../domain/entities/npcs.js';
 import { makeActionResult } from './actionResult.js';
 import { remapNpcLocks, locksAfterFullGenerate } from '../domain/locksPreservation.js';
 import { persistCampaignState, persistSaveUpdate } from './campaignSliceShared.js';
+// The app's one client-error seam. A pure leaf with no imports of its own, so
+// this edge cannot close a cycle back through the store.
+import { reportError } from '../lib/errorReporter.js';
 
 // A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
@@ -463,7 +466,26 @@ export function bindActiveSaveId(get, set, saveId) {
     // account's. See claimSettlementForAccount for why one field beats a flag.
     claimSettlementForAccount(state);
   });
-  return transfers ? persistSaveUpdate(saveId, { versionHistory }) : undefined;
+  if (!transfers) return undefined;
+  // ⛔ THE DOOR OWNS ITS OWN REJECTION, AND THAT IS A CLASS FIX. Every caller of
+  // setActiveSaveId discards this promise — the three components and the
+  // post-signup intent handler all call it for its STORE effect, and a
+  // `try { … } catch` around a call that returns a promise catches synchronous
+  // throws only. `persistSaveUpdate` can genuinely reject: in an unconfigured
+  // build it returns `outboxRunner(...)` raw, without the `.catch` its
+  // cloud branch carries. So a failed timeline transfer became an UNHANDLED
+  // REJECTION — a crash-level event in some hosts, and silence about the actual
+  // failure in all of them.
+  //
+  // Curing it at each call site would be four fixes and a fifth chokepoint away
+  // from regressing. Curing it here means no call site CAN leak it: the promise
+  // this returns never rejects, and a caller that does await it reads `false`.
+  // The failure stops being silent at the same time — it reaches the reporter,
+  // which is the seam the app already routes client errors through.
+  return persistSaveUpdate(saveId, { versionHistory }).catch((error) => {
+    reportError(error, { kind: 'bindActiveSaveId.draftTimelineTransfer' });
+    return false;
+  });
 }
 
 /**
