@@ -1,0 +1,45 @@
+{
+  "file": "public/landing-maps/realm-cnocby.png",
+  "what": "The Realm view of Cnocby and its four neighbours, photographed in Chromium from the running app.",
+  "script": "scripts/capture-landing-realm.mjs → e2e/landing-realm-capture.spec.js",
+  "seed": "lf-033",
+  "mapSeed": "landing-lf-033",
+  "mapKind": "highIsland",
+  "weeks": 12,
+  "settlements": [
+    {
+      "id": "t",
+      "name": "Cnocby",
+      "tier": "village"
+    },
+    {
+      "id": "n0",
+      "name": "Keshigordu",
+      "tier": "town"
+    },
+    {
+      "id": "n1",
+      "name": "Skáloy",
+      "tier": "city"
+    },
+    {
+      "id": "n2",
+      "name": "Aryagrad",
+      "tier": "town"
+    },
+    {
+      "id": "n3",
+      "name": "Penshaw",
+      "tier": "village"
+    }
+  ],
+  "placedBy": "the realm's own \"Autoplace all\" control",
+  "captureWidth": 1440,
+  "deviceScaleFactor": 2,
+  "pixelWidth": 2280,
+  "pixelHeight": 1124,
+  "bytes": 477946,
+  "tip": "6fcbd310e25ea7c38e210926f89931f8f455abde",
+  "capturedAt": "2026-09-19",
+  "note": "Not AI art and not a drawing: a screenshot of the product rendering its own realm. Re-cut with `node scripts/capture-landing-realm.mjs`."
+}
