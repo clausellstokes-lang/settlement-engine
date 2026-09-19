@@ -62,7 +62,15 @@
  * property no rendered test can: that across the twenty-eight computed-geometry sites
  * this tree carries — twenty-five real charts and three the detector reads as charts and
  * the census names as layout — none is cut from a field its own caption does not name,
- * except the two that are, which are named with their arithmetic.
+ * except the ONE that is, which is named with its arithmetic.
+ *
+ * THE CENSUS, BY VERDICT, so a reader can check the paragraph above against the rows
+ * rather than trusting it: 28 rows = 16 one-source + 8 derived + 3 layout + 1 reported.
+ * (The sentence above said "the two that are" and had done since before the §934.29
+ * consist cured `overview-power-fill`; REPORTED_DISAGREEMENTS below has held exactly
+ * one member since, and ARM 5 pins it. A docstring figure nothing asserts is the
+ * cheapest thing in this file to leave wrong — measured at 2026-09-19 against these
+ * rows, and the breakdown is here so the next reader can re-measure in one grep.)
  */
 import { describe, expect, it } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';

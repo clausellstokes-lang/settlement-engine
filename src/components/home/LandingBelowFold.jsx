@@ -35,6 +35,7 @@ import { tl } from '../../copy/landing.js';
 // tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
 // so it adds nothing to the first-paint closure.
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT, FOUNDER_SEATS } from '../../config/tierFacts.js';
+import { isInvitationOnly } from '../../config/pricing.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 // The one client-side truth about what the gallery can return. gallery.js already
 // pulls this module, so reading it here costs the chunk nothing.
@@ -426,14 +427,13 @@ function fillTierBody(body) {
 }
 
 function TierStrip() {
-  // ⛔ PUBLIC TIERS ONLY (owner, ODQ §934.24 addendum). The filter reads the
-  // TIER'S OWN `invitationOnly` flag, never the spelling 'Founder', so the rule
-  // is about what a tier IS and a second invitation-only tier is covered the day
-  // it is added. It is the same flag lane 31's `isInvitationOnly` predicate
-  // (src/config/pricing.js, car 06d04c7c4) reads; that module is not on this
-  // branch, so this filters inline rather than minting a rival named predicate.
-  // Repoint it at `isInvitationOnly` when that car composes in.
-  const tiers = (tl('closer.tiers') || []).filter((tier) => !tier.invitationOnly);
+  // ⛔ PUBLIC TIERS ONLY (owner, ODQ §934.24 addendum). The filter asks the TIER'S OWN
+  // property, never the spelling 'Founder', so the rule is about what a tier IS and a
+  // second invitation-only tier is covered the day it is added. It asks through
+  // config/pricing.js's `isInvitationOnly` (car 06d04c7c4), which composed in with the
+  // consist — so the strip and the pricing page now read ONE predicate rather than two
+  // spellings of the same question, which is what the inline copy was a placeholder for.
+  const tiers = (tl('closer.tiers') || []).filter((tier) => !isInvitationOnly(tier));
   return (
     <div style={{
       // Owner order (2026-07-22): a TWO-BY-TWO grid (Wanderer + Cartographer on

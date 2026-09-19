@@ -68,9 +68,13 @@ export const SIZE_LADDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 
  * here, beside the other display facts, rather than being inferred from a number that
  * cannot mean it.
  *
- * ⚠ RECORDED FOR THE CHAIR: the GATE therefore still permits `thorp` for anon
- * (authSlice.js TIER_GATE.anon.maxTier = 'town', TIER_RANK.thorp = 0). Tightening the
- * gate to match this set is an enforcement change, not a copy one, and is the chair's.
+ * ✅ THE GATE HAS SINCE BEEN TIGHTENED TO MATCH (car e7c85a66b, §934.34): TIER_GATE.anon
+ * carries `minTier: 'hamlet'` and `isTierAllowed` refuses a RANGE, so a thorpe really is
+ * refused for an anonymous visitor rather than merely unoffered. This row stays the
+ * DISPLAY-side spelling of the same fact — a set the sentences can name, where the gate
+ * holds two bounds — and tests/config/tierFacts.contract.test.js pins the two together.
+ * (The paragraph that used to sit here recorded the gap as an open decision for the
+ * chair; it outlived the car that closed it.)
  * @type {ReadonlyArray<string>}
  */
 export const ANON_SIZES = Object.freeze(['hamlet', 'village', 'town']);

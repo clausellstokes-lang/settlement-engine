@@ -26,6 +26,20 @@
  * prerendered documents the postbuild step writes at the dist root (304 of them
  * at the time of writing), because a leak into an inlined script would land in
  * the HTML rather than in a chunk.
+ *
+ * ✅ AND IT DOES RUN IN CI, GATED ARMS AND ALL — recorded here because a 2026-09-19
+ * review read the `VERIFY_DIST` gate above and concluded it could not (the env var is
+ * set explicitly in ci.yml only inside the boot-smoke FAILURE-receipt step). The path
+ * it missed is the ordinary one: ci.yml's `check-build` job runs `npm run build` and
+ * then `npm run verify:dist`, which is `scripts/check-test-ratchet.mjs --verify-dist` —
+ * and THAT sets `VERIFY_DIST=1` in the runner's own environment
+ * (check-test-ratchet.mjs, `if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1'`) before
+ * spawning `npx vitest run tests/build/`, whose corpus is discovered recursively from
+ * disk and refuses to run if it is empty. MEASURED 2026-09-19 with
+ * `node scripts/check-test-ratchet.mjs --verify-dist --dry`: "strict corpus: 59
+ * file(s) under tests/build/", this file among them. So the gated arms below run
+ * against a REAL dist on every CI build; no ci.yml change is owed, and the arm that
+ * makes a missing dist a hard failure is what keeps that from being green-on-nothing.
  */
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';

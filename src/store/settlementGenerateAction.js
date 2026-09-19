@@ -181,9 +181,16 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // the three samples is a thorpe — town, city, village — so §934.34's floor changes
   // nothing about them; the TIER gate still applies to a fork, which is why the city
   // sample already refuses for an anonymous reader.)
+  // ⛔ AND IT FAILS CLOSED. The `typeof` guard exists because a hand-built store (a test's,
+  // an older persisted shape) may not carry the selector — but its fallback was `true`,
+  // which is a CAPABILITY GATE answering "yes" to a store that could not be asked. Every
+  // real store carries it (store/authSlice.js), so the fallback is never taken in
+  // production and closing it costs nothing there; what it buys is that the ONE point
+  // §934.34 is enforced at cannot be opened by an absence. The exemption above still
+  // wins, because a curated sample fork is not the reader's configuration at all.
   const canCustomize = isSampleFork || (typeof state.canCustomizePreGeneration === 'function'
-    ? state.canCustomizePreGeneration()
-    : true);
+    ? state.canCustomizePreGeneration() === true
+    : false);
   const config = canCustomize
     ? storedConfig
     : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };

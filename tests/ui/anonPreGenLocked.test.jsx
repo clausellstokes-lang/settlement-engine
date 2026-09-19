@@ -34,15 +34,19 @@ vi.mock('../../src/lib/analytics.js', () => ({
 // THE ENGINE, stubbed at the transport seam the lane calls. Every arm below is about a
 // gate that answers BEFORE the engine, and the one arm that gets past both bounds is
 // asserting exactly that — a real pipeline run would add a minute and prove none of it.
+const engine = vi.hoisted(() => ({ lastRequest: null }));
 vi.mock('../../src/lib/generationClient.js', () => ({
-  runGeneration: async () => ({
-    result: {
-      settlement: { name: 'Forged', tier: 'thorp' },
-      preservation: null,
-      resolvedConfig: { settType: 'thorp' },
-      pipelineHistory: [],
-    },
-  }),
+  runGeneration: async (request) => {
+    engine.lastRequest = request;
+    return {
+      result: {
+        settlement: { name: 'Forged', tier: 'thorp' },
+        preservation: null,
+        resolvedConfig: request?.payload?.fullConfig ?? null,
+        pipelineHistory: [],
+      },
+    };
+  },
 }));
 
 import { create } from 'zustand';
@@ -284,6 +288,25 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     expect(store.state.lastRefusal, 'a free account was refused its thorpe').toBeNull();
   });
 
+  test('a store that cannot be ASKED is treated as unable — the capability read fails closed', async () => {
+    // ⛔ A CAPABILITY GATE MAY NOT ANSWER "YES" TO A STORE IT COULD NOT ASK. The lane's
+    // `typeof … === 'function'` guard exists for hand-built and older store shapes, and
+    // its fallback used to be `true`: the one point §934.34 is enforced at could be
+    // opened by an ABSENCE. Every real store carries the selector, so closing it costs
+    // production nothing and buys the rule its floor.
+    const store = laneStore('free', 'village');
+    delete store.state.canCustomizePreGeneration;
+    store.state.config = { ...DEFAULT_CONFIG, settType: 'village', customName: 'Spitzplatz', culture: 'imperial' };
+    engine.lastRequest = null;
+    await runLane(store);
+
+    const sent = engine.lastRequest?.payload?.fullConfig;
+    expect(sent, 'the engine was never reached').toBeTruthy();
+    expect(sent.settType, 'the reader\'s size is still theirs').toBe('village');
+    expect(sent.customName, 'an unaskable store was granted the pre-generation options').toBe(DEFAULT_CONFIG.customName);
+    expect(sent.culture).toBe(DEFAULT_CONFIG.culture);
+  });
+
   test('the generation lane forces it there, and exempts the curated sample fork', async () => {
     const { readFileSync } = await import('node:fs');
     const src = readFileSync('src/store/settlementGenerateAction.js', 'utf8');
@@ -299,5 +322,8 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     // …and leaves a CURATED SAMPLE FORK alone, which would otherwise have been handed a
     // random town under a curated town's name.
     expect(src).toMatch(/canCustomize = isSampleFork \|\|/);
+    // …and the capability read FAILS CLOSED when the store cannot be asked (the arm above
+    // drives it; this is the spelling that makes it so, pinned beside the others).
+    expect(src, 'the capability read fails OPEN again').toMatch(/canCustomizePreGeneration\(\) === true\s*\n\s*: false\);/);
   });
 });
