@@ -30351,9 +30351,9 @@
     },
     {
       "id": "EM-B3a",
-      "status": "DRAFT",
+      "status": "READY",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B3a.md",
-      "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+      "verifiedBase": "4da740b5227b90bd1dec8e903a8361755d482c00",
       "changeManifest": [
         {
           "action": "MODIFY",
@@ -30368,17 +30368,17 @@
         {
           "action": "MODIFY",
           "path": "src/lib/accountData.js",
-          "_note": "one module-private pure helper `withoutEditState` plus one call inside preflightAccountExport (:206) over the settlements list, before the payload literal; a DESTRUCTURE-DROP in importScrub.js's spelling so the observed-shape register does not move; reference-identical when nothing is dropped (+6 eff)."
+          "_note": "one module-private pure helper `withoutEditState` plus one call inside preflightAccountExport (:206) over the settlements list, AFTER the settlements assembly (:208-210) and BEFORE the payload literal (:341; version 1 said :340, which closes the preflight object) and therefore before the byte measurement at :354; a DESTRUCTURE-DROP in importScrub.js scrubImportedConfig (:49) spelling so the observed-shape register does not move; reference-identical when nothing is dropped (+6 eff)."
         },
         {
           "action": "CREATE",
           "path": "tests/store/decreeRegistryPersistence.test.js",
-          "_note": "the persistence round-trip battery: acceptance cases A1, A2, A4, A5, A6 as 5 literal-titled tests in 2 describes, no .each and no loop-generated test (EM-PREAMBLE 3.4). CREATE rather than TEST because the validator requires a non-CREATE row's path to exist at the base (implementation-packets.mjs:710); 134 landed rows use CREATE for a new test file."
+          "_note": "the persistence round-trip battery: acceptance cases A1, A2, A4, A5, A6 as 5 literal-titled tests in 2 describes, no .each and no loop-generated test (EM-PREAMBLE 3.4). CREATE rather than TEST because the validator requires a non-CREATE row's path to exist at the base (implementation-packets.mjs:710); 134 landed rows use CREATE for a new test file. Owes NO mutation-coverage row: tests/store is not an ENFORCER_DIR and the basename trips no NAME_PATTERN token (tests/lint/mutationCoverage.shared.mjs, measured at a41a0e109)."
         },
         {
           "action": "CREATE",
           "path": "tests/lib/editTravel.test.js",
-          "_note": "ARCH 8 instrument 8, a RUNTIME travel test and never a static walker: acceptance cases A3, A7, A8 as 3 literal-titled tests in 2 describes. Anchored negatives use lifecycleRoundTrip.test.js:1937's expectAbsentWithAnchor idiom with spatialLayout as the live anchor."
+          "_note": "ARCH 8 instrument 8, a RUNTIME travel test and never a static walker: acceptance cases A3, A7, A8 as 3 literal-titled tests in 2 describes. Anchored negatives use lifecycleRoundTrip.test.js:1937's expectAbsentWithAnchor idiom with spatialLayout as the live anchor. Owes NO mutation-coverage row: tests/lib is not an ENFORCER_DIR and the basename trips no NAME_PATTERN token (measured at a41a0e109)."
         }
       ],
       "requiredSymbols": [
@@ -30483,6 +30483,10 @@
           "symbol": "create or replace function public._gallery_world_snapshot_is_safe"
         },
         {
+          "path": "supabase/migrations/202_edit_registry_public_denylist.sql",
+          "symbol": "create or replace function public._gallery_world_snapshot_is_safe"
+        },
+        {
           "path": "scripts/check-observed-shape-readers.mjs",
           "symbol": "export const EXPLAINED_WRITER_EXEMPTIONS"
         }
@@ -30490,7 +30494,7 @@
       "acceptanceCases": [
         {
           "id": "A1",
-          "case": "a save whose settlement carries both edit keys survives save list writeAll list byte-exact with array order intact and mints no settlements column"
+          "case": "a save whose settlement carries both edit keys as OPAQUE planted values survives save list writeAll list byte-exact with nested key order and array element order intact and mints no settlements column"
         },
         {
           "id": "A2",
@@ -30506,7 +30510,7 @@
         },
         {
           "id": "A5",
-          "case": "a second save is byte-identical and a partial update leaves both keys byte-exact with nothing re-minted or re-ordered"
+          "case": "a second save is byte-identical and a partial update leaves both keys byte-exact with nothing re-ordered or normalised away, asserted by deep equality against the planted opaque fixture and never field by field"
         },
         {
           "id": "A6",
