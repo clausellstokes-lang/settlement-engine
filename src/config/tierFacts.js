@@ -106,6 +106,32 @@ export function signInUnlocksSizes() {
   return oxfordList(SIGN_IN_UNLOCKS.map((key) => SIZE_LABEL[key].toLowerCase()));
 }
 
+/**
+ * Does signing in unlock the PRE-GENERATION OPTIONS? Derived from the two rows rather
+ * than asserted, so the sentence stops claiming it the day an anonymous visitor gets
+ * them — or the day a free account loses them.
+ * @returns {boolean}
+ */
+export function signInUnlocksCustomize() {
+  return PRE_GEN_OPTIONS.free === true && PRE_GEN_OPTIONS.anon === false;
+}
+
+/**
+ * ⭐ THE WHOLE "WHAT SIGNING IN UNLOCKS" CLAUSE, composed from the facts and joined by
+ * the estate's Oxford joiner: "thorpe, city, and metropolis, to customize, and save up
+ * to 3 drafts". The three parts are separate FACTS — a size range, a capability and a
+ * save cap — and each drops out of the sentence on its own if the facts stop carrying
+ * it, which is what stops a sentence promising something the gate refuses.
+ * @returns {string}
+ */
+export function signInUnlocksClause() {
+  return oxfordList([
+    signInUnlocksSizes(),
+    signInUnlocksCustomize() ? 'to customize' : '',
+    TIER_FACTS.free.saveLimit > 0 ? `save up to ${TIER_FACTS.free.saveLimit} drafts` : '',
+  ]);
+}
+
 // PDF-export posture (owner ruling 2026-07-13): only premium exports FREELY and
 // without limit ('unlimited'); anon + free pay per dossier ($2.99, the single-
 // dossier ladder) — 'per_dossier'. Pinned to TIER_GATE.{tier}.export by the
@@ -116,13 +142,22 @@ const EXPORT_MODE = Object.freeze({ anon: 'per_dossier', free: 'per_dossier', pr
 // Pinned to TIER_GATE.{tier}.customContent by the contract test.
 const CUSTOM_CONTENT = Object.freeze({ anon: false, free: false, premium: true });
 
+// ⛔ PRE-GENERATION CONFIGURATION IS FREE WITH AN ACCOUNT, AND ONLY WITH ONE (the owner,
+// §934.34: "only hamlet, village, and town can be accessed without signing in and only
+// with everything on random"). This is the wizard's own options — name, terrain, culture,
+// priorities, magic, the constraint grids — and it is NOT `customContent` above, which is
+// the Compendium's authored content and stays premium. The owner ruled the two on
+// opposite sides, so they are two facts. Pinned to TIER_GATE.{tier}.preGenOptions by the
+// contract test.
+const PRE_GEN_OPTIONS = Object.freeze({ anon: false, free: true, premium: true });
+
 /**
  * Per-tier display facts, keyed by the stored auth tier value ('anon' | 'free' |
  * 'premium'). saveLimit / maxSizeLabel derive straight from the pricing catalog;
  * exportMode + customContent from the ruling above. The contract test asserts each
  * agrees with the authSlice enforcement gate.
  *
- * @typedef {{ key: string, saveLimit: number, maxSizeLabel: string, exportMode: 'unlimited'|'per_dossier', customContent: boolean }} TierFacts
+ * @typedef {{ key: string, saveLimit: number, maxSizeLabel: string, exportMode: 'unlimited'|'per_dossier', customContent: boolean, preGenOptions: boolean }} TierFacts
  * @type {Readonly<Record<'anon'|'free'|'premium', TierFacts>>}
  */
 export const TIER_FACTS = Object.freeze({
@@ -132,6 +167,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: ANON_MAX_SIZE_LABEL,
     exportMode: EXPORT_MODE.anon,
     customContent: CUSTOM_CONTENT.anon,
+    preGenOptions: PRE_GEN_OPTIONS.anon,
   }),
   free: Object.freeze({
     key: 'free',
@@ -139,6 +175,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: SIZE_LABEL[TIERS.wanderer.maxSize], // Metropolis (every size)
     exportMode: EXPORT_MODE.free,
     customContent: CUSTOM_CONTENT.free,
+    preGenOptions: PRE_GEN_OPTIONS.free,
   }),
   premium: Object.freeze({
     key: 'premium',
@@ -146,6 +183,7 @@ export const TIER_FACTS = Object.freeze({
     maxSizeLabel: SIZE_LABEL[TIERS.cartographer.maxSize],
     exportMode: EXPORT_MODE.premium,
     customContent: CUSTOM_CONTENT.premium,
+    preGenOptions: PRE_GEN_OPTIONS.premium,
   }),
 });
 

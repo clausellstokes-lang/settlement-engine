@@ -62,10 +62,27 @@ import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js
 // export surfaces read `canExport()` and route a non-exporting tier to the
 // entitlement/purchase rung (BuyThisDossier). Anon has always been false (the anon
 // one-shot buy path). This flip activates the built-but-dormant $2.99 ladder.
+//
+// ⛔ THE ANONYMOUS ROW IS A RANGE AND A LOCK, NOT ONE CEILING (the owner, §934.34: "only
+// hamlet, village, and town can be accessed without signing in and only with everything
+// on random"). Two fields carry it, and both are ENFORCEMENT — the display layer derives
+// from them (config/tierFacts.js ANON_SIZES / PRE_GEN_OPTIONS, held equal by
+// tests/config/tierFacts.contract.test.js):
+//
+//   `minTier`        THE FLOOR. A ceiling alone could never express this rule: thorp is
+//                    RANK 0, so `maxTier: 'town'` admitted it, and an anonymous visitor
+//                    could forge a thorpe the product does not offer them. A thorpe now
+//                    requires an account, like a city and a metropolis.
+//   `preGenOptions`  THE PRE-GENERATION CONFIGURATION — name, terrain, culture,
+//                    priorities, magic, the constraint grids. False for anon: they pick a
+//                    size and forge with everything else on random. NOT the same gate as
+//                    `customContent`, which is the Compendium's authored content and stays
+//                    a Cartographer capability; the two are deliberately separate fields
+//                    because the owner ruled them on opposite sides.
 export const TIER_GATE = {
-  anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false },
-  premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
+  anon:    { minTier: 'hamlet', maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: false },
+  free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, preGenOptions: true  },
+  premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  preGenOptions: true  },
 };
 
 // `capital` is the legacy tier name that lines up with pricing.js's maxSize
@@ -825,6 +842,30 @@ export const createAuthSlice = (set, get) => ({
     return TIER_GATE[tier]?.maxTier || 'village';
   },
 
+  /**
+   * The SMALLEST size this account may forge. Only the anonymous row has a floor above
+   * the ladder's first rung (§934.34: a thorpe requires an account); every other tier
+   * reaches the whole ladder, and an elevated role bypasses both bounds.
+   */
+  minAllowedTier: () => {
+    if (ELEVATED_ROLES.includes(get().auth.role)) return 'thorp';
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.minTier || 'thorp';
+  },
+
+  /**
+   * Whether this account may CONFIGURE a generation before forging it — the wizard's
+   * pre-generation options (name, terrain, culture, priorities, magic, the constraint
+   * grids). Anonymous visitors pick a size and forge with everything else on random
+   * (the owner, §934.34). Distinct from `canUseCustomContent`, which gates the
+   * Compendium's authored content and stays premium.
+   */
+  canCustomizePreGeneration: () => {
+    if (ELEVATED_ROLES.includes(get().auth.role)) return true;
+    const { tier } = get().auth;
+    return TIER_GATE[tier]?.preGenOptions === true;
+  },
+
   maxSaves: () => {
     if (staffUnlocksPaidFeatures(get().auth.role)) return Infinity;
     const { tier } = get().auth;
@@ -840,7 +881,12 @@ export const createAuthSlice = (set, get) => ({
     if (rank === undefined) return false;
     const maxRank = TIER_RANK[get().maxAllowedTier()];
     if (maxRank === undefined) return false;
-    return rank <= maxRank;
+    // ⛔ BOTH BOUNDS. The floor is why this is a RANGE: an anonymous visitor reaches
+    // hamlet through town, and a thorpe — rank 0, which every ceiling admits — requires
+    // an account (§934.34). An unknown floor FAILS CLOSED like an unknown ceiling.
+    const minRank = TIER_RANK[get().minAllowedTier()];
+    if (minRank === undefined) return false;
+    return rank >= minRank && rank <= maxRank;
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */

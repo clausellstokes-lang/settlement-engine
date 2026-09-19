@@ -19,7 +19,8 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import {
-  TIER_FACTS, ANON_MAX_TIER, ANON_MAX_SIZE_LABEL,
+  TIER_FACTS, ANON_MAX_TIER, ANON_MAX_SIZE_LABEL, ANON_SIZES, SIZE_LADDER, SIGN_IN_UNLOCKS,
+  signInUnlocksClause, signInUnlocksCustomize, signInUnlocksSizes,
   FREE_SAVE_LIMIT, FOUNDER_SEATS, SINGLE_DOSSIER_PRICE,
 } from '../../src/config/tierFacts.js';
 import { TIERS, SINGLE_DOSSIER } from '../../src/config/pricing.js';
@@ -40,6 +41,10 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
       expect(facts.exportMode).toBe(gate.export ? 'unlimited' : 'per_dossier');
       // Custom content is premium-only; mirror the gate exactly.
       expect(facts.customContent).toBe(gate.customContent);
+      // §934.34 — the PRE-GENERATION options, a different gate from customContent above:
+      // the owner ruled the wizard's own dials free with an account and the Compendium's
+      // authored content premium, so the two facts are pinned separately.
+      expect(facts.preGenOptions).toBe(gate.preGenOptions);
     });
   }
 
@@ -90,6 +95,38 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
   it('anon size ceiling matches the gate (Town, not Village)', () => {
     expect(ANON_MAX_TIER).toBe(TIER_GATE.anon.maxTier);
     expect(ANON_MAX_SIZE_LABEL).toBe('Town');
+  });
+
+  // ⛔ THE ANONYMOUS RANGE IS A FLOOR AND A CEILING (the owner, §934.34: "only hamlet,
+  // village, and town can be accessed without signing in"). A ceiling alone could never
+  // say it — thorp is RANK 0, which every ceiling admits — so the gate grew `minTier` and
+  // the display set is held to the two bounds here. This is the pin that stops the
+  // sentence and the picker drifting from the gate in either direction.
+  it('the anonymous SET is exactly the gate range [minTier, maxTier]', () => {
+    const rung = (key) => SIZE_LADDER.indexOf(key);
+    expect(rung(TIER_GATE.anon.minTier), 'the gate floor is not a rung of the ladder').toBeGreaterThanOrEqual(0);
+    expect(rung(TIER_GATE.anon.maxTier), 'the gate ceiling is not a rung of the ladder').toBeGreaterThanOrEqual(0);
+    expect([...ANON_SIZES]).toEqual(SIZE_LADDER.slice(rung(TIER_GATE.anon.minTier), rung(TIER_GATE.anon.maxTier) + 1));
+    expect([...ANON_SIZES]).toEqual(['hamlet', 'village', 'town']);
+    // …and a thorpe is on the OTHER side of the floor, which is the whole ruling.
+    expect(ANON_SIZES).not.toContain('thorp');
+    expect(SIGN_IN_UNLOCKS).toContain('thorp');
+  });
+
+  it('an account, and only an account, reaches the whole ladder', () => {
+    for (const tier of ['free', 'premium']) {
+      expect(TIER_GATE[tier].minTier, `${tier} should reach the ladder's first rung`).toBe(SIZE_LADDER[0]);
+    }
+    expect(TIER_GATE.anon.minTier).not.toBe(SIZE_LADDER[0]);
+  });
+
+  // The sentence the conversion surfaces render, held to the facts it is composed from.
+  it('the unlock clause is composed from the facts, not typed', () => {
+    expect(signInUnlocksSizes()).toBe('thorpe, city, and metropolis');
+    expect(signInUnlocksCustomize()).toBe(TIER_FACTS.free.preGenOptions && !TIER_FACTS.anon.preGenOptions);
+    expect(signInUnlocksClause()).toBe(`${signInUnlocksSizes()}, to customize, and save up to ${FREE_SAVE_LIMIT} drafts`);
+    expect(signInUnlocksClause()).toContain('thorpe');
+    expect(signInUnlocksClause()).toContain('to customize');
   });
 
   it('free save cap is 3 and sourced from the pricing catalog', () => {
