@@ -530,10 +530,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {/* Import coverage overlay */}
             {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A']}}/>}
           </div>
-          <div style={{display:'flex',justifyContent:'space-between',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginTop:3}}>
-            <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
-            {fb.stressModifier&&fb.stressModifier<1&&<span style={{color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
+          <div style={{display:'flex',justifyContent:'space-between',gap:8,color:MUTED,marginTop:3}}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile)}}>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
+            {fb.stressModifier&&fb.stressModifier<1&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.danger}}>Stress penalty: ×{fb.stressModifier}</span>}
+            {fb.importCoverage>0&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#2A5A8A']}}>Trade covers {Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}% of gap</span>}
           </div>
         </div>
         {/* Narrative */}
