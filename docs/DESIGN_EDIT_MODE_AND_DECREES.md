@@ -216,3 +216,38 @@ An NPC carries a `status` and an institution a `state`, both typed roots set fro
 - **Destruction is a state; removal is erasure.** Both stay available, each with a cause from the removal pool. The record keeps what was destroyed; it forgets what was removed.
 - **Ops:** `set-npc-status` and `set-institution-state` join the home set (EM-B1a); `add-institution` is "created". The vocabularies are FINITE-SEMANTICS pools, never free text, and the readers that consume them are named in the packet that adds each field.
 
+## 16. The director's vocabulary — outcomes the DM predetermines or the party shapes (the owner, ODQ §934.48; 2026-09-19)
+
+**The rule.** Every intervention in the owner's list — suing for or accepting peace, receiving or refusing an envoy, directing a force, resupply or resources, steering trade, an automatic win, a siege or a coup that fails, a belief's confidence changed, mutated or corrected, a stressor or an event — is the OUTCOME OF A PROCESS THE SIMULATION ALREADY RUNS. The DM never writes the outcome into the world. The DM PINS THE PROCESS'S DECISION, and the simulation plays the consequences by its own rules. This is §13's phantom rule generalized, and it is §14's engine — pins — applied to the simulation's forks instead of the generator's.
+
+**The mechanism: pins on registered forks.** The simulation registers every weighted decision it makes (the decision-fork registry; forty-two forks today, each with a typed outcome vocabulary). A DIRECTIVE decree names a fork, an outcome from that fork's own vocabulary, and a tick (`when`, §13). When the pulse reaches that fork it takes the pinned outcome instead of rolling — the same consult the generator's pinned mode (EM-P0) performs — and everything downstream (casualties, morale, legitimacy, the chronicle line) follows from the existing machinery. One op type, `pin-fork`, over different forks: peace sued for, accepted or refused; an envoy received or turned away; a siege that holds or falls; a coup that succeeds or is exposed; an automatic win.
+
+**Direction.** Resupply, redirecting a force, steering trade are the levers the simulation's other side already pulls. They surface as decrees that call the war and trade layers' own actions at the tick (`direct-force`, `resupply`, `direct-trade`), so a resupplied army is resupplied by the upkeep mechanics, never by a number typed over the muster.
+
+**Information.** The belief ledger is simulation state with its own forks. Three ops through the pulse's own belief writer at the tick: `set-belief-confidence` (a band), `mutate-belief` (to a recorded variant), `correct-belief` (to the truth). The town's knowledge stays a thing the simulation owns.
+
+**Events, predetermined or shaped by the party.** A predetermined event is a decree with `when` drawn from the pulse's own event catalogue (never free text). An event shaped by the party is the same decree with `cause: 'party'`: "the party broke the siege" pins the siege fork to its lifted-by-outside-aid outcome with the party as the agent, and the chronicle says so in the herald's voice. Stressors added after generation are world facts by consequence (§14).
+
+**What keeps it honest.** Guards stay suggestive (§2.7): a pinned siege with no siege standing offers "start one" (`fulfil`) or `proceed`, never a refusal. Phantom targets yield home procedures and a record only (§13). Applied pins reopen read-only; the rewind is `undoLastPulse` (§12.1). The vocabulary is closed by construction — a fork's own outcomes, a catalogue's own events, a belief's own variants (FINITE-SEMANTICS); the free tier stays annotation.
+
+**What it costs, and where the two programs meet.** ONE HOOK: the pulse consults pins at each registered fork — the shape EM-P0 lands for the generator — so the editor and the simulator share one idea. The fork registry gains the outcome key EM-P2 already adds. `informationStatecraft.js` is hot (780/800): the information ops packet opens with an executed headroom measurement and splits if it must. This is the seam the simulator program (§934.38) builds against.
+
+**Chair defaults, vetoable.** An automatic win settles the war's terms in the same act, from the fork's own vocabulary. A party-caused chronicle line reads "by the party's hand" from the herald's pools.
+
+## 17. Where the acts live, and missions (the owner, ODQ §934.49; 2026-09-19)
+
+**The rule.** Every act starts on the card of the thing it acts on. The dossier is organized by subject (§934.25), so the editor adds no director's console and no second surface: in edit mode a card that holds a first-hand fact wears a PENCIL (an edit, §14), a card that shows a process wears a SEAL (a directive, §16), and a derived card wears neither — a provenance note.
+
+**The seals, by card.**
+- The war card: "Sue for peace", "Accept the peace", "Refuse it", "Direct the force", "Resupply", "Let the siege fall" (or hold), "Let the coup fail" (or succeed) — each a `pin-fork` or a direction over the war layer's own forks and actions.
+- The trade card: "Receive the envoy", "Turn the envoy away", "Direct trade", "Embargo".
+- A rumour or belief row: "Confirm it" (correct), "Cast doubt" (confidence), "Twist it" (mutate to a recorded variant).
+- The chronicle's next-tick foot: "Schedule an event" from the pulse's own catalogue, with a `when`.
+- A person's card: "Send on a mission" — envoy (to whom: a real save or a phantom; about what: peace, trade, alliance) or spy (on whom), and every other mission the simulation's casting and espionage forks already know, never one they do not. The NPC's status reads away-on-mission until the return the tick resolves; the mission's outcome is pinned by the DM or rolled by the fork; the return follows the estate's own procedures (a caught spy is the espionage layer's business, not a new rule).
+
+**One pop-up shape for every seal.** Worded in the herald's voice ("What befalls this siege?") with the fork's own outcomes as the choices, a `when`, the cause toggle "the party did this" (`cause: 'party'`), and the forge's brown-and-gold scheme (§3). It never shows a fork id. Every act lands in the one registry at the dossier's foot, in order, with a PHANTOM/REAL badge where a counterparty is involved (§13).
+
+**What this fixes for intuition.** The DM never asks "where is the war console"; they look at the war. The same gesture edits a fact and directs a process, and the glyph tells them which. Missions are the one place a person and a process meet, and they live on the person.
+
+**Build.** Wave 3 gains **EM-E7 — missions**: `send-on-mission` over the casting and espionage forks (measured against `envoyCasting.js` and the espionage layer's registered forks), the away-on-mission status (measured: whether `NpcStatus` needs a value or the roster's absence set already covers it), the return at the tick. Wave 4's surfaces place the seals per card as above.
+
