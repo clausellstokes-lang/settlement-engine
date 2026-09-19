@@ -499,7 +499,22 @@ describe('No rendered row says "None" beside a bar that has width', () => {
       .toBeGreaterThan(0);
     expect(offenders, `an absence is printed beside a magnitude on ${offenders.length} row(s)`)
       .toEqual([]);
-  });
+    // ⛔⛔ AN EXPLICIT PER-TEST BUDGET, CARRYING ITS OWN MEASUREMENT (the ratchet's law: a
+    // budget expiry is a COST FAILURE, never debt). This arm generates 102 settlements and
+    // renders TWO tabs for each, opening the Defense fold every time. MEASURED: 15.2 s for
+    // the whole file on a quiet box, and 46.9 s for this arm alone on the consist's full
+    // check at load 123 on 8 cores — over the 20 s default, which is what reddened.
+    //
+    // THE CORPUS IS NOT CUT TO FIT, and that is the trade being made rather than a default
+    // left alone. The chair's ruling is ≥ 100 settlements ACROSS TIERS, because the defect
+    // needs both the tier gate (`defenseGenerator` zeroes `scores.magical` for a thorp or
+    // hamlet with no presence) and the world slider to move before it can appear; 17 per
+    // tier is the smallest split that meets it with every tier represented. Shrinking the
+    // corpus would buy seconds by weakening the only arm that measures the defect on real
+    // generated worlds, so the cost is declared here instead. The budget is ~2x the worst
+    // figure measured, which is the estate's own margin (worldGenerationClockSeam carries
+    // 120000 and 180000 on the same reasoning).
+  }, 90000);
 });
 
 describe('DefenseTab Threat Assessment — one score, one word, both tabs', () => {

@@ -251,16 +251,42 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     expect(duplicates, 'the exact-duplicate residual is bounded pool EXHAUSTION and must not move').toBe(28);
 
     // A PRE-EXISTING CONDITION, pinned here so HK-3 cannot be blamed for it and so
-    // it cannot quietly grow: 50 of the corpus's 611 generated NPCs carry NO
+    // it cannot quietly grow: 52 of the corpus's 613 generated NPCs carry NO
     // plotHooks field at all. generateSingleNPC always builds one, so something
     // downstream of generateNPCs is re-shaping these records — measured IDENTICALLY
-    // (50/611) in the pre-HK-3 base 1a820e8c, so it is not this wave's doing and not
-    // this wave's to fix. Reported to the chair rather than papered over; the number
-    // is frozen here so the day it moves, a lane sees it.
+    // (as 50/611) in the pre-HK-3 base 1a820e8c, so it is not this wave's doing and
+    // not this wave's to fix. Reported to the chair rather than papered over; the
+    // number is frozen here so the day it moves, a lane sees it.
+    //
+    // ⭐⭐ BOTH LITERALS MOVED ON 2026-09-18, AND THE MOVER WAS BISECTED RATHER THAN
+    // GUESSED. 611 → 613 and 50 → 52. The count was measured at four shas in extracted
+    // trees of their own (`git archive <sha> src tests package.json`, the corpus built by
+    // this file's own `genAt`), and the step is exact:
+    //
+    //   fe021a487  611 / 50   [hamlet 60 · village 74 · town 104 · city 164 · metropolis 209]
+    //   5c8a8c741  611 / 50   (the service-catalogue car: no movement)
+    //   cd6ec1c49  613 / 52   [hamlet 61 · village 74 · town 104 · city 165 · metropolis 209]
+    //   0e68bee62  613 / 52   (and every sha after it, to the tip)
+    //
+    // THE MOVER IS `cd6ec1c49` — "A generalist role no longer joins any faction the
+    // settlement happens to have", a SIGNED act under docs/shift-records/
+    // 2026-09-18-content-coherence.json (§934, the owner's "impliment every fix"), whose
+    // D1b/D2 cause names `ensureFactionStructuralNpcs`. Its own commit says what this
+    // measurement sees from the other side: a generalist mis-filed into the criminal
+    // faction had been covering an office and SUPPRESSING the seat, so with the misfiling
+    // gone the office is honestly unled and the synthesiser seats a structural
+    // placeholder. Exactly two settlements gained exactly one each (+1 hamlet, +1 city),
+    // both placeholders, and a placeholder carries no plotHooks — which is why the
+    // hookless count moved by the same two. No rng draw was added: the numbers move
+    // because a seat that was being covered dishonestly is now visibly empty.
+    //
+    // ⚠ THE HOOKLESS FIGURE IS RE-BASED, NOT RE-ARGUED. 52 of 613 is the same defect at
+    // the same rate; it is not evidence of a new leak, and the day it moves for any other
+    // reason this comment is what a lane reads first.
     const npcTotal = corpus.reduce((n, s) => n + (s.npcs || []).length, 0);
     const hookless = corpus.reduce((n, s) => n + (s.npcs || []).filter((x) => !(x.plotHooks || []).length).length, 0);
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(611);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(50);
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(613);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(52);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {

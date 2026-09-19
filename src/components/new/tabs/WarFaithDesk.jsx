@@ -185,8 +185,8 @@ function requireSettlement(settlement, wrapper) {
     throw new Error(
       `${wrapper}: the \`settlement\` prop is required. Without it \`DeskLines\` has no name`
       + ` and no tier, so a position that draws more than one lens prints the settlement's name`
-      + ` at the head of every sentence instead of standing the repeats down to the tier noun —`
-      + ` a page that is subtly wrong rather than one that fails. Pass the host tab's own`
+      + ` at the head of every sentence instead of standing the repeats down to the tier noun.`
+      + ` That is a page which is subtly wrong rather than one that fails. Pass the host tab's own`
       + ` settlement (WarTab.jsx / FaithTab.jsx already hold it).`,
     );
   }
