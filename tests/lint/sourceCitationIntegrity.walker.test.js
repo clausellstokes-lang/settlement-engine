@@ -70,7 +70,7 @@
  * a live document wrongly baselined costs one row, a frozen one wrongly excluded
  * costs a permanent blind spot, so anything not provably frozen is INCLUDED.
  *
- * ── ARM 3 · THE SYMBOL ARM (REPORT-ONLY, LIVE CODE) ──────────────────────────
+ * ── ARM 3 · THE SYMBOL ARM (REPORT-ONLY, LIVE CODE + LIVE DOCS) ──────────────
  * A citation whose adjacent backticked symbol is not on the cited line. It never
  * fails the gate, and the reason is arithmetic rather than caution: a citation is
  * symbol-checkable only when the name and the number sit on the SAME line, which
@@ -80,6 +80,48 @@
  * common nouns ("tabs", "source", "settlement") read as symbols. Precision and
  * coverage trade directly, and this arm keeps the precision and prints what it
  * sees, exactly as proseWiringCensus gates three identities and reports the rest.
+ *
+ * ⭐ IT REACHED ONLY `CODE_TREES` UNTIL FIX-C2c (2026-09-20), WHICH IS WHERE IT IS
+ * WORST. Measured at `578272a99` the two halves are almost mirror images:
+ *   live code   4 findings, THREE of them confirmed false positives
+ *   live docs 223 findings on a sample-of-twenty lead-validity of 19/20
+ *             (209 after FIX-C2c's own twenty cures)
+ * The structural cause is where each corpus writes its citations. Code writes them
+ * inside dense, backtick-rich comments where a NEIGHBOURING symbol steals the
+ * attribution; docs write "`symbol` at `path:line`" in prose and tables, where the
+ * adjacent backtick IS the address's subject. The three standing code false
+ * positives are `scripts/wiring-census.mjs:349` (the documented case below),
+ * `tests/domain/roadsParticipation.test.js`'s `npcVerdictPulse.js:133` (TRUE: the
+ * `replaceOustedNpcs(` call whose base argument sits at `:134`) and
+ * `tests/lint/dossierMountRegistry.walker.test.js`'s `Primitives.jsx:120` (TRUE:
+ * that line IS `{open && <div>{children}</div>}`; the sentence attaches
+ * `Collapsible` to the BARE `:89`, which is the same construct inside it).
+ *
+ * ⛔ THE LANDED-PACKET RULE, AND WHY THE DOCS HALF NEEDS ONE. 192 of the
+ * manifest's 194 packets are LANDED, and a landed packet is a frozen record in
+ * exactly the sense a `docs/review-r2/` result is — it names the base it was
+ * verified at and its own header says "do not redispatch". Without the rule the
+ * widened arm prints 443 findings; with it, 223. The excluded 220 are the
+ * packets' own frozen evidence, among them three stale `implementation-packets.mjs`
+ * addresses in HB-2, WF-1D and SCW-0. The five in-range stale addresses FIX-C2b
+ * recorded (in GR-3B-ORIENT, GR-4A, GR-4B, IN-0C, IN-1A, TC-5B-II, ES-DA and
+ * DCS-1) are covered by the same rule — every one of those packets is LANDED — but
+ * this arm never printed them and does not now: they carry no adjacent backticked
+ * declared symbol, which is the 5.6% ceiling above, not the exclusion.
+ * The rule reads `PACKET_MANIFEST.json`'s
+ * `status` (`landedPacketPaths`) and never a hand list, so a packet that changes
+ * status moves the corpus with it; READY, SUPERSEDED and a packet file the
+ * manifest does not list at all stay LIVE. (443 and 223 are both measured BEFORE
+ * this lane's own twenty cures, so the pair compares the rule against itself on
+ * one tree state.)
+ *
+ * ⚠ A LEAD IS NOT A CURE INSTRUCTION, AND THE SAMPLE SAYS SO TWICE. On the same
+ * twenty, lead validity was 19/20 but SYMBOL ATTRIBUTION was only 16/20: the arm
+ * pointed at the right citation by the wrong name four times. The sharpest is
+ * `tests/components/handbookVoice.test.jsx`'s "AppViews.jsx:46 renders
+ * `<HowToUse />`" — `declaredAt` says `:47` (the lazy() DECLARATION) and the
+ * sentence's verb says `:182` (the only place it RENDERS). Cure by reading the
+ * sentence; a cure driven by `declaredAt` writes a new wrong address.
  *
  * ⛔ AND IT HAS A MEASURED FALSE POSITIVE, WHICH IS WHY IT MUST NEVER GATE. Of the
  * 31 findings in its first run, ONE was wrong, and it was wrong in the way this
@@ -96,12 +138,50 @@
  * TREAT EVERY LINE THIS ARM PRINTS AS A LEAD, NEVER AS A VERDICT.
  *
  * ── WHAT THIS WALKER CANNOT SEE (measured, not guessed) ──────────────────────
- *   · a citation whose target does not resolve — 357 point at files absent from
- *     this tree, 170 at an ambiguous basename, 12 at vendored `node_modules`
- *     builds. Unresolvable is SKIPPED, never convicted: this gate judges only an
- *     address it can read, which is also what makes the synthetic `fixture.ts:1`
- *     inside a test assertion a non-event rather than an allowlist entry.
- *   · a stale address that still lands inside the file.
+ * An UNRESOLVABLE citation is SKIPPED, never convicted: this gate judges only an
+ * address it can read, which is also what makes the synthetic `fixture.ts:1`
+ * inside a test assertion a non-event rather than an allowlist entry. Measured at
+ * `578272a99` (FIX-C2c): 14,834 citations seen, 14,244 resolved, 166 ambiguous
+ * (12 distinct basenames — now READ by ARM 5 below) and 424 absent (143 tokens).
+ *
+ * ⭐ THE ABSENT SET IS NOT ONE THING, AND CALLING IT "absent" HID FOUR CLASSES.
+ * Classified against the WHOLE history path set (one `git log --all --name-only`
+ * pass; a per-token pathspec glob under-matched four of them by anchoring on the
+ * token's own leading segment):
+ *   DELETED-or-RENAMED (307)  the token suffix-matches a path in history.
+ *                             Dominated by the town-map strip — TE-STRIP-1
+ *                             (43c3ac3805), -2 (f02289efec), -3, -4.
+ *   SYNTHETIC (32)            the walkers' own planted fixtures and illustrations.
+ *   MISPATHED (13)            the file is LIVE but the citation names a wrong
+ *                             directory — `src/domain/spatialSubstrateRead.js` is
+ *                             `src/domain/spatial/spatialSubstrateRead.js`.
+ *   VENDORED                  a `node_modules` build named without its prefix
+ *                             (`jspdf.es.js`, `react-pdf.js`, lint-staged's own
+ *                             `gitWorkflow.js`, vitest's `tasks.d-*.d.ts`).
+ *   ABBREVIATED               a LIVE file exists whose basename ENDS with the
+ *                             token: `packets.mjs` is
+ *                             `scripts/implementation-packets.mjs`, `session.mjs`
+ *                             is `implementation-session.mjs`, `schema.js` is
+ *                             `settlement.schema.js`. True as prose, false as an
+ *                             address, and invisible to a suffix index.
+ *   PINNED-UNCOMMITTED        THE FOURTH SUB-CLASS, named by FIX-C2c. TWO tests,
+ *                             both checkable: the token suffix-matches NOTHING in
+ *                             `git log --all`, AND the citing document records a
+ *                             tree hash or a date. The proof case is FIX-C2b's:
+ *                             `writers.js` x27 in the sha-pinned
+ *                             SETTLEMENT_CAPABILITY_ATLAS, whose own front matter
+ *                             says several mapped systems "exist only as untracked
+ *                             files". It is NOT deletion and NOT a rename — the
+ *                             target never entered history on this line, so no
+ *                             commit can ever be cited for its going.
+ * ⚠ THE MEASURED CONSEQUENCE, and it is why the class needs naming rather than
+ * curing: every PINNED-UNCOMMITTED citation already sits inside an archival
+ * document or a LANDED packet, EXCEPT ONE — `docs/DESIGN_REALM_MAGIC_TOGGLE.md`'s
+ * `WorldMap.js:758-770`, struck by FIX-C2c with its reason. There is nothing to
+ * re-address, because there is no file to re-address to.
+ *
+ *   · a stale address that still lands inside the file (ARM 3 reads for this, and
+ *     reports rather than convicts).
  *
  * ── ARM 4 · THE BARE `:NNN` ARM (REPORT-ONLY, LIVE CODE + LIVE DOCS) ─────────
  * A line address with no path in front of it, inheriting its file from a citation
@@ -136,6 +216,32 @@
  * THE LAW: a skip list matched by bare name is matched at every depth, so every entry
  * must be a name that can never be a source directory.
  *
+ * ── ARM 5 · THE AMBIGUOUS-BASENAME ARM (REPORT-ONLY, ALL CORPORA) ────────────
+ * A citation whose token matches 2+ files. Until FIX-C2c every arm dropped it
+ * WITHOUT A WORD — `buildTargetIndex` returned null and all four arms `continue`
+ * on a null target — so 166 citations across 12 basenames were the estate's
+ * largest remaining blind spot after `tests/build/`. The biggest are `en.js` (67,
+ * two candidates: `src/copy/en.js` and a vendored tinymce i18n file), `index.js`
+ * (21, THIRTEEN candidates) and `index.ts` (13, THIRTY-TWO supabase entrypoints).
+ *
+ * It resolves what the sentence actually says — one objective filter (`extent`: a
+ * candidate too short to hold the address cannot be meant) and three kinds of
+ * evidence (a discriminating directory segment in the sentence, an import in the
+ * citing file, a backticked symbol exactly one candidate declares) — and NAMES the
+ * rest with their candidates. Measured at this tip: 98 of 169 resolved
+ * (`extent` 86, `directory` 7, `symbol` 5), 71 left open and printed. The estate's
+ * own population is 166; the other three are this walker's and the shared module's
+ * illustrative citations, which are TRUE and which the arm resolves, exactly as
+ * ARM 4's header carries real addresses rather than invented ones.
+ *
+ * ⛔ AND IT MUST NEVER FEED ARMS 1 AND 2, which is a stronger rule than "it must
+ * never gate". `buildTargetIndex`'s null for an ambiguous token is the only thing
+ * keeping those addresses out of the gating arms, and teaching IT to guess would
+ * hand ARM 1 (live code, no baseline) and ARM 2 (live docs, a ratchet AT ZERO) a
+ * set nobody has ever checked — `docs/FIRST_CONTACT_BACKLOG.md:2830` alone cites
+ * `en.js:1549`. The disambiguation therefore lives in `disambiguateToken`, is
+ * consumed only here, and leaves the gate's resolver byte-identical.
+ *
  * ⚠ IT READS FROM DISK, DELIBERATELY. `git grep` without a rev reads the INDEX,
  * and the mutation sweep proves this gate by PLANTING an untracked file, so an
  * index-based walk would be blind to its own mutant.
@@ -169,19 +275,24 @@
 import { describe, expect, test } from 'vitest';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 
 import {
   BASELINE_REL,
   CODE_TREES,
+  ambiguousFindings,
   archivalReason,
   bareFindings,
+  buildCandidateIndex,
   buildTargetIndex,
   citationsIn,
   citedLines,
   collectFiles,
   createReader,
+  disambiguateToken,
   eofFindings,
+  landedPacketPaths,
   partitionDocs,
   rowKey,
   sentenceSpans,
@@ -192,8 +303,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const read = createReader(ROOT);
 const resolve = buildTargetIndex(ROOT);
+const candidatesFor = buildCandidateIndex(ROOT);
 const codeFiles = CODE_TREES.flatMap((tree) => collectFiles(ROOT, tree));
 const docs = partitionDocs(ROOT, read);
+/** The frozen-record rule for packet bodies, read from the manifest's own status. */
+const landedPackets = landedPacketPaths(ROOT);
+/** ARM 3's corpus: live code plus every live document that is not a LANDED packet. */
+const symbolCorpus = [...codeFiles, ...docs.live.filter((p) => !landedPackets.has(p))];
 const stats = { seen: 0, resolvable: 0 };
 const codeEof = eofFindings({ files: codeFiles, resolve, read, stats });
 const docsEof = eofFindings({ files: docs.live, resolve, read });
@@ -283,6 +399,74 @@ describe('source citation integrity — the controls (each proves an arm can RED
     expect(sentenceSpans('v1.2 holds').map((s) => s.text)).toEqual(['v1.2 holds']);
   });
 
+  test('CONTROL: the LANDED rule excludes a landed packet and KEEPS a ready one', () => {
+    // A synthetic manifest, because the live one has no READY row to read: EM-R0a
+    // was placed READY at 680eacb8d, a DESCENDANT of the base this control was
+    // written at. A rule that cannot be shown to keep a READY packet would be a
+    // rule nobody could trust the day one exists.
+    const dir = mkdtempSync(join(tmpdir(), 'packet-status-'));
+    try {
+      mkdirSync(join(dir, 'docs/implementation'), { recursive: true });
+      writeFileSync(join(dir, 'docs/implementation/PACKET_MANIFEST.json'), JSON.stringify({
+        packets: [
+          { id: 'L-1', status: 'LANDED', packetPath: 'docs/implementation/packets/x/L-1.md' },
+          { id: 'R-1', status: 'READY', packetPath: 'docs/implementation/packets/x/R-1.md' },
+          { id: 'S-1', status: 'SUPERSEDED', packetPath: 'docs/implementation/packets/x/S-1.md' },
+        ],
+      }));
+      const landed = landedPacketPaths(dir);
+      expect([...landed]).toEqual(['docs/implementation/packets/x/L-1.md']);
+      // READY and SUPERSEDED are LIVE, and so is a packet file the manifest never lists.
+      expect(landed.has('docs/implementation/packets/x/R-1.md'), 'a READY packet is live').toBe(false);
+      expect(landed.has('docs/implementation/packets/x/S-1.md'), 'a SUPERSEDED packet is live').toBe(false);
+      expect(landed.has('docs/implementation/packets/x/UNLISTED.md'), 'unknown status is not frozen status').toBe(false);
+      // A missing or malformed manifest excludes NOTHING rather than guessing.
+      writeFileSync(join(dir, 'docs/implementation/PACKET_MANIFEST.json'), '{ not json');
+      expect(landedPacketPaths(dir).size, 'a malformed manifest excludes nothing').toBe(0);
+      expect(landedPacketPaths(join(dir, 'no-such-root')).size, 'an absent manifest excludes nothing').toBe(0);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  });
+
+  test('CONTROL: the ambiguity reader resolves on evidence and REFUSES without it', () => {
+    // synthetic-citation-names: `__c2cCopy.js` and `__c2cTheme.js` name NO file in this
+    // tree, deliberately. A first draft of this control used `en.js` and `theme.js` —
+    // both of which are REAL ambiguous basenames here — and ARM 5 read six of the
+    // control's own string literals as live citations, inflating its population from
+    // 168 to 174. A fixture shaped like a real artifact name is read by the walkers
+    // that govern its directory (the CURE-I fixture law, run 19); an absent name is
+    // skipped by every arm, which is what makes this control inert.
+    const bank = {
+      'src/copy/__c2cCopy.js': Array.from({ length: 400 }, (_, i) => (i === 41 ? 'const bannerTitle = 1;' : '')),
+      'vendor/i18n/__c2cCopy.js': ['short', 'file'],
+      'src/a/__c2cTheme.js': ['a', 'b', 'c'],
+      'src/b/__c2cTheme.js': ['a', 'b', 'c'],
+      'src/importer.js': ["import { x } from './a/__c2cTheme.js';"],
+    };
+    const r = (rel) => bank[rel] ?? null;
+    const copies = ['src/copy/__c2cCopy.js', 'vendor/i18n/__c2cCopy.js'];
+    const themes = ['src/a/__c2cTheme.js', 'src/b/__c2cTheme.js'];
+    const ask = (token, candidates, sentence, citingFile, cites) => disambiguateToken({
+      token, candidates, sentence, citingFile, read: r, cites,
+    });
+    // extent: a two-line file cannot hold line 300, so only one candidate can be meant.
+    expect(ask('__c2cCopy.js', copies, 'see the copy table at 300', 'docs/D.md', 300))
+      .toEqual({ path: 'src/copy/__c2cCopy.js', by: 'extent' });
+    // directory: a discriminating segment written in the sentence.
+    expect(ask('__c2cCopy.js', copies, 'see vendor/i18n/ line 1', 'docs/D.md', 1))
+      .toEqual({ path: 'vendor/i18n/__c2cCopy.js', by: 'directory' });
+    // import: the citing file's own module graph settles it.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 1', 'src/importer.js', 1))
+      .toEqual({ path: 'src/a/__c2cTheme.js', by: 'import' });
+    // symbol: exactly one candidate declares the backticked name.
+    expect(ask('__c2cCopy.js', copies, '`bannerTitle` at line 1', 'docs/D.md', 1))
+      .toEqual({ path: 'src/copy/__c2cCopy.js', by: 'symbol' });
+    // ⛔ AND IT REFUSES. No extent split, no directory, no import, no symbol.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 2', 'docs/D.md', 2)).toBeNull();
+    // An address NO candidate can hold leaves the bucket whole rather than re-homing
+    // a merely-stale citation onto the longest file that happens to survive.
+    expect(ask('__c2cTheme.js', themes, 'the theme at 9999', 'docs/D.md', 9999)).toBeNull();
+  });
+
   test('CONTROL: the archival rule DISCRIMINATES — it is four checkable predicates, not a hunch', () => {
     const bank = {
       'docs/LIVE.md': ['# live', 'body'],
@@ -315,8 +499,24 @@ describe('source citation integrity — the live estate', () => {
     expect(stats.seen, 'the citation parser matched nothing').toBeGreaterThanOrEqual(700);
     expect(stats.resolvable, 'the target index resolved nothing').toBeGreaterThanOrEqual(600);
     expect(resolve('sourceCitationIntegrity.shared.mjs')).toBe('tests/lint/sourceCitationIntegrity.shared.mjs');
-    // An ambiguous basename must resolve to NOTHING rather than to a coin flip.
+    // ⛔ THE GATE'S RESOLVER STILL REFUSES A COIN FLIP. ARM 5 resolves ambiguity for a
+    // READER; this null is what keeps those addresses out of ARM 1 and ARM 2.
     expect(resolve('index.js')).toBeNull();
+    expect(candidatesFor('index.js').length, 'the candidate index keeps the whole bucket').toBeGreaterThan(1);
+    expect(candidatesFor('no-such-file-anywhere.js'), 'an absent token has no candidates').toEqual([]);
+
+    // The LANDED rule is DERIVED from the manifest, never transcribed, so a packet
+    // that changes status moves the corpus with it instead of drifting past a list.
+    const manifest = JSON.parse(readFileSync(join(ROOT, 'docs/implementation/PACKET_MANIFEST.json'), 'utf8'));
+    const landedRows = manifest.packets.filter((p) => p.status === 'LANDED');
+    expect(landedPackets.size, 'every LANDED manifest row is excluded, and nothing else is').toBe(landedRows.length);
+    expect(landedPackets.size, 'the frozen-packet set collapsed').toBeGreaterThanOrEqual(150);
+    for (const row of manifest.packets.filter((p) => p.status !== 'LANDED')) {
+      expect(landedPackets.has(row.packetPath), `${row.id} is ${row.status} and must stay LIVE`).toBe(false);
+    }
+    expect(symbolCorpus.filter((p) => landedPackets.has(p)), 'ARM 3 still reads a frozen packet body').toEqual([]);
+    expect(symbolCorpus.length, 'ARM 3\'s corpus collapsed').toBeGreaterThanOrEqual(5000);
+    expect(symbolCorpus.length - codeFiles.length, 'ARM 3 reaches no live document').toBeGreaterThanOrEqual(200);
   });
 
   test('ARM 1 — NO citation in src/, tests/ or scripts/ points past the end of its target', () => {
@@ -353,10 +553,11 @@ describe('source citation integrity — the live estate', () => {
     ).toEqual([]);
   });
 
-  test('ARM 3 — REPORT-ONLY: citations whose named symbol has moved', () => {
-    const findings = symbolFindings({ files: codeFiles, resolve, read });
+  test('ARM 3 — REPORT-ONLY: citations whose named symbol has moved, over live code AND live docs', () => {
+    const findings = symbolFindings({ files: symbolCorpus, resolve, read });
     // Never an assertion on the count: this arm exists to be READ, and a ratchet
     // over a 5.6%-coverage heuristic would freeze the heuristic, not the estate.
+    const inCode = findings.filter((r) => !r.from.startsWith('docs/')).length;
     const lines = findings.map(
       (r) => `  ${r.from}:${r.line}  cites ${r.cite}  but \`${r.symbol}\` is declared at `
         + `${r.declaredAt.slice(0, 4).join(', ')} in ${r.target}`,
@@ -369,10 +570,47 @@ describe('source citation integrity — the live estate', () => {
     // report nobody can read is a false instrument, and this walker exists
     // because false instruments are the class.
     process.stdout.write(
-      `\nSYMBOL ARM (report-only): ${findings.length} citation(s) whose named symbol is not on the cited line.\n`
+      `\nSYMBOL ARM (report-only): ${findings.length} citation(s) whose named symbol is not on the cited line`
+      + ` — ${inCode} in live code, ${findings.length - inCode} in live docs, over ${symbolCorpus.length} files`
+      + ` (${landedPackets.size} LANDED packet bodies excluded as frozen records).\n`
+      + '  ⚠ EVERY LINE IS A LEAD, NEVER A VERDICT. Measured 2026-09-20 on a systematic sample of\n'
+      + '  twenty docs findings: 19/20 led to a citation that genuinely needed re-addressing, but only\n'
+      + '  16/20 named the right symbol — so cure by reading the SENTENCE, never by `declaredAt`.\n'
       + `${lines.join('\n')}\n\n`,
     );
     expect(Array.isArray(findings)).toBe(true);
+  });
+
+  test('ARM 5 — REPORT-ONLY: citations whose basename matches more than one file', () => {
+    const stats5 = { seen: 0, resolved: 0 };
+    const findings = ambiguousFindings({
+      files: [...codeFiles, ...docs.all], candidatesFor, read, stats: stats5,
+    });
+    const byRule = {};
+    for (const r of findings) if (r.by) byRule[r.by] = (byRule[r.by] ?? 0) + 1;
+    const open = findings.filter((r) => !r.resolved);
+    const byToken = new Map();
+    for (const r of findings) {
+      const e = byToken.get(r.token) ?? { seen: 0, resolved: 0, candidates: r.candidates.length };
+      e.seen += 1;
+      if (r.resolved) e.resolved += 1;
+      byToken.set(r.token, e);
+    }
+    const ledger = [...byToken.entries()]
+      .sort((a, b) => b[1].seen - a[1].seen)
+      .map(([token, e]) => `  ${String(e.resolved).padStart(3)}/${String(e.seen).padEnd(4)} resolved  ${token}`
+        + `  (${e.candidates} candidates)`);
+    process.stdout.write(
+      `\nAMBIGUOUS-BASENAME ARM (report-only): ${stats5.seen} citation(s) whose token matches 2+ files;`
+      + ` ${stats5.resolved} resolved by path evidence, ${open.length} left open.\n`
+      + `  by rule: ${JSON.stringify(byRule)}\n${ledger.join('\n')}\n`
+      + `${open.map((r) => `  OPEN  ${r.from}:${r.line}  ${r.cite}  ->  ${r.candidates.slice(0, 4).join(' | ')}`
+        + `${r.candidates.length > 4 ? ` | …${r.candidates.length - 4} more` : ''}`).join('\n')}\n\n`,
+    );
+    // A population floor, exactly as ARM 4 carries: a walk that stops finding the
+    // form entirely has broken, and that is worth a red even in a report-only arm.
+    expect(stats5.seen, 'the ambiguity reader matched nothing — 2+-candidate tokens cannot have vanished')
+      .toBeGreaterThanOrEqual(100);
   });
 
   test('ARM 4 — REPORT-ONLY: bare `:NNN` addresses past the end of the file their sentence names', () => {

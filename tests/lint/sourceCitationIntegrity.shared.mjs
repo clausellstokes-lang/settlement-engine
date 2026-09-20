@@ -82,6 +82,54 @@ export const SNAPSHOT_PIN = /^\s*(?:[*#>\s]*)\*\*(?:Snapshot base|Frozen at|Pinn
 export const BANNER_LINES = 10;
 export const PIN_LINES = 30;
 
+/** Where the implementation programme records every packet's status. */
+export const PACKET_MANIFEST_REL = 'docs/implementation/PACKET_MANIFEST.json';
+
+/**
+ * THE LANDED-PACKET RULE — the archival rule for `docs/implementation/packets/`,
+ * read from the manifest's own `status` field and NEVER from a hand list.
+ *
+ * A LANDED packet is a historical record in the same sense a `docs/review-r2/`
+ * result is: it states what the tree held at the base it names, it carries the
+ * sha it was implemented at, and its own header says "do not redispatch". Its
+ * addresses were true at that base and re-addressing them to today's tree would
+ * FALSIFY the record rather than repair it. MEASURED 2026-09-20 (FIX-C2c): 192
+ * of the manifest's 194 rows are LANDED, and excluding their bodies takes ARM 3's
+ * widened docs report from 443 findings to 223 — the suppressed 220 are larger
+ * than the surviving population, which is the whole reason the rule must exist.
+ *
+ * ⚠ THE RULE IS DELIBERATELY NARROWER THAN "a packet". It excludes LANDED and
+ * nothing else. A SUPERSEDED, READY or in-flight packet is LIVE, and so is a
+ * packet FILE the manifest does not list at all (measured: 196 files under
+ * `packets/`, 194 manifest rows — `MF-CH2B.md` and `TC-3.md` carry no row).
+ * Unknown status is not frozen status; that is the same one-directional bias the
+ * archival rules already carry — a live document wrongly excluded is a permanent
+ * blind spot, a frozen one wrongly included costs a printed line.
+ *
+ * ⚠ IT IS NOT WIRED INTO `archivalReason`, and that is deliberate. ARM 2's
+ * baseline is a ratchet AT ZERO over `docs.live`; moving 192 documents out of
+ * that corpus would silence any past-EOF citation inside them with no record of
+ * the silencing. This rule narrows ONE report-only arm and touches no gate.
+ *
+ * @param {string} root repo root (absolute)
+ * @returns {Set<string>} repo-relative packetPaths whose status is LANDED
+ */
+export function landedPacketPaths(root) {
+  /** @type {Set<string>} */
+  const out = new Set();
+  /** @type {unknown} */
+  let parsed;
+  try { parsed = JSON.parse(readFileSync(join(root, PACKET_MANIFEST_REL), 'utf8')); }
+  catch { return out; }
+  const packets = /** @type {{ packets?: unknown }} */ (parsed)?.packets;
+  if (!Array.isArray(packets)) return out;
+  for (const row of packets) {
+    const entry = /** @type {{ status?: unknown, packetPath?: unknown }} */ (row);
+    if (entry?.status === 'LANDED' && typeof entry.packetPath === 'string') out.add(entry.packetPath);
+  }
+  return out;
+}
+
 /**
  * The one file excluded from the walk by name. It is a REGISTER OF STALE
  * ADDRESSES — every row in it is a citation this gate has convicted — so
@@ -135,11 +183,16 @@ export function createReader(root) {
 /**
  * Index every trailing path-segment run of every indexable file, so
  * `warDeployment.js`, `worldPulse/warDeployment.js` and the full path all
- * resolve. A token matched by 2+ files is AMBIGUOUS and resolves to nothing.
+ * resolve to the same bucket.
+ *
+ * Extracted from `buildTargetIndex` (FIX-C2c) so the resolver and the
+ * ambiguity reader share ONE walk of the eight index roots — the walk is the
+ * expensive half, and a second copy of it would also be a second thing to keep
+ * true.
  * @param {string} root repo root (absolute)
- * @returns {(token: string) => string | null}
+ * @returns {Map<string, string[]>} suffix -> every file that ends with it
  */
-export function buildTargetIndex(root) {
+export function buildSuffixIndex(root) {
   /** @type {string[]} */
   const paths = [];
   for (const tree of INDEX_ROOTS) paths.push(...collectFiles(root, tree));
@@ -158,10 +211,41 @@ export function buildTargetIndex(root) {
       else bySuffix.set(key, [p]);
     }
   }
+  return bySuffix;
+}
+
+/**
+ * THE GATE'S RESOLVER. A token matched by 2+ files is AMBIGUOUS and resolves to
+ * NOTHING — which is what keeps those citations out of ARM 1 (live code, no
+ * baseline) and ARM 2 (live docs, a ratchet AT ZERO).
+ *
+ * ⛔ ITS NULL IS LOAD-BEARING AND MUST STAY (FIX-C2c). Teaching THIS function to
+ * guess would hand both gating arms a set of addresses nobody has ever checked:
+ * `docs/FIRST_CONTACT_BACKLOG.md:2830` alone cites `en.js:1549`, and a
+ * newly-resolvable past-EOF citation in a live document is an instant red with no
+ * baseline to absorb it. The disambiguation added by FIX-C2c therefore lives in
+ * `disambiguateToken`, is consumed only by the report-only ambiguity arm, and
+ * leaves this function byte-identical in behaviour.
+ * @param {string} root repo root (absolute)
+ * @returns {(token: string) => string | null}
+ */
+export function buildTargetIndex(root) {
+  const bySuffix = buildSuffixIndex(root);
   return (token) => {
     const found = bySuffix.get(token);
     return found && found.length === 1 ? found[0] : null;
   };
+}
+
+/**
+ * Every file a token could name — the whole bucket, where `buildTargetIndex`
+ * collapses a 2+ bucket to null. `[]` for a token this tree does not hold.
+ * @param {string} root repo root (absolute)
+ * @returns {(token: string) => string[]}
+ */
+export function buildCandidateIndex(root) {
+  const bySuffix = buildSuffixIndex(root);
+  return (token) => bySuffix.get(token) ?? [];
 }
 
 /** A range spec may not be expanded past this many lines (a typo is not a corpus). */
@@ -493,6 +577,213 @@ export function bareFindings({ files, resolve, read, stats }) {
             }
           }
           m = BARE_ADDRESS.exec(span.text);
+        }
+      }
+    }
+  }
+  return rows;
+}
+
+// ── THE AMBIGUOUS-BASENAME ARM (report-only) ─────────────────────────────────
+
+/**
+ * An import specifier in the citing file, in any of the three spellings the
+ * estate writes. The captured group is the specifier.
+ */
+const IMPORT_SPEC = /(?:from|import|require)\s*\(?\s*['"]([^'"\n]+)['"]/g;
+
+/** Per-process memo of a code file's resolved import specifiers. */
+const IMPORT_SPECS_BY_FILE = new Map();
+
+/**
+ * Resolve a specifier that may be relative to the citing file's directory into a
+ * repo-relative forward-slash path. Absolute-ish and bare specifiers come back
+ * unchanged, which is right: a suffix match handles them.
+ * @param {string} spec
+ * @param {string} fromRel repo-relative path of the citing file
+ * @returns {string}
+ */
+function resolveSpec(spec, fromRel) {
+  if (!spec.startsWith('.')) return spec.replace(/^\/+/, '');
+  const base = fromRel.split('/').slice(0, -1);
+  for (const seg of spec.split('/')) {
+    if (seg === '.' || seg === '') continue;
+    if (seg === '..') base.pop();
+    else base.push(seg);
+  }
+  return base.join('/');
+}
+
+/**
+ * THE DISAMBIGUATION READER. One objective filter, then three kinds of evidence,
+ * each of which must narrow the bucket to EXACTLY ONE candidate or hand on:
+ *
+ *   extent     FIRST, and the only OBJECTIVE step: a candidate with fewer lines
+ *              than the address cites cannot be the file the sentence means —
+ *              ARM 1's own test, used to narrow rather than to convict. It
+ *              carries every other rule: `institutionServices.js:1567` has two
+ *              candidates and only one of them is long enough to hold line 1567.
+ *              When it eliminates ALL candidates the bucket is left whole, so a
+ *              citation that is merely stale cannot be silently re-homed.
+ *   directory  a discriminating directory segment of exactly one candidate is
+ *              written in the citation's own SENTENCE (`peaceTerms.js` beside
+ *              the words `worldPulse/`). The segments compared are only those
+ *              the candidates do NOT share — a segment every candidate carries
+ *              discriminates nothing.
+ *   import     the CITING FILE imports exactly one of the candidates. Only ever
+ *              fires for a code citation, and it is the strongest evidence there
+ *              is: the file's own module graph.
+ *   symbol     exactly one candidate DECLARES a backticked, symbol-shaped name
+ *              from the citing line — `declarationLines`, the same reader ARM 3
+ *              uses, so the two arms cannot disagree about what a declaration is.
+ *
+ * ⛔ IT IS A READER, NOT A RESOLVER, and nothing it returns may reach a gate. It
+ * answers "which file did this sentence mean", which is a question about PROSE;
+ * `buildTargetIndex` answers "which file can I read with certainty", which is the
+ * question a gate is allowed to ask. Keeping them apart is why widening the first
+ * cannot red the second.
+ *
+ * @param {object} args
+ * @param {string} args.token the cited token, e.g. `index.ts`
+ * @param {string[]} args.candidates every file the token could name (2+)
+ * @param {string} args.sentence the citation's own sentence span
+ * @param {string} args.citingFile repo-relative path of the citing file
+ * @param {(rel: string) => string[] | null} args.read
+ * @param {number} [args.cites] the highest line the citation addresses
+ * @returns {{ path: string, by: 'extent' | 'directory' | 'import' | 'symbol' } | null}
+ */
+export function disambiguateToken({ token, candidates, sentence, citingFile, read, cites }) {
+  let pool = candidates;
+  if (Number.isFinite(cites)) {
+    const longEnough = pool.filter((c) => (read(c)?.length ?? 0) >= /** @type {number} */ (cites));
+    if (longEnough.length === 1) return { path: longEnough[0], by: 'extent' };
+    if (longEnough.length > 1) pool = longEnough;
+  }
+  const dirsOf = (p) => p.split('/').slice(0, -1);
+  const shared = new Set(dirsOf(pool[0]));
+  for (const c of pool.slice(1)) {
+    const mine = new Set(dirsOf(c));
+    for (const seg of [...shared]) if (!mine.has(seg)) shared.delete(seg);
+  }
+  const byDir = pool.filter((c) => dirsOf(c).some((seg) => !shared.has(seg) && sentence.includes(`${seg}/`)));
+  if (byDir.length === 1) return { path: byDir[0], by: 'directory' };
+
+  // ⛔ CODE FILES ONLY, AND THE JOIN HAPPENS ONCE. A prose document has no module
+  // graph to consult, and joining one to look for an `import` is how this reader
+  // OOM-killed a `tests/lint` run: the first draft re-evaluated `citing.join('\n')`
+  // inside the match loop, allocating a fresh copy of a million-byte document per
+  // match, once per ambiguous citation in it. The memo then keeps a file that DOES
+  // have a module graph from being re-scanned for each of its citations.
+  if (/\.(js|jsx|mjs|cjs|ts|tsx)$/.test(citingFile)) {
+    let specs = IMPORT_SPECS_BY_FILE.get(citingFile);
+    if (!specs) {
+      specs = new Set();
+      const citing = read(citingFile);
+      if (citing) {
+        const source = citing.join('\n');
+        IMPORT_SPEC.lastIndex = 0;
+        let m = IMPORT_SPEC.exec(source);
+        while (m !== null) { specs.add(resolveSpec(m[1], citingFile)); m = IMPORT_SPEC.exec(source); }
+      }
+      IMPORT_SPECS_BY_FILE.set(citingFile, specs);
+    }
+    const byImport = pool.filter((c) => {
+      const stem = c.replace(/\.[^./]+$/, '');
+      return specs.has(c) || specs.has(stem);
+    });
+    if (byImport.length === 1) return { path: byImport[0], by: 'import' };
+  }
+
+  const stem = basename(token).split('.')[0];
+  /** @type {Set<string>} */
+  const named = new Set();
+  BACKTICKED.lastIndex = 0;
+  let span = BACKTICKED.exec(sentence);
+  while (span !== null) {
+    IDENTIFIER.lastIndex = 0;
+    let id = IDENTIFIER.exec(span[1]);
+    while (id !== null) {
+      if (SYMBOL_SHAPED.test(id[0]) && id[0] !== stem) named.add(id[0]);
+      id = IDENTIFIER.exec(span[1]);
+    }
+    span = BACKTICKED.exec(sentence);
+  }
+  if (named.size > 0) {
+    const bySymbol = pool.filter((c) => {
+      const lines = read(c);
+      return lines ? [...named].some((n) => declarationLines(lines, n).length > 0) : false;
+    });
+    if (bySymbol.length === 1) return { path: bySymbol[0], by: 'symbol' };
+  }
+  return null;
+}
+
+/**
+ * THE AMBIGUOUS-BASENAME ARM — REPORT-ONLY.
+ *
+ * A citation whose token matches 2+ files was, until FIX-C2c, dropped by every
+ * arm WITHOUT A WORD: `buildTargetIndex` returned null and `eofFindings`,
+ * `symbolFindings` and `bareFindings` all `continue` on a null target. MEASURED
+ * 2026-09-20 at `578272a99`: 166 citations across 12 distinct basenames, the
+ * largest of them `en.js` (67), `index.js` (21, thirteen candidates) and
+ * `index.ts` (13, thirty-two supabase function entrypoints).
+ *
+ * It resolves what the prose actually says (see `disambiguateToken`) and NAMES
+ * the rest with their candidates, so the blind spot is a counted set instead of
+ * a silence. It never gates, for the same measured reason ARMS 3 and 4 never
+ * gate: the resolution is evidence about English, not about a file.
+ *
+ * @param {object} args
+ * @param {string[]} args.files
+ * @param {(token: string) => string[]} args.candidatesFor
+ * @param {(rel: string) => string[] | null} args.read
+ * @param {{ seen: number, resolved: number }} [args.stats] filled in place
+ * @returns {{ from: string, line: number, cite: string, token: string,
+ *   candidates: string[], resolved: string | null, by: string | null }[]}
+ */
+export function ambiguousFindings({ files, candidatesFor, read, stats }) {
+  /** @type {{ from: string, line: number, cite: string, token: string, candidates: string[], resolved: string | null, by: string | null }[]} */
+  const rows = [];
+  for (const from of files) {
+    if (from === BASELINE_REL) continue;
+    const lines = read(from);
+    if (!lines) continue;
+    for (let i = 0; i < lines.length; i += 1) {
+      const text = lines[i];
+      if (!MAY_CITE.test(text)) continue;
+      // ⛔ THE CHEAP TEST FIRST, AND IT IS NOT A MICRO-OPTIMISATION. Splitting a line
+      // into sentence spans allocates a substring per stop, and 91,823 lines in this
+      // estate carry a code extension while only 9,477 hold a citation and ~169 hold
+      // an AMBIGUOUS one — 11.5 MB of slicing for a set that fits on a page. Together
+      // with the import-join defect above, that garbage OOM-killed a `tests/lint` run
+      // (2026-09-20, no count line printed). Resolve the token first; span the line
+      // only when one of its citations is actually ambiguous.
+      const onLine = citationsIn(text);
+      if (onLine.length === 0) continue;
+      if (!onLine.some((c) => candidatesFor(c.token).length >= 2)) continue;
+      for (const span of sentenceSpans(text)) {
+        for (const c of citationsIn(span.text)) {
+          const candidates = candidatesFor(c.token);
+          if (candidates.length < 2) continue;
+          if (stats) stats.seen += 1;
+          const hit = disambiguateToken({
+            token: c.token,
+            candidates,
+            sentence: span.text,
+            citingFile: from,
+            read,
+            cites: Math.max(...c.cited),
+          });
+          if (hit && stats) stats.resolved += 1;
+          rows.push({
+            from,
+            line: i + 1,
+            cite: `${c.token}:${c.spec}`,
+            token: c.token,
+            candidates,
+            resolved: hit ? hit.path : null,
+            by: hit ? hit.by : null,
+          });
         }
       }
     }
