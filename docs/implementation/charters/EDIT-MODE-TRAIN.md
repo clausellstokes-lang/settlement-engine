@@ -449,6 +449,17 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-C2** builds now in its own worktree (`fix-citations-2026-09-20` @63e40fe57): the walker's EOF arm gate-wired over `src/tests/scripts` with the 38 live rows re-addressed (the seven certification citations past EOF; the tuning inventory's `realHome` rot; the `Primitives.jsx` cluster), docs-live under a shrink-only baseline, archival excluded, the symbol arm report-only; composed at the next composition train. **FIX-C2b (NEW, measure-first after it lands):** the declaration-aware third arm over the 5,479 citations naming a symbol the target never declares.
 - **EM-B1k2's pre-proof** runs at `read-tip-63e40fe57` carrying addenda 39 and 43 (the display-name census; the save writers; the fourth ratchet root; the `contract` token; the sealed `checks` without dist-gated files).
 
+## Amendments of 2026-09-20 03:29 EDT — REVIEW-P walked: sixteen findings fated into FIX-P1…P5 and REVIEW-P2 (ODQ §934.63)
+
+| lane | carries | composed |
+|---|---|---|
+| **FIX-P1** | F1 the byte-identical anonymous forks (a per-visitor salt in the anonymous envelope; the full user id in `forkSeedFor`); the copy made true; noticed 1, 2, 8 | the next composition train |
+| **FIX-P2** (measure-first, the preview persona) | F2 the realm layer keyed on `settlement.id` | its measurement first |
+| **FIX-P3** (dispatched now) | F3 the silent daily-cap refusal on the dossier toolbar; F4 Narrate navigates; F10 `/signin` drops the reason; F11 the 404 lands silently; F12 duplicate alerts; F13 "this account" for a visitor; noticed 3 — the refusal walker's population widened to prove every path | the next composition train |
+| **FIX-P4** | F5/F6 the forge coach (gated on the reveal; docked clear; a real sheet on the phone); F15 the realm's DEV-only warnings | the next composition train |
+| **FIX-P5** | F7/F8/F9 the floors and the phone bar; F14 one tier word by a walker; F16 the lock mark; noticed 4–7 | the next composition train |
+| **REVIEW-P2** | the seven unwalked public routes, the gallery hubs, `/world/:code`, and an account walk under the persona on the production build | after the composition train |
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
