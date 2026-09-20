@@ -465,6 +465,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - The branch: `9f3455b84` CURE-E · `96036427f` CURE-F · `c71782e7f` CURE-G · `21b991118` the refreeze (`2651·383·2268·25035·6678`) · `dbd077481` EM-B3c re-pinned. **Run 18** validates `21b991118`; EM-B3c builds in the slot from the first freed working seat, its batches behind run 18; on its landing: the flip, EM-P2 v4 placed, then the composition train EM-T4.
 - **FIX-C2b's first commit** is the certification file's whole citation set (`subsystemRowsWar.js`, ~40 stale addresses) re-addressed by symbol.
 
+## Amendments of 2026-09-20 03:35 EDT — EM-B1f version 3 accepted (the block lifted by execution); the ninth roster row's omission is `ALL_BUT_DEAD`; train EM-T6 opens EM-B1k2 → EM-B1f; EM-B3c dispatched (ODQ §934.47 addendum 46)
+
+- **CORRECTION to the amendment of 2026-09-19 17:36 (EM-B1f ruling 3):** the ninth roster row's reasoned omission is `omits: ALL_BUT_DEAD` — the walker's own arm refuses an omission naming `active` (not a member of the live union) or one that enumerates the union without the three new members. **Train EM-T6 now opens EM-B1k2 → EM-B1f** (defence in depth lands before the filter widens; they share `roadsParticipation.test.js`), then EM-B1h → EM-B1i → EM-B1j → EM-A2b → EM-B1a. EM-B1f's walker rows gain `spelling: 'derived'`.
+- **EM-B1j's compile** measures the readers of the institution status `'remnant'` (written by `tierOutcomeApply.js` outside the `EntityStatus` typedef); a separate vocabulary charters **EM-B1l**. **EM-B3c** builds in the slot now.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
