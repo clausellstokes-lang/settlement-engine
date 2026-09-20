@@ -8,6 +8,7 @@
  * CREATE rows claim to have produced.
  */
 
+import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
   existsSync,
@@ -526,17 +527,141 @@ function addError(errors, message) {
   errors.push(message);
 }
 
+// ── §7.4 THE SEALED-BURN EXEMPTION (chair ruling, ODQ §934.47 addendum 84) ───────────
+// The non-terminal arm of the retirement check below demands that a `retiredSymbols`
+// symbol still be PRESENT, because the packet is written against it. That premise has
+// exactly one lawful exception, and nobody had written it down: THE PACKET'S OWN SEALED
+// BUILD. EM-B1f's change manifest ordered its lane to burn `UNDISPOSITIONED_CEILING`'s
+// figure — the exact text of its own retiredSymbols row — while `validate` sat at index 11
+// of that same packet's sealed `checks`, so the manifest and the packet's own gate were
+// mutually unsatisfiable for as long as the packet was READY. Measured three ways: retiree
+// present, row present -> valid; retiree burned, row present -> refused; retiree burned,
+// row deleted -> valid. No ordering of lane acts made the honest manifest green.
+//
+// THE DISCRIMINATOR IS THE SEAL, AND A SEAL IS A RECEIPT RATHER THAN A CLAIM. A seal can
+// only exist because `createImplementationSession` ran THIS validator through
+// `loadLiveAuthority` and required it green — with the retiree present — before writing
+// it. So "absent under a live seal" means precisely "present at dispatch, burned by the
+// build that dispatch authorized", while "absent with no seal" keeps its old meaning: a
+// placement whose retiree is already gone is stale, and stays refused.
+//
+// FOUR FENCES, each exercised by a counterforce arm in the validator's test home:
+//   * THE ENVELOPE MUST VERIFY. `integrityDigest` is recomputed from the payload, so a
+//     seal edited after it was written licenses nothing. This is a DISCIPLINE boundary,
+//     not a security one: whoever can write the Git directory can also recompute the
+//     digest, exactly as `openImplementationSession` has always been forgeable.
+//   * THE SEAL MUST BE THIS PACKET'S. A seal carrying another id is not a licence.
+//   * THE SEAL MUST BE THIS WORKTREE'S. `gitDir` is compared against the live one, the
+//     same fence `openImplementationSession` applies before it will open a session, so a
+//     seal copied in from elsewhere is not a licence.
+//   * THE BOUND HEAD MUST BE AN ANCESTOR. A stale seal, bound to a commit this tree never
+//     reached, is REFUSED, and the refusal names the HEAD it bound so the staleness is
+//     legible instead of mysterious. Ancestor rather than equality deliberately: the seal
+//     is still telling the truth once the build's own commit lands on top of it, which is
+//     when the composing chair re-runs `validate`.
+//
+// The lookup runs ONLY where the refusal was about to be raised, so a tree with no absent
+// retiree spawns no `git` at all and the ordinary run costs exactly what it cost before.
+const SEAL_DIRECTORY = 'implementation-sessions';
+const SEAL_FILENAME = 'seal.json';
+
+/**
+ * The session-envelope version this reader accepts. `implementation-session.mjs` owns the
+ * number as `SESSION_SCHEMA_VERSION` and imports FROM this module, so it cannot be imported
+ * back without a cycle; the two are pinned equal by an arm in the validator's test home
+ * rather than by a shared constant.
+ */
+export const SEAL_ENVELOPE_SCHEMA_VERSION = 1;
+
+/**
+ * The absolute Git administration directory for a tree, or null when it is not a worktree.
+ * A linked worktree answers with its own directory, which is why seals do not leak between
+ * the lanes that share one repository.
+ *
+ * @param {string} rootDir
+ * @returns {string|null}
+ */
+function gitDirectoryOf(rootDir) {
+  const probe = spawnSync('git', ['rev-parse', '--path-format=absolute', '--git-dir'], {
+    cwd: rootDir, encoding: 'utf8', shell: false,
+  });
+  if (probe.status !== 0 || typeof probe.stdout !== 'string') return null;
+  const value = probe.stdout.trim();
+  return value ? resolve(value) : null;
+}
+
+/**
+ * Whether a commit is an ancestor of the tree's HEAD. A sha naming no object exits non-zero
+ * too, so an invented seal HEAD fails closed here instead of throwing.
+ *
+ * @param {string} rootDir
+ * @param {string} commit
+ * @returns {boolean}
+ */
+function isAncestorOfHead(rootDir, commit) {
+  if (typeof commit !== 'string' || !SHA_40.test(commit)) return false;
+  return spawnSync('git', ['merge-base', '--is-ancestor', commit, 'HEAD'], {
+    cwd: rootDir, encoding: 'utf8', shell: false,
+  }).status === 0;
+}
+
+/**
+ * Read this worktree's dispatch seal for one packet, refusing anything that is not a
+ * well-formed, integrity-verified seal FOR THIS PACKET in THIS worktree. Ancestry is left
+ * to the caller deliberately, so a stale seal can be reported BY ITS HEAD rather than
+ * silently dropped into the same verdict as no seal at all.
+ *
+ * @param {string} rootDir
+ * @param {unknown} packetId
+ * @returns {{ digest:string, head:string, gitDir:string }|null}
+ */
+export function readDispatchSeal(rootDir, packetId) {
+  try {
+    if (typeof packetId !== 'string' || !ID_TOKEN.test(packetId)) return null;
+    const gitDir = gitDirectoryOf(rootDir);
+    if (!gitDir) return null;
+    const envelope = JSON.parse(
+      readFileSync(resolve(gitDir, SEAL_DIRECTORY, packetId, SEAL_FILENAME), 'utf8'),
+    );
+    if (!isRecord(envelope)
+      || envelope.schemaVersion !== SEAL_ENVELOPE_SCHEMA_VERSION
+      || !Object.hasOwn(envelope, 'payload')
+      || typeof envelope.integrityDigest !== 'string') return null;
+    const recomputed = sha256(canonicalSerialize({
+      schemaVersion: envelope.schemaVersion,
+      payload: envelope.payload,
+    }));
+    if (recomputed !== envelope.integrityDigest) return null;
+    const payload = envelope.payload;
+    if (!isRecord(payload) || payload.id !== packetId) return null;
+    if (typeof payload.gitDir !== 'string' || resolve(payload.gitDir) !== gitDir) return null;
+    if (typeof payload.head !== 'string' || !SHA_40.test(payload.head)) return null;
+    return { digest: envelope.integrityDigest, head: payload.head, gitDir };
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Validate manifest structure plus its joins to the index, packet Markdown, and
  * live source files. It returns every measured error instead of stopping at the
  * first one, but no caller may treat a partial result as valid.
  *
+ * `onNote` receives observations that are NOT errors — today, the one sealed burn described
+ * at THE SEALED-BURN EXEMPTION above. It is an optional sink rather than a third key on the
+ * return value on purpose: every caller in the estate asserts the exact shape
+ * `{ ok, errors }`, and a validator that quietly changed its answer's shape to announce that
+ * it had changed nothing would be its own kind of lie.
+ *
  * @param {unknown} manifest
- * @param {{ rootDir?:string }} [options]
+ * @param {{ rootDir?:string, onNote?:(note:string) => void }} [options]
  * @returns {{ ok:boolean, errors:string[] }}
  */
 export function validatePacketManifest(manifest, options = {}) {
   const rootDir = resolve(options.rootDir ?? DEFAULT_ROOT);
+  const onNote = typeof options.onNote === 'function' ? options.onNote : null;
+  /** @param {string} message */
+  const addNote = (message) => { if (onNote) onNote(message); };
   /** @type {string[]} */
   const errors = [];
   if (!isRecord(manifest)) {
@@ -810,6 +935,15 @@ export function validatePacketManifest(manifest, options = {}) {
     }
     const retired = Array.isArray(retiredSymbols) ? retiredSymbols : [];
     const retiredKeys = new Set();
+    // Read AT MOST ONCE per packet, and only when a retiree has actually gone missing:
+    // the seal lookup shells out to Git, and the overwhelmingly common case reaches none
+    // of it. `undefined` is "not yet asked"; `null` is "asked, and there is no seal".
+    /** @type {{ digest:string, head:string, gitDir:string }|null|undefined} */
+    let sealProbe;
+    const dispatchSeal = () => {
+      if (sealProbe === undefined) sealProbe = readDispatchSeal(rootDir, id);
+      return sealProbe;
+    };
     for (let index = 0; index < retired.length; index += 1) {
       const row = retired[index];
       const at = `${idLabel}.retiredSymbols[${index}]`;
@@ -844,7 +978,26 @@ export function validatePacketManifest(manifest, options = {}) {
       } else if (!TERMINAL_PACKET_STATUSES.has(String(status))) {
         if (!exists) addError(errors, `${at}.path does not exist: ${row.path}`);
         else if (!readRepositoryFile(rootDir, row.path).includes(row.symbol)) {
-          addError(errors, `${at}.symbol is already absent from ${row.path} before ${String(status)}: ${row.symbol}`);
+          // §7.4: the one lawful absence is the packet's OWN sealed build burning its own
+          // retiree. See THE SEALED-BURN EXEMPTION above for why a seal is a receipt and
+          // what each of its four fences refuses. The refusal's sentence is unchanged in
+          // both refusing branches, so a stale seal reads as the same defect PLUS the
+          // reason its seal did not save it.
+          const absence = `${at}.symbol is already absent from ${row.path} before ${String(status)}: ${row.symbol}`;
+          const seal = dispatchSeal();
+          if (!seal) addError(errors, absence);
+          else if (!isAncestorOfHead(rootDir, seal.head)) {
+            addError(
+              errors,
+              `${absence} — dispatch seal ${seal.digest} binds HEAD ${seal.head}, which is`
+              + " not an ancestor of this tree's HEAD: a stale seal is not a licence.",
+            );
+          } else {
+            addNote(
+              `${at}.symbol: retiree burned under seal ${seal.digest}`
+              + ` (bound HEAD ${seal.head}): ${row.symbol}`,
+            );
+          }
         }
       }
     }
@@ -1030,7 +1183,17 @@ export function runImplementationPacketsCli(argv, options = {}) {
   try {
     if (argv.length === 1 && argv[0] === 'validate') {
       const manifest = loadPacketManifest({ rootDir });
-      const result = validatePacketManifest(manifest, { rootDir });
+      /** @type {string[]} */
+      const notes = [];
+      const result = validatePacketManifest(manifest, {
+        rootDir,
+        onNote: (note) => { notes.push(note); },
+      });
+      // Printed BEFORE the verdict, and on both verdicts: a sealed burn is a thing the
+      // reader must be told about whether or not something else reddened the same run.
+      for (const note of notes.sort(compareCodepoint)) {
+        writeLine(stdout, `[implementation-packets] note: ${note}`);
+      }
       if (!result.ok) {
         for (const error of result.errors) writeLine(stderr, `[implementation-packets] ${error}`);
         return 1;

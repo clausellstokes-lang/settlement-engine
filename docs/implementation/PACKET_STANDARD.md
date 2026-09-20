@@ -109,6 +109,13 @@ The operator order for a READY packet is fixed:
    matches; otherwise it reports stale, incomplete, or invalid work and requires
    the affected command to run again.
 
+A non-terminal packet's `retiredSymbols` symbol must still be present, except where that
+packet's own seal in this worktree licenses the absence — the seal is the receipt that the
+symbol was there at dispatch, so `validate:packets` reports such a burn as a printed note
+instead of an error, while a seal naming another packet, another worktree, a payload its
+integrity digest no longer matches, or a HEAD that is not an ancestor of this tree licenses
+nothing and the refusal stands.
+
 Dispatch and resume do not create/delete worktrees, stage, commit, merge, restore,
 clean files, infer affected tests, or interpret or waive semantic line budgets.
 Those remain operator decisions; only the complete `npm run check` chain is landing authority.
