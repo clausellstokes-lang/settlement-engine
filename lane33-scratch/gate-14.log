@@ -1,0 +1,10 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 38021 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/lane-prose-weave
+
+
+ Test Files  3 passed (3)
+      Tests  46 passed | 3 skipped (49)
+   Start at  06:53:39
+   Duration  511ms (transform 62ms, setup 62ms, import 133ms, tests 293ms, environment 0ms)
+

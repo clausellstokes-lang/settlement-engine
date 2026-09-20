@@ -1,0 +1,12 @@
+import { sample63 } from './lib.mjs';
+import { generate } from './seam.mjs';
+const row = sample63().find(r => r.settType === 'city');
+const rec = generate(row);
+console.log('economicState =', JSON.stringify(rec.economicState).slice(0, 2600));
+console.log('\nviability.summary =', rec.economicViability.summary);
+console.log('\njudgment evidences:');
+for (const j of rec.generationCoherenceReceipt.judgments) for (const e of (j.evidence || [])) console.log(`  ${j.id} :: ${e.path} :: ${e.evidence}`);
+console.log('\npowerStructure.publicLegitimacy =', JSON.stringify(rec.powerStructure.publicLegitimacy));
+console.log('powers =', JSON.stringify((rec.powerStructure.factions || []).map(f => f.power)), 'sum=', (rec.powerStructure.factions || []).reduce((a, f) => a + (f.power || 0), 0));
+console.log('income pct sum =', (rec.economicState.incomeSources || []).reduce((a, s) => a + (s.percentage || 0), 0));
+console.log('\nstressors =', JSON.stringify(rec.stressors).slice(0, 700));

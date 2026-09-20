@@ -1,0 +1,201 @@
+{
+  "id": "EM-B1a",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1a.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE OP VOCABULARY AND THE EIGHTEEN HOME OPS (the chair's ruling 1, the split; ruling 2, the membership; ARCH §9 as amended). OP_TYPES holds exactly: set-field, add-institution, remove-institution, set-institution-state, add-npc, remove-npc, set-npc-status, add-faction, remove-faction, set-power-holder, rebalance-power, set-relationship, rename-faction, rename-npc, rename-settlement, set-world-fact, found-phantom, promote-phantom. ⛔ set-state IS STRUCK (system states are DERIVED, design §14) and its absence is asserted BY NAME so a later author cannot restore it silently. Every row carries ALL TEN declared fields — target, payload, stage, consequence, requires, enables, relatedTo, conflictsWith, duration, guards + guardsStated — none optional, none omitted 'when empty': an empty relation is [], an absent duration is null, empty coverage is guards: [] PLUS a non-empty guardsStated. The rigidity is PRICED, not fussiness: EM-B3 persists an Op inside every Decree, so a field added after that lands is a stored-shape change with a migration cost. OP_STAGES and OP_CONSEQUENCE_POLICIES carry BOTH members even though every row here uses `home`, so EM-B1b appends without editing a frozen constant; A3 asserts the off-stage members are declared but provably UNREACHED at this tip. THE THREE NEW ROWS (ruling 2): set-npc-status and set-institution-state take the POST-EM-B1d vocabularies as kind:'enum' — NpcStatus's SEVEN (the tree's six plus the owner's `jailed`) and EntityStatus's SIX (the tree's five plus the owner's `ruined`; 'abandoned' is `vacant`) — FINITE-SEMANTICS, never free text. ⛔⛔ THE TYPEDEF EDITS AND THEIR CONSUMERS ARE **EM-B1d's**, NOT THIS PACKET'S: the chair's ruling (1) allowed them here unless the consumer rows took the packet past three existing logic files, and MEASURED they take it to NINE (two typedef files plus seven enumerating consumers — factionLifecycle.js:75, successors.js:63, envoyCasting.js:98, magicFormsPractitioner.js:79, affordanceManifest.js:197, targetRosters.js:103, SummaryTab.jsx:56). STOP AND SPLIT is declared at the packet's §15 with the full roster, so THIS packet's manifest keeps ZERO existing production files modified and EM-B1d lands FIRST. and `destroyed` (a state the record keeps) is a DIFFERENT act from remove-institution (erasure); set-world-fact DECLARES its payload only, validating `fact` membership over the seven world-fact keys and the PRESENCE of `value`, resolving NO pool and re-deriving NOTHING, because rederive/pins are EM-B2's (design §14 final, HZ-DERIVED). makeOp is PURE and MINTS NO ID (the entry id is EM-C1's stage(); the DM entity id is EM-B2's mintDmId); validateOp is PURE and TOTAL with errors ALWAYS a frozen compareCodepoint-sorted array and ok DERIVED from errors.length. Draws no random number: no prng, no rngContext. ≈231-249 effective against the 250 leaf cap — INSIDE, with ≤19 lines of margin; EM-B1c (the three rename-* ops + set-world-fact, ≈36) is pre-declared as the next split, and crossing 250 is a STOP, never a squeeze. Lands DARK. ⭐ ODQ §934.47 ADD. 6 — THE EDITOR WRITES THE TREE'S EXISTING SHAPES: EntityStatus is NOT widened (lane P2 measured `ruined` live in 22 files as the PULSE's vocabulary, kept apart from the composer's STATUS_REMOVED set by rosterProvenance.js:210). set-institution-state offers the pool {active, impaired, ruined, destroyed, vacant} and writes TWO SHAPES BY VALUE: the four composer values write STATUS_ACTIVE/IMPAIRED/DESTROYED/VACANT; `ruined` writes THE PULSE'S OWN SHAPE through the pulse's ruin path — at the tick on a canonized town, directly on a draft. No union changes, so NO BEHAVIOUR-SHIFT MEASUREMENT IS OWED and this packet's budget is unchanged (a contract, not a file). ⚠⚠ THREE MEASURED CORRECTIONS: the live shape at calamityKernel.js:250-252 has FIVE keys, not two; two of them are CALAMITY-SPECIFIC (worldPulseFate:'destroyed_by_disaster' would be a LIE on a DM decree; remnantReason takes a calamity's string); and ⛔ THE RUIN PATH IS NOT EXPORTED — `ruin` is a module-private arrow inside another function, and calamityKernel's neighbouring exports are promotesTo (:180) and strikeCapForTier (:196), so the ruling's 'name the one the op calls, by symbol' has NO ANSWER at this base. RAISED R4. ⛔⛔ ODQ §934.50 / design §18 — `requires` SPLITS into { world: [...], registry: [...] } on EVERY one of the eighteen rows: the WORLD half names predicates from WORLD_CONDITIONS that decide whether a card OFFERS the seal at all ('not a guard refusing an act but the world's state determining which acts exist'), the REGISTRY half stays the guards' suggestive ordering condition. AT ~+1 EFFECTIVE LINE PER ROW THAT IS +18, taking this leaf from ≈231-249 to ≈249-267 AGAINST THE 250 CAP — so the EM-B1c split pre-declared at §3 is NO LONGER A CONTINGENCY, IT IS REQUIRED: the three rename-* ops plus set-world-fact (four rows, ≈36 effective) leave, taking this leaf to ≈213-231. The lane does not squeeze the rows to avoid it. RAISED R6.",
+      "action": "CREATE",
+      "path": "src/domain/edit/operations.js"
+    },
+    {
+      "_note": "THE WORLD-CONDITION PREDICATES (ODQ §934.50, design §18). WORLD_CONDITIONS is the frozen id -> predicate map; each predicate is (record, campaignState) => boolean, PURE, TOTAL and FALSE-ON-ABSENCE — an absent field yields false, never a throw, so a card simply does not offer the seal. SIX ARE LIVE, MEASURED BY SYMBOL: warInProgress -> atWarWith(graph, worldState, a, b) (roads/embassyHazard.js:74; indexed twin atWarWithIdx at worldPulse/tickIndices.js:413); forceInField -> worldState.deployments[settlementId] (a FIELD with no exported predicate — read at briefs/composers.js:118 and applyWorldPulse.js:409); siegeInProgress -> liveSieges({ worldState, regionalGraph }) (display/warStatus.js:88); tradeWith -> worldState.relationshipStates[edge].relationshipType === 'trade_partner' (the PRIMARY_RELATIONSHIP_TYPES vocabulary); beliefExists -> hasBeliefMaps(worldState) (display/settlementBeliefs.js:188); npcPresent -> NpcStatus === 'active' (EM-B1d's union). ⛔ FOUR ARE HONESTLY ABSENT and are DECLARED with source:'EM-E4', NEVER INVENTED: pendingPeaceOffer (isBilateralPeaceOffer reads an OUTCOME in flight, proposalPayload.peaceOffer === true — there is no standing 'an offer is pending' field), envoyArrived (the army-transit layer projects encounters but carries no 'arrived at us' field), openRoute (the tree states the absence itself at defenseStateProse.js:1498 — 'economicState.tradeRoutes does not exist'), plotInMotion (collectPlotHooks yields dossier NARRATIVE hooks, not a coup-plot state). The four sit in the map, return false until EM-E4 lands their state, and carry their source note AS DATA so a walker can tell a declared-absent predicate from a missing one. ⚠ THIS LEAF EXISTS BECAUSE THE CAP DEMANDED IT, MEASURED: operations.js already estimates ≈231-249 of 250 and ten predicates with their field reads are ~60 effective lines. It makes this packet's new logic-bearing leaves 2 of ≤2 — at the cap exactly. ≈60 effective of 250.",
+      "action": "CREATE",
+      "path": "src/domain/edit/worldConditions.js"
+    },
+    {
+      "_note": "THE ACCEPTANCE — eight arms, ONE literal describe, eight straight-line `it`, no .each / runIf / nested describe (§P3.4). A1 is guard-the-guard and runs FIRST (the eighteen set-equal both directions; every row carrying all ten fields; keys in compareCodepoint order; set-state asserted ABSENT by name). A3 pins the chair's ruling (1): both closed vocabularies exact and frozen, every row stage:'home' AND consequence:'home', the two sets asserted SET-EQUAL to each other so the fields can never drift, and the off-stage members asserted unreached — plus the counterforce that consequenceFor is defined NOWHERE (EM-F1's) and rederive is called nowhere (EM-B2's). A4 is the prevention guard: relational integrity total and symmetric, and NO HOME ROW NAMES AN OFF-STAGE TYPE, so the eighteen are closed over themselves at this tip — the arm EM-B1b re-runs over all twenty-five. A5 proves the rename ops delegate to the existing cascade and define no rename logic of their own (HZ-JOINKEY). A7 pins design §15 in both directions and asserts set-institution-state('destroyed') and remove-institution are DISTINCT op types. A8 carries the ok/errors invariant and proves set-world-fact resolves no pool. Every negative carries its `// anchored:` marker on the line immediately above it. A CREATE row, not TEST — the validator refuses a non-CREATE row whose path does not exist (:709).",
+      "action": "CREATE",
+      "path": "tests/domain/editOperations.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE RENAME CASCADE'S WHOLE-SETTLEMENT WRITER, and the reason a name is never plain `free` (design §12.3, HZ-JOINKEY). MEASURED: (settlement, oldName, newName) -> { changed: boolean, touched: string[] }, returning { changed:false, touched:[] } when the settlement is not a record, either name is falsy, OR oldName === newName. rename-faction declares it as its writer and this packet re-implements no part of it. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function applyFactionRenameToSettlement"
+    },
+    {
+      "_note": "THE CASCADE'S PATCH FORM — (settlement, oldName, newName) -> { changed, touched, changes: StoredRecord }, deep-cloning only the CASCADE_BUCKETS actually present. Named so the op declares WHICH cascade entry point it means; a store writer takes this one. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function factionRenameChanges"
+    },
+    {
+      "_note": "THE NPC HALF of the cascade, for rename-npc. Its own header records that the two NPC homes were once walked separately and DRIFTED — 'the drift IS the bug this replaced' — which is exactly why the op delegates rather than re-implementing. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function applyNpcRenameToSettlement"
+    },
+    {
+      "_note": "The NPC cascade's patch form, the sibling of factionRenameChanges. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function npcRenameChanges"
+    },
+    {
+      "_note": "THE ONE WAY to turn a faction index into the faction a rename targets — makeOp's target resolution for rename-faction. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function resolveFactionForRename"
+    },
+    {
+      "_note": "THE DECLARED JOIN SURFACES — the frozen evidence that a faction name is a JOIN KEY and not flavour, each row { path, kind, why }, with the NPC family SPREAD across NPC_HOMES so the two homes cannot drift. This is the list EM-A3's flavor census reads for its value-join half, and the list A5 scans to prove this module re-implements none of its paths. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const FACTION_RENAME_SURFACES"
+    },
+    {
+      "_note": "The NPC rename's own declared surface list, the sibling of the above. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const NPC_RENAME_SURFACES"
+    },
+    {
+      "_note": "THE TOTALITY WRITER rebalance-power DECLARES as its fulfil writer (design §12.8; ARCH §5). ⚠ MEASURED AND LOAD-BEARING: IT MUTATES IN PLACE — `factions[s.i].power = s.floor` — and returns the SAME array reference; largest-remainder to an exact sum of 100 with ties broken by current order; it returns the argument unchanged when the roster is empty or every power is <= 0. This packet CALLS it nowhere (EM-C3 does); the mutation is recorded here because a later caller that assumed purity would corrupt a roster. Proven present: grep -c -> 1.",
+      "path": "src/generators/power/rulingStructure.js",
+      "symbol": "export const renormalizeFactionPower"
+    },
+    {
+      "_note": "⛔ NAMED BECAUSE IT EXISTS AND THE FINDING IS ACCEPTED (the chair's ruling 7) — AND IT IS REFUTED AS THE PREREQUISITE RULE'S SOURCE. MEASURED: (institutions, tier, _magicPriority) -> string. Its entire body is a keyword ladder over institution names returning a NARRATIVE SENTENCE through pickRandom (e.g. \"The great cathedral's spire is the tallest thing for miles.\"). No boolean, no violation list, no verdict — and it CONSUMES A DRAW. EM-B1a calls it nowhere; the row exists so EM-C3's compiler finds the correction in the manifest rather than re-discovering it. Proven present: grep -c -> 1.",
+      "path": "src/generators/structuralValidator.js",
+      "symbol": "export const checkInstCompat"
+    },
+    {
+      "_note": "THE REAL VALIDITY CHECKER, half of ruling (7)'s correction: (institutions, config = {}) -> { violations, suggestions }. This packet calls it nowhere; it is named so the prerequisite rule's true ground is findable from here when EM-C3 compiles. Proven present: grep -c -> 1.",
+      "path": "src/generators/structuralValidator.js",
+      "symbol": "export const checkStructuralValidity"
+    },
+    {
+      "_note": "THE REAL PREREQUISITE TABLE, the other half of ruling (7)'s correction — a live `requires` map whose first rows are exactly the design's example shape: Citadel requires 'City walls and gates' / 'Massive walls and fortifications' ('Inner fortress requires outer defenses'), and 'Gates (if walled)' requires a wall and carries suggestionOnly: true with its own reason. This, not a sentence generator, is what a prerequisite guard reads. Proven present: grep -c -> 1.",
+      "path": "src/data/spatialData.js",
+      "symbol": "export const GATE_FEATURES"
+    },
+    {
+      "_note": "THE CATEGORY VOCABULARY. MEASURED: 13 frozen values. ⭐ NAMED FOR `category`, NOT `archetype` — the chair's fact (2) and this lane's measurement agree that no faction record carries `type` or `archetype`: the pushes at rulingStructure.js carry faction/power/desc/isGoverning, `category` is read live at economyReconciliation.js:68 and relationshipArchetypes.js:10,55, and factionArchetype(f) at factionArchetypes.js:103 DERIVES the archetype FROM f.category — a derivation design §14 forbids editing. set-field and add-faction therefore spell `category`. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionArchetypes.js",
+      "symbol": "export const FACTION_ARCHETYPES"
+    },
+    {
+      "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. OP_TYPES' key order is authored and asserted through it (so a new row cannot be appended 'wherever'), and validateOp's errors array is sorted with it (so a three-error case has one exact expected order). Proven present: grep -c -> 1.",
+      "path": "src/domain/deterministicSort.js",
+      "symbol": "export const compareCodepoint"
+    },
+    {
+      "_note": "THE GENERATION WRITER OF governingName (W1), and the contract fact (1)'s ground: `governingName: (factions.find((f) => f.isGoverning) || {}).faction || null`, whose own comment is the law — 'Sim consumers (factionProfile legitimacy inheritance, ruling_authority governing-faction power, hook escalation, simulation spine, world-event legitimacy deltas) key off this field; it must always name the faction entry that carries isGoverning.' THIS IS WHY set-power-holder MOVES THE FLAG AND LETS THE NAME FOLLOW. Proven present: grep -c 'export const generatePowerStructure' -> 1.",
+      "path": "src/generators/power/rulingStructure.js",
+      "symbol": "export const generatePowerStructure"
+    },
+    {
+      "_note": "THE TRANSFER OF POWER (W2) — set-power-holder's DECLARED WRITER. MEASURED at rulingPower.js:657: it returns a settlement whose powerStructure carries `governingName: toGovernment, government: toGovernment` together with previousGovernments, publicLegitimacy and stability, so the seat, both name fields and the record of what the seat used to be move as ONE act. A third site, economyReconciliation.js:277, is a PROPAGATION (it copies projected.governingName), not an independent decision. ⛔ The op writes none of them directly. Proven present: grep -c 'previousGovernments' src/domain/rulingPower.js -> 4.",
+      "path": "src/domain/rulingPower.js",
+      "symbol": "previousGovernments"
+    },
+    {
+      "_note": "THE NPC STATUS VOCABULARY, THE TREE'S OWN — and it REFINES the chair's fact (3). MEASURED: NpcStatus = 'active'|'dead'|'missing'|'exiled'|'retired'|'removed' — SIX, with no `jailed` (the seventh the chair's message named) and no `departed`/`present` (design §15's prose). set-npc-status spells the TREE's six, because the same fact rules the existing ops-layer writers are the op's writer and a value outside their typedef would break them. `jailed` is RAISED, never invented. Proven present: grep -c 'NpcStatus' -> 3.",
+      "path": "src/domain/entities/npcs.js",
+      "symbol": "NpcStatus"
+    },
+    {
+      "_note": "THE OPS-LAYER WRITER the chair's fact (3) names — `status: input.status || 'active'` at :133 is where the field is created, and killNpc at :158 writes 'dead'. set-npc-status CREATES the field on an NPC that lacks it (measured: it exists today on roughly one NPC in ten, the structural seats, value 'active') through THIS writer and its sibling in src/domain/events/mutateEntities.js — ⛔ never a second path. Proven present: grep -c 'export function createNpc' -> 1.",
+      "path": "src/domain/entities/npcs.js",
+      "symbol": "export function createNpc"
+    },
+    {
+      "_note": "THE INSTITUTION STATE VOCABULARY, THE TREE'S OWN. MEASURED: EntityStatus = 'active'|'impaired'|'removed'|'destroyed'|'vacant' — FIVE, each with its authored gloss ('removed — institution closed, NPC departed, faction dissolved (recoverable)'; 'destroyed — physical destruction; rebuild required'), and no `ruined`, `abandoned` or `under-construction` (design §15's prose). ⭐ `destroyed` and `removed` are already DISTINCT here, which is §15's 'destruction is a state the record keeps; removal is erasure' true in the tree before the editor exists. Proven present: grep -c 'EntityStatus' -> 2.",
+      "path": "src/domain/entities/status.js",
+      "symbol": "EntityStatus"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "MAIN BEHAVIOUR AND GUARD-THE-GUARD, ASSERTED FIRST: OP_TYPES holds exactly the EIGHTEEN home types, set-equal both directions with a full offender list; EVERY row carries all ten declared fields of the declared type with guardsStated non-empty; Object.keys(OP_TYPES) is in compareCodepoint order; set-state is asserted ABSENT BY NAME (the chair's ruling 2; design §14 — system states are derived), so restoring it reds; and makeOp('set-field', { kind:'institution', id:'i1' }, {...}) returns an Op carrying the declared stage, consequence and four relations."
+    },
+    {
+      "id": "A2",
+      "case": "ABSENCE AND MALFORMED INPUT — NOTHING THROWS. An unknown type, a null target, { kind:'nonsense' }, a string op, undefined, and a payload with an undeclared key: makeOp returns null for each and validateOp returns { ok:false, errors:[...] } with the NAMED error, never a throw and never a partial op. validateOp(null) returns exactly errors: ['op is absent']. An omitted required payload field names that field; an enum value outside spec.values names that field. ⭐ AND THE WORLD HALF (§934.50): for a row whose requires.world names a predicate, a world in which that predicate is FALSE means the op IS NOT OFFERED, and a planted TRUE means it is — asserted inside this case, not as a new one. The four source:'EM-E4' predicates are asserted to return FALSE and to carry their source note, so a declared absence is never mistaken for a bug."
+    },
+    {
+      "id": "A3",
+      "case": "THE SEAT'S FLAG, AND THE STAGE PARTITION SET-EQUAL. set-power-holder's payload names a HOLDER and its declared writer is src/domain/rulingPower.js's transfer path; a source scan proves this module writes neither governingName nor government (matcher proved live on a planted string) — the name FOLLOWS the isGoverning flag, as rulingStructure.js's own comment requires ('it must always name the faction entry that carries isGoverning'). Then: OP_STAGES is exactly ['home','off-stage'] and OP_CONSEQUENCE_POLICIES exactly ['home','by-target-reality'], both frozen; every one of the eighteen rows is stage:'home' AND consequence:'home'; the two sets are SET-EQUAL so the fields can never drift; the off-stage members are declared but provably UNREACHED at this tip. Counterforce: consequenceFor is defined NOWHERE (EM-F1's) and rederive is called nowhere (EM-B2's)."
+    },
+    {
+      "id": "A4",
+      "case": "RELATIONAL INTEGRITY, TOTAL AND CLOSED — the prevention guard. Every string in every requires / enables / relatedTo / conflictsWith array is a key of OP_TYPES, reported as a full offender list; conflictsWith is symmetric in both directions; requires and enables are exact inverses; relatedTo is symmetric. NO HOME ROW NAMES AN OFF-STAGE TYPE — the eighteen are closed over themselves at this tip, asserted by name, which is the arm EM-B1b re-runs over all twenty-five. ⭐ AND THE TWO KINDS ARE KEPT APART: every requires.world entry is a key of WORLD_CONDITIONS (full offender list) and every requires.registry entry is an OP_TYPES key — a world predicate appearing in the registry half, or an op type in the world half, reds. This is what stops the guards from judging a condition the card should have decided, and vice versa."
+    },
+    {
+      "id": "A5",
+      "case": "BOUNDARY — THE RENAME OPS DELEGATE AND RE-IMPLEMENT NOTHING. Each of the three rename-* types declares the right target kind, a single required name field, stage:'home', consequence:'home', and names the existing cascade as its declared writer. A source scan proves this module defines no rename logic of its own and re-implements no path listed in FACTION_RENAME_SURFACES — the join-key law honoured by delegation (HZ-JOINKEY) — with the matcher proved live on a planted string."
+    },
+    {
+      "id": "A6",
+      "case": "PURITY, DORMANCY AND THE IMPORT FENCE. makeOp and validateOp are proved pure: identical inputs give toEqual results, the input payload object is proved unmutated against a pre-call clone, and 100 calls change nothing observable. The import list is asserted EXACTLY and contains NONE OF src/kernel/prng.js, src/kernel/rngContext.js, any src/store/** path, any src/components/** path, and no force / muster / casualty / upkeep module. A source scan over src/** finds ZERO importers of this leaf, with guard-the-guard arms on both the walk and the matcher."
+    },
+    {
+      "id": "A7",
+      "case": "THE TWO VOCABULARIES ARE THE TREE'S, AND THE FIELD IS `category`. set-npc-status.payload.status is kind:'enum' with exactly the NpcStatus six (active, dead, exiled, missing, removed, retired) and set-institution-state.payload.state exactly the EntityStatus five (active, destroyed, impaired, removed, vacant) — each PARSED FROM ITS OWN TYPEDEF'S SOURCE FILE by the test so a typedef edit reds here; neither is kind:'free' (FINITE-SEMANTICS). `jailed` — named in design §15's prose and in the chair's fact (3) but absent from the typedef — is asserted ABSENT BY NAME, a recorded verdict rather than an oversight. set-field and add-faction spell `category`, never `archetype` or `type`, asserted by a source scan finding no such payload key, because archetype is a DERIVATION design §14 forbids editing. And set-institution-state('destroyed') and remove-institution are asserted DISTINCT op types. ⭐ AND THE TWO WRITE SHAPES (§934.47 add. 6): set-institution-state's pool is exactly {active, impaired, ruined, destroyed, vacant}; the four composer values are asserted to write the STATUS_* constants, and `ruined` is asserted to write the PULSE's shape (status:'ruined' with _worldPulseInactive:true) and NOT a composer constant. ⛔ EntityStatus is asserted UNWIDENED at its five, so the op offering `ruined` can never be read as having added it to the union."
+    },
+    {
+      "id": "A8",
+      "case": "THE ok/errors INVARIANT, AND set-world-fact AS A DECLARATION. For every case in a table of valid and invalid ops, result.ok === (result.errors.length === 0) — the two can never disagree, because ok is derived rather than set. errors is FROZEN and compareCodepoint-sorted, with a three-error case asserted in exact sorted order. set-world-fact validates `fact` membership against the seven world-fact keys and the PRESENCE of `value`, and is asserted NOT to resolve any pool and NOT to re-derive anything — proved by a source scan finding no rederive call and no pool import, so the design §14 engine stays EM-B2's."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/editOperations.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/operations.js",
+      "tests/domain/editOperations.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

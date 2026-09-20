@@ -1,0 +1,68 @@
+{
+  "id": "EM-R0c",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0c.md",
+  "_verifiedBaseNote": "Compiled and measured at claude/composite-r4 32602dc607b7423838249cf57d73baf08feb047d. The chair stamps the base at or AFTER EM-R0a, EM-R0b, EM-R0d and EM-R0f have LANDED: the sealed dispatch's substrate check names src/domain/edit/recordRegister.js, src/domain/edit/recordInvariants.js and src/data/economyFingerprint.js, none of which exists at 32602dc60.",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    { "action": "CREATE", "path": "src/domain/edit/recordMergeTree.js", "symbol": "mergeTree" },
+    { "action": "CREATE", "path": "src/domain/edit/mergeConsequence.js", "symbol": "mergeConsequence" },
+    { "action": "TEST", "path": "tests/domain/recordMerge.test.js" }
+  ],
+  "_changeManifestNote": "THREE rows, set-equal with the packet's section 7 table. No MODIFY row, no REGISTER row, no generated artifact: tests/domain is not a mutation-coverage ENFORCER_DIR and 'recordMerge' matches no NAME_PATTERN token; the lighting-census baseline is NEVER a packet row (EM-PREAMBLE section P2.1) and is re-derived whole by the chair at the train's terminal; no src/ path of this packet is an input to any of the five edge-shared bundle metas.",
+  "requiredSymbols": [
+    {
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline",
+      "_note": "The acceptance test builds its 63-row stride through this entry, exactly as tests/property/generatorGoldenMaster.test.js does. PROVEN at 32602dc60: grep -cF -> 1. POST-EDIT SIMULATION: this packet does not touch that file, so the text is present verbatim after its own edits; no retiredSymbols row is owed and no other LANDED packet's row for this (path, symbol) pair is disturbed."
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export function goldenCorpus",
+      "_note": "PROVEN at 32602dc60: grep -cF -> 1. Untouched by this packet's edits."
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export const keyOf",
+      "_note": "PROVEN at 32602dc60: grep -cF -> 1. Untouched by this packet's edits."
+    },
+    {
+      "path": "tests/build/domainGeneratorsBoundary.test.js",
+      "symbol": "const BASELINE_EDGES",
+      "_note": "The shrink-only domain->generators ratchet, in this packet's checks. PROVEN at 32602dc60: grep -cF -> 1. The live edge set measures FOUR files / FIVE edges, identical to the baseline; this packet adds none and removes none, so the text and the frozen set are both unchanged after its edits."
+    },
+    {
+      "_pending": "ADDED BY THE CHAIR AT PROMOTION, once EM-R0a, EM-R0b and EM-R0f are LANDED. These seven symbols DO NOT EXIST at this compile's tip 32602dc60 (measured: 'file absent' for all three paths), so naming them as requiredSymbols now would break the standard's rule that a required symbol is present at the verified base. They are the symbols the deliverable CALLS and must find unchanged.",
+      "symbols": [
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const RECORD_CLASSES", "owner": "EM-R0a" },
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const CLASS_EXCEPTIONS", "owner": "EM-R0a" },
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const KEYED_COLLECTIONS", "owner": "EM-R0a" },
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const ATOMIC_COLLECTIONS", "owner": "EM-R0a" },
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const CONSISTENCY_GROUPS", "owner": "EM-R0a" },
+        { "path": "src/domain/edit/recordInvariants.js", "symbol": "export function recordInvariants", "owner": "EM-R0b" },
+        { "path": "src/data/economyFingerprint.js", "symbol": "export function fingerprintPowerEconomyInput", "owner": "EM-R0f (proposed by this compile; see the packet's section 3.1)" }
+      ],
+      "_blocked": "An EIGHTH symbol, CHECK_META (or any per-check map from a check id to the top-level key(s) it relates), is REQUIRED by design section 22.2 item 3 and section 22.3 item 5 for the escalation ladder's cross-key first step. EM-R0b VERSION 2 AS ACCEPTED EXPORTS NO SUCH SYMBOL and its Violation typedef is { id, path, message, kind } with no keys. This is the packet's STOP-4 and the report's question 2."
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "EMPTY, and proved rather than asserted: this packet's edits are two CREATEs under src/domain/edit/ and one CREATE under tests/domain/. It moves, renames and deletes no symbol at any path, and it touches no file that any requiredSymbols row of any packet names. The one retirement in this neighbourhood belongs to EM-R0f, which owes a retiredSymbols row for 'export function fingerprintPowerEconomyInput' at src/generators/power/economyReconciliation.js unless it keeps that text with a forwarding re-export; EP-0 (LANDED) holds a row on the same file for 'rngSeed: stepRng.fork(POWER_STREAM).seed,', which sits below the moved region and is undisturbed either way.",
+  "acceptanceCases": [
+    { "id": "A1", "case": "IDENTITY AND THE WRITE BASE. Over the 63-row stride, mergeConsequence(record, X, X) with X deep-equal on both sides returns a record byte-identical to the record; the caller's record is unmutated; NO key of `record` is absent from the result (the chair's 2026-09-19 20:16 contract, ODQ 934.60, executed); escalations and readings are both empty. Executed: 63/63 identical, 0 mutated, 0 keys lost, 0 escalations, 0 readings." },
+    { "id": "A2", "case": "THE GROUP IS THE UNIT - a label never sits beside a flag that contradicts it. With economicState.foodSecurity.label differing between R0 and R1 and isSecure identical in both, the merged group is R1's WHOLE. enclosingGroup('economicState.foodSecurity.label') is 'food-security'; enclosingGroup('availableServices.legal') is null (a measured NON-group, design 22.3 item 4). THE PAIRED NEGATIVE: with the group rule off, the same inputs produce the contradictory pair. Executed: 63/63 whole, 0 split." },
+    { "id": "A3", "case": "ABSENT IS A VALUE, AND NOTHING IS MERGED BY POSITION. When R0 and R1 agree on a collection LONGER than the record's, the record's own array stands unpadded; a key both re-derivations carry and the record does not stays ABSENT from the result. Executed: 63/63 and 63/63." },
+    { "id": "A4", "case": "KEYED BY THE DECLARED KEY. With R1's availableServices.food permuted and one entry changed, the changed entry joins BY NAME, every other entry is byte-identical to the record's, and the order arm is COUNTED in delta.orderMoved. Executed: 31/31." },
+    { "id": "A5", "case": "A CROSS-ENTRY TOTAL IS ATOMIC (design 22.3 item 3). economicState.incomeSources - whose shares total 100 - comes from R1 as ONE value, never entry by entry beside settled neighbours. Executed: 61/61." },
+    { "id": "A6", "case": "THE ORDER RULE'S TWO ARMS, on economicState.activeChains - the READING collection the corpus itself re-ordered 43 of 67 times. NEVER on institutions: it is HELD, the tree merge never reaches it, and an arm written there measures 0 and proves nothing. Arm 1: R0 and R1 agree on the commons' order, so the record's order stands and delta.orderMoved is silent. Arm 2: R1 reverses them, so R1's order governs and delta.orderMoved names the collection. Executed: 55/55 and 55/55." },
+    { "id": "A7", "case": "MIRRORS RECOMPUTED, THE RECEIPT RECOMPUTED AND NEVER TAKEN. recomputeMirrors is a no-op on a plain record; after a role change the member chip follows the merged roster. With R1 carrying a planted digest and a changed prosperity, the merged record's economyInputFingerprint is the RECOMPUTED value, never R1's (taking R1's is WRONG for the merged record in 31 of 315 measured trials). Executed: 63/63, 63/63, 63/63." },
+    { "id": "A8", "case": "THE CHAIN IS THE SEMANTICS. An ARRAY of edits throws TypeError with the law in the message; a single edit yields delta.appliedEdit as a STRING; delta.nextBase is R1 (the next edit's R0); delta.orphaned is the op's EM-R6 rows verbatim and [] when the op has none; and the module's export list is enumerated in the assertion so NO exported symbol takes more than one edit. Executed: throws, string, true, verbatim, 5 exports enumerated." }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/domain/edit/mergeConsequence.js", "src/domain/edit/recordMergeTree.js", "tests/domain/recordMerge.test.js"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/recordMerge.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/build/domainGeneratorsBoundary.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js"]
+  ],
+  "_checksNote": "NO GENERATOR is among these commands, so section P2.12's 'a generator goes LAST' rule has nothing to order and this packet declares no generated path. npm run typecheck:domain:strict runs scripts/check-domain-strict.mjs, which writes its baseline ONLY under --update (script lines 40 and 138) and is therefore a read-only check. One test directory per vitest array."
+}

@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+import io, sys
+stamp = sys.argv[1]
+ODQ = "docs/OWNER_DECISION_QUEUE.md"; CH = "docs/implementation/charters/EDIT-MODE-TRAIN.md"
+body = ("**THE SEVENTH REFREEZE `578272a99`** at the composed tip d279d13eb: the door printed `files 2656 → 2664, parked 383 → 359, credited 2273 → 2305, titles 25080 → 25501, suiteTitles 6684 → 6812`; the plain run 34/34. RECONCILED against the seven composed lanes' declared deltas (files +8: P3 +5, P4 +1, P5 +1, P1 +1; parked −25: L1; credited +33; titles +429: L1 +330, P3 +36, P4 +16, P5 +16, P1 +27, C2b +3, 13b +1; suites +130: L1 +108, P3 +10, P4 +4, P5 +3, P1 +5) — the measurement differs by EXACTLY one PARKED new test file: parked −24 (not −25), credited +32 (not +33), titles +421 (−8), suites +128 (−2) — every figure explained by one new file of 8 titles and 2 suite titles that the walker PARKS while its lane declared it credited. COMPOSE-REPROOF-1 names it (the walker's own `parkReasonsFor` over the eight files new since fb39b1ad6) and says whether the park is the grammar's or a defect the lane cures at the next sitting. "
+ "**COMPOSE-REPROOF-1 DISPATCHED at 578272a99** (one Opus verify lane; every composed lane's declared count lines once, by directory; the expected red now only the provenance title; the gate granted at dispatch). **RUN 22 LAUNCHED at 11:59:47** in the consist detached at 578272a99 (log `<SP>/consist-check-2-run22.log`; its one expected red the provenance title — §934.71; the chair's build + `verify:dist` at the same tip follow separately because the `&&` chain stops at the ratchet on that red). "
+ "**THE FOURTH PREAMBLE AMENDMENT `2dc08a595`** (EM-PREAMBLE.md SHA-256 `ce516004…af4b` → `c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675`): §P2 row 11 gains the sentence that the generation worker's byte budget has NO PLACEMENT CURE — `worker.rollupOptions` is unset, `manualChunks` never runs for a worker build, every worker entry is its own rollup build, a worker byte is bought back inside the worker's own files (TOOL-12's measurement; addenda 83, 87); the script self-verified the fact against `vite.config.js`'s worker block; every member placed from here cites the new hash — EM-R0a first, at this sitting. "
+ "**SEATS:** gate = FIX-B2 (exclusive builds) · COMPOSE-REPROOF-1 · run 22 (the chair's terminal); queue = FIX-D9 → FIX-T2 → TOOL-19 → TOOL-15 → TOOL-22 → TOOL-24 → FIX-K1 → TOOL-7a → TOOL-9 → TOOL-8a → FIX-P2 → FIX-D7 → FIX-T1 → FIX-D8 → the dead agents; working = (EM-R0a's sealed build after its placement).")
+line = ("- **§934.47 addendum 96 — THE SEVENTH REFREEZE (`578272a99`: `2664·359·2305·25501·6812`) RECONCILED TO THE SEVEN LANES' DELTAS WITH EXACTLY ONE NEW PARKED FILE (named by the re-proof); COMPOSE-REPROOF-1 DISPATCHED; RUN 22 LAUNCHED AT THE COMPOSED TIP; THE FOURTH PREAMBLE AMENDMENT (`2dc08a595`; SHA `c9f33c8d…6675` — the worker budget has no placement cure) (2026-09-20 " + stamp + " EDT; the chair; vetoable).** " + body)
+u = io.open(ODQ, encoding="utf-8").read()
+key = "- **§934.47 addendum 95 —"; assert u.count(key) == 1 and "addendum 96 —" not in u
+i = u.index(key); j = u.index("\n", i); u = u[:j + 1] + line + "\n" + u[j + 1:]
+io.open(ODQ, "w", encoding="utf-8").write(u)
+c = io.open(CH, encoding="utf-8").read(); assert "addendum 96" not in c
+if not c.endswith("\n"): c += "\n"
+c += ("\n## Amendments of 2026-09-20 " + stamp + " EDT — the seventh refreeze; run 22; the fourth preamble amendment (ODQ §934.47 addendum 96)\n\n"
+      "- **The fourth preamble amendment is in force** (`2dc08a595`; SHA `c9f33c8d…6675`): the worker budget has no placement cure. EM-R0a is placed under it at this sitting; every later member cites it.\n"
+      "- **One new test file is parked by the walker's grammar at the composed tip** (8 titles / 2 suites); its lane cures or the park is accepted with the reason at the next sitting, on COMPOSE-REPROOF-1's naming.\n")
+io.open(CH, "w", encoding="utf-8").write(c)
+print("ODQ addendum 96:", io.open(ODQ, encoding="utf-8").read().count("addendum 96 —"), "| charter amended")

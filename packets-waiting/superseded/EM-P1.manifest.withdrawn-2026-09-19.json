@@ -1,0 +1,242 @@
+{
+  "id": "EM-P1",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-P1.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "⛔⛔ THE NPC MINT, AT NET ZERO EFFECTIVE LINES. `npc.id = `npc_${idx + 1}`` (:1631) makes an NPC's identity its ARRAY INDEX; it is replaced one-line-for-one-line by a mint in the step's own DRAW ORDER. MEASURED: this file is 1345 effective against a FROZEN scripts/.size-baseline.json entry of 1345 — ZERO HEADROOM — and eslint.config.js:89-97 turns that entry into a per-file max-lines override that tests/lint/sizeBaseline.test.js keeps shrink-only. The mint CONSUMES NO PRNG DRAW: it numbers what the stream already produced, which is what lets A5 assert that no value, count, name or ordering moves.",
+      "action": "MODIFY",
+      "path": "src/generators/npcGenerator.js"
+    },
+    {
+      "_note": "THE INSTITUTION MINT. There is NO general institution id today — the only `id:` in the file is `repair.${n}` at :701 — and identity is the DISPLAY NAME (institutions.find(i => i.name === instName) at :426 and :492), which design §12.3 makes a free-cascade field the DM may change. `inst:<n>` is minted once per admitted row in admission order, before any sort. 571 effective against the 800 generator ceiling, no baseline entry.",
+      "action": "MODIFY",
+      "path": "src/generators/steps/assembleInstitutions.js"
+    },
+    {
+      "_note": "THE FACTION MINT. `id: `faction.${slug(name)}`` (:142) derives the id FROM THE NAME, so a rename — the very act §12.3 routes through the cascade — changes it. Replaced by `fac:<n>` in draw order. 45 effective, ceiling 800.",
+      "action": "MODIFY",
+      "path": "src/generators/density/densityAscension.js"
+    },
+    {
+      "_note": "THE UNCONDITIONAL v3 MIGRATION. migrateSaveToV2 (:190) runs on EVERY read AND write path (:331, :443, :503, :684, :713, :743, :775, :850) — its own comment at :195 says so, which is why it already recovers the seed for saved rows. The v3 arm back-fills missing ids in STORED ARRAY ORDER, keeps present ones, and leaves a foreign id ALONE. ⛔ NO FLAG, NO ENV READ, NO CONDITIONAL (PACKET_STANDARD 'Ungated persistence'). ⛔ It does NOT bump SCHEMA_VERSION and does NOT append to the MIGRATIONS chain — either would move all 525 golden rows for a second, unrelated cause. ⚠ THE RECORDED ASYMMETRY: a save whose roster was reordered before migration gets ids that are stable from now on but need not match a fresh generation's; A8 pins it so no later lane reads it as a bug. 619 effective, ceiling 800, no baseline entry.",
+      "action": "MODIFY",
+      "path": "src/lib/saves.js"
+    },
+    {
+      "_note": "THE IDENTITY BATTERY — A1–A8. A3 and A4 are the defect's direct negative controls: a RENAME does not move an id (the faction slug did) and a ROSTER EDIT does not re-point one (the npc index did). A5 is the no-draw proof. A7 is the ungated-persistence source scan. A8 pins both the foreign-id rule and §6's recorded asymmetry. Copies tests/domain/settlementMigrations.test.js's idempotency, purity and nullish arms; flat literal it(...) only (EM-PREAMBLE §P3.4).",
+      "action": "CREATE",
+      "path": "tests/domain/entityIdentity.test.js"
+    },
+    {
+      "_note": "⚠ CONDITIONAL ROW — add it ONLY IF enumerateInvariants picks the file. tests/domain is not one of the eight ENFORCER_DIRS and `entityIdentity` matches no NAME_PATTERN token, so measured, the meta-test does NOT demand a row. The implementer runs the measurement and adds nothing the meta-test does not ask for — a volunteered row is as much a drift as a missing one.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "⛔ THE DEFECT, NPC HALF: the id IS the array index. Three estate modules recorded the consequence independently (locksPreservation.js:228, characterDrift.js:17, characterEdit.js:51-53). Replaced at net zero.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "npc.id = `npc_${idx + 1}`;"
+    },
+    {
+      "_note": "The sole npc roster writer and the mint's host.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateNPCs = ("
+    },
+    {
+      "_note": "⛔ THE DEFECT, INSTITUTION HALF: identity is the DISPLAY NAME, and a name is a free-cascade field the DM may change.",
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "institutions.find(i => i.name === instName)"
+    },
+    {
+      "_note": "The institution roster's producing step — the mint's host and the admission order it numbers in.",
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs']"
+    },
+    {
+      "_note": "⛔ THE DEFECT, FACTION HALF: the id is a slug of the NAME.",
+      "path": "src/generators/density/densityAscension.js",
+      "symbol": "id: `faction.${slug(name)}`"
+    },
+    {
+      "_note": "The faction deriver, read so the mint sits where the id is written today rather than in a second place.",
+      "path": "src/generators/power/factionGrouping.js",
+      "symbol": "export const generateFactions = (npcs, relationships) => {"
+    },
+    {
+      "_note": "⭐ THE FACT THAT MAKES AN ID A FACT OF THE SEED: each step draws from a stream forked by its NAME, so a mint numbering that step's own draw order is stable for the seed forever. NOT EDITED.",
+      "path": "src/generators/pipeline.js",
+      "symbol": "const stepRng = rng.fork(name);"
+    },
+    {
+      "_note": "THE MIGRATION SEAM. Its own comment records the property this packet needs — it runs on every read AND write path — which is why a v3 arm inherits that reach and satisfies the ungated-persistence law by construction.",
+      "path": "src/lib/saves.js",
+      "symbol": "function migrateSaveToV2(entry)"
+    },
+    {
+      "_note": "The one save service every read and write goes through; no second migration path may be minted.",
+      "path": "src/lib/saves.js",
+      "symbol": "export const saves"
+    },
+    {
+      "_note": "⛔ NOT APPENDED TO. A new MIGRATIONS entry would force a SCHEMA_VERSION bump, and that moves every golden row for a cause unrelated to identity.",
+      "path": "src/domain/settlementMigrations.js",
+      "symbol": "export function migrateSettlementToLatest"
+    },
+    {
+      "_note": "⛔ NOT BUMPED. It is 1; normalizeSettlement.js:167 stamps it into every settlement and the golden hashes the whole blob, so a bump re-records all 525 rows.",
+      "path": "src/domain/settlement.schema.js",
+      "symbol": "export const SCHEMA_VERSION"
+    },
+    {
+      "_note": "The golden's hashing seam over the 525-row fixture — candidate mover #1, and the only one that hashes a whole settlement alongside townCartographyCalibration.",
+      "path": "tests/property/generatorGoldenMaster.test.js",
+      "symbol": "function hashFor(config)"
+    },
+    {
+      "_note": "⭐ THE DOOR, AND IT IS THE CHAIR'S. The estate's one re-record mechanism, driven by UPDATE_GOLDEN=1. The implementer MEASURES which of the eight candidate suites move and STOPS; the chair executes the door ONCE over the measured movers under the signed cause. 44 golden fixtures and 46 recordGolden call sites exist, which is why a guessed set would turn a one-time re-record into two.",
+      "path": "tests/helpers/goldenRecordDoor.js",
+      "symbol": "export function recordGolden"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 1 — EM-P1b's, not this packet's (it would be existing logic file FOUR). Named so it cannot be re-found as new.",
+      "path": "src/domain/locksPreservation.js",
+      "symbol": "npc_3"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 2 — EM-P1b's. Its own comment records the rebind: a keeper moved npc_6 to npc_8 while npc_6 came to name a different person.",
+      "path": "src/domain/npc/characterDrift.js",
+      "symbol": "npc_6"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 3 — EM-P1b's. The id-keyed sidecar family whose header states the defect in full.",
+      "path": "src/domain/npc/characterEdit.js",
+      "symbol": "export const AUTHORED_MARKER_KEY"
+    },
+    {
+      "_note": "The save row's closed 17-key patch surface — NOT widened: the ids ride inside the settlement blob, which is already a patch key.",
+      "path": "src/store/settlementSliceHelpers.js",
+      "symbol": "export const SAVED_SETTLEMENT_PATCH_KEYS"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE MINT: a freshly generated settlement carries npc:<n> / inst:<n> / fac:<n> on every NPC, institution and faction — complete, unique within its kind, and 1-based contiguous."
+    },
+    {
+      "id": "A2",
+      "case": "⛔ SAME SEED, SAME IDS: two generations at one seed produce identical ids for every entity — the property EM-B2a's layer keys rest on."
+    },
+    {
+      "id": "A3",
+      "case": "⛔ A RENAME DOES NOT MOVE AN ID: renaming a faction and an institution leaves both ids unchanged — the direct negative control for `faction.${slug(name)}` and for name-keyed institution lookup."
+    },
+    {
+      "id": "A4",
+      "case": "⛔ A ROSTER EDIT DOES NOT RE-POINT AN ID: removing the second of five NPCs leaves the remaining four with their original ids, none renumbered — the direct negative control for `npc_${idx+1}`."
+    },
+    {
+      "id": "A5",
+      "case": "⛔ THE MINT TAKES NO DRAW: the golden corpus before and after, compared field by field except the new id keys, shows no value, count, name or ordering moving anywhere."
+    },
+    {
+      "id": "A6",
+      "case": "MIGRATION BACK-FILL AND IDEMPOTENCY: an older save with no ids gets them on its first read through the REAL saves path, in stored array order; the second read is byte-identical; the input is not mutated."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ THE MIGRATION IS UNCONDITIONAL: a source scan proves the v3 arm is reached on every save read and write path and sits inside NO conditional, flag read or env read; SCHEMA_VERSION is still 1 and listMigrations() still holds ONE entry."
+    },
+    {
+      "id": "A8",
+      "case": "⛔ FOREIGN IDS AND THE RECORDED ASYMMETRY: an imported entity's non-matching id is LEFT ALONE and reported FOREIGN, never rewritten; and a save whose roster was reordered before migration has ids stable across later reads, with the test stating in its own words that they need not match a fresh generation's."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/entityIdentity.test.js",
+      "tests/domain/settlementMigrations.test.js",
+      "tests/domain/userEdits.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/store/lifecycleRoundTrip.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/corruptionWebDormancyGolden.test.js",
+      "tests/property/momentumDormancyGolden.test.js",
+      "tests/property/npcCredibilityDormancyGolden.test.js",
+      "tests/property/npcGrowthDormancyGolden.test.js",
+      "tests/property/npcLadderDormancyGolden.test.js",
+      "tests/property/roadsDormancyGolden.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/townCartographyCalibration.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "tests/lint/sizeBaseline.test.js",
+      "tests/lint/mutationCoverageManifest.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/generators/npcGenerator.js",
+      "src/generators/steps/assembleInstitutions.js",
+      "src/generators/density/densityAscension.js",
+      "src/lib/saves.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/check-writer-reach.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "EM-B1b",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1b.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE OFF-STAGE LEAF — option O1 as the chair shaped it (ruling 2), so EM-B1a's manifest is UNCHANGED. OFF_STAGE_OP_TYPES carries the seven off-stage ops under THE PHANTOM CONSEQUENCE RULE (ODQ §934.43, design §13): declare-war, make-peace, open-trade, close-trade, send-force, recall-force, resolve-outcome. Each carries stage:'off-stage', consequence:'by-target-reality' and all ten of B1a's declared fields, importing both closed vocabularies from operations.js rather than minting a second. THE OWNER'S RULE: a phantom counterparty can absorb an act but never return one — a phantom act yields the HOME PROCEDURES (a force resolves won or lost and returns through the EXISTING muster/casualty/upkeep mechanics; an envoy or caravan returns unchanged) and the RECORD (a chronicle line) and NOTHING ELSE: no war state, no treaty, no trade route, no envoy state, no faction-power or legitimacy shift. ⛔ THE RESOLVER IS NOT HERE: consequenceFor(target) is EM-F1's, and authoring, importing or referencing it is a STOP. ⛔ RELATIONS MUST NOT ASSUME PHANTOM-SIDE STATE EXISTS (§13 clause d): make-peace.requires is exactly ['declare-war'] — a prior ENTRY IN THE REGISTRY, never a war state in the world; the same binds recall-force and close-trade. Consequence the DM wants is a SEPARATE HOME DECREE the registry may OFFER and never applies on its own — encoded as relatedTo, never as enables. Guard coverage is guards: [] plus a non-empty guardsStated naming EM-C3 (ARCH §5's 'stated when empty'); a rule FUNCTION authored here is a STOP. ≈83 effective of the 250 leaf cap — INSIDE, and the earlier ≈314-332 combined-file overage is retired by this split. ⛔⛔ ODQ §934.50 / design §18 — THE OFF-STAGE SET GOES FROM SEVEN TO ELEVEN. Three 'make them' DIRECTIVES join, each creating a world-state condition on the COUNTERPARTY's side: make-them-sue-for-peace (a pending peace offer), make-them-send-envoy (an envoy arrived), open-route (an open route). Against a REAL save each is a pin on the counterparty's own fork — EM-E4's; against a PHANTOM each is a declared, RECORD-ONLY offer per §13 that satisfies the home's predicate at the tick. They are the clearest case for consequence:'by-target-reality' in the whole catalogue, because a phantom can absorb an act but never return one. Plus sue-for-peace, whose requires.world is ONLY warInProgress(counterparty) — measured live as atWarWith(graph, worldState, a, b) at roads/embassyHazard.js:74. ⚠ schedule-event requires NOTHING ('always, from the catalogue'; `when` at or after the next tick) and is a HOME op, so it belongs to EM-B1a's set as a nineteenth row — RAISED R5, because B1a is already over its cap by its own §16.3. BUDGET: eleven rows x ~9 effective ≈ 99, plus shared constants ≈ 12 and imports ≈ 8 ⇒ ≈119 of the 250 leaf cap — comfortably inside, so O1's shape holds and no further split is needed here.",
+      "action": "CREATE",
+      "path": "src/domain/edit/operationsOffStage.js"
+    },
+    {
+      "_note": "THE COMPOSITION, AND IT IS EXACTLY TWO EFFECTIVE LINES (the chair's ruling 2): one `import { OFF_STAGE_OP_TYPES } from './operationsOffStage.js'` and one spread into the frozen catalogue, `OP_TYPES = Object.freeze({ ...HOME_OP_TYPES, ...OFF_STAGE_OP_TYPES })`. ⛔ NOTHING ELSE IN THE FILE MOVES — no B1a row, no signature, no vocabulary — and an edit exceeding +2 effective is a STOP. This is what keeps EM-B1a's manifest unchanged while both leaves stay inside the 250 per-file cap. ⚠ Object.freeze on the composed map freezes the OUTER object only, so the acceptance asserts each SOURCE map frozen too (RAISED R2).",
+      "action": "MODIFY",
+      "path": "src/domain/edit/operations.js"
+    },
+    {
+      "_note": "FOUR ARMS (B1-B4) APPENDED to EM-B1a's single literal describe — straight-line `it`, no .each / runIf / nested describe (§P3.4). B1 re-asserts B1a's eighteen so a row dropped by either packet reds here (OP_TYPES must hold exactly twenty-five). B2 pins the §13 partition as an EXACT SORTED LIST rather than a length and asserts the consequence set SET-EQUAL to the stage set, plus the counterforce that consequenceFor is defined nowhere. B3 is design §13's clause (d) made structural: for every off-stage type, requires holds only op-type keys and no world predicate, with make-peace.requires pinned to exactly ['declare-war']; relational integrity is re-run over all twenty-five. B4 carries the product law — a WELL-FORMED off-stage op against a phantom target validates ok:true, because validateOp REPORTS MALFORMATION AND NEVER REFUSES AN ACT (design §2.7; at this table a god sits) — plus the forbidden-home arm proving the module imports no force/muster/casualty/upkeep module, with the matcher proved live on a planted string. Every negative carries its `// anchored:` marker on the line immediately above it.",
+      "action": "MODIFY",
+      "path": "tests/domain/editOperations.test.js"
+    },
+    {
+      "_note": "THE GUARD-COVERAGE WALKER (design §6 instrument 3; ARCH §8.3) — arms B5-B8, the packet's prevention guard, in the tests/lint/chooserTotality.walker.test.js shape (HB-1's A7/A8: declared equals discovered, BOTH directions, full offender list). B5 is guard-the-guard: the walk is asserted non-empty before any membership claim. B6 is the set-equality both ways — an unregistered type reds, a stale row reds. B7 is design §12.8's clause: a declared guards entry that is not a function reds, and a row whose guards is non-empty while guardsStated claims emptiness reds. ⭐ At this wave every row is LEGITIMATELY guards: [] because guardRules.js is EM-C3's — §12.8's 'refuses a declared rule that cannot fire' bites only on a DECLARED rule, of which there are zero — so B7 pins that as the current state WITH ITS REASON and EM-C3's population will move it visibly, which is what keeps the instrument honest rather than vacuous. B8 is the register's own guard: this file owns an invariants entry in scripts/mutation-coverage-manifest.json, asserted from the TEST side so a dropped row reds here rather than at a terminal.",
+      "action": "CREATE",
+      "path": "tests/lint/opGuardCoverage.walker.test.js"
+    },
+    {
+      "_note": "THE MUTATION-COVERAGE ROW, PRICED AT COMPILE — the obligation PACKET_STANDARD.md records as having been discovered at a terminal TWICE. tests/lint is the FIRST of the ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36-37) and tests/lint/mutationCoverageManifest.test.js asserts that every enumerated file owns an `invariants` entry, so the new walker above owes exactly one row. ⭐ THE SPLIT MOVED THIS OBLIGATION CLEANLY WITH THE FILE THAT INCURS IT — EM-B1a owes nothing. MEASURED at this base: the manifest holds 704 `invariants` rows of kinds rationale | mutation | uncovered, ~472 kB; a `rationale` row is { kind: 'rationale', rationale: '<the executed account>' }. 704 -> 705. ⛔ ADDED SURGICALLY BESIDE ITS SIBLINGS — the file is NEVER re-serialised whole, because a formatter's diff would bury the one row that matters. ⚠ The rationale must carry the EXECUTED mutant account (planted, run under the gate mutex, restored digest-exact), which is why the ordered sequence writes it AFTER the mutants rather than before. ⛔⛔ RE-MEASURED AT e02bf0f26: this path now has a LIVE NON-TERMINAL HOLDER — EM-A1 at DRAFT — and DRAFT reserves exactly as READY does, so validate:packets reds if both hold it. The chair sequences EM-A1 and EM-B1b, or one defers the row to the terminal as the census row is deferred. RAISED R4. ⓘ PLACEMENT IS JUST-IN-TIME (the chair's ruling 3): this packet is NOT placed in PACKET_MANIFEST.json until EM-A1 frees this path; it waits in the chair kit. The contract is unchanged by that — only the moment of placement is.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE OBLIGATION'S SOURCE, and the reason this packet rather than EM-B1a owes the mutation-coverage row: `tests/lint` is the FIRST entry of ENFORCER_DIRS (:36-37), and the meta-test asserts every file enumerated under those dirs owns an `invariants` entry in scripts/mutation-coverage-manifest.json. Named in requiredSymbols so the obligation is provable from the manifest rather than from packet prose. Proven present: grep -c 'export const ENFORCER_DIRS' -> 1.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    },
+    {
+      "_note": "THE WALKER SHAPE THIS PACKET COPIES — a register walker that asserts its declared table SET-EQUAL to the live scan in BOTH directions with a full offender list (HB-1's A7/A8: 'classified equals discovered both directions', 'symbolsWithTwoDispositions empty'). Named so the proof shape is bound to a real precedent rather than described. ⚠ Its SCAN_ROOTS are src/domain/{worldPulse,spatial,traditions,region} — src/domain/edit is NOT among them, which is the separate measured finding that the decision-fork register does not reach the editor (EM-A2a's R2). Proven present: grep -c 'const SCAN_ROOTS' -> 1.",
+      "path": "tests/lint/chooserTotality.walker.test.js",
+      "symbol": "const SCAN_ROOTS"
+    },
+    {
+      "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. The seven appended rows keep OP_TYPES' key order asserted through it over the combined twenty-five. Proven present: grep -c -> 1.",
+      "path": "src/domain/deterministicSort.js",
+      "symbol": "export const compareCodepoint"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "B1",
+      "case": "MAIN, WITH EM-B1a's TOTALITY RE-ASSERTED: OP_TYPES now holds exactly TWENTY-FIVE types — B1a's eighteen plus these seven — set-equal both directions with a full offender list, so a row dropped by either packet reds here. OP_TYPES is now a COMPOSITION of two frozen maps (option O1), so the arm asserts over the composition AND asserts BOTH source maps frozen — Object.freeze on a spread freezes the outer object only, so a row could otherwise be mutated through OFF_STAGE_OP_TYPES while OP_TYPES reported frozen. Every new row carries all ten fields with guardsStated non-empty, and Object.keys(OP_TYPES) remains compareCodepoint-ordered over the combined set."
+    },
+    {
+      "id": "B2",
+      "case": "THE §13 PARTITION, TOTAL AND SET-EQUAL. The stage:'off-stage' set is EXACTLY the ELEVEN { declare-war, make-peace, open-trade, close-trade, send-force, recall-force, resolve-outcome, sue-for-peace, make-them-sue-for-peace, make-them-send-envoy, open-route } — an exact sorted list, never a length — and every other type is home. The consequence:'by-target-reality' set SET-EQUALS the off-stage set and consequence:'home' equals the home set. Counterforce: a source scan proves consequenceFor is defined NOWHERE in the module — the resolver is EM-F1's, and this packet declares policy only."
+    },
+    {
+      "id": "B3",
+      "case": "NO PHANTOM-SIDE PREREQUISITE (design §13 clause d). For EVERY off-stage type, requires contains only op-type keys and NO world predicate — asserted by name, with make-peace.requires pinned to exactly ['declare-war'] (the prior REGISTRY ENTRY, never a war state in the world), and the same law asserted for recall-force (send-force) and close-trade (open-trade). Relational integrity is re-run over all twenty-five: every relation string is an OP_TYPES key; conflictsWith and relatedTo symmetric; requires and enables exact inverses. ⭐ THE THREE 'MAKE THEM' ROWS ARE THE SHARPEST TEST OF THIS LAW (§934.50): they CREATE the counterparty's condition, and they must still name only op-type keys in requires.registry and never a phantom-side world predicate — asserted by name for all three."
+    },
+    {
+      "id": "B4",
+      "case": "THE REPORT-NEVER-REFUSE LAW, AND NO FORCE-RETURN PATH. A WELL-FORMED off-stage op against a phantom target validates ok:true — validateOp reports malformation only and never refuses an act, because at this table a god sits and magic is real (design §2.7; §P8). Plus the forbidden-home arm: a source scan proves the module imports no force, muster, casualty or upkeep module and writes no such path, with the matcher proved live on a planted string — the home procedures stay EM-F1's."
+    },
+    {
+      "id": "B5",
+      "case": "THE COVERAGE WALKER — GUARD-THE-GUARD, FIRST. The walk is asserted non-empty before any membership claim; every one of the twenty-five types declares guards as an ARRAY and guardsStated as a NON-EMPTY string."
+    },
+    {
+      "id": "B6",
+      "case": "DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS. The declared coverage set SET-EQUALS the live scan in BOTH directions with a full offender list (the chooserTotality shape) — an unregistered type reds, a stale row reds."
+    },
+    {
+      "id": "B7",
+      "case": "A DECLARED RULE MUST BE ABLE TO FIRE (design §12.8). A declared guards entry that is not a function reds; a row whose guards is non-empty while guardsStated claims emptiness reds. At this wave every row is legitimately guards: [] because guardRules.js is EM-C3's, and THAT IS ASSERTED AS THE CURRENT STATE WITH ITS REASON, so the instrument is honest rather than vacuous and EM-C3's population will move it visibly."
+    },
+    {
+      "id": "B8",
+      "case": "THE REGISTER'S OWN GUARD. tests/lint/opGuardCoverage.walker.test.js owns an `invariants` entry in scripts/mutation-coverage-manifest.json — the obligation this packet prices at compile — asserted from the TEST side so a dropped row reds here rather than at a terminal, which is the failure mode PACKET_STANDARD.md records as having happened twice."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/editOperations.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/opGuardCoverage.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/operations.js",
+      "tests/domain/editOperations.test.js",
+      "tests/lint/opGuardCoverage.walker.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

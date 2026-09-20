@@ -1,0 +1,186 @@
+{
+  "id": "EM-B1i",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1i.md",
+  "verifiedBase": "__BASE__",
+  "_verifiedBaseNote": "STAMPED BY THE CHAIR AT PROMOTION. Compiled and measured whole at 32602dc607b7423838249cf57d73baf08feb047d (git status --short EMPTY before and after), by the Opus COMPILE lane, session a9df403c, 2026-09-20. The base the chair stamps MUST be a tip at which EM-B1h has LANDED: src/domain/worldPulse/worldPulseFates.js does not exist at the compile tip, and this packet's cure imports two of its symbols. At promotion the chair ALSO adds three requiredSymbols rows for that leaf — {WORLD_PULSE_FATE_KIND, WORLD_PULSE_FATE_KINDS, isWorldPulseFate} — each proved by the grep -cF printed in EM-B1i.evidence.md section 16. They are omitted here because PACKET_STANDARD.md admits only symbols present at the verified base, and a lane never names a symbol it could not prove.",
+  "changeManifest": [
+    {
+      "_note": "THE CURE. institutionDestroyed (:136) tests the fate's DECLARED KIND instead of its truthiness. One import from EM-B1h's leaf; one frozen DESTROYED_BY_FATE_KIND literal above the function; line :139 (`if (inst.worldPulseFate) return true;`) replaced by two lines - an unknown truthy fate keeps today's reading (the conservative contract, so no saved world changes meaning silently), then the kind decides. The two flag checks at :138 and the NONSTANDING_STATUS line remain BYTE-IDENTICAL and keep their ORDER, so a rise-fated record that was later deactivated still reads destroyed. The membership test is the leaf's Set-based isWorldPulseFate and NEVER the `in` operator: `in` walks Object.prototype, and 'constructor', 'toString', 'valueOf' and '__proto__' all answer true to it (executed, evidence section 7.1). The reader stays module-private - no new export. +5 effective lines; the file is 376 of 800 and on no hot list.",
+      "action": "MODIFY",
+      "path": "src/domain/worldPulse/causeLifecycle.js"
+    },
+    {
+      "_note": "THE ACCEPTANCE FILE, A1-A7. ONE literal describe, SEVEN straight-line it. The driver is the REAL advanceCauseLifecycle through leashSevered/fixedRng copied from tests/domain/ruinInstitution.test.js:154-185 - never a re-implementation of the private predicate. A comment-only strip that KEEPS string contents (commentsOnly, ruinInstitution.test.js:192) powers A6 and A7; the shared tests/helpers/codeOnlySource.js is FORBIDDEN because it blanks string contents and returns a vacuous zero. NEVER name a variable, parameter or import `it`, `test` or `describe` - that second binding is the OPENER_UNRESOLVED:it cause that parked EM-B1e's file until CURE-C (145acdb75). This path is outside every ENFORCER_DIR and matches no NAME_PATTERN token (proved by importing tests/lint/mutationCoverage.shared.mjs), so it owes NO scripts/mutation-coverage-manifest.json row and does NOT contend with EM-B1d.",
+      "action": "CREATE",
+      "path": "tests/domain/institutionDestroyedByKind.test.js"
+    },
+    {
+      "_note": "EM-B1h'S ARM, NARROWED - NEVER DELETED. EM-B1h's A6/T3 asserts that NO file under src/ imports WORLD_PULSE_FATE_KIND and names EM-B1i in the message a violation prints; EM-B1h section 11 makes such a reader its own STOP, 'that is EM-B1i's'. This packet is that reader, so the arm becomes a DECLARED READER ROSTER: the scan's hit list must be SET-EQUAL, BOTH WAYS, to ['src/domain/worldPulse/causeLifecycle.js']. Both failure directions stay live - an emptied hit list reds (the cure went missing) and a second importer reds (an unmeasured reader appeared). Add NO describe and NO it: the edit re-spells an existing arm's assertion and message, so the lighting census must not move on this file. Restate EM-B1h's own CANNOT-CATCH sentence about a stale kind, now that a reader exists.",
+      "action": "TEST",
+      "path": "tests/lint/worldPulseFateTotality.walker.test.js"
+    },
+    {
+      "_note": "THE PRODUCER-TO-CONSUMER REGISTER ROW, RESHAPED. EM-B1h's N9 predicted a row over the eighteen fate WORDS; measured, that row would be self-referential and vacuous because the consumer derives its reading from the producer's own map by import (preamble section P6's anti-vacuity rule). The non-vacuous contract is one level up and it is exactly this walker's declared class: the consumer branches on KINDS, and a FOURTH kind declared by the leaf would fall through to 'not destroyed' - a silent default. ONE new straight-line it inside the EXISTING describe('vocabularyTotality - bound consumers (exact set, both ways)'), binding objectLiteralKeys(read('src/domain/worldPulse/causeLifecycle.js'), 'DESTROYED_BY_FATE_KIND') to WORLD_PULSE_FATE_KINDS with setDiff in both directions, plus a boolean-value check. The file is CREDITED at the compile tip (26 titles, 6 suite titles, measured with the lighting walker's own parkReasonsFor), so the one title really counts. Add NO second describe.",
+      "action": "REGISTER",
+      "path": "tests/lint/vocabularyTotality.walker.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE SUBJECT. Module-private (not exported), so its verdict is only observable at its one consequence. The packet edits the BODY and never re-spells this signature line, so the text survives the edit verbatim - the post-edit simulation of LANE-EM-PREPROOF step 10. Renaming it would un-ground every acceptance arm.",
+      "path": "src/domain/worldPulse/causeLifecycle.js",
+      "symbol": "function institutionDestroyed(inst) {"
+    },
+    {
+      "_note": "The status arm that must still decide LAST and must not move. A3 pins the ordering by consequence. The declaration prefix survives the edit; the packet adds no member and removes none.",
+      "path": "src/domain/worldPulse/causeLifecycle.js",
+      "symbol": "const NONSTANDING_STATUS = new Set("
+    },
+    {
+      "_note": "The exported host of the one call site (:397, inside TERMINAL 2). Every acceptance arm drives the cure through this function rather than through the private predicate, so a rename would make the whole matrix unbuildable.",
+      "path": "src/domain/worldPulse/causeLifecycle.js",
+      "symbol": "export function advanceCauseLifecycle"
+    },
+    {
+      "_note": "The tolerant name resolver whose match rule (xn === n || xn.includes(n) || n.includes(xn)) is what makes a demoted-and-RENAMED institution reachable by a leash naming the lesser. A1's fixture depends on it; the packet does not touch it.",
+      "path": "src/domain/worldPulse/causeLifecycle.js",
+      "symbol": "function sustainingInstitution(settlement, npc) {"
+    },
+    {
+      "_note": "THE `standing` WRITE SITE. Its record literal carries no status key, no _worldPulseInactive and no _worldPulseMorallyAbolished - the fact that makes demoted_by_disaster kind `standing`. A7 re-derives the kind from this literal, so the packet must find this exact text. UNTOUCHED: this packet edits no writer.",
+      "path": "src/domain/worldPulse/calamityKernel.js",
+      "symbol": "worldPulseFate: 'demoted_by_disaster',"
+    },
+    {
+      "_note": "A `rise` WRITE SITE - the in-place promotion, no status change and no flag. A7 re-derives its kind from this literal. UNTOUCHED.",
+      "path": "src/domain/worldPulse/upswingKernel.js",
+      "symbol": "worldPulseFate: 'upgraded_by_reconstruction' }"
+    },
+    {
+      "_note": "The other `rise` WRITE SITE - a NEW status:'active' record. A7 re-derives its kind from this literal, and tests/domain/upswingKernel.test.js:491 pins that the writer still stamps it. UNTOUCHED.",
+      "path": "src/domain/worldPulse/upswingKernel.js",
+      "symbol": "worldPulseFate: 'founded_by_flourishing' }"
+    },
+    {
+      "_note": "THE SET THIS PACKET DELIBERATELY DOES NOT DERIVE (R3/Q4). Named so that a lane which quietly widens it from the closure kind is caught by the packet's own contract as well as by provenanceStampSingleWriter.walker.test.js's exact both-ways FREEZE pin. The DECLARATION PREFIX is named, never the full literal, so the row cannot be invalidated by a lawful edit elsewhere in the file.",
+      "path": "src/domain/worldPulse/institutionLifecycle.js",
+      "symbol": "const LIFECYCLE_CLOSE_FATES = new Set("
+    },
+    {
+      "_note": "EM-B1e's LANDED driver of THIS reader. Its A6 arms are the oracle this cure must not red (measured clean: both fated records are closure-kinded AND carry _worldPulseInactive with status 'ruined', so line :138 decides them first). The packet copies this function's shape for its own driver and runs the landed suite in checks.",
+      "path": "tests/domain/ruinInstitution.test.js",
+      "symbol": "function leashSevered(sustainer) {"
+    },
+    {
+      "_note": "The ONE static importer of causeLifecycle.js in src/. It is also the importer of calamityKernel.js, which is EM-B1h's importer of the leaf - which is why this packet's new import edge adds ZERO modules to any chunk. Named verbatim because the byte measurement in section 3.2 rests on this clause being the only door into the reader.",
+      "path": "src/domain/worldPulse/pulseKernel.js",
+      "symbol": "import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecycleNewsEntries } from './causeLifecycle.js';"
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "NONE. The packet removes, renames and moves no symbol: it adds one import line, adds one const above institutionDestroyed, and replaces lines INSIDE that function's body. Every requiredSymbols row above was simulated against the packet's own edits and survives verbatim. No other LANDED packet's rows for these (path, symbol) pairs need discharging.",
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE CURE AT ITS ONE CONSEQUENCE, THROUGH THE REAL PULSE. Driven through the real advanceCauseLifecycle with a seeded fork, six fixtures identical but for the fate on the paymaster. POSITIVE CONTROL FIRST: a closure-kinded paymaster (destroyed_by_disaster) still severs - reforms non-empty, a 're-adjudicated' event, the record dropped. Then demoted_by_disaster, upgraded_by_reconstruction and founded_by_flourishing each emit NO event, push NO reform and KEEP the record. NEGATIVE CONTROL: an institution with no fate and no non-standing status never severs in either direction, so the driver cannot pass vacuously."
+    },
+    {
+      "id": "A2",
+      "case": "THE UNKNOWN WORD KEEPS TODAY'S READING, AND `in` IS FORBIDDEN. A truthy fate outside the vocabulary ('razed_by_the_gods') still severs, so no saved world changes meaning silently. AND THE FOUR PROTOTYPE WORDS: 'constructor', 'toString', 'valueOf' and '__proto__' each still sever - which they would NOT if membership were tested with the `in` operator against the frozen kind map. A non-string truthy fate (an object) severs too. Each negative carries an // anchored: marker on the line above."
+    },
+    {
+      "id": "A3",
+      "case": "THE UNTOUCHED ARMS, AND THEIR ORDER, PINNED BY CONSEQUENCE. _worldPulseInactive: true beside a `standing` fate still severs, and so does _worldPulseMorallyAbolished: true - proving the flags decide BEFORE the fate. A non-standing status with no fate still severs, proving the status arm still decides LAST. AND THE LANDED ORACLE IS EXECUTED, NOT REASONED ABOUT: tests/domain/ruinInstitution.test.js is in checks and its A6 (leashSevered x4) and A4 (three golden digests) must be green."
+    },
+    {
+      "id": "A4",
+      "case": "NOTHING MOVES. The three goldens are bytewise unchanged by digest - generator-golden-master.json 7177cd6e89ebee404dec05d725d91e98ff59d2cfa124104a9a22515a7c8e8f1e, dossier-prose-manifest-golden.json 921c51cf6799ffdfdbffa3715fb496f7d15ce44fff508864653d8ebf3bb4db41, preset-lighting-witness-golden.json 7f67ee8e6cda2b7e70a780090b16db20a4f8032a1746a51b2e044dd69bd98ae2 - and tests/simulation/presetLightingWitness.test.js is in checks so the witness is re-driven for real rather than trusted. The compile lane executed the witness three times (unpatched, probed, cured): 0 of 104 fields moved."
+    },
+    {
+      "id": "A5",
+      "case": "THE KIND LAW IS TOTAL, AND A FOURTH KIND CANNOT ARRIVE QUIETLY. DESTROYED_BY_FATE_KIND's keys are SET-EQUAL both ways to WORLD_PULSE_FATE_KINDS and every value is a boolean. AND THE PARTITION IS COUNTED: driving the predicate over all eighteen members yields exactly 15 destroyed and 3 standing, with the three standing ones named - so a re-kinding upstream reds here as well as in EM-B1h's walker."
+    },
+    {
+      "id": "A6",
+      "case": "EXACTLY ONE READER OF THE KIND, DECLARED. A source scan over every non-test .js/.jsx under src/ finds the importers of WORLD_PULSE_FATE_KIND SET-EQUAL both ways to ['src/domain/worldPulse/causeLifecycle.js']. BOTH FAILURE DIRECTIONS ARE REQUIRED: a planted second importer reds, and an emptied hit list reds (the cure went missing). The scan is asserted non-empty FIRST (guard-the-guard)."
+    },
+    {
+      "id": "A7",
+      "case": "THE KIND IS RE-DERIVED FROM THE RECORD, NOT TRUSTED (EM-B1h R11). Over a comment-only strip that KEEPS string contents, the three non-closure write-site record literals are re-read and asserted to carry no status: key, no _worldPulseInactive and no _worldPulseMorallyAbolished - so the standing/rise kinds this reader now branches on are still true of the writers. BOTH CONTROLS: the matcher fires on a planted _worldPulseInactive beside one of the three, and ignores a commented one."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/institutionDestroyedByKind.test.js",
+      "tests/domain/causeResolutionLifecycle.test.js",
+      "tests/domain/ruinInstitution.test.js",
+      "tests/domain/corruptionWebPins.test.js",
+      "tests/domain/envoyChanceMeetingLedger.test.js",
+      "tests/domain/roadsParticipation.test.js",
+      "tests/domain/upswingKernel.test.js",
+      "tests/domain/calamity.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/worldPulseFateTotality.walker.test.js",
+      "tests/lint/vocabularyTotality.walker.test.js",
+      "tests/lint/couplingInclusion.walker.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "tests/lint/contractTestAntiVacuity.walker.test.js",
+      "tests/lint/provenanceStampSingleWriter.walker.test.js",
+      "tests/lint/proseNumerics.test.js",
+      "tests/lint/sizeBaseline.test.js",
+      "tests/lint/domainStrictBaseline.test.js",
+      "tests/lint/domainAnyCastBaseline.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/simulation/presetLightingWitness.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/worldPulse/causeLifecycle.js",
+      "tests/domain/institutionDestroyedByKind.test.js",
+      "tests/lint/worldPulseFateTotality.walker.test.js",
+      "tests/lint/vocabularyTotality.walker.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/check-writer-reach.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ],
+  "_checksNote": "NO GENERATOR APPEARS IN checks, so step 14(a)'s 'a generator goes LAST' rule is satisfied vacuously: edge-shared INPUT membership is 0 of 307 across all five committed metas, so npm run build:edge-shared is absent and none of preamble section P2 row 12's seven generated paths is owed. Both check-* scripts run in their documented READER mode (their write doors are --write); eslint carries no --fix. No command in this list writes an undeclared path. tests/lint/sovereigntyLightingContract.walker.test.js is deliberately NOT in checks: it is an EXPECTED INTERIOR RED until the host train's terminal, and a checks entry must exit 0."
+}

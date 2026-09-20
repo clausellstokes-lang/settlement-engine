@@ -1,0 +1,27 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 68765 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist
+
+ ❯ tests/lint/tuningRegister.walker.test.js (75 tests | 75 skipped) 1738ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/tuningRegister.walker.test.js [ tests/lint/tuningRegister.walker.test.js ]
+Error: tuning inventory REFROZEN at 959faad1984dbac7f5aab43749e9184d1d4e2772 by chair-fable-5.1 (session 923472dc): 237 tables, 535 named, 6985 bare. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without TUNING_INVENTORY_REFREEZE, and THAT green is the proof.
+ ❯ refreezeInventory tests/lint/tuningRegister.walker.test.js:139:9
+    137|   writeFileSync(temporary, `${JSON.stringify(next, null, 2)}\n`, 'utf8…
+    138|   renameSync(temporary, INVENTORY_PATH);
+    139|   throw new Error(`tuning inventory REFROZEN at ${next.measuredAtSha} …
+       |         ^
+    140|     + ` ${next.totals.tables} tables, ${next.totals.unregisteredNamed}…
+    141|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+ ❯ tests/lint/tuningRegister.walker.test.js:147:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  75 skipped (75)
+   Start at  00:37:13
+   Duration  1.97s (transform 54ms, setup 23ms, import 108ms, tests 1.74s, environment 0ms)
+

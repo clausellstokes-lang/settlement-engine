@@ -1,0 +1,22 @@
+── foreign vocabularies per member (v5, simulated) ──
+  active    11  ACTIVE_UI_STAGES, THREAT_STAGES, ACTIVE_STAGES, ACTIVE_FLOW_STAGES, ACTIVE_STRESSOR_STAGES, ACTIVE_SYNERGY_STAGES, STRESSOR_LIFECYCLE_STAGES
+  dead       0  (none)
+  exiled     0  (none)
+  jailed     3  VERDICT_CAUSES, VERDICTS, AUTHORITY_VERDICTS
+  missing    3  STASIS_REASONS
+  removed    8  INACTIVE_STATUS, RUIN_STATUS, INACTIVE_STATUSES, NONSTANDING_STATUS, DEAD_ENDPOINT_STATUS, TRANSPORT_DOWN_STATUSES, RUINED_STATUS, DEAD_EDGE_STATUSES
+  retired    0  (none)
+TRIGGER = ["dead","exiled","retired"]
+
+FLAGGED (6):
+    src/domain/density/factionLifecycle.js -> active,dead,exiled,removed
+    src/domain/entities/npcs.js -> active,dead,exiled,jailed,removed
+    src/domain/worldPulse/magicFormsPractitioner.js -> active,dead,exiled,jailed,missing,removed,retired
+    src/domain/worldPulse/npcLadderKernel.js -> dead
+    src/domain/worldPulse/npcLadderState.js -> dead
+    src/domain/worldPulse/warSeatBooks.js -> dead
+
+DISCOVERED ENUMERATORS (3):
+    src/domain/density/factionLifecycle.js -> dead,exiled,removed
+    src/domain/entities/npcs.js -> dead,exiled,jailed,removed
+    src/domain/worldPulse/magicFormsPractitioner.js -> dead,exiled,jailed,missing,removed,retired

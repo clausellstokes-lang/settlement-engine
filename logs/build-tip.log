@@ -1,0 +1,31 @@
+== tip 2b0322992 02:54:47
+== lane 24 receipt (shared)
+ Test Files  6 passed (6)
+      Tests  73 passed (73)
+== build (exclusive) 02:55:04
+build exit 0
+676321 engine-B6kMVz06.js
+125886 engine-core-DEo3MRBd.js
+23846 engine-core-lazy-Am2-QOhS.js
+1399318 generation.worker-DNFpfUQI.js
+== VERIFY_DIST tests/build 02:55:27
+     × the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES) 5ms
+     × the engine chunk still exists (lazy) and remains large 7ms
+     × dist/index.html carries the home canonical, and every dynamic kind replaces it 4ms
+     × every expected public path has a prerendered dist document with head truth 4ms
+     × sitemap == router == dist: no indexable path route lacks a prerendered file 0ms
+     × every gallery facet hub is emitted; bare /gallery stays dynamic (never shadowed) 0ms
+     × the removed /compendium/lens-* entry documents are not baked into dist 0ms
+E2E anti-vacuity check FAILED: usage: check-e2e-not-vacuous.mjs <playwright args> --projects <a,b> | --results <report.json>
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/build/generationWorkerLazy.test.js > generation worker — production boundary > the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+AssertionError: generation worker bundle generation.worker-DNFpfUQI.js is 1399318 B; the ceiling is 1398705 B (re-minted by the worker-headroom car, 2026-09-18). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 1399318 to be less than or equal to 1398705
+ FAIL  tests/build/metaShell.test.js > the dynamic injection holds against the ACTUAL dist shell (VERIFY_DIST) > dist/index.html carries the home canonical, and every dynamic kind replaces it
+ FAIL  tests/build/prerenderRoutes.test.js > prerender — dist walk (the emitted files carry their own truth) > every expected public path has a prerendered dist document with head truth
+ FAIL  tests/build/prerenderRoutes.test.js > prerender — dist walk (the emitted files carry their own truth) > sitemap == router == dist: no indexable path route lacks a prerendered file
+ FAIL  tests/build/prerenderRoutes.test.js > prerender — dist walk (the emitted files carry their own truth) > every gallery facet hub is emitted; bare /gallery stays dynamic (never shadowed)
+ FAIL  tests/build/prerenderRoutes.test.js > prerender — dist walk (the emitted files carry their own truth) > the removed /compendium/lens-* entry documents are not baked into dist
+ FAIL  tests/build/vendorPdfLazy.test.js > Tier 9.7 — vendor-pdf lazy load contract > the engine chunk still exists (lazy) and remains large
+ Test Files  4 failed | 52 passed (56)
+      Tests  7 failed | 517 passed (524)
+== done 02:55:55

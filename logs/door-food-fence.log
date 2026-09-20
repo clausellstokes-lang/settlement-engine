@@ -1,0 +1,7 @@
+measured  6ffc462c6a73f85ca2396053bacadb71d3e1904a265bdc9c90a6e59b5d71d089
+expected  6ffc462c6a73f85ca2396053bacadb71d3e1904a265bdc9c90a6e59b5d71d089
+moved     360 of 360
+
+golden re-record REFUSED [DIRTY_TREE] for surface 'espionage-dormancy-fence': the tree is dirty beyond the paths this act may touch. In a shared tree those paths may belong to another lane, and a re-record taken over them is not reproducible from any commit. Commit first, then re-record at the clean tip. Dirty: tests/fixtures/generator-golden-master.json
+
+REFUSED by the door. Nothing was written.

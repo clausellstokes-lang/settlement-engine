@@ -1,0 +1,252 @@
+{
+  "id": "EM-B1h",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1h.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "_note": "THE CLOSED, KINDED FATE VOCABULARY, IN ITS OWN ZERO-IMPORT LEAF (the chair's Q2 ruling, ODQ §934.47 addendum 28). ⭐ THE SHAPE IS THE KIND MAP AS THE SINGLE AUTHORED SOURCE, THE FLAT LIST DERIVED FROM IT — measured against the chair's alternative of two literals side by side: 910 B minified versus 1,248 B (the eighteen strings spelled ONCE), and 'a member with no kind' becomes UNREPRESENTABLE rather than merely detected, which leaves the walker three LIVE arms (every kind ∈ WORLD_PULSE_FATE_KINDS; the keys in codepoint order; the populations exactly 15/1/2) instead of one set-equality between two literals three lines apart that can only catch a typo made in the same edit. Exports WORLD_PULSE_FATE_KINDS, WORLD_PULSE_FATE_KIND, WORLD_PULSE_FATES (= Object.freeze(Object.keys(KIND))), isWorldPulseFate and assertWorldPulseFate. ⭐⭐ THREE KINDS, NOT TWO, AND THE THIRD IS NOT WHERE IT WAS EXPECTED — each write site was classified by the SIBLING KEYS OF ITS OWN RECORD LITERAL, not by the fate's English: `closure` (the writer sets _worldPulseInactive:true AND a non-active status) holds FIFTEEN; `rise` holds TWO (upswingKernel :516 renames in place with no status change, :763 pushes a NEW status:'active' record); `standing` holds ONE — `demoted_by_disaster`, whose writer (calamityKernel :304-311) changes NO status and sets NO flag and whose own comment reads 'rename in place, keeping the slot standing'. ⛔ The six names flagged for a second look (downsized, privatized, captured_by_local_powers, reduced_to_watch_post, hollowed_out, survives_as_remnant) are ALL plain `closure`: their single writer deactivateForDemotion (tierOutcomeApply :158) sets _worldPulseInactive:true and status remnant/removed for all seven, however gentle the word. ⛔ null IS THE CLEAR SENTINEL AND NOT A MEMBER (the chair's Q3) and the gloss must say so in TWO sentences: four sites write worldPulseFate: null to CLEAR a fate when an institution stands again (institutionLifecycle :959 and :1103, magicRegimeLifecycle :374, tierOutcomeApply :265), each BESIDE status:'active' with the flags set FALSE, and causeLifecycle.institutionDestroyed reads exactly that absence through truthiness — adding null would make 'no fate' a fate. ⛔ ruined_by_decree is DECLARED AND UNPRODUCIBLE until EM-B1a. ⛔⛔ NOBODY READS THE KIND IN THIS PACKET — it is frozen DATA and acceptance A6 asserts by source scan that no src/ file imports WORLD_PULSE_FATE_KIND, which is what keeps the packet golden-neutral; EM-B1i is the packet that makes causeLifecycle.institutionDestroyed test the `closure` kind, and it owns the golden/preset-witness measurement and the owner's signed door. ⛔ ZERO IMPORTS — which is also what makes the ARGUED_UNLAYERED row's `reads: Object.freeze([])` exact. ⛔ THE FILE MUST CONTAIN NO `status:` TOKEN IN CODE AND NO `status: 'ruined'` ANYWHERE: the LANDED tests/domain/ruinInstitution.test.js A7 asserts the comment-only-stripped hit list over every non-test src/ file is EXACTLY ['src/domain/worldPulse/calamityKernel.js'], and this leaf is inside that scan — acceptance A7 of THIS packet asserts it in both directions so a later editor of the leaf is told why. Priced 910 B minified (esbuild, an UPPER BOUND — rollup scope-hoists and mangles the export names inside the worker chunk), landing only in src/workers/advanceInterval.worker.js, which has NO ceiling today (TOOL-3's declared 4 KB per-train headroom; R2).",
+      "action": "CREATE",
+      "path": "src/domain/worldPulse/worldPulseFates.js"
+    },
+    {
+      "_note": "THE ONE GUARDED WRITER REFUSES A FOREIGN WORD — AND THE GUARD LIVES IN THE LEAF, ON MEASUREMENT (R3's second question). ruinInstitution (:242, created by EM-B1e) gains ONE CALL, assertWorldPulseFate(fate, 'ruinInstitution'), plus the import edge to ./worldPulseFates.js. ⭐ MEASURED AGAINST THE INLINE ALTERNATIVE: the leaf's exported assert costs 98 B minified and +2 effective lines in the kernel; an inline `import { WORLD_PULSE_FATES }` + a local Set + the throw costs 204 B and +4 — so the kernel is touched half as much, and the error message is spelled ONCE, in the leaf, where EM-B1a and EM-B1i will reuse it instead of re-spelling a third and fourth copy (which is the very defect this packet exists to end). ⛔ THE CALL'S POSITION IS CONTRACT: it goes AFTER the existing `typeof fate !== 'string' || fate === ''` check (:243) and BEFORE the `reason` check (:244), so every verdict the LANDED ruinInstitution.test.js A3 asserts is UNCHANGED — fate: '', a non-string fate and a missing fate each still throw on the SAME check they throw on today — and acceptance A2 asserts that ORDER BY MESSAGE so a later reordering cannot pass silently. ⛔ NOTHING ELSE IN THE FILE IS TOUCHED: not the signature line, not the five added keys or THEIR ORDER (the preset witness hashes 52 interior ticks of serialized world pulse, so key order is history), not :309's demote branch (worldPulseFate:'demoted_by_disaster', already a member and now classified `standing`), and not the two call sites at :317/:321, which both pass 'destroyed_by_disaster' and are therefore INERT under the new guard — A1 proves the accepted record is byte-identical to EM-B1e's frozen oracle shape. ⭐ MEASURED: the file is 457 effective lines against the src/domain/** ceiling of 800 (eslint.config.js:687) — 343 lines of headroom against a ≤2-line edit, with a control that reproduces roadsKernel.js's frozen .size-baseline value of 838 EXACTLY; it is NOT on PACKET_STANDARD.md's standing hot list and carries no .size-baseline entry. ⛔ IT IS THE ONLY PRODUCTION FILE THIS PACKET EDITS, and that economy is the point: the other five writer kernels already spell members, so they need no edit — which matters most for institutionLifecycle.js, MEASURED AT 798 OF 800 (R3, which the chair has accepted onto the standing hot list).",
+      "action": "MODIFY",
+      "path": "src/domain/worldPulse/calamityKernel.js"
+    },
+    {
+      "_note": "THE TOTALITY WALKER — ONE literal describe, FOUR straight-line `it` (T1–T4), no .each / runIf / nested describe (§P3.4), copying the SET-EQUAL-IN-BOTH-DIRECTIONS shape of tests/lint/chooserTotality.walker.test.js (SCAN_ROOTS :64) and the straight-line proof shape of tests/domain/institutionFounding.test.js (:113). ⛔ THE MATCHER IS FIXED AND NON-DISCRETIONARY: a COMMENT-ONLY strip that KEEPS string contents, copied from tests/domain/ruinInstitution.test.js:187's commentsOnly — NEVER tests/helpers/codeOnlySource.js, which blanks string CONTENTS and would return a vacuous zero (EM-B1e measured exactly that trap). Scope: src/**/*.{js,jsx} excluding *.test.*, 2,246 files at the compile tip. T1 asserts the scan non-empty FIRST, then that WORLD_PULSE_FATES parses to exactly 18 distinct members IN CODEPOINT ORDER, that null is NOT among them, that every member's kind is one of the declared three, and that the populations are exactly closure 15 / standing 1 / rise 2. T2 is DECLARED EQUALS DISCOVERED in both directions: the six-row writer roster resolves live at path+symbol; the set of files that WRITE worldPulseFate is SET-EQUAL to it both ways; and the lane's `spelling` field is CHECKED against the tree rather than trusted — a `literal` row must be flagged and spell only members; a `derived` row must name a deriver that resolves live and WHOSE OWN RETURNS ARE ALL MEMBERS (the arm that catches 'disbanded', which NO write site spells — its only producer is moralInstitutionPressure.js:348, a file that writes no worldPulseFate at all); an `argument` row must import assertWorldPulseFate and call it; a `clear` row must write worldPulseFate: null at its site and spell no fate. T3 DERIVES the trigger from the live vocabulary minus the measured homonyms and asserts it is exactly the FOURTEEN discriminating members, with a floor arm that reds if it empties or halves; each of the THREE homonyms (abandoned → FOSSIL_KINDS × undercity/colonization.js, DEAD_ENDPOINT_STATUS × worldPulse/corruptionWeb.js, PLAN_STATES × worldPulse/demographicsPlans.js; abolished and disbanded → NONSTANDING_STATUS × worldPulse/causeLifecycle.js, the READER'S OWN FILE) must name ≥1 foreign declared vocabulary BY NAME AND FILE; FLAGGED is set-equal both directions to the literal roster rows ∪ the EMPTY inline exemption register, whose checker is proved on a planted row; both readers are asserted UNFLAGGED and NON-ENUMERATING; and the LEAF is asserted `status:`-free in both directions (A7). T4 drives the REAL ruinInstitution: all eighteen members accepted (positive control FIRST), a well-formed non-member refused, EM-B1e's four absence verdicts re-asserted with their check ORDER pinned by message, and the accepted record proved byte-identical to EM-B1e's frozen oracle shape. ⛔ THE DECLARED CANNOT-CATCH HEADER, IN TWO PARAGRAPHS: (1) a writer that builds a fate from a runtime value no deriver returns is invisible to a source scan — MEASURED: no such site exists today, every patch.fate producer in src/ is enumerated (institutionLifecycle:851 calls the same deriver; moralInstitutionPressure:379 passes the :348 ternary) — and the guarded writer is the one site where the check runs at RUNTIME, which is why EM-B1a's op routes through it; (2) ⭐ THE KIND IS DATA WITH NO READER, SO NO ARM CAN PROVE A KIND *CORRECT* — only present, single and drawn from the declared three. The kinds were derived at compile from the writers' record literals; a writer that later changes what it does to the record without changing its fate word would leave the kind stale with nothing red. EM-B1i, the first reader, is where that becomes catchable (R11). Both matcher controls are REQUIRED: it fires on a planted literal and ignores a commented one, and the shared codeOnly helper is shown to return zero. Negatives carry `// anchored:` on the line immediately above (tests/lint/negativeAssertionAnchor.walker.test.js scans SCAN_ROOTS=['tests']). Rule 2 of tests/lint/contractTestAntiVacuity.walker.test.js is satisfied by construction: the denominator is DERIVED from source (the vocabulary is imported, the flagged set is scanned), never a local pure literal.",
+      "action": "CREATE",
+      "path": "tests/lint/worldPulseFateTotality.walker.test.js"
+    },
+    {
+      "_note": "THE MUTATION-COVERAGE ROW — OWED because tests/lint is the FIRST entry of ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36). 705 → 706, measured at the compile tip. ⛔ SURGICALLY, NEVER RE-SERIALISED WHOLE: insert the complete block immediately BEFORE the \"tests/components/dossierRawKeys.census.test.jsx\" key and immediately AFTER the close of \"tests/copy/landingProseGrounding.test.js\" — a pure +N / −0 diff at the file's TAIL, chosen deliberately because EM-B1d's row inserts at the HEAD (between \"tests/lint/dossierMountRegistry.walker.test.js\" and \"tests/lint/stepPresentationEngineFence.walker.test.js\"), so even a same-day landing cannot textually conflict. Anchor on the key NAMES, never line numbers. Row shape { kind, rationale, kindNote }; kind is `rationale` or `mutation` — ⛔ `uncovered` is UNAVAILABLE to an enforcer-directory file — inline, ≥40 chars, carrying the EXECUTED account of the six §P6 mutants. ⛔⛔ THE COLLISION IS LIVE: at the compile tip EM-B1d reserves this exact path at status READY (measured over the 189-entry registered manifest). The charter's train order (EM-T3 before EM-T6) resolves it, but a reservation by ANY non-terminal packet at dispatch is a STOP — do not take the path, do not re-serialise.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    },
+    {
+      "_note": "⭐⭐ THE REGISTER VERSION 1 MISSED, FOUND BY SWEEPING WHAT A NEW src/domain/worldPulse/ FILE OWES. This walker is a census TOTAL over src/domain/{worldPulse,spatial} (CENSUS_SCOPE_RE, :1054) and its own arm is titled 'a NEW unlayered module REDS — it must get a family, an argument, or the baseline'. The leaf matches no LAYER_PATTERNS family, and the baseline door is explicitly closed to it ('only for pre-program debt'; the frozen set 'only shrinks'), so it takes the ARGUMENT. ⛔ TWO EDITS, ONE DIFF: (a) add one ARGUED_UNLAYERED row for 'src/domain/worldPulse/worldPulseFates.js' in the exact shape of the bandFamilies.js row (:473) — kind: 'substrate', a `reason` of MORE THAN 20 CHARACTERS (the walker asserts the length) naming it the pulse's closed fate vocabulary spoken by every layer, and `reads: Object.freeze([])`, WHICH IS EXACT BECAUSE THE LEAF HAS ZERO IMPORTS (the walker asserts the declared `reads` equals the live scan of layered imports; a true leaf declares [] and any port it later reaches REDS); (b) ARGUED_ROSTER_CEILING 28 → 29. ⛔ THE CEILING IS ASSERTED BY EXACT EQUALITY, BY DESIGN — its own comment: 'a number that only has to be not exceeded is not a ratchet, it is a budget' — so the row without the bump, or the bump without the row, REDS. Measured at the compile tip: ARGUED_UNLAYERED holds exactly 28 keys, 20 of them `substrate` with reads: Object.freeze([]), and ARGUED_ROSTER_CEILING reads 28. ⭐ AND NO CROSS-LAYER PAIR IS MINTED, SO NEITHER COUPLING BASELINE JSON MOVES: scanCrossLayerPairs (:1164) iterates LAYER_OF — layered modules only — and skips a dep with no layer ('if (!depLayer || depLayer === layer) continue'), and calamityKernel.js, the leaf's one importer, is ITSELF unlayered (it matches no family and sits at line 36 of the 179-entry tests/lint/.coupling-unlayered-baseline.json). ⛔ ADD NO `describe` AND NO `it` — the lighting census must not move on this file (the delta stays +4 titles, from the walker alone). ⛔ DO NOT TOUCH tests/lint/.coupling-inclusion-baseline.json OR tests/lint/.coupling-unlayered-baseline.json. ⓘ FREE OF CONTENTION: ten packets name this path and ALL TEN ARE LANDED. ⭐ `const ARGUED_ROSTER_CEILING = 28` is deliberately NOT a requiredSymbols row — this packet RE-SPELLS that line, and requiredSymbols is asserted verbatim at every status (the EM-P3 lesson; the row the chair cut from EM-B1d version 5). The stable prefix `const ARGUED_ROSTER_CEILING` is named instead.",
+      "action": "REGISTER",
+      "path": "tests/lint/couplingInclusion.walker.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "⭐ THE WRITER THE GUARD JOINS, created by EM-B1e (LANDED 8f714cf3c). POST-EDIT SIMULATION: the packet inserts ONE CALL inside the body and extends the import clause; the signature text is never re-spelled, moved or renamed — PRESENT after the build. grep -cF → 1.",
+      "path": "src/domain/worldPulse/calamityKernel.js",
+      "symbol": "export function ruinInstitution"
+    },
+    {
+      "_note": "⭐ A LANDED PIN ON THE FILE THIS PACKET MODIFIES, DISCHARGED HERE TOO. MF-T2R (LANDED) and EM-B1e (LANDED) both hold this exact (path, symbol) pair on this file. POST-EDIT: :527, a different function from the edited region — PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/calamityKernel.js",
+      "symbol": "export function forceCalamityStrike"
+    },
+    {
+      "_note": "⭐ EM-B1e's (LANDED) anchor export on this same file, discharged here too: the nearest preceding export to the ruin writer, pinning the file's identity so a rename or a file move is detectable from the manifest. POST-EDIT: :196 — PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/calamityKernel.js",
+      "symbol": "export function strikeCapForTier"
+    },
+    {
+      "_note": "⭐ THE `standing` MEMBER'S WRITE SITE, and the packet's sharpest measured fact. The calamity DEMOTE branch (:304-311) writes this literal and — measured by the sibling keys of its own record literal — NO status, NO _worldPulseInactive, NO _worldPulseEconomyClosed; its selection at :291 requires status 'active' and its comment reads 'rename in place, keeping the slot standing'. Hence kind `standing`, and hence EM-B1i's defect population is THREE, not two (R10). Already a member, so this packet does not touch it; named so an edit is visible at the manifest level. POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/calamityKernel.js",
+      "symbol": "worldPulseFate: 'demoted_by_disaster'"
+    },
+    {
+      "_note": "DERIVER 1, behind institutionLifecycle.js's two `derived` write sites (:1019, :1061). Returns EXACTLY 'shuttered' | 'bankrupt' | 'closed_for_want_of_custom' — and exactly those three across ALL 30 revisions of the file, which is what makes the no-retired-spelling claim historical rather than a snapshot. All three are `closure` members. ⛔ THIS FILE IS NOT IN THE CHANGE MANIFEST AND MUST NOT BE: 798 effective lines of an 800 ceiling (R3). POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/institutionLifecycle.js",
+      "symbol": "function closureFateForInstitution"
+    },
+    {
+      "_note": "⭐ THE SECOND VOCABULARY'S CLOSE SET, §13's subject. new Set(['shuttered','bankrupt','closed_for_want_of_custom']) at :635, read by priorLifecycleCounts (:643-649) as a damping counter on a settlement's rebuild odds. MEASURED: a STRICT SUBSET of the `closure` kind, 3 of 15, and all 3 of 3 are members. ⛔ NOT EDITED AND NOT DERIVED HERE — deriving it would make institutionLifecycle.js a READER of the kind (this packet has none, which is what keeps it golden-neutral) AND would change behaviour, since the counter would go from counting 3 words to counting 15 (R6). Named so the relationship is provable from the manifest. POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/institutionLifecycle.js",
+      "symbol": "const LIFECYCLE_CLOSE_FATES"
+    },
+    {
+      "_note": "DERIVER 3, behind tierOutcomeApply.js:162. Returns SEVEN {fate, status} pairs at :142-148 whose status is 'remnant' ×6 and 'removed' ×1 — NEVER 'active' — and whose caller deactivateForDemotion (:158) sets _worldPulseInactive: true for all seven. ⇒ ALL SEVEN ARE `closure`, including the six names flagged for a second look; the gentle words are PROSE, the record is a deactivation. ⚠ This file is ALSO in the eager first-paint closure, a second reason it is not edited. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/tierOutcomeApply.js",
+      "symbol": "function demotionFateForInstitution"
+    },
+    {
+      "_note": "DERIVER 2, behind magicRegimeLifecycle.js:357. Returns 'bankrupt' | 'closed_for_want_of_custom', and its own docblock records that the estate already made this packet's argument once: 'DRAWN FROM institutionLifecycle's EXISTING three-word fate vocabulary … rather than adding a fourth. Law 7 is a rule about not growing vocabularies casually, and this is a case where the existing one already said it.' NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/magicRegimeLifecycle.js",
+      "symbol": "export function magicClosureFate"
+    },
+    {
+      "_note": "⭐ THE ONLY PRODUCER OF TWO MEMBERS, IN A FILE THAT WRITES NO worldPulseFate AT ALL. :348 sets the value that reaches institutionPatch.fate (:379), which institutionLifecycle.js:1055's `patch.fate || 'abolished'` consumes and :1061 stamps. A write-site scan cannot see 'disbanded' from here — which is why the charter's original figures understated the vocabulary by twelve values, and why the walker's T2 checks DERIVERS rather than only literals. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/moralInstitutionPressure.js",
+      "symbol": "const fate = best.martial ? 'disbanded' : 'abolished';"
+    },
+    {
+      "_note": "A `literal` roster row of kind `closure`, inside export function applySettlementLifecycleOutcomeToSettlement (:578): the settlement-death stamp at :601, written beside status:'removed' and _worldPulseInactive:true. Already a member, so this file is not edited. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/settlementLifecycleFirstClass.js",
+      "symbol": "worldPulseFate: 'abandoned_with_the_settlement'"
+    },
+    {
+      "_note": "A `literal` roster row of kind `rise`: the institution UPGRADE at :516, inside export function advanceUpswing (:366). Measured: the record literal carries NO status and NO inactive flag, and the selection at :515 requires status 'active' — a promotion in place. One of the THREE members EM-B1i's reader mis-reads as destroyed today (R10). NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/upswingKernel.js",
+      "symbol": "worldPulseFate: 'upgraded_by_reconstruction'"
+    },
+    {
+      "_note": "A `literal` roster row of kind `rise`: the flourishing-founding at :763, which pushes a NEW record carrying status:'active'. The second of the three members EM-B1i's reader mis-reads as destroyed today (R10). NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/upswingKernel.js",
+      "symbol": "worldPulseFate: 'founded_by_flourishing'"
+    },
+    {
+      "_note": "⭐ THE HOMONYM HOME, AND IT IS THE READER'S OWN FILE. NONSTANDING_STATUS (:134) = new Set(['removed','destroyed','remnant','ruined','defunct','closed','disbanded','abolished']) — a STATUS vocabulary holding two words that are also FATES. It is why the walker's trigger is the FOURTEEN discriminating members and not all eighteen: triggering on 'abolished' or 'disbanded' would convict causeLifecycle.js, the very file that READS worldPulseFate at :139. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/worldPulse/causeLifecycle.js",
+      "symbol": "const NONSTANDING_STATUS"
+    },
+    {
+      "_note": "READER 1, declared NON-ENUMERATING: :258's `const fate = textOrNull(inst.worldPulseFate)` forwards the value as free text into ProvenanceLifecycle.fate and branches on no value. ⭐ MEASURED AND ASSERTED BY A6: `lastLifecycle` is read NOWHERE in src/ outside this producer — OverviewTab.jsx:57, the only consumer of institutionProvenanceOf, destructures `created` ONLY — so no fate word reaches a surface and the voice law does not apply. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "src/domain/provenance/rosterProvenance.js",
+      "symbol": "function institutionLastLifecycle"
+    },
+    {
+      "_note": "⭐⭐ THE ROSTER THIS PACKET APPENDS TO, and the register version 1 missed. POST-EDIT SIMULATION: row 5 inserts a new entry INSIDE this object; the declaration line itself is untouched — PRESENT after the build. Its 28 keys and the bandFamilies.js row's shape (kind: 'substrate', reads: Object.freeze([])) are the contract the new row copies. grep -cF → 1.",
+      "path": "tests/lint/couplingInclusion.walker.test.js",
+      "symbol": "const ARGUED_UNLAYERED = Object.freeze({"
+    },
+    {
+      "_note": "⭐ THE CEILING, NAMED BY ITS STABLE PREFIX ONLY. POST-EDIT SIMULATION, AND IT CUT A ROW BEFORE IT WAS WRITTEN: `const ARGUED_ROSTER_CEILING = 28` is NOT named here, because row 5 RE-SPELLS that line (28 → 29) and requiredSymbols is asserted VERBATIM at every status, so check:packet's first step would red the moment the edit was made — the EM-P3 lesson, and exactly the row the chair cut from EM-B1d version 5. No retiredSymbols row is owed either: the SYMBOL survives, only its value changes. The prefix named here is present once and survives the edit. grep -cF → 1.",
+      "path": "tests/lint/couplingInclusion.walker.test.js",
+      "symbol": "const ARGUED_ROSTER_CEILING"
+    },
+    {
+      "_note": "tests/lint is the FIRST entry — the reason the walker owes a mutation-coverage row, and the reason `uncovered` is unavailable to it. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    },
+    {
+      "_note": "The register-walker shape this packet copies: a declared table asserted SET-EQUAL to a live source scan in BOTH directions. NOT in the change manifest; POST-EDIT: PRESENT. grep -cF → 1.",
+      "path": "tests/lint/chooserTotality.walker.test.js",
+      "symbol": "const SCAN_ROOTS"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "⭐ THE GUARD IS LIVE AND THE HISTORY DOES NOT MOVE (walker arm T4). Through the REAL exported ruinInstitution: ALL EIGHTEEN MEMBERS ARE ACCEPTED, asserted as a positive control BEFORE the refusal so the arm cannot pass on a broken import; and a well-formed non-member ('razed_by_the_gods') THROWS. ⭐ THE BYTE ARM: JSON.stringify of the record produced for fate:'destroyed_by_disaster' is identical to EM-B1e's frozen oracle shape — the same five keys, the same values, IN THE SAME ORDER — so a VALIDATING guard is proved BYTE-TRANSPARENT on every call it admits. THE PROMISE makes this the packet's central safety claim."
+    },
+    {
+      "id": "A2",
+      "case": "EM-B1e's ABSENCE VERDICTS ARE UNCHANGED, AND THE CHECK ORDER IS PINNED (T4). A missing fate, fate:'', a non-string fate and a missing reason each still throw. ⛔ THE ORDER IS ASSERTED BY MESSAGE, not merely the fact of a throw: fate:'' must fail the TYPE check and never the membership check, because §6 places the assertWorldPulseFate call AFTER the type check and BEFORE the reason check — a later reordering would leave the LANDED tests/domain/ruinInstitution.test.js A3 green while silently changing which contract refused the call. Every negative carries `// anchored:` on the line immediately above."
+    },
+    {
+      "id": "A3",
+      "case": "⭐ DECLARED EQUALS DISCOVERED, BOTH DIRECTIONS (T2). Every roster row resolves live at path+symbol, so a moved or deleted deriver reds. The set of src/ files that WRITE worldPulseFate is SET-EQUAL to the six declared roster rows IN BOTH DIRECTIONS — an unlisted writer reds by name AND a stale row reds. The lane's `spelling` field is CHECKED against the tree, never trusted: every `literal` row is flagged and spells only members; ⭐ every `derived` row names a deriver that resolves live and WHOSE OWN STRING RETURNS ARE ALL MEMBERS — the arm that catches 'disbanded', which no write site spells and which only moralInstitutionPressure.js:348 produces; every `clear` row writes worldPulseFate: null at its declared site and spells no fate; the `argument` row imports assertWorldPulseFate and calls it. Full offender lists, never a first failure."
+    },
+    {
+      "id": "A4",
+      "case": "⭐ THE TRIGGER, THE HOMONYMS AND THE SET-EQUALITY (T3). The trigger is DERIVED from the live vocabulary minus the measured homonyms — never transcribed — and asserted to be exactly the FOURTEEN discriminating members, with a floor arm that reds if it comes out empty or halves. Each of the THREE homonyms must name at least one foreign declared vocabulary BY NAME AND FILE (abandoned → FOSSIL_KINDS, DEAD_ENDPOINT_STATUS, PLAN_STATES; abolished and disbanded → NONSTANDING_STATUS in causeLifecycle.js, the reader's own file). FLAGGED is SET-EQUAL, BOTH DIRECTIONS, to the literal roster rows ∪ the register; the register is EMPTY and its checker is proved on a planted row. ⛔ BOTH MATCHER CONTROLS ARE REQUIRED, NOT OPTIONAL: the matcher is proved to FIRE on a planted literal before any negative is asserted, proved to IGNORE a commented one, and the estate's shared codeOnly helper is shown to return ZERO here — so the arm cannot be vacuously green (EM-B1e measured exactly that trap on this same technique)."
+    },
+    {
+      "id": "A5",
+      "case": "⛔ NOTHING MOVES; THE VOCABULARY IS DERIVED; THE KINDS ARE TOTAL (T1). generatorGoldenMaster, dossierProseManifest and THE PRESET WITNESS are bytewise unchanged, asserted as fixture digests. The scan is asserted non-empty FIRST (guard-the-guard). WORLD_PULSE_FATES parses to exactly EIGHTEEN distinct members IN CODEPOINT ORDER, frozen, and null is asserted NOT to be among them. ⭐ THE KIND TOTALITY: every member's kind is one of WORLD_PULSE_FATE_KINDS, WORLD_PULSE_FATE_KINDS is exactly {closure, rise, standing}, and the three populations are exactly closure 15 / standing 1 / rise 2 — so a re-kinding cannot ride in unnoticed. ⭐ THE HONESTY ARM: seventeen of the eighteen are proved to be produced by a live writer or a named deriver in src/, with ruined_by_decree asserted BY NAME as the single declared-dormant member — so a nineteenth word that no writer produces cannot be added quietly, and the one word chartered to be dormant is visible as such."
+    },
+    {
+      "id": "A6",
+      "case": "⭐ NO READER ENUMERATES, NO READER IS A SURFACE, AND NOTHING READS THE KIND (T3). Both readers are asserted UNFLAGGED and non-enumerating, driven through the REAL functions with a standing-institution negative control first: rosterProvenance's institutionLastLifecycle forwards the value as free text, and causeLifecycle.institutionDestroyed answers on truthiness. ⭐ The surface claim is ASSERTED, not assumed: `lastLifecycle` is read nowhere in src/ outside its own producer, and OverviewTab.jsx's institutionBadge — the only consumer of institutionProvenanceOf in the tree — destructures `created` ONLY. ⭐⭐ AND THE GOLDEN-NEUTRALITY CLAIM IS MACHINERY RATHER THAN A PROMISE: a source scan proves NO file under src/ imports WORLD_PULSE_FATE_KIND. The kind is data with no reader, which is exactly what makes this packet a FREEZE and not a CURE; the failure message names EM-B1i as the packet that is allowed to read it."
+    },
+    {
+      "id": "A7",
+      "case": "⭐ THE LEAF IS CLEAN, AND A LATER EDITOR IS TOLD WHY (T3). The leaf's COMMENT-STRIPPED source contains NO `status:` token at all, and its RAW source contains no `status: 'ruined'`. Both directions are asserted with the reason in the failure message: tests/domain/ruinInstitution.test.js's LANDED A7 asserts that the comment-only-stripped `status: 'ruined'` hit list over every non-test src/ file is EXACTLY ['src/domain/worldPulse/calamityKernel.js'], and this new leaf is inside that scan — so a doc STRING or a template literal mentioning the token in the leaf would red a LANDED packet's acceptance arm, while a // or /* */ gloss is blanked by the strip and is safe."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/worldPulseFateTotality.walker.test.js",
+      "tests/lint/couplingInclusion.walker.test.js",
+      "tests/lint/couplingDesk.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "tests/lint/contractTestAntiVacuity.walker.test.js",
+      "tests/lint/ruinFilterRoster.walker.test.js",
+      "tests/lint/domainStrictBaseline.test.js",
+      "tests/lint/domainAnyCastBaseline.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/ruinInstitution.test.js",
+      "tests/domain/calamity.test.js",
+      "tests/domain/calamity.kernel.integration.test.js",
+      "tests/domain/ruinFilter.probe.test.js",
+      "tests/domain/institutionLifecycle.test.js",
+      "tests/domain/evaluateInstitutionLifecycle.test.js",
+      "tests/domain/magicRegimeLifecycle.test.js",
+      "tests/domain/settlementLifecycleFirstClass.test.js",
+      "tests/domain/upswingKernel.test.js",
+      "tests/domain/shiftTier.test.js",
+      "tests/domain/causeResolutionLifecycle.test.js",
+      "tests/domain/institutionStatusModel.test.js",
+      "tests/domain/martialMoralWF8.test.js",
+      "tests/domain/moralInstitutionFounding.test.js",
+      "tests/domain/institutionFounding.test.js",
+      "tests/domain/worldPulseExpansion.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/provenance/rosterProvenance.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/simulation/presetLightingWitness.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/worldPulse/worldPulseFates.js",
+      "src/domain/worldPulse/calamityKernel.js",
+      "tests/lint/worldPulseFateTotality.walker.test.js",
+      "tests/lint/couplingInclusion.walker.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/check-writer-reach.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

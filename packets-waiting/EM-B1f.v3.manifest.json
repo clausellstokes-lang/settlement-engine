@@ -1,0 +1,138 @@
+{
+  "id": "EM-B1f",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1f.md",
+  "_statusNote": "⭐ VERSION 3 — READY-able. THE VERSION 2 BLOCK IS LIFTED BY EXECUTION, NOT BY INHERITANCE. EM-B1k's cure is in the tree at 19c4cb853 (pulseKernel.js :184 and :579), and this lane re-ran BOTH reproductions there with THIS PACKET'S OWN ARM applied through an in-memory override: (1) the DM reproduction — a generated seven-person town, the shipped shelve writer, one tick with commit:true and the REAL store commit — persists 7 of 7 with status jailed, exiled or removed, and 7 of 7 when the DM shelves, against 6 of 7 + npc_target_missing at the PRE-CURE kernel with the same arm (the harm version 2 refused to ship, reproduced and then cured); (2) the sole-member house reproduction over eight statuses is BYTE-IDENTICAL with the arm on and off at the cured tree — the arm changes nothing in that consequence space. exiled and removed do dissolve a sole-member house, but that is the PRE-EXISTING ROSTER_ABSENT_STATUSES reading (factionLifecycle.js:87), fires identically with the arm absent, and keeps the person in the record. See §13 and evidence §2–§3.",
+  "_verifiedBaseNote": "⛔ THE CHAIR STAMPS THIS, AND IT MUST BE THE TIP AT PROMOTION. Compiled against 19c4cb85393e73404caa3bac1fe7800a48bfd39e (git status --short EMPTY in slot-2 and read-tip-32602dc60 at the start AND the end of the lane; no tree was written). This value and the packet Markdown's `Verified base` row must be substituted TOGETHER — the validator compares them (implementation-packets.mjs:889). ⓘ The packet declares NO `REGISTER` row and NO `CREATE` row, so no declared-substrate file sits in the assertAncestorAndSubstrate window and the CREATE-absence check is vacuous. ⓘ The J-T1 window `git diff --stat e5bdfd031 19c4cb853` over all twelve change paths and all seven requiredSymbols paths moved ONE file: tests/domain/roadsParticipation.test.js (+118, EM-B1k's A3 and A5). ⭐ THE BRANCH MOVED DURING THE LANE AND IT IS SAFE: the tip advanced 19c4cb853 → 63e40fe57 (EM-B1k flipped LANDED) → 9f3455b84 (CURE-E) → 96036427f (CURE-F); 19c4cb853 is an ancestor of 96036427f and `git diff --stat 19c4cb853 96036427f` over all twelve change paths, all seven requiredSymbols paths and supabase/functions/_shared/ is EMPTY, so the chair may stamp EITHER sha without re-measuring — 96036427f is recommended because placement is free there.",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "_note": "THE ONE PRODUCTION EDIT. `isOffStage` (:157) gains ONE arm, and the import at :36 gains ONE specifier. THE ARM'S MEMBERS ARE exiled · jailed · removed (the chair's Q1; NOT missing, NOT retired — R18: an irreversible consequence may only follow an irreversible cause). ⭐ FORM B, THE CHAIR'S (Q4): `export const OFF_STAGE_STATUSES = Object.freeze(NPC_UNAVAILABLE_STATUSES.filter((s) => s !== 'dead'))` — DERIVED, never spelled a third time. ⭐ THE IMPORT IS NOT A NEW EDGE, AND THE ESTATE ALREADY WRITES IT: state.js:36 reads `import { importanceWeight } from '../entities/npcs.js'`, and envoyCasting.js:50 ALREADY reads `import { NPC_UNAVAILABLE_STATUSES, importanceWeight } from '../entities/npcs.js'` — the exact post-edit line, byte for byte, landed in another file. entities/npcs.js's own closure is 2 modules (itself + src/kernel/slugify.js) and does NOT reach roads/state.js (no cycle); ZERO modules are added to any closure. BYTES, RE-MEASURED at 19c4cb853 with the repo's own esbuild 0.28.1 over the real file: base 7,727 B; FORM B as a specifier 7,911 B = +184 B (FORM A, three literals, 7,885 B = +158 B; FORM B as a second import statement 7,946 B = +219 B). The base file is byte-identical to version 2's (sha256 23ffc63bb6f39944defe147241f7f9ddbc75966509efb1bcaa4176b789676481), so the figures reproduce exactly. Bound for the build lane: ≤370 B. CHUNKS, measured: NOT in the zero-slack generation worker (220-module closure); NOT in the eager first-paint closure — ⛔ BUT VERSION 2's PARENTHETICAL 'both importers absent' IS REFUTED: src/domain/entities/npcs.js IS eager (main.jsx → store/index.js → settlementSlice.js → events/mutateEntities.js → entities/npcs.js). It does not change the price (the edge points from state.js to npcs.js, not back) and the sentence is struck. IS in the lazy engine (< 679_000, vendorPdfLazy.test.js:787 — Q2: the literal assertion is the law between re-mints) and in advanceInterval.worker's 549-module closure (Q3: price as a DELTA against TOOL-3's 4 KB per-train headroom; no per-packet re-mint). Effective lines 288 / 800 under eslint's own flat-config Linter — not a hot file, no scripts/.size-baseline.json entry, absent from PACKET_STANDARD.md's six-row standing list. ⛔ THIS EDIT STALES BOTH EDGE-SHARED BUNDLES — see the seven _shared rows.",
+      "action": "MODIFY",
+      "path": "src/domain/roads/state.js"
+    },
+    {
+      "_note": "⛔ THE NINTH ROSTER ROW (the chair's Q5: it is this packet's, not EM-B1d's). ⭐⭐ SHAPE EXECUTED, NOT ARGUED — version 3 ran THE WALKER'S OWN `offencesOf` over the post-edit source (evidence §7): `{ file: 'src/domain/roads/state.js', symbol: 'isOffStage', spelling: 'literals', enumerator: false, omits: ALL_BUT_DEAD, why: <≥40 chars> }` is LAWFUL; `spelling: 'union-read'` is CONVICTED ('declared a union READ but spells dead at 158:dead'); a <40-char `why` is CONVICTED; and ⛔⛔ THE CHARTER'S OWN RULING TEXT — an omission naming `active`, `dead`, `missing`, `retired` (amendment of 2026-09-19 17:36, ruling 3) — IS CONVICTED TWICE: 'omits a word that is not a member of the live union: active' (the stale check tests NON_ACTIVE, which excludes `active` by construction) and 'enumerates the union without exiled, jailed, removed'. The lawful `omits` is exactly the NON_ACTIVE members the file does not SPELL, which under FORM B is ALL_BUT_DEAD = ['exiled','jailed','missing','removed','retired']. THE PACKET CARRIES THE LAWFUL ROW AND THE CHAIR AMENDS THE LEDGER (§12.1 item 1). Measured post-edit: the file spells exactly ONE non-active member ('dead', at 158) so it is FLAGGED but NOT a DISCOVERED_ENUMERATOR (that needs ≥2) ⇒ enumerator:false is forced by A2/A4's declared-equals-discovered arm, and spelling:'literals' is forced by A3's FLAGGED === DECLARED_FLAGGABLE arm. ⛔⛔ APPEND AT THE END, NEVER INSERT: A3 drives three synthetic probes off CONSUMER_ROSTER[3] (the envoyCasting row — verified by execution), and an insertion would silently re-aim them. ⭐ THE WALKER ALREADY NAMES THIS PACKET: its CHOKEPOINT constant (:121) reads '…status-based absence joins that chokepoint in EM-B1f, not here'. ⛔ Nothing else in the walker is touched: not the matcher, not the derived trigger set (pinned ['dead','exiled','retired']), not the empty exemption register, not the CANNOT-CATCH header.",
+      "action": "MODIFY",
+      "path": "tests/lint/statusUnionTotality.walker.test.js"
+    },
+    {
+      "_note": "A2 + A3 — the chokepoint's OWN suite (the charter's 'T the chokepoint's own suite'). ONE new straight-line `it` inside the existing describe at :30. No new describe. A2 pins OFF_STAGE_STATUSES to ['exiled','jailed','removed'] AND Object.isFrozen — so a later widening of NPC_UNAVAILABLE_STATUSES reds here instead of changing behaviour silently — then asserts isOffStage TRUE for the three and for 'JAILED', FALSE for active, dead, missing, retired, 'sabbatical', '', a non-string (0), and a record with NO status key (4,884 of 5,171 corpus NPCs). EVERY ONE OF THOSE ROWS IS ALREADY EXECUTED at 19c4cb853 in evidence §6. ⛔ The `missing`/`retired` FALSE rows are what pin the chair's Q1 ruling into the tree. A3 re-asserts the four existing `it`s. CREDITED: the lighting walker's own parkReasonsFor returns [] for this file (executed, evidence §8). ⛔ Never name a variable or parameter `it`, `test` or `describe` (26 of the estate's 384 parked files park for that alone).",
+      "action": "TEST",
+      "path": "tests/domain/roadsState.test.js"
+    },
+    {
+      "_note": "A1 — the charter's seat-read arm. ⛔ rosterNpcById is MODULE-PRIVATE (warSeatBooks.js:92), so the arm is observed through readWarSeatBooks (:618), which calls it at :633 and whose !rulerId||!ruler branch returns securityBand:'unseated', seatWeight01:0 and omits rulerId. ONE new straight-line `it`, copying VERBATIM the landed shape of 'never lets a dead roster holder keep deciding through a stale top rung' with status:'jailed'. ⭐ BOTH HALVES ARE ALREADY EXECUTED AT 19c4cb853 (evidence §6): arm OFF, a jailed/exiled/removed/missing/retired ruler ALL read securityBand:'holding', seatWeight01:0.3744, rulerId:'a:ruler' — design §15's jailed mayor who still governs, reproduced at the tip the build starts from; arm ON, jailed/JAILED/exiled/removed read 'unseated', 0, rulerId absent, interestKind:'realm', settlementWeight01:1 — identical to the landed dead case — while missing, retired, 'sabbatical', a non-string and an absent key all still read 'holding'. CREDITED opener (executed).",
+      "action": "TEST",
+      "path": "tests/domain/warSeatBooks.test.js"
+    },
+    {
+      "_note": "A4 + A5 + A7 — TWO new straight-line `it`. A4: buildWorldSnapshot excludes a jailed NPC from the participation view WHILE save.settlement.npcs still contains them by id — absence from participation is not absence from the record, which is the lifecycle answer to 'must a jailed NPC still appear in the dossier'. A5 re-asserts the existing dormancy arm (same settlement REFERENCE when nobody is off-stage) under the widened predicate — no new title; tests/property/roadsDormancyGolden.test.js is the corpus-wide half and rides `checks`. A7 asserts the ninth roster row and that removing it reds by name. ⚠ THIS FILE IS CONTESTED: EM-B1k declared it as a TEST row and its claim RETIRED when the chair flipped it to LANDED at 63e40fe57; EM-B1k2 (DRAFT, kit packets-waiting/, not yet in the register) declares it too. The validator permits ONE non-terminal owner (implementation-packets.mjs:676, :694-700), so whichever of EM-B1f and EM-B1k2 is placed second waits for the first to flip. ⛔ Do NOT touch this file's `.npcs`-reader inventory ratchet (:187), its EXPECTED list or UNDISPOSITIONED_NPCS_READERS — the widening of its two scan roots (:428 greps only src/domain/worldPulse and src/domain/spatial) is EM-B1k2's, chartered 2026-09-20 02:53. ⛔ Do not disturb EM-B1k's two `it`s at :65 and :108. CREDITED opener (executed).",
+      "action": "TEST",
+      "path": "tests/domain/roadsParticipation.test.js"
+    },
+    {
+      "_note": "P2.10 — SEVEN PATHS, 1 of 7. ⛔ Written by `npm run build:edge-shared`, which is LAST in `checks` (step 14a: a generator mid-chain re-stamps declared paths and the packet gate can never reach the steps after it — it cost EM-B1d a ruled exception). roads/state.js is an INPUT of this bundle (114 inputs, re-measured at 19c4cb853; membership, never entry-hood — EM-PREAMBLE §P2 row 10). The sourceHash transition is stamped by the pre-proof at the real base. ⛔ action is MODIFY: PACKET_ACTIONS is ['CREATE','DOC','MODIFY','REGISTER','TEST'] (implementation-packets.mjs:30-36) — there is no REGENERATE.",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/aiCharterBundle.js"
+    },
+    {
+      "_note": "2 of 7 — the sidecar meta, same run. Never hand-edited.",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/aiCharterBundle.meta.json"
+    },
+    {
+      "_note": "3 of 7 — the second bundle whose inputs moved. roads/state.js is an input of its 115 (re-measured at 19c4cb853).",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/aiOutputSchemaBundle.js"
+    },
+    {
+      "_note": "4 of 7 — the sidecar meta, same run.",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/aiOutputSchemaBundle.meta.json"
+    },
+    {
+      "_note": "5 of 7 — ⛔ A SIBLING META, RE-STAMPED BY THE SAME BUILD WINDOW THOUGH ITS BUNDLE DID NOT MOVE (its 74 inputs do not include roads/state.js — measured). scripts/build-edge-shared.mjs declares FIVE ENTRIES (:33-39) and writes `generatedAt: new Date().toISOString()` (:83) for each inside one loop (:108). ESTABLISHED BOTH WAYS, as step 11 requires: by reading the generator, and by the precedent landings — EM-B1d's own flip 95e494bdb shows EXACTLY these seven paths and no others, and ee8ac6c3c shows the same seven. A manifest naming fewer cannot pass its own seal ('sealed foreign work drifted').",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/aiGroundingBundle.meta.json"
+    },
+    {
+      "_note": "6 of 7 — a sibling meta (2 inputs), same window, same reason.",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/analyticsEventsBundle.meta.json"
+    },
+    {
+      "_note": "7 of 7 — a sibling meta (2 inputs), same window, same reason.",
+      "action": "MODIFY",
+      "path": "supabase/functions/_shared/intentAtlasBundle.meta.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE CHOKEPOINT this packet widens. At 19c4cb853 its body is `isInStasis(npc) || npc.whereabouts.state === 'hostage'` and IT NEVER READS `.status` — the charter's premise, confirmed by reading the whole body at :157-161. PROVEN: grep -cF 'export function isOffStage' -> 1 (line 157). ⭐ POST-EDIT VERDICT: HOLDS. The packet edits the BODY and §6 pins the declaration line byte-for-byte. NOT a retiredSymbols row.",
+      "path": "src/domain/roads/state.js",
+      "symbol": "export function isOffStage"
+    },
+    {
+      "_note": "THE INHERITED PREDICATE the chokepoint is built ON (npcOps.js:151). Its vocabulary is STASIS_REASONS — a PER-LAYER fact, design §19 ruling 7, NOT NpcStatus — which is why the new arm is built BESIDE it rather than by widening it. PROVEN: grep -cF -> 1 (line 151). POST-EDIT: HOLDS (untouched).",
+      "path": "src/domain/npc/npcOps.js",
+      "symbol": "export function isInStasis"
+    },
+    {
+      "_note": "⭐ EM-B1d VERSION 5's AVAILABILITY VOCABULARY, which the deliverable READS and must find unchanged (the standard's rule). Object.freeze(['dead','exiled','jailed','removed']) at :105, re-read at 19c4cb853. Its own header names this packet: 'Participation is a THIRD question, cured once at isOffStage (roads/state.js §8) by EM-B1f'. ⛔ THE PACKET RE-SPELLS NOTHING FROM IT — OFF_STAGE_STATUSES is DERIVED — so this is a PRESERVE row, never a change path. PROVEN: grep -cF 'export const NPC_UNAVAILABLE_STATUSES' -> 1. POST-EDIT: HOLDS (untouched).",
+      "path": "src/domain/entities/npcs.js",
+      "symbol": "export const NPC_UNAVAILABLE_STATUSES"
+    },
+    {
+      "_note": "THE SEAT READ, the charter's third required symbol. ⛔ MODULE-PRIVATE at :92. Its :102 line already pairs `=== 'dead'` with isOffStage, so the widening ARRIVES here with no edit — one chokepoint is the point. PROVEN: grep -cF 'function rosterNpcById' -> 1 (line 92). POST-EDIT: HOLDS (untouched). ⓘ EM-B1d (LANDED) names the same pair; a LANDED packet's row needs no discharge and this packet retires nothing.",
+      "path": "src/domain/worldPulse/warSeatBooks.js",
+      "symbol": "function rosterNpcById"
+    },
+    {
+      "_note": "Added because the deliverable CALLS it: rosterNpcById is private, so A1 can only observe the seat read through this export (:618, calling it at :633). PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched). Driven live in evidence §6.",
+      "path": "src/domain/worldPulse/warSeatBooks.js",
+      "symbol": "export function readWarSeatBooks"
+    },
+    {
+      "_note": "Added because A4 CALLS it: the MASTER GATE (:94) whose participation view at :127-129 filters off-stage NPCs out of the settlement every pulse kernel reads while leaving the raw save roster untouched. ⭐ AT 19c4cb853 IT IS A READ PROJECTION AND NOTHING ELSE — EM-B1k made the tick's write base the raw save roster (pulseKernel.js :184, :579), which is what lifted this packet's version 2 block (§13). PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched). ⓘ EM-B1k (READY) names the same pair as a PRESERVE row; nothing to discharge either way.",
+      "path": "src/domain/worldPulse/worldSnapshot.js",
+      "symbol": "export function buildWorldSnapshot"
+    },
+    {
+      "_note": "⛔ THE HOUSE-ROSTER READER, named in requiredSymbols so §13 cannot be lost between statuses. :117 filters settlement.npcs by isOnRoster, whose vocabulary is ROSTER_ABSENT_STATUSES = ['dead','exiled','removed'] (:87), and an empty roster dissolves the house (factionLifecycleStateOf :130). The packet does NOT edit it. ⭐ MEASURED AT THE CURED TREE: this reader now sees the RAW roster, and with the arm on or off the eight-status house table is byte-identical (§13.2) — the `exiled`/`removed` dissolutions are this constant's PRE-EXISTING R18 reading, not the arm's. PROVEN: grep -cF 'export function factionRosterOf' -> 1 (line 113). POST-EDIT: HOLDS (untouched). ⓘ EM-B1k (READY) names the same pair as a PRESERVE row.",
+      "path": "src/domain/density/factionLifecycle.js",
+      "symbol": "export function factionRosterOf"
+    },
+    {
+      "_note": "THE WALKER'S ROSTER, which this packet MODIFIES and must therefore find unchanged in shape. EM-B1d v5 CREATED it; it exists at 19c4cb853 with EIGHT rows. Its `spelling` field is CHECKED against the tree, never trusted. PROVEN: grep -cF 'const CONSUMER_ROSTER' -> 1 (line 124). POST-EDIT: HOLDS — the packet APPENDS a row to the array and changes no other text, so the literal `const CONSUMER_ROSTER` survives verbatim.",
+      "path": "tests/lint/statusUnionTotality.walker.test.js",
+      "symbol": "const CONSUMER_ROSTER"
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "⭐ NONE. The packet moves, renames and deletes no symbol; every requiredSymbols row above is verbatim-preserved after its own edits (the post-edit simulation is stated per row). ⛔ `OFF_STAGE_STATUSES` is CREATED by this packet and is therefore named NOWHERE in the manifest until the LANDED flip. DISCHARGE SWEEP, EXECUTED over all 191 register entries at 19c4cb853: exactly three other rows name any of these eight (path, symbol) pairs — EM-B1d (LANDED) on warSeatBooks#rosterNpcById, EM-B1k (READY) on worldSnapshot#buildWorldSnapshot and factionLifecycle#factionRosterOf — and all three are PRESERVE rows over symbols this packet does not touch, so there is nothing to discharge. No retiredSymbols row anywhere in the register names one of this packet's pairs.",
+  "_placementNote": "⭐ FREE AT THE TIP — MEASURED TWICE. TERMINAL_PACKET_STATUSES = {LANDED, SUPERSEDED} (implementation-packets.mjs:43); reservesChangePaths = !TERMINAL.has(status) (:676); a duplicate path across two non-terminal packets is an ERROR (:694-700). (a) AT THE COMPILE BASE 19c4cb853: 191 entries — 187 LANDED, 2 SUPERSEDED, 2 READY — and EM-B1k was STILL READY although its code had landed in that very commit, reserving TEST tests/domain/roadsParticipation.test.js; validate would have refused this packet with 'duplicate change path across packets: tests/domain/roadsParticipation.test.js (EM-B1k, EM-B1f)'. (b) ⭐ AT 96036427f, THE TIP AS THIS LANE CLOSED: the chair flipped EM-B1k to LANDED at 63e40fe57 (CURE-E 9f3455b84 and CURE-F 96036427f landed behind it); the register reads 188 LANDED / 2 SUPERSEDED / 1 READY, the ONLY non-terminal packet is EM-B3c, and it shares NONE of this packet's twelve paths ⇒ PLACEMENT IS FREE. 19c4cb853 is an ancestor of 96036427f and `git diff --stat` over all twelve change paths and all seven requiredSymbols paths across that window is EMPTY, so every figure in this manifest stands at the new tip; all eight requiredSymbols re-confirmed grep -cF = 1 there. ⚠ EM-B1k2 (DRAFT, kit packets-waiting/, NOT yet in the register) declares the same test path; two non-terminal packets cannot both hold it, so whichever is placed second waits for the first to flip (packet Q3). NO packet in the register declares src/domain/roads/state.js as a change path.",
+  "acceptanceCases": [
+    { "id": "A1", "case": "⭐ THE SEAT LAW, EXECUTED (design §15: 'a jailed or exiled holder cannot keep a seat'). A jailed ruler read through readWarSeatBooks gives interestKind:'realm', settlementWeight01:1, seatWeight01:0, securityBand:'unseated', rulerId undefined — IDENTICAL to the landed status:'dead' case whose shape this copies verbatim. ⛔ ANCHORED AGAINST VACUITY: an `active` ruler in the same arm reads securityBand:'holding', seatWeight01:0.3744, rulerId:'a:ruler'. BOTH halves are already executed at 19c4cb853 — the jailed mayor who still governs, reproduced at the tip the build starts from, and the post-arm 'unseated' reproduced through an in-memory override of the same tree." },
+    { "id": "A2", "case": "THE ARM, EXACT AND DERIVED. OFF_STAGE_STATUSES equals ['exiled','jailed','removed'] and Object.isFrozen is true — so a later widening of NPC_UNAVAILABLE_STATUSES REDS HERE rather than changing behaviour silently, which is the whole value of deriving instead of spelling. isOffStage is TRUE for the three and for 'JAILED' (the estate's own lowercasing idiom: warSeatBooks:102, npcLadderState:205, npcLadderKernel:660), and FALSE for active, dead, missing, retired, the unknown token 'sabbatical', '', a non-string (0), and a record with NO `status` key at all (4,884 of 5,171 generated NPCs). ⛔ The `missing` and `retired` FALSE rows are what pin the chair's Q1 ruling into the tree: a reversible absence keeps the place. Every row executed at 19c4cb853." },
+    { "id": "A3", "case": "REGRESSION ANCHOR — travel is still narrative (THE ROADS §1 law 5). The four existing `it`s of the isOffStage describe read exactly as before: stasis (both reasons), hostage, traveller/visiting/returning, and home/null/undefined. NO NEW TITLE — the existing cases re-run under the widened predicate. isOffStage(null) and isOffStage(undefined) both stay false (executed)." },
+    { "id": "A4", "case": "⛔ ABSENCE FROM PARTICIPATION IS NOT ABSENCE FROM THE RECORD. Over a save whose roster holds one jailed and one active NPC, buildWorldSnapshot excludes the jailed one from snapshot.byId.get(sid).settlement.npcs AND save.settlement.npcs still contains them, by id. This is the lifecycle row that answers the dossier question: the record keeps the person; the pulse does not act through them. ⭐ AND IT IS NOW TRUE OF THE WRITE SIDE TOO — EM-B1k made the tick's settlement descend from the raw save roster, which §13 proves by driving the shipped tick with commit:true and the real store commit: 7 of 7 persist with the arm on." },
+    { "id": "A5", "case": "DORMANCY — zero allocation when nobody is off-stage. The existing `plain` fixture still yields snapshot.byId.get('p').settlement === plain.settlement (the same REFERENCE), proving the widened predicate stays presence-driven and a world with no such NPC is byte-identical. NO NEW TITLE. The corpus-wide half is tests/property/roadsDormancyGolden.test.js, which rides `checks` (copying EM-B1k's own landed checks row)." },
+    { "id": "A6", "case": "⛔ NOTHING MOVES. generatorGoldenMaster, dossierProseManifest and roadsDormancyGolden are bytewise unchanged. PROVED, NOT ARGUED, on two independent measurements RE-EXECUTED at 19c4cb853: (1) across the FULL 525-row golden corpus, 5,171 generated NPCs carry only <ABSENT> (4,884) or 'active' (287) — ZERO of the arm's three members; (2) no writer in src/ assigns any of them to an NPC's `.status` — the NPC writers are killNpc ('dead'), createNpc, mutateEntities ×3, undoEvent, magicFormsPractitioner, factionRoles, lineageMemberBirth, densityAscension and factionDensityKernel (all 'active'), and addNpc enumerates its fields without forwarding event.payload.status. ⛔ THE ONE CORRECTION TO VERSION 2: two src/ sites DO write status:'removed' — settlementLifecycleFirstClass.js:601 and tierOutcomeApply.js:143 — and BOTH write an INSTITUTION (demotionFateForInstitution; EntityStatus carries `removed` as a homonym), never an NPC. tests/generators/densityLaw.test.js is run in the same arm because this packet feeds the density lane. Run via `checks`; no new title." },
+    { "id": "A7", "case": "⭐ THE WALKER'S NINTH ROW, GUARDED. tests/lint/statusUnionTotality.walker.test.js is green with src/domain/roads/state.js APPENDED as a `spelling:'literals', enumerator:false, omits:ALL_BUT_DEAD` row carrying its ≥40-character reason; DELETING that row REDS BY NAME, because the arm makes the file FLAGGED the moment it lands (post-edit it spells exactly one trigger word, 'dead' at line 158, to subtract it) while A3 asserts FLAGGED === DECLARED_FLAGGABLE set-equal both directions; and the guard-the-guard arm — 'a roster file must still contain a trigger token' — passes on that same literal. SIMULATED THROUGH THE WALKER'S OWN offencesOf at 19c4cb853, never reimplemented: the lawful row returns [], `union-read` returns ['…declared a union READ but spells dead at 158:dead'], and the charter's own omission text returns two convictions. Measured control: at 19c4cb853 state.js spells NO non-active member, so EM-B1d's eight-row roster cannot name it today." }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/domain/roads/state.js", "tests/domain/roadsState.test.js", "tests/domain/warSeatBooks.test.js", "tests/domain/roadsParticipation.test.js", "tests/lint/statusUnionTotality.walker.test.js"],
+    ["npm", "run", "typecheck:ratchet"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/roadsState.test.js", "tests/domain/roadsParticipation.test.js", "tests/domain/warSeatBooks.test.js", "tests/domain/warSeatTermination.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/lint/statusUnionTotality.walker.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js", "tests/property/roadsDormancyGolden.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/generators/densityLaw.test.js", "tests/domain/advanceWorkerByteIdentity.test.js"],
+    ["node", "scripts/check-observed-shape-readers.mjs"],
+    ["node", "scripts/check-writer-reach.mjs"],
+    ["node", "scripts/implementation-packets.mjs", "validate"],
+    ["npm", "run", "build:edge-shared"]
+  ],
+  "_checksOrderNote": "⛔ THE GENERATOR IS LAST, DELIBERATELY (pre-proof step 14a, from EM-B1d version 5's second STOP): `npm run build:edge-shared` re-stamps declared paths mid-chain, the packet gate correctly invalidates every step after it, and check:packet can never reach them — EM-B1d's focused-9..13 read 'exit null, 0 ms'. Nothing may follow it. ⓘ NO tests/build file is named: per the chair's Q7 of 2026-09-20 the dist-gated byte arms leave the sealed checks and the byte proof is owed to the chair's build + verify:dist at the landing (§8 step 5). ⭐ roadsDormancyGolden joins the golden row because A5's dormancy claim is exactly what it pins across the dormant corpus — copied from EM-B1k's own landed checks."
+}

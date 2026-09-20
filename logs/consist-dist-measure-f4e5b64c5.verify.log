@@ -1,0 +1,6 @@
+
+> settlementforge@1.0.0 verify:dist
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 55087 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] STRICT DIST OK — 59 discovered/reported file(s), 538 test(s), zero failed/non-run/uncollected/missing/extra/duplicate rows.

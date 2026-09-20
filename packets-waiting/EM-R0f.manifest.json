@@ -1,0 +1,87 @@
+{
+  "id": "EM-R0f",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0f.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "action": "CREATE",
+      "path": "src/data/economyFingerprint.js",
+      "symbol": "fingerprintPowerEconomyInput, economyProjectionInput, ECONOMY_FINGERPRINT_VERSION - the three declarations lifted VERBATIM from src/generators/power/economyReconciliation.js (:37, :85-92, :94-111); one import, ../kernel/proseHash.js; nothing from generators/store/lib or the kernel prng/rngContext seams"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/generators/power/economyReconciliation.js",
+      "symbol": "the import block, :37 and :85-112 - the fnv1a32 import is deleted with the function, the new import of ../../data/economyFingerprint.js is added at the head of the block, and NO re-export is left behind; the call text at :171 and :358 is byte-identical"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/generators/powerEconomyFreshness.test.js",
+      "symbol": "the import block :17-19 - fingerprintPowerEconomyInput splits out to ../../src/data/economyFingerprint.js while assertPowerEconomyFreshness stays on the generator; no describe/test/it added, removed or renamed"
+    },
+    {
+      "action": "MODIFY",
+      "path": "tests/build/domainGeneratorsBoundary.test.js",
+      "symbol": "the module header :1-59 (the ~22.7k LOC figure, the stale six-row baseline list, EM-R0f's citation) and, per the chair's Q2 ruling, the cardinality arm's title and bound at :159/:164; BASELINE_EDGES is NOT touched"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/build/generationWorkerLazy.test.js",
+      "symbol": "WORKER_BUNDLE_CEILING_BYTES - re-minted to the exact measured bundle ONLY if the build lane's real build measures a rise; bound 184 B (the measured +92 B esbuild per-module estimate x2); the constant and its dated attribution comment only"
+    }
+  ],
+  "requiredSymbols": [
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function assertPowerEconomyFreshness(" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function projectPowerGenerationIntent(" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function createPowerGenerationIntent({" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function reconcilePowerStructure(" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function refreshPowerGenerationTraces(" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "rngSeed: stepRng.fork(POWER_STREAM).seed," },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "createPRNG(intent.rngSeed)" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "powerStructure.economyInputFingerprint = fingerprintPowerEconomyInput(" },
+    { "path": "src/kernel/proseHash.js", "symbol": "export function fnv1a32(" },
+    { "path": "tests/build/domainGeneratorsBoundary.test.js", "symbol": "const BASELINE_EDGES = Object.freeze({" },
+    { "path": "tests/build/domainGeneratorsBoundary.test.js", "symbol": "'src/domain/worldPulse/resourceDynamicsKernel.js': ['../../generators/computeActiveChains.js', '../../generators/terrainHelpers.js']," },
+    { "path": "tests/generators/powerEconomyFreshness.test.js", "symbol": "fingerprintPowerEconomyInput(first.economicState, first.tier)," },
+    { "path": "tests/build/generationWorkerLazy.test.js", "symbol": "export const WORKER_BUNDLE_CEILING_BYTES = " },
+    { "path": "tests/domain/dataPurity.test.js", "symbol": "describe('src/data purity (no runtime imports of generators/store/lib)', () => {" }
+  ],
+  "retiredSymbols": [
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "export function fingerprintPowerEconomyInput(economicState, tier) {" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "function economyProjectionInput(economicState, tier) {" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "const ECONOMY_FINGERPRINT_VERSION = 'power-economy-v1';" },
+    { "path": "src/generators/power/economyReconciliation.js", "symbol": "import { fnv1a32 } from '../../kernel/proseHash.js';" }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "GOLDEN NEUTRALITY. Over all 525 rows of goldenCorpus(), fingerprintPowerEconomyInput imported from src/data/economyFingerprint.js returns row for row exactly what the pre-move function returned and exactly what the pipeline writes to powerStructure.economyInputFingerprint. SHA-256 over 'keyOf(c) TAB fingerprint' in corpus order = 318fb81a94ca724d664907bc3cdd1602a995df2b6c7c32f5dca4022887618e18, zero disagreements."
+    },
+    {
+      "id": "A2",
+      "case": "Both goldens and the preset witness are byte-identical across the change; generatorGoldenMaster and dossierProseManifest are green with no update door set."
+    },
+    {
+      "id": "A3",
+      "case": "tests/generators/powerEconomyFreshness.test.js is green with fingerprintPowerEconomyInput imported from its new home and assertPowerEconomyFreshness still from the generator; the freshness invariant still throws on a perturbed prosperity and on a fingerprint-stripped power structure."
+    },
+    {
+      "id": "A4",
+      "case": "tests/build/domainGeneratorsBoundary.test.js is green and BASELINE_EDGES is byte-identical: the live set is still 4 files / 5 specifiers, and src/data/economyFingerprint.js creates no src/domain to src/generators edge."
+    },
+    {
+      "id": "A5",
+      "case": "tests/domain/dataPurity.test.js is green with the new leaf in its walked set - no generators/store/lib import, no rngContext capture, no kernel/prng import - and eslint's src/data/** no-restricted-imports override passes on it."
+    }
+  ],
+  "checks": [
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/generators/powerEconomyFreshness.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/dataPurity.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/build/domainGeneratorsBoundary.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js"],
+    ["npx", "eslint", "src/data/economyFingerprint.js", "src/generators/power/economyReconciliation.js", "tests/generators/powerEconomyFreshness.test.js", "tests/build/domainGeneratorsBoundary.test.js"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npm", "run", "typecheck:ratchet"],
+    ["node", "scripts/implementation-packets.mjs", "validate"]
+  ]
+}

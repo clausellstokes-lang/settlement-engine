@@ -1,0 +1,11 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 72876 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/lane-prose-weave
+
+Not implemented: HTMLCanvasElement's toDataURL() method: without installing the canvas npm package
+
+ Test Files  2 passed (2)
+      Tests  19 passed (19)
+   Start at  07:46:26
+   Duration  2.99s (transform 1.40s, setup 43ms, import 1.32s, tests 1.85s, environment 779ms)
+

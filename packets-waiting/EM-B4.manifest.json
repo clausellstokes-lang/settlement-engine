@@ -1,0 +1,223 @@
+{
+  "id": "EM-B4",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B4.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE PURE FOLD LEAF (fork G1 — in-app and VERSIONLESS; see the packet §0.4). `foldInlineEditsIntoLayer(settlement)` is TOTAL and UNCONDITIONAL: a non-object, a settlement with no `_userEdits`, or an empty `_userEdits` is returned REFERENTIALLY unchanged and NO `dmLayer` key is created — absence stays absence. Where edits exist it writes `layer.entities[id][field] = originalValue` (the ENGINE'S value — the record already carries the DM's, because applyUserEdit wrote it in place at userEdits.js:181). ADD-ONLY: an already-owned layer field is LEFT ALONE, which is the single rule that makes the second run byte-identical to the first. `auditInlineEditFold(settlement)` is the charter's `--check` as a PURE FUNCTION rather than a CLI, returning three ASCII-ascending deduplicated lists (wouldAdd, alreadyOwned, unfoldable) and leaving the settlement byte-identical. ⛔ NO FLAG, NO ENV READ, NO CONDITIONAL ARM — PACKET_STANDARD 'Ungated persistence' makes a gate here the fail-OPEN direction, and EM-PREAMBLE HZ-PERSIST-UNGATED mirrors it. Reads `_userEdits` ONLY through walkUserEdits (userEdits.js:351); never a second walk. ⭐ AMENDED (ODQ §934.44 addendum): `dmLayer` holds ROOT keys only, so the fold CLASSIFIES each inline edit root-or-derived through the same decision-fork registry EM-A1 reads and writes only the root ones; a DERIVED inline edit is REPORTED in a fourth list `derivedRefused` and NEVER applied, because applying it re-introduces the stale-derivation contradiction design §14 exists to prevent (and history is additionally immutable, THE PROMISE). ⛔ THE CLASSIFIER DOES NOT EXIST: the registry's scan roots are src/domain/worldPulse, /spatial, /traditions and /region and zero of its 43 rows names a src/generators module — a fourth reason this packet is BLOCKED. ⭐ DECIDED YES (§934.47 B): the fold's target is settled — ROOT paths to dmLayer.roots by the §14 classification through EM-P2's generation fork registry (joined on (cardShape, outputKey), the same join EM-A1 uses), and DERIVED-prose and HISTORY paths to dmLayer.notes as the DM's notes on the card, kept and shown as notes, never as facts. The derivedRefused list becomes the NOTES FOLD — the same measured set, re-homed rather than refused, so nothing a DM wrote is lost and nothing derived is re-asserted as a fact. Measured 9 of EDITABLE_FIELDS.settlement's 14 paths are derived or history under §14 (economicViability.summary, the three safetyProfile *Desc paths, the five history.* paths) and go to notes. The audit's fourth list is renamed wouldNote.",
+      "action": "CREATE",
+      "path": "src/domain/edit/foldInlineEdits.js"
+    },
+    {
+      "_note": "⛔ THE ONE UNCONDITIONAL SEAT, MEASURED. src/lib/saves.js is where every save is read: localLoad chains `.map(migrateSaveToV2).map(migrateSettlementShape)` at :713, and migrateSaveToV2 runs on EVERY read AND write path (:331, :443, :503, :684, :713, :743, :775, :850) — its own comment at :195 says so. The fold is added to that chain AFTER both existing steps (a settlement must reach its current shape before its edits are read), on EVERY read path and inside NO conditional. THE MEDIUM CORRECTION THIS ROW ENCODES: the charter asks for `scripts/migrate-edit-registry.mjs`, but saves live in a browser's localStorage['dnd_settlement_saves'] (:16, :105, :125) or in per-user Supabase `settlements` rows behind that user's session (:369-371) — a repo-side node CLI can reach NEITHER, and the estate's only scripts/migrate-* migrates a repository baseline file. The file carries no scripts/.size-baseline.json entry and sits under the 800 layer ceiling.",
+      "action": "MODIFY",
+      "path": "src/lib/saves.js"
+    },
+    {
+      "_note": "THE BATTERY — A1, A2, A3, A4, A5, A7. Copies the proof shape of tests/domain/settlementMigrations.test.js, whose `describe('Tier 1.4 — migrateSettlementToLatest behavior')` carries exactly the three arms a fold owes: `it('is idempotent on an already-current settlement')`, `it('does not mutate the input')` and `it('returns the same value for null / non-object inputs (no crash)')`. A7 is the pair of structural pins that keep this packet inside its own law: a source scan proving the call site sits in NO conditional, flag read or env read on any save-read path, and the assertion that SCHEMA_VERSION is still 1 with listMigrations() still holding ONE entry. ⛔ Flat literal `it(...)` only — no `.each`, no looped or conditional registration, no nested describes (EM-PREAMBLE §P3.4). REGISTRATION MEASURED: tests/domain is not one of the eight ENFORCER_DIRS and `foldInlineEdits.test.js` matches no mutationCoverage NAME_PATTERN token, so NO scripts/mutation-coverage-manifest.json row is owed — confirmed empirically by the zero existing tests/scripts rows in that manifest.",
+      "action": "CREATE",
+      "path": "tests/domain/foldInlineEdits.test.js"
+    },
+    {
+      "_note": "A6, THE REAL INTEGRATION, in the file that already owns the estate's save-envelope fixpoint: `describe('E-C saves envelope — the local substrate: save, import (list), fixpoint, update')` › `test('save → list → writeAll → list is a byte-exact fixpoint (the reload/import hop)')`. One arm drives the REAL saves service over a settlement carrying inline edits and asserts the layer is present and stable across both list hops with no flag set. Already-credited file, so it adds NO lighting-census file row and no new suite title.",
+      "action": "TEST",
+      "path": "tests/store/lifecycleRoundTrip.test.js"
+    },
+    {
+      "_note": "⛔ NOT A ROW HERE — THE RETIREMENT IS ITS OWN PACKET, AND THE MEASUREMENT IS WHY. src/domain/historyPreservation.js:83 filters EDITABLE_FIELDS.settlement for `history.*` to decide what restoreAuthoredHistory re-applies after a history reroll, so DELETING THOSE FIVE ROWS SILENTLY STOPS AUTHORED HISTORY SURVIVING A REROLL — a regeneration BEHAVIOUR change, not a data edit. Beside it, settlementPendingEdits.js keeps QUEUE_WIRED_PROSE_PATHS 'in lockstep with EDITABLE_FIELDS' (:36, :65) and WorkbenchProseEditor.jsx renders 'the 16 queue-wired paths'. Retirement therefore touches userEdits.js + historyPreservation.js (behaviour) + settlementPendingEdits.js (a lockstep register) + a component: four files, a second behaviour family, and a surface that must leave the screen in the same wave the rows leave the registry. Named EM-B4b, sequenced with wave 4. ⭐ The fold does not need it: it reads _userEdits and writes dmLayer, is correct whether or not the old lever exists, and is idempotent.",
+      "action": "DOC",
+      "path": "src/domain/userEdits.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE FOLD'S ONLY READ PATH — the whole-tree iterator over every entity._userEdits[path] record. Renaming it forces a second walk of the same state, which is the duplicate-reader class this family refuses.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export function walkUserEdits"
+    },
+    {
+      "_note": "⛔ THE SOURCE RECORD'S WRITER, and the reason the fold stores `originalValue` rather than the DM's value: applyUserEdit already wrote the DM's value ONTO the record in place and kept the engine's original beside it. It is also EM-B2 §0's block, inherited here — whether the fold CLEARS this record or leaves it standing is the unruled half.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export function applyUserEdit"
+    },
+    {
+      "_note": "The fold's closed input denominator: 6 entity types plus 14 settlement-root prose paths. Its `npc` list carries `role`, which ARCH §9 declares a POOL field of the npc card — the single measured overlap that makes the fold's target unruled.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export const EDITABLE_FIELDS"
+    },
+    {
+      "_note": "THE SAVE SERVICE the fold is wired into. Its load chain is the one place every save is read, and it is what makes the normalization UNCONDITIONAL without a flag.",
+      "path": "src/lib/saves.js",
+      "symbol": "export const saves"
+    },
+    {
+      "_note": "THE ESTATE'S MIGRATION CONTRACT, whose shape this fold copies: pure, idempotent on an already-current settlement, non-mutating, and safe on null / non-object. ⛔ Under fork G1 the MIGRATIONS chain is NOT appended to — this symbol is named so an accidental append is visible.",
+      "path": "src/domain/settlementMigrations.js",
+      "symbol": "export function migrateSettlementToLatest"
+    },
+    {
+      "_note": "The chain's public enumeration. A7 asserts it still holds exactly ONE entry after this packet.",
+      "path": "src/domain/settlementMigrations.js",
+      "symbol": "export function listMigrations"
+    },
+    {
+      "_note": "The chain's own validator (no gap, no fanout, to === from + 1). Preserved so a later versioned fold cannot land without its integrity arm.",
+      "path": "src/domain/settlementMigrations.js",
+      "symbol": "export function diagnoseMigrationChain"
+    },
+    {
+      "_note": "⛔⛔ THE VERSION STAMP THIS PACKET MUST NOT MOVE. It is 1. normalizeSettlement.js:167 stamps it into every settlement, assembleSettlement.js:324 runs normalizeSettlement inside the pipeline, and tests/property/generatorGoldenMaster.test.js hashes sha256(JSON.stringify(generateSettlementPipeline(...))) over a 525-row fixture — so a bump re-records ALL 525 golden rows, which EM-PREAMBLE §P3.1 makes a standing STOP. This is the whole price of fork G2.",
+      "path": "src/domain/settlement.schema.js",
+      "symbol": "export const SCHEMA_VERSION"
+    },
+    {
+      "_note": "THE PROOF THAT THE CHANGE DOCK'S QUEUE IS SESSION-ONLY. partializeStoreState returns exactly nine keys and `pendingEditsQueue` is not among them; the save row's own closed patch list does not carry it either. So design §12.13's 'RETIRED, not merged' is costless and the charter's first named input contributes ZERO rows.",
+      "path": "src/store/persistProjection.js",
+      "symbol": "export function partializeStoreState"
+    },
+    {
+      "_note": "The closed 17-key save-row patch surface. `dmLayer` rides inside the settlement blob, so this list is deliberately NOT widened; naming it makes an accidental widening visible.",
+      "path": "src/store/settlementSliceHelpers.js",
+      "symbol": "export const SAVED_SETTLEMENT_PATCH_KEYS"
+    },
+    {
+      "_note": "The Change Dock's enqueue point, appending to draft.pendingEditsQueue — a key no persistence surface carries. Read-only evidence; this packet neither retires, merges nor touches the Dock.",
+      "path": "src/store/settlementPendingEdits.js",
+      "symbol": "export function queuePendingEdit"
+    },
+    {
+      "_note": "⛔ THE SURVEYOR'S REVIEW ARTIFACT, which the charter names as this packet's required symbol. The SHAPE exists and is preserved — pure, returning { accepted: [{index, op}], blocked: [{index, reason:'needs_consent'}], corrections: [{index, class}] } over ReviewOp / ReviewDecision. But NO INSTANCE OF IT IS EVER PERSISTED: InterpretApplyPanel.jsx:153-155 holds result, decisions and applyResult in React useState and `git grep interpretation -- src/store` is EMPTY, so the charter's second named input is also empty and this symbol is a preserved contract rather than a migration source.",
+      "path": "src/domain/intent/interpretReview.js",
+      "symbol": "export function reviewInterpretation"
+    },
+    {
+      "_note": "The review's closed action vocabulary ['approve','edit','reject','pending']. Preserved for EM-D4, which re-points the Surveyor onto the registry; untouched here.",
+      "path": "src/domain/intent/interpretReview.js",
+      "symbol": "export const REVIEW_ACTIONS"
+    },
+    {
+      "_note": "⭐ THE CENSUS CORRECTION, PINNED AS A SYMBOL. The lighting census's `files` figure is TEST_FILES.length and TEST_FILES walks tests/ ONLY, so this packet's predicted +1 is caused by its ONE new TEST file and not by src/domain/edit/foldInlineEdits.js. EM-PREAMBLE §P2.1 states the opposite and is wrong; naming this symbol keeps the correction executable.",
+      "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "symbol": "const TEST_FILES = walk(join(ROOT, 'tests'))"
+    },
+    {
+      "_note": "The eight enforcer dirs the mutation-coverage denominator is built from. With NAME_PATTERN they are the measured reason tests/domain/foldInlineEdits.test.js owes NO manifest row.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    },
+    {
+      "_note": "⛔ THE CLASSIFIER THE FOLD NEEDS AND CANNOT HAVE. The decision-fork registry is the SIMULATION's: 43 rows, scan roots src/domain/worldPulse, /spatial, /traditions, /region, and ZERO rows naming a src/generators module. Without it the fold cannot tell a root from a derivation, and a fold that guesses is the data corruption design §14 was written to stop.",
+      "path": "src/domain/worldPulse/habitForkRegistry.js",
+      "symbol": "export const HABIT_FORK_REGISTRY"
+    },
+    {
+      "_note": "The registry walker's scan roots — the receipt that src/generators is outside the classifier's reach.",
+      "path": "tests/lint/chooserTotality.walker.test.js",
+      "symbol": "const SCAN_ROOTS"
+    },
+    {
+      "_note": "⛔ THE RETIREMENT'S BEHAVIOUR TRIPWIRE. It imports EDITABLE_FIELDS and filters its settlement list for `history.*` to decide what restoreAuthoredHistory re-applies after a history reroll — which is why deleting those rows is a regeneration behaviour change and belongs to EM-B4b, not here.",
+      "path": "src/domain/historyPreservation.js",
+      "symbol": "EDITABLE_FIELDS.settlement"
+    },
+    {
+      "_note": "THE LOCKSTEP REGISTER. settlementPendingEdits.js keeps this in lockstep with EDITABLE_FIELDS, so a row leaving the registry moves this too — the second reason retirement is its own packet.",
+      "path": "src/store/settlementPendingEdits.js",
+      "symbol": "export const QUEUE_WIRED_PROSE_PATHS"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE FOLD: a settlement carrying three _userEdits records across two entities yields dmLayer.entities holding all three at the record's originalValue, with the record's own field values UNTOUCHED and the argument unmutated."
+    },
+    {
+      "id": "A2",
+      "case": "DORMANT/ABSENT: a settlement with no _userEdits, and one with _userEdits {}, are both returned REFERENTIALLY unchanged (===) and NO dmLayer key is created — absence stays absence."
+    },
+    {
+      "id": "A3",
+      "case": "⛔ THE FIXPOINT: the second run is byte-identical to the first and the third to the second; a field already owned in dmLayer keeps its ORIGINAL value and is never overwritten by a later _userEdits record (the add-only rule)."
+    },
+    {
+      "id": "A4",
+      "case": "COUNTERFORCE / MALFORMED: null, undefined, a string, a number, a non-object _userEdits value and a record missing originalValue — nothing throws, the four non-objects come back ===, and the two malformed records appear in unfoldable and never in dmLayer."
+    },
+    {
+      "id": "A5",
+      "case": "⛔ THE --check ARM WITH THE ROOT/DERIVED CLASSIFIER AND THE NOTES FOLD: auditInlineEditFold over a mixed settlement (two root-foldable, one already owned, one malformed, one DERIVED such as economicViability.summary, one HISTORY such as history.founding.reason) returns all five ASCII-ascending lists — wouldAdd, alreadyOwned, unfoldable, wouldNote; the derived and history edits appear ONLY in wouldNote and land in dmLayer.notes, never in dmLayer.roots; three calls return equal lists; and the settlement is byte-identical before and after."
+    },
+    {
+      "id": "A6",
+      "case": "LIFECYCLE / REAL INTEGRATION: the REAL saves service's save → list → writeAll → list hop over a settlement with inline edits is a byte-exact fixpoint, the layer present and stable on both list hops, with NO flag set."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ THE UNGATED AND UNVERSIONED PINS: a source scan proves the fold's call site is reached on EVERY save-read path and sits inside NO conditional, flag read or env read; SCHEMA_VERSION is still 1 and listMigrations() still holds ONE entry; and both golden fixtures are byte-identical by SHA-256."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/foldInlineEdits.test.js",
+      "tests/domain/settlementMigrations.test.js",
+      "tests/domain/userEdits.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/store/lifecycleRoundTrip.test.js",
+      "tests/store/persistMerge.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/foldInlineEdits.js",
+      "src/lib/saves.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

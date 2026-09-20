@@ -1,0 +1,70 @@
+{
+  "id": "EM-B3d",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B3d.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "action": "MODIFY",
+      "path": "src/lib/importScrub.js",
+      "_note": "ONE new exported pure strip, `scrubImportedEditState`, APPENDED AT THE VERY END OF THE FILE (+10 eff), plus a net +1 RAW line in the module docblock (THREE STRIPS -> FOUR STRIPS amended in place, one new bullet). Appending at the end is a CONTRACT, not a style note: three live path:line citations address importScrub.js:115-121 and :158-166 (importReconciliationAdmission.js:442 and :549; tests/lib/importReconciliation.test.js:604), and an insertion in the middle would move them by the size of the function. The spelling is an Object.hasOwn guard plus a DESTRUCTURE-DROP, copied from scrubImportedConfig (:49) and scrubGalleryImportLivingContent (:145): measured against the detector's own rule (scanReaders counts a read ONLY at ts.isPropertyAccessExpression), it adds ZERO property reads and therefore ZERO observed-shape register rows. REFERENCE-IDENTICAL when neither key is an own key, which is every import at this landing."
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/store/galleryImportSettlement.js",
+      "_note": "NET ZERO LINES, two changed: the named import at :23-27 takes `scrubImportedEditState` on the SAME line as `scrubGalleryImportLivingContent,` (the estate already spells two names on one import line at accountImport.js:58), and the settlement-level call at :71 gains ONE outermost token IN PLACE. NO line may be added above `_seed: undefined` (:76): four live citations address galleryImportSettlement.js:76 from tests/domain/composeStateProse.test.js:319, tests/domain/stateProseKernel.test.js:612 and tests/property/dossierProseManifest.test.js:30 and :522. The explanation lives in the new function's JSDoc."
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/store/galleryImportMap.js",
+      "_note": "NET ZERO LINES, two changed: the named import at :13-17 and the per-member settlement call at :290, same spelling and same outermost position as the sibling gallery path. EST-A's requiredSymbols row `importGalleryMapWithCampaignImpl` survives verbatim."
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/lib/accountImport.js",
+      "_note": "NET ZERO LINES, two changed: the single-line import at :58 gains the third name, and `const settlement = scrubImportedTreasury({` at :617 becomes `const settlement = scrubImportedEditState(scrubImportedTreasury({` with the extra parenthesis closed on the existing `});` line. This one seam also carries the reconciliation session (importReconciliationAdmission.js:684) and accountImportBody.js:414, so all three account-side doors inherit the strip. WEB-5's four requiredSymbols rows, including the literal `meta.restoreLifecycle === true` (:639), survive verbatim."
+    },
+    {
+      "action": "TEST",
+      "path": "tests/lib/importScrub.test.js",
+      "_note": "acceptance cases A1, A2, A3, A4 as 4 literal-titled `it`s in ONE new `describe` appended after the DEF-1 suite; A5 joins as a fifth in the same suite. No .each, no loop-generated test, no nested describe, and no variable or parameter named `it`, `test` or `describe`. A4 copies the shape of the existing `ALL THREE import paths call it - the one-path-only shape store-4 was` arm, naming each importer individually. TEST rather than CREATE because the file exists at the base (implementation-packets.mjs errors on a non-CREATE row whose path is absent). Owes NO mutation-coverage row: tests/lib is not an ENFORCER_DIR and the basename trips no NAME_PATTERN token, measured at ee204c827. DO NOT anchor the existing un-anchored `expect(out).not.toHaveProperty(stripped)` at :42: its FROZEN_UNANCHORED_NEGATIVES ceiling of 1 reds on a SHRINK, and that register is outside this manifest."
+    },
+    {
+      "action": "TEST",
+      "path": "tests/lib/editTravel.test.js",
+      "_note": "acceptance case A6, the RUNTIME IMPORT ARM design section 12 item 4 names and this suite does not yet carry: its docblock claims `not into an import` while A7 executes fork, backup export and realm snapshot only. ONE literal-titled `test` appended INSIDE the existing second describe; no existing arm is edited. Reuses the file's dmLayerFixture(), decreesFixture() and expectByteEqual, and drives prepareSettlementEntry - the one import door reachable headlessly, already driven by tests/lib/importScrub.test.js:129. Owes NO mutation-coverage row, same measurement as above."
+    }
+  ],
+  "requiredSymbols": [
+    { "path": "src/lib/importScrub.js", "symbol": "export function scrubImportedTreasury" },
+    { "path": "src/lib/importScrub.js", "symbol": "export function scrubImportedConfig" },
+    { "path": "src/lib/importScrub.js", "symbol": "export function scrubGalleryImportLivingContent" },
+    { "path": "src/store/galleryImportSettlement.js", "symbol": "export async function importGallerySettlementImpl" },
+    { "path": "src/store/galleryImportMap.js", "symbol": "importGalleryMapWithCampaignImpl" },
+    { "path": "src/lib/accountImport.js", "symbol": "export function prepareSettlementEntry" },
+    { "path": "src/domain/normalizeSettlement.js", "symbol": "export function normalizeSettlement" },
+    { "path": "src/domain/edit/recordRegister.js", "symbol": "NOT_YET_WRITTEN_KEYS" },
+    { "path": "tests/lib/importScrub.test.js", "symbol": "is REFERENCE-IDENTICAL when there is nothing to strip" },
+    { "path": "tests/lib/importScrub.test.js", "symbol": "ALL THREE import paths call it — the one-path-only shape store-4 was" },
+    { "path": "tests/lib/editTravel.test.js", "symbol": "A7 — the three travel surfaces, executed end to end" }
+  ],
+  "retiredSymbols": [],
+  "acceptanceCases": [
+    { "id": "A1", "case": "a settlement carrying both edit keys as OPAQUE planted values comes back without either, every other key deep-equal with its insertion order intact, and the source object is not mutated" },
+    { "id": "A2", "case": "the strip is REFERENCE-IDENTICAL when there is nothing to strip, which is every import at this landing, and a null undefined or array settlement passes through unchanged without throwing" },
+    { "id": "A3", "case": "an empty container a null and a malformed value are all PRESENT keys and are all dropped because the strip never inspects the value, in deliberate contrast with the save path where an empty container is the owner's own fact" },
+    { "id": "A4", "case": "all three import paths import the new strip from importScrub.js and call it, asserted file by file with the file named in the failure message" },
+    { "id": "A5", "case": "prepareSettlementEntry returns an entry whose settlement has neither editor key and no treasury, with the food ledger and the world's own content surviving, so the two strips compose rather than shadow" },
+    { "id": "A6", "case": "the runtime import arm design section 12 item 4 names: a foreign import file carrying both keys yields a prepared entry whose serialized form contains neither key at any depth, anchored on the surviving name tier institution and import provenance" }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/lib/importScrub.js", "src/store/galleryImportSettlement.js", "src/store/galleryImportMap.js", "src/lib/accountImport.js", "tests/lib/importScrub.test.js", "tests/lib/editTravel.test.js"],
+    ["node", "scripts/check-observed-shape-readers.mjs"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/lib/importScrub.test.js", "tests/lib/editTravel.test.js", "tests/lib/accountImport.test.js", "tests/lib/importReconciliation.test.js", "tests/lib/importReconciliationRecovery.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/treasuryDormancy.byteIdentity.test.js", "tests/domain/livingContentLawWiring.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/store/decreeRegistryPersistence.test.js", "tests/store/lifecycleRoundTrip.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/security/snapshotDenylistDrift.test.js", "tests/security/worldSnapshotDenyCensus.test.js", "tests/security/gallerySanitizeAllowlist.contract.test.js", "tests/security/townMapEditsPublicDrop.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/lint", "--exclude=tests/lint/sovereigntyLightingContract.walker.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js"]
+  ]
+}

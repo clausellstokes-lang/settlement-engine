@@ -1,0 +1,16 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 71082 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+Running 1 test using 1 worker
+
+[capture-landing-realm] /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/lane-prose-weave/public/landing-maps/realm-cnocby.png · 2280x1124 · 906121 bytes
+  ✓  1 [chromium] › e2e/landing-realm-capture.spec.js:108:1 › the landing realm map is captured from the running Realm view (9.9s)
+
+  1 passed (16.1s)
+[capture-landing-realm] captured 884.9 kB → png 466.9 kB + webp 120.5 kB
+[capture-landing-realm] realm-cnocby.webp  120.5 kB   (served first)
+[capture-landing-realm] realm-cnocby.png   466.9 kB   (the fallback)
+[capture-landing-realm]   seed lf-033 · 12 weeks · 2280x1124 · tip 8f0ac2993
+[capture-landing-realm]   in frame: Cnocby, Keshigordu, Skáloy, Aryagrad, Penshaw
+[capture-landing-realm]   WebP is inside the 195.3 kB target (74.9 kB to spare).
+[capture-landing-realm] ⚠ the PNG fallback is OVER the 390.6 kB target by 76.3 kB.
+[capture-landing-realm]   It is the FALLBACK, so only engines that cannot decode WebP pay it.

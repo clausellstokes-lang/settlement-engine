@@ -1,0 +1,138 @@
+{
+  "id": "EM-A3",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-A3.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "action": "CREATE",
+      "path": "tests/lint/flavorFields.census.test.js",
+      "symbol": "acceptance cases A1 through A5 — the value-join arm and the property-read arm"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/domain/edit/fieldDeclarations.js",
+      "symbol": "the readersProof string value on each kind: 'free' row of FIELD_DECLARATIONS"
+    },
+    {
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json",
+      "symbol": "invariants['tests/lint/flavorFields.census.test.js']"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const FACTION_RENAME_SURFACES"
+    },
+    {
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const NPC_RENAME_SURFACES"
+    },
+    {
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const NON_CASCADED_SURFACES"
+    },
+    {
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const NPC_NON_CASCADED_SURFACES"
+    },
+    {
+      "path": "scripts/check-writer-reach.mjs",
+      "symbol": "export const BASELINE_PATH"
+    },
+    {
+      "path": "scripts/lib/writer-reach-scan.mjs",
+      "symbol": "export const SURFACE_CLOSURE_STOP"
+    },
+    {
+      "path": "scripts/lib/writer-reach-scan.mjs",
+      "symbol": "export const WEB_DISPLAY_DIRS"
+    },
+    {
+      "path": "scripts/lib/writer-reach-scan.mjs",
+      "symbol": "export function parseReach"
+    },
+    {
+      "path": "scripts/check-observed-shape-readers.mjs",
+      "symbol": "export const EXPLAINED_WRITER_EXEMPTIONS"
+    },
+    {
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    },
+    {
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateNPCs"
+    },
+    {
+      "path": "src/generators/economy/upgradeOpportunities.js",
+      "symbol": "export const getUpgradeOpportunities"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE VALUE-JOIN HALF — every declaration row whose stored path is an exact-key path in either cascade denominator is declared free-cascade; no joining row is free or pool; no free-cascade row is join-less"
+    },
+    {
+      "id": "A2",
+      "case": "DORMANT AND ABSENT — a card type carrying no free row still runs the live scan, asserts a non-empty corpus under every scan root, and reports zero free rows without passing vacuously"
+    },
+    {
+      "id": "A3",
+      "case": "GUARD-THE-GUARD — a planted kind free on a row whose path is a declared cascade key REDS A1, and the message names both the declaration row and the exact cascade path"
+    },
+    {
+      "id": "A4",
+      "case": "THE ANTI-VACUITY FENCE — the scan walked a non-empty file set under EVERY root, both cascade denominators are non-empty, at least one declaration row is classified as JOINING, and the positive control (role on npcs, read by getUpgradeOpportunities) IS found by the scan"
+    },
+    {
+      "id": "A5",
+      "case": "EVERY FREE ROW CARRIES A LIVE PROOF — readersProof is a non-empty string on every kind free row and names an arm this census actually ran, and no pool or free-cascade row carries one"
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/flavorFields.census.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js",
+      "tests/lint/sovereigntyLightingContract.walker.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/factionRename.test.js",
+      "tests/domain/editDeclarations.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "tests/lint/flavorFields.census.test.js",
+      "src/domain/edit/fieldDeclarations.js"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

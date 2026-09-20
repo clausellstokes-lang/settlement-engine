@@ -1,0 +1,167 @@
+names {"t":"Cnocby","n0":"Keshigordu","n1":"Skáloy","n2":"Aryagrad","n3":"Penshaw"}
+wizardNews total 122 kinds {"applied":107,"queued":15}
+=== APPLIED ENTRIES (107) ===
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.reform.n1_npc_thieves_guild_kingpin_0.1 | HL: The Kingpin reforms | SUM: The Kingpin's settle rivalry goal advances through reform.
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.mobilize.n1_npc_7.1 | HL: Amleth Svensson mobilizes | SUM: Amleth Svensson's survive crisis goal advances through mobilize.
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.mobilize.n0_npc_2.1 | HL: Kadan Urgench mobilizes | SUM: Kadan Urgench's expand influence goal advances through mobilize.
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.reform.n1_npc_3.1 | HL: Frigg Hrollasson reforms | SUM: Frigg Hrollasson's protect followers goal advances through reform.
+t 1 | wizard_news.1.world_pulse.applied.candidate.condition.crime.n0.1 | HL: Criminal pressure takes hold | SUM: Keshigordu shows enough criminal pressure for a new condition to emerge.
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.protect.t_npc_4.1 | HL: Nuada Walsh protects | SUM: Nuada Walsh's expand influence goal advances through protect.
+t 1 | wizard_news.1.world_pulse.applied.world_stressor.religious_conversion_fracture.n2 | HL: Aryagrad turns to the faith of Korl | SUM: After a long contest of devotion, Korl has become the patron creed of Aryagrad.
+t 1 | wizard_news.1.world_pulse.applied.world_stressor.religious_conversion_fracture.t | HL: Cnocby turns to the faith of Vael | SUM: After a long contest of devotion, Vael has become the patron creed of Cnocby.
+t 1 | wizard_news.1.world_pulse.applied.candidate.npc.reform.n1_npc_6.1 | HL: Helga Eindriðason reforms | SUM: Helga Eindriðason's survive crisis goal advances through reform.
+t 2 | wizard_news.2.world_pulse.applied.candidate.stressor.betrayal.n0.2 | HL: Betrayal shock emerges | SUM: Betrayal shock is beginning to take root in Keshigordu.
+t 2 | wizard_news.2.aftermath.world_stressor.religious_conversion_fracture.n2 | HL: Religious conversion fracture has passed | SUM: Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet.
+t 2 | wizard_news.2.world_pulse.applied.candidate.npc.suppress.n0_npc_1.2 | HL: Oljeitu Tayichi'ud suppresses Sorqan Tanghud | SUM: Oljeitu Tayichi'ud's expand influence goal advances through suppress Sorqan Tanghud.
+t 2 | wizard_news.2.world_pulse.applied.candidate.condition.legitimacy.n1.2 | HL: Legitimacy challenge takes hold | SUM: Skáloy shows enough legitimacy pressure for a new condition to emerge.
+t 2 | wizard_news.2.world_pulse.applied.candidate.npc.mobilize.n1_npc_2.2 | HL: Þrúðr Ragnarsson mobilizes | SUM: Þrúðr Ragnarsson's profit from change goal advances through mobilize.
+t 2 | wizard_news.2.world_pulse.applied.candidate.condition.trade.n3.2 | HL: Trade route strain takes hold | SUM: Penshaw shows enough trade pressure for a new condition to emerge.
+t 2 | wizard_news.2.world_pulse.applied.candidate.condition.conflict.t.2 | HL: Wartime pressure takes hold | SUM: Cnocby shows enough conflict pressure for a new condition to emerge.
+t 2 | wizard_news.2.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.2 | HL: allied relationship shifts | SUM: An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t 2 | wizard_news.2.world_pulse.applied.world_stressor.religious_conversion_fracture.n3 | HL: Penshaw turns to the faith of Vael | SUM: After a long contest of devotion, Vael has become the patron creed of Penshaw.
+t 2 | wizard_news.2.world_pulse.applied.world_outcome.residual.world_stressor_religious_conversion_fracture_n2.n2 | HL: Religious conversion fracture leaves aftereffects | SUM: Religious conversion fracture is no longer the active crisis, but its consequences remain visible.
+t 3 | wizard_news.3.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.3 | HL: allied relationship shifts | SUM: An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.reform.n3_npc_6.3 | HL: Hugh Doherty reforms | SUM: Hugh Doherty's protect followers goal advances through reform.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.reform.n3_npc_1.3 | HL: Alastair O'Connor reforms | SUM: Alastair O'Connor's survive crisis goal advances through reform.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.reform.n3_npc_4.3 | HL: Cael Flaherty reforms | SUM: Cael Flaherty's profit from change goal advances through reform.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.exploit.n0_npc_4.3 | HL: Sorqan Tanghud exploits | SUM: Sorqan Tanghud's restore order goal advances through exploit.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.mobilize.n2_npc_8.3 | HL: Vipin Goswami mobilizes | SUM: Vipin Goswami's survive crisis goal advances through mobilize.
+t 3 | wizard_news.3.world_pulse.applied.candidate.condition.crime.n2.3 | HL: Criminal pressure takes hold | SUM: Aryagrad shows enough criminal pressure for a new condition to emerge.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_1.3 | HL: Odhrán MacCarthy redirects a long design | SUM: Odhrán MacCarthy keeps the same character, but new circumstances now demand different aims.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_2.3 | HL: Aengus Walsh's aims turn with the times | SUM: A changed settlement has forced Aengus Walsh to reconsider what comes next.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_3.3 | HL: Rónnat Sullivan changes ambitions | SUM: Rónnat Sullivan's goals shift because the settlement context changed.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_4.3 | HL: Nuada Walsh takes up a new ambition | SUM: New conditions in the settlement have turned Nuada Walsh's effort toward another end.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_5.3 | HL: Donnchadh Brennan redirects a long design | SUM: Donnchadh Brennan keeps the same character, but new circumstances now demand different aims.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_6.3 | HL: Hector Gallagher's aims turn with the times | SUM: A changed settlement has forced Hector Gallagher to reconsider what comes next.
+t 3 | wizard_news.3.world_pulse.applied.candidate.npc.goal_rebranch.t_npc_7.3 | HL: Inghean MacCarthy changes ambitions | SUM: Inghean MacCarthy's goals shift because the settlement context changed.
+t 4 | wizard_news.4.world_pulse.applied.world_stressor.betrayal.deity_pact.n1.n0 | HL: Skáloy turns on Keshigordu | SUM: The faith of Korl broke its pact with Keshigordu, a betrayal its patron's nature made only a matter of time.
+t 4 | wizard_news.4.aftermath.world_stressor.betrayal.n0 | HL: Betrayal shock has passed | SUM: Betrayal shock is over, but it leaves purge fear, loyalty tests, diplomatic distrust. It will be remembered for a while yet.
+t 4 | wizard_news.4.aftermath.world_stressor.religious_conversion_fracture.t | HL: Religious conversion fracture has passed | SUM: Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet.
+t 4 | wizard_news.4.world_pulse.applied.candidate.condition.legitimacy.n2.4 | HL: Legitimacy challenge takes hold | SUM: Aryagrad shows enough legitimacy pressure for a new condition to emerge.
+t 4 | wizard_news.4.world_pulse.applied.candidate.npc.reform.n1_npc_10.4 | HL: Yngvi Sigmundsson reforms | SUM: Yngvi Sigmundsson's bind external patron goal advances through reform.
+t 4 | wizard_news.4.world_pulse.applied.candidate.condition.legitimacy.n0.4 | HL: Legitimacy challenge takes hold | SUM: Keshigordu shows enough legitimacy pressure for a new condition to emerge.
+t 4 | wizard_news.4.world_pulse.applied.candidate.faction.faction_institution_capture.n1_merchant_guilds.4 | HL: Merchant Guilds moves to capture an institution | SUM: Merchant Guilds sees an opening to press merchant charter interests.
+t 4 | wizard_news.4.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.n3.t.4 | HL: channel inferred relationship shifts | SUM: Local pressure creates a minor incident between neutral settlements.
+t 4 | wizard_news.4.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.4 | HL: allied relationship shifts | SUM: An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 4 | wizard_news.4.world_pulse.applied.candidate.faction.faction_institution_capture.t_craft_guilds.4 | HL: Craft Guilds moves to capture an institution | SUM: Craft Guilds sees an opening to press merchant charter interests.
+t 4 | wizard_news.4.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n0.n0 | HL: Betrayal shock leaves aftereffects | SUM: Betrayal shock is no longer the active crisis, but its consequences remain visible.
+t 4 | wizard_news.4.world_pulse.applied.world_outcome.residual.world_stressor_religious_conversion_fracture_t.t | HL: Religious conversion fracture leaves aftereffects | SUM: Religious conversion fracture is no longer the active crisis, but its consequences remain visible.
+t 5 | wizard_news.5.world_pulse.applied.candidate.npc.reform.n1_npc_arcane_orders_archmagister_0.5 | HL: The Archmagister reforms | SUM: The Archmagister's survive crisis goal advances through reform.
+t 5 | wizard_news.5.world_pulse.applied.candidate.npc.reform.n1_npc_thieves_guild_lieutenant_1.5 | HL: The Lieutenant reforms | SUM: The Lieutenant's control institution goal advances through reform.
+t 5 | wizard_news.5.world_pulse.applied.candidate.npc.mobilize.n2_npc_2.5 | HL: Kamala Patil mobilizes | SUM: Kamala Patil's bind external patron goal advances through mobilize.
+t 5 | wizard_news.5.world_pulse.applied.candidate.resource.deplete.n1.ancient_grove.5 | HL: ancient grove depleted | SUM: Skáloy is consuming ancient grove faster than it recovers.
+t 5 | wizard_news.5.world_pulse.applied.candidate.condition.legitimacy.n3.5 | HL: Legitimacy challenge takes hold | SUM: Penshaw shows enough legitimacy pressure for a new condition to emerge.
+t 5 | wizard_news.5.world_pulse.applied.candidate.faction.faction_service_bolster.n3_religious_authorities.5 | HL: Religious Authorities bolsters its services | SUM: Religious Authorities sees an opening to press temple authority interests.
+t 6 | wizard_news.6.aftermath.world_stressor.betrayal.n1 | HL: Betrayal shock has passed | SUM: Betrayal shock is over, but it leaves purge fear, loyalty tests, diplomatic distrust. It will be remembered for a while yet.
+t 6 | wizard_news.6.aftermath.world_stressor.religious_conversion_fracture.n3 | HL: Religious conversion fracture has passed | SUM: Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet.
+t 6 | wizard_news.6.world_pulse.applied.candidate.resource.deplete.n1.hunting_grounds.6 | HL: hunting grounds depleted | SUM: Skáloy is consuming hunting grounds faster than it recovers.
+t 6 | wizard_news.6.world_pulse.applied.candidate.npc.reform.n2_npc_7.6 | HL: Kalpana Mehta reforms | SUM: Kalpana Mehta's control institution goal advances through reform.
+t 6 | wizard_news.6.world_pulse.applied.candidate.condition.crime.n3.6 | HL: Criminal pressure takes hold | SUM: Penshaw shows enough criminal pressure for a new condition to emerge.
+t 6 | wizard_news.6.world_pulse.applied.candidate.faction.faction_institution_capture.n1_merchant_guilds.6 | HL: Merchant Guilds moves to capture an institution | SUM: Merchant Guilds sees an opening to press merchant charter interests.
+t 6 | wizard_news.6.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.6 | HL: allied relationship shifts | SUM: An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 6 | wizard_news.6.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n1.n0 | HL: Betrayal shock leaves aftereffects | SUM: Betrayal shock is no longer the active crisis, but its consequences remain visible.
+t 6 | wizard_news.6.world_pulse.applied.world_outcome.residual.world_stressor_religious_conversion_fracture_n3.n3 | HL: Religious conversion fracture leaves aftereffects | SUM: Religious conversion fracture is no longer the active crisis, but its consequences remain visible.
+t 7 | wizard_news.7.cause_lifecycle.n2:npc_3.exposed-public | HL: Indumati Bakshi is exposed | SUM: Indumati Bakshi's compromise (rooted in a patron that rewards the deed) has become public. The quiet arrangement is now a scandal.
+t 7 | wizard_news.7.world_pulse.applied.candidate.npc.bargain.n3_npc_3.7 | HL: Orla Burke bargains | SUM: Orla Burke's expand influence goal advances through bargain.
+t 7 | wizard_news.7.world_pulse.applied.candidate.npc.protect.t_npc_4.7 | HL: Nuada Walsh protects | SUM: Nuada Walsh's protect followers goal advances through protect.
+t 7 | wizard_news.7.world_pulse.applied.candidate.institution.abolish.n2.town_watch.7 | HL: Aryagrad may disband its Town watch | SUM: Long peace under Korl is letting the Town watch lapse.
+t 7 | wizard_news.7.world_pulse.applied.candidate.institution.abolish.n1.professional_city_watch.7 | HL: Skáloy may disband its Professional city watch | SUM: Long peace under Korl is letting the Professional city watch lapse.
+t 7 | wizard_news.7.world_pulse.applied.candidate.condition.food.n1.7 | HL: Famine pressure takes hold | SUM: Skáloy shows enough food pressure for a new condition to emerge.
+t 7 | wizard_news.7.world_pulse.applied.candidate.faction.faction_institution_capture.t_craft_guilds.7 | HL: Craft Guilds moves to capture an institution | SUM: Craft Guilds sees an opening to press merchant charter interests.
+t 8 | wizard_news.8.world_pulse.applied.candidate.condition.crime.n3.8 | HL: Criminal pressure takes hold | SUM: Penshaw shows enough criminal pressure for a new condition to emerge.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.protect.t_npc_5.8 | HL: Donnchadh Brennan protects | SUM: Donnchadh Brennan's survive crisis goal advances through protect.
+t 8 | wizard_news.8.world_pulse.applied.world_stressor.betrayal.deity_pact.n1.n2 | HL: Skáloy turns on Aryagrad | SUM: The faith of Korl broke its pact with Aryagrad, a betrayal its patron's nature made only a matter of time.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_1.8 | HL: Rognvald Randversson changes ambitions | SUM: Rognvald Randversson's goals shift because the settlement context changed.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_10.8 | HL: Yngvi Sigmundsson redirects a long design | SUM: Yngvi Sigmundsson keeps the same character, but new circumstances now demand different aims.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_2.8 | HL: Þrúðr Ragnarsson takes up a new ambition | SUM: New conditions in the settlement have turned Þrúðr Ragnarsson's effort toward another end.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_3.8 | HL: Frigg Hrollasson redirects a long design | SUM: Frigg Hrollasson keeps the same character, but new circumstances now demand different aims.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_4.8 | HL: Gefjon Karason's aims turn with the times | SUM: A changed settlement has forced Gefjon Karason to reconsider what comes next.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_5.8 | HL: Domaldr Thorsson changes ambitions | SUM: Domaldr Thorsson's goals shift because the settlement context changed.
+t 8 | wizard_news.8.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_6.8 | HL: Helga Eindriðason takes up a new ambition | SUM: New conditions in the settlement have turned Helga Eindriðason's effort toward another end.
+t 8 | wizard_news.8.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.8 | HL: allied relationship shifts | SUM: An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.reform.n2_npc_4.9 | HL: Meera Sahni reforms | SUM: Meera Sahni's win public legitimacy goal advances through reform.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.reform.n0_npc_5.9 | HL: Senggum Salji'ud reforms | SUM: Senggum Salji'ud's profit from change goal advances through reform.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_7.9 | HL: Amleth Svensson takes up a new ambition | SUM: New conditions in the settlement have turned Amleth Svensson's effort toward another end.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_8.9 | HL: Álfdís Þorkellsson changes ambitions | SUM: Álfdís Þorkellsson's goals shift because the settlement context changed.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_9.9 | HL: Mimir Ljotsson's aims turn with the times | SUM: A changed settlement has forced Mimir Ljotsson to reconsider what comes next.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_arcane_orders_archmagister_0.9 | HL: The Archmagister takes up a new ambition | SUM: New conditions in the settlement have turned The Archmagister's effort toward another end.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_thieves_guild_kingpin_0.9 | HL: The Kingpin's aims turn with the times | SUM: A changed settlement has forced The Kingpin to reconsider what comes next.
+t 9 | wizard_news.9.world_pulse.applied.candidate.npc.goal_rebranch.n1_npc_thieves_guild_lieutenant_1.9 | HL: The Lieutenant's aims turn with the times | SUM: A changed settlement has forced The Lieutenant to reconsider what comes next.
+t 9 | wizard_news.9.world_pulse.applied.candidate.relationship.trade_route_disruption.edge.t.n0.9 | HL: trade partner relationship shifts | SUM: Trade pressure disrupts routes and introduces resentment or leverage.
+t 9 | wizard_news.9.world_pulse.applied.candidate.institution.close.t.ale_house.9 | HL: Ale house in Cnocby closes its doors | SUM: Sustained economic decline is squeezing out the institutions the settlement leans on least.
+t10 | wizard_news.10.world_pulse.applied.candidate.npc.reform.n1_npc_10.10 | HL: Yngvi Sigmundsson reforms | SUM: Yngvi Sigmundsson's survive crisis goal advances through reform.
+t10 | wizard_news.10.world_pulse.applied.candidate.npc.reform.n1_npc_3.10 | HL: Frigg Hrollasson reforms | SUM: Frigg Hrollasson's protect followers goal advances through reform.
+t10 | wizard_news.10.aftermath.world_stressor.betrayal.n1 | HL: Betrayal shock has passed | SUM: Betrayal shock is over, but it leaves purge fear, loyalty tests, diplomatic distrust. It will be remembered for a while yet.
+t10 | wizard_news.10.world_pulse.applied.candidate.npc.reform.n2_npc_5.10 | HL: Sudha Bajaj reforms | SUM: Sudha Bajaj's win public legitimacy goal advances through reform.
+t10 | wizard_news.10.world_pulse.applied.candidate.npc.bargain.n1_npc_4.10 | HL: Gefjon Karason bargains | SUM: Gefjon Karason's survive crisis goal advances through bargain.
+t10 | wizard_news.10.world_pulse.applied.candidate.npc.reform.n0_npc_3.10 | HL: Ughul Ongirad reforms | SUM: Ughul Ongirad's expand influence goal advances through reform.
+t10 | wizard_news.10.world_pulse.applied.candidate.condition.crime.t.10 | HL: Criminal pressure takes hold | SUM: Cnocby shows enough criminal pressure for a new condition to emerge.
+t10 | wizard_news.10.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.n0.t.10 | HL: channel inferred relationship shifts | SUM: Local pressure creates a minor incident between neutral settlements.
+t10 | wizard_news.10.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n1.n1 | HL: Betrayal shock leaves aftereffects | SUM: Betrayal shock is no longer the active crisis, but its consequences remain visible.
+t10 | wizard_news.10.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n1.n2 | HL: Betrayal shock leaves aftereffects | SUM: Betrayal shock is no longer the active crisis, but its consequences remain visible.
+t11 | wizard_news.11.world_pulse.applied.candidate.institution.abolish.n2.town_watch.11 | HL: Aryagrad may disband its Town watch | SUM: Long peace under Korl is letting the Town watch lapse.
+t11 | wizard_news.11.world_pulse.applied.candidate.institution.abolish.n0.town_watch.11 | HL: Keshigordu may disband its Town watch | SUM: Long peace under Vael is letting the Town watch lapse.
+t11 | wizard_news.11.world_pulse.applied.candidate.institution.abolish.n1.professional_city_watch.11 | HL: Skáloy may disband its Professional city watch | SUM: Long peace under Korl is letting the Professional city watch lapse.
+t11 | wizard_news.11.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.11 | HL: allied relationship shifts | SUM: An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t11 | wizard_news.11.world_pulse.applied.candidate.faction.faction_rival_power_contest.n2_thieves_guild.11 | HL: Thieves' Guild contests a rival's power | SUM: Thieves' Guild sees an opening to press criminal shadow rule interests.
+t11 | wizard_news.11.world_pulse.applied.world_stressor.religious_conversion_fracture.n0 | HL: Keshigordu turns to the faith of Korl | SUM: After a long contest of devotion, Korl has become the patron creed of Keshigordu.
+t12 | wizard_news.12.world_pulse.applied.candidate.condition.trade.t.12 | HL: Trade route strain takes hold | SUM: Cnocby shows enough trade pressure for a new condition to emerge.
+t12 | wizard_news.12.history.world_stressor.religious_conversion_fracture.t | HL: Religious conversion fracture passes into history | SUM: No one speaks of religious conversion fracture in the present tense anymore; it belongs to the settlement's story now.
+t12 | wizard_news.12.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.12 | HL: allied relationship shifts | SUM: An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+
+=== APPLIED, TOWN-TOUCHING (id contains .t. or ends .t) ===
+t 1 | wizard_news.1.world_pulse.applied.world_stressor.religious_conversion_fracture.t | Cnocby turns to the faith of Vael | After a long contest of devotion, Vael has become the patron creed of Cnocby.
+t 2 | wizard_news.2.world_pulse.applied.candidate.condition.conflict.t.2 | Wartime pressure takes hold | Cnocby shows enough conflict pressure for a new condition to emerge.
+t 2 | wizard_news.2.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.2 | allied relationship shifts | An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t 3 | wizard_news.3.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.3 | allied relationship shifts | An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t 4 | wizard_news.4.aftermath.world_stressor.religious_conversion_fracture.t | Religious conversion fracture has passed | Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet.
+t 4 | wizard_news.4.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.n3.t.4 | channel inferred relationship shifts | Local pressure creates a minor incident between neutral settlements.
+t 4 | wizard_news.4.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.4 | allied relationship shifts | An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 4 | wizard_news.4.world_pulse.applied.world_outcome.residual.world_stressor_religious_conversion_fracture_t.t | Religious conversion fracture leaves aftereffects | Religious conversion fracture is no longer the active crisis, but its consequences remain visible.
+t 6 | wizard_news.6.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.6 | allied relationship shifts | An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 8 | wizard_news.8.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.8 | allied relationship shifts | An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+t 9 | wizard_news.9.world_pulse.applied.candidate.relationship.trade_route_disruption.edge.t.n0.9 | trade partner relationship shifts | Trade pressure disrupts routes and introduces resentment or leverage.
+t 9 | wizard_news.9.world_pulse.applied.candidate.institution.close.t.ale_house.9 | Ale house in Cnocby closes its doors | Sustained economic decline is squeezing out the institutions the settlement leans on least.
+t10 | wizard_news.10.world_pulse.applied.candidate.condition.crime.t.10 | Criminal pressure takes hold | Cnocby shows enough criminal pressure for a new condition to emerge.
+t10 | wizard_news.10.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.n0.t.10 | channel inferred relationship shifts | Local pressure creates a minor incident between neutral settlements.
+t11 | wizard_news.11.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.11 | allied relationship shifts | An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.
+t12 | wizard_news.12.world_pulse.applied.candidate.condition.trade.t.12 | Trade route strain takes hold | Cnocby shows enough trade pressure for a new condition to emerge.
+t12 | wizard_news.12.history.world_stressor.religious_conversion_fracture.t | Religious conversion fracture passes into history | No one speaks of religious conversion fracture in the present tense anymore; it belongs to the settlement's story now.
+t12 | wizard_news.12.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.12 | allied relationship shifts | An ally buffers pressure, but the support becomes a real burden on the supporting settlement.
+
+=== wizardNews entry sample (full shape) ===
+{
+ "schemaVersion": 1,
+ "id": "wizard_news.1.world_pulse.applied.candidate.npc.reform.n1_npc_thieves_guild_kingpin_0.1",
+ "createdAt": "2026-01-01T00:00:00.000Z",
+ "tick": 1,
+ "scope": "settlement",
+ "significance": "notable",
+ "score": 51,
+ "headline": "The Kingpin reforms",
+ "summary": "The Kingpin's settle rivalry goal advances through reform.",
+ "kind": "applied",
+ "impactKind": "npc_reform",
+ "channelType": null,
+ "severity": 0.64,
+ "settlementIds": [
+  "n1"
+ ],
+ "impactIds": [],
+ "channelIds": [],
+ "sourceEventId": "candidate.npc.reform.n1_npc_thieves_guild_kingpin_0.1",
+ "tags": [
+  "world_pulse",
+  "npc",
+  "npc_reform",
+  "applied"
+ ],
+ "reasons": [
+  "civic role favors reform.",
+  "Pressure sat barely over the gate, and the ambition behind it is hungry.",
+  "Ideal: prosperity."
+ ]
+}
+
+pulseHistory ticks 12
+timeline ticks 12

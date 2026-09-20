@@ -1,0 +1,28 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 29452 after 0 poll(s); 3 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/slot-2
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 4150ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 140ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+Error: census REFROZEN at f4c395e2d7d70fdab300f32ba1cdb78f77c7a21c by chair-fable-a9df403c: files 2653 -> 2656, parked 383 -> 383, credited 2270 -> 2273, titles 25052 -> 25074, suiteTitles 6680 -> 6684. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT green is the proof.
+ ❯ refreezeCensusBaseline tests/lint/sovereigntyLightingContract.walker.test.js:755:9
+    753|     .map((key) => `${key} ${previous[key]} -> ${figures[key]}`)
+    754|     .join(', ');
+    755|   throw new Error(`census REFROZEN at ${next.measuredAtSha} by ${measu…
+       |         ^
+    756|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+    757|     + ' re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT …
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:3079:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 33 passed (34)
+   Start at  08:19:38
+   Duration  5.38s (transform 140ms, setup 28ms, import 1.07s, tests 4.15s, environment 0ms)
+

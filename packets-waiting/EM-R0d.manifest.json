@@ -1,0 +1,216 @@
+{
+  "id": "EM-R0d",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0d.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "action": "CREATE",
+      "path": "src/data/bandLadders.js",
+      "symbol": "legitimacyBandOf"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/generators/factionDynamics.js",
+      "symbol": "legitimacyBandFor"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/generators/defenseGenerator.js",
+      "symbol": "computeDefenseReadiness"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/generators/foodGenerator.js",
+      "symbol": "generateFoodSecurity"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/domain/bandLadders.test.js"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/domain/generalStateProseDesk.test.js"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/ui/compendiumFoodSecurity.test.jsx"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/ui/compendiumPower.test.jsx"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/build/generationWorkerLazy.test.js"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/components/dossierLabelCase.test.jsx"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/copy/voiceMechanics.test.js"
+    },
+    {
+      "action": "MODIFY",
+      "path": "src/domain/prose/holderTable.js",
+      "symbol": "HOLDER_SOURCES"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "path": "src/generators/factionDynamics.js",
+      "symbol": "export function legitimacyBandFor"
+    },
+    {
+      "path": "src/generators/factionDynamics.js",
+      "symbol": "export const DEFENSE_CONTRIB"
+    },
+    {
+      "path": "src/generators/defenseGenerator.js",
+      "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>"
+    },
+    {
+      "path": "src/generators/foodGenerator.js",
+      "symbol": "export function generateFoodSecurity"
+    },
+    {
+      "path": "tests/domain/generalStateProseDesk.test.js",
+      "symbol": "function readinessLabels()"
+    },
+    {
+      "path": "tests/domain/generalStateProseDesk.test.js",
+      "symbol": "function foodLabels()"
+    },
+    {
+      "path": "tests/helpers/sourceContract.js",
+      "symbol": "export function mustExtract"
+    },
+    {
+      "path": "tests/build/generationWorkerLazy.test.js",
+      "symbol": "export const WORKER_BUNDLE_CEILING_BYTES"
+    },
+    {
+      "path": "tests/build/domainGeneratorsBoundary.test.js",
+      "symbol": "const BASELINE_EDGES"
+    },
+    {
+      "path": "src/domain/prose/holderTable.js",
+      "symbol": "export const HOLDER_SOURCES"
+    },
+    {
+      "path": "tests/copy/voiceMechanics.test.js",
+      "symbol": "const AUTHORED_VOCABULARY_ALLOWLIST"
+    }
+  ],
+  "retiredSymbols": [],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE SHAPE — every *_BANDS entry's min is the *_CUTS field it names or -Infinity, FOOD_FLAG_CUTS.pressured/.surplus are identical to FOOD_SECURITY_CUTS', every container is frozen, the label lists are the producers' own in order, and each cut point appears exactly ONCE in the leaf's text"
+    },
+    {
+      "id": "A2",
+      "case": "EXHAUSTIVE EQUIVALENCE, LEGITIMACY AND READINESS — over every integer 0..100 the exported band function returns the label and flags the pre-move producer returned; both scores are integers in 0..100, so 101 values is a complete proof"
+    },
+    {
+      "id": "A3",
+      "case": "BOUNDARY EQUIVALENCE, THE FOOD LABEL LADDER — each of the four label cuts at cut-0.0001 / cut / cut+0.0001, crossed with the famine flag and a surplus above and below 40, returns the pre-move chain's label; the STRICT > is asserted at every cut"
+    },
+    {
+      "id": "A4",
+      "case": "THE TWO FOOD LADDERS ARE DIFFERENT ON PURPOSE — foodSecurityFlagsOf equals the pre-move inline flags at every boundary, and the measured disagreement is PINNED: deficitPct in (15, 20] yields label Import-Dependent with isPressured true and isDeficit false, so a later fold reds here first with ODQ 934.57 named"
+    },
+    {
+      "id": "A5",
+      "case": "TOTALITY AND ABSENCE — NaN, undefined, null, -1, Infinity and a numeric string all resolve to the FLOOR band and to a total flag object; nothing returns null, undefined or throws"
+    },
+    {
+      "id": "A6",
+      "case": "IDENTITY / GOLDEN — generatorGoldenMaster and dossierProseManifest do not move; run BEFORE the test cures so a move is attributable to a producer edit alone"
+    },
+    {
+      "id": "A7",
+      "case": "THE PRODUCERS SPELL NO CUT OF THEIR OWN — none of the three generator files contains any of the twelve cut literals in a comparison any more, and prosperityMod's 40/20/8 chain is asserted STILL PRESENT and untouched"
+    },
+    {
+      "id": "A8",
+      "case": "THE ONE ADDRESS AND THE LAYERING BOUNDARY — src/domain/bandLadders.js does not exist, every importer takes src/data/bandLadders.js, no file under src/generators imports a src/domain band address, and the live src/domain to src/generators edge set equals BASELINE_EDGES (4 files / 5 edges)"
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/bandLadders.test.js",
+      "tests/domain/generalStateProseDesk.test.js",
+      "tests/domain/powerStateProseDesk.test.js",
+      "tests/domain/defenseStateProseDesk.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/ui/compendiumFoodSecurity.test.jsx",
+      "tests/ui/compendiumPower.test.jsx"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/generators/isolatedTrade.test.js",
+      "tests/generators/foodVariance.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/proseWiringCensus.walker.test.js",
+      "tests/lint/sourceCitationIntegrity.walker.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/copy/voiceMechanics.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/components/dossierLabelCase.test.jsx"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/build/domainGeneratorsBoundary.test.js",
+      "tests/build/generationWorkerLazy.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ]
+  ]
+}

@@ -1,0 +1,47 @@
+CAR B — schema 21 -> 22, PREPARED (not committed). Execute at the FINAL consist tip.
+BRANCH NOW: d4343bcf1 (CAR A) + 56a551552 (CAR A', ODQ §934.18).
+
+MEASURED AT CAR A (d4343bcf1), from the live walker + the plain gate:
+  reads 1966 -> 1965 | identities 1392 -> 1391 | UI cohort files 51->50, ids 131->128, counts 195->192
+  bank UNCHANGED at CAR A: bankedReads 61, taggedRows 40; neighbourNetwork 39 reads / 26 addresses
+  interSettlementRelationships on settlement: 8 files / 12 reads (component reader out, domain reader in)
+  crossSettlementConflicts on settlement: 2 -> 1 address (src/pdf/lib/viewModel.js alone) — NOT read by the new reader
+
+THE RUNG (template = git show 4be2d0f2a, the schema-20->21 diff, 7 files):
+  scripts/lib/observed-shape-baseline.mjs   BASELINE_SCHEMA 21->22; RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA=21;
+                                            validateSchema21Baseline re-bound to its own literal; validateSchema22Baseline live
+  scripts/check-observed-shape-readers.mjs  live-validator binding -> validateSchema22Baseline; `_doc`; schema index entry 22.
+    ⛔ CHAIR RULING (withdraws the brief): **NO EXPLAINED_WRITER_EXEMPTIONS EDIT**. `interSettlementRelationships on
+    settlement` has an ordinary in-src property writer (neighbourBackLink.js:144,149, the one gate 0 proves), so its
+    rows are ORDINARY exactly like its seven existing ones; schema 21's refusal of the posture change STANDS. No
+    auto-tagging. `neighbourNetwork`'s moved read is the banked identity's reasoned move, tagged as the register's law says.
+  scripts/migrate-observed-shape-readers.mjs  DOMAIN_READER_TARGET_SCHEMA=22; its rung docblock; delta paths (the 3 bookkeeping
+                                            files); transition policy 'schema-21-to-22-exact-scanner-transition-v1';
+                                            LEAF_MIGRATION_PREDECESSOR[22]=21; LEAF_PREDECESSOR_VALIDATOR[21]=validateSchema21Baseline;
+                                            DECLARED_BANK_BY_TARGET[22] = MEASURED post-bank (projected 73/48)
+  tests/lint/observedShapeBank.literal.js   set to the MEASURED post-bank; EXPECT NO CHANGE (61 reads / 40 addresses,
+                                            neighbourNetwork 39/26) — it moves only if the measurement moves.
+  tests/lint/observedShapeBaseline.test.js / observedShapeMigration.test.js / observedShapeSentinel.test.js /
+  observedShapeReaders.walker.test.js       rung-number pins, retired-21 fixture + inverse probes, predecessor table 22->21,
+                                            CLI default message, both out-of-table probes 22->23, declared-bank pins, bank history
+
+SEQUENCE (all gated; the tree must be CLEAN and the subjectSha a committed ancestor):
+  0. git rebase <final-tip>                       # CAR A's sha CHANGES — re-stamp everything below to it
+  1. <author the rung>; commit  -> CAR B1 sha = SUBJECT SHA
+  2. node scripts/check-observed-shape-readers.mjs --scan-only --scan-mode=legacy-leaf --json=$SP/osr-legacy-22.json
+  3. node scripts/migrate-observed-shape-readers.mjs --predecessor=scripts/.observed-shape-readers-baseline.json \
+       --legacy=$SP/osr-legacy-22.json --target-schema=22 --json=$SP/osr-report-22.json \
+       --review-template=$SP/osr-review-22.json
+  4. <complete the decisions ledger in osr-review-22.json>
+  5. node scripts/migrate-observed-shape-readers.mjs --predecessor=... --legacy=$SP/osr-legacy-22.json \
+       --target-schema=22 --review=$SP/osr-review-22.json --bundle=$SP/osr-bundle-22.json
+  6. edit tests/lint/observedShapeBank.literal.js to the MEASURED post-bank (the write names it when it refuses)
+  7. node scripts/check-observed-shape-readers.mjs --write --migrate-schema --migration-review=$SP/osr-bundle-22.json
+  8. commit register + literal together -> CAR B2
+  9. receipts: plain `node scripts/check-observed-shape-readers.mjs` exit 0 (quote count + schema);
+     the five observedShape suites; tests/pdf whole; then git log --oneline <final-tip>..HEAD
+  $SP = /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad
+
+DECISIONS LEDGER: RETIRE the stale rows at the deleted component path AND the `crossSettlementConflicts on settlement`
+row at src/pdf/lib/viewModel.js (CAR A', ODQ §934.18 — that identity then has ZERO addresses estate-wide);
+ADMIT the two new rows at the domain reader as ORDINARY.

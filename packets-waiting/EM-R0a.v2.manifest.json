@@ -1,0 +1,85 @@
+{
+  "id": "EM-R0a",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0a.md",
+  "_verifiedBaseNote": "⛔ THE CHAIR SUBSTITUTES THE SINGLE TOKEN `__BASE__` HERE AND IN THE PACKET MARKDOWN'S `Verified base` ROW IN ONE ACT, with the promotion tip's FULL 40-hex sha. The Markdown row is written ``fixes-2026-09-18-consist` at `__BASE__`` because parsePacketHeader (scripts/implementation-packets.mjs:302-310) accepts only `<branch>` at `<40-hex>` or a bare 40-hex; a bare `__BASE__` parses to null and :889 then errors `verifiedBase disagrees with packet Markdown: manifest=__BASE__ packet=null` on the promotion commit itself. EXECUTED against the tree's own parser (evidence E-25): with the substitution the header yields verifiedBase AND the non-blank verifiedBranch that :891 requires of a READY packet. ⛔ AND IT MUST BE THE PROMOTION TIP: `scripts/mutation-coverage-manifest.json` is a REGISTER row, REGISTER !== 'CREATE', so it sits in the substrate assertAncestorAndSubstrate diffs (implementation-session.mjs:185-196, which excludes CREATE rows at :186). Setting verifiedBase to the promotion tip makes head === verifiedBase and the arm returns early at :184. ⛔⛔ AND THIS ENTRY MAY NOT ENTER PACKET_MANIFEST.json AT ANY STATUS UNTIL EM-B1d IS TERMINAL: implementation-packets.mjs:676 reserves change paths at every NON-TERMINAL status (DRAFT included; TERMINAL is only LANDED and SUPERSEDED at :43), and EM-B1d (READY at ad7ddf2c9) names scripts/mutation-coverage-manifest.json. Two live packets naming one path error `duplicate change path across packets` at :697-703. Measured 2026-09-19 at ad7ddf2c9: 189 packets, 186 LANDED, 2 SUPERSEDED, 1 READY (EM-B1d, whose own manifest has grown 11 → 16 rows under EM-PREAMBLE §P2 row 12; none of the new rows is a path of this packet). The chair ruled SEQUENCE (design §22.3 / the compile's Q4); the EM-R family builds after train EM-T7, so the wait costs nothing.",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "_note": "THE REGISTER, VERSION 2. Pure frozen data: twelve exports, no import, no function, no branch. Copied VERBATIM from the packet §6 with §5.1/§5.2's tables expanded — every row is a measurement over the golden corpus AND the save path. VERSION 2's content: 47 classed top-level keys (41 generated + 4 SAVED-ONLY + 2 the editor's) · 3 CLASS_EXCEPTIONS (the RECEIPT, the MIRROR, and — new, measured — `generationCoherenceReceipt.repairs` → HISTORY, the ONLY receipt sub-path that moves when a HISTORY input is withheld) · 48 KEYED (two left under design §22.3 item 3) · 15 ATOMIC · 2 CROSS_ENTRY_TOTALS · 9 KEY_UNPROVEN_AT_LENGTH_ONE · 3 UNMERGEABLE · 6 CONSISTENCY_GROUPS. MEASURED DRAFT = 163 effective lines (non-blank, non-comment) against a ≤210 bound and the standard's 250-per-leaf cap, so NO SPLIT IS NEEDED. ⛔ NO src/generators/** MODULE MAY IMPORT THIS FILE: EM-P3 measured that one path segment sends EAGER_FIRST_PAINT_MODULES 268 → 270. At this packet's landing NOTHING imports it, so it is emitted in no chunk and every bundle delta is exactly 0 B; the first importer will be EM-R0c (THE MERGE).",
+      "action": "CREATE",
+      "path": "src/domain/edit/recordRegister.js"
+    },
+    {
+      "_note": "THE TOTALITY WALKER, VERSION 2 — SEVEN arms (A7 is new: the cross-entry totals, with the two REJECTED baseChance candidates as its paired negative, so the arm that admits a total also refuses a near-miss). One describe, seven literal `it` titles, no .each, no loop-generated registration, no nested describe (EM-PREAMBLE §P3.4). The stride is the 63-row structured sample DERIVED IN-TEST from tests/helpers/goldenMasterCorpus.js#goldenCorpus — no committed fixture — generated through generateSettlementPipeline(cfg, null, { seed: _seed, customContent: {} }) exactly as tests/property/generatorGoldenMaster.test.js:798 does. ⭐ THE STRIDE IS CHOSEN BY EXECUTION: the 63-row sample yields the SAME 41 top-level keys, the SAME 63 collection paths, the SAME split, the SAME 1,170 node and 884 leaf paths as the full 525-row corpus, at 1,256 ms of generation against 7,820 ms — and the whole census is byte-identical between 58fcfe614 and ad7ddf2c9. The file header carries the ELEVEN-row `CANNOT-CATCH:` block verbatim from packet §6, whose row 9 states the walker's own boundary: it GENERATES and does not SAVE, so it can only assert the four SAVED_ONLY_KEYS absent; observing them over a real save → load is EM-R7's arm (design §22.3 item 7). Every negative assertion carries `// anchored:` on the line immediately above.",
+      "action": "CREATE",
+      "path": "tests/lint/recordRegisterTotality.walker.test.js"
+    },
+    {
+      "_note": "§P2.2's OBLIGATION, PRICED AT COMPILE. `tests/lint` is one of the eight ENFORCER_DIRS (tests/lint/mutationCoverage.shared.mjs:36) and tests/lint/mutationCoverageManifest.test.js asserts that every enumerated file owns an `invariants` entry. ONE row, keyed `tests/lint/recordRegisterTotality.walker.test.js`, added SURGICALLY beside its siblings — ⛔ the manifest is NEVER re-serialised whole (PACKET_STANDARD, 'Registration obligations a wave prices at compile'). kind: \"rationale\", in tests/lint/densityCreateBoundary.walker.test.js's form: the file's catching power is an EXACT PARTITION over a live measurement asserted in BOTH directions and floored against vacuity inside the same file (A1's non-empty walk and three-way key partition; A3's disjoint-and-total pair; A4's exact unproven-key set; A7's paired negative), which no source mutant can perturb.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE GENERATOR ENTRY THE WALKER CALLS, and the only production symbol this packet needs. Declared at src/generators/generateSettlementPipeline.js:77. PROVEN at 58fcfe614 and re-proven at ad7ddf2c9: `grep -cF 'export function generateSettlementPipeline' src/generators/generateSettlementPipeline.js` -> 1. POST-EDIT SIMULATION: this packet does not touch that file, so the text is still present verbatim after its own edits; no retiredSymbols row is owed and no other LANDED packet's row for this (path, symbol) pair is disturbed.",
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline"
+    },
+    {
+      "_note": "THE STRIDE'S SOURCE at tests/helpers/goldenMasterCorpus.js:76 — the walker derives its 63 rows from this rather than committing a fixture, so the stride can never drift from the golden master's own corpus. PROVEN: `grep -cF 'export function goldenCorpus'` -> 1. POST-EDIT: untouched; still present verbatim.",
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export function goldenCorpus"
+    },
+    {
+      "_note": "THE ROW LABEL at tests/helpers/goldenMasterCorpus.js:60 — every failure message names the corpus row by `keyOf(row)` so a red is reproducible from the message alone. PROVEN: `grep -cF 'export const keyOf'` -> 1. POST-EDIT: untouched; still present verbatim.",
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export const keyOf"
+    },
+    {
+      "_note": "THE OBLIGATION'S SOURCE at tests/lint/mutationCoverage.shared.mjs:36 — ['tests/lint','tests/design','tests/docs','tests/data','tests/copy','tests/security','tests/edgeFunctions','tests/generators']. `tests/lint` is a member, which is WHY the REGISTER row above exists; naming it makes the obligation provable from the manifest. The EM-B1d precedent names exactly this symbol for exactly this reason. PROVEN: `grep -cF 'export const ENFORCER_DIRS'` -> 1. POST-EDIT: untouched; still present verbatim.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    }
+  ],
+  "retiredSymbols": null,
+  "_retiredSymbolsNote": "EMPTY, and the emptiness is the post-edit simulation's RESULT (pre-proof step 10), not an omission: this packet CREATEs two files and appends one JSON row. It moves, renames and deletes no symbol at any path, so every requiredSymbols row above is still present VERBATIM after the packet's own edits, and no LANDED packet's rows for any of those four (path, symbol) pairs are disturbed. Re-run at ad7ddf2c9; all four grep counts are still 1.",
+  "acceptanceCases": [
+    { "id": "A1", "case": "CLASS TOTALITY AND THE THREE-WAY KEY PARTITION, with the denominator refused first. records.length >= 63 is asserted before anything else. Every top-level key of every generated record resolves in RECORD_CLASSES; every declared class is a member of RECORD_CLASS_NAMES (the eight of design §22.2 item 7); GENERATED_KEYS equals the observed set EXACTLY, both directions; every SAVED_ONLY_KEYS and NOT_YET_WRITTEN_KEYS member is ABSENT from every generated record; and GENERATED_KEYS, SAVED_ONLY_KEYS and the editor's two partition RECORD_CLASSES. A new record key REDS BY NAME, which is the charter's own phrase for this member." },
+    { "id": "A2", "case": "THE EXCEPTIONS ARE LIVE, AND THE MIRROR IS A MEASUREMENT RATHER THAN A LABEL. All three CLASS_EXCEPTIONS paths resolve on a generated record; every factions[].members[] entry equals — field for field, on every field the NPC carries — the npcs[] entry its id names, in every observed pair (measured at compile: 572 of 572 members resolve by id, all 25 fields equal, no NPC field absent from any chip); and generationCoherenceReceipt.repairs is present wherever the corpus produces one (20 of 63 rows)." },
+    { "id": "A3", "case": "COUNTERFORCE — COLLECTION TOTALITY AND KEY SOUNDNESS. Every array-of-objects path observed is in KEYED_COLLECTIONS exclusive-or ATOMIC_COLLECTIONS; every declared row of both is observed at least once; the two sets are disjoint; and for every KEYED row the declared key (a field, or a composite) is PRESENT on every entry and UNIQUE within every observed array. resourceAnalysis.gaps is the paired negative: its `chain` is present on every entry and NOT unique in 29 of 60 arrays at 63 rows, which is why it is ATOMIC, and the arm re-measures that breakage so the atomic row keeps a live liveness anchor." },
+    { "id": "A4", "case": "BOUNDARY / ANTI-VACUITY. KEY_UNPROVEN_AT_LENGTH_ONE equals EXACTLY the set of declared collections whose longest observed array holds one entry (measured: nine — activeConditions, activeConditions[].causes, defenseProfile.institutions.charter/.mercenary/.militia/.watch, economicViability.warnings, generationCoherenceReceipt.authoredTensions, structuralSuggestions). Equality in both directions, so a row that gains a longer array must LEAVE the set and a row that loses its multi-entry observations must JOIN it. Without this arm, nine keys are credited by a uniqueness test that is trivially true. ACCEPTED AS WRITTEN by the chair (design §22.3)." },
+    { "id": "A5", "case": "A RULING MADE ENFORCEABLE — THE UNMERGEABLE SET. Every UNMERGEABLE_COLLECTIONS path (relationships, conflicts, powerStructure.conflicts) is still classed HELD, and its declared composite is still present-and-unique in every observed array. Measured at compile: no SINGLE field of relationships is unique across the corpus except the prose `description` (63/63); `tension` manages 7/63 and `type` 0/63 — so these collections are safe only because they are held, and a reclassification out of HELD REDS HERE." },
+    { "id": "A6", "case": "GROUP LIVENESS AND NON-NESTING. Every CONSISTENCY_GROUPS root resolves on a generated record — a root spelled `foo[]` at EVERY entry of that collection, which is how a PER-ENTRY group is expressed with no extension: the merge's keyed arm passes exactly that collapsed spelling to the entry node, so the group is matched by path equality. Every declared member path resolves under its root; the ids are unique; and no group's root is nested inside another group's root (design §22.3 item 2: groups never nest)." },
+    { "id": "A7", "case": "⭐ THE CROSS-ENTRY TOTALS ARE STILL TOTALS, WITH A PAIRED NEGATIVE (design §22.3 item 3). Every CROSS_ENTRY_TOTALS key is in ATOMIC_COLLECTIONS and NOT in KEYED_COLLECTIONS; and over every multi-entry array observed, the named field sums to the named total — economicState.incomeSources.percentage → 100 over 61 arrays, one distinct sum; powerStructure.factions.power → 100 over 63 arrays, one distinct sum. THE PAIRED NEGATIVE, so the arm that admits a total also refuses a near-miss: defenseProfile.institutions.magicDef.baseChance and .walls.baseChance are asserted NOT to be totals (measured 4 and 2 distinct sums — 0.9/0.8/0.85/0.6 and 1.0/1.3 — after a loose ±1 tolerance had raised them and a relative tolerance refuted them)." },
+    { "id": "A8", "case": "IDENTITY / GOLDEN. tests/property/generatorGoldenMaster.test.js (525 rows) and tests/property/dossierProseManifest.test.js DO NOT MOVE. This packet adds data ABOUT a record and a test that only READS generated records; it touches no generator, no save path, no catalogue and no value. Run, never re-recorded; UPDATE_GOLDEN is never set and motion is a STOP." }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/recordRegisterTotality.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/recordRegister.js",
+      "tests/lint/recordRegisterTotality.walker.test.js"
+    ]
+  ]
+}

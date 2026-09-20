@@ -1,0 +1,72 @@
+{
+  "id": "EM-R0b",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0b.md",
+  "_verifiedBaseNote": "VERSION 4. Compiled and measured at claude/composite-r4 32602dc607b7423838249cf57d73baf08feb047d, then PRE-PROOFED and re-executed whole at 141a1d7752e8d9199c0bf347ea99808121733b0b. The J-T1 window over every change-manifest path and every requiredSymbols path (including the five _pending) is EMPTY across those 24 commits, and generateSettlementPipeline's 224-module import closure contains none of the five src/ files that did move, so every corpus figure carries by construction and was re-executed anyway. THE BASE IS NOT FREE: scripts/implementation-session.mjs assertAncestorAndSubstrate builds substrate = non-CREATE change rows UNION every requiredSymbols path, and throws 'verified-base descendant changed declared substrate' when git diff base..HEAD touches any of them. At promotion the five _pending rows join requiredSymbols, putting src/data/bandLadders.js and src/domain/edit/recordRegister.js into the substrate -- files EM-R0d and EM-R0a CREATE. So the chair MUST stamp the base at or AFTER both landings (and base === HEAD skips the substrate check entirely, which is the cleanest promotion).",
+  "_preProofNote": "Opus PRE-PROOF lane, 2026-09-20 07:0x EDT, at 141a1d775. Preamble SHA-256 re-verified LIVE as 16dfb96fa79320abc7dcfbdd8f5152b6aa66998c269287a951079df6c8223195 (the v3 compile's b90a95b7... is SUPERSEDED; P2 row 11 took its second amendment in the window). No premise refuted; every v3 headline figure re-executed and holding to the row. TWO PACKET CORRECTIONS: (1) the lighting delta is titles +7, not +8 -- A8 is homed in tests/build/domainGeneratorsBoundary.test.js, RUN AND NOT EDITED, and the census sums liveTitlesIn over CREDITED files only, so an unedited file contributes nothing; SEVEN arms (A1-A7) land in the new file. (2) 'the 63-row stride' that A1/A3/A6/A7 name is defined in NO tree artifact and no arithmetic stride over 525 yields 63 -- it is the packet's section 12 question 1, with the recommendation i % 8 === 6 (65 rows, carries the pin at corpus index 510 by construction, EXECUTED 64 clean / 1 violating). A1's cardinality is a MARKED PLACEHOLDER until the chair rules.",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    { "action": "CREATE", "path": "src/domain/edit/recordInvariants.js", "symbol": "recordInvariants" },
+    { "action": "CREATE", "path": "src/domain/edit/recordInvariantMeta.js", "symbol": "CHECK_META" },
+    { "action": "CREATE", "path": "src/domain/edit/recordInvariantFlags.js", "symbol": "FLAGS_EVER_TRUE" },
+    { "action": "TEST", "path": "tests/domain/recordInvariants.test.js" }
+  ],
+  "_changeManifestNote": "FOUR rows, set-equal with the packet's section 7 table. Version 3 adds ONE row: src/domain/edit/recordInvariantMeta.js, the frozen CHECK_META table EM-R0c's escalation ladder reads. No MODIFY row, no REGISTER row, no generated artifact: tests/domain is not a mutation-coverage ENFORCER_DIR and 'recordInvariants' matches no NAME_PATTERN token; the lighting-census baseline is NEVER a packet row (EM-PREAMBLE section P2.1); no src/ path of this packet is an input to any edge-shared bundle meta.",
+  "requiredSymbols": [
+    {
+      "path": "src/domain/activeConditions.js",
+      "symbol": "export function severityBand",
+      "_note": "The one domain-layer band producer the module imports. RE-PROVEN at 141a1d775 by grep -cF -> 2. The 2 is a SUBSTRING ARTEFACT, not a double declaration: grep -nF gives 541:export function severityBand(severity) and 1009:export function severityBands(), a separate plural sibling the -F prefix match catches. POST-EDIT SIMULATION: this packet CREATEs only and does not touch that file, so the text is present verbatim after its own edits."
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export function goldenCorpus",
+      "_note": "The 525-row corpus, one spelling. RE-PROVEN at 141a1d775 by grep -cF -> 1. Untouched. NOTE: this module exports goldenCorpus and keyOf and NOTHING ELSE -- it defines no stride, sample or slice, which is the packet's section 12 question 1."
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export const keyOf",
+      "_note": "RE-PROVEN at 141a1d775 by grep -cF -> 1. Untouched."
+    },
+    {
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline",
+      "_note": "The pipeline the control runs; the TEST calls it and the MODULE never does. RE-PROVEN at 141a1d775 by grep -cF -> 1. Untouched. Its 224-module static import closure was walked at this tip and contains ZERO of the five src/ files that moved in the J-T1 window (all five are src/domain/worldPulse/*, none reachable), which is why every 525-row corpus figure carries."
+    },
+    {
+      "path": "tests/build/domainGeneratorsBoundary.test.js",
+      "symbol": "const BASELINE_EDGES",
+      "_note": "The shrink-only domain->generators ratchet, in this packet's checks and asserted by A8. RE-PROVEN at 141a1d775 by grep -cF -> 1. The frozen set reads FOUR importing files / FIVE edges (checkDraftEdit, neighbourBackLink, institutionLifecycle, resourceDynamicsKernel); none of this packet's three leaves imports src/generators, so the text and the frozen set are unchanged after its edits. THIS FILE IS RUN, NEVER EDITED: A8 lands no `it` here, which is why the lighting delta is titles +7 and not +8."
+    },
+    {
+      "_pending": "ADDED BY THE CHAIR AT PROMOTION, once EM-R0d and EM-R0a are LANDED. RE-MEASURED at 141a1d775: src/data/bandLadders.js and src/domain/edit/recordRegister.js are BOTH STILL ABSENT (src/domain/edit/ does not exist as a directory at all), so by PACKET_STANDARD they may not be named here yet; EM-R0d and EM-R0a are Depends-on rows instead. WARNING, MEASURED FROM THE DISPATCH'S OWN SOURCE: the moment these five join requiredSymbols they join the SUBSTRATE that assertAncestorAndSubstrate diffs across base..HEAD, so the base must be stamped at or after both landings -- see _verifiedBaseNote.",
+      "symbols": [
+        { "path": "src/data/bandLadders.js", "symbol": "export function legitimacyBandOf", "owner": "EM-R0d" },
+        { "path": "src/data/bandLadders.js", "symbol": "export function readinessBandOf", "owner": "EM-R0d" },
+        { "path": "src/data/bandLadders.js", "symbol": "export function foodSecurityBandOf", "owner": "EM-R0d" },
+        { "path": "src/data/bandLadders.js", "symbol": "export const FOOD_SECURITY_CUTS", "owner": "EM-R0d" },
+        { "path": "src/domain/edit/recordRegister.js", "symbol": "export const RECORD_CLASSES", "owner": "EM-R0a — NEW at version 3; acceptance case A2 reads it to prove every CHECK_META key is a classed key. ⛔ The MODULE never imports it; only the test does." }
+      ]
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "EMPTY. Version 3's edits are three CREATEs under src/domain/edit/ and one CREATE under tests/domain/. It moves, renames and deletes no symbol at any path, and it touches no file that any requiredSymbols row of any packet names.",
+  "acceptanceCases": [
+    { "id": "A1", "case": "THE CONTROL, AND THE PIN BOTH WAYS. On the declared stride __STRIDE_RULE__ recordInvariants returns [] on __STRIDE_N_MINUS_1__ rows and exactly the pinned V-SUMMARY-DEPS, with its exact message, on town|germanic|mountain|mountain_pass|civilized|golden-master-v3 (corpus index 510). The violating-row SET equals KNOWN_VIOLATIONS in BOTH directions, so curing the generator REDS this arm and FIX-G1 must remove the pin. Not a skip, not a filter, not a widened tolerance. THE CARDINALITY IS A MARKED PLACEHOLDER until the packet's section 12 question 1 is ruled: 'the 63-row stride' is defined in no tree artifact and no arithmetic stride over 525 yields 63. The arm's SHAPE is EXECUTED at 141a1d775 both ways -- full 525: 1 violating row and it is the pin; recommended stride i % 8 === 6 (65 rows): 64 clean, 1 violating, and it is the pin. A stride that misses index 510 makes this arm VACUOUS." },
+    { "id": "A2", "case": "CHECK_META IS TOTAL, ITS KEYS RESOLVE, AND A VIOLATION CARRIES THEM. (i) every id in CHECK_IDS has a CHECK_META row and every row names a declared id, BOTH directions (measured 33/33, none missing, none extra); (ii) every key any row names is a key EM-R0a's RECORD_CLASSES classes, and every paths entry heads at a key its own keys[] carries (measured: 14 distinct keys, 0 bad); (iii) CROSS_KEY_CHECKS is exactly the rows with no arms and more than one key, and equals the SEVEN ids of section 5.4 - asserted against the literal seven so a hand-edit that adds an eighth reds; (iv) every violation the stride produces carries kind and non-empty keys, and V-FLAGVEC's carries ONE key, the arm's, never the union." },
+    { "id": "A3", "case": "GUARD THE GUARD. For each of the 33 checks, the smallest mutation of a real record returns exactly that check's id and no other, each step clearing its check's own tolerance. V-FLAGVEC's foodSecurity arm needs an Import-Dependent carrier. The three duplication mutants are measured isolating: control clean 63/63, convict 63/63, trip no other check 0/63." },
+    { "id": "A4", "case": "NO THRESHOLD, NO ENVELOPE. The four band checks call legitimacyBandOf / readinessBandOf / foodSecurityBandOf / severityBand, and recordInvariants.js contains no numeric literal outside its tolerance constants, asserted by a scan of the module's own source." },
+    { "id": "A5", "case": "THE ROUNDING RULE. Constructed records at deficitPct = 15 and = 5: both adjacent labels pass at each cut and a label two rungs away REDS. Section 6's six-row table, executed. The facts that forced the rule re-measure identically at 32602dc60 (36 rows in the (15,20] window, 12 isPressured and 24 isDeficit)." },
+    { "id": "A6", "case": "THE FLAG DATA IS DECLARED, NOT DERIVED. The shipped FLAGS_EVER_TRUE covers every label the 63-row stride shows (5 of 5 labels, none lost from the 525-row table), and a flag DERIVED from the published deficitPct is shown to disagree with the record on the (15,20] rows - the reason the table is declared." },
+    { "id": "A7", "case": "ABSENCE, UNSEEN LABEL, PURITY, IDEMPOTENCY, AND THE DUPLICATION PAIRS. [] for a record with economicViability, isolationSupport and activeConditions deleted and for a record whose foodSecurity.label is unknown; the record deep-equal to a pre-call clone; two calls equal; and each duplication check ABSTAINS when either side of its pair is absent - it may never convict a partial record." },
+    { "id": "A8", "case": "THE LAYERING BOUNDARY HOLDS. The live src/domain -> src/generators edge scan equals BASELINE_EDGES and none of the three new leaves appears. Run, never edited." }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/domain/edit/recordInvariants.js", "src/domain/edit/recordInvariantMeta.js", "src/domain/edit/recordInvariantFlags.js", "tests/domain/recordInvariants.test.js"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/recordInvariants.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/build/domainGeneratorsBoundary.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js"]
+  ],
+  "_checksNote": "NO GENERATOR is among these commands, so section P2.12's 'a generator goes LAST' rule has nothing to order and this packet declares no generated path. npm run typecheck:domain:strict runs scripts/check-domain-strict.mjs, which writes its baseline ONLY under --update and is therefore a read-only check. One test directory per vitest array."
+}

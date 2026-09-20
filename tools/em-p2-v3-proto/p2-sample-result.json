@@ -1,0 +1,681 @@
+{
+  "rows": 63,
+  "wall": 25426,
+  "dump": [
+    {
+      "step": "resolveConfig",
+      "key": "tier",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "population",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "tradeRoute",
+      "via": "provides",
+      "moved": 5,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "terrainType",
+      "via": "provides",
+      "moved": 3,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "resolvedTerrain",
+      "via": "provides",
+      "moved": 3,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "culture",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "culturalIdentity",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "generationContentProfile",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "magicLevel",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "threat",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "priorityMagicEffective",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "noMagic",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "townPlus",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "effectiveConfig",
+      "via": "provides",
+      "moved": 7,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "institutionToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "categoryToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "goodsToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveConfig",
+      "key": "servicesToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "buildGenerationContext",
+      "key": "generationContext",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResources",
+      "via": "provides",
+      "moved": 62,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesNative",
+      "via": "provides",
+      "moved": 62,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesDepleted",
+      "via": "provides",
+      "moved": 48,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesNativeDepleted",
+      "via": "provides",
+      "moved": 48,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesCustom",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourceDefinitions",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourceDefinitionsDepleted",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveResources",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveStress",
+      "key": "stress",
+      "via": "provides",
+      "moved": 57,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveStress",
+      "key": "stressTypes",
+      "via": "provides",
+      "moved": 57,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveStress",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 57,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourProfile",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourEconBias",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourFacBias",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "rawNeighbour",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "institutions",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "catalogForTier",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "generationRepairs",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "subsumptionPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "cascadePass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 56,
+      "run": 63,
+      "drewIn": 56,
+      "rows": 63
+    },
+    {
+      "step": "isolationPass",
+      "key": "stress",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 2,
+      "rows": 63
+    },
+    {
+      "step": "isolationPass",
+      "key": "isolationSupport",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 2,
+      "rows": 63
+    },
+    {
+      "step": "isolationPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 2,
+      "rows": 63
+    },
+    {
+      "step": "isolationPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 2,
+      "rows": 63
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "stress",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "stressTypes",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "generateEconomy",
+      "key": "economicState",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generateEconomy",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generatePower",
+      "key": "powerIntent",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "generatePower",
+      "key": "powerStructure",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "neighbourFactions",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "factionCorrelationPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 1,
+      "rows": 63
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "generationRepairs",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "isolationSupport",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "economicState",
+      "via": "provides",
+      "moved": 20,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "spatialLayout",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "availableServices",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "powerEconomyReconcilePass",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "structuralValidationPass",
+      "key": "structural",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 0,
+      "rows": 63
+    },
+    {
+      "step": "generatePopulation",
+      "key": "npcs",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generatePopulation",
+      "key": "relationships",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generatePopulation",
+      "key": "factions",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generatePopulation",
+      "key": "conflicts",
+      "via": "provides",
+      "moved": 58,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "corruptionPass",
+      "key": "factions",
+      "via": "mutates",
+      "moved": 39,
+      "run": 63,
+      "drewIn": 42,
+      "rows": 63
+    },
+    {
+      "step": "corruptionPass",
+      "key": "npcs",
+      "via": "mutates",
+      "moved": 39,
+      "run": 63,
+      "drewIn": 42,
+      "rows": 63
+    },
+    {
+      "step": "generateNarratives",
+      "key": "settlementReason",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generateNarratives",
+      "key": "resourceAnalysis",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generateNarratives",
+      "key": "economicViability",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "generateNarratives",
+      "key": "history",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "settlement",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "stress",
+      "via": "mutates",
+      "moved": 54,
+      "run": 63,
+      "drewIn": 63,
+      "rows": 63
+    }
+  ]
+}

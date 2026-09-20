@@ -1,0 +1,46 @@
+{
+  "id": "EM-B1j",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1j.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    { "action": "MODIFY", "path": "src/domain/worldPulse/calamityKernel.js", "symbol": "remnantInstitution" },
+    { "action": "MODIFY", "path": "src/domain/worldPulse/institutionLifecycle.js", "symbol": "applyInstitutionLifecycleOutcome" },
+    { "action": "MODIFY", "path": "src/domain/worldPulse/magicRegimeLifecycle.js", "symbol": "magicClosureFate" },
+    { "action": "TEST", "path": "tests/domain/ruinInstitution.test.js" },
+    { "action": "TEST", "path": "tests/lint/ruinShapeReplica.walker.test.js" }
+  ],
+  "requiredSymbols": [
+    { "path": "src/domain/worldPulse/calamityKernel.js", "symbol": "ruinInstitution" },
+    { "path": "src/domain/worldPulse/institutionLifecycle.js", "symbol": "applyInstitutionLifecycleOutcome" },
+    { "path": "src/domain/worldPulse/magicRegimeLifecycle.js", "symbol": "magicClosureFate" },
+    { "path": "src/domain/worldPulse/institutionStatusModel.js", "symbol": "STATUS_SHELL" },
+    { "path": "tests/domain/ruinInstitution.test.js", "symbol": "ruinInstitution" }
+  ],
+  "retiredSymbols": [],
+  "acceptanceCases": [
+    { "id": "A1", "case": "each of the three in-class sites: the writer's record equals the pre-edit literal by sha256(JSON.stringify) AND by Object.keys order" },
+    { "id": "A2", "case": "applyInstitutionLifecycleOutcome driven through a close and an abolish returns a byte-identical institution" },
+    { "id": "A3", "case": "absent fate, absent reason, absent closure and a bogus closure each throw TypeError, the message naming the closed set" },
+    { "id": "A4", "case": "outcomeId omitted leaves closedByWorldPulseOutcomeId absent from Object.keys; outcomeId null emits it with value null" },
+    { "id": "A5", "case": "an abolished record built through the writer is NOT a shell (the economy flag was never stamped)" },
+    { "id": "A6", "case": "the replica walker convicts a planted remnant literal, clears the three re-pointed sites, and the demotion site's out-of-class marker has a population of exactly one" }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/domain/worldPulse/calamityKernel.js", "src/domain/worldPulse/institutionLifecycle.js", "src/domain/worldPulse/magicRegimeLifecycle.js", "tests/domain/ruinInstitution.test.js", "tests/lint/ruinShapeReplica.walker.test.js"],
+    ["npm", "run", "typecheck:ratchet"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/ruinInstitution.test.js", "tests/domain/institutionLifecycle.test.js", "tests/domain/magicRegimeLifecycle.test.js", "tests/domain/institutionStatusModel.test.js", "tests/domain/magicForms.test.js", "tests/domain/foodStockpile.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/lint"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/simulation"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js"]
+  ],
+  "_notes": {
+    "dependsOn": "FIX-T1 (tests/lint/ruinShapeReplica.walker.test.js is ABSENT at 141a1d775); EM-B1e LANDED",
+    "collisionGroup": "src/domain/worldPulse/institutionLifecycle.js with EM-B1j-prime-prime and EM-B1a; tests/lint/ruinShapeReplica.walker.test.js with FIX-T1",
+    "postEditSimulation": "no requiredSymbols row is moved, renamed or deleted by this deliverable: the three MODIFY rows add an export and replace literals INSIDE existing function bodies, so every named symbol is still present verbatim after the edit. retiredSymbols is empty and no other LANDED packet's rows for these (path, symbol) pairs are discharged.",
+    "generatedArtifacts": "NONE",
+    "lightingDelta": "+0 files / +0 parked / +0 credited / +N titles / +0 suiteTitles (no file created; N measured by the build lane with parkReasonsFor)",
+    "byteBudgets": "generation worker closure 228 modules, 0 worldPulse members -> untouched; EAGER_FIRST_PAINT_MODULES 268, none of the three modified files is a member; 0 of 5 edge-shared metas name any of them"
+  }
+}

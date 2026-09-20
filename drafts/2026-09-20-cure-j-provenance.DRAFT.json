@@ -1,0 +1,29 @@
+{
+  "_doc": "DRAFT — NOT YET SIGNED. THE SHIFT RECORD FOR CURE-J's PROVENANCE-ONLY RE-RECORD OF THE PROSE MANIFEST GOLDEN (ODQ §934.71, asked 2026-09-20 by the chair, session a9df403c). Prepared by the chair from CURE-J's measured receipt (kit findings/CURE-J/CURE-J.receipt.md). It becomes a record only when the owner's words are pasted VERBATIM into `ownerWords` with the date; until then no door act may cite it. The door's verb (`recordGolden` under GOLDEN_SHIFT_SIGNED, goldenRecordDoor.js:49-53) is the OWNER's; a lane runs it on the owner's word from a committed tree, after this file is committed at docs/shift-records/2026-09-20-cure-j-provenance.json.",
+  "ownerWords": "PENDING — the owner has not yet answered §934.71",
+  "ownerDate": "PENDING",
+  "odqRow": "§934.71",
+  "cause": "ZERO PROSE MOVEMENT. On 2026-09-20 FIX-C2 re-addressed one source citation inside a JSDoc block of scripts/prose-rate-corpus.mjs (EconomicsTab.jsx:251-257 → :272) — one line of comment text, not a token of code. That file is one of the three MANIFEST_RECORDER_FILES, and the golden's provenance pinned the recorder by RAW file sha, so run 21 (the full check at c33446830) refused the fixture on the one title `THE PROVENANCE REFUSES A FIXTURE ITS RECORDER DID NOT WRITE` with every row unchanged. CURE-J commit 1 (9ee0be7e9 on cure-j-2026-09-20; composed onto the branch as c127cdfb2) made the recorder identity the CODE (recorderShas() over comment-stripped, whitespace-collapsed source; strings, templates and regex literals byte-for-byte), so a citation re-address can never again force a re-record. The stored `_provenance.recorder` map (raw shas from the 2026-09-17 record) can therefore never match the new identity, and ONE re-record is owed to restamp the provenance. MEASURED WITHOUT WRITING by the CURE-J lane: rows byte-identical, rowsSha unchanged at e972c0d0…2559, 0 moved / 0 added / 0 removed (1050 → 1050); only `recordedOverSha`, `note` and `recorder` move; `shift`, `ruling`, `car` hold; whole-file sha 921c51cf…db41 → 0f64dbd8…879a; door predictedRows 2 → 2.",
+  "seat": "the chair (Fable 5.1, session a9df403c), executing the door write from a committed tree on the owner's word; measured by the CURE-J lane (Opus 5), 2026-09-20",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact",
+      "expected": {
+        "rows": 1050,
+        "rowsSha": "e972c0d0…2559 (unchanged — the lane's receipt carries the full digest)",
+        "wholeFileShaBefore": "921c51cf6799ffdfdbffa3715fb496f7d15ce44fff508864653d8ebf3bb4db41",
+        "wholeFileShaAfterPredicted": "0f64dbd8…879a (the lane's dry measurement; re-measured at the door write)",
+        "movedRows": 0
+      }
+    }
+  ],
+  "doorSequence": [
+    "1. The owner answers §934.71; the chair pastes the words and the date into this file verbatim and commits it at docs/shift-records/2026-09-20-cure-j-provenance.json by pathspec on the integration branch.",
+    "2. A lane on a clean worktree at that tip runs the door: GOLDEN_SHIFT_SIGNED=<this record's path> node scripts/prose-manifest-cells.mjs --record (or the estate's recordGolden verb — read goldenRecordDoor.js for the exact spelling) with MANIFEST_PROVENANCE amended in the same commit (recordedOverSha → the tip; one sentence appended to note; shift/ruling/car untouched).",
+    "3. The lane diffs the fixture: only _provenance moved; rows byte-identical; rowsSha unchanged. The golden-freeze register row is updated by the door itself (never by hand). tests/property/dossierProseManifest.test.js green; generatorGoldenMaster green as control; goldenFreeze.walker green.",
+    "4. The commit by pathspec (the fixture, the register, the script, this record's status line if the door stamps it); the chair composes it; RUN 22 (or the next full check) then carries no provenance red."
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "id": "EM-B1c",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1c.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE FIVE DELEGATING HOME OPS (ODQ §934.47 add. 10, ratifying the lane's pre-declared line): rename-faction, rename-npc, rename-settlement (§12.3, each running the EXISTING cascade), set-world-fact (§14, DECLARATION ONLY — rederive and the pins are EM-B2's) and schedule-event (§18, the nineteenth HOME op: requires NOTHING, `when` at or after the next tick, the event drawn from the pulse's own catalogue and never free text). ONE BEHAVIOUR FAMILY: ops whose work belongs to another module. ⛔ THE THREE RENAMES WRITE NO NAME FIELD — they declare a writer and delegate; C2 scans for a planted assignment to prove it. `newName` is kind:'free' and that is correct, not a lapse: a name is the estate's one free-cascade field — typeable, but a change is this typed op running the cascade, so the freedom is in the value and the safety in the delegation. ⛔⛔ THE FILE CAP, RE-MEASURED AFTER THE SPLIT THE CHAIR RATIFIED: B1a's fourteen rows come to ≈213-227 of 250 (the split worked for B1a alone), but appending these five puts operations.js at ≈258-277. The lane has therefore taken EM-B1b's own O1 shape — a sibling leaf plus a two-line spread — because it is the chair's own precedent and the alternative is the squeeze the chair forbade. This DEPARTS from the ruling's literal 'MODIFIES operations.js by its rows' and is RAISED as R3; if the chair prefers the literal form, only these two manifest rows change and a fourth split is owed. ≈50 effective of 250.",
+      "action": "CREATE",
+      "path": "src/domain/edit/operationsHomeDelegating.js"
+    },
+    {
+      "_note": "THE COMPOSITION, EXACTLY TWO EFFECTIVE LINES — one import of HOME_DELEGATING_OP_TYPES and one spread into the frozen OP_TYPES, the same shape EM-B1b uses for its off-stage leaf. ⛔ NOTHING ELSE IN THE FILE MOVES and an edit exceeding +2 effective is a STOP. ⚠ Object.freeze on a spread freezes the OUTER map only, so C1 asserts ALL THREE source maps frozen (B1a's home rows, B1b's off-stage rows, this packet's five).",
+      "action": "MODIFY",
+      "path": "src/domain/edit/operations.js"
+    },
+    {
+      "_note": "SIX ARMS (C1-C6) APPENDED to EM-B1a's single literal describe — straight-line `it`, no .each / runIf / nested describe (§P3.4). C1 re-asserts the COMBINED totality at thirty (B1a's 14 + B1b's 11 + these 5) so a row dropped by any of the three reds here. C2 is the prevention guard: the three renames declare their writers by name (factionRenameChanges, npcRenameChanges, renameSettlementImpl) and a source scan proves this module writes no name field and re-implements no path in FACTION_RENAME_SURFACES or NPC_RENAME_SURFACES, matcher proved live on a planted assignment. C4 pins that CUT_TRADE_ROUTE — AUTHORITATIVE and NON-AUTHORABLE at once — is REJECTED while CREATE_ROUTE is accepted, both lists read BY REFERENCE and neither re-typed. C5 pins the `when` floor and asserts NO CLAMP: scheduling into the past is rejected with a named error, never silently moved, because a clamp would apply a decree at a tick the DM did not choose. ⚠ NO NEW tests/lint FILE APPEARS, so per the chair's condition NO mutation-coverage row is owed.",
+      "action": "MODIFY",
+      "path": "tests/domain/editOperations.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "rename-faction's DECLARED WRITER, the pure-domain patch form: (settlement, oldName, newName) -> { changed, touched, changes }, deep-cloning only the CASCADE_BUCKETS present. This packet declares it and calls it nowhere. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function factionRenameChanges"
+    },
+    {
+      "_note": "rename-npc's DECLARED WRITER, the sibling pure-domain form. Its file's header records that the two NPC homes were once walked separately and DRIFTED — 'the drift IS the bug this replaced' — which is exactly why the op delegates. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export function npcRenameChanges"
+    },
+    {
+      "_note": "THE JOIN SURFACES C2 SCANS: frozen { path, kind, why } rows, the NPC family SPREAD across NPC_HOMES so the two homes cannot drift. C2 proves this module re-implements none of these paths. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const FACTION_RENAME_SURFACES"
+    },
+    {
+      "_note": "The NPC rename's own declared surface list, the sibling of the above. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const NPC_RENAME_SURFACES"
+    },
+    {
+      "_note": "⚠ rename-settlement's DECLARED WRITER — AND IT IS STORE-SIDE, unlike its two siblings. MEASURED: (get, set, id, newName) -> boolean, taking the slice's get and set (an Immer producer) and reading new Date().toISOString(); it returns true when a canon flavor entry was recorded. There is NO pure-domain settlementRenameChanges to delegate to, so the row declares this path AS DATA for EM-C4's generic adapter to resolve — src/domain/edit/** may not reach the store (§P4). RAISED R1. Proven present: grep -c -> 1.",
+      "path": "src/store/settlementRenameHelpers.js",
+      "symbol": "export function renameSettlementImpl"
+    },
+    {
+      "_note": "schedule-event's CATALOGUE READER. MEASURED: Object.freeze(['CUT_TRADE_ROUTE', 'CREATE_ROUTE']) — the pulse's own authoritative canon event types, read BY REFERENCE and never re-typed (§18: 'drawn from the pulse's own catalogue, never free text'). Proven present: grep -c -> 1.",
+      "path": "src/domain/events/authoritativeCanonEventTypes.js",
+      "symbol": "export const AUTHORITATIVE_CANON_EVENT_TYPES"
+    },
+    {
+      "_note": "⛔ THE EXCLUSION THE ESTATE ALREADY RULES: a frozen Set of NINE event types a DM may not author (KILL_LEADER, CUT_TRADE_ROUTE, DAMAGE_INSTITUTION, DEMOTE_NPC, REFUGEE_WAVE, PLAGUE, RAID_OR_MONSTER_ATTACK, REMOVED_THREAT, STARTED_RIOT). ⭐ CUT_TRADE_ROUTE is AUTHORITATIVE and NON-AUTHORABLE at once, so schedule-event's values are the catalogue MINUS this set, read by reference. The editor inherits the estate's existing authoring rule rather than minting a new one. RAISED R2. Proven present: grep -c -> 1.",
+      "path": "src/domain/events/affordanceManifest.js",
+      "symbol": "export const NON_AUTHORABLE_EVENTS"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "C1",
+      "case": "MAIN AND THE COMBINED TOTALITY RE-ASSERTED: OP_TYPES holds exactly THIRTY — EM-B1a's fourteen home rows plus EM-B1b's eleven off-stage rows plus these five — set-equal both directions with a full offender list, so a row dropped by any of the three packets reds here. Every new row carries all ten declared fields; keys stay compareCodepoint-ordered over the composition; and ALL THREE SOURCE MAPS are asserted frozen, because Object.freeze on a spread freezes only the outer object."
+    },
+    {
+      "id": "C2",
+      "case": "THE RENAMES DELEGATE AND WRITE NO NAME — the prevention guard. Each of the three declares its target kind, a single required newName, stage:'home', consequence:'home', and its declared writer BY NAME (factionRenameChanges, npcRenameChanges, renameSettlementImpl). A source scan proves this module writes no name field and re-implements no path listed in FACTION_RENAME_SURFACES or NPC_RENAME_SURFACES, with the matcher proved live on a planted assignment."
+    },
+    {
+      "id": "C3",
+      "case": "set-world-fact NAMES EM-P3's HOME AND RESOLVES NOTHING. `fact` validates against exactly the seven world-fact keys; `value` presence is required; the per-fact pool mapping cites WORLD_FACT_SOURCES and is asserted to contain NO SECOND COPY of any option list. A source scan proves no rederive call and no pool import — the design §14 engine stays EM-B2's."
+    },
+    {
+      "id": "C4",
+      "case": "schedule-event READS THE CATALOGUE AND REFUSES THE NON-AUTHORABLE. Its event values derive from AUTHORITATIVE_CANON_EVENT_TYPES MINUS NON_AUTHORABLE_EVENTS, read BY REFERENCE — a source scan proves neither list is re-typed. 'CUT_TRADE_ROUTE', which is authoritative AND non-authorable, is asserted REJECTED; 'CREATE_ROUTE' accepted; a free-text event rejected. Anchored by the accepted case first."
+    },
+    {
+      "id": "C5",
+      "case": "THE `when` FLOOR, AND NO CLAMP. `when` at nextTick and after validates; `when` before nextTick returns { ok: false } with a named error and the returned op is asserted UNCHANGED — never silently clamped, because a clamp would apply a decree at a tick the DM did not choose. A non-integer `when` is rejected."
+    },
+    {
+      "id": "C6",
+      "case": "PURITY, DORMANCY AND THE IMPORT FENCE. makeOp/validateOp stay pure over the new rows (the input payload proved unmutated against a pre-call clone); the module's import list contains NONE of a PRNG, rngContext, src/store/**, src/components/**, or src/domain/factionRename.js — it names the cascade as DATA and never imports it; a source scan finds ZERO importers of the new leaf, with guard-the-guard arms on both the walk and the matcher."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/editOperations.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/operationsHomeDelegating.js",
+      "src/domain/edit/operations.js",
+      "tests/domain/editOperations.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "id": "EM-A2a",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-A2a.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE POOL MACHINERY AND THE TEN TABLE POOLS. POOLS (frozen), poolValues(poolId, world) -> a FROZEN, codepoint-sorted, duplicate-free string[] that is never null and never throws, and rollFrom(poolId, world, seed, entryId, n) -> string|null — the signature the chair ruled (3). THE STREAM IS A ROOT COMPOSITION, NEVER A FORK: createPRNG(`edit-pool:${poolId}:${seed}:${entryId}:${n}`) then one .pick — no `::` is spelled, so tests/kernel/prngForkLabelDelimiter.test.js's EMBEDDED_DELIMITER_FAMILIES and its RESERVED `epoch` head cannot move; `n` rides IN the key rather than as a number of advances, so reopening a card at roll 3 reproduces roll 3 without replaying 0..2 (design §11). CONSUMES NO WORLD DRAW: nothing from src/kernel/rngContext.js, whose helpers read a module-level _activeRng that THROWS when absent and steals a world draw when present (§P5 HZ-PRNG). THE TEN TABLE POOLS: institution.class (getInstitutionsForTier — a Set, 85 at town), faction.category (13 — the chair's fact (2): no faction record carries `type` or `archetype`, the field is `category`, and `archetype` is a DERIVATION design §14 forbids editing; `stance` is dropped with it), cause.remove (the owner's five), commodity (RESOURCE_DATA 33 + SPECIAL_RESOURCES 6), tier (TIER_ORDER, 6, the ONE pool exempt from the codepoint sort because its order is meaning), npc.status and institution.state (THE TREE'S OWN TYPEDEFS — NpcStatus's six and EntityStatus's five — which REFUTE design §15's prose in both directions; the chair's fact (3) rules the existing ops-layer writers are the op's writer, and a value outside the typedef would break their type contract), and THE WIZARD'S OWN SETS read at the generator rather than re-typed: worldFact.terrain (TERRAIN_WEIGHTS' seven keys, EXECUTED set-equal to the wizard's own seven <option> values) and worldFact.culture (CULTURES, 11, whose own header says it must match the generator's list), plus worldFact.stressors (STRESS_TYPE_MAP's 15 keys). ⛔ NO JSX IS IMPORTED — a wizard option read from a component would be both a layering violation (§P4) and the 'second copy' the chair's ruling (5) forbids. ≈143 effective of the 250 leaf cap (an ESTIMATE, re-measured with eslint's own Linter at implementation; crossing 250 is a STOP, never a squeeze). Lands DARK. EM-A2b appends seven world-derived rows to this file.",
+      "action": "CREATE",
+      "path": "src/domain/edit/pools.js"
+    },
+    {
+      "_note": "THE ACCEPTANCE — eight arms, ONE literal describe, eight straight-line `it`, no .each / runIf / nested describe (§P3.4). A1 is guard-the-guard and runs FIRST so no later arm passes on nothing. A3 carries the WIZARD-PARITY arm: worldFact.terrain is asserted set-equal to the wizard's seven <option> values read from ConfigurationPanel.jsx BY THE TEST (never by the module), so a drift between the wizard's menu and the generator's table reds HERE rather than shipping as an unofferable option. A6 is load-bearing: the ambient stream is fixed with setActiveRng, fifty rollFrom calls are made across all ten pools, and the NEXT ambient draw is asserted equal to the pre-recorded value — the world's sequence did not advance by one step. A7 is the prevention guard, asserting the import list EXACTLY in both directions. A8 pins THE TREE'S two typedefs (NpcStatus's six, EntityStatus's five) as exact sorted lists parsed from their own source files, asserts `destroyed` and `removed` present and DISTINCT ('destruction is a state the record keeps; removal is erasure' made structural), and asserts `jailed` ABSENT BY NAME so the one value design §15's prose claims and the tree lacks is a recorded verdict. Every negative carries its `// anchored:` marker on the line immediately above it. A CREATE row, not TEST — the validator refuses a non-CREATE row whose path does not exist (implementation-packets.mjs:709).",
+      "action": "CREATE",
+      "path": "tests/domain/editPools.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE TIER-GATED NAME SET and the ONLY source of institution.class (design §12.7). MEASURED BY LIVE IMPORT: returns a Set, not an array — getInstitutionsForTier('town') -> Set size 85. A packet that wrote .map/.sort onto the return would have thrown. Proven present: grep -c -> 1.",
+      "path": "src/generators/lookups.js",
+      "symbol": "export const getInstitutionsForTier"
+    },
+    {
+      "_note": "THE TIER-GATED CATALOG SHAPE. MEASURED at 'town': 10 categories / 85 rows — name-for-name equal to the Set above, which is what lets the pool use either without a second gate. Proven present: grep -c -> 1.",
+      "path": "src/generators/lookups.js",
+      "symbol": "export const getInstitutionalCatalog"
+    },
+    {
+      "_note": "THE GATE ITSELF — `(def, tier) => !def?.minTier || tierAtLeast(tier, def.minTier)`, the generator's own minTier test written the same way round. Named so a pool re-implementing the gate is detectable from the manifest. Proven present: grep -c -> 1.",
+      "path": "src/generators/lookups.js",
+      "symbol": "export const institutionAvailableAtTier"
+    },
+    {
+      "_note": "THE STREAM SOURCE, and it is NOT at src/generators/kernel/prng.js — that path does not exist at this base; re-found by symbol. pick(arr) returns UNDEFINED on an empty or absent array, which is why rollFrom's contract converts to null. Its fork() derives `${seed}::${label}` and the `::` delimiter is load-bearing vocabulary frozen by tests/kernel/prngForkLabelDelimiter.test.js — which is exactly why rollFrom uses a ROOT composition instead. Proven present: grep -c -> 1.",
+      "path": "src/kernel/prng.js",
+      "symbol": "export function createPRNG"
+    },
+    {
+      "_note": "THE PRECEDENT THE CHAIR RULED (4): a src/domain leaf that seeds its own stream with a ROOT composition (createPRNG(`instant-npc:${seed}`)) and takes the culture bag as a PARAMETER, touching neither the ambient context nor the 68.6 kB name table. EM-A2b copies it for the name pools; this packet copies the stream shape. Proven present: grep -c -> 2 (the export plus one JSDoc reference).",
+      "path": "src/domain/npc/npcOps.js",
+      "symbol": "export function instantNpc"
+    },
+    {
+      "_note": "THE CATEGORY POOL'S VALUE SET. MEASURED: 13 frozen values — government, noble, military, merchant, religious, criminal, arcane, craft, labor, outsider, occupation, civic, other. ⭐ NAMED FOR `faction.category`, NOT `archetype`: the chair's fact (2) and this lane's measurement agree that no faction record carries `type` or `archetype` — the stored field is `category` (read live at economyReconciliation.js:68 and relationshipArchetypes.js:10,55) and `factionArchetype(f)` at :103 DERIVES the archetype from `f.category`, which design §14 forbids editing. The same thirteen values are the category pool's members. Proven present: grep -c -> 1.",
+      "path": "src/domain/factionArchetypes.js",
+      "symbol": "export const FACTION_ARCHETYPES"
+    },
+    {
+      "_note": "THE RESOURCE CATALOGUE AT ITS SOURCE (design §12.7 — never the resourceDisplayName seam, which passes unknowns through at :130). MEASURED: 33 keys, each row carrying commodities: string[]. ⚠ This module sits in the EAGER first-paint `data` chunk; the static import is admissible only because three first-paint modules already reach it, so the pool adds no new edge (src/data/goods/identity.js states the surface law verbatim, enforced by tests/build/vendorPdfLazy.test.js). Proven present: grep -c -> 1.",
+      "path": "src/data/resourceData.js",
+      "symbol": "export const RESOURCE_DATA"
+    },
+    {
+      "_note": "The commodity pool's second half. MEASURED: 6 keys, read at the same source module as RESOURCE_DATA so the two halves cannot drift into separate homes. Proven present: grep -c -> 1.",
+      "path": "src/data/resourceData.js",
+      "symbol": "export const SPECIAL_RESOURCES"
+    },
+    {
+      "_note": "THE SIZE LADDER, six ordered small-to-large. Its ORDER IS MEANING, which is why `tier` is the one pool exempt from the codepoint sort — A4 pins the exemption in BOTH directions ('city' precedes 'hamlet' alphabetically but follows it here) so it can never be silently 'fixed'. Proven present: grep -c -> 1.",
+      "path": "src/data/constants.js",
+      "symbol": "export const TIER_ORDER"
+    },
+    {
+      "_note": "THE WIZARD'S TERRAIN SET, named by symbol per the chair's ruling (5) and never re-typed. MEASURED: seven weighted pairs whose keys are plains, hills, forest, riverside, coastal, mountain, desert — and EXECUTED set-equal to the seven <option> values the wizard renders at ConfigurationPanel.jsx:349-355. The pool reads THIS, not the JSX; A3 asserts the two agree, so a drift reds in this packet rather than shipping as an option the generator cannot roll. Proven present: grep -c 'export const TERRAIN_WEIGHTS' -> 1.",
+      "path": "src/generators/steps/resolveConfig.js",
+      "symbol": "export const TERRAIN_WEIGHTS"
+    },
+    {
+      "_note": "THE WIZARD'S CULTURE SET — eleven, and the estate ALREADY treats it as canonical: its own comment reads 'Exported for the gallery facet-alignment contract (culture facet vocabulary must match the generator's own list)'. That is the chair's ruling (5) already in force for another consumer, which is why the pool joins it rather than minting a second copy. Proven present: grep -c 'export const CULTURES' -> 1.",
+      "path": "src/generators/steps/resolveConfig.js",
+      "symbol": "export const CULTURES"
+    },
+    {
+      "_note": "THE STRESSOR VOCABULARY. MEASURED: 15 keys, each carrying { label, colour, probability, requiresTier, crisisHook, ... }. The pool takes the KEYS, never the labels — a label is a display string and a pool is a fact set, which is the display-seam mistake §12.7 forbids arriving by a different door. Proven present: grep -c -> 1.",
+      "path": "src/data/stressTypes.js",
+      "symbol": "export const STRESS_TYPE_MAP"
+    },
+    {
+      "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction — `(a,b) => String(a ?? '') < String(b ?? '') ? -1 : ...`. Ten of the eleven pools sort through it; `tier` is the stated exception. Proven present: grep -c -> 1.",
+      "path": "src/domain/deterministicSort.js",
+      "symbol": "export const compareCodepoint"
+    },
+    {
+      "_note": "THE NPC STATUS VOCABULARY, THE TREE'S OWN — and it REFUTES design §15's prose. MEASURED: NpcStatus = 'active'|'dead'|'missing'|'exiled'|'retired'|'removed' — SIX, with `active` where §15 says `present`, `retired` and `removed` that §15 lacks, and NO `jailed` and no `departed`. The pool takes the TREE's members because the chair's fact (3) rules that the existing ops-layer writers (entities/npcs.js, events/mutateEntities.js) are the writer the op calls and never a second path — a value outside this typedef would break their own type contract the moment it was written. `jailed` is RAISED, never invented. Proven present: grep -c 'NpcStatus' src/domain/entities/npcs.js -> 3.",
+      "path": "src/domain/entities/npcs.js",
+      "symbol": "NpcStatus"
+    },
+    {
+      "_note": "THE INSTITUTION STATE VOCABULARY, THE TREE'S OWN — likewise refuting §15's prose. MEASURED: EntityStatus = 'active'|'impaired'|'removed'|'destroyed'|'vacant' — FIVE, each with its authored gloss in the typedef ('removed — institution closed, NPC departed, faction dissolved (recoverable)'; 'destroyed — physical destruction; rebuild required'), and no `ruined`, `abandoned` or `under-construction`. `destroyed` and `removed` are DISTINCT here, which is design §15's 'destruction is a state the record keeps; removal is erasure' already true in the tree. Proven present: grep -c 'EntityStatus' src/domain/entities/status.js -> 2.",
+      "path": "src/domain/entities/status.js",
+      "symbol": "EntityStatus"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "MAIN BEHAVIOUR AND GUARD-THE-GUARD, ASSERTED FIRST: POOLS holds exactly the TEN declared ids (set-equal both directions, full offender list); every pool returns a frozen, non-empty, duplicate-free string[] on a real town world; institution.class is exactly 85 and SET-EQUALS [...getInstitutionsForTier('town')]; faction.category set-equals Object.values(FACTION_ARCHETYPES) (13); tier equals TIER_ORDER (6)."
+    },
+    {
+      "id": "A2",
+      "case": "ABSENCE IS THE TYPED VALUE AND NOTHING THROWS. null, undefined, {}, { tier: 'nonsense' }, { institutions: null } and an unknown pool id each return a FROZEN ARRAY — never null, never undefined, never a throw — and rollFrom returns null for each empty pool. A tier of 'random', 'custom' or absent yields the VILLAGE catalogue (lookups.js's own special case) rather than an empty pool, anchored against the 'nonsense' case which yields []."
+    },
+    {
+      "id": "A3",
+      "case": "SOURCE IDENTITY, AND WIZARD PARITY. Each catalogue pool SET-EQUALS its source live, and a source scan proves pools.js imports neither display seam and NO JSX AT ALL, with the matcher proved live on a planted string. worldFact.terrain SET-EQUALS the wizard's own seven <option> values — read from ConfigurationPanel.jsx by the TEST, never by the module — and worldFact.culture set-equals CULTURES (11), so a drift between the wizard's menu and the generator's table reds here. The tier gate is proved LIVE rather than inherited: a row carrying minTier 'metropolis' is ABSENT from institution.class at city and PRESENT at metropolis."
+    },
+    {
+      "id": "A4",
+      "case": "BOUNDARY — STABLE ORDER AND THE ONE STATED EXCEPTION. Every pool except `tier` is in compareCodepoint order, asserted by re-sorting and comparing. `tier` is TIER_ORDER's semantic small-to-large sequence VERBATIM and is asserted NOT to be codepoint-sorted ('city' precedes 'hamlet' alphabetically but follows it here), so the exemption is pinned in both directions and cannot be silently repaired."
+    },
+    {
+      "id": "A5",
+      "case": "IDEMPOTENCY AND THE REOPEN GUARANTEE. rollFrom(p, w, s, e, 3) returns the same value on three calls (toBe). Rolls 0..9 are taken in order, then roll 3 is taken ALONE on a fresh call and equals the earlier roll 3 — the reopen guarantee of design §11, which an advancing single stream would break because roll 3 would then depend on whether 0..2 were ever taken. Different entryIds at the same n differ for at least one pool, and different seeds likewise, so both key segments are proved live."
+    },
+    {
+      "id": "A6",
+      "case": "THE NO-DRAW LAW AND THE GOLDEN'S STRUCTURAL PROOF (§P5 HZ-PRNG). With setActiveRng(createPRNG('probe')) live, the ambient sequence is fixed by recording two draws; after re-seeding, fifty rollFrom calls across all ten pools are made and the NEXT ambient draw is asserted EQUAL to the recorded second value — the world's stream did not advance by one step. With NO active RNG, rollFrom does not throw, so the fail-closed context was never reached. Plus the dormancy half: a source scan over src/** finds ZERO importers of src/domain/edit/pools.js, with guard-the-guard arms proving the walk non-empty and the matcher live on a planted string."
+    },
+    {
+      "id": "A7",
+      "case": "THE IMPORT FENCE, BOTH DIRECTIONS — the packet's prevention guard. pools.js's import list is asserted EXACTLY: it contains src/kernel/prng.js, src/generators/lookups.js, src/domain/factionArchetypes.js, src/domain/dossier/powerStrata.js, src/data/resourceData.js, src/data/constants.js, src/generators/steps/resolveConfig.js, src/data/stressTypes.js and src/domain/deterministicSort.js, and it contains NONE OF src/kernel/rngContext.js, src/data/namingData.js, src/generators/npcGenerator.js, any *.jsx, any src/components/** or src/store/** path. The list is proved non-empty first."
+    },
+    {
+      "id": "A8",
+      "case": "THE TWO STATE VOCABULARIES ARE THE TREE'S, NOT DESIGN §15's PROSE. npc.status set-equals the NpcStatus typedef's six (active, dead, exiled, missing, removed, retired) and institution.state the EntityStatus typedef's five (active, destroyed, impaired, removed, vacant) — exact sorted lists, never lengths, both frozen, each PARSED FROM ITS OWN SOURCE FILE by the test so a typedef edit reds here rather than drifting. `destroyed` and `removed` are both present and DISTINCT, which is design §15's 'destruction is a state the record keeps; removal is erasure' made structural. `jailed` — named in §15's prose and in the chair's fact (3) but absent from the tree's typedef — is asserted ABSENT BY NAME, so its absence is a recorded verdict rather than an oversight."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/editPools.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/kernel/prngForkLabelDelimiter.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/pools.js",
+      "tests/domain/editPools.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

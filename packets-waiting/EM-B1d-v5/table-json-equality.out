@@ -1,0 +1,34 @@
+PACKET_ACTIONS (frozen): CREATE, DOC, MODIFY, REGISTER, TEST
+§7 table rows parsed by column name: 16
+JSON changeManifest rows:            16
+rows only in the TABLE: NONE
+rows only in the JSON:  NONE
+actions outside PACKET_ACTIONS: NONE
+bare basenames in the table:    NONE
+multi-path cells in the table:  NONE
+duplicate paths: NONE
+lighting-baseline row present:  NONE (prose only, as §P2 row 1 requires)
+
+SET-EQUAL BOTH DIRECTIONS: YES
+
+requiredSymbols, grep -cF at 58fcfe614 (all must be >= 1):
+    3  src/domain/entities/npcs.js :: NpcStatus
+    1  src/domain/entities/npcs.js :: export function killNpc
+    1  src/domain/entities/npcs.js :: const IMPORTANCE_WEIGHT = {
+    1  src/domain/density/factionLifecycle.js :: export const ROSTER_ABSENT_STATUSES
+    1  src/domain/entities/successors.js :: export function inferSuccessors
+    1  src/domain/worldPulse/envoyCasting.js :: export function rosterPersonAvailable
+    1  src/domain/worldPulse/envoyCasting.js :: const IDENTITY_SEPARATOR
+    1  src/domain/worldPulse/magicFormsPractitioner.js :: const LOST_NPC_STATUS
+    4  src/domain/entities/status.js :: EntityStatus
+    1  src/domain/worldPulse/npcVerdictTable.js :: export const HOLDING_VERDICT
+    1  src/domain/worldPulse/warSeatBooks.js :: function rosterNpcById
+    1  src/domain/worldPulse/npcLadderState.js :: export function eligibleMembersOf
+    1  src/domain/worldPulse/npcLadderKernel.js :: function advanceLitLadder
+    1  tests/generators/densityLaw.test.js :: the absent-status line is EXACT in both directions
+    1  tests/domain/espionageMission.test.js :: status: 'imprisoned'
+    1  tests/lint/mutationCoverage.shared.mjs :: export const ENFORCER_DIRS
+    1  tests/lint/chooserTotality.walker.test.js :: const SCAN_ROOTS
+requiredSymbols rows: 17; minimum count: 1
+
+handwritten rows: 9 · generated rows: 7

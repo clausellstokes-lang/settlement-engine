@@ -1,0 +1,3 @@
+# RETIRED — there is never any deferred work (the owner's law, 2026-09-19; ODQ §934.56)
+
+This file once listed deferred-and-unsequenced items. The owner ruled that no such state exists: anything emergent goes INTO THE SEQUENCE the turn it surfaces, with one of three fates — a SLOT, an OWNER'S DECISION POINT with its moment named, or CLOSED (not work) with the reason. The one authority is the charter, `docs/implementation/charters/EDIT-MODE-TRAIN.md` on the ledger branch: the sections "THE DEFERRED WORK, SEQUENCED" and "THE OWNER'S LAW: THERE IS NEVER ANY DEFERRED WORK". Do not add rows here; add them there.

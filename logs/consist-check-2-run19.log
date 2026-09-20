@@ -1,0 +1,430 @@
+
+> settlementforge@1.0.0 check
+> npm run validate:hazard-registry && npm run validate:premortem && npm run validate:packets && npm run validate:data && npm run validate:custom-content-manifest && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run validate:tuning-bands && npm run validate:foundry-module && npm run validate:mcp-server && npm run typecheck:ratchet && npm run typecheck:domain:strict && npm run lint && npm run test:ratchet && npm run build && npm run verify:dist
+
+
+> settlementforge@1.0.0 validate:hazard-registry
+> node scripts/check-hazard-registry.mjs
+
+[hazard-registry] OK — 29 class(es): MACHINERY 13, PARTIAL 11, DOCUMENT 5, ACCEPTED 0. DOCUMENT 5/5, OWED 16/18 (shrink-only), MACHINERY 13/9 (grow-only), floor 27.
+
+> settlementforge@1.0.0 validate:premortem
+> node scripts/premortem.mjs --self-check
+
+[premortem] VICTORY (an empty population by design, still armed): test-ratchet-red-file: the baselined-red census is ZERO (the ratchet's win banked 2026-09-19): no file carries a baselined-red row, so no edit can hide inside one; a row reappearing re-arms this predicate
+[premortem] SELF-CHECK OK — 28 predicates (16 derived, 12 authored of which 3 hybrid), 23/29 registry classes routed to a trigger, 6 uncovered and each explicitly exempted with a reason.
+
+> settlementforge@1.0.0 validate:packets
+> node scripts/implementation-packets.mjs validate
+
+[implementation-packets] valid: 192 packets (1 READY)
+
+> settlementforge@1.0.0 validate:data
+> node scripts/find-duplicate-keys.js && node scripts/generate-institution-service-keys.mjs --check
+
+
+Summary: 0 exact duplicate(s), 0 casing collision(s)
+[institution-service-keys] verified 285 ordered keys
+
+> settlementforge@1.0.0 validate:custom-content-manifest
+> node scripts/generate-custom-content-manifest.mjs --check
+
+custom-content manifest artifacts are current
+
+> settlementforge@1.0.0 validate:migration-head
+> node scripts/check-migration-head.mjs
+
+[check-migration-head] repo migration head = 203 (203 files, contiguous)
+[check-migration-head] PENDING DEPLOY: prod applied head=200 (per supabase/applied-head.json, as of 2026-09-16) is behind repo head=203. 3 migration(s) not yet in prod: 201, 202, 203. Run `supabase db push`, then bump appliedHead. (Visible, not fatal — this is the normal commit→deploy window.)
+
+> settlementforge@1.0.0 validate:edge
+> node scripts/validate-edge-functions.mjs
+
+Edge function syntax and guard contracts are valid (79 files; 43 test suites env-scope clean).
+
+> settlementforge@1.0.0 validate:map
+> node scripts/validate-map-fork.mjs
+
+Map fork JavaScript parses successfully; 135 vendored libs match the supply-chain manifest.
+
+> settlementforge@1.0.0 validate:tuning-bands
+> node scripts/check-tuning-bands.mjs
+
+[check-tuning-bands] manifest v2 OK: 9 ratified soak bands, all valid.
+
+> settlementforge@1.0.0 validate:foundry-module
+> node scripts/validate-foundry-module.mjs
+
+foundry-module OK — module.json valid, 3 script(s) parse, README present.
+
+> settlementforge@1.0.0 validate:mcp-server
+> node scripts/validate-mcp-server.mjs
+
+mcp-server OK — package.json valid + dependency-free, 3 module(s) parse, read-only tool manifest, no write/network path.
+
+> settlementforge@1.0.0 typecheck:ratchet
+> node scripts/check-full-typecheck.mjs
+
+[typecheck-ratchet] OK — no type regressions (167 error(s), ceiling 167).
+
+> settlementforge@1.0.0 typecheck:domain:strict
+> node scripts/check-domain-strict.mjs
+
+[domain-strict] ✓ no strict-type regressions (1113 errors, ceiling 1113).
+
+> settlementforge@1.0.0 lint
+> eslint src/ tests/ scripts/
+
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/MapOverlay.jsx
+  125:13  warning  Error: Cannot modify local variables after render completes
+
+This argument is a function which may reassign or mutate `transformOut` after render, which can cause inconsistent behavior on subsequent renders. Consider using state instead.
+
+  123 |   // ── Image-mode pan/zoom (self-owned; no FMG to mirror) ────────────────
+  124 |   const fittedRef = useRef(null); // imageUrl we've already fit, so we don't re-fit on every tick
+> 125 |   useEffect(() => {
+      |             ^^^^^^^
+> 126 |     if (!imageMode) return;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 127 |     const el = wrapperRef.current;
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 194 |     };
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 195 |   }, [imageMode, customBackdrop?.imageUrl, customBackdrop?.w, customBackdrop?.h, size.width, size.height]);
+      | ^^^^ This function may (indirectly) reassign or modify `transformOut` after render
+  196 |
+  197 |   // ── Wrapper size sync (drives viewBox) ──────────────────────────────
+  198 |   // Watch the wrapper's rendered rect via ResizeObserver. Toggling the
+
+  134 |     const applyT = (t) => {
+  135 |       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
+> 136 |       if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      |           ^^^^^^^^^^^^ This modifies `transformOut`
+  137 |       const { tx, ty, scale } = transformRef.current;
+  138 |       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+  139 |       schedulePersist(tx, ty, scale, W, H);  react-hooks/immutability
+  136:11  warning  Error: This value cannot be modified
+
+Modifying component props or hook arguments is not allowed. Consider using a local variable instead.
+
+  134 |     const applyT = (t) => {
+  135 |       transformRef.current = { ...transformRef.current, ...t, width: W, height: H };
+> 136 |       if (transformOut) transformOut.current = transformRef.current; // live read for the drop handler
+      |           ^^^^^^^^^^^^ `transformOut` cannot be modified
+  137 |       const { tx, ty, scale } = transformRef.current;
+  138 |       if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+  139 |       schedulePersist(tx, ty, scale, W, H);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/immutability
+  195:6   warning  React Hook useEffect has a missing dependency: 'transformOut'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/SingleDossierSuccessPage.jsx
+  211:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  209 |     if (verification.status !== 'verified') return;
+  210 |     autoDownloadedRef.current = true;
+> 211 |     handleDownload();
+      |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  212 |   }, [settlement, verification.status, handleDownload]);
+  213 |
+  214 |   function handleKeep() {  react-hooks/set-state-in-effect
+  366:45  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  364 |           disabled={downloading || verification.status !== 'verified'}
+  365 |         >
+> 366 |           {downloading ? 'Preparing PDF…' : autoDownloadedRef.current ? 'Download again' : 'Download PDF'}
+      |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  367 |         </Button>
+  368 |
+  369 |         {downloadError && (                                                                                                                                                                                                                                                                                   react-hooks/refs
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/contentStudio/customContentLifecycleSupport.jsx
+  3:10  warning  'chromeFontSize' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/gallery/GalleryCampaigns.jsx
+  103:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  101 |   useEffect(() => {
+  102 |     let ignore = false;
+> 103 |     setLoading(true); setError(null);
+      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  104 |     // The server RPC honors every facet + sort + search (normalizeMapFilters →
+  105 |     // p_filters, p_sort_key, p_search_query); kind is pinned to campaign shares
+  106 |     // over whatever the sidebar narrows  react-hooks/set-state-in-effect
+  137:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  135 |
+  136 |   useEffect(() => {
+> 137 |     if (!viewingSlug) { setDetail(null); return; }
+      |                         ^^^^^^^^^ Avoid calling setState() directly within an effect
+  138 |     let ignore = false;
+  139 |     setDetailLoading(true); setDetail(null);
+  140 |     fetchGalleryMap(viewingSlug)                                                                                              react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/gallery/GalleryMaps.jsx
+  72:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  70 |
+  71 |   useEffect(() => {
+> 72 |     if (!viewingSlug) { setDetail(null); return; }
+     |                         ^^^^^^^^^ Avoid calling setState() directly within an effect
+  73 |     let ignore = false;
+  74 |     setDetailLoading(true); setDetail(null);
+  75 |     fetchGalleryMap(viewingSlug)                                                                                                                           react-hooks/set-state-in-effect
+  84:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  82 |   useEffect(() => {
+  83 |     let ignore = false;
+> 84 |     setLoading(true); setError(null);
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  85 |     // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
+  86 |     // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
+  87 |     // honors every facet + sort + search (normalizeMapFilters → p_filters,  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/legal/LegalPage.jsx
+  18:10  warning  'chromeFontSize' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/loadingJourney/ProgressJourneyOverlay.jsx
+   87:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  85 |   const videoRef = useRef(null);
+  86 |   const progressRef = useRef(progress);
+> 87 |   progressRef.current = progress;
+     |   ^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  88 |   const [videoReady, setVideoReady] = useState(false);
+  89 |
+  90 |   useEffect(() => {                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+  175:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  173 |   const [phase, setPhase] = useState('scrub'); // 'scrub' | 'fading' | 'gone'
+  174 |   const onDismissRef = useRef(onDismiss);
+> 175 |   onDismissRef.current = onDismiss;
+      |   ^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  176 |
+  177 |   const scrubbing = present === true && motionOk && !videoFailed;
+  178 |                                                                                                                                                                                                                                                                                                                                                                       react-hooks/refs
+  184:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  182 |     if (!scrubbing || holdAtEnd) return undefined;
+  183 |     if (progress >= 1 && phase === 'scrub') {
+> 184 |       setPhase('fading');
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  185 |       const t = setTimeout(() => {
+  186 |         setPhase('gone');
+  187 |         onDismissRef.current?.();  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/loadingJourney/useJourneyConductor.js
+  187:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  185 |   const finishedFiredRef = useRef(false);
+  186 |   const arrivedRef = useRef(arrived);
+> 187 |   arrivedRef.current = arrived;
+      |   ^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  188 |   const onFinishedRef = useRef(onFinished);
+  189 |   onFinishedRef.current = onFinished;
+  190 |                                                                                                                                                                                                                                                                                                                          react-hooks/refs
+  189:3  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  187 |   arrivedRef.current = arrived;
+  188 |   const onFinishedRef = useRef(onFinished);
+> 189 |   onFinishedRef.current = onFinished;
+      |   ^^^^^^^^^^^^^^^^^^^^^ Cannot update ref during render
+  190 |
+  191 |   useEffect(() => {
+  192 |     if (!active) {                                                                                                                                                                                                                                                                                                                                                                react-hooks/refs
+  193:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  191 |   useEffect(() => {
+  192 |     if (!active) {
+> 193 |       setFrame((f) => (f.phase === JOURNEY_PHASE.idle ? f : IDLE_FRAME));
+      |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  194 |       return undefined;
+  195 |     }
+  196 |  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/loadingJourney/useRealmLoadProgress.js
+  76:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  74 |     bridgeAtRef.current = null;
+  75 |     maxRef.current = 0;
+> 76 |     setFrac(0);
+     |     ^^^^^^^ Avoid calling setState() directly within an effect
+  77 |   }, [runId]);
+  78 |
+  79 |   useEffect(() => {                                               react-hooks/set-state-in-effect
+  85:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  83 |       // Snap to the top; the overlay reads 1 and plays out its final fade.
+  84 |       maxRef.current = 1;
+> 85 |       setFrac(1);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  86 |       return undefined;
+  87 |     }
+  88 |  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/map/KeyboardPlacementControl.jsx
+  38:10  warning  'chromeFontSize' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/map/TerritoryLayer.jsx
+  72:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  70 |   const [pack, setPack] = useState(null);
+  71 |   useEffect(() => {
+> 72 |     setPack(null);
+     |     ^^^^^^^ Avoid calling setState() directly within an effect
+  73 |     if (!digest || imageMode) return undefined;
+  74 |     const bridge = getSpatialCaptureBridge();
+  75 |     if (!bridge || !bridge.isReady || typeof bridge.getSpatialPack !== 'function') return undefined;  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/map/WorldMapStage.jsx
+  309:54  warning  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  307 |                   parent live-reads transformOut for the drop handler — master's
+  308 |                   onTransform CALLBACK spelling silently severed the threading. */}
+> 309 |               <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
+      |                                                      ^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  310 |             </Suspense>
+  311 |           )}
+  312 |           <Suspense fallback={null}>  react-hooks/refs
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/components/settlementDetail/SettlementDetailActions.jsx
+   4:10  warning  't' is defined but never used. Allowed unused vars must match /^_/u               no-unused-vars
+  27:3   warning  'imageExporting' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  27:19  warning  'onExportImage' is defined but never used. Allowed unused args must match /^_/u   no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/ai/personaSlicer.js
+  120:62  warning  'settlements' is assigned a value but never used. Allowed unused args must match /^_/u  no-unused-vars
+  121:3   warning  'tick' is assigned a value but never used. Allowed unused args must match /^_/u         no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/construct/intentComparator.js
+  25:7  warning  'HIGHER_IS_BETTER' is assigned a value but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/content/customContentCharset.generated.js
+  1:1  warning  Unused eslint-disable directive (no problems were reported)
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/corruptionLeash.js
+  120:35  warning  'settlement' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+  120:47  warning  'worldState' is defined but never used. Allowed unused args must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/display/stateProse/defenseStateProse.js
+  95:10  warning  'MONSTER_THREAT_TIERS' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/display/stateProse/stressorsStateProse.js
+  51:10  warning  'STRESS_TYPE_MAP' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/domain/townCartography/cartographySkeleton.js
+  62:10  warning  'ordinal' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/hooks/useGalleryPageState.js
+  166:10  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  164 |
+  165 |   useEffect(() => {
+> 166 |     void loadList(galleryQuery);
+      |          ^^^^^^^^ Avoid calling setState() directly within an effect
+  167 |     // Cleanup bumps the token, and THAT is what retires an in-flight load on a
+  168 |     // query change or an unmount: a superseded promise finds `gen` behind the
+  169 |     // current one and writes nothing. It replaces the old local `cancelled`  react-hooks/set-state-in-effect
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/consist/src/pdf/sections/Cover.jsx
+  18:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 36 problems (0 errors, 36 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+
+> settlementforge@1.0.0 test:ratchet
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 90806 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] TEST REGRESSIONS (fix them; do not widen the census):
+  1 failing test(s) NOT in the frozen census:
+    tests/security/migrationRefIntegrity.meta.test.js :: security-suite migration references resolve (runIf cannot silently vacate) every referenced migration file exists under supabase/migrations/
+      ASSERTION · ran 9ms against a 20000ms budget (vite.config.js testTimeout) — a real verdict — read the message
+      msg: AssertionError: expected [ …(5) ] to deeply equal []
+
+  machine at this run: load 18.07/26.45/24.48 over 8 core(s)
+  full runner report: /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/test-ratchet-LfZCHf/results.json
+  stable copy of it:  /var/folders/0l/_sz6gzvd11x6sthjy1jdj0_80000gp/T/test-ratchet-last-red.json
+
+Frozen census is 0 failing test(s), measured at b43dfb7719722cf224db0d181fd51e15a4f35d85.
+Run `npm run test` for the unfiltered reporter output.
+run 19 exit 1 at Sun Sep 20 04:39:19 EDT 2026

@@ -1,0 +1,289 @@
+{
+  "id": "EM-B2a",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B2a.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "⭐ RE-SCOPED (ODQ §934.47): the three measured blocks became Wave 0 packets — EM-P0 (the pipeline's pinned mode and the population split), EM-P1 (stable ids, DECIDED YES under §934.47 A) and EM-P2 (the sibling generation fork registry). This car no longer edits src/generators/pipeline.js: it DRIVES EM-P0's `pins` option rather than minting it. The row is kept as the measurement that scheduled EM-P0 — runPipeline runs all 23 steps unconditionally from config, accepts no record, and holds no skip/reuse/pin/preserve branch; generatePopulation calls generateNPCs with no roster parameter and is root-writing and deriving in one body; rng.fork(name) at :165 already gives each step its own stream, which is the half that works.",
+      "action": "READ-ONLY (EM-P0's path; this car does not edit it)",
+      "path": "src/generators/pipeline.js"
+    },
+    {
+      "_note": "THE LEAF, REWRITTEN TO THE AMENDED MECHANISM (ODQ §934.44 addendum, design §14): `layerRead(layer, key) → value|undefined`, `applyEdit(layer, op) → layer` (pure; never touches a record), `regenerateWithLayer(seed, config, layer) → record` through the REAL entry `generateSettlementPipeline(config, importedNeighbour, options)` (generateSettlementPipeline.js:77 — the same function the golden hashes, so instrument 7 compares like with like), plus `DM_ID_NS` and `mintDmId`. `roots` holds THE DM'S OVERRIDE, inverting §12.5's storage: the record is regenerated FROM the layer, so the layer is the input. ⛔ THE KEY SPELLING IS THIS PACKET'S BLOCK — see the requiredSymbols rows for npcGenerator, assembleInstitutions and densityAscension.",
+      "action": "CREATE",
+      "path": "src/domain/edit/dmLayer.js"
+    },
+    {
+      "_note": "⛔⛔ THE HOOK'S HOST, AND THE ROW THAT BREAKS THE BUDGET. `runPipeline(initialContext, rng, options)` (:152) is the runner that threads the SINGLE rng to every generator step — measured, src/generators holds only 6 `createPRNG(` sites in 4 files but 74 `rng(` draw sites across 19 files, so the choosers are draw sites reached through this runner, not PRNG-creation sites. `drawRoot(rng, key, pool, layer)` seats here as ONE helper: it ADVANCES THE RNG EXACTLY AS AN UNOVERRIDDEN DRAW WOULD, BEFORE consulting the layer, which is the single rule that makes 'untouched roots keep their value' true and instrument 7's one-root property provable; an override that is not a member of `pool` is IGNORED and the drawn value stands.",
+      "action": "MODIFY",
+      "path": "src/generators/pipeline.js"
+    },
+    {
+      "_note": "⛔ ROOT CHOOSER FILE 1 of 5 — npc name, role, disposition and the roster. 23 `rng(` draw sites, the densest in the estate. IT IS ALSO THE BLOCK'S PRIMARY RECEIPT: `npc.id = `npc_${idx + 1}`` at :1631 makes an NPC's identity its ARRAY INDEX, so a roster root edit (which design §14 explicitly makes editable) re-points every later layer key. STOP AND SPLIT: this file plus the four below is five existing logic-bearing production files against a hard limit of three.",
+      "action": "MODIFY",
+      "path": "src/generators/npcGenerator.js"
+    },
+    {
+      "_note": "⛔ ROOT CHOOSER FILE 2 of 5 — the institution roster, class and standing. Draws through helpers rather than a direct `rng(`. SECOND BLOCK RECEIPT: institutions have NO general id mint (only `id: `repair.N`` at :701) and are resolved BY DISPLAY NAME (`institutions.find(i => i.name === instName)` at :426 and :492), and a name is a `free-cascade` field the DM may change — so the key moves when the DM edits it.",
+      "action": "MODIFY",
+      "path": "src/generators/steps/assembleInstitutions.js"
+    },
+    {
+      "_note": "⛔ ROOT CHOOSER FILE 3 of 5 — faction archetype and stance; 5 `rng(` draw sites.",
+      "action": "MODIFY",
+      "path": "src/generators/power/relationshipArchetypes.js"
+    },
+    {
+      "_note": "⛔ ROOT CHOOSER FILE 4 of 5 — the faction roster and power share (a root under the totality guard, design §14's ruled edge); 1 `rng(` draw site.",
+      "action": "MODIFY",
+      "path": "src/generators/power/stressFactions.js"
+    },
+    {
+      "_note": "⛔ ROOT CHOOSER FILE 5 of 5 — the power seat's holder. It references an npc or a faction and so inherits BOTH identity defects.",
+      "action": "MODIFY",
+      "path": "src/generators/power/rulingStructure.js"
+    },
+    {
+      "_note": "THE TWELFTH DELTA KEY. `deriveRegenerationDelta` returns an ELEVEN-key envelope identically on its nullish branch (:94) and its real return (:160); `preservedCanon` is an ENTITY diff out of diffEntityCatalogs, which is why design §12.12 rules a field-level section NEW derivation. `dmFields` is appended after `summary` on BOTH branches, reads `dmLayer.roots`, is ASCII-ascending on key, is `[]` when the layer is absent or empty, and is NOT counted by `regenerationDeltaSize`. The eleven keys and their order are untouched. Measured 103 effective lines against the 800 layer ceiling, and in NONE of the five edge-shared closures.",
+      "action": "MODIFY",
+      "path": "src/domain/regenerationDelta.js"
+    },
+    {
+      "_note": "THE UNIT BATTERY — A1–A5, A8. Copies tests/domain/regenerationDelta.test.js's shape (flat literal registration, whole-envelope assertions, an explicit purity arm). ⛔ No `.each`, no looped or conditional registration, no nested describes (EM-PREAMBLE §P3.4). Owes NO mutation-coverage row (tests/domain is not an ENFORCER_DIR and the basename matches no NAME_PATTERN token).",
+      "action": "CREATE",
+      "path": "tests/domain/dmLayer.test.js"
+    },
+    {
+      "_note": "⛔ INSTRUMENT 7 IN ITS TRUE, AMENDED FORM — A6 and A7. (a) generateSettlementPipeline with an EMPTY layer equals tests/fixtures/generator-golden-master.json BYTE-FOR-BYTE across the 525-row corpus, and the prose manifest is unmoved; (b) the same seed+config with a ONE-ROOT layer differs from (a) ONLY in that root and the derivations downstream of it, EVERY UNTOUCHED ROOT IDENTICAL — which is the executable statement that the overridden chooser still consumed its draw. ANTI-VACUITY: (b) must differ from (a) somewhere, or the layer was never consulted. ⭐ Matches mutationCoverage NAME_PATTERN on `golden`, so it OWES the manifest row below.",
+      "action": "CREATE",
+      "path": "tests/property/dmLayerGoldenIsolation.test.js"
+    },
+    {
+      "_note": "THE ENVELOPE RE-PIN. `it('returns canonical envelope shape')` asserts ELEVEN keys today; re-asserted against TWELVE, plus one arm proving `dmFields` is `[]` on the nullish branch and the eleven original keys unmoved in name, order and value. Already-credited file — no new lighting-census file row from this row.",
+      "action": "TEST",
+      "path": "tests/domain/regenerationDelta.test.js"
+    },
+    {
+      "_note": "THE MUTATION-COVERAGE ROW the golden-isolation property owes, added SURGICALLY beside its tests/property/*Golden* siblings in the `golden-byte-pin` neighbourhood (:1142-1200). ⛔ The manifest is NEVER re-serialised whole.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    },
+    {
+      "_note": "⭐ THE CHAIR'S REGISTER ROW, SCHEDULED AT THE TRAIN TERMINAL (K3 ruling accepted). The `dmLayer on settlement` EXPLAINED_WRITER_EXEMPTIONS entry is minted AFTER the writer lands, because gate 0 (assertExplainedWriterEvidence, scripts/check-observed-shape-readers.mjs:1345) refuses a row whose named src/** writer does not actually write the key — a row minted earlier is STALE by construction. Predicted spelling: { identity: 'dmLayer on settlement', mechanism: 'save-time-writer', writer: <EM-B3's writer>, ruling: 'ODQ §934.40 / design §12.5 + §12.9 / §934.47', why: <the save-time argument> }. ⛔ THE LANE NEVER EXECUTES IT; the chair does, through the observed-shape migration-bundle door on a branch cut at the integration tip.",
+      "action": "REGISTER",
+      "path": "scripts/check-observed-shape-readers.mjs"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE DELTA DERIVER this packet extends by exactly one key. Renaming it un-grounds A7's whole claim and both of the surfaces that render the envelope (VersionDiffView.jsx:145, RegenerationDeltaCard.jsx).",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function deriveRegenerationDelta"
+    },
+    {
+      "_note": "The size reader `dmFields` must NOT enter: a DM's own field is not a structural change the world made. Preserved so the exclusion stays checkable.",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function regenerationDeltaSize"
+    },
+    {
+      "_note": "The other public reader of the envelope; preserved so the twelfth key cannot be added by reshaping the module.",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function newEntitiesByType"
+    },
+    {
+      "_note": "THE REGENERATION PATH and the only lawful re-apply seat. It is the ONE store action that re-runs generation on an existing settlement, it returns early on canon, and it has exactly two branches. If this action is renamed or split the seat moves and the packet is STALE.",
+      "path": "src/store/settlementSlice.js",
+      "symbol": "regenSection: async (section) => {"
+    },
+    {
+      "_note": "The settlement writer the store uses for a save row — a typed refusal envelope over a closed patch-key list. Unchanged by this packet, and named so a widening of the save surface reds instead of passing.",
+      "path": "src/store/settlementSlice.js",
+      "symbol": "updateSavedSettlement: (id, partial) => {"
+    },
+    {
+      "_note": "The closed 17-key patch surface whose first member is 'settlement'. `dmLayer` rides INSIDE the settlement blob, so this list is deliberately NOT widened by the EM family; naming it makes an accidental widening visible.",
+      "path": "src/store/settlementSliceHelpers.js",
+      "symbol": "export const SAVED_SETTLEMENT_PATCH_KEYS"
+    },
+    {
+      "_note": "⛔⛔ THE BLOCK'S FIRST GROUND. The estate's EXISTING writer of DM field ownership: it mutates the entity's field and records { value, originalValue, editedAt } under entity._userEdits[path], then sets entity._authored = true. Design §12.5's sentence is already implemented here for a declared field set. Named as a required symbol so the contradiction cannot be resolved by deleting it without a chair ruling.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export function applyUserEdit"
+    },
+    {
+      "_note": "⛔⛔ THE BLOCK'S MEASUREMENT. Declares 6 entity types plus 14 settlement-root prose paths; its `npc` list is goal.short, secret.what, personality and ROLE. ARCH §9 declares the npc card's `role` a POOL field, so `npc.role` is claimed by both mechanisms — the single measured overlap and the smallest form of the contradiction.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export const EDITABLE_FIELDS"
+    },
+    {
+      "_note": "The whole-tree iterator over existing inline edits. EM-B4's only real migration input reads through it, so it is preserved across this family.",
+      "path": "src/domain/userEdits.js",
+      "symbol": "export function walkUserEdits"
+    },
+    {
+      "_note": "The authorship marker's ONE declaration, carrying the recorded ruling \"_authored alone buys regen survival in all three modes (executed)\". The EM family reuses this vocabulary and never mints a second marker.",
+      "path": "src/domain/npc/characterEdit.js",
+      "symbol": "export const AUTHORED_MARKER_KEY"
+    },
+    {
+      "_note": "The function the golden master hashes. A7's isolation claim is a claim about THIS function's output, so renaming it removes the only executed statement that the layer is invisible to generation.",
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline"
+    },
+    {
+      "_note": "The golden's hashing seam: sha256(JSON.stringify(generateSettlementPipeline(...))) over the 525-row committed fixture. Preserved because A7 asserts byte-identity of what it produces.",
+      "path": "tests/property/generatorGoldenMaster.test.js",
+      "symbol": "function hashFor(config)"
+    },
+    {
+      "_note": "The prose manifest's committed fixture address, tests/fixtures/dossier-prose-manifest-golden.json. The second golden A7 holds unchanged.",
+      "path": "tests/property/dossierProseManifest.test.js",
+      "symbol": "const MANIFEST_REL"
+    },
+    {
+      "_note": "⭐ THE CENSUS CORRECTION, PINNED AS A SYMBOL. The lighting census's `files` figure is TEST_FILES.length and TEST_FILES walks tests/ ONLY — so a new src/domain file moves NOTHING and this packet's predicted +2 is caused by its two new TEST files. EM-PREAMBLE §P2.1 says otherwise and is wrong; naming this symbol keeps the correction executable.",
+      "path": "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "symbol": "const TEST_FILES = walk(join(ROOT, 'tests'))"
+    },
+    {
+      "_note": "The eight enforcer dirs the mutation-coverage denominator is built from. With NAME_PATTERN they are why tests/property/dmLayerGoldenIsolation.test.js owes a row and tests/domain/dmLayer.test.js owes none.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    },
+    {
+      "_note": "⛔ THE HOOK'S HOST. The runner that threads the single rng to every generator step — `drawRoot(rng, key, pool, layer)` seats here. Renaming or re-signing it moves the hook and stales the packet.",
+      "path": "src/generators/pipeline.js",
+      "symbol": "export function runPipeline"
+    },
+    {
+      "_note": "⛔⛔ THE BLOCK'S PRIMARY RECEIPT. An NPC's id is its ARRAY INDEX, not a PRNG draw and not content — so a layer key `npc:npc_3:role` is stable only while the roster's length and order are, and design §14 makes the ROSTER editable. Under the amended mechanism the layer is consulted at the chooser on EVERY regeneration, so a mis-keyed layer applies the DM's value to the WRONG ENTITY every time. The estate has convicted this class three times already (locksPreservation.js:228, characterDrift.js:17, characterEdit.js:51-53).",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "npc.id = `npc_${idx + 1}`;"
+    },
+    {
+      "_note": "⛔ THE BLOCK'S SECOND RECEIPT. Institutions carry no general id mint and are resolved BY DISPLAY NAME — and a name is a `free-cascade` field the DM may change, so the key moves when the DM edits it.",
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "institutions.find(i => i.name === instName)"
+    },
+    {
+      "_note": "⛔ THE BLOCK'S THIRD RECEIPT. A faction's id is DERIVED FROM ITS NAME, so a rename — the very act §12.3 routes through the cascade — changes the id the layer keyed on.",
+      "path": "src/generators/density/densityAscension.js",
+      "symbol": "id: `faction.${slug(name)}`"
+    },
+    {
+      "_note": "⛔ GATE ONE'S RECEIPT. The decision-fork classification registry the chair directed this compile to read the choosers from. It is the SIMULATION's: 43 rows, and `grep -c generators` returns ZERO. Design §14 makes registering a chooser a prerequisite ('a chooser without a registry row is registered first or its field is dropped'), so generation's root choosers need their own wave before EM-A1.",
+      "path": "src/domain/worldPulse/habitForkRegistry.js",
+      "symbol": "export const HABIT_FORK_REGISTRY"
+    },
+    {
+      "_note": "⛔ GATE ONE'S SECOND RECEIPT. The registry walker's scan roots are src/domain/worldPulse, /spatial, /traditions and /region — `src/generators` is NOT among them, so no instrument in the estate enumerates generation's choosers.",
+      "path": "tests/lint/chooserTotality.walker.test.js",
+      "symbol": "const SCAN_ROOTS"
+    },
+    {
+      "_note": "⛔ THE FINAL AMENDMENT'S BLOCK. The root-writing-and-deriving step: it calls generateNPCs with no roster parameter, then derives relationships and factions from the freshly drawn roster in the same body. Splitting those halves is the pipeline-seam packet's work, not this one's.",
+      "path": "src/generators/steps/generatePopulation.js",
+      "symbol": "const npcs = generateNPCs("
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE LAYER AT THE CHOOSER: drawRoot(rng, key, pool, layer) returns the layer's value when layerRead is defined AND that value is a member of `pool`, otherwise the drawn value; an override outside `pool` is IGNORED; and in EVERY case the rng is advanced exactly as an unoverridden draw would advance it (asserted by comparing the post-call rng state against a control draw)."
+    },
+    {
+      "id": "A2",
+      "case": "DORMANT/ABSENT: reapplyLayer(regenerated, undefined) and reapplyLayer(regenerated, EMPTY_DM_LAYER) both return the regenerated record REFERENTIALLY unchanged (===) with reapplied [] and dropped [] — the no-draw behaviour."
+    },
+    {
+      "id": "A3",
+      "case": "COUNTERFORCE — the three refusals: an undeclared field, a target id absent from the record, and an op validateOp refuses each return ok:false with the exact closed reason, hand back record and layer === the inputs, and never throw."
+    },
+    {
+      "id": "A4",
+      "case": "BOUNDARY/SPARSE: a layer holding a field for an entity the reroll REMOVED, mixed with two survivors — the survivors are in `reapplied`, the casualty is in `dropped`, the entity is NOT re-created, and both lists are ASCII-ascending and deduplicated."
+    },
+    {
+      "id": "A5",
+      "case": "IDEMPOTENCY: applyEdit twice on one field with different values leaves the RECORD holding the second value while layer.entities[id][field] still holds the ENGINE'S ORIGINAL (never the first DM value); a second reapplyLayer is byte-identical to the first."
+    },
+    {
+      "id": "A6",
+      "case": "LIFECYCLE ROUND TRIP: a real generated settlement → applyEdit → JSON round trip → reapplyLayer onto a fresh generation from the same seed is byte-exact, and mintDmId reproduces the same id for the same (seed, kind, n) across the hop."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ THE ISOLATION PROPERTY IN ITS TRUE, AMENDED FORM (ARCH §8 instrument 7 at 2280742ab): (a) generateSettlementPipeline with an EMPTY layer equals tests/fixtures/generator-golden-master.json BYTE-FOR-BYTE across the 525-row corpus and leaves the prose manifest unmoved; (b) the same seed+config with a ONE-ROOT layer differs from (a) ONLY in that root and the derivations downstream of it, with EVERY UNTOUCHED ROOT IDENTICAL — the executable statement that the overridden chooser still consumed its draw. ANTI-VACUITY: (b) must differ from (a) somewhere, or the layer was never consulted."
+    },
+    {
+      "id": "A8",
+      "case": "DETERMINISM AND THE NAMESPACE: mintDmId throws TypeError on a non-string seed, an unknown kind and a negative / fractional / non-safe n; every valid triple returns dm:<kind>:<16 lowercase hex>; the same triple twice is equal and three distinct triples are distinct."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/dmLayer.test.js",
+      "tests/domain/regenerationDelta.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/dmLayerGoldenIsolation.test.js",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/sizeBaseline.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/store/lifecycleRoundTrip.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/dmLayer.js",
+      "src/domain/regenerationDelta.js",
+      "src/store/settlementSlice.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

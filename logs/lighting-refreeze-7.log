@@ -1,0 +1,40 @@
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 97734 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/slot-2
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 2301ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 142ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+Error: census REFROZEN at d279d13ebe718f07b278ec6d1a705a0870159079 by chair-fable-a9df403c: files 2656 -> 2664, parked 383 -> 359, credited 2273 -> 2305, titles 25080 -> 25501, suiteTitles 6684 -> 6812. This run fails BY DESIGN so a refreeze can never be mistaken for a passing gate — re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT green is the proof.
+ ❯ refreezeCensusBaseline tests/lint/sovereigntyLightingContract.walker.test.js:755:9
+    753|     .map((key) => `${key} ${previous[key]} -> ${figures[key]}`)
+    754|     .join(', ');
+    755|   throw new Error(`census REFROZEN at ${next.measuredAtSha} by ${measu…
+       |         ^
+    756|     + ' This run fails BY DESIGN so a refreeze can never be mistaken f…
+    757|     + ' re-run this walker without LIGHTING_CENSUS_REFREEZE, and THAT …
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:3079:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 33 passed (34)
+   Start at  11:57:17
+   Duration  2.98s (transform 97ms, setup 19ms, import 574ms, tests 2.30s, environment 0ms)
+
+door exit 1 at Sun Sep 20 11:57:20 EDT 2026
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.502.lock.shared as PID 97797 after 0 poll(s); 1 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/slot-2
+
+
+ Test Files  1 passed (1)
+      Tests  34 passed (34)
+   Start at  11:57:21
+   Duration  3.66s (transform 98ms, setup 20ms, import 593ms, tests 2.96s, environment 0ms)
+
+plain exit 0 at Sun Sep 20 11:57:24 EDT 2026

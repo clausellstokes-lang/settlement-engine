@@ -1,0 +1,266 @@
+ARM 3 AFTER FIX-C2c: 213 (code 4, docs 209) over 49 files
+
+ 18  docs/GEOPOLITICAL_WAR_LAYER.md
+ 16  docs/DESIGN_FP_ARCH_GR.md
+ 13  docs/FABLE_VALIDATION_QUEUE.md
+ 12  docs/DESIGN_FP_ARCH_SP.md
+ 12  docs/DESIGN_FP_ARCH_TR.md
+ 11  docs/implementation/preverification/EP-SUBSTRATE.md
+  9  docs/DESIGN_FP_ARCH_INT.md
+  9  docs/PHASE4_FAITH_DELTA.md
+  9  docs/TEMPORAL_AUDIT.md
+  8  docs/SUBSYSTEM_INTEGRATION_PLAN.md
+  8  docs/implementation/preverification/WF-SUBSTRATE.md
+  6  docs/COHESION_REMEDIATION_PLAN.md
+  6  docs/DESIGN_FP_ARCH_WF.md
+  6  docs/analytics-event-taxonomy.md
+  5  docs/DESIGN_FP_ARCH_WC.md
+  5  docs/SITE_COHERENCE_AUDIT.md
+  4  docs/DESIGN_FP_ARCH_CW.md
+  3  docs/DESIGN_FP_ARCHITECTURE.md
+  3  docs/DESIGN_FP_ARCH_POP.md
+  3  docs/DESIGN_FP_GRAMMAR.md
+  3  docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md
+  3  docs/GOLDEN_SHIFT_LEDGER.md
+  3  docs/RISK_REGISTER.md
+  3  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md
+  3  docs/simulation-intelligence-layer.md
+  2  docs/DESIGN_FP_TRADE.md
+  2  docs/DESIGN_HOOK_NONREDUNDANCY.md
+  2  docs/FIRST_CONTACT_BACKLOG.md
+  2  docs/MASTER_MERGE_PLAN.md
+  2  docs/PHASE55_E0_TEMPO_GOVERNOR_PLAN.md
+  2  docs/PHASE55_SPATIAL_ENGINE_DESIGN.md
+  2  docs/implementation/charters/EDIT-MODE-TRAIN.md
+  2  docs/implementation/preambles/WC-PREAMBLE.md
+  1  tests/components/handbookVoice.test.jsx
+  1  tests/domain/roadsParticipation.test.js
+  1  tests/lint/dossierMountRegistry.walker.test.js
+  1  scripts/wiring-census.mjs
+  1  docs/DEAD_CODE_DISPOSITION.md
+  1  docs/DESIGN_FP_ARCH_CENSUS.md
+  1  docs/DESIGN_FP_ARCH_ES.md
+  1  docs/DESIGN_FP_ARCH_WY.md
+  1  docs/DESIGN_FP_INTERIOR.md
+  1  docs/DESIGN_FP_POPULATIONS.md
+  1  docs/DESIGN_REALM_MAGIC_TOGGLE.md
+  1  docs/GENERATION_TIME_SHIFT_MAP_DOSSIER.md
+  1  docs/REGIONAL_ENGINE_AUDIT.md
+  1  docs/briefs/W2_CONJUNCTION_CONTENT_BRIEF.md
+  1  docs/content/RECEIPT_POOLS_INTERIOR.md
+  1  docs/implementation/INDEX.md
+
+--- every remaining lead ---
+tests/components/handbookVoice.test.jsx:145  AppViews.jsx:46  `HowToUse` -> 47 in src/AppViews.jsx
+tests/domain/roadsParticipation.test.js:480  npcVerdictPulse.js:133  `replacementSource` -> 99 in src/domain/worldPulse/npcVerdictPulse.js
+tests/lint/dossierMountRegistry.walker.test.js:1287  Primitives.jsx:120  `Collapsible` -> 67 in src/components/new/Primitives.jsx
+scripts/wiring-census.mjs:349  defenseGenerator.js:189-191  `economicGates` -> 467,647 in src/generators/defenseGenerator.js
+docs/COHESION_REMEDIATION_PLAN.md:114  activeConditions.js:368-370  `affectedSystems` -> 62,70,78 in src/domain/activeConditions.js
+docs/COHESION_REMEDIATION_PLAN.md:115  causalState.js:611  `finalizeVariable` -> 1350 in src/domain/causalState.js
+docs/COHESION_REMEDIATION_PLAN.md:116  deriveSystemState.js:64-73  `deriveResilience` -> 101 in src/domain/state/deriveSystemState.js
+docs/COHESION_REMEDIATION_PLAN.md:119  npcProfile.js:32  `CATEGORY_TO_ARCHETYPE` -> 36 in src/domain/npcProfile.js
+docs/COHESION_REMEDIATION_PLAN.md:132  mutateWorld.js:171  `nearbyResourcesDepleted` -> 204,264,988 in src/domain/events/mutateWorld.js
+docs/COHESION_REMEDIATION_PLAN.md:151  priorityHelpers.js:49  `hasPort` -> 61 in src/generators/priorityHelpers.js
+docs/DEAD_CODE_DISPOSITION.md:196  npcData.js:392  `NPC_FACTION_GOALS` -> 458 in src/data/npcData.js
+docs/DESIGN_FP_ARCHITECTURE.md:95  simulationRules.js:185  `ENGINE_GATED_VIRTUAL_RULE_KEYS` -> 230 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCHITECTURE.md:198  sovereigntyBundle.js:166  `catalogGrewSinceWr10` -> 191 in src/domain/worldPulse/sovereigntyBundle.js
+docs/DESIGN_FP_ARCHITECTURE.md:335  src/domain/roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/DESIGN_FP_ARCH_CENSUS.md:187  beliefMap.js:159  `STRENGTH_BANDS` -> 160 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_FP_ARCH_CW.md:44  tests/domain/couplingRegistry.test.js:299  `couplingId` -> 214,231,289 in tests/domain/couplingRegistry.test.js
+docs/DESIGN_FP_ARCH_CW.md:53  src/domain/worldPulse/simulationRules.js:271  `provenanceLedgerEnabled` -> 669 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_CW.md:76  src/domain/worldPulse/beliefMap.js:1468  `detectMisjudgment` -> 1499 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_FP_ARCH_CW.md:83  src/domain/worldPulse/simulationRules.js:185  `ENGINE_GATED_VIRTUAL_RULE_KEYS` -> 230 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_ES.md:700  beliefMap.js:591  `reconcileBelief` -> 607 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_FP_ARCH_GR.md:35  simulationRules.js:185  `ENGINE_GATED_VIRTUAL_RULE_KEYS` -> 230 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_GR.md:175  peaceTerms.js:348  `mintedThisPair` -> 372 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_ARCH_GR.md:179  peaceTerms.js:230  `treatyTicksPerYear` -> 258,945 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_ARCH_GR.md:179  peaceTermsSale.js:184  `treatyTicksPerYear` -> 187 in src/domain/worldPulse/peaceTermsSale.js
+docs/DESIGN_FP_ARCH_GR.md:181  peaceTerms.js:634  `worstObserved` -> 694 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_ARCH_GR.md:184  peaceTerms.js:686  `nextLedger` -> 338 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_ARCH_GR.md:186  treatyBreach.js:47-51  `repudiableTreatyPairs` -> 102 in src/domain/worldPulse/treatyBreach.js
+docs/DESIGN_FP_ARCH_GR.md:188  peaceTerms.js:783  `mintTreaty` -> 847 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_ARCH_GR.md:190  relationshipState.js:136  `RELATIONSHIP_TURNING_POINT_CAP` -> 198 in src/domain/worldPulse/relationshipState.js
+docs/DESIGN_FP_ARCH_GR.md:195  informationStatecraft.js:120  `fractureCredibilityDeltas` -> 401 in src/domain/worldPulse/informationStatecraft.js
+docs/DESIGN_FP_ARCH_GR.md:197  rulingPower.js:189  `governingFactionOf` -> 224 in src/domain/rulingPower.js
+docs/DESIGN_FP_ARCH_GR.md:197  npcLadderState.js:153  `npcInFaction` -> 160 in src/domain/worldPulse/npcLadderState.js
+docs/DESIGN_FP_ARCH_GR.md:197  npcLedger.js:586  `durableIdForRoster` -> 587 in src/domain/worldPulse/npcLedger.js
+docs/DESIGN_FP_ARCH_GR.md:200  sovereigntyBundle.js:166  `catalogGrewSinceWr10` -> 191 in src/domain/worldPulse/sovereigntyBundle.js
+docs/DESIGN_FP_ARCH_GR.md:487  src/domain/worldPulse/pactFormation.js:169  `PACT_DRAFT_LENS` -> 173 in src/domain/worldPulse/pactFormation.js
+docs/DESIGN_FP_ARCH_GR.md:563  informationStatecraft.js:120  `fractureCredibilityDeltas` -> 401 in src/domain/worldPulse/informationStatecraft.js
+docs/DESIGN_FP_ARCH_INT.md:29  coup.js:45  `WAR_SENTIMENT_PHOLD_WEIGHT` -> 49 in src/domain/worldPulse/coup.js
+docs/DESIGN_FP_ARCH_INT.md:34  grievanceRead.js:29-30  `WOUND_TYPE_RE` -> 48 in src/domain/worldPulse/grievanceRead.js
+docs/DESIGN_FP_ARCH_INT.md:38  npcLadderState.js:72  `HEIR_INHERIT_FRACTION` -> 77 in src/domain/worldPulse/npcLadderState.js
+docs/DESIGN_FP_ARCH_INT.md:46  factionPairLedger.js:44  `HALF_LIFE_WEEKS` -> 45 in src/domain/worldPulse/factionPairLedger.js
+docs/DESIGN_FP_ARCH_INT.md:48  relationshipState.js:136  `RELATIONSHIP_TURNING_POINT_CAP` -> 198 in src/domain/worldPulse/relationshipState.js
+docs/DESIGN_FP_ARCH_INT.md:50  display/settlementRumors.js:116  `WHAT_PHRASES` -> 123 in src/domain/display/settlementRumors.js
+docs/DESIGN_FP_ARCH_INT.md:86  applyWorldPulse.js:943  `carriedDemand` -> 958 in src/domain/worldPulse/applyWorldPulse.js
+docs/DESIGN_FP_ARCH_INT.md:186  simulationRules.js:45  `factionCompetitionEnabled` -> 70,743,833 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_INT.md:357  simulationRules.js:517  `factionCompetitionEnabled` -> 70,743,833 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_POP.md:21  demographicsKernel.js:402  `newsEntries` -> 250,424 in src/domain/worldPulse/demographicsKernel.js
+docs/DESIGN_FP_ARCH_POP.md:43  traditions/relations.js:48-49  `ADOPTION_THRESHOLD` -> 50 in src/domain/traditions/relations.js
+docs/DESIGN_FP_ARCH_POP.md:45  settlementLifecycleKernel.js:225  `TERMINAL_DWELL` -> 226 in src/domain/worldPulse/settlementLifecycleKernel.js
+docs/DESIGN_FP_ARCH_SP.md:63  simulationRules.js:739  `infoModeOf` -> 1255 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_SP.md:109  beliefMap.js:224  `beliefRecord` -> 225 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_FP_ARCH_SP.md:111  simulationRules.js:739  `infoModeOf` -> 1255 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_SP.md:114  sovereigntyMarketStage.js:156  `beliefLegsOf` -> 242 in src/domain/worldPulse/sovereigntyMarketStage.js
+docs/DESIGN_FP_ARCH_SP.md:119  peaceTermsCatalog.js:141  `TERM_CATALOG` -> 159 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/DESIGN_FP_ARCH_SP.md:122  src/lib/spatialUsage.js:243-269  `intelCooldown` -> 367 in src/lib/spatialUsage.js
+docs/DESIGN_FP_ARCH_SP.md:126  settlementRumors.js:116  `WHAT_PHRASES` -> 123 in src/domain/display/settlementRumors.js
+docs/DESIGN_FP_ARCH_SP.md:142  informationStatecraft.js:584  `alignmentOf` -> 1334 in src/domain/worldPulse/informationStatecraft.js
+docs/DESIGN_FP_ARCH_SP.md:142  beliefMap.js:1025  `applyAllyIntelSharing` -> 1041 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_FP_ARCH_SP.md:142  informationStatecraft.js:500  `alignmentOf` -> 1334 in src/domain/worldPulse/informationStatecraft.js
+docs/DESIGN_FP_ARCH_SP.md:144  src/domain/roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/DESIGN_FP_ARCH_SP.md:557  roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/DESIGN_FP_ARCH_TR.md:31  simulationRules.js:490  `commodityFlowEnabled` -> 769,938 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_TR.md:38  seaLanes.js:84-87  `SEA_LANE_CAPACITY` -> 102 in src/domain/spatial/seaLanes.js
+docs/DESIGN_FP_ARCH_TR.md:39  simulationRules.js:528  `routeLifecycleEnabled` -> 976 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_TR.md:40  simulationRules.js:547  `magicEconomyEnabled` -> 995 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_TR.md:61  tradeWar.js:81  `FLIP_COOLDOWN_TICKS` -> 86 in src/domain/worldPulse/tradeWar.js
+docs/DESIGN_FP_ARCH_TR.md:70  commonsVoiceKernel.js:155  `RUNG_KIND` -> 184 in src/domain/worldPulse/commonsVoiceKernel.js
+docs/DESIGN_FP_ARCH_TR.md:82  simulationRules.js:472  `envoyDiplomacyEnabled` -> 920 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_TR.md:84  peaceTermsCatalog.js:77  `TERM_FAMILIES` -> 328 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/DESIGN_FP_ARCH_TR.md:98  settlementRumors.js:116  `WHAT_PHRASES` -> 123 in src/domain/display/settlementRumors.js
+docs/DESIGN_FP_ARCH_TR.md:99  roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/DESIGN_FP_ARCH_TR.md:138  simulationRules.js:579  `demographicsEnabled` -> 1027 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_TR.md:525  sovereigntyBundle.js:166  `catalogGrewSinceWr10` -> 191 in src/domain/worldPulse/sovereigntyBundle.js
+docs/DESIGN_FP_ARCH_WC.md:5663  migration.js:578  `releaseArrivals` -> 616 in src/domain/spatial/migration.js
+docs/DESIGN_FP_ARCH_WC.md:6682  convergence.js:185  `ENGAGEMENT_MOVES` -> 190 in src/domain/worldPulse/convergence.js
+docs/DESIGN_FP_ARCH_WC.md:6695  warHomeCosts.js:443  `leviedPopulationBySource` -> 452 in src/domain/worldPulse/warHomeCosts.js
+docs/DESIGN_FP_ARCH_WC.md:6704  envoyErrandVocabulary.js:130  `PURPOSE_CLASS_BY_PURPOSE` -> 147 in src/domain/worldPulse/envoyErrandVocabulary.js
+docs/DESIGN_FP_ARCH_WC.md:6877  espionageMath.js:96  `TAP_LEVELS` -> 104 in src/domain/worldPulse/espionage/espionageMath.js
+docs/DESIGN_FP_ARCH_WF.md:42  peaceTermsCatalog.js:192  `TERM_TYPES` -> 325 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/DESIGN_FP_ARCH_WF.md:50  realmEvents.js:24  `COMPOUND_SIGNATURES` -> 25 in src/domain/worldPulse/realmEvents.js
+docs/DESIGN_FP_ARCH_WF.md:173  src/domain/roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/DESIGN_FP_ARCH_WF.md:204  simulationRules.js:185  `ENGINE_GATED_VIRTUAL_RULE_KEYS` -> 230 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_ARCH_WF.md:733  peaceTermsCatalog.js:192  `TERM_FAMILIES` -> 328 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/DESIGN_FP_ARCH_WF.md:734  sovereigntyBundle.js:166  `catalogGrewSinceWr10` -> 191 in src/domain/worldPulse/sovereigntyBundle.js
+docs/DESIGN_FP_ARCH_WY.md:685  mapSlice.js:328-330  `setLayerFilter` -> 382 in src/store/mapSlice.js
+docs/DESIGN_FP_GRAMMAR.md:216  informationStatecraft.js:363  `fractureCredibilityDeltas` -> 401 in src/domain/worldPulse/informationStatecraft.js
+docs/DESIGN_FP_GRAMMAR.md:553  peaceTerms.js:885  `believedMarginAtSignature` -> 942 in src/domain/worldPulse/peaceTerms.js
+docs/DESIGN_FP_GRAMMAR.md:1061  treatyBreach.js:46-51  `isRepudiableTreaty` -> 87 in src/domain/worldPulse/treatyBreach.js
+docs/DESIGN_FP_INTERIOR.md:277  simulationRules.js:306  `factionCompetitionEnabled` -> 70,743,833 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_POPULATIONS.md:171  traditions/relations.js:48-49, 226  `adoptedFrom` -> 144,281 in src/domain/traditions/relations.js
+docs/DESIGN_FP_TRADE.md:200  simulationRules.js:424  `commodityFlowEnabled` -> 769,938 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_FP_TRADE.md:206  simulationRules.js:449-462  `routeLifecycleEnabled` -> 976 in src/domain/worldPulse/simulationRules.js
+docs/DESIGN_HOOK_NONREDUNDANCY.md:112  src/generators/hookVariety.js:42  `drawUnique` -> 93 in src/generators/hookVariety.js
+docs/DESIGN_HOOK_NONREDUNDANCY.md:116  src/domain/hookEscalation.js:43  `collectAllHooks` -> 49 in src/domain/hookEscalation.js
+docs/DESIGN_REALM_MAGIC_TOGGLE.md:114  composeInstantWorld.js:180  `settType` -> 139 in src/lib/instantWorld/composeInstantWorld.js
+docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:435  pulseKernel.js:1938  `alignmentOf` -> 2085,2171 in src/domain/worldPulse/pulseKernel.js
+docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:435  beliefMap.js:915  `applyAllyIntelSharing` -> 1041 in src/domain/worldPulse/beliefMap.js
+docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:436  warTermination.js:762-766  `actorId` -> 638,646,656 in src/domain/worldPulse/warTermination.js
+docs/FABLE_VALIDATION_QUEUE.md:185  tierResourceDynamics.js:106  `tierEligibility` -> 119 in src/domain/worldPulse/tierResourceDynamics.js
+docs/FABLE_VALIDATION_QUEUE.md:637  src/domain/region/graph.js:310  `normalizeEdge` -> 198 in src/domain/region/graph.js
+docs/FABLE_VALIDATION_QUEUE.md:852  behavioralContract.js:1051-1054  `releaseCases` -> 1025 in src/domain/certification/behavioralContract.js
+docs/FABLE_VALIDATION_QUEUE.md:1004  behavioralContract.js:1051-1054  `releaseCases` -> 1025 in src/domain/certification/behavioralContract.js
+docs/FABLE_VALIDATION_QUEUE.md:1219  behavioralContract.js:1051-1054  `releaseCases` -> 1025 in src/domain/certification/behavioralContract.js
+docs/FABLE_VALIDATION_QUEUE.md:7289  pactFormation.js:367  `signPactProposal` -> 444 in src/domain/worldPulse/pactFormation.js
+docs/FABLE_VALIDATION_QUEUE.md:7304  peaceTerms.js:250  `signedTick` -> 269 in src/domain/worldPulse/peaceTerms.js
+docs/FABLE_VALIDATION_QUEUE.md:7344  src/data/constants.js:56  `prosperityRank` -> 97 in src/data/constants.js
+docs/FABLE_VALIDATION_QUEUE.md:7436  check-observed-shape-readers.mjs:993-995, 671-673  `dirtyInputsFor` -> 2250 in scripts/check-observed-shape-readers.mjs
+docs/FABLE_VALIDATION_QUEUE.md:7444  locksPreservation.js:139  `idArray` -> 115,308 in src/domain/locksPreservation.js
+docs/FABLE_VALIDATION_QUEUE.md:7451  mapSlice.js:815-830  `burgToConfig` -> 872 in src/store/mapSlice.js
+docs/FABLE_VALIDATION_QUEUE.md:7457  aiLayer.js:222  `plotHooks` -> 228 in src/generators/aiLayer.js
+docs/FABLE_VALIDATION_QUEUE.md:7478  locksPreservation.js:139  `idArray` -> 115,308 in src/domain/locksPreservation.js
+docs/FIRST_CONTACT_BACKLOG.md:160  App.jsx:74  `PricingMomentCard` -> 77 in src/App.jsx
+docs/FIRST_CONTACT_BACKLOG.md:2766  src/config/pricing.js:255  `priceCents` -> 245,267,298 in src/config/pricing.js
+docs/GENERATION_TIME_SHIFT_MAP_DOSSIER.md:147  factionCategories.js:121-126  `inferFactionCategory` -> 149 in src/generators/power/factionCategories.js
+docs/GEOPOLITICAL_WAR_LAYER.md:36  graph.js:21-38  `REGIONAL_CHANNEL_TYPES` -> 47 in src/domain/region/graph.js
+docs/GEOPOLITICAL_WAR_LAYER.md:36  graph.js:456-512  `relationshipChannelBundle` -> 665 in src/domain/region/graph.js
+docs/GEOPOLITICAL_WAR_LAYER.md:44  graph.js:40  `REGIONAL_CHANNEL_STATUSES` -> 66 in src/domain/region/graph.js
+docs/GEOPOLITICAL_WAR_LAYER.md:51  graph.js:674  `delayTicks` -> 227,944 in src/domain/region/graph.js
+docs/GEOPOLITICAL_WAR_LAYER.md:64  stressors.js:628  `ageRoamingStressors` -> 313 in src/domain/worldPulse/stressors.js
+docs/GEOPOLITICAL_WAR_LAYER.md:65  stressorDynamics.js:748  `originContext` -> 951 in src/domain/worldPulse/stressorDynamics.js
+docs/GEOPOLITICAL_WAR_LAYER.md:203  stressorDynamics.js:920  `windDownSponsoredStressors` -> 929 in src/domain/worldPulse/stressorDynamics.js
+docs/GEOPOLITICAL_WAR_LAYER.md:301  npcAgency.js:799-814  `evaluateNpcRules` -> 1116 in src/domain/worldPulse/npcAgency.js
+docs/GEOPOLITICAL_WAR_LAYER.md:301  prng.js:50,62  `weightedPick` -> 54 in src/kernel/prng.js
+docs/GEOPOLITICAL_WAR_LAYER.md:323  stressorDynamics.js:920  `windDownSponsoredStressors` -> 929 in src/domain/worldPulse/stressorDynamics.js
+docs/GEOPOLITICAL_WAR_LAYER.md:343  authSlice.js:364  `canUseCustomContent` -> 840 in src/store/authSlice.js
+docs/GEOPOLITICAL_WAR_LAYER.md:352  causalState.js:539  `deriveReligiousAuthority` -> 1120 in src/domain/causalState.js
+docs/GEOPOLITICAL_WAR_LAYER.md:355  stressors.js:156  `spreadChannels` -> 529,808 in src/domain/worldPulse/stressors.js
+docs/GEOPOLITICAL_WAR_LAYER.md:364  corruption.js:521  `hasCriminalInst` -> 597 in src/domain/corruption.js
+docs/GEOPOLITICAL_WAR_LAYER.md:466  flows.js:114  `tradeScarcityFlows` -> 124 in src/domain/worldPulse/flows.js
+docs/GEOPOLITICAL_WAR_LAYER.md:468  pressureModel.js:142  `countChannels` -> 88 in src/domain/worldPulse/pressureModel.js
+docs/GEOPOLITICAL_WAR_LAYER.md:529  corruption.js:521  `hasCriminalInst` -> 597 in src/domain/corruption.js
+docs/GEOPOLITICAL_WAR_LAYER.md:557  rulingPower.js:376  `transferRulingPower` -> 485 in src/domain/rulingPower.js
+docs/GOLDEN_SHIFT_LEDGER.md:332  region/graph.js:649  `syncRelationshipChannelBundle` -> 737 in src/domain/region/graph.js
+docs/GOLDEN_SHIFT_LEDGER.md:465  region/graph.js:649  `syncRelationshipChannelBundle` -> 737 in src/domain/region/graph.js
+docs/GOLDEN_SHIFT_LEDGER.md:1880  src/generators/narrativeGenerator.js:750  `generateSettlementReason` -> 753 in src/generators/narrativeGenerator.js
+docs/MASTER_MERGE_PLAN.md:284  auth.js:152-154  `redirectTo` -> 167,361 in src/lib/auth.js
+docs/MASTER_MERGE_PLAN.md:835  tests/build/vendorPdfLazy.test.js:426  `CLOSURE_BUDGET_BYTES` -> 565 in tests/build/vendorPdfLazy.test.js
+docs/PHASE4_FAITH_DELTA.md:75  religiousContest.js:339-499  `advanceReligionStates` -> 544 in src/domain/worldPulse/religiousContest.js
+docs/PHASE4_FAITH_DELTA.md:124  src/domain/worldPulse/pantheon.js:129-135  `deityIdOf` -> 141 in src/domain/worldPulse/pantheon.js
+docs/PHASE4_FAITH_DELTA.md:167  religionState.js:491-513  `applyDivineMandate` -> 762 in src/domain/worldPulse/religionState.js
+docs/PHASE4_FAITH_DELTA.md:312  religionState.js:614  `faithProfile` -> 641 in src/domain/worldPulse/religionState.js
+docs/PHASE4_FAITH_DELTA.md:339  religiousContest.js:434  `deityLocalStrength` -> 508 in src/domain/worldPulse/religiousContest.js
+docs/PHASE4_FAITH_DELTA.md:341  religionState.js:570  `MANDATE_RANGE` -> 681 in src/domain/worldPulse/religionState.js
+docs/PHASE4_FAITH_DELTA.md:342  religiousContest.js:487  `pietyMult` -> 754 in src/domain/worldPulse/religiousContest.js
+docs/PHASE4_FAITH_DELTA.md:346  disposition.js:234  `W_DEITY` -> 195 in src/domain/worldPulse/disposition.js
+docs/PHASE4_FAITH_DELTA.md:347  causalState.js:731-744  `lawDir` -> 957 in src/domain/causalState.js
+docs/PHASE55_E0_TEMPO_GOVERNOR_PLAN.md:189  candidateEvents.js:116  `compareStableKeys` -> 360 in src/domain/worldPulse/candidateEvents.js
+docs/PHASE55_E0_TEMPO_GOVERNOR_PLAN.md:239  candidateEvents.js:380-430  `rollCandidates` -> 678 in src/domain/worldPulse/candidateEvents.js
+docs/PHASE55_SPATIAL_ENGINE_DESIGN.md:996  campaignWorldPulseSlice.js:187  `canonizeCampaignWorld` -> 331 in src/store/campaignWorldPulseSlice.js
+docs/PHASE55_SPATIAL_ENGINE_DESIGN.md:1336  disposition.js:221  `computeAggressiveness` -> 253 in src/domain/worldPulse/disposition.js
+docs/REGIONAL_ENGINE_AUDIT.md:77  graph.js:291-294  `relationshipType` -> 204,263,481 in src/domain/region/graph.js
+docs/RISK_REGISTER.md:58  campaignSlice.js:436-457  `persistCampaignState` -> 591,686,728 in src/store/campaignSlice.js
+docs/RISK_REGISTER.md:117  domain/events/mutateHelpers.js:47  `powerStructure` -> 160 in src/domain/events/mutateHelpers.js
+docs/RISK_REGISTER.md:118  tonightAtTheTable.js:31-63  `npcSecretText` -> 84 in src/domain/summary/tonightAtTheTable.js
+docs/SITE_COHERENCE_AUDIT.md:61  resourceData.js:118  `tradeGoods` -> 20,31,42 in src/data/resourceData.js
+docs/SITE_COHERENCE_AUDIT.md:83  townLayoutV2.js:624  `srcA` -> 620 in src/domain/townMap/townLayoutV2.js
+docs/SITE_COHERENCE_AUDIT.md:145  townLayoutV2.js:283  `exportsList` -> 284 in src/domain/townMap/townLayoutV2.js
+docs/SITE_COHERENCE_AUDIT.md:170  src/lib/spatialUsage.js:158  `commercialReasons` -> 349 in src/lib/spatialUsage.js
+docs/SITE_COHERENCE_AUDIT.md:188  check-observed-shape-readers.mjs:124-129  `rowOf` -> 1694 in scripts/check-observed-shape-readers.mjs
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:68  npcAgency.js:807  `evaluateNpcRules` -> 1116 in src/domain/worldPulse/npcAgency.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:124  candidateEvents.js:109  `simulationRules` -> 552,564 in src/domain/worldPulse/candidateEvents.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:128  applyWorldPulse.js:421  `wizardNews` -> 1148,1196,1235 in src/domain/worldPulse/applyWorldPulse.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:297  npcAgency.js:445  `npcStates` -> 433,650,696 in src/domain/worldPulse/npcAgency.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:369  stressorGates.js:428  `religiousConversionGate` -> 719 in src/domain/worldPulse/stressorGates.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:380  applyWorldPulse.js:680  `byId` -> 1040 in src/domain/worldPulse/applyWorldPulse.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:438  stressorPicker.js:31  `GEN_TO_PULSE_TYPE` -> 35 in src/domain/stressorPicker.js
+docs/SUBSYSTEM_INTEGRATION_PLAN.md:593  candidateEvents.js:259  `rollCandidates` -> 678 in src/domain/worldPulse/candidateEvents.js
+docs/TEMPORAL_AUDIT.md:61  worldPulse/worldState.js:302  `canonizeWorldState` -> 676 in src/domain/worldPulse/worldState.js
+docs/TEMPORAL_AUDIT.md:63  worldPulse/applyWorldPulse.js:1024  `applyWorldPulseProposal` -> 1176 in src/domain/worldPulse/applyWorldPulse.js
+docs/TEMPORAL_AUDIT.md:64  region/graph.js:84  `nowIso` -> 99 in src/domain/region/graph.js
+docs/TEMPORAL_AUDIT.md:65  region/wizardNews.js:169  `nowIso` -> 262 in src/domain/region/wizardNews.js
+docs/TEMPORAL_AUDIT.md:70  userEdits.js:171  `editedAt` -> 185 in src/domain/userEdits.js
+docs/TEMPORAL_AUDIT.md:99  worldPulse/stressors.js:404  `updatedAt` -> 288,339,347 in src/domain/worldPulse/stressors.js
+docs/TEMPORAL_AUDIT.md:100  region/wizardNews.js:476  `createdAt` -> 656,917,957 in src/domain/region/wizardNews.js
+docs/TEMPORAL_AUDIT.md:101  region/graph.js:190-191  `createdAt` -> 232 in src/domain/region/graph.js
+docs/TEMPORAL_AUDIT.md:110  kernel/prng.js:79  `generateSeed` -> 241 in src/kernel/prng.js
+docs/analytics-event-taxonomy.md:22  src/domain/causalState.js:89  `CAUSAL_BANDS` -> 422 in src/domain/causalState.js
+docs/analytics-event-taxonomy.md:65  src/components/OutputContainer.jsx:78-83  `TAB_GROUPS` -> 96 in src/components/OutputContainer.jsx
+docs/analytics-event-taxonomy.md:93  settlementSlice.js:250  `queueEdit` -> 264 in src/store/settlementSlice.js
+docs/analytics-event-taxonomy.md:95  settlementSlice.js:273  `commitPendingEdits` -> 267 in src/store/settlementSlice.js
+docs/analytics-event-taxonomy.md:187  src/lib/gallery.js:41  `publishSettlement` -> 57 in src/lib/gallery.js
+docs/analytics-event-taxonomy.md:188  gallery.js:52  `unpublishSettlement` -> 78 in src/lib/gallery.js
+docs/briefs/W2_CONJUNCTION_CONTENT_BRIEF.md:10  causeLifecycle.js:88  `causeClass` -> 352,358,376 in src/domain/worldPulse/causeLifecycle.js
+docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2279  src/domain/corruption.js:421-441  `CAPTURE_LADDER` -> 474 in src/domain/corruption.js
+docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2571  src/domain/causalState.js:300-315  `defenseProfileHasWalls` -> 380 in src/domain/causalState.js
+docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:3152  src/domain/display/defenseDisplay.js:29  `DEFENSE_STRESS_STATUS` -> 61 in src/domain/display/defenseDisplay.js
+docs/content/RECEIPT_POOLS_INTERIOR.md:38  demographicsHerald.js:58  `QUANTITY_BANDS` -> 72 in src/domain/worldPulse/demographicsHerald.js
+docs/implementation/INDEX.md:1311  implementation-packets.mjs:498  `changeManifest` -> 652,956,1000 in scripts/implementation-packets.mjs
+docs/implementation/charters/EDIT-MODE-TRAIN.md:57  settlementRenameHelpers.js:249  `campaignState` -> 121,237 in src/store/settlementRenameHelpers.js
+docs/implementation/charters/EDIT-MODE-TRAIN.md:87  neighbourBackLink.js:99  `findSaveByName` -> 71 in src/domain/relationships/neighbourBackLink.js
+docs/implementation/preambles/WC-PREAMBLE.md:69  peaceTermsCatalog.js:192  `TERM_FAMILIES` -> 328 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/implementation/preambles/WC-PREAMBLE.md:71  espionageMath.js:96  `TAP_LEVELS` -> 104 in src/domain/worldPulse/espionage/espionageMath.js
+docs/implementation/preverification/EP-SUBSTRATE.md:67  pulseKernel.js:184  `nextWorldStateForPulse` -> 191 in src/domain/worldPulse/pulseKernel.js
+docs/implementation/preverification/EP-SUBSTRATE.md:126  generosityKernel.js:131  `intelActs` -> 1037 in src/domain/worldPulse/generosityKernel.js
+docs/implementation/preverification/EP-SUBSTRATE.md:127  traditionsKernel.js:258  `asObject` -> 106 in src/domain/worldPulse/traditionsKernel.js
+docs/implementation/preverification/EP-SUBSTRATE.md:129  worldState.js:648  `WEEKS_PER_YEAR` -> 41 in src/domain/worldPulse/worldState.js
+docs/implementation/preverification/EP-SUBSTRATE.md:129  intelActs.js:104-106  `WEEKS_PER_YEAR` -> 71 in src/domain/spatial/intelActs.js
+docs/implementation/preverification/EP-SUBSTRATE.md:186  worldState.js:15  `cloneArray` -> 74 in src/domain/worldPulse/worldState.js
+docs/implementation/preverification/EP-SUBSTRATE.md:188  worldState.js:695  `appendPulseHistory` -> 796 in src/domain/worldPulse/worldState.js
+docs/implementation/preverification/EP-SUBSTRATE.md:189  warTermination.js:1032  `syntheticPrior` -> 1053 in src/domain/worldPulse/warTermination.js
+docs/implementation/preverification/EP-SUBSTRATE.md:203  configSlice.js:80-88  `updateConfig` -> 157 in src/store/configSlice.js
+docs/implementation/preverification/EP-SUBSTRATE.md:205  InstantWorldEntry.jsx:38-40  `freshSeed` -> 42 in src/components/instant/InstantWorldEntry.jsx
+docs/implementation/preverification/EP-SUBSTRATE.md:206  InstantWorldEntry.jsx:63  `setSeed` -> 110 in src/components/instant/InstantWorldEntry.jsx
+docs/implementation/preverification/WF-SUBSTRATE.md:137  religionState.js:312  `advanceShares` -> 342 in src/domain/worldPulse/religionState.js
+docs/implementation/preverification/WF-SUBSTRATE.md:138  realmEvents.js:24  `COMPOUND_SIGNATURES` -> 25 in src/domain/worldPulse/realmEvents.js
+docs/implementation/preverification/WF-SUBSTRATE.md:150  peaceTermsCatalog.js:192  `TERM_FAMILIES` -> 328 in src/domain/worldPulse/peaceTermsCatalog.js
+docs/implementation/preverification/WF-SUBSTRATE.md:151  sovereigntyBundle.js:166  `catalogGrewSinceWr10` -> 191 in src/domain/worldPulse/sovereigntyBundle.js
+docs/implementation/preverification/WF-SUBSTRATE.md:179  worldState.js:496  `cloneAdmittedEnvoyErrands` -> 202 in src/domain/worldPulse/worldState.js
+docs/implementation/preverification/WF-SUBSTRATE.md:203  subsystemRowsVirtual.test.js:454  `VIRTUAL_RULES` -> 255 in tests/domain/subsystemRowsVirtual.test.js
+docs/implementation/preverification/WF-SUBSTRATE.md:339  src/domain/display/settlementRumors.js:116  `WHAT_PHRASES` -> 123 in src/domain/display/settlementRumors.js
+docs/implementation/preverification/WF-SUBSTRATE.md:344  src/domain/roads/state.js:319  `riskToleranceOf` -> 334 in src/domain/roads/state.js
+docs/simulation-intelligence-layer.md:21  src/domain/causalState.js:67,89  `CAUSAL_BANDS` -> 422 in src/domain/causalState.js
+docs/simulation-intelligence-layer.md:43  requestMeta.ts:140  `botGuard` -> 190 in supabase/functions/_shared/requestMeta.ts
+docs/simulation-intelligence-layer.md:377  requestMeta.ts:140  `botGuard` -> 190 in supabase/functions/_shared/requestMeta.ts

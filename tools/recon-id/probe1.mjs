@@ -1,0 +1,18 @@
+import { runHeadless, instrumentedRoot } from './instrument.mjs';
+import { goldenCorpus, keyOf } from './lib.mjs';
+const ALL = goldenCorpus();
+const row = ALL[100];
+const { root } = instrumentedRoot(row._seed ?? keyOf(row));
+const out = await runHeadless(row, root);
+const s = out?.settlement ?? out;
+console.log('=== runHeadless top keys ===', Object.keys(out).slice(0,30).join(', '));
+console.log('=== settlement top keys ===');
+console.log(Object.keys(s).sort().join(' '));
+console.log('\n=== npcs[0] keys ===', Object.keys(s.npcs?.[0]||{}).sort().join(' '));
+console.log('npcs[0].id =', JSON.stringify(s.npcs?.[0]?.id));
+console.log('\n=== institutions[0] keys ===', Object.keys(s.institutions?.[0]||{}).sort().join(' '));
+console.log('\n=== powerStructure keys ===', Object.keys(s.powerStructure||{}).sort().join(' '));
+console.log('=== powerStructure.factions[0] keys ===', Object.keys(s.powerStructure?.factions?.[0]||{}).sort().join(' '));
+console.log('=== settlement.factions[0] keys ===', Object.keys(s.factions?.[0]||{}).sort().join(' '));
+console.log('\n=== relationships[0] keys ===', Object.keys(s.relationships?.[0]||{}).sort().join(' '));
+console.log('=== history keys ===', Object.keys(s.history||{}).sort().join(' '));

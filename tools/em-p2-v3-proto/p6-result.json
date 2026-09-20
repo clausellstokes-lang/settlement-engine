@@ -1,0 +1,1664 @@
+{
+  "rows": 63,
+  "wall": 25885,
+  "stepDrew": {
+    "resolveConfig": 63,
+    "buildGenerationContext": 0,
+    "resolveResources": 63,
+    "resolveStress": 63,
+    "resolveNeighbour": 0,
+    "assembleInstitutions": 63,
+    "subsumptionPass": 0,
+    "cascadePass": 56,
+    "isolationPass": 2,
+    "stressConfirmPass": 0,
+    "generateEconomy": 63,
+    "generatePower": 0,
+    "neighbourFactions": 0,
+    "factionCorrelationPass": 1,
+    "coherenceRepairPass": 0,
+    "economyReconcilePass": 63,
+    "powerEconomyReconcilePass": 0,
+    "structuralValidationPass": 0,
+    "generatePopulation": 63,
+    "corruptionPass": 42,
+    "generateNarratives": 63,
+    "assembleSettlement": 63
+  },
+  "dump": [
+    {
+      "step": "resolveConfig",
+      "key": "tier",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.tier",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "population",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.population",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "tradeRoute",
+      "via": "provides",
+      "moved": 5,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "terrainType",
+      "via": "provides",
+      "moved": 3,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.terrainType",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "resolvedTerrain",
+      "via": "provides",
+      "moved": 3,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "culture",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.culture",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "culturalIdentity",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.culturalIdentity",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "generationContentProfile",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "magicLevel",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.magicLevel",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "threat",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "priorityMagicEffective",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "noMagic",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "townPlus",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "effectiveConfig",
+      "via": "provides",
+      "moved": 7,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveConfig",
+      "key": "institutionToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "categoryToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "goodsToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveConfig",
+      "key": "servicesToggles",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "buildGenerationContext",
+      "key": "generationContext",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResources",
+      "via": "provides",
+      "moved": 62,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResources",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesNative",
+      "via": "provides",
+      "moved": 62,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResources",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesDepleted",
+      "via": "provides",
+      "moved": 48,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 23,
+        "transformed": 40
+      },
+      "post": {
+        "absent": 0,
+        "same": 23,
+        "transformed": 40
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResourcesDepleted",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesNativeDepleted",
+      "via": "provides",
+      "moved": 48,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 23,
+        "transformed": 40
+      },
+      "post": {
+        "absent": 0,
+        "same": 23,
+        "transformed": 40
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResourcesNativeDepleted",
+          40
+        ],
+        [
+          "record.config.nearbyResourcesDepleted",
+          23
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourcesCustom",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResourcesCustom",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourceDefinitions",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResourceDefinitions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "nearbyResourceDefinitionsDepleted",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.config.nearbyResourceDefinitionsDepleted",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveResources",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveStress",
+      "key": "stress",
+      "via": "provides",
+      "moved": 57,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 9,
+        "transformed": 54
+      },
+      "finPaths": [
+        [
+          "record.stress",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveStress",
+      "key": "stressTypes",
+      "via": "provides",
+      "moved": 57,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      "post": {
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      "finPaths": [
+        [
+          "record.config.stressTypes",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveStress",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 57,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourProfile",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourEconBias",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "neighbourFacBias",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "rawNeighbour",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "resolveNeighbour",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "institutions",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 7,
+        "transformed": 56
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "catalogForTier",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "assembleInstitutions",
+      "key": "generationRepairs",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 43,
+        "same": 20,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.generationCoherenceReceipt.repairs",
+          20
+        ]
+      ]
+    },
+    {
+      "step": "subsumptionPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 7,
+        "transformed": 56
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "cascadePass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 56,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 41,
+        "transformed": 22
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "isolationPass",
+      "key": "stress",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 9,
+        "transformed": 54
+      },
+      "finPaths": [
+        [
+          "record.stress",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "isolationPass",
+      "key": "isolationSupport",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 62,
+        "transformed": 1
+      },
+      "finPaths": [
+        [
+          "record.isolationSupport",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "isolationPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 43,
+        "transformed": 20
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "isolationPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "stress",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 9,
+        "transformed": 54
+      },
+      "finPaths": [
+        [
+          "record.stress",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "stressTypes",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      "post": {
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      "finPaths": [
+        [
+          "record.config.stressTypes",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "stressConfirmPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateEconomy",
+      "key": "economicState",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 17,
+        "transformed": 46
+      },
+      "finPaths": [
+        [
+          "record.economicState",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateEconomy",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generatePower",
+      "key": "powerIntent",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "generatePower",
+      "key": "powerStructure",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.powerStructure",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "neighbourFactions",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.powerStructure",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "factionCorrelationPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 43,
+        "transformed": 20
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "generationRepairs",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 43,
+        "same": 20,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 43,
+        "same": 20,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.generationCoherenceReceipt.repairs",
+          20
+        ]
+      ]
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "isolationSupport",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.isolationSupport",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "effectiveConfig",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.config",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "coherenceRepairPass",
+      "key": "institutions",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.institutions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "economicState",
+      "via": "provides",
+      "moved": 20,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.economicState",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "spatialLayout",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.spatialLayout",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "economyReconcilePass",
+      "key": "availableServices",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.availableServices",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "powerEconomyReconcilePass",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.powerStructure",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "structuralValidationPass",
+      "key": "structural",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 63,
+        "same": 0,
+        "transformed": 0
+      },
+      "finPaths": []
+    },
+    {
+      "step": "generatePopulation",
+      "key": "npcs",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.npcs",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generatePopulation",
+      "key": "relationships",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.relationships",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generatePopulation",
+      "key": "factions",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.factions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generatePopulation",
+      "key": "conflicts",
+      "via": "provides",
+      "moved": 58,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.conflicts",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "corruptionPass",
+      "key": "factions",
+      "via": "mutates",
+      "moved": 39,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.factions",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "corruptionPass",
+      "key": "npcs",
+      "via": "mutates",
+      "moved": 39,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.npcs",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateNarratives",
+      "key": "settlementReason",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.settlementReason",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateNarratives",
+      "key": "resourceAnalysis",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.resourceAnalysis",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateNarratives",
+      "key": "economicViability",
+      "via": "provides",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.economicViability",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "generateNarratives",
+      "key": "history",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.history",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "settlement",
+      "via": "provides",
+      "moved": 63,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "powerStructure",
+      "via": "mutates",
+      "moved": 0,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "post": {
+        "absent": 0,
+        "same": 0,
+        "transformed": 63
+      },
+      "finPaths": [
+        [
+          "record.powerStructure",
+          63
+        ]
+      ]
+    },
+    {
+      "step": "assembleSettlement",
+      "key": "stress",
+      "via": "mutates",
+      "moved": 54,
+      "run": 63,
+      "fin": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "post": {
+        "absent": 0,
+        "same": 63,
+        "transformed": 0
+      },
+      "finPaths": [
+        [
+          "record.stress",
+          63
+        ]
+      ]
+    }
+  ]
+}

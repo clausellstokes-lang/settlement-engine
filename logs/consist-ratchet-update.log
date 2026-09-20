@@ -1,0 +1,9 @@
+tip 7a0fe5889 start 11:13:24
+
+> settlementforge@1.0.0 test:ratchet:update
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --update
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 12187 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] baseline updated: 0 failing test(s) remain, 1 removed.
+  - tests/property/generatorGoldenMaster.test.js :: generator golden master (cross-build output stability) every config produces byte-identical output to the golden master
+RATCHET UPDATE EXIT 0 11:31:27

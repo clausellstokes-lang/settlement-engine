@@ -1,0 +1,161 @@
+{
+  "id": "EM-B2b",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B2b.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "⭐ WORLD FACTS BY CONSEQUENCE. EM-B2a's `rederive` is extended: config′ = { ...config, ...layer.worldFacts }, validated key-by-key and value-by-value against EM-P3's canonical option sets. ⛔ AN INVALID KEY OR VALUE THROWS — never a silent fallback to the stored value, never a clamp, never a warn-and-continue: a fallback makes the DM's stated world quietly untrue, which is the one thing design §14's 'consequence by design' does not license. `DmLayer` gains its second sub-object, `worldFacts` (keyed by CONFIG key), per §14 final's own wording.",
+      "action": "MODIFY",
+      "path": "src/domain/edit/dmLayer.js"
+    },
+    {
+      "_note": "THE TWELFTH DELTA KEY, READING BOTH SUB-OBJECTS. deriveRegenerationDelta returns ELEVEN keys identically on its nullish branch (:94) and its real return (:160), and `preservedCanon` comes from diffEntityCatalogs — an ENTITY diff, which is exactly why design §12.12 rules a FIELD-LEVEL section new derivation. `dmFields` is appended after `summary` on BOTH branches as { roots: [...], worldFacts: [...] }, each ASCII-ascending, both empty when the layer is absent or empty (so every existing caller sees an ADDED key and no changed one), and NOT counted by regenerationDeltaSize. Measured 103 effective lines against the 800 ceiling, no size-baseline entry, and in NONE of the five edge-shared closures.",
+      "action": "MODIFY",
+      "path": "src/domain/regenerationDelta.js"
+    },
+    {
+      "_note": "THE ENVELOPE RE-PIN. `it('returns canonical envelope shape')` asserts ELEVEN keys today; re-asserted against TWELVE, with one arm proving dmFields is { roots: [], worldFacts: [] } on the nullish branch and the eleven original keys unmoved in name, order and value. Already-credited file — no new lighting-census file row.",
+      "action": "TEST",
+      "path": "tests/domain/regenerationDelta.test.js"
+    },
+    {
+      "_note": "THE BATTERY — A1–A5, A7. A1 is the packet's whole promise in the owner's own image: a settlement moved to the coast KEEPS its harbour master — every pinned chosen fact unchanged (the same NPCs by id, the same institution roster, the same faction archetypes) while the derivations recompute. A3 drives the no-fallback refusals. ⭐ A4 IS GATE 4'S ANSWER: a both-directions source scan pinning the culture reader set at EXACTLY the 21 src/generators files measured at compile, so the blast radius stays STATED rather than quietly growing — which is what §14's consequence-by-design ruling requires of this packet, since it may not BOUND the radius. Flat literal it(...) only (EM-PREAMBLE §P3.4).",
+      "action": "CREATE",
+      "path": "tests/domain/worldFactRederive.test.js"
+    },
+    {
+      "_note": "⚠ CONDITIONAL ROW — add ONLY IF enumerateInvariants picks the file. tests/domain is not one of the eight ENFORCER_DIRS and `worldFactRederive` matches no NAME_PATTERN token, so measured, the meta-test does NOT demand a row. Run the measurement; a volunteered row is as much a drift as a missing one.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE DELTA DERIVER this packet extends by exactly one key. Renaming it un-grounds A6 and both surfaces that render the envelope (VersionDiffView.jsx:145, RegenerationDeltaCard.jsx).",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function deriveRegenerationDelta"
+    },
+    {
+      "_note": "dmFields must NOT enter the size — a DM's own field is not a change the world made. Preserved so the exclusion stays checkable.",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function regenerationDeltaSize"
+    },
+    {
+      "_note": "The other public reader of the envelope; preserved so the twelfth key cannot be added by reshaping the module.",
+      "path": "src/domain/regenerationDelta.js",
+      "symbol": "export function newEntitiesByType"
+    },
+    {
+      "_note": "⭐ WHERE config′ ENTERS: the FIRST step of the graph (deps: []), and the heaviest in-pipeline culture reader after npcGenerator — 18 reads. It sits upstream of every chooser, which is the measured reason a culture change re-derives essentially the whole world.",
+      "path": "src/generators/steps/resolveConfig.js",
+      "symbol": "registerStep('resolveConfig', {"
+    },
+    {
+      "_note": "The second step (deps: ['resolveConfig']) and the second place a world fact lands; 4 culture reads.",
+      "path": "src/generators/steps/buildGenerationContext.js",
+      "symbol": "registerStep('buildGenerationContext', {"
+    },
+    {
+      "_note": "⛔ GATE 4'S HEAVIEST READER: 21 `culture` reads, receiving culture directly from steps/generatePopulation.js:65. NAMED, NOT BOUNDED — design §14 final rules the consequence by design, so this packet states the radius and reports it in the delta. A4 pins the whole 21-file set both directions.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateNPCs = ("
+    },
+    {
+      "_note": "The golden's hashing seam over the 525-row fixture. A7 asserts byte-identity: fresh generation passes no layer and no config′, so neither golden can see any of this.",
+      "path": "tests/property/generatorGoldenMaster.test.js",
+      "symbol": "function hashFor(config)"
+    },
+    {
+      "_note": "The prose manifest's committed fixture address — the second golden A7 holds unchanged.",
+      "path": "tests/property/dossierProseManifest.test.js",
+      "symbol": "const MANIFEST_REL"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "⛔ THE HARBOUR MASTER KEEPS HIS JOB: a saved draft re-derived with { terrain: 'coastal' } keeps EVERY pinned chosen fact — the same NPCs by id, the same institution roster, the same faction archetypes — while the economy, supply chains, defense scores and food security all recompute."
+    },
+    {
+      "id": "A2",
+      "case": "DORMANT/ABSENT: worldFacts absent and worldFacts {} both yield a result byte-identical to a roots-only rederive, with dmFields.worldFacts []."
+    },
+    {
+      "id": "A3",
+      "case": "⛔ NO SILENT FALLBACK: an unknown config key, and a known key whose value is outside EM-P3's option set, each THROW naming the key and the accepted set — neither falls back to the stored value nor warns and continues."
+    },
+    {
+      "id": "A4",
+      "case": "⛔ THE STATED BLAST RADIUS IS COMPLETE: a both-directions source scan pins the `culture` reader set at EXACTLY the 21 src/generators files named at compile. A new reader reds here, so the radius stays STATED rather than quietly growing."
+    },
+    {
+      "id": "A5",
+      "case": "IDEMPOTENCY AND PURITY: three identical config′ re-derives are byte-identical, and record, config and layer are all unmutated."
+    },
+    {
+      "id": "A6",
+      "case": "THE DELTA READS BOTH SUB-OBJECTS: a layer with one root override and one world fact yields dmFields.roots naming the root with both values and dmFields.worldFacts naming the config key with both, each ASCII-ascending, with the eleven original keys unmoved and regenerationDeltaSize unchanged by their presence."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ THE GOLDENS CANNOT SEE ANY OF IT: fresh generation with no layer and no config′ leaves tests/fixtures/generator-golden-master.json and tests/fixtures/dossier-prose-manifest-golden.json byte-identical by SHA-256."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/worldFactRederive.test.js",
+      "tests/domain/regenerationDelta.test.js",
+      "tests/domain/dmLayer.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js",
+      "tests/property/dmLayerGoldenIsolation.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/dmLayer.js",
+      "src/domain/regenerationDelta.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

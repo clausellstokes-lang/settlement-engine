@@ -1,0 +1,200 @@
+{
+  "id": "EM-P0",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-P0.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "⛔⛔ VERSION 2 — THE RE-CUT (ODQ §934.47 addendum 9, ledger c22c25efc). VERSION 1'S DESIGN WAS REFUTED BY EXECUTION: it read generateRelationships(npcs, …) taking the roster as an argument and concluded the deriving half was pure. It is not — it DRAWS 67 times on the step's own stream (generateRelationships 62, generateFactions 2, generateConflicts 3), ambiently through npcGenerator.js:16's `import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js'` bound by setActiveRng(stepRng) at pipeline.js:187, plus rng.random() at generatePopulation.js:123. THE RUNNER'S RE-CUT: runPipeline gains ONE option, `pins`, handed to every step THROUGH THE CONTEXT under the reserved key __pins, so step.fn(ctx, rng)'s signature is unchanged and no step is re-registered; __pins is stripped from the returned context and is exempt by name from the undeclared-write scan. ⛔ THERE IS NO SKIP — v1's whole-step `provides` skip is RETIRED, and not merely superseded: a step must advance its own stream for the steps that follow, and a skipped step cannot. Partial pinning THROWS (v1's rule 5 survives, re-aimed from provides to choosers). ⭐ IN THE SAME EDIT, the docblock's reference to `settlementSlice.applyChange` — which does not exist (git grep returns one unrelated comment at settlementRenameHelpers.js:37) — is corrected at +0 effective lines, since it is a comment. Measured 113 effective against the 800 ceiling, no size-baseline entry.",
+      "action": "MODIFY",
+      "path": "src/generators/pipeline.js"
+    },
+    {
+      "_note": "⛔⛔ ONE REGISTRATION, ONE STREAM, THE SEAM MOVED INSIDE. src/kernel/prng.js:84 is `fork: (label) => createPRNG(`${seed}::${label}`)` — a fork is createPRNG over a DERIVED SEED, a fresh stream at position 0, never a continuation — so two registered steps can NEVER share one stream position. Proved three ways over a 41-row sample of the 525-row corpus: V1 (two steps, each forking its own name) moved 41 of 41; V2 (two steps, the root half forking the string 'generatePopulation') ALSO moved 41 of 41, which convicts v1's §6 exactly — the root half gets that label's stream at position 0 and the derive half then gets its own at position 0 instead of continuing; V3 (ONE shared stream object) held 0 of 41. So the step keeps ONE registerStep and ONE stream object, and its body becomes drawPopulation + derivePopulation + a chooseOrPin helper IN THIS SAME FILE, the same rng object passed to both halves. ⛔ ALL SIX DECLARATIONS UNCHANGED: deps ['coherenceRepairPass','powerEconomyReconcilePass'], reads ['culture','economicState','effectiveConfig','generationContext','institutions','powerStructure','tier'], readsVersion { economicState: 'reconciled' }, provides ['npcs','relationships','factions','conflicts'], phase 'population', fn (ctx, rng). v1's worry that the derive half's `reads` would need `npcs` is MOOT — npcs never leaves the step body. All four choosers are wrapped, including the rng.random() scatter; chooseOrPin does NOT advance the stream when a pin is present, which is what makes a pinned re-derive reproduce the record. Measured 142 effective.",
+      "action": "MODIFY",
+      "path": "src/generators/steps/generatePopulation.js"
+    },
+    {
+      "_note": "THE BATTERY — A1–A7. A1 is the packet's whole promise and the arm where version 1 FAILED AT 41 OF 41 SAMPLED ROWS: with no pins and with pins {}, output is byte-identical to the 525-row golden fixture and the prose manifest is unmoved. A3 counts draws in both modes — 67 in the derive half unpinned, ZERO fully pinned — and states that the two stream positions differ BY DESIGN. A5 REPLACES v1's fork-spelling conviction, which has no subject any more because the re-cut mints no fork: it asserts the step's rng handle is the SAME OBJECT IDENTITY (===) in both halves and that getStepOrder() holds exactly one 'generatePopulation' and no 'drawPopulation'. A7 scans the step file for exactly ONE registerStep( and ZERO fork( calls, with src/kernel/prng.js byte-identical to the base as its control — that derivation is owner-gated under THE PROMISE by its own header. Flat literal it(...) only (EM-PREAMBLE §P3.4). tests/generators IS an ENFORCER_DIR, so this file owes the row below.",
+      "action": "CREATE",
+      "path": "tests/generators/pipelinePinnedMode.test.js"
+    },
+    {
+      "_note": "The mutation-coverage row tests/generators/pipelinePinnedMode.test.js owes, because tests/generators is one of the eight ENFORCER_DIRS and enumerateInvariants picks every *.test.js under one. Added SURGICALLY beside its siblings; ⛔ the manifest is never re-serialised whole.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE RUNNER this packet gives a pinned mode. It runs all 23 registered steps unconditionally and accepts no record today.",
+      "path": "src/generators/pipeline.js",
+      "symbol": "export function runPipeline"
+    },
+    {
+      "_note": "The topological walk over deps. Unchanged — the re-cut adds NO step, which is the point.",
+      "path": "src/generators/pipeline.js",
+      "symbol": "export function getStepOrder"
+    },
+    {
+      "_note": "⛔ THE AMBIENT BINDING, AND HALF THE REFUTATION OF VERSION 1. It binds the step's stream for the WHOLE step body, which is how generateRelationships's 62 draws reach that stream without ever naming it. Preserved exactly; the re-cut depends on it.",
+      "path": "src/generators/pipeline.js",
+      "symbol": "const prevRng = setActiveRng(stepRng);"
+    },
+    {
+      "_note": "⛔⛔ THE FORK LAW, AND THE OTHER HALF OF THE REFUTATION. A fork is createPRNG over a derived seed — a FRESH stream at position 0, never a continuation — so two registered steps can never share a position. Its own header records that changing this derivation re-rolls every seeded stream in the product and is OWNER-GATED UNDER THE PROMISE. NEVER EDITED: it is precisely why the seam moved inside the step.",
+      "path": "src/kernel/prng.js",
+      "symbol": "fork: (label) => createPRNG(`${seed}::${label}`)"
+    },
+    {
+      "_note": "The ambient binder the runner calls per step.",
+      "path": "src/kernel/rngContext.js",
+      "symbol": "export function setActiveRng"
+    },
+    {
+      "_note": "The ambient draw surface the deriving half travels. Unchanged.",
+      "path": "src/kernel/rngContext.js",
+      "symbol": "export function random"
+    },
+    {
+      "_note": "⛔ THE PROOF THAT THE DERIVING HALF DRAWS: npcGenerator imports the ambient helpers, so generateRelationships's 62 draws come off the step's stream. NOT EDITED — the seam is in the step, not in the generator.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';"
+    },
+    {
+      "_note": "THE STEP. It stays ONE registration; the seam is internal.",
+      "path": "src/generators/steps/generatePopulation.js",
+      "symbol": "registerStep('generatePopulation', {"
+    },
+    {
+      "_note": "⛔ ALL FOUR CHOOSER KEYS, DECLARED. This `provides` line is the pin key spelling EM-P2 later registers its rows' outputKey against (§0R.4: P0 defines the spelling, P2 registers against it — the chooser call sites are inside the step's own body, so a registry is a GUARD over the mechanism rather than an input to it). UNCHANGED by this packet.",
+      "path": "src/generators/steps/generatePopulation.js",
+      "symbol": "provides: ['npcs', 'relationships', 'factions', 'conflicts'],"
+    },
+    {
+      "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three.",
+      "path": "src/generators/steps/generatePopulation.js",
+      "symbol": "const roll = rng.random() * totalPower;"
+    },
+    {
+      "_note": "CHOOSER 1, the root draw. Takes no roster.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateNPCs = ("
+    },
+    {
+      "_note": "CHOOSER 2 — takes the roster AND DRAWS 62 TIMES. An argument is not a proof of purity, which is the sentence version 1 needed and did not have.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
+    },
+    {
+      "_note": "CHOOSER 3 — takes both and draws twice.",
+      "path": "src/generators/power/factionGrouping.js",
+      "symbol": "export const generateFactions = (npcs, relationships) => {"
+    },
+    {
+      "_note": "CHOOSER 4 — draws three times. Its home is power/conflicts.js, not powerGenerator.js.",
+      "path": "src/generators/power/conflicts.js",
+      "symbol": "export const generateConflicts = (factions, relationships, config = {}, institutions = []) => {"
+    },
+    {
+      "_note": "The golden's hashing seam over the 525-row fixture. A1 asserts byte-identity, and version 1 moved 41 of 41 sampled rows here — this is where that failure appears.",
+      "path": "tests/property/generatorGoldenMaster.test.js",
+      "symbol": "function hashFor(config)"
+    },
+    {
+      "_note": "The prose manifest's committed fixture address — the second golden A1 holds unchanged.",
+      "path": "tests/property/dossierProseManifest.test.js",
+      "symbol": "const MANIFEST_REL"
+    },
+    {
+      "_note": "The eight enforcer dirs — tests/generators is one, which is why this packet's test file owes a mutation-coverage row.",
+      "path": "tests/lint/mutationCoverage.shared.mjs",
+      "symbol": "export const ENFORCER_DIRS"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "⛔ THE NULL CHANGE, AND THE ARM VERSION 1 FAILED: with no pins and with pins {}, generateSettlementPipeline's output is BYTE-IDENTICAL to tests/fixtures/generator-golden-master.json across all 525 rows and the prose manifest is unmoved. Version 1's design moved 41 of 41 sampled rows here."
+    },
+    {
+      "id": "A2",
+      "case": "THE PIN REPRODUCES THE RECORD: passing a generated settlement's npcs, relationships, factions and conflicts back as pins at the same seed yields that settlement byte-for-byte, with no chooser drawing."
+    },
+    {
+      "id": "A3",
+      "case": "⛔ A PINNED CHOOSER DOES NOT DRAW: a counting wrapper over the step's stream takes the full 67 derive-half draws (62 + 2 + 3) unpinned and ZERO fully pinned; the two stream positions differ, which §6 states is by design."
+    },
+    {
+      "id": "A4",
+      "case": "⛔ THE PARTIAL PIN REFUSES: pins holding relationships but not factions or conflicts throws the rule-5 message naming the step, its four chooser keys and the supplied subset; under onStrictViolation it reports { step, kind: 'pin', keys } and does not throw. A DM's root edit is NOT a partial pin — EM-B2a pins every chooser and overrides a VALUE."
+    },
+    {
+      "id": "A5",
+      "case": "⛔ ONE STREAM, ONE STEP — REPLACING VERSION 1'S FORK-SPELLING ARM, WHICH NOW HAS NO SUBJECT: the step's rng handle is the SAME OBJECT IDENTITY (===) in drawPopulation and derivePopulation, and getStepOrder() contains exactly one 'generatePopulation' and no 'drawPopulation'."
+    },
+    {
+      "id": "A6",
+      "case": "IDEMPOTENCY AND PURITY: three identical pinned calls are byte-identical; pins and initialContext are unmutated; __pins is absent from the returned context."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ NO SECOND STREAM ANYWHERE: a source scan of generatePopulation.js finds exactly ONE registerStep( and ZERO fork( calls. Control: src/kernel/prng.js's fork derivation is byte-identical to the base, so the owner-gated stream law is untouched."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/generators/pipelinePinnedMode.test.js",
+      "tests/generators/assemblyCoherenceRngIsolation.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/entropyRootCensus.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/generators/pipeline.js",
+      "src/generators/steps/generatePopulation.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ]
+}

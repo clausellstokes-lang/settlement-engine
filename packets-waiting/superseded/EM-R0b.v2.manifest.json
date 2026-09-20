@@ -1,0 +1,99 @@
+{
+  "id": "EM-R0b",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R0b.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "action": "CREATE",
+      "path": "src/domain/edit/recordInvariants.js",
+      "symbol": "recordInvariants"
+    },
+    {
+      "action": "CREATE",
+      "path": "src/domain/edit/recordInvariantFlags.js",
+      "symbol": "FLAGS_EVER_TRUE"
+    },
+    {
+      "action": "TEST",
+      "path": "tests/domain/recordInvariants.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "path": "src/domain/activeConditions.js",
+      "symbol": "export function severityBand"
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export function goldenCorpus"
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "export const keyOf"
+    },
+    {
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "export function generateSettlementPipeline"
+    },
+    {
+      "path": "tests/build/domainGeneratorsBoundary.test.js",
+      "symbol": "const BASELINE_EDGES"
+    },
+    {
+      "_pending": "ADDED BY THE CHAIR AT PROMOTION, once EM-R0d is LANDED. These four symbols DO NOT EXIST at this compile's tip e5bdfd031 (measured), so by PACKET_STANDARD they may not be named here yet; EM-R0d is a Depends-on row instead. At promotion the base is at or after EM-R0d's landing and these join: src/data/bandLadders.js :: 'export function legitimacyBandOf', 'export function readinessBandOf', 'export function foodSecurityBandOf', 'export const FOOD_SECURITY_CUTS'."
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE CONTROL - every shipped check is clean on plain generated records of the 63-row stride, and the module's declared data is the 525-row table; the ONE dated KNOWN pin is the only violation"
+    },
+    {
+      "id": "A2",
+      "case": "THE KNOWN PIN BITES BOTH WAYS - the single-row V-SUMMARY-DEPS expectation is a named, dated, single-row assertion that REDS when the generator defect is cured (FIX-G1 removes it)"
+    },
+    {
+      "id": "A3",
+      "case": "THE PLANTED-MUTANT TABLE - for each of the 30 checks, the smallest mutation of a real record trips EXACTLY that check and no other"
+    },
+    {
+      "id": "A4",
+      "case": "THE BAND CHECKS ARE THE PRODUCERS' OWN TABLES - all four read EM-R0d's leaf or severityBand() by import; the module declares no threshold and no learned envelope, asserted by a source scan of the module itself"
+    },
+    {
+      "id": "A5",
+      "case": "THE ROUNDING RULE - a constructed record whose published deficitPct sits exactly on a cut passes with either adjacent label, and a label two rungs away still REDS"
+    },
+    {
+      "id": "A6",
+      "case": "THE FLAG DATA IS DECLARED, NOT DERIVED - the shipped label-to-flags table equals the table re-measured from the 63-row stride, and the module derives no flag from a published number"
+    },
+    {
+      "id": "A7",
+      "case": "ABSENCE, THE UNSEEN LABEL, PURITY AND IDEMPOTENCY - a record missing whole readings and a record with an unknown label both yield []; the input is deep-equal to a pre-call clone; two calls return equal arrays"
+    },
+    {
+      "id": "A8",
+      "case": "THE LAYERING BOUNDARY HOLDS - the live src/domain to src/generators edge set equals BASELINE_EDGES and the new leaves appear in it not at all"
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/recordInvariants.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/build/domainGeneratorsBoundary.test.js"
+    ]
+  ]
+}

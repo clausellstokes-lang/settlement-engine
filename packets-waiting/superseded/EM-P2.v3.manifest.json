@@ -1,0 +1,393 @@
+{
+  "id": "EM-P2",
+  "status": "DRAFT",
+  "packetVersion": 3,
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-P2.md",
+  "verifiedBase": "__BASE__",
+  "dependsOn": [
+    "EM-P0 (LANDED 429ceed54)"
+  ],
+  "collisionGroup": null,
+  "changeManifest": [
+    {
+      "action": "CREATE",
+      "path": "src/domain/generation/generationForkRegistry.js",
+      "symbol": "GENERATION_TIER1",
+      "note": "106 effective lines measured (eslint max-lines, skipBlankLines+skipComments); 75 Tier-1 rows + 10 Tier-2 rows. Also declares GENERATION_TIER2, GENERATION_CHANNELS, GENERATION_BLIND_HALVES, GENERATION_CENSUS_ROWS, tier1For, tier2For. NO PRODUCTION IMPORTER."
+    },
+    {
+      "action": "CREATE",
+      "path": "tests/lint/generationForkRegistry.contract.test.js",
+      "note": "The static arms: A2 totality against getStepMeta() in both directions, A3s the class derivation, A8s Tier 2's static half plus the registerStep-aware resolver and its guard-the-guard. 1 describe, 3 it."
+    },
+    {
+      "action": "CREATE",
+      "path": "tests/generators/generationForkCensus.test.js",
+      "note": "The census by execution: A1 the controls, A3 the classification, A4 onRecord, A5 the mint channel, A6 the hash channel, A7 the corpus ceiling, A8e Tier 2's execution half. 1 describe, 5 it. Holds both vi.mock factories."
+    },
+    {
+      "action": "CREATE",
+      "path": "tests/helpers/generationForkCensus.js",
+      "note": "The instrumentation. A PLAIN .js helper, never a .test.js: importing a symbol from a .test.js re-registers that file's suites in every importer (the dormancyOracle incident). Registers no describe and no it, so it does not enter the lighting census denominator."
+    },
+    {
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json",
+      "symbol": "uncoveredBaseline['tests/lint/generationForkRegistry.contract.test.js']",
+      "note": "EM-PREAMBLE §P2.2 — mandatory for a new tests/lint/ file. Appended SURGICALLY beside its tests/lint/ siblings; the manifest is never re-serialised whole. kind: 'rationale' with a kindNote, following tests/lint/chooserTotality.walker.test.js's own row: the guard-the-guard controls are inside the file and execute on every run, and a sweep plant is a two-file edit whose second path this manifest does not reserve."
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "path": "src/generators/pipeline.js",
+      "symbol": "getStepMeta",
+      "provenAt": "pipeline.js:259",
+      "by": "grep -nE '^export (function|const) (registerStep|getStepOrder|getStepMeta|runPipeline)' src/generators/pipeline.js"
+    },
+    {
+      "path": "src/generators/pipeline.js",
+      "symbol": "getStepOrder",
+      "provenAt": "pipeline.js:110",
+      "by": "same command"
+    },
+    {
+      "path": "src/generators/pipeline.js",
+      "symbol": "runPipeline",
+      "provenAt": "pipeline.js:171",
+      "by": "same command"
+    },
+    {
+      "path": "src/generators/pipeline.js",
+      "symbol": "registerStep",
+      "provenAt": "pipeline.js:99",
+      "by": "same command"
+    },
+    {
+      "path": "src/kernel/prng.js",
+      "symbol": "createPRNG",
+      "provenAt": "prng.js:22",
+      "by": "grep -nE '^export ' src/kernel/prng.js"
+    },
+    {
+      "path": "src/kernel/proseHash.js",
+      "symbol": "pickVariant",
+      "provenAt": "proseHash.js:47",
+      "by": "grep -nE '^export ' src/kernel/proseHash.js"
+    },
+    {
+      "path": "src/kernel/proseHash.js",
+      "symbol": "fnv1a32",
+      "provenAt": "proseHash.js:28",
+      "by": "grep -nE '^export ' src/kernel/proseHash.js"
+    },
+    {
+      "path": "src/generators/generateSettlementPipeline.js",
+      "symbol": "generateSettlementPipeline",
+      "provenAt": ":77",
+      "by": "grep -nE '^export .*generateSettlementPipeline' src/generators/generateSettlementPipeline.js"
+    },
+    {
+      "path": "src/lib/dependencyEngine.js",
+      "symbol": "withCustomContent",
+      "provenAt": ":90",
+      "by": "grep -nE '^export .*withCustomContent' src/lib/dependencyEngine.js"
+    },
+    {
+      "path": "src/domain/content/userContentTunables.js",
+      "symbol": "resolveConfigWithUserContentTunables",
+      "provenAt": ":113",
+      "by": "grep -nE '^export .*resolveConfigWithUserContentTunables' src/domain/content/userContentTunables.js"
+    },
+    {
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "pickFirst",
+      "provenAt": ":240",
+      "by": "grep -n '^const pickFirst' src/generators/npcGenerator.js",
+      "note": "MODULE-LOCAL, never exported. Named by source declaration — EM-A1 §1c.1 property 2."
+    },
+    {
+      "path": "src/generators/power/rulingStructure.js",
+      "symbol": "generatePowerStructure",
+      "provenAt": ":79",
+      "by": "grep -n 'generatePowerStructure' src/generators/power/rulingStructure.js"
+    },
+    {
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "assembleInstitutions",
+      "provenAt": ":213 registerStep('assembleInstitutions'",
+      "by": "git grep -n \"registerStep(\" -- src/generators",
+      "note": "Declared ONLY as a registerStep host — invisible to the model's resolver form set."
+    },
+    {
+      "path": "src/generators/steps/generatePopulation.js",
+      "symbol": "generatePopulation",
+      "provenAt": ":226 registerStep('generatePopulation'",
+      "by": "same command"
+    },
+    {
+      "path": "src/generators/steps/generatePower.js",
+      "symbol": "generatePower",
+      "provenAt": ":24 registerStep('generatePower'",
+      "by": "same command"
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "goldenCorpus",
+      "provenAt": ":76",
+      "by": "grep -nE '^export ' tests/helpers/goldenMasterCorpus.js"
+    },
+    {
+      "path": "tests/helpers/goldenMasterCorpus.js",
+      "symbol": "keyOf",
+      "provenAt": ":60",
+      "by": "same command"
+    },
+    {
+      "path": "tests/helpers/codeOnlySource.js",
+      "symbol": "codeOnly",
+      "provenAt": ":34",
+      "by": "grep -nE '^export ' tests/helpers/codeOnlySource.js"
+    },
+    {
+      "path": "tests/helpers/anchoredNegatives.js",
+      "symbol": "expectAbsentWithAnchor",
+      "provenAt": ":111",
+      "by": "grep -nE '^export ' tests/helpers/anchoredNegatives.js"
+    }
+  ],
+  "acceptanceCases": [
+    "A1 — THE INSTRUMENT'S OWN CONTROL, the FIRST arm, and a STOP if it reds: with both mocks installed, on the control row total mints is 35-36 with via fork >= 31 (a total of 4 is the signature of a mock that did not reach the generator graph), direct mints = 4, 0 foreign-prefix seeds; the golden hash of that row is unchanged (b77b5909009112855bad4dacf881847d06e43385f64a15f4b528e0d30c91c3ce) and a stride sweep of >=25 rows moves 0; the population step draws > 0 unpinned (315) and exactly 0 under full pins, the pinned run reproducing the record; export parity holds for both mocked modules; src/kernel/prng.js:84 reads the fork derivation the re-implementation rests on. If this arm reds the lane writes the STOP with the numbers it saw and stops; it does NOT touch vite.config.js, a setupFiles entry or any shared vitest config.",
+    "A2 — TOTALITY BY CONSTRUCTION: GENERATION_TIER1's (step, key) set equals getStepMeta()'s in both directions; 75 rows; 57 via 'provides' + 18 via 'mutates'; the order is getStepOrder()'s; anti-vacuity floor (pairs > 70) asserted before any equality.",
+    "A3s — EVERY DERIVED FIELD IS DERIVED, NOT AUTHORED: for all 75 rows class follows the three rules from stepDraws/keyMoves; onRecordClass follows the four rules from the onRecord counts and onRecord.absent + .same + .transformed === rows on every row; every rows === GENERATION_CENSUS_ROWS; recordPath === null iff onRecordClass === 'absent' and is a non-empty string otherwise; every array, row and onRecord object is frozen; counts are 28 drawn, 1 label (generatePower|powerIntent), 46 pure, and absent 19, same 35, transformed 15, varies 6.",
+    "A3 — THE CLASSIFICATION, RE-EXECUTED: the 63-row corpus is built by the declared rule (42 grid + 21 tail); a fresh run of all 22 perturbations reproduces every row's stepDraws and keyMoves; 13 steps draw; a mismatch PRINTS the fresh literal and FAILS, never writes. Timeout 180000 ms (measured 25426 ms).",
+    "A4 — onRecord, RE-EXECUTED OVER THE WHOLE SAMPLE: over all 63 rows every row's onRecord COUNTS and recordPath equal the literal by the declared ladder (step 3 admits objects and arrays only); the six varies rows come out varies with those exact counts; a row whose non-absent recordPath is NOT unanimous across the corpus MUST be varies, otherwise the arm reds and prints both paths; a mismatch PRINTS the fresh literal and FAILS.",
+    "A5 — THE MINT CHANNEL: 4 DIRECT mints on the probe row; every seed prefixed by the run's root seed (0 foreign); the seed <root>::generatePower::power-structure minted 4 times with vias [fork, direct, direct, direct]; viaFork equals 22 step forks plus the sub-forks the proxy saw; total >= 35. The DIRECT count is the assertion; total mints and pickVariant counts are row-dependent and recorded, not pinned.",
+    "A6 — THE HASH CHANNEL: on the probe row pickVariant makes 96 calls, every pool > 1, every seed non-falsy, 96 distinct seeds; fnv1a32 external calls = 6; the two censuses are disjoint; the three DISPLAY-NAME-keyed sites are named as observed data (EM-P1b's class, nothing asserted about their cure).",
+    "A7 — THE CORPUS CEILING: under settType:'random', culture:'random_culture' and _randomizePriorities:true, over 24 seeds each, tier, townPlus, culture, magicLevel and priorityMagicEffective each move in at least one seed while the register classes them pure. The arm asserts > 0, never a ratio; the observed count is recorded in the failure message.",
+    "A8 — TIER 2, four arms plus the anchored negative: every outputKey resolves on a generated record (rows 1-4 and 6-10 at 42/42, npcs[].status at 18/42 so its floor is > 0); every (step, key) exists in Tier 1 and forkId === step; origin equals the holding-step perturbation (five rows computed); every module#symbol is declared exactly once by the registerStep-aware resolver, with its guard-the-guard (22/22 vs the model's 0/22, pickFirst = 1, three ghost negatives, two nonexistent symbols at 0); no row carries a producer or an editable field; powerStructure.seats[].holder is asserted absent via expectAbsentWithAnchor anchored on powerStructure.governingName."
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/generationForkRegistry.contract.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/generators/generationForkCensus.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ]
+  ],
+  "predictedRegisterMoves": {
+    "lightingCensus": {
+      "baselinePath": "tests/lint/.lighting-census-baseline.json",
+      "files": {
+        "base": 2646,
+        "predicted": 2648,
+        "confidence": "CONFIRMED"
+      },
+      "suiteTitles": {
+        "base": 6671,
+        "predicted": 6673,
+        "confidence": "CONFIRMED"
+      },
+      "titles": {
+        "base": 25005,
+        "predicted": 25016,
+        "confidence": "CONFIRMED"
+      },
+      "credited": {
+        "base": 2263,
+        "predicted": 2265,
+        "confidence": "PLAUSIBLE"
+      },
+      "parked": {
+        "base": 383,
+        "predicted": 383,
+        "confidence": "PLAUSIBLE"
+      },
+      "note": "INTERIOR RED, named not discovered. Re-derived WHOLE at the train's terminal BY THE CHAIR (EM-PREAMBLE §P2.1). This packet's ordered sequence schedules no refreeze and its change manifest lists no baseline as a generated artifact."
+    },
+    "mutationCoverage": {
+      "rowsAdded": 1,
+      "confidence": "CONFIRMED"
+    },
+    "observedShapeRegister": {
+      "move": "none",
+      "confidence": "CONFIRMED",
+      "why": "no domain reader of dmLayer or decrees is added"
+    },
+    "writerReach": {
+      "move": "none",
+      "confidence": "CONFIRMED",
+      "why": "no new reader of settlement fields under src/domain/edit/**"
+    },
+    "sizeBaseline": {
+      "move": "none",
+      "confidence": "CONFIRMED",
+      "why": "106 effective lines against a domain layer ceiling of 800"
+    }
+  },
+  "bundleObligations": {
+    "edgeShared": {
+      "owed": false,
+      "why": "The five metas (aiCharterBundle 114 inputs, aiGroundingBundle 74, aiOutputSchemaBundle 115, analyticsEventsBundle 2, intentAtlasBundle 2) carry explicit inputs path lists; none lists a src/domain/generation path, and none can, because nothing imports the new leaf. `git grep generationForkRegistry -- src tests scripts supabase` is empty at the base."
+    },
+    "workerCeiling": {
+      "owed": false,
+      "ceiling": 1401128,
+      "why": "No production importer, so the leaf enters no bundle closure: not the generation worker (zero slack), not the lazy engine, not EAGER_FIRST_PAINT_MODULES. The packet modifies zero existing src/ files, so EM-PREAMBLE §P2.11's per-path measurement has an empty subject set."
+    },
+    "stopIf": "A production import of the new leaf appears necessary for any reason (STOP-5)."
+  },
+  "goldenPosture": "UNCHANGED. tests/property/generatorGoldenMaster.test.js and tests/property/dossierProseManifest.test.js must not move; motion is a STOP (EM-PREAMBLE §P3.1). A1 proves it for the census path (the committed golden manifest's own hash, byte-identical with the instrument installed).",
+  "hotFiles": [],
+  "openChairQuestions": [],
+  "chairRulingsCarried": {
+    "date": "2026-09-19",
+    "Q-1": "28 drawn / 1 label / 46 pure. Design §21.5.1's '29 drawn, 46 pure' was the recon's pre-ruling count; the chair corrects the ledger.",
+    "Q-2": "If the mock does not take, the build lane STOPS. The census's FIRST arm is the instrument's own control; the shared-config fallback (vite.config.js, setupFiles) is a CHAIR ACT, never a packet step.",
+    "Q-3": "recordPath STAYS, contracted: the landing path for same/transformed (dotted from `record`, nested and renamed landings spelled in full), null for absent, never ''.",
+    "Q-4": "producer is STRUCK. EM-A1's declarations already name each field's writer; the capability EM-A1 asked for is the resolver (§6.6), not a column.",
+    "Q-5": "No probe row. onRecord carries per-row COUNTS over the 63-row sample plus a derived label that is 'varies' when not unanimous.",
+    "Q-6": "CARRY BOTH COMPARANDS. Each Tier-1 row holds onRecord {absent,same,transformed} + onRecordClass (the key's FINAL value vs the record) AND producedOnRecord {absent,same,transformed} + producedOnRecordClass (the POST-STEP value vs the record). recordPath is defined against the FINAL comparand. MEASURED: over 63 corpus rows x 75 register rows, 0 rows where the post-step value lands at a different path than the final one, so NO producedPath field is carried and A4 re-measures that zero. The two classes disagree on 18 of 75 rows.",
+    "Q-7": "ACCEPTED. The value-hash search admits objects and arrays only: the byte floor was the defect (a 12-byte string passes it), the type gate is the fix. Recorded in the evidence with the before/after for resolveConfig|tradeRoute (varies 58/5 -> absent 63/63) so the next reader does not re-find it."
+  },
+  "basePressure": {
+    "emP3InFlight": true,
+    "what": "EM-P3 is building in the slot now: it moves src/generators/steps/resolveConfig.js and adds two option-list modules.",
+    "exposure": "18 of the 75 Tier-1 rows are resolveConfig rows; three of them (tradeRoute 5/63, terrainType 3/63, resolvedTerrain 3/63) turn on a handful of corpus rows.",
+    "requiredSymbolsNamingResolveConfig": [],
+    "requiredSymbolsNote": "CONFIRMED: no requiredSymbols row names src/generators/steps/resolveConfig.js. The step-file rows are assembleInstitutions.js, generatePopulation.js and generatePower.js only. The exposure is entirely in the Tier-1 DATA.",
+    "preProofObligation": "The pre-proof at promotion MUST re-run the full 75-row classification at the then-tip and diff it against this literal. The goldens stay byte-identical under EM-P3, so the expectation is ZERO rows move — an expectation is not a receipt."
+  },
+  "tier1Shape": {
+    "fields": [
+      "step",
+      "key",
+      "via",
+      "stepDraws",
+      "keyMoves",
+      "rows",
+      "class",
+      "onRecord{absent,same,transformed}",
+      "onRecordClass",
+      "producedOnRecord{absent,same,transformed}",
+      "producedOnRecordClass",
+      "recordPath"
+    ],
+    "rows": 75,
+    "classTally": {
+      "drawn": 28,
+      "label": 1,
+      "pure": 46
+    },
+    "onRecordClassTally": {
+      "absent": 19,
+      "same": 35,
+      "transformed": 15,
+      "varies": 6
+    },
+    "variesRows": [
+      {
+        "row": "resolveResources|nearbyResourcesDepleted",
+        "absent": 0,
+        "same": 23,
+        "transformed": 40
+      },
+      {
+        "row": "resolveResources|nearbyResourcesNativeDepleted",
+        "absent": 0,
+        "same": 23,
+        "transformed": 40,
+        "note": "non-unanimous recordPath; already varies"
+      },
+      {
+        "row": "resolveStress|stressTypes",
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      {
+        "row": "stressConfirmPass|stressTypes",
+        "absent": 0,
+        "same": 51,
+        "transformed": 12
+      },
+      {
+        "row": "assembleInstitutions|generationRepairs",
+        "absent": 43,
+        "same": 20,
+        "transformed": 0
+      },
+      {
+        "row": "coherenceRepairPass|generationRepairs",
+        "absent": 43,
+        "same": 20,
+        "transformed": 0
+      }
+    ],
+    "producedOnRecordClassTally": {
+      "absent": 27,
+      "same": 18,
+      "transformed": 15,
+      "varies": 15
+    },
+    "comparandsDisagreeOn": 18,
+    "producedPathNeeded": false,
+    "producedPathMeasurement": "0 of 75 rows have a differing landing path between the two comparands (counting only rows where both land); one recordPath serves both triples."
+  },
+  "tier2Shape": {
+    "fields": [
+      "cardShape",
+      "outputKey",
+      "forkId",
+      "step",
+      "key",
+      "module",
+      "symbol",
+      "origin"
+    ],
+    "rows": 10,
+    "note": "producer STRUCK per the chair's Q-4. No editable field: editability is EM-A1's declaration and is not conditioned on origin."
+  },
+  "consumers": {
+    "EM-A1": "joins Tier 2 on (cardShape, outputKey)",
+    "design-22": "ARCH-REDERIVE v1 (ledger 2026-09-19); the re-entry family EM-R1..R6 reads Tier 1 per writer to know whether what a step wrote is what the record holds, or whether a later producer or mutator replaced it",
+    "EM-P0b": "WITHDRAWN — where this packet once pointed at it, the follow-on is the re-entry family EM-R (design §22)"
+  },
+  "leaf": {
+    "rawLines": 117,
+    "effectiveLines": 106,
+    "perLeafBudget": 250,
+    "splitTaken": false,
+    "longestLine": 384,
+    "note": "106 effective lines across all three shapes (pre-ruling, one triple, two triples). No max-len rule in eslint.config.js."
+  },
+  "censusWallClockMs": {
+    "latest": 25885,
+    "observedRange": [
+      25426,
+      31101
+    ],
+    "perRow": 410.9,
+    "budgetAgainst": 31000,
+    "timeout": 180000,
+    "note": "1,449 pipeline runs plus one record index per baseline; budget against ~31 s, not the best run."
+  }
+}

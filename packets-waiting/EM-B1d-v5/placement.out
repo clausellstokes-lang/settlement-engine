@@ -1,0 +1,17 @@
+closure sizes: {
+  'generation.worker': 220,
+  'advanceInterval.worker': 549,
+  'townScene.worker': 18
+}
+EAGER_FIRST_PAINT_MODULES: 268
+
+file                                             genWorker advInterval townScene eagerFP lazyEngine
+src/domain/entities/npcs.js                      no        YES         no        YES     no
+src/domain/entities/status.js                    no        YES         no        YES     no
+src/domain/entities/successors.js                no        no          no        YES     no
+src/domain/worldPulse/envoyCasting.js            no        YES         no        no      no
+src/domain/density/factionLifecycle.js           no        YES         no        YES     no
+src/domain/worldPulse/magicFormsPractitioner.js  no        no          no        no      no
+
+importers of src/domain/entities/npcs.js INSIDE the generation-worker closure: NONE
+importers of src/domain/entities/status.js INSIDE the generation-worker closure: NONE

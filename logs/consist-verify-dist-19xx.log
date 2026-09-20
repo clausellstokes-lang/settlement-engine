@@ -1,0 +1,18 @@
+
+> settlementforge@1.0.0 verify:dist
+> sh scripts/gate-mutex.sh --run -- node scripts/check-test-ratchet.mjs --verify-dist
+
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 48027 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+[test-ratchet] STRICT DIST REFUSED: every discovered build test must run exactly once and pass.
+  runner exited NON-ZERO; strict dist never banks a runner failure.
+  report.success is not TRUE; strict dist requires an explicit successful report.
+  suite status was not PASSED:
+    tests/build/cultureProfilesLazy.test.js [failed]
+    tests/build/generationWorkerLazy.test.js [failed]
+  FAILED build-test row(s):
+    tests/build/cultureProfilesLazy.test.js :: FP-G16 — the culture corpus stays off the open path (source + config) the corpus fingerprint is minted in exactly one source module
+      ASSERTION · ran 2123ms against a 20000ms budget (vite.config.js testTimeout) — a real verdict — read the message
+      msg: AssertionError: the fingerprint "A timber-and-stone, guild-and-estate design grammar." must be minted in exactly one source module: expected [ 'src/data/cultureProfiles.js', …(1) ] to have a length of 1 but got 2
+    tests/build/generationWorkerLazy.test.js :: generation worker — production boundary the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+      ASSERTION · ran 7ms against a 20000ms budget (vite.config.js testTimeout) — a real verdict — read the message
+      msg: AssertionError: generation worker bundle generation.worker-BPghz0h7.js is 1405144 B; the ceiling is 1404493 B (build-900-chair.log): expected 1405144 to be less than or equal to 1404493

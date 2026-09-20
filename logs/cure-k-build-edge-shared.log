@@ -1,0 +1,29 @@
+
+> settlementforge@1.0.0 build:edge-shared
+> node scripts/build-edge-shared.mjs
+
+
+  supabase/functions/_shared/aiGroundingBundle.js  408.1kb
+
+⚡ Done in 62ms
+✓ aiGrounding: aiGroundingBundle.js  (inputs: 74, 408.0 KB, hash 9788abb8fdb7287e)
+
+  supabase/functions/_shared/analyticsEventsBundle.js  19.6kb
+
+⚡ Done in 9ms
+✓ analyticsEvents: analyticsEventsBundle.js  (inputs: 2, 19.7 KB, hash 0a6ba64ce0b8d5e2)
+
+  supabase/functions/_shared/aiCharterBundle.js  534.5kb
+
+⚡ Done in 57ms
+✓ aiCharter: aiCharterBundle.js  (inputs: 114, 534.4 KB, hash ed6ba60e6fb9d5ba)
+
+  supabase/functions/_shared/intentAtlasBundle.js  26.2kb
+
+⚡ Done in 14ms
+✓ intentAtlas: intentAtlasBundle.js  (inputs: 2, 26.3 KB, hash 9136e063f280d77f)
+
+  supabase/functions/_shared/aiOutputSchemaBundle.js  530.9kb
+
+⚡ Done in 71ms
+✓ aiOutputSchema: aiOutputSchemaBundle.js  (inputs: 115, 530.8 KB, hash c7e40769f2cfa953)

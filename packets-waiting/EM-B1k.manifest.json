@@ -1,0 +1,87 @@
+{
+  "id": "EM-B1k",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-B1k.md",
+  "_statusNote": "⭐ DRAFT, READY-able in one pass. It floats with TOP PRIORITY and builds in the slot ahead of everything waiting. It cures CONFIRMED data loss on a shipped DM action: a person the DM shelves through the Availability control is absent from the settlement the next tick persists (measured: 6 of 7, in both the store's save and the DB payload), and `return-npc` then refuses with npc_target_missing, so un-shelving can never recover them. ⛔ STOP AND SPLIT DECLARED AT COMPILE (§0): the ruled cure's three parts do not fit one packet — four production files exceed '≤3 existing logic-bearing production files modified' and successorNpc.js is in the EAGER first-paint graph while the others are not. The split is the chair's own line: THIS packet is the WRITE BASE alone, and ⭐ IT WAS MEASURED TO STOP BOTH DEFECTS — with the snapshot left filtered and factionDensityKernel unpatched, making only the update's settlement raw leaves the house crewed with no faction_dissolved beat, because that kernel's own stillEmpty confirmation (:262, 'an irreversible consequence may only fire on a fact that is still true') was correct all along and failed only because its base was filtered too. EM-B1k2 (chartered in §12.1) carries cures (2) and (3) as defense-in-depth.",
+  "_verifiedBaseNote": "⛔ THE CHAIR STAMPS THIS AND IT MUST BE THE TIP. Compiled against e5bdfd03176b402e777f2681187b49db47ab43c5 (git status --short empty at the start AND the end of the lane). This value and the Markdown's `Verified base` row are substituted TOGETHER (implementation-packets.mjs:889).",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "_note": "⛔⛔ THE ONE PRODUCTION EDIT, AND IT MUST BE NET ZERO EFFECTIVE LINES. `pulseKernel.js` measures EXACTLY 1581 effective lines against its scripts/.size-baseline.json ceiling of 1581 — ZERO headroom, pinned by tests/lint/sizeBaseline.test.js (:103, :120), and the file's own comments show it is already managed at that ceiling (':-joined at +0 effective lines against the frozen ceiling', :576-578). TWO SINGLE-LINE REPLACEMENTS, NO ADDITIONS: (a) :184 inside buildSettlementMap — `settlement: localSettlements.get(String(item.id)) || item.save?.settlement || item.settlement,`; (b) :579 — `localSettlements.set(String(item.id), { ...vaulted.settlement, npcs: (item.save?.settlement?.npcs) || vaulted.settlement.npcs });`. `item.save?.settlement` is saveSettlement's exact meaning (worldSnapshot.js:11-13), INLINED because the ceiling forbids adding an import. ⛔ A helper function, an added guard line or a reformat is a STOP — raising the baseline is a chair act. BUDGETS: NOT in the zero-slack generation worker (0 B); NOT eager; in advanceInterval.worker, which has no ceiling today (TOOL-3 mints one with 4 KB per-train headroom ⇒ price as a DELTA, no per-packet re-mint, the chair's Q3); ⭐ an INPUT of NEITHER edge-shared bundle (measured), so this packet owes NO _shared rows and NO generator in checks — worldSnapshot.js is the input of both and this packet deliberately does not touch it.",
+      "action": "MODIFY",
+      "path": "src/domain/worldPulse/pulseKernel.js"
+    },
+    {
+      "_note": "THE RED-FIRST REPRODUCTION AS A SUITE — A1, A2, A4. A generated town; one NPC shelved through the app's OWN writer applyNpcOp('stasis-npc') (settlementPendingEditWriters.js:131, reached from the DM's Availability select at NpcLifecycleControls.jsx:115-121); one tick with commit:true through simulateCampaignWorldPulse; then the REAL store commit applyWorldPulseResultToState. TODAY'S RED, to be watched fail first: 'store 6 of 7 / DB 6 of 7' and return-npc -> {\"ok\":false,\"status\":\"failed\",\"reason\":\"npc_target_missing\"}. ⭐ HOW IT REACHES THE REAL STORE COMMIT WITHOUT THE LOADER STUB THE RECON NEEDED: vitest runs through Vite, so import.meta.env is defined and src/lib/supabase.js (the only module needing it) loads unchanged; vite.config.js:894-898 sets environment 'node' by default, which is all store logic needs. THE MODEL IS tests/store/wizardNewsCommitReconcile.test.js — a tests/store/** file importing a store helper directly. ⛔ Imports its opener from 'vitest' so the file is CREDITED (EM-B1e's failure mode); straight-line literal `it`s only; ⛔ never name a variable `it`, `test` or `describe`.",
+      "action": "CREATE",
+      "path": "tests/store/participationWriteBase.test.js"
+    },
+    {
+      "_note": "A3 + A5 — TWO new straight-line `it` in an existing CREDITED file (it imports { describe, it, expect } from 'vitest'). A3: a house whose SOLE member is shelved survives the tick — `crewed`, still in powerStructure.factions, NO faction_dissolved beat; the active-member control unchanged. Today's red: houses ['The Crown'], beats ['faction_dissolved']. A5 IS THE PACKET'S CHIEF BURDEN: the participation READS must be unchanged — a shelved person is still never cast, never travels, never ladder-eligible, never holds the war seat, and buildWorldSnapshot still returns the SAME settlement reference when nobody is off-stage. That arm exists because three movers (applyWorldPulseBetrayal:51, npcAgency:235, npcGrowthKernel:597) .map the update roster with an index and will iterate MORE people under a raw base; all three compute from worldState keyed by npcId rather than from position, so the expected effect is a refreshed mark rather than a miscomputation — PLAUSIBLE, and A5 is what proves it. ⛔ Do NOT widen the `.npcs` inventory ratchet here — that is EM-B1k2's (:308 gains src/domain/density, measured to convict exactly ONE new file, factionLifecycle.js).",
+      "action": "TEST",
+      "path": "tests/domain/roadsParticipation.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "⭐ THE SEAM. `settlement: localSettlements.get(String(item.id)) || item.settlement` at :184 is the WRITE BASE, born filtered; called ONCE, at :1506, on postTimeSnapshot (which is buildWorldSnapshot's output). PROVEN: grep -cF 'function buildSettlementMap' -> 1. POST-EDIT: HOLDS — the packet changes the body's one line and adds nothing.",
+      "path": "src/domain/worldPulse/pulseKernel.js",
+      "symbol": "function buildSettlementMap"
+    },
+    {
+      "_note": "THE RAW ROSTER, ALREADY ON THE ITEM — which is why cure (1) needs no new field. worldSnapshot.js:139-146 returns { id, save, name, settlement, … } and saveSettlement(save) is `save?.settlement || save` (:11-13). :127-129 is where the filtered object is minted; :131 returns the SAME reference when nobody is off-stage, which is the packet's dormancy proof. ⛔ THIS FILE IS NOT EDITED — it is an INPUT of both edge-shared bundles, and not touching it is why this packet owes no _shared rows. PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched).",
+      "path": "src/domain/worldPulse/worldSnapshot.js",
+      "symbol": "export function buildWorldSnapshot"
+    },
+    {
+      "_note": "⭐ THE MERGE RULE, ALREADY WRITTEN IN THE TREE, and the packet's contract is this algorithm verbatim in meaning: iterate the RAW roster; take the tick's version of each person by npcId when it has one, else the raw one. The roads lane wrote it because it had ALREADY been bitten by this defect — its comment at :1094-1096 says 'the update dropped an off-stage NPC roads must keep … so a hostage is never lost even under a naive save merge'. It is lane-local and doubly gated (roadsActive AND a spatial digest, :342-348), which is why it does not cure the estate: the DM reproduction loses the person with roadsEnabled:true as well as without. PROVEN: grep -cF 'const fullRoster' -> 1. POST-EDIT: HOLDS (untouched; it becomes redundant — §12.1 item 2).",
+      "path": "src/domain/worldPulse/roadsKernel.js",
+      "symbol": "const fullRoster"
+    },
+    {
+      "_note": "THE MERGE KEY. `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || 'npc_'+index)}` — id-first with a POSITIONAL FALLBACK that could mis-pair across two arrays of different length. Every generated NPC carries id and name (createNpc always sets both), so the fallback is unreached on real data — A4 pins that rather than assuming it. PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched).",
+      "path": "src/domain/worldPulse/npcAgency.js",
+      "symbol": "export function npcId"
+    },
+    {
+      "_note": "THE GUARD THAT WAS RIGHT ALL ALONG. factionRosterOf filters by isOnRoster (:117) and is consumed by factionDensityKernel's stillEmpty confirmation (:262) over `fresh`. ⭐ THE PACKET'S WHOLE CASE: give that confirmation a RAW base and it refuses the irreversible act by itself — measured, with the kernel unpatched. PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched; A3 proves it).",
+      "path": "src/domain/density/factionLifecycle.js",
+      "symbol": "export function factionRosterOf"
+    },
+    {
+      "_note": "THE WRITE-BACK the packet cures UPSTREAM rather than editing. :197 `let nextSettlement = update.settlement || save.settlement;` assigns WHOLESALE — no merge by id, no read-only guard, no changed-fields write-back anywhere on the path — landing at :232 (the store's save) and :243 (the DB payload, via persistSaveUpdate). A1 asserts through it. PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched).",
+      "path": "src/store/campaignPulseHelpers.js",
+      "symbol": "export function applyWorldPulseResultToState"
+    },
+    {
+      "_note": "THE DM'S OWN WRITER, which A1 drives so the reproduction is the shipped act and not a hand-set flag. :131 `npc.stasis = { reason: payload.reason }`, reached from the Availability select via queueEdit('stasis-npc'). The same export is used for the return-npc half of A1, which today refuses with npc_target_missing. PROVEN: grep -cF -> 1. POST-EDIT: HOLDS (untouched).",
+      "path": "src/store/settlementPendingEditWriters.js",
+      "symbol": "export function applyNpcOp"
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "⭐ NONE. The packet renames, moves and deletes no symbol; it replaces two lines inside one existing function body. Every requiredSymbols row above is verbatim-preserved after its own edits. MEASURED: no packet in the 190-entry register names any of these seven (path, symbol) pairs, so there is nothing to discharge.",
+  "_placementNote": "✓ FREE, MEASURED AT e5bdfd031: no non-terminal packet reserves src/domain/worldPulse/pulseKernel.js, tests/store/participationWriteBase.test.js or tests/domain/roadsParticipation.test.js; EM-B1k is not in the register (190 entries). The CREATE target tests/store/participationWriteBase.test.js is absent at the base.",
+  "acceptanceCases": [
+    { "id": "A1", "case": "⭐ THE DM'S OWN ACT, END TO END. A generated town; one NPC shelved through applyNpcOp('stasis-npc') — the shipped writer behind the Availability control, not a hand-set flag; one tick with commit:true through simulateCampaignWorldPulse; then the real applyWorldPulseResultToState. REQUIRED: the persisted roster holds ALL SEVEN in both state.savedSettlements[0].settlement.npcs and persistUpdates[0].settlement.npcs, and return-npc afterwards SUCCEEDS. ⛔ TODAY'S RED, to be watched fail before the fix: 'store 6 of 7 / DB 6 of 7' and return-npc -> {\"ok\":false,\"status\":\"failed\",\"reason\":\"npc_target_missing\"}." },
+    { "id": "A2", "case": "A ROADS HOSTAGE. ⚠ STATED AS A CONSTRUCTION, NOT A CLAIM THAT THE MOVER RAN: the real mover needs roadsActive AND a spatial digest AND a capture roll across several ticks, so the smallest lawful construction is used — the mover's OWN shape, whereabouts: { state:'hostage', placeId, purposeKind, sinceTick, expectedReturnTick, missionId } exactly as roadsKernel.js:1073 writes it — placed on the save, then one tick. REQUIRED: the hostage is in the persisted roster. TODAY'S RED: lost, 6 of 7." },
+    { "id": "A3", "case": "A SOLE-MEMBER HOUSE SURVIVES THE TICK. Its one member shelved; one tick. REQUIRED: the house reads `crewed`, is still in powerStructure.factions, and NO faction_dissolved beat fires; the control with an active member is unchanged. ⛔ TODAY'S RED: houses ['The Crown'], beats ['faction_dissolved']. THE POPULATION AT RISK, measured over the full 525-row golden corpus with the estate's own factionRosterOf: 1,608 of 3,378 factions (47.6%) hold exactly ONE rostered member, 147 of them governing, and 100% of settlements hold at least one." },
+    { "id": "A4", "case": "THE MERGE LOSES NOTHING, BOTH HALVES AT ONCE. A death during the tick AND an arrival during the tick, with an off-stage person present: the death IS persisted, the arrival IS persisted, and the off-stage person is ALSO present. ⛔ Includes the npcId fallback pin: every roster member carries `id` and `name`, so the positional fallback in npcId (`npc_${index}`) is unreached — asserted, not assumed, because that fallback could mis-pair across two arrays of different length." },
+    { "id": "A5", "case": "⛔ THE PARTICIPATION READS ARE UNCHANGED — THE PACKET'S CHIEF BURDEN AND ITS STOP. A shelved person is still never cast (rosterPersonAvailable), never travels (roadsKernel), never ladder-eligible (eligibleMembersOf), never holds the war seat (readWarSeatBooks reads `unseated`); and buildWorldSnapshot still returns the SAME settlement reference when nobody is off-stage (the dormancy/byte-identity proof). This arm exists because three movers .map the update roster with an index and will iterate more people under a raw base. If it reds, that is the packet's STOP, not a renegotiation." },
+    { "id": "A6", "case": "⛔ NOTHING MOVES, AND IT IS EXECUTED RATHER THAN ARGUED. generatorGoldenMaster, dossierProseManifest, the roads dormancy golden and the preset-lighting witness are bytewise unchanged. The justification is measured: NO fixture under tests/fixtures contains `stasis` or `whereabouts`; the preset witness contains none of stasis/hostage/jailed/exiled; and generation writes neither key (0 of 340 sampled NPCs). The cure can therefore only change worlds where the bug fires. Every one of those goldens is named in `checks`." },
+    { "id": "A7", "case": "THE CEILING HELD. src/domain/worldPulse/pulseKernel.js measures EXACTLY 1581 effective lines after the edit — the same figure as before — and tests/lint/sizeBaseline.test.js is green. Measured with eslint's own Linter (max-lines, skipBlankLines + skipComments) before and after, both quoted in the receipt. A different number is a STOP: the file sits at 1581/1581 with zero headroom and raising the baseline is a chair act." }
+  ],
+  "checks": [
+    ["npx", "eslint", "src/domain/worldPulse/pulseKernel.js", "tests/store/participationWriteBase.test.js", "tests/domain/roadsParticipation.test.js"],
+    ["npm", "run", "typecheck:ratchet"],
+    ["npm", "run", "typecheck:domain:strict"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/store/participationWriteBase.test.js", "tests/domain/roadsParticipation.test.js", "tests/domain/roadsState.test.js", "tests/domain/warSeatBooks.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/generators/densityLaw.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/property/generatorGoldenMaster.test.js", "tests/property/dossierProseManifest.test.js", "tests/property/roadsDormancyGolden.test.js", "tests/lint/sizeBaseline.test.js"],
+    ["npx", "vitest", "run", "--pool=threads", "--maxWorkers=2", "tests/domain/advanceWorkerByteIdentity.test.js"],
+    ["node", "scripts/check-observed-shape-readers.mjs"],
+    ["node", "scripts/check-writer-reach.mjs"],
+    ["node", "scripts/implementation-packets.mjs", "validate"]
+  ],
+  "_checksNote": "⛔ NO GENERATOR AMONG THEM, and that is measured rather than chosen: src/domain/worldPulse/pulseKernel.js is an INPUT of neither edge-shared bundle, so no `npm run build:edge-shared` is owed and pre-proof step 14a's ordering hazard (a generator mid-chain re-stamping declared paths) does not arise for this packet at all."
+}

@@ -1,0 +1,165 @@
+{
+  "id": "EM-R6",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-R6.md",
+  "verifiedBase": "__BASE__",
+  "changeManifest": [
+    {
+      "_note": "THE DECLARED DENOMINATOR AND THE CASCADE — 38 DECLARED ROWS (37 observed cascade paths), version 2 under the chair's R3. Copies src/domain/factionRename.js's architecture exactly: ONE frozen INSTITUTION_RENAME_SURFACES whose every row carries a `why` AND a `removal` rule, ONE frozen NON_CASCADED_SURFACES ledger of FIVE rows with a written reason each, an in-place apply that MUTATES the draft it is handed, and the minimal-clone immutable form. ⭐ THE THREE ROWS R3 RULED IN, each under the exact-match guard: spatialLayout.quarters[].landmarks[] (1,664 corpus matches; measured 1,604 of 1,664 = 96.4% are copies of an institution name written by spatialGenerator's `instNames` branches, 60 = 3.6% are fixed-table literals like 'Alehouse' in the quarter named 'Alehouse & Common'; the LIVE READER is districtProfile.inferInstitutions:392, which joins an institution to a quarter through this haystack, so a stale landmark un-homes the renamed house); {npcs[],factions[].members[]}.secondaryAffiliation (TWO observed paths, not one — it is stored at both homes; ALREADY a FACTION cascade row, and the measured corpus union is DISJOINT: 1,828 values = 708 institution-only + 658 faction-only + 462 neither + ZERO both, which is why sharing one field between two cascades is lawful and why the disjointness is an ARM of the walker); economicState.activeChains[].label (168 corpus matches; 14 of 14 sampled matches are that chain's own sole processor, so where the label equals an institution's name it IS that name shown to the DM on the Economics tab). ⭐ THREE SIMPLIFICATIONS AGAINST THE MODEL, EACH MEASURED: (1) an institution has ONE name spelling — 17,361 of 17,361 carry `name`, 0 carry `id`, 0 carry `localUid` — so NO dual-write and NO accessor, and factionRename's `nameOf` / FACTION-ACCESS LAW has no counterpart here and must not be invented; (2) NOT ONE of the 37 observed cascade paths is PROSE — every one is an exact-name key join, INCLUDING the three R3 added — so `substituteWholeWord` is NOT imported and the whole-word-boundary hazard class does not exist here; (3) the only runtime imports are `deepClone` and `NPC_HOMES`. ⛔ src/domain/clone.js IS in the generation worker's zero-slack closure (WORKER_BUNDLE_CEILING_BYTES=1401208) AND in 3 of the 5 edge-shared metas, and src/lib/narrativeMutations.js is in that worker closure too — IMPORTING clone.js adds no byte to it, MODIFYING either would owe the worker re-mint and seven generated _shared paths. ⛔ ONE MATCH RULE FOR ALL 38 ROWS: value.trim() === oldName, trimmed both sides, NOT case-folded (factionRename.js:388 verbatim). Its measured cost is declared and the chair has slotted it to FIX-D1: \"Thieves' Guild\" (88 occurrences at secondaryAffiliation) beside the catalogue institution \"Thieves' guild\" does NOT move, by design. ⭐ EFFECTIVE LINES MEASURED 219 of the 250 leaf cap (version 1 predicted '≈214' and UNDER-PRICED it: the chain-label walk and the NPC_HOMES import line were not in that estimate), with a counter proved 6/6 EXACT against scripts/.size-baseline.json. ⛔ THE SPLIT IS FORCED, NOT CHOSEN: one leaf measures 261 — OVER the cap. Minified 6,999 B.",
+      "action": "CREATE",
+      "path": "src/domain/institutionRename.js"
+    },
+    {
+      "_note": "THE REMOVAL SWEEP OVER THE SAME LIST (design §22.3 item 10, via §22.2 item 10: 'a removal owes the same cascade a rename does'). Imports the vocabulary, the surface list and EVERY primitive from the rename leaf — nothing is declared twice; that is what makes the split a seam rather than a fork. ⭐ FIVE REMOVAL KINDS, EACH THE RECORD'S OWN MEASURED ABSENCE SHAPE AND NEVER A NULL, ALL FIVE OBSERVED FIRING over 525 removals: DROP THE RECORD (institutions[].name); DROP THE ENTRY (availableServices.*[].institution, `institution` present on 25,628 of 25,628 so absence is not a shape this record carries; defenseProfile.institutions.*[].name, 1,690 of 1,690, the entry IS the institution; economicState.tradeDependencies[].institution, 2,444 of 2,444); DROP THE ITEM (the four processingInstitutions[] lists, linkedInstitutionIds[], and R3's landmarks[]); DELETE THE KEY (resourceAnalysis.gaps[].institution, already absent on 923 of 2,982; {npcs[],members[]}.institution, already absent on 4,874 of 5,171; corruptTies.*, parent already absent on 4,817 of 5,171; R3's secondaryAffiliation, already absent on 4,257 of 5,171); DELETE THE `dependency` OBJECT (already absent on 5,515 of 6,676 chains). ⛔ VERSION 1's FIRST DRAFT WROTE `null` AND THE CENSUS REFUTED IT: deleting returns the record to a shape it already carries; null would mint a NEW shape for every tolerant reader (textOrNull, `i?.id || i?.name`) to meet for the first time. ⭐ AND A SIXTH RULE R3(iii) FORCED — REPORT-ONLY: economicState.activeChains[].label is present on 6,676 of 6,676 chains, so a removal CANNOT delete it without minting a new shape; the label STANDS and the loss is carried by a second orphan note. ⭐ THE ORPHAN REPORT IS A CLOSED VOCABULARY OF TWO KINDS AND THE WRITER NEVER REFUSES (the chair's R6): 'chain-lost-its-last-processor' (measured 304 over 525 removals) and 'chain-label-names-a-removed-house' (measured 7 over 525, 4 of them on a chain that KEPT other processors). EM-PREAMBLE §P8 makes 'a guard would refuse rather than offer proceed' a STOP and design §2.7 makes guards suggestive, so a refusal here would break the preamble the packet is signed under; whether the DM is warned, offered a fulfilment or allowed to proceed is EM-C2's judgment. ⛔ Both literals and the key `orphaned:` are ABSENT from src/ and tests/ at the tip, so neither collides with an existing vocabulary. Effective lines measured 65 of the 250 cap; minified 2,088 B.",
+      "action": "CREATE",
+      "path": "src/domain/institutionRemoval.js"
+    },
+    {
+      "_note": "THE ACCEPTANCE — A1, A2, A3, A6, A7, A8. ONE literal `describe`, SIX straight-line `it`, no .each / runIf / nested describe (§P3.4 AND the brief's step 14b: a NEW test file registers straight-line literal `it`s under ONE literal `describe` or its promised `credited +1` lands as `parked +1`). Copies tests/domain/factionRename.test.js's describe('faction rename — the INDEPENDENT denominator') (:189). ⛔ EVERY FIXTURE IS A RELOADED SAVE, not a live settlement — that file's own header states why: at generation one NPC object is SHARED between settlement.npcs[] and settlement.factions[].members[], so an in-memory rename appears to move both homes and every in-memory probe agrees; serialization splits the alias and the member copies are the stale ones. Copy its reloaded() (:172). ⭐ A1 IS THE PREVENTION GUARD AND ITS DENOMINATOR IS INDEPENDENT: it walks the WHOLE blob for strings equal to a roster institution name and requires every shape found to appear in one of the two lists — it NEVER reads the module's declarations, because a probe map that names the same paths is a self-referential exam (the R-5 defect the faction pin was rebuilt to remove, which had reported a confident green over four reader-visible surfaces that never moved). ITS STRIDE AND ITS WALL-CLOCK, MEASURED: the 63-row structured sample (one row per settType × terrainOverride pair plus the 21 non-grid rows) costs 1,223 ms for 63 generations and yields 2,428 institutions across all six tiers — the sample the census recon proved reproduces the full 525-row classification exactly. ⓘ NO structured-sample helper exists in tests/ (the chair has slotted that to TOOL-4); the stride is built in the file from goldenCorpus() (tests/helpers/goldenMasterCorpus.js:76). Anti-vacuity floor FIRST: ≥40 shapes (measured 42) and ≥2,000 institutions. ⭐⭐ A1 ALSO CARRIES THE DISJOINTNESS ARM THE CHAIR ORDERED (R3 ii): no secondaryAffiliation value may be BOTH a roster institution name and a roster faction name — measured over the FULL 525-row corpus, 1,828 values = 708 institution-only + 658 faction-only + 462 neither + ZERO both. A field shared by two cascades is lawful only while their match sets are measured disjoint, so THE DAY ONE VALUE IS BOTH, THIS REDS and the chair rules it. Its own anti-vacuity floor: ≥1,000 values and ≥1 of each single-class kind. A2 renames the worst-case institution per row on a reloaded save: 4,227 handles before over 525 rows, ZERO still spelling the old name on ANY of the 38 declared rows, ZERO new dangling joins, residue only on the five declared NON_CASCADED paths (528 occurrences) — with a guard-the-guard asserting handlesBefore > 0 and changed === true BEFORE the staleness arm. ⭐ A3 IS A CONTROL PAIR, NOT AN ASSERTION: joined PER PERSON by the NPC's own id, a one-home walk leaves a disagreeing person in 44 of 63 rows and the two-home cascade leaves 0 of 63, over a baseline of 572 paired people with 0 disagreeing before any edit. ⛔ THE COMPARISON MUST BE PER PERSON: factions[].members[] is a strict SUBSET of npcs[] (39 npc-only, 0 member-only), so comparing the two lists wholesale reports a false 30/63 — this lane's own first measurement did exactly that and is corrected here so the build lane does not repeat it. Every negative carries `// anchored:` on the line immediately above (negativeAssertionAnchor.walker's SCAN_ROOTS=['tests'] covers this path). ⛔ THE BASENAME IS PART OF THE CONTRACT: it matches NONE of NAME_PATTERN's sixteen tokens (executed at the tip), so no mutation-coverage row is owed; renaming it to carry contract/census/walker/pin would silently create one.",
+      "action": "CREATE",
+      "path": "tests/domain/institutionRename.test.js"
+    },
+    {
+      "_note": "THE REMOVAL ACCEPTANCE — A4, A5 and the removal halves of A6 and A7. ONE literal `describe`, FOUR straight-line `it`, same discipline and the same reloaded() fixtures. ⭐ A4 IS THE DELTA-BY-KIND GATE AND IT MUST NOT BE AN ABSOLUTE (design §22.1 correction 6; §22 item 5): the record ALREADY carries dangling institution joins before any edit — measured over 525 rows, per settlement, thorp median 11 / hamlet 11 / village 8 / town 15 / city 23 / metropolis 18, concentrated in five paths (resourceAnalysis.resourceChains[].processingInstitutions[] 2,885 · economicState.activeChains[].processingInstitutions[] 2,525 · exploitation.fullyExploited 869 · partiallyExploited 699 · availableServices.criminal[].institution 421 — the chair has handed those five to FIX-D1). AN ABSOLUTE 'no dangling reference' GATE REDS ON ARRIVAL. The arm subtracts the record's own baseline and asserts ZERO NEW dangles OF ANY KIND — measured 0 over 525 removals. ⛔ THE DANGLE DENOMINATOR EXCLUDES R3's THREE ROWS BY CONSTRUCTION: landmarks[], secondaryAffiliation and activeChains[].label lawfully hold non-institution strings, so counting their non-matches as dangles would be a category error; the denominator is the 32 reference paths whose key name itself declares an institution reference. ⭐ ALL FIVE REMOVAL KINDS must be observed firing (measured: all five), or the arm is vacuous on a fixture whose institution carries only one kind of handle. A5 asserts the TWO-KIND orphan report and that the sweep COMPLETES in both cases: 304 'chain-lost-its-last-processor' and 7 'chain-label-names-a-removed-house' over 525 removals, with `changed` still true and no path left half-swept. ⭐ A6's removal half additionally asserts that the chain LABEL SURVIVES a removal (row 38's report-only rule) — the one place where doing nothing is the contract. ⓘ The basename matches none of NAME_PATTERN's tokens (executed at the tip).",
+      "action": "CREATE",
+      "path": "tests/domain/institutionRemoval.test.js"
+    },
+    {
+      "_note": "⭐ R2 — RULED BY THE CHAIR: TAKE IT. `NPC_HOMES = Object.freeze(['npcs[]', 'factions[].members[]'])` is declared `const` and NOT exported at :168, and its own header states the law this packet also lives under: 'a field added for one home can never be forgotten at the other'. Adding the one token `export` costs +1 effective line and gives the estate ONE declaration of the two homes for BOTH cascades; the new leaf imports it as INSTITUTION_HOMES. ⭐ POST-EDIT SIMULATION, EXECUTED AGAINST THE VALIDATOR ITSELF: requiredSymbols is asserted with `source.includes(row.symbol)` — a plain SUBSTRING check (scripts/implementation-packets.mjs:802) — so the verbatim text `const NPC_HOMES` SURVIVES inside `export const NPC_HOMES`. ⇒ NO retiredSymbols row is owed, here or anywhere, and no other packet's rows need discharging: the live 190-entry manifest at e5bdfd031 names src/domain/factionRename.js in NO changeManifest and in NO requiredSymbols, at any status. ⛔ NOTHING ELSE IN THIS FILE IS TOUCHED — it is the estate's faction and person rename writer, 388 effective of the 800 ceiling, and merging a third entity's cascade into it is an architecture change, not a budget cure (§11). ⛔ REGISTERS THAT ADDRESS BY LINE CANNOT FIRE: this file appears in NONE of the sixteen tests/lint/.*-baseline.json files (every grep -c → 0), so the prose-numerics exact-identity hazard (brief step 13) is structurally absent. ⛔ AND IT IS NOT A STAMPED FILE (brief step 15): docs/content/wiring-census.json's stamp.files holds SEVEN entries, all under src/domain/display/stateProse/, so proseWiringCensus.walker cannot red on stale-bytes and the census JSON is not a manifest row. ⚠ TWO STORE SUITES PIN THIS FILE's behaviour (tests/store/factionRenameConvergence.test.js, tests/store/settlementSlice.test.js) and both are in `checks` — an export token is inert, and the run proves it rather than asserting it.",
+      "action": "MODIFY",
+      "path": "src/domain/factionRename.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE FIRST OF THE DELIVERABLE'S TWO RUNTIME IMPORTS. `deepClone` is called by the minimal-clone immutable forms of both leaves, exactly as factionRenameChanges calls it, so a rename or a signature change there breaks this packet. ⛔ AND THE FILE IS A ZERO-SLACK NEIGHBOUR: src/domain/clone.js IS inside the generation worker's static closure (measured at e5bdfd031: 220 static / 228 static+dynamic modules from src/workers/generation.worker.js) whose ceiling WORKER_BUNDLE_CEILING_BYTES = 1401208 is EXACT with zero slack, and it is an INPUT of 3 of the 5 edge-shared metas (aiCharterBundle, aiGroundingBundle, aiOutputSchemaBundle). This packet IMPORTS it and never modifies it — importing adds no byte to it, which is why no worker re-mint and no _shared rebuild is owed. POST-EDIT SIMULATION: this file is NOT in the change manifest and no symbol moves — PRESENT after the build. Proven present at the tip: source.includes('export function deepClone') → true, count 1.",
+      "path": "src/domain/clone.js",
+      "symbol": "export function deepClone"
+    },
+    {
+      "_note": "⭐ THE SECOND RUNTIME IMPORT, AND THE PACKET'S ONE MODIFY (R2, RULED). `const NPC_HOMES` at src/domain/factionRename.js:168 is the estate's single declaration that a character is stored at BOTH settlement.npcs[] and settlement.factions[].members[], and this packet's cascade must write both or the member chip keeps the dead name on every reloaded save — the exact defect measured here at 44 of 63 rows by a one-home control, and cured at 0 of 63 by the two-home walk. ⭐ POST-EDIT SIMULATION, EXECUTED: the validator asserts requiredSymbols with `source.includes(row.symbol)` (scripts/implementation-packets.mjs:802), a plain substring check, so `const NPC_HOMES` is STILL PRESENT verbatim inside `export const NPC_HOMES` after the edit — PRESENT after the build, NO retiredSymbols row owed. Had the assertion been line-anchored, this would have been a retirement and every LANDED packet naming the same (path, symbol) pair would have needed discharging; measured at e5bdfd031, NO packet names this path at all. Proven present at the tip: source.includes('const NPC_HOMES') → true, count 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "const NPC_HOMES"
+    },
+    {
+      "_note": "THE ARCHITECTURE THIS PACKET COPIES, PINNED SO THE MODEL IS FINDABLE FROM THE MANIFEST RATHER THAN FROM PACKET PROSE. FACTION_RENAME_SURFACES (:241) is the shape every row of INSTITUTION_RENAME_SURFACES imitates — a frozen list, one stored path per row, a `why` per row, the NPC family spread across BOTH homes so the two cannot drift. Its sibling NON_CASCADED_SURFACES (:281) is the shape of this packet's five-row ledger, and two of its rulings are quoted verbatim as the reasons for two of those rows: `simulationTrace[].causes[].reason` ('the generation TRACE ... rewriting it would falsify the receipt') governs simulationTrace[].downstreamEffects[].target, and `economicState.safetyProfile.criminalInstitutions[]` ('a fixed vocabulary label ... naming an INSTITUTION rather than referring to the faction') governs resourceAnalysis.resourceConditions[].label. ⭐ IT IS ALSO THE PRECEDENT FOR R9: this very list declares `${ROSTER}.name`, a row that NEVER EXISTS ON GENERATED DATA (measured: powerStructure.factions[].name present on 0 of 3,378 records) and is kept because it heals divergent legacy records — exactly the reasoning under which this packet declares factions[].members[].linkedInstitutionIds[], observed 0 times while npcs[].linkedInstitutionIds[] is observed 25 times. POST-EDIT SIMULATION: R2's edit touches :168 only; this text at :241 is untouched — PRESENT after the build. Proven present at the tip: count 1.",
+      "path": "src/domain/factionRename.js",
+      "symbol": "export const FACTION_RENAME_SURFACES"
+    },
+    {
+      "_note": "THE ANCHOR, NAMED SO §3a's CONDITIONAL IS PROVABLE FROM THE MANIFEST AND SO THE FILE IS PINNED AGAINST BEING EDITED BY THIS PACKET. anchorForInstitution resolves cat:<catalogId> -> uid:<localUid> -> name:<slug>; measured over all 525 corpus rows, 15,278 institutions anchor `cat:` and 2,083 anchor `name:` with ZERO duplicate anchors over 17,361 records, so a rename MOVES the anchor for exactly the 12% — observed firing 5 times in 63 worst-case renames, every one of the `name:` class. ⛔ THIS PACKET DOES NOT EDIT THIS FILE and mints no catalogId: the re-stamp is owner-gated (a persisted key addition on institutions plus 417 of 525 golden rows) and is ODQ §934.59, on which the owner has not answered. THIS ROW IS WHAT MAKES §3a CUTTABLE: under the owner's YES the chair deletes §3a whole and this row stays, because the fact it pins is why nothing else moves; under NO the four anchorKey-keyed stores (mapEdits.pins[].anchor, mapEdits.sceneOverrides[].anchor, interiorEdits' object KEYS, fogSessions[].buildings[] — all INSIDE the settlement record, all ABSENT on 525 of 525 generated records by the dormancy law) become a THIRD leaf and the budget row changes. POST-EDIT SIMULATION: not in the change manifest — PRESENT after the build. Proven present at the tip: count 1.",
+      "path": "src/domain/townMap/anchors.js",
+      "symbol": "export function anchorForInstitution"
+    },
+    {
+      "_note": "THE PRODUCER THAT WROTE THE WARNING THIS PACKET ACTS ON. src/generators/factionRoles.js:245 stores `linkedInst.id || linkedInst.name` into an NPC's linkedInstitutionIds, and its own comment at :228-234 calls the name branch 'rename-sensitive' while explaining that `id ||` is kept 'so an id-bearing institution is never downgraded to a rename-sensitive label'. MEASURED: a generated institution has NO id (0 of 17,361), so the stored value is ALWAYS the name — 25 occurrences corpus-wide, on 287 of 5,171 NPCs. That is why npcs[].linkedInstitutionIds[] is a cascade row and why it is rewritten as a NAME LIST: an id can never equal a display name, so a MIXED list heals only its name-keyed half, which is precisely the half that dangles. The estate's institution join is src/domain/entities/propagate.js's instId = (i) => i?.id || i?.name (:330). POST-EDIT SIMULATION: not in the change manifest — PRESENT after the build. Proven present at the tip: the verbatim text occurs 4 times in this file (the validator asserts source.includes(symbol), so any count >= 1 satisfies it).",
+      "path": "src/generators/factionRoles.js",
+      "symbol": "linkedInstitutionIds"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE INDEPENDENT DENOMINATOR (the prevention guard), WITH THE DISJOINTNESS ARM. (i) A walk of the WHOLE settlement blob over the 63-row structured sample reports the path shape of every string exactly equal to a roster institution name, and EVERY shape must appear in INSTITUTION_RENAME_SURFACES or in NON_CASCADED_SURFACES. It never reads the module's own declarations — a probe map naming the same paths is a self-referential exam (the R-5 defect tests/domain/factionRename.test.js was rebuilt to remove, which had reported a confident green over four reader-visible surfaces that never moved). THE STRIDE AND ITS WALL-CLOCK, MEASURED: 63 rows (one per settType × terrainOverride pair plus the 21 non-grid rows — the sample the census recon proved reproduces the full 525-row classification exactly), 1,223 ms for 63 generations, 2,428 institutions, all six tiers. ANTI-VACUITY FIRST: >=40 distinct shapes (measured 42) and >=2,000 institutions, so an empty green cannot be mistaken for a clean one. A NEW stored field that starts holding an institution name reds this arm instead of hiding behind an un-probed path. (ii) THE DISJOINTNESS ARM (the chair's R3 ii): no secondaryAffiliation value may be BOTH a roster institution name and a roster faction name. Measured over the FULL 525-row corpus: 1,828 values = 708 institution-only + 658 faction-only + 462 neither + ZERO both. This path is cascaded by TWO writers (the faction cascade already owns it), which is lawful only while their match sets are measured disjoint — so the day one value is both, this arm reds and the chair rules it rather than one cascade silently rewriting the other's link. Its own anti-vacuity floor: >=1,000 values and >=1 of each single-class kind."
+    },
+    {
+      "id": "A2",
+      "case": "THE RENAME IS TOTAL ON REAL PIPELINE DATA — the packet's central claim, executed. For each row of the stride, on a RELOADED save, rename the institution carrying the most cascade-row handles. Measured over 525 rows: 4,227 handles before; ZERO still spelling the old name on ANY of the 38 declared rows; ZERO new dangling joins. The only residue is on the five declared NON_CASCADED paths (528 occurrences: downstreamEffects[].target 468, resourceConditions[].label 48, activeChains[].resource 12), every one accounted for by name. GUARD-THE-GUARD: assert handlesBefore > 0 and changed === true BEFORE the staleness assertion, so the arm cannot pass on a fixture holding no handles. The defect this replaces is captured at §8 step 1 BEFORE the fix exists: today the same rename leaves every one of those handles stale and nothing throws and nothing is logged."
+    },
+    {
+      "id": "A3",
+      "case": "THE MEMBER MIRROR — proved by a CONTROL PAIR rather than asserted. Joined PER PERSON by the NPC's own id, on a reloaded save: (i) the baseline — 572 paired people, ZERO disagreeing before any edit; (ii) THE NEGATIVE CONTROL — a one-home walk (npcs[] only) leaves a disagreeing person in 44 of 63 rows; (iii) the cascade's two-home walk leaves 0 of 63. The control is required, not optional: without it 'both homes agree' is also true of a fixture where neither moved. THE JOIN MUST BE PER PERSON: factions[].members[] is a strict SUBSET of npcs[] (39 npc-only people, 0 member-only), so comparing the two lists wholesale reports a false 30/63 disagreement before any edit at all. AND THE COMPOSITION THIS PROVES: design §22.2 item 7 classes the member list as a MIRROR that is RECOMPUTED after a merge — but §22.1 ruling 7 rules that a rename never goes through re-derivation, so no recompute runs for a rename and the cascade itself is the only thing that can heal the chip. Writing both homes makes any later recompute a no-op rather than a second answer."
+    },
+    {
+      "id": "A4",
+      "case": "THE REMOVAL SWEEPS THE SAME LIST — the DELTA-BY-KIND gate. Removing the worst-case institution adds ZERO new dangling joins OF ANY KIND, measured against the record's OWN pre-existing baseline and never as an absolute (design §22.1 correction 6). The baseline is real and large: over 525 rows the pre-existing strict dangles per settlement run thorp median 11, hamlet 11, village 8, town 15, city 23, metropolis 18, concentrated in five paths (resourceChains processingInstitutions 2,885; activeChains processingInstitutions 2,525; exploitation fullyExploited 869 and partiallyExploited 699; availableServices.criminal[].institution 421) — an ABSOLUTE gate reds on arrival. THE DANGLE DENOMINATOR EXCLUDES R3's THREE ROWS BY CONSTRUCTION: landmarks[], secondaryAffiliation and activeChains[].label lawfully hold non-institution strings, so counting their non-matches as dangles would be a category error. ALL FIVE removal kinds (DROP THE RECORD, DROP THE ENTRY, DROP THE ITEM, DELETE THE KEY, DELETE THE dependency OBJECT) must be observed firing — measured, all five — or the arm is vacuous on a fixture whose institution carries only one kind of handle."
+    },
+    {
+      "id": "A5",
+      "case": "THE ORPHAN REPORT IS A REPORT, NOT A REFUSAL — AND IT HAS TWO KINDS (the chair's R6). (i) A chain whose LAST processor is the removed house is reported as { kind: 'chain-lost-its-last-processor', path, chainId } — measured 304 over 525 removals. (ii) A chain whose label names the removed house is reported as { kind: 'chain-label-names-a-removed-house', path, chainId } AND THE LABEL IS NOT DELETED — the label is present on 6,676 of 6,676 chains, so deleting it would mint a shape no generated record carries — measured 7 over 525 removals, 4 of them on a chain that KEPT other processors, so the stale label is a real reader-visible fact and not merely a consequence of the chain emptying. THE SWEEP COMPLETES IN BOTH CASES: EM-PREAMBLE §P8 makes 'a guard would refuse rather than offer proceed' a STOP and design §2.7 makes guards suggestive, so a refusal inside this writer would break the preamble the packet is signed under. Whether the DM is warned, offered a fulfilment or allowed to proceed is the guard engine's judgment (EM-C2), and recordInvariants (EM-R0b) is the gate design §22.3 item 10 names. Asserted with its negative: the sweep's `changed` is still true and no path is left half-swept. OrphanKind is a CLOSED VOCABULARY OF TWO; both literals are absent from src/ and tests/ at the tip."
+    },
+    {
+      "id": "A6",
+      "case": "WHAT IT MUST NOT TOUCH. A sibling institution keeps its name. Every declared NON_CASCADED path is BYTE-IDENTICAL before and after, asserted by name — the two receipts especially (simulationTrace[].downstreamEffects[].target, which is the ruling simulationTrace[].causes[].reason already carries, and generationCoherenceReceipt.repairs[].subject, which design §22.3 item 1 classes as HISTORY by path: never merged, never recomputed, THE PROMISE). NO RECORD GAINS A KEY IT DID NOT CARRY (deep key-set equality on every touched record — the cascade never mints a spelling and never mints a parent). AND THE CHAIN LABEL SURVIVES A REMOVAL (row 38's report-only rule) — the one place in this packet where doing nothing is the contract, asserted directly rather than left to the absence of an assertion. A no-op rename (oldName === newName, an unknown name, an empty name) reports changed: false, touched: [] and mutates nothing. Every negative carries `// anchored:` on the line immediately above."
+    },
+    {
+      "id": "A7",
+      "case": "THE IMMUTABLE FORMS. institutionRenameChanges and institutionRemovalChanges return ONLY the touched top-level buckets, deep-cloned and ready to spread; they never mutate their input (deep-equal against a pre-call clone, plus not.toBe on every returned bucket); they carry the SAME touched set as the in-place forms on the same fixture; and the removal form carries the SAME orphaned notes. This is the factionRenameChanges contract and the library lane's shape: a rename must never deep-copy the whole settlement."
+    },
+    {
+      "id": "A8",
+      "case": "GOLDEN POSTURE UNCHANGED. tests/property/generatorGoldenMaster.test.js and tests/property/dossierProseManifest.test.js are bytewise unchanged, asserted as the fixture digests before and at the tip. Free by construction — the packet adds two pure functions that nobody calls and mints no persisted key — and executed anyway, because EM-PREAMBLE §P3.1 makes any motion of either a STOP across the whole EM train."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/institutionRename.test.js",
+      "tests/domain/institutionRemoval.test.js",
+      "tests/domain/factionRename.test.js",
+      "tests/domain/npcRename.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/store/factionRenameConvergence.test.js",
+      "tests/store/settlementSlice.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/institutionRename.js",
+      "src/domain/institutionRemoval.js",
+      "src/domain/factionRename.js",
+      "tests/domain/institutionRename.test.js",
+      "tests/domain/institutionRemoval.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/check-writer-reach.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

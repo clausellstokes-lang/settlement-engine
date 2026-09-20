@@ -1,0 +1,142 @@
+{
+  "id": "EM-A2b",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-A2b.md",
+  "verifiedBase": "d31af2ceebf643818201b2e2ab4a556765d2fc7c",
+  "changeManifest": [
+    {
+      "_note": "THE SEVEN WORLD-DERIVED POOLS, appended to EM-A2a's POOLS. name.settlement and name.npc read world.namingData PASSED IN — src/data/namingData.js (4,038 lines / ~68.6 kB) is imported NOWHERE, exactly as src/domain/npc/npcOps.js:218 instantNpc({ seed, namingData }) does and exactly as src/domain/townCartography/cartographyWards.js:19-21 records the estate refusing that import into a bounded leaf. npc.role reads the world's institutions; deity reads pantheonStandings(world) and holds no premade list (the deity doctrine is constitutional: faith is culture, never theology). worldFact.resources reads getCompatibleResources(route, terrain) at its canonical home and maps to .key NEVER .label — a label is a display string and a pool is a fact set, which is the display-seam mistake §12.7 forbids arriving by a different door. worldFact.goods reads GOODS_CATEGORIES (7); worldFact.services reads INSTITUTION_SERVICES (285) at src/data/institutionServices.js, not the tradeGoodsData.js re-export. ⭐ THE BLOCK IS RESOLVED BY EM-P3, WHICH THIS PACKET NOW DEPENDS ON. The lane compiled this row BLOCKED on the measured contradiction (§2): the wizard's six options live only as JSX <option> literals in ConfigurationPanel.jsx, the generator's TERRAIN_ROUTE_POOLS is a module-PRIVATE const, and the two sets DISAGREE (the wizard offers mountain_pass; the generator rolls it never). EM-P3 (placed by the chair at e02bf0f26) reaches the SAME finding independently — its P-4: 'TRADE ACCESS HAS NO CANONICAL LIST ANYWHERE … This is a MINT, not a move' — and mints src/data/worldFactOptions.js#TRADE_ACCESS with a domain re-export, so this pool reads that one home. ≈97 effective; the COMBINED pools.js after A2a + A2b estimates ≈244 of 250, and EM-A2c (the three route/terrain-gated rows) is pre-declared as the next split if it measures over. Changes no A2a row, no signature and no stream key.",
+      "action": "MODIFY",
+      "path": "src/domain/edit/pools.js"
+    },
+    {
+      "_note": "SEVEN ARMS (B1-B7) APPENDED to EM-A2a's single literal describe — straight-line `it`, no .each / runIf / nested describe (§P3.4). B1 re-asserts A2a's TEN ids so a row dropped by either packet reds here (POOLS must hold exactly SEVENTEEN: A2a's ten plus these seven). B3 is the load-bearing one: a namingData bag carrying ONE INVENTED PREFIX must produce a name containing it, proving the pool draws from the SUPPLIED bag and never reaches for the real table behind the caller's back — and a source scan proves namingData.js, npcGenerator.js and every .jsx are absent from the import list. B4 pins worldFact.resources to getCompatibleResources(...).map(r => r.key) — exactly 33 at ('port','coastal') — and asserts the pool holds NO .label value. B5 proves the resource gate is LIVE, not inherited, by a non-empty symmetric difference between two route/terrain pairs. B6 re-asserts the no-draw law across all seventeen pools. B7 is the deity doctrine: the world's own ids, [] for a world with none, and no premade deity array anywhere in the module. worldFact.tradeAccess reads EM-P3's minted TRADE_ACCESS through its domain re-export; the lane's own BLOCK on it is resolved by that packet. Every negative carries its `// anchored:` marker on the line immediately above it.",
+      "action": "MODIFY",
+      "path": "tests/domain/editPools.test.js"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "THE GENERATOR'S OWN NAME TABLE — the DATA behind the name generator, since no seedable name-generator EXPORT exists: generateSettlementName draws on the ambient fail-closed rngContext and pickFirst is module-private, so the charter's 'names from the culture's generator' was refuted and the chair ruled (4) the instantNpc shape instead. MEASURED: 11 culture keys, all 11 carrying maleNames + femaleNames + surnames, plus settlementPrefixes / settlementSuffixes. Named here because the pool's values must remain derivable from it even though pools.js never imports it — the caller passes the culture's entry. Proven present: grep -c -> 1.",
+      "path": "src/data/namingData.js",
+      "symbol": "export const NAMING_DATA"
+    },
+    {
+      "_note": "THE PRECEDENT THE CHAIR RULED (4), and the reason the refuted name-generator premise is a substitution rather than an invention: a src/domain leaf that seeds its own stream with a ROOT composition and takes the culture bag as a PARAMETER (pickFromNaming(rng, cultureData, gender)), touching neither the ambient context nor the 68.6 kB table. If this disappears, the packet's shape has lost its ground. Proven present: grep -c -> 2 (the export plus one JSDoc reference).",
+      "path": "src/domain/npc/npcOps.js",
+      "symbol": "export function instantNpc"
+    },
+    {
+      "_note": "⛔ THE REFUTED EXPORT, named so the refutation is findable from the manifest rather than re-discovered. MEASURED: (r = 'germanic') => string, whose body reads _rng() = `random` imported from src/kernel/rngContext.js at line 16 — the ambient module-level context, which THROWS with no active seeded RNG (rngContext.js:70-80) and CONSUMES A WORLD DRAW with one. Called nowhere by this packet. Proven present: grep -c 'export const generateSettlementName' -> 1.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateSettlementName"
+    },
+    {
+      "_note": "THE PANTHEON READER, and the deity doctrine's structural guarantee: it returns the WORLD's own deity ids (sorted descending seats then codepoint id) and [] when the pantheon is dormant or absent, so the deity pool can hold no premade list — the constitutional line that faith is culture and never theology. Signature (worldState) -> Array<{ id, seats, wins, losses, tier, fromMajor }>. Proven present: grep -c -> 1.",
+      "path": "src/domain/display/pantheonDepth.js",
+      "symbol": "export function pantheonStandings"
+    },
+    {
+      "_note": "THE WIZARD'S RESOURCE SET, gated by route and terrain — the canonical home, which src/generators/terrainHelpers.js:12 re-exports and which is what the wizard's own panel imports. MEASURED BY LIVE IMPORT: getCompatibleResources('port','coastal') returns an ARRAY OF 33 OBJECTS, each carrying { key, label, desc, commodities, ... }. The pool maps to .key, never .label. Proven present: grep -c 'export const getCompatibleResources' -> 1.",
+      "path": "src/domain/resourceTerrainCompatibility.js",
+      "symbol": "export const getCompatibleResources"
+    },
+    {
+      "_note": "THE GOODS CATEGORY VOCABULARY the wizard's goods toggles are keyed on. MEASURED: 7 keys — AGRICULTURAL, RAW_MATERIALS, MANUFACTURED, LUXURY, SERVICES, FOOD_PROCESSED, TRADE. Proven present: grep -c -> 1.",
+      "path": "src/data/tradeGoodsData.js",
+      "symbol": "export const GOODS_CATEGORIES"
+    },
+    {
+      "_note": "THE SERVICES VOCABULARY, read at its SOURCE module rather than the tradeGoodsData.js re-export at :138 — one truth, one home. MEASURED: 285 keys. ⚠ 285 is the vocabulary's true size, not an error; it is a drop-down question for EM-D2's PoolField (search rather than a menu) and is raised, not solved here. Proven present: grep -c -> 1.",
+      "path": "src/data/institutionServices.js",
+      "symbol": "export const INSTITUTION_SERVICES"
+    },
+    {
+      "_note": "THE ESTATE'S ONE SANCTIONED STRING ORDER, locale-free by construction. All seven appended pools sort through it. Proven present: grep -c -> 1.",
+      "path": "src/domain/deterministicSort.js",
+      "symbol": "export const compareCodepoint"
+    }
+  ],
+  "acceptanceCases": [
+    {
+      "id": "B1",
+      "case": "MAIN AND GUARD-THE-GUARD, WITH EM-A2a's TOTALITY RE-ASSERTED: POOLS now holds exactly SEVENTEEN ids — A2a's ten plus these seven — set-equal both directions with a full offender list, so a row dropped by either packet reds here. Every new pool returns a frozen, duplicate-free string[] on a real world, asserted before any negative below."
+    },
+    {
+      "id": "B2",
+      "case": "ABSENCE IS THE TYPED VALUE. A world with no namingData yields [] for both name pools; a world with no pantheon yields [] for deity; a world with no institutions yields [] for npc.role; null, undefined and {} never throw for any of the seven. Each absence is anchored against a populated control in the same arm."
+    },
+    {
+      "id": "B3",
+      "case": "THE PASSED-IN BAG, AND THE IMPORT FENCE (the counterforce). A namingData bag carrying ONE INVENTED PREFIX produces a name.settlement value containing it — proving the pool draws from the SUPPLIED bag and never reaches for the real table behind the caller's back. A source scan proves pools.js imports neither src/data/namingData.js nor src/generators/npcGenerator.js nor any .jsx, with the matcher proved live on a planted string."
+    },
+    {
+      "id": "B4",
+      "case": "SOURCES READ AT THEIR CANONICAL HOMES. worldFact.goods set-equals Object.keys(GOODS_CATEGORIES) (7); worldFact.services set-equals Object.keys(INSTITUTION_SERVICES) (285) read from src/data/institutionServices.js, NOT the tradeGoodsData.js re-export; worldFact.resources at ('port','coastal') set-equals getCompatibleResources('port','coastal').map(r => r.key) — exactly 33 — and is asserted to hold NO .label value, which is what keeps a display string out of a fact pool."
+    },
+    {
+      "id": "B5",
+      "case": "BOUNDARY — THE RESOURCE GATE IS LIVE, NOT INHERITED. worldFact.resources differs between ('port','coastal') and ('isolated','desert'), asserted as a non-empty symmetric difference so the gate is proved to fire rather than returning one fixed list. An absent route/terrain falls back to ('road', null) and still returns a non-empty frozen array."
+    },
+    {
+      "id": "B6",
+      "case": "DETERMINISM ACROSS THE COMBINED SET. rollFrom on each of the seven returns the same value on repeat calls (toBe); roll 3 taken alone equals roll 3 taken in sequence (the reopen guarantee); different entryIds differ for at least one pool. And the no-draw law re-asserted across ALL SEVENTEEN pools: with an ambient RNG active, fifty rollFrom calls leave the next ambient draw equal to the pre-recorded value."
+    },
+    {
+      "id": "B7",
+      "case": "THE DEITY DOCTRINE. deity returns exactly the world's own pantheon ids for a three-deity world and [] for a world with none; a source scan finds NO premade deity-name array anywhere in the module — faith is culture, never theology. Anchored by the populated case asserted first."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/editPools.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/dossierProseManifest.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/negativeAssertionAnchor.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/domain/edit/pools.js",
+      "tests/domain/editPools.test.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ]
+  ]
+}

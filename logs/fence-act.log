@@ -1,0 +1,16 @@
+added 588 packages in 6s
+== tip cdf6555f6 clean=0
+== FENCE DOOR ACT 04:47:58
+measured  0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430
+expected  0d5dac61460956399f7a787d8dae6db93a2bddfdb870883ba958125342fbe430
+moved     346 of 360
+
+REFUSED: the record's `cause` does not open with a shouted title clause, so this runner cannot take a heading from it. Give the cause a leading capitalised clause, or write the paragraph by hand — it will not be guessed.
+
+== changed:
+== fence plain receipt
+     × THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus 10951ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  1 failed | 20 passed (21)
+== done 04:48:53

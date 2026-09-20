@@ -1,0 +1,278 @@
+{
+  "id": "EM-P1",
+  "status": "DRAFT",
+  "packetPath": "docs/implementation/packets/settlement-editor/EM-P1.md",
+  "verifiedBase": "58fcfe61458b784b0470b854caf916b7c2961edf",
+  "_baseNote": "PRE-PROOF version 2. Re-measured at the read tip 58fcfe614 (2026-09-19 ~18:2x EDT). ⚠ THE CHAIR RE-STAMPS THIS AT PROMOTION from the live branch tip — 58fcfe614 is the tree this lane could read, and the build branch has since gained docs commits, packet placements and EM-B1e's calamityKernel landing. The revalidation sentence is in the packet header under __BASE__.",
+  "changeManifest": [
+    {
+      "_note": "⛔⛔ THE NPC MINT, AT NET ZERO EFFECTIVE LINES. `npc.id = `npc_${idx + 1}`` makes an NPC's identity its ARRAY INDEX; it is replaced one-line-for-one-line by a mint in the step's own DRAW ORDER. MEASURED AT 58fcfe614: 1345 effective against a FROZEN scripts/.size-baseline.json entry of 1345 — ZERO HEADROOM. ⚠ PRE-PROOF CORRECTION: the replaced text `npc.id = `npc_${idx + 1}`;` is a requiredSymbols row in version 1 and the packet DELETES it — see retiredSymbols and P1-E8. ⚠ PRE-PROOF FINDING: this is a VALUE change on an EXISTING key (npc_1 -> npc:1), not a key addition, and `npcAgency.npcId` reads `npc?.id ||` first, so every world-pulse ledger key for a NEW world moves with it (P1-E10).",
+      "action": "MODIFY",
+      "path": "src/generators/npcGenerator.js"
+    },
+    {
+      "_note": "THE INSTITUTION MINT. There is NO general institution id today — the only `id:` in the file is `repair.${n}` — and identity is the DISPLAY NAME (institutions.find(i => i.name === instName), 2 sites). `inst:<n>` is minted once per admitted row in admission order, before any sort. 571 effective against the 800 generator ceiling. ⚠ IN THE ZERO-SLACK GENERATION WORKER (1,401,208 B): this +25 eff carries a worker re-mint obligation. Stated bound 240 B (an estimate of the minified growth x2, NOT a measurement — this lane may not build).",
+      "action": "MODIFY",
+      "path": "src/generators/steps/assembleInstitutions.js"
+    },
+    {
+      "_note": "⛔⛔ BLOCKED ROW — THE PREMISE IS REFUTED AND ONLY THE CHAIR MAY RE-CUT IT (P1-E9). densityAscension.js is NOT a generation step: it is the SIMULATION-time seat-ascension planner (§810.6 R21) that materialises ONE house, so `fac:<n> in draw order` is not expressible there (no collection, no <n>); its id is byte-shared with mutateEntities.js:407's ADD_FACTION co-mint (factionDensityKernel.js:114-115 records the one-polity-two-ids bug that divergence caused); and those ids are written into event chains that REPLAY, which is lived history. MEASURED: generated factions carry NO id at all — src/generators/power/factionGrouping.js pushes {name, members, dominantCategory} and SORTS at the end, and src/domain/factionRefs.js states the estate's doctrine that faction handles are name-derived 'pending the governed ID-only migration'. THE CHAIR'S CHOICE: (a) re-point this row to src/generators/power/factionGrouping.js (72 raw lines, the only site where 'mint in draw order, before any sort' is both meaningful and available) and leave densityAscension/ADD_FACTION alone; or (b) split the faction half into its own packet. NOT DECIDED HERE.",
+      "action": "MODIFY",
+      "path": "src/generators/density/densityAscension.js"
+    },
+    {
+      "_note": "THE UNCONDITIONAL v3 MIGRATION. migrateSaveToV2 (:190) runs on EVERY read AND write path (:331, :443, :503, :684, :713, :743, :775, :850) — re-confirmed at 58fcfe614. The v3 arm back-fills missing ids in STORED ARRAY ORDER, keeps present ones, and leaves a foreign id ALONE. ⛔ NO FLAG, NO ENV READ, NO CONDITIONAL. ⛔ It does NOT bump SCHEMA_VERSION and does NOT append to the MIGRATIONS chain. ⛔ PRE-PROOF: the function NAME `migrateSaveToV2` is a requiredSymbols row asserted verbatim at every status — it must NOT be renamed to migrateSaveToV3 (P1-E8). 619 effective, ceiling 800, no baseline entry. NOT in any worker bundle (20 importers, all components/store).",
+      "action": "MODIFY",
+      "path": "src/lib/saves.js"
+    },
+    {
+      "_note": "THE IDENTITY BATTERY — A1–A8. A3 and A4 are the defect's direct negative controls. A5 is the no-draw proof. A7 is the ungated-persistence source scan. A8 pins both the foreign-id rule and §6's recorded asymmetry. Copies tests/domain/settlementMigrations.test.js's idempotency, purity and nullish arms; flat literal it(...) only (EM-PREAMBLE §P3.4). ⚠ A5's wording must be re-cut with §6's cause sentence (P1-E10): for NPCs this is a VALUE change on an existing key, so 'compared field by field except the NEW id keys' does not express it.",
+      "action": "CREATE",
+      "path": "tests/domain/entityIdentity.test.js"
+    },
+    {
+      "_note": "⚠ CONDITIONAL ROW — add it ONLY IF enumerateInvariants picks the file. tests/domain is not one of the ENFORCER_DIRS and `entityIdentity` matches no NAME_PATTERN token, so measured, the meta-test does NOT demand a row. ⛔ ANCHOR ON KEY NAMES, NEVER A LINE NUMBER: this file already gained EM-P0's `tests/generators/pipelinePinnedMode.test.js` row in the J-T1 window, and EM-B1d v5 and EM-B3c v2 will both have inserted rows before this packet builds.",
+      "action": "REGISTER",
+      "path": "scripts/mutation-coverage-manifest.json"
+    },
+    {
+      "_note": "THE LIGHTING CENSUS RE-FREEZE, caused by the one new TEST file. LIGHTING_CENSUS_REFREEZE='EM-P1'. ⚠ PRE-PROOF: EM-P0 ALREADY TOOK the tuple this packet predicted. Live baseline at 58fcfe614 is files 2646 / parked 383 / credited 2263 / titles 25005 / suiteTitles 6671 (measuredBy EM-P0), so EM-P1's delta is +1 file / +0 parked / +1 credited FROM THERE = 2647 / 383 / 2264, with the two title figures stamped by the chair at promotion from the live baseline.",
+      "action": "REGISTER",
+      "path": "tests/lint/.lighting-census-baseline.json"
+    },
+    {
+      "_note": "⭐⭐ THE REGISTER MOVE VERSION 1 SAID WOULD NOT HAPPEN (P1-E14). The observed-shape register's whole subject is a reader asking for a key NO WRITER PRODUCES, and its founding examples are `.id` on a RulingFaction and the recorded faction-key-defect-class. MEASURED against scripts/.observed-shape-readers-baseline.json: 33 findings / 53 multiplicity / 28 files are exactly `id on factions` or `id on institutions`; `id on npcs` appears ZERO times because NPCs already carry an id. Minting the writers CLEARS them, so the frozen inventory SHRINKS. A shrink is a plain `--write` re-freeze, NOT the migration-bundle mint door. ⚠ The exact post-edit figure is measured by the build lane and stamped then; 33/53/28 is the pre-edit ceiling this shrink may not exceed.",
+      "action": "REGISTER",
+      "path": "scripts/.observed-shape-readers-baseline.json"
+    },
+    {
+      "_note": "⛔ THE CHAIR'S ACT, NOT THE BUILD LANE'S, and a change-manifest row because the door WRITES it (brief step 11). Re-recorded ONCE through tests/helpers/goldenRecordDoor.js under a signed shift record. 525 rows, predictedRows 525 (the key set does not change; only the hashes do).",
+      "action": "REGISTER",
+      "path": "tests/fixtures/generator-golden-master.json"
+    },
+    {
+      "_note": "⛔ THE CHAIR'S ACT. recordGolden writes the fixture AND the register row ATOMICALLY in one act, so the register is a written path whenever any surface moves. It is also the door's own authority file — an unregistered surface is refused with SURFACE_NOT_REGISTERED.",
+      "action": "REGISTER",
+      "path": "tests/fixtures/.golden-freeze-register.json"
+    },
+    {
+      "_note": "⛔ THE CHAIR'S ACT, and the reason the packet's §6/§10 command is stale: `UPDATE_GOLDEN=1` ALONE IS NOW REFUSED (REFUSALS.NO_SIGNATURE). GOLDEN_SHIFT_SIGNED must NAME this file, and the door reads and verifies its CONTENT: ownerWords verbatim, ownerDate YYYY-MM-DD, odqRow beginning §, ONE cause, seat, and per-surface {action, predictedRows, proofForm}. ⭐ ONE CAUSE PER RECORD IS THE LAW, so EM-P1 and FIX-G1 are TWO records and TWO Owner-Signed commits — they may share a sitting but not a record, and the first must be COMMITTED before the second runs or the door reds DIRTY_TREE. The filename is the chair's; this row reserves the path shape.",
+      "action": "CREATE",
+      "path": "docs/shift-records/2026-09-19-em-p1-stable-identity.json"
+    }
+  ],
+  "requiredSymbols": [
+    {
+      "_note": "The sole npc roster writer and the mint's host. SURVIVES the edit (the mint is placed inside it), so it is the anchor that replaces the deleted defect row.",
+      "path": "src/generators/npcGenerator.js",
+      "symbol": "export const generateNPCs = ("
+    },
+    {
+      "_note": "⛔ THE DEFECT, INSTITUTION HALF: identity is the DISPLAY NAME, and a name is a free-cascade field the DM may change. PRESERVED by this packet — EM-P1b re-points the readers — so it is a legitimate requiredSymbols row (2 occurrences at the tip).",
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "institutions.find(i => i.name === instName)"
+    },
+    {
+      "_note": "The institution roster's producing step — the mint's host and the admission order it numbers in. UNCHANGED.",
+      "path": "src/generators/steps/assembleInstitutions.js",
+      "symbol": "provides: ['institutions', 'catalogForTier', 'generationRepairs']"
+    },
+    {
+      "_note": "⛔⛔ THE MEASURED TRUE FACTION SITE (P1-E9). Generated factions carry NO id: this function pushes {name, members, dominantCategory} and SORTS at the end, which is the only place in the estate where 'mint in draw order, BEFORE any sort' is both meaningful and available. Named here whether or not the chair re-points the MODIFY row, so it cannot be re-found as new.",
+      "path": "src/generators/power/factionGrouping.js",
+      "symbol": "export const generateFactions = (npcs, relationships) => {"
+    },
+    {
+      "_note": "⛔ THE PERSISTED, ID-FIRST FACTION HANDLE — the seam that makes this packet a VALUE change rather than a key addition. `refText(faction?.id) || factionDisplayNameOf(faction)`: today every generated faction resolves to its NAME; the moment an id exists, all 9 call sites and the PERSISTED linkedFactionIds values flip to it. NOT EDITED by this packet; named so the flip is declared and not discovered.",
+      "path": "src/domain/factionRefs.js",
+      "symbol": "export function factionRefOf(faction) {"
+    },
+    {
+      "_note": "⛔ THE SAME SEAM ON THE NPC SIDE. The world-pulse's canonical NPC key takes `npc?.id` FIRST, so changing the npc id spelling moves every ledger key for a newly generated world. NOT EDITED; named so the dormancy-golden measurement has a declared cause.",
+      "path": "src/domain/worldPulse/npcAgency.js",
+      "symbol": "export function npcId(saveId, npc, index) {"
+    },
+    {
+      "_note": "⭐ THE FACT THAT MAKES AN ID A FACT OF THE SEED: each step draws from a stream forked by its NAME. NOT EDITED. ⚠ EM-P0 has LANDED since the compile and this line now sits below the partial-pin refusal; the symbol itself is unmoved (grep -cF = 1 at 58fcfe614).",
+      "path": "src/generators/pipeline.js",
+      "symbol": "const stepRng = rng.fork(name);"
+    },
+    {
+      "_note": "THE MIGRATION SEAM. Its own comment records the property this packet needs — it runs on every read AND write path. ⛔ THE NAME IS PRESERVED VERBATIM: adding a 'v3 arm' must not rename this function, or this row reds post-edit and blocks the whole gate (P1-E8).",
+      "path": "src/lib/saves.js",
+      "symbol": "function migrateSaveToV2(entry)"
+    },
+    {
+      "_note": "The one save service every read and write goes through; no second migration path may be minted.",
+      "path": "src/lib/saves.js",
+      "symbol": "export const saves"
+    },
+    {
+      "_note": "⛔ NOT APPENDED TO. A new MIGRATIONS entry would force a SCHEMA_VERSION bump, and that moves every golden row for a cause unrelated to identity.",
+      "path": "src/domain/settlementMigrations.js",
+      "symbol": "export function migrateSettlementToLatest"
+    },
+    {
+      "_note": "⛔ NOT BUMPED. It is 1; a bump re-records all 525 rows for a second cause.",
+      "path": "src/domain/settlement.schema.js",
+      "symbol": "export const SCHEMA_VERSION"
+    },
+    {
+      "_note": "The golden's hashing seam over the 525-row fixture — sha256(JSON.stringify(settlement)), the WHOLE blob, which is why all 525 rows move.",
+      "path": "tests/property/generatorGoldenMaster.test.js",
+      "symbol": "function hashFor(config)"
+    },
+    {
+      "_note": "⭐ THE DOOR, AND IT IS THE CHAIR'S. ⚠ PRE-PROOF: the door no longer accepts `UPDATE_GOLDEN=1` alone — GOLDEN_SHIFT_SIGNED must name a signed record file under docs/shift-records/ and the door verifies its CONTENT. Registered surfaces: 50. Of those, 32 are hash-family and 14 structural; NO structural fixture carries an NPC, institution or faction record (P1-E13).",
+      "path": "tests/helpers/goldenRecordDoor.js",
+      "symbol": "export function recordGolden"
+    },
+    {
+      "_note": "⛔ AN UNNAMED CONSUMER OF THE 525-ROW FIXTURE, LANDED BY EM-P0 AFTER THIS PACKET WAS COMPILED. Its A1 arm reads the committed manifest on a >=40-row stride and asserts nothing moved, so it REDS between this packet's edit and the chair's door and greens by itself afterwards. It is NOT a recordGolden surface and cannot be re-recorded. Named so §11's 'a fixture outside the candidates moved' STOP does not fire on it.",
+      "path": "tests/generators/pipelinePinnedMode.test.js",
+      "symbol": "expect(moved, 'golden rows moved — version 1 of this packet moved 41 of 41 here').toEqual([]);"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 1 — EM-P1b's, not this packet's (it would be existing logic file FOUR). Named so it cannot be re-found as new.",
+      "path": "src/domain/locksPreservation.js",
+      "symbol": "npc_3"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 2 — EM-P1b's. Its own comment records the rebind.",
+      "path": "src/domain/npc/characterDrift.js",
+      "symbol": "npc_6"
+    },
+    {
+      "_note": "⛔ CONVICTED READER 3 — EM-P1b's. The id-keyed sidecar family.",
+      "path": "src/domain/npc/characterEdit.js",
+      "symbol": "export const AUTHORED_MARKER_KEY"
+    },
+    {
+      "_note": "The save row's closed patch surface — NOT widened: the ids ride inside the settlement blob, which is already a patch key.",
+      "path": "src/store/settlementSliceHelpers.js",
+      "symbol": "export const SAVED_SETTLEMENT_PATCH_KEYS"
+    }
+  ],
+  "retiredSymbols": [],
+  "_retiredSymbolsNote": "⛔⛔ DELIBERATELY EMPTY AT DRAFT AND READY, AND THE CHAIR ADDS THE ROWS AT THE LANDED FLIP. Measured by execution (P1-E8): a retiredSymbols row whose symbol the packet's own edit removed REDS at READY with `symbol is already absent from <path> before READY`, and because `validate-packets` is the sealed plan's PREREQUISITE, that red BLOCKS every other check. The same row is GREEN at LANDED, where absence is exactly what the arm asserts. The two rows the chair adds at the flip: {src/generators/npcGenerator.js :: npc.id = `npc_${idx + 1}`;} and — only if the chair keeps the faction MODIFY row where version 1 put it — {src/generators/density/densityAscension.js :: id: `faction.${slug(name)}`}. No other packet in the estate names either pair, so no cross-packet discharge is owed.",
+  "acceptanceCases": [
+    {
+      "id": "A1",
+      "case": "THE MINT: a freshly generated settlement carries npc:<n> / inst:<n> / fac:<n> on every NPC, institution and faction — complete, unique within its kind, and 1-based contiguous."
+    },
+    {
+      "id": "A2",
+      "case": "⛔ SAME SEED, SAME IDS: two generations at one seed produce identical ids for every entity — the property EM-B2a's layer keys rest on."
+    },
+    {
+      "id": "A3",
+      "case": "⛔ A RENAME DOES NOT MOVE AN ID: renaming a faction and an institution leaves both ids unchanged — the direct negative control for name-derived identity."
+    },
+    {
+      "id": "A4",
+      "case": "⛔ A ROSTER EDIT DOES NOT RE-POINT AN ID: removing the second of five NPCs leaves the remaining four with their original ids, none renumbered — the direct negative control for `npc_${idx+1}`."
+    },
+    {
+      "id": "A5",
+      "case": "⛔ THE MINT TAKES NO DRAW, AND THE DECLARED VALUE MOVES ARE EXACTLY TWO CLASSES: over the golden corpus before and after, the ONLY differing path-templates are (i) the npc id strings and every value derived from them, and (ii) the newly present institution and faction id keys. No count, name, ordering or PRNG draw moves anywhere. (Re-cut from version 1, which said 'only the id keys are added' — measured, npc.id is an EXISTING key whose VALUE changes.)"
+    },
+    {
+      "id": "A6",
+      "case": "MIGRATION BACK-FILL AND IDEMPOTENCY: an older save with no ids gets them on its first read through the REAL saves path, in stored array order; the second read is byte-identical; the input is not mutated."
+    },
+    {
+      "id": "A7",
+      "case": "⛔ THE MIGRATION IS UNCONDITIONAL: a source scan proves the v3 arm is reached on every save read and write path and sits inside NO conditional, flag read or env read; SCHEMA_VERSION is still 1 and listMigrations() still holds ONE entry."
+    },
+    {
+      "id": "A8",
+      "case": "⛔ FOREIGN IDS AND THE RECORDED ASYMMETRY: an imported entity's non-matching id is LEFT ALONE and reported FOREIGN, never rewritten; and a save whose roster was reordered before migration has ids stable across later reads, with the test stating in its own words that they need not match a fresh generation's."
+    }
+  ],
+  "checks": [
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/domain/entityIdentity.test.js",
+      "tests/domain/settlementMigrations.test.js",
+      "tests/domain/userEdits.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/store/lifecycleRoundTrip.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/property/generatorGoldenMaster.test.js",
+      "tests/property/corruptionWebDormancyGolden.test.js",
+      "tests/property/momentumDormancyGolden.test.js",
+      "tests/property/npcCredibilityDormancyGolden.test.js",
+      "tests/property/npcGrowthDormancyGolden.test.js",
+      "tests/property/npcLadderDormancyGolden.test.js",
+      "tests/property/roadsDormancyGolden.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/generators/pipelinePinnedMode.test.js",
+      "tests/domain/townCartographyCalibration.test.js"
+    ],
+    [
+      "npx",
+      "vitest",
+      "run",
+      "--pool=threads",
+      "--maxWorkers=2",
+      "tests/lint/sovereigntyLightingContract.walker.test.js",
+      "tests/lint/sizeBaseline.test.js",
+      "tests/lint/mutationCoverageManifest.test.js",
+      "tests/lint/goldenFreeze.walker.test.js"
+    ],
+    [
+      "npx",
+      "eslint",
+      "src/generators/npcGenerator.js",
+      "src/generators/steps/assembleInstitutions.js",
+      "src/generators/density/densityAscension.js",
+      "src/lib/saves.js"
+    ],
+    [
+      "node",
+      "scripts/check-observed-shape-readers.mjs"
+    ],
+    [
+      "node",
+      "scripts/check-writer-reach.mjs"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:ratchet"
+    ],
+    [
+      "npm",
+      "run",
+      "typecheck:domain:strict"
+    ],
+    [
+      "node",
+      "scripts/implementation-packets.mjs",
+      "validate"
+    ]
+  ],
+  "_checksNote": "Two changes from version 1, both measured. (1) `tests/generators/pipelinePinnedMode.test.js` joins the golden arm — EM-P0 landed it after the compile and its A1 reads the committed 525-row fixture (P1-E12). (2) `tests/lint/goldenFreeze.walker.test.js` joins the lint arm because the shift-record README names its green as THE receipt of a lawful re-record. ⚠ `npm run build` is NOT in this list and cannot be: the worker re-mint obligation (assembleInstitutions is in the 1,401,208 B zero-slack generation worker) is the build lane's own step through the exclusive mutex, priced by the kit's per-module attribution."
+}

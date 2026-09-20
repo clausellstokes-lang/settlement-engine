@@ -1,0 +1,13 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.502.lock as PID 36273 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+Running 1 test using 1 worker
+
+[capture-landing-realm] /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/923472dc-319b-4b73-9e42-fa911739df78/scratchpad/lane-prose-weave/public/landing-maps/realm-cnocby.png · 2280x1124 · 477946 bytes
+  ✓  1 [chromium] › e2e/landing-realm-capture.spec.js:108:1 › the landing realm map is captured from the running Realm view (8.8s)
+
+  1 passed (14.6s)
+[capture-landing-realm] public/landing-maps/realm-cnocby.png · 477946 bytes
+[capture-landing-realm]   seed lf-033 · 12 weeks · 2280x1124 · tip 6fcbd310e
+[capture-landing-realm]   in frame: Cnocby, Keshigordu, Skáloy, Aryagrad, Penshaw
+[capture-landing-realm] OVER THE 400 kB TARGET by 77946 bytes.
+[capture-landing-realm] Reduce it through the DECLARED sharp pipeline and register the output — never by re-cutting worse.

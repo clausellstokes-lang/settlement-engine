@@ -1,0 +1,2976 @@
+{
+ "seed": "lf-033",
+ "weeks": 12,
+ "name": "Cnocby",
+ "population": 412,
+ "config": {
+  "priorityEconomy": 49,
+  "priorityMilitary": 47,
+  "priorityReligion": 23,
+  "priorityCriminal": 64,
+  "settType": "village",
+  "population": 1500,
+  "tradeRouteAccess": "road",
+  "culture": "celtic",
+  "contentProfile": "grounded",
+  "contentBoundaries": {
+   "human_trafficking": false,
+   "slavery": false,
+   "torture": false,
+   "hard_drugs": true
+  },
+  "settlementAgeMode": "auto",
+  "settlementAgeYears": 0,
+  "monsterThreat": "heartland",
+  "priorityMagic": 21,
+  "magicExists": true,
+  "nearbyResourcesRandom": true,
+  "nearbyResources": [
+   "mountain_timber",
+   "hot_springs_mineral",
+   "managed_forest",
+   "ancient_grove",
+   "precious_metals"
+  ],
+  "nearbyResourcesDepleted": [
+   "mountain_timber",
+   "precious_metals"
+  ],
+  "nearbyResourcesState": {},
+  "selectedStresses": [],
+  "selectedStressesRandom": true,
+  "customName": "",
+  "customInstitutions": [],
+  "customResources": [],
+  "customTradeRoutes": [],
+  "powerDynamicsConfig": null,
+  "defenseScenarioConfig": null,
+  "_randomizePriorities": true,
+  "tier": "village",
+  "_routeIntent": "random",
+  "magicLevel": "low",
+  "cultureProfileKey": "celtic",
+  "terrainType": "mountain",
+  "terrainOverride": "mountain",
+  "nearbyResourcesNative": [
+   "mountain_timber",
+   "hot_springs_mineral",
+   "managed_forest",
+   "ancient_grove",
+   "precious_metals"
+  ],
+  "nearbyResourcesNativeDepleted": [
+   "mountain_timber",
+   "precious_metals"
+  ],
+  "nearbyResourcesCustom": [],
+  "nearbyResourceDefinitions": [],
+  "nearbyResourceDefinitionsDepleted": [],
+  "stressType": null,
+  "stressTypes": [],
+  "intendedStressTypes": [],
+  "_population": 412,
+  "_isolationSupport": {
+   "version": 1,
+   "applicable": false,
+   "tier": "village",
+   "requiredCapacity": 38,
+   "capacity": 38,
+   "deficit": 0,
+   "status": "connected",
+   "paths": [],
+   "magicDependent": false
+  },
+  "_magicTradeOnly": false
+ },
+ "arrivalScene": "Cnocby smells like bread from the gate: a bakehouse near the entrance, open early, already on the second bake of the day. A proper village, large enough to have a market and small enough that strangers are noticed: earth-banked enclosures and older rounded foundations remain visible between newer halls. Cnocby is announced by the smoke of its cookfires and the sound of its market before its buildings are visible.",
+ "pressureSentence": "Odhrán MacCarthy's relationship with Nuada Walsh is more complicated than their public roles suggest. Nuada Walsh now operates in ways Odhrán MacCarthy would not approve of. Neither discusses the divergence directly.",
+ "conflicts": [
+  {
+   "parties": [
+    "The Grey Council",
+    "The Establishment"
+   ],
+   "issue": "Control of the market licensing process",
+   "stakes": "Commercial supremacy",
+   "intensity": "low",
+   "desc": "The Grey Council and The Establishment are in low conflict over control of the market licensing process. The stakes are commercial supremacy.",
+   "plotHooks": [
+    "A neutral figure is being pressured by both The Grey Council and The Establishment to take a side before the next council session.",
+    "Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions."
+   ]
+  }
+ ],
+ "npcGoal": {
+  "name": "Odhrán MacCarthy",
+  "role": "Mayor",
+  "goal": {
+   "short": "Use current stability to address structural vulnerabilities before conditions change.",
+   "long": "Transform this settlement into a city-state with real independence"
+  }
+ },
+ "hooksAll": [
+  "A neutral figure is being pressured by both The Grey Council and The Establishment to take a side before the next council session.",
+  "Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions."
+ ],
+ "crossings": [
+  {
+   "variable": "public_legitimacy",
+   "before": 52,
+   "after": 15,
+   "change": -37,
+   "bandBefore": "adequate",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Public legitimacy fell sharply (adequate → critical). Pressure increased"
+  },
+  {
+   "variable": "trade_connectivity",
+   "before": 50,
+   "after": 21,
+   "change": -29,
+   "bandBefore": "adequate",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Trade connectivity fell sharply (adequate → critical). Pressure increased"
+  },
+  {
+   "variable": "religious_authority",
+   "before": 46,
+   "after": 70,
+   "change": 24,
+   "bandBefore": "strained",
+   "bandAfter": "adequate",
+   "polarity": "higher_is_better",
+   "explanation": "Religious authority rose sharply (strained → adequate)"
+  },
+  {
+   "variable": "social_trust",
+   "before": 51,
+   "after": 34,
+   "change": -17,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Social trust fell sharply (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "labor_capacity",
+   "before": 50,
+   "after": 39,
+   "change": -11,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Labor capacity fell noticeably (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "ruling_authority",
+   "before": 57,
+   "after": 47,
+   "change": -10,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Ruling authority fell noticeably (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "defense_readiness",
+   "before": 31,
+   "after": 24,
+   "change": -7,
+   "bandBefore": "strained",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Defense readiness fell noticeably (strained → critical). Pressure increased"
+  },
+  {
+   "variable": "faction_power",
+   "before": 50,
+   "after": 49,
+   "change": -1,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Faction power fell slightly (adequate → strained). Pressure increased"
+  }
+ ],
+ "deltasAll": [
+  {
+   "variable": "public_legitimacy",
+   "before": 52,
+   "after": 15,
+   "change": -37,
+   "bandBefore": "adequate",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Public legitimacy fell sharply (adequate → critical). Pressure increased"
+  },
+  {
+   "variable": "trade_connectivity",
+   "before": 50,
+   "after": 21,
+   "change": -29,
+   "bandBefore": "adequate",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Trade connectivity fell sharply (adequate → critical). Pressure increased"
+  },
+  {
+   "variable": "religious_authority",
+   "before": 46,
+   "after": 70,
+   "change": 24,
+   "bandBefore": "strained",
+   "bandAfter": "adequate",
+   "polarity": "higher_is_better",
+   "explanation": "Religious authority rose sharply (strained → adequate)"
+  },
+  {
+   "variable": "social_trust",
+   "before": 51,
+   "after": 34,
+   "change": -17,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Social trust fell sharply (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "labor_capacity",
+   "before": 50,
+   "after": 39,
+   "change": -11,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Labor capacity fell noticeably (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "ruling_authority",
+   "before": 57,
+   "after": 47,
+   "change": -10,
+   "bandBefore": "adequate",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Ruling authority fell noticeably (adequate → strained). Pressure increased"
+  },
+  {
+   "variable": "criminal_opportunity",
+   "before": 52,
+   "after": 60,
+   "change": 8,
+   "bandBefore": "strained",
+   "bandAfter": "strained",
+   "polarity": "lower_is_better",
+   "explanation": "Criminal opportunity rose noticeably. Pressure increased"
+  },
+  {
+   "variable": "law_order",
+   "before": 29,
+   "after": 21,
+   "change": -8,
+   "bandBefore": "critical",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Law & order fell noticeably. Pressure increased"
+  },
+  {
+   "variable": "defense_readiness",
+   "before": 31,
+   "after": 24,
+   "change": -7,
+   "bandBefore": "strained",
+   "bandAfter": "critical",
+   "polarity": "higher_is_better",
+   "explanation": "Defense readiness fell noticeably (strained → critical). Pressure increased"
+  },
+  {
+   "variable": "food_security",
+   "before": 32,
+   "after": 37,
+   "change": 5,
+   "bandBefore": "strained",
+   "bandAfter": "strained",
+   "polarity": "higher_is_better",
+   "explanation": "Food security rose slightly"
+  }
+ ],
+ "headlines": [
+  {
+   "tick": 12,
+   "id": "candidate.condition.trade.t.12",
+   "headline": "Trade route strain may take hold",
+   "summary": "Cnocby shows enough trade pressure for a new condition to emerge.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.5571428571428572
+  },
+  {
+   "tick": 12,
+   "id": "candidate.relationship.ally_burden.edge.t.n3.12",
+   "headline": "allied relationship may shift",
+   "summary": "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.33325714285714286
+  },
+  {
+   "tick": 11,
+   "id": "world_stressor.religious_conversion_fracture.n0",
+   "headline": "Keshigordu turns to the faith of Korl",
+   "summary": "After a long contest of devotion, Korl has become the patron creed of Keshigordu.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.32301594102623876
+  },
+  {
+   "tick": 11,
+   "id": "candidate.relationship.ally_conflict_mirror.edge.t.n3.11",
+   "headline": "allied relationship may shift",
+   "summary": "An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6818285714285715
+  },
+  {
+   "tick": 11,
+   "id": "candidate.faction.faction_rival_power_contest.n2_thieves_guild.11",
+   "headline": "Thieves' Guild may contest a rival's power",
+   "summary": "Thieves' Guild sees an opening to press criminal shadow rule interests.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.41077142857142857
+  },
+  {
+   "tick": 11,
+   "id": "candidate.institution.abolish.n0.town_watch.11",
+   "headline": "Keshigordu may disband its Town watch",
+   "summary": "Long peace under Vael is letting the Town watch lapse.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.7341392935134705
+  },
+  {
+   "tick": 11,
+   "id": "candidate.institution.abolish.n1.professional_city_watch.11",
+   "headline": "Skáloy may disband its Professional city watch",
+   "summary": "Long peace under Korl is letting the Professional city watch lapse.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7260901532368803
+  },
+  {
+   "tick": 11,
+   "id": "candidate.institution.abolish.n2.town_watch.11",
+   "headline": "Aryagrad may disband its Town watch",
+   "summary": "Long peace under Korl is letting the Town watch lapse.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.7746023353696808
+  },
+  {
+   "tick": 10,
+   "id": "world_outcome.residual.world_stressor_betrayal_n1.n1",
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.15
+  },
+  {
+   "tick": 10,
+   "id": "world_outcome.residual.world_stressor_betrayal_n1.n2",
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.15
+  },
+  {
+   "tick": 10,
+   "id": "candidate.npc.reform.n1_npc_10.10",
+   "headline": "Yngvi Sigmundsson may reform",
+   "summary": "Yngvi Sigmundsson's survive crisis goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7458160317678716
+  },
+  {
+   "tick": 10,
+   "id": "candidate.npc.reform.n1_npc_3.10",
+   "headline": "Frigg Hrollasson may reform",
+   "summary": "Frigg Hrollasson's protect followers goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7449377731251661
+  },
+  {
+   "tick": 10,
+   "id": "candidate.npc.reform.n2_npc_5.10",
+   "headline": "Sudha Bajaj may reform",
+   "summary": "Sudha Bajaj's win public legitimacy goal can advance through reform.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.7136566695395218
+  },
+  {
+   "tick": 10,
+   "id": "candidate.npc.bargain.n1_npc_4.10",
+   "headline": "Gefjon Karason may bargain",
+   "summary": "Gefjon Karason's survive crisis goal can advance through bargain.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7060674976533717
+  },
+  {
+   "tick": 10,
+   "id": "candidate.npc.reform.n0_npc_3.10",
+   "headline": "Ughul Ongirad may reform",
+   "summary": "Ughul Ongirad's expand influence goal can advance through reform.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.6597662232312456
+  },
+  {
+   "tick": 10,
+   "id": "candidate.condition.crime.t.10",
+   "headline": "Criminal pressure may take hold",
+   "summary": "Cnocby shows enough criminal pressure for a new condition to emerge.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.52
+  },
+  {
+   "tick": 10,
+   "id": "candidate.relationship.neutral_border_incident.edge.n0.t.10",
+   "headline": "channel inferred relationship may shift",
+   "summary": "Local pressure creates a minor incident between neutral settlements.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.3466
+  },
+  {
+   "tick": 9,
+   "id": "candidate.faction.faction_government_challenge.n1_city_council.9",
+   "headline": "City Council may press a challenge to the government",
+   "summary": "City Council sees an opening to press council rule interests.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6109291209278962
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.reform.n2_npc_4.9",
+   "headline": "Meera Sahni may reform",
+   "summary": "Meera Sahni's win public legitimacy goal can advance through reform.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.7333486606689021
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.reform.n0_npc_5.9",
+   "headline": "Senggum Salji'ud may reform",
+   "summary": "Senggum Salji'ud's profit from change goal can advance through reform.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.6588075079216251
+  },
+  {
+   "tick": 9,
+   "id": "candidate.faction.faction_service_bolster.n3_religious_authorities.9",
+   "headline": "Religious Authorities may bolster its services",
+   "summary": "Religious Authorities sees an opening to press temple authority interests.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5255175409461861
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_7.9",
+   "headline": "Amleth Svensson takes up a new ambition",
+   "summary": "New conditions in the settlement have turned Amleth Svensson's effort toward another end.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_8.9",
+   "headline": "Álfdís Þorkellsson changes ambitions",
+   "summary": "Álfdís Þorkellsson's goals shift because the settlement context changed.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_9.9",
+   "headline": "Mimir Ljotsson's aims turn with the times",
+   "summary": "A changed settlement has forced Mimir Ljotsson to reconsider what comes next.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_arcane_orders_archmagister_0.9",
+   "headline": "The Archmagister takes up a new ambition",
+   "summary": "New conditions in the settlement have turned The Archmagister's effort toward another end.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_thieves_guild_kingpin_0.9",
+   "headline": "The Kingpin's aims turn with the times",
+   "summary": "A changed settlement has forced The Kingpin to reconsider what comes next.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.npc.goal_rebranch.n1_npc_thieves_guild_lieutenant_1.9",
+   "headline": "The Lieutenant's aims turn with the times",
+   "summary": "A changed settlement has forced The Lieutenant to reconsider what comes next.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 9,
+   "id": "candidate.relationship.trade_route_disruption.edge.t.n0.9",
+   "headline": "trade partner relationship may shift",
+   "summary": "Trade pressure disrupts routes and introduces resentment or leverage.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.3846428571428571
+  },
+  {
+   "tick": 9,
+   "id": "candidate.institution.close.t.ale_house.9",
+   "headline": "Ale house in Cnocby may close its doors",
+   "summary": "Sustained economic decline is squeezing out the institutions the settlement leans on least.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.392625
+  },
+  {
+   "tick": 8,
+   "id": "world_stressor.betrayal.deity_pact.n1.n2",
+   "headline": "Skáloy turns on Aryagrad",
+   "summary": "The faith of Korl broke its pact with Aryagrad, a betrayal its patron's nature made only a matter of time.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.43556363202091325
+  },
+  {
+   "tick": 8,
+   "id": "candidate.condition.crime.n3.8",
+   "headline": "Criminal pressure may take hold",
+   "summary": "Penshaw shows enough criminal pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.71
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.protect.t_npc_5.8",
+   "headline": "Donnchadh Brennan may protect",
+   "summary": "Donnchadh Brennan's survive crisis goal can advance through protect.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.6663977832274399
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_1.8",
+   "headline": "Rognvald Randversson changes ambitions",
+   "summary": "Rognvald Randversson's goals shift because the settlement context changed.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_10.8",
+   "headline": "Yngvi Sigmundsson redirects a long design",
+   "summary": "Yngvi Sigmundsson keeps the same character, but new circumstances now demand different aims.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_2.8",
+   "headline": "Þrúðr Ragnarsson takes up a new ambition",
+   "summary": "New conditions in the settlement have turned Þrúðr Ragnarsson's effort toward another end.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_3.8",
+   "headline": "Frigg Hrollasson redirects a long design",
+   "summary": "Frigg Hrollasson keeps the same character, but new circumstances now demand different aims.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_4.8",
+   "headline": "Gefjon Karason's aims turn with the times",
+   "summary": "A changed settlement has forced Gefjon Karason to reconsider what comes next.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_5.8",
+   "headline": "Domaldr Thorsson changes ambitions",
+   "summary": "Domaldr Thorsson's goals shift because the settlement context changed.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.npc.goal_rebranch.n1_npc_6.8",
+   "headline": "Helga Eindriðason takes up a new ambition",
+   "summary": "New conditions in the settlement have turned Helga Eindriðason's effort toward another end.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.44
+  },
+  {
+   "tick": 8,
+   "id": "candidate.relationship.ally_burden.edge.t.n3.8",
+   "headline": "allied relationship may shift",
+   "summary": "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.33325714285714286
+  },
+  {
+   "tick": 7,
+   "id": "candidate.faction.faction_government_challenge.n2_thieves_guild.7",
+   "headline": "Thieves' Guild may press a challenge to the government",
+   "summary": "Thieves' Guild sees an opening to press criminal shadow rule interests.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6696830320068309
+  },
+  {
+   "tick": 7,
+   "id": "candidate.faction.faction_government_challenge.n3_feudal_stewardship.7",
+   "headline": "Feudal Stewardship may press a challenge to the government",
+   "summary": "Feudal Stewardship sees an opening to press council rule interests.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5568386841683446
+  },
+  {
+   "tick": 7,
+   "id": "candidate.npc.bargain.n3_npc_3.7",
+   "headline": "Orla Burke may bargain",
+   "summary": "Orla Burke's expand influence goal can advance through bargain.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6928819731450001
+  },
+  {
+   "tick": 7,
+   "id": "candidate.npc.protect.t_npc_4.7",
+   "headline": "Nuada Walsh may protect",
+   "summary": "Nuada Walsh's protect followers goal can advance through protect.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.6823250841806358
+  },
+  {
+   "tick": 7,
+   "id": "candidate.condition.food.n1.7",
+   "headline": "Famine pressure may take hold",
+   "summary": "Skáloy shows enough food pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.5857142857142857
+  },
+  {
+   "tick": 7,
+   "id": "candidate.faction.faction_institution_capture.t_craft_guilds.7",
+   "headline": "Craft Guilds may move to capture an institution",
+   "summary": "Craft Guilds sees an opening to press merchant charter interests.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.3006786052327803
+  },
+  {
+   "tick": 7,
+   "id": "candidate.institution.abolish.n1.professional_city_watch.7",
+   "headline": "Skáloy may disband its Professional city watch",
+   "summary": "Long peace under Korl is letting the Professional city watch lapse.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6405795230179547
+  },
+  {
+   "tick": 7,
+   "id": "candidate.institution.abolish.n2.town_watch.7",
+   "headline": "Aryagrad may disband its Town watch",
+   "summary": "Long peace under Korl is letting the Town watch lapse.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6522571984000001
+  },
+  {
+   "tick": 6,
+   "id": "world_outcome.residual.world_stressor_religious_conversion_fracture_n3.n3",
+   "headline": "Religious conversion fracture leaves aftereffects",
+   "summary": "Religious conversion fracture is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.15
+  },
+  {
+   "tick": 6,
+   "id": "world_outcome.residual.world_stressor_betrayal_n1.n0",
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.21751061942017613
+  },
+  {
+   "tick": 6,
+   "id": "candidate.npc.reform.n2_npc_7.6",
+   "headline": "Kalpana Mehta may reform",
+   "summary": "Kalpana Mehta's control institution goal can advance through reform.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6496831933096373
+  },
+  {
+   "tick": 6,
+   "id": "candidate.condition.crime.n3.6",
+   "headline": "Criminal pressure may take hold",
+   "summary": "Penshaw shows enough criminal pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.62
+  },
+  {
+   "tick": 6,
+   "id": "candidate.faction.faction_institution_capture.n1_merchant_guilds.6",
+   "headline": "Merchant Guilds may move to capture an institution",
+   "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.4121076865145896
+  },
+  {
+   "tick": 6,
+   "id": "candidate.relationship.ally_burden.edge.t.n3.6",
+   "headline": "allied relationship may shift",
+   "summary": "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.33325714285714286
+  },
+  {
+   "tick": 6,
+   "id": "candidate.resource.deplete.n1.hunting_grounds.6",
+   "headline": "hunting grounds may be depleted",
+   "summary": "Skáloy is consuming hunting grounds faster than it recovers.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6905204759726915
+  },
+  {
+   "tick": 5,
+   "id": "candidate.npc.reform.n1_npc_arcane_orders_archmagister_0.5",
+   "headline": "The Archmagister may reform",
+   "summary": "The Archmagister's survive crisis goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7257142857142856
+  },
+  {
+   "tick": 5,
+   "id": "candidate.npc.reform.n1_npc_thieves_guild_lieutenant_1.5",
+   "headline": "The Lieutenant may reform",
+   "summary": "The Lieutenant's control institution goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7230754667136983
+  },
+  {
+   "tick": 5,
+   "id": "candidate.npc.mobilize.n2_npc_2.5",
+   "headline": "Kamala Patil may mobilize",
+   "summary": "Kamala Patil's bind external patron goal can advance through mobilize.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6883922933939989
+  },
+  {
+   "tick": 5,
+   "id": "candidate.condition.legitimacy.n3.5",
+   "headline": "Legitimacy challenge may take hold",
+   "summary": "Penshaw shows enough legitimacy pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6428571428571429
+  },
+  {
+   "tick": 5,
+   "id": "candidate.faction.faction_service_bolster.n3_religious_authorities.5",
+   "headline": "Religious Authorities may bolster its services",
+   "summary": "Religious Authorities sees an opening to press temple authority interests.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5038802901606438
+  },
+  {
+   "tick": 5,
+   "id": "candidate.resource.deplete.n1.ancient_grove.5",
+   "headline": "ancient grove may be depleted",
+   "summary": "Skáloy is consuming ancient grove faster than it recovers.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6502263719141754
+  },
+  {
+   "tick": 4,
+   "id": "world_stressor.betrayal.deity_pact.n1.n0",
+   "headline": "Skáloy turns on Keshigordu",
+   "summary": "The faith of Korl broke its pact with Keshigordu, a betrayal its patron's nature made only a matter of time.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.7634369320448358
+  },
+  {
+   "tick": 4,
+   "id": "world_outcome.residual.world_stressor_religious_conversion_fracture_t.t",
+   "headline": "Religious conversion fracture leaves aftereffects",
+   "summary": "Religious conversion fracture is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.15
+  },
+  {
+   "tick": 4,
+   "id": "world_outcome.residual.world_stressor_betrayal_n0.n0",
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.192258
+  },
+  {
+   "tick": 4,
+   "id": "candidate.condition.legitimacy.n2.4",
+   "headline": "Legitimacy challenge may take hold",
+   "summary": "Aryagrad shows enough legitimacy pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6457142857142857
+  },
+  {
+   "tick": 4,
+   "id": "candidate.npc.reform.n1_npc_10.4",
+   "headline": "Yngvi Sigmundsson may reform",
+   "summary": "Yngvi Sigmundsson's bind external patron goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6106735873976298
+  },
+  {
+   "tick": 4,
+   "id": "candidate.npc.reform.n3_npc_manor_household_lord_mayor_0.4",
+   "headline": "The Lord Mayor may reform",
+   "summary": "The Lord Mayor's win public legitimacy goal can advance through reform.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.7771428571428571
+  },
+  {
+   "tick": 4,
+   "id": "candidate.condition.legitimacy.n0.4",
+   "headline": "Legitimacy challenge may take hold",
+   "summary": "Keshigordu shows enough legitimacy pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.5571428571428572
+  },
+  {
+   "tick": 4,
+   "id": "candidate.relationship.neutral_to_rival.edge.n2.t.4",
+   "headline": "channel inferred may become rival",
+   "summary": "Neutral relations are being pushed toward rivalry by conflict pressure or accumulated resentment.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.5114285714285715
+  },
+  {
+   "tick": 4,
+   "id": "candidate.faction.faction_institution_capture.n1_merchant_guilds.4",
+   "headline": "Merchant Guilds may move to capture an institution",
+   "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.3893353973116538
+  },
+  {
+   "tick": 4,
+   "id": "candidate.relationship.neutral_border_incident.edge.n3.t.4",
+   "headline": "channel inferred relationship may shift",
+   "summary": "Local pressure creates a minor incident between neutral settlements.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.37088571428571426
+  },
+  {
+   "tick": 4,
+   "id": "candidate.relationship.ally_burden.edge.t.n3.4",
+   "headline": "allied relationship may shift",
+   "summary": "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.3229714285714286
+  },
+  {
+   "tick": 4,
+   "id": "candidate.faction.faction_institution_capture.t_craft_guilds.4",
+   "headline": "Craft Guilds may move to capture an institution",
+   "summary": "Craft Guilds sees an opening to press merchant charter interests.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.3042906532818039
+  },
+  {
+   "tick": 3,
+   "id": "candidate.condition.conflict.t.3",
+   "headline": "Wartime pressure may take hold",
+   "summary": "Cnocby shows enough conflict pressure for a new condition to emerge.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.8371428571428572
+  },
+  {
+   "tick": 3,
+   "id": "candidate.faction.faction_institution_suppression.n0_merchant_guilds.3",
+   "headline": "Merchant Guilds may move to suppress an institution",
+   "summary": "Merchant Guilds sees an opening to press merchant charter interests.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.39477139390316807
+  },
+  {
+   "tick": 3,
+   "id": "candidate.faction.faction_institution_suppression.n2_thieves_guild.3",
+   "headline": "Thieves' Guild may move to suppress an institution",
+   "summary": "Thieves' Guild sees an opening to press criminal shadow rule interests.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.3635413244120666
+  },
+  {
+   "tick": 3,
+   "id": "candidate.relationship.ally_conflict_mirror.edge.t.n3.3",
+   "headline": "allied relationship may shift",
+   "summary": "An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6818285714285715
+  },
+  {
+   "tick": 3,
+   "id": "candidate.npc.reform.n3_npc_6.3",
+   "headline": "Hugh Doherty may reform",
+   "summary": "Hugh Doherty's protect followers goal can advance through reform.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6678482529603212
+  },
+  {
+   "tick": 3,
+   "id": "candidate.npc.reform.n3_npc_1.3",
+   "headline": "Alastair O'Connor may reform",
+   "summary": "Alastair O'Connor's survive crisis goal can advance through reform.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.666786585888332
+  },
+  {
+   "tick": 3,
+   "id": "candidate.npc.reform.n3_npc_4.3",
+   "headline": "Cael Flaherty may reform",
+   "summary": "Cael Flaherty's profit from change goal can advance through reform.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6421335020333471
+  },
+  {
+   "tick": 3,
+   "id": "candidate.npc.exploit.n0_npc_4.3",
+   "headline": "Sorqan Tanghud may exploit",
+   "summary": "Sorqan Tanghud's restore order goal can advance through exploit.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.626392721395067
+  },
+  {
+   "tick": 3,
+   "id": "candidate.npc.mobilize.n2_npc_8.3",
+   "headline": "Vipin Goswami may mobilize",
+   "summary": "Vipin Goswami's survive crisis goal can advance through mobilize.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.5940305243181111
+  },
+  {
+   "tick": 3,
+   "id": "candidate.condition.crime.n2.3",
+   "headline": "Criminal pressure may take hold",
+   "summary": "Aryagrad shows enough criminal pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.58
+  },
+  {
+   "tick": 3,
+   "id": "candidate.faction.faction_institution_suppression.n3_religious_authorities.3",
+   "headline": "Religious Authorities may move to suppress an institution",
+   "summary": "Religious Authorities sees an opening to press temple authority interests.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.46707849260944456
+  },
+  {
+   "tick": 3,
+   "id": "candidate.stressor.coup_detat.n1.3",
+   "headline": "Coup d'état may emerge",
+   "summary": "Coup d'état is beginning to take root in Skáloy.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.7428571428571429
+  },
+  {
+   "tick": 2,
+   "id": "world_stressor.religious_conversion_fracture.n3",
+   "headline": "Penshaw turns to the faith of Vael",
+   "summary": "After a long contest of devotion, Vael has become the patron creed of Penshaw.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5
+  },
+  {
+   "tick": 2,
+   "id": "world_outcome.residual.world_stressor_religious_conversion_fracture_n2.n2",
+   "headline": "Religious conversion fracture leaves aftereffects",
+   "summary": "Religious conversion fracture is no longer the active crisis, but its consequences remain visible.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.159075
+  },
+  {
+   "tick": 2,
+   "id": "candidate.stressor.betrayal.n0.2",
+   "headline": "Betrayal shock may emerge",
+   "summary": "Betrayal shock is beginning to take root in Keshigordu.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.73
+  },
+  {
+   "tick": 2,
+   "id": "candidate.npc.suppress.n0_npc_1.2",
+   "headline": "Oljeitu Tayichi'ud may suppress Sorqan Tanghud",
+   "summary": "Oljeitu Tayichi'ud's expand influence goal can advance through suppress Sorqan Tanghud.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.6552256538842252
+  },
+  {
+   "tick": 2,
+   "id": "candidate.npc.seek_promotion.n1_npc_4.2",
+   "headline": "Gefjon Karason may seek promotion",
+   "summary": "Gefjon Karason's secure office goal can advance through seek promotion.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6394832768711625
+  },
+  {
+   "tick": 2,
+   "id": "candidate.condition.legitimacy.n1.2",
+   "headline": "Legitimacy challenge may take hold",
+   "summary": "Skáloy shows enough legitimacy pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.6
+  },
+  {
+   "tick": 2,
+   "id": "candidate.npc.mobilize.n1_npc_2.2",
+   "headline": "Þrúðr Ragnarsson may mobilize",
+   "summary": "Þrúðr Ragnarsson's profit from change goal can advance through mobilize.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.5757886964079375
+  },
+  {
+   "tick": 2,
+   "id": "candidate.condition.trade.n3.2",
+   "headline": "Trade route strain may take hold",
+   "summary": "Penshaw shows enough trade pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5714285714285714
+  },
+  {
+   "tick": 2,
+   "id": "candidate.condition.conflict.t.2",
+   "headline": "Wartime pressure may take hold",
+   "summary": "Cnocby shows enough conflict pressure for a new condition to emerge.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.5571428571428572
+  },
+  {
+   "tick": 2,
+   "id": "candidate.relationship.ally_conflict_mirror.edge.t.n3.2",
+   "headline": "allied relationship may shift",
+   "summary": "An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.5474285714285714
+  },
+  {
+   "tick": 2,
+   "id": "candidate.faction.faction_institution_suppression.n0_landed_gentry.2",
+   "headline": "Landed Gentry may move to suppress an institution",
+   "summary": "Landed Gentry sees an opening to press noble patronage interests.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.3942169331404101
+  },
+  {
+   "tick": 1,
+   "id": "world_stressor.religious_conversion_fracture.n2",
+   "headline": "Aryagrad turns to the faith of Korl",
+   "summary": "After a long contest of devotion, Korl has become the patron creed of Aryagrad.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.5
+  },
+  {
+   "tick": 1,
+   "id": "world_stressor.religious_conversion_fracture.t",
+   "headline": "Cnocby turns to the faith of Vael",
+   "summary": "After a long contest of devotion, Vael has become the patron creed of Cnocby.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.5
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.reform.n1_npc_thieves_guild_kingpin_0.1",
+   "headline": "The Kingpin may reform",
+   "summary": "The Kingpin's settle rivalry goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.64
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.sabotage.n3_npc_5.1",
+   "headline": "Nessa Jordan may sabotage The Lord Mayor",
+   "summary": "Nessa Jordan's survive crisis goal can advance through sabotage The Lord Mayor.",
+   "settlementIds": [
+    "n3"
+   ],
+   "severity": 0.6330151237353421
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.seek_promotion.n0_npc_4.1",
+   "headline": "Sorqan Tanghud may seek promotion",
+   "summary": "Sorqan Tanghud's restore order goal can advance through seek promotion.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.6151902951934225
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.seek_promotion.n2_npc_6.1",
+   "headline": "Rakesh Joshi may seek promotion",
+   "summary": "Rakesh Joshi's secure office goal can advance through seek promotion.",
+   "settlementIds": [
+    "n2"
+   ],
+   "severity": 0.6001000715444691
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.mobilize.n1_npc_7.1",
+   "headline": "Amleth Svensson may mobilize",
+   "summary": "Amleth Svensson's survive crisis goal can advance through mobilize.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.5904608698312601
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.mobilize.n0_npc_2.1",
+   "headline": "Kadan Urgench may mobilize",
+   "summary": "Kadan Urgench's expand influence goal can advance through mobilize.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.5762853037099888
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.reform.n1_npc_3.1",
+   "headline": "Frigg Hrollasson may reform",
+   "summary": "Frigg Hrollasson's protect followers goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.5339551213955624
+  },
+  {
+   "tick": 1,
+   "id": "candidate.condition.crime.n0.1",
+   "headline": "Criminal pressure may take hold",
+   "summary": "Keshigordu shows enough criminal pressure for a new condition to emerge.",
+   "settlementIds": [
+    "n0"
+   ],
+   "severity": 0.53
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.protect.t_npc_4.1",
+   "headline": "Nuada Walsh may protect",
+   "summary": "Nuada Walsh's expand influence goal can advance through protect.",
+   "settlementIds": [
+    "t"
+   ],
+   "severity": 0.5286112112389654
+  },
+  {
+   "tick": 1,
+   "id": "candidate.npc.reform.n1_npc_6.1",
+   "headline": "Helga Eindriðason may reform",
+   "summary": "Helga Eindriðason's survive crisis goal can advance through reform.",
+   "settlementIds": [
+    "n1"
+   ],
+   "severity": 0.5059677084983817
+  }
+ ],
+ "news": [
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.12.world_pulse.applied.candidate.condition.trade.t.12",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 12,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 45,
+   "headline": "Trade route strain takes hold",
+   "summary": "Cnocby shows enough trade pressure for a new condition to emerge.",
+   "kind": "applied",
+   "impactKind": "trade_pressure",
+   "channelType": null,
+   "severity": 0.5571428571428572,
+   "settlementIds": [
+    "t"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.condition.trade.t.12",
+   "tags": [
+    "world_pulse",
+    "condition",
+    "trade_pressure",
+    "applied"
+   ],
+   "reasons": [
+    "trade pressure derived from causal state",
+    "Organic settlement drift is conservative: pressure must pass a gate before it can roll."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.12.history.world_stressor.religious_conversion_fracture.t",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 12,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 32,
+   "headline": "Religious conversion fracture passes into history",
+   "summary": "No one speaks of religious conversion fracture in the present tense anymore; it belongs to the settlement's story now.",
+   "kind": "applied",
+   "impactKind": "stressor_graduated",
+   "channelType": null,
+   "severity": 0.5,
+   "settlementIds": [
+    "t"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "world_stressor.religious_conversion_fracture.t",
+   "tags": [
+    "world_pulse",
+    "stressor",
+    "history",
+    "religious_conversion_fracture"
+   ],
+   "reasons": [
+    "The echo faded below living memory and was recorded as history."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.12.world_pulse.applied.candidate.relationship.ally_burden.edge.t.n3.12",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 12,
+   "scope": "regional",
+   "significance": "notable",
+   "score": 27,
+   "headline": "allied relationship shifts",
+   "summary": "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+   "kind": "applied",
+   "impactKind": "ally_burden",
+   "channelType": null,
+   "severity": 0.33325714285714286,
+   "settlementIds": [
+    "n3"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.relationship.ally_burden.edge.t.n3.12",
+   "tags": [
+    "world_pulse",
+    "condition",
+    "ally_burden",
+    "applied"
+   ],
+   "reasons": [
+    "An ally buffers pressure, but the support becomes a real burden on the supporting settlement.",
+    "The burden is moderate; the endurance left to bear it, near-total."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.candidate.institution.abolish.n2.town_watch.11",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 80,
+   "headline": "Aryagrad may disband its Town watch",
+   "summary": "Long peace under Korl is letting the Town watch lapse.",
+   "kind": "applied",
+   "impactKind": "institution_closure",
+   "channelType": null,
+   "severity": 0.7746023353696808,
+   "settlementIds": [
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.institution.abolish.n2.town_watch.11",
+   "tags": [
+    "world_pulse",
+    "institution",
+    "institution_closure",
+    "applied"
+   ],
+   "reasons": [
+    "A demilitarizing town no longer sustains the Town watch.",
+    "The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.candidate.institution.abolish.n0.town_watch.11",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 77,
+   "headline": "Keshigordu may disband its Town watch",
+   "summary": "Long peace under Vael is letting the Town watch lapse.",
+   "kind": "applied",
+   "impactKind": "institution_closure",
+   "channelType": null,
+   "severity": 0.7341392935134705,
+   "settlementIds": [
+    "n0"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.institution.abolish.n0.town_watch.11",
+   "tags": [
+    "world_pulse",
+    "institution",
+    "institution_closure",
+    "applied"
+   ],
+   "reasons": [
+    "A demilitarizing town no longer sustains the Town watch.",
+    "The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.candidate.institution.abolish.n1.professional_city_watch.11",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 76,
+   "headline": "Skáloy may disband its Professional city watch",
+   "summary": "Long peace under Korl is letting the Professional city watch lapse.",
+   "kind": "applied",
+   "impactKind": "institution_closure",
+   "channelType": null,
+   "severity": 0.7260901532368803,
+   "settlementIds": [
+    "n1"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.institution.abolish.n1.professional_city_watch.11",
+   "tags": [
+    "world_pulse",
+    "institution",
+    "institution_closure",
+    "applied"
+   ],
+   "reasons": [
+    "A demilitarizing town no longer sustains the Professional city watch.",
+    "The case against it has been building for seasons rather than arriving in a single ruling: an arc, not a decree."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.candidate.relationship.ally_conflict_mirror.edge.t.n3.11",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "regional",
+   "significance": "notable",
+   "score": 55,
+   "headline": "allied relationship shifts",
+   "summary": "An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner.",
+   "kind": "applied",
+   "impactKind": "ally_conflict_mirror",
+   "channelType": null,
+   "severity": 0.6818285714285715,
+   "settlementIds": [
+    "n3"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.relationship.ally_conflict_mirror.edge.t.n3.11",
+   "tags": [
+    "world_pulse",
+    "relationship",
+    "ally_conflict_mirror",
+    "applied"
+   ],
+   "reasons": [
+    "An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.candidate.faction.faction_rival_power_contest.n2_thieves_guild.11",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 33,
+   "headline": "Thieves' Guild contests a rival's power",
+   "summary": "Thieves' Guild sees an opening to press criminal shadow rule interests.",
+   "kind": "applied",
+   "impactKind": "faction_rival_power_contest",
+   "channelType": null,
+   "severity": 0.41077142857142857,
+   "settlementIds": [
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.faction.faction_rival_power_contest.n2_thieves_guild.11",
+   "tags": [
+    "world_pulse",
+    "faction",
+    "faction_rival_power_contest",
+    "applied"
+   ],
+   "reasons": [
+    "Thieves' Guild can contest a rival faction's influence basis."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.11.world_pulse.applied.world_stressor.religious_conversion_fracture.n0",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 11,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 26,
+   "headline": "Keshigordu turns to the faith of Korl",
+   "summary": "After a long contest of devotion, Korl has become the patron creed of Keshigordu.",
+   "kind": "applied",
+   "impactKind": "stressor_birth_religious_conversion_fracture",
+   "channelType": null,
+   "severity": 0.32301594102623876,
+   "settlementIds": [
+    "n0"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "world_stressor.religious_conversion_fracture.n0",
+   "tags": [
+    "world_pulse",
+    "stressor",
+    "stressor_birth_religious_conversion_fracture",
+    "applied"
+   ],
+   "reasons": [
+    "Korl overtook the former patron to become Keshigordu's patron creed.",
+    "Deep local devotion sharpened the upheaval beyond what the numbers alone would."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.npc.reform.n1_npc_10.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 78,
+   "headline": "Yngvi Sigmundsson reforms",
+   "summary": "Yngvi Sigmundsson's survive crisis goal advances through reform.",
+   "kind": "applied",
+   "impactKind": "npc_reform",
+   "channelType": null,
+   "severity": 0.7458160317678716,
+   "settlementIds": [
+    "n1"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.reform.n1_npc_10.10",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_reform",
+    "applied"
+   ],
+   "reasons": [
+    "civic role favors reform.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: prosperity."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.npc.reform.n1_npc_3.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 78,
+   "headline": "Frigg Hrollasson reforms",
+   "summary": "Frigg Hrollasson's protect followers goal advances through reform.",
+   "kind": "applied",
+   "impactKind": "npc_reform",
+   "channelType": null,
+   "severity": 0.7449377731251661,
+   "settlementIds": [
+    "n1"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.reform.n1_npc_3.10",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_reform",
+    "applied"
+   ],
+   "reasons": [
+    "religious role favors reform.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: prosperity."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.aftermath.world_stressor.betrayal.n1",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "regional",
+   "significance": "major",
+   "score": 73,
+   "headline": "Betrayal shock has passed",
+   "summary": "Betrayal shock is over, but it leaves purge fear, loyalty tests, diplomatic distrust. It will be remembered for a while yet.",
+   "kind": "applied",
+   "impactKind": "stressor_aftermath",
+   "channelType": null,
+   "severity": 0.7634369320448358,
+   "settlementIds": [
+    "n1",
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "world_stressor.betrayal.n1",
+   "tags": [
+    "world_pulse",
+    "stressor",
+    "aftermath",
+    "betrayal"
+   ],
+   "reasons": [
+    "The crisis ran its course.",
+    "Echo begins: still in living memory until it fades."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.npc.reform.n2_npc_5.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 57,
+   "headline": "Sudha Bajaj reforms",
+   "summary": "Sudha Bajaj's win public legitimacy goal advances through reform.",
+   "kind": "applied",
+   "impactKind": "npc_reform",
+   "channelType": null,
+   "severity": 0.7136566695395218,
+   "settlementIds": [
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.reform.n2_npc_5.10",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_reform",
+    "applied"
+   ],
+   "reasons": [
+    "civic role favors reform.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: knowledge."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.npc.bargain.n1_npc_4.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 56,
+   "headline": "Gefjon Karason bargains",
+   "summary": "Gefjon Karason's survive crisis goal advances through bargain.",
+   "kind": "applied",
+   "impactKind": "npc_bargain",
+   "channelType": null,
+   "severity": 0.7060674976533717,
+   "settlementIds": [
+    "n1"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.bargain.n1_npc_4.10",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_bargain",
+    "applied"
+   ],
+   "reasons": [
+    "merchant role favors bargain.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: prosperity."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.npc.reform.n0_npc_3.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 53,
+   "headline": "Ughul Ongirad reforms",
+   "summary": "Ughul Ongirad's expand influence goal advances through reform.",
+   "kind": "applied",
+   "impactKind": "npc_reform",
+   "channelType": null,
+   "severity": 0.6597662232312456,
+   "settlementIds": [
+    "n0"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.reform.n0_npc_3.10",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_reform",
+    "applied"
+   ],
+   "reasons": [
+    "religious role favors reform.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: glory."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.condition.crime.t.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 42,
+   "headline": "Criminal pressure takes hold",
+   "summary": "Cnocby shows enough criminal pressure for a new condition to emerge.",
+   "kind": "applied",
+   "impactKind": "crime_pressure",
+   "channelType": null,
+   "severity": 0.52,
+   "settlementIds": [
+    "t"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.condition.crime.t.10",
+   "tags": [
+    "world_pulse",
+    "condition",
+    "crime_pressure",
+    "applied"
+   ],
+   "reasons": [
+    "criminal pressure derived from causal state",
+    "Organic settlement drift is conservative: pressure must pass a gate before it can roll."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.candidate.relationship.neutral_border_incident.edge.n0.t.10",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "regional",
+   "significance": "notable",
+   "score": 28,
+   "headline": "channel inferred relationship shifts",
+   "summary": "Local pressure creates a minor incident between neutral settlements.",
+   "kind": "applied",
+   "impactKind": "neutral_border_incident",
+   "channelType": null,
+   "severity": 0.3466,
+   "settlementIds": [
+    "n0"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.relationship.neutral_border_incident.edge.n0.t.10",
+   "tags": [
+    "world_pulse",
+    "relationship",
+    "neutral_border_incident",
+    "applied"
+   ],
+   "reasons": [
+    "Local pressure creates a minor incident between neutral settlements."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n1.n1",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 12,
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "kind": "applied",
+   "impactKind": "stressor_residual",
+   "channelType": null,
+   "severity": 0.15,
+   "settlementIds": [
+    "n1"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "world_outcome.residual.world_stressor_betrayal_n1.n1",
+   "tags": [
+    "world_pulse",
+    "condition",
+    "stressor_residual",
+    "applied"
+   ],
+   "reasons": [
+    "A time-bounded stressor resolved.",
+    "Residual effects remain: purge fear, loyalty tests, diplomatic distrust.",
+    "The crisis ran its course."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.10.world_pulse.applied.world_outcome.residual.world_stressor_betrayal_n1.n2",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 10,
+   "scope": "settlement",
+   "significance": "notable",
+   "score": 12,
+   "headline": "Betrayal shock leaves aftereffects",
+   "summary": "Betrayal shock is no longer the active crisis, but its consequences remain visible.",
+   "kind": "applied",
+   "impactKind": "stressor_residual",
+   "channelType": null,
+   "severity": 0.15,
+   "settlementIds": [
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "world_outcome.residual.world_stressor_betrayal_n1.n2",
+   "tags": [
+    "world_pulse",
+    "condition",
+    "stressor_residual",
+    "applied"
+   ],
+   "reasons": [
+    "A time-bounded stressor resolved.",
+    "Residual effects remain: purge fear, loyalty tests, diplomatic distrust.",
+    "The crisis ran its course."
+   ]
+  },
+  {
+   "schemaVersion": 1,
+   "id": "wizard_news.9.world_pulse.applied.candidate.npc.reform.n2_npc_4.9",
+   "createdAt": "2026-01-01T00:00:00.000Z",
+   "tick": 9,
+   "scope": "settlement",
+   "significance": "major",
+   "score": 77,
+   "headline": "Meera Sahni reforms",
+   "summary": "Meera Sahni's win public legitimacy goal advances through reform.",
+   "kind": "applied",
+   "impactKind": "npc_reform",
+   "channelType": null,
+   "severity": 0.7333486606689021,
+   "settlementIds": [
+    "n2"
+   ],
+   "impactIds": [],
+   "channelIds": [],
+   "sourceEventId": "candidate.npc.reform.n2_npc_4.9",
+   "tags": [
+    "world_pulse",
+    "npc",
+    "npc_reform",
+    "applied"
+   ],
+   "reasons": [
+    "religious role favors reform.",
+    "Pressure sat well clear of the gate, and the ambition behind it is steady.",
+    "Ideal: glory."
+   ]
+  }
+ ],
+ "neighborNames": [
+  {
+   "id": "t",
+   "name": "Cnocby",
+   "tier": "village"
+  },
+  {
+   "id": "n0",
+   "name": "Keshigordu",
+   "tier": "town"
+  },
+  {
+   "id": "n1",
+   "name": "Skáloy",
+   "tier": "city"
+  },
+  {
+   "id": "n2",
+   "name": "Aryagrad",
+   "tier": "town"
+  },
+  {
+   "id": "n3",
+   "name": "Penshaw",
+   "tier": "village"
+  }
+ ],
+ "traceSample": [
+  {
+   "causes": [
+    {
+     "source": "config.settType=village",
+     "reason": "Tier set directly by user choice."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "population",
+     "effect": "range 401–900"
+    },
+    {
+     "target": "institutionPool",
+     "effect": "scaling tier"
+    }
+   ],
+   "targetType": "condition",
+   "targetId": "tier.village",
+   "step": "resolveConfig",
+   "result": "selected",
+   "ts": 0
+  },
+  {
+   "causes": [
+    {
+     "source": "config.terrainOverride=auto",
+     "reason": "Terrain not pinned: weighted-rolled from regional pool."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeRoutePool",
+     "effect": "terrain-constrained"
+    },
+    {
+     "target": "resourcePool",
+     "effect": "terrain-biased"
+    }
+   ],
+   "targetType": "condition",
+   "targetId": "terrain.mountain",
+   "step": "resolveConfig",
+   "result": "rolled",
+   "ts": 1
+  },
+  {
+   "causes": [
+    {
+     "source": "terrain.mountain",
+     "reason": "Picked from coherence-safe pool: road, road, road, isolated, isolated."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "economicViability",
+     "effect": "trade-access input"
+    }
+   ],
+   "targetType": "condition",
+   "targetId": "tradeRoute.road",
+   "step": "resolveConfig",
+   "result": "rolled",
+   "ts": 2
+  },
+  {
+   "causes": [
+    {
+     "source": "config.monsterThreat=random_threat",
+     "reason": "Picked from frontier-weighted threat distribution."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "defenseProfile",
+     "effect": "threat-tier input"
+    }
+   ],
+   "targetType": "threat",
+   "targetId": "monsterThreat.heartland",
+   "step": "resolveConfig",
+   "result": "rolled",
+   "ts": 3
+  },
+  {
+   "causes": [
+    {
+     "source": "config.culture=random_culture",
+     "reason": "Culture not pinned: picked from canonical 11-culture catalog."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "namePool",
+     "effect": "culture-scoped"
+    },
+    {
+     "target": "institutionFlavor",
+     "effect": "culture-scoped"
+    }
+   ],
+   "targetType": "condition",
+   "targetId": "culture.celtic",
+   "step": "resolveConfig",
+   "result": "rolled",
+   "ts": 4
+  },
+  {
+   "causes": [
+    {
+     "source": "terrain.mountain",
+     "effect": "enables",
+     "reason": "\"mountain_timber\" is terrain-specific to mountain, which this settlement borders."
+    },
+    {
+     "source": "tier.village",
+     "effect": "eligible depletion roll passed",
+     "reason": "The accessible mountain stands have been cleared faster than they can regrow."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "institution.sawmill",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.carpenter",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.charcoal",
+     "effect": "biased toward selection"
+    }
+   ],
+   "targetType": "resource",
+   "targetId": "resource.mountain_timber",
+   "step": "resolveResources",
+   "result": "present_but_depleted",
+   "ts": 5
+  },
+  {
+   "causes": [
+    {
+     "source": "terrain.mountain",
+     "effect": "enables",
+     "reason": "\"hot_springs_mineral\" is terrain-specific to mountain, which this settlement borders."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "institution.alchemist",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.apoth",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.inn",
+     "effect": "biased toward selection"
+    }
+   ],
+   "targetType": "resource",
+   "targetId": "resource.hot_springs_mineral",
+   "step": "resolveResources",
+   "result": "present",
+   "ts": 6
+  },
+  {
+   "causes": [
+    {
+     "source": "terrainCompatibility",
+     "effect": "permitted",
+     "reason": "\"managed_forest\" is compatible with this settlement's trade route + terrain combination."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "institution.sawmill",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.carpenter",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.charcoal",
+     "effect": "biased toward selection"
+    }
+   ],
+   "targetType": "resource",
+   "targetId": "resource.managed_forest",
+   "step": "resolveResources",
+   "result": "present",
+   "ts": 7
+  },
+  {
+   "causes": [
+    {
+     "source": "terrainCompatibility",
+     "effect": "permitted",
+     "reason": "\"ancient_grove\" is compatible with this settlement's trade route + terrain combination."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "institution.druid",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.church",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.shrine",
+     "effect": "biased toward selection"
+    }
+   ],
+   "targetType": "resource",
+   "targetId": "resource.ancient_grove",
+   "step": "resolveResources",
+   "result": "present",
+   "ts": 8
+  },
+  {
+   "causes": [
+    {
+     "source": "terrainCompatibility",
+     "effect": "permitted",
+     "reason": "\"precious_metals\" is compatible with this settlement's trade route + terrain combination."
+    },
+    {
+     "source": "tier.village",
+     "effect": "eligible depletion roll passed",
+     "reason": "The accessible precious-metal veins are exhausted."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "institution.jewel",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.mint",
+     "effect": "biased toward selection"
+    },
+    {
+     "target": "institution.bank",
+     "effect": "biased toward selection"
+    }
+   ],
+   "targetType": "resource",
+   "targetId": "resource.precious_metals",
+   "step": "resolveResources",
+   "result": "present_but_depleted",
+   "ts": 9
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a multiple water sources."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.multiple_water_sources",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 10
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a dwellings (80-180)."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.dwellings_80_180",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 11
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a farmland."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.farmland",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 12
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "60% final likelihood",
+     "reason": "Base chance 59% lifted by ×1.01 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×1.01",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.travelers_inn",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 13
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "41% final likelihood",
+     "reason": "Base chance 59% reduced by ×0.70 from nearby resources + terrain."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.weekly_market",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 14
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "39% final likelihood",
+     "reason": "Base chance 78% reduced by ×0.50 from nearby resources + terrain."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.ale_house",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 15
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "25% likelihood",
+     "reason": "Base chance for this tier/category was 25%."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.waystation",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 16
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a mill."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.mill",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 17
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "100% final likelihood",
+     "reason": "Base chance 90% lifted by ×2.50 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×2.50",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.blacksmith",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 18
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "100% final likelihood",
+     "reason": "Base chance 70% lifted by ×2.51 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×2.51",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.carpenter",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 19
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "60% likelihood",
+     "reason": "Base chance for this tier/category was 60%."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.thatcher",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 20
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "54% final likelihood",
+     "reason": "Base chance 45% lifted by ×1.20 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×1.20",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "welfareCapacity",
+     "effect": "reinforced"
+    },
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.apothecary",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 21
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "80% final likelihood",
+     "reason": "Base chance 35% lifted by ×2.29 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×2.29",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.sawmill",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 22
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "83% final likelihood",
+     "reason": "Base chance 18% lifted by ×4.62 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×4.62",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.charcoal_burner",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 23
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "18% final likelihood",
+     "reason": "Base chance 25% reduced by ×0.70 from nearby resources + terrain."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.brickmaker",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 24
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "32% final likelihood",
+     "reason": "Base chance 45% reduced by ×0.70 from nearby resources + terrain."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.brewer",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 25
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "28% final likelihood",
+     "reason": "Base chance 40% reduced by ×0.70 from nearby resources + terrain."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tradeConnectivity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.stable_master",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 26
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "50% likelihood",
+     "reason": "Base chance for this tier/category was 50%."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "welfareCapacity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.midwife",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 27
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "15% likelihood",
+     "reason": "Base chance for this tier/category was 15%."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.village_scribe",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 28
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a parish church."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "welfareCapacity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.parish_church",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 29
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a priest (resident)."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "welfareCapacity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.priest_resident",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 30
+  },
+  {
+   "causes": [
+    {
+     "source": "tier.village",
+     "effect": "required",
+     "reason": "Every village-sized settlement has a graveyard."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "welfareCapacity",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.graveyard",
+   "step": "assembleInstitutions",
+   "result": "required",
+   "ts": 31
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "92% likelihood",
+     "reason": "Base chance for this tier/category was 92%."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [],
+   "targetType": "institution",
+   "targetId": "institution.village_reeve",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 32
+  },
+  {
+   "causes": [
+    {
+     "source": "baseChance",
+     "effect": "16% final likelihood",
+     "reason": "Base chance 10% lifted by ×1.60 from nearby resources + terrain."
+    },
+    {
+     "source": "nearbyResources",
+     "effect": "×1.60",
+     "reason": "Nearby resources (mountain_timber, hot_springs_mineral, managed_forest…) shifted the selection odds."
+    },
+    {
+     "source": "terrain.mountain",
+     "effect": "context",
+     "reason": "Selection occurred in a mountain setting."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "publicOrder",
+     "effect": "eroded"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.underground_network",
+   "step": "assembleInstitutions",
+   "result": "selected",
+   "ts": 33
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Alehouse\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.food",
+     "effect": "reinforced"
+    },
+    {
+     "target": "tag.trade",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.alehouse",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 34
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Subsistence farming\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.essential",
+     "effect": "reinforced"
+    },
+    {
+     "target": "tag.agriculture",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.subsistence_farming",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 35
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Maltster\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.trade",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.maltster",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 36
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Peat cutter\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.trade",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.peat_cutter",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 37
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Stable yard\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.trade",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.stable_yard",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 38
+  },
+  {
+   "causes": [
+    {
+     "source": "supplyChainCascade",
+     "effect": "added",
+     "reason": "\"Stone quarry\" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one."
+    }
+   ],
+   "downstreamEffects": [
+    {
+     "target": "tag.trade",
+     "effect": "reinforced"
+    }
+   ],
+   "targetType": "institution",
+   "targetId": "institution.stone_quarry",
+   "step": "cascadePass",
+   "result": "cascaded",
+   "ts": 39
+  }
+ ],
+ "versions": {
+  "generatorVersion": "0.9.0",
+  "simulationVersion": 1
+ }
+}
