@@ -32293,10 +32293,11 @@
     },
     {
       "id": "EM-P2",
-      "status": "READY",
+      "status": "LANDED",
       "packetVersion": 4,
       "packetPath": "docs/implementation/packets/settlement-editor/EM-P2.md",
       "verifiedBase": "e5f53ae95760d79084caa5f57b6d5d945b06b63b",
+      "landedAt": "ec0a30da290bc1e65dcf118425637eb5142fe36c",
       "dependsOn": [
         "EM-P0 (LANDED 429ceed54)"
       ],
