@@ -723,3 +723,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **Two comment strippers, two contracts:** CURE-J's `stripComments` (`tests/helpers/dossierManifest.js`) is DIGEST-grade — identities; FIX-T2's `commentsOnly` (`tests/helpers/codeOnlySource.js`) is COUNTER-grade — offset-preserving counts. TOOL-20 hoists the 51 local copies (27 string-blind) onto the one that matches each caller's contract; never a third.
 - **FIX-T2** lands after FIX-D9 in the gate queue; `significanceMigration.census.test.js` is settled by an unedited run first.
+
+## Amendments of 2026-09-20 09:24 EDT — FIX-C2b complete; FIX-C2c and DOC-3 chartered (ODQ §934.47 addendum 91)
+
+- **FIX-C2b is complete on its lane** (`0bc7503b8`, `a7cd336bb`, `7330a89e9`, `b1c1ac182`); composed after TOOL-13b at the composition sitting.
+- **FIX-C2c (NEW; brief `briefs/launch/FIX-C2c.md`; after FIX-C2b composes):** ARM 3 reaches the docs scope (report-only; LANDED packets' bodies excluded by the manifest's status); the 170 ambiguous-basename citations resolved or named as a class; `PINNED-UNCOMMITTED` classified; the five stale docs citations re-addressed by symbol.
+- **DOC-3 (NEW; the chair's, at a docs sitting):** `WC-PREAMBLE.md:70`'s stale `:1360`/`:1366` corrected — a family preamble's SHA re-stamps its members, so the LANDED members' historical hashes are noted as such.
+- **ARM 4 stays report-only** (a shrink-only baseline over a half-false set is refused by measurement — the chair's standing ruling for heuristic arms).
