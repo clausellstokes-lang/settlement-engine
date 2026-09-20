@@ -38,16 +38,31 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const viewport of [{ width: 1024, height: 768 }, { width: 1440, height: 900 }]) {
-  test(`(a) the Realm sidebar's locked Instant World button holds its label and pill at ${viewport.width}px`, async ({ page }) => {
+  test(`(a) the Realm sidebar's locked gate holds its label and pill at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto('/realm');
     await settleRoute(page);
-    const button = page.getByTestId('instant-world-open');
-    await expect(button).toBeVisible({ timeout: 20_000 });
+    // ⚠ THE SUBJECT MOVED, AND THE DEFECT MOVED WITH IT. Owner defect (a) was the Instant
+    // World card's LOCKED button, whose label and "Available at launch" pill could not wrap
+    // inside the Realm's 240px sidebar and spilled out of both sides. Since 7a203fc36 ("The
+    // desktop Realm gate is as honest as the phone's, and both doors are true") the palette
+    // withholds that card from a non-entitled viewer and draws RealmLockedGate in its place.
+    // And the card's guard, `canManageCampaigns`, is the SAME predicate as its own
+    // `canGenerate`, so `premiumReachClosed` is always false at the one live mount: the
+    // LOCKED Instant World button is unreachable on the live surface by construction, and
+    // this arm's anonymous visit could never reach it again. That commit's own body says
+    // where the measurement went — "Its wrap site follows the pill from RealmDashboard to
+    // RealmLockedGate in the census" — so the arm follows it, to the live locked control in
+    // the same 240px sidebar, with the same label, pill and wrap to measure. The card's own
+    // contract stays pinned in jsdom (tests/components/launchLock.upsells.test.jsx).
+    const card = page.getByTestId('realm-palette-locked');
+    await expect(card).toBeVisible({ timeout: 20_000 });
+    const button = card.getByRole('button', { name: /See Cartographer/i });
+    await expect(button).toBeVisible();
     await expect(button.locator('[data-launch-pill]')).toHaveCount(1);
     const box = await button.evaluate((el) => {
       const b = el.getBoundingClientRect();
-      const card = el.closest('[data-testid="instant-world-entry"]').getBoundingClientRect();
+      const card_ = el.closest('[data-testid="realm-palette-locked"]').getBoundingClientRect();
       // The label is a text node, so the content box is a Range over the button's contents.
       const range = document.createRange();
       range.selectNodeContents(el);
@@ -56,7 +71,7 @@ for (const viewport of [{ width: 1024, height: 768 }, { width: 1440, height: 900
         left: b.left, right: b.right,
         contentLeft: Math.min(...rects.map((r) => r.left)),
         contentRight: Math.max(...rects.map((r) => r.right)),
-        cardLeft: card.left, cardRight: card.right,
+        cardLeft: card_.left, cardRight: card_.right,
         wrap: getComputedStyle(el).flexWrap,
       };
     });
