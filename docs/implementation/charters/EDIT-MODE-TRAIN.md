@@ -754,3 +754,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **Composed at `d279d13eb`:** FIX-L1, FIX-P3, FIX-P4, FIX-P5, FIX-P1, FIX-P1b, FIX-C2b, TOOL-13b (21 commits). The seventh refreeze, COMPOSE-REPROOF-1 and RUN 22 follow at that tip; the chair's build + `verify:dist` run separately after run 22 (the `&&` chain stops at the ratchet on the owner-gated provenance red).
 - **TOOL-25 gains an arm:** `git diff --numstat` must never report `-` for a tracked source file (FIX-P1b's commit message needed a NUL stripped too).
 - **A dispatch note for `src/components/generate/FoundingWorlds.jsx`:** its `generate(seed, {...})` call now carries FIX-P3's options bag and FIX-P1's seed argument; a third lane at that line conflicts with both.
+
+## Amendments of 2026-09-20 12:01 EDT — the seventh refreeze; run 22; the fourth preamble amendment (ODQ §934.47 addendum 96)
+
+- **The fourth preamble amendment is in force** (`2dc08a595`; SHA `c9f33c8d…6675`): the worker budget has no placement cure. EM-R0a is placed under it at this sitting; every later member cites it.
+- **One new test file is parked by the walker's grammar at the composed tip** (8 titles / 2 suites); its lane cures or the park is accepted with the reason at the next sitting, on COMPOSE-REPROOF-1's naming.
