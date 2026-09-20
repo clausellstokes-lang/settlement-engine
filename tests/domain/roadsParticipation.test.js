@@ -15,6 +15,20 @@ import { execFileSync } from 'node:child_process';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { eligibleMembersOf, ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 import { npcId } from '../../src/domain/worldPulse/npcAgency.js';
+// EM-B1k (A3, A5): the write-base cure is proved AT THIS CHOKEPOINT, because the thing it must
+// not disturb is exactly what this file pins — the participation view. A3 drives the SHIPPED
+// pulse entry so the seam under test is the real one; A5 is the regression belt around it.
+import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
+import { applyWorldPulseResultToState } from '../../src/store/campaignPulseHelpers.js';
+import { ensureRegionalGraph } from '../../src/domain/region/graph.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { applyNpcOp } from '../../src/store/settlementPendingEditWriters.js';
+import { factionLifecycleStateOf } from '../../src/domain/density/factionLifecycle.js';
+import { DENSITY_LAW_CONFIG_KEY, REGISTER_VII_DENSITY_LAW_VERSION } from '../../src/domain/density/densityLaw.js';
+import { rosterPersonAvailable } from '../../src/domain/worldPulse/envoyCasting.js';
+import { readWarSeatBooks } from '../../src/domain/worldPulse/warSeatBooks.js';
+import { isOffStage } from '../../src/domain/roads/state.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)', () => {
   const npcs = [
@@ -46,6 +60,110 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
     const plain = { id: 'p', name: 'P', phase: 'canon', settlement: { name: 'P', npcs: [{ id: 'a', importance: 'notable' }] }, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
     const snap = buildWorldSnapshot({ campaign: { ...campaign, settlementIds: ['p'] }, saves: [plain], worldState: campaign.worldState });
     expect(snap.byId.get('p').settlement, 'no allocation when nobody is off-stage').toBe(plain.settlement);
+  });
+
+  it('EM-B1k A3 — a house whose SOLE member is shelved survives the tick: crewed, seated, no dissolution beat', () => {
+    // THE IRREVERSIBLE CONSEQUENCE, AND THE GUARD THAT WAS RIGHT ALL ALONG. §810.4 R18: an
+    // irreversible consequence may only be triggered by irreversible causes, and
+    // factionDensityKernel's own `stillEmpty` confirmation re-reads the roster at the moment it
+    // applies. It failed only because the base it re-read was the PARTICIPATION VIEW. Shelving
+    // is a reversible stage mark; dissolving a house is permanent. THE POPULATION AT RISK,
+    // measured over the 525-row golden corpus: 1,608 of 3,378 factions (47.6%) hold exactly ONE
+    // rostered member, 147 of them governing, and 100% of settlements hold at least one.
+    const crown = { id: 'fac.crown', name: 'The Crown', faction: 'The Crown', isGoverning: true, power: 40 };
+    const weavers = { id: 'fac.weavers', name: 'The Weavers', faction: 'The Weavers', power: 12 };
+    const member = (house, extra) => ({ id: `npc.${house.replace(/\W/g, '')}`, name: `Factor of ${house}`, factionAffiliation: house, status: 'active', importance: 'notable', ...extra });
+    const ashfordWith = (weaverExtra) => ({
+      id: 'ashford', name: 'Ashford', tier: 'town',
+      config: { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION },
+      npcs: [member('The Crown', {}), member('The Weavers', weaverExtra)],
+      powerStructure: { governingName: 'The Crown', factions: [crown, weavers], seatOfPower: 'The Crown', publicLegitimacy: { score: 55 }, factionRelationships: [] },
+    });
+    const tickOnce = (settlement) => {
+      const save = { id: 'ashford', name: 'Ashford', phase: 'canon', settlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+      const world = { rngSeed: 'em-b1k-a3', tick: 4, simulationRules: {} };
+      const result = simulateCampaignWorldPulse({
+        campaign: { id: 'c-em-b1k-a3', name: 'C', settlementIds: ['ashford'], worldState: world, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 4, entries: [] } },
+        saves: [save], interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z',
+      });
+      const out = result.settlementUpdates[0].settlement;
+      return { out, houses: (out.powerStructure?.factions || []).map((f) => String(f.name)), beats: (result.wizardNews?.entries || []).map((e) => String(e.impactKind || e.kind)) };
+    };
+
+    const control = tickOnce(ashfordWith({}));
+    expect(control.houses, 'THE CONTROL: with its member on stage the house is untouched').toEqual(['The Crown', 'The Weavers']);
+
+    const shelved = tickOnce(ashfordWith({ stasis: { reason: 'sequestered' } }));
+    expect(
+      shelved.houses,
+      `A HOUSE WAS DISSOLVED BECAUSE ITS ONE MEMBER WAS SHELVED (houses ${JSON.stringify(shelved.houses)},`
+      + ` lifecycle '${factionLifecycleStateOf(shelved.out, weavers)}', beats ${JSON.stringify(shelved.beats)}).`
+      + ' Shelving is reversible; dissolution is not — the confirmation re-read a roster the'
+      + ' participation filter had already shortened.',
+    ).toEqual(['The Crown', 'The Weavers']);
+    expect(factionLifecycleStateOf(shelved.out, weavers), 'the house still reads crewed by the estate own lifecycle reader').toBe('crewed');
+    expectAbsentWithAnchor(shelved.beats, 'faction_dissolved', 'faction_service_bolster', 'the tick must not narrate a dissolution that did not happen');
+  });
+
+  it('EM-B1k A5 — the participation reads are UNCHANGED, the post-time view is re-derived from the raw save, and a shelved person is frozen', () => {
+    // ⛔ THE CURE'S CHIEF BURDEN. Three movers `.map` the update roster with an index, so under a
+    // RAW write base they iterate more people than they used to. This arm is the proof that not
+    // one participation guarantee moved with them. Measured denominators behind it: 24 corpus
+    // towns swapped base-for-base moved worldState in 0 and a settlement key in only 6, every one
+    // of those six a SPURIOUS faction_interregnum the cure REMOVES.
+    const guild = { id: 'f1', name: 'Guild', faction: 'Guild', isGoverning: true, power: 40 };
+    const fkey = ladderFactionKey(guild);
+    const free = { id: 'free', name: 'Alia', importance: 'key', factionAffiliation: 'Guild', structuralRank: 'dominant', status: 'active' };
+    const shelvedNpc = { ...free, id: 'shelved', name: 'Bram', stasis: { reason: 'imprisoned' } };
+    const court = { id: 's', name: 'S', npcs: [free, shelvedNpc], powerStructure: { governingName: 'Guild', factions: [guild], seatOfPower: 'Guild', publicLegitimacy: { score: 55 } } };
+    const world = { tick: 4, simulationRules: {} };
+    const snap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['s'], worldState: world }, saves: [{ id: 's', name: 'S', phase: 'canon', settlement: court, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: world });
+
+    // 1. never cast · 2. never on stage for the roads lane · 3. never ladder-eligible
+    expect(rosterPersonAvailable(free), 'LIVENESS: the free sibling IS castable').toBe(true);
+    expect(rosterPersonAvailable(shelvedNpc), 'a shelved person is still never cast').toBe(false);
+    expect(isOffStage(free), 'LIVENESS: the free sibling is on stage').toBe(false);
+    expect(isOffStage(shelvedNpc), 'a shelved person is still off-stage for the roads lane').toBe(true);
+    const ladder = eligibleMembersOf('s', court, guild, fkey).map((r) => r.npcId);
+    expect(ladder, 'the ladder belt still admits the free member and only them').toEqual([npcId('s', free, 0)]);
+    // 4. never holds the war seat — with the SHELVED person as the only seated candidate
+    const booksFor = (npc) => {
+      const sole = { ...court, npcs: [npc] };
+      const seatWorld = { ...world, spatialLedgers: { npcLadder: { s: { factions: { [fkey]: { rungs: [npcId('s', npc, 0)] } } } } } };
+      const seatSnap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['s'], worldState: seatWorld }, saves: [{ id: 's', name: 'S', phase: 'canon', settlement: sole, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: seatWorld });
+      return readWarSeatBooks({ worldState: seatWorld, snapshot: seatSnap, actorId: 's', opponentId: 'o' });
+    };
+    expect(booksFor(free).securityBand, 'LIVENESS: an on-stage ruler really does seat').toBe('secure');
+    expect(booksFor(shelvedNpc).securityBand, 'a shelved ruler still holds no war seat').toBe('unseated');
+    // 5. the dormancy reference — nobody off-stage ⇒ the SAME settlement object
+    const plainSettlement = { id: 'p', name: 'P', npcs: [free] };
+    const plainSnap = buildWorldSnapshot({ campaign: { id: 'c', settlementIds: ['p'], worldState: world }, saves: [{ id: 'p', name: 'P', phase: 'canon', settlement: plainSettlement, campaignState: { phase: 'canon', eventLog: [], locks: {} } }], worldState: world });
+    expect(plainSnap.byId.get('p').settlement, 'a world with nobody off-stage still passes the settlement through by reference').toBe(plainSettlement);
+    expect(snap.byId.get('s').settlement.npcs.map((n) => String(n.id)), 'and the filtered view is still exactly the on-stage roster').toEqual(['free']);
+
+    // 6+7. THE POST-TIME CONFIRMATION and THE FROZEN CLAUSE, through a real committed tick.
+    const town = generateSettlementPipeline({ settType: 'town', culture: 'anglo_saxon', terrainOverride: 'plains', tradeRouteAccess: 'road', monsterThreat: 'civilized' }, null, { seed: 'em-b1k-a5', customContent: {} });
+    town.id = 'ashford';
+    const shelfStore = { settlement: town };
+    applyNpcOp(() => shelfStore, (fn) => fn(shelfStore), { kind: 'stasis-npc', payload: { npcId: String(town.npcs[0].id), reason: 'sequestered' } });
+    const preRecord = JSON.parse(JSON.stringify(town.npcs[0]));
+    const townSave = { id: 'ashford', name: town.name, phase: 'canon', settlement: town, campaignState: { phase: 'canon', eventLog: [], locks: {} } };
+    const townWorld = { rngSeed: 'ws-em-b1k-a5', tick: 4, simulationRules: {} };
+    const townCampaign = { id: 'c-em-b1k-a5', name: 'C', settlementIds: ['ashford'], worldState: townWorld, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }), wizardNews: { currentTick: 4, entries: [] } };
+    const townResult = simulateCampaignWorldPulse({ campaign: townCampaign, saves: [townSave], interval: 'one_month', commit: true, now: '2026-01-01T00:00:00.000Z' });
+    const townState = { savedSettlements: [JSON.parse(JSON.stringify(townSave))], activeSaveId: 'ashford', settlement: null, systemState: null, editedAt: null };
+    const persisted = applyWorldPulseResultToState(townState, townCampaign, townResult, '2026-01-01T00:00:00.000Z')[0].settlement;
+    // The projection is recomputed FROM TRUTH rather than from a previous projection: the save
+    // the tick wrote holds the shelved person, and the view derived from it still hides them.
+    const postSnap = buildWorldSnapshot({ campaign: { id: 'c-em-b1k-a5', settlementIds: ['ashford'], worldState: townWorld }, saves: [{ ...townSave, settlement: persisted }], worldState: townWorld });
+    const postItem = postSnap.byId.get('ashford');
+    expect((postItem.save.settlement.npcs || []).some((n) => String(n.id) === String(preRecord.id)), 'THE POST-TIME SAVE must INCLUDE the shelved person — the raw roster survived the tick').toBe(true);
+    expect((postItem.settlement.npcs || []).some((n) => String(n.id) === String(preRecord.id)), 'and the post-time VIEW must still EXCLUDE them — participation is unchanged').toBe(false);
+    const postRecord = (persisted.npcs || []).find((n) => String(n.id) === String(preRecord.id));
+    expect(postRecord, 'THE FROZEN CLAUSE needs the person to still exist to be frozen').toBeTruthy();
+    const movedKeys = [...new Set([...Object.keys(preRecord), ...Object.keys(postRecord || {})])]
+      .filter((k) => JSON.stringify(preRecord[k]) !== JSON.stringify((postRecord || {})[k]));
+    expect(movedKeys, 'A TICK WROTE ONTO A SHELVED PERSON. Stasis means frozen: a mover that now iterates the raw roster must not mark somebody who was not on stage').toEqual([]);
   });
 });
 
