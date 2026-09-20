@@ -423,6 +423,12 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **EM-R0b v3** (kit `packets-waiting/EM-R0b.*`; v2 superseded): `CHECK_META` total over 33 checks with a violation carrying the keys of the arm that fired; EM-R0c's STOP-4 discharged. **EM-R0a's pre-proof** adds one consistency group rooted at `history` (prevention for `founding.age ≡ history.age`). **EM-R7** carries the exhaustive one-fact-two-paths sweep and records `readiness.score`'s unresolved relation. **EM-R0d's pre-proof** names `severityBands()` as `severityBand`'s plural sibling.
 
+## Amendments of 2026-09-20 02:53 EDT — EM-B1k2 accepted (three premises refuted, the packet smaller); FIX-D4 ruled into one build lane under the owner's signature; EM-B1k3 conditional; TOOL-8 chartered (ODQ §934.47 addenda 39–40)
+
+- **EM-B1k2** (kit `packets-waiting/EM-B1k2.*`; placed after EM-B1k lands): one logic-bearing line plus three comment-only contracts, the ratchet widened to `src/domain/density` (one new conviction) and, at its pre-proof, to `src/generators/density` (`titularSuccession.js`'s disposition); its pre-proof also runs the full-corpus display-name census (Q4 — a duplicate charters **EM-B1k3**, conditional), reads every save writer for the legacy shape (Q5), traces `priced.settlementUpdates`' producer, and removes the dist-gated build tests from the sealed `checks` (Q7).
+- **FIX-D4** is a BUILD lane at the next composition train: N-3 (the pool literal) priced first, then (b) resolve-or-drop the handle and (d) the sanitiser's regex and predicate repaired with culture-correct copy; its golden (159 rows) and prose movement are the owner's signature — two records, one sitting. **TOOL-8 (NEW):** the dark-guard census.
+- **Preamble amendment owed at the chair's next placement sitting:** §P2.11 says a `skipIf(!requireDistRead)` byte arm in a focused run is not evidence about bytes; the byte row names `factionLifecycle.js` as EAGER. **TOOL-3's resume** records the first-paint closure's live margin in the test's header.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
