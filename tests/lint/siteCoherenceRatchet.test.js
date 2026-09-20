@@ -66,7 +66,7 @@ const SITE_GENESIS_REL = 'src/domain/townMap/siteGenesis.js';
 
 /** The estate's heavy-suite local budget (determinismBanCoverage.test.js:169), which is
  *  also CR-SCW0-5's ruled corpus budget. A LOCAL timeout, never a raise of the global
- *  `testTimeout` at vite.config.js:912, and never an assertion on wall clock. */
+ *  `testTimeout` at vite.config.js:1138, and never an assertion on wall clock. */
 const CORPUS_BUDGET_MS = 120_000;
 
 // ── THE CORPUS, FROZEN (SITE_COHERENCE_PLAN.md:56). 210 + 252 = 462. ────────────────────
