@@ -197,6 +197,13 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   // and the row below it is why. Breaking the F29 seam/roster/law import cycle
   // moved the seam's version vocabulary into livingContentLawVersion.js, so the
   // seam now carries exactly one static edge — to that leaf.
+  // ⛔ AMENDED AGAIN (FIX-B2, 2026-09-20): "deliberately UNPINNED" above is NO
+  // LONGER TRUE OF EITHER ROW. Both are now PINNED to the small lazy
+  // `living-content-seam` chunk (manualChunks below) — see the measurement on
+  // the livingContentLawVersion row. The excision itself is unchanged and still
+  // correct: nothing eager reaches either file, so neither belongs in eager
+  // engine-core. What changed is that the UNPINNED half of the ruling rested on
+  // a claim about the emitted graph that the emitted graph refutes.
   '/src/domain/content/livingContentSeam.js',
   // livingContentLawVersion.js — THE SAME PREMISE, ONE HOP ON, AND IT IS EXCISED
   // FOR THE SAME REASON RATHER THAN BY ANALOGY. The excisions above are applied
@@ -211,10 +218,32 @@ export const ENGINE_SHARED_DOMAIN_EXCISIONS = [
   // them for returning users); WITH this row, all 483 chunks are byte- AND
   // content-hash-IDENTICAL to the pre-cure build. The cycle cure is therefore
   // free, which is the only shape worth shipping against a three-figure margin.
-  // Excised and deliberately UNPINNED, like the seam: nothing eager reaches it,
-  // so Rollup co-locates it into the lazy `engine` chunk where its one emitted
-  // importer already lives (@guarded-by tests/build/engineChunkLazy.test.js's
-  // orphan-excision guard, which reds if it ever DOES become eager-reachable).
+  // ⛔ THE "ONE EMITTED IMPORTER" CLAIM WAS FALSE, AND IT COST 677,935 B FIVE TIMES OVER
+  // (FIX-B2, 2026-09-20; TOOL-12 §3a, ODQ §934.47 addenda 82-83). This row used to read
+  // "Excised and deliberately UNPINNED, like the seam: nothing eager reaches it, so Rollup
+  // co-locates it into the lazy `engine` chunk where its ONE EMITTED IMPORTER already
+  // lives". The first half is true and unchanged. The second half was never measured, and
+  // it is wrong: livingContentLawVersion.js has SIX static importers, and only ONE of them
+  // (livingContentSeam.js) is itself in the engine chunk. The other FIVE live outside it,
+  // in five separate emitted chunks — so each of those five was forced to statically import
+  // 677,935 B of generators to read a version constant:
+  //     livingContentLaw.js               -> livingContentLaw-*.js                 173 B
+  //     livingContentRoster.js            -> livingContentRoster-*.js            1,788 B
+  //     density/densityCreateBoundary.js  -> densityCreateBoundary-*.js            686 B
+  //     lib/importScrub.js                -> importScrub-*.js                      846 B
+  //     lib/importReconciliationAdmission -> StructuredCampaignReconciliation-*  47,291 B
+  // A 173-byte chunk dragging 677,935 B is a 3,918x ratio. This is precisely the FP-G11
+  // formatNumber incident the note two rows up warns about, in the same file, committed by
+  // the same reasoning: "an unpinned excision co-locates where its importer already lives"
+  // is only safe when the importer is SINGULAR and IN the chunk — and nobody counted.
+  // THE CURE IS THE PLACEMENT: both rows are pinned to `living-content-seam` below, and all
+  // five chunks stop importing the engine. Sizes measured from the emitted dist; the count
+  // is the source graph's, read with this file's own static-edge spelling.
+  // ⚠ THE EXCISIONS THEMSELVES STAND. Nothing eager reaches either file, so eager
+  // engine-core is still the wrong home; the pin is what the excision always owed.
+  // @guarded-by tests/build/engineChunkLazy.test.js's orphan-excision guard (which reds if
+  //   either file becomes eager-reachable) — and now, by EXECUTING manualChunks, that guard
+  //   also sees the pin.
   '/src/domain/content/livingContentLawVersion.js',
   '/src/domain/priorityBands.js',
   '/src/domain/townMap/glyphAssign.js',
@@ -708,6 +737,68 @@ export default defineConfig({
           if (id.includes('/src/generators/aiLayer.js'))
             return 'ai-layer';
 
+          // ══ FIX-B2 (2026-09-20) — THE ANCHORED LEAVES ════════════════════
+          // One defect, four pins. TOOL-12 measured the emitted graph and found
+          // 38 chunks statically importing the 677,935 B lazy engine, explained
+          // by exactly TWELVE members whose consumers live in OTHER chunks. That
+          // is the FP-G11 formatNumber incident (the note further down this file),
+          // still live, twelve times over. THE CURE IS THE PLACEMENT, and it is
+          // the same cure formatNumber got: a member whose consumers live outside
+          // the engine is pinned to its own small lazy chunk, so the consumer's
+          // chunk imports the SMALL chunk and stops importing the engine.
+          //
+          // These four are the LOW-risk leaves (TOOL-12 moves 4, 5, 6, 10). Each
+          // rule below names the anchor it cuts and the size of the chunk that was
+          // paying. None of these modules is in the eager first-paint graph, and
+          // none of their static importers is either (measured: zero eager static
+          // contacts across all four), so no pin here can re-parent a chunk into
+          // first paint — the failure mode FP-G17 records for resolveTerrain.js.
+          // @enforced-by tests/build/vendorPdfLazy.test.js (the first-paint byte
+          //   budget + engine-absent-from-closure + the engine size band) and
+          //   tests/build/engineChunkLazy.test.js (the orphan-excision guard,
+          //   which EXECUTES these rules).
+
+          // ── The living-content seam + its version vocabulary (LAZY PAIR) ──
+          // Both are ENGINE_SHARED_DOMAIN excisions that were left UNPINNED on a
+          // claim about the emitted graph that the emitted graph refutes — see the
+          // measurement on the livingContentLawVersion.js excision row above.
+          // FIVE emitted chunks (livingContentLaw 173 B, livingContentRoster
+          // 1,788 B, densityCreateBoundary 686 B, importScrub 846 B, and
+          // StructuredCampaignReconciliation 47,291 B) statically imported the
+          // whole 677,935 B engine to read a version constant. They move together
+          // because the seam's ONLY static edge is to the version leaf (the F29
+          // cycle cure, SEAMCYCLE above), so the pair is self-contained: the chunk
+          // has NO outward static edge at all and can drag nothing behind it. The
+          // seam's payload edge stays a dynamic import(), which is what keeps the
+          // roster closure out of both vite derivations — livingContentSeamLazy's
+          // three source-shape contracts are untouched by a placement change.
+          if (
+            id.includes('/src/domain/content/livingContentSeam.js')
+            || id.includes('/src/domain/content/livingContentLawVersion.js')
+          )
+            return 'living-content-seam';
+
+          // ── Narrative mutation helpers (LAZY LEAF, zero imports) ──────────
+          // A zero-import leaf that matched NO rule, so Rollup co-located it into
+          // the engine chunk (the FP-G11 shape again). Its consumers: the lazy
+          // `factionRename` chunk (14,422 B), which statically imported 677,935 B
+          // to reach it — and src/store/aiSlice.js, which is EAGER but reaches it
+          // through a dynamic import(). That second edge is the sharper one: the
+          // AI path was fetching the whole generation engine at action time for a
+          // ~4 kB mutation helper. A dynamic edge from an eager module is a lazy
+          // boundary, not a first-paint risk, so this pin is safe in both
+          // directions and cuts a real download on the AI path.
+          if (id.includes('/src/lib/narrativeMutations.js'))
+            return 'narrative-mutations';
+
+          // ── Stress priority (LAZY LEAF, zero imports) ─────────────────────
+          // Under the blanket /src/generators/ rule only because it lives there;
+          // its outside consumer is components/new/generalDeskRead.js, whose
+          // 21,497 B chunk had to fetch the engine to read it. Zero imports, so
+          // the chunk cannot drag anything. MUST stay before /src/generators/.
+          if (id.includes('/src/generators/stressPriority.js'))
+            return 'stress-priority';
+
           // ── Strict content identity (small, legitimately EAGER) ───
           // Campaign rows are synchronously hash-checked before entering state.
           // Isolate that authority from the conservative generator-shared
@@ -732,6 +823,20 @@ export default defineConfig({
           // source graph. Its outward edge is data/cultureProfiles.js, which
           // leaves the eager 'data' chunk for 'data-lazy' the moment the boundary
           // leaves the eager module graph — lazy -> lazy, the safe direction.
+          // FIX-B2 (2026-09-20) joins customCategories.js here rather than minting it a
+          // chunk, because this rule's own opening sentence describes it exactly: imported
+          // by a generator (steps/economyReconcilePass.js) and by one lazy product surface
+          // (primitives/CategorySelect.jsx), never by the entry's static source graph. It is
+          // an ESD excision that matched no rule, so Rollup co-located it into the lazy
+          // `engine` chunk and CompendiumPanel (153,849 B) had to fetch 677,935 B of
+          // generators to draw a category list — FP-G11's incident, the same as the
+          // cultureProfiles boundary two sentences up, and cured the same way. JOINING this
+          // chunk rather than minting one is the cheaper cure and it is measured, not
+          // assumed: customCategories' only outward edge is deterministicSort.js
+          // (content-identity), which engine-core-lazy ALREADY imports, so this adds no new
+          // chunk, no new chunk EDGE, and no __vitePreload map entry — and it cannot form a
+          // chunk cycle, because engine-core does not import engine-core-lazy (measured on
+          // the emitted graph; bootSmoke.test.js's cycle finder re-proves it per build).
           if (
             id.includes('/src/domain/content/settlementContentProvenance.js')
             || id.includes('/src/domain/content/customSupplyChainActivation.js')
@@ -740,6 +845,7 @@ export default defineConfig({
             || id.includes('/src/domain/townMap/glyphAssign.js')
             || id.includes('/src/domain/townScene/customBuildingPresentation.js')
             || id.includes('/src/domain/cultureProfiles.js')
+            || id.includes('/src/domain/customCategories.js')
           )
             return 'engine-core-lazy';
 
@@ -863,10 +969,32 @@ export default defineConfig({
             return 'engine';
 
           // ── Data tables (static, highly cacheable) ────────────────
-          // narrativeData.js still calls into the engine's PRNG/helpers at
-          // runtime, so it's not pure data — keeping it in the engine chunk
-          // avoids the data ↔ engine circular-import warning Rollup would
-          // otherwise emit.
+          // ⛔ THE RATIONALE BELOW WAS REFUTED BY THE FILE IT GOVERNS (corrected FIX-B2,
+          // 2026-09-20; TOOL-12 item 2, ODQ §934.47 addendum 83). It used to read
+          // "narrativeData.js still calls into the engine's PRNG/helpers at runtime, so
+          // it's not pure data — keeping it in the engine chunk avoids the data <-> engine
+          // circular-import warning Rollup would otherwise emit". That is false on the
+          // tree, and src/data/narrativeData.js:1-8 says so in terms: the two executable
+          // template tables that drew randomness at render time (PRESSURE_SENTENCES,
+          // POLITICAL_FLAVOR) were MOVED to src/generators/narrativeText.js, and the file
+          // "now holds only pure string tables: no runtime imports, no RNG capture".
+          // MEASURED at this tip: the module has ZERO static imports, ZERO re-exports and
+          // ZERO dynamic imports, so there is no cycle for this rule to be avoiding.
+          //
+          // ⭐ THE RULE STAYS ANYWAY, AND THE REASON IS A DIFFERENT ONE. The chair REFUSED
+          // the move (recorded, vetoable): every consumer of narrativeData.js is itself in
+          // the engine chunk, so pinning it elsewhere leaves the generation fetch
+          // BYTE-IDENTICAL and shrinks only the measured chunk. That is a ledger move, not
+          // a cure, and this estate does not spend a placement on a ceiling. (Its real, and
+          // smaller, benefit is cache granularity: 35,858 B of authored prose — measured by
+          // its own text's offsets inside the emitted chunk — re-hashes on every generator
+          // edit today. That is a claim worth making honestly, and it is NOT the claim
+          // "the user downloads less".) The two refusals sit beside the four FIX-B2 pins
+          // above precisely so a later reader can tell a cure from a ledger move.
+          // ⚠ AND DO NOT "FIX" THIS BY DELETING THE RULE: narrativeData.js is not eager, so
+          // it would fall through to data-lazy — and 106 emitted chunks statically import
+          // data-lazy, from AuthModal to GalleryPage. That charges 106 lazy surfaces 35.8 kB
+          // of generator-only prose to buy the engine's ledger. Measured, and refused.
           //
           // stressTypes.js USED to be routed here too (same reason), but its
           // executable, rng-capturing summary closures were split out into

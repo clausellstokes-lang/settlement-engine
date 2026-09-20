@@ -132,9 +132,18 @@ describe('living-content seam — the lazy boundary that keeps the roster out of
       + 'bypassed somewhere and first paint is now paying for the roster closure.',
     ).toBe(false);
     expect(eager.has(LAW)).toBe(false);
-    // The SEAM is allowed to be non-eager too (it is excised from
-    // ENGINE_SHARED_DOMAIN and rides the lazy engine chunk with its one
-    // importer), and that is the placement the excision comment claims.
+    // The SEAM is allowed to be non-eager too: it is excised from
+    // ENGINE_SHARED_DOMAIN, so eager engine-core is the wrong home for it.
+    // ⚠ AMENDED (FIX-B2, 2026-09-20): this note used to add "and rides the lazy
+    // engine chunk with its one importer". It no longer does, and the claim was
+    // wrong when it was written — the seam's version leaf had FIVE importers
+    // outside the engine chunk, each of whose chunks was therefore statically
+    // importing 677,935 B to read a version constant. The seam and
+    // livingContentLawVersion.js are now PINNED to the small lazy
+    // `living-content-seam` chunk (vite.config.js). That is a placement change
+    // only: this arm asserts the seam is not EAGER, which is untouched by which
+    // lazy chunk it rides, and the three source-shape contracts above are
+    // untouched too (the payload edge is still a dynamic import()).
     expect(eager.has(SEAM)).toBe(false);
   });
 
