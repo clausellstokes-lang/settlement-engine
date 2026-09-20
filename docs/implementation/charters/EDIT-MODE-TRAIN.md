@@ -742,3 +742,9 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **EM-B1f is LANDED at `6b57180ef`** (flipped `7a6f85d20`). EM-T6's order proceeds: EM-B1h next (its compile names `isOffStage`'s docblock arm and the walker's `:402` message), then B1i, B1j (after FIX-T1 composes), A2b, B1a. EM-R0a is placed at this sitting's end (after the composition and the fourth preamble amendment's sentence).
 - **The composition sitting's order:** FIX-L1 → FIX-P3 → FIX-P4 → FIX-P5 → FIX-P1b → FIX-C2b → TOOL-13b, one re-proof lane at the composed tip; FIX-B2, FIX-D9, FIX-T2, TOOL-19 and the rest compose at the next sitting as they land.
+
+## Amendments of 2026-09-20 11:49 EDT — the composition's first half; TE-26's direction law; TOOL-15b chartered (ODQ §934.47 addendum 94)
+
+- **TE-26 amended by measurement:** a symbol row's figure is a TRAP where the row asserts PRESENCE and LOAD-BEARING where a terminal `retiredSymbols` row asserts ABSENCE; presence rows are re-spelled figure-free, terminal retirees keep their figures, and `packetSymbolFigureCensus.walker` admits them by shape.
+- **TOOL-15b (NEW; after TOOL-15 composes):** the figure-in-a-symbol predicate beside HK-3/HK-5 in `scripts/implementation-packets.mjs` (the gate and the pre-commit hook), and `tests/scripts/implementationPackets.test.js`'s census arms brought under the guard-of-guards.
+- **The composition law (the FIX-C2 idiom, generalised):** the chair composes only what cherry-picks clean, proving file-set and blob equality; a conflicting commit is composed by the lane that owns it, in the slot, for that one step, keeping both hunks and re-proving both lanes' pins.
