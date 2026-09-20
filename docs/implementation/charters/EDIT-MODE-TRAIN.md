@@ -444,6 +444,11 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **CURE-G** (the cure lane's window, after CURE-E/F): EM-B1k's suite renamed to `participationWriteBase.contract.test.js` (the register's own opt-in token), its `mutation` row with a convicting mutant, and `baseStateCapsule.test.js:369`'s stale floor raised to the live count.
 - **TOOL-6b (NEW; a tooling dock after train EM-T4's terminal):** `tests/store` admitted to the mutation register's enforcer set under its own, stricter predicate (134 surgical rows; the vacuity floor 686 → 840; the admitted-tree arm generalised); its first commit gives the shrink-only ratchet a ratchet over itself; it sweeps the manifest sentence the admission falsifies. **EM-B1k2's** test file carries the `contract` token from its pre-proof.
 
+## Amendments of 2026-09-20 03:11 EDT — FIX-C2 measured and built as a parallel lane (the source-citation walker, EOF arm gate-wired); FIX-C2b chartered; EM-B1k2's pre-proof dispatched at the landed tip (ODQ §934.47 addendum 44)
+
+- **FIX-C2** builds now in its own worktree (`fix-citations-2026-09-20` @63e40fe57): the walker's EOF arm gate-wired over `src/tests/scripts` with the 38 live rows re-addressed (the seven certification citations past EOF; the tuning inventory's `realHome` rot; the `Primitives.jsx` cluster), docs-live under a shrink-only baseline, archival excluded, the symbol arm report-only; composed at the next composition train. **FIX-C2b (NEW, measure-first after it lands):** the declaration-aware third arm over the 5,479 citations naming a symbol the target never declares.
+- **EM-B1k2's pre-proof** runs at `read-tip-63e40fe57` carrying addenda 39 and 43 (the display-name census; the save writers; the fourth ratchet root; the `contract` token; the sealed `checks` without dist-gated files).
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
