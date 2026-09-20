@@ -4,8 +4,15 @@ on:
   # Run on every branch push (not just master/main) so feature branches — where
   # the work actually happens — get the same gate before they ever reach a PR
   # (finding F35: CI was advisory to feature branches).
+  # THE LEDGER BRANCH DOES NOT START CI ON ITS OWN PUSHES (2026-09-20, CI-3). This branch,
+  # `review-fixes-2026-07-08`, is the documentation ledger: the charter, the decision queue
+  # and the docs. Its `src/` is a fossil by design, so a CI run here can only fail and only
+  # spends runner minutes (run 35534817791 on 2026-09-20 reddened or was cut on five jobs).
+  # A push run uses the workflow file AT THE PUSHED REF, so the exclusion has to live in THIS
+  # branch's copy as well as the code branch's (CURE-O, 6e841c52f). A negative pattern placed
+  # AFTER a positive one excludes the ref; at least one positive pattern must remain.
   push:
-    branches: ['**']
+    branches: ['**', '!review-fixes-2026-07-08']
   pull_request:
     branches: [master, main]
   # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
