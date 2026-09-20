@@ -704,3 +704,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **FIX-B3 (NEW; FIX-B2's family, after B2 lands):** `ENGINE_SHARED_DOMAIN` seeded from the REACHABLE graph, not every file under `src/generators/` (the dark trio charges first paint by construction: ESD 51 → 49, EAGER 268 → 266 without it); measured with a build; the first-paint budget's honest headroom re-measured.
 - **TOOL-23 (NEW; measure-first):** the reachability census — 248 of 2,247 `src/` modules reachable from no build entry; FIX-D9's resolved-path scanner reused; the seven entries enumerated (including `src/utils/pdfRender.worker.js`).
 - **The next lighting refreeze MEASURES `suiteTitles`** (the walker asserts its five figures in order and stops at the first miss; two lanes today could not evaluate it).
+
+## Amendments of 2026-09-20 09:17 EDT — TOOL-18's fates; TOOL-24, DOC-1, DOC-2 chartered (ODQ §934.47 addendum 88)
+
+- **TOOL-24 (NEW; a build lane when a seat frees):** three SHRINK-ONLY prose-byte totals — `src/generators/**`, `src/domain/**` minus certification, `src/domain/certification/**` — measured by TOOL-18's M3 rule (templates included; the parse, never a regex), with the existing declared-row door for a raise and a NON-ASSERTED per-file diagnostic printed via `process.stdout.write` on the red; its first row names the `src/data` prose `proseLeavesOnDisk()` misses (234,998 B).
+- **DOC-1 (NEW; the chair's, at the composition sitting):** the prose ceiling's authority — ARCH-COMPOSED-PROSE §10–§13, cited by five files and existing nowhere — materialised as `docs/ARCH_COMPOSED_PROSE.md` §10–§13 from `proseCorpusBytes.test.js`'s docblock and the baseline's `_ceilingArithmetic` (a restatement, no new law), the five citations left true.
+- **DOC-2 (NEW; the chair's, one line):** `src/generators/data/deityPool.js`'s deletion within the window recorded with its reason beside the deity doctrine, if the deleting commit does not already carry it.
+- **TOOL-17's brief gains a second measurement:** which chunk carries `causeConjunctionRole*`'s 203,036 shipping bytes and what that chunk's budget is.
