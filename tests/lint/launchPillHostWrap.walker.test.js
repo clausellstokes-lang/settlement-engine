@@ -95,6 +95,14 @@ const OTHER_HOSTS = Object.freeze({
   'src/components/account/AccountSubscriptionSection.jsx': 1, // raw <button> tile (pill whiteSpace normal)
   'src/components/dossier/DossierLadderModal.jsx': 1, // block <span>
   'src/components/dossier/ExportUnlockDialog.jsx': 1, // inline-flex <span> that already wraps
+  // ⭐ A NEW KIND OF HOST, LOOKED AT RATHER THAN ADDED SILENTLY (FIX-P5, ODQ §934.63 F16).
+  // The entitlement ladder's two value cells: the pill now joins any cell that quotes a
+  // currency mark, which today is "$2.99 per settlement" alone. A `<td>` is not a Button
+  // and this rule does not judge it — and it cannot clip the pill the way the Realm
+  // sidebar clipped "ee Premium", because the cure carries its own geometry: the cell
+  // drops `whiteSpace: 'nowrap'` to `'normal'` exactly where the pill joins the figure,
+  // so the pill takes its own line inside a narrow column instead of spilling out of one.
+  'src/components/pricing/PricingBands.jsx': 2, // the ladder's free + cartographer <td> cells
   'src/components/primitives/LockedDestination.jsx': 1, // raw <button>
   'src/components/settlement/NextActionRail.jsx': 1, // block <span>
 });
