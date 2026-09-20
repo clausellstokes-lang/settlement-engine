@@ -672,6 +672,11 @@
     "tests/domain/institutionClassify.parity.test.js": {
       "kind": "uncovered"
     },
+    "tests/domain/irreversibleRawRoster.contract.test.js": {
+      "kind": "mutation",
+      "label": "irreversible-raw-roster/the R18 law reads the participation view and proposes a dissolution",
+      "what": "EM-B1k2. advanceFactionDensity's tick-start base is the roster readFactionLifecycle decides a PERMANENT dissolution from (§810.4 R18: an irreversible consequence may only be triggered by irreversible causes). The plant reverts the one token back to asObject(item.settlement) — the OFF-STAGE participation view — so a house whose sole member is merely SHELVED has its dissolution PROPOSED again. It is convicted at the PRODUCTION rather than at the beat, because EM-B1k's raw write base still refuses the beat downstream via stillEmpty over fresh: A1 wraps readFactionLifecycle itself and reads back what the mover handed it. A4 reds beside it through the same defect's second door (the fresh fallback), which is why the expected title pins A1 by name."
+    },
     "tests/domain/npc/npcFacetConsumer.walker.test.js": {
       "kind": "uncovered"
     },

@@ -696,7 +696,27 @@ export function advanceFactionDensity(args) {
 
   for (const sid of orderedIds) {
     const item = itemById.get(sid);
-    const tickStart = item && item.settlement ? asObject(item.settlement) : null;
+    // ⭐ THE LAW READS THE RAW ROSTER, NEVER THE PARTICIPATION VIEW (EM-B1k2; §810.4 R18).
+    // `item.settlement` is the OFF-STAGE-filtered projection (worldSnapshot.js:124-133), and
+    // an IRREVERSIBLE consequence may only be triggered by IRREVERSIBLE causes — so a house
+    // whose one member is merely SHELVED must never even have its dissolution PROPOSED.
+    // `asObject(item.save).settlement` is saveSettlement()'s exact meaning
+    // (worldSnapshot.js:11-13), inlined rather than imported; the two are the SAME OBJECT
+    // whenever nobody is off-stage, which is why the swap is behaviour-neutral everywhere
+    // else. The `||` fallback is the snapshot's own tolerance: every save shape that carries a
+    // falsy `.settlement` carries no roster either, so raw and filtered cannot diverge on it.
+    // EM-B1k made the WRITE base raw at pulseKernel.js `settlement: localSettlements.get(String(item.id)) || item.save?.settlement`; this is the READ.
+    // ⚠ WHY `asObject(item.save)` AND NOT `item.save?.` — the shape EM-B1k's sister line uses.
+    // `buildSettlementMap` takes untyped parameters, so its `item` is implicitly `any` and an
+    // optional chain type-checks there. Here `itemById` is declared
+    // `Map<string, Record<string, unknown>>`, so `item.save` is `unknown` and `item.save?.
+    // settlement` reds BOTH typecheck ratchets (TS2339, +1 against a baseline of 0). `asObject`
+    // is this module's own narrowing helper, already imported and already applied to the very
+    // next term, and it agrees with the optional chain on EVERY input: a missing, null,
+    // primitive or array `save` all yield `{}` and fall through to `item.settlement`.
+    // ⛔ Every REVERSIBLE reading in this file keeps the participation view (applyCadence's
+    // arrival append, the marks) — the roads chokepoint is not reopened.
+    const tickStart = item && item.settlement ? asObject(asObject(item.save).settlement || item.settlement) : null;
     if (!tickStart) continue;
 
     // THE LAW, READ AT TICK-START. Returns an empty no-op shape for a v1 world, so

@@ -101,7 +101,7 @@ describe('participation chokepoint — the master gate (buildWorldSnapshot, §8)
       + ' Shelving is reversible; dissolution is not — the confirmation re-read a roster the'
       + ' participation filter had already shortened.',
     ).toEqual(['The Crown', 'The Weavers']);
-    expect(factionLifecycleStateOf(shelved.out, weavers), 'the house still reads crewed by the estate own lifecycle reader').toBe('crewed');
+    expect(factionLifecycleStateOf(shelved.out, weavers), 'the house still reads crewed by the estate\'s own lifecycle reader').toBe('crewed');
     expectAbsentWithAnchor(shelved.beats, 'faction_dissolved', 'faction_service_bolster', 'the tick must not narrate a dissolution that did not happen');
   });
 
@@ -190,7 +190,27 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // the FULL roster to manage hostages); partyImpact = the RAW READER (deliberately ungated —
   // DM sovereignty); everything else is via-snapshot (protected by the gate, no edit). A NEW
   // reader added here must be dispositioned before this pin is updated.
+  //
+  // ⛔ EM-B1k2 NARROWED THAT BLANKET, because it was FALSE of four rows and nobody had asked.
+  // "everything else is via-snapshot" covers a reader that receives the SNAPSHOT. It does not
+  // cover a reader whose base is its CALLER'S CHOICE, and `settlementLifecycleFirstClass.js`
+  // and `successorNpc.js` are exactly that: permanent roster writers with no save in their
+  // signatures, sitting here with no disposition at all and inheriting a sentence that was
+  // never about them. Nor does it cover the two density roots the scan now reaches. Those four
+  // rows carry their own dispositions below; the blanket binds only the rows that carry none.
+  // ⛔ A row with no written disposition of its own is a row nobody has judged — the next
+  // reader to notice that should write one, not widen this paragraph.
   const EXPECTED = [
+    // ⭐ EM-B1k2 — THE R18 LAW ITSELF, and the row the widened roots exist for.
+    // `factionRosterOf` (:113) is the estate's roster filter and `readFactionLifecycle` (:155)
+    // is the §810.4 R18 law that reads it. PARTICIPATION-INDEPENDENT BY CONSTRUCTION AND
+    // REQUIRED TO BE: it decides an IRREVERSIBLE consequence — a house swept out of
+    // `powerStructure.factions` — and R18 admits only irreversible causes. Both of its
+    // production callers in factionDensityKernel.js now hand it a RAW roster: the law at
+    // `tickStart` (EM-B1k2) and the confirmation at `fresh` (EM-B1k). ⛔ A caller that hands
+    // it the participation view dissolves a house because somebody is shelved — which is the
+    // defect EM-B1k2 removed the habitat for, measured 7 of 7 towns before the cure.
+    'src/domain/density/factionLifecycle.js',
     // THE DECOMPOSITION WAVE (war tranche, file 4) moved seedBetrayalTraitor — the one
     // `.npcs` read the apply pass owned — verbatim out of applyWorldPulse.js into this
     // leaf. Same reader, same disposition (via-snapshot, protected by the gate, no edit);
@@ -254,6 +274,19 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // the cadence runs only under the density law's version gate (`_densityLawVersion: 2`),
     // which no shipped world carries — proven by the landing's three bit-identical
     // dormancy probes.
+    //
+    // ⭐ EM-B1k2 ADDS THE SECOND CLAUSE, because TE-DENSITY-1 above is about `applyCadence`
+    // ALONE and the file's OTHER roster reader inherited the via-snapshot blanket it had no
+    // right to. THE LIFECYCLE READ IS IRREVERSIBLE, SO IT IS RAW: `tickStart` (the base
+    // `readFactionLifecycle` decides a dissolution from) reads `asObject(item.save).settlement`
+    // and its confirmation (`stillEmpty` over `fresh`) reads the roster EM-B1k made raw at the write
+    // base. IRREVERSIBLE ⇒ RAW is the whole rule: a permanent consequence may not be computed
+    // from a projection and then rescued by a second guard, because the rescue is one edit
+    // away from being skipped (the `fresh` fallback is that edit already written). Every
+    // REVERSIBLE reading in this file keeps the participation view — the emergence founder's
+    // append at `applyCadence`, the interregnum marks — so the roads chokepoint is untouched.
+    // ⚠ And TE-DENSITY-1's own claim was ASPIRATIONAL until EM-B1k landed: `fresh` really is
+    // the raw saved roster now, so the append it describes lands where it says it does.
     'src/domain/worldPulse/factionDensityKernel.js',
     // D-7e clause (i) (round-3 F3): seatGratitudeSevToward reads the persisted LADDER
     // record's `.npcs` STANDINGS map (priorLedger[sid].npcs — ladder state, never the
@@ -364,9 +397,47 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',
     'src/domain/worldPulse/roadsKernel.js',
+    // ⭐ EM-B1k2 — A PERMANENT ROSTER WRITER WHOSE BASE IS ITS CALLER'S. ⛔ NOT via-snapshot,
+    // and saying so is the point of this row: it sat here under the blanket above with no
+    // disposition at all, and the blanket is FALSE of it.
+    // `applySettlementLifecycleOutcomeToSettlement` (:578) stamps `dispersed: true` on every
+    // soul when a settlement dies — permanent, once. It takes NO save in its signature, so it
+    // cannot read raw itself; its base is `applyWorldPulse.js:717`'s `entry.settlement`,
+    // reaching it through `applyOutcomeToSettlement` (:733 → the writer call at :155), and
+    // that entry comes from `buildSettlementMap`'s map, made RAW by EM-B1k. MEASURED on the
+    // filtered base: roster out 2, dispersed stamps 2, the shelved soul absent, against
+    // 3 / 3 / present on the raw base — law 6 conservation broken in silence. The file now
+    // carries this contract in its own docblock, where the next editor will read it.
     'src/domain/worldPulse/settlementLifecycleFirstClass.js',
+    // ⭐ EM-B1k2 — THE SECOND PERMANENT ROSTER WRITER, same shape, same correction. ⛔ NOT
+    // via-snapshot. `replaceOustedNpcs` (:64) RETURNS A WHOLE ROSTER, so whatever it was not
+    // handed is gone from the settlement its caller writes. No save in the signature; its base
+    // is `npcVerdictPulse.js:133`'s `replacementSource` (bound at :99), which is
+    // pulseKernel.js `for (const sid of [...localSettlements.keys()])`'s entry, made RAW by
+    // EM-B1k (the seam is cited by CONTENT, never by line: tests/lint/
+    // pulseKernelLineAddress.walker.test.js freezes hand-keyed kernel addresses at zero and
+    // proves this backticked token still exists). MEASURED on the
+    // filtered base: roster out 2, the ousted person replaced, the shelved soul absent;
+    // against 3 / replaced / present on the raw base. ⚠ Its name join
+    // (`String(name).toLowerCase()`) is a SEPARATE question, closed by measurement rather than
+    // by cure: 0 duplicate display names across the 525-row golden corpus' 5,171 NPCs.
     'src/domain/worldPulse/successorNpc.js',
     'src/domain/worldPulse/worldSnapshot.js',
+    // ⭐ EM-B1k2 — THE FOURTH ROOT'S REAL CONVICTION. `disperseNamedRoster` (:317) reads
+    // `input.npcs` (:319) at GENERATION time: its one importer is narrativeGenerator.js:33,
+    // called at :995 in the coherence seam, where no `buildWorldSnapshot` has run and
+    // therefore no participation view exists at all. PARTICIPATION-INDEPENDENT BY
+    // CONSTRUCTION, not by choice — the roster it reads is the one being generated. ⛔ A
+    // future caller that hands it a TICK-TIME settlement owes the raw base and owes it here.
+    'src/generators/density/applyDensityLaw.js',
+    // ⭐ EM-B1k2 — DARK, and in this census only because the predicate now reaches past the
+    // `.npcs` literal. It reads the roster solely through `factionRosterOf` (:74, :177, :231)
+    // and the literal `.npcs` never appears in the file, so a `.npcs`-only scan could not see
+    // it. It has NO `src/` importer: nothing in production reaches it, so whatever settlement
+    // its future caller passes is what it will read, and it is policed by nothing else.
+    // ⛔ THE PACKET THAT WIRES IT OWES THE RAW-BASE DISPOSITION — R22 binds a succession to a
+    // title, which is exactly the kind of permanent seat consequence R18 governs.
+    'src/generators/density/titularSuccession.js',
   ];
 
   /**
@@ -421,9 +492,24 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // MONOTONE DOWN from here. You may burn it; you may never pad it.
   const UNDISPOSITIONED_CEILING = 7;
 
-  /** The live scan this whole block is about. */
+  /**
+   * The live scan this whole block is about.
+   *
+   * ⭐ EM-B1k2 WIDENED IT ON BOTH AXES (2026-09-20), because the census asserted a protection
+   * that did not reach the files where the IRREVERSIBLE decisions actually live. The ROOTS gain
+   * `src/domain/density` (the R18 law itself and its roster filter) and `src/generators/density`
+   * (the generation-time dispersal). The PREDICATE gains `factionRosterOf`, because the roster
+   * can be read through the estate's own filter without the literal `.npcs` ever appearing —
+   * `titularSuccession.js` is exactly that shape and was invisible to a `.npcs`-only scan.
+   * Measured: 41 → 44 readers, the three new members each dispositioned below.
+   *
+   * ⛔ TWO `-e` FLAGS, NEVER A BRE `\|` ALTERNATION. `execFileSync('grep', …)` resolves through
+   * PATH, which is BSD grep 2.6.0-FreeBSD on a macOS dev machine and GNU grep in CI. `-e` means
+   * the same thing to both; `\|` does not, and a scan whose result depends on the host's grep
+   * dialect is a ratchet that reports a different census depending on who runs it.
+   */
   function foundReaders() {
-    const out = execFileSync('grep', ['-rl', '\\.npcs', 'src/domain/worldPulse', 'src/domain/spatial'], { cwd: process.cwd(), encoding: 'utf-8' });
+    const out = execFileSync('grep', ['-rl', '-e', '\\.npcs', '-e', 'factionRosterOf', 'src/domain/worldPulse', 'src/domain/spatial', 'src/domain/density', 'src/generators/density'], { cwd: process.cwd(), encoding: 'utf-8' });
     return out.split('\n').filter((l) => l && !l.includes('.test.')).sort();
   }
 

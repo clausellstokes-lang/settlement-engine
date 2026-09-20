@@ -128,6 +128,7 @@ MUTATED_FILES=(
   tests/fixtures/.golden-freeze-register.json
   src/domain/display/publicSafe.js
   src/components/instant/InstantWorldEntry.jsx
+  src/domain/worldPulse/factionDensityKernel.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1583,6 +1584,26 @@ check_caught "step-presentation/a COMPUTED specifier pulls the module in and no 
 #      SubstrateTab.jsx:82; restored byte-identical by md5 => bare 0.
 perl -0pi -e "s/fontSize: chromeFontSize\(FS\.pico, mobile\)/fontSize: FS.pico/" src/components/new/tabs/SubstrateTab.jsx
 check_caught "phone-floor/a sub-floor size loses its helper and renders at its desktop step on a phone" src/components/new/tabs/SubstrateTab.jsx "npx vitest run tests/components/phoneChromeFloor.census.test.js --no-file-parallelism" "every sub-floor size passes through a helper or carries a written ruling"
+
+# 112. THE IRREVERSIBLE READ TAKES THE RAW ROSTER (EM-B1k2). `advanceFactionDensity`'s tick-start
+#      base is the roster `readFactionLifecycle` decides a PERMANENT dissolution from, and §810.4
+#      R18 admits only irreversible causes. Reverting the one token to `asObject(item.settlement)`
+#      hands the law the OFF-STAGE participation view again, so a house whose SOLE member is
+#      merely SHELVED has its dissolution PROPOSED.
+#      ⭐ WHY THE CONVICTION IS AT THE PRODUCTION AND NOT AT THE BEAT. EM-B1k's raw write base
+#      still REFUSES that beat downstream (`stillEmpty` over `fresh`), so a plant judged on the
+#      tick's output would read as MISSED while the defect was fully present — the habitat this
+#      packet removed is precisely a proposal that survives because something else catches it.
+#      A1 therefore wraps `readFactionLifecycle` itself and reads back the roster the mover chose
+#      to hand it. A4 reds beside it through the same defect's second door (the `fresh` fallback,
+#      where the confirmation re-reads the projection too), which is why the expected title pins
+#      A1 by name rather than counting reds.
+#      Measured with a cp backup and a cp restore (never the checkout family, because this tree is
+#      shared and `git checkout --` would discard a lane's uncommitted work; md5
+#      9e05e7e19eb149f46d39eaf307b68a22 before and after): clean => 5 passed; planted => 2 red (A1
+#      by name and A4), 3 passed, title_matches=1; restored => 5 passed.
+perl -0pi -e 's/asObject\(asObject\(item\.save\)\.settlement \|\| item\.settlement\)/asObject(item.settlement)/' src/domain/worldPulse/factionDensityKernel.js
+check_caught "irreversible-raw-roster/the R18 law reads the participation view and proposes a dissolution" src/domain/worldPulse/factionDensityKernel.js "npx vitest run tests/domain/irreversibleRawRoster.contract.test.js --no-file-parallelism" "A1 — the dissolution is never PROPOSED: the law reads the raw roster, so a shelved sole member mints no reaction"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

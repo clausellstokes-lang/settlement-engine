@@ -608,6 +608,22 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
     const dispersalNote = settlementHasUnderways(settlement)
       ? 'Escaped through the underways: fate unresolved.'
       : 'Left with the last wagons: fate unresolved.';
+    // ⛔ THE BASE THIS PERMANENT WRITE LANDS ON IS ITS CALLER'S, AND IT MUST BE THE RAW SAVE
+    // ROSTER (EM-B1k2's written contract; §810.4 law 6 conservation).
+    //
+    // The map below stamps every named soul PERMANENTLY — a settlement dies once. This
+    // function receives no save and cannot read raw itself, so the roster it is handed is
+    // whatever `applyOutcomeToSettlement` passes: `applyWorldPulse.js`'s `entry.settlement`,
+    // taken from `buildSettlementMap`'s own map and made RAW by EM-B1k. Handed the OFF-STAGE
+    // participation view instead (worldSnapshot.js:124-133), this silently drops every
+    // shelved person and every roads hostage from the dispersal — MEASURED: roster out 2,
+    // dispersed stamps 2, the shelved soul absent, against 3 / 3 / present on the raw base.
+    // They would be neither stamped nor carried, which is a named soul leaving the record
+    // with no receipt at all.
+    //
+    // ⛔ NEVER RE-BASE THIS ON A PROJECTION. It is deliberately NOT covered by the
+    // via-snapshot blanket in tests/domain/roadsParticipation.test.js — that file now carries
+    // this disposition in terms, and a caller that hands a filtered roster here is the defect.
     const npcs = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
       .map((npc) => (npc && !npc.dispersed
         ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote }
