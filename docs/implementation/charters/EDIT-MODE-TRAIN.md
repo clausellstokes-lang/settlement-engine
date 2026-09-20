@@ -865,3 +865,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **THE OWNER, IN THE LIVE SESSION (~15:3x), verbatim:** "I leave all decisions to you and give you all deferment regarding signatures and golden door signings". Every listed gate is decided as recommended: the push chain after a fully green check in addendum 115's order (the merge announced first; migrations, edge redeploys and `ops:post-deploy` the owner's hand because they need credentials); four lanes / one gate holder; PR #48 closed unmerged; the chair signs repair shift records.
 - **§934.76 DECIDED YES — FIX-G4 BRIEFED** (`briefs/launch/FIX-G4.md`), dispatched at the cured tip after CURE-L lands. FIX-W1's golden-door commit proceeds on the chair's signature of its drafted record.
+
+## Amendments of 2026-09-20 15:47 EDT — CURE-L closed; the ninth refreeze; RUN 24; BATCH GATES; TOOL-26 (ODQ §934.47 addendum 117)
+
+- CURE-L's three commits (`65cbf86e1` · `85cd9f4a8` · `835f81812`) cure RUN 23's two causes and raise the e2e CI cap; the ninth lighting refreeze `7a4ea48e9` = `2665·359·2306·25530·6815`; RUN 24 launched 15:46:14 at that tip.
+- **STAFFING AMENDED BY THE OWNER — BATCH GATES:** queued lanes with disjoint change sets compose onto one throwaway batch branch and share ONE full check; a gate-ready lane is assigned to the newest open batch it fits, else a new one; the fit test and the live batches are in the kit's `BATCH-LEDGER.md`; sealed Edit-Mode builds and a second golden-door lane are never batched together. Verb 4's pause-and-resume still governs a lane that gates alone.
+- **TOOL-26 CHARTERED:** a shrink-only roster of every test file that reads `src/` by path (104 outside `tests/lint` across 19 directories, 103 inside), and from it the governed directories per `src/` area — a lane is handed its counted set. After B1.
+- FIX-G4 dispatched as a batch member-to-be; it also measures whether the freeze register's stale `_doc` sentence can be corrected lawfully.
