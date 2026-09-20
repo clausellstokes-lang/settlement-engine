@@ -228,6 +228,44 @@ function walkFiles(dir, out = []) {
 
 const sha256Of = (rel) => createHash('sha256').update(readFileSync(join(ROOT, rel))).digest('hex');
 
+/**
+ * ⛔ THE ONE PIN, AND THIS FILE NO LONGER KEEPS A COPY OF IT (CURE-L, 2026-09-20).
+ *
+ * A4 used to carry three literal sha256 strings. That made this test a SECOND register
+ * of frozen bytes, and the estate has exactly one: `tests/fixtures/.golden-freeze-register.json`,
+ * whose rows `tests/lint/goldenFreeze.walker.test.js` holds equal to the files they
+ * name ("every frozen row byte-hashes to its register sha256"). When CURE-J re-recorded
+ * the prose-manifest golden through the owner's signed door (ODQ §934.71, rows 1050 ->
+ * 1050, provenance only), the register moved with it and this literal did not — so a
+ * LAWFUL act reddened a packet acceptance arm that had nothing to say about it.
+ *
+ * Reading the register instead keeps A4's real claim exactly as strong: the pulse
+ * history has not moved relative to what the estate pins. A signed re-record moves the
+ * file AND its row together and can never red this again; an UNSIGNED movement moves
+ * the file alone and still reds, here and in the freeze walker both.
+ */
+const REGISTER_REL = 'tests/fixtures/.golden-freeze-register.json';
+
+/**
+ * The sha a register's rows pin for one surface IDENTITY — never an index, never a
+ * position. PURE, so the counterforce can feed it a doctored register.
+ *
+ * ⚠ FAIL-CLOSED BY CONSTRUCTION. An unknown surface, a missing `sha256`, or a rows
+ * array that has stopped being an array all yield a sentence that cannot equal a
+ * 64-hex digest, so a reader that quietly stopped resolving REDS here instead of
+ * passing vacuously. That is the whole failure mode a byte pin has.
+ */
+const pinIn = (rows, surface) => {
+  const row = (Array.isArray(rows) ? rows : []).find((r) => r?.surface === surface);
+  return typeof row?.sha256 === 'string' ? row.sha256 : `NO REGISTER PIN FOR SURFACE: ${surface}`;
+};
+
+/** That same lookup against the live register. */
+const registerPinOf = (surface) => pinIn(
+  JSON.parse(readFileSync(join(ROOT, REGISTER_REL), 'utf8')).surfaces,
+  surface,
+);
+
 describe('EM-B1e — the pulse ruin shape has exactly one writer', () => {
   it('A1 BYTE-EQUALITY: both calamity ruin sites still write the pre-refactor record, to the byte', () => {
     const s = struckOf(runStrike());
@@ -281,15 +319,29 @@ describe('EM-B1e — the pulse ruin shape has exactly one writer', () => {
   });
 
   it('A4 the pulse history does not move: both goldens and the preset witness are bytewise unchanged', () => {
-    // ⛔ PACKET-SCOPED BYTE PIN. These are actuals measured at this packet's base,
-    // asserted so the refactor cannot move a golden silently. The preset witness is
-    // the instrument that actually covers this path (it hashes 52 interior one-week
-    // ticks of world pulse) and it has NO capture arm by design, so a move cannot be
-    // quietly re-recorded. A lawful move is a hand act with a stated cause under
-    // docs/GOLDEN_SHIFT_LEDGER.md, which re-records this line too.
-    expect(sha256Of('tests/fixtures/generator-golden-master.json')).toBe('7177cd6e89ebee404dec05d725d91e98ff59d2cfa124104a9a22515a7c8e8f1e');
-    expect(sha256Of('tests/fixtures/dossier-prose-manifest-golden.json')).toBe('921c51cf6799ffdfdbffa3715fb496f7d15ce44fff508864653d8ebf3bb4db41');
-    expect(sha256Of('tests/fixtures/preset-lighting-witness-golden.json')).toBe('7f67ee8e6cda2b7e70a780090b16db20a4f8032a1746a51b2e044dd69bd98ae2');
+    // ⛔ PACKET-SCOPED BYTE PIN, READ FROM THE ESTATE'S ONE REGISTER (CURE-L, see
+    // `pinIn` above for why the three literals this arm used to carry are gone). The
+    // preset witness is the instrument that actually covers this path — it hashes 52
+    // interior one-week ticks of world pulse — and it has NO capture arm by design, so
+    // a move cannot be quietly re-recorded. A lawful move is a signed act through
+    // tests/helpers/goldenRecordDoor.js, which moves the register row this reads.
+    //
+    // Collected then asserted ONCE, with the surface identity carried into the
+    // comparison so a failure names WHICH artefact moved rather than printing two
+    // bare digests.
+    const SURFACES = [
+      ['generator-golden-master', 'tests/fixtures/generator-golden-master.json'],
+      ['dossier-prose-manifest', 'tests/fixtures/dossier-prose-manifest-golden.json'],
+      ['preset-lighting-witness', 'tests/fixtures/preset-lighting-witness-golden.json'],
+    ];
+    const live = SURFACES.map(([surface, rel]) => `${surface} ${sha256Of(rel)}`);
+    const pinned = SURFACES.map(([surface]) => `${surface} ${registerPinOf(surface)}`);
+    expect(
+      live,
+      'the pulse history moved against the golden freeze register. If this was a SIGNED '
+      + 're-record, the register row moves with the file through goldenRecordDoor.js and '
+      + 'this arm never sees it; an unsigned movement is the finding.',
+    ).toEqual(pinned);
   });
 
   it('A5 pure: the input is never mutated, the result is a new object, and repetition changes nothing', () => {
