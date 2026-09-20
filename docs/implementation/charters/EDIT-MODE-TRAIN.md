@@ -759,3 +759,8 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 
 - **The fourth preamble amendment is in force** (`2dc08a595`; SHA `c9f33c8d…6675`): the worker budget has no placement cure. EM-R0a is placed under it at this sitting; every later member cites it.
 - **One new test file is parked by the walker's grammar at the composed tip** (8 titles / 2 suites); its lane cures or the park is accepted with the reason at the next sitting, on COMPOSE-REPROOF-1's naming.
+
+## Amendments of 2026-09-20 12:04 EDT — EM-R0a placed and building (ODQ §934.47 addendum 97)
+
+- **EM-R0a is READY at `2dc08a595` (placed `680eacb8d`) and building under seal;** EM-R0d (conditional on FIX-C2, now composed) is placed at R0a's flip; EM-R0b v4 after R0a and R0d land; EM-R0f after R0b; EM-R0c after R0f and R0b.
+- **Compile law:** a compiled manifest writes `retiredSymbols: []`, never `null` or a word — the validator refuses a non-array when the key is present; the placement script normalises an empty marker and refuses anything else.
