@@ -99,6 +99,24 @@ export const BOTTOM_NAV_H = `var(${BOTTOM_NAV_H_VAR}, 0px)`;
 export const aboveBottomNav = (base) => `calc(${base}px + ${BOTTOM_NAV_H})`;
 
 /**
+ * ⭐ THE STABLE HOOK ON THE FIXED BOTTOM BAR (App.jsx's primary nav below 1024 px), the
+ * sibling of FOOTER_LINKS_ATTR below and declared for the same reason.
+ *
+ * A measurement that judges what sits UNDER the bar has to be able to tell the bar's own
+ * seats apart from the page's controls, and the only way to find the bar was a SHAPE:
+ * "the first <nav> whose computed position is fixed". A shape is not a contract. It
+ * matched the bar and then convicted the bar's five seats of sitting under the bar on
+ * every route (27 reds, CI job 106141849116), and the day the bar stops being a fixed
+ * <nav> it would match NOTHING and report every route clean instead — a vacuous green on
+ * the one instrument the estate has for phone reachability.
+ *
+ * So the bar declares itself. The attribute changes nothing about how it renders, and
+ * tests/lint/phoneBarOrder.walker.test.js pins it, so the next markup change reds a fast
+ * test rather than a fourteen-minute browser job.
+ */
+export const BOTTOM_NAV_ATTR = 'data-sf-bottom-nav';
+
+/**
  * The stable hook on LegalRibbonRow's links row (the <nav>). The band ends at the top
  * of the row after it, and the rows after it are the tucked ones.
  */

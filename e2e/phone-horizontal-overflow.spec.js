@@ -53,6 +53,7 @@
  */
 import { expect, test } from '@playwright/test';
 import { staticUrls } from '../scripts/generate-sitemap.mjs';
+import { BOTTOM_NAV_ATTR } from '../src/lib/chromeInsets.js';
 
 /** The narrowest common phone. Narrower than the 391px the walk used, deliberately. */
 test.use({ viewport: { width: 375, height: 812 } });
@@ -157,6 +158,22 @@ test.describe('phone layout — no horizontal overflow at 375px', () => {
  * ⚠ ONLY WHAT A READER COULD USE IS JUDGED. A control that is `display:none`, zero-area,
  * inside a closed dialog or `aria-hidden` is not a reachability failure — it is not on
  * the page. A control that is VISIBLE and under the bar is.
+ *
+ * ⛔ AND THE BAR'S OWN SEATS ARE NOT THE PAGE. This judged EVERY control in the document
+ * against the bar's top edge, the bar's five seats included — and a seat in a bar pinned
+ * to `bottom: 0` ends at the viewport's bottom edge BY DEFINITION, which is the bar's own
+ * height below the floor. So the instrument convicted the bar of sitting under itself on
+ * every route it walked (27 reds, CI job 106141849116: five controls, `bottom: 812,
+ * past: 45`, identically on all 27). The bar is now found by its DECLARED hook
+ * (BOTTOM_NAV_ATTR, src/lib/chromeInsets.js) rather than by the shape "the first <nav>
+ * whose computed position is fixed", its own descendants are exempt, and `barFound` is
+ * asserted — because the shape's other failure mode is the silent one: the day the bar
+ * stops matching, the floor becomes the viewport bottom and every route reports clean.
+ *
+ * ⛔ THE ANTI-VACUITY COUNT IS THE PAGE'S CONTROLS, NOT THE DOCUMENT'S. The bar draws five
+ * controls on every route no matter what the view does, so a count over the document would
+ * be satisfied by the chrome alone — which is precisely the thrown-lazy-chunk case the
+ * count exists to catch.
  */
 async function unreachable(page) {
   await page.evaluate(async () => {
@@ -166,9 +183,8 @@ async function unreachable(page) {
     window.scrollTo(0, document.documentElement.scrollHeight);
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
   });
-  return page.evaluate(() => {
-    const bar = [...document.querySelectorAll('nav')]
-      .find((n) => getComputedStyle(n).position === 'fixed');
+  return page.evaluate((attr) => {
+    const bar = document.querySelector(`[${attr}]`);
     const barTop = bar ? bar.getBoundingClientRect().top : window.innerHeight;
     const floor = Math.min(barTop, window.innerHeight);
     const visible = (el) => {
@@ -178,7 +194,10 @@ async function unreachable(page) {
       const r = el.getBoundingClientRect();
       return r.width > 0 && r.height > 0;
     };
-    const under = [...document.querySelectorAll('button, a[href], input, select, textarea, [role="button"]')]
+    const CONTROLS = 'button, a[href], input, select, textarea, [role="button"]';
+    // The PAGE's controls: everything the document draws, minus the bar's own seats.
+    const owned = [...document.querySelectorAll(CONTROLS)].filter((el) => !(bar && bar.contains(el)));
+    const under = owned
       .filter(visible)
       .map((el) => ({ el, r: el.getBoundingClientRect() }))
       .filter(({ r }) => r.bottom > floor + 1)
@@ -189,19 +208,23 @@ async function unreachable(page) {
         past: Math.round(r.bottom - floor),
       }));
     return {
+      barFound: Boolean(bar),
       floor: Math.round(floor),
       barHeight: bar ? Math.round(window.innerHeight - barTop) : 0,
       innerHeight: window.innerHeight,
       under: under.slice(0, 8),
       underCount: under.length,
-      controls: document.querySelectorAll('button, a[href], input, select, textarea, [role="button"]').length,
+      controls: document.querySelectorAll(CONTROLS).length,
+      pageControls: owned.length,
     };
-  });
+  }, BOTTOM_NAV_ATTR);
 }
 
 const reachReport = (route, m) => `\n${route} has ${m.underCount} control(s) a phone `
   + `cannot scroll to: at the end of every scroller they still sit below ${m.floor}px, `
   + `which is the top of the ${m.barHeight}px bottom bar in a ${m.innerHeight}px viewport.\n`
+  + `  (${m.pageControls} of the page's own controls were judged; the bar's own seats are not `
+  + 'among them.)\n'
   + m.under.map((u) => `    +${u.past}px under the bar  <${u.tag}>  "${u.name}"`).join('\n')
   + '\n\n  Cure it at the LAYOUT ROOT, never per card: a content column must not be a '
   + 'fixed-height box inside `overflow: hidden` with controls outside its one scroller, '
@@ -214,9 +237,14 @@ test.describe('phone layout — every route reaches its last control at 375px', 
       await page.goto(route);
       await settle(page);
       const m = await unreachable(page);
-      // ⛔ ANTI-VACUITY: a page that rendered no controls satisfies "nothing is under the
-      // bar" trivially, which is exactly what a thrown lazy chunk leaves behind.
-      expect(m.controls, `${route} rendered no interactive element at all`).toBeGreaterThan(0);
+      // ⛔ ANTI-VACUITY, BOTH WAYS. A page that rendered no controls satisfies "nothing is
+      // under the bar" trivially, which is exactly what a thrown lazy chunk leaves behind —
+      // and the count has to EXCLUDE the bar, which draws five seats on every route however
+      // badly the view failed. A bar the walk cannot find is the other vacuous green: the
+      // floor silently becomes the viewport bottom and every route reports clean.
+      expect(m.barFound, `${route}: the bottom bar carries no ${BOTTOM_NAV_ATTR} hook, so the `
+        + 'floor is the viewport edge and this measurement means nothing').toBe(true);
+      expect(m.pageControls, `${route} rendered no interactive element of its own`).toBeGreaterThan(0);
       expect(m.under, reachReport(route, m)).toEqual([]);
     });
   }
@@ -227,6 +255,8 @@ test.describe('phone layout — every route reaches its last control at 375px', 
     await page.goto('/settlements');
     await settle(page);
     const m = await unreachable(page);
+    expect(m.barFound, 'the bottom bar carries no hook, so this measurement means nothing').toBe(true);
+    expect(m.pageControls, 'the library rendered no interactive element of its own').toBeGreaterThan(0);
     expect(m.under, reachReport('/settlements', m)).toEqual([]);
     const named = await page.evaluate(() => [...document.querySelectorAll('button')]
       .map((b) => (b.getAttribute('aria-label') || b.textContent || '').trim())
@@ -235,5 +265,40 @@ test.describe('phone layout — every route reaches its last control at 375px', 
     // of them is drawn, the arm above has already proved it is reachable. Recorded so a
     // reader of a green run knows which controls were on the page when it passed.
     expect(Array.isArray(named)).toBe(true);
+  });
+
+  test('NEGATIVE CONTROL: a control planted under the bar is still convicted', async ({ page }) => {
+    // ⛔ EXEMPTING THE BAR'S OWN SEATS IS A HOLE CUT IN THE INSTRUMENT, AND THIS IS THE
+    // PROOF THAT IT IS ONLY THAT HOLE. Every arm above is an assertion that a list is
+    // EMPTY, and an exemption that grew one element too wide would make all 27 of them
+    // pass forever on a page whose last control really was unreachable. So a visible
+    // button is planted in the page's own body, fixed exactly where the bar sits, and the
+    // SAME `unreachable()` the sweep runs has to name it.
+    await page.goto('/');
+    await settle(page);
+    const clean = await unreachable(page);
+    expect(clean.barFound, 'presence control: the bar was found by its declared hook').toBe(true);
+    expect(clean.under, 'presence control: the landing is clean before the plant').toEqual([]);
+
+    await page.evaluate(() => {
+      const plant = document.createElement('button');
+      plant.type = 'button';
+      plant.textContent = 'PLANTED under the bar';
+      // Fixed to the viewport's bottom edge: the same geometry the bar's own seats have,
+      // and the geometry a clipped panel's last control ends up with.
+      plant.style.cssText = 'position:fixed;left:0;bottom:0;width:120px;height:40px;z-index:1';
+      document.querySelector('main').appendChild(plant);
+    });
+
+    const planted = await unreachable(page);
+    expect(
+      planted.underCount,
+      'the instrument stopped convicting a control under the bar — the bar exemption is too wide',
+    ).toBe(1);
+    expect(planted.under[0].name).toBe('PLANTED under the bar');
+    expect(planted.under[0].past, 'the plant sits under the bar by the bar\'s own height')
+      .toBe(planted.barHeight);
+    expect(planted.pageControls, 'the plant joined the page\'s own controls, not the bar\'s')
+      .toBe(clean.pageControls + 1);
   });
 });

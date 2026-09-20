@@ -206,7 +206,11 @@ export const bottomClearance = (basePx) =>
  *
  * and beside them THE PAINTED ARROW'S LENGTHS (their names, the var() strings with a
  * 0px fallback, and aboveBottomNav(px), which lifts a desktop-branch bottom offset over
- * the bottom bar that shows from 640 to 1023 px); see the CHROME note above.
+ * the bottom bar that shows from 640 to 1023 px); see the CHROME note above. And:
+ *
+ *   BOTTOM_NAV_ATTR       the stable hook on App.jsx's fixed bottom bar, so a
+ *                         measurement can tell the bar's own seats from the page's
+ *                         controls without guessing at its markup
  *
  * The leaf exists because theme.js sits outside the full-tree typecheck include,
  * and a hook under src/hooks importing theme.js directly would pull this file (and
@@ -217,5 +221,5 @@ export const bottomClearance = (basePx) =>
 export {
   FOOTER_INSET_VAR, FOOTER_TUCK_VAR, HEADER_HEIGHT_VAR, FOOTER_LINKS_ATTR, FOOTER_INSET, FOOTER_TUCKED_BOTTOM, aboveFooter,
   ARROW_HANG_VAR, ARROW_CLEAR_VAR, ARROW_BARB_CLEAR_VAR, BOTTOM_NAV_H_VAR, ARROW_VARS,
-  HEADER_H, ARROW_HANG, ARROW_CLEAR, ARROW_BARB_CLEAR, BOTTOM_NAV_H, aboveBottomNav,
+  HEADER_H, ARROW_HANG, ARROW_CLEAR, ARROW_BARB_CLEAR, BOTTOM_NAV_H, aboveBottomNav, BOTTOM_NAV_ATTR,
 } from '../lib/chromeInsets.js';

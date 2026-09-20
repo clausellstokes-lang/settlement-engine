@@ -34,9 +34,12 @@ import { join } from 'node:path';
 
 import { NAV, NAV_FLOW, PHONE_NAV_EXCLUDED, ROUTES, barNav } from '../../src/lib/routes.js';
 import { NAV_HIT } from '../../src/components/nav/arrowGeometry.js';
+import { BOTTOM_NAV_ATTR } from '../../src/lib/chromeInsets.js';
 
 const ROOT = process.cwd();
 const APP = readFileSync(join(ROOT, 'src/App.jsx'), 'utf8');
+/** components/theme.js, the declared path every surface reads its chrome vocabulary from. */
+const THEME = readFileSync(join(ROOT, 'src/components/theme.js'), 'utf8');
 /**
  * App.jsx with its comments stripped. The source arms below ask what the file DOES, and
  * the file legitimately NAMES the retired array in prose to say what it replaced — a
@@ -117,6 +120,39 @@ describe('THE PHONE BAR — one order, derived from the painting', () => {
     // …and no OTHER literal list of view ids either — the shape, not the one name.
     const idLiterals = [...APP_CODE.matchAll(/\[\s*('|")generate\1\s*,/g)];
     expect(idLiterals.map((m) => m[0]), 'a new literal array of nav view ids in App.jsx').toEqual([]);
+  });
+
+  test('the bar DECLARES itself, so a measurement can tell its seats from the page', () => {
+    // ⭐ THE HOOK THE PHONE REACHABILITY WALK MEASURES BY (e2e/phone-horizontal-overflow.spec.js).
+    // That walk judges every control on the page against the TOP OF THIS BAR, and it found
+    // the bar by a SHAPE: "the first <nav> whose computed position is fixed". A shape is not
+    // a contract, and it failed in both directions at once. It matched — and then convicted
+    // the bar's own five seats of sitting under the bar on every route it walked (27 reds,
+    // CI job 106141849116: `bottom: 812, past: 45`, five controls, identically on all 27),
+    // because a seat in a bar pinned to `bottom: 0` ends at the viewport edge by definition.
+    // And the day the bar stops being a fixed <nav>, the shape would match NOTHING, the floor
+    // would silently become the viewport bottom, and every route would report clean.
+    //
+    // So the bar carries the estate's declared attribute idiom (BOTTOM_NAV_ATTR in
+    // src/lib/chromeInsets.js, the sibling of FOOTER_LINKS_ATTR on the footer's links row),
+    // the walk asserts it found one, and THIS arm is the fast test that reds in seconds where
+    // that browser job takes fourteen minutes.
+    expect(
+      BOTTOM_NAV_ATTR,
+      'the bar hook was renamed. That is safe for the e2e walk, which reads it from the same '
+      + 'leaf — but this arm and the source arm below spell it, so re-spell them together.',
+    ).toBe('data-sf-bottom-nav');
+    expect(
+      THEME,
+      'src/components/theme.js stopped re-exporting BOTTOM_NAV_ATTR from the chromeInsets leaf, '
+      + 'so App.jsx can no longer read its chrome vocabulary from the one declared path',
+    ).toMatch(/BOTTOM_NAV_ATTR[\s\S]{0,200}?from '\.\.\/lib\/chromeInsets\.js'/);
+    expect(
+      APP_CODE,
+      '\nsrc/App.jsx\'s fixed bottom bar no longer carries BOTTOM_NAV_ATTR. The phone '
+      + 'reachability walk finds the bar by that hook and asserts it found one, so the browser '
+      + 'suite reds on every public route. Put the hook back on the <nav>; do not loosen the walk.\n',
+    ).toMatch(/<nav aria-label="Primary" \{\.\.\.\{ \[BOTTOM_NAV_ATTR\]: '' \}\}/);
   });
 
   test('the hairline falls after the working pair, on the phone only', () => {

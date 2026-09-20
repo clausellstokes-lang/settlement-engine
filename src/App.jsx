@@ -33,7 +33,7 @@ import { allowsFloatingFeedback, barNav, guardForView, redirectForView, viewToPa
 import { applyDocumentHead } from './lib/seo.js';
 import {
   GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, sans, SP, R, FS, swatch, CHROME, bottomClearance, aboveFooter, FOOTER_TUCKED_BOTTOM,
-  ARROW_HANG, BOTTOM_NAV_H, HEADER_H, aboveBottomNav,
+  ARROW_HANG, BOTTOM_NAV_H, BOTTOM_NAV_ATTR, HEADER_H, aboveBottomNav,
 } from './components/theme.js';
 import { resolveViewBackground, paintsPageBackground } from './config/pageBackgrounds.js';
 import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
@@ -623,8 +623,13 @@ export default function App() {
             header so the destinations come before the page in the Tab order, as the
             header's nav did from 640 px before the painted arrow. Fixed, so its place in
             the DOM does not move it on screen. */}
+        {/* BOTTOM_NAV_ATTR is the bar's stable hook (lib/chromeInsets.js), the sibling of
+            the footer links row's. It changes nothing about how the bar renders; it lets a
+            measurement tell the bar's own seats from the page's controls without guessing
+            at its markup, which is how the phone reachability walk came to convict the bar
+            of sitting under itself on every route. */}
         {narrow && (
-          <nav aria-label="Primary" style={{
+          <nav aria-label="Primary" {...{ [BOTTOM_NAV_ATTR]: '' }} style={{
             position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100,
             background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
             borderTop: BAR_RULE,
