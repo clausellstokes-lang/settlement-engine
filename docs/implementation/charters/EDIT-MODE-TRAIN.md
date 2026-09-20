@@ -470,6 +470,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **CORRECTION to the amendment of 2026-09-19 17:36 (EM-B1f ruling 3):** the ninth roster row's reasoned omission is `omits: ALL_BUT_DEAD` — the walker's own arm refuses an omission naming `active` (not a member of the live union) or one that enumerates the union without the three new members. **Train EM-T6 now opens EM-B1k2 → EM-B1f** (defence in depth lands before the filter widens; they share `roadsParticipation.test.js`), then EM-B1h → EM-B1i → EM-B1j → EM-A2b → EM-B1a. EM-B1f's walker rows gain `spelling: 'derived'`.
 - **EM-B1j's compile** measures the readers of the institution status `'remnant'` (written by `tierOutcomeApply.js` outside the `EntityStatus` typedef); a separate vocabulary charters **EM-B1l**. **EM-B3c** builds in the slot now.
 
+## Amendments of 2026-09-20 03:37 EDT — the cure lane's receipt and its ten items fated (ODQ §934.47 addendum 47)
+
+- **TOOL-7** carries: the marker-slice lint (string-and-comment-skipping form), the shared `objectLiteralKeys`/`fnBody` helpers moved to `tests/helpers/`, and the root-anchor tidy-up of `humanizeEngineTokens.test.js`. **TOOL-6b** carries the sweep plant for `pulseKernel.js`. **EM-P3b** carries `GENERATED_ROUTE_VALUES`'s pin and the two fixture oddities, with `landingFixture.js:47`'s reader check deciding whether **FIX-P5** cures it on the public landing now.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
