@@ -33029,9 +33029,10 @@
     },
     {
       "id": "EM-R0a",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-R0a.md",
       "verifiedBase": "2dc08a595134d7571012dcc515ec4bb0dd147b73",
+      "landedAt": "26f22d3948c6db3e7eae03e78049bc7ed4a76564",
       "changeManifest": [
         {
           "_note": "THE REGISTER, VERSION 2. Pure frozen data: twelve exports, no import, no function, no branch. Copied VERBATIM from the packet §6 with §5.1/§5.2's tables expanded — every row is a measurement over the golden corpus AND the save path. VERSION 2's content: 47 classed top-level keys (41 generated + 4 SAVED-ONLY + 2 the editor's) · 3 CLASS_EXCEPTIONS (the RECEIPT, the MIRROR, and — new, measured — `generationCoherenceReceipt.repairs` → HISTORY, the ONLY receipt sub-path that moves when a HISTORY input is withheld) · 48 KEYED (two left under design §22.3 item 3) · 15 ATOMIC · 2 CROSS_ENTRY_TOTALS · 9 KEY_UNPROVEN_AT_LENGTH_ONE · 3 UNMERGEABLE · ⭐ 7 CONSISTENCY_GROUPS (VERSION 3: the seventh, `history-age`, rooted at `history` with the two-member list ['age','founding.age'], ordered by ODQ §934.47 addendum 38 ruling (1) — `history.age === history.founding.age` re-executed at the pre-proof tip, EQUAL in 63/63, the value a NUMBER, root and both members resolving 63/63 (evidence E-41). `members: null` would be a DEFECT there: history also carries the three ORDER-BEARING collections eventsTimeline, historicalEvents and currentTensions, which a whole-object group would move whenever the age moved.) MEASURED DRAFT = 163 effective lines at version 2, 164 at version 3 (the seventh group is one declaration line) (non-blank, non-comment) against a ≤210 bound and the standard's 250-per-leaf cap, so NO SPLIT IS NEEDED. ⛔ NO src/generators/** MODULE MAY IMPORT THIS FILE: EM-P3 measured that one path segment sends EAGER_FIRST_PAINT_MODULES 268 → 270. At this packet's landing NOTHING imports it, so it is emitted in no chunk and every bundle delta is exactly 0 B; the first importer will be EM-R0c (THE MERGE).",

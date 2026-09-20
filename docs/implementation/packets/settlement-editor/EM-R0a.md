@@ -2,11 +2,12 @@
 
 **Preamble:** docs/implementation/preambles/EM-PREAMBLE.md (SHA-256: c9f33c8d2940372bde8a6d931e3d389b79516a90ed45405cbbbf3e698cc46675 — stamped by the chair at placement — verified at this pre-proof's tip `141a1d775` as `16dfb96fa79320abc7dcfbdd8f5152b6aa66998c269287a951079df6c8223195`, E-46. ⚠ It has MOVED TWICE under this packet: version 1 cited `1cf5442719…`, version 2 `b90a95b7af…`, and the SECOND amendment lands §P2 row 11's two new sentences. **Rows 10, 11 and 12 are each answered, not inherited** — no `checks` command of this packet runs a generator, no `src/` path of it is an edge-shared input, it widens no EXISTING named set, it lands 0 B in every budget so row 11's skipped-byte-arm sentence has no arm to skip, and `EAGER_FIRST_PAINT_MODULES` was re-measured BY IMPORT (268 modules, zero `src/domain/edit/` paths) exactly as row 11 demands. §7 says so.)
 
-- **Status:** `READY`
+- **Status:** `LANDED`
   ⚠ **READY-able at `141a1d775`** — every verified fact re-found by symbol at that tip (E-35…E-48);
   the chair promotes by stamping the status, the base and the preamble hash.
   ⚠ The status value stands ALONE on its line because `parsePacketHeader`
   (`scripts/implementation-packets.mjs:294`) anchors the status row at end-of-line.
+- **Landed at:** `26f22d3948c6db3e7eae03e78049bc7ed4a76564` — the twelfth landing — 6 files (+638/−5): `src/domain/edit/recordRegister.js` and its totality walker created, the mutation-coverage row, the wiring census regenerated (`producerIndexFiles` 1172 → 1173), two comment-only re-cuts; sealed at 680eacb8d (digest `981c3b39…e10d`), the nine §P6 mutants each convicted under its own title, `check:packet` and `implementation:resume` red on the ONE named pre-existing title only (the prose manifest's provenance — cured on CURE-J's branch, composing at this sitting); the NUL class struck a third time and was cured structurally (`JSON.stringify(key.map(...))`); the chair's build + `verify:dist` at the landing in flight
 - **Packet version:** 3 (compiled at `58fcfe614`, re-cut at `ad7ddf2c9`, pre-proofed at `141a1d775`)
   **What version 3 changed and why.** An Opus pre-proof lane re-measured every verified fact at
   `141a1d775` under the chair's standing instruction to pre-proof this packet WITH the `history`
@@ -924,7 +925,7 @@ Do not edit the packet, broaden the manifest, repair unrelated gate failures, or
 
 ## 12. Completion receipt
 
-⭐ **THE COMPLETION COMMIT NAMES EXACTLY THESE THREE PATHS AND NO OTHER** — the commit is made with
+⭐ **THE COMPLETION COMMIT NAMES EXACTLY THESE THREE PATHS AND NO OTHER** *(RE-CUT AT THE FLIP, the chair, 2026-09-20 — ODQ §934.47 addendum 105: the three were the compile's; the chair's placement cuts added THREE more rows to §7 — the wiring-census MODIFY row (preamble row 13) and the two comment-only MODIFY rows for `tests/store/decreeRegistryPersistence.test.js` and `tests/lib/editTravel.test.js` — so the completion commit lawfully named SIX paths, §7 being the sealed authority; the build lane noticed the staleness and followed §7. A landed record is annotated, never rewritten.)* — the commit is made with
 an explicit pathspec and `git show --stat HEAD` is read back before the receipt is written:
 
 ```
