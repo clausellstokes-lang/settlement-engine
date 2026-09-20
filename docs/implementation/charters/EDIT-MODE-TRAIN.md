@@ -415,6 +415,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **TOOL-7 (NEW, tooling; measure-first):** a lint arm over `src/` for the `in` operator against a frozen literal object (it reads prototype members — `constructor`, `toString`, `valueOf`, `__proto__` — executed by EM-B1i's compile); the population is measured before the arm is written.
 - **FIX-C2 (NEW, a parallel measure-first lane in the next composition train):** the estate's existing `<file>:<line>` citations in tests and docs swept against live line numbers (one was found stale by eleven lines); pre-proof step 16 guards packets, nothing guards what already exists.
 
+## Amendments of 2026-09-20 02:46 EDT — EM-R6 version 3.1 accepted; the sentinel vocabulary is eleven (FIX-D5 +245 B); its pre-proof gains two arms; EM-R7 gains a `readable` source scan (ODQ §934.47 addendum 37)
+
+- **EM-R6 version 3.1** (kit `packets-waiting/EM-R6.*`) folds the nine rulings of addendum 34 with a declared `rewrite` field and an import-time `readable` resolver; FIX-D5 rides (eleven sentinel spellings, 3 live / 8 dark; +5 effective lines, +245 B). **Its pre-proof adds:** a closed-vocabulary pin on `LABEL_REWRITE` (OrphanKind's shape) and a set-equality arm joining `servicesGenerator.js`'s sentinel literals to the domain's declared list. **EM-R7 adds** a `tests/lint` source-scan arm enforcing `readable` on both cascade ledgers. **EM-B1c's pre-proof** carries the faction-side `readable` typing.
+
 ## Pre-proof tasks (Opus, read-only, before each packet is READY)
 1. Name every "verified fact" with file:line at the base; 2. fill the change manifest and required symbols; 3. measure the budget (files, lines) and split if over; 4. name the tests the packet's proof shape copies; 5. run the sealed dispatch dry.
 
