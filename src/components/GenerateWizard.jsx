@@ -24,6 +24,7 @@ import WizardCloseout from './generate/WizardCloseout.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME, HEADER_H } from './theme.js';
 import { t } from '../copy/index.js';
 import RefusalNotice from './primitives/RefusalNotice.jsx';
+import { raisedHere, REFUSAL_SURFACES } from '../lib/refusalReasons.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -220,7 +221,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       });
     } catch { /* analytics must never affect generation */ }
     try {
-      const generated = await generate();
+      // `at` names WHERE the reader clicked (REVIEW-P F12): one store record was
+      // painted by every mount on the page, so one refusal was announced twice. The
+      // gate stamps this key; only this surface says what it raised.
+      const generated = await generate(undefined, { at: REFUSAL_SURFACES.GENERATE_WIZARD });
       // ⛔ A REFUSAL IS NOT AN ERROR, AND TURNING ONE INTO AN ERROR IS HOW THE REASON
       // WAS LOST. This used to throw on a null, which landed the reader on the generic
       // "we couldn't generate" line for what was actually a known, explainable gate —
@@ -447,7 +451,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         {/* A recorded REFUSAL wins over the generic error line: it knows which gate
             refused and can name the door. The two are exclusive so a reader never
             gets a reason and a shrug at the same time. */}
-        {lastRefusal ? (
+        {raisedHere(lastRefusal, REFUSAL_SURFACES.GENERATE_WIZARD) ? (
           <RefusalNotice
             refusal={lastRefusal}
             actions={typeof onSignIn === 'function' ? (
@@ -502,8 +506,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
       {/* Regenerate lives in the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the
-          dossier. */}
-      {settlement && generateError && (
+          dossier.
+          ⛔ AND A RECORDED REFUSAL SUPPRESSES IT, exactly as on the pre-generate
+          branch: a throw leaves BOTH a generateError and a lane-recorded reason,
+          and the reason knows which failure it was (a spent allowance, a stale
+          build) where the generic line only knows that something went wrong. Two
+          alerts for one click is the doubling F12 found on /create. */}
+      {settlement && generateError && !lastRefusal && (
         <ClerkNote
           role="alert"
           rubric={t('generate.notes.errorRubric')}
@@ -538,6 +547,17 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             handleNewSettlement={handleNewSettlement}
             maxWidth={PAGE_MAX}
           />
+
+          {/* ⛔ THE FOURTH REGENERATE WAS A DEAD CLICK (REVIEW-P F3, ODQ §934.24(c)).
+              After one generation and two rerolls the toolbar's "↻ Regenerate draft"
+              left the town unchanged, recorded `dailyCap` on the store, and rendered
+              NOTHING — no role=alert anywhere on the page, the button still enabled.
+              The dossier branch was the one generation surface with no notice at all.
+              It is mounted HERE, under the sticky bar that carries the button and
+              above the dossier it would have replaced, on the same parchment ground
+              the re-roll error line uses; the toolbar's own box is the dark arrow
+              band, where a clerk's note (ink on no wash) would not be readable. */}
+          <RefusalNotice refusal={raisedHere(lastRefusal, REFUSAL_SURFACES.GENERATE_WIZARD) ? lastRefusal : null} style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }} />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Laying out the settlement dossier…</div>}>
             {/* P139 — cap the dossier body to the shared page width so it
