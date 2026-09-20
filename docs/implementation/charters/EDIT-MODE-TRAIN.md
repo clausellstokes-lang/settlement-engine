@@ -711,3 +711,10 @@ CURE-A `08cb42e31` (the model walker's mask: findings identical under both forms
 - **DOC-1 (NEW; the chair's, at the composition sitting):** the prose ceiling's authority — ARCH-COMPOSED-PROSE §10–§13, cited by five files and existing nowhere — materialised as `docs/ARCH_COMPOSED_PROSE.md` §10–§13 from `proseCorpusBytes.test.js`'s docblock and the baseline's `_ceilingArithmetic` (a restatement, no new law), the five citations left true.
 - **DOC-2 (NEW; the chair's, one line):** `src/generators/data/deityPool.js`'s deletion within the window recorded with its reason beside the deity doctrine, if the deleting commit does not already carry it.
 - **TOOL-17's brief gains a second measurement:** which chunk carries `causeConjunctionRole*`'s 203,036 shipping bytes and what that chunk's budget is.
+
+## Amendments of 2026-09-20 09:19 EDT — FIX-P5 complete; FIX-P10 chartered (ODQ §934.47 addendum 89)
+
+- **FIX-P5 is complete on its lane** (`e207d0718`, `881c84863`, `5c29fef92`, `a5575107a`, `ec7d8a363`); composed after FIX-P4 at the composition sitting.
+- **FIX-P10 (NEW; after FIX-P5 composes; measure-first):** the phone-floor family's leftovers — five prose-shaped 12–13 px lines on lane 28's surfaces (`src/App.jsx:916`, `:946`, …); `phoneChromeFloor`'s stale `/create` and `/settlements` rows re-measured shrink-only; `WizardOutputToolbar`'s sticky offset against the painted header's real height; `dossierPhoneFloorAllViews.test.jsx` extended to `/pricing`.
+- **FIX-P9 gains:** the taste-approved sample's `†` (`PricingSample.jsx`) checked against the shipped registry.
+- **§934.64 sharpened by measurement:** 12 px cannot fit the painted slip at any phone width (misses by 2.11 px at 375); the chair recommends keeping 10 px.
