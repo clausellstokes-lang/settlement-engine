@@ -247,13 +247,11 @@ cure can only change worlds where the bug fires.
 | `MODIFY` | `src/domain/worldPulse/pulseKernel.js` | `buildSettlementMap` (`:184`) and the `localSettlements` seed (`:579`) | ⛔ **+0 eff** | §6's two single-line replacements, verbatim. ⛔ **NET ZERO effective lines — measure with eslint's `Linter` before and after and quote both.** No helper, no added guard, no reformat. |
 | `CREATE` | `tests/store/participationWriteBase.test.js` | A1 · A2 · A4 | **≤250 eff** | The red-first reproduction as a suite: the DM's own act through `applyNpcOp`, the shipped pulse with `commit: true`, and the real `applyWorldPulseResultToState`. ⛔ Imports its opener from `'vitest'`; straight-line literal `it`s only; ⛔ never name a variable `it`, `test` or `describe`. Model: `tests/store/wizardNewsCommitReconcile.test.js`. |
 | `TEST` | `tests/domain/roadsParticipation.test.js` | the master-gate describe | `n/a` | A3 and A5 — **two** new straight-line `it`: a sole-member house survives (`crewed`, no beat); the participation guarantees are unchanged. ⛔ Do not touch the `.npcs` inventory ratchet — widening it is **EM-B1k2's**. |
-| `REGISTER` | `scripts/mutation-coverage-manifest.json` | one row keyed `tests/store/participationWriteBase.test.js` | `+1 row` | ⚠ **OWED ONLY IF `tests/store` is an enforcer dir or the basename matches `NAME_PATTERN` — measured NO on both** (`ENFORCER_DIRS` has no `tests/store`; the basename carries no pattern token). ⛔ **This row is therefore NOT taken.** Kept in the table as the measured negative so the next reader does not re-derive it. |
 
 ⛔ **No `_shared` rows and no generator in `checks`** — `pulseKernel.js` is an input of neither
 edge bundle (measured). **Generated artifacts: NONE.**
 
-*(The `REGISTER` row above is a measured negative and is **not** in the JSON manifest; the §7 table
-and the JSON are set-equal over the three real rows.)*
+*(The chair's fifth cut at placement, 2026-09-20: the compile had kept a `REGISTER` row for `scripts/mutation-coverage-manifest.json` in this table as a "measured negative" while rightly omitting it from the JSON. TOOL-1's arm (composed at train EM-T4) reads a path only the table names as a non-dispatchable drift, so the row is removed here; the measured negative stands where it belongs, in §7.1 row P2.2. The table and the JSON are set-equal over the three real rows.)*
 
 ### §7.1 · The registration ledger
 
