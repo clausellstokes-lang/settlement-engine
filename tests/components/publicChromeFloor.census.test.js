@@ -58,7 +58,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import {
-  PHONE_CHROME_FLOOR, SUB_FLOOR_KEYS, censusOfSource, emptyCensus,
+  PHONE_CHROME_FLOOR, SUB_FLOOR_KEYS, SUB_PROSE_KEYS, censusOfSource, emptyCensus,
+  proseFloorCensusOfSource,
 } from './phoneFloorCensus.shared.mjs';
 import { PHONE_PROSE_FLOOR, chromeFontSize, proseFontSize } from '../../src/design/proseScale.js';
 import { legacy } from '../../src/design/tokens.js';
@@ -121,6 +122,57 @@ const ROSTER = Object.freeze({
     surface: "the painted arrow's brass plate — the Sign In slip on every page, and the signed-in name",
     chrome: 0, prose: 0, ruled: 0,
   },
+  // ⭐⭐ THE PAGE THAT ASKS FOR MONEY (FIX-P5, 2026-09-20, ODQ §934.63 F9). The anonymous
+  // public-path walk counted FIFTEEN elements under 12 px on /pricing at 375 wide and
+  // forty-five more between 12 and 14 — "Chairs held are counted in the Hall." and
+  // "Dollar figures are estimates at the starter-pack rate" at ELEVEN pixels, "Most
+  // popular", "25 credits", "17% off" and the ladder's four area headings at eleven, and
+  // eleven reading paragraphs at twelve. It fell exactly where this roster's docblock
+  // says a surface falls: the dossier census governs `src/components/new`, the roster
+  // above had only the nav and the Create page, and /pricing was in neither.
+  // It is here rather than only in the router census because that one cannot see the 12 px
+  // half at all (see PROSE_FLOOR_ROSTER below), and because this is a PUBLIC CONVERSION
+  // surface, which is what this file is for.
+  'src/components/PricingPage.jsx': {
+    surface: 'the /pricing page frame: the anti-AI line, the no-hidden-fees sentence, the redeem notice, the one-time band and the local-mode note',
+    chrome: 0, prose: 2, ruled: 0,
+  },
+  'src/components/pricing/PricingBands.jsx': {
+    surface: "/pricing bands 2 to 5: the Surveyor band, the Founder charter's chair meter, the task menu, the entitlement ladder and the FAQ",
+    chrome: 2, prose: 2, ruled: 0,
+  },
+  'src/components/pricing/PricingTierCards.jsx': {
+    surface: "/pricing's tier cards and credit-pack tiles: the recommended stamp, the taglines, the feature rows, the seat line, the discount and pack labels",
+    chrome: 3, prose: 1, ruled: 0,
+  },
+});
+
+/**
+ * ⭐⭐ THE SECOND FLOOR, ON THE SURFACE THAT EARNED IT FIRST.
+ *
+ * `ROSTER` above is held to the 12 px CHROME floor, because that is what the shared scanner
+ * judges: a literal below twelve. The law has a second and HIGHER floor — 14 px for a
+ * passage a reader reads — and until now no source instrument enforced it anywhere. The
+ * consequence was measured on /pricing: eleven `<p>` elements at exactly FS.sm, which is
+ * 12 px, clearing the chrome floor by construction and sitting two steps under the floor
+ * their own law sets. The chrome census could not see them in either direction, before or
+ * after the cure.
+ *
+ * ⛔ WHY A SECOND ROSTER RATHER THAN A FLAG ON THE FIRST. The two floors are not the same
+ * claim and a surface can honestly satisfy one without the other: every file in ROSTER
+ * clears the chrome floor today, and App.jsx, HomeHero.jsx and generate/ClerkNote.jsx
+ * carry five prose-shaped 12 and 13 px lines between them that belong to the lane that
+ * owns those surfaces. Folding the higher floor into the roster would have reddened three
+ * files this lane is not curing, which is how a floor acquires a budget on the day it
+ * lands. A file joins this roster when its surface has been cured, and it arrives at zero.
+ *
+ * Per file: the number of prose-shaped sub-14 px sites routed through `proseFontSize`.
+ * EXACT in both directions, for the reason the chrome roster's own baselines are.
+ */
+const PROSE_FLOOR_ROSTER = Object.freeze({
+  'src/components/PricingPage.jsx': { floored: 9 },
+  'src/components/pricing/PricingBands.jsx': { floored: 12 },
+  'src/components/pricing/PricingTierCards.jsx': { floored: 3 },
 });
 
 /**
@@ -174,6 +226,22 @@ function censusOfRoster() {
 }
 
 const CENSUS = censusOfRoster();
+
+function proseFloorCensus() {
+  const all = { prose: [], bare: [], ruled: [] };
+  /** @type {Record<string, {floored: number}>} */
+  const perFile = {};
+  for (const rel of Object.keys(PROSE_FLOOR_ROSTER)) {
+    const abs = join(ROOT, rel);
+    if (!existsSync(abs)) { perFile[rel] = { floored: -1 }; continue; }
+    const one = proseFloorCensusOfSource(readFileSync(abs, 'utf8'), rel);
+    for (const key of Object.keys(all)) all[key].push(...one[key]);
+    perFile[rel] = { floored: one.prose.length };
+  }
+  return { ...all, perFile };
+}
+
+const PROSE_CENSUS = proseFloorCensus();
 
 describe('THE PHONE FLOORS ON THE PUBLIC CHROME — the bottom nav and /create', () => {
   test('the walk is live: every roster file exists, parsed, and gave the walk work', () => {
@@ -316,6 +384,102 @@ describe('THE PHONE FLOORS ON THE PUBLIC CHROME — the bottom nav and /create',
     // …and the sizes really are the four lane 28 measured, not a different ladder.
     expect(measured.map((m) => m.font)).toEqual([10, 10, 10, 10]);
     expect(measured.map((m) => Number(m.slipW.toFixed(2)))).toEqual([32.04, 38.92, 40.92, 45.8]);
+  });
+
+  test('THE PROSE FLOOR: every prose-shaped size on a rostered surface passes through proseFontSize', () => {
+    // ⛔ ANTI-VACUITY FIRST, in the same arm: an empty roster, a moved token table or a
+    // predicate that stopped recognising a paragraph all produce the same empty list this
+    // arm asserts.
+    expect(Object.keys(PROSE_FLOOR_ROSTER).length, 'the prose-floor roster is empty').toBeGreaterThanOrEqual(3);
+    expect(
+      SUB_PROSE_KEYS.size,
+      'no FS token reads below the prose floor — the token table or the floor moved',
+    ).toBeGreaterThan(SUB_FLOOR_KEYS.size);
+    expect(
+      PROSE_CENSUS.prose.length,
+      'the prose-floor walk judged nothing — the roster files stopped carrying floored prose',
+    ).toBeGreaterThanOrEqual(20);
+
+    expect(
+      PROSE_CENSUS.bare,
+      `\n${PROSE_CENSUS.bare.length} prose-shaped fontSize literal(s) below the ${PHONE_PROSE_FLOOR}px phone PROSE `
+      + 'floor render at their desktop step on a 375px screen, on a public surface this census holds to '
+      + 'that floor.\n'
+      + '⚠ THESE CLEAR THE 12px CHROME FLOOR, so the sibling arms above and the router census both read '
+      + 'them as fine. A paragraph is not chrome: wrap the size in proseFontSize(<the FS token>, mobile), '
+      + 'binding `mobile` once per component with useIsMobile() ABOVE any early return.\n'
+      + 'If the line is really furniture — a pill, a tracked label, a badge — it is chrome and belongs on '
+      + 'chromeFontSize; if it must stay small, write the reason on its line or the one above as '
+      + '`// phone-floor: <why>`:\n'
+      + `${PROSE_CENSUS.bare.join('\n')}\n`,
+    ).toEqual([]);
+    expect(
+      PROSE_CENSUS.ruled,
+      '\nA `// phone-floor:` ruling exempts a PROSE line on a rostered surface. No such ruling has ever '
+      + 'been needed here; if one is, register it the way the chrome census registers its own (RULINGS, '
+      + 'with a count and a reason) rather than leaving it to this message:\n'
+      + `${PROSE_CENSUS.ruled.join('\n')}\n`,
+    ).toEqual([]);
+  });
+
+  test('the prose-floor roster baselines are exact in both directions', () => {
+    const expected = Object.fromEntries(
+      Object.entries(PROSE_FLOOR_ROSTER).map(([rel, row]) => [rel, { floored: row.floored }]),
+    );
+    expect(
+      PROSE_CENSUS.perFile,
+      '\nA prose-floor baseline moved.\n'
+      + 'MORE than a row claims → a new reading line was floored; usually right, raise the row in the '
+      + 'same commit.\n'
+      + 'FEWER → a floored paragraph went back to a bare literal, or left the surface. Say which, and '
+      + 'lower the row, so this floor cannot quietly recede the way the chrome one could not.\n',
+    ).toEqual(expected);
+  });
+
+  test('the PROSE-floor detector discriminates (executed controls)', () => {
+    // ⛔ Every claim in the two arms above is a property of what the scanner returned, and a
+    // scanner that stopped recognising a paragraph returns an empty walk and passes both.
+    const bare = proseFloorCensusOfSource(
+      'export const A = () => <p style={{ fontSize: FS.sm }}>x</p>;', 'control.jsx',
+    );
+    expect(bare.bare.length, 'a bare 12px PARAGRAPH is no longer caught — the second floor is off').toBe(1);
+
+    const wrapped = proseFloorCensusOfSource(
+      'export const A = ({ mobile }) => <p style={{ fontSize: proseFontSize(FS.sm, mobile) }}>x</p>;',
+      'control.jsx',
+    );
+    expect(wrapped.bare, 'a wrapped paragraph is reported as bare').toEqual([]);
+    expect(wrapped.prose.length, 'a wrapped paragraph is no longer counted as floored').toBe(1);
+
+    // ⛔ THE BOUNDARY BETWEEN THE TWO FLOORS. The same 12px literal on a CHIP is chrome,
+    // already at its own floor, and must NOT be dragged up two steps by this arm — that is
+    // the flattening design/proseScale.js's amendment exists to prevent.
+    const chip = proseFloorCensusOfSource(
+      'export const A = () => <span style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: "0.06em" }}>x</span>;',
+      'control.jsx',
+    );
+    expect(chip.bare, 'a tracked 800-weight chip is read as prose — the two floors have collapsed into one').toEqual([]);
+
+    const overFloor = proseFloorCensusOfSource(
+      'export const A = () => <p style={{ fontSize: FS.lg }}>x</p>;', 'control.jsx',
+    );
+    expect(overFloor.bare, 'a size AT or ABOVE the prose floor is reported — this has stopped being a floor').toEqual([]);
+
+    const ruled = proseFloorCensusOfSource(
+      '// phone-floor: the line is painted inside a 13px rule\n'
+      + 'export const A = () => <p style={{ fontSize: FS.sm }}>x</p>;', 'control.jsx',
+    );
+    expect(ruled.bare, 'a written ruling no longer moves a prose site out of `bare`').toEqual([]);
+    expect(ruled.ruled.length, 'a written ruling is no longer collected for a reviewer').toBe(1);
+
+    // A prose-shaped line on the CHROME helper is the chrome census's `misclassified`
+    // bucket; this one must not double-report it under a second name.
+    const onChrome = proseFloorCensusOfSource(
+      'export const A = ({ mobile }) => <p style={{ fontSize: chromeFontSize(FS.sm, mobile) }}>x</p>;',
+      'control.jsx',
+    );
+    expect(onChrome.bare, 'a prose line on chromeFontSize is double-reported here').toEqual([]);
+    expect(onChrome.prose, 'a prose line on chromeFontSize is counted as floored prose').toEqual([]);
   });
 
   test('the detectors discriminate, and a written ruling is honoured (executed controls)', () => {

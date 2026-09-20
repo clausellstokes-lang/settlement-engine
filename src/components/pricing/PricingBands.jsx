@@ -21,12 +21,21 @@ import {
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
+import { purchasesOpen } from '../../lib/launchGate.js';
 import { tp } from '../../copy/pricingPage.js';
 import {
   GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, FS, BODY, SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX } from '../theme.js';
 import { space } from '../../design/tokens.js';
+// ⭐ THE ESTATE'S FLOORS ON THE PAGE THAT ASKS FOR MONEY (ODQ §934.63 F9, under §934.24
+// item 4). Every band below binds `mobile` with useIsMobile() at the top of its own
+// component — a band is its own component, so one binding per band is the only shape
+// that keeps the flag in scope at every site. Desktop is untouched: both helpers are the
+// identity above the breakpoint (tests/components/publicChromeFloor.census.test.js).
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import Button from '../primitives/Button.jsx';
+import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 
 const SECTION_GAP = space['space-8']; // 48 — between major page regions (PricingPage's rhythm)
 const TIER_ROW_MAX = 3 * 320 + 2 * 16; // 992 — the page's shared column edge
@@ -40,6 +49,7 @@ const SURVEYOR_SLATE_BG = SLATE_BG;
 const SURVEYOR_SLATE_TEXT = SLATE_DEEP;
 
 export function SurveyorBand({ onSeeMenu }) {
+  const mobile = useIsMobile();
   return (
     <article
       aria-labelledby="tier-surveyor-name"
@@ -56,7 +66,7 @@ export function SurveyorBand({ onSeeMenu }) {
           {tp('band2.surveyor.name')}
         </h3>
         <span style={{
-          fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
           color: SURVEYOR_SLATE_TEXT,
         }}>
           {tp('band2.surveyor.badge')}
@@ -69,10 +79,10 @@ export function SurveyorBand({ onSeeMenu }) {
           straight down, and the spare height sits above the CTA, as it does on the
           sibling cards, so the CTA stays level with theirs (owner orders 2026-09-17:
           the body paragraph used to grow and left a dead gap mid-card). */}
-      <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
+      <p style={{ margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
         {tp('band2.surveyor.body')}
       </p>
-      <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
+      <p style={{ margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
         {tp('band2.surveyor.byok')}
       </p>
       <Button type="button" variant="secondary" size="lg" fullWidth style={{ minHeight: 44, marginTop: 'auto' }} onClick={onSeeMenu}>
@@ -103,6 +113,7 @@ export function SurveyorBand({ onSeeMenu }) {
 // the comment above says it can no longer elect — a behaviour change wearing a cleanup's name.
 // The prop is still ACCEPTED (callers pass it) and is now explicitly unread.
 export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta: _isPrimaryCta }) {
+  const mobile = useIsMobile();
   const seats = FOUNDER_SEAT_CAP;
   return (
     <section
@@ -124,17 +135,17 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta: _
         <p style={{ margin: `0 0 ${SP.sm}px`, fontSize: FS.lg, fontWeight: 700, color: INK, fontFamily: sans, lineHeight: 1.4 }}>
           {tp('band2.charter.lead', { seats })}
         </p>
-        <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
+        <p style={{ margin: `0 0 ${SP.xs}px`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, lineHeight: 1.55 }}>
           {tp('band2.charter.sustainability', { seats })}
         </p>
-        <p style={{ margin: 0, fontSize: FS.sm, color: BODY, fontFamily: sans, fontWeight: 600, lineHeight: 1.55 }}>
+        <p style={{ margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontFamily: sans, fontWeight: 600, lineHeight: 1.55 }}>
           {tp('band2.charter.capNote', { seats })}
           {' '}
           {typeof TIERS.founder.oneTimeCredits === 'number' && tp('band2.charter.credits', { credits: TIERS.founder.oneTimeCredits })}
         </p>
       </div>
       <div style={{ flex: '1 1 240px', minWidth: 240, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-        <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
+        <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, fontWeight: 600 }}>
           {typeof founderSeatsRemaining === 'number'
             ? tp('band2.charter.chairsHeld', { held: seats - founderSeatsRemaining, seats })
             : tp('band2.charter.chairsFallback', { seats })}
@@ -167,6 +178,7 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta: _
 // narrative schedule; the ≈$ derives from the starter-pack anchor. A geometric
 // instrument (a real table), quiet and fully accessible (craft-law split).
 export function TaskMenu({ livePricing = null }) {
+  const mobile = useIsMobile();
   const anchor = getCreditAnchor();
   const narrativeCosts = Object.fromEntries(
     Object.keys(getActiveAiCosts()).map((feature) => [
@@ -194,7 +206,7 @@ export function TaskMenu({ livePricing = null }) {
       <h3 style={{ margin: `0 0 ${SP.xs}px`, fontFamily: serif_, fontSize: FS.xl, color: INK }}>
         {tp('band3.taskMenu.heading')}
       </h3>
-      <p style={{ margin: `0 0 ${SP.md}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+      <p style={{ margin: `0 0 ${SP.md}px`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55 }}>
         {tp('band3.taskMenu.intro')}
       </p>
       <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: sans, fontSize: FS.sm }}>
@@ -210,7 +222,7 @@ export function TaskMenu({ livePricing = null }) {
         </tbody>
       </table>
       {anchor && (
-        <p style={{ margin: `${SP.md}px 0 0`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+        <p style={{ margin: `${SP.md}px 0 0`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55 }}>
           {tp('band3.taskMenu.anchor', { perCredit: anchor.perCreditLabel })}
         </p>
       )}
@@ -218,11 +230,11 @@ export function TaskMenu({ livePricing = null }) {
         {tp('band3.taskMenu.workedHeading')}
       </h4>
       {workedRows.map((w) => (
-        <p key={w.persona} style={{ margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+        <p key={w.persona} style={{ margin: `0 0 ${SP.xs}px`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55 }}>
           {tp('band3.taskMenu.workedLine', { persona: w.persona, detail: w.detail, credits: w.credits, approx: w.approx })}
         </p>
       ))}
-      <p style={{ margin: `${SP.md}px 0 0`, fontSize: FS.xs, color: BODY, fontStyle: 'italic', lineHeight: 1.5 }}>
+      <p style={{ margin: `${SP.md}px 0 0`, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontStyle: 'italic', lineHeight: 1.5 }}>
         {tp('band3.taskMenu.estimate')}
       </p>
       <p style={{ margin: `${SP.sm}px 0 0`, fontSize: FS.sm, color: INK, fontWeight: 700, lineHeight: 1.5 }}>
@@ -235,16 +247,38 @@ export function TaskMenu({ livePricing = null }) {
 // Band 4: the comparison table from THE ENTITLEMENT LADDER (the owner's
 // 2026-07-17 ruling as config). Cells render the config vocabulary verbatim;
 // grouped area headers; a plain accessible table inside an overflow container.
+/**
+ * ⛔ WHAT READS AS MONEY IN A LADDER CELL — the SAME detector
+ * tests/components/lockedPriceSlots.census.test.js applies to the tier-card slots, written
+ * once here so the render and the census cannot come to disagree about which cells are
+ * priced. A currency mark, not a bare digit: a ladder cell legitimately says "3 saves" and
+ * "1 sample per settlement", and neither is an offer.
+ */
+const CELL_QUOTES_MONEY = /[$£€]/;
+
 export function ComparisonTable() {
+  const mobile = useIsMobile();
+  const purchasesAreOpen = purchasesOpen();
   const areas = tp('band4.areas') || {};
   const rowLabels = tp('band4.rows') || {};
   const cell = (v) => (v === true ? tp('band4.included') : v === false ? tp('band4.notIncluded') : String(v));
+  /**
+   * ⭐ NO PRICE PRINTS UNRESOLVED WHILE PURCHASES ARE LOCKED (ODQ §934.63 F16, under the
+   * §934.24 addendum). Every other `$` on this page sits beside the lock mark; the ladder's
+   * one priced cell ("$2.99 per settlement", ENTITLEMENT_LADDER `export-bundle`.free) did
+   * not, because the lock had been read as a rule about CONTROLS and this cell is not a
+   * control. It is still a figure a reader is asked to believe resolves today. Derived from
+   * the cell's own text rather than from the row id, so a second priced cell arrives already
+   * marked.
+   * @param {string} text the cell's rendered words
+   */
+  const lockedCell = (text) => !purchasesAreOpen && CELL_QUOTES_MONEY.test(text);
   return (
     <section aria-labelledby="comparison-heading" style={{ maxWidth: TIER_ROW_MAX, margin: `0 auto ${SECTION_GAP}px` }}>
       <h2 id="comparison-heading" style={{ margin: `0 0 ${SP.xs}px`, fontFamily: serif_, fontSize: FS.xxl, color: INK, textAlign: 'center' }}>
         {tp('band4.heading')}
       </h2>
-      <p style={{ margin: `0 0 ${SP.lg}px`, textAlign: 'center', fontSize: FS.sm, color: BODY, fontStyle: 'italic' }}>
+      <p style={{ margin: `0 0 ${SP.lg}px`, textAlign: 'center', fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontStyle: 'italic' }}>
         {tp('band4.engineNote')}
       </p>
       <div style={{ overflowX: 'auto' }}>
@@ -264,20 +298,33 @@ export function ComparisonTable() {
                   colSpan={3}
                   style={{
                     textAlign: 'left', padding: `${SP.md}px 0 ${SP.xs}px`,
-                    fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+                    fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800,
                     letterSpacing: '0.08em', textTransform: 'uppercase', color: GOLD_DEEP,
                   }}
                 >
                   {areas[group.area] || group.area}
                 </th>
               </tr>
-              {group.rows.map((row) => (
-                <tr key={row.id} style={{ borderBottom: `1px solid ${BORDER}` }}>
-                  <td style={{ padding: '6px 8px 6px 0', color: INK }}>{rowLabels[row.id] || row.id}</td>
-                  <td style={{ padding: '6px 0', textAlign: 'right', color: BODY, whiteSpace: 'nowrap' }}>{cell(row.free)}</td>
-                  <td style={{ padding: '6px 0 6px 24px', textAlign: 'right', color: BODY, whiteSpace: 'nowrap' }}>{cell(row.cartographer)}</td>
-                </tr>
-              ))}
+              {group.rows.map((row) => {
+                const free = cell(row.free);
+                const carto = cell(row.cartographer);
+                return (
+                  <tr key={row.id} style={{ borderBottom: `1px solid ${BORDER}` }}>
+                    <td style={{ padding: '6px 8px 6px 0', color: INK }}>{rowLabels[row.id] || row.id}</td>
+                    {/* `normal` wrapping only where the pill joins the figure: the cells are
+                        `nowrap` so a two-word value never breaks mid-phrase, and the pill
+                        needs a line of its own inside a narrow column. */}
+                    <td style={{ padding: '6px 0', textAlign: 'right', color: BODY, whiteSpace: lockedCell(free) ? 'normal' : 'nowrap' }}>
+                      {free}
+                      {lockedCell(free) && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+                    </td>
+                    <td style={{ padding: '6px 0 6px 24px', textAlign: 'right', color: BODY, whiteSpace: lockedCell(carto) ? 'normal' : 'nowrap' }}>
+                      {carto}
+                      {lockedCell(carto) && <AvailableAtLaunchPill style={{ marginLeft: 6 }} />}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           ))}
         </table>
@@ -287,7 +334,7 @@ export function ComparisonTable() {
           ladder's own surveyor-stages row already reads 'per task' under both
           plan columns, so a third column would repeat one value down an empty
           table and imply a subscription that does not exist. */}
-      <p style={{ margin: `${SP.md}px 0 0`, fontSize: FS.sm, color: BODY, fontStyle: 'italic', textAlign: 'center' }}>
+      <p style={{ margin: `${SP.md}px 0 0`, fontSize: proseFontSize(FS.sm, mobile), color: BODY, fontStyle: 'italic', textAlign: 'center' }}>
         {tp('band4.surveyorNote')}
       </p>
     </section>
@@ -297,6 +344,7 @@ export function ComparisonTable() {
 // Band 5: the objection-first FAQ — native details/summary (geometric
 // instrument layer, zero-JS accessible), config facts interpolated.
 export function PricingFaq() {
+  const mobile = useIsMobile();
   const items = tp('band5.items') || [];
   const vars = { seats: FOUNDER_SEAT_CAP, freeSaves: FREE_SAVE_LIMIT, retentionMonths: RETENTION_MONTHS };
   const fill = (s) => String(s).replace(/\{(\w+)\}/g, (m, name) =>
@@ -311,7 +359,7 @@ export function PricingFaq() {
           <summary style={{ cursor: 'pointer', fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK, lineHeight: 1.5 }}>
             {item.q}
           </summary>
-          <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.6 }}>
+          <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.6 }}>
             {fill(item.a)}
           </p>
         </details>

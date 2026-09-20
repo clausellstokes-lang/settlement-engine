@@ -38,7 +38,8 @@
 
 import { describe, expect, test } from 'vitest';
 
-import { getVisibleTiers } from '../../src/config/pricing.js';
+import { ENTITLEMENT_LADDER } from '../../src/config/entitlementLadder.js';
+import { getVisibleTiers, SINGLE_DOSSIER } from '../../src/config/pricing.js';
 import { en, tierPriceSlot, tOptional } from '../../src/copy/index.js';
 import { purchasesOpen } from '../../src/lib/launchGate.js';
 
@@ -169,6 +170,45 @@ describe('THE TIER-CARD SLOTS UNDER THE PURCHASE LOCK', () => {
           .toBe(isPriced ? row.priceSub : row.standingSub);
       }
     }
+  });
+
+  /**
+   * ⭐ THE ENTITLEMENT LADDER IS PART OF THE CENSUS NOW (FIX-P5, ODQ §934.63 F16).
+   *
+   * The register above rules on TIER-CARD SLOTS, which is the shape the owner's order
+   * named. The public-path walk then found a figure printing outside that shape: the
+   * comparison table's "$2.99 per settlement" cell, the only `$` on /pricing not sitting
+   * beside a lock mark. The cure is in the render (the cell carries the mark, pinned in
+   * tests/components/launchLock.pricing.test.jsx); this arm is the LIST, so the day a
+   * second ladder cell starts quoting money the census names it here instead of a browser
+   * walk finding it six weeks later.
+   *
+   * ⚠ A CURRENCY MARK, NOT A DIGIT — and the ladder is why the two detectors differ. A
+   * tier-card slot is a price or a standing, so a bare number in one is already suspect;
+   * a ladder cell is a quantity ("3 saves", "1 sample per settlement", the retention
+   * months), so digits are ordinary there and only a currency mark is an offer.
+   */
+  test('THE ENTITLEMENT LADDER: exactly the cells the register names quote money', () => {
+    const CURRENCY = /[$£€]/;
+    const rows = ENTITLEMENT_LADDER.flatMap((group) => group.rows);
+    // ⛔ ANTI-VACUITY: an empty ladder satisfies the equality below trivially. The floor is
+    // the ladder MEASURED (4 groups, 9 rows, 18 value cells on 2026-09-20), not a round
+    // number — a guessed floor either passes on a collapsed ladder or reds on a true one.
+    expect(ENTITLEMENT_LADDER.length, 'the entitlement ladder has no groups').toBeGreaterThanOrEqual(4);
+    expect(rows.length, 'the entitlement ladder is empty').toBeGreaterThanOrEqual(9);
+    expect(CURRENCY.test('$2.99 per settlement')).toBe(true);
+    expect(CURRENCY.test('1 sample per settlement')).toBe(false);
+
+    const quoting = rows.flatMap((row) => [['free', row.free], ['cartographer', row.cartographer]]
+      .filter(([, v]) => typeof v === 'string' && CURRENCY.test(v))
+      .map(([plan, v]) => `${row.id}.${plan} = ${v}`));
+    expect(
+      quoting,
+      '\nA comparison-table cell quotes a figure while purchases are locked, and this register does not '
+      + 'admit it. The render marks any currency-bearing cell automatically, so this is not a bug report '
+      + '- it is the list moving. Re-read whether the new figure should be on a public ladder at all, '
+      + 'then record it here.\n',
+    ).toEqual([`export-bundle.free = ${SINGLE_DOSSIER.priceLabel} per settlement`]);
   });
 
   test('THE ADJACENT MONEY SURFACES are named, so nothing is hidden by scope', () => {

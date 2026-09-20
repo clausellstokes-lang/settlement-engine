@@ -224,6 +224,12 @@ const CENSUS = (() => {
  * 0). Nothing here raises a floor; every number is a count.
  *   554 component files over 36 routes and the shell, 127 sub-floor sites left,
  *   all of them still on the three surfaces lane 28 owns (98 + 19 + 10).
+ *
+ * ⭐ /pricing CURED AND UN-OWNED (FIX-P5, 2026-09-20, ODQ §934.63 F9). Ten of that 127
+ * were the pricing page's, and the public-path walk found them on the phone: eleven-pixel
+ * prose on the page that asks for money. They are cured, /pricing's row loses its `owner`,
+ * and the estate now has 117 sub-floor sites left on the two surfaces lane 28 still owns
+ * (98 + 19).
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -233,7 +239,6 @@ const ROUTE_BASELINE = Object.freeze({
   // other route except the four ClerkNote sites the Realm shares, named below.
   '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 98, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
-  '/pricing':               { roots: 1, files: 14, floored: 7, ruled: 3, bare: 10, owner: 'lane 28 — the pricing page' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
   '/realm':                 { roots: 2, files: 153, floored: 484, ruled: 1, bare: 0, owner: 'lane 28 — generate/ClerkNote.jsx, mounted here' },
@@ -251,6 +256,19 @@ const ROUTE_BASELINE = Object.freeze({
   // re-expressed through statusCase and the label seams, and the Power tab's raw coup-weight
   // span retired. `bare` holds at 0 on both, so nothing sub-floor shipped; the routes lane 36
   // re-recorded on its own base already carry the move, which is why only these two fell.
+  // ⭐ /pricing LEFT THE OWNED LIST (FIX-P5, ODQ §934.63 F9). Its row read
+  // `bare: 10, owner: 'lane 28 — the pricing page'`; the ten are cured, so the number is
+  // 0 and — by this registry's own law — `owner` goes with it. floored 7 -> 17 is those
+  // exact ten sites arriving on a helper, measured on this tree and on the untouched base:
+  // /pricing is the ONLY row this lane moves, and every other row below is byte-identical
+  // between the two measurements.
+  // ⚠ WHAT THIS ROW STILL CANNOT SEE, AND WHERE THAT IS HELD. The scanner judges a literal
+  // only when it reads BELOW the 12 px CHROME floor, so the eleven 12 px `<p>` lines the
+  // review measured on this page are invisible to it in both directions: they were bare
+  // and unreported, and now they are on `proseFontSize` and still uncounted. That half of
+  // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
+  // PROSE-floor arm over a named pricing roster for exactly this gap.
+  '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
   '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },

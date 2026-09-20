@@ -62,6 +62,7 @@ import { purchasesOpen } from '../../src/lib/launchGate.js';
 import { AVAILABLE_AT_LAUNCH } from '../../src/components/primitives/AvailableAtLaunchPill.jsx';
 import { PRODUCTS } from '../../src/lib/stripe.js';
 import { getActivePacks } from '../../src/config/pricing.js';
+import { SINGLE_DOSSIER_PRICE } from '../../src/config/tierFacts.js';
 import { t } from '../../src/copy/index.js';
 
 /** A hydrated, signed-in free reader on a configured build, plus the moment openers. */
@@ -140,6 +141,53 @@ describe('launch lock: PricingPage tier cards and credit packs', () => {
       name: new RegExp(`^${escapeRe(t('pricing.creditPacks.pack', { credits: firstPack.credits }))}`),
     });
     expect(within(tile).getByText(AVAILABLE_AT_LAUNCH)).toBeTruthy();
+  });
+
+  /**
+   * ⭐ THE LADDER'S PRICED CELL WEARS THE MARK TOO (FIX-P5, ODQ §934.63 F16).
+   *
+   * The public-path walk found that every `$` figure on /pricing sat in a section carrying
+   * "Available at launch" EXCEPT "$2.99 per settlement" in the comparison table. It was a
+   * coverage gap rather than a wrong price: the owner's 2026-09-16 order names the CONTROL
+   * as what wears the mark, and a table cell is not a control — so the cell fell out of the
+   * rule while still printing a figure a reader is asked to believe resolves today.
+   *
+   * ⛔ AND THE OTHER DIRECTION IS THE ARM THAT MATTERS. A blanket "mark every cell" would
+   * paper the ladder with pills; a ladder cell legitimately says "3 saves", "unlimited" and
+   * "1 sample per settlement", and none of those is an offer. So this pins BOTH: the cells
+   * that quote a currency mark carry it, and every other cell carries none.
+   */
+  test('the entitlement ladder marks its priced cells and only its priced cells', () => {
+    const { container } = render(<PricingPage onNavigate={() => {}} />);
+    // The ladder's own section, by the heading it is labelled from — not by the table,
+    // which has no accessible name of its own and would match the task menu's table too.
+    const section = container.querySelector('section[aria-labelledby="comparison-heading"]');
+    expect(section, 'the comparison section did not render').toBeTruthy();
+    /** Every value cell in the ladder, with its rendered words. */
+    const cells = [...section.querySelectorAll('td')];
+    expect(cells.length, 'the ladder rendered no cells: the scan broke').toBeGreaterThanOrEqual(12);
+
+    const priced = cells.filter((td) => /[$£€]/.test(td.textContent || ''));
+    expect(
+      priced.length,
+      'the ladder no longer quotes a figure anywhere, so the arm below is vacuous',
+    ).toBe(1);
+    expect(priced[0].textContent).toBe(`${SINGLE_DOSSIER_PRICE} per settlement${AVAILABLE_AT_LAUNCH}`);
+
+    for (const td of priced) {
+      expect(
+        td.querySelector('[data-launch-pill]'),
+        `a ladder cell prints "${td.textContent}" with no lock mark while purchases are closed`,
+      ).toBeTruthy();
+    }
+    const unpriced = cells.filter((td) => !/[$£€]/.test(td.textContent || ''));
+    expect(unpriced.length, 'every ladder cell quotes money: the control has no population').toBeGreaterThanOrEqual(10);
+    for (const td of unpriced) {
+      expect(
+        td.querySelector('[data-launch-pill]'),
+        `a ladder cell that quotes no figure ("${td.textContent}") wears the lock mark anyway`,
+      ).toBeNull();
+    }
   });
 });
 

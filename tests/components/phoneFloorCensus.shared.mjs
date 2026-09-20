@@ -29,7 +29,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { legacy } from '../../src/design/tokens.js';
-import { PHONE_CHROME_FLOOR } from '../../src/design/proseScale.js';
+import { PHONE_CHROME_FLOOR, PHONE_PROSE_FLOOR } from '../../src/design/proseScale.js';
 
 /** The two helpers a sub-floor size may pass through. */
 export const HELPERS = new Set(['chromeFontSize', 'proseFontSize']);
@@ -251,4 +251,90 @@ export const emptyCensus = () => ({
   bare: [], chrome: [], prose: [], ruled: [], suppressed: [], misclassified: [], outOfScope: [],
 });
 
-export { PHONE_CHROME_FLOOR };
+/**
+ * ⭐ THE FS KEYS THAT RENDER BELOW THE **PROSE** FLOOR — derived from the same two modules
+ * as SUB_FLOOR_KEYS, and a strict superset of it (14 > 12).
+ */
+export const SUB_PROSE_KEYS = new Set(
+  Object.entries(legacy.FS).filter(([, px]) => px < PHONE_PROSE_FLOOR).map(([key]) => key),
+);
+
+/**
+ * ⭐⭐ THE SECOND FLOOR, AS A FACT ABOUT THE SOURCE — AND THE HOLE IT CLOSES.
+ *
+ * `censusOfSource` above judges a literal only when it reads below the 12 px CHROME floor,
+ * because that is the lower of the two and it is the one that makes a line unreadable
+ * outright. That leaves a real and measured gap: a `<p>` written at `FS.sm` renders at
+ * TWELVE pixels, which clears the chrome floor and sits two steps under the 14 px prose
+ * floor the very same law sets — so the scanner sees nothing, in either direction. The
+ * public-path walk measured eleven such paragraphs on /pricing alone (ODQ §934.63 F9),
+ * including "A chair is given, never sold." and "The price on this page is the price at
+ * checkout", and no instrument in this repo could say so: the rendered walk
+ * (dossierPhoneFloorAllViews) reaches only the dossier's views, and this scanner reaches
+ * only below 12.
+ *
+ * ⛔ IT IS OPT-IN BY ROSTER, NOT ESTATE-WIDE, AND THAT IS DELIBERATE. Turning this on
+ * everywhere at once would red on hundreds of 12 px and 13 px reading lines across
+ * surfaces no lane is holding, which is how a law gets a budget bolted to it on the day it
+ * lands. A census that names its files raises the floor one surface at a time, and each
+ * surface arrives cured.
+ *
+ * ⚠ IT JUDGES ONLY PROSE-SHAPED SITES. `proseShaped` is the same predicate the rendered
+ * walk classifies by, so a pill, a tracked label or a 700-weight badge at 12 px is chrome,
+ * is already at its own floor, and is not reported here.
+ *
+ * @param {string} src
+ * @param {string} rel
+ * @returns {{prose: any[], bare: string[], ruled: string[]}}
+ */
+export function proseFloorCensusOfSource(src, rel) {
+  const lines = src.split('\n');
+  const found = { prose: [], bare: [], ruled: [] };
+  let ast;
+  try { ast = parseSource(src); } catch (e) { throw new Error(`${rel} did not parse: ${e.message}`, { cause: e }); }
+
+  eachNode(ast, (node) => {
+    if (node.type !== 'Property' || node.computed) return;
+    if ((node.key?.name ?? node.key?.value) !== 'fontSize') return;
+    const value = node.value;
+    const line = value.loc.start.line;
+    const where = `${rel}:${line}`;
+    const snippet = (lines[line - 1] || '').trim().slice(0, 100);
+    // The shape is read off the SAME style object either way, so a site that is prose on
+    // the helper and a site that is prose bare are judged by one rule.
+    if (!proseShaped(node.parent, enclosingElement(node))) return;
+
+    if (value.type === 'CallExpression' && value.callee?.type === 'Identifier' && HELPERS.has(value.callee.name)) {
+      const px = subProsePx(value.arguments[0]);
+      if (px == null) return;
+      // A prose-shaped line on `chromeFontSize` is the CHROME census's `misclassified`
+      // bucket, which already reports it with its own message; reporting it twice under
+      // two names would make one cure look like two.
+      if (value.callee.name === 'proseFontSize') found.prose.push({ where, px, snippet });
+      return;
+    }
+
+    const px = subProsePx(value);
+    if (px == null) return;
+    if (ruledAt(lines, line)) found.ruled.push(`${where}  ${px}px  ::  ${snippet}`);
+    else found.bare.push(`${where}  ${px}px  ::  ${snippet}`);
+  });
+  return found;
+}
+
+/** `literalPx`'s sibling, against the PROSE floor. @param {any} node */
+function subProsePx(node) {
+  if (!node) return null;
+  if (node.type === 'MemberExpression' && node.object?.type === 'Identifier' && node.object.name === 'FS') {
+    const key = node.computed
+      ? (node.property?.type === 'Literal' ? String(node.property.value) : null)
+      : node.property?.name;
+    return key != null && SUB_PROSE_KEYS.has(key) ? legacy.FS[key] : null;
+  }
+  if (node.type === 'Literal' && typeof node.value === 'number') {
+    return node.value < PHONE_PROSE_FLOOR ? node.value : null;
+  }
+  return null;
+}
+
+export { PHONE_CHROME_FLOOR, PHONE_PROSE_FLOOR };

@@ -14,21 +14,41 @@ import { t, tierPriceSlot, tx } from '../../copy/index.js';
 import {
   GOLD, GOLD_DEEP, GOLD_SOFT, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
 } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from '../primitives/AvailableAtLaunchPill.jsx';
 
+/**
+ * ⭐ THE FEATURE MARK IS A CHECK, AND IT NOW LOOKS LIKE ONE (ODQ §934.63 noticed 4).
+ *
+ * It was `†`. The estate's own instrument already called the glyph what it is —
+ * tests/design/contrast.test.js names this site "PricingPage decorative gold marks
+ * (FeatureRow CHECK)" — and the review found the consequence: a dagger is the reader's
+ * FOOTNOTE mark, it stood before every Wanderer and Cartographer line on /pricing, and
+ * the page carries no footnote anywhere. A mark that promises a target it does not have
+ * is a small dishonesty on the page that asks for money, which is why the fix is the
+ * glyph and not a footnote invented to justify it.
+ *
+ * ⚠ WHAT STILL DIVERGES, SAID PLAINLY. `components/organic/samples/PricingSample.jsx`
+ * (the taste-approved pricing-desk sample this row was cut from) still draws `†`. A
+ * sample is the RECORD of what was approved, and re-cutting it is a taste decision this
+ * lane does not own; the chair carries it. Everything else is unchanged: the mark stays
+ * decorative and aria-hidden, so the feature TEXT still carries the whole meaning and the
+ * mark still owes no contrast floor.
+ */
+const FEATURE_MARK = '✓';
+
 function FeatureRow({ children }) {
+  const mobile = useIsMobile();
   return (
     <li style={{
       display: 'flex', alignItems: 'flex-start', gap: 8,
-      padding: '4px 0', color: BODY, fontSize: FS.sm,
+      padding: '4px 0', color: BODY, fontSize: proseFontSize(FS.sm, mobile),
       fontFamily: sans, lineHeight: 1.5,
     }}>
-      {/* The rubric dagger — the feature-list mark of the pricing bench (the
-          taste-approved pricing-desk sample). Decorative (aria-hidden); the
-          feature TEXT carries the meaning, so it owes no contrast floor. */}
-      <span aria-hidden="true" style={{ color: 'var(--oc-rubric)', fontWeight: 700, flexShrink: 0 }}>†</span>
+      <span aria-hidden="true" style={{ color: 'var(--oc-rubric)', fontWeight: 700, flexShrink: 0 }}>{FEATURE_MARK}</span>
       <span>{children}</span>
     </li>
   );
@@ -42,6 +62,7 @@ function FeatureRow({ children }) {
  * Defaults false, so every existing caller is byte-identical in behaviour.
  */
 export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading, ctaDisabled = false, emphasised, founderSeatsRemaining, audienceLine, simulationVariant }) {
+  const mobile = useIsMobile();
   const purchasesAreOpen = purchasesOpen();
   // P9 / decision 4 — when the simulation-led A/B variant is on, source the
   // feature list + tagline from pricing.variant.tiers.<key>.*, falling back to
@@ -104,7 +125,7 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
             // flow beneath the gold rule, not a rounded corner pill. Ink-on-gold
             // is the house AA pairing (7.6:1; white-on-gold 2.4:1 was retired).
             background: GOLD, color: INK,
-            fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em',
+            fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.06em',
             padding: '3px 9px',
             textTransform: 'uppercase',
           }}
@@ -128,7 +149,7 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
       </header>
 
       <p style={{
-        margin: 0, fontSize: FS.sm, color: BODY,
+        margin: 0, fontSize: proseFontSize(FS.sm, mobile), color: BODY,
         fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.5,
       }}>
         {tagline}
@@ -170,7 +191,7 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
               than violet-hue-alone. Live count via the founder_seats_taken RPC
               (migration 010); the fetch may fail or be pending, so fall back to
               the safe "Limited to N seats" copy with no meter in those cases. */}
-          <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontFamily: sans, fontWeight: 600 }}>
+          <p style={{ margin: 0, fontSize: proseFontSize(FS.xs, mobile), color: BODY, fontFamily: sans, fontWeight: 600 }}>
             {typeof founderSeatsRemaining === 'number'
               ? `${founderSeatsRemaining} of ${FOUNDER_SEAT_CAP} seats remaining.`
               : `Limited to ${FOUNDER_SEAT_CAP} seats.`}
@@ -237,6 +258,7 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
 }
 
 export function PackTile({ pack, onBuy, loading, emphasised }) {
+  const mobile = useIsMobile();
   const purchasesAreOpen = purchasesOpen();
   const packName = `${t('pricing.creditPacks.pack', { credits: pack.credits })}, ${pack.price}`;
   return (
@@ -284,14 +306,14 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
       </div>
       {pack.discount && (
         <div style={{
-          fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.04em',
+          fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.04em',
           textTransform: 'uppercase',
           color: emphasised ? GOLD_DEEP : SECOND,
         }}>
           {pack.discount}
         </div>
       )}
-      <div style={{ fontSize: FS.xs, color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {t('pricing.creditPacks.pack', { credits: pack.credits })}
       </div>
       {/* The launch pill wraps inside a narrow tile instead of overflowing it. */}
