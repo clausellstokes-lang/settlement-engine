@@ -32003,9 +32003,10 @@
     },
     {
       "id": "EM-B1k2",
-      "status": "READY",
+      "status": "LANDED",
       "packetPath": "docs/implementation/packets/settlement-editor/EM-B1k2.md",
       "verifiedBase": "154bd7c07a2e4f6bf900fd8a7572050b9692c79e",
+      "landedAt": "e96a1c33e578502d249d3004f8b022b020199ece",
       "changeManifest": [
         {
           "action": "MODIFY",
